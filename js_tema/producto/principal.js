@@ -51,11 +51,13 @@ let response_carga_valoraciones = data => {
     $(".ordenar_valoraciones_button").click(ordenar_valoraciones);
     let valoracion_persona = $(".contenedor_promedios").html();
     render_enid(".valoracion_persona", valoracion_persona);
-
-
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").click(function (e) {
+        e.preventDefault();
+    });
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").append("<div>Ranking</div>");
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-flex");
 
 }
-
 let agrega_valoracion_respuesta = (valoracion, num) => {
 
     let url = "../q/index.php/api/valoracion/utilidad/format/json/";

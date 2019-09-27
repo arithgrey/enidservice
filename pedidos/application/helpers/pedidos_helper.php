@@ -291,18 +291,18 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = create_select(
-                $tipos_entregas,
-                "tipo_entrega",
-                "tipo_entrega form-control form_edicion_tipo_entrega mt-3 mb-3",
-                "tipo_entrega",
-                "nombre",
-                "id",
-                0,
-                1,
-                0,
-                "-"
-            );
-        $r[] = menu($domicilio, $recibo, $id_recibo);
+            $tipos_entregas,
+            "tipo_entrega",
+            "tipo_entrega form-control form_edicion_tipo_entrega mt-3 mb-3",
+            "tipo_entrega",
+            "nombre",
+            "id",
+            0,
+            1,
+            0,
+            "-"
+        );
+        $r[] = menu($domicilio, $recibo, $id_recibo, $usuario);
         $r[] = tiene_domilio($domicilio);
         $r[] = compras_cliente($num_compras);
         $r[] = resumen_usuario($usuario, $recibo);
@@ -619,23 +619,22 @@ if (!function_exists('invierte_date_time')) {
 
         }
     }
-    if (!function_exists('menu')) {
-
-        function menu($domicilio, $recibo, $id_recibo)
-        {
-
-            $x[] = link_cambio_fecha($domicilio, $recibo);
-            $x[] = link_recordatorio($id_recibo);
-            $x[] = link_nota();
-            $x[] = link_costo($id_recibo, $recibo);
-            $r[] = d(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
-            $r[] = d(append($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
-            return d(append($r), "dropdown pull-right  mr-5 btn_opciones  ");
 
 
-        }
+    function menu($domicilio, $recibo, $id_recibo, $usuario)
+    {
+
+        $x[] = link_cambio_fecha($domicilio, $recibo);
+        $x[] = link_recordatorio($recibo, $usuario);
+        $x[] = link_nota();
+        $x[] = link_costo($id_recibo, $recibo);
+        $r[] = d(icon("fa fa-plus-circle fa-3x"), ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
+        $r[] = d(append($x), ["class" => "dropdown-menu  w_300 contenedor_opciones_pedido top_menos_10", "aria-labelledby" => "dropdownMenuButton"]);
+        return d(append($r), "dropdown pull-right  mr-5 btn_opciones  ");
+
 
     }
+
 
     if (!function_exists('evaluacion')) {
 
@@ -673,26 +672,47 @@ if (!function_exists('invierte_date_time')) {
         function form_fecha_recordatorio($data, $tipo_recortario)
         {
 
+            $recibo = prm_def($data, "recibo");
+            $str =  pr($recibo,"resumen_pedido" );
+            $usuario =  prm_def($data, "usuario");
+            if (es_data($usuario)){
 
-            $x = h("RECORDATORIO", 3, "top_50");
+                $str .=  " \n%0A".pr($usuario,"nombre"). "\n%0A";
+                $str .=  pr($usuario,"tel_contacto");
+            }
+
+            $x = h("RECORDATORIO", 3);
             $r[] = form_open("", ["class" => "form_fecha_recordatorio letter-spacing-5 "]);
-            $r[] = d(text_icon("fa fa-calendar-o", " FECHA "), 4);
             $r[] = d(
-                input(
-                    [
+                flex("FECHA", input([
                         "data-date-format" => "yyyy-mm-dd",
                         "name" => 'fecha_cordatorio',
-                        "class" => "form-control input-sm fecha_cordatorio",
+                        "class" => "fecha_cordatorio",
+                        "id" => "fecha_cordatorio",
                         "type" => 'date',
                         "value" => date("Y-m-d"),
                         "min" => add_date(date("Y-m-d"), -15),
                         "max" => add_date(date("Y-m-d"), 15)
-                    ]),
-                8
-            );
+                    ]
+                ), "d-flex  justify-content-between align-items-center", "", "w-100 mr-3"
+                ), 4);
 
-            $r[] = d(text_icon("fa fa-clock-o", " HORA"), 3);
-            $r[] = d(lista_horarios()["select"], 9);
+            $r[] = d(flex("HORA", horarios(), "justify-content-between align-items-center", "", "w-100 mr-3"), 4);
+
+
+            $r[] = d(
+                flex(" TIPO",
+                    create_select(
+                        $tipo_recortario,
+                        "tipo",
+                        "form-control tipo_recordatorio",
+                        "tipo_recordatorio",
+                        "tipo",
+                        "idtipo_recordatorio")
+                    , "d-flex  justify-content-between align-items-center",
+                    "",
+                    "w-100 mr-3"
+                ), 4);
             $r[] = hiddens(
                 [
                     "class" => "recibo",
@@ -701,15 +721,21 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $r[] = d(" TIPO", 3);
-            $r[] = d(create_select($tipo_recortario, "tipo", "form-control tipo_recordatorio", "tipo_recordatorio", "tipo", "idtipo_recordatorio"), 9);
-            $r[] = d(textarea(["name" => "descripcion", "class" => "descripcion_recordatorio"]), 12);
+
+            $r[] = d(h("Recordatorio", 5), 12);
+            $r[] = d(
+                textarea(
+                    [
+                        "name" => "descripcion",
+                        "class" => "descripcion_recordatorio",
+                        "rows" => 3
+                    ],0 , $str), "col-lg-12 bottom_50 p-0");
             $r[] = section(place("nota_recordatorio display_none"), 12);
             $r[] = d(btn("CONTINUAR", ["class" => "top_menos_40"]), 12);
             $r[] = form_close();
             $r[] = place("place_recordatorio");
             $form = d(append($r), "top_30 form_separador ");
-            return d(add_text($x, $form), 6, 1);
+            return d(add_text($x, $form), 8, 1);
 
 
         }
@@ -1321,7 +1347,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $a = hrz(
                     input($config),
-                    d($row["descripcion"]).
+                    d($row["descripcion"]) .
                     d(
                         text_icon(
                             "fa fa-clock-o",
@@ -1565,7 +1591,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $encabezado = btw(
 
-                    h("TIPO DE ENTREGA ".$tipo, 4)
+                    h("TIPO DE ENTREGA " . $tipo, 4)
                     ,
                     d(icon("fa fa fa-pencil"), "editar_tipo_entrega ")
                     ,
@@ -1573,7 +1599,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-                return add_text($encabezado  , append($r));
+                return add_text($encabezado, append($r));
 
             endif;
 
@@ -1772,9 +1798,10 @@ if (!function_exists('invierte_date_time')) {
         }
     }
     if (!function_exists('link_recordatorio')) {
-        function link_recordatorio($id_recibo)
+        function link_recordatorio($recibo, $usuario)
         {
 
+            $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
             return d(a_enid("RECORDATORIO", path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1")), 1);
 
         }
@@ -1851,7 +1878,7 @@ if (!function_exists('invierte_date_time')) {
                 $action = "../../q/index.php/api/usuario/index/format/json/";
                 $attr = ["METHOD" => "PUT", "id" => "form_set_usuario", "class" => "border form_set_usuario padding_10 shadow"];
                 $form[] = form_open($action, $attr);
-                $form[] = h("Cliente", 3 , "strong");
+                $form[] = h("Cliente", 3, "strong");
                 $form[] = d("NOMBRE:", "top_10", 1);
                 $form[] = input(["name" => "nombre", "value" => $usuario["nombre"], "type" => "text", "required" => "true"]);
                 $form[] = d("APELLIDO PATERNO:", "top_10", 1);

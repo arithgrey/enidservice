@@ -174,7 +174,7 @@ class Home extends CI_Controller
 
         }
 
-        $this->app->pagina($data, render_seguimiento($data),1);
+        $this->app->pagina($data, render_seguimiento($data), 1);
     }
 
     private function get_estatus_enid_service($q = [])
@@ -332,6 +332,10 @@ class Home extends CI_Controller
             } elseif (prm_def($param, "recordatorio") > 0) {
 
 
+                $id_usuario = pr($data["recibo"], "id_usuario");
+                if ($id_usuario > 0) {
+                    $data["usuario"] = $this->app->usuario($id_usuario);
+                }
                 $this->app->pagina($data, form_fecha_recordatorio($data, $this->get_tipo_recordatorio()), 1);
 
             } else {
@@ -354,7 +358,7 @@ class Home extends CI_Controller
 
                 ];
 
-                $this->app->pagina($data, render_pendidos($data) ,1);
+                $this->app->pagina($data, render_pendidos($data), 1);
             }
 
 

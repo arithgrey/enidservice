@@ -1374,78 +1374,100 @@ if (!function_exists('microtime_float')) {
         return ((float)$useg + (float)$seg);
     }
 }
-if (!function_exists('lista_horarios')) {
-    function lista_horarios($dia_busqueda = 0)
-    {
 
-        $fecha = horario_enid();
-        $hoy = $fecha->format('Y-m-d');
-        $hora_actual = date_format($fecha, 'H');
-        $minuto_actual = date_format($fecha, 'i');
-        $hora_actual = intval($hora_actual);
-        $minuto_actual = intval($minuto_actual);
-        $nuevo_dia = 0;
-        $base = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
-        $horarios = [];
+function horarios()
+{
+    //[FIXME]
+    $horarios = [
+        "08:00", "08:30","09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00","19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
 
-        /*Dia distonto horario completo  */
-        $hora_actual = ($dia_busqueda != 0 && $dia_busqueda != $hoy) ? 19 : $hora_actual;
+    $select = "<select name='horario_entrega' class='form-control  horario_entrega'  > ";
+    foreach ($horarios as $row) {
 
-        switch ($hora_actual) {
+        $select .= "<option value='" . $row . "'>" . $row . "</option>";
 
-            case ($hora_actual < 9 || $hora_actual >= 18):
+    }
+
+    $select .= "</select>";
+
+    return $select;
+}
+function lista_horarios($dia_busqueda = 0)
+{
+
+
+    $fecha = horario_enid();
+    $hoy = $fecha->format('Y-m-d');
+    $hora_actual = date_format($fecha, 'H');
+    $minuto_actual = date_format($fecha, 'i');
+    $hora_actual = intval($hora_actual);
+    $minuto_actual = intval($minuto_actual);
+    $nuevo_dia = 0;
+    //[FIXME]
+    $base = ["09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00"];
+    $horarios = [];
+
+    /*Dia distonto horario completo  */
+    $hora_actual = ($dia_busqueda != 0 && $dia_busqueda != $hoy) ? 19 : $hora_actual;
+
+    switch ($hora_actual) {
+
+        case ($hora_actual < 9 || $hora_actual >= 18):
+
+            $horarios = $base;
+            $nuevo_dia = ($hora_actual > 18) ? ($nuevo_dia = $nuevo_dia + 1) : $nuevo_dia;
+
+            break;
+
+        case 17:
+
+            if ($minuto_actual < 10) {
+
+                $horarios[] = "18:00";
+
+            } else {
 
                 $horarios = $base;
                 $nuevo_dia = ($hora_actual > 18) ? ($nuevo_dia = $nuevo_dia + 1) : $nuevo_dia;
+            }
 
-                break;
+            break;
 
-            case 17:
+        default:
 
-                if ($minuto_actual < 10) {
+            for ($a = 0; $a < count($base); $a++) {
 
-                    $horarios[] = "18:00";
+                $hora = intval(substr($base[$a], 0, 2));
+                if ($hora > $hora_actual) {
 
-                } else {
+                    $horarios[] = $base[$a];
 
-                    $horarios = $base;
-                    $nuevo_dia = ($hora_actual > 18) ? ($nuevo_dia = $nuevo_dia + 1) : $nuevo_dia;
                 }
+            }
 
-                break;
+            break;
+    }
 
-            default:
+    $select = "<select name='horario_entrega' class='form-control  horario_entrega'  > ";
+    foreach ($horarios as $row) {
 
-                for ($a = 0; $a < count($base); $a++) {
-
-                    $hora = intval(substr($base[$a], 0, 2));
-                    if ($hora > $hora_actual) {
-
-                        $horarios[] = $base[$a];
-
-                    }
-                }
-
-                break;
-        }
-
-        $select = "<select name='horario_entrega' class='form-control  horario_entrega'  > ";
-        foreach ($horarios as $row) {
-
-            $select .= "<option value='" . $row . "'>" . $row . "</option>";
-
-        }
-
-        $select .= "</select>";
-        $response = [
-            "select" => $select,
-            "nuevo_dia" => $nuevo_dia
-        ];
-
-        return $response;
+        $select .= "<option value='" . $row . "'>" . $row . "</option>";
 
     }
+
+    $select .= "</select>";
+    $response = [
+        "select" => $select,
+        "nuevo_dia" => $nuevo_dia
+    ];
+
+    return $response;
+
+
 }
+
 if (!function_exists('get_url_servicio')) {
     function get_url_servicio($id_servicio, $n = 0)
     {
@@ -1586,7 +1608,7 @@ if (!function_exists('get_menu_session')) {
 
             if ($proceso_compra < 1) {
 
-                $response = flex($vender, $session, "flex-row-reverse bd-highlight", "mr-3 ");
+                $response = flex($vender, $session, "d-flex justify-content-end bd-highlight-row-reverse bd-highlight", "mr-3 ");
                 return $response;
 
 
@@ -2659,7 +2681,7 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
             icon("fa fa-shopping-bag  white")
             ,
             [
-                "class"=>"dropdown-toggle",
+                "class" => "dropdown-toggle",
                 "data-toggle" => "dropdown"
             ]
 
@@ -2678,7 +2700,7 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
     if ($in_session < 1) {
 
 
-        return flex(append($r), $carrito,"d-flex justify-content-end mr-3","","ml-4 ");
+        return flex(append($r), $carrito, "d-flex justify-content-end mr-3", "", "ml-4 ");
 
 
     } else {
