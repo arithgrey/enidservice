@@ -216,7 +216,7 @@ class Home extends CI_Controller
 
         $data = $this->app->cssJs($data, "pedidos");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
-        $this->table->set_heading(array('MONTO', 'CONCEPTO', 'REGISTO', ''));
+        $this->table->set_heading(['MONTO', 'CONCEPTO', 'REGISTO', '']);
         $total = 0;
         foreach ($costos_operacion as $row) {
 
@@ -226,35 +226,31 @@ class Home extends CI_Controller
             $this->table->add_row(array($row["monto"] . " MXN", $row["tipo"], $row["fecha_registro"], $icon));
         }
 
-        $gastos = d(span("TOTAL EN GASTOS: ", " strong ") . $total . " MXN", "top_50 f12");
-        $this->table->add_row(array(d($gastos), "", ""));
-        $gastos = d(span("SALDADO: ", "strong") . $param["saldado"] . " MXN", "top_5 f12");
-
-        $this->table->add_row(array(d($gastos), "", ""));
-
+        $tb = $this->table->generate();
         $utilidad = $param["saldado"] - $total;
-        $total = d(span("UTILIDAD:", " underline text-utilidad strong ") . $utilidad . "MXN", "top_20 ");
-        $this->table->add_row(array(h($total, 4), "", ""));
+        $resumen = add_text(
+            d("TOTAL EN GASTOS: " . $total . " MXN")
+            ,
+            d("SALDADO: " . $param["saldado"] . " MXN")
+            ,
+            h("UTILIDAD:" . $utilidad . "MXN", 3 , "strong")
 
-        $this->table->set_template(template_table_enid());
-
+        );
 
         $recibo = $this->get_ppfp($param["costos_operacion"]);
-        $id_servicio = (is_array($recibo) && count($recibo) > 0) ? $recibo[0]["id_servicio"] : 0;
+        $id_servicio = (es_data($recibo)) ? pr($recibo, "id_servicio") : 0;
         $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
 
-
         $response = get_format_costo_operacion(
-            $this->table->generate(),
+            $tb,
+            $resumen,
             $this->get_tipo_costo_operacion(),
             $param["costos_operacion"],
             $path,
             $costos_operacion,
             $recibo
         );
-
         $this->app->pagina($data, $response, 1);
-
 
     }
 

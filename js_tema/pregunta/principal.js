@@ -56,7 +56,6 @@ let response_carga_productos_sugeridos = (data) => {
     if (data.sugerencias == undefined && data.sugerencias != 0) {
 
         render_enid(".place_tambien_podria_interezar", data);
-
     }
 }
 
@@ -70,7 +69,6 @@ let carga_valoraciones = () => {
 let response_carga_valoraciones = (data) => {
 
     render_enid(".place_valoraciones", data);
-
     if (get_option("desde_valoracion") == 1) {
         recorre(".place_valoraciones");
         set_option("desde_valoracion", 0);
@@ -90,8 +88,6 @@ let ordenar_valoraciones = function (e) {
     switch (parseInt(tipo_ordenamiento)) {
         case 0:
             /*Ordenamos por los que tienen más votos*/
-
-
             listitems.sort(function (a, b) {
 
                 return (+$(a).attr('numero_utilidad') > +$(b).attr('numero_utilidad')) ?
@@ -101,11 +97,9 @@ let ordenar_valoraciones = function (e) {
             });
             render_enid(".contenedor_global_recomendaciones", listitems);
             set_option("orden", "asc");
-
-
             break;
-        case 1:
 
+        case 1:
 
             listitems.sort(function (a, b) {
 
@@ -114,11 +108,11 @@ let ordenar_valoraciones = function (e) {
                         1 : 0;
 
             });
-
             render_enid(".contenedor_global_recomendaciones", listitems);
-
             break;
+
         case 2:
+
             break;
         default:
     }

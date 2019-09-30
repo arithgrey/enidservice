@@ -24,6 +24,11 @@ $(document).ready(() => {
     $(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
     $(".form_notas").submit(registrar_nota);
     retorno();
+    $(".precio").focus(function () {
+        $('.precio').next('label').addClass('focused_input');
+
+    });
+
 
 });
 let editar_horario_entrega = function (e) {

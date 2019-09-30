@@ -6,40 +6,25 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $servicio = $data["servicio"];
         $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
 
-        $f[] = a_enid(
-            text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑA")
-            ,
-            [
-                "class" => "escribir_valoracion white escribir",
-                "href" => "../valoracion?servicio=" . $servicio,
-
-            ]
-        );
         $f[] = resumem_valoracion($num);
-        $f[] = a_enid(
-            "MÁS SOBRE EL VENDEDOR"
-            ,
-            [
-                "href" => "../recomendacion/?q=" . $data["id_usuario"],
-                "class" => "link_vendedor mt-5 f11 black underline bottom_100 strong"
-            ]
-
-
-        );
-        $a = d(append($f), "d-flex flex-column justify-content-center text-center");
+        $a = d(append($f), "d-flex flex-column justify-content-center");
         $z[] = place("table_orden_1");
         $z[] = criterios();
         $z[] = add_text(
             comentarios($comentarios, $data["respuesta_valorada"]),
-            d(redactar($comentarios, $num, $servicio), "mt-1")
+            d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between")
         );
 
-        $b = d(append($z), 12);
-        return d($a,4).d("","col-lg-1"). d($b, 7);
+        $b = d(append($z));
+        if (es_data($comentarios)) {
+            $response[] = h("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
+        }
+        $response[] = d($a, 4) . d("", "col-lg-1") . d($b, 7);
+
+        return append($response);
 
     }
 
@@ -162,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
 
         );
         $r[] = place("nuevo");
-        $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), ["class"=> "top_40 bottom_40"]);
+        $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), ["class" => "top_40 bottom_40"]);
         $r[] = place("place_registro_valoracion");
         $r[] = form_close();
 
@@ -248,21 +233,23 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         for ($z = 0; $z < count($criterios); $z++) {
             $extra_criterios = [
-                "class" => 'criterio_busqueda ordenar_valoraciones_button  padding_5 border ',
+                "class" => 'col-lg-6  criterio_busqueda ordenar_valoraciones_button  padding_5 border  text-center',
                 "id" => $z
             ];
             if ($z == 0) {
 
                 $extra_criterios =
                     [
-                        "class" => 'criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg-dark',
+                        "class" => 'col-lg-6  criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg_black',
                         "id" => $z
                     ];
             }
             $r[] = d($criterios[$z], $extra_criterios);
         }
 
-        return d(append($r), "d-flex   justify-content-end");
+        $response[] = d("ordernar por", "text-uppercase  mb-2");
+        $response[] = d(append($r), "d-flex mb-5");
+        return append($response);
     }
 
     function resumem_valoracion($numero_valoraciones, $persona = 0)
@@ -272,11 +259,21 @@ if (!function_exists('invierte_date_time')) {
 
             $valoracion = $numero_valoraciones[0];
             $num = $valoracion["num_valoraciones"];
-            $comentarios = $num . ($num > 1) ? "COMENTARIOS" : "COMENTARIO";
             $promedio = number_format($valoracion["promedio"], 1, '.', '');
-            $parte_promedio = d(crea_estrellas($promedio) . span($promedio, ["class" => 'promedio_num f15 strong black']), ["class" => 'contenedor_promedios']);
-            $parte_promedio .= tb(tr(td($comentarios, 'info_comentarios')));
-            $parte_promedio .= d(porcentaje($num, $valoracion["personas_recomendarian"], 1) . "%", 'porcentaje_recomiendan');
+            $parte_promedio = btw(
+                label($promedio, 'promedio_num f15 strong black cantidad_promedio h1')
+                ,
+                crea_estrellas($promedio)
+                ,
+                'contenedor_promedios bg_green p-2 mb-5 text-center'
+            );
+            $parte_promedio .= d(
+                add_text(
+                    porcentaje($num, $valoracion["personas_recomendarian"])
+                    ,
+                    "%"
+                )
+            );
             $parte_promedio .= igual($persona, 1, "de los consumidores recomiendan", "de los consumidores recomiendan este producto");
             return $parte_promedio;
 
@@ -287,35 +284,25 @@ if (!function_exists('invierte_date_time')) {
     function comentarios($comentarios, $es_valorado)
     {
 
-        $z = [];
+        $response = [];
         foreach ($comentarios as $row) {
-
+            $r = [];
             $id = $row["id_valoracion"];
             $num_util = $row["num_util"];
-
             $fecha_registro = $row["fecha_registro"];
-
-            $config =
-                [
-                    "class" => 'contenedor_valoracion_info ',
-                    "numero_utilidad" => $num_util,
-                    "fecha_info_registro" => $fecha_registro
-                ];
-
-
-            $r[] = d(crea_estrellas($row["valoracion"], 1));
-            $r[] = d($row["titulo"], 'titulo_valoracion');
-            $r[] = d($row["comentario"], 'comentario_valoracion');
+            $r[] = flex(crea_estrellas($row["valoracion"], 1), format_fecha($fecha_registro), 'justify-content-between');
+            $r[] = h($row["titulo"], 4, "strong text-uppercase");
+            $r[] = p($row["comentario"], "mb-3");
 
             if ($row["recomendaria"] == 1) {
                 $r[] = d(text_icon("fa fa-check-circle", "Recomiendo este producto"), 'recomendaria_valoracion strong color_recomendaria');
             }
 
-            $r[] = d(add_text($row["nombre"],  $fecha_registro ) , 'nombre_comentario_valoracion');
-            $texto_valoracion = ($es_valorado === $id) ? d("Recibimos tu valoracion! ", 'text_recibimos_valoracion') :  "";
+            $r[] = d_p($row["nombre"], 'strong black mt-1');
+            $texto_valoracion = ($es_valorado === $id) ? "Gracias! Se ha enviado correctamente tus comentarios de esta reseña " : "";
             $es_util = a_enid("SI" . span("[" . $num_util . "]", 'num_respuesta'),
                 [
-                    "class" => 'respuesta_util respuesta_ok valorar_respuesta mr-4 blue_enid',
+                    "class" => 'respuesta_util respuesta_ok valorar_respuesta mr-4 black',
                     "id" => $id,
                     "onclick" => "agrega_valoracion_respuesta('" . $id . "' , 1)"
                 ]
@@ -323,48 +310,68 @@ if (!function_exists('invierte_date_time')) {
 
             $btn_no_util = a_enid("NO" . span("[" . $row["num_no_util"] . "]", 'num_respuesta'),
                 [
-                    "class" => 'respuesta_no valorar_respuesta mr-4 blue_enid',
+                    "class" => 'respuesta_no valorar_respuesta mr-4 black',
                     "id" => $id,
                     "onclick" => "agrega_valoracion_respuesta('" . $id . "' , 0)"
                 ]
             );
 
 
-            $a = tr(
-                add_text(
-
-                    td(h("¿Te ha resultado útil?", 5, "letter-spacing-5 strong")),
-                    td($es_util . $btn_no_util)
-                )
+            $a = add_text(
+                d_p("¿Te ha resultado útil?", "mr-5"),
+                d($es_util),
+                d($btn_no_util)
             );
-            $b = tr(td($texto_valoracion));
-            $r[] = d(tb(add_text($a, $b)), 'contenedor_utilidad');
-            $z[] = d(d(append($r), add_attributes($config)), "contenedor_global_recomendaciones");
+
+
+            $r[] = d($a, "letter-spacing-1 mt-5 d-flex");
+            $r[] = d_p($texto_valoracion, "mt-5");
+            $str = d(append($r),
+                [
+                    "class" => 'contenedor_valoracion_info',
+                    "numero_utilidad" => $num_util,
+                    "fecha_info_registro" => $fecha_registro
+                ]);
+            $response[] = section($str, "contenedor_global_recomendaciones border-bottom mb-5");
         }
-        return d(append($z));
+        return article(append($response));
     }
 
-    function redactar($comentarios, $numero_valoraciones, $servicio)
+    function redactar($comentarios, $data)
     {
-        $response = "";
+
+        $id_servicio = $data["servicio"];
+        $id_usuario = $data["id_usuario"];
+
+        $response = [];
+        $response[] = format_link(
+            text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑA")
+            ,
+            [
+                "href" => "../valoracion?servicio=" . $id_servicio,
+
+            ]
+        );
+
+        $response[] = format_link(
+            "MÁS SOBRE EL VENDEDOR"
+            ,
+            [
+                "href" => "../recomendacion/?q=" . $id_usuario,
+            ], 0
+
+
+        );
         if (es_data($comentarios) && count($comentarios) > 5) {
 
-            if (pr($numero_valoraciones, "num_valoraciones") > 6) {
-
-                $response = a_enid(text_icon("fa fa-chevron-right ir", "CARGAR MÁS"),
-                    "cargar_mas_valoraciones");
-
-            } else {
-
-                $response = a_enid(text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑAESCRIBE UNA RESEÑA "),
-                    [
-                        "class" => "escribir_valoracion",
-                        "href" => "../valoracion?servicio=" . $servicio
-                    ]);
-            }
-
+            $response[] = format_link(
+                text_icon("fa fa-chevron-right ir", "CARGAR MÁS")
+                ,
+                ["class" => "cargar_mas_valoraciones"]
+            );
         }
-        return $response;
+
+        return append($response);
     }
 
     function posibilidades($calificacion)

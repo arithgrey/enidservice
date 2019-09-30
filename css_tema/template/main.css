@@ -177,9 +177,11 @@ th:hover {
 .color_linkeding {
     color: #006FA6 !important;
 }
-.color_venta{
-    color: #04528a!important;
+
+.color_venta {
+    color: #04528a !important;
 }
+
 .blue_linkeding_background {
     background: #006FA6 !important;
 }
@@ -411,11 +413,12 @@ li {
 / / background: #015ec8 !important;
 / / background: #000205;
 / / background: #0e2f53 !important;
-    background: #0a1521 !important;
+    background: #000 !important;
     padding: 10px !important;
     color: white !important;
     width: 100% !important;
     border: 0 !important;
+    outline: none !important;
 }
 
 .a_enid_blue:hover {
@@ -1648,6 +1651,14 @@ a {
     color: #02071a
 }
 
+.bg_green {
+    background: #2ada71;
+}
+
+.bg_black {
+    background: #000;
+}
+
 .checkbox_enid {
     width: 15px !important;
     background-color: white !important;
@@ -1668,15 +1679,15 @@ a {
 .checkbox_enid:focus {
     outline: none;
 }
-
 /*Extra small devices(portrait phones, less than576px)*/
 @media (max-width: 575.98px) {
 
-    .top_sm_100{
+    .top_sm_100 {
         margin-top: 100px;
     }
-    .padding_sm_20{
-        padding: 0px!important;
+
+    .padding_sm_20 {
+        padding: 0px !important;
     }
 }
 

@@ -54,8 +54,10 @@ let response_carga_valoraciones = data => {
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").click(function (e) {
         e.preventDefault();
     });
-    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").append("<div>Ranking</div>");
-    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-flex");
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").before("<div class='black'>Opiniones de clientes</div>");
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-block");
+    $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").css("margin-top", "-8px");
+
 
 }
 let agrega_valoracion_respuesta = (valoracion, num) => {

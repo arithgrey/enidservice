@@ -53,17 +53,13 @@ if (!function_exists('span')) {
 
     }
 }
-if (!function_exists('p')) {
-    function p($str, $attributes = [], $row = 0)
-    {
 
-        $attributes = (is_string($attributes)) ? add_attributes(["class" => $attributes]) : add_attributes($attributes);
-        $base = "<p " . $attributes . ">" . $str . "</p>";
-        $e = ($row == 0) ? $base : addNRow($base);
-        return $e;
+function p($str, $attributes = [], $row = 0)
+{
+    return get_base_html("p", $str, $attributes, $row);
 
-    }
 }
+
 if (!function_exists('btn')) {
     function btn($info, $attributes = [], $row = 0, $type_button = 1, $submit = 1, $anchor = 0)
     {
@@ -241,14 +237,25 @@ if (!function_exists('get_base_html')) {
 }
 
 
-if (!function_exists('d')) {
-    function d($info, $attributes = [], $row = 0, $frow = 0)
-    {
+function d($info, $attributes = [], $row = 0, $frow = 0)
+{
 
-        return get_base_html("div", $info, $attributes, $row, $frow);
+    return get_base_html("div", $info, $attributes, $row, $frow);
 
-    }
 }
+
+function d_p($info, $attributes = [], $row = 0, $frow = 0)
+{
+
+    return d(p($info), $attributes, $row, $frow);
+
+}
+
+function format_time($info, $attributes = [], $row = 0, $frow = 0)
+{
+    return get_base_html("time", $info, $attributes, $row, $frow);
+}
+
 
 if (!function_exists('u')) {
     function u($info, $attributes = [], $row = 0, $frow = 0)
@@ -269,78 +276,83 @@ if (!function_exists('del')) {
     }
 }
 
-if (!function_exists('section')) {
-    function section($info, $attributes = [], $row = 0, $frow = 0)
-    {
+function section($info, $attributes = [], $row = 0, $frow = 0)
+{
 
-        return get_base_html("section", $info, $attributes, $row, $frow);
+    return get_base_html("section", $info, $attributes, $row, $frow);
 
-    }
 }
 
-if (!function_exists('input')) {
-    function input($attributes = [], $e = 0, $bootstrap = 1)
-    {
+function article($info, $attributes = [], $row = 0, $frow = 0)
+{
 
-        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " ") : "  ";
-        $attributes["autocomplete"] = "off";
+    return get_base_html("article", $info, $attributes, $row, $frow);
 
-        if ($bootstrap) {
+}
 
-            $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
+
+function input($attributes = [], $e = 0, $bootstrap = 1)
+{
+
+    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " ") : "  ";
+    $attributes["autocomplete"] = "off";
+
+    if ($bootstrap) {
+
+        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
+    }
+
+    if (prm_def($attributes, "type") !== 0) {
+
+        $type = $attributes["type"];
+
+        switch ($type) {
+
+            case "tel":
+
+                $attributes["onpaste"] = "paste_telefono();";
+                $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " telefono ") : " telefono ";
+                $attributes["minlength"] = 8;
+                $attributes["maxlength"] = 10;
+                $attributes["required"] = true;
+
+                break;
+
+            case "email":
+
+                $attributes["onpaste"] = "paste_email();";
+                $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " correo ") : " correo ";
+
+                break;
+
+
+            case "text":
+
+                if (prm_def($attributes, "name") === "nombre") {
+                    $attributes["onpaste"] = "paste_nombre();";
+                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
+                    $attributes["minlength"] = 3;
+                }
+                break;
+
+            case "checkbox":
+
+                $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " checkbox_enid border cursor_pointer rounded") : " checkbox_enid border cursor_pointer rounded";
+
+                break;
+
+
+            default:
+
         }
-
-        if (prm_def($attributes, "type") !== 0) {
-
-            $type = $attributes["type"];
-
-            switch ($type) {
-
-                case "tel":
-
-                    $attributes["onpaste"] = "paste_telefono();";
-                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " telefono ") : " telefono ";
-                    $attributes["minlength"] = 8;
-                    $attributes["maxlength"] = 10;
-                    $attributes["required"] = true;
-
-                    break;
-
-                case "email":
-
-                    $attributes["onpaste"] = "paste_email();";
-                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " correo ") : " correo ";
-
-                    break;
-
-
-                case "text":
-
-                    if (prm_def($attributes, "name") === "nombre") {
-                        $attributes["onpaste"] = "paste_nombre();";
-                        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
-                        $attributes["minlength"] = 3;
-                    }
-                    break;
-
-                case "checkbox":
-
-                    $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " checkbox_enid border cursor_pointer rounded") : " checkbox_enid border cursor_pointer rounded";
-
-                    break;
-
-
-                default:
-
-            }
-
-        }
-
-        $attr = add_attributes($attributes);
-        return ($e < 1) ? "<input " . $attr . " >" : addNRow("<input " . $attr . " >");
 
     }
+
+    $attr = add_attributes($attributes);
+    return ($e < 1) ? "<input " . $attr . " >" : addNRow("<input " . $attr . " >");
+
 }
+
 if (!function_exists('input_hidden')) {
     function hiddens($attributes = '', $e = 0)
     {
@@ -403,20 +415,18 @@ if (!function_exists('n_row_12')) {
 
     }
 }
-if (!function_exists('a_enid')) {
-    function a_enid($title = '', $attributes = [], $row_12 = 0, $type_button = 0)
-    {
 
+function a_enid($title = '', $attributes = [], $format_block = 1)
+{
 
-        $base = "<a" .
-            _parse_attributes((is_string($attributes)) ? ["href" => $attributes] : $attributes) . ">" .
-            $title
-            . "</a>";
-        $e = ($row_12 == 0) ? $base : addNRow($base);
-        return $e;
-
+    $att = (is_string($attributes)) ? ["href" => $attributes] : $attributes;
+    if ($format_block > 0) {
+        $att["class"] = (es_data($att) && array_key_exists("class", $att)) ? add_text($att["class"], " d-block") : " ";
     }
+    return get_base_html("a", $title, $att);
+
 }
+
 if (!function_exists('get_td')) {
     function td($val = '', $attributes = [])
     {
@@ -851,16 +861,16 @@ if (!function_exists('now_enid')) {
     }
 }
 
-if (!function_exists('porcentaje')) {
-    function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
-    {
-        if (is_numeric($cantidad) == is_numeric($porciento)) {
 
-            return ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100, $decimales)) : ($cantidad * $porciento / 100);
+function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
+{
+    if (is_numeric($cantidad) == is_numeric($porciento)) {
 
-        }
+        return ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100, $decimales)) : ($cantidad * $porciento / 100);
+
     }
 }
+
 if (!function_exists('porcentaje_total')) {
     function porcentaje_total($cantidad, $total, $decimales = 2)
     {
@@ -1379,8 +1389,8 @@ function horarios()
 {
     //[FIXME]
     $horarios = [
-        "08:00", "08:30","09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
-        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00","19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30",
+        "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"];
 
     $select = "<select name='horario_entrega' class='form-control  horario_entrega'  > ";
     foreach ($horarios as $row) {
@@ -1393,6 +1403,7 @@ function horarios()
 
     return $select;
 }
+
 function lista_horarios($dia_busqueda = 0)
 {
 
@@ -2739,13 +2750,13 @@ function crea_estrellas($calificacion, $sm = 0)
     if ($calificacion > 0) {
 
         for ($a; $a <= $calificacion; $a++) {
-            $ext = ($sm > 0) ? "" : "f2";
+            $ext = ($sm > 0) ? "" : "";
             $valoraciones .= label("★", ["class" => 'estrella black ' . $ext, "id" => $a]);
         }
     }
 
     for ($a; $a <= 5; $a++) {
-        $ext = ($sm > 0) ? "" : "f2";
+        $ext = ($sm > 0) ? "" : "";
 
         $restantes .=
             label("★",
@@ -2818,4 +2829,21 @@ function contaiter($str, $attributes = [], $fluid = 1)
 
 
     return $response;
+}
+
+function format_fecha($date, $horas = 0)
+{
+
+    $ext = ($horas > 0) ? 'H:i:s' : '';
+    return format_time(date_format(date_create($date), 'd M Y ' . $ext));
+
+}
+
+function format_link($str, $attributes, $primario = 1)
+{
+
+    $f =  ($primario>0)? " p-3 bg_black white strong col": " p-3 strong  border_enid col black";
+    $att =  $attributes;
+    $att["class"] = (array_key_exists("class", $attributes)) ? add_text($attributes["class"], $f) : $f;
+    return a_enid($str, $att);
 }

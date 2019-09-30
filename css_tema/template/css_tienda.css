@@ -223,15 +223,7 @@
 .iconos_social a img{
     margin-right: 10px;
 }
-.escribir_valoracion {
-    background: #000;
-    padding: 10px;
-    font-weight: bold;
-}
-.escribir_valoracion:hover{
-    color:#ccc;
 
-}
 .estrella{
     color: #000;
 }

@@ -123,10 +123,7 @@
     margin-top: 20px;
 }
 
-.contenedor_opciones_pedido {
 
-    padding: 50px!important;
-}
 .contenedor_opciones_pedido div a {
     color: black;
     text-decoration: underline;
@@ -163,17 +160,10 @@
     background: #0046c0;
     color: white;
 }
-
-.btn_opciones {
-    display: scroll;
-    position: fixed;
-    bottom: 385px;
-    right: 0px;
-    margin-right: 80px!important;
-
-}
-
-
 .text-utilidad{
     color: #0a1b42;
+}
+.select_gastos{
+
+    height: 42px;
 }

@@ -137,7 +137,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes), 10, 1);
 
         $response[] = d(d("", "place_valoraciones"), 10, 1);
-        $response[] = d(h("TAMBIÉN TE PODRÍA  INTERESAR", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none p-0");
+        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none p-0");
         $response[] = d(d("", "place_tambien_podria_interezar  bottom_100"), 10, 1);
 
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);

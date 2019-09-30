@@ -3,20 +3,6 @@
     background: #083ef9;
 
 }
-
-.escribir_valoracion {
-    background: #015ec8;
-    padding: 10px;
-    color: white;
-    font-weight: bold;
-}
-
-.escribir_valoracion:hover {
-    cursor: pointer;
-    background: #074e9f;
-}
-
-
 .promedio_num {
     font-size: 2em;
     font-weight: bold;
@@ -35,10 +21,6 @@
     font-size: 3em;
 }
 
-.titulo_valoracion {
-    font-weight: bold;
-    font-size: 1.3em;
-}
 
 .comentario_valoracion {
     font-size: .9em;
@@ -58,11 +40,6 @@
 .cargar_mas_valoraciones:hover {
     cursor: pointer;
 }
-
-.nombre_comentario_valoracion {
-    color: grey;
-}
-
 .contenedor_utilidad {
     text-align: right;
 }
