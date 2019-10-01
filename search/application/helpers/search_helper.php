@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
 
-        $z[] = heading(span("FILTRA TU BÚSQUEDA")
+        $z[] = h(span("FILTRA TU BÚSQUEDA")
             .
             small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)", "fp_5")
             ,

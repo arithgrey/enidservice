@@ -70,7 +70,7 @@ if (!function_exists('invierte_date_time')) {
             ], 1
         );
 
-        $r[] = heading('RECUPERA TUS DATOS DE ACCESO', 3, 1);
+        $r[] = h('RECUPERA TUS DATOS DE ACCESO', 3, 1);
 
         $r[] = "<form class='form-pass' id='form-pass' action='" . url_recuperacion_password() . "'>";
         $r[] = input(
@@ -109,7 +109,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = a_enid(img_enid(), ["href" => "../", "class" => "col-lg-8 col-lg-offset-2"], 1);
-        $r[] = heading('ÚNETE', 3, 1);
+        $r[] = h('ÚNETE', 3, 1);
         $r[] = d(frm_registro(), 1);
         $r[] = d(
             a_enid("¿YA ESTÁS REGISTRADO?  ACCEDE!",

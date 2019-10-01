@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
 
         $a[] = btw(
 
-            heading("ORDEN #" . prm_def($recibo, "id_proyecto_persona_forma_pago"), 3)
+            h("ORDEN #" . prm_def($recibo, "id_proyecto_persona_forma_pago"), 3)
             ,
             a_enid(
 
@@ -288,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
             $articulos = $r["num_ciclos_contratados"];
             $monto_a_pagar = $r["monto_a_pagar"] * $articulos;
             $r[] = d(a_enid(img($path), path_enid("pedidos_recibo", $r["id_proyecto_persona_forma_pago"])));
-            $r[] = h(add_text("TOTAL ", $monto_a_pagar . "MXN"), 4, "strong");
+            $r[] = h(add_text("TOTAL ", $monto_a_pagar , "MXN"), 4, "strong");
             $r[] = h(add_text("CUBIERTO", $r["saldo_cubierto"] . "MXN"), 5);
             $r[] = h(add_text("ARTÍCULOS", $articulos,1), 5);
 

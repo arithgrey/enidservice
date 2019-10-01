@@ -1,7 +1,7 @@
 <div class="col-lg-4 col-lg-offset-4">
     <div class="jumbotron"
          style="background: #fbfbfb;border-right-style: solid;border-width:.9px;border-left-style: solid;">
-        <?= heading("TRANSFERIR FONDOS", 2) ?>
+        <?= h("TRANSFERIR FONDOS", 2) ?>
         <div style="width: 80%;margin: 0 auto;margin-top: 20px;">
             <?= create_select(
                 [

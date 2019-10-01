@@ -261,7 +261,7 @@ if (!function_exists('invierte_date_time')) {
 
             $url = "https://enidservices.com/inicio/valoracion/?servicio=" . $id_servicio;
             $r[] = img_enid([], 1, 1);
-            $r[] = heading("¿Valorarías tu experiencia de compra en Enid Service?", 3);
+            $r[] = h("¿Valorarías tu experiencia de compra en Enid Service?", 3);
             $r[] = d("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
             $r[] = d(a_enid("Déjanos tus comentarios aquí!", ["href" => $url]));
             $sender = get_request_email(

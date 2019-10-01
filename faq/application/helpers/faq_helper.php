@@ -254,7 +254,7 @@ function get_format_fq($flag_categoria, $flag_busqueda_q, $faqs_categoria, $resp
 
             $x[] = d($z, "day");
             $x[] = img($source);
-            $x[] = heading($titulo);
+            $x[] = h($titulo);
             $text = ul(li(append($x)), "event-list");
             $r[] = a_enid($text, ["href" => $href]);
             $z++;

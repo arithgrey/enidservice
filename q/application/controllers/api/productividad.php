@@ -46,10 +46,10 @@ class productividad extends REST_Controller
 
             case 3:
 
-
                 $response += [
                     "recordatorios" => $this->get_recordatorios($id_usuario),
                     "ventas_enid_service" => $this->get_ventas_enid_service(),
+                    "ventas_semana" => $this->ventas_semana()
                 ];
 
                 $response = get_tareas_pendienetes_usuario($response);
@@ -57,9 +57,7 @@ class productividad extends REST_Controller
                 break;
 
             case 20:
-
                 $response = pendientes_cliente($response);
-
                 break;
             default:
                 break;
@@ -76,8 +74,8 @@ class productividad extends REST_Controller
             "se_lee" => 0,
             "se_ve_cliente" => 0,
         ];
-        return $this->app->api("pregunta/cliente/format/json/", $q);
 
+        return $this->app->api("pregunta/cliente/format/json/", $q);
     }
 
     private function get_preguntas($id_vendedor)
@@ -203,33 +201,43 @@ class productividad extends REST_Controller
 
     private function pendientes_ventas_usuario($id_usuario)
     {
-        $q["id_usuario"] = $id_usuario;
-        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/", $q);
+        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/", ["id_usuario" => $id_usuario]);
         $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
         return $response;
     }
 
     private function get_ventas_enid_service()
     {
-
-        $q["fecha"] = 1;
-
-        return $this->app->api("recibo/dia/format/json/", $q);
+        return $this->app->api("recibo/dia/format/json/", ["fecha" => 1]);
     }
 
     private function get_scostos($id_usuario)
     {
-
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("costo_operacion/scostos/format/json/", $q);
-
+        return $this->app->api("costo_operacion/scostos/format/json/", ["id_usuario" => $id_usuario]);
     }
 
     function get_tareas($id_usuario)
     {
-
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("tickets/pendientes/format/json/", $q);
+        return $this->app->api("tickets/pendientes/format/json/", ["id_usuario" => $id_usuario]);
     }
 
+    function ventas_semana()
+    {
+        $fecha = new DateTime(now_enid());
+        $dias = $fecha->format("w");
+        $q = [
+            "cliente" => "",
+            "v" => 0,
+            "recibo" => "",
+            "tipo_entrega" => 0,
+            "status_venta" => 14,
+            "tipo_orden" => 1,
+            "fecha_inicio" => add_date(now_enid(), - $dias),
+            "fecha_termino" => now_enid()
+        ];
+
+        $response = $this->app->api("recibo/pedidos/format/json/", $q);
+        return count($response);
+
+    }
 }

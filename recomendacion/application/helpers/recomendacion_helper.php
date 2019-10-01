@@ -1,27 +1,29 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
-    if (!function_exists('crea_repo_categorias_destacadas')) {
-        function format_recomendacion($data,$resumen_recomendacion,$resumen_valoraciones_vendedor)
-        {
 
-            $usuario = $data["usuario"];
-            $paginacion =  $data["paginacion"];
-            $r[] =  h("RESEÑAS Y VALORACIONES SOBRE", 3, "underline" ) ;
-            $r[] =  a_enid(icon('fa fa-shopping-cart') . get_campo($usuario, "nombre"),
-                [
+    function format_recomendacion($data, $resumen_recomendacion, $resumen_valoraciones_vendedor)
+    {
 
-                    "href" => "../search/?q3=" . get_campo($usuario, "id_usuario"),
-                    "class" => 'go-usuario top_20 cursor_pointer'
-                ],
-                1,
-                0) ;
-            $r[] =  d($resumen_recomendacion, 1) ;
-            $r[] =  d($paginacion, 1) ;
-            $r[] =  d($resumen_valoraciones_vendedor, 1) ;
-            $r[] =  d($paginacion, 1) ;
+        $usuario = $data["usuario"];
+        $paginacion = $data["paginacion"];
+        $vendedor = get_campo($usuario, "nombre");
+        $link = a_enid(
+            $vendedor,
+            [
 
-            return d(append($r),  "top_30 col-lg-6 col-lg-offset-3 shadow padding_10");
-        }
+                "href" => "../search/?q3=" . get_campo($usuario, "id_usuario"),
+                "class" => "h2 strong mt-0 color_azul_fuerte cursor_pointer"
+            ]
+        );
+        $str = add_text("VALORACIONES RELACIONADAS A ", $link);
+        $r[] = h($str, 1, "h4 strong text-uppercase ");
+        $r[] = d($resumen_recomendacion);
+        $r[] = d($paginacion);
+        $r[] = d($resumen_valoraciones_vendedor);
+        $r[] = d($paginacion);
+
+        return d(append($r), 6, 1);
     }
+
 
 }

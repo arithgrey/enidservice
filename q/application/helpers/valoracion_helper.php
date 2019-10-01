@@ -9,10 +9,10 @@ if (!function_exists('invierte_date_time')) {
         $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
 
-        $f[] = resumem_valoracion($num);
+        $f[] = valorados($num);
         $a = d(append($f), "d-flex flex-column justify-content-center");
         $z[] = place("table_orden_1");
-        $z[] = criterios();
+        $z[] = criterios($comentarios);
         $z[] = add_text(
             comentarios($comentarios, $data["respuesta_valorada"]),
             d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between")
@@ -227,32 +227,37 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function criterios()
+    function criterios($comentarios)
     {
-        $criterios = ["RELEVANTE", "RECIENTE"];
-        $r = [];
-        for ($z = 0; $z < count($criterios); $z++) {
-            $extra_criterios = [
-                "class" => 'col-lg-6  criterio_busqueda ordenar_valoraciones_button  padding_5 border  text-center',
-                "id" => $z
-            ];
-            if ($z == 0) {
+        $response = [];
+        if (es_data($comentarios)) {
 
-                $extra_criterios =
-                    [
-                        "class" => 'col-lg-6  criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg_black',
-                        "id" => $z
-                    ];
+            $criterios = ["RELEVANTE", "RECIENTE"];
+            $r = [];
+            for ($z = 0; $z < count($criterios); $z++) {
+                $extra_criterios = [
+                    "class" => 'col-lg-6  criterio_busqueda ordenar_valoraciones_button  padding_5 border  text-center',
+                    "id" => $z
+                ];
+                if ($z == 0) {
+
+                    $extra_criterios =
+                        [
+                            "class" => 'col-lg-6  criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg_black',
+                            "id" => $z
+                        ];
+                }
+                $r[] = d($criterios[$z], $extra_criterios);
             }
-            $r[] = d($criterios[$z], $extra_criterios);
-        }
 
-        $response[] = d("ordernar por", "text-uppercase  mb-2");
-        $response[] = d(append($r), "d-flex mb-5");
+            $response[] = d("ordernar por", "text-uppercase  mb-2");
+            $response[] = d(append($r), "d-flex mb-5");
+
+        }
         return append($response);
     }
 
-    function resumem_valoracion($numero_valoraciones, $persona = 0)
+    function valorados($numero_valoraciones, $persona = 0)
     {
 
         if (es_data($numero_valoraciones)) {
@@ -265,16 +270,21 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 crea_estrellas($promedio)
                 ,
-                'contenedor_promedios bg_green p-2 mb-5 text-center'
+                'contenedor_promedios bg_azul_tenue p-2 mb-5 text-center'
             );
-            $parte_promedio .= d(
-                add_text(
-                    porcentaje($num, $valoracion["personas_recomendarian"])
-                    ,
-                    "%"
-                )
-            );
-            $parte_promedio .= igual($persona, 1, "de los consumidores recomiendan", "de los consumidores recomiendan este producto");
+            if ($persona > 0) {
+
+                $parte_promedio .= d(
+                    add_text(
+                        porcentaje($num, $valoracion["personas_recomendarian"])
+                        ,
+                        "%"
+                    )
+                );
+
+                $parte_promedio .= igual($persona, 1, "de los consumidores recomiendan", "de los consumidores recomiendan este producto");
+            }
+
             return $parte_promedio;
 
         }
@@ -401,4 +411,6 @@ if (!function_exists('invierte_date_time')) {
         }
         return append($response);
     }
+
+
 }
