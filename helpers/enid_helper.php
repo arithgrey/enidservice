@@ -1,21 +1,11 @@
 <?php
 
-if (!function_exists('heading')) {
-    function heading($data = '', $h = '1', $attributes = '')
-    {
-        return (is_string($attributes)) ?
-            "<h" . $h . add_attributes(["class" => $attributes]) . ">" . $data . "</h" . $h . ">" :
-            "<h" . $h . add_attributes($attributes) . ">" . $data . "</h" . $h . ">";
 
-    }
-}
-if (!function_exists('ul')) {
-    function ul($list, $attributes = [])
-    {
+function ul($list, $attributes = [])
+{
 
-        return _list('ul', $list, (is_string($attributes)) ? ["class" => $attributes] : $attributes);
+    return _list('ul', $list, (is_string($attributes)) ? ["class" => $attributes] : $attributes);
 
-    }
 }
 
 if (!function_exists('li')) {
@@ -1127,14 +1117,14 @@ if (!function_exists('hr')) {
 
     }
 }
-if (!function_exists('border')) {
-    function border($attributes = [])
-    {
 
-        $extra = (is_string($attributes)) ? $attributes : add_attributes($att);
-        return d("", "border " . $extra);
-    }
+function border($attributes = [])
+{
+
+    $extra = (is_string($attributes)) ? $attributes : add_attributes($attributes);
+    return d("", "border " . $extra);
 }
+
 
 if (!function_exists('debug')) {
     function debug($msg, $array = 0)
@@ -1287,22 +1277,22 @@ if (!function_exists('sksort')) {
         else $array = $temp_array;
     }
 }
-if (!function_exists('date_difference')) {
-    function date_difference($date_1, $date_2, $differenceFormat = '%a')
-    {
-        $interval = date_diff(date_create($date_1), date_create($date_2));
-        return $interval->format($differenceFormat);
-    }
-}
-if (!function_exists('add_date')) {
-    function add_date($inicio, $dias)
-    {
 
-        $fecha = date_create($inicio);
-        date_add($fecha, date_interval_create_from_date_string($dias . ' days'));
-        return date_format($fecha, 'Y-m-d');
-    }
+function date_difference($date_1, $date_2, $differenceFormat = '%a')
+{
+    $interval = date_diff(date_create($date_1), date_create($date_2));
+    return $interval->format($differenceFormat);
 }
+
+
+function add_date($inicio, $dias)
+{
+
+    $fecha = date_create($inicio);
+    date_add($fecha, date_interval_create_from_date_string($dias . ' days'));
+    return date_format($fecha, 'Y-m-d');
+}
+
 if (!function_exists('evita_basura')) {
     function evita_basura($text)
     {
@@ -1504,49 +1494,47 @@ if (!function_exists('img_servicio')) {
 }
 
 
-if (!function_exists('append')) {
+function append($array, $col = 0, $num_col = 0)
+{
+    if (is_array($array)) {
 
-    function append($array, $col = 0, $num_col = 0)
-    {
-        if (is_array($array)) {
+        if (es_local() > 0) {
+            $f = 0;
+            foreach ($array as $clave => $row) {
 
-            if (es_local() > 0) {
-                $f = 0;
-                foreach ($array as $clave => $row) {
-
-                    if ($row == null && $row != "" && $clave != 0) {
-                        echo " la clave  " . $clave . " va  null \n";
-                        $f++;
-                    }
+                if ($row == null && $row != "" && $clave != 0) {
+                    echo " la clave  " . $clave . " va  null \n";
+                    $f++;
                 }
-                if ($f > 0) {
-                    print_r($array);
-                }
-
+            }
+            if ($f > 0) {
+                print_r($array);
             }
 
-            $callback = function ($a, $b) {
-                if (!is_null($b)) {
-                    return " " . $a . $b;
-                }
-            };
-
-
-            $response = array_reduce($array, $callback, '');
-
-            if ($col > 0) {
-
-                $response = ($num_col > 0) ? d($response, $num_col) : d($response);
-            }
-
-            return $response;
-
-        } else {
-
-            echo "No es array -> " . print_r($array);
         }
 
+        $callback = function ($a, $b) {
+            if (!is_null($b)) {
+                return " " . $a . $b;
+            }
+        };
+
+
+        $response = array_reduce($array, $callback, '');
+
+        if ($col > 0) {
+
+            $response = ($num_col > 0) ? d($response, $num_col) : d($response);
+        }
+
+        return $response;
+
+    } else {
+
+        echo "No es array -> " . print_r($array);
     }
+
+
 }
 
 
@@ -2000,7 +1988,7 @@ function social($proceso_compra, $desc_web, $black = 1)
             img(
                 [
                     "src" => "../img_tema/productos/messenger.png",
-                    "style" => "width:15px!important;"
+                    "class" => "w_15"
                 ]
             ),
             [
@@ -2040,7 +2028,7 @@ function social($proceso_compra, $desc_web, $black = 1)
 
 
     }
-    return append($r);
+    return d(append($r), "d-flex align-items-center");
 
 }
 
@@ -2418,11 +2406,14 @@ function create_contenido_menu($data)
 
     foreach ($navegacion as $row) {
 
-        $menu[] = li(a_enid(icon($row["iconorecurso"]) . $row["nombre"],
-            [
-                "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
-                "class" => 'black'
-            ]));
+        $menu[] =
+            a_enid(
+                icon($row["iconorecurso"]) . $row["nombre"],
+                [
+                    "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
+                    "class" => 'black text-capitalize'
+                ]
+            );
 
 
     }
@@ -2534,15 +2525,6 @@ function gb_modal()
 function menu_session_mobil($in_session)
 {
 
-
-    $a = d(
-        a_enid(img_enid([]),
-            [
-                "href" => path_enid("home")
-            ]
-        ), "logo_lateral_login"
-    );
-
     $b = a_enid("×",
         [
             "href" => "javascript:void(0)",
@@ -2550,18 +2532,18 @@ function menu_session_mobil($in_session)
             "onclick" => "closeNav()"
         ]);
 
-    $r[] = flex("", $b);
+    $r[] = d( $b, "ml-auto");
 
-    $form[] = '<form class="form col-lg-12" action="../search">';
+    $form[] = '<form  action="../search">';
     $form[] = flex(
 
         input(["name" => "q", "placeholder" => "artículo", "class" => "input_search ", 'style' => 'height: 41px!important;']),
         btn("BUSCAR", ['class' => 'boton-busqueda']),
-        " align-items-center justify-content-between ",
+        "justify-content-between ",
         "align-self-end"
     );
     $form[] = form_close();
-    $r[] = d(append($form), "top_150");
+    $r[] = d(append($form),"my-auto");
 
 
     if ($in_session < 1) {
@@ -2580,7 +2562,7 @@ function menu_session_mobil($in_session)
         );
     }
 
-    return d(append($r), ["id" => "mySidenav", "class" => "sidenav"]);
+    return d(d(append($r),"row col-lg-12 h-100"), ["id" => "mySidenav", "class" => "sidenav"]);
 
 }
 
@@ -2625,7 +2607,6 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
             get_img_usuario($id_usuario),
             ul(
                 [
-                    "",
                     $menu,
                     a_enid(
                         "Mis reseñas y valoraciones" .
@@ -2698,7 +2679,7 @@ function frm_search($clasificaciones_departamentos, $in_session = 0, $is_mobile 
 
         ),
         d(
-            heading("TU CARRITO", 4, "strong "),
+            h("TU CARRITO", 4, "strong "),
             [
 
                 "class" => "dropdown-menu mt-5 border-0  bg-white p-2 "
@@ -2842,8 +2823,8 @@ function format_fecha($date, $horas = 0)
 function format_link($str, $attributes, $primario = 1)
 {
 
-    $f =  ($primario>0)? " p-3 bg_black white strong col": " p-3 strong  border_enid col black";
-    $att =  $attributes;
+    $f = ($primario > 0) ? " p-3 bg_black white strong col" : " p-3 strong  border_enid col black";
+    $att = $attributes;
     $att["class"] = (array_key_exists("class", $attributes)) ? add_text($attributes["class"], $f) : $f;
     return a_enid($str, $att);
 }

@@ -36,7 +36,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hr("mt-5");
         $r[] = h("VENTAS POR ESTACIÓN ", 4, "text-left");
         $r[] = h(add_text("ESTACIONES DE REPARTO: " ,  $p), 6, "text-left underline");
-        $r[] = d(d(d(append($z), "main-timeline2"), 12), 13);
+        $r[] = d(append($z), "main-timeline2");
         return d(append($r), "container");
     }
 
@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $total = 0;
-        $r = [];
+        $response = [];
         $b = 0;
         $reparto = 0;
 
@@ -53,11 +53,12 @@ if (!function_exists('invierte_date_time')) {
             $nombre_linea = $data[$a]["nombre_linea"];
             $num = $data[$a]["num"];
             $total = $total + $num;
-
+            $r =  [];
             $reparto++;
+            $text = [];
             if ($b < 1) {
 
-                $text = [];
+
                 $text[] = btw(
 
                     h($nombre_linea, 9, "letter-spacing-1")
@@ -68,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
                 $text[] = border();
-                $r[] = d(append($text), "col-lg-2  top_20 text-center");
+                $r[] = d(append($text), "col-lg-2 mt-5 text-center");
                 $b = 1;
 
             } else {
@@ -81,13 +82,14 @@ if (!function_exists('invierte_date_time')) {
                     "timeline-content"
                 );
 
-                $r[] = d(append($text), "col-lg-2 top_20 text-center");
+                $r[] = d(append($text), "col-lg-2 mt-5 text-center");
             }
+            $response[] =  append($r);
         }
 
-        $x[] = h("VENTAS EN LíNEAS DE METRO: " . $total, 4, "text-left");
+        $x[] = h("VENTAS EN LÍNEAS DE METRO: " . $total, 4, "text-left");
         $x[] = h("LINEAS DE REPARTO: " . $reparto, 6, "text-left underline");
-        $x[] = d(d(d(d(append($r), "main-timeline12"), "col-md-12 contenedor_general padding_20 "), 13));
+        $x[] = d(d(d(d(append($response), "main-timeline12 d-flex flex-wrap"), "col-md-12 contenedor_general padding_20 "), 13));
         return append($x);
 
     }

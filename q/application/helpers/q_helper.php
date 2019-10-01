@@ -545,7 +545,7 @@ if (!function_exists('invierte_date_time')) {
         $info_global = $data["info_global"];
         $lista_fechas = get_arreglo_valor($info_global, "fecha");
         $list = [];
-        foreach ( get_franja_horaria() as $row) {
+        foreach (get_franja_horaria() as $row) {
 
             $franja_h = $row;
             $list[] = "<tr>";
@@ -660,7 +660,7 @@ if (!function_exists('invierte_date_time')) {
         {
 
 
-            $r[] = heading("Buen día " . $param["nombre"] . " " . $param["email"]);
+            $r[] = h("Buen día " . $param["nombre"] . " " . $param["email"]);
             $r[] = d(
                 img(
                     [
@@ -787,8 +787,6 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-
-
     if (!function_exists('crea_tareas_pendientes_info')) {
         function crea_tareas_pendientes_info($f)
         {
@@ -835,92 +833,102 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('add_tareas')) {
-        function add_tareas($tareas)
-        {
+    function add_ventas_semana($ventas)
+    {
 
-            $r = [];
-            $f = 0;
-            foreach ($tareas as $row) {
+        $link = a_enid(
+            add_text("ventas de la semana", $ventas, 1),
+            [
+                "href" => path_enid("pedidos"),
+                "class" => "strong text-uppercase h3 color_azul_fuerte"
+            ]
+        );
+        return $link;
+    }
+
+    function add_tareas($tareas)
+    {
+
+        $r = [];
+        $f = 0;
+        foreach ($tareas as $row) {
 
 
-                $text = d(substr($row["asunto"], 0, 30), "black");
-                $text =  flex(icon(" fa fa-check-square bg-dark white padding_10") ,  $text, "top_10 mh_notificaciones align-items-center border-bottom", "" , "ml-2");
-                $r[] = a_enid($text, "../desarrollo/?q=1&ticket=" . $row["id_ticket"]);
-                $f++;
-            }
+            $text = d(substr($row["asunto"], 0, 30), "black");
+            $text = flex(icon(" fa fa-check-square bg-dark white padding_10"), $text, "top_10 mh_notificaciones align-items-center border-bottom", "", "ml-2");
+            $r[] = a_enid($text, "../desarrollo/?q=1&ticket=" . $row["id_ticket"]);
+            $f++;
+        }
 
 
-            $agregar = d(
-                a_enid(
-                    text_icon("fas fa-plus-circle black", " TAREA"),
+        $agregar = d(
+            a_enid(
+                text_icon("fas fa-plus-circle black", " TAREA"),
                 [
                     "href" => path_enid("desarrollo"),
                     "target" => "black",
                     "class" => "black"
                 ]), "bottom_50 black strong f14 black");
-            $tareas = add_text($agregar, append($r));
+        $tareas = add_text($agregar, append($r));
 
 
-            $response =
-                [
-                    "html" => $tareas,
-                    "flag" => $f,
-
-                ];
-
-            return $response;
-
-        }
-
-    }
-    if (!function_exists('add_tareas_pendientes')) {
-        function add_tareas_pendientes($meta, $hecho)
-        {
-
-            $lista = "";
-            $f = 0;
-            if ($meta > $hecho) {
-
-                $text = "Hace falta por resolver " . ($meta - $hecho) . " tareas!";
-                $lista = b_notificacion("../desarrollo/?q=1", "fa fa-credit-card ", $text);
-                $f++;
-            }
-
-            $response = [
-                "html" => $lista,
+        $response =
+            [
+                "html" => $tareas,
                 "flag" => $f,
+
             ];
 
-            return $response;
-        }
+        return $response;
 
     }
-    if (!function_exists('add_envios_a_ventas')) {
-        function add_envios_a_ventas($meta, $hecho)
-        {
-
-            $lista = "";
-            $f = 0;
-            if ($meta > $hecho) {
 
 
-                $text = "Apresúrate completa tu logro sólo hace falta 
+    function add_tareas_pendientes($meta, $hecho)
+    {
+
+        $lista = "";
+        $f = 0;
+        if ($meta > $hecho) {
+
+            $text = "Hace falta por resolver " . ($meta - $hecho) . " tareas!";
+            $lista = b_notificacion("../desarrollo/?q=1", "fa fa-credit-card ", $text);
+            $f++;
+        }
+
+        $response = [
+            "html" => $lista,
+            "flag" => $f,
+        ];
+
+        return $response;
+    }
+
+
+    function add_envios_a_ventas($meta, $hecho)
+    {
+
+        $lista = "";
+        $f = 0;
+        if ($meta > $hecho) {
+
+
+            $text = "Apresúrate completa tu logro sólo hace falta 
                 " . ($meta - $hecho) . " venta para completar tus labores del día!";
-                $lista = b_notificacion("../reporte_enid/?q=2", " fa fa-money ", $text);
-                $f++;
-            }
-
-            $response = [
-
-                "html" => $lista,
-                "flag" => $f,
-
-            ];
-
-            return $response;
+            $lista = b_notificacion("../reporte_enid/?q=2", " fa fa-money ", $text);
+            $f++;
         }
+
+        $response = [
+
+            "html" => $lista,
+            "flag" => $f,
+
+        ];
+
+        return $response;
     }
+
 
     if (!function_exists('add_accesos_pendientes')) {
         function add_accesos_pendientes($meta, $hecho)
@@ -1010,14 +1018,11 @@ if (!function_exists('invierte_date_time')) {
                 $saldo_cubierto = $row["saldo_cubierto"];
 
 
-
-                $text =  flex(
-                    icon(" fa fa-ticket  padding_10 white blue_enid2") ,
-                    $saldo_cubierto . " MXN " , "top_10  justify-content-between padding_10 mh_notificaciones border-bottom",
+                $text = flex(
+                    icon(" fa fa-ticket  padding_10 white blue_enid2"),
+                    $saldo_cubierto . " MXN ", "top_10  justify-content-between padding_10 mh_notificaciones border-bottom",
                     "",
-                "text-primary strong");
-
-
+                    "text-primary strong");
 
 
                 $r[] = a_enid($text,
@@ -1108,13 +1113,13 @@ if (!function_exists('invierte_date_time')) {
 
             $pendiente = round($adeudos_cliente, 2);
             $text = ajustar(
-                'Saldo por liquidar ' ,
+                'Saldo por liquidar ',
                 span($pendiente . 'MXN',
-                [
-                    "class" => "saldo_pendiente_notificacion strong f15",
-                    "deuda_cliente" => $pendiente
-                ]
-            )) ;
+                    [
+                        "class" => "saldo_pendiente_notificacion strong f15",
+                        "deuda_cliente" => $pendiente
+                    ]
+                ));
 
             $lista = b_notificacion("../area_cliente/?action=compras", "fa fa-credit-card", $text);
 
@@ -1141,7 +1146,7 @@ if (!function_exists('invierte_date_time')) {
 
             ,
 
-                    $url
+            $url
         );
     }
 
@@ -1404,6 +1409,7 @@ if (!function_exists('invierte_date_time')) {
         $num_telefonico = $inf["numero_telefonico"];
 
 
+        $lista[] = add_ventas_semana($info["ventas_semana"]);
         $tareas = add_tareas($info["tareas"]);
         $f = $f + $tareas["flag"];
         $lista[] = $tareas["html"];
@@ -1493,7 +1499,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
-            "lista_pendientes" =>  append($lista),
+            "lista_pendientes" => append($lista),
 
         ];
 

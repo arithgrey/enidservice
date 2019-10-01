@@ -22,7 +22,7 @@ class Valoracion extends REST_Controller
         if (fx($param, "id_usuario,id_servicio")) {
 
             $params = ["COUNT(0)num"];
-            $params_where = ["id_servicio" =>  $param["id_servicio"], "id_usuario" => $param["id_usuario"]];
+            $params_where = ["id_servicio" => $param["id_servicio"], "id_usuario" => $param["id_usuario"]];
             $response = $this->valoracion_model->get($params, $params_where)[0]["num"];
 
         }
@@ -49,7 +49,7 @@ class Valoracion extends REST_Controller
     {
 
         $param = $this->get();
-        if (fx($param ,"id_servicio")){
+        if (fx($param, "id_servicio")) {
 
             $id_servicio = $param["id_servicio"];
             $servicio = $this->app->servicio($id_servicio);
@@ -76,9 +76,9 @@ class Valoracion extends REST_Controller
 
         $param = $this->get();
         $comentarios = $this->valoracion_model->get_desglose_valoraciones_vendedor($param);
-        $response = crea_resumen_valoracion_comentarios($comentarios["data"], "");
+        $response = comentarios($comentarios["data"], "");
 
-        if (es_data($comentarios["data"]) ) {
+        if (es_data($comentarios["data"])) {
 
             $response = hr() . d("RESEÑAS HECHAS POR OTROS CLIENTES", ["class" => 'text_resumen']) . hr() . $response;
         }
@@ -90,15 +90,15 @@ class Valoracion extends REST_Controller
 
         $param = $this->get();
         $comentarios = $this->valoracion_model->get_desglose_valoraciones_periodo($param);
-        $data_comentarios = crea_resumen_valoracion_comentarios($comentarios["data"], "");
+        $data_comentarios = comentarios($comentarios["data"], "");
         if (count($comentarios["data"]) > 0) {
 
 
-            $r[]  = hr();
-            $r[]  = d("RESEÑAS HECHAS POR OTROS CLIENTES", 'text_resumen');
-            $r[]  = hr();
-            $r[]   = $data_comentarios;
-            $data_comentarios = d(append($r), 6,1);
+            $r[] = hr();
+            $r[] = d("RESEÑAS HECHAS POR OTROS CLIENTES", 'text_resumen');
+            $r[] = hr();
+            $r[] = $data_comentarios;
+            $data_comentarios = d(append($r), 6, 1);
 
         }
         $this->response($data_comentarios);
@@ -133,18 +133,17 @@ class Valoracion extends REST_Controller
     {
 
         $param = $this->get();
-        $valoraciones = $this->valoracion_model->get_valoraciones_usuario($param);
         $response = [];
+        $valoraciones = $this->valoracion_model->get_valoraciones_usuario($param);
         if (es_data($valoraciones)) {
 
-            $data =  [
-                "info_valoraciones" => crea_resumen_valoracion($valoraciones, 1),
+            $response = [
+                "info_valoraciones" => valorados($valoraciones, 1),
                 "data" => $valoraciones
             ];
-            $response = $data;
         }
-        $this->response($response);
 
+        $this->response($response);
     }
 
     function articulo_GET()
@@ -156,7 +155,7 @@ class Valoracion extends REST_Controller
 
         $data = [
             "servicio" => $param["id_servicio"],
-            "id_usuario" => pr($usuario,"id_usuario"),
+            "id_usuario" => pr($usuario, "id_usuario"),
             "comentarios" => $this->valoracion_model->get_valoraciones($param),
             "numero_valoraciones" => $valoraciones,
             "respuesta_valorada" => $param["respuesta_valorada"],

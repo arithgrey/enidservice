@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
             " " . strtoupper(trim(get_campo($cliente, "apellido_materno")));
 
 
-		$r[] = heading("Buen día " . $nombre);
+		$r[] = h("Buen día " . $nombre);
 		$r[] = p("Tienes una nueva respuesta en tu buzón");
 		$r[] = a_enid("Enid Service", ["href" => "http://enidservices.com/"]);
 		$r[] = hr();
@@ -94,7 +94,7 @@ if (!function_exists('invierte_date_time')) {
 	function format_notificacion_subscrito($nombre)
 	{
 
-		$r[] = heading("Buen día" . $nombre);
+		$r[] = h("Buen día" . $nombre);
 		$r[] = d("Te notificamos que desde este momento puedes consultar más productos y servicios a través de ");
 		$r[] = a_enid("Enid Service",
 			[

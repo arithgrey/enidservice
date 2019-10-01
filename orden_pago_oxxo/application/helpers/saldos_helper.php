@@ -60,8 +60,8 @@ if (!function_exists('invierte_date_time')) {
         function get_form_monto_pago($info_pago)
         {
 
-            $r[] = heading("MONTO A PAGAR");
-            $r[] = heading("$" . $info_pago["q"] . "MXN");
+            $r[] = h("MONTO A PAGAR");
+            $r[] = h("$" . $info_pago["q"] . "MXN");
             $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago");
             return append($r);
         }
@@ -192,8 +192,8 @@ if (!function_exists('invierte_date_time')) {
         function monto_pago($monto)
         {
 
-            $r[] = heading("MONTO A PAGAR");
-            $r[] = heading("$" . $monto . "MXN", 2);
+            $r[] = h("MONTO A PAGAR");
+            $r[] = h("$" . $monto . "MXN", 2);
             $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago", 1);
             return d(append($r));
 

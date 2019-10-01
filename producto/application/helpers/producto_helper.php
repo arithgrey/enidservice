@@ -136,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5 p-0 ");
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes), 10, 1);
 
-        $response[] = d(d("", "place_valoraciones"), 10, 1);
+        $response[] = d(d("", "place_valoraciones mt-5"), 10, 1);
         $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none p-0");
         $response[] = d(d("", "place_tambien_podria_interezar  bottom_100"), 10, 1);
 
@@ -158,7 +158,7 @@ if (!function_exists('invierte_date_time')) {
     function disponibilidad($precio, $existencia, $es_servicio, $id_servicio)
     {
 
-        $r[] = heading($precio . "MXN" . text_diponibilidad($existencia, $es_servicio),
+        $r[] = h($precio . "MXN" . text_diponibilidad($existencia, $es_servicio),
             1,
             "card-title pricing-card-title"
         );

@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
             $banca = $data["banca"];
             $nombre = pr($usuario, "nombre") . " " . pr($usuario, "apellido_paterno") . " " . pr($usuario, "apellido_materno");
 
-            $x[] = heading(($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO", 3);
+            $x[] = h(($banca == 0) ? "ASOCIAR CUENTA BANCARIA" : "ASOCIAR TARJETA DE DÉDITO O CRÉDITO", 3);
             $x[] = d("Enid Service protege y garantiza la seguridad de la información de su cuenta bancaria. Nunca revelaremos su información financiera y, cada vez que inicie una transacción con esta cuenta bancaria, Enid Service se lo notificará por correo electrónico.");
             $x[] = form_asociar_cuenta($data["error"], $nombre, $data["bancos"], $banca);
 
@@ -42,12 +42,12 @@ if (!function_exists('invierte_date_time')) {
                 );
             endif;
             $r[] = d(heading($nombre_persona, 4), ["style" => "border-bottom-style: solid;border-width: 1px;"]);
-            $r[] = heading("1.- PAÍS", 4);
+            $r[] = h("1.- PAÍS", 4);
             $r[] = create_select(array(
                 "text" => "México",
                 "v" => 1
             ), "pais", "form-control", "pais", "text", "v");
-            $r[] = heading("2.- SELECCIONA TU BANCO", 4);
+            $r[] = h("2.- SELECCIONA TU BANCO", 4);
             $r[] = create_select(
                 $bancos,
                 "banco",
@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($banca == 0):
 
-                $r[] = heading("3.-NÚMERO CLABE(18 dígitos)", 4);
+                $r[] = h("3.-NÚMERO CLABE(18 dígitos)", 4);
                 $r[] = input([
                     "class" => "form-control numero_tarjeta",
                     "id" => "input-1",
@@ -71,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
                 ]);
 
             else:
-                $r[] = heading("4.- TIPO DE TARJETA ", 4);
+                $r[] = h("4.- TIPO DE TARJETA ", 4);
 
                 $opt[] = array(
                     "text" => "Débito",
@@ -82,7 +82,7 @@ if (!function_exists('invierte_date_time')) {
                     "v" => 1
                 );
                 $r[] = create_select($opt, "tipo_tarjeta", "form-control", "tipo_tarjeta", "text", "v");
-                $r[] = heading("5.- NÚMERO DE TARJETA " . icon("fa fa-credit-card-alt"), 4);
+                $r[] = h("5.- NÚMERO DE TARJETA " . icon("fa fa-credit-card-alt"), 4);
                 $r[] = input([
                     "class" => "form-control numero_tarjeta",
                     "id" => "input-1",
@@ -203,7 +203,7 @@ if (!function_exists('invierte_date_time')) {
         function asociar_cuenta_bancaria()
         {
 
-            $r[] = heading("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3);
+            $r[] = h("ASOCIAR CUENTA BANCARIA Ó TARJETA DE CRÉDITO O DÉBITO", 3);
             $r[] = a_enid(
                 d("Asociar  tarjeta de crédito o débito",
 

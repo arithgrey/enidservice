@@ -180,7 +180,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if ($ubicacion < 1) {
-                $response = heading(
+                $response = h(
                     "Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX, local número 406",
                     4,
                     "white"
@@ -198,8 +198,8 @@ if (!function_exists('invierte_date_time')) {
 
             $response = "";
             if ($ubicacion > 0) {
-                $r[] = heading("VISÍTANOS!", 1, "white");
-                $r[] = heading(
+                $r[] = h("VISÍTANOS!", 1, "white");
+                $r[] = h(
                     "Eje Central Lázaro Cárdenas 38, Centro Histórico C.P. 06000 CDMX, local número 406",
                     4,
 

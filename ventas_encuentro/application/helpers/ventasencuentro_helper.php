@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
         function format_form()
         {
 
-            $r[] = d("VENTAS PUNTO ENCUENTRO", "titulo_enid_sm", 1);
+            $r[] = d("VENTAS PUNTO ENCUENTRO", "titulo_enid_sm");
             $r[] = form_open("", ["class" => 'form_ventas_encuentro']);
             $r[] = frm_fecha_busqueda();
             $r[] = form_close(place("place_usabilidad top_50"));

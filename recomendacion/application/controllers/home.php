@@ -33,18 +33,18 @@ class Home extends CI_Controller
 
     private function create_vista($data, $id_usuario, $prm)
     {
+
         $recomendacion = $this->busqueda_recomendacion($prm);
         if ($data["in_session"] == 1) {
-            $id_usuario_actual = $data["id_usuario"];
-            $this->notifica_lectura($id_usuario, $id_usuario_actual);
+            $this->notifica_lectura($id_usuario, $data["id_usuario"]);
         }
 
-        $prm =  [
-            "page" => prm_def($this->input->get(), "page"),
+        $prm +=  [
+            "page" => prm_def( $this->input->get(), "page"),
             "resultados_por_pagina" => 5
         ];
 
-        $prm["totales_elementos"] = $recomendacion["data"][0]["num_valoraciones"];
+        $prm["totales_elementos"] = (es_data($recomendacion)) ? $recomendacion["data"][0]["num_valoraciones"] : 0;
 
         $data["paginacion"] = "";
         if ($prm["totales_elementos"] > $prm["resultados_por_pagina"]) {
@@ -53,12 +53,12 @@ class Home extends CI_Controller
             $data["paginacion"] = $this->get_paginacion($prm);
         }
 
-
         $response = format_recomendacion(
             $this->app->cssJs($data, "recomendacion_vista"),
             $recomendacion["info_valoraciones"],
             $this->resumen_valoraciones_vendedor($prm)
         );
+
         $this->app->pagina($data, $response, 1);
 
     }

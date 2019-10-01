@@ -1,5 +1,5 @@
 <div class="col-lg-4 col-lg-offset-4">
-    <?= heading("SOLICITA SALDO A UN AMIGO", 3) ?>
+    <?= h("SOLICITA SALDO A UN AMIGO", 3) ?>
     <?= d(
         "Ingresa el monto y correo que solicitas a tu amigo para contar con saldo en tu cuenta."
         ,

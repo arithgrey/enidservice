@@ -851,12 +851,6 @@ class recibo extends REST_Controller
                     $interval = " - 1 MONTH ";
 
                     break;
-                case 1:
-
-                    break;
-                case 2:
-
-                    break;
 
                 case 3:
                     $interval = " - 3 MONTH ";
