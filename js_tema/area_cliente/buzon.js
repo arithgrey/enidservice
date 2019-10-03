@@ -5,11 +5,11 @@ let carga_buzon = () => {
     let url = "../q/index.php/api/pregunta/buzon/format/json/";
     let data_send = {"modalidad": get_option("modalidad_ventas")};
     request_enid("GET", data_send, url, response_buzon, ".place_buzon");
-}
+};
 let response_buzon = data => {
     render_enid(".place_buzon", data);
     $(".pregunta").click(carga_respuestas);
-}
+};
 let carga_respuestas = () => {
 
     let id_pregunta = parseInt(get_attr(this, "id"));
@@ -33,20 +33,20 @@ let carga_respuestas = () => {
         respuesta();
     }
 
-}
+};
 let respuesta = () => {
 
     let url = "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";
     request_enid("GET", get_option("data_pregunta"), url, r_complete, ".place_buzon");
 
-}
+};
 let r_complete = data => {
 
     $(".contenedor_opciones_buzon").hide();
     render_enid(".place_buzon", data);
     $(".form_valoracion_pregunta").submit(enviar_respuesta);
 
-}
+};
 let enviar_respuesta = e => {
 
     let data_send = $(".form_valoracion_pregunta").serialize() + "&" + $.param({
@@ -56,4 +56,4 @@ let enviar_respuesta = e => {
     let url = "../q/index.php/api/respuesta/respuesta_pregunta/format/json/";
     request_enid("POST", data_send, url, respuesta);
     e.preventDefault();
-}
+};

@@ -52,14 +52,14 @@ let get_place_usuarios = () => {
 		    default:      
 	} 	
 	return nuevo_place;
-}
+};
 let carga_usuarios = () => {
 	
 	let place 		= 	get_place_usuarios();	
 	let url 		=  	"../q/index.php/api/usuario/miembros_activos/format/json/";	
 	let data_send 	= 	{"status": get_option("estado_usuario") , "id_departamento" : get_option("depto") , "page" : get_option("page") };					
 	request_enid( "GET",  data_send, url, response_carga_usuario);
-}
+};
 let response_carga_usuario = (data) => {
 	let place 		= 	get_place_usuarios();	
 	render_enid(place , data);		
@@ -71,7 +71,7 @@ let response_carga_usuario = (data) => {
 	$(".pagination > li > a, .pagination > li > span").css("color" , "white");
 	recorre(".tab-content");	
 	$(".usuario_enid_service").click(carga_data_usuario);
-}
+};
 let pre_nuevo_usuario = () => {
 
 	get_puestos_por_cargo();
@@ -80,7 +80,7 @@ let pre_nuevo_usuario = () => {
 	document.getElementById("form-miembro-enid-service").reset();	
 	$(".place_correo_incorrecto").empty();
 
-}
+};
 let carga_data_usuario = (e) => {
 
 	document.getElementById("form-miembro-enid-service").reset();	
@@ -92,7 +92,7 @@ let carga_data_usuario = (e) => {
 	let url 		=  	"../q/index.php/api/usuario/miembro/format/json/";	
 	let data_send 	= 	{"id_usuario" : get_option("id_usuario")};					
 	request_enid( "GET",  data_send, url, response_carga_data_usuario);
-}
+};
 let response_carga_data_usuario =  (data) => {
 
 	$(".place_config_usuario").empty();
@@ -125,19 +125,19 @@ let response_carga_data_usuario =  (data) => {
 	selecciona_select(".form-miembro-enid-service .sexo" , sexo);
 
 	get_puestos_por_cargo();
-}
+};
 let get_puestos_por_cargo = () => {
 
 	let url 		=  	"../q/index.php/api/perfiles/puesto_cargo/format/json/";		
 	let depto 		=  	$(".form-miembro-enid-service .depto" ).val();	
 	let data_send 	= 	{id_departamento : depto};					
 	request_enid( "GET", data_send, url, response_puesto_por_cargo);
-}
+};
 let response_puesto_por_cargo = (data) => {
 
 	render_enid(".place_puestos", data);
 	selecciona_select(".form-miembro-enid-service .puesto" , get_option("perfil"));		
-}
+};
 let actualizacion_usuario = (e) => {
 
 	let data_send 	=  $(".form-miembro-enid-service").serialize()+"&"+$.param({"id_usuario" : get_option("id_usuario"), "editar" : get_option("flag_editar") });	
@@ -146,7 +146,7 @@ let actualizacion_usuario = (e) => {
 		response_actualizacion_usuario(data, data_send);		
 	});	
 	e.preventDefault();
-}
+};
 let response_actualizacion_usuario = (data , data_send) => {
 
 	render_enid(".place_correo_incorrecto" , "");		
@@ -162,7 +162,7 @@ let response_actualizacion_usuario = (data , data_send) => {
 		$("#tab_productividad").tab("show");		
 		$("#tab_equipo_enid_service").tab("show");	
 	}	
-}
+};
 let  carga_mapa_menu = () => {
 
 	let url 		=  	"../q/index.php/api/recurso/mapa_perfiles_permisos/format/json/";	
@@ -170,25 +170,25 @@ let  carga_mapa_menu = () => {
 	let data_send 	= 	{"id_perfil" : get_option("id_perfil") };						
 	request_enid( "GET",  data_send, url, response_carga_mapa);
 	
-}
+};
 let response_carga_mapa = (data) => {
 	render_enid(".place_perfilles_permisos" , data);		
 	recorre(".tab-content");
 	$(".perfil_recurso").click(modifica_accesos_usuario);
-}
+};
 let modifica_accesos_usuario = function(e) {
 	
 	set_option("id_recurso", get_parameter_enid($(this) , "id"));	
 	let url 		=  	"../q/index.php/api/perfil_recurso/permiso/format/json/";	
 	let data_send 	= 	{"id_perfil" : get_option("id_perfil"),  "id_recurso" : get_option("id_recurso")};					
 	request_enid( "PUT",  data_send, url , carga_mapa_menu );	
-}
+};
 let  registra_recurso = (e) => {
 	let data_send 	=  $(".form_recurso").serialize();	
 	let url 		=  "../q/index.php/api/recurso/index/format/json/";	
 	request_enid( "POST",  data_send, url, response_registro_recurso);
 	e.preventDefault();
-}
+};
 let  response_registro_recurso = (data) => {
 
 	$(".place_recurso").empty();
@@ -196,4 +196,4 @@ let  response_registro_recurso = (data) => {
 	$("#tab_productividad").tab("show");		
 	$("#tab_perfiles").tab("show");	
 	carga_mapa_menu();			
-}
+};

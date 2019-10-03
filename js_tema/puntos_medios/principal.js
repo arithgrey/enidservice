@@ -9,7 +9,7 @@ window.onpopstate = function (event) {
 
         valida_retorno();
     }
-}
+};
 
 $(document).ready(() => {
 
@@ -227,7 +227,7 @@ let registra_usuario = (e) => {
     }
     e.preventDefault();
 
-}
+};
 let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
 
     let clases = [".form_punto_encuentro .nombre", ".form_punto_encuentro .correo", ".form_punto_encuentro .telefono", ".form_punto_encuentro .pw"];
@@ -251,7 +251,7 @@ let focus_inputs_form = (nombre, correo, telefono, pwlength) => {
         $(".form_punto_encuentro .pw").addClass("focus_error");
     }
 
-}
+};
 let response_registro_usuario = (data) => {
 
 
@@ -278,7 +278,7 @@ let set_link = function () {
     let url = "../login/index.php/api/sess/servicio/format/json/";
     request_enid("POST", data_send, url, go_login);
 
-}
+};
 
 let notifica_punto_entrega = e => {
 
@@ -307,7 +307,7 @@ let agregar_nota = () => {
     recorre(".comentarios");
     showonehideone(".input_notas", ".text_agregar_nota");
 
-}
+};
 let valida_retorno = function () {
     let v = parseInt(get_option("vista"));
 
@@ -341,7 +341,7 @@ let valida_retorno = function () {
 
             break;
     }
-}
+};
 
 let horarios_disponibles = () => {
 
@@ -349,10 +349,10 @@ let horarios_disponibles = () => {
     let data_send = {"dia": get_parameter(".fecha_entrega")};
     request_enid("GET", data_send, url, response_horario);
 
-}
+};
 let response_horario = (data) => {
 
     if (!isArray(data)) {
         render_enid(".horario_entrega", data);
     }
-}
+};

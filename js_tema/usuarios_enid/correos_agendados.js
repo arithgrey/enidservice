@@ -44,11 +44,11 @@ let agenda_correo =  (e) =>  {
 
     e.preventDefault();
 
-}
+};
 
 let agenda_correo_usuario_registrado = (e) =>  {
 
     id_persona = get_parameter_enid($(this), "id");
     set_option("persona", id_persona);
     recorre_web_version_movil();
-}
+};

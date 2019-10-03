@@ -44,9 +44,9 @@ let parsea_text = (e) => {
 
     e.preventDefault();
 
-}
+};
 let copia_texto = () => {
 
     var clipboard = new Clipboard('.copy_text');
 
-}
+};

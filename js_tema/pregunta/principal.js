@@ -30,25 +30,25 @@ let registra_valoracion = (e) => {
         request_enid("POST", data_send, url, response_registro_valoracion, ".place_registro_valoracion");
     }
     e.preventDefault();
-}
+};
 
 let response_registro_valoracion = data => {
 
     let fn = (data > 0) ? redirect("../pregunta/?action=hechas&id=" + data + "&#pregunta86") : "";
 
-}
+};
 
 let before_registro_valoracion = () => {
 
     bloquea_form(".form_valoracion");
-}
+};
 
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
     let data_send = {"id_servicio": get_option("servicio")};
     request_enid("GET", data_send, url, response_carga_productos_sugeridos, ".place_tambien_podria_interezar");
-}
+};
 
 let response_carga_productos_sugeridos = (data) => {
 
@@ -57,14 +57,14 @@ let response_carga_productos_sugeridos = (data) => {
 
         render_enid(".place_tambien_podria_interezar", data);
     }
-}
+};
 
 let carga_valoraciones = () => {
 
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
     let data_send = {"id_servicio": get_option("servicio"), "respuesta_valorada": get_option("respuesta_valorada")};
     request_enid("GET", data_send, url, response_carga_valoraciones, ".place_registro_afiliado");
-}
+};
 
 let response_carga_valoraciones = (data) => {
 
@@ -78,7 +78,7 @@ let response_carga_valoraciones = (data) => {
     let valoracion_persona = $(".contenedor_promedios").html();
     render_enid(".valoracion_persona", valoracion_persona);
 
-}
+};
 
 let ordenar_valoraciones = function (e) {
 
@@ -116,4 +116,4 @@ let ordenar_valoraciones = function (e) {
             break;
         default:
     }
-}
+};

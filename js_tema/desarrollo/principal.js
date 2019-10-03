@@ -7,7 +7,7 @@ window.onpopstate = function (event) {
     if (event) {
         valida_retorno();
     }
-}
+};
 $(document).ready(() => {
 
     set_option("s", 0);
@@ -71,7 +71,7 @@ let productividad = e => {
     request_enid("GET", data_send, url, 1, ".place_productividad", 0, ".place_productividad");
     e.preventDefault();
 
-}
+};
 
 let recorre_web_version_movil = () => recorre(".tab-content");
 
@@ -91,12 +91,12 @@ let metricas_desarrollo = (e) => {
         focus_input(inputs);
     }
     e.preventDefault();
-}
+};
 let response_carga_metricas = (data) => {
 
     render_enid(".place_metricas_desarrollo", data);
     $('th').click(ordena_tabla);
-}
+};
 let carga_comparativas = () => {
 
     let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
@@ -107,7 +107,7 @@ let carga_comparativas = () => {
         $('th').click(ordena_tabla);
 
     }, ".place_metricas_comparativa");
-}
+};
 let solicitudes_cliente = e => {
 
 
@@ -124,31 +124,31 @@ let solicitudes_cliente = e => {
 
     }
     e.preventDefault();
-}
+};
 let response_carga_solicitudes = data => {
 
     render_enid(".place_metricas_servicio", data);
     $('th').click(ordena_tabla);
-}
+};
 
 let num_pendientes = () => {
 
     let url = "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";
     let data_send = {"id_usuario": get_option("id_usuario"), "id_departamento": get_option("id_depto")};
     request_enid("GET", data_send, url, 1, ".place_tareas_pendientes", ".place_tareas_pendientes");
-}
+};
 
 let form_n_ticket = () => {
 
     let url = "../q/index.php/api/tickets/form/format/json/";
     request_enid("GET", {}, url, r_form_ticket, ".place_form_tickets");
-}
+};
 
 let r_form_ticket = data => {
 
     render_enid(".place_form_tickets", data);
     $(".form_ticket").submit(registra_ticket);
-}
+};
 
 let registra_ticket = e => {
 
@@ -157,13 +157,13 @@ let registra_ticket = e => {
     request_enid("POST", data_send, url, response_registro_ticket, ".place_registro_ticket");
     e.preventDefault();
 
-}
+};
 let response_registro_ticket = data => {
     render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
     show_tabs(["#ver_avances", "#base_tab_clientes"]);
     carga_info_detalle_ticket();
-}
+};
 
 let set_estatus_ticket = function (id_ticket, status) {
 
@@ -172,14 +172,14 @@ let set_estatus_ticket = function (id_ticket, status) {
     request_enid("PUT", data_send, url, () => {
         tikets_usuario();
     });
-}
+};
 let carga_info_detalle_ticket = () => {
 
     set_option("s", 1);
     let url = "../q/index.php/api/tickets/detalle/format/json/";
     let data_send = {"id_ticket": get_option("id_ticket")};
     request_enid("GET", data_send, url, response_carga_ticket);
-}
+};
 
 let response_carga_ticket = (data) => {
 
@@ -238,7 +238,7 @@ let response_carga_ticket = (data) => {
     $(".frm_efectivo_resultante").submit(efectivo_resultante);
 
 
-}
+};
 let carga_formulario_respuesta_ticket = function (e) {
 
     let tarea = get_parameter_enid($(this), "id");
@@ -252,7 +252,7 @@ let carga_formulario_respuesta_ticket = function (e) {
         $(".form_respuesta_ticket").submit(registra_respuesta_pregunta);
 
     }, seccion);
-}
+};
 
 let carga_comentarios_tareas = function (e) {
 
@@ -265,7 +265,7 @@ let carga_comentarios_tareas = function (e) {
     set_option("seccion", seccion);
     request_enid("GET", data_send, url, response_carga_comentario_tareas);
 
-}
+};
 
 let carga_comentarios_terea_simple = () => {
 
@@ -276,7 +276,7 @@ let carga_comentarios_terea_simple = () => {
     set_option("seccion", seccion);
     request_enid("GET", data_send, url, response_carga_comentario_tareas);
 
-}
+};
 
 let response_carga_comentario_tareas = function (data) {
 
@@ -287,7 +287,7 @@ let response_carga_comentario_tareas = function (data) {
         empty_elements(seccion);
     });
 
-}
+};
 
 let registra_tarea = e => {
 
@@ -300,20 +300,20 @@ let registra_tarea = e => {
     request_enid("POST", data_send, url, carga_info_detalle_ticket, ".place_proyectos");
     e.preventDefault();
 
-}
+};
 let muestra_tareas_por_estatus = () => {
 
     showonehideone(".mostrar_todas_las_tareas", ".tarea_pendiente");
     $(".mostrar_tareas_pendientes").hide();
     set_option("flag_mostrar_solo_pendientes", 1);
-}
+};
 
 let muestra_todas_las_tareas = () => {
 
     showonehideone(".tarea_pendiente", ".mostrar_todas_las_tareas");
     $(".mostrar_tareas_pendientes").show();
     set_option("flag_mostrar_solo_pendientes", 0);
-}
+};
 let tikets_usuario = () => {
 
     let status_ticket = 0;
@@ -332,7 +332,7 @@ let tikets_usuario = () => {
     request_enid("GET", data_send, url, response_carga_tickets);
 
 
-}
+};
 let response_carga_tickets = function (data) {
 
 
@@ -385,7 +385,7 @@ let response_carga_tickets = function (data) {
     });
 
 
-}
+};
 let actualiza_tareas = function (e) {
 
     set_option("id_tarea", get_parameter_enid($(this), "id"));
@@ -397,7 +397,7 @@ let actualiza_tareas = function (e) {
         "id_ticket": get_option("id_ticket")
     };
     request_enid("PUT", data_send, url, response_actualiza_tareas, ".place_proyectos");
-}
+};
 
 let response_actualiza_tareas = data => {
 
@@ -410,7 +410,7 @@ let response_actualiza_tareas = data => {
         carga_info_detalle_ticket();
 
     }
-}
+};
 
 let show_section_dinamic_button = seccion => ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
 
@@ -430,13 +430,13 @@ let agregar_tarea = () => {
 };
 let cerrar_ticket = (id) => {
 
-    id = parseInt(id)
+    id = parseInt(id);
     if (id > 0) {
         set_option("id_ticket", id);
         show_confirm("¿DESEAS CERRAR EL TICKET?", "Se descartarán todas sus tareas incluidas", "CERRAR TICKET", confirmacion_cerrar_ticket);
     }
 
-}
+};
 let confirmacion_cerrar_ticket = () => {
 
     let id_ticket = get_option("id_ticket");
@@ -444,7 +444,7 @@ let confirmacion_cerrar_ticket = () => {
     let data_send = {"status": 2, "id_ticket": id_ticket};
     request_enid("PUT", data_send, url, tikets_usuario);
 
-}
+};
 let valida_retorno = () => {
 
     switch (parseInt(get_option("s"))) {
@@ -463,7 +463,7 @@ let valida_retorno = () => {
             break;
     }
 
-}
+};
 let on_load = () => {
 
 
@@ -473,7 +473,7 @@ let on_load = () => {
         set_option("id_ticket", action);
         carga_info_detalle_ticket();
     }
-}
+};
 let edita_descripcion_tarea = id_tarea => {
 
     showonehideone("#tarea_" + id_tarea, ".text_tarea_" + id_tarea);
@@ -493,7 +493,7 @@ let edita_descripcion_tarea = id_tarea => {
         }
 
     });
-}
+};
 let elimina_tarea = id_tarea => {
 
 
@@ -509,14 +509,14 @@ let elimina_tarea = id_tarea => {
 
     });
 
-}
+};
 let marcar_como_hecho = function (e) {
 
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
         set_estatus_ticket(id, 4);
     }
-}
+};
 let t_nombre_asunto = function () {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
@@ -546,7 +546,7 @@ let t_nombre_asunto = function () {
 
         });
     }
-}
+};
 let agendar_google = () => $(".seccion_agendar").removeClass("hidden");
 let google_path = function (e) {
     e.preventDefault();
@@ -578,11 +578,11 @@ let google_path = function (e) {
         base += "&dates="+format_google+"/"+format_google;
     }
     window.open(base, '_blank');
-}
+};
 let muestra_nota_motenaria = function () {
 
     $(".nota_monetaria_area").removeClass("d-none");
-}
+};
 let registra_nota_monetaria = function (e) {
 
     e.preventDefault();
@@ -591,7 +591,7 @@ let registra_nota_monetaria = function (e) {
     set_option("s", 1);
     request_enid("PUT", data_send, url, carga_info_detalle_ticket);
 
-}
+};
 let registra_efecto_monetario = function (e) {
 
 
@@ -605,7 +605,7 @@ let registra_efecto_monetario = function (e) {
 
     }
 
-}
+};
 let efectivo_resultante = function (e) {
     e.preventDefault();
     if (get_parameter("#efectivo_resultante", 1) > 0){
@@ -615,4 +615,4 @@ let efectivo_resultante = function (e) {
         request_enid("PUT", data_send, url, carga_info_detalle_ticket);
 
     }
-}
+};

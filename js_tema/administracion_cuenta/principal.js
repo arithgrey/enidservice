@@ -26,7 +26,7 @@ let direccion_usuario = () => {
     let data_send = $(".form_notificacion").serialize() + "&" + $.param({"v": get_option("v")});
     request_enid("GET", data_send, url, response_direccion_usuario);
 
-}
+};
 let response_direccion_usuario = data => {
 
     render_enid(".direcciones", data);
@@ -44,7 +44,7 @@ let response_direccion_usuario = data => {
 
     });
 
-}
+};
 let registra_direccion_usuario = e => {
 
     if (get_option("existe_codigo_postal") == 1) {
@@ -61,11 +61,11 @@ let registra_direccion_usuario = e => {
         }
     }
     e.preventDefault();
-}
+};
 let response_registra_direccion_usuario = data => {
     set_option("v", 1);
     direccion_usuario();
-}
+};
 let u_nombre = e => {
 
     let data_send = $(".f_nombre_usuario").serialize();
@@ -74,7 +74,7 @@ let u_nombre = e => {
         seccess_enid(".registro_nombre_usuario", "Tu nombre de usuario fue actualizado!");
     }, ".registro_nombre_usuario");
     e.preventDefault();
-}
+};
 let actualiza_telefono = e => {
 
     let data_send = $(".form_telefono_usuario").serialize();
@@ -84,7 +84,7 @@ let actualiza_telefono = e => {
     }, ".registro_telefono_usuario");
 
     e.preventDefault();
-}
+};
 let set_tel = e => {
 
     if (get_parameter(".tel2").length > 4 && get_parameter(".lada2").length > 1) {
@@ -100,11 +100,11 @@ let set_tel = e => {
         focus_input([".tel2", ".lada2"]);
     }
     e.preventDefault();
-}
+};
 let elimina_espacio = function () {
 
     $(this).val(quita_espacios_text($(this).val().toLowerCase()));
-}
+};
 let quita_espacios_text = v => {
 
     let valor = "";
@@ -114,7 +114,7 @@ let quita_espacios_text = v => {
         }
     }
     return valor;
-}
+};
 let set_password = e => {
 
     let flag = val_text_form("#password", ".place_pw_1", 7, "Texto ");
@@ -144,13 +144,13 @@ let set_password = e => {
     }
 
     e.preventDefault();
-}
+};
 let s_password = (anterior, nuevo, confirma) => {
 
     let url = "../q/index.php/api/usuario/pass/format/json/";
     let data_send = {"nuevo": nuevo, "anterior": anterior, "confirma": confirma, "type": 2};
     request_enid("PUT", data_send, url, r_password, ".msj_password");
-}
+};
 let r_password = data => {
 
     if (data) {
@@ -163,4 +163,4 @@ let r_password = data => {
         render_enid(".msj_password", data);
 
     }
-}
+};

@@ -52,33 +52,33 @@ let carga_uso_sistema = function (e) {
         focus_input([".f_usabilidad #datetimepicker5", ".f_usabilidad #datetimepicker4"]);
     }
     e.preventDefault();
-}
+};
 let response_carga_uso_sistema = function (data) {
 
     render_enid(".place_usabilidad_general", data);
     $('th').click(ordena_tabla);
 
-}
+};
 let response_comparativa_dia = function (data) {
 
     render_enid(".place_prospectos_comparativa", data);
     $(".info-dia-p").click(data_miembros_g);
     $(".info-d").click(data_eventos_g);
 
-}
+};
 let data_miembros_g = function (e) {
 
     let url = "../q/index.php/api/enid/resumen_global_admin_p/format/json/";
     let data_send = {periodo: get_parameter_enid($(this), "id")};
     request_enid("GET", data_send, url, 1, ".info-resumen-prospecto", "", ".info-resumen-prospecto");
 
-}
+};
 let carga_nuevos_miembros = function () {
 
     let url = "../q/index.php/api/enid/nuevos_miembros/format/json/";
     let data_send = {};
     request_enid("GET", data_send, url, 1, ".nuevos_miembros", "", ".nuevos_miembros");
-}
+};
 let carga_metricas_mail_marketing = function (e) {
 
 
@@ -94,7 +94,7 @@ let carga_metricas_mail_marketing = function (e) {
         focus_input([".form_busqueda_mail_enid #datetimepicker5", ".form_busqueda_mail_enid #datetimepicker4"]);
     }
     e.preventDefault();
-}
+};
 let indicadores = function (e) {
 
 
@@ -114,7 +114,7 @@ let indicadores = function (e) {
         focus_input([".form_busqueda_global_enid #datetimepicker5", ".form_busqueda_global_enid #datetimepicker4"]);
     }
     e.preventDefault();
-}
+};
 let response_indicadores = function (data) {
 
     desbloqueda_form(".form_busqueda_global_enid");
@@ -126,20 +126,20 @@ let response_indicadores = function (data) {
     $(".servicios").click(resumen_servicios);
     $(".productos_valorados_distintos").click(resumen_servicios_valorados);
     $(".lista_deseos").click(resume_lista_deseos);
-}
+};
 let registra_metas = function (e) {
 
     let data_send = $("#form_metas").serialize();
     let url = "../q/index.php/api/objetivos/meta/format/json/";
     request_enid("POST", data_send, url, response_registro_metas, ".place_registro_metas");
     e.preventDefault();
-}
+};
 let response_registro_metas = function (data) {
 
     seccess_enid(".place_registro_metas", "Meta registrada!");
     $("#fijar_metas_equipo").modal("hide");
 
-}
+};
 let metricas_desarrollo = function (e) {
 
 
@@ -157,35 +157,35 @@ let metricas_desarrollo = function (e) {
 
 
     e.preventDefault();
-}
+};
 let response_metricas_desarrollo = function (data) {
 
     render_enid(".place_metricas_desarrollo", data);
     $('th').click(ordena_tabla);
-}
+};
 let carga_comparativas = function () {
 
     let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
     let data_send = {tiempo: 1};
     request_enid("GET", data_send, url, response_carga_comparativa, ".place_metricas_comparativa", 0, ".place_metricas_comparativa");
     e.preventDefault();
-}
+};
 let response_carga_comparativa = function (data) {
     render_enid(".place_metricas_comparativa", data);
     $('th').click(ordena_tabla);
-}
+};
 let solicitudes_cliente = function (e) {
 
     let url = "../q/index.php/api/desarrollo/global_calidad/format/json/";
     let data_send = $(".form_busqueda_desarrollo_solicitudes").serialize();
     request_enid("GET", data_send, url, response_solicitudes_cliente, ".place_metricas_servicio", 0, ".place_metricas_servicio");
     e.preventDefault();
-}
+};
 let response_solicitudes_cliente = function (data) {
 
     render_enid(".place_metricas_servicio", data);
     $('th').click(ordena_tabla);
-}
+};
 let carga_repo_afiliacion = function (e) {
 
     let url = "../q/index.php/api/afiliacion/metricas/format/json/";
@@ -198,14 +198,14 @@ let carga_repo_afiliacion = function (e) {
 
     }
     e.preventDefault();
-}
+};
 let carga_repo_afiliacion_productividad = function (e) {
 
     let url = "../q/index.php/api/afiliacion/afiliados_productividad/format/json/";
     let data_send = $(".form_busqueda_afiliacion_productividad").serialize();
     request_enid("GET", data_send, url, 1, ".place_repo_afiliacion_productividad", 0, ".place_repo_afiliacion_productividad");
     e.preventDefault();
-}
+};
 let carga_productos_mas_solicitados = function (e) {
 
     if (get_parameter(".form_busqueda_productos_solicitados #datetimepicker4").length > 5 && get_parameter(".form_busqueda_productos_solicitados #datetimepicker5").length > 5) {
@@ -219,7 +219,7 @@ let carga_productos_mas_solicitados = function (e) {
 
     }
     e.preventDefault();
-}
+};
 let resumen_usuarios = function () {
 
     let url = "../q/index.php/api/usuario/usuarios/format/json/";
@@ -229,7 +229,7 @@ let resumen_usuarios = function () {
         "page": get_option("page")
     };
     request_enid("GET", data_send, url, response_resumen_usuarios, ".place_reporte");
-}
+};
 let response_resumen_usuarios = function (data) {
 
     render_enid(".place_reporte", data);
@@ -246,7 +246,7 @@ let response_resumen_usuarios = function (data) {
         resumen_usuarios();
         e.preventDefault();
     });
-}
+};
 let resumen_mensajes = function () {
 
 
@@ -256,7 +256,7 @@ let resumen_mensajes = function () {
     };
     let url = "../q/index.php/api/cotizaciones/contactos/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
-}
+};
 let resumen_compras = function () {
 
 
@@ -265,10 +265,10 @@ let resumen_compras = function () {
         "fecha_termino": get_attr(this, "fecha_termino"),
         "tipo": get_attr(this, "tipo_compra"),
         "v": 1
-    }
+    };
     let url = "../q/index.php/api/recibo/compras/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
-}
+};
 
 let resumen_valoracion = function () {
 
@@ -279,7 +279,7 @@ let resumen_valoracion = function () {
     };
     let url = "../q/index.php/api/valoracion/resumen_valoraciones_periodo/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
-}
+};
 let resumen_servicios = function () {
 
 
@@ -287,11 +287,11 @@ let resumen_servicios = function () {
         "fecha_inicio": get_parameter_enid($(this), "fecha_inicio"),
         "fecha_termino": get_parameter_enid($(this), "fecha_termino"),
         "v": 1
-    }
+    };
 
     let url = "../q/index.php/api/servicio/periodo/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
-}
+};
 let resumen_servicios_valorados = function () {
 
 
@@ -302,18 +302,18 @@ let resumen_servicios_valorados = function () {
     let url = "../q/index.php/api/valoracion/resumen_valoraciones_periodo_servicios/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
 
-}
+};
 let resume_lista_deseos = function () {
 
 
     let data_send = {
         "fecha_inicio": get_parameter_enid($(this), "fecha_inicio"),
         "fecha_termino": get_parameter_enid($(this), "fecha_termino")
-    }
+    };
 
     let url = "../q/index.php/api/servicio/lista_deseos_periodo/format/json/";
     request_enid("GET", data_send, url, 1, ".place_reporte", 0, ".place_reporte");
-}
+};
 let carga_repo_usabilidad = function (e) {
 
     let data_send = $(".f_actividad_productos_usuarios").serialize() + "&" + $.param({"v": 1});
@@ -329,7 +329,7 @@ let carga_repo_usabilidad = function (e) {
 
     }
     e.preventDefault();
-}
+};
 
 let carga_repo_dispositivos = function (e) {
 
@@ -346,14 +346,14 @@ let carga_repo_dispositivos = function (e) {
 
     }
     e.preventDefault();
-}
+};
 let info_usabilidad = (data) => {
 
     render_enid(".repo_usabilidad", data);
     $(".servicios").click(resumen_servicios);
     $(".usuarios").click(resumen_usuarios);
 
-}
+};
 let carga_repo_tipos_entregas = function (e) {
 
     let data_send = $(".form_tipos_entregas").serialize() + "&" + $.param({"v": 1});
@@ -375,6 +375,6 @@ let comparativa_dia = () => {
 
     let url = "../q/index.php/api/enid/prospectos_comparativa_d/format/json/";
     request_enid("GET", {}, url, response_comparativa_dia, ".place_prospectos_comparativa");
-}
+};
 
 let set_menu = go => show_tabs(["#btn_repo_afiliacion", go]);

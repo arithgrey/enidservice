@@ -47,9 +47,9 @@ let agrega_lista_deseos = () => {
     };
     let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";
     request_enid("POST", data_send, url, response_lista_deseos)
-}
+};
 let response_lista_deseos = data => {
 
     submit_enid(".form_pre_pedido_contact");
 
-}
+};

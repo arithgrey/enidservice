@@ -16,7 +16,7 @@ let configura_recomendaria = function (e) {
     $(this).css("color", "blue");
     empty_elements(".place_recomendaria");
 
-}
+};
 let configura_calificacion = function (e) {
 
 
@@ -42,7 +42,7 @@ let configura_calificacion = function (e) {
         $(estrella_).css("-webkit-text-stroke-color", "#004afc");
 
     }
-}
+};
 let registra_valoracion = (e) => {
 
     let recomendaria = get_option("recomendaria");
@@ -74,11 +74,11 @@ let registra_valoracion = (e) => {
     }
 
     e.preventDefault();
-}
+};
 let before_registro_valoracion = () => {
     sload(".place_registro_valoracion", "Validando datos ", 1);
     bloquea_form(".form_valoracion");
-}
+};
 let response_registro_valoracion = (data) => {
 
     let url_producto = "../producto/?producto=" + data.id_servicio + "&valoracion=1";
@@ -106,10 +106,10 @@ let response_registro_valoracion = (data) => {
 
     }
     recorre(".place_registro_valoracion");
-}
+};
 let evalua_propietario = () => {
 
     if (get_parameter(".propietario") == 1) {
         bloquea_form(".form_valoracion");
     }
-}
+};

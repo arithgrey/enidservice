@@ -23,14 +23,14 @@ let registra_respuesta = (e) => {
     let url = "../q/index.php/api/fq/respuesta/format/json/";
     request_enid("POST", data_send, url, r_registro_respuesta, ".place_refitro_respuesta");
     e.preventDefault();
-}
+};
 
 let r_registro_respuesta = (data) => {
 
     seccess_enid(".place_refitro_respuesta", "Respuesta registrada!");
     document.getElementById("form_respuesta").reset();
     redirect("../faq/?faq=" + data);
-}
+};
 
 let pre_editar_respuesta = function (e) {
 
@@ -44,20 +44,20 @@ let pre_editar_respuesta = function (e) {
 
     carga_info_faq();
     $(".btn_img_avanzado").show();
-}
+};
 
 let pre_registro_respuesta = () => {
     document.getElementById("form_respuesta").reset();
     set_option("editar_respuesta", 0);
     $(".btn_img_avanzado").hide();
-}
+};
 
 let carga_info_faq = () => {
 
     let data_send = {"id_faq": get_option("faq")};
     let url = "../q/index.php/api/faqs/respuesta/format/json/";
     request_enid("GET", data_send, url, response_carga_info_faq);
-}
+};
 
 let response_carga_info_faq = (data) => {
 
@@ -70,14 +70,14 @@ let response_carga_info_faq = (data) => {
     selecciona_select(".form_respuesta .tipo_respuesta", status);
     valorHTML(".titulo", titulo);
     $(".note-editable").html(respuesta);
-}
+};
 
 let agrega_img_faq = () => {
 
     let url = "../q/index.php/api/img/form_faq/format/json/";
     let data_send = {"id_faq": get_parameter(".id_faq")};
     request_enid("GET", data_send, url, response_carga_form_imagenes, ".place_load_img_faq");
-}
+};
 
 let response_carga_form_imagenes = (data) => {
 
@@ -87,7 +87,7 @@ let response_carga_form_imagenes = (data) => {
     render_enid(".place_load_img_faq", data);
     $("#guardar_img_faq").hide();
     $(".imagen_img_faq").change(upload_imgs_enid_faq);
-}
+};
 
 
 let upload_imgs_enid_faq = function () {
@@ -103,7 +103,7 @@ let upload_imgs_enid_faq = function () {
         $("#form_img_enid_faq").submit(registra_img_faq);
     };
     reader.readAsDataURL(file);
-}
+};
 let registra_img_faq = (e) => {
 
 
@@ -129,17 +129,17 @@ let registra_img_faq = (e) => {
 
     });
     $.removeData(formData);
-}
+};
 
 let carga_categocias_extras = () => {
 
     let url = "../q/index.php/api/fq/categorias_extras/format/json/";
     let data_send = {};
     request_enid("GET", data_send, url, 1, ".place_categorias_extras", 0, ".place_categorias_extras");
-}
+};
 let valida_registro_respuesta = () => {
 
     let erespuesta = get_parameter(".erespuesta");
     $(".note-editable").html(erespuesta);
 
-}
+};

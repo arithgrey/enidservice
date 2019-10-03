@@ -27,7 +27,7 @@ let get_proyectos_persona = () => {
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
 
-}
+};
 let carga_form_solicitar_desarrollo = (e) => {
 
     let url =  "../q/index.php/api/tickets/form/format/json/";
@@ -54,7 +54,7 @@ let carga_form_solicitar_desarrollo = (e) => {
 			show_error_enid(".place_proyectos" , "Error ... ");
 	});				
 
-}
+};
 let registra_ticket = (e) => {
 
 
@@ -82,7 +82,7 @@ let registra_ticket = (e) => {
 		});	
 					
 	e.preventDefault();
-}
+};
 let tikets_usuario = () => {
 	
 	recorre_web_version_movil();
@@ -127,7 +127,7 @@ let tikets_usuario = () => {
 		}).fail(function(){			
 			show_error_enid(".place_proyectos" , "Error ... ");
 	});				
-}
+};
 
 let carga_info_detalle_ticket =() => {
 
@@ -170,7 +170,7 @@ let carga_info_detalle_ticket =() => {
 	}).fail(function(){			
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
-}
+};
 
 let  actualizar_estatus_ticket = (e) => {
 	
@@ -190,7 +190,7 @@ let  actualizar_estatus_ticket = (e) => {
 	}).fail(function(){			
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});		
-}
+};
 
 let  registra_tarea = (e) => {
 	
@@ -214,7 +214,7 @@ let  registra_tarea = (e) => {
 	});			
 
 	e.preventDefault();
-}
+};
 
 let  actualiza_tareas = (e) => {
 		
@@ -242,7 +242,7 @@ let  actualiza_tareas = (e) => {
 	}).fail(function(){			
 		show_error_enid(".place_proyectos" , "Error ... ");
 	});			
-}
+};
 
 let regresar_list_posible_cliente = () => {
 
@@ -265,7 +265,7 @@ let regresar_list_posible_cliente = () => {
 			
 			break; 		
 	}
-}
+};
 
 let  modificar_asunto = (e) => {
 	
@@ -274,7 +274,7 @@ let  modificar_asunto = (e) => {
 	$(".mof_asunto").val(asunto_ticket);
 
 	$(".form-actualizar-asunto").submit(actualiza_asunto_ticket);
-}
+};
 let actualiza_asunto_ticket = (e) => {
 	
 	let data_send = $(".form-actualizar-asunto").serialize()+"&"+$.param({"id_ticket" : get_id_ticket()});
@@ -301,34 +301,34 @@ let actualiza_asunto_ticket = (e) => {
 	});	
 
 	e.preventDefault();
-}
+};
 let get_menu_actual = function(){
 	return menu_actual;
-}
+};
 
 let muestra_tareas_por_estatus = function(){
 
 	showonehideone( ".mostrar_todas_las_tareas" , ".tarea_pendiente"  );
 	$(".mostrar_tareas_pendientes").hide();
 	set_flag_mostrar_solo_pendientes(1);
-}
+};
 
 let muestra_todas_las_tareas = function(){
 
 	showonehideone( ".tarea_pendiente"  , ".mostrar_todas_las_tareas");	
 	$(".mostrar_tareas_pendientes").show();
 	set_flag_mostrar_solo_pendientes(0);	
-}
+};
 
 let set_flag_mostrar_solo_pendientes = function(n_val){
 	flag_mostrar_solo_pendientes = n_val;
-}
+};
 
 let get_flag_mostrar_solo_pendientes = function(){
 	return  flag_mostrar_solo_pendientes;	
-}
+};
 
 
 let get_flag_estoy_en_agendado = function(){
 	return flag_estoy_en_agendado;
-}
+};

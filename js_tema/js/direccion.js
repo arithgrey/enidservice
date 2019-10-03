@@ -9,7 +9,7 @@ var auto_completa_direccion = function(){
 		var data_send 	=  {"cp" : cp , "delegacion" : get_option("delegacion") };
 		request_enid( "GET",  data_send , url , response_auto_complete_direccion );
 	}
-}
+};
 function response_auto_complete_direccion(data){
 
 	

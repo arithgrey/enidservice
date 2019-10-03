@@ -5,7 +5,7 @@ let registro_costo_operativo = e => {
     bloquea_form(".form_costos");
     request_enid("POST", data_send, url, response_costo, ".notificacion_registro_costo");
     e.preventDefault();
-}
+};
 let response_costo = data => {
 
 
@@ -20,8 +20,8 @@ let response_costo = data => {
         redirect("");
     }
 
-}
+};
 let muestra_formulario_costo = () => {
 
     showonehideone(".contenedor_form_costos_operacion", ".contenedor_costos_registrados");
-}
+};

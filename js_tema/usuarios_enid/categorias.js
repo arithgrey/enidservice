@@ -4,7 +4,7 @@ let simula_envio_categoria = e => {
 
     valida_existencia_clasificacion();
     e.preventDefault();
-}
+};
 
 let valida_existencia_clasificacion = () => {
 
@@ -18,12 +18,12 @@ let valida_existencia_clasificacion = () => {
         }
     }).done(next_step_add_clasificacion).fail(function () {
     });
-}
+};
 let next_step_add_clasificacion = data => {
 
     let str = "<span class='alerta_enid'>ÉSTA CATEGORÍA YA SE ENCUENTRA REGISTRADA</span>";
     let fn = (data.existencia < 1) ? load_niveles() : render_enid(".msj_existencia", str);
-}
+};
 
 let load_niveles = () => {
 
@@ -41,13 +41,13 @@ let load_niveles = () => {
     }).done(muestra_sugerencias_primer_nivel).fail(function () {
     });
 
-}
+};
 
 let muestra_sugerencias_primer_nivel = (data) => {
 
     render_enid(".primer_nivel", data);
     $(".primer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones);
-}
+};
 
 let muestra_mas_opciones = (e) => {
 
@@ -66,7 +66,7 @@ let muestra_mas_opciones = (e) => {
         }).done(muestra_sugerencias_segundo_nivel);
 
     }
-}
+};
 let muestra_sugerencias_segundo_nivel = (data) => {
 
 
@@ -75,7 +75,7 @@ let muestra_sugerencias_segundo_nivel = (data) => {
         add_categoria(2, get_parameter(".primer_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
     $(".segundo_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_segundo);
-}
+};
 
 let muestra_mas_opciones_segundo = (e) => {
 
@@ -94,7 +94,7 @@ let muestra_mas_opciones_segundo = (e) => {
         });
 
     }
-}
+};
 
 let muestra_sugerencias_tercer_nivel = (data) => {
 
@@ -105,7 +105,7 @@ let muestra_sugerencias_tercer_nivel = (data) => {
 
     $(".seleccion_2").hide();
     $(".tercer_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_tercer);
-}
+};
 
 let muestra_mas_opciones_tercer = (e) => {
 
@@ -123,7 +123,7 @@ let muestra_mas_opciones_tercer = (e) => {
         });
 
     }
-}
+};
 
 let muestra_sugerencias_cuarto = (data) => {
 
@@ -134,7 +134,7 @@ let muestra_sugerencias_cuarto = (data) => {
 
     $(".seleccion_3").hide();
     $(".cuarto_nivel .sugerencia_clasificacion option").click(muestra_mas_opciones_quinto);
-}
+};
 
 let muestra_mas_opciones_quinto = (e) => {
     clean_categorias(3);
@@ -150,7 +150,7 @@ let muestra_mas_opciones_quinto = (e) => {
         }).done(muestra_sugerencias_quinto);
 
     }
-}
+};
 
 let muestra_sugerencias_quinto = (data) => {
     clean_categorias(4);
@@ -159,7 +159,7 @@ let muestra_sugerencias_quinto = (data) => {
     $(".seleccion_5").click(() => {
         add_categoria(5, get_parameter(".cuarto_nivel option:selected"), get_parameter(".servicio option:selected"));
     });
-}
+};
 
 let clean_categorias = (inicio) => {
 
@@ -176,7 +176,7 @@ let clean_categorias = (inicio) => {
             $(categorias[x]).empty();
         }
     }
-}
+};
 let add_categoria = (nivel, padre, tipo) => {
 
 
@@ -191,7 +191,7 @@ let add_categoria = (nivel, padre, tipo) => {
         beforeSend: function () {
         }
     }).done(next_add);
-}
+};
 
 let next_add = (data) => {
 
@@ -199,4 +199,4 @@ let next_add = (data) => {
     $(".form_categoria").show();
     reset_form("form_categoria");
     render_enid(".msj_existencia", "<a class='a_enid_black'>CATEGORÍA AGREGADA!</a>");
-}
+};

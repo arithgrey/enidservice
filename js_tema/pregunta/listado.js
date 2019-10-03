@@ -14,7 +14,7 @@ let carga_respuestas = (id, es_vendedor) => {
     }
 
 
-}
+};
 let response_respuestas = (data, id) => {
 
 
@@ -33,7 +33,7 @@ let response_respuestas = (data, id) => {
 
     $(".form_comentario").submit(envia_respuesta);
 
-}
+};
 
 let envia_respuesta = (e) => {
 
@@ -63,4 +63,4 @@ let envia_respuesta = (e) => {
 
     e.preventDefault();
 
-}
+};

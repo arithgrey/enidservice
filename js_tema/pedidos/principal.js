@@ -38,7 +38,7 @@ let editar_horario_entrega = function (e) {
     bloquea_form(".form_fecha_entrega");
     request_enid("PUT", data_send, url, response_horario_entrega, ".place_fecha_entrega");
     e.preventDefault();
-}
+};
 let crea_recordatorio = function (e) {
 
 
@@ -62,7 +62,7 @@ let crea_recordatorio = function (e) {
 
     e.preventDefault();
 
-}
+};
 let google_path = function (desc_google,  hora_fecha, details) {
 
     let base = "https://calendar.google.com/calendar/r/eventedit";
@@ -94,7 +94,7 @@ let google_path = function (desc_google,  hora_fecha, details) {
         base += "&dates="+format_google+"/"+format_google;
     }
     window.open(base, '_blank');
-}
+};
 let response_recordatorio = function (data) {
 
     if (data == true) {
@@ -104,7 +104,7 @@ let response_recordatorio = function (data) {
     } else {
         desbloqueda_form(".form_fecha_recordatorio");
     }
-}
+};
 let response_horario_entrega = function (data) {
 
     $(".place_fecha_entrega").empty();
@@ -112,7 +112,7 @@ let response_horario_entrega = function (data) {
     desbloqueda_form(".form_fecha_entrega");
     redirect(url);
 
-}
+};
 let busqueda_pedidos = function (e) {
 
     let fecha_inicio = get_parameter("#datetimepicker4");
@@ -125,7 +125,7 @@ let busqueda_pedidos = function (e) {
 
     }
     e.preventDefault();
-}
+};
 let response_pedidos = function (data) {
 
     render_enid(".place_pedidos", data);
@@ -136,7 +136,7 @@ let response_pedidos = function (data) {
         $(".form_search").submit();
     });
 
-}
+};
 let cambio_estado = function () {
 
     let recibo = get_parameter_enid($(this), "id");
@@ -146,7 +146,7 @@ let cambio_estado = function () {
     let status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
     $(".status_venta_registro option[value='" + status_venta_registro + "']").attr("disabled", "disabled");
 
-}
+};
 let modidica_estado = function () {
 
 
@@ -175,7 +175,7 @@ let modidica_estado = function () {
             }
         });
     }
-}
+};
 let guarda_nuevo_estado =  () => {
 
     let status_venta = parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));
@@ -219,7 +219,7 @@ let guarda_nuevo_estado =  () => {
                 break;
         }
     }
-}
+};
 let modifica_status =  (status_venta, es_proceso_compra_sin_filtro = 0) =>{
 
 
@@ -239,7 +239,7 @@ let modifica_status =  (status_venta, es_proceso_compra_sin_filtro = 0) =>{
         set_option("es_proceso_compra", 1);
         registra_data_nuevo_estado(status_venta);
     }
-}
+};
 let registra_saldo_cubierto = e => {
 
     if (valida_num_form(".saldo_cubierto", ".mensaje_saldo_cubierto") == 1) {
@@ -252,7 +252,7 @@ let registra_saldo_cubierto = e => {
 
     }
     e.preventDefault();
-}
+};
 let response_saldo_cubierto =  data =>{
 
     debugger;
@@ -272,12 +272,12 @@ let response_saldo_cubierto =  data =>{
         $(".mensaje_saldo_cubierto").show();
         render_enid(".mensaje_saldo_cubierto", data);
     }
-}
+};
 let next_status =  () => {
 
     let url = "../pedidos/?recibo=" + get_parameter(".recibo");
     redirect(url);
-}
+};
 let descontar_articulos_stock =  () =>{
 
     let id_servicio = get_parameter(".id_servicio");
@@ -286,12 +286,12 @@ let descontar_articulos_stock =  () =>{
     let url = "../q/index.php/api/servicio/stock/format/json/";
     request_enid("PUT", data_send, url, response_articulos_stock);
 
-}
+};
 let response_articulos_stock =  data  => {
 
     let url = "../pedidos/?recibo=" + get_parameter(".recibo");
     redirect(url);
-}
+};
 let response_status_venta =  data => {
 
 
@@ -305,7 +305,7 @@ let response_status_venta =  data => {
         render_enid(".mensaje_saldo_cubierto_post_venta", data);
     }
 
-}
+};
 let pre_cancelacion =  () =>{
 
     let tipo = 0;
@@ -343,12 +343,12 @@ let pre_cancelacion =  () =>{
     let url = "../q/index.php/api/tipificacion/index/format/json/";
     request_enid("GET", data_send, url, response_pre_cancelacion)
 
-}
+};
 let response_pre_cancelacion =   data => {
 
     render_enid(".place_tipificaciones", data);
     $(".tipificacion").change(registra_motivo_cancelacion);
-}
+};
 let registra_motivo_cancelacion = () => {
 
     let status_venta = get_valor_selected(".status_venta");
@@ -362,7 +362,7 @@ let registra_motivo_cancelacion = () => {
     let url = "../q/index.php/api/recibo/status/format/json/";
     bloquea_form(".selector_estados_ventas");
     request_enid("PUT", data_send, url, response_status_venta);
-}
+};
 let cambio_tipo_entrega =  () =>{
 
     let tipo_entrega = get_valor_selected(".form_edicion_tipo_entrega .tipo_entrega");
@@ -392,7 +392,7 @@ let cambio_tipo_entrega =  () =>{
 
     }
 
-}
+};
 let set_tipo_entrega =  (tipo_entrega, tipo_entrega_actual) =>{
 
     if (tipo_entrega != tipo_entrega_actual) {
@@ -423,24 +423,24 @@ let set_tipo_entrega =  (tipo_entrega, tipo_entrega_actual) =>{
         registra_tipo_entrega(tipo_entrega, get_parameter(".recibo"));
     }
 
-}
+};
 let registra_tipo_entrega =  (tipo_entrega, recibo) => {
 
     let text_tipo_entrega = get_parameter(".text_tipo_entrega");
     let data_send = {"tipo_entrega": tipo_entrega, recibo: recibo, text_tipo_entrega: text_tipo_entrega};
     let url = "../q/index.php/api/recibo/tipo_entrega/format/json/";
     request_enid("PUT", data_send, url, response_tipo_entrega);
-}
+};
 let response_tipo_entrega =  (data) => {
 
     let url = "../pedidos/?recibo=" + get_parameter(".recibo");
     redirect(url);
-}
+};
 let pre_tipo_entrega =  () => {
     $(".form_edicion_tipo_entrega").show();
     let tipo_entrega_actual = get_parameter(".tipo_entrega_def");
     selecciona_valor_select(".form_edicion_tipo_entrega .tipo_entrega", tipo_entrega_actual);
-}
+};
 let verifica_pago_previo =  id_status =>{
 
     debugger;
@@ -457,18 +457,18 @@ let verifica_pago_previo =  id_status =>{
         modifica_status(id_status, 1);
     }
 
-}
+};
 let oculta_opciones_estados =  () => {
 
     despliega([".selector_estados_ventas", 0]);
 
-}
+};
 let procesa_cambio_estado =  () => {
 
     set_option("es_proceso_compra", 1);
     modifica_status(6, 1);
 
-}
+};
 let registra_data_nuevo_estado = status_venta => {
 
 
@@ -482,7 +482,7 @@ let registra_data_nuevo_estado = status_venta => {
     set_option("es_proceso_compra", 0);
     let url = "../q/index.php/api/recibo/status/format/json/";
     request_enid("PUT", data_send, url, response_status_venta)
-}
+};
 let confirma_cambio_horario =  (id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) =>{
 
 
@@ -511,12 +511,12 @@ let confirma_cambio_horario =  (id_recibo, status, saldo_cubierto_envio, monto_a
     });
 
 
-}
+};
 let agregar_nota =  () => {
 
     showonehideone(".form_notas", ".agregar_comentario");
     recorre(".form_notas");
-}
+};
 let registrar_nota =  e  => {
 
     debugger;
@@ -535,12 +535,12 @@ let registrar_nota =  e  => {
     }
 
     e.preventDefault();
-}
+};
 let response_registro_nota =  data => {
     $(".place_nota").empty();
     redirect("");
 
-}
+};
 let modifica_status_recordatorio = (id_recordatorio, status) =>{
     if (id_recordatorio > 0) {
 
@@ -548,7 +548,7 @@ let modifica_status_recordatorio = (id_recordatorio, status) =>{
         let data_send = {id_recordatorio: id_recordatorio, status: status};
         request_enid("PUT", data_send, url);
     }
-}
+};
 let registro_usuario =  function(e) {
 
     debugger;
@@ -557,21 +557,21 @@ let registro_usuario =  function(e) {
     bloquea_form(".form_set_usuario");
     request_enid("PUT", data_send, url, response_usuario);
     e.preventDefault();
-}
+};
 
 let response_usuario = (data) => redirect("");
 
 let muestra_form_usuario = () => {
     showonehideone("#contenedor_form_usuario", ".contenedor_cliente");
 
-}
+};
 let confirma_eliminar_concepto = id => {
 
     show_confirm("¿Seguro deseas eliminar este concepto?", "", "Eliminar", function () {
 
         elimina_costo_operacion(id);
     });
-}
+};
 
 let elimina_costo_operacion =  id => {
 
@@ -582,7 +582,7 @@ let elimina_costo_operacion =  id => {
         redirect("");
     });
 
-}
+};
 let retorno =  () => {
     let sender = get_parameter(".consulta");
     if (sender > 0) {
@@ -611,7 +611,7 @@ let retorno =  () => {
         $(".form_busqueda_pedidos").submit();
     }
 
-}
+};
 let agenda_compra =  function () {
 
     let id =  get_parameter_enid($(this),"id");
@@ -624,11 +624,11 @@ let agenda_compra =  function () {
 
 
 
-}
+};
 let r_agenda = function (data) {
 
     if (data!=false){
 
         redirect("../");
     }
-}
+};
