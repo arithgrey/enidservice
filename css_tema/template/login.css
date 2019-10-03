@@ -8,12 +8,6 @@
     margin-right: 20px;
     margin-bottom: 10px;
 }
-
-.acceso_a_cuenta {
-    background: blue;
-    padding: 10px !important;
-}
-
 .acceso_a_cuenta:hover {
     cursor: pointer;
 }
@@ -42,16 +36,6 @@
     color: white;
     width: 100% !important;
 }
-
-.recupara-pass {
-    margin-top: 30px;
-}
-
-.recupara-pass:hover {
-    cursor: pointer;
-    padding: 10px;
-}
-
 footer, .footer-extra {
     display: none;
 }
@@ -71,27 +55,11 @@ form button:hover {
 #olvide-pass, .place_acceso_sistema {
     color: #000306 !important;
 }
-
-.olvide_pass{
-    font-size: 1.4em;
-}
 .mensaje_bienvenida {
     background: #09052f;
     color: white;
     padding: 10px;
 }
-
-.registrar-cuenta ,.btn_acceder_cuenta_enid{
-    
-    font-weight: bold;
-    font-size: 1.7em;
-    letter-spacing: 12px;
-    
-}
-.registrar-cuenta:hover {
-    color: black !important;
-}
-
 .llamada-a-la-accion {
     color: #0003f9 !important;
 }

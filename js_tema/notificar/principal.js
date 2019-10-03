@@ -36,7 +36,7 @@ let notifica_pago = e => {
         recorre(".num_recibo");
     }
     e.preventDefault();
-}
+};
 
 let response_notificacion_pago = data => {
 
@@ -46,14 +46,14 @@ let response_notificacion_pago = data => {
     render_enid(".placa_notificador_pago", str);
     recorre(".placa_notificador_pago");
     notifica_registro_pago(data);
-}
+};
 
 let notifica_registro_pago = data => {
 
     let data_send = {"id_notificacion_pago": data};
     let url = "../msj/index.php/api/emp/notifica_pago/format/json/";
     request_enid("POST", data_send, url, response_notificacion_registro_pago, ".placa_notificador_pago");
-}
+};
 let response_notificacion_registro_pago = data => {
 
     let str = "<div class='white' " +
@@ -65,14 +65,14 @@ let response_notificacion_registro_pago = data => {
     render_enid(".placa_notificador_pago", str);
     $(".form_notificacion :input").attr("disabled", true);
 
-}
+};
 let valida_auto_complete_recibo = () => {
 
 
     let url = "../pagos/index.php/api/cobranza/info_saldo_pendiente/format/json/";
     let data_send = {"recibo": $(".num_recibo").val()};
     request_enid("GET", data_send, url, response_autocomplete);
-}
+};
 
 let response_autocomplete = data => {
 
@@ -104,14 +104,14 @@ let response_autocomplete = data => {
     set_id_servicio(id_servicio);
     set_select_servicio(data.data_servicio);
 
-}
+};
 let notifica_recibo_en_proceso = (saldo_cubierto, monto_a_pagar) => {
 
     if (saldo_cubierto >= monto_a_pagar) {
         $(".place_recibo").show();
         render_enid(".place_recibo", "RECIBIMOS TU NOTIFICACIÓN!");
     }
-}
+};
 
 let set_id_servicio = id_servicio => selecciona_select(".servicio", id_servicio);
 let set_select_servicio = data_servicio => {
@@ -125,4 +125,4 @@ let set_select_servicio = data_servicio => {
     }
     select += "</select>";
     render_enid("#servicio", select);
-}
+};

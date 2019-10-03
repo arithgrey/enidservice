@@ -21,7 +21,7 @@ let carga_productos_sugeridos = () => {
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
     let data_send = {"id_servicio": get_option("servicio"), "q": get_parameter(".qservicio")};
     request_enid("GET", data_send, url, response_carga_productos);
-}
+};
 
 let response_carga_productos = data => {
 
@@ -30,7 +30,7 @@ let response_carga_productos = data => {
         $(".text_sugerencias").removeClass("d-none");
         render_enid(".place_tambien_podria_interezar", data);
     }
-}
+};
 
 let carga_valoraciones = () => {
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
@@ -39,7 +39,7 @@ let carga_valoraciones = () => {
         "respuesta_valorada": get_option("respuesta_valorada")
     };
     request_enid("GET", data_send, url, response_carga_valoraciones);
-}
+};
 
 let response_carga_valoraciones = data => {
     render_enid(".place_valoraciones", data);
@@ -59,14 +59,14 @@ let response_carga_valoraciones = data => {
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").css("margin-top", "-8px");
 
 
-}
+};
 let agrega_valoracion_respuesta = (valoracion, num) => {
 
     let url = "../q/index.php/api/valoracion/utilidad/format/json/";
     let data_send = {"valoracion": valoracion, "utilidad": num};
     set_option("respuesta_valorada", valoracion);
     request_enid("PUT", data_send, url, carga_valoraciones);
-}
+};
 
 let ordenar_valoraciones = function (e) {
 
@@ -105,7 +105,7 @@ let ordenar_valoraciones = function (e) {
             break;
         default:
     }
-}
+};
 let agregar_a_lista_deseos = () => {
 
 
@@ -116,7 +116,7 @@ let agregar_a_lista_deseos = () => {
         let data_send = {"id_servicio": get_option("servicio"), "articulos": articulos};
         request_enid("PUT", data_send, url, respuesta_add_valoracion);
     }
-}
+};
 
 let respuesta_add_valoracion = data => {
 
@@ -126,7 +126,7 @@ let respuesta_add_valoracion = data => {
     redirect("../lista_deseos");
 
 
-}
+};
 
 let agregar_talla = function () {
 
@@ -138,7 +138,7 @@ let agregar_talla = function () {
             $(".producto_talla").val(id_seleccion);
         }
     });
-}
+};
 let tab_descripcion = function () {
 
     $(".descripcion_producto").addClass("border_enid");
@@ -147,11 +147,11 @@ let tab_descripcion = function () {
     $(".descripcion_detallada").addClass("border");
 
 
-}
+};
 let tab_descripcion_avanzada = function () {
 
     $(".descripcion_producto").removeClass("border_enid").addClass("border");
     $(".descripcion_detallada").addClass("border_enid");
     $(".descripcion_detallada").removeClass("border");
 
-}
+};

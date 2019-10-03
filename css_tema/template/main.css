@@ -181,9 +181,11 @@ th:hover {
 .color_venta {
     color: #04528a !important;
 }
-.color_azul_fuerte{
-    color: #01111d!important;
+
+.color_azul_fuerte {
+    color: #01111d !important;
 }
+
 .blue_linkeding_background {
     background: #006FA6 !important;
 }
@@ -361,9 +363,11 @@ li {
 .button_enid_eleccion_active {
     color: blue !important;
 }
-.w_15{
-    width: 15px!important;
+
+.w_15 {
+    width: 15px !important;
 }
+
 /*Todo lo que pertenece a medios*/
 @media only screen and (max-width: 991px) {
 
@@ -1179,15 +1183,9 @@ table {
 }
 
 .underline {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
-/*
-.btn_guardar {
-    border: 0 !important;
-    letter-spacing: 5px;
-}
-*/
 .btn_guardar:hover {
     cursor: pointer;
     padding: 10px;
@@ -1652,7 +1650,8 @@ a {
 .bg_green {
     background: #2ada71;
 }
-.bg_azul_tenue{
+
+.bg_azul_tenue {
     background: #007bff;
 }
 
@@ -1680,10 +1679,12 @@ a {
 .checkbox_enid:focus {
     outline: none;
 }
-.border_enid{
+
+.border_enid {
     border: 1px solid;
     border-bottom: 2px solid #000;
 }
+
 /*Extra small devices(portrait phones, less than576px)*/
 @media (max-width: 575.98px) {
 

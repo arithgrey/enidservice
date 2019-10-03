@@ -1,84 +1,100 @@
-//"use strict";
-$(document).on("ready", () => {
+'use strict';
+let email_recuperacion = '#email_recuperacion';
+let $email_recuperacion = $(email_recuperacion);
+let $mail_acceso = $('#mail_acceso');
+let $input_pw = $('.input_enid_format #pw');
+let soy_nuevo = '.btn_soy_nuevo';
+let registrar = '.registrar_cuenta';
+let form_inicio = '.form_sesion_enid';
+let form_pass = '.form-pass';
+let $form_pass = $(form_pass);
+let form_registro = '.form-miembro-enid-service';
+let nombre_persona = '.nombre_persona';
+let email = '#mail';
+let pw = '#pw';
+let $pw = $('#pw');
+let selector_acceso_sistema = '.place_acceso_sistema';
+let place_recuperacion = '.place_recuperacion_pw';
+let $olvide_pass = $('.olvide_pass');
+let wr = '.wrapper_login';
+let contenedor_recuperacion_password = '.contenedor_recuperacion_password';
+let seccion_registro_usuario = '.seccion_registro_nuevo_usuario_enid_service';
+let registro_pw = '.registro_pw';
+$(document).on('ready', () => {
 
-    $("footer").ready(valida_seccion_inicial);
-    $(".btn_soy_nuevo").click(mostrar_seccion_nuevo_usuario);
-    $(".btn_soy_nuevo_simple").click(mostrar_seccion_nuevo_usuario);
-    $(".registrar-cuenta").click(mostrar_seccion_nuevo_usuario);
-    $(".form_sesion_enid").submit(valida_form_session);
-    $(".form-pass").submit(recupera_password);
-    $("#olvide-pass").click(carga_mail);
-    $(".form-miembro-enid-service").submit(agrega_usuario);
-    $(".recupara-pass").click(muestra_contenedor_recuperacion);
-    $(".btn_acceder_cuenta_enid").click(muestra_seccion_acceso);
-    $(".nombre_persona").keyup(function () {
+    $('footer').ready(valida_seccion_inicial);
+    $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);
+    $('.btn_soy_nuevo_simple').click(mostrar_seccion_nuevo_usuario);
+    $(registrar).click(mostrar_seccion_nuevo_usuario);
+    $(form_inicio).submit(valida_form_session);
+    $form_pass.submit(recupera_password);
+    $olvide_pass.click(carga_mail);
+    $(form_registro).submit(agrega_usuario);
+    $olvide_pass.click(muestra_contenedor_recuperacion);
+    $('.btn_acceder_cuenta_enid').click(muestra_seccion_acceso);
+
+    despliega('.extra_menu_simple', 1);
+    despliega(['.base_compras', '.base_paginas_extra', '.info_metodos_pago'], 0);
+
+    $(nombre_persona).keyup(function () {
         transforma_mayusculas(this);
     });
-    despliega(".extra_menu_simple", 1);
-    despliega([".base_compras", ".base_paginas_extra", ".info_metodos_pago"], 0);
 
-    $("#mail").keyup(() => {
-        sin_espacios("#mail");
+    $(email).keyup(() => {
+        sin_espacios(email);
     });
 
-    $("#email_recuperacion").keyup(() => {
-        sin_espacios("#email_recuperacion");
+    $email_recuperacion.keyup(() => {
+        sin_espacios(email_recuperacion);
     });
 
-
-    /*Registro*/
-    $(".registro_email").focus(function () {
-        $(this).next('label').addClass('focused_input');
-    });
-    $(".nombre_persona").focus(function () {
-        $(this).next('label').addClass('focused_input');
-    });
-    $(".registro_pw").focus(function () {
+    $('.registro_email').focus(function () {
         $(this).next('label').addClass('focused_input');
     });
 
-
-    /*Acceso*/
-    $("#mail_acceso").focus(function () {
-        $('#mail_acceso').next('label').addClass('focused_input');
-
+    $(nombre_persona).focus(function () {
+        $(this).next('label').addClass('focused_input');
     });
-    $("#mail_acceso").focusout(function () {
-        if ($('#mail_acceso').val() === '') {
-            $('#mail_acceso').next('label').removeClass('focused_input');
-        }
-    });
-    $(".input_enid_format #pw").focus(function () {
-        $('.input_enid_format #pw').next('label').addClass('focused_input');
 
+    $(registro_pw).focus(function () {
+        $(this).next('label').addClass('focused_input');
     });
-    $(".input_enid_format #pw").focusout(function () {
-        if ($('.input_enid_format #pw').val() === '') {
-            $('.input_enid_format #pw').next('label').removeClass('focused_input');
 
+    $mail_acceso.focus(function () {
+        $mail_acceso.next('label').addClass('focused_input');
+    });
+
+    $mail_acceso.focusout(function () {
+        if ($mail_acceso.val() === '') {
+            $mail_acceso.next('label').removeClass('focused_input');
         }
     });
 
+    $input_pw.focus(function () {
+        $input_pw.next('label').addClass('focused_input');
+    });
 
+    $input_pw.focusout(function () {
+        if ($input_pw.val() === '') {
+            $input_pw.next('label').removeClass('focused_input');
+        }
+    });
 });
+
 let inicio_session = () => {
 
-
-    let url = get_option("url");
-    let data_send = {secret: get_option("tmp_password"), "email": get_option("email")};
-    if (get_parameter("#mail_acceso").length > 5 && get_parameter("#pw").length > 5) {
-
-        request_enid("POST", data_send, url, response_inicio_session, 1, before_inicio_session);
+    let data_send = {secret: get_option('tmp_password'), 'email': get_option('email')};
+    if (get_parameter('#mail_acceso').length > 5 && get_parameter(pw).length > 5) {
+        let url = get_option('url');
+        bloquea_form(form_inicio);
+        sload(selector_acceso_sistema);
+        request_enid('POST', data_send, url, response_inicio_session);
 
     } else {
-
-        focus_input(["#email", "#pw"]);
+        focus_input(['#email', pw]);
     }
-}
-let before_inicio_session = () => {
-    desabilita_botones();
-    sload(".place_acceso_sistema", "Validando datos ", 1);
-}
+};
+
 let response_inicio_session = data => {
 
     if (data !== 0) {
@@ -87,175 +103,161 @@ let response_inicio_session = data => {
 
     } else {
 
-        habilita_botones();
-        format_error(".place_acceso_sistema", "Verifica tus datos de acceso");
-        empty_elements(".inf_usuario_registrado");
-        $(".inf_usuario_registrado").removeClass();
+        desbloqueda_form(form_inicio);
+        format_error(selector_acceso_sistema, 'Verifica tus datos de acceso');
+        empty_elements('.inf_usuario_registrado');
+
     }
-}
+};
+
 let valida_form_session = e => {
 
-    let pw = $.trim(get_parameter("#pw"));
-    let email = get_parameter('#mail_acceso');
-    if (valida_formato_pass(pw) == valida_formato_email(email)) {
+    let pass = $.trim($pw.val());
+    let str_email = $mail_acceso.val();
+    if (valida_formato_pass(pass) === valida_formato_email(str_email)) {
 
-        let tmp_password = "" + CryptoJS.SHA1(pw);
-        set_option("tmp_password", tmp_password);
-        set_option("url", $("#in").attr("action"));
-        set_option("email", email);
+        let str = "" + CryptoJS.SHA1(pass);
+        let action = $('#in').attr('action');
+        set_option({
+            'tmp_password': str,
+            'url': action,
+            'email': str_email
+        });
         inicio_session();
     }
     e.preventDefault();
-}
+
+};
 let recupera_password = e => {
 
-    let flag = valida_email_form("#email_recuperacion", ".place_recuperacion_pw");
-    if (flag == 1) {
-        $(".place_recuperacion_pw").empty();
-        let url = $(".form-pass").attr("action");
-        let data_send = $(".form-pass").serialize();
-        bloquea_form(".form-pass");
-        request_enid("POST", data_send, url, response_recupera_password, ".place_status_inicio");
+    if (valida_email_form(email_recuperacion, place_recuperacion)) {
+        $(place_recuperacion).empty();
+        let url = $form_pass.attr('action');
+        let data_send = $form_pass.serialize();
+        bloquea_form(form_pass);
+        request_enid('POST', data_send, url, response_recupera_password, '.place_status_inicio');
     }
     e.preventDefault();
-}
+};
+
 let response_recupera_password = data => {
 
     if (data > 0) {
-
-        $('#contenedor-form-recuperacion').find('input, textarea, button, select').attr('disabled', 'disabled');
-        let newDiv = document.createElement("div");
-        newDiv.setAttribute("class", "envio_correcto");
-        let newContent = document.createTextNode("El correo de recuperación se ha enviado con éxito.!");
+        let newDiv = document.createElement('div');
+        newDiv.setAttribute('class', 'envio_correcto');
+        let newContent = document.createTextNode('El correo de recuperación se ha enviado con éxito.!');
         newDiv.appendChild(newContent);
-        render_enid(".place_recuperacion_pw", newDiv);
-        seccess_enid(".place_status_inicio", newDiv);
+        render_enid(place_recuperacion, newDiv);
+        seccess_enid('.place_status_inicio', newDiv);
     }
+};
 
-}
-let carga_mail = () => $("#email_recuperacion").val(get_parameter("#mail"));
+let carga_mail = () => $email_recuperacion.val(get_parameter(email));
 
 let valida_formato_pass = text => {
 
-    let estado = 0;
-    if (text.length >= 8) {
+    let response = 0;
+    response = (text.length >= 8) ? 1 : format_error(selector_acceso_sistema, 'Contraseña muy corta!');
+    return response;
 
-        estado = 1;
-
-    } else {
-
-        format_error(".place_acceso_sistema", "Contraseña muy corta!");
-    }
-    return estado;
-}
+};
 
 let valida_formato_email = email => {
 
-    let estado = 1;
-    let expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
+    let response = 1;
     if (valEmail(email)) {
-        estado = 0;
-        format_error(".place_acceso_sistema", "Correo no valido");
+        response--;
+        format_error(selector_acceso_sistema, 'Correo no valido');
     }
-    return estado;
-}
-let habilita_botones = function () {
+    return response;
+};
 
-    for (a = 0; a < document.getElementsByTagName('input').length; a++) {
-        document.getElementsByTagName('input')[a].disabled = false;
-    }
-}
-let desabilita_botones = () => {
-
-    for (a = 0; a < document.getElementsByTagName('input').length; a++) {
-        document.getElementsByTagName('input')[a].disabled = true;
-    }
-}
 let mostrar_seccion_nuevo_usuario = () => {
 
-    despliega([".contenedor_recuperacion_password", ".wrapper_login"], 0);
-    despliega([".seccion_registro_nuevo_usuario_enid_service"]);
+    despliega([contenedor_recuperacion_password, wr], 0);
+    despliega([seccion_registro_usuario]);
+    recorre('#flipkart-navbar');
 
-}
+};
 let agrega_usuario = (e) => {
 
-    let url = "../q/index.php/api/usuario/vendedor/format/json/";
-    let password = get_parameter(".registro_pw");
-    let email = get_parameter(".registro_email");
-    let nombre = get_parameter(".nombre_persona");
+    let url = '../q/index.php/api/usuario/vendedor/format/json/';
+    let password = get_parameter(registro_pw);
+    let email = get_parameter('.registro_email');
+    let nombre = get_parameter(nombre_persona);
 
-    if (valida_formato_email(email) == valida_formato_pass(password)) {
-        if (val_text_form(".nombre_persona", ".place_registro_miembro", 3, "Nombre") == 1) {
+    if (valida_formato_email(email) === valida_formato_pass(password)) {
+        if (val_text_form(nombre_persona, '.place_registro_miembro', 3, 'Nombre')) {
 
-            let tmp_password = "" + CryptoJS.SHA1(password);
+            let tmp_password = '' + CryptoJS.SHA1(password);
             set_option({
-                "tmp_password": tmp_password,
-                "email": email,
-                "nombre": nombre,
+                'tmp_password': tmp_password,
+                'email': email,
+                'nombre': nombre,
 
             });
 
-            let data_send = {"nombre": nombre, "email": email, "password": tmp_password, "simple": 1};
-            request_enid("POST", data_send, url, response_usuario_registro);
+            let data_send = {'nombre': nombre, 'email': email, 'password': tmp_password, 'simple': 1};
+            request_enid('POST', data_send, url, response_usuario_registro);
         }
     }
     e.preventDefault();
-}
+};
 let response_usuario_registro = data => {
 
     if (data.usuario_registrado == 1) {
 
-        redirect("?action=registro");
+        redirect('?action=registro');
 
     } else {
 
-        if (data.usuario_existe == 1) {
-            let str = "<span class='alerta_enid'> Este usuario ya se encuentra registrado, " +
-                "<span class='acceso_a_cuenta'> accede a tu cuenta aquí " +
-                "</span> " +
-                "</span>";
+        if (data.usuario_existe > 0) {
 
-            render_enid(".place_registro_miembro", str);
-            $(".acceso_a_cuenta").click(muestra_seccion_acceso);
-            habilita_botones();
+            let str_usuario = 'Este usuario ya se encuentra registrado';
+            let str = `<span class="alerta_enid d-block text-center p-3">${str_usuario}</span>`;
+            let place = '.place_registro_miembro';
+            render_enid(place, str);
+            $(place).addClass('mt-5');
+            $('.acceso_a_cuenta').click(muestra_seccion_acceso);
+            desbloqueda_form(form_registro);
 
         }
     }
-}
+};
 let muestra_seccion_acceso = () => {
 
-    despliega(".wrapper_login");
-    despliega([".contenedor_recuperacion_password", ".seccion_registro_nuevo_usuario_enid_service"], 0);
-}
+    despliega(wr);
+    despliega([contenedor_recuperacion_password, seccion_registro_usuario], 0);
+};
 let muestra_contenedor_recuperacion = () => {
 
-    despliega([".wrapper_login", ".seccion_registro_nuevo_usuario_enid_service"], 0);
-    despliega(".contenedor_recuperacion_password");
-}
+    despliega([wr, seccion_registro_usuario], 0);
+    despliega(contenedor_recuperacion_password);
+    recorre('#flipkart-navbar');
+};
 let valida_seccion_inicial = () => {
-    switch (get_parameter(".action")) {
-        case "nuevo":
+    switch (get_parameter('.action')) {
+        case 'nuevo':
             mostrar_seccion_nuevo_usuario();
             break;
-        case "recuperar":
+        case 'recuperar':
             muestra_contenedor_recuperacion();
             break;
-        case "registro":
+        case 'registro':
             facilita_acceso();
             break;
         default:
     }
-}
+};
 let facilita_acceso = () => {
 
     let secciones = [
-        ".olvide_pass",
-        ".registrar_cuenta",
-        ".btn_soy_nuevo",
-        ".iniciar_sesion_lateral",
-        ".call_to_action_anuncio",
-        ".contenedor-lateral-menu"
+        '.olvide_pass',
+        registrar,
+        soy_nuevo,
+        '.iniciar_sesion_lateral',
+        '.call_to_action_anuncio',
+        '.contenedor-lateral-menu'
     ];
     despliega(secciones, 0);
 };

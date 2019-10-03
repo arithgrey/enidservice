@@ -18,7 +18,7 @@ let cargar_num_envios_a_validacion =  () => {
 	});
 
 
-}
+};
 
 let cargar_num_agendados_email = () => {
 	
@@ -36,7 +36,7 @@ let cargar_num_agendados_email = () => {
 	}).fail(function(){			
 		show_error_enid(".place_correo_envio" , "Error al cargar número de agendados en email");
 	});		
-}
+};
 
 let   cargar_num_agendados = () => {
 	
@@ -61,7 +61,7 @@ let   cargar_num_agendados = () => {
 	}).fail(function(){			
 		show_error_enid(".place_llamada_hecha" , "Error ... ");
 	});		
-}
+};
 
 let   cargar_num_clientes_restantes = () => {
 
@@ -80,4 +80,4 @@ let   cargar_num_clientes_restantes = () => {
 	}).fail(function(){			
 		show_error_enid(".place_llamada_hecha" , "Error ... ");
 	});		
-}
+};

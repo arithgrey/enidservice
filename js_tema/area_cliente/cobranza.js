@@ -14,7 +14,7 @@ let inf_ticket = function (e) {
         let data_send = {"id_recibo": get_option("id_recibo"), "cobranza": 1};
         request_enid("GET", data_send, url, r_carga_info_resumen_pago_pendiente, ".place_resumen_servicio");
     }
-}
+};
 let r_carga_info_resumen_pago_pendiente = data => {
 
 
@@ -23,13 +23,13 @@ let r_carga_info_resumen_pago_pendiente = data => {
     $(".cancelar_compra").click(conf_cancelacion_compra);
     $(".btn_direccion_envio").click(inf_envio);
 
-}
+};
 let resposponse_confirma_cancelacion = data => {
 
     render_enid(".place_resumen_servicio", data);
     $(".cancelar_orden_compra").click(cancela_compra);
 
-}
+};
 let cancela_compra = function () {
 
 
@@ -38,7 +38,7 @@ let cancela_compra = function () {
     let data_send = {"id_recibo": get_option("id_recibo"), "modalidad": get_option("modalidad_ventas")};
     request_enid("PUT", data_send, url, response_cancelacion_compra);
 
-}
+};
 let response_cancelacion_compra = (data) => {
 
 
@@ -61,7 +61,7 @@ let response_cancelacion_compra = (data) => {
 
     }
     metricas_perfil();
-}
+};
 let conf_cancelacion_compra = function () {
 
     set_option({
@@ -77,4 +77,4 @@ let conf_cancelacion_compra = function () {
         let data_send = {"id_recibo": get_option("id_recibo"), "modalidad": get_option("modalidad_ventas")};
         request_enid("GET", data_send, url, resposponse_confirma_cancelacion);
     }
-}
+};

@@ -6,7 +6,7 @@ window.onpopstate = function (event) {
 
         let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_retorno();
     }
-}
+};
 $(document).ready(() => {
 
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
@@ -252,7 +252,7 @@ let registro = (e) => {
     }
 
     e.preventDefault();
-}
+};
 
 
 let solicitud_cotizacion = e => {
@@ -336,7 +336,7 @@ let solicitud_cotizacion = e => {
     }
 
     e.preventDefault();
-}
+};
 let registro_cotizacion = (e) => {
 
     let data_send = $(".form_cotizacion_enid_service").serialize();
@@ -345,12 +345,12 @@ let registro_cotizacion = (e) => {
     request_enid("POST", data_send, url, respuesta_proceso_usuario_activo);
     e.preventDefault();
 
-}
+};
 let before_registro_afiliado = () => {
 
     bloquea_form(".form-miembro-enid-service");
     sload(".place_registro_afiliado", "Validando datos ", 1);
-}
+};
 
 let respuesta_registro = (data) => {
 
@@ -361,7 +361,7 @@ let respuesta_registro = (data) => {
         if (data.usuario_existe > 0) {
 
             flex(".usuario_existente");
-            empty_elements(".place_registro_afiliado")
+            empty_elements(".place_registro_afiliado");
 
             recorre(".usuario_existente");
             $(".informacion_extra").show();
@@ -384,7 +384,7 @@ let respuesta_registro_cotizacion = (data) => {
     $(".place_registro_afiliado").empty();
     redirect("../area_cliente");
 
-}
+};
 let procesar_pedido_usuario_activo = () => {
 
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
@@ -404,25 +404,25 @@ let procesar_pedido_usuario_activo = () => {
         redirect("../area_cliente/?action=compras");
     }, 0, before_pedido_activo);
 
-}
+};
 
 let before_pedido_activo = () => {
 
     $('.btn_procesar_pedido_cliente').prop('disabled', true);
     sload(".place_proceso_compra", "Validando datos ", 1);
 
-}
+};
 
 let respuesta_proceso_usuario_activo = (data) => {
 
     redirect("../area_cliente");
 
-}
+};
 let quita_espacios_en_telefono = () => {
 
     $(".telefono").val(quitar_espacios_numericos(get_parameter(".telefono")));
 
-}
+};
 let set_link = function () {
 
     let plan = get_parameter_enid($(this), "id_servicio");
@@ -448,7 +448,7 @@ let continuar_compra = function () {
 
     showonehideone(".pr_compra", ".compra_resumen");
     set_option("vista", 2)
-}
+};
 let response_set_link = (data) => redirect("../login");
 let valida_retorno = () => {
     let vista = parseInt(get_option("vista"));
@@ -456,11 +456,11 @@ let valida_retorno = () => {
 
         case 2:
             showonehideone(".compra_resumen", ".pr_compra");
-            set_option("vista", 1)
+            set_option("vista", 1);
             break;
 
         default:
 
             break;
     }
-}
+};

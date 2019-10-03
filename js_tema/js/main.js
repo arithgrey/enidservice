@@ -74,11 +74,11 @@ let set_option = (key, value = 0) => {
         });
     }
 
-}
+};
 let get_option = key => {
 
     return option[key];
-}
+};
 let show_confirm = (text, text_complemento, text_continuar = 0, on_next = 0, on_cancel = 0) => {
 
     if (on_next == 0) {
@@ -112,7 +112,7 @@ let sload = place => {
     let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
     render_enid(place, bar);
-}
+};
 let seccess_enid = (place, msj) => {
 
     $(place).show();
@@ -121,12 +121,12 @@ let seccess_enid = (place, msj) => {
     setTimeout(function () {
         $(place).fadeOut(1500);
     }, 1500);
-}
+};
 let selecciona_valor_select = (opcion_a_seleccionar, posicion) => {
 
     $(opcion_a_seleccionar + " option[value='" + posicion + "']").attr("selected", true);
 
-}
+};
 let val_text_form = (input, place_msj, len, nom) => {
 
     $(place_msj).show();
@@ -148,12 +148,12 @@ let val_text_form = (input, place_msj, len, nom) => {
 
     }
     return flag;
-}
-let format_error = (place_msj, msj) => {
+};
+let format_error = (place, str) => {
 
-    render_enid(place_msj, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + msj + "</div>");
+    render_enid(place, "<div class='col-lg-12 alerta_enid padding_5 top_10 bottom_10'>" + str + "</div>");
 
-}
+};
 let valida_email_form = (input, place_msj) => {
 
 
@@ -184,7 +184,7 @@ let valida_email_form = (input, place_msj) => {
     format_error(place_msj, mensaje_user);
     return flag;
 
-}
+};
 
 let valida_tel_form = (input, place_msj) => {
 
@@ -211,13 +211,13 @@ let valida_tel_form = (input, place_msj) => {
 
     format_error(place_msj, mensaje_user);
     return flag;
-}
+};
 let valEmail = valor => {
 
     let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
     return !re.exec(valor);
 
-}
+};
 
 let mostrar_img_upload = (source, id_section) => {
 
@@ -230,7 +230,7 @@ let mostrar_img_upload = (source, id_section) => {
     img.src = source;
     li.appendChild(img);
     list.appendChild(li);
-}
+};
 
 let showonehideone = (show, hide) => {
 
@@ -240,12 +240,12 @@ let showonehideone = (show, hide) => {
     $(hide).addClass("d-none");
 
 
-}
+};
 
 let selecciona_select = (class_select, valor_a_seleccionar) => {
 
     $(class_select + ' > option[value="' + valor_a_seleccionar + '"]').attr('selected', 'selected');
-}
+};
 
 let metricas_perfil = () => {
 
@@ -256,7 +256,7 @@ let metricas_perfil = () => {
         let data_send = {"id_usuario": get_parameter(".id_usuario")};
         request_enid("GET", data_send, url, response_metricas_perfil);
     }
-}
+};
 let response_metricas_perfil = data => {
 
     render_enid(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
@@ -283,7 +283,7 @@ let response_metricas_perfil = data => {
     if (parseInt(deuda_cliente) > 0) {
         render_enid(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
-}
+};
 
 let notifica_usuario_pendientes = num_pendientes => {
 
@@ -298,7 +298,7 @@ let notifica_usuario_pendientes = num_pendientes => {
         set_option("flag_activa_notificaciones", 0);
         set_titulo_web(get_parameter(".titulo_web"));
     }
-}
+};
 let rotulo_title = () => {
 
     let num_pendientes = get_option("num_pendientes");
@@ -317,14 +317,14 @@ let rotulo_title = () => {
         let espera = 3000;
         setTimeout("rotulo_title()", espera);
     }
-}
+};
 
 let set_titulo_web = str => {
 
     let titulo_web = str;
     set_option("titulo_web", str);
     document.title = titulo_web;
-}
+};
 let registra_respuesta_pregunta = e => {
 
     let url = "../q/index.php/api/respuesta/index/format/json/";
@@ -333,7 +333,7 @@ let registra_respuesta_pregunta = e => {
     set_option("seccion", seccion);
     request_enid("POST", data_send, url, carga_comentarios_terea_simple);
     e.preventDefault();
-}
+};
 let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
 
     if (texto == 0) {
@@ -359,7 +359,7 @@ let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
         return valor_numerico;
     }
 
-}
+};
 let sin_espacios = (input, es_correo = 0) => {
 
     let valor = get_parameter(input);
@@ -370,14 +370,14 @@ let sin_espacios = (input, es_correo = 0) => {
         valida_email_form(input, "");
     }
 
-}
+};
 let quita_espacios_input = () => {
 
     let valor = get_parameter(".telefono_info_contacto");
     let nuevo = quitar_espacios_numericos(valor);
     $(".telefono_info_contacto").val(nuevo);
 
-}
+};
 
 let quita_espacios = input => {
 
@@ -385,7 +385,7 @@ let quita_espacios = input => {
     let nuevo = quitar_espacios_numericos(valor);
     $(input).val(nuevo);
 
-}
+};
 
 let quita_espacios_input_precio = () => {
 
@@ -393,7 +393,7 @@ let quita_espacios_input_precio = () => {
     let nuevo = quitar_espacios_numericos(valor);
     set_parameter(".precio", nuevo);
 
-}
+};
 
 let comparer = index => {
 
@@ -401,13 +401,13 @@ let comparer = index => {
         let valA = getCellValue(a, index), valB = getCellValue(b, index);
         return $.isNumeric(valA) && $.isNumeric(valB) ? valA - valB : valA.localeCompare(valB)
     }
-}
+};
 
 let getCellValue = (row, index) => {
 
     return $(row).children('td').eq(index).text()
 
-}
+};
 let ordena_tabla = function () {
 
     let table = $(this).parents('table').eq(0);
@@ -419,7 +419,7 @@ let ordena_tabla = function () {
     for (let i = 0; i < rows.length; i++) {
         table.append(rows[i])
     }
-}
+};
 
 
 let openNav = () => {
@@ -427,12 +427,12 @@ let openNav = () => {
     document.getElementById("mySidenav").style.width = "100%";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
 
-}
+};
 
 let closeNav = () => {
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
-}
+};
 
 let array_key_exists = (key, array) => {
 
@@ -446,13 +446,13 @@ let array_key_exists = (key, array) => {
     }
     return response;
 
-}
+};
 
 let getMaxOfArray = numArray => {
 
     return Math.max.apply(null, numArray);
 
-}
+};
 
 let despliega = (array, tipo = 1) => {
 
@@ -492,7 +492,7 @@ let despliega = (array, tipo = 1) => {
         }
     }
 
-}
+};
 
 /*SE ELIMINAN EL CONTENIDO LOS ELEMENTOS*/
 let empty_elements = (array) => {
@@ -509,7 +509,7 @@ let empty_elements = (array) => {
             $(array).empty();
         }
     }
-}
+};
 
 /*Regresa el valor que esta en el nodo html*/
 let get_parameter_enid = (element, param) => {
@@ -524,7 +524,7 @@ let get_parameter_enid = (element, param) => {
         console.log("No existe " + param + " el parametro en el nodo");
         return false;
     }
-}
+};
 let request_enid = (method, data_send, url, call_back, place_before_send = 0, before_send = 0, place_render = "") => {
 
     if (before_send < 1) {
@@ -549,7 +549,7 @@ let request_enid = (method, data_send, url, call_back, place_before_send = 0, be
         type: method,
         beforeSend: before_send
     }).done(call_back);
-}
+};
 
 let set_black = array => {
 
@@ -557,7 +557,7 @@ let set_black = array => {
 
         set_parameter(array[x], "");
     }
-}
+};
 let focus_input = input => {
 
     let base = "1px solid rgb(13, 62, 86)";
@@ -573,7 +573,7 @@ let focus_input = input => {
 
         $(input).css("border", base);
     }
-}
+};
 let randomString = (len, charSet) => {
     charSet = charSet || 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let randomString = '';
@@ -582,7 +582,7 @@ let randomString = (len, charSet) => {
         randomString += charSet.substring(randomPoz, randomPoz + 1);
     }
     return randomString;
-}
+};
 /*Recorre a sección*/
 let recorre = contenedor => {
 
@@ -608,14 +608,14 @@ let recorre = contenedor => {
     }
 
 
-}
+};
 
 let transforma_mayusculas = x => {
     let text = x.value;
     text.trim();
     let text_mayusculas = text.toUpperCase();
     x.value = text_mayusculas;
-}
+};
 let reload_imgs = (id, url, flag = 0) => {
 
     if (document.location.hostname != "localhost" && flag > 0) {
@@ -625,7 +625,7 @@ let reload_imgs = (id, url, flag = 0) => {
             console.log(url);
         }
     }
-}
+};
 
 let show_error_enid = () => {
 
@@ -637,7 +637,7 @@ let show_error_enid = () => {
     request_enid("POST", data_send, url, function () {
 
     });
-}
+};
 
 let valida_num_form = (input, place_msj) => {
 
@@ -657,13 +657,13 @@ let valida_num_form = (input, place_msj) => {
 
     format_error(place_msj, mensaje_user);
     return f;
-}
+};
 let advierte = text => {
 
     $(".text-order-name-error").text(text);
     $("#modal-error-message").modal("show");
 
-}
+};
 let div_enid = (id_padre, text, clase = '') => {
 
     var newDiv = document.createElement("div");
@@ -684,7 +684,7 @@ let div_enid = (id_padre, text, clase = '') => {
     document.getElementById(id_padre).innerHTML = newDiv.outerHTML;
 
 
-}
+};
 
 let reset_form = id => document.getElementById(id).reset();
 
@@ -734,7 +734,7 @@ let response_mensaje_contacto = data => {
 
     seccess_enid(".place_registro_contacto", "<div class='contacto_enviado'> Gracias por enviarnos tu mensaje, pronto sabrás de nosotros. ! </div>");
     document.getElementById("form_contacto").reset();
-}
+};
 let envia_comentario = e => {
 
     let url = $("#form_contacto").attr("action");
@@ -752,7 +752,7 @@ let envia_comentario = e => {
         }
     }
     e.preventDefault();
-}
+};
 
 
 let set_places = () => {
@@ -760,12 +760,12 @@ let set_places = () => {
     let place = [".place_mail_contacto", ".place_tel_contacto"];
     place.map(empty_elements);
 
-}
+};
 /*AQUÍ TERMINAN LAS PORQUERIAS*/
 let submit_enid = (form) => {
 
     $(form).submit();
-}
+};
 let show_tabs = (str, tipo = 1) => {
 
     let type = (tipo > 0) ? "show" : "hide";
@@ -780,7 +780,7 @@ let show_tabs = (str, tipo = 1) => {
         $(type).tab(type);
     }
 
-}
+};
 
 let rm_class = (arr_class, class_rm) => {
 
@@ -796,7 +796,7 @@ let rm_class = (arr_class, class_rm) => {
         $(arr_class).removeClass(class_rm);
     }
 
-}
+};
 let add_class = (arr_class, class_add) => {
 
 
@@ -811,15 +811,15 @@ let add_class = (arr_class, class_add) => {
         $(arr_class).addClass(class_add);
     }
 
-}
+};
 
 let append_enid = (array) => {
 
     return array.join(",");
-}
+};
 let minusculas = function (e) {
     e.value = e.value.toLowerCase()
-}
+};
 
 let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");
@@ -838,18 +838,18 @@ let anima_busqueda = function (e) {
         $(".busqueda_derecho").removeClass("col-lg-7").addClass("col-lg-5");
         set_option("disparador_buscados", 0);
     }
-}
+};
 let valida_formato_nombre = function (e) {
     if (!/^[A-Za-záéíóúñ ]*$/.test(String.fromCharCode(e.keyCode))) {
         e.preventDefault();
     }
-}
+};
 
 let valida_formato_search = function (e) {
     if (!/^[A-Za-záéíóúñ0-9 ]*$/.test(String.fromCharCode(e.keyCode))) {
         e.preventDefault();
     }
-}
+};
 let valida_formato_correo = function (e) {
 
     let c = String.fromCharCode(e.keyCode);
@@ -863,14 +863,14 @@ let valida_formato_correo = function (e) {
         const formatTimes = (times > 0) ? e.preventDefault() : '';
     }
 
-}
+};
 let valida_formato_telefono = function (e) {
 
     this.value = quitar_espacios_numericos(this.value);
     if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
         e.preventDefault();
     }
-}
+};
 
 let paste_telefono = function () {
 
@@ -879,7 +879,7 @@ let paste_telefono = function () {
         let str = event.clipboardData.getData("text/plain");
         event.target.value = quitar_espacios_numericos(str.trim());
     }
-}
+};
 let paste_email = function () {
 
     event.preventDefault();
@@ -894,7 +894,7 @@ let paste_email = function () {
         }
         event.target.value = text;
     }
-}
+};
 let paste_nombre = function () {
 
     event.preventDefault();
@@ -907,7 +907,7 @@ let paste_nombre = function () {
         }
         event.target.value = text;
     }
-}
+};
 let paste_search = function () {
 
     event.preventDefault();
@@ -922,7 +922,7 @@ let paste_search = function () {
         }
         event.target.value = text;
     }
-}
+};
 
 
 

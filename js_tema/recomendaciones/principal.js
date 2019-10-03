@@ -5,6 +5,6 @@ let agrega_valoracion_respuesta = (valoracion, num) => {
     let data_send = {"valoracion": valoracion, "utilidad": num};
     set_option("respuesta_valorada", valoracion);
     request_enid("PUT", data_send, url, up_page);
-}
+};
 
 

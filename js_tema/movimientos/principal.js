@@ -20,7 +20,7 @@ let metodos_de_envio_disponibles = () => {
 
     let url = "../pagos/index.php/api/afiliados/metodos_disponibles_pago/format/json/";
     request_enid("GET", {}, url, response_metodos_envio, ".place_info_cuentas_pago");
-}
+};
 let response_metodos_envio = (data) => {
     render_enid(".place_info_cuentas_pago", data);
     $(".actualizar_form").click(registra_actualizacion_banco_persona);
@@ -63,7 +63,7 @@ let response_metodos_envio = (data) => {
 
     });
 
-}
+};
 let muestra_imagen_banco = () => {
 
 
@@ -78,7 +78,7 @@ let muestra_imagen_banco = () => {
     } else {
         render_enid(".place_imagen_banco", "");
     }
-}
+};
 let registra_actualizacion_banco_persona = () => {
 
     let flag_1 = valida_banco_seleccionado();
@@ -96,7 +96,7 @@ let registra_actualizacion_banco_persona = () => {
         request_enid("PUT", data_send, url, metodos_de_envio_disponibles, ".place_info_cuentas_pago");
     }
 
-}
+};
 let valida_banco_seleccionado = () => {
 
     banco = get_parameter(".banco_cuenta");
@@ -115,15 +115,15 @@ let valida_banco_seleccionado = () => {
         render_enid(".place_banco", "");
         return 1;
     }
-}
+};
 let valida_tarjeta_registrada = () => {
 
     set_option("numero_tarjeta", get_parameter(".numero_tarjeta"));
     return val_text_form(".numero_tarjeta", ".place_numero_tarjeta", 16, "Número de tarjeta");
 
-}
+};
 let valida_propietario_tarjeta = () => {
 
     set_optino("propietario", get_parameter(".propietario"));
     return val_text_form(".propietario", ".place_propietario_tarjeta", 5, "Propietario de la tarjeta");
-}
+};

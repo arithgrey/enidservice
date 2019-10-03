@@ -6,14 +6,14 @@ let carga_form_img = () => {
 	let url        = "../q/index.php/api/img/form_img_servicio_producto/format/json/";
 	let data_send  = $.param({"id_servicio" : get_option("servicio")});		    
     request_enid("GET", data_send , url , response_cargar_form , ".place_img_producto" );					
-}
+};
 let response_cargar_form = data => {
 
     render_enid(".place_img_producto" , data);
     despliega([".guardar_img_enid" , "#guardar_img"]);
     $(".imagen_img").change(upload_imgs_enid_pre);
     recorre("#guardar_img");
-}
+};
 let upload_imgs_enid_pre = function(){
 
     
@@ -29,7 +29,7 @@ let upload_imgs_enid_pre = function(){
         $("#form_img_enid").submit(registra_img_servicio);            
     };
     reader.readAsDataURL(file);
-}
+};
 let registra_img_servicio = e =>{
     e.preventDefault();
 
@@ -60,7 +60,7 @@ let registra_img_servicio = e =>{
     carga_informacion_servicio(1);
     $.removeData(formData);
 
-}
+};
 let response_load_image =  data =>{
 
     switch(array_key_exists("status_imagen_servicio", data)) {

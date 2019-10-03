@@ -7,7 +7,7 @@ window.onpopstate = function (event) {
 
         valida_retorno();
     }
-}
+};
 
 let id_tarea = 0;
 let persona = 0;
@@ -81,7 +81,7 @@ let retorno =  () =>  {
             compras_usuario();
             break;
     }
-}
+};
 let alcance_producto =  function (e) {
 
     let url = "../q/index.php/api/servicio/alcance_producto/format/json/";
@@ -89,7 +89,7 @@ let alcance_producto =  function (e) {
     request_enid("GET", data_send, url, function (data) {
         redirect("../producto/?producto=" + data);
     });
-}
+};
 let notifica_tipo_compra =  (tipo, recibo) => {
 
     let url = "../q/index.php/api/intento_compra/index/format/json/";
@@ -148,4 +148,4 @@ let valida_retorno =  () => {
         }
 
     }
-}
+};

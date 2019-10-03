@@ -62,11 +62,11 @@ let carga_productos_sugeridos = () => {
 	let q 			=  get_parameter(".qservicio");
 	let data_send 	= {"id_servicio" :  q};
 	request_enid( "GET",  data_send, url, response_carga_productos);
-}
+};
 let response_carga_productos = data =>{
 
 	if (data["sugerencias"] == undefined ){
 		$(".text_interes").removeClass("hidden");
 		render_enid(".place_tambien_podria_interezar" , data);
 	}
-}
+};

@@ -11,8 +11,8 @@ let busqueda =  (e) =>{
     request_enid( "GET",  data_send, url, r_busqueda);
     e.preventDefault();
 
-}
+};
 let r_busqueda =  (data)  => {
 
     render_enid(".place_tiempo_entrega" , data)
-}
+};

@@ -83,7 +83,7 @@ let retorno = () => {
             compras_usuario();
             break;
     }
-}
+};
 
 let alcance_producto =  function(e) {
 
@@ -101,4 +101,4 @@ let alcance_producto =  function(e) {
     }).fail(function () {
         show_error_enid(".place_buzon", "Error ... ");
     });
-}
+};

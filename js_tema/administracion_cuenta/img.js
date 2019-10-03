@@ -6,14 +6,14 @@ let carga_form_imagenes_usuario = () => {
     let data_send = {};
     let url = "../q/index.php/api/img/form_img_user/format/json/";
     request_enid("GET", data_send, url, response_carga_form_imagenes, ".place_form_img");
-}
+};
 
 let response_carga_form_imagenes = data => {
 
     render_enid(".place_form_img", data);
     $(".imagen_img").change(upload_pre);
 
-}
+};
 let upload_pre = function () {
 
 
@@ -27,7 +27,7 @@ let upload_pre = function () {
     };
     reader.readAsDataURL(file);
 
-}
+};
 
 let registra_img_usr = e => {
 
@@ -51,4 +51,4 @@ let registra_img_usr = e => {
 
     });
     $.removeData(formData);
-}
+};

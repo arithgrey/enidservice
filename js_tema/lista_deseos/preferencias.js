@@ -51,7 +51,7 @@ let agrega_interes = function(e)  {
     let url = "../q/index.php/api/usuario_clasificacion/interes/format/json/";
     let data_send = {id_clasificacion: id_clasificacion};
     request_enid("PUT", data_send, url, response_agrega_interes, ".place_resumen_servicio");
-}
+};
 
 let response_agrega_interes = data => {
 
@@ -59,4 +59,4 @@ let response_agrega_interes = data => {
     let preferencia = ".preferencia_" + get_option("id_clasificacion");
     let x = (data.tipo > 0 ) ? $(preferencia).addClass("selected_clasificacion") : $(preferencia).removeClass("selected_clasificacion");
 
-}
+};
