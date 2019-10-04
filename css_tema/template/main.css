@@ -367,8 +367,6 @@ li {
 .w_15 {
     width: 15px !important;
 }
-
-/*Todo lo que pertenece a medios*/
 @media only screen and (max-width: 991px) {
 
     .btn_whatsApp {
@@ -590,11 +588,13 @@ input {
     margin-top: 20px !important;
 }
 
+/*
 .titulo_enid_sm {
     font-weight: bold;
     color: black !important;
     font-size: 2em !important;
 }
+ */
 
 .titulo_enid_sm_sm {
     font-weight: bold;

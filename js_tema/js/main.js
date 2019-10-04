@@ -6,7 +6,6 @@ let tipo_negocio = 0;
 let option = [];
 $("footer").ready(() => {
 
-
     set_option({
         "in_session": get_parameter(".in_session"),
         "is_mobile": get_parameter(".is_mobile"),
@@ -19,23 +18,35 @@ $("footer").ready(() => {
     set_titulo_web(get_parameter(".titulo_web"));
     $(".precio").keyup(quita_espacios_input_precio);
 
-    $(".input_busqueda_producto").click(anima_busqueda);
-    $(".input_busqueda_producto").blur(anima_busqueda);
-    $('.input_busqueda_producto').keypress(valida_formato_search);
 
-    $(".telefono").keypress(valida_formato_telefono);
-    $(".telefono").focus(valida_formato_telefono);
-    $(".telefono").blur(valida_formato_telefono);
+    if ($(".input_busqueda_producto").length) {
+
+        let $busqueda_producto = $(".input_busqueda_producto");
+        $busqueda_producto.click(anima_busqueda);
+        $busqueda_producto.blur(anima_busqueda);
+        $busqueda_producto.keypress(valida_formato_search);
+    }
+
+
+    if ($(".telefono").length) {
+        $telefono = $(".telefono");
+        $telefono.keypress(valida_formato_telefono);
+        $telefono.focus(valida_formato_telefono);
+        $telefono.blur(valida_formato_telefono);
+    }
+
     $(".validar_nombre").keypress(valida_formato_nombre);
     $(".correo").keypress(valida_formato_correo);
 
 
     if ($(".input_enid input")) {
+
         let input_enid = document.getElementsByClassName("input_enid_format");
 
         for (var i = 0; i < input_enid.length; i++) {
-            if (input_enid[i].firstElementChild.tagName == "INPUT") {
 
+            let tag = input_enid[i].firstElementChild.tagName;
+            if (tag == "INPUT") {
                 if (input_enid[i].firstElementChild.value.length > 0) {
                     let next = input_enid[i].firstElementChild.nextElementSibling.className;
                     if (next.length > 1) {
@@ -46,6 +57,13 @@ $("footer").ready(() => {
             }
         }
 
+    }
+
+    if ($('.input_busqueda_inicio').length) {
+        $('.input_busqueda_inicio').next('label').addClass('focused_input');
+    }
+    if ($('.input_busqueda_termino').length) {
+        $('.input_busqueda_termino').next('label').addClass('focused_input');
     }
 
 
@@ -747,7 +765,10 @@ let envia_comentario = e => {
             set_places();
             recorre("#btn_envio_mensaje");
             let id_empresa = 1;
-            let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
+            let data_send = $("#form_contacto").serialize() + "&" + $.param({
+                "empresa": id_empresa,
+                "tipo": 2
+            });
             request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");
         }
     }
@@ -825,7 +846,7 @@ let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");
 let anima_busqueda = function (e) {
 
-
+    alert();
     if (get_option("disparador_buscados") < 1) {
 
         $(".busqueda_izquierda").removeClass("col-lg-5").addClass("col-lg-3");
