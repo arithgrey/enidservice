@@ -367,8 +367,6 @@ li {
 .w_15 {
     width: 15px !important;
 }
-
-/*Todo lo que pertenece a medios*/
 @media only screen and (max-width: 991px) {
 
     .btn_whatsApp {
@@ -513,6 +511,7 @@ input {
     border-bottom: solid 1px grey !important;
     height: 40px !important;
     appearance: none !important;
+    -moz-appearance: none !important;
     margin: 0;
     -webkit-appearance: none !important;
     outline: none;
@@ -590,11 +589,13 @@ input {
     margin-top: 20px !important;
 }
 
+/*
 .titulo_enid_sm {
     font-weight: bold;
     color: black !important;
     font-size: 2em !important;
 }
+ */
 
 .titulo_enid_sm_sm {
     font-weight: bold;
@@ -1255,13 +1256,14 @@ h2 {
 }
 
 .focus_error {
-    border: 1px solid rgb(13, 62, 86) !important;
+    /*border: 1px solid rgb(13, 62, 86) !important;*/
+    border-bottom: 1px solid red !important;
 }
 
-.menu_usuario {
-    left: -180px !important;
-    min-height: 310px;
-}
+/*.menu_usuario {*/
+/*    left: -180px !important;*/
+/*    min-height: 310px;*/
+/*}*/
 
 .input_select_busqueda {
     width: 45% !important;
@@ -1616,6 +1618,9 @@ a {
 
 .solid_bottom_3 {
     border-bottom: solid 3px #000 !important;
+}
+.solid_bottom_error_3 {
+    border-bottom: solid 3px red !important;
 }
 
 .w_15 {

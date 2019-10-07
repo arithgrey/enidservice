@@ -131,7 +131,7 @@ function sub_categorias_destacadas($param)
 
 function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
 {
-
+    $response = "";
     if (is_numeric($attributes)) {
 
         switch ($attributes) {
@@ -487,10 +487,10 @@ function remove_comma($text)
     return str_replace("'", '', (str_replace('"', '', $text)));
 }
 
-function h($data = '', $h = 1, $attributes = '', $row_12 = 0, $att_header = '')
+function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
 {
 
-    $response = "";
+
     if (is_numeric($attributes) && $attributes > 0) {
 
         $response = addNRow("<h$h>".$data."</h$h>");
@@ -634,8 +634,9 @@ function push_element_json($arr, $element)
             array_push($arr, $element);
         }
 
-        return $arr;
     }
+
+    return $arr;
 }
 
 
@@ -750,11 +751,11 @@ function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
 }
 
 
-function exists_array_def($data, $key, $exists = 1, $fail = 0)
-{
-    return (is_array($data) && array_key_exists($key, $data)) ? $exists : $fail;
-
-}
+//function exists_array_def($data, $key, $exists = 1, $fail = 0)
+//{
+//    return (is_array($data) && array_key_exists($key, $data)) ? $exists : $fail;
+//
+//}
 
 
 function label($label_text = '', $attributes = [], $row = 0)
@@ -825,20 +826,19 @@ function url_recuperacion_password()
 }
 
 
-function get_dominio($url)
-{
-    $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
-    $url = explode('/', str_replace($protocolos, '', $url));
+//function get_dominio($url)
+//{
+//    $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
+//    $url = explode('/', str_replace($protocolos, '', $url));
+//
+//    return $url[0];
+//}
 
-    return $url[0];
-}
-
-
-function mayus($variable)
-{
-    return strtr(strtoupper($variable), "àèìòùáéíóúçñäëïöü", "ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
-
-}
+//function mayus($variable)
+//{
+//    return strtr(strtoupper($variable), "àèìòùáéíóúçñäëïöü", "ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
+//
+//}
 
 
 function get_campo($param, $key, $label = "", $add_label = 0)
@@ -874,23 +874,27 @@ function now_enid()
 
 function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
 {
+    $response = 0;
     if (is_numeric($cantidad) == is_numeric($porciento)) {
 
-        return ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100,
+        $response = ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100,
                 $decimales)) : ($cantidad * $porciento / 100);
 
     }
+
+    return $response;
 }
 
 
-function porcentaje_total($cantidad, $total, $decimales = 2)
+function porcentaje_total($cantidad, $total)
 {
-
+    $response = 0;
     if ($total > 0) {
 
-        return $cantidad * 100 / $total;
+        $response = $cantidad * 100 / $total;
     }
 
+    return $response;
 
 }
 
@@ -1020,7 +1024,7 @@ function valida_seccion_activa($seccion, $activa)
 
 function randomString($length = 10, $uc = true, $n = true, $sc = false)
 {
-
+    $rstr = "";
     $source = 'abcdefghijklmnopqrstuvwxyz';
     if ($uc == 1) {
         $source .= 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -1032,7 +1036,7 @@ function randomString($length = 10, $uc = true, $n = true, $sc = false)
         $source .= '|@#~$%()=^*+[]{}-_';
     }
     if ($length > 0) {
-        $rstr = "";
+
         $source = str_split($source, 1);
         for ($i = 1; $i <= $length; $i++) {
             mt_srand((double)microtime() * 1000000);
@@ -1163,6 +1167,7 @@ function border($attributes = [])
 
 function debug($msg, $array = 0)
 {
+    $response = false;
     if (es_local() > 0) {
 
         $_date_fmt = 'Y-m-d H:i:s';
@@ -1184,8 +1189,10 @@ function debug($msg, $array = 0)
         flock($fp, LOCK_UN);
         fclose($fp);
 
-        return true;
+        $response = true;
     }
+
+    return $response;
 
 }
 
@@ -1286,14 +1293,14 @@ function iframe($attributes = '', $row_12 = 0)
 }
 
 
-function center($attributes = '', $row_12 = 0)
-{
-
-    $base = "<center ".add_attributes($attributes)." ></center>";
-
-    return ($row_12 == 0) ? $base : addNRow($base);
-
-}
+//function center($attributes = '', $row_12 = 0)
+//{
+//
+//    $base = "<center ".add_attributes($attributes)." ></center>";
+//
+//    return ($row_12 == 0) ? $base : addNRow($base);
+//
+//}
 
 /*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
 
@@ -1364,15 +1371,15 @@ function evita_basura($text)
 }
 
 
-function add_hour($num_hours)
-{
-    $nowtime = date("Y-m-d H:i:s");
-    $num_hours = $num_hours * 60;
-    $date = date('H:i:s', strtotime($nowtime.' + '.$num_hours.' minute'));
-
-    return $date;
-
-}
+//function add_hour($num_hours)
+//{
+//    $nowtime = date("Y-m-d H:i:s");
+//    $num_hours = $num_hours * 60;
+//    $date = date('H:i:s', strtotime($nowtime.' + '.$num_hours.' minute'));
+//
+//    return $date;
+//
+//}
 
 function get_logo($is_mobile, $tipo = 0)
 {
@@ -1632,12 +1639,13 @@ function append($array, $col = 0, $num_col = 0)
             $response = ($num_col > 0) ? d($response, $num_col) : d($response);
         }
 
-        return $response;
 
     } else {
 
         echo "No es array -> ".print_r($array);
     }
+
+    return $response;
 }
 
 
@@ -1672,9 +1680,10 @@ function es_email_valido($email)
 
 }
 
-function get_menu_session($is_mobile, $in_session, $proceso_compra = 1)
+function get_menu_session($in_session, $proceso_compra = 1)
 {
 
+    $response = "";
     if ($in_session < 1) {
 
         $vender = a_enid(
@@ -1688,15 +1697,9 @@ function get_menu_session($is_mobile, $in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-                text_icon(
-
-                        "fa fa-user"
-                        ,
-                        " INICIAR SESIÓN ",
-                        [
-
-                        ], 0
-
+                text_icon("fa fa-user", " INICIAR SESIÓN ",
+                        [],
+                        0
                 )
                 ,
                 [
@@ -1712,14 +1715,12 @@ function get_menu_session($is_mobile, $in_session, $proceso_compra = 1)
                     "d-flex justify-content-end bd-highlight-row-reverse bd-highlight",
                     "mr-3 ");
 
-            return $response;
-
 
         }
 
-
     }
 
+    return $response;
 
 }
 
@@ -1778,42 +1779,34 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
 {
 
-    $vinicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
-    $vfin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
+    $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
+    $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
-
-    $r[] = btw(
-            d("Inicio", 'strong top_30 '),
-            d(input([
+    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha inicio",
+            [
                     "name" => 'fecha_inicio',
-                    "class" => "form-control input-sm top_30",
+                    "class" => "input_busqueda_inicio",
                     "id" => 'datetimepicker4',
-                    "value" => $vinicio,
+                    "value" => $inicio,
                     "type" => "date",
-            ])),
-            'col-lg-4 d-flex align-items-center justify-content-between'
+            ]
     );
 
 
-    $r[] = btw(
-            d("Fin", 'strong top_30'),
-            d(input(
-                    [
+    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha término",
+            [
+                    "name" => 'fecha_termino',
+                    "class" => "input_busqueda_termino",
+                    "id" => 'datetimepicker5',
+                    "value" => $fin,
+                    "type" => "date",
+            ]
 
-                            "name" => 'fecha_termino',
-                            "class" => "form-control input-sm top_30",
-                            "id" => 'datetimepicker5',
-                            "value" => $vfin,
-                            "type" => "date",
-
-                    ]
-            )),
-            'col-lg-4 d-flex align-items-center justify-content-between '
     );
 
-    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda ")), 'col-lg-4 top_30');
+    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), 'col-lg-4 mt-5 p-0 p-0');
 
-    return append($r);
+    return contaiter(append($r));
 
 
 }
@@ -1939,6 +1932,7 @@ function format_phone($number)
 function path_enid($pos, $extra = 0, $link_directo = 0)
 {
 
+    $path = "";
     $base_url = [
             "url_home" => "../reporte_enid",
             "forma_pago" => "forma_pago/?info=1",
@@ -2089,7 +2083,6 @@ function social($proceso_compra, $desc_web, $black = 1)
                         "target" => "_black",
                         "class" => "fa fa-twitter ".$color,
                         "title" => "Tweet",
-                        "target" => "_black",
                         "data-size" => "large",
                         "href" => $url_twitter,
                 ]);
@@ -2744,6 +2737,7 @@ function menu_session_mobil($in_session)
 function tmp_menu($is_mobile, $id_usuario, $menu)
 {
 
+    $extra = is_mobile() ? " notificaciones_enid_mb " : " notificaciones_enid ";
     $notificaciones = btw(
 
 
@@ -2759,7 +2753,7 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
                     ,
                     [
-                            "class" => "blue_enid dropdown-toggle mr-3",
+                            "class" => "dropdown-toggle mr-3",
                             "data-toggle" => "dropdown",
                     ]
             )
@@ -2770,8 +2764,8 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
                     place("place_notificaciones_usuario padding_10 shadow border")
                     ,
-                    add_text("dropdown-menu shadow ",
-                            ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
+                    add_text("dropdown-menu shadow ", $extra)
+
             )
             ,
             "dropdown dropleft  menu_notificaciones_progreso_dia "
@@ -2935,29 +2929,38 @@ function crea_estrellas($calificacion, $sm = 0)
     return add_text($valoraciones, $restantes);
 }
 
-function input_frm($col, $text_label, $config_input = [], $config_label = [])
+function input_frm($col, $text_label, $config_input = [], $text_place = "")
 {
 
-
+    $config_label = [];
     if (es_data($config_input)) {
 
         $config_label["for"] = $config_input["id"];
         $config_label["id"] = "label_".$config_input["id"];
         $config_label["class"] = "cursor_pointer label_".$config_input["id"];
-
     }
 
-    $r[] = btw(input($config_input, 0, 0),
+
+    $str = strlen($text_place) > 0 ? $text_place : "";
+    $text = add_text(
+            input($config_input, 0, 0),
             label(
                     $text_label
                     ,
                     $config_label
-            ),
-            "input_enid_format w-100"
+            )
+            ,
+            d(
+                    $str,
+                    add_text("solid_bottom_error_3 mt-3  d-none place_input_form_",
+                            $config_input["id"])
+            )
     );
+    $r[] = d($text, "input_enid_format w-100");
     if (is_numeric($col)) {
 
         return ($col > 0) ? d(append($r), $col) : append($r);
+
     } else {
 
         return d(append($r), $col);
@@ -2971,7 +2974,6 @@ function contaiter($str, $attributes = [], $fluid = 1)
 
     $f = ($fluid > 0) ? "container-fluid" : 'container';
     $att = [];
-    $response = "";
 
     if (intval($attributes) && $attributes > 0) {
 

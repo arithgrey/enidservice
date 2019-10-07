@@ -35,7 +35,7 @@
 
         <?php if ($is_mobile < 1 && $in_session < 1): ?>
 
-            <?= get_menu_session(0, $in_session, $proceso_compra) ?>
+            <?= get_menu_session( $in_session, $proceso_compra) ?>
             <?= d(hrz(get_logo($is_mobile), $frecuentes, 2, "d-flex align-items-center"), 5) ?>
             <?= d(frm_search($clasificaciones_departamentos, $in_session), "col-lg-7 mt-4 p-0") ?>
 

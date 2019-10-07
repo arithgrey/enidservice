@@ -143,7 +143,7 @@ if (!function_exists('invierte_date_time')) {
             "placeholder" => "5552...",
             "maxlength" => 10,
             "minlength" => 8,
-        ]);
+        ], _text_telefono);
 
 
         $z[] = input_frm("col-lg-6 mt-5", "PASSWORD", [
@@ -152,7 +152,7 @@ if (!function_exists('invierte_date_time')) {
             "class" => "pw",
             "required" => true,
             "placeholder" => "***"
-        ]);
+        ], _text_pass);
 
         $r[] = d(append($z), "informacion_del_cliente  col-lg-12");
 

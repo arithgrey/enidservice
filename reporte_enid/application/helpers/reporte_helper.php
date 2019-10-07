@@ -1,115 +1,189 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
 
     function render_reporte($data)
     {
 
-
-        $response[] = d(place("place_reporte"), ["class" => "tab-pane", "id" => 'reporte']);
-
-        $i[] = d("INDICADORES ENID SERVICE", "titulo_enid_sm", 1);
-        $i[] = form_open("", ["class" => 'form_busqueda_global_enid']);
-        $i[] = frm_fecha_busqueda();
-        $i[] = form_close();
-        $i[] = addNRow(place("place_usabilidad top_50"));
-        $response[] = d(append($i), ["class" => "tab-pane active", "id" => 'tab_default_1']);
-
-
-        $ds[] = d("DISPOSITIVOS ", "titulo_enid_sm", 1);
-        $ds[] = form_open("", ["class" => 'f_dipositivos ']);
-        $ds[] = frm_fecha_busqueda();
-        $ds[] = form_close();
-        $ds[] = addNRow(place("top_50 repo_dispositivos"));
-        $response[] = d(append($ds), ["class" => "tab-pane", "id" => 'tab_dispositivos']);
-
-
-        $v[] = d("VISITAS WEB ", "titulo_enid_sm", 1);
-        $v[] = form_open("", ["class" => 'f_usabilidad']);
-        $v[] = frm_fecha_busqueda();
-        $v[] = form_close();
-        $v[] = place("top_50 place_usabilidad_general");
-
-        $response[] = d(append($v), ["class" => "tab-pane", "id" => 'tab_default_2']);
-
-
-        $p[] = d("TIPOS DE ENTREGAS ", "titulo_enid_sm", 1);
-        $p[] = form_open("", ["class" => 'form_tipos_entregas']);
-        $p[] = frm_fecha_busqueda();
-        $p[] = form_close();
-        $p[] = addNRow(place("place_tipos_entregas top_50"));
-        $response[] = d(append($p), ["class" => "tab-pane", "id" => 'tab_tipos_entregas']);
-
-
-        $ac[] = d("ACTIVIDAD ", "titulo_enid_sm", 1);
-        $ac[] = form_open("", ["class" => 'f_actividad_productos_usuarios ']);
-        $ac[] = frm_fecha_busqueda();
-        $ac[] = form_close();
-        $ac[] = addNRow(place("top_50 repo_usabilidad"));
-
-        $response[] = d(append($ac), ["class" => "tab-pane", "id" => 'tab_usuarios']);
-
-        $t[] = d("TAREAS RESUELTAS", "titulo_enid_sm", 1);
-        $t[] = render_atencion_cliente();
-        $response[] = d(append($t), ["class" => "tab-pane", "id" => "tab_atencion_cliente"]);
-
-        $response[] = d(d("PERSONAS QUE PROMOCIONAN LOS PRODUCTOS Y SERVICIOS", "titulo_enid_sm", 1),
-            [
-                "class" => "tab-pane", "id" => "tab_afiliaciones"
-            ]
-        );
-
-        $b[] = d("PRODUCTOS MÁS BUSCADOS POR CLIENTES", "titulo_enid_sm", 1);
-        $b[] = get_form_busqueda_productos_solicitados();
-        $response[] = d(append($b), ["class" => "tab-pane", "id" => "tab_busqueda_productos"]);
-
-
-        $dest[] = d("CATEGORÍAS DESTACADAS ", "titulo_enid_sm", 1);
-        $dest[] = crea_repo_categorias_destacadas(sub_categorias_destacadas($data["categorias_destacadas"]));
-        $response[] = d(append($dest), ["class" => "tab-pane", "id" => "tab_productos_publicos"]);
-
-
-        $res[] = d(get_menu(), 2);
-        $res[] = d(d(append($response), "tab-content"), 10);
-        return d(d(append($res), 'contenedor_principal_enid_service'), "contenedor_principal_enid");
-
-    }
-
-
-    function render_atencion_cliente()
-    {
-
-        $r[] = d(
-            ul(
+        $response[] = d(
+                place("place_reporte"),
                 [
-                    li(a_enid("Atención al cliente", ["href" => "#tab_1_actividad", "data-toggle" => "tab"]), ["class" => "active"]),
-                    li(a_enid("Comparativa", ["href" => "#tab_2_comparativa", "data-toggle" => "tab"]), ["class" => "comparativa"]),
-                    li(a_enid("Calidad y servicio", ["href" => "#tab_3_comparativa", "data-toggle" => "tab"]), ["class" => "calidad_servicio"])
-
-                ],
-                "nav nav-tabs"
-            ), "panel-heading"
+                        "class" => "tab-pane",
+                        "id" => 'reporte',
+                ]
         );
-        $z[] = d(get_form_busqueda_desarrollo(), ["class" => "tab-pane fade in active", "id" => "tab_1_actividad"]);
-        $z[] = d(addNRow(place("place_metricas_comparativa top_50")), ["class" => "tab-pane fade", "id" => "tab_2_comparativa"]);
-        $z[] = d(frm_busqueda_desarrollo(), ["class" => "tab-pane fade", "id" => "tab_3_comparativa"]);
 
-        $r[] = d(append($z), "tab-content");
-        return append($r);
+        $response[] = format_indicadores();
+        $response[] = format_dispositivos();
+        $response[] = format_visitas();
+        $response[] = format_tipo_entrega();
+        $response[] = format_actividad();
+        $response[] = format_productos_solicitados();
+        $response[] = format_categorias($data);
+        $res[] = d(get_menu(), "col-lg-2 p-0 contenedor_menu");
+        $res[] = d(d(append($response), "tab-content"), 10);
+
+        return d(append($res), "container-fluid");
+
+    }
+
+    /**
+     * @param $data
+     * @param  array  $dest
+     * @param  array  $response
+     * @return array
+     */
+    function format_categorias(array $data)
+    {
+        $r[] = h("CATEGORÍAS DESTACADAS", 3, "mb-5 h3 text-uppercase strong text-center");
+        $r[] = crea_repo_categorias_destacadas(
+                sub_categorias_destacadas($data["categorias_destacadas"]));
+
+        return d(append($r),
+                [
+                        "class" => "tab-pane",
+                        "id" => "tab_productos_publicos",
+                ]
+        );
 
 
     }
 
+    /**
+     * @param  array  $b
+     * @param  array  $response
+     * @return array
+     */
+    function format_productos_solicitados()
+    {
+        $form = base_busqueda_form('PRODUCTOS MÁS BUSCADOS POR CLIENTES',
+                'form_busqueda_productos_solicitados', 'place_keywords');
 
-    function get_form_busqueda_productos_solicitados()
+        $response = d($form,
+                [
+                        "class" => "tab-pane",
+                        "id" => "tab_busqueda_productos",
+                ]
+        );
+
+        return $response;
+    }
+
+    /**
+     * @param  array  $ac
+     * @param  array  $response
+     * @return array
+     */
+    function format_actividad()
     {
 
-        $r[] = form_open("", ["class" => 'form_busqueda_productos_solicitados']);
+        $form = base_busqueda_form('ACTIVIDAD',
+                'f_actividad_productos_usuarios', 'repo_usabilidad');
+
+        return d($form, [
+                        "class" => "tab-pane",
+                        "id" => 'tab_usuarios',
+                ]
+        );
+
+
+    }
+
+    /**
+     * @param  array  $p
+     * @param  array  $response
+     * @return array
+     */
+    function format_tipo_entrega()
+    {
+
+        $form = base_busqueda_form('TIPOS DE ENTREGAS', 'form_tipos_entregas',
+                'place_tipos_entregas');
+
+        return d($form,
+                [
+                        "class" => "tab-pane",
+                        "id" => 'tab_tipos_entregas',
+                ]
+        );
+
+
+    }
+
+    /**
+     * @param  array  $v
+     * @param  array  $response
+     * @return array
+     */
+    function format_visitas()
+    {
+
+        $form = base_busqueda_form('visitas web', 'f_usabilidad',
+                'place_usabilidad_general');
+
+        return d($form, [
+                "class" => "tab-pane",
+                "id" => 'tab_default_2',
+        ]);
+
+
+    }
+
+    /**
+     * @param  array  $ds
+     * @param  array  $response
+     * @return array
+     */
+    function format_dispositivos()
+    {
+
+        $form = base_busqueda_form('dispositivos', 'f_dipositivos', 'repo_dispositivos');
+
+        return d($form,
+                [
+                        "class" => "tab-pane",
+                        "id" => 'tab_dispositivos',
+                ]
+        );
+
+
+    }
+
+    /**
+     * @param  array  $i
+     * @param  array  $response
+     * @return array
+     */
+    function format_indicadores()
+    {
+        $form = base_busqueda_form(
+                "indicadores", 'form_busqueda_global_enid', "place_usabilidad");
+
+        return d($form,
+                [
+                        "class" => "tab-pane active",
+                        "id" => 'tab_default_1',
+                ]
+        );
+
+
+    }
+
+    /**
+     * @param  array  $r
+     * @return array
+     */
+    function base_busqueda_form($titulo_seccion, $clase_form, $place)
+    {
+
+        $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
+        $r[] = form_open("", ["class" => $clase_form]);
         $r[] = frm_fecha_busqueda();
         $r[] = form_close();
-        $z[] = addNRow(append($r));
-        $z[] = addNRow(place("place_keywords top_50"));
-        return append($z);
+        $r[] = place($place." mt-5");
 
+        return append($r);
     }
 
 
@@ -121,170 +195,143 @@ if (!function_exists('invierte_date_time')) {
         $f[] = form_close();
         $r[] = addNRow(append($f));
         $r[] = addNRow(place("place_metricas_servicio"));
+
         return append($r);
 
     }
-
-
-    function get_form_busqueda_desarrollo()
-    {
-
-
-        $f[] = form_open("", ["class" => 'form_busqueda_desarrollo']);
-        $f[] = frm_fecha_busqueda();
-        $f[] = form_close();
-        $r[] = addNRow(append($f));
-        $r[] = addNRow(place(" top_50 place_metricas_desarrollo"));
-        return append($r);
-
-    }
-
 
     function crea_repo_categorias_destacadas($param)
     {
-        $z = 0;
+
+        $r = [];
         foreach ($param as $row) {
 
-
-            $total = $row["total"];
-
-            if ($z == 0) {
-                echo "<ul class='clasificaciones_sub_menu_ul'>";
-            }
-            $href = path_enid("search", "/?q=&q2=" . $row["primer_nivel"]);
-            echo "<table>
-                      <tr>
-                        " . td($total) . "
-                        " . td(a_enid($row["nombre_clasificacion"]),
+            $total = p($row["total"], 'h4 strong');
+            $href = path_enid("search", "/?q=&q2=".$row["primer_nivel"]);
+            $clasificacion = a_enid($row["nombre_clasificacion"],
                     [
-                        "href" => $href,
-                        "class" => 'text_categoria_sub_menu'
+                            "href" => $href,
+                            "class" => "black strong",
                     ]
-                ) . "
-                      </tr>
-                      </table>";
-            $z++;
-            if ($z == 5) {
-                $z = 0;
-                echo "</ul>";
-            }
+            );
+            $r[] = d(flex($total, $clasificacion,
+                    'mt-2 justify-content-between align-items-center'), 4, 1);
 
         }
+
+        return append($r);
     }
 
 
     function get_menu()
     {
+
+
         $list = [
-            li(a_enid(text_icon("fa fa-money", "PEDIDOS"),
-                    [
-                        "id" => "btn_servicios",
-                        "href" => path_enid("pedidos"),
-                        "class" => "black   dispositivos"
-                    ])
-            ),
-
-            li(a_enid(text_icon("fa-shopping-bag", "COMPRAS"),
-                    [
-                        "id" => "btn_servicios",
-                        "href" => path_enid("compras"),
-                        "class" => "black   dispositivos"
-                    ])
-            ),
-            li(
-                a_enid(text_icon('fa fa-globe', "INDICADORES"),
-                    [
-                        "href" => "#tab_default_1",
-                        "data-toggle" => "tab",
-                        "class" => 'btn_menu_tab cotizaciones black  '
-                    ]
+                a_enid(text_icon("fa fa-money", "pedidos"),
+                        [
+                                "id" => "btn_servicios",
+                                "href" => path_enid("pedidos"),
+                                "class" => "text-uppercase black   dispositivos",
+                        ]
                 )
-            ),
-            li(
-                a_enid(text_icon('fa fa-clock-o', "TIEMPO DE VENTA"),
-                    [
-                        "href" => path_enid("tiempo_venta"),
-                        "class" => ' black  '
-                    ]
+            ,
+
+                a_enid(text_icon("fa-shopping-bag", "compras"),
+                        [
+                                "id" => "btn_servicios",
+                                "href" => path_enid("compras"),
+                                "class" => "text-uppercase black   dispositivos",
+                        ]
+                )
+            ,
+
+                a_enid(text_icon('fa fa-globe', "indicadores"),
+                        [
+                                "href" => "#tab_default_1",
+                                "data-toggle" => "tab",
+                                "class" => 'text-uppercase text-uppercase btn_menu_tab cotizaciones black  ',
+                        ]
+                )
+            ,
+
+                a_enid(text_icon('fa fa-clock-o', "tiempo de venta"),
+                        [
+                                "href" => path_enid("tiempo_venta"),
+                                "class" => 'text-uppercase black',
+                        ]
                 )
 
-            ),
-            li(
-                a_enid(text_icon('fa fa-exchange', "VENTAS PUNTOS DE ENCUENTRO"),
-                    [
-                        "href" => path_enid("ventas_encuentro"),
-                        "class" => ' black  '
-                    ]
+            ,
+
+                a_enid(text_icon('fa fa-exchange', "puntos de encuentro"),
+                        [
+                                "href" => path_enid("ventas_encuentro"),
+                                "class" => 'text-uppercase black  active',
+                        ]
+                )
+
+            ,
+
+                a_enid(text_icon("fa fa-shopping-cart", "productos solicitados"),
+                        [
+                                "href" => "#tab_busqueda_productos",
+                                "data-toggle" => "tab",
+                                "class" => 'text-uppercase black',
+
+                        ]
+                )
+            ,
+                a_enid(text_icon("fa fa-fighter-jet", "tipos entregas"),
+                        [
+                                "href" => "#tab_tipos_entregas",
+                                "data-toggle" => "tab",
+                                "class" => 'text-uppercase black ',
+
+                        ]
+                )
+            ,
+
+                a_enid(text_icon("fa fa-user", "usuarios"),
+                        [
+                                "id" => "btn_usuarios",
+                                "href" => "#tab_usuarios",
+                                "data-toggle" => "tab",
+                                "class" => "text-uppercase black   btn_repo_afiliacion text-uppercase",
+                        ]
+                )
+            ,
+                a_enid(text_icon("fa-check-circle", "ventas por categorias"),
+                        [
+
+                                "href" => "#tab_productos_publicos",
+                                "data-toggle" => "tab",
+                                "class" => "text-uppercase black  text-uppercase",
+                        ]
+                )
+            ,
+
+                a_enid(text_icon("fa fa-flag", "actividad"),
+                        [
+                                "id" => "btn_servicios",
+                                "href" => "#tab_default_2",
+                                "data-toggle" => "tab",
+                                "class" => "text-uppercase black   usabilidad_btn",
+                        ]
+                )
+            ,
+                a_enid(text_icon("fa fa-mobile", "dispositivos"),
+                        [
+                                "id" => "btn_servicios",
+                                "href" => "#tab_dispositivos",
+                                "data-toggle" => "tab",
+                                "class" => "text-uppercase black   dispositivos",
+                        ]
                 ),
-                "active"
-            ),
-            li(
-                a_enid(text_icon("fa fa-shopping-cart", "PRODUCTOS SOLICITADOS"),
-                    [
-                        "href" => "#tab_busqueda_productos",
-                        "data-toggle" => "tab",
-                        "class" => 'black   btn_repo_afiliacion',
-                        "id" => 'btn_repo_afiliacion'
-                    ]
-                )
-            ),
-            li(a_enid(text_icon("fa fa-fighter-jet", "TIPOS ENTREGAS"),
-                    [
-                        "href" => "#tab_tipos_entregas",
-                        "data-toggle" => "tab",
-                        "class" => 'black ',
-                        "id" => 'btn_repo_afiliacion'
-                    ]
-                )
-            ),
-
-            li(a_enid(text_icon("fa fa-user", "ACTIVIDAD USUARIOS"),
-                    [
-                        "id" => "btn_usuarios",
-                        "href" => "#tab_usuarios",
-                        "data-toggle" => "tab",
-                        "class" => "black   btn_repo_afiliacion"
-                    ])
-            ),
-            li(a_enid(text_icon("fa-check-circle", "CATEGORÍAS DESTACADAS"),
-                    [
-                        "id" => "btn_repo_afiliacion",
-                        "href" => "#tab_productos_publicos",
-                        "data-toggle" => "tab",
-                        "class" => "black   btn_repo_afiliacion"
-                    ]
-                )
-            ),
-
-            li(a_enid(text_icon("fa fa-handshake-o", "ATENCIÓ AL CLIENTE"),
-                    [
-                        "id" => "btn_repo_atencion_cliente",
-                        "href" => "#tab_atencion_cliente",
-                        "data-toggle" => "tab",
-                        "class" => "black   btn_repo_atencion_cliente"
-                    ])
-            ),
-            li(a_enid(text_icon("fa fa-flag", "ACTIVIDAD"),
-                    [
-                        "id" => "btn_servicios",
-                        "href" => "#tab_default_2",
-                        "data-toggle" => "tab",
-                        "class" => "black   usabilidad_btn"
-                    ])
-            ),
-            li(a_enid(text_icon("fa fa-mobile", "DISPOSITIVOS"),
-                    [
-                        "id" => "btn_servicios",
-                        "href" => "#tab_dispositivos",
-                        "data-toggle" => "tab",
-                        "class" => "black   dispositivos"
-                    ])
-            )
-
 
         ];
 
-        return ul($list, "nav tabs");
+        return append($list);
     }
 
 

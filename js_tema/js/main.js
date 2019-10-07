@@ -4,8 +4,16 @@ let flag_titulo_web = 0;
 let tarea = 0;
 let tipo_negocio = 0;
 let option = [];
-$("footer").ready(() => {
+let $telefono = "";
+const MIN_NOMBRE_LENGTH = 2;
+const MIN_CORREO_LENGTH = 5;
+const MIN_TELEFONO_LENGTH = 7;
+const MIN_TELEFONO_MOBILE_LENGTH = 9;
+const TELEFONO_MOBILE_LENGTH = 10;
+const MIN_PW_LENGTH = 5;
 
+
+$("footer").ready(() => {
 
     set_option({
         "in_session": get_parameter(".in_session"),
@@ -19,34 +27,44 @@ $("footer").ready(() => {
     set_titulo_web(get_parameter(".titulo_web"));
     $(".precio").keyup(quita_espacios_input_precio);
 
-    $(".input_busqueda_producto").click(anima_busqueda);
-    $(".input_busqueda_producto").blur(anima_busqueda);
-    $('.input_busqueda_producto').keypress(valida_formato_search);
 
-    $(".telefono").keypress(valida_formato_telefono);
-    $(".telefono").focus(valida_formato_telefono);
-    $(".telefono").blur(valida_formato_telefono);
+    if ($(".input_busqueda_producto").length) {
+
+        let $busqueda_producto = $(".input_busqueda_producto");
+        $busqueda_producto.click(anima_busqueda);
+        $busqueda_producto.blur(anima_busqueda);
+        $busqueda_producto.keypress(valida_formato_search);
+    }
+
+
+    if (document.body.querySelector(".telefono")) {
+
+        $telefono = $(".telefono");
+        $telefono.keypress(valida_formato_telefono);
+        $telefono.focus(valida_formato_telefono);
+        $telefono.blur(valida_formato_telefono);
+    }
+
+    if (document.body.querySelector(".input_enid_format")) {
+
+        $(".input_enid_format :input").focus(next_label_input_focus);
+        $(".input_enid_format :input").focusout(next_label_focus_out);
+    }
+
+
     $(".validar_nombre").keypress(valida_formato_nombre);
     $(".correo").keypress(valida_formato_correo);
 
 
-    if ($(".input_enid input")) {
-        let input_enid = document.getElementsByClassName("input_enid_format");
+    verifica_formato_default_inputs();
 
-        for (var i = 0; i < input_enid.length; i++) {
-            if (input_enid[i].firstElementChild.tagName == "INPUT") {
 
-                if (input_enid[i].firstElementChild.value.length > 0) {
-                    let next = input_enid[i].firstElementChild.nextElementSibling.className;
-                    if (next.length > 1) {
-                        let selector = '.input_enid_format .' + next;
-                        $(selector).addClass('focused_input')
-                    }
-                }
-            }
-        }
-
-    }
+    // if ($('.input_busqueda_inicio').length) {
+    //     $('.input_busqueda_inicio').next('label').addClass('focused_input');
+    // }
+    // if ($('.input_busqueda_termino').length) {
+    //     $('.input_busqueda_termino').next('label').addClass('focused_input');
+    // }
 
 
 });
@@ -747,7 +765,10 @@ let envia_comentario = e => {
             set_places();
             recorre("#btn_envio_mensaje");
             let id_empresa = 1;
-            let data_send = $("#form_contacto").serialize() + "&" + $.param({"empresa": id_empresa, "tipo": 2});
+            let data_send = $("#form_contacto").serialize() + "&" + $.param({
+                "empresa": id_empresa,
+                "tipo": 2
+            });
             request_enid("POST", data_send, url, response_mensaje_contacto, ".place_registro_contacto");
         }
     }
@@ -923,8 +944,32 @@ let paste_search = function () {
         event.target.value = text;
     }
 };
+let next_label_input_focus = function () {
 
+    $(this).next('label').addClass('focused_input');
+    $(this).addClass('input_focus');
+}
+let next_label_focus_out = function () {
 
+    if ($(this).val() === '') {
+        $(this).next('label').removeClass('focused_input');
+        $(this).removeClass('input_focus');
+    }
+}
+let verifica_formato_default_inputs = function () {
 
+    if (document.body.querySelector(".input_enid_format")) {
+        let input_enid_format = $('.input_enid_format :input');
+        for (var i = 0; i < input_enid_format.length; i++) {
+            let $selector_input = input_enid_format[i];
+            if ($selector_input.tagName == "INPUT") {
+                if ($selector_input.value.length > 0) {
+                    let $selector_current_label = $selector_input.nextSibling;
+                    $selector_current_label.classList.add('focused_input');
+                }
+            }
+        }
+    }
+}
 
 
