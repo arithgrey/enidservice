@@ -4,6 +4,15 @@ let flag_titulo_web = 0;
 let tarea = 0;
 let tipo_negocio = 0;
 let option = [];
+let $telefono = "";
+const MIN_NOMBRE_LENGTH = 2;
+const MIN_CORREO_LENGTH = 5;
+const MIN_TELEFONO_LENGTH = 7;
+const MIN_TELEFONO_MOBILE_LENGTH = 9;
+const TELEFONO_MOBILE_LENGTH = 10;
+const MIN_PW_LENGTH = 5;
+
+
 $("footer").ready(() => {
 
     set_option({
@@ -28,43 +37,34 @@ $("footer").ready(() => {
     }
 
 
-    if ($(".telefono").length) {
+    if (document.body.querySelector(".telefono")) {
+
         $telefono = $(".telefono");
         $telefono.keypress(valida_formato_telefono);
         $telefono.focus(valida_formato_telefono);
         $telefono.blur(valida_formato_telefono);
     }
 
+    if (document.body.querySelector(".input_enid_format")) {
+
+        $(".input_enid_format :input").focus(next_label_input_focus);
+        $(".input_enid_format :input").focusout(next_label_focus_out);
+    }
+
+
     $(".validar_nombre").keypress(valida_formato_nombre);
     $(".correo").keypress(valida_formato_correo);
 
 
-    if ($(".input_enid input")) {
+    verifica_formato_default_inputs();
 
-        let input_enid = document.getElementsByClassName("input_enid_format");
 
-        for (var i = 0; i < input_enid.length; i++) {
-
-            let tag = input_enid[i].firstElementChild.tagName;
-            if (tag == "INPUT") {
-                if (input_enid[i].firstElementChild.value.length > 0) {
-                    let next = input_enid[i].firstElementChild.nextElementSibling.className;
-                    if (next.length > 1) {
-                        let selector = '.input_enid_format .' + next;
-                        $(selector).addClass('focused_input')
-                    }
-                }
-            }
-        }
-
-    }
-
-    if ($('.input_busqueda_inicio').length) {
-        $('.input_busqueda_inicio').next('label').addClass('focused_input');
-    }
-    if ($('.input_busqueda_termino').length) {
-        $('.input_busqueda_termino').next('label').addClass('focused_input');
-    }
+    // if ($('.input_busqueda_inicio').length) {
+    //     $('.input_busqueda_inicio').next('label').addClass('focused_input');
+    // }
+    // if ($('.input_busqueda_termino').length) {
+    //     $('.input_busqueda_termino').next('label').addClass('focused_input');
+    // }
 
 
 });
@@ -846,7 +846,7 @@ let go_login = (data) => redirect("../login");
 let up_page = (data) => redirect("");
 let anima_busqueda = function (e) {
 
-    alert();
+
     if (get_option("disparador_buscados") < 1) {
 
         $(".busqueda_izquierda").removeClass("col-lg-5").addClass("col-lg-3");
@@ -944,8 +944,32 @@ let paste_search = function () {
         event.target.value = text;
     }
 };
+let next_label_input_focus = function () {
 
+    $(this).next('label').addClass('focused_input');
+    $(this).addClass('input_focus');
+}
+let next_label_focus_out = function () {
 
+    if ($(this).val() === '') {
+        $(this).next('label').removeClass('focused_input');
+        $(this).removeClass('input_focus');
+    }
+}
+let verifica_formato_default_inputs = function () {
 
+    if (document.body.querySelector(".input_enid_format")) {
+        let input_enid_format = $('.input_enid_format :input');
+        for (var i = 0; i < input_enid_format.length; i++) {
+            let $selector_input = input_enid_format[i];
+            if ($selector_input.tagName == "INPUT") {
+                if ($selector_input.value.length > 0) {
+                    let $selector_current_label = $selector_input.nextSibling;
+                    $selector_current_label.classList.add('focused_input');
+                }
+            }
+        }
+    }
+}
 
 

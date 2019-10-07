@@ -354,17 +354,15 @@ let before_registro_afiliado = () => {
 
 let respuesta_registro = (data) => {
 
-    $(".place_registro_afiliado").empty();
+    empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
         desbloqueda_form(".form-miembro-enid-service");
         if (data.usuario_existe > 0) {
 
-            flex(".usuario_existente");
-            empty_elements(".place_registro_afiliado");
-
+            $('.usuario_existente').removeClass('some d-none');
             recorre(".usuario_existente");
-            $(".informacion_extra").show();
+
 
         } else {
 

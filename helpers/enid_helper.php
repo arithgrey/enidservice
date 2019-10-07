@@ -1782,7 +1782,7 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
     $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
     $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
-    $r[] = input_frm(4, "Fecha inicio",
+    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha inicio",
             [
                     "name" => 'fecha_inicio',
                     "class" => "input_busqueda_inicio",
@@ -1793,7 +1793,7 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
     );
 
 
-    $r[] = input_frm(4, "Fecha término",
+    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha término",
             [
                     "name" => 'fecha_termino',
                     "class" => "input_busqueda_termino",
@@ -1804,7 +1804,7 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
 
     );
 
-    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), 'col-lg-4 p-0');
+    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), 'col-lg-4 mt-5 p-0 p-0');
 
     return contaiter(append($r));
 
@@ -2737,6 +2737,7 @@ function menu_session_mobil($in_session)
 function tmp_menu($is_mobile, $id_usuario, $menu)
 {
 
+    $extra = is_mobile() ? " notificaciones_enid_mb " : " notificaciones_enid ";
     $notificaciones = btw(
 
 
@@ -2752,7 +2753,7 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
                     ,
                     [
-                            "class" => "blue_enid dropdown-toggle mr-3",
+                            "class" => "dropdown-toggle mr-3",
                             "data-toggle" => "dropdown",
                     ]
             )
@@ -2763,8 +2764,8 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
                     place("place_notificaciones_usuario padding_10 shadow border")
                     ,
-                    add_text("dropdown-menu shadow ",
-                            ($is_mobile > 0) ? " notificaciones_enid_mb " : " notificaciones_enid ")
+                    add_text("dropdown-menu shadow ", $extra)
+
             )
             ,
             "dropdown dropleft  menu_notificaciones_progreso_dia "
@@ -2928,29 +2929,38 @@ function crea_estrellas($calificacion, $sm = 0)
     return add_text($valoraciones, $restantes);
 }
 
-function input_frm($col, $text_label, $config_input = [], $config_label = [])
+function input_frm($col, $text_label, $config_input = [], $text_place = "")
 {
 
-
+    $config_label = [];
     if (es_data($config_input)) {
 
         $config_label["for"] = $config_input["id"];
         $config_label["id"] = "label_".$config_input["id"];
         $config_label["class"] = "cursor_pointer label_".$config_input["id"];
-
     }
 
-    $r[] = btw(input($config_input, 0, 0),
+
+    $str = strlen($text_place) > 0 ? $text_place : "";
+    $text = add_text(
+            input($config_input, 0, 0),
             label(
                     $text_label
                     ,
                     $config_label
-            ),
-            "input_enid_format w-100"
+            )
+            ,
+            d(
+                    $str,
+                    add_text("solid_bottom_error_3 mt-3  d-none place_input_form_",
+                            $config_input["id"])
+            )
     );
+    $r[] = d($text, "input_enid_format w-100");
     if (is_numeric($col)) {
 
         return ($col > 0) ? d(append($r), $col) : append($r);
+
     } else {
 
         return d(append($r), $col);
