@@ -1,4 +1,26 @@
 "use strict";
+let frm_efectivo_resultante = '.frm_efectivo_resultante';
+let frm_nota_monetaria = '.frm_nota_monetaria';
+let input_efectivo = '.input_efectivo_resultante';
+let input_clientes_ab = '.input_clientes_ab';
+let input_asunto = '.input_asunto';
+
+let menu_efectivo_resultante = '.menu_efectivo_resultante';
+let frm_clientes_ab_testing = '.frm_clientes_ab_testing';
+let resumen_efectivo_resultante = '.resumen_efectivo_resultante';
+let resumen_clientes_ab = '.resumen_clientes_ab';
+let num_departamento = ".num_departamento";
+let id_departamento = 0;
+let select_departamento = '.depto';
+let id_ticket = '.ticket';
+let boton_agregar_tarea = '.boton_agregar_tarea';
+let seccion_nueva_tarea = '.seccion_nueva_tarea';
+let menu_tareas_pendientes = '.menu_tareas_pendientes';
+
+/*selectores globales*/
+let $q = $(".q");
+let $id_ticket = $(".ticket");
+
 window.history.pushState({page: 1}, "", "");
 window.history.pushState({page: 2}, "", "");
 window.history.pushState({page: 3}, "", "");
@@ -10,135 +32,31 @@ window.onpopstate = function (event) {
 };
 $(document).ready(() => {
 
+
     set_option("s", 0);
-    let num_departamento = get_parameter(".num_departamento");
     set_option("modulo", 2);
+    let $num_departamento = $(num_departamento);
+    id_departamento = $num_departamento.val();
 
-
-    $("footer").ready(() => {
-
-        set_option("id_depto", get_parameter(".num_departamento"));
-        num_pendientes();
-    });
-
-
-    $(".depto").change(() => {
-
-        set_option("id_depto", get_parameter(".depto"));
+    $(select_departamento).change(() => {
+        set_option("id_depto", get_parameter(select_departamento));
         tikets_usuario();
     });
 
-    $(".q").keyup(tikets_usuario);
-
-    $(".form_busqueda_actividad_enid").submit(productividad);
-
+    $q.keyup(tikets_usuario);
     set_option("id_usuario", get_parameter(".id_usuario"));
-
-    $(".li_menu").click(recorre_web_version_movil);
     $(".base_tab_clientes").click(tikets_usuario);
-    $(".form_busqueda_desarrollo").submit(metricas_desarrollo);
-    $(".form_busqueda_desarrollo_solicitudes").submit(solicitudes_cliente);
-
-    if (num_departamento == 4) {
-
+    if (id_departamento == 4) {
         $(".contenedor_deptos").show();
-        set_option("id_depto", num_departamento);
-        selecciona_select(".depto", 4);
+        selecciona_select(select_departamento, id_departamento);
     }
-
-    $(".comparativa").click(carga_comparativas);
-    $(".abrir_ticket").click(form_n_ticket);
-
-    on_load();
-
-    $(".input_enid_format #q_busqueda").focus(function () {
-        $('.input_enid_format #q_busqueda').next('label').addClass('focused_input');
-
-    });
-    $(".input_enid_format #q_busqueda").focusout(function () {
-        if ($('.input_enid_format #q_busqueda').val() === '') {
-            $('.input_enid_format #q_busqueda').next('label').removeClass('focused_input');
-
-        }
-    });
+    $(".abrir_ticket").click(form_nuevo_ticket);
+    es_ticket();
 
 
 });
 
-let productividad = e => {
-
-    let url = "../q/index.php/api/productividad/usuario/format/json/";
-    request_enid("GET", data_send, url, 1, ".place_productividad", 0, ".place_productividad");
-    e.preventDefault();
-
-};
-
-let recorre_web_version_movil = () => recorre(".tab-content");
-
-let metricas_desarrollo = (e) => {
-
-
-    if (get_parameter(".form_busqueda_desarrollo #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo #datetimepicker5").length > 5) {
-
-        let url = "../q/index.php/api/desarrollo/global/format/json/";
-        let data_send = $(".form_busqueda_desarrollo").serialize();
-        bloquea_form(".form_busqueda_desarrollo");
-        request_enid("GET", data_send, url, response_carga_metricas, ".place_metricas_desarrollo");
-
-    } else {
-
-        let inputs = [".form_busqueda_desarrollo #datetimepicker4", ".form_busqueda_desarrollo #datetimepicker5"];
-        focus_input(inputs);
-    }
-    e.preventDefault();
-};
-let response_carga_metricas = (data) => {
-
-    render_enid(".place_metricas_desarrollo", data);
-    $('th').click(ordena_tabla);
-};
-let carga_comparativas = () => {
-
-    let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
-    let data_send = {tiempo: 1};
-
-    request_enid("GET", data_send, url, () => {
-        render_enid(".place_metricas_comparativa", data);
-        $('th').click(ordena_tabla);
-
-    }, ".place_metricas_comparativa");
-};
-let solicitudes_cliente = e => {
-
-
-    if (get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker4").length > 5 && get_parameter(".form_busqueda_desarrollo_solicitudes #datetimepicker5").length > 5) {
-
-        let url = "../q/index.php/api/desarrollo/global_calidad/format/json/";
-        let data_send = $(".form_busqueda_desarrollo_solicitudes").serialize();
-        request_enid("GET", data_send, url, response_carga_solicitudes, ".place_metricas_servicio");
-
-    } else {
-
-        let inputs = [".form_busqueda_desarrollo_solicitudes #datetimepicker4", ".form_busqueda_desarrollo_solicitudes #datetimepicker5"];
-        focus_input(inputs);
-
-    }
-    e.preventDefault();
-};
-let response_carga_solicitudes = data => {
-
-    render_enid(".place_metricas_servicio", data);
-    $('th').click(ordena_tabla);
-};
-
-let num_pendientes = () => {
-
-    let url = "../q/index.php/api/desarrollo/num_tareas_pendientes/format/json/";
-    let data_send = {"id_usuario": get_option("id_usuario"), "id_departamento": get_option("id_depto")};
-    request_enid("GET", data_send, url, 1, ".place_tareas_pendientes", ".place_tareas_pendientes");
-};
-
-let form_n_ticket = () => {
+let form_nuevo_ticket = () => {
 
     let url = "../q/index.php/api/tickets/form/format/json/";
     request_enid("GET", {}, url, r_form_ticket, ".place_form_tickets");
@@ -162,7 +80,7 @@ let response_registro_ticket = data => {
     render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
     show_tabs(["#ver_avances", "#base_tab_clientes"]);
-    carga_info_detalle_ticket();
+    ticket();
 };
 
 let set_estatus_ticket = function (id_ticket, status) {
@@ -173,7 +91,7 @@ let set_estatus_ticket = function (id_ticket, status) {
         tikets_usuario();
     });
 };
-let carga_info_detalle_ticket = () => {
+let ticket = () => {
 
     set_option("s", 1);
     let url = "../q/index.php/api/tickets/detalle/format/json/";
@@ -183,23 +101,18 @@ let carga_info_detalle_ticket = () => {
 
 let response_carga_ticket = (data) => {
 
-
     render_enid(".place_proyectos", data);
-
-    if ($('#efectivo_resultante').val().length > 0) {
-        $('#efectivo_resultante').next('label').addClass('focused_input');
-    }
-
-    despliega([".seccion_nueva_tarea", ".mostrar_tareas_pendientes"], 0);
-    $(".btn_agregar_tarea").click(agregar_tarea);
+    verifica_formato_default_inputs();
+    despliega([seccion_nueva_tarea, menu_tareas_pendientes], 0);
+    $(boton_agregar_tarea).click(agregar_tarea);
     $(".agregar_respuesta").click(carga_formulario_respuesta_ticket);
     $(".comentarios_tarea").click(carga_comentarios_tareas);
     $(".form_agregar_tarea").submit(registra_tarea);
     $(".tarea").click(actualiza_tareas);
-    $(".mostrar_tareas_pendientes").click(muestra_tareas_por_estatus);
+    $(menu_tareas_pendientes).click(muestra_tareas_por_estatus);
     $(".mostrar_todas_las_tareas").click(muestra_todas_las_tareas);
     $(".ver_tickets").click(tikets_usuario);
-    $(".asunto").click(t_nombre_asunto);
+    $(".asunto").click(set_asunto);
 
     $('.form_datetime').datetimepicker({
         language: 'es',
@@ -217,26 +130,28 @@ let response_carga_ticket = (data) => {
     $(".agendar_google").click(agendar_google);
     $(".frm_agendar_google").submit(google_path);
 
-    $(".nota_monetaria").click(muestra_nota_motenaria);
-    $('.frm_nota_monetaria').submit(registra_nota_monetaria);
+    $(frm_nota_monetaria).submit(registra_nota_monetaria);
     $('.estrella').click(registra_efecto_monetario);
 
+
+    $(".menu_nota_monetaria").click(function () {
+        toggle_format_menu(frm_nota_monetaria);
+    });
+
+    $('.menu_efectivo_resultante').click(function () {
+        toggle_format_menu(frm_efectivo_resultante, resumen_efectivo_resultante);
+    });
+
+    $('.menu_clientes_ab_testing').click(function () {
+        toggle_format_menu(frm_clientes_ab_testing, resumen_clientes_ab);
+    });
+
+
+    $(frm_efectivo_resultante).submit(efectivo_resultante);
+    $(frm_clientes_ab_testing).submit(clientes_ab);
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
     }
-
-    $("#efectivo_resultante").focus(function () {
-        $('#efectivo_resultante').next('label').addClass('focused_input');
-
-    });
-
-    $("#efectivo_resultante").focusout(function () {
-        if ($('#efectivo_resultante').val() === '') {
-            $('#efectivo_resultante').next('label').removeClass('focused_input');
-        }
-    });
-    $(".frm_efectivo_resultante").submit(efectivo_resultante);
-
 
 };
 let carga_formulario_respuesta_ticket = function (e) {
@@ -297,21 +212,21 @@ let registra_tarea = e => {
         "id_ticket": get_option("id_ticket"),
         "tarea": $(".form_agregar_tarea .note-editable").html()
     });
-    request_enid("POST", data_send, url, carga_info_detalle_ticket, ".place_proyectos");
+    request_enid("POST", data_send, url, ticket, ".place_proyectos");
     e.preventDefault();
 
 };
 let muestra_tareas_por_estatus = () => {
 
     showonehideone(".mostrar_todas_las_tareas", ".tarea_pendiente");
-    $(".mostrar_tareas_pendientes").hide();
+    $(menu_tareas_pendientes).hide();
     set_option("flag_mostrar_solo_pendientes", 1);
 };
 
 let muestra_todas_las_tareas = () => {
 
     showonehideone(".tarea_pendiente", ".mostrar_todas_las_tareas");
-    $(".mostrar_tareas_pendientes").show();
+    $(menu_tareas_pendientes).show();
     set_option("flag_mostrar_solo_pendientes", 0);
 };
 let tikets_usuario = () => {
@@ -320,21 +235,20 @@ let tikets_usuario = () => {
     if (document.querySelector(".estatus_tickets")) {
         status_ticket = get_parameter(".estatus_tickets");
     }
-    let keyword = get_parameter(".q");
-    set_option("keyword", keyword);
+
+    let keyword = $q.val();
     let url = "../q/index.php/api/tickets/ticket_desarrollo/format/json/";
     let data_send = {
         "status": status_ticket,
-        "id_departamento": get_option("id_depto"),
-        "keyword": get_option("keyword"),
+        "id_departamento": id_departamento,
+        "keyword": keyword,
         "modulo": 3
     };
-    request_enid("GET", data_send, url, response_carga_tickets);
 
+    request_enid("GET", data_send, url, response_carga_tickets);
 
 };
 let response_carga_tickets = function (data) {
-
 
     render_enid(".place_proyectos", data);
     $(".hecho").click(marcar_como_hecho);
@@ -353,17 +267,12 @@ let response_carga_tickets = function (data) {
             set_estatus_ticket(get_option("ticket_drag"), status);
         }
     });
-
     $(".ver_detalle_ticket").dblclick(function (e) {
 
         set_option("id_ticket", get_parameter_enid($(this), "id"));
-        carga_info_detalle_ticket();
+        ticket();
 
     });
-
-    $(".btn_refresh").click(tikets_usuario);
-    $(".estatus_tickets").change(tikets_usuario);
-
 
     $('.up_ab').click(function () {
         $('.bloque_ab').addClass('d-none');
@@ -383,6 +292,7 @@ let response_carga_tickets = function (data) {
     $('.up_revision').click(function () {
         $('.bloque_revision').addClass('d-none');
     });
+    $(".estatus_tickets").change(tikets_usuario);
 
 
 };
@@ -407,18 +317,18 @@ let response_actualiza_tareas = data => {
 
     } else {
 
-        carga_info_detalle_ticket();
+        ticket();
 
     }
 };
 
-let show_section_dinamic_button = seccion => ($(seccion).is(":visible")) ? $(seccion).hide() : $(seccion).show();
+let set_visible = s => ($(s).is(":visible")) ? $(s).hide() : $(s).show();
 
 let agregar_tarea = () => {
 
-    show_section_dinamic_button(".seccion_nueva_tarea");
-    show_section_dinamic_button(".btn_agregar_tarea");
-    recorre(".seccion_nueva_tarea");
+    set_visible(seccion_nueva_tarea);
+    set_visible(boton_agregar_tarea);
+    recorre(seccion_nueva_tarea);
 
     despliega([".listado_pendientes", ".mostrar_todas_las_tareas", ".table_resumen_ticket"], 0);
     $('.summernote').summernote({
@@ -453,25 +363,18 @@ let valida_retorno = () => {
 
             tikets_usuario();
             break;
-
-        case 2:
-
-            break;
-
         default:
 
             break;
     }
 
 };
-let on_load = () => {
+let es_ticket = () => {
 
-
-    let action = get_parameter(".ticket", 1);
-    if (action > 0) {
-
-        set_option("id_ticket", action);
-        carga_info_detalle_ticket();
+    let id_ticket = $id_ticket.val();
+    if (id_ticket > 0) {
+        set_option("id_ticket", id_ticket);
+        ticket();
     }
 };
 let edita_descripcion_tarea = id_tarea => {
@@ -487,7 +390,7 @@ let edita_descripcion_tarea = id_tarea => {
             let url = "../q/index.php/api/tarea/descripcion/format/json/";
             let data_send = {"id_tarea": id_tarea, "descripcion": text_tarea};
             request_enid("PUT", data_send, url, () => {
-                carga_info_detalle_ticket();
+                ticket();
             });
 
         }
@@ -496,14 +399,13 @@ let edita_descripcion_tarea = id_tarea => {
 };
 let elimina_tarea = id_tarea => {
 
-
     show_confirm("¿DESEAS ELIMINAR LA TAREA?", "Se borrará completamente", "ELIMINAR", () => {
 
         let url = "../q/index.php/api/tarea/index/format/json/";
         let data_send = {"id_tarea": id_tarea};
         request_enid("DELETE", data_send, url, () => {
 
-            carga_info_detalle_ticket();
+            ticket();
 
         });
 
@@ -517,33 +419,30 @@ let marcar_como_hecho = function (e) {
         set_estatus_ticket(id, 4);
     }
 };
-let t_nombre_asunto = function () {
+let set_asunto = function () {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
 
         showonehideone(".i_desc_asunto", ".s_desc_asunto");
-        $(".i_asunto").keyup(function (e) {
+        $(input_asunto).keyup(function (e) {
 
             var code = (e.keyCode ? e.keyCode : e.which);
             if (code == 13) {
-                let asunto = get_parameter(".i_asunto");
+                let asunto = get_parameter(input_asunto);
                 if (asunto.length > 3) {
 
-                    rm_class(".i_asunto");
+                    rm_class(input_asunto);
                     let url = "../q/index.php/api/tickets/asunto/format/json/";
                     let data_send = {"id_ticket": id, "asunto": asunto};
                     request_enid("PUT", data_send, url, () => {
-                        carga_info_detalle_ticket();
+                        ticket();
                     });
 
                 } else {
 
-                    focus_input(".i_asunto");
+                    focus_input(input_asunto);
                 }
-
             }
-
-
         });
     }
 };
@@ -551,68 +450,71 @@ let agendar_google = () => $(".seccion_agendar").removeClass("hidden");
 let google_path = function (e) {
     e.preventDefault();
     let base = "https://calendar.google.com/calendar/r/eventedit";
-    let desc_google =  get_parameter(".descripcion_google");
-    let hora_fecha =  get_parameter(".hora_fecha");
-    if (desc_google.length > 5 ){
-        base += "?text=Enid Service "+desc_google;
+    let desc_google = get_parameter(".descripcion_google");
+    let hora_fecha = get_parameter(".hora_fecha");
+    if (desc_google.length > 5) {
+        base += "?text=Enid Service " + desc_google;
     }
-    if (hora_fecha.length > 5 ){
-        let format_google =  "";
-        let eliminar = ['-',  ':'];
-        for (let x in hora_fecha){
+    if (hora_fecha.length > 5) {
+        let format_google = "";
+        let eliminar = ['-', ':'];
+        for (let x in hora_fecha) {
 
-            if ( eliminar.includes(hora_fecha[x]) == false ){
-                if (hora_fecha[x] != ' '){
+            if (eliminar.includes(hora_fecha[x]) == false) {
+                if (hora_fecha[x] != ' ') {
 
-                    format_google +=  hora_fecha[x];
+                    format_google += hora_fecha[x];
 
-                }else{
+                } else {
 
-                    format_google +=  "T";
+                    format_google += "T";
                 }
 
             }
 
         }
 
-        base += "&dates="+format_google+"/"+format_google;
+        base += "&dates=" + format_google + "/" + format_google;
     }
     window.open(base, '_blank');
-};
-let muestra_nota_motenaria = function () {
-
-    $(".nota_monetaria_area").removeClass("d-none");
 };
 let registra_nota_monetaria = function (e) {
 
     e.preventDefault();
     let url = "../q/index.php/api/tickets/nota_monetaria/format/json/";
-    let data_send = $(this).serialize() +"&"+$.param({"id_ticket": get_option("id_ticket")});
+    let data_send = $(this).serialize() + "&" + $.param({"id_ticket": get_option("id_ticket")});
     set_option("s", 1);
-    request_enid("PUT", data_send, url, carga_info_detalle_ticket);
+    request_enid("PUT", data_send, url, ticket);
 
 };
 let registra_efecto_monetario = function (e) {
 
-
-    let  efecto_monetario = e.target.id;
-    if (efecto_monetario > 0){
-
+    let efecto_monetario = e.target.id;
+    if (efecto_monetario > 0) {
         let url = "../q/index.php/api/tickets/efecto_monetario/format/json/";
-        let data_send = $.param({"id_ticket": get_option("id_ticket") ,  "efecto_monetario" : efecto_monetario });
+        let data_send = $.param({
+            "id_ticket": get_option("id_ticket"),
+            "efecto_monetario": efecto_monetario
+        });
         set_option("s", 1);
-        request_enid("PUT", data_send, url, carga_info_detalle_ticket);
-
+        request_enid("PUT", data_send, url, ticket);
     }
-
 };
 let efectivo_resultante = function (e) {
-    e.preventDefault();
-    if (get_parameter("#efectivo_resultante", 1) > 0){
 
+    if ($(input_efectivo).val() > 0) {
         let url = "../q/index.php/api/tickets/efectivo_resultante/format/json/";
-        let data_send = $('.frm_efectivo_resultante').serialize();
-        request_enid("PUT", data_send, url, carga_info_detalle_ticket);
-
+        let data_send = $(frm_efectivo_resultante).serialize();
+        request_enid("PUT", data_send, url, ticket);
     }
+    e.preventDefault();
+};
+let clientes_ab = function (e) {
+
+    if ($(input_clientes_ab).val() > 0) {
+        let url = "../q/index.php/api/tickets/clientes_ab/format/json/";
+        let data_send = $(frm_clientes_ab_testing).serialize();
+        request_enid("PUT", data_send, url, ticket);
+    }
+    e.preventDefault();
 };

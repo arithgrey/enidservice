@@ -2882,16 +2882,28 @@ function frm_search(
 
 }
 
-function flex($d, $d1, $ext = '', $ext_left = '', $ext_right = '')
+function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '')
 {
-    $att = "d-flex ";
-    if (is_array($ext)) {
-        $att = $ext[0];
+    $response = "";
+    if (is_array($d)) {
+
+        $clase_extra = 'd-flex ';
+        $clase_extra .= (strlen($d1) > 0) ? $d1 : '';
+        $response = d(append($d), $clase_extra);
+
     } else {
-        $att .= $ext;
+
+        $att = "d-flex ";
+        if (is_array($ext)) {
+            $att = $ext[0];
+        } else {
+            $att .= $ext;
+        }
+
+        $response = d(add_text(d($d, $ext_left), d($d1, $ext_right)), $att);
     }
 
-    return d(add_text(d($d, $ext_left), d($d1, $ext_right)), $att);
+    return $response;
 
 }
 
@@ -3017,4 +3029,17 @@ function format_link($str, $attributes, $primario = 1)
             $attributes)) ? add_text($attributes["class"], $f) : $f;
 
     return a_enid($str, $att);
+}
+
+function formated_link($str, $primario = 1)
+{
+
+    $f = ($primario > 0) ? " p-3 bg_black white strong col" : " p-3 strong  border_enid col black";
+    $att["class"] = $f;
+    return d($str, $att);
+}
+
+function money($num)
+{
+    return add_text(money_format('%i', $num), " MXN");
 }

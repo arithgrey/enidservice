@@ -972,4 +972,21 @@ let verifica_formato_default_inputs = function () {
     }
 }
 
+let toggle_format_menu = function (clase_selector, ocultar = []) {
 
+
+    if (!$(clase_selector).is(':visible')) {
+        despliega(ocultar, 0);
+    } else {
+        despliega(ocultar, 1);
+    }
+
+    if ($(clase_selector).hasClass('d-none')) {
+        $(clase_selector).removeClass('d-none');
+    } else {
+
+        $(clase_selector).toggle();
+    }
+
+    recorre(clase_selector);
+}
