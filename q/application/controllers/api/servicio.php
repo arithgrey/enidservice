@@ -1245,7 +1245,8 @@ class Servicio extends REST_Controller
                 "talla",
                 "url_ml",
                 "contra_entrega",
-                "deseado"
+                "deseado",
+                "cupon_primer_compra"
             ];
 
             if ($param["c"] < 0) {
