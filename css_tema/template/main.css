@@ -367,6 +367,7 @@ li {
 .w_15 {
     width: 15px !important;
 }
+
 @media only screen and (max-width: 991px) {
 
     .btn_whatsApp {
@@ -493,12 +494,6 @@ li {
     background: #f6f8fe;
 }
 
-input {
-    background: white !important;
-    background: white !important;
-    height: 30px !important;
-    width: 100%;
-}
 
 .input_enid_format {
     align-self: flex-end;
@@ -506,15 +501,9 @@ input {
 }
 
 .input_enid_format input {
-
     border: none !important;
     border-bottom: solid 1px grey !important;
     height: 40px !important;
-    appearance: none !important;
-    -moz-appearance: none !important;
-    margin: 0;
-    -webkit-appearance: none !important;
-    outline: none;
 }
 
 .input_enid_format input:hover {
@@ -1463,6 +1452,10 @@ h5 {
 }
 
 
+.mh_15 {
+
+    min-height: 15px;
+}
 .mh_25 {
 
     min-height: 25px;
@@ -1619,6 +1612,7 @@ a {
 .solid_bottom_3 {
     border-bottom: solid 3px #000 !important;
 }
+
 .solid_bottom_error_3 {
     border-bottom: solid 3px red !important;
 }
@@ -1721,3 +1715,24 @@ a {
 @media (min-width: 1200px) {
 
 }
+
+input {
+    -moz-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    box-shadow: none;
+    outline: none;
+    margin: 0;
+    -webkit-appearance: none !important;
+    appearance: none !important;
+    background: white !important;
+    background: white !important;
+    width: 100%;
+}
+
+input:focus:invalid {
+    border-bottom: 2px solid #ff1919 !important;
+}
+/*input:valid {*/
+/*    background-color: grey;*/
+/*}*/

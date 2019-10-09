@@ -287,7 +287,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
     $attributes["class"] = (array_key_exists("class",
             $attributes)) ? ($attributes["class"]." ") : "  ";
-    $attributes["autocomplete"] = "off";
+
 
     if ($bootstrap) {
 
@@ -304,8 +304,8 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
             case "tel":
 
                 $attributes["onpaste"] = "paste_telefono();";
-                $attributes["class"] = (array_key_exists("class", $attributes)) ? (
-                        $attributes["class"]." telefono ") : " telefono ";
+                $attributes["class"] = (array_key_exists("class",
+                        $attributes)) ? ($attributes["class"]." telefono ") : " telefono ";
                 $attributes["minlength"] = 8;
                 $attributes["maxlength"] = 10;
                 $attributes["required"] = true;
@@ -314,12 +314,19 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
             case "email":
 
+                $attributes["required"] = "true";
+                $attributes["pattern"] = '[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)';
+                $attributes['title'] = "Verifica el formato de tu correo!";
                 $attributes["onpaste"] = "paste_email();";
                 $attributes["class"] = (array_key_exists("class",
                         $attributes)) ? ($attributes["class"]." correo ") : " correo ";
 
                 break;
 
+            case "password":
+
+                $attributes["required"] = "true";
+                break;
 
             case "text":
 
@@ -345,6 +352,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
     }
 
+    $attributes["autocomplete"] = "off";
     $attr = add_attributes($attributes);
 
     return ($e < 1) ? "<input ".$attr." >" : addNRow("<input ".$attr." >");
@@ -2964,7 +2972,7 @@ function input_frm($col, $text_label, $config_input = [], $text_place = "")
             ,
             d(
                     $str,
-                    add_text("solid_bottom_error_3 mt-3  d-none place_input_form_",
+                    add_text("mt-3  d-none place_input_form_",
                             $config_input["id"])
             )
     );
@@ -3036,10 +3044,17 @@ function formated_link($str, $primario = 1)
 
     $f = ($primario > 0) ? " p-3 bg_black white strong col" : " p-3 strong  border_enid col black";
     $att["class"] = $f;
+
     return d($str, $att);
 }
 
 function money($num)
 {
     return add_text(money_format('%i', $num), " MXN");
+}
+
+function format_load()
+{
+
+    return d(d('', 'progress-bar mh_15 w-100'), "cargando_form progress progress-striped active page-progress-bar mt-5 d-none");
 }
