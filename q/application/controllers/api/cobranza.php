@@ -281,7 +281,7 @@ class Cobranza extends REST_Controller
             $text = "TENEMOS UNA ORDEN DE COMPRA EN PROCESO DEL CLIENTE " . $param["nombre"] . " - " . $param["email"] . " - " . $param["telefono"] . " RECIBO NÚMERO " . $id_recibo;
         }
         $asunto = "NUEVA ORDEN DE COMPRA EN PROCESO, RECIBO #" . $id_recibo;
-        $cuerpo = img_enid([], 1, 1) . h($text, 3, 'resumen_mail');
+        $cuerpo = img_enid([], 1, 1) . add_element($text, 'h3');
         $q = get_request_email("enidservice@gmail.com", $asunto, $cuerpo);
         $this->app->send_email($q);
 
