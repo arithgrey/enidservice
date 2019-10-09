@@ -379,7 +379,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = form_close();
 
         }
-
+        $r[] =  format_load();
         return append($r);
 
 
@@ -421,7 +421,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'btn_procesar_pedido_cliente',
             ],
                     1, 1);
-            $r[] = place('place_proceso_compra');
+            $r[] = place('place_proceso_compra mt-5');
         }
 
         if ($in_session < 1) {

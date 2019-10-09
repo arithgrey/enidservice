@@ -33,6 +33,7 @@ let $fecha_entrega = $('.fecha_entrega');
 let $form_punto_encuentro_horario = $(form_punto_encuentro_horario);
 let $desglose_estaciones = $(desglose_estaciones);
 
+
 window.history.pushState({page: 1}, "", "");
 window.history.pushState({page: 2}, "", "");
 window.history.pushState({page: 3}, "", "");
@@ -54,6 +55,7 @@ $(document).ready(() => {
         despliega([".informacion_del_cliente"], 1);
         add_class(".continuar", "mt-5");
         set_option("vista", 4);
+        verifica_formato_default_inputs(0);
     });
     $form_punto_encuentro.submit(registra_usuario);
     $form_punto_encuentro_horario.submit(notifica_punto_entrega);
@@ -63,6 +65,10 @@ $(document).ready(() => {
     despliega(secciones_default, 0);
     $desglose_estaciones.removeClass('d-lg-flex');
 
+    $input_nombre.keypress(envia_formulario);
+    $input_telefono.keypress(envia_formulario);
+    $input_pw.keypress(envia_formulario);
+    $input_correo.keypress(envia_formulario);
 });
 
 let estaciones = function (id, q) {
@@ -137,11 +143,12 @@ let muestra_horarios = function () {
 };
 
 let registra_usuario = (e) => {
-
+    verifica_formato_default_inputs(0);
     let len_telefono = $input_telefono.val().length;
     let len_pw = $input_pw.val().length;
     reset_posibles_errores();
     if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH) {
+
 
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
@@ -150,7 +157,8 @@ let registra_usuario = (e) => {
         });
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         bloquea_form(form_punto_encuentro);
-        request_enid("POST", data_send, url, response_registro_usuario, ".place_notificacion_punto_encuentro_registro");
+        valida_load();
+        request_enid("POST", data_send, url, response_registro_usuario);
 
     } else {
 
@@ -181,7 +189,7 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 
 let response_registro_usuario = (data) => {
-
+    valida_load();
     if (data.usuario_existe > 0) {
 
         $('.usuario_existente').removeClass('d-none');
@@ -213,11 +221,12 @@ let notifica_punto_entrega = e => {
     }
     let data_send = $form_punto_encuentro_horario.serialize() + "&" + $.param({"tipo_entrega": 1});
     bloquea_form(form_punto_encuentro_horario);
-    request_enid("POST", data_send, url, response_notificacion_punto_entrega, ".place_notificacion_punto_encuentro");
+    valida_load();
+    request_enid("POST", data_send, url, response_notificacion_punto_entrega);
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
-
+    valida_load();
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
     if (get_parameter(".primer_registro") == 1) {
         redirect_forma_pago(data.id_recibo);
@@ -314,3 +323,9 @@ let buscador_estaciones_disponibles = () => {
 let redirect_forma_pago = (id_recibo) => {
     redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
 }
+let envia_formulario = function (e) {
+    let code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) {
+        $form_punto_encuentro.submit();
+    }
+};

@@ -58,6 +58,11 @@ $("footer").ready(() => {
 
     verifica_formato_default_inputs();
 
+    if (document.body.querySelector('form')) {
+        $('form').submit(function () {
+            verifica_formato_default_inputs(0);
+        });
+    }
 
     // if ($('.input_busqueda_inicio').length) {
     //     $('.input_busqueda_inicio').next('label').addClass('focused_input');
@@ -956,21 +961,32 @@ let next_label_focus_out = function () {
         $(this).removeClass('input_focus');
     }
 }
-let verifica_formato_default_inputs = function () {
+let verifica_formato_default_inputs = function (validacion = 1) {
 
     if (document.body.querySelector(".input_enid_format")) {
         let input_enid_format = $('.input_enid_format :input');
         for (var i = 0; i < input_enid_format.length; i++) {
             let $selector_input = input_enid_format[i];
             if ($selector_input.tagName == "INPUT") {
-                if ($selector_input.value.length > 0) {
+
+                if (validacion > 0) {
+
+                    if ($selector_input.value.length > 0) {
+                        let $selector_current_label = $selector_input.nextSibling;
+                        $selector_current_label.classList.add('focused_input');
+                    }
+                } else {
+
                     let $selector_current_label = $selector_input.nextSibling;
                     $selector_current_label.classList.add('focused_input');
+
                 }
+
             }
         }
     }
 }
+
 
 let toggle_format_menu = function (clase_selector, ocultar = []) {
 
@@ -989,4 +1005,17 @@ let toggle_format_menu = function (clase_selector, ocultar = []) {
     }
 
     recorre(clase_selector);
+}
+let valida_load = function () {
+
+    if (document.body.querySelector(".cargando_form")) {
+
+        let $load = $('.cargando_form');
+        if ($load.hasClass('d-none')) {
+            $load.removeClass('d-none');
+        } else {
+            $load.addClass('d-none');
+        }
+    }
+
 }

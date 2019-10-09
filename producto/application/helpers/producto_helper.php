@@ -352,7 +352,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = '<form action="' . $url . '" method="POST" >';
         $r[] = form_hidden(["id_servicio" => $id_servicio, "es_servicio" => 1]);
-        $r[] = btn(text_icon("fa fa fa-long-arrow-right", "COTIZAR ", [], 0), ["class" => "pt-sm-5 "]);
+        $r[] = btn(text_icon("fa fa fa-long-arrow-right", "COTIZAR ", [], 0));
         $r[] = form_close();
         return d(append($r), "contenedor_form mt-5");
 

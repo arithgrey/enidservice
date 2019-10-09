@@ -777,7 +777,7 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $orden
                 ]);
             $r[] = d(btn("CONTINUAR", ["class" => "top_20"]), 12);
-            $r[] = place("place_notificacion_punto_encuentro");
+            $r[] = format_load();
             $r[] = form_close(place("place_fecha_entrega"));
             $response = append($r);
             $response = d($response, 6, 1);

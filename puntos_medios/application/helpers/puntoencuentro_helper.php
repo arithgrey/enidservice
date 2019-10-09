@@ -69,7 +69,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = frm_quien_recibe($punto_encuentro, $recibo);
             $r[] = hiddens(["class" => "recibo", "name" => "recibo", "value" => $recibo]);
         }
+
         $r[] = hiddens(["class" => "primer_registro", "value" => $primer_registro]);
+
 
         return d(append($r), "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe p-0");
 
@@ -199,7 +201,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(btn("CONTINUAR", ["class" => "botton_enviar_solicitud "]), "col-lg-3 continuar");
 
         //$r[] = format_usuario_registrado($in_session, $servicio, $num_ciclos);
+        $r[] =  d(format_load(),12);
         $r[] = form_close();
+
         return append($r);
 
 
@@ -289,9 +293,10 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
-
+        $r[] = d(format_load(),12);
         $r[] = place("place_notificacion_punto_encuentro ");
         $r[] = form_close();
+
         return append($r);
 
     }

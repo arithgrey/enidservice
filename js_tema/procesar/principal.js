@@ -7,6 +7,8 @@ window.onpopstate = function (event) {
         let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_retorno();
     }
 };
+
+
 $(document).ready(() => {
 
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
@@ -27,229 +29,67 @@ $(document).ready(() => {
 
 
     $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
-    $(".telefono").keyup(quita_espacios_en_telefono);
     $(".link_acceso").click(set_link);
-    $(".email").keyup(() => {
-        sin_espacios(".email");
-    });
     $(".continuar_pedido").click(continuar_compra);
-
-
-    if (option["in_session"] < 1) {
-
-        if ($(".form-cotizacion-enid-service")) {
-            $(".form-cotizacion-enid-service #nombre").focus(function () {
-                $('.form-cotizacion-enid-service #nombre').next('label').addClass('focused_input');
-
-            });
-            $(".form-cotizacion-enid-service #nombre").focusout(function () {
-                if ($('.form-cotizacion-enid-service #nombre').val() === '') {
-                    $('.form-cotizacion-enid-service #nombre').next('label').removeClass('focused_input');
-
-                }
-            });
-
-            $(".form-cotizacion-enid-service .email").focus(function () {
-                $('.form-cotizacion-enid-service .email').next('label').addClass('focused_input');
-
-            });
-            $(".form-cotizacion-enid-service .email").focusout(function () {
-                if ($('.form-cotizacion-enid-service .email').val() === '') {
-                    $('.form-cotizacion-enid-service .email').next('label').removeClass('focused_input');
-
-                }
-            });
-
-            $(".form-cotizacion-enid-service .password").focus(function () {
-                $('.form-cotizacion-enid-service .password').next('label').addClass('focused_input');
-
-            });
-            $(".form-cotizacion-enid-service .password").focusout(function () {
-                if ($('.form-cotizacion-enid-service .password').val() === '') {
-                    $('.form-cotizacion-enid-service .password').next('label').removeClass('focused_input');
-
-                }
-            });
-
-            $(".form-cotizacion-enid-service .telefono").focus(function () {
-                $('.form-cotizacion-enid-service .telefono').next('label').addClass('focused_input');
-
-            });
-            $(".form-cotizacion-enid-service .telefono").focusout(function () {
-                if ($('.form-cotizacion-enid-service .telefono').val() === '') {
-                    $('.form-cotizacion-enid-service .telefono').next('label').removeClass('focused_input');
-
-                }
-            });
-
-
-            if ($('.fecha_servicio').length) {
-                if ($('.fecha_servicio').val().length > 0) {
-                    $('.fecha_servicio ').next('label').addClass('focused_input');
-                }
-            }
-        }
-
-        if ($(".form-miembro-enid-service ")) {
-
-            $(".form-miembro-enid-service .nombre").focus(function () {
-                $('.form-miembro-enid-service .nombre').next('label').addClass('focused_input');
-
-            });
-
-            $(".form-miembro-enid-service .nombre").focusout(function () {
-                if ($('.form-miembro-enid-service .nombre').val() === '') {
-                    $('.form-miembro-enid-service .nombre').next('label').removeClass('focused_input');
-                }
-            });
-
-            $(".form-miembro-enid-service .correo").focus(function () {
-                $('.form-miembro-enid-service .correo').next('label').addClass('focused_input');
-
-            });
-
-            $(".form-miembro-enid-service .correo").focusout(function () {
-                if ($('.form-miembro-enid-service .correo').val() === '') {
-                    $('.form-miembro-enid-service .correo').next('label').removeClass('focused_input');
-                }
-            });
-
-
-            $(".form-miembro-enid-service .password").focus(function () {
-                $('.form-miembro-enid-service .password').next('label').addClass('focused_input');
-
-            });
-
-            $(".form-miembro-enid-service .password").focusout(function () {
-                if ($('.form-miembro-enid-service .password').val() === '') {
-                    $('.form-miembro-enid-service .password').next('label').removeClass('focused_input');
-                }
-            });
-
-
-            $(".form-miembro-enid-service .telefono").focus(function () {
-                $('.form-miembro-enid-service .telefono').next('label').addClass('focused_input');
-
-            });
-
-            $(".form-miembro-enid-service .telefono").focusout(function () {
-                if ($('.form-miembro-enid-service .telefono').val() === '') {
-                    $('.form-miembro-enid-service .telefono').next('label').removeClass('focused_input');
-                }
-            });
-
-        }
-
-
-        $('.agregar_commentario').click(function () {
-            $('.text_comentarios').removeClass('d-none');
-        });
-
-
-    } else {
-
-        $(".text_agregar_comentario").click(function () {
-            $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
-        });
-
-        if ($('.fecha_servicio').length) {
-            if ($('.fecha_servicio').val().length > 0) {
-                $('.fecha_servicio ').next('label').addClass('focused_input');
-            }
-        }
-        
-    }
+    formato_inicial_comentarios();
+    $telefono.keypress(envia_formulario);
 
 
 });
 
-
 let registro = (e) => {
 
-
     let flag = 0;
-    let clases = [
-        ".form-miembro-enid-service .telefono",
-        ".form-miembro-enid-service .email",
-        ".form-miembro-enid-service .password",
-        ".form-miembro-enid-service .nombre"
-    ];
-
-    clases.forEach(function (element) {
-        $(element).removeClass("focus_error");
-    });
-
-    if (get_parameter(".form-miembro-enid-service .telefono").length < 8) {
-        $(".form-miembro-enid-service .telefono").addClass("focus_error");
-        flag++;
-    }
-    if (get_parameter(".form-miembro-enid-service .email").length < 6) {
-
-        $(".form-miembro-enid-service .email").addClass("focus_error");
-        flag++;
-    }
-    if (get_parameter(".form-miembro-enid-service .password").length < 6) {
-
-        $(".form-miembro-enid-service .password").addClass("focus_error");
-        flag++;
-
-    }
-    if (get_parameter(".form-miembro-enid-service .nombre").length < 8) {
-
-        $(".form-miembro-enid-service .nombre").addClass("focus_error");
-        flag++;
-    }
-
-    if (flag < 1) {
-
-        let text_password = $.trim($(".password").val());
-        if (text_password.length > 7) {
-            $(".place_password_afiliado").empty();
-            let flag = valida_num_form(".telefono", ".place_telefono");
-            if (flag == 1) {
-                let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
-                if (flag2 == 1) {
+    let text_password = $.trim($(".password").val());
+    if (text_password.length > 7) {
+        $(".place_password_afiliado").empty();
+        let flag = valida_num_form(".telefono", ".place_telefono");
+        if (flag == 1) {
+            let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
+            if (flag2 == 1) {
 
 
-                    $(".resumen_productos_solicitados").hide();
-                    recorre(".contenedor_formulario_compra");
-                    bloquea_form(".form-miembro-enid-service");
-                    let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-                    let pw = $.trim($(".password").val());
-                    let pwpost = "" + CryptoJS.SHA1(pw);
+                $(".resumen_productos_solicitados").hide();
+                recorre(".contenedor_formulario_compra");
+                bloquea_form(".form-miembro-enid-service");
+                let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
+                let pw = $.trim($(".password").val());
+                let pwpost = "" + CryptoJS.SHA1(pw);
 
-                    set_option({
-                        "email": $(".email").val(),
-                        "nombre": $(".nombre").val(),
-                        "telefono": $(".telefono").val(),
-                        "usuario_referencia": $(".q2").val(),
-                        "talla": $(".talla").val(),
-                    });
+                set_option({
+                    "email": $(".email").val(),
+                    "nombre": $(".nombre").val(),
+                    "telefono": $(".telefono").val(),
+                    "usuario_referencia": $(".q2").val(),
+                    "talla": $(".talla").val(),
+                });
 
-                    let data_send = {
-                        "password": pwpost,
-                        "email": get_option("email"),
-                        "nombre": get_option("nombre"),
-                        "telefono": get_option("telefono"),
-                        "id_servicio": get_parameter(".id_servicio"),
-                        "num_ciclos": get_option("num_ciclos"),
-                        "descripcion_servicio": get_option("descripcion_servicio"),
-                        "ciclo_facturacion": get_option("ciclo_facturacion"),
-                        "usuario_referencia": get_option("usuario_referencia"),
-                        "talla": get_option("talla"),
-                        "tipo_entrega": 2,
-                        "fecha_servicio": get_option("fecha_servicio"),
-                    };
-                    $(".informacion_extra").hide();
-                    request_enid("POST", data_send, url, respuesta_registro, 0, before_registro_afiliado);
-                }
+                let data_send = {
+                    "password": pwpost,
+                    "email": get_option("email"),
+                    "nombre": get_option("nombre"),
+                    "telefono": get_option("telefono"),
+                    "id_servicio": get_parameter(".id_servicio"),
+                    "num_ciclos": get_option("num_ciclos"),
+                    "descripcion_servicio": get_option("descripcion_servicio"),
+                    "ciclo_facturacion": get_option("ciclo_facturacion"),
+                    "usuario_referencia": get_option("usuario_referencia"),
+                    "talla": get_option("talla"),
+                    "tipo_entrega": 2,
+                    "fecha_servicio": get_option("fecha_servicio"),
+                };
+                $(".informacion_extra").hide();
+                bloquea_form(".form-miembro-enid-service");
+                ;
+                valida_load();
+                request_enid("POST", data_send, url, respuesta_registro, 0);
             }
-        } else {
-            desbloqueda_form(".form-miembro-enid-service");
-            render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
         }
-
+    } else {
+        desbloqueda_form(".form-miembro-enid-service");
+        render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
     }
+
 
     e.preventDefault();
 };
@@ -259,81 +99,50 @@ let solicitud_cotizacion = e => {
 
 
     let flag = 0;
-    let clases = [".form-cotizacion-enid-service .telefono", ".form-cotizacion-enid-service .email", ".form-cotizacion-enid-service .password", ".form-cotizacion-enid-service .nombre"];
+    let text_password = $.trim($(".password").val());
+    if (text_password.length > 7) {
+        $(".place_password_afiliado").empty();
+        let flag = valida_num_form(".telefono", ".place_telefono");
+        if (flag == 1) {
+            let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
+            if (flag2 == 1) {
 
-    for (var x in clases) {
+                recorre(".contenedor_formulario_compra");
+                bloquea_form(".form-cotizacion-enid-service");
+                let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
+                let pwpost = "" + CryptoJS.SHA1($.trim($(".password").val()));
 
-        $(clases[x]).removeClass("focus_error");
+                set_option("email", $(".email").val());
+                set_option("nombre", $(".nombre").val());
+                set_option("telefono", $(".telefono").val());
+                set_option("usuario_referencia", $(".q2").val());
+                set_option("talla", "");
+                let data_send = {
+                    "password": pwpost,
+                    "email": get_option("email"),
+                    "nombre": get_option("nombre"),
+                    "telefono": get_option("telefono"),
+                    "id_servicio": get_parameter(".id_servicio"),
+                    "num_ciclos": 1,
+                    "descripcion_servicio": get_parameter(".comentario"),
+                    "ciclo_facturacion": get_parameter(".id_ciclo_facturacion"),
+                    "usuario_referencia": get_option("usuario_referencia"),
+                    "talla": "",
+                    "tipo_entrega": 2,
+                    "fecha_servicio": get_parameter(".fecha_servicio"),
 
-    }
-
-    if (get_parameter(".form-cotizacion-enid-service .telefono").length < 8) {
-        $(".form-cotizacion-enid-service .telefono").addClass("focus_error");
-        flag++;
-    }
-    if (get_parameter(".form-cotizacion-enid-service .email").length < 6) {
-
-        $(".form-cotizacion-enid-service .email").addClass("focus_error");
-        flag++;
-    }
-    if (get_parameter(".form-cotizacion-enid-service .password").length < 6) {
-
-        $(".form-cotizacion-enid-service .password").addClass("focus_error");
-        flag++;
-
-    }
-    if (get_parameter(".form-cotizacion-enid-service .nombre").length < 8) {
-
-        $(".form-cotizacion-enid-service .nombre").addClass("focus_error");
-        flag++;
-    }
-
-    if (flag < 1) {
-
-
-        let text_password = $.trim($(".password").val());
-        if (text_password.length > 7) {
-            $(".place_password_afiliado").empty();
-            let flag = valida_num_form(".telefono", ".place_telefono");
-            if (flag == 1) {
-                let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
-                if (flag2 == 1) {
-
-                    recorre(".contenedor_formulario_compra");
-                    bloquea_form(".form-cotizacion-enid-service");
-                    let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-                    let pwpost = "" + CryptoJS.SHA1($.trim($(".password").val()));
-
-                    set_option("email", $(".email").val());
-                    set_option("nombre", $(".nombre").val());
-                    set_option("telefono", $(".telefono").val());
-                    set_option("usuario_referencia", $(".q2").val());
-                    set_option("talla", "");
-                    let data_send = {
-                        "password": pwpost,
-                        "email": get_option("email"),
-                        "nombre": get_option("nombre"),
-                        "telefono": get_option("telefono"),
-                        "id_servicio": get_parameter(".id_servicio"),
-                        "num_ciclos": 1,
-                        "descripcion_servicio": get_parameter(".comentario"),
-                        "ciclo_facturacion": get_parameter(".id_ciclo_facturacion"),
-                        "usuario_referencia": get_option("usuario_referencia"),
-                        "talla": "",
-                        "tipo_entrega": 2,
-                        "fecha_servicio": get_parameter(".fecha_servicio"),
-
-                    };
-                    $(".informacion_extra").hide();
-                    request_enid("POST", data_send, url, respuesta_registro_cotizacion, 0, before_registro_afiliado);
-                }
+                };
+                $(".informacion_extra").hide();
+                bloquea_form(".form-miembro-enid-service");
+                valida_load();
+                request_enid("POST", data_send, url, respuesta_registro_cotizacion, 0);
             }
-        } else {
-            desbloqueda_form(".form-miembro-enid-service");
-            render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
         }
-
+    } else {
+        desbloqueda_form(".form-miembro-enid-service");
+        render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
     }
+
 
     e.preventDefault();
 };
@@ -342,14 +151,10 @@ let registro_cotizacion = (e) => {
     let data_send = $(".form_cotizacion_enid_service").serialize();
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     bloquea_form(".form_cotizacion_enid_service");
+    valida_load();
     request_enid("POST", data_send, url, respuesta_proceso_usuario_activo);
     e.preventDefault();
 
-};
-let before_registro_afiliado = () => {
-
-    bloquea_form(".form-miembro-enid-service");
-    sload(".place_registro_afiliado", "Validando datos ", 1);
 };
 
 let respuesta_registro = (data) => {
@@ -460,5 +265,30 @@ let valida_retorno = () => {
         default:
 
             break;
+    }
+};
+let formato_inicial_comentarios = function () {
+    if (option["in_session"] < 1) {
+
+        $('.agregar_commentario').click(function () {
+            $('.text_comentarios').removeClass('d-none');
+        });
+
+        $('.nombre').keypress(envia_formulario);
+        $('.email').keypress(envia_formulario);
+        $('.password').keypress(envia_formulario);
+
+    } else {
+
+        $(".text_agregar_comentario").click(function () {
+            $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
+        });
+
+    }
+}
+let envia_formulario = function (e) {
+    let code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13) {
+        $(".form-cotizacion-enid-service").submit();
     }
 };
