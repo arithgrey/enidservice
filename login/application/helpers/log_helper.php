@@ -125,18 +125,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
-        $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
-                [
-                        "name" => "email",
-                        "placeholder" => "CORREO",
-                        "class" => "email registro_email ",
-                        "type" => "email",
-                        "required" => true,
-                        "onkeypress" => "minusculas(this);",
-                        "id" => "registro_email",
-                ]
-        );
-        $r[] = place("place_correo_incorrecto");
+
         $r[] = input_frm(
                 "mt-5", "TU NOMBRE",
                 [
@@ -149,6 +138,18 @@ if (!function_exists('invierte_date_time')) {
                 ]
         );
         $r[] = place("place_nombre_info");
+        $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
+                [
+                        "name" => "email",
+                        "placeholder" => "CORREO",
+                        "class" => "email registro_email ",
+                        "type" => "email",
+                        "required" => true,
+                        "onkeypress" => "minusculas(this);",
+                        "id" => "registro_email",
+                ]
+        );
+        $r[] = place("place_correo_incorrecto");
         $r[] = input_frm(
                 "mt-5", "UNA CONTRASEÑA",
                 [

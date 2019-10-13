@@ -429,7 +429,7 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
     $att = (is_string($attributes)) ? ["href" => $attributes] : $attributes;
     if ($format_block > 0) {
         $att["class"] = (es_data($att) && array_key_exists("class",
-                        $att)) ? add_text($att["class"], " d-block") : " ";
+                        $att)) ? add_text($att["class"], " d-block") : " d-block";
     }
 
     return get_base_html("a", $title, $att);
@@ -2745,23 +2745,20 @@ function menu_session_mobil($in_session)
 function tmp_menu($is_mobile, $id_usuario, $menu)
 {
 
-    $extra = is_mobile() ? " notificaciones_enid_mb " : " notificaciones_enid ";
+
     $notificaciones = btw(
 
 
             a_enid(
-
-
                     flex(
                             icon("fa fa-bell white"),
                             d("", "num_tareas_dia_pendientes_usr"),
                             "",
                             "align-self-center"
                     )
-
                     ,
                     [
-                            "class" => "dropdown-toggle mr-3",
+                            "class" => "dropdown-toggle",
                             "data-toggle" => "dropdown",
                     ]
             )
@@ -2770,54 +2767,49 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
 
             d(
 
-                    place("place_notificaciones_usuario padding_10 shadow border")
+                    place("place_notificaciones_usuario m-3")
                     ,
-                    add_text("dropdown-menu shadow ", $extra)
+                    "dropdown-menu menu_dropdown_enid"
 
             )
             ,
-            "dropdown dropleft  menu_notificaciones_progreso_dia "
+            "dropdown dropleft menu_notificaciones_progreso_dia mr-2 "
+    );
+
+    $imagen_usuario = a_enid(get_img_usuario($id_usuario),
+            [
+                    "class" => "dropdown-toggle",
+                    "data-toggle" => "dropdown",
+            ]
     );
 
 
-    $menu = li(
-            btw(
-                    get_img_usuario($id_usuario),
-                    ul(
-                            [
-                                    $menu,
-                                    a_enid(
-                                            "Mis reseñas y valoraciones".
-                                            d(
+    $menu_usuario = [
+            $menu,
+            a_enid("Mis reseñas y valoraciones", [
 
+                    "href" => path_enid("recomendacion", $id_usuario),
+                    "class" => "black",
+            ]),
+            a_enid("Configuración y privacidad", [
+                    "href" => path_enid("administracion_cuenta"),
+                    "class" => 'black',
+            ]),
+            a_enid("Cerrar sessión",
+                    [
 
-                                                    add_text(
-                                                            str_repeat(span('★',
-                                                                    ["class" => "estrella azul_estrella"]),
-                                                                    4)
-                                                            ,
-                                                            span('★',
-                                                                    [
-                                                                            "class" => "azul_estrella_simple",
+                            "href" => path_enid("logout"),
+                            "class" => 'black',
+                    ]
+            ),
+    ];
+    $opciones_menu = d(append($menu_usuario), 'dropdown-menu mw_250 p-3');
+    $extra_menu = [
+            $imagen_usuario,
 
-                                                                    ])
-
-                                                    )
-
-
-                                                    , "contenedor_promedios"
-                                            )
-                                            ,
-                                            path_enid("recomendacion", $id_usuario)
-
-                                    ),
-                                    a_enid("Configuración y privacidad",
-                                            path_enid("administracion_cuenta")),
-                                    a_enid("Cerrar sessión", path_enid("logout")),
-                            ],
-                            "dropdown-menu menu_usuario "
-                    ), ""
-            ), "dropdown ");
+            $opciones_menu,
+    ];
+    $menu = d(append($extra_menu), 'dropdown dropleft');
 
     return flex($notificaciones, $menu, "mr-5");
 
@@ -3056,5 +3048,6 @@ function money($num)
 function format_load()
 {
 
-    return d(d('', 'progress-bar mh_15 w-100'), "cargando_form progress progress-striped active page-progress-bar mt-5 d-none");
+    return d(d('', 'progress-bar mh_15 w-100'),
+            "cargando_form progress progress-striped active page-progress-bar mt-5 d-none");
 }

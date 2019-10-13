@@ -1925,9 +1925,9 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_data($cupon)) {
 
-            $response[] = h("CUPON PROMOCIONAL POR PRIMER COMPRA", 4,'strong');
+            $response[] = h("CUPON PROMOCIONAL POR PRIMER COMPRA", 4, 'strong');
             $response[] = formated_link(pr($cupon, 'cupon'));
-            $response[] = h(add_text("Valor ", money(pr($cupon, 'valor', 0))),4);
+            $response[] = h(add_text("Valor ", money(pr($cupon, 'valor', 0))), 4);
 
         }
 
