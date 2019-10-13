@@ -132,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
                             "required" => "true",
                             "placeholder" => "***",
                     ],_text_pass);
-            echo _text_pass;
+            
 
 
             $z[] = input_frm("col-lg-6 mt-5", "Tel. ",
