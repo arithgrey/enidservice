@@ -1,4 +1,6 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
 
 
@@ -10,96 +12,66 @@ if (!function_exists('invierte_date_time')) {
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
+            $img = img(
+                    [
+                            "src" => $row["icon"],
+                            "id" => $id,
+                            "class" => "cursor_pointer linea_metro puntos_encuentro",
+                            "nombre_linea" => $row["nombre"],
+                    ]
+            );
+
+            $accion = ($index !== false) ? 'agregar_linea fa fa-plus-square fa-2x ' : 'fa fa-minus fa-2x quitar_linea ';
+            $icono = icon(_text($accion), ["id" => $id]);
             if ($index !== false) {
 
-                $img =
-                    img(
-                        [
-                            "src" => $row["icon"],
-                            "id" => $id,
-                            "class" => "cursor_pointer linea_metro puntos_encuentro",
-                            "nombre_linea" => $row["nombre"]
-                        ]
-                    );
-
-                $negra[] = d(ajustar(
-                    $img, icon("agregar_linea fa fa-plus-square fa-2x", ["id" => $id])), 3);
+                $negra[] = d(ajustar($img, $icono), 3);
 
             } else {
-
-                $img =
-                    img(
-                        [
-                            "src" => $row["icon"],
-                            "id" => $id,
-                            "class" => "cursor_pointer linea_metro puntos_encuentro",
-                            "nombre_linea" => $row["nombre"]
-                        ]
-                    );
-
-                $r[] = d(ajustar($img, icon("quitar_linea  fa fa-minus fa-2x", ["id" => $id])), 3);
-
-
+                $r[] = d(ajustar($img, $icono), 3);
             }
-
-
         }
-
 
         $response[] = h("LINEAS DE METRO DISPONIBLES", 3);
         $response[] = append($r);
-        $response[] = br(7);
         $response[] = hr();
         $response[] = h("LINEAS DE METRO EN PAUSA", 3);
         $response[] = append($negra);
+
         return append($response);
     }
 
     function create_listado_linea_metro($data, $lista_negra, $param)
     {
         $r = [];
-        $negra = [];
+//        $negra = [];
 
         foreach ($data as $row) {
 
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
-            if ($index !== false) {
+            $extra_clase_imagen = ($index !== false) ? '' : ' lm bb_hv filter_g';
 
-
-                $img =
-                    img(
-                        [
+            $img = img(
+                    [
                             "src" => $row["icon"],
                             "id" => $id,
-                            "class" => "cursor_pointer linea_metro lm",
-                            "nombre_linea" => $row["nombre"]
-                        ]
-                    );
+                            "class" => "cursor_pointer linea_metro lm ".$extra_clase_imagen,
+                            "nombre_linea" => $row["nombre"],
+                    ]
+            );
 
-                $negra[] = d($img, 3);
+            if ($index !== false) {
+
+//                $negra[] = d($img, 3);
 
             } else {
 
-
-                $ext =  (prm_def($param, "is_mobile") > 0 ) ? "w-100" : "w-50";
-                $img =
-                    img(
-                        [
-                            "src" => $row["icon"],
-                            "id" => $id,
-                            "class" => "cursor_pointer linea_metro lm bb_hv filter_g",
-                            "nombre_linea" => $row["nombre"]
-                        ]
-                    );
-
-                $r[] = d($img, " mx-auto mt-2 " . $ext);
-
-
+                $ext = (prm_def($param, "is_mobile") > 0) ? "w-100" : "w-50";
+                $r[] = d($img, " mx-auto mt-2 ".$ext);
             }
-
-
         }
+
         return append($r);
     }
 
@@ -109,14 +81,12 @@ if (!function_exists('invierte_date_time')) {
         foreach ($array as $row) {
 
             $linea = d(
-                add_text(
-                    "LINEA ", $row["numero"]
-                ),
-                [
-                    "id" => $row["id"],
-                    "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
-                    "nombre_linea" => $row["nombre"]
-                ]
+                    add_text("LINEA ", $row["numero"]),
+                    [
+                            "id" => $row["id"],
+                            "class" => "cursor_pointer linea_metro nombre_linea_metrobus top_20",
+                            "nombre_linea" => $row["nombre"],
+                    ]
             );
 
             $r[] = d($linea, 3);
@@ -124,6 +94,4 @@ if (!function_exists('invierte_date_time')) {
 
         return append($r);
     }
-
-
 }

@@ -1664,7 +1664,6 @@ function get_request_email($email, $asunto, $cuerpo)
             "para" => $email,
             "asunto" => $asunto,
             "cuerpo" => $cuerpo,
-
     ];
 }
 
@@ -3051,3 +3050,19 @@ function format_load()
     return d(d('', 'progress-bar mh_15 w-100'),
             "cargando_form progress progress-striped active page-progress-bar mt-5 d-none");
 }
+
+function _text()
+{
+
+
+    $lista_argumentos = func_get_args();
+    $response = '';
+    for ($i = 0; $i < func_num_args(); $i++) {
+        $response .= $lista_argumentos[$i];
+    }
+
+    return $response;
+
+}
+
+

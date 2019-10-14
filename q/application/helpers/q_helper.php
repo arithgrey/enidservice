@@ -67,7 +67,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-
         $a[] = td("Periodo");
         $a[] = td("Totales  Días ".$num_dias);
         $a[] = $seccion_fechas;
@@ -91,7 +90,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = tr(append($d));
 
         return tb(append($response), ["border" => "1", "class" => "text-center"]);
-
 
     }
 
@@ -1359,40 +1357,42 @@ if (!function_exists('invierte_date_time')) {
 
     function add_preguntas_sin_lectura($preguntas, $es_vendedor = 0)
     {
-
         $r = [];
         $f = 0;
-        foreach ($preguntas as $row) {
+        if (es_data($preguntas)) {
 
 
-            $id_pregunta = $row["id_pregunta"];
-            $pregunta = $row["pregunta"];
-            $id_servicio = $row["id_servicio"];
-            $pregunta =
-                    d(((strlen($pregunta) > 50) ? substr($pregunta, 0, 60) : $pregunta),
-                            "black");
+            foreach ($preguntas as $row) {
 
-            $t = [];
-            $t[] = ajustar(
-                    d(img_servicio($id_servicio), "w_50"),
-                    $pregunta,
-                    0
-            );
+                $id_pregunta = $row["id_pregunta"];
+                $pregunta = $row["pregunta"];
+                $id_servicio = $row["id_servicio"];
+                $pregunta = d(((strlen($pregunta) > 50) ? substr($pregunta, 0,
+                        60) : $pregunta),
+                        "black");
+
+                $t = [];
+                $t[] = ajustar(
+                        d(img_servicio($id_servicio), "w_50"),
+                        $pregunta,
+                        0
+                );
+
+                $r[] = a_enid(
+                                append($t),
+                                "../pregunta/?action=recepcion&id=".$id_pregunta."&id_servicio=".$id_servicio."#pregunta".$id_pregunta
+                        ).
+                        hr();
+                $f++;
+            }
 
 
-            $r[] = a_enid(
-                            append($t),
-                            "../pregunta/?action=recepcion&id=".$id_pregunta."&id_servicio=".$id_servicio."#pregunta".$id_pregunta
-                    ).
-                    hr();
-            $f++;
+            if (es_data($r)) {
+                array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
+            }
+
+
         }
-
-
-        if (es_data($r)) {
-            array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
-        }
-
         $response = [
                 "html" => append($r),
                 "flag" => $f,
@@ -1407,35 +1407,37 @@ if (!function_exists('invierte_date_time')) {
 
         $r = [];
         $f = 0;
-        foreach ($respuestas as $row) {
+        if (es_data($respuestas)) {
+            foreach ($respuestas as $row) {
+                $id_pregunta = $row["id_pregunta"];
+                $pregunta = $row["pregunta"];
+                $id_servicio = $row["id_servicio"];
+                $pregunta = d(((strlen($pregunta) > 50) ? substr($pregunta, 0,
+                        60) : $pregunta), "black");
 
 
-            $id_pregunta = $row["id_pregunta"];
-            $pregunta = $row["pregunta"];
-            $id_servicio = $row["id_servicio"];
-            $pregunta = d(((strlen($pregunta) > 50) ? substr($pregunta, 0,
-                    60) : $pregunta), "black");
+                $t = [];
+                $t[] = ajustar(
+                        d(img_servicio($id_servicio), "w_50"),
+                        $pregunta,
+                        0
+                );
 
 
-            $t = [];
-            $t[] = ajustar(
-                    d(img_servicio($id_servicio), "w_50"),
-                    $pregunta,
-                    0
-            );
+                $r[] = a_enid(
+                                append($t),
+                                "../pregunta/?action=hechas&id=".$id_pregunta."&id_servicio=".$id_servicio."#pregunta".$id_pregunta
+                        ).hr();
+                $f++;
+            }
 
+            if (es_data($r)) {
 
-            $r[] = a_enid(
-                            append($t),
-                            "../pregunta/?action=hechas&id=".$id_pregunta."&id_servicio=".$id_servicio."#pregunta".$id_pregunta
-                    ).hr();
-            $f++;
+                array_unshift($r, "TU BUZÓN");
+            }
+
         }
 
-        if (es_data($r)) {
-
-            array_unshift($r, "TU BUZÓN");
-        }
 
         $response = [
                 "html" => append($r),

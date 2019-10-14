@@ -8,11 +8,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $in_session = $data["in_session"];
-        //$r[] = place("info_articulo", ["id" => 'info_articulo']);
         $z[] = str_title($in_session, $data["is_mobile"], 1);
         $z[] = frm_contacto_servicio($in_session, $data["servicio"]);
-        //$z[] = place("place_registro_afiliado");
-        //$r[] = d(d(append($z), "contenedo_compra_info"), "contenedor_compra");
+
         return d(append($z), 8, 1);
 
     }
@@ -52,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = str_title($in_session, $is_mobile);
         $z[] = form_open("", [
-                "class" => "form-miembro-enid-service ",
+                "class" => "form_nuevo",
                 "id" => "form-miembro-enid-service",
         ]);
         $z[] = frm_miembro_enid_service_hidden(
@@ -76,14 +74,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
     function str_title($in_session, $is_mobile, $es_servicio = 0)
     {
 
         $text = "";
         if ($es_servicio > 0) {
-            $text = ($in_session == 0 && $is_mobile == 0) ?
-                    h("SOLICITA TU PRESUPUESTO", 3, " strong") : "";
+            $text = ($in_session == 0 && $is_mobile == 0) ? h("SOLICITA TU PRESUPUESTO",
+                    3, " strong") : "";
         }
 
         return $text;
@@ -131,8 +128,7 @@ if (!function_exists('invierte_date_time')) {
                             "type" => "password",
                             "required" => "true",
                             "placeholder" => "***",
-                    ],_text_pass);
-            
+                    ], _text_pass);
 
 
             $z[] = input_frm("col-lg-6 mt-5", "Tel. ",
@@ -183,25 +179,71 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $servicio[0];
 
-        $r = [];
+        $hiddens[] = hiddens(
+                [
+                        "id" => "id_servicio",
+                        "class" => "id_servicio  servicio",
+                        "name" => "id_servicio",
+                        "value" => $servicio["id_servicio"],
+                ]
+        );
+        $hiddens[] = hiddens(
+                [
+                        "class" => "id_ciclo_facturacion",
+                        "name" => "ciclo_facturacion",
+                        "value" => $servicio["id_ciclo_facturacion"],
+                ]
+        );
+        $hiddens[] = hiddens(
+                [
+                        "class" => "num_ciclos",
+                        "name" => "num_ciclos",
+                        "value" => 1,
+                ]
+        );
+
+        $hiddens[] = hiddens(
+                [
+                        "class" => "talla",
+                        "name" => "talla",
+                        "value" => "",
+                ]);
+        $hiddens[] = hiddens(
+                [
+                        "class" => "tipo_entrega",
+                        "name" => "tipo_entrega",
+                        "value" => 2,
+                ]);
+        $hiddens[] = hiddens(
+                [
+                        "class" => "id_carro_compras",
+                        "name" => "id_carro_compras",
+                        "value" => 0,
+                ]);
+        $hiddens[] = hiddens(
+                [
+                        "class" => "carro_compras",
+                        "name" => "carro_compras",
+                        "value" => "",
+                ]);
+
+
         if ($in_session < 1) {
 
-            $r[] = form_open("", ["class" => "form-cotizacion-enid-service row"]);
+            $x[] = form_open("", ["class" => "form_nuevo row"]);
+            $x[] = input_frm("col-lg-6 mt-5",
+                    "Nombre",
+                    [
+                            "id" => "nombre",
+                            "name" => "nombre",
+                            "type" => "text",
+                            "placeholder" => "Quien solicita",
+                            "class" => "nombre",
+                            "minlength" => 3,
+                            "required" => true,
+                    ]
 
-            $x[] =
-                    input_frm("col-lg-6 mt-5",
-                            "Nombre",
-                            [
-                                    "id" => "nombre",
-                                    "name" => "nombre",
-                                    "type" => "text",
-                                    "placeholder" => "Quien solicita",
-                                    "class" => "nombre",
-                                    "minlength" => 3,
-                                    "required" => true,
-                            ]
-
-                    );
+            );
 
             $x[] = input_frm("col-lg-6 mt-5", "Email",
                     [
@@ -223,7 +265,6 @@ if (!function_exists('invierte_date_time')) {
                             "required" => true,
                             "id" => "password",
                     ]
-
             );
 
 
@@ -261,125 +302,63 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = append($x);
-
-            $r[] = hiddens([
-                    "id" => "id_servicio",
-                    "class" => "id_servicio servicio form-control",
-                    "name" => "id_servicio",
-                    "value" => $servicio["id_servicio"],
-            ]);
-            $r[] = hiddens([
-                    "class" => "id_ciclo_facturacion",
-                    "name" => "ciclo_facturacion",
-                    "value" => $servicio["id_ciclo_facturacion"],
-            ]);
-
-
             $r[] = d(textarea(
                     [
                             "name" => "comentarios",
                             "class" => "comentario",
 
-                    ]), "col-lg-12 mt-3 d-none text_comentarios");
+                    ]
+            ), "col-lg-12 mt-3 d-none text_comentarios");
 
 
             $r[] = d("", 9);
             $r[] = d(btn("COTIZAR"), "col-lg-3 mt-5");
             $r[] = seccion_usuario_registrado();
             $r[] = place("place_config_usuario");
+            $r[] = append($hiddens);
             $r[] = form_close();
 
         } else {
 
             $r[] = form_open("", ["class" => "form_cotizacion_enid_service"]);
-            $r[] = contaiter(h("SOLICITA TU PRESUPUESTO", 3, "strong"), 1);
-            $r[] = contaiter(d(span("SOBRE: ",
-                            "underline").$servicio["nombre_servicio"], 12),
-                    "mt-3 mb-3");
+            $r[] = append($hiddens);
+            $r[] = contaiter(h("PRESUPUESTO", 3, "strong"), 1);
+            $texto_descriptivo_cotizacion = h(
+                    add_text("SOBRE: ", $servicio["nombre_servicio"]), 4);
+            $r[] = contaiter($texto_descriptivo_cotizacion, "mb-3");
 
-            $r[] = contaiter(
-                    input_frm("col-lg-12", "Fecha de interés", [
-                            "data-date-format" => "yyyy-mm-dd",
-                            "name" => 'fecha_servicio',
-                            "class" => "fecha_servicio",
-                            "type" => 'date',
-                            "value" => date("Y-m-d"),
-                            "min" => date("Y-m-d"),
-                            "max" => add_date(date("Y-m-d"), 35),
-                            "id" => "fecha_interes",
-                    ]), "mt-5 mb-3");
+            $r[] = contaiter(input_frm("col-lg-12 p-0", "Fecha de interés", [
+                    "data-date-format" => "yyyy-mm-dd",
+                    "name" => 'fecha_servicio',
+                    "class" => "fecha_servicio",
+                    "type" => 'date',
+                    "value" => date("Y-m-d"),
+                    "min" => date("Y-m-d"),
+                    "max" => add_date(date("Y-m-d"), 35),
+                    "id" => "fecha_interes",
+            ]), "mt-5");
 
             $r[] = contaiter(d("¿Deseas agregar algún comentario?",
-                    "top_30 strong text_agregar_comentario cursor_pointer"), 1);
+                    "strong text_agregar_comentario cursor_pointer"), 'mt-5');
             $r[] = contaiter(textarea([
                     "name" => "descripcion",
                     "class" => "d-none descripcion_comentario",
             ]), 1);
-
-            $r[] = hiddens(
-                    [
-                            "id" => "id_servicio",
-                            "class" => "id_servicio  servicio form-control",
-                            "name" => "id_servicio",
-                            "value" => $servicio["id_servicio"],
-                    ]);
-            $r[] = hiddens(
-                    [
-                            "class" => "num_ciclos",
-                            "name" => "num_ciclos",
-                            "value" => 1,
-                    ]);
-
-            $r[] = hiddens(
-                    [
-                            "class" => "id_ciclo_facturacion",
-                            "name" => "ciclo_facturacion",
-                            "value" => $servicio["id_ciclo_facturacion"],
-                    ]);
-            $r[] = hiddens(
-                    [
-                            "class" => "talla",
-                            "name" => "talla",
-                            "value" => "",
-                    ]);
-            $r[] = hiddens(
-                    [
-                            "class" => "tipo_entrega",
-                            "name" => "tipo_entrega",
-                            "value" => 2,
-                    ]);
-            $r[] = hiddens(
-                    [
-                            "class" => "id_carro_compras",
-                            "name" => "id_carro_compras",
-                            "value" => 0,
-                    ]);
-            $r[] = hiddens(
-                    [
-                            "class" => "carro_compras",
-                            "name" => "carro_compras",
-                            "value" => "",
-                    ]);
-
-
             $r[] = contaiter(
-                    dd(
-                            "",
-                            btn(
-                                    "ENVIAR",
-                                    [
-                                            "class" => "top_30 ",
-                                            "name" => "comentarios",
-                                    ], 0
-                            ),
-                            6
+                    btn(
+                            "ENVIAR",
+                            [
+                                    "class" => "top_30 ",
+                                    "name" => "comentarios",
+                            ], 0
                     )
             );
 
             $r[] = form_close();
 
         }
-        $r[] =  format_load();
+        $r[] = format_load();
+
         return append($r);
 
 
@@ -466,12 +445,14 @@ if (!function_exists('invierte_date_time')) {
                         "name" => "num_ciclos",
                         "class" => "num_ciclos",
                         "value" => $num_ciclos,
-                ]),
+                ])
+            ,
                 hiddens([
                         "name" => "ciclo_facturacion",
-                        "class" => "ciclo_facturacion",
+                        "class" => "id_ciclo_facturacion",
                         "value" => $ciclo_facturacion,
-                ]),
+                ])
+            ,
                 hiddens([
                         "name" => "talla",
                         "class" => "talla",
@@ -488,6 +469,12 @@ if (!function_exists('invierte_date_time')) {
                         "name" => "id_carro_compras",
                         "class" => "id_carro_compras",
                         "value" => $id_carro_compras,
+                ])
+            ,
+                hiddens([
+                        "class" => "fecha_servicio",
+                        "name" => 'fecha_servicio',
+                        "value" => date("Y-m-d"),
                 ]),
 
 

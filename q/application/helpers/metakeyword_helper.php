@@ -1,4 +1,6 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
 
     function create_arr_tags($data)
@@ -8,7 +10,6 @@ if (!function_exists('invierte_date_time')) {
 
             $metakeyword = $row["metakeyword"];
             if (strlen($metakeyword) > 0) {
-
                 $tags = json_decode($metakeyword, true);
                 break;
             }
@@ -23,13 +24,15 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("ÚLTIMAS EMPLEADAS ", "item-content-block");
         foreach ($catalogo as $row) {
 
-            array_push($response,
-                a_enid($row,
-                    [
-                        'class' => 'white tag_catalogo',
-                        'id' => $row
-                    ]
-                )
+            array_push(
+                    $response,
+                    a_enid(
+                            $row,
+                            [
+                                    'class' => 'white tag_catalogo',
+                                    'id' => $row,
+                            ]
+                    )
             );
         }
 

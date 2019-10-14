@@ -1,22 +1,24 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
     function valida_active($num, $num_tab)
     {
-        return  ($num == $num_tab) ? ' class="active" ' : "";
+        return ($num == $num_tab) ? ' class="active" ' : "";
 
     }
+
     function lista_categorias($categorias)
     {
 
         $r = [];
         foreach ($categorias as $row) {
 
-            $r[] = d(
-                a_enid(
-                span($row["nombre_categoria"] . "(" . $row["faqs"]. ")")
-                , "?categoria=" . $row["id_categoria"])
-            );
+            $str = _text("(", $row["faqs"], ")");
+            $link = add_text("?categoria=", $row["id_categoria"]);
+            $r[] = a_enid(_text($row["nombre_categoria"], $str), $link);
         }
+
         return append($r);
     }
 
@@ -24,20 +26,20 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $tags = explode(",", $string);
-        $response = "";
+        $response = [];
         foreach ($tags as $row) {
 
-
-            $response .= d(text_icon('fa fa-times', $row),
-                [
-                    "class" => 'tag_servicio btn btn-primary btn-sm',
-                    "id" => $row,
-                    "onclick" => "eliminar_tag('" . $row . "' ,  '" . $id_servicio . "' );"
-
-                ]);
-
+            $response[] = d(
+                    text_icon('fa fa-times', $row),
+                    [
+                            "class" => 'tag_servicio btn btn-primary btn-sm',
+                            "id" => $row,
+                            "onclick" => "eliminar_tag('".$row."' ,  '".$id_servicio."' );",
+                    ]
+            );
         }
-        return $response;
+
+        return append($response);
     }
 
     function valida_existencia_imagenes($num_images)
@@ -48,35 +50,40 @@ if (!function_exists('invierte_date_time')) {
     function text_agregar_telefono($has_phone, $telefono_visible)
     {
 
-        $link =  ($has_phone == 0)  ? a_enid('INDICA TU NÚMERO TELEFÓNICO',  path_enid("administracion_cuenta") ) : "";
-        return d(d($link, 1), "top_30");
+        $accion = a_enid('INDICA TU NÚMERO TELEFÓNICO',
+                path_enid("administracion_cuenta"));
+        $link = ($has_phone < 1) ? $accion : "";
+
+        return d($link, "p-0 col-lg-1 top_30");
 
     }
+
     function valida_text_imagenes($tipo_promocion, $num_images)
     {
 
         $tipo_promocion = strtoupper($tipo_promocion);
         if ($num_images == 0) {
 
-
+            $ayuda = _text(
+                    "MUESTRA IMAGENES SOBRE TU ", $tipo_promocion, " A TUS CLIENTES");
             $text[] = h(
-                "MUESTRA IMAGENES SOBRE TU " . $tipo_promocion . " A TUS CLIENTES"
-                ,
-                5
-                ,
-                'mensaje_imagenes_visible white shadow padding_10 black_enid_background'
-                ,
-                1
+                    $ayuda
+                    ,
+                    5
+                    ,
+                    'mensaje_imagenes_visible white shadow padding_10 black_enid_background'
+                    ,
+                    1
             );
 
-
+            $incentivo = _text("TU ", $tipo_promocion,
+                    " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES");
             $text[] = d(
-                "TU " . $tipo_promocion . " NO SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
-
-                ,
-                "notificacion_publicar_imagenes top_40 bottom_40"
-                ,
-                1);
+                    $incentivo
+                    ,
+                    "notificacion_publicar_imagenes top_40 bottom_40"
+                    ,
+                    1);
 
             return append($text);
         }
@@ -85,16 +92,16 @@ if (!function_exists('invierte_date_time')) {
     function valida_descartar_promocion($num_images, $id_servicio, $id_perfil)
     {
 
-        $response = ($num_images == 0 || $id_perfil != 20 && $id_perfil > 0) ?
-            d(
+        $response = ($num_images < 1 || $id_perfil != 20) ?
+
                 a_enid(
-                    "DESCARTAR PROMOCIÓN",
-                    [
-                        "class" => 'descartar_promocion border descartar_promocion padding_10 ',
-                        "id" => $id_servicio
-                    ]
-                ), "text-right top_30 bottom_50"
-            ) : "";
+                        "DESCARTAR PROMOCIÓN",
+                        [
+                                "class" => 'descartar_promocion border descartar_promocion padding_10 text-right top_30 bottom_50',
+                                "id" => $id_servicio,
+                        ]
+                ) : "";
+
         return $response;
     }
 

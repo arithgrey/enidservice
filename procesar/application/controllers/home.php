@@ -137,7 +137,7 @@ class Home extends CI_Controller
             "externo" => 1
         ];
 
-        $response = $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
+        $response = $this->app->api("usuario_direccion/direccion_envio_pedido/format/json/", $q);
 
         if ($v > 0) {
             $response = append([$response, hiddens(["class" => "es_seguimiento", "value" => 1])]);

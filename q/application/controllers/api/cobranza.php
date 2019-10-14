@@ -296,7 +296,6 @@ class Cobranza extends REST_Controller
 
         ];
 
-
         return $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
 
     }

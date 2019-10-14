@@ -1,37 +1,30 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
 
     function render_tallas($data)
     {
 
 
-        $str = ($data["num_clasificaciones"] > 0) ? h(
-            "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
-            5
-            ,
-            'titulo-tags-ingresos'
-        ) : "";
+        $str = ($data["num_clasificaciones"] > 0) ?
+                h(
+                        "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
+                        5
+                        ,
+                        'titulo-tags-ingresos'
+                ) : "";
 
+        $talla = h(prm_def($data["talla"], "tipo"), 2, 'info-tipo-talla');
+        $cuerpo_talla = _text($talla, $str, $data["clasificaciones_existentes"]);
 
-        $r[] = d(
-            append([
-
-                    h(
-                        prm_def($data["talla"], "tipo"),
-                        2,
-                        'info-tipo-talla'
-                    )
-                    , $str, $data["clasificaciones_existentes"]
-                ]
-            )
-            ,
-            "agregadas col-lg-9"
-        );
+        $r[] = d($cuerpo_talla, "agregadas col-lg-9");
         $r[] = btw(
-            h("CLASIFICACIONES", 3),
-            frm_clasificacion_talla(),
-            " sugerencias col-lg-3"
+                h("CLASIFICACIONES", 3),
+                frm_clasificacion_talla(),
+                " sugerencias col-lg-3"
         );
+
         return append($r);
 
     }
@@ -39,8 +32,14 @@ if (!function_exists('invierte_date_time')) {
     function formatAgregar($param)
     {
 
-        $btn = "<button class='button-op " . add_text("seleccion_" , $param["nivel"]) . "'>AGREGAR A LA LISTA</button>";
-        return d($btn, "mas_" . $param["nivel"]);
+        $btn = form_button(
+                [
+                        'class' => _text('button-op ', 'seleccion_', $param["nivel"]),
+
+                ], 'AGREGAR A LA LISTA'
+        );
+
+        return d($btn, "mas_".$param["nivel"]);
 
     }
 
@@ -49,16 +48,15 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "form-agregar-clasificacion-talla"]);
         $r[] = input(
-            [
-                "type" => "text",
-                "name" => "clasificacion",
-                "placeholder" => "Busca por clasificación"
-            ]
+                [
+                        "type" => "text",
+                        "name" => "clasificacion",
+                        "placeholder" => "Busca por clasificación",
+                ]
         );
-
         $r[] = form_close(place("info_tags"));
+
         return append($r);
 
     }
-
 }
