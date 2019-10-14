@@ -1,7 +1,7 @@
+"use strict";
 window.history.pushState({page: 1}, "", "");
 window.history.pushState({page: 2}, "", "");
 window.onpopstate = function (event) {
-
     if (event) {
 
         let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_retorno();
@@ -9,170 +9,112 @@ window.onpopstate = function (event) {
 };
 
 
+let form_miembro = '.form_nuevo';
+let form_cotizacion = ".form_cotizacion_enid_service";
+
+let input_nombre = '.nombre';
+let input_email = '.email';
+let input_id_servicio = '.id_servicio';
+let descripcion_servicio = '.resumen_producto';
+let id_ciclo_facturacion = '.id_ciclo_facturacion';
+let usuario_referencia = '.q2';
+let num_ciclos = '.num_ciclos';
+let talla = '.talla';
+
+let $form_miembro = $(form_miembro);
+let $form_cotizacion = $(form_cotizacion);
+
+let $input_nombre = $(input_nombre);
+let $input_email = $(input_email);
+let $id_servicio = $(input_id_servicio);
+let $descripcion_servicio = $(descripcion_servicio);
+let $id_ciclo_facturacion = $(id_ciclo_facturacion);
+let $usuario_referencia = $(usuario_referencia);
+let $num_ciclos = $(num_ciclos);
+let $talla = $(talla);
+
+let input_password = ".password";
+let fecha_servicio = ".fecha_servicio";
+let $input_password = "";
+let $input_fecha_servicio = $(fecha_servicio);
+
 $(document).ready(() => {
 
+    set_option({"vista": 1,});
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
-    recorre(".contenedor_compra");
-
-    $(".form-miembro-enid-service").submit(registro);
-    $(".form-cotizacion-enid-service").submit(solicitud_cotizacion);
-    $(".form_cotizacion_enid_service").submit(registro_cotizacion);
-
-    set_option({
-        "id_servicio": get_parameter(".id_servicio"),
-        "dominio": get_parameter(".dominio"),
-        "num_ciclos": get_parameter(".num_ciclos"),
-        "ciclo_facturacion": get_parameter(".ciclo_facturacion"),
-        "descripcion_servicio": get_parameter(".resumen_producto"),
-        "vista": 1,
-    });
-
-
+    $form_miembro.submit(registro);
+    $form_cotizacion.submit(registro_cotizacion);
     $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
     $(".link_acceso").click(set_link);
     $(".continuar_pedido").click(continuar_compra);
-    formato_inicial_comentarios();
-    $telefono.keypress(envia_formulario);
-
+    formato_inicial();
+    if (document.body.querySelector(".telefono")) {
+        $telefono.keypress(envia_formulario);
+    }
 
 });
 
 let registro = (e) => {
 
-    let flag = 0;
-    let text_password = $.trim($(".password").val());
-    if (text_password.length > 7) {
-        $(".place_password_afiliado").empty();
-        let flag = valida_num_form(".telefono", ".place_telefono");
-        if (flag == 1) {
-            let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
-            if (flag2 == 1) {
+    verifica_formato_default_inputs(0);
+    let len_telefono = $telefono.val().length;
+    let len_pw = $input_password.val().length;
+    reset_posibles_errores();
+    let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
+    if ($validacion_primer_registro) {
+        bloquea_form(form_miembro);
+        let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
+        let text_password = $.trim($input_password.val());
+        let pwpost = "" + CryptoJS.SHA1(text_password);
+        let data_send = {
+            "password": pwpost,
+            "email": $input_email.val(),
+            "nombre": $input_nombre.val(),
+            "telefono": $telefono.val(),
+            "id_servicio": $id_servicio.val(),
+            "num_ciclos": $num_ciclos.val(),
+            "descripcion_servicio": $descripcion_servicio.val(),
+            "ciclo_facturacion": $id_ciclo_facturacion.val(),
+            "usuario_referencia": $usuario_referencia.val(),
+            "talla": $talla.val(),
+            "tipo_entrega": 2,
+            "fecha_servicio": $input_fecha_servicio.val(),
+        };
 
+        valida_load();
+        request_enid("POST", data_send, url, respuesta_registro, 0);
 
-                $(".resumen_productos_solicitados").hide();
-                recorre(".contenedor_formulario_compra");
-                bloquea_form(".form-miembro-enid-service");
-                let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-                let pw = $.trim($(".password").val());
-                let pwpost = "" + CryptoJS.SHA1(pw);
-
-                set_option({
-                    "email": $(".email").val(),
-                    "nombre": $(".nombre").val(),
-                    "telefono": $(".telefono").val(),
-                    "usuario_referencia": $(".q2").val(),
-                    "talla": $(".talla").val(),
-                });
-
-                let data_send = {
-                    "password": pwpost,
-                    "email": get_option("email"),
-                    "nombre": get_option("nombre"),
-                    "telefono": get_option("telefono"),
-                    "id_servicio": get_parameter(".id_servicio"),
-                    "num_ciclos": get_option("num_ciclos"),
-                    "descripcion_servicio": get_option("descripcion_servicio"),
-                    "ciclo_facturacion": get_option("ciclo_facturacion"),
-                    "usuario_referencia": get_option("usuario_referencia"),
-                    "talla": get_option("talla"),
-                    "tipo_entrega": 2,
-                    "fecha_servicio": get_option("fecha_servicio"),
-                };
-                $(".informacion_extra").hide();
-                bloquea_form(".form-miembro-enid-service");
-                ;
-                valida_load();
-                request_enid("POST", data_send, url, respuesta_registro, 0);
-            }
-        }
     } else {
-        desbloqueda_form(".form-miembro-enid-service");
-        render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
+        focus_inputs_form(len_telefono, len_pw);
     }
-
 
     e.preventDefault();
 };
 
-
-let solicitud_cotizacion = e => {
-
-
-    let flag = 0;
-    let text_password = $.trim($(".password").val());
-    if (text_password.length > 7) {
-        $(".place_password_afiliado").empty();
-        let flag = valida_num_form(".telefono", ".place_telefono");
-        if (flag == 1) {
-            let flag2 = val_text_form(".telefono", ".place_telefono", 6, "Número telefónico");
-            if (flag2 == 1) {
-
-                recorre(".contenedor_formulario_compra");
-                bloquea_form(".form-cotizacion-enid-service");
-                let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-                let pwpost = "" + CryptoJS.SHA1($.trim($(".password").val()));
-
-                set_option("email", $(".email").val());
-                set_option("nombre", $(".nombre").val());
-                set_option("telefono", $(".telefono").val());
-                set_option("usuario_referencia", $(".q2").val());
-                set_option("talla", "");
-                let data_send = {
-                    "password": pwpost,
-                    "email": get_option("email"),
-                    "nombre": get_option("nombre"),
-                    "telefono": get_option("telefono"),
-                    "id_servicio": get_parameter(".id_servicio"),
-                    "num_ciclos": 1,
-                    "descripcion_servicio": get_parameter(".comentario"),
-                    "ciclo_facturacion": get_parameter(".id_ciclo_facturacion"),
-                    "usuario_referencia": get_option("usuario_referencia"),
-                    "talla": "",
-                    "tipo_entrega": 2,
-                    "fecha_servicio": get_parameter(".fecha_servicio"),
-
-                };
-                $(".informacion_extra").hide();
-                bloquea_form(".form-miembro-enid-service");
-                valida_load();
-                request_enid("POST", data_send, url, respuesta_registro_cotizacion, 0);
-            }
-        }
-    } else {
-        desbloqueda_form(".form-miembro-enid-service");
-        render_enid(".place_password_afiliado", "<span class='alerta_enid'>Registre una contraseña de mínimo 8 caracteres</span>");
-    }
-
-
-    e.preventDefault();
-};
 let registro_cotizacion = (e) => {
 
-    let data_send = $(".form_cotizacion_enid_service").serialize();
+    let data_send = $form_cotizacion.serialize();
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
-    bloquea_form(".form_cotizacion_enid_service");
+    bloquea_form(form_cotizacion);
     valida_load();
     request_enid("POST", data_send, url, respuesta_proceso_usuario_activo);
     e.preventDefault();
-
 };
 
 let respuesta_registro = (data) => {
-
+    debugger;
     empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
-        desbloqueda_form(".form-miembro-enid-service");
+        desbloqueda_form(form_miembro);
         if (data.usuario_existe > 0) {
 
-            $('.usuario_existente').removeClass('some d-none');
+            $('.usuario_existente').removeClass('d-none');
             recorre(".usuario_existente");
-
 
         } else {
 
-            redirect("../area_cliente/?action=compras");
-
+            redirect("../area_cliente/?action=compras&ticket=" + data.id_recibo);
         }
 
     } else {
@@ -181,28 +123,19 @@ let respuesta_registro = (data) => {
     }
 
 };
-
-let respuesta_registro_cotizacion = (data) => {
-
-    $(".place_registro_afiliado").empty();
-    redirect("../area_cliente");
-
-};
 let procesar_pedido_usuario_activo = () => {
 
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
-
     let data_send = {
-        "id_servicio": get_option("id_servicio"),
-        "num_ciclos": get_option("num_ciclos"),
-        "descripcion_servicio": get_option("descripcion_servicio"),
-        "ciclo_facturacion": get_option("ciclo_facturacion"),
-        "talla": get_option("talla"),
+        "id_servicio": $id_servicio.val(),
+        "num_ciclos": $num_ciclos.val(),
+        "descripcion_servicio": $descripcion_servicio.val(),
+        "ciclo_facturacion": $id_ciclo_facturacion.val(),
+        "talla": $talla.val(),
         "tipo_entrega": 2,
         "id_carro_compras": get_parameter(".id_carro_compras"),
         "carro_compras": get_parameter(".carro_compras"),
     };
-
     request_enid("POST", data_send, url, () => {
         redirect("../area_cliente/?action=compras");
     }, 0, before_pedido_activo);
@@ -221,14 +154,10 @@ let respuesta_proceso_usuario_activo = (data) => {
     redirect("../area_cliente");
 
 };
-let quita_espacios_en_telefono = () => {
 
-    $(".telefono").val(quitar_espacios_numericos(get_parameter(".telefono")));
-
-};
 let set_link = function () {
 
-    let plan = get_parameter_enid($(this), "id_servicio");
+    let id = get_parameter_enid($(this), "id_servicio");
     let extension_dominio = get_parameter_enid($(this), "extension_dominio");
     let ciclo_facturacion = get_parameter_enid($(this), "ciclo_facturacion");
     let is_servicio = get_parameter_enid($(this), "is_servicio");
@@ -236,7 +165,7 @@ let set_link = function () {
     let num_ciclos = get_parameter_enid($(this), "num_ciclos");
 
     let data_send = $.param({
-        "id_servicio": plan,
+        "id_servicio": id,
         "extension_dominio": extension_dominio,
         "ciclo_facturacion": ciclo_facturacion,
         is_servicio: is_servicio,
@@ -261,22 +190,22 @@ let valida_retorno = () => {
             showonehideone(".compra_resumen", ".pr_compra");
             set_option("vista", 1);
             break;
-
-        default:
-
-            break;
     }
 };
-let formato_inicial_comentarios = function () {
+let formato_inicial = function () {
     if (option["in_session"] < 1) {
 
         $('.agregar_commentario').click(function () {
             $('.text_comentarios').removeClass('d-none');
         });
 
-        $('.nombre').keypress(envia_formulario);
-        $('.email').keypress(envia_formulario);
-        $('.password').keypress(envia_formulario);
+        $input_nombre.keypress(envia_formulario);
+        $input_email.keypress(envia_formulario);
+        if (document.body.querySelector(input_password)) {
+            $input_password = $(input_password);
+            $input_password.keypress(envia_formulario);
+        }
+
 
     } else {
 
@@ -289,6 +218,25 @@ let formato_inicial_comentarios = function () {
 let envia_formulario = function (e) {
     let code = (e.keyCode ? e.keyCode : e.which);
     if (code == 13) {
-        $(".form-cotizacion-enid-service").submit();
+        if (document.body.querySelector(form_miembro)) {
+            $form_miembro.submit();
+        }
+    }
+};
+let reset_posibles_errores = function () {
+
+    $telefono.next().next().addClass('d-none');
+    $input_password.next().next().addClass('d-none');
+}
+
+let focus_inputs_form = (len_telefono, len_pw) => {
+
+    desbloqueda_form(form_miembro);
+    if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono != TELEFONO_MOBILE_LENGTH) {
+        $telefono.next().next().removeClass('d-none');
+    }
+
+    if (len_pw <= MIN_PW_LENGTH) {
+        $input_password.next().next().removeClass('d-none');
     }
 };

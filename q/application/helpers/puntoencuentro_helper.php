@@ -1,4 +1,6 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) {
+    exit('No direct script access allowed');
+}
 if (!function_exists('invierte_date_time')) {
 
 
@@ -10,31 +12,22 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = $row["nombre"];
             $id = $row["id"];
-
-            if (search_bi_array($lista_negra, "id_punto_encuentro", $id) !== false) {
-
-                $l[] = ajustar(d($nombre,
-                    [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
-                        "id" => $id,
-                        "nombre_estacion" => $nombre
-
-                    ]
-                ), icon("fa agregar_punto  fas fa-plus-square ", ["id" => $id]));
-
-            } else {
-
-                $l[] = ajustar(d($nombre,
-                    [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
-                        "id" => $id,
-                        "nombre_estacion" => $nombre
-                    ]
-                ), icon("fa quitar_punto  fa fa-minus ", ["id" => $id]));
+            $clase = (search_bi_array($lista_negra, "id_punto_encuentro",
+                            $id) !== false) ? 'fa agregar_punto  fas fa-plus-square ' : 'fa quitar_punto  fa fa-minus ';
+            $icono = icon($clase, ["id" => $id]);
 
 
-            }
-
+            $l[] = ajustar(
+                    d(
+                            $nombre,
+                            [
+                                    "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                                    "id" => $id,
+                                    "nombre_estacion" => $nombre,
+                            ]
+                    ),
+                    $icono
+            );
 
         }
 
@@ -51,36 +44,26 @@ if (!function_exists('invierte_date_time')) {
             $nombre = $row["nombre"];
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_punto_encuentro", $id);
+            $estacion = d(
+                    $nombre,
+                    [
+                            "class" => "nombre_estacion cursor_pointer punto_encuentro mx-auto mt-2 w-50",
+                            "id" => $id,
+                            "nombre_estacion" => $nombre,
+                            "costo_envio" => $row["costo_envio"],
+                            "flag_envio_gratis" => $es_envio_gratis,
+
+                    ]
+            );
 
             if ($index !== false) {
 
-                $negra[] = d($nombre,
-                    [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro   mx-auto mt-2 w-50",
-                        "id" => $id,
-                        "nombre_estacion" => $nombre,
-                        "costo_envio" => $row["costo_envio"],
-                        "flag_envio_gratis" => $es_envio_gratis
-
-                    ]
-                );
+                $negra[] = $estacion;
 
             } else {
 
-                $l[] = d($nombre,
-                    [
-                        "class" => "nombre_estacion cursor_pointer punto_encuentro  mx-auto mt-2 w-50 ",
-                        "id" => $id,
-                        "nombre_estacion" => $nombre,
-                        "costo_envio" => $row["costo_envio"],
-                        "flag_envio_gratis" => $es_envio_gratis
-
-                    ]
-                );
-
+                $l[] = $estacion;
             }
-
-
         }
 
 
@@ -90,8 +73,6 @@ if (!function_exists('invierte_date_time')) {
         //$r[] = place("mensaje_cobro_envio");
         $r[] = btn("CONTINUAR", ["class" => "btn_continuar_punto_encuentro"]);
         //$x[] = place("quien_recibe");
-
-
 
 
         $x[] = append($l);
