@@ -13,12 +13,6 @@
 .largenav {
     display: none;
 }
-
-.form_direccion_envio{
-    text-transform: uppercase;
-    min-height: 400px;
-}
-
 .contenedor_deuda_para_envio {
     width: 60%;
     margin: 0 auto;

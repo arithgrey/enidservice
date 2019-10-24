@@ -63,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
                 $data["id_carro_compras"]
         );
         $z[] = frm_primer_registro($in_session, $is_mobile, $ext);
-        $z[] = place("place_registro_afiliado");
+//        $z[] = place("place_registro_afiliado");
 
         $z[] = hiddens(["value" => $data["email"], "class" => 'email_s']);
         $r[] = d(d(d(append($z), "contenedo_compra_info"), "contenedor_compra"),
@@ -91,11 +91,10 @@ if (!function_exists('invierte_date_time')) {
     {
         $r = [];
         if ($in_session < 1) {
-            $r[] = contaiter(h("DATOS DE COMPRA", 3), 1);
-
+            $r[] = contaiter(h("DATOS DE COMPRA", 3, "strong"), 1);
 
             $z[] = input_frm(
-                    "col-lg-6 mt-5", "Nombre",
+                    "col-lg-6 mt-5", "NOMBRE",
                     [
                             "name" => "nombre",
                             "id" => "nombre",
@@ -107,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "Email",
+            $z[] = input_frm("col-lg-6 mt-5", "EMAIL",
                     [
                             "name" => "email",
                             "placeholder" => "ej. jonathan@enidservices.com",
@@ -121,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "password",
+            $z[] = input_frm("col-lg-6 mt-5", "PASSWORD",
                     [
                             "id" => "password",
                             "class" => " input-sm password",
@@ -131,7 +130,7 @@ if (!function_exists('invierte_date_time')) {
                     ], _text_pass);
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "Tel. ",
+            $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO",
                     [
                             "id" => "telefono",
                             "class" => "telefono",
@@ -146,13 +145,13 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $r[] = contaiter(append($z));
+            $r[] = d(append($z), 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5");
+            $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5 p-0 mb-5");
+            $r[] = format_load(12);
             $r[] = seccion_usuario_registrado();
             $r[] = text_acceder_cuenta($info_ext);
             $r[] = form_close();
-
         }
 
         return d(append($r), "pr_compra   ");
@@ -373,29 +372,23 @@ if (!function_exists('invierte_date_time')) {
             $monto_total_con_envio,
             $in_session
     ) {
-        $r[] = h(
-                text_icon("fa fa-shopping-bag", 'ORDEN')
 
-                ,
-                3,
-                ' letter-spacing-5  bottom_30 text_total'
-        );
-
-        $r[] = $resumen;
-        $r[] = hiddens(
-                [
-                        "name" => "resumen_producto",
-                        "class" => "resumen_producto",
-                        "value" => $resumen_servicio_info,
-                ]);
-        $x[] = h("MONTO ".$monto_total."MXN", 5, "strong");
-        $x[] = h("ENVÍO ".$costo_envio_cliente."MXN", 5, "strong");
-        $x[] = h("TOTAL ".$monto_total_con_envio."MXN", 3,
-                "text_total underline letter-spacing-15");
-        $r[] = d(append($x), "text-right top_20");
-
-
+        $r = [];
         if ($in_session > 0) {
+            $r[] = $resumen;
+            $r[] = hiddens(
+                    [
+                            "name" => "resumen_producto",
+                            "class" => "resumen_producto",
+                            "value" => $resumen_servicio_info,
+                    ]
+            );
+            $x[] = h("MONTO ".$monto_total."MXN", 5, "strong");
+            $x[] = h("ENVÍO ".$costo_envio_cliente."MXN", 5, "strong");
+            $x[] = h("TOTAL ".$monto_total_con_envio."MXN", 3,
+                    "text_total underline letter-spacing-15");
+            $r[] = d(append($x), "text-right top_20");
+
             $r[] = btn("ORDENAR COMPRA", [
                     "class" => 'btn_procesar_pedido_cliente',
             ],
@@ -403,11 +396,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = place('place_proceso_compra mt-5');
         }
 
-        if ($in_session < 1) {
-            $r[] = d(d("", 6).d(btn("CONTINUAR",
-                            ["class" => "continuar_pedido mt-3"]), 6), "row top_30");
-        }
-        $r[] = br(30);
 
         return d(append($r), "compra_resumen");
 
@@ -556,7 +544,7 @@ if (!function_exists('invierte_date_time')) {
                         "is_servicio" => $param["is_servicio"],
                         "q2" => $param["q2"],
                         "num_ciclos" => $param["num_ciclos"],
-                        "class" => "text-right link_acceso cursor_pointer  underline link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 ",
+                        "class" => "text-right link_acceso cursor_pointer  strong link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 ",
                 ];
 
 

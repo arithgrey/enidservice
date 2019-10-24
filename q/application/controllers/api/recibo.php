@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH . '../../librerias/REST_Controller.php';
+require APPPATH.'../../librerias/REST_Controller.php';
 
 class recibo extends REST_Controller
 {
@@ -42,13 +42,70 @@ class recibo extends REST_Controller
 
                 $total = $this->recibo_model->get_tiempo_venta($param, 1);
                 $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
-                $response = $this->get_costos_operativos($response, $param["fecha_inicio"], $param["fecha_termino"]);
+                $response = $this->get_costos_operativos($response,
+                        $param["fecha_inicio"], $param["fecha_termino"]);
                 $response = get_format_tiempo_entrega($response, $total, $param);
 
             }
 
         }
         $this->response($response);
+
+    }
+
+    private function get_costos_operativos($data, $fecha_inicio, $fecha_termino)
+    {
+
+
+        $response = [];
+        $a = 0;
+        foreach ($data as $row) {
+
+            $response[$a] = $row;
+            if ($fecha_inicio === $fecha_termino) {
+                $fecha_termino = $fecha_inicio = "";
+
+            }
+
+            $ids_recibo = $this->recibo_model->get_recibo_ventas_pagas_servicio($row["id_servicio"],
+                    $fecha_inicio, $fecha_termino);
+            $costos = (es_data($ids_recibo)) ? $this->get_text_in($ids_recibo) : [];
+            $response[$a]["total_costos_operativos"] = $costos;
+            $a++;
+
+        }
+
+        return $response;
+
+    }
+
+    private function get_text_in($data)
+    {
+
+        $response = [];
+        $total = 0;
+        foreach ($data as $row) {
+
+            $response[] = $row["recibo"];
+            $total = ($total + $row["saldo_cubierto"]);
+        }
+
+        $response = add_fields($response);
+
+        $res = [
+                "total_costos" => intval($this->get_sumatoria_costos_operativos($response)),
+                "total_pagos" => $total,
+        ];
+
+        return $res;
+    }
+
+    private function get_sumatoria_costos_operativos($in)
+    {
+
+        $q["in"] = $in;
+
+        return $this->app->api("costo_operacion/qsum/format/json/", $q);
 
     }
 
@@ -105,12 +162,12 @@ class recibo extends REST_Controller
 
         $response = 0;
         $recibo = $this->recibo_model->q_get(
-            [
-                "monto_a_pagar",
-                "num_ciclos_contratados",
-                "flag_envio_gratis"
-            ],
-            $param["id_recibo"]
+                [
+                        "monto_a_pagar",
+                        "num_ciclos_contratados",
+                        "flag_envio_gratis",
+                ],
+                $param["id_recibo"]
         );
 
         if (es_data($recibo)) {
@@ -186,10 +243,10 @@ class recibo extends REST_Controller
             if (es_data($ordenes)) {
 
                 $data = [
-                    "id_usuario" => $id_usuario,
-                    "ordenes" => $ordenes,
-                    "modalidad" => $modalidad,
-                    "id_perfil" => $this->app->getperfiles(),
+                        "id_usuario" => $id_usuario,
+                        "ordenes" => $ordenes,
+                        "modalidad" => $modalidad,
+                        "id_perfil" => $this->app->getperfiles(),
                 ];
 
                 $response = get_vista_cliente($data);
@@ -198,6 +255,24 @@ class recibo extends REST_Controller
         }
         $this->response($response);
 
+    }
+
+    private function add_imgs_servicio($ordenes)
+    {
+
+        $a = 0;
+        $response = [];
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_servicio = $ordenes[$a]["id_servicio"];
+            $orden["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1,
+                    1);
+            $a++;
+            $response[] = $orden;
+        }
+
+        return $response;
     }
 
     function agrega_estados_direcciones_a_pedidos($ordenes_compra)
@@ -211,25 +286,25 @@ class recibo extends REST_Controller
             $ordenes[$a]["direccion_registrada"] = ($row["status"] == 6) ? 0 : 1;
             $a++;
         }
+
         return $ordenes;
     }
-
 
     function resumen_desglose_pago_GET()
     {
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_recibo",1)) {
+        if (fx($param, "id_recibo", 1)) {
             $recibo = $this->recibo_model->q_get([], $param["id_recibo"]);
             if (es_data($recibo)) {
 
                 $r = $recibo[0];
                 $id_servicio = $r["id_servicio"];
                 $dc = [
-                    "url_request" => get_url_request(""),
-                    "recibo" => $recibo,
-                    "id_recibo" => $param["id_recibo"],
+                        "url_request" => get_url_request(""),
+                        "recibo" => $recibo,
+                        "id_recibo" => $param["id_recibo"],
                 ];
 
 
@@ -237,20 +312,22 @@ class recibo extends REST_Controller
                 $dc["servicio"] = $this->app->servicio($id_servicio);
 
 
-                if (($r["monto_a_pagar"] > $r["saldo_cubierto"]   ) || pr($dc["servicio"], "flag_servicio") >  0) {
+                if (($r["monto_a_pagar"] > $r["saldo_cubierto"]) || pr($dc["servicio"],
+                                "flag_servicio") > 0) {
 
-                    if (pr($dc["servicio"], "flag_servicio") >  0 ){
+                    if (pr($dc["servicio"], "flag_servicio") > 0) {
 
                         $dc += [
-                            "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
-                            "modalidad" => 1,
+                                "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
+                                "modalidad" => 1,
                         ];
 
-                        $response =  notificacion_cotizacion($dc);
+                        $response = notificacion_cotizacion($dc);
 
-                    }else{
+                    } else {
 
-                        $response = $this->ticket_pendiente_pago($param, $recibo, $dc, $url_img);
+                        $response = $this->ticket_pendiente_pago($param, $recibo, $dc,
+                                $url_img);
 
                     }
 
@@ -259,11 +336,11 @@ class recibo extends REST_Controller
 
 
                     $dc += [
-                        "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
-                        "modalidad" => 1,
+                            "usuario_venta" => $this->app->usuario($r["id_usuario_venta"]),
+                            "modalidad" => 1,
                     ];
 
-                    $response =  notificacion_pago_realizado($dc);
+                    $response = notificacion_pago_realizado($dc);
 
                 }
             }
@@ -282,7 +359,8 @@ class recibo extends REST_Controller
 
             if ($r["tipo_entrega"] == 1) {
 
-                return $this->ticket_pendiente_pago_contra_entrega($param, $recibo, $dc, $url_img);
+                return $this->ticket_pendiente_pago_contra_entrega($param, $recibo, $dc,
+                        $url_img);
 
             } else {
 
@@ -290,12 +368,14 @@ class recibo extends REST_Controller
 
                     $dc = $this->get_data_saldo($param, $recibo, $dc);
                     $dc["es_punto_encuentro"] = 0;
-                    $response = $this->get_mensaje_pago_al_memento($dc, $url_img);
+                    $response = $this->pagar($dc, $url_img);
+
 
                 } else {
 
                     $usuario = $this->app->usuario($r["id_usuario"]);
-                    $response = $this->get_mensaje_no_aplica($recibo, get_costo_envio($r), $usuario, $dc);
+                    $response = $this->get_mensaje_no_aplica(
+                            $recibo, get_costo_envio($r), $usuario, $dc);
                 }
 
             }
@@ -322,14 +402,16 @@ class recibo extends REST_Controller
                     $id = $this->get_punto_encuentro($this->get_punto_encuentro_recibo($id_recibo));
                     $dc["punto_encuentro"] = $id;
                     $dc["es_punto_encuentro"] = 1;
-                    $response = $this->get_mensaje_pago_al_memento($dc, $url_img_servicio);
+                    $response = $this->pagar($dc,
+                            $url_img_servicio);
 
                 endif;
 
             else:
 
                 $usuario = $this->app->usuario($r["id_usuario"]);
-                $response = $this->get_mensaje_no_aplica($recibo, get_costo_envio($r[0]), $usuario, $dc);
+                $response = $this->get_mensaje_no_aplica($recibo, get_costo_envio($r[0]),
+                        $usuario, $dc);
             endif;
 
         endif;
@@ -337,33 +419,35 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    private function get_punto_encuentro_recibo($id_recibo)
-    {
-
-        $q["id_recibo"] = $id_recibo;
-        $ppfppe = $this->app->api("proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/", $q);
-        return pr($ppfppe, "id_punto_encuentro", 0);
-
-    }
-
     private function get_punto_encuentro($id_punto_encuentro)
     {
 
         $q["id"] = $id_punto_encuentro;
+
         return $this->app->api("punto_encuentro/id/format/json/", $q);
     }
 
-    private function get_mensaje_pago_al_memento($dc, $url_img)
+    private function get_punto_encuentro_recibo($id_recibo)
     {
 
-        $response = "";
+        $q["id_recibo"] = $id_recibo;
+        $ppfppe = $this->app->api("proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/",
+                $q);
+
+        return pr($ppfppe, "id_punto_encuentro", 0);
+
+    }
+
+    private function pagar($dc, $url_img)
+    {
+
+        $response = [];
         $recibo = $dc["recibo"];
 
         if (es_data($recibo) && array_key_exists("costo_envio_sistema", $dc)):
 
             $servicio = $dc["servicio"];
             $envio_sistema = $dc["costo_envio_sistema"];
-
             $r = $recibo[0];
             $data["recibo"] = $r;
             $url_request = $dc["url_request"];
@@ -380,45 +464,89 @@ class recibo extends REST_Controller
             $tipo_entrega = $r["tipo_entrega"];
 
             $deuda = get_saldo_pendiente(
-                $monto_a_pagar,
-                $num_ciclos_contratados,
-                $saldo_cubierto,
-                $costo_envio_cliente,
-                $envio_sistema,
-                $tipo_entrega
+                    $monto_a_pagar,
+                    $num_ciclos_contratados,
+                    $saldo_cubierto,
+                    $costo_envio_cliente,
+                    $envio_sistema,
+                    $tipo_entrega
             );
 
             $saldo_pendiente = $deuda["total_mas_envio"];
-            $text_compra = ($tipo_entrega > 0) ? "¿COMO  PAGAS TU ENTREGA?" : "Formas de pago";
+            //$r[] = ($tipo_entrega > 0) ? get_format_punto_encuentro($dc, $r) : "";
+            $seccion_compra = getPayButtons(
+                    $id_recibo, $url_request, $saldo_pendiente, $id_usuario_venta);
+            //$r[] = get_botones_seguimiento($id_recibo);
+
+            $desglose_pedido[] = d(
+                    format_concepto(
+                            $id_recibo,
+                            $resumen_pedido,
+                            $num_ciclos_contratados,
+                            $es_servicio,
+                            $id_ciclo_facturacion,
+                            $saldo_pendiente,
+                            $url_img,
+                            $monto_a_pagar,
+                            $deuda
+                    ), 'bg-light');
 
 
-            $r[] = ($tipo_entrega > 0) ? get_format_punto_encuentro($dc, $r) : "";
-            $r[] = h(text_icon("fa fa-credit-card", $text_compra), 4, 'top_50 letter-spacing-5 uderline');
-            $r[] = getPayButtons($id_recibo, $url_request, $saldo_pendiente, $id_usuario_venta);
-            $r[] = get_botones_seguimiento($id_recibo);
+            $desglose_pedido[] =
+                    format_link_primario(
+                            "Rastrea tu orden",
+                            [
 
-            $f = format_concepto(
-                $id_recibo,
-                $resumen_pedido,
-                $num_ciclos_contratados,
-                $es_servicio,
-                $id_ciclo_facturacion,
-                $saldo_pendiente,
-                $url_img,
-                $monto_a_pagar,
-                $deuda
-            );
+                                    "href" => path_enid('pedido_seguimiento',
+                                            _text($id_recibo)),
+                                    'class' => 'text-right mt-5',
 
-            $r = d(d(append($r), 10, 1), "col-lg-8  shadow padding_10");
-            $response = d($r . $f, 1);
+
+                            ]
+                            ,
+                            1
+                    );
+
+            $desglose_pedido[] =
+                    format_link_primario(
+                            "Modica la dirección de entrega",
+                            [
+
+                                    "href" => path_enid('pedido_seguimiento',
+                                            _text($id_recibo,
+                                                    '&domicilio=1&asignacion=1')),
+                                    'class' => 'text-right',
+                            ]
+                            ,
+                            1
+                    );
+
+            $desglose_pedido[] =
+                    format_link_primario('Cancelar compra',
+                            [
+                                    "class" => "cancelar_compra text-right",
+                                    "id" => $id_recibo,
+                                    "modalidad" => '0',
+                            ],1
+                    );
+
+
+            $response[] = d($seccion_compra, "col-lg-5");
+            $response[] = d(append($desglose_pedido), "col-lg-7");
+
         endif;
-        return $response;
+
+        return append($response);
 
 
     }
 
-    private function get_mensaje_no_aplica($recibo, $costo_envio_sistema, $usuario, $data_complete)
-    {
+    private function get_mensaje_no_aplica(
+            $recibo,
+            $costo_envio_sistema,
+            $usuario,
+            $data_complete
+    ) {
 
 
         $response = false;
@@ -444,7 +572,7 @@ class recibo extends REST_Controller
             $a_paterno = ($u["apellido_paterno"] !== null) ? $u["apellido_paterno"] : "";
             $a_materno = ($u["apellido_materno"] !== null) ? $u["apellido_materno"] : "";
 
-            $cliente = $nombre . " " . $a_paterno . " " . $a_materno;
+            $cliente = $nombre." ".$a_paterno." ".$a_materno;
             $envio_cliente = ($envio_sistema > $envio_vendedor) ? $envio_sistema : $envio_cliente;
             $saldo_pendiente = ($monto_a_pagar * $num_ciclos_contratados) - $saldo_cubierto;
 
@@ -454,44 +582,49 @@ class recibo extends REST_Controller
             $text_envio_cliente_sistema = "";
             if ($es_servicio == 0) {
                 $saldo_pendiente = $saldo_pendiente + $envio_cliente;
-                $text_envio_cliente_sistema = key_exists_bi($costo_envio_sistema, "text_envio", "cliente");
+                $text_envio_cliente_sistema = key_exists_bi($costo_envio_sistema,
+                        "text_envio", "cliente");
             }
 
 
             $url_request = "https://enidservices.com/inicio/";
-            $url_pago_oxxo = $url_request . "orden_pago_oxxo/?q=" . $saldo_pendiente . "&q2=" . $id_recibo . "&q3=" . $id_usuario;
-            $url_pago_paypal = "https://www.paypal.me/eniservice/" . $saldo_pendiente;
-            $config_log = ['src' => "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg", 'width' => '100'];
+            $url_pago_oxxo = $url_request."orden_pago_oxxo/?q=".$saldo_pendiente."&q2=".$id_recibo."&q3=".$id_usuario;
+            $url_pago_paypal = "https://www.paypal.me/eniservice/".$saldo_pendiente;
+            $config_log = [
+                    'src' => "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+                    'width' => '100',
+            ];
             $img_oxxo = "https://enidservices.com/inicio/img_tema/pago-oxxo.jpeg";
             $img_paypal = "https://enidservices.com/inicio/img_tema/explicacion-pago-en-linea.png";
-            $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
+            $url_seguimiento_pago = $url_request."pedidos/?seguimiento=$id_recibo&notificar=1";
 
 
             $r[] = saludo($cliente, $config_log, $id_recibo);
 
             $r[] = get_text_saldo_pendiente(
-                $resumen_pedido,
-                $num_ciclos_contratados,
-                $es_servicio,
-                $id_ciclo_facturacion,
-                $text_envio_cliente_sistema,
-                $fecha_registro,
-                $fecha_vencimiento,
-                $monto_a_pagar,
-                $saldo_pendiente
+                    $resumen_pedido,
+                    $num_ciclos_contratados,
+                    $es_servicio,
+                    $id_ciclo_facturacion,
+                    $text_envio_cliente_sistema,
+                    $fecha_registro,
+                    $fecha_vencimiento,
+                    $monto_a_pagar,
+                    $saldo_pendiente
             );
 
             $r[] = get_text_forma_pago(
-                $img_oxxo,
-                $url_pago_oxxo,
-                $url_pago_paypal,
-                $img_paypal
+                    $img_oxxo,
+                    $url_pago_oxxo,
+                    $url_pago_paypal,
+                    $img_paypal
             );
 
             $r[] = get_text_notificacion_pago($url_seguimiento_pago);
 
             $response = d(append($r), ["style" => "width: 100%;"]);
         }
+
         return $response;
 
     }
@@ -502,12 +635,13 @@ class recibo extends REST_Controller
         if (es_data($recibo)) {
 
             $response += [
-                "id_recibo" => $param["id_recibo"],
-                "id_usuario_venta" => $recibo[0]["id_usuario_venta"],
-                "informacion_envio" => [],
+                    "id_recibo" => $param["id_recibo"],
+                    "id_usuario_venta" => $recibo[0]["id_usuario_venta"],
+                    "informacion_envio" => [],
                 /*"recibo" => $recibo*/
             ];
         }
+
         return $response;
     }
 
@@ -519,40 +653,40 @@ class recibo extends REST_Controller
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
 
             $params = [
-                "p.id_proyecto_persona_forma_pago recibo",
-                "p.saldo_cubierto",
-                "p.fecha_registro",
-                "p.monto_a_pagar",
-                "p.num_ciclos_contratados",
-                "p.cancela_cliente",
-                "p.se_cancela",
-                "p.status",
-                "p.fecha_contra_entrega",
-                "p.tipo_entrega",
-                "p.fecha_entrega",
-                "p.costo_envio_cliente",
-                "p.id_servicio",
-                "p.fecha_cancelacion",
-                "p.fecha_pago"
+                    "p.id_proyecto_persona_forma_pago recibo",
+                    "p.saldo_cubierto",
+                    "p.fecha_registro",
+                    "p.monto_a_pagar",
+                    "p.num_ciclos_contratados",
+                    "p.cancela_cliente",
+                    "p.se_cancela",
+                    "p.status",
+                    "p.fecha_contra_entrega",
+                    "p.tipo_entrega",
+                    "p.fecha_entrega",
+                    "p.costo_envio_cliente",
+                    "p.id_servicio",
+                    "p.fecha_cancelacion",
+                    "p.fecha_pago",
             ];
             if ($param["recibo"] > 0) {
                 /*Busqueda por número recibo*/
                 $params = [
-                    "id_proyecto_persona_forma_pago recibo",
-                    "saldo_cubierto",
-                    "fecha_registro",
-                    "monto_a_pagar",
-                    "num_ciclos_contratados",
-                    "cancela_cliente",
-                    "se_cancela",
-                    "status",
-                    "fecha_contra_entrega",
-                    "tipo_entrega",
-                    "fecha_entrega",
-                    "costo_envio_cliente",
-                    "id_servicio",
-                    "fecha_cancelacion",
-                    "fecha_pago"
+                        "id_proyecto_persona_forma_pago recibo",
+                        "saldo_cubierto",
+                        "fecha_registro",
+                        "monto_a_pagar",
+                        "num_ciclos_contratados",
+                        "cancela_cliente",
+                        "se_cancela",
+                        "status",
+                        "fecha_contra_entrega",
+                        "tipo_entrega",
+                        "fecha_entrega",
+                        "costo_envio_cliente",
+                        "id_servicio",
+                        "fecha_cancelacion",
+                        "fecha_pago",
                 ];
 
                 $response = $this->recibo_model->q_get($params, $param["recibo"]);
@@ -564,7 +698,8 @@ class recibo extends REST_Controller
             }
             if ($param["v"] == 1) {
                 $response = $this->add_imgs_servicio($response);
-                $response = create_resumen_pedidos($response, $this->get_estatus_enid_service($param), $param);
+                $response = create_resumen_pedidos($response,
+                        $this->get_estatus_enid_service($param), $param);
 
             }
         }
@@ -585,8 +720,9 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "fecha_entrega,horario_entrega,recibo")) {
 
-            $fecha_contra_entrega = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
-            $response = $this->recibo_model->set_fecha_contra_entrega($param["recibo"], $fecha_contra_entrega);
+            $fecha_contra_entrega = $param["fecha_entrega"]." ".$param["horario_entrega"].":00";
+            $response = $this->recibo_model->set_fecha_contra_entrega($param["recibo"],
+                    $fecha_contra_entrega);
         }
 
         $this->response($response);
@@ -671,12 +807,14 @@ class recibo extends REST_Controller
 
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
-        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
+        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR ".$pago_pendiente."MXN";
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
 
-            $response = $this->recibo_model->set_status_orden($param["saldo_cubierto"], 1, $param["recibo"], 'fecha_pago');
+            $response = $this->recibo_model->set_status_orden($param["saldo_cubierto"], 1,
+                    $param["recibo"], 'fecha_pago');
 
         }
+
         return $response;
     }
 
@@ -687,7 +825,8 @@ class recibo extends REST_Controller
         if (array_key_exists("cancelacion", $param)) {
             $this->response($this->set_cancelacion($param));
         }
-        if (array_key_exists("es_proceso_compra", $param) && $param["es_proceso_compra"] == 1) {
+        if (array_key_exists("es_proceso_compra",
+                        $param) && $param["es_proceso_compra"] == 1) {
             $this->response($this->set_default_orden($param));
         }
         $response = false;
@@ -710,11 +849,13 @@ class recibo extends REST_Controller
 
         if (fx($param, "status,tipificacion,recibo")) {
 
-            $response = $this->recibo_model->cancela_orden(0, $param["status"], $param["recibo"], 'fecha_cancelacion');
+            $response = $this->recibo_model->cancela_orden(0, $param["status"],
+                    $param["recibo"], 'fecha_cancelacion');
             if ($response == true) {
                 $response = $this->add_tipificacion($param);
             }
         }
+
         return $response;
     }
 
@@ -731,8 +872,8 @@ class recibo extends REST_Controller
         if (fx($param, "status,recibo")) {
 
             $params = [
-                "status" => $param["status"],
-                "saldo_cubierto" => 0
+                    "status" => $param["status"],
+                    "saldo_cubierto" => 0,
             ];
 
             $in = ["id_proyecto_persona_forma_pago" => $param["recibo"]];
@@ -743,6 +884,7 @@ class recibo extends REST_Controller
                 $response = $this->add_tipificacion($param);
             }
         }
+
         return $response;
     }
 
@@ -750,27 +892,33 @@ class recibo extends REST_Controller
     {
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
-        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
+        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR ".$pago_pendiente."MXN";
 
         if ($param["saldo_cubierto"] > 0
-            &&
-            $param["saldo_cubierto"] >= $pago_pendiente
-            ||
-            ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
+                &&
+                $param["saldo_cubierto"] >= $pago_pendiente
+                ||
+                ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
 
 
-            $response = $this->recibo_model->notifica_entrega($param["saldo_cubierto"], $param["status"], $param["recibo"], 'fecha_entrega');
+            $response = $this->recibo_model->notifica_entrega($param["saldo_cubierto"],
+                    $param["status"], $param["recibo"], 'fecha_entrega');
             $this->solicita_encuenta($param["id_recibo"]);
 
 
         }
+
         return $response;
     }
 
     private function solicita_encuenta($id_recibo)
     {
 
-        $recibo = $this->recibo_model->q_get(["notificacion_encuesta", "id_usuario", "id_servicio"], $id_recibo);
+        $recibo = $this->recibo_model->q_get([
+                "notificacion_encuesta",
+                "id_usuario",
+                "id_servicio",
+        ], $id_recibo);
 
         if (es_data($recibo)) {
             $r = $recibo[0];
@@ -779,7 +927,8 @@ class recibo extends REST_Controller
                 $usuario = $this->app->usuario($id_usuario);
                 if (es_data($usuario)) {
                     if (es_email_valido($usuario[0]["email"]) > 0) {
-                        $sender = get_notificacion_solicitud_valoracion($usuario, $r["id_servicio"]);
+                        $sender = get_notificacion_solicitud_valoracion($usuario,
+                                $r["id_servicio"]);
                         $this->app->send_email($sender, 1);
                         $this->recibo_model->q_up("notificacion_encuesta", 1, $id_recibo);
                     }
@@ -794,7 +943,8 @@ class recibo extends REST_Controller
         $param = $this->put();
         $response = [];
         if (fx($param, "recibo,tipo_entrega")) {
-            $response = $this->recibo_model->q_up("tipo_entrega", $param["tipo_entrega"], $param["recibo"]);
+            $response = $this->recibo_model->q_up("tipo_entrega", $param["tipo_entrega"],
+                    $param["recibo"]);
             if ($response) {
                 $param["tipificacion"] = 31;
                 $this->add_tipificacion($param);
@@ -810,7 +960,8 @@ class recibo extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "recibo")) {
-            $response = $this->recibo_model->q_up("notificacion_pago", 1, $param["recibo"]);
+            $response = $this->recibo_model->q_up("notificacion_pago", 1,
+                    $param["recibo"]);
         }
         $this->response($response);
     }
@@ -824,7 +975,8 @@ class recibo extends REST_Controller
 
             $compras = $this->recibo_model->get_compras_tipo_periodo($param);
             if ($param["v"] == 1) {
-                $response = get_view_compras($this->status_enid(), $compras, $param["tipo"]);
+                $response = get_view_compras($this->status_enid(), $compras,
+                        $param["tipo"]);
             }
         }
         $this->response($response);
@@ -871,8 +1023,10 @@ class recibo extends REST_Controller
 
             $id_servicio = $param["id_servicio"];
             $response = [
-                "solicitudes" => $this->recibo_model->get_solicitudes_periodo_servicio($id_servicio, $interval),
-                "entregas" => $this->recibo_model->get_solicitudes_entregadas_periodo_servicio($id_servicio, $interval),
+                    "solicitudes" => $this->recibo_model->get_solicitudes_periodo_servicio($id_servicio,
+                            $interval),
+                    "entregas" => $this->recibo_model->get_solicitudes_entregadas_periodo_servicio($id_servicio,
+                            $interval),
             ];
 
         }
@@ -908,76 +1062,6 @@ class recibo extends REST_Controller
 
         $this->response($response);
 
-    }
-
-    private function add_imgs_servicio($ordenes)
-    {
-
-        $a = 0;
-        $response = [];
-        foreach ($ordenes as $row) {
-
-            $orden = $row;
-            $id_servicio = $ordenes[$a]["id_servicio"];
-            $orden["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
-            $a++;
-            $response[] = $orden;
-        }
-        return $response;
-    }
-
-
-    private function get_sumatoria_costos_operativos($in)
-    {
-
-        $q["in"] = $in;
-        return $this->app->api("costo_operacion/qsum/format/json/", $q);
-
-    }
-
-    private function get_costos_operativos($data, $fecha_inicio, $fecha_termino)
-    {
-
-
-        $response = [];
-        $a = 0;
-        foreach ($data as $row) {
-
-            $response[$a] = $row;
-            if ($fecha_inicio === $fecha_termino) {
-                $fecha_termino = $fecha_inicio = "";
-
-            }
-
-            $ids_recibo = $this->recibo_model->get_recibo_ventas_pagas_servicio($row["id_servicio"], $fecha_inicio, $fecha_termino);
-            $costos = (es_data($ids_recibo)) ? $this->get_text_in($ids_recibo) : [];
-            $response[$a]["total_costos_operativos"] = $costos;
-            $a++;
-
-        }
-        return $response;
-
-    }
-
-    private function get_text_in($data)
-    {
-
-        $response = [];
-        $total = 0;
-        foreach ($data as $row) {
-
-            $response[] = $row["recibo"];
-            $total = ($total + $row["saldo_cubierto"]);
-        }
-
-        $response = add_fields($response);
-
-        $res = [
-            "total_costos" => intval($this->get_sumatoria_costos_operativos($response)),
-            "total_pagos" => $total,
-        ];
-
-        return $res;
     }
 
     function agenda_POST()

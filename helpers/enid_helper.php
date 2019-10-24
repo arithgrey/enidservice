@@ -69,8 +69,8 @@ function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor 
         $attributes["class"] =
                 (array_key_exists(
                         "class", $attributes) ? 1 : 0 == 1) ? $attributes["class"]
-                        ." "." a_enid_blue white w-100  strong cursor_pointer" :
-                        "a_enid_blue white    cursor_pointer";
+                        ." "." a_enid_blue p-2 white w-100  strong cursor_pointer format_action" :
+                        "a_enid_blue white p-2 format_action cursor_pointer";
     }
 
 
@@ -852,7 +852,7 @@ function url_recuperacion_password()
 function get_campo($param, $key, $label = "", $add_label = 0)
 {
 
-    return ($add_label == 1) ? ($label."  ".$param[0][$key]) : ((count($param) > 0) ? $param[0][$key] : "");
+    return ($add_label > 0) ? ($label."  ".$param[0][$key]) : ((count($param) > 0) ? $param[0][$key] : "");
 
 }
 
@@ -1936,7 +1936,7 @@ function format_phone($number)
 }
 
 
-function path_enid($pos, $extra = 0, $link_directo = 0)
+function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 {
 
     $path = "";
@@ -2001,6 +2001,10 @@ function path_enid($pos, $extra = 0, $link_directo = 0)
 
         $path = ($link_directo > 0) ? (($extra !== 0) ? $base_url[$pos].$extra : $base_url[$pos]) : (($extra !== 0) ? "../".$base_url[$pos].$extra : "../".$base_url[$pos]);
 
+        if ($controlador > 0) {
+
+            $path = "../".$path;
+        }
     } else {
 
         echo "NO EXISTE ->  ".$pos;
@@ -3022,13 +3026,27 @@ function format_fecha($date, $horas = 0)
 function format_link($str, $attributes, $primario = 1)
 {
 
-    $f = ($primario > 0) ? " p-3 bg_black white strong col" : " p-3 strong  border_enid col black";
+    $f = ($primario > 0) ?
+            " borde_accion p-2 bg_black white text-center text-uppercase strong col" :
+            " borde_accion p-2 strong border_enid col black text-uppercase text-center";
     $att = $attributes;
     $att["class"] = (array_key_exists("class",
             $attributes)) ? add_text($attributes["class"], $f) : $f;
 
     return a_enid($str, $att);
 }
+
+function format_link_primario($str, $attributes, $primario = 0)
+{
+
+    $f = ($primario > 0) ? " black " : " agregar_direccion_pedido border-0 bg_black white";
+    $att = $attributes;
+    $att["class"] = (array_key_exists("class",
+            $attributes)) ? add_text($attributes["class"], $f) : $f;
+
+    return a_enid($str, $att);
+}
+
 
 function formated_link($str, $primario = 1)
 {
@@ -3044,21 +3062,52 @@ function money($num)
     return add_text(money_format('%i', $num), " MXN");
 }
 
-function format_load()
+function format_load($extra = '')
 {
 
-    return d(d('', 'progress-bar mh_15 w-100'),
-            "cargando_form progress progress-striped active page-progress-bar mt-5 d-none");
+    if (is_numeric($extra)) {
+        switch ($extra) {
+            case 12:
+
+                $extra = 'col-lg-12 p-0';
+
+                break;
+            case 13:
+
+                $extra = 'row ';
+
+                break;
+            default:
+        }
+    }
+
+    return d(
+            d('', 'progress-bar mh_15 w-100'),
+            "cargando_form progress progress-striped active 
+            page-progress-bar mt-5 d-none ".$extra
+    );
 }
 
 function _text()
 {
 
-
     $lista_argumentos = func_get_args();
     $response = '';
     for ($i = 0; $i < func_num_args(); $i++) {
         $response .= $lista_argumentos[$i];
+    }
+
+    return $response;
+
+}
+
+function _d()
+{
+
+    $lista_argumentos = func_get_args();
+    $response = '';
+    for ($i = 0; $i < func_num_args(); $i++) {
+        $response .= d($lista_argumentos[$i]);
     }
 
     return $response;
