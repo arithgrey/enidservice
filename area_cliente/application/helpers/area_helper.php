@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $response[] = d(get_menu($action), 2);
+            //$response[] = d(get_menu($action), 2);
             $response[] = d(d(append($r), "tab-content"), 10);
             return d(append($response), "contenedor_principal_enid");
 

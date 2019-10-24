@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH . '../../librerias/REST_Controller.php';
+require APPPATH.'../../librerias/REST_Controller.php';
 
 class usuario_direccion extends REST_Controller
 {
@@ -37,6 +37,25 @@ class usuario_direccion extends REST_Controller
 
     }
 
+    function quitar_PUT()
+    {
+
+        $param = $this->put();
+        $response = [];
+
+        if (fx($param, "id_direccion,id_usuario")) {
+
+            $in = [
+                    "id_direccion" => $param['id_direccion'],
+                    "id_usuario" => $param['id_usuario'],
+            ];
+            $set = ["status" => 0];
+            $response = $this->usuario_direccion_model->update($set, $in, 10);
+        }
+        $this->response($response);
+
+    }
+
     function principal_PUT()
     {
 
@@ -46,11 +65,11 @@ class usuario_direccion extends REST_Controller
             if ($param["id_usuario"] > 0 && $param["id_direccion"] > 0) {
 
                 $params_where = [
-                    "id_usuario" => $param["id_usuario"]
+                        "id_usuario" => $param["id_usuario"],
                 ];
 
                 $response =
-                    $this->usuario_direccion_model->delete($params_where, 10);
+                        $this->usuario_direccion_model->delete($params_where, 10);
 
             }
         }
@@ -85,18 +104,19 @@ class usuario_direccion extends REST_Controller
 
         $param = $this->get();
         $id_usuario = $this->get_id_usuario($param);
-        $response = "";
+        $response = [];
+        $data["id_usuario"] = $id_usuario;
+        $param["id_usuario"] = $id_usuario;
+        $usuario = [];
+        $registro_direccion = 0;
         if ($id_usuario > 0) {
 
-            $data["id_usuario"] = $id_usuario;
-            $param["id_usuario"] = $data["id_usuario"];
             $domicilio = $this->get_direccion_pedido($param);
-            $data["registro_direccion"] = 0;
 
             if (es_data($domicilio)) {
 
                 $domicilio = $this->get_domicilio_cliente($param);
-                $data["registro_direccion"] = (es_data($domicilio)) ? 1 : 0;
+                $registro_direccion = es_data($domicilio);
             }
 
             if (es_data($domicilio)) {
@@ -108,10 +128,14 @@ class usuario_direccion extends REST_Controller
             $data["data_saldo_pendiente"] = $this->get_recibo_saldo_pendiente($param);
             $data["info_envio_direccion"] = $domicilio;
             $data["param"] = $param;
-            if ($data["registro_direccion"] == 0) {
-                $data["info_usuario"] = $this->app->usuario($id_usuario);
+
+            if ($registro_direccion < 1) {
+
+                $usuario = $this->app->usuario($id_usuario);
             }
 
+            $data["info_usuario"] = $usuario;
+            $data['registro_direccion'] = $registro_direccion;
             $response = format_direccion_envio($data);
 
         }
@@ -120,13 +144,61 @@ class usuario_direccion extends REST_Controller
 
     }
 
+    private function get_id_usuario($param)
+    {
+
+        return ($this->app->is_logged_in() > 0) ? $this->id_usuario : (prm_def($param,
+                "id_usuario"));
+    }
+
+    private function get_direccion_pedido($q)
+    {
+
+        return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
+                $q);
+
+    }
+
+    private function get_domicilio_cliente($param)
+    {
+
+        $direccion = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);
+        if (es_data($direccion)) {
+
+            return $this->get_data_direccion(pr($direccion, "id_direccion"));
+        }
+
+        return $direccion;
+    }
+
+    private function get_data_direccion($id_direccion)
+    {
+
+
+        return $this->app->api(
+                "direccion/data_direccion/format/json/",
+                [
+                        "id_direccion" => $id_direccion,
+                ]
+        );
+    }
+
+    private function get_recibo_saldo_pendiente($q)
+    {
+
+        return $this->app->api("recibo/saldo_pendiente_recibo/format/json/", $q);
+    }
+
     function index_POST()
     {
 
         $param = $this->post();
         $response = false;
         if (fx($param, "id_usuario,id_direccion")) {
-            $params = ["id_usuario" => $param["id_usuario"], 'id_direccion' => $param["id_direccion"]];
+            $params = [
+                    "id_usuario" => $param["id_usuario"],
+                    'id_direccion' => $param["id_direccion"],
+            ];
             $response = $this->usuario_direccion_model->insert($params);
         }
         $this->response($response);
@@ -193,15 +265,15 @@ class usuario_direccion extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $params_where = [
-                "id_usuario" => $param["id_usuario"],
-                "status" => 1
+                    "id_usuario" => $param["id_usuario"],
+                    "status" => 1,
             ];
 
             $direcciones = $this->usuario_direccion_model->get(
-                [],
-                $params_where,
-                10,
-                'fecha_registro');
+                    [],
+                    $params_where,
+                    10,
+                    'fecha_registro');
 
             foreach ($direcciones as $row) {
 
@@ -215,47 +287,5 @@ class usuario_direccion extends REST_Controller
         }
         $this->response($response);
 
-    }
-
-    private function get_domicilio_cliente($param)
-    {
-
-        $direccion = $this->usuario_direccion_model->get_usuario_direccion($param["id_usuario"]);
-        if (es_data($direccion)) {
-
-            return $this->get_data_direccion(pr($direccion, "id_direccion"));
-        }
-        return $direccion;
-    }
-
-    private function get_data_direccion($id_direccion)
-    {
-
-
-        return $this->app->api(
-            "direccion/data_direccion/format/json/",
-            [
-                "id_direccion" => $id_direccion
-            ]
-        );
-    }
-
-    private function get_direccion_pedido($q)
-    {
-
-        return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/", $q);
-
-    }
-
-    private function get_recibo_saldo_pendiente($q)
-    {
-
-        return $this->app->api("recibo/saldo_pendiente_recibo/format/json/", $q);
-    }
-
-    private function get_id_usuario($param)
-    {
-
-        return ($this->app->is_logged_in() > 0) ? $this->id_usuario : (prm_def($param, "id_usuario"));
     }
 }

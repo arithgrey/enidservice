@@ -55,14 +55,17 @@ $(document).ready(() => {
 });
 
 let registro = (e) => {
-
+    debugger;
     verifica_formato_default_inputs(0);
     let len_telefono = $telefono.val().length;
     let len_pw = $input_password.val().length;
     reset_posibles_errores();
+
     let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
     if ($validacion_primer_registro) {
+
         bloquea_form(form_miembro);
+        valida_load();
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         let text_password = $.trim($input_password.val());
         let pwpost = "" + CryptoJS.SHA1(text_password);
@@ -81,7 +84,6 @@ let registro = (e) => {
             "fecha_servicio": $input_fecha_servicio.val(),
         };
 
-        valida_load();
         request_enid("POST", data_send, url, respuesta_registro, 0);
 
     } else {
@@ -102,7 +104,6 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-    debugger;
     empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
@@ -123,6 +124,7 @@ let respuesta_registro = (data) => {
     }
 
 };
+
 let procesar_pedido_usuario_activo = () => {
 
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
@@ -136,9 +138,8 @@ let procesar_pedido_usuario_activo = () => {
         "id_carro_compras": get_parameter(".id_carro_compras"),
         "carro_compras": get_parameter(".carro_compras"),
     };
-    request_enid("POST", data_send, url, () => {
-        redirect("../area_cliente/?action=compras");
-    }, 0, before_pedido_activo);
+
+    request_enid("POST", data_send, url, respuesta_registro, 0, before_pedido_activo);
 
 };
 

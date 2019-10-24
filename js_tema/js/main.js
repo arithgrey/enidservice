@@ -708,6 +708,11 @@ let div_enid = (id_padre, text, clase = '') => {
 
 
 };
+let bloquea_form = (form) => {
+
+    $("*", form).prop('disabled', true);
+    valida_load(form);
+}
 
 let reset_form = id => document.getElementById(id).reset();
 
@@ -723,7 +728,6 @@ let validar_si_numero = numero => (!/^([0-9])*$/.test(numero)) ? false : true;
 
 let set_parameter = (element, valor) => $(element).val(valor);
 
-let bloquea_form = form => $("*", form).prop('disabled', true);
 
 let is_mobile = () => get_option("is_mobile");
 
@@ -1006,9 +1010,10 @@ let toggle_format_menu = function (clase_selector, ocultar = []) {
 
     recorre(clase_selector);
 }
-let valida_load = function () {
+let valida_load = function (form_previo = '') {
 
     if (document.body.querySelector(".cargando_form")) {
+
 
         let $load = $('.cargando_form');
         if ($load.hasClass('d-none')) {
@@ -1016,6 +1021,7 @@ let valida_load = function () {
         } else {
             $load.addClass('d-none');
         }
+
     }
 
 }

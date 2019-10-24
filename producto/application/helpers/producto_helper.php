@@ -336,7 +336,7 @@ if (!function_exists('invierte_date_time')) {
         );
         //$r[] = text_diponibilidad($existencia, $es_servicio);
         $r[] = $tiempo_entrega;
-        $r[] = btn("ORDENAR  ENTREGA", ["class" => "text-left mt-5"]);
+        $r[] = btn("ordenar entrega", ["class" => "text-left mt-5 text-uppercase"]);
         $r[] = form_close();
         return d(append($r), "contenedor_form");
 
