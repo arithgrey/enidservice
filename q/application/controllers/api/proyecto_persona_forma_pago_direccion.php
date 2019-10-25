@@ -107,6 +107,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
             if ($param['tipo'] == 2) {
 
                 $response = $this->quitar_domicilio_entrega($param);
+
             } else {
                 $response = $this->quitar_punto_entrega($param);
             }

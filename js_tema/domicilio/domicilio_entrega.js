@@ -20,11 +20,11 @@ $(document).ready(() => {
     $(".agregar_punto_encuentro_pedido").click(() => {
 
         submit_enid(".form_puntos_medios");
+
     });
 
     $(".establecer_direccion").click(asignar_direccion_existente_pedido);
     $(".eliminar_domicilio").click(eliminar_domicilio);
-
     $(".establecer_punto_encuentro").click(asignar_punto_encuentro_existente_pedido);
 
 });
@@ -33,8 +33,20 @@ let asignar_direccion_existente_pedido = function () {
 
     let id_direccion = get_parameter_enid($(this), "id");
     let id_recibo = get_parameter_enid($(this), "id_recibo");
+    let tipo = get_parameter_enid($(this), "tipo");
+    let text = (tipo == 2) ? "¿DESEAS ENVIAR A ESTA DIRECCIÓN TU PEDIDO?" : "¿DESEAS ENVIAR A ESTE PUNTO DE ENCUENTRO, TU PEDIDO?";
+
     show_confirm("¿DESEAS ENVIAR A ESTA DIRECCIÓN TU PEDIDO?", "", "CONTINUAR", function () {
-        proceso_asignar_direccion(id_direccion, id_recibo)
+        if (tipo == 2) {
+
+            proceso_asignar_direccion(id_direccion, id_recibo)
+
+        } else {
+
+            $('.punto_encuentro_asignado').val(id_direccion);
+            submit_enid(".form_puntos_medios_avanzado");
+        }
+
     });
 };
 let eliminar_domicilio = function () {

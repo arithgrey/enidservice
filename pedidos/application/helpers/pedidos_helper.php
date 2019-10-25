@@ -969,6 +969,12 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "id_carro_compras",
                 "value" => 0,
         ]);
+        $r[] = hiddens([
+                "class" => "punto_encuentro_asignado",
+                "name" => "punto_encuentro",
+                "value" => 0,
+        ]);
+
 
         $r[] = form_close();
 
@@ -1172,6 +1178,8 @@ if (!function_exists('invierte_date_time')) {
                                 "class" => "establecer_direccion mt-2",
                                 "id" => $row["id_direccion"],
                                 "id_recibo" => $id_recibo,
+                                'tipo' => 2,
+
                         ]
                 ), 'p-1');
             }
@@ -1205,6 +1213,7 @@ if (!function_exists('invierte_date_time')) {
 
     function crea_puntos_entrega($punto_entrega, $lista_puntos_encuentro, $id_recibo)
     {
+
         $id_registro = pr($punto_entrega, 'id', 0);
         $r = [];
         if (es_data($lista_puntos_encuentro)) {
@@ -1238,7 +1247,14 @@ if (!function_exists('invierte_date_time')) {
 
                 $acciones[] = format_link(
                         "Entregar en esta estación",
-                        ['class' => 'mt-3']
+                        [
+                                "class" => "establecer_direccion mt-2 mt-3",
+                                "id" => $id,
+                                'tipo' => 1,
+                                "id_recibo" => $id_recibo,
+
+
+                        ]
                 );
             }
 
