@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('render_ticket_empresa')) {
+
         function render_ticket_empresa($data)
         {
 
@@ -37,8 +37,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('form_ticket_dep')) {
+
         function form_ticket_dep($departamentos, $total)
         {
 
@@ -87,9 +86,7 @@ if (!function_exists('invierte_date_time')) {
             return d(d(append($r), "col-lg-6 col-lg-offset-3 "), 13);
 
         }
-    }
 
-    if (!function_exists('frm_busqueda_desarrollo')) {
         function form_busqueda_desarrollo_solicitudes()
         {
 
@@ -99,8 +96,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('get_form_busqueda_desarrollo')) {
+
         function get_form_busqueda_desarrollo()
         {
 
@@ -110,8 +106,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('get_menu')) {
+
         function get_menu($activa)
         {
 
@@ -152,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
 
             return ul($list);
         }
-    }
+
     /*
     if (!function_exists('get_menu_metricas')) {
 

@@ -2,7 +2,7 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    if (!function_exists('render_deseos')) {
+
         function render_deseos($data)
         {
 
@@ -14,9 +14,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
 
-    if (!function_exists('format_slider_preferencias')) {
         function format_slider_preferencias()
         {
 
@@ -46,8 +44,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('productos_deseados')) {
+
         function productos_deseados($productos)
         {
 
@@ -55,9 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
 
-    if (!function_exists('format_temporadas')) {
         function format_temporadas()
         {
             $response = append([
@@ -83,8 +78,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_images_preferencias')) {
+
         function format_images_preferencias()
         {
 
@@ -113,8 +107,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_images')) {
         function format_images()
         {
 
@@ -154,8 +146,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('list_clasificaciones')) {
+
 
         function list_clasificaciones($data)
         {
@@ -198,8 +189,6 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('sin_productos')) {
 
         function sin_productos()
         {
@@ -218,8 +207,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('format_productos_deseados')) {
+
         function format_productos_deseados($productos_deseados)
         {
 
@@ -238,8 +226,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_slide_accesorios')) {
+
         function format_slide_accesorios()
         {
 
@@ -261,8 +248,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('format_preferencias')) {
+
         function format_preferencias()
         {
 
@@ -275,8 +261,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_clasificaciones')) {
+
 
         function format_clasificaciones($row)
         {
@@ -295,9 +280,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
 
-    if (!function_exists('get_menu')) {
 
         function get_menu()
         {
@@ -323,8 +306,7 @@ if (!function_exists('invierte_date_time')) {
             return ul([$preferencias, $deseos]);
         }
 
-    }
-    if (!function_exists('lista_deseo')) {
+
         function lista_deseo($productos_deseados)
         {
 
@@ -379,7 +361,6 @@ if (!function_exists('invierte_date_time')) {
             }
             return append($response);
         }
-    }
 
     function frm_pre_pedido($id, $id_servicio, $extension_dominio = "", $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
     {
@@ -403,7 +384,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    if (!function_exists('get_msj_busqueda_error')) {
+
         function get_msj_busqueda_error()
         {
 
@@ -416,7 +397,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-        }
+
     }
 
 }

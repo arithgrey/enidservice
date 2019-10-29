@@ -2,7 +2,7 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    if (!function_exists('form_entrega')) {
+
 
         function form_entrega()
         {
@@ -24,8 +24,7 @@ if (!function_exists('invierte_date_time')) {
                 "col-lg-6"
             );
         }
-    }
-    if (!function_exists('get_format_compras')) {
+
         function format_compras()
         {
             $opt_turnos[] = array(
@@ -69,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
             return append($x);
 
 
-        }
+
     }
 }
 

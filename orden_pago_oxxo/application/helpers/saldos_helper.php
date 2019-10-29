@@ -1,8 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
-
-
-    if (!function_exists('get_format_orden_compra')) {
+    
         function format_orden_compra($usuario, $pago, $numero_cuenta)
         {
 
@@ -53,8 +51,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('get_form_monto_pago')) {
 
 
         function get_form_monto_pago($info_pago)
@@ -66,8 +62,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
         }
 
-    }
-    if (!function_exists('get_form_saldos')) {
+
         function get_form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta)
         {
 
@@ -120,9 +115,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
 
-    if (!function_exists('get_instrucciones')) {
         function get_instrucciones()
         {
 
@@ -164,8 +157,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('get_instruccion_pago')) {
+
         function get_instruccion_pago($numero_cuenta)
         {
 
@@ -187,8 +179,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
         }
-    }
-    if (!function_exists('monto_pago')) {
+
         function monto_pago($monto)
         {
 
@@ -198,6 +189,6 @@ if (!function_exists('invierte_date_time')) {
             return d(append($r));
 
         }
-    }
+
 
 }

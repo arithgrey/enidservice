@@ -2,7 +2,7 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    if (!function_exists('format_cuenta')) {
+
         function render_cuenta($data)
         {
 
@@ -15,9 +15,6 @@ if (!function_exists('invierte_date_time')) {
             );
         }
 
-    }
-
-    if (!function_exists('format_cuenta')) {
         function format_cuenta($id_usuario, $usuario)
         {
 
@@ -50,8 +47,8 @@ if (!function_exists('invierte_date_time')) {
             return d(append($r), "tab-content");
 
         }
-    }
-    if (!function_exists('foto')) {
+
+
         function foto($id_usuario, $usuario)
         {
 
@@ -65,8 +62,7 @@ if (!function_exists('invierte_date_time')) {
             return hrz(append($r) ,  resumen_cuenta($usuario) , 4);
 
         }
-    }
-    if (!function_exists('privacidad_seguridad')) {
+
         function privacidad()
         {
 
@@ -79,9 +75,8 @@ if (!function_exists('invierte_date_time')) {
 
             return append($r);
         }
-    }
 
-    if (!function_exists('calma')) {
+
         function calma()
         {
 
@@ -112,8 +107,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('perfil_usuario')) {
+
 
         function perfil_usuario($id_usuario)
         {
@@ -134,9 +128,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-
-    if (!function_exists('resumen_cuenta')) {
 
         function resumen_cuenta($usuario)
         {
@@ -158,10 +149,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-
-    }
-    if (!function_exists('frm_set_pw')) {
-        function frm_set_pw()
+       function frm_set_pw()
         {
 
             $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
@@ -201,9 +189,6 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
         }
 
-    }
-
-    if (!function_exists('format_user')) {
 
         function format_user($usuario, $vista = 0)
         {
@@ -227,8 +212,6 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('frm_negocio')) {
 
         function frm_negocio($usuario)
         {
@@ -280,8 +263,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('frm_telefono')) {
+
         function frm_telefono($usuario)
         {
 
@@ -330,8 +312,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('frm_email')) {
+
         function frm_email($usuario)
         {
 
@@ -356,8 +337,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('frm_nombre')) {
+
         function frm_nombre($usuario)
         {
 
@@ -381,8 +361,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('menu')) {
+
         function menu($id_usuario)
         {
 
@@ -466,6 +445,6 @@ if (!function_exists('invierte_date_time')) {
 
             return ul($list);
         }
-    }
+
 }
 

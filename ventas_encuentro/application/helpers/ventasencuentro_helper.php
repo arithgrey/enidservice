@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('render')) {
+
         function render($data)
         {
             $r[] = format_form();
@@ -9,8 +9,8 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('format_form')) {
+
+
         function format_form()
         {
 
@@ -21,6 +21,6 @@ if (!function_exists('invierte_date_time')) {
             return d(d(append($r), 8, 1), 13);
 
         }
-    }
+
 
 }
