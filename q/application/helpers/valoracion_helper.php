@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_valoracion($servicio, $extra, $id_servicio)
     {
 
-        $propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"]) ? 1 : 0;
+        $propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"]);
         $nombre = ($extra["in_session"] == 1) ? $extra["nombre"] : "";
         $email = ($extra["in_session"] == 1) ? $extra["email"] : "";
 

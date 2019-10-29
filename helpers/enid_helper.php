@@ -428,9 +428,18 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
 
     $att = (is_string($attributes)) ? ["href" => $attributes] : $attributes;
     if ($format_block > 0) {
-        $att["class"] = (es_data($att) && array_key_exists("class",
+
+
+        $class = (es_data($att) && array_key_exists("class",
                         $att)) ? add_text($att["class"], " d-block") : " d-block";
+
+        if (is_array($attributes) && array_key_exists('rm_class', $attributes)) {
+            $class = str_replace($attributes['rm_class'], ' ', $class);
+        }
+
+        $att["class"] = $class;
     }
+
 
     return get_base_html("a", $title, $att);
 
@@ -2967,7 +2976,7 @@ function input_frm($col, $text_label, $config_input = [], $text_place = "")
             ,
             d(
                     $str,
-                    add_text("mt-3  d-none place_input_form_",
+                    add_text("mt-3 color_red  d-none place_input_form_",
                             $config_input["id"])
             )
     );
@@ -3026,10 +3035,13 @@ function format_fecha($date, $horas = 0)
 function format_link($str, $attributes, $primario = 1)
 {
 
+
     $f = ($primario > 0) ?
             " borde_accion p-2 bg_black white text-center text-uppercase strong col" :
             " borde_accion p-2 strong border_enid col black text-uppercase text-center";
     $att = $attributes;
+
+
     $att["class"] = (array_key_exists("class",
             $attributes)) ? add_text($attributes["class"], $f) : $f;
 

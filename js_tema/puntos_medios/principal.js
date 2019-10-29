@@ -1,5 +1,4 @@
 "use strict";
-/*variables*/
 let form_punto_encuentro = '.form_punto_encuentro';
 let form_punto_encuentro_horario = '.form_punto_encuentro_horario';
 let ksearch = '.ksearch';
@@ -149,13 +148,13 @@ let registra_usuario = (e) => {
     reset_posibles_errores();
     if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH) {
 
-
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
             "password": password,
             "id_servicio": get_parameter(".servicio")
         });
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
+        $('.botton_enviar_solicitud').attr("disabled", true);
         bloquea_form(form_punto_encuentro);
         valida_load();
         request_enid("POST", data_send, url, response_registro_usuario);
@@ -189,17 +188,25 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 
 let response_registro_usuario = (data) => {
-    valida_load();
-    if (data.usuario_existe > 0) {
+    debugger;
+    if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
+        despliega(['.continuar', '.informacion_del_cliente'], 0);
         $('.usuario_existente').removeClass('d-none');
-        recorre(".usuario_existente");
+        set_option("vista", 5);
 
     } else {
 
-        redirect_forma_pago(data.id_recibo);
+        if (data.hasOwnProperty('id_recibo') && parseInt(data.id_recibo) > 0) {
+            if (data.hasOwnProperty('session_creada') && parseInt(data.session_creada) > 0) {
+                redirect_forma_pago(data.id_recibo);
+            } else {
+                console.log("No se creo la session, repara esto!");
+            }
+        } else {
+            console.log("No se creo la orden, repara esto!");
+        }
     }
-
 };
 let set_link = function () {
 
@@ -226,13 +233,15 @@ let notifica_punto_entrega = e => {
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
+
     valida_load();
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
     if (get_parameter(".primer_registro") == 1) {
         redirect_forma_pago(data.id_recibo);
     } else {
-        let url = "../pedidos/?seguimiento=" + get_parameter(".recibo") + "&domicilio=1";
-        redirect(url);
+        redirect_forma_pago(get_parameter(".recibo"));
+        // let url = "../pedidos/?seguimiento=" + get_parameter(".recibo") + "&domicilio=1";
+        // redirect(url);
     }
 };
 let agregar_nota = () => {
@@ -270,6 +279,15 @@ let valida_retorno = function () {
 
             break;
 
+        case 5:
+            //Cuando se muestra que el usuario con el cual se quiere realizar la compra ya existe
+            set_option("vista", 4);
+            despliega(['.continuar', '.informacion_del_cliente'], 1);
+            $('.usuario_existente').addClass('d-none');
+            $('.botton_enviar_solicitud').attr("disabled", false);
+            desbloqueda_form(form_punto_encuentro);
+
+            break;
         default:
 
             break;
@@ -321,6 +339,7 @@ let buscador_estaciones_disponibles = () => {
     }
 };
 let redirect_forma_pago = (id_recibo) => {
+
     redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
 }
 let envia_formulario = function (e) {

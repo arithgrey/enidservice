@@ -161,14 +161,18 @@ if (!function_exists('invierte_date_time')) {
     function seccion_usuario_registrado()
     {
         return d(
-                a_enid("TU USUARIO YA SE ENCUENTRA REGISTRADO",
-                        [
-                                'class' => "white  black_enid_background padding_1 white mt-5 enid_hide",
-                                "href" => path_enid("login"),
+                add_text("tu usuario ya existe",
+                        format_link("inicia sessión",
+                                [
+                                        'class' => "mt-5 ml-3  text-uppercase",
+                                        "href" => path_enid("login"),
+                                        'rm_class' => "d-block"
 
-                        ]
-                ), 'usuario_existente d-none  col-lg-12');
+                                ]
+                        )
+                ),
 
+                'text-uppercase usuario_existente d-none strong text-center col-lg-12 h4');
 
     }
 

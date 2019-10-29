@@ -24,13 +24,13 @@ class Home extends CI_Controller
             $this->estado_compra($id_ticket);
 
             $data += [
-                    "action" => $param["action"],
-                    "valoraciones" =>
-                            prm_def(
-                                    $this->resumen_valoraciones($data["id_usuario"]),
-                                    "info_valoraciones", []),
-                    "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
-                    "ticket" => $id_ticket,
+                "action" => $param["action"],
+                "valoraciones" =>
+                    prm_def(
+                        $this->resumen_valoraciones($data["id_usuario"]),
+                        "info_valoraciones", []),
+                "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
+                "ticket" => $id_ticket,
             ];
 
             $data = $this->app->cssJs($data, "area_cliente");
@@ -44,13 +44,10 @@ class Home extends CI_Controller
 
         if ($id_recibo > 0) {
             $recibo = $this->recibo($id_recibo);
-            if (es_data($recibo)) {
-
+            if (es_data($recibo) && pr($recibo, 'id_ciclo_facturacion') != 9) {
                 $this->gestiona_tipo_entrega($recibo, $id_recibo);
-
             }
         }
-
     }
 
     private function recibo($id)
@@ -71,9 +68,9 @@ class Home extends CI_Controller
 
 
                 $link_registro_domicilio =
-                        _text(
-                                "../", path_enid("pedido_seguimiento", $id_recibo),
-                                "&domicilio=1");
+                    _text(
+                        "../", path_enid("pedido_seguimiento", $id_recibo),
+                        "&domicilio=1");
                 redirect($link_registro_domicilio);
 
             } else {
@@ -82,7 +79,7 @@ class Home extends CI_Controller
                 if (pr($recibo, 'saldo_cubierto') > 0) {
 
                     $link_registro_domicilio =
-                            _text("../", path_enid("pedido_seguimiento", $id_recibo));
+                        _text("../", path_enid("pedido_seguimiento", $id_recibo));
                     redirect($link_registro_domicilio);
                 }
 
@@ -96,10 +93,10 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
-                [
-                        "id_recibo" => $id_recibo,
-                        "total" => 1,
-                ]
+            [
+                "id_recibo" => $id_recibo,
+                "total" => 1,
+            ]
         );
 
     }
@@ -108,13 +105,13 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("valoracion/usuario/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
     }
 
     private function get_alcance($id_usuario)
     {
 
         return $this->app->api("servicio/alcance_usuario/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
     }
 }

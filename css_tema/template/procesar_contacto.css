@@ -57,9 +57,6 @@
     transition: all 1s ease;
     left: 0px !important
 }
-.input_focus::-webkit-input-placeholder { color: silver!important; }
-.input_focus:-moz-placeholder { color: silver!important; }
-.input_focus:-ms-input-placeholder { color: silver!important; }
 .horario_entrega{
     height: 40px!important;
 }

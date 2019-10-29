@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH.'../../librerias/REST_Controller.php';
+require APPPATH . '../../librerias/REST_Controller.php';
 
 class Tickets extends REST_Controller
 {
@@ -22,12 +22,12 @@ class Tickets extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $response = $this->tickets_model->get(
-                    ["id_ticket", "asunto"],
-                    [
-                            "id_usuario" => $param["id_usuario"],
-                            "status" => 1,
-                    ],
-                    10
+                ["id_ticket", "asunto"],
+                [
+                    "id_usuario" => $param["id_usuario"],
+                    "status" => 1,
+                ],
+                10
             );
 
         }
@@ -54,9 +54,9 @@ class Tickets extends REST_Controller
         if (fx($param, "id_ticket")) {
 
             $data = [
-                    "info_ticket" => $this->tickets_model->get_info_ticket($param),
-                    "info_tareas" => $this->get_tareas_ticket($param),
-                    "info_num_tareas" => $this->get_tareas_ticket_num($param),
+                "info_ticket" => $this->tickets_model->get_info_ticket($param),
+                "info_tareas" => $this->get_tareas_ticket($param),
+                "info_num_tareas" => $this->get_tareas_ticket_num($param),
             ];
 
             $this->response(format_tareas($data));
@@ -92,12 +92,12 @@ class Tickets extends REST_Controller
             $param["id_usuario"] = $id_usuario;
 
             $params =
-                    [
-                            "asunto" => $param["asunto"],
-                            "prioridad" => $param["prioridad"],
-                            "id_usuario" => $param["id_usuario"],
-                            "id_departamento" => $param["departamento"],
-                    ];
+                [
+                    "asunto" => $param["asunto"],
+                    "prioridad" => $param["prioridad"],
+                    "id_usuario" => $param["id_usuario"],
+                    "id_departamento" => $param["departamento"],
+                ];
 
             $param["ticket"] = $this->tickets_model->insert($params, 1);
             $es_cliente = $this->get_es_cliente($id_usuario);
@@ -115,7 +115,7 @@ class Tickets extends REST_Controller
     {
 
         return $this->app->api("usuario_perfil/es_cliente/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
     }
 
     private function notificacion_ticket_soporte($param)
@@ -179,8 +179,8 @@ class Tickets extends REST_Controller
             $modalidad = $param["modalidad"];
 
             $recibo = ($modalidad == 1) ?
-                    $this->get_recibo_por_enviar($param) :
-                    $this->get_recibo_por_pagar($param);
+                $this->get_recibo_por_enviar($param) :
+                $this->get_recibo_por_pagar($param);
 
 
             $response = form_cancelar_compra($recibo, $modalidad);
@@ -212,9 +212,10 @@ class Tickets extends REST_Controller
         if ($param["modalidad"] == 0) {
 
             $data["recibo"] = $this->get_recibo_por_pagar($param);
-            if ($data["recibo"]["cuenta_correcta"] == 1) {
-                $param["cancela_cliente"] = ($data["recibo"]["id_usuario"] == $param["id_usuario"]) ? 1 : 0;
-                /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
+            $data_complete['id_servicio'] = $data["recibo"];
+            if ($data["recibo"]["cuenta_correcta"] > 0) {
+
+                $param["cancela_cliente"] = ($data["recibo"]["id_usuario"] == $param["id_usuario"]);
                 $data_complete["registro"] = $this->cancelar_orden_compra($param);
 
 
@@ -225,7 +226,7 @@ class Tickets extends REST_Controller
             $data["recibo"] = $this->get_recibo_por_enviar($param);
             if ($data["recibo"]["cuenta_correcta"] == 1) {
                 $param["cancela_cliente"] =
-                        ($data["recibo"]["id_usuario_venta"] == $param["id_usuario"]) ? 0 : 1;
+                    ($data["recibo"]["id_usuario_venta"] == $param["id_usuario"]) ? 0 : 1;
 
                 /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
                 $data_complete["registro"] = $this->cancelar_orden_compra($param);
@@ -247,9 +248,9 @@ class Tickets extends REST_Controller
         $id_servicio = $this->get_servicio_ppfp($param["id_recibo"]);
 
         return [
-                "id_servicio" => $id_servicio,
-                "gamificacion" => $this->gamificacion_negativa($id_servicio,
-                        $param["id_usuario"]),
+            "id_servicio" => $id_servicio,
+            "gamificacion" => $this->gamificacion_negativa($id_servicio,
+                $param["id_usuario"]),
         ];
 
     }
@@ -264,16 +265,16 @@ class Tickets extends REST_Controller
     {
 
         return $this->app->api("recibo/servicio_ppfp/format/json/",
-                ["id_recibo" => $id_recibo]);
+            ["id_recibo" => $id_recibo]);
     }
 
     private function gamificacion_negativa($id_servicio, $id_usuario)
     {
         $q = [
-                "id_servicio" => $id_servicio,
-                "type" => 2,
-                "id" => $id_servicio,
-                "id_usuario" => $id_usuario,
+            "id_servicio" => $id_servicio,
+            "type" => 2,
+            "id" => $id_servicio,
+            "id_usuario" => $id_usuario,
 
         ];
 
@@ -321,7 +322,7 @@ class Tickets extends REST_Controller
                     $tickets = $this->tickets_model->get_tickets_desarrollo($param);
                     if (count($tickets) == 0) {
                         $tickets = $this->tickets_model->get_tickets_desarrollo($param,
-                                1);
+                            1);
                     }
                     $data["info_tickets"] = $tickets;
                     $data["status_solicitado"] = $param["status"];
@@ -369,7 +370,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "status,id_ticket")) {
             $response = $this->tickets_model->q_up("status", $param["status"],
-                    $param["id_ticket"]);
+                $param["id_ticket"]);
         }
         $this->response($response);
     }
@@ -381,7 +382,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "nota_monetaria,id_ticket")) {
             $response = $this->tickets_model->q_up("nota_monetaria",
-                    $param["nota_monetaria"], $param["id_ticket"]);
+                $param["nota_monetaria"], $param["id_ticket"]);
         }
         $this->response($response);
     }
@@ -393,7 +394,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "efecto_monetario,id_ticket")) {
             $response = $this->tickets_model->q_up("efecto_monetario",
-                    $param["efecto_monetario"], $param["id_ticket"]);
+                $param["efecto_monetario"], $param["id_ticket"]);
         }
         $this->response($response);
     }
@@ -405,7 +406,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "efectivo_resultante,id_ticket")) {
             $response = $this->tickets_model->q_up("efectivo_resultante",
-                    $param["efectivo_resultante"], $param["id_ticket"]);
+                $param["efectivo_resultante"], $param["id_ticket"]);
         }
         $this->response($response);
     }
@@ -417,7 +418,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "clientes_ab,id_ticket")) {
             $response = $this->tickets_model->q_up("clientes_ab",
-                    $param["clientes_ab"], $param["id_ticket"]);
+                $param["clientes_ab"], $param["id_ticket"]);
         }
         $this->response($response);
     }
@@ -429,7 +430,7 @@ class Tickets extends REST_Controller
         $response = false;
         if (fx($param, "id_ticket,asunto")) {
             $response = $this->tickets_model->q_up("asunto", $param["asunto"],
-                    $param["id_ticket"]);
+                $param["id_ticket"]);
         }
         $this->response($response);
     }

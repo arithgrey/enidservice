@@ -186,6 +186,11 @@ th:hover {
     color: #01111d !important;
 }
 
+.color_red {
+    color: red!important;
+}
+
+
 .blue_linkeding_background {
     background: #006FA6 !important;
 }
@@ -546,15 +551,15 @@ li {
 }
 
 .input_focus::-webkit-input-placeholder {
-    color: silver !important;
+    color: red !important;
 }
 
 .input_focus:-moz-placeholder {
-    color: silver !important;
+    color: red !important;
 }
 
 .input_focus:-ms-input-placeholder {
-    color: silver !important;
+    color: red !important;
 }
 
 /*

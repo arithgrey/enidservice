@@ -123,12 +123,14 @@ class Home extends CI_Controller
     private function get_domicilio_recibo($id_recibo)
     {
 
+
         $q["id_recibo"] = $id_recibo;
         $direccion = $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
                 $q);
         $domicilio = [];
 
         if (count($direccion) > 0 && $direccion[0]["id_direccion"] > 0) {
+
             $id_direccion = $direccion[0]["id_direccion"];
             $domicilio = $this->get_direccion($id_direccion);
         }
@@ -149,16 +151,22 @@ class Home extends CI_Controller
 
         $id_recibo = pr($data['recibo'], 'id_proyecto_persona_forma_pago');
         $domicilio_entrega = $this->get_domicilio_recibo($id_recibo);
-        $asignacion = prm_def($param, 'asignacion');
+        $punto_entrega =  $this->get_punto_encuentro($id_recibo);
 
-        if (!es_data($domicilio_entrega) || $asignacion) {
+        $asignacion = prm_def($param, 'asignacion');
+        $tiene_domicilio = es_data($domicilio_entrega);
+        $tiene_punto_entrega =  es_data($punto_entrega);
+
+        if (!$tiene_domicilio || $asignacion) {
+//
+//            if(!$tiene_domicilio &&  $tiene_punto_entrega){
+//
+//                redirect(path_enid('area_cliente_compras', $id_recibo, 0, 1));
+//            }
 
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);
-            $punto_entrega = [];
-            if(!es_data($domicilio_entrega)){
-                $punto_entrega =  $this->get_punto_encuentro($id_recibo);
-            }
+
             $data += [
                     "lista_direcciones" => $domicilios,
                     "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario),

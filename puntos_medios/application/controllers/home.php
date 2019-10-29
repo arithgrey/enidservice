@@ -58,7 +58,7 @@ class Home extends CI_Controller
         } else {
 
             $data["recibo"] = $param["recibo"];
-            
+
         }
 
         $this->load_vistas_punto_encuentro($param, $data);

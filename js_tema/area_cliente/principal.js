@@ -189,11 +189,11 @@ let resposponse_confirma_cancelacion = data => {
 };
 let cancela_compra = function () {
 
-
-    set_option("id_recibo", get_parameter_enid($(this), "id"));
+    debugger;
+    let id_recibo =  get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/cancelar/format/json/";
     let data_send = {
-        "id_recibo": get_option("id_recibo"),
+        "id_recibo": id_recibo,
         "modalidad": get_option("modalidad_ventas")
     };
     request_enid("PUT", data_send, url, response_cancelacion_compra);
@@ -201,7 +201,7 @@ let cancela_compra = function () {
 };
 let response_cancelacion_compra = (data) => {
 
-
+    debugger;
     if (get_option("modalidad_ventas") == 1) {
 
         show_tabs(["#mi_buzon", "#mis_ventas"]);

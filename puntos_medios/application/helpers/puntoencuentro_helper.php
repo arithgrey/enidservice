@@ -223,39 +223,31 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(btn("CONTINUAR", ["class" => "botton_enviar_solicitud "]),
                 "col-lg-3 continuar");
 
-        //$r[] = format_usuario_registrado($in_session, $servicio, $num_ciclos);
+
         $r[] = d(format_load(), 12);
         $r[] = form_close();
-
+        $r[] = format_usuario_registrado();
         return append($r);
 
 
     }
 
-    function format_usuario_registrado($in_session, $servicio, $num_ciclos)
+    function format_usuario_registrado()
     {
 
-        $r = [];
-        if ($in_session < 1) {
+        return d(
+                add_text("tu usuario ya existe",
+                        format_link("inicia sessión",
+                                [
+                                        'class' => "mt-5 ml-3 h5 text-uppercase",
+                                        "href" => path_enid("login"),
+                                        'rm_class' => "d-block"
 
-            $x[] = h("YA TIENES UN USUARIO REGISTRADO", 2,
-                    "display_none text_usuario_registrado underline");
-            $x[] = h("¿tienes una cuenta? ", 5,
+                                ]
+                        )
+                ),
 
-                    [
-                            "class" => "text-right text_usuario_registrado_pregunta  text-uppercase link_acceso cursor_pointer",
-                            "id_servicio" => $servicio,
-                            "num_ciclos" => $num_ciclos,
-                    ]
-
-
-            );
-
-
-        }
-
-        return d(append($r), "form_primer_registro display_none");
-
+                 'text-uppercase usuario_existente d-none  col-lg-12 h4 text-center strong');
     }
 
 

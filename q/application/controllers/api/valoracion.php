@@ -169,10 +169,14 @@ class Valoracion extends REST_Controller
     {
 
         $param = $this->get();
-        $id_servicio = $param["id_servicio"];
-        $servicio = $this->app->servicio($id_servicio);
-        //$extra = $param;
-        $response = get_form_valoracion($servicio, $param, $id_servicio);
+        $response = false;
+        if (fx($param, 'id_servicio')) {
+
+            $id_servicio = $param["id_servicio"];
+            $servicio = $this->app->servicio($id_servicio);
+            $response = get_form_valoracion($servicio, $param, $id_servicio);
+        }
+
         $this->response($response);
     }
 
