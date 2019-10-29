@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('render_contacto')) {
+
         function render_contacto($data)
         {
 
@@ -35,9 +35,9 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
 
-    if (!function_exists('format_recibe_ubicacion')) {
+
+
         function format_recibe_ubicacion($servicio)
         {
 
@@ -64,8 +64,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('format_proceso_compra')) {
+
         function format_proceso_compra()
         {
 
@@ -78,8 +77,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('format_eleccion')) {
+
         function format_eleccion()
         {
 
@@ -101,9 +99,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('selector_direccion')) {
-        function selector_direccion()
+     function selector_direccion()
         {
 
             $r[] = a_enid(
@@ -132,8 +128,7 @@ if (!function_exists('invierte_date_time')) {
             return append($r);
 
         }
-    }
-    if (!function_exists('form_proceso_compra')) {
+
 
         function form_proceso_compra()
         {
@@ -145,8 +140,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_direccion')) {
 
         function format_direccion($ubicacion, $departamentos, $nombre, $email, $telefono)
         {
@@ -158,8 +151,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('format_direccion_map')) {
         function format_direccion_map($ubicacion)
         {
 
@@ -172,8 +163,6 @@ if (!function_exists('invierte_date_time')) {
 
             return d(append($r), 6);
         }
-    }
-    if (!function_exists('get_formar_direccion')) {
 
         function get_formar_direccion($ubicacion)
         {
@@ -190,8 +179,6 @@ if (!function_exists('invierte_date_time')) {
             }
             return $response;
         }
-    }
-    if (!function_exists('format_visitanos')) {
 
         function format_visitanos($ubicacion)
         {
@@ -214,8 +201,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('form_ubicacion')) {
 
         function form_ubicacion($servicio)
         {
@@ -266,11 +251,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-
-    if (!function_exists('form_whatsapp')) {
-
-        function form_whatsapp($servicio)
+     function form_whatsapp($servicio)
         {
 
             $r[] = form_open("", ["class" => "form-horizontal form_whatsapp"]);
@@ -312,8 +293,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-    if (!function_exists('form_contactar')) {
         function form_contactar($ubicacion, $departamentos, $nombre, $email, $telefono)
         {
 
@@ -387,9 +366,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
-    if (!function_exists('get_form_mensaje')) {
-        function get_form_mensaje($departamentos, $email, $telefono)
+      function get_form_mensaje($departamentos, $email, $telefono)
         {
 
             $r[] = '<form id="form_contacto" action="../msj/index.php/api/emp/contacto/format/json/" method="post">';
@@ -452,7 +429,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-    }
 
 }
 

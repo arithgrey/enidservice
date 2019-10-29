@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    if (!function_exists('format_orden')) {
+
 
         function format_orden($data)
         {
@@ -9,9 +9,7 @@ if (!function_exists('invierte_date_time')) {
             return d($data, "col-lg-8 col-lg-offset-2 contenedor_principal_enid");
 
         }
-    }
 
-    if (!function_exists('get_format_pago')) {
         function get_format_pago()
         {
 
@@ -27,8 +25,6 @@ if (!function_exists('invierte_date_time')) {
             return d(d(append($r), 6, 1), "top_30", 1);
 
         }
-    }
-    if (!function_exists('format_tipos_entrega')) {
 
         function format_tipos_entrega()
         {
@@ -72,10 +68,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-    }
-
-
-    if (!function_exists('img_pago')) {
 
         function img_pago()
         {
@@ -99,8 +91,5 @@ if (!function_exists('invierte_date_time')) {
             return d(d(append($response), "text-center justify-content-center   top_20 px-3"), 1);
 
         }
-    }
-
-
 }
 

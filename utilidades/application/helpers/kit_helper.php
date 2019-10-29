@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-   if (!function_exists('get_form_tags')) {
+
         function form_tags()
         {
 
@@ -14,5 +14,5 @@ if (!function_exists('invierte_date_time')) {
             return  d(d(append($r),6,1),"row top_50");
 
         }
-    }
+
 }
