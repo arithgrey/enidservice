@@ -564,6 +564,7 @@ if (!function_exists('invierte_date_time')) {
 
         $paginacion = addNRow(d($paginacion, 1));
         $r = [];
+
         $callback = function ($n) {
             return d($n);
         };
