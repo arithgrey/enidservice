@@ -14,7 +14,8 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $data["usuario"] = $this->app->usuario($this->app->get_session("idusuario"));
+        $id_usuario= $this->app->get_session("idusuario");
+        $data["usuario"] = $this->app->usuario($id_usuario);
         $data = $this->app->cssJs($data, "administracion_cuenta");
         $this->app->pagina($data, render_cuenta($data),1);
 
