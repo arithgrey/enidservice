@@ -28,139 +28,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_valoracion($servicio, $extra, $id_servicio)
-    {
-
-        $propietario = ($extra["id_usuario"] == $servicio[0]["id_usuario"]);
-        $nombre = ($extra["in_session"] == 1) ? $extra["nombre"] : "";
-        $email = ($extra["in_session"] == 1) ? $extra["email"] : "";
-
-        $r[] = h("ESCRIBE UNA RESEÑA", 3, "underline");
-        $r[] = d("Sobre  " . pr($servicio, "nombre_servicio"));
-        $r[] = form_open("", ["class" => "form_valoracion"]);
-        $r[] = place("nuevo");
-        $r[] = flex(
-            "Valoración*",
-            posibilidades(
-                [
-                    "",
-                    "Insuficiente",
-                    "Aceptable",
-                    "Promedio",
-                    "Bueno",
-                    "Excelente"
-                ]
-            ),
-            "", "text-valoracion"
-        );
-        $r[] = place("nuevo");
-        $r[] = d("¿Recomendarías este producto?*", "text-valoracion strong");
-        $r[] = btw(
-            a_enid("SI", ["class" => 'recomendaria', "id" => 1]),
-            a_enid("NO", ["class" => 'recomendaria', "id" => 0]),
-            "display_flex_enid mt-4 mb-4"
-
-        );
-        $r[] = place("place_recomendaria");
-        $r[] = place("nuevo");
-        $r[] = ajustar(
-            d("Tu opinión en una frase*", "text-valoracion strong"),
-
-            input(
-                [
-                    "type" => "text",
-                    "name" => "titulo",
-                    "class" => "input-sm input",
-                    "placeholder" => "Por ejemplo: Me encantó!",
-                    "required" => "Agrega una breve descripción"
-                ])
-            , 6
-        );
-
-        $r[] = hiddens([
-            "name" => "propietario",
-            "class" => "propietario",
-            "value" => $propietario
-        ]);
-        $r[] = place("nuevo");
-        $r[] = btw(
-            d("Tu reseña (comentarios)*", "text-valoracion strong"),
-            d(
-                input(
-                    [
-                        "type" => "text",
-                        "name" => "comentario",
-                        "placeholder" => "¿Por qué te gusta el producto o por qué no?",
-                        "required" => "Comenta tu experiencia"
-                    ]
-                )
-            )
-            ,
-            "display_flex_enid"
-
-        );
-        $r[] = place("nuevo");
-
-        $input = d(
-            input([
-
-                "type" => "text",
-                "name" => "nombre",
-                "placeholder" => "Por ejemplo: Jonathan",
-                "value" => $nombre . '"  ' . valida_readonly($nombre),
-                "class" => "input form-control",
-                "required" => true,
-            ])
-        );
-
-        $r[] = btw(
-            d("Nombre*", "text-valoracion strong"),
-            $input,
-
-            "display_flex_enid"
-
-        );
-        $r[] = hiddens(
-            [
-                "name" => "id_servicio",
-                "value" => $id_servicio
-            ]
-        );
-        $r[] = place("nuevo");
-
-
-        $r[] = btw(
-            d(
-                "Tu correo electrónico*", "text-valoracion strong"
-            ),
-            d(
-                input([
-                    "type" => "email",
-                    "name" => "email",
-                    "class" => "input form-control",
-                    "placeholder" => "Por ejemplo: jmedrano@enidservices.com",
-                    "required" => valida_readonly($email),
-                    "value" => $email
-                ])
-            ),
-            "display_flex_enid"
-
-        );
-        $r[] = place("nuevo");
-        $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), ["class" => "top_40 bottom_40"]);
-        $r[] = place("place_registro_valoracion");
-        $r[] = form_close();
-
-        $social = social(0, "Mira lo que compré en Enid service!");
-        $encuesta[] = d(d(append($r), 10, 1), 1);
-        $encuesta[] = d(d($social, "col-lg-10 col-lg-offtse-1 bottom_50"), 1);
-        $response[] = d(append($encuesta), "col-lg-6 col-lg-offset-3 shadow padding_10 bottom_50");
-
-
-        return append($response);
-
-    }
-
     function get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio)
     {
 
@@ -220,12 +87,7 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    function valida_readonly($text)
-    {
 
-        return mayorque(trim(strlen($text)), 1, "readonly");
-
-    }
 
     function criterios($comentarios)
     {
@@ -384,33 +246,6 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function posibilidades($calificacion)
-    {
-        $response = [];
-        for ($x = 1; $x <= 5; $x++) {
-
-            $id_input = "radio" . $x;
-            $response[] = input(
-                [
-                    "id" => $id_input,
-                    "value" => $x,
-                    "class" => 'input-start',
-                    "type" => "radio"
-                ]
-            );
-
-            $response[] = label("★",
-                [
-                    "class" => 'estrella ' . "estrella_" . $x,
-                    "for" => "$id_input",
-                    "id" => $x,
-                    "title" => $x . " - " . $calificacion[$x]
-                ]
-            );
-
-        }
-        return append($response);
-    }
 
 
 }
