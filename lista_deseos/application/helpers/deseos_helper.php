@@ -52,6 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
     function format_temporadas()
     {
+
         $response = append(
             [
                 d("Apparel", "slide-label"),
