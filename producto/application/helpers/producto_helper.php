@@ -369,7 +369,7 @@ if (!function_exists('invierte_date_time')) {
     if (!function_exists('url_post')) {
         function url_post($id_servicio)
         {
-            return "http://enidservice.com/inicio/img_tema/productos/" . $id_servicio;
+            return "http://enidservices.com/inicio/img_tema/productos/" . $id_servicio;
         }
     }
     if (!function_exists('costruye_meta_keyword')) {

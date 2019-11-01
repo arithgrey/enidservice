@@ -1,3 +1,3 @@
 # enidservice
-Enid - http://enidservice.com/
+Enid - http://enidservices.com/
 
