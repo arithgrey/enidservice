@@ -35,7 +35,11 @@ if (!function_exists('invierte_date_time')) {
             );
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5", 1);
-        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong']);
+        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!",
+            [
+                "class" => 'strong black registrar_cuenta f16 strong'
+            ]
+        );
         $x[] = a_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
             [
@@ -90,7 +94,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $extra = add_text(
-            place("place_recuperacion_pw"), place("recuperacion_pw"));
+            place("place_recuperacion_pw"), place("recuperacion_pw")
+        );
         $r[] = form_close($extra);
         $r[] = ya_registro();
         $response = d(append($r), "contenedor_recuperacion_password display_none");
@@ -225,7 +230,11 @@ if (!function_exists('invierte_date_time')) {
                 "placeholder" => "****",
             ]
         );
-        $r[] = btn("INICIAR", ["class" => "mt-5"]);
+        $r[] = btn("INICIAR",
+            [
+                "class" => "mt-5"
+            ]
+        );
         $r[] = form_close();
 
         return append($r);

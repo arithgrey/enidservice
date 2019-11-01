@@ -13,7 +13,6 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $folio = prm_def($pago, "q2", "");
-
         $monto = $pago["q"];
         $concepto = "Saldo a cuenta Enid Service";
 
@@ -65,36 +64,45 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = '<form action="../pdf/orden_pago.php" method="POST">';
-        $r[] = hiddens([
-            "name" => "beneficiario",
-            "value" => $beneficiario
+        $r[] = hiddens(
+            [
+                "name" => "beneficiario",
+                "value" => $beneficiario
 
-        ]);
-        $r[] = hiddens([
-            "name" => "folio",
-            "value" => $folio
+            ]);
+        $r[] = hiddens(
+            [
+                "name" => "folio",
+                "value" => $folio
 
-        ]);
-        $r[] = hiddens([
-            "name" => "monto",
-            "value" => $monto
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "name" => "monto",
+                "value" => $monto
 
-        ]);
-        $r[] = hiddens([
-            "name" => "numero_cuenta",
-            "value" => $numero_cuenta
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "name" => "numero_cuenta",
+                "value" => $numero_cuenta
 
-        ]);
-        $r[] = hiddens([
-            "name" => "concepto",
-            "value" => $concepto
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "name" => "concepto",
+                "value" => $concepto
 
-        ]);
+            ]
+        );
         $r[] = d(
             btn(
                 "IMPRIMIR",
                 [
-                    "class" => " imprimir top_50"
+                    "class" => " imprimir mt-5"
                 ]
                 ,
                 1
@@ -122,33 +130,35 @@ if (!function_exists('invierte_date_time')) {
             "INSTRUCCIONES",
             [
                 "style" => "background: #000b39;color: white;padding: 5px;"
-            ],
-            1);
+            ]
+        );
 
+        $r[] = _d(
+            "1.-Acude a la tienda OXXO más cencana ",
+            "2.- Indica en caja que quieres realizar un depósito en cuenta BBVA Bancomer ",
+            "3.- Proporciona el número de cuenta señalado",
+            "4.-Realiza el pago exacto correspondiente, que se indica en el monto a pagar",
+            "5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso.",
+            "En el podrás verificar que se haya realizado correctamente, conserva este comprobante.",
+            "6.- Notifica tu pago desde tu área de cliente",
 
-        $r [] = d("1.-Acude a la tienda OXXO más cencana ");
-        $r [] = d("2.- Indica en caja que quieres realizar un
-                                                depósito en cuenta BBVA Bancomer ");
-        $r [] = d("3.- Proporciona el número de cuenta señalado");
-        $r [] = d("4.-Realiza el 
-                        pago exacto correspondiente, que se indica en el monto a pagar");
-        $r [] = d("5.-Al confirmar tu pago, el cajero te entregará un comprobante impreso.");
-        $r [] = d("En el podrás verificar que se haya realizado correctamente, conserva este comprobante.");
-
-        $r [] = d("6.- Notifica tu pago desde tu área de cliente");
-        $r [] = a_enid("http://enidservices.com/inicio/login/",
+        );
+        $r [] = a_enid(
+            "http://enidservices.com/inicio/login/",
             [
                 "href" => "http://enidservices.com/inicio/login/"
-            ]);
-        $r [] = d("ó", 1);
-        $r [] = d("Notifica tu pago  al área de ventas ventas@enidservices.com", 1);
+            ]
+        );
+        $r [] = d("ó");
+        $r [] = d("Notifica tu pago  al área de ventas ventas@enidservices.com");
         $r [] = d(
-            img([
+            img(
+                [
                     "src" => path_enid("img_logo"),
                 ]
             ),
             "col-lg-6 "
-            , 1
+
         );
 
         return d(append($r));
@@ -159,22 +169,16 @@ if (!function_exists('invierte_date_time')) {
     function instruccion_pago($numero_cuenta)
     {
 
-
         $r[] = img(
             [
                 "src" => "http://enidservices.com/inicio/img_tema/portafolio/logo-bbv.png",
                 "style" => "width:300px!important;"
-
             ]
         );
 
         $r[] = h($numero_cuenta, 4, ["style" => "color:blue;margin-bottom:30px;"]);
         $r[] = instrucciones();
-        return addNRow(
-            d(
-                append($r), "border padding_20 top_20"
-            )
-        );
+        return d(append($r), "border padding_20 top_20");
 
     }
 
@@ -182,11 +186,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = h("MONTO A PAGAR");
-        $r[] = h("$" . $monto . "MXN", 2);
-        $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago", 1);
+        $r[] = h(_text("$", $monto, "MXN"), 2);
+        $r[] = d("OXXO Cobrará una comisión adicional al momento de realizar el pago");
         return d(append($r));
 
     }
-
 
 }
