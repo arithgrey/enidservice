@@ -6,11 +6,10 @@ input[type="radio"] {
     cursor: pointer;
 }
 
-label:hover, label:hover ~ label {
+.estrella:hover, .estrella:hover ~ .estrella {
     -webkit-text-fill-color: white;
     -webkit-text-stroke-color: #004afc;
     -webkit-text-stroke-width: .5px;
-
 }
 
 
@@ -21,16 +20,3 @@ label:hover, label:hover ~ label {
     padding: 10px;
 }
 
-.text-valoracion {
-
-}
-
-.nuevo {
-    margin-top: 20px;
-}
-
-.nota_recomendarias {
-    background: red;
-    padding: 5px;
-    color: white;
-}

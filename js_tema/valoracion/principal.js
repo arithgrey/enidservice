@@ -44,19 +44,21 @@ let configura_calificacion = function (e) {
     }
 };
 let registra_valoracion = (e) => {
-
+    debugger;
     let recomendaria = get_option("recomendaria");
 
 
     if (recomendaria == 3) {
 
-        /*Agregamos comentario para que seleccione opción*/
-        render_enid(".place_recomendaria", "<span class='nota_recomendarias'>¿Recomendarías este artículo?</span>");
+
+        $('.text_recomendarias').addClass('color_red');
+        recorre('.text_recomendarias');
 
     } else {
 
         if (recomendaria == 0 || recomendaria == 1) {
 
+            $('.text_recomendarias ').removeClass('color_red');
             $(".place_recomendaria").empty();
             let url = "../q/index.php/api/valoracion/index/format/json/";
             let data_send = $(".form_valoracion").serialize() + "&" + $.param({
@@ -67,8 +69,7 @@ let registra_valoracion = (e) => {
 
         } else {
 
-            /*Agregamos comentario para que seleccione opción*/
-            render_enid(".place_recomendaria", "<span class='nota_recomendarias'>¿Recomendarías este artículo?</span>");
+            $('.text_recomendarias').addClass('color_red');
 
         }
     }

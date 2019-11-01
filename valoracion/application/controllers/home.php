@@ -5,7 +5,7 @@ class Home extends CI_Controller
     function __construct()
     {
         parent::__construct();
-
+        $this->load->helper('valoraciones');
         $this->load->library(lib_def());
     }
 
@@ -19,22 +19,22 @@ class Home extends CI_Controller
             create_url_preview("formas_pago_enid.png")
         );
 
-        $servicio = $this->input->get("servicio");
+        $id_servicio = $this->input->get("servicio");
 
-        if ($servicio > 0 && ctype_digit($servicio)) {
+        if ($id_servicio > 0 && ctype_digit($id_servicio)) {
 
 
             $prm = [
 
                 "in_session" => 0,
                 "id_usuario" => 0,
-                "id_servicio" => $servicio,
+                "id_servicio" => $id_servicio,
             ];
 
             if ($data["in_session"] == 1) {
 
 
-                $prm += [
+                $prm = [
 
                     "in_session" => 1,
                     "email" => $data["email"],
@@ -46,7 +46,11 @@ class Home extends CI_Controller
             }
 
             $data = $this->app->cssJs($data, "valoracion");
-            $response = d($this->frm_valoracion($prm), "top_20", 1);
+            $data["servicio"]=  $this->app->servicio($id_servicio);
+            $data['extra'] =  $prm;
+
+            $response = get_form_valoracion($data);
+
             $this->app->pagina($data, $response, 1);
 
 
@@ -57,10 +61,10 @@ class Home extends CI_Controller
         }
     }
 
-    private function frm_valoracion($q)
-    {
-
-        return $this->app->api("valoracion/valoracion_form/format/json/", $q);
-
-    }
+//    private function frm_valoracion($q)
+//    {
+//
+//        return $this->app->api("valoracion/valoracion_form/format/json/", $q);
+//
+//    }
 }
