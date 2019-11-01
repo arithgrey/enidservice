@@ -747,10 +747,6 @@ class app extends CI_Controller
                     "css" =>
                         [
                             "css_tienda.css",
-                            //"producto_principal.css",
-                            //"sugerencias.css",
-                            //"producto.css"
-
 
                         ],
                     "js" =>
@@ -851,6 +847,8 @@ class app extends CI_Controller
 
                             "search/principal.js",
                         ],
+                    "url_img_post" => create_url_preview("dispensador-rojo.jpg"),
+
                 ]
 
             ,
