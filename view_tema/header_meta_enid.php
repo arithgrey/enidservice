@@ -12,7 +12,6 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <?= meta('author', 'Enid Service'); ?>
 <meta name="description" content="<?= $desc_web; ?>"/>
 <meta name="robots" content="all">
-<meta name="google-site-verification" content="http://enidservices.com/google8dba39b938429ded.html"/>
 <link rel="canonical" href="http://enidservices.com/"/>
 <link rel="canonical" href="http://www.enidservice.com/"/>
 <link rel="alternate" hreflang="es" href="http://enidservices.com/"/>
@@ -30,6 +29,7 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:site_name" content="Enid Service"/>
 <meta property="og:image" content="<?= $url_img_post ?>"/>
 <meta property="og:description" content="<?= $desc_web; ?>"/>
+<meta property="fb:app_id" content="708127766008103"/>
 <meta property="business:contact_data:email" content="ventas@enidservices.com"/>
 <meta property="business:contact_data:phone_number" content="5552967027"/>
 <meta property="business:contact_data:website" content="<?= $enlace_actual; ?>"/>
