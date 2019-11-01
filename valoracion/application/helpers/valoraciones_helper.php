@@ -7,10 +7,8 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["servicio"];
         $extra = $data["extra"];
-
         $id_servicio = pr($servicio, 'id_servicio');
         $nombre_servicio = pr($servicio, "nombre_servicio");
-
         $propietario = ($extra["id_usuario"] == pr($servicio, 'id_usuario'));
         $nombre = ($extra["in_session"]) ? $extra["nombre"] : "";
         $email = ($extra["in_session"]) ? $extra["email"] : "";
@@ -24,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = flex(
-            h("¿Qué valoración darías a este artículo?",3 , ' strong mr-3 '),
+            h("¿Qué valoración darías a este artículo?", 3, ' strong mr-3 '),
             posibilidades(
                 [
                     "",
@@ -44,9 +42,6 @@ if (!function_exists('invierte_date_time')) {
             "display_flex_enid mt-4 mb-4"
 
         );
-
-        $r[] = place("nuevo");
-
         $r[] = hiddens(
             [
                 "name" => "propietario",
@@ -74,7 +69,6 @@ if (!function_exists('invierte_date_time')) {
             "nuevo"
         );
 
-
         $r[] = input_frm(
             "mt-5", "Tu reseña (comentarios)*",
             [
@@ -87,8 +81,6 @@ if (!function_exists('invierte_date_time')) {
             ]
 
         );
-
-
         $config =
             [
                 "type" => "text",
@@ -105,7 +97,6 @@ if (!function_exists('invierte_date_time')) {
             $config['readonly '] = true;
         }
         $r[] = input_frm("mt-5", "Tu Nombre", $config);
-
 
         $config_email = [
             "type" => "email",
@@ -127,16 +118,31 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = place("nuevo");
         $r[] = btn(text_icon('fa fa-chevron-right ir', "ENVIAR RESEÑA "), ["class" => "top_40 bottom_40"]);
-        $r[] = place("place_registro_valoracion");
+        $r[] = h('Tu valoración quedó registrada!', 4, 'text-center mt-5  registro_valoracion d-none');
+        $r[] = d(
+            d(
+                format_link('más recomendaciones',
+                    [
+                        'href' => path_enid('producto', _text($id_servicio,'&valoracion=1')),
+
+                    ], 0), 4, 1
+            ), 'registro_valoracion d-none');
+
+        $r[] = h('¿Aún no tienes una cuenta?', 4, 'text-center mt-5 registro_usuario d-none');
+
+        $r[] = d(
+            d(
+                format_link('Registrate ahora!',
+                    [
+                        'href' => path_enid('nuevo_usuario')
+                    ], 0), 4, 1
+            ), 'registro_usuario d-none'
+        );
+
         $r[] = form_close();
 
-        $social = social(0, "Mira lo que compré en Enid service!");
         $encuesta[] = d(append($r), 6, 1);
-//        $encuesta[] = d(d($social, "col-lg-10 col-lg-offtse-1 bottom_50"), 1);
         $response[] = append($encuesta);
-
-
-        //DEJÉ col-lg-12 para el margen del mobile
         return d(append($response), 'col-lg-12');
 
     }

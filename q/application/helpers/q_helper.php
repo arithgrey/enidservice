@@ -679,11 +679,11 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = h(add_text("HOLA, ", strtoupper($nombre)), 3);
         $r[] = d(img([
-                "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
+                "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
                 "style" => "width: 100%",
         ]));
         $r[] = d("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
-        $r[] = d("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservice.com/inicio/contact/");
+        $r[] = d("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservices.com/inicio/contact/");
 
         return append($r);
 
@@ -698,7 +698,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
                 img(
                         [
-                                "src" => "http://enidservice.com/inicio/img_tema/enid_service_logo.jpg",
+                                "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
                                 "style" => "width: 100%",
                         ]),
                 [
@@ -711,7 +711,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br();
         $r[] = a_enid("ACCEDE A TU CUENTA AHORA!",
                 [
-                        "href" => "http://enidservice.com/inicio/login/",
+                        "href" => "http://enidservices.com/inicio/login/",
                         "target" => "_blank",
                         "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;",
                 ]);

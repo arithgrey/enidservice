@@ -12,10 +12,10 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <?= meta('author', 'Enid Service'); ?>
 <meta name="description" content="<?= $desc_web; ?>"/>
 <meta name="robots" content="all">
-<meta name="google-site-verification" content="http://enidservice.com/google8dba39b938429ded.html"/>
-<link rel="canonical" href="http://enidservice.com/"/>
+<meta name="google-site-verification" content="http://enidservices.com/google8dba39b938429ded.html"/>
+<link rel="canonical" href="http://enidservices.com/"/>
 <link rel="canonical" href="http://www.enidservice.com/"/>
-<link rel="alternate" hreflang="es" href="http://enidservice.com/"/>
+<link rel="alternate" hreflang="es" href="http://enidservices.com/"/>
 <meta name="googlebot" content="index,follow">
 <meta name="geo.region" content="MX-DIF"/>
 <meta name="geo.position" content="23.634501;-102.552784"/>
