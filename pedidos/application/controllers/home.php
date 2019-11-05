@@ -26,8 +26,8 @@ class Home extends CI_Controller
         } else {
 
             $fn = (prm_def($param,
-                            "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ? $this->carga_vista_costos_operacion($param,
-                    $data) : $this->seguimiento_pedido($param, $data);
+                    "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ? $this->carga_vista_costos_operacion($param,
+                $data) : $this->seguimiento_pedido($param, $data);
 
         }
     }
@@ -40,9 +40,10 @@ class Home extends CI_Controller
         $id_recibo = $this->input->get("seguimiento");
         $recibo = $this->get_recibo($id_recibo, 1);
 
-        $data += [
+        $data +=
+            [
                 "servicio" => $this->app->servicio(pr($recibo, "id_servicio")),
-        ];
+            ];
 
 
         $drecibo = $recibo[0];
@@ -51,7 +52,7 @@ class Home extends CI_Controller
         $es_domicilio = prm_def($param, "domicilio");
 
         $acceso = ($id_usuario_compra == $data["id_usuario"] ||
-                $id_usuario_venta == $data["id_usuario"]);
+            $id_usuario_venta == $data["id_usuario"]);
 
         if (es_data($recibo) && $data["in_session"] > 0 && $data["id_usuario"] > 0 && $acceso) {
 
@@ -59,15 +60,15 @@ class Home extends CI_Controller
             $data["es_vendedor"] = ($id_usuario_venta == $data["id_usuario"]) ? 1 : 0;
 
             $data += [
-                    "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
-                    "recibo" => $recibo,
+                "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
+                "recibo" => $recibo,
 
             ];
 
 
             $fn = ($es_domicilio) ? $this->domicilios($param,
-                    $data) : $this->load_view_seguimiento($data,
-                    $param, $recibo, $id_recibo);
+                $data) : $this->load_view_seguimiento($data,
+                $param, $recibo, $id_recibo);
 
 
         } else {
@@ -87,7 +88,7 @@ class Home extends CI_Controller
         if (es_data($response) && $add_img > 0) {
 
             $response[0]["url_img_servicio"] = $this->app->imgs_productos($response[0]["id_servicio"],
-                    1, 1, 1);
+                1, 1, 1);
 
         }
 
@@ -104,7 +105,20 @@ class Home extends CI_Controller
             $recibo = $recibo[0];
             $tipo_entrega = $recibo["tipo_entrega"];
             $response["tipo_entrega"] = $tipo_entrega;
-            $domicilio = ($tipo_entrega > 0) ? $this->get_punto_encuentro($id_recibo) : $this->get_domicilio_recibo($id_recibo);
+
+            switch ($tipo_entrega) {
+
+                case 1: //Puntos encuentro
+                    $domicilio = $this->get_punto_encuentro($id_recibo);
+                    break;
+
+                case 2: //Mensajería
+                    $domicilio = $this->get_domicilio_recibo($id_recibo);
+                    break;
+                default:
+                    $domicilio = [];
+
+            }
             $response["domicilio"] = $domicilio;
 
         }
@@ -117,7 +131,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/complete/format/json/",
-                ["id_recibo" => $id_recibo]);
+            ["id_recibo" => $id_recibo]);
     }
 
     private function get_domicilio_recibo($id_recibo)
@@ -126,7 +140,7 @@ class Home extends CI_Controller
 
         $q["id_recibo"] = $id_recibo;
         $direccion = $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
-                $q);
+            $q);
         $domicilio = [];
 
         if (count($direccion) > 0 && $direccion[0]["id_direccion"] > 0) {
@@ -142,7 +156,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("direccion/data_direccion/format/json/",
-                ["id_direccion" => $id]);
+            ["id_direccion" => $id]);
     }
 
     private function domicilios($param, $data)
@@ -151,11 +165,11 @@ class Home extends CI_Controller
 
         $id_recibo = pr($data['recibo'], 'id_proyecto_persona_forma_pago');
         $domicilio_entrega = $this->get_domicilio_recibo($id_recibo);
-        $punto_entrega =  $this->get_punto_encuentro($id_recibo);
+        $punto_entrega = $this->get_punto_encuentro($id_recibo);
 
         $asignacion = prm_def($param, 'asignacion');
         $tiene_domicilio = es_data($domicilio_entrega);
-        $tiene_punto_entrega =  es_data($punto_entrega);
+        $tiene_punto_entrega = es_data($punto_entrega);
 
         if (!$tiene_domicilio || $asignacion) {
 //
@@ -168,17 +182,17 @@ class Home extends CI_Controller
             $domicilios = $this->get_direcciones_usuario($id_usuario);
 
             $data += [
-                    "lista_direcciones" => $domicilios,
-                    "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario),
-                    "num_domicilios" => count($domicilios),
-                    "domicilio_entrega" => $domicilio_entrega,
-                    "punto_entrega" => $punto_entrega,
+                "lista_direcciones" => $domicilios,
+                "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario),
+                "num_domicilios" => count($domicilios),
+                "domicilio_entrega" => $domicilio_entrega,
+                "punto_entrega" => $punto_entrega,
 
             ];
 
             $this->app->pagina(
-                    $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
-                    render_domicilio($data), 1
+                $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
+                render_domicilio($data), 1
             );
         } else {
 
@@ -191,14 +205,14 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("usuario_direccion/all/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
     }
 
     private function get_puntos_encuentro($id_usuario)
     {
 
         return $this->app->api("usuario_punto_encuentro/usuario/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
     }
 
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
@@ -207,18 +221,18 @@ class Home extends CI_Controller
         $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
 
         $data += [
-                "notificacion_pago" => ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
-                "orden" => $id_recibo,
-                "status_ventas" => $this->get_estatus_enid_service(),
-                "evaluacion" => 1,
-                "tipificaciones" => $this->get_tipificaciones($id_recibo),
-                "id_servicio" => pr($recibo, "id_servicio"),
+            "notificacion_pago" => ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
+            "orden" => $id_recibo,
+            "status_ventas" => $this->get_estatus_enid_service(),
+            "evaluacion" => 1,
+            "tipificaciones" => $this->get_tipificaciones($id_recibo),
+            "id_servicio" => pr($recibo, "id_servicio"),
         ];
 
         if ($recibo[0]["saldo_cubierto"] > 0 && $recibo[0]["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
 
             $data["evaluacion"] = $this->verifica_evaluacion($recibo[0]["id_usuario"],
-                    $recibo[0]["id_servicio"]);
+                $recibo[0]["id_servicio"]);
 
         }
 
@@ -236,7 +250,7 @@ class Home extends CI_Controller
 
 
         return $this->app->api("tipificacion_recibo/recibo/format/json/",
-                ["recibo" => $id_recibo]);
+            ["recibo" => $id_recibo]);
     }
 
     private function verifica_evaluacion($id_usuario, $id_servicio)
@@ -244,8 +258,8 @@ class Home extends CI_Controller
 
         $q = [
 
-                "id_usuario" => $id_usuario,
-                "id_servicio" => $id_servicio,
+            "id_usuario" => $id_usuario,
+            "id_servicio" => $id_servicio,
         ];
 
         return $this->app->api("valoracion/num/format/json/", $q);
@@ -264,23 +278,23 @@ class Home extends CI_Controller
             $total = $total + $row["monto"];
             $id = $row["id"];
             $icon = icon("fa fa-times ",
-                    ["onclick" => "confirma_eliminar_concepto('{$id}')"]);
+                ["onclick" => "confirma_eliminar_concepto('{$id}')"]);
             $this->table->add_row(array(
-                    $row["monto"]." MXN",
-                    $row["tipo"],
-                    $row["fecha_registro"],
-                    $icon,
+                $row["monto"] . " MXN",
+                $row["tipo"],
+                $row["fecha_registro"],
+                $icon,
             ));
         }
 
         $tb = $this->table->generate();
         $utilidad = $param["saldado"] - $total;
         $resumen = add_text(
-                d("TOTAL EN GASTOS: ".$total." MXN")
-                ,
-                d("SALDADO: ".$param["saldado"]." MXN")
-                ,
-                h("UTILIDAD:".$utilidad."MXN", 3, "strong")
+            d("TOTAL EN GASTOS: " . $total . " MXN")
+            ,
+            d("SALDADO: " . $param["saldado"] . " MXN")
+            ,
+            h("UTILIDAD:" . $utilidad . "MXN", 3, "strong")
 
         );
 
@@ -289,13 +303,13 @@ class Home extends CI_Controller
         $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
 
         $response = get_format_costo_operacion(
-                $tb,
-                $resumen,
-                $this->get_tipo_costo_operacion(),
-                $param["costos_operacion"],
-                $path,
-                $costos_operacion,
-                $recibo
+            $tb,
+            $resumen,
+            $this->get_tipo_costo_operacion(),
+            $param["costos_operacion"],
+            $path,
+            $costos_operacion,
+            $recibo
         );
         $this->app->pagina($data, $response, 1);
 
@@ -305,7 +319,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("costo_operacion/recibo/format/json/",
-                ["recibo" => $id_recibo]);
+            ["recibo" => $id_recibo]);
 
     }
 
@@ -330,21 +344,21 @@ class Home extends CI_Controller
 
         if ($this->app->getperfiles() != 3) {
 
-            header("location:".path_enid("area_cliente"));
+            header("location:" . path_enid("area_cliente"));
 
         }
 
         $data = $this->app->cssJs($data, "pedidos");
 
         $data += [
-                "tipos_entregas" => $this->get_tipos_entregas([]),
-                "status_ventas" => $this->get_estatus_enid_service(),
+            "tipos_entregas" => $this->get_tipos_entregas([]),
+            "status_ventas" => $this->get_estatus_enid_service(),
         ];
 
 
         $fn = (prm_def($param, "recibo") < 1) ?
-                $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) :
-                $this->load_detalle_pedido($param, $data);
+            $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) :
+            $this->load_detalle_pedido($param, $data);
 
     }
 
@@ -358,8 +372,8 @@ class Home extends CI_Controller
     {
 
         $fn = (array_key_exists("recibo",
-                        $param) && ctype_digit($param["recibo"])) ? $this->carga_detalle_pedido($param,
-                $data) : redirect("../../?q=");
+                $param) && ctype_digit($param["recibo"])) ? $this->carga_detalle_pedido($param,
+            $data) : redirect("../../?q=");
 
     }
 
@@ -375,8 +389,8 @@ class Home extends CI_Controller
 
             $data += [
 
-                    "orden" => $id_recibo,
-                    "recibo" => $recibo,
+                "orden" => $id_recibo,
+                "recibo" => $recibo,
 
             ];
 
@@ -394,8 +408,8 @@ class Home extends CI_Controller
                     $data["usuario"] = $this->app->usuario($id_usuario);
                 }
                 $this->app->pagina($data,
-                        form_fecha_recordatorio($data, $this->get_tipo_recordatorio()),
-                        1);
+                    form_fecha_recordatorio($data, $this->get_tipo_recordatorio()),
+                    1);
 
             } else {
 
@@ -406,17 +420,17 @@ class Home extends CI_Controller
                 $cupon = $this->cupon($id_recibo, $servicio, $num_compras);
                 $data += [
 
-                        "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
-                        "usuario" => $this->get_usuario($id_usuario),
-                        "status_ventas" => $this->get_estatus_enid_service(),
-                        "tipificaciones" => $this->get_tipificaciones($id_recibo),
-                        "comentarios" => $this->get_recibo_comentarios($id_recibo),
-                        "recordatorios" => $this->get_recordatorios($id_recibo),
-                        "id_recibo" => $id_recibo,
-                        "tipo_recortario" => $this->get_tipo_recordatorio(),
-                        "num_compras" => $num_compras,
-                        "servicio" => $servicio,
-                        "cupon" => $cupon,
+                    "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
+                    "usuario" => $this->get_usuario($id_usuario),
+                    "status_ventas" => $this->get_estatus_enid_service(),
+                    "tipificaciones" => $this->get_tipificaciones($id_recibo),
+                    "comentarios" => $this->get_recibo_comentarios($id_recibo),
+                    "recordatorios" => $this->get_recordatorios($id_recibo),
+                    "id_recibo" => $id_recibo,
+                    "tipo_recortario" => $this->get_tipo_recordatorio(),
+                    "num_compras" => $num_compras,
+                    "servicio" => $servicio,
+                    "cupon" => $cupon,
 
                 ];
 
@@ -441,7 +455,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("recibo/num_compras_usuario/format/json/",
-                ["id_usuario" => $id_usuario]);
+            ["id_usuario" => $id_usuario]);
 
     }
 
@@ -453,9 +467,9 @@ class Home extends CI_Controller
         if ($num_compras == 1 && $cupon_primer_compra > 0) {
 
             $q = [
-                    'id_recibo' => $id_recibo,
-                    'valor' => $cupon_primer_compra,
-                    'v' => 2,
+                'id_recibo' => $id_recibo,
+                'valor' => $cupon_primer_compra,
+                'v' => 2,
             ];
 
             $response = $this->app->api("cupon/index/format/json/", $q, 'json', 'POST');
@@ -475,7 +489,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("recibo_comentario/index/format/json/",
-                ["id_recibo" => $id_recibo]);
+            ["id_recibo" => $id_recibo]);
 
     }
 
@@ -485,7 +499,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-                "recordatorio/index/format/json/", ["id_recibo" => $id_recibo]);
+            "recordatorio/index/format/json/", ["id_recibo" => $id_recibo]);
     }
 
 }

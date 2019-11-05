@@ -99,7 +99,7 @@
     border-radius: 6px;
     float: right;
     transition: all .3s ease-out;
-    padding: 30px 30px 25px 30px;
+    padding: 20px 20px 15px 20px;
     position: relative;
 }
 
@@ -153,19 +153,8 @@
 .timeline__item__content__description {
     margin: 0;
     padding: 0;
-    font-size: 16px;
-    line-height: 24px;
-    font-weight: 300;
-    color: #04174B;
-}
 
-@media (min-width: 800px) {
-    .timeline__item__content__description {
-        font-size: 19px;
-        line-height: 28px;
-    }
 }
-
 .timeline__item__content__techs {
     margin-top: 15px;
     text-align: right;
