@@ -10,7 +10,9 @@ if (!function_exists('invierte_date_time')) {
 
             $metakeyword = $row["metakeyword"];
             if (strlen($metakeyword) > 0) {
-                $tags = json_decode($metakeyword, true);
+                $tags = json_decode(
+                    $metakeyword, true
+                );
                 break;
             }
         }
@@ -18,26 +20,24 @@ if (!function_exists('invierte_date_time')) {
         return $tags;
     }
 
-    function get_catalogo_metakeyword($catalogo)
+    function catalogo_metakeyword($catalogo)
     {
 
-        $response[] = d("ÚLTIMAS EMPLEADAS ", "item-content-block");
+        $response[] = d("ÚLTIMAS EMPLEADAS ");
         foreach ($catalogo as $row) {
 
             array_push(
-                    $response,
-                    a_enid(
-                            $row,
-                            [
-                                    'class' => 'white tag_catalogo',
-                                    'id' => $row,
-                            ]
-                    )
+                $response,
+                a_enid(
+                    $row,
+                    [
+                        'class' => 'white tag_catalogo',
+                        'id' => $row,
+                    ]
+                )
             );
         }
 
         return append($response);
-
     }
-
 }

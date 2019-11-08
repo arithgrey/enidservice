@@ -1,10 +1,12 @@
 .input_nuevo, .contenedor_costo, .contenedor_info_youtube, .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
     display: none;
 }
-.text_agregar_color{
+
+.text_agregar_color {
     color: #010127;
     font-size: 1.3em;
 }
+
 .icon-pencil {
     margin-left: 10px;
 }
@@ -81,9 +83,6 @@
     color: white;
 }
 
-.text_numero_existencia {
-    margin-top: 10px;
-}
 
 .mjs_articulo_no_disponible {
     background: red;
@@ -145,12 +144,13 @@
     margin-top: 20px;
 }
 
-.mxn{
+.mxn {
     font-size: 2em;
     margin-left: 10px;
     font-weight: bold;
     color: #02233c;
 }
+
 .table_info_precios {
     width: 30%;
 
@@ -217,11 +217,6 @@
         margin-top: 30px;
     }
 
-
-    .contenedor_inf_servicios_ciclo_facturacion {
-        margin-top: 30px;
-    }
-
     .info_comision_venta {
         padding: 5px;
     }
@@ -229,6 +224,7 @@
     .informacion_costo_envio {
         margin-top: 40px;
     }
+
     .hr_producto {
         display: block;
     }

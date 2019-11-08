@@ -13,37 +13,40 @@ if (!function_exists('invierte_date_time')) {
 
             $i = $info["usuario_notificado"];
 
-            $text = "Buen día ".
-                    strtoupper(
+            $text = _text(
+                "Buen día ",
+                pr($i, "nombre")
 
-                            pr($i, "nombre")
-                    ).
-                    " - ".strtoupper(
-
-                            pr($i, "email")
-                    )
-                    ." un placer";
-
+            );
             $r[] = d($text, ["style" => "margin-top: 20px;text-decoration: underline;"]);
-            $r[] = d("Equipo Enid Service.");
-            $r[] = d("Nos encanta que emplees Enid Service para comprar y vender productos y servicios en Internet, te informamos que de momento una de tus compras ha sido cancelada por el vendedor, ");
-            $r[] = strong("pero mantén la calma!");
-            $r[] = d(", tu saldo se encuentra seguro en tu cuenta de Enid service, ya sea que desees emplear este para comprar otros artículos o retirar el mismo de tu cuenta puedes hacerlo accediendo aquí.");
-            $r[] = d("Si tienes alguna duda o algún comentario con gusto estamos para escucharte puedes contactarnos a través de alguno de los siguientes medios que se indican aquí!");
-            $r[] = d("Si quisieras calificar al vendedor o agregar algún comentario respecto a tu experiencia en esta compra ");
-            $r[] = a_enid("puedes hacerlo aquí.",
-                    [
-                            "style" => "background: blue;color: white;padding: 5px;",
-                            "href" => "http://enidservices.com/inicio/valoracion/?servicio=".$info["id_recibo"],
-                    ]);
+            $r[] = _d(
+                "Equipo Enid Service.",
+                "Nos encanta que emplees Enid Service para comprar y vender productos y servicios en Internet, te informamos que de momento una de tus compras ha sido cancelada por el vendedor, ",
+                strong("pero mantén la calma!"),
+                ", tu saldo se encuentra seguro en tu cuenta de Enid service, ya sea que desees emplear este para comprar otros artículos o retirar el mismo de tu cuenta puedes hacerlo accediendo aquí.",
+                "Si tienes alguna duda o algún comentario con gusto estamos para escucharte puedes contactarnos a través de alguno de los siguientes medios que se indican aquí!",
+                "Si quisieras calificar al vendedor o agregar algún comentario respecto a tu experiencia en esta compra "
+            );
+
+            $r[] = a_enid(
+                "puedes hacerlo aquí.",
+                [
+                    "style" => "background: blue;color: white;padding: 5px;",
+                    "href" => "http://enidservices.com/inicio/valoracion/?servicio=" . $info["id_recibo"],
+                ]
+            );
             $r[] = d("Estamos en contacto y no dudes en contactarnos para este u otro tema relacionado!");
-            $r[] = a_enid(img([
-                    "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
-                    "width" => "300px",
-            ]),
+            $r[] = a_enid(
+                img(
                     [
-                            "href" => "http://enidservices.com/",
-                    ]);
+                        "src" => path_enid('logo_enid'),
+                        "width" => "300px",
+                    ]
+                ),
+                [
+                    "href" => path_enid('enid'),
+                ]
+            );
 
         }
 
@@ -58,29 +61,36 @@ if (!function_exists('invierte_date_time')) {
         $url = $data["url_request"];
 
         $r[] = d(
-                a_enid(img(
-                        [
-                                "src" => '../img_tema/enid_service_logo.jpg'
-                            ,
-                                'width' => '100%',
-                        ]
-                ),
-                        [
-                                'href' => $url."contact/#envio_msj",
-                        ]
-                ), 4, 1);
-        $r[] = d(h('RECIBIMOS TU NOTIFICACIÓN!', 3, ["style" => "font-size: 2em;"]), 6,
-                1);
+            a_enid(img(
+                [
+                    "src" => '../img_tema/enid_service_logo.jpg'
+                    ,
+                    'width' => '100%',
+                ]
+            ),
+                [
+                    'href' => $url . "contact/#envio_msj",
+                ]
+            ), 4, 1);
+        $r[] = d(
+            h('RECIBIMOS TU NOTIFICACIÓN!', 3,
+                [
+                    "style" => "font-size: 2em;"
+                ]
+            ), 6,
+            1);
         $r[] = hr();
-        $r[] = d(a_enid(
-                add_element(
-                        "Ver más promociones", "button",
-                        ["class" => "btn a_enid_black"]),
-
-                ["href" => $url]
-        ), 6, 1);
+        $ver_promos = add_element("Ver más promociones", "button", ["class" => "btn a_enid_black"]);
+        $r[] = d(
+            a_enid(
+                $ver_promos,
+                [
+                    "href" => $url
+                ]
+            ), 6, 1
+        );
         $r[] = d(a_enid("Anuncia tus artículos",
-                ["href" => $url."login", "class" => "anunciar_productos"]), 6, 1);
+            ["href" => $url . "login", "class" => "anunciar_productos"]), 6, 1);
 
         return d(append($r), 6, 1);
 
@@ -97,16 +107,16 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d("No me queda más que pedirle que nos envíe sus comentarios o si así lo prefiere evalúe nuestros servicios ");
         $r[] = a_enid("en este enlace.",
-                [
-                        "href" => "https://goo.gl/DTHQid",
-                        "style" => "background: blue;color: white;padding: 5px;",
-                ]);
+            [
+                "href" => "https://goo.gl/DTHQid",
+                "style" => "background: blue;color: white;padding: 5px;",
+            ]);
 
         $r[] = a_enid("Le recordamos que puede acceder a su cuenta Enid Service a través de este enlace",
-                [
-                        "href" => "http://enidservices.com/inicio/login",
-                        "style" => "background: blue;color: white;padding: 5px;",
-                ]);
+            [
+                "href" => "http://enidservices.com/inicio/login",
+                "style" => "background: blue;color: white;padding: 5px;",
+            ]);
 
         return append($r);
     }
@@ -116,31 +126,31 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = d("Hemos tenido pocas noticias sobre ti!, ");
-        $r[] = d("Excelente día ".$data["nombre"]."-".$data["email"]." hemos tenido pocas noticias sobre ti, ahora
+        $r[] = d("Excelente día " . $data["nombre"] . "-" . $data["email"] . " hemos tenido pocas noticias sobre ti, ahora
          hay más personas que están vendiendo y comprando sus productos a través de Enid Service, la plataforma 
          de comercio electrónico de México, apresurate y anuncia tus artículos y servicios para llegas a más personas
           que están en busca de lo que ofreces! ");
         $r[] = a_enid("Puedes acceder a su cuenta Enid Service aquí!",
-                [
-                        "href" => "http://enidservices.com/inicio/login",
-                        "style" => "background: blue;color: white;padding: 5px;",
-                ]);
+            [
+                "href" => "http://enidservices.com/inicio/login",
+                "style" => "background: blue;color: white;padding: 5px;",
+            ]);
 
         $r[] = a_enid(img([
-                "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
-                "width" => "300px",
+            "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+            "width" => "300px",
         ]),
-                [
-                        "href" => "http://enidservices.com/",
-                ]);
+            [
+                "href" => "http://enidservices.com/",
+            ]);
         $r[] = hr();
 
         $r[] = a_enid(
-                "YA NO QUIERO RECIBIR ESTE CORREO",
-                [
-                        'href' => $data["url_cancelar_envio"],
-                        'style' => 'color:black;font-size:.9em;font-weight:bold',
-                ]);
+            "YA NO QUIERO RECIBIR ESTE CORREO",
+            [
+                'href' => $data["url_cancelar_envio"],
+                'style' => 'color:black;font-size:.9em;font-weight:bold',
+            ]);
 
         return append($r);
     }
@@ -157,10 +167,10 @@ if (!function_exists('invierte_date_time')) {
 
             $usuario = $usuario[0];
             $nombre_usuario =
-                    $usuario["nombre"]." ".
-                    $usuario["apellido_paterno"].
-                    $usuario["apellido_materno"]." -  ".
-                    $usuario["email"];
+                $usuario["nombre"] . " " .
+                $usuario["apellido_paterno"] .
+                $usuario["apellido_materno"] . " -  " .
+                $usuario["email"];
 
             $lista_prioridades = ["", "Alta", "Media", "Baja"];
             $asunto = "";
@@ -176,26 +186,26 @@ if (!function_exists('invierte_date_time')) {
                 $nombre_departamento = $row["nombre_departamento"];
             }
 
-            $r[] = label("Nuevo ticket abierto".$extra["ticket"]);
-            $r[] = d("Cliente que solicita ".$nombre_usuario);
+            $r[] = label("Nuevo ticket abierto" . $extra["ticket"]);
+            $r[] = d("Cliente que solicita " . $nombre_usuario);
 
             $r[] = btw(
-                    strong("Prioridad:"),
-                    $lista_prioridades[$prioridad]
+                strong("Prioridad:"),
+                $lista_prioridades[$prioridad]
             );
 
             $r[] = btw(
-                    strong("Departamento a quien está dirigido:"),
-                    $nombre_departamento
+                strong("Departamento a quien está dirigido:"),
+                $nombre_departamento
             );
 
             $r[] = btw(
-                    strong(" Asunto:"),
-                    $asunto
+                strong(" Asunto:"),
+                $asunto
             );
             $r[] = btw(
-                    strong("Reseña:"),
-                    $mensaje
+                strong("Reseña:"),
+                $mensaje
 
             );
 

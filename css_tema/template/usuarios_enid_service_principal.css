@@ -14,18 +14,6 @@
     margin-top: 70px;
 }
 
-.titulo-tags-ingresos {
-    text-decoration: underline;
-    font-weight: bold;
-    color: #0d0d3c;
-}
-
-.info-tipo-talla {
-    text-decoration: underline;
-    font-weight: bold;
-    color: #0d567e;
-}
-
 .tag-add {
     font-size: .8em;
     padding: 5px;

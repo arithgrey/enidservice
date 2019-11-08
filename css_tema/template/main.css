@@ -187,7 +187,7 @@ th:hover {
 }
 
 .color_red {
-    color: red!important;
+    color: red !important;
 }
 
 
@@ -1170,7 +1170,7 @@ table {
     display: block;
 }
 
-.cursor_pointer:hover{
+.cursor_pointer:hover {
     cursor: pointer;
 }
 
@@ -1360,7 +1360,7 @@ select {
 }
 
 .bg_black {
-    background: #000!important;
+    background: #000 !important;
 }
 
 .bg_white {
@@ -1457,9 +1457,11 @@ h5 {
 .mw_250 {
     min-width: 250px !important;
 }
+
 .mw_300 {
     min-width: 300px !important;
 }
+
 .mw_350 {
     min-width: 350px !important;
 }
@@ -1526,6 +1528,11 @@ h5 {
 .mah_50 {
 
     max-height: 50px !important;
+}
+
+.mah_100_p {
+
+    max-height: 100% !important;
 }
 
 .mah_250 {
@@ -1774,7 +1781,7 @@ input:focus:invalid {
 }
 
 .llamada_accion:hover {
-    background: white!important;
+    background: white !important;
     color: black !important;
     border: 2px solid black;
 }
@@ -1796,9 +1803,20 @@ input:focus:invalid {
 .link_text:hover {
 
     background-color: #000;
-    color: #fff!important;
+    color: #fff !important;
     text-decoration: underline;
 }
-.borde_accion{
+
+.borde_accion {
     box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);
+}
+
+/*Configurador de productos*/
+.w_articulos_postulados {
+    width: 44px !important;
+    height: 44px;
+}
+
+.h_310 {
+    height: 310px !important;
 }

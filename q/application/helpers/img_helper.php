@@ -13,33 +13,41 @@ if (!function_exists('invierte_date_time')) {
             "enctype" => "multipart/form-data"
 
         ]);
-        $r[] = input([
-            "type" => "file",
-            "id" => 'imagen_img_faq',
-            "class" => 'imagen_img_faq',
-            "name" => "imagen"
-        ]);
+        $r[] = input(
+            [
+                "type" => "file",
+                "id" => 'imagen_img_faq',
+                "class" => 'imagen_img_faq',
+                "name" => "imagen"
+            ]
+        );
         $r[] = hiddens(
             [
                 "name" => 'q',
                 "value" => 'faq'
-            ]);
+            ]
+        );
         $r[] = hiddens(
-            ["class" => 'dinamic_img_faq',
+            [
+                "class" => 'dinamic_img_faq',
                 "id" => 'dinamic_img_faq',
                 "name" => 'id_faq',
-                "value" => $id_faq]
+                "value" => $id_faq
+            ]
         );
 
         $x[] = place("lista_imagenes_faq", ["id" => 'lista_imagenes_faq']);
-        $x[] = btn(icon("fa fa-check") . " AGREGAR ",
+
+        $x[] = btn(
+            text_icon("fa fa-check", " AGREGAR "),
             [
                 "type" => "submit",
                 "id" => 'guardar_img_faq',
                 "style" => 'color:white;'
-            ]);
+            ]
+        );
 
-        $r[] = d(append($x), "col-lg-6  col-lg-offset-3  top_30");
+        $r[] = d(append($x), 6, 1);
 
         $r[] = form_close(place("place_load_img_faq"));
 
@@ -51,28 +59,41 @@ if (!function_exists('invierte_date_time')) {
     function form_img_usuario($nombre_archivo = 'perfil_usuario')
     {
         $r[] = form_open_multipart('',
-
             [
                 "accept-charset" => "utf-8",
                 "method" => "POST",
                 "id" => "form_img_enid",
                 "class" => "form_img_enid",
                 "enctype" => "multipart/form-data"
-
             ]
         );
 
-        $r[] = input([
-            "type" => "file",
-            "id" => "imagen_img",
-            "class" => "imagen_img",
-            "name" => "imagen"
-        ]);
+        $r[] = input(
+            [
+                "type" => "file",
+                "id" => "imagen_img",
+                "class" => "imagen_img",
+                "name" => "imagen"
+            ]
+        );
 
-        $r[] = hiddens(["name" => 'q', "value" => $nombre_archivo]);
-        $r[] = hiddens(["class" => 'dinamic_img', "id" => 'dinamic_img', "name" => 'dinamic_img']);
+        $r[] = hiddens(
+            [
+                "name" => 'q',
+                "value" => $nombre_archivo
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "class" => 'dinamic_img',
+                "id" => 'dinamic_img',
+                "name" => 'dinamic_img'
+            ]
+        );
 
-        $r[] = btn("AGREGAR IMAGEN" . icon("fa fa-check"),
+        $r[] = btn(
+            text_icon("fa fa-check", "AGREGAR IMAGEN")
+            ,
             [
                 "class" => 'guardar_img_enid display_none bottom_30 display_none',
                 "id" => 'guardar_img'
@@ -81,7 +102,12 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        $r[] = place("place_load_img", ["id" => "place_load_img"]);
+        $r[] = place(
+            "place_load_img",
+            [
+                "id" => "place_load_img"
+            ]
+        );
         $r[] = form_close();
 
         return append($r);
@@ -102,35 +128,40 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = input([
-            "type" => "file",
-            "id" => "imagen_img",
-            "class" => "imagen_img",
-            "name" => "imagen",
-            "enctype" => "multipart/form-data",
-            "size" => "20",
-            "multiple" => true
-        ]);
+        $r[] = input(
+            [
+                "type" => "file",
+                "id" => "imagen_img",
+                "class" => "imagen_img",
+                "name" => "imagen",
+                "enctype" => "multipart/form-data",
+                "size" => "20",
+                "multiple" => true
+            ]
+        );
 
         $r[] = hiddens(["name" => 'q', "value" => $q, "class" => "q_imagen"]);
         $r[] = hiddens(["name" => $q2, "value" => $q3, "class" => "q2_imagen"]);
         $r[] = hiddens(["class" => 'dinamic_img', "id" => 'dinamic_img', "name" => 'dinamic_img']);
-        $r[] = place("separate-enid");
         $r[] = place("place_load_img", ["id" => 'place_load_img']);
-        $r[] = place("separate-enid");
 
         $r[] = d(
             btn(
-                text_icon("fa fa-check" , "AGREGAR IMAGEN"),
-            [
-                "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30 ',
-                "id" => 'guardar_img'
-            ],
-            1,
-            1
-        ), "display_none btn_guardar_imagen");
+                text_icon("fa fa-check", "AGREGAR IMAGEN"),
+                [
+                    "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30 ',
+                    "id" => 'guardar_img'
+                ],
+                1,
+                1
+            ), "display_none btn_guardar_imagen");
 
-        $r[] = form_close(place("previsualizacion", ["id" => "previsualizacion"]));
+        $place = place("previsualizacion",
+            [
+                "id" => "previsualizacion"
+            ]
+        );
+        $r[] = form_close($place);
         return append($r);
 
     }

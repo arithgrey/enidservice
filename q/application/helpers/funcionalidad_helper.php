@@ -6,39 +6,32 @@ if (!function_exists('invierte_date_time')) {
 
         $r = [];
         foreach ($conceptos as $row) {
-
-            $r[] = "<table style='width:100%;margin-top:30px;' >";
             foreach ($row["conceptos"] as $row2) {
 
+                $config = [
+                    "id" => $row2["id_privacidad"],
+                    "class" => 'concepto_privacidad',
+                    "termino_asociado" => 0,
+                    "type" => 'checkbox'
+                ];
 
-                $extra_seleccion = "";
-                $termino_asociado = 0;
                 if (!is_null($row2["id_usuario"])) {
-                    $extra_seleccion = "checked";
-                    $termino_asociado = 1;
+
+                    array_push($config, ['checked' => true]);
+                    $config["termino_asociado"] = 1;
+                    $config["checked"] = true;
                 }
 
-                $r[] = "<tr>";
-
-                $attr = add_attributes(
-                    [
-                        "id" => $row2["id_privacidad"],
-                        "class" => 'concepto_privacidad',
-                        "termino_asociado" => $termino_asociado,
-                        "type" => 'checkbox'
-                    ]
+                $str = _text(
+                    td(input($config)),
+                    td(strtoupper($row2["privacidad"]))
                 );
-                $r[] = td("<input " . $attr . " " . $extra_seleccion . ">");
-                $r[] = td(strtoupper($row2["privacidad"]));
-                $r[] = "</tr>";
-
+                $r[] = tr($str);
             }
-            $r[] = "</table>";
         }
 
-        return append($r);
+        return tb(append($r));
 
     }
-
 }
 

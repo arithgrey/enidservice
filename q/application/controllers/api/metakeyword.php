@@ -98,7 +98,7 @@ class Metakeyword extends REST_Controller
 		$response = $this->metakeyword_model->get_metakeyword_catalogo_usuario($param);
 		if ($param["v"] == 1) {
 
-			$response = get_catalogo_metakeyword(create_arr_tags($response));
+			$response = catalogo_metakeyword(create_arr_tags($response));
 
 		}
 		$this->response($response);
