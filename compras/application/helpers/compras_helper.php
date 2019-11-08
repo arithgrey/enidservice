@@ -18,38 +18,48 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_compras()
+    function render_compras()
     {
-        $opt_turnos[] = array(
-            "opcion" => "-1 MES",
-            "val" => 1
-        );
-        $opt_turnos[] = array(
-            "opcion" => "-3 MES",
-            "val" => 3
-        );
+        $opt_turnos[] =
+            [
+                "opcion" => "-1 MES",
+                "val" => 1
+            ];
+        $opt_turnos[] =
+            [
+                "opcion" => "-3 MES",
+                "val" => 3
+            ];
 
-        $opt_turnos[] = array(
-            "opcion" => "-6 MES",
-            "val" => 6
-        );
+        $opt_turnos[] =
+            [
+                "opcion" => "-6 MES",
+                "val" => 6
+            ];
 
-        $opt_turnos[] = array(
-            "opcion" => "-1 AÑO",
-            "val" => 12
-        );
-
+        $opt_turnos[] =
+            [
+                "opcion" => "-1 AÑO",
+                "val" => 12
+            ];
 
         $r[] = form_entrega();
 
+        $select = create_select(
+            $opt_turnos,
+            "tipo",
+            "form-control",
+            "tipo",
+            "opcion",
+            "val"
+        );
         $r[] = ajustar(
             d("FECHA REFERENCIA", 'strong')
             ,
             d(
-                create_select($opt_turnos, "tipo", "form-control", "tipo", "opcion", "val")
+                $select
             )
             ,
-
             " d-flex align-items-center justify-content-between"
         );
 

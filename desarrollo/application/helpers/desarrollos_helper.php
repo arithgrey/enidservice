@@ -6,32 +6,31 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $activa = $data["activa"];
-        $r[] = hiddens(
-            [
-                "type" => 'hidden',
-                "class" => 'id_usuario',
-                "value" => $data["id_usuario"]
-            ]
+        $z[] = form_ticket_dep(
+            $data["departamentos"],
+            $data["num_departamento"]
         );
-        $z[] = form_ticket_dep($data["departamentos"], $data["num_departamento"]);
         $z[] = place('place_proyectos');
         $z[] = place('place_tickets');
-        $r[] = d(append($z), ["class" => "tab-pane " . valida_seccion_activa(1, $activa), "id" => 'tab_abrir_ticket']);
+        $abrir_ticket = append($z);
 
-        $r[] = d(
-            d(
-                place("place_form_tickets"), 1)
-            ,
-            [
-                "class" => "tab-pane " . valida_seccion_activa(3, $activa),
-                "id" => "tab_nuevo_ticket"
-            ]
+        $r[] = tab_seccion(
+            $abrir_ticket,
+            'tab_abrir_ticket',
+            valida_seccion_activa(1, $activa)
         );
 
+        $r[] = tab_seccion(
+            place("place_form_tickets"),
+            'tab_nuevo_ticket',
+            valida_seccion_activa(3, $activa)
+        );
+
+        $tab_content = tab_content($r);
 
         $response[] = hrz(
-            ul(get_menu($activa), "nav tabs"),
-            d(append($r), "tab-content"),
+            menu($activa),
+            $tab_content,
             2
         );
 
@@ -39,6 +38,12 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "ticket",
                 "value" => $data["ticket"],
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "class" => 'id_usuario',
+                "value" => $data["id_usuario"]
             ]
         );
 
@@ -87,43 +92,37 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_menu($activa)
+    function menu($activa)
     {
 
 
         $list = [
-            li(
-                a_enid("ABRIR TICKET",
-                    [
-                        "href" => "#tab_nuevo_ticket",
-                        "data-toggle" => "tab",
-                        "class" => "a_enid_blue abrir_ticket"
-                    ]
-                ),
-                'black  ' . valida_seccion_activa(3, $activa)
 
-            ),
-
-            li(
-                a_enid(
-                    text_icon('fa fa-check-circle', "PENDIENTES")
-                    ,
-                    [
-                        "href" => "#tab_abrir_ticket"
-                        , "data-toggle" => "tab"
-                        , "id" => 'base_tab_clientes'
-                        , "class" => 'black strong base_tab_clientes top_30'
-                    ]
-                ) . place('place_tareas_pendientes'),
-
-
+            tab(
+                "ABRIR TICKET",
+                '#tab_nuevo_ticket'
+                ,
                 [
-                    "class" => 'black  ' . valida_seccion_activa(1, $activa)
+                    'id' => 'abrir_ticket',
+                    'class' => 'black a_enid_blue abrir_ticket ' . valida_seccion_activa(3, $activa)
+
+                ]
+            )
+
+            ,
+
+            tab(
+
+                text_icon('fa fa-check-circle', "PENDIENTES"),
+                '#tab_abrir_ticket',
+                [
+                    "id" => 'base_tab_clientes',
+                    'class' => 'black strong base_tab_clientes top_30' . valida_seccion_activa(1, $activa)
                 ]
             )
         ];
 
-        return ul($list);
+        return append($list);
     }
 
     /*
