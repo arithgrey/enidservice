@@ -4,14 +4,36 @@ if (!function_exists('invierte_date_time')) {
     function render_user($data)
     {
 
-
         $action = $data["action"];
-        $r[] = d(place("place_servicios_contratados"), ["class" => "tab-pane " . valida_active_tab('compras', $action), "id" => 'tab_mis_pagos']);
-        $r[] = d(place("place_ventas_usuario"), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_mis_ventas']);
-        $r[] = d(format_valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]), ["class" => "tab-pane " . valida_active_tab('ventas', $action), "id" => 'tab_valoraciones']);
-        $r[] = d(place("place_pagar_ahora"), ["class" => "tab-pane", "id" => "tab_pagos"]);
-        $r[] = d(place("place_resumen_servicio"), ["class" => "tab-pane", "id" => "tab_renovar_servicio"]);
+
         $r[] = hiddens_tickects($action, $data["ticket"]);
+        $r[] = tab_seccion(
+            place("place_servicios_contratados"),
+            "tab_mis_pagos",
+            valida_active_tab('compras', $action)
+        );
+
+        $r[] = tab_seccion(
+            place("place_ventas_usuario"),
+            'tab_mis_ventas',
+            valida_active_tab('ventas', $action)
+        );
+
+        $r[] = tab_seccion(
+            valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]),
+            'tab_valoraciones',
+            valida_active_tab('ventas', $action)
+        );
+
+        $r[] = tab_seccion(
+            place("place_pagar_ahora"),
+            'tab_pagos'
+        );
+        $r[] = tab_seccion(
+            place("place_resumen_servicio"),
+            'tab_renovar_servicio'
+        );
+
         $r[] = d("",
             [
                 "class" => "resumen_pagos_pendientes",
@@ -21,8 +43,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
         //$response[] = d(get_menu($action), 2);
-        $response[] = d(d(append($r), "tab-content"), 10);
-        return d(append($response), "contenedor_principal_enid");
+        $response[] = d(append($r), "tab-content col-lg-10");
+        return append($response);
 
     }
 
@@ -37,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
         );
     }
 
-    function format_valoraciones($valoraciones, $id_usuario, $alcance)
+    function valoraciones($valoraciones, $id_usuario, $alcance)
     {
 
         $r = [];
@@ -73,16 +95,15 @@ if (!function_exists('invierte_date_time')) {
 
             $a = [];
             $a[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
-            $a[] = td($promedio, ["class" => 'num_alcance']);
+            $a[] = td($promedio, 'num_alcance');
             $a[] = td($minimo, ["class" => 'num_alcance', "id" => $maximo]);
 
             $r[] = tr(append($a));
 
-
             $b = [];
-            $b[] = td("Tope", ["class" => 'num_alcance']);
-            $b[] = td("Promedio", ["class" => 'num_alcance']);
-            $b[] = td("Mínimo", ["class" => 'num_alcance']);
+            $b[] = td("Tope", 'num_alcance');
+            $b[] = td("Promedio", 'num_alcance');
+            $b[] = td("Mínimo", 'num_alcance');
 
             $r[] = tr(append($b));
 
@@ -96,25 +117,24 @@ if (!function_exists('invierte_date_time')) {
     function valida_active_tab($nombre_seccion, $estatus)
     {
 
-        $a = ($nombre_seccion == $estatus) ? " active " : "";
-        $b = ($nombre_seccion == "compras") ? " active " : "";
+        $a = igual($nombre_seccion, $estatus, ' active ');
+        $b = igual($nombre_seccion, "compras", 'active');
         return (strlen($estatus) > 0) ? $a : $b;
 
     }
 
     function get_menu()
     {
-        $_pagos =
-            a_enid("",
-                [
-                    "href" => "#tab_pagos",
-                    "data-toggle" => "tab",
-                    "class" => 'black strong tab_pagos',
-                    "id" => 'btn_pagos'
-                ]
-            );
+        $link_pagos = tab(
+            "",
+            "#tab_pagos",
+            [
+                'class' => 'tab_pagos',
+                'id' => 'btn_pagos'
+            ]
+        );
 
-        $_vendedor =
+        $link_vendedor =
             a_enid(
                 d(
                     text_icon("fa fa-flag", " VENDER"),
@@ -122,66 +142,65 @@ if (!function_exists('invierte_date_time')) {
                 )
             );
 
-
-        $a_mis_ventas = a_enid(
-
-            text_icon('fa fa-shopping-bag', "VENTAS")
-            ,
+        $link_ventas = tab(
+            text_icon('fa fa-shopping-bag', "VENTAS"),
+            "#tab_mis_ventas",
             [
+                "class" => 'btn_mis_ventas',
                 "id" => "mis_ventas",
-                "href" => "#tab_mis_ventas",
-                "data-toggle" => "tab",
-                "class" => 'btn_mis_ventas'
             ]
+
         );
 
         $place_ventas = place("place_num_pagos_notificados");
 
+        $link_compras = tab(
 
-        $_compras = a_enid(
             text_icon('fa fa-credit-card-alt', " COMPRAS"),
+            "#tab_mis_pagos",
             [
-                "id" => "mis_compras",
-                "href" => "#tab_mis_pagos",
-                "data-toggle" => "tab",
                 "class" => 'btn_cobranza mis_compras'
             ]
+
         );
 
-        $notificacion = a_enid(
+        $link_notificaciones = tab(
             place("place_num_pagos_por_realizar"),
+            "#tab_mis_pagos",
             [
                 "id" => "mis_compras",
-                "href" => "#tab_mis_pagos",
-                "data-toggle" => "tab",
                 "class" => 'btn_cobranza mis_compras'
             ]
         );
 
-        $_valoraciones = a_enid(
-            text_icon("fa fa-star", " VALORACIONES"),
+        $link_valoraciones = tab(
+
+            text_icon("fa fa-star", " VALORACIONES")
+            ,
+            "#tab_valoraciones",
             [
-                "id" => "mis_valoraciones",
-                "href" => "#tab_valoraciones",
-                "data-toggle" => "tab"
+                "id" => "mis_valoraciones"
             ]
         );
 
-        $_lista_deseo = a_enid(
+        $link_lista_deseo = a_enid(
             text_icon("fa fa-gift", "LISTA DE DESEOS"),
             path_enid("lista_deseos")
         );
 
-
         $list = [
-            $_vendedor,
-            $a_mis_ventas,
+            $link_vendedor,
+            $link_ventas,
             $place_ventas,
-            $_compras,
-            $notificacion,
-            $_valoraciones,
-            $_lista_deseo,
-            li($_pagos, ["class" => 'li_menu', "style" => "display: none;"]),
+            $link_compras,
+            $link_notificaciones,
+            $link_valoraciones,
+            $link_lista_deseo,
+            li($link_pagos,
+                [
+                    "class" => 'li_menu',
+                ]
+            ),
 
         ];
         return ul($list, [

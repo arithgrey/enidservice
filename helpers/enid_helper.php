@@ -445,6 +445,40 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
 
 }
 
+function tab($text, $accion, $attributes = [])
+{
+
+    $attributes["data-toggle"] = "tab";
+    $attributes["href"] = $accion;
+    return get_base_html("a", $text, $attributes);
+}
+
+function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
+{
+
+
+    if (array_key_exists("class", $attributes)) {
+        $attributes["class"] = $attributes["class"] . "tab-pane fade ";
+    } else {
+        $attributes["class"] = " tab-pane fade ";
+    }
+    if ($activo > 0) {
+
+        $attributes["class"] = $attributes["class"] . " tab-pane active ";
+    }
+
+    $attributes['role'] = "tabpanel";
+    $attributes['id'] = $id_selector;
+    return d($contenido, $attributes);
+
+}
+
+function tab_content($array = [])
+{
+
+    return d(append($array), 'tab-content');
+}
+
 
 function td($val = '', $attributes = [])
 {
@@ -2033,10 +2067,10 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
 
 }
 
-function _titulo($text, $tipo = 0, $extra='')
+function _titulo($text, $tipo = 0, $extra = '')
 {
     $tipo_titulo = ($tipo == 0) ? 'h3' : 'h4';
-    return h($text, 1, $tipo_titulo . ' strong text-uppercase '.$extra);
+    return h($text, 1, $tipo_titulo . ' strong text-uppercase ' . $extra);
 
 }
 

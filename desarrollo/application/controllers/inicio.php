@@ -15,7 +15,8 @@ class Inicio extends CI_Controller
 
         $data = $this->app->session();
         $param = $this->input->get();
-        $data["num_departamento"] = $this->id_deptop_id_perfil($this->app->getperfiles(2, "idperfil"));
+        $id_perfil = $this->app->getperfiles(2, "idperfil");
+        $data["num_departamento"] = $this->id_deptop_id_perfil($id_perfil);
         $data["departamentos"] = $this->deptos_enid();
         $data["clasificaciones_departamentos"] = $this->app->get_departamentos(1);
         $activa = prm_def($param, "q");

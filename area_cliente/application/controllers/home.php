@@ -23,12 +23,10 @@ class Home extends CI_Controller
             $id_ticket = prm_def($param, "ticket");
             $this->estado_compra($id_ticket);
 
+            $resumen = $this->resumen_valoraciones($data["id_usuario"]);
             $data += [
                 "action" => $param["action"],
-                "valoraciones" =>
-                    prm_def(
-                        $this->resumen_valoraciones($data["id_usuario"]),
-                        "info_valoraciones", []),
+                "valoraciones" => prm_def($resumen, "info_valoraciones", []),
                 "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
                 "ticket" => $id_ticket,
             ];
@@ -69,8 +67,10 @@ class Home extends CI_Controller
 
                 $link_registro_domicilio =
                     _text(
-                        "../", path_enid("pedido_seguimiento", $id_recibo),
-                        "&domicilio=1");
+                        "../",
+                        path_enid("pedido_seguimiento", $id_recibo),
+                        "&domicilio=1"
+                    );
                 redirect($link_registro_domicilio);
 
             } else {
@@ -79,11 +79,15 @@ class Home extends CI_Controller
                 if (pr($recibo, 'saldo_cubierto') > 0) {
 
                     $link_registro_domicilio =
-                        _text("../", path_enid("pedido_seguimiento", $id_recibo));
+                        _text(
+                            "../",
+                            path_enid("pedido_seguimiento", $id_recibo)
+                        );
                     redirect($link_registro_domicilio);
                 }
 
             }
+
 
         }
 
@@ -92,7 +96,8 @@ class Home extends CI_Controller
     private function recibo_pago_direccion($id_recibo)
     {
 
-        return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
+        return $this->app->api(
+            "proyecto_persona_forma_pago_direccion/recibo/format/json/",
             [
                 "id_recibo" => $id_recibo,
                 "total" => 1,
