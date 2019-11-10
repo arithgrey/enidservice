@@ -8,21 +8,29 @@ if (!function_exists('invierte_date_time')) {
 
 
         $str = ($data["num_clasificaciones"] > 0) ?
-                h(
-                        "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
-                        5
-                        ,
-                        'titulo-tags-ingresos'
-                ) : "";
+            h(
+                "CLASIFICACIONES AGREGADAS RECIENTEMENTE",
+                5
+                ,
+                'underline strong'
+            ) : "";
 
-        $talla = h(prm_def($data["talla"], "tipo"), 2, 'info-tipo-talla');
-        $cuerpo_talla = _text($talla, $str, $data["clasificaciones_existentes"]);
+        $talla = h(
+            prm_def($data["talla"], "tipo"),
+            2,
+            'underline strong'
+        );
+        $cuerpo_talla = _text(
+            $talla,
+            $str,
+            $data["clasificaciones_existentes"]
+        );
 
         $r[] = d($cuerpo_talla, "agregadas col-lg-9");
         $r[] = btw(
-                h("CLASIFICACIONES", 3),
-                frm_clasificacion_talla(),
-                " sugerencias col-lg-3"
+            h("CLASIFICACIONES", 3),
+            frm_clasificacion_talla(),
+            " sugerencias col-lg-3"
         );
 
         return append($r);
@@ -33,26 +41,30 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $btn = form_button(
-                [
-                        'class' => _text('button-op ', 'seleccion_', $param["nivel"]),
+            [
+                'class' => _text('button-op ', 'seleccion_', $param["nivel"]),
 
-                ], 'AGREGAR A LA LISTA'
+            ], 'AGREGAR A LA LISTA'
         );
 
-        return d($btn, "mas_".$param["nivel"]);
+        return d($btn, "mas_" . $param["nivel"]);
 
     }
 
     function frm_clasificacion_talla()
     {
 
-        $r[] = form_open("", ["class" => "form-agregar-clasificacion-talla"]);
+        $r[] = form_open("",
+            [
+                "class" => "form_clasificacion_talla"
+            ]
+        );
         $r[] = input(
-                [
-                        "type" => "text",
-                        "name" => "clasificacion",
-                        "placeholder" => "Busca por clasificación",
-                ]
+            [
+                "type" => "text",
+                "name" => "clasificacion",
+                "placeholder" => "Busca por clasificación",
+            ]
         );
         $r[] = form_close(place("info_tags"));
 

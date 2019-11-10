@@ -2039,6 +2039,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "desarrollo" => "desarrollo",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
+        "enid" => "https://enidservices.com",
+        "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg'
     ];
 
 

@@ -18,7 +18,7 @@ class Home extends CI_Controller
             create_url_preview("paginas_web_ii.jpeg")
         );
 
-		$data["f_pago"] = 1;
+
 		$this->app->pagina($this->app->cssJs($data, "tareas_complejas"), 'home');
 	}
 }

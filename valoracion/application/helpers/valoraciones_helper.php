@@ -12,8 +12,9 @@ if (!function_exists('invierte_date_time')) {
         $propietario = ($extra["id_usuario"] == pr($servicio, 'id_usuario'));
         $nombre = ($extra["in_session"]) ? $extra["nombre"] : "";
         $email = ($extra["in_session"]) ? $extra["email"] : "";
+
         $r[] = h("ESCRIBE UNA RESEÑA", 3, "strong");
-        $r[] = d("Sobre  " . $nombre_servicio);
+        $r[] = d(_text("Sobre  ", $nombre_servicio));
         $r[] = form_open("",
             [
                 "class" => "form_valoracion"
@@ -123,7 +124,7 @@ if (!function_exists('invierte_date_time')) {
             d(
                 format_link('más recomendaciones',
                     [
-                        'href' => path_enid('producto', _text($id_servicio,'&valoracion=1')),
+                        'href' => path_enid('producto', _text($id_servicio, '&valoracion=1')),
 
                     ], 0), 4, 1
             ), 'registro_valoracion d-none');

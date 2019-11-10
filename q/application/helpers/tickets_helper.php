@@ -22,33 +22,33 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($solicitud_saldo as $row):
 
-            $response[] = tr(td(d("Folio # ".$row["id_solicitud"], 'folio'),
-                    ["colspan" => "2"]));
+            $response[] = tr(td(d("Folio # " . $row["id_solicitud"], 'folio'),
+                ["colspan" => "2"]));
 
             $y[] = td(
-                    d(
-                            span("SOLICITUD DE SALDO A".$row["email_solicitado"],
-                                    'monto_solicitado')
-                            ,
-                            "desc_solicitud"
-                    )
+                d(
+                    span("SOLICITUD DE SALDO A" . $row["email_solicitado"],
+                        'monto_solicitado')
+                    ,
+                    "desc_solicitud"
+                )
             );
-            $y[] = td($row["monto_solicitado"]."MXN", 'monto_solicitud_text');
+            $y[] = td($row["monto_solicitado"] . "MXN", 'monto_solicitud_text');
 
             $response[] = tr(append($y));
 
 
             $r[] =
-                    td(
-                            d(
-                                    span("SOLICITUD DE SALDO A".$row["email_solicitado"],
-                                            'monto_solicitado')
-                                    ,
-                                    "desc_solicitud"
-                            )
-                    );
+                td(
+                    d(
+                        span("SOLICITUD DE SALDO A" . $row["email_solicitado"],
+                            'monto_solicitado')
+                        ,
+                        "desc_solicitud"
+                    )
+                );
 
-            $r[] = td($row["monto_solicitado"]."MXN", 'monto_solicitud_text');
+            $r[] = td($row["monto_solicitado"] . "MXN", 'monto_solicitud_text');
 
             $response[] = tr(append($r));
             $re[] = tb(append($response));
@@ -66,93 +66,118 @@ if (!function_exists('invierte_date_time')) {
     function format_tablero($tickets)
     {
 
-        $ab[] = d(h(text_icon('fa fa-angle-up up_ab', "[AB]"), 5, " text-uppercase "));
-        $backlog[] = d(h(text_icon('fa fa-angle-up up_backlog', "Backlog"), 5,
-                " text-uppercase "));
-        $pendiente[] = d(h(text_icon('fa fa-angle-up up_pendiente', "Pendiente"), 5,
-                " text-uppercase "));
-        $haciendo[] = d(h(text_icon('fa fa-angle-up up_proceso', "Proceso"), 5,
-                " text-uppercase "));
-        $hecho[] = d(h(text_icon('fa fa-angle-up up_hecho', "hecho"), 5,
-                " text-uppercase "));
-        $revision[] = d(h(text_icon('fa fa-angle-up up_revision', "Revisión"), 5,
-                " text-uppercase "));
+        $title_ab = text_icon('fa fa-angle-up up_ab', "[AB]");
+        $ab[] = h(
+            $title_ab,
+            5,
+            "text-uppercase "
+        );
+
+        $title_backlog = text_icon('fa fa-angle-up up_backlog', "Backlog");
+        $title_backlog = h($title_backlog, 5, " text-uppercase ");
+        $backlog[] = d($title_backlog);
+
+
+        $pendiente = text_icon('fa fa-angle-up up_pendiente', "Pendiente");
+        $pendiente = h($pendiente, 5, " text-uppercase ");
+        $pendiente[] = d($pendiente);
+
+        $haciendo = h(text_icon('fa fa-angle-up up_proceso', "Proceso"), 5, " text-uppercase ");
+        $haciendo[] = d($haciendo);
+        $hecho = h(text_icon('fa fa-angle-up up_hecho', "hecho"), 5, " text-uppercase ");
+        $hecho[] = d($hecho);
+
+        $revision = h(text_icon('fa fa-angle-up up_revision', "Revisión"), 5,
+            " text-uppercase ");
+        $revision[] = d($revision);
 
         foreach ($tickets as $row) {
 
             $id_ticket = $row["id_ticket"];
             $asunto = $row["asunto"];
             $efecto_monetario = $row["efecto_monetario"];
-            $asunto = flex($asunto, crea_estrellas($efecto_monetario, 1), "flex-column ");
+            $asunto = flex($asunto, crea_estrellas($efecto_monetario, 1), "flex-column");
 
             switch ($row["status"]) {
 
 
                 case 7:
 
-                    $ab[] = d(d(
-                            $asunto
-                            , 12),
-                            [
-                                    "class" => "row ui-widget-content border draggable padding_10 
+                    $ab[] = d(
+                        d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 
                             shadow ab_target cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
+                            "id" => $id_ticket,
 
-                            ]);
+                        ]
+                    );
 
                     break;
 
 
                 case 5:
 
-                    $backlog[] = d(d($asunto, 12),
-                            [
-                                    "class" => "row ui-widget-content border draggable padding_10 shadow  backlog_target 
+                    $backlog[] = d(
+                        d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow  backlog_target 
                             cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
+                            "id" => $id_ticket,
 
-                            ]);
+                        ]
+                    );
 
                     break;
 
 
                 case 0:
 
-                    $pendiente[] = d(d($asunto, 12),
-                            [
-                                    "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
-
-                            ]);
+                    $pendiente[] = d(
+                        d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
+                            "id" => $id_ticket,
+                        ]
+                    );
 
                     break;
 
                 case 1:
 
-                    $haciendo[] = d(d($asunto, 12),
-                            [
-                                    "class" => "row ui-widget-content border draggable padding_10 shadow 
+                    $haciendo[] = d(
+                        d($asunto, 12),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow 
                             proceso_target 
                             cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
+                            "id" => $id_ticket,
 
-                            ]);
+                        ]
+                    );
 
                     break;
                 case 2:
 
-                    $text = ajustar($asunto,
-                            icon("fas fa-check-circle hecho", ["id" => $id_ticket]));
-                    $hecho[] = d(
-                            d(
-                                    $text, 12
-                            ),
+                    $text = ajustar(
+                        $asunto,
+                        icon("fas fa-check-circle hecho",
                             [
-                                    "class" => "row ui-widget-content border draggable padding_10
+                                "id" => $id_ticket
+                            ]
+                        )
+                    );
+                    $hecho[] = d(
+                        d(
+                            $text, 12
+                        ),
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10
                              shadow hecho_target cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
+                            "id" => $id_ticket,
 
-                            ]);
+                        ]
+                    );
 
 
                     break;
@@ -160,11 +185,11 @@ if (!function_exists('invierte_date_time')) {
                 case 6:
 
                     $revision[] = d(d($asunto, 12),
-                            [
-                                    "class" => "row ui-widget-content border draggable padding_10 shadow revision_target cursor_pointer ver_detalle_ticket top_5",
-                                    "id" => $id_ticket,
+                        [
+                            "class" => "row ui-widget-content border draggable padding_10 shadow revision_target cursor_pointer ver_detalle_ticket top_5",
+                            "id" => $id_ticket,
 
-                            ]);
+                        ]);
 
                     break;
 
@@ -173,28 +198,28 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = d(append($ab), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_ab",
-                "id" => 7,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_ab",
+            "id" => 7,
         ]);
         $response[] = d(append($backlog), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_backlog",
-                "id" => 5,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_backlog",
+            "id" => 5,
         ]);
         $response[] = d(append($pendiente), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_pendiente",
-                "id" => 0,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_pendiente",
+            "id" => 0,
         ]);
         $response[] = d(append($haciendo), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_haciendo",
-                "id" => 1,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_haciendo",
+            "id" => 1,
         ]);
         $response[] = d(append($hecho), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_hecho",
-                "id" => 2,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_hecho",
+            "id" => 2,
         ]);
         $response[] = d(append($revision), [
-                "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_revision",
-                "id" => 6,
+            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_revision",
+            "id" => 6,
         ]);
 
         return append($response);
@@ -218,12 +243,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_respuesta_ticket top_20"]);
         $r[] = h("COMENTARIO", 3);
         $r[] = textarea(
-                [
-                        "class" => "form-control",
-                        "id" => "mensaje",
-                        "name" => "mensaje",
-                        "required" => "",
-                ]);
+            [
+                "class" => "form-control",
+                "id" => "mensaje",
+                "name" => "mensaje",
+                "required" => "",
+            ]);
         $r[] = hiddens(["name" => "tarea", "value" => $tarea]);
         $r[] = btn("Enviar");
         $r[] = form_close();
@@ -238,37 +263,37 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => 'form_ticket']);
         $r[] = hiddens(
-                [
-                        "name" => "prioridad",
-                        "value" => "1",
-                ]);
+            [
+                "name" => "prioridad",
+                "value" => "1",
+            ]);
         $r[] = hiddens(
-                [
-                        "name" => "mensaje",
-                        "id" => "mensaje",
-                        "class" => "mensaje",
-                ]);
+            [
+                "name" => "mensaje",
+                "id" => "mensaje",
+                "class" => "mensaje",
+            ]);
         $r[] = d("DEPARTAMENTO AL CUAL SOLICITAS", 1);
         $r[] = addNRow(
-                create_select(
-                        $departamentos,
-                        "departamento",
-                        "form-control",
-                        "departamento",
-                        "nombre",
-                        "id_departamento"
-                ));
+            create_select(
+                $departamentos,
+                "departamento",
+                "form-control",
+                "departamento",
+                "nombre",
+                "id_departamento"
+            ));
         $r[] = n_row_12();
         $r[] = d("MODULO, ASUNTO, TÓPICO", "input-group-addon");
         $r[] = input(
-                [
-                        "id" => "asunto",
-                        "name" => "asunto",
-                        "class" => "form-control",
-                        "placeholder" => "MODULO, ASUNTO, TÓPICO",
-                        "required" => "true",
-                        "type" => "text",
-                ]);
+            [
+                "id" => "asunto",
+                "name" => "asunto",
+                "class" => "form-control",
+                "placeholder" => "MODULO, ASUNTO, TÓPICO",
+                "required" => "true",
+                "type" => "text",
+            ]);
         $r[] = end_row();
         $r[] = btn("ABRIR TICKET");
         $r[] = form_close();
@@ -287,22 +312,22 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(d(append($x), "padding_20"));
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = btn("SEGUIR COMPRANDO",
-                [
+            [
 
-                        "class" => "top_30",
+                "class" => "top_30",
 
-                ],
-                1,
-                1, 0, $url);
+            ],
+            1,
+            1, 0, $url);
 
         $r[] = btn("CANCELAR ÓRDEN DE COMPRA",
-                [
-                        "class" => "cancelar_orden_compra top_20",
-                        "id" => $recibo['id_recibo'],
-                        "modalidad" => $modalidad,
-                ],
-                1,
-                1);
+            [
+                "class" => "cancelar_orden_compra top_20",
+                "id" => $recibo['id_recibo'],
+                "modalidad" => $modalidad,
+            ],
+            1,
+            1);
 
 
         return d(append($r), 6, 1);
@@ -312,10 +337,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $config = [
-                "type" => 'checkbox',
-                "class" => 'tarea ',
-                "id" => $id_tarea,
-                "value" => $valor_actualizar,
+            "type" => 'checkbox',
+            "class" => 'tarea ',
+            "id" => $id_tarea,
+            "value" => $valor_actualizar,
         ];
 
 
@@ -335,9 +360,9 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($data)) {
 
             $r[] = d("MOSTRAR SÓLO TAREAS PENDIENTES",
-                    'menu_tareas_pendientes a_enid_black cursor_pointer');
+                'menu_tareas_pendientes a_enid_black cursor_pointer');
             $r[] = d("MOSTRAR TODAS LAS TAREAS",
-                    'mostrar_todas_las_tareas a_enid_black cursor_pointer');
+                'mostrar_todas_las_tareas a_enid_black cursor_pointer');
 
         }
 
@@ -362,7 +387,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($info_ticket as $row) {
 
                 $id_ticket = $row["id_ticket"];
-                $resumen = $pendientes." / ".$tareas;
+                $resumen = $pendientes . " / " . $tareas;
                 $asunto = $row["asunto"];
                 $efecto_monetario = $row["efecto_monetario"];
                 $nota_monetaria = $row["nota_monetaria"];
@@ -370,33 +395,33 @@ if (!function_exists('invierte_date_time')) {
                 $clientes_ab = $row["clientes_ab"];
 
                 $cerrar =
-                        btn(
-                                "CERRAR",
-                                [
-                                        "onClick" => "cerrar_ticket({$id_ticket})",
-                                        "class" => "col-lg-3",
-                                ],
-                                0, 1, 0, 1
-                        );
+                    btn(
+                        "CERRAR",
+                        [
+                            "onClick" => "cerrar_ticket({$id_ticket})",
+                            "class" => "col-lg-3",
+                        ],
+                        0, 1, 0, 1
+                    );
 
                 $icon = ($pendientes != $tareas) ? "fa fa-check-circle text-secondary " : "fa fa-check-circle text-dark";
 
 
                 $x[] = d(
 
-                        btw(
-                                h(add_text("#", $id_ticket, 1), 2),
-                                $cerrar,
-                                "d-flex align-items-center justify-content-between"
-                        )
+                    btw(
+                        h(add_text("#", $id_ticket, 1), 2),
+                        $cerrar,
+                        "d-flex align-items-center justify-content-between"
+                    )
                 );
 
 
                 $calendario[] = form_open("", ["class" => 'frm_agendar_google']);
                 $calendario[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
                 $calendario[] = hiddens([
-                        "class" => "descripcion_google",
-                        "value" => $asunto,
+                    "class" => "descripcion_google",
+                    "value" => $asunto,
                 ]);
                 $agendar = ajustar(input_hour_date(), btn("Agendar"), 4);
                 $calendario[] = d("AGENDAR", "cursor_pointer  underline agendar_google");
@@ -407,29 +432,29 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = append($calendario);
                 //$x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
                 $x[] = d(add_text(icon("fa fa-pencil asunto", ["id" => $id_ticket]),
-                        $asunto), "top_30 border padding_10 bottom_30 s_desc_asunto");
+                    $asunto), "top_30 border padding_10 bottom_30 s_desc_asunto");
 
 
                 $x[] = d(
-                        ajustar(
-                                d("TAREA: "),
-                                input([
-                                                "class" => "input_asunto",
-                                                "value" => $asunto,
-                                        ]
-                                )
-                        ), "col-lg-6 display_none i_desc_asunto");
+                    ajustar(
+                        d("TAREA: "),
+                        input([
+                                "class" => "input_asunto",
+                                "value" => $asunto,
+                            ]
+                        )
+                    ), "col-lg-6 display_none i_desc_asunto");
 
 
                 $x[] = crea_estrellas($efecto_monetario);
 
                 $menus_monetarios = [
-                        d("Nota monetaria",
-                                "strong menu_nota_monetaria underline cursor_pointer"),
-                        d("Efectivo resultante ",
-                                "strong menu_efectivo_resultante underline cursor_pointer ml-5"),
-                        d("Clientes resultantes",
-                                "strong menu_clientes_ab_testing underline cursor_pointer ml-5"),
+                    d("Nota monetaria",
+                        "strong menu_nota_monetaria underline cursor_pointer"),
+                    d("Efectivo resultante ",
+                        "strong menu_efectivo_resultante underline cursor_pointer ml-5"),
+                    d("Clientes resultantes",
+                        "strong menu_clientes_ab_testing underline cursor_pointer ml-5"),
                 ];
 
                 $x[] = flex($menus_monetarios);
@@ -437,27 +462,27 @@ if (!function_exists('invierte_date_time')) {
                 $x[] = frm_efectivo_resultante($id_ticket, $efectivo_resultante);
                 $x[] = frm_clientes_ab_testing($id_ticket, $clientes_ab);
                 $x[] = form_open("",
-                        ["class" => "frm_nota_monetaria nota_monetaria_area d-none mb-5"]);
+                    ["class" => "frm_nota_monetaria nota_monetaria_area d-none mb-5"]);
                 $x[] =
-                        hrz(
-                                textarea(
-                                        [
-                                                "name" => "nota_monetaria",
-                                                "value" => $nota_monetaria,
-                                        ],
-                                        0,
-                                        $nota_monetaria
-                                ),
-                                btn("AGREGAR")
-                                ,
-                                9
-                                ,
-                                "strong  underline cursor_pointer mt-5 mb-5 row"
+                    hrz(
+                        textarea(
+                            [
+                                "name" => "nota_monetaria",
+                                "value" => $nota_monetaria,
+                            ],
+                            0,
+                            $nota_monetaria
+                        ),
+                        btn("AGREGAR")
+                        ,
+                        9
+                        ,
+                        "strong  underline cursor_pointer mt-5 mb-5 row"
 
-                        );
+                    );
                 $x[] = form_close();
                 $x[] = d(icon("fas fa-2x fa-plus-circle blue_enid"),
-                        "boton_agregar_tarea padding_1  cursor_pointer text-right");
+                    "boton_agregar_tarea padding_1  cursor_pointer text-right");
                 $r[] = d(append($x), "shadow padding_20");
 
             }
@@ -475,34 +500,34 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("",
-                ["class" => "frm_efectivo_resultante mt-5 mb-5 col-md-5 d-none"]);
+            ["class" => "frm_efectivo_resultante mt-5 mb-5 col-md-5 d-none"]);
 
         $r[] = flex(
-                input_frm(0, "MXN",
-                        [
-                                "type" => "number",
-                                "step" => "any",
-                                "id" => "efectivo_resultante",
-                                "class" => "input_efectivo_resultante",
-                                "name" => "efectivo_resultante",
-                                "placeholder" => "1000",
-                                "min" => 0,
-                                "maxlength" => 6,
-                                "value" => $efectivo_resultante,
+            input_frm(0, "MXN",
+                [
+                    "type" => "number",
+                    "step" => "any",
+                    "id" => "efectivo_resultante",
+                    "class" => "input_efectivo_resultante",
+                    "name" => "efectivo_resultante",
+                    "placeholder" => "1000",
+                    "min" => 0,
+                    "maxlength" => 6,
+                    "value" => $efectivo_resultante,
 
-                        ]
-                ),
-                btn("GUARDAR", [], 0),
-                "d-flex justify-content-between", "row mr-auto", "row"
+                ]
+            ),
+            btn("GUARDAR", [], 0),
+            "d-flex justify-content-between", "row mr-auto", "row"
         );
 
         $r[] = hiddens(["name" => "id_ticket", "value" => $id_ticket]);
         $r[] = form_close();
         $text_efectivo = flex("EFECTIVO RESULTANTE ",
-                formated_link(money($efectivo_resultante)), 'align-items-end',
-                '', 'ml-3');
+            formated_link(money($efectivo_resultante)), 'align-items-end',
+            '', 'ml-3');
         $response[] = contaiter(d($text_efectivo, "col-lg-12 strong m-0 p-0"),
-                "mt-5 resumen_efectivo_resultante");
+            "mt-5 resumen_efectivo_resultante");
         $response[] = contaiter(append($r), "mb-5");
 
         return append($response);
@@ -514,35 +539,35 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("",
-                ["class" => "frm_clientes_ab_testing mt-5 mb-4 col-md-5 d-none"]);
+            ["class" => "frm_clientes_ab_testing mt-5 mb-4 col-md-5 d-none"]);
 
         $r[] = flex(
-                input_frm(0, "NÚMERO DE CLIENTES",
-                        [
-                                "type" => "number",
-                                "step" => "any",
-                                "id" => "clientes_ab",
-                                "class" => "input_clientes_ab",
-                                "name" => "clientes_ab",
-                                "placeholder" => "10",
-                                "min" => 0,
-                                "maxlength" => 6,
-                                "value" => $clientes_ab,
+            input_frm(0, "NÚMERO DE CLIENTES",
+                [
+                    "type" => "number",
+                    "step" => "any",
+                    "id" => "clientes_ab",
+                    "class" => "input_clientes_ab",
+                    "name" => "clientes_ab",
+                    "placeholder" => "10",
+                    "min" => 0,
+                    "maxlength" => 6,
+                    "value" => $clientes_ab,
 
-                        ]
-                ),
-                btn("GUARDAR", [], 0),
-                "d-flex justify-content-between", "row mr-auto", "row"
+                ]
+            ),
+            btn("GUARDAR", [], 0),
+            "d-flex justify-content-between", "row mr-auto", "row"
         );
 
         $r[] = hiddens(["name" => "id_ticket", "value" => $id_ticket]);
         $r[] = form_close();
         $text = flex("CLIENTES AB TESTING RESULTANTES ", formated_link($clientes_ab),
-                'align-items-end',
-                'mr-3'
+            'align-items-end',
+            'mr-3'
         );
         $response[] = contaiter(d($text, "col-lg-12 strong m-0 p-0"),
-                "mt-5 resumen_clientes_ab");
+            "mt-5 resumen_clientes_ab");
         $response[] = contaiter(append($r), "mb-5");
 
         return append($response);
@@ -588,79 +613,79 @@ if (!function_exists('invierte_date_time')) {
 
             $input = valida_check_tarea($id_tarea, $valor_actualizar, $status);
             $descripcion = ($status > 0) ? del($row["descripcion"],
-                    "descripcion_tarea  cursor_pointer") : $row["descripcion"];
+                "descripcion_tarea  cursor_pointer") : $row["descripcion"];
 
 
             $menu = [];
             $menu[] = icon(" fa-ellipsis-h ml-3 ", ["data-toggle" => "dropdown"]);
             $menu[] = d(
-                    append(
+                append(
+                    [
+
+                        d(
+                            text_icon("fas fa-minus cursor_pointer",
+                                "Quitar"),
                             [
-
-                                    d(
-                                            text_icon("fas fa-minus cursor_pointer",
-                                                    "Quitar"),
-                                            [
-                                                    "class" => "top_5  cursor_pointer",
-                                                    "onClick" => "elimina_tarea({$id_tarea})",
-                                            ]
-                                    ),
-
+                                "class" => "top_5  cursor_pointer",
+                                "onClick" => "elimina_tarea({$id_tarea})",
                             ]
-                    ),
-                    "dropdown-menu  padding_20"
+                        ),
+
+                    ]
+                ),
+                "dropdown-menu  padding_20"
             );
 
             $bloque_descripcion = append(
-                    [
-                            d(
-                                    $descripcion,
-                                    [
-                                            "class" => "contenedor_descripcion cursor_pointer text_tarea_".$id_tarea,
-                                            "onClick" => "edita_descripcion_tarea({$id_tarea})",
-                                    ]
-                            ),
-                            d(
-                                    input(
-                                            [
-                                                    "name" => "descripcion",
-                                                    "value" => $row["descripcion"],
-                                                    "type" => "text",
-                                                    "class" => "itarea_".$id_tarea,
-                                            ]
-                                    )
-                                    ,
-                                    [
-                                            "class" => "input_descripcion",
-                                            "id" => "tarea_".$id_tarea,
-                                    ]
+                [
+                    d(
+                        $descripcion,
+                        [
+                            "class" => "contenedor_descripcion cursor_pointer text_tarea_" . $id_tarea,
+                            "onClick" => "edita_descripcion_tarea({$id_tarea})",
+                        ]
+                    ),
+                    d(
+                        input(
+                            [
+                                "name" => "descripcion",
+                                "value" => $row["descripcion"],
+                                "type" => "text",
+                                "class" => "itarea_" . $id_tarea,
+                            ]
+                        )
+                        ,
+                        [
+                            "class" => "input_descripcion",
+                            "id" => "tarea_" . $id_tarea,
+                        ]
 
-                            ),
-                    ]
+                    ),
+                ]
             );
 
 
             $descripcion = btw(
-                    d($bloque_descripcion)
-                    ,
-                    d(append($menu), "btn-group")
-                    ,
-                    " d-flex align-items-center justify-content-between  "
+                d($bloque_descripcion)
+                ,
+                d(append($menu), "btn-group")
+                ,
+                " d-flex align-items-center justify-content-between  "
             );
 
 
             $text = btw(
 
-                    $input
-                    ,
-                    $descripcion
-                    ,
-                    "d-flex align-items-center justify-content-between "
+                $input
+                ,
+                $descripcion
+                ,
+                "d-flex align-items-center justify-content-between "
 
             );
 
 
-            $r[] = d($text, $estado_tarea.' top_30   ');
+            $r[] = d($text, $estado_tarea . ' top_30   ');
 
 
         }

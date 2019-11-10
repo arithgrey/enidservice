@@ -29,12 +29,12 @@ function carga_tipo_talla_por_id(id){
 /**/
 function muestra_tipo_talla(data){
 	render_enid(".place_tallas", data);
-	$(".form-agregar-clasificacion-talla").submit(muestra_clasificacion_tipo_talla_disponibles	);
+	$(".form_clasificacion_talla").submit(muestra_clasificacion_tipo_talla_disponibles	);
 }
 /***/
 function muestra_clasificacion_tipo_talla_disponibles(e){
 
-	var  	data_send 	= $(".form-agregar-clasificacion-talla").serialize()+"&"+$.param({"id":get_option("id") , "v":1});
+	var  	data_send 	= $(".form_clasificacion_talla").serialize()+"&"+$.param({"id":get_option("id") , "v":1});
 	var 	url			= "../q/index.php/api/clasificacion/tipo_talla_clasificacion/format/json/";
 	request_enid( "GET",  data_send , url , muestra_clasificaciones_disponibles );
 	e.preventDefault();

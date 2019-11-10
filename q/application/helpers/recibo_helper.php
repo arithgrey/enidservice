@@ -1184,7 +1184,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id_servicio = $row["id_servicio"];
             $resumen_pedido = $row["resumen_pedido"];
-            $url_imagen = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+            $url_imagen = link_imagen_servicio($id_servicio);
 
 
             $response[] = img(

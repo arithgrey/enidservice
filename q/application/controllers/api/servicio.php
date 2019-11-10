@@ -1501,7 +1501,7 @@ class Servicio extends REST_Controller
                     $id_servicio = $row["id_servicio"];
 
                     $id_error = "imagen_" . $id_servicio;
-                    $url_img = "../imgs/index.php/enid/imagen_servicio/" . $id_servicio;
+                    $url_img = link_imagen_servicio($id_servicio);
                     $img = img(
                         [
                             "src" => $url_img,
@@ -1534,7 +1534,7 @@ class Servicio extends REST_Controller
                 $this->table->set_template(template_table_enid());
                 $tb_general = $this->table->generate();
                 $tb_headers = $this->get_headers_tipo_entrega($servicios);
-                $total = $tb_headers .  hr() . $tb_general;
+                $total = $tb_headers . hr() . $tb_general;
                 $response = $total;
 
 
@@ -1599,7 +1599,7 @@ class Servicio extends REST_Controller
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
 
-            if (es_data($servicios) ) {
+            if (es_data($servicios)) {
 
 
                 $response = get_view_sugerencias(
@@ -1678,8 +1678,8 @@ class Servicio extends REST_Controller
             if ($existentes < 8) {
 
                 $param["limit"] = (8 - $existentes);
-                foreach ($this->busqueda_producto_por_palabra_clave($param)  as $row ){
-                    $servicios[] =  $row;
+                foreach ($this->busqueda_producto_por_palabra_clave($param) as $row) {
+                    $servicios[] = $row;
                 }
             }
 
