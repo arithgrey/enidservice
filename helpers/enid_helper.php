@@ -1,6 +1,5 @@
 <?php
 
-
 function ul($list, $attributes = [])
 {
 
@@ -450,7 +449,15 @@ function tab($text, $accion, $attributes = [])
 
     $attributes["data-toggle"] = "tab";
     $attributes["href"] = $accion;
-    return get_base_html("a", $text, $attributes);
+    if (array_key_exists("class", $attributes)) {
+        $attributes["class"] = $attributes["class"] . " text-uppercase black ";
+    } else {
+
+        $attributes["class"] = " text-uppercase black";
+    }
+
+    return a_enid($text, $attributes);
+
 }
 
 function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
@@ -458,9 +465,9 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
 
 
     if (array_key_exists("class", $attributes)) {
-        $attributes["class"] = $attributes["class"] . "tab-pane fade ";
+        $attributes["class"] = $attributes["class"] . "tab-pane  ";
     } else {
-        $attributes["class"] = " tab-pane fade ";
+        $attributes["class"] = " tab-pane  ";
     }
     if ($activo > 0) {
 
@@ -472,6 +479,13 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
     return d($contenido, $attributes);
 
 }
+
+function tab_activa($seccion, $activa)
+{
+    return ($seccion == $activa) ? 1 : 0;
+
+}
+
 
 function tab_content($array = [])
 {
@@ -802,14 +816,6 @@ function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
 
 }
 
-
-//function exists_array_def($data, $key, $exists = 1, $fail = 0)
-//{
-//    return (is_array($data) && array_key_exists($key, $data)) ? $exists : $fail;
-//
-//}
-
-
 function label($label_text = '', $attributes = [], $row = 0)
 {
 
@@ -1064,13 +1070,6 @@ function lib_def()
 function valida_num($num)
 {
     return ($num > 0) ? $num : 0;
-}
-
-
-function valida_seccion_activa($seccion, $activa)
-{
-    return ($seccion == $activa) ? " active " : "";
-
 }
 
 
@@ -2025,6 +2024,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "logout" => "login/index.php/startsession/logout",
         "nuevo_usuario" => "login/?action=nuevo",
         "lista_deseos" => "lista_deseos",
+        "lista_deseos_preferencias" => "lista_deseos/?q=preferencias",
         "terminos-y-condiciones" => "terminos-y-condiciones",
         "contacto" => "contact/#envio_msj",
         "contact" => "contact/?ubicacion=1#direccion",
@@ -2040,7 +2040,9 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",
-        "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg'
+        "enid_login" => "https://enidservices.com/inicio/login/",
+        "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg',
+        "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png'
     ];
 
 
@@ -2834,7 +2836,9 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
         "dropdown dropleft menu_notificaciones_progreso_dia mr-2 "
     );
 
-    $imagen_usuario = a_enid(get_img_usuario($id_usuario),
+
+    $imagen_usuario = a_enid(
+        get_img_usuario($id_usuario),
         [
             "class" => "dropdown-toggle",
             "data-toggle" => "dropdown",
@@ -3172,5 +3176,13 @@ function _d()
     return $response;
 
 }
+
+
+//function exists_array_def($data, $key, $exists = 1, $fail = 0)
+//{
+//    return (is_array($data) && array_key_exists($key, $data)) ? $exists : $fail;
+//
+//}
+
 
 

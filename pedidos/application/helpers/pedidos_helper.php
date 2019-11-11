@@ -41,7 +41,6 @@ if (!function_exists('invierte_date_time')) {
     function render_seguimiento($data)
     {
 
-
         $recibo = $data["recibo"];
         $id_servicio = $data["id_servicio"];
 
@@ -126,15 +125,14 @@ if (!function_exists('invierte_date_time')) {
             $fecha = ($es_servicio) ? $fecha_servicio : (
                 $tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
 
-            $status = prm_def($recibo,"status");
-            $text ="";
-            if (!in_array($status, [15, 9,10])){
+            $status = prm_def($recibo, "status");
+            $text = "";
+            if (!in_array($status, [15, 9, 10])) {
 
                 $text = ($es_servicio) ?
                     "PLANEADO PARA EL DÍA " : "FECHA EN QUE SE  ESTIMA LLEGARÁ TU PEDIDO";
-                $text = add_text($text, format_fecha($fecha) ,1);
+                $text = add_text($text, format_fecha($fecha), 1);
             }
-
 
 
         }
@@ -150,7 +148,6 @@ if (!function_exists('invierte_date_time')) {
             _titulo($text_orden, 2, 'text-right')
             ,
             a_enid(
-
                 img(
                     [
                         "src" => prm_def($recibo, "url_img_servicio"),
@@ -179,15 +176,15 @@ if (!function_exists('invierte_date_time')) {
         $lista_puntos_encuentro = $data['puntos_encuentro'];
         $r = $r[0];
         $id_recibo = $r["id_proyecto_persona_forma_pago"];
-
         $tipo_entrega = $r["tipo_entrega"];
         $domicilio_entrega = $data['domicilio_entrega'];
-        $response[] = d(
-            h('selecciona una dirección de envío',
-                3,
-                'strong text-uppercase'
-            )
-        );
+        $response[] =
+            d(
+                h('selecciona una dirección de envío',
+                    3,
+                    'strong text-uppercase'
+                )
+            );
 
         $response[] = hiddens(
             [
@@ -335,10 +332,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d("SOLICITADO EL ");
-        $r[] = d(
-            date_format(date_create(pr($recibo, "fecha_registro")
-            ), 'd M Y H:i:s'),
-            "ml-1 strong");
+        $str = date_format(
+            date_create(pr($recibo, "fecha_registro")), 'd M Y H:i:s');
+
+        $r[] = d($str, "ml-1 strong");
 
         return d(append($r), "mb-5 row");
     }
@@ -361,21 +358,17 @@ if (!function_exists('invierte_date_time')) {
             $table_costos
             ,
 
-            "contenedor_costos_registrados bottom_100"
+            "bottom_100"
         );
-        $r[] = d($resumen, "contenedor_costos_registrados");
+        $r[] = d($resumen);
 
-        $r[] =
-            d(
-                format_link(
-                    "Agregar",
-                    [
-                        "onclick" => "muestra_formulario_costo();",
-                        "class" => "mt-5 col-lg-3",
-                    ]
-                ),
-                "contenedor_costos_registrados"
-            );
+        $r[] = format_link(
+            "Agregar",
+            [
+                "onclick" => "muestra_formulario_costo();",
+                "class" => "mt-5 col-lg-3",
+            ]
+        );
 
         $r[] = d(
             frm_costos(
@@ -432,7 +425,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = create_select(
             $tipos_entregas,
             "tipo_entrega",
-            "tipo_entrega form-control form_edicion_tipo_entrega mt-3 mb-3",
+            "tipo_entrega form_edicion_tipo_entrega mt-3 mb-3",
             "tipo_entrega",
             "nombre",
             "id",
@@ -447,7 +440,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = resumen_usuario($usuario, $recibo);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio);
-
         $r[] = create_seccion_saldos($recibo);
         $r[] = d(seccion_cupon($cupon), "top_30 underline text-right");
         $r[] = d(create_seccion_recordatorios($recibo), "top_30 underline text-right");
@@ -667,31 +659,36 @@ if (!function_exists('invierte_date_time')) {
                     "name" => "status_venta",
                     "value" => $rb["status"],
                     "id" => "status_venta_registro",
-                ]);
+                ]
+            );
             $r[] = hiddens(
                 [
                     "class" => "saldo_actual_cubierto",
                     "name" => "saldo_cubierto",
                     "value" => $rb["saldo_cubierto"],
-                ]);
+                ]
+            );
             $r[] = hiddens(
                 [
                     "class" => "tipo_entrega_def",
                     "name" => "tipo_entrega",
                     "value" => $rb["tipo_entrega"],
-                ]);
+                ]
+            );
             $r[] = hiddens(
                 [
                     "class" => "id_servicio",
                     "name" => "id_servicio",
                     "value" => $rb["id_servicio"],
-                ]);
+                ]
+            );
             $r[] = hiddens(
                 [
                     "class" => "articulos",
                     "name" => "articulos",
                     "value" => $rb["num_ciclos_contratados"],
-                ]);
+                ]
+            );
         }
 
 
@@ -707,8 +704,13 @@ if (!function_exists('invierte_date_time')) {
         $x[] = link_recordatorio($recibo, $usuario);
         $x[] = link_nota();
         $x[] = link_costo($id_recibo, $recibo);
-        $r[] = d(icon("fa fa-plus-circle fa-3x"),
-            ["class" => " dropdown-toggle", "data-toggle" => "dropdown"]);
+        $r[] = d(
+            icon("fa fa-plus-circle fa-3x"),
+            [
+                "class" => " dropdown-toggle",
+                "data-toggle" => "dropdown"
+            ]
+        );
         $r[] = d(
             append($x),
             [
@@ -1241,8 +1243,8 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "class" => $class,
                     "data-toggle" => "dropdown",
-                    "aria-haspopup" => "true",
-                    "aria-expanded" => "false",
+                    "aria-haspopup" => true,
+                    "aria-expanded" => false,
 
                 ], $nombre
             );

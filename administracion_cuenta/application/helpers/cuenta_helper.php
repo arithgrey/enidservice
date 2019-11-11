@@ -17,45 +17,27 @@ if (!function_exists('invierte_date_time')) {
     function format_cuenta($id_usuario, $usuario)
     {
 
-        $r[] = d(
+        $r[] = tab_seccion(
             foto($id_usuario, $usuario),
-            [
-                "class" => "tab-pane active",
-                "id" => "tab_mis_datos"
-            ]
+            'tab_mis_datos',
+            1
+
         );
         $actualizar = btw(
 
             h("ACTUALIZAR DATOS DE ACCESO", 3)
             ,
-            frm_set_pw()
+            frm_pw()
             ,
             4,
             1
 
         );
-        $r[] = d(
-            $actualizar
-            ,
-            [
-                "class" => "tab-pane ",
-                "id" => "tab_privacidad"
-            ]
-        );
 
-        $r[] = d(privacidad(),
-            [
-                "class" => "tab-pane ",
-                "id" => "tab_privacidad_seguridad"
-            ]
-        );
-        $r[] = d(
-            calma(),
-            [
-                "class" => "tab-pane ",
-                "id" => "tab_direccion"
-            ]
-        );
+
+        $r[] = tab_seccion($actualizar, 'tab_privacidad');
+        $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
+        $r[] = tab_seccion(calma(), 'tab_direccion');
         return d(append($r), "tab-content");
 
     }
@@ -71,8 +53,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = d(format_user($usuario), "page-header menu_info_usuario");
         $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ",
-            'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1',
-            1
+            'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1'
         );
         return hrz(append($r), resumen_cuenta($usuario), 4);
 
@@ -82,7 +63,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $x[] = h("INFORMACIÓN PERSONAL", 3);
-        $x[] = hr();
         $x[] = place("place_registro_conceptos");
         $x[] = place("contenedor_conceptos_privacidad");
         $r[] = d(append($x), 7);
@@ -108,9 +88,8 @@ if (!function_exists('invierte_date_time')) {
 
         $direccion_envio = _text(
             h("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
-            d("El lugar donde compras o recibes tus compras o ventas", 1),
+            d("El lugar donde compras o recibes tus compras o ventas"),
             hr()
-
         );
 
         return dd($calma, $direccion_envio, 7);
@@ -131,7 +110,8 @@ if (!function_exists('invierte_date_time')) {
             ), "imagen_usuario_completa"
         );
 
-        $r[] = btn("MODIFICAR",
+        $r[] = btn(
+            "MODIFICAR",
             [
                 "class" => "editar_imagen_perfil top_20"
             ]
@@ -147,40 +127,48 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = h("TU CUENTA ENID SERVICE", 3);
         $r[] = format_user($usuario, 1);
-        $r[] = addNRow(d(get_campo($usuario, "email", ""), "top_20", 1));
-        $r[] = addNRow(get_campo($usuario, "tel_contacto", "Tu prime apellido", 1));
-        $r[] = a_enid(
+        $r[] = d(get_campo($usuario, "email"));
+        $r[] = get_campo($usuario, "tel_contacto", "Tu prime apellido", 1);
+
+        $r[] = tab(
             text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
+            "#tab_direccion",
             [
                 "class" => "a_enid_black btn_direccion top_20",
-                "href" => "#tab_direccion",
-                "data-toggle" => "tab"
-            ],
-            1,
-            1);
-        $r[] = hr();
+            ]
+        );
 
+        $r[] = hr();
         return append($r);
 
     }
 
-    function frm_set_pw()
+    function frm_pw()
     {
 
-        $r[] = form_open("", ["id" => "form_update_password", "class" => "form-horizontal", "method" => "POST"]);
-        $r[] = d("CONTRASEÑA ACTUAL", 1);
-        $r[] = input(
+        $r[] = form_open("",
+            [
+                "id" => "form_update_password",
+                "class" => "form-horizontal", "method" => "POST"
+            ]
+        );
+
+
+        $r[] = input_frm(12,
+            "CONTRASEÑA ACTUAL",
             [
                 "name" => "password",
                 "id" => "password",
                 "class" => "form-control input-sm",
                 "type" => "password",
                 "required" => "true"
-            ]
+            ],
+            'place_pw_1'
         );
-        $r[] = place('place_pw_1');
-        $r[] = d("NUEVA", 1);
-        $r[] = input(
+
+        $r[] = input_frm(
+            12,
+            "NUEVA",
             [
                 "name" => "pw_nueva",
                 "id" => "pw_nueva",
@@ -188,20 +176,37 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'form-control input-sm',
                 "required" => "true"
             ]
+            , 'place_pw_2'
+
         );
-        $r[] = place('place_pw_2');
-        $r[] = d("CONFIRMAR NUEVA", 1);
-        $r[] = input([
-            "name" => "pw_nueva_confirm",
-            "id" => "pw_nueva_confirm",
-            "type" => "password",
-            "class" => "form-control input-sm",
-            "required" => "true"
-        ]);
-        $r[] = hiddens(["name" => "secret", "id" => "secret"]);
-        $r[] = place('place_pw_3');
+
+
+        $r[] = input_frm(
+            12, "CONFIRMAR NUEVA",
+            [
+                "name" => "pw_nueva_confirm",
+                "id" => "pw_nueva_confirm",
+                "type" => "password",
+                "class" => "form-control input-sm",
+                "required" => "true"
+            ],
+            'place_pw_3'
+        );
+
+
+        $r[] = hiddens(
+            [
+                "name" => "secret",
+                "id" => "secret"
+            ]
+        );
+
         $r[] = place("reportesession");
-        $r[] = btn("Actualizar", ["id" => "inbutton", "class" => "btn btn_save input-sm"]);
+        $r[] = btn("Actualizar",
+            [
+                "id" => "inbutton", "class" => "btn btn_save input-sm"
+            ]
+        );
         $r[] = form_close(place("msj_password"));
 
         return append($r);
@@ -234,7 +239,11 @@ if (!function_exists('invierte_date_time')) {
     function frm_negocio($usuario)
     {
 
-        $r[] = form_open("", ["class" => "f_telefono_usuario_negocio"]);
+        $r[] = form_open("",
+            [
+                "class" => "f_telefono_usuario_negocio"
+            ]
+        );
         $r[] = input_frm(3, "Teléfono de negocio",
             [
                 'name' => 'lada_negocio',
@@ -276,7 +285,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r = [];
 
-
         $r[] = input_frm(
             3,
             "Teléfon Movil1",
@@ -310,7 +318,6 @@ if (!function_exists('invierte_date_time')) {
             ], 'registro_telefono_usuario'
 
         );
-
 
         $r[] = btn("Actualizar", ["class" => "input_enid"], 2);
 
@@ -349,7 +356,11 @@ if (!function_exists('invierte_date_time')) {
     function frm_nombre($usuario)
     {
 
-        $r[] = form_open("", ["class" => "f_nombre_usuario"]);
+        $r[] = form_open("",
+            [
+                "class" => "f_nombre_usuario"
+            ]
+        );
         $r[] = input_frm(12, 'Nombre de usuario',
             [
                 "id" => "nombre_usuario",
@@ -376,79 +387,67 @@ if (!function_exists('invierte_date_time')) {
         $f[] = d("COMPARTIR ");
         $final = append($f);
 
+        $link_cuenta = tab(
+            text_icon("fa fa-address-book-o", "CUENTA"),
+            '#tab_mis_datos',
+            [
+                "id" => 'base_tab_agendados',
+                "class" => 'black  base_tab_agendados active'
+            ]
+        );
+        $link_direccion_envio = tab(
+            text_icon("fa  fa-fighter-jet", "DIRECCIÓN DE ENVÍO"),
+            '#tab_direccion',
+            [
+                "id" => 'btn_direccion',
+                "class" => 'black  btn_direccion'
+            ]
+
+        );
+        $link_pw = tab(
+            text_icon("fa fa-unlock-alt", "CONTRASEÑA"),
+            "#tab_privacidad",
+            [
+                "id" => 'base_tab_privacidad',
+                "class" => 'black  base_tab_privacidad'
+            ]
+
+        );
+        $link_privacidad = tab(
+            text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
+            '#tab_privacidad_seguridad',
+            [
+                "class" => 'black  tab_privacidad_seguridad'
+            ]
+
+
+        );
+        $link_preferencias = a_enid(
+            text_icon('fa fa-gift f12', 'INTERESES Y PREFERENCIAS'),
+            path_enid('lista_deseos_preferencias')
+
+        );
+        $link_productos_venta = a_enid(
+            text_icon('fa fa-credit-card-alt', 'TUS PRODUCTOS EN VENTA'),
+            "../search/?q3=" . $id_usuario . "&tienda=1"
+
+        );
+
+
         $list = [
-            li(
-                a_enid(
-                    text_icon("fa fa-address-book-o", "CUENTA")
-                    ,
-                    [
-                        "href" => "#tab_mis_datos",
-                        "data-toggle" => "tab",
-                        "id" => 'base_tab_agendados',
-                        "class" => 'black  base_tab_agendados active'
-                    ]
-                )
-            ),
-
-            li(a_enid(
-                    text_icon("fa  fa-fighter-jet", "DIRECCIÓN DE ENVÍO")
-                    ,
-                    [
-                        "href" => "#tab_direccion",
-                        "data-toggle" => "tab",
-                        "id" => 'btn_direccion',
-                        "class" => 'black  btn_direccion'
-
-                    ]
-                )
-            ),
-
-
-            li(a_enid(
-                    text_icon("fa fa-unlock-alt", "CONTRASEÑA")
-                    ,
-                    [
-                        "href" => "#tab_privacidad",
-                        "data-toggle" => "tab",
-                        "id" => 'base_tab_privacidad',
-                        "class" => 'black  base_tab_privacidad'
-                    ]
-                )
-            ),
-            li(a_enid(
-
-                    text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
-                    [
-                        "href" => "#tab_privacidad_seguridad",
-                        "data-toggle" => "tab",
-                        "class" => 'black  tab_privacidad_seguridad'
-                    ]
-                )
-            ),
-
-
-            li(icon("fa fa-gift f12 ") . a_enid(
-                    "INTERESES Y PREFERENCIAS",
-                    [
-                        "class" => "btn_intereses",
-                        "href" => "../lista_deseos/?q=preferencias"
-                    ]
-                )
-            ),
-
-
-            li(
-
-                text_icon("fa fa-credit-card-alt", a_enid("TUS PRODUCTOS EN VENTA",
-                        [
-                            "class" => "btn_cuenta_personal",
-                            "href" => "../search/?q3=" . $id_usuario . "&tienda=1"
-                        ]
-                    )
-                )
-            ),
-
-            li(d($final, "contenedor_compartir_redes_sociales"))
+            $link_cuenta
+            ,
+            $link_direccion_envio
+            ,
+            $link_pw
+            ,
+            $link_privacidad
+            ,
+            $link_preferencias
+            ,
+            $link_productos_venta
+            ,
+            $final
 
         ];
 

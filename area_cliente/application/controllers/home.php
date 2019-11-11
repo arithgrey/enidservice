@@ -116,6 +116,7 @@ class Home extends CI_Controller
     private function get_alcance($id_usuario)
     {
 
+
         return $this->app->api("servicio/alcance_usuario/format/json/",
             ["id_usuario" => $id_usuario]);
     }

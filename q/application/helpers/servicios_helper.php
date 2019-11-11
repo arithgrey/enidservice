@@ -40,6 +40,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_configurador($data)
     {
+        $response = "";
         $servicio = $data["servicio"];
         if (es_data($servicio)) {
 
@@ -98,11 +99,12 @@ if (!function_exists('invierte_date_time')) {
                 $_nombre_servicio
             );
 
-            $response[] = agregar_imgs();
-            $response[] = d(append($r), "contenedor_global_servicio");
-            return append($response);
+            $res[] = agregar_imgs();
+            $res[] = d(append($r), "contenedor_global_servicio");
+            $response = append($res);
 
         }
+        return $response;
 
     }
 
@@ -204,6 +206,7 @@ if (!function_exists('invierte_date_time')) {
 
         $f[] = restablecer($servicio, $id_perfil);
         $f[] = form_tags($id_servicio, $keyword_usuario);
+
         return d(
             append($f),
             [
@@ -254,7 +257,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = d($str_rango_entrega, 6);
         $t[] = d(form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping), 6);
         $t[] = d(compras_casa($es_servicio, $entregas_en_casa), 6);
-        $t[] = d(telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono, $es_servicio), 6);
+        $t[] = d(telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio), 6);
         $t[] = contra_entrega($es_servicio, $es_entrega, $id_servicio);
         $t[] = uso_disponibilidad($existencia, $es_nuevo, $es_servicio);
         $t[] = seccion_ciclos_facturacion($ciclos, $id_ciclo_facturacion, $es_servicio);
@@ -312,9 +315,10 @@ if (!function_exists('invierte_date_time')) {
     function restablecer($servicio, $id_perfil)
     {
 
+        $response = "";
         if (es_data($servicio) && $id_perfil == 3) {
 
-            return
+            $response =
                 d(
                     btn("RESTABLECER PUBLICACIÓN",
                         [
@@ -326,6 +330,7 @@ if (!function_exists('invierte_date_time')) {
                     "row pull-right bottom_100"
                 );
         }
+        return $response;
     }
 
     function format_colores($es_servicio, $inf_colores)
@@ -606,38 +611,62 @@ if (!function_exists('invierte_date_time')) {
     function menu_config($num, $num_imagenes, $url_productos_publico)
     {
 
-        $foto_config = [
-            'href' => "#tab_imagenes",
-            'data-toggle' => "tab"
-        ];
-        $precios_config = [
-            'href' => "#tab_info_precios",
-            'data-toggle' => "tab"
-        ];
 
-        $precios_inf = ['href' => "#tab_info_producto",
-            'data-toggle' => "tab",
-            'id' => 'tab_info_producto_seccion',
-            'class' => 'detalle'
-        ];
-
-        $meta_inf = ['href' => "#tab_terminos_de_busqueda", 'data-toggle' => "tab"];
+        $link_foto = tab(icon('fa fa-picture-o'), "#tab_imagenes");
+        $link_precios = tab(icon('fa fa-credit-card'), "#tab_info_precios");
+        $link_detalle = tab(
+            icon('fa fa-info detalle'),
+            "#tab_info_producto",
+            [
+                'id' => 'tab_info_producto_seccion',
+                'class' => 'detalle'
+            ]
+        );
+        $link_busqueda = tab(
+            icon('fa fa-fighter-jet menu_meta_key_words'),
+            "#tab_terminos_de_busqueda"
+        );
 
         $list = [
-            li(a_enid(icon('fa fa-picture-o'), $foto_config), ["class" => valida_active($num, 1)]),
-            li(a_enid(icon('fa fa-credit-card'), $precios_config), ["class" => valida_active($num, 4), "style" => valida_existencia_imagenes($num_imagenes)]),
-            li(a_enid(icon('fa fa-info detalle'), $precios_inf), ["style" => valida_existencia_imagenes($num_imagenes)]),
-            li(a_enid(icon('fa fa-fighter-jet menu_meta_key_words'), $meta_inf),
-                ["class" => valida_active($num, 3), "style" => valida_existencia_imagenes($num_imagenes)]
+            li(
+                $link_foto,
+                [
+                    "class" => valida_active($num, 1)
+                ]
             ),
             li(
-                a_enid(icon("fa fa-shopping-bag") . "VER PUBLICACIÓN",
+                $link_precios,
+                [
+                    "class" => valida_active($num, 4),
+                    "style" => valida_existencia_imagenes($num_imagenes)
+                ]
+            ),
+            li(
+                $link_detalle,
+                [
+                    "style" => valida_existencia_imagenes($num_imagenes)
+                ]
+            ),
+            li(
+                $link_busqueda,
+                [
+                    "class" => valida_active($num, 3),
+                    "style" => valida_existencia_imagenes($num_imagenes)
+                ]
+            ),
+            li(
+                a_enid(
+                    text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN")
+                    ,
                     [
                         "href" => $url_productos_publico,
                         "target" => "_blank",
                         "style" => 'background: #002565;color: white!important;'
                     ]
-                ), ["style" => valida_existencia_imagenes($num_imagenes)]
+                ),
+                [
+                    "style" => valida_existencia_imagenes($num_imagenes)
+                ]
             )
         ];
 
@@ -831,13 +860,6 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
-    function evalua_utilidad_mas_envio($flag_envio_gratis, $costo_envio, $utilidad)
-    {
-
-        return ($flag_envio_gratis > 0) ? ($utilidad - $costo_envio) : $utilidad;
-
-    }
-
 
     function select_producto_usado($valor_actual)
     {
@@ -858,82 +880,6 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function get_producto_usado($tipo)
-    {
-        $usado = ["No", "Si"];
-        return $usado[$tipo];
-    }
-
-
-    function create_table_servicios($servicios)
-    {
-
-        $list = [];
-        $z = 1;
-        $extra = "";
-        foreach ($servicios as $row) {
-
-            $r = [];
-            $text_estatus = ($row["status"] == 0) ? "Inactivo" : "Activo";
-            $r[] = td(icon('servicio fa fa-file-text-o', ["id" => $row["id_servicio"]]),
-                'especificacion_servicio'
-            );
-
-            $r[] = td($row["nombre_servicio"], $extra);
-            $r[] = td($text_estatus, 'text-center strong');
-            $list[] = tr(append($r));
-            $z++;
-        }
-        return $list;
-
-    }
-
-    function get_text_ciclo_facturacion($id_ciclo_facturacion)
-    {
-
-        $nuevo_text = "";
-        switch ($id_ciclo_facturacion) {
-            case '1':
-                $nuevo_text = "365 Días";
-
-                break;
-            case '2':
-                $nuevo_text = "30 Días";
-
-                break;
-
-            case '3':
-                $nuevo_text = "7 Días";
-
-                break;
-
-            case '4':
-                $nuevo_text = "15 Días";
-
-                break;
-
-            case '5':
-                $nuevo_text = "Págo único";
-                break;
-            case '6':
-                $nuevo_text = "365 Días";
-                break;
-
-            case '7':
-                $nuevo_text = "365 Días";
-                break;
-
-            case '8':
-                $nuevo_text = "365 Días";
-                break;
-
-            default:
-
-                break;
-        }
-        return $nuevo_text;
-    }
-
 
     function editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
     {
@@ -947,7 +893,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function rango_entrega($id_perfil, $actual, $attributes = '', $titulo, $minimo = 1, $maximo = 10)
+    function rango_entrega($id_perfil, $actual, $attributes = [], $titulo, $minimo = 1, $maximo = 10)
     {
 
 
@@ -1172,7 +1118,7 @@ if (!function_exists('invierte_date_time')) {
     function form_rango_entrega($es_servicio, $id_perfil, $stock)
     {
 
-
+        $response = "";
         if ($es_servicio < 1 && $id_perfil == 3) {
 
             $r = [];
@@ -1193,10 +1139,9 @@ if (!function_exists('invierte_date_time')) {
             );
 
             array_push($r, form_close());
-            return d(append($r), 6);
+            $response = d(append($r), 6);
         }
-
-
+        return $response;
     }
 
     function form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping)
@@ -1239,7 +1184,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function telefono_publico($has_phone, $telefono_visible, $activo_visita_telefono, $baja_visita_telefono, $es_servicio)
+    function telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio)
     {
 
         $ver_telefono = ($es_servicio == 1) ? "¿PERSONAS PUEDEN VER TU NÚMERO TELEFÓNICO PARA SOLICITARTE MÁS INFORMES?" : "¿PERSONAS PUEDEN SOLICITARTE MÁS INFORMES POR TELÉFONO?";
@@ -1264,7 +1209,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(h($ver_telefono, 5), "top_50", 1);
         $r[] = btw($v, $nov, "top_40 ");
-        $r[] = text_agregar_telefono($has_phone, $telefono_visible);
+        $r[] = text_agregar_telefono($has_phone);
         return d(append($r), 12);
 
 
@@ -1273,6 +1218,7 @@ if (!function_exists('invierte_date_time')) {
     function contra_entrega($es_servicio, $es_entrega, $id_servicio)
     {
 
+        $response = [];
         if ($es_servicio < 1) {
 
             $v = val_class($es_entrega, 1, "button_enid_eleccion_active");
@@ -1298,9 +1244,11 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = h("¿VENDES ESTA ARTÍCULO CONTRA ENTREGA?", 5, "top_30");
             $r[] = btw($si, $no, "top_30");
-            return d(d(d(append($r), "top_50"), 12), 6);
+            $response[] = d(d(d(append($r), "top_50"), 12), 6);
 
         }
+
+        return append($response);
     }
 
 
@@ -1584,7 +1532,7 @@ if (!function_exists('invierte_date_time')) {
 //                break;
 //            case 0:
 //
-//                $extra = ($row["flag_envio_gratis"] == 1) ? "Envios gratis a todo México" : "Envios a todo México";
+    /*               $extra = ($row["flag_envio_gratis"] == 1) ? "Envios gratis a todo México" : "Envios a todo México";*/
 //
 //                break;
 //
@@ -1609,4 +1557,88 @@ if (!function_exists('invierte_date_time')) {
 
     }
     */
+    //
+//    function evalua_utilidad_mas_envio($flag_envio_gratis, $costo_envio, $utilidad)
+//    {
+//
+//        return ($flag_envio_gratis > 0) ? ($utilidad - $costo_envio) : $utilidad;
+//
+//    }
+
+    //    function get_producto_usado($tipo)
+//    {
+//        $usado = ["No", "Si"];
+//        return $usado[$tipo];
+//    }
+//
+//
+//    function create_table_servicios($servicios)
+//    {
+//
+//        $list = [];
+//        $z = 1;
+//        $extra = "";
+//        foreach ($servicios as $row) {
+//
+//            $r = [];
+//            $text_estatus = ($row["status"] == 0) ? "Inactivo" : "Activo";
+//            $r[] = td(icon('servicio fa fa-file-text-o', ["id" => $row["id_servicio"]]),
+//                'especificacion_servicio'
+//            );
+//
+//            $r[] = td($row["nombre_servicio"], $extra);
+//            $r[] = td($text_estatus, 'text-center strong');
+//            $list[] = tr(append($r));
+//            $z++;
+//        }
+//        return $list;
+//
+//    }
+//
+//    function get_text_ciclo_facturacion($id_ciclo_facturacion)
+//    {
+//
+//        $nuevo_text = "";
+//        switch ($id_ciclo_facturacion) {
+//            case '1':
+//                $nuevo_text = "365 Días";
+//
+//                break;
+//            case '2':
+//                $nuevo_text = "30 Días";
+//
+//                break;
+//
+//            case '3':
+//                $nuevo_text = "7 Días";
+//
+//                break;
+//
+//            case '4':
+//                $nuevo_text = "15 Días";
+//
+//                break;
+//
+//            case '5':
+//                $nuevo_text = "Págo único";
+//                break;
+//            case '6':
+//                $nuevo_text = "365 Días";
+//                break;
+//
+//            case '7':
+//                $nuevo_text = "365 Días";
+//                break;
+//
+//            case '8':
+//                $nuevo_text = "365 Días";
+//                break;
+//
+//            default:
+//
+//                break;
+//        }
+//        return $nuevo_text;
+//    }
+
 }

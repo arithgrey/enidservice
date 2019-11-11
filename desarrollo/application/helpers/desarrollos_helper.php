@@ -17,13 +17,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion(
             $abrir_ticket,
             'tab_abrir_ticket',
-            valida_seccion_activa(1, $activa)
+            tab_activa(1, $activa)
         );
 
         $r[] = tab_seccion(
             place("place_form_tickets"),
             'tab_nuevo_ticket',
-            valida_seccion_activa(3, $activa)
+            tab_activa(3, $activa)
         );
 
         $tab_content = tab_content($r);
@@ -47,14 +47,13 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        return append($response, "contenedor_principal_enid_service");
+        return append($response);
 
 
     }
 
     function form_ticket_dep($departamentos, $total)
     {
-
 
         $r[] = flex(
 
@@ -76,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
                 "id_departamento"
             )
             ,
-            "formulario_busqueda_tickets align-items-center justify-content-between"
+            "align-items-center justify-content-between"
         );
 
         $r[] = hiddens(
@@ -96,28 +95,33 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $list = [
+        $class_ticket = _text(
+            'black a_enid_blue abrir_ticket ',
+            tab_activa(3, $activa)
+        );
+        $class_pendientes = _text(
+            'black strong base_tab_clientes ' .
+            tab_activa(1, $activa)
 
+        );
+
+        $list = [
             tab(
                 "ABRIR TICKET",
                 '#tab_nuevo_ticket'
                 ,
                 [
                     'id' => 'abrir_ticket',
-                    'class' => 'black a_enid_blue abrir_ticket ' . valida_seccion_activa(3, $activa)
-
+                    'class' => $class_ticket
                 ]
             )
-
             ,
-
             tab(
-
                 text_icon('fa fa-check-circle', "PENDIENTES"),
                 '#tab_abrir_ticket',
                 [
                     "id" => 'base_tab_clientes',
-                    'class' => 'black strong base_tab_clientes top_30' . valida_seccion_activa(1, $activa)
+                    'class' => $class_pendientes
                 ]
             )
         ];

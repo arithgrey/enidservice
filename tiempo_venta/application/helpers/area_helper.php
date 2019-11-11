@@ -146,6 +146,30 @@ if (!function_exists('invierte_date_time')) {
 
     function get_menu($action)
     {
+        
+        $link_def = tab("", "#tab_pagos",
+            [
+                "class" => 'black strong tab_pagos'
+            ]
+        );
+
+        $link_ventas = tab(
+            text_icon('fa fa-shopping-bag', "TUS VENTAS"),
+            "#tab_mis_ventas",
+            [
+                "id" => "mis_ventas",
+                "class" => 'btn_mis_ventas'
+            ]
+        );
+
+        $link_compras = tab(
+            text_icon('fa fa-credit-card-alt', "TUS COMPRAS"),
+            "#tab_mis_pagos",
+            [
+                "id" => "mis_compras",
+                "class" => 'btn_cobranza mis_compras'
+            ]
+        );
 
         $list = [
             li(a_enid(d("VENDER"),
@@ -155,34 +179,22 @@ if (!function_exists('invierte_date_time')) {
 
                     ])
                 , "li_menu menu_vender " . valida_active_tab('ventas', $action)),
-            li(a_enid(text_icon('fa fa-shopping-bag', "TUS VENTAS"),
-                [
-                    "id" => "mis_ventas",
-                    "href" => "#tab_mis_ventas",
-                    "data-toggle" => "tab",
-                    "class" => 'black strong btn_mis_ventas'
-                ]), 'li_menu'),
+            li($link_ventas, 'li_menu'),
             li(place("place_num_pagos_notificados"), 'li_menu'),
-            li(a_enid(text_icon('fa fa-credit-card-alt', "TUS COMPRAS" . place("place_num_pagos_por_realizar")),
-                [
-                    "id" => "mis_compras",
-                    "href" => "#tab_mis_pagos",
-                    "data-toggle" => "tab",
-                    "class" => 'black strong btn_cobranza mis_compras'
-                ]), 'li_menu ' . valida_active_tab('compras', $action)),
+
+            li(
+                $link_compras
+                , 'li_menu ' . valida_active_tab('compras', $action)
+            ),
             li(a_enid(
                 text_icon("fa fa-gift", "LISTA DE DESEOS"),
                 [
                     "href" => path_enid("lista_deseos"),
                     "class" => 'black strong'
                 ]), 'li_menu'),
-            li(a_enid("",
-                [
-                    "href" => "#tab_pagos",
-                    "data-toggle" => "tab",
-                    "class" => 'black strong tab_pagos',
-                    "id" => 'btn_pagos'
-                ]), ["class" => 'li_menu', "style" => "display: none;"]),
+            li(
+                $link_def
+                , ["class" => 'li_menu', "style" => "display: none;"]),
 
         ];
         return ul($list, "nav tabs shadow border padding_10");
