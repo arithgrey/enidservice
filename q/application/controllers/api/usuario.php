@@ -826,6 +826,7 @@ class usuario extends REST_Controller
         foreach ($param["fechas"] as $fecha) {
 
             $num = $this->search_element_array($param["publicaciones"], "fecha_registro", $fecha, "num");
+
             $config = array('class' => 'servicios',
                 'fecha_inicio' => $fecha,
                 'fecha_termino' => $fecha,

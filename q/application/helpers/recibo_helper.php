@@ -758,12 +758,12 @@ if (!function_exists('invierte_date_time')) {
                 "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt',
                 "DETALLES DE TU COMPRA ");
 
-        $text = btn($text_icono,
+        $text = tab(
+            $text_icono,
+            "#tab_renovar_servicio",
             [
                 "class" => 'resumen_pagos_pendientes',
                 "id" => $id_recibo,
-                "href" => "#tab_renovar_servicio",
-                "data-toggle" => "tab",
             ]
         );
 
@@ -904,19 +904,16 @@ if (!function_exists('invierte_date_time')) {
 
     function format_direccion_envio($inf, $id_recibo, $recibo)
     {
-        $resumen = "";
-        $resumen .= d(
-            icon("fa fa-pencil",
-                [
-                    "class" => "btn_direccion_envio ",
-                    "id" => $id_recibo,
-                    "href" => "#tab_mis_pagos",
-                    "data-toggle" => "tab",
-                ],
-                1
-            ),
-            "top_20"
-            , 1
+
+
+        $resumen = tab(
+            icon("fa fa-pencil"),
+            "#tab_mis_pagos",
+            [
+                "class" => "btn_direccion_envio ",
+                "id" => $id_recibo,
+
+            ]
         );
 
 

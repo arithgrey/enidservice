@@ -29,7 +29,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = contaiter(
                 d("Tu usuario fué registrado, accede ahora!",
-                    "inf_usuario_registrado strong mt-5 bg-light p-2 text-right")
+                    "inf_usuario_registrado strong mt-5 bg-light p-2 text-right"
+                )
                 ,
                 1
             );

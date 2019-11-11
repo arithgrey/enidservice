@@ -10,19 +10,19 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion(
             place("place_servicios_contratados"),
             "tab_mis_pagos",
-            valida_active_tab('compras', $action)
+            active_tab('compras', $action)
         );
 
         $r[] = tab_seccion(
             place("place_ventas_usuario"),
             'tab_mis_ventas',
-            valida_active_tab('ventas', $action)
+            active_tab('ventas', $action)
         );
 
         $r[] = tab_seccion(
             valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]),
             'tab_valoraciones',
-            valida_active_tab('ventas', $action)
+            active_tab('ventas', $action)
         );
 
         $r[] = tab_seccion(
@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        //$response[] = d(get_menu($action), 2);
+        //$response[] = d(menu($action), 2);
         $response[] = d(append($r), "tab-content col-lg-10");
         return append($response);
 
@@ -114,16 +114,16 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function valida_active_tab($nombre_seccion, $estatus)
+    function active_tab($nombre_seccion, $estatus)
     {
 
-        $a = igual($nombre_seccion, $estatus, ' active ');
-        $b = igual($nombre_seccion, "compras", 'active');
+        $a = igual($nombre_seccion, $estatus, 1, 0);
+        $b = igual($nombre_seccion, "compras", 1, 0);
         return (strlen($estatus) > 0) ? $a : $b;
 
     }
 
-    function get_menu()
+    function menu()
     {
         $link_pagos = tab(
             "",
@@ -136,10 +136,9 @@ if (!function_exists('invierte_date_time')) {
 
         $link_vendedor =
             a_enid(
-                d(
-                    text_icon("fa fa-flag", " VENDER"),
-                    path_enid("vender_nuevo")
-                )
+                text_icon("fa fa-flag", " VENDER"),
+                path_enid("vender_nuevo")
+
             );
 
         $link_ventas = tab(
@@ -203,7 +202,8 @@ if (!function_exists('invierte_date_time')) {
             ),
 
         ];
-        return ul($list, [
+        return ul($list,
+            [
                 "class" => "shadow border padding_10 d-flex flex-column justify-content-between"
             ]
         );

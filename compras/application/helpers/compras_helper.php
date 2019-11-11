@@ -74,8 +74,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = form_close();
         $x[] = d(place("place_compras top_50"), 12);
         return append($x);
-
-
+        
     }
 }
 

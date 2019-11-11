@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_active($num, $num_tab)
     {
 
-        return ($num == $num_tab) ? ' class="active" ' : "";
+        return ($num == $num_tab) ? 1 : 0;
     }
 
     function lista_categorias($categorias)

@@ -10,23 +10,22 @@ if (!function_exists('invierte_date_time')) {
         $top_servicios = $data["top_servicios"];
         $considera_segundo = $data["considera_segundo"];
 
-
-        $t[] = get_menu($id_perfil, $is_mobile, $action);
+        $t[] = menu($id_perfil, $is_mobile, $action);
         $t[] = btw(
-            h("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 3)
+            _titulo("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA")
             ,
-            get_top_ventas($top_servicios)
+            top_ventas($top_servicios)
             ,
             "contenedor_top " . ($action == 1) ? " display_none " : " "
         );
         $r[] = d(append($t), 2);
 
-        $z[] = d(format_articulos_venta($data["list_orden"]), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
-        $z[] = d(format_puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
+        $z[] = d(articulos_venta($data["list_orden"]), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
+        $z[] = d(puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
         $z[] = d(form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
         $r[] = d(d(append($z), "tab-content"), 10);
         $r[] = d(get_top_articulos($top_servicios, $is_mobile), 2);
-        $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"], $id_perfil);
+        $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"]);
 
         return append($r);
     }
@@ -48,7 +47,8 @@ if (!function_exists('invierte_date_time')) {
                             "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
                             "id" => "0",
                             "style" => "color: blue;"
-                        ]),
+                        ]
+                    ),
 
 
                     a_enid(
@@ -56,8 +56,8 @@ if (!function_exists('invierte_date_time')) {
                         [
                             "class" => "tipo_promocion tipo_servicio",
                             "id" => "1"
-                        ])
-
+                        ]
+                    )
                     ,
                     "display_flex_enid"
                 )
@@ -163,7 +163,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_top_ventas($top)
+    function top_ventas($top)
     {
 
         $response = [];
@@ -193,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function format_articulos_venta($list_orden)
+    function articulos_venta($list_orden)
     {
 
 
@@ -205,7 +205,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function format_puntos_venta()
+    function puntos_venta()
     {
 
         $r[] = h("PUNTOS DE VENTA", 3);
@@ -320,7 +320,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_formar_hiddens($is_mobile, $action, $extra_servicio, $id_perfil)
+    function get_formar_hiddens($is_mobile, $action, $extra_servicio)
     {
 
 
@@ -424,9 +424,24 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_menu($perfil, $is_mobile, $action)
+    function menu($perfil, $is_mobile, $action)
     {
         $response = "";
+        $link_punto_venta = tab(
+            text_icon('fa fa-map', " PUNTOS DE VENTA "),
+            "#tab_puntos_venta",
+            [
+                'class' => "black puntos_venta"
+            ]
+        );
+
+        $link_venta = tab(
+            text_icon("fa fa-shopping-cart", " TUS ARTÍCULOS EN VENTA"),
+            "#tab_servicios",
+            [
+                'class' => "black  btn_serv",
+            ]
+        );
         if ($is_mobile == 0) {
             $list = [
 
@@ -435,35 +450,18 @@ if (!function_exists('invierte_date_time')) {
                         text_icon('fa fa-cart-plus', " VENDER PRODUCTOS ")
                         ,
                         [
-                            "href" => "../planes_servicios/?action=nuevo",
+                            "href" => path_enid('vender_nuevo'),
                             "class" => "agregar_servicio btn_agregar_servicios"
                         ]
                     ),
                     valida_active_tab('nuevo', $action) . "  "
                 ),
                 li(
-                    a_enid(
-                        text_icon('fa fa-map', " PUNTOS DE VENTA ")
-                        ,
-                        [
-                            'data-toggle' => "tab",
-                            'class' => "black puntos_venta",
-                            'href' => "#tab_puntos_venta",
-                        ]
-                    ),
-                    valida_active_tab('puntos_venta', $action) . "  "
+                    $link_punto_venta, valida_active_tab('puntos_venta', $action) . "  "
                 ),
 
                 li(
-                    a_enid(
-                        text_icon("fa fa-shopping-cart", " TUS ARTÍCULOS EN VENTA")
-                        ,
-                        [
-                            'data-toggle' => "tab",
-                            'class' => "black  btn_serv",
-                            'href' => "#tab_servicios",
-                        ]
-                    ),
+                    $link_venta,
                     [
                         "class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action),
                         "id" => 0,
