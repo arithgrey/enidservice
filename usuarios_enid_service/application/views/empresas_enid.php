@@ -22,19 +22,19 @@
                 </div>
                 <div class='col-lg-9'>
                     <div class="tab-content">
-                        <?= d(append([
-                            h("Recurso", 3),
-
-                            a_enid("+ Agregar Recurso",
-                                [
-                                    "href" => "#tab_agregar_recursos",
-                                    "data-toggle" => "tab",
-                                    "class" => "btn input-sm"
-                                ]),
-
-                            place("place_perfilles_permisos")
-                        ]),
-                            ["class" => "tab-pane active ", "id" => "sec_0"]) ?>
+                        <?= d(
+                            _text(
+                                h("Recurso", 3)
+                                ,
+                                tab("+ Agregar Recurso", "#tab_agregar_recursos")
+                                ,
+                                place("place_perfilles_permisos")
+                            )
+                        ),
+                        [
+                            "class" => "tab-pane active ", "id" => "sec_0"
+                        ]
+                        ) ?>
                     </div>
                 </div>
             </div>

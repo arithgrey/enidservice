@@ -34,11 +34,9 @@ if (!function_exists('invierte_date_time')) {
             'tab_renovar_servicio'
         );
 
-        $r[] = d("",
+        $r[] = tab("", "#tab_renovar_servicio",
             [
                 "class" => "resumen_pagos_pendientes",
-                "href" => "#tab_renovar_servicio",
-                "data-toggle" => "tab"
             ]
         );
 

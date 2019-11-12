@@ -419,7 +419,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_active_tab($seccion, $valor_actual, $considera_segundo = 0)
     {
 
-        return ($considera_segundo == 0) ? (($seccion == $valor_actual) ? " active " : "") : " active ";
+        return ($considera_segundo == 0) ? (($seccion == $valor_actual) ? 1 : 0) : 1;
 
     }
 
@@ -472,17 +472,19 @@ if (!function_exists('invierte_date_time')) {
 
             if ($perfil != 20 && $perfil > 0) {
 
+                $link_articulos_venta = tab(
+                    text_icon("fa fa-globe", " ARTÍCULOS EN VENTA"),
+                    "#tab_servicios",
+                    [
+                        'class' => "black  btn_serv",
+                        "id" => 1
+                    ]
+
+                );
                 $list[] =
                     li(
-                        a_enid(
-                            icon("fa fa-globe") . " ARTÍCULOS EN VENTA",
-                            [
-                                'data-toggle' => "tab",
-                                'class' => "black  btn_serv",
-                                'href' => "#tab_servicios",
-                                "id" => 1
-                            ]
-                        ),
+                        $link_articulos_venta
+                        ,
                         [
                             "class" => ' li_menu_servicio btn_servicios ' . valida_active_tab('lista', $action),
                             "id" => 1,
@@ -493,6 +495,13 @@ if (!function_exists('invierte_date_time')) {
             $response = ul($list, ["class" => "nav tabs contenedor_menu_enid_service_lateral"]);
         } else {
 
+
+            $link = tab("", "#tab_servicios",
+                [
+
+                    'class' => "black  btn_serv"
+                ]
+            );
             $list = [
                 li(
                     a_enid(
@@ -505,14 +514,8 @@ if (!function_exists('invierte_date_time')) {
                     ["class" => valida_active_tab('nuevo', $action)]
                 ),
 
-                li(a_enid(
-                    "",
-                    [
-                        'data-toggle' => "tab",
-                        'class' => "black  btn_serv",
-                        'href' => "#tab_servicios"
-                    ]
-                ),
+                li(
+                    $link,
                     "li_menu li_menu_servicio btn_servicios " . valida_active_tab('lista', $action)
 
                 )
