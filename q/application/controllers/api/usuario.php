@@ -314,9 +314,9 @@ class usuario extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if(fx($param, "entregas_en_casa,id_usuario")){
+        if (fx($param, "entregas_en_casa,id_usuario")) {
 
-            $response = $this->usuario_model->q_up("entregas_en_casa", $param["entregas_en_casa"],  $param["id_usuario"]);
+            $response = $this->usuario_model->q_up("entregas_en_casa", $param["entregas_en_casa"], $param["id_usuario"]);
 
         }
 
@@ -827,26 +827,35 @@ class usuario extends REST_Controller
 
             $num = $this->search_element_array($param["publicaciones"], "fecha_registro", $fecha, "num");
 
-            $config = array('class' => 'servicios',
-                'fecha_inicio' => $fecha,
-                'fecha_termino' => $fecha,
-                'href' => "#reporte",
-                'data-toggle' => "tab",
-                'title' => "Servicios postulados"
+
+            $link = tab($num, "#reporte",
+                [
+                    'class' => 'servicios',
+                    'fecha_inicio' => $fecha,
+                    'fecha_termino' => $fecha,
+                    'title' => "Servicios postulados"
+                ]
             );
 
-            $num = ($num > 0) ? a_enid($num, $config) : 0;
-            $config = array('class' => 'usuarios',
-                'fecha_inicio' => $fecha,
-                'fecha_termino' => $fecha,
-                'href' => "#reporte",
-                'data-toggle' => "tab",
-                'title' => "Servicios postulados"
+
+            $num = ($num > 0) ? $link : 0;
+
+
+            $num_registros = $this->search_element_array(
+                $param["usuarios_nuevos"], "fecha", $fecha, "num");
+            $link_registros = tab(
+                $num_registros, "#reporte",
+                [
+
+                    'class' => 'usuarios',
+                    'fecha_inicio' => $fecha,
+                    'fecha_termino' => $fecha,
+                    'title' => "Servicios postulados"
+                ]
             );
 
-            $num_registros = $this->search_element_array($param["usuarios_nuevos"],
-                "fecha", $fecha, "num");
-            $num_registros = ($num_registros > 0) ? a_enid($num_registros, $config) : 0;
+            $num_registros = ($num_registros > 0) ? $link_registros : 0;
+
             if ($a < $total) {
                 array_push($publicaciones, $num);
                 array_push($registros, $num_registros);
@@ -898,12 +907,12 @@ class usuario extends REST_Controller
     private function agrega_lista_deseos($id_usuario, $id_servicio)
     {
 
-        $q =  [
+        $q = [
             "id_usuario" => $id_usuario,
             "id_servicio" => $id_servicio,
         ];
 
-        return $this->app->api( "usuario_deseo/add_lista_deseos", $q, "json", "PUT");
+        return $this->app->api("usuario_deseo/add_lista_deseos", $q, "json", "PUT");
     }
 
     private function get_usuario_por_servicio($q)

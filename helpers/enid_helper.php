@@ -1699,7 +1699,9 @@ function append($array, $col = 0, $num_col = 0)
     return $response;
 }
 
-
+function m($str){
+    return d($str,'col-lg-12');
+}
 function get_request_email($email, $asunto, $cuerpo)
 {
 

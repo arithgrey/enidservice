@@ -236,41 +236,55 @@ if (!function_exists('invierte_date_time')) {
 
     function get_format_info_usuario()
     {
-        $l = [
-            li(a_enid(text_icon("fa fa-trophy", "Miembros activos"),
-                [
-                    "href" => "#tab_usuarios_activos",
-                    "data-toggle" => "tab",
-                    "class" => "equipo_enid_service",
-                    "id" => '1'
-                ]), ["class" => "active", "id" => "1"]),
 
-            li(a_enid(
-                text_icon("fa fa-chevron-circle-down", "Bajas")
-                ,
+
+        $link_mienmbros = tab(
+            text_icon("fa fa-trophy", "Miembros activos"),
+            "#tab_usuarios_activos",
+            [
+                "class" => "equipo_enid_service",
+                "id" => '1'
+            ]
+        );
+
+        $link_bajas = tab(
+            text_icon("fa fa-chevron-circle-down", "Bajas"),
+            "#tab_usuarios_baja",
+            [
+                "class" => "btn_solo_llamar_despues equipo_enid_service",
+                "id" => '0'
+            ]
+        );
+
+        $l = [
+            li(
+                $link_mienmbros,
                 [
-                    "href" => "#tab_usuarios_baja",
-                    "data-toggle" => "tab",
-                    "class" =>
-                        "btn_solo_llamar_despues equipo_enid_service",
-                    "id" => '0'
-                ])),
+                    "class" => "active",
+                    "id" => "1"
+                ]
+            ),
+
+            li(
+                $link_bajas
+            ),
             li(place("place_num_agendados_llamar_despues"))
         ];
 
 
         $r[] = h("Equipo Enid Service", 3);
         $r[] = d(ul($l, "nav nav-tabs"), "panel-heading");
-        $r[] = d(
 
+        $link_agregar = tab(
+            "Agregar nuevo", "#tab_mas_info_usuario",
+            [
+                "class" => "btn_nuevo_usuario"
+            ]
+        );
+
+        $r[] = d(
             add_text(
-                btn("Agregar nuevo",
-                    [
-                        "class" => "btn input-sm btn_nuevo_usuario",
-                        "data-toggle" => "tab",
-                        "href" => "#tab_mas_info_usuario"
-                    ]
-                )
+                $link_agregar
                 ,
                 place("usuarios_enid_service")
             )

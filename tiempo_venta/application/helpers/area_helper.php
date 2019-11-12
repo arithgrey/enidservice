@@ -5,6 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function render_tv($data)
     {
 
+
         $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
         $r[] = d(
 
@@ -146,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_menu($action)
     {
-        
+
         $link_def = tab("", "#tab_pagos",
             [
                 "class" => 'black strong tab_pagos'

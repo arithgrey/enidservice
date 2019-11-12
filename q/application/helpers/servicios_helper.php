@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             $es_servicio = $s["flag_servicio"];
 
             $precio = $s["precio"];
-            $extra_producto = $id_servicio . "&q2=" . $data["id_usuario"];
+            $extra_producto = _text($id_servicio, "&q2=", $data["id_usuario"]);
             $url_productos_publico = path_enid('producto', $extra_producto);
             $costo_envio = $data["costo_envio"];
 
@@ -207,13 +207,14 @@ if (!function_exists('invierte_date_time')) {
         $f[] = restablecer($servicio, $id_perfil);
         $f[] = form_tags($id_servicio, $keyword_usuario);
 
-        return d(
-            append($f),
+        return tab_seccion(
+            append($f), "tab_terminos_de_busqueda", 0,
             [
-                "class" => "tab-pane " . $extra_3,
-                "id" => "tab_terminos_de_busqueda"
+
+                "class" => _text(" " . $extra_3),
             ]
         );
+
 
     }
 
