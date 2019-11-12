@@ -12,15 +12,16 @@ if (!function_exists('invierte_date_time')) {
         $num_compras = $data["num_compras"];
         $id_recibo = $data["id_recibo"];
         $cupon = $data['cupon'];
+
         $re[] = frm_pedidos($orden);
-        $re[] = d(crea_estado_venta($status, $r), 1);
+        $re[] = d(crea_estado_venta($status, $r));
         $re[] = format_estados_venta($status, $r, $orden);
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
         $re[] = crea_fecha_entrega($r);
         $re[] = create_fecha_contra_entrega($r, $domicilio);
         $re[] = fecha_espera_servicio($r, $data["servicio"]);
-        $re[] = notificacion_por_cambio_fecha(
+        $re[] = notificacion_cambio_fecha(
             $r, $num_compras, pr($r, "saldo_cubierto")
         );
         $re[] = crea_seccion_recordatorios($data["recordatorios"]);
@@ -28,10 +29,12 @@ if (!function_exists('invierte_date_time')) {
         $re[] = frm_nota($id_recibo);
         $re[] = create_seccion_comentarios($data["comentarios"]);
 
-        $response[] = d(append($re), "col-lg-7 ");
+        $response[] = d(append($re), 7);
         $response[] = d("", "col-lg-1 ");
-        $response[] = d(cliente_compra_inf($r, $data["tipos_entregas"], $domicilio,
-            $num_compras, $data["usuario"], $id_recibo, $cupon), 4);
+        $response[] = d(
+            cliente_compra_inf($r, $data["tipos_entregas"], $domicilio,
+            $num_compras, $data["usuario"], $id_recibo, $cupon), 4
+        );
         $response[] = hiddens_detalle($r);
 
         return d(append($response), "col-lg-10 col-lg-offset-1 p-0");
@@ -1728,7 +1731,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function notificacion_por_cambio_fecha($recibo, $num_compras, $saldo_cubierto)
+    function notificacion_cambio_fecha($recibo, $num_compras, $saldo_cubierto)
     {
 
 
