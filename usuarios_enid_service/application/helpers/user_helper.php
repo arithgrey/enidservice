@@ -5,21 +5,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = h("Afiliados Enid Service", 3);
-        $r[] =
-            ul(li(
-                a_enid(
-                    text_icon('fa fa-trophy', "Miembros Afiliados")
-                    ,
-                    [
-                        "href" => "#tab_afiliados_activos",
-                        "data-toggle" => "tab",
-                        "id" => '1'
-                    ]
-                )
-            ),
-                "nav nav-tabs"
-
-            );
+        $link_miembros = tab(
+            text_icon('fa fa-trophy', "Miembros Afiliados"),
+            "#tab_afiliados_activos",
+            [
+                "id" => 1
+            ]
+        );
+        $r[] = ul(li($link_miembros), "nav nav-tabs");
         $r[] = place("usuarios_enid_service_afiliados");
         return append($r);
 
@@ -29,73 +22,89 @@ if (!function_exists('invierte_date_time')) {
     function get_format_view_usuario($departamentos)
     {
 
-        $opt_turnos[] = array(
-            "opcion" => "Matutino",
-            "val" => "Matutino"
+        $opt_turnos[] =
+            [
+                "opcion" => "Matutino",
+                "val" => "Matutino"
+            ];
+        $opt_turnos[] =
+            [
+                "opcion" => "Vespertino",
+                "val" => "Vespertino"
+            ];
+        $opt_turnos[] =
+            [
+                "opcion" => "Tiempo completo",
+                "val" => "Tiempo completo"
+            ];
+        $options[] =
+            [
+                "opcion" => "Activo",
+                "val" => 1
+            ];
+        $options[] =
+            [
+                "opcion" => "Baja",
+                "val" => 0
+            ];
+        $options[] =
+            [
+                "opcion" => "Suspendido",
+                "val" => 2
+            ];
+        $opt[] =
+            [
+                "opcion" => "2PM",
+                "val" => "2PM"
+            ];
+        $opt[] =
+            [
+                "opcion" => "3PM",
+                "val" => "3PM"
+            ];
+
+        $opt[] =
+            [
+                "opcion" => "6PM",
+                "val" => "6PM"
+            ];
+        $opt[] =
+            [
+                "opcion" => "7PM",
+                "val" => "7PM"
+            ];
+        $opt_sexo[] =
+            [
+                "opcion" => "Masculino",
+                "val" => 1
+            ];
+        $opt_sexo[] =
+            [
+                "opcion" => "Femenino",
+                "val" => 0
+            ];
+        $r[] = _titulo("+ Nuevo miembro");
+
+        $r[] = form_open("",
+            [
+                "class" => "form-miembro-enid-service",
+                "id" => 'form-miembro-enid-service'
+            ]
+        );
+        $select_estado_usuario = create_select(
+            $options,
+            "status",
+            "form-control input-sm estado_usuario",
+            "estado_usuario",
+            "opcion",
+            "val"
         );
 
-        $opt_turnos[] = array(
-            "opcion" => "Vespertino",
-            "val" => "Vespertino"
+        $r[] = btw(
+            d("Estatus"),
+            $select_estado_usuario,
+            4
         );
-        $opt_turnos[] = array(
-            "opcion" => "Tiempo completo",
-            "val" => "Tiempo completo"
-        );
-
-        $options[] = array(
-            "opcion" => "Activo",
-            "val" => 1
-        );
-
-        $options[] = array(
-            "opcion" => "Baja",
-            "val" => 0
-        );
-
-        $options[] = array(
-            "opcion" => "Suspendido",
-            "val" => 2
-        );
-
-        $opt[] = array(
-            "opcion" => "2PM",
-            "val" => "2PM"
-        );
-        $opt[] = array(
-            "opcion" => "3PM",
-            "val" => "3PM"
-        );
-
-        $opt[] = array(
-            "opcion" => "6PM",
-            "val" => "6PM"
-        );
-        $opt[] = array(
-            "opcion" => "7PM",
-            "val" => "7PM"
-        );
-
-        $opt_sexo[] = array(
-            "opcion" => "Masculino",
-            "val" => 1
-        );
-        $opt_sexo[] = array(
-            "opcion" => "Femenino",
-            "val" => 0
-        );
-
-
-        $r[] = h("+ Nuevo miembro", 3);
-        $r[] = form_open("", ["class" => "form-miembro-enid-service", "id" => 'form-miembro-enid-service']);
-        $r[] = d(
-            btw(
-                d("Estatus"),
-                create_select($options, "status", "form-control input-sm estado_usuario", "estado_usuario", "opcion", "val"),
-                4
-
-            ),
-            13);
 
 
         $y[] = btw(
@@ -265,13 +274,12 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 place("usuarios_enid_service")
             )
-
-
             ,
             [
                 "class" => "tab-pane active",
                 "id" => "tab_usuarios_activos"
-            ]);
+            ]
+        );
 
         return append($r);
 
@@ -405,52 +413,69 @@ if (!function_exists('invierte_date_time')) {
     function get_menu($in_session)
     {
 
-        $config = [
-            "id" => 'tab_equipo_enid_service',
-            "data-toggle" => 'tab',
-            "class" => 'black strong tab_equipo_enid_service',
-            "href" => "#tab1",
+
+        $link_equipo = tab(
+            text_icon("fa fa-space-shuttle", 'EQUIPO  ENID  SERVICE')
+            ,
+            "#tab1"
+            ,
+            [
+                "id" => 'tab_equipo_enid_service',
+                "class" => 'tab_equipo_enid_service',
+            ]
+        );
+
+        $link_afiliados = tab(
+            text_icon("fa fa-handshake-o", "AFILIADOS"),
+            "#tab_productividad_ventas",
+            [
+                "id" => 'tab_afiliados',
+                "class" => 'tab_afiliados btn_ventas_mes_usuario',
+
+            ]
+
+        );
+
+        $link_perfiles_permisos = tab(
+
+            text_icon("fa fa-unlock-alt", "PERFILES / PERMISOS "),
+            "#tab_perfiles_permisos",
+            [
+                "id" => 'tab_perfiles',
+                "class" => 'perfiles_permisos',
+            ]
+
+        );
+
+
+        $link_categorias = tab(
+            text_icon("fa fa-circle", "CATEGORÍAS / SERVICIOS"),
+            "#tab_agregar_categorias",
+            [
+                "id" => 'agregar_categorias',
+                "class" => 'tab_agregar_categorias',
+            ]
+        );
+
+
+        $link_tallas = tab(
+
+            text_icon("fa fa-percent", "TALLAS"),
+            "#agregar_tallas",
+            [
+                "id" => 'agregar_tallas_menu',
+                "class" => 'agregar_tallas',
+            ]
+        );
+
+
+        $list = [
+            $link_equipo,
+            $link_afiliados,
+            $link_perfiles_permisos,
+            $link_categorias,
+            $link_tallas
         ];
-        $l1 = li(a_enid(text_icon("fa fa-space-shuttle", 'EQUIPO  ENID  SERVICE'), $config));
-
-        $config = [
-
-            "id" => 'tab_afiliados',
-            "class" => 'black strong tab_afiliados btn_ventas_mes_usuario',
-            "href" => "#tab_productividad_ventas",
-
-        ];
-
-        $l2 = li(a_enid(text_icon("fa fa-handshake-o", "AFILIADOS") . place("place_num_productividad"), $config));
-
-        $config = [
-            "id" => 'tab_perfiles',
-            "class" => 'black strong perfiles_permisos',
-            "href" => "#tab_perfiles_permisos",
-        ];
-
-        $l3 = li(a_enid(text_icon("fa fa-unlock-alt", "PERFILES / PERMISOS "), $config));
-
-        $config = [
-            "id" => 'agregar_categorias',
-            "class" => 'black strong tab_agregar_categorias',
-            "data-toggle" => 'tab',
-            "href" => "#tab_agregar_categorias",
-
-        ];
-
-        $l4 = li(a_enid(text_icon("fa fa-circle", "CATEGORÍAS / SERVICIOS"), $config));
-
-        $config4 = [
-
-            "id" => 'agregar_tallas_menu',
-            "class" => 'black strong agregar_tallas',
-            "data-toggle" => 'tab',
-            "href" => "#agregar_tallas",
-        ];
-
-        $l5 = li(a_enid(icon("fa fa-percent") . "TALLAS", $config4));
-        $list = [$l1, $l2, $l3 . $l4, $l5];
         return ul($list, ["class" => "nav tabs"]);
 
     }
