@@ -6,14 +6,7 @@ if (!function_exists('invierte_date_time')) {
     function render_reporte($data)
     {
 
-        $response[] = d(
-            place("place_reporte"),
-            [
-                "class" => "tab-pane",
-                "id" => 'reporte',
-            ]
-        );
-
+        $response[] = tab_seccion(place("place_reporte"), 'reporte');
         $response[] = format_indicadores();
         $response[] = format_dispositivos();
         $response[] = format_visitas();
@@ -22,18 +15,12 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_productos_solicitados();
         $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 p-0 contenedor_menu");
-        $res[] = d(d(append($response), "tab-content"), 10);
+        $res[] = tab_content($response, 10);
 
         return d(append($res), "container-fluid");
 
     }
 
-    /**
-     * @param $data
-     * @param array $dest
-     * @param array $response
-     * @return array
-     */
     function format_categorias(array $data)
     {
         $r[] = h("CATEGORÍAS DESTACADAS", 3, "mb-5 h3 text-uppercase strong text-center");

@@ -214,10 +214,15 @@ class Home extends CI_Controller
         $fecha->add(new DateInterval('P1D'));
         $entrega =
             $trans->translate(
-                'en', 'es', $fecha->format('l, d M Y')
+                'en', 'es', $fecha->format('l d M Y')
             );
 
-        return d("REALIZA HOY TU PEDIDO Y " . strong(add_text("TENLO EL ", $entrega)), "mt-5 tiempo_entrega_promedio ");
+        $text = _text(
+            "realiza hoy tu pedido y ",
+            "tenlo el  ",
+            $entrega
+        );
+        return d($text, "text-uppercase mt-5 ");
     }
 
     private function descripcion($servicio)

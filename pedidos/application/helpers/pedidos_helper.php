@@ -47,6 +47,7 @@ if (!function_exists('invierte_date_time')) {
         $recibo = $data["recibo"];
         $id_servicio = $data["id_servicio"];
 
+        $r[] =  $data['breadcrumbs'];
         $z[] = seguimiento($recibo, $data);
         $z[] = resumen_orden($data, $recibo, $id_servicio);
         $r[] = append($z);
@@ -181,6 +182,8 @@ if (!function_exists('invierte_date_time')) {
         $id_recibo = $r["id_proyecto_persona_forma_pago"];
         $tipo_entrega = $r["tipo_entrega"];
         $domicilio_entrega = $data['domicilio_entrega'];
+
+        $response[] =  $data['breadcrumbs'];
         $response[] =
             d(
                 h('selecciona una dirección de envío',

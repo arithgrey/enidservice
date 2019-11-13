@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         //$response[] = d(menu($action), 2);
-        $response[] = d(append($r), "tab-content col-lg-10");
+        $response[] = tab_content($r, 10);
         return append($response);
 
     }

@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $att = (is_mobile()) ? "strong" : "strong  mx-auto ";
         $r[] = flex(
-                h("SELECCIONA TU LINEA MÁS CERCANA ", 2, $att),
+                _titulo("SELECCIONA TU LINEA MÁS CERCANA ",0, $att),
                 $data["leneas_metro"],
                 [
                         "d-lg-flex align-items-center contenedor_estaciones",
@@ -19,7 +19,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] =
                 flex(
-                        h("¿CUAL ESTACIÓN SE TE FACILITA? ", 2, "strong"),
+                        _titulo("¿CUAL ESTACIÓN SE TE FACILITA? "),
 
                         "",
                         [
@@ -128,8 +128,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = form_open("", ["class" => "form_punto_encuentro mt-5 row"]);
         $z[] = append($extra);
-        $z[] = contaiter(d(h("¿Quién recibe?", 3, " strong text-uppercase "), 12),
-                "mb-5");
+        $z[] = contaiter(_titulo("¿Quién recibe?"), "mb-5");
         $z[] =
                 input_frm("col-lg-6 mt-5",
                         "NOMBRE",
@@ -183,8 +182,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(append($z), "informacion_del_cliente  col-lg-12");
 
 
-        $sec[] = h("¿En qué horario te gustaría recibir tu pedido?", 3,
-                " strong text-uppercase  col-lg-12 ");
+        $sec[] = _titulo("¿En qué horario te gustaría recibir tu pedido?",0,'col-lg-12 mb-5');
 
         $a = input_frm("col-lg-6 mt-5", "FECHA", [
                 "data-date-format" => "yyyy-mm-dd",

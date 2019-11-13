@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $r = [];
         if ($in_session < 1) {
-            $r[] = contaiter(h("DATOS DE COMPRA", 3, "strong"), 1);
+            $r[] = contaiter(_titulo("DATOS DE COMPRA"), 1);
 
             $z[] = input_frm(
                     "col-lg-6 mt-5", "NOMBRE",

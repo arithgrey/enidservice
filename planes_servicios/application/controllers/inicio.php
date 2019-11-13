@@ -17,6 +17,7 @@ class Inicio extends CI_Controller
         $param = $this->input->get();
         $data = $this->app->session();
 
+
         $data += [
             "action" => valida_action($param, "action"),
             "considera_segundo" => 0,

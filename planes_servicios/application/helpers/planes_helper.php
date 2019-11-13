@@ -20,11 +20,28 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = d(append($t), 2);
 
-        $z[] = d(articulos_venta($data["list_orden"]), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_servicios']);
-        $z[] = d(puntos_venta(), ["class" => "tab-pane " . valida_active_tab(0, $action, $considera_segundo), "id" => 'tab_puntos_venta']);
-        $z[] = d(form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile), ["class" => "tab-pane  " . valida_active_tab(1, $action), "id" => 'tab_form_servicio']);
-        $r[] = d(d(append($z), "tab-content"), 10);
-        $r[] = d(get_top_articulos($top_servicios, $is_mobile), 2);
+        $z[] = tab_seccion(
+            articulos_venta($data["list_orden"]),
+            'tab_servicios',
+            valida_active_tab(0, $action, $considera_segundo)
+        );
+        $z[] = tab_seccion(
+
+            puntos_venta()
+            ,
+            'tab_puntos_venta',
+            valida_active_tab(0, $action, $considera_segundo)
+        );
+        $z[] = tab_seccion(
+            form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile),
+            'tab_form_servicio',
+            valida_active_tab(1, $action)
+        );
+
+
+
+        $r[] = tab_content($z,10);
+        $r[] = d(top_articulos($top_servicios, $is_mobile), 2);
         $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"]);
 
         return append($r);
@@ -252,7 +269,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_top_articulos($top, $is_mobile)
+    function top_articulos($top, $is_mobile)
     {
 
         $response = "";

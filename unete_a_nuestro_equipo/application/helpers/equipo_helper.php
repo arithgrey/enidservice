@@ -25,7 +25,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(append($z), ["class" => "tab-pane active text-style", "id" => "tab2"]);
 
             $response[] = d(get_format_temas_ayuda(), 2);
-            $response[] = d(d(append($r),"tab-content"),10);
+            $response[] = tab_content($r, 10);
+
             return append($response);
 
 
