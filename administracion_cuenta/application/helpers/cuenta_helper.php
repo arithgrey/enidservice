@@ -38,7 +38,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion($actualizar, 'tab_privacidad');
         $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
         $r[] = tab_seccion(calma(), 'tab_direccion');
-        return d(append($r), "tab-content");
+
+        return  tab_content($r);
+
 
     }
 

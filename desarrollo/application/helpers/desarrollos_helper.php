@@ -10,12 +10,11 @@ if (!function_exists('invierte_date_time')) {
             $data["departamentos"],
             $data["num_departamento"]
         );
+
         $z[] = place('place_proyectos');
         $z[] = place('place_tickets');
-        $abrir_ticket = append($z);
-
         $r[] = tab_seccion(
-            $abrir_ticket,
+            $z,
             'tab_abrir_ticket',
             tab_activa(1, $activa)
         );

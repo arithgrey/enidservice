@@ -191,7 +191,9 @@ if (!function_exists('invierte_date_time')) {
             $s["metakeyword_usuario"],
             val_class($num, 3, ' active ')
         );
-        return d(append($r), "tab-content");
+
+        return tab_content($r);
+
 
     }
 
@@ -266,6 +268,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = path_venta_extra($es_servicio, $url_ml);
         $t[] = form_costo_unidad($precio, $es_servicio, $costo_envio);
         $t[] = utilidad($text_comision_venta, $utilidad);
+
         return d(append($t), ["class" => "tab-pane " . $ext_4, "id" => "tab_info_precios"]);
 
     }
@@ -285,6 +288,9 @@ if (!function_exists('invierte_date_time')) {
         $d[] = $inf_n_descripcion;
         $d[] = form_descripcion($nueva_descripcion);
         $d[] = format_colores($es_servicio, $info_colores);
+
+
+
         return d(append($d), ["class" => "tab-pane " . $ext_2, "id" => "tab_info_producto"]);
 
     }

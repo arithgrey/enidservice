@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
         $a = add_text(
 
-            h("SELECCIONA TU TIPO DE ENTREGA", 2, "strong"),
+            _titulo("SELECCIONA TU TIPO DE ENTREGA"),
             mensajeria($id_servicio, $orden_pedido)
             ,
             punto_entrega($id_servicio, $orden_pedido)

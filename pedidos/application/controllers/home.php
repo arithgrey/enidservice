@@ -9,11 +9,13 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("pedidos");
         $this->load->library("table");
+        $this->load->library('breadcrumbs');
         $this->load->library(lib_def());
     }
 
     function index()
     {
+
 
         $param = $this->input->get();
         $data = $this->app->session();
@@ -169,7 +171,7 @@ class Home extends CI_Controller
 
         $asignacion = prm_def($param, 'asignacion');
         $tiene_domicilio = es_data($domicilio_entrega);
-        $tiene_punto_entrega = es_data($punto_entrega);
+//        $tiene_punto_entrega = es_data($punto_entrega);
 
         if (!$tiene_domicilio || $asignacion) {
 //
@@ -189,6 +191,10 @@ class Home extends CI_Controller
                 "punto_entrega" => $punto_entrega,
 
             ];
+
+            $this->breadcrumbs->push('Orden de compra', path_enid('area_cliente_compras', $id_recibo));
+            $this->breadcrumbs->push('Domicilio de entrega', '/');
+            $data['breadcrumbs'] = $this->breadcrumbs->show();
 
             $this->app->pagina(
                 $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
@@ -235,6 +241,10 @@ class Home extends CI_Controller
                 $recibo[0]["id_servicio"]);
 
         }
+
+        $this->breadcrumbs->push('Orden de compra', path_enid('area_cliente_compras', $id_recibo));
+        $this->breadcrumbs->push('Seguimiento', '/');
+        $data['breadcrumbs'] = $this->breadcrumbs->show();
 
         $this->app->pagina($data, render_seguimiento($data), 1);
     }

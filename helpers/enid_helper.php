@@ -463,7 +463,9 @@ function tab($text, $accion, $attributes = [])
 function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
 {
 
-
+    if (is_array($contenido)) {
+        $contenido = append($contenido);
+    }
     if (array_key_exists("class", $attributes)) {
         $attributes["class"] = $attributes["class"] . "tab-pane  ";
     } else {
@@ -487,10 +489,14 @@ function tab_activa($seccion, $activa)
 }
 
 
-function tab_content($array = [])
+function tab_content($array = [], $col = 0)
 {
 
-    return d(append($array), 'tab-content');
+    $response = d(append($array), 'tab-content');
+    if ($col > 0) {
+        $response = d($response, $col);
+    }
+    return $response;
 }
 
 
@@ -1699,9 +1705,11 @@ function append($array, $col = 0, $num_col = 0)
     return $response;
 }
 
-function m($str){
-    return d($str,'col-lg-12');
+function m($str)
+{
+    return d($str, 'col-lg-12');
 }
+
 function get_request_email($email, $asunto, $cuerpo)
 {
 
@@ -3178,6 +3186,7 @@ function _d()
     return $response;
 
 }
+
 
 
 //function exists_array_def($data, $key, $exists = 1, $fail = 0)
