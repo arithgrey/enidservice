@@ -6,8 +6,8 @@
                 "class" => 'id_usuario',
                 "value" => $id_usuario
             ]) ?>
-            <?= d(get_format_info_usuario(), ["class" => "tab-pane active ", "id" => "tab1"]) ?>
-            <?= d(get_format_afiliados(), ["class" => "tab-pane", "id" => 'tab_productividad_ventas']); ?>
+            <?= tab_seccion(get_format_info_usuario(), "tab1", 1) ?>
+            <?= tab_seccion(get_format_afiliados(), 'tab_productividad_ventas') ?>
             <div class="tab-pane" id='tab_perfiles_permisos'>
                 <?= h("Perfiles / permisos", 3) ?>
                 <div class="col-lg-3">
@@ -22,7 +22,8 @@
                 </div>
                 <div class='col-lg-9'>
                     <div class="tab-content">
-                        <?= d(
+
+                        <?= tab_seccion(
                             _text(
                                 h("Recurso", 3)
                                 ,
@@ -30,18 +31,30 @@
                                 ,
                                 place("place_perfilles_permisos")
                             )
-                        ),
-                        [
-                            "class" => "tab-pane active ", "id" => "sec_0"
-                        ]
+                            ,
+                            "sec_0", 1
                         ) ?>
                     </div>
                 </div>
             </div>
-            <?= d(get_form_agregar_recurso(), ["class" => "tab-pane", "id" => 'tab_agregar_recursos']) ?>
-            <?= d(get_format_categorias(), ["class" => "tab-pane", "id" => 'tab_agregar_categorias']) ?>
-            <?= d(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
-            <?= d(get_format_view_usuario($departamentos), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
+            <?= tab_seccion(
+                get_form_agregar_recurso(),
+                'tab_agregar_recursos'
+            ) ?>
+
+            <?= tab_seccion(
+                get_format_categorias(),
+                'tab_agregar_categorias'
+            ) ?>
+
+            <?= tab_seccion(
+                get_format_tipo_clasificacion(),
+                'agregar_tallas'
+            ) ?>
+            <?= tab_seccion(
+                get_format_view_usuario($departamentos),
+                'tab_mas_info_usuario'
+            ) ?>
         </div>
     </div>
 </div>

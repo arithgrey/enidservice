@@ -282,18 +282,12 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = d(
-            add_text(
-                $link_agregar
-                ,
-                place("usuarios_enid_service")
-            )
+        $contenido = add_text(
+            $link_agregar
             ,
-            [
-                "class" => "tab-pane active",
-                "id" => "tab_usuarios_activos"
-            ]
+            place("usuarios_enid_service")
         );
+        $r[] = tab_seccion($contenido, "tab_usuarios_activos", 1);
 
         return append($r);
 

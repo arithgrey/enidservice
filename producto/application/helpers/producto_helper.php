@@ -513,47 +513,50 @@ if (!function_exists('invierte_date_time')) {
             $extra_class_contenido = '';
 
             if ($z < 1) {
-                $extra_class = ' active ';
+                $extra_class = 1;
                 $extra_class_contenido = ' in active ';
             }
 
 
-            $preview[] =
+            $preview[] = tab(
+
                 img(
                     [
                         'src' => $url,
                         'alt' => $nombre_servicio,
-                        'class' => 'col-lg-8 mt-2 border  cursor_pointer ' . $extra_class,
-                        'id' => $z,
-                        'data-toggle' => 'tab',
-                        'href' => "#imagen_tab_" . $z
+                        'class' => 'col-lg-8 mt-2 border cursor_pointer ' . $extra_class,
+                        'id' => $z
                     ]
-                );
+                ),
+                "#imagen_tab_" . $z
 
-            $preview_mb[] = img(
-                [
-                    'src' => $url,
-                    'alt' => $nombre_servicio,
-                    'class' => 'col-xs-3 col-sm-3 mt-2 border  mh_50 mah_50 mr-1 mb-1' . $extra_class,
-                    'id' => $z,
-                    'data-toggle' => 'tab',
-                    'href' => "#imagen_tab_" . $z
-                ]
+            );
 
+            $preview_mb[] = tab(
+                img(
+                    [
+                        'src' => $url,
+                        'alt' => $nombre_servicio,
+                        'class' => 'col-xs-3 col-sm-3 mt-2 border  mh_50 mah_50 mr-1 mb-1' . $extra_class,
+                        'id' => $z,
+                    ]
+
+                ),
+                "#imagen_tab_" . $z
             );
 
 
             $ext = ($is_mobile < 1) ? "mh_450 mah_450" : "";
 
-            $imgs_grandes[] =
-                img(
-                    [
-                        'src' => $url,
-                        "class" => " w-100 tab-pane fade zoom" . $ext . " " . $extra_class_contenido,
-                        "id" => "imagen_tab_" . $z,
+            $img = img(
+                [
+                    'src' => $url,
+                    "class" => " w-100 zoom " . $extra_class_contenido,
 
-                    ]
-                );
+
+                ]
+            );
+            $imgs_grandes[] = tab_seccion($img, "imagen_tab_" . $z, $ext);
 
             $z++;
 

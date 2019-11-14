@@ -38,9 +38,7 @@ if (!function_exists('invierte_date_time')) {
             valida_active_tab(1, $action)
         );
 
-
-
-        $r[] = tab_content($z,10);
+        $r[] = tab_content($z, 10);
         $r[] = d(top_articulos($top_servicios, $is_mobile), 2);
         $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"]);
 
@@ -53,88 +51,74 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = h("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
         $r[] = form_open('', ['class' => "form_nombre_producto ", "id" => 'form_nombre_producto']);
-        $r[] = d(
-            h("¿QUÉ DESEAS ANUNCIAR?", 4, 1)
-            .
-            d(
-                btw(
+        $link_producto = a_enid('UN PRODUCTO',
+            [
+                "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
+                "id" => "0",
+                "style" => "color: blue;"
+            ]
+        );
+        $link_servicio = a_enid(
+            "UN SERVICIO",
+            [
+                "class" => "tipo_promocion tipo_servicio",
+                "id" => "1"
+            ]
+        );
+        $selector_producto_servicio = flex(
 
-                    a_enid('UN PRODUCTO',
-                        [
-                            "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
-                            "id" => "0",
-                            "style" => "color: blue;"
-                        ]
-                    ),
-
-
-                    a_enid(
-                        "UN SERVICIO",
-                        [
-                            "class" => "tipo_promocion tipo_servicio",
-                            "id" => "1"
-                        ]
-                    )
-                    ,
-                    "display_flex_enid"
-                )
-                , 1)
-            ,
-            " col-lg-3 top_30"
+            $link_producto,
+            $link_servicio
 
         );
 
 
-        $r[] = btw(
+        $r[] = dd(
+            _titulo("¿QUÉ DESEAS ANUNCIAR?"),
+            $selector_producto_servicio,
+            3
+        );
 
-            h(
-                text_icon('fa fa-shopping-bag', " ARTÍCULO")
-                ,
-                4,
-                1
-            )
-            ,
 
-            input(
-                [
-                    "id" => "nombre_producto",
-                    "name" => "nombre",
-                    "class" => "input  nuevo_producto_nombre top_10",
-                    "type" => "text",
-                    "onkeyup" => "transforma_mayusculas(this)",
-                    "required" => true
-                ],
-                1
-            )
-            , "col-lg-3 seccion_menu_tipo_servicio top_30"
-
+        $r[] = form_input(
+            'col-lg-3  ',
+            'ARTÍCULO',
+            [
+                "id" => "nombre_producto",
+                "name" => "nombre",
+                "class" => "input  nuevo_producto_nombre ",
+                "type" => "text",
+                "onkeyup" => "transforma_mayusculas(this)",
+                "required" => true
+            ]
 
         );
+
+        $contenedor_ciclo_facturacion = _text(
+            _titulo("CICLO DE FACTURACIÓN")
+            ,
+            create_select(
+                $ciclo_facturacion,
+                "ciclo",
+                "form-control ciclo_facturacion ci_facturacion",
+                "ciclo",
+                "ciclo",
+                "id_ciclo_facturacion"
+            )
+        );
+
         $r[] = d(
-
-            append([
-                h(
-                    "CICLO DE FACTURACIÓN",
-                    4,
-                    [
-                        'title' => "¿Qué vendes?"
-                    ], 1)
-                ,
-                create_select(
-                    $ciclo_facturacion,
-                    "ciclo",
-                    "form-control ciclo_facturacion ci_facturacion top_10",
-                    "ciclo",
-                    "ciclo",
-                    "id_ciclo_facturacion",
-                    1)
-
-            ])
+            $contenedor_ciclo_facturacion
             ,
             [
-                "class" => "col-lg-3 contenedor_ciclo_facturacion seccion_menu_tipo_servicio top_30 ",
+                "class" => "col-lg-3 contenedor_ciclo_facturacion",
                 "style" => "display: none;"
             ]
+        );
+
+
+        $r[] = form_input(
+            "col-lg-3 contenedor_precio"
         );
 
         $r[] = d(
@@ -165,11 +149,13 @@ if (!function_exists('invierte_date_time')) {
 
             ])
             ,
-            "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
+            "col-lg-3 contenedor_precio  top_30"
         );
+
+
         $r[] = d(btn("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]),
             [
-                "class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50'
+                "class" => ' col-lg-3 siguiente_btn top_50'
             ]);
         $r[] = form_close();
         $re[] = d(append($r), "contenedor_agregar_servicio_form top_30");

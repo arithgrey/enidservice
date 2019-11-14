@@ -269,7 +269,9 @@ if (!function_exists('invierte_date_time')) {
         $t[] = form_costo_unidad($precio, $es_servicio, $costo_envio);
         $t[] = utilidad($text_comision_venta, $utilidad);
 
-        return d(append($t), ["class" => "tab-pane " . $ext_4, "id" => "tab_info_precios"]);
+
+        return tab_seccion($t, "tab_info_precios", $ext_4);
+
 
     }
 
@@ -290,8 +292,8 @@ if (!function_exists('invierte_date_time')) {
         $d[] = format_colores($es_servicio, $info_colores);
 
 
+        return tab_seccion($d, "tab_info_producto", $ext_2);
 
-        return d(append($d), ["class" => "tab-pane " . $ext_2, "id" => "tab_info_producto"]);
 
     }
 
@@ -315,7 +317,8 @@ if (!function_exists('invierte_date_time')) {
         $z[] = d($val_youtube, "text_video_servicio");
         $z[] = form_youtube($valor_youtube);
 
-        return d(append($z), ["class" => "tab-pane " . $ext_1, "id" => "tab_imagenes"]);
+        return tab_seccion($z, "tab_imagenes", $ext_1);
+
 
     }
 

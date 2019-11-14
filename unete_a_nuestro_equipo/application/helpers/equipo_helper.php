@@ -22,8 +22,7 @@ if (!function_exists('invierte_date_time')) {
             $z[] = hr();
 
             $r[] = place("info_articulo", ["id" => 'info_articulo']);
-            $r[] = d(append($z), ["class" => "tab-pane active text-style", "id" => "tab2"]);
-
+            $r[] = tab_seccion($z, "tab2", 1);
             $response[] = d(get_format_temas_ayuda(), 2);
             $response[] = tab_content($r, 10);
 

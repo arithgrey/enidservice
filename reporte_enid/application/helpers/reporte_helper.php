@@ -27,14 +27,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = crea_repo_categorias_destacadas(
             sub_categorias_destacadas($data["categorias_destacadas"]));
 
-        return d(append($r),
-            [
-                "class" => "tab-pane",
-                "id" => "tab_productos_publicos",
-            ]
-        );
-
-
+        return tab_seccion($r, "tab_productos_publicos");
     }
 
     /**
@@ -47,120 +40,62 @@ if (!function_exists('invierte_date_time')) {
         $form = base_busqueda_form('PRODUCTOS MÁS BUSCADOS POR CLIENTES',
             'form_busqueda_productos_solicitados', 'place_keywords');
 
-        $response = d($form,
-            [
-                "class" => "tab-pane",
-                "id" => "tab_busqueda_productos",
-            ]
-        );
+        return tab_seccion($form, "tab_busqueda_productos");
 
-        return $response;
     }
 
-    /**
-     * @param array $ac
-     * @param array $response
-     * @return array
-     */
+
     function format_actividad()
     {
 
         $form = base_busqueda_form('ACTIVIDAD',
             'f_actividad_productos_usuarios', 'repo_usabilidad');
 
-        return d($form, [
-                "class" => "tab-pane",
-                "id" => 'tab_usuarios',
-            ]
-        );
-
+        return tab_seccion($form, 'tab_usuarios');
 
     }
 
-    /**
-     * @param array $p
-     * @param array $response
-     * @return array
-     */
     function format_tipo_entrega()
     {
 
         $form = base_busqueda_form('TIPOS DE ENTREGAS', 'form_tipos_entregas',
             'place_tipos_entregas');
 
-        return d($form,
-            [
-                "class" => "tab-pane",
-                "id" => 'tab_tipos_entregas',
-            ]
-        );
-
-
+        return tab_seccion($form, 'tab_tipos_entregas');
     }
 
-    /**
-     * @param array $v
-     * @param array $response
-     * @return array
-     */
     function format_visitas()
     {
 
         $form = base_busqueda_form('visitas web', 'f_usabilidad',
             'place_usabilidad_general');
 
-        return d($form, [
-            "class" => "tab-pane",
-            "id" => 'tab_default_2',
-        ]);
-
+        return tab_seccion($form, 'tab_default_2');
 
     }
 
-    /**
-     * @param array $ds
-     * @param array $response
-     * @return array
-     */
     function format_dispositivos()
     {
 
-        $form = base_busqueda_form('dispositivos', 'f_dipositivos', 'repo_dispositivos');
-
-        return d($form,
-            [
-                "class" => "tab-pane",
-                "id" => 'tab_dispositivos',
-            ]
+        $form = base_busqueda_form(
+            'dispositivos',
+            'f_dipositivos',
+            'repo_dispositivos'
         );
-
+        return tab_seccion($form, 'tab_dispositivos');
 
     }
 
-    /**
-     * @param array $i
-     * @param array $response
-     * @return array
-     */
     function format_indicadores()
     {
         $form = base_busqueda_form(
             "indicadores", 'form_busqueda_global_enid', "place_usabilidad");
 
-        return d($form,
-            [
-                "class" => "tab-pane active",
-                "id" => 'tab_default_1',
-            ]
-        );
+        return tab_seccion($form, 'tab_default_1', 1);
 
 
     }
 
-    /**
-     * @param array $r
-     * @return array
-     */
     function base_busqueda_form($titulo_seccion, $clase_form, $place)
     {
 
