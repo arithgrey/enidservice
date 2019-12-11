@@ -53,7 +53,7 @@ let carga_servicios = function () {
     set_option("s", 1);
     let global = (get_parameter_enid($(this), "id" || get_option("global")) > 0) ? 1 : 0;
     set_option("global", global);
-    let e =  [".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"];
+    let e = [".texto_ventas_titulo", ".contenedor_busqueda", ".contenedor_busqueda_articulos"];
     despliega(e, 1);
 
     let url = "../q/index.php/api/servicio/empresa/format/json/";
@@ -557,12 +557,14 @@ let muestra_seccion_porcentaje_ganancia_afiliados = () => {
 let configuracion_inicial = function () {
 
 
-    set_option("modalidad", get_parameter_enid($(this), "id"));
-    if (get_option("modalidad") == 1) {
+    let modalidad = parseInt(get_parameter_enid($(this), "id"));
+    set_option("modalidad", modalidad);
+    if (modalidad > 0) {
+        /*Servicio*/
         set_option("id_ciclo_facturacion", 9);
         $(".text_modalidad").text("Servicio");
-        $(".tipo_producto").css("color", "black");
-        $(".tipo_servicio").css("color", "blue");
+        $(".tipo_producto").removeClass('button_enid_eleccion_active');
+        $(".tipo_servicio").addClass('button_enid_eleccion_active');
         selecciona_select(".ci_facturacion", 9);
         $(".precio").val(0);
         despliega([".contenedor_ciclo_facturacion", ".siguiente_btn"], 1);
@@ -572,11 +574,10 @@ let configuracion_inicial = function () {
 
         set_option("id_ciclo_facturacion", 5);
         $(".text_modalidad").text("Artículo/Producto");
-        $(".tipo_producto").css("color", "blue");
-        $(".tipo_servicio").css("color", "black");
+        $(".tipo_producto").addClass('button_enid_eleccion_active');
+        $(".tipo_servicio").removeClass('button_enid_eleccion_active');
         despliega([".contenedor_precio"], 1);
         despliega([".contenedor_ciclo_facturacion"], 0);
-
 
     }
 };
@@ -603,7 +604,7 @@ let simula_envio = (e) => {
 };
 let verifica_existencia_categoria = () => {
 
-    set_option("s",4);
+    set_option("s", 4);
     let url = "../q/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";
     let nombre = get_parameter(".nuevo_producto_nombre");
     let data_send = {"clasificacion": nombre, "id_servicio": get_option("modalidad")};
@@ -1332,7 +1333,7 @@ let retorno = () => {
 
         case 1:
 
-            window.location =  document.referrer;
+            window.location = document.referrer;
 
             break;
 
@@ -1349,7 +1350,7 @@ let retorno = () => {
 
         case 4:
 
-            window.location =  "";
+            window.location = "";
 
             break;
 
@@ -1376,30 +1377,30 @@ let r_lineas = function (data) {
 };
 let agregar_linea = function () {
 
-    let id =  get_parameter_enid($(this),"id");
+    let id = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra" : 0 , "id" : id};
+    let data_send = {"lista_negra": 0, "id": id};
     request_enid("PUT", data_send, url, puntos_venta);
 };
 let quitar_linea = function () {
 
-    let id =  get_parameter_enid($(this),"id");
+    let id = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra" : 1 , "id" : id};
+    let data_send = {"lista_negra": 1, "id": id};
     request_enid("PUT", data_send, url, puntos_venta);
 };
 let puntos_encuentro = function () {
 
-    let id =  ( get_parameter_enid($(this),"id") >  0 ) ?  get_parameter_enid($(this),"id")  : get_option("id_punto_encuentro");
-    set_option("id_punto_encuentro" , id);
-    if (id >  0){
+    let id = (get_parameter_enid($(this), "id") > 0) ? get_parameter_enid($(this), "id") : get_option("id_punto_encuentro");
+    set_option("id_punto_encuentro", id);
+    if (id > 0) {
 
         let url = "../q/index.php/api/punto_encuentro/disponibilidad/format/json/";
         let data_send = {"id": id, "v": 1};
         request_enid("GET", data_send, url, r_puntos_encuentro);
     }
 };
-let r_puntos_encuentro  = function (data) {
+let r_puntos_encuentro = function (data) {
 
     render_enid(".place_puntos_venta", data);
     $(".quitar_punto").click(quitar_punto);
@@ -1410,29 +1411,28 @@ let r_puntos_encuentro  = function (data) {
 let quitar_punto = function () {
 
 
-    let id =  get_parameter_enid($(this),"id");
+    let id = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra" : 1 , "id" : id};
+    let data_send = {"lista_negra": 1, "id": id};
     request_enid("PUT", data_send, url, puntos_encuentro);
 
 };
 let agregar_punto = function () {
 
 
-    let id =  get_parameter_enid($(this),"id");
+    let id = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra" : 0 , "id" : id};
+    let data_send = {"lista_negra": 0, "id": id};
     request_enid("PUT", data_send, url, puntos_encuentro);
 };
-let restablecer = function(){
+let restablecer = function () {
 
-    let id =  get_parameter_enid($(this),"id");
-    if(id > 0 ){
+    let id = get_parameter_enid($(this), "id");
+    if (id > 0) {
         set_option("id_servicio", id);
         show_confirm("SE RE INICIARÁN LOS VALORES DE LA PUBLICACIÓN ¿ESTAS DE ACUERTO?", "", "SI, RE INICIAR PROMOCIÓN", restablecer_promocion);
 
     }
-
 
 
 };
@@ -1442,7 +1442,9 @@ let restablecer_promocion = function () {
     let id = get_option("id_servicio");
     let url = "../q/index.php/api/servicio/restablecer/format/json/";
     let data_send = {"id": id};
-    request_enid("PUT", data_send, url, ()=> {carga_informacion_servicio();});
+    request_enid("PUT", data_send, url, () => {
+        carga_informacion_servicio();
+    });
 
 
 };

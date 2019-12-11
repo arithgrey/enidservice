@@ -39,8 +39,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-
-        $r[] = tab_content($z,10);
+        $r[] = tab_content($z, 10);
         $r[] = d(top_articulos($top_servicios, $is_mobile), 2);
         $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"]);
 
@@ -51,74 +50,81 @@ if (!function_exists('invierte_date_time')) {
     function form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
     {
 
-        $r[] = h("DA A CONOCER TU PRODUCTO Ó SERVICIO", 3, 1);
-        $r[] = form_open('', ['class' => "form_nombre_producto ", "id" => 'form_nombre_producto']);
-        $r[] = d(
-            h("¿QUÉ DESEAS ANUNCIAR?", 4, 1)
-            .
-            d(
-                btw(
 
-                    a_enid('UN PRODUCTO',
-                        [
-                            "class" => "tipo_promocion tipo_producto easy_select_enid mr-1",
-                            "id" => "0",
-                            "style" => "color: blue;"
-                        ]
-                    ),
+        $r[] = form_open('',
+            [
+                'class' => "form_nombre_producto col-lg-6 col-lg-offset-3 p-0",
+                "id" => 'form_nombre_producto'
+            ]
+        );
 
+        $r[] = _titulo('¿Qué anunciamos?');
+        $r[] = flex(
 
-                    a_enid(
-                        "UN SERVICIO",
-                        [
-                            "class" => "tipo_promocion tipo_servicio",
-                            "id" => "1"
-                        ]
-                    )
-                    ,
-                    "display_flex_enid"
-                )
-                , 1)
+            a_enid('UN PRODUCTO',
+                [
+                    "class" => "tipo_promocion tipo_producto easy_select_enid button_enid_eleccion_active",
+                    "id" => 0,
+                ]
+            )
             ,
-            " col-lg-3 top_30"
-
+            a_enid(
+                "UN SERVICIO",
+                [
+                    "class" => "tipo_promocion tipo_servicio",
+                    "id" => 1
+                ]
+            )
+            ,
+            'mt-3'
         );
 
 
-        $r[] = btw(
+        $nombre = input_frm('mt-5',
+            span("Nombre del artículo", 'text-uppercase'),
+            [
+                "id" => "nombre_producto",
+                "name" => "nombre",
+                "class" => "nuevo_producto_nombre",
+                "type" => "text",
+                "onkeyup" => "transforma_mayusculas(this)",
+                "required" => true,
+                "placeholder" => "Nombre de tu artículo o servicio"
+            ]
+        );
 
-            h(
-                text_icon('fa fa-shopping-bag', " ARTÍCULO")
-                ,
-                4,
-                1
-            )
-            ,
+
+        $seccion_precio = d(_d(
+
+            label(
+                'Precio MXN',
+
+                'text-uppercase h5 black strong'
+
+            ),
 
             input(
                 [
-                    "id" => "nombre_producto",
-                    "name" => "nombre",
-                    "class" => "input  nuevo_producto_nombre top_10",
-                    "type" => "text",
-                    "onkeyup" => "transforma_mayusculas(this)",
-                    "required" => true
-                ],
-                1
+                    "id" => "costo",
+                    "class" => "costo precio border-top-0 border-right-0 border-left-0 border_bottom_big",
+                    "name" => "costo",
+                    "required" => true,
+                    "step" => "any",
+                    "type" => "number",
+                    "placehorder" => "880",
+
+                ]
             )
-            , "col-lg-3 seccion_menu_tipo_servicio top_30"
+
+        ), 'contenedor_precio');
 
 
-        );
-        $r[] = d(
-
-            append([
+        $seccion_ciclo_facturacion = d(
+            [
                 h(
                     "CICLO DE FACTURACIÓN",
-                    4,
-                    [
-                        'title' => "¿Qué vendes?"
-                    ], 1)
+                    5, 'h5 strong'
+                )
                 ,
                 create_select(
                     $ciclo_facturacion,
@@ -127,52 +133,24 @@ if (!function_exists('invierte_date_time')) {
                     "ciclo",
                     "ciclo",
                     "id_ciclo_facturacion",
-                    1)
-
-            ])
-            ,
-            [
-                "class" => "col-lg-3 contenedor_ciclo_facturacion seccion_menu_tipo_servicio top_30 ",
-                "style" => "display: none;"
-            ]
-        );
-
-        $r[] = d(
-            append([
-
-                h(
-                    text_icon('fa fa-money', " PRECIO"),
-                    4,
-                    [
-
-                    ],
                     1
                 )
-                ,
 
-                input(
-                    [
-                        "id" => "costo",
-                        "class" => "form-control input-sm costo precio top_10",
-                        "name" => "costo",
-                        "required" => true,
-                        "step" => "any",
-                        "type" => "number"
-                    ], 1
-                )
-                ,
-                d($error_registro, "extra_precio", 1)
-
-            ])
+            ]
             ,
-            "col-lg-3 contenedor_precio seccion_menu_tipo_servicio top_30"
+            "contenedor_ciclo_facturacion d-none"
         );
-        $r[] = d(btn("SIGUIENTE", ["class" => "btn_siguiente_registrar_servicio "]),
-            [
-                "class" => 'seccion_menu_tipo_servicio col-lg-3 siguiente_btn top_50'
-            ]);
+        $r[] = _d(
+            $nombre,
+            $seccion_precio,
+            $seccion_ciclo_facturacion
+        );
+
+
+        $r[] = d($error_registro, "extra_precio mt-3");
+        $r[] = btn("Continuar", ['class' => 'siguiente_btn mt-5']);
         $r[] = form_close();
-        $re[] = d(append($r), "contenedor_agregar_servicio_form top_30");
+        $re[] = d($r, "contenedor_agregar_servicio_form ");
         $re[] = get_selector_categoria($is_mobile);
         return append($re);
 

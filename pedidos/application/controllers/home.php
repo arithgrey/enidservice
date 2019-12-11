@@ -267,7 +267,6 @@ class Home extends CI_Controller
     {
 
         $q = [
-
             "id_usuario" => $id_usuario,
             "id_servicio" => $id_servicio,
         ];
@@ -429,7 +428,6 @@ class Home extends CI_Controller
                 $num_compras = $this->get_num_compras($id_usuario);
                 $cupon = $this->cupon($id_recibo, $servicio, $num_compras);
                 $data += [
-
                     "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
                     "usuario" => $this->get_usuario($id_usuario),
                     "status_ventas" => $this->get_estatus_enid_service(),

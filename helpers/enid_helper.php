@@ -231,10 +231,16 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
 }
 
 
-function d($info, $attributes = [], $row = 0, $frow = 0)
+function d($text, $attributes = [], $row = 0, $frow = 0)
 {
 
-    return get_base_html("div", $info, $attributes, $row, $frow);
+
+    if (is_array($text)) {
+        $text = append($text);
+    }
+
+    return get_base_html("div", $text, $attributes, $row, $frow);
+
 
 }
 
@@ -310,6 +316,18 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 $attributes["required"] = true;
 
                 break;
+
+
+            case "number":
+
+                $attributes["onpaste"] = "paste_telefono();";
+                $attributes["minlength"] = 1;
+                $attributes["maxlength"] = 3;
+                $attributes["required"] = true;
+                $attributes["min"] = 0;
+
+                break;
+
 
             case "email":
 
@@ -528,16 +546,30 @@ function get_th($val = '', $attributes = '')
 function tr($val = '', $attributes = '')
 {
 
-    return "<tr " . add_attributes($attributes) . " >" . $val . "</tr>";
-}
+    if (is_array($val)) {
 
+        return "<tr " . add_attributes($attributes) . " >" . append($val) . "</tr>";
+
+    } else {
+
+        return "<tr " . add_attributes($attributes) . " >" . $val . "</tr>";
+    }
+
+}
 
 function tb($val = '', $attributes = '')
 {
 
-    return "<table " . add_attributes($attributes) . " >" . $val . "</table>";
-}
+    if (is_array($val)) {
 
+        return "<table " . add_attributes($attributes) . " >" . append($val) . "</table>";
+
+    } else {
+
+        return "<table " . add_attributes($attributes) . " >" . $val . "</table>";
+    }
+
+}
 
 function select_enid($data, $text_option, $val, $attributes = '')
 {
@@ -1257,24 +1289,60 @@ function debug($msg, $array = 0)
 function get_costo_envio($param)
 {
 
+
     $gratis = $param["flag_envio_gratis"];
+    $tipo_entrega = $param['tipo_entrega'];
     $r = [];
     if ($gratis == 1) {
 
         $r["costo_envio_cliente"] = 0;
         $r["costo_envio_vendedor"] = 100;
-        $r["text_envio"] = texto_costo_envio_info_publico($gratis,
+        $r["text_envio"] = texto_costo_envio_info_publico(
+            $gratis,
             $r["costo_envio_cliente"],
-            $r["costo_envio_vendedor"]);
+            $r["costo_envio_vendedor"],
+            $tipo_entrega
+        );
     } else {
+
         $r["costo_envio_cliente"] = 100;
         $r["costo_envio_vendedor"] = 0;
-        $r["text_envio"] = texto_costo_envio_info_publico($gratis,
+        $r["text_envio"] = texto_costo_envio_info_publico(
+            $gratis,
             $r["costo_envio_cliente"],
-            $r["costo_envio_vendedor"]);
+            $r["costo_envio_vendedor"],
+            $tipo_entrega
+        );
     }
 
     return $r;
+}
+
+function texto_costo_envio_info_publico(
+    $flag_envio_gratis,
+    $costo_envio_cliente,
+    $costo_envio_vendedor,
+    $tipo_entrega
+)
+{
+
+    $text_envio = ['', ' MXN DE TU ENTREGA', ' MXN DE ENVÍO', ''];
+    $response = ($flag_envio_gratis > 0) ?
+        [
+            "cliente" => "ENTREGA GRATIS!",
+            "cliente_solo_text" => "ENTREGA GRATIS!",
+            "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO",
+        ]
+        :
+        [
+
+            "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
+            "cliente_solo_text" => _text($costo_envio_cliente, $text_envio[$tipo_entrega]),
+            "cliente" => _text($costo_envio_cliente, $text_envio[$tipo_entrega]),
+        ];
+
+
+    return $response;
 }
 
 
@@ -2897,25 +2965,23 @@ function frm_search(
 {
 
     $r[] = '<form action="../search" class="search_principal_form d-flex">';
-    $r[] = d($clasificaciones_departamentos, "display_none");
-    $r[] = d(
-        input(
-            [
-                "class" => "input_busqueda_producto ",
-                "type" => "text",
-                "placeholder" => "Búsqueda",
-                "name" => "q",
-                "onpaste" => "paste_search();",
+    $r[] = d($clasificaciones_departamentos, "d-none");
+    $r[] = input(
+        [
+            "class" => "input_busqueda_producto",
+            "type" => "text",
+            "placeholder" => "Búsqueda",
+            "name" => "q",
+            "onpaste" => "paste_search();",
 
-            ]
-        )
+        ]
+
     );
-    $r[] = d(btn(icon("fa fa-search "),
+    $r[] = btn(icon("fa fa-search "),
         [
             "class" => " button_busqueda_producto  flipkart-navbar-button",
-        ],
-        0,
-        0));
+        ]
+    );
     $r[] = form_close();
 
 
@@ -3087,24 +3153,27 @@ function contaiter($str, $attributes = [], $fluid = 1)
 function format_fecha($date, $horas = 0)
 {
 
-    $ext = ($horas > 0) ? 'H:i:s' : '';
+    $ext = ($horas > 0) ? 'H:i' : '';
 
     return format_time(date_format(date_create($date), 'd M Y ' . $ext));
 
 }
 
-function format_link($str, $attributes, $primario = 1)
+function format_link($str, $attributes, $primario = 1 , $texto_strong = 1 )
 {
 
 
-    $f = ($primario > 0) ?
-        " borde_accion p-2 bg_black white text-center text-uppercase strong col" :
-        " borde_accion p-2 strong border_enid col black text-uppercase text-center";
+    $clase = ($primario > 0) ?
+        "text-center borde_accion p-2 bg_black white  text-uppercase col " :
+        "text-center borde_accion p-2 border_enid col black text-uppercase ";
+
+    $clase .= ($texto_strong) ?  ' font-weight-bold ': '';
+
     $att = $attributes;
 
 
     $att["class"] = (array_key_exists("class",
-        $attributes)) ? add_text($attributes["class"], $f) : $f;
+        $attributes)) ? add_text( $clase , $attributes["class"]) : $clase;
 
     return a_enid($str, $att);
 }
@@ -3187,6 +3256,66 @@ function _d()
 
 }
 
+function ticket_pago($recibo, $tipos_entrega, $format = 1)
+{
+
+    $response = [];
+    if (es_data($recibo)) {
+
+        $r = $recibo[0];
+
+        $monto = $r['monto_a_pagar'];
+        $ciclos = $r['num_ciclos_contratados'];
+        $abono = $r['saldo_cubierto'];
+        $costo_envio_cliente = $r['costo_envio_cliente'];
+        $entrega_tipo = $r['tipo_entrega'];
+        $tipo_entrega = ($entrega_tipo - 1);
+        $subtotal = ($monto * $ciclos);
+        $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
+        $abono_format = ($abono > 0) ? _text('- ', money($abono)) : '';
+        $abono_format_text = ($abono > 0) ? 'Abono' : '';
+        $es_abono = ($abono > 0);
+        $saldo_pendiente = ($subtotal - $abono) + $costo_envio_cliente;
+        $saldo_pendiente_pago_contra_entrega = ($subtotal - $abono);
+
+
+        switch ($format) {
+
+            case 1:
+
+                $espacio = 'justify-content-between mt-3 ';
+                $response[] = hr('mb-4');
+                $response[] = flex('Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
+                $response[] = flex($tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio, 'envio_text', 'envio_money text-uppercase');
+                if ($es_abono) {
+                    $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
+                }
+                $response[] = hr('mt-4');
+                $response[] = flex('Total', money($saldo_pendiente), 'justify-content-between', 'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
+                $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
+
+                break;
+            default:
+
+                break;
+
+        }
+
+
+        $checkout = [
+            'checkout' => d($response, 'checkout_resumen'),
+            'saldo_pendiente' => $saldo_pendiente,
+            'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
+            'tipo_entrega' => $entrega_tipo,
+            'descuento_entrega' => $costo_envio_cliente
+
+        ];
+
+    }
+    return $checkout;
+
+
+}
 
 
 //function exists_array_def($data, $key, $exists = 1, $fail = 0)

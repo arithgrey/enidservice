@@ -101,13 +101,6 @@
     font-weight: bold;
 }
 
-.btn_siguiente_registrar_servicio {
-    width: 100% !important;
-    background: black !important;
-    padding: 5px;
-    color: white;
-    margin-bottom: 50px;
-}
 
 .num_clasificacion_phone {
     margin-top: 25px !important;
@@ -134,7 +127,7 @@
     width: 100%;
 }
 
-.btn_siguiente_registrar_servicio, .btn_guardar_ciclo_facturacion, .btn_precio_servicio,
+.btn_guardar_ciclo_facturacion, .btn_precio_servicio,
 .btn_guardar_desc {
     width: 100% !important;
     background: black !important;
@@ -200,7 +193,7 @@
         background: #07206b !important;
     }
 
-    .btn_siguiente_registrar_servicio, .btn_guardar_ciclo_facturacion {
+     .btn_guardar_ciclo_facturacion {
         width: 100% !important;
         background: black !important;
         padding: 5px;

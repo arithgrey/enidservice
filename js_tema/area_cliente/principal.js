@@ -21,12 +21,10 @@ let id_servicio = 0;
 let id_persona = 0;
 
 let id_ticket = '.ticket';
-let menu_navegacion_completo =  '.menu_navegacion_completo';
+let menu_navegacion_completo = '.menu_navegacion_completo';
 let $id_ticket = $(id_ticket);
 let $menu_navegacion_completo = $(menu_navegacion_completo);
-
-
-
+let $visita_tienda = $('.visita_tienda');
 
 $(document).ready(() => {
 
@@ -161,7 +159,7 @@ let inf_ticket = function (e) {
     recorre();
     let id_recibo = get_parameter_enid($(this), "id");
     if (id_recibo == undefined) {
-        id_recibo = ($id_ticket.val()!= undefined) ? $id_ticket.val() : get_option("id_recibo");
+        id_recibo = ($id_ticket.val() != undefined) ? $id_ticket.val() : get_option("id_recibo");
     }
 
     if (id_recibo > 0) {
@@ -190,7 +188,7 @@ let resposponse_confirma_cancelacion = data => {
 let cancela_compra = function () {
 
     debugger;
-    let id_recibo =  get_parameter_enid($(this), "id");
+    let id_recibo = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/cancelar/format/json/";
     let data_send = {
         "id_recibo": id_recibo,
@@ -201,7 +199,7 @@ let cancela_compra = function () {
 };
 let response_cancelacion_compra = (data) => {
 
-    debugger;
+
     if (get_option("modalidad_ventas") == 1) {
 
         show_tabs(["#mi_buzon", "#mis_ventas"]);
@@ -240,4 +238,91 @@ let conf_cancelacion_compra = function () {
         };
         request_enid("GET", data_send, url, resposponse_confirma_cancelacion);
     }
+};
+let get_lugar_por_status_compra = () => {
+
+    let nuevo_place = "";
+    if (get_option("modalidad_ventas") == 0) {
+
+        switch (parseFloat(get_option("estado_compra"))) {
+            case 10:
+                nuevo_place = ".place_resumen_servicio";
+                break;
+            case 6:
+                nuevo_place = ".place_servicios_contratados";
+                break;
+            case 1:
+                nuevo_place = ".place_servicios_contratados_y_pagados";
+                break;
+            default:
+                nuevo_place = ".place_servicios_contratados";
+                break;
+        }
+    } else {
+        nuevo_place = ".place_ventas_usuario";
+    }
+    return nuevo_place;
+};
+let compras_usuario = () => {
+
+    recorre();
+    let modalidad = get_option("modalidad_ventas");
+    let url = "../q/index.php/api/recibo/recibos/format/json/";
+    let data_send = {"status": get_option("estado_compra"), "modalidad": modalidad};
+    request_enid("GET", data_send, url, r_compras_usuario);
+
+};
+let r_compras_usuario = function (data) {
+
+
+    if (data.hasOwnProperty('total') && parseInt(data.total) > 0) {
+
+
+        let place = get_lugar_por_status_compra();
+        render_enid(place, data);
+        $(".solicitar_desarrollo").click(function (e) {
+
+            set_option("id_proyecto", get_parameter_enid($(this), "id"));
+            tikets_usuario_servicio();
+
+        });
+        $(".form_q_servicios").submit();
+        $(".resumen_pagos_pendientes").click(inf_ticket);
+        $(".btn_direccion_envio").click(inf_envio);
+        $(".ver_mas_compras_o_ventas").click(compras_ventas_concluidas);
+
+    } else {
+
+        $visita_tienda.removeClass('d-none');
+    }
+
+};
+let inf_envio = function (e) {
+
+    set_option("recibo", get_parameter_enid($(this), "id"));
+    inf_envio_complete();
+};
+let compras_ventas_concluidas = () => {
+
+    let url = "../q/index.php/api/recibo/compras_efectivas/format/json/";
+    let data_send = {
+        "modalidad": get_option("modalidad_ventas"),
+        "page": get_option("page")
+    };
+    request_enid("GET", data_send, url, r_compras_ventas_concluidas);
+};
+let r_compras_ventas_concluidas = (data) => {
+
+
+    let place = get_lugar_por_status_compra();
+    render_enid(place, data);
+    $(".resumen_pagos_pendientes").click(inf_ticket);
+    $(".pagination > li > a, .pagination > li > span").css("color", "white");
+    $(".pagination > li > a, .pagination > li > span").click(function (e) {
+        set_option("page", $(this).text());
+        compras_ventas_concluidas();
+        e.preventDefault();
+    });
+    recorre(place);
+
 };
