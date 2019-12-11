@@ -62,34 +62,39 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function titulo_tablero($class_backlog, $titulo)
+    {
+
+        return h(
+            text_icon(_text('fa fa-angle-up ', $class_backlog), $titulo),
+            5,
+            " text-uppercase "
+        );
+
+    }
+
+    function widget_content($asunto, $id_ticket, $target)
+    {
+        return d(
+            d($asunto, 12),
+            [
+                "class" => _text("row ui-widget-content border draggable padding_10 
+                            shadow  cursor_pointer ver_detalle_ticket top_5 ", $target),
+                "id" => $id_ticket,
+
+            ]
+        );
+    }
 
     function format_tablero($tickets)
     {
 
-        $title_ab = text_icon('fa fa-angle-up up_ab', "[AB]");
-        $ab[] = h(
-            $title_ab,
-            5,
-            "text-uppercase "
-        );
-
-        $title_backlog = text_icon('fa fa-angle-up up_backlog', "Backlog");
-        $title_backlog = h($title_backlog, 5, " text-uppercase ");
-        $backlog[] = d($title_backlog);
-
-
-        $pendiente = text_icon('fa fa-angle-up up_pendiente', "Pendiente");
-        $pendiente = h($pendiente, 5, " text-uppercase ");
-        $pendiente[] = d($pendiente);
-
-        $haciendo = h(text_icon('fa fa-angle-up up_proceso', "Proceso"), 5, " text-uppercase ");
-        $haciendo[] = d($haciendo);
-        $hecho = h(text_icon('fa fa-angle-up up_hecho', "hecho"), 5, " text-uppercase ");
-        $hecho[] = d($hecho);
-
-        $revision = h(text_icon('fa fa-angle-up up_revision', "Revisión"), 5,
-            " text-uppercase ");
-        $revision[] = d($revision);
+        $ab[] = titulo_tablero('up_ab', "[AB]");
+        $backlog[] = titulo_tablero('up_backlog', "Backlog");
+        $pendiente[] = titulo_tablero('up_pendiente', "Pendiente");
+        $haciendo[] = titulo_tablero('up_proceso', "Proceso");
+        $hecho[] = titulo_tablero('up_hecho', "hecho");
+        $revision[] = titulo_tablero('up_revision', "Revisión");
 
         foreach ($tickets as $row) {
 
@@ -100,127 +105,91 @@ if (!function_exists('invierte_date_time')) {
 
             switch ($row["status"]) {
 
-
                 case 7:
 
-                    $ab[] = d(
-                        d($asunto, 12),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10 
-                            shadow ab_target cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-
-                        ]
-                    );
+                    $ab[] = widget_content($asunto, $id_ticket, 'ab_target');
 
                     break;
 
 
                 case 5:
 
-                    $backlog[] = d(
-                        d($asunto, 12),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow  backlog_target 
-                            cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-
-                        ]
-                    );
+                    $backlog[] = widget_content($asunto, $id_ticket, 'backlog_target');
 
                     break;
 
 
                 case 0:
 
-                    $pendiente[] = d(
-                        d($asunto, 12),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow blue_target cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-                        ]
-                    );
+                    $pendiente[] = widget_content($asunto, $id_ticket, 'blue_target');
 
                     break;
 
                 case 1:
 
-                    $haciendo[] = d(
-                        d($asunto, 12),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow 
-                            proceso_target 
-                            cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-
-                        ]
-                    );
+                    $haciendo[] = widget_content($asunto, $id_ticket, 'proceso_target');
 
                     break;
                 case 2:
 
-                    $text = ajustar(
+                    $text = flex(
                         $asunto,
                         icon("fas fa-check-circle hecho",
                             [
                                 "id" => $id_ticket
                             ]
-                        )
-                    );
-                    $hecho[] = d(
-                        d(
-                            $text, 12
                         ),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10
-                             shadow hecho_target cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-
-                        ]
+                        'justify-content-between'
                     );
 
+                    $hecho[] = widget_content($text, $id_ticket, 'hecho_target');
 
                     break;
 
                 case 6:
 
-                    $revision[] = d(d($asunto, 12),
-                        [
-                            "class" => "row ui-widget-content border draggable padding_10 shadow revision_target cursor_pointer ver_detalle_ticket top_5",
-                            "id" => $id_ticket,
-
-                        ]);
+                    $revision[] = widget_content($asunto, $id_ticket, 'revision_target');
 
                     break;
-
-
             }
         }
 
-        $response[] = d(append($ab), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_ab",
-            "id" => 7,
-        ]);
-        $response[] = d(append($backlog), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_backlog",
-            "id" => 5,
-        ]);
-        $response[] = d(append($pendiente), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_pendiente",
-            "id" => 0,
-        ]);
-        $response[] = d(append($haciendo), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_haciendo",
-            "id" => 1,
-        ]);
-        $response[] = d(append($hecho), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_hecho",
-            "id" => 2,
-        ]);
-        $response[] = d(append($revision), [
-            "class" => "col-lg-2 border pading_10 mh_700 droppable bloque_revision",
-            "id" => 6,
-        ]);
+        $base = 'col-lg-2 border pading_10 mh_700 droppable';
+        $response[] = d($ab,
+            [
+                "class" => _text($base, " bloque_ab"),
+                "id" => 7,
+            ]
+        );
+        $response[] = d($backlog,
+            [
+                "class" => _text($base, " bloque_backlog"),
+                "id" => 5,
+            ]
+        );
+        $response[] = d($pendiente,
+            [
+                "class" => _text($base, " bloque_pendiente"),
+                "id" => 0,
+            ]
+        );
+        $response[] = d($haciendo,
+            [
+                "class" => _text($base, " bloque_haciendo"),
+                "id" => 1,
+            ]
+        );
+        $response[] = d($hecho,
+            [
+                "class" => _text($base, " bloque_hecho"),
+                "id" => 2,
+            ]
+        );
+        $response[] = d($revision, [
+                "class" => _text($base, " bloque_revision"),
+                "id" => 6,
+            ]
+        );
 
         return append($response);
 
