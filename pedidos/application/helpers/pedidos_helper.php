@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("", "col-lg-1 ");
         $response[] = d(
             cliente_compra_inf($r, $data["tipos_entregas"], $domicilio,
-            $num_compras, $data["usuario"], $id_recibo, $cupon), 4
+                $num_compras, $data["usuario"], $id_recibo, $cupon), 4
         );
         $response[] = hiddens_detalle($r);
 
@@ -47,7 +47,7 @@ if (!function_exists('invierte_date_time')) {
         $recibo = $data["recibo"];
         $id_servicio = $data["id_servicio"];
 
-        $r[] =  $data['breadcrumbs'];
+        $r[] = $data['breadcrumbs'];
         $z[] = seguimiento($recibo, $data);
         $z[] = resumen_orden($data, $recibo, $id_servicio);
         $r[] = append($z);
@@ -104,6 +104,7 @@ if (!function_exists('invierte_date_time')) {
     function resumen_orden($data, $recibo, $id_servicio)
     {
 
+
         $z = [];
         $servicio = $data["servicio"];
         $es_vendedor = $data["es_vendedor"];
@@ -131,10 +132,11 @@ if (!function_exists('invierte_date_time')) {
 
             $status = prm_def($recibo, "status");
             $text = "";
-            if (!in_array($status, [15, 9, 10])) {
+            if (!in_array($status, [15, 9, 10]) && $tipo_entrega == 2) {
 
                 $text = ($es_servicio) ?
-                    "PLANEADO PARA EL DÍA " : "FECHA EN QUE SE  ESTIMA LLEGARÁ TU PEDIDO";
+                    "PLANEADO PARA EL DÍA " :
+                    "FECHA EN QUE SE  ESTIMA LLEGARÁ TU PEDIDO";
                 $text = add_text($text, format_fecha($fecha), 1);
             }
 
@@ -143,6 +145,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = $evaluacion;
         $z[] = h($text, 4);
+        $z[] = text_domicilio($data);
         $id_recibo = prm_def($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
@@ -162,8 +165,93 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $a[] = append($z);
-        return d(append($a), "col-lg-3");
 
+        return d($a, 3);
+
+
+    }
+
+    function text_domicilio($data)
+    {
+
+
+        $recibo = $data['recibo'];
+        $domicilio = $data['domicilio'];
+        $tipo_entrega = $domicilio['tipo_entrega'];
+        $text = "";
+
+        switch ($tipo_entrega) {
+
+            case 1:
+
+                $punto_encuetro = $domicilio['domicilio'];
+                if (es_data($punto_encuetro)) {
+
+                    $pe = $punto_encuetro[0];
+                    $tipo = $pe['tipo'];
+                    $nombre_linea = $pe['nombre_linea'];
+                    $numero = $pe['numero'];
+                    $nombre = $pe['nombre'];
+
+
+                    $text = _text(
+                        'TIENES UNA CITA EL DÍA ',
+                        format_fecha(pr($recibo, 'fecha_contra_entrega'), 1),
+                        ' EN ',
+                        'ESTACIÓN DEL METRO DE CIUDAD DE MÉXICO, ',
+                        strong($nombre),
+                        ' ',
+                        $tipo,
+                        ' #',
+                        $numero,
+                        ' ',
+                        $nombre_linea,
+                        ' '
+                    );
+                }
+
+                break;
+
+            case 2:
+
+                $domicilio = $domicilio['domicilio'];
+                if (es_data($domicilio)) {
+
+                    $domicilio = $domicilio[0];
+                    $calle = $domicilio['calle'];
+                    $numero_exterior = $domicilio['numero_exterior'];
+                    $asentamiento = $domicilio['asentamiento'];
+                    $municipio = $domicilio['municipio'];
+                    $ciudad = $domicilio['ciudad'];
+                    $cp = $domicilio['cp'];
+
+                    $text = _text(
+                        $calle,
+                        ' #',
+                        $numero_exterior,
+                        ' ',
+                        $asentamiento,
+                        ', ',
+                        $municipio,
+                        ' ',
+                        $ciudad,
+                        ' C.P. ',
+                        $cp
+                    );
+
+
+                }
+
+                break;
+
+            default:
+
+                break;
+
+        }
+
+
+        return $text;
 
     }
 
@@ -172,9 +260,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = $data["recibo"];
-//        $domicilio = $data["domicilio"];
-//        $id_servicio = $r["id_servicio"];
-
         $punto_entrega = $data['punto_entrega'];
         $lista_direcciones = $data["lista_direcciones"];
         $lista_puntos_encuentro = $data['puntos_encuentro'];
@@ -183,7 +268,7 @@ if (!function_exists('invierte_date_time')) {
         $tipo_entrega = $r["tipo_entrega"];
         $domicilio_entrega = $data['domicilio_entrega'];
 
-        $response[] =  $data['breadcrumbs'];
+        $response[] = $data['breadcrumbs'];
         $response[] =
             d(
                 h('selecciona una dirección de envío',

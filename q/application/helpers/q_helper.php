@@ -1191,6 +1191,7 @@ if (!function_exists('invierte_date_time')) {
         if ($adeudos_cliente > 0) {
 
             $pendiente = round($adeudos_cliente, 2);
+
             $text = ajustar(
                 d('Saldo por liquidar', 'black '),
                 d(
@@ -1380,8 +1381,6 @@ if (!function_exists('invierte_date_time')) {
             $preguntas["html"],
             $respuestas["html"],
             d($compras_sin_cierre["html"], "top_20"),
-
-
         ];
 
         $response["lista_pendientes"] =

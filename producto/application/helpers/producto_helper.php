@@ -262,7 +262,7 @@ if (!function_exists('invierte_date_time')) {
         );
         //$r[] = text_diponibilidad($existencia, $es_servicio);
         $r[] = $tiempo_entrega;
-        $r[] = btn("ordenar entrega", ["class" => "text-left mt-5 text-uppercase"]);
+        $r[] = btn("Lo quiero", ["class" => "text-left mt-5 text-uppercase"]);
         $r[] = form_close();
         return d(append($r), "contenedor_form");
 
@@ -624,10 +624,10 @@ if (!function_exists('invierte_date_time')) {
 
 
                 d(
-                    text_icon("fa fa-long-arrow-right", "AGREGAR A TU LISTA DE DESEOS ", [], 0)
+                    text_icon("fa fa-long-arrow-right", "Lo deseo ", [], 0)
                     ,
                     [
-                        'class' => 'agregar_a_lista mt-5 black strong strong p-3 mt-3 border  l_deseos padding_10  border-dark mt-3',
+                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1  border-dark mt-2',
 
                     ]
 
@@ -640,10 +640,10 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session == 1) {
                 $btn =
                     d(
-                        text_icon("fa fa-long-arrow-right", "AGREGAR A TU LISTA DE DESEOS", [], 0),
+                        text_icon("fa fa-long-arrow-right", "Lo deseo", [], 0),
                         [
                             "id" => 'agregar_a_lista_deseos_add',
-                            "class" => "cursor_pointer  border agregar_a_lista_deseos l_deseos padding_10  border-dark mt-3"
+                            "class" => "cursor_pointer  border agregar_a_lista_deseos l_deseos p-1  border-dark mt-3 text-uppercase strong border_bottom_big"
 
                         ]
 

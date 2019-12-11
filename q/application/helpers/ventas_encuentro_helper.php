@@ -12,15 +12,17 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $ventas_pe = $row["ventas_en_punto"];
-            $entrega = ($ventas_pe > 1) ? span("ENTREGAS", "black") : span("ENTREGA", "black");
-            $str =  text_icon("icon fa fa-space-shuttle black",  a_enid(
+            $str = ($ventas_pe > 1) ? "entregas" : "entrega";
+            $entrega = span($str, 'black text-uppercase');
+            $str = text_icon("icon fa fa-space-shuttle black", a_enid(
 
                 h($row["nombre_punto_encuentro"], 3, "title") .
                 p(
-                    span($ventas_pe, "f2 strong rounded shadow rounded padding_10 border black top_20") .
+                    span(
+                        $ventas_pe,
+                        "f2 strong rounded shadow rounded padding_10 border black top_20"
+                    ) .
                     $entrega
-
-
                     , "description"
                 )
                 ,
@@ -35,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = format_linea(get_resumen($data));
         $r[] = hr("mt-5");
         $r[] = h("VENTAS POR ESTACIÓN ", 4, "text-left");
-        $r[] = h(add_text("ESTACIONES DE REPARTO: " ,  $p), 6, "text-left underline");
+        $r[] = h(add_text("ESTACIONES DE REPARTO: ", $p), 6, "text-left underline");
         $r[] = d(append($z), "main-timeline2");
         return d(append($r), "container");
     }
@@ -53,20 +55,17 @@ if (!function_exists('invierte_date_time')) {
             $nombre_linea = $data[$a]["nombre_linea"];
             $num = $data[$a]["num"];
             $total = $total + $num;
-            $r =  [];
+            $r = [];
             $reparto++;
             $text = [];
             if ($b < 1) {
 
-
                 $text[] = btw(
-
                     h($nombre_linea, 9, "letter-spacing-1")
                     ,
                     p($num, "text-center strong underline f15")
                     ,
                     "timeline-content"
-
                 );
                 $text[] = border();
                 $r[] = d(append($text), "col-lg-2 mt-5 text-center");
@@ -84,7 +83,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = d(append($text), "col-lg-2 mt-5 text-center");
             }
-            $response[] =  append($r);
+            $response[] = append($r);
         }
 
         $x[] = h("VENTAS EN LÍNEAS DE METRO: " . $total, 4, "text-left");
@@ -110,7 +109,8 @@ if (!function_exists('invierte_date_time')) {
                         "id_linea_metro" => $id_linea,
                         "num" => 1,
                         "nombre_linea" => $nombre
-                    ]);
+                    ]
+                );
 
             } else {
                 $response = search($response, $id_linea, $nombre);
@@ -130,11 +130,13 @@ if (!function_exists('invierte_date_time')) {
         }
 
         if ($b < 1) {
-            array_push($response, [
-                "id_linea_metro" => $id_linea,
-                "num" => 1,
-                "nombre_linea" => $nombre_linea
-            ]);
+            array_push($response,
+                [
+                    "id_linea_metro" => $id_linea,
+                    "num" => 1,
+                    "nombre_linea" => $nombre_linea
+                ]
+            );
         }
         return $response;
     }

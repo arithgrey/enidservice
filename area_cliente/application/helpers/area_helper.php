@@ -3,7 +3,6 @@
 if (!function_exists('invierte_date_time')) {
     function render_user($data)
     {
-
         $action = $data["action"];
 
         $r[] = hiddens_tickects($action, $data["ticket"]);
@@ -30,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
             'tab_pagos'
         );
         $r[] = tab_seccion(
-            place("place_resumen_servicio"),
+            place("place_resumen_servicio col-lg-8 col-lg-offset-2"),
             'tab_renovar_servicio'
         );
 
@@ -40,12 +39,21 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        //$response[] = d(menu($action), 2);
+        $response[] = d(menu($action), 2);
+        $response[] = paseo();
         $response[] = tab_content($r, 10);
+
         return append($response);
 
     }
 
+    function paseo()
+    {
+
+        $r[] = _titulo('UPS! aún no tenemos pedidos ...');
+        $r[] = format_link('Explorémos un poco!', ['href' => path_enid('search_q3')]);
+        return d(d($r, 4, 1), 'row mt-5 mb-5 d-none visita_tienda');
+    }
 
     function hiddens_tickects($action, $ticket)
     {
@@ -69,12 +77,12 @@ if (!function_exists('invierte_date_time')) {
                 "VER COMENTARIOS",
                 [
                     "href" => path_enid("recomendacion", $id_usuario),
-                    "class" => "a_enid_blue  top_30 text-center"
+                    "class" => "a_enid_blue top_30 text-center"
                 ]
             );
 
             $x[] = d($alcance, " text-center top_30");
-            $r[] = d(d(append($x), 6, 1), "text-center");
+            $r[] = d(d($x, 6, 1), "text-center");
         }
         return append($r);
 
@@ -136,7 +144,6 @@ if (!function_exists('invierte_date_time')) {
             a_enid(
                 text_icon("fa fa-flag", " VENDER"),
                 path_enid("vender_nuevo")
-
             );
 
         $link_ventas = tab(
@@ -152,7 +159,6 @@ if (!function_exists('invierte_date_time')) {
         $place_ventas = place("place_num_pagos_notificados");
 
         $link_compras = tab(
-
             text_icon('fa fa-credit-card-alt', " COMPRAS"),
             "#tab_mis_pagos",
             [
@@ -186,23 +192,20 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $list = [
+            $link_compras,
             $link_vendedor,
             $link_ventas,
             $place_ventas,
-            $link_compras,
             $link_notificaciones,
             $link_valoraciones,
             $link_lista_deseo,
-            li($link_pagos,
-                [
-                    "class" => 'li_menu',
-                ]
-            ),
-
+            $link_pagos,
         ];
-        return ul($list,
+
+        return ul(
+            $list,
             [
-                "class" => "shadow border padding_10 d-flex flex-column justify-content-between"
+                "class" => "d-flex flex-column justify-content-between"
             ]
         );
 

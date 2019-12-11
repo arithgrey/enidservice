@@ -30,12 +30,12 @@ if (!function_exists('invierte_date_time')) {
         foreach ($tags as $row) {
 
             $response[] = d(
-                    text_icon('fa fa-times', $row),
-                    [
-                            "class" => 'tag_servicio btn btn-primary btn-sm',
-                            "id" => $row,
-                            "onclick" => "eliminar_tag('".$row."' ,  '".$id_servicio."' );",
-                    ]
+                text_icon('fa fa-times', $row),
+                [
+                    "class" => 'tag_servicio btn btn-primary btn-sm',
+                    "id" => $row,
+                    "onclick" => "eliminar_tag('" . $row . "' ,  '" . $id_servicio . "' );",
+                ]
             );
         }
 
@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
         $accion = a_enid(
             'INDICA TU NÚMERO TELEFÓNICO',
-                path_enid("administracion_cuenta")
+            path_enid("administracion_cuenta")
         );
         $link = ($has_phone < 1) ? $accion : "";
 
@@ -67,29 +67,27 @@ if (!function_exists('invierte_date_time')) {
         if ($num_images == 0) {
 
             $ayuda = _text(
-                    "MUESTRA IMAGENES SOBRE TU ",
-                    $tipo_promocion,
-                    " A TUS CLIENTES"
+                "MUESTRA IMAGENES SOBRE TU ",
+                $tipo_promocion,
+                " A TUS CLIENTES"
             );
             $text[] = h(
-                    $ayuda
-                    ,
-                    5
-                    ,
-                    'white shadow padding_10 black_enid_background'
-                    ,
-                    1
+                $ayuda
+                ,
+                5
+                ,
+                'white shadow padding_10 black_enid_background'
             );
 
-            $incentivo = _text("TU ", $tipo_promocion,
-                    "SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
+            $incentivo = _text(
+                "TU ", $tipo_promocion,
+                "SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
             );
             $text[] = d(
-                    $incentivo
-                    ,
-                    "top_40 bottom_40"
-                    ,
-                    1);
+                $incentivo
+                ,
+                "top_40 bottom_40"
+            );
 
             return append($text);
         }
@@ -100,13 +98,13 @@ if (!function_exists('invierte_date_time')) {
 
         $response = ($num_images < 1 || $id_perfil != 20) ?
 
-                a_enid(
-                        "DESCARTAR PROMOCIÓN",
-                        [
-                                "class" => 'descartar_promocion border padding_10 text-right top_30 bottom_50',
-                                "id" => $id_servicio,
-                        ]
-                ) : "";
+            a_enid(
+                "DESCARTAR PROMOCIÓN",
+                [
+                    "class" => 'descartar_promocion border padding_10 text-right top_30 bottom_50',
+                    "id" => $id_servicio,
+                ]
+            ) : "";
 
         return $response;
     }

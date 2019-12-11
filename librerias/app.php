@@ -319,9 +319,6 @@ class app extends CI_Controller
                     "js" =>
                         [
                             'area_cliente/principal.js',
-                            'area_cliente/proyectos_persona.js',
-                            'area_cliente/cobranza.js',
-                            'js/direccion.js',
                             "alerts/jquery-confirm.js",
 
                         ],

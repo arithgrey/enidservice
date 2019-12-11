@@ -100,7 +100,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $res[] = agregar_imgs();
-            $res[] = d(append($r), "contenedor_global_servicio");
+            $res[] = d($r, "contenedor_global_servicio");
             $response = append($res);
 
         }
@@ -290,7 +290,6 @@ if (!function_exists('invierte_date_time')) {
         $d[] = format_colores($es_servicio, $info_colores);
 
 
-
         return d(append($d), ["class" => "tab-pane " . $ext_2, "id" => "tab_info_producto"]);
 
     }
@@ -373,6 +372,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "url",
                     "name" => "url_mercado_libre",
                     "class" => "form-control url_mercado_libre",
+                    "id" => "url_mercado_libre",
                     "value" => $url_ml
                 ]
             );

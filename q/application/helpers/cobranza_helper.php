@@ -3,35 +3,35 @@
 }
 if (!function_exists('invierte_date_time')) {
 
-    function texto_costo_envio_info_publico($envio_gratis, $costo_envio_cliente)
-    {
-
-        if ($envio_gratis > 0) {
-
-            $r = [
-                "cliente" => "ENTREGA GRATIS!",
-                "cliente_solo_text" => "ENTREGA GRATIS!",
-                "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO",
-            ];
-
-
-        } else {
-
-            $text = $costo_envio_cliente . " MXN DE ENVÍO";
-            $str = _text(
-                "MÁS ",
-                $costo_envio_cliente,
-                " MXN DE TU ENTREGA"
-            );
-            $r = [
-                "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
-                "cliente_solo_text" => $str,
-                "cliente" => $text
-            ];
-        }
-
-        return $r;
-    }
+//    function texto_costo_envio_info_publico($envio_gratis, $costo_envio_cliente,$tipo_entrega)
+//    {
+//
+//        if ($envio_gratis > 0) {
+//
+//            $r = [
+//                "cliente" => "ENTREGA GRATIS!",
+//                "cliente_solo_text" => "ENTREGA GRATIS!",
+//                "ventas_configuracion" => "TU PRECIO YA INCLUYE EL ENVÍO",
+//            ];
+//
+//
+//        } else {
+//
+//            $text = $costo_envio_cliente . " MXN DE ENVÍO";
+//            $str = _text(
+//                "MÁS ",
+//                $costo_envio_cliente,
+//                " MXN DE TU ENTREGA"
+//            );
+//            $r = [
+//                "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
+//                "cliente_solo_text" => $str,
+//                "cliente" => $text
+//            ];
+//        }
+//
+//        return $r;
+//    }
 
     function valida_fecha_entrega($fecha_entrega)
     {
