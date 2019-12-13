@@ -22,6 +22,10 @@ let secciones_estaciones_metro = [
     contenedor_estaciones,
     text_seleccion_linea
 ];
+
+/*global*/
+let $es_regreso = 0;
+
 /*global selectores*/
 let $form_punto_encuentro = $(form_punto_encuentro);
 let $input_nombre = $form_punto_encuentro.find('.nombre');
@@ -31,6 +35,9 @@ let $input_pw = $form_punto_encuentro.find('.pw');
 let $fecha_entrega = $('.fecha_entrega');
 let $form_punto_encuentro_horario = $(form_punto_encuentro_horario);
 let $desglose_estaciones = $(desglose_estaciones);
+let $linea_metro = $('.linea_metro');
+let $link_acceso = $(".link_acceso");
+let $boton_enviar_solicitud = $('.botton_enviar_solicitud');
 
 
 window.history.pushState({page: 1}, "", "");
@@ -41,14 +48,13 @@ window.history.pushState({page: 5}, "", "");
 window.onpopstate = function (event) {
 
     if (event) {
-
         valida_retorno();
     }
 };
 
 $(document).ready(() => {
 
-    $(".botton_enviar_solicitud").click(() => {
+    $boton_enviar_solicitud.click(() => {
 
         despliega([seccion_horarios_entrega], 0);
         despliega([".informacion_del_cliente"], 1);
@@ -56,14 +62,15 @@ $(document).ready(() => {
         set_option("vista", 4);
         verifica_formato_default_inputs(0);
     });
+
     $form_punto_encuentro.submit(registra_usuario);
     $form_punto_encuentro_horario.submit(notifica_punto_entrega);
-    $(".link_acceso").click(set_link);
-    $(".linea_metro").click(muestra_estaciones);
+    $link_acceso.click(set_link);
+    $linea_metro.click(muestra_estaciones);
+
     set_option({"vista": 1, "punto_encuentro_previo": 0});
     despliega(secciones_default, 0);
     $desglose_estaciones.removeClass('d-lg-flex');
-
     $input_nombre.keypress(envia_formulario);
     $input_telefono.keypress(envia_formulario);
     $input_pw.keypress(envia_formulario);
@@ -74,14 +81,17 @@ let estaciones = function (id, q) {
 
     let url = "../q/index.php/api/punto_encuentro/linea_metro/format/json/";
     set_option("id_linea", id);
-    let data_send = {};
-    if (get_parameter(".primer_registro") == 1) {
+
+    let data_send = [{}];
+    if (parseInt(get_parameter(".primer_registro")) == 1) {
+
         data_send = {
             "id": id,
             "v": 1,
             "servicio": get_parameter(".servicio"),
             "q": q
         };
+
     } else {
         data_send = {
             "id": id,
@@ -90,6 +100,7 @@ let estaciones = function (id, q) {
             "q": q
         };
     }
+
     request_enid("GET", data_send, url, response_estaciones);
 };
 
@@ -97,17 +108,20 @@ let muestra_estaciones = function () {
 
     let q = texto_buscador();
     let id = 0;
-    if (get_option("id_linea") != undefined && get_option("id_linea") > 0) {
+    let id_linea = get_option("id_linea");
+    if ($es_regreso < 1 && parseInt(id_linea) > 0) {
 
-        id = get_option("id_linea");
+        id = id_linea;
 
     } else {
 
         id = get_parameter_enid($(this), "id");
-        set_option("nombre_linea", get_parameter_enid($(this), "nombre_linea"));
+        let $nombre_linea = get_parameter_enid($(this), "nombre_linea");
+        set_option("nombre_linea", $nombre_linea);
+        $es_regreso--;
     }
 
-    if (id > 0) {
+    if (parseInt(id) > 0) {
         estaciones(id, q);
     }
 };
@@ -154,7 +168,7 @@ let registra_usuario = (e) => {
             "id_servicio": get_parameter(".servicio")
         });
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-        $('.botton_enviar_solicitud').attr("disabled", true);
+        $boton_enviar_solicitud.attr("disabled", true);
         bloquea_form(form_punto_encuentro);
         valida_load();
         request_enid("POST", data_send, url, response_registro_usuario);
@@ -172,7 +186,7 @@ let reset_posibles_errores = function () {
     $input_telefono.next().next().addClass('d-none');
     $input_pw.next().next().addClass('d-none');
 
-}
+};
 let focus_inputs_form = (len_telefono, len_pw) => {
 
 
@@ -188,7 +202,7 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 
 let response_registro_usuario = (data) => {
-    debugger;
+
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
         despliega(['.continuar', '.informacion_del_cliente'], 0);
@@ -236,12 +250,11 @@ let response_notificacion_punto_entrega = (data) => {
 
     valida_load();
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
-    if (get_parameter(".primer_registro") == 1) {
+    if (parseInt(get_parameter(".primer_registro")) == 1) {
         redirect_forma_pago(data.id_recibo);
     } else {
         redirect_forma_pago(get_parameter(".recibo"));
-        // let url = "../pedidos/?seguimiento=" + get_parameter(".recibo") + "&domicilio=1";
-        // redirect(url);
+
     }
 };
 let agregar_nota = () => {
@@ -258,7 +271,7 @@ let valida_retorno = function () {
 
             break;
         case 2:
-
+            $es_regreso++;
             despliega(secciones_estaciones_metro, 1);
             despliega([place_estaciones_metro, ksearch, text_seleccion_estacion], 0);
             break;
@@ -284,7 +297,7 @@ let valida_retorno = function () {
             set_option("vista", 4);
             despliega(['.continuar', '.informacion_del_cliente'], 1);
             $('.usuario_existente').addClass('d-none');
-            $('.botton_enviar_solicitud').attr("disabled", false);
+            $boton_enviar_solicitud.attr("disabled", false);
             desbloqueda_form(form_punto_encuentro);
 
             break;
@@ -332,19 +345,21 @@ let buscador_estaciones_disponibles = () => {
     if (document.body.querySelector(".ksearch")) {
         $(ksearch).keypress(function (e) {
             let code = (e.keyCode ? e.keyCode : e.which);
-            if (code == 13) {
+            if (code === 13) {
                 muestra_estaciones();
             }
         });
     }
 };
+
 let redirect_forma_pago = (id_recibo) => {
 
     redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
-}
+};
+
 let envia_formulario = function (e) {
     let code = (e.keyCode ? e.keyCode : e.which);
-    if (code == 13) {
+    if (code === 13) {
         $form_punto_encuentro.submit();
     }
 };
