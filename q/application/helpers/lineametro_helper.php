@@ -55,7 +55,6 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_linea_metro", $id);
             $extra_clase_imagen = ($index !== false) ? '' : ' lm bb_hv filter_g';
-
             $img = img(
                 [
                     "src" => $row["icon"],
@@ -66,8 +65,6 @@ if (!function_exists('invierte_date_time')) {
             );
 
             if ($index !== false) {
-
-//                $negra[] = d($img, 3);
 
             } else {
 
