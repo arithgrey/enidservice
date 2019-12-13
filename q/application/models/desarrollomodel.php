@@ -25,7 +25,7 @@ class desarrollomodel extends CI_Model
 	function get_comparativa_desarrollo_calidad($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_tareas_solicitadas(0, $_num, $param);
 		$this->create_tmp_tareas_realizadas(0, $_num, $param);
 		$this->create_tmp_fechas(0, $_num, $param);
@@ -84,7 +84,7 @@ class desarrollomodel extends CI_Model
 	function get_resumen_desarrollo($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 
 		$this->create_tmp_tareas(0, $_num, $param);
 		$this->create_tmp_tareas_horario(0, $_num, $param);
@@ -124,7 +124,7 @@ class desarrollomodel extends CI_Model
 	function get_comparativa_desarrollo($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 
 		$param["tiempo"] = 1;
 		$this->create_tmp_table_comparativas(0, $_num, $param);

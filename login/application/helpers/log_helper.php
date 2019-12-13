@@ -192,8 +192,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = "<form " . $attr . ">";
         $r[] = input(
             [
-                "name" => get_random(),
-                "value" => get_random(),
+                "name" => mt_rand(),
+                "value" => mt_rand(),
                 "type" => "hidden",
             ]
         );

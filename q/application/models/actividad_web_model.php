@@ -289,7 +289,7 @@ class actividad_web_model extends CI_Model
 	function get_comparativa_landing_page($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_langings($_num, 0, $param);
 		$data_complete["semanal"] = $this->visitas_enid_semana($_num);
 		$this->create_tmp_langings($_num, 1, $param);
@@ -478,7 +478,7 @@ class actividad_web_model extends CI_Model
 	{
 
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$sql_visitas = $this->crea_visitas_por_periodo($param);
 		$this->crea_tabla_temploral("visitas_periodo_$_num", $sql_visitas, 0);
 		$query_get = "SELECT * FROM visitas_periodo_$_num";

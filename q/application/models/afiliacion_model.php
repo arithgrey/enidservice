@@ -11,7 +11,7 @@ class afiliacion_model extends CI_Model
 	function repo_afiliaciones($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_fechas(0, $_num, $param);
 		$this->create_tmp_afiliados(0, $_num, $param);
 
