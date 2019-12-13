@@ -678,4 +678,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function filtra_tarea($param)
+    {
+
+        $base = ' t.status != 4 ';
+        $busqueda =  $param['keyword'];
+        $keyword = _text('AND t.asunto LIKE ', '"%', $busqueda, '%"');
+        $filtro = (strlen($busqueda) > 0) ? _text($base, $keyword) : $base;
+        return $filtro;
+
+    }
+
 }

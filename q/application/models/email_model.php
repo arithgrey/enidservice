@@ -35,7 +35,7 @@ class email_model extends CI_Model
 	function get_correos_enviados_accesos($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_accesos(0, $_num, $param);
 		$this->create_tmp_envios(0, $_num, $param);
 

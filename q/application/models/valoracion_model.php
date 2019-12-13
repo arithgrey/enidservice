@@ -53,7 +53,7 @@ class valoracion_model extends CI_Model
 
 	function get_valoraciones_usuario($param)
 	{
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_servicios_usuario($_num, 1, $param);
 		$id_usuario = $param["id_usuario"];
 		$query_get = "SELECT 
@@ -219,7 +219,7 @@ class valoracion_model extends CI_Model
 	function get_desglose_valoraciones_vendedor($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_servicios_usuario($_num, 1, $param);
 		$limit = $this->get_limit($param);
 		$query_get = "SELECT v.* FROM  valoracion v 

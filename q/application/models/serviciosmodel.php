@@ -81,7 +81,7 @@ class serviciosmodel extends CI_Model
 	function num_periodo($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_servicio(1, $_num, $param);
 		$query_get = "SELECT
                         DATE(fecha_registro)fecha_registro, 
@@ -123,7 +123,7 @@ class serviciosmodel extends CI_Model
 	function get_productos_solicitados($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_productos_solicitados(0, $_num, $param);
 		$query_get = "SELECT * FROM tmp_productos_$_num ORDER BY num_keywords DESC";
 		$result = $this->db->query($query_get);
@@ -217,7 +217,7 @@ class serviciosmodel extends CI_Model
 	function get_top_semanal_vendedor($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_views_productos_usuario(0, $_num, $param);
 		$query_get = "SELECT 
                         id_servicio , 
@@ -408,7 +408,7 @@ class serviciosmodel extends CI_Model
 	function busqueda($param)
 	{
         $response["total_busqueda"] = $this->get_resultados_posibles($param);
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_productos_disponibles(0, $_num, $param);
 		$response["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
 		if ($param["agrega_clasificaciones"] > 0 ) {
@@ -735,7 +735,7 @@ class serviciosmodel extends CI_Model
 	{
 
 		$data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_productos_disponibles(0, $_num, $param);
 		$query_get = "SELECT * FROM tmp_producto_$_num ";
 		$result = $this->db->query($query_get);

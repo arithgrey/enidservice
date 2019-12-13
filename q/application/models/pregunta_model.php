@@ -117,7 +117,7 @@ class Pregunta_model extends CI_Model
 	function get_preguntas_sin_leer_vendedor($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_servicios_venta_usuario(0, $_num, $param);
 
 		$query_get = "SELECT 
@@ -162,7 +162,7 @@ class Pregunta_model extends CI_Model
 	function get_preguntas_realizadas_a_vendedor($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_servicios_venta_usuario(0, $_num, $param);
 		$this->create_tmp_servicios_venta_usuario_pregunta(0, $_num, $param);
 		$query_get = "SELECT * FROM 
@@ -208,7 +208,7 @@ class Pregunta_model extends CI_Model
 	function get_preguntas_realizadas($param)
 	{
 
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_preguntas_realizadas(0, $_num, $param);
 		$this->create_tmp_preguntas_servicios(0, $_num, $param);
 

@@ -196,7 +196,7 @@ class usuario_model extends CI_Model
 	{
 
 		$id_perfil = $param["id_perfil"];
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_tmp_usuarios_perfil(0, $_num, $id_perfil);
 		$query_get =
 			"SELECT
@@ -396,7 +396,7 @@ class usuario_model extends CI_Model
 
 	function get_equipo_enid_service($param)
 	{
-		$_num = get_random();
+		$_num = mt_rand();
 		$this->create_usuarios_enid_service(0, $_num, $param);
 		$query_get = "SELECT 
                     u.* , 

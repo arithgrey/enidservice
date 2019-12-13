@@ -945,12 +945,6 @@ function get_campo($param, $key, $label = "", $add_label = 0)
 }
 
 
-function get_random()
-{
-    return mt_rand();
-}
-
-
 function usuario($q2)
 {
     $id_usuario_envio = 0;

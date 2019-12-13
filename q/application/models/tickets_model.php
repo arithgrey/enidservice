@@ -38,7 +38,7 @@ class Tickets_model extends CI_Model
         return $this->update([$q => $q2], ["id_ticket" => $id]);
     }
 
-    function create_tmp_tareas_tickets($flag, $_num, $param)
+    function tmp_tareas_tickets($flag, $_num, $param)
     {
 
         $this->db->query(get_drop("tmp_tareas_ticket_$_num"));
@@ -64,8 +64,8 @@ class Tickets_model extends CI_Model
     function get_tickets_desarrollo($param, $simple = 0)
     {
 
-        $_num = get_random();
-        $this->create_tmp_tareas_tickets(0, $_num, $param);
+        $_num = mt_rand();
+        $this->tmp_tareas_tickets(0, $_num, $param);
 
         $query_get = "SELECT                       
                       t.id_ticket,
@@ -102,17 +102,17 @@ class Tickets_model extends CI_Model
 
         $result = $this->db->query($query_get);
         $data = $result->result_array();
-        $this->create_tmp_tareas_tickets(1, $_num, $param);
+        $this->tmp_tareas_tickets(1, $_num, $param);
         return $data;
     }
 
     function get_tickets($param)
     {
 
-        $_num = get_random();
-        $this->create_tmp_tareas_tickets(0, $_num, $param);
-
-        $query_get = "SELECT                       
+        $_num = mt_rand();
+        $this->tmp_tareas_tickets(0, $_num, $param);
+        $where = filtra_tarea($param);
+        $base = "SELECT                       
                       t.id_ticket,
                       t.asunto,
                       t.mensaje,
@@ -130,16 +130,17 @@ class Tickets_model extends CI_Model
                         tmp_tareas_ticket_$_num tp
                       ON 
                         t.id_ticket =  tp.id_ticket
-                    WHERE t.status != 4
-                        ORDER BY                                                         
-                        t.status ";
+                    WHERE                     
+                    ";
 
-
-        $data  = $this->db->query($query_get)->result_array();
-        $this->create_tmp_tareas_tickets(1, $_num, $param);
+        $order_by = "ORDER BY  t.status";
+        $query_get = _text($base, $where, $order_by);
+        $data = $this->db->query($query_get)->result_array();
+        $this->tmp_tareas_tickets(1, $_num, $param);
         return $data;
 
     }
+
 
     function insert($params, $return_id = 0, $debug = 0)
     {
@@ -206,7 +207,7 @@ class Tickets_model extends CI_Model
     function get_solicitudes_saldo($param)
     {
 
-        $_num = get_random();
+        $_num = mt_rand();
         $this->create_tmp_solicitud_pago_usuario(0, $_num, $param);
         $query_get = "SELECT * FROM tmp_solicitud_pago_usuario_$_num s 
                         INNER JOIN solicitud_pago sp
