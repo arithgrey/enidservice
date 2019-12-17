@@ -65,6 +65,11 @@ let form_nuevo_ticket = () => {
 let r_form_ticket = data => {
 
     render_enid(".place_form_tickets", data);
+    if (document.body.querySelector(".input_enid_format")) {
+
+        $(".input_enid_format :input").focus(next_label_input_focus);
+        $(".input_enid_format :input").focusout(next_label_focus_out);
+    }
     $(".form_ticket").submit(registra_ticket);
 };
 
@@ -72,7 +77,7 @@ let registra_ticket = e => {
 
     let url = "../q/index.php/api/tickets/index/format/json/";
     let data_send = $(".form_ticket").serialize();
-    request_enid("POST", data_send, url, response_registro_ticket, ".place_registro_ticket");
+    request_enid("POST", data_send, url, response_registro_ticket);
     e.preventDefault();
 
 };

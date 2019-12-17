@@ -163,7 +163,6 @@ let inf_ticket = function (e) {
     }
 
     if (id_recibo > 0) {
-        //$menu_navegacion_completo.addClass('d-none');
         set_option("id_recibo", id_recibo);
         let url = "../q/index.php/api/recibo/resumen_desglose_pago/format/json/";
         let data_send = {"id_recibo": get_option("id_recibo"), "cobranza": 1};

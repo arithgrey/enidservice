@@ -245,54 +245,81 @@
     border-style: solid;
     border-width: 1px;
 }
-.cerrar_ticket{
-    padding:5px;
-    color:black;
-    text-decoration:under-line;
+
+.cerrar_ticket {
+    padding: 5px;
+    color: black;
+    text-decoration: under-line;
 }
-.cerrar_ticket:hover{
-    color:blue;
+
+.cerrar_ticket:hover {
+    color: blue;
 }
-.note-codable{
+
+.note-codable {
     display: none;
 
 }
-.contenedor_tareas{
+
+.contenedor_tareas {
     background: #f0f3f6;
 }
-.descripcion_tarea:hover .icon_delete_description{
 
-    display: block!important;
+.descripcion_tarea:hover .icon_delete_description {
+
+    display: block !important;
 }
-.input_descripcion{
+
+.input_descripcion {
     display: none;
 }
-.mh_700{
+
+.mh_700 {
     min-height: 700px;
 }
-.blue_target{
+
+.blue_target {
     background: #2626b0;
     color: white;
 }
-.ab_target{
+
+.ab_target {
     background: #004d50;
     color: white;
 }
-.backlog_target{
+
+.backlog_target {
     background: #2c9e7f;
     color: white;
 }
-.hecho_target{
+
+.hecho_target {
     background: #011d3c;
     color: white;
 }
-.proceso_target{
 
-    background: orangered;
+.proceso_target {
+
+    background: #004cff;
     color: white;
 }
-.revision_target{
+
+.revision_target {
 
     background: darkslategray;
     color: white;
 }
+.contenedor_tarea .asunto_tarea {
+    font-size: .9em;
+}
+.footer_enid{
+
+    bottom: 0!important;
+
+}
+@media (max-width: 575.98px) {
+    .contenedor_tarea .asunto_tarea {
+        font-size: .7em;
+    }
+}
+

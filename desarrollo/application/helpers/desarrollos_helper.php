@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
             $data["num_departamento"]
         );
 
-        $z[] = place('place_proyectos');
+        $z[] = d('', 'place_proyectos mt-5');
         $z[] = place('place_tickets');
         $r[] = tab_seccion(
             $z,
@@ -27,10 +27,10 @@ if (!function_exists('invierte_date_time')) {
 
         $tab_content = tab_content($r);
 
-        $response[] = hrz(
+        $response[] = dd(
             menu($activa),
-            $tab_content,
-            2
+            $tab_content,2
+
         );
 
         $response[] = hiddens(
@@ -54,29 +54,23 @@ if (!function_exists('invierte_date_time')) {
     function form_ticket_dep($departamentos, $total)
     {
 
-        $r[] = flex(
-
-            input_frm("", "Busqueda",
+        $r[] = input_frm("", "Busqueda",
                 [
                     "name" => "q",
                     "class" => "q",
                     "type" => "text",
                     "id" => "q_busqueda"
                 ]
-            )
-            ,
-            create_select(
-                $departamentos,
-                "depto",
-                "form-control input-sm depto",
-                "depto",
-                "nombre",
-                "id_departamento"
-            )
-            ,
-            "align-items-center justify-content-between"
-        );
+            );
 
+        $r[] = create_select(
+            $departamentos,
+            "depto",
+            "d-none depto",
+            "depto",
+            "nombre",
+            "id_departamento"
+        );
         $r[] = hiddens(
             [
                 "name" => "departamento",
@@ -85,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'num_departamento'
             ]
         );
-        return d(d(append($r), "col-lg-6 col-lg-offset-3 "), 13);
+        return contaiter(d($r, 6, 1));
 
     }
 

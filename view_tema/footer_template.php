@@ -1,3 +1,6 @@
+<?= gb_modal() ?>
+<?= d(d("© 2019 ENID SERVICE.", "blue_enid3 white p-2 col"),'footer_enid col-lg-12 p-0') ?>
+
 <?= hiddens(
     [
         "class" => "in_session",
@@ -11,7 +14,7 @@
         "value" => $titulo
     ]
 ) ?>
-
+</body>
 
 <?php if ($in_session == 0): ?>
     <?php
@@ -100,9 +103,10 @@
 
     ?>
     <?php if (!isset($proceso_compra) && !is_null($proceso_compra) && $proceso_compra == 0): ?>
-        <?= d(append($list_footer), "base_paginas_extra", 1) ?>
+        <?= d($list_footer, "base_paginas_extra", 1) ?>
     <?php endif ?>
 <?php endif; ?>
+
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
         <?php if (file_exists($link)): ?>
@@ -145,7 +149,7 @@
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>
-<?= gb_modal() ?>
+
 <?php if (prm_def($this->input->get(), "debug")): ?>
     <style>
         body * {
@@ -153,6 +157,6 @@
         }
     </style>
 <?php endif; ?>
-</body>
-<?= d("© 2019 ENID SERVICE.", "blue_enid3 white p-2 footer_enid w-100 col-lg-12") ?>
+
+
 </html>

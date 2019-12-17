@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <?= $this->load->view("../../../view_tema/header_meta_enid") ?>
-    <div id="flipkart-navbar" class="menu_navegacion_completo bottom_50">
+    <div id="flipkart-navbar" class="menu_navegacion_completo mb-sm-4 mb-md-5">
 
         <?php
 

@@ -159,7 +159,7 @@ class Tickets extends REST_Controller
     function form_GET()
     {
 
-        $this->response(get_format_tickets($this->get_departamentos($this->get())));
+        $this->response(frm_ticket($this->get_departamentos($this->get())));
     }
 
     private function get_departamentos($q)
