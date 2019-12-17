@@ -2804,23 +2804,25 @@ function gb_modal()
         ), "modal-footer");
 
 
-    $r[] = d(d(
-        d(append($mod), "modal-content"),
-        [
-            "class" => "modal-dialog",
-            "role" => "document",
+    $r[] = d(
+        d(
+            d($mod, "modal-content"),
+            [
+                "class" => "modal-dialog",
+                "role" => "document",
+
+            ]
+        ), [
+
+            "class" => "modal",
+            "tabindex" => "-1",
+            "role" => "dialog",
+            "id" => "modal-error-message",
 
         ]
-    ), [
+    );
 
-        "class" => "modal",
-        "tabindex" => "-1",
-        "role" => "dialog",
-        "id" => "modal-error-message",
-
-    ]);
-
-    return append($r);
+    return contaiter($r);
 
 }
 
@@ -3087,7 +3089,7 @@ function input_frm($col, $text_label, $config_input = [], $text_place = "")
 
 
     $str = strlen($text_place) > 0 ? $text_place : "";
-    $text = add_text(
+    $text = _text(
         input($config_input, 0, 0),
         label(
             $text_label
@@ -3097,18 +3099,18 @@ function input_frm($col, $text_label, $config_input = [], $text_place = "")
         ,
         d(
             $str,
-            add_text("mt-3 color_red  d-none place_input_form_",
+            add_text("mt-3 color_red d-none place_input_form_",
                 $config_input["id"])
         )
     );
     $r[] = d($text, "input_enid_format w-100");
     if (is_numeric($col)) {
 
-        return ($col > 0) ? d(append($r), $col) : append($r);
+        return ($col > 0) ? d($r, $col) : append($r);
 
     } else {
 
-        return d(append($r), $col);
+        return d($r, $col);
     }
 
 
@@ -3153,7 +3155,7 @@ function format_fecha($date, $horas = 0)
 
 }
 
-function format_link($str, $attributes, $primario = 1 , $texto_strong = 1 )
+function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 {
 
 
@@ -3161,13 +3163,13 @@ function format_link($str, $attributes, $primario = 1 , $texto_strong = 1 )
         "text-center borde_accion p-2 bg_black white  text-uppercase col " :
         "text-center borde_accion p-2 border_enid col black text-uppercase ";
 
-    $clase .= ($texto_strong) ?  ' font-weight-bold ': '';
+    $clase .= ($texto_strong) ? ' font-weight-bold ' : '';
 
     $att = $attributes;
 
 
     $att["class"] = (array_key_exists("class",
-        $attributes)) ? add_text( $clase , $attributes["class"]) : $clase;
+        $attributes)) ? add_text($clase, $attributes["class"]) : $clase;
 
     return a_enid($str, $att);
 }

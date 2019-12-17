@@ -66,24 +66,27 @@ if (!function_exists('invierte_date_time')) {
     {
 
         return h(
-            text_icon(_text('fa fa-angle-up ', $class_backlog), $titulo),
+            text_icon(_text('fa fa-angle-up font-weight-bold ', $class_backlog), $titulo),
             5,
-            " text-uppercase "
+            " text-uppercase font-weight-bold "
         );
 
     }
 
     function widget_content($asunto, $id_ticket, $target)
     {
-        return d(
-            d($asunto, 12),
-            [
-                "class" => _text("row ui-widget-content border draggable padding_10 
-                            shadow  cursor_pointer ver_detalle_ticket top_5 ", $target),
-                "id" => $id_ticket,
+        return
+            d(
+                $asunto,
+                [
+                    "class" =>
+                        _text(
+                            "row ui-widget-content border draggable padding_10 shadow  cursor_pointer ver_detalle_ticket ",
+                            $target),
+                    "id" => $id_ticket,
 
-            ]
-        );
+                ]
+            );
     }
 
     function format_tablero($tickets)
@@ -99,9 +102,9 @@ if (!function_exists('invierte_date_time')) {
         foreach ($tickets as $row) {
 
             $id_ticket = $row["id_ticket"];
-            $asunto = $row["asunto"];
+            $asunto = p($row["asunto"], 'text-uppercase asunto_tarea');
             $efecto_monetario = $row["efecto_monetario"];
-            $asunto = flex($asunto, crea_estrellas($efecto_monetario, 1), "flex-column");
+            $asunto = flex($asunto, crea_estrellas($efecto_monetario, 1), 'flex-column justify-content-between contenedor_tarea');
 
             switch ($row["status"]) {
 
@@ -154,7 +157,7 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $base = 'col-lg-2 border pading_10 mh_700 droppable';
+        $base = 'col border mh_700 droppable';
         $response[] = d($ab,
             [
                 "class" => _text($base, " bloque_ab"),
@@ -191,20 +194,20 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        return append($response);
+        return contaiter($response);
 
     }
 
-    function get_format_tickets($departamentos)
-    {
-
-        $r[] = d(d("ABRIR SOLICITUD", "titulo_enid"), 6, 1);
-        $r[] = d(get_form_ticket($departamentos), 6, 1);
-        $r[] = place("place_registro_ticket");
-
-        return append($r);
-
-    }
+//    function get_format_tickets($departamentos)
+//    {
+//
+//
+//        $r[] = d(get_form_ticket($departamentos), 6, 1);
+//        $r[] = place("place_registro_ticket");
+//
+//        return append($r);
+//
+//    }
 
     function get_form_respuesta($tarea)
     {
@@ -226,7 +229,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_form_ticket($departamentos)
+    function frm_ticket($departamentos)
     {
 
 
@@ -235,39 +238,43 @@ if (!function_exists('invierte_date_time')) {
             [
                 "name" => "prioridad",
                 "value" => "1",
-            ]);
+            ]
+        );
         $r[] = hiddens(
             [
                 "name" => "mensaje",
                 "id" => "mensaje",
                 "class" => "mensaje",
-            ]);
-        $r[] = d("DEPARTAMENTO AL CUAL SOLICITAS", 1);
-        $r[] = addNRow(
-            create_select(
-                $departamentos,
-                "departamento",
-                "form-control",
-                "departamento",
-                "nombre",
-                "id_departamento"
-            ));
-        $r[] = n_row_12();
-        $r[] = d("MODULO, ASUNTO, TÓPICO", "input-group-addon");
-        $r[] = input(
+            ]
+        );
+
+        $r[] = create_select(
+            $departamentos,
+            "departamento",
+            "form-control d-none",
+            "departamento",
+            "nombre",
+            "id_departamento"
+        );
+
+
+        $solicitud = input_frm('', 'Solicitud',
             [
                 "id" => "asunto",
                 "name" => "asunto",
-                "class" => "form-control",
-                "placeholder" => "MODULO, ASUNTO, TÓPICO",
-                "required" => "true",
+                "required" => true,
                 "type" => "text",
-            ]);
-        $r[] = end_row();
-        $r[] = btn("ABRIR TICKET");
+                "placeholder" => 'Ej. realizar compra'
+            ]
+        );
+
+        $registro = btn("Solicitar");
+
+        $r[] = d(_titulo('¿cual es la tarea?', 0, 'mb-5'));
+        $r[] = dd($solicitud, $registro, 8);
         $r[] = form_close();
 
-        return append($r);
+        return contaiter(d($r,'col-lg-6 col-lg-offset-3 mb-5 p-0'));
 
 
     }
@@ -682,7 +689,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $base = ' t.status != 4 ';
-        $busqueda =  $param['keyword'];
+        $busqueda = $param['keyword'];
         $keyword = _text('AND t.asunto LIKE ', '"%', $busqueda, '%"');
         $filtro = (strlen($busqueda) > 0) ? _text($base, $keyword) : $base;
         return $filtro;

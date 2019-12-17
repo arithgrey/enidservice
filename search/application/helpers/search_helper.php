@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
 
-        $z[] = h(span("FILTRA TU BÚSQUEDA")
+        $z[] = h("FILTRA TU BÚSQUEDA"
             .
             small($busqueda . "(" . $data["num_servicios"] . "PRODUCTOS)", "fp_5")
             ,
@@ -52,20 +52,20 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
-        $fil[] = d(d(append($z), 10, 1), 3);
+        $fil[] = d(d($z, 10, 1), 3);
 
 
-        $seccion = add_text(
+        $seccion = _text(
 
             append($x)
             ,
-            d($paginacion,"row mt-5")
+            d($paginacion,"row mt-md-5")
         );
 
 
 
         $fil[] = d(d($seccion, ["style" => "width:96%!important;" , "class"=> "col-lg-12"]) , 9);
-        $r[] = d(append($fil), "col-lg-12 mt-5");
+        $r[] = d($fil, "col-lg-12 mt-md-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
 
 
@@ -216,7 +216,7 @@ if (!function_exists('invierte_date_time')) {
             endforeach;
 
         }
-        return d(d(append($r), "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light');
+        return d(d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
 
 
     }
@@ -256,7 +256,7 @@ if (!function_exists('invierte_date_time')) {
             $response = d(append($r), "contenedor_sub_categorias");
 
         }
-        return d(d($response, 'contenedor_menu_productos_sugeridos'), " padding_5 mt-5");
+        return d(d($response, 'contenedor_menu_productos_sugeridos'), "  mt-md-5");
     }
     function crea_sub_menu_categorias_destacadas($param)
     {

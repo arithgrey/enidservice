@@ -31,8 +31,6 @@ $("footer").ready(() => {
     if ($(".input_busqueda_producto").length) {
 
         let $busqueda_producto = $(".input_busqueda_producto");
-        // $busqueda_producto.click(anima_busqueda);
-        // $busqueda_producto.blur(anima_busqueda);
         $busqueda_producto.keypress(valida_formato_search);
     }
 
@@ -63,14 +61,6 @@ $("footer").ready(() => {
             verifica_formato_default_inputs(0);
         });
     }
-
-    // if ($('.input_busqueda_inicio').length) {
-    //     $('.input_busqueda_inicio').next('label').addClass('focused_input');
-    // }
-    // if ($('.input_busqueda_termino').length) {
-    //     $('.input_busqueda_termino').next('label').addClass('focused_input');
-    // }
-
 
 });
 let set_option = (key, value = 0) => {
