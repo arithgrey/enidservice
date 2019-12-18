@@ -142,19 +142,6 @@
     font-size: 1.3em;
     color: #001066;
 }
-
-.seccion_form_pedidos .col-lg-4 {
-
-    margin-top: 25px;
-
-
-}
-
-.seccion_form_pedidos .col-lg-6 {
-
-    margin-top: 25px;
-}
-
 .contenedor_entregado {
 
     background: #0046c0;
@@ -166,4 +153,9 @@
 .select_gastos{
 
     height: 42px;
+}
+.form_busqueda_pedidos{
+
+    font-weight: bold;
+    color: #000000;
 }
