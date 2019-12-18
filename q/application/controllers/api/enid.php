@@ -53,7 +53,6 @@ class Enid extends REST_Controller
             "envio_usuario" => $param,
             "tiempo_empleado" => ($inicio - $fin),
             "actividad_enid_service" => $data["resumen"],
-
         ];
 
         $response = ($param["vista"] == 1) ? metricas($response) : $data;

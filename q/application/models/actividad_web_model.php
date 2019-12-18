@@ -269,7 +269,7 @@ class actividad_web_model extends CI_Model
 		$query_get = "SELECT 
                       DATE(fecha_registro) fecha ,
                       COUNT(0)total ,                      
-                      SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END)compras_efectivas, 
+                      SUM(CASE WHEN status in (1,7,9,11,12,14,15) THEN 1 ELSE 0 END)compras_efectivas, 
                       SUM(CASE WHEN status = 6 AND  " . $where . " THEN 1 ELSE 0 END)solicitudes,
                       SUM(CASE WHEN status = 7 THEN 1 ELSE 0 END)envios, 
                       SUM(CASE WHEN status = 10 AND " . $where_cancelacion . " THEN 1 ELSE 0 END)cancelaciones

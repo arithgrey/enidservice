@@ -504,7 +504,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
-        $inicio = d(h(_text(count($recibos), "Elemtos encontrados "), 5), "mt-5");
+        $inicio = _titulo(_text(count($recibos), " resultados "), 1,"mt-5");
 
         return _text($tb_fechas, $inicio, append($tb));
     }

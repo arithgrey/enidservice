@@ -571,55 +571,57 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 4,
             ];
 
-        $r[] = h("ORDENES DE COMPRA", 3);
-        $r[] = form_open("",
-            ["class" => "form_busqueda_pedidos ", "method" => "post"]);
+
+        $r[] = form_open("", ["class" => "form_busqueda_pedidos row", "method" => "post"]);
         $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas);
+        $es_busqueda = keys_en_arreglo($param,
+            [
+                'fecha_inicio',
+                'fecha_termino',
+                'type',
+                'servicio'
+            ]
+        );
+        if ($es_busqueda) {
 
-        if (is_array($param) && array_key_exists("fecha_inicio", $param)
-
-            && array_key_exists("fecha_termino", $param)
-
-            && array_key_exists("type", $param)
-
-            && array_key_exists("servicio", $param)
-
-        ) {
-
-            $r[] = d(frm_fecha_busqueda($param["fecha_inicio"],
-                $param["fecha_termino"]));
-            $r[] = hiddens([
-                "name" => "consulta",
-                "class" => "consulta",
-                "value" => 1,
-            ]);
-            $r[] = hiddens([
-                "name" => "servicio",
-                "class" => "servicio",
-                "value" => $param["servicio"],
-            ]);
-            $r[] = hiddens([
-                "name" => "type",
-                "class" => "type",
-                "value" => $param["type"],
-            ]);
+            $r[] = frm_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]);
+            $r[] = hiddens(
+                [
+                    "name" => "consulta",
+                    "class" => "consulta",
+                    "value" => 1,
+                ]
+            );
+            $r[] = hiddens(
+                [
+                    "name" => "servicio",
+                    "class" => "servicio",
+                    "value" => $param["servicio"],
+                ]
+            );
+            $r[] = hiddens(
+                [
+                    "name" => "type",
+                    "class" => "type",
+                    "value" => $param["type"],
+                ]
+            );
 
 
         } else {
 
-            $r[] = d(frm_fecha_busqueda());
+            $r[] = frm_fecha_busqueda();
         }
 
 
         $r[] = form_close();
-        $z[] = d(append($r),
-            " border padding_10 shadow row seccion_form_pedidos top_50");
-        $z[] = d(place("place_pedidos top_50 bottom_50"), 1);
-        $z[] = d(frm_busqueda(), 1);
+        $z[] = d($r, "p-5 shadow seccion_form_pedidos container");
+        $z[] = contaiter(place("place_pedidos "));
+        $z[] = contaiter(frm_busqueda());
 
-        $response = d(append($z), 10, 1);
-
-        return $response;
+        $response[] = d(_titulo("ORDENES DE COMPRA"), 'col-lg-10 col-lg-offset-1 p-md-0 mb-4');
+        $response[] =  d($z,10,1);
+        return append($response);
 
 
     }
@@ -641,50 +643,46 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = btw(
-            d("CLIENTE", "strong"),
-            d(input([
+        $r[] = input_frm(6, 'Cliente',
+            [
                 "name" => "cliente",
-                "class" => "form-control",
+                "id" => "cliente",
                 "placeholder" => "Nombre, correo, telefono ...",
-            ])),
-            "col-lg-4 d-flex align-items-center justify-content-between"
-        );
-        $r[] = hiddens([
-            "name" => "v",
-            'value' => 1,
+            ]);
 
-        ]);
-        $r[] = btw(
-            d("#RECIBO", "strong"),
-            d(input([
+
+        $r[] = hiddens(
+            [
+                "name" => "v",
+                'value' => 1,
+            ]
+        );
+
+        $r[] = input_frm(6, '#Recibo',
+            [
                 "name" => "recibo",
-                "class" => "form-control",
-            ])),
-            "col-lg-4 d-flex align-items-center justify-content-between"
+                "id" => 'busqueda_recibo'
+            ]
         );
 
-        $r[] = btw(
-            d("TIPO ENTREGA", "strong"),
-
-            d(
-                create_select(
-                    $tipos_entregas,
-                    "tipo_entrega",
-                    "tipo_entrega form-control",
-                    "tipo_entrega",
-                    "nombre",
-                    "id",
-                    0,
-                    1,
-                    0,
-                    "-")),
-            "col-lg-4 d-flex align-items-center justify-content-between"
-
+        $r[] = flex(
+            "Tipo de entrega",
+            create_select(
+                $tipos_entregas,
+                "tipo_entrega",
+                "tipo_entrega form-control",
+                "tipo_entrega",
+                "nombre",
+                "id",
+                0,
+                1,
+                0,
+                "-"),
+            "flex-column col-md-4 p-0 mt-3"
         );
-        $r[] = btw(
-            d("STATUS", "strong"),
-            d(create_select(
+
+        $r[] = flex('Status',
+            create_select(
                 $status_ventas,
                 "status_venta",
                 "status_venta  form-control",
@@ -695,14 +693,14 @@ if (!function_exists('invierte_date_time')) {
                 1,
                 0,
                 "-"
-            )),
-            "col-lg-6 d-flex align-items-center justify-content-between"
-
+            )
+            ,
+            "flex-column col-md-4 p-0 mt-3"
         );
 
 
-        $r[] = btw(
-            d("ORDENAR", "strong"),
+        $r[] = flex(
+            "Ordenar",
             create_select(
                 $fechas,
                 "tipo_orden",
@@ -711,8 +709,9 @@ if (!function_exists('invierte_date_time')) {
                 "fecha",
                 "val"
             ),
-            "col-lg-6 d-flex align-items-center justify-content-between"
+            "flex-column col-md-4 p-0 mt-3"
         );
+
 
         return append($r);
 

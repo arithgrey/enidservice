@@ -292,7 +292,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
     $attributes["class"] = (array_key_exists("class",
         $attributes)) ? ($attributes["class"] . " ") : "  ";
-    
+
     if ($bootstrap) {
 
         $attributes["class"] = (array_key_exists("class", $attributes)) ? (
@@ -348,7 +348,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
                 if (prm_def($attributes, "name") === "nombre") {
                     $attributes["onpaste"] = "paste_nombre();";
-                    if(prm_def($attributes, 'no_validar') <  1){
+                    if (prm_def($attributes, 'no_validar') < 1) {
                         $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
                     }
                     $attributes["minlength"] = 3;
@@ -1898,13 +1898,13 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 }
 
 
-function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
+function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 p-0', $base_termino = 'col-lg-4 mt-5 p-0', $base_boton='col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
     $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
     $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
-    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha inicio",
+    $r[] = input_frm($base_inicio, "Fecha inicio",
         [
             "name" => 'fecha_inicio',
             "class" => "input_busqueda_inicio",
@@ -1915,7 +1915,7 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
     );
 
 
-    $r[] = input_frm('col-lg-4 mt-5 p-0', "Fecha término",
+    $r[] = input_frm($base_termino, "Fecha término",
         [
             "name" => 'fecha_termino',
             "class" => "input_busqueda_termino",
@@ -1926,9 +1926,9 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0)
 
     );
 
-    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), 'col-lg-4 mt-5 p-0 p-0');
+    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), $base_boton);
 
-    return contaiter(append($r));
+    return append($r);
 
 
 }
@@ -1953,7 +1953,7 @@ function input_hour_date()
     ]);
 
     return d(
-        append($r),
+        $r,
         [
             "class" => "input-group date form_datetime ",
             "data-date-format" => "dd MM yyyy - HH:ii p",
@@ -2231,7 +2231,7 @@ function social($proceso_compra, $desc_web, $black = 1)
 
     }
 
-    return d(append($r), "d-flex align-items-center");
+    return d($r, "d-flex align-items-center");
 
 }
 
@@ -3313,12 +3313,20 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
 
 }
 
+function keys_en_arreglo($param, $keys = [])
+{
 
-//function exists_array_def($data, $key, $exists = 1, $fail = 0)
-//{
-//    return (is_array($data) && array_key_exists($key, $data)) ? $exists : $fail;
-//
-//}
+    $response = true;
+    if (es_data($param)) {
 
+        for ($a = 0; $a < count($keys); $a++) {
+            if (!in_array($keys[$a], $param)) {
+                $response = false;
+                break;
+            }
+        }
+    }
 
+    return $response;
 
+}
