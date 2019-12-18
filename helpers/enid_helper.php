@@ -292,8 +292,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
     $attributes["class"] = (array_key_exists("class",
         $attributes)) ? ($attributes["class"] . " ") : "  ";
-
-
+    
     if ($bootstrap) {
 
         $attributes["class"] = (array_key_exists("class", $attributes)) ? (
@@ -349,8 +348,9 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
                 if (prm_def($attributes, "name") === "nombre") {
                     $attributes["onpaste"] = "paste_nombre();";
-                    $attributes["class"] = (array_key_exists("class", $attributes)) ? (
-                        $attributes["class"] . " validar_nombre ") : " validar_nombre ";
+                    if(prm_def($attributes, 'no_validar') <  1){
+                        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
+                    }
                     $attributes["minlength"] = 3;
                 }
                 break;

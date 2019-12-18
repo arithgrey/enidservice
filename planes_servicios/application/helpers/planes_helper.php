@@ -89,7 +89,8 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "onkeyup" => "transforma_mayusculas(this)",
                 "required" => true,
-                "placeholder" => "Nombre de tu artículo o servicio"
+                "placeholder" => "Nombre de tu artículo o servicio",
+                "no_validar" => 1
             ]
         );
 
