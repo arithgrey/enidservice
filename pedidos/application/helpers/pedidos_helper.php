@@ -615,9 +615,9 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = form_close();
-        $z[] = d($r, "p-5 shadow seccion_form_pedidos container");
-        $z[] = contaiter(place("place_pedidos "));
-        $z[] = contaiter(frm_busqueda());
+        $z[] = d($r, "p-5 shadow  ");
+        $z[] = place("place_pedidos ");
+        $z[] = frm_busqueda();
 
         $response[] = d(_titulo("ORDENES DE COMPRA"), 'col-lg-10 col-lg-offset-1 p-md-0 mb-4');
         $response[] =  d($z,10,1);

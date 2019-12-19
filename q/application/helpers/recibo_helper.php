@@ -106,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
 
         $es[] = td();
         tr(append($es));
-        $response[] = "</table>";
+        $response[] = "</div>";
 
         $response[] = tr();
 
@@ -448,7 +448,8 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        $def = ["class" => "header_table_recibos"];
+        $def = ["class" => "header_table_recibos col-lg-2"];
+        $defrow = ["class" => "col-lg-2 border fp8"];
 
         $tb[] = "<table class='table_enid_service top_20 table '>";
 
@@ -457,11 +458,11 @@ if (!function_exists('invierte_date_time')) {
         $tbl[] = get_th("", $def);
         $tbl[] = get_th("STATUS", $def);
         $tbl[] = get_th("TIPO ENTREGA", $def);
-        $tbl[] = get_th("SALDO CUBIERTO", $def);
+//        $tbl[] = get_th("SALDO CUBIERTO", $def);
         $tbl[] = get_th("MONTO COMPRA", $def);
         $tbl[] = get_th($ops_tipo_orden_text[$tipo_orden], $def);
 
-        $tb[] = tr($tbl);
+        $tb[] = tr($tbl, ['class' => 'mb-5 mt-5 border font-weight-bold']);
 
         foreach ($recibos as $row) {
 
@@ -479,7 +480,7 @@ if (!function_exists('invierte_date_time')) {
             $extra = (in_array($status, [9, 7, 11, 12])) ? " entregado" : "";
             $extra = ($status == 10) ? " cancelado " : $extra;
 
-            $tb[] = "<tr id='" . $recibo . "' class='desglose_orden cursor_pointer  " . $extra . "' >";
+            $tb[] = "<div id='" . $recibo . "' class='desglose_orden cursor_pointer d-flex" . $extra . "' >";
 
             $id_servicio = $row["id_servicio"];
             $url_img = $row["url_img_servicio"];
@@ -491,13 +492,13 @@ if (!function_exists('invierte_date_time')) {
                     "style" => "width:40px!important;height:40px!important;",
                 ]
             );
-            $tb[] = td($recibo);
-            $tb[] = td($img);
-            $tb[] = td($estado_compra);
-            $tb[] = td($tipo_entrega);
-            $tb[] = td(_text($row["saldo_cubierto"], "MXN"));
-            $tb[] = td(_text($monto_a_pagar, "MXN"));
-            $tb[] = td($entrega);
+            $tb[] = td($recibo, $defrow);
+            $tb[] = td($img, $defrow);
+            $tb[] = td($estado_compra, $defrow);
+            $tb[] = td($tipo_entrega, $defrow);
+//            $tb[] = td(_text($row["saldo_cubierto"], "MXN"), $defrow);
+            $tb[] = td(_text($monto_a_pagar, "MXN"), $defrow);
+            $tb[] = td($entrega, $defrow);
             $tb[] = "</tr>";
 
         }

@@ -262,7 +262,7 @@ class app extends CI_Controller
             $data["meta_keywords"] = $meta_keywords;
             $data["desc_web"] = $desc;
             $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
-
+            $data["menu"] = "";
 
         }
 

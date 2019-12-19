@@ -312,11 +312,6 @@
 .contenedor_tarea .asunto_tarea {
     font-size: .9em;
 }
-.footer_enid{
-
-    bottom: 0!important;
-
-}
 @media (max-width: 575.98px) {
     .contenedor_tarea .asunto_tarea {
         font-size: .7em;

@@ -1,11 +1,9 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
-$enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+$enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
-<title>
-	<?= $titulo ?>
-</title>
+<title><?= $titulo ?></title>
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <?= meta('keywords', $meta_keywords . " "); ?>
@@ -25,19 +23,18 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:locale" content="es_ES"/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="<?= $desc_web; ?>"/>
-<meta property="og:url" content="<?= $enlace_actual; ?>"/>
+<meta property="og:url" content="<?= $enlace; ?>"/>
 <meta property="og:site_name" content="Enid Service"/>
 <meta property="og:image" content="<?= $url_img_post ?>"/>
 <meta property="og:description" content="<?= $desc_web; ?>"/>
 <meta property="fb:app_id" content="708127766008103"/>
 <meta property="business:contact_data:email" content="ventas@enidservices.com"/>
 <meta property="business:contact_data:phone_number" content="5552967027"/>
-<meta property="business:contact_data:website" content="<?= $enlace_actual; ?>"/>
+<meta property="business:contact_data:website" content="<?= $enlace; ?>"/>
 <meta property="article:publisher" content="https://www.facebook.com/enidservicemx"/>
 <meta property="place:location:latitude" content="23.634501"/>
 <meta property="place:location:longitude" content="-102.552784"/>
 <meta property="fb:admins" content="645179855527609"/>
-
 <!--Twitter Card data-->
 <meta name="twitter:card" content="summary">
 <meta name="twitter:card" content="summary_large_image">
@@ -47,7 +44,6 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="twitter:creator" content="@enidservice">
 <meta name="twitter:image" content="<?= $url_img_post ?>">
 <meta name="twitter:image:src" content="<?= $url_img_post ?>">
-
 <meta itemprop="name" content="Enid Service">
 <meta itemprop="description" content="<?= $desc_web; ?>">
 <meta itemprop="image logo" content="<?= $url_img_post ?>">
@@ -59,7 +55,6 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
 <script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>
-
 <script src="../js_tema/bootstrap.min.js?<?= version_enid ?>">
 </script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -72,5 +67,3 @@ $enlace_actual = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <script src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script src="../js_tema/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
-
-
