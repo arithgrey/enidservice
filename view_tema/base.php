@@ -1,1 +1,2 @@
-<?=contaiter($page)?>
+<?=d($page,13)?>
+

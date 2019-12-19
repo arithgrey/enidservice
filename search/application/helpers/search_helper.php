@@ -264,13 +264,13 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($param as $row) {
 
-            $response [] = d(a_enid($row["nombre_clasificacion"],
+            $response [] = a_enid($row["nombre_clasificacion"],
                 [
                     "href" => "?q=&q2=" . $row["primer_nivel"],
                     "class" => ' text-uppercase black '
                 ]
 
-            ));
+            );
 
         }
 
@@ -289,9 +289,9 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = append($t);
         $r[] = append($sec);
-        $res  = d(d( append($r), " no-gutters  no-gutters d-flex  flex-row justify-content-center align-items-center"), "card mb-3 border-0" );
+        $res  = d(d( $r, " no-gutters  no-gutters d-flex  flex-row justify-content-center align-items-center"), "card mb-3 border-0" );
         $f  = d( $res,13);
-        return d($f,"col-lg-6 top_50 bottom_50");
+        return d($f,6);
     }
 
     function crea_menu_principal_web($param)

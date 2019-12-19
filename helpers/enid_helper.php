@@ -536,15 +536,16 @@ function td($val = '', $attributes = [])
 }
 
 
-function get_th($val = '', $attributes = '')
+function get_th($val = '', $attributes = [])
 {
 
-    return "<th " . add_attributes($attributes) . " NOWRAP >" . $val . "</th>";
+    return "<div " . add_attributes($attributes) . " NOWRAP >" . $val . "</div>";
 }
 
 
-function tr($val = '', $attributes = '')
+function tr($val = '', $attributes = [])
 {
+
 
     if (is_array($val)) {
 
@@ -1898,7 +1899,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 }
 
 
-function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 p-0', $base_termino = 'col-lg-4 mt-5 p-0', $base_boton='col-lg-4 mt-5 p-0 p-0 align-self-end')
+function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 p-0', $base_termino = 'col-lg-4 mt-5 p-0', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
     $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
@@ -2822,67 +2823,68 @@ function gb_modal()
         ]
     );
 
-    return contaiter($r);
+    return d($r,13);
 
 }
 
 function menu_session_mobil($in_session)
 {
 
-    $b = a_enid("×",
-        [
-            "href" => "javascript:void(0)",
-            "class" => "closebtn closebtn_lateral f15  white p-3 border",
-            "onclick" => "closeNav()",
-        ]);
+    $r[] = d(
+        a_enid("×",
+            [
+                "href" => "javascript:void(0)",
+                "class" => "closebtn closebtn_lateral p-3  font-weight-bold h1 black",
+                "onclick" => "closeNav()",
+            ]
+        ), 'ml-auto mr-5 mt-5 '
+    );
 
-    $r[] = d($b, "ml-auto");
-
-    $form[] = '<form  action="../search">';
+    $form[] = open_form(['action' => "../search"]);
     $form[] = flex(
-
-        input([
-            "name" => "q",
-            "placeholder" => "artículo",
-            "class" => "input_search ",
-            'style' => 'height: 41px!important;',
-        ]),
-        btn("BUSCAR", ['class' => 'boton-busqueda']),
-        "justify-content-between ",
-        "align-self-end"
+        input(
+            [
+                "name" => "q",
+                "placeholder" => "artículo",
+                "class" => "input_search w-100",
+                'style' => 'height: 41px!important;',
+            ]
+        ),
+        btn("buscar",
+            [
+                'class' => 'boton-busqueda'
+            ]
+        ),
+        "justify-content-between "
     );
     $form[] = form_close();
-    $r[] = d(append($form), "my-auto");
+
+
+    $r[] = d($form);
 
 
     if ($in_session < 1) {
 
         $r[] = d(
-            a_enid("INICIAR SESSION",
+            a_enid("accede a tu cuenta",
                 [
-                    "class" => " white top_10 strong fp9",
+                    "class" => "white font-weight-bold contenedor-lateral-menu w-100 text-uppercase text-right",
                     "href" => "../login",
                 ]
-            ),
-
-
-            "contenedor-lateral-menu "
-
+            ), 'row w-100'
         );
     }
 
-    return d(d(append($r), "row col-lg-12 h-100"),
-        ["id" => "mySidenav", "class" => "sidenav"]);
+
+    $menu_lateral = d(flex($r, 'd-flex flex-column  align-items-center justify-content-between h-100'), ["id" => "mySidenav", "class" => "sidenav"]);
+
+    return addNRow($menu_lateral);
 
 }
 
-function tmp_menu($is_mobile, $id_usuario, $menu)
+function tmp_menu($id_usuario, $menu)
 {
-
-
     $notificaciones = btw(
-
-
         a_enid(
             flex(
                 icon("fa fa-bell white"),
@@ -2939,13 +2941,12 @@ function tmp_menu($is_mobile, $id_usuario, $menu)
             ]
         ),
     ];
-    $opciones_menu = d(append($menu_usuario), 'dropdown-menu mw_250 p-3');
+    $opciones_menu = d($menu_usuario, 'dropdown-menu mw_250 p-3');
     $extra_menu = [
         $imagen_usuario,
-
         $opciones_menu,
     ];
-    $menu = d(append($extra_menu), 'dropdown dropleft');
+    $menu = d($extra_menu, 'dropdown dropleft');
 
     return flex($notificaciones, $menu, "mr-5");
 
@@ -3010,7 +3011,7 @@ function frm_search(
 
     } else {
 
-        return add_text(d(append($r)), d(tmp_menu($is_mobile, $id_usuario, $menu)));
+        return add_text(d($r), d(tmp_menu($id_usuario, $menu)));
 
     }
 
@@ -3330,3 +3331,92 @@ function keys_en_arreglo($param, $keys = [])
     return $response;
 
 }
+
+function opciones_populares()
+{
+
+    $response[] = a_enid(
+        "POPULARES",
+        [
+            "class" => "white  f11 border-right frecuentes border-right-enid",
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=1&order=4")
+        ]
+    );
+    $response[] = a_enid(
+        "NOVEDADES",
+        [
+            "class" => "white  f11 border-right frecuentes border-right-enid"
+            ,
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=1"
+            )
+        ]
+    );
+
+    $response[] = a_enid(
+        "SERVICIOS",
+        [
+            "class" => "   white  f11  frecuentes",
+            "href" => path_enid("search", "?q2=0&q=&order=2&order=1&order=9")
+        ]
+    );
+    return flex($response);
+}
+
+function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
+{
+
+    $is_mobile = is_mobile();
+
+    $frecuentes = opciones_populares();
+    $response = [];
+
+    if ($is_mobile < 1 && $in_session < 1) {
+
+        $response[] = get_menu_session($in_session, $proceso_compra);
+        $response[] = d(hrz(get_logo($is_mobile), $frecuentes, 2, "d-flex align-items-center"), 5);
+        $response[] = d(frm_search($clasificaciones_departamentos, $in_session), "col-lg-7 mt-4 p-0");
+
+    } elseif ($is_mobile > 0 && $in_session < 1) {
+
+        $response[] = get_logo($is_mobile, $in_session);
+
+    } elseif ($is_mobile > 0 && $in_session > 0) {
+
+
+        $response[] = ajustar(
+            get_logo($is_mobile, $in_session),
+            tmp_menu($is_mobile, $id_usuario, $menu)
+        );
+
+    } elseif ($is_mobile < 1 && $in_session > 0) {
+
+        $response[] = flex(
+            ajustar(get_logo($is_mobile), $frecuentes, 2),
+            frm_search($clasificaciones_departamentos, $in_session, $is_mobile, $id_usuario, $menu)
+            ,
+            "",
+            "col-lg-7 align-self-center mt-4",
+            "col-lg-5 align-items-center justify-content-between d-flex mt-4"
+
+        );
+    } else {
+
+    }
+
+    $navegacion = d(
+        $response,
+        [
+            'id' => "flipkart-navbar",
+            'class' => "mb-sm-4 mb-md-5 col-lg-12"
+        ]
+    );
+
+    return d($navegacion, 13);
+
+}
+
+function open_form($attr = [])
+{
+    return '<form ' . add_attributes($attr) . ' >';
+}
+
