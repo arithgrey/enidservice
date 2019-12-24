@@ -448,21 +448,17 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        $def = ["class" => "header_table_recibos col-lg-2"];
-        $defrow = ["class" => "col-lg-2 border fp8"];
+        $items = [
+            "ORDEN",
+            "",
+            "STATUS",
+            "TIPO ENTREGA",
+            "MONTO COMPRA",
+            $ops_tipo_orden_text[$tipo_orden],
+        ];
 
-        $tb[] = "<table class='table_enid_service top_20 table '>";
-
-
-        $tbl[] = get_th("ORDEN", $def);
-        $tbl[] = get_th("", $def);
-        $tbl[] = get_th("STATUS", $def);
-        $tbl[] = get_th("TIPO ENTREGA", $def);
-//        $tbl[] = get_th("SALDO CUBIERTO", $def);
-        $tbl[] = get_th("MONTO COMPRA", $def);
-        $tbl[] = get_th($ops_tipo_orden_text[$tipo_orden], $def);
-
-        $tb[] = tr($tbl, ['class' => 'mb-5 mt-5 border font-weight-bold']);
+        $titulos = d_c($items, "font-weight-bold col-lg-2 ");
+        $tb[] = d($titulos, 'mb-3 mt-3 d-none d-md-block row');
 
         foreach ($recibos as $row) {
 
@@ -479,35 +475,40 @@ if (!function_exists('invierte_date_time')) {
 
             $extra = (in_array($status, [9, 7, 11, 12])) ? " entregado" : "";
             $extra = ($status == 10) ? " cancelado " : $extra;
-
-            $tb[] = "<div id='" . $recibo . "' class='desglose_orden cursor_pointer d-flex" . $extra . "' >";
-
             $id_servicio = $row["id_servicio"];
             $url_img = $row["url_img_servicio"];
-            $id_error = "imagen_" . $id_servicio;
             $img = img(
                 [
                     "src" => $url_img,
-                    "id" => $id_error,
-                    "style" => "width:40px!important;height:40px!important;",
+                    "class" => "mx-auto d-block pedido_img"
                 ]
             );
-            $tb[] = td($recibo, $defrow);
-            $tb[] = td($img, $defrow);
-            $tb[] = td($estado_compra, $defrow);
-            $tb[] = td($tipo_entrega, $defrow);
-//            $tb[] = td(_text($row["saldo_cubierto"], "MXN"), $defrow);
-            $tb[] = td(_text($monto_a_pagar, "MXN"), $defrow);
-            $tb[] = td($entrega, $defrow);
-            $tb[] = "</tr>";
 
+            $items = [
+                span($recibo, 'd-md-block d-none'),
+                $img,
+                span($estado_compra,'font-weight-bold estado_compra'),
+                $tipo_entrega,
+                money($monto_a_pagar),
+                $entrega,
+            ];
+
+            $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
+            $tb[] = d(
+                d_c(
+                    $items, 'col-lg-2 border descripcion_compra fp8'),
+                [
+                    'id' => $recibo,
+                    'class' => 'desglose_orden cursor_pointer row  mt-md-0 mt-sm-5 text-center text-md-left' . $extra
+                ]
+            );
         }
 
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
-        $inicio = _titulo(_text(count($recibos), " resultados "), 1,"mt-5");
+        $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
 
-        return _text($tb_fechas, $inicio, append($tb));
+        return _text($tb_fechas, $inicio, d($tb, 'col-lg-12'));
     }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)

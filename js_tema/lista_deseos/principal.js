@@ -36,8 +36,8 @@ $(document).ready(() => {
     });
     $(".btn_buzon").click(function () {
 
-        //carga_num_preguntas();
         carga_buzon();
+
     });
 
     $(".preguntas").click(function (e) {

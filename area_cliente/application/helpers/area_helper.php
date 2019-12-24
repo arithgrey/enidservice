@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $response[] = d(menu($action), 2);
+        $response[] = menu($action);
         $response[] = paseo();
         $response[] = tab_content($r, 10);
 
@@ -202,46 +202,12 @@ if (!function_exists('invierte_date_time')) {
             $link_pagos,
         ];
 
-        return ul(
+        return d(ul(
             $list,
             [
                 "class" => "d-flex flex-column justify-content-between"
             ]
-        );
-
+        ),'menu_area_cliente col-lg-2 p-0');
 
     }
-
-//    function get_format_buzon()
-//    {
-//
-//        $r[] = h("BUZÓN", 3);
-//        $r[] = d(append(
-//
-//            a_enid("HECHAS" .
-//                span("", 'notificacion_preguntas_sin_leer_cliente'),
-//                [
-//                    "class" => "a_enid_black preguntas btn_preguntas_compras",
-//                    "id" => '0'
-//                ]
-//            )
-//            ,
-//
-//            a_enid(
-//                "RECIBIDAS" .
-//                span("", 'notificacion_preguntas_sin_leer_ventas')
-//                ,
-//                [
-//                    "class" => "a_enid_blue preguntas ",
-//                    "id" => "1"
-//                ])
-//
-//        ));
-//
-//        $r[] = place("place_buzon");
-//
-//        return append($r);
-//
-//
-//    }
 }
