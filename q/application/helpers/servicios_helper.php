@@ -559,16 +559,16 @@ if (!function_exists('invierte_date_time')) {
                 [
                     'src' => $s["url_img_servicio"],
                     'alt' => $s["metakeyword"],
-                    'class' => ' mx-auto d-block p-1 mh_270 mah_100_p',
+                    'class' => 'mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310  mh-auto mt-5',
                 ]
             );
 
 
         if ($in_session > 0) {
 
-            $response[] = d(a_enid(append($p), get_url_servicio($id_servicio)));
+            $response[] = d(a_enid($p, get_url_servicio($id_servicio)));
             $response[] = d(editar_servicio($in_session, $id_servicio, $s["id_usuario"], $s["id_usuario_actual"], $id_perfil));
-            $response = d(append($response), "producto_enid d-flex flex-column justify-content-center col-lg-3  top_50 px-3");
+            $response = d($response, "producto_enid d-flex flex-column justify-content-center col-lg-3 top_50 px-3");
 
 
         } else {
@@ -577,7 +577,7 @@ if (!function_exists('invierte_date_time')) {
                 append($p),
                 [
                     "href" => get_url_servicio($id_servicio),
-                    "class" => "col-lg-3 hps top_50 p-1 d-flex align-content-center flex-wrap h_310",
+                    "class" => "col-lg-3 hps mt-5 mx-auto my-auto d-flex align-content-center flex-wrap h_310",
                 ]
             );
         }

@@ -65,10 +65,13 @@
         "value" => $titulo]
 ) ?>
 
+<?=d('','top_100 bottom_100 row')?>
 <?php if ($footer_visible): ?>
-    <footer class='blue_enid3 p-4 white mt-5' id='sticky-footer'>
-        <?= d("© 2019 ENID SERVICE.", 'col-lg-12 p-0'); ?>
-    </footer>
+    <?php if (!is_mobile()): ?>
+        <footer class='blue_enid3 p-4 white mt-5' id='sticky-footer'>
+            <?= d("© 2019 ENID SERVICE.", 'col-lg-12 p-0'); ?>
+        </footer>
+    <?php endif; ?>
 <?php endif; ?>
 </body>
 </html>

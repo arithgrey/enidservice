@@ -1775,3 +1775,11 @@ ul li a {
 #page-content{
     flex: 1 0 auto;
 }
+
+@media (max-width: 575.98px) {
+
+    .mh_sm_310{
+        max-height: 310px !important;
+    }
+
+}
