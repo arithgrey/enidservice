@@ -141,55 +141,55 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
                 break;
             case 2:
 
-                $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-2'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-2'>" . $info . "</{$tipo}>";
 
                 break;
             case 3:
-                $response = "<{$tipo} class='p-0 col-lg-3'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-3'>" . $info . "</{$tipo}>";
                 break;
             case 4:
-                $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-4'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-4'>" . $info . "</{$tipo}>";
                 break;
             case 5:
-                $response = "<{$tipo} class='p-0 col-lg-5'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-5'>" . $info . "</{$tipo}>";
                 break;
             case 6:
 
-                $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-6'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-6'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 7:
 
-                $response = "<{$tipo} class='p-0 col-lg-7'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-7'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 8:
 
-                $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-8'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-8'>" . $info . "</{$tipo}>";
 
                 break;
             case 9:
-                $response = "<{$tipo} class='p-0 col-lg-9'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-9'>" . $info . "</{$tipo}>";
                 break;
 
             case 10:
 
 
-                $response = ($row > 0) ? "<{$tipo} class='p-0 col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class='p-0 col-lg-10'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-10'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 11:
-                $response = "<{$tipo} class='p-0 col-lg-11'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-11'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 12:
 
 
-                $response = "<{$tipo} class='p-0 col-lg-12'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-lg-12'>" . $info . "</{$tipo}>";
 
                 break;
 
@@ -1496,17 +1496,6 @@ function evita_basura($text)
     return $b;
 }
 
-
-//function add_hour($num_hours)
-//{
-//    $nowtime = date("Y-m-d H:i:s");
-//    $num_hours = $num_hours * 60;
-//    $date = date('H:i:s', strtotime($nowtime.' + '.$num_hours.' minute'));
-//
-//    return $date;
-//
-//}
-
 function get_logo($is_mobile, $tipo = 0)
 {
 
@@ -1905,7 +1894,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 }
 
 
-function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 p-0', $base_termino = 'col-lg-4 mt-5 p-0', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
+function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 ', $base_termino = 'col-lg-4 mt-5 ', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
     $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
@@ -2454,69 +2443,69 @@ function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
 
         case 1:
 
-            $response = d($a, "p-0 col-lg-1 " . $extra_left) . d($b,
-                    "p-0 col-lg-11 " . $extra_right);
+            $response = d($a, " col-lg-1 " . $extra_left) . d($b,
+                    " col-lg-11 " . $extra_right);
             break;
 
         case 2:
 
-            $response = d($a, "p-0 col-lg-2 " . $extra_left) . d($b,
-                    "p-0 col-lg-10 " . $extra_right);
+            $response = d($a, " col-lg-2 " . $extra_left) . d($b,
+                    " col-lg-10 " . $extra_right);
 
             break;
         case 3:
 
-            $response = d($a, "p-0 col-lg-3 " . $extra_left) . d($b,
-                    "p-0 col-lg-9 " . $extra_right);
+            $response = d($a, " col-lg-3 " . $extra_left) . d($b,
+                    " col-lg-9 " . $extra_right);
 
             break;
 
         case 4:
 
-            $response = d($a, "p-0 col-lg-4 " . $extra_left) . d($b,
-                    "p-0 col-lg-8 " . $extra_right);
+            $response = d($a, " col-lg-4 " . $extra_left) . d($b,
+                    " col-lg-8 " . $extra_right);
 
             break;
 
         case 5:
 
-            $response = d($a, "p-0 col-lg-5 " . $extra_left) . d($b,
-                    "p-0 col-lg-7 " . $extra_right);
+            $response = d($a, " col-lg-5 " . $extra_left) . d($b,
+                    " col-lg-7 " . $extra_right);
 
             break;
 
         case 6:
 
-            $response = d($a, "p-0 col-lg-6 " . $extra_left) . d($b,
-                    "p-0 col-lg-6 " . $extra_right);
+            $response = d($a, " col-lg-6 " . $extra_left) . d($b,
+                    " col-lg-6 " . $extra_right);
 
             break;
 
         case 7:
 
-            $response = d($a, "p-0 col-lg-7 " . $extra_left) . d($b,
-                    "p-0 col-lg-5 " . $extra_right);
+            $response = d($a, " col-lg-7 " . $extra_left) . d($b,
+                    " col-lg-5 " . $extra_right);
 
             break;
 
         case 8:
 
-            $response = d($a, "p-0 col-lg-8 " . $extra_left) . d($b,
-                    "p-0 col-lg-4 " . $extra_right);
+            $response = d($a, " col-lg-8 " . $extra_left) . d($b,
+                    " col-lg-4 " . $extra_right);
 
             break;
 
         case 9:
 
-            $response = d($a, "p-0 col-lg-9 " . $extra_left) . d($b,
-                    "p-0 col-lg-3 " . $extra_right);
+            $response = d($a, " col-lg-9 " . $extra_left) . d($b,
+                    " col-lg-3 " . $extra_right);
 
             break;
 
         case 10:
 
-            $response = d($a, "p-0 col-lg-10 " . $extra_left) . d($b,
-                    "p-0 col-lg-2 " . $extra_right);
+            $response = d($a, " col-lg-10 " . $extra_left) . d($b,
+                    " col-lg-2 " . $extra_right);
 
             break;
 
@@ -3214,7 +3203,7 @@ function format_load($extra = '')
         switch ($extra) {
             case 12:
 
-                $extra = 'col-lg-12 p-0';
+                $extra = 'col-lg-12 ';
 
                 break;
             case 13:

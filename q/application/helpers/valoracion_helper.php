@@ -20,9 +20,9 @@ if (!function_exists('invierte_date_time')) {
 
         $b = d(append($z));
         if (es_data($comentarios)) {
-            $response[] = h("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
+            $response[] =_titulo("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
         }
-        $response[] = d($a, 4) . d("", "col-lg-1") . d($b, 7);
+        $response[] = d($a, 'col-lg-4 p-0') . d("", "col-lg-1") . d($b, 7);
 
         return append($response);
 

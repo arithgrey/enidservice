@@ -32,9 +32,9 @@ if (!function_exists('invierte_date_time')) {
             $a,
             $b,
             [
-                "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center p-0"
+                "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center "
             ],
-            "col-lg-4 p-0",
+            "col-lg-4 ",
             "col-lg-8  mt-sm-5 text-center"
         );
         return append($r);
@@ -70,8 +70,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
 
-            d($imagenes["preview"], " align-self-center col-lg-2  d-none d-lg-block d-xl-block d-md-block d-xl-none p-0"),
-            d($imagenes["imagenes_contenido"], "p-0 tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0   col-lg-6 col-lg-offset-3 align-self-center"),
+            d($imagenes["preview"], " align-self-center col-lg-2  d-none d-lg-block d-xl-block d-md-block d-xl-none "),
+            d($imagenes["imagenes_contenido"], " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0   col-lg-6 col-lg-offset-3 align-self-center"),
             "d-flex col-lg-9 mb-5"
         );
         $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row bg-light bloque_derecho_principal");
@@ -132,12 +132,12 @@ if (!function_exists('invierte_date_time')) {
         $producto = append($r);
 
 
-        $response[] = d(h("DESCRIPCIÓN DEL PRODUCTO", 1, "strong"), "col-lg-10 col-lg-offset-1 mt-lg-5 p-0 top_sm_100");
-        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5 p-0 ");
+//        $response[] = d(h("DESCRIPCIÓN DEL PRODUCTO", 2, "strong"), "col-lg-10 col-lg-offset-1 mt-lg-5  top_sm_100");
+        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5  ");
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes), 10, 1);
 
         $response[] = d(d("", "place_valoraciones mt-5"), 10, 1);
-        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none p-0");
+        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar  bottom_100"), 10, 1);
 
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
@@ -379,8 +379,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $i = pre_youtube($imgs, $yt);
-        $izquierdo = ($i["es_imagen"] > 0) ? "col-lg-7 p-0" : "col-lg-6 col-sm-12";
-        $derecha = ($i["es_imagen"] > 0) ? "col-lg-5 p-0" : "col-lg-6 col-sm-12";
+        $izquierdo = ($i["es_imagen"] > 0) ? "col-lg-7 p-0 " : "col-lg-6 col-sm-12 p-0";
+        $derecha = ($i["es_imagen"] > 0) ? "col-lg-5 " : "col-lg-6 col-sm-12 ";
 
         $flex = ($i["es_imagen"] > 0) ? "align-items-center" : ["d-lg-flex "];
 
