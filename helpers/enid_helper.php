@@ -542,6 +542,12 @@ function get_th($val = '', $attributes = [])
     return "<div " . add_attributes($attributes) . " NOWRAP >" . $val . "</div>";
 }
 
+function _th($val = '', $attributes = [])
+{
+
+    return d($val, $attributes);
+}
+
 
 function tr($val = '', $attributes = [])
 {
@@ -2823,7 +2829,7 @@ function gb_modal()
         ]
     );
 
-    return d($r,13);
+    return d($r, 13);
 
 }
 
@@ -3418,5 +3424,18 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 function open_form($attr = [])
 {
     return '<form ' . add_attributes($attr) . ' >';
+}
+
+function d_c($items = [], $attr)
+{
+
+    $response = [];
+
+    for ($x = 0; $x < count($items); $x++) {
+
+        $response[] = d($items[$x], $attr);
+
+    }
+    return append($response);
 }
 

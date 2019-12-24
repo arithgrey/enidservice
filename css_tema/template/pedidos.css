@@ -7,6 +7,7 @@
     background: #033178;
     color: white;
 }
+
 .cancelado {
 
     background: #ff7266;
@@ -142,20 +143,45 @@
     font-size: 1.3em;
     color: #001066;
 }
+
 .contenedor_entregado {
 
     background: #0046c0;
     color: white;
 }
-.text-utilidad{
+
+.text-utilidad {
     color: #0a1b42;
 }
-.select_gastos{
+
+.select_gastos {
 
     height: 42px;
 }
-.form_busqueda_pedidos{
+
+.form_busqueda_pedidos {
 
     font-weight: bold;
     color: #000000;
 }
+.pedido_img{
+    width: 50px;
+    height: 50px;
+}
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+    .descripcion_compra {
+
+        border: none !important;
+    }
+    .estado_compra{
+        font-size: 1.5em;
+    }
+    .pedido_img{
+        width: 230px!important;
+        height: auto;
+    }
+
+}
+
