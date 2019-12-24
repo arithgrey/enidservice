@@ -54,6 +54,7 @@ window.onpopstate = function (event) {
 
 $(document).ready(() => {
 
+    $('footer').addClass('d-none');
     $boton_enviar_solicitud.click(() => {
 
         despliega([seccion_horarios_entrega], 0);

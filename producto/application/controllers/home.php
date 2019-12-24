@@ -92,6 +92,7 @@ class Home extends CI_Controller
 
         ];
 
+        $data['footer_visible'] = false;
         $this->app->pagina($data, render_tipo_entrega($data), 1);
 
     }

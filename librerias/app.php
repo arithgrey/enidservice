@@ -228,9 +228,8 @@ class app extends CI_Controller
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->get_departamentos();
-
+        $data["footer_visible"] = true;
         if ($this->is_logged_in() > 0) {
-
 
             $session = $this->get_session();
             $nombre = $session["nombre"];
