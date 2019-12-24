@@ -38,16 +38,16 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session(
-                "",
-                "",
-                "Registra tu cuenta  y recibe  asistencia al momento.",
-                create_url_preview("recomendacion.jpg")
+            "",
+            "",
+            "Registra tu cuenta  y recibe  asistencia al momento.",
+            create_url_preview("recomendacion.jpg")
         );
 
         $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
 
         $this->app->pagina($this->app->cssJs($data, "procesar_crear"),
-                render_procesar_contacto($data), 1);
+            render_procesar_contacto($data), 1);
 
     }
 
@@ -63,10 +63,10 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session(
-                "",
-                "",
-                "Registra tu cuenta  y recibe  asistencia al momento.",
-                create_url_preview("recomendacion.jpg")
+            "",
+            "",
+            "Registra tu cuenta  y recibe  asistencia al momento.",
+            create_url_preview("recomendacion.jpg")
         );
 
         $num_usuario_referencia = usuario($this->input->get("q2"));
@@ -76,7 +76,7 @@ class Home extends CI_Controller
 
         if ($data["servicio"][0]["flag_servicio"] == 0) {
             $data["costo_envio"] =
-                    $this->calcula_costo_envio($this->crea_data_costo_envio($data));
+                $this->calcula_costo_envio($this->crea_data_costo_envio($data));
 
         }
 
@@ -85,7 +85,7 @@ class Home extends CI_Controller
         $data["vendedor"] = "";
         if ($data["servicio"][0]["telefono_visible"] == 1) {
             $data["vendedor"] =
-                    $this->app->usuario($data["servicio"][0]["id_usuario"]);
+                $this->app->usuario($data["servicio"][0]["id_usuario"]);
         }
 
         $data = $this->app->cssJs($data, "procesar");
@@ -106,7 +106,7 @@ class Home extends CI_Controller
     {
 
         $param["flag_envio_gratis"] = (array_key_exists("servicio",
-                        $data) && count($data["servicio"]) > 0) ? $data["servicio"][0]["flag_envio_gratis"] : 0;
+                $data) && count($data["servicio"]) > 0) ? $data["servicio"][0]["flag_envio_gratis"] : 0;
 
         return $param;
     }
@@ -115,16 +115,16 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session(
-                "",
-                "",
-                "Registra tu cuenta  y recibe  asistencia al momento.");
+            "",
+            "",
+            "Registra tu cuenta  y recibe  asistencia al momento.");
 
         $data = $this->app->cssJs($data, "procesar_domicilio");
 
         $param += [
 
-                "id_recibo" => $param["recibo"],
-                "id_usuario" => $data['id_usuario'],
+            "id_recibo" => $param["recibo"],
+            "id_usuario" => $data['id_usuario'],
         ];
 
         $response = $this->carga_ficha_direccion_envio($param, 1);
@@ -136,24 +136,25 @@ class Home extends CI_Controller
     {
 
         $q += [
-                "text_direccion" => "Dirección de Envio",
-                "externo" => 1,
+            "text_direccion" => "Dirección de Envio",
+            "externo" => 1,
         ];
 
         $response = $this->app->api(
-                "usuario_direccion/direccion_envio_pedido/format/json/", $q);
+            "usuario_direccion/direccion_envio_pedido/format/json/", $q);
 
         if ($v > 0) {
 
-            $response = append([
+            $response = append(
+                [
                     $response,
                     hiddens(
-                            [
-                                    "class" => "es_seguimiento",
-                                    "value" => 1,
-                            ]
+                        [
+                            "class" => "es_seguimiento",
+                            "value" => 1,
+                        ]
                     ),
-            ]);
+                ]);
         }
 
         return $response;

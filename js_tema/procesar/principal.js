@@ -38,9 +38,13 @@ let fecha_servicio = ".fecha_servicio";
 let $input_password = "";
 let $input_fecha_servicio = $(fecha_servicio);
 
+let primer_compra = '.primer_compra';
+let $primer_compra =  $(primer_compra);
+
 $(document).ready(() => {
 
-    set_option({"vista": 1,});
+    $('footer').addClass('d-none');
+    set_option({"vista": 1});
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
     $form_miembro.submit(registro);
     $form_cotizacion.submit(registro_cotizacion);
@@ -104,14 +108,15 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-    debugger;
+
     empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
         desbloqueda_form(form_miembro);
-        if (data.usuario_existe > 0) {
+        if (parseInt(data.usuario_existe) > 0) {
 
             $('.usuario_existente').removeClass('d-none');
+            $primer_compra.addClass('d-none');
             recorre(".usuario_existente");
 
         } else {
@@ -180,7 +185,7 @@ let set_link = function () {
 };
 let continuar_compra = function () {
 
-    showonehideone(".pr_compra", ".compra_resumen");
+    showonehideone(primer_compra, ".compra_resumen");
     set_option("vista", 2)
 };
 let response_set_link = (data) => redirect("../login");
@@ -189,9 +194,14 @@ let valida_retorno = () => {
     switch (vista) {
 
         case 2:
-            showonehideone(".compra_resumen", ".pr_compra");
+            showonehideone(".compra_resumen", primer_compra);
             set_option("vista", 1);
             break;
+
+        default:
+
+            break;
+
     }
 };
 let formato_inicial = function () {
