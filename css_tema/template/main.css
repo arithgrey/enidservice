@@ -653,7 +653,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background: linear-gradient(to right, #000000, #081a54);
+    background: linear-gradient(to right, #0a1d84, #081a54);
     min-height: 90px;
 }
 
@@ -861,9 +861,11 @@ div.pagination li.active span:hover {
     }
 
 }
-.boton-busqueda{
+
+.boton-busqueda {
     min-height: 41px;
 }
+
 .form-control {
     border-radius: 0 !important;
 }
@@ -1276,13 +1278,6 @@ select {
 .letter-spacing-1 {
     letter-spacing: 1px;
 }
-
-/*
-.producto_enid {
-    height: 290px !important;
-}
-
- */
 
 .texto_precio {
     background: #030a27;
@@ -1772,13 +1767,14 @@ ul li a {
 
     color: #000000;
 }
-#page-content{
+
+#page-content {
     flex: 1 0 auto;
 }
 
 @media (max-width: 575.98px) {
 
-    .mh_sm_310{
+    .mh_sm_310 {
         max-height: 310px !important;
     }
 

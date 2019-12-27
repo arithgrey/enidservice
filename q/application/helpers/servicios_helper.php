@@ -141,7 +141,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
-            h(valida_text_imagenes($tipo_promocion, $num_imagenes), 3),
+            _titulo(valida_text_imagenes($tipo_promocion, $num_imagenes),1),
             $num_imagenes,
             $id_servicio,
             $id_perfil,
@@ -553,30 +553,37 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $s["id_servicio"];
         $in_session = $s["in_session"];
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
+        $path_servicio = get_url_servicio($id_servicio);
 
-        $p[] =
-            img(
-                [
-                    'src' => $s["url_img_servicio"],
-                    'alt' => $s["metakeyword"],
-                    'class' => 'mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310  mh-auto mt-5',
-                ]
-            );
 
+        $img = img(
+            [
+                'src' => $s["url_img_servicio"],
+                'alt' => $s["metakeyword"],
+                'class' => 'mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310  mh-auto mt-5',
+            ]
+        );
 
         if ($in_session > 0) {
 
-            $response[] = d(a_enid($p, get_url_servicio($id_servicio)));
-            $response[] = d(editar_servicio($in_session, $id_servicio, $s["id_usuario"], $s["id_usuario_actual"], $id_perfil));
-            $response = d($response, "producto_enid d-flex flex-column justify-content-center col-lg-3 top_50 px-3");
-
+            $response[] = d(a_enid($img, $path_servicio));
+            $response[] = d(editar_servicio(
+                $in_session,
+                $id_servicio,
+                $s["id_usuario"],
+                $s["id_usuario_actual"],
+                $id_perfil
+            ));
+            $response = d($response,
+                "d-flex flex-column justify-content-center col-lg-3 top_50 px-3"
+            );
 
         } else {
 
             $response = a_enid(
-                append($p),
+                $img,
                 [
-                    "href" => get_url_servicio($id_servicio),
+                    "href" => $path_servicio,
                     "class" => "col-lg-3 hps mt-5 mx-auto my-auto d-flex align-content-center flex-wrap h_310",
                 ]
             );
@@ -813,7 +820,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = d(icon("fa fa fa-pencil"), "dropdown-toggle ");
         $x[] = ul([$definir, $quitar], ["class" => "dropdown-menu ", "style" => "height:100px"]);
-        $r[] = d(append($x), "dropdown ");
+        $r[] = d($x, "dropdown ");
         return append($r);
 
 

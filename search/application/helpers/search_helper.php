@@ -33,10 +33,7 @@ if (!function_exists('invierte_date_time')) {
 
         $x[] = get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile);
         $x[] = append($data["lista_productos"]);
-
-
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
-
 
         $z[] = _titulo("FILTRA TU BÚSQUEDA", 0, 'mt-5 mt-md-0 ');
 
@@ -126,8 +123,8 @@ if (!function_exists('invierte_date_time')) {
     function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
     {
 
-        $filtro = get_format_filtro($filtros, $order);
-        $response = ($is_mobile > 0) ? d($filtro, 12) :
+        $filtro = filtro($filtros, $order);
+        $response = ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 ') :
             flex($filtro,$paginacion,'d-md-flex justify-content-between');
         return $response;
 
@@ -135,20 +132,21 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-    function get_format_filtro($filtros, $order)
+    function filtro($filtros, $order)
     {
 
         $r[] = '<select class="form-control order" name="order" id="order">';
         $a = 0;
         foreach ($filtros as $row):
+            $str =  strtoupper($row);
             if ($a == $order):
 
                 $r[] = '<option value="' . $a . '" selected>';
-                $r[] = $row;
+                $r[] = $str;
                 $r[] = '</option>';
             else:
-                $r[] = '<option value="' . $a . '" selected>';
-                $r[] = $row;
+                $r[] = '<option value="' . $a . '">';
+                $r[] = $str;
                 $r[] = '</option>';
 
             endif;
