@@ -485,7 +485,7 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
         $contenido = append($contenido);
     }
     if (array_key_exists("class", $attributes)) {
-        $attributes["class"] = $attributes["class"] . "tab-pane  ";
+        $attributes["class"] = $attributes["class"] . " tab-pane  ";
     } else {
         $attributes["class"] = " tab-pane  ";
     }
@@ -510,7 +510,7 @@ function tab_activa($seccion, $activa)
 function tab_content($array = [], $col = 0)
 {
 
-    $response = d(append($array), 'tab-content');
+    $response = d(append($array), 'tab-content mt-sm-5');
     if ($col > 0) {
         $response = d($response, $col);
     }

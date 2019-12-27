@@ -718,7 +718,7 @@ let validar_si_numero = numero => (!/^([0-9])*$/.test(numero)) ? false : true;
 let set_parameter = (element, valor) => $(element).val(valor);
 
 
-let is_mobile = () => get_option("is_mobile");
+let is_mobile = () => (parseInt(get_option("is_mobile")) > 0 );
 
 let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
 let isJson = (str) => {
