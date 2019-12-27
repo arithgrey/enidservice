@@ -1805,12 +1805,11 @@ function get_menu_session($in_session, $proceso_compra = 1)
     if ($in_session < 1) {
 
         $vender = a_enid(
-            "Agiliza tus ventas",
+            "vender",
             [
                 "href" => "../login/?action=nuevo",
                 "class" => ' white text-uppercase strong text_agilizar',
-
-            ]
+            ],0
         );
 
 

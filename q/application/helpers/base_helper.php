@@ -63,34 +63,15 @@ if (!function_exists('invierte_date_time')) {
     function valida_text_imagenes($tipo_promocion, $num_images)
     {
 
-        $tipo_promocion = strtoupper($tipo_promocion);
-        if ($num_images == 0) {
+        $response = "";
+        if ($num_images < 1) {
 
-            $ayuda = _text(
-                "MUESTRA IMAGENES SOBRE TU ",
-                $tipo_promocion,
-                " A TUS CLIENTES"
-            );
-            $text[] = h(
-                $ayuda
-                ,
-                5
-                ,
-                'white shadow padding_10 black_enid_background'
-            );
-
-            $incentivo = _text(
-                "TU ", $tipo_promocion,
+            $response = _text(
+                "TU ", $tipo_promocion, " ",
                 "SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
             );
-            $text[] = d(
-                $incentivo
-                ,
-                "top_40 bottom_40"
-            );
-
-            return append($text);
         }
+        return $response;
     }
 
     function descartar_promocion($num_images, $id_servicio, $id_perfil)

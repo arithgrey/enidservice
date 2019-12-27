@@ -14,12 +14,6 @@
 .fa-youtube-play {
     color: red;
 }
-
-.agregar_img_servicio_img:hover {
-    padding: 5px !important;
-    margin-right: 1px;
-}
-
 .contenedor_imagen_muestra {
     overflow-x: scroll;
     overflow-x: hidden;

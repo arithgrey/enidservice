@@ -586,13 +586,11 @@ class Servicio extends REST_Controller
     }
 
     /*Se modifica la calificción del servicio*/
-
     private function create_table_images($imagenes, $is_mobile)
     {
 
 
         $num_imgs = 0;
-        $this->table->set_heading('', '', '', '', '', '', '');
         $images_complete = [];
         foreach ($imagenes as $row) {
 
@@ -610,7 +608,7 @@ class Servicio extends REST_Controller
                 "style" => $extra_imagen
             ]);
 
-            for ($num_imgs = $num_imgs; $num_imgs < 7; $num_imgs++) {
+            for ($num_imgs = $num_imgs; $num_imgs < 6; $num_imgs++) {
 
                 $icon = icon("fa fa-camera agregar_img_servicio");
                 $interior = d($icon,
@@ -621,13 +619,13 @@ class Servicio extends REST_Controller
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
                     ]);
 
-                $img_preview = d(append([$interior, $img]));
+                $img_preview = d(append([$interior, $img]), 'col-sm-2 mx-auto');
                 $images_complete[$num_imgs] = $img_preview;
 
             }
         }
-        $this->table->add_row($images_complete);
-        return $this->table->generate();
+
+        return d($images_complete,'d-md-flex');
     }
 
     private function create_imgs_tb($row, $is_mobile)
