@@ -168,7 +168,6 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $data["info_categorias"] = $this->get_categorias_servicios($param);
         $data["nivel"] = $param["nivel"];
-        $response = [];
 
         $response =
             (es_data($data["info_categorias"])) ?

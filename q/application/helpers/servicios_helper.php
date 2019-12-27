@@ -686,39 +686,28 @@ if (!function_exists('invierte_date_time')) {
 
         $nivel = "nivel_" . $data["nivel"];
         $config = [
-            'class' => 'num_clasificacion ' . $nivel . ' selector_categoria ',
-            'size' => 20
+            'class' => 'num_clasificacion ' . $nivel . ' selector_categoria form-control w-100 mt-5 ',
+            'size' => 30
         ];
 
-        if ($param["is_mobile"] > 0) {
-
-            $config = [
-                'class' => 'num_clasificacion ' . $nivel . ' num_clasificacion_phone selector_categoria '
-            ];
-        }
-
-
-        $select = select_enid(
+        return select_enid(
             $data["info_categorias"],
             "nombre_clasificacion",
             "id_clasificacion",
             $config);
-        return $select;
-
     }
 
     function get_add_categorias($data, $param)
     {
 
         $data["padre"] = $param["padre"];
-        $select = d(
-            text_icon('fa fa-angle-double-right', "AGREGAR NUEVO")
+        $select = btn(
+            text_icon('fa fa-angle-double-right', "agregar")
             ,
             [
-                "class" => "a_enid_black nueva_categoria_producto top_20",
+                "class" => "nueva_categoria_producto d-flex mt-5 ",
                 "id" => $data["padre"]
-            ],
-            1);
+            ]);
         return $select;
     }
 

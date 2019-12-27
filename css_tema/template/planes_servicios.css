@@ -344,33 +344,16 @@
     font-size: .9em !important;
 }
 
-.nueva_categoria_producto:hover {
-    cursor: pointer;
-}
 
-.contenedor_categorias_servicios {
-    display: none;
-}
 
-.info_categoria {
-    display: inline-table;
-}
 
 .text_add_imgs {
     font-weight: bold;
     font-size: 2em;
 }
 
-.cancelar_registro {
-    background: red;
-    padding: 5px !important;
-    color: white !important;
-    font-weight: bold !important;
-}
 
-.selector_categoria {
-    width: 100%;
-}
+
 
 .li_menu_compartir_cuenta {
     background: #e9f0fb;
@@ -389,14 +372,6 @@
         display: block;
     }
 
-    .contenedor_categorias_servicios {
-        margin-top: 30px;
-    }
-
-    .info_categoria_movil {
-        margin-top: 25px !important;
-    }
-
     .text_add_imgs {
         font-weight: bold;
         font-size: 1.6em;
@@ -406,16 +381,8 @@
         margin-top: 10px;
         margin-bottom: 10px;
     }
-
-    .cancelar_registro:hover {
-        cursor: pointer;
+    .top_tipo_publicacion{
+        margin-bottom: 55px!important;
     }
 
-    .cancelar_registro {
-        background: red;
-        padding: 10px !important;
-        color: white !important;
-        font-weight: bold !important;
-        margin-bottom: 100px;
-    }
 }

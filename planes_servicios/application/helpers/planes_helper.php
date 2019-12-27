@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_perfil = $data["id_perfil"];
-        $is_mobile = $data["is_mobile"];
+        $is_mobile = is_mobile();
         $action = $data["action"];
         $top_servicios = $data["top_servicios"];
         $considera_segundo = $data["considera_segundo"];
@@ -18,7 +18,8 @@ if (!function_exists('invierte_date_time')) {
             ,
             "contenedor_top " . ($action == 1) ? " display_none " : " "
         );
-        $r[] = d(append($t), 2);
+
+        $r[] = d($t, 'col-md-2 menu');
 
         $z[] = tab_seccion(
             articulos_venta($data["list_orden"]),
@@ -35,7 +36,10 @@ if (!function_exists('invierte_date_time')) {
         $z[] = tab_seccion(
             form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile),
             'tab_form_servicio',
-            valida_active_tab(1, $action)
+            valida_active_tab(1, $action),
+            [
+                'class' => 'mt-5 mt-md-0'
+            ]
         );
 
 
@@ -76,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             )
             ,
-            'mt-3'
+            'mt-5 mt-md-4 mb-5 top_tipo_publicacion'
         );
 
 
@@ -113,11 +117,10 @@ if (!function_exists('invierte_date_time')) {
                     "step" => "any",
                     "type" => "number",
                     "placehorder" => "880",
-
-                ]
+                ],0,0
             )
 
-        ), 'contenedor_precio');
+        ), 'contenedor_precio mt-5 mt-md-3');
 
 
         $seccion_ciclo_facturacion = d(
@@ -286,32 +289,22 @@ if (!function_exists('invierte_date_time')) {
     function get_selector_categoria($is_mobile)
     {
 
-        $r = [];
-        if ($is_mobile > 0) {
+
+        $r[] = _titulo('¿en qué categoría se encuentra tu artículo?');
+        $r[] = hr();
 
 
-            $r[] = h('SELECIONA LAS CATEGORÍAS', 3);
-            $r[] = hr();
-            $r[] = places(0);
-
-
-        } else {
-
-
-            $r[] = h("GRUPO AL CUAL PERTENECE TU PRODUCTO", 3);
-            $r[] = a_enid(
-                "CANCELAR",
+        $cerrar = d(
+            format_link("",
                 [
-                    "class" => "cancelar_registro white",
+                    'class' => "fa fa-times cancelar_registro fa-2x"
+                ]
+            ), 'col-xs-2 col-sm-1 ml-auto');
+        $r[] = d($cerrar, 13);
 
-                ],
-                1);
-            $r[] = hr();
-            $r[] = places();
 
-        }
-
-        return d(append($r), "contenedor_categorias_servicios");
+        $r[] = places();
+        return d($r, "contenedor_categorias_servicios d-none");
 
     }
 
@@ -349,41 +342,20 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function places($class = 1)
+    function places()
     {
 
-        $response = "";
-        if ($class > 0) {
-
-            $text = append(
-                [
-                    d(place("primer_nivel_seccion"), ["class" => "info_categoria"]),
-                    d(place("segundo_nivel_seccion"), ["class" => "info_categoria"]),
-                    d(place("tercer_nivel_seccion"), ["class" => "info_categoria"]),
-                    d(place("cuarto_nivel_seccion"), ["class" => "info_categoria"]),
-                    d(place("quinto_nivel_seccion"), ["class" => "info_categoria"]),
-                    d(place("sexto_nivel_seccion"), ["class" => "info_categoria"])
-                ]
-
-            );
-
-            $response = addNRow($text);
-
-
-        } else {
-
-            $response = ul([
-                place("primer_nivel_seccion"),
-                place("segundo_nivel_seccion"),
-                place("tercer_nivel_seccion"),
-                place("cuarto_nivel_seccion"),
-                place("quinto_nivel_seccion"),
-                place("sexto_nivel_seccion")
-
-            ]);
-        }
-        return $response;
-
+        $class = 'col-md-3 col-sm-12';
+        return d(
+            [
+                d(place("primer_nivel_seccion"), $class),
+                d(place("segundo_nivel_seccion"),$class),
+                d(place("tercer_nivel_seccion"),$class),
+                d(place("cuarto_nivel_seccion"),$class),
+                d(place("quinto_nivel_seccion"),$class),
+                d(place(_text("sexto_nivel_seccion " , $class)))
+            ], 'd-md-flex align-items-center '
+        );
     }
 
 
@@ -422,7 +394,7 @@ if (!function_exists('invierte_date_time')) {
 
     function menu($perfil, $is_mobile, $action)
     {
-        $response = "";
+
         $link_punto_venta = tab(
             text_icon('fa fa-map', " PUNTOS DE VENTA "),
             "#tab_puntos_venta",

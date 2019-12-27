@@ -6,6 +6,7 @@ window.onpopstate = event => {
         retorno();
     }
 };
+let $menu = $('.menu');
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -702,7 +703,7 @@ let clean_data_categorias = () => {
 
 let carga_listado_categorias = () => {
 
-    debugger;
+
     let nombre = get_parameter(".nuevo_producto_nombre");
     clean_data_categorias();
     let data_send = {
@@ -1127,9 +1128,9 @@ let valida_action_inicial = () => {
             break;
 
         case 1:
-            /*Si es version movil recorre pantalla*/
-            if (is_mobile() == 1) {
-                recorre(".contenedor_agregar_servicio_form")
+
+            if (is_mobile()) {
+                $menu.addClass('d-none');
             }
             let x = (is_mobile() == 1) ? despliega([".btn_agregar_servicios", ".btn_servicios"], 0) : "";
             set_option("modalidad", 0);
