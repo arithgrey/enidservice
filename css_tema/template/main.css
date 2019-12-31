@@ -634,7 +634,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background: linear-gradient(to right, #0a1d84, #081a54);
+    background: linear-gradient(to right, #101c5b, #010615);
     min-height: 90px;
 }
 
@@ -654,12 +654,13 @@ div.pagination li.active span:hover {
     font-size: 15px;
 }
 
-.flipkart-navbar-button {
-    background-color: #010915;
-    border: 1px solid #d8d9da;
-    color: #ffffff;
-    cursor: pointer;
-}
+/*.flipkart-navbar-button {*/
+/*    !*background-color: #010915;*!*/
+/*    background-color: whitesmoke;*/
+/*    border: 1px solid #d8d9da;*/
+/*    color: #ffffff;*/
+/*    cursor: pointer;*/
+/*}*/
 
 .cart-button {
     background-color: #2469d9;
@@ -1172,19 +1173,13 @@ h2 {
     /*border: 1px solid rgb(13, 62, 86) !important;*/
     border-bottom: 1px solid red !important;
 }
-
-/*.menu_usuario {*/
-/*    left: -180px !important;*/
-/*    min-height: 310px;*/
-/*}*/
-
 .input_select_busqueda {
     width: 45% !important;
 }
 
-.flipkart-navbar-button {
-    height: 30px !important;
-}
+/*.flipkart-navbar-button {*/
+/*    height: 30px !important;*/
+/*}*/
 
 .f19 {
 
@@ -1514,15 +1509,6 @@ a {
     background: linear-gradient(to right, #00040e, #0a1a50);
 }
 
-.text_iniciar_session {
-    color: #e0e9ea;
-
-}
-
-.text_iniciar_session:hover {
-    color: #e0e9ea;
-}
-
 .frecuentes {
     padding: 0px 10px;
 }
@@ -1757,6 +1743,10 @@ ul li a {
 
     .mh_sm_310 {
         max-height: 310px !important;
+    }
+    #flipkart-navbar{
+
+        min-height: 65px;
     }
 
 }

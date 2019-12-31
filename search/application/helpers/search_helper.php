@@ -24,7 +24,6 @@ if (!function_exists('invierte_date_time')) {
     function render_search($data)
     {
 
-
         $paginacion = $data["paginacion"];
         $is_mobile = $data["is_mobile"];
         $categorias_destacadas = $data["categorias_destacadas"];
@@ -38,7 +37,12 @@ if (!function_exists('invierte_date_time')) {
         $z[] = _titulo("FILTRA TU BÚSQUEDA", 0, 'mt-5 mt-md-0 ');
 
         if ($is_mobile < 1) {
-            $z[] = img(["src" => "../img_tema/productos/ejemplo.png"]);
+            $z[] = img(
+                [
+                    "src" => "../img_tema/productos/ejemplo.png",
+                    'class' => 'd-none d-md-block'
+                ]
+            );
         }
 
 
@@ -123,13 +127,13 @@ if (!function_exists('invierte_date_time')) {
     function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
     {
 
+        $paginacion = d($paginacion, 'd-none d-md-block');
         $filtro = filtro($filtros, $order);
         $response = ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 ') :
-            flex($filtro,$paginacion,'d-md-flex justify-content-between');
+            flex($filtro, $paginacion, 'd-md-flex justify-content-between');
         return $response;
 
     }
-
 
 
     function filtro($filtros, $order)
@@ -138,7 +142,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = '<select class="form-control order" name="order" id="order">';
         $a = 0;
         foreach ($filtros as $row):
-            $str =  strtoupper($row);
+            $str = strtoupper($row);
             if ($a == $order):
 
                 $r[] = '<option value="' . $a . '" selected>';
@@ -233,7 +237,7 @@ if (!function_exists('invierte_date_time')) {
             $response = d($r, "contenedor_sub_categorias");
 
         }
-        return d(d($response, 'contenedor_menu_productos_sugeridos'), "  mt-md-5");
+        return d(d($response, 'contenedor_menu_productos_sugeridos'), "d-none d-md-block  mt-md-5");
     }
 
     function crea_sub_menu_categorias_destacadas($param)

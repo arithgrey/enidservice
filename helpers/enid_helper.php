@@ -141,61 +141,61 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
                 break;
             case 2:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-lg-2 col-lg-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-2'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-md-2 col-md-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-2'>" . $info . "</{$tipo}>";
 
                 break;
             case 3:
-                $response = "<{$tipo} class=' col-lg-3'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-3'>" . $info . "</{$tipo}>";
                 break;
             case 4:
-                $response = ($row > 0) ? "<{$tipo} class=' col-lg-4 col-lg-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-4'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-md-4 col-md-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-4'>" . $info . "</{$tipo}>";
                 break;
             case 5:
-                $response = "<{$tipo} class=' col-lg-5'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-5'>" . $info . "</{$tipo}>";
                 break;
             case 6:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-lg-6 col-lg-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-6'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-md-6 col-md-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-6'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 7:
 
-                $response = "<{$tipo} class=' col-lg-7'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-7'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 8:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-lg-8 col-lg-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-8'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-md-8 col-md-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-8'>" . $info . "</{$tipo}>";
 
                 break;
             case 9:
-                $response = "<{$tipo} class=' col-lg-9'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-9'>" . $info . "</{$tipo}>";
                 break;
 
             case 10:
 
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-lg-10 col-lg-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-lg-10'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-md-10 col-md-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-10'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 11:
-                $response = "<{$tipo} class=' col-lg-11'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-11'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 12:
 
 
-                $response = "<{$tipo} class=' col-lg-12'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-md-12'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 13:
 
-                $response = "<{$tipo} class=' row '>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
 
                 break;
 
@@ -1502,12 +1502,14 @@ function get_logo($is_mobile, $tipo = 0)
     if ($is_mobile == 1) {
 
         $en_mobile = d("☰ ENID SERVICE",
-            ["class" => "smallnav menu white f12 ", "onclick" => "openNav()"]);
+            [
+                "class" => "smallnav menu white f12 mt-4 ",
+                "onclick" => "openNav()"
+            ]
+        );
         $class = "col-lg-12";
         switch ($tipo) {
-            case 0:
-                $class = "col-lg-12";
-                break;
+
             case 1:
                 $class = "col-lg-3";
                 break;
@@ -1516,12 +1518,12 @@ function get_logo($is_mobile, $tipo = 0)
                 break;
         }
 
-        return d($en_mobile, ["class" => $class]);
+        return d($en_mobile, $class);
 
     } else {
 
         $img_enid = img_enid(["style" => "width: 50px!important;"]);
-        $en_pc = a_enid($img_enid, ["href" => "../", "class" => "ml-5"]);
+        $en_pc = a_enid($img_enid, ["href" => path_enid('home')]);
 
         return $en_pc;
     }
@@ -1814,23 +1816,26 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            text_icon("fa fa-user", " INICIAR SESIÓN ",
+            text_icon("fa fa-user", " iniciar sesión",
                 [],
                 0
             )
             ,
             [
                 "href" => path_enid('login'),
-                "class" => "text_iniciar_session text-decoration-none mr-4",
+                "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white",
             ]
         );
 
 
         if ($proceso_compra < 1) {
 
-            $response = flex($vender, $session,
-                "d-flex justify-content-end bd-highlight-row-reverse bd-highlight",
-                "mr-3 ");
+            $response = flex(
+                $vender,
+                $session,
+                "d-none d-md-block d-md-flex justify-content-end mt-md-3 mb-md-3",
+                "mr-3 ", '', ''
+            );
 
 
         }
@@ -2936,6 +2941,7 @@ function tmp_menu($id_usuario, $menu)
         ),
     ];
     $opciones_menu = d($menu_usuario, 'dropdown-menu mw_250 p-3');
+
     $extra_menu = [
         $imagen_usuario,
         $opciones_menu,
@@ -2949,17 +2955,16 @@ function tmp_menu($id_usuario, $menu)
 function frm_search(
     $clasificaciones_departamentos,
     $in_session = 0,
-    $is_mobile = 0,
     $id_usuario = 0,
     $menu = 0
 )
 {
 
-    $r[] = '<form action="../search" class="search_principal_form d-flex">';
+    $r[] = '<form action="../search" class="search_principal_form d-none d-md-block d-md-flex mr-5">';
     $r[] = d($clasificaciones_departamentos, "d-none");
     $r[] = input(
         [
-            "class" => "input_busqueda_producto",
+            "class" => "input_busqueda_producto col-lg-11",
             "type" => "text",
             "placeholder" => "Búsqueda",
             "name" => "q",
@@ -2968,62 +2973,55 @@ function frm_search(
         ]
 
     );
-    $r[] = btn(icon("fa fa-search "),
-        [
-            "class" => " button_busqueda_producto  flipkart-navbar-button",
-        ]
-    );
+    $r[] = btn(icon("fa fa-search "), ['style' => 'background: #007bff!important;']);
     $r[] = form_close();
 
+    if (!$in_session) {
 
-    $carrito = btw(
-        d(
-            icon("fa fa-shopping-bag  white")
-            ,
-            [
-                "class" => "dropdown-toggle",
-                "data-toggle" => "dropdown",
-            ]
+        $contenido = [
 
-        ),
-        d(
-            h("TU CARRITO", 4, "strong "),
-            [
-
-                "class" => "dropdown-menu mt-5 border-0  bg-white p-2 ",
-            ]
-        )
-
-    );
-
-
-    if ($in_session < 1) {
-
-
-        return flex(append($r), $carrito, "d-flex justify-content-end mr-3", "", "ml-4 ");
-
-
-    } else {
-
-        return add_text(d($r), d(tmp_menu($id_usuario, $menu)));
-
+            a_enid(_titulo("tu carrito"),
+                [
+                    'class' => 'dropdown-item'
+                ]
+            )
+        ];
+        $r[] = d(
+            dropdown(
+                icon("fa fa-shopping-bag  white"),
+                $contenido
+            ), 'mr-5 mt-2'
+        );
     }
 
 
+    $response = [];
+    if (!$in_session) {
+
+        $response[] = d($r, 'd-md-flex justify-content-end mt-3');
+
+    } else {
+
+        $response[] = dd($r, tmp_menu($id_usuario, $menu));
+
+    }
+
+    return append($response);
+
 }
 
-function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '')
+function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = 'd-flex ')
 {
     $response = "";
     if (is_array($d)) {
 
-        $clase_extra = 'd-flex ';
-        $clase_extra .= (strlen($d1) > 0) ? $d1 : '';
-        $response = d(append($d), $clase_extra);
+
+        $att .= (strlen($d1) > 0) ? $d1 : '';
+        $response = d(append($d), $att);
 
     } else {
 
-        $att = "d-flex ";
+
         if (is_array($ext)) {
             $att = $ext[0];
         } else {
@@ -3332,7 +3330,7 @@ function opciones_populares()
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white  f11 border-right frecuentes border-right-enid",
+            "class" => "white f11 border-right frecuentes border-right-enid",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=1&order=4")
         ]
     );
@@ -3364,44 +3362,48 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
     $frecuentes = opciones_populares();
     $response = [];
 
-    if ($is_mobile < 1 && $in_session < 1) {
+    if (!$in_session) {
 
-        $response[] = get_menu_session($in_session, $proceso_compra);
-        $response[] = d(hrz(get_logo($is_mobile), $frecuentes, 2, "d-flex align-items-center"), 5);
-        $response[] = d(frm_search($clasificaciones_departamentos, $in_session), "col-lg-7 mt-4 p-0");
+        if (!$is_mobile) {
 
-    } elseif ($is_mobile > 0 && $in_session < 1) {
+            $response[] = get_menu_session($in_session, $proceso_compra);
+            $response[] = d([get_logo($is_mobile), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
+            $response[] = frm_search($clasificaciones_departamentos, $in_session);
+        } else {
+            $response[] = get_logo($is_mobile, $in_session);
+        }
 
-        $response[] = get_logo($is_mobile, $in_session);
-
-    } elseif ($is_mobile > 0 && $in_session > 0) {
-
-
-        $response[] = ajustar(
-            get_logo($is_mobile, $in_session),
-            tmp_menu($is_mobile, $id_usuario, $menu)
-        );
-
-    } elseif ($is_mobile < 1 && $in_session > 0) {
-
-        $response[] = flex(
-            ajustar(get_logo($is_mobile), $frecuentes, 2),
-            frm_search($clasificaciones_departamentos, $in_session, $is_mobile, $id_usuario, $menu)
-            ,
-            "",
-            "col-lg-7 align-self-center mt-4",
-            "col-lg-5 align-items-center justify-content-between d-flex mt-4"
-
-        );
     } else {
 
+        if (!$is_mobile) {
+
+            $response[] = flex(
+                ajustar(get_logo($is_mobile), $frecuentes, 2),
+                frm_search($clasificaciones_departamentos, $in_session, $id_usuario, $menu)
+                ,
+                "",
+                "col-md-7 align-self-center mt-4 pupulares d-none d-md-block",
+                "col-lg-5 align-items-center justify-content-between d-flex mt-4 "
+
+            );
+
+        } else {
+
+            $response[] = ajustar(
+                get_logo($is_mobile, $in_session),
+                tmp_menu($id_usuario, $menu)
+            );
+        }
+
+
     }
+
 
     $navegacion = d(
         $response,
         [
             'id' => "flipkart-navbar",
-            'class' => "mb-sm-4 mb-md-5 col-lg-12"
+            'class' => "mb-sm-4 mb-md-5 col-md-12"
         ]
     );
 
@@ -3440,10 +3442,11 @@ function terminar($ext = '', $id = '')
     return d($cerrar, 13);
 }
 
-function dropdown($presentacion, $a_menu = [], $ext = '')
+function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
 {
-
-    $r[] = d($presentacion,
+    //dropdown-item
+    $r[] = d(
+        $presentacion,
         [
             'class' => 'dropdown-toggle',
             'data-toggle' => "dropdown",
@@ -3453,7 +3456,19 @@ function dropdown($presentacion, $a_menu = [], $ext = '')
     );
 
 
+    $text_direccion = 'dropdown';
+    switch ($direccion) {
+        case 'L':
+            $text_direccion = 'dropleft';
+            break;
+        case 'R':
+            $text_direccion = 'dropright';
+            break;
+        default:
+            break;
+    }
+
     $r[] = d($a_menu, "dropdown-menu");
-    return d($r, _text('position-absolute ', $ext));
+    return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
 
 }

@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        return d(d(append($r), 4, 1), "col-lg-12");
+        return d($r, 4, 1);
 
     }
 
@@ -46,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = append($x);
 
-        return d(append($r), "text-center  wrapper_login");
+        return d($r, " wrapper_login");
 
     }
 
