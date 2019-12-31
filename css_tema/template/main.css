@@ -561,25 +561,6 @@ li {
 .input_focus:-ms-input-placeholder {
     color: red !important;
 }
-
-/*
-.input_enid_format {
-
-    background: white !important;
-    height: 30px !important;
-    outline: none;
-}
-
-.input_enid_format:hover {
-    border-style: solid;
-    border-color: black;
-    cursor: pointer;
-}
-*/
-.contenedor_menu_enid_service_lateral {
-    margin-top: 20px !important;
-}
-
 .titulo_enid_sm_sm {
     font-weight: bold;
     color: black !important;

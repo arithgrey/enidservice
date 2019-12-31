@@ -26,11 +26,6 @@
     text-transform: uppercase;
 }
 
-.foto_producto, .imagen_principal {
-    margin-top: 3px;
-    margin-bottom: 3px;
-    text-decoration: underline !important;
-}
 
 .input_link_dropshipping {
     display: none;

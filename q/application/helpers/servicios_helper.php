@@ -141,12 +141,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
-            _titulo(valida_text_imagenes($tipo_promocion, $num_imagenes),1),
+            _titulo(valida_text_imagenes($tipo_promocion, $num_imagenes), 1),
             $num_imagenes,
             $id_servicio,
             $id_perfil,
             $data["images"],
-            $tipo_promocion,
             $val_youtube,
             $valor_youtube,
             $ext_1
@@ -162,7 +161,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = conf_detalle(
-            $s["status"], $id_servicio,
+            $s["status"],
+            $s["es_publico"],
+            $id_servicio,
             $es_servicio, $id_perfil,
             $s["stock"],
             $s["tiempo_promedio_entrega"],
@@ -221,7 +222,9 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_detalle(
-        $status, $id_servicio,
+        $status,
+        $es_publico,
+        $id_servicio,
         $es_servicio, $id_perfil, $stock,
         $pronostico_entrega,
         $entregas_en_casa,
@@ -246,7 +249,12 @@ if (!function_exists('invierte_date_time')) {
 
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
         $baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
-        $t[] = d(d(estado_publicacion($status, $id_servicio), "col-lg-4 top_30 bottom_20", 1), 12);
+
+
+        $t[] = d(estado_publicacion($status, $id_servicio), 6);
+        $t[] = d(es_publico($status, $es_publico, $id_servicio), 6);
+
+
         $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock);
         $str_rango_entrega = rango_entrega(
             $id_perfil,
@@ -300,21 +308,29 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio,
         $id_perfil,
         $images,
-        $tipo_promocion,
         $val_youtube,
         $valor_youtube,
         $ext_1)
     {
 
-        $z[] = $notificacion_imagenes;
+
         $z[] = descartar_promocion($num_imagenes, $id_servicio, $id_perfil);
-        $z[] = d($images, "contenedor_imagen_muestra");
-        $z[] = h("¿TIENES ALGÚN VIDEO SOBRE TU " . $tipo_promocion . "?", 4);
+        if ($num_imagenes < 1) {
+            $z[] = d($notificacion_imagenes, 'mt-3 mb-3');
+        }
+
+
+        $z[] = $images;
+
+
+        $z[] = _titulo("tienes algún video?", 1);
         $z[] = d(text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE "));
         $z[] = d($val_youtube, "text_video_servicio");
         $z[] = form_youtube($valor_youtube);
 
-        return d(append($z), ["class" => "tab-pane " . $ext_1, "id" => "tab_imagenes"]);
+        $activo = ($ext_1 !== "") ? 1 : 0;
+        return tab_seccion($z, "tab_imagenes", $activo);
+
 
     }
 
@@ -794,34 +810,30 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $text = menorque($principal, 1, "Definir como principal", "Imagen principal");
-        $extra_principal = menorque($principal, 1, "", "blue_enid");
+        $ext = menorque($principal, 1, "", "blue_enid");
 
 
-        $definir = d(
-            icon('fa fa-star', "dropdown-item  " . $extra_principal) .
-            $text,
+        $menu[] = a_enid(
+            text_icon('fa fa-star', $text)
+            ,
             [
-                "class" => "top_20 cursor_pointer imagen_principal",
+                "class" => _text("imagen_principald dropdown-item text-uppercase " . $ext),
                 "id" => $id_imagen
             ]
         );
 
 
-        $quitar =
-            d(
-                text_icon('fa fa-times dropdown-item', "Quitar")
-
-                , [
-                    "class" => "top_20 cursor_pointer foto_producto",
+        $menu[] =
+            a_enid(
+                text_icon('fa fa-times ', "quitar")
+                ,
+                [
+                    "class" => "foto_producto dropdown-item text-uppercase",
                     "id" => $id_imagen
                 ]
             );
 
-
-        $x[] = d(icon("fa fa fa-pencil"), "dropdown-toggle ");
-        $x[] = ul([$definir, $quitar], ["class" => "dropdown-menu ", "style" => "height:100px"]);
-        $r[] = d($x, "dropdown ");
-        return append($r);
+        return dropdown(icon("fa fa fa-pencil"), $menu, 'mt-5 mt-md-1');
 
 
     }
@@ -1183,6 +1195,41 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(h($titulo_ca, 5), 1);
         $r[] = btw($confirmar, $omitir, "top_30 ");
         return d(d(d(append($r), "top_50"), 1), 12);
+
+
+    }
+
+
+    function es_publico($status, $es_publico, $id_servicio)
+    {
+
+
+        $activo = ($es_publico && $status) ? ' button_enid_eleccion_active' : '';
+        $no_activo = ($es_publico == 0 || $status == 0) ? ' button_enid_eleccion_active' : '';
+
+        $v = ($status < 1) ? '' : a_enid(
+            "si",
+            [
+                'id' => $id_servicio,
+                'es_publico' => 1,
+                'class' => 'button_enid_eleccion  text-uppercase es_publico ' . $activo
+            ]
+
+        );
+
+        $nov = a_enid(
+            "no, solo yo puedo ser esto",
+            [
+                'id' => $id_servicio,
+                'es_publico' => 0,
+                'class' => 'button_enid_eleccion text-uppercase es_publico ' . $no_activo
+            ]
+
+        );
+
+        $r[] = d(h("¿todos pueden ver este artículo?", 5, 'text-uppercase'));
+        $r[] = dd($v, $nov);
+        return $r;
 
 
     }

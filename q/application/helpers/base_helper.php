@@ -67,8 +67,8 @@ if (!function_exists('invierte_date_time')) {
         if ($num_images < 1) {
 
             $response = _text(
-                "TU ", $tipo_promocion, " ",
-                "SERÁ VISIBLE HASTA QUE INCLUYAS ALGUNAS IMÁGENES"
+                "tu ", $tipo_promocion, " ",
+                "será visible hasta que incluyas algunas imágenes"
             );
         }
         return $response;
@@ -77,17 +77,11 @@ if (!function_exists('invierte_date_time')) {
     function descartar_promocion($num_images, $id_servicio, $id_perfil)
     {
 
-        $response = ($num_images < 1 || $id_perfil != 20) ?
 
-            a_enid(
-                "DESCARTAR PROMOCIÓN",
-                [
-                    "class" => 'descartar_promocion border padding_10 text-right top_30 bottom_50',
-                    "id" => $id_servicio,
-                ]
-            ) : "";
+        return ($num_images < 1 || $id_perfil != 20) ?
+            terminar('descartar_promocion', $id_servicio) : '';
 
-        return $response;
+
     }
 
 }
