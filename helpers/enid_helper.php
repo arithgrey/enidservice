@@ -1809,7 +1809,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
             [
                 "href" => "../login/?action=nuevo",
                 "class" => ' white text-uppercase strong text_agilizar',
-            ],0
+            ], 0
         );
 
 
@@ -3427,3 +3427,33 @@ function d_c($items = [], $attr)
     return append($response);
 }
 
+function terminar($ext = '', $id = '')
+{
+
+    $cerrar = d(
+        format_link("",
+            [
+                'class' => _text("fa fa-times ", $ext),
+                'id' => $id
+            ]
+        ), 'col-xs-2 col-sm-1 ml-auto');
+    return d($cerrar, 13);
+}
+
+function dropdown($presentacion, $a_menu = [], $ext = '')
+{
+
+    $r[] = d($presentacion,
+        [
+            'class' => 'dropdown-toggle',
+            'data-toggle' => "dropdown",
+            'aria-haspopup' => true,
+            'aria-expanded' => "false"
+        ]
+    );
+
+
+    $r[] = d($a_menu, "dropdown-menu");
+    return d($r, _text('position-absolute ', $ext));
+
+}

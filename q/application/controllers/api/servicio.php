@@ -263,6 +263,24 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+    function espublico_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "es_publico,id_servicio")) {
+
+
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("es_publico", $param["es_publico"], $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
+
+
 
     function tallas_GET()
     {
@@ -617,35 +635,33 @@ class Servicio extends REST_Controller
                         "style" =>
                             "border-style: solid;position:absolute;z-index:2000;
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
-                    ]);
+                    ]
+                );
 
-                $img_preview = d(append([$interior, $img]), 'col-sm-2 mx-auto');
+                $img_preview = d([$interior, $img], 'col mx-auto nav tabs');
                 $images_complete[$num_imgs] = $img_preview;
 
             }
         }
 
-        return d($images_complete,'d-md-flex');
+        return d($images_complete, 'd-md-flex mt-5 mb-5');
     }
 
-    private function create_imgs_tb($row, $is_mobile)
+    private function create_imgs_tb($row)
     {
         $id_imagen = $row["id_imagen"];
-        $url_imagen = get_url_servicio($row["nombre_imagen"], 1);
-        $extra_imagen = ($is_mobile == 0) ? 'position:relative;width:150px!important;height:150px!important;' : 'position:relative;width:170px!important;height:150px!important;';
-        $id_error = "imagen_" . $id_imagen;
-        $img = img([
-            'src' => $url_imagen,
-            'style' => $extra_imagen,
-            'id' => $id_error,
-            'onerror' => "reloload_img( '" . $id_error . "','" . $url_imagen . "', 1);"
-        ]);
+        $extra_img = is_mobile() ? ' w-75 ' : '';
+        $img = img(
+            [
+                'src' => get_url_servicio($row["nombre_imagen"], 1),
+                'class' => _text('mx-auto ', $extra_img)
+            ]
+        );
 
-        $config_imagen = dropdown_button($id_imagen, $row["principal"]);
-        $extra_principal = ["class" => "selector_principal"];
-        $informacion_imagen = $config_imagen . $img;
-        $contenedor_imagen = ($row["principal"] == 0) ? $informacion_imagen : d($informacion_imagen, $extra_principal);
-        return $contenedor_imagen;
+        $dropdown = dropdown_button($id_imagen, $row["principal"]);
+        $extra = ($row["principal"] < 1) ? '' : 'selector_principal';
+        return d([$dropdown, $img], _text('col mx-auto row ', $extra));
+
     }
 
     function empresa_GET()
@@ -665,7 +681,7 @@ class Servicio extends REST_Controller
 
             $servicios = $this->get_servicios_empresa($param);
 
-            if (count($servicios) > 0) {
+            if (es_data($servicios) ) {
                 if ($servicios["num_servicios"] > 0) {
 
                     $this->response($this->get_view_empresa($servicios, $param));

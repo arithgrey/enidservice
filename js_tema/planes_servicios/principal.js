@@ -7,6 +7,12 @@ window.onpopstate = event => {
     }
 };
 let $menu = $('.menu');
+let seccion_busqueda = '.contenedor_busqueda_articulos';
+let titulo_seccion = '.titulo_seccion';
+
+let $seccion_busqueda = $(seccion_busqueda);
+let $titulo_seccion = $(titulo_seccion);
+
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -21,6 +27,7 @@ $(document).ready(() => {
         set_option("nuevo", 1);
         despliega([".texto_ventas_titulo"], 1);
     });
+
     $(".li_menu_servicio").click(() => {
         despliega([".btn_agregar_servicios", ".contenedor_top"], 1);
     });
@@ -101,8 +108,10 @@ let respuesta_carga_servicios = data => {
 
 let carga_info_servicio = function (e) {
 
+
     set_option("servicio", get_parameter_enid($(this), "id"));
     if (get_option("servicio") > 0) {
+
         carga_informacion_servicio(1);
     }
 };
@@ -113,6 +122,7 @@ let carga_informacion_servicio = (num = 1) => {
     despliega([".contenedor_busqueda"], 0);
     let url = "../q/index.php/api/servicio/especificacion/format/json/";
     let data_send = {id_servicio: get_option("servicio"), "num": num};
+
     request_enid("GET", data_send, url, respuesta_informacion_servicio, ".place_servicios", function () {
 
         recorre(".contenedor_principal_enid");
@@ -121,7 +131,7 @@ let carga_informacion_servicio = (num = 1) => {
 };
 
 let respuesta_informacion_servicio = (data) => {
-
+    add_class([seccion_busqueda, titulo_seccion], 'd-none');
     render_enid(".place_servicios", data);
     $(".cancelar_carga_imagen").click(cancelar_carga_imagen);
     $(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
@@ -165,6 +175,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".tiempo_entrega").change(set_tiempo_entrega);
     $(".btn_url_ml").click(set_url_ml);
     $(".activar_publicacion").click(activa_publicacion);
+    $(".es_publico").click(activa_visibilidad);
     $(".restablecer").click(restablecer);
 
 
@@ -185,7 +196,10 @@ let respuesta_informacion_servicio = (data) => {
 let actualiza_entregas_en_casa = function (e) {
 
     let url = "../q/index.php/api/servicio/entregas_en_casa/format/json/";
-    let data_send = {entregas_en_casa: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
+    let data_send = {
+        entregas_en_casa: get_parameter_enid($(this), "id"),
+        id_servicio: get_option("servicio")
+    };
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
@@ -194,7 +208,10 @@ let actualiza_entregas_en_casa = function (e) {
 
 let actualiza_telefono_visible = function () {
     let url = "../q/index.php/api/servicio/telefono_visible/format/json/";
-    let data_send = {telefono_visible: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
+    let data_send = {
+        telefono_visible: get_parameter_enid($(this), "id"),
+        id_servicio: get_option("servicio")
+    };
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
@@ -204,7 +221,10 @@ let actualiza_telefono_visible = function () {
 let actualiza_ventas_mayoreo = function (e) {
 
     let url = "../q/index.php/api/servicio/ventas_mayoreo/format/json/";
-    let data_send = {venta_mayoreo: get_parameter_enid($(this), "id"), id_servicio: get_option("servicio")};
+    let data_send = {
+        venta_mayoreo: get_parameter_enid($(this), "id"),
+        id_servicio: get_option("servicio")
+    };
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
@@ -945,7 +965,10 @@ let elimina_foto_producto = function (e) {
 
     let url = "../q/index.php/api/imagen_servicio/index/format/json/";
     if (get_parameter_enid($(this), "id") > 0) {
-        let data_send = {"id_imagen": get_parameter_enid($(this), "id"), "id_servicio": get_option("servicio")};
+        let data_send = {
+            "id_imagen": get_parameter_enid($(this), "id"),
+            "id_servicio": get_option("servicio")
+        };
         request_enid("DELETE", data_send, url, function () {
             carga_informacion_servicio(1);
         }, ".place_servicios");
@@ -1218,7 +1241,11 @@ let actualiza_talla_servicio = function () {
     let existencia = get_parameter_enid($(this), "existencia");
     if (id > 0) {
         let url = "../q/index.php/api/servicio/talla/format/json/";
-        let data_send = {"id_servicio": get_option("servicio"), "id_talla": id, "existencia": existencia};
+        let data_send = {
+            "id_servicio": get_option("servicio"),
+            "id_talla": id,
+            "existencia": existencia
+        };
         request_enid("PUT", data_send, url, carga_tallas);
     }
 };
@@ -1226,7 +1253,10 @@ let set_tiempo_entrega = () => {
 
     let tiempo_entrega = get_valor_selected(".tiempo_entrega");
     let url = "../q/index.php/api/servicio/tiempo_entrega/format/json/";
-    let data_send = {"id_servicio": get_option("servicio"), "tiempo_entrega": tiempo_entrega};
+    let data_send = {
+        "id_servicio": get_option("servicio"),
+        "tiempo_entrega": tiempo_entrega
+    };
     request_enid("PUT", data_send, url, respuesta_tiempo_entrega, ".response_tiempo_entrega");
 
 
@@ -1273,6 +1303,18 @@ let activa_publicacion = function () {
     });
 
 };
+let activa_visibilidad = function () {
+    let status = get_parameter_enid($(this), "es_publico");
+    let id_servicio = get_parameter_enid($(this), "id");
+    let data_send = {"es_publico": status, "id_servicio": id_servicio};
+    let url = "../q/index.php/api/servicio/espublico/format/json/";
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    });
+
+};
+
+
 let descartar_promocion = function () {
 
     let id_servicio = get_parameter_enid($(this), "id");

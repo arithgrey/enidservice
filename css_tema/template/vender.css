@@ -14,11 +14,6 @@
 .fa-youtube-play {
     color: red;
 }
-.contenedor_imagen_muestra {
-    overflow-x: scroll;
-    overflow-x: hidden;
-}
-
 .contenedor_imagen_muestra_producto {
     border-style: solid;
     position: absolute;
