@@ -133,6 +133,7 @@ let carga_informacion_servicio = (num = 1) => {
 let respuesta_informacion_servicio = (data) => {
     add_class([seccion_busqueda, titulo_seccion], 'd-none');
     render_enid(".place_servicios", data);
+    verifica_formato_default_inputs();
     $(".cancelar_carga_imagen").click(cancelar_carga_imagen);
     $(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
     $(".agregar_img_servicio").click(carga_form_img);

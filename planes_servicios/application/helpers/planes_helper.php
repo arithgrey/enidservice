@@ -5,18 +5,17 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_perfil = $data["id_perfil"];
-        $is_mobile = is_mobile();
         $action = $data["action"];
         $top_servicios = $data["top_servicios"];
         $considera_segundo = $data["considera_segundo"];
 
-        $t[] = menu($id_perfil, $is_mobile, $action);
+        $t[] = menu($id_perfil, $action);
         $t[] = btw(
-            _titulo("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA")
+            _titulo("artículos más vistos de la semana")
             ,
             top_ventas($top_servicios)
             ,
-            "contenedor_top " . ($action == 1) ? " display_none " : " "
+            "contenedor_top " . ($action == 1) ? " d-none " : " "
         );
 
         $r[] = d($t, 'col-md-2 menu');
@@ -24,19 +23,18 @@ if (!function_exists('invierte_date_time')) {
         $z[] = tab_seccion(
             articulos_venta($data["list_orden"]),
             'tab_servicios',
-            valida_active_tab(0, $action, $considera_segundo)
+            tab_activa(0, $action, $considera_segundo)
         );
         $z[] = tab_seccion(
-
             puntos_venta()
             ,
             'tab_puntos_venta',
-            valida_active_tab(0, $action, $considera_segundo)
+            tab_activa(0, $action, $considera_segundo)
         );
         $z[] = tab_seccion(
-            form_ventas($data["ciclo_facturacion"], $data["error_registro"], $is_mobile),
+            form_ventas($data["ciclo_facturacion"], $data["error_registro"]),
             'tab_form_servicio',
-            valida_active_tab(1, $action),
+            tab_activa(1, $action),
             [
                 'class' => 'mt-5 mt-md-0'
             ]
@@ -44,16 +42,15 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = tab_content($z, 10);
-        $r[] = d(top_articulos($top_servicios, $is_mobile), 2);
-        $r[] = get_formar_hiddens($is_mobile, $action, $data["extra_servicio"]);
+        $r[] = d(top_articulos($top_servicios), 2);
+        $r[] = frm_hiddens($action, $data["extra_servicio"]);
 
         return append($r);
     }
 
 
-    function form_ventas($ciclo_facturacion, $error_registro, $is_mobile)
+    function form_ventas($ciclo_facturacion, $error_registro)
     {
-
 
         $r[] = form_open('',
             [
@@ -64,18 +61,17 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = _titulo('¿Qué anunciamos?');
         $r[] = flex(
-
-            a_enid('UN PRODUCTO',
+            a_enid('un producto',
                 [
-                    "class" => "tipo_promocion tipo_producto easy_select_enid button_enid_eleccion_active",
+                    "class" => "tipo_promocion tipo_producto easy_select_enid button_enid_eleccion_active text-uppercase",
                     "id" => 0,
                 ]
             )
             ,
             a_enid(
-                "UN SERVICIO",
+                "un servicio",
                 [
-                    "class" => "tipo_promocion tipo_servicio",
+                    "class" => "tipo_promocion tipo_servicio text-uppercase",
                     "id" => 1
                 ]
             )
@@ -155,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btn("Continuar", ['class' => 'siguiente_btn mt-5']);
         $r[] = form_close();
         $re[] = d($r, "contenedor_agregar_servicio_form ");
-        $re[] = get_selector_categoria($is_mobile);
+        $re[] = selector_categoria();
         return append($re);
 
 
@@ -181,33 +177,27 @@ if (!function_exists('invierte_date_time')) {
                         ], 1
                     );
 
-
                 $response[] = ajustar($link, $row["vistas"]);
 
             }
         }
+
         return append($response);
-
-
     }
 
 
     function articulos_venta($list_orden)
     {
-
-
-        $r[] = d(_titulo("lo que vendes"),'titulo_seccion');
+        $r[] = d(_titulo("lo que vendes"), 'titulo_seccion');
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);
-
     }
-
 
     function puntos_venta()
     {
 
-        $r[] = h("PUNTOS DE VENTA", 3);
+        $r[] = _titulo("puntos de venta");
         $r[] = d(place("place_puntos_venta top_50"), 1);
         return append($r);
 
@@ -217,21 +207,21 @@ if (!function_exists('invierte_date_time')) {
     function get_format_busqueda($list_orden)
     {
 
-
-        $r[] = input_frm(4, 'Nombre del producto o servicio', [
-            "id" => "textinput",
-            "name" => "textinput",
-            "placeholder" => "Nombre del producto o servicio",
-            "class" => "form-control input-sm q_emp",
-            "onkeyup" => "onkeyup_colfield_check(event);"
-        ]);
+        $r[] = input_frm(4, 'Nombre del producto o servicio',
+            [
+                "id" => "textinput",
+                "name" => "textinput",
+                "placeholder" => "Nombre del producto o servicio",
+                "class" => "form-control input-sm q_emp",
+                "onkeyup" => "onkeyup_colfield_check(event);"
+            ]
+        );
 
         $r[] = d(list_orden($list_orden), 4);
 
         return d($r, 'd-md-flex row mt-5 mb-5');
 
     }
-
 
     function list_orden($list_orden)
     {
@@ -245,54 +235,56 @@ if (!function_exists('invierte_date_time')) {
             $a++;
         }
         $r[] = '</select>';
-        return append($r);
 
+        return append($r);
     }
 
 
-    function top_articulos($top, $is_mobile)
+    function top_articulos($top)
     {
 
         $response = "";
+        $is_mobile = is_mobile();
         if (es_data($top) && $is_mobile > 0) {
 
             $r = [];
             foreach ($top as $row):
 
                 $r[] = icon("fa fa-angle-right");
-                $articulo = (trim(strlen($row["nombre_servicio"])) > 22) ? substr($row["nombre_servicio"], 0, 22) . "..." : strlen($row["nombre_servicio"]);
+                $nombre_servicio = $row["nombre_servicio"];
+                $articulo = (trim(strlen($nombre_servicio)) > 22) ? substr($nombre_servicio, 0, 22) . "..." : strlen($nombre_servicio);
                 $r[] = $articulo;
-                $r[] = d(span($row["vistas"], "a_enid_black_sm_sm"),
+                $r[] = d(
+                    d($row["vistas"], "a_enid_black_sm_sm"),
                     [
                         "class" => "pull-right",
                         "title" => "Personas que han visualizado este  producto"
-                    ]);
+                    ]
+                );
 
 
-                $r[] = a_enid(append($r), path_enid("producto", $row['id_servicio']));
+                $r[] = a_enid($r, path_enid("producto", $row['id_servicio']));
 
             endforeach;
 
 
             if (es_data($top)):
-                array_pop($r, h("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA", 2));
+                $titulo = _titulo("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA");
+                array_pop($r, $titulo);
             endif;
 
-            $response = d(append($r), "card contenedor_articulos_mobil");
+            $response = d($r, "card contenedor_articulos_mobil");
 
         }
         return $response;
     }
 
 
-    function get_selector_categoria($is_mobile)
+    function selector_categoria()
     {
-
 
         $r[] = _titulo('¿en qué categoría se encuentra tu artículo?');
         $r[] = hr();
-
-
         $cerrar = d(
             format_link("",
                 [
@@ -300,18 +292,17 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ), 'col-xs-2 col-sm-1 ml-auto');
         $r[] = d($cerrar, 13);
-
-
         $r[] = places();
+
         return d($r, "contenedor_categorias_servicios d-none");
 
     }
 
 
-    function get_formar_hiddens($is_mobile, $action, $extra_servicio)
+    function frm_hiddens($action, $extra_servicio)
     {
 
-
+        $is_mobile = is_mobile();
         $r[] = hiddens(
             [
 
@@ -368,7 +359,6 @@ if (!function_exists('invierte_date_time')) {
                 case 'nuevo':
                     $action = 1;
                     break;
-
                 case 'lista':
                     $action = 0;
                     break;
@@ -383,17 +373,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function valida_active_tab($seccion, $valor_actual, $considera_segundo = 0)
+    function menu($perfil, $action)
     {
 
-        return ($considera_segundo == 0) ? (($seccion == $valor_actual) ? 1 : 0) : 1;
-
-    }
-
-
-    function menu($perfil, $is_mobile, $action)
-    {
-
+        $is_mobile = is_mobile();
         $punto_venta = tab(
             text_icon('fa fa-map', " puntos de entrega "),
             "#tab_puntos_venta",
@@ -421,12 +404,12 @@ if (!function_exists('invierte_date_time')) {
                         text-uppercase black"
                     ]
                 ),
-                _text(valida_active_tab('nuevo', $action), " ")
+                _text(tab_activa('nuevo', $action), " ")
             );
 
             $list[] = li(
                 $punto_venta,
-                _text(valida_active_tab('puntos_venta', $action), " ")
+                _text(tab_activa('puntos_venta', $action), " ")
             );
 
             $list[] =
@@ -436,7 +419,7 @@ if (!function_exists('invierte_date_time')) {
                         "class" =>
                             _text(
                                 'li_menu_servicio btn_servicios ',
-                                valida_active_tab('lista', $action)
+                                tab_activa('lista', $action)
                             ),
                         "id" => 0,
                     ]
@@ -461,7 +444,7 @@ if (!function_exists('invierte_date_time')) {
                         [
                             "class" => _text(
                                 'li_menu_servicio btn_servicios ',
-                                valida_active_tab('lista', $action)
+                                tab_activa('lista', $action)
                             ),
                             "id" => 1,
 
@@ -475,7 +458,7 @@ if (!function_exists('invierte_date_time')) {
             $link = tab("", "#tab_servicios",
                 [
 
-                    'class' => "black  btn_serv"
+                    'class' => "black btn_serv"
                 ]
             );
 
@@ -487,13 +470,13 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "agregar_servicio btn_agregar_servicios"
                     ]
                 ),
-                ["class" => valida_active_tab('nuevo', $action)]
+                ["class" => tab_activa('nuevo', $action)]
             );
             $list[] = li(
                 $link,
                 _text(
                     "li_menu li_menu_servicio btn_servicios ",
-                    valida_active_tab('lista', $action)
+                    tab_activa('lista', $action)
                 )
 
             );
@@ -503,6 +486,5 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
     }
-
 
 }

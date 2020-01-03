@@ -69,24 +69,6 @@
 .contenedor_costo {
     margin-top: 25px;
 }
-
-.seccion_ventas_mayoreo {
-    margin-top: 25px;
-}
-
-.seccion_informacion_envio {
-    margin-top: 25px;
-}
-
-
-.costo_envio_text {
-    margin-top: 20px;
-}
-
-.seccion_ventas_mayoreo_table {
-    margin-top: 20px;
-}
-
 .receipt-main {
 
     padding: 40px 30px !important;
@@ -184,10 +166,6 @@
 }
 
 .text_agregar_color:hover {
-    cursor: pointer;
-}
-
-.text_info_envio:hover {
     cursor: pointer;
 }
 

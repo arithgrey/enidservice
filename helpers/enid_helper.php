@@ -500,10 +500,10 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
 
 }
 
-function tab_activa($seccion, $activa)
+function tab_activa($seccion, $activa, $considera_segundo = 0)
 {
-    return ($seccion == $activa) ? 1 : 0;
 
+    return ($considera_segundo == 0) ? (($seccion == $activa) ? 1 : 0) : 1;
 }
 
 
@@ -3227,10 +3227,21 @@ function _text()
     for ($i = 0; $i < func_num_args(); $i++) {
         $response .= $lista_argumentos[$i];
     }
-
     return $response;
 
 }
+function _text_()
+{
+
+    $lista_argumentos = func_get_args();
+    $response = '';
+    for ($i = 0; $i < func_num_args(); $i++) {
+        $response .= ' '.$lista_argumentos[$i];
+    }
+    return $response;
+
+}
+
 
 function _d()
 {
