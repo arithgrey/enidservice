@@ -263,6 +263,7 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+
     function espublico_PUT()
     {
 
@@ -279,7 +280,6 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
-
 
 
     function tallas_GET()
@@ -620,11 +620,13 @@ class Servicio extends REST_Controller
 
             $url_imagen = get_url_request("img_tema/tienda_en_linea/agregar_imagen.png");
             $extra_imagen = ($is_mobile == 0) ? "position: relative;width:160px!important;height:160px;" : "position: relative;width:160px!important;";
-            $img = img([
-                "class" => "img-responsive agregar_img_servicio_img",
-                "src" => $url_imagen,
-                "style" => $extra_imagen
-            ]);
+            $img = img(
+                [
+                    "class" => "img-responsive agregar_img_servicio_img mx-auto",
+                    "src" => $url_imagen,
+                    "style" => $extra_imagen
+                ]
+            );
 
             for ($num_imgs = $num_imgs; $num_imgs < 6; $num_imgs++) {
 
@@ -638,7 +640,7 @@ class Servicio extends REST_Controller
                     ]
                 );
 
-                $img_preview = d([$interior, $img], 'col mx-auto nav tabs');
+                $img_preview = d([$interior, $img], 'col mx-auto nav tabs mt-2');
                 $images_complete[$num_imgs] = $img_preview;
 
             }
@@ -660,7 +662,7 @@ class Servicio extends REST_Controller
 
         $dropdown = dropdown_button($id_imagen, $row["principal"]);
         $extra = ($row["principal"] < 1) ? '' : 'selector_principal';
-        return d([$dropdown, $img], _text('col mx-auto row ', $extra));
+        return d([$dropdown, $img], _text('col mx-auto row mt-2', $extra));
 
     }
 
@@ -681,7 +683,7 @@ class Servicio extends REST_Controller
 
             $servicios = $this->get_servicios_empresa($param);
 
-            if (es_data($servicios) ) {
+            if (es_data($servicios)) {
                 if ($servicios["num_servicios"] > 0) {
 
                     $this->response($this->get_view_empresa($servicios, $param));

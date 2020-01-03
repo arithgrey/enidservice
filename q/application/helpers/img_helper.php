@@ -135,9 +135,9 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "imagen_img",
                 "name" => "imagen",
                 "enctype" => "multipart/form-data",
-                "size" => "20",
+                "size" => "25",
                 "multiple" => true
-            ]
+            ],0,0
         );
 
         $r[] = hiddens(["name" => 'q', "value" => $q, "class" => "q_imagen"]);
