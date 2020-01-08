@@ -289,14 +289,14 @@ let muestra_select_ciclo_facturacion = function (e) {
 let muestra_seccion_nombre_servicio = e => {
 
     let visible = $(".text_nombre_servicio").is(":visible");
-    let x = (visible == true) ? showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio") : showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio");
+    let x = (visible == true) ? showonehideone(".form_servicio_nombre_info", ".text_nombre_servicio") : showonehideone(".input_nombre_servicio_facturacion", ".text_nombre_servicio");
 };
 
 
 let muestra_seccion_video_servicio = () => {
 
     let visible = $(".text_video_servicio").is(":visible");
-    let x = (visible == true) ? showonehideone(".input_url_youtube", ".text_video_servicio") : showonehideone(".input_url_youtube", ".text_video_servicio");
+    let x = (visible == true) ? showonehideone(".form_servicio_youtube", ".text_video_servicio") : showonehideone(".input_url_youtube", ".text_video_servicio");
 };
 
 

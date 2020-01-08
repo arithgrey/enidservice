@@ -1,4 +1,4 @@
-.input_nuevo, .contenedor_costo, .contenedor_info_youtube, .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
+.input_nuevo, .contenedor_costo, .form_servicio_youtube , .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
     display: none;
 }
 
@@ -23,7 +23,7 @@
 }
 
 
-.input_nombre_servicio_facturacion {
+.form_servicio_nombre_info {
     display: none;
 }
 
