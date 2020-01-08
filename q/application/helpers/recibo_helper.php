@@ -426,7 +426,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function create_resumen_pedidos($recibos, $lista_estados, $param)
+    function render_resumen_pedodos($recibos, $lista_estados, $param)
     {
 
         $tipo_orden = $param["tipo_orden"];
@@ -460,6 +460,7 @@ if (!function_exists('invierte_date_time')) {
         $titulos = d_c($items, "font-weight-bold col-lg-2 ");
         $tb[] = d($titulos, 'mb-3 mt-3 d-none d-md-block row');
 
+        $total = 0;
         foreach ($recibos as $row) {
 
 
@@ -472,11 +473,11 @@ if (!function_exists('invierte_date_time')) {
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
             $tipo_entrega = ($tipo_entrega == 1) ? "PAGO CONTRA ENTREGA" : "MENSAJERÍA";
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
-
             $extra = (in_array($status, [9, 7, 11, 12])) ? " entregado" : "";
             $extra = ($status == 10) ? " cancelado " : $extra;
-            $id_servicio = $row["id_servicio"];
             $url_img = $row["url_img_servicio"];
+            $total += $monto_a_pagar;
+
             $img = img(
                 [
                     "src" => $url_img,
@@ -487,7 +488,7 @@ if (!function_exists('invierte_date_time')) {
             $items = [
                 span($recibo, 'd-md-block d-none'),
                 $img,
-                span($estado_compra,'font-weight-bold estado_compra'),
+                span($estado_compra, 'font-weight-bold estado_compra'),
                 $tipo_entrega,
                 money($monto_a_pagar),
                 $entrega,
@@ -507,8 +508,8 @@ if (!function_exists('invierte_date_time')) {
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
-
-        return _text($tb_fechas, $inicio, d($tb, 'col-lg-12'));
+        $totales =  _titulo(_text_('Total', money($total)),1);
+        return _text($tb_fechas, $inicio, d($tb, 'col-lg-12 mb-4'), $totales);
     }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)
