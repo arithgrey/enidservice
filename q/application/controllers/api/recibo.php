@@ -651,7 +651,7 @@ class recibo extends REST_Controller
             }
             if ($param["v"] == 1) {
                 $response = $this->add_imgs_servicio($response);
-                $response = create_resumen_pedidos($response,
+                $response = render_resumen_pedodos($response,
                     $this->get_estatus_enid_service($param), $param);
 
             }
