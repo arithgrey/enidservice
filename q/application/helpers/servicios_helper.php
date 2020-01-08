@@ -67,9 +67,10 @@ if (!function_exists('invierte_date_time')) {
             $tipo_promocion = ["PRODUCTO", "SERVICIO"][$es_servicio];
             $valor_youtube = pr($servicio, "url_vide_youtube");
             $val_youtube = icon('fa fa-pencil text_url_youtube') . $valor_youtube;
-            $_nombre_servicio = pr($servicio, "nombre_servicio");
+            $nombre = pr($servicio, "nombre_servicio");
 
-            $r[] = titulo_servicio($tipo_promocion, $_nombre_servicio, $servicio);
+
+            $r[] = seccion_titulo($nombre, $servicio);
             $r[] = menu_config($num, $num_imagenes, $url_productos_publico);
 
             $r[] = configurador(
@@ -91,7 +92,7 @@ if (!function_exists('invierte_date_time')) {
                 $comision,
                 $utilidad,
                 $servicio,
-                $_nombre_servicio
+                $nombre
             );
 
             $res[] = agregar_imgs();
@@ -162,7 +163,6 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio,
             $es_servicio, $id_perfil,
             $s["stock"],
-            $s["tiempo_promedio_entrega"],
             $s["entregas_en_casa"],
             $tel_visible,
             $s["contra_entrega"],
@@ -172,7 +172,6 @@ if (!function_exists('invierte_date_time')) {
             $s["id_ciclo_facturacion"],
             $data["has_phone"],
             $s["venta_mayoreo"],
-            $s["url_ml"],
             $precio, $costo_envio,
             $s["link_dropshipping"],
             $comision_venta, $utilidad,
@@ -215,7 +214,6 @@ if (!function_exists('invierte_date_time')) {
         $es_publico,
         $id_servicio,
         $es_servicio, $id_perfil, $stock,
-        $pronostico_entrega,
         $entregas_en_casa,
         $telefono_visible,
         $es_entrega,
@@ -225,7 +223,6 @@ if (!function_exists('invierte_date_time')) {
         $id_ciclo_facturacion,
         $has_phone,
         $venta_mayoreo,
-        $url_ml,
         $precio,
         $costo_envio,
         $link_dropshipping,
@@ -237,12 +234,9 @@ if (!function_exists('invierte_date_time')) {
 
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
         $baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
-
-
         $t[] = estado_publicacion($status, $id_servicio);
         $t[] = es_publico($status, $es_publico, $id_servicio);
         $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock);
-
         $t[] = form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping);
         $t[] = compras_casa($es_servicio, $entregas_en_casa);
         $t[] = telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio);
@@ -251,8 +245,6 @@ if (!function_exists('invierte_date_time')) {
         $t[] = uso_disponibilidad($existencia, $es_nuevo, $es_servicio);
         $t[] = seccion_uso_producto($es_nuevo);
         $t[] = seccion_ciclos_facturacion($ciclos, $id_ciclo_facturacion, $es_servicio);
-
-        $t[] = path_venta_extra($es_servicio, $url_ml);
         $t[] = form_costo_unidad($precio);
         $t[] = form_costo_envio($es_servicio, $costo_envio);
         $t[] = utilidad($text_comision_venta, $utilidad);
@@ -299,9 +291,23 @@ if (!function_exists('invierte_date_time')) {
 
 
         $z[] = $images;
-        $z[] = titulo_bloque("¿tienes algún video?");
-        $z[] = d(text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE "));
-        $z[] = d($val_youtube, "text_video_servicio");
+        $z[] = titulo_bloque(
+            text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE "));
+
+        if (strlen($val_youtube) > 0) {
+
+            $z[] = d(text_icon('fa fa fa-pencil text_video_servicio',
+                a_enid(
+                    'ver ahora',
+                    [
+                        'href' => $valor_youtube,
+                        'target' => '_black',
+                        'class' => 'black underline'
+                    ], 0
+                )
+            ), "text-uppercase");
+        }
+
         $z[] = form_youtube($valor_youtube);
 
 
@@ -351,32 +357,6 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    function path_venta_extra($es_servicio, $url_ml)
-    {
-
-        $r = [];
-        if ($es_servicio < 1) {
-
-            $x[] = input_frm(
-                'contenedor_pago_ml',
-                "¿CUENTAS CON ALGÚN ENLACE DE PAGO EN MERCADO LIBRE?",
-                [
-                    "type" => "url",
-                    "name" => "url_mercado_libre",
-                    "class" => "form-control url_mercado_libre",
-                    "id" => "url_mercado_libre",
-                    "value" => $url_ml
-                ]
-            );
-
-            $x[] = d(btn("GUARDAR", ["class" => "btn_url_ml"]));
-            $r[] = d($x, 'col-md-6 mt-5');
-
-        }
-        return append($r);
-
-
-    }
 
     function venta_mayoreo($es_servicio, $venta_mayoreo)
     {
@@ -571,7 +551,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_perfil
             ));
             $response = d($response,
-                "d-flex flex-column justify-content-center col-lg-3 top_50 px-3"
+                "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
             );
 
         } else {
@@ -1013,65 +993,76 @@ if (!function_exists('invierte_date_time')) {
             $text .= $url[$b];
         }
 
-        return path_enid("youtube_embebed", $text, 0, 1);
+        return path_enid("youtube_embebed", $text, 1, 0);
 
     }
 
-    function titulo_servicio($tipo_promocion, $nuevo_nombre_servicio, $servicio)
+    function seccion_titulo($nuevo_nombre_servicio, $servicio)
     {
 
-        $response = [];
-        $ie_nombre = input(
+
+        $titulo = _text_(
+            icon('fa fa-pencil text_nombre_servicio'),
+            $nuevo_nombre_servicio
+        );
+
+        $response[] = titulo_bloque($titulo);
+        $response[] = form_open("", ['class' => 'form_servicio_nombre_info']);
+        $response[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
+
+        $input = input_frm("", '¿NOMBRE DEL ARTICULO O SERVICIO?',
             [
 
                 "type" => "text",
                 "name" => "q2",
                 "class" => "nuevo_producto_nombre",
+                "id" => "nuevo_producto_nombre",
                 "onkeyup" => "transforma_mayusculas(this)",
                 "value" => pr($servicio, 'nombre_servicio'),
                 "required" => true
-            ],
-            1
+            ]
         );
 
-        $h = append([icon('fa fa-pencil text_nombre_servicio'), $tipo_promocion, $nuevo_nombre_servicio]);
-        $respons[] = h($h, 4);
-        $respons[] = form_open("", ['class' => 'form_servicio_nombre_info input_nombre_servicio_facturacion ']);
-        $respons[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
-        $respons[] = d($ie_nombre, 9);
-        $respons[] = d(btn("GUARDAR", ["class" => "info_guardar_nombre_servicio"], 1), 3);
-        $respons[] = form_close();
-        return addNRow(append($response));
+        $button = btn("modificar");
+        $response[] = flex($input, $button,
+            'mt-5 mb-5 align-items-center',
+            'col-sm-8 p-0', 'col-sm-4 p-0');
+
+        $response[] = form_close();
+        return append($response);
 
     }
 
     function form_youtube($valor_youtube)
     {
 
-        $r = [];
-        $i = input([
-            "type" => "hidden",
-            "name" => "q",
-            "value" => "url_vide_youtube"
-        ],
-            1);
 
+        $r[] = form_open("", ["class" => "form_servicio_youtube"]);
+        $r[] = input(
+            [
+                "type" => "hidden",
+                "name" => "q",
+                "value" => "url_vide_youtube"
+            ]
+        );
 
-        $p = d("", "place_url_youtube", 1);
-        array_push($r, form_open("", ["class" => "form_servicio_youtube input_url_youtube contenedor_info_youtube"]));
-        array_push($r, input([
-            "type" => "url",
-            "name" => "q2",
-            "class" => 'url_youtube',
-            "value" => $valor_youtube,
-            "required" => true
-        ], 1));
+        $input = input_frm("", "LINK DE YOUTUBE",
+            [
+                "type" => "url",
+                "name" => "q2",
+                "class" => 'url_youtube',
+                "id" => 'url_youtube',
+                "value" => $valor_youtube,
+                "required" => true
+            ]
+        );
 
-        array_push($r, d($i . $p, 9));
-        array_push($r, d(btn("GUARDAR", ["class" => "guardar_video_btn"], 1), 3));
-        array_push($r, form_close());
+        $button = btn("GUARDAR", ["class" => "guardar_video_btn"]);
+        $r[] = flex($input, $button,
+            'mt-5 align-items-end','col-sm-8 p-0','col-sm-4 p-0');
+        $r[] = form_close();
 
-        return append($r);
+        return d($r);
 
     }
 
@@ -1349,7 +1340,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close(place("place_registro_costo"));
 
 
-        return d($r, 'col-md-5 mt-5');
+        return d($r, 'col-md-6 mt-5');
 
 
     }
