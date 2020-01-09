@@ -778,7 +778,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon('fa fa-star', $text)
             ,
             [
-                "class" => _text("imagen_principald dropdown-item text-uppercase " . $ext),
+                "class" => _text("imagen_principal dropdown-item text-uppercase " . $ext),
                 "id" => $id_imagen
             ]
         );
