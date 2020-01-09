@@ -324,7 +324,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(frm_categorias(), 7);
-        $r[] = d(heading("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
+        $r[] = d(_titulo("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
         return append($r);
 
 

@@ -22,7 +22,7 @@
                 </div>
                 <div class='col-lg-9'>
                     <div class="tab-content">
-                        <?= d(
+                        <?= d(d(
                             _text(
                                 h("Recurso", 3)
                                 ,
@@ -31,9 +31,9 @@
                                 place("place_perfilles_permisos")
                             )
                         ),
-                        [
-                            "class" => "tab-pane active ", "id" => "sec_0"
-                        ]
+                            [
+                                "class" => "tab-pane active ", "id" => "sec_0"
+                            ]
                         ) ?>
                     </div>
                 </div>

@@ -1,23 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function form_entrega()
-    {
-
-        return input_frm(6, "FECHA DE ENTREGA",
-            [
-                "data-date-format" => "yyyy-mm-dd",
-                "name" => 'fecha_inicio',
-                "class" => "form-control input-sm datetimepicker4",
-                "id" => 'datetimepicker4',
-                "value" => date("Y-m-d"),
-
-            ]
-        );
-
-
-    }
-
     function render_compras()
     {
         $opt_turnos[] =
@@ -43,7 +26,19 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 12
             ];
 
-        $r[] = form_entrega();
+
+        $r[] = d('Fecha entrega', 'mr-5 strong text-uppercase black');
+        $r[] = input_frm('', "",
+            [
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_inicio',
+                "class" => " datetimepicker4",
+                "id" => 'datetimepicker4',
+                "value" => date("Y-m-d"),
+                "type" => 'date'
+
+            ]
+        );
 
         $select = create_select(
             $opt_turnos,
@@ -53,28 +48,30 @@ if (!function_exists('invierte_date_time')) {
             "opcion",
             "val"
         );
-        $r[] = ajustar(
-            d("FECHA REFERENCIA", 'strong')
-            ,
-            d(
-                $select
-            )
-            ,
-            " d-flex align-items-center justify-content-between"
-        );
+        $r[] = flex("comparado con", $select,
+            'flex-column ml-md-5 mt-5 ',
+            'strong black text-uppercase', 'mt-3');
 
+        $ext = (is_mobile()) ? 'p-0' : '';
+        $r[] = d(btn('Validar'),
+
+            _text_('col-md-2 col-sm-12 mt-5 mt-md-0', $ext)
+        );
 
         $x[] = form_open("",
             [
-                "class" => "form_compras",
+                "class" => "form_compras d-md-flex justify-content-center align-items-end mx-auto mt-5",
                 "method" => "post"
             ]
         );
-        $x[] = d(append($r), 6, 1);
+        $x[] = append($r);
         $x[] = form_close();
-        $x[] = d(place("place_compras top_50"), 12);
-        return append($x);
-        
+        $x[] = place("place_compras mt-5");
+        $response[] = d(_titulo("planeación y compras"), 'col-lg-12 mt-5');
+        $response[] = d($x, 'col-sm-12 mt-3');
+        return append($response);
+
+
     }
 }
 
