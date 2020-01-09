@@ -70,7 +70,7 @@ if (!function_exists('invierte_date_time')) {
             $nombre = pr($servicio, "nombre_servicio");
 
 
-            $r[] = seccion_titulo($nombre, $servicio);
+            $r[] = seccion_titulo($nombre, $servicio, $num_imagenes);
             $r[] = menu_config($num, $num_imagenes, $url_productos_publico);
 
             $r[] = configurador(
@@ -136,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
-            titulo_bloque(valida_text_imagenes($tipo_promocion, $num_imagenes)),
+            valida_text_imagenes($tipo_promocion, $num_imagenes),
             $num_imagenes,
             $id_servicio,
             $id_perfil,
@@ -617,11 +617,13 @@ if (!function_exists('invierte_date_time')) {
             "#tab_terminos_de_busqueda"
         );
 
+
         $list = [
             li(
                 $link_foto,
                 [
-                    "class" => valida_active($num, 1)
+                    "class" => valida_active($num, 1),
+                    "style" => valida_existencia_imagenes($num_imagenes)
                 ]
             ),
             li(
@@ -660,7 +662,8 @@ if (!function_exists('invierte_date_time')) {
             )
         ];
 
-        return ul($list, "nav nav-tabs");
+        $ext = (is_mobile() && $num_imagenes < 1) ? 'd-none' : '';
+        return ul($list, _text_("nav nav-tabs", $ext));
 
     }
 
@@ -967,11 +970,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = terminar(icon('fa fa fa-times btn_enid_blue cancelar_carga_imagen cancelar_img'));
-
-        $x[] = d(_titulo("AGREGAR IMAGENES"));
-        $x[] = d(place("place_img_producto mt-5"));
-        $r[] = d($x);
-        return d($r, "contenedor_agregar_imagenes");
+        $titulo = d(_titulo("agregar imagenes"), 'mt-5');
+        $lugar = d(place("place_img_producto mt-5"), 'mt-5');
+        $r[] = flex($titulo, $lugar, 'd-flex flex-column align-items-center');
+        return d($r, "contenedor_agregar_imagenes d-none mt-5");
 
     }
 
@@ -997,16 +999,17 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function seccion_titulo($nuevo_nombre_servicio, $servicio)
+    function seccion_titulo($nuevo_nombre_servicio, $servicio, $num_imagenes)
     {
 
 
+        $ext =  (is_mobile() && $num_imagenes <  1) ? 'd-none' : '';
         $titulo = _text_(
             icon('fa fa-pencil text_nombre_servicio'),
             $nuevo_nombre_servicio
         );
 
-        $response[] = titulo_bloque($titulo);
+        $response[] = d(titulo_bloque($titulo),$ext);
         $response[] = form_open("", ['class' => 'form_servicio_nombre_info']);
         $response[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
 
@@ -1059,7 +1062,7 @@ if (!function_exists('invierte_date_time')) {
 
         $button = btn("GUARDAR", ["class" => "guardar_video_btn"]);
         $r[] = flex($input, $button,
-            'mt-5 align-items-end','col-sm-8 p-0','col-sm-4 p-0');
+            'mt-5 align-items-end', 'col-sm-8 p-0', 'col-sm-4 p-0');
         $r[] = form_close();
 
         return d($r);

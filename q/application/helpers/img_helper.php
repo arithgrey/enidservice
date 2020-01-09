@@ -137,24 +137,23 @@ if (!function_exists('invierte_date_time')) {
                 "enctype" => "multipart/form-data",
                 "size" => "25",
                 "multiple" => true
-            ],0,0
+            ], 0, 0
         );
 
         $r[] = hiddens(["name" => 'q', "value" => $q, "class" => "q_imagen"]);
         $r[] = hiddens(["name" => $q2, "value" => $q3, "class" => "q2_imagen"]);
         $r[] = hiddens(["class" => 'dinamic_img', "id" => 'dinamic_img', "name" => 'dinamic_img']);
-        $r[] = place("place_load_img", ["id" => 'place_load_img']);
+        $r[] = d(place("place_load_img row", ["id" => 'place_load_img']), 12);
 
+        $width = (is_mobile()) ? 'w-100' : 'w-50';
         $r[] = d(
             btn(
                 text_icon("fa fa-check", "AGREGAR IMAGEN"),
                 [
-                    "class" => 'guardar_img_enid bottom_30 letter-spacing-5 top_30 ',
+                    "class" => 'guardar_img_enid mt-3',
                     "id" => 'guardar_img'
-                ],
-                1,
-                1
-            ), "display_none btn_guardar_imagen");
+                ]
+            ), _text_("d-none btn_guardar_imagen my-auto mx-auto", $width));
 
         $place = place("previsualizacion",
             [

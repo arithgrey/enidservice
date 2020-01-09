@@ -66,10 +66,12 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($num_images < 1) {
 
-            $response = _text(
-                "tu ", $tipo_promocion, " ",
-                "será visible hasta que incluyas algunas imágenes"
-            );
+            $response = d(titulo_bloque(
+                _text(
+                    "tu ", $tipo_promocion, " ",
+                    "será visible hasta que incluyas algunas imágenes"
+                )
+            ),'mt-5 mt-md-2 mb-5 py-5 py-md-1');
         }
         return $response;
     }
@@ -79,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         return ($num_images < 1 || $id_perfil != 20) ?
-            terminar('descartar_promocion', $id_servicio) : '';
+            d(terminar('descartar_promocion', $id_servicio),'mt-5') : '';
 
 
     }
