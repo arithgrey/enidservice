@@ -2928,11 +2928,11 @@ function tmp_menu($id_usuario, $menu)
             "href" => path_enid("recomendacion", $id_usuario),
             "class" => "black",
         ]),
-        a_enid("Configuración y privacidad", [
+        a_enid("Configuración", [
             "href" => path_enid("administracion_cuenta"),
             "class" => 'black',
         ]),
-        a_enid("Cerrar sessión",
+        a_enid("salir",
             [
 
                 "href" => path_enid("logout"),

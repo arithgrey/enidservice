@@ -236,13 +236,11 @@ let mostrar_img_upload = (source, id_section) => {
 
     let list = document.getElementById(id_section);
     $.removeData(list);
-    let li = document.createElement('li');
     let img = document.createElement('img');
-    img.setAttribute('width', '100%');
-    img.setAttribute('height', '100%');
+    let width = (!is_mobile()) ? 'w-50' : 'w-100';
+    $(img).addClass('imagen_previa mx-auto ' + width);
     img.src = source;
-    li.appendChild(img);
-    list.appendChild(li);
+    list.appendChild(img);
 };
 
 let showonehideone = (show, hide) => {
@@ -718,7 +716,7 @@ let validar_si_numero = numero => (!/^([0-9])*$/.test(numero)) ? false : true;
 let set_parameter = (element, valor) => $(element).val(valor);
 
 
-let is_mobile = () => (parseInt(get_option("is_mobile")) > 0 );
+let is_mobile = () => (parseInt(get_option("is_mobile")) > 0);
 
 let isArray = (param) => param instanceof Array || Object.prototype.toString.call(param) === '[object Array]';
 let isJson = (str) => {
