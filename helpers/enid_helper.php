@@ -2632,7 +2632,7 @@ function create_contenido_menu($data)
                 icon($row["iconorecurso"]) . $row["nombre"],
                 [
                     "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
-                    "class" => 'black text-capitalize',
+                    "class" => 'black text-uppercase mt-2 ',
                 ]
             );
 
@@ -2925,18 +2925,19 @@ function tmp_menu($id_usuario, $menu)
         $menu,
         a_enid("Mis reseñas y valoraciones", [
 
-            "href" => path_enid("recomendacion", $id_usuario),
-            "class" => "black",
-        ]),
+                "href" => path_enid("recomendacion", $id_usuario),
+                "class" => "black text-uppercase mt-2",
+            ]
+        ),
         a_enid("Configuración", [
             "href" => path_enid("administracion_cuenta"),
-            "class" => 'black',
+            "class" => 'black text-uppercase mt-2',
         ]),
         a_enid("salir",
             [
 
                 "href" => path_enid("logout"),
-                "class" => 'black',
+                "class" => 'black text-uppercase mt-2',
             ]
         ),
     ];
@@ -3230,13 +3231,14 @@ function _text()
     return $response;
 
 }
+
 function _text_()
 {
 
     $lista_argumentos = func_get_args();
     $response = '';
     for ($i = 0; $i < func_num_args(); $i++) {
-        $response .= ' '.$lista_argumentos[$i];
+        $response .= ' ' . $lista_argumentos[$i];
     }
     return $response;
 
