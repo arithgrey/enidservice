@@ -156,7 +156,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
     $(".foto_producto").click(elimina_foto_producto);
-    $(".imagen_principal").click(set_imagen_principal);
+    $(".imagen_principal").click(imagen_principal);
     $(".form_tag").submit(agrega_metakeyword);
     $(".text_nuevo").click(muestra_input_producto_nuevo);
     $(".text_ciclo_facturacion").click(muestra_input_ciclo_facturacion);
@@ -1268,7 +1268,8 @@ let respuesta_tiempo_entrega = (data) => {
     $(".response_tiempo_entrega").empty();
 
 };
-let set_imagen_principal = function () {
+let imagen_principal = function () {
+
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
 
