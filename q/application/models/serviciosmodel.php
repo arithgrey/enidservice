@@ -664,7 +664,7 @@ class serviciosmodel extends CI_Model
                         FROM 
                         servicio
                         WHERE 
-                            1=1
+                            es_publico >  0 
                         $distinto
                             AND 
                         $nivel_text = $id_clasificacion  

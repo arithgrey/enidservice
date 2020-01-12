@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
         $r[] = tab_seccion(calma(), 'tab_direccion');
 
-        return  tab_content($r);
+        return tab_content($r);
 
 
     }
@@ -57,32 +57,31 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ",
             'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1'
         );
-        return hrz(append($r), resumen_cuenta($usuario), 4);
+        return dd($r, resumen_cuenta($usuario), 4);
 
     }
 
     function privacidad()
     {
 
-        $x[] = h("INFORMACIÓN PERSONAL", 3);
+        $x[] = _titulo("INFORMACIÓN PERSONAL");
         $x[] = place("place_registro_conceptos");
         $x[] = place("contenedor_conceptos_privacidad");
-        $r[] = d(append($x), 7);
-        $r[] = d(h("PRIVACIDAD Y SEGURIDAD", 3), 5);
+        return dd($x, _titulo("PRIVACIDAD Y SEGURIDAD"), 5);
 
-        return append($r);
     }
-
 
     function calma()
     {
 
+        $str = d("Tu dirección NO  se mostrará públicamente y solo podrán tener 
+        acceso a ella, personas que han comprado tus productos o las personas que 
+        te enviarán tus compras");
 
-        $calma = _text(
-            h("MANTEN LA CALMA!", 3),
-            d("Tu dirección NO  se mostrará públicamente y solo 
-            podrán tener acceso a ella, personas que han comprado tus productos o 
-            las personas que te enviarán tus compras", 1),
+        $calma = _text_(
+            _titulo("MANTEN LA CALMA!"),
+            $str
+            ,
             hr(),
             place("direcciones")
         );
@@ -115,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btn(
             "MODIFICAR",
             [
-                "class" => "editar_imagen_perfil top_20"
+                "class" => "editar_imagen_perfil mt-5"
             ]
         );
 
@@ -127,7 +126,7 @@ if (!function_exists('invierte_date_time')) {
     function resumen_cuenta($usuario)
     {
 
-        $r[] = h("TU CUENTA ENID SERVICE", 3);
+        $r[] = _titulo("TU CUENTA ENID SERVICE");
         $r[] = format_user($usuario, 1);
         $r[] = d(get_campo($usuario, "email"));
         $r[] = get_campo($usuario, "tel_contacto", "Tu prime apellido", 1);
@@ -136,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
             "#tab_direccion",
             [
-                "class" => "a_enid_black btn_direccion top_20",
+                "class" => "a_enid_black btn_direccion mt-5",
             ]
         );
 
@@ -154,7 +153,6 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form-horizontal", "method" => "POST"
             ]
         );
-
 
         $r[] = input_frm(12,
             "CONTRASEÑA ACTUAL",
@@ -182,7 +180,6 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-
         $r[] = input_frm(
             12, "CONFIRMAR NUEVA",
             [
@@ -194,7 +191,6 @@ if (!function_exists('invierte_date_time')) {
             ],
             'place_pw_3'
         );
-
 
         $r[] = hiddens(
             [
@@ -221,7 +217,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($vista < 1) {
 
-            $r[] = h("Cuenta", 1, 'strong');
+            $r[] = _titulo("Cuenta");
             $r[] = frm_nombre($usuario);
             $r[] = frm_email($usuario);
             $r[] = d(frm_telefono($usuario));
@@ -360,7 +356,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("",
             [
-                "class" => "f_nombre_usuario"
+                "class" => "form_nombre_usuario"
             ]
         );
         $r[] = input_frm(12, 'Nombre de usuario',
@@ -457,4 +453,3 @@ if (!function_exists('invierte_date_time')) {
     }
 
 }
-

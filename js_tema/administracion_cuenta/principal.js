@@ -4,7 +4,7 @@ $(document).ready(() => {
         set_option("v", 1);
         direccion_usuario();
     });
-    $(".f_nombre_usuario").submit(u_nombre);
+    $(".form_nombre_usuario").submit(u_nombre);
     $(".tab_privacidad_seguridad").click(get_conceptos);
     $(".nombre_usuario").keyup(elimina_espacio);
     $(".tel2").keyup(() => {
@@ -68,7 +68,7 @@ let response_registra_direccion_usuario = data => {
 };
 let u_nombre = e => {
 
-    let data_send = $(".f_nombre_usuario").serialize();
+    let data_send = $(".form_nombre_usuario").serialize();
     let url = "../q/index.php/api/usuario/nombre_usuario/format/json/";
     request_enid("PUT", data_send, url, function () {
         seccess_enid(".registro_nombre_usuario", "Tu nombre de usuario fue actualizado!");
