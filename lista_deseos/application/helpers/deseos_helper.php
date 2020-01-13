@@ -192,16 +192,16 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = d(busqueda_error(), 1);
+        $r[] = busqueda_error();
         $r[] = h("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
         $r[] = btn("Explorar ahora!",
             [
 
                 "class" => "top_20"
 
-            ], 1, 1, 0, path_enid("home")
+            ], 0, 1, 0, path_enid("home")
         );
-        return d(append($r), 4, 1);
+        return d($r,'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
 
 
     }
@@ -410,7 +410,7 @@ if (!function_exists('invierte_date_time')) {
         return img(
             [
                 "src" => "https://media.giphy.com/media/VTXzh4qtahZS/giphy.gif",
-                "class" => "img_servicio_def",
+                "class" => "",
 
             ]
         );

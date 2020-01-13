@@ -438,20 +438,31 @@ class Cobranza extends REST_Controller
 
                 }
 
-                $response["session_creada"] = 0;
-                if ($response['orden_creada'] > 0) {
-                    $session = $this->create_session($param);
-                    if (es_data($session)) {
-                        $response["session_creada"] = 1;
-                        $this->app->set_userdata($session);
-                    }
+                if (is_array($response) && $response != false) {
+
+                    $response = $this->has_login($response, $param);
                 }
+
                 $this->response($response);
             }
             $this->response($usuario);
         } else {
             $this->response(-1);
         }
+    }
+
+    private function has_login($response, $param)
+    {
+
+        $response["session_creada"] = 0;
+        if ($response['orden_creada'] > 0) {
+            $session = $this->create_session($param);
+            if (es_data($session)) {
+                $response["session_creada"] = 1;
+                $this->app->set_userdata($session);
+            }
+        }
+        return $response;
     }
 
     function crea_usuario($q)

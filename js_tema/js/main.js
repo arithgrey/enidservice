@@ -225,6 +225,23 @@ let valida_tel_form = (input, place_msj) => {
     format_error(place_msj, mensaje_user);
     return flag;
 };
+
+let regular_email = selector => {
+
+    let valor = selector.val();
+    let es_valido = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/.test(valor);
+    let $selector_mensaje = selector.next('label').next('div');
+    if (!es_valido) {
+
+        $selector_mensaje.removeClass('d-none');
+
+    } else {
+
+        $selector_mensaje.addClass('d-none');
+    }
+    return es_valido;
+};
+
 let valEmail = valor => {
 
     let re = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/;
@@ -876,13 +893,13 @@ let valida_formato_correo = function (e) {
     let c = String.fromCharCode(e.keyCode);
     let format = /^([A-z0-9@._])*$/.test(c);
     let fn = (!format) ? e.preventDefault() : '';
-
     let $text = $(this).val();
     let formatStart = ($text.length < 1 && /^([@._])*$/.test(c)) ? e.preventDefault() : '';
     if (/^([@])*$/.test(c)) {
         let times = ($text.match(/@/g) || []).length;
         const formatTimes = (times > 0) ? e.preventDefault() : '';
     }
+    regular_email($(this));
 
 };
 let valida_formato_telefono = function (e) {
@@ -915,6 +932,7 @@ let paste_email = function () {
         }
         event.target.value = text;
     }
+    regular_email($(this));
 };
 let paste_nombre = function () {
 

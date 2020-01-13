@@ -36,21 +36,22 @@ if (!function_exists('invierte_date_time')) {
     function valida_fecha_entrega($fecha_entrega)
     {
 
-
-        $r = 0;
+        $response = false;
         $hoy = date("Y-m-d");
         $dias_entrega = date_difference($hoy, $fecha_entrega);
         $len = strlen($fecha_entrega) == 10;
-        if ($len && $dias_entrega >= 0 && $dias_entrega <= 4) {
-            $r = 1;
+        if (($len && $dias_entrega >= 0) && $dias_entrega <= 4) {
+            $response = true;
         }
 
-        return $r;
+        return $response;
     }
 
     function valida_horario_entrega($horario_entrega)
     {
         $horarios = [
+            "08:00",
+            "08:30",
             "09:00",
             "09:30",
             "10:00",
@@ -65,10 +66,12 @@ if (!function_exists('invierte_date_time')) {
             "14:30",
             "15:00",
             "15:30",
+            "16:00",
             "16:30",
             "17:00",
             "17:30",
             "18:00",
+            "18:30",
             "19:00",
 
         ];

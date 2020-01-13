@@ -155,7 +155,7 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "correo",
                         "minlength" => 5,
                         "required" => true,
-                ]
+                ],'Hey! no tan rápido, valida tu email'
         );
 
 

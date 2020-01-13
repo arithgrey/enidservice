@@ -508,7 +508,7 @@ if (!function_exists('invierte_date_time')) {
 
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
-        $totales =  _titulo(_text_('Total', money($total)),1);
+        $totales = _titulo(_text_('Total', money($total)), 1);
         return _text($tb_fechas, $inicio, d($tb, 'col-lg-12 mb-4'), $totales);
     }
 
@@ -771,7 +771,7 @@ if (!function_exists('invierte_date_time')) {
             $text_icono,
             "#tab_renovar_servicio",
             [
-                "class" => 'resumen_pagos_pendientes',
+                "class" => 'resumen_pagos_pendientes mt-4 mb-4',
                 "id" => $id_recibo,
             ]
         );
@@ -831,7 +831,7 @@ if (!function_exists('invierte_date_time')) {
 
         return ($modalidad < 1 && $ordenes < 1) ?
             "" :
-            d(h(mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS"), 3), 1);
+            _titulo(mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS"));
 
     }
 
@@ -1045,8 +1045,8 @@ if (!function_exists('invierte_date_time')) {
         $text_descuento = ($tipo_entrega == 2) ? $texto_cambio_contra_entrega : $text_descuento;
 
 
-        $response[] = _titulo('FORMAS DE PAGO', 0, 'mb-5');
-        $response[] =
+        $response[] = _titulo('FORMAS DE PAGO', 0, 'mb-5 mt-5');
+        $botones_pago[] =
             a_enid(
                 img(
                     [
@@ -1065,14 +1065,14 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-        $response[] =
+        $botones_pago[] =
 
             format_link(
                 "Tiendas (OXXO)"
                 ,
                 [
 
-                    "class" => " mt-3 mb-5",
+                    "class" => " mt-4 mb-5",
                     "onclick" => "notifica_tipo_compra(4 , '" . $id_recibo . "');",
                     "href" =>
                         get_link_oxxo(
@@ -1083,13 +1083,11 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
+        $response[] = append($botones_pago);
 
-        $response[] = d(
-            h(
-                $text_descuento, 4, 'text-uppercase strong black'
-            )
+        $response[] = _titulo(
+            $text_descuento, 1
         );
-
 
         return d($response, "seccion_compra");
 
@@ -1101,13 +1099,13 @@ if (!function_exists('invierte_date_time')) {
         $modalidad = $data["modalidad"];
         $ordenes = $data["ordenes"];
 
-        $r[] = get_text_modalidad($modalidad, $ordenes);
-        $text = ($modalidad == 1) ? "TUS ÚLTIMAS VENTAS" : "TUS ÚLTIMAS COMPRAS";
-        $r[] = btn($text, ["class" => "ver_mas_compras_o_ventas top_30 bottom_30"]);
+        $r[] = d(get_text_modalidad($modalidad, $ordenes), 'mt-5');
+        $text = ($modalidad == 1) ? "ÚLTIMAS VENTAS" : "ÚLTIMAS COMPRAS";
+        $r[] = d(d(btn($text, ["class" => "ver_mas_compras_o_ventas mt-5 mb-5 col-sm-3"]), 12), 'row');
         $r[] = create_listado_compra_venta($ordenes, $modalidad, $data["id_perfil"]);
         $r[] = d(place("contenedor_ventas_compras_anteriores"), 13);
 
-        return d(append($r), 10, 1);
+        return d($r);
     }
 
     function create_listado_compra_venta($ordenes, $modalidad, $id_perfil = 0)
@@ -1138,8 +1136,9 @@ if (!function_exists('invierte_date_time')) {
                 $t .= btn("AVANZADO", [], 1, 1, 0, $url);
             }
 
-            $list[] = d(d($t,
-                "align-items-center  d-flex flex-row border padding_20 top_20 justify-content-between min_block "),
+            $list[] = d(
+                d($t,
+                    "align-items-center d-md-flex border padding_20 top_20 justify-content-between min_block text-center"),
                 1);
         }
 
@@ -1230,8 +1229,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function rastreo_compra($id_recibo)
+    function rastreo_compra($id_recibo, $seccion_compra)
     {
+        $response[] = d($seccion_compra, 'd-md-none');
         $response[] = format_link(
             "Rastrea tu orden",
             [

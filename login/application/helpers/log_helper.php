@@ -213,7 +213,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
                 "placeholder" => "ej. jonathan@gmail.com",
-            ]
+            ],'Hey, no tan rápido, valida tu email!'
         );
         $r[] = input_frm(
             "mt-5", "PASSWORD",

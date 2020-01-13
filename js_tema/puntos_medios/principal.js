@@ -161,8 +161,9 @@ let registra_usuario = (e) => {
     let len_telefono = $input_telefono.val().length;
     let len_pw = $input_pw.val().length;
     reset_posibles_errores();
-    if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH) {
+    if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH && regular_email($input_correo)) {
 
+        valida_load();
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
             "password": password,
@@ -171,7 +172,6 @@ let registra_usuario = (e) => {
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         $boton_enviar_solicitud.attr("disabled", true);
         bloquea_form(form_punto_encuentro);
-        valida_load();
         request_enid("POST", data_send, url, response_registro_usuario);
 
     } else {
@@ -206,7 +206,8 @@ let response_registro_usuario = (data) => {
 
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
-        despliega(['.continuar', '.informacion_del_cliente'], 0);
+        // despliega([], 0);
+        $('.continuar, .informacion_del_cliente').removeClass('d-none');
         $('.usuario_existente').removeClass('d-none');
         set_option("vista", 5);
 

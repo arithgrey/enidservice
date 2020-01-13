@@ -1231,7 +1231,7 @@
         '<div class="jconfirm-closeIcon">&times;</div>' +
         '<div class="jconfirm-title-c">' +
         '<span class="jconfirm-icon-c"></span>' +
-        '<span class="jconfirm-title"></span>' +
+        '<span class="jconfirm-title black mb-5 mt-4"></span>' +
         '</div>' +
         '<div class="jconfirm-content-pane">' +
         '<div class="jconfirm-content"></div>' +
@@ -1293,7 +1293,7 @@
         closeIcon: null,
         closeIconClass: false,
         watchInterval: 100,
-        columnClass: 'col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1',
+        columnClass: 'col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1',
         boxWidth: '50%',
         scrollToPreviousElement: true,
         scrollToPreviousElementAnimate: true,

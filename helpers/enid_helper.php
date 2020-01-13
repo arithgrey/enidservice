@@ -141,55 +141,55 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
                 break;
             case 2:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-md-2 col-md-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-2'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-sm-2 col-sm-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-2'>" . $info . "</{$tipo}>";
 
                 break;
             case 3:
-                $response = "<{$tipo} class=' col-md-3'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-3'>" . $info . "</{$tipo}>";
                 break;
             case 4:
-                $response = ($row > 0) ? "<{$tipo} class=' col-md-4 col-md-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-4'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-sm-4 col-sm-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-4'>" . $info . "</{$tipo}>";
                 break;
             case 5:
-                $response = "<{$tipo} class=' col-md-5'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-5'>" . $info . "</{$tipo}>";
                 break;
             case 6:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-md-6 col-md-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-6'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-sm-6 col-sm-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-6'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 7:
 
-                $response = "<{$tipo} class=' col-md-7'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-7'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 8:
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-md-8 col-md-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-8'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-sm-8 col-sm-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-8'>" . $info . "</{$tipo}>";
 
                 break;
             case 9:
-                $response = "<{$tipo} class=' col-md-9'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-9'>" . $info . "</{$tipo}>";
                 break;
 
             case 10:
 
 
-                $response = ($row > 0) ? "<{$tipo} class=' col-md-10 col-md-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-md-10'>" . $info . "</{$tipo}>";
+                $response = ($row > 0) ? "<{$tipo} class=' col-sm-10 col-sm-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-10'>" . $info . "</{$tipo}>";
 
                 break;
 
             case 11:
-                $response = "<{$tipo} class=' col-md-11'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-11'>" . $info . "</{$tipo}>";
                 break;
 
 
             case 12:
 
 
-                $response = "<{$tipo} class=' col-md-12'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class=' col-sm-12'>" . $info . "</{$tipo}>";
 
                 break;
 
@@ -3286,13 +3286,13 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
             case 1:
 
                 $espacio = 'justify-content-between mt-3 ';
-                $response[] = hr('mb-4');
+                $response[] = hr('mb-4 border_big',0);
                 $response[] = flex('Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
                 $response[] = flex($tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio, 'envio_text', 'envio_money text-uppercase');
                 if ($es_abono) {
                     $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
                 }
-                $response[] = hr('mt-4');
+                $response[] = hr('mt-4 border_big',0);
                 $response[] = flex('Total', money($saldo_pendiente), 'justify-content-between', 'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
                 $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
 
