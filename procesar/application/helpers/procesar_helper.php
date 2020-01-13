@@ -95,7 +95,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $r = [];
         if ($in_session < 1) {
-            $r[] = contaiter(_titulo("DATOS DE COMPRA"), 1);
+            $r[] = _titulo("información de compra");
             $z[] = input_frm(
                 "col-lg-6 mt-5", "NOMBRE",
                 [
@@ -118,7 +118,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "email",
                     "required" => "true",
                     "onkeypress" => "minusculas(this);",
-                ]
+                ],'Hey! no tan rápido valida tu email!'
 
             );
 
@@ -270,7 +270,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "email",
                     "required" => "true",
                     "id" => "correo",
-                ]
+                ],'formato incorrecto'
             );
 
             $x[] = input_frm("col-lg-6 mt-5", "Password",

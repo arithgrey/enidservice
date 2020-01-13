@@ -208,7 +208,7 @@ let response_cancelacion_compra = (data) => {
 
         let id_servicio = data.registro.id_servicio;
         let href = "../valoracion/?servicio=" + id_servicio;
-        let btn_cuenta_historia = "<a href='" + href + "' class='a_enid_blue'>CUENTANOS TU EXPERIENCIA</a>";
+        let btn_cuenta_historia = "<a href='" + href + "' class='a_enid_blue p-3'>CUENTANOS TU EXPERIENCIA</a>";
         let div = "<div class='cuenta_tu_experiencia'>" + btn_cuenta_historia + "</div>";
         let div2 = "<h3>¿NOS AYUDARÍAS A EVALUAR EL PRODUCTO QUE CANCELASTE?</h3>";
         let response = "<div class='col-lg-8 col-lg-offset-2 text-center'>" + div2 + "" + div + "</div>";
@@ -274,7 +274,8 @@ let compras_usuario = () => {
 let r_compras_usuario = function (data) {
 
 
-    if (data.hasOwnProperty('total') && parseInt(data.total) > 0) {
+
+    // if (data.hasOwnProperty('total') && parseInt(data.total) > 0) {
 
 
         let place = get_lugar_por_status_compra();
@@ -290,10 +291,10 @@ let r_compras_usuario = function (data) {
         $(".btn_direccion_envio").click(inf_envio);
         $(".ver_mas_compras_o_ventas").click(compras_ventas_concluidas);
 
-    } else {
-
-        $visita_tienda.removeClass('d-none');
-    }
+    // } else {
+    //
+    //     $visita_tienda.removeClass('d-none');
+    // }
 
 };
 let inf_envio = function (e) {

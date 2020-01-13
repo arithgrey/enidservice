@@ -237,7 +237,7 @@
 }
 
 .jconfirm .jconfirm-box.jconfirm-type-green {
-    border-top: solid 7px #2ecc71;
+    /*border-top: solid 7px #2ecc71;*/
     -webkit-animation-name: type-green;
     animation-name: type-green;
 }

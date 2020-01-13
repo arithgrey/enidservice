@@ -7,20 +7,16 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = hiddens_tickects($action, $data["ticket"]);
         $r[] = tab_seccion(
-            place("place_servicios_contratados"),
+            d('',
+                "place_servicios_contratados col-md-10 col-md-offset-1 "
+            ),
             "tab_mis_pagos",
             active_tab('compras', $action)
         );
 
         $r[] = tab_seccion(
-            place("place_ventas_usuario"),
+            d('', "place_ventas_usuario col-md-10 col-md-offset-1"),
             'tab_mis_ventas',
-            active_tab('ventas', $action)
-        );
-
-        $r[] = tab_seccion(
-            valoraciones($data["valoraciones"], $data["id_usuario"], $data["alcance"]),
-            'tab_valoraciones',
             active_tab('ventas', $action)
         );
 
@@ -29,7 +25,9 @@ if (!function_exists('invierte_date_time')) {
             'tab_pagos'
         );
         $r[] = tab_seccion(
-            place("place_resumen_servicio col-lg-8 col-lg-offset-2"),
+            d('',
+                "place_resumen_servicio d-sm-flex  align-items-center mt-5 col-lg-8 col-lg-offset-2 mt-md-0 p-0"
+            ),
             'tab_renovar_servicio'
         );
 
@@ -39,9 +37,10 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $response[] = menu($action);
+
         $response[] = paseo();
-        $response[] = tab_content($r, 10);
+        $response[] = d(tab_content($r), 'co-sm-12 col-md-12 col-lg-10');
+        $response[] = menu($action);
 
         return append($response);
 
@@ -52,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = _titulo('UPS! aún no tenemos pedidos ...');
         $r[] = format_link('Explorémos un poco!', ['href' => path_enid('search_q3')]);
-        return d(d($r, 4, 1), 'row mt-5 mb-5 d-none visita_tienda');
+        return d(d($r), 'mt-5 mb-5 d-none visita_tienda');
     }
 
     function hiddens_tickects($action, $ticket)
@@ -140,11 +139,6 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $link_vendedor =
-            a_enid(
-                text_icon("fa fa-flag", " VENDER"),
-                path_enid("vender_nuevo")
-            );
 
         $link_ventas = tab(
             text_icon('fa fa-shopping-bag', "VENTAS"),
@@ -156,7 +150,6 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $place_ventas = place("place_num_pagos_notificados");
 
         $link_compras = tab(
             text_icon('fa fa-credit-card-alt', " COMPRAS"),
@@ -167,47 +160,17 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $link_notificaciones = tab(
-            place("place_num_pagos_por_realizar"),
-            "#tab_mis_pagos",
-            [
-                "id" => "mis_compras",
-                "class" => 'btn_cobranza mis_compras'
-            ]
-        );
 
-        $link_valoraciones = tab(
-
-            text_icon("fa fa-star", " VALORACIONES")
-            ,
-            "#tab_valoraciones",
-            [
-                "id" => "mis_valoraciones"
-            ]
-        );
-
-        $link_lista_deseo = a_enid(
-            text_icon("fa fa-gift", "LISTA DE DESEOS"),
-            path_enid("lista_deseos")
-        );
 
         $list = [
             $link_compras,
-            $link_vendedor,
             $link_ventas,
-            $place_ventas,
-            $link_notificaciones,
-            $link_valoraciones,
-            $link_lista_deseo,
-            $link_pagos,
         ];
 
-        return d(ul(
+        return d(
             $list,
-            [
-                "class" => "d-flex flex-column justify-content-between"
-            ]
-        ),'menu_area_cliente col-lg-2 p-0');
+                 "d-flex flex-column menu_area_cliente col-lg-2 p-0 mt-5"
+        );
 
     }
 }

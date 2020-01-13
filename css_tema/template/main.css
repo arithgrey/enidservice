@@ -1738,7 +1738,11 @@ ul li a {
 #page-content {
     flex: 1 0 auto;
 }
+.jconfirm-buttons button{
 
+    background: #000!important;
+    color: white!important;
+}
 @media (max-width: 575.98px) {
 
     .mh_sm_310 {

@@ -473,8 +473,8 @@ class recibo extends REST_Controller
             $pedido[] = $checkout['checkout_resumen'];
             $data_checkout = $checkout['checkout'];
             $seccion_compra = getPayButtons($r, $url_request, $id_usuario_venta, $data_checkout);
-            $pedido[] = rastreo_compra($id_recibo);
-
+            $pedido[] = rastreo_compra($id_recibo, $seccion_compra);
+            $seccion_compra = d($seccion_compra, 'd-none d-md-block');
             $response[] = dd($seccion_compra, $pedido, 5);
 
         endif;

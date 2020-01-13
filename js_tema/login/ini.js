@@ -20,13 +20,14 @@ let wr = '.wrapper_login';
 let contenedor_recuperacion_password = '.contenedor_recuperacion_password';
 let seccion_registro_usuario = '.seccion_registro_nuevo_usuario_enid_service';
 let registro_pw = '.registro_pw';
+let $form_inicio = $(form_inicio);
 $(document).on('ready', () => {
 
     $('footer').ready(valida_seccion_inicial);
     $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);
     $('.btn_soy_nuevo_simple').click(mostrar_seccion_nuevo_usuario);
     $(registrar).click(mostrar_seccion_nuevo_usuario);
-    $(form_inicio).submit(valida_form_session);
+    $form_inicio.submit(valida_form_session);
     $form_pass.submit(recupera_password);
     $olvide_pass.click(carga_mail);
     $(form_registro).submit(agrega_usuario);
@@ -114,17 +115,19 @@ let valida_form_session = e => {
 
     let pass = $.trim($pw.val());
     let str_email = $mail_acceso.val();
-    if (valida_formato_pass(pass) === valida_formato_email(str_email)) {
-
-        let str = "" + CryptoJS.SHA1(pass);
-        let action = $('#in').attr('action');
-        set_option({
-            'tmp_password': str,
-            'url': action,
-            'email': str_email
-        });
-        inicio_session();
+    if (regular_email($mail_acceso)) {
+        if (valida_formato_pass(pass) === valida_formato_email(str_email)) {
+            let str = "" + CryptoJS.SHA1(pass);
+            let action = $('#in').attr('action');
+            set_option({
+                'tmp_password': str,
+                'url': action,
+                'email': str_email
+            });
+            inicio_session();
+        }
     }
+
     e.preventDefault();
 
 };
@@ -197,7 +200,12 @@ let agrega_usuario = (e) => {
 
             });
 
-            let data_send = {'nombre': nombre, 'email': email, 'password': tmp_password, 'simple': 1};
+            let data_send = {
+                'nombre': nombre,
+                'email': email,
+                'password': tmp_password,
+                'simple': 1
+            };
             request_enid('POST', data_send, url, response_usuario_registro);
         }
     }
