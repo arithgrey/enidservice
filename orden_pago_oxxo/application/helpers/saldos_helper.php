@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hr([], 0);
         $r[] = monto_pago($monto);
         $r[] = instruccion_pago($numero_cuenta);
-        return d(m(append($r)), 6, 1);
+        return d($r, 6, 1);
 
 
     }

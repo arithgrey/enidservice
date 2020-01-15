@@ -40,14 +40,14 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($str, " d-flex flex-column justify-content-between mh_350");
         $r[] = img_pago();
         $r[] = format_tipos_entrega();
-        return d(append($r), 6, 1);
+        return d($r, 6, 1);
 
     }
 
     function format_tipos_entrega()
     {
 
-        $x[] = d(h("TIPOS DE ENTREGA", 3));
+        $x[] = _titulo("TIPOS DE ENTREGA", 3);
         $x[] = d("El pago realizado en tiendas de autoservicio tendrá una comisión 
         adicional al monto de la compra por transacción fijada por el proveedor
          y no es imputable a Enid Service."
@@ -61,15 +61,15 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-        }, [
+        },
+            [
                 "../img_tema/bancos/envios.png",
                 "../img_tema/bancos/contra_entrega.png",
-
             ]
         );
 
 
-        $x[] = d(append($bloque), "row top_30 bottom_30");
+        $x[] = d($bloque, "row top_30 bottom_30");
 
         $entregas = array_map(function ($n) {
             return img([
@@ -77,7 +77,8 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "col-lg-6"
             ]);
 
-        }, [
+        },
+            [
                 "../img_tema/bancos/fedex.png",
                 "../img_tema/bancos/dhl2.png"
 
@@ -85,8 +86,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $x[] = d(append($entregas), "col-lg-6 col-lg-offset-3 top_30 bottom_30");
-        return d(append($x), "top_10");
+        $x[] = d($entregas, "col-lg-6 col-lg-offset-3 top_30 bottom_30");
+        return d($x, "mt-3");
 
     }
 
@@ -101,16 +102,17 @@ if (!function_exists('invierte_date_time')) {
 
         };
 
-        $response = array_map($cb, [
-            "../img_tema/bancos/targetas-de-credito.jpg",
-            "../img_tema/bancos/paypal.png",
-            "../img_tema/bancos/1.png",
-            "../img_tema/bancos/3.png",
-            "../img_tema/bancos/8.png",
-            "../img_tema/bancos/oxxo-logo.png"
-        ]);
-        return d(
-            append($response), "text-center justify-content-center top_20 px-3");
+        $response = array_map($cb,
+            [
+                "../img_tema/bancos/targetas-de-credito.jpg",
+                "../img_tema/bancos/paypal.png",
+                "../img_tema/bancos/1.png",
+                "../img_tema/bancos/3.png",
+                "../img_tema/bancos/8.png",
+                "../img_tema/bancos/oxxo-logo.png"
+            ]
+        );
+        return d($response, "text-center justify-content-center top_20 px-3");
 
     }
 }

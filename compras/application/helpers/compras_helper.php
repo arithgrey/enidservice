@@ -71,7 +71,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($x, 'col-sm-12 mt-3');
         return append($response);
 
-
     }
 }
 

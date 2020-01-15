@@ -65,7 +65,6 @@ class Home extends CI_Controller
             $direcciones_registradas = $this->recibo_pago_direccion($id_recibo);
             if ($direcciones_registradas < 1) {
 
-
                 $link_registro_domicilio =
                     _text(
                         "../",
@@ -86,12 +85,8 @@ class Home extends CI_Controller
                         );
                     redirect($link_registro_domicilio);
                 }
-
             }
-
-
         }
-
     }
 
     private function recibo_pago_direccion($id_recibo)

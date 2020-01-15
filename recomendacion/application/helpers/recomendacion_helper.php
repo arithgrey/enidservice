@@ -10,8 +10,7 @@ if (!function_exists('invierte_date_time')) {
         $link = a_enid(
             $vendedor,
             [
-
-                "href" => "../search/?q3=" . get_campo($usuario, "id_usuario"),
+                "href" => path_enid('search_q3', get_campo($usuario, "id_usuario")),
                 "class" => "h2 strong mt-0 color_azul_fuerte cursor_pointer"
             ]
         );

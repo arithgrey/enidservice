@@ -6,7 +6,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $ubicacion = $data["ubicacion"];
-
         $social = h(
             social(0, "", 0),
             3,
@@ -29,7 +28,8 @@ if (!function_exists('invierte_date_time')) {
                 $data["telefono"]
             ),
             [
-                "class" => "top_menos_100  padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
+                "class" => "top_menos_100 
+                 padding_15  bottom_100 text-uppercase container inner contenedor_form shadow ",
                 "id" => "direccion",
             ]
         );
@@ -69,18 +69,17 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_proceso_compra();
         return append($r);
 
-
     }
 
     function format_proceso_compra()
     {
 
         $r = [
-            d(h("¿Quieres aparta tu pedido?", 2, "strong"), 1),
+            d(_titulo("¿Quieres aparta tu pedido?"), 1),
             d(selector_direccion(), 1)
         ];
 
-        return d(append($r), 10, 1);
+        return d($r, 10, 1);
 
 
     }
@@ -88,12 +87,14 @@ if (!function_exists('invierte_date_time')) {
     function format_eleccion()
     {
 
-        $config = [
-            "class" => "easy_select_enid cursor_pointer selector",
-            "id" => 1
-        ];
+        $config =
+            [
+                "class" => "easy_select_enid cursor_pointer selector",
+                "id" => 1
+            ];
 
-        $r[] = d(text_icon("fa fa-envelope-o", " CORREO"),
+        $r[] = d(
+            text_icon("fa fa-envelope-o", " CORREO"),
             $config
         );
 
@@ -101,7 +102,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "easy_select_enid cursor_pointer selector",
                 "id" => 2
-            ]);
+            ]
+        );
 
         return append($r);
 
@@ -223,7 +225,8 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "text",
                     "placeholder" => "Tu nombre ",
                     "class" => "form-control input-md nombre"
-                ]), 8);
+                ]
+            ), 8);
 
         $r[] = label(text_icon("fa fa-envelope-o", " CORREO "), 4);
         $r[] = hiddens(

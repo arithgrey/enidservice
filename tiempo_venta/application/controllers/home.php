@@ -5,7 +5,7 @@ class Home extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->helper("area");
+        $this->load->helper("enventa");
         $this->load->library(lib_def());
         $this->app->acceso();
     }
