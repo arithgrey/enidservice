@@ -3,23 +3,22 @@ if (!function_exists('invierte_date_time')) {
 
     function get_format_faqs($data)
     {
-
-
         $response = hrz(
             get_format_izquierdo($data["categorias_publicas_venta"], $data["categorias_temas_de_ayuda"], 1),
-            get_format_listado_fq($data),
+            lista_fq($data),
             3
         );
+
         return d($response, 1);
 
     }
 
-    function get_format_listado_fq($data)
+    function lista_fq($data)
     {
 
-
         $response = "";
-        if (array_key_exists("faqs_categoria", $data) && $data["faqs_categoria"] > 0) {
+        $es_categoria = (array_key_exists("faqs_categoria", $data) && $data["faqs_categoria"] > 0);
+        if ($es_categoria) {
 
             $response = get_cat($data["faqs_categoria"]);
 
@@ -28,14 +27,15 @@ if (!function_exists('invierte_date_time')) {
 
             if (prm_def($data, "respuesta") > 0) {
 
-
+                $es_configuracion = array_key_exists(
+                        "param", $data) && array_key_exists("config", $data["param"]);
                 $response =
-                    (array_key_exists("param", $data) && array_key_exists("config", $data["param"])) ? form_respuesta($data, 1) : get_lista_faq($data["respuesta"], $data);
+                    ($es_configuracion) ? form_respuesta(
+                        $data, 1) : get_lista_faq($data["respuesta"], $data);
 
             } else {
 
                 $response = ($data["es_form"] > 0) ? form_respuesta($data) : $response;
-
             }
 
         }
@@ -59,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
                     ),
                     h($row["titulo"], 4, "black text-uppercase")
                     ,
-                    3, "row mh_200 border top_30 "
+                    3, "row mh_200 border mt-5 "
                 );
             $r[] = a_enid($bloque, path_enid("editar_faq", $row["id_faq"]));
 
@@ -78,15 +78,14 @@ if (!function_exists('invierte_date_time')) {
 
             $extra = ($data["in_session"] > 0) ? a_enid(icon("fa fa-cogs"), ["href" => path_enid("editar_faq", $row["id_faq"] . "&config=1")]) : "";
             $x[] = d(h($extra . $row["titulo"], 4, "black text-uppercase underline"), 1);
-            $x[] = d(p($row["respuesta"], "black top_30"), 1);
-            $x[] = d(p($row["fecha_registro"], "top_30"), 1);
+            $x[] = d_p($row["respuesta"], "black mt-5");
+            $x[] = d_p($row["fecha_registro"], "mt-5");
 
             $r[] = d(
-                append($x)
+                $x
                 ,
                 "col-lg-12 top_30 padding_10 "
             );
-
         }
 
         return append($r);
@@ -99,7 +98,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(lista_categorias($categorias_publicas_venta));
         $r[] = d(place("place_categorias_extras"));
         $r[] = d(lista_categorias($categorias_temas_de_ayuda));
-        return d(append($r), "categorias_frecuentes padding_10 shadow top_30 border ");
+        return d($r, "categorias_frecuentes p-3 shadow top_30 border ");
 
     }
 
@@ -127,9 +126,19 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_respuesta", "id" => 'form_respuesta']);
         $r[] = d("CATEGORÍA", 3);
 
+        $select = create_select(
+            $lista_categorias,
+            "categoria",
+            "form-control categoria",
+            "categoria",
+            "nombre_categoria",
+            "id_categoria"
+        );
+
+
         if ($editar > 0) {
 
-            $r[] = d(create_select_selected(
+            $select = create_select_selected(
                 $lista_categorias,
                 "id_categoria",
                 "nombre_categoria",
@@ -137,39 +146,30 @@ if (!function_exists('invierte_date_time')) {
                 "categoria",
                 "form-control categoria"
 
-            ), 9);
-
-
-        } else {
-            $r[] = d(create_select(
-                $lista_categorias,
-                "categoria",
-                "form-control categoria",
-                "categoria",
-                "nombre_categoria",
-                "id_categoria"
-            ), 9);
-
+            );
         }
-
-
-        $r[] = d("TIPO", "col-lg-3 top_20");
-        $opt[] = [
-            "val" => 1,
-            "text" => "Pública"
-        ];
-        $opt[] = [
-            "val" => 0,
-            "text" => "Privada"
-        ];
-        $opt[] = [
-            "val" => 2,
-            "text" => "Solo para labor de venta"
-        ];
-        $opt[] = [
-            "val" => 3,
-            "text" => "Pos venta"
-        ];
+        $r[] = d($select, 9);
+        $r[] = d("TIPO", "col-lg-3 mt-5");
+        $opt[] =
+            [
+                "val" => 1,
+                "text" => "Pública"
+            ];
+        $opt[] =
+            [
+                "val" => 0,
+                "text" => "Privada"
+            ];
+        $opt[] =
+            [
+                "val" => 2,
+                "text" => "Solo para labor de venta"
+            ];
+        $opt[] =
+            [
+                "val" => 3,
+                "text" => "Pos venta"
+            ];
 
 
         if ($editar > 0) {
@@ -182,8 +182,17 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $r[] = d("TITULO", "col-lg-4 top_20");
-        $r[] = d(input(["type" => "text", "name" => "titulo", "class" => 'form-control titulo  top_20', "required" => true, "value" => $titulo]), 8);
+        $r[] = d("TITULO", "col-lg-4 mt-5");
+        $r[] = d(
+            input(
+                [
+                    "type" => "text",
+                    "name" => "titulo",
+                    "class" => 'form-control titulo  top_20',
+                    "required" => true,
+                    "value" => $titulo
+                ]
+            ), 8);
         $r[] = d(place("", ["id" => "summernote"]), "col-lg-12 top_40");
         $r[] = d(btn("Registrar", ["class" => "btn", "type" => "submit"]), "col-lg-12 top_20");
         $r[] = hiddens(
@@ -193,12 +202,18 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "id_faq"
             ]
         );
-        $r[] = hiddens([
-            "class" => "erespuesta",
-            "value" => $respuesta
-        ]);
-        $r[] = hiddens(["class" => "editar_respuesta", "value" => $editar, "name" => "editar_respuesta"]);
-
+        $r[] = hiddens(
+            [
+                "class" => "erespuesta",
+                "value" => $respuesta
+            ]);
+        $r[] = hiddens(
+            [
+                "class" => "editar_respuesta",
+                "value" => $editar,
+                "name" => "editar_respuesta"
+            ]
+        );
 
         $r[] = form_close();
         $r[] = d(place("place_refitro_respuesta"), "col-lg-12 top_40");
@@ -211,6 +226,20 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return d(d(append($r), 8, 1), "top_30");
+    }
+
+    function lista_categorias($categorias)
+    {
+
+        $l = [];
+        foreach ($categorias as $row) {
+
+
+            $str = _text_($row["nombre_categoria"], "(", $row["faqs"], ")");
+            $link = _text("?categoria=", $row["id_categoria"]);
+            $l[] = a_enid($str, $link);
+        }
+        return append($l);
     }
 
     /*
@@ -313,36 +342,23 @@ function get_format_fq($flag_categoria, $flag_busqueda_q, $faqs_categoria, $resp
     }
 
     */
+//
+//    function get_format_menu($in_session, $perfil)
+//    {
+//
+//        return ul([
+//                a_enid(
+//                    path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
+//                    ,
+//                    [
+//                        "href" => "#tab1default"
+//                    ]
+//                )
+//            ]
+//            ,
+//            "nav nav-tabs"
+//        );
+//    }
 
-    function get_format_menu($in_session, $perfil)
-    {
-
-        return ul([
-                a_enid(
-                    path_enid("fa fa-question-circle", "PREGUNTAS FRECUENTES")
-                    ,
-                    [
-                        "href" => "#tab1default"
-                    ]
-                )
-            ]
-            ,
-            "nav nav-tabs"
-        );
-    }
-
-
-    function lista_categorias($categorias)
-    {
-
-        $l = [];
-        foreach ($categorias as $row) {
-            $l[] = d(a_enid(
-                    d($row["nombre_categoria"] . "(" . $row["faqs"] . ")"),
-                    "?categoria=" . $row["id_categoria"])
-            );
-        }
-        return append($l);
-    }
 
 }

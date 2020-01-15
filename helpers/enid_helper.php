@@ -8,48 +8,23 @@ function ul($list, $attributes = [])
 
 }
 
-
 function li($info, $attributes = [], $row_12 = 0)
 {
     return add_element($info, "li", (
     is_string($attributes)) ? ["class" => $attributes] : $attributes, $row_12);
 }
 
-
-function span($info, $attributes = [], $row = 0)
+function span($str, $attributes = [], $row = 0)
 {
 
-    $attr = "";
-    if (es_data($attributes)) {
-
-        $attr = add_attributes($attributes);
-
-    } else {
-
-        if (is_string($attributes) && strlen(trim($attributes)) > 0) {
-            $att = [];
-            $att["class"] = $attributes;
-            $attr = add_attributes($att);
-
-        }
-
-    }
-
-    $base = "<span" . $attr . ">" . $info . "</span>";
-    $e = ($row == 0) ? $base : addNrow($base);
-
-    return $e;
-
-
+    return get_base_html("span", $str, $attributes, $row);
 }
-
 
 function p($str, $attributes = [], $row = 0)
 {
     return get_base_html("p", $str, $attributes, $row);
 
 }
-
 
 function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor = 0)
 {
@@ -67,9 +42,13 @@ function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor 
 
         $attributes["class"] =
             (array_key_exists(
-                "class", $attributes) ? 1 : 0 == 1) ? $attributes["class"]
-                . " " . " a_enid_blue p-2 white w-100  strong cursor_pointer format_action" :
-                "a_enid_blue white p-2 format_action cursor_pointer";
+                "class", $attributes) ? 1 : 0 == 1) ?
+                _text_(
+                    $attributes["class"]
+                    ,
+                    " a_enid_blue p-2 white w-100  strong cursor_pointer format_action"
+                )
+                : "a_enid_blue white p-2 format_action cursor_pointer";
     }
 
 
@@ -91,7 +70,6 @@ function add_element($info, $type, $attributes = '', $row = 0)
 {
 
     $base = "<" . $type . " " . add_attributes($attributes) . " >" . $info . "</" . $type . ">";
-
     return ($row < 1) ? $base : addNRow($base);
 
 }
@@ -105,6 +83,7 @@ function sub_categorias_destacadas($param)
     foreach ($param["clasificaciones"] as $row) {
 
         $primer_nivel = $row["primer_nivel"];
+
         $clasificacion = search_bi_array(
             $param["nombres_primer_nivel"],
             "id_clasificacion",
@@ -127,7 +106,6 @@ function sub_categorias_destacadas($param)
 
 }
 
-
 function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
 {
     $response = "";
@@ -135,14 +113,10 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
 
         switch ($attributes) {
             case 1:
-
                 return addNRow($info);
-
                 break;
             case 2:
-
                 $response = ($row > 0) ? "<{$tipo} class=' col-sm-2 col-sm-offset-5'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-2'>" . $info . "</{$tipo}>";
-
                 break;
             case 3:
                 $response = "<{$tipo} class=' col-sm-3'>" . $info . "</{$tipo}>";
@@ -151,55 +125,32 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
                 $response = ($row > 0) ? "<{$tipo} class=' col-sm-4 col-sm-offset-4'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-4'>" . $info . "</{$tipo}>";
                 break;
             case 5:
-                $response = "<{$tipo} class=' col-sm-5'>" . $info . "</{$tipo}>";
+                $response = "<{$tipo} class='col-sm-5'>" . $info . "</{$tipo}>";
                 break;
             case 6:
-
                 $response = ($row > 0) ? "<{$tipo} class=' col-sm-6 col-sm-offset-3'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-6'>" . $info . "</{$tipo}>";
-
                 break;
-
             case 7:
-
                 $response = "<{$tipo} class=' col-sm-7'>" . $info . "</{$tipo}>";
                 break;
-
-
             case 8:
-
                 $response = ($row > 0) ? "<{$tipo} class=' col-sm-8 col-sm-offset-2'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-8'>" . $info . "</{$tipo}>";
-
                 break;
             case 9:
                 $response = "<{$tipo} class=' col-sm-9'>" . $info . "</{$tipo}>";
                 break;
-
             case 10:
-
-
                 $response = ($row > 0) ? "<{$tipo} class=' col-sm-10 col-sm-offset-1'>" . $info . "</{$tipo}>" : "<{$tipo} class=' col-sm-10'>" . $info . "</{$tipo}>";
-
                 break;
-
             case 11:
                 $response = "<{$tipo} class=' col-sm-11'>" . $info . "</{$tipo}>";
                 break;
-
-
             case 12:
-
-
                 $response = "<{$tipo} class=' col-sm-12'>" . $info . "</{$tipo}>";
-
                 break;
-
             case 13:
-
                 $response = "<{$tipo} class='row'>" . $info . "</{$tipo}>";
-
                 break;
-
-
         }
 
         if ($frow > 0) {
@@ -213,35 +164,23 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
         if (is_array($attributes)) {
 
             $base = "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>";
-            $d = ($row > 0) ? addNRow($base) : $base;
-
-            return $d;
+            return ($row > 0) ? addNRow($base) : $base;
 
         } else {
 
             $base = "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
-            $d = ($row > 0) ? addNRow($base) : $base;
-
-            return $d;
+            return ($row > 0) ? addNRow($base) : $base;
         }
-
-
     }
-
 }
-
 
 function d($text, $attributes = [], $row = 0, $frow = 0)
 {
-
-
     if (is_array($text)) {
         $text = append($text);
     }
 
     return get_base_html("div", $text, $attributes, $row, $frow);
-
-
 }
 
 function d_p($info, $attributes = [], $row = 0, $frow = 0)
@@ -256,14 +195,12 @@ function format_time($info, $attributes = [], $row = 0, $frow = 0)
     return get_base_html("time", $info, $attributes, $row, $frow);
 }
 
-
 function u($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return get_base_html("u", $info, $attributes, $row, $frow);
 
 }
-
 
 function del($info, $attributes = [], $row = 0, $frow = 0)
 {
@@ -286,12 +223,11 @@ function article($info, $attributes = [], $row = 0, $frow = 0)
 
 }
 
-
 function input($attributes = [], $e = 0, $bootstrap = 1)
 {
 
     $attributes["class"] = (array_key_exists("class",
-        $attributes)) ? ($attributes["class"] . " ") : "  ";
+        $attributes)) ? (_text_($attributes["class"], " ")) : "  ";
 
     if ($bootstrap) {
 
@@ -316,7 +252,6 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
                 break;
 
-
             case "number":
 
                 $attributes["onpaste"] = "paste_telefono();";
@@ -327,11 +262,11 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
                 break;
 
-
             case "email":
 
                 $attributes["required"] = "true";
-                $attributes["pattern"] = '[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)';
+                $attributes["pattern"] =
+                    '[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)';
                 $attributes['title'] = "Verifica el formato de tu correo!";
                 $attributes["onpaste"] = "paste_email();";
                 $attributes["class"] = (array_key_exists("class",
@@ -340,7 +275,6 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 break;
 
             case "password":
-
                 $attributes["required"] = "true";
                 break;
 
@@ -349,7 +283,8 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 if (prm_def($attributes, "name") === "nombre") {
                     $attributes["onpaste"] = "paste_nombre();";
                     if (prm_def($attributes, 'no_validar') < 1) {
-                        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " validar_nombre ") : " validar_nombre ";
+                        $attributes["class"] = (array_key_exists("class", $attributes)) ?
+                            (_text_($attributes["class"], " validar_nombre ")) : " validar_nombre ";
                     }
                     $attributes["minlength"] = 3;
                 }
@@ -358,8 +293,10 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
             case "checkbox":
 
                 $attributes["class"] = (array_key_exists("class",
-                    $attributes)) ? ($attributes["class"] . " checkbox_enid border cursor_pointer rounded") : " checkbox_enid border cursor_pointer rounded";
-
+                    $attributes)) ?
+                    (
+                    _text_($attributes["class"], "checkbox_enid border cursor_pointer rounded")
+                    ) : " checkbox_enid border cursor_pointer rounded";
                 break;
 
 
@@ -376,16 +313,12 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
 }
 
-
 function hiddens($attributes = '', $e = 0)
 {
 
-    $input = "<input type='hidden'  " . add_attributes($attributes) . " >";
-
-    return ($e == 0) ? $input : addNRow($input);
+    return "<input type='hidden'  " . add_attributes($attributes) . " >";
 
 }
-
 
 function add_attributes($attributes = '')
 {
@@ -399,7 +332,6 @@ function add_attributes($attributes = '')
 
         $response = array_reduce(array_keys($attributes), $callback, '');
 
-
     } else {
 
         $response = ($attributes != '') ? ' ' . $attributes : '';
@@ -408,7 +340,6 @@ function add_attributes($attributes = '')
     return $response;
 
 }
-
 
 function add_fields($fields)
 {
@@ -419,26 +350,22 @@ function add_fields($fields)
             $r[] = ($b == count($fields) - 1) ? $fields[$i] : $fields[$i] . ",";
             $b++;
         }
-
     }
-
     return append($r);
 }
 
-
 function end_row()
 {
-    return str_repeat("</div>", 2);
-}
 
+    return str_repeat("</div>", 2);
+
+}
 
 function n_row_12($attributes = '')
 {
 
     return "<div class='row'><div class='col-lg-12 ' " . _parse_attributes($attributes) . ">";
-
 }
-
 
 function a_enid($title = '', $attributes = [], $format_block = 1)
 {
@@ -446,9 +373,9 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
     $att = (is_string($attributes)) ? ["href" => $attributes] : $attributes;
     if ($format_block > 0) {
 
-
-        $class = (es_data($att) && array_key_exists("class",
-                $att)) ? add_text($att["class"], " d-block") : " d-block";
+        $class = (es_data($att) &&
+            array_key_exists("class", $att)) ?
+            _text_($att["class"], " d-block") : " d-block";
 
         if (is_array($attributes) && array_key_exists('rm_class', $attributes)) {
             $class = str_replace($attributes['rm_class'], ' ', $class);
@@ -457,9 +384,7 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
         $att["class"] = $class;
     }
 
-
     return get_base_html("a", $title, $att);
-
 }
 
 function tab($text, $accion, $attributes = [])
@@ -468,7 +393,9 @@ function tab($text, $accion, $attributes = [])
     $attributes["data-toggle"] = "tab";
     $attributes["href"] = $accion;
     if (array_key_exists("class", $attributes)) {
-        $attributes["class"] = $attributes["class"] . " text-uppercase black ";
+
+        $attributes["class"] = _text_($attributes["class"], "text-uppercase black ");
+
     } else {
 
         $attributes["class"] = " text-uppercase black";
@@ -485,13 +412,17 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
         $contenido = append($contenido);
     }
     if (array_key_exists("class", $attributes)) {
-        $attributes["class"] = $attributes["class"] . " tab-pane  ";
+
+        $attributes["class"] = _text_($attributes["class"], "tab-pane");
+
     } else {
-        $attributes["class"] = " tab-pane  ";
+
+        $attributes["class"] = " tab-pane ";
     }
     if ($activo > 0) {
 
-        $attributes["class"] = $attributes["class"] . " tab-pane active ";
+        $attributes["class"] =
+            _text_($attributes["class"], "tab-pane active");
     }
 
     $attributes['role'] = "tabpanel";
@@ -510,13 +441,12 @@ function tab_activa($seccion, $activa, $considera_segundo = 0)
 function tab_content($array = [], $col = 0)
 {
 
-    $response = d(append($array), 'tab-content mt-sm-5');
+    $response = d($array, 'tab-content mt-sm-5');
     if ($col > 0) {
         $response = d($response, $col);
     }
     return $response;
 }
-
 
 function td($val = '', $attributes = [])
 {
@@ -535,46 +465,19 @@ function td($val = '', $attributes = [])
 
 }
 
-
-function get_th($val = '', $attributes = [])
-{
-
-    return "<div " . add_attributes($attributes) . " NOWRAP >" . $val . "</div>";
-}
-
-function _th($val = '', $attributes = [])
-{
-
-    return d($val, $attributes);
-}
-
-
 function tr($val = '', $attributes = [])
 {
 
-
-    if (is_array($val)) {
-
-        return "<tr " . add_attributes($attributes) . " >" . append($val) . "</tr>";
-
-    } else {
-
-        return "<tr " . add_attributes($attributes) . " >" . $val . "</tr>";
-    }
+    $str = is_array($val) ? append($val) : $val;
+    return "<tr " . add_attributes($attributes) . " >" . $str . "</tr>";
 
 }
 
 function tb($val = '', $attributes = '')
 {
 
-    if (is_array($val)) {
-
-        return "<table " . add_attributes($attributes) . " >" . append($val) . "</table>";
-
-    } else {
-
-        return "<table " . add_attributes($attributes) . " >" . $val . "</table>";
-    }
+    $str = is_array($val) ? append($val) : $val;
+    return "<table " . add_attributes($attributes) . " >" . $str . "</table>";
 
 }
 
@@ -590,7 +493,6 @@ function select_enid($data, $text_option, $val, $attributes = '')
     return append($select);
 }
 
-
 function remove_comma($text)
 {
 
@@ -600,7 +502,6 @@ function remove_comma($text)
 function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
 {
 
-
     if (is_numeric($attributes) && $attributes > 0) {
 
         $response = addNRow("<h$h>" . $data . "</h$h>");
@@ -609,34 +510,27 @@ function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
 
         if (is_string($attributes)) {
 
-
             $label = "<h$h " . add_attributes(["class" => $attributes]) . ">" . $data . "</h$h>";
             $response = ($row_12 > 0) ? addNRow($label) : $label;
 
-
         } else {
-
 
             $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
             $response = ($row_12 > 0) ? addNRow($label) : $label;
 
         }
-
-
     }
 
     return "<header>" . $response . "</header>";
 
 }
 
-
 function get_url_request($extra)
 {
 
-    return "http://" . $_SERVER['HTTP_HOST'] . "/inicio/" . $extra;
+    return _text("http://", $_SERVER['HTTP_HOST'], "/inicio/", $extra);
 
 }
-
 
 function es_local()
 {
@@ -644,7 +538,6 @@ function es_local()
     return ($_SERVER['HTTP_HOST'] !== "localhost") ? 0 : 1;
 
 }
-
 
 function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
 {
@@ -660,7 +553,7 @@ function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
 
 function template_table_enid()
 {
-    $template = array(
+    return [
         'table_open' => '<table   class="table " >',
         'thead_open' => '<thead class="black_enid_background2 white ">',
         'thead_close' => '</thead>',
@@ -679,18 +572,15 @@ function template_table_enid()
         'cell_alt_start' => '<td>',
         'cell_alt_end' => '</td>',
         'table_close' => '</table>',
-    );
+    ];
 
-    return $template;
 }
-
 
 function create_tag($param, $class, $val_id, $text)
 {
 
     $tags = "";
     foreach ($param as $row) {
-
 
         $info = $row[$text];
         $id = $row[$val_id];
@@ -702,34 +592,28 @@ function create_tag($param, $class, $val_id, $text)
             ]
         );
     }
-    $new_tags = add_element($tags, "d", array('class' => 'tags'));
 
-    return $new_tags;
+    return add_element($tags, "d", ['class' => 'tags']);
+
 }
-
 
 function get_array_json($val)
 {
 
     $response = [];
     if (strlen(trim($val)) > 1) {
-
         $response = json_decode($val, true);
-
     }
 
     return $response;
 }
 
-
 function get_json_array($arr)
 {
-
 
     return (count($arr) > 0) ? json_encode($arr) : json_encode([]);
 
 }
-
 
 function push_element_json($arr, $element)
 {
@@ -743,34 +627,31 @@ function push_element_json($arr, $element)
         if ($exists < 1) {
             array_push($arr, $element);
         }
-
     }
 
     return $arr;
 }
 
-
 function unset_element_array($array, $element)
 {
 
-    $new_array = [];
+    $response = [];
     $b = 0;
     for ($a = 0; $a < count($array); $a++) {
         if ($array[$a] != $element) {
-            $new_array[$b] = $array[$a];
+            $response[$b] = $array[$a];
             $b++;
         }
     }
 
-    return $new_array;
+    return $response;
 
 }
-
 
 function create_button_easy_select($arr, $attributes, $comparador = 1)
 {
     sort($arr);
-    $easy_selet = "";
+    $easy_select = "";
     if ($comparador == 1) {
 
         foreach ($arr as $row) {
@@ -784,7 +665,7 @@ function create_button_easy_select($arr, $attributes, $comparador = 1)
             $extra = ($row[$attributes["campo_comparacion"]] ==
                 $attributes["valor_esperado"]) ? 1 : 0;
 
-            $easy_selet .= add_element($text, "a",
+            $easy_select .= add_element($text, "a",
                 [
                     'class' => $class,
                     'id' => $row[$attributes["valor_id"]],
@@ -802,15 +683,15 @@ function create_button_easy_select($arr, $attributes, $comparador = 1)
         foreach ($arr as $row) {
             $attr = add_attributes($extra);
             $id = $row[$campo_id];
-            $easy_selet .= "<a " . $attr . " id=" . $id . "  >" . $row["talla"] . "</a>";
+            $easy_select .=
+                _text("<a ", $attr, " id=", $id, "  >", $row["talla"], "</a>");
         }
 
     }
 
-    return $easy_selet;
+    return $easy_select;
 
 }
-
 
 function create_select(
     $data,
@@ -843,12 +724,11 @@ function create_select(
 
 }
 
-
 function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
 {
 
-    $val = (is_array($data) && array_key_exists($key,
-            $data) && $data[$key] !== null) ? $data[$key] : $val_def;
+    $val = (is_array($data) &&
+        array_key_exists($key, $data) && $data[$key] !== null) ? $data[$key] : $val_def;
 
     if ($valida_basura > 0) {
 
@@ -864,27 +744,23 @@ function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
 function label($label_text = '', $attributes = [], $row = 0)
 {
 
-
     $base = (is_string($attributes)) ?
         "<label" . add_attributes(["class" => $attributes]) . ">" . $label_text . "</label>" :
         "<label" . add_attributes($attributes) . ">" . $label_text . "</label>";
 
     return ($row == 0) ? $base : addNRow($base);
 
-
 }
-
 
 function addNRow($e, $attributes = [])
 {
 
     return (is_string($attributes)) ?
-        n_row_12(["class" => $attributes]) . $e . end_row() :
+        n_row_12(["class" => $attributes]) . $e . end_row()
+        :
         n_row_12($attributes) . $e . end_row();
 
-
 }
-
 
 function place($class, $attributes = [], $row = 0)
 {
@@ -909,9 +785,9 @@ function place($class, $attributes = [], $row = 0)
 function img_enid($extra = [], $row_12 = 0, $external = 0)
 {
 
-
     $conf["src"] = ($external == 0) ?
-        "../img_tema/enid_service_logo.jpg" : "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg";
+        "../img_tema/enid_service_logo.jpg" :
+        "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg";
 
     if (es_data($extra)) {
         $conf += $extra;
@@ -928,22 +804,6 @@ function url_recuperacion_password()
     return "../msj/index.php/api/mailrest/recupera_password/format/json/";
 }
 
-
-//function get_dominio($url)
-//{
-//    $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
-//    $url = explode('/', str_replace($protocolos, '', $url));
-//
-//    return $url[0];
-//}
-
-//function mayus($variable)
-//{
-//    return strtr(strtoupper($variable), "àèìòùáéíóúçñäëïöü", "ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
-//
-//}
-
-
 function get_campo($param, $key, $label = "", $add_label = 0)
 {
 
@@ -951,31 +811,31 @@ function get_campo($param, $key, $label = "", $add_label = 0)
 
 }
 
-
 function usuario($q2)
 {
-    $id_usuario_envio = 0;
+    $id = 0;
     if (isset($q2) && $q2 != null) {
-        $id_usuario_envio = $q2;
+        $id = $q2;
     }
 
-    return $id_usuario_envio;
+    return $id;
 }
-
 
 function now_enid()
 {
-    return date('Y-m-d');
-}
 
+    return date('Y-m-d');
+
+}
 
 function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
 {
     $response = 0;
     if (is_numeric($cantidad) == is_numeric($porciento)) {
 
-        $response = ($numeric_format == 1) ? (number_format($cantidad * $porciento / 100,
-            $decimales)) : ($cantidad * $porciento / 100);
+        $response = ($numeric_format == 1) ?
+            (number_format($cantidad * $porciento / 100, $decimales)) :
+            ($cantidad * $porciento / 100);
 
     }
 
@@ -988,7 +848,7 @@ function porcentaje_total($cantidad, $total)
     $response = 0;
     if ($total > 0) {
 
-        $response = $cantidad * 100 / $total;
+        $response = ($cantidad * 100 / $total);
     }
 
     return $response;
@@ -999,41 +859,44 @@ function porcentaje_total($cantidad, $total)
 function get_url_pinterest($url, $icon = 0)
 {
 
-    $url_pinterest = "https://www.pinterest.com/pin/create/button/?url=" . $url;
+    $path = _text("https://www.pinterest.com/pin/create/button/?url=", $url);
     if ($icon > 0) {
         return a_enid(icon('fa fa-pinterest-p'),
             [
                 'target' => "_black",
-                'href' => $url_pinterest,
+                'href' => $path,
                 'class' => 'black',
             ]);
     }
 
-    return $url_pinterest;
+    return $path;
 
 }
-
 
 function get_url_twitter($url, $mensaje, $icon = 0)
 {
 
-    $url_twitter = "https://twitter.com/intent/tweet?text=" . $mensaje . $url;
+    $path = _text(
+        "https://twitter.com/intent/tweet?text=", $mensaje, $url);
     if ($icon > 0) {
-        return a_enid(icon('fa fa-twitter'),
+        return a_enid(
+            icon('fa fa-twitter'),
             [
                 'target' => "_black",
-                'href' => $url_twitter,
-            ]);
+                'href' => $path,
+            ]
+        );
     }
 
-    return $url_twitter;
+    return $path;
 }
 
 
 function get_url_facebook($url, $icon = 0)
 {
 
-    $url_facebook = "https://www.facebook.com/sharer/sharer.php?u=" . $url . ";src=sdkpreparse";
+    $url_facebook = _text(
+        "https://www.facebook.com/sharer/sharer.php?u=", $url, ";src=sdkpreparse");
     if ($icon > 0) {
         return a_enid(
             icon('fa fa-facebook-square'),
@@ -1051,10 +914,10 @@ function get_url_facebook($url, $icon = 0)
 function get_url_tienda($id_usuario)
 {
 
-    return "http://" . $_SERVER['HTTP_HOST'] . "/inicio/search/?q3=" . $id_usuario;
+    return _text(
+        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario);
 
 }
-
 
 function unique_multidim_array($array, $key)
 {
@@ -1093,24 +956,20 @@ function get_keys($array_keys)
     return implode(",", $array_keys);
 }
 
-
 function create_url_preview($img)
 {
     return base_url() . "../img_tema/portafolio/" . $img;
 }
-
 
 function lib_def()
 {
     return "../../librerias/app";
 }
 
-
 function valida_num($num)
 {
     return ($num > 0) ? $num : 0;
 }
-
 
 function randomString($length = 10, $uc = true, $n = true, $sc = false)
 {
@@ -1146,38 +1005,34 @@ function site_url($uri = '')
     return $CI->config->site_url($uri);
 }
 
-
 function get_drop($tmp_table)
 {
-    return "DROP TABLE IF EXISTS " . $tmp_table . " ";
-
+    return _text_("DROP TABLE IF EXISTS ", $tmp_table);
 }
 
-function valida_extension($string, $num_ext, $strin_secundario)
+function valida_extension($string, $num_ext, $str)
 {
 
-    return (strlen($string) > $num_ext) ? $string : $strin_secundario;
+    return (strlen($string) > $num_ext) ? $string : $str;
 
 }
-
 
 function link_imagen_servicio($id)
 {
 
-    return ($id > 0) ? "../imgs/index.php/enid/imagen_servicio/" . $id : "";
-}
+    return ($id > 0) ? _text("../imgs/index.php/enid/imagen_servicio/", $id) : "";
 
+}
 
 function select_vertical($data, $val, $text_option, $attributes = '')
 {
 
     $extra = add_attributes($attributes);
-    $select = "<select " . $extra . " > ";
+    $select = _text_("<select ", $extra, " > ");
     foreach ($data as $row) {
         $select .= "<option value='" . $row[$val] . "'>" . $row[$text_option] . " </option>";
     }
     $select .= "</select>";
-
     return $select;
 
 }
@@ -1199,7 +1054,6 @@ function small($text, $attributes = [])
 
 }
 
-
 function strong($text, $attributes = '', $row = 0)
 {
 
@@ -1214,12 +1068,9 @@ function strong($text, $attributes = '', $row = 0)
     } else {
 
         $base = "<strong" . add_attributes($attributes) . ">" . $text . "</strong>";
-
         return ($row == 0) ? $base : addNRow($base);
 
-
     }
-
 
 }
 
@@ -1243,7 +1094,6 @@ function hr($attributes = [], $row = 1)
 
     }
 
-
 }
 
 function border($attributes = [])
@@ -1251,7 +1101,7 @@ function border($attributes = [])
 
     $extra = (is_string($attributes)) ? $attributes : add_attributes($attributes);
 
-    return d("", "border " . $extra);
+    return d("", _text_("border ", $extra));
 }
 
 
@@ -1286,7 +1136,6 @@ function debug($msg, $array = 0)
 
 }
 
-
 function get_costo_envio($param)
 {
 
@@ -1320,15 +1169,18 @@ function get_costo_envio($param)
 }
 
 function texto_costo_envio_info_publico(
-    $flag_envio_gratis,
-    $costo_envio_cliente,
-    $costo_envio_vendedor,
-    $tipo_entrega
-)
+    $flag_envio_gratis, $costo_envio_cliente,
+    $costo_envio_vendedor, $tipo_entrega)
 {
 
-    $text_envio = ['', ' MXN DE TU ENTREGA', ' MXN DE ENVÍO', ''];
-    $response = ($flag_envio_gratis > 0) ?
+    $text_envio = [
+        '',
+        ' MXN DE TU ENTREGA',
+        ' MXN DE ENVÍO',
+        ''
+    ];
+
+    return ($flag_envio_gratis > 0) ?
         [
             "cliente" => "ENTREGA GRATIS!",
             "cliente_solo_text" => "ENTREGA GRATIS!",
@@ -1336,14 +1188,11 @@ function texto_costo_envio_info_publico(
         ]
         :
         [
-
             "ventas_configuracion" => "EL CLIENTE PAGA SU ENVÍO, NO GASTA POR EL ENVÍO",
             "cliente_solo_text" => _text($costo_envio_cliente, $text_envio[$tipo_entrega]),
             "cliente" => _text($costo_envio_cliente, $text_envio[$tipo_entrega]),
         ];
 
-
-    return $response;
 }
 
 
@@ -1355,9 +1204,7 @@ function fx($param, $k = '', $num = 0)
     if (es_data($keys)) {
         $z = 1;
         for ($a = 0; $a < count($keys); $a++) {
-
             if ($keys[$a] != null) {
-
 
                 if (!array_key_exists(trim($keys[$a]),
                         $param) || strlen(trim($param[$keys[$a]])) < $num) {
@@ -1366,13 +1213,11 @@ function fx($param, $k = '', $num = 0)
                     break;
                 }
 
-
             } else {
 
                 debug("este parámetro está llegando nulo" . $keys[$a]);
                 break;
             }
-
 
         }
 
@@ -1397,11 +1242,13 @@ function textarea($attributes = [], $row_12 = 0, $def = '')
 {
 
     $attributes["rows"] = "2";
-
     if (array_key_exists("class", $attributes)) {
-        $attributes["class"] = $attributes["class"] . " form-control rounded-0";
+        $attributes["class"] = _text_(
+            $attributes["class"], " form-control rounded-0");
     } else {
+
         $attributes["class"] = " form-control rounded-0";
+
     }
     $base = "<textarea " . add_attributes($attributes) . " >" . $def . "</textarea>";
     $e = ($row_12 == 0) ? $base : addNRow($base);
@@ -1417,18 +1264,6 @@ function iframe($attributes = '', $row_12 = 0)
 
     return ($row_12 == 0) ? $base : addNRow($base);
 }
-
-
-//function center($attributes = '', $row_12 = 0)
-//{
-//
-//    $base = "<center ".add_attributes($attributes)." ></center>";
-//
-//    return ($row_12 == 0) ? $base : addNRow($base);
-//
-//}
-
-/*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
 
 function sksort(&$array, $subkey = "id", $sort_ascending = false)
 {
@@ -1523,9 +1358,8 @@ function get_logo($is_mobile, $tipo = 0)
     } else {
 
         $img_enid = img_enid(["style" => "width: 50px!important;"]);
-        $en_pc = a_enid($img_enid, ["href" => path_enid('home')]);
+        return a_enid($img_enid, ["href" => path_enid('home')]);
 
-        return $en_pc;
     }
 
 }
@@ -1608,7 +1442,6 @@ function horarios()
 function lista_horarios($dia_busqueda = 0)
 {
 
-
     $fecha = horario_enid();
     $hoy = $fecha->format('Y-m-d');
     $hora_actual = date_format($fecha, 'H');
@@ -1689,12 +1522,11 @@ function lista_horarios($dia_busqueda = 0)
     }
 
     $select .= "</select>";
-    $response = [
-        "select" => $select,
-        "nuevo_dia" => $nuevo_dia,
-    ];
-
-    return $response;
+    return
+        [
+            "select" => $select,
+            "nuevo_dia" => $nuevo_dia,
+        ];
 
 
 }
@@ -1710,21 +1542,25 @@ function get_url_servicio($id_servicio, $n = 0)
 
 function img_servicio($id, $external = 0)
 {
-    $url = ($external > 0) ? "http://enidservices.com/inicio/imgs/index.php/enid/imagen_servicio/" . $id : get_url_request("imgs/index.php/enid/imagen_servicio/" . $id);
+    $url = ($external > 0) ?
+        _text(
+            "http://enidservices.com/inicio/imgs/index.php/enid/imagen_servicio/", $id
+        ) :
+        get_url_request(_text("imgs/index.php/enid/imagen_servicio/", $id));
 
-    $img = [
+    return [
         'src' => $url,
         'id' => "imagen_" . $id,
         'class' => 'imagen-producto',
     ];
 
-    return img($img);
 
 }
 
 
 function append($array, $col = 0, $num_col = 0)
 {
+    $response = "";
     if (is_array($array)) {
 
         if (es_local() > 0) {
@@ -1748,14 +1584,12 @@ function append($array, $col = 0, $num_col = 0)
             }
         };
 
-
         $response = array_reduce($array, $callback, '');
 
         if ($col > 0) {
 
             $response = ($num_col > 0) ? d($response, $num_col) : d($response);
         }
-
 
     } else {
 
@@ -1773,11 +1607,12 @@ function m($str)
 function get_request_email($email, $asunto, $cuerpo)
 {
 
-    return [
-        "para" => $email,
-        "asunto" => $asunto,
-        "cuerpo" => $cuerpo,
-    ];
+    return
+        [
+            "para" => $email,
+            "asunto" => $asunto,
+            "cuerpo" => $cuerpo,
+        ];
 }
 
 
@@ -1793,10 +1628,8 @@ function es_email_valido($email)
             }
         }
     }
-    $es_valido = ($b < 6 && $f > 0) ? 1 : 0;
 
-    return $es_valido;
-
+    return ($b < 6 && $f > 0) ? 1 : 0;
 
 }
 
@@ -1813,8 +1646,6 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 "class" => ' white text-uppercase strong text_agilizar',
             ], 0
         );
-
-
         $session = a_enid(
             text_icon("fa fa-user", " iniciar sesión",
                 [],
@@ -1836,10 +1667,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 "d-none d-md-block d-md-flex justify-content-end mt-md-3 mb-md-3",
                 "mr-3 ", '', ''
             );
-
-
         }
-
     }
 
     return $response;
@@ -1856,9 +1684,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
         if ($row > 0) {
 
             $offset = 0;
-
             switch ($n) {
-
                 case 2:
                     $offset = 5;
                     break;
@@ -1882,7 +1708,6 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
         $response = d(append([$a, $b]), ["class" => $class]);
 
         if ($frow > 0) {
-
             $response = d(d(append([$a, $b]), $class), 13);
         }
 
@@ -1896,7 +1721,6 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
     return $response;
 
 }
-
 
 function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 ', $base_termino = 'col-lg-4 mt-5 ', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
@@ -1913,7 +1737,6 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-l
             "type" => "date",
         ]
     );
-
 
     $r[] = input_frm($base_termino, "Fecha término",
         [
@@ -1946,11 +1769,13 @@ function input_hour_date()
         ]
     );
     $r[] = span(span("", "fa fa-clock-o"), "input-group-addon");
-    $r[] = hiddens([
-        "id" => "dtp_input1",
-        "name" => "hora_fecha",
-        "class" => "hora_fecha",
-    ]);
+    $r[] = hiddens(
+        [
+            "id" => "dtp_input1",
+            "name" => "hora_fecha",
+            "class" => "hora_fecha",
+        ]
+    );
 
     return d(
         $r,
@@ -1976,16 +1801,14 @@ function get_format_izquierdo(
                 'width' => '100%',
             ]
         ),
-        [
-            'href' => "../contact/#envio_msj",
-        ]
+        "../contact/#envio_msj"
     );
 
 
     if ($agregar_categoria > 0) {
 
 
-        $r[] = d(h("CATEGORIAS DESTACADAS", 3));
+        $r[] = _titulo("CATEGORIAS DESTACADAS", 3);
         $r[] = d(a_enid(h("Agregar", 5, "underline top_20"),
             ["href" => path_enid("nfaq"), "class" => "black"]));
 
@@ -2000,12 +1823,13 @@ function get_format_izquierdo(
 
 
     $r[] = d(append([
-        h("¿TIENES ALGUNA DUDA?", 3),
+        _titulo("¿TIENES ALGUNA DUDA?"),
         a_enid("ENVIA TU MENSAJE",
             [
                 "href" => "../contact/#envio_msj",
                 'style' => 'color:black!important;text-decoration:underline;',
-            ]),
+            ]
+        ),
 
     ]),
         [
@@ -2120,11 +1944,12 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 
     if (array_key_exists($pos, $base_url)) {
 
-        $path = ($link_directo > 0) ? (($extra !== 0) ? $base_url[$pos] . $extra : $base_url[$pos]) : (($extra !== 0) ? "../" . $base_url[$pos] . $extra : "../" . $base_url[$pos]);
+        $path = ($link_directo > 0) ?
+            (($extra !== 0) ? $base_url[$pos] . $extra : $base_url[$pos]) : (($extra !== 0) ? "../" . $base_url[$pos] . $extra : "../" . $base_url[$pos]);
 
         if ($controlador > 0) {
 
-            $path = "../" . $path;
+            $path = _text("../", $path);
         }
     } else {
 
@@ -2138,8 +1963,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 function text_icon($class_icono, $text, $att = [], $left = 1)
 {
 
-    return ($left > 0) ? (icon($class_icono,
-            $att) . " " . $text) : ($text . " " . icon($class_icono, $att));
+    return ($left > 0) ? (icon($class_icono, $att) . " " . $text) : (_text_($text, icon($class_icono, $att)));
 
 }
 
@@ -2149,7 +1973,6 @@ function _titulo($text, $tipo = 0, $extra = '')
     return h($text, 1, $tipo_titulo . ' strong text-uppercase ' . $extra);
 
 }
-
 
 function horario_enid()
 {
@@ -2179,13 +2002,10 @@ function social($proceso_compra, $desc_web, $black = 1)
     $url_share = current_url() . '?' . $_SERVER['QUERY_STRING'];
     $url_facebook = get_url_facebook($url_share);
     $url_twitter = get_url_twitter($url_share, $desc_web);
-
-
     $color = ($black > 0) ? "black" : "white";
-
     $r = [];
-    if ($proceso_compra < 1) {
 
+    if ($proceso_compra < 1) {
 
         $r[] = a_enid(
             img(
@@ -2197,8 +2017,6 @@ function social($proceso_compra, $desc_web, $black = 1)
             [
                 "href" => "https://www.m.me/enidservicemx",
                 "target" => "_black",
-
-
             ]
         );
 
@@ -2208,26 +2026,29 @@ function social($proceso_compra, $desc_web, $black = 1)
                 "target" => "_black",
                 "class" => "fa fa-facebook " . $color,
 
-            ]);
+            ]
+        );
 
         $r[] = a_enid("",
             [
                 "href" => "https://www.instagram.com/enid_service/",
-                "class" => "fa fa-instagram " . $color,
+                "class" => _text_("fa fa-instagram ", $color),
                 "title" => "Tumblr",
                 "target" => "_black",
-            ]);
+            ]
+        );
 
         $r[] = a_enid("",
             [
                 "target" => "_black",
-                "class" => "fa fa-twitter " . $color,
+                "class" => _text_("fa fa-twitter ", $color),
                 "title" => "Tweet",
                 "data-size" => "large",
                 "href" => $url_twitter,
-            ]);
-        $r[] = get_url_pinterest($url_share, 1);
+            ]
+        );
 
+        $r[] = get_url_pinterest($url_share, 1);
 
     }
 
@@ -2239,11 +2060,14 @@ function es_data($e)
 {
 
     return (is_array($e) && count($e) > 0) ? true : false;
+
 }
 
 function igual($a, $b, $str, $def = "")
 {
+
     return ($a == $b) ? $str : $def;
+
 }
 
 function val_class($a, $b, $class, $def = "")
@@ -2282,8 +2106,8 @@ function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = 
 function key_exists_bi($data, $k, $sk, $def = "")
 {
 
-    return (is_array($data) && array_key_exists($k,
-            $data) && is_array($data[$k]) && array_key_exists($sk,
+    return (is_array($data) &&
+        array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk,
             $data[$k])) ? $data[$k][$sk] : $def;
 }
 
@@ -2294,73 +2118,44 @@ function pr($data, $index, $def = false)
             $data[0])) ? $data[0][$index] : $def;
 }
 
-
 function hrz($a, $b, $col = 0, $class = '')
 {
     switch ($col) {
 
         case 1:
-
             $response = d(d($a, 1) . d($b, 11), $class);
             break;
 
         case 2:
-
             $response = d(d($a, 2) . d($b, 10), $class);
-
             break;
         case 3:
-
             $response = d(d($a, 3) . d($b, 9), $class);
-
             break;
-
         case 4:
-
             $response = d(d($a, 4) . d($b, 8), $class);
-
             break;
-
         case 5:
-
             $response = d(d($a, 5) . d($b, 7), $class);
-
             break;
-
         case 6:
-
             $response = d(d($a, 6) . d($b, 6), $class);
-
             break;
-
         case 7:
-
             $response = d(d($a, 7) . d($b, 5), $class);
-
             break;
-
         case 8:
-
             $response = d(d($a, 8) . d($b, 4), $class);
-
             break;
-
         case 9:
-
             $response = d(d($a, 9) . d($b, 3), $class);
-
             break;
-
         case 10:
-
             $response = d(d($a, 10) . d($b, 2), $class);
-
             break;
-
-
         default:
-
             $response = d(d($a) . d($b), $class);
+            break;
 
     }
 
@@ -2373,68 +2168,38 @@ function dd($a, $b, $col = 0)
     switch ($col) {
 
         case 1:
-
             $response = d($a, 1) . d($b, 11);
             break;
-
         case 2:
-
             $response = d($a, 2) . d($b, 10);
-
             break;
         case 3:
-
             $response = d($a, 3) . d($b, 9);
-
             break;
-
         case 4:
-
             $response = d($a, 4) . d($b, 8);
-
             break;
-
         case 5:
-
             $response = d($a, 5) . d($b, 7);
-
             break;
-
         case 6:
-
             $response = d($a, 6) . d($b, 6);
-
             break;
-
         case 7:
-
             $response = d($a, 7) . d($b, 5);
-
             break;
-
         case 8:
-
             $response = d($a, 8) . d($b, 4);
-
             break;
-
         case 9:
-
             $response = d($a, 9) . d($b, 3);
-
             break;
-
         case 10:
-
             $response = d($a, 10) . d($b, 2);
-
             break;
-
-
         default:
-
             $response = d($a) . d($b);
-
+            break;
     }
 
     return $response;
@@ -2455,48 +2220,41 @@ function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
 
             $response = d($a, " col-lg-2 " . $extra_left) . d($b,
                     " col-lg-10 " . $extra_right);
-
             break;
         case 3:
 
             $response = d($a, " col-lg-3 " . $extra_left) . d($b,
                     " col-lg-9 " . $extra_right);
-
             break;
 
         case 4:
 
             $response = d($a, " col-lg-4 " . $extra_left) . d($b,
                     " col-lg-8 " . $extra_right);
-
             break;
 
         case 5:
 
             $response = d($a, " col-lg-5 " . $extra_left) . d($b,
                     " col-lg-7 " . $extra_right);
-
             break;
 
         case 6:
 
             $response = d($a, " col-lg-6 " . $extra_left) . d($b,
                     " col-lg-6 " . $extra_right);
-
             break;
 
         case 7:
 
             $response = d($a, " col-lg-7 " . $extra_left) . d($b,
                     " col-lg-5 " . $extra_right);
-
             break;
 
         case 8:
 
             $response = d($a, " col-lg-8 " . $extra_left) . d($b,
                     " col-lg-4 " . $extra_right);
-
             break;
 
         case 9:
@@ -2512,7 +2270,6 @@ function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
                     " col-lg-2 " . $extra_right);
 
             break;
-
 
         default:
 
@@ -2538,71 +2295,39 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
     switch ($col) {
 
         case 0:
-
             $response = d(d($a) . d($b), $class);
             break;
-
         case 1:
-
             $response = d(d($a, 1) . d($b, 11), $class);
             break;
-
         case 2:
-
             $response = d(d($a, 2) . d($b, 10), $class);
-
             break;
         case 3:
-
             $response = d(d($a, 3) . d($b, 9), $class);
-
             break;
-
         case 4:
-
             $response = d(d($a, 4) . d($b, 8), $class);
-
             break;
-
         case 5:
-
             $response = d(d($a, 5) . d($b, 7), $class);
-
             break;
-
         case 6:
-
             $response = d(d($a, 6) . d($b, 6), $class);
-
             break;
-
         case 7:
-
             $response = d(d($a, 7) . d($b, 5), $class);
-
             break;
-
         case 8:
-
             $response = d(d($a, 8) . d($b, 4), $class);
-
             break;
-
         case 9:
-
             $response = d(d($a, 9) . d($b, 3), $class);
-
             break;
-
         case 10:
-
             $response = d(d($a, 10) . d($b, 2), $class);
-
             break;
-
-
         default:
-
             $response = d(d($a) . d($b), $class);
 
     }
@@ -2627,15 +2352,16 @@ function create_contenido_menu($data)
 
     foreach ($navegacion as $row) {
 
+        $path = base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa;
+        $path_web = base_url($row["urlpaginaweb"]);
         $menu[] =
             a_enid(
                 icon($row["iconorecurso"]) . $row["nombre"],
                 [
-                    "href" => ($row["idrecurso"] == 18) ? base_url($row["urlpaginaweb"]) . "/?q=" . $id_empresa : base_url($row["urlpaginaweb"]),
+                    "href" => ($row["idrecurso"] == 18) ? $path : $path_web,
                     "class" => 'black text-uppercase mt-2 ',
                 ]
             );
-
 
     }
 
@@ -2665,100 +2391,22 @@ function dispositivo()
 
     $mobile_ua = strtolower(substr($_SERVER['HTTP_USER_AGENT'], 0, 4));
     $mobile_agents = array(
-        'w3c ',
-        'acs-',
-        'alav',
-        'alca',
-        'amoi',
-        'audi',
-        'avan',
-        'benq',
-        'bird',
-        'blac',
-        'blaz',
-        'brew',
-        'cell',
-        'cldc',
-        'cmd-',
-        'dang',
-        'doco',
-        'eric',
-        'hipt',
-        'inno',
-        'ipaq',
-        'java',
-        'jigs',
-        'kddi',
-        'keji',
-        'leno',
-        'lg-c',
-        'lg-d',
-        'lg-g',
-        'lge-',
-        'maui',
-        'maxo',
-        'midp',
-        'mits',
-        'mmef',
-        'mobi',
-        'mot-',
-        'moto',
-        'mwbp',
-        'nec-',
-        'newt',
-        'noki',
-        'palm',
-        'pana',
-        'pant',
-        'phil',
-        'play',
-        'port',
-        'prox',
-        'qwap',
-        'sage',
-        'sams',
-        'sany',
-        'sch-',
-        'sec-',
-        'send',
-        'seri',
-        'sgh-',
-        'shar',
-        'sie-',
-        'siem',
-        'smal',
-        'smar',
-        'sony',
-        'sph-',
-        'symb',
-        't-mo',
-        'teli',
-        'tim-',
-        'tosh',
-        'tsm-',
-        'upg1',
-        'upsi',
-        'vk-v',
-        'voda',
-        'wap-',
-        'wapa',
-        'wapi',
-        'wapp',
-        'wapr',
-        'webc',
-        'winw',
-        'winw',
-        'xda ',
-        'xda-',
+        'w3c ', 'acs-', 'alav', 'alca', 'amoi', 'audi', 'avan', 'benq', 'bird', 'blac',
+        'blaz', 'brew', 'cell', 'cldc', 'cmd-', 'dang', 'doco', 'eric', 'hipt',
+        'inno', 'ipaq', 'java', 'jigs', 'kddi', 'keji', 'leno', 'lg-c', 'lg-d', 'lg-g',
+        'lge-', 'maui', 'maxo', 'midp', 'mits', 'mmef', 'mobi', 'mot-', 'moto', 'mwbp',
+        'nec-', 'newt', 'noki', 'palm', 'pana', 'pant', 'phil', 'play', 'port', 'prox',
+        'qwap', 'sage', 'sams', 'sany', 'sch-', 'sec-', 'send', 'seri', 'sgh-', 'shar',
+        'sie-', 'siem', 'smal', 'smar', 'sony', 'sph-', 'symb', 't-mo', 'teli', 'tim-',
+        'tosh', 'tsm-', 'upg1', 'upsi', 'vk-v', 'voda', 'wap-', 'wapa', 'wapi', 'wapp',
+        'wapr', 'webc', 'winw', 'winw', 'xda ', 'xda-',
     );
 
     if (in_array($mobile_ua, $mobile_agents)) {
         $mobile_browser++;
     }
-
     if (strpos(strtolower($_SERVER['HTTP_USER_AGENT']), 'opera mini') > 0) {
         $mobile_browser++;
-        //Check for tablets on opera mini alternative headers
         $stock_ua = strtolower(isset($_SERVER['HTTP_X_OPERAMINI_PHONE_UA']) ? $_SERVER['HTTP_X_OPERAMINI_PHONE_UA'] : (isset($_SERVER['HTTP_DEVICE_STOCK_UA']) ? $_SERVER['HTTP_DEVICE_STOCK_UA'] : ''));
         if (preg_match('/(tablet|ipad|playbook)|(android(?!.*mobile))/i', $stock_ua)) {
             $tablet_browser++;
@@ -2766,14 +2414,10 @@ function dispositivo()
     }
 
     if ($tablet_browser > 0) {
-        // do something for tablet devices
-        //print 'is tablet';
         return 0;
     } elseif ($mobile_browser > 0) {
-        // do something for mobile devices
         return 1;
     } else {
-
         return 2;
     }
 }
@@ -2875,7 +2519,13 @@ function menu_session_mobil($in_session)
     }
 
 
-    $menu_lateral = d(flex($r, 'd-flex flex-column  align-items-center justify-content-between h-100'), ["id" => "mySidenav", "class" => "sidenav"]);
+    $menu_lateral = d(
+        flex($r, 'd-flex flex-column  align-items-center justify-content-between h-100'),
+        [
+            "id" => "mySidenav",
+            "class" => "sidenav"
+        ]
+    );
 
     return addNRow($menu_lateral);
 
@@ -2897,15 +2547,11 @@ function tmp_menu($id_usuario, $menu)
                 "data-toggle" => "dropdown",
             ]
         )
-
         ,
-
         d(
-
             place("place_notificaciones_usuario m-3")
             ,
             "dropdown-menu menu_dropdown_enid"
-
         )
         ,
         "dropdown dropleft menu_notificaciones_progreso_dia mr-2 "
@@ -2923,19 +2569,20 @@ function tmp_menu($id_usuario, $menu)
 
     $menu_usuario = [
         $menu,
-        a_enid("Mis reseñas y valoraciones", [
-
+        a_enid("Mis reseñas y valoraciones",
+            [
                 "href" => path_enid("recomendacion", $id_usuario),
                 "class" => "black text-uppercase mt-2",
             ]
         ),
-        a_enid("Configuración", [
-            "href" => path_enid("administracion_cuenta"),
-            "class" => 'black text-uppercase mt-2',
-        ]),
+        a_enid("Configuración",
+            [
+                "href" => path_enid("administracion_cuenta"),
+                "class" => 'black text-uppercase mt-2',
+            ]
+        ),
         a_enid("salir",
             [
-
                 "href" => path_enid("logout"),
                 "class" => 'black text-uppercase mt-2',
             ]
@@ -2970,11 +2617,14 @@ function frm_search(
             "placeholder" => "Búsqueda",
             "name" => "q",
             "onpaste" => "paste_search();",
-
         ]
-
     );
-    $r[] = btn(icon("fa fa-search "), ['style' => 'background: #007bff!important;']);
+
+    $r[] = btn(icon("fa fa-search "),
+        [
+            'style' => 'background: #007bff!important;'
+        ]
+    );
     $r[] = form_close();
 
     if (!$in_session) {
@@ -3013,7 +2663,7 @@ function frm_search(
 
 function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = 'd-flex ')
 {
-    $response = "";
+
     if (is_array($d)) {
 
 
@@ -3050,18 +2700,17 @@ function crea_estrellas($calificacion, $sm = 0)
     if ($calificacion > 0) {
 
         for ($a; $a <= $calificacion; $a++) {
-            $ext = ($sm > 0) ? "" : "";
-            $valoraciones .= label("★", ["class" => 'estrella black ' . $ext, "id" => $a]);
+
+            $valoraciones .= label("★", ["class" => 'estrella black ', "id" => $a]);
         }
     }
 
     for ($a; $a <= 5; $a++) {
-        $ext = ($sm > 0) ? "" : "";
 
         $restantes .=
             label("★",
                 [
-                    "class" => 'estrella azul_estrella_simple  cursor_pointer ' . $ext,
+                    "class" => 'estrella azul_estrella_simple  cursor_pointer ',
                     "id" => $a,
                 ]
             );
@@ -3144,8 +2793,8 @@ function format_fecha($date, $horas = 0)
 {
 
     $ext = ($horas > 0) ? 'H:i' : '';
-
-    return format_time(date_format(date_create($date), 'd M Y ' . $ext));
+    return format_time(date_format(date_create($date),
+        _text_('d M Y ', $ext)));
 
 }
 
@@ -3164,17 +2813,6 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
     $att["class"] = (array_key_exists("class",
         $attributes)) ? add_text($clase, $attributes["class"]) : $clase;
-
-    return a_enid($str, $att);
-}
-
-function format_link_primario($str, $attributes, $primario = 0)
-{
-
-    $f = ($primario > 0) ? " black " : " agregar_direccion_pedido border-0 bg_black white";
-    $att = $attributes;
-    $att["class"] = (array_key_exists("class",
-        $attributes)) ? add_text($attributes["class"], $f) : $f;
 
     return a_enid($str, $att);
 }
@@ -3200,14 +2838,10 @@ function format_load($extra = '')
     if (is_numeric($extra)) {
         switch ($extra) {
             case 12:
-
                 $extra = 'col-lg-12 ';
-
                 break;
             case 13:
-
                 $extra = 'row ';
-
                 break;
             default:
         }
@@ -3223,10 +2857,10 @@ function format_load($extra = '')
 function _text()
 {
 
-    $lista_argumentos = func_get_args();
+    $argumentos = func_get_args();
     $response = '';
     for ($i = 0; $i < func_num_args(); $i++) {
-        $response .= $lista_argumentos[$i];
+        $response .= $argumentos[$i];
     }
     return $response;
 
@@ -3235,23 +2869,22 @@ function _text()
 function _text_()
 {
 
-    $lista_argumentos = func_get_args();
+    $argumentos = func_get_args();
     $response = '';
     for ($i = 0; $i < func_num_args(); $i++) {
-        $response .= ' ' . $lista_argumentos[$i];
+        $response .= ' ' . $argumentos[$i];
     }
     return $response;
 
 }
 
-
 function _d()
 {
 
-    $lista_argumentos = func_get_args();
+    $argumentos = func_get_args();
     $response = '';
     for ($i = 0; $i < func_num_args(); $i++) {
-        $response .= d($lista_argumentos[$i]);
+        $response .= d($argumentos[$i]);
     }
 
     return $response;
@@ -3286,13 +2919,13 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
             case 1:
 
                 $espacio = 'justify-content-between mt-3 ';
-                $response[] = hr('mb-4 border_big',0);
+                $response[] = hr('mb-4 border_big', 0);
                 $response[] = flex('Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
                 $response[] = flex($tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio, 'envio_text', 'envio_money text-uppercase');
                 if ($es_abono) {
                     $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
                 }
-                $response[] = hr('mt-4 border_big',0);
+                $response[] = hr('mt-4 border_big', 0);
                 $response[] = flex('Total', money($saldo_pendiente), 'justify-content-between', 'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
                 $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
 
@@ -3303,15 +2936,15 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
 
         }
 
+        $checkout =
+            [
+                'checkout' => d($response, 'checkout_resumen'),
+                'saldo_pendiente' => $saldo_pendiente,
+                'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
+                'tipo_entrega' => $entrega_tipo,
+                'descuento_entrega' => $costo_envio_cliente
 
-        $checkout = [
-            'checkout' => d($response, 'checkout_resumen'),
-            'saldo_pendiente' => $saldo_pendiente,
-            'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
-            'tipo_entrega' => $entrega_tipo,
-            'descuento_entrega' => $costo_envio_cliente
-
-        ];
+            ];
 
     }
     return $checkout;
@@ -3371,7 +3004,6 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 {
 
     $is_mobile = is_mobile();
-
     $frecuentes = opciones_populares();
     $response = [];
 
@@ -3485,3 +3117,49 @@ function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
     return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
 
 }
+//function get_th($val = '', $attributes = [])
+//{
+//
+//    return "<div " . add_attributes($attributes) . " NOWRAP >" . $val . "</div>";
+//}
+//function _th($val = '', $attributes = [])
+//{
+//
+//    return d($val, $attributes);
+//}
+
+//function get_dominio($url)
+//{
+//    $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
+//    $url = explode('/', str_replace($protocolos, '', $url));
+//
+//    return $url[0];
+//}
+
+//function mayus($variable)
+//{
+//    return strtr(strtoupper($variable), "àèìòùáéíóúçñäëïöü", "ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
+//
+//}
+
+//function center($attributes = '', $row_12 = 0)
+//{
+//
+//    $base = "<center ".add_attributes($attributes)." ></center>";
+//
+//    return ($row_12 == 0) ? $base : addNRow($base);
+//
+//}
+
+/*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
+
+//function format_link_primario($str, $attributes, $primario = 0)
+//{
+//
+//    $f = ($primario > 0) ? " black " : " agregar_direccion_pedido border-0 bg_black white";
+//    $att = $attributes;
+//    $att["class"] = (array_key_exists("class",
+//        $attributes)) ? add_text($attributes["class"], $f) : $f;
+//
+//    return a_enid($str, $att);
+//}

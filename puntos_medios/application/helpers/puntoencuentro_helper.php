@@ -7,27 +7,27 @@ if (!function_exists('invierte_date_time')) {
     {
         $att = (is_mobile()) ? "strong" : "strong  mx-auto ";
         $r[] = flex(
-                _titulo("SELECCIONA TU LINEA MÁS CERCANA ",0, $att),
-                $data["leneas_metro"],
-                [
-                        "d-lg-flex align-items-center contenedor_estaciones",
-                ],
-                "col-lg-5 text_seleccion_linea p-0",
-                "col-lg-7 place_lineas bg-light p-5 "
+            _titulo("SELECCIONA TU LINEA MÁS CERCANA ", 0, $att),
+            $data["leneas_metro"],
+            [
+                "d-lg-flex align-items-center contenedor_estaciones",
+            ],
+            "col-lg-5 text_seleccion_linea p-0",
+            "col-lg-7 place_lineas bg-light p-5 "
 
         );
 
         $r[] =
-                flex(
-                        _titulo("¿CUAL ESTACIÓN SE TE FACILITA? "),
+            flex(
+                _titulo("¿CUAL ESTACIÓN SE TE FACILITA? "),
 
-                        "",
-                        [
-                                "d-lg-flex align-items-center desglose_estaciones",
-                        ],
-                        "col-lg-5 text_seleccion_estacion p-0",
-                        "place_estaciones_metro col-lg-7 bg-light p-5"
-                );
+                "",
+                [
+                    "d-lg-flex align-items-center desglose_estaciones",
+                ],
+                "col-lg-5 text_seleccion_estacion p-0",
+                "place_estaciones_metro col-lg-7 bg-light p-5"
+            );
 
         return append($r);
     }
@@ -36,59 +36,56 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $primer_registro = $data["primer_registro"];
-        $in_session = $data["in_session"];
-        $punto_encuentro = $data["punto_encuentro"];
         $r[] = seleccion_estacion($data);
         $r[] = hiddens(
-                [
-                        "class" => "primer_registro",
-                        "value" => $primer_registro,
-                ]
+            [
+                "class" => "primer_registro",
+                "value" => $primer_registro,
+            ]
         );
 
         if ($primer_registro > 0) {
 
             $r[] = formulario_compra_punto_encuentro($data);
 
-
         } else {
 
             $r[] = formalario_cambio_punto_encuentro($data);
 
-
         }
 
-        return d(append($r), "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe p-0");
+        return d($r, "col-lg-8 col-lg-offset-2 mt-5 mb-5 proceso_compra_pe p-0");
 
     }
 
     function formulario_primer_registro_punto_encuentro(
-            $num_ciclos,
-            $carro_compras,
-            $id_carro_compras
-    ) {
+        $num_ciclos,
+        $carro_compras,
+        $id_carro_compras
+    )
+    {
 
         $extra = [
 
-                hiddens([
-                        "name" => "punto_encuentro",
-                        "class" => "punto_encuentro_form punto_encuentro",
-                ]),
-                hiddens([
-                        "name" => "num_ciclos",
-                        "class" => "num_ciclos",
-                        "value" => $num_ciclos,
-                ]),
-                hiddens([
-                        "name" => "carro_compras",
-                        "class" => "carro_compras",
-                        "value" => $carro_compras,
-                ]),
-                hiddens([
-                        "name" => "id_carro_compras",
-                        "class" => "id_carro_compras",
-                        "value" => $id_carro_compras,
-                ]),
+            hiddens([
+                "name" => "punto_encuentro",
+                "class" => "punto_encuentro_form punto_encuentro",
+            ]),
+            hiddens([
+                "name" => "num_ciclos",
+                "class" => "num_ciclos",
+                "value" => $num_ciclos,
+            ]),
+            hiddens([
+                "name" => "carro_compras",
+                "class" => "carro_compras",
+                "value" => $carro_compras,
+            ]),
+            hiddens([
+                "name" => "id_carro_compras",
+                "class" => "id_carro_compras",
+                "value" => $id_carro_compras,
+            ]),
         ];
 
         return frm_punto_encuentro($extra);
@@ -99,18 +96,21 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = frm_punto_encuentro_horario([
-                hiddens(
-                        [
-                                "class" => "recibo",
-                                "name" => "recibo",
-                                "value" => $recibo,
-                        ]),
+            hiddens(
+                [
+                    "class" => "recibo",
+                    "name" => "recibo",
+                    "value" => $recibo,
+                ]
+            ),
 
-                hiddens([
-                        "name" => "punto_encuentro",
-                        "class" => "punto_encuentro_form punto_encuentro",
-                        "value" => $punto_encuentro,
-                ]),
+            hiddens(
+                [
+                    "name" => "punto_encuentro",
+                    "class" => "punto_encuentro_form punto_encuentro",
+                    "value" => $punto_encuentro,
+                ]
+            ),
         ]);
 
         return d($response, 6, 1);
@@ -130,36 +130,37 @@ if (!function_exists('invierte_date_time')) {
         $z[] = append($extra);
         $z[] = contaiter(_titulo("¿Quién recibe?"), "mb-5");
         $z[] =
-                input_frm("col-lg-6 mt-5",
-                        "NOMBRE",
-                        [
-                                "id" => "nombre",
-                                "name" => "nombre",
-                                "type" => "text",
-                                "placeholder" => "Persona que recibe",
-                                "class" => "nombre",
-                                "minlength" => 3,
-                                "required" => true,
-                        ]
-                );
+            input_frm("col-lg-6 mt-5",
+                "NOMBRE",
+                [
+                    "id" => "nombre",
+                    "name" => "nombre",
+                    "type" => "text",
+                    "placeholder" => "Persona que recibe",
+                    "class" => "nombre",
+                    "minlength" => 3,
+                    "required" => true,
+                ]
+            );
 
 
         $z[] = input_frm(
-                "col-lg-6 mt-5",
-                "CORREO",
-                [
-                        "id" => "correo",
-                        "name" => "email",
-                        "type" => "email",
-                        "placeholder" => "jonathan@gmail.com",
-                        "class" => "correo",
-                        "minlength" => 5,
-                        "required" => true,
-                ],'Hey! no tan rápido, valida tu email'
+            "col-lg-6 mt-5",
+            "CORREO",
+            [
+                "id" => "correo",
+                "name" => "email",
+                "type" => "email",
+                "placeholder" => "jonathan@gmail.com",
+                "class" => "correo",
+                "minlength" => 5,
+                "required" => true,
+            ], 'Hey! no tan rápido, valida tu email'
         );
 
 
-        $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO ", [
+        $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO ",
+            [
                 "id" => "tel",
                 "name" => "telefono",
                 "type" => "tel",
@@ -168,23 +169,23 @@ if (!function_exists('invierte_date_time')) {
                 "placeholder" => "5552...",
                 "maxlength" => 10,
                 "minlength" => 8,
-        ], _text_telefono);
+            ], _text_telefono);
 
 
-        $z[] = input_frm("col-lg-6 mt-5", "PASSWORD", [
+        $z[] = input_frm("col-lg-6 mt-5", "PASSWORD",
+            [
                 "id" => "pw",
                 "type" => "password",
                 "class" => "pw",
                 "required" => true,
                 "placeholder" => "***",
-        ], _text_pass);
+            ], _text_pass);
 
         $r[] = d(append($z), "informacion_del_cliente  col-lg-12");
+        $sec[] = _titulo("¿En qué horario te gustaría recibir tu pedido?", 0, 'col-lg-12 mb-5');
 
-
-        $sec[] = _titulo("¿En qué horario te gustaría recibir tu pedido?",0,'col-lg-12 mb-5');
-
-        $a = input_frm("col-lg-6 mt-5", "FECHA", [
+        $a = input_frm("col-lg-6 mt-5", "FECHA",
+            [
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_entrega',
                 "class" => "fecha_entrega",
@@ -194,7 +195,8 @@ if (!function_exists('invierte_date_time')) {
                 "max" => $maximo,
                 "onChange" => "horarios_disponibles()",
                 "id" => "fecha",
-        ]);
+            ]
+        );
 
 
         $b[] = d(text_icon("fa fa-clock-o", " HORA "), "strong");
@@ -204,22 +206,28 @@ if (!function_exists('invierte_date_time')) {
         $sec[] = $a;
         $sec[] = $horas;
 
-        $sec[] = d("¿ALGUNA INDICACIÓN?", [
+        $sec[] = d("¿ALGUNA INDICACIÓN?",
+            [
                 "class" => " strong  top_50 bottom_50 cursor_pointer text_agregar_nota col-lg-12 underline",
                 "onclick" => "agregar_nota();",
-        ]);
+            ]
+        );
         $x[] = d("¿ALGUNA INDICACIÓN?", "mt-3 strong");
         $x[] = textarea(
-                [
-                        "name" => "comentarios",
-                        "class" => "mt-3",
-                ]);
-        $sec[] = d(append($x), "input_notas   top_50 bottom_50");
+            [
+                "name" => "comentarios",
+                "class" => "mt-3",
+            ]);
+        $sec[] = d($x, "input_notas   top_50 bottom_50");
 
-        $r[] = d(append($sec), "seccion_horarios_entrega ");
+        $r[] = d($sec, "seccion_horarios_entrega ");
         $r[] = d("", 9);
-        $r[] = d(btn("CONTINUAR", ["class" => "botton_enviar_solicitud "]),
-                "col-lg-3 continuar");
+        $r[] = d(btn("CONTINUAR",
+            [
+                "class" => "botton_enviar_solicitud "
+            ]
+        ),
+            "col-lg-3 continuar");
 
 
         $r[] = d(format_load(), 12);
@@ -234,18 +242,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         return d(
-                add_text("tu usuario ya existe",
-                        format_link("inicia sessión",
-                                [
-                                        'class' => "mt-5 ml-3 h5 text-uppercase",
-                                        "href" => path_enid("login"),
-                                        'rm_class' => "d-block"
+            add_text("tu usuario ya existe",
+                format_link("inicia sessión",
+                    [
+                        'class' => "mt-5 ml-3 h5 text-uppercase",
+                        "href" => path_enid("login"),
+                        'rm_class' => "d-block"
 
-                                ]
-                        )
-                ),
+                    ]
+                )
+            ),
 
-                 'text-uppercase usuario_existente d-none  col-lg-12 h4 text-center strong');
+            'text-uppercase usuario_existente d-none  col-lg-12 h4 text-center strong');
     }
 
 
@@ -262,27 +270,27 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario"]);
         $r[] = append($extra);
         $r[] = h("¿En qué horario te gustaría recibir tu pedido?", 3,
-                " strong text-uppercase  col-lg-12 ");
+            " strong text-uppercase  col-lg-12 ");
 
         $r[] = d(
-                btw(
-                        input([
-                                "data-date-format" => "yyyy-mm-dd",
-                                "name" => 'fecha_entrega',
-                                "class" => "fecha_entrega",
-                                "type" => 'date',
-                                "value" => $minimo,
-                                "min" => $minimo,
-                                "max" => $maximo,
-                                "onChange" => "horarios_disponibles()",
-                                "id" => "fecha",
-                        ], 0, 0),
-                        label("FECHA", ["for" => "fecha"])
-                        ,
-                        "input_enid_format"
-                )
+            btw(
+                input([
+                    "data-date-format" => "yyyy-mm-dd",
+                    "name" => 'fecha_entrega',
+                    "class" => "fecha_entrega",
+                    "type" => 'date',
+                    "value" => $minimo,
+                    "min" => $minimo,
+                    "max" => $maximo,
+                    "onChange" => "horarios_disponibles()",
+                    "id" => "fecha",
+                ], 0, 0),
+                label("FECHA", ["for" => "fecha"])
                 ,
-                "col-lg-6 mt-5"
+                "input_enid_format"
+            )
+            ,
+            "col-lg-6 mt-5"
         );
 
 
@@ -302,47 +310,48 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function formulario_compra_punto_encuentro_session(
-            $punto_encuentro,
-            $servicio,
-            $num_ciclos,
-            $id_carro_compras,
-            $carro_compras
-    ) {
+        $punto_encuentro,
+        $servicio,
+        $num_ciclos,
+        $id_carro_compras,
+        $carro_compras
+    )
+    {
         return d(
-                frm_punto_encuentro_horario([
-                                hiddens(
-                                        [
-                                                "name" => "punto_encuentro",
-                                                "class" => "punto_encuentro_form punto_encuentro",
-                                                "value" => $punto_encuentro,
-                                        ]),
-                                hiddens(
-                                        [
-                                                "class" => "id_servicio servicio",
-                                                "name" => "id_servicio",
-                                                "value" => $servicio,
-                                        ]),
-                                hiddens(
-                                        [
-                                                "name" => "num_ciclos",
-                                                "class" => "num_ciclos",
-                                                "value" => $num_ciclos,
-                                        ]),
-                                hiddens(
-                                        [
-                                                "name" => "id_carro_compras",
-                                                "class" => "id_carro_compras",
-                                                "value" => $id_carro_compras,
-                                        ]),
-                                hiddens(
-                                        [
-                                                "name" => "carro_compras",
-                                                "class" => "carro_compras",
-                                                "value" => $carro_compras,
-                                        ]),
+            frm_punto_encuentro_horario([
+                    hiddens(
+                        [
+                            "name" => "punto_encuentro",
+                            "class" => "punto_encuentro_form punto_encuentro",
+                            "value" => $punto_encuentro,
+                        ]),
+                    hiddens(
+                        [
+                            "class" => "id_servicio servicio",
+                            "name" => "id_servicio",
+                            "value" => $servicio,
+                        ]),
+                    hiddens(
+                        [
+                            "name" => "num_ciclos",
+                            "class" => "num_ciclos",
+                            "value" => $num_ciclos,
+                        ]),
+                    hiddens(
+                        [
+                            "name" => "id_carro_compras",
+                            "class" => "id_carro_compras",
+                            "value" => $id_carro_compras,
+                        ]),
+                    hiddens(
+                        [
+                            "name" => "carro_compras",
+                            "class" => "carro_compras",
+                            "value" => $carro_compras,
+                        ]),
 
-                        ]
-                )
+                ]
+            )
         );
     }
 
@@ -355,28 +364,28 @@ if (!function_exists('invierte_date_time')) {
         $in_session = $data['in_session'];
         $punto_encuentro = $data["punto_encuentro"];
         $z[] = hiddens(
-                [
-                        "name" => "servicio",
-                        "class" => "servicio id_servicio",
-                        "value" => $servicio,
-                ]
+            [
+                "name" => "servicio",
+                "class" => "servicio id_servicio",
+                "value" => $servicio,
+            ]
         );
 
 
         if ($in_session < 1) {
 
             $z[] = formulario_primer_registro_punto_encuentro(
-                    $num_ciclos, $carro_compras, $id_carro_compras);
+                $num_ciclos, $carro_compras, $id_carro_compras);
 
         } else {
 
             $z[] = formulario_compra_punto_encuentro_session(
-                    $punto_encuentro, $servicio, $num_ciclos, $id_carro_compras,
-                    $carro_compras);
+                $punto_encuentro, $servicio, $num_ciclos, $id_carro_compras,
+                $carro_compras);
         }
 
 
-        return d(append($z), 'formulario_quien_recibe');
+        return d($z, 'formulario_quien_recibe');
 
     }
 
@@ -384,23 +393,26 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(frm_punto_encuentro_horario(
+                [
+                    hiddens(
                         [
-                                hiddens([
-                                        "name" => "punto_encuentro",
-                                        "class" => "punto_encuentro_form punto_encuentro",
-                                        "value" => $data["punto_encuentro"],
-                                ]),
-                                hiddens([
-                                        "class" => "recibo",
-                                        "name" => "recibo",
-                                        "value" => $data["recibo"],
-                                ]),
+                            "name" => "punto_encuentro",
+                            "class" => "punto_encuentro_form punto_encuentro",
+                            "value" => $data["punto_encuentro"],
                         ]
-                )
+                    ),
+                    hiddens(
+                        [
+                            "class" => "recibo",
+                            "name" => "recibo",
+                            "value" => $data["recibo"],
+                        ]
+                    ),
+                ]
+            )
         );
 
-        return d(append($r), 'formulario_quien_recibe');
-
+        return d($r, 'formulario_quien_recibe');
 
     }
 }

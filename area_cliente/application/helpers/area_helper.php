@@ -169,7 +169,7 @@ if (!function_exists('invierte_date_time')) {
 
         return d(
             $list,
-                 "d-flex flex-column menu_area_cliente col-lg-2 p-0 mt-5"
+                 "d-flex flex-column menu_area_cliente col-lg-2 p-md-0 mt-5"
         );
 
     }

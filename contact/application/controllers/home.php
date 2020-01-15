@@ -21,7 +21,6 @@ class Home extends CI_Controller
 
         if (prm_def($param, "proceso_compra", 0, 1) > 0) {
 
-
             $this->app->pagina($this->app->cssJs($data, "contacto_proceso_compra"), format_proceso_compra(), 1);
 
         } else {
@@ -34,16 +33,15 @@ class Home extends CI_Controller
     private function load_ubicacion($data, $param)
     {
 
-
-        $data["telefono"] = ($data["id_usuario"] > 0) ? $this->app->usuario($data["id_usuario"])[0]["tel_contacto"] : "";
-
-        if ($data["in_session"] == 0 && prm_def($param, "servicio", 0, 1) > 0) {
-
+        $data["telefono"] =
+            ($data["id_usuario"] > 0) ? $this->app->usuario($data["id_usuario"])[0]["tel_contacto"] : "";
+        if ($data["in_session"] < 1 && prm_def($param, "servicio", 0, 1) > 0) {
 
             $this->app->pagina(
-
-                $this->app->cssJs($data, "contacto_ubicacion"),
-                format_recibe_ubicacion($param["servicio"]),
+                $this->app->cssJs($data, "contacto_ubicacion")
+                ,
+                format_recibe_ubicacion($param["servicio"])
+                ,
                 1
             );
 
@@ -52,13 +50,12 @@ class Home extends CI_Controller
             $param = $this->input->get();
             $data["ubicacion"] = prm_def($param, "ubicacion");
             $this->app->pagina(
-                $data,
+                $data
+                ,
                 render_contacto($data)
                 ,
                 1
             );
-
         }
     }
-
 }

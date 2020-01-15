@@ -116,7 +116,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "nombre",
                     "type" => "text",
                     "required" => "true"
-                ])
+                ]
+            )
             ,
             4
 
@@ -147,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
             4
         );
 
-        $r[] = d(append($y), 13);
+        $r[] = d($y, 13);
         $x[] = d("Email");
         $x[] = input([
             "name" => "email",
@@ -160,7 +161,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = place("place_correo_incorrecto");
 
 
-        $r[] = d(append($x), 4);
+        $r[] = d($x, 4);
         $r[] = btw(
             d("Departamento"),
             create_select(
@@ -206,7 +207,7 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $r[] = d(append($l), 13);
+        $r[] = d($l, 13);
 
 
         $t[] = btw(
@@ -224,7 +225,7 @@ if (!function_exists('invierte_date_time')) {
             4
         );
 
-        $r[] = d(append($t), 13);
+        $r[] = d($t, 13);
         $r[] = btn("Registrar");
         $r[] = place("place_config_usuario");
         $r[] = form_close();
@@ -313,7 +314,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ), 9);
 
-        $r[] = d(d(append($x), 6, 1), 13);
+        $r[] = d(d($x, 6, 1), 13);
         $r[] = place("place_tallas");
         return append($r);
 
@@ -323,11 +324,11 @@ if (!function_exists('invierte_date_time')) {
     function get_format_categorias()
     {
 
-        $r[] = d(frm_categorias(), 7);
-        $r[] = d(_titulo("CATEGORÍAS    EN PRODUCTOS Y SERVICIOS", 3), 5);
-        return append($r);
-
-
+        return dd(
+            frm_categorias(),
+            _titulo("CATEGORÍAS EN PRODUCTOS Y SERVICIOS")
+            , 5
+        );
     }
 
 
@@ -390,17 +391,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", ["class" => "form_recurso", "id" => 'form_recurso']);
-        $r[] = btw(
-
-            d("Nombre"),
-            input([
+        $r[] = input_frm(6, "Nombre",
+            [
                 "type" => "text",
                 "name" => "nombre",
                 "class" => "form-control",
                 "required" => "true"
-            ])
-            ,
-            6
+            ]
         );
 
         $r[] = btw(

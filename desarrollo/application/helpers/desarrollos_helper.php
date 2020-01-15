@@ -10,9 +10,9 @@ if (!function_exists('invierte_date_time')) {
             $data["departamentos"],
             $data["num_departamento"]
         );
-
         $z[] = d('', 'place_proyectos mt-5');
         $z[] = place('place_tickets');
+
         $r[] = tab_seccion(
             $z,
             'tab_abrir_ticket',
@@ -29,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = dd(
             menu($activa),
-            $tab_content,2
+            $tab_content, 2
 
         );
 
@@ -55,13 +55,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = input_frm("", "Busqueda",
-                [
-                    "name" => "q",
-                    "class" => "q",
-                    "type" => "text",
-                    "id" => "q_busqueda"
-                ]
-            );
+            [
+                "name" => "q",
+                "class" => "q",
+                "type" => "text",
+                "id" => "q_busqueda"
+            ]
+        );
 
         $r[] = create_select(
             $departamentos,
@@ -83,15 +83,14 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
     function menu($activa)
     {
-
 
         $class_ticket = _text(
             'black a_enid_blue abrir_ticket ',
             tab_activa(3, $activa)
         );
+
         $class_pendientes = _text(
             'black strong base_tab_clientes ' .
             tab_activa(1, $activa)

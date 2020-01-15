@@ -6,7 +6,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = form_open("", ["class" => "form_tiempo_entrega", "id" => "form_tiempo_entrega"]);
+        $r[] = form_open("",
+            [
+                "class" => "form_tiempo_entrega",
+                "id" => "form_tiempo_entrega"
+            ]
+        );
         $r[] = d(
 
             d(
@@ -26,10 +31,10 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(frm_fecha_busqueda(), 8);
         $r[] = form_close();
-        $form = d(append($r), 1);
+        $form = d($r, 1);
         $z[] = d(
             btw(
-                d(h("ARTÍCULO", 3), 1)
+                d(_titulo("ARTÍCULO"), 1)
                 ,
                 $form
                 ,
@@ -45,72 +50,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_hiddens_tickects($action, $ticket)
-    {
-        return append(
-            [
-                hiddens(["class" => "action", "value" => $action]),
-                hiddens(["class" => "ticket", "value" => $ticket])
-            ]
-        );
-    }
-
-    /*
-    function get_format_buzon()
-    {
-
-        $r[] = h("BUZÓN", 3);
-        $r[] = d(append(
-
-            a_enid("HECHAS" .
-                span("", 'notificacion_preguntas_sin_leer_cliente'),
-                [
-                    "class" => "a_enid_black preguntas btn_preguntas_compras",
-                    "id" => '0'
-                ]
-            )
-            ,
-
-            a_enid(
-                add_text("RECIBIDAS", span("", 'notificacion_preguntas_sin_leer_ventas'))
-                ,
-                [
-                    "class" => "a_enid_blue preguntas ",
-                    "id" => "1"
-                ])
-
-        ));
-
-        $r[] = place("place_buzon");
-
-        return append($r);
-
-    }
-     *
-     */
-
-    function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
-    {
-
-        $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
-        $x[] = $valoraciones;
-        $url = path_enid("recomendacion", $id_usuario);
-        $x[] = d(
-            a_enid("VER COMENTARIOS",
-                [
-                    "href" => $url,
-                    "class" => "a_enid_blue "
-                ]
-            ),
-            "text-center top_20"
-        );
-
-        $x[] = d($alcance, " text-center ");
-        $r[] = d(append($x), 3);
-        $r[] = d(place("place_ventas_usuario"), 9);
-        return d(append($r), "text-center");
-
-    }
 
     function crea_alcance($alcance)
     {
@@ -130,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = td("Mínimo", ["class" => 'num_alcance']);
             $r[] = tr(append($x));
 
-            $response = add_text(h("ALCANCE DE TUS PRODUCTOS", 3), tb(append($r)));
+            $response = add_text(_titulo("ALCANCE DE TUS PRODUCTOS"), tb($r));
         }
         return $response;
 
@@ -201,4 +140,71 @@ if (!function_exists('invierte_date_time')) {
         return ul($list, "nav tabs shadow border padding_10");
     }
 
+//
+//    function get_hiddens_tickects($action, $ticket)
+//    {
+//        return append(
+//            [
+//                hiddens(["class" => "action", "value" => $action]),
+//                hiddens(["class" => "ticket", "value" => $ticket])
+//            ]
+//        );
+//    }
+
+    /*
+    function get_format_buzon()
+    {
+
+        $r[] = h("BUZÓN", 3);
+        $r[] = d(append(
+
+            a_enid("HECHAS" .
+                span("", 'notificacion_preguntas_sin_leer_cliente'),
+                [
+                    "class" => "a_enid_black preguntas btn_preguntas_compras",
+                    "id" => '0'
+                ]
+            )
+            ,
+
+            a_enid(
+                add_text("RECIBIDAS", span("", 'notificacion_preguntas_sin_leer_ventas'))
+                ,
+                [
+                    "class" => "a_enid_blue preguntas ",
+                    "id" => "1"
+                ])
+
+        ));
+
+        $r[] = place("place_buzon");
+
+        return append($r);
+
+    }
+     *
+     */
+//
+//    function get_format_valoraciones($valoraciones, $id_usuario, $alcance)
+//    {
+//
+//        $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+//        $x[] = $valoraciones;
+//        $url = path_enid("recomendacion", $id_usuario);
+//        $x[] = d(
+//            a_enid("VER COMENTARIOS",
+//                [
+//                    "href" => $url,
+//                    "class" => "a_enid_blue "
+//                ]
+//            ),
+//            "text-center top_20"
+//        );
+//
+//        $x[] = d($alcance, " text-center ");
+//        $r[] = d(append($x), 3);
+//        $r[] = d(place("place_ventas_usuario"), 9);
+//        return d(append($r), "text-center");
+//
+//    }
 }

@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = append($data["lista_productos"]);
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = _titulo("FILTRA TU BÚSQUEDA", 0, 'mt-5 mt-md-0 ');
+        $z[] = _titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 ');
 
         if ($is_mobile < 1) {
             $z[] = img(
@@ -62,8 +62,6 @@ if (!function_exists('invierte_date_time')) {
         $fil[] = d($seccion, 'col-lg-9 p-0');
         $r[] = d($fil, "col-lg-12 mt-md-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
-
-
         $r[] = append($cat);
         return append($r);
 
@@ -82,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
             add_text(
                 icon('fa fa-search icon'),
                 input([
-                    "class" => "input-field  mh_50 border border-dark  solid_bottom_hover_3  ",
+                    "class" => "input-field mh_50 border border-dark  solid_bottom_hover_3  ",
                     "placeholder" => "buscar",
                     "name" => "q"
                 ])
@@ -90,10 +88,9 @@ if (!function_exists('invierte_date_time')) {
             , "input-icons col-lg-6 row");
         $z[] = form_close();
         $ext = (is_mobile() < 1) ? "" : "top_200";
-        $r[] = d(append($z), "mt-5 " . $ext);
+        $r[] = d($z, "mt-5 " . $ext);
 
-        return
-            d(append($r), " top_20 col-lg-10 col-lg-offset-1", 1);
+        return d($r, " mt-5 col-lg-10 col-lg-offset-1", 1);
 
 
     }
@@ -103,9 +100,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("separador_inicial");
         $r[] = btw(
 
-            h("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA", 1),
+            _titulo("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA"),
             btn(
-                text_icon('fa fa-chevron-right ir', "ANUNCIA TU PRIMER PRODUCTO ")
+                text_icon('fa fa-chevron-right ir', "HAS TU PRIMER PUBLICACIÓN ")
                 ,
                 [
                     "class" => "top_30"
@@ -113,10 +110,10 @@ if (!function_exists('invierte_date_time')) {
                 1,
                 1,
                 1,
-                "../planes_servicios/?action=nuevo"
+                path_enid('vender_nuevo')
             )
             ,
-            "col-lg-6  col-lg-offset-3 text-center"
+            "col-lg-6 col-lg-offset-3 text-center"
         );
         $r[] = place("separador_final");
 
@@ -129,9 +126,9 @@ if (!function_exists('invierte_date_time')) {
 
         $paginacion = d($paginacion, 'd-none d-md-block');
         $filtro = filtro($filtros, $order);
-        $response = ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 ') :
+        return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 ') :
             flex($filtro, $paginacion, 'd-md-flex justify-content-between');
-        return $response;
+
 
     }
 
@@ -196,7 +193,8 @@ if (!function_exists('invierte_date_time')) {
             endforeach;
 
         }
-        return d(d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
+        return d(
+            d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
 
 
     }
@@ -257,7 +255,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-
         $t[] = d(
             img(
                 [
@@ -267,9 +264,8 @@ if (!function_exists('invierte_date_time')) {
             ), 'col-md-6 col-sm-12 ' . $extra);
 
         $s[] = _titulo("Más categorías", 0);
-        $s[] = p(d(append($response), 'mt-4'));
+        $s[] = p(d($response, 'mt-4'));
         $sec[] = d($s, 'col-md-6 col-sm-12 mt-3 mt-md-0');
-
         $r[] = append($t);
         $r[] = append($sec);
 
@@ -287,7 +283,6 @@ if (!function_exists('invierte_date_time')) {
         foreach ($param["clasificaciones"] as $row) {
 
             $primer_nivel = $row["primer_nivel"];
-
             $nombre_clasificacion = search_bi_array(
                 $param["nombres_primer_nivel"],
                 "id_clasificacion",
@@ -295,7 +290,6 @@ if (!function_exists('invierte_date_time')) {
                 "nombre_clasificacion",
                 ""
             );
-
 
             $response[$z]["primer_nivel"] = $primer_nivel;
             $response[$z]["total"] = $row["total"];
@@ -321,13 +315,9 @@ if (!function_exists('invierte_date_time')) {
             $r[] = a_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
         }
 
-        $response = [
+        return [
             "html" => append($r),
             "num_categorias" => count($info),
         ];
-        return $response;
-
-
     }
-
 }

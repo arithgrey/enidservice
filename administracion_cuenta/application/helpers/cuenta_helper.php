@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $actualizar = btw(
 
-            h("ACTUALIZAR DATOS DE ACCESO", 3)
+            _titulo("actualizar datos de acceso")
             ,
             frm_pw()
             ,
@@ -41,9 +41,7 @@ if (!function_exists('invierte_date_time')) {
 
         return tab_content($r);
 
-
     }
-
 
     function foto($id_usuario, $usuario)
     {
@@ -51,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btw(
             perfil_usuario($id_usuario),
             place("place_form_img"),
-            "col-lg-5 shadow padding_20"
+            "col-lg-5 shadow p-5"
         );
         $r[] = d(format_user($usuario), "page-header menu_info_usuario");
         $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ",
@@ -79,16 +77,18 @@ if (!function_exists('invierte_date_time')) {
         te enviarán tus compras");
 
         $calma = _text_(
-            _titulo("MANTEN LA CALMA!"),
+            _titulo("manten la calma!")
+            ,
             $str
             ,
-            hr(),
+            hr()
+            ,
             place("direcciones")
         );
 
 
         $direccion_envio = _text(
-            h("DIRECCIÓN DE ENVÍO O RECEPCIÓN", 3),
+            _titulo("DIRECCIÓN DE ENVÍO O RECEPCIÓN"),
             d("El lugar donde compras o recibes tus compras o ventas"),
             hr()
         );
@@ -97,10 +97,8 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
     function perfil_usuario($id_usuario)
     {
-
 
         $r[] = d(
             img(
@@ -112,7 +110,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = btn(
-            "MODIFICAR",
+            "modificar",
             [
                 "class" => "editar_imagen_perfil mt-5"
             ]
@@ -126,10 +124,10 @@ if (!function_exists('invierte_date_time')) {
     function resumen_cuenta($usuario)
     {
 
-        $r[] = _titulo("TU CUENTA ENID SERVICE");
+        $r[] = _titulo("tu cuenta");
         $r[] = format_user($usuario, 1);
         $r[] = d(get_campo($usuario, "email"));
-        $r[] = get_campo($usuario, "tel_contacto", "Tu prime apellido", 1);
+        $r[] = get_campo($usuario, "tel_contacto", "Prime apellido", 1);
 
         $r[] = tab(
             text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
@@ -155,7 +153,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = input_frm(12,
-            "CONTRASEÑA ACTUAL",
+            "contraseña actual",
             [
                 "name" => "password",
                 "id" => "password",
@@ -168,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = input_frm(
             12,
-            "NUEVA",
+            "nueva contraseña",
             [
                 "name" => "pw_nueva",
                 "id" => "pw_nueva",
@@ -181,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = input_frm(
-            12, "CONFIRMAR NUEVA",
+            12, "confirmar contraseña",
             [
                 "name" => "pw_nueva_confirm",
                 "id" => "pw_nueva_confirm",
@@ -202,7 +200,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("reportesession");
         $r[] = btn("Actualizar",
             [
-                "id" => "inbutton", "class" => "btn btn_save input-sm"
+                "id" => "inbutton",
+                "class" => "btn btn_save input-sm"
             ]
         );
         $r[] = form_close(place("msj_password"));
@@ -409,7 +408,6 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 'base_tab_privacidad',
                 "class" => 'black  base_tab_privacidad'
             ]
-
         );
         $link_privacidad = tab(
             text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
@@ -417,8 +415,6 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => 'black  tab_privacidad_seguridad'
             ]
-
-
         );
         $link_preferencias = a_enid(
             text_icon('fa fa-gift f12', 'INTERESES Y PREFERENCIAS'),
@@ -430,7 +426,6 @@ if (!function_exists('invierte_date_time')) {
             "../search/?q3=" . $id_usuario . "&tienda=1"
 
         );
-
 
         $list = [
             $link_cuenta
