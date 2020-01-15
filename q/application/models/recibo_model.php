@@ -325,12 +325,13 @@ class Recibo_model extends CI_Model
 
         $where = $this->get_where_tiempo($param);
         $tipo = $param["tipo"];
+        $ext = ($tipo == 9) ? ' saldo_cubierto > 0 ' : 'status = "'.$tipo.'"  ';
         $query_get = "SELECT 
                       * 
                     FROM 
                       proyecto_persona_forma_pago 
                     WHERE 
-                      status =  $tipo 
+                      " . $ext . " 
                     AND 
                        " . $where;
 

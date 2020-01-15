@@ -49,11 +49,12 @@ class Enid extends REST_Controller
         $data = $this->actividad_web_model->crea_reporte_enid_service($param);
         $fin = microtime_float();
 
-        $response = [
-            "envio_usuario" => $param,
-            "tiempo_empleado" => ($inicio - $fin),
-            "actividad_enid_service" => $data["resumen"],
-        ];
+        $response =
+            [
+                "envio_usuario" => $param,
+                "tiempo_empleado" => ($inicio - $fin),
+                "actividad_enid_service" => $data["resumen"],
+            ];
 
         $response = ($param["vista"] == 1) ? metricas($response) : $data;
         $this->response($response);
