@@ -1150,76 +1150,38 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $tipo_solicitud =
-            h(
+            _titulo(
                 search_bi_array(
                     $status_enid_service,
                     "id_estatus_enid_service",
                     $tipo,
                     "nombre"
                 )
-                , 5
+
             );
-
-
         $r = [];
         foreach ($compras as $row) {
 
             $response = [];
             $id_servicio = $row["id_servicio"];
-            $resumen_pedido = $row["resumen_pedido"];
             $url_imagen = link_imagen_servicio($id_servicio);
 
 
             $response[] = img(
                 [
                     "src" => $url_imagen,
-                    "style" => 'width: 44px!important',
                     "onerror" => "this.src='../img_tema/portafolio/producto.png'",
+                    "class" => "col-md-3"
                 ]
             );
 
-            $response[] = a_enid(
-                $resumen_pedido,
-                path_enid(
-                    "pedidos_recibo",
-                    $row["id_proyecto_persona_forma_pago"]
-                )
+            $response[] = _titulo(money($row["monto_a_pagar"]), 1);
+
+            $r[] = d(
+                $response,
+                "d-md-flex align-items-center 
+                justify-content-between border shadow mt-5 p-5 text-center"
             );
-
-            $t = [];
-            $t = [
-                "PRECIO",
-                $row["monto_a_pagar"],
-                " MXN | COSTO DE ENVIO AL CLIENTE ",
-                "| COSTO DE ENVIO AL VENDEDOR ",
-                $row["costo_envio_vendedor"],
-                "MXN",
-            ];
-
-            $response[] = d($t);
-
-            $response[] = d(
-                [
-                    "ARTICULOS SOLICITADOS ",
-                    $row["num_ciclos_contratados"],
-                    "|",
-                    "SALDO CUBIERTO",
-                    $row["saldo_cubierto"],
-                    "MXN",
-                ]
-            );
-
-            $response[] = append([
-
-
-                "LABOR DE COBRANZA"
-                ,
-                icon("fa fa-envelope")
-                ,
-                $row["num_email_recordatorio"],
-            ]);
-
-            $r[] = d($response, "border shadow top_30 padding_30");
 
         }
 

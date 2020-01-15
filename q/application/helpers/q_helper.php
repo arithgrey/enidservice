@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
                 $ventas = $row["ventas"][0];
                 $num_transacciones = $ventas["total"];
                 $compras_efectivas = $ventas["compras_efectivas"];
-                $solicitudes = $ventas["solicitudes"];
+
                 $envios = $ventas["envios"];
                 $cancelaciones = $ventas["cancelaciones"];
 
@@ -204,7 +204,6 @@ if (!function_exists('invierte_date_time')) {
                 $table .= td("Transacciones");
                 $table .= td("Ventas");
                 $table .= td("Cancelaciones");
-                $table .= td("Solicitudes");
                 $table .= td("Envíos");
                 $table .= "</tr>";
                 $table .= "<tr>";
@@ -233,19 +232,6 @@ if (!function_exists('invierte_date_time')) {
                         "title" => 'Solicitudes de compra',
                     ]);
                 $table .= td($link_cancelaciones);
-
-
-                $link_solicitudes = tab($solicitudes, '#reporte',
-                    [
-                        "class" => 'solicitudes',
-                        "fecha_inicio" => $fecha_inicio,
-                        "fecha_termino" => $fecha_termino,
-                        "tipo_compra" => '6',
-                        "title" => 'Solicitudes de compra',
-                    ]);
-
-                $table .= td($link_solicitudes);
-
 
                 $link_envios = tab(
                     $envios, '#reporte',
