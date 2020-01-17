@@ -318,6 +318,7 @@ a:hover {
     background: red;
     color: white;
 }
+
 .alerta_enid {
     background: #fff;
     color: #000106;
@@ -553,6 +554,7 @@ li {
 .input_focus:-ms-input-placeholder {
     color: red !important;
 }
+
 .titulo_enid_sm_sm {
     font-weight: bold;
     color: black !important;
@@ -1165,6 +1167,7 @@ h2 {
     /*border: 1px solid rgb(13, 62, 86) !important;*/
     border-bottom: 1px solid red !important;
 }
+
 .input_select_busqueda {
     width: 45% !important;
 }
@@ -1263,6 +1266,11 @@ select {
 
 .bg_black {
     background: #000 !important;
+}
+
+.bg_custom_black {
+
+    background: #1d2a37!important;
 }
 
 .bg_white {
@@ -1725,17 +1733,20 @@ ul li a {
 #page-content {
     flex: 1 0 auto;
 }
-.jconfirm-buttons button{
 
-    background: #000!important;
-    color: white!important;
+.jconfirm-buttons button {
+
+    background: #000 !important;
+    color: white !important;
 }
+
 @media (max-width: 575.98px) {
 
     .mh_sm_310 {
         max-height: 310px !important;
     }
-    #flipkart-navbar{
+
+    #flipkart-navbar {
 
         min-height: 65px;
     }

@@ -1,16 +1,12 @@
-.sin_domicilio {
-    background: #d20c2f;
+.cancelado {
+
+    background: #ff7266;
+    color: white;
 }
 
 .entregado {
 
     background: #033178;
-    color: white;
-}
-
-.cancelado {
-
-    background: #ff7266;
     color: white;
 }
 
@@ -34,14 +30,7 @@
 }
 
 
-.encabezado_domicilio, .encabezado_cliente {
 
-}
-
-.contenido_domicilio, .contenido_domicilio {
-    background: white;
-    padding: 5px;
-}
 
 .status_compra {
     background: #071929;

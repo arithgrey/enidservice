@@ -40,9 +40,9 @@ function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor 
 
     if ($type == 1) {
 
-        $attributes["class"] = array_key_exists("class", $attributes)  ?
-                _text_($attributes["class"], _registro)
-                : _registro;
+        $attributes["class"] = array_key_exists("class", $attributes) ?
+            _text_($attributes["class"], _registro)
+            : _registro;
     }
 
 
@@ -1800,7 +1800,6 @@ function faqs(
     );
 
 
-
     if (es_data($categorias_publicas_venta) ||
         es_data($categorias_temas_de_ayuda)) {
 
@@ -1808,11 +1807,11 @@ function faqs(
             $categorias_publicas_venta, $categorias_temas_de_ayuda);
     }
 
-    if ($agregar_categoria > 0 ) {
+    if ($agregar_categoria > 0) {
         $r[] = format_link("Agregar",
             [
                 "href" => path_enid("nfaq"),
-                'class' =>'mt-5 w-50'
+                'class' => 'mt-5 w-50'
             ]
         );
     }
@@ -1952,14 +1951,38 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 function text_icon($class_icono, $text, $att = [], $left = 1)
 {
 
-    return ($left > 0) ? (icon($class_icono, $att) . " " . $text) : (_text_($text, icon($class_icono, $att)));
+    return ($left > 0) ? (flex(icon($class_icono, $att), $text, _between)) : (flex($text, icon($class_icono, $att), _between));
 
 }
 
 function _titulo($text, $tipo = 0, $extra = '')
 {
-    $tipo_titulo = ($tipo == 0) ? 'h3' : 'h4';
-    return h($text, 1, $tipo_titulo . ' strong text-uppercase ' . $extra);
+
+    $response = [];
+    switch ($tipo) {
+
+        case 0:
+            $response[] = h($text, 1, _text_(_t1, $extra));
+
+            break;
+
+        case 1:
+            $response[] = h($text, 2, _text_(_t2, $extra));
+
+            break;
+
+        case 3:
+            $response[] = h($text, 3, _text_(_t3, $extra));
+
+            break;
+
+        case 4:
+            $response[] = h($text, 4, _text_(_t4, $extra));
+
+            break;
+
+    }
+    return append($response);
 
 }
 
@@ -2657,6 +2680,31 @@ function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = '
 
 
         $att .= (strlen($d1) > 0) ? $d1 : '';
+        $response = d($d, $att);
+
+    } else {
+
+
+        if (is_array($ext)) {
+            $att = $ext[0];
+        } else {
+            $att .= $ext;
+        }
+
+        $response = d(add_text(d($d, $ext_left), d($d1, $ext_right)), $att);
+    }
+
+    return $response;
+
+}
+
+function flex_md($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = 'd-md-flex ')
+{
+
+    if (is_array($d)) {
+
+
+        $att .= (strlen($d1) > 0) ? $d1 : '';
         $response = d(append($d), $att);
 
     } else {
@@ -3051,6 +3099,12 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 function open_form($attr = [])
 {
     return '<form ' . add_attributes($attr) . ' >';
+}
+
+function d_row($contenido)
+{
+
+    return d($contenido, 13);
 }
 
 function d_c($items = [], $attr)
