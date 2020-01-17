@@ -129,7 +129,7 @@ let sload = place => {
 let seccess_enid = (place, msj) => {
 
     $(place).show();
-    render_enid(place, "<span class='response_ok_enid'>" + msj + "</span>");
+    render_enid(place, "<div class='bg_green p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold'>" + msj + "</div>");
 
     setTimeout(function () {
         $(place).fadeOut(1500);
