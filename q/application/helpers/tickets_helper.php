@@ -198,17 +198,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-//    function get_format_tickets($departamentos)
-//    {
-//
-//
-//        $r[] = d(get_form_ticket($departamentos), 6, 1);
-//        $r[] = place("place_registro_ticket");
-//
-//        return append($r);
-//
-//    }
-
     function get_form_respuesta($tarea)
     {
 
@@ -406,7 +395,6 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $x[] = append($calendario);
-                //$x[] = d(h(add_text("DEPARTAMENTO", strtoupper($row["nombre_departamento"])), 6));
                 $x[] = d(add_text(icon("fa fa-pencil asunto", ["id" => $id_ticket]),
                     $asunto), "top_30 border padding_10 bottom_30 s_desc_asunto");
 

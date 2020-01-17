@@ -40,15 +40,9 @@ function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor 
 
     if ($type == 1) {
 
-        $attributes["class"] =
-            (array_key_exists(
-                "class", $attributes) ? 1 : 0 == 1) ?
-                _text_(
-                    $attributes["class"]
-                    ,
-                    " a_enid_blue p-2 white w-100  strong cursor_pointer format_action"
-                )
-                : "a_enid_blue white p-2 format_action cursor_pointer";
+        $attributes["class"] = array_key_exists("class", $attributes)  ?
+                _text_($attributes["class"], _registro)
+                : _registro;
     }
 
 
@@ -1788,12 +1782,13 @@ function input_hour_date()
 
 }
 
-function get_format_izquierdo(
+function faqs(
     $categorias_publicas_venta = [],
     $categorias_temas_de_ayuda = [],
     $agregar_categoria = 0
 )
 {
+
     $r[] = a_enid(
         img(
             [
@@ -1801,45 +1796,39 @@ function get_format_izquierdo(
                 'width' => '100%',
             ]
         ),
-        "../contact/#envio_msj"
+        path_enid('contact')
     );
 
 
-    if ($agregar_categoria > 0) {
 
+    if (es_data($categorias_publicas_venta) ||
+        es_data($categorias_temas_de_ayuda)) {
 
-        $r[] = _titulo("CATEGORIAS DESTACADAS", 3);
-        $r[] = d(a_enid(h("Agregar", 5, "underline top_20"),
-            ["href" => path_enid("nfaq"), "class" => "black"]));
-
+        $r[] = get_format_listado_categorias(
+            $categorias_publicas_venta, $categorias_temas_de_ayuda);
     }
 
-
-    if (es_data($categorias_publicas_venta) || es_data($categorias_temas_de_ayuda)) {
-
-        $r[] = get_format_listado_categorias($categorias_publicas_venta,
-            $categorias_temas_de_ayuda);
-    }
-
-
-    $r[] = d(append([
-        _titulo("¿TIENES ALGUNA DUDA?"),
-        a_enid("ENVIA TU MENSAJE",
+    if ($agregar_categoria > 0 ) {
+        $r[] = format_link("Agregar",
             [
-                "href" => "../contact/#envio_msj",
-                'style' => 'color:black!important;text-decoration:underline;',
+                "href" => path_enid("nfaq"),
+                'class' =>'mt-5 w-50'
             ]
-        ),
+        );
+    }
 
-    ]),
+    $ayuda[] = _titulo("¿TIENES ALGUNA DUDA?");
+    $ayuda[] = a_enid("ENVIA TU MENSAJE",
         [
-            "style" => "background: #f2f2f2;padding: 10px;",
-            "class" => "top_30",
+            "href" => "../contact/#envio_msj",
+            'class' => 'black underline mt-3',
         ]
     );
 
-    return append($r);
+    $r[] = d($ayuda, 'mt-5');
 
+
+    return append($r);
 
 }
 
@@ -2719,7 +2708,7 @@ function crea_estrellas($calificacion, $sm = 0)
     return add_text($valoraciones, $restantes);
 }
 
-function input_frm($col, $text_label, $config_input = [], $text_place = "")
+function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext_label = '')
 {
 
     $config_label = [];
@@ -2727,7 +2716,10 @@ function input_frm($col, $text_label, $config_input = [], $text_place = "")
 
         $config_label["for"] = $config_input["id"];
         $config_label["id"] = "label_" . $config_input["id"];
-        $config_label["class"] = "cursor_pointer label_" . $config_input["id"];
+        $config_label["class"] = _text_(
+            _text("cursor_pointer label_", $config_input["id"]),
+            $ext_label
+        );
     }
 
 
@@ -3117,49 +3109,3 @@ function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
     return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
 
 }
-//function get_th($val = '', $attributes = [])
-//{
-//
-//    return "<div " . add_attributes($attributes) . " NOWRAP >" . $val . "</div>";
-//}
-//function _th($val = '', $attributes = [])
-//{
-//
-//    return d($val, $attributes);
-//}
-
-//function get_dominio($url)
-//{
-//    $protocolos = ['http://', 'https://', 'ftp://', 'www.'];
-//    $url = explode('/', str_replace($protocolos, '', $url));
-//
-//    return $url[0];
-//}
-
-//function mayus($variable)
-//{
-//    return strtr(strtoupper($variable), "àèìòùáéíóúçñäëïöü", "ÀÈÌÒÙÁÉÍÓÚÇÑÄËÏÖÜ");
-//
-//}
-
-//function center($attributes = '', $row_12 = 0)
-//{
-//
-//    $base = "<center ".add_attributes($attributes)." ></center>";
-//
-//    return ($row_12 == 0) ? $base : addNRow($base);
-//
-//}
-
-/*Ordena el arreglo de a cuerdo al tipo de indice que se indique*/
-
-//function format_link_primario($str, $attributes, $primario = 0)
-//{
-//
-//    $f = ($primario > 0) ? " black " : " agregar_direccion_pedido border-0 bg_black white";
-//    $att = $attributes;
-//    $att["class"] = (array_key_exists("class",
-//        $attributes)) ? add_text($attributes["class"], $f) : $f;
-//
-//    return a_enid($str, $att);
-//}

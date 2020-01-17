@@ -1,5 +1,5 @@
 <div id='info_antes_de_ayuda'>
-    <?= d(get_format_izquierdo($in_session), 2) ?>
+    <?= d(faqs($in_session), 2) ?>
     <div class='col-lg-10'>
 
         <?= tab(

@@ -13,71 +13,70 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
+        $param = $this->input->get();
 
-        $data["respuesta"] = "";
-        $data["faqs_categoria"] = "";
-        $data["r_sim"] = "";
+        $faqs = prm_def($param, 'faqs');
+        $categoria = prm_def($param, 'categoria');
 
-        $param = ($this->input->get() !== false) ? $this->input->get() : [];
-        $faq = (array_key_exists("faq", $param)) ? $param["faq"] : "";
-        $faqs = (array_key_exists("faqs", $param)) ? $param["faqs"] : "";
-        $categoria = (array_key_exists("categoria", $param)) ? $param["categoria"] : "";
-
-        $data["es_form"] =  ( prm_def($param , "nueva") > 0 ) ?  1 : 0 ;
+        $data["es_form"] = prm_def($param, "nueva");
         $data["categorias_publicas_venta"] = $this->get_categorias_por_tipo(1);
         $data["categorias_temas_de_ayuda"] = $this->get_categorias_por_tipo(5);
-
-        $flag_busqueda_q = prm_def($param , "faq");
-        $data["flag_busqueda_q"] = $flag_busqueda_q;
         $data["lista_categorias"] = $this->get_categorias_tipo(1);
 
-        $f =  0 ;
-        if ($flag_busqueda_q >  0 ) {
 
-            $data["respuesta"] = $this->get_faq($faq);
-            $f ++ ;
+        $id_faq = prm_def($param, "faq");
+        $data["flag_busqueda_q"] = ($id_faq > 0);
+        $f = 0;
 
+        if ($id_faq > 0) {
+
+            $data["respuesta"] = $this->get_faq($id_faq);
+            $f++;
         }
 
-        if ( prm_def($param, "categoria")>  0 ) {
+        if ($categoria > 0) {
 
             $data["faqs_categoria"] = $this->get_faqs_categoria($categoria, $data);
-            $f ++ ;
+            $f++;
         }
 
-        $flag_busqueda_personalidaza = prm_def($param, "faqs");
-        $data["flag_busqueda_personalidaza"] = $flag_busqueda_personalidaza;
 
-        if ($flag_busqueda_personalidaza > 0 ) {
+        $data["flag_busqueda_personalidaza"] = ($faqs > 0);
+
+        if ($faqs > 0) {
 
             $data["faqs_categoria"] = $this->search_faqs($faqs);
-            $f ++;
+            $f++;
 
         }
-        if( $f < 1 ){
+        if ($f < 1) {
 
-            $response =  $this->get_recientes($param);
-            $data["faqs_categoria"]=  $this->append_imgs($response);
+
+            $data["faqs_categoria"] = $this->append_imgs(
+                $this->recientes($param));
 
         }
 
         $data["param"] = $this->input->get();
-        
-        $data = $this->app->cssJs($data,"faq");
-        $this->app->pagina($data,   get_format_faqs($data) , 1);
+
+        $data = $this->app->cssJs($data, "faq");
+        $this->app->pagina($data, render($data), 1);
 
     }
-    private function get_recientes($q){
+
+    private function recientes($q)
+    {
 
 
-        return $this->app->api("fq/index/format/json/", $q);
+        return $this->app->api("fq/index/format/json/");
 
     }
+
     private function get_categorias_por_tipo($tipo)
     {
 
         $q["tipo"] = $tipo;
-        return  $this->app->api("categoria/categorias_por_tipo/format/json/", $q);
+        return $this->app->api("categoria/categorias_por_tipo/format/json/", $q);
 
 
     }
@@ -94,53 +93,61 @@ class Home extends CI_Controller
 
         $q["id_categoria"] = $id_categoria;
         $q["extra"] = $extra;
-        return   $this->append_imgs($this->app->api("fq/qsearch/format/json/", $q));
+        return $this->append_imgs($this->app->api("fq/qsearch/format/json/", $q));
 
 
     }
-    private function append_imgs($data){
 
-        $response =  [];
+    private function append_imgs($data)
+    {
 
-        $a = 0;
-        foreach($data as $row ){
+        $response = [];
+        if (es_data($data)) {
 
-            $response[$a] =  $row;
-            $id_faq     =  $row["id_faq"];
-            $img_faq    =  $this->get_img_faq($id_faq);
+            $a = 0;
+            foreach ($data as $row) {
 
-            $url_img  = "";
-            if ( es_data($img_faq) ){
+                $response[$a] = $row;
+                $id_faq = $row["id_faq"];
+                $img_faq = $this->get_img_faq($id_faq);
 
-                $url_img = path_enid("img_faq", $img_faq[0]["nombre_imagen"]);
+                $path = "";
+                if (es_data($img_faq)) {
+
+                    $path = path_enid("img_faq", $img_faq[0]["nombre_imagen"]);
+                }
+
+                $response[$a]["url_img"] = $path;
+                $a++;
             }
-
-            $response[$a]["url_img"] =  $url_img;
-            $a ++;
-
         }
+
         return $response;
 
     }
-    private function  get_img_faq($id_faq){
+
+    private function get_img_faq($id_faq)
+    {
 
         $q["id_faq"] = $id_faq;
         return $this->app->api("imagen_faq/img/format/json/", $q);
 
     }
+
     private function get_categorias_tipo($tipo = 1)
     {
 
         $q["tipo"] = $tipo;
-        return $this->app->api( "categoria/categorias_por_tipo/format/json/", $q);
+        return $this->app->api("categoria/categorias_por_tipo/format/json/", $q);
     }
 
     private function get_faq($faq)
     {
 
-        $q["id"] = $faq;
-        return  $this->app->api("fq/id/format/json/", $q);
-
+        if ($faq > 0) {
+            $q["id"] = $faq;
+            return $this->app->api("fq/id/format/json/", $q);
+        }
     }
 
     private function search_faqs($q)

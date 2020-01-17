@@ -318,14 +318,6 @@ a:hover {
     background: red;
     color: white;
 }
-
-.response_ok_enid {
-    background: #357ebd !important;
-    width: 25%;
-    padding: 2px;
-    color: white !important;
-}
-
 .alerta_enid {
     background: #fff;
     color: #000106;
@@ -1694,15 +1686,10 @@ input:focus:invalid {
 .format_action {
     box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);
     border: solid 2px #ffffff;
-    background-color: #000000;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.15;
     letter-spacing: 2px;
-    text-align: center;
-    color: #ffffff;
-    text-transform: uppercase;
-    font-weight: bold;
 }
 
 .link_text:hover {
