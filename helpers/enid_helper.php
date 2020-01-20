@@ -1716,7 +1716,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 
 }
 
-function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-lg-4 mt-5 ', $base_termino = 'col-lg-4 mt-5 ', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
+function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-sm-4 mt-5 p-0 p-md-1 ', $base_termino = 'col-sm-4 mt-5 p-0 p-md-1', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
     $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
