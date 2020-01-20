@@ -2,9 +2,8 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function render_tv($data)
+    function render($data)
     {
-
 
         $r[] = form_open("",
             [
@@ -12,41 +11,27 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "form_tiempo_entrega"
             ]
         );
-        $r[] = d(
 
-            d(
-                input(
-
-                    [
-                        "name" => "q",
-                        "placeholder" => "id, nombre",
-                        "class" => "top_30 col-lg-12"
-                    ]
-                ), 12
-            )
-
-            ,
-            4
+        $busqueda = input_frm('', 'Artículo',
+            [
+                "name" => "q",
+                "placeholder" => "id, nombre",
+                "class" => "input_busqueda",
+                "id" => "input_busqueda"
+            ]
         );
 
-        $r[] = d(frm_fecha_busqueda(), 8);
+        $fechas = frm_fecha_busqueda();
+        $r[] = flex($busqueda, $fechas, _between_end, 'p-md-0 col-sm-4 mt-5', 8, 'd-md-flex');
         $r[] = form_close();
-        $form = d($r, 1);
-        $z[] = d(
-            btw(
-                d(_titulo("ARTÍCULO"), 1)
-                ,
-                $form
-                ,
-                8, 1
 
-            )
-            ,
-            13
-        );
-        $z[] = d(place("place_tiempo_entrega"), 8, 1);
+        $form = append($r);
 
-        return append($z);
+        $response[] = d(_titulo("tiempo de venta por artículo"), _mbt5);
+        $response[] = $form;
+        $response[] = d(place("place_tiempo_entrega"),12);
+
+        return d($response,8,1);
 
     }
 

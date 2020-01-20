@@ -40,7 +40,6 @@ define('_registro','bg_black p-2 white w-100 text-uppercase cursor_pointer round
 
 /*textos*/
 define('_strong', 'text-uppercase black font-weight-bold');
-/*textos*/
 define('_t1', 'h3 text-uppercase black font-weight-bold');
 define('_t2', 'h4 text-uppercase black font-weight-bold');
 define('_t3', 'h4 text-uppercase black');
