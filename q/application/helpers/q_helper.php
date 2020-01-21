@@ -481,55 +481,49 @@ if (!function_exists('invierte_date_time')) {
     function format_miembros($data)
     {
 
-        $_response[] = h("USUARIOS", 3);
-        $_response[] = $data["paginacion"];
+
+        $response[] = $data["paginacion"];
 
         foreach ($data["miembros"] as $row) {
 
+            $contenido = [];
             $id_usuario = $row["id_usuario"];
-            $afiliado = $row["nombre"] . " " . $row["apellido_paterno"] . " " . $row["apellido_materno"];
+            $persona = _text_(
+                $row["nombre"], $row["apellido_paterno"], $row["apellido_materno"]);
 
 
-            $re[] = img([
-                "src" => "../imgs/index.php/enid/imagen_usuario/" . $id_usuario,
-                "style" => 'width: 44px!important;',
-                "onerror" => "this.src='../img_tema/user/user.png'",
-            ]);
-            $re[] = d($afiliado);
-            $re[] = d($row["fecha_registro"]);
-            $response[] = d(append($re), "popup-head-left pull-left");
-
-            if ($data["modo_edicion"] == 1):
-                $res[] = d(icon("fa fa-envelope"),
-                    ["title" => "Email de recordatorio enviados"]);
-                $m[] = btn(
-                    icon('fa fa-plus'),
-                    [
-                        "class" => "chat-header-button",
-                        "data-toggle" => "dropdown",
-                    ]
+            $imagen = img(
+                [
+                    "src" => path_enid('imagen_usuario', $id_usuario),
+                    "onerror" => "this.src='../img_tema/user/user.png'",
+                    'class' => 'w-75 mw-100 mx-auto'
+                ]
+            );
+            $contenido[] = d($imagen);
+            $contenido[] = flex(
+                format_fecha($row["fecha_registro"]),
+                    _titulo($persona,4),
+                'flex-column'
                 );
 
-
-                $link_editar = tab(
-                    text_icon('fa fa-pencil', "Editar información"),
+            if ($data["modo_edicion"] > 0):
+                $contenido[] = tab(
+                    text_icon('fa fa-pencil', ""),
                     '#tab_mas_info_usuario',
                     [
-                        "class" => 'usuario_enid_service',
+                        "class" => 'usuario_enid_service ml-auto',
                         "id" => $id_usuario,
                     ]
                 );
-                $m[] = ul($link_editar, "dropdown-menu pull-right");
-                $res[] = d(append($m), "btn-group");
-                $response[] = d(append($res), "popup-head-right pull-right");
+
             endif;
 
-            $_response[] = d(d(append($response), "popup-head"),
-                ["class" => "popup-box chat-popup", "id" => "qnimate"]);
+            $elemento = d_c($contenido, ['class' => 'col-sm-4 text-md-left text-center']);
+            $response[] = d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row', _between));
 
         }
 
-        return append($_response);
+        return append($response);
 
     }
 
@@ -960,12 +954,11 @@ if (!function_exists('invierte_date_time')) {
             $f++;
         }
 
-        $response = [
+        return [
             "html" => $lista,
             "flag" => $f,
         ];
 
-        return $response;
     }
 
 

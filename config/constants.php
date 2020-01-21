@@ -48,3 +48,8 @@ define('_t4', 'h5 text-uppercase black font-weight-bold');
 
 /*icon*/
 define('_close_icon', 'fa fa-times');
+define('_email_icon', 'fa fa-envelope');
+define('_editar_icon', 'fa fa fa-pencil');
+
+
+
