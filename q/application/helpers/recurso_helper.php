@@ -24,17 +24,27 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $tr[] = d(input($conf));
-            $tr[] = d(strip_tags($row["nombre"]),'text-uppercase ml-0 ml-md-2');
+            $nombre_recurso = strip_tags($row["nombre"]);
+            $tr[] = d($nombre_recurso, 'text-uppercase ml-0 ml-md-2');
+            $path = $row["urlpaginaweb"];
             $tr[] = format_link("Ver sitio",
                 [
-                    "href" => $row["urlpaginaweb"],
+                    "href" => $path,
                     "class" => 'blue_enid_background white ml-auto col-md-2',
                     "id" => $id_recurso,
                     "target" => '_black'
                 ]
             );
+            $tr[] = tab(icon(_editar_icon), '#configurar_recurso',
+                [
+                    'class' => 'configurar_recurso',
+                    'path' => $path,
+                    'nombre_recurso' => $nombre_recurso,
+                    'id' => $id_recurso
+                ]
+            );
 
-            $response[] = d($tr,'d-flex mt-3');
+            $response[] = d($tr, 'd-flex mt-3');
             $b++;
         }
         return append($response);

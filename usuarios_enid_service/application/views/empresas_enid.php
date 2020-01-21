@@ -7,6 +7,8 @@
                 "value" => $id_usuario
             ]) ?>
             <?= d(get_format_info_usuario(), ["class" => "tab-pane active ", "id" => "tab1"]) ?>
+            <?= tab_seccion(form_recurso(),'configurar_recurso',0) ?>
+
             <?= d(get_format_afiliados(), ["class" => "tab-pane", "id" => 'tab_productividad_ventas']); ?>
             <div class="tab-pane" id='tab_perfiles_permisos'>
                 <?= h("Perfiles / permisos", 3) ?>

@@ -29,6 +29,23 @@ class recurso extends REST_Controller
         $this->response($response);
     }
 
+    function index_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "nombre,urlpaginaweb,id")) {
+            $params = [
+                "nombre" => $param["nombre"],
+                "urlpaginaweb" => $param["urlpaginaweb"],
+
+            ];
+            $response = $this->recurso_model->update($params, ['idrecurso' => $param['id']]);
+        }
+        $this->response($response);
+    }
+
+
     function navegacion_GET()
     {
         $param = $this->get();

@@ -811,7 +811,7 @@ let show_tabs = (str, tipo = 1) => {
 
     } else {
 
-        $(type).tab(type);
+        $(str).tab(type);
     }
 
 };

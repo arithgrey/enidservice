@@ -234,12 +234,38 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function form_recurso()
+    {
+
+        $response[] = _titulo('Recursos');
+        $response[] = form_open('', ['class' => 'frm_recurso']);
+        $response[] = input_frm('mt-5', 'Nombre',
+            [
+                'id' => 'nombre_recurso',
+                'class' => 'nombre_recurso',
+                'name' => 'nombre'
+            ]
+        );
+        $response[] = input_frm('mt-5', 'Link de acceso',
+            [
+                'id' => 'link_recurso',
+                'class' => 'link_recurso',
+                'name' => 'urlpaginaweb'
+            ]
+        );
+        $response[] = hiddens(['id' => 'id_recurso', 'name' => 'id']);
+        $response[] = btn('modificar', ['class' => 'mt-5']);
+        $response[] = form_close();
+        return d($response, 6, 1);
+
+
+    }
 
     function get_format_info_usuario()
     {
 
 
-        $link_mienmbros = tab(
+        $link_miembros = tab(
             text_icon("fa fa-trophy", "Miembros activos"),
             "#tab_usuarios_activos",
             [
@@ -259,45 +285,33 @@ if (!function_exists('invierte_date_time')) {
 
         $l = [
             li(
-                $link_mienmbros,
+                $link_miembros,
                 [
                     "class" => "active",
                     "id" => "1"
                 ]
             ),
-
             li(
                 $link_bajas
-            ),
-            li(place("place_num_agendados_llamar_despues"))
+            )
         ];
 
 
-        $r[] = h("Equipo Enid Service", 3);
-        $r[] = d(ul($l, "nav nav-tabs"), "panel-heading");
+        $response[] = _titulo("Equipo Enid Service");
+        $response[] = ul($l, "nav nav-tabs mb-5 mt-5");
 
-        $link_agregar = tab(
-            "Agregar nuevo", "#tab_mas_info_usuario",
+        $contenido[] = tab(
+            btn("Agregar", ['class' => 'col-sm-3'], 1),
+            "#tab_mas_info_usuario",
             [
-                "class" => "btn_nuevo_usuario"
+                "class" => "btn_nuevo_usuario "
             ]
         );
 
-        $r[] = d(
-            add_text(
-                $link_agregar
-                ,
-                place("usuarios_enid_service")
-            )
-            ,
-            [
-                "class" => "tab-pane active",
-                "id" => "tab_usuarios_activos"
-            ]
-        );
+        $contenido[] = place("usuarios_enid_service");
+        $response[] = tab_seccion($contenido, 'tab_usuarios_activos', 1);
 
-        return append($r);
-
+        return d($response, 12);
 
     }
 
@@ -396,6 +410,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "name" => "nombre",
                 "class" => "form-control",
+                "id" => "nombre_recurso",
                 "required" => "true"
             ]
         );
