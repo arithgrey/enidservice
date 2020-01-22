@@ -62,6 +62,7 @@ $("footer").ready(() => {
         });
     }
 
+
 });
 let set_option = (key, value = 0) => {
 

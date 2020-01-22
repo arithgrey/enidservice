@@ -11,7 +11,7 @@ define('FOPEN_WRITE_CREATE', 'ab');
 define('FOPEN_READ_WRITE_CREATE', 'a+b');
 define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
-define('version_enid', 'v=1.9.1'.rand());
+define('version_enid', 'v=1.9.1' . rand());
 define('ICONV_ENABLED', TRUE);
 
 /**TEXTOS DE VALIDACIÓN*/
@@ -37,8 +37,11 @@ define('_between_end', 'justify-content-between align-items-end w-100');
 
 define('_mbt5', 'mt-5 mb-5');
 
+/**/
+define('_self_center', 'align-self-center');
+
 /*botones*/
-define('_registro','bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold');
+define('_registro', 'bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold');
 
 /*textos*/
 define('_strong', 'text-uppercase black font-weight-bold');

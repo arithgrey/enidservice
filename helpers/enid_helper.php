@@ -2308,7 +2308,7 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
 
     $extra = ($horizontal == 1 && $col > 0) ? $extra . $srow : $extra;
     $extra = $extra . $extra_class;
-    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between " . $extra : "d-flex flex-column justify-content-between " . $extra;
+    $class = ($horizontal > 0) ? "d-flex align-items-center justify-content-between mt-1 " . $extra : "d-flex flex-column justify-content-between " . $extra;
 
     switch ($col) {
 
@@ -2551,6 +2551,10 @@ function menu_session_mobil($in_session)
 
 function tmp_menu($id_usuario, $menu)
 {
+    $contenido[] = addNRow(terminar_dropdown());
+    $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
+
+    $seccion = append($contenido);
     $notificaciones = btw(
         a_enid(
             flex(
@@ -2567,9 +2571,9 @@ function tmp_menu($id_usuario, $menu)
         )
         ,
         d(
-            place("place_notificaciones_usuario m-3")
+            $seccion
             ,
-            "dropdown-menu menu_dropdown_enid"
+            "row dropdown-menu menu_dropdown_enid"
         )
         ,
         "dropdown dropleft menu_notificaciones_progreso_dia mr-2 "
@@ -2585,6 +2589,7 @@ function tmp_menu($id_usuario, $menu)
     );
 
 
+    $cerrar_menu = addNRow(terminar_dropdown('', 'p-0'));
     $menu_usuario = [
         $menu,
         a_enid("Mis reseñas y valoraciones",
@@ -2606,7 +2611,9 @@ function tmp_menu($id_usuario, $menu)
             ]
         ),
     ];
-    $opciones_menu = d($menu_usuario, 'dropdown-menu mw_250 p-3');
+    $seccion_contenido[] = $cerrar_menu;
+    $seccion_contenido[] = d_row(d($menu_usuario, 'col-sm-12 mt-3'));
+    $opciones_menu = d($seccion_contenido, 'dropdown-menu mw_250 p-3');
 
     $extra_menu = [
         $imagen_usuario,
@@ -2614,7 +2621,7 @@ function tmp_menu($id_usuario, $menu)
     ];
     $menu = d($extra_menu, 'dropdown dropleft');
 
-    return flex($notificaciones, $menu, "mr-5");
+    return flex($notificaciones, $menu, "mr-md-5 mt-3 mt-md-0");
 
 }
 
@@ -3137,6 +3144,21 @@ function terminar($ext = '', $id = '')
             ]
         ), 'col-xs-2 col-sm-1 ml-auto');
     return d($cerrar, 13);
+}
+
+function terminar_dropdown($ext = '', $extra_dropdown = '')
+{
+
+    return d(
+        format_link("",
+            [
+                'class' => _text("fa fa-times ", $ext),
+                'aria-expanded' => false,
+                'aria-haspopup' => true
+
+            ]
+        ), _text_('col-xs-3 mt-2 col-sm-2 pull-right cerrar_dropdown', $extra_dropdown));
+
 }
 
 function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
