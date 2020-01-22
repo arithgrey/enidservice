@@ -5,7 +5,8 @@ if (!function_exists('invierte_date_time')) {
     {
         $orden_pedido = $data["orden_pedido"];
         $id_servicio = $data["id_servicio"];
-        $a = add_text(
+
+        $a = _text_(
             _titulo("SELECCIONA TU TIPO DE ENTREGA")
             ,
             mensajeria($id_servicio, $orden_pedido)
@@ -29,13 +30,13 @@ if (!function_exists('invierte_date_time')) {
         $r[] = flex(
             $a,
             $b,
-            [
-                "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center "
-            ],
-            "col-lg-4 ",
+
+            "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center p-md-0"
+            ,
+            "col-lg-4 p-0",
             "col-lg-8 mt-sm-5 text-center"
         );
-        return append($r);
+        return d($r, 'mt-5 w-100');
 
 
     }
@@ -121,7 +122,8 @@ if (!function_exists('invierte_date_time')) {
         $producto = append($r);
         $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5  ");
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes), 10, 1);
-        $response[] = d(d("", "place_valoraciones mt-5"), 10, 1);
+        $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
+
         $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100"), 10, 1);
 
@@ -231,12 +233,11 @@ if (!function_exists('invierte_date_time')) {
             "is_servicio" => $es_servicio,
             "q2" => $q2
         ]);
-        $r[] = ajustar(
-            d("PIEZAS", "f15 strong"),
+        $tipo = (is_mobile()) ? 2 : 4;
+        $r[] = flex(
+            _titulo("PIEZAS", $tipo),
             select_cantidad_compra($es_servicio, $existencia)
-            ,
-            8
-
+            , _between
         );
         $r[] = $tiempo_entrega;
         $r[] = btn("Lo quiero", ["class" => "text-left mt-5 text-uppercase"]);
@@ -326,11 +327,11 @@ if (!function_exists('invierte_date_time')) {
         $es_servicio = pr($servicio, "flag_servicio");
         $es_nuevo = pr($servicio, "flag_nuevo");
 
-        $z[] = d(_titulo($nombre), "mb-3");
+        $z[] = d(_titulo($nombre), "mb-4");
 
         if (strlen($descripcion) > 5) {
 
-            $z[] = d($descripcion);
+            $z[] = d($descripcion, 'mt-4 mb-4');
         }
 
         $z[] = nombre_vendedor($proceso_compra, $usuario, $id_publicador);
@@ -338,13 +339,12 @@ if (!function_exists('invierte_date_time')) {
 
         if ($tel_visible > 0) {
 
-            $phone = format_phone($usuario[0]["tel_contacto"]);
-            $z[] = d(h($phone, 5, "strong letter-spacing-5"));
+            $phone = format_phone(pr($usuario, "tel_contacto"));
+            $z[] = _titulo($phone, 4, 'mt-4 mb-4');
         }
 
-        $z[] = d(social($proceso_compra, 1), "iconos_social");
+        $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
         $z[] = tb_colores($color, $es_servicio);
-
         $yt = pr($servicio, "url_vide_youtube");
 
         $r = [];
@@ -352,12 +352,12 @@ if (!function_exists('invierte_date_time')) {
 
         $i = pre_youtube($imgs, $yt);
         $izquierdo = ($i["es_imagen"] > 0) ? "col-lg-7 p-0 " : "col-lg-6 col-sm-12 p-0";
-        $derecha = ($i["es_imagen"] > 0) ? "col-lg-5 " : "col-lg-6 col-sm-12 ";
-
+        $derecha = ($i["es_imagen"] > 0) ? "col-lg-5 " : "col-lg-6 col-sm-12 p-0 mt-5 mt-md-0";
         $flex = ($i["es_imagen"] > 0) ? "align-items-center" : ["d-lg-flex "];
 
+        $contenido_descripcion = append($z);
         $r[] = flex(
-            append($z),
+            $contenido_descripcion,
             $i["img"],
             $flex,
             $izquierdo,
@@ -402,11 +402,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function tb_colores
-    ($text_color, $es_servicio)
+    function tb_colores($text_color, $es_servicio)
     {
 
-        $response = "";
+        $colores_disponibles = 0;
+        $contenido = "";
         if (!is_null($text_color)) {
             $final = "";
             if ($es_servicio == 0) {
@@ -418,15 +418,23 @@ if (!function_exists('invierte_date_time')) {
                     $style = "background:$color;height:40px; ";
                     $info .= d("", ["style" => $style, "class" => "col-sm-4 col-md-4 col-lg-4 col-xl-4"]);
                     $v++;
+                    $colores_disponibles++;
                 }
                 if ($v > 0) {
                     $final = $info;
                 }
-                $response = $final;
+                $contenido = $final;
             }
         }
 
-        return d(d($response, "mt-4 row"), "col-lg-12");
+        if ($colores_disponibles > 0) {
+
+            $tipo = (is_mobile()) ? 3 : 5;
+            $response[] = d(_titulo('colores disponibles', $tipo), 'text-right text-md-left mb-4 mb-md-0');
+
+        }
+        $response[] = d($contenido, "mt-4");
+        return append($response);
     }
 
 
@@ -507,7 +515,7 @@ if (!function_exists('invierte_date_time')) {
                     'class' => 'col-xs-3 col-sm-3 mt-2 border mh_50 mah_50 mr-1 mb-1' . $extra_class,
                     'id' => $z,
                     'data-toggle' => 'tab',
-                    'href' => _text("#imagen_tab_" , $z)
+                    'href' => _text("#imagen_tab_", $z)
                 ]
 
             );

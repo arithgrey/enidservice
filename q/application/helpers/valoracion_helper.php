@@ -9,8 +9,8 @@ if (!function_exists('invierte_date_time')) {
         $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
 
-        $f[] = valorados($num);
-        $a = d(append($f), "d-flex flex-column justify-content-center");
+
+        $promedio_valoraciones = valorados($num);
         $z[] = place("table_orden_1");
         $z[] = criterios($comentarios);
         $z[] = add_text(
@@ -18,11 +18,11 @@ if (!function_exists('invierte_date_time')) {
             d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between")
         );
 
-        $b = d(append($z));
+        $b = d($z);
         if (es_data($comentarios)) {
-            $response[] =_titulo("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
+            $response[] = _titulo("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
         }
-        $response[] = d($a, 'col-lg-4 p-0') . d("", "col-lg-1") . d($b, 7);
+        $response[] = dd($promedio_valoraciones, $b);
 
         return append($response);
 
@@ -88,7 +88,6 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-
     function criterios($comentarios)
     {
         $response = [];
@@ -112,7 +111,7 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d($criterios[$z], $extra_criterios);
             }
 
-            $response[] = d("ordernar por", "text-uppercase  mb-2");
+            $response[] = _titulo("ordernar por",4, 'mb-2');
             $response[] = d(append($r), "d-flex mb-5");
 
         }
@@ -127,12 +126,13 @@ if (!function_exists('invierte_date_time')) {
             $valoracion = $numero_valoraciones[0];
             $num = $valoracion["num_valoraciones"];
             $promedio = number_format($valoracion["promedio"], 1, '.', '');
-            $parte_promedio = btw(
-                label($promedio, 'promedio_num f15 strong black cantidad_promedio h1')
+            $parte_promedio = flex(
+
+                _titulo($promedio,0,'mb-4 mt-4')
                 ,
                 crea_estrellas($promedio)
                 ,
-                'contenedor_promedios bg_azul_tenue p-2 mb-5 text-center'
+                'contenedor_promedios border border-secondary text-center p-3 flex-column mt-5 mb-5'
             );
             if ($persona > 0) {
 
@@ -245,7 +245,6 @@ if (!function_exists('invierte_date_time')) {
 
         return append($response);
     }
-
 
 
 }
