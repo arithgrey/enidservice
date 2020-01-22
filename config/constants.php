@@ -17,6 +17,8 @@ define('ICONV_ENABLED', TRUE);
 /**TEXTOS DE VALIDACIÓN*/
 define('_text_pass', "Ingresa una contraseña de por lo menos 5 caracteres!");
 define('_text_telefono', "Ingresa un teléfono de 8 o 10 caracteres!");
+define('_text_horario_entrega', "¿En qué horario te gustaría recibir tu pedido?");
+define('_text_correo', 'Hey! no tan rápido, valida tu correo!');
 
 /*bootstrap class*/
 /*col*/
@@ -44,12 +46,14 @@ define('_t1', 'h3 text-uppercase black font-weight-bold');
 define('_t2', 'h4 text-uppercase black font-weight-bold');
 define('_t3', 'h4 text-uppercase black');
 define('_t4', 'h5 text-uppercase black font-weight-bold');
+define('_t5', 'h5 text-uppercase black ');
 
 
 /*icon*/
 define('_close_icon', 'fa fa-times');
 define('_email_icon', 'fa fa-envelope');
 define('_editar_icon', 'fa fa fa-pencil');
+define('_tiempo_icon', 'fa fa-clock-o');
 
 
 

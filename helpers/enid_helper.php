@@ -1966,7 +1966,7 @@ function _titulo($text, $tipo = 0, $extra = '')
 
             break;
 
-        case 1:
+        case 2:
             $response[] = h($text, 2, _text_(_t2, $extra));
 
             break;
@@ -1978,6 +1978,10 @@ function _titulo($text, $tipo = 0, $extra = '')
 
         case 4:
             $response[] = h($text, 4, _text_(_t4, $extra));
+
+            break;
+        case 5:
+            $response[] = h($text, 5, _text_(_t5, $extra));
 
             break;
 
@@ -2023,7 +2027,9 @@ function social($proceso_compra, $desc_web, $black = 1)
             img(
                 [
                     "src" => "../img_tema/productos/messenger.png",
-                    "class" => "w_15",
+                    "class" => "w_15 border-0",
+                    'style' => 'filter: hue-rotate(8deg) brightness(70%);'
+
                 ]
             ),
             [

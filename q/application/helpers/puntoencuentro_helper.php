@@ -13,20 +13,20 @@ if (!function_exists('invierte_date_time')) {
             $nombre = $row["nombre"];
             $id = $row["id"];
             $clase = (search_bi_array($lista_negra, "id_punto_encuentro",
-                            $id) !== false) ? 'fa agregar_punto  fas fa-plus-square ' : 'fa quitar_punto  fa fa-minus ';
+                    $id) !== false) ? 'fa agregar_punto  fas fa-plus-square ' : 'fa quitar_punto  fa fa-minus ';
             $icono = icon($clase, ["id" => $id]);
 
 
             $l[] = ajustar(
-                    d(
-                            $nombre,
-                            [
-                                    "class" => "nombre_estacion cursor_pointer punto_encuentro",
-                                    "id" => $id,
-                                    "nombre_estacion" => $nombre,
-                            ]
-                    ),
-                    $icono
+                d(
+                    $nombre,
+                    [
+                        "class" => "nombre_estacion cursor_pointer punto_encuentro",
+                        "id" => $id,
+                        "nombre_estacion" => $nombre,
+                    ]
+                ),
+                $icono
             );
 
         }
@@ -44,16 +44,17 @@ if (!function_exists('invierte_date_time')) {
             $nombre = $row["nombre"];
             $id = $row["id"];
             $index = search_bi_array($lista_negra, "id_punto_encuentro", $id);
+            $with = is_mobile() ? 'w-100' : 'w-50';
             $estacion = d(
-                    $nombre,
-                    [
-                            "class" => "nombre_estacion cursor_pointer punto_encuentro mx-auto mt-2 w-50",
-                            "id" => $id,
-                            "nombre_estacion" => $nombre,
-                            "costo_envio" => $row["costo_envio"],
-                            "flag_envio_gratis" => $es_envio_gratis,
+                $nombre,
+                [
+                    "class" => _text_("nombre_estacion cursor_pointer punto_encuentro mx-auto mt-2 ", $with),
+                    "id" => $id,
+                    "nombre_estacion" => $nombre,
+                    "costo_envio" => $row["costo_envio"],
+                    "flag_envio_gratis" => $es_envio_gratis,
 
-                    ]
+                ]
             );
 
             if ($index !== false) {

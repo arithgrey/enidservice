@@ -7,26 +7,27 @@ if (!function_exists('invierte_date_time')) {
     {
         $att = (is_mobile()) ? "strong" : "strong  mx-auto ";
         $r[] = flex(
-            _titulo("SELECCIONA TU LINEA MÁS CERCANA ", 0, $att),
+            _titulo("¿cual linea se te facilita?", 0, $att),
             $data["leneas_metro"],
             [
                 "d-lg-flex align-items-center contenedor_estaciones",
             ],
-            "col-lg-5 text_seleccion_linea p-0",
-            "col-lg-7 place_lineas bg-light p-5 "
+            "col-lg-5 text_seleccion_linea mb-5 p-md-0",
+            "col-lg-7 place_lineas bg-light p-md-5 "
 
         );
 
+        $ext = (is_mobile()) ? 'row' : '';
         $r[] =
             flex(
-                _titulo("¿CUAL ESTACIÓN SE TE FACILITA? "),
+                _titulo("selecciona tu estacción de entrega"),
 
                 "",
                 [
-                    "d-lg-flex align-items-center desglose_estaciones",
+                    "d-lg-flex desglose_estaciones p-md-0",
                 ],
-                "col-lg-5 text_seleccion_estacion p-0",
-                "place_estaciones_metro col-lg-7 bg-light p-5"
+                "col-lg-5 text_seleccion_estacion p-md-0",
+                _text_("place_estaciones_metro col-lg-7 bg-light p-5", $ext)
             );
 
         return append($r);
@@ -126,25 +127,25 @@ if (!function_exists('invierte_date_time')) {
         $maximo = add_date($minimo, 4);
         $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
-        $z[] = form_open("", ["class" => "form_punto_encuentro mt-5 row"]);
-        $z[] = append($extra);
-        $z[] = contaiter(_titulo("¿Quién recibe?"), "mb-5");
-        $z[] =
-            input_frm("col-lg-6 mt-5",
-                "NOMBRE",
-                [
-                    "id" => "nombre",
-                    "name" => "nombre",
-                    "type" => "text",
-                    "placeholder" => "Persona que recibe",
-                    "class" => "nombre",
-                    "minlength" => 3,
-                    "required" => true,
-                ]
-            );
+        $form[] = form_open("", ["class" => "form_punto_encuentro"]);
+        $form[] = append($extra);
+        $form[] = d(_titulo("¿Quién recibe?"), 'col-sm-12 mb-5');
+
+        $form[] = input_frm("col-lg-6 mt-5",
+            "NOMBRE",
+            [
+                "id" => "nombre",
+                "name" => "nombre",
+                "type" => "text",
+                "placeholder" => "Persona que recibe",
+                "class" => "nombre",
+                "minlength" => 3,
+                "required" => true,
+            ]
+        );
 
 
-        $z[] = input_frm(
+        $form[] = input_frm(
             "col-lg-6 mt-5",
             "CORREO",
             [
@@ -155,11 +156,11 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "correo",
                 "minlength" => 5,
                 "required" => true,
-            ], 'Hey! no tan rápido, valida tu email'
+            ], _text_correo
         );
 
 
-        $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO ",
+        $form[] = input_frm("col-lg-6 mt-5", "TELÉFONO ",
             [
                 "id" => "tel",
                 "name" => "telefono",
@@ -172,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
             ], _text_telefono);
 
 
-        $z[] = input_frm("col-lg-6 mt-5", "PASSWORD",
+        $form[] = input_frm("col-lg-6 mt-5", "PASSWORD",
             [
                 "id" => "pw",
                 "type" => "password",
@@ -181,10 +182,12 @@ if (!function_exists('invierte_date_time')) {
                 "placeholder" => "***",
             ], _text_pass);
 
-        $r[] = d(append($z), "informacion_del_cliente  col-lg-12");
-        $sec[] = _titulo("¿En qué horario te gustaría recibir tu pedido?", 0, 'col-lg-12 mb-5');
 
-        $a = input_frm("col-lg-6 mt-5", "FECHA",
+        $tipo = is_mobile() ? 'col-sm-12 p-0' : 'row';
+        $r[] = d($form, _text_("informacion_del_cliente p-md-0", $tipo));
+        $sec[] = d(_titulo(_text_horario_entrega), 'col-lg-12 mb-5 p-md-0');
+
+        $a = input_frm("col-lg-6 mt-5 p-md-0", "FECHA",
             [
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_entrega',
@@ -199,28 +202,37 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $b[] = d(text_icon("fa fa-clock-o", " HORA "), "strong");
+        $b[] = d(text_icon(_tiempo_icon, "hora de tu entrega"), _strong);
         $b[] = d($lista_horarios, "mt-2");
-        $horas = d(append($b), "col-lg-6 ");
+        $horas = d($b, "col-lg-6 mt-5");
 
         $sec[] = $a;
         $sec[] = $horas;
 
-        $sec[] = d("¿ALGUNA INDICACIÓN?",
+
+        $ext = is_mobile() ? 'h4' : '';
+        $sec[] = d("¿TIENES ALGUNA INDICACIÓN?",
             [
-                "class" => " strong  top_50 bottom_50 cursor_pointer text_agregar_nota col-lg-12 underline",
+                "class" =>
+                    _text_($ext, _strong,
+                        "mt-5 mb-5 cursor_pointer text_agregar_nota col-lg-12 
+                        underline p-md-0 text-center text-md-left"),
                 "onclick" => "agregar_nota();",
             ]
         );
-        $x[] = d("¿ALGUNA INDICACIÓN?", "mt-3 strong");
+
+
+        $x[] = d("¿ALGUNA INDICACIÓN?", _text_("mt-3", _strong));
         $x[] = textarea(
             [
                 "name" => "comentarios",
-                "class" => "mt-3",
-            ]);
-        $sec[] = d($x, "input_notas   top_50 bottom_50");
+                "class" => "mt-5",
+            ]
+        );
 
-        $r[] = d($sec, "seccion_horarios_entrega ");
+        $sec[] = d($x, "input_notas mt-5 mb-5 col-sm-12 p-md-0");
+
+        $r[] = d(d($sec, "seccion_horarios_entrega row"), 12);
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR",
             [
@@ -269,8 +281,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "form_punto_encuentro_horario"]);
         $r[] = append($extra);
-        $r[] = h("¿En qué horario te gustaría recibir tu pedido?", 3,
-            " strong text-uppercase  col-lg-12 ");
+        $r[] = _titulo(_text_horario_entrega, 0, "col-lg-12");
 
         $r[] = d(
             btw(
@@ -296,7 +307,7 @@ if (!function_exists('invierte_date_time')) {
 
         $b[] = d(text_icon("fa fa-clock-o", " HORA "), "strong");
         $b[] = d($horarios["select"], "mt-2");
-        $r[] = d(append($b), "col-lg-6 mt-5");
+        $r[] = d($b, "col-lg-6 mt-5");
 
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
