@@ -311,11 +311,42 @@ class Servicio extends REST_Controller
         if ($this->input->is_ajax_request()) {
             $param = $this->post();
             if (fx($param, "precio,flag_servicio")) {
-                $response["registro"] = (ctype_digit($param["precio"]) && $param["precio"] >= 0) ? $this->registra_data_servicio($param) : 0;
+                $precio = $param["precio"];
+                $es_float = $this->es_float($precio);
+                $es_cantidad = ($param["precio"] >= 0);
+
+                $response["registro"] = 0;
+                if ($es_float && $es_cantidad) {
+
+                    $response["registro"] = $this->registra_data_servicio($param);
+                }
             }
         }
         $this->response($response);
 
+    }
+
+
+    private function es_float($cantidad)
+    {
+
+        if (!is_scalar($cantidad)) {
+            return false;
+        }
+        if (gettype($cantidad) === "float") {
+
+            $response = true;
+
+        } else {
+
+            $response = preg_match("/^\\d+\\.\\d+$/", $cantidad) === 1;
+        }
+
+        if (!$response) {
+
+            $response = (ctype_digit($cantidad));
+        }
+        return $response;
     }
 
     private function registra_data_servicio($param)

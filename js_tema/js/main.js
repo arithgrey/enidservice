@@ -25,7 +25,7 @@ $("footer").ready(() => {
     $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));
-    $(".precio").keyup(quita_espacios_input_precio);
+    $(".precio").keypress(quita_espacios_input_precio);
 
 
     if ($(".input_busqueda_producto").length) {
@@ -365,12 +365,13 @@ let registra_respuesta_pregunta = e => {
 };
 let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
 
-    if (texto == 0) {
+    if (texto < 1) {
         let valor_numerico = "";
-        for (let a = 0; a < nuevo_valor.length; a++) {
-            if (nuevo_valor[a] != " ") {
 
-                if (validar_si_numero(nuevo_valor[a]) == true) {
+        for (let a = 0; a < nuevo_valor.length; a++) {
+            if (nuevo_valor[a] !== " ") {
+
+                if (validar_si_numero(nuevo_valor[a]) === true) {
                     valor_numerico += nuevo_valor[a];
                 }
             }
@@ -380,7 +381,7 @@ let quitar_espacios_numericos = (nuevo_valor, texto = 0) => {
 
         let valor_numerico = "";
         for (let a = 0; a < nuevo_valor.length; a++) {
-            if (nuevo_valor[a] != " ") {
+            if (nuevo_valor[a] !== " ") {
 
                 valor_numerico += nuevo_valor[a];
             }
@@ -416,13 +417,25 @@ let quita_espacios = input => {
 
 };
 
-let quita_espacios_input_precio = () => {
+let quita_espacios_input_precio = (e) => {
 
-    let valor = get_parameter(".precio");
-    let nuevo = quitar_espacios_numericos(valor);
-    set_parameter(".precio", nuevo);
+    let keycode = e.keyCode;
+    let char = String.fromCharCode(keycode);
 
+
+    if (!/^([0-9])*$/.test(char)) {
+
+
+        if (keycode !== 46) {
+
+            e.preventDefault()
+        }
+    }
 };
+let es_float = function (str) {
+
+    return /^[+-]?(([0-9]+)|([0-9]*\.[0-9]+|[0-9]+\.[0-9]*)|(([0-9]+|([0-9]*\.[0-9]+|[0-9]+\.[0-9]*))[eE][+-]?[0-9]+))$/.test(str);
+}
 
 let comparer = index => {
 
@@ -975,6 +988,18 @@ let next_label_focus_out = function () {
         $(this).removeClass('input_focus');
     }
 }
+let next_error = function ($selector, despliega = 1) {
+
+    if (despliega < 1) {
+
+        $selector.next('label').next('div').addClass('d-none');
+
+    } else {
+
+        $selector.next('label').next('div').removeClass('d-none');
+    }
+
+}
 let verifica_formato_default_inputs = function (validacion = 1) {
 
     if (document.body.querySelector(".input_enid_format")) {
@@ -1033,5 +1058,4 @@ let valida_load = function (form_previo = '') {
         }
 
     }
-
 }
