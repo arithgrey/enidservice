@@ -19,6 +19,8 @@ define('_text_pass', "Ingresa una contraseña de por lo menos 5 caracteres!");
 define('_text_telefono', "Ingresa un teléfono de 8 o 10 caracteres!");
 define('_text_horario_entrega', "¿En qué horario te gustaría recibir tu pedido?");
 define('_text_correo', 'Hey! no tan rápido, valida tu correo!');
+define('_text_cantidad', 'Ups! esta no es una cantidad correcta!');
+
 
 /*bootstrap class*/
 /*col*/

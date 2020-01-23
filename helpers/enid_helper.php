@@ -253,7 +253,13 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 $attributes["maxlength"] = 3;
                 $attributes["required"] = true;
                 $attributes["min"] = 0;
+                $attributes["step"] = 'any';
 
+                break;
+            case "float":
+
+                $attributes['onkeypress'] = "return (event.charCode >= 48 && event.charCode <= 57) ||  event.charCode == 46 || event.charCode == 0 ";
+                $attributes['type'] = 'text';
                 break;
 
             case "email":
