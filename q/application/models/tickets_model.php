@@ -189,6 +189,32 @@ class Tickets_model extends CI_Model
         return $this->db->update("ticket", $data);
     }
 
+    function liberacion($id)
+    {
+        $query_set = "UPDATE ticket SET
+                        status = 2 ,
+                        fecha_liberacion = CURRENT_TIMESTAMP()
+                        WHERE id_ticket ='" . $id . "' ";
+        return $this->db->query($query_set);
+    }
+
+    function resumen_liberacion()
+    {
+        $query_get = "SELECT 
+                COUNT(0)mensual ,
+                SUM(CASE WHEN fecha_liberacion BETWEEN  
+                DATE_ADD(CURRENT_DATE(), INTERVAL 1-DAYOFWEEK(CURRENT_DATE())  DAY) AND DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY) THEN 1 ELSE 0 END)semanal,
+                SUM(CASE WHEN fecha_liberacion BETWEEN  
+                     DATE_ADD(DATE_ADD(CURRENT_DATE(), INTERVAL -1 WEEK), INTERVAL 1-DAYOFWEEK(CURRENT_DATE())  DAY)
+                     AND
+                     DATE_ADD(CURRENT_DATE(), INTERVAL 1-DAYOFWEEK(CURRENT_DATE())  DAY) THEN 1 ELSE 0 END) semana_anterior
+                FROM ticket 
+                WHERE 
+                status = 2 AND 
+                fecha_liberacion BETWEEN DATE_FORMAT(now(),'%Y-%m-01') AND  DATE_ADD(CURRENT_DATE(), INTERVAL 1 DAY)";
+        return $this->db->query($query_get)->result_array($query_get);
+    }
+
     private function create_tmp_solicitud_pago_usuario($flag, $_num, $param)
     {
 
