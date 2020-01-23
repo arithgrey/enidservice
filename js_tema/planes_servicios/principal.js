@@ -13,6 +13,7 @@ let titulo_seccion = '.titulo_seccion';
 let $seccion_busqueda = $(seccion_busqueda);
 let $titulo_seccion = $(titulo_seccion);
 
+let $costo = $('.costo');
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -326,13 +327,21 @@ let muestra_input_color = (e) => {
 };
 let registra_costo_servicio = e => {
 
-    let url = "../q/index.php/api/servicio/costo/format/json/";
-    let data_send = $(".form_costo").serialize() + "&" + $.param({
-        "id_servicio": get_option("servicio")
-    });
-    request_enid("PUT", data_send, url, function (data) {
-        carga_informacion_servicio(4)
-    });
+
+    let $precio_unidad = $('.precio_unidad');
+    let $total_precio_unidad = $precio_unidad.val();
+    if (es_float($total_precio_unidad) && $total_precio_unidad > 0) {
+        let url = "../q/index.php/api/servicio/costo/format/json/";
+        let data_send = $(".form_costo").serialize() + "&" + $.param({
+            "id_servicio": get_option("servicio")
+        });
+        request_enid("PUT", data_send, url, function (data) {
+            carga_informacion_servicio(4)
+        });
+    } else {
+        next_error($precio_unidad);
+    }
+
     e.preventDefault();
 };
 
@@ -607,19 +616,26 @@ let configuracion_inicial = function () {
 
 let simula_envio = (e) => {
 
-    let costo = get_parameter(".costo");
+    let costo = $costo.val();
     let next = (get_option("modalidad") == 0 && costo == 0) ? 0 : 1;
-
+    next_error($costo, 0);
     if (next) {
 
-        showonehideone(".contenedor_categorias", ".contenedor_nombre");
-        despliega([".contenedor_top"], 0);
-        set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
-        set_option("costo", costo);
-        $(".extra_precio").text("");
-        verifica_existencia_categoria();
+        if (es_float(costo)) {
+
+            showonehideone(".contenedor_categorias", ".contenedor_nombre");
+            despliega([".contenedor_top"], 0);
+            set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
+            set_option("costo", costo);
+            $(".extra_precio").text("");
+            verifica_existencia_categoria();
+
+        } else {
+            next_error($costo);
+        }
+
     } else {
-        $("#costo").css("border", "1px solid rgb(13, 62, 86)");
+        $costo.css("border", "1px solid rgb(13, 62, 86)");
         $(".extra_precio").text("INGRESA EL PRECIO DEL PRODUCTO");
     }
     e.preventDefault();
@@ -958,7 +974,7 @@ let response_registro = (data) => {
             despliega([".btn_agregar_servicios"], 1);
         }
     } else {
-        redirect("../planes_servicios/?action=nuevo&mensaje=" + data.registro.mensaje);
+        redirect("../planes_servicios/?action=nuevo&mensaje=Verificar el precio que ingresaste");
     }
 
 };

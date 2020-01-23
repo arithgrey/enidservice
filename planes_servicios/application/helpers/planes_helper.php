@@ -94,30 +94,18 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
-        $seccion_precio = d(_d(
-
-            label(
-                'Precio MXN',
-
-                'text-uppercase h5 black strong'
-
-            ),
-
-            input(
-                [
-                    "id" => "costo",
-                    "class" => "costo precio border-top-0 border-right-0 border-left-0 border_bottom_big",
-                    "name" => "costo",
-                    "required" => true,
-                    "step" => "any",
-                    "type" => "number",
-                    "placehorder" => "880",
-                ], 0, 0
-            )
-
-        ), 'contenedor_precio mt-5 mt-md-3');
-
+        $seccion_precio = input_frm('contenedor_precio mt-5 mt-md-5',
+            'Precio MXN',
+            [
+                "id" => "costo",
+                "class" => "costo precio border-top-0 border-right-0 border-left-0 border_bottom_big",
+                "name" => "costo",
+                "required" => true,
+                "step" => "any",
+                "type" => "float",
+                "placehorder" => "880",
+            ],_text_cantidad
+        );
 
         $seccion_ciclo_facturacion = d(
             [

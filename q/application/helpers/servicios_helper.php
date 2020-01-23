@@ -1003,13 +1003,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $ext =  (is_mobile() && $num_imagenes <  1) ? 'd-none' : '';
+        $ext = (is_mobile() && $num_imagenes < 1) ? 'd-none' : '';
         $titulo = _text_(
             icon('fa fa-pencil text_nombre_servicio'),
             $nuevo_nombre_servicio
         );
 
-        $response[] = d(titulo_bloque($titulo),$ext);
+        $response[] = d(titulo_bloque($titulo), $ext);
         $response[] = form_open("", ['class' => 'form_servicio_nombre_info']);
         $response[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
 
@@ -1324,20 +1324,19 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form_costo input_costo contenedor_costo mt-5"
             ]
         );
-        $r[] = btw(
-            input(
-                [
-                    "type" => "number",
-                    "name" => "precio",
-                    "step" => "any",
-                    "class" => "form-control ",
-                    "value" => $precio
-                ]
-            ),
-            d("MXN", "mxn")
-            ,
-            "display_flex_enid"
+
+        $r[] = input_frm('', 'MXN',
+            [
+                "type" => "float",
+                "name" => "precio",
+                "step" => "any",
+                "class" => "precio_unidad",
+                "id" => "precio_unidad",
+                "value" => $precio
+            ],
+            _text_cantidad
         );
+
 
         $r[] = btn("GUARDAR", ["class" => "mt-5"]);
         $r[] = form_close(place("place_registro_costo"));
