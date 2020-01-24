@@ -105,6 +105,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "nombre",
                     "type" => "text",
                     "required" => "true",
+                    'onkeyup' => "this.value = this.value.toUpperCase();"
                 ]
             );
 
@@ -118,7 +119,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "email",
                     "required" => "true",
                     "onkeypress" => "minusculas(this);",
-                ],'Hey! no tan rápido valida tu email!'
+                ], _text_correo
 
             );
 
@@ -270,7 +271,7 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "email",
                     "required" => "true",
                     "id" => "correo",
-                ],'formato incorrecto'
+                ], _text_correo
             );
 
             $x[] = input_frm("col-lg-6 mt-5", "Password",
