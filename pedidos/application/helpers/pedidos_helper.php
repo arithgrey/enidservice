@@ -8,6 +8,7 @@ if (!function_exists('invierte_date_time')) {
         $orden = $data["orden"];
         $status = $data["status_ventas"];
         $r = $data["recibo"];
+        $id_cliente = pr($r, 'id_usuario');
         $domicilio = $data["domicilio"];
         $num_compras = $data["num_compras"];
         $id_recibo = $data["id_recibo"];
@@ -28,7 +29,8 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
         $re[] = frm_nota($id_recibo);
         $re[] = create_seccion_comentarios($data["comentarios"]);
-        $re[] = formulario_arquetipos($data['id_usuario'], $data['tipo_tag_arquetipo']);
+        $re[] = formulario_arquetipos($id_cliente, $data['tipo_tag_arquetipo']);
+        $re[] = tags_arquetipo($data['tag_arquetipo'], $data['tipo_tag_arquetipo']);
 
         $response[] = d(d($re, 12), 8);
 
@@ -63,13 +65,65 @@ if (!function_exists('invierte_date_time')) {
             );
             $submit = btn('Guardar');
 
-            $response[] = flex($input, $submit, _text_(_between, _mbt5), _8p);
+            $response[] = flex_md($input, $submit, _text_(_between, _mbt5), _8p);
             $response[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
             $response[] = hiddens(['name' => 'tipo', 'value' => $tipo]);
             $response[] = form_close();
         }
 
         return append($response);
+
+
+    }
+
+    function tags_arquetipo($tag_arquetipo, $tipo_tag_arquetipo)
+    {
+
+
+        $prioridad_1[] = d_p($tipo_tag_arquetipo[0]['tipo'], _text_('mt-3 ', _strong));
+        $prioridad_2[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 2, 'tipo'), _text_('mt-3 ', _strong));
+        $prioridad_3[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 3, 'tipo'), _text_('mt-3 ', _strong));
+        $prioridad_4[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 4, 'tipo'), _text_('mt-3 ', _strong));
+        $prioridad_5[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 5, 'tipo'), _text_('mt-3 ', _strong));
+        $prioridad_6[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 6, 'tipo'), _text_('mt-3 ', _strong));
+
+        foreach ($tag_arquetipo as $row) {
+
+            $tag = $row['tag'];
+            $id_tipo_tag_arquetipo = $row['id_tipo_tag_arquetipo'];
+            switch ($id_tipo_tag_arquetipo) {
+
+                case 1:
+                    $prioridad_1[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                case 2:
+                    $prioridad_2[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                case 3:
+                    $prioridad_3[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                case 4:
+                    $prioridad_4[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                case 5:
+                    $prioridad_5[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                case 6:
+                    $prioridad_6[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    break;
+                default:
+
+            }
+
+        }
+        $response[] = d($prioridad_1, 'border p-3 border-secondary');
+        $response[] = d($prioridad_2, 'border p-3 border-secondary');
+        $response[] = d($prioridad_3, 'border p-3 border-secondary');
+        $response[] = d($prioridad_4, 'border p-3 border-secondary');
+        $response[] = d($prioridad_5, 'border p-3 border-secondary');
+        $response[] = d($prioridad_6, 'border p-3 border-secondary');
+
+        return d($response);
 
 
     }

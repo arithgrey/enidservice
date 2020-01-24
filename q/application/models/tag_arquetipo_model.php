@@ -31,4 +31,8 @@ class Tag_arquetipo_model extends CI_Model
         return ($return_id == 1) ? $this->db->insert_id() : $insert;
     }
 
+    function q_get($params = [], $id)
+    {
+        return $this->get($params, ["id" => $id]);
+    }
 }
