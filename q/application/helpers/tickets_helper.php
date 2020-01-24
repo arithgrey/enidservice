@@ -89,7 +89,7 @@ if (!function_exists('invierte_date_time')) {
             );
     }
 
-    function format_tablero($tickets)
+    function format_tablero($tickets, $comparativa)
     {
 
         $ab[] = titulo_tablero('up_ab', "[AB]");
@@ -194,7 +194,32 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        return contaiter($response);
+
+        $contenido[] = contaiter(seccion_comparativa($comparativa),'mt-5 mb-5');
+        $contenido[] = contaiter($response);
+        return append($contenido);
+
+    }
+
+    function seccion_comparativa($comparativa)
+    {
+        $seccion_comparativa = [];
+
+        $format = 'col-sm-4 border text-center border-secondary';
+
+        foreach ($comparativa as $row) {
+
+            $totales = [
+                flex(_titulo('Logros de mes', 4), $row['mensual'] ,'flex-column'),
+                flex(_titulo('Logros de la semana pasada', 4) , $row['semana_anterior'], 'flex-column'),
+                flex(_titulo('Logros de esta semana', 4) , $row['semanal'], 'flex-column'),
+
+            ];
+
+
+            $seccion_comparativa[] = d_c($totales, $format);
+        }
+        return $seccion_comparativa;
 
     }
 
@@ -263,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = dd($solicitud, $registro, 8);
         $r[] = form_close();
 
-        return contaiter(d($r,'col-lg-6 col-lg-offset-3 mb-5 p-0'));
+        return contaiter(d($r, 'col-lg-6 col-lg-offset-3 mb-5 p-0'));
 
 
     }

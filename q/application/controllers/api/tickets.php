@@ -334,7 +334,8 @@ class Tickets extends REST_Controller
                 case 3:
 
                     $tickets = $this->tickets_model->get_tickets($param);
-                    $response = format_tablero($tickets);
+                    $comparativa = $this->comparativa();
+                    $response = format_tablero($tickets, $comparativa);
 
                     break;
 
@@ -369,10 +370,30 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "status,id_ticket")) {
-            $response = $this->tickets_model->q_up("status", $param["status"],
-                $param["id_ticket"]);
+            $status = $param["status"];
+            $id = $param["id_ticket"];
+            if ($status == 2) {
+
+                $response = $this->tickets_model->liberacion($id);
+
+            } else {
+
+                $response = $this->tickets_model->q_up("status", $status, $id);
+            }
+
         }
         $this->response($response);
+    }
+
+    function comparativa_GET()
+    {
+
+        $this->response($this->comparativa());
+    }
+
+    function comparativa()
+    {
+        return $this->tickets_model->resumen_liberacion();
     }
 
     function nota_monetaria_PUT()
