@@ -59,6 +59,7 @@ define('_close_icon', 'fa fa-times');
 define('_email_icon', 'fa fa-envelope');
 define('_editar_icon', 'fa fa fa-pencil');
 define('_tiempo_icon', 'fa fa-clock-o');
+define('_eliminar_icon', 'fa fa-times');
 
 
 

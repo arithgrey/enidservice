@@ -190,10 +190,12 @@ let response_carga_mapa = (data) => {
     recorre(".tab-content");
     $(".perfil_recurso").click(modifica_accesos_usuario);
     $('.configurar_recurso').click(configurar_recurso);
+    $('.baja_recurso').click(baja_recurso);
+
 };
 let configurar_recurso = function () {
 
-	$configurar_recurso.show();
+    $configurar_recurso.show();
     let $selector = $(this);
     let id = $selector.attr('id');
     let path = $selector.attr('path');
@@ -243,4 +245,20 @@ let response_registro_recurso = (data) => {
     $("#tab_productividad").tab("show");
     $("#tab_perfiles").tab("show");
     carga_mapa_menu();
+};
+let baja_recurso = function (e) {
+
+    let id = get_parameter_enid($(this), 'id');
+    set_option('id', id);
+    show_confirm('¿DESEAS DAR DE BAJA ESTE RECURSO?', 'Se eliminará este menú para todos los usuarios', 0, baja);
+};
+let baja = function () {
+
+    let id = get_option('id');
+    if (parseInt(id) > 0) {
+
+        let data_send = $.param({'id': id});
+        let url = "../q/index.php/api/recurso/index/format/json/";
+        request_enid("DELETE", data_send, url, response_registro_recurso);
+    }
 };

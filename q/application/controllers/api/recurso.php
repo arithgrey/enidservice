@@ -29,6 +29,20 @@ class recurso extends REST_Controller
         $this->response($response);
     }
 
+    function index_DELETE()
+    {
+
+        $param = $this->delete();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $id = $param['id'];
+            $response = $this->recurso_model->q_up('status', 0, $id);
+
+        }
+        $this->response($response);
+    }
+
     function index_PUT()
     {
 

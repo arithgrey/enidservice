@@ -907,10 +907,11 @@ class app extends CI_Controller
                             'usuarios_enid/notificaciones.js',
                             'usuarios_enid/categorias.js',
                             "js/clasificaciones.js",
+                            "alerts/jquery-confirm.js",
 
                         ],
                     "css" => [
-
+                        "confirm-alert.css",
                         "usuarios_enid_service_principal.css",
                         "template_card.css",
 
