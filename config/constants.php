@@ -30,12 +30,21 @@ define('_10auto', "col-sm-10 col-sm-offset-1 p-0");
 
 define('_6p', "col-sm-6 p-0");
 define('_4p', "col-sm-4 p-0");
+define('_8p', "col-sm-8 p-0");
 define('_12p', "col-sm-12 p-0");
+
+define('_6', "col-sm-6");
+define('_4', "col-sm-4");
+define('_8', "col-sm-8");
+define('_12', "col-sm-12");
+
 
 
 define('_between', 'justify-content-between align-items-center w-100');
 define('_between_md', 'justify-content-between align-items-center w-100 text-center');
 define('_between_end', 'justify-content-between align-items-end w-100');
+define('_flex_right', 'justify-content-end');
+
 
 define('_mbt5', 'mt-5 mb-5');
 
@@ -50,7 +59,7 @@ define('_strong', 'text-uppercase black font-weight-bold');
 define('_t1', 'h3 text-uppercase black font-weight-bold');
 define('_t2', 'h4 text-uppercase black font-weight-bold');
 define('_t3', 'h4 text-uppercase black');
-define('_t4', 'h5 text-uppercase black font-weight-bold');
+define('_t4', 'h4 text-uppercase black font-weight-bold');
 define('_t5', 'h5 text-uppercase black ');
 
 

@@ -24,4 +24,5 @@ let response_costo = data => {
 let muestra_formulario_costo = () => {
 
     showonehideone(".contenedor_form_costos_operacion", ".contenedor_costos_registrados");
+    $('.link_agregar').addClass('d-none').removeClass('d-block');
 };

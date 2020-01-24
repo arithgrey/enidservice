@@ -280,7 +280,12 @@ class Home extends CI_Controller
 
         $data = $this->app->cssJs($data, "pedidos");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
-        $this->table->set_heading(['MONTO', 'CONCEPTO', 'REGISTO', '']);
+        $this->table->set_heading([
+            _titulo('MONTO', 4),
+            _titulo('CONCEPTO', 4),
+            _titulo('REGISTO', 4),
+            _titulo('')
+        ]);
         $total = 0;
         foreach ($costos_operacion as $row) {
 
@@ -289,23 +294,20 @@ class Home extends CI_Controller
             $icon = icon("fa fa-times ",
                 ["onclick" => "confirma_eliminar_concepto('{$id}')"]);
             $this->table->add_row(array(
-                $row["monto"] . " MXN",
+                money($row["monto"]),
                 $row["tipo"],
-                $row["fecha_registro"],
+                format_fecha($row["fecha_registro"], 1),
                 $icon,
             ));
         }
 
         $tb = $this->table->generate();
         $utilidad = $param["saldado"] - $total;
-        $resumen = add_text(
-            d("TOTAL EN GASTOS: " . $total . " MXN")
-            ,
-            d("SALDADO: " . $param["saldado"] . " MXN")
-            ,
-            h("UTILIDAD:" . $utilidad . "MXN", 3, "strong")
 
-        );
+        $seccion[] = d(flex("TOTAL EN GASTOS: ", money($total),_between));
+        $seccion[] = d(flex("SALDADO: " , money($param["saldado"]),_between));
+        $seccion[] = d(flex("utilidad:", money($utilidad),_between,_t2,_t2));
+        $totales =  d($seccion,'d-flex flex-column');
 
         $recibo = $this->get_ppfp($param["costos_operacion"]);
         $id_servicio = (es_data($recibo)) ? pr($recibo, "id_servicio") : 0;
@@ -313,7 +315,7 @@ class Home extends CI_Controller
 
         $response = get_format_costo_operacion(
             $tb,
-            $resumen,
+            $totales,
             $this->get_tipo_costo_operacion(),
             $param["costos_operacion"],
             $path,
