@@ -1,4 +1,5 @@
 "use strict";
+let $form_tag_arquetipo = $('.form_tag_arquetipo');
 $(document).ready(() => {
 
     despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
@@ -29,7 +30,8 @@ $(document).ready(() => {
 
     });
 
-
+    
+    $form_tag_arquetipo.submit(registro_arquetipo);
 });
 let editar_horario_entrega = function (e) {
 
@@ -635,3 +637,28 @@ let r_agenda = function (data) {
         redirect("../");
     }
 };
+
+let registro_arquetipo = function (e) {
+
+    e.preventDefault();
+
+    let data_send = $(this).serialize();
+    let str = $(this).find('input').val();
+    let $selector_avertencia = $(this).find('input').next('label').next('div');
+    if (str.length) {
+
+        $selector_avertencia.addClass('d-none');
+        bloquea_form('.form_tag_arquetipo');
+        let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
+        request_enid("POST", data_send, url, response_tag_arquetipo);
+
+    } else {
+
+        $selector_avertencia.removeClass('d-none');
+    }
+
+
+}
+let response_tag_arquetipo = function () {
+    redirect('');
+}

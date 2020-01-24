@@ -304,10 +304,10 @@ class Home extends CI_Controller
         $tb = $this->table->generate();
         $utilidad = $param["saldado"] - $total;
 
-        $seccion[] = d(flex("TOTAL EN GASTOS: ", money($total),_between));
-        $seccion[] = d(flex("SALDADO: " , money($param["saldado"]),_between));
-        $seccion[] = d(flex("utilidad:", money($utilidad),_between,_t2,_t2));
-        $totales =  d($seccion,'d-flex flex-column');
+        $seccion[] = d(flex("TOTAL EN GASTOS: ", money($total), _between));
+        $seccion[] = d(flex("SALDADO: ", money($param["saldado"]), _between));
+        $seccion[] = d(flex("utilidad:", money($utilidad), _between, _t2, _t2));
+        $totales = d($seccion, 'd-flex flex-column');
 
         $recibo = $this->get_ppfp($param["costos_operacion"]);
         $id_servicio = (es_data($recibo)) ? pr($recibo, "id_servicio") : 0;
@@ -441,6 +441,7 @@ class Home extends CI_Controller
                     "num_compras" => $num_compras,
                     "servicio" => $servicio,
                     "cupon" => $cupon,
+                    "tipo_tag_arquetipo" => $this->get_tipo_tag_arqquetipo()
 
                 ];
 
@@ -512,4 +513,8 @@ class Home extends CI_Controller
             "recordatorio/index/format/json/", ["id_recibo" => $id_recibo]);
     }
 
+    private function get_tipo_tag_arqquetipo()
+    {
+        return $this->app->api("tipo_tag_arquetipo/index/format/json/");
+    }
 }
