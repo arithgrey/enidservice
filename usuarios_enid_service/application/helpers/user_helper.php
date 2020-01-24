@@ -237,6 +237,7 @@ if (!function_exists('invierte_date_time')) {
     function form_recurso()
     {
 
+
         $response[] = _titulo('Recursos');
         $response[] = form_open('', ['class' => 'frm_recurso']);
         $response[] = input_frm('mt-5', 'Nombre',

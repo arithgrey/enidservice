@@ -30,20 +30,21 @@ if (!function_exists('invierte_date_time')) {
             $tr[] = format_link("Ver sitio",
                 [
                     "href" => $path,
-                    "class" => 'blue_enid_background white ml-auto col-md-2',
+                    "class" => 'blue_enid_background white ml-auto col-md-2  mr-md-3',
                     "id" => $id_recurso,
                     "target" => '_black'
                 ]
             );
             $tr[] = tab(icon(_editar_icon), '#configurar_recurso',
                 [
-                    'class' => 'configurar_recurso',
+                    'class' => 'configurar_recurso mr-2',
                     'path' => $path,
                     'nombre_recurso' => $nombre_recurso,
                     'id' => $id_recurso
                 ]
             );
 
+            $tr[] = icon(_text_('baja_recurso', _eliminar_icon), ['id' => $id_recurso]);
             $response[] = d($tr, 'd-flex mt-3');
             $b++;
         }

@@ -32,6 +32,7 @@ class Recurso_model extends CI_Model
             perfil_recurso  pr
             ON  r.idrecurso  =  pr.idrecurso 
             WHERE 
+            r.status = 1 AND
             r.idrecurso = pr.idrecurso AND 
             pr.idperfil = $id_perfil  
             ORDER BY order_negocio ASC";
