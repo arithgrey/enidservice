@@ -441,7 +441,8 @@ class Home extends CI_Controller
                     "num_compras" => $num_compras,
                     "servicio" => $servicio,
                     "cupon" => $cupon,
-                    "tipo_tag_arquetipo" => $this->get_tipo_tag_arqquetipo()
+                    "tipo_tag_arquetipo" => $this->get_tipo_tag_arqquetipo(),
+                    "tag_arquetipo" => $this->tag_arquetipo($id_usuario),
 
                 ];
 
@@ -516,5 +517,11 @@ class Home extends CI_Controller
     private function get_tipo_tag_arqquetipo()
     {
         return $this->app->api("tipo_tag_arquetipo/index/format/json/");
+    }
+
+    private function tag_arquetipo($id_usuario)
+    {
+        $q = ['usuario' => $id_usuario];
+        return $this->app->api("tag_arquetipo/index/format/json/", $q);
     }
 }

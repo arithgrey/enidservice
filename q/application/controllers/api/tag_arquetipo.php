@@ -12,7 +12,23 @@ class Tag_arquetipo extends REST_Controller
 
     function index_GET()
     {
-        $this->response($this->tag_arquetipo_model->get());
+
+
+        $param = $this->get();
+        $es_usuario = array_key_exists('usuario', $param);
+        if ($es_usuario) {
+
+
+            $response = $this->tag_arquetipo_model->get(
+                [], ['id_usuario' => $param['usuario']], 100,'id_tipo_tag_arquetipo','ASC');
+
+        } else {
+
+            $response = $this->tag_arquetipo_model->get();
+        }
+        $this->response($response);
+
+
     }
 
     function index_POST()
