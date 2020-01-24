@@ -1,5 +1,7 @@
 "use strict";
+let $num_ciclos = $('#num_ciclos');
 $(document).ready(function () {
+
 
     set_option([
         "servicio", get_parameter(".servicio"),
@@ -13,13 +15,17 @@ $(document).ready(function () {
     $(".talla").click(agregar_talla);
     $(".descripcion_producto ").click(tab_descripcion);
     $(".descripcion_detallada ").click(tab_descripcion_avanzada);
+    $num_ciclos.change(articulos_seleccionados);
 
 
 });
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
-    let data_send = {"id_servicio": get_option("servicio"), "q": get_parameter(".qservicio")};
+    let data_send = {
+        "id_servicio": get_option("servicio"),
+        "q": get_parameter(".qservicio")
+    };
     request_enid("GET", data_send, url, response_carga_productos);
 };
 
@@ -155,3 +161,10 @@ let tab_descripcion_avanzada = function () {
     $(".descripcion_detallada").removeClass("border");
 
 };
+let articulos_seleccionados = function () {
+
+    let numero_articulos = this.value;
+    if (parseInt(numero_articulos) > 0) {
+        $('.num_ciclos').val(numero_articulos);
+    }
+}
