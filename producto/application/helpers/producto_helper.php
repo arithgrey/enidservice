@@ -9,9 +9,9 @@ if (!function_exists('invierte_date_time')) {
         $a = _text_(
             _titulo("SELECCIONA TU TIPO DE ENTREGA")
             ,
-            mensajeria($id_servicio, $orden_pedido)
-            ,
             punto_entrega($id_servicio, $orden_pedido)
+            ,
+            mensajeria($id_servicio, $orden_pedido)
         );
 
         $b = pre_pedido(
@@ -188,8 +188,7 @@ if (!function_exists('invierte_date_time')) {
                     $es_servicio,
                     $existencia,
                     $q2,
-                    $tiempo_entrega,
-                    $proceso_compra
+                    $tiempo_entrega
                 ) : $response;
 
         else:
@@ -220,7 +219,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_frm($id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega, $proceso_compra)
+    function get_frm($id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
     {
 
         $ext = (prm_def($_GET, "debug")) ? "&debug=1" : "";
@@ -241,8 +240,35 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = $tiempo_entrega;
         $r[] = btn("Lo quiero", ["class" => "text-left mt-5 text-uppercase"]);
+
         $r[] = form_close();
-        return d(append($r), "contenedor_form");
+
+
+        $path = _text("../puntos_medios/?producto=", $id_servicio);
+        $r[] = '<form class="form_pre_puntos_medios" action="' . $path . '" method="POST">';
+        $r[] = hiddens([
+            "class" => "servicio",
+            "name" => "servicio",
+            "value" => $id_servicio
+        ]);
+        $r[] = hiddens([
+            "class" => "id_servicio",
+            "name" => "id_servicio",
+            "value" => $id_servicio
+        ]);
+
+        $r[] = hiddens([
+            "class" => "num_ciclos",
+            "name" => "num_ciclos",
+            "value" => 1
+        ]);
+        $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
+        $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
+        $r[] = btn("Pago contra entrega", ['class' => 'mt-2']);
+        $r[] = form_close();
+
+
+        return d($r, "contenedor_form");
 
 
     }
@@ -602,7 +628,7 @@ if (!function_exists('invierte_date_time')) {
                     text_icon("fa fa-long-arrow-right", "Lo deseo ", [], 0)
                     ,
                     [
-                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark mt-2',
+                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark ',
 
                     ]
 
@@ -646,7 +672,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(d("PAGO CONTRA ENTREGA "), "text");
         $response = d($r,
             [
-                "class" => " cursor_pointer p-4 bg-light mh-selector d-flex flex-column justify-content-center selector_entrega",
+                "class" => " cursor_pointer p-4 bg-light mh-selector d-flex flex-column justify-content-center selector_entrega mt-5",
                 "onclick" => "carga_opcion_entrega(1, " . $id_servicio . " , " . $orden_pedido . " );"
             ]
         );
