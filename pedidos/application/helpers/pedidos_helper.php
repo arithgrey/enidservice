@@ -28,6 +28,7 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
         $re[] = frm_nota($id_recibo);
         $re[] = create_seccion_comentarios($data["comentarios"]);
+        $re[] = formulario_arquetipos($data['id_usuario'], $data['tipo_tag_arquetipo']);
 
         $response[] = d(d($re, 12), 8);
 
@@ -38,6 +39,38 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens_detalle($r);
 
         return d($response, _10auto);
+
+    }
+
+    function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo)
+    {
+
+        $response[] = _titulo('tags arquetipos');
+        foreach ($tipo_tag_arquetipo as $row) {
+
+            $descripcion = $row['tipo'];
+            $tipo = $row['id_tipo_tag_arquetipo'];
+            $clase_form = 'form_tag_arquetipo mt-5';
+            $response[] = form_open("", ["class" => $clase_form]);
+            $class = _text_('tag', $tipo);
+            $input = input_frm('', $descripcion,
+                [
+                    'class' => $class,
+                    'id' => $class,
+                    'name' => 'tag'
+
+                ], '¿Falta este dato no?'
+            );
+            $submit = btn('Guardar');
+
+            $response[] = flex($input, $submit, _text_(_between, _mbt5), _8p);
+            $response[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
+            $response[] = hiddens(['name' => 'tipo', 'value' => $tipo]);
+            $response[] = form_close();
+        }
+
+        return append($response);
+
 
     }
 
@@ -445,7 +478,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $r[] = row_d($link);
-        $r[] = hr('mt-5 mb-5',0);
+        $r[] = hr('mt-5 mb-5', 0);
         $r[] = d(
             frm_costos(
                 $tipo_costos,
@@ -477,9 +510,9 @@ if (!function_exists('invierte_date_time')) {
             $seccion[] = d(a_enid(img($path),
                 path_enid("pedidos_recibo", $r["id_proyecto_persona_forma_pago"])));
 
-            $seccion[] = _titulo(flex("TOTAL ", money($monto_a_pagar), _flex_right,'mr-md-4'));
-            $seccion[] = _titulo(flex("CUBIERTO", money($r["saldo_cubierto"])  ,_flex_right,'mr-md-4'), 5);
-            $seccion[] = _titulo(flex("ARTÍCULOS", $articulos, _flex_right,'mr-md-4'), 5);
+            $seccion[] = _titulo(flex("TOTAL ", money($monto_a_pagar), _flex_right, 'mr-md-4'));
+            $seccion[] = _titulo(flex("CUBIERTO", money($r["saldo_cubierto"]), _flex_right, 'mr-md-4'), 5);
+            $seccion[] = _titulo(flex("ARTÍCULOS", $articulos, _flex_right, 'mr-md-4'), 5);
 
             if ($r["cancela_cliente"] > 0 || $r["se_cancela"] > 0 || $r["status"] == 10) {
 
