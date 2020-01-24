@@ -3126,6 +3126,12 @@ function d_row($contenido)
     return d($contenido, 13);
 }
 
+function row_d($contenido)
+{
+
+    return d(d($contenido, 13), 12);
+}
+
 function d_c($items = [], $attr)
 {
 
@@ -3197,3 +3203,4 @@ function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
     return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
 
 }
+

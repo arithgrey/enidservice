@@ -30,8 +30,6 @@
 }
 
 
-
-
 .status_compra {
     background: #071929;
 
@@ -153,10 +151,12 @@
     font-weight: bold;
     color: #000000;
 }
-.pedido_img{
+
+.pedido_img {
     width: 50px;
     height: 50px;
 }
+
 /*Extra small devices (portrait phones, less than 576px)*/
 @media (max-width: 575.98px) {
 
@@ -164,11 +164,13 @@
 
         border: none !important;
     }
-    .estado_compra{
+
+    .estado_compra {
         font-size: 1.5em;
     }
-    .pedido_img{
-        width: 230px!important;
+
+    .pedido_img {
+        width: 230px !important;
         height: auto;
     }
 

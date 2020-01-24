@@ -434,62 +434,62 @@ if (!function_exists('invierte_date_time')) {
     )
     {
 
-        $r[] = btw(
-
-            h("COSTOS DE OPERACIÓN", 3, "strong")
-            ,
-            $table_costos
-            ,
-
-            "bottom_100"
-        );
+        $r[] = _titulo("COSTOS DE OPERACIÓN");
+        $r[] = d($table_costos, 'mt-5 mb-5');
         $r[] = d($resumen);
-
-        $r[] = format_link(
+        $link = format_link(
             "Agregar",
             [
                 "onclick" => "muestra_formulario_costo();",
-                "class" => "mt-5 col-lg-3",
+                "class" => "mt-5 col-md-3 link_agregar",
             ]
         );
-
+        $r[] = row_d($link);
+        $r[] = hr('mt-5 mb-5',0);
         $r[] = d(
             frm_costos(
                 $tipo_costos,
                 $id_recibo,
                 $costos_operacion
-            ), "display_none contenedor_form_costos_operacion"
+            ), "d-none contenedor_form_costos_operacion col-lg-12 p-0 "
         );
-        $response = hrz(append($r), format_img_recibo($path, $recibo), 8);
+        $seccion = append($r);
 
-        return d($response, 10, 1);
+        $response = flex_md(
+            $seccion,
+            format_img_recibo($path, $recibo),
+            '', _8, _4
+        );
+
+        return d($response, _text_(_10auto, 'mt-5'));
 
 
     }
 
     function format_img_recibo($path, $r)
     {
-        $response = "";
+        $response = [];
         if (es_data($r)) {
 
             $r = $r[0];
             $articulos = $r["num_ciclos_contratados"];
             $monto_a_pagar = $r["monto_a_pagar"] * $articulos;
-            $r[] = d(a_enid(img($path),
+            $seccion[] = d(a_enid(img($path),
                 path_enid("pedidos_recibo", $r["id_proyecto_persona_forma_pago"])));
-            $r[] = h(add_text("TOTAL ", $monto_a_pagar, "MXN"), 4, "strong");
-            $r[] = h(add_text("CUBIERTO", $r["saldo_cubierto"] . "MXN"), 5);
-            $r[] = h(add_text("ARTÍCULOS", $articulos, 1), 5);
+
+            $seccion[] = _titulo(flex("TOTAL ", money($monto_a_pagar), _flex_right,'mr-md-4'));
+            $seccion[] = _titulo(flex("CUBIERTO", money($r["saldo_cubierto"])  ,_flex_right,'mr-md-4'), 5);
+            $seccion[] = _titulo(flex("ARTÍCULOS", $articulos, _flex_right,'mr-md-4'), 5);
 
             if ($r["cancela_cliente"] > 0 || $r["se_cancela"] > 0 || $r["status"] == 10) {
 
-                $r[] = h("ORDEN CANCELADA", 3, "red_enid strong");
+                $seccion[] = _titulo("ORDEN CANCELADA", 3, "red_enid");
 
             }
-            $response = d(append($r), "text-right");
+            $response[] = d($seccion, "text-right mt-5");
         }
 
-        return $response;
+        return append($response);
 
     }
 
@@ -990,35 +990,35 @@ if (!function_exists('invierte_date_time')) {
             3), 8, 1);
         if (es_data($costos_registro)) {
 
-            $r[] = h("Gasto", 3, "strong text-uppercase");
-            $r[] = form_open("", ["class" => "form_costos letter-spacing-5 mt-5"],
+            $r[] = d(_titulo("Gasto", 4, 'mt-5'));
+            $form[] = form_open("", ["class" => "form_costos letter-spacing-5 mt-5"],
                 ["recibo" => $id_recibo]);
 
-            $r[] =
-                input_frm(6, "MONTO GASTADO",
-                    [
-                        "type" => "number",
-                        "required" => true,
-                        "class" => "precio",
-                        "name" => "costo",
-                        "id" => "precio",
-                    ]
-                );
+            $input_monto = input_frm('', "MONTO GASTADO",
+                [
+                    "type" => "number",
+                    "required" => true,
+                    "class" => "precio",
+                    "name" => "costo",
+                    "id" => "precio",
+                ]
+            );
 
 
-            $r[] =
-                create_select(
-                    $costos_registro,
-                    "tipo",
-                    "id_tipo_costo form-control p-0 col-lg-5 select_gastos ml-2",
-                    "tipo",
-                    "tipo",
-                    "id_tipo_costo"
-                );
+            $select_costo = create_select(
+                $costos_registro,
+                "tipo",
+                "id_tipo_costo form-control select_gastos ml-2",
+                "tipo",
+                "tipo",
+                "id_tipo_costo"
+            );
 
+            $form[] = flex_md($input_monto, $select_costo, _between_md, _4p);
 
-            $r[] = d(btn("AGREGAR"), "mt-5 col-lg-6 p-0");
-            $r[] = form_close(place("notificacion_registro_costo"));
+            $form[] = d(btn("AGREGAR"), "mt-5 col-md-3 pull-right p-0");
+            $form[] = form_close(place("notificacion_registro_costo"));
+            $r[] = d($form);
             $response = append($r);
         }
 
