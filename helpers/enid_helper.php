@@ -284,7 +284,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                     $attributes["onpaste"] = "paste_nombre();";
                     if (prm_def($attributes, 'no_validar') < 1) {
                         $attributes["class"] = (array_key_exists("class", $attributes)) ?
-                            (_text_($attributes["class"], " validar_nombre ")) : " validar_nombre ";
+                            (_text_($attributes["class"], "validar_nombre ")) : " validar_nombre ";
                     }
                     $attributes["minlength"] = 3;
                 }
