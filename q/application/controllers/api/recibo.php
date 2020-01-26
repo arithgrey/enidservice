@@ -1031,4 +1031,12 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function stags_arquetipos_GET()
+    {
+
+        $response = $this->recibo_model->sin_tags_arquetipo();
+        $this->response($response);
+
+    }
+
 }

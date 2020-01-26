@@ -38,6 +38,7 @@ class productividad extends REST_Controller
             "respuestas" => $this->get_respuestas($id_usuario),
             "compras_sin_cierre" => $this->pendientes_ventas_usuario($id_usuario),
             "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
+            "clientes_sin_tags_arquetipos" => $this->get_stag(),
             "tareas" => $this->get_tareas($id_usuario),
         ];
 
@@ -216,6 +217,11 @@ class productividad extends REST_Controller
         return $this->app->api("costo_operacion/scostos/format/json/", ["id_usuario" => $id_usuario]);
     }
 
+    private function get_stag()
+    {
+        return $this->app->api("recibo/stags_arquetipos/format/json/");
+    }
+
     function get_tareas($id_usuario)
     {
         return $this->app->api("tickets/pendientes/format/json/", ["id_usuario" => $id_usuario]);
@@ -232,7 +238,7 @@ class productividad extends REST_Controller
             "tipo_entrega" => 0,
             "status_venta" => 14,
             "tipo_orden" => 1,
-            "fecha_inicio" => add_date(now_enid(), - $dias),
+            "fecha_inicio" => add_date(now_enid(), -$dias),
             "fecha_termino" => now_enid()
         ];
 
