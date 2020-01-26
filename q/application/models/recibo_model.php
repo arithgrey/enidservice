@@ -325,7 +325,7 @@ class Recibo_model extends CI_Model
 
         $where = $this->get_where_tiempo($param);
         $tipo = $param["tipo"];
-        $ext = ($tipo == 9) ? ' saldo_cubierto > 0 ' : 'status = "'.$tipo.'"  ';
+        $ext = ($tipo == 9) ? ' saldo_cubierto > 0 ' : 'status = "' . $tipo . '"  ';
         $query_get = "SELECT 
                       * 
                     FROM 
@@ -1008,4 +1008,24 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+
+    function sin_tags_arquetipo()
+    {
+        $query_get = "SELECT 
+                        id_proyecto_persona_forma_pago id_recibo, 
+                        saldo_cubierto 
+                        FROM 
+                        proyecto_persona_forma_pago  p  
+                        WHERE                    
+                        saldo_cubierto >  0 
+                        AND 
+                        status != 10
+                        AND
+                        id_usuario 
+                        NOT IN (SELECT id_usuario from tag_arquetipo group by id_usuario)
+                        ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5 ";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 }   

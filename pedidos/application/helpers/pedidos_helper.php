@@ -54,12 +54,13 @@ if (!function_exists('invierte_date_time')) {
             $tipo = $row['id_tipo_tag_arquetipo'];
             $clase_form = 'form_tag_arquetipo mt-5';
             $response[] = form_open("", ["class" => $clase_form]);
-            $class = _text_('tag', $tipo);
+            $class = _text('tag', $tipo);
             $input = input_frm('', $descripcion,
                 [
                     'class' => $class,
                     'id' => $class,
-                    'name' => 'tag'
+                    'name' => 'tag',
+                    'onkeyup' => "this.value = this.value.toUpperCase();"
 
                 ], '¿Falta este dato no?'
             );

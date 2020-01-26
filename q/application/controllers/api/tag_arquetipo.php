@@ -63,7 +63,6 @@ class Tag_arquetipo extends REST_Controller
 
         }
         $this->response($response);
-        
-    }
 
+    }
 }

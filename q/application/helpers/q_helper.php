@@ -502,9 +502,9 @@ if (!function_exists('invierte_date_time')) {
             $contenido[] = d($imagen);
             $contenido[] = flex(
                 format_fecha($row["fecha_registro"]),
-                    _titulo($persona,4),
+                _titulo($persona, 4),
                 'flex-column'
-                );
+            );
 
             if ($data["modo_edicion"] > 0):
                 $contenido[] = tab(
@@ -1104,6 +1104,44 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function add_usuarios_sin_tags_arquetipos($recibos)
+    {
+
+        $r = [];
+        $f = 0;
+        foreach ($recibos as $row) {
+
+            $id_recibo = $row["id_recibo"];
+            $saldo_cubierto = $row["saldo_cubierto"];
+
+
+            $text = flex(
+                icon("fa-inbox"),
+                "SIN TAGS ARQUETIPO",
+                "top_10 justify-content-between  mh_notificaciones border-bottom",
+                "",
+                "strong black");
+
+
+            $r[] = a_enid($text,
+                [
+                    "href" => path_enid('pedidos_recibo', $id_recibo),
+                ]
+            );
+
+            $f++;
+        }
+
+        return
+            [
+                "html" => append($r),
+                "flag" => $f,
+
+            ];
+
+
+    }
+
     function add_valoraciones_sin_leer($num, $id_usuario)
     {
         $lista = "";
@@ -1489,6 +1527,10 @@ if (!function_exists('invierte_date_time')) {
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
         $f = $f + $recibos_sin_costos_operacion["flag"];
         $lista[] = $recibos_sin_costos_operacion["html"];
+
+        $usuarios_sin_tag_arquetipos = add_usuarios_sin_tags_arquetipos($info["clientes_sin_tags_arquetipos"]);
+        $f = $f + $usuarios_sin_tag_arquetipos["flag"];
+        $lista[] = $usuarios_sin_tag_arquetipos["html"];
 
 
         $recordatorios = add_recordatorios($info["recordatorios"]);
