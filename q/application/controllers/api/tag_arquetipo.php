@@ -20,7 +20,7 @@ class Tag_arquetipo extends REST_Controller
 
 
             $response = $this->tag_arquetipo_model->get(
-                [], ['id_usuario' => $param['usuario']], 100,'id_tipo_tag_arquetipo','ASC');
+                [], ['id_usuario' => $param['usuario']], 100, 'id_tipo_tag_arquetipo', 'ASC');
 
         } else {
 
@@ -50,6 +50,20 @@ class Tag_arquetipo extends REST_Controller
 
         $this->response($response);
 
+    }
+
+    function index_DELETE()
+    {
+
+        $param = $this->delete();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $response = $this->tag_arquetipo_model->q_delete($param["id"]);
+
+        }
+        $this->response($response);
+        
     }
 
 }

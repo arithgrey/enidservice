@@ -86,42 +86,53 @@ if (!function_exists('invierte_date_time')) {
         $prioridad_4[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 4, 'tipo'), _text_('mt-3 ', _strong));
         $prioridad_5[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 5, 'tipo'), _text_('mt-3 ', _strong));
         $prioridad_6[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 6, 'tipo'), _text_('mt-3 ', _strong));
+        $prioridad_7[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 7, 'tipo'), _text_('mt-3 ', _strong));
 
         foreach ($tag_arquetipo as $row) {
 
+
             $tag = $row['tag'];
             $id_tipo_tag_arquetipo = $row['id_tipo_tag_arquetipo'];
+
+            $base = 'ml-5 f9';
+
+            $str = _text_(text_icon(_text_(_eliminar_icon, 'baja_tag_arquetipo'), _text_('-', $tag), ['id' => $row['id']], 0));
             switch ($id_tipo_tag_arquetipo) {
 
                 case 1:
-                    $prioridad_1[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_1[] = li($str, $base);
                     break;
                 case 2:
-                    $prioridad_2[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_2[] = li($str, $base);
                     break;
                 case 3:
-                    $prioridad_3[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_3[] = li($str, $base);
                     break;
                 case 4:
-                    $prioridad_4[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_4[] = li($str, $base);
                     break;
                 case 5:
-                    $prioridad_5[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_5[] = li($str, $base);
                     break;
                 case 6:
-                    $prioridad_6[] = li(_text_('-', $tag), 'ml-5 f9 ');
+                    $prioridad_6[] = li($str, $base);
+                    break;
+                case 7:
+                    $prioridad_7[] = li($str, $base);
                     break;
                 default:
 
             }
 
         }
-        $response[] = d($prioridad_1, 'border p-3 border-secondary');
-        $response[] = d($prioridad_2, 'border p-3 border-secondary');
-        $response[] = d($prioridad_3, 'border p-3 border-secondary');
-        $response[] = d($prioridad_4, 'border p-3 border-secondary');
-        $response[] = d($prioridad_5, 'border p-3 border-secondary');
-        $response[] = d($prioridad_6, 'border p-3 border-secondary');
+        $ext = 'border p-3 border-secondary';
+        $response[] = d($prioridad_1, $ext);
+        $response[] = d($prioridad_2, $ext);
+        $response[] = d($prioridad_3, $ext);
+        $response[] = d($prioridad_4, $ext);
+        $response[] = d($prioridad_5, $ext);
+        $response[] = d($prioridad_6, $ext);
+        $response[] = d($prioridad_7, $ext);
 
         return d($response);
 

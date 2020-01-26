@@ -1,5 +1,6 @@
 "use strict";
 let $form_tag_arquetipo = $('.form_tag_arquetipo');
+let $tag_arquetipo = $('.baja_tag_arquetipo');
 $(document).ready(() => {
 
     despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
@@ -30,8 +31,8 @@ $(document).ready(() => {
 
     });
 
-    
     $form_tag_arquetipo.submit(registro_arquetipo);
+    $tag_arquetipo.click(baja_tag_arquetipo);
 });
 let editar_horario_entrega = function (e) {
 
@@ -661,4 +662,19 @@ let registro_arquetipo = function (e) {
 }
 let response_tag_arquetipo = function () {
     redirect('');
+}
+let baja_tag_arquetipo = function () {
+
+    set_option('tag_arquetipo', get_parameter_enid($(this), 'id'));
+    show_confirm("¿QUIERES QUITAR ESTA DESCRIPCIÓN?", "", 0, baja_tag);
+}
+let baja_tag = function () {
+
+    let tag_arquetipo = get_option('tag_arquetipo');
+    if (parseInt(tag_arquetipo) > 0) {
+
+        let data_send = $.param({'id': tag_arquetipo});
+        let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
+        request_enid("DELETE", data_send, url, response_tag_arquetipo);
+    }
 }
