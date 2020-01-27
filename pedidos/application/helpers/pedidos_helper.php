@@ -47,7 +47,7 @@ if (!function_exists('invierte_date_time')) {
     function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo)
     {
 
-        $response[] = _titulo('tags arquetipos');
+        $response[] = _titulo('tags arquetipos', 4);
         foreach ($tipo_tag_arquetipo as $row) {
 
             $descripcion = $row['tipo'];
@@ -72,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = form_close();
         }
 
-        return append($response);
+        return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
 
 
     }
@@ -135,7 +135,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($prioridad_6, $ext);
         $response[] = d($prioridad_7, $ext);
 
-        return d($response);
+        return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
 
 
     }
@@ -1705,28 +1705,21 @@ if (!function_exists('invierte_date_time')) {
         $nota = [];
         if (es_data($data)) {
 
-            $nota[] = h("Seguimiento al cliente", 4, "strong row mt-5 mb-5");
+            $nota[] = _titulo("Seguimiento al cliente", 4);
         }
 
         foreach ($data as $row) {
 
 
-            $n = dd_p(
-                text_icon("fa fa-clock-o",
-                    date_format(date_create($row["fecha_registro"]),
-                        'd M Y H:i:s'))
-                ,
-                $row["comentario"]
-                ,
-                4
-            );
-
-            $nota[] = d($n, "row mt-4 d-flex align-items-center  border-bottom");
+            $registro = date_format(date_create($row["fecha_registro"]), 'd M Y H:i:s');
+            $seccion_registro = text_icon("fa fa-clock-o", $registro);
+            $nota[] = flex($seccion_registro, $row['comentario'], 'mt-3 mb-3', _4p, 'col-sm-8 text-right');
 
         }
 
 
-        return append($nota);
+        $response = d(d($nota, 12), 'row mt-5 mb-5 border');
+        return es_data($data) ? $response : '';
 
 
     }
@@ -1735,21 +1728,21 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $list = [];
+        $response = [];
         if (es_data($recordatorios)) {
 
-            $list[] = h("Recordatorios", 4, "strong row mt-5 mb-5");
+            $response[] = _titulo("Recordatorios", 4);
         }
         foreach ($recordatorios as $row) {
 
             $id_recordatorio = $row["id_recordatorio"];
             $status = ($row["status"] > 0) ? 0 : 1;
 
-
             $config = [
                 "type" => "checkbox",
                 "class" => "item_recordatorio checkbox_enid",
-                "onclick" => "modifica_status_recordatorio({$id_recordatorio} , {$status})",
+                "onclick" =>
+                    "modifica_status_recordatorio({$id_recordatorio} , {$status})",
             ];
 
             if ($row["status"] > 0) {
@@ -1758,34 +1751,25 @@ if (!function_exists('invierte_date_time')) {
                     "checked" => true,
                     "type" => "checkbox",
                     "class" => "checkbox_enid item_recordatorio",
-                    "onclick" => "modifica_status_recordatorio({$id_recordatorio} , {$status})",
+                    "onclick" =>
+                        "modifica_status_recordatorio({$id_recordatorio} , {$status})",
                 ];
 
             }
 
+            $item = [];
+            $item[] = flex(input($config), $row["descripcion"], _between);
+            $registro =
+                date_format(date_create($row["fecha_cordatorio"]), 'd M Y H:i:s');
 
-            $a = hrz(
-                input($config),
-                d($row["descripcion"]) .
-                d(
-                    text_icon(
-                        "fa fa-clock-o",
-                        date_format(date_create($row["fecha_cordatorio"]),
-                            'd M Y H:i:s')
-                    )
-                    ,
-                    "text-right"
-                )
+            $item[] = d($registro, 'text-right');
 
-                , 2,
-                "flex row d-flex align-items-center  border-bottom mt-5 mb-5");
-
-
-            $list[] = $a;
+            $response[] = d($item, 'mt-4 border-bottom');
 
         }
 
-        return append($list);
+        $response = d(d($response, 12), 'row mt-5 mb-5 border');
+        return es_data($recordatorios) ? $response : '';
     }
 
     function create_seccion_tipificaciones($data)
@@ -2192,15 +2176,15 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($cupon)) {
 
             $valor = pr($cupon, 'valor');
-            $contenido[] = d(_titulo("cupón promocional", 1));
+            $contenido[] = d(_titulo("cupón promocional",4));
             $ext = _text_(_registro, 'mt-5');
             $contenido[] = d(pr($cupon, 'cupon'), $ext);
 
             $contenido[] = d("Valido por", 'mt-4');
             $contenido[] = d(money($valor), 'h4');
 
-            $contenido = d($response, 'col-sm-8 mx-auto text-center');
-            $response[] = bloque($contenido);
+            $seccion = d($contenido, 'col-sm-8 mx-auto text-center');
+            $response[] = bloque($seccion);
 
         }
         return append($response);
