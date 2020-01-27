@@ -13,6 +13,8 @@ if (!function_exists('invierte_date_time')) {
         $num_compras = $data["num_compras"];
         $id_recibo = $data["id_recibo"];
         $cupon = $data['cupon'];
+        $negocios = $data['negocios'];
+        $usuario_tipo_negocio = $data['usuario_tipo_negocio'];
 
         $re[] = frm_pedidos($orden);
         $re[] = d(crea_estado_venta($status, $r));
@@ -29,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
         $re[] = frm_nota($id_recibo);
         $re[] = create_seccion_comentarios($data["comentarios"]);
-        $re[] = formulario_arquetipos($id_cliente, $data['tipo_tag_arquetipo']);
+        $re[] = formulario_arquetipos($id_cliente, $data['tipo_tag_arquetipo'], $negocios, $usuario_tipo_negocio);
         $re[] = tags_arquetipo($data['tag_arquetipo'], $data['tipo_tag_arquetipo']);
 
         $response[] = d(d($re, 12), 8);
@@ -44,10 +46,26 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo)
+    function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo, $negocios, $usuario_tipo_negocio)
     {
 
         $response[] = _titulo('tags arquetipos', 4);
+        $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
+        $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
+        $text_tipo = _titulo('tipo negocio', 5);
+        $response[] = text_icon(_text_(_editar_icon,'editar_usuario_tipo_negocio'), _titulo($negocio_registrado,4));
+        $response[] = form_open('', ["class" => 'form_usuario_tipo_negocio d-none']);
+        $tipo = create_select_selected(
+            $negocios, 'idtipo_negocio', 'nombre',
+            $id_tipo_negocio, 'tipo_negocio', 'usuario_tipo_negocio'
+        );
+
+        $response[] = flex($text_tipo, $tipo, _between);
+        $response[] = hiddens(['name' => 'id_usuario', 'value' => $id_usuario]);
+
+        $response[] = form_close();
+
+
         foreach ($tipo_tag_arquetipo as $row) {
 
             $descripcion = $row['tipo'];
@@ -600,6 +618,7 @@ if (!function_exists('invierte_date_time')) {
         $usuario,
         $id_recibo,
         $cupon
+
     )
     {
 
@@ -2176,7 +2195,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($cupon)) {
 
             $valor = pr($cupon, 'valor');
-            $contenido[] = d(_titulo("cupón promocional",4));
+            $contenido[] = d(_titulo("cupón promocional", 4));
             $ext = _text_(_registro, 'mt-5');
             $contenido[] = d(pr($cupon, 'cupon'), $ext);
 
@@ -2272,11 +2291,6 @@ if (!function_exists('invierte_date_time')) {
                         $tipo . " " . $lugar_entrega . " " . $nombre_linea;
                     break;
 
-                // 3 | CENTRO COMERCIAL
-                case 3:
-
-                    break;
-
                 default:
 
                     break;
@@ -2321,75 +2335,99 @@ if (!function_exists('invierte_date_time')) {
             $attr = [
                 "METHOD" => "PUT",
                 "id" => "form_set_usuario",
-                "class" => "border form_set_usuario padding_10 shadow",
+                "class" => "border form_set_usuario padding_10 row",
             ];
             $form[] = form_open($action, $attr);
-            $form[] = h("Cliente", 3, "strong");
-            $form[] = d("NOMBRE:", "top_10", 1);
-            $form[] = input([
-                "name" => "nombre",
-                "value" => $usuario["nombre"],
-                "type" => "text",
-                "required" => "true",
-            ]);
-            $form[] = d("APELLIDO PATERNO:", "top_10", 1);
-            $form[] = input([
-                "name" => "apellido_paterno",
-                "value" => $usuario["apellido_paterno"],
-                "type" => "text",
-            ]);
-            $form[] = d("APELLIDO MATERNO:", "top_10", 1);
-            $form[] = input([
-                "name" => "apellido_materno",
-                "value" => $usuario["apellido_materno"],
-                "type" => "text",
-            ]);
-            $form[] = d("EMAIL:", "top_10", 1);
-            $form[] = input([
-                'name' => 'email',
-                'value' => $usuario["email"],
-                "required" => "true",
-                "class" => "input-sm email email",
-                "onkeypress" => "minusculas(this);",
-            ]);
-            $form[] = d("TELÉFONO:", " top_10", 1);
-            $form[] = input([
-                'name' => 'tel_contacto',
-                'value' => $usuario["tel_contacto"],
-                "required" => "true",
-                'type' => "tel",
-                "maxlength" => 13,
-                "minlength" => 8,
-                "class" => "form-control input-sm  telefono telefono_info_contacto",
-            ]);
+            $form[] = _titulo("Cliente");
+
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'NOMBRE',
+                [
+                    "name" => "nombre",
+                    "value" => $usuario["nombre"],
+                    "type" => "text",
+                    "required" => "true",
+                    "class" => 'nombre_cliente',
+                    "id" => 'nombre_cliente',
+                    "uppercase" => True
+                ]
+            );
+
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'APELLIDO PATERNO:',
+                ([
+                    "name" => "apellido_paterno",
+                    "class" => "apellido_paterno",
+                    "id" => "apellido_paterno",
+                    "value" => $usuario["apellido_paterno"],
+                    "type" => "text",
+                    "uppercase" => True
+                ])
+            );
+
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'APELLIDO MATERNO:',
+                ([
+                    "name" => "apellido_materno",
+                    'class' => 'apellido_materno',
+                    'id' => 'apellido_materno',
+                    "value" => $usuario["apellido_materno"],
+                    "type" => "text",
+                    "uppercase" => True
+                ])
+            );
+
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'CORREO ELECTRÓNICO:',
+                ([
+                    'name' => 'email',
+                    'value' => $usuario["email"],
+                    "required" => "true",
+                    "class" => "email email",
+                    "id" => "email_cliente",
+                    "onkeypress" => "minusculas(this);",
+                ])
+            );
+
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'TELÉFONO:',
+                ([
+                    'name' => 'tel_contacto',
+                    'value' => $usuario["tel_contacto"],
+                    "required" => "true",
+                    'type' => "tel",
+                    "maxlength" => 13,
+                    "minlength" => 8,
+                    "class" => "telefono telefono_info_contacto",
+                    'id' => 'telefono_cliente'
+                ])
+            );
+
             $form[] = input([
                 "value" => $usuario["id_usuario"],
                 "name" => "id_usuario",
                 "type" => "hidden",
 
             ]);
-            $opt[] = array(
-
+            $opt[] = [
                 "text" => "Femenino",
-                "val" => 0,
-            );
-            $opt[] = array(
-
+                "val" => 0
+            ];
+            $opt[] = [
                 "text" => "Masculino",
-                "val" => 1,
-            );
-            $opt[] = array(
-
+                "val" => 1
+            ];
+            $opt[] = [
                 "text" => "Indefinido",
-                "val" => 2,
-            );
-            $form[] = d(create_select($opt, "sexo", "sexo", "sexo", "text", "val", 1,
-                $usuario["sexo"]), "top_20");
+                "val" => 2
+            ];
+            $form[] = create_select($opt, "sexo", "sexo mt-5 form-control", "sexo", "text", "val", 0,
+                $usuario["sexo"]);
             $form[] = btn("GUARDAR", ["class" => "top_30 bottom_50"]);
             $form[] = form_close(place("place_form_set_usuario"));
-            $f = d(append($form), ["id" => "contenedor_form_usuario"]);
+            return d($form, ["id" => "contenedor_form_usuario"]);
 
-            return $f;
+
         }
 
 
