@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
             tab_activa(3, $activa)
         );
 
-        $tab_content = tab_content($r);
+        $tab_content = d(tab_content($r),_mbt5);
 
         $response[] = dd(
             menu($activa),
@@ -79,27 +79,25 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'num_departamento'
             ]
         );
-        return contaiter(d($r, 6, 1));
+        return d_row(d($r, 6, 1));
 
     }
 
     function menu($activa)
     {
 
-        $class_ticket = _text(
-            'black a_enid_blue abrir_ticket ',
+        $class_ticket = _text_(
+            'mt-5 abrir_ticket ',
             tab_activa(3, $activa)
         );
 
-        $class_pendientes = _text(
-            'black strong base_tab_clientes ' .
-            tab_activa(1, $activa)
-
+        $class_pendientes = _text_(
+            _strong,'mt-4    base_tab_clientes ', tab_activa(1, $activa)
         );
 
         $list = [
             tab(
-                "ABRIR TICKET",
+                btn("ABRIR TICKET"),
                 '#tab_nuevo_ticket'
                 ,
                 [
@@ -109,7 +107,7 @@ if (!function_exists('invierte_date_time')) {
             )
             ,
             tab(
-                text_icon('fa fa-check-circle', "PENDIENTES"),
+                text_icon('fa fa-check-circle', "pendientes"),
                 '#tab_abrir_ticket',
                 [
                     "id" => 'base_tab_clientes',
