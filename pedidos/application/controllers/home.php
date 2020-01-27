@@ -443,8 +443,11 @@ class Home extends CI_Controller
                     "cupon" => $cupon,
                     "tipo_tag_arquetipo" => $this->get_tipo_tag_arqquetipo(),
                     "tag_arquetipo" => $this->tag_arquetipo($id_usuario),
+                    "negocios" => $this->tipos_negocio(),
+                    "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario)
 
                 ];
+//                xmp($data['usuario_tipo_negocio']);
 
                 $this->app->pagina($data, render_pendidos($data), 1);
             }
@@ -523,5 +526,17 @@ class Home extends CI_Controller
     {
         $q = ['usuario' => $id_usuario];
         return $this->app->api("tag_arquetipo/index/format/json/", $q);
+    }
+
+    private function tipos_negocio()
+    {
+
+        return $this->app->api("tipo_negocio/index/format/json/");
+    }
+
+    private function usuario_tipo_negocio($id_usuario)
+    {
+
+        return $this->app->api("usuario_tipo_negocio/usuario/format/json/", ['id_usuario' => $id_usuario]);
     }
 }

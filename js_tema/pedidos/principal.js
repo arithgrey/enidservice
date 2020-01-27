@@ -1,6 +1,9 @@
 "use strict";
 let $form_tag_arquetipo = $('.form_tag_arquetipo');
 let $tag_arquetipo = $('.baja_tag_arquetipo');
+let $usuario_tipo_negocio = $('.usuario_tipo_negocio');
+let $editar_usuario_tipo_negocio = $('.editar_usuario_tipo_negocio');
+let $form_usuario_tipo_negocio = $('.form_usuario_tipo_negocio');
 $(document).ready(() => {
 
     despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
@@ -33,6 +36,8 @@ $(document).ready(() => {
 
     $form_tag_arquetipo.submit(registro_arquetipo);
     $tag_arquetipo.click(baja_tag_arquetipo);
+    $usuario_tipo_negocio.change(usuario_tipo_negocio);
+    $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
 });
 let editar_horario_entrega = function (e) {
 
@@ -677,4 +682,17 @@ let baja_tag = function () {
         let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
         request_enid("DELETE", data_send, url, response_tag_arquetipo);
     }
+}
+let usuario_tipo_negocio = function () {
+
+    let tipo_negocio = get_valor_selected('.usuario_tipo_negocio');
+    if (parseInt(tipo_negocio) > 0) {
+        let data_send = $form_usuario_tipo_negocio.serialize();
+        let url = "../q/index.php/api/usuario_tipo_negocio/index/format/json/";
+        request_enid("POST", data_send, url, response_tag_arquetipo);
+    }
+}
+let editar_usuario_tipo_negocio = function () {
+
+    $form_usuario_tipo_negocio.removeClass('d-none');
 }

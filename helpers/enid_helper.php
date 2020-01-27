@@ -177,6 +177,14 @@ function d($text, $attributes = [], $row = 0, $frow = 0)
     return get_base_html("div", $text, $attributes, $row, $frow);
 }
 
+function xmp($text)
+{
+
+    echo "<xmp>";
+    echo print_r($text);
+    echo "</xmp>";
+}
+
 function d_p($info, $attributes = [], $row = 0, $frow = 0)
 {
 
@@ -288,6 +296,10 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                     }
                     $attributes["minlength"] = 3;
                 }
+                if (prm_def($attributes, 'uppercase', false)) {
+                    $attributes['onkeyup'] = "this.value = this.value.toUpperCase();";
+                }
+
                 break;
 
             case "checkbox":
