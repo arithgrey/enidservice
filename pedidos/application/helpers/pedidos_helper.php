@@ -16,6 +16,9 @@ if (!function_exists('invierte_date_time')) {
         $negocios = $data['negocios'];
         $usuario_tipo_negocio = $data['usuario_tipo_negocio'];
 
+        $usuario = $data["usuario"];
+        $re[] = d(menu($domicilio, $r, $id_recibo, $usuario),'col-sm-12 mr-5 pr-5 d-md-none');
+
         $re[] = frm_pedidos($orden);
         $re[] = d(crea_estado_venta($status, $r));
         $re[] = format_estados_venta($status, $r, $orden);
@@ -38,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(
             cliente_compra_inf($r, $data["tipos_entregas"], $domicilio,
-                $num_compras, $data["usuario"], $id_recibo, $cupon), 4
+                $num_compras, $usuario, $id_recibo, $cupon), 4
         );
         $response[] = hiddens_detalle($r);
 
@@ -53,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
         $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
         $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
         $text_tipo = _titulo('tipo negocio', 5);
-        $response[] = text_icon(_text_(_editar_icon,'editar_usuario_tipo_negocio'), _titulo($negocio_registrado,4));
+        $response[] = text_icon(_text_(_editar_icon, 'editar_usuario_tipo_negocio'), _titulo($negocio_registrado, 4));
         $response[] = form_open('', ["class" => 'form_usuario_tipo_negocio d-none']);
         $tipo = create_select_selected(
             $negocios, 'idtipo_negocio', 'nombre',
@@ -623,9 +626,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
+        $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario),'d-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-
-        $r[] = menu($domicilio, $recibo, $id_recibo, $usuario);
         $r[] = tiene_domilio($domicilio);
         $r[] = compras_cliente($num_compras);
         $r[] = seccion_usuario($usuario, $recibo);
@@ -902,14 +904,14 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $r[] = d(
-            append($x),
+            $x,
             [
-                "class" => "dropdown-menu  w_300 contenedor_opciones_pedido p-4 ",
+                "class" => "dropdown-menu w_300 p-4 menu_pedidos",
 
             ]
         );
 
-        return d(d(append($r), "dropleft position-fixed "), "pull-right");
+        return d(d($r, "dropleft position-fixed desglose"), "row pull-right");
 
 
     }
