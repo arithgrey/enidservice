@@ -4,6 +4,10 @@
     color: white;
 }
 
+.desglose {
+    z-index: 1000;
+}
+
 .entregado {
 
     background: #033178;
@@ -29,11 +33,13 @@
     text-align: center;
 }
 
+.menu_pedidos div a{
+    color: #000000!important;
+}
 
 .status_compra {
+
     background: #071929;
-
-
 }
 
 .resumen_pago {
@@ -109,12 +115,6 @@
 
 .seccion_recordatorio {
     margin-top: 20px;
-}
-
-
-.contenedor_opciones_pedido div a {
-    color: black;
-    text-decoration: underline;
 }
 
 .compras_en_tiempo {
