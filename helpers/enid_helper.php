@@ -2513,7 +2513,7 @@ function menu_session_mobil($in_session)
         a_enid("×",
             [
                 "href" => "javascript:void(0)",
-                "class" => "closebtn closebtn_lateral p-3  font-weight-bold h1 black",
+                "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black",
                 "onclick" => "closeNav()",
             ]
         ), 'ml-auto mr-5 mt-5 '
@@ -2544,8 +2544,9 @@ function menu_session_mobil($in_session)
 
     if ($in_session < 1) {
 
+
         $r[] = d(
-            a_enid("accede a tu cuenta",
+            a_enid("accede a tu cuenta" ,
                 [
                     "class" => "white font-weight-bold contenedor-lateral-menu w-100 text-uppercase text-right",
                     "href" => "../login",

@@ -1,5 +1,9 @@
 set_option("flag_carga", 0);
+$(document).ready(function () {
 
+    oculta_acceder();
+
+});
 let carga_opcion_entrega = (id, id_servicio, orden_pedido) => {
 
 

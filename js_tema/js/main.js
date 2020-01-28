@@ -1059,3 +1059,9 @@ let valida_load = function (form_previo = '') {
 
     }
 }
+let oculta_acceder = function () {
+    if ($('.contenedor-lateral-menu').length && is_mobile() === true) {
+
+        $('.contenedor-lateral-menu').addClass('d-none').removeClass('d-block');
+    }
+}

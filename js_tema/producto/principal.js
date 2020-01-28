@@ -2,7 +2,7 @@
 let $num_ciclos = $('#num_ciclos');
 $(document).ready(function () {
 
-
+    oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
         "respuesta_valorada", 0,
