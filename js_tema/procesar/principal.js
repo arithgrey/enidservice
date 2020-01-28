@@ -44,6 +44,7 @@ let $primer_compra =  $(primer_compra);
 $(document).ready(() => {
 
     $('footer').addClass('d-none');
+    oculta_acceder();
     set_option({"vista": 1});
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
     $form_miembro.submit(registro);

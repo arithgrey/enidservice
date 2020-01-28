@@ -66,6 +66,7 @@
 ) ?>
 
 <?= d('', 'top_100 bottom_100') ?>
+<?= hiddens(['class' => 'is_mobile', 'value' => is_mobile()]) ?>
 <?php if ($footer_visible): ?>
     <?php if (!is_mobile()): ?>
         <footer class='blue_enid3 p-4 white mt-5' id='sticky-footer'>
