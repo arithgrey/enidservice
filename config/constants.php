@@ -67,6 +67,8 @@ define('_t5', 'h5 text-uppercase black ');
 define('_close_icon', 'fa fa-times');
 define('_email_icon', 'fa fa-envelope');
 define('_editar_icon', 'fa fa fa-pencil');
+define('_money_icon', 'fa fa-money');
+define('_historia_icon', 'fa fa-history');
 define('_tiempo_icon', 'fa fa-clock-o');
 define('_eliminar_icon', 'fa fa-times');
 

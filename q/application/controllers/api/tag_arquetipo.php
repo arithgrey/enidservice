@@ -7,6 +7,7 @@ class Tag_arquetipo extends REST_Controller
     {
         parent::__construct();
         $this->load->model("tag_arquetipo_model");
+        $this->load->helper("arquetipo_helper");
         $this->load->library(lib_def());
     }
 
@@ -18,13 +19,30 @@ class Tag_arquetipo extends REST_Controller
         $es_usuario = array_key_exists('usuario', $param);
         if ($es_usuario) {
 
-
             $response = $this->tag_arquetipo_model->get(
                 [], ['id_usuario' => $param['usuario']], 100, 'id_tipo_tag_arquetipo', 'ASC');
 
         } else {
 
             $response = $this->tag_arquetipo_model->get();
+        }
+        $this->response($response);
+
+
+    }
+
+    function q_GET()
+    {
+
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, 'fecha_inicio,fecha_termino,tipo_tag_arquetipo')) {
+            $fecha_inicio = $param['fecha_inicio'];
+            $fecha_termino = $param['fecha_termino'];
+            $tipo_tag_arquetipo = $param['tipo_tag_arquetipo'];
+            $data = $this->tag_arquetipo_model->q($fecha_inicio, $fecha_termino, $tipo_tag_arquetipo);
+            $response = render_historial($data);
         }
         $this->response($response);
 

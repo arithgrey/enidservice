@@ -51,4 +51,16 @@ class Tag_arquetipo_model extends CI_Model
     {
         return $this->get($params, ["id" => $id]);
     }
+
+    function q($fecha_inicio, $fecha_termino, $id_tipo_tag_arquetipo)
+    {
+        $query_get = 'SELECT * FROM tag_arquetipo 
+                        WHERE id_tipo_tag_arquetipo = "'.$id_tipo_tag_arquetipo.'" 
+                        AND  
+                        DATE(fecha_registro ) BETWEEN "'.$fecha_inicio.'" AND "'.$fecha_termino.'"';
+
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 }

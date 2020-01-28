@@ -13,6 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_tipo_entrega();
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
+        $response[] = format_arquetipos($data);
         $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 p-0 contenedor_menu");
         $res[] = tab_content($response, 10);
@@ -47,14 +48,29 @@ if (!function_exists('invierte_date_time')) {
         $form = base_busqueda_form('PRODUCTOS MÁS BUSCADOS POR CLIENTES',
             'form_busqueda_productos_solicitados', 'place_keywords');
 
-        $response = d($form,
+        return d($form,
             [
                 "class" => "tab-pane",
                 "id" => "tab_busqueda_productos",
             ]
         );
 
-        return $response;
+
+    }
+
+    function format_arquetipos($data)
+    {
+        $form = busqueda_arquetipo($data['tipo_tag_arquetipo'], 'HISTORIAS DE USUARIO (ARQUETIPOS)',
+            'form_arquetipos', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_arquetipos",
+            ]
+        );
+
+
     }
 
     /**
@@ -173,6 +189,24 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
+    function busqueda_arquetipo($tipo_tag_arquetipo, $titulo_seccion, $clase_form, $place)
+    {
+
+
+        $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
+        $r[] = form_open("", ["class" => $clase_form]);
+        $tipos = create_select(
+            $tipo_tag_arquetipo, 'tipo_tag_arquetipo', 'tipo_tag_arquetipo',
+            'tipo_tag_arquetipo', 'tipo', 'id_tipo_tag_arquetipo');
+        $fechas = frm_fecha_busqueda();
+        $r[] = flex_md($tipos, $fechas, _between, 4, 8);
+        $r[] = form_close();
+        $r[] = place(_text_($place, " mt-5"));
+
+        return append($r);
+    }
+
+
 //
 //    function frm_busqueda_desarrollo()
 //    {
@@ -266,7 +300,12 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $list = [
-            a_enid(text_icon("fa fa-money", "pedidos"),
+            tab(
+                text_icon(_historia_icon, "Arquetipos"),
+                '#tab_arquetipos'
+            )
+            ,
+            a_enid(text_icon(_money_icon, "pedidos"),
                 [
                     "id" => "btn_servicios",
                     "href" => path_enid("pedidos"),
@@ -279,7 +318,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "id" => "btn_servicios",
                     "href" => path_enid("compras"),
-                    "class" => "text-uppercase black   dispositivos",
+                    "class" => "text-uppercase black  dispositivos",
                 ]
             )
             ,
