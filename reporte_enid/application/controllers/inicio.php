@@ -20,7 +20,9 @@ class Inicio extends CI_Controller
         $this->valida_es_cliente($module);
 
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
+        $data["tipo_tag_arquetipo"] = $this->tipo_tag_arquetipo();
         $data = $this->app->cssJs($data, "reporte_enid");
+
         $this->app->pagina($data, render_reporte($data), 1);
 
     }
@@ -73,5 +75,12 @@ class Inicio extends CI_Controller
 
         return $this->app->api("clasificacion/categorias_destacadas/format/json/", $q);
     }
+
+    private function tipo_tag_arquetipo()
+    {
+
+        return $this->app->api("tipo_tag_arquetipo/index/format/json/");
+    }
+
 
 }

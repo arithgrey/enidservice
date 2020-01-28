@@ -1,7 +1,7 @@
 "use strict";
 let incidencia = 0;
+let $form_arquetipos = $('.form_arquetipos');
 $(document).ready(() => {
-
 
     set_option("page", 0);
     $("#nuevos_miembros").click(carga_nuevos_miembros);
@@ -32,9 +32,7 @@ $(document).ready(() => {
     $(".btn_repo_afiliacion").click(() => {
         set_menu("#btn_usuarios");
     });
-
-
-
+    $form_arquetipos.submit(arquetipos)
 
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
@@ -375,6 +373,26 @@ let comparativa_dia = () => {
 
     let url = "../q/index.php/api/enid/prospectos_comparativa_d/format/json/";
     request_enid("GET", {}, url, response_comparativa_dia, ".place_prospectos_comparativa");
+};
+
+let arquetipos = function (e) {
+
+
+    let f_inicio = get_parameter(".form_arquetipos #datetimepicker4");
+    let f_termino = get_parameter(".form_arquetipos #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_arquetipos.serialize();
+        let url = "../q/index.php/api/tag_arquetipo/q/format/json/";
+
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_arquetipos #datetimepicker5", ".form_arquetipos #datetimepicker4"]);
+    }
+    e.preventDefault();
 };
 
 let set_menu = go => show_tabs(["#btn_repo_afiliacion", go]);
