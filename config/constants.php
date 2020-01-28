@@ -33,8 +33,11 @@ define('_4p', "col-sm-4 p-0");
 define('_8p', "col-sm-8 p-0");
 define('_12p', "col-sm-12 p-0");
 
-define('_6', "col-sm-6");
+define('_2_12', "col-sm-12 col-md-2");
+define('_10_12', "col-sm-12 col-md-10");
+
 define('_4', "col-sm-4");
+define('_6', "col-sm-6");
 define('_8', "col-sm-8");
 define('_12', "col-sm-12");
 

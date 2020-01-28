@@ -6,12 +6,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_usuario = $data["id_usuario"];
-        return hrz(
-            menu($id_usuario),
-            format_cuenta($id_usuario, $data["usuario"]),
-            2,
-            "contenedor_principal_enid"
-        );
+        $response[] = menu($id_usuario);
+        $response[] = format_cuenta($id_usuario, $data["usuario"]);
+        return append($response);
+
     }
 
     function format_cuenta($id_usuario, $usuario)
@@ -39,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
         $r[] = tab_seccion(calma(), 'tab_direccion');
 
-        return tab_content($r);
+        return d(tab_content($r), _10_12);
 
     }
 
@@ -378,18 +376,17 @@ if (!function_exists('invierte_date_time')) {
     function menu($id_usuario)
     {
 
-        $f[] = get_url_facebook(get_url_tienda($id_usuario), 1);
-        $f[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
-        $f[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
-        $f[] = d("COMPARTIR ");
-        $final = append($f);
+        $iconos[] = get_url_facebook(get_url_tienda($id_usuario), 1);
+        $iconos[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
+        $iconos[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
+        $final = flex($iconos, _between);
 
         $link_cuenta = tab(
             text_icon("fa fa-address-book-o", "CUENTA"),
             '#tab_mis_datos',
             [
-                "id" => 'base_tab_agendados',
-                "class" => 'black  base_tab_agendados active'
+                "id" => '',
+                "class" => 'active'
             ]
         );
         $link_direccion_envio = tab(
@@ -397,7 +394,7 @@ if (!function_exists('invierte_date_time')) {
             '#tab_direccion',
             [
                 "id" => 'btn_direccion',
-                "class" => 'black  btn_direccion'
+                "class" => 'btn_direccion'
             ]
 
         );
@@ -406,24 +403,31 @@ if (!function_exists('invierte_date_time')) {
             "#tab_privacidad",
             [
                 "id" => 'base_tab_privacidad',
-                "class" => 'black  base_tab_privacidad'
+                "class" => '  base_tab_privacidad'
             ]
         );
         $link_privacidad = tab(
-            text_icon("fa fa-shield", "PRIVACIDAD Y SEGURIDAD"),
+            text_icon("fa fa-shield", "PRIVACIDAD "),
             '#tab_privacidad_seguridad',
             [
-                "class" => 'black  tab_privacidad_seguridad'
+                "class" => 'tab_privacidad_seguridad'
             ]
         );
         $link_preferencias = a_enid(
-            text_icon('fa fa-gift f12', 'INTERESES Y PREFERENCIAS'),
-            path_enid('lista_deseos_preferencias')
+            text_icon('fa fa-gift', 'INTERESES Y PREFERENCIAS'),
+            [
+                'href' => path_enid('lista_deseos_preferencias'),
+                'class' => 'text-right'
+            ]
 
         );
         $link_productos_venta = a_enid(
             text_icon('fa fa-credit-card-alt', 'TUS PRODUCTOS EN VENTA'),
-            "../search/?q3=" . $id_usuario . "&tienda=1"
+
+            [
+                'href' => path_enid('search_q3', _text($id_usuario, "&tienda=1")),
+                'class' => 'text-right'
+            ]
 
         );
 
@@ -444,7 +448,7 @@ if (!function_exists('invierte_date_time')) {
 
         ];
 
-        return ul($list);
+        return ul($list, _text_(_2_12,'mt-5 menu'));
     }
 
 }

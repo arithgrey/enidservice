@@ -12,7 +12,8 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $tag = $row['tag'];
-            $response[] = flex(_text_($actual, '.-'), $tag, _text_(_between,'mt-2'));
+            $class = _text_(_between, 'mt-2','text-uppercase');
+            $response[] = flex(_text_($actual, '.-'), $tag, $class);
             $actual++;
         }
         return d($response);
