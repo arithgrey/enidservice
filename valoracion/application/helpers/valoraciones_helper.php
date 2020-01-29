@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $nombre = ($extra["in_session"]) ? $extra["nombre"] : "";
         $email = ($extra["in_session"]) ? $extra["email"] : "";
 
-        $r[] = h("ESCRIBE UNA RESEÑA", 3, "strong");
+        $r[] = d(_titulo("ESCRIBE UNA RESEÑA"),'mt-5');
         $r[] = d(_text("Sobre  ", $nombre_servicio));
         $r[] = form_open("",
             [
@@ -144,7 +144,7 @@ if (!function_exists('invierte_date_time')) {
 
         $encuesta[] = d(append($r), 6, 1);
         $response[] = append($encuesta);
-        return d(append($response), 'col-lg-12');
+        return d($response, 'col-lg-12 p-0');
 
     }
 

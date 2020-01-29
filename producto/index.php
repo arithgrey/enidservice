@@ -109,4 +109,3 @@ define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
 date_default_timezone_set('America/Mexico_City');
 ini_set('memory_limit', '32M');
 require_once BASEPATH . 'core/CodeIgniter.php';
-require_once BASEPATH . 'core/CodeIgniter.php';
