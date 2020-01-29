@@ -4,6 +4,7 @@ let frm_nota_monetaria = '.frm_nota_monetaria';
 let input_efectivo = '.input_efectivo_resultante';
 let input_clientes_ab = '.input_clientes_ab';
 let input_asunto = '.input_asunto';
+let tiempo_estimado = '.tiempo_estimado';
 
 let menu_efectivo_resultante = '.menu_efectivo_resultante';
 let frm_clientes_ab_testing = '.frm_clientes_ab_testing';
@@ -154,6 +155,7 @@ let response_carga_ticket = (data) => {
 
     $(frm_efectivo_resultante).submit(efectivo_resultante);
     $(frm_clientes_ab_testing).submit(clientes_ab);
+    $(tiempo_estimado).change(tiempo_tarea);
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
     }
@@ -522,4 +524,14 @@ let clientes_ab = function (e) {
         request_enid("PUT", data_send, url, ticket);
     }
     e.preventDefault();
+};
+let tiempo_tarea = function () {
+
+    let tiempo = get_valor_selected(tiempo_estimado);
+    if (parseInt(tiempo) > 0) {
+        let url = "../q/index.php/api/tickets/tiempo_estimado/format/json/";
+        let data_send = $('.form_tiempo_estimado').serialize();
+        request_enid("PUT", data_send, url, ticket);
+    }
+
 };

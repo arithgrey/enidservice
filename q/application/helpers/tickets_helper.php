@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $contenido[] = contaiter(seccion_comparativa($comparativa),'mt-5 mb-5');
+        $contenido[] = contaiter(seccion_comparativa($comparativa), 'mt-5 mb-5');
         $contenido[] = contaiter($response);
         return append($contenido);
 
@@ -210,9 +210,9 @@ if (!function_exists('invierte_date_time')) {
         foreach ($comparativa as $row) {
 
             $totales = [
-                flex(_titulo('Logros de mes', 4), $row['mensual'] ,'flex-column'),
-                flex(_titulo('Logros de la semana pasada', 4) , $row['semana_anterior'], 'flex-column'),
-                flex(_titulo('Logros de esta semana', 4) , $row['semanal'], 'flex-column'),
+                flex(_titulo('Logros de mes', 4), $row['mensual'], 'flex-column'),
+                flex(_titulo('Logros de la semana pasada', 4), $row['semana_anterior'], 'flex-column'),
+                flex(_titulo('Logros de esta semana', 4), $row['semanal'], 'flex-column'),
 
             ];
 
@@ -298,7 +298,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $x[] = _titulo("¿REALMENTE DESEAS CANCELAR LA COMPRA?");
-        $x[] = d($recibo["resumen"],'mt-5 mb-5');
+        $x[] = d($recibo["resumen"], 'mt-5 mb-5');
         $r[] = d(d($x));
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = btn("SEGUIR COMPRANDO",
@@ -383,6 +383,7 @@ if (!function_exists('invierte_date_time')) {
                 $nota_monetaria = $row["nota_monetaria"];
                 $efectivo_resultante = $row["efectivo_resultante"];
                 $clientes_ab = $row["clientes_ab"];
+                $tiempo_estimado = $row['tiempo_estimado'];
 
                 $cerrar =
                     btn(
@@ -407,6 +408,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
+                $calendario[] = form_tiempo_estimado($tiempo_estimado, $id_ticket);
                 $calendario[] = form_open("", ["class" => 'frm_agendar_google']);
                 $calendario[] = d(h(add_text(text_icon($icon, $resumen), "TAREAS"), 5));
                 $calendario[] = hiddens([
@@ -414,6 +416,7 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $asunto,
                 ]);
                 $agendar = ajustar(input_hour_date(), btn("Agendar"), 4);
+
                 $calendario[] = d("AGENDAR", "cursor_pointer  underline agendar_google");
                 $calendario[] = ajustar($agendar, "", 8, "hidden seccion_agendar");
                 $calendario[] = form_close();
@@ -483,6 +486,53 @@ if (!function_exists('invierte_date_time')) {
 
         return append($response);
 
+    }
+
+    function form_tiempo_estimado($tiempo_estimado, $id_ticket)
+    {
+
+
+
+        $select[] = [
+            'tiempo' => 5,
+            'tiempo_estimado' => '5 minutos'
+        ];
+        $select[] = [
+            'tiempo' => 10,
+            'tiempo_estimado' => '10 minutos'
+        ];
+        $select[] = [
+            'tiempo' => 30,
+            'tiempo_estimado' => '30 minutos'
+        ];
+        $select[] = [
+            'tiempo' => 60,
+            'tiempo_estimado' => '1 hora'
+        ];
+        $select[] = [
+            'tiempo' => 120,
+            'tiempo_estimado' => '2 horas'
+        ];
+        $select[] = [
+            'tiempo' => 240,
+            'tiempo_estimado' => '4 horas'
+        ];
+        $select[] = [
+            'tiempo' => 880,
+            'tiempo_estimado' => '8 horas'
+        ];
+        $form[] = form_open("", [
+            "class" => "form_tiempo_estimado d-flex"
+        ]);
+        $form[] = _titulo('tiempo estimado', 4);
+        $ext = is_mobile() ? '' : 'w-25';
+        $form[] = create_select_selected($select, 'tiempo',
+            'tiempo_estimado', $tiempo_estimado,
+            'tiempo_estimado',
+            _text_('tiempo_estimado form-control ml-5', $ext));
+        $form[] = hiddens(['name' => 'id_ticket', 'value' => $id_ticket]);
+        $form[] = form_close();
+        return append($form);
     }
 
     function frm_efectivo_resultante($id_ticket, $efectivo_resultante)

@@ -385,6 +385,19 @@ class Tickets extends REST_Controller
         $this->response($response);
     }
 
+    function tiempo_estimado_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "tiempo_estimado,id_ticket")) {
+            $tiempo_estimado = $param["tiempo_estimado"];
+            $id = $param["id_ticket"];
+            $response = $this->tickets_model->q_up("tiempo_estimado", $tiempo_estimado, $id);
+        }
+        $this->response($response);
+    }
+
     function comparativa_GET()
     {
 

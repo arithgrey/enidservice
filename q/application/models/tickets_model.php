@@ -133,7 +133,7 @@ class Tickets_model extends CI_Model
                     WHERE                     
                     ";
 
-        $order_by = "ORDER BY  t.status";
+        $order_by = "ORDER BY t.tiempo_estimado , t.status ASC";
         $query_get = _text($base, $where, $order_by);
         $data = $this->db->query($query_get)->result_array();
         $this->tmp_tareas_tickets(1, $_num, $param);
