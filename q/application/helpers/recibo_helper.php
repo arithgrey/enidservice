@@ -952,7 +952,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         return [
-            'checkout_resumen' => d($r, 'bg-light p-5'),
+            'checkout_resumen' => d_row(d($r, 'bg-light p-5')),
             'checkout' => $ticket_pago
         ];
 
@@ -1089,7 +1089,7 @@ if (!function_exists('invierte_date_time')) {
             $text_descuento, 1
         );
 
-        return d($response, "seccion_compra");
+        return d($response, "col-lg-12 seccion_compra p-0");
 
     }
 
@@ -1193,8 +1193,8 @@ if (!function_exists('invierte_date_time')) {
 
     function rastreo_compra($id_recibo, $seccion_compra)
     {
-        $response[] = d($seccion_compra, 'd-md-none');
-        $response[] = format_link(
+        $response[] = d($seccion_compra, 'd-md-none row');
+        $seccion[] = d(format_link(
             "Rastrea tu orden",
             [
 
@@ -1202,9 +1202,9 @@ if (!function_exists('invierte_date_time')) {
                 'class' => 'text-right mt-5',
             ]
             , 1, 0
-        );
+        ),_12p);
 
-        $response[] = format_link(
+        $seccion[] = d(format_link(
             "Cambia la dirección de entrega",
             [
 
@@ -1215,15 +1215,16 @@ if (!function_exists('invierte_date_time')) {
             ]
             ,
             0, 0
-        );
+        ),_12p);
 
-        $response[] = format_link('Cancelar compra',
+        $seccion[] = d(format_link('Cancelar compra',
             [
                 "class" => "cancelar_compra mt-3 text-right text-uppercase",
                 "id" => $id_recibo, "modalidad" => '0',
             ], 0, 0
-        );
+        ),_12p);
 
+        $response[] = d_row(append($seccion));
         return append($response);
 
     }

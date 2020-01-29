@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens_tickects($action, $data["ticket"]);
         $r[] = tab_seccion(
             d('',
-                "place_servicios_contratados col-md-10 col-md-offset-1 "
+                "place_servicios_contratados col-md-10 col-md-offset-1 p-0"
             ),
             "tab_mis_pagos",
             active_tab('compras', $action)

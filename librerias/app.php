@@ -201,19 +201,19 @@ class app extends CI_Controller
     function pagina($data, $center_page, $pagina_base = 0)
     {
 
-
-        $this->load->view("../../../view_tema/header_template", $data);
+        $base = '../../../';
+        $this->load->view(_text($base, "view_tema/header_template"), $data);
         if ($pagina_base > 0) {
 
             $data["page"] = $center_page;
-            $this->load->view("../../../view_tema/base", $data);
+            $this->load->view(_text($base, "view_tema/base"), $data);
 
         } else {
 
             $this->load->view($center_page, $data);
         }
 
-        $this->load->view("../../../view_tema/footer_template", $data);
+        $this->load->view(_text($base, "view_tema/footer_template"), $data);
 
     }
 

@@ -297,9 +297,9 @@ if (!function_exists('invierte_date_time')) {
     function form_cancelar_compra($recibo, $modalidad)
     {
 
-        $x[] = h("¿REALMENTE DESEAS CANCELAR LA COMPRA?", 3);
-        $x[] = d($recibo["resumen"]);
-        $r[] = d(d(append($x), "padding_20"));
+        $x[] = _titulo("¿REALMENTE DESEAS CANCELAR LA COMPRA?");
+        $x[] = d($recibo["resumen"],'mt-5 mb-5');
+        $r[] = d(d($x));
         $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
         $r[] = btn("SEGUIR COMPRANDO",
             [
@@ -320,7 +320,7 @@ if (!function_exists('invierte_date_time')) {
             1);
 
 
-        return d(append($r), 6, 1);
+        return d($r, _6auto);
     }
 
     function valida_check_tarea($id_tarea, $valor_actualizar, $status)

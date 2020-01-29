@@ -194,14 +194,15 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = busqueda_error();
         $r[] = h("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-        $r[] = btn("Explorar ahora!",
+//
+        $r[] = a_enid(btn("Explorar ahora!",
             [
 
-                "class" => "top_20"
+                "class" => "mt-5"
 
-            ], 0, 1, 0, path_enid("home")
-        );
-        return d($r,'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
+            ]
+        ), path_enid("home"));
+        return d($r, 'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
 
 
     }

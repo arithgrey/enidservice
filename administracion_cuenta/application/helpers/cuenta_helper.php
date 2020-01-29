@@ -21,16 +21,10 @@ if (!function_exists('invierte_date_time')) {
             1
 
         );
-        $actualizar = btw(
 
-            _titulo("actualizar datos de acceso")
-            ,
-            frm_pw()
-            ,
-            4,
-            1
-
-        );
+        $seccion[] = _titulo("actualizar datos de acceso");
+        $seccion[] = frm_pw();
+        $actualizar = d($seccion,'col-md-8 col-md-offset-2 p-0');
 
 
         $r[] = tab_seccion($actualizar, 'tab_privacidad');
@@ -44,16 +38,15 @@ if (!function_exists('invierte_date_time')) {
     function foto($id_usuario, $usuario)
     {
 
-        $r[] = btw(
-            perfil_usuario($id_usuario),
-            place("place_form_img"),
-            "col-lg-5 shadow p-5"
-        );
-        $r[] = d(format_user($usuario), "page-header menu_info_usuario");
-        $r[] = d("Mantén la calma esta información será solo será visible si tú lo permites ",
-            'registro_telefono_usuario_lada_negocio blue_enid3  white padding_1'
-        );
-        return dd($r, resumen_cuenta($usuario), 4);
+        $perfil[] = perfil_usuario($id_usuario);
+        $perfil[] = place("place_form_img");
+        $r[] = d_row(d($perfil, 8, 1));
+
+        $r[] = d(d(format_user($usuario), "page-header menu_info_usuario col-sm-12"), 13);
+
+        $response[] = d($r, 7);
+        $response[] = d(resumen_cuenta($usuario), _5p);
+        return append($response);
 
     }
 
@@ -63,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = _titulo("INFORMACIÓN PERSONAL");
         $x[] = place("place_registro_conceptos");
         $x[] = place("contenedor_conceptos_privacidad");
-        return dd($x, _titulo("PRIVACIDAD Y SEGURIDAD"), 5);
+        return d_row(dd($x, _titulo("PRIVACIDAD Y SEGURIDAD"), 5));
 
     }
 
@@ -90,8 +83,10 @@ if (!function_exists('invierte_date_time')) {
             d("El lugar donde compras o recibes tus compras o ventas"),
             hr()
         );
+        $direccion_envio = d($direccion_envio, 'mt-5 mt-md-0');
 
-        return dd($calma, $direccion_envio, 7);
+
+        return d_row(dd($calma, $direccion_envio, 7));
 
     }
 
@@ -102,19 +97,22 @@ if (!function_exists('invierte_date_time')) {
             img(
                 [
                     "src" => path_enid("imagen_usuario", $id_usuario),
-                    "onerror" => "this.src='../img_tema/user/user.png'"
+                    "onerror" => "this.src='../img_tema/user/user.png'",
+                    'class' => 'px-auto mt-4'
                 ]
-            ), "imagen_usuario_completa"
+            ), "imagen_usuario_completa text-center col-lg-12"
         );
 
-        $r[] = btn(
-            "modificar",
-            [
-                "class" => "editar_imagen_perfil mt-5"
-            ]
+        $r[] = d(
+            btn(
+                "modificar",
+                [
+                    "class" => "editar_imagen_perfil"
+                ]
+            ), 'mt-4 mb-4 col-lg-12'
         );
 
-        return append($r);
+        return d($r, 'border row p-4');
 
     }
 
@@ -122,21 +120,24 @@ if (!function_exists('invierte_date_time')) {
     function resumen_cuenta($usuario)
     {
 
-        $r[] = _titulo("tu cuenta");
-        $r[] = format_user($usuario, 1);
-        $r[] = d(get_campo($usuario, "email"));
-        $r[] = get_campo($usuario, "tel_contacto", "Prime apellido", 1);
+        $response[] = _titulo("tu cuenta");
+        $response[] = d(format_user($usuario, 1), 'mt-5');
+        $response[] = d(get_campo($usuario, "email"));
+        $response[] = d(get_campo($usuario, "nombre"));
+        $response[] = d(get_campo($usuario, "apellido_paterno"));
+        $response[] = d(get_campo($usuario, "apellido_materno"));
+        $response[] = d(get_campo($usuario, "tel_contacto"));
 
-        $r[] = tab(
-            text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"),
+        $boton = btn(text_icon('fa  fa-fighter-jet', "MI DIRECCIÓN"));
+        $response[] = tab(
+            $boton,
             "#tab_direccion",
             [
-                "class" => "a_enid_black btn_direccion mt-5",
+                "class" => "btn_direccion mt-5",
             ]
         );
 
-        $r[] = hr();
-        return append($r);
+        return append($response);
 
     }
 
@@ -146,16 +147,17 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("",
             [
                 "id" => "form_update_password",
-                "class" => "form-horizontal", "method" => "POST"
+                "class" => "form-horizontal mt-5",
+                "method" => "POST"
             ]
         );
 
-        $r[] = input_frm(12,
-            "contraseña actual",
+        $r[] = input_frm('',
+            "Contraseña actual",
             [
                 "name" => "password",
                 "id" => "password",
-                "class" => "form-control input-sm",
+                "class" => "pw",
                 "type" => "password",
                 "required" => "true"
             ],
@@ -163,26 +165,26 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = input_frm(
-            12,
-            "nueva contraseña",
+            'mt-5',
+            "Nueva contraseña",
             [
                 "name" => "pw_nueva",
                 "id" => "pw_nueva",
                 "type" => "password",
-                "class" => 'form-control input-sm',
-                "required" => "true"
+                "class" => 'pw_nueva',
+                "required" => true
             ]
             , 'place_pw_2'
 
         );
 
         $r[] = input_frm(
-            12, "confirmar contraseña",
+            'mt-5', "Confirmar",
             [
                 "name" => "pw_nueva_confirm",
                 "id" => "pw_nueva_confirm",
                 "type" => "password",
-                "class" => "form-control input-sm",
+                "class" => "pw_confirmacion",
                 "required" => "true"
             ],
             'place_pw_3'
@@ -199,7 +201,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btn("Actualizar",
             [
                 "id" => "inbutton",
-                "class" => "btn btn_save input-sm"
+                "class" => "btn_save mt-5"
             ]
         );
         $r[] = form_close(place("msj_password"));
@@ -214,11 +216,11 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($vista < 1) {
 
-            $r[] = _titulo("Cuenta");
+            $r[] = d(d(_titulo("SOBRE TI"), _12p), 'row mt-5 mb-5');
             $r[] = frm_nombre($usuario);
             $r[] = frm_email($usuario);
-            $r[] = d(frm_telefono($usuario));
-            $r[] = d(frm_negocio($usuario));
+            $r[] = frm_telefono($usuario);
+
 
         } else {
 
@@ -239,7 +241,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "f_telefono_usuario_negocio"
             ]
         );
-        $r[] = input_frm(3, "Teléfono de negocio",
+        $input[] = input_frm('', "Teléfono de negocio",
             [
                 'name' => 'lada_negocio',
                 'id' => 'lada',
@@ -254,7 +256,7 @@ if (!function_exists('invierte_date_time')) {
             "registro_telefono_usuario_lada_negocio"
         );
 
-        $r[] = input_frm(5, "Teléfono de negocio",
+        $input[] = input_frm('', "Teléfono de negocio",
 
             [
                 'name' => 'telefono_negocio',
@@ -269,26 +271,24 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $r[] = d(btn("Actualizar", ["class" => "input_enid"]), 2);
+        $input[] = d(btn("Actualizar"), '');
+        $r[] = flex_md($input, _text_(_between, 'mt-5 row'));
         $r[] = form_close();
-        return append($r);
+        return d($r, 13);
 
     }
 
     function frm_telefono($usuario)
     {
-
-        $r = [];
-
-        $r[] = input_frm(
-            3,
-            "Teléfon Movil1",
+        $r[] = d(input_frm(
+            '',
+            "Lada",
             [
                 "id" => "lada",
                 "name" => "lada",
                 "placeholder" => "Lada",
-                "class" => "form-control input-sm input_enid lada ",
-                "required" => "",
+                "class" => "lada ",
+                "required" => true,
                 "type" => "text",
                 "maxlength" => "3",
                 "minlength" => "2",
@@ -296,15 +296,15 @@ if (!function_exists('invierte_date_time')) {
             ]
             , 'registro_telefono_usuario_lada'
 
-        );
+        ), 'col-md-3 mb-5');
 
 
-        $r[] = input_frm(5, "Teléfono",
+        $r[] = d(input_frm('', "Teléfono",
             [
                 "id" => "telefono",
                 "name" => "tel_contacto",
                 "placeholder" => "Teléfono",
-                "class" => "form-control input-sm input_enid telefono ",
+                "class" => "telefono ",
                 "required" => true,
                 "type" => "text",
                 "maxlength" => "13",
@@ -312,14 +312,14 @@ if (!function_exists('invierte_date_time')) {
                 "value" => pr($usuario, 'tel_contacto')
             ], 'registro_telefono_usuario'
 
-        );
+        ), 'col-md-5  mb-5');
 
-        $r[] = btn("Actualizar", ["class" => "input_enid"], 2);
+        $r[] = d(btn("Actualizar"), 'col');
 
-        $form[] = form_open("", ["class" => "form_telefono_usuario"]);
-        $form[] = append($r);
+        $form[] = form_open("", ["class" => "form_telefono_usuario row"]);
+        $form[] = flex_md($r, 'row');
         $form[] = form_close();
-        return append($form);
+        return d($form, 'mt-4 mb-4');
 
 
     }
@@ -328,12 +328,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("");
-        $r[] = input_frm(12, 'Correo electrónico',
+        $r[] = input_frm('', 'Correo electrónico',
             [
                 "id" => "correo_electronico",
                 "name" => "correo_electronico",
                 "placeholder" => "El correo electrónico no se mostrará públicamente",
-                "class" => "form-control input-sm input_enid correo_electronico",
+                "class" => "correo_electronico",
                 "required" => "",
                 "type" => "text",
                 "value" => pr($usuario, 'email'),
@@ -341,9 +341,11 @@ if (!function_exists('invierte_date_time')) {
             ]
 
         );
-        $r[] = d('El correo electrónico NO se mostrará públicamente');
+
         $r[] = form_close();
-        return append($r);
+        $response[] = d(d($r, _12p), 'row mt-5 mb-3');
+        $response[] = d(d('El correo electrónico NO se mostrará públicamente', _12p), 'row mb-5');
+        return append($response);
 
 
     }
@@ -356,30 +358,31 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form_nombre_usuario"
             ]
         );
-        $r[] = input_frm(12, 'Nombre de usuario',
+        $r[] = input_frm('', 'Nombre de usuario',
             [
                 "id" => "nombre_usuario",
                 "name" => "nombre_usuario",
                 "placeholder" => "Nombre por cual te indentifican clientes y vendedores",
-                "class" => "form-control input-sm input_enid nombre_usuario",
+                "class" => "nombre_usuario",
                 "required" => true,
                 "type" => "text",
                 "value" => pr($usuario, 'nombre_usuario'),
-                "maxlength" => "15"
+                "maxlength" => 30
             ], "registro_nombre_usuario"
         );
         $r[] = form_close();
-        return append($r);
+        return d(d($r, _12p), 'row mt-5 mb-5');
 
     }
 
     function menu($id_usuario)
     {
 
-        $iconos[] = get_url_facebook(get_url_tienda($id_usuario), 1);
-        $iconos[] = get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1);
-        $iconos[] = get_url_pinterest(get_url_tienda($id_usuario), 1);
-        $final = flex($iconos, _between);
+        $separacion = 'ml-3';
+        $iconos[] = d(get_url_facebook(get_url_tienda($id_usuario), 1));
+        $iconos[] = d(get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1), $separacion);
+        $iconos[] = d(get_url_pinterest(get_url_tienda($id_usuario), 1), $separacion);
+        $final = flex($iconos);
 
         $link_cuenta = tab(
             text_icon("fa fa-address-book-o", "CUENTA"),
@@ -448,7 +451,7 @@ if (!function_exists('invierte_date_time')) {
 
         ];
 
-        return ul($list, _text_(_2_12,'mt-5 menu'));
+        return ul($list, _text_(_2_12, 'mt-5 mb-5 menu '));
     }
 
 }

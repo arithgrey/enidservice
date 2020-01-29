@@ -24,12 +24,14 @@ define('_text_cantidad', 'Ups! esta no es una cantidad correcta!');
 
 /*bootstrap class*/
 /*col*/
-
+define('_6auto', "col-sm-6 col-sm-offset-3 p-0");
 define('_8auto', "col-sm-8 col-sm-offset-2 p-0");
 define('_10auto', "col-sm-10 col-sm-offset-1 p-0");
 
 define('_6p', "col-sm-6 p-0");
 define('_4p', "col-sm-4 p-0");
+define('_5p', "col-sm-5 p-0");
+define('_7p', "col-sm-7 p-0");
 define('_8p', "col-sm-8 p-0");
 define('_12p', "col-sm-12 p-0");
 
