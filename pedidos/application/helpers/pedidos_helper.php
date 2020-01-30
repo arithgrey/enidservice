@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
         $usuario_tipo_negocio = $data['usuario_tipo_negocio'];
 
         $usuario = $data["usuario"];
-        $re[] = d(menu($domicilio, $r, $id_recibo, $usuario),'col-sm-12 mr-5 pr-5 d-md-none');
+        $re[] = d(menu($domicilio, $r, $id_recibo, $usuario), 'col-sm-12 mr-5 pr-5 d-md-none');
 
         $re[] = frm_pedidos($orden);
         $re[] = d(crea_estado_venta($status, $r));
@@ -285,6 +285,7 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $a[] = append($z);
+        $a[] = format_link('comprar nuevamente', ['href' => path_enid('producto', $id_servicio), 'class' => 'mt-5']);
 
         return d($a, 3);
 
@@ -626,7 +627,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario),'d-none d-md-block');
+        $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario), 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = tiene_domilio($domicilio);
         $r[] = compras_cliente($num_compras);
