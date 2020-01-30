@@ -86,7 +86,7 @@ class Tickets extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "prioridad,departamento,asunto")) {
+        if (fx($param, "prioridad,departamento,asunto,tiempo_estimado")) {
             $id_usuario = prm_def($param, "id_usuario", $this->id_usuario);
 
             $param["id_usuario"] = $id_usuario;
@@ -97,6 +97,7 @@ class Tickets extends REST_Controller
                     "prioridad" => $param["prioridad"],
                     "id_usuario" => $param["id_usuario"],
                     "id_departamento" => $param["departamento"],
+                    "tiempo_estimado" => $param["tiempo_estimado"],
                 ];
 
             $param["ticket"] = $this->tickets_model->insert($params, 1);
