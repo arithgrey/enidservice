@@ -6,6 +6,47 @@ if (!defined('BASEPATH')) {
 if (!function_exists('invierte_date_time')) {
 
 
+    function tiempos()
+    {
+        $tiempos[] = [
+            'tiempo' => 5,
+            'tiempo_estimado' => '5 minutos'
+        ];
+        $tiempos[] = [
+            'tiempo' => 10,
+            'tiempo_estimado' => '10 minutos'
+        ];
+        $tiempos[] = [
+            'tiempo' => 15,
+            'tiempo_estimado' => '10 minutos'
+        ];
+        $tiempos[] = [
+            'tiempo' => 30,
+            'tiempo_estimado' => '30 minutos'
+        ];
+        $tiempos[] = [
+            'tiempo' => 45,
+            'tiempo_estimado' => '30 minutos'
+        ];
+        $tiempos[] = [
+            'tiempo' => 60,
+            'tiempo_estimado' => '1 hora'
+        ];
+        $tiempos[] = [
+            'tiempo' => 120,
+            'tiempo_estimado' => '2 horas'
+        ];
+        $tiempos[] = [
+            'tiempo' => 240,
+            'tiempo_estimado' => '4 horas'
+        ];
+        $tiempos[] = [
+            'tiempo' => 880,
+            'tiempo_estimado' => '8 horas'
+        ];
+        return $tiempos;
+    }
+
     function solicitudes_saldo($data)
     {
 
@@ -282,13 +323,23 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $registro = btn("Solicitar");
+        $registro = btn("Solicitar", ['class' => _mbt5_md]);
 
         $r[] = d(_titulo('¿cual es la tarea?', 0, 'mb-5'));
-        $r[] = dd($solicitud, $registro, 8);
+
+        $label_tiempo = d('¿tiempo estimado?', _text_(_strong, _mbt5_md));
+        $tiempo_estimado_select = create_select(tiempos(), 'tiempo_estimado',
+            'form-control',
+            'tiempo_estimado', 'tiempo_estimado', 'tiempo');
+
+
+        $tiempo_estimado_seccion = flex($label_tiempo, $tiempo_estimado_select, 'flex-column');
+
+        $seccion_solicitud = flex_md($solicitud, $tiempo_estimado_seccion, _between, _7p, _5p);
+        $r[] = flex_md($seccion_solicitud, $registro, _between, _8p, _4p);
         $r[] = form_close();
 
-        return contaiter(d($r, 'col-lg-6 col-lg-offset-3 mb-5 p-0'));
+        return contaiter(d($r, 'col-lg-8 col-lg-offset-2 mb-5 p-0'));
 
 
     }
@@ -490,36 +541,7 @@ if (!function_exists('invierte_date_time')) {
 
     function form_tiempo_estimado($tiempo_estimado, $id_ticket)
     {
-
-
-        $select[] = [
-            'tiempo' => 5,
-            'tiempo_estimado' => '5 minutos'
-        ];
-        $select[] = [
-            'tiempo' => 10,
-            'tiempo_estimado' => '10 minutos'
-        ];
-        $select[] = [
-            'tiempo' => 30,
-            'tiempo_estimado' => '30 minutos'
-        ];
-        $select[] = [
-            'tiempo' => 60,
-            'tiempo_estimado' => '1 hora'
-        ];
-        $select[] = [
-            'tiempo' => 120,
-            'tiempo_estimado' => '2 horas'
-        ];
-        $select[] = [
-            'tiempo' => 240,
-            'tiempo_estimado' => '4 horas'
-        ];
-        $select[] = [
-            'tiempo' => 880,
-            'tiempo_estimado' => '8 horas'
-        ];
+        $select = tiempos();
         $form[] = form_open("", [
             "class" => "form_tiempo_estimado d-flex align-items-center w-100",
         ]);
@@ -528,13 +550,13 @@ if (!function_exists('invierte_date_time')) {
 
 
         $clase_icon = _text_(_editar_icon, 'editar_tiempo_estimado');
-        $base_tiempo = d('TIEMPO AÚN SIN SER DEFINIDO','ml-5');
+        $base_tiempo = d('TIEMPO AÚN SIN SER DEFINIDO', 'ml-5');
         if ($tiempo_estimado < 1) {
 
             $form[] = d(text_icon($clase_icon, $base_tiempo), 'ml-5 sin_tiempo');
         } else {
 
-            $tiempo_estimado = d(search_bi_array($select, 'tiempo', $tiempo_estimado, 'tiempo_estimado', $base_tiempo),'ml-5');
+            $tiempo_estimado = d(search_bi_array($select, 'tiempo', $tiempo_estimado, 'tiempo_estimado', $base_tiempo), 'ml-5');
 
             $form[] = d(text_icon($clase_icon, $tiempo_estimado), 'ml-5');
         }
