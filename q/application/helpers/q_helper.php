@@ -1311,19 +1311,25 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($recibos as $row) {
 
+                $fecha_contra_entrega = $row['fecha_contra_entrega'];
+                $fecha_entrega = date_create($fecha_contra_entrega)->format('Y-m-d');
+                $fecha = horario_enid();
+                $hoy = $fecha->format('Y-m-d');
+                $dias = date_difference($hoy, $fecha_entrega);
+                $text_entrega = _text_('Se entrega en ', $dias, 'días!');
+                if ($dias == 1) {
+                    $text_entrega = 'Se entregará mañana';
+                }
 
-                $text = btw(
-                    d(
-                        img($row["url_img_servicio"])
-                        ,
-                        "w_50"
-                    ),
-                    d(
-                        $row["total"] . "MXN",
-                        "text_monto_sin_cierre text-left"
-                    ),
-                    "display_flex_enid top_10 border-0 solid_bottom_2 "
-                );
+                $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy!' : $text_entrega;
+                $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
+                $dia_entrega = d($notificacion_hoy, _text_('badge', $es_hoy));
+
+                $imagenes = d(img($row["url_img_servicio"]), "w_50");
+                $total = d(money($row["total"]), "text-left black");
+                $total_seccion = flex($total, $dia_entrega, 'flex-column');
+
+                $text = flex($imagenes, $total_seccion, _between);
 
                 $url = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $r[] = d(a_enid($text, $url), "border-bottom");
@@ -1333,7 +1339,7 @@ if (!function_exists('invierte_date_time')) {
             if (es_data($r)) {
 
                 array_unshift($r,
-                    d(h("VENTAS EN PROCESO", 3, ["class" => "strong top_20"])));
+                    d(_titulo("ventas en proceso")));
 
             }
 
