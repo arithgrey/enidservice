@@ -492,7 +492,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-
         $select[] = [
             'tiempo' => 5,
             'tiempo_estimado' => '5 minutos'
@@ -522,14 +521,28 @@ if (!function_exists('invierte_date_time')) {
             'tiempo_estimado' => '8 horas'
         ];
         $form[] = form_open("", [
-            "class" => "form_tiempo_estimado d-flex"
+            "class" => "form_tiempo_estimado d-flex align-items-center w-100",
         ]);
         $form[] = _titulo('tiempo estimado', 4);
         $ext = is_mobile() ? '' : 'w-25';
+
+
+        $clase_icon = _text_(_editar_icon, 'editar_tiempo_estimado');
+        $base_tiempo = d('TIEMPO AÚN SIN SER DEFINIDO','ml-5');
+        if ($tiempo_estimado < 1) {
+
+            $form[] = d(text_icon($clase_icon, $base_tiempo), 'ml-5 sin_tiempo');
+        } else {
+
+            $tiempo_estimado = d(search_bi_array($select, 'tiempo', $tiempo_estimado, 'tiempo_estimado', $base_tiempo),'ml-5');
+
+            $form[] = d(text_icon($clase_icon, $tiempo_estimado), 'ml-5');
+        }
+
         $form[] = create_select_selected($select, 'tiempo',
             'tiempo_estimado', $tiempo_estimado,
             'tiempo_estimado',
-            _text_('tiempo_estimado form-control ml-5', $ext));
+            _text_('tiempo_estimado form-control d-none ml-5', $ext));
         $form[] = hiddens(['name' => 'id_ticket', 'value' => $id_ticket]);
         $form[] = form_close();
         return append($form);

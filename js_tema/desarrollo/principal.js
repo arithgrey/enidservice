@@ -17,6 +17,7 @@ let id_ticket = '.ticket';
 let boton_agregar_tarea = '.boton_agregar_tarea';
 let seccion_nueva_tarea = '.seccion_nueva_tarea';
 let menu_tareas_pendientes = '.menu_tareas_pendientes';
+let editar_tiempo_estimado = '.editar_tiempo_estimado';
 
 /*selectores globales*/
 let $q = $(".q");
@@ -156,6 +157,13 @@ let response_carga_ticket = (data) => {
     $(frm_efectivo_resultante).submit(efectivo_resultante);
     $(frm_clientes_ab_testing).submit(clientes_ab);
     $(tiempo_estimado).change(tiempo_tarea);
+    $(editar_tiempo_estimado).click(function () {
+
+        $('.sin_tiempo').addClass('d-none');
+        $(editar_tiempo_estimado).addClass('d-none');
+        $(tiempo_estimado).removeClass('d-none');
+    });
+
     if (get_option("flag_mostrar_solo_pendientes") > 0) {
         muestra_tareas_por_estatus();
     }
