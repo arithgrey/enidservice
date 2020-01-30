@@ -52,6 +52,7 @@ define('_flex_right', 'justify-content-end');
 
 
 define('_mbt5', 'mt-5 mb-5');
+define('_mbt5_md', 'mt-5 mb-5 mt-md-0 mb-md-0');
 
 /**/
 define('_self_center', 'align-self-center');
