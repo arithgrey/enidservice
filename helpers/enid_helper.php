@@ -2128,16 +2128,16 @@ function mayorque($a, $b, $mayor = 1, $menor = "")
     return ($a > $b) ? $mayor : $menor;
 }
 
-function search_bi_array($array, $columna, $busqueda, $get = false, $si_false = "")
+function search_bi_array($array, $columna, $busqueda, $get = FALSE, $si_false = "")
 {
 
     $arr_col = array_column($array, $columna);
     $index = array_search($busqueda, $arr_col);
     $response = $index;
 
-    if ($get != false) {
+    if ($get !== FALSE) {
 
-        $response = ($index != false) ? $array[$index][$get] : $si_false;
+        $response = ($index !== FALSE) ? $array[$index][$get] : $si_false;
     }
 
     return $response;

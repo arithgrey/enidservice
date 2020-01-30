@@ -553,15 +553,18 @@ if (!function_exists('invierte_date_time')) {
 
 
         $clase_icon = _text_(_editar_icon, 'editar_tiempo_estimado');
+
         $base_tiempo = d('TIEMPO AÚN SIN SER DEFINIDO', 'ml-5');
         if ($tiempo_estimado < 1) {
 
             $form[] = d(text_icon($clase_icon, $base_tiempo), 'ml-5 sin_tiempo');
+
         } else {
 
-            $tiempo_estimado = d(search_bi_array($select, 'tiempo', $tiempo_estimado, 'tiempo_estimado', $base_tiempo), 'ml-5');
 
-            $form[] = d(text_icon($clase_icon, $tiempo_estimado), 'ml-5');
+            $tiempo_text = d(search_bi_array($select, 'tiempo', intval($tiempo_estimado), 'tiempo_estimado', $base_tiempo), 'ml-5');
+
+            $form[] = d(text_icon($clase_icon, $tiempo_text), 'ml-5');
         }
 
         $form[] = create_select_selected($select, 'tiempo',
