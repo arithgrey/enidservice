@@ -949,17 +949,21 @@ function unique_multidim_array($array, $key)
 }
 
 
-function create_select_selected($data, $campo_val, $campo_text, $selected, $name, $class)
+function create_select_selected($data, $campo_val, $campo_text, $selected, $name, $class, $valor = 0)
 {
 
     $select = "<select class='" . $class . "' name='" . $name . "'>";
+    $str = '';
     foreach ($data as $row) {
+
         $extra = ($row[$campo_val] == $selected) ? "selected" : "";
+        if ($row[$campo_val] == $selected) {
+            $str = $row[$campo_text];
+        }
         $select .= "<option value='" . $row[$campo_val] . "' " . $extra . " > " . $row[$campo_text] . "</option>";
     }
     $select .= "</select>";
-
-    return $select;
+    return ($valor < 1) ? $select : $str;
 }
 
 
@@ -2546,7 +2550,7 @@ function menu_session_mobil($in_session)
 
 
         $r[] = d(
-            a_enid("accede a tu cuenta" ,
+            a_enid("accede a tu cuenta",
                 [
                     "class" => "white font-weight-bold contenedor-lateral-menu w-100 text-uppercase text-right",
                     "href" => "../login",
