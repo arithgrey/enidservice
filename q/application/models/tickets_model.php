@@ -119,7 +119,8 @@ class Tickets_model extends CI_Model
                       t.status,
                       t.id_usuario,
                       t.efecto_monetario,                    
-                      t.fecha_registro,           
+                      t.fecha_registro,       
+                      t.tiempo_estimado,    
                       d.nombre nombre_departamento ,                      
                       tp.num_tareas_pendientes
                       FROM 

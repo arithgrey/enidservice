@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
         ];
         $tiempos[] = [
             'tiempo' => 15,
-            'tiempo_estimado' => '10 minutos'
+            'tiempo_estimado' => '15 minutos'
         ];
         $tiempos[] = [
             'tiempo' => 30,
@@ -26,7 +26,7 @@ if (!function_exists('invierte_date_time')) {
         ];
         $tiempos[] = [
             'tiempo' => 45,
-            'tiempo_estimado' => '30 minutos'
+            'tiempo_estimado' => '45 minutos'
         ];
         $tiempos[] = [
             'tiempo' => 60,
@@ -143,7 +143,11 @@ if (!function_exists('invierte_date_time')) {
         foreach ($tickets as $row) {
 
             $id_ticket = $row["id_ticket"];
-            $asunto = p($row["asunto"], 'text-uppercase asunto_tarea');
+            $tiempo_estimado = $row['tiempo_estimado'];
+
+            $tiempo = search_bi_array(tiempos(), 'tiempo', $tiempo_estimado, 'tiempo_estimado', 0);
+            $base_tiempo = ($tiempo != 0) ? _text_('[', $tiempo, ']') : '';
+            $asunto = p(_text_($base_tiempo, $row["asunto"]), 'text-uppercase asunto_tarea');
             $efecto_monetario = $row["efecto_monetario"];
             $asunto = flex($asunto, crea_estrellas($efecto_monetario, 1), 'flex-column justify-content-between contenedor_tarea');
 
@@ -154,7 +158,6 @@ if (!function_exists('invierte_date_time')) {
                     $ab[] = widget_content($asunto, $id_ticket, 'ab_target');
 
                     break;
-
 
                 case 5:
 
