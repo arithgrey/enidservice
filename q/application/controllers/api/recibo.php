@@ -166,6 +166,7 @@ class recibo extends REST_Controller
                 "monto_a_pagar",
                 "num_ciclos_contratados",
                 "flag_envio_gratis",
+                "tipo_entrega"
             ],
             $param["id_recibo"]
         );
@@ -760,7 +761,8 @@ class recibo extends REST_Controller
 
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
-        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
+
+        $response = _text_(_text_pago , money($pago_pendiente ));
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
 
             $response = $this->recibo_model->set_status_orden($param["saldo_cubierto"], 1,
@@ -845,19 +847,17 @@ class recibo extends REST_Controller
     {
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
-        $response = "INGRESA UN MONTO CORRECTO SALDO POR LIQUIDAR " . $pago_pendiente . "MXN";
+        $response = _text_(_text_pago, money($pago_pendiente));
 
-        if ($param["saldo_cubierto"] > 0
-            &&
-            $param["saldo_cubierto"] >= $pago_pendiente
-            ||
-            ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
+        $saldo_cubierto = $param["saldo_cubierto"];
+        $restante = ($pago_pendiente - $param["saldo_cubierto"]);
+        if ($saldo_cubierto > 0 && $saldo_cubierto >= $pago_pendiente || $restante < 101) {
 
-
-            $response = $this->recibo_model->notifica_entrega($param["saldo_cubierto"],
-                $param["status"], $param["recibo"], 'fecha_entrega');
+            $status = $param["status"];
+            $recibo = $param["recibo"];
+            $response = $this->recibo_model->notifica_entrega($saldo_cubierto,
+                $status, $recibo, 'fecha_entrega');
             $this->solicita_encuenta($param["id_recibo"]);
-
 
         }
 

@@ -301,16 +301,15 @@ let response_articulos_stock = data => {
     redirect(url);
 };
 let response_status_venta = data => {
-
-
+    
     desbloqueda_form(".selector_estados_ventas");
-    if (data == true) {
+    if (data === true) {
 
         show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?", "", 0, descontar_articulos_stock, next_status);
 
     } else {
 
-        render_enid(".mensaje_saldo_cubierto_post_venta", data);
+        advierte(data);
     }
 
 };
@@ -484,13 +483,13 @@ let procesa_cambio_estado = () => {
 };
 let registra_data_nuevo_estado = status_venta => {
 
-
     bloquea_form(".selector_estados_ventas");
     let data_send = $.param({
         "recibo": get_parameter(".recibo"),
         "status": status_venta,
         "saldo_cubierto": get_parameter(".saldo_cubierto_pos_venta"),
-        "es_proceso_compra": get_option("es_proceso_compra")
+        "es_proceso_compra": get_option("es_proceso_compra"),
+        'tipo_entrega': get_parameter('.tipo_entrega_def')
     });
     set_option("es_proceso_compra", 0);
     let url = "../q/index.php/api/recibo/status/format/json/";
