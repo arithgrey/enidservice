@@ -1155,7 +1155,6 @@ function debug($msg, $array = 0)
 function get_costo_envio($param)
 {
 
-
     $gratis = $param["flag_envio_gratis"];
     $tipo_entrega = $param['tipo_entrega'];
     $r = [];
@@ -2466,37 +2465,35 @@ function gb_modal()
 {
 
 
-    $mod[] = d(
+    $seccion = d(
         p(
             span(
-                "", "text-order-name-error"
+                "", "text-order-name-error black"
             )
-            , "font-weight-bold text-dark"
-        ), "modal-body"
+            , "font-weight-bold text-dark text-center"
+        ), "modal-body mt-5 mb-5"
     );
-
-    $mod[] = d(
-        form_button(
-
+    $cerrar = d(
+        icon(_text_(_eliminar_icon, 'fa-2x'),
             [
-                "type" => "button",
-                "class" => "btn btn-secondary",
                 "data-dismiss" => "modal",
             ]
-            ,
-            "Cerrar"
-        ), "modal-footer");
+        ), 'ml-auto'
+    );
 
-
-    $r[] = d(
-        d(
-            d($mod, "modal-content"),
-            [
-                "class" => "modal-dialog",
-                "role" => "document",
-
-            ]
-        ), [
+    $cerrar = d($cerrar, "modal-header border-0");
+    $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content rounded-0");
+    $contenido = d(
+        $seccion_contenido
+        ,
+        [
+            "class" => "modal-dialog",
+            "role" => "document",
+        ]
+    );
+    $modal = d(
+        $contenido,
+        [
 
             "class" => "modal",
             "tabindex" => "-1",
@@ -2506,7 +2503,7 @@ function gb_modal()
         ]
     );
 
-    return d($r, 13);
+    return d($modal, 13);
 
 }
 

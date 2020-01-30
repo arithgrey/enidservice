@@ -513,11 +513,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
             input_frm('w-100', "SALDO CUBIERTO MXM",
                 [
-                    "class" => "form-control saldo_cubierto_pos_venta",
+                    "class" => "saldo_cubierto_pos_venta",
                     "id" => "saldo_cubierto_pos_venta",
                     "type" => "number",
                     "step" => "any",
-                    "required" => "true",
+                    "required" => true,
                     "name" => "saldo_cubierto",
                     "value" => $recibo[0]["saldo_cubierto"],
                 ]
