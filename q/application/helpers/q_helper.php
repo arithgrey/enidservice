@@ -888,15 +888,16 @@ if (!function_exists('invierte_date_time')) {
     function add_ventas_semana($ventas)
     {
 
-        $link = a_enid(
-            add_text("ventas de la semana", $ventas, 1),
+        $ventas = d($ventas, 'border p-2 border-secondary');
+        return a_enid(
+            flex("ventas de la semana", $ventas, _between),
             [
                 "href" => path_enid("pedidos"),
                 "class" => "strong text-uppercase h3 color_azul_fuerte",
             ]
         );
 
-        return $link;
+
     }
 
     function add_tareas($tareas)
@@ -1516,11 +1517,12 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
 
         $ventas_enid_service = $info["ventas_enid_service"];
+        $ventas_semana = $info["ventas_semana"];
+
         $tareas_enid_service = $inf["tareas_enid_service"];
         $num_telefonico = $inf["numero_telefonico"];
 
-
-        $lista[] = add_ventas_semana($info["ventas_semana"]);
+        $lista[] = add_ventas_semana($ventas_semana);
         $tareas = add_tareas($info["tareas"]);
         $f = $f + $tareas["flag"];
         $lista[] = $tareas["html"];
@@ -1538,21 +1540,17 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $usuarios_sin_tag_arquetipos["flag"];
         $lista[] = $usuarios_sin_tag_arquetipos["html"];
 
-
         $recordatorios = add_recordatorios($info["recordatorios"]);
         $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
-
 
         $preguntas = add_preguntas_sin_lectura($info["preguntas"]);
         $lista[] = $preguntas["html"];
         $f = $f + $preguntas["flag"];
 
-
         $respuestas = add_respuestas_sin_lectura($info["respuestas"]);
         $lista[] = $respuestas["html"];
         $f = $f + $respuestas["flag"];
-
 
         $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
         $f = $f + $deuda["flag"];
