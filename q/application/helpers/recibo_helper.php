@@ -15,33 +15,34 @@ if (!function_exists('invierte_date_time')) {
         $url_seguimiento = path_enid('pedido_seguimiento', $id_recibo);
 
         $response[] = get_format_transaccion($id_recibo, 1);
-        $response[] = h("VENDEDOR", 4, "text-center");
+        $response[] = _titulo("VENDEDOR", 4);
 
         $usuario_venta = pr($usuario_venta, "nombre");
-        $nombre_vendedor = add_text($usuario_venta,
-            pr($usuario_venta, "apellido_materno"), 1);
+        $apellido = pr($usuario_venta, "apellido_materno");
+        $nombre_vendedor = _text_($usuario_venta, $apellido);
 
-        $rr[] = h($nombre_vendedor, 5, "top_50 letter-spacing-10 underline strong text-upper");
+        $rr[] = _titulo($nombre_vendedor, 5);
 
         if (strlen($usuario_venta) > 4) {
 
-            $response[] = h("NFORMACIÓN DE CONTACTO", 4, "text-center");
-            $rr[] = h(pr($usuario_venta, "tel_contacto"), 5, 'mt-5');
+            $response[] = _titulo("información de contacto", 5);
+            $telefono = pr($usuario_venta, "tel_contacto");
+            $rr[] = _titulo($telefono, 5);
         }
 
 
         $response[] = d($rr);
+        $resumen_pedido = pr($recibo, "resumen_pedido");
 
-        $b[] = ajustar("DETALLES", pr($recibo, "resumen_pedido"), 3, "top_30 strong");
+        $b[] = flex_md("DETALLES", $resumen_pedido, _between_md);
 
-        $str = _text("PRECIO", money($precio));
-        $b[] = ($precio > 0) ? ajustar("PRECIO", $str, 3, "mt-5") :
-            ajustar("PRECIO ", "SOLICITADO AL VENDEDOR", 3, "mt-5");
+        $descripcion_precio = flex_md("PRECIO:", money($precio), _between_md);
+        $descripcion_precio_solicitado = flex_md("PRECIO ", "SOLICITADO AL VENDEDOR", _between);
+        $b[] = ($precio > 0) ? $descripcion_precio : $descripcion_precio_solicitado;
 
-        $b[] = ($precio > 0) ? ajustar("MONTO A PAGAR",
-            _text("$", $monto_a_pagar, "MXN"),
-            3,
-            "mt-5") : "";
+        if ($precio > 0) {
+            $b[] = flex_md("MONTO A PAGAR", money($monto_a_pagar));
+        }
 
         $c[] = d("Total de la compra", "top_40 strong text-uppercase");
         $str = _text("$", $monto_a_pagar, "MXN");
@@ -49,12 +50,11 @@ if (!function_exists('invierte_date_time')) {
         $t[] = d($b);
         $t[] = d($c);
         $response[] = append($t);
-        $response[] = btn("RASTREAR COTIZACIÓN",
+        $response[] = format_link("RASTREAR COTIZACIÓN",
             [
                 "href" => $url_seguimiento,
                 "class" => "top_50 bottom_50",
-            ], 1, 1, 0,
-            $url_seguimiento
+            ]
         );
 
         $_response[] = append(
@@ -64,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        return d(append($_response), 6, 1);
+        return d($_response, _8auto);
 
     }
 
@@ -282,10 +282,9 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $r[] = d(d(img_enid(), "w_200 "), "row d-flex justify-content-center");
-            $r[] = h("Detalles ", 2, "text-center");
-            $r[] = h(add_text("#Recibo: ", $id_recibo), 3, "text-center bottom_40");
-            $r[] = hr();
+            $r[] = d(d(img_enid(), "w_200"), "d-flex justify-content-center");
+            $r[] = _titulo(add_text("#Recibo: ", $id_recibo), 3);
+            $r[] = hr([],0);
 
         }
 
@@ -1202,7 +1201,7 @@ if (!function_exists('invierte_date_time')) {
                 'class' => 'text-right mt-5',
             ]
             , 1, 0
-        ),_12p);
+        ), _12p);
 
         $seccion[] = d(format_link(
             "Cambia la dirección de entrega",
@@ -1215,14 +1214,14 @@ if (!function_exists('invierte_date_time')) {
             ]
             ,
             0, 0
-        ),_12p);
+        ), _12p);
 
         $seccion[] = d(format_link('Cancelar compra',
             [
                 "class" => "cancelar_compra mt-3 text-right text-uppercase",
                 "id" => $id_recibo, "modalidad" => '0',
             ], 0, 0
-        ),_12p);
+        ), _12p);
 
         $response[] = d_row(append($seccion));
         return append($response);
