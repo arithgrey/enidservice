@@ -121,7 +121,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($x, 3);
         $producto = append($r);
         $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5  ");
-        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes), 10, 1);
+        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session), 10, 1);
+
         $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
 
         $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
@@ -167,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
             $q2,
             $tiempo_entrega,
             $proceso_compra);
-        $r[] = agregar_lista_deseos(0, $in_session);
+//        $r[] = agregar_lista_deseos(0, $in_session);
 
 
         $r[] = $tallas;
@@ -239,9 +240,9 @@ if (!function_exists('invierte_date_time')) {
             , _between
         );
         $r[] = $tiempo_entrega;
-        $r[] = btn("Lo quiero", ["class" => "text-left mt-5 text-uppercase"]);
-
+        $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
         $r[] = form_close();
+        $r[] = d('ó', 'text-center mt-1 mb-1 ');
 
 
         $path = _text("../puntos_medios/?producto=", $id_servicio);
@@ -341,7 +342,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function desc_servicio($servicio, $proceso_compra, $data, $imgs)
+    function desc_servicio($servicio, $proceso_compra, $data, $imgs, $in_session)
     {
 
         $usuario = $data["usuario"];
@@ -382,9 +383,12 @@ if (!function_exists('invierte_date_time')) {
         $flex = ($i["es_imagen"] > 0) ? "align-items-center" : ["d-lg-flex "];
 
         $contenido_descripcion = append($z);
+
+        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session);
+        $imagen = flex_md($i["img"], $agregar_lista_deseos,'flex-column');
         $r[] = flex(
             $contenido_descripcion,
-            $i["img"],
+            $imagen,
             $flex,
             $izquierdo,
             $derecha
@@ -628,7 +632,7 @@ if (!function_exists('invierte_date_time')) {
                     text_icon("fa fa-long-arrow-right", "Lo deseo ", [], 0)
                     ,
                     [
-                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark ',
+                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark p-2',
 
                     ]
 
@@ -644,13 +648,10 @@ if (!function_exists('invierte_date_time')) {
                         text_icon("fa fa-long-arrow-right", "Lo deseo", [], 0),
                         [
                             "id" => 'agregar_a_lista_deseos_add',
-                            "class" => "cursor_pointer border agregar_a_lista_deseos l_deseos p-1 border-dark mt-3 text-uppercase strong border_bottom_big"
+                            "class" => "cursor_pointer border agregar_a_lista_deseos l_deseos p-1 border-dark mt-3 text-uppercase strong border_bottom_big p-2"
 
                         ]
-
-
                     );
-
             }
             return $btn;
 

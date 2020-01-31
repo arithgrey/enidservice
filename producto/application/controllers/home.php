@@ -223,7 +223,10 @@ class Home extends CI_Controller
             "tenlo el  ",
             $entrega
         );
-        return d($text, "text-uppercase mt-5 ");
+
+        $response[] = d($text, "text-uppercase mt-5 ");
+        $response[] = d(_titulo('Tienes una de dos',4), 'mt-5 text-center');
+        return append($response);
     }
 
     private function descripcion($servicio)
