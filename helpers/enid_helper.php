@@ -1918,6 +1918,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "youtube_embebed" => "https://www.youtube.com/embed/",
         "area_cliente_compras" => "area_cliente/?action=compras&ticket=",
         "area_cliente" => "area_cliente",
+        "_area_cliente" => "../area_cliente",
         "area_cliente_pregunta" => "area_cliente/?action=preguntas",
         "instagram" => "https://www.instagram.com/enid_service/",
         "twitter" => "https://twitter.com/enidservice",

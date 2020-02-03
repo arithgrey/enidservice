@@ -11,6 +11,7 @@ class Home extends CI_Controller
         $this->load->library("table");
         $this->load->library('breadcrumbs');
         $this->load->library(lib_def());
+        $this->id_usuario = $this->app->get_session("idusuario");
     }
 
     function index()
@@ -353,12 +354,6 @@ class Home extends CI_Controller
     {
 
 
-        if ($this->app->getperfiles() != 3) {
-
-            header("location:" . path_enid("area_cliente"));
-
-        }
-
         $data = $this->app->cssJs($data, "pedidos");
 
         $data += [
@@ -391,12 +386,14 @@ class Home extends CI_Controller
     private function carga_detalle_pedido($param, $data)
     {
 
-
+        $id_perfil = $data['id_perfil'];
         $id_recibo = $param["recibo"];
         $recibo = $this->get_recibo($id_recibo, 1);
+        $id_usuario_venta = pr($recibo, 'id_usuario_venta');
+        propietario(
+            $this->id_usuario, $id_usuario_venta, path_enid('_area_cliente'));
 
         if (es_data($recibo) > 0) {
-
 
             $data += [
 
@@ -418,38 +415,12 @@ class Home extends CI_Controller
                 if ($id_usuario > 0) {
                     $data["usuario"] = $this->app->usuario($id_usuario);
                 }
-                $this->app->pagina($data,
-                    form_fecha_recordatorio($data, $this->get_tipo_recordatorio()),
-                    1);
+                $form = form_fecha_recordatorio($data, $this->get_tipo_recordatorio());
+                $this->app->pagina($data, $form, 1);
 
             } else {
 
-
-                $id_usuario = pr($recibo, "id_usuario");
-                $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
-                $num_compras = $this->get_num_compras($id_usuario);
-                $cupon = $this->cupon($id_recibo, $servicio, $num_compras);
-                $data += [
-                    "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
-                    "usuario" => $this->get_usuario($id_usuario),
-                    "status_ventas" => $this->get_estatus_enid_service(),
-                    "tipificaciones" => $this->get_tipificaciones($id_recibo),
-                    "comentarios" => $this->get_recibo_comentarios($id_recibo),
-                    "recordatorios" => $this->get_recordatorios($id_recibo),
-                    "id_recibo" => $id_recibo,
-                    "tipo_recortario" => $this->get_tipo_recordatorio(),
-                    "num_compras" => $num_compras,
-                    "servicio" => $servicio,
-                    "cupon" => $cupon,
-                    "tipo_tag_arquetipo" => $this->get_tipo_tag_arqquetipo(),
-                    "tag_arquetipo" => $this->tag_arquetipo($id_usuario),
-                    "negocios" => $this->tipos_negocio(),
-                    "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario)
-
-                ];
-//                xmp($data['usuario_tipo_negocio']);
-
-                $this->app->pagina($data, render_pendidos($data), 1);
+                $this->pedido($data, $recibo, $id_perfil);
             }
 
 
@@ -458,6 +429,40 @@ class Home extends CI_Controller
             $this->app->pagina($data, get_error_message(), 1);
         }
 
+    }
+
+    private function pedido($data, $recibo, $id_perfil)
+    {
+        $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+        $id_usuario = pr($recibo, "id_usuario");
+        $tipo_tag_arqquetipo = ($id_perfil === 3) ? $this->get_tipo_tag_arqquetipo() : [];
+        $tag_arquetipo = ($id_perfil === 3) ? $this->tag_arquetipo($id_usuario) : [];
+        $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
+        $num_compras = $this->get_num_compras($id_usuario);
+        $cupon = $this->cupon($id_recibo, $servicio, $num_compras);
+
+
+        $data += [
+            "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
+            "usuario" => $this->get_usuario($id_usuario),
+            "status_ventas" => $this->get_estatus_enid_service(),
+            "tipificaciones" => $this->get_tipificaciones($id_recibo),
+            "comentarios" => $this->get_recibo_comentarios($id_recibo),
+            "recordatorios" => $this->get_recordatorios($id_recibo),
+            "id_recibo" => $id_recibo,
+            "tipo_recortario" => $this->get_tipo_recordatorio(),
+            "num_compras" => $num_compras,
+            "servicio" => $servicio,
+            "cupon" => $cupon,
+            "tipo_tag_arquetipo" => $tipo_tag_arqquetipo,
+            "tag_arquetipo" => $tag_arquetipo,
+            "negocios" => $this->tipos_negocio(),
+            "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario)
+
+        ];
+
+
+        $this->app->pagina($data, render_pendidos($data), 1);
     }
 
     private function get_tipo_recordatorio()

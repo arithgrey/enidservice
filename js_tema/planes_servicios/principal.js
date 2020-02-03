@@ -725,6 +725,7 @@ let listar_categorias = (data) => {
 
 
 let set_nombre_servicio_html = n_nombre_servicio => {
+
     set_option("nombre_servicio", n_nombre_servicio);
     let nombre_servicio = n_nombre_servicio;
     $(".nombre_producto").val(n_nombre_servicio);

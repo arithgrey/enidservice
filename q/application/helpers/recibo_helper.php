@@ -490,7 +490,7 @@ if (!function_exists('invierte_date_time')) {
                 span($estado_compra, 'font-weight-bold estado_compra'),
                 $tipo_entrega,
                 money($monto_a_pagar),
-                $entrega,
+                format_fecha($entrega),
             ];
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
