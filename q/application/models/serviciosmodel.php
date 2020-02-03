@@ -407,14 +407,17 @@ class serviciosmodel extends CI_Model
 
     function busqueda($param)
     {
-        $response["total_busqueda"] = $this->get_resultados_posibles($param);
+
+        $busqueda = $this->get_resultados_posibles($param);
+        $response["total_busqueda"] = $busqueda['num_servicios'];
+        $where = $busqueda['where'];
         $_num = mt_rand();
-        $this->create_productos_disponibles(0, $_num, $param);
+        $this->create_productos_disponibles(0, $_num, $param, $where);
         $response["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
         if ($param["agrega_clasificaciones"] > 0) {
             $response["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
         }
-        $this->create_productos_disponibles(1, $_num, $param);
+        $this->create_productos_disponibles(1, $_num, $param, $where);
         return $response;
     }
 
@@ -475,15 +478,13 @@ class serviciosmodel extends CI_Model
                 metakeyword_usuario) 
                 AGAINST ('" . $q . "*' IN BOOLEAN MODE) " : "";
 
-
         $no_empresa = (prm_def($param, 'es_empresa') < 1) ? 'AND  es_publico >  0' : ' ';
-        $sql_extra = " 
+        return " 
                     WHERE 
                     flag_imagen > 0
                     " . $extra_empresa . "
                     " . $extra_vendedor . "
-                    " . $extra_existencia . "
-        
+                    " . $extra_existencia . "       
                     AND 
                     status = 1
                     " . $no_empresa . "   
@@ -491,9 +492,6 @@ class serviciosmodel extends CI_Model
                     " . $sql_match . "
                     " . $orden . "
                     " . $limit;
-
-
-        return $sql_extra;
 
     }
 
@@ -742,16 +740,19 @@ class serviciosmodel extends CI_Model
     {
 
         $data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
+        $busqueda = $this->get_resultados_posibles($param);
+        $data_complete["total_busqueda"] = $busqueda['num_servicios'];
+        $where = $busqueda['where'];
         $_num = mt_rand();
-        $this->create_productos_disponibles(0, $_num, $param);
-        $query_get = "SELECT * FROM tmp_producto_$_num ";
+        $this->create_productos_disponibles(0, $_num, $param, $where);
+        $query_get = "SELECT * FROM tmp_producto_$_num";
         $result = $this->db->query($query_get);
         $servicios = $result->result_array();
         $data_complete["servicio"] = $servicios;
         if ($param["agrega_clasificaciones"] > 0) {
             $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
         }
-        $this->create_productos_disponibles(1, $_num, $param);
+        $this->create_productos_disponibles(1, $_num, $param, $where);
         return $data_complete;
 
     }
@@ -761,51 +762,30 @@ class serviciosmodel extends CI_Model
     {
 
         $query_where = $this->get_sql_servicio($param, 1);
-        $query_get = "SELECT  
-                        COUNT(0)num_servicios 
-                    FROM 
-                        servicio  " . $query_where;
-        return $this->db->query($query_get)->result_array()[0]["num_servicios"];
+        $where = $this->get_sql_servicio($param, 0);
+        $query_get = _text_("SELECT  COUNT(0)num_servicios FROM servicio  ", $query_where);
+        $num_servicios = $this->db->query($query_get)->result_array()[0]["num_servicios"];
+        return [
+            'num_servicios' => $num_servicios,
+            'where' => $where
+        ];
 
     }
 
 
-    function create_productos_disponibles($flag, $_num, $param)
+    function create_productos_disponibles($flag, $_num, $param, $where)
     {
 
-        $this->db->query("DROP TABLE IF exists tmp_producto_$_num");
+        $response = $this->db->query("DROP TABLE IF exists tmp_producto_$_num");
         if ($flag == 0) {
 
-            $where = $this->get_sql_servicio($param, 0);
+            $campos_clasificacion = ", primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel , quinto_nivel";
+            $param_extra = ($param["agrega_clasificaciones"] > 0) ? $campos_clasificacion : "";
+            $query_create = _text_("CREATE TABLE tmp_producto_$_num AS SELECT  id_servicio, nombre_servicio, id_usuario, metakeyword", $param_extra, " FROM servicio ", $where);
+            $response = $this->db->query($query_create);
 
-
-            $param_extra = ($param["agrega_clasificaciones"] > 0) ?
-                ",primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel 
-            , quinto_nivel" : "";
-
-
-            $query_create = "CREATE TABLE tmp_producto_$_num AS 
-                            SELECT  
-                                id_servicio ,                              
-                                nombre_servicio,
-                                id_usuario,                         
-                                metakeyword                                 
-                                /*
-                                flag_servicio,                                                     
-                                flag_envio_gratis,
-                                color,   
-                                precio , 
-                                existencia,
-                                id_ciclo_facturacion,
-                                vista,
-                                valoracion,
-                                deseado*/      
-                                " . $param_extra . "                       
-                            FROM 
-                            servicio" . $where;
-
-            $this->db->query($query_create);
         }
+        return $response;
     }
 
     function agrega_metakeyword_sistema($param)

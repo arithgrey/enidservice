@@ -424,15 +424,7 @@ if (!function_exists('invierte_date_time')) {
             ]
 
         );
-        $link_productos_venta = a_enid(
-            text_icon('fa fa-credit-card-alt', 'TUS PRODUCTOS EN VENTA'),
 
-            [
-                'href' => path_enid('search_q3', _text($id_usuario, "&tienda=1")),
-                'class' => 'text-right'
-            ]
-
-        );
 
         $list = [
             $link_cuenta
@@ -444,8 +436,6 @@ if (!function_exists('invierte_date_time')) {
             $link_privacidad
             ,
             $link_preferencias
-            ,
-            $link_productos_venta
             ,
             $final
 

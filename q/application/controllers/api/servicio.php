@@ -14,7 +14,8 @@ class Servicio extends REST_Controller
         $this->load->model("serviciosmodel");
         $this->load->library('table');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $loggin = $this->app->is_logged_in();
+        $this->id_usuario = (!$loggin) ? prm_def($this->get(), "id_usuario") : $this->app->get_session("idusuario");
     }
 
     function envio_gratis_GET()
@@ -700,10 +701,11 @@ class Servicio extends REST_Controller
     function empresa_GET()
     {
 
+        $param = $this->get();
+        $response = false;
+        if (fx($param, 'q,page,order')) {
 
-        if ($this->input->is_ajax_request() OR $_SERVER['HTTP_HOST'] == "localhost") {
 
-            $param = $this->get();
             $param["q"] = $this->get("q");
             $param["id_usuario"] = $this->id_usuario;
             $param["id_clasificacion"] = prm_def($param, "q2");
@@ -714,31 +716,34 @@ class Servicio extends REST_Controller
 
             $servicios = $this->get_servicios_empresa($param);
 
-            if (es_data($servicios)) {
-                if ($servicios["num_servicios"] > 0) {
+            if (es_data($servicios) && array_key_exists('num_servicios', $servicios)) {
 
-                    $this->response($this->get_view_empresa($servicios, $param));
+                $response = $this->get_view_empresa($servicios, $param);
 
-                }
             } else {
 
-                $data_complete["num_servicios"] = 0;
-                $data_complete["info_servicios"] = btw(
-                    icon("fa fa-search")
-                    ,
-                    "Tu búsqueda de " . $param["q"] . " (0 Productos) ",
-                    ""
-                );
-                $this->response($data_complete);
+                $response = $servicios;
+//
+//            $data_complete["num_servicios"] = 0;
+//            $data_complete["info_servicios"] = btw(
+//                icon("fa fa-search")
+//                ,
+//                _text_("Tu búsqueda de ", $param["q"], " (0 Productos) "),
+//                ""
+//            );
+//            $this->response($data_complete);
             }
-        } else {
-            $this->response("error");
+
+
         }
+        $this->response($response);
+
 
     }
 
     private function get_servicios_empresa($q)
     {
+
         $q["es_empresa"] = 1;
         return $this->app->api("servicio/q/format/json/", $q);
     }
@@ -1115,15 +1120,23 @@ class Servicio extends REST_Controller
     {
 
         $param = $this->get();
-        $param["id_usuario"] = ($this->app->is_logged_in() && $this->id_usuario > 0) ? $this->id_usuario : prm_def($param, "id_usuario");
-        $servicios = $this->serviciosmodel->busqueda($param);
-        $servicios += [
-            "url_request" => get_url_request(""),
-            "num_servicios" => $servicios["total_busqueda"],
-        ];
-        if (array_key_exists("es_empresa", $param) != false) {
-            $this->add_gamificacion_search($param);
+        $param["id_usuario"] = $this->id_usuario;
+
+        $servicios = false;
+        if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
+
+            $es_empresa = array_key_exists("es_empresa", $param);
+            $servicios = $this->serviciosmodel->busqueda($param);
+            $total_busqueda = prm_def($servicios, 'total_busqueda');
+            $servicios += [
+                "url_request" => get_url_request(""),
+                "num_servicios" => $total_busqueda,
+            ];
+            if ($es_empresa) {
+                $this->add_gamificacion_search($param);
+            }
         }
+
         $this->response($servicios);
 
 
@@ -1131,7 +1144,7 @@ class Servicio extends REST_Controller
 
     private function add_gamificacion_search($q)
     {
-        if (array_key_exists("q", $q) > 0 && strlen(trim($q["q"])) > 1) {
+        if (prm_def($q, 'q', FALSE) != FALSE && strlen($q['q']) > 1) {
 
             $this->app->api("metakeyword/gamificacion_search/format/json/", $q, "json", "POST");
         }
