@@ -45,7 +45,6 @@ define('_8', "col-sm-8");
 define('_12', "col-sm-12");
 
 
-
 define('_between', 'justify-content-between align-items-center w-100');
 define('_between_md', 'justify-content-between align-items-center w-100 text-center');
 define('_between_end', 'justify-content-between align-items-end w-100');
@@ -78,6 +77,4 @@ define('_money_icon', 'fa fa-money');
 define('_historia_icon', 'fa fa-history');
 define('_tiempo_icon', 'fa fa-clock-o');
 define('_eliminar_icon', 'fa fa-times');
-
-
-
+define('_delivery_icon', 'fa fa-fighter-jet');

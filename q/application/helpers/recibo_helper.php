@@ -763,19 +763,19 @@ if (!function_exists('invierte_date_time')) {
 
         $text_icono =
             ($vendedor == 1) ?
-                "DETALLES DE LA COMPRA " : text_icon('fa fa-credit-card-alt',
+                "DETALLES DE LA COMPRA " : text_icon(_money_icon,
                 "DETALLES DE TU COMPRA ");
 
         $text = tab(
             $text_icono,
             "#tab_renovar_servicio",
             [
-                "class" => 'resumen_pagos_pendientes mt-4 mb-4',
+                "class" => 'resumen_pagos_pendientes mt-4 mb-4 strong black',
                 "id" => $id_recibo,
             ]
         );
 
-        return d($text);
+        return d($text,'col-md-3');
     }
 
 
@@ -1137,7 +1137,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = d(
                 d($t,
-                    "align-items-center d-md-flex border padding_20 top_20 justify-content-between min_block text-center"),
+                    "align-items-center d-md-flex border border border-secondary mt-4 mb-4 p-4 justify-content-between min_block text-center"),
                 1);
         }
 

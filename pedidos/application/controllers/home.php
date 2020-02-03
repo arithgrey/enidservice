@@ -28,9 +28,11 @@ class Home extends CI_Controller
 
         } else {
 
+
             $fn = (prm_def($param,
-                    "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ? $this->carga_vista_costos_operacion($param,
-                $data) : $this->seguimiento_pedido($param, $data);
+                    "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ?
+                $this->carga_vista_costos_operacion($param, $data) :
+                $this->seguimiento_pedido($param, $data);
 
         }
     }
@@ -279,6 +281,11 @@ class Home extends CI_Controller
     function carga_vista_costos_operacion($param, $data)
     {
 
+        $id_recibo = $param['costos_operacion'];
+        $recibo = $this->get_recibo($id_recibo);
+        $id_usuario_venta = pr($recibo, 'id_usuario_venta');
+        propietario($this->id_usuario, $id_usuario_venta, path_enid('_area_cliente'));
+
         $data = $this->app->cssJs($data, "pedidos");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
         $this->table->set_heading([
@@ -309,7 +316,6 @@ class Home extends CI_Controller
         $seccion[] = d(flex("SALDADO: ", money($param["saldado"]), _between));
         $seccion[] = d(flex("utilidad:", money($utilidad), _between, _t2, _t2));
         $totales = d($seccion, 'd-flex flex-column');
-
         $recibo = $this->get_ppfp($param["costos_operacion"]);
         $id_servicio = (es_data($recibo)) ? pr($recibo, "id_servicio") : 0;
         $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
@@ -405,7 +411,8 @@ class Home extends CI_Controller
             if (prm_def($param, "fecha_entrega") > 0) {
 
 
-                $this->app->pagina($data, get_form_fecha_entrega($data), 1);
+                $form = get_form_fecha_entrega($data);
+                $this->app->pagina($data, $form, 1);
 
 
             } elseif (prm_def($param, "recordatorio") > 0) {
@@ -435,8 +442,8 @@ class Home extends CI_Controller
     {
         $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
         $id_usuario = pr($recibo, "id_usuario");
-        $tipo_tag_arqquetipo = ($id_perfil === 3) ? $this->get_tipo_tag_arqquetipo() : [];
-        $tag_arquetipo = ($id_perfil === 3) ? $this->tag_arquetipo($id_usuario) : [];
+        $tipo_tag_arqquetipo = ($id_perfil == 3) ? $this->get_tipo_tag_arqquetipo() : [];
+        $tag_arquetipo = ($id_perfil == 3) ? $this->tag_arquetipo($id_usuario) : [];
         $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
         $num_compras = $this->get_num_compras($id_usuario);
         $cupon = $this->cupon($id_recibo, $servicio, $num_compras);

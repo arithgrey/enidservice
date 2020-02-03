@@ -1256,7 +1256,9 @@ function fx($param, $k = '', $num = 0)
 function textarea($attributes = [], $row_12 = 0, $def = '')
 {
 
-    $attributes["rows"] = "2";
+
+    $attributes["rows"] = prm_def($attributes, 'rows', 2);
+
     if (array_key_exists("class", $attributes)) {
         $attributes["class"] = _text_(
             $attributes["class"], " form-control rounded-0");
