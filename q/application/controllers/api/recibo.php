@@ -604,8 +604,9 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v")) {
-
+        $es_usuario = ($this->id_usuario > 0);
+        if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v") && $es_usuario) {
+            $param['id_usuario'] =  $this->id_usuario;
             $params = [
                 "p.id_proyecto_persona_forma_pago recibo",
                 "p.saldo_cubierto",
@@ -642,6 +643,7 @@ class recibo extends REST_Controller
                     "fecha_cancelacion",
                     "fecha_pago",
                 ];
+
 
                 $response = $this->recibo_model->q_get($params, $param["recibo"]);
 
@@ -762,7 +764,7 @@ class recibo extends REST_Controller
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
 
-        $response = _text_(_text_pago , money($pago_pendiente ));
+        $response = _text_(_text_pago, money($pago_pendiente));
         if ($param["saldo_cubierto"] > 0 && $param["saldo_cubierto"] >= $pago_pendiente || ($pago_pendiente - $param["saldo_cubierto"]) < 101) {
 
             $response = $this->recibo_model->set_status_orden($param["saldo_cubierto"], 1,

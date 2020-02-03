@@ -2,6 +2,20 @@
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
+    function propietario($usurio_actual, $usuario_venta, $si_falla = FALSE)
+    {
+
+        $es_propietario = ($usurio_actual === $usuario_venta);
+        if ($si_falla !== FALSE) {
+            if (!$es_propietario) {
+
+                redirect($si_falla);
+            }
+        } else {
+            return $es_propietario;
+        }
+    }
+
     function render_pendidos($data)
     {
 
@@ -15,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
         $cupon = $data['cupon'];
         $negocios = $data['negocios'];
         $usuario_tipo_negocio = $data['usuario_tipo_negocio'];
-
+        $id_perfil = $data['id_perfil'];
         $usuario = $data["usuario"];
         $re[] = d(menu($domicilio, $r, $id_recibo, $usuario), 'col-sm-12 mr-5 pr-5 d-md-none');
 
@@ -34,8 +48,12 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
         $re[] = frm_nota($id_recibo);
         $re[] = create_seccion_comentarios($data["comentarios"]);
-        $re[] = formulario_arquetipos($id_cliente, $data['tipo_tag_arquetipo'], $negocios, $usuario_tipo_negocio);
-        $re[] = tags_arquetipo($data['tag_arquetipo'], $data['tipo_tag_arquetipo']);
+        $re[] = formulario_arquetipos(
+            $id_cliente, $data['tipo_tag_arquetipo'],
+            $negocios, $usuario_tipo_negocio, $id_perfil);
+
+        $re[] = tags_arquetipo(
+            $data['tag_arquetipo'], $data['tipo_tag_arquetipo'], $id_perfil);
 
         $response[] = d(d($re, 12), 8);
 
@@ -49,115 +67,129 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo, $negocios, $usuario_tipo_negocio)
+    function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo,
+                                   $negocios, $usuario_tipo_negocio, $id_perfil)
     {
 
-        $response[] = _titulo('tags arquetipos', 4);
-        $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
-        $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
-        $text_tipo = _titulo('tipo negocio', 5);
-        $response[] = text_icon(_text_(_editar_icon, 'editar_usuario_tipo_negocio'), _titulo($negocio_registrado, 4));
-        $response[] = form_open('', ["class" => 'form_usuario_tipo_negocio d-none']);
-        $tipo = create_select_selected(
-            $negocios, 'idtipo_negocio', 'nombre',
-            $id_tipo_negocio, 'tipo_negocio', 'usuario_tipo_negocio'
-        );
+        $response = [];
+        if ($id_perfil === 3) {
 
-        $response[] = flex($text_tipo, $tipo, _between);
-        $response[] = hiddens(['name' => 'id_usuario', 'value' => $id_usuario]);
-
-        $response[] = form_close();
-
-
-        foreach ($tipo_tag_arquetipo as $row) {
-
-            $descripcion = $row['tipo'];
-            $tipo = $row['id_tipo_tag_arquetipo'];
-            $clase_form = 'form_tag_arquetipo mt-5';
-            $response[] = form_open("", ["class" => $clase_form]);
-            $class = _text('tag', $tipo);
-            $input = input_frm('', $descripcion,
-                [
-                    'class' => $class,
-                    'id' => $class,
-                    'name' => 'tag',
-                    'onkeyup' => "this.value = this.value.toUpperCase();"
-
-                ], '¿Falta este dato no?'
+            $response[] = _titulo('tags arquetipos', 4);
+            $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
+            $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
+            $text_tipo = _titulo('tipo negocio', 5);
+            $response[] = text_icon(
+                _text_(_editar_icon, 'editar_usuario_tipo_negocio'),
+                _titulo($negocio_registrado, 4));
+            $response[] = form_open('', ["class" => 'form_usuario_tipo_negocio d-none']);
+            $tipo = create_select_selected(
+                $negocios, 'idtipo_negocio', 'nombre',
+                $id_tipo_negocio, 'tipo_negocio', 'usuario_tipo_negocio'
             );
-            $submit = btn('Guardar');
 
-            $response[] = flex_md($input, $submit, _text_(_between, _mbt5), _8p);
-            $response[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
-            $response[] = hiddens(['name' => 'tipo', 'value' => $tipo]);
+            $response[] = flex($text_tipo, $tipo, _between);
+            $response[] = hiddens(['name' => 'id_usuario', 'value' => $id_usuario]);
+
             $response[] = form_close();
-        }
 
-        return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
+
+            foreach ($tipo_tag_arquetipo as $row) {
+
+                $descripcion = $row['tipo'];
+                $tipo = $row['id_tipo_tag_arquetipo'];
+                $clase_form = 'form_tag_arquetipo mt-5';
+                $response[] = form_open("", ["class" => $clase_form]);
+                $class = _text('tag', $tipo);
+                $input = input_frm('', $descripcion,
+                    [
+                        'class' => $class,
+                        'id' => $class,
+                        'name' => 'tag',
+                        'onkeyup' => "this.value = this.value.toUpperCase();"
+
+                    ], '¿Falta este dato no?'
+                );
+                $submit = btn('Guardar');
+
+                $response[] = flex_md($input, $submit, _text_(_between, _mbt5), _8p);
+                $response[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
+                $response[] = hiddens(['name' => 'tipo', 'value' => $tipo]);
+                $response[] = form_close();
+            }
+
+            return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
+        }
+        return append($response);
 
 
     }
 
-    function tags_arquetipo($tag_arquetipo, $tipo_tag_arquetipo)
+    function tags_arquetipo($tag_arquetipo, $tipo_tag_arquetipo, $id_perfil)
     {
 
 
-        $prioridad_1[] = d_p($tipo_tag_arquetipo[0]['tipo'], _text_('mt-3 ', _strong));
-        $prioridad_2[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 2, 'tipo'), _text_('mt-3 ', _strong));
-        $prioridad_3[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 3, 'tipo'), _text_('mt-3 ', _strong));
-        $prioridad_4[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 4, 'tipo'), _text_('mt-3 ', _strong));
-        $prioridad_5[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 5, 'tipo'), _text_('mt-3 ', _strong));
-        $prioridad_6[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 6, 'tipo'), _text_('mt-3 ', _strong));
-        $prioridad_7[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 7, 'tipo'), _text_('mt-3 ', _strong));
+        $response = [];
 
-        foreach ($tag_arquetipo as $row) {
+        if ($id_perfil === 3) {
 
 
-            $tag = $row['tag'];
-            $id_tipo_tag_arquetipo = $row['id_tipo_tag_arquetipo'];
+            $prioridad_1[] = d_p($tipo_tag_arquetipo[0]['tipo'], _text_('mt-3 ', _strong));
+            $prioridad_2[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 2, 'tipo'), _text_('mt-3 ', _strong));
+            $prioridad_3[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 3, 'tipo'), _text_('mt-3 ', _strong));
+            $prioridad_4[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 4, 'tipo'), _text_('mt-3 ', _strong));
+            $prioridad_5[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 5, 'tipo'), _text_('mt-3 ', _strong));
+            $prioridad_6[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 6, 'tipo'), _text_('mt-3 ', _strong));
+            $prioridad_7[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 7, 'tipo'), _text_('mt-3 ', _strong));
 
-            $base = 'ml-5 f9';
+            foreach ($tag_arquetipo as $row) {
 
-            $str = _text_(text_icon(_text_(_eliminar_icon, 'baja_tag_arquetipo'), _text_('-', $tag), ['id' => $row['id']], 0));
-            switch ($id_tipo_tag_arquetipo) {
 
-                case 1:
-                    $prioridad_1[] = li($str, $base);
-                    break;
-                case 2:
-                    $prioridad_2[] = li($str, $base);
-                    break;
-                case 3:
-                    $prioridad_3[] = li($str, $base);
-                    break;
-                case 4:
-                    $prioridad_4[] = li($str, $base);
-                    break;
-                case 5:
-                    $prioridad_5[] = li($str, $base);
-                    break;
-                case 6:
-                    $prioridad_6[] = li($str, $base);
-                    break;
-                case 7:
-                    $prioridad_7[] = li($str, $base);
-                    break;
-                default:
+                $tag = $row['tag'];
+                $id_tipo_tag_arquetipo = $row['id_tipo_tag_arquetipo'];
+
+                $base = 'ml-5 f9';
+
+                $str = _text_(text_icon(_text_(_eliminar_icon, 'baja_tag_arquetipo'), _text_('-', $tag), ['id' => $row['id']], 0));
+                switch ($id_tipo_tag_arquetipo) {
+
+                    case 1:
+                        $prioridad_1[] = li($str, $base);
+                        break;
+                    case 2:
+                        $prioridad_2[] = li($str, $base);
+                        break;
+                    case 3:
+                        $prioridad_3[] = li($str, $base);
+                        break;
+                    case 4:
+                        $prioridad_4[] = li($str, $base);
+                        break;
+                    case 5:
+                        $prioridad_5[] = li($str, $base);
+                        break;
+                    case 6:
+                        $prioridad_6[] = li($str, $base);
+                        break;
+                    case 7:
+                        $prioridad_7[] = li($str, $base);
+                        break;
+                    default:
+
+                }
 
             }
+            $ext = 'border p-3 border-secondary';
+            $response[] = d($prioridad_1, $ext);
+            $response[] = d($prioridad_2, $ext);
+            $response[] = d($prioridad_3, $ext);
+            $response[] = d($prioridad_4, $ext);
+            $response[] = d($prioridad_5, $ext);
+            $response[] = d($prioridad_6, $ext);
+            $response[] = d($prioridad_7, $ext);
 
+            return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
         }
-        $ext = 'border p-3 border-secondary';
-        $response[] = d($prioridad_1, $ext);
-        $response[] = d($prioridad_2, $ext);
-        $response[] = d($prioridad_3, $ext);
-        $response[] = d($prioridad_4, $ext);
-        $response[] = d($prioridad_5, $ext);
-        $response[] = d($prioridad_6, $ext);
-        $response[] = d($prioridad_7, $ext);
-
-        return d(d($response, 'col-sm-12 p-0'), _text_('row', _mbt5));
-
+        return append($response);
 
     }
 
@@ -459,8 +491,6 @@ if (!function_exists('invierte_date_time')) {
             a_enid(_titulo("MIS PEDIDOS"),
                 [
                     "href" => path_enid("pedidos")
-
-
                 ]
             ), 13);
         $r[] = flex(
@@ -628,20 +658,33 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario), 'd-none d-md-block');
+
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = tiene_domilio($domicilio);
+        $r[] = tracker($id_recibo);
         $r[] = compras_cliente($num_compras);
         $r[] = seccion_usuario($usuario, $recibo);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio);
         $r[] = create_seccion_saldos($recibo);
         $r[] = seccion_cupon($cupon);
-        $r[] = create_seccion_recordatorios($recibo);
 
         return d($r, 12);
 
     }
 
+    function tracker($id_recibo)
+    {
+        return
+            d(
+                format_link('Tracker',
+                    [
+                        'href' => path_enid('pedido_seguimiento', $id_recibo)
+                    ]
+                ),
+                _text_('row', _mbt5_md)
+            );
+    }
 
     function get_form_busqueda_pedidos($data, $param)
     {
@@ -1981,9 +2024,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function bloque($text)
+    function bloque($text, $ext = '')
     {
-        return d($text, "border p-3 mt-3 mb-3 row");
+        return d($text, _text_("border p-3 mt-3 mb-3 row", $ext));
     }
 
 
@@ -2025,7 +2068,7 @@ if (!function_exists('invierte_date_time')) {
                 "-"
             );
 
-            return bloque(append($response));
+            return bloque($response, 'd-none');
 
         endif;
 
@@ -2125,11 +2168,11 @@ if (!function_exists('invierte_date_time')) {
     function compras_cliente($num)
     {
 
-        $ext = ($num > 0) ? " COMPRAS A LO LARGO DEL TIEMPO " : "NUEVO PROSPECTO";
-        $text = _text_($ext, $num);
+        $ext = " COMPRAS A LO LARGO DEL TIEMPO ";
+        $text = _text_($ext, d_p($num, 'ml-auto'));
         $starts = ($num > 0) ? label("★★★★★", 'estrella') : "";
 
-        return bloque(add_text($text, $starts));
+        return bloque(_text_($text, $starts));
 
     }
 

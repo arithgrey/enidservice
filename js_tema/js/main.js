@@ -652,10 +652,9 @@ let recorre = contenedor => {
 };
 
 let transforma_mayusculas = x => {
-    let text = x.value;
-    text.trim();
-    let text_mayusculas = text.toUpperCase();
-    x.value = text_mayusculas;
+
+    x.classList.add('text-uppercase');
+
 };
 let reload_imgs = (id, url, flag = 0) => {
 
