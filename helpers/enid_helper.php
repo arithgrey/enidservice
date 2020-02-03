@@ -1660,7 +1660,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
             "vender",
             [
                 "href" => "../login/?action=nuevo",
-                "class" => ' white text-uppercase strong text_agilizar',
+                "class" => ' white text-uppercase strong text_agilizar ',
             ], 0
         );
         $session = a_enid(
