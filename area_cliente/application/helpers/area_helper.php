@@ -39,8 +39,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = paseo();
-        $response[] = d(tab_content($r), 'co-sm-12 col-md-12 col-lg-10');
-        $response[] = menu($action);
+        $response[] = d(tab_content($r), 12);
+//        $response[] = menu($action);
 
         return append($response);
 
@@ -140,16 +140,6 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $link_ventas = tab(
-            text_icon('fa fa-shopping-bag', "VENTAS"),
-            "#tab_mis_ventas",
-            [
-                "class" => 'btn_mis_ventas',
-                "id" => "mis_ventas",
-            ]
-
-        );
-
 
         $link_compras = tab(
             text_icon('fa fa-credit-card-alt', " COMPRAS"),
@@ -164,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
 
         $list = [
             $link_compras,
-            $link_ventas,
+
         ];
 
         return d(
