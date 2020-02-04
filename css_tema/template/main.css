@@ -500,7 +500,9 @@ li {
     border-bottom: solid 1px grey !important;
     height: 40px !important;
 }
-
+.border_red{
+    border: solid 1px red;
+}
 .input_enid_format input:hover {
 
     border: none !important;

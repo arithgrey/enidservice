@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
     function format_form()
     {
 
-        $r[] = _titulo("ventas punto de entrega");
+        $r[] = _titulo("ventas punto de entrega",0,_mbt5);
         $r[] = form_open("",
             [
                 "class" => 'form_ventas_encuentro'
