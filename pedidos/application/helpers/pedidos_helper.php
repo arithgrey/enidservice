@@ -1156,7 +1156,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "type" => "number",
                     "required" => true,
-                    "class" => "precio",
+                    "class" => "precio costo_operativo",
                     "name" => "costo",
                     "id" => "precio",
                 ]
@@ -1914,10 +1914,10 @@ if (!function_exists('invierte_date_time')) {
         if (prm_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
 
             $recibo = $recibo[0];
-            $entrega = "ENTREGA PLANEADA PARA EL ";
+            $entrega = "SE ENTREGARÁ EL ";
             $fecha_entrega = format_fecha($recibo["fecha_contra_entrega"], 1);
-
-            $contenido = flex($entrega, $fecha_entrega, _between . " p-3 white bg_custom_black mb-5 mt-5");
+            $formato_entrega = _text_(_between, "blue_enid2 shadow p-3 white mb-5 mt-5");
+            $contenido = flex($entrega, $fecha_entrega, $formato_entrega);
             $text = d_row($contenido);
             $fecha = ($recibo["tipo_entrega"] == 1) ? $text : "";
 

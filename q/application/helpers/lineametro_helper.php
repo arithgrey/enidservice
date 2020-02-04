@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $response[] = h("LINEAS DE METRO DISPONIBLES", 3);
+        $response[] = _titulo("LINEAS DEL METRO DONDE HACES ENTREGAS",4);
         $response[] = append($r);
         $response[] = hr();
         $response[] = h("LINEAS DE METRO EN PAUSA", 3);
