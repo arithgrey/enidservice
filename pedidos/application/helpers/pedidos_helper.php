@@ -1598,9 +1598,9 @@ if (!function_exists('invierte_date_time')) {
 
             }
         }
-        $response = append($text);
+        return append($text);
 
-        return $response;
+
     }
 
     function accion_pago($recibo)
@@ -2398,7 +2398,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $bloque = flex("domicilio de envío", $direccion, 'flex-column', _strong);
+        $bloque = flex("domicilio de envío", $direccion, 'flex-column text-uppercase', _strong);
 
         return bloque($bloque);
     }
