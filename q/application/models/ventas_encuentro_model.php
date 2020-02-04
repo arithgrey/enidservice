@@ -20,7 +20,7 @@ class ventas_encuentro_model extends CI_Model
         $extra = "AND id_usuario = '" . $id_usuario . "'";
 
         if ($fecha_inicio != $hoy) {
-            $extra = " AND DATE(r.fecha_entrega) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' AND id_usuario = '" . $id_usuario . "'";
+            $extra = " AND DATE(r.fecha_entrega) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' AND r.id_usuario = '" . $id_usuario . "'";
         }
 
         $query_get = "SELECT
