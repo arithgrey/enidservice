@@ -19,7 +19,7 @@ class Recibo_comentario extends REST_Controller
 		$response = false;
 		if (fx($param, "id_recibo,comentarios")) {
 
-			$params = ["id_recibo" => $param["id_recibo"], "comentario" => $param["comentarios"]];
+			$params = ["id_recibo" => $param["id_recibo"], "comentario" => strip_tags_content($param["comentarios"])];
 			$response = $this->recibo_comentario_model->insert($params, 1);
 		}
 		$this->response($response);

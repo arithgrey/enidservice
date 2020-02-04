@@ -8,6 +8,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $r = [];
         $negra = [];
+        $base  ='col-md-3 mt-4';
         foreach ($data as $row) {
 
             $id = $row["id"];
@@ -30,19 +31,22 @@ if (!function_exists('invierte_date_time')) {
 
             if ($index !== false) {
 
-                $negra[] = d(ajustar($img, $icono), 3);
+                $negra[] = d(ajustar($img, $icono), $base);
 
             } else {
 
-                $r[] = d(ajustar($img, $icono), 3);
+                $r[] = d(ajustar($img, $icono), $base);
             }
         }
 
-        $response[] = _titulo("LINEAS DEL METRO DONDE HACES ENTREGAS",4);
-        $response[] = append($r);
-        $response[] = hr();
-        $response[] = h("LINEAS DE METRO EN PAUSA", 3);
-        $response[] = append($negra);
+        $activas[] = d(_titulo("LINEAS DEL METRO DONDE HACES ENTREGAS",4),12);
+        $activas[] = append($r);
+
+        $pausa[] = d(_titulo("LINEAS DE METRO EN PAUSA", 4),'col-sm-12 mt-5');
+        $pausa[] = append($negra);
+
+        $response[] =  d($activas,13);
+        $response[] =  d($pausa,13);
 
         return append($response);
     }
