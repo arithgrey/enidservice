@@ -12,20 +12,16 @@ class ventas_encuentro_model extends CI_Model
     {
 
 
-        $fecha_inicio  = $param["fecha_inicio"];
-        $fecha_termino  = $param["fecha_termino"];
+        $fecha_inicio = $param["fecha_inicio"];
+        $fecha_termino = $param["fecha_termino"];
+        $id_usuario = $param['id_usuario'];
 
         $hoy = date_format(horario_enid(), 'Y-m-d');
-        $extra  = "";
+        $extra = "AND id_usuario = '" . $id_usuario . "'";
 
-        if($fecha_inicio != $hoy ){
-            $extra =  " AND DATE(r.fecha_entrega) BETWEEN '".$fecha_inicio."' AND  '".$fecha_termino."' ";
+        if ($fecha_inicio != $hoy) {
+            $extra = " AND DATE(r.fecha_entrega) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' AND id_usuario = '" . $id_usuario . "'";
         }
-
-
-
-
-
 
         $query_get = "SELECT
                         COUNT(pe.id_linea_metro)linea,  
@@ -47,7 +43,7 @@ class ventas_encuentro_model extends CI_Model
                         linea_metro  l  ON  pe.id_linea_metro =  l.id
                         WHERE  
                             r.saldo_cubierto > 0  AND  r.tipo_entrega = 1
-                            ".$extra."
+                            " . $extra . "
                              
                         GROUP BY  pe.id_linea_metro, p.id_punto_encuentro 
                         ORDER BY  COUNT(pe.id_linea_metro)  DESC;";

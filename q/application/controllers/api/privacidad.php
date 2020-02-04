@@ -18,6 +18,7 @@ class Privacidad extends REST_Controller
 
 		$param = $this->get();
 		$response = false;
+
 		if (fx($param, "id_funcionalidad,id_usuario")) {
 			$response = $this->privacidad_model->get_conceptos_por_funcionalidad_usuario($param["id_funcionalidad"], $param["id_usuario"]);
 		}
