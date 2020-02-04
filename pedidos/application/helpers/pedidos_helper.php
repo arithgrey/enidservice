@@ -711,7 +711,7 @@ if (!function_exists('invierte_date_time')) {
                 ], 0
             );
         }
-        return d($response,_text_('row' ,'mt-3'));
+        return d($response, _text_('row', 'mt-3'));
 
     }
 
@@ -1323,17 +1323,17 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", [
-            "class" => "form_notas row top_80 bottom_80 ",
+            "class" => "form_notas row mt-5 mb-5 ",
             "style" => "display:none;",
         ]);
-        $r[] = d("NOTA", "letter-spacing-10");
+        $r[] =_titulo("NOTA",4);
         $r[] = textarea([
             "name" => "comentarios",
             "class" => "comentarios form-control top_30 bottom_30",
         ]);
         $r[] = hiddens(["name" => "id_recibo", "value" => $id_recibo]);
         $r[] = btn("AGREGAR", ["name" => "comentarios"]);
-        $r[] = form_close(place("place_nota"));
+        $r[] = form_close(place("place_nota row"));
 
         return append($r);
 
@@ -1802,15 +1802,15 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($data)) {
 
             $nota[] = _titulo("Seguimiento al cliente", 4);
-        }
-
-        foreach ($data as $row) {
 
 
-            $registro = date_format(date_create($row["fecha_registro"]), 'd M Y H:i:s');
-            $seccion_registro = text_icon("fa fa-clock-o", $registro);
-            $nota[] = flex($seccion_registro, $row['comentario'], 'mt-3 mb-3', _4p, 'col-sm-8 text-right');
+            foreach ($data as $row) {
 
+                $registro = date_format(date_create($row["fecha_registro"]), 'd M Y H:i:s');
+                $seccion_registro = text_icon("fa fa-clock-o", $registro);
+                $nota[] = flex($seccion_registro, strip_tags($row['comentario']), 'mt-3 mb-3', _4p, 'col-sm-8 text-right');
+
+            }
         }
 
 
