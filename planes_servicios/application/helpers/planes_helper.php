@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($t, 'col-md-2 p-0');
 
         $z[] = tab_seccion(
-            articulos_venta($data["list_orden"]),
+            articulos_venta($data["list_orden"], $id_usuario),
             'tab_servicios',
             tab_activa(0, $action, $considera_segundo)
         );
@@ -174,9 +174,17 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function articulos_venta($list_orden)
+    function articulos_venta($list_orden, $id_usuario)
     {
-        $r[] = d(_titulo("lo que vendes"), 'titulo_seccion');
+        $ventas = _titulo("lo que vendes");
+        $tienda = format_link('tu tienda',
+            [
+                'href' => get_url_tienda($id_usuario),
+                'target'=>'_blank'
+            ]
+        );
+
+        $r[] = flex($ventas, $tienda, _between);
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);
@@ -195,12 +203,12 @@ if (!function_exists('invierte_date_time')) {
     function get_format_busqueda($list_orden)
     {
 
-        $r[] = input_frm(4, 'Nombre del producto o servicio',
+        $r[] = input_frm(4, 'Filtrar',
             [
                 "id" => "textinput",
                 "name" => "textinput",
                 "placeholder" => "Nombre del producto o servicio",
-                "class" => "form-control input-sm q_emp",
+                "class" => "q_emp",
                 "onkeyup" => "onkeyup_colfield_check(event);"
             ]
         );
@@ -361,7 +369,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function menu($perfil, $action,$id_usuario)
+    function menu($perfil, $action, $id_usuario)
     {
 
         $is_mobile = is_mobile();
@@ -374,14 +382,13 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $venta = tab(
-            text_icon("fa fa-shopping-cart", "en venta"),
+            text_icon("fa fa-shopping-cart", "Lo que vendes"),
             "#tab_servicios",
             [
-                'class' => "black  btn_serv",
+                'class' => "black btn_serv mt-3",
             ]
         );
-        $tienda = format_link('tu tienda', ['href' => get_url_tienda($id_usuario)]);
-        $list[] =  li(d($tienda,_text_(_12p,'mb-5')));
+
         if (!$is_mobile) {
 
             $list[] = li(
@@ -391,7 +398,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "href" => path_enid('vender_nuevo'),
                         "class" => "agregar_servicio btn_agregar_servicios 
-                        text-uppercase black"
+                        text-uppercase black mt-3"
                     ]
                 ),
                 _text(tab_activa('nuevo', $action), " ")
@@ -399,7 +406,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = li(
                 $punto_venta,
-                _text(tab_activa('puntos_venta', $action), " ")
+                _text(tab_activa('puntos_venta', $action), " mt-3")
             );
 
             $list[] =
@@ -422,7 +429,7 @@ if (!function_exists('invierte_date_time')) {
                     text_icon("fa fa-globe", " articulos en venta"),
                     "#tab_servicios",
                     [
-                        'class' => "black  btn_serv",
+                        'class' => "black  btn_serv mt-3",
                         "id" => 1
                     ]
 

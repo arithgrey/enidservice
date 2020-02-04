@@ -15,7 +15,8 @@ class Servicio extends REST_Controller
         $this->load->library('table');
         $this->load->library(lib_def());
         $loggin = $this->app->is_logged_in();
-        $this->id_usuario = (!$loggin) ? prm_def($this->get(), "id_usuario") : $this->app->get_session("idusuario");
+        $param = $this->get();
+        $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("idusuario");
     }
 
     function envio_gratis_GET()
@@ -392,7 +393,7 @@ class Servicio extends REST_Controller
         $quinto_nivel =
             (array_key_exists("quinto_nivel", $param)) ? $param["quinto_nivel"] : 0;
 
-        $nombre_servicio = $param["nombre_servicio"];
+        $nombre_servicio = strip_tags($param["nombre_servicio"]);
         $valor_precio = prm_def($param, "precio");
 
         $lista_clasificaciones = [$primer_nivel, $segundo_nivel, $tercer_nivel, $cuarto_nivel, $quinto_nivel];
@@ -431,7 +432,7 @@ class Servicio extends REST_Controller
     function create_servicio($param)
     {
 
-        $nombre_servicio = $param["nombre_servicio"];
+        $nombre_servicio = strip_tags($param["nombre_servicio"]);
         $es_servicio = $param["flag_servicio"];
 
         $primer_nivel =
@@ -703,10 +704,9 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
+        $param["q"] = prm_def($param,'q','');
         if (fx($param, 'q,page,order')) {
 
-
-            $param["q"] = $this->get("q");
             $param["id_usuario"] = $this->id_usuario;
             $param["id_clasificacion"] = prm_def($param, "q2");
             $param["extra"] = $param;
@@ -1121,10 +1121,9 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
-
         $servicios = false;
-        if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
 
+        if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
             $es_empresa = array_key_exists("es_empresa", $param);
             $servicios = $this->serviciosmodel->busqueda($param);
             $total_busqueda = prm_def($servicios, 'total_busqueda');

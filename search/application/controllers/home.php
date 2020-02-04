@@ -17,22 +17,12 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        $param += [
-
-            "id_clasificacion" => prm_def($param, "q2"),
-            "vendedor" => prm_def($param, "q3"),
-            "num_hist" => 9990890
-
-        ];
-
-        evita_basura(prm_def($param, "q", "", 1));
-
+        $param += ["num_hist" => 9990890];
         $this->load_data($param);
     }
 
     private function load_data($param)
     {
-
 
         $data = $this->app->session(
             "",
@@ -41,27 +31,24 @@ class Home extends CI_Controller
             create_url_preview("promo.png")
         );
 
-        $q = prm_def($param, "q", "");
-        $per_page = 16;
-
         $data_send = [
-            "q" => $q,
-            "vendedor" => $param["vendedor"],
-            "id_clasificacion" => $param["id_clasificacion"],
+            "q" => prm_def($param, "q", ""),
+            "vendedor" => prm_def($param, "q3"),
+            "id_clasificacion" => prm_def($param, "q2"),
             "extra" => $param,
-            "order" => prm_def($param, "order", 11, 1),
-            "resultados_por_pagina" => $per_page,
+            "order" => prm_def($param, "order", 11),
+            "resultados_por_pagina" => 12,
             "agrega_clasificaciones" => ($this->agent->is_mobile()) ? 0 : 1,
-            "in_session" => 0
+            "in_session" => 0,
+            "page" => prm_def($param, "page")
+
         ];
 
 
-        $data["servicios"] = $servicios = $this->busqueda_producto_por_palabra_clave($data_send);
-
-        $fn = (prm_def($servicios, "total_busqueda") > 0) ?
-            $this->servicios($data, $param, $q, $data_send, $servicios, $per_page) :
-            $this->sin_resultados($param, $data);
-
+        $data["servicios"] = $this->busqueda_producto_por_palabra_clave($data_send);
+        $son_servicio = prm_def($data["servicios"], "total_busqueda");
+        $fn = ($son_servicio > 0) ?
+            $this->servicios($data, $data_send) : $this->sin_resultados($param, $data);
 
     }
 
@@ -69,37 +56,40 @@ class Home extends CI_Controller
     {
 
         $data["css"] = ["search_sin_encontrar.css"];
-        $response = (prm_def($param, "tienda") < 1) ? sin_resultados($param) : sin_resultados_tienda();
-        $this->app->pagina($data, $response, 1);
+        $this->app->pagina($data, sin_resultados($param), 1);
 
     }
 
-    private function servicios($data, $param, $q, $data_send, $servicios, $per_page)
+    private function servicios($data, $data_send)
     {
 
         $data["url_request"] = get_url_request("");
         $total = key_exists_bi($data, "servicios", "num_servicios", 0);
+        $q = $data_send['q'];
+        $servicios = $data["servicios"];
+
         $data += [
             "busqueda" => $q,
             "num_servicios" => $total,
             "bloque_busqueda" => "",
         ];
 
-        if ($data["is_mobile"] < 1) {
-            $data["bloque_busqueda"] = $this->crea_menu_lateral($data);
 
+        if (is_mobile() < 1) {
+
+            $data["bloque_busqueda"] = $this->crea_menu_lateral($data);
         }
 
 
         $data["paginacion"] =
             $this->paginacion(
                 $total,
-                $per_page,
+                $data_send['resultados_por_pagina'],
                 $q,
-                $param["id_clasificacion"],
-                $param["vendedor"],
+                $data_send["id_clasificacion"],
+                $data_send["vendedor"],
                 $data_send["order"],
-                prm_def($param, "page")
+                $data_send['page']
             );
 
         $this->set_option("in_session", 0);
@@ -119,8 +109,8 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "search");
         $data["filtros"] = get_orden();
         $data["order"] = $data_send["order"];
-        $this->create_keyword($param);
-        $this->app->pagina($data, render_search($data),1);
+        $this->create_keyword($data_send);
+        $this->app->pagina($data, render_search($data), 1);
     }
 
     private function set_option($key, $value)
@@ -131,7 +121,7 @@ class Home extends CI_Controller
     private function get_vista_servicio($servicio)
     {
 
-        $servicio +=  [
+        $servicio += [
             "in_session" => 0,
             "id_usuario_actual" => 0,
         ];
@@ -178,7 +168,7 @@ class Home extends CI_Controller
 
         $data = $this->get_clasificaciones(array_unique($clasificaciones));
 
-        $response =  [
+        $response = [
             "primer_nivel" => $this->filter_nivel($primer, $data),
             "segundo_nivel" => $this->filter_nivel($segundo_nivel, $data),
             "tercer_nivel" => $this->filter_nivel($tercer_nivel, $data),
@@ -197,7 +187,7 @@ class Home extends CI_Controller
             foreach ($nivel as $row) {
 
                 $i = search_bi_array($data, "id_clasificacion", $row);
-                if ($i !== false ) {
+                if ($i !== false) {
 
                     $response[] = $data[$i];
                 }
@@ -222,12 +212,12 @@ class Home extends CI_Controller
 
     private function get_clasificaciones($clasificaciones)
     {
-        $response =  [];
-        if (es_data($clasificaciones)){
+        $response = [];
+        if (es_data($clasificaciones)) {
 
-            $response =  $this->app->api("clasificacion/in/format/json/",
+            $response = $this->app->api("clasificacion/in/format/json/",
                 [
-                    "clasificaciones" => implode("," , $clasificaciones)
+                    "clasificaciones" => implode(",", $clasificaciones)
                 ]
             );
 
@@ -244,7 +234,7 @@ class Home extends CI_Controller
     private function create_keyword($q)
     {
 
-        if (array_key_exists("q", $q)) {
+        if (prm_def($q, 'q')) {
 
             if ($this->id_usuario > 0) {
                 $q["id_usuario"] = $this->id_usuario;
