@@ -224,8 +224,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $ext = (prm_def($_GET, "debug")) ? "&debug=1" : "";
-        $url = "../producto/?producto=" . $id_servicio . "&pre=1" . $ext;
-        $r[] = '<form action="' . $url . '" method="POST" >';
+        $r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
         $r[] = form_hidden([
             "id_servicio" => $id_servicio,
             "extension_dominio" => "",
@@ -241,11 +240,30 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = $tiempo_entrega;
         $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
-        $r[] = form_close();
+
         $r[] = d('ó', 'text-center mt-1 mb-1 ');
 
-
         $path = _text("../puntos_medios/?producto=", $id_servicio);
+
+        $r[] = form_hidden([
+            "id_servicio" => $id_servicio,
+            "extension_dominio" => "",
+            "ciclo_facturacion" => "",
+            "is_servicio" => $es_servicio,
+            "q2" => $q2
+        ]);
+        $r[] = hiddens([
+            "class" => "servicio",
+            "name" => "servicio",
+            "value" => $id_servicio
+        ]);
+
+        $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
+        $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
+        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => '']);
+        $r[] = form_close();
+
+
         $r[] = '<form class="form_pre_puntos_medios" action="' . $path . '" method="POST">';
         $r[] = hiddens([
             "class" => "servicio",
@@ -385,7 +403,7 @@ if (!function_exists('invierte_date_time')) {
         $contenido_descripcion = append($z);
 
         $agregar_lista_deseos = agregar_lista_deseos(0, $in_session);
-        $imagen = flex_md($i["img"], $agregar_lista_deseos,'flex-column');
+        $imagen = flex_md($i["img"], $agregar_lista_deseos, 'flex-column');
         $r[] = flex(
             $contenido_descripcion,
             $imagen,
