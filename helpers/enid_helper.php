@@ -2622,11 +2622,16 @@ function tmp_menu($id_usuario, $menu)
         ]
     );
 
-
     $cerrar_menu = addNRow(terminar_dropdown('', 'p-0'));
+
+    $link_tienda = a_enid(btn('Productos en venta'), get_url_tienda($id_usuario));
+
+
     $menu_usuario = [
+
         $menu,
-        a_enid("Mis reseñas y valoraciones",
+
+        a_enid("reseñas y valoraciones",
             [
                 "href" => path_enid("recomendacion", $id_usuario),
                 "class" => "black text-uppercase mt-2",
@@ -2638,14 +2643,16 @@ function tmp_menu($id_usuario, $menu)
                 "class" => 'black text-uppercase mt-2',
             ]
         ),
+
         a_enid("salir",
             [
                 "href" => path_enid("logout"),
                 "class" => 'black text-uppercase mt-2',
             ]
         ),
+        $link_tienda
     ];
-    $seccion_contenido[] = $cerrar_menu;
+
     $seccion_contenido[] = d_row(d($menu_usuario, 'col-sm-12 mt-3'));
     $opciones_menu = d($seccion_contenido, 'dropdown-menu mw_250 p-3');
 

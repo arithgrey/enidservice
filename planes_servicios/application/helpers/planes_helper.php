@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($t, 'col-md-2 p-0');
 
         $z[] = tab_seccion(
-            articulos_venta($data["list_orden"], $id_usuario),
+            articulos_venta($data["list_orden"]),
             'tab_servicios',
             tab_activa(0, $action, $considera_segundo)
         );
@@ -174,17 +174,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function articulos_venta($list_orden, $id_usuario)
+    function articulos_venta($list_orden)
     {
-        $ventas = _titulo("lo que vendes");
-        $tienda = format_link('tu tienda',
-            [
-                'href' => get_url_tienda($id_usuario),
-                'target'=>'_blank'
-            ]
-        );
 
-        $r[] = flex($ventas, $tienda, _between);
+        $r[] = _titulo("configurar artículos");
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);
@@ -382,7 +375,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $venta = tab(
-            text_icon("fa fa-shopping-cart", "Lo que vendes"),
+            text_icon("fa fa-shopping-cart", "configurar artículos"),
             "#tab_servicios",
             [
                 'class' => "black btn_serv mt-3",
@@ -393,7 +386,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = li(
                 a_enid(
-                    text_icon('fa fa-share', "vender")
+                    text_icon('fa fa-share', "publicar producto")
                     ,
                     [
                         "href" => path_enid('vender_nuevo'),
@@ -426,7 +419,7 @@ if (!function_exists('invierte_date_time')) {
             if ($perfil != 20 && $perfil > 0) {
 
                 $link_articulos_venta = tab(
-                    text_icon("fa fa-globe", " articulos en venta"),
+                    text_icon("fa fa-globe", "articulos en venta"),
                     "#tab_servicios",
                     [
                         'class' => "black  btn_serv mt-3",
