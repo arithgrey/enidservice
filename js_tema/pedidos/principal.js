@@ -18,6 +18,7 @@ $(document).ready(() => {
     $(".configurara_informacion_cliente").click(muestra_form_usuario);
     $(".form_set_usuario").submit(registro_usuario);
     $(".form_costos").submit(registro_costo_operativo);
+    $('.costo_operativo').keyup(envia_costo_operativo);
 
     $(".agenda_compra").click(agenda_compra);
     $(".saldo_cubierto_pos_venta").keyup((e) => {
@@ -301,7 +302,7 @@ let response_articulos_stock = data => {
     redirect(url);
 };
 let response_status_venta = data => {
-    
+
     desbloqueda_form(".selector_estados_ventas");
     if (data === true) {
 
@@ -695,3 +696,9 @@ let editar_usuario_tipo_negocio = function () {
 
     $form_usuario_tipo_negocio.removeClass('d-none');
 }
+let envia_costo_operativo = function (e) {
+    let code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 13 && $('.costo_operativo').val() > 0) {
+        $(".form_costos").submit();
+    }
+};
