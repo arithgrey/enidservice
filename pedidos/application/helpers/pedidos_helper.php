@@ -660,8 +660,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario), 'd-none d-md-block');
 
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = tiene_domilio($domicilio);
         $r[] = tracker($id_recibo);
+        $r[] = imprimir_recibo($recibo, $tipos_entregas);
+        $r[] = tiene_domilio($domicilio);
         $r[] = compras_cliente($num_compras);
         $r[] = seccion_usuario($usuario, $recibo);
         $r[] = frm_usuario($usuario);
@@ -675,16 +676,43 @@ if (!function_exists('invierte_date_time')) {
 
     function tracker($id_recibo)
     {
-        return
-            d(
-                format_link(
-                    text_icon(_delivery_icon, 'Tracker'),
-                    [
-                        'href' => path_enid('pedido_seguimiento', $id_recibo)
-                    ]
-                ),
-                _text_('row', _mbt5_md)
+        $pedido = btn(_text_('Compartir pedido', icon(_share_icon)));
+        $link = a_enid(
+            $pedido,
+            [
+                'href' => path_enid('pedido_seguimiento', $id_recibo),
+                'target' => '_black',
+                'class' => _text_(_mbt5_md, 'w-100')
+            ]
+        );
+        return d($link, 13);
+    }
+
+
+    function imprimir_recibo($recibo, $tipos_entrega)
+    {
+
+
+        $checkout = ticket_pago($recibo, $tipos_entrega, $format = 1);
+        $response = [];
+        if (es_data($checkout) && es_data($recibo)) {
+
+            $recibo = $recibo[0];
+            $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
+            $id_usuario_venta = $recibo["id_usuario_venta"];
+            $tipo_entrega = $recibo["tipo_entrega"];
+            $descuento_entrega = $checkout['descuento_entrega'];
+            $es_descuento = ($tipo_entrega == 1 && $descuento_entrega > 0);
+            $saldo_pendiente = ($es_descuento) ? $checkout['saldo_pendiente_pago_contra_entrega'] : $checkout['saldo_pendiente'];
+            $link = pago_oxxo('', $saldo_pendiente, $id_recibo, $id_usuario_venta);
+            $response[] = format_link('Pago en oxxo',
+                [
+                    'href' => $link
+                ], 0
             );
+        }
+        return d($response,_text_('row' ,'mt-3'));
+
     }
 
     function get_form_busqueda_pedidos($data, $param)

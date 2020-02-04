@@ -78,3 +78,5 @@ define('_historia_icon', 'fa fa-history');
 define('_tiempo_icon', 'fa fa-clock-o');
 define('_eliminar_icon', 'fa fa-times');
 define('_delivery_icon', 'fa fa-fighter-jet');
+define('_share_icon', 'fa fa-share');
+

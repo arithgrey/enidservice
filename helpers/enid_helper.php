@@ -927,7 +927,7 @@ function get_url_tienda($id_usuario)
 {
 
     return _text(
-        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario,'&tienda=1');
+        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario, '&tienda=1');
 
 }
 
@@ -948,6 +948,17 @@ function unique_multidim_array($array, $key)
     return $temp_array;
 }
 
+function pago_oxxo($url_request, $saldo, $id_recibo, $id_usuario)
+{
+
+
+    $url_request = (strlen($url_request) < 1) ? '../' : $url_request;
+    return ($saldo > 0 && $id_recibo > 0 && $id_usuario > 0) ?
+        (
+        _text($url_request, "orden_pago_oxxo/?q=", $saldo, "&q2=", $id_recibo, "&q3=", $id_usuario)
+        ) : "";
+
+}
 
 function create_select_selected($data, $campo_val, $campo_text, $selected, $name, $class, $valor = 0)
 {
