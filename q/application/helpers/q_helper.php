@@ -1316,10 +1316,17 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_entrega = date_create($fecha_contra_entrega)->format('Y-m-d');
                 $fecha = horario_enid();
                 $hoy = $fecha->format('Y-m-d');
+                $es_mayor = ($fecha_entrega > $hoy);
                 $dias = date_difference($hoy, $fecha_entrega);
-                $text_entrega = _text_('Se entrega en ', $dias, 'días!');
-                if ($dias == 1) {
+
+                $text_entrega = _text_('Se entregará en ', $dias, 'días!');
+                $text_entrega_paso = _text_('La fecha de entrega fué hace ', $dias, 'días!');
+                $text_entrega = (!$es_mayor) ? $text_entrega_paso : $text_entrega;
+
+                if ($dias == 1 && $es_mayor) {
                     $text_entrega = 'Se entregará mañana';
+                } elseif ($dias == 1 && !$es_mayor) {
+                    $text_entrega = 'La entrega fué ayer';
                 }
 
                 $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy!' : $text_entrega;
