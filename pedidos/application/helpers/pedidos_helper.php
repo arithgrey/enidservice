@@ -1004,7 +1004,7 @@ if (!function_exists('invierte_date_time')) {
             $str .= pr($usuario, "tel_contacto");
         }
 
-        $x = _titulo("RECORDATORIO",0,'mt-5');
+        $x = _titulo("RECORDATORIO", 0, 'mt-5');
         $r[] = form_open("",
             ["class" => "form_fecha_recordatorio"]);
 
@@ -1050,7 +1050,7 @@ if (!function_exists('invierte_date_time')) {
                 "rows" => 5,
             ], 0, $str);
         $r[] = place("nota_recordatorio d-none ");
-        $r[] = btn("CONTINUAR",['class' => 'mt-5']);
+        $r[] = btn("CONTINUAR", ['class' => 'mt-5']);
         $r[] = form_close();
         $r[] = place("place_recordatorio");
         $form = d($r, "form_separador ");
@@ -1529,18 +1529,27 @@ if (!function_exists('invierte_date_time')) {
         $text = [];
 
         if (es_data($data_direccion)) {
-            if ($data_direccion["tipo_entrega"] == 2 && count($data_direccion["domicilio"]) > 0) {
+            if ($data_direccion["tipo_entrega"] == 2 && es_data($data_direccion["domicilio"])) {
 
 
                 $domicilio = $data_direccion["domicilio"][0];
                 $calle = $domicilio["calle"];
 
-                $t = $calle . " " . " NÚMERO " .
-                    $domicilio["numero_exterior"] . " NÚMERO INTERIOR " . $domicilio["numero_interior"] .
-                    " COLONIA " . $domicilio["asentamiento"] . " DELEGACIÓN/MUNICIPIO " . $domicilio["municipio"] .
-                    " ESTADO " . $domicilio["estado"] . " CÓDIGO POSTAL " . $domicilio["cp"];
+                $text[] = _text_($calle,
+                    "NÚMERO",
+                    $domicilio["numero_exterior"],
+                    "NÚMERO INTERIOR ",
+                    $domicilio["numero_interior"],
+                    "COLONIA",
+                    $domicilio["asentamiento"],
+                    " DELEGACIÓN/MUNICIPIO ",
+                    $domicilio["municipio"],
+                    " ESTADO ",
+                    $domicilio["estado"],
+                    " CÓDIGO POSTAL ",
+                    $domicilio["cp"]
+                );
 
-                $text[] = $t;
 
             } else {
 

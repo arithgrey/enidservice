@@ -72,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
-        $r[] = d(h('"' . prm_def($param, "q") . '".', 4, "strong letter-spacing-15 fz_30"));
+        $r[] = d(h('"' . prm_def($param, "q","") . '".', 4, "strong letter-spacing-15 fz_30"));
         $r[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
 
         $z[] = "<form action='../search' class='mt-5'>";
@@ -92,32 +92,6 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r, " mt-5 col-lg-10 col-lg-offset-1", 1);
 
-
-    }
-
-    function sin_resultados_tienda()
-    {
-        $r[] = place("separador_inicial");
-        $r[] = btw(
-
-            _titulo("AÚN NO HAS ANUNCIADO PRODUCTOS EN TU TIENDA"),
-            btn(
-                text_icon('fa fa-chevron-right ir', "HAS TU PRIMER PUBLICACIÓN ")
-                ,
-                [
-                    "class" => "top_30"
-                ],
-                1,
-                1,
-                1,
-                path_enid('vender_nuevo')
-            )
-            ,
-            "col-lg-6 col-lg-offset-3 text-center"
-        );
-        $r[] = place("separador_final");
-
-        return append($r);
 
     }
 

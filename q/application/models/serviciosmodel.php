@@ -412,12 +412,13 @@ class serviciosmodel extends CI_Model
         $response["total_busqueda"] = $busqueda['num_servicios'];
         $where = $busqueda['where'];
         $_num = mt_rand();
-        $this->create_productos_disponibles(0, $_num, $param, $where);
+        $response["temporal"] = $this->create_productos_disponibles(0, $_num, $where);
         $response["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
+
         if ($param["agrega_clasificaciones"] > 0) {
             $response["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
         }
-        $this->create_productos_disponibles(1, $_num, $param, $where);
+        $response["temporal_remove"] = $this->create_productos_disponibles(1, $_num, $where);
         return $response;
     }
 
@@ -425,16 +426,15 @@ class serviciosmodel extends CI_Model
     {
 
         $niveles = ["primer_nivel", "segundo_nivel", "tercer_nivel", "cuarto_nivel", "quinto_nivel"];
-        $data_niveles_clasificaciones = [];
+        $response = [];
         for ($a = 0; $a < count($niveles); $a++) {
 
             $nivel = $niveles[$a];
-
             $query_get = "SELECT DISTINCT($nivel)id_clasificacion FROM tmp_producto_$_num";
-            $data_niveles_clasificaciones[$nivel] = $this->db->query($query_get)->result_array();
+            $response[$nivel] = $this->db->query($query_get)->result_array();
 
         }
-        return $data_niveles_clasificaciones;
+        return $response;
     }
 
     function get_limit($param)
@@ -463,30 +463,25 @@ class serviciosmodel extends CI_Model
         $num_q = strlen(trim($q));
         $id_usuario = $param["id_usuario"];
 
-
         $extra_existencia = ($id_usuario > 0) ? " " : " AND existencia > 0  ";
-
-        $extra_empresa = ($id_usuario > 0) ? " AND id_usuario = " . $id_usuario : "";
-        $extra_empresa = (prm_def($param, "global") > 0) ? " " : $extra_empresa;
-
         $vendedor = $param["vendedor"];
+        $extra_empresa = ($id_usuario > 0 && $vendedor < 1) ? " AND id_usuario = " . $id_usuario : "";
+        $extra_empresa = (prm_def($param, "global") > 0) ? " " : $extra_empresa;
         $extra_vendedor = ($vendedor > 0) ? " AND id_usuario =  '" . $vendedor . "'" : "";
+
         $orden = $this->get_orden($param);
 
         $sql_match = ($num_q > 0) ?
-            "   AND MATCH(metakeyword , 
-                metakeyword_usuario) 
+            "   AND MATCH(metakeyword , metakeyword_usuario) 
                 AGAINST ('" . $q . "*' IN BOOLEAN MODE) " : "";
 
         $no_empresa = (prm_def($param, 'es_empresa') < 1) ? 'AND  es_publico >  0' : ' ';
-        return " 
-                    WHERE 
+        return " WHERE                     
                     flag_imagen > 0
+                    AND status = 1
                     " . $extra_empresa . "
                     " . $extra_vendedor . "
-                    " . $extra_existencia . "       
-                    AND 
-                    status = 1
+                    " . $extra_existencia . "                           
                     " . $no_empresa . "   
                     " . $extra_clasificacion . "
                     " . $sql_match . "
@@ -744,7 +739,7 @@ class serviciosmodel extends CI_Model
         $data_complete["total_busqueda"] = $busqueda['num_servicios'];
         $where = $busqueda['where'];
         $_num = mt_rand();
-        $this->create_productos_disponibles(0, $_num, $param, $where);
+        $this->create_productos_disponibles(0, $_num, $where);
         $query_get = "SELECT * FROM tmp_producto_$_num";
         $result = $this->db->query($query_get);
         $servicios = $result->result_array();
@@ -752,7 +747,7 @@ class serviciosmodel extends CI_Model
         if ($param["agrega_clasificaciones"] > 0) {
             $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
         }
-        $this->create_productos_disponibles(1, $_num, $param, $where);
+        $this->create_productos_disponibles(1, $_num, $where);
         return $data_complete;
 
     }
@@ -773,15 +768,15 @@ class serviciosmodel extends CI_Model
     }
 
 
-    function create_productos_disponibles($flag, $_num, $param, $where)
+    function create_productos_disponibles($flag, $_num, $where)
     {
 
         $response = $this->db->query("DROP TABLE IF exists tmp_producto_$_num");
-        if ($flag == 0) {
-
-            $campos_clasificacion = ", primer_nivel , segundo_nivel , tercer_nivel , cuarto_nivel , quinto_nivel";
-            $param_extra = ($param["agrega_clasificaciones"] > 0) ? $campos_clasificacion : "";
-            $query_create = _text_("CREATE TABLE tmp_producto_$_num AS SELECT  id_servicio, nombre_servicio, id_usuario, metakeyword", $param_extra, " FROM servicio ", $where);
+        if ($flag < 1) {
+            $query_create = _text_("CREATE TABLE tmp_producto_$_num AS 
+                SELECT  id_servicio, nombre_servicio, id_usuario, 
+                metakeyword, primer_nivel , segundo_nivel , 
+                tercer_nivel , cuarto_nivel , quinto_nivel FROM servicio ", $where);
             $response = $this->db->query($query_create);
 
         }

@@ -927,7 +927,7 @@ function get_url_tienda($id_usuario)
 {
 
     return _text(
-        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario);
+        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario,'&tienda=1');
 
 }
 
