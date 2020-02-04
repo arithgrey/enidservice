@@ -284,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d(d(img_enid(), "w_200"), "d-flex justify-content-center");
             $r[] = _titulo(add_text("#Recibo: ", $id_recibo), 3);
-            $r[] = hr([],0);
+            $r[] = hr([], 0);
 
         }
 
@@ -567,14 +567,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_link_oxxo($url_request, $saldo, $id_recibo, $id_usuario)
-    {
 
-
-        return ($saldo > 0 && $id_recibo > 0 && $id_usuario > 0) ?
-            ($url_request . "orden_pago_oxxo/?q=" . $saldo . "&q2=" . $id_recibo . "&q3=" . $id_usuario) : "";
-
-    }
 
     function get_saldo_pendiente(
         $monto,
@@ -775,7 +768,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        return d($text,'col-md-3');
+        return d($text, 'col-md-3');
     }
 
 
@@ -1074,7 +1067,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => " mt-4 mb-5",
                     "onclick" => "notifica_tipo_compra(4 , '" . $id_recibo . "');",
                     "href" =>
-                        get_link_oxxo(
+                        pago_oxxo(
                             $url_request,
                             $saldo_pendiente,
                             $id_recibo,
