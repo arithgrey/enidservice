@@ -1,6 +1,7 @@
 "use strict";
 let incidencia = 0;
 let $form_arquetipos = $('.form_arquetipos');
+let $form_tipificaciones = $('.form_tipificaciones');
 $(document).ready(() => {
 
     set_option("page", 0);
@@ -33,7 +34,7 @@ $(document).ready(() => {
         set_menu("#btn_usuarios");
     });
     $form_arquetipos.submit(arquetipos)
-
+    $form_tipificaciones.submit(tipificaciones);
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 let carga_uso_sistema = function (e) {
@@ -386,6 +387,24 @@ let arquetipos = function (e) {
         let data_send = $form_arquetipos.serialize();
         let url = "../q/index.php/api/tag_arquetipo/q/format/json/";
 
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_arquetipos #datetimepicker5", ".form_arquetipos #datetimepicker4"]);
+    }
+    e.preventDefault();
+};
+let tipificaciones = function (e) {
+
+
+    let f_inicio = get_parameter(".form_tipificaciones #datetimepicker4");
+    let f_termino = get_parameter(".form_tipificaciones #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_tipificaciones.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/tipificacion_recibo/q/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
     } else {
