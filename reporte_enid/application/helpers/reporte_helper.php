@@ -14,6 +14,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
         $response[] = format_arquetipos($data);
+        $response[] = format_tipificaciones();
+
         $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 p-0 contenedor_menu");
         $res[] = tab_content($response, 10);
@@ -69,15 +71,23 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "tab_arquetipos",
             ]
         );
+    }
+
+    function format_tipificaciones()
+    {
+        $form = base_busqueda_form('TIPIFICACIONES',
+            'form_tipificaciones', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_tipificaciones",
+            ]
+        );
 
 
     }
 
-    /**
-     * @param array $ac
-     * @param array $response
-     * @return array
-     */
     function format_actividad()
     {
 
@@ -300,6 +310,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $list = [
+
             tab(
                 text_icon(_historia_icon, "Arquetipos"),
                 '#tab_arquetipos'
@@ -311,6 +322,11 @@ if (!function_exists('invierte_date_time')) {
                     "href" => path_enid("pedidos"),
                     "class" => "text-uppercase black   dispositivos",
                 ]
+            )
+            ,
+            tab(
+                text_icon(_bomb_icon, "tipificaciones"),
+                '#tab_tipificaciones'
             )
             ,
 

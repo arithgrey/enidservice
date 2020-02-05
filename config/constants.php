@@ -79,4 +79,5 @@ define('_tiempo_icon', 'fa fa-clock-o');
 define('_eliminar_icon', 'fa fa-times');
 define('_delivery_icon', 'fa fa-fighter-jet');
 define('_share_icon', 'fa fa-share');
+define('_bomb_icon', 'fa fa-bomb');
 
