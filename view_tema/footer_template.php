@@ -21,6 +21,7 @@
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>
+
 <?php if (isset($js) && !is_null($js) && is_array($js)): ?>
     <?php $s = "../js_tema/";
     foreach ($js as $script): ?>
@@ -34,6 +35,7 @@
         <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>
+
 
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>

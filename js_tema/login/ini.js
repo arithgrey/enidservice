@@ -105,8 +105,8 @@ let response_inicio_session = data => {
     } else {
 
         desbloqueda_form(form_inicio);
-        format_error(selector_acceso_sistema, 'Verifica tus datos de acceso');
-        empty_elements('.inf_usuario_registrado');
+        advierte('Verifica tus datos de acceso');
+        $(selector_acceso_sistema).addClass('d-none');
 
     }
 };
@@ -159,8 +159,11 @@ let carga_mail = () => $email_recuperacion.val(get_parameter(email));
 
 let valida_formato_pass = text => {
 
-    let response = 0;
-    response = (text.length >= 8) ? 1 : format_error(selector_acceso_sistema, 'Contraseña muy corta!');
+    let response = 1;
+    if (text.length < 8) {
+        advierte('Ups la contaseña es muy corta!');
+        response--;
+    }
     return response;
 
 };
@@ -188,8 +191,8 @@ let agrega_usuario = (e) => {
     let password = get_parameter(registro_pw);
     let email = get_parameter('.registro_email');
     let nombre = get_parameter(nombre_persona);
-
-    if (valida_formato_email(email) === valida_formato_pass(password)) {
+    let formato_email = valida_formato_email(email);
+    if (formato_email === valida_formato_pass(password) && parseInt(formato_email) > 0) {
         if (val_text_form(nombre_persona, '.place_registro_miembro', 3, 'Nombre')) {
 
             let tmp_password = '' + CryptoJS.SHA1(password);

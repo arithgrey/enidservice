@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        return d($r, 4, 1);
+        return d($r, 4,1);
 
     }
 
@@ -27,15 +27,14 @@ if (!function_exists('invierte_date_time')) {
         $r[] = frm_login();
         if ($action === "registro") {
 
-            $r[] = contaiter(
+            $r[] = d(
                 d("Tu usuario fué registrado, accede ahora!",
                     "inf_usuario_registrado strong mt-5 bg-light p-2 text-right"
                 )
-                ,
-                1
+
             );
         }
-        $r[] = place("place_acceso_sistema mt-5 mb-5", 1);
+        $r[] = place("place_acceso_sistema mt-5 mb-5");
         $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong']);
         $x[] = a_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
@@ -46,13 +45,13 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = append($x);
 
-        return d($r, " wrapper_login");
+        return d($r, " wrapper_login mt-5");
 
     }
 
     function img_default()
     {
-        return contaiter(
+        return
             d(
                 a_enid(
                     img_enid(
@@ -65,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ), "text-center"
             )
-        );
+        ;
     }
 
     function recuperacion()
@@ -213,7 +212,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
                 "placeholder" => "ej. jonathan@gmail.com",
-            ],'Hey, no tan rápido, valida tu email!'
+            ], 'Hey, no tan rápido, valida tu email!'
         );
         $r[] = input_frm(
             "mt-5", "PASSWORD",
