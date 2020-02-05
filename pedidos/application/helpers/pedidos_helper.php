@@ -19,6 +19,7 @@ if (!function_exists('invierte_date_time')) {
     function render_pendidos($data)
     {
 
+
         $orden = $data["orden"];
         $status = $data["status_ventas"];
         $r = $data["recibo"];

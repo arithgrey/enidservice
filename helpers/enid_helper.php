@@ -2478,14 +2478,23 @@ function dispositivo()
 function gb_modal()
 {
 
+    $span = span('Loading', 'sr-only');
+    $load = str_repeat(d($span,
+        [
+            'class' => "spinner-grow",
+            'role' => "status"
+        ]
+    ), 5);
+    $cargando = d(
+        $load, 'text-center cargando_modal d-none');
 
-    $seccion = d(
-        p(
-            span(
-                "", "text-order-name-error black"
-            )
-            , "font-weight-bold text-dark text-center"
-        ), "modal-body mt-5 mb-5"
+
+    $text = span("", "text-order-name-error black");
+    $mensaje_cotenidio =
+        _text_(p($text, "font-weight-bold text-dark text-center"), $cargando);
+    $seccion = d($mensaje_cotenidio
+
+        , "modal-body mt-5 mb-5"
     );
     $cerrar = d(
         icon(_text_(_eliminar_icon, 'fa-2x'),
@@ -2585,7 +2594,7 @@ function menu_session_mobil($in_session)
 
 function tmp_menu($id_usuario, $menu)
 {
-    $contenido[] = addNRow(terminar_dropdown());
+
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
 
     $seccion = append($contenido);
@@ -3238,20 +3247,20 @@ function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
     return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
 
 }
-function strip_tags_content($text, $tags = '', $invert = FALSE) {
+
+function strip_tags_content($text, $tags = '', $invert = FALSE)
+{
 
     preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
     $tags = array_unique($tags[1]);
 
-    if(is_array($tags) AND count($tags) > 0) {
-        if($invert == FALSE) {
-            return preg_replace('@<(?!(?:'. implode('|', $tags) .')\b)(\w+)\b.*?>.*?</\1>@si', '', $text);
+    if (is_array($tags) AND count($tags) > 0) {
+        if ($invert == FALSE) {
+            return preg_replace('@<(?!(?:' . implode('|', $tags) . ')\b)(\w+)\b.*?>.*?</\1>@si', '', $text);
+        } else {
+            return preg_replace('@<(' . implode('|', $tags) . ')\b.*?>.*?</\1>@si', '', $text);
         }
-        else {
-            return preg_replace('@<('. implode('|', $tags) .')\b.*?>.*?</\1>@si', '', $text);
-        }
-    }
-    elseif($invert == FALSE) {
+    } elseif ($invert == FALSE) {
         return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $text);
     }
     return $text;

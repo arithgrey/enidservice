@@ -145,15 +145,13 @@ if (!function_exists('invierte_date_time')) {
                     "required" => "true",
                     "placeholder" => "555296...",
 
-                ]
+                ], _text_telefono
             );
 
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(
-                btn("CONTINUAR", [], 0), "col-lg-3 mt-5 p-0 mb-5");
-            $r[] = format_load(12);
+            $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5 p-0 mb-5");
             $r[] = text_acceder_cuenta($info_ext);
             $r[] = form_close();
 
@@ -415,10 +413,11 @@ if (!function_exists('invierte_date_time')) {
                 "text_total underline letter-spacing-15");
             $r[] = d($x, "text-right top_20");
 
-            $r[] = btn("ORDENAR COMPRA", [
-                "class" => 'btn_procesar_pedido_cliente',
-            ],
-                1, 1);
+            $r[] = d(btn("ORDENAR COMPRA",
+                [
+                    "class" => 'btn_procesar_pedido_cliente',
+                ]
+            ),'col-sm-4 row pull-right');
             $r[] = place('place_proceso_compra mt-5');
         }
 

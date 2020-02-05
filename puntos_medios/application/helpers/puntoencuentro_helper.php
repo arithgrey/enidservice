@@ -243,7 +243,6 @@ if (!function_exists('invierte_date_time')) {
             "col-lg-3 continuar");
 
 
-        $r[] = d(format_load(), 12);
         $r[] = form_close();
         $r[] = format_usuario_registrado();
         return append($r);
@@ -312,7 +311,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
-        $r[] = d(format_load(), 12);
+        
         $r[] = place("place_notificacion_punto_encuentro ");
         $r[] = form_close();
 

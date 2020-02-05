@@ -25,9 +25,10 @@ define('_text_pago', 'Ups! el monto no es correcto, la cantidad a pagar es');
 
 /*bootstrap class*/
 /*col*/
-define('_6auto', "col-sm-6 col-sm-offset-3 p-0");
-define('_8auto', "col-sm-8 col-sm-offset-2 p-0");
-define('_10auto', "col-sm-10 col-sm-offset-1 p-0");
+define('_4auto', "col-sm-4 col-sm-offset-4 row");
+define('_6auto', "col-sm-6 col-sm-offset-3 row");
+define('_8auto', "col-sm-8 col-sm-offset-2 row");
+define('_10auto', "col-sm-10 col-sm-offset-1 row");
 
 define('_6p', "col-sm-6 p-0");
 define('_4p', "col-sm-4 p-0");

@@ -163,8 +163,7 @@ let registra_usuario = (e) => {
     let len_pw = $input_pw.val().length;
     reset_posibles_errores();
     if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH && regular_email($input_correo)) {
-
-        valida_load();
+        advierte('Procesando tu pedido', 1);
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
             "password": password,
@@ -205,10 +204,11 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 let response_registro_usuario = (data) => {
 
+    debugger;
+    $("#modal-error-message").modal("hide");
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
-        // despliega([], 0);
-        $('.continuar, .informacion_del_cliente').removeClass('d-none');
+        $('.continuar, .informacion_del_cliente').addClass('d-none');
         $('.usuario_existente').removeClass('d-none');
         set_option("vista", 5);
 
@@ -245,13 +245,12 @@ let notifica_punto_entrega = e => {
     }
     let data_send = $form_punto_encuentro_horario.serialize() + "&" + $.param({"tipo_entrega": 1});
     bloquea_form(form_punto_encuentro_horario);
-    valida_load();
+    advierte('Procesando pedido', 1);
     request_enid("POST", data_send, url, response_notificacion_punto_entrega);
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
 
-    valida_load();
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
     if (parseInt(get_parameter(".primer_registro")) == 1) {
         redirect_forma_pago(data.id_recibo);

@@ -125,6 +125,7 @@ let sload = place => {
 
     let bar = '<div class="progress progress-striped active page-progress-bar">';
     bar += '<div class="progress-bar" style="width: 100%;"></div> </div>';
+    $(place).removeClass('d-none');
     render_enid(place, bar);
 };
 let seccess_enid = (place, msj) => {
@@ -698,8 +699,13 @@ let valida_num_form = (input, place_msj) => {
     format_error(place_msj, mensaje_user);
     return f;
 };
-let advierte = text => {
+let advierte = (text, cargando_modal = 0) => {
 
+    let $selector_carga_modal = $('.cargando_modal');
+    $selector_carga_modal.addClass('d-none');
+    if (parseInt(cargando_modal) > 0) {
+        $selector_carga_modal.removeClass('d-none');
+    }
     $(".text-order-name-error").text(text);
     $("#modal-error-message").modal("show");
 

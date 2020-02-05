@@ -39,7 +39,7 @@ let $input_password = "";
 let $input_fecha_servicio = $(fecha_servicio);
 
 let primer_compra = '.primer_compra';
-let $primer_compra =  $(primer_compra);
+let $primer_compra = $(primer_compra);
 
 $(document).ready(() => {
 
@@ -60,17 +60,17 @@ $(document).ready(() => {
 });
 
 let registro = (e) => {
-    debugger;
+
     verifica_formato_default_inputs(0);
     let len_telefono = $telefono.val().length;
     let len_pw = $input_password.val().length;
     reset_posibles_errores();
-
+    debugger;
     let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
     if ($validacion_primer_registro) {
 
         bloquea_form(form_miembro);
-        valida_load();
+        advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         let text_password = $.trim($input_password.val());
         let pwpost = "" + CryptoJS.SHA1(text_password);
@@ -92,6 +92,7 @@ let registro = (e) => {
         request_enid("POST", data_send, url, respuesta_registro, 0);
 
     } else {
+
         focus_inputs_form(len_telefono, len_pw);
     }
 
@@ -109,10 +110,11 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-
+    debugger;
     empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
+        $("#modal-error-message").modal("hide");
         desbloqueda_form(form_miembro);
         if (parseInt(data.usuario_existe) > 0) {
 
@@ -134,6 +136,7 @@ let respuesta_registro = (data) => {
 
 let procesar_pedido_usuario_activo = () => {
 
+    advierte('Procesando pedido',1);
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     let data_send = {
         "id_servicio": $id_servicio.val(),
@@ -153,8 +156,6 @@ let procesar_pedido_usuario_activo = () => {
 let before_pedido_activo = () => {
 
     $('.btn_procesar_pedido_cliente').prop('disabled', true);
-    sload(".place_proceso_compra", "Validando datos ", 1);
-
 };
 
 let respuesta_proceso_usuario_activo = (data) => {

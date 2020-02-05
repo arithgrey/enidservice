@@ -457,9 +457,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btn("Registrar dirección ",
                 ['class' => "text_btn_direccion_envio top_30 bottom_20"]);
         $r[] = place("notificacion_direccion");
-        $r[] = form_close(format_load());
+        $r[] = form_close();
 
-        return d(append($r), "contenedor_form_envio mt-5");
+        return d($r, "contenedor_form_envio mt-5");
 
     }
 

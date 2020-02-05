@@ -1,4 +1,5 @@
 "use strict";
+
 window.history.pushState({page: 1}, "", "");
 window.history.pushState({page: 2}, "", "");
 window.onpopstate = event => {
@@ -12,8 +13,9 @@ let titulo_seccion = '.titulo_seccion';
 
 let $seccion_busqueda = $(seccion_busqueda);
 let $titulo_seccion = $(titulo_seccion);
-
 let $costo = $('.costo');
+let $form_nombre_producto = $('.form_nombre_producto');
+
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -22,7 +24,8 @@ $(document).ready(() => {
     $("footer").ready(valida_action_inicial);
     $(".btn_servicios").click(carga_servicios);
     $(".tipo_promocion").click(configuracion_inicial);
-    $(".form_nombre_producto").submit(simula_envio);
+    $form_nombre_producto.submit(simula_envio);
+
     $(".btn_agregar_servicios").click(() => {
         showonehideone(".contenedor_nombre", ".contenedor_categorias");
         set_option("nuevo", 1);
@@ -38,6 +41,9 @@ $(document).ready(() => {
     $(".ci_facturacion").change(evalua_precio);
     $(".cancelar_registro").click(cancelar_registro);
     def_contenedores();
+
+    $costo.keypress(enter_precio);
+
 });
 
 let def_contenedores = () => {
@@ -1509,4 +1515,10 @@ let restablecer_promocion = function () {
     });
 
 
+};
+let enter_precio = function (e) {
+
+    if (e.keyCode == 13) {
+        $form_nombre_producto.submit();
+    }
 };
