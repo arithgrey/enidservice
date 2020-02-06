@@ -11,8 +11,6 @@ const MIN_TELEFONO_LENGTH = 7;
 const MIN_TELEFONO_MOBILE_LENGTH = 9;
 const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
-
-
 $("footer").ready(() => {
 
     set_option({
@@ -710,6 +708,11 @@ let advierte = (text, cargando_modal = 0) => {
     $("#modal-error-message").modal("show");
 
 };
+let cerrar_modal = () => {
+
+    $("#modal-error-message").modal("hide");
+};
+
 let div_enid = (id_padre, text, clase = '') => {
 
     var newDiv = document.createElement("div");

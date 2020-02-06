@@ -264,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = input_frm("col-lg-6 mt-5", "Email",
                 [
                     "name" => "email",
-                    "placeholder" => "Ej. jonathan@enidservice.com",
+                    "placeholder" => "Ej. jonathan@enidservices.com",
                     "class" => "email",
                     "type" => "email",
                     "required" => "true",

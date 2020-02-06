@@ -45,7 +45,7 @@ class Imprimir
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Text(35, 110, $monto . " MXN");
 
-        $pdf->Image("1.png", 28, 130, 50, 20, "png");
+        $pdf->Image("4.png", 28, 130, 50, 20, "png");
         $pdf->SetFont('Arial', 'B', 15);
         $pdf->SetTextColor(0, 0, 0);
         $pdf->Text(28, 160, $numero_cuenta);

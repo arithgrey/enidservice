@@ -11,7 +11,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="description" content="<?= $desc_web; ?>"/>
 <meta name="robots" content="all">
 <link rel="canonical" href="http://enidservices.com/"/>
-<link rel="canonical" href="http://www.enidservice.com/"/>
+<link rel="canonical" href="http://www.enidservices.com/"/>
 <link rel="alternate" hreflang="es" href="http://enidservices.com/"/>
 <meta name="googlebot" content="index,follow">
 <meta name="geo.region" content="MX-DIF"/>

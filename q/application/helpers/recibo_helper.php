@@ -405,7 +405,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = anchor($url_pago_paypal, "Comprar ahora!");
         $r[] = hr();
         $r[] = d("2.- Aceptamos pagos en tiendas de autoservicio OXXO y transferencia
-         bancaria en línea para bancos BBVA Bancomer", 1);
+         bancaria en línea para bancos HSBC", 1);
         $r[] = anchor($url_pago_oxxo, h("OXXO", 4));
         $r[] = anchor($url_pago_oxxo, "Imprimir órden de pago");
         $r[] = anchor($url_pago_oxxo, img($img_pago_oxxo));
