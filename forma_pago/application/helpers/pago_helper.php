@@ -28,7 +28,7 @@ if (!function_exists('invierte_date_time')) {
             , _text(
                 "3.- Adicionalmente aceptamos pagos en tiendas de ",
                 strong("autoservicio (OXXO y 7Eleven)"),
-                " y transferencia bancaria en línea para los bancos BBVA Bancomer."
+                " y transferencia bancaria en línea para los bancos HSBC."
             )
             ,
             "El pago realizado en tiendas de autoservicio tendrá una comisión adicional 

@@ -1,4 +1,5 @@
 "use strict";
+
 let carga_form_img = () => {
     set_option("s", 3);
     showonehideone(".contenedor_agregar_imagenes", ".contenedor_global_servicio");
@@ -28,24 +29,37 @@ let ver_carga = function () {
         let im = e.target.result;
         mostrar_img_upload(im, 'place_load_img');
         recorre(".guardar_img_enid");
-        $("#form_img_enid").submit(registra_img_servicio);
+        $("#form_img_enid").submit(agrega_imagenes);
     };
     reader.readAsDataURL(file);
 };
-let registra_img_servicio = e => {
+let agrega_imagenes = function (e) {
+    //registra_img_servicio
     e.preventDefault();
+    let file = $('input[type=file]')[0].files;
+    registra_img_servicio(file);
+    setTimeout(function () {
+        response_load_image("true");
+        carga_informacion_servicio(1);
+        cerrar_modal();
+    }, 4000);
 
-    let f = $('input[type=file]')[0].files;
+
+};
+let registra_img_servicio = file => {
+
+    advierte('Procesando tus imágenes', 1);
     $(".guardar_img_enid").hide();
-    sload(".place_load_img");
-
-    for (var x in f) {
+    let $q = get_parameter(".q_imagen");
+    let $servicio = get_parameter(".q2_imagen");
+    let $imgs = get_parameter(".dinamic_img");
+    for (let x in file) {
 
         let formData = new FormData();
-        formData.append("imagen", f[x]);
-        formData.append("q", get_parameter(".q_imagen"));
-        formData.append("servicio", get_parameter(".q2_imagen"));
-        formData.append("dinamic_img", get_parameter(".dinamic_img"));
+        formData.append("imagen", file[x]);
+        formData.append("q", $q);
+        formData.append("servicio", $servicio);
+        formData.append("dinamic_img", $imgs);
 
         $.ajax({
             url: "../q/index.php/api/archivo/imgs",
@@ -56,13 +70,13 @@ let registra_img_servicio = e => {
             contentType: false,
             processData: false
         });
+
     }
-
-    response_load_image("true");
-    carga_informacion_servicio(1);
-    $.removeData(formData);
-
+    //
+    // response_load_image("true");
+    // carga_informacion_servicio(1);
 };
+
 let response_load_image = data => {
 
     switch (array_key_exists("status_imagen_servicio", data)) {

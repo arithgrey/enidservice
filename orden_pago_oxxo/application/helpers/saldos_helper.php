@@ -120,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
 
             img(
                 [
-                    "src" => "http://enidservices.com/inicio/img_tema/portafolio/logo-bbv.png",
+                    "src" => "http://enidservices.com/inicio/img_tema/bancos/4.png",
                     "style" => "width:110px!important;",
                     'class' => 'ml-2'
                 ]
@@ -166,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = instrucciones($numero_cuenta);
-        return d(append($r));
+        return d($r);
 
     }
 
