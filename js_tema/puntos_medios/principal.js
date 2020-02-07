@@ -158,6 +158,7 @@ let muestra_horarios = function () {
 };
 
 let registra_usuario = (e) => {
+
     verifica_formato_default_inputs(0);
     let len_telefono = $input_telefono.val().length;
     let len_pw = $input_pw.val().length;

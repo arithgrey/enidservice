@@ -416,7 +416,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
 
-            if ($perfil != 20 && $perfil > 0) {
+            if ($perfil == 3) {
 
                 $link_articulos_venta = tab(
                     text_icon("fa fa-globe", "articulos en venta"),

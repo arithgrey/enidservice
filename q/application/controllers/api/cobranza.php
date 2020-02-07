@@ -337,7 +337,7 @@ class Cobranza extends REST_Controller
 
         $param["id_recibo"] = $id_recibo;
         $param["id_usuario"] = $id_usuario;
-        $response = $this->create_orden_punto_entrega($param);
+        $this->create_orden_punto_entrega($param);
 
         return $this->agrega_punto_encuentro_usuario($param);
     }
@@ -401,6 +401,16 @@ class Cobranza extends REST_Controller
 
     }
 
+    function usuario_referencia($param)
+    {
+        $usuario_referencia = 0;
+        if (array_key_exists('es_cliente', $param) && $param['es_cliente'] < 1) {
+
+            $usuario_referencia = $this->id_usuario;
+        }
+        return $usuario_referencia;
+    }
+
     function primer_orden_POST()
     {
 
@@ -412,16 +422,20 @@ class Cobranza extends REST_Controller
                 $prevent++;
             };
         }
+        $usuario_referencia = $this->usuario_referencia($param);
+        if ($usuario_referencia > 0) {
 
+            $param['usuario_referencia'] = $usuario_referencia;
+        }
         if ($prevent < 1 || $es_pe) {
 
             $usuario = $this->crea_usuario($param);
             if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {
-
+                $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
                 $param += [
                     "es_usuario_nuevo" => 1,
                     "usuario_nuevo" => 1,
-                    "usuario_referencia" => $usuario["id_usuario"],
+                    "usuario_referencia" => $usuario_referencia,
                     "id_usuario" => $usuario["id_usuario"],
                     "usuario_existe" => 0,
                 ];
@@ -455,12 +469,14 @@ class Cobranza extends REST_Controller
     {
 
         $response["session_creada"] = 0;
-        if ($response['orden_creada'] > 0) {
+        if ($response['orden_creada'] > 0 && $param['es_cliente'] > 0) {
             $session = $this->create_session($param);
             if (es_data($session)) {
                 $response["session_creada"] = 1;
                 $this->app->set_userdata($session);
             }
+        } else {
+            $response["session_creada"] = 1;
         }
         return $response;
     }

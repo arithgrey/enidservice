@@ -55,30 +55,27 @@ class Home extends CI_Controller
         $id_usuario_compra = $drecibo["id_usuario"];
         $id_usuario_venta = $drecibo["id_usuario_venta"];
         $es_domicilio = prm_def($param, "domicilio");
+        $id_usuario_referencia = $drecibo['id_usuario_referencia'];
 
-        $acceso = ($id_usuario_compra == $data["id_usuario"] ||
-            $id_usuario_venta == $data["id_usuario"]);
+        $es_usuario_compra = ($this->id_usuario == $id_usuario_compra);
+        $es_propietario = propietario($this->id_usuario, $id_usuario_venta, $id_usuario_referencia, path_enid('_area_cliente'));
+        $tiene_acceso = ($es_usuario_compra || $es_propietario);
+        $es_session = ($data["in_session"] > 0);
 
-        if (es_data($recibo) && $data["in_session"] > 0 && $data["id_usuario"] > 0 && $acceso) {
+        if (es_data($recibo) && $es_session && $data["id_usuario"] > 0 && $tiene_acceso) {
 
 
-            $data["es_vendedor"] = ($id_usuario_venta == $data["id_usuario"]) ? 1 : 0;
-
+            $data["es_vendedor"] = ($id_usuario_venta == $data["id_usuario"]);
             $data += [
                 "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
                 "recibo" => $recibo,
-
             ];
-
 
             $fn = ($es_domicilio) ? $this->domicilios($param,
                 $data) : $this->load_view_seguimiento($data,
                 $param, $recibo, $id_recibo);
 
 
-        } else {
-
-            redirect("../../area_cliente");
         }
 
     }
@@ -284,7 +281,10 @@ class Home extends CI_Controller
         $id_recibo = $param['costos_operacion'];
         $recibo = $this->get_recibo($id_recibo);
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
-        propietario($this->id_usuario, $id_usuario_venta, path_enid('_area_cliente'));
+        $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+        propietario(
+            $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
+            path_enid('_area_cliente'));
 
         $data = $this->app->cssJs($data, "pedidos");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
@@ -396,8 +396,10 @@ class Home extends CI_Controller
         $id_recibo = $param["recibo"];
         $recibo = $this->get_recibo($id_recibo, 1);
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
+        $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
         propietario(
-            $this->id_usuario, $id_usuario_venta, path_enid('_area_cliente'));
+            $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
+            path_enid('_area_cliente'));
 
         if (es_data($recibo) > 0) {
 
@@ -446,8 +448,10 @@ class Home extends CI_Controller
         $tag_arquetipo = ($id_perfil == 3) ? $this->tag_arquetipo($id_usuario) : [];
         $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
         $num_compras = $this->get_num_compras($id_usuario);
-        $cupon = $this->cupon($id_recibo, $servicio, $num_compras);
 
+        $cupon = ($data['id_perfil'] != 6) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
+
+        $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
 
         $data += [
             "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
@@ -464,7 +468,8 @@ class Home extends CI_Controller
             "tipo_tag_arquetipo" => $tipo_tag_arqquetipo,
             "tag_arquetipo" => $tag_arquetipo,
             "negocios" => $this->tipos_negocio(),
-            "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario)
+            "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario),
+            "es_vendedor" => ($this->id_usuario == $id_usuario_referencia && $id_perfil == 6),
 
         ];
 

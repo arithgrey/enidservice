@@ -128,7 +128,7 @@ class Recibo_model extends CI_Model
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
         $extra_extatus_venta = ($status_venta == 14) ? "AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
-        $extra_usuario_venta = ($id_usuario_venta == 1) ? " " : "AND p.id_usuario_venta = '" . $id_usuario_venta . "'";
+        $extra_usuario_venta = ($id_usuario_venta == 1) ? " " : "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
         $ext_fecha = $this->get_fecha($param);
@@ -486,13 +486,18 @@ class Recibo_model extends CI_Model
     function valida_recibo_por_pagar_usuario($param)
     {
 
+        $propietarios = "( 
+        id_usuario =  '" . $param["id_usuario"] . "' OR 
+        id_usuario_referencia =  '" . $param["id_usuario"] . "' OR
+        id_usuario_venta =  '" . $param["id_usuario"] . "' 
+        )  ";
         $query_get = "SELECT 
                     *
                   FROM proyecto_persona_forma_pago 
                   WHERE 
                     id_proyecto_persona_forma_pago = '" . $param["id_recibo"] . "'
                   AND 
-                    id_usuario =  '" . $param["id_usuario"] . "'
+                   " . $propietarios . "
                   AND 
                     monto_a_pagar > saldo_cubierto 
                   LIMIT 1";
@@ -879,9 +884,12 @@ class Recibo_model extends CI_Model
 
     }
 
-    function pendientes_sin_cierre($id_usuario)
+    function pendientes_sin_cierre($id_usuario, $id_perfil)
     {
 
+        $extra_usuario = ($id_perfil != 6) ?
+            " id_usuario_venta ='" . $id_usuario . "' " :
+            "( id_usuario_venta ='" . $id_usuario . "' OR id_usuario_referencia ='" . $id_usuario . "' )";
         $query_get = "SELECT 
 						id_servicio, 
 						id_proyecto_persona_forma_pago	 id_recibo,
@@ -890,7 +898,7 @@ class Recibo_model extends CI_Model
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  
-						and id_usuario_venta ='" . $id_usuario . "' 
+						and " . $extra_usuario . " 						  
 						AND  se_cancela = 0
 						AND  status !=  10
 						AND 

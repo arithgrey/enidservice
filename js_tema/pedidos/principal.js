@@ -263,8 +263,6 @@ let registra_saldo_cubierto = e => {
     e.preventDefault();
 };
 let response_saldo_cubierto = data => {
-
-    debugger;
     if (data == true) {
 
         let status_venta = get_valor_selected(".status_venta");
@@ -525,6 +523,43 @@ let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_
 
 
 };
+let confirma_reparto = (id_recibo, punto_encuentro) => {
+
+    let text = "¿DESEAS QUE EL REPARTIDOR SE DIRIJA HACER LA ENTREGA A:?";
+    show_confirm(text, punto_encuentro, "SI", function () {
+        enviar_repatidor(id_recibo);
+    });
+    setTimeout(function () {
+
+        let $jsSelector = $('.jconfirm-content');
+        if ($jsSelector.length) {
+            $jsSelector.find('div').addClass('rounded-0 alert border-secondary alert-light black text-uppercase text-center border');
+        }
+    }, 1000);
+
+};
+
+let enviar_repatidor = function (id_recibo) {
+
+
+    $('.jconfirm').addClass('d-none');
+    advierte('Se está solicitando tu entrega al repartidor', 1)
+    $('.text-order-name-error').addClass('h4 text-uppercase');
+    let url = "../q/index.php/api/recibo/reparto/format/json/";
+    let data_send = {'id': id_recibo};
+    request_enid("PUT", data_send, url, response_reparto);
+
+
+};
+let response_reparto = function () {
+
+    advierte('Tu solicitud fué enviada ya pronto estaremos en camino!');
+    setTimeout(function () {
+        redirect("");
+    }, 2000);
+
+};
+
 let agregar_nota = () => {
 
     showonehideone(".form_notas", ".agregar_comentario");

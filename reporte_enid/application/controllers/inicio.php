@@ -38,7 +38,7 @@ class Inicio extends CI_Controller
                 break;
 
             case 6:
-                $module = "location:../tareas";
+                $module = "location:../pedidos";
                 break;
 
 

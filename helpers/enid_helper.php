@@ -1086,7 +1086,7 @@ function strong($text, $attributes = '', $row = 0)
 
     if (is_string($attributes)) {
 
-        $att["class"] = $attributes;
+        $att["class"] = _text_($attributes, _strong);
         $base = "<strong" . add_attributes($att) . ">" . $text . "</strong>";
 
         return ($row == 0) ? $base : addNRow($base);
@@ -2658,8 +2658,7 @@ function tmp_menu($id_usuario, $menu)
                 "href" => path_enid("logout"),
                 "class" => 'black text-uppercase mt-2',
             ]
-        ),
-        $link_tienda
+        )
     ];
 
     $seccion_contenido[] = d_row(d($menu_usuario, 'col-sm-12 mt-3'));
