@@ -35,8 +35,10 @@ let $talla = $(talla);
 
 let input_password = ".password";
 let fecha_servicio = ".fecha_servicio";
-let $input_password = "";
+let $input_password = $(input_password);
 let $input_fecha_servicio = $(fecha_servicio);
+let $input_es_cliente = $('.es_cliente');
+
 
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
@@ -61,17 +63,20 @@ $(document).ready(() => {
 
 let registro = (e) => {
 
+
     verifica_formato_default_inputs(0);
     let len_telefono = $telefono.val().length;
     let len_pw = $input_password.val().length;
     reset_posibles_errores();
     debugger;
+
     let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
     if ($validacion_primer_registro) {
 
         bloquea_form(form_miembro);
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
+
         let text_password = $.trim($input_password.val());
         let pwpost = "" + CryptoJS.SHA1(text_password);
         let data_send = {
@@ -87,6 +92,7 @@ let registro = (e) => {
             "talla": $talla.val(),
             "tipo_entrega": 2,
             "fecha_servicio": $input_fecha_servicio.val(),
+            "es_cliente": $input_es_cliente.val(),
         };
 
         request_enid("POST", data_send, url, respuesta_registro, 0);
@@ -136,7 +142,7 @@ let respuesta_registro = (data) => {
 
 let procesar_pedido_usuario_activo = () => {
 
-    advierte('Procesando pedido',1);
+    advierte('Procesando pedido', 1);
     let url = "../q/index.php/api/cobranza/solicitud_proceso_pago/format/json/";
     let data_send = {
         "id_servicio": $id_servicio.val(),

@@ -22,7 +22,7 @@ class productividad extends REST_Controller
 
         $response = [
             "objetivos_perfil" => $this->get_objetivos_perfil($param),
-            "productos_anunciados" => $this->valida_producto_anunciado($param),
+//            "productos_anunciados" => $this->valida_producto_anunciado($param),
             "flag_direccion" => $this->verifica_direccion_registrada_usuario($param),
             "info_notificaciones" => $this->get_notificaciones_usuario_perfil($param),
             "id_perfil" => $param["id_perfil"],
@@ -36,7 +36,7 @@ class productividad extends REST_Controller
             "id_usuario" => $id_usuario,
             "preguntas" => $this->get_preguntas($id_usuario),
             "respuestas" => $this->get_respuestas($id_usuario),
-            "compras_sin_cierre" => $this->pendientes_ventas_usuario($id_usuario),
+            "compras_sin_cierre" => $this->pendientes_ventas_usuario($id_usuario, $id_perfil),
             "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
             "clientes_sin_tags_arquetipos" => $this->get_stag(),
             "tareas" => $this->get_tareas($id_usuario),
@@ -57,9 +57,10 @@ class productividad extends REST_Controller
 
                 break;
 
-            case 20:
+            case (20 || 6):
                 $response = pendientes_cliente($response);
                 break;
+
             default:
                 break;
         }
@@ -200,9 +201,14 @@ class productividad extends REST_Controller
 
     }
 
-    private function pendientes_ventas_usuario($id_usuario)
+    private function pendientes_ventas_usuario($id_usuario, $id_perfil)
     {
-        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/", ["id_usuario" => $id_usuario]);
+        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/",
+            [
+                "id_usuario" => $id_usuario,
+                "id_perfil" => $id_perfil
+            ]
+        );
         $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
         return $response;
     }

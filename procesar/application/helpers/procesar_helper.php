@@ -25,27 +25,30 @@ if (!function_exists('invierte_date_time')) {
         $is_mobile = $data["is_mobile"];
         $q2 = $data["q2"];
         $in_session = $data["in_session"];
-        $producto = desglose_servicio($servicio, $inf_ext);
-        $monto_total = floatval(pr($servicio,
-                "precio")) * floatval($inf_ext["num_ciclos"]
-            );
-        $costo_envio_cliente = 0;
-        if (pr($servicio, "flag_servicio") < 1) {
-            $costo_envio_cliente = $costo_envio["costo_envio_cliente"];
+        $es_cliente = ($data['id_perfil'] == 20) ? 1 : 0;
+        $es_cliente = ($in_session) ? $es_cliente : 1;
 
-        }
+        $producto = desglose_servicio($servicio, $inf_ext);
+        $precio = pr($servicio, "precio");
+        $monto_total = floatval($precio) * floatval($inf_ext["num_ciclos"]);
+        $costo_envio_cliente =
+            (pr($servicio, "flag_servicio") < 1) ?
+                $costo_envio["costo_envio_cliente"] : 0;
+
 
         $ext = $inf_ext;
         $talla = (array_key_exists("talla", $inf_ext)) ? $inf_ext["talla"] : 0;
 
         $r[] = place("info_articulo", ["id" => 'info_articulo']);
+        $total_con_costo_envio = ($monto_total + $costo_envio_cliente);
         $z[] = format_resumen(
             $producto["resumen_producto"],
             $producto["resumen_servicio_info"],
             $monto_total,
             $costo_envio_cliente,
-            ($monto_total + $costo_envio_cliente),
-            $in_session
+            $total_con_costo_envio,
+            $in_session,
+            $es_cliente
         );
 
         $z[] = str_title($in_session, $is_mobile);
@@ -55,6 +58,8 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "form-miembro-enid-service",
             ]
         );
+
+
         $z[] = frm_miembro_enid_service_hidden(
             $q2,
             $ext["id_servicio"],
@@ -62,9 +67,10 @@ if (!function_exists('invierte_date_time')) {
             $ext["ciclo_facturacion"],
             $talla,
             $data["carro_compras"],
-            $data["id_carro_compras"]
+            $data["id_carro_compras"],
+            $es_cliente
         );
-        $z[] = frm_primer_registro($in_session, $is_mobile, $ext);
+        $z[] = frm_primer_registro($in_session, $ext, $es_cliente);
         $z[] = hiddens(
             [
                 "value" => $data["email"],
@@ -91,11 +97,14 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_primer_registro($in_session, $is_mobile, $info_ext)
+    function frm_primer_registro($in_session, $info_ext, $es_cliente)
     {
+        $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
-        if ($in_session < 1) {
-            $r[] = _titulo("información de compra");
+        if ($in_session < 1 || !$es_cliente) {
+
+            $titulo = ($es_cliente) ? "información de compra" : 'Datos del cliente';
+            $r[] = _titulo($titulo);
             $z[] = input_frm(
                 "col-lg-6 mt-5", "NOMBRE",
                 [
@@ -110,28 +119,38 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "EMAIL",
-                [
-                    "name" => "email",
-                    "placeholder" => "ej. jonathan@enidservices.com",
-                    "class" => "email",
-                    "id" => "email",
-                    "type" => "email",
-                    "required" => "true",
-                    "onkeypress" => "minusculas(this);",
-                ], _text_correo
+            $config_email = [
+                "name" => "email",
+                "placeholder" => "ej. jonathan@enidservices.com",
+                "class" => "email",
+                "id" => "email",
+                "type" => "email",
+                "required" => "true",
+                "onkeypress" => "minusculas(this);",
+            ];
+            if (!$es_cliente) {
 
+                $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
+            }
+
+            $z[] = input_frm(_text_("col-lg-6 mt-5", $es_cliente_class), "EMAIL",
+                $config_email, _text_correo
             );
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "PASSWORD",
+            $config_password =
                 [
                     "id" => "password",
                     "class" => " input-sm password",
                     "type" => "password",
                     "required" => "true",
                     "placeholder" => "***",
-                ], _text_pass);
+                ];
+            if (!$es_cliente) {
+                $config_password['value'] = sha1(mt_rand());
+            }
+            $z[] = input_frm(_text_("col-lg-6 mt-5", $es_cliente_class), "PASSWORD",
+                $config_password, _text_pass);
 
 
             $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO",
@@ -152,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($z, 13);
             $r[] = d("", 9);
             $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5 p-0 mb-5");
-            $r[] = text_acceder_cuenta($info_ext);
+            $r[] = text_acceder_cuenta($info_ext, $es_cliente);
             $r[] = form_close();
 
         }
@@ -393,12 +412,13 @@ if (!function_exists('invierte_date_time')) {
         $monto_total,
         $costo_envio_cliente,
         $monto_total_con_envio,
-        $in_session
+        $in_session,
+        $es_cliente
     )
     {
 
         $r = [];
-        if ($in_session > 0) {
+        if ($in_session > 0 && $es_cliente) {
             $r[] = $resumen;
             $r[] = hiddens(
                 [
@@ -407,17 +427,17 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $resumen_servicio_info,
                 ]
             );
-            $x[] = h("MONTO " . $monto_total . "MXN", 5, "strong");
-            $x[] = h("ENVÍO " . $costo_envio_cliente . "MXN", 5, "strong");
-            $x[] = h("TOTAL " . $monto_total_con_envio . "MXN", 3,
+            $x[] = h("MONTO " . money($monto_total), 5, "strong");
+            $x[] = h("ENVÍO " . money($costo_envio_cliente), 5, "strong");
+            $x[] = h("TOTAL " . money($monto_total_con_envio), 3,
                 "text_total underline letter-spacing-15");
-            $r[] = d($x, "text-right top_20");
+            $r[] = d($x, "text-right mt-5");
 
             $r[] = d(btn("ORDENAR COMPRA",
                 [
                     "class" => 'btn_procesar_pedido_cliente',
                 ]
-            ),'col-sm-4 row pull-right');
+            ), 'col-sm-4 row pull-right');
             $r[] = place('place_proceso_compra mt-5');
         }
 
@@ -434,7 +454,8 @@ if (!function_exists('invierte_date_time')) {
         $ciclo_facturacion,
         $talla,
         $carro_compras,
-        $id_carro_compras
+        $id_carro_compras,
+        $es_cliente
     )
     {
 
@@ -462,6 +483,7 @@ if (!function_exists('invierte_date_time')) {
                         "value" => $plan,
                     ]
                 ),
+
                 hiddens(
                     [
                         "name" => "num_ciclos",
@@ -504,6 +526,14 @@ if (!function_exists('invierte_date_time')) {
                         "value" => date("Y-m-d"),
                     ]
                 ),
+                hiddens(
+                    [
+                        "name" => "es_cliente",
+                        "class" => "es_cliente",
+                        "value" => $es_cliente,
+                    ]
+                ),
+
             ]
         );
 
@@ -555,39 +585,44 @@ if (!function_exists('invierte_date_time')) {
         $precio = pr($servicio, "precio");
         $text = ($inf_ext["is_servicio"] == 1) ? "DURACIÓN" : "PIEZAS";
 
-        $r[] = ajustar(d("ARTÍCULO", "f14"), d($nombre_servicio, "text-right"), 4,
+        $r[] = ajustar(_titulo("ARTÍCULO"), d($nombre_servicio, "text-right"), 4,
             "top_50");
         $r[] = h($text . duracion($id_ciclo_facturacion, $duracion,
                 $inf_ext["is_servicio"]), 5, "top_10 text-right strong");
 
 
-        $response = [
+        return [
             "resumen_producto" => append($r),
             "monto_total" => $precio,
             "resumen_servicio_info" => $nombre_servicio,
         ];
 
-        return $response;
     }
 
 
-    function text_acceder_cuenta($param)
+    function text_acceder_cuenta($param, $es_cliente)
     {
 
-        $ext =
-            [
-                "id_servicio" => $param["is_servicio"],
-                "extension_dominio" => "",
-                "ciclo_facturacion" => $param["ciclo_facturacion"],
-                "is_servicio" => $param["is_servicio"],
-                "q2" => $param["q2"],
-                "num_ciclos" => $param["num_ciclos"],
-                "class" => "text-right link_acceso cursor_pointer  strong link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 ",
-            ];
+        $response = [];
+        if ($es_cliente) {
+
+            $ext =
+                [
+                    "id_servicio" => $param["is_servicio"],
+                    "extension_dominio" => "",
+                    "ciclo_facturacion" => $param["ciclo_facturacion"],
+                    "is_servicio" => $param["is_servicio"],
+                    "q2" => $param["q2"],
+                    "num_ciclos" => $param["num_ciclos"],
+                    "class" => "text-right link_acceso cursor_pointer  strong link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 ",
+                ];
 
 
-        $text[] = h("¿Tienes una cuenta? ", 5, $ext);
+            $text[] = h("¿Tienes una cuenta? ", 5, $ext);
 
-        return d($text, 12);
+            $response[] = d($text, 12);
+        }
+        return append($response);
+
     }
 }

@@ -94,6 +94,7 @@ class Home extends CI_Controller
 
         } else {
 
+
             $this->app->pagina($data, render_pm($data), 1);
 
         }

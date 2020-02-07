@@ -104,7 +104,7 @@ let show_confirm = (text, text_complemento, text_continuar = 0, on_next = 0, on_
     if (text_continuar == 0) {
         text_continuar = "CONTINUAR Y MODIFICAR";
     }
-    $.confirm({
+    let confirm_modal = $.confirm({
         title: text,
         content: text_complemento,
         type: 'green',

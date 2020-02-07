@@ -17,7 +17,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
-        return d($r, 4,1);
+        return d($r, 4, 1);
 
     }
 
@@ -63,8 +63,7 @@ if (!function_exists('invierte_date_time')) {
                     path_enid("home")
 
                 ), "text-center"
-            )
-        ;
+            );
     }
 
     function recuperacion()
@@ -116,11 +115,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = img_default();
-        $r[] = h('ÚNETE', 3);
+        $r[] = _titulo('ÚNETE');
         $r[] = frm_registro();
         $r[] = ya_registro();
 
-        return d(append($r), "seccion_registro_nuevo_usuario_enid_service");
+        return d($r, "seccion_registro_nuevo_usuario_enid_service");
 
     }
 
@@ -165,6 +164,18 @@ if (!function_exists('invierte_date_time')) {
 
             ]
         );
+
+        $perfil[] = [
+            'nombre_perfil' => 'Quiero vender',
+            'id_perfil' => 6
+        ];
+        $perfil[] = [
+            'nombre_perfil' => 'Quiero comprar',
+            'id_perfil' => 20
+        ];
+
+
+        $r[] = create_select($perfil, 'perfil', 'perfil form-control mt-5', 'perfil', 'nombre_perfil', 'id_perfil');
         $r[] = place("place_password_afiliado");
         $r[] = btn('Registrar',
             [

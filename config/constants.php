@@ -18,6 +18,7 @@ define('ICONV_ENABLED', TRUE);
 define('_text_pass', "Ingresa una contraseña de por lo menos 5 caracteres!");
 define('_text_telefono', "Ingresa un teléfono de 8 o 10 caracteres!");
 define('_text_horario_entrega', "¿En qué horario te gustaría recibir tu pedido?");
+define('_text_horario_entrega_vendedor', "¿En qué horario recibirá el pedido tu cliente?");
 define('_text_correo', 'Hey! no tan rápido, valida tu correo!');
 define('_text_cantidad', 'Ups! esta no es una cantidad correcta!');
 define('_text_pago', 'Ups! el monto no es correcto, la cantidad a pagar es');
@@ -81,4 +82,5 @@ define('_eliminar_icon', 'fa fa-times');
 define('_delivery_icon', 'fa fa-fighter-jet');
 define('_share_icon', 'fa fa-share');
 define('_bomb_icon', 'fa fa-bomb');
+define('_repato_icon', 'fa fa-bicycle');
 

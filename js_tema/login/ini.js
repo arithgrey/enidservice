@@ -192,6 +192,8 @@ let agrega_usuario = (e) => {
     let email = get_parameter('.registro_email');
     let nombre = get_parameter(nombre_persona);
     let formato_email = valida_formato_email(email);
+    let perfil = get_valor_selected('.perfil');
+
     if (formato_email === valida_formato_pass(password) && parseInt(formato_email) > 0) {
         if (val_text_form(nombre_persona, '.place_registro_miembro', 3, 'Nombre')) {
 
@@ -207,7 +209,8 @@ let agrega_usuario = (e) => {
                 'nombre': nombre,
                 'email': email,
                 'password': tmp_password,
-                'simple': 1
+                'simple': 1,
+                'perfil': perfil
             };
             request_enid('POST', data_send, url, response_usuario_registro);
         }

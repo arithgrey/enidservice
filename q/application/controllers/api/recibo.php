@@ -20,8 +20,8 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario")) {
-            $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"]);
+        if (fx($param, "id_usuario,id_perfil")) {
+            $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"], $param["id_perfil"]);
         }
         $this->response($response);
 
@@ -131,6 +131,20 @@ class recibo extends REST_Controller
         }
         $this->response($response);
     }
+
+    function reparto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $id_recibo = $param['id'];
+            $response = $this->recibo_model->q_up('status', 16, $id_recibo);
+        }
+        $this->response($response);
+    }
+
 
     function servicio_ppfp_GET()
     {
@@ -606,7 +620,8 @@ class recibo extends REST_Controller
         $response = [];
         $es_usuario = ($this->id_usuario > 0);
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v") && $es_usuario) {
-            $param['id_usuario'] =  $this->id_usuario;
+            $param['perfil'] = $this->app->getperfiles();
+            $param['id_usuario'] = $this->id_usuario;
             $params = [
                 "p.id_proyecto_persona_forma_pago recibo",
                 "p.saldo_cubierto",

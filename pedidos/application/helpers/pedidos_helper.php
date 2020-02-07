@@ -2,15 +2,18 @@
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
-    function propietario($usurio_actual, $usuario_venta, $si_falla = FALSE)
+    function propietario($usurio_actual, $usuario_venta, $id_usuario_referencia, $si_falla = FALSE)
     {
 
-        $es_propietario = ($usurio_actual === $usuario_venta);
+        $es_propietario = ($usurio_actual == $usuario_venta || $usurio_actual == $id_usuario_referencia);
         if ($si_falla !== FALSE) {
             if (!$es_propietario) {
 
                 redirect($si_falla);
+            } else {
+                return $es_propietario;
             }
+
         } else {
             return $es_propietario;
         }
@@ -21,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $orden = $data["orden"];
-        $status = $data["status_ventas"];
+        $status_ventas = $data["status_ventas"];
         $r = $data["recibo"];
         $id_cliente = pr($r, 'id_usuario');
         $domicilio = $data["domicilio"];
@@ -32,11 +35,13 @@ if (!function_exists('invierte_date_time')) {
         $usuario_tipo_negocio = $data['usuario_tipo_negocio'];
         $id_perfil = $data['id_perfil'];
         $usuario = $data["usuario"];
-        $re[] = d(menu($domicilio, $r, $id_recibo, $usuario), 'col-sm-12 mr-5 pr-5 d-md-none');
+        $es_vendedor = $data['es_vendedor'];
+        $menu = menu($domicilio, $r, $id_recibo, $usuario, $es_vendedor);
+        $re[] = d($menu, 'col-sm-12 mr-5 pr-5 d-md-none');
 
-        $re[] = frm_pedidos($orden);
-        $re[] = d(crea_estado_venta($status, $r));
-        $re[] = format_estados_venta($status, $r, $orden);
+        $re[] = frm_pedidos($orden, $es_vendedor);
+        $re[] = d(crea_estado_venta($status_ventas, $r));
+        $re[] = format_estados_venta($status_ventas, $r, $orden);
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
         $re[] = crea_fecha_entrega($r);
@@ -58,9 +63,11 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(d($re, 12), 8);
 
+        $seccion_venta = cliente_compra_inf(
+            $r, $data["tipos_entregas"], $domicilio, $num_compras, $usuario,
+            $id_recibo, $cupon, $es_vendedor, $id_perfil, $status_ventas);
         $response[] = d(
-            cliente_compra_inf($r, $data["tipos_entregas"], $domicilio,
-                $num_compras, $usuario, $id_recibo, $cupon), 4
+            $seccion_venta, 4
         );
         $response[] = hiddens_detalle($r);
 
@@ -485,7 +492,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_pedidos($orden)
+    function frm_pedidos($orden, $es_vendedor)
     {
 
         $r[] = d(
@@ -494,18 +501,20 @@ if (!function_exists('invierte_date_time')) {
                     "href" => path_enid("pedidos")
                 ]
             ), 13);
+
+        $edicion = d(
+            icon("fa fa-pencil"),
+            [
+                "class" => "text-right editar_estado",
+                "id" => $orden,
+            ]
+        );
+        $edicion = ($es_vendedor) ? '' : $edicion;
         $r[] = flex(
             _titulo(_text("# ORDEN ", $orden), 3)
             ,
-            d(
-                icon("fa fa-pencil"),
-                [
-                    "class" => "text-right editar_estado",
-                    "id" => $orden,
-                ]
-            ),
+            $edicion,
             "row align-items-center   mt-4 mb-4", "", "ml-auto"
-
         );
 
         return append($r);
@@ -646,26 +655,21 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function cliente_compra_inf(
-        $recibo,
-        $tipos_entregas,
-        $domicilio,
-        $num_compras,
-        $usuario,
-        $id_recibo,
-        $cupon
-
-    )
+        $recibo, $tipos_entregas, $domicilio,
+        $num_compras, $usuario, $id_recibo,
+        $cupon, $es_vendedor, $id_perfil, $status_ventas)
     {
 
 
-        $r[] = d(menu($domicilio, $recibo, $id_recibo, $usuario), 'd-none d-md-block');
-
+        $menu = menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor);
+        $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
+        $r[] = enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
         $r[] = tracker($id_recibo);
         $r[] = imprimir_recibo($recibo, $tipos_entregas);
         $r[] = tiene_domilio($domicilio);
         $r[] = compras_cliente($num_compras);
-        $r[] = seccion_usuario($usuario, $recibo);
+        $r[] = seccion_usuario($usuario, $recibo, $es_vendedor);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio);
         $r[] = create_seccion_saldos($recibo);
@@ -687,6 +691,68 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         return d($link, 13);
+    }
+
+    function enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
+    {
+
+        $response = [];
+        $punto_encuentro = "";
+        $tipo_entrega = 0;
+        $es_domicilio = es_data($domicilio);
+
+        if ($es_domicilio) {
+
+            $domicilio_entrega = $domicilio["domicilio"];
+            $tipo_entrega = $domicilio["tipo_entrega"];
+            $punto_encuentro = ($tipo_entrega != 1) ? "" : text_punto_encuentro($domicilio_entrega);
+        }
+
+        if ($tipo_entrega == 1) {
+
+            if ($es_vendedor || $id_perfil != 20) {
+
+                $status_recibo = pr($recibo, 'status');
+
+                $clasificacion = search_bi_array(
+                    $status_ventas,
+                    "id_estatus_enid_service",
+                    $status_recibo,
+                    "text_vendedor",
+                    ""
+                );
+
+
+                $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
+                    [
+                        'style' => 'background:#0740ec!important;'
+                    ]
+                );
+                $link = a_enid(
+                    $pedido,
+                    [
+
+                        'class' => _text_(_mbt5_md, 'w-100'),
+                        "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
+
+                    ]
+                );
+                $sin_boton_envio = [16];
+                if (!in_array($status_recibo, $sin_boton_envio)) {
+
+                    $response[] = d($link, 'row mb-3');
+
+                } else {
+
+                    $response[] = d(btn($clasificacion, ['style' => 'background:#0740ec!important;']), 'row mb-3');
+                }
+
+            }
+        }
+
+        return append($response);
+
+
     }
 
 
@@ -963,13 +1029,15 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function menu($domicilio, $recibo, $id_recibo, $usuario)
+    function menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor)
     {
 
         $x[] = link_cambio_fecha($domicilio, $recibo);
         $x[] = link_recordatorio($recibo, $usuario);
         $x[] = link_nota();
-        $x[] = link_costo($id_recibo, $recibo);
+        if (!$es_vendedor) {
+            $x[] = link_costo($id_recibo, $recibo, $es_vendedor);
+        }
         $r[] = d(
             icon("fa fa-plus-circle fa-3x"),
             [
@@ -1327,7 +1395,7 @@ if (!function_exists('invierte_date_time')) {
             "class" => "form_notas row mt-5 mb-5 ",
             "style" => "display:none;",
         ]);
-        $r[] =_titulo("NOTA",4);
+        $r[] = _titulo("NOTA", 4);
         $r[] = textarea([
             "name" => "comentarios",
             "class" => "comentarios form-control top_30 bottom_30",
@@ -1537,7 +1605,7 @@ if (!function_exists('invierte_date_time')) {
                 0
             );
 
-            $menu = d(append($acciones),
+            $menu = d($acciones,
                 [
                     "class" => "dropdown-menu mw_300 mh_100 p-4 border-0",
 
@@ -2058,7 +2126,7 @@ if (!function_exists('invierte_date_time')) {
 
     function bloque($text, $ext = '')
     {
-        return d($text, _text_("border p-3 mt-3 mb-3 row", $ext));
+        return d($text, _text_("border border-secondary p-3 mt-3 mb-3 row", $ext));
     }
 
 
@@ -2146,7 +2214,8 @@ if (!function_exists('invierte_date_time')) {
                         break;
                     }
                 }
-                $response = d($text_status, "row bg_black white p-4 row mb-5");
+
+                $response = d($text_status, "row bg_black white p-4 row mb-5 text-uppercase rounded-0 text-center format_action font-weight-bold");
             }
         endif;
 
@@ -2154,7 +2223,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function seccion_usuario($usuario, $recibo)
+    function seccion_usuario($usuario, $recibo, $es_vendedor)
     {
 
         $r = [];
@@ -2170,7 +2239,10 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = d($nombre);
-            $r[] = d($row["email"]);
+
+            $display = ($es_vendedor) ? 'd-none' : '';
+
+            $r[] = d($row["email"], $display);
             $r[] = d($row["tel_contacto"]);
             $r[] = d($row["tel_contacto_alterno"]);
 
@@ -2296,7 +2368,7 @@ if (!function_exists('invierte_date_time')) {
             ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]));
     }
 
-    function link_costo($id_recibo, $recibo)
+    function link_costo($id_recibo, $recibo, $es_vendedor)
     {
         if (es_data($recibo)) {
 
@@ -2344,11 +2416,10 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
-    function create_punto_entrega($domicilio)
+    function text_punto_encuentro($domicilio)
     {
+        $response = "";
 
-        $punto_encuentro = "";
         foreach ($domicilio as $row) {
 
             $id = $row["id_tipo_punto_encuentro"];
@@ -2360,13 +2431,15 @@ if (!function_exists('invierte_date_time')) {
 
                 //1 | LÍNEA DEL METRO
                 case 1:
-                    $punto_encuentro .=
-                        strtoupper(strong("ESTACIÓN DEL METRO ") . $lugar_entrega . " LINEA " . $row["numero"] . " " . $nombre_linea . " COLOR " . $row["color"]);
+                    $response =
+                        _text_("ESTACIÓN DEL METRO ", $lugar_entrega, " LINEA ",
+                            $row["numero"], $nombre_linea, " COLOR ", $row["color"]
+                        );
                     break;
                 //2 | ESTACIÓN DEL  METRO BUS
                 case 2:
-                    $punto_encuentro .=
-                        $tipo . " " . $lugar_entrega . " " . $nombre_linea;
+                    $response = _text_($tipo, $lugar_entrega, $nombre_linea);
+
                     break;
 
                 default:
@@ -2375,9 +2448,15 @@ if (!function_exists('invierte_date_time')) {
             }
 
         }
+        return $response;
+    }
+
+    function create_punto_entrega($domicilio)
+    {
+
+        $punto_encuentro = text_punto_encuentro($domicilio);
         $encabezado = d_p("punto de encuentro", _strong);
         $encuentro = d_p($punto_encuentro, "contenido_domicilio mt-3");
-
         $contenido = add_text($encabezado, $encuentro);
         return bloque($contenido);
 

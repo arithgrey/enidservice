@@ -479,7 +479,7 @@ class usuario extends REST_Controller
                 if ($response["id_usuario"] > 0) {
 
                     $q["id_usuario"] = $response["id_usuario"];
-                    $q["puesto"] = 20;
+                    $q["puesto"] = $param['perfil'];
                     $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
                     if ($response["usuario_permisos"] > 0) {
                         $response["email"] = $email;

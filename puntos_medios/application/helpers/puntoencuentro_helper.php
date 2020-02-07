@@ -6,8 +6,14 @@ if (!function_exists('invierte_date_time')) {
     function seleccion_estacion($data)
     {
         $att = (is_mobile()) ? "strong" : "strong  mx-auto ";
+
+        $in_session = $data['in_session'];
+        $es_cliente = ($data['id_perfil'] == 20);
+        $es_cliente = ($in_session) ? $es_cliente : 0;
+
+        $titulo = ($es_cliente) ? "¿cual linea se te facilita?" : "¿En qué linea del metro será la entrega?";
         $r[] = flex(
-            _titulo("¿cual linea se te facilita?", 0, $att),
+            _titulo($titulo, 0, $att),
             $data["leneas_metro"],
             [
                 "d-lg-flex align-items-center contenedor_estaciones",
@@ -17,10 +23,11 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
+        $titulo = ($es_cliente) ? "selecciona tu estacción de entrega" : "¿En qué estación será la entrega?";
         $ext = (is_mobile()) ? 'row' : '';
         $r[] =
             flex(
-                _titulo("selecciona tu estacción de entrega"),
+                _titulo($titulo),
 
                 "",
                 [
@@ -35,6 +42,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_pm($data)
     {
+
 
         $primer_registro = $data["primer_registro"];
         $r[] = seleccion_estacion($data);
@@ -60,10 +68,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function formulario_primer_registro_punto_encuentro(
-        $num_ciclos,
-        $carro_compras,
-        $id_carro_compras
-    )
+        $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente)
     {
 
         $extra = [
@@ -87,9 +92,14 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "id_carro_compras",
                 "value" => $id_carro_compras,
             ]),
+            hiddens([
+                "name" => "es_cliente",
+                "class" => "es_cliente",
+                "value" => $es_cliente,
+            ]),
         ];
 
-        return frm_punto_encuentro($extra);
+        return frm_punto_encuentro($extra, $es_cliente);
 
     }
 
@@ -118,7 +128,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_punto_encuentro($extra)
+    function frm_punto_encuentro($extra, $es_cliente)
     {
         $horarios = lista_horarios();
         $lista_horarios = $horarios["select"];
@@ -130,6 +140,8 @@ if (!function_exists('invierte_date_time')) {
         $form[] = form_open("", ["class" => "form_punto_encuentro"]);
         $form[] = append($extra);
         $form[] = d(_titulo("¿Quién recibe?"), 'col-sm-12 mb-5');
+        $es_cliente_class = ($es_cliente) ? '' : 'd-none';
+
 
         $form[] = input_frm("col-lg-6 mt-5",
             "NOMBRE",
@@ -146,18 +158,24 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
+        $config_email = [
+            "id" => "correo",
+            "name" => "email",
+            "type" => "email",
+            "placeholder" => "jonathan@gmail.com",
+            "class" => "correo",
+            "minlength" => 5,
+            "required" => true,
+        ];
+        if (!$es_cliente) {
+
+            $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
+        }
+
         $form[] = input_frm(
-            "col-lg-6 mt-5",
+            _text_("col-lg-6 mt-5", $es_cliente_class),
             "CORREO",
-            [
-                "id" => "correo",
-                "name" => "email",
-                "type" => "email",
-                "placeholder" => "jonathan@gmail.com",
-                "class" => "correo",
-                "minlength" => 5,
-                "required" => true,
-            ], _text_correo
+            $config_email, _text_correo
         );
 
 
@@ -174,19 +192,26 @@ if (!function_exists('invierte_date_time')) {
             ], _text_telefono);
 
 
-        $form[] = input_frm("col-lg-6 mt-5", "PASSWORD",
-            [
-                "id" => "pw",
-                "type" => "password",
-                "class" => "pw",
-                "required" => true,
-                "placeholder" => "***",
-            ], _text_pass);
+        $config = [
+            "id" => "pw",
+            "type" => "password",
+            "class" => "pw",
+            "required" => true,
+            "placeholder" => "***",
+        ];
+
+        if (!$es_cliente) {
+            $config['value'] = sha1(mt_rand());
+        }
+
+        $form[] = input_frm(_text_("col-lg-6 mt-5", $es_cliente_class), "PASSWORD", $config, _text_pass);
 
 
         $tipo = is_mobile() ? 'col-sm-12 p-0' : 'row';
         $r[] = d($form, _text_("informacion_del_cliente p-md-0", $tipo));
-        $sec[] = d(_titulo(_text_horario_entrega), 'col-lg-12 mb-5 p-md-0');
+
+        $titulo = ($es_cliente) ? _text_horario_entrega : _text_horario_entrega_vendedor;
+        $sec[] = d(_titulo($titulo), 'col-lg-12 mb-5 p-md-0');
 
         $a = input_frm("col-lg-6 mt-5 p-md-0", "FECHA",
             [
@@ -223,7 +248,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $x[] = d("¿ALGUNA INDICACIÓN?", _text_("mt-3", _strong));
+        $x[] = d("¿TIENES ALGUNA INDICACIÓN?", _text_("mt-3", _strong));
         $x[] = textarea(
             [
                 "name" => "comentarios",
@@ -311,7 +336,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d("", 9);
         $r[] = d(btn("CONTINUAR", ["class" => "mt-5 "]), "col-lg-3");
-        
+
         $r[] = place("place_notificacion_punto_encuentro ");
         $r[] = form_close();
 
@@ -374,6 +399,8 @@ if (!function_exists('invierte_date_time')) {
         $id_carro_compras = $data["id_carro_compras"];
         $in_session = $data['in_session'];
         $punto_encuentro = $data["punto_encuentro"];
+        $es_cliente = ($data['id_perfil'] == 20) ? 1 : 0;
+        $es_cliente = ($in_session) ? $es_cliente : 1;
         $z[] = hiddens(
             [
                 "name" => "servicio",
@@ -386,13 +413,23 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session < 1) {
 
             $z[] = formulario_primer_registro_punto_encuentro(
-                $num_ciclos, $carro_compras, $id_carro_compras);
+                $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente);
 
         } else {
 
-            $z[] = formulario_compra_punto_encuentro_session(
-                $punto_encuentro, $servicio, $num_ciclos, $id_carro_compras,
-                $carro_compras);
+
+            if (!$es_cliente) {
+
+                $z[] = formulario_primer_registro_punto_encuentro(
+                    $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente);
+
+            } else {
+
+                $z[] = formulario_compra_punto_encuentro_session(
+                    $punto_encuentro, $servicio, $num_ciclos, $id_carro_compras,
+                    $carro_compras);
+            }
+
         }
 
 

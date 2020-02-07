@@ -236,7 +236,6 @@ class Tickets extends REST_Controller
                 $data_complete["info_cliente"] = $this->app->usuario($data["recibo"]["id_usuario"]);
                 $data_complete["info_email"] = $this->notifica_venta_cancelada_a_cliente($prm);
 
-
             }
         }
         $this->response($data_complete);
