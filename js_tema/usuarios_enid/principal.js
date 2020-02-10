@@ -59,7 +59,7 @@ let get_place_usuarios = () => {
     return nuevo_place;
 };
 let carga_usuarios = () => {
-
+    
     let place = get_place_usuarios();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {

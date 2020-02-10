@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function get_format_afiliados()
     {
 
-        $r[] = h("Afiliados Enid Service", 3);
+        $r[] = _titulo("Miembros");
         $link_miembros = tab(
             text_icon('fa fa-trophy', "Miembros Afiliados"),
             "#tab_afiliados_activos",
