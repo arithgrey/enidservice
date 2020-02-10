@@ -496,7 +496,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "src" => path_enid('imagen_usuario', $id_usuario),
                     "onerror" => "this.src='../img_tema/user/user.png'",
-                    'class' => 'w-75 mw-100 mx-auto'
+                    'class' => 'w-50 mw-100 mx-auto'
                 ]
             );
             $contenido[] = d($imagen);
