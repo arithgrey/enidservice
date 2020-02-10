@@ -4,6 +4,7 @@ let $link_recurso = $('#link_recurso');
 let $form_recurso = $('.frm_recurso');
 let $id_recurso = $('#id_recurso');
 let $configurar_recurso = $('#configurar_recurso');
+let $form = $('.form-miembro-enid-service');
 $(document).ready(function () {
 
     set_option("estado_usuario", 1);
@@ -59,7 +60,7 @@ let get_place_usuarios = () => {
     return nuevo_place;
 };
 let carga_usuarios = () => {
-    
+
     let place = get_place_usuarios();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
@@ -92,48 +93,52 @@ let pre_nuevo_usuario = () => {
 };
 let carga_data_usuario = (e) => {
 
-    document.getElementById("form-miembro-enid-service").reset();
-    $(".place_correo_incorrecto").empty();
-    recorre(".tab-content");
-    set_option("id_usuario", get_parameter_enid($(this), "id"));
-    set_option("flag_editar", 1);
+    let id = e.target.id;
+    if (parseInt(id) > 0) {
 
-    let url = "../q/index.php/api/usuario/miembro/format/json/";
-    let data_send = {"id_usuario": get_option("id_usuario")};
-    request_enid("GET", data_send, url, response_carga_data_usuario);
+        document.getElementById("form-miembro-enid-service").reset();
+        $(".place_correo_incorrecto").empty();
+        recorre(".tab-content");
+        set_option("flag_editar", 1);
+
+        let url = "../q/index.php/api/usuario/miembro/format/json/";
+
+        let data_send = {"id_usuario": id};
+        request_enid("GET", data_send, url, response_carga_data_usuario);
+    }
+
 };
 let response_carga_data_usuario = (data) => {
-
+    debugger;
     $(".place_config_usuario").empty();
-    let info_usuario = data[0];
+    data = data[0];
 
-    let nombre = info_usuario.nombre;
-    let apellido_paterno = info_usuario.apellido_paterno;
-    let apellido_materno = info_usuario.apellido_materno;
-    let email = info_usuario.email;
-    let id_departamento = info_usuario.id_departamento;
-    let inicio_labor = info_usuario.inicio_labor;
-    let fin_labor = info_usuario.fin_labor;
-    let turno = info_usuario.turno;
-    let sexo = info_usuario.sexo;
-    status = info_usuario.status;
+    let nombre = data.nombre;
+    let apellido_paterno = data.apellido_paterno;
+    let apellido_materno = data.apellido_materno;
+    let email = data.email;
+    let id_departamento = data.id_departamento;
+    let inicio_labor = data.inicio_labor;
+    let fin_labor = data.fin_labor;
+    let turno = data.turno;
+    let sexo = data.sexo;
+    let status = data.status;
 
-    set_option("perfil", info_usuario.idperfil);
-
-    valorHTML(".form-miembro-enid-service .nombre", nombre);
-    valorHTML(".form-miembro-enid-service .apellido_paterno", apellido_paterno);
-    valorHTML(".form-miembro-enid-service .apellido_materno", apellido_materno);
-    valorHTML(".form-miembro-enid-service .email", email);
+    set_option("perfil", data.idperfil);
+    set_option("id_usuario", data.idusuario);
+    $form.find('.nombre').val(nombre);
+    $form.find(".apellido_paterno").val(apellido_paterno);
+    $form.find(".apellido_materno").val(apellido_materno);
+    $form.find(".email").val(email);
     selecciona_select(".form-miembro-enid-service .depto", id_departamento);
-
     selecciona_select(".form-miembro-enid-service .estado_usuario", status);
     selecciona_select(".estado_usuario", status);
     selecciona_select(".form-miembro-enid-service .inicio_labor", inicio_labor);
     selecciona_select(".form-miembro-enid-service .fin_labor", fin_labor);
     selecciona_select(".form-miembro-enid-service .turno", turno);
     selecciona_select(".form-miembro-enid-service .sexo", sexo);
+    verifica_formato_default_inputs();
 
-    get_puestos_por_cargo();
 };
 let get_puestos_por_cargo = () => {
 
@@ -149,34 +154,18 @@ let response_puesto_por_cargo = (data) => {
 };
 let actualizacion_usuario = (e) => {
 
+    
     let data_send = $(".form-miembro-enid-service").serialize() + "&" + $.param({
         "id_usuario": get_option("id_usuario"),
         "editar": get_option("flag_editar")
     });
     let url = "../q/index.php/api/usuario/miembro/format/json/";
     request_enid("POST", data_send, url, function (data) {
-        response_actualizacion_usuario(data, data_send);
+        redirect('');
     });
     e.preventDefault();
 };
-let response_actualizacion_usuario = (data, data_send) => {
 
-    render_enid(".place_correo_incorrecto", "");
-    if (data_send.usuario_existente != "0") {
-        render_enid(".place_correo_incorrecto", "<span class='alerta_enid'>" + data.usuario_existente + "</span>");
-    }
-    if (data.registro_usuario == true) {
-        render_enid(".place_status_registro", data);
-        $("#tab_productividad").tab("show");
-        $("#tab_equipo_enid_service").tab("show");
-
-    }
-    if (data.modificacion_usuario == true) {
-        render_enid(".place_status_registro", data);
-        $("#tab_productividad").tab("show");
-        $("#tab_equipo_enid_service").tab("show");
-    }
-};
 let carga_mapa_menu = () => {
 
     let url = "../q/index.php/api/recurso/mapa_perfiles_permisos/format/json/";

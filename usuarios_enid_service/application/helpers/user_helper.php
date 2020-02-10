@@ -21,6 +21,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_format_view_usuario($departamentos)
     {
+        $separacion = 'row mt-5';
 
         $opt_turnos[] =
             [
@@ -83,7 +84,7 @@ if (!function_exists('invierte_date_time')) {
                 "opcion" => "Femenino",
                 "val" => 0
             ];
-        $r[] = _titulo("+ Nuevo miembro");
+        $r[] = _titulo("Nuevo miembro");
 
         $r[] = form_open("",
             [
@@ -91,98 +92,82 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 'form-miembro-enid-service'
             ]
         );
-        $select_estado_usuario = create_select(
+        $select = d(create_select(
             $options,
             "status",
-            "form-control input-sm estado_usuario",
+            "form-control estado_usuario",
             "estado_usuario",
             "opcion",
             "val"
+        ), 4);
+        $r[] = d($select, $separacion);
+
+
+        $y[] = input_frm(4, 'Nombre',
+            [
+                "name" => "nombre",
+                "placeholder" => "Nombre",
+                "class" => "nombre",
+                "id" => "nombre",
+                "type" => "text",
+                "required" => true
+            ]
         );
 
-        $r[] = btw(
-            d("Estatus"),
-            $select_estado_usuario,
-            4
-        );
-
-
-        $y[] = btw(
-            d("Nombre"),
-            input(
-                [
-                    "name" => "nombre",
-                    "placeholder" => "Nombre",
-                    "class" => "nombre",
-                    "type" => "text",
-                    "required" => "true"
-                ]
-            )
-            ,
-            4
-
-        );
-
-        $y[] = btw(
-            d("A.paterno"),
-            input([
+        $y[] = input_frm(4, 'Apellido paterno',
+            [
                 "name" => "apellido_paterno",
                 "placeholder" => "placeholder",
                 "class" => "apellido_paterno",
+                "id" => "apellido_paterno",
                 "type" => "text",
                 "required" => true
-            ])
+            ]
+        );
+
+
+        $y[] = input_frm(4,
+            "Apellido materno",
+            [
+                "name" => "apellido_materno",
+                "placeholder" => "placeholder",
+                "class" => "apellido_materno",
+                "id" => "apellido_materno",
+                "type" => "text",
+                "required" => "true"
+            ]
             ,
             4
         );
 
-        $y[] = btw(
-            d("A.Materno"),
-            input(
-                ["name" => "apellido_materno",
-                    "placeholder" => "placeholder",
-                    "class" => "form-control input-sm apellido_materno",
-                    "type" => "text",
-                    "required" => "true"])
-            ,
-            4
-        );
-
-        $r[] = d($y, 13);
-        $x[] = d("Email");
-        $x[] = input([
-            "name" => "email",
-            "placeholder" => "email",
-            "class" => "form-control input-sm email",
-            "type" => "email",
-            "required" => true,
-            "readonly" => true
-        ]);
-        $x[] = place("place_correo_incorrecto");
+        $r[] = d($y, $separacion);
 
 
-        $r[] = d($x, 4);
-        $r[] = btw(
-            d("Departamento"),
+        $input_puestos[] = input_frm(6, 'Email',
+            [
+                "name" => "email",
+                "placeholder" => "email",
+                "class" => " email",
+                "id" => " email",
+                "type" => "email",
+                "required" => true,
+                "readonly" => true
+            ]);
+
+
+        $input_puestos[] = d(
+
             create_select(
                 $departamentos,
                 "departamento",
                 "form-control input-sm depto",
                 "departamento",
                 "nombre",
-                "id_departamento",
-                1
-            ),
-            4
-        );
+                "id_departamento"
+            ), 6);
 
-        $r[] = btw(
-            d("Puesto")
-            ,
-            place("place_puestos")
-            ,
-            4
-        );
+
+        $r[] = d($input_puestos, $separacion);
 
 
         $l[] = btw(
@@ -207,13 +192,13 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $r[] = d($l, 13);
+        $r[] = d($l, $separacion);
 
 
         $t[] = btw(
             d("Sexo"),
             create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val"),
-            4
+            6
         );
 
         $t[] = btw(
@@ -222,11 +207,11 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "text",
                 "name" => "tel_contacto"
             ]),
-            4
+            6
         );
 
-        $r[] = d($t, 13);
-        $r[] = btn("Registrar");
+        $r[] = d($t, $separacion);
+        $r[] = btn("Registrar",['class'=> 'mt-5']);
         $r[] = place("place_config_usuario");
         $r[] = form_close();
         return append($r);
