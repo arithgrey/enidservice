@@ -508,11 +508,10 @@ if (!function_exists('invierte_date_time')) {
 
             if ($data["modo_edicion"] > 0):
                 $contenido[] = tab(
-                    text_icon('fa fa-pencil', ""),
+                    text_icon('usuario_enid_service fa fa-pencil','', ["id" => $id_usuario]),
                     '#tab_mas_info_usuario',
                     [
-                        "class" => 'usuario_enid_service ml-auto',
-                        "id" => $id_usuario,
+                        "class" => 'ml-auto',
                     ]
                 );
 
