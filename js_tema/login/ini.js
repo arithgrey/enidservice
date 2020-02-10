@@ -65,21 +65,13 @@ $(document).on('ready', () => {
         $mail_acceso.next('label').addClass('focused_input');
     });
 
-    $mail_acceso.focusout(function () {
-        if ($mail_acceso.val() === '') {
-            $mail_acceso.next('label').removeClass('focused_input');
-        }
-    });
+
 
     $input_pw.focus(function () {
         $input_pw.next('label').addClass('focused_input');
     });
 
-    $input_pw.focusout(function () {
-        if ($input_pw.val() === '') {
-            $input_pw.next('label').removeClass('focused_input');
-        }
-    });
+
 });
 
 let inicio_session = () => {

@@ -44,7 +44,7 @@ $("footer").ready(() => {
     if (document.body.querySelector(".input_enid_format")) {
 
         $(".input_enid_format :input").focus(next_label_input_focus);
-        $(".input_enid_format :input").focusout(next_label_focus_out);
+
     }
 
 
@@ -1016,6 +1016,7 @@ let verifica_formato_default_inputs = function (validacion = 1) {
             let $selector_input = input_enid_format[i];
             if ($selector_input.tagName == "INPUT") {
 
+                debugger;
                 if (validacion > 0) {
 
                     if ($selector_input.value.length > 0) {
@@ -1024,9 +1025,10 @@ let verifica_formato_default_inputs = function (validacion = 1) {
                     }
                 } else {
 
-                    let $selector_current_label = $selector_input.nextSibling;
-                    $selector_current_label.classList.add('focused_input');
-
+                    if ($selector_input.value.length > 0) {
+                        let $selector_current_label = $selector_input.nextSibling;
+                        $selector_current_label.classList.add('focused_input');
+                    }
                 }
 
             }
