@@ -186,7 +186,6 @@ let resposponse_confirma_cancelacion = data => {
 };
 let cancela_compra = function () {
 
-    debugger;
     let id_recibo = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/cancelar/format/json/";
     let data_send = {

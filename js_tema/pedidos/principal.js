@@ -454,7 +454,6 @@ let pre_tipo_entrega = () => {
 };
 let verifica_pago_previo = id_status => {
 
-    debugger;
     let saldo_cubierto = get_parameter(".saldo_actual_cubierto");
     if (saldo_cubierto > 0) {
 
@@ -567,7 +566,6 @@ let agregar_nota = () => {
 };
 let registrar_nota = e => {
 
-    debugger;
     let url = "../q/index.php/api/recibo_comentario/index/format/json/";
     let comentario = get_parameter(".comentarios");
     let texto = comentario.trim().length;
@@ -599,7 +597,6 @@ let modifica_status_recordatorio = (id_recordatorio, status) => {
 };
 let registro_usuario = function (e) {
 
-    debugger;
     let url = $(".form_set_usuario").attr("action");
     let data_send = $(".form_set_usuario").serialize();
     bloquea_form(".form_set_usuario");

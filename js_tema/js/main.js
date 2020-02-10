@@ -1016,7 +1016,6 @@ let verifica_formato_default_inputs = function (validacion = 1) {
             let $selector_input = input_enid_format[i];
             if ($selector_input.tagName == "INPUT") {
 
-                debugger;
                 if (validacion > 0) {
 
                     if ($selector_input.value.length > 0) {

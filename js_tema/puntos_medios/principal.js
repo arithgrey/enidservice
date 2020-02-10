@@ -205,7 +205,7 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 let response_registro_usuario = (data) => {
 
-    debugger;
+
     $("#modal-error-message").modal("hide");
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 

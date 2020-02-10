@@ -428,6 +428,7 @@ if (!function_exists('invierte_date_time')) {
     function render_resumen_pedodos($recibos, $lista_estados, $param)
     {
 
+        $perfil = $param['perfil'];
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = [
             "",
@@ -445,7 +446,6 @@ if (!function_exists('invierte_date_time')) {
             "FECHA DE PAGO",
             "FECHA CONTRA ENTREGA",
         ];
-
 
         $items = [
             "ORDEN",
@@ -484,14 +484,14 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $items = [
-                span($recibo, 'd-md-block d-none'),
-                $img,
-                span($estado_compra, 'font-weight-bold estado_compra'),
-                $tipo_entrega,
-                money($monto_a_pagar),
-                format_fecha($entrega),
-            ];
+            $items = [];
+            $items[] = span($recibo, 'd-md-block d-none');
+            $items[] = $img;
+            $items[] = span($estado_compra, 'font-weight-bold estado_compra');
+            $items[] = $tipo_entrega;
+            $items[] = money($monto_a_pagar);
+            $items[] = format_fecha($entrega);
+
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $tb[] = d(
@@ -565,8 +565,6 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
-
-
 
 
     function get_saldo_pendiente(
