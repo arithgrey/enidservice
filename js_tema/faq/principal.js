@@ -35,7 +35,6 @@ let registra_respuesta = (e) => {
 
 let r_registro_respuesta = (data) => {
 
-    debugger;
     seccess_enid(".place_refitro_respuesta", "Respuesta registrada!");
     reset_form("form_respuesta");
     redirect("../faq/?faq=" + data);

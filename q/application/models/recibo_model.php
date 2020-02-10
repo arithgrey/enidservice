@@ -128,7 +128,8 @@ class Recibo_model extends CI_Model
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
         $extra_extatus_venta = ($status_venta == 14) ? "AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
-        $extra_usuario_venta = ($id_usuario_venta == 1) ? " " : "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
+        $extra_usuario_venta = ($id_usuario_venta == 1) ? " " :
+            "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
         $ext_fecha = $this->get_fecha($param);
@@ -154,7 +155,7 @@ class Recibo_model extends CI_Model
             $sql = " INNER JOIN usuario u ON 
                                     p.id_usuario =  u.idusuario 
                                     WHERE 
-                                        u.nombre LIKE '%{$cliente}%' 
+                                        ( u.nombre LIKE '%{$cliente}%' 
                                     OR
                                         u.apellido_paterno LIKE '%{$cliente}%'
                                     OR
@@ -162,7 +163,7 @@ class Recibo_model extends CI_Model
                                     OR
                                         u.tel_contacto LIKE '%{$cliente}%'
                                     OR
-                                        u.email        LIKE '%{$cliente}%'
+                                        u.email        LIKE '%{$cliente}%' )
                                     ";
         }
         return $sql;

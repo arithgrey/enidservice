@@ -282,8 +282,8 @@ class recibo extends REST_Controller
 
             $orden = $row;
             $id_servicio = $ordenes[$a]["id_servicio"];
-            $orden["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1,
-                1);
+            $orden["url_img_servicio"] = $this->app->imgs_productos(
+                $id_servicio, 1, 1, 1);
             $a++;
             $response[] = $orden;
         }
@@ -668,6 +668,7 @@ class recibo extends REST_Controller
                 $response = $this->recibo_model->get_q($params, $param);
             }
             if ($param["v"] == 1) {
+
                 $response = $this->add_imgs_servicio($response);
                 $response = render_resumen_pedodos($response,
                     $this->get_estatus_enid_service($param), $param);

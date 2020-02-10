@@ -68,7 +68,6 @@ let registro = (e) => {
     let len_telefono = $telefono.val().length;
     let len_pw = $input_password.val().length;
     reset_posibles_errores();
-    debugger;
 
     let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
     if ($validacion_primer_registro) {
@@ -116,7 +115,7 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-    debugger;
+
     empty_elements(".place_registro_afiliado");
     if (data != -1) {
 
