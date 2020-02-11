@@ -1,3 +1,20 @@
+.pago_en_proceso {
+    background: #04325b;
+}
+
+.se_pago {
+
+    background: #007eee;
+}
+
+.pago_en_proceso h4 {
+    color: white !important;
+}
+
+.se_pago h4 {
+    color: white !important;
+}
+
 .cancelado {
 
     background: #ff7266;
@@ -33,8 +50,8 @@
     text-align: center;
 }
 
-.menu_pedidos div a{
-    color: #000000!important;
+.menu_pedidos div a {
+    color: #000000 !important;
 }
 
 .status_compra {

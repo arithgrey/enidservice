@@ -280,13 +280,16 @@ class Home extends CI_Controller
 
         $id_recibo = $param['costos_operacion'];
         $recibo = $this->get_recibo($id_recibo);
+        $id_servicio = pr($recibo, 'id_servicio');
+
+
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
         propietario(
             $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
             path_enid('_area_cliente'));
 
-        $data = $this->app->cssJs($data, "pedidos");
+        $data = $this->app->cssJs($data, "pedidos_costos_operacion");
         $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
         $this->table->set_heading([
             _titulo('MONTO', 4),
@@ -329,6 +332,7 @@ class Home extends CI_Controller
             $costos_operacion,
             $recibo
         );
+
         $this->app->pagina($data, $response, 1);
 
     }

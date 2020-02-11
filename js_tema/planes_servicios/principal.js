@@ -15,7 +15,6 @@ let $seccion_busqueda = $(seccion_busqueda);
 let $titulo_seccion = $(titulo_seccion);
 let $costo = $('.costo');
 let $form_nombre_producto = $('.form_nombre_producto');
-
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -41,6 +40,7 @@ $(document).ready(() => {
     $(".ci_facturacion").change(evalua_precio);
     $(".cancelar_registro").click(cancelar_registro);
     def_contenedores();
+
 
     $costo.keypress(enter_precio);
 
@@ -159,6 +159,8 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_servicio_nombre_info").submit(actualiza_dato_servicio);
     $(".form_servicio_url_venta").submit(actualiza_dato_url_venta);
     $(".form_servicio_afiliados").submit(actualiza_dato_servicio_afiliado);
+
+
     $(".form_servicio_desc").submit(actualiza_dato_servicio_desc);
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
@@ -188,6 +190,9 @@ let respuesta_informacion_servicio = (data) => {
 
 
     $(".form_dropshipping").submit(modifica_dropshipping);
+
+    $('.form_comision_venta').submit(registro_comision);
+
     if (get_option("flag_nueva_categoria") == 1) {
         recorre("#seccion_metakeywords_servicio");
     }
@@ -1521,4 +1526,14 @@ let enter_precio = function (e) {
     if (e.keyCode == 13) {
         $form_nombre_producto.submit();
     }
+};
+let registro_comision = function (e) {
+
+    e.preventDefault();
+    let data_send = $('.form_comision_venta').serialize();
+    let url = "../q/index.php/api/servicio/comision/format/json/";
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    });
+
 };

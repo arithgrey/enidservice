@@ -32,15 +32,24 @@ class costo_operacion extends REST_Controller
             $num = $this->costo_operacion_model->get_num_type($param["recibo"], $param["tipo"]);
             $status = false;
 
+            $tipo = $param["tipo"];
+            $id_recibo = $param["recibo"];
+            $monto = $param["costo"];
+
             if ($num < 1) {
 
                 $params = [
-                    "monto" => $param["costo"],
-                    "id_recibo" => $param["recibo"],
-                    "id_tipo_costo" => $param["tipo"]
+                    "monto" => $monto,
+                    "id_recibo" => $id_recibo,
+                    "id_tipo_costo" => $tipo
                 ];
 
                 $status = $this->costo_operacion_model->insert($params);
+                if ($tipo == 12) {
+
+                    $this->notifica_pago_comision_a_vendedor($id_recibo, $monto);
+
+                }
 
             }
 
@@ -68,7 +77,9 @@ class costo_operacion extends REST_Controller
         $this->response($response);
 
     }
-    function qsum_GET(){
+
+    function qsum_GET()
+    {
 
         $param = $this->get();
         $response = false;
@@ -80,18 +91,31 @@ class costo_operacion extends REST_Controller
         $this->response($response);
 
     }
+
     /*recibos sin costos de operación*/
-    function scostos_GET(){
+    function scostos_GET()
+    {
 
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
 
-           $response =  $this->costo_operacion_model->get_recibos_sin_costos($param["id_usuario"]);
+            $response = $this->costo_operacion_model->get_recibos_sin_costos($param["id_usuario"]);
         }
 
         $this->response($response);
 
     }
+
+    private function notifica_pago_comision_a_vendedor($id_recibo, $monto)
+    {
+        return $this->app->api("recibo/pago_comision/format/json/",
+            [
+                "id" => $id_recibo, 'monto' => $monto
+            ]
+            , 'json', 'PUT'
+        );
+    }
+
 
 }

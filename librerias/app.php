@@ -531,12 +531,8 @@ class app extends CI_Controller
 
                     "css" =>
                         [
-
-                            /**"js/bootstrap-datepicker/css/datepicker-custom.css",
-                             * "js/bootstrap-timepicker/css/timepicker.css",**/
                             "pedidos.css",
                             "confirm-alert.css",
-
                         ],
                     "js" =>
                         [
@@ -550,7 +546,7 @@ class app extends CI_Controller
                             "js/pickers-init.js",
                             "alerts/jquery-confirm.js",
                             "pedidos/principal.js",
-                            "pedidos/costos_operacion.js",
+
 
                         ]
                     ,
@@ -558,6 +554,31 @@ class app extends CI_Controller
 
                 ]
             ,
+            "pedidos_costos_operacion" =>
+                [
+
+                    "css" =>
+                        [
+                            "confirm-alert.css",
+                        ],
+                    "js" =>
+                        [
+
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                            "js/bootstrap-daterangepicker/moment.min.js",
+                            "js/bootstrap-daterangepicker/daterangepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
+                            "alerts/jquery-confirm.js",
+                            "pedidos/costos_operacion.js",
+
+                        ]
+                    ,
+                ]
+            ,
+
             "pedidos_domicilios_pedidos" =>
                 [
                     "css" =>

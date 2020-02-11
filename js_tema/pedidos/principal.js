@@ -17,8 +17,10 @@ $(document).ready(() => {
     $(".form_cantidad").submit(registra_saldo_cubierto);
     $(".configurara_informacion_cliente").click(muestra_form_usuario);
     $(".form_set_usuario").submit(registro_usuario);
-    $(".form_costos").submit(registro_costo_operativo);
-    $('.costo_operativo').keyup(envia_costo_operativo);
+
+
+
+
 
     $(".agenda_compra").click(agenda_compra);
     $(".saldo_cubierto_pos_venta").keyup((e) => {
@@ -610,24 +612,8 @@ let muestra_form_usuario = () => {
     showonehideone("#contenedor_form_usuario", ".contenedor_cliente");
 
 };
-let confirma_eliminar_concepto = id => {
-
-    show_confirm("¿Seguro deseas eliminar este concepto?", "", "Eliminar", function () {
-
-        elimina_costo_operacion(id);
-    });
-};
-
-let elimina_costo_operacion = id => {
 
 
-    let data_send = $.param({"id": id});
-    let url = "../q/index.php/api/costo_operacion/index/format/json/";
-    request_enid("DELETE", data_send, url, function () {
-        redirect("");
-    });
-
-};
 let retorno = () => {
     let sender = get_parameter(".consulta");
     if (sender > 0) {
@@ -696,15 +682,15 @@ let registro_arquetipo = function (e) {
     }
 
 
-}
+};
 let response_tag_arquetipo = function () {
     redirect('');
-}
+};
 let baja_tag_arquetipo = function () {
 
     set_option('tag_arquetipo', get_parameter_enid($(this), 'id'));
     show_confirm("¿QUIERES QUITAR ESTA DESCRIPCIÓN?", "", 0, baja_tag);
-}
+};
 let baja_tag = function () {
 
     let tag_arquetipo = get_option('tag_arquetipo');
@@ -714,7 +700,7 @@ let baja_tag = function () {
         let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
         request_enid("DELETE", data_send, url, response_tag_arquetipo);
     }
-}
+};
 let usuario_tipo_negocio = function () {
 
     let tipo_negocio = get_valor_selected('.usuario_tipo_negocio');
@@ -723,14 +709,8 @@ let usuario_tipo_negocio = function () {
         let url = "../q/index.php/api/usuario_tipo_negocio/index/format/json/";
         request_enid("POST", data_send, url, response_tag_arquetipo);
     }
-}
+};
 let editar_usuario_tipo_negocio = function () {
 
     $form_usuario_tipo_negocio.removeClass('d-none');
-}
-let envia_costo_operativo = function (e) {
-    let code = (e.keyCode ? e.keyCode : e.which);
-    if (code == 13 && $('.costo_operativo').val() > 0) {
-        $(".form_costos").submit();
-    }
 };
