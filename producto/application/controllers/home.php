@@ -208,24 +208,17 @@ class Home extends CI_Controller
 
     private function valida_tiempo_entrega($tiempo)
     {
-        $trans = new GoogleTranslate();
-        $fecha = new DateTime(date("Y-m-d e"));
-        $fechaTest = new DateTime(date("Y-m-d e"));
-        $fechaTest->add(new DateInterval('P1D'));
-        $fecha->add(new DateInterval('P1D'));
-        $entrega =
-            $trans->translate(
-                'en', 'es', $fecha->format('l d M Y')
-            );
 
-        $text = _text(
-            "realiza hoy tu pedido y ",
-            "tenlo el  ",
-            $entrega
-        );
+        $fecha = horario_enid();
+        $hoy = $fecha->format('H:i:s');
 
-        $response[] = d($text, "text-uppercase mt-5 ");
-        $response[] = d(_titulo('Tienes una de dos',4), 'mt-5 text-center');
+        $text = "Realiza tu pedido antes de las 6 PM y tenlo el hoy mismo!";
+        $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
+        $str = ($hoy < 18) ? $text : $mas_un_dia;
+
+
+        $response[] = d($str, "text-uppercase mt-5 ");
+        $response[] = d(_titulo('Tienes una de dos', 4), 'mt-5 text-center');
         return append($response);
     }
 

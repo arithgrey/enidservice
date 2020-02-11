@@ -190,9 +190,11 @@ let respuesta_informacion_servicio = (data) => {
 
 
     $(".form_dropshipping").submit(modifica_dropshipping);
-
     $('.form_comision_venta').submit(registro_comision);
+    $('.editar_comision').click(function () {
 
+        showonehideone('.form_comision_venta','.text_comision');
+    });
     if (get_option("flag_nueva_categoria") == 1) {
         recorre("#seccion_metakeywords_servicio");
     }

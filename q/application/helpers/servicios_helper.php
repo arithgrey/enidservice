@@ -1357,9 +1357,17 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if ($perfil == 3) {
 
+            $text[] = text_icon(_text_(_editar_icon,'editar_comision'),
+                _text_(
+                    d('COMISIÓN QUE PAGAS POR VENTA',_strong),
+                    _titulo(money($comision), 2)
+                )
+            );
+
+            $r[] = d($text,'text_comision');
             $r[] = form_open("",
                 [
-                    "class" => "form_comision_venta"
+                    "class" => "form_comision_venta d-none"
                 ]
             );
 
@@ -1381,9 +1389,9 @@ if (!function_exists('invierte_date_time')) {
             $guardar = btn("GUARDAR");
             $r[] = flex_md($input, $guardar, _text_(_between_md, 'row'), 8, 4);
 
-            $response[] = d($r, 'col-md-6 mt-5');
+            $response[] = append($r);
         }
-        return append($response);
+        return d($response, 'col-md-6 mt-5');
 
 
     }
