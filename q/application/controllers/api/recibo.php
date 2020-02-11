@@ -120,6 +120,19 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function pago_comision_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,monto")) {
+            /*los pagos y fecha registro se mantienen en los costos operativos*/
+            $response = $this->recibo_model->q_up("flag_pago_comision", 1, $param['id']);
+
+        }
+        $this->response($response);
+    }
+
     function cancelar_envio_recordatorio_PUT()
     {
 
@@ -290,6 +303,7 @@ class recibo extends REST_Controller
 
         return $response;
     }
+
 
     function agrega_estados_direcciones_a_pedidos($ordenes_compra)
     {
@@ -590,7 +604,7 @@ class recibo extends REST_Controller
 
             $r[] = get_text_notificacion_pago($url_seguimiento_pago);
 
-            $response = d(append($r), 'w-100');
+            $response = d($r, 'w-100');
         }
 
         return $response;
@@ -623,7 +637,7 @@ class recibo extends REST_Controller
             $param['perfil'] = $this->app->getperfiles();
             $param['id_usuario'] = $this->id_usuario;
             $params = [
-                "p.id_proyecto_persona_forma_pago recibo",
+                "p.id_proyecto_persona_forma_pago recibo ",
                 "p.saldo_cubierto",
                 "p.fecha_registro",
                 "p.monto_a_pagar",
@@ -638,6 +652,10 @@ class recibo extends REST_Controller
                 "p.id_servicio",
                 "p.fecha_cancelacion",
                 "p.fecha_pago",
+                "p.flag_pago_comision",
+                "p.comision_venta",
+
+
             ];
             if ($param["recibo"] > 0) {
                 /*Busqueda por número recibo*/
@@ -657,6 +675,8 @@ class recibo extends REST_Controller
                     "id_servicio",
                     "fecha_cancelacion",
                     "fecha_pago",
+                    "flag_pago_comision",
+                    "comision_venta",
                 ];
 
 
@@ -668,6 +688,7 @@ class recibo extends REST_Controller
                 $response = $this->recibo_model->get_q($params, $param);
             }
             if ($param["v"] == 1) {
+
 
                 $response = $this->add_imgs_servicio($response);
                 $response = render_resumen_pedodos($response,

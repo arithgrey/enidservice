@@ -429,6 +429,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $perfil = $param['perfil'];
+        $es_vendedor = in_array($perfil, [6, 3]);
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = [
             "",
@@ -447,19 +448,22 @@ if (!function_exists('invierte_date_time')) {
             "FECHA CONTRA ENTREGA",
         ];
 
-        $items = [
-            "ORDEN",
-            "",
-            "STATUS",
-            "TIPO ENTREGA",
-            "MONTO COMPRA",
-            $ops_tipo_orden_text[$tipo_orden],
-        ];
 
-        $titulos = d_c($items, "font-weight-bold col-lg-2 ");
-        $tb[] = d($titulos, 'mb-3 mt-3 d-none d-md-block row');
+        $titulos[] = "ORDEN";
+        $titulos[] = "";
+        $titulos[] = "STATUS";
+        $titulos[] = "MONTO COMPRA";
+        if (!$es_vendedor) {
 
+            $titulos[] = $ops_tipo_orden_text[$tipo_orden];
+        }
+
+
+        $titulos_reporte[] = d_c($titulos, "font-weight-bold col-lg-2 ");
+        $titulos_reporte[] = d('TUS GANANCIAS', "bg_black white font-weight-bold col-lg-4 text-center");
+        $tb[] = d($titulos_reporte, 'mb-3 mt-3 d-none d-md-block row');
         $total = 0;
+        $saldo_por_cobrar = 0;
         foreach ($recibos as $row) {
 
 
@@ -467,13 +471,31 @@ if (!function_exists('invierte_date_time')) {
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
-            $tipo_entrega = $row["tipo_entrega"];
-            $estado_compra = ($row["se_cancela"] == 1 || $row["cancela_cliente"] == 1) ? "CANCELACIÓN" : 0;
+            $es_orden_cancelada = ($row["se_cancela"] == 1 || $row["cancela_cliente"] == 1);
+            $estado_compra = $es_orden_cancelada ? "CANCELACIÓN" : 0;
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
-            $tipo_entrega = ($tipo_entrega == 1) ? "PAGO CONTRA ENTREGA" : "MENSAJERÍA";
+
+            $se_pago = $row['flag_pago_comision'];
+            $comision = _titulo(money($row['comision_venta']), 4);
+            $saldo_cubierto = $row['saldo_cubierto'];
+
+            $verificado = ($se_pago > 0) ? _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
+
+            $por_ganar = _d('Cuando el cliente reciba su compra', $comision);
+            $comision = ($saldo_cubierto > 0) ? $verificado : $por_ganar;
+            if ($es_orden_cancelada) {
+                $comision = '';
+            }
+
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
             $extra = (in_array($status, [9, 7, 11, 12])) ? " entregado" : "";
             $extra = ($status == 10) ? " cancelado " : $extra;
+            if ($se_pago > 0) {
+                $extra = 'se_pago white';
+            } else if ($saldo_cubierto > 0) {
+                $extra = 'pago_en_proceso white';
+                $saldo_por_cobrar += $saldo_por_cobrar + $row['comision_venta'];
+            }
             $url_img = $row["url_img_servicio"];
             $total += $monto_a_pagar;
 
@@ -488,27 +510,40 @@ if (!function_exists('invierte_date_time')) {
             $items[] = span($recibo, 'd-md-block d-none');
             $items[] = $img;
             $items[] = span($estado_compra, 'font-weight-bold estado_compra');
-            $items[] = $tipo_entrega;
             $items[] = money($monto_a_pagar);
-            $items[] = format_fecha($entrega);
+
+
+            if (!$es_vendedor) {
+                $items[] = format_fecha($entrega);
+            }
 
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
-            $tb[] = d(
-                d_c(
-                    $items, 'col-lg-2 border descripcion_compra fp8'),
+            $contenido = [];
+            $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
+            $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
+            $line = d(
+                $contenido,
                 [
                     'id' => $recibo,
-                    'class' => 'desglose_orden cursor_pointer row  mt-md-0 mt-sm-5 text-center text-md-left' . $extra
+                    'class' => _text_('desglose_orden cursor_pointer row  mt-md-0 mt-sm-5 text-center text-md-left', $extra)
                 ]
             );
+
+            $tb[] = $line;
+
+
         }
 
 
+        $text_saldo_por_cobrar = d_row(flex('saldo por cobrar',money($saldo_por_cobrar),
+            _text_('col-sm-4 ml-auto text-uppercase h4',_strong,_between_md)
+        ));
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
         $totales = _titulo(_text_('Total', money($total)), 1);
-        return _text($tb_fechas, $inicio, d($tb, 'col-lg-12 mb-4'), $totales);
+        $tabla =  append($tb);
+        return d_c([$tb_fechas,$text_saldo_por_cobrar, $inicio, $tabla, $totales],'col-sm-12 mt-4');
     }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)

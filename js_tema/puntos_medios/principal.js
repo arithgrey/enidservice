@@ -205,7 +205,6 @@ let focus_inputs_form = (len_telefono, len_pw) => {
 
 let response_registro_usuario = (data) => {
 
-
     $("#modal-error-message").modal("hide");
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
@@ -217,7 +216,17 @@ let response_registro_usuario = (data) => {
 
         if (data.hasOwnProperty('id_recibo') && parseInt(data.id_recibo) > 0) {
             if (data.hasOwnProperty('session_creada') && parseInt(data.session_creada) > 0) {
-                redirect_forma_pago(data.id_recibo);
+                let es_cliente = $('.es_cliente').val();
+                let id = data.id_recibo;
+                if (parseInt(es_cliente)) {
+
+                    redirect_forma_pago(id);
+
+                } else {
+
+                    redirect('../pedidos/?recibo=' + id)
+                }
+
             } else {
                 console.log("No se creo la session, repara esto!");
             }

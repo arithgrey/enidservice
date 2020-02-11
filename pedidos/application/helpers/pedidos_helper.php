@@ -606,9 +606,10 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $r[] = row_d($link);
-        $r[] = hr('mt-5 mb-5', 0);
+
         $r[] = d(
             frm_costos(
+                $recibo,
                 $tipo_costos,
                 $id_recibo,
                 $costos_operacion
@@ -616,14 +617,13 @@ if (!function_exists('invierte_date_time')) {
         );
         $seccion = append($r);
 
-        $response = flex_md(
+        $response[] = flex_md(
             $seccion,
             format_img_recibo($path, $recibo),
-            '', _8, _4
+            'row', _8, _4
         );
 
-        return d($response, _text_(_10auto, 'mt-5'));
-
+        return d($response, 10, 1);
 
     }
 
@@ -785,6 +785,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_busqueda_pedidos($data, $param)
     {
 
+        $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
         $status_ventas = $data["status_ventas"];
         $fechas[] =
@@ -814,8 +815,8 @@ if (!function_exists('invierte_date_time')) {
             ];
 
 
-        $r[] = form_open("", ["class" => "form_busqueda_pedidos row", "method" => "post"]);
-        $r[] = form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas);
+        $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
+        $r[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas);
         $es_busqueda = keys_en_arreglo($param,
             [
                 'fecha_inicio',
@@ -826,7 +827,7 @@ if (!function_exists('invierte_date_time')) {
         );
         if ($es_busqueda) {
 
-            $r[] = frm_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"]);
+            $r[] = frm_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"],$ancho_fechas,$ancho_fechas);
             $r[] = hiddens(
                 [
                     "name" => "consulta",
@@ -852,16 +853,17 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $r[] = frm_fecha_busqueda();
+            $r[] = frm_fecha_busqueda(0, 0, $ancho_fechas,$ancho_fechas);
         }
 
 
         $r[] = form_close();
-        $z[] = d($r, "p-5 shadow  ");
+        $z[] = append($r);
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
-        $response[] = d(_titulo("ORDENES DE COMPRA"), 'col-lg-10 col-lg-offset-1 p-md-0 mb-4');
+        $response[] = d(_titulo("TUS ORDENES DE COMPRA EN CURSO"), ' col-sm-10 col-sm-offset-1 mt-5');
+        $response[] = d(_titulo("busqueda", 3), ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
         return append($response);
 
@@ -881,11 +883,13 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function form_busqueda_pedidos($tipos_entregas, $status_ventas, $fechas)
+    function form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas)
     {
 
+        $id_perfil = $data['id_perfil'];
+        $display = (in_array($id_perfil, [6, 20])) ? 'd-none' : '';
 
-        $r[] = input_frm(6, 'Cliente',
+        $r[] = input_frm(_text_(_6p, 'mt-5'), 'Cliente',
             [
                 "name" => "cliente",
                 "id" => "cliente",
@@ -900,12 +904,13 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = input_frm(6, '#Recibo',
+        $r[] = input_frm(_text_(_6p, 'mt-5'), '#Recibo',
             [
                 "name" => "recibo",
                 "id" => 'busqueda_recibo'
             ]
         );
+
 
         $r[] = flex(
             "Tipo de entrega",
@@ -1215,7 +1220,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_costos($tipo_costos, $id_recibo, $costos_registrados)
+    function frm_costos($recibo, $tipo_costos, $id_recibo, $costos_registrados)
     {
 
         $costos_registro = [];
@@ -1269,12 +1274,12 @@ if (!function_exists('invierte_date_time')) {
                 "id_tipo_costo"
             );
 
-            $form[] = flex_md($input_monto, $select_costo, _between_md, _4p);
-
+            $form[] = hiddens(['class' => 'costo_comision_venta', 'value' => pr($recibo, 'comision_venta', 0)]);
+            $form[] = flex_md($input_monto, $select_costo, _between_md, _7p, _5p);
             $form[] = d(btn("AGREGAR"), "mt-5 col-md-3 pull-right p-0");
             $form[] = form_close(place("notificacion_registro_costo"));
             $r[] = d($form);
-            $response = append($r);
+            $response = d($r);
         }
 
         return $response;

@@ -158,6 +158,7 @@ if (!function_exists('invierte_date_time')) {
         $comision_venta = _text_("COMISIÓN POR VENTA", money($comision));
 
         $r[] = conf_detalle(
+            $s["comision"],
             $s["status"],
             $s["es_publico"],
             $id_servicio,
@@ -210,6 +211,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_detalle(
+        $comision,
         $status,
         $es_publico,
         $id_servicio,
@@ -235,6 +237,7 @@ if (!function_exists('invierte_date_time')) {
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
         $baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
         $t[] = estado_publicacion($status, $id_servicio);
+        $t[] = form_comision($comision, $id_perfil, $id_servicio);
         $t[] = es_publico($status, $es_publico, $id_servicio);
         $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock);
         $t[] = form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping);
@@ -245,6 +248,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = uso_disponibilidad($existencia, $es_nuevo, $es_servicio);
         $t[] = seccion_uso_producto($es_nuevo);
         $t[] = seccion_ciclos_facturacion($ciclos, $id_ciclo_facturacion, $es_servicio);
+
         $t[] = form_costo_unidad($precio);
         $t[] = form_costo_envio($es_servicio, $costo_envio);
         $t[] = utilidad($text_comision_venta, $utilidad);
@@ -1346,6 +1350,44 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+
+    function form_comision($comision, $perfil, $id_servicio)
+    {
+
+        $response = [];
+        if ($perfil == 3) {
+
+            $r[] = form_open("",
+                [
+                    "class" => "form_comision_venta"
+                ]
+            );
+
+            $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
+            $input = input_frm('', 'COMISIÓN QUE PAGAS POR VENTA',
+                [
+                    "type" => "float",
+                    "name" => "comision",
+                    "step" => "any",
+                    "class" => "comision",
+                    "id" => "comision",
+                    "value" => $comision
+
+                ],
+                _text_cantidad
+            );
+
+
+            $guardar = btn("GUARDAR");
+            $r[] = flex_md($input, $guardar, _text_(_between_md, 'row'), 8, 4);
+
+            $response[] = d($r, 'col-md-6 mt-5');
+        }
+        return append($response);
+
+
+    }
+
 
     function form_costo_envio($es_servicio, $costo_envio)
     {

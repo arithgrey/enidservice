@@ -69,6 +69,19 @@ class Servicio extends REST_Controller
         $this->response($response);
     }
 
+    function comision_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,comision")) {
+
+            $id_servicio = $param["id"];
+            $response = $this->serviciosmodel->q_up("comision", $param["comision"], $id_servicio);
+
+        }
+        $this->response($response);
+    }
+
     function contra_entrega_PUT()
     {
 
@@ -704,7 +717,7 @@ class Servicio extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        $param["q"] = prm_def($param,'q','');
+        $param["q"] = prm_def($param, 'q', '');
         if (fx($param, 'q,page,order')) {
 
             $param["id_usuario"] = $this->id_usuario;
@@ -1169,7 +1182,8 @@ class Servicio extends REST_Controller
                 "id_usuario id_usuario_venta",
                 "precio",
                 "id_ciclo_facturacion",
-                "existencia"
+                "existencia",
+                "comision"
             ];
 
             $servicio = $this->serviciosmodel->q_get($params, $id_servicio);

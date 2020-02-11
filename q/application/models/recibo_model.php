@@ -123,7 +123,7 @@ class Recibo_model extends CI_Model
         $tipo_entrega = $param["tipo_entrega"];
         $status_venta = $param["status_venta"];
         $id_usuario_venta = $param['id_usuario'];
-        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p  ";
+        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p";
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
@@ -761,6 +761,7 @@ class Recibo_model extends CI_Model
         $flag_envio_gratis = $servicio["flag_envio_gratis"];
         $id_usuario_venta = $servicio["id_usuario_venta"];
         $precio = $servicio["precio"];
+        $comision = $servicio['comision'];
 
         $resumen_compra = $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
         $costo_envio_cliente = 0;
@@ -808,7 +809,8 @@ class Recibo_model extends CI_Model
             "id_servicio",
             "resumen_pedido",
             "talla",
-            "tipo_entrega"
+            "tipo_entrega",
+            "comision_venta"
         ];
 
 
@@ -831,7 +833,8 @@ class Recibo_model extends CI_Model
                 $id_servicio,
                 "'" . $resumen_compra . "'",
                 $talla,
-                $tipo_entrega
+                $tipo_entrega,
+                $comision
             ];
 
 
@@ -1041,5 +1044,4 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
-
 }   
