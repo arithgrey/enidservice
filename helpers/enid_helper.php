@@ -715,7 +715,8 @@ function create_select(
     $row = 0,
     $def = 0,
     $valor = 0,
-    $text_def = ""
+    $text_def = "",
+    $menos = []
 )
 {
 
@@ -727,7 +728,10 @@ function create_select(
     }
     foreach ($data as $item) {
 
-        $select[] = "<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
+        if (!in_array($item[$val], $menos)) {
+
+            $select[] = "<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
+        }
     }
 
     $select[] = "</select>";
@@ -960,7 +964,7 @@ function pago_oxxo($url_request, $saldo, $id_recibo, $id_usuario)
 
 }
 
-function create_select_selected($data, $campo_val, $campo_text, $selected, $name, $class, $valor = 0)
+function create_select_selected($data, $campo_val, $campo_text, $selected, $name, $class, $valor = 0, $menos = [])
 {
 
     $select = "<select class='" . $class . "' name='" . $name . "'>";
@@ -971,7 +975,9 @@ function create_select_selected($data, $campo_val, $campo_text, $selected, $name
         if ($row[$campo_val] == $selected) {
             $str = $row[$campo_text];
         }
-        $select .= "<option value='" . $row[$campo_val] . "' " . $extra . " > " . $row[$campo_text] . "</option>";
+        if (!in_array($row[$campo_val], $menos)) {
+            $select .= "<option value='" . $row[$campo_val] . "' " . $extra . " > " . $row[$campo_text] . "</option>";
+        }
     }
     $select .= "</select>";
     return ($valor < 1) ? $select : $str;
@@ -2475,9 +2481,8 @@ function dispositivo()
     }
 }
 
-function gb_modal()
+function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1)
 {
-
     $span = span('Loading', 'sr-only');
     $load = str_repeat(d($span,
         [
@@ -2485,17 +2490,12 @@ function gb_modal()
             'role' => "status"
         ]
     ), 5);
-    $cargando = d(
-        $load, 'text-center cargando_modal d-none');
-
-
+    $cargando = d($load, 'text-center cargando_modal d-none');
+    $cargando = ($icono_carga > 0) ? $cargando : '';
     $text = span("", "text-order-name-error black");
-    $mensaje_cotenidio =
-        _text_(p($text, "font-weight-bold text-dark text-center"), $cargando);
-    $seccion = d($mensaje_cotenidio
-
-        , "modal-body mt-5 mb-5"
-    );
+    $mensaje_cotenidio = _text_(p($text, "font-weight-bold text-dark text-center"), $cargando);
+    $mensaje_cotenidio = ($modal_inicial !== 1) ? $modal_inicial : $mensaje_cotenidio;
+    $seccion = d($mensaje_cotenidio, "modal-body mt-5 mb-5");
     $cerrar = d(
         icon(_text_(_eliminar_icon, 'fa-2x'),
             [
@@ -2521,7 +2521,7 @@ function gb_modal()
             "class" => "modal",
             "tabindex" => "-1",
             "role" => "dialog",
-            "id" => "modal-error-message",
+            "id" => $id_modal,
 
         ]
     );

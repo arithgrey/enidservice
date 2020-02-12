@@ -4,26 +4,41 @@ let $tag_arquetipo = $('.baja_tag_arquetipo');
 let $usuario_tipo_negocio = $('.usuario_tipo_negocio');
 let $editar_usuario_tipo_negocio = $('.editar_usuario_tipo_negocio');
 let $form_usuario_tipo_negocio = $('.form_usuario_tipo_negocio');
+let $form_cantidad_post_venta = $('.form_cantidad_post_venta');
+let $form_cantidad = $(".form_cantidad");
+let $saldo_actual_cubierto = $('.saldo_actual_cubierto');
+let $saldo_cubierto_pos_venta = $('.saldo_cubierto_pos_venta');
+let $status_venta = $('.status_venta');
+let $modal_estado_venta = $('#modal_estado_venta');
+let $editar_estado_compra = $('.editar_estado_compra');
+let $selector_estados_ventas = $('.selector_estados_ventas');
+let $status_venta_registro = $('.status_venta_registro');
+let $saldo_cubierto = parseInt($saldo_actual_cubierto.val());
 $(document).ready(() => {
 
-    despliega([".selector_estados_ventas", ".form_cantidad", ".form_cantidad_post_venta"], 0);
+    $editar_estado_compra.click(function () {
+        selecciona_select('.status_venta_select', parseInt($status_venta_registro.val()));
+        $modal_estado_venta.modal("show");
+        despliega([".selector_estados_ventas", 1]);
+    });
+
+    despliega([".form_cantidad", ".form_cantidad_post_venta"], 0);
 
     $(".form_busqueda_pedidos").submit(busqueda_pedidos);
     $(".form_fecha_entrega").submit(editar_horario_entrega);
     $(".form_fecha_recordatorio").submit(crea_recordatorio);
     $(".editar_estado").click(cambio_estado);
     $(".editar_tipo_entrega").click(pre_tipo_entrega);
-    $(".status_venta").change(modidica_estado);
+
+    $status_venta.change(modifica_estado);
+
     $(".form_cantidad").submit(registra_saldo_cubierto);
     $(".configurara_informacion_cliente").click(muestra_form_usuario);
     $(".form_set_usuario").submit(registro_usuario);
 
 
-
-
-
     $(".agenda_compra").click(agenda_compra);
-    $(".saldo_cubierto_pos_venta").keyup((e) => {
+    $saldo_cubierto_pos_venta.keyup((e) => {
         let code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13) {
             modifica_status(get_valor_selected(".status_venta"));
@@ -32,10 +47,6 @@ $(document).ready(() => {
     $(".form_edicion_tipo_entrega").change(cambio_tipo_entrega);
     $(".form_notas").submit(registrar_nota);
     retorno();
-    $(".precio").focus(function () {
-        $('.precio').next('label').addClass('focused_input');
-
-    });
 
     $form_tag_arquetipo.submit(registro_arquetipo);
     $tag_arquetipo.click(baja_tag_arquetipo);
@@ -151,22 +162,23 @@ let response_pedidos = function (data) {
 let cambio_estado = function () {
 
     let recibo = get_parameter_enid($(this), "id");
-    $(".selector_estados_ventas").show();
+    $selector_estados_ventas.show();
     let status_venta_actual = get_parameter(".status_venta_registro");
     selecciona_valor_select(".selector_estados_ventas .status_venta", status_venta_actual);
     let status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
     $(".status_venta_registro option[value='" + status_venta_registro + "']").attr("disabled", "disabled");
 
 };
-let modidica_estado = function () {
+let modifica_estado = function () {
 
     $('.place_tipificaciones').addClass('mt-5 mb-5');
-    if (get_parameter(".status_venta_registro") != 9) {
+    if ($saldo_cubierto < 1) {
 
         guarda_nuevo_estado();
 
     } else {
-        let text = "ESTE PEDIDO YA FUÉ NOTIFICADO COMO ENTREGADO, ¿AÚN ASÍ DESEAS MODIFICAR SU ESTADO?";
+
+        let text = "ESTE PEDIDO YA FUÉ NOTIFICADO COMO PAGADO, ¿AÚN ASÍ DESEAS MODIFICAR SU ESTADO?";
         $.confirm({
             title: text,
             content: '',
@@ -181,7 +193,8 @@ let modidica_estado = function () {
                     }
                 },
                 cancel: function () {
-                    $(".selector_estados_ventas").hide();
+
+                    $modal_estado_venta.modal('hide');
                 }
             }
         });
@@ -191,59 +204,45 @@ let guarda_nuevo_estado = () => {
 
     let status_venta = parseInt(get_valor_selected(".selector_estados_ventas .status_venta"));
     let status_venta_registro = parseInt(get_parameter(".status_venta_registro"));
-
-    if (status_venta != status_venta_registro) {
-        $(".form_cantidad").hide();
+    if (status_venta !== status_venta_registro) {
+        $form_cantidad.hide();
         $(".place_tipificaciones").empty();
         switch (status_venta) {
             case 0:
-
                 break;
             case 1:
-                $(".form_cantidad").show();
+                $form_cantidad_post_venta.show();
                 break;
-
             case 6:
                 /*Cuando no ha registrado algún pago*/
                 verifica_pago_previo(6);
                 break;
-
-            case 7:
-                modifica_status(status_venta);
-                break;
-            case 9:
-                modifica_status(status_venta);
-                break;
             case 10:
+                $modal_estado_venta.modal("hide");
                 pre_cancelacion();
                 break;
-            case 11:
-                modifica_status(status_venta);
-                break;
-
             case 15:
-
-                modifica_status(status_venta);
+                $form_cantidad_post_venta.show();
                 break;
-
             default:
+                modifica_status(status_venta);
                 break;
         }
     }
 };
 let modifica_status = (status_venta, es_proceso_compra_sin_filtro = 0) => {
 
+    if (es_proceso_compra_sin_filtro === 0) {
 
-    let saldo_cubierto = get_parameter(".saldo_actual_cubierto");
+        let saldo_pos_venta = parseInt($saldo_cubierto_pos_venta.val());
 
-    if (es_proceso_compra_sin_filtro == 0) {
-
-        if (saldo_cubierto > 0 || get_parameter(".saldo_cubierto_pos_venta") > 0) {
+        if (($saldo_cubierto > 0 || saldo_pos_venta > 0)) {
 
             registra_data_nuevo_estado(status_venta);
+
         } else {
 
-            $(".form_cantidad_post_venta").show();
+            $form_cantidad_post_venta.show();
         }
 
     } else {
@@ -253,9 +252,9 @@ let modifica_status = (status_venta, es_proceso_compra_sin_filtro = 0) => {
 };
 let registra_saldo_cubierto = e => {
 
-    if (valida_num_form(".saldo_cubierto", ".mensaje_saldo_cubierto") == 1) {
+    if (valida_num_form(".saldo_cubierto", ".mensaje_saldo_cubierto") === 1) {
 
-        let data_send = $(".form_cantidad").serialize();
+        let data_send = $form_cantidad.serialize();
         $(".mensaje_saldo_cubierto").empty();
         let url = "../q/index.php/api/recibo/saldo_cubierto/format/json/";
         bloquea_form(".form_cantidad");
@@ -265,15 +264,17 @@ let registra_saldo_cubierto = e => {
     e.preventDefault();
 };
 let response_saldo_cubierto = data => {
-    if (data == true) {
 
-        let status_venta = get_valor_selected(".status_venta");
-        if (status_venta == 6 || status_venta == 9) {
+
+    if (data === true) {
+
+        let status_venta = parseInt(get_valor_selected(".status_venta"));
+
+        if (status_venta === 6 || status_venta === 9) {
             next_status();
         } else {
             show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?", "", 0, descontar_articulos_stock, next_status);
         }
-
 
     } else {
 
@@ -301,18 +302,10 @@ let response_articulos_stock = data => {
     let url = "../pedidos/?recibo=" + get_parameter(".recibo");
     redirect(url);
 };
-let response_status_venta = data => {
+let response_cancelacion = data => {
 
-    desbloqueda_form(".selector_estados_ventas");
-    if (data === true) {
-
-        show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?", "", 0, descontar_articulos_stock, next_status);
-
-    } else {
-
-        advierte(data);
-    }
-
+    $('.tipificacion').prop('disabled', 'disabled');
+    redirect('');
 };
 let pre_cancelacion = () => {
 
@@ -322,7 +315,6 @@ let pre_cancelacion = () => {
         case 0:
             tipo = 2;
             break;
-
         /*opciones en punto de encuentro*/
         case 1:
             tipo = 2;
@@ -330,18 +322,15 @@ let pre_cancelacion = () => {
         /*opciones en mensajeria por  enid*/
         case 2:
             tipo = 4;
-
             break;
         /*Visita en el negocio*/
         case 3:
-
             tipo = 6;
             break;
         /*opciones en mensajeria por  mercado libre*/
         case 4:
             tipo = 5;
             break;
-
         default:
             break;
 
@@ -354,8 +343,7 @@ let pre_cancelacion = () => {
 };
 let response_pre_cancelacion = data => {
 
-    render_enid(".place_tipificaciones", data);
-    $('.place_tipificaciones').addClass('row mt-5 mb-5');
+    modal(data);
     $(".tipificacion").change(registra_motivo_cancelacion);
 };
 let registra_motivo_cancelacion = () => {
@@ -370,7 +358,7 @@ let registra_motivo_cancelacion = () => {
     });
     let url = "../q/index.php/api/recibo/status/format/json/";
     bloquea_form(".selector_estados_ventas");
-    request_enid("PUT", data_send, url, response_status_venta);
+    request_enid("PUT", data_send, url, response_cancelacion);
 };
 let cambio_tipo_entrega = () => {
 
@@ -456,7 +444,8 @@ let pre_tipo_entrega = () => {
 };
 let verifica_pago_previo = id_status => {
 
-    let saldo_cubierto = get_parameter(".saldo_actual_cubierto");
+    let saldo_cubierto = $saldo_actual_cubierto.val();
+
     if (saldo_cubierto > 0) {
 
         let text = "ESTA ORDEN  CUENTA CON UN SALDO REGISTRADO DE " + saldo_cubierto + "MXN ¿AUN ASÍ DESEAS NOTIFICAR SU FALTA DE PAGO?";
@@ -472,7 +461,7 @@ let verifica_pago_previo = id_status => {
 };
 let oculta_opciones_estados = () => {
 
-    despliega([".selector_estados_ventas", 0]);
+    $modal_estado_venta.modal("hide");
 
 };
 let procesa_cambio_estado = () => {
@@ -494,6 +483,33 @@ let registra_data_nuevo_estado = status_venta => {
     set_option("es_proceso_compra", 0);
     let url = "../q/index.php/api/recibo/status/format/json/";
     request_enid("PUT", data_send, url, response_status_venta)
+};
+let response_status_venta = data => {
+
+    desbloqueda_form(".selector_estados_ventas");
+    let status = parseInt(get_valor_selected('.status_venta'));
+    if (data === true) {
+
+
+        switch (parseInt(status)) {
+            case 6:
+                $status_venta.prop('disabled', 'disabled');
+                debugger;
+                redirect('');
+                break;
+
+            default:
+
+                show_confirm("¿QUIERES DESCONTAR LOS ARTICULOS DEL STOCK?", "", 0, descontar_articulos_stock, next_status);
+                break;
+        }
+
+
+    } else {
+
+        advierte(data);
+    }
+
 };
 let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) => {
 

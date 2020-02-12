@@ -102,13 +102,17 @@ class Recibo_model extends CI_Model
     function notifica_entrega($saldo_cubierto, $status, $id, $tipo_fecha)
     {
 
+        $sin_cancelar = [1, 7, 9, 11, 12, 14, 15];
+        $es_venta = (in_array($status, $sin_cancelar));
+        $cancelacion = (!$es_venta) ?: ',se_cancela = 0 , cancela_cliente = 0';
+
         $query_update = "UPDATE 
                             proyecto_persona_forma_pago 
                           SET 
                             saldo_cubierto  =  {$saldo_cubierto} , 
                             status          =  {$status} ,
                             {$tipo_fecha}   =   CURRENT_TIMESTAMP()   ,
-                            entregado       =   1                         
+                            entregado       =   1  " . $cancelacion . "                       
                           WHERE 
                             id_proyecto_persona_forma_pago =  {$id} 
                           LIMIT 1";
