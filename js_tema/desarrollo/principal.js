@@ -18,6 +18,7 @@ let boton_agregar_tarea = '.boton_agregar_tarea';
 let seccion_nueva_tarea = '.seccion_nueva_tarea';
 let menu_tareas_pendientes = '.menu_tareas_pendientes';
 let editar_tiempo_estimado = '.editar_tiempo_estimado';
+let $modal_tiempo_tarea = $();
 
 /*selectores globales*/
 let $q = $(".q");
@@ -32,6 +33,7 @@ window.onpopstate = function (event) {
         valida_retorno();
     }
 };
+
 $(document).ready(() => {
 
 
@@ -55,7 +57,6 @@ $(document).ready(() => {
     $(".abrir_ticket").click(form_nuevo_ticket);
     es_ticket();
 
-
 });
 
 let form_nuevo_ticket = () => {
@@ -70,19 +71,31 @@ let r_form_ticket = data => {
     if (document.body.querySelector(".input_enid_format")) {
 
         $(".input_enid_format :input").focus(next_label_input_focus);
+
     }
     $(".form_ticket").submit(registra_ticket);
 };
 
 let registra_ticket = e => {
 
-    let url = "../q/index.php/api/tickets/index/format/json/";
-    let data_send = $(".form_ticket").serialize();
-    request_enid("POST", data_send, url, response_registro_ticket);
+
+    $modal_tiempo_tarea = $('#modal_tiempo_tarea');
+    $modal_tiempo_tarea.modal('show');
+
+    $('.registro_tiempo_tarea').click(function () {
+
+        let url = "../q/index.php/api/tickets/index/format/json/";
+        let tiempo_estimado = get_valor_selected('#modal_tiempo_tarea #tiempo_estimado');
+        let data_send = $(".form_ticket").serialize() + "&" + $.param({'tiempo_estimado': tiempo_estimado});
+        request_enid("POST", data_send, url, response_registro_ticket);
+    });
+
+
     e.preventDefault();
 
 };
 let response_registro_ticket = data => {
+    $modal_tiempo_tarea.modal('hide');
     render_enid(".place_registro_ticket", "A la brevedad se realizará su solicitud!");
     set_option("id_ticket", data);
     show_tabs(["#ver_avances", "#base_tab_clientes"]);

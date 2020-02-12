@@ -330,19 +330,23 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(_titulo('¿cual es la tarea?', 0, 'mb-5'));
 
-        $label_tiempo = d('¿tiempo estimado?', _text_(_strong, _mbt5_md));
+        $label_tiempo = _titulo('¿tiempo estimado que se invertirá en realizar esta tarea?',3);
         $tiempo_estimado_select = create_select(tiempos(), 'tiempo_estimado',
             'form-control',
             'tiempo_estimado', 'tiempo_estimado', 'tiempo');
 
 
-        $tiempo_estimado_seccion = flex($label_tiempo, $tiempo_estimado_select, 'flex-column');
+        $tiempos[] = dd($label_tiempo, $tiempo_estimado_select);
+        $tiempos[] =  d(btn('Registrar'),'mt-3 registro_tiempo_tarea');
 
-        $seccion_solicitud = flex_md($solicitud, $tiempo_estimado_seccion, _between, _7p, _5p);
-        $r[] = flex_md($seccion_solicitud, $registro, _between, _8p, _4p);
+        $r[] = flex_md($solicitud, $registro, _between, _8p, _4p);
+
         $r[] = form_close();
 
-        return contaiter(d($r, 'col-lg-8 col-lg-offset-2 mb-5 p-0'));
+        $reponse[] = d($r, 'col-lg-8 col-lg-offset-2 mb-5 p-0');
+        $reponse[] = gb_modal(append($tiempos), 'modal_tiempo_tarea');
+        return append($reponse);
+
 
 
     }
