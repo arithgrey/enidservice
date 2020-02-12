@@ -363,8 +363,9 @@ class Home extends CI_Controller
     function seguimiento_pedido($param, $data)
     {
 
-
-        $data = $this->app->cssJs($data, "pedidos");
+        $es_busqueda = (prm_def($param, "recibo") < 1);
+        $css = ($es_busqueda) ? "pedidos_busqueda" : "pedidos";
+        $data = $this->app->cssJs($data, $css);
 
         $data += [
             "tipos_entregas" => $this->get_tipos_entregas([]),
@@ -372,10 +373,17 @@ class Home extends CI_Controller
         ];
 
 
-        $fn = (prm_def($param, "recibo") < 1) ?
-            $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1) :
-            $this->load_detalle_pedido($param, $data);
+        $fn = ($es_busqueda < 1) ?
+            $this->load_detalle_pedido($param, $data) :
+            $this->busqueda_pedidos($param, $data);
 
+    }
+
+
+    private function busqueda_pedidos($param, $data)
+    {
+
+        $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
     }
 
     private function get_tipos_entregas($q)
@@ -456,6 +464,10 @@ class Home extends CI_Controller
         $cupon = ($data['id_perfil'] != 6) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
 
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+        $es_venta_comisionada = ($id_usuario != $id_usuario_referencia && $this->id_usuario != $id_usuario_referencia);
+
+        $usuario_comision = ($es_venta_comisionada) ? $this->get_usuario($id_usuario_referencia) : [];
+
 
         $data += [
             "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
@@ -474,9 +486,10 @@ class Home extends CI_Controller
             "negocios" => $this->tipos_negocio(),
             "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario),
             "es_vendedor" => ($this->id_usuario == $id_usuario_referencia && $id_perfil == 6),
-
+            "id_usuaario_actual" => $this->id_usuario,
+            "es_venta_comisionada" => $es_venta_comisionada,
+            "usuario_comision" => $usuario_comision
         ];
-
 
         $this->app->pagina($data, render_pendidos($data), 1);
     }

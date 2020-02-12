@@ -161,7 +161,7 @@ class recibo extends REST_Controller
                 'cancela_cliente' => 0
             ];
             $in = ["id_proyecto_persona_forma_pago" => $param["id"]];
-            $response = $this->recibo_model->update($params,$in);
+            $response = $this->recibo_model->update($params, $in);
         }
         $this->response($response);
     }
@@ -299,16 +299,32 @@ class recibo extends REST_Controller
 
         $a = 0;
         $response = [];
+        $path_servicio = [];
+        $servicios = [];
         foreach ($ordenes as $row) {
 
             $orden = $row;
             $id_servicio = $ordenes[$a]["id_servicio"];
-            $orden["url_img_servicio"] = $this->app->imgs_productos(
-                $id_servicio, 1, 1, 1);
+            if (!in_array($id_servicio, $servicios)) {
+                $servicios[] = $id_servicio;
+                $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
+                $path_servicio[] = [
+                    'id_servicio' => $id_servicio,
+                    'path' => $path
+                ];
+                $orden["url_img_servicio"] = $path;
+
+            } else {
+
+                $path = search_bi_array($path_servicio, 'id_servicio', $id_servicio, 'path');
+                $orden["url_img_servicio"] = $path;
+            }
+
             $a++;
             $response[] = $orden;
         }
 
+        $a = 0;
         return $response;
     }
 

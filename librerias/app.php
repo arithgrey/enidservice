@@ -526,6 +526,26 @@ class app extends CI_Controller
 
                 ]
             ,
+            "pedidos_busqueda" =>
+                [
+
+                    "css" =>
+                        [
+
+                        ],
+                    "js" =>
+                        [
+
+                            "alerts/jquery-confirm.js",
+                            "pedidos/busqueda.js",
+
+                        ]
+                    ,
+
+
+                ]
+            ,
+
             "pedidos" =>
                 [
 
