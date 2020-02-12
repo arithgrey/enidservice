@@ -26,6 +26,12 @@ if (!function_exists('invierte_date_time')) {
         $orden = $data["orden"];
         $status_ventas = $data["status_ventas"];
         $r = $data["recibo"];
+        $r += [
+            "id_usuaario_actual" => $data['id_usuaario_actual']
+        ];
+
+        $es_venta_comisionada = $data['es_venta_comisionada'];
+        $usuario_comision = $data['usuario_comision'];
         $id_cliente = pr($r, 'id_usuario');
         $domicilio = $data["domicilio"];
         $num_compras = $data["num_compras"];
@@ -48,9 +54,8 @@ if (!function_exists('invierte_date_time')) {
             $status_ventas, 'id_estatus_enid_service', $id_status, 'text_vendedor');
 
 
-        $re[] = frm_pedidos($orden, $text_estado_venta);
+        $re[] = frm_pedidos($es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
         $re[] = d(crea_estado_venta($status_ventas, $r));
-//        $re[] = format_estados_venta($status_ventas, $r, $orden);
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
         $re[] = crea_fecha_entrega($r);
@@ -501,7 +506,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_pedidos($orden, $text_estado_venta)
+    function frm_pedidos($es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
     {
 
         $r[] = d(
@@ -512,13 +517,36 @@ if (!function_exists('invierte_date_time')) {
             ), 13);
 
 
-        $r[] = d(_titulo(_text_("# ORDEN ", $orden), 3), 'mt-5 row');
-        $seccion_estado_compra = text_icon(
-            _text_(_editar_icon, 'editar_estado_compra'), _titulo($text_estado_venta, 4), [], 0);
+        $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision);
+        $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
+        $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _between_md);
+        $r[] = d($recibo_vendedor, 'row mt-3');
+        $icono = _text_(_editar_icon, 'editar_estado_compra');
+        $str = _titulo($text_estado_venta, 4);
+        $seccion_estado_compra = text_icon($icono, $str, [], 0);
         $r[] = d($seccion_estado_compra, 'row border-bottom mb-4');
 
         return append($r);
 
+    }
+
+    function nombre_comisionista($es_venta_comisionada, $usuario_comision)
+    {
+        $response = [];
+        if ($es_venta_comisionada && es_data($usuario_comision)) {
+
+            $comisionista = $usuario_comision[0];
+
+            $vendedor = _text_(
+                'agenda',
+                $comisionista['nombre'],
+                $comisionista['apellido_paterno'],
+                $comisionista['apellido_materno']
+            );
+            $response[] = p($vendedor, _text_('blue_enid3 pl-3 pr-3  white', _strong));
+
+        }
+        return append($response);
     }
 
     function format_estados_venta($status_ventas, $recibo, $es_vendedor)
@@ -2239,6 +2267,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r = [];
+
         $id_usuario = pr($recibo, "id_usuario");
         foreach ($usuario as $row) {
 
@@ -2249,12 +2278,7 @@ if (!function_exists('invierte_date_time')) {
                 es_null($row, "apellido_materno")
             );
 
-
             $r[] = d($nombre);
-
-            $display = ($es_vendedor) ? 'd-none' : '';
-
-            $r[] = d($row["email"], $display);
             $r[] = d($row["tel_contacto"]);
             $r[] = d($row["tel_contacto_alterno"]);
 

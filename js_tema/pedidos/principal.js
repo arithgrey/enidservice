@@ -23,8 +23,6 @@ $(document).ready(() => {
     });
 
     despliega([".form_cantidad", ".form_cantidad_post_venta"], 0);
-
-    $(".form_busqueda_pedidos").submit(busqueda_pedidos);
     $(".form_fecha_entrega").submit(editar_horario_entrega);
     $(".form_fecha_recordatorio").submit(crea_recordatorio);
     $(".editar_estado").click(cambio_estado);
@@ -133,30 +131,6 @@ let response_horario_entrega = function (data) {
     let url = "../pedidos/?recibo=" + get_parameter(".recibo");
     desbloqueda_form(".form_fecha_entrega");
     redirect(url);
-
-};
-let busqueda_pedidos = function (e) {
-
-    let fecha_inicio = get_parameter("#datetimepicker4");
-    let fecha_termino = get_parameter("#datetimepicker5");
-    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
-
-        let data_send = $(".form_busqueda_pedidos").serialize();
-        let url = "../q/index.php/api/recibo/pedidos/format/json/";
-        request_enid("GET", data_send, url, response_pedidos, ".place_pedidos");
-
-    }
-    e.preventDefault();
-};
-let response_pedidos = function (data) {
-
-    render_enid(".place_pedidos", data);
-    $('th').click(ordena_tabla);
-    $(".desglose_orden").click(function () {
-        let recibo = get_parameter_enid($(this), "id");
-        $(".numero_recibo").val(recibo);
-        $(".form_search").submit();
-    });
 
 };
 let cambio_estado = function () {
