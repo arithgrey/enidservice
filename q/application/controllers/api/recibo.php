@@ -153,7 +153,15 @@ class recibo extends REST_Controller
         if (fx($param, "id")) {
 
             $id_recibo = $param['id'];
-            $response = $this->recibo_model->q_up('status', 16, $id_recibo);
+
+            $params = [
+                "status" => 16,
+                "saldo_cubierto" => 0,
+                'se_cancela' => 0,
+                'cancela_cliente' => 0
+            ];
+            $in = ["id_proyecto_persona_forma_pago" => $param["id"]];
+            $response = $this->recibo_model->update($params,$in);
         }
         $this->response($response);
     }
@@ -868,6 +876,8 @@ class recibo extends REST_Controller
             $params = [
                 "status" => $param["status"],
                 "saldo_cubierto" => 0,
+                'se_cancela' => 0,
+                'cancela_cliente' => 0
             ];
 
             $in = ["id_proyecto_persona_forma_pago" => $param["recibo"]];

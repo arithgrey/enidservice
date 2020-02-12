@@ -284,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
         $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
         $r[] = btn("Pago contra entrega", ['class' => 'mt-2']);
-        $r[] = d_p('No pierdas un día más, tu entrega puede ser hoy mismo!','text-right mt-2');
+
         $r[] = form_close();
 
 

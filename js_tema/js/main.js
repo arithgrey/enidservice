@@ -697,6 +697,17 @@ let valida_num_form = (input, place_msj) => {
     format_error(place_msj, mensaje_user);
     return f;
 };
+let modal = (text, cargando_modal = 0) => {
+
+    let $selector_carga_modal = $('.cargando_modal');
+    $selector_carga_modal.addClass('d-none');
+    if (parseInt(cargando_modal) > 0) {
+        $selector_carga_modal.removeClass('d-none');
+    }
+    $(".text-order-name-error").html(text);
+    $("#modal-error-message").modal("show");
+
+};
 let advierte = (text, cargando_modal = 0) => {
 
     let $selector_carga_modal = $('.cargando_modal');
