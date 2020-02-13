@@ -77,7 +77,8 @@ class Recibo_model extends CI_Model
                             saldo_cubierto  =  {$saldo_cubierto} , 
                             status          =  {$status} ,
                             {$tipo_fecha}   =   CURRENT_TIMESTAMP(),
-                            se_cancela      =  1                  
+                            se_cancela      =  1,
+                            saldo_cubierto  =  0                  
                           WHERE 
                             id_proyecto_persona_forma_pago =  {$id} 
                           LIMIT 1";
@@ -141,7 +142,9 @@ class Recibo_model extends CI_Model
 
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-        $query_get .= $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $extra_usuario_venta . $ext_fecha . $ext_servicio . " ORDER BY p.fecha_registro DESC";
+        $query_get .=
+            $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $extra_usuario_venta . $ext_fecha . $ext_servicio .
+            " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC";
         return $this->db->query($query_get)->result_array();
 
     }

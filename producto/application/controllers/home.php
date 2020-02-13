@@ -102,8 +102,8 @@ class Home extends CI_Controller
         $id_servicio = prm_def($param, "producto", 0, 1);
         $this->set_option("id_servicio", $id_servicio);
         $data = $this->app->session();
-        $data["proceso_compra"] =
-            (!$data["in_session"]) ? prm_def($param, "proceso") : 1;
+
+        $data["proceso_compra"] = (!$data["in_session"]) ? prm_def($param, "proceso") : 1;
 
         if ($id_servicio < 1) {
 
@@ -124,13 +124,16 @@ class Home extends CI_Controller
     private function vista($param, $data)
     {
 
+
         $id_servicio = $this->get_option("id_servicio");
         $data["q2"] = prm_def($param, "q2");
         $servicio = $this->app->servicio($id_servicio);
+
         $data["tallas"] = $this->get_tallas($id_servicio);
         $path = path_enid("go_home");
-        $usuario = (es_data($servicio)) ? $this->app->usuario(
-            pr($servicio, "id_usuario")) : redirect($path);
+        $id_usuario = pr($servicio, "id_usuario");
+
+        $usuario = (es_data($servicio)) ? $this->app->usuario($id_usuario) : redirect($path);
         $redirect = (!es_data($usuario)) ? redirect($path) : "";
         $data["usuario"] = $usuario;
         $data["id_publicador"] = key_exists_bi($servicio, 0, "id_usuario", 0);

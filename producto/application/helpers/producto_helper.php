@@ -44,6 +44,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_producto($data)
     {
+
         $inf_servicio = $data["info_servicio"];
         $imgs = $data["imgs"];
         $in_session = $data["in_session"];
@@ -503,7 +504,7 @@ if (!function_exists('invierte_date_time')) {
                 ), ' mr-5 col-lg-12 text-right '
             );
 
-            $response = ($id_usuario == $usuario_servicio || $id_perfil != 20) ? $editar_button : "";
+            $response = ($id_usuario == $usuario_servicio) ? $editar_button : "";
         }
         return $response;
     }
