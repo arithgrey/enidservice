@@ -79,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion_venta = cliente_compra_inf(
             $r, $data["tipos_entregas"], $domicilio, $num_compras, $usuario,
-            $id_recibo, $cupon, $es_vendedor, $id_perfil, $status_ventas);
+            $id_recibo, $cupon, $es_vendedor, $id_perfil, $status_ventas, $data);
         $response[] = d(
             $seccion_venta, 4
         );
@@ -549,11 +549,11 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function format_estados_venta($status_ventas, $recibo, $es_vendedor)
+    function format_estados_venta($data, $status_ventas, $recibo, $es_vendedor)
     {
 
-        $status_vendedor = [1, 7, 9, 11, 12, 14, 15, 16];
-        $disponibilidad = ($es_vendedor) ? $status_vendedor : [];
+        $restriccion_status_comisionista = $data['restricciones']['restriccion_status_comisionista'];
+        $disponibilidad = ($es_vendedor) ? $restriccion_status_comisionista : [];
         $realizo_pago = (pr($recibo, 'saldo_cubierto') > 0);
         if (!$es_vendedor && $realizo_pago) {
             $disponibilidad = [16];
@@ -686,7 +686,7 @@ if (!function_exists('invierte_date_time')) {
     function cliente_compra_inf(
         $recibo, $tipos_entregas, $domicilio,
         $num_compras, $usuario, $id_recibo,
-        $cupon, $es_vendedor, $id_perfil, $status_ventas)
+        $cupon, $es_vendedor, $id_perfil, $status_ventas, $data)
     {
 
 
@@ -699,7 +699,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tiene_domilio($domicilio);
 
 
-        $r[] = format_estados_venta($status_ventas, $recibo, $es_vendedor);
+        $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
         $r[] = compras_cliente($num_compras);
         $r[] = seccion_usuario($usuario, $recibo, $es_vendedor);
         $r[] = frm_usuario($usuario);
@@ -881,6 +881,13 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $param["type"],
                 ]
             );
+            $r[] = hiddens(
+                [
+                    "name" => "perfil",
+                    "class" => "perfil_consulta",
+                    "value" => $data["id_perfil"],
+                ]
+            );
 
 
         } else {
@@ -919,7 +926,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_perfil = $data['id_perfil'];
-        $display = (in_array($id_perfil, [6, 20])) ? 'd-none' : '';
+        $restriciones_comisionista_busqueda = $data['restricciones']['restriccion_status_comisionista_busqueda'];
+        $restricciones_administrador_busqueda = $data['restricciones']['restricciones_administrador_busqueda'];
+        $restricciones = ($id_perfil == 6) ? $restriciones_comisionista_busqueda : [];
+        $restricciones = (!in_array($id_perfil, [20, 6])) ? $restricciones_administrador_busqueda : $restricciones;
 
         $r[] = input_frm(_text_(_6p, 'mt-5'), 'Cliente',
             [
@@ -956,7 +966,8 @@ if (!function_exists('invierte_date_time')) {
                 0,
                 1,
                 0,
-                "-"),
+                "-"
+            ),
             "flex-column col-md-4 p-0 mt-3"
         );
 
@@ -971,7 +982,8 @@ if (!function_exists('invierte_date_time')) {
                 0,
                 1,
                 0,
-                "-"
+                "-",
+                $restricciones
             )
             ,
             "flex-column col-md-4 p-0 mt-3"

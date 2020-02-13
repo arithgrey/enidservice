@@ -425,10 +425,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function render_resumen_pedodos($recibos, $lista_estados, $param)
+    function render_resumen_pedidos($recibos, $lista_estados, $param)
     {
 
         $perfil = $param['perfil'];
+        $es_administrador = (!in_array($perfil, [20, 6]));
+
         $es_vendedor = in_array($perfil, [6, 3]);
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = [
@@ -454,7 +456,6 @@ if (!function_exists('invierte_date_time')) {
         $titulos[] = "STATUS";
         $titulos[] = "MONTO COMPRA";
         if (!$es_vendedor) {
-
             $titulos[] = $ops_tipo_orden_text[$tipo_orden];
         }
 
@@ -468,18 +469,29 @@ if (!function_exists('invierte_date_time')) {
 
 
             $recibo = $row["recibo"];
+            $usuario_venta = [];
+            if ($es_administrador) {
+                $usuario_venta = $row['usuario'];
+            }
+
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
             $es_orden_cancelada = ($row["se_cancela"] == 1 || $row["cancela_cliente"] == 1);
             $estado_compra = $es_orden_cancelada ? "CANCELACIÓN" : 0;
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
-
             $se_pago = $row['flag_pago_comision'];
             $comision = _titulo(money($row['comision_venta']), 4);
             $saldo_cubierto = $row['saldo_cubierto'];
 
-            $verificado = ($se_pago > 0) ? _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
+            $verificado = ($se_pago > 0) ?
+                _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
+            if ($perfil != 6) {
+
+                $nombre_vendedor = format_nombre_vendedor($usuario_venta);
+                $verificado = ($se_pago > 0) ? _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
+
+            }
 
             $por_ganar = _d('Cuando el cliente reciba su compra', $comision);
             $comision = ($saldo_cubierto > 0) ? $verificado : $por_ganar;
@@ -494,11 +506,10 @@ if (!function_exists('invierte_date_time')) {
                 $extra = 'se_pago white';
             } else if ($saldo_cubierto > 0) {
                 $extra = 'pago_en_proceso white';
-                $saldo_por_cobrar += $saldo_por_cobrar + $row['comision_venta'];
+                $saldo_por_cobrar = $saldo_por_cobrar + $row['comision_venta'];
             }
             $url_img = $row["url_img_servicio"];
             $total += $monto_a_pagar;
-
             $img = img(
                 [
                     "src" => $url_img,
@@ -517,7 +528,6 @@ if (!function_exists('invierte_date_time')) {
                 $items[] = format_fecha($entrega);
             }
 
-
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $contenido = [];
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
@@ -531,19 +541,33 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $tb[] = $line;
-
-
         }
 
-
-        $text_saldo_por_cobrar = d_row(flex('saldo por cobrar',money($saldo_por_cobrar),
-            _text_('col-sm-4 ml-auto text-uppercase h4',_strong,_between_md)
+        $es_administrador = in_array($perfil, [20, 6]);
+        $text_saldo = ($es_administrador) ? 'saldo por cobrar' : 'total por pagar';
+        $text_saldo_por_cobrar = d_row(flex($text_saldo, money($saldo_por_cobrar),
+            _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md)
         ));
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
         $totales = _titulo(_text_('Total', money($total)), 1);
-        $tabla =  append($tb);
-        return d_c([$tb_fechas,$text_saldo_por_cobrar, $inicio, $tabla, $totales],'col-sm-12 mt-4');
+        $tabla = append($tb);
+        return d_c([$tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales], 'col-sm-12 mt-4');
+    }
+
+    function format_nombre_vendedor($usuario_venta)
+    {
+
+        $response = "";
+        if (count($usuario_venta) > 0) {
+            $response = _text_(
+                'Vendido por',
+                $usuario_venta['nombre'],
+                $usuario_venta['apellido_paterno']
+            );
+        }
+        return $response;
+
     }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)

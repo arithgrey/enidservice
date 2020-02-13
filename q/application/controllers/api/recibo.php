@@ -324,10 +324,58 @@ class recibo extends REST_Controller
             $response[] = $orden;
         }
 
-        $a = 0;
         return $response;
     }
 
+    function add_comisionistas($ordenes, $param)
+    {
+        $id_perfil = $param['perfil'];
+        $es_administrador = (!in_array($id_perfil, [20, 6]));
+
+        if ($es_administrador) {
+
+            return $this->append_usuarios($ordenes);
+
+        } else {
+
+            return $ordenes;
+        }
+
+    }
+
+    function append_usuarios($ordenes)
+    {
+        $a = 0;
+        $ids_usuarios = [];
+        $usuarios = [];
+        $response = [];
+
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_usuario_referencia = $row['id_usuario_referencia'];
+            $response[$a] = $orden;
+            if (!in_array($id_usuario_referencia, $ids_usuarios)) {
+
+                $ids_usuarios[] = $id_usuario_referencia;
+                $usuario = $this->app->usuario($id_usuario_referencia);
+                $busqueda_usuario =
+                    [
+                        'id_usuario' => $id_usuario_referencia,
+                        'usuario' => (es_data($usuario)) ? $usuario[0] : []
+                    ];
+                $response[$a]['usuario'] = $busqueda_usuario['usuario'];
+                $usuarios[] = $busqueda_usuario;
+
+            } else {
+                $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario_referencia, 'usuario');
+                $response[$a]['usuario'] = $usuario;
+            }
+            $a++;
+        }
+
+        return $response;
+    }
 
     function agrega_estados_direcciones_a_pedidos($ordenes_compra)
     {
@@ -657,7 +705,7 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = [];
         $es_usuario = ($this->id_usuario > 0);
-        if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v") && $es_usuario) {
+        if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
             $param['id_usuario'] = $this->id_usuario;
             $params = [
@@ -678,7 +726,7 @@ class recibo extends REST_Controller
                 "p.fecha_pago",
                 "p.flag_pago_comision",
                 "p.comision_venta",
-
+                "p.id_usuario_referencia",
 
             ];
             if ($param["recibo"] > 0) {
@@ -701,6 +749,7 @@ class recibo extends REST_Controller
                     "fecha_pago",
                     "flag_pago_comision",
                     "comision_venta",
+                    "id_usuario_referencia"
                 ];
 
 
@@ -715,7 +764,8 @@ class recibo extends REST_Controller
 
 
                 $response = $this->add_imgs_servicio($response);
-                $response = render_resumen_pedodos($response,
+                $response = $this->add_comisionistas($response, $param);
+                $response = render_resumen_pedidos($response,
                     $this->get_estatus_enid_service($param), $param);
 
             }

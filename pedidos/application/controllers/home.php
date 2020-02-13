@@ -375,7 +375,7 @@ class Home extends CI_Controller
 
         $fn = ($es_busqueda < 1) ?
             $this->load_detalle_pedido($param, $data) :
-            $this->busqueda_pedidos($param, $data);
+            $this-> busqueda_pedidos($param, $data);
 
     }
 
@@ -488,8 +488,9 @@ class Home extends CI_Controller
             "es_vendedor" => ($this->id_usuario == $id_usuario_referencia && $id_perfil == 6),
             "id_usuaario_actual" => $this->id_usuario,
             "es_venta_comisionada" => $es_venta_comisionada,
-            "usuario_comision" => $usuario_comision
+            "usuario_comision" => $usuario_comision,
         ];
+
 
         $this->app->pagina($data, render_pendidos($data), 1);
     }
