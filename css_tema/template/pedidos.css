@@ -1,3 +1,7 @@
+.bg_reporte{
+    background: #020720;
+    color: white;
+}
 .pago_en_proceso {
     background: #04325b;
 }

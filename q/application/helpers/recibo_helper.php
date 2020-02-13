@@ -462,12 +462,17 @@ if (!function_exists('invierte_date_time')) {
 
         $titulos_reporte[] = d_c($titulos, "font-weight-bold col-lg-2 ");
         $titulos_reporte[] = d('TUS GANANCIAS', "bg_black white font-weight-bold col-lg-4 text-center");
-        $tb[] = d($titulos_reporte, 'mb-3 mt-3 d-none d-md-block row');
+        $linea_titulos[] = d($titulos_reporte, 'mb-3 mt-3 d-none d-md-block row');
         $total = 0;
         $saldo_por_cobrar = 0;
+        $ordenes_canceladas = 0;
+        $ordenes_pagadas = 0;
+        $ordenes_en_proceso = 0;
+        $transacciones = 0;
+        $linea_en_proceso = [];
+        $linea_cambio_estado = [];
         foreach ($recibos as $row) {
-
-
+            $transacciones++;
             $recibo = $row["recibo"];
             $usuario_venta = [];
             if ($es_administrador) {
@@ -478,11 +483,22 @@ if (!function_exists('invierte_date_time')) {
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
             $es_orden_cancelada = ($row["se_cancela"] == 1 || $row["cancela_cliente"] == 1);
+
             $estado_compra = $es_orden_cancelada ? "CANCELACIÓN" : 0;
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
-            $se_pago = $row['flag_pago_comision'];
-            $comision = _titulo(money($row['comision_venta']), 4);
             $saldo_cubierto = $row['saldo_cubierto'];
+            $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
+
+
+            $es_compra_efectiva = (!$es_orden_cancelada && $saldo_cubierto > 0);
+            $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada);
+            $ordenes_canceladas = totales($ordenes_canceladas, $es_orden_cancelada);
+            $ordenes_pagadas = totales($ordenes_pagadas, $es_compra_efectiva);
+            $ordenes_en_proceso = totales($ordenes_en_proceso, $es_orden_en_proceso);
+
+
+            $comision = _titulo(money($row['comision_venta']), 4);
+
 
             $verificado = ($se_pago > 0) ?
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
@@ -532,6 +548,7 @@ if (!function_exists('invierte_date_time')) {
             $contenido = [];
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
             $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
+
             $line = d(
                 $contenido,
                 [
@@ -540,7 +557,16 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $tb[] = $line;
+
+            if ($es_orden_en_proceso) {
+
+                $linea_en_proceso[] = $line;
+
+            } else {
+
+                $linea_cambio_estado[] = $line;
+            }
+
         }
 
         $es_administrador = in_array($perfil, [20, 6]);
@@ -548,11 +574,47 @@ if (!function_exists('invierte_date_time')) {
         $text_saldo_por_cobrar = d_row(flex($text_saldo, money($saldo_por_cobrar),
             _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md)
         ));
+        $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
         $totales = _titulo(_text_('Total', money($total)), 1);
-        $tabla = append($tb);
-        return d_c([$tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales], 'col-sm-12 mt-4');
+
+        $listado[] = append($linea_titulos);
+        $listado[] = append($linea_en_proceso);
+        $listado[] = append($linea_cambio_estado);
+
+        $tabla = append($listado);
+        return d_c([$conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales], 'col-sm-12 mt-4');
+    }
+
+    function conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones)
+    {
+
+        $porcentaje_conversion = number_format(porcentaje_total($ordenes_pagadas, $transacciones), 2);
+        $porcentaje_caida = number_format(porcentaje_total($ordenes_canceladas, $transacciones), 2);
+        $porcentaje_ordenes_entra = number_format(porcentaje_total($ordenes_en_proceso, $transacciones), 2);
+
+        $base = 'text-center';
+        $response[] = flex('registradas', $transacciones, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('en proceso', $ordenes_en_proceso, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('Canceladas', $ordenes_canceladas, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('compras', $ordenes_pagadas, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('% cancelación', $porcentaje_caida, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('% por entregar', $porcentaje_ordenes_entra, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+        $response[] = flex('% Conversión', $porcentaje_conversion, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
+
+
+        return d($response, 'd-md-flex pt-1 pb-1 bg_reporte');
+
+    }
+
+    function totales($actual, $evaluacion)
+    {
+        if ($evaluacion) {
+
+            $actual++;
+        }
+        return $actual;
     }
 
     function format_nombre_vendedor($usuario_venta)
