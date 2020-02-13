@@ -247,6 +247,8 @@ class app extends CI_Controller
             $data["id_empresa"] = $session["idempresa"];
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
+            $data['restricciones'] = $this->config->item('restricciones');
+
 
 
         } else {
@@ -531,7 +533,7 @@ class app extends CI_Controller
 
                     "css" =>
                         [
-
+                            "pedidos.css",
                         ],
                     "js" =>
                         [
@@ -541,8 +543,6 @@ class app extends CI_Controller
 
                         ]
                     ,
-
-
                 ]
             ,
 

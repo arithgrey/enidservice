@@ -2639,13 +2639,6 @@ function tmp_menu($id_usuario, $menu)
     $menu_usuario = [
 
         $menu,
-
-        a_enid("reseñas y valoraciones",
-            [
-                "href" => path_enid("recomendacion", $id_usuario),
-                "class" => "black text-uppercase mt-2",
-            ]
-        ),
         a_enid("Configuración",
             [
                 "href" => path_enid("administracion_cuenta"),

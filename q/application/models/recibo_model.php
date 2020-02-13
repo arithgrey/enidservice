@@ -131,7 +131,10 @@ class Recibo_model extends CI_Model
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
-        $extra_extatus_venta = ($status_venta == 14) ? "AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
+        $extra_extatus_venta = ($status_venta == 14) ? " AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
+        $extra_extatus_venta = ($status_venta == 17) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
+        $extra_extatus_venta = ($status_venta == 18) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
+
         $extra_usuario_venta = ($id_usuario_venta == 1) ? " " :
             "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
