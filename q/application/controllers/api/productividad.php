@@ -32,11 +32,14 @@ class productividad extends REST_Controller
         $prm["modalidad"] = 1;
         $prm["id_usuario"] = $id_usuario;
         $response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
+        $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil);
+
+        $a  =0;
         $response += [
             "id_usuario" => $id_usuario,
             "preguntas" => $this->get_preguntas($id_usuario),
             "respuestas" => $this->get_respuestas($id_usuario),
-            "compras_sin_cierre" => $this->pendientes_ventas_usuario($id_usuario, $id_perfil),
+            "compras_sin_cierre" => $compras_sin_cierrre,
             "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
             "clientes_sin_tags_arquetipos" => $this->get_stag(),
             "tareas" => $this->get_tareas($id_usuario),
@@ -237,6 +240,7 @@ class productividad extends REST_Controller
     {
         $fecha = new DateTime(now_enid());
         $dias = $fecha->format("w");
+        $hoy = now_enid();
         $q = [
             "cliente" => "",
             "v" => 0,
@@ -244,12 +248,12 @@ class productividad extends REST_Controller
             "tipo_entrega" => 0,
             "status_venta" => 14,
             "tipo_orden" => 1,
-            "fecha_inicio" => add_date(now_enid(), -$dias),
-            "fecha_termino" => now_enid()
+            "fecha_inicio" => add_date($hoy, -$dias),
+            "fecha_termino" => $hoy,
         ];
 
         $response = $this->app->api("recibo/pedidos/format/json/", $q);
-        return count($response);
+        return (es_data($response)) ? count($response) : 0;
 
     }
 }
