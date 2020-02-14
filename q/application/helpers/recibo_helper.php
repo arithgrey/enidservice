@@ -430,8 +430,8 @@ if (!function_exists('invierte_date_time')) {
 
         $perfil = $param['perfil'];
         $es_administrador = (!in_array($perfil, [20, 6]));
-
         $es_vendedor = in_array($perfil, [6, 3]);
+        $es_comisionista = in_array($perfil, [6]);
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = [
             "",
@@ -474,11 +474,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($recibos as $row) {
             $transacciones++;
             $recibo = $row["recibo"];
-            $usuario_venta = [];
-            if ($es_administrador) {
-                $usuario_venta = $row['usuario'];
-            }
-
+            $usuario_venta = prm_def($row, 'usuario', []);
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
@@ -504,15 +500,15 @@ if (!function_exists('invierte_date_time')) {
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
             if ($perfil != 6) {
 
-                $nombre_vendedor = format_nombre_vendedor($usuario_venta);
+                $nombre_vendedor = format_nombre_vendedor($usuario_venta, $es_administrador);
                 $verificado = ($se_pago > 0) ? _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
 
             }
 
             $por_ganar = _d('Cuando el cliente reciba su compra', $comision);
             $comision = ($saldo_cubierto > 0) ? $verificado : $por_ganar;
-            if ($es_orden_cancelada) {
-                $comision = '';
+            if ($es_orden_cancelada || $es_orden_en_proceso && !$es_comisionista) {
+                $comision = ($es_administrador) ? $nombre_vendedor : '';
             }
 
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
@@ -534,18 +530,18 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $items = [];
-            $items[] = span($recibo, 'd-md-block d-none');
-            $items[] = $img;
+            $numero_recibo = span($recibo, 'd-md-block d-none');
+
             $items[] = span($estado_compra, 'font-weight-bold estado_compra');
             $items[] = money($monto_a_pagar);
 
-
-            if (!$es_vendedor) {
-                $items[] = format_fecha($entrega);
-            }
-
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $contenido = [];
+            $contenido[] = d($numero_recibo, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
+            $str_fecha_contra_entrega = ($es_orden_en_proceso) ? 'se entregará el' : 'fué el';
+            $fecha_contra_entrega = _d($str_fecha_contra_entrega, format_fecha($entrega, 1));
+            $contenido[] = d($fecha_contra_entrega, 'col-lg-2 border descripcion_compra fp8 text-center text-uppercase');
+            $contenido[] = d($img, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
             $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
 
@@ -553,7 +549,8 @@ if (!function_exists('invierte_date_time')) {
                 $contenido,
                 [
                     'id' => $recibo,
-                    'class' => _text_('desglose_orden cursor_pointer row  mt-md-0 mt-sm-5 text-center text-md-left', $extra)
+                    'class' => _text_(
+                        'desglose_orden cursor_pointer row  mt-md-0  text-center text-md-left mt-5', $extra)
                 ]
             );
 
@@ -617,11 +614,11 @@ if (!function_exists('invierte_date_time')) {
         return $actual;
     }
 
-    function format_nombre_vendedor($usuario_venta)
+    function format_nombre_vendedor($usuario_venta, $es_administrador)
     {
 
         $response = "";
-        if (count($usuario_venta) > 0) {
+        if (es_data($usuario_venta) && $es_administrador) {
             $response = _text_(
                 'Vendido por',
                 $usuario_venta['nombre'],
