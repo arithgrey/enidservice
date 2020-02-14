@@ -44,7 +44,7 @@ $("footer").ready(() => {
     if (document.body.querySelector(".input_enid_format")) {
 
         $(".input_enid_format :input").focus(next_label_input_focus);
-
+        
     }
 
 

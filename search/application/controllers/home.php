@@ -37,7 +37,7 @@ class Home extends CI_Controller
             "id_clasificacion" => prm_def($param, "q2"),
             "extra" => $param,
             "order" => prm_def($param, "order", 11),
-            "resultados_por_pagina" => 12,
+            "resultados_por_pagina" => 40,
             "agrega_clasificaciones" => ($this->agent->is_mobile()) ? 0 : 1,
             "in_session" => 0,
             "page" => prm_def($param, "page")
