@@ -604,7 +604,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = flex('% Conversión', $porcentaje_conversion, _text_(_between, 'mt-2 border-bottom botder-md-0 text-uppercase'), $base, $base, 'flex-row');
 
 
-        return d($response, 'd-md-flex pt-1 pb-1 bg_reporte');
+        return d_row(d($response, 'd-md-flex pt-1 pb-1 bg_reporte w-100'));
 
     }
 
@@ -654,7 +654,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tr($titulos);
         $r[] = tr($valores);
 
-        return tb($r);
+        return d_row(tb($r));
     }
 
     function get_text_status($lista, $estado_compra)

@@ -508,7 +508,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($data["modo_edicion"] > 0):
                 $contenido[] = tab(
-                    text_icon('usuario_enid_service fa fa-pencil','', ["id" => $id_usuario]),
+                    text_icon('usuario_enid_service fa fa-pencil', '', ["id" => $id_usuario]),
                     '#tab_mas_info_usuario',
                     [
                         "class" => 'ml-auto',
@@ -1048,20 +1048,18 @@ if (!function_exists('invierte_date_time')) {
         if ($num > 0) {
 
             $text = "Agrega un número para compras o ventas";
-            $lista = b_notificacion("../administracion_cuenta/",
-                $text);
+            $lista = b_notificacion(
+                path_enid('administracion_cuenta'), $text);
 
             $f++;
         }
 
-        $response = [
+        return [
 
             "html" => $lista,
             "flag" => $f,
 
         ];
-
-        return $response;
 
     }
 
