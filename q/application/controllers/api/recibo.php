@@ -704,10 +704,14 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        $es_usuario = ($this->id_usuario > 0);
+        $es_usuario = ($this->id_usuario > 0 || fx($param, 'id_usuario'));
+
+        if ($this->id_usuario > 0) {
+            $param['id_usuario'] = $this->id_usuario;
+        }
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
-            $param['id_usuario'] = $this->id_usuario;
+
             $params = [
                 "p.id_proyecto_persona_forma_pago recibo ",
                 "p.saldo_cubierto",

@@ -22,7 +22,6 @@ class productividad extends REST_Controller
 
         $response = [
             "objetivos_perfil" => $this->get_objetivos_perfil($param),
-//            "productos_anunciados" => $this->valida_producto_anunciado($param),
             "flag_direccion" => $this->verifica_direccion_registrada_usuario($param),
             "info_notificaciones" => $this->get_notificaciones_usuario_perfil($param),
             "id_perfil" => $param["id_perfil"],
@@ -34,7 +33,7 @@ class productividad extends REST_Controller
         $response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
         $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil);
 
-        $a  =0;
+
         $response += [
             "id_usuario" => $id_usuario,
             "preguntas" => $this->get_preguntas($id_usuario),
@@ -53,7 +52,7 @@ class productividad extends REST_Controller
                 $response += [
                     "recordatorios" => $this->get_recordatorios($id_usuario),
                     "ventas_enid_service" => $this->get_ventas_enid_service(),
-                    "ventas_semana" => $this->ventas_semana()
+                    "ventas_semana" => $this->ventas_semana($id_usuario)
                 ];
 
                 $response = get_tareas_pendienetes_usuario($response);
@@ -236,7 +235,7 @@ class productividad extends REST_Controller
         return $this->app->api("tickets/pendientes/format/json/", ["id_usuario" => $id_usuario]);
     }
 
-    function ventas_semana()
+    function ventas_semana($id_usuario)
     {
         $fecha = new DateTime(now_enid());
         $dias = $fecha->format("w");
@@ -250,6 +249,8 @@ class productividad extends REST_Controller
             "tipo_orden" => 1,
             "fecha_inicio" => add_date($hoy, -$dias),
             "fecha_termino" => $hoy,
+            "perfil" => 3,
+            "id_usuario" => $id_usuario
         ];
 
         $response = $this->app->api("recibo/pedidos/format/json/", $q);
