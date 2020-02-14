@@ -60,4 +60,29 @@ class usuario_perfil extends REST_Controller
         $this->response($response);
     }
 
+    function comisionistas_GET()
+    {
+
+        $response = $this->usuario_perfil_model->comisionistas();
+        $this->response($this->concatena_nombres($response));
+    }
+
+    private function concatena_nombres($data)
+    {
+
+        $response = [];
+        foreach ($data as $row) {
+
+            $nombre = $row['nombre'];
+            $apellido_paterno = $row['apellido_paterno'];
+            $apellido_materno = $row['apellido_materno'];
+            $row['nombre_usuario'] =
+                _text_($nombre, $apellido_paterno, $apellido_materno);
+            $response[] = $row;
+
+        }
+        return $response;
+
+    }
+
 }

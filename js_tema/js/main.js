@@ -44,13 +44,13 @@ $("footer").ready(() => {
     if (document.body.querySelector(".input_enid_format")) {
 
         $(".input_enid_format :input").focus(next_label_input_focus);
-        
+        $(".input_enid_format :input").change(next_label_input_focus);
+
     }
 
 
     $(".validar_nombre").keypress(valida_formato_nombre);
     $(".correo").keypress(valida_formato_correo);
-
 
     verifica_formato_default_inputs();
 
@@ -168,6 +168,7 @@ let format_error = (place, str) => {
 
 };
 let valida_email_form = (input, place_msj) => {
+
 
 
     despliega([place_msj], 1);
@@ -999,14 +1000,14 @@ let next_label_input_focus = function () {
 
     $(this).next('label').addClass('focused_input');
     $(this).addClass('input_focus');
-}
+};
 let next_label_focus_out = function () {
 
     if ($(this).val() === '') {
         $(this).next('label').removeClass('focused_input');
         $(this).removeClass('input_focus');
     }
-}
+};
 let next_error = function ($selector, despliega = 1) {
 
     if (despliega < 1) {
@@ -1018,7 +1019,7 @@ let next_error = function ($selector, despliega = 1) {
         $selector.next('label').next('div').removeClass('d-none');
     }
 
-}
+};
 let verifica_formato_default_inputs = function (validacion = 1) {
 
     if (document.body.querySelector(".input_enid_format")) {
@@ -1064,7 +1065,7 @@ let toggle_format_menu = function (clase_selector, ocultar = []) {
     }
 
     recorre(clase_selector);
-}
+};
 let valida_load = function (form_previo = '') {
 
     if (document.body.querySelector(".cargando_form")) {
@@ -1078,7 +1079,7 @@ let valida_load = function (form_previo = '') {
         }
 
     }
-}
+};
 let oculta_acceder = function () {
     if ($('.contenedor-lateral-menu').length && is_mobile() === true) {
 

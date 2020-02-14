@@ -2,7 +2,6 @@
 let $form_busqueda = $(".form_busqueda_pedidos");
 $(document).ready(() => {
 
-
     $form_busqueda.submit(busqueda_pedidos);
 
 });

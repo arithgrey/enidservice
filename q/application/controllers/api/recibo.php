@@ -709,6 +709,7 @@ class recibo extends REST_Controller
         if ($this->id_usuario > 0) {
             $param['id_usuario'] = $this->id_usuario;
         }
+
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
 

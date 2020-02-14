@@ -375,7 +375,7 @@ class Home extends CI_Controller
 
         $fn = ($es_busqueda < 1) ?
             $this->load_detalle_pedido($param, $data) :
-            $this-> busqueda_pedidos($param, $data);
+            $this->busqueda_pedidos($param, $data);
 
     }
 
@@ -383,7 +383,19 @@ class Home extends CI_Controller
     private function busqueda_pedidos($param, $data)
     {
 
+        $es_administrador = in_array($data['id_perfil'], [3]);
+        $comisionistas = [];
+        if ($es_administrador) {
+            $comisionistas = $this->usuarios_comisionistas();
+        }
+        $data['comisionistas'] = $comisionistas;
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
+    }
+
+    private function usuarios_comisionistas()
+    {
+
+        return $this->app->api("usuario_perfil/comisionistas/format/json/");
     }
 
     private function get_tipos_entregas($q)
