@@ -19,17 +19,10 @@ class app extends CI_Controller
     )
     {
         $response = [];
-        $a = 0;
-        if (count($data) > 0) {
 
-            foreach ($data as $row) {
+        if (es_data($data)) {
 
-                $servicio = $row;
-                $id = $data[$a]["id_servicio"];
-                $servicio["url_img_servicio"] = $this->get_img($id, 1, 1, 1);
-                $a++;
-                $response[] = $servicio;
-            }
+            $response = $this->path_imagenes($data);
 
         } else {
 
@@ -41,6 +34,34 @@ class app extends CI_Controller
 
 
     }
+
+    private function path_imagenes($data)
+    {
+        $response = [];
+        $a = 0;
+        $servicios = [];
+        $servicios_path = [];
+        foreach ($data as $row) {
+            $id = $data[$a]["id_servicio"];
+            if (!in_array($id, $servicios)) {
+
+                $servicios[] = $id;
+                $path = $this->get_img($id, 1, 1, 1);
+                $servicios_path[] = [
+                    'id' => $id,
+                    'path' => $path
+                ];
+            } else {
+                $path = search_bi_array($servicios_path, 'id', $id, 'path');
+            }
+
+            $row["url_img_servicio"] = $path;
+            $response[] = $row;
+            $a++;
+        }
+        return $response;
+    }
+
 
     private function get_img($id_servicio, $completo = 0, $limit = 1, $path = 0)
     {
@@ -248,7 +269,6 @@ class app extends CI_Controller
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
             $data['restricciones'] = $this->config->item('restricciones');
-
 
 
         } else {
