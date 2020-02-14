@@ -2,7 +2,6 @@
 let email_recuperacion = '#email_recuperacion';
 let $email_recuperacion = $(email_recuperacion);
 let $mail_acceso = $('#mail_acceso');
-let $input_pw = $('.input_enid_format #pw');
 let soy_nuevo = '.btn_soy_nuevo';
 let registrar = '.registrar_cuenta';
 let form_inicio = '.form_sesion_enid';
@@ -41,36 +40,9 @@ $(document).on('ready', () => {
         transforma_mayusculas(this);
     });
 
-    $(email).keyup(() => {
-        sin_espacios(email);
-    });
-
     $email_recuperacion.keyup(() => {
         sin_espacios(email_recuperacion);
     });
-
-    $('.registro_email').focus(function () {
-        $(this).next('label').addClass('focused_input');
-    });
-
-    $(nombre_persona).focus(function () {
-        $(this).next('label').addClass('focused_input');
-    });
-
-    $(registro_pw).focus(function () {
-        $(this).next('label').addClass('focused_input');
-    });
-
-    $mail_acceso.focus(function () {
-        $mail_acceso.next('label').addClass('focused_input');
-    });
-
-
-
-    $input_pw.focus(function () {
-        $input_pw.next('label').addClass('focused_input');
-    });
-
 
 });
 
@@ -104,7 +76,6 @@ let response_inicio_session = data => {
 };
 
 let valida_form_session = e => {
-
     let pass = $.trim($pw.val());
     let str_email = $mail_acceso.val();
     if (regular_email($mail_acceso)) {

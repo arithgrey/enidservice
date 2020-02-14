@@ -817,6 +817,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_busqueda_pedidos($data, $param)
     {
 
+
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
         $status_ventas = $data["status_ventas"];
@@ -848,6 +849,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
+        $select_comisionistas = create_select(
+            $data['comisionistas'], 'id_usuario_referencia', 'comisionista form-control',
+            'comisionista', 'nombre_usuario', 'idusuario', 0, 1, 0, '-');
+
+
         $r[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas);
         $es_busqueda = keys_en_arreglo($param,
             [
@@ -856,6 +862,14 @@ if (!function_exists('invierte_date_time')) {
                 'type',
                 'servicio'
             ]
+        );
+
+
+        $visibilidad = (!es_data($data['comisionistas'])) ? 'd-none' : '';
+        $r[] = flex_md('Filtrar por vendedor', $select_comisionistas,
+            _text_('col-sm-12 mt-md-m5 mt-3 p-0', _between_md, $visibilidad),
+            _text_('text-left', $visibilidad),
+            _text_('text-left', $visibilidad)
         );
         if ($es_busqueda) {
 
@@ -990,16 +1004,10 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
+        $busqueda_orden = create_select_selected($fechas, 'val', 'fecha', 5, 'tipo_orden', 'form-control');
         $r[] = flex(
             "Ordenar",
-            create_select(
-                $fechas,
-                "tipo_orden",
-                "form-control",
-                "tipo_orden",
-                "fecha",
-                "val"
-            ),
+            $busqueda_orden,
             "flex-column col-md-4 p-0 mt-3"
         );
 

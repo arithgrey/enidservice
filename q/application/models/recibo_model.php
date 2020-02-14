@@ -136,15 +136,17 @@ class Recibo_model extends CI_Model
         $extra_extatus_venta = ($status_venta == 17) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
         $extra_extatus_venta = ($status_venta == 18) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
 
+        $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
+        $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
         $extra_usuario_venta = ($id_usuario_venta == 1) ? " " :
             "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-        $query_get .=
-            $ext_usuario . $ext_contra_entrega . $extra_extatus_venta . $extra_usuario_venta . $ext_fecha . $ext_servicio .
-            " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC";
+        $query_get .= _text_($ext_usuario, $usuario_referencia, $ext_contra_entrega,
+            $extra_extatus_venta, $extra_usuario_venta, $ext_fecha,
+            $ext_servicio, " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC");
         return $this->db->query($query_get)->result_array();
 
     }
