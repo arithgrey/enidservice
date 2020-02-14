@@ -1502,13 +1502,11 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $response = [
+        return [
             "html" => append($r),
             "flag" => $f,
 
         ];
-
-        return $response;
 
     }
 
