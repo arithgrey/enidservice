@@ -30,23 +30,23 @@ if (!function_exists('invierte_date_time')) {
         $busqueda = $data["busqueda"];
 
 
-        $x[] = get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile);
-        $x[] = append($data["lista_productos"]);
+        $x[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile),13);
+        $x[] = d($data["lista_productos"],13);
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = _titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 ');
+        $z[] = d(_titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 '),13);
 
         if ($is_mobile < 1) {
-            $z[] = img(
+            $z[] = d(img(
                 [
                     "src" => "../img_tema/productos/ejemplo.png",
                     'class' => 'd-none d-md-block'
                 ]
-            );
+            ),'row mt-4');
         }
 
 
-        $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
+        $z[] = d(get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda),13);
 
         $fil[] = d($z, 3);
 
@@ -55,11 +55,11 @@ if (!function_exists('invierte_date_time')) {
 
             append($x)
             ,
-            d($paginacion, "mt-md-5")
+            d($paginacion, "row mt-md-5")
         );
 
 
-        $fil[] = d($seccion, 'col-lg-9 p-0');
+        $fil[] = d($seccion, 'col-lg-9');
         $r[] = d($fil, "col-lg-12 mt-md-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
         $r[] = append($cat);
@@ -100,8 +100,8 @@ if (!function_exists('invierte_date_time')) {
 
         $paginacion = d($paginacion, 'd-none d-md-block');
         $filtro = filtro($filtros, $order);
-        return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 ') :
-            flex($filtro, $paginacion, 'd-md-flex justify-content-between');
+        return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 p-0') :
+            flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0');
 
 
     }
@@ -168,7 +168,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return d(
-            d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"), 'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
+            d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"),
+            'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
 
 
     }
@@ -209,7 +210,7 @@ if (!function_exists('invierte_date_time')) {
             $response = d($r, "contenedor_sub_categorias");
 
         }
-        return d(d($response, 'contenedor_menu_productos_sugeridos'), "d-none d-md-block  mt-md-5");
+        return d(d($response, 'contenedor_menu_productos_sugeridos'), "d-none d-md-block  mt-md-5 w-100");
     }
 
     function crea_sub_menu_categorias_destacadas($param)
@@ -243,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($t);
         $r[] = append($sec);
 
-        return d($r, 'col-lg-6 mt-5 d-md-flex  align-items-center ' . $extra);
+        return d(d($r, ' mt-5 d-md-flex  align-items-center ' . $extra),13);
 
     }
 
