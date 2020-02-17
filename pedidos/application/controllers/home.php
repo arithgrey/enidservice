@@ -477,9 +477,8 @@ class Home extends CI_Controller
 
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
         $es_venta_comisionada = ($id_usuario != $id_usuario_referencia && $this->id_usuario != $id_usuario_referencia);
-
         $usuario_comision = ($es_venta_comisionada) ? $this->get_usuario($id_usuario_referencia) : [];
-
+        $es_lista_negra = $this->es_lista_negra($id_usuario);
 
         $data += [
             "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
@@ -501,6 +500,7 @@ class Home extends CI_Controller
             "id_usuaario_actual" => $this->id_usuario,
             "es_venta_comisionada" => $es_venta_comisionada,
             "usuario_comision" => $usuario_comision,
+            "es_lista_negra" => $es_lista_negra
         ];
 
 
@@ -586,4 +586,12 @@ class Home extends CI_Controller
 
         return $this->app->api("usuario_tipo_negocio/usuario/format/json/", ['id_usuario' => $id_usuario]);
     }
+
+    private function es_lista_negra($id_usuario)
+    {
+
+        return $this->app->api("lista_negra/index/format/json/", ['id_usuario' => $id_usuario]);
+    }
+
+
 }

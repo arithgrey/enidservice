@@ -19,9 +19,9 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
+
     function render_pendidos($data)
     {
-
 
         $orden = $data["orden"];
         $status_ventas = $data["status_ventas"];
@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
         $text_estado_venta = search_bi_array(
             $status_ventas, 'id_estatus_enid_service', $id_status, 'text_vendedor');
 
-
+        $re[] = notificacion_lista_negra($data);
         $re[] = frm_pedidos($es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
         $re[] = d(crea_estado_venta($status_ventas, $r));
         $re[] = crea_seccion_solicitud($r);
@@ -1094,6 +1094,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = link_nota();
         if (!$es_vendedor) {
             $x[] = link_costo($id_recibo, $recibo, $es_vendedor);
+            $x[] = lista_negra($recibo, $es_vendedor);
         }
         $r[] = d(
             icon("fa fa-plus-circle fa-3x"),
@@ -2436,6 +2437,22 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function lista_negra($recibo, $es_vendedor)
+    {
+
+
+        $id_usuario = pr($recibo, "id_usuario");
+
+        return d(
+            a_enid("ENVIAR A LISTA NEGRA",
+                [
+
+                    "onclick" => "confirma_envio_lista_negra({$id_usuario})",
+                ]
+            )
+        );
+    }
+
 
     function link_cambio_fecha($domicilio, $recibo)
     {
@@ -2541,6 +2558,20 @@ if (!function_exists('invierte_date_time')) {
 
         return bloque($bloque);
     }
+
+    function notificacion_lista_negra($data)
+    {
+
+        $response = [];
+        if (es_data($data['es_lista_negra'])) {
+
+            $str = _titulo('este usuario fué enviado a lista negra', '', 'white');
+            $response[] = d($str, 'row red_enid_background p-2 white mb-5');
+        }
+
+        return append($response);
+    }
+
 
     function frm_usuario($usuario)
     {
