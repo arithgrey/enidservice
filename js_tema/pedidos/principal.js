@@ -485,6 +485,7 @@ let response_status_venta = data => {
     }
 
 };
+
 let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) => {
 
 
@@ -514,6 +515,38 @@ let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_
 
 
 };
+let confirma_envio_lista_negra = (id_usuario) => {
+
+    let text_confirmacion = '¿realmente deseas mandar a lista negra a esta persona?';
+    show_confirm(text_confirmacion, '', "SI", function () {
+        let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
+        let data_send = {'v': 1, 'id_usuario': id_usuario};
+        request_enid("GET", data_send, url, response_motivos_lista_negra);
+    });
+
+}
+let response_motivos_lista_negra = (data) => {
+    modal(data);
+    $('.form_lista_negra').submit(agregar_lista_negra)
+};
+let agregar_lista_negra = (e) => {
+
+    if (parseInt(get_valor_selected('.motivo')) > 0) {
+
+        let data_send = $('.form_lista_negra').serialize();
+        let url = "../q/index.php/api/lista_negra/index/format/json/";
+        $('.cargando_modal').removeClass('d-none');
+        $('.motivo').prop('disabled', 'disabled');
+        request_enid("POST", data_send, url, function (data) {
+            redirect('');
+        });
+
+    }
+
+    e.preventDefault();
+}
+
+
 let confirma_reparto = (id_recibo, punto_encuentro) => {
 
     let text = "¿DESEAS QUE EL REPARTIDOR SE DIRIJA HACER LA ENTREGA A:?";
