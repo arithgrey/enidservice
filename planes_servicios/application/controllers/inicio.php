@@ -2,12 +2,15 @@
 
 class Inicio extends CI_Controller
 {
+    private $modulo;
+
     function __construct()
     {
         parent::__construct();
         $this->load->helper("planes");
         $this->load->library(lib_def());
         $this->app->acceso();
+        $this->modulo = 'planes_servicios';
     }
 
     function index()
@@ -16,8 +19,6 @@ class Inicio extends CI_Controller
 
         $param = $this->input->get();
         $data = $this->app->session();
-
-
         $data += [
             "action" => valida_action($param, "action"),
             "considera_segundo" => 0,
@@ -39,10 +40,23 @@ class Inicio extends CI_Controller
 
     }
 
+    private function restricciones($data)
+    {
+
+        $restricciones = $data['restricciones'][$this->modulo];
+        $id_perfil = $data['id_perfil'];
+        $acceso = (in_array($id_perfil, $restricciones));
+
+        if ($acceso) {
+
+            redirect(path_enid("url_home"));
+        }
+    }
+
     private function prevenir_acceso($param, $data)
     {
 
-
+        $this->restricciones($data);
         if ($data["action"] == 2) {
             $data["considera_segundo"] = 1;
             if (ctype_digit($param["servicio"]) && $data["in_session"] === 1 && $data["id_usuario"] > 0) {
