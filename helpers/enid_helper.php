@@ -1504,6 +1504,8 @@ function lista_horarios($dia_busqueda = 0)
         "17:00",
         "17:30",
         "18:00",
+        "18:30",
+        "17:00",
     ];
     $horarios = [];
 

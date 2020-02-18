@@ -549,6 +549,24 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
+    function nombre_cliente($usuario)
+    {
+        $response = [];
+        if (es_data($usuario)) {
+
+            $usuario = $usuario[0];
+
+            $vendedor = _text_('cliente',
+                $usuario['nombre'],
+                $usuario['apellido_paterno'],
+                $usuario['apellido_materno']
+            );
+            $response[] = p($vendedor, _text_('pl-3 pr-3  border', _strong));
+
+        }
+        return append($response);
+    }
+
     function format_estados_venta($data, $status_ventas, $recibo, $es_vendedor)
     {
 
@@ -620,11 +638,13 @@ if (!function_exists('invierte_date_time')) {
         $id_recibo,
         $path,
         $costos_operacion,
-        $recibo
+        $recibo, $es_venta_comisionada, $usuario_comision, $usuario_compra
     )
     {
 
         $r[] = _titulo("COSTOS DE OPERACIÓN");
+        $r[] = nombre_comisionista($es_venta_comisionada, $usuario_comision);
+        $r[] = nombre_cliente($usuario_compra);
         $r[] = d($table_costos, 'mt-5 mb-5');
         $r[] = d($resumen);
         $link = format_link(
@@ -2164,13 +2184,14 @@ if (!function_exists('invierte_date_time')) {
 
         $recibo = $recibo[0];
         $pagado = $recibo["saldo_cubierto"];
-        $total = ($recibo["precio"] * $recibo["num_ciclos_contratados"])
-            + $recibo["costo_envio_cliente"];
+
+        $costo_envio_cliente = $recibo["costo_envio_cliente"];
+
+        $total = ($recibo["precio"] * $recibo["num_ciclos_contratados"]) + $costo_envio_cliente;
         $direccion = 'flex-column text-center col-sm-6';
         $strong = _text_('mb-4', _strong);
 
-        $text[] = flex("envio", money($recibo["costo_envio_cliente"]),
-            $direccion, $strong);
+        $text[] = flex("envio", money($costo_envio_cliente), $direccion, $strong);
 
         $text[] = flex("total", money($total), $direccion, $strong);
 

@@ -171,14 +171,8 @@ class Home extends CI_Controller
 
         $asignacion = prm_def($param, 'asignacion');
         $tiene_domicilio = es_data($domicilio_entrega);
-//        $tiene_punto_entrega = es_data($punto_entrega);
 
         if (!$tiene_domicilio || $asignacion) {
-//
-//            if(!$tiene_domicilio &&  $tiene_punto_entrega){
-//
-//                redirect(path_enid('area_cliente_compras', $id_recibo, 0, 1));
-//            }
 
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);
@@ -280,8 +274,7 @@ class Home extends CI_Controller
 
         $id_recibo = $param['costos_operacion'];
         $recibo = $this->get_recibo($id_recibo);
-        $id_servicio = pr($recibo, 'id_servicio');
-
+//        $id_servicio = pr($recibo, 'id_servicio');
 
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
@@ -312,6 +305,14 @@ class Home extends CI_Controller
             ));
         }
 
+
+        $id_usuario = pr($recibo, 'id_usuario');
+
+        $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+        $usuario_comision = $this->get_usuario($id_usuario_referencia);
+        $usuario_compra = $this->get_usuario($id_usuario);
+
+
         $tb = $this->table->generate();
         $utilidad = $param["saldado"] - $total;
 
@@ -330,8 +331,7 @@ class Home extends CI_Controller
             $param["costos_operacion"],
             $path,
             $costos_operacion,
-            $recibo
-        );
+            $recibo, 1, $usuario_comision,$usuario_compra);
 
         $this->app->pagina($data, $response, 1);
 

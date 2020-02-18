@@ -784,7 +784,7 @@ class Recibo_model extends CI_Model
         }
 
         $monto_a_pagar = $precio;
-        if ($es_servicio == 0 && $tipo_entrega > 1) {
+        if ($es_servicio < 1 && $tipo_entrega > 1) {
 
             $costo_envio = $param["costo_envio"];
             $costo_envio_cliente = $costo_envio["costo_envio_cliente"];
