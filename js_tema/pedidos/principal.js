@@ -517,7 +517,7 @@ let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_
 };
 let confirma_envio_lista_negra = (id_usuario) => {
 
-    let text_confirmacion = '¿realmente deseas mandar a lista negra a esta persona?';
+    let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
         let data_send = {'v': 1, 'id_usuario': id_usuario};
@@ -525,6 +525,32 @@ let confirma_envio_lista_negra = (id_usuario) => {
     });
 
 }
+let confirma_intento_reventa = (id_usuario, recibo) => {
+
+
+    let url = "../q/index.php/api/tipo_tag_arquetipo/reventa/format/json/";
+    let data_send = {'v': 1, 'id_usuario': id_usuario, 'recibo': recibo};
+    request_enid("GET", data_send, url, response_reventa);
+
+};
+
+let response_reventa = (data) => {
+
+    modal(data);
+    verifica_formato_default_inputs();
+    $(".input_enid_format :input").focus(next_label_input_focus);
+    $('.form_reventa').submit(registra_intento_reventa);
+
+};
+let registra_intento_reventa = function (e) {
+
+    let data_send = $('.form_reventa').serialize() + '&' + $.param({'intento_reventa': 1});
+    bloquea_form('.form_tag_arquetipo');
+    let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
+    request_enid("POST", data_send, url, response_tag_arquetipo);
+    e.preventDefault();
+
+};
 let response_motivos_lista_negra = (data) => {
     modal(data);
     $('.form_lista_negra').submit(agregar_lista_negra)
@@ -706,7 +732,7 @@ let registro_arquetipo = function (e) {
 
 
 };
-let response_tag_arquetipo = function () {
+let response_tag_arquetipo = function (data) {
     redirect('');
 };
 let baja_tag_arquetipo = function () {

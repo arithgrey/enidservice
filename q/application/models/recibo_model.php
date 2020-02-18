@@ -1056,4 +1056,27 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+
+    function reventa($id_vendedor)
+    {
+        $query_get = "SELECT  
+                        id_proyecto_persona_forma_pago id_recibo, id_servicio FROM proyecto_persona_forma_pago 
+                        WHERE saldo_cubierto > 0 
+                        AND intento_reventa < 1 AND fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
+                        AND se_cancela < 1 AND cancela_cliente < 1
+                        AND id_usuario_referencia = '" . $id_vendedor . "' LIMIT 5";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
+    function notificacion_intento_reventa($id_recibo)
+    {
+        $query_get = "UPDATE proyecto_persona_forma_pago 
+                        SET intento_reventa = (intento_reventa + 1) 
+                        WHERE id_proyecto_persona_forma_pago = '" . $id_recibo . "' LIMIT 1 ";
+
+        return $this->db->query($query_get);
+    }
+
+
 }   

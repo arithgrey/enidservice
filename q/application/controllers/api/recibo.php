@@ -732,6 +732,8 @@ class recibo extends REST_Controller
                 "p.flag_pago_comision",
                 "p.comision_venta",
                 "p.id_usuario_referencia",
+                "p.intento_reventa",
+                'p.intento_recuperacion'
 
             ];
             if ($param["recibo"] > 0) {
@@ -754,7 +756,9 @@ class recibo extends REST_Controller
                     "fecha_pago",
                     "flag_pago_comision",
                     "comision_venta",
-                    "id_usuario_referencia"
+                    "id_usuario_referencia",
+                    "intento_reventa",
+                    'intento_recuperacion'
                 ];
 
 
@@ -1155,6 +1159,33 @@ class recibo extends REST_Controller
     {
 
         $response = $this->recibo_model->sin_tags_arquetipo();
+        $this->response($response);
+
+    }
+
+    function reventa_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_vendedor", 1)) {
+
+            $id_vendedor = $param['id_vendedor'];
+            $response = $this->recibo_model->reventa($id_vendedor);
+        }
+        $this->response($response);
+
+    }
+
+    function reventa_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "recibo", 1)) {
+
+            $id_recibo = $param['recibo'];
+            $response = $this->recibo_model->notificacion_intento_reventa($id_recibo);
+
+        }
         $this->response($response);
 
     }

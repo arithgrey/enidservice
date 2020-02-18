@@ -1028,8 +1028,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = agregar_nueva_direccion();
 
-//        $r[] = lista_puntos_encuentro($tipo_entrega, $puntos_encuentro, $id_recibo, $domicilio);
-
         return append($r);
     }
 
@@ -1096,6 +1094,8 @@ if (!function_exists('invierte_date_time')) {
             $x[] = link_costo($id_recibo, $recibo, $es_vendedor);
             $x[] = lista_negra($recibo, $es_vendedor);
         }
+        $x[] = intento_reventa($recibo);
+
         $r[] = d(
             icon("fa fa-plus-circle fa-3x"),
             [
@@ -2448,6 +2448,23 @@ if (!function_exists('invierte_date_time')) {
                 [
 
                     "onclick" => "confirma_envio_lista_negra({$id_usuario})",
+                ]
+            )
+        );
+    }
+
+    function intento_reventa($recibo)
+    {
+
+
+        $id_usuario = pr($recibo, "id_usuario");
+        $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
+
+        return d(
+            a_enid("REGISTRAR INTENTO DE REVENTA",
+                [
+
+                    "onclick" => "confirma_intento_reventa({$id_usuario}, {$id_recibo})",
                 ]
             )
         );
