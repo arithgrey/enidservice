@@ -33,8 +33,6 @@ class Tag_arquetipo extends REST_Controller
 
     function q_GET()
     {
-
-
         $param = $this->get();
         $response = false;
         if (fx($param, 'fecha_inicio,fecha_termino,tipo_tag_arquetipo')) {
@@ -63,6 +61,10 @@ class Tag_arquetipo extends REST_Controller
                 'id_usuario' => $param['usuario']
             ];
 
+            if (prm_def($param, 'intento_reventa') > 0) {
+
+                $this->reventa($param);
+            }
             $response = $this->tag_arquetipo_model->insert($params);
         }
 
@@ -82,5 +84,12 @@ class Tag_arquetipo extends REST_Controller
         }
         $this->response($response);
 
+    }
+
+    private function reventa($param)
+    {
+
+        return $this->app->api("recibo/reventa", $param, 'json', 'PUT');
+        
     }
 }

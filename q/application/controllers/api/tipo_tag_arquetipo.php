@@ -7,12 +7,24 @@ class Tipo_tag_arquetipo extends REST_Controller
     {
         parent::__construct();
         $this->load->model("tipo_tag_arquetipo_model");
+        $this->load->helper("tipo_tag_arquetipo");
         $this->load->library(lib_def());
     }
 
     function index_GET()
     {
         $this->response($this->tipo_tag_arquetipo_model->get([], [], 100));
+    }
+
+    function reventa_GET()
+    {
+
+        $param = $this->get();
+        if (fx($param, "id_usuario,recibo,v")) {
+
+            $this->response(form_reventa($param));
+
+        }
     }
 
     function index_POST()
@@ -35,5 +47,6 @@ class Tipo_tag_arquetipo extends REST_Controller
         $this->response($response);
 
     }
+
 
 }

@@ -36,15 +36,15 @@ class productividad extends REST_Controller
 
         $response += [
             "id_usuario" => $id_usuario,
-            "preguntas" => $this->get_preguntas($id_usuario),
-            "respuestas" => $this->get_respuestas($id_usuario),
+            "preguntas" => [],
+            "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
             "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
             "clientes_sin_tags_arquetipos" => $this->get_stag(),
             "tareas" => $this->get_tareas($id_usuario),
         ];
 
-
+        $response = $this->re_intentos_compras($id_usuario, $response, $id_perfil);
         switch ($id_perfil) {
 
             case 3:
@@ -60,6 +60,8 @@ class productividad extends REST_Controller
                 break;
 
             case (20 || 6):
+
+
                 $response = pendientes_cliente($response);
                 break;
 
@@ -257,4 +259,24 @@ class productividad extends REST_Controller
         return (es_data($response)) ? count($response) : 0;
 
     }
+
+    function re_intentos_compras($id_usuario, $response, $id_perfil)
+    {
+
+        $q = ["id_vendedor" => $id_usuario];
+
+        $pendientes = [];
+        if (in_array($id_perfil, [6, 3])) {
+
+            $pendientes = $this->app->api("recibo/reventa/format/json/", $q);
+
+        }
+        $response['reintentos_compras'] = $pendientes;
+        return $response;
+
+
+
+    }
+
+
 }

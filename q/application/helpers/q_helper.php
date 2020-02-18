@@ -1301,6 +1301,38 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
+
+    function add_reintentos_compras($recibos)
+    {
+        $r = [];
+        $f = 0;
+        if (es_data($recibos)) {
+
+            foreach ($recibos as $row) {
+
+
+                $text = d('Podrías vender nuevamente a este cliente!','black strong text-right');
+                $url = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $r[] = d(a_enid($text, $url), "border-bottom");
+                $f++;
+            }
+
+            if (es_data($r)) {
+
+                array_unshift($r, d(_titulo("intentos de reventa")));
+            }
+
+        }
+
+        return [
+
+            "html" => append($r),
+            "flag" => $f,
+
+        ];
+
+    }
+
     function add_compras_sin_cierre($recibos)
     {
         $r = [];
@@ -1350,15 +1382,12 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $response = [
+        return [
 
             "html" => append($r),
             "flag" => $f,
 
         ];
-
-        return $response;
-
 
     }
 
@@ -1370,7 +1399,6 @@ if (!function_exists('invierte_date_time')) {
         $inf_notificacion = $info["info_notificaciones"];
 
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-
         $f = $f + $compras_sin_cierre["flag"];
 
 
@@ -1533,6 +1561,12 @@ if (!function_exists('invierte_date_time')) {
         $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
         $lista[] = d($compras_sin_cierre["html"], "top_20");
         $f = $f + $compras_sin_cierre["flag"];
+
+
+        $reintentos_compras = add_reintentos_compras($info["reintentos_compras"]);
+        $lista[] = d($reintentos_compras["html"], "top_20");
+        $f = $f + $reintentos_compras["flag"];
+
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
         $f = $f + $recibos_sin_costos_operacion["flag"];

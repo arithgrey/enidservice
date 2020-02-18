@@ -474,6 +474,8 @@ if (!function_exists('invierte_date_time')) {
         foreach ($recibos as $row) {
             $transacciones++;
             $recibo = $row["recibo"];
+            $intento_reventa = $row['intento_reventa'];
+            $intento_recuperacion = $row['intento_recuperacion'];
             $usuario_venta = prm_def($row, 'usuario', []);
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
@@ -492,10 +494,7 @@ if (!function_exists('invierte_date_time')) {
             $ordenes_pagadas = totales($ordenes_pagadas, $es_compra_efectiva);
             $ordenes_en_proceso = totales($ordenes_en_proceso, $es_orden_en_proceso);
 
-
             $comision = _titulo(money($row['comision_venta']), 4);
-
-
             $verificado = ($se_pago > 0) ?
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
             if ($perfil != 6) {
@@ -533,7 +532,7 @@ if (!function_exists('invierte_date_time')) {
             $numero_recibo = span($recibo, 'd-md-block d-none');
 
             $items[] = span($estado_compra, 'font-weight-bold estado_compra');
-            $items[] = money($monto_a_pagar);
+            $items[] = monto_compra($monto_a_pagar, $perfil, $intento_reventa, $saldo_cubierto, $es_orden_cancelada, $intento_recuperacion);
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $contenido = [];
@@ -582,6 +581,30 @@ if (!function_exists('invierte_date_time')) {
 
         $tabla = append($listado);
         return d_c([$conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales], 'col-sm-12 mt-4');
+    }
+
+    function monto_compra($monto, $id_perfil, $intento_reventa, $saldo_cubierto,
+                          $es_orden_cancelada, $intento_recuperacion)
+    {
+
+        $se_pago_administrador = ( $saldo_cubierto > 0);
+
+        if ($se_pago_administrador) {
+            $str = _text_('intentos de segunda reventa', $intento_reventa);
+        } elseif ($es_orden_cancelada) {
+            $str = _text_('intentos de recuperación', $intento_recuperacion);
+        } else {
+            $str = '';
+        }
+
+
+        $text = [
+            money($monto),
+            _titulo($str, 5, 'white')
+        ];
+
+        return d_c($text, ['class' => 'text-center text-uppercase']);
+
     }
 
     function conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones)
