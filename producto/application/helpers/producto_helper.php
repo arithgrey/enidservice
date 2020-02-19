@@ -257,8 +257,8 @@ if (!function_exists('invierte_date_time')) {
         if ($es_comisionista) {
 
             $comision = pr($servicio, 'comision');
-            $text_comisionn = strong(money($comision), 'white f12');
-            $text = _text_('gana', $text_comisionn, 'al verder este artículo');
+            $text_comisionn = strong(money($comision), 'white f14');
+            $text = _text_('gana', $text_comisionn, 'al verderlo!');
             $class = 'aviso_comision mb-2 white text-uppercase border shadow text-right p-2';
             $response[] = d($text, $class);
         }

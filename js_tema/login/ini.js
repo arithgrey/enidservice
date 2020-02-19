@@ -22,6 +22,7 @@ let registro_pw = '.registro_pw';
 let $form_inicio = $(form_inicio);
 $(document).on('ready', () => {
 
+
     $('footer').ready(valida_seccion_inicial);
     $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);
     $('.btn_soy_nuevo_simple').click(mostrar_seccion_nuevo_usuario);
@@ -44,7 +45,20 @@ $(document).on('ready', () => {
         sin_espacios(email_recuperacion);
     });
 
+    $form_inicio.find('.correo').keyup(submit_inputs);
+    $form_inicio.find('#pw').keyup(submit_inputs);
+
 });
+
+let submit_inputs = (e) => {
+
+    let keycode = e.keyCode;
+    if (keycode === 13) {
+
+        $form_inicio.submit();
+    }
+
+};
 
 let inicio_session = () => {
 

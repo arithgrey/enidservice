@@ -7,6 +7,7 @@ class tipificacion extends REST_Controller
     {
         parent::__construct();
         $this->load->model("tipificacion_model");
+        $this->load->helper("tipificacion");
         $this->load->library(lib_def());
     }
 
@@ -38,6 +39,27 @@ class tipificacion extends REST_Controller
                     1,
                     0,
                     "-");
+        }
+
+        $this->response($response);
+
+    }
+
+    function recuperacion_GET()
+    {
+
+        $param = $this->get();
+        $response = [];
+        if (fx($param, "tipo,id_usuario,recibo")) {
+
+            $in = ["tipo" => $param["tipo"]];
+            $response = $this->tipificacion_model->get([], $in, 100, 'nombre_tipificacion');
+
+            $es_form = (prm_def($param, 'v') > 0);
+            if ($es_form) {
+
+                $response = form_recuperacion($param, $response);
+            }
         }
 
         $this->response($response);

@@ -28,6 +28,8 @@ class tipificacion_recibo extends REST_Controller
                 ];
                 $response = $this->tipificacion_recibo_model->insert($params);
             }
+            $this->recibo_intento_recuperacion($param);
+
         }
         $this->response($response);
 
@@ -65,11 +67,19 @@ class tipificacion_recibo extends REST_Controller
                 $param['fecha_inicio'], $param['fecha_termino']);
             if ($param['v'] == 1) {
 
-                $response =  reporte($response);
+                $response = reporte($response);
             }
 
         }
         $this->response($response);
+    }
+
+    function recibo_intento_recuperacion($q)
+    {
+        if (prm_def($q, 'id_tipo_padre') == 11) {
+
+            $this->app->api("recibo/recuperacion", $q, 'json', 'PUT');
+        }
     }
 
 }
