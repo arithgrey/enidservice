@@ -1176,6 +1176,20 @@ class recibo extends REST_Controller
 
     }
 
+    function recuperacion_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_vendedor", 1)) {
+
+            $response = $this->recibo_model->recuperacion($param['id_vendedor']);
+
+        }
+        $this->response($response);
+
+    }
+
+
     function reventa_PUT()
     {
         $param = $this->put();
@@ -1189,6 +1203,7 @@ class recibo extends REST_Controller
         $this->response($response);
 
     }
+
     function recuperacion_PUT()
     {
         $param = $this->put();
