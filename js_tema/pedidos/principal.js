@@ -14,13 +14,19 @@ let $editar_estado_compra = $('.editar_estado_compra');
 let $selector_estados_ventas = $('.selector_estados_ventas');
 let $status_venta_registro = $('.status_venta_registro');
 let $saldo_cubierto = parseInt($saldo_actual_cubierto.val());
+let $modal_opciones_compra = $('#modal_opciones_compra');
+let $menu_recibo = $('.menu_recibo');
 $(document).ready(() => {
 
+
     $editar_estado_compra.click(function () {
+
         selecciona_select('.status_venta_select', parseInt($status_venta_registro.val()));
         $modal_estado_venta.modal("show");
         despliega([".selector_estados_ventas", 1]);
+        oculta_opciones_recibo();
     });
+    $menu_recibo.click(opciones_recibo);
 
     despliega([".form_cantidad", ".form_cantidad_post_venta"], 0);
     $(".form_fecha_entrega").submit(editar_horario_entrega);
@@ -540,7 +546,8 @@ let response_form_intento_recuperacion = function (data) {
     let $select = '.form_tipificacion_recuperacion .tipificacion';
     $($select).change(function () {
         $($select).removeClass('sin_seleccion');
-    })
+    });
+    oculta_opciones_recibo();
 
 };
 let registro_intento_recuperacion = (e) => {
@@ -564,10 +571,9 @@ let registro_intento_recuperacion = (e) => {
 
 }
 let response_intento_recuperacion = (data) => {
-
-    redirect('');
-
-}
+    cerrar_modal();
+    opciones_recibo();
+};
 let confirma_intento_reventa = (id_usuario, recibo) => {
 
 
@@ -597,6 +603,7 @@ let registra_intento_reventa = function (e) {
 let response_motivos_lista_negra = (data) => {
     modal(data);
     $('.form_lista_negra').submit(agregar_lista_negra)
+    oculta_opciones_recibo();
 };
 let agregar_lista_negra = (e) => {
 
@@ -656,6 +663,7 @@ let response_reparto = function () {
 let agregar_nota = () => {
 
     showonehideone(".form_notas", ".agregar_comentario");
+    oculta_opciones_recibo();
     recorre(".form_notas");
 };
 let registrar_nota = e => {
@@ -805,4 +813,10 @@ let usuario_tipo_negocio = function () {
 let editar_usuario_tipo_negocio = function () {
 
     $form_usuario_tipo_negocio.removeClass('d-none');
+};
+let opciones_recibo = () => {
+    $modal_opciones_compra.modal('show');
+};
+let oculta_opciones_recibo = () => {
+    $modal_opciones_compra.modal('hide');
 };
