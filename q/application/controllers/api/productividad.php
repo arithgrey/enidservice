@@ -45,6 +45,7 @@ class productividad extends REST_Controller
         ];
 
         $response = $this->re_intentos_compras($id_usuario, $response, $id_perfil);
+        $response =  $this->recuperacion($id_usuario, $response, $id_perfil);
         switch ($id_perfil) {
 
             case 3:
@@ -275,8 +276,23 @@ class productividad extends REST_Controller
         return $response;
 
 
-
     }
 
+    function recuperacion($id_usuario, $response, $id_perfil)
+    {
+
+        $q = ["id_vendedor" => $id_usuario];
+
+        $pendientes = [];
+        if (in_array($id_perfil, [6, 3])) {
+
+            $pendientes = $this->app->api("recibo/recuperacion/format/json/", $q);
+
+        }
+        $response['recuperacion'] = $pendientes;
+        return $response;
+
+
+    }
 
 }

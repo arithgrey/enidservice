@@ -1333,6 +1333,40 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function add_recuperacion($recibos)
+    {
+        $r = [];
+        $f = 0;
+        if (es_data($recibos)) {
+
+            foreach ($recibos as $row) {
+
+
+                $text = d('Podrías recuperar la venta de este pedido','black strong text-right');
+                $url = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $r[] = d(a_enid($text, $url), "border-bottom");
+                $f++;
+            }
+
+            if (es_data($r)) {
+
+                array_unshift($r, d(_titulo("RECUPERACIÓN!")));
+            }
+
+        }
+
+        return [
+
+            "html" => append($r),
+            "flag" => $f,
+
+        ];
+
+    }
+
+
+
+
     function add_compras_sin_cierre($recibos)
     {
         $r = [];
@@ -1566,6 +1600,11 @@ if (!function_exists('invierte_date_time')) {
         $reintentos_compras = add_reintentos_compras($info["reintentos_compras"]);
         $lista[] = d($reintentos_compras["html"], "top_20");
         $f = $f + $reintentos_compras["flag"];
+
+        $recuperacion = add_recuperacion($info["recuperacion"]);
+        $lista[] = d($recuperacion["html"], "top_20");
+        $f = $f + $recuperacion["flag"];
+
 
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
