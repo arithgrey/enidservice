@@ -1485,6 +1485,8 @@ function lista_horarios($dia_busqueda = 0)
     $nuevo_dia = 0;
     //[FIXME]
     $base = [
+        "08:00",
+        "08:30",
         "09:00",
         "09:30",
         "10:00",
@@ -1505,7 +1507,7 @@ function lista_horarios($dia_busqueda = 0)
         "17:30",
         "18:00",
         "18:30",
-        "17:00",
+        "19:00",
     ];
     $horarios = [];
 
