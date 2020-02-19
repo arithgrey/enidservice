@@ -524,6 +524,49 @@ let confirma_envio_lista_negra = (id_usuario) => {
         request_enid("GET", data_send, url, response_motivos_lista_negra);
     });
 
+};
+
+let confirma_intento_recuperacion = (id_usuario, recibo) => {
+
+    let data_send = {"v": 1, tipo: 11, 'id_usuario': id_usuario, 'recibo': recibo};
+    let url = "../q/index.php/api/tipificacion/recuperacion/format/json/";
+    request_enid("GET", data_send, url, response_form_intento_recuperacion)
+
+};
+let response_form_intento_recuperacion = function (data) {
+
+    modal(data);
+    $('.form_tipificacion_recuperacion').submit(registro_intento_recuperacion);
+    let $select = '.form_tipificacion_recuperacion .tipificacion';
+    $($select).change(function () {
+        $($select).removeClass('sin_seleccion');
+    })
+
+};
+let registro_intento_recuperacion = (e) => {
+
+    let $form = $('.form_tipificacion_recuperacion');
+    let data_send = $form.serialize();
+    let $select = '.form_tipificacion_recuperacion .tipificacion';
+    let tipificacion = get_valor_selected($select);
+    if (parseInt(tipificacion) > 0) {
+        bloquea_form('.form_tipificacion_recuperacion');
+        $($select).removeClass('sin_seleccion');
+        let url = "../q/index.php/api/tipificacion_recibo/index/format/json/";
+        request_enid("POST", data_send, url, response_intento_recuperacion)
+
+    } else {
+
+        $($select).addClass('sin_seleccion');
+    }
+
+    e.preventDefault()
+
+}
+let response_intento_recuperacion = (data) => {
+
+    redirect('');
+
 }
 let confirma_intento_reventa = (id_usuario, recibo) => {
 

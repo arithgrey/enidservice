@@ -1189,5 +1189,18 @@ class recibo extends REST_Controller
         $this->response($response);
 
     }
+    function recuperacion_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "recibo", 1)) {
+
+            $id_recibo = $param['recibo'];
+            $response = $this->recibo_model->notificacion_intento_recuperacion($id_recibo);
+
+        }
+        $this->response($response);
+
+    }
 
 }

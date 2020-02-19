@@ -1114,6 +1114,8 @@ if (!function_exists('invierte_date_time')) {
             $x[] = link_costo($id_recibo, $recibo, $es_vendedor);
             $x[] = lista_negra($recibo, $es_vendedor);
         }
+
+        $x[] = intento_recuperacion($recibo);
         $x[] = intento_reventa($recibo);
 
         $r[] = d(
@@ -2480,12 +2482,27 @@ if (!function_exists('invierte_date_time')) {
 
         $id_usuario = pr($recibo, "id_usuario");
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
-
         return d(
             a_enid("REGISTRAR INTENTO DE REVENTA",
                 [
 
                     "onclick" => "confirma_intento_reventa({$id_usuario}, {$id_recibo})",
+                ]
+            )
+        );
+    }
+
+    function intento_recuperacion($recibo)
+    {
+
+
+        $id_usuario = pr($recibo, "id_usuario");
+        $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
+        return d(
+            a_enid("AGREGAR INTENTO RECUPERACIÓN",
+                [
+
+                    "onclick" => "confirma_intento_recuperacion({$id_usuario}, {$id_recibo})",
                 ]
             )
         );

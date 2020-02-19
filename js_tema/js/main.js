@@ -829,7 +829,6 @@ let set_places = () => {
     place.map(empty_elements);
 
 };
-/*AQUÍ TERMINAN LAS PORQUERIAS*/
 let submit_enid = (form) => {
 
     $(form).submit();

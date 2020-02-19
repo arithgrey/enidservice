@@ -1078,5 +1078,14 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get);
     }
 
+    function notificacion_intento_recuperacion($id_recibo)
+    {
+        $query_get = "UPDATE proyecto_persona_forma_pago 
+                        SET intento_recuperacion = (intento_recuperacion + 1) 
+                        WHERE id_proyecto_persona_forma_pago = '" . $id_recibo . "' LIMIT 1 ";
+
+        return $this->db->query($query_get);
+    }
+
 
 }   

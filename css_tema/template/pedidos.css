@@ -1,7 +1,13 @@
-.bg_reporte{
+.sin_seleccion {
+
+    border: 1px solid rgb(13, 62, 86);
+}
+
+.bg_reporte {
     background: #020720;
     color: white;
 }
+
 .pago_en_proceso {
     background: #04325b;
 }
