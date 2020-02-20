@@ -249,8 +249,10 @@ if (!function_exists('invierte_date_time')) {
         $z[] = resumen_orden($data, $recibo, $id_servicio);
         $r[] = append($z);
 
+        $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
+        $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 top_50');
         $r[] = d(
-            place("place_tambien_podria_interezar"), "col-lg-12 top_50"
+            place("place_tambien_podria_interezar"), "col-lg-12"
         );
         $r[] = hiddens(
             [
@@ -289,9 +291,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = d(
-            tiempo($recibo, $domicilio, $es_vendedor),
-            "timeline top_40", 1
+        $tiempo = tiempo($data, $recibo, $domicilio, $es_vendedor);
+        $r[] = d($tiempo, "timeline top_40", 1
         );
 
         return d(append($r), 8);
@@ -362,7 +363,11 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $a[] = append($z);
-        $a[] = format_link('comprar nuevamente', ['href' => path_enid('producto', $id_servicio), 'class' => 'mt-5']);
+        $a[] = format_link('comprar nuevamente',
+            [
+                'href' => path_enid('producto', $id_servicio), 'class' => 'mt-5'
+            ]
+        );
 
         return d($a, 3);
 
@@ -371,7 +376,6 @@ if (!function_exists('invierte_date_time')) {
 
     function text_domicilio($data)
     {
-
 
         $recibo = $data['recibo'];
         $domicilio = $data['domicilio'];
@@ -391,20 +395,26 @@ if (!function_exists('invierte_date_time')) {
                     $numero = $pe['numero'];
                     $nombre = $pe['nombre'];
 
+                    $checkout = ticket_pago($recibo, [], 2);
 
-                    $text = _text(
+                    $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
+
+                    $text_pago = _text_('A TU ENTREGA PAGARÁS', money($saldo_pendiente));
+                    $pago_pendiente = _titulo($text_pago);
+                    $str = d($pago_pendiente, 'mt-5 text-right');
+                    $text = _text_(
                         'TIENES UNA CITA EL DÍA ',
                         format_fecha(pr($recibo, 'fecha_contra_entrega'), 1),
-                        ' EN ',
+                        'EN',
                         'ESTACIÓN DEL METRO DE CIUDAD DE MÉXICO, ',
                         strong($nombre),
-                        ' ',
                         $tipo,
-                        ' #',
+                        '#',
                         $numero,
-                        ' ',
                         $nombre_linea,
-                        ' '
+                        $str
+
+
                     );
                 }
 
@@ -1780,14 +1790,14 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function tiempo($recibo, $domicilio, $es_vendedor)
+    function tiempo($data, $recibo, $domicilio, $es_vendedor)
     {
 
         $linea = [];
         $flag = 0;
         $recibo = $recibo[0];
         $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
-
+        $in_session = $data['in_session'];
 
         for ($i = 5; $i > 0; $i--) {
 
@@ -1814,7 +1824,7 @@ if (!function_exists('invierte_date_time')) {
                 case 3:
 
                     $class = ($recibo["saldo_cubierto"] > 0) ? "timeline__item__date_active" : "timeline__item__date";
-                    $seccion_2 = seccion_compra($recibo, $id_recibo, $es_vendedor);
+                    $seccion_2 = seccion_compra($in_session, $recibo, $id_recibo, $es_vendedor);
 
                     break;
 
@@ -1826,8 +1836,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
             $seccion = d(icon("fa fa-check-circle-o"), $class);
-            $linea[] = d($seccion . $seccion_2, "timeline__item");
-
+            $linea[] = d(_text_($seccion, $seccion_2), "timeline__item");
 
         }
 
@@ -1842,14 +1851,16 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function seccion_compra($recibo, $id_recibo, $es_vendedor)
+    function seccion_compra($in_session, $recibo, $id_recibo, $es_vendedor)
     {
 
         $path_ticket = path_enid('area_cliente_compras', $id_recibo);
         $pago_realizado = text_icon("fa fa-check black", "COMPRASTÉ!");
         $comprar = format_link("COMPRA AHORA!", ["href" => $path_ticket]);
         $text = ($recibo["saldo_cubierto"] > 0) ? $pago_realizado : $comprar;
-        $seccion = d(
+        $text = (!$in_session) ? 'PREPARANDO TU PEDIDO' : $text;
+
+        return d(
             p(
                 $text
                 ,
@@ -1859,7 +1870,6 @@ if (!function_exists('invierte_date_time')) {
             ),
             "timeline__item__content");
 
-        return $seccion;
     }
 
     function seccion_domicilio($domicilio, $id_recibo, $tipo_entrega, $es_vendedor)
@@ -1935,12 +1945,10 @@ if (!function_exists('invierte_date_time')) {
                 break;
         }
 
-        $response = [
+        return [
             "text" => $text,
             "estado" => $estado,
         ];
-
-        return $response;
 
     }
 
@@ -2528,7 +2536,8 @@ if (!function_exists('invierte_date_time')) {
         $fecha = horario_enid();
         $hoy = $fecha->format('Y-m-d');
         $dias = date_difference($hoy, $fecha_entrega);
-        $pasaron_dias = $dias > 0;
+
+        $pasaron_dias = ($dias > 0);
 
         if ($es_intento && $pasaron_dias) {
 

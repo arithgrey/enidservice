@@ -49,7 +49,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="image logo" content="<?= $url_img_post ?>">
 <meta itemprop="email" content="ventas@enidservices.com">
 <meta itemprop="telephone" content="5552967027">
-<meta itemprop="address" content="Centro Histórico, Centro, 06000 Ciudad de México, CDMX, Local 406">
+<meta itemprop="address" content="">
 <meta itemprop="url" content="<?= base_url() ?>">
 <meta itemprop="photo" content="<?= $url_img_post ?>">
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
@@ -61,7 +61,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <script src="../js_tema/js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
 <script src="../js_tema/js/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.es.js"></script>
 <link rel="stylesheet" type="text/css" href="../css_tema/template/main.css?<?= version_enid ?>">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css?<?= version_enid ?>">
+<link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
