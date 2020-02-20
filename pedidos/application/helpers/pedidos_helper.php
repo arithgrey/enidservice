@@ -2451,7 +2451,7 @@ if (!function_exists('invierte_date_time')) {
 
     function link_nota()
     {
-        return d(a_enid("AGREGAR UNA NOTA AL PEDIDO",
+        return d(a_enid("AGREGAR NOTA",
             ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]));
     }
 
@@ -2462,7 +2462,7 @@ if (!function_exists('invierte_date_time')) {
             $saldo = pr($recibo, "saldo_cubierto");
             $ext = _text("/?costos_operacion=", $id_recibo, "&saldado=", $saldo);
             $url = path_enid("pedidos", $ext);
-            $link = a_enid("REGISTRAR COSTOS DE OPERACIÓN",
+            $link = a_enid("COSTOS DE OPERACIÓN",
                 [
                     "href" => $url,
                     'class' => 'black'
@@ -2480,7 +2480,7 @@ if (!function_exists('invierte_date_time')) {
         $id_usuario = pr($recibo, "id_usuario");
 
         return d(
-            a_enid("ENVIAR ESTE USUARIO A LISTA NEGRA",
+            a_enid("LISTA NEGRA",
                 [
 
                     "onclick" => "confirma_envio_lista_negra({$id_usuario})",
@@ -2510,7 +2510,7 @@ if (!function_exists('invierte_date_time')) {
         $id_usuario = pr($recibo, "id_usuario");
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
         return d(
-            a_enid("REGISTRAR INTENTO DE REVENTA",
+            a_enid("REVENTA",
                 [
 
                     "onclick" => "confirma_intento_reventa({$id_usuario}, {$id_recibo})",
@@ -2541,11 +2541,13 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_intento && $pasaron_dias) {
 
+            $aviso = _text_('pasaron ', $dias, 'dias desde que inció su proceso de compra hasta la fecha');
+            $tiempo_trasncurrido = d($aviso, 'text-danger text-uppercase fp8');
             $response[] = d(
-                a_enid("AGREGAR INTENTO RECUPERACIÓN",
+                a_enid(_d("RECUPERACIÓN", $tiempo_trasncurrido),
                     [
 
-                        "onclick" => "confirma_intento_recuperacion({$id_usuario}, {$id_recibo})",
+                        "onclick" => "confirma_intento_recuperacion({$id_usuario}, {$id_recibo}, {$dias})",
                     ]
                 )
             );

@@ -532,9 +532,10 @@ let confirma_envio_lista_negra = (id_usuario) => {
 
 };
 
-let confirma_intento_recuperacion = (id_usuario, recibo) => {
+let confirma_intento_recuperacion = (id_usuario, recibo, dias) => {
 
-    let data_send = {"v": 1, tipo: 11, 'id_usuario': id_usuario, 'recibo': recibo};
+
+    let data_send = {"v": 1, tipo: 11, 'id_usuario': id_usuario, 'recibo': recibo, 'dias': dias};
     let url = "../q/index.php/api/tipificacion/recuperacion/format/json/";
     request_enid("GET", data_send, url, response_form_intento_recuperacion)
 
@@ -572,7 +573,10 @@ let registro_intento_recuperacion = (e) => {
 }
 let response_intento_recuperacion = (data) => {
     cerrar_modal();
-    opciones_recibo();
+    show_confirm("¿HAY ALGO MÁS QUÉ HACER CON ESTE PEDIDO?", "", 'si', function () {
+        opciones_recibo();
+    });
+
 };
 let confirma_intento_reventa = (id_usuario, recibo) => {
 

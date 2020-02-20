@@ -237,6 +237,7 @@ class Home extends CI_Controller
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
     {
 
+        $data['url_img_post'] = path_enid('rastreo_pedido',0,1);
         if (es_data($recibo)) {
 
             $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
