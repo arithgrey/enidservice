@@ -1311,7 +1311,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($recibos as $row) {
 
 
-                $text = d('Podrías vender nuevamente a este cliente!','black strong text-right');
+                $text = d('Podrías vender nuevamente a este cliente!', 'black strong text-right');
                 $url = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $r[] = d(a_enid($text, $url), "border-bottom");
                 $f++;
@@ -1342,7 +1342,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($recibos as $row) {
 
 
-                $text = d('Podrías recuperar la venta de este pedido','black strong text-right');
+                $text = d('Podrías recuperar la venta de este pedido', 'black strong text-right');
                 $url = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $r[] = d(a_enid($text, $url), "border-bottom");
                 $f++;
@@ -1365,12 +1365,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-
-
     function add_compras_sin_cierre($recibos)
     {
         $r = [];
         $f = 0;
+        $ventas_posteriores = [];
+        $ventas_hoy = [];
         if (es_data($recibos)) {
 
             foreach ($recibos as $row) {
@@ -1403,15 +1403,25 @@ if (!function_exists('invierte_date_time')) {
                 $text = flex($imagenes, $total_seccion, _between);
 
                 $url = path_enid("pedidos_recibo", $row["id_recibo"]);
-                $r[] = d(a_enid($text, $url), "border-bottom");
+
+                $linea = d(a_enid($text, $url), "border-bottom");
+                if ($es_hoy) {
+
+                    $ventas_hoy[] = $linea;
+
+                } else {
+
+                    $ventas_posteriores[] = $linea;
+                }
+
                 $f++;
             }
 
-            if (es_data($r)) {
+            if (es_data($recibos)) {
 
-                array_unshift($r,
-                    d(_titulo("ventas en proceso")));
-
+                $r[] = d(_titulo("ventas en proceso"));
+                $r[] = append($ventas_hoy);
+                $r[] = append($ventas_posteriores);
             }
 
         }
@@ -1604,7 +1614,6 @@ if (!function_exists('invierte_date_time')) {
         $recuperacion = add_recuperacion($info["recuperacion"]);
         $lista[] = d($recuperacion["html"], "top_20");
         $f = $f + $recuperacion["flag"];
-
 
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);

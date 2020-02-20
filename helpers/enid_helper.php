@@ -1763,7 +1763,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-sm-4 mt-5 p-0 p-md-1 ', $base_termino = 'col-sm-4 mt-5 p-0 p-md-1', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
-    $inicio = ($def_inicio != 0) ? $def_inicio : add_date(date("Y-m-d"),-1);
+    $inicio = ($def_inicio != 0) ? $def_inicio : add_date(date("Y-m-d"), -1);
     $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
     $r[] = input_frm($base_inicio, "Fecha inicio",
@@ -1971,7 +1971,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "enid" => "https://enidservices.com",
         "enid_login" => "https://enidservices.com/inicio/login/",
         "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg',
-        "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png'
+        "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png',
+        "rastreo_pedido" => 'http://enidservices.com/inicio/img_tema/seguimiento.png'
     ];
 
 

@@ -50,7 +50,7 @@ class tipificacion extends REST_Controller
 
         $param = $this->get();
         $response = [];
-        if (fx($param, "tipo,id_usuario,recibo")) {
+        if (fx($param, "tipo,id_usuario,recibo,dias")) {
 
             $in = ["tipo" => $param["tipo"]];
             $response = $this->tipificacion_model->get([], $in, 100, 'nombre_tipificacion');
