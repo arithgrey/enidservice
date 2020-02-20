@@ -200,7 +200,9 @@ class app extends CI_Controller
     function acceso()
     {
 
-        $fn = ($this->is_logged_in() > 0) ? "" : $this->out();
+        if (!$this->is_logged_in()) {
+            $this->out();
+        }
     }
 
     function is_logged_in()

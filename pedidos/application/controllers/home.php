@@ -4,6 +4,8 @@
 
 class Home extends CI_Controller
 {
+    private $id_usuario;
+
     function __construct()
     {
         parent::__construct();
@@ -20,15 +22,16 @@ class Home extends CI_Controller
 
         $param = $this->input->get();
         $data = $this->app->session();
-        $this->app->acceso();
+
 
         if (prm_def($param, "seguimiento") > 0 && ctype_digit($param["seguimiento"])) {
+
 
             $this->vista_seguimiento($param, $data);
 
         } else {
 
-
+            $this->app->acceso();
             $fn = (prm_def($param,
                     "costos_operacion") > 0 && ctype_digit($param["costos_operacion"])) ?
                 $this->carga_vista_costos_operacion($param, $data) :
@@ -45,39 +48,55 @@ class Home extends CI_Controller
         $id_recibo = $this->input->get("seguimiento");
         $recibo = $this->get_recibo($id_recibo, 1);
 
-        $data +=
-            [
-                "servicio" => $this->app->servicio(pr($recibo, "id_servicio")),
-            ];
+        if (es_data($recibo)) {
+
+            $data +=
+                [
+                    "servicio" => $this->app->servicio(pr($recibo, "id_servicio")),
+                ];
 
 
-        $drecibo = $recibo[0];
-        $id_usuario_compra = $drecibo["id_usuario"];
-        $id_usuario_venta = $drecibo["id_usuario_venta"];
-        $es_domicilio = prm_def($param, "domicilio");
-        $id_usuario_referencia = $drecibo['id_usuario_referencia'];
-
-        $es_usuario_compra = ($this->id_usuario == $id_usuario_compra);
-        $es_propietario = propietario($this->id_usuario, $id_usuario_venta, $id_usuario_referencia, path_enid('_area_cliente'));
-        $tiene_acceso = ($es_usuario_compra || $es_propietario);
-        $es_session = ($data["in_session"] > 0);
-
-        if (es_data($recibo) && $es_session && $data["id_usuario"] > 0 && $tiene_acceso) {
+            $es_domicilio = prm_def($param, "domicilio");
 
 
-            $data["es_vendedor"] = ($id_usuario_venta == $data["id_usuario"]);
+            $data += ["recibo" => $recibo];
+            $data["es_vendedor"] = (pr('id_usuario_referencia', $recibo) == $data["id_usuario"]);
             $data += [
                 "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
-                "recibo" => $recibo,
             ];
 
-            $fn = ($es_domicilio) ? $this->domicilios($param,
-                $data) : $this->load_view_seguimiento($data,
-                $param, $recibo, $id_recibo);
+            if ($es_domicilio) {
+
+                $this->view_domicilios($data, $recibo, $param);
+
+            } else {
+
+
+                $this->load_view_seguimiento($data, $param, $recibo, $id_recibo);
+            }
 
 
         }
+    }
 
+    private function view_domicilios($data, $recibo, $param)
+    {
+        $drecibo = $recibo[0];
+        $id_usuario_compra = $drecibo["id_usuario"];
+        $id_usuario_venta = $drecibo["id_usuario_venta"];
+        $es_session = ($data["in_session"] > 0);
+        $id_usuario_referencia = $drecibo['id_usuario_referencia'];
+        $es_usuario_compra = ($this->id_usuario == $id_usuario_compra);
+
+        if (es_data($recibo) && $es_session && $data["id_usuario"] > 0) {
+            $es_propietario = propietario($this->id_usuario, $id_usuario_venta, $id_usuario_referencia, path_enid('_area_cliente'));
+            $tiene_acceso = ($es_usuario_compra || $es_propietario);
+
+            if ($tiene_acceso) {
+                $this->domicilios($param, $data);
+            }
+
+        }
     }
 
     private function get_recibo($id_recibo, $add_img = 0)
@@ -218,29 +237,42 @@ class Home extends CI_Controller
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
     {
 
-        $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
+        if (es_data($recibo)) {
 
-        $data += [
-            "notificacion_pago" => ($recibo[0]["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
-            "orden" => $id_recibo,
-            "status_ventas" => $this->get_estatus_enid_service(),
-            "evaluacion" => 1,
-            "tipificaciones" => $this->get_tipificaciones($id_recibo),
-            "id_servicio" => pr($recibo, "id_servicio"),
-        ];
+            $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
+            $data_recibo = $recibo[0];
 
-        if ($recibo[0]["saldo_cubierto"] > 0 && $recibo[0]["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
+            $data += [
+                "notificacion_pago" => ($data_recibo["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
+                "orden" => $id_recibo,
+                "status_ventas" => $this->get_estatus_enid_service(),
+                "evaluacion" => 1,
+                "tipificaciones" => $this->get_tipificaciones($id_recibo),
+                "id_servicio" => pr($recibo, "id_servicio"),
+            ];
 
-            $data["evaluacion"] = $this->verifica_evaluacion($recibo[0]["id_usuario"],
-                $recibo[0]["id_servicio"]);
+            if ($data_recibo["saldo_cubierto"] > 0 && $data_recibo["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
 
+                $data["evaluacion"] = $this->verifica_evaluacion($data_recibo["id_usuario"],
+                    $recibo[0]["id_servicio"]);
+
+            }
+
+
+            $breadcrumbs = [];
+            if ($data['in_session']) {
+
+                $this->breadcrumbs->push('Orden de compra', path_enid('area_cliente_compras', $id_recibo));
+                $this->breadcrumbs->push('Seguimiento', '/');
+                $breadcrumbs[] = $this->breadcrumbs->show();
+            }
+            $data['breadcrumbs'] = append($breadcrumbs);
+
+
+            $this->app->pagina($data, render_seguimiento($data), 1);
         }
 
-        $this->breadcrumbs->push('Orden de compra', path_enid('area_cliente_compras', $id_recibo));
-        $this->breadcrumbs->push('Seguimiento', '/');
-        $data['breadcrumbs'] = $this->breadcrumbs->show();
 
-        $this->app->pagina($data, render_seguimiento($data), 1);
     }
 
     private function get_estatus_enid_service($q = [])
@@ -331,7 +363,7 @@ class Home extends CI_Controller
             $param["costos_operacion"],
             $path,
             $costos_operacion,
-            $recibo, 1, $usuario_comision,$usuario_compra);
+            $recibo, 1, $usuario_comision, $usuario_compra);
 
         $this->app->pagina($data, $response, 1);
 

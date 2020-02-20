@@ -576,7 +576,7 @@ let response_intento_recuperacion = (data) => {
 };
 let confirma_intento_reventa = (id_usuario, recibo) => {
 
-
+    oculta_opciones_recibo();
     let url = "../q/index.php/api/tipo_tag_arquetipo/reventa/format/json/";
     let data_send = {'v': 1, 'id_usuario': id_usuario, 'recibo': recibo};
     request_enid("GET", data_send, url, response_reventa);
