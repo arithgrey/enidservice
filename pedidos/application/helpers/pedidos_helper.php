@@ -250,9 +250,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($z);
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
-        $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 top_50');
+        $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 ');
         $r[] = d(
-            place("place_tambien_podria_interezar"), "col-lg-12"
+            place("place_tambien_podria_interezar"), "col-sm-12"
         );
         $r[] = hiddens(
             [
@@ -283,19 +283,13 @@ if (!function_exists('invierte_date_time')) {
         $es_vendedor = $data["es_vendedor"];
         $domicilio = $data["domicilio"];
 
-        $r[] = _titulo(
-            text_icon(
-                "fa fa-map-signs",
-                "¿Donde se encuentra mi pedido?", [], 0
-            )
-        );
+        $r[] = _titulo("¿Donde se encuentra mi pedido?");
 
 
         $tiempo = tiempo($data, $recibo, $domicilio, $es_vendedor);
-        $r[] = d($tiempo, "timeline top_40", 1
-        );
+        $r[] = d($tiempo, "timeline mt-5", 1);
 
-        return d(append($r), 8);
+        return d($r, 'col-sm-8 mt-5');
 
     }
 
@@ -342,11 +336,18 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = $evaluacion;
-        $z[] = h($text, 4);
+        $z[] = _titulo($text, 2);
         $z[] = text_domicilio($data);
         $id_recibo = prm_def($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
+
+
+        $path_servicio = get_url_servicio($id_servicio);
+        $path_resumen_servicio = path_enid('pedidos_recibo', $id_recibo);
+        $perfiles_vendedores = [3, 6];
+        $es_vendedor = ($data['in_session'] && in_array($data['id_perfil'], $perfiles_vendedores));
+        $path = ($es_vendedor) ? $path_resumen_servicio : $path_servicio;
 
         $a[] = btw(
 
@@ -359,13 +360,14 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 )
                 ,
-                get_url_servicio($id_servicio)
+                $path
             )
         );
         $a[] = append($z);
         $a[] = format_link('comprar nuevamente',
             [
-                'href' => path_enid('producto', $id_servicio), 'class' => 'mt-5'
+                'href' => path_enid('producto', $id_servicio),
+                'class' => 'mt-5'
             ]
         );
 
@@ -396,7 +398,6 @@ if (!function_exists('invierte_date_time')) {
                     $nombre = $pe['nombre'];
 
                     $checkout = ticket_pago($recibo, [], 2);
-
                     $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
                     $text_pago = _text_('A TU ENTREGA PAGARÁS', money($saldo_pendiente));
@@ -413,8 +414,6 @@ if (!function_exists('invierte_date_time')) {
                         $numero,
                         $nombre_linea,
                         $str
-
-
                     );
                 }
 
@@ -1812,6 +1811,7 @@ if (!function_exists('invierte_date_time')) {
                 }
             }
 
+            $status_actual = $recibo['status'];
             switch ($i) {
 
                 case 2:
@@ -1828,6 +1828,12 @@ if (!function_exists('invierte_date_time')) {
 
                     break;
 
+                case 4:
+
+                    $se_entrego = in_array($status_actual, [16, 7, 15, 9]);
+                    $class = ($se_entrego) ? "timeline__item__date_active" : 'timeline__item__date';
+                    $seccion_2 = seccion_en_camino($status);
+                    break;
 
                 default:
                     $class = ($activo > 0) ? "f12 timeline__item__date_active" : "timeline__item__date";
@@ -1872,6 +1878,23 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function seccion_en_camino()
+    {
+
+        $text = text_icon(_check_icon, 'TU PEDIDO ESTÁ EN CAMINO', [], 0);
+        return d(
+            p(
+                $text
+                ,
+
+                "timeline__item__content__description strong"
+
+            ),
+            "timeline__item__content");
+
+    }
+
+
     function seccion_domicilio($domicilio, $id_recibo, $tipo_entrega, $es_vendedor)
     {
 
@@ -1884,14 +1907,15 @@ if (!function_exists('invierte_date_time')) {
             "INDICA EL DOMICILIO DE ENVÍO",
         ];
 
-        $entrega = text_icon("fa fa-check", "DOMICILIO DE ENTREGA CONFIRMADO");
+
+        $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO");
         if (tiene_domilio($domicilio, 1) < 1) {
             $entrega = format_link($tipos_entrega[$tipo_entrega - 1], ['href' => $url]);
         }
 
 
         $url = ($es_vendedor > 0) ? "" : $url;
-        $seccion = d(
+        return d(
             p(
                 a_enid(
                     $entrega,
@@ -1905,7 +1929,7 @@ if (!function_exists('invierte_date_time')) {
             "timeline__item__content"
         );
 
-        return $seccion;
+
     }
 
     function texto_status($status)
