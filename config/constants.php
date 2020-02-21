@@ -83,4 +83,6 @@ define('_delivery_icon', 'fa fa-fighter-jet');
 define('_share_icon', 'fa fa-share');
 define('_bomb_icon', 'fa fa-bomb');
 define('_repato_icon', 'fa fa-bicycle');
+define('_check_icon', 'fa fa fa-check-circle-o');
+
 
