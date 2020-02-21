@@ -1073,10 +1073,9 @@ if (!function_exists('invierte_date_time')) {
             $id_recibo = $row["id_recibo"];
             $saldo_cubierto = $row["saldo_cubierto"];
 
-
             $text = flex(
                 icon("fa fa-ticket black"),
-                $saldo_cubierto . " MXN ",
+                money($saldo_cubierto),
                 "top_10  justify-content-between  mh_notificaciones border-bottom",
                 "",
                 "strong black");
@@ -1377,6 +1376,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $fecha_contra_entrega = $row['fecha_contra_entrega'];
                 $fecha_entrega = date_create($fecha_contra_entrega)->format('Y-m-d');
+
                 $fecha = horario_enid();
                 $hoy = $fecha->format('Y-m-d');
                 $es_mayor = ($fecha_entrega > $hoy);
@@ -1392,9 +1392,11 @@ if (!function_exists('invierte_date_time')) {
                     $text_entrega = 'La entrega fué ayer';
                 }
 
-                $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy!' : $text_entrega;
+                $hora_entrega = format_hora($fecha_contra_entrega);
+                $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy! ' : $text_entrega;
+
                 $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
-                $dia_entrega = d($notificacion_hoy, _text_('badge', $es_hoy));
+                $dia_entrega = d(_text_($notificacion_hoy, $hora_entrega), _text_('badge', $es_hoy));
 
                 $imagenes = d(img($row["url_img_servicio"]), "w_50");
                 $total = d(money($row["total"]), "text-left black");
