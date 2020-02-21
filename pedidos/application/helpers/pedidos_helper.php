@@ -53,8 +53,9 @@ if (!function_exists('invierte_date_time')) {
         $text_estado_venta = search_bi_array(
             $status_ventas, 'id_estatus_enid_service', $id_status, 'text_vendedor');
 
+        $saldo_cubierto = pr($r, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
-        $re[] = frm_pedidos($es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
+        $re[] = frm_pedidos($r, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
         $re[] = d(crea_estado_venta($status_ventas, $r));
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
@@ -62,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_fecha_contra_entrega($r, $domicilio, $es_venta_cancelada);
         $re[] = fecha_espera_servicio($r, $data["servicio"]);
         $re[] = notificacion_cambio_fecha(
-            $r, $num_compras, pr($r, "saldo_cubierto")
+            $r, $num_compras, $saldo_cubierto
         );
         $re[] = crea_seccion_recordatorios($data["recordatorios"]);
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
@@ -84,15 +85,17 @@ if (!function_exists('invierte_date_time')) {
             $seccion_venta, 4
         );
         $response[] = hiddens_detalle($r);
-        $response[] = opciones_compra($domicilio, $r, $id_recibo, $usuario, $es_vendedor);
+        $tipos_entregas = $data["tipos_entregas"];
+        $response[] = opciones_compra($domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
 
         return d($response, _10auto);
 
     }
 
-    function opciones_compra($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor)
+    function opciones_compra($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor, $tipos_entregas)
     {
         $contenido[] = d(_titulo('¿Hay algo que hacer?'), 'mb-5  text-center');
+        $x[] = tracker($id_recibo);
         $x[] = link_cambio_estado_venta();
         $x[] = link_cambio_fecha($domicilio, $recibo);
         $x[] = link_recordatorio($recibo, $usuario);
@@ -102,9 +105,12 @@ if (!function_exists('invierte_date_time')) {
             $x[] = lista_negra($recibo, $es_vendedor);
         }
 
-        $x[] = intento_recuperacion($recibo);
+        $text = intento_recuperacion($recibo);
+        if ($text['es_visible']) {
+            $xx[] = $text['text'];
+        }
         $x[] = intento_reventa($recibo);
-
+        $x[] = imprimir_recibo($recibo, $tipos_entregas);
 
         $contenido[] = d_c($x, ['class' => 'mt-4 elemento_menu border-bottom']);
         return gb_modal($contenido, 'modal_opciones_compra');
@@ -538,8 +544,9 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_pedidos($es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
+    function frm_pedidos($recibo, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
     {
+
 
         $r[] = d(
             a_enid(_titulo("MIS PEDIDOS"),
@@ -552,7 +559,21 @@ if (!function_exists('invierte_date_time')) {
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision);
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
         $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _between_md);
+
+
         $r[] = d($recibo_vendedor, 'row mt-3');
+
+
+        $saldo_cubierto = pr($recibo, 'saldo_cubierto');
+        $se_paga_comision = pr($recibo, 'flag_pago_comision');
+        $es_vendedor = in_array($id_perfil, [6, 3]);
+
+
+        if ($saldo_cubierto > 0 && $se_paga_comision > 0 && $es_vendedor) {
+            $comision = pr($recibo, 'comision_venta');
+            $monto = p(money($comision), 'strong ml-4');
+            $r[] = d(_text_('COBRASTE', $monto), 'row mt-1');
+        }
 
         $str = _titulo($text_estado_venta, 4);
 
@@ -746,8 +767,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
         $r[] = enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
-        $r[] = tracker($id_recibo);
-        $r[] = imprimir_recibo($recibo, $tipos_entregas);
+//        $r[] = tracker($id_recibo);
+//        $r[] = imprimir_recibo($recibo, $tipos_entregas);
         $r[] = tiene_domilio($domicilio);
 
 
@@ -766,16 +787,16 @@ if (!function_exists('invierte_date_time')) {
 
     function tracker($id_recibo)
     {
-        $pedido = btn(_text_('Compartir pedido', icon(_share_icon)));
+        $pedido = text_icon(_share_icon, 'Compartir pedido', [], 0);
         $link = a_enid(
             $pedido,
             [
                 'href' => path_enid('pedido_seguimiento', $id_recibo),
                 'target' => '_black',
-                'class' => _text_(_mbt5_md, 'w-100')
+                'class' => 'text-uppercase black'
             ]
         );
-        return d($link, 13);
+        return d($link);
     }
 
     function enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
@@ -857,13 +878,16 @@ if (!function_exists('invierte_date_time')) {
             $es_descuento = ($tipo_entrega == 1 && $descuento_entrega > 0);
             $saldo_pendiente = ($es_descuento) ? $checkout['saldo_pendiente_pago_contra_entrega'] : $checkout['saldo_pendiente'];
             $link = pago_oxxo('', $saldo_pendiente, $id_recibo, $id_usuario_venta);
-            $response[] = format_link('Pago en oxxo',
+            $response[] = a_enid('imprimir instrucciones de pago en oxxo',
                 [
-                    'href' => $link
-                ], 0
+                    'href' => $link,
+                    'class' => 'black text-uppercase',
+                    'target' => '_black'
+                ]
             );
         }
-        return d($response, _text_('row', 'mt-3'));
+        return d($response);
+
 
     }
 
@@ -2562,8 +2586,8 @@ if (!function_exists('invierte_date_time')) {
         $dias = date_difference($hoy, $fecha_entrega);
 
         $pasaron_dias = ($dias > 0);
-
-        if ($es_intento && $pasaron_dias) {
+        $es_visible = ($es_intento && $pasaron_dias);
+        if ($es_visible) {
 
             $aviso = _text_('pasaron ', $dias, 'dias desde que inció su proceso de compra hasta la fecha');
             $tiempo_trasncurrido = d($aviso, 'text-danger text-uppercase fp8');
@@ -2579,7 +2603,10 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return append($response);
+        return [
+            'es_visible' => $es_visible,
+            'text' => append($response)
+        ];
     }
 
 
@@ -2597,7 +2624,7 @@ if (!function_exists('invierte_date_time')) {
             $fecha_entrega = $recibo["fecha_entrega"];
 
             return d(
-                a_enid("CAMBIAR LA FECHA DE ENTREGA",
+                a_enid("MODIFICAR LA FECHA DE ENTREGA",
                     [
                         "class" => "editar_horario_entrega",
                         "id" => $id_recibo,
