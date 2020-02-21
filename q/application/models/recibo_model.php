@@ -1064,7 +1064,9 @@ class Recibo_model extends CI_Model
                         WHERE saldo_cubierto > 0 
                         AND intento_reventa < 1 AND fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
                         AND se_cancela < 1 AND cancela_cliente < 1
-                        AND id_usuario_referencia = '" . $id_vendedor . "' LIMIT 5";
+                        AND 
+                        (id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "') 
+                        LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -1075,8 +1077,9 @@ class Recibo_model extends CI_Model
                         id_proyecto_persona_forma_pago id_recibo, id_servicio 
                         FROM 
                         proyecto_persona_forma_pago p 
-                        WHERE 
-                        p.saldo_cubierto < 1
+                        WHERE
+                        es_test < 1 
+                        AND p.saldo_cubierto < 1
                         AND p.id_proyecto_persona_forma_pago > 384
                         AND  
                         p.intento_recuperacion < 1
@@ -1089,6 +1092,7 @@ class Recibo_model extends CI_Model
                         p.id_usuario_venta = '" . $id_vendedor . "' 
                         )
                         AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+                        
                         LIMIT 5";
 
         return $this->db->query($query_get)->result_array();

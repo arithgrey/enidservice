@@ -2897,6 +2897,13 @@ function format_fecha($date, $horas = 0)
         _text_('d M Y ', $ext)));
 
 }
+function format_hora($date)
+{
+
+
+    return format_time(date_format(date_create($date), 'H:i' ));
+
+}
 
 function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 {
