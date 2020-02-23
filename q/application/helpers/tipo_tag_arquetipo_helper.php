@@ -15,20 +15,43 @@ if (!function_exists('invierte_date_time')) {
                 "method" => "post"
             ]
         );
-        $form[] = input_frm('', '¿Qué artículo le ofrecisté?',
-            [
-                'class' => 'reventa',
-                'id' => 'reventa',
-                'name' => 'tag',
-                'required' => true
-            ]
+
+        $form[] = d(_titulo('¿Qué acción realizasté?', 3), 'acccion_realizada text-left');
+        $accciones[] = ['text' => 'Mandé mensaje recordando su venta de hace tiempo y ofrecí nuevos artículos con la página web'];
+        $accciones[] = ['text' => 'Le recordé que quería otro artículo y que tenemos pendiente su nueva entrega'];
+
+        $form[] = create_select($accciones,
+            'accion_reventa',
+            'accion_reventa form-control text-uppercase acccion_realizada_select',
+            'accion_reventa',
+            'text',
+            'text', 0, 1, 0, '-'
         );
 
 
+        $form[] = d('¿Hay algún artículo que le interese?', 'mt-5 d-none hay_interes text-left text-uppercase');
+
+        $interes = format_link('SI', ['class' => 'interes_articulo']);
+        $sin_interes = format_link('AUN NO SABEMOS', ['class' => 'sin_interes_articulo'], 0);
+        $accciones_interes = flex($interes, $sin_interes, _text_(_between, 'mt-5'), 'aplica', 'no_aplica');
+        $form[] = d($accciones_interes, 'hay_interes d-none');
+        $form[] = d(
+            input_frm('', '¿Qué artículo?',
+                [
+                    'class' => 'reventa for',
+                    'id' => 'reventa',
+                    'name' => 'tag',
+                    'required' => true
+                ]
+            ), 'mt-5 d-none registro_articulo'
+        );
+
+
+        $form[] = hiddens(['name' => 'interes', 'value' => 0, 'class' => 'interes']);
         $form[] = hiddens(['name' => 'tipo', 'value' => 2]);
         $form[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
         $form[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
-        $form[] = btn('Registrar', ['class' => 'mt-5']);
+        $form[] = d(btn('Registrar', ['class' => 'mt-5']), 'd-none registro_articulo');
         $form[] = form_close();
         return append($form);
     }

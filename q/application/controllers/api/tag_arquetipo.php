@@ -63,9 +63,15 @@ class Tag_arquetipo extends REST_Controller
 
             if (prm_def($param, 'intento_reventa') > 0) {
 
-                $this->reventa($param);
+
+                $this->reventa($param, $params);
+
+            } else {
+
+                $response = $this->tag_arquetipo_model->insert($params);
+
             }
-            $response = $this->tag_arquetipo_model->insert($params);
+
         }
 
         $this->response($response);
@@ -86,10 +92,28 @@ class Tag_arquetipo extends REST_Controller
 
     }
 
-    private function reventa($param)
+    private function reventa($param, $data_arquetipo)
     {
 
-        return $this->app->api("recibo/reventa", $param, 'json', 'PUT');
-        
+        $response = $this->app->api("recibo/reventa", $param, 'json', 'PUT');
+
+
+        if (fx($param, "recibo,accion_reventa")) {
+
+            $data_comentarios = [
+                'id_recibo' => $param['recibo'],
+                'comentarios' => $param['accion_reventa']
+            ];
+            $this->app->api("recibo_comentario/index", $data_comentarios, 'json', 'POST');
+
+        }
+
+        if (prm_def($param, 'interes')) {
+
+            $response = $this->tag_arquetipo_model->insert($data_arquetipo);
+
+        }
+        return $response;
+
     }
 }
