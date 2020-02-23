@@ -626,7 +626,7 @@ let registro_reventa = function () {
     $('.cargando_modal').removeClass('d-none');
     let data_send = $('.form_reventa').serialize() + '&' + $.param({'intento_reventa': 1});
     bloquea_form('.form_tag_arquetipo');
-    let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
+    let url = "../q/index.php/api/Compartir pedido\ntag_arquetipo/index/format/json/";
     bloquea_form('.form_reventa');
     request_enid("POST", data_send, url, response_tag_arquetipo);
 }

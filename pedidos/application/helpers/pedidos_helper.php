@@ -408,7 +408,12 @@ if (!function_exists('invierte_date_time')) {
 
                     $text_pago = _text_('A TU ENTREGA PAGARÁS', money($saldo_pendiente));
                     $pago_pendiente = _titulo($text_pago);
-                    $str = d($pago_pendiente, 'mt-5 text-right');
+
+                    $status = pr($recibo, 'status');
+                    $se_entrego = in_array($status, [15, 9]);
+                    $es_orden_entregada = ($se_entrego && ($saldo_pendiente < 1));
+
+                    $str = (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
                     $text = _text_(
                         'TIENES UNA CITA EL DÍA ',
                         format_fecha(pr($recibo, 'fecha_contra_entrega'), 1),
@@ -787,7 +792,7 @@ if (!function_exists('invierte_date_time')) {
 
     function tracker($id_recibo)
     {
-        $pedido = text_icon(_share_icon, 'Compartir pedido', [], 0);
+        $pedido = text_icon(_share_icon, 'Rastrear pedido', [], 0);
         $link = a_enid(
             $pedido,
             [
@@ -1838,6 +1843,14 @@ if (!function_exists('invierte_date_time')) {
             $status_actual = $recibo['status'];
             switch ($i) {
 
+
+                case 1:
+                    $class = "timeline__item__date_active";
+                    $seccion_2 = seccion_ordenado();
+
+
+                    break;
+
                 case 2:
                     $class = (tiene_domilio($domicilio,
                             1) == 0) ? "timeline__item__date" : "timeline__item__date_active";
@@ -1854,10 +1867,19 @@ if (!function_exists('invierte_date_time')) {
 
                 case 4:
 
-                    $se_entrego = in_array($status_actual, [16, 7, 15, 9]);
-                    $class = ($se_entrego) ? "timeline__item__date_active" : 'timeline__item__date';
+                    $paso_en_camino = in_array($status_actual, [16, 7, 15, 9]);
+                    $class = ($paso_en_camino) ? "timeline__item__date_active" : 'timeline__item__date';
                     $seccion_2 = seccion_en_camino($status);
                     break;
+
+
+                case 5:
+
+                    $se_entrego = in_array($status_actual, [9, 15]);
+                    $class = ($se_entrego) ? "timeline__item__date_active" : 'timeline__item__date';
+                    $seccion_2 = seccion_en_entregado($status);
+                    break;
+
 
                 default:
                     $class = ($activo > 0) ? "f12 timeline__item__date_active" : "timeline__item__date";
@@ -1901,6 +1923,37 @@ if (!function_exists('invierte_date_time')) {
             "timeline__item__content");
 
     }
+
+    function seccion_en_entregado()
+    {
+
+        return d(
+            p(
+                'ENTREGADO'
+                ,
+
+                "timeline__item__content__description strong"
+
+            ),
+            "timeline__item__content");
+
+    }
+
+    function seccion_ordenado()
+    {
+
+        return d(
+            p(
+                'ORDEN REALIZADA    '
+                ,
+
+                "timeline__item__content__description strong"
+
+            ),
+            "timeline__item__content");
+
+    }
+
 
     function seccion_en_camino()
     {
