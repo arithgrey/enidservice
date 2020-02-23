@@ -594,13 +594,45 @@ let response_reventa = (data) => {
     $(".input_enid_format :input").focus(next_label_input_focus);
     $('.form_reventa').submit(registra_intento_reventa);
 
-};
-let registra_intento_reventa = function (e) {
+    $('.accion_reventa').change(function () {
+        let text = this.value;
+        if (text.length > 5) {
 
+            $('.hay_interes').removeClass('d-none');
+            $('.interes_articulo').click(function () {
+                $('.no_aplica').addClass('d-none');
+                $('.registro_articulo').removeClass('d-none');
+                $('.interes').val(1);
+
+            });
+
+            $('.no_aplica').click(function () {
+
+                registro_reventa();
+            });
+
+        } else {
+
+            $('.registro_articulo').addClass('d-none');
+        }
+    });
+
+
+};
+
+let registro_reventa = function () {
+
+
+    $('.cargando_modal').removeClass('d-none');
     let data_send = $('.form_reventa').serialize() + '&' + $.param({'intento_reventa': 1});
     bloquea_form('.form_tag_arquetipo');
     let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
+    bloquea_form('.form_reventa');
     request_enid("POST", data_send, url, response_tag_arquetipo);
+}
+let registra_intento_reventa = function (e) {
+
+    registro_reventa();
     e.preventDefault();
 
 };
