@@ -51,6 +51,10 @@ class Inicio extends CI_Controller
                 $module = "location:../area_cliente";
                 break;
 
+            case 21:
+                $module = "location:../pedidos/?reparto=1";
+                break;
+
             default:
 
                 break;

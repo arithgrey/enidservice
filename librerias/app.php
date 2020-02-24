@@ -596,6 +596,11 @@ class app extends CI_Controller
 
                 ]
             ,
+            'reparto' =>
+                [
+                    "reparto.css",
+                ]
+            ,
             "pedidos_costos_operacion" =>
                 [
 

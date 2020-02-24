@@ -425,6 +425,64 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function cuentas_por_cobrar_reparto($recibos)
+    {
+
+        $listado = [];
+        foreach ($recibos as $row) {
+
+            $recibo = $row["recibo"];
+            $url_img = $row["url_img_servicio"];
+            $monto = $row["monto_a_pagar"];
+            $num_ciclos = $row["num_ciclos_contratados"];
+            $costo_envio_cliente = $row["costo_envio_cliente"];
+            $nombre_tipo_entrega = $row["nombre_tipo_entrega"];
+            $monto_a_pagar = ($monto * $num_ciclos) + $costo_envio_cliente;
+            $fecha_contra_entrega = $row['fecha_contra_entrega'];
+
+            $img = img(
+                [
+                    "src" => $url_img,
+                    "class" => "mx-auto d-block pedido_img"
+                ]
+            );
+
+            $nombre_repartidor = _text_(
+                $row['nombre_repartidor'],
+                $row['apellido_repartidor']
+            );
+
+            $format_fecha_hora = format_fecha($fecha_contra_entrega, 1);
+
+            $items = [];
+            $contenido = [];
+
+            $numero_recibo = span($recibo, 'd-md-block d-none');
+            $items[] = money($monto_a_pagar);
+
+            $contenido[] = d($numero_recibo, 'col border descripcion_compra fp8 text-center text-uppercase');
+            $contenido[] = d($img, 'col border descripcion_compra fp8 text-center text-uppercase');
+            $contenido[] = d_c($items, 'col border descripcion_compra fp8');
+            $contenido[] = d($nombre_repartidor, 'col border descripcion_compra fp8');
+            $contenido[] = d($nombre_tipo_entrega, 'col border descripcion_compra fp8');
+            $contenido[] = d($format_fecha_hora, 'col border descripcion_compra fp8');
+
+            $text = append($contenido);
+            $line = a_enid(
+                $text,
+                [
+                    'id' => $recibo,
+                    'class' => _text_('row cursor_pointer mt-md-0 text-center text-md-left mt-5 black'),
+                    'href' => path_enid('pedidos_recibo', $recibo)
+                ], 0
+            );
+
+            $listado[] = $line;
+        }
+        return d($listado, 'col-sm-12 mt-5');
+
+    }
+
     function render_resumen_pedidos($recibos, $lista_estados, $param)
     {
 
@@ -587,7 +645,7 @@ if (!function_exists('invierte_date_time')) {
                           $es_orden_cancelada, $intento_recuperacion)
     {
 
-        $se_pago_administrador = ( $saldo_cubierto > 0);
+        $se_pago_administrador = ($saldo_cubierto > 0);
 
         if ($se_pago_administrador) {
             $str = _text_('intentos de segunda reventa', $intento_reventa);
@@ -1360,10 +1418,54 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-//    function get_link_saldo_enid($id_usuario, $id_recibo)
-//    {
-//
-//        return "../movimientos/?q=transfer&action=8&operacion=" . $id_usuario . "&recibo=" . $id_recibo;
-//    }
+    function repartidor_disponible($repartidores_en_entrega, $repartidores)
+    {
 
+        $array_repartidores = array_column($repartidores, 'idusuario');
+        $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
+
+        $id_usuario = 1;
+        if ($array_repartidores_entrega[0] < 1) {
+
+            $id_usuario = $array_repartidores[0];
+
+        } else {
+
+            $ocupados = array_intersect($array_repartidores, $array_repartidores_entrega);
+            $disponibles = elimina_ocupados($array_repartidores, $ocupados);
+            $id_usuario = proximo_disponible($disponibles, $id_usuario);
+
+        }
+
+        return $id_usuario;
+
+    }
+
+    function elimina_ocupados($array_repartidores, $ocupados)
+    {
+
+        for ($a = 0; $a < count($ocupados); $a++) {
+
+            $ocupado = $ocupados[$a];
+            $index = array_search($ocupado, $array_repartidores);
+            if ($index !== false) {
+                unset($array_repartidores[$index]);
+            }
+        }
+        return $array_repartidores;
+    }
+
+    function proximo_disponible($disponibles, $id_usuario)
+    {
+
+        foreach ($disponibles as $row) {
+
+            if ($row > 0) {
+                $id_usuario = $row;
+            }
+            break;
+        }
+
+        return $id_usuario;
+    }
 }
