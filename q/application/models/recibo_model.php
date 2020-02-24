@@ -1117,5 +1117,49 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get);
     }
 
+    function reparto_recoleccion()
+    {
+
+        $query_get = "SELECT 
+                        p.id_proyecto_persona_forma_pago recibo ,
+                        p.id_servicio ,
+                        p.fecha_contra_entrega, 
+                        p.saldo_cubierto, 
+                        p.fecha_contra_entrega, 
+                        p.tipo_entrega ,
+                        p.num_ciclos_contratados , 
+                        p.monto_a_pagar ,
+                        p.costo_envio_cliente, 
+                        u.nombre nombre_repartidor , 
+                        u.apellido_paterno apellido_repartidor   ,
+                        t.nombre nombre_tipo_entrega
+                        FROM proyecto_persona_forma_pago p 
+                        INNER JOIN usuario u 
+                        ON p.id_usuario_entrega = u.idusuario  
+                        INNER JOIN tipo_entrega t 
+                        ON 
+                        t.id =  p.tipo_entrega
+                        WHERE saldo_cubierto > 0 and efectivo_en_casa < 1";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
+    function espacios($id_recibo)
+    {
+
+        $query_get = "SELECT id_usuario_entrega FROM proyecto_persona_forma_pago 
+                        WHERE  
+                        id_proyecto_persona_forma_pago != '" . $id_recibo . "' 
+                        AND  
+                        fecha_contra_entrega = (
+                        SELECT fecha_contra_entrega 
+                        FROM proyecto_persona_forma_pago 
+                        WHERE 
+                        id_proyecto_persona_forma_pago = '" . $id_recibo . "') 
+                        ORDER BY id_usuario_entrega DESC";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 
 }   

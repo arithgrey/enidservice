@@ -153,17 +153,22 @@ class recibo extends REST_Controller
         if (fx($param, "id")) {
 
             $id_recibo = $param['id'];
-
             $params = [
                 "status" => 16,
                 "saldo_cubierto" => 0,
                 'se_cancela' => 0,
                 'cancela_cliente' => 0
             ];
-            $in = ["id_proyecto_persona_forma_pago" => $param["id"]];
+
+            $in = ["id_proyecto_persona_forma_pago" => $id_recibo];
+            $repartidores = $this->repartidores();
+            $repartidores_en_entrega = $this->recibo_model->espacios($id_recibo);
+            $id_usuario = repartidor_disponible($repartidores_en_entrega, $repartidores);
+            $params['id_usuario_entrega'] = $id_usuario;
+
             $response = $this->recibo_model->update($params, $in);
         }
-        $this->response($response);
+            $this->response($response);
     }
 
 
@@ -783,6 +788,27 @@ class recibo extends REST_Controller
 
     }
 
+    function reparto_recoleccion_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "v")) {
+
+            $response = $this->recibo_model->reparto_recoleccion();
+            if ($param['v'] == 1) {
+
+                $response = $this->add_imgs_servicio($response);
+                $response = cuentas_por_cobrar_reparto($response);
+
+            }
+
+        }
+
+        $this->response($response);
+    }
+
+
     function get_estatus_enid_service($q)
     {
 
@@ -936,7 +962,8 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    private function add_tipificacion($q)
+    private
+    function add_tipificacion($q)
     {
 
         return $this->app->api("tipificacion_recibo/index", $q, "json", "POST");
@@ -967,7 +994,8 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    private function set_status($param)
+    private
+    function set_status($param)
     {
         $param["id_recibo"] = $param["recibo"];
         $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
@@ -988,7 +1016,8 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    private function solicita_encuenta($id_recibo)
+    private
+    function solicita_encuenta($id_recibo)
     {
 
         $recibo = $this->recibo_model->q_get([
@@ -1061,7 +1090,8 @@ class recibo extends REST_Controller
 
     }
 
-    private function status_enid($q = [])
+    private
+    function status_enid($q = [])
     {
         return $this->app->api("status_enid_service/index/format/json/", $q);
     }
@@ -1218,4 +1248,9 @@ class recibo extends REST_Controller
 
     }
 
+    function repartidores()
+    {
+
+        return $this->app->api("usuario_perfil/repartidores/format/json/");
+    }
 }

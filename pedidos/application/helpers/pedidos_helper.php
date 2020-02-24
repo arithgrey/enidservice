@@ -896,6 +896,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
     function get_form_busqueda_pedidos($data, $param)
     {
 
@@ -997,14 +998,13 @@ if (!function_exists('invierte_date_time')) {
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
-        $response[] = d(_titulo("TUS ORDENES DE COMPRA EN CURSO"), ' col-sm-10 col-sm-offset-1 mt-5');
+        $response[] = d(_titulo("TUS ORDENES DE COMPRA"), ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d(_titulo("busqueda", 3), ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
         return append($response);
 
 
     }
-
 
     function frm_busqueda()
     {
@@ -2898,42 +2898,4 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
-//    function lista_puntos_encuentro(
-//        $tipo_entrega,
-//        $puntos_encuentro,
-//        $id_recibo,
-//        $domicilio = ''
-//    )
-//    {
-//
-//        $asignado = (is_array($domicilio) && $domicilio["tipo_entrega"] == 1) ? $domicilio["domicilio"][0]["id"] : 0;
-//        $a = 1;
-//        $r = [];
-//        foreach ($puntos_encuentro as $row) {
-//
-//            $id = $row["id"];
-//            $extra = ($id === $asignado) ? "asignado_actualmente" : "";
-//            $str = [];
-//            $str[] = d("#" . $a, ["class" => "f15"], 1);
-//            $str[] = d($row["nombre"], 1);
-//            $modificar = ($tipo_entrega < 2) ? " establecer_punto_encuentro " : "";
-//
-//            $str[] = btn("ESTABLECER COMO PUNTO DE ENTREGA",
-//                [
-//                    "class" => "h6 text-muted text-right  cursor_pointer  btn_direccion  " . $modificar,
-//                    "id" => $id,
-//                    "id_recibo" => $id_recibo,
-//
-//                ]
-//            );
-//            $r[] = d(append($str),
-//                "top_50 border padding_10 contenedor_listado d-flex flex-column justify-content-between " . $extra);
-//
-//            $a++;
-//        }
-//
-//        return append($r);
-//
-//    }
 }

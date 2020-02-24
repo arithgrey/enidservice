@@ -237,7 +237,7 @@ class Home extends CI_Controller
     private function load_view_seguimiento($data, $param, $recibo, $id_recibo)
     {
 
-        $data['url_img_post'] = path_enid('rastreo_pedido',0,1);
+        $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
         if (es_data($recibo)) {
 
             $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
@@ -415,14 +415,15 @@ class Home extends CI_Controller
 
     private function busqueda_pedidos($param, $data)
     {
-
         $es_administrador = in_array($data['id_perfil'], [3]);
         $comisionistas = [];
+
         if ($es_administrador) {
             $comisionistas = $this->usuarios_comisionistas();
         }
         $data['comisionistas'] = $comisionistas;
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
+
     }
 
     private function usuarios_comisionistas()
@@ -624,6 +625,14 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("lista_negra/index/format/json/", ['id_usuario' => $id_usuario]);
+    }
+
+    private function cuentas_sin_recoleccion($q)
+    {
+
+        $q['v'] = 1;
+        return $this->app->api("recibo/reparto_recoleccion/format/json/", $q);
+
     }
 
 

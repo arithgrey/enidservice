@@ -67,6 +67,18 @@ class usuario_perfil extends REST_Controller
         $this->response($this->concatena_nombres($response));
     }
 
+    function repartidores_GET()
+    {
+
+        $params =
+            [
+                "idperfil" => 21,
+                "status" => 1
+            ];
+        $response = $this->usuario_perfil_model->get([], $params, 100);
+        $this->response($response);
+    }
+
     private function concatena_nombres($data)
     {
 
