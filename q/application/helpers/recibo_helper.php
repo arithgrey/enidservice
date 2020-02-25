@@ -473,7 +473,7 @@ if (!function_exists('invierte_date_time')) {
                 $text,
                 [
                     'id' => $recibo,
-                    'class' => _text_('row cursor_pointer mt-md-0 text-center text-md-left mt-5 black'),
+                    'class' => _text_('efectivo_fuera row cursor_pointer mt-md-0 text-center text-md-left mt-5 black'),
                     'href' => path_enid('pedidos_recibo', $recibo)
                 ], 0
             );
@@ -505,12 +505,10 @@ if (!function_exists('invierte_date_time')) {
             $repatidores_involucrados = count($repatidores);
             $total_repartidores = dd('#Repartidores', $repatidores_involucrados);
 
-            $total_por_cobro = dd('Total por cobro', money($total));
-
+            $btn = btn('REGISTRAR COMO COBRADO', ['class' => 'efectivo_en_casa']);
+            $total_por_cobro = _d('Total por cobro', d(money($total),'total_a_pago'), $btn);
             $contenido[] = d($total_repartidores, $base);
             $contenido[] = d($total_por_cobro, $base);
-
-
             $response[] = d($contenido, 13);
 
         }

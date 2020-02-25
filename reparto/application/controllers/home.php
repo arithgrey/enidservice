@@ -17,11 +17,9 @@ class Home extends CI_Controller
     function index()
     {
 
-
         $param = $this->input->post();
         $data = $this->app->session();
         $this->seguimiento_pedido($param, $data);
-
 
     }
 
@@ -43,7 +41,7 @@ class Home extends CI_Controller
     {
         
         $data['recibos'] = $this->cuentas_sin_recoleccion($param);
-        $form = busqueda_reparto($data);
+        $form = busqueda_reparto($data,$param);
         $this->app->pagina($data, $form, 1);
 
     }
