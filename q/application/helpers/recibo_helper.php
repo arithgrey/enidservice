@@ -429,6 +429,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $listado = [];
+        $total = 0;
         foreach ($recibos as $row) {
 
             $recibo = $row["recibo"];
@@ -443,7 +444,7 @@ if (!function_exists('invierte_date_time')) {
             $img = img(
                 [
                     "src" => $url_img,
-                    "class" => "mx-auto d-block pedido_img"
+                    "class" => "mx-auto d-block mh_50 w_50"
                 ]
             );
 
@@ -456,8 +457,8 @@ if (!function_exists('invierte_date_time')) {
 
             $items = [];
             $contenido = [];
-
             $numero_recibo = span($recibo, 'd-md-block d-none');
+            $total = $total + $monto_a_pagar;
             $items[] = money($monto_a_pagar);
 
             $contenido[] = d($numero_recibo, 'col border descripcion_compra fp8 text-center text-uppercase');
@@ -479,8 +480,41 @@ if (!function_exists('invierte_date_time')) {
 
             $listado[] = $line;
         }
-        return d($listado, 'col-sm-12 mt-5');
 
+        $response[] = totales_cuentas_pago($total, $recibos);
+        $response[] = d($listado, ' mt-5');
+        return d($response, 'col-sm-12 mt-5');
+
+    }
+
+    function totales_cuentas_pago($total, $recibos)
+    {
+
+        $response = [];
+        if (es_data($recibos)) {
+
+
+            $ids_usuario_entrega = array_column($recibos, 'id_usuario_entrega');
+            $repatidores = array_unique($ids_usuario_entrega);
+            $base = 'col border descripcion_compra fp8 text-center text-uppercase';
+
+
+            $total_recibos = dd('#Recibos', count($recibos));
+            $contenido[] = d($total_recibos, $base);
+
+            $repatidores_involucrados = count($repatidores);
+            $total_repartidores = dd('#Repartidores', $repatidores_involucrados);
+
+            $total_por_cobro = dd('Total por cobro', money($total));
+
+            $contenido[] = d($total_repartidores, $base);
+            $contenido[] = d($total_por_cobro, $base);
+
+
+            $response[] = d($contenido, 13);
+
+        }
+        return append($response);
     }
 
     function render_resumen_pedidos($recibos, $lista_estados, $param)

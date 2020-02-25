@@ -200,10 +200,12 @@ class usuario_model extends CI_Model
         $this->create_tmp_usuarios_perfil(0, $_num, $id_perfil);
         $query_get =
             "SELECT
-                    nombre
+                    u.idusuario
+                    ,nombre
                     ,email 
                     ,apellido_paterno 
-                    ,apellido_materno 
+                    ,apellido_materno ,
+                    CONCAT(nombre,' ', apellido_paterno ) nombre_completo
                     FROM  usuario u
                     INNER JOIN 
                     tmp_clienes_$_num up 
