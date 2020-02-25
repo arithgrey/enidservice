@@ -795,7 +795,7 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "v")) {
 
-            $response = $this->recibo_model->reparto_recoleccion();
+            $response = $this->recibo_model->reparto_recoleccion($param);
             if ($param['v'] == 1) {
 
                 $response = $this->add_imgs_servicio($response);

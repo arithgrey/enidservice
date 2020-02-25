@@ -18,24 +18,21 @@ class Home extends CI_Controller
     {
 
 
-        $param = $this->input->get();
+        $param = $this->input->post();
         $data = $this->app->session();
         $this->seguimiento_pedido($param, $data);
 
 
     }
 
-
-
     function seguimiento_pedido($param, $data)
     {
 
         $data = $this->app->cssJs($data, 'reparto');
-
         $data += [
-            "tipos_entregas" => $this->get_tipos_entregas([])
+            "tipos_entregas" => $this->get_tipos_entregas([]),
+            "repartidores" => $this->repartidores(),
         ];
-
 
         $this->busqueda_pedidos($param, $data);
 
@@ -44,13 +41,13 @@ class Home extends CI_Controller
 
     private function busqueda_pedidos($param, $data)
     {
-
+        
         $data['recibos'] = $this->cuentas_sin_recoleccion($param);
         $form = busqueda_reparto($data);
         $this->app->pagina($data, $form, 1);
 
     }
-    
+
     private function get_tipos_entregas($q)
     {
 
@@ -63,6 +60,14 @@ class Home extends CI_Controller
 
         $q['v'] = 1;
         return $this->app->api("recibo/reparto_recoleccion/format/json/", $q);
+
+    }
+
+    private function repartidores()
+    {
+
+        $q['id_perfil'] = 21;
+        return $this->app->api("usuario/perfiles/format/json/", $q);
 
     }
 

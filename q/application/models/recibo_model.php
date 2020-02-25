@@ -1117,8 +1117,21 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get);
     }
 
-    function reparto_recoleccion()
+    function reparto_recoleccion($param)
     {
+
+        $tipo_entrega = prm_def($param, 'tipo_entrega');
+        $extra_tipo_entrega = ($tipo_entrega > 0) ? " AND p.tipo_entrega = '" . $tipo_entrega . "' " : '';
+        $repartidor = prm_def($param, 'repartidor');
+        $extra_repartidor = ($repartidor > 0) ? " AND p.id_usuario_entrega = '" . $repartidor . "' " : '';
+
+
+        $fecha_inicio = prm_def($param, 'fecha_inicio');
+        $fecha_termino = prm_def($param, 'fecha_termino');
+        $ops_tipo_orden = ["", "fecha_registro", "fecha_entrega", "fecha_cancelacion", "fecha_pago", "fecha_contra_entrega"];
+        $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_entrega] . ") BETWEEN '" . $fecha_inicio . "' AND '" . $fecha_termino . "' ";
+        $extra_fecha = ($tipo_entrega > 0) ? $extra : '';
+
 
         $query_get = "SELECT 
                         p.id_proyecto_persona_forma_pago recibo ,
@@ -1128,6 +1141,7 @@ class Recibo_model extends CI_Model
                         p.fecha_contra_entrega, 
                         p.tipo_entrega ,
                         p.num_ciclos_contratados , 
+                        p.id_usuario_entrega , 
                         p.monto_a_pagar ,
                         p.costo_envio_cliente, 
                         u.nombre nombre_repartidor , 
@@ -1139,7 +1153,7 @@ class Recibo_model extends CI_Model
                         INNER JOIN tipo_entrega t 
                         ON 
                         t.id =  p.tipo_entrega
-                        WHERE saldo_cubierto > 0 and efectivo_en_casa < 1";
+                        WHERE saldo_cubierto > 0 and efectivo_en_casa < 1 " . $extra_repartidor . $extra_tipo_entrega . $extra_fecha;
 
         return $this->db->query($query_get)->result_array();
     }
