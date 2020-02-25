@@ -168,7 +168,7 @@ class recibo extends REST_Controller
 
             $response = $this->recibo_model->update($params, $in);
         }
-            $this->response($response);
+        $this->response($response);
     }
 
 
@@ -1243,6 +1243,22 @@ class recibo extends REST_Controller
             $id_recibo = $param['recibo'];
             $response = $this->recibo_model->notificacion_intento_recuperacion($id_recibo);
 
+        }
+        $this->response($response);
+
+    }
+
+    function efectivo_en_casa_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (array_key_exists('recibos', $param)) {
+
+            $recibos = $param['recibos'];
+            if (es_data($recibos)) {
+
+                $response = $this->recibo_model->recibos_efectivo_en_casa($recibos);
+            }
         }
         $this->response($response);
 

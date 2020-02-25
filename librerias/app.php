@@ -598,8 +598,15 @@ class app extends CI_Controller
             ,
             "reparto" =>
                 [
-                    "css" => ["reparto.css"],
-                    "js" => []
+                    "css" => [
+                        "reparto.css",
+                        "confirm-alert.css",
+
+                    ],
+                    "js" => [
+                        'reparto/principal.js',
+                        "alerts/jquery-confirm.js",
+                    ]
                 ]
             ,
             "pedidos_costos_operacion" =>
