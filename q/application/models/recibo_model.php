@@ -1224,4 +1224,32 @@ class Recibo_model extends CI_Model
 
     }
 
+    function franja_horaria($franja_horaria, $id_usuario, $id_perfil)
+    {
+
+        $casos = [
+            3 => '1 = 1',
+            6 => 'id_usuario_referencia = "' . $id_usuario . '"',
+            21 => 'id_usuario_entrega = "' . $id_usuario . '"',
+        ];
+        $extra_usuario = $casos[$id_perfil];
+
+        $query_get = 'SELECT 
+                        id_proyecto_persona_forma_pago, 
+                        id_servicio,
+                        num_ciclos_contratados ,
+                        fecha_contra_entrega
+                        FROM proyecto_persona_forma_pago 
+                        WHERE
+                        (
+                            fecha_entrega = "' . $franja_horaria . '"
+                            OR
+                            fecha_contra_entrega = "' . $franja_horaria . '" 
+                             
+                        )
+                        AND ' . $extra_usuario . ' ';
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 }   

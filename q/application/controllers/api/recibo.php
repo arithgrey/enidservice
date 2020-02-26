@@ -1275,6 +1275,27 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function franja_horaria_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        $data = $this->app->get_session();
+        if (fx($param, "franja_horaria,v")) {
+
+            $id_usuario = $data['idusuario'];
+            $id_perfil = $this->app->getperfiles();
+
+            $franja_horaria = $param['franja_horaria'];
+            $ordenes = $this->recibo_model->franja_horaria($franja_horaria, $id_usuario, $id_perfil);
+            $response = $this->add_imgs_servicio($ordenes);
+            if ($param['v'] > 0) {
+                $response = tracker_franja_horaria($response);
+            }
+        }
+        $this->response($response);
+    }
+
     function repartidores()
     {
 

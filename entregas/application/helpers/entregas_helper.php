@@ -30,17 +30,42 @@ if (!function_exists('invierte_date_time')) {
 
 
         $horarios = array_horarios();
-        $response[] = d(format_fecha($fecha), _text_(_strong, 'border-bottom'));
+        $fecha_titulo = d(format_fecha($fecha), _strong);
         $fechas_contra_entrega = array_column($proximas_entregas, 'fecha_contra_entrega');
 
+        $total_dia = 0;
         foreach ($horarios as $row) {
 
-
             $total_pedidos_franja_horaria = busqueda_horario($row, $fecha, $fechas_contra_entrega);
-            $extra = ($total_pedidos_franja_horaria > 0) ? 'text-white bg-dark' : '';
-            $response[] = d(_d($row, $total_pedidos_franja_horaria), _text_('border-bottom mt-5', $extra));
+            $extra = ($total_pedidos_franja_horaria > 0) ? 'text-white bg-primary strong f11 entregas_franja_horaria cursor_pointer' : '';
+            if ($total_pedidos_franja_horaria > 0) {
+
+                $total_dia = ($total_dia + $total_pedidos_franja_horaria);
+            }
+
+            $text_entregas_franja_horaria = ($total_pedidos_franja_horaria > 0) ? $total_pedidos_franja_horaria : '';
+
+            $franja = _text($fecha, ' ', $row);
+            $response[] = d(
+                _d($row, $text_entregas_franja_horaria),
+                [
+                    'class' => _text_('border-bottom mt-5', $extra),
+                    'onclick' => 'busqueda_ordenes_franja_horaria("' . $franja . '")',
+                ]
+
+            );
 
         }
+
+        $str_total = ($total_dia > 0) ? $total_dia : '';
+        $entregas_programadas = d($str_total);
+        $text = ($total_dia > 0) ? 'Entregas programadas' : 'Sin entregas';
+        $bottom = ($total_dia > 0) ? '' : 'mb-4';
+        $str_entregas = d($text, _text_('fp8 text-uppercase', $bottom));
+
+        $totales = d(_text_($str_entregas, $entregas_programadas), 'border-bottom');
+        array_unshift($response, $totales);
+        array_unshift($response, $fecha_titulo);
         return d($response, 'border col-md-2 text-center border-secondary p-0');
     }
 
@@ -49,7 +74,6 @@ if (!function_exists('invierte_date_time')) {
 
         $pedidos_en_horario = 0;
         foreach ($lista_horarios as $row) {
-
             $fecha_entrega = date_create($row)->format('Y-m-d');
             if ($fecha_entrega == $fecha_calendario) {
                 $hora_entrega = date_create($row)->format('H:i');
@@ -57,7 +81,6 @@ if (!function_exists('invierte_date_time')) {
 
                     $pedidos_en_horario++;
                 }
-
             }
         }
         return $pedidos_en_horario;

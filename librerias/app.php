@@ -609,6 +609,19 @@ class app extends CI_Controller
                     ]
                 ]
             ,
+            'entregas' =>
+                [
+                    "css" => [
+                        "entregas.css",
+                        "confirm-alert.css",
+
+                    ],
+                    "js" => [
+                        'entregas/principal.js',
+                        "alerts/jquery-confirm.js",
+                    ]
+                ]
+            ,
             "pedidos_costos_operacion" =>
                 [
 
