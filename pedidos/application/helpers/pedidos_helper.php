@@ -857,7 +857,11 @@ if (!function_exists('invierte_date_time')) {
 
                     } else {
 
-                        $response[] = d(btn($clasificacion, ['style' => 'background:#0740ec!important;']), 'row mb-3');
+
+                        $path_tracker = path_enid('pedido_seguimiento', $id_recibo);
+                        $response[] = d(
+                            format_link($clasificacion, ['href' => $path_tracker]), 'row mb-3'
+                        );
                     }
 
                 }
@@ -1004,7 +1008,7 @@ if (!function_exists('invierte_date_time')) {
         $titulo = _titulo("TUS ORDENES DE COMPRA");
         $busqueda = _titulo("busqueda", 3);
 
-        $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas','','mr-1');
+        $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
         $link = format_link($text_entregas, ['href' => path_enid('entregas')]);
         $busqueda_calendario = flex($busqueda, $link, _between);
         $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');

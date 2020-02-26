@@ -52,7 +52,7 @@ class Inicio extends CI_Controller
                 break;
 
             case 21:
-                $module = "location:../pedidos/?reparto=1";
+                $module = "location:../entregas";
                 break;
 
             default:

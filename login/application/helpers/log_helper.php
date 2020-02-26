@@ -173,9 +173,19 @@ if (!function_exists('invierte_date_time')) {
             'nombre_perfil' => 'Quiero comprar',
             'id_perfil' => 20
         ];
+        $perfil[] = [
+            'nombre_perfil' => 'Quiero hacer entregas',
+            'id_perfil' => 21
+        ];
 
-
-        $r[] = create_select($perfil, 'perfil', 'perfil form-control mt-5', 'perfil', 'nombre_perfil', 'id_perfil');
+        $r[] = create_select(
+            $perfil,
+            'perfil',
+            'perfil form-control mt-5',
+            'perfil',
+            'nombre_perfil',
+            'id_perfil'
+        );
         $r[] = place("place_password_afiliado");
         $r[] = btn('Registrar',
             [

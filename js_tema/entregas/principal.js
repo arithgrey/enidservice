@@ -8,7 +8,6 @@ let busqueda_ordenes_franja_horaria = (franja) => {
 };
 let response_entregas_franja_horaria = (data) => {
 
-
     modal(data);
 
 };
