@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(d($re, 12), 8);
 
-        $seccion_venta = cliente_compra_inf(
+        $seccion_venta = cliente_compra_inf($es_venta_cancelada,
             $r, $data["tipos_entregas"], $domicilio, $num_compras, $usuario,
             $id_recibo, $cupon, $es_vendedor, $id_perfil, $status_ventas, $data);
         $response[] = d(
@@ -761,19 +761,17 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function cliente_compra_inf(
-        $recibo, $tipos_entregas, $domicilio,
-        $num_compras, $usuario, $id_recibo,
-        $cupon, $es_vendedor, $id_perfil, $status_ventas, $data)
+    function cliente_compra_inf($es_venta_cancelada,
+                                $recibo, $tipos_entregas, $domicilio,
+                                $num_compras, $usuario, $id_recibo,
+                                $cupon, $es_vendedor, $id_perfil, $status_ventas, $data)
     {
 
 
         $menu = menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor);
         $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
-//        $r[] = tracker($id_recibo);
-//        $r[] = imprimir_recibo($recibo, $tipos_entregas);
+        $r[] = enviar_a_reparto($es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
         $r[] = tiene_domilio($domicilio);
 
 
@@ -804,60 +802,65 @@ if (!function_exists('invierte_date_time')) {
         return d($link);
     }
 
-    function enviar_a_reparto($domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
+    function enviar_a_reparto($es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
     {
 
+
         $response = [];
-        $punto_encuentro = "";
-        $tipo_entrega = 0;
-        $es_domicilio = es_data($domicilio);
-
-        if ($es_domicilio) {
-
-            $domicilio_entrega = $domicilio["domicilio"];
-            $tipo_entrega = $domicilio["tipo_entrega"];
-            $punto_encuentro = ($tipo_entrega != 1) ? "" : text_punto_encuentro($domicilio_entrega, $recibo);
-        }
-
-        if ($tipo_entrega == 1) {
-
-            if ($es_vendedor || $id_perfil != 20) {
-
-                $status_recibo = pr($recibo, 'status');
-
-                $clasificacion = search_bi_array(
-                    $status_ventas,
-                    "id_estatus_enid_service",
-                    $status_recibo,
-                    "text_vendedor",
-                    ""
-                );
+        if (!$es_venta_cancelada) {
 
 
-                $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
-                    [
-                        'style' => 'background:#0740ec!important;'
-                    ]
-                );
-                $link = a_enid(
-                    $pedido,
-                    [
+            $punto_encuentro = "";
+            $tipo_entrega = 0;
+            $es_domicilio = es_data($domicilio);
 
-                        'class' => _text_(_mbt5_md, 'w-100'),
-                        "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
+            if ($es_domicilio) {
 
-                    ]
-                );
-                $sin_boton_envio = [16];
-                if (!in_array($status_recibo, $sin_boton_envio)) {
+                $domicilio_entrega = $domicilio["domicilio"];
+                $tipo_entrega = $domicilio["tipo_entrega"];
+                $punto_encuentro = ($tipo_entrega != 1) ? "" : text_punto_encuentro($domicilio_entrega, $recibo);
+            }
 
-                    $response[] = d($link, 'row mb-3');
+            if ($tipo_entrega == 1) {
 
-                } else {
+                if ($es_vendedor || $id_perfil != 20) {
 
-                    $response[] = d(btn($clasificacion, ['style' => 'background:#0740ec!important;']), 'row mb-3');
+                    $status_recibo = pr($recibo, 'status');
+
+                    $clasificacion = search_bi_array(
+                        $status_ventas,
+                        "id_estatus_enid_service",
+                        $status_recibo,
+                        "text_vendedor",
+                        ""
+                    );
+
+
+                    $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
+                        [
+                            'style' => 'background:#0740ec!important;'
+                        ]
+                    );
+                    $link = a_enid(
+                        $pedido,
+                        [
+
+                            'class' => _text_(_mbt5_md, 'w-100'),
+                            "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
+
+                        ]
+                    );
+                    $sin_boton_envio = [16];
+                    if (!in_array($status_recibo, $sin_boton_envio)) {
+
+                        $response[] = d($link, 'row mb-3');
+
+                    } else {
+
+                        $response[] = d(btn($clasificacion, ['style' => 'background:#0740ec!important;']), 'row mb-3');
+                    }
+
                 }
-
             }
         }
 

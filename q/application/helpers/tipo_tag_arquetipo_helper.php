@@ -19,6 +19,8 @@ if (!function_exists('invierte_date_time')) {
         $form[] = d(_titulo('¿Qué acción realizasté?', 3), 'acccion_realizada text-left');
         $accciones[] = ['text' => 'Mandé mensaje recordando su venta de hace tiempo y ofrecí nuevos artículos con la página web'];
         $accciones[] = ['text' => 'Le recordé que quería otro artículo y que tenemos pendiente su nueva entrega'];
+        $accciones[] = ['text' => 'No tiene whatsApp debemos investigar otro medio de contacto'];
+        $accciones[] = ['text' => 'Envié video sobre algún artículo nuevo'];
 
         $form[] = create_select($accciones,
             'accion_reventa',

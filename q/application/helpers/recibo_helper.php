@@ -861,124 +861,6 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
-
-    /*
-    function get_texto_saldo_pendiente($monto_a_liquidar, $monto_a_pagar, $modalidad_ventas)
-    {
-
-        $texto = "";
-        if ($modalidad_ventas == 1) {
-
-            $texto = ($monto_a_liquidar > 0) ? d("MONTO DE LA COMPRA", 'text-saldo-pendiente') . d($monto_a_pagar . "MXN", "text-saldo-pendiente-monto") : $texto;
-
-        } else {
-
-            $texto = ($monto_a_liquidar > 0) ?
-                add_text(
-                    d("SALDO PENDIENTE", 'text-saldo-pendiente')
-                    ,
-                    d(add_text($monto_a_liquidar, "MXN"), "text-saldo-pendiente-monto")
-                ) : $texto;
-
-
-        }
-
-        return d($texto, 'contenedor-saldo-pendiente');
-
-    }
-    */
-
-    /*
-    function monto_pendiente_cliente($monto, $saldo_cubierto, $costo, $num_ciclos)
-    {
-
-        return ($monto * $num_ciclos) + $costo;
-
-    }
-    */
-    /*
-    function evalua_texto_envios_compras($modalidad_ventas, $total, $tipo)
-    {
-
-        $text = "";
-        switch ($tipo) {
-            case 1:
-                if ($modalidad_ventas > 0) {
-
-                    $text = "DATE PRISA MANTÉN EXCELENTE REPUTACIÓN ENVIA TU ARTÍCULO EN VENTA DE FORMA PUNTUAL";
-                    $text_2 = "Date prisa, mantén una buena reputación enviando tus  $total articulos vendidos de forma puntual";
-                    $text = ($total == 1) ? $text : $text_2;
-
-                }
-
-                break;
-
-
-            case 6:
-                if ($modalidad_ventas < 1) {
-
-                    $text = "DATE PRISA REALIZA TU COMPRA ANTES DE QUE OTRA PERSONA SE LLEVE TU PEDIDO!";
-
-                }
-                break;
-
-            default:
-
-                break;
-        }
-
-        $text = d($text, ['class' => 'alert alert-info', 'style' => 'margin-top: 10px;background: #001541;color: white']);
-        return $text;
-    }
-*/
-    /*
-    function get_text_direccion_envio($id_recibo, $modalidad_ventas, $direccion_registrada, $estado_envio)
-    {
-
-        $texto = "";
-        if ($modalidad_ventas == 0) {
-
-            $texto = text_icon('fa fa-bus ', "¿DÓNDE ENVIAMOS TU PEDIDO?", ["id" => $id_recibo]);
-            if ($direccion_registrada > 0) {
-                switch ($estado_envio) {
-                    case 0:
-                        $texto = text_icon("fa fa-bus", "A LA BREVEDAD EL VENDEDOR TE ENVIARÁ TU PEDIDO");
-                        break;
-
-                    default:
-                        $texto = text_icon('fa fa-bus', "DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]);
-                        break;
-                }
-
-            }
-
-        } else {
-
-            $texto = ($direccion_registrada == 1) ? text_icon('fa fa-bus ', "VER DIRECCIÓN DE ENVÍO", ["id" => $id_recibo]) : $texto;
-
-        }
-
-        return d($texto, ["class" => "btn_direccion_envio", "id" => $id_recibo]);
-    }
-    */
-    /*
-    function get_estados_ventas($data, $indice, $modalidad_ventas)
-    {
-
-        $response = "";
-        foreach ($data as $row) {
-
-            if ($row["id_estatus_enid_service"] == $indice) {
-
-                $response = ($modalidad_ventas == 1) ? $row["text_vendedor"] : $row["text_cliente"];
-
-                break;
-            }
-        }
-
-        return $response;
-    }
-    */
     function carga_estado_compra($id_recibo, $vendedor = 0)
     {
 
@@ -1055,58 +937,6 @@ if (!function_exists('invierte_date_time')) {
             _titulo(mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS"));
 
     }
-
-    /*
-    function get_mensaje_compra($modalidad, $num_ordenes)
-    {
-
-
-        $response = "";
-        if ($modalidad == 0 && $num_ordenes == 0) {
-            $final = d(
-                img(
-                    [
-                        "src" => "../img_tema/tienda_en_linea/carrito_compra.jpg",
-                        "class" => "img_invitacion_compra"
-                    ]
-                )
-                ,
-                "img_center_compra"
-            );
-
-            $f = a_enid($final, path_enid("home"));
-
-            $f .= a_enid(
-                h(
-                    "EXPLORAR TIENDA"
-                    ,
-                    3, "text-center text_explorar_tienda"
-                ), path_enid("home")
-            );
-
-            $response = $f;
-        }
-        return $response;
-    }
-
-    function agregar_direccion_envio($id_recibo)
-    {
-
-        return d(
-            text_icon("fa fa-bus", " Agrega la dirección de envío de tu pedido!")
-            ,
-            [
-                "class" => "btn_direccion_envio contenedor_agregar_direccion_envio_pedido a_enid_black cursor_pointer",
-                "id" => $id_recibo,
-                "href" => "#tab_mis_pagos",
-                "data-toggle" => "tab"
-            ],
-            1
-        );
-
-    }
-
-    */
 
     function format_direccion_envio($inf, $id_recibo, $recibo)
     {
@@ -1457,7 +1287,7 @@ if (!function_exists('invierte_date_time')) {
         $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
 
         $id_usuario = 1;
-        if ($array_repartidores_entrega[0] < 1) {
+        if (es_data($array_repartidores_entrega) && $array_repartidores_entrega[0] < 1) {
 
             $id_usuario = $array_repartidores[0];
 
