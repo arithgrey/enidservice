@@ -1425,7 +1425,7 @@ function microtime_float()
 function array_horarios($simple = 1)
 {
     //[FIXME]
-    if (array_horarios > 0) {
+    if ($simple > 0) {
 
         return [
             "08:00",

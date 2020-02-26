@@ -506,7 +506,7 @@ if (!function_exists('invierte_date_time')) {
             $total_repartidores = dd('#Repartidores', $repatidores_involucrados);
 
             $btn = btn('REGISTRAR COMO COBRADO', ['class' => 'efectivo_en_casa']);
-            $total_por_cobro = _d('Total por cobro', d(money($total),'total_a_pago'), $btn);
+            $total_por_cobro = _d('Total por cobro', d(money($total), 'total_a_pago'), $btn);
             $contenido[] = d($total_repartidores, $base);
             $contenido[] = d($total_por_cobro, $base);
             $response[] = d($contenido, 13);
@@ -861,6 +861,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+
     function carga_estado_compra($id_recibo, $vendedor = 0)
     {
 
@@ -1330,4 +1331,53 @@ if (!function_exists('invierte_date_time')) {
 
         return $id_usuario;
     }
+
+    function tracker_franja_horaria($recibos)
+    {
+
+        $fecha_contra_entrega = array_column($recibos, 'fecha_contra_entrega');
+        $fecha_hora = array_unique($fecha_contra_entrega);
+
+        $response = [];
+        if (es_data($fecha_contra_entrega)) {
+
+            $text = flex_md(
+                'entrega programada el',
+                format_fecha($fecha_contra_entrega[0], 1),
+                _between_md,
+                '',
+                _strong
+            );
+            $response[] = _titulo($text, 5);
+        }
+        foreach ($recibos as $row) {
+
+            $id_recibo = $row['id_proyecto_persona_forma_pago'];
+            $pedido = d(_text_('#', $id_recibo));
+            $num_ciclos_contratados = $row['num_ciclos_contratados'];
+            $img = img(
+                [
+                    "src" => $row['url_img_servicio'],
+                    'class' => 'w_50'
+                ]
+            );
+
+            $contenido = [];
+            $contenido[] = d($pedido);
+            $articulos = flex('Artículos ', $num_ciclos_contratados, _between, 'mr-2');
+            $contenido[] = d($articulos);
+            $contenido[] = d(_text_($img, 'Rastrear pedido'));
+            $linea = d($contenido, _text_('d-md-flex', _between_md, 'border p-2'));
+            $response[] = a_enid($linea,
+                [
+
+                    'href' => path_enid('pedido_seguimiento', $id_recibo),
+                    'class' => 'black'
+                ]
+
+            );
+        }
+        return append($response);
+    }
+
 }

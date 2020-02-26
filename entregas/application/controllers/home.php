@@ -17,8 +17,10 @@ class Home extends CI_Controller
     function index()
     {
 
-        $param = $this->input->post();
+
         $data = $this->app->session();
+        $this->app->acceso();
+        $data = $this->app->cssJs($data, "entregas");
         $id_usuario = $data['id_usuario'];
         $id_perfil = $data['id_perfil'];
         $data['proximas_entregas'] = $this->proximas_reparto($id_perfil, $id_usuario);
