@@ -1264,9 +1264,22 @@ class recibo extends REST_Controller
 
     }
 
+    function proximas_reparto_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_usuario,id_perfil")) {
+            $response = $this->recibo_model->proximas($param["id_usuario"], $param["id_perfil"]);
+        }
+        $this->response($response);
+    }
+
     function repartidores()
     {
 
         return $this->app->api("usuario_perfil/repartidores/format/json/");
     }
+
+
 }

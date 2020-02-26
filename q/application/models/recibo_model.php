@@ -924,9 +924,43 @@ class Recibo_model extends CI_Model
 						OR
 						DATE(fecha_vencimiento) <=  DATE(CURRENT_DATE())
 						OR
-						DATE(fecha_entrega) <=  DATE(CURRENT_DATE())
-						
+						DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
 						)   
+						";
+        return $this->db->query($query_get)->result_array();
+    }
+
+    function proximas($id_usuario, $id_perfil)
+    {
+
+        $casos = [
+            3 => ' 1 = 1',
+            6 => 'id_usuario_referencia = "' . $id_usuario . '"',
+            21 => 'id_usuario_entrega = "' . $id_usuario . '"',
+        ];
+        $extra_usuario = $casos[$id_perfil];
+        $query_get = "SELECT 
+						id_servicio, 
+						id_proyecto_persona_forma_pago	 id_recibo,
+						(monto_a_pagar * num_ciclos_contratados) total,
+						fecha_contra_entrega,
+						id_usuario_referencia,
+						id_usuario_entrega						 
+						FROM  proyecto_persona_forma_pago 
+						WHERE  
+						saldo_cubierto < 1  
+						AND " . $extra_usuario . " 						  
+						AND  se_cancela = 0
+						AND  status !=  10
+						AND 					
+						(
+                            DATE(fecha_contra_entrega) <=  DATE(CURRENT_DATE())
+                            OR
+                            DATE(fecha_vencimiento) <=  DATE(CURRENT_DATE())
+                            OR
+                            DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
+						) 
+						ORDER BY fecha_contra_entrega ASC  
 						";
         return $this->db->query($query_get)->result_array();
     }
