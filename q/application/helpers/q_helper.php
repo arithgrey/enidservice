@@ -1428,11 +1428,10 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        return [
 
+        return [
             "html" => append($r),
             "flag" => $f,
-
         ];
 
     }
@@ -1440,7 +1439,6 @@ if (!function_exists('invierte_date_time')) {
     function pendientes_cliente($info)
     {
 
-        $num_telefonico = $info["info_notificaciones"]["numero_telefonico"];
         $f = 0;
         $inf_notificacion = $info["info_notificaciones"];
 
@@ -1464,25 +1462,16 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $direccion["flag"];
 
 
-        $direccion_envio = add_direccion_envio($info["flag_direccion"]);
-        $f = $f + $direccion_envio["flag"];
-
-
-        $numtelefonico = add_numero_telefonico($num_telefonico);
-        $f = $f + $numtelefonico["flag"];
-
-
         $response["num_tareas_pendientes_text"] = $f;
         $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
-
+        $menu_ventas_semana = menu_ventas_semana($info);
         $list = [
             $deuda["html"],
             $direccion["html"],
-            $direccion_envio["html"],
-            $numtelefonico["html"],
             $preguntas["html"],
             $respuestas["html"],
             d($compras_sin_cierre["html"], "top_20"),
+            $menu_ventas_semana
         ];
 
         $response["lista_pendientes"] =
@@ -1490,6 +1479,25 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
 
+    }
+
+    function menu_ventas_semana($data)
+    {
+
+
+        $id_perfil = $data['id_perfil'];
+        $es_reparto = (in_array($id_perfil, [6, 3, 1]));
+
+        $response = [];
+        if ($es_reparto) {
+
+            $link = format_link('Próximas entregas', ['href' => path_enid('entregas')]);
+            $response[] = d($link);
+
+        }
+
+
+        return append($response);
     }
 
     function add_preguntas_sin_lectura($preguntas, $es_vendedor = 0)

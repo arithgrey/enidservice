@@ -1960,6 +1960,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "login" => "login",
         "_login" => "../login",
         "vender" => "planes_servicios",
+        "entregas" => "entregas",
         "vender_nuevo" => "planes_servicios/?action=nuevo",
         "editar_producto" => "planes_servicios/?action=editar&servicio=",
         "sobre_enid" => "sobre_enidservice",

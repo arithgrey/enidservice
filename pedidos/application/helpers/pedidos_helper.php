@@ -1001,8 +1001,14 @@ if (!function_exists('invierte_date_time')) {
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
-        $response[] = d(_titulo("TUS ORDENES DE COMPRA"), ' col-sm-10 col-sm-offset-1 mt-5');
-        $response[] = d(_titulo("busqueda", 3), ' col-sm-10 col-sm-offset-1 mt-5');
+        $titulo = _titulo("TUS ORDENES DE COMPRA");
+        $busqueda = _titulo("busqueda", 3);
+
+        $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas','','mr-1');
+        $link = format_link($text_entregas, ['href' => path_enid('entregas')]);
+        $busqueda_calendario = flex($busqueda, $link, _between);
+        $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');
+        $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
         return append($response);
 
