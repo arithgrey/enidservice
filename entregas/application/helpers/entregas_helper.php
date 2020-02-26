@@ -46,13 +46,14 @@ if (!function_exists('invierte_date_time')) {
             $text_entregas_franja_horaria = ($total_pedidos_franja_horaria > 0) ? $total_pedidos_franja_horaria : '';
 
             $franja = _text($fecha, ' ', $row);
+            $config = [
+                'class' => _text_('border-bottom mt-5', $extra)
+            ];
+            if (($total_pedidos_franja_horaria > 0)) {
+                $config['onclick'] = 'busqueda_ordenes_franja_horaria("' . $franja . '")';
+            }
             $response[] = d(
-                _d($row, $text_entregas_franja_horaria),
-                [
-                    'class' => _text_('border-bottom mt-5', $extra),
-                    'onclick' => 'busqueda_ordenes_franja_horaria("' . $franja . '")',
-                ]
-
+                _d($row, $text_entregas_franja_horaria), $config
             );
 
         }

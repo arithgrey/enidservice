@@ -1705,15 +1705,13 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
+        $lista[] = menu_ventas_semana($info);
 
-        $response = [
+        return [
             "num_tareas_pendientes_text" => $f,
             "num_tareas_pendientes" => $new_flag,
             "lista_pendientes" => append($lista),
-
         ];
-
-        return $response;
 
     }
 
