@@ -514,6 +514,12 @@ class Home extends CI_Controller
         $usuario_comision = ($es_venta_comisionada) ? $this->get_usuario($id_usuario_referencia) : [];
         $es_lista_negra = $this->es_lista_negra($id_usuario);
 
+        $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
+        $es_administrador = es_administrador($data);
+        $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : 1;
+        $repartidor = ($es_administrador) ? $this->get_usuario($id_repartidor) : [];
+
+
         $data += [
             "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
             "usuario" => $this->get_usuario($id_usuario),
@@ -534,7 +540,9 @@ class Home extends CI_Controller
             "id_usuaario_actual" => $this->id_usuario,
             "es_venta_comisionada" => $es_venta_comisionada,
             "usuario_comision" => $usuario_comision,
-            "es_lista_negra" => $es_lista_negra
+            "es_lista_negra" => $es_lista_negra,
+            "repartidor" => $repartidor
+
         ];
 
 

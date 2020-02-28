@@ -2035,7 +2035,10 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 function text_icon($class_icono, $text, $att = [], $left = 1)
 {
 
-    return ($left > 0) ? (flex(icon($class_icono, $att), $text, _between)) : (flex($text, icon($class_icono, $att), _between));
+    $es_derecho = (!is_array($att) && $att == 0);
+    $izquierdo = (flex(icon($class_icono, $att), $text, _between));
+    $derecho = (flex($text, icon($class_icono, $att), _between));
+    return ($left > 0 && !$es_derecho) ? $izquierdo : $derecho;
 
 }
 
@@ -3309,4 +3312,38 @@ function strip_tags_content($text, $tags = '', $invert = FALSE)
     return $text;
 }
 
+function format_nombre($usuario)
+{
 
+    $response = "";
+    if (es_data($usuario)) {
+        $response = _text_(
+            $usuario[0]['nombre'],
+            $usuario[0]['apellido_paterno']
+        );
+    }
+    return $response;
+
+}
+
+function es_administrador_o_vendedor($data)
+{
+
+    return in_array($data['id_perfil'], $data['restricciones']['es_administrador_o_vendedor']);
+
+}
+
+function es_administrador($data)
+{
+
+    return in_array($data['id_perfil'], $data['restricciones']['es_administrador']);
+
+}
+
+function es_orden_entregada($recibo, $data)
+{
+
+    $status = prm_def($recibo, 'status');
+    return in_array($status, $data['restricciones']['orden_entregada']);
+
+}

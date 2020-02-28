@@ -78,9 +78,17 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(d($re, 12), 8);
 
-        $seccion_venta = cliente_compra_inf($es_venta_cancelada,
-            $r, $data["tipos_entregas"], $domicilio, $num_compras, $usuario,
-            $id_recibo, $cupon, $es_vendedor, $id_perfil, $status_ventas, $data);
+        $seccion_venta = compra(
+            $es_venta_cancelada,
+            $r,
+            $domicilio, $num_compras,
+            $usuario,
+            $id_recibo,
+            $cupon, $es_vendedor,
+            $id_perfil, $status_ventas,
+            $data
+        );
+
         $response[] = d(
             $seccion_venta, 4
         );
@@ -406,7 +414,10 @@ if (!function_exists('invierte_date_time')) {
                     $checkout = ticket_pago($recibo, [], 2);
                     $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
-                    $text_pago = _text_('A TU ENTREGA PAGARÁS', money($saldo_pendiente));
+                    $in_session = $data['in_session'];
+                    $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
+                        ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
+                    $text_pago = _text_($text_entrega, money($saldo_pendiente));
                     $pago_pendiente = _titulo($text_pago);
 
                     $status = pr($recibo, 'status');
@@ -664,7 +675,11 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_cantidad($recibo);
 
         $text_estado_venta = search_bi_array(
-            $status_ventas, 'id_estatus_enid_service', $id_status, 'text_vendedor');
+            $status_ventas,
+            'id_estatus_enid_service',
+            $id_status,
+            'text_vendedor'
+        );
 
         $response[] = d(_titulo($text_estado_venta, 2), 'col-sm-12 p-0 text-center');
         $response[] = d($r, "selector_estados_ventas mt-5 col-sm-12");
@@ -761,19 +776,24 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function cliente_compra_inf($es_venta_cancelada,
-                                $recibo, $tipos_entregas, $domicilio,
-                                $num_compras, $usuario, $id_recibo,
-                                $cupon, $es_vendedor, $id_perfil, $status_ventas, $data)
+    function compra($es_venta_cancelada,
+                    $recibo, $domicilio,
+                    $num_compras, $usuario, $id_recibo,
+                    $cupon, $es_vendedor,
+                    $id_perfil,
+                    $status_ventas,
+                    $data
+    )
     {
 
 
+        $tipos_entregas = $data['tipos_entregas'];
         $menu = menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor);
         $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = enviar_a_reparto($es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
+        $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
+        $r[] = repatidor($data, $id_recibo);
         $r[] = tiene_domilio($domicilio);
-
 
         $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
         $r[] = compras_cliente($num_compras);
@@ -785,6 +805,34 @@ if (!function_exists('invierte_date_time')) {
 
 
         return d($r, 12);
+
+    }
+
+    function repatidor($data, $id_recibo)
+    {
+
+        $response = [];
+        if (es_administrador($data)) {
+
+            $usuario = $data['repartidor'];
+            $nombre = format_nombre($usuario);
+            $id_usuario = pr($usuario, 'id_usuario');
+            $es_orden_pagada_entregada = es_orden_pagada_entregada($data);
+            $str = ($es_orden_pagada_entregada) ? 'Entregó' : 'Entregará';
+            $text = _text_($str, $nombre);
+            $text = text_icon(_editar_icon, $text, 0);
+            $reparto = format_link($text,
+                [
+                    'class' => 'repartidor',
+                    'id' => $id_recibo,
+                    'usuario' => $id_usuario
+                ],
+                0
+            );
+            $response[] = d($reparto, 'row mb-5');
+        }
+
+        return append($response);
 
     }
 
@@ -802,7 +850,7 @@ if (!function_exists('invierte_date_time')) {
         return d($link);
     }
 
-    function enviar_a_reparto($es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
+    function enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
     {
 
 
@@ -823,54 +871,67 @@ if (!function_exists('invierte_date_time')) {
 
             if ($tipo_entrega == 1) {
 
-                if ($es_vendedor || $id_perfil != 20) {
 
-                    $status_recibo = pr($recibo, 'status');
-
-                    $clasificacion = search_bi_array(
-                        $status_ventas,
-                        "id_estatus_enid_service",
-                        $status_recibo,
-                        "text_vendedor",
-                        ""
-                    );
-
-
-                    $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
-                        [
-                            'style' => 'background:#0740ec!important;'
-                        ]
-                    );
-                    $link = a_enid(
-                        $pedido,
-                        [
-
-                            'class' => _text_(_mbt5_md, 'w-100'),
-                            "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
-
-                        ]
-                    );
-                    $sin_boton_envio = [16];
-                    if (!in_array($status_recibo, $sin_boton_envio)) {
-
-                        $response[] = d($link, 'row mb-3');
-
-                    } else {
-
-
-                        $path_tracker = path_enid('pedido_seguimiento', $id_recibo);
-                        $response[] = d(
-                            format_link($clasificacion, ['href' => $path_tracker]), 'row mb-3'
-                        );
-                    }
-
-                }
+                $response[] = reparto_contra_entrega(
+                    $data,
+                    $status_ventas,
+                    $recibo,
+                    $id_recibo,
+                    $punto_encuentro
+                );
             }
         }
 
         return append($response);
 
 
+    }
+
+    function reparto_contra_entrega($data, $status_ventas, $recibo, $id_recibo, $punto_encuentro)
+    {
+        $response = [];
+
+        if (es_administrador_o_vendedor($data)) {
+
+            $status_recibo = pr($recibo, 'status');
+            $clasificacion = search_bi_array(
+                $status_ventas,
+                "id_estatus_enid_service",
+                $status_recibo,
+                "text_vendedor",
+                ""
+            );
+
+            $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
+                [
+                    'style' => 'background:#0740ec!important;'
+                ]
+            );
+
+            $link = a_enid(
+                $pedido,
+                [
+                    'class' => _text_(_mbt5_md, 'w-100'),
+                    "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
+                ]
+            );
+
+
+            if (!in_array($status_recibo, [16])) {
+
+                $response[] = d($link, 'row mb-3');
+
+            } else {
+
+
+                $path_tracker = path_enid('pedido_seguimiento', $id_recibo);
+                $link = format_link($clasificacion, ['href' => $path_tracker]);
+                $response[] = d($link, 'row mb-3');
+
+            }
+
+        }
+        return append($response);
     }
 
 
@@ -2911,4 +2972,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function es_orden_pagada_entregada($data)
+    {
+        $response = false;
+
+        if (es_data($data['recibo'])) {
+            $recibo = $data['recibo'];
+            $saldo_cubierto = pr($recibo, 'saldo_cubierto');
+            $response = ($saldo_cubierto > 0 && es_orden_entregada($recibo, $data));
+        }
+        return $response;
+    }
 }

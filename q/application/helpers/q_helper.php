@@ -872,14 +872,13 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $response = [
+        return [
 
             "html" => $lista,
             "flag" => $f,
 
         ];
 
-        return $response;
 
     }
 
@@ -1029,14 +1028,13 @@ if (!function_exists('invierte_date_time')) {
             $f++;
         }
 
-        $response = [
+        return [
 
             "html" => $lista,
             "flag" => $f,
 
         ];
 
-        return $response;
 
     }
 
@@ -1178,21 +1176,19 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
         if ($sin_direcciones > 0) {
 
-
             $lista = b_notificacion(
                 path_enid('area_cliente'), "Registra tu dirección de envio");
             $f++;
 
         }
 
-        $response = [
+        return [
 
             "html" => $lista,
             "flag" => $f,
 
         ];
 
-        return $response;
     }
 
 
@@ -1263,13 +1259,12 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $response = [
+        return [
 
             "html" => $lista,
             "flag" => $f,
         ];
 
-        return $response;
     }
 
     function add_recordatorios($recordatorios)
@@ -1291,15 +1286,13 @@ if (!function_exists('invierte_date_time')) {
             $f++;
         }
 
-        $response = [
+        return [
 
             "html" => append($r),
             "flag" => $f,
         ];
 
-        return $response;
     }
-
 
     function add_reintentos_compras($recibos)
     {
@@ -1364,7 +1357,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function add_compras_sin_cierre($recibos)
+    function add_compras_sin_cierre($recibos, $es_reparto = 0)
     {
         $r = [];
         $f = 0;
@@ -1404,7 +1397,10 @@ if (!function_exists('invierte_date_time')) {
 
                 $text = flex($imagenes, $total_seccion, _between);
 
-                $url = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);
+                $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
+
 
                 $linea = d(a_enid($text, $url), "border-bottom");
                 if ($es_hoy) {
@@ -1824,6 +1820,37 @@ if (!function_exists('invierte_date_time')) {
         $t = tb(append($t));
 
         return $t;
+
+    }
+
+    function pendientes_reparto($data)
+    {
+
+        $f = 0;
+        $recibos = $data['proximos_pedidos'];
+        $proximas_entregas = add_compras_sin_cierre($recibos, 1);
+        $f = $f + $proximas_entregas["flag"];
+        $lista[] = d($proximas_entregas["html"], "mt-5");
+        $tareas_pendiente = "";
+        if ($f > 0) {
+
+            $tareas_pendiente = d(
+                $f,
+                [
+                    "id" => $f,
+                    "class" => 'notificacion_tareas_pendientes_enid_service',
+                ]
+            );
+
+        }
+
+
+        return [
+            "num_tareas_pendientes_text" => $f,
+            "num_tareas_pendientes" => $tareas_pendiente,
+            "lista_pendientes" => append($lista),
+        ];
+
 
     }
 }

@@ -133,6 +133,19 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function repartidor_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "recibo,usuario")) {
+
+            $response = $this->recibo_model->q_up("id_usuario_entrega", $param['usuario'], $param['recibo']);
+
+        }
+        $this->response($response);
+    }
+
     function cancelar_envio_recordatorio_PUT()
     {
 
@@ -367,7 +380,7 @@ class recibo extends REST_Controller
                 $busqueda_usuario =
                     [
                         'id_usuario' => $id_usuario_referencia,
-                        'usuario' => (es_data($usuario)) ? $usuario[0] : []
+                        'usuario' => $usuario
                     ];
                 $response[$a]['usuario'] = $busqueda_usuario['usuario'];
                 $usuarios[] = $busqueda_usuario;
@@ -1270,7 +1283,9 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario,id_perfil")) {
-            $response = $this->recibo_model->proximas($param["id_usuario"], $param["id_perfil"]);
+
+            $dia = prm_def($param, 'dia');
+            $response = $this->recibo_model->proximas($param["id_usuario"], $param["id_perfil"], $dia);
         }
         $this->response($response);
     }

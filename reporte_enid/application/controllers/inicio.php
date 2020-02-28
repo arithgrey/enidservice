@@ -42,7 +42,7 @@ class Inicio extends CI_Controller
                 break;
 
 
-            case  in_array($num_perfil, $desarrollo):
+            case in_array($num_perfil, $desarrollo):
                 $module = "location:../desarrollo";
                 break;
 
