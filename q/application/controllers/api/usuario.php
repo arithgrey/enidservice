@@ -86,8 +86,37 @@ class usuario extends REST_Controller
         if (fx($param, "id_perfil")) {
 
             $response = $this->usuario_model->get_usuarios_perfil($param);
+            $response = $this->format_perfil($response, $param);
         }
         $this->response($response);
+    }
+
+    function format_perfil($usuarios, $param)
+    {
+
+        $id_usuario = prm_def($param, 'usuario');
+        $v = prm_def($param, 'v');
+        $id_recibo = prm_def($param, 'id_recibo');
+
+        if ($v > 0 && $id_usuario > 0 && $id_recibo > 0) {
+
+            $str = '¿Qué repartidor asignamos para la entrega de este pedido?';
+            $contenido[] = form_open('', ['class' => 'form_cambio_reparto']);
+            $contenido[] = d(_titulo($str), 'text-left mb-3');
+            $contenido[] = create_select_selected(
+                $usuarios,
+                'idusuario',
+                'nombre',
+                $id_usuario,
+                'usuario',
+                'reparto form-control'
+            );
+            $contenido[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+            $contenido[] = btn('Modificar', ['class' => 'mt-5 cambio_usuario_entrega']);
+            $contenido[] = form_close();
+            $usuarios = append($contenido);
+        }
+        return $usuarios;
     }
 
     function telefono_negocio_PUT()

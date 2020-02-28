@@ -930,7 +930,7 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
-    function proximas($id_usuario, $id_perfil)
+    function proximas($id_usuario, $id_perfil, $dia = 0)
     {
 
         $casos = [
@@ -939,6 +939,8 @@ class Recibo_model extends CI_Model
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
         $extra_usuario = $casos[$id_perfil];
+        $extra_dia = ($dia > 0) ? ' AND  DATE(fecha_contra_entrega) =  DATE(CURRENT_DATE())' : '';
+
         $query_get = "SELECT 
 						id_servicio, 
 						id_proyecto_persona_forma_pago	 id_recibo,
@@ -954,12 +956,13 @@ class Recibo_model extends CI_Model
 						AND  status !=  10
 						AND 					
 						(
-                            DATE(fecha_contra_entrega) <=  DATE(CURRENT_DATE())
+                            DATE(fecha_contra_entrega) >=  DATE(CURRENT_DATE())
                             OR
-                            DATE(fecha_vencimiento) <=  DATE(CURRENT_DATE())
+                            DATE(fecha_vencimiento) >=  DATE(CURRENT_DATE())
                             OR
-                            DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
+                            DATE(fecha_entrega) >=  DATE(CURRENT_DATE())						
 						) 
+						" . $extra_dia . "
 						ORDER BY fecha_contra_entrega ASC  
 						";
         return $this->db->query($query_get)->result_array();

@@ -19,7 +19,6 @@ class productividad extends REST_Controller
         $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
         $param["id_usuario"] = $id_usuario;
 
-
         $response = [
             "objetivos_perfil" => $this->get_objetivos_perfil($param),
             "flag_direccion" => $this->verifica_direccion_registrada_usuario($param),
@@ -40,12 +39,12 @@ class productividad extends REST_Controller
             "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
             "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
-            "clientes_sin_tags_arquetipos" => $this->get_stag(),
+            "clientes_sin_tags_arquetipos" => $this->get_stag($id_perfil),
             "tareas" => $this->get_tareas($id_usuario),
         ];
 
         $response = $this->re_intentos_compras($id_usuario, $response, $id_perfil);
-        $response =  $this->recuperacion($id_usuario, $response, $id_perfil);
+        $response = $this->recuperacion($id_usuario, $response, $id_perfil);
         switch ($id_perfil) {
 
             case 3:
@@ -60,8 +59,13 @@ class productividad extends REST_Controller
 
                 break;
 
-            case (20 || 6):
+            case 21:
 
+                $response['proximos_pedidos'] = $this->proximas_reparto($id_perfil, $id_usuario);
+                $response = pendientes_reparto($response);
+                break;
+
+            case (20 || 6):
 
                 $response = pendientes_cliente($response);
                 break;
@@ -124,8 +128,8 @@ class productividad extends REST_Controller
 
         $response += [
             "id_usuario" => $param["id_usuario"],
-            "adeudos_cliente" => $this->get_adeudo_cliente($param),
-            "valoraciones_sin_leer" => $this->get_num_lectura_valoraciones($param),
+            "adeudos_cliente" => $this->get_adeudo_cliente($param, $id_perfil),
+            "valoraciones_sin_leer" => $this->get_num_lectura_valoraciones($param, $id_perfil),
             "id_perfil" => $id_perfil
         ];
 
@@ -159,15 +163,29 @@ class productividad extends REST_Controller
         return $response;
     }
 
-    private function get_adeudo_cliente($q)
+    private function get_adeudo_cliente($q, $id_perfil)
     {
-        return $this->app->api("recibo/deuda_cliente/format/json/", $q);
+
+        $response = [];
+        if (!in_array($id_perfil, [21])) {
+
+            $response = $this->app->api("recibo/deuda_cliente/format/json/", $q);
+        }
+        return $response;
+
+
     }
 
-    private function get_num_lectura_valoraciones($q)
+    private function get_num_lectura_valoraciones($q, $id_perfil)
     {
 
-        return $this->app->api("servicio/num_lectura_valoraciones/format/json/", $q);
+        $response = [];
+        $es_administrador = [3, 4];
+        if (in_array($id_perfil, $es_administrador)) {
+
+            $response = $this->app->api("servicio/num_lectura_valoraciones/format/json/", $q);
+        }
+        return $response;
     }
 
     private function email_enviados_enid_service()
@@ -228,9 +246,18 @@ class productividad extends REST_Controller
         return $this->app->api("costo_operacion/scostos/format/json/", ["id_usuario" => $id_usuario]);
     }
 
-    private function get_stag()
+    private function get_stag($id_perfil)
     {
-        return $this->app->api("recibo/stags_arquetipos/format/json/");
+
+        $response = [];
+        $es_administrador = [3, 4];
+        if (in_array($id_perfil, $es_administrador)) {
+
+            $response = $this->app->api("recibo/stags_arquetipos/format/json/");
+        }
+
+        return $response;
+
     }
 
     function get_tareas($id_usuario)
@@ -292,7 +319,22 @@ class productividad extends REST_Controller
         $response['recuperacion'] = $pendientes;
         return $response;
 
+    }
+
+    function proximas_reparto($id_perfil, $id_usuario)
+    {
+
+        $response = $this->app->api(
+            "recibo/proximas_reparto/format/json/",
+            [
+                "id_perfil" => $id_perfil,
+                "id_usuario" => $id_usuario,
+                "dia" => 1
+            ]
+        );
+        return $this->app->imgs_productos(0, 1, 1, 1, $response);
 
     }
+
 
 }

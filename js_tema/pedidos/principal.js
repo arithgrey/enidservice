@@ -16,8 +16,8 @@ let $status_venta_registro = $('.status_venta_registro');
 let $saldo_cubierto = parseInt($saldo_actual_cubierto.val());
 let $modal_opciones_compra = $('#modal_opciones_compra');
 let $menu_recibo = $('.menu_recibo');
+let $repartidor = $('.repartidor');
 $(document).ready(() => {
-
 
     $editar_estado_compra.click(function () {
 
@@ -56,6 +56,8 @@ $(document).ready(() => {
     $tag_arquetipo.click(baja_tag_arquetipo);
     $usuario_tipo_negocio.change(usuario_tipo_negocio);
     $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
+    $repartidor.click(cambio_reparto);
+
 });
 let editar_horario_entrega = function (e) {
 
@@ -855,4 +857,33 @@ let opciones_recibo = () => {
 };
 let oculta_opciones_recibo = () => {
     $modal_opciones_compra.modal('hide');
+};
+let cambio_reparto = function (e) {
+
+    let $id_recibo = get_parameter_enid($(this), 'id');
+    let $id_usuario = get_parameter_enid($(this), 'usuario');
+    let data_send = $.param({'id_recibo': $id_recibo, 'usuario': $id_usuario, 'v': 1, 'id_perfil': 21});
+    let url = "../q/index.php/api/usuario/perfiles/format/json/";
+    request_enid("GET", data_send, url, response_cambio_reparto);
+
+};
+let response_cambio_reparto = function (data) {
+
+    modal(data);
+    $('.form_cambio_reparto').submit(nuevo_repartidor);
+
+
+};
+let nuevo_repartidor = function (e) {
+
+    $('.cargando_modal').removeClass('d-none');
+    let data_send = $(".form_cambio_reparto").serialize();
+    let url = "../q/index.php/api/recibo/repartidor/format/json/";
+    request_enid("PUT", data_send, url, response_nuevo_repartidor);
+    bloquea_form(".form_cambio_reparto");
+    e.preventDefault();
+};
+let response_nuevo_repartidor = function (data) {
+
+    redirect('');
 };

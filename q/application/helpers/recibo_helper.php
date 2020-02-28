@@ -589,7 +589,9 @@ if (!function_exists('invierte_date_time')) {
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
             if ($perfil != 6) {
 
-                $nombre_vendedor = format_nombre_vendedor($usuario_venta, $es_administrador);
+                $nombre_usuario = format_nombre($usuario_venta);
+                $nombre_vendedor = ($es_administrador) ? _text_('vendidor por ', $nombre_usuario) : '';
+
                 $verificado = ($se_pago > 0) ? _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
 
             }
@@ -727,20 +729,6 @@ if (!function_exists('invierte_date_time')) {
         return $actual;
     }
 
-    function format_nombre_vendedor($usuario_venta, $es_administrador)
-    {
-
-        $response = "";
-        if (es_data($usuario_venta) && $es_administrador) {
-            $response = _text_(
-                'Vendido por',
-                $usuario_venta['nombre'],
-                $usuario_venta['apellido_paterno']
-            );
-        }
-        return $response;
-
-    }
 
     function tb_fechas($recibos, $ops_tipo_orden, $tipo_orden)
     {
