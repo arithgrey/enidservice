@@ -115,7 +115,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text = intento_recuperacion($recibo);
         if ($text['es_visible']) {
-            $xx[] = $text['text'];
+            $x[] = $text['text'];
         }
         $x[] = intento_reventa($recibo);
         $x[] = imprimir_recibo($recibo, $tipos_entregas);
@@ -891,7 +891,8 @@ if (!function_exists('invierte_date_time')) {
     {
         $response = [];
 
-        if (es_administrador_o_vendedor($data)) {
+        $es_orden_pagaga_entregada = es_orden_pagada_entregada($data);
+        if (es_administrador_o_vendedor($data) && !$es_orden_pagaga_entregada) {
 
             $status_recibo = pr($recibo, 'status');
             $clasificacion = search_bi_array(

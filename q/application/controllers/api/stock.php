@@ -3,314 +3,368 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class Stock extends REST_Controller
 {
-	public $option;
-	private $id_usuario;
+    public $option;
+    private $id_usuario;
 
-	function __construct()
-	{
-		parent::__construct();
-		$this->load->helper("stock");
-		$this->load->library("table");
-		$this->load->library(lib_def());
-	}
+    function __construct()
+    {
+        parent::__construct();
+        $this->load->helper("stock");
+        $this->load->library("table");
+        $this->load->library(lib_def());
+    }
 
-	function compras_GET()
-	{
+    function compras_GET()
+    {
 
-		$param = $this->get();
-		$response = false;
-		if (fx($param, "fecha_inicio,tipo")) {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,tipo")) {
 
-			$pedidos_servicio = crea_resumen_servicios_solicitados($this->get_solicitudes_contra_entrega($param));
-			$pedidos_servicio = $this->agrega_stock_servicios($pedidos_servicio);
-			$response = $this->asocia_servicio_solicitudes($pedidos_servicio, $param["tipo"]);
-			$compras_por_enviar = $this->get_compras_por_enviar();
+            $solicitudes_contra_entrega = $this->get_solicitudes_contra_entrega($param);
+            $pedidos_servicio = crea_resumen_servicios_solicitados($solicitudes_contra_entrega);
+            $pedidos_servicio = $this->agrega_stock_servicios($pedidos_servicio);
+            $response = $this->asocia_servicio_solicitudes($pedidos_servicio, $param["tipo"]);
+            $compras_por_enviar = $this->get_compras_por_enviar();
 
-			if (prm_def($param, "v") > 0) {
+            if (prm_def($param, "v") > 0) {
 
-				$response = $this->create_table_compras($response, $compras_por_enviar);
+                $response = $this->create_table_compras($response, $compras_por_enviar);
 
-			}
-		}
-		$this->response($response);
-	}
+            }
+        }
+        $this->response($response);
+    }
 
-	private function create_table_compras($servicios, $compras_por_enviar)
-	{
+    private function create_table_compras($servicios, $compras_por_enviar)
+    {
 
-		$this->table->set_heading('#',
-            'SERVICIO',
-            'STOCK ACTUAL',
-            "PEDIDOS CONTRA ENTREGA",
-            "CASOS IDENTICO",
-            "PRONOSTICO  VENTAS (A)",
-            "PRONOSTICO VENTAS (B)",
-            "ADQUIRIDAS ENID",
-            "OTRAS PLATAFORMAS",
-            "COMPRAR OPCIÓN (A)",
-            "COMPRAR OPCIÓN (B)"
+
+        $base = 'col-md-1 border text-uppercase bg_black white';
+        $titulos[] = d('#', $base);
+        $titulos[] = d('SERVICIO', $base);
+        $titulos[] = d('En STOCK ', $base);
+        $titulos[] = d("PEDIDOS CONTRA ENTREGA", 'col-md-2 border  text-uppercase  bg_black white');
+        $titulos[] = d("CASOS IDENTICO", $base);
+        $titulos[] = d("PRONOSTICO  VENTAS (A)", $base);
+        $titulos[] = d("PRONOSTICO VENTAS (B)", $base);
+        $titulos[] = d("ADQUIRIDAS ENID", $base);
+        $titulos[] = d("OTRAS PLATAFORMAS", $base);
+        $titulos[] = d("COMPRAR OPCIÓN (A)", $base);
+        $titulos[] = d("COMPRAR OPCIÓN (B)", $base);
+        $response[] = d($titulos, 13);
+
+
+        $b = 1;
+        $compras = [];
+        $comparativa = [];
+        for ($a = 0; $a < count($servicios); $a++) {
+
+            $id_servicio = $servicios[$a]["id_servicio"];
+            $stock = $servicios[$a]["stock"];
+            $pedidos_contra_entrega = $servicios[$a]["pedidos_contra_entrega"];
+
+            $total_pedidos_contra_entrega = $servicios[$a]["total_pedidos_contra_entrega"];
+            $total_entregas_contra_entrega = $servicios[$a]["total_entregas_contra_entrega"];
+            $pedidos = $servicios[$a]["pedidos"];
+            $resumen = $this->get_format_resumen(
+                $total_pedidos_contra_entrega . " / " . $total_entregas_contra_entrega,
+                $pedidos,
+                $pedidos_contra_entrega, $id_servicio
+            );
+            $sugerencia = $resumen["sugerencia"];
+            $sugerencia_b = $resumen["sugerencias_b"];
+            $comparativa[] = $resumen['comparativa'];
+            $img = img(
+                [
+                    "class" => "img - responsive img_servicio_compras",
+                    "src" => link_imagen_servicio($id_servicio),
+                ]
+            );
+
+            $img = a_enid($img, get_url_servicio($id_servicio));
+            $total_enid = $this->get_ventas_tipo(1, $compras_por_enviar, $id_servicio);
+            $total_otras = $this->get_ventas_tipo(2, $compras_por_enviar, $id_servicio);
+            $total_compras = ($sugerencia + $total_enid + $total_otras) - $stock;
+            $total_compras_b = ($sugerencia_b + $total_enid + $total_otras) - $stock;
+
+
+            $linea = [];
+
+
+            $base = 'col-md-1 border text-uppercase fp8 text-center';
+            $linea[] = d($b, $base);
+            $linea[] = d($img, $base);
+            $linea[] = d($stock, $base);
+            $linea[] = d($pedidos_contra_entrega, 'col-md-2 border  text-uppercase text-center ');
+            $linea[] = d($resumen["text"],
+                [
+                    'class' => _text_($base, 'comparativas cursor_pointer'),
+                    'id' => $id_servicio
+                ]
+            );
+            $linea[] = d($sugerencia, $base);
+            $linea[] = d($sugerencia_b, $base);
+            $linea[] = d($total_enid, $base);
+            $linea[] = d($total_otras, $base);
+            $linea[] = d($total_compras, $base);
+            $linea[] = d($total_compras_b, $base);
+            $compras[] = d($linea, 13);
+
+            $b++;
+        }
+
+        $response[] = append($compras);
+        $response[] = append($comparativa);
+        return append($response);
+
+    }
+
+    private function get_ventas_tipo($tipo, $compras_pagas, $id_servicio)
+    {
+
+        $compras = 0;
+        foreach ($compras_pagas as $row) {
+            if ($tipo == 1) {
+                if (($row["tipo_entrega"] == 1 || $row["tipo_entrega"] == 2 || $row["tipo_entrega"] == 3) && $row["id_servicio"] == $id_servicio) {
+                    $compras = $compras + $row["ventas_pagas_sin_envio"];
+                }
+            } else {
+                if ($row["tipo_entrega"] == 4 && $row["id_servicio"] == $id_servicio) {
+                    $compras = $compras + $row["ventas_pagas_sin_envio"];
+                }
+            }
+        }
+        return $compras;
+    }
+
+    private function get_ventas_fecha($fecha, $ventas)
+    {
+
+        $venta = 0;
+        for ($a = 0; $a < count($ventas); $a++) {
+
+
+            if ($fecha == $ventas[$a]["fecha_entrega"]) {
+
+                $venta = $ventas[$a]["solicitudes"];
+
+            }
+        }
+        return $venta;
+
+    }
+
+    private function get_format_resumen($resumen, $pedidos, $pedidos_contra_entrega, $id_servicio)
+    {
+
+        $solicitudes = $pedidos["solicitudes"];
+        $entregas = $pedidos["entregas"];
+
+        $table = "<table  border='1' class='text-center mt-5'>";
+        $table .= "<tr>";
+        $table .= td("FECHA");
+        $table .= td("SOLICITUDES");
+        $table .= td("VENTAS");
+        $table .= "</tr>";
+
+        $promedio = [];
+        $relevante = [];
+        $secundaria = [];
+        $media = [];
+
+        for ($a = 0; $a < count($solicitudes); $a++) {
+
+
+            $fecha_contra_entrega = $solicitudes[$a]["fecha_contra_entrega"];
+            $solicitud = $solicitudes[$a]["solicitudes"];
+
+            $class = ($pedidos_contra_entrega == $solicitud) ? "caso_exacto" : "";
+            $t = "<tr class='" . $class . "'>";
+            $t .= td($fecha_contra_entrega);
+            $ventas_efectivas = $this->get_ventas_fecha($fecha_contra_entrega, $entregas);
+            $t .= td($solicitud);
+            $t .= td($ventas_efectivas);
+
+            $t .= "</tr>";
+
+            if ($pedidos_contra_entrega == $solicitud) {
+
+                $relevante[] = $t;
+                $promedio [] = ["solicitud" => $solicitud, "ventas_efectivas" => $ventas_efectivas];
+
+                $media[$ventas_efectivas] = (!array_key_exists($ventas_efectivas, $media)) ? 1 : ($media[$ventas_efectivas] + 1);
+
+
+            } else {
+
+                $secundaria[$ventas_efectivas] = (!array_key_exists($ventas_efectivas, $secundaria)) ? 1 : ($secundaria[$ventas_efectivas] + 1);
+
+            }
+        }
+
+
+        for ($a = 0; $a < count($relevante); $a++) {
+            $table .= $relevante[$a];
+        }
+
+        $table .= "</table>";
+        $tabla_porcentaje = $this->get_tabla_porcentajes($media, $pedidos_contra_entrega, count($relevante));
+
+        $totales_casos = $this->get_max_min($tabla_porcentaje["totales"]);
+        $completo = $totales_casos["completo"];
+        asort($completo);
+        $min = (es_data($completo)) ? $completo[0] : 0;
+        $max = $totales_casos["max"];
+        $text_resumen = count($relevante);
+
+        $response_table = $table . $tabla_porcentaje["table"];
+        $tabla_comprativas = d($response_table,
+            [
+                'class' => 'mt-5 tabla_comprativa d-none',
+                'id' => $id_servicio
+
+            ]
         );
-		$b = 1;
-		for ($a = 0; $a < count($servicios); $a++) {
-
-			$id_servicio = $servicios[$a]["id_servicio"];
-			$stock = $servicios[$a]["stock"];
-			$pedidos_contra_entrega = $servicios[$a]["pedidos_contra_entrega"];
 
-			$total_pedidos_contra_entrega = $servicios[$a]["total_pedidos_contra_entrega"];
-			$total_entregas_contra_entrega = $servicios[$a]["total_entregas_contra_entrega"];
-			$pedidos = $servicios[$a]["pedidos"];
-			$resumen = $this->get_format_resumen($total_pedidos_contra_entrega . "/" . $total_entregas_contra_entrega, $pedidos, $pedidos_contra_entrega);
-			$sugerencia = $resumen["sugerencia"];
-			$sugerencia_b = $resumen["sugerencias_b"];
-			$img = img([
-				"class" => "img-responsive img_servicio_compras",
-				"src" => link_imagen_servicio($id_servicio),
-			]);
+        return [
+            "text" => $text_resumen,
+            "comparativa" => $tabla_comprativas,
+            "promedios" => $promedio,
+            "media" => $media,
+            "sugerencia" => $max,
+            "sugerencias_b" => $min
+        ];
+
+    }
+
+    private function get_max_min($totales)
+    {
+
+
+        $max = 0;
+        $min = array();
+
+        foreach ($totales as $row) {
+            if ($row["compras"] > $max) {
+                $max = $row["compras"];
+            }
+            array_push($min, $row["compras"]);
+
+        }
+        $response = ["max" => $max, "completo" => $min];
+        return $response;
+    }
+
+    private function get_tabla_porcentajes($media, $pedidos_contra_entrega, $total)
+    {
+
+        $table = "<table border='1' class='text-center'>";
+
+        $table .= "<tr>";
+        $table .= td("SOLICITUDES " . $pedidos_contra_entrega, ["colspan" => 3]);
+        $table .= "</tr>";
+
+        $table .= "<tr>";
+        $table .= td("CASOS");
+        $table .= td("PORCENTAJE");
+        $table .= td("COMPRAS");
+        $table .= "</tr>";
+
+        $totales = [];
+        $z = 0;
+        foreach ($media as $key => $value) {
+            $totales[$z] = ["casos" => $value, "compras" => $key];
+            $table .= "<tr>";
+            $table .= td($value);
+            $table .= td(porcentaje_total($value, $total) . "%");
+            $table .= td($key);
+            $table .= "</tr>";
+            $z++;
+        }
+        $table .= "</table>";
+        //$r =  $totales;
+        $response = ["table" => $table, "totales" => $totales];
+        return $response;
+    }
+
+    private function asocia_servicio_solicitudes($pedidos_servicio, $tipo)
+    {
+        $response = [];
+        foreach ($pedidos_servicio as $row) {
+
+            $id_servicio = $row["id_servicio"];
+            $pedidos = $this->get_solicitudes_servicio_pasado($id_servicio, $tipo);
+            $total_pedidos = count($pedidos["solicitudes"]);
+            $total_entregas = count($pedidos["entregas"]);
+
+            $response[] = [
+                "id_servicio" => $id_servicio,
+                "pedidos_contra_entrega" => $row["pedidos"],
+                "stock" => $row["stock"],
+                "total_pedidos_contra_entrega" => $total_pedidos,
+                "total_entregas_contra_entrega" => $total_entregas,
+                "pedidos" => $pedidos
+            ];
+        }
+        return $response;
+    }
+
+    private function agrega_stock_servicios($servicios)
+    {
+
+        $response = [];
+        for ($a = 0; $a < count($servicios); $a++) {
+
+            $id_servicio = $servicios[$a]["id_servicio"];
+            $response[] = [
+                "id_servicio" => $id_servicio,
+                "pedidos" => $servicios[$a]["pedidos"],
+                "stock" => $this->get_stock_servicio($id_servicio)
+            ];
+        }
+        return $response;
+    }
+
+    private function get_stock_servicio($id_servicio)
+    {
 
-			$img = a_enid($img,  get_url_servicio($id_servicio));
-			$total_enid = $this->get_ventas_tipo(1, $compras_por_enviar, $id_servicio);
-			$total_otras = $this->get_ventas_tipo(2, $compras_por_enviar, $id_servicio);
-			$total_compras = ($sugerencia + $total_enid + $total_otras) - $stock;
-			$total_compras_b = ($sugerencia_b + $total_enid + $total_otras) - $stock;
+        return $this->app->api("servicio/stock/format/json/", ["id_servicio" => $id_servicio]);
+    }
 
-			$this->table->add_row($b, $img, $stock, $pedidos_contra_entrega, $resumen["text"], $sugerencia, $sugerencia_b, $total_enid, $total_otras, $total_compras, $total_compras_b);
-			$b++;
-		}
+    private function get_solicitudes_servicio_pasado($id_servicio, $tipo = 1)
+    {
 
+        $q["tipo"] = $tipo;
+        $q["id_servicio"] = $id_servicio;
+        return $this->app->api("recibo/solicitudes_periodo_servicio/format/json/", $q);
+    }
 
-        $this->table->set_template(template_table_enid());
-		return $this->table->generate();
+    private function get_solicitudes_contra_entrega($param)
+    {
 
-	}
 
-	private function get_ventas_tipo($tipo, $compras_pagas, $id_servicio)
-	{
+        $q["cliente"] = "";
+        $q["recibo"] = "";
+        $q["v"] = 0;
+        $q["tipo_entrega"] = 0;
+        $q["status_venta"] = 6;
+        $q["tipo_orden"] = 5;
+        $q["fecha_inicio"] = $param["fecha_inicio"];
+        $q["fecha_termino"] = $param["fecha_inicio"];
+        $q["perfil"] = $this->app->getperfiles();
+        $q["id_usuario"] = $this->app->get_session("idusuario");
 
-		$compras = 0;
-		foreach ($compras_pagas as $row) {
-			if ($tipo == 1) {
-				if (($row["tipo_entrega"] == 1 || $row["tipo_entrega"] == 2 || $row["tipo_entrega"] == 3) && $row["id_servicio"] == $id_servicio) {
-					$compras = $compras + $row["ventas_pagas_sin_envio"];
-				}
-			} else {
-				if ($row["tipo_entrega"] == 4 && $row["id_servicio"] == $id_servicio) {
-					$compras = $compras + $row["ventas_pagas_sin_envio"];
-				}
-			}
-		}
-		return $compras;
-	}
 
-	private function get_ventas_fecha($fecha, $ventas)
-	{
+        return $this->app->api("recibo/pedidos/format/json/", $q);
 
-		$venta = 0;
-		for ($a = 0; $a < count($ventas); $a++) {
+    }
 
+    private function get_compras_por_enviar()
+    {
 
-			if ($fecha == $ventas[$a]["fecha_entrega"]) {
+        $q[1] = 1;
+        return $this->app->api("recibo/compras_por_enviar/format/json/", $q);
 
-				$venta = $ventas[$a]["solicitudes"];
-
-			}
-		}
-		return $venta;
-
-	}
-
-	private function get_format_resumen($resumen, $pedidos, $pedidos_contra_entrega)
-	{
-
-		//$resumen        =  a_enid($resumen , ["class"    =>  "dropdown-toggle" , "href"=>"#",  "id"=>"dropdownMenuLink"]);
-		$solicitudes = $pedidos["solicitudes"];
-		$entregas = $pedidos["entregas"];
-
-		$table = "<table  border='1' class='text-center' >";
-		$table .= "<tr>";
-		$table .= td("FECHA");
-		$table .= td("SOLICITUDES");
-		$table .= td("VENTAS");
-		$table .= "</tr>";
-
-		$promedio = [];
-		$relevante = [];
-		$secundaria = [];
-		$media = [];
-
-		for ($a = 0; $a < count($solicitudes); $a++) {
-
-
-			$fecha_contra_entrega = $solicitudes[$a]["fecha_contra_entrega"];
-			$solicitud = $solicitudes[$a]["solicitudes"];
-
-			$class = ($pedidos_contra_entrega == $solicitud) ? "caso_exacto" : "";
-			$t = "<tr class='" . $class . "'>";
-			$t .= td($fecha_contra_entrega);
-			$ventas_efectivas = $this->get_ventas_fecha($fecha_contra_entrega, $entregas);
-			$t .= td($solicitud);
-			$t .= td($ventas_efectivas);
-
-			$t .= "</tr>";
-
-			if ($pedidos_contra_entrega == $solicitud) {
-
-				$relevante[] = $t;
-				$promedio [] = ["solicitud" => $solicitud, "ventas_efectivas" => $ventas_efectivas];
-
-                $media[$ventas_efectivas]  =  (!array_key_exists($ventas_efectivas, $media)) ? 1 : ( $media[$ventas_efectivas] + 1);
-
-
-			} else {
-
-                $secundaria[$ventas_efectivas] =  (!array_key_exists($ventas_efectivas, $secundaria))  ?  1 : ( $secundaria[$ventas_efectivas] + 1);
-
-			}
-		}
-
-
-		for ($a = 0; $a < count($relevante); $a++) {
-			$table .= $relevante[$a];
-		}
-
-		$table .= "</table>";
-		$tabla_porcentaje = $this->get_tabla_porcentajes($media, $pedidos_contra_entrega, count($relevante));
-
-		$totales_casos = $this->get_max_min($tabla_porcentaje["totales"]);
-		$completo = $totales_casos["completo"];
-		asort($completo);
-		$min = (es_data($completo) ) ? $completo[0] : 0;
-		$max = $totales_casos["max"];
-		$text_resumen = count($relevante);
-		$text = d($text_resumen . d($table . $tabla_porcentaje["table"], ["class" => "dropdown-menu"]), ["class" => "dropdown"]);
-		$response = ["text" => $text, "promedios" => $promedio, "media" => $media, "sugerencia" => $max, "sugerencias_b" => $min];
-
-		return $response;
-	}
-
-	private function get_max_min($totales)
-	{
-
-
-		$max = 0;
-		$min = array();
-
-		foreach ($totales as $row) {
-			if ($row["compras"] > $max) {
-				$max = $row["compras"];
-			}
-			array_push($min, $row["compras"]);
-
-		}
-		$response = ["max" => $max, "completo" => $min];
-		return $response;
-	}
-
-	private function get_tabla_porcentajes($media, $pedidos_contra_entrega, $total)
-	{
-
-		$table = "<table border='1' class='text-center'>";
-
-		$table .= "<tr>";
-		$table .= td("SOLICITUDES " . $pedidos_contra_entrega, ["colspan" => 3]);
-		$table .= "</tr>";
-
-		$table .= "<tr>";
-		$table .= td("CASOS");
-		$table .= td("PORCENTAJE");
-		$table .= td("COMPRAS");
-		$table .= "</tr>";
-
-		$totales = [];
-		$z = 0;
-		foreach ($media as $key => $value) {
-			$totales[$z] = ["casos" => $value, "compras" => $key];
-			$table .= "<tr>";
-			$table .= td($value);
-			$table .= td(porcentaje_total($value, $total) . "%");
-			$table .= td($key);
-			$table .= "</tr>";
-			$z++;
-		}
-		$table .= "</table>";
-		//$r =  $totales;
-		$response = ["table" => $table, "totales" => $totales];
-		return $response;
-	}
-	private function asocia_servicio_solicitudes($pedidos_servicio, $tipo)
-	{
-		$response = [];
-		foreach ($pedidos_servicio as $row) {
-
-			$id_servicio = $row["id_servicio"];
-			$pedidos = $this->get_solicitudes_servicio_pasado($id_servicio, $tipo);
-			$total_pedidos = count($pedidos["solicitudes"]);
-			$total_entregas = count($pedidos["entregas"]);
-
-			$response[] = [
-				"id_servicio" => $id_servicio,
-				"pedidos_contra_entrega" => $row["pedidos"],
-				"stock" => $row["stock"],
-				"total_pedidos_contra_entrega" => $total_pedidos,
-				"total_entregas_contra_entrega" => $total_entregas,
-				"pedidos" => $pedidos
-			];
-		}
-		return $response;
-	}
-
-	private function agrega_stock_servicios($servicios)
-	{
-
-		$response = [];
-		for ($a = 0; $a < count($servicios); $a++) {
-
-			$id_servicio = $servicios[$a]["id_servicio"];
-			$response[] = [
-				"id_servicio" => $id_servicio,
-				"pedidos" => $servicios[$a]["pedidos"],
-				"stock" => $this->get_stock_servicio($id_servicio)
-			];
-		}
-		return $response;
-	}
-
-	private function get_stock_servicio($id_servicio)
-	{
-
-		return $this->app->api("servicio/stock/format/json/", ["id_servicio" => $id_servicio]);
-	}
-
-	private function get_solicitudes_servicio_pasado($id_servicio, $tipo = 1)
-	{
-
-		$q["tipo"] = $tipo;
-        $q["id_servicio"]   =  $id_servicio;
-		return $this->app->api("recibo/solicitudes_periodo_servicio/format/json/", $q);
-	}
-
-	private function get_solicitudes_contra_entrega($param)
-	{
-
-
-		$q["cliente"] = "";
-		$q["recibo"] = "";
-		$q["v"] = 0;
-		$q["tipo_entrega"] = 0;
-		$q["status_venta"] = 6;
-		$q["tipo_orden"] = 5;
-		$q["fecha_inicio"] = $param["fecha_inicio"];
-		$q["fecha_termino"] = $param["fecha_inicio"];
-
-		return $this->app->api("recibo/pedidos/format/json/", $q);
-
-	}
-
-	private function get_compras_por_enviar()
-	{
-
-		$q[1] = 1;
-		return $this->app->api("recibo/compras_por_enviar/format/json/", $q);
-
-	}
+    }
 }

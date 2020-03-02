@@ -3343,7 +3343,7 @@ function es_administrador($data)
 function es_orden_entregada($recibo, $data)
 {
 
-    $status = prm_def($recibo, 'status');
+    $status = pr($recibo, "status");
     return in_array($status, $data['restricciones']['orden_entregada']);
 
 }
