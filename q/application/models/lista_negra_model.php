@@ -62,4 +62,12 @@ class lista_negra_model extends CI_Model
         return $this->db->delete($this->tabla, $params_where);
     }
 
+    function q($ids)
+    {
+
+        $where = 'WHERE id_usuario IN ('. $ids .')';
+        $query_create = "SELECT id_usuario FROM lista_negra " . $where;
+        return $this->db->query($query_create)->result_array();
+    }
+
 }

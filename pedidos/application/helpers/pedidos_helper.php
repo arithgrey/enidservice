@@ -42,9 +42,7 @@ if (!function_exists('invierte_date_time')) {
         $id_perfil = $data['id_perfil'];
         $usuario = $data["usuario"];
         $es_vendedor = $data['es_vendedor'];
-        $cancela_cliente = pr($r, "cancela_cliente");
-        $se_cancela = pr($r, "se_cancela");
-        $es_venta_cancelada = ($status_ventas == 10 || $cancela_cliente || $se_cancela);
+        $es_venta_cancelada = es_orden_cancelada($data);
         $menu = menu($domicilio, $r, $id_recibo, $usuario, $es_vendedor);
         $re[] = d($menu, 'col-sm-12 mr-5 pr-5 d-md-none');
 
@@ -812,7 +810,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        if (es_administrador($data)) {
+        $es_orden_cancelada = es_orden_cancelada($data);
+        if (es_administrador($data) && !$es_orden_cancelada) {
 
             $usuario = $data['repartidor'];
             $nombre = format_nombre($usuario);
@@ -891,8 +890,8 @@ if (!function_exists('invierte_date_time')) {
     {
         $response = [];
 
-        $es_orden_pagaga_entregada = es_orden_pagada_entregada($data);
-        if (es_administrador_o_vendedor($data) && !$es_orden_pagaga_entregada) {
+        $es_orden_pagada_entregada = es_orden_pagada_entregada($data);
+        if (es_administrador_o_vendedor($data) && !$es_orden_pagada_entregada) {
 
             $status_recibo = pr($recibo, 'status');
             $clasificacion = search_bi_array(
@@ -2856,9 +2855,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        if (es_data($data['es_lista_negra'])) {
+        $fue_lista_negra = es_data($data['usuario_lista_negra']);
+        if (es_data($data['es_lista_negra']) || $fue_lista_negra) {
 
-            $str = _titulo('este usuario fué enviado a lista negra', '', 'white');
+
+            $texto = ($fue_lista_negra) ?
+                'Ya no vendemos a esta persona quedó mal en el pasado, fue enviado a lista negra' :
+                'este usuario fué enviado a lista negra';
+            $str = _titulo($texto, '', 'white');
             $response[] = d($str, 'row red_enid_background p-2 white mb-5');
         }
 
@@ -2984,4 +2988,26 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
     }
+
+    function es_orden_cancelada($data)
+    {
+
+        $response = false;
+        if (es_data($data['recibo'])) {
+
+            $recibo = $data['recibo'];
+            $cancela_cliente = pr($recibo, "cancela_cliente");
+            $se_cancela = pr($recibo, "se_cancela");
+            $status = pr($recibo, "status");
+
+            $es_lista_negra = es_data($data['es_lista_negra']);
+            $fue_lista_negra = es_data($data['usuario_lista_negra']);
+            $response = ($status == 10 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
+
+        }
+        return $response;
+
+    }
+
+
 }

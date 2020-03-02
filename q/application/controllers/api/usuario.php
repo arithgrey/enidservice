@@ -776,6 +776,28 @@ class usuario extends REST_Controller
         $this->response($response);
     }
 
+    function lista_negra_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "idusuario,email,tel_contacto,tel_contacto_alterno")) {
+
+            $response = [];
+            $idusuario = $param['idusuario'];
+            $email = $param['email'];
+            $tel_contacto = $param['tel_contacto'];
+            $tel_contacto_alterno = $param['tel_contacto_alterno'];
+
+            $usuarios = $this->usuario_model->lista_negra($idusuario, $email, $tel_contacto, $tel_contacto_alterno);
+            if (es_data($usuarios)) {
+
+                $response = $this->usuarios_en_lista_negra($usuarios);
+            }
+        }
+        $this->response($response);
+    }
+
     function actividad_GET()
     {
 
@@ -1014,5 +1036,18 @@ class usuario extends REST_Controller
     {
 
         return $this->app->api("servicio/num_periodo/format/json/", $q);
+    }
+
+    private function usuarios_en_lista_negra($usuarios)
+    {
+
+        $lista = [];
+        foreach ($usuarios as $row) {
+
+            $lista[] =  $row['idusuario'];
+        }
+
+        $q['usuarios'] = get_keys($lista);
+        return $this->app->api("lista_negra/q/format/json/", $q);
     }
 }
