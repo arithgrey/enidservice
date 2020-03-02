@@ -286,6 +286,7 @@ class app extends CI_Controller
             $data["desc_web"] = $desc;
             $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
             $data["menu"] = "";
+            $data['key_desarrollo'] = $this->config->item('key_desarrollo');
 
         }
 

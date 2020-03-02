@@ -636,14 +636,14 @@ if (!function_exists('invierte_date_time')) {
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
             $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
 
-            $line = d(
-                $contenido,
-                [
-                    'id' => $recibo,
-                    'class' => _text_(
-                        'desglose_orden cursor_pointer row  mt-md-0  text-center text-md-left mt-5', $extra)
-                ]
-            );
+
+            $path = path_enid('pedidos_recibo', $recibo);
+            $config = [
+                'id' => $recibo,
+                'class' => _text_('black row  mt-md-0  text-center text-md-left mt-5', $extra),
+                'href' => $path
+            ];
+            $line = a_enid(append($contenido), $config, 0);
 
 
             if ($es_orden_en_proceso) {
@@ -659,9 +659,11 @@ if (!function_exists('invierte_date_time')) {
 
         $es_administrador = in_array($perfil, [20, 6]);
         $text_saldo = ($es_administrador) ? 'saldo por cobrar' : 'total por pagar';
-        $text_saldo_por_cobrar = d_row(flex($text_saldo, money($saldo_por_cobrar),
-            _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md)
-        ));
+        $text_saldo_por_cobrar = d_row(
+            flex($text_saldo, money($saldo_por_cobrar),
+                _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md)
+            )
+        );
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");

@@ -6,36 +6,36 @@ if (!function_exists('invierte_date_time')) {
         function crea_resumen_servicios_solicitados($data)
         {
 
-
             $response = [];
             $ids_servicio = [];
+            if (es_data($data)) {
+                foreach ($data as $row) {
+                    $a = 0;
+                    $id_servicio = $row["id_servicio"];
+                    $ciclos_contratados = $row["num_ciclos_contratados"];
+                    if (!in_array($id_servicio, $ids_servicio)) {
+                        $ids_servicio[] = $id_servicio;
 
-            foreach ($data as $row) {
-                $a = 0;
-                $id_servicio = $row["id_servicio"];
-                $ciclos_contratados = $row["num_ciclos_contratados"];
-                if (!in_array($id_servicio, $ids_servicio)) {
-                    $ids_servicio[] = $id_servicio;
+                        $response[] =
+                            [
+                                "id_servicio" => $id_servicio,
+                                "pedidos" => $ciclos_contratados
+                            ];
 
-                    $response[] =
-                        [
-                            "id_servicio" => $id_servicio,
-                            "pedidos" => $ciclos_contratados
-                        ];
-
-                } else {
+                    } else {
 
 
-                    $index = search_bi_array($response, "id_servicio", $id_servicio);
+                        $index = search_bi_array($response, "id_servicio", $id_servicio);
 
-                    if ($index !== false) {
+                        if ($index !== false) {
 
-                        $response[$a]["pedidos"] =
-                            $response[$index]["pedidos"] + $ciclos_contratados;
+                            $response[$a]["pedidos"] =
+                                $response[$index]["pedidos"] + $ciclos_contratados;
 
-                        $a++;
+                            $a++;
+                        }
+
                     }
-
                 }
             }
             return $response;

@@ -860,6 +860,7 @@ let oculta_opciones_recibo = () => {
 };
 let cambio_reparto = function (e) {
 
+    modal('Buscando ...',1);
     let $id_recibo = get_parameter_enid($(this), 'id');
     let $id_usuario = get_parameter_enid($(this), 'usuario');
     let data_send = $.param({'id_recibo': $id_recibo, 'usuario': $id_usuario, 'v': 1, 'id_perfil': 21});
