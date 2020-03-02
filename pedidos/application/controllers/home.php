@@ -518,11 +518,11 @@ class Home extends CI_Controller
         $es_administrador = es_administrador($data);
         $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : 1;
         $repartidor = ($es_administrador) ? $this->get_usuario($id_repartidor) : [];
-
-
+        $usuario_compra = $this->get_usuario($id_usuario);
+        $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
         $data += [
             "domicilio" => $this->get_domicilio_entrega($id_recibo, $recibo),
-            "usuario" => $this->get_usuario($id_usuario),
+            "usuario" => $usuario_compra,
             "status_ventas" => $this->get_estatus_enid_service(),
             "tipificaciones" => $this->get_tipificaciones($id_recibo),
             "comentarios" => $this->get_recibo_comentarios($id_recibo),
@@ -541,10 +541,10 @@ class Home extends CI_Controller
             "es_venta_comisionada" => $es_venta_comisionada,
             "usuario_comision" => $usuario_comision,
             "es_lista_negra" => $es_lista_negra,
-            "repartidor" => $repartidor
+            "repartidor" => $repartidor,
+            "usuario_lista_negra" => $usuario_lista_negra
 
         ];
-
 
         $this->app->pagina($data, render_pendidos($data), 1);
     }
@@ -640,6 +640,24 @@ class Home extends CI_Controller
 
         $q['v'] = 1;
         return $this->app->api("recibo/reparto_recoleccion/format/json/", $q);
+
+    }
+
+    private function busqueda_lista_negra($usuario_compra)
+    {
+
+        $response = [];
+        if (es_data($usuario_compra)) {
+
+            $q = [
+                'idusuario' => pr($usuario_compra, 'idusuario'),
+                'email' => pr($usuario_compra, 'email'),
+                'tel_contacto' => pr($usuario_compra, 'tel_contacto'),
+                'tel_contacto_alterno' => pr($usuario_compra, 'tel_contacto_alterno')
+            ];
+            $response = $this->app->api("usuario/lista_negra/format/json/", $q);
+        }
+        return $response;
 
     }
 

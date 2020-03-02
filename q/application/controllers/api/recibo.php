@@ -975,8 +975,7 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    private
-    function add_tipificacion($q)
+    private function add_tipificacion($q)
     {
 
         return $this->app->api("tipificacion_recibo/index", $q, "json", "POST");

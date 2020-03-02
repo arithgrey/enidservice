@@ -553,129 +553,15 @@ class usuario_model extends CI_Model
         }
         return $data_complete;
     }
-    /*
 
+    function lista_negra($idusuario, $email, $tel_contacto, $tel_contacto_alterno)
+    {
+        $where = 'WHERE email ="' . $email . '"  ';
+        $extra_email = ($idusuario > 0) ? ' idusuario ="' . $idusuario . '" ' : '';
+        $extra_tel = (strlen($tel_contacto) > 3) ? ' OR  tel_contacto ="' . $tel_contacto . '"' : '';
+        $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? ' OR tel_contacto_alterno = "' . $tel_contacto_alterno . '"' : '';
 
-
-
-
-  function nombre_usuario($param){
-
-      $id_usuario =  $param["id_usuario"];
-      $query_get ="SELECT nombre FROM usuario WHERE idusuario =$id_usuario LIMIT 1";
-      $result =  $this->db->query($query_get);
-      return $result->result_array();
-  }
-
-
-
-
-
-  function get_tipo_entregas($param){
-
-      $id_usuario =  $param["id_usuario"];
-      $query_get = "SELECT
-                      entregas_en_casa
-                      tipo_entregas
-                      FROM usuario
-                      WHERE
-                      idusuario =  $id_usuario LIMIT 1";
-      $result =  $this->db->query($query_get);
-      return $result->result_array()[0]["tipo_entregas"];
-  }
-
-  function get_informes_por_telefono($param){
-
-      $id_usuario =  $param["id_usuario"];
-      $query_get = "SELECT
-                      informes_telefono
-                      FROM usuario
-                      WHERE
-                      idusuario =  $id_usuario LIMIT 1";
-      $result =  $this->db->query($query_get);
-      return $result->result_array()[0]["informes_telefono"];
-
-  }
-
-  function get_terminos_privacidad($param){
-
-      $id_usuario =  $param["id_usuario"];
-      $query_get = "SELECT
-                      *
-                      FROM privacidad_usuario
-                      WHERE
-                      id_usuario =  $id_usuario";
-      $result =  $this->db->query($query_get);
-      return $result->result_array();
-  }
-  */
-
-    /*
-  function set_cancelacion_compra($id){
-      return $this->q_up("num_cancelaciones" , "num_cancelaciones + 1 " , $id);
-  }
-    */
-    /*
-    function actualizarPassword($antes, $nuevo, $id_usuario){
-
-        $existe = count($this->validarPassword($antes, $id_usuario));
-        if($existe != 1){
-
-            return "La contraseña ingresada no corresponde a su contraseña actual";
-        }else{
-            $query_update = "UPDATE usuario SET password = '".$nuevo."' WHERE idusuario = '".$id_usuario."' limit 1";
-            $dbresponse = $this->db->query( $query_update );
-            return $dbresponse;
-        }
+        $query_create = "SELECT idusuario FROM usuario " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
+        return $this->db->query($query_create)->result_array();
     }
-    */
-    /*
-function set_telefono_negocio($param){
-
-    $params         =
-    [
-        "tel_contacto_alterno"  =>  $param["telefono_negocio"] ,
-        "lada_negocio"          =>  $param["lada_negocio"]
-    ];
-    $params_where   = ["idusuario" => $param["id_usuario"]];
-    return $this->update( $params , $params_where );
-}
-*/
-    /*
-    function set_telefono($param){
-
-
-    }
-    */
-    /*
-    function set_pass($param){
-
-
-        $new_pass                   =   randomString();
-        $params                     =   ["password" => sha1($new_pass)];
-        $params_where               =   ["email"   => trim($param["mail"]) ];
-        $resopnse["new_pass"]       =   $new_pass;
-        $resopnse["status_send"]    =   $this->update($params, $params_where );
-        $resopnse["mail"] =  $param["mail"];
-        return $resopnse;
-    }
-    */
-    /*
-      function get_usuario_cobranza($param){
-
-        $id_usuario =  $param["id_usuario"];
-        $query_get =    "SELECT
-                            idusuario id_usuario,
-                            nombre,
-                            apellido_paterno,
-                            apellido_materno ,
-                            email
-                        FROM usuario
-                        WHERE
-                        idusuario = $id_usuario LIMIT 1";
-        $result =  $this->db->query($query_get);
-        return $result->result_array();
-    }
-    */
-
 }

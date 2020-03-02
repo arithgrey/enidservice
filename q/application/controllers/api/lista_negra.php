@@ -46,5 +46,19 @@ class lista_negra extends REST_Controller
 
     }
 
+    function q_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "usuarios")) {
+
+            $response = $this->lista_negra_model->q($param['usuarios']);
+
+        }
+        $this->response($response);
+
+    }
+
 
 }
