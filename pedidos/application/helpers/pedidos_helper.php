@@ -53,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
 
         $saldo_cubierto = pr($r, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
-        $re[] = frm_pedidos($r, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
+        $re[] = frm_pedidos($data, $r, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
         $re[] = d(crea_estado_venta($status_ventas, $r));
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
@@ -578,7 +578,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_pedidos($recibo, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
+    function frm_pedidos($data, $recibo, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
     {
 
 
@@ -590,7 +590,7 @@ if (!function_exists('invierte_date_time')) {
             ), 13);
 
 
-        $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision);
+        $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
         $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _between_md);
 
@@ -617,7 +617,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function nombre_comisionista($es_venta_comisionada, $usuario_comision)
+    function nombre_comisionista($es_venta_comisionada, $usuario_comision, $data)
     {
         $response = [];
         if ($es_venta_comisionada && es_data($usuario_comision)) {
@@ -631,6 +631,15 @@ if (!function_exists('invierte_date_time')) {
                 $comisionista['apellido_materno']
             );
             $response[] = p($vendedor, _text_('blue_enid3 pl-3 pr-3  white', _strong));
+
+        } else {
+
+            $recibo = $data['recibo'];
+            $comision = pr($recibo, 'comision_venta');
+            $text = d(_text_('Lograsté una comisión de ', money($comision)),'underline');
+            $se_entrego = es_orden_pagada_entregada($data);
+
+            $response[] = (es_usuario_referencia($data) && $se_entrego) ? $text : '';
 
         }
         return append($response);
@@ -663,6 +672,7 @@ if (!function_exists('invierte_date_time')) {
         if (!$es_vendedor && $realizo_pago) {
             $disponibilidad = [16];
         }
+        $disponibilidad[] = 18;
 
         $id_status = pr($recibo, 'status');
 
@@ -1249,6 +1259,20 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "articulos",
                     "name" => "articulos",
                     "value" => $rb["num_ciclos_contratados"],
+                ]
+            );
+            $r[] = hiddens(
+                [
+                    "class" => "registro_articulo_interes",
+                    "name" => "registro_articulo_interes",
+                    "value" => $rb["registro_articulo_interes"],
+                ]
+            );
+            $r[] = hiddens(
+                [
+                    "class" => "id_usuario_compra",
+                    "name" => "id_usuario_compra",
+                    "value" => $rb["id_usuario"],
                 ]
             );
         }
@@ -3048,6 +3072,13 @@ if (!function_exists('invierte_date_time')) {
     function es_lista_negra($data)
     {
         return es_data($data['usuario_lista_negra']);
+    }
+
+    function es_usuario_referencia($data)
+    {
+
+        return ($data['id_usuario_referencia'] === $data['id_usuario']);
+
     }
 
 

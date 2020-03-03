@@ -17,6 +17,7 @@ let $saldo_cubierto = parseInt($saldo_actual_cubierto.val());
 let $modal_opciones_compra = $('#modal_opciones_compra');
 let $menu_recibo = $('.menu_recibo');
 let $repartidor = $('.repartidor');
+let $registro_articulo_interes = $('.registro_articulo_interes');
 $(document).ready(() => {
 
     $editar_estado_compra.click(function () {
@@ -57,6 +58,7 @@ $(document).ready(() => {
     $usuario_tipo_negocio.change(usuario_tipo_negocio);
     $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
     $repartidor.click(cambio_reparto);
+    valida_registro_articulo_interes();
 
 });
 let editar_horario_entrega = function (e) {
@@ -896,4 +898,47 @@ let nuevo_repartidor = function (e) {
 let response_nuevo_repartidor = function (data) {
 
     redirect('');
+};
+let valida_registro_articulo_interes = () => {
+
+    let $se_registra_articulo_interes = $registro_articulo_interes.val();
+    if (parseInt($se_registra_articulo_interes) < 1) {
+
+        let $recibo = $('.recibo').val();
+        let $id_usuario_compra = $('.id_usuario_compra').val();
+        let data_send = $.param({'v': 1, 'recibo': $recibo, 'id_usuario': $id_usuario_compra});
+        let url = "../q/index.php/api/tag_arquetipo/articulos_interes/format/json/";
+        request_enid("GET", data_send, url, response_form_interes);
+
+    }
+};
+let response_form_interes = function (data) {
+
+    modal(data);
+    $(".input_enid_format :input").focus(next_label_input_focus);
+    $(".input_enid_format :input").change(next_label_input_focus);
+
+    $('.agregar_nuevo_interes').click(function () {
+        $('.opciones_nuevo_articulo').addClass('d-none');
+        $('.form_articulo_interes').removeClass('d-none');
+    });
+
+    $('.form_articulo_interes').submit(registro_articulo_interes);
+    $('.aun_no_se').click(registro_aun_sin_articulo_interes);
+
+};
+let registro_articulo_interes = function (e) {
+
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/tag_arquetipo/interes/format/json/";
+    request_enid("POST", data_send, url, response_tag_arquetipo);
+    e.preventDefault();
+};
+let registro_aun_sin_articulo_interes = function () {
+
+    let $recibo = $('.recibo').val();
+    let data_send = $.param({'v': 1, 'id': $recibo});
+    let url = "../q/index.php/api/recibo/registro_articulo_interes/format/json/";
+    request_enid("PUT", data_send, url, response_tag_arquetipo);
 };

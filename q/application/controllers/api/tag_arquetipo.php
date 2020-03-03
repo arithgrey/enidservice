@@ -7,7 +7,7 @@ class Tag_arquetipo extends REST_Controller
     {
         parent::__construct();
         $this->load->model("tag_arquetipo_model");
-        $this->load->helper("arquetipo_helper");
+        $this->load->helper("arquetipo");
         $this->load->library(lib_def());
     }
 
@@ -78,6 +78,31 @@ class Tag_arquetipo extends REST_Controller
 
     }
 
+    function interes_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+
+        if (fx($param, "tag,tipo,usuario,recibo")) {
+
+            $params = [
+                'tag' => $param['tag'],
+                'id_tipo_tag_arquetipo' => $param['tipo'],
+                'id_usuario' => $param['usuario']
+            ];
+
+            $response = $this->tag_arquetipo_model->insert($params);
+            if ($response) {
+
+                $response = $this->notifica_registro_articulo_interes($param['recibo']);
+            }
+
+        }
+        $this->response($response);
+
+    }
+
     function index_DELETE()
     {
 
@@ -116,4 +141,24 @@ class Tag_arquetipo extends REST_Controller
         return $response;
 
     }
+
+    function articulos_interes_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "recibo,id_usuario")) {
+
+            $response = form_articulos_interes($param);
+        }
+        $this->response($response);
+
+    }
+
+    function notifica_registro_articulo_interes($id_recibo)
+    {
+
+        return $this->app->api("recibo/registro_articulo_interes", ["id" => $id_recibo], "json", "PUT");
+    }
+
 }
