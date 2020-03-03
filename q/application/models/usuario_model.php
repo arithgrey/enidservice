@@ -196,8 +196,10 @@ class usuario_model extends CI_Model
     {
 
         $id_perfil = $param["id_perfil"];
+        $id_empresa = $param['id_empresa'];
+        $id_usuario = $param['id_usuario'];
         $_num = mt_rand();
-        $this->create_tmp_usuarios_perfil(0, $_num, $id_perfil);
+        $this->create_tmp_usuarios_perfil(0, $_num, $id_perfil, $id_empresa, $id_usuario);
         $query_get =
             "SELECT
                     u.idusuario
@@ -214,12 +216,12 @@ class usuario_model extends CI_Model
 
         $result = $this->db->query($query_get);
         $data_complete = $result->result_array();
-        $this->create_tmp_usuarios_perfil(1, $_num, $id_perfil);
+        $this->create_tmp_usuarios_perfil(1, $_num, $id_perfil, $id_empresa, $id_usuario);
         return $data_complete;
 
     }
 
-    function create_tmp_usuarios_perfil($flag, $_num, $perfil)
+    function create_tmp_usuarios_perfil($flag, $_num, $perfil, $id_empresa, $id_usuario)
     {
 
         $query_drop = "DROP TABLE IF exists tmp_clienes_$_num";
@@ -228,11 +230,16 @@ class usuario_model extends CI_Model
 
             $query_create = "CREATE TABLE tmp_clienes_$_num AS 
                           SELECT 
-                            idusuario 
-                          FROM 
-                            usuario_perfil 
-                          WHERE 
-                          idperfil=" . $perfil;
+                            up.idusuario 
+                            FROM 
+                            usuario_perfil  up 
+                            INNER JOIN usuario u 
+                            ON 
+                            u.idusuario = up.idusuario
+                            WHERE 
+                            u.idempresa = '" . $id_empresa . "' AND
+                            up.idperfil=" . $perfil .
+                " OR up.idusuario ='" . $id_usuario . "'";
             $this->db->query($query_create);
         }
     }

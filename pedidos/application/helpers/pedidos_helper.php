@@ -92,37 +92,57 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = hiddens_detalle($r);
         $tipos_entregas = $data["tipos_entregas"];
-        $response[] = opciones_compra($domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
+        $response[] = opciones_compra($data, $domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
 
         return d($response, _10auto);
 
     }
 
-    function opciones_compra($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor, $tipos_entregas)
+    function opciones_compra($data, $domicilio, $recibo, $id_recibo, $usuario, $es_vendedor, $tipos_entregas)
     {
+
         $contenido[] = d(_titulo('¿Hay algo que hacer?'), 'mb-5  text-center');
         $x[] = tracker($id_recibo);
         $x[] = link_cambio_estado_venta();
-        $x[] = link_cambio_fecha($domicilio, $recibo);
-        $x[] = link_recordatorio($recibo, $usuario);
+        $x = link_cambio_punto_encuentro($data, $x, $recibo);
+        $x = link_recordatorio($recibo, $data, $x);
         $x[] = link_nota();
-        if (!$es_vendedor) {
-            $x[] = link_costo($id_recibo, $recibo, $es_vendedor);
-            $x[] = lista_negra($recibo, $es_vendedor);
-        }
+        $x = link_costo($x, $data, $id_recibo, $recibo, $es_vendedor);
+        $x = lista_negra($x, $recibo, $es_vendedor);
 
-        $text = intento_recuperacion($recibo);
+        $text = intento_recuperacion($recibo, $data);
         if ($text['es_visible']) {
             $x[] = $text['text'];
         }
-        $x[] = intento_reventa($recibo);
-        $x[] = imprimir_recibo($recibo, $tipos_entregas);
+        $x = intento_reventa($x, $recibo, $data);
+        $x = imprimir_recibo($x, $recibo, $tipos_entregas, $data);
 
         $contenido[] = d_c($x, ['class' => 'mt-4 elemento_menu border-bottom']);
         return gb_modal($contenido, 'modal_opciones_compra');
 
     }
 
+    function link_cambio_punto_encuentro($data, $response, $recibo)
+    {
+
+
+        if (es_data($recibo) && !es_orden_cancelada($data)) {
+
+            $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+            $form[] = frm_pe_avanzado($id_recibo);
+            $form[] = d(
+                a_enid("CAMBIAR LA HORA Y LUGAR DE ENTREGA",
+                    [
+                        "class" => "lugar_horario_entrega",
+                        "id" => $id_recibo,
+                        "onclick" => "confirma_lugar_horario_entrega()",
+                    ])
+            );
+            $response[] = append($form);
+        }
+        return $response;
+
+    }
 
     function formulario_arquetipos($id_usuario, $tipo_tag_arquetipo,
                                    $negocios, $usuario_tipo_negocio, $id_perfil)
@@ -935,13 +955,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function imprimir_recibo($recibo, $tipos_entrega)
+    function imprimir_recibo($response, $recibo, $tipos_entrega, $data)
     {
 
-
         $checkout = ticket_pago($recibo, $tipos_entrega, $format = 1);
-        $response = [];
-        if (es_data($checkout) && es_data($recibo)) {
+        $es_lista_negra = es_lista_negra($data);
+        if (es_data($checkout) && es_data($recibo) && !$es_lista_negra) {
 
             $recibo = $recibo[0];
             $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
@@ -951,19 +970,19 @@ if (!function_exists('invierte_date_time')) {
             $es_descuento = ($tipo_entrega == 1 && $descuento_entrega > 0);
             $saldo_pendiente = ($es_descuento) ? $checkout['saldo_pendiente_pago_contra_entrega'] : $checkout['saldo_pendiente'];
             $link = pago_oxxo('', $saldo_pendiente, $id_recibo, $id_usuario_venta);
-            $response[] = a_enid('imprimir instrucciones de pago en oxxo',
+            $contenido[] = a_enid('imprimir instrucciones de pago en oxxo',
                 [
                     'href' => $link,
                     'class' => 'black text-uppercase',
                     'target' => '_black'
                 ]
             );
+            $response[] = d($contenido);
         }
-        return d($response);
 
+        return $response;
 
     }
-
 
     function get_form_busqueda_pedidos($data, $param)
     {
@@ -1544,7 +1563,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_pe_avanzado($id_recibo)
+    function frm_pe_avanzado($id_recibo, $es_vendedor = 0)
     {
 
 
@@ -1572,6 +1591,10 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens([
             "name" => "id_carro_compras",
             "value" => 0,
+        ]);
+        $r[] = hiddens([
+            "name" => "vendedor",
+            "value" => $es_vendedor,
         ]);
 
         $r[] = form_close();
@@ -2630,9 +2653,10 @@ if (!function_exists('invierte_date_time')) {
             ["class" => "agregar_comentario", "onClick" => "agregar_nota();"]));
     }
 
-    function link_costo($id_recibo, $recibo, $es_vendedor)
+    function link_costo($response, $data, $id_recibo, $recibo, $es_vendedor)
     {
-        if (es_data($recibo)) {
+
+        if (!$es_vendedor && es_data($recibo)) {
 
             $saldo = pr($recibo, "saldo_cubierto");
             $ext = _text("/?costos_operacion=", $id_recibo, "&saldado=", $saldo);
@@ -2643,33 +2667,36 @@ if (!function_exists('invierte_date_time')) {
                     'class' => 'black'
                 ]
             );
-            return d($link);
+
+            $response[] = d($link);
         }
+        return $response;
+
 
     }
 
-    function lista_negra($recibo, $es_vendedor)
+    function lista_negra($response, $recibo, $es_vendedor)
     {
 
+        if (!$es_vendedor) {
+            $id_usuario = pr($recibo, "id_usuario");
+            $response[] = d(
+                a_enid("LISTA NEGRA",
+                    [
 
-        $id_usuario = pr($recibo, "id_usuario");
-
-        return d(
-            a_enid("LISTA NEGRA",
-                [
-
-                    "onclick" => "confirma_envio_lista_negra({$id_usuario})",
-                ]
-            )
-        );
+                        "onclick" => "confirma_envio_lista_negra({$id_usuario})",
+                    ]
+                )
+            );
+        }
+        return $response;
     }
-
 
     function link_cambio_estado_venta()
     {
 
         return d(
-            a_enid("CAMBIAR ESTADO DE LA COMPRA",
+            a_enid("STATUS DE LA COMPRA",
                 [
 
                     'class' => 'editar_estado_compra'
@@ -2678,25 +2705,31 @@ if (!function_exists('invierte_date_time')) {
         );
     }
 
-    function intento_reventa($recibo)
+    function intento_reventa($x, $recibo, $data)
     {
 
 
         $id_usuario = pr($recibo, "id_usuario");
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
-        return d(
-            a_enid("REVENTA",
-                [
+        $es_lista_negra = es_lista_negra($data);
+        if (!$es_lista_negra) {
 
-                    "onclick" => "confirma_intento_reventa({$id_usuario}, {$id_recibo})",
-                ]
-            )
-        );
+            $x[] = d(
+                a_enid("REVENTA",
+                    [
+
+                        "onclick" => "confirma_intento_reventa({$id_usuario}, {$id_recibo})",
+                    ]
+                )
+            );
+        }
+
+        return $x;
+
     }
 
-    function intento_recuperacion($recibo)
+    function intento_recuperacion($recibo, $data)
     {
-
 
         $id_usuario = pr($recibo, "id_usuario");
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
@@ -2713,7 +2746,8 @@ if (!function_exists('invierte_date_time')) {
         $dias = date_difference($hoy, $fecha_entrega);
 
         $pasaron_dias = ($dias > 0);
-        $es_visible = ($es_intento && $pasaron_dias);
+        $es_lista_negra = es_lista_negra($data);
+        $es_visible = ($es_intento && $pasaron_dias && !$es_lista_negra);
         if ($es_visible) {
 
             $aviso = _text_('pasaron ', $dias, 'dias desde que inció su proceso de compra hasta la fecha');
@@ -2762,22 +2796,24 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    function link_recordatorio($recibo, $usuario)
+    function link_recordatorio($recibo, $data, $response)
     {
 
-        $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
+        $es_lista_negra = es_lista_negra($data);
+        if (!$es_lista_negra) {
 
-        $path = path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1");
-        $link =
-            a_enid(
-                "AGENDAR UN RECORDATORIO",
-                ['class' => 'black',
+            $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
+            $path = path_enid("pedidos", "/?recibo=" . $id_recibo . "&recordatorio=1");
+            $link = a_enid(
+                "AGENDAR RECORDATORIO",
+                [
+                    'class' => 'black',
                     'href' => $path
                 ]
             );
-        return d(
-            $link
-        );
+            $response[] = d($link);
+        }
+        return $response;
 
     }
 
@@ -3007,6 +3043,11 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
 
+    }
+
+    function es_lista_negra($data)
+    {
+        return es_data($data['usuario_lista_negra']);
     }
 
 

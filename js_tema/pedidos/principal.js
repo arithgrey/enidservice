@@ -523,6 +523,15 @@ let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_
 
 
 };
+let confirma_lugar_horario_entrega = () => {
+
+    let text = "¿DESEAS CAMBIAR EL HORARIO Y PUNTO DE ENCUENTRO?";
+    show_confirm(text, '', "SI", function () {
+        $('.form_puntos_medios_avanzado').submit();
+    });
+
+};
+
 let confirma_envio_lista_negra = (id_usuario) => {
 
     let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
@@ -860,7 +869,7 @@ let oculta_opciones_recibo = () => {
 };
 let cambio_reparto = function (e) {
 
-    modal('Buscando ...',1);
+    modal('Buscando ...', 1);
     let $id_recibo = get_parameter_enid($(this), 'id');
     let $id_usuario = get_parameter_enid($(this), 'usuario');
     let data_send = $.param({'id_recibo': $id_recibo, 'usuario': $id_usuario, 'v': 1, 'id_perfil': 21});

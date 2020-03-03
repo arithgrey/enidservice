@@ -260,14 +260,22 @@ let notifica_punto_entrega = e => {
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
-
+    debugger;
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
-    if (parseInt(get_parameter(".primer_registro")) == 1) {
-        redirect_forma_pago(data.id_recibo);
-    } else {
-        redirect_forma_pago(get_parameter(".recibo"));
 
+    if (data.es_administrador) {
+
+        redirect(data.path_seguimiento)
+
+    } else {
+
+        if (parseInt(get_parameter(".primer_registro")) > 0) {
+            redirect_forma_pago(data.id_recibo);
+        } else {
+            redirect_forma_pago(data.id_recibo);
+        }
     }
+
 };
 let agregar_nota = () => {
 

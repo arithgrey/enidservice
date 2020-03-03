@@ -4,6 +4,7 @@ require APPPATH . '../../librerias/REST_Controller.php';
 class usuario extends REST_Controller
 {
     private $id_usuario;
+    private $id_empresa;
 
     function __construct()
     {
@@ -13,6 +14,7 @@ class usuario extends REST_Controller
         $this->load->library('table');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_empresa = $this->app->get_session('idempresa');
     }
 
     function index_PUT()
@@ -83,8 +85,15 @@ class usuario extends REST_Controller
 
         $param = $this->get();
         $response = false;
+
         if (fx($param, "id_perfil")) {
 
+            if (prm_def($param, 'id_empresa') < 1) {
+                $param['id_empresa'] = $this->id_empresa;
+            }
+            if (prm_def($param, 'id_usuario') < 1) {
+                $param['id_usuario'] = $this->id_usuario;
+            }
             $response = $this->usuario_model->get_usuarios_perfil($param);
             $response = $this->format_perfil($response, $param);
         }
@@ -1044,7 +1053,7 @@ class usuario extends REST_Controller
         $lista = [];
         foreach ($usuarios as $row) {
 
-            $lista[] =  $row['idusuario'];
+            $lista[] = $row['idusuario'];
         }
 
         $q['usuarios'] = get_keys($lista);

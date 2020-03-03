@@ -382,8 +382,23 @@ class Cobranza extends REST_Controller
             $response = $this->create_orden_punto_entrega($param);
             /*Lo agrego en el diccionario para el usuario*/
             $param["id_usuario"] = $this->id_usuario;
-            $response = $this->agrega_punto_encuentro_usuario($param);
+            $nuevo = $this->agrega_punto_encuentro_usuario($param);
             $response = $this->quita_domicilio_entrega_por_recibo($id_recibo);
+
+
+            $data =
+                [
+                    'restricciones' => $this->config->item('restricciones'),
+                    'id_perfil' => $this->app->getperfiles()
+                ];
+
+            $path_seguimiento = path_enid('pedidos_recibo', $id_recibo);
+            $response = [
+                'punto_nuevo' => $nuevo,
+                'id_recibo' => $id_recibo,
+                'es_administrador' => es_administrador_o_vendedor($data),
+                'path_seguimiento' => $path_seguimiento
+            ];
 
         }
         $this->response($response);
