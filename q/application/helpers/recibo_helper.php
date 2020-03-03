@@ -1369,5 +1369,4 @@ if (!function_exists('invierte_date_time')) {
         }
         return append($response);
     }
-
 }

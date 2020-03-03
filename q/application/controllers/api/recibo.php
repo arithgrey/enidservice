@@ -133,6 +133,19 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function registro_articulo_interes_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $response = $this->recibo_model->q_up("registro_articulo_interes", 1, $param['id']);
+
+        }
+        $this->response($response);
+    }
+
     function repartidor_PUT()
     {
 
@@ -1315,6 +1328,4 @@ class recibo extends REST_Controller
 
         return $this->app->api("usuario_perfil/repartidores/format/json/");
     }
-
-
 }

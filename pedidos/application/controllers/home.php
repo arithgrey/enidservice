@@ -542,7 +542,8 @@ class Home extends CI_Controller
             "usuario_comision" => $usuario_comision,
             "es_lista_negra" => $es_lista_negra,
             "repartidor" => $repartidor,
-            "usuario_lista_negra" => $usuario_lista_negra
+            "usuario_lista_negra" => $usuario_lista_negra,
+            "id_usuario_referencia" => $id_usuario_referencia
 
         ];
 
