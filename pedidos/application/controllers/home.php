@@ -516,7 +516,7 @@ class Home extends CI_Controller
 
         $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
         $es_administrador = es_administrador($data);
-        $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : 1;
+        $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : $data['id_usuario'];
         $repartidor = ($es_administrador) ? $this->get_usuario($id_repartidor) : [];
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);

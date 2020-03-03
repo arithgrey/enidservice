@@ -908,17 +908,17 @@ class Recibo_model extends CI_Model
             "( id_usuario_venta ='" . $id_usuario . "' OR id_usuario_referencia ='" . $id_usuario . "' )";
         $query_get = "SELECT 
 						id_servicio, 
+						id_usuario,
 						id_proyecto_persona_forma_pago	 id_recibo,
 						(monto_a_pagar * num_ciclos_contratados) total,
 						fecha_contra_entrega										 
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  
-						and " . $extra_usuario . " 						  
+						AND " . $extra_usuario . " 						  
 						AND  se_cancela = 0
 						AND  status !=  10
-						AND 
-						
+						AND 						
 						(
 						DATE(fecha_contra_entrega) <=  DATE(CURRENT_DATE())
 						OR

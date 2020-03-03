@@ -33,6 +33,10 @@ class Inicio extends CI_Controller
         $module = 1;
         $desarrollo = [8, 11, 7];
         switch ($num_perfil) {
+            case 4:
+                $module = "location:../pedidos";
+                break;
+
             case 5:
                 $module = "location:../cargar_base";
                 break;

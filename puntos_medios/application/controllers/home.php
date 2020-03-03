@@ -88,9 +88,8 @@ class Home extends CI_Controller
         if ($es_avanzado && $es_punto_encuentro) {
 
             /*solo tomamos la hora del pedido*/
-            $this->app->pagina($data,
-                    get_format_pagina_form_horario($data["recibo"],
-                            $param["punto_encuentro"]), 1);
+            $horario= get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]);
+            $this->app->pagina($data,$horario, 1);
 
         } else {
 

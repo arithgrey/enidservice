@@ -226,14 +226,37 @@ class productividad extends REST_Controller
 
     private function pendientes_ventas_usuario($id_usuario, $id_perfil)
     {
-        $response = $this->app->api("recibo/pendientes_sin_cierre/format/json/",
+        $usuarios = $this->app->api("recibo/pendientes_sin_cierre/format/json/",
             [
                 "id_usuario" => $id_usuario,
                 "id_perfil" => $id_perfil
             ]
         );
-        $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
-        return $response;
+        $usuarios = $this->usuarios_en_lista_negra($usuarios);
+        return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
+
+    }
+
+    private function usuarios_en_lista_negra($usuarios)
+    {
+        $lista = [];
+        $lista_completa = [];
+        foreach ($usuarios as $row) {
+
+            $lista[] = $row['id_usuario'];
+        }
+
+        $q['usuarios'] = get_keys($lista);
+        $usuarios_lista_negra = $this->app->api("lista_negra/q/format/json/", $q);
+        foreach ($usuarios as $row) {
+
+            $es_lista_negra = search_bi_array($usuarios_lista_negra, 'id_usuario', $row['id_usuario']);
+            if (!$es_lista_negra) {
+
+                $lista_completa[] = $row;
+            }
+        }
+        return $lista_completa;
     }
 
     private function get_ventas_enid_service()
