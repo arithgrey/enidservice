@@ -8,6 +8,7 @@ let $telefono = "";
 const MIN_NOMBRE_LENGTH = 2;
 const MIN_CORREO_LENGTH = 5;
 const MIN_TELEFONO_LENGTH = 7;
+const MAX_TELEFONO_LEGTH = 12;
 const MIN_TELEFONO_MOBILE_LENGTH = 9;
 const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
@@ -168,7 +169,6 @@ let format_error = (place, str) => {
 
 };
 let valida_email_form = (input, place_msj) => {
-
 
 
     despliega([place_msj], 1);

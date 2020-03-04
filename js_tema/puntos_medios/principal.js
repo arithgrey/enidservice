@@ -159,11 +159,13 @@ let muestra_horarios = function () {
 
 let registra_usuario = (e) => {
 
+
     verifica_formato_default_inputs(0);
     let len_telefono = $input_telefono.val().length;
     let len_pw = $input_pw.val().length;
     reset_posibles_errores();
-    if (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH && regular_email($input_correo)) {
+    let $longitud_minima_maxima = (len_telefono > MIN_TELEFONO_LENGTH && len_telefono <=  MAX_TELEFONO_LEGTH);
+    if ($longitud_minima_maxima && len_pw > MIN_PW_LENGTH && regular_email($input_correo)) {
         advierte('Procesando tu pedido', 1);
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
