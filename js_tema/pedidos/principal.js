@@ -613,14 +613,14 @@ let response_reventa = (data) => {
 
             $('.hay_interes').removeClass('d-none');
             $('.interes_articulo').click(function () {
-                $('.no_aplica').addClass('d-none');
+
                 $('.registro_articulo').removeClass('d-none');
                 $('.interes').val(1);
 
             });
 
             $('.no_aplica').click(function () {
-
+                $('.form_reventa').addClass('d-none');
                 registro_reventa();
             });
 
