@@ -255,6 +255,7 @@ class Home extends CI_Controller
             ];
 
             $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
+            $data = $this->agrega_usuario_entrega_tracker($data, $es_administrador);
 
             if ($data_recibo["saldo_cubierto"] > 0 && $data_recibo["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
 
@@ -288,6 +289,17 @@ class Home extends CI_Controller
         }
         return $data;
     }
+    private function agrega_usuario_entrega_tracker($data, $es_administrador)
+    {
+        if ($es_administrador && es_data($data['recibo'])) {
+
+            $recibo = $data['recibo'];
+            $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
+            $data['usuario_entrega'] = $this->app->usuario($id_usuario_entrega);
+        }
+        return $data;
+    }
+
 
     private function get_estatus_enid_service($q = [])
     {
@@ -512,16 +524,17 @@ class Home extends CI_Controller
 
     private function pedido($data, $recibo, $id_perfil)
     {
+        $es_administrador = es_administrador($data);
         $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
         $id_usuario = pr($recibo, "id_usuario");
-        $tipo_tag_arqquetipo = ($id_perfil == 3) ? $this->get_tipo_tag_arqquetipo() : [];
-        $tag_arquetipo = ($id_perfil == 3) ? $this->tag_arquetipo($id_usuario) : [];
+        $tipo_tag_arqquetipo = ($es_administrador) ? $this->get_tipo_tag_arqquetipo() : [];
+        $tag_arquetipo = ($es_administrador) ? $this->tag_arquetipo($id_usuario) : [];
         $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
         $resumen_compras = $this->get_num_compras($id_usuario);
         $num_compras = prm_def($resumen_compras, 'compras');
         $solicitudes = prm_def($resumen_compras, 'solicitudes');
 
-        $cupon = ($data['id_perfil'] != 6) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
+        $cupon = ($data['id_perfil'] != 6 && $es_administrador) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
 
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
         $es_venta_comisionada = ($id_usuario != $id_usuario_referencia && $this->id_usuario != $id_usuario_referencia);
@@ -529,7 +542,7 @@ class Home extends CI_Controller
         $es_lista_negra = $this->es_lista_negra($id_usuario);
 
         $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
-        $es_administrador = es_administrador($data);
+
         $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : $data['id_usuario'];
         $repartidor = ($es_administrador) ? $this->get_usuario($id_repartidor) : [];
         $usuario_compra = $this->get_usuario($id_usuario);
