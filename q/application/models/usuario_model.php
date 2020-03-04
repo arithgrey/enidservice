@@ -561,12 +561,12 @@ class usuario_model extends CI_Model
         return $data_complete;
     }
 
-    function lista_negra($idusuario, $email, $tel_contacto, $tel_contacto_alterno)
+    function busqueda($idusuario, $email, $tel_contacto, $tel_contacto_alterno)
     {
-        $where = 'WHERE email ="' . $email . '"  ';
-        $extra_email = ($idusuario > 0) ? ' idusuario ="' . $idusuario . '" ' : '';
-        $extra_tel = (strlen($tel_contacto) > 3) ? ' OR  tel_contacto ="' . $tel_contacto . '"' : '';
-        $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? ' OR tel_contacto_alterno = "' . $tel_contacto_alterno . '"' : '';
+        $where = "WHERE email = '" . $email . "'";
+        $extra_email = ($idusuario > 0) ? " OR idusuario = " . $idusuario  : " ";
+        $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
+        $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
 
         $query_create = "SELECT idusuario FROM usuario " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
         return $this->db->query($query_create)->result_array();

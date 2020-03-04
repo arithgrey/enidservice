@@ -17,10 +17,12 @@ class ventas_encuentro_model extends CI_Model
         $id_usuario = $param['id_usuario'];
 
         $hoy = date_format(horario_enid(), 'Y-m-d');
-        $extra = "AND id_usuario = '" . $id_usuario . "'";
+        $extra = "AND r.id_usuario_venta = '" . $id_usuario . "' OR r.id_usuario_referencia = '" . $id_usuario . "' ";
 
         if ($fecha_inicio != $hoy) {
-            $extra = " AND DATE(r.fecha_entrega) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' AND r.id_usuario = '" . $id_usuario . "'";
+            $extra = " AND DATE(r.fecha_entrega) 
+            BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' AND 
+            ( r.id_usuario_venta = '" . $id_usuario . "' OR r.id_usuario_referencia = '" . $id_usuario . "' )";
         }
 
         $query_get = "SELECT

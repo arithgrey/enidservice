@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = create_select($accciones,
             'accion_reventa',
-            'accion_reventa form-control text-uppercase acccion_realizada_select',
+            'accion_reventa form-control text-uppercase acccion_realizada_select text-uppercase',
             'accion_reventa',
             'text',
             'text', 0, 1, 0, '-'
