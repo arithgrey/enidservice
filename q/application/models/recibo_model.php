@@ -1116,7 +1116,10 @@ class Recibo_model extends CI_Model
                         AND intento_reventa < 1 AND fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
                         AND se_cancela < 1 AND cancela_cliente < 1
                         AND 
-                        (id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "') 
+                        (
+                            id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "'
+                        ) 
+                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
                         LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
