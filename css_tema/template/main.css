@@ -1282,6 +1282,10 @@ select {
     background: white;
 }
 
+.bg_custom_blue {
+    background: #301fac !important;
+}
+
 html {
     height: 100%;
     box-sizing: border-box;

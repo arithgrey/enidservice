@@ -798,7 +798,7 @@ class usuario extends REST_Controller
             $tel_contacto = $param['tel_contacto'];
             $tel_contacto_alterno = $param['tel_contacto_alterno'];
 
-            $usuarios = $this->usuario_model->lista_negra($idusuario, $email, $tel_contacto, $tel_contacto_alterno);
+            $usuarios = $this->usuario_model->busqueda($idusuario, $email, $tel_contacto, $tel_contacto_alterno);
             if (es_data($usuarios)) {
 
                 $response = $this->usuarios_en_lista_negra($usuarios);
@@ -1059,4 +1059,21 @@ class usuario extends REST_Controller
         $q['usuarios'] = get_keys($lista);
         return $this->app->api("lista_negra/q/format/json/", $q);
     }
+
+    function busqueda_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_usuario,email,tel_contacto")) {
+
+            $id_usuario = $param["id_usuario"];
+            $email = $param["email"];
+            $tel_contacto = $param["tel_contacto"];
+            $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto);
+
+        }
+        $this->response($response);
+    }
+
 }

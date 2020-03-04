@@ -270,7 +270,7 @@ class app extends CI_Controller
             $data["id_empresa"] = $session["idempresa"];
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
-            $data['restricciones'] = $this->config->item('restricciones');
+
 
 
         } else {
@@ -290,6 +290,7 @@ class app extends CI_Controller
 
         }
 
+        $data['restricciones'] = $this->config->item('restricciones');
         return $data;
     }
 
