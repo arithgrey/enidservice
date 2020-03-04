@@ -32,7 +32,6 @@ class motivo_lista_negra extends REST_Controller
 
 
         $param = $this->get();
-
         $response = false;
         if (fx($param, 'v,id_usuario')) {
 
@@ -41,14 +40,25 @@ class motivo_lista_negra extends REST_Controller
 
                 $render[] = form_open("", ["class" => "form_lista_negra", "method" => "post"]);
                 $render[] = d(_titulo('¿Cual es el motivo?'));
+
+                $otro = ['id' => 0, 'motivo' => 'otro'];
+                array_unshift($response, $otro);
                 $render[] = create_select(
-                    $response, 'id_motivo', 'motivo form-control mt-5 mb-5',
+                    $response, 'id_motivo', 'motivo form-control mt-5 mb-3',
                     'id', 'motivo', 'id', 0, 1, '-');
+
+                $render[] = d(input_frm('', '¿Cual fué el motivo?',
+                    [
+                        'class' => 'motivo_lista_negra',
+                        'id' => 'motivo_lista_negra',
+                        'name' => 'motivo_lista_negra',
+                        'type' => 'text'
+                    ]
+                ), 'input_agregar_motivo mt-5 mb-5 d-none');
                 $render[] = hiddens(['name' => 'id_usuario', 'value' => $param['id_usuario']]);
 
-                $render[] = btn('agregar');
+                $render[] = d(btn('agregar'),'agregar_botton_lista_negra d-none');
                 $render[] = form_close();
-
                 $response = append($render);
 
             }

@@ -651,12 +651,39 @@ let registra_intento_reventa = function (e) {
 };
 let response_motivos_lista_negra = (data) => {
     modal(data);
-    $('.form_lista_negra').submit(agregar_lista_negra)
+    $(".input_enid_format :input").focus(next_label_input_focus);
+    $(".input_enid_format :input").change(next_label_input_focus);
+    $('.form_lista_negra').submit(agregar_lista_negra);
+    $('.motivo').change(evalua_registro_motivo_lista_negra);
     oculta_opciones_recibo();
+};
+let evalua_registro_motivo_lista_negra = function () {
+
+    let $motivo = parseInt(get_valor_selected('.motivo'));
+    
+    if (Number.isInteger($motivo)) {
+        $('.agregar_botton_lista_negra').removeClass('d-none');
+    } else {
+        $('.agregar_botton_lista_negra').addClass('d-none');
+    }
+
+    if ($motivo === 0) {
+
+        $('.input_agregar_motivo').removeClass('d-none');
+        $('.motivo_lista_negra').attr('required', true);
+
+    } else {
+
+        $('.input_agregar_motivo').addClass('d-none');
+        $('.motivo_lista_negra').attr('required', false);
+
+    }
+
 };
 let agregar_lista_negra = (e) => {
 
-    if (parseInt(get_valor_selected('.motivo')) > 0) {
+    let $motivo = parseInt(get_valor_selected('.motivo'));
+    if ($motivo >= 0) {
 
         let data_send = $('.form_lista_negra').serialize();
         let url = "../q/index.php/api/lista_negra/index/format/json/";
@@ -665,9 +692,7 @@ let agregar_lista_negra = (e) => {
         request_enid("POST", data_send, url, function (data) {
             redirect('');
         });
-
     }
-
     e.preventDefault();
 }
 
