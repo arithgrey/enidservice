@@ -38,7 +38,7 @@ if (!function_exists('invierte_date_time')) {
 
         $str_fecha = ($es_hoy) ? 'Hoy ' : format_fecha($fecha);
         $fecha_titulo = d($str_fecha, _strong);
-        $fechas_contra_entrega = array_column($proximas_entregas, 'fecha_contra_entrega');
+        $fechas_contra_entrega = (es_data($proximas_entregas)) ? array_column($proximas_entregas, 'fecha_contra_entrega') : [];
         $hay_ordenes_ocultas = 0;
         $total_dia = 0;
         foreach ($horarios as $row) {

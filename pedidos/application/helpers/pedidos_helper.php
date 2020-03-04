@@ -157,7 +157,7 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_administrador($data)) {
 
-            $response[] = _titulo('tags arquetipos', 4);
+            $response[] = _titulo('¿Como es tu cliente?', 4);
             $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
             $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
             $text_tipo = _titulo('tipo negocio', 5);
@@ -225,7 +225,8 @@ if (!function_exists('invierte_date_time')) {
             $tag_arquetipo = $data['tag_arquetipo'];
             $tipo_tag_arquetipo = $data['tipo_tag_arquetipo'];
 
-            $prioridad_1[] = d_p($tipo_tag_arquetipo[0]['tipo'], _text_('mt-3 ', _strong));
+            $tipo = pr($tipo_tag_arquetipo, 'tipo');
+            $prioridad_1[] = d_p($tipo, _text_('mt-3 ', _strong));
             $prioridad_2[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 2, 'tipo'), _text_('mt-3 ', _strong));
             $prioridad_3[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 3, 'tipo'), _text_('mt-3 ', _strong));
             $prioridad_4[] = d_p(search_bi_array($tipo_tag_arquetipo, 'id_tipo_tag_arquetipo', 4, 'tipo'), _text_('mt-3 ', _strong));
@@ -433,9 +434,19 @@ if (!function_exists('invierte_date_time')) {
 
         if ($data['es_administrador']) {
 
-            $usuario_venta = format_nombre($data['vendedor']);
+
+            $se_define_repartidor = (es_data($data['usuario_entrega']));
+            $usuario_entrega = ($se_define_repartidor) ? format_nombre($data['usuario_entrega']) : '';
+
+
+            $nombre = _text_('Entregará ', $usuario_entrega);
+            $nombre = ($se_define_repartidor) ? $nombre : 'aún no hay repartidor asignado :(';
+            $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
+
+
+            $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
             $nombre = _text_('Agenda ', $usuario_venta);
-            $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  white bg_custom_blue');
+            $a[] = d($nombre, 'mt-3 text-center p-2 text-uppercase  bg-light border border-secondary');
 
         }
 
@@ -878,7 +889,9 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $es_orden_cancelada = es_orden_cancelada($data);
-        if (es_administrador($data) && !$es_orden_cancelada) {
+        $status = pr($data['recibo'], 'status');
+        
+        if (es_administrador($data) && !$es_orden_cancelada && $status != 6) {
 
             $usuario = $data['repartidor'];
             $nombre = format_nombre($usuario);
