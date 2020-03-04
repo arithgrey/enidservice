@@ -23,7 +23,7 @@ class Ventas_encuentro extends REST_Controller
         $es_usuario = ($this->id_usuario > 0);
         if (fx($param, "fecha_inicio,fecha_termino") && $es_usuario) {
 
-            $param['id_usuario'] = $this->id_usuario;
+            $param["id_usuario"] = $this->id_usuario;
             $response = $this->ventas_encuentro_model->get_periodo($param);
             $response = format_linea_tiempo($response);
 

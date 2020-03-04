@@ -79,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
         $seccion_venta = compra(
             $es_venta_cancelada,
             $r,
-            $domicilio, $num_compras,
+            $domicilio,
             $usuario,
             $id_recibo,
             $cupon, $es_vendedor,
@@ -374,7 +374,6 @@ if (!function_exists('invierte_date_time')) {
 
         $text_orden = _text("ORDEN #", $id_recibo);
 
-
         $path_servicio = get_url_servicio($id_servicio);
         $path_resumen_servicio = path_enid('pedidos_recibo', $id_recibo);
         $perfiles_vendedores = [3, 6];
@@ -402,6 +401,15 @@ if (!function_exists('invierte_date_time')) {
                 'class' => 'mt-5'
             ]
         );
+
+        if ($data['es_administrador']) {
+
+            $usuario_venta = format_nombre($data['vendedor']);
+            $nombre = _text_('Agenda ', $usuario_venta);
+            $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  white bg_custom_blue');
+
+        }
+
 
         return d($a, 3);
 
@@ -636,7 +644,7 @@ if (!function_exists('invierte_date_time')) {
 
             $recibo = $data['recibo'];
             $comision = pr($recibo, 'comision_venta');
-            $text = d(_text_('Lograsté una comisión de ', money($comision)),'underline');
+            $text = d(_text_('Lograsté una comisión de ', money($comision)), 'underline');
             $se_entrego = es_orden_pagada_entregada($data);
 
             $response[] = (es_usuario_referencia($data) && $se_entrego) ? $text : '';
@@ -733,6 +741,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function get_format_costo_operacion(
+        $data,
         $table_costos,
         $resumen,
         $tipo_costos,
@@ -744,7 +753,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = _titulo("COSTOS DE OPERACIÓN");
-        $r[] = nombre_comisionista($es_venta_comisionada, $usuario_comision);
+        $r[] = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
         $r[] = nombre_cliente($usuario_compra);
         $r[] = d($table_costos, 'mt-5 mb-5');
         $r[] = d($resumen);
@@ -806,7 +815,7 @@ if (!function_exists('invierte_date_time')) {
 
     function compra($es_venta_cancelada,
                     $recibo, $domicilio,
-                    $num_compras, $usuario, $id_recibo,
+                    $usuario, $id_recibo,
                     $cupon, $es_vendedor,
                     $id_perfil,
                     $status_ventas,
@@ -822,9 +831,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
         $r[] = repatidor($data, $id_recibo);
         $r[] = tiene_domilio($domicilio);
-
         $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
-        $r[] = compras_cliente($num_compras);
+        $r[] = compras_cliente($data);
         $r[] = seccion_usuario($usuario, $recibo, $es_vendedor);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio, $recibo);
@@ -2578,14 +2586,24 @@ if (!function_exists('invierte_date_time')) {
         return bloque($response);
     }
 
-    function compras_cliente($num)
+    function compras_cliente($data)
     {
 
-        $ext = " COMPRAS A LO LARGO DEL TIEMPO ";
-        $text = _text_($ext, d_p($num, 'ml-auto'));
+        $num = $data['num_compras'];
+        $solicitudes_pasadas_usuario = $data['solicitudes_pasadas_usuario'];
+        $ext = "COMPRAS A LO LARGO DEL TIEMPO ";
+        $base = _text_(_between, 'mt-5');
+        $total = 'bg_custom_blue p-2 white';
+        $text_compras = flex($ext, $num, _between, 'fp9', $total);
         $starts = ($num > 0) ? label("★★★★★", 'estrella') : "";
 
-        return bloque(_text_($text, $starts));
+        $ext = " ORDENES DE COMPRA QUE HA REALIZADO ESTE USUARIO ";
+        $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'fp9', $total);
+
+        $response[] = $text_compras;
+        $response[] = $starts;
+        $response[] = $text;
+        return bloque(append($response));
 
     }
 

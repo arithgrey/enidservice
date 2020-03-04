@@ -242,6 +242,7 @@ class Home extends CI_Controller
 
             $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
             $data_recibo = $recibo[0];
+            $es_administrador = es_administrador($data);
 
             $data += [
                 "notificacion_pago" => ($data_recibo["notificacion_pago"] > 0) ? 0 : $notificacion_pago,
@@ -250,15 +251,16 @@ class Home extends CI_Controller
                 "evaluacion" => 1,
                 "tipificaciones" => $this->get_tipificaciones($id_recibo),
                 "id_servicio" => pr($recibo, "id_servicio"),
+                "es_administrador" => $es_administrador
             ];
+
+            $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
 
             if ($data_recibo["saldo_cubierto"] > 0 && $data_recibo["se_cancela"] == 0 && $data["es_vendedor"] < 1) {
 
-                $data["evaluacion"] = $this->verifica_evaluacion($data_recibo["id_usuario"],
-                    $recibo[0]["id_servicio"]);
-
+                $data["evaluacion"] = $this->verifica_evaluacion(
+                    $data_recibo["id_usuario"], $recibo[0]["id_servicio"]);
             }
-
 
             $breadcrumbs = [];
             if ($data['in_session']) {
@@ -274,6 +276,17 @@ class Home extends CI_Controller
         }
 
 
+    }
+
+    private function agrega_usuario_referencia_tracker($data, $es_administrador)
+    {
+        if ($es_administrador && es_data($data['recibo'])) {
+
+            $recibo = $data['recibo'];
+            $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+            $data['vendedor'] = $this->app->usuario($id_usuario_referencia);
+        }
+        return $data;
     }
 
     private function get_estatus_enid_service($q = [])
@@ -307,8 +320,6 @@ class Home extends CI_Controller
 
         $id_recibo = $param['costos_operacion'];
         $recibo = $this->get_recibo($id_recibo);
-//        $id_servicio = pr($recibo, 'id_servicio');
-
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
         propietario(
@@ -358,6 +369,7 @@ class Home extends CI_Controller
         $path = $this->app->imgs_productos($id_servicio, 1, 1, 1);
 
         $response = get_format_costo_operacion(
+            $data,
             $tb,
             $totales,
             $this->get_tipo_costo_operacion(),
@@ -505,7 +517,9 @@ class Home extends CI_Controller
         $tipo_tag_arqquetipo = ($id_perfil == 3) ? $this->get_tipo_tag_arqquetipo() : [];
         $tag_arquetipo = ($id_perfil == 3) ? $this->tag_arquetipo($id_usuario) : [];
         $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
-        $num_compras = $this->get_num_compras($id_usuario);
+        $resumen_compras = $this->get_num_compras($id_usuario);
+        $num_compras = prm_def($resumen_compras, 'compras');
+        $solicitudes = prm_def($resumen_compras, 'solicitudes');
 
         $cupon = ($data['id_perfil'] != 6) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
 
@@ -543,8 +557,8 @@ class Home extends CI_Controller
             "es_lista_negra" => $es_lista_negra,
             "repartidor" => $repartidor,
             "usuario_lista_negra" => $usuario_lista_negra,
-            "id_usuario_referencia" => $id_usuario_referencia
-
+            "id_usuario_referencia" => $id_usuario_referencia,
+            "solicitudes_pasadas_usuario" => $solicitudes
         ];
 
         $this->app->pagina($data, render_pendidos($data), 1);
@@ -560,7 +574,10 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("recibo/num_compras_usuario/format/json/",
-            ["id_usuario" => $id_usuario]);
+            [
+                "id_usuario" => $id_usuario
+            ]
+        );
 
     }
 

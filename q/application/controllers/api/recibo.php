@@ -1178,7 +1178,27 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario")) {
 
-            $response = $this->recibo_model->get_total_compras_usuario($param["id_usuario"]);
+            $id_usuario = $param["id_usuario"];
+            $usuario = $this->app->usuario($id_usuario);
+            $response = 0;
+            if (es_data($usuario)) {
+
+                $email = pr($usuario, "email");
+                $tel_contacto = pr($usuario, "tel_contacto");
+                $q = ["id_usuario" => $id_usuario, "email" => $email, "tel_contacto" => $tel_contacto];
+                $usuarios = $this->usuarios_similares($q);
+                $response = 0;
+                if (es_data($usuarios)) {
+
+                    $lista = [];
+                    foreach ($usuarios as $row) {
+
+                        $lista[] = $row['idusuario'];
+                    }
+                    $ids = implode(",", $lista);
+                    $response = $this->recibo_model->get_total_compras_usuario($ids);
+                }
+            }
         }
         $this->response($response);
     }
@@ -1327,5 +1347,12 @@ class recibo extends REST_Controller
     {
 
         return $this->app->api("usuario_perfil/repartidores/format/json/");
+    }
+
+    function usuarios_similares($q)
+    {
+
+        return $this->app->api("usuario/busqueda/format/json/", $q);
+
     }
 }

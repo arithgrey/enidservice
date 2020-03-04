@@ -56,6 +56,7 @@ class lista_negra extends REST_Controller
             $response = $this->lista_negra_model->q($param['usuarios']);
 
         }
+
         $this->response($response);
 
     }
