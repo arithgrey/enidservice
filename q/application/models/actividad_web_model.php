@@ -534,8 +534,10 @@ class actividad_web_model extends CI_Model
                 u.email,
                 u.apellido_paterno,
                 u.apellido_materno 
-                FROM usuario u INNER JOIN $tabla_comisionistas up 
-                ON up.idusuario =  u.idusuario";
+                FROM usuario u 
+                INNER JOIN $tabla_comisionistas up 
+                ON up.idusuario =  u.idusuario
+                WHERE u.status = 1";
     }
 
     function recibos_fecha($param)
@@ -562,7 +564,7 @@ class actividad_web_model extends CI_Model
     function get_ventas_comisionadas($tabla_comisionistas, $tabla_recibos)
     {
 
-        $query_get = "SELECT * FROM " . $tabla_comisionistas." u 
+        $query_get = "SELECT * FROM " . $tabla_comisionistas . " u 
                       LEFT OUTER JOIN $tabla_recibos 
                       r ON u.idusuario =  r.id_usuario_referencia";
         return $this->db->query($query_get)->result_array();
