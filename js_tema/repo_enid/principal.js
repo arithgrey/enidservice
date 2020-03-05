@@ -2,6 +2,8 @@
 let incidencia = 0;
 let $form_arquetipos = $('.form_arquetipos');
 let $form_tipificaciones = $('.form_tipificaciones');
+let $form_ventas_comisionistas = $('.form_ventas_comisionistas');
+
 $(document).ready(() => {
 
     set_option("page", 0);
@@ -35,6 +37,7 @@ $(document).ready(() => {
     });
     $form_arquetipos.submit(arquetipos)
     $form_tipificaciones.submit(tipificaciones);
+    $form_ventas_comisionistas.submit(ventas_comisionistas);
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 let carga_uso_sistema = function (e) {
@@ -415,3 +418,22 @@ let tipificaciones = function (e) {
 };
 
 let set_menu = go => show_tabs(["#btn_repo_afiliacion", go]);
+
+let ventas_comisionistas = function (e) {
+
+
+    let f_inicio = get_parameter(".form_ventas_comisionistas #datetimepicker4");
+    let f_termino = get_parameter(".form_ventas_comisionistas #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_ventas_comisionistas.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/enid/ventas_comisionadas/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_arquetipos #datetimepicker5", ".form_arquetipos #datetimepicker4"]);
+    }
+    e.preventDefault();
+};

@@ -1853,4 +1853,50 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+
+    function format_reporte_ventas_comisionadas($estadisticas)
+    {
+
+
+        $response = [];
+        $contenido = [];
+        $base = 'col-md-2 border strong text-center';
+        $contenido[] = d("#", 'col-md-1');
+        $contenido[] = d("Vendedor", 'col-md-3');
+        $contenido[] = d("Operaciones", $base);
+        $contenido[] = d("Ventas efectivas", $base);
+        $contenido[] = d("En proceso", $base);
+        $contenido[] = d("Ventas caidas", $base);
+
+        $response[] = d($contenido, 'row border');
+
+        foreach ($estadisticas as $row) {
+
+            $idusuario = $row['idusuario'];
+            $id_usuario_referencia = $row['id_usuario_referencia'];
+
+            $actividad = ($id_usuario_referencia > 0);
+            $total = ($actividad) ? $row['total'] : 0;
+            $efectivas = ($actividad) ? $row['efectivas'] : 0;
+            $en_proceso = ($actividad) ? $row['en_proceso'] : 0;
+            $canceladas = ($actividad) ? $row['canceladas'] : 0;
+
+            $nombre_completo = format_nombre($row);
+
+            $contenido = [];
+            $base = 'col-md-2 border text-center';
+            $contenido[] = d($idusuario, 'col-md-1');
+            $contenido[] = d($nombre_completo, 'col-md-3 text-uppercase');
+            $contenido[] = d($total, $base);
+            $contenido[] = d($efectivas, $base);
+            $contenido[] = d($en_proceso, $base);
+            $contenido[] = d($canceladas, $base);
+
+            $response[] = d($contenido, 'row border');
+        }
+        return d($response, 'mt-5 col-md-12');
+
+    }
+
+
 }

@@ -495,4 +495,77 @@ class actividad_web_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+    function ventas_comisionadas($param)
+    {
+
+        $_num = mt_rand();
+        $sql_comisionistas = $this->comisionistas();
+        $tabla_comisionistas = 'tabla_comisionistas_' . $_num;
+
+        $tabla_comisionistas_usuarios = 'tabla_comisionistas_usuarios_' . $_num;
+        $tabla_recibos = 'tabla_recibos_' . $_num;
+        $sql_comisionistas_usuarios = $this->comisionistas_usuarios($tabla_comisionistas);
+        $sql_recibos = $this->recibos_fecha($param);
+
+
+        $this->crea_tabla_temploral($tabla_comisionistas, $sql_comisionistas, 0);
+        $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_comisionistas_usuarios, 0);
+        $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 0);
+
+        $response = $this->get_ventas_comisionadas($tabla_comisionistas_usuarios, $tabla_recibos);
+
+        $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 1);
+        $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_comisionistas_usuarios, 1);
+        $this->crea_tabla_temploral($tabla_comisionistas, '', 1);
+        return $response;
+
+    }
+
+    function comisionistas()
+    {
+        return "SELECT idusuario FROM usuario_perfil WHERE idperfil IN(3,4,6)";
+    }
+
+    function comisionistas_usuarios($tabla_comisionistas)
+    {
+        return "SELECT 
+                u.idusuario,
+                u.nombre,
+                u.email,
+                u.apellido_paterno,
+                u.apellido_materno 
+                FROM usuario u INNER JOIN $tabla_comisionistas up 
+                ON up.idusuario =  u.idusuario";
+    }
+
+    function recibos_fecha($param)
+    {
+        return "SELECT 
+                COUNT(0)total, 
+                SUM(CASE WHEN saldo_cubierto > 0 THEN 1 ELSE  0 END )efectivas, 
+                SUM(CASE WHEN saldo_cubierto < 1 AND se_cancela = 0 AND  cancela_cliente = 0  THEN 1 ELSE  0 END )en_proceso ,
+                SUM(CASE WHEN se_cancela > 0 OR  cancela_cliente > 0  THEN 1 ELSE  0 END )canceladas ,
+                id_usuario_referencia
+                FROM 
+                proyecto_persona_forma_pago                
+                WHERE 
+                DATE(fecha_registro)
+                BETWEEN 
+                '" . $param["fecha_inicio"] . "' AND '" . $param["fecha_termino"] . "' 
+                GROUP BY 
+                id_usuario_referencia
+                ORDER BY 
+                COUNT(0) DESC";
+    }
+
+
+    function get_ventas_comisionadas($tabla_comisionistas, $tabla_recibos)
+    {
+
+        $query_get = "SELECT * FROM " . $tabla_comisionistas." u 
+                      LEFT OUTER JOIN $tabla_recibos 
+                      r ON u.idusuario =  r.id_usuario_referencia";
+        return $this->db->query($query_get)->result_array();
+    }
+
 }

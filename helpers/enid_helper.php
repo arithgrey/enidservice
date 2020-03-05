@@ -3316,11 +3316,22 @@ function format_nombre($usuario)
 {
 
     $response = "";
-    if (es_data($usuario)) {
+    $es_usuario = (is_array($usuario) && array_key_exists('nombre', $usuario));
+    if ($es_usuario) {
+
         $response = _text_(
-            $usuario[0]['nombre'],
-            $usuario[0]['apellido_paterno']
+            $usuario['nombre'],
+            $usuario['apellido_paterno']
         );
+    } else {
+
+        if (es_data($usuario)) {
+            $response = _text_(
+                $usuario[0]['nombre'],
+                $usuario[0]['apellido_paterno']
+            );
+        }
+
     }
     return $response;
 
