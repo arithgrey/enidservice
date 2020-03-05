@@ -1133,20 +1133,17 @@ class Recibo_model extends CI_Model
                         proyecto_persona_forma_pago p 
                         WHERE
                         es_test < 1 
-                        AND p.saldo_cubierto < 1
-                        AND p.id_proyecto_persona_forma_pago > 384
-                        AND  
-                        p.intento_recuperacion < 1
-                        AND 
-                        p.fecha_contra_entrega < DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY)
+                        AND p.saldo_cubierto < 1                        
+                        AND p.intento_recuperacion < 1
+                        AND p.id_proyecto_persona_forma_pago > 384                    
+                        AND DATE(p.fecha_contra_entrega) < DATE(DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
                         AND 
                         (
                         p.id_usuario_referencia = '" . $id_vendedor . "'
                         OR 
                         p.id_usuario_venta = '" . $id_vendedor . "' 
                         )
-                        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
-                        
+                        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)                        
                         LIMIT 5";
 
         return $this->db->query($query_get)->result_array();

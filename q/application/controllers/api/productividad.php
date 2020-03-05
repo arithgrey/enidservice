@@ -55,9 +55,14 @@ class productividad extends REST_Controller
                     "ventas_semana" => $this->ventas_semana($id_usuario)
                 ];
 
-                $response = get_tareas_pendienetes_usuario($response);
+                $response = tareas_administrador($response);
 
                 break;
+
+            case (6):
+                $response = tareas_vendedor($response);
+                break;
+
 
             case 21:
 
@@ -65,7 +70,9 @@ class productividad extends REST_Controller
                 $response = pendientes_reparto($response);
                 break;
 
-            case (20 || 6):
+
+            case (20):
+
 
                 $response = pendientes_cliente($response);
                 break;
@@ -133,33 +140,6 @@ class productividad extends REST_Controller
             "id_perfil" => $id_perfil
         ];
 
-        switch ($id_perfil) {
-            case 3:
-
-                $response += [
-
-                    "email_enviados_enid_service" => $this->email_enviados_enid_service(),
-                    "accesos_enid_service" => $this->accesos_enid_service(),
-                    "tareas_enid_service" => $this->tareas_enid_service()[0]["num_pendientes_desarrollo"],
-                    "num_pendientes_direccion" => $this->tareas_enid_service()[0]["num_pendientes_direccion"]
-                ];
-
-                break;
-
-            case 4:
-
-                $response += [
-                    "email_enviados_enid_service" => $this->email_enviados_enid_service(),
-                    "accesos_enid_service" => $this->accesos_enid_service(),
-                    "tareas_enid_service" => pr($this->tareas_enid_service(), "num_pendientes_desarrollo", 0),
-                ];
-
-                break;
-
-            default:
-
-                break;
-        }
         return $response;
     }
 
