@@ -211,7 +211,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($t, $separacion);
-        $r[] = btn("Registrar",['class'=> 'mt-5']);
+        $r[] = btn("Registrar", ['class' => 'mt-5']);
         $r[] = place("place_config_usuario");
         $r[] = form_close();
         return append($r);
@@ -269,32 +269,44 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $agregar = tab(
+            btn("Agregar"),
+            "#tab_mas_info_usuario",
+            [
+                "class" => "btn_nuevo_usuario"
+            ]
+        );
         $l = [
             li(
                 $link_miembros,
                 [
-                    "class" => "active",
+                    "class" => "active col-md-4",
                     "id" => "1"
                 ]
             ),
             li(
-                $link_bajas
+                $link_bajas, 'col-md-4'
+            ),
+            li(
+                $agregar, 'col-md-3'
             )
         ];
 
 
-        $response[] = _titulo("Equipo Enid Service");
+        $response[] = _titulo("Equipo");
         $response[] = ul($l, "nav nav-tabs mb-5 mt-5");
 
-        $contenido[] = tab(
-            btn("Agregar", ['class' => 'col-sm-3'], 1),
-            "#tab_mas_info_usuario",
-            [
-                "class" => "btn_nuevo_usuario "
+
+        $response[] = d(_titulo('Busqueda', 3),_mbt5);
+        $response[] = input_frm('', '¿a quién buscamos? Nombre, email, telefono', [
+                'name' => 'q',
+                'id' => 'q',
+                'class' => 'q nombre_usuario'
             ]
         );
 
-        $contenido[] = place("usuarios_enid_service");
+
+        $contenido[] = place("usuarios_enid_service mt-5");
         $response[] = tab_seccion($contenido, 'tab_usuarios_activos', 1);
 
         return d($response, 12);

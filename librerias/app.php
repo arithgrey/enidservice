@@ -699,6 +699,7 @@ class app extends CI_Controller
                         [
                             'planes_servicios/principal.js',
                             'planes_servicios/img.js',
+                            "alerts/jquery-confirm.js",
                             'js/summernote.js',
                         ]
                     ,

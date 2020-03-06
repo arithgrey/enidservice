@@ -483,20 +483,18 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = $data["paginacion"];
-
         foreach ($data["miembros"] as $row) {
 
             $contenido = [];
             $id_usuario = $row["id_usuario"];
-            $persona = _text_(
-                $row["nombre"], $row["apellido_paterno"], $row["apellido_materno"]);
+            $persona = _text_($row["nombre"], $row["apellido_paterno"], $row["apellido_materno"]);
 
 
             $imagen = img(
                 [
                     "src" => path_enid('imagen_usuario', $id_usuario),
                     "onerror" => "this.src='../img_tema/user/user.png'",
-                    'class' => 'w-50 mw-100 mx-auto'
+                    'class' => 'w_50 mw-100 mx-auto'
                 ]
             );
             $contenido[] = d($imagen);

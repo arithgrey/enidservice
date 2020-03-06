@@ -5,12 +5,20 @@ let $form_recurso = $('.frm_recurso');
 let $id_recurso = $('#id_recurso');
 let $configurar_recurso = $('#configurar_recurso');
 let $form = $('.form-miembro-enid-service');
+let $nombre_usuario = $('.nombre_usuario');
 $(document).ready(function () {
 
     set_option("estado_usuario", 1);
     set_option("depto", 0);
     set_option("page", 1);
     $("footer").ready(carga_usuarios);
+    $nombre_usuario.keypress(function (e) {
+
+        let keycode = e.keyCode;
+        if (keycode === 13) {
+            carga_usuarios();
+        }
+    });
     $(".equipo_enid_service").click(carga_usuarios);
     $(".form-miembro-enid-service").submit(actualizacion_usuario);
     $(".btn_nuevo_usuario").click(pre_nuevo_usuario);
@@ -62,12 +70,15 @@ let get_place_usuarios = () => {
 let carga_usuarios = () => {
 
     let place = get_place_usuarios();
+    let $nombre_usuario = $('.nombre_usuario').val();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
-        "status": get_option("estado_usuario"),
-        "id_departamento": get_option("depto"),
-        "page": get_option("page")
-    };
+            "status": get_option("estado_usuario"),
+            "id_departamento": get_option("depto"),
+            "page": get_option("page"),
+            "q": $nombre_usuario,
+        }
+    ;
     request_enid("GET", data_send, url, response_carga_usuario);
 };
 let response_carga_usuario = (data) => {
@@ -154,7 +165,7 @@ let response_puesto_por_cargo = (data) => {
 };
 let actualizacion_usuario = (e) => {
 
-    
+
     let data_send = $(".form-miembro-enid-service").serialize() + "&" + $.param({
         "id_usuario": get_option("id_usuario"),
         "editar": get_option("flag_editar")
