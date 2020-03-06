@@ -326,26 +326,25 @@ class usuario_model extends CI_Model
     function get_where_usuarios_total($param)
     {
 
-        $id_departamento = $param["id_departamento"];
         $status = $param["status"];
+        $q = prm_def($param, "q");
+        $extra = (strlen($q) > 1) ? " WHERE 
+        u.nombre like '%" . $q . "%'
+        OR u.email like '%" . $q . "%'
+        OR u.apellido_paterno like '%" . $q . "%'
+        OR u.apellido_materno like '%" . $q . "%'
+        OR u.tel_contacto  like '%" . $q . "%'
+         " : '';
 
-        switch (intval($param["id_departamento"])) {
-            case 0:
-                return "					
-                    inner join usuario_perfil pu
+        return "   inner join usuario_perfil pu
                     on 
                     pu.idusuario = u.idusuario
                     AND pu.idperfil != 20                    
-                    AND u.status = $status ORDER BY u.fecha_registro DESC";
-                break;
+                    AND u.status = $status
+                    " . $extra . " 
+                    ORDER BY u.fecha_registro DESC";
 
-            case 8:
 
-                return " WHERE id_departamento = 8 ";
-                break;
-            default:
-                break;
-        }
     }
 
     function get_productos_deseados_sugerencias($param)
@@ -454,29 +453,22 @@ class usuario_model extends CI_Model
     function get_where_usuarios($param)
     {
 
-        $id_departamento = $param["id_departamento"];
         $status = $param["status"];
-
-        switch (intval($param["id_departamento"])) {
-            case 0:
-                $limit = $this->get_limit_usuarios($param);
-                return
-                    "
-                    inner join usuario_perfil pu
+        $q = prm_def($param, "q");
+        $extra = (strlen($q) > 1) ? " WHERE 
+        u.nombre like '%" . $q . "%'
+        OR u.email like '%" . $q . "%'
+        OR u.apellido_paterno like '%" . $q . "%'
+        OR u.apellido_materno like '%" . $q . "%'
+        OR u.tel_contacto  like '%" . $q . "%'
+         " : " ";
+        $limit = $this->get_limit_usuarios($param);
+        return "inner join usuario_perfil pu
                     on 
                     pu.idusuario = u.idusuario
                     AND pu.idperfil != 20                    
-                    AND u.status = $status ORDER BY u.fecha_registro DESC " . $limit;
-                break;
-
-            case 8:
-                $limit = $this->get_limit_usuarios($param);
-                return
-                    " WHERE id_departamento = 8 " . $limit;
-                break;
-            default:
-                break;
-        }
+                    AND u.status = $status
+                     " . $extra . " ORDER BY u.fecha_registro DESC " . $limit;
     }
 
     function set_miembro($param)
@@ -564,7 +556,7 @@ class usuario_model extends CI_Model
     function busqueda($idusuario, $email, $tel_contacto, $tel_contacto_alterno)
     {
         $where = "WHERE email = '" . $email . "'";
-        $extra_email = ($idusuario > 0) ? " OR idusuario = " . $idusuario  : " ";
+        $extra_email = ($idusuario > 0) ? " OR idusuario = " . $idusuario : " ";
         $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
         $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
 
