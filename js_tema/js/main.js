@@ -227,21 +227,6 @@ let valida_tel_form = (input, place_msj) => {
     return flag;
 };
 
-let regular_email = selector => {
-
-    let valor = selector.val();
-    let es_valido = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/.test(valor);
-    let $selector_mensaje = selector.next('label').next('div');
-    if (!es_valido) {
-
-        $selector_mensaje.removeClass('d-none');
-
-    } else {
-
-        $selector_mensaje.addClass('d-none');
-    }
-    return es_valido;
-};
 
 let valEmail = valor => {
 
@@ -932,7 +917,7 @@ let valida_formato_correo = function (e) {
         let times = ($text.match(/@/g) || []).length;
         const formatTimes = (times > 0) ? e.preventDefault() : '';
     }
-    regular_email($(this));
+    es_formato_email($(this));
 
 };
 let valida_formato_telefono = function (e) {
@@ -965,7 +950,7 @@ let paste_email = function () {
         }
         event.target.value = text;
     }
-    regular_email($(this));
+    es_formato_email($(this));
 };
 let paste_nombre = function () {
 
@@ -1023,7 +1008,7 @@ let verifica_formato_default_inputs = function (validacion = 1) {
 
     if (document.body.querySelector(".input_enid_format")) {
         let input_enid_format = $('.input_enid_format :input');
-        for (var i = 0; i < input_enid_format.length; i++) {
+        for (let i = 0; i < input_enid_format.length; i++) {
             let $selector_input = input_enid_format[i];
             if ($selector_input.tagName == "INPUT") {
 
@@ -1084,4 +1069,75 @@ let oculta_acceder = function () {
 
         $('.contenedor-lateral-menu').addClass('d-none').removeClass('d-block');
     }
-}
+};
+let escucha_submmit_selector = function (e, $form, $submit = 0) {
+
+    if (e.keyCode === 13) {
+
+        if ($form.find('.submit').length) {
+
+            $form.find('.submit_enid').click();
+
+        } else {
+
+            $form.find('button').click();
+        }
+        if ($submit > 0) {
+            $form.find('input').focus();
+            $form.submit();
+        }
+    }
+};
+let es_formato_telefono = function ($input) {
+
+    let len_telefono = $input.val().length;
+    let tiene_formato = true;
+    if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono !== TELEFONO_MOBILE_LENGTH) {
+
+        $input.next().next().removeClass('d-none');
+        tiene_formato = false;
+    } else {
+        $input.next().next().addClass('d-none');
+    }
+    return tiene_formato;
+};
+let es_formato_password = function ($input) {
+
+    let len_pw = $input.val().length;
+    let tiene_formato = true;
+    if (len_pw <= MIN_PW_LENGTH) {
+        $input.next().next().removeClass('d-none');
+        tiene_formato = false;
+    } else {
+        $input.next().next().addClass('d-none');
+    }
+    return tiene_formato;
+
+};
+let es_formato_email = selector => {
+
+    let valor = selector.val();
+    let es_valido = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/.test(valor);
+    let $selector_mensaje = selector.next('label').next('div');
+    if (!es_valido) {
+
+        $selector_mensaje.removeClass('d-none');
+
+    } else {
+
+        $selector_mensaje.addClass('d-none');
+    }
+    return es_valido;
+};
+let es_formato_nombre = $input => {
+
+    let len_pw = $input.val().length;
+    let tiene_formato = true;
+    if (len_pw <= MIN_NOMBRE_LENGTH) {
+        $input.next().next().removeClass('d-none');
+        tiene_formato = false;
+    } else {
+        $input.next().next().addClass('d-none');
+    }
+    return tiene_formato;
+};

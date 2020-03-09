@@ -272,7 +272,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
             case "email":
 
-                $attributes["required"] = "true";
+                $attributes["required"] = true;
                 $attributes["pattern"] =
                     '[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)';
                 $attributes['title'] = "Verifica el formato de tu correo!";
@@ -283,7 +283,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 break;
 
             case "password":
-                $attributes["required"] = "true";
+                $attributes["required"] = true;
                 break;
 
             case "text":
@@ -319,9 +319,15 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
     }
 
     $attributes["autocomplete"] = "off";
+    if (array_key_exists('required', $attributes)) {
+        $attributes['required'] = true;
+    }
+
     $attr = add_attributes($attributes);
 
-    return ($e < 1) ? "<input " . $attr . " >" : addNRow("<input " . $attr . " >");
+
+    return ($e < 1) ? "<input  $attr>" : addNRow("<input " . $attr . " >");
+
 
 }
 

@@ -20,6 +20,16 @@ let contenedor_recuperacion_password = '.contenedor_recuperacion_password';
 let seccion_registro_usuario = '.seccion_registro_nuevo_usuario_enid_service';
 let registro_pw = '.registro_pw';
 let $form_inicio = $(form_inicio);
+let $form_registro = $(form_registro);
+let $nombre_persona = $form_registro.find(nombre_persona);
+let $registro_email = $form_registro.find('.registro_email');
+let $registro_pw = $form_registro.find('.registro_pw');
+let $botton_registro = $form_registro.find('.botton_registro');
+
+
+let $input_correo_inicio = $form_inicio.find('.correo');
+let $input_password_inicio = $form_inicio.find('#pw');
+
 $(document).on('ready', () => {
 
 
@@ -30,35 +40,48 @@ $(document).on('ready', () => {
     $form_inicio.submit(valida_form_session);
     $form_pass.submit(recupera_password);
     $olvide_pass.click(carga_mail);
-    $(form_registro).submit(agrega_usuario);
+    $form_registro.submit(agrega_usuario);
     $olvide_pass.click(muestra_contenedor_recuperacion);
     $('.btn_acceder_cuenta_enid').click(muestra_seccion_acceso);
 
     despliega('.extra_menu_simple', 1);
     despliega(['.base_compras', '.base_paginas_extra', '.info_metodos_pago'], 0);
-
-    $(nombre_persona).keyup(function () {
+    /*REGISTRO*/
+    $nombre_persona.keyup(function (e) {
         transforma_mayusculas(this);
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_registro, 1);
+    });
+
+    $registro_email.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_registro, 1);
+    });
+
+    $registro_pw.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_registro, 1);
     });
 
     $email_recuperacion.keyup(() => {
-        sin_espacios(email_recuperacion);
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_registro, 1);
     });
 
-    $form_inicio.find('.correo').keyup(submit_inputs);
-    $form_inicio.find('#pw').keyup(submit_inputs);
+
+    /*Acceso*/
+    $input_correo_inicio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_inicio, 1);
+    });
+
+    $input_password_inicio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_inicio, 1);
+    });
 
 });
 
-let submit_inputs = (e) => {
-
-    let keycode = e.keyCode;
-    if (keycode === 13) {
-
-        $form_inicio.submit();
-    }
-
-};
 
 let inicio_session = () => {
 
@@ -90,19 +113,21 @@ let response_inicio_session = data => {
 };
 
 let valida_form_session = e => {
-    let pass = $.trim($pw.val());
-    let str_email = $mail_acceso.val();
-    if (regular_email($mail_acceso)) {
-        if (valida_formato_pass(pass) === valida_formato_email(str_email)) {
-            let str = "" + CryptoJS.SHA1(pass);
-            let action = $('#in').attr('action');
-            set_option({
-                'tmp_password': str,
-                'url': action,
-                'email': str_email
-            });
-            inicio_session();
-        }
+
+    let respuestas = [];
+    respuestas.push(es_formato_password($input_password_inicio));
+    respuestas.push(es_formato_email($input_correo_inicio));
+    let $tiene_formato = (!respuestas.includes(false));
+
+    if ($tiene_formato) {
+        let str = "" + CryptoJS.SHA1($input_password_inicio.val());
+        let action = $('#in').attr('action');
+        set_option({
+            'tmp_password': str,
+            'url': action,
+            'email': $input_correo_inicio.val()
+        });
+        inicio_session();
     }
 
     e.preventDefault();
@@ -134,26 +159,6 @@ let response_recupera_password = data => {
 
 let carga_mail = () => $email_recuperacion.val(get_parameter(email));
 
-let valida_formato_pass = text => {
-
-    let response = 1;
-    if (text.length < 8) {
-        advierte('Ups la contaseña es muy corta!');
-        response--;
-    }
-    return response;
-
-};
-
-let valida_formato_email = email => {
-
-    let response = 1;
-    if (valEmail(email)) {
-        response--;
-        format_error(selector_acceso_sistema, 'Correo no valido');
-    }
-    return response;
-};
 
 let mostrar_seccion_nuevo_usuario = () => {
 
@@ -165,38 +170,40 @@ let mostrar_seccion_nuevo_usuario = () => {
 let agrega_usuario = (e) => {
 
     let url = '../q/index.php/api/usuario/vendedor/format/json/';
-    let password = get_parameter(registro_pw);
-    let email = get_parameter('.registro_email');
-    let nombre = get_parameter(nombre_persona);
-    let formato_email = valida_formato_email(email);
     let perfil = get_valor_selected('.perfil');
+    let respuestas = [];
+    respuestas.push(es_formato_password($registro_pw));
+    respuestas.push(es_formato_email($registro_email));
+    respuestas.push(es_formato_nombre($nombre_persona));
+    let $tiene_formato = (!respuestas.includes(false));
 
-    if (formato_email === valida_formato_pass(password) && parseInt(formato_email) > 0) {
-        if (val_text_form(nombre_persona, '.place_registro_miembro', 3, 'Nombre')) {
+    if ($tiene_formato) {
 
-            let tmp_password = '' + CryptoJS.SHA1(password);
-            set_option({
-                'tmp_password': tmp_password,
-                'email': email,
-                'nombre': nombre,
+        let tmp_password = '' + CryptoJS.SHA1($registro_pw.val());
+        let nombre = $nombre_persona.val();
+        let email = $registro_email.val();
+        set_option({
+            'tmp_password': tmp_password,
+            'email': email,
+            'nombre': nombre,
 
-            });
+        });
 
-            let data_send = {
-                'nombre': nombre,
-                'email': email,
-                'password': tmp_password,
-                'simple': 1,
-                'perfil': perfil
-            };
-            request_enid('POST', data_send, url, response_usuario_registro);
-        }
+        let data_send = {
+            'nombre': nombre,
+            'email': email,
+            'password': tmp_password,
+            'simple': 1,
+            'perfil': perfil
+        };
+        request_enid('POST', data_send, url, response_usuario_registro);
+
     }
     e.preventDefault();
 };
 let response_usuario_registro = data => {
 
-    if (data.usuario_registrado == 1) {
+    if (data.usuario_registrado === 1) {
 
         redirect('?action=registro');
 

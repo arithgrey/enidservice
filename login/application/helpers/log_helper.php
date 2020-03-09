@@ -133,11 +133,12 @@ if (!function_exists('invierte_date_time')) {
             [
                 "name" => "nombre",
                 "placeholder" => "TU NOMBRE",
-                "class" => "nombre_persona",
+                "class" => "nombre_persona registros_nombre_persona",
                 "type" => "text",
                 "required" => true,
                 "id" => "registro_nombre",
-            ]
+            ],
+            _text_nombre
         );
         $r[] = place("place_nombre_info");
         $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
@@ -149,7 +150,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => true,
                 "onkeypress" => "minusculas(this);",
                 "id" => "registro_email",
-            ]
+            ], _text_correo
         );
         $r[] = place("place_correo_incorrecto");
         $r[] = input_frm(
@@ -162,7 +163,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => true,
                 "id" => "registro_pw",
 
-            ]
+            ], _text_pass
         );
 
         $perfil[] = [
@@ -189,7 +190,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_password_afiliado");
         $r[] = btn('Registrar',
             [
-                "class" => "top_20",
+                "class" => "mt-5 botton_registro",
             ]
         );
         $r[] = form_close(place("place_registro_miembro"));
@@ -233,7 +234,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
                 "placeholder" => "ej. jonathan@gmail.com",
-            ], 'Hey, no tan rápido, valida tu email!'
+            ], _text_correo
         );
         $r[] = input_frm(
             "mt-5", "PASSWORD",
@@ -244,7 +245,8 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "pw",
 
                 "placeholder" => "****",
-            ]
+            ],
+            _text_password
         );
         $r[] = btn("INICIAR", ["class" => "mt-5"]);
         $r[] = form_close();
