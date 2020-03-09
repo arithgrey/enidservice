@@ -25,7 +25,6 @@ let secciones_estaciones_metro = [
 
 /*global*/
 let $es_regreso = 0;
-
 /*global selectores*/
 let $form_punto_encuentro = $(form_punto_encuentro);
 let $input_nombre = $form_punto_encuentro.find('.nombre');
@@ -52,6 +51,7 @@ window.onpopstate = function (event) {
     }
 };
 
+let paso = 0;
 $(document).ready(() => {
 
     $('footer').addClass('d-none');
@@ -63,6 +63,13 @@ $(document).ready(() => {
         add_class(".continuar", "mt-5");
         set_option("vista", 4);
         verifica_formato_default_inputs(0);
+        if (paso > 0) {
+            $form_punto_encuentro.find('input').focus();
+            $form_punto_encuentro.submit();
+        } else {
+            paso++;
+        }
+
     });
 
     $form_punto_encuentro.submit(registra_usuario);
@@ -73,10 +80,25 @@ $(document).ready(() => {
     set_option({"vista": 1, "punto_encuentro_previo": 0});
     despliega(secciones_default, 0);
     $desglose_estaciones.removeClass('d-lg-flex');
-    $input_nombre.keypress(envia_formulario);
-    $input_telefono.keypress(envia_formulario);
-    $input_pw.keypress(envia_formulario);
-    $input_correo.keypress(envia_formulario);
+    $input_nombre.keypress(function (e) {
+
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_punto_encuentro, 1);
+    });
+    $input_telefono.keypress(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_punto_encuentro, 1);
+    });
+    $input_pw.keypress(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_punto_encuentro, 1);
+    });
+    $input_correo.keypress(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_punto_encuentro, 1);
+    });
+
+
 });
 
 let estaciones = function (id, q) {
@@ -159,13 +181,11 @@ let muestra_horarios = function () {
 
 let registra_usuario = (e) => {
 
-
     verifica_formato_default_inputs(0);
-    let len_telefono = $input_telefono.val().length;
-    let len_pw = $input_pw.val().length;
+
     reset_posibles_errores();
-    let $longitud_minima_maxima = (len_telefono > MIN_TELEFONO_LENGTH && len_telefono <=  MAX_TELEFONO_LEGTH);
-    if ($longitud_minima_maxima && len_pw > MIN_PW_LENGTH && regular_email($input_correo)) {
+    let $tiene_formato = focus_inputs_form();
+    if ($tiene_formato) {
         advierte('Procesando tu pedido', 1);
         let password = "" + CryptoJS.SHA1($input_pw.val());
         let data_send = $form_punto_encuentro.serialize() + "&" + $.param({
@@ -177,10 +197,6 @@ let registra_usuario = (e) => {
         bloquea_form(form_punto_encuentro);
         request_enid("POST", data_send, url, response_registro_usuario);
 
-    } else {
-
-        focus_inputs_form(len_telefono, len_pw);
-
     }
     e.preventDefault();
 
@@ -191,17 +207,15 @@ let reset_posibles_errores = function () {
     $input_pw.next().next().addClass('d-none');
 
 };
-let focus_inputs_form = (len_telefono, len_pw) => {
+let focus_inputs_form = () => {
 
+    let respuestas = [];
+    respuestas.push(es_formato_telefono($input_telefono));
+    respuestas.push(es_formato_password($input_pw));
+    respuestas.push(es_formato_email($input_correo));
+    respuestas.push(es_formato_nombre($input_nombre));
+    return (!respuestas.includes(false));
 
-    if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono != TELEFONO_MOBILE_LENGTH) {
-
-        $input_telefono.next().next().removeClass('d-none');
-    }
-    if (len_pw <= MIN_PW_LENGTH) {
-
-        $input_pw.next().next().removeClass('d-none');
-    }
 };
 
 
@@ -379,9 +393,3 @@ let redirect_forma_pago = (id_recibo) => {
     redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
 };
 
-let envia_formulario = function (e) {
-    let code = (e.keyCode ? e.keyCode : e.which);
-    if (code === 13) {
-        $form_punto_encuentro.submit();
-    }
-};

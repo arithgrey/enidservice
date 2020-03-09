@@ -940,6 +940,7 @@ class Recibo_model extends CI_Model
 						OR
 						DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
 						)   
+						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
 						";
         return $this->db->query($query_get)->result_array();
     }
@@ -977,6 +978,7 @@ class Recibo_model extends CI_Model
                             DATE(fecha_entrega) >=  DATE(CURRENT_DATE())						
 						) 
 						" . $extra_dia . "
+						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
 						ORDER BY fecha_contra_entrega ASC  
 						";
         return $this->db->query($query_get)->result_array();

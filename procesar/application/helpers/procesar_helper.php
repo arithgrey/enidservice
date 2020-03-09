@@ -115,7 +115,8 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "text",
                     "required" => "true",
                     'onkeyup' => "this.value = this.value.toUpperCase();"
-                ]
+                ],
+                _text_nombre
             );
 
 
@@ -133,14 +134,16 @@ if (!function_exists('invierte_date_time')) {
                 $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
             }
 
-            $z[] = input_frm(_text_("col-lg-6 mt-5", $es_cliente_class), "EMAIL",
+            $z[] = input_frm(
+                _text_("col-lg-6 mt-5", $es_cliente_class),
+                "EMAIL",
                 $config_email, _text_correo
             );
 
 
             $config_password =
                 [
-                    "id" => "password",
+                    "id" => "password_registro",
                     "class" => " input-sm password",
                     "type" => "password",
                     "required" => "true",
@@ -170,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", [], 0), "col-lg-3 mt-5 p-0 mb-5");
+            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid'], 0), "col-lg-3 mt-5 p-0 mb-5");
             $r[] = text_acceder_cuenta($info_ext, $es_cliente);
             $r[] = form_close();
 

@@ -890,7 +890,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $es_orden_cancelada = es_orden_cancelada($data);
         $status = pr($data['recibo'], 'status');
-        
+
         if (es_administrador($data) && !$es_orden_cancelada && $status != 6) {
 
             $usuario = $data['repartidor'];
@@ -2158,7 +2158,7 @@ if (!function_exists('invierte_date_time')) {
 
         $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO");
         if (tiene_domilio($domicilio, 1) < 1) {
-            $entrega = format_link($tipos_entrega[$tipo_entrega - 1], ['href' => $url]);
+            $entrega = format_link($tipos_entrega[$tipo_entrega-1], ['href' => $url]);
         }
 
 
@@ -2368,18 +2368,34 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $fecha = "";
-        if (prm_def($domicilio, "domicilio") > 0 && es_data($recibo)) {
 
+        if (count(prm_def($domicilio, "domicilio")) > 0 && es_data($recibo)) {
 
             $recibo = $recibo[0];
-            $entrega = ($es_venta_cancelada) ? 'SE CANCELÓ LA ENTREGA, LA FECHA QUE SE HABÍA PLANEADO FUÉ EL' : "SE ENTREGARÁ EL ";
-            $fecha_entrega = format_fecha($recibo["fecha_contra_entrega"], 1);
+            $entrega = ($es_venta_cancelada) ?
+                "SE CANCELÓ LA ENTREGA, LA FECHA QUE SE HABÍA PLANEADO FUÉ EL" :
+                "SE ENTREGARÁ EL ";
+
+
+            $tipos_fechas = [0, "fecha_contra_entrega", "fecha_entrega"];
+            $id_tipo = (int)$recibo["tipo_entrega"];
+            $tipo = $tipos_fechas[$id_tipo];
+            $fecha_entrega = $recibo[$tipo];
+
+
             $color = ($es_venta_cancelada) ? 'red_enid_background' : 'blue_enid2';
             $formato_entrega = _text_(_between, " shadow p-3 white mb-5 mt-5", $color);
             $contenido = flex($entrega, $fecha_entrega, $formato_entrega);
-            $text = d_row($contenido);
-            $fecha = ($recibo["tipo_entrega"] == 1) ? $text : "";
+            $fecha = d_row($contenido);
 
+
+        } else {
+
+
+            $titulo =
+                _titulo('ups! esta orden no cuenta 
+                con domicilio de entrega registrado',4);
+            $fecha = d($titulo,'row bg-warning p-1');
         }
 
         return $fecha;
@@ -2873,7 +2889,8 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "class" => "editar_horario_entrega",
                         "id" => $id_recibo,
-                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{$fecha_entrega}' )",
+                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{
+                $fecha_entrega}' )",
                     ])
             );
 

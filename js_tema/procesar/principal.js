@@ -8,8 +8,7 @@ window.onpopstate = function (event) {
     }
 };
 
-
-let form_miembro = '.form_nuevo';
+let form_miembro = '#form-miembro-enid-service';
 let form_cotizacion = ".form_cotizacion_enid_service";
 
 let input_nombre = '.nombre';
@@ -24,8 +23,6 @@ let talla = '.talla';
 let $form_miembro = $(form_miembro);
 let $form_cotizacion = $(form_cotizacion);
 
-let $input_nombre = $(input_nombre);
-let $input_email = $(input_email);
 let $id_servicio = $(input_id_servicio);
 let $descripcion_servicio = $(descripcion_servicio);
 let $id_ciclo_facturacion = $(id_ciclo_facturacion);
@@ -33,12 +30,16 @@ let $usuario_referencia = $(usuario_referencia);
 let $num_ciclos = $(num_ciclos);
 let $talla = $(talla);
 
-let input_password = ".password";
+let input_password = "#password_registro";
 let fecha_servicio = ".fecha_servicio";
-let $input_password = $(input_password);
+
+let $input_nombre_registro_envio = $form_miembro.find(input_nombre);
+let $input_email_registro_envio = $form_miembro.find(input_email);
+let $input_password_registro_envio = $form_miembro.find(input_password);
+let $input_telefono_registro_envio = $form_miembro.find('.telefono');
+
 let $input_fecha_servicio = $(fecha_servicio);
 let $input_es_cliente = $('.es_cliente');
-
 
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
@@ -54,35 +55,51 @@ $(document).ready(() => {
     $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
     $(".link_acceso").click(set_link);
     $(".continuar_pedido").click(continuar_compra);
-    formato_inicial();
-    if (document.body.querySelector(".telefono")) {
-        $telefono.keypress(envia_formulario);
-    }
+
+    $('.agregar_commentario').click(function () {
+        $('.text_comentarios').removeClass('d-none');
+    });
+
+    $input_nombre_registro_envio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_miembro);
+    });
+    $input_email_registro_envio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_miembro);
+    });
+    $input_password_registro_envio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_miembro);
+    });
+    $input_telefono_registro_envio.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_miembro);
+    });
 
 });
 
 let registro = (e) => {
 
+    let respuestas = [];
+    respuestas.push(es_formato_nombre($input_nombre_registro_envio));
+    respuestas.push(es_formato_password($input_password_registro_envio));
+    respuestas.push(es_formato_email($input_email_registro_envio));
+    respuestas.push(es_formato_telefono($input_telefono_registro_envio));
+    let $tiene_formato = (!respuestas.includes(false));
 
-    verifica_formato_default_inputs(0);
-    let len_telefono = $telefono.val().length;
-    let len_pw = $input_password.val().length;
-    reset_posibles_errores();
+    if ($tiene_formato) {
 
-    let $validacion_primer_registro = (len_telefono > MIN_TELEFONO_LENGTH && len_pw > MIN_PW_LENGTH);
-    if ($validacion_primer_registro) {
-
-        bloquea_form(form_miembro);
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
 
-        let text_password = $.trim($input_password.val());
+        let text_password = $.trim($input_password_registro_envio.val());
         let pwpost = "" + CryptoJS.SHA1(text_password);
         let data_send = {
             "password": pwpost,
-            "email": $input_email.val(),
-            "nombre": $input_nombre.val(),
-            "telefono": $telefono.val(),
+            "email": $input_email_registro_envio.val(),
+            "nombre": $input_nombre_registro_envio.val(),
+            "telefono": $input_telefono_registro_envio.val(),
             "id_servicio": $id_servicio.val(),
             "num_ciclos": $num_ciclos.val(),
             "descripcion_servicio": $descripcion_servicio.val(),
@@ -93,14 +110,10 @@ let registro = (e) => {
             "fecha_servicio": $input_fecha_servicio.val(),
             "es_cliente": $input_es_cliente.val(),
         };
-
+        bloquea_form(form_miembro);
         request_enid("POST", data_send, url, respuesta_registro, 0);
 
-    } else {
-
-        focus_inputs_form(len_telefono, len_pw);
     }
-
     e.preventDefault();
 };
 
@@ -117,7 +130,7 @@ let registro_cotizacion = (e) => {
 let respuesta_registro = (data) => {
 
     empty_elements(".place_registro_afiliado");
-    if (data != -1) {
+    if (data !== -1) {
 
         $("#modal-error-message").modal("hide");
         desbloqueda_form(form_miembro);
@@ -154,15 +167,10 @@ let procesar_pedido_usuario_activo = () => {
         "carro_compras": get_parameter(".carro_compras"),
     };
 
-    request_enid("POST", data_send, url, respuesta_registro, 0, before_pedido_activo);
-
-};
-
-let before_pedido_activo = () => {
-
     $('.btn_procesar_pedido_cliente').prop('disabled', true);
-};
+    request_enid("POST", data_send, url, respuesta_registro);
 
+};
 let respuesta_proceso_usuario_activo = (data) => {
 
     redirect("../area_cliente");
@@ -191,7 +199,6 @@ let set_link = function () {
 
 };
 let continuar_compra = function () {
-
     showonehideone(primer_compra, ".compra_resumen");
     set_option("vista", 2)
 };
@@ -209,53 +216,5 @@ let valida_retorno = () => {
 
             break;
 
-    }
-};
-let formato_inicial = function () {
-    if (option["in_session"] < 1) {
-
-        $('.agregar_commentario').click(function () {
-            $('.text_comentarios').removeClass('d-none');
-        });
-
-        $input_nombre.keypress(envia_formulario);
-        $input_email.keypress(envia_formulario);
-        if (document.body.querySelector(input_password)) {
-            $input_password = $(input_password);
-            $input_password.keypress(envia_formulario);
-        }
-
-
-    } else {
-
-        $(".text_agregar_comentario").click(function () {
-            $('.descripcion_comentario').removeClass("d-none").addClass("mt-5");
-        });
-
-    }
-}
-let envia_formulario = function (e) {
-    let code = (e.keyCode ? e.keyCode : e.which);
-    if (code == 13) {
-        if (document.body.querySelector(form_miembro)) {
-            $form_miembro.submit();
-        }
-    }
-};
-let reset_posibles_errores = function () {
-
-    $telefono.next().next().addClass('d-none');
-    $input_password.next().next().addClass('d-none');
-}
-
-let focus_inputs_form = (len_telefono, len_pw) => {
-
-    desbloqueda_form(form_miembro);
-    if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono != TELEFONO_MOBILE_LENGTH) {
-        $telefono.next().next().removeClass('d-none');
-    }
-
-    if (len_pw <= MIN_PW_LENGTH) {
-        $input_password.next().next().removeClass('d-none');
     }
 };

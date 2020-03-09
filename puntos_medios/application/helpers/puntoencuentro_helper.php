@@ -154,7 +154,7 @@ if (!function_exists('invierte_date_time')) {
                 "minlength" => 3,
                 "required" => true,
                 'onkeyup' => "this.value = this.value.toUpperCase();"
-            ]
+            ],_text_nombre
         );
 
 
