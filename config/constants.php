@@ -24,6 +24,7 @@ define('_text_correo', 'Hey! no tan rápido, valida tu correo!');
 define('_text_cantidad', 'Ups! esta no es una cantidad correcta!');
 define('_text_pago', 'Ups! el monto no es correcto, la cantidad a pagar es');
 define('_text_nombre', 'Ups! parace que no tienes nombre!');
+define('_text_apellido', 'Parece que algo anda mal con el apellido');
 
 
 

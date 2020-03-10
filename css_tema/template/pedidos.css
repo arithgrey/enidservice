@@ -31,8 +31,11 @@
     color: white;
 }
 
-.desglose {
+.menu_recibo {
     z-index: 1000;
+}
+.modal{
+    z-index: 1100;
 }
 
 .entregado {

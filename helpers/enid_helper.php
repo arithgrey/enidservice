@@ -726,17 +726,17 @@ function create_select(
 )
 {
 
-    $select[] = "<select name='" . $name . "'  class='" . $class . "'  id='" . $id . "'> ";
+    $select[] = "<select name='" . $name . "'  class='text-uppercase " . $class . "'  id='" . $id . "'> ";
 
     if ($def == 1) {
 
-        $select[] = "<option value='" . $valor . "'>" . strtoupper($text_def) . " </option>";
+        $select[] = "<option value='" . $valor . "'>" . $text_def . " </option>";
     }
     foreach ($data as $item) {
 
         if (!in_array($item[$val], $menos)) {
 
-            $select[] = "<option value='" . $item[$val] . "'>" . strtoupper($item[$text_option]) . " </option>";
+            $select[] = "<option value='" . $item[$val] . "'>" . $item[$text_option] . " </option>";
         }
     }
 

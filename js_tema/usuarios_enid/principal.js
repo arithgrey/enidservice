@@ -6,6 +6,12 @@ let $id_recurso = $('#id_recurso');
 let $configurar_recurso = $('#configurar_recurso');
 let $form = $('.form-miembro-enid-service');
 let $nombre_usuario = $('.nombre_usuario');
+let $input_nombre_registro = $form.find('.nombre');
+let $input_apellido_paterno = $form.find('.apellido_paterno');
+let $input_apellido_materno = $form.find('.apellido_materno');
+let $input_email_registro = $form.find('.email');
+let $input_telefono_registro = $form.find('.tel_contacto');
+
 $(document).ready(function () {
 
     set_option("estado_usuario", 1);
@@ -20,7 +26,7 @@ $(document).ready(function () {
         }
     });
     $(".equipo_enid_service").click(carga_usuarios);
-    $(".form-miembro-enid-service").submit(actualizacion_usuario);
+    $form.submit(actualizacion_usuario);
     $(".btn_nuevo_usuario").click(pre_nuevo_usuario);
     $(".form-miembro-enid-service .depto").change(get_puestos_por_cargo);
     $(".perfiles_permisos").click(carga_mapa_menu);
@@ -50,6 +56,30 @@ $(document).ready(function () {
     $("#agregar_tallas_menu").click(function () {
         $(".form-tipo-talla").submit();
     });
+
+    $input_nombre_registro.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form);
+    });
+    $input_apellido_paterno.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form);
+    });
+    $input_apellido_materno.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form);
+    });
+
+    $input_email_registro.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form);
+    });
+
+    $input_telefono_registro.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form);
+    });
+
 
 });
 let get_place_usuarios = () => {
@@ -106,24 +136,21 @@ let carga_data_usuario = (e) => {
 
     let id = e.target.id;
     if (parseInt(id) > 0) {
-
         document.getElementById("form-miembro-enid-service").reset();
         $(".place_correo_incorrecto").empty();
         recorre(".tab-content");
         set_option("flag_editar", 1);
 
         let url = "../q/index.php/api/usuario/miembro/format/json/";
-
         let data_send = {"id_usuario": id};
         request_enid("GET", data_send, url, response_carga_data_usuario);
     }
 
 };
 let response_carga_data_usuario = (data) => {
-    debugger;
+
     $(".place_config_usuario").empty();
     data = data[0];
-
     let nombre = data.nombre;
     let apellido_paterno = data.apellido_paterno;
     let apellido_materno = data.apellido_materno;
@@ -134,6 +161,8 @@ let response_carga_data_usuario = (data) => {
     let turno = data.turno;
     let sexo = data.sexo;
     let status = data.status;
+    let tel_contacto = data.tel_contacto;
+    let id_perfil = data.idperfil;
 
     set_option("perfil", data.idperfil);
     set_option("id_usuario", data.idusuario);
@@ -141,6 +170,9 @@ let response_carga_data_usuario = (data) => {
     $form.find(".apellido_paterno").val(apellido_paterno);
     $form.find(".apellido_materno").val(apellido_materno);
     $form.find(".email").val(email);
+    $form.find(".tel_contacto").val(tel_contacto);
+
+    selecciona_select(".form-miembro-enid-service .perfil", id_perfil);
     selecciona_select(".form-miembro-enid-service .depto", id_departamento);
     selecciona_select(".form-miembro-enid-service .estado_usuario", status);
     selecciona_select(".estado_usuario", status);
@@ -165,15 +197,28 @@ let response_puesto_por_cargo = (data) => {
 };
 let actualizacion_usuario = (e) => {
 
+    let respuestas = [];
+    respuestas.push(es_formato_nombre($input_nombre_registro));
+    respuestas.push(es_formato_apellido($input_apellido_paterno));
+    respuestas.push(es_formato_apellido($input_apellido_materno));
+    respuestas.push(es_formato_telefono($input_telefono_registro));
+    respuestas.push(es_formato_email($input_email_registro));
+    let $es_formato = (!respuestas.includes(false));
 
-    let data_send = $(".form-miembro-enid-service").serialize() + "&" + $.param({
-        "id_usuario": get_option("id_usuario"),
-        "editar": get_option("flag_editar")
-    });
-    let url = "../q/index.php/api/usuario/miembro/format/json/";
-    request_enid("POST", data_send, url, function (data) {
-        redirect('');
-    });
+    if ($es_formato) {
+
+        let data_send = $form.serialize() + "&" + $.param({
+            "id_usuario": get_option("id_usuario"),
+            "editar": get_option("flag_editar")
+        });
+        let url = "../q/index.php/api/usuario/miembro/format/json/";
+        bloquea_form('.form-miembro-enid-service');
+        modal('Procesando...', 1);
+        request_enid("POST", data_send, url, function (data) {
+            redirect('');
+        });
+    }
+
     e.preventDefault();
 };
 

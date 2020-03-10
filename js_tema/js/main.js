@@ -1141,3 +1141,15 @@ let es_formato_nombre = $input => {
     }
     return tiene_formato;
 };
+let es_formato_apellido = $input => {
+
+    let len_pw = $input.val().length;
+    let tiene_formato = true;
+    if (len_pw <= 3) {
+        $input.next().next().removeClass('d-none');
+        tiene_formato = false;
+    } else {
+        $input.next().next().addClass('d-none');
+    }
+    return tiene_formato;
+};

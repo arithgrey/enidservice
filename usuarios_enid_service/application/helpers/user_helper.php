@@ -19,10 +19,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_format_view_usuario($departamentos)
+    function get_format_view_usuario($departamentos, $perfiles)
     {
-        $separacion = 'row mt-5';
-
         $opt_turnos[] =
             [
                 "opcion" => "Matutino",
@@ -84,136 +82,149 @@ if (!function_exists('invierte_date_time')) {
                 "opcion" => "Femenino",
                 "val" => 0
             ];
-        $r[] = _titulo("Nuevo miembro");
+        $r[] = _titulo("Agregar usuario");
 
         $r[] = form_open("",
             [
-                "class" => "form-miembro-enid-service",
+                "class" => "form-miembro-enid-service row",
                 "id" => 'form-miembro-enid-service'
             ]
         );
-        $select = d(create_select(
-            $options,
-            "status",
-            "form-control estado_usuario",
-            "estado_usuario",
-            "opcion",
-            "val"
-        ), 4);
-        $r[] = d($select, $separacion);
+        $class_select = 'flex-column col-md-4 mb-3 mt-5';
+        $r[] = flex(
+            'Status',
+            create_select(
+                $options,
+                "status",
+                "form-control estado_usuario",
+                "estado_usuario",
+                "opcion",
+                "val"
+            ), $class_select, _strong
+        );
 
+        $menos = [3, 4, 5, 7, 8, 11, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19];
+        $select = create_select(
+            $perfiles,
+            "perfil",
+            "form-control perfil",
+            "perfil",
+            "nombreperfil",
+            "idperfil"
+            , 0, 0, 0, "",
+            $menos
+        );
 
-        $y[] = input_frm(4, 'Nombre',
+        $r[] = flex('perfil', $select, $class_select, _strong);
+
+        $select_departamentos = create_select(
+            $departamentos,
+            "departamento",
+            "form-control input-sm depto",
+            "departamento",
+            "nombre",
+            "id_departamento"
+        );
+
+        $r[] = flex('departamento', $select_departamentos, $class_select, _strong);
+
+        $class_select_horarios = 'flex-column col-md-3 mt-5';
+        $r[] = flex(
+            "Inicio de labores"
+            ,
+            create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
+            , $class_select_horarios, _strong
+        );
+
+        $select_labores = create_select($opt, "fin_labor", "form-control fin_labor", "fin_labor", "opcion", "val");
+        $r[] = flex(
+            "Fin de labores",
+            $select_labores,
+            $class_select_horarios, _strong
+        );
+
+        $r[] = flex(
+            "Turno",
+            create_select(
+                $opt, "turno",
+                "form-control input-sm turno", "turno", "opcion", "val")
+            ,
+            $class_select_horarios, _strong
+        );
+
+        $r[] = flex(
+            "Sexo",
+            create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val")
+            , $class_select_horarios, _strong
+        );
+
+        $top = 'col-md-4 mt-5';
+        $r[] = input_frm('col-md-4 mt-5', 'Nombre',
             [
                 "name" => "nombre",
                 "placeholder" => "Nombre",
-                "class" => "nombre",
+                "class" => "nombre text-uppercase",
                 "id" => "nombre",
                 "type" => "text",
                 "required" => true
-            ]
+            ],
+            _text_nombre
         );
 
-        $y[] = input_frm(4, 'Apellido paterno',
+        $r[] = input_frm('col-md-4 mt-5', 'Apellido paterno',
             [
                 "name" => "apellido_paterno",
                 "placeholder" => "placeholder",
-                "class" => "apellido_paterno",
+                "class" => "apellido_paterno text-uppercase",
                 "id" => "apellido_paterno",
                 "type" => "text",
                 "required" => true
-            ]
+            ],
+            _text_apellido
         );
 
 
-        $y[] = input_frm(4,
+        $r[] = input_frm($top,
             "Apellido materno",
             [
                 "name" => "apellido_materno",
                 "placeholder" => "placeholder",
-                "class" => "apellido_materno",
+                "class" => "apellido_materno text-uppercase",
                 "id" => "apellido_materno",
                 "type" => "text",
-                "required" => "true"
-            ]
-            ,
-            4
+                "required" => true
+            ], _text_apellido
         );
 
-        $r[] = d($y, $separacion);
-
-
-        $input_puestos[] = input_frm(6, 'Email',
+        $r[] = input_frm('col-md-6 mt-5', 'Email',
             [
                 "name" => "email",
                 "placeholder" => "email",
-                "class" => " email",
-                "id" => " email",
+                "class" => "email",
+                "id" => "email",
                 "type" => "email",
                 "required" => true,
                 "readonly" => true
-            ]);
+            ], _text_correo
+        );
 
 
-        $input_puestos[] = d(
+        $r[] = input_frm('col-md-6 mt-5', "Teléfono",
 
-            create_select(
-                $departamentos,
-                "departamento",
-                "form-control input-sm depto",
-                "departamento",
-                "nombre",
-                "id_departamento"
-            ), 6);
-
-
-        $r[] = d($input_puestos, $separacion);
-
-
-        $l[] = btw(
-            d("Inicio de labores")
+            [
+                "type" => "tel",
+                "name" => "tel_contacto",
+                "class" => "tel_contacto",
+                "id" => "tel_contacto"
+            ]
             ,
-            create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
-            , 4
-        );
-
-        $l[] = btw(
-            d("Fin de labores"),
-            d(create_select($opt, "fin_labor", "form-control fin_labor", "fin_labor", "opcion", "val"))
-            , 4
+            _text_telefono
         );
 
 
-        $l[] = btw(
-            d("Turno"),
-            create_select($opt_sexo, "turno", "form-control input-sm turno", "turno", "opcion", "val")
-            , 4
-
-
-        );
-
-        $r[] = d($l, $separacion);
-
-
-        $t[] = btw(
-            d("Sexo"),
-            create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val"),
-            6
-        );
-
-        $t[] = btw(
-            d("Teléfono"),
-            input([
-                "type" => "text",
-                "name" => "tel_contacto"
-            ]),
-            6
-        );
-
-        $r[] = d($t, $separacion);
-        $r[] = btn("Registrar", ['class' => 'mt-5']);
-        $r[] = place("place_config_usuario");
+        $r[] = d(btn("Registrar", ['class' => 'submit_enid']), 'col-md-12 mt-5');
         $r[] = form_close();
+        $r[] = place("place_config_usuario");
         return append($r);
 
 
@@ -297,7 +308,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = ul($l, "nav nav-tabs mb-5 mt-5");
 
 
-        $response[] = d(_titulo('Busqueda', 3),_mbt5);
+        $response[] = d(_titulo('Busqueda', 3), _mbt5);
         $response[] = input_frm('', '¿a quién buscamos? Nombre, email, telefono', [
                 'name' => 'q',
                 'id' => 'q',
