@@ -99,7 +99,6 @@ let get_place_usuarios = () => {
 };
 let carga_usuarios = () => {
 
-    let place = get_place_usuarios();
     let $nombre_usuario = $('.nombre_usuario').val();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
@@ -197,26 +196,17 @@ let response_puesto_por_cargo = (data) => {
 };
 let actualizacion_usuario = (e) => {
 
-    let respuestas = [];
-    respuestas.push(es_formato_nombre($input_nombre_registro));
-    respuestas.push(es_formato_apellido($input_apellido_paterno));
-    respuestas.push(es_formato_apellido($input_apellido_materno));
-    respuestas.push(es_formato_telefono($input_telefono_registro));
-    respuestas.push(es_formato_email($input_email_registro));
-    let $es_formato = (!respuestas.includes(false));
+    let $tipo_seleccion = get_valor_selected('.estado_usuario');
+    let editar = get_option("flag_editar");
+    let $es_lista_negra = (parseInt(editar) > 0 && parseInt($tipo_seleccion) === 3);
+    if ($es_lista_negra) {
 
-    if ($es_formato) {
+        confirma_lista_negra();
 
-        let data_send = $form.serialize() + "&" + $.param({
-            "id_usuario": get_option("id_usuario"),
-            "editar": get_option("flag_editar")
-        });
-        let url = "../q/index.php/api/usuario/miembro/format/json/";
-        bloquea_form('.form-miembro-enid-service');
-        modal('Procesando...', 1);
-        request_enid("POST", data_send, url, function (data) {
-            redirect('');
-        });
+    } else {
+
+        agregar_usuario();
+
     }
 
     e.preventDefault();
@@ -252,7 +242,7 @@ let configurar_recurso = function () {
     verifica_formato_default_inputs();
     $form_recurso.submit(recurso);
 
-}
+};
 let recurso = function (e) {
 
     e.preventDefault();
@@ -261,12 +251,12 @@ let recurso = function (e) {
     request_enid("PUT", data_send, url, response_recurso);
 
 
-}
+};
 let response_recurso = function () {
     $configurar_recurso.hide();
     show_tabs('#tab_perfiles_permisos', 1);
 
-}
+};
 let modifica_accesos_usuario = function (e) {
 
     set_option("id_recurso", get_parameter_enid($(this), "id"));
@@ -306,4 +296,85 @@ let baja = function () {
         let url = "../q/index.php/api/recurso/index/format/json/";
         request_enid("DELETE", data_send, url, response_registro_recurso);
     }
+};
+let agregar_usuario = function () {
+
+    let respuestas = [];
+    respuestas.push(es_formato_nombre($input_nombre_registro));
+    respuestas.push(es_formato_apellido($input_apellido_paterno));
+    respuestas.push(es_formato_apellido($input_apellido_materno));
+    respuestas.push(es_formato_telefono($input_telefono_registro));
+    respuestas.push(es_formato_email($input_email_registro));
+    let $es_formato = (!respuestas.includes(false));
+
+    if ($es_formato) {
+
+        let data_send = $form.serialize() + "&" + $.param({
+            "id_usuario": get_option("id_usuario"),
+            "editar": get_option("flag_editar")
+        });
+        let url = "../q/index.php/api/usuario/miembro/format/json/";
+        bloquea_form('.form-miembro-enid-service');
+        modal('Procesando...', 1);
+        request_enid("POST", data_send, url, function (data) {
+            redirect('');
+        });
+    }
+};
+let confirma_lista_negra = function () {
+
+    let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
+    let id_usuario = get_option("id_usuario");
+    show_confirm(text_confirmacion, '', "SI", function () {
+        let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
+        let data_send = {'v': 1, 'id_usuario': id_usuario};
+        request_enid("GET", data_send, url, response_motivos_lista_negra);
+    });
+};
+
+let response_motivos_lista_negra = (data) => {
+    modal(data);
+    $(".input_enid_format :input").focus(next_label_input_focus);
+    $(".input_enid_format :input").change(next_label_input_focus);
+    $('.form_lista_negra').submit(agregar_lista_negra);
+    $('.motivo').change(evalua_registro_motivo_lista_negra);
+
+};
+let agregar_lista_negra = (e) => {
+
+    let $motivo = parseInt(get_valor_selected('.motivo'));
+    if ($motivo >= 0) {
+
+        let data_send = $('.form_lista_negra').serialize();
+        let url = "../q/index.php/api/lista_negra/index/format/json/";
+        $('.cargando_modal').removeClass('d-none');
+        $('.motivo').prop('disabled', 'disabled');
+        request_enid("POST", data_send, url, function (data) {
+            redirect('');
+        });
+    }
+    e.preventDefault();
+};
+let evalua_registro_motivo_lista_negra = function () {
+
+    let $motivo = parseInt(get_valor_selected('.motivo'));
+
+    if (Number.isInteger($motivo)) {
+        $('.agregar_botton_lista_negra').removeClass('d-none');
+    } else {
+        $('.agregar_botton_lista_negra').addClass('d-none');
+    }
+
+    if ($motivo === 0) {
+
+        $('.input_agregar_motivo').removeClass('d-none');
+        $('.motivo_lista_negra').attr('required', true);
+
+    } else {
+
+        $('.input_agregar_motivo').addClass('d-none');
+        $('.motivo_lista_negra').attr('required', false);
+
+    }
+
 };

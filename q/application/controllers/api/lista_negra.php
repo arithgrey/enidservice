@@ -20,11 +20,12 @@ class lista_negra extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_motivo")) {
 
+            $id_usuario = $param['id_usuario'];
             $id_motivo = $param['id_motivo'];
             if ($id_motivo > 0) {
 
                 $params = [
-                    "id_usuario" => $param['id_usuario'],
+                    "id_usuario" => $id_usuario,
                     "id_motivo" => $id_motivo
                 ];
 
@@ -35,11 +36,14 @@ class lista_negra extends REST_Controller
                 ];
                 $id_motivo = $this->registro_motivo_lista_negra($q);
                 $params = [
-                    "id_usuario" => $param['id_usuario'],
+                    "id_usuario" => $id_usuario,
                     "id_motivo" => $id_motivo
                 ];
             }
             $response = $this->lista_negra_model->insert($params, 1);
+            if ($response > 0) {
+                $this->usuario_lista_negra($id_usuario);
+            }
 
         }
         $this->response($response);
@@ -78,6 +82,14 @@ class lista_negra extends REST_Controller
     function registro_motivo_lista_negra($q)
     {
         return $this->app->api("motivo_lista_negra/index/format/json/", $q, 'json', 'POST');
+    }
+
+    function usuario_lista_negra($id_usuario)
+    {
+
+        $q["id_usuario"] = $id_usuario;
+        $q["status"] = 3;
+        return $this->app->api("usuario/status", $q, "json", "PUT");
     }
 
 

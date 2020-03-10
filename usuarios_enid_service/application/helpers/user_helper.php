@@ -51,6 +51,11 @@ if (!function_exists('invierte_date_time')) {
                 "opcion" => "Suspendido",
                 "val" => 2
             ];
+        $options[] =
+            [
+                "opcion" => "Lista negra",
+                "val" => 3
+            ];
         $opt[] =
             [
                 "opcion" => "2PM",
@@ -104,6 +109,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $menos = [3, 4, 5, 7, 8, 11, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19];
+
         $select = create_select(
             $perfiles,
             "perfil",
@@ -120,7 +126,7 @@ if (!function_exists('invierte_date_time')) {
         $select_departamentos = create_select(
             $departamentos,
             "departamento",
-            "form-control input-sm depto",
+            "form-control depto",
             "departamento",
             "nombre",
             "id_departamento"

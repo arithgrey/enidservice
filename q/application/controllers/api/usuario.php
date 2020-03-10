@@ -33,6 +33,24 @@ class usuario extends REST_Controller
 
     }
 
+    function status_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "status,id_usuario")) {
+
+
+            $id_usuario = $param["id_usuario"];
+            $status = $param["status"];
+
+            $response = $this->usuario_model->q_up("status", $status, $id_usuario);
+
+        }
+        $this->response($response);
+
+    }
+
+
     function ultima_publicacion_PUT()
     {
 
