@@ -12,11 +12,8 @@ $(document).ready(() => {
     $("#nuevos_miembros").click(carga_nuevos_miembros);
     $(".mail_marketing").click(carga_metricas_mail_marketing);
     $(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
-    $(".usabilidad_btn").click(() => {
-        submit_enid(".f_usabilidad")
-    });
 
-    $(".f_usabilidad").submit(carga_uso_sistema);
+
     $(".form_busqueda_global_enid").submit(indicadores);
     $("#form_metas").submit(registra_metas);
     $(".form_busqueda_desarrollo").submit(metricas_desarrollo);
@@ -27,7 +24,7 @@ $(document).ready(() => {
     $(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);
     $(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
     $(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
-    $(".f_dipositivos").submit(carga_repo_dispositivos);
+
     $(".form_tipos_entregas").submit(carga_repo_tipos_entregas);
 
 
@@ -42,42 +39,6 @@ $(document).ready(() => {
     $form_ventas_comisionistas.submit(ventas_comisionistas);
     $form_entregas.submit(ventas_entregadas);
 });
-/*Aquí se carga la data de las métricas del visitas(día)*/
-let carga_uso_sistema = function (e) {
-
-
-    if (get_parameter(".f_usabilidad #datetimepicker4").length > 5 && get_parameter(".f_usabilidad #datetimepicker5").length > 5) {
-
-        let data_send = $(".f_usabilidad").serialize();
-        let url = "../q/index.php/api/enid/usabilidad_landing_pages/format/json/";
-        request_enid("GET", data_send, url, response_carga_uso_sistema, ".place_usabilidad_general");
-
-    } else {
-
-        focus_input([".f_usabilidad #datetimepicker5", ".f_usabilidad #datetimepicker4"]);
-    }
-    e.preventDefault();
-};
-let response_carga_uso_sistema = function (data) {
-
-    render_enid(".place_usabilidad_general", data);
-    $('th').click(ordena_tabla);
-
-};
-let response_comparativa_dia = function (data) {
-
-    render_enid(".place_prospectos_comparativa", data);
-    $(".info-dia-p").click(data_miembros_g);
-    $(".info-d").click(data_eventos_g);
-
-};
-let data_miembros_g = function (e) {
-
-    let url = "../q/index.php/api/enid/resumen_global_admin_p/format/json/";
-    let data_send = {periodo: get_parameter_enid($(this), "id")};
-    request_enid("GET", data_send, url, 1, ".info-resumen-prospecto", "", ".info-resumen-prospecto");
-
-};
 let carga_nuevos_miembros = function () {
 
     let url = "../q/index.php/api/enid/nuevos_miembros/format/json/";
@@ -336,22 +297,6 @@ let carga_repo_usabilidad = function (e) {
     e.preventDefault();
 };
 
-let carga_repo_dispositivos = function (e) {
-
-    let data_send = $(".f_dipositivos").serialize() + "&" + $.param({"v": 1});
-    let url = "../q/index.php/api/pagina_web/productividad/format/json/";
-
-    if (get_parameter(".f_dipositivos #datetimepicker4").length > 5 && get_parameter(".f_dipositivos #datetimepicker5").length > 5) {
-
-        request_enid("GET", data_send, url, 1, ".repo_dispositivos", 0, ".repo_dispositivos");
-
-    } else {
-
-        focus_input([".f_dipositivos #datetimepicker5", ".f_dipositivos #datetimepicker4"]);
-
-    }
-    e.preventDefault();
-};
 let info_usabilidad = (data) => {
 
     render_enid(".repo_usabilidad", data);
@@ -375,11 +320,6 @@ let carga_repo_tipos_entregas = function (e) {
 
     }
     e.preventDefault();
-};
-let comparativa_dia = () => {
-
-    let url = "../q/index.php/api/enid/prospectos_comparativa_d/format/json/";
-    request_enid("GET", {}, url, response_comparativa_dia, ".place_prospectos_comparativa");
 };
 
 let arquetipos = function (e) {
