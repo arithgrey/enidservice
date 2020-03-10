@@ -15,7 +15,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_productos_solicitados();
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
-
+        $response[] = format_entregas();
         $response[] = format_tipificaciones();
 
         $response[] = format_categorias($data);
@@ -74,6 +74,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
+
     function format_comisionistas($data)
     {
         $form = base_busqueda_form('VENTAS POR COMISIONISTAS',
@@ -83,6 +84,20 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "tab-pane",
                 "id" => "tab_comisionistas",
+            ]
+        );
+
+    }
+
+    function format_entregas()
+    {
+        $form = base_busqueda_form('REPARTIDORES ENTREGAS',
+            'form_entregas', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_entregas",
             ]
         );
 
@@ -298,7 +313,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-user", "usuarios"),
             "#tab_usuarios",
             [
-                "class" => "text-uppercase black   btn_repo_afiliacion text-uppercase",
+                "class" => "text-uppercase black btn_repo_afiliacion text-uppercase",
             ]
         );
 
@@ -330,6 +345,10 @@ if (!function_exists('invierte_date_time')) {
             tab(
                 text_icon(_mas_opciones_icon, "Comisiones"),
                 '#tab_comisionistas'
+            ),
+            tab(
+                text_icon(_entregas_icon, "Repartidores"),
+                '#tab_entregas'
             )
             ,
             tab(

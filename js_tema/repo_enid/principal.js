@@ -3,6 +3,8 @@ let incidencia = 0;
 let $form_arquetipos = $('.form_arquetipos');
 let $form_tipificaciones = $('.form_tipificaciones');
 let $form_ventas_comisionistas = $('.form_ventas_comisionistas');
+let $form_entregas = $('.form_entregas');
+
 
 $(document).ready(() => {
 
@@ -38,6 +40,7 @@ $(document).ready(() => {
     $form_arquetipos.submit(arquetipos)
     $form_tipificaciones.submit(tipificaciones);
     $form_ventas_comisionistas.submit(ventas_comisionistas);
+    $form_entregas.submit(ventas_entregadas);
 });
 /*Aquí se carga la data de las métricas del visitas(día)*/
 let carga_uso_sistema = function (e) {
@@ -434,6 +437,22 @@ let ventas_comisionistas = function (e) {
     } else {
 
         focus_input([".form_arquetipos #datetimepicker5", ".form_arquetipos #datetimepicker4"]);
+    }
+    e.preventDefault();
+};
+let ventas_entregadas = function (e) {
+    let f_inicio = get_parameter(".form_entregas #datetimepicker4");
+    let f_termino = get_parameter(".form_entregas #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_entregas.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/enid/ventas_entregas/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_entregas #datetimepicker5", ".form_entregas #datetimepicker4"]);
     }
     e.preventDefault();
 };
