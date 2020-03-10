@@ -8,8 +8,6 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = tab_seccion(place("place_reporte"), 'reporte');
         $response[] = format_indicadores();
-        $response[] = format_dispositivos();
-        $response[] = format_visitas();
         $response[] = format_tipo_entrega();
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
@@ -122,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
     function format_actividad()
     {
 
-        $form = base_busqueda_form('ACTIVIDAD',
+        $form = base_busqueda_form('USUARIOS',
             'f_actividad_productos_usuarios', 'repo_usabilidad');
 
         return d($form, [
@@ -155,50 +153,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /**
-     * @param array $v
-     * @param array $response
-     * @return array
-     */
-    function format_visitas()
-    {
-
-        $form = base_busqueda_form('visitas web', 'f_usabilidad',
-            'place_usabilidad_general');
-
-        return d($form, [
-            "class" => "tab-pane",
-            "id" => 'tab_default_2',
-        ]);
-
-
-    }
-
-    /**
-     * @param array $ds
-     * @param array $response
-     * @return array
-     */
-    function format_dispositivos()
-    {
-
-        $form = base_busqueda_form('dispositivos', 'f_dipositivos', 'repo_dispositivos');
-
-        return d($form,
-            [
-                "class" => "tab-pane",
-                "id" => 'tab_dispositivos',
-            ]
-        );
-
-
-    }
-
-    /**
-     * @param array $i
-     * @param array $response
-     * @return array
-     */
     function format_indicadores()
     {
         $form = base_busqueda_form(
@@ -323,15 +277,6 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $link_actividad = tab(
-            text_icon("fa fa-flag", "actividad"),
-            "#tab_default_2",
-            [
-                "id" => "btn_servicios",
-                "class" => "text-uppercase black   usabilidad_btn",
-            ]
-        );
-
         $link_dispositivos = tab(
             text_icon("fa fa-mobile", "dispositivos"),
             "#tab_dispositivos",
@@ -405,10 +350,6 @@ if (!function_exists('invierte_date_time')) {
             $link_usuarios
             ,
             $link_ventas_categorias
-            ,
-            $link_actividad
-            ,
-            $link_dispositivos
         ];
 
         return append($list);
