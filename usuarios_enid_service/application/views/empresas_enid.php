@@ -43,7 +43,7 @@
             <?= d(get_form_agregar_recurso(), ["class" => "tab-pane", "id" => 'tab_agregar_recursos']) ?>
             <?= d(get_format_categorias(), ["class" => "tab-pane", "id" => 'tab_agregar_categorias']) ?>
             <?= d(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
-            <?= d(get_format_view_usuario($departamentos), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
+            <?= d(get_format_view_usuario($departamentos,$perfiles_enid_service), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
         </div>
     </div>
 </div>

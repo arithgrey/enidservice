@@ -511,7 +511,6 @@ class usuario_model extends CI_Model
             "idempresa" => '1',
             "apellido_paterno" => $param["apellido_paterno"],
             "apellido_materno" => $param["apellido_materno"],
-            "tel_contacto" => $param["tel_contacto"],
             "inicio_labor" => $param["inicio_labor"],
             "fin_labor" => $param["fin_labor"],
             "turno" => $param["turno"],
@@ -519,6 +518,12 @@ class usuario_model extends CI_Model
             "id_departamento" => $param["departamento"],
             "password" => sha1("qwerty123.1")
         ];
+        if (strlen($param["tel_contacto"]) > 3) {
+
+            $params["tel_contacto"] = $param["tel_contacto"];
+        }
+
+
         $id_usuario = $this->insert($params, 1);
         $param["id_usuario"] = $id_usuario;
         return $param;

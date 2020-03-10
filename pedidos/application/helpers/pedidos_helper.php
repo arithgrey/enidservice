@@ -69,18 +69,22 @@ if (!function_exists('invierte_date_time')) {
         $re[] = create_seccion_comentarios($data["comentarios"]);
         $respuestas = tags_arquetipo($data);
         $unicos = $respuestas['unicos'];
-        $re[] = formulario_arquetipos(
+
+        $seccion_arquetipos[] = formulario_arquetipos(
             $data,
             $id_cliente,
             $negocios, $usuario_tipo_negocio, $unicos);
 
 
-        $re[] = $respuestas['respuestas'];
+        $seccion_arquetipos[] = $respuestas['respuestas'];
 
-
+        if (!is_mobile()) {
+            $re[] = append($seccion_arquetipos);
+        }
         $response[] = d(d($re, 12), 8);
 
-        $seccion_venta = compra(
+
+        $seccion_venta[] = compra(
             $es_venta_cancelada,
             $r,
             $domicilio,
@@ -91,12 +95,17 @@ if (!function_exists('invierte_date_time')) {
             $data
         );
 
+        if (is_mobile()) {
+            $seccion_venta[] = d($seccion_arquetipos, 12);
+        }
         $response[] = d(
             $seccion_venta, 4
         );
         $response[] = hiddens_detalle($r);
         $tipos_entregas = $data["tipos_entregas"];
+
         $response[] = opciones_compra($data, $domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
+
 
         return d($response, _10auto);
 
@@ -635,12 +644,12 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "href" => path_enid("pedidos")
                 ]
-            ), 13);
+            ), 'row d-none d-md-block mt-5');
 
 
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
-        $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _between_md);
+        $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _text(_between_md, 'text-left'));
 
 
         $r[] = d($recibo_vendedor, 'row mt-3');
@@ -659,7 +668,7 @@ if (!function_exists('invierte_date_time')) {
 
         $str = _titulo($text_estado_venta, 4);
 
-        $r[] = d($str, 'row border-bottom mb-4');
+        $r[] = d("", 'row border-bottom mb-4');
 
         return append($r);
 
@@ -669,6 +678,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $response = [];
         if ($es_venta_comisionada && es_data($usuario_comision)) {
+
 
             $comisionista = $usuario_comision[0];
 
@@ -681,6 +691,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = p($vendedor, _text_('blue_enid3 pl-3 pr-3  white', _strong));
 
         } else {
+
 
             $recibo = $data['recibo'];
             $comision = pr($recibo, 'comision_venta');
@@ -2158,7 +2169,7 @@ if (!function_exists('invierte_date_time')) {
 
         $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO");
         if (tiene_domilio($domicilio, 1) < 1) {
-            $entrega = format_link($tipos_entrega[$tipo_entrega-1], ['href' => $url]);
+            $entrega = format_link($tipos_entrega[$tipo_entrega - 1], ['href' => $url]);
         }
 
 
@@ -2321,7 +2332,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($data)) {
 
             $r[] = d(h("MOVIMIENTOS", 4, "strong row mt-5 mb-5"),
-                " top_30 bottom_30 padding_10  row");
+                " top_30 bottom_30 padding_10 row");
             $r[] = append($tipificacon);
 
         }
@@ -2394,8 +2405,8 @@ if (!function_exists('invierte_date_time')) {
 
             $titulo =
                 _titulo('ups! esta orden no cuenta 
-                con domicilio de entrega registrado',4);
-            $fecha = d($titulo,'row bg-warning p-1');
+                con domicilio de entrega registrado', 4);
+            $fecha = d($titulo, 'row bg-warning p-1');
         }
 
         return $fecha;
@@ -2579,23 +2590,21 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if (es_data($recibo)):
-            if (
-                pr($recibo, "se_cancela") < 1 &&
-                pr($recibo, "status") != 10 &&
-                pr($recibo, "cancela_cliente") < 1) {
-                $status = pr($recibo, "status");
-                $text_status = "";
 
-                foreach ($status_ventas as $row) {
+            $status = pr($recibo, "status");
+            $text_status = "";
 
-                    if ($status == $row["id_estatus_enid_service"]) {
-                        $text_status = $row["text_vendedor"];
-                        break;
-                    }
+            foreach ($status_ventas as $row) {
+
+                if ($status == $row["id_estatus_enid_service"]) {
+                    $text_status = $row["text_vendedor"];
+                    break;
                 }
-
-                $response = d($text_status, "row bg_black white p-4 row mb-5 text-uppercase rounded-0 text-center format_action font-weight-bold");
             }
+            $class = "row bg_black white p-4 mb-5 text-uppercase 
+            rounded-0 text-center format_action font-weight-bold";
+            $response = d($text_status, $class);
+
         endif;
 
         return $response;

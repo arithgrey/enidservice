@@ -684,22 +684,36 @@ class usuario extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "editar,nombre,email,apellido_paterno,apellido_materno,inicio_labor,fin_labor,turno,sexo,departamento")) {
+        $parametros = "editar,nombre,email,apellido_paterno,apellido_materno,inicio_labor,fin_labor,turno,sexo,departamento";
+        if (fx($param, $parametros)) {
 
             $response["usuario_existente"] = 0;
 
             if ($param["editar"] == 1) {
 
-                $response["modificacion_usuario"] = $this->usuario_model->set_miembro($param);
-                $this->agrega_permisos_usuario($param);
+                $modificacion_usuario = $this->usuario_model->set_miembro($param);
+                if ($modificacion_usuario) {
+                    $q["id_usuario"] = $param["id_usuario"];
+                    $q["puesto"] = $param['perfil'];
+                    $this->agrega_permisos_usuario($q);
+                    $response["modificacion_usuario"] = $modificacion_usuario;
+                }
+
 
             } else {
 
 
                 if ($this->usuario_model->evalua_usuario_existente($param) == 0) {
 
-                    $response["registro_usuario"] = $this->usuario_model->crea_usuario_enid_service($param);
-                    $this->agrega_permisos_usuario($response);
+                    $usuario = $this->usuario_model->crea_usuario_enid_service($param);
+                    if (es_data($usuario)) {
+
+                        $q["id_usuario"] = $usuario["id_usuario"];
+                        $q["puesto"] = $param['perfil'];
+                        $this->agrega_permisos_usuario($q);
+                    }
+                    $response["registro_usuario"] = $usuario;
+
 
                 } else {
 
