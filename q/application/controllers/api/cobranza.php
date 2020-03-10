@@ -342,6 +342,7 @@ class Cobranza extends REST_Controller
         return $this->agrega_punto_encuentro_usuario($param);
     }
 
+
     private function create_orden_punto_entrega($q)
     {
 
@@ -385,7 +386,9 @@ class Cobranza extends REST_Controller
             $nuevo = $this->agrega_punto_encuentro_usuario($param);
             $response = $this->quita_domicilio_entrega_por_recibo($id_recibo);
 
-
+            if ($response) {
+                $this->fecha_entrega($param['fecha_entrega'], $param['horario_entrega'], $id_recibo);
+            }
             $data =
                 [
                     'restricciones' => $this->config->item('restricciones'),
@@ -598,6 +601,18 @@ class Cobranza extends REST_Controller
     {
 
         return $this->app->api("servicio/nombre_estado_enid/format/json/", $q);
+    }
+
+    function fecha_entrega($fecha_entrega, $horario_entrega, $recibo)
+    {
+
+        $q = [
+            "fecha_entrega" => $fecha_entrega,
+            "horario_entrega" => $horario_entrega,
+            "recibo" => $recibo,
+        ];
+        return $this->app->api("recibo/fecha_entrega/format/json/", $q, "json", "PUT");
+
     }
 
     function comision_GET()
