@@ -92,6 +92,8 @@ define('_flecha_derecha', 'fa-chevron-circle-right');
 define('_calendario_icon', 'fa fa-calendar');
 define('_mas_opciones_bajo_icon', 'fa-chevron-circle-down');
 define('_mas_opciones_icon', 'fa-chevron-circle-up');
+define('_entregas_icon', 'fa fa-motorcycle');
+
 
 
 

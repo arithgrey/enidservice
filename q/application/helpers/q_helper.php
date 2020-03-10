@@ -1923,6 +1923,112 @@ if (!function_exists('invierte_date_time')) {
         return append($data);
 
     }
+    function format_reporte_ventas_reparto($estadisticas)
+    {
+
+
+        $response = [];
+        $contenido = [];
+        $base = 'col-md-2 border strong text-center';
+        $contenido[] = d("#", 'col-md-1');
+        $contenido[] = d("Vendedor", 'col-md-3');
+        $contenido[] = d("Operaciones", $base);
+        $contenido[] = d("Ventas efectivas", $base);
+        $contenido[] = d("En proceso", $base);
+        $contenido[] = d("Ventas caidas", $base);
+
+        $response[] = d($contenido, 'row border');
+
+        $total_operaciones = 0;
+        $total_ventas = 0;
+        $total_proceso = 0;
+        $total_canceladas = 0;
+
+        $ids_usuarios_actividad = [];
+        $ids_usuarios_actividad_venta = [];
+
+        $a = 1;
+        foreach ($estadisticas as $row) {
+
+            $idusuario = $row['idusuario'];
+            $ids_usuarios[] = $idusuario;
+            $id_usuario_entrega = $row['id_usuario_entrega'];
+
+            if ($id_usuario_entrega > 0) {
+                $ids_usuarios_actividad[] = $id_usuario_entrega;
+                if ($row['efectivas'] > 0) {
+                    $ids_usuarios_actividad_venta[] = $id_usuario_entrega;
+                }
+            }
+            $actividad = ($id_usuario_entrega > 0);
+            $total = ($actividad) ? $row['total'] : 0;
+            $total_operaciones = ($total_operaciones + $total);
+
+            $efectivas = ($actividad) ? $row['efectivas'] : 0;
+            $total_ventas = ($total_ventas + $efectivas);
+
+            $en_proceso = ($actividad) ? $row['en_proceso'] : 0;
+            $total_proceso = ($total_proceso + $en_proceso);
+
+            $canceladas = ($actividad) ? $row['canceladas'] : 0;
+            $total_canceladas = ($total_canceladas + $canceladas);
+
+            $nombre_completo = format_nombre($row);
+
+            $contenido = [];
+            $base = 'col-md-2 border text-center';
+            $extra = ($efectivas < 1) ? 'bg-danger white' : '';
+            $contenido[] = d($idusuario, 'col-md-1');
+            $contenido[] = d($nombre_completo, 'col-md-3 text-uppercase');
+            $contenido[] = d($total, $base);
+            $contenido[] = d($efectivas, _text_($base, $extra));
+            $contenido[] = d($en_proceso, $base);
+            $contenido[] = d($canceladas, $base);
+
+            $response[] = d($contenido, 'row border');
+            $a++;
+        }
+
+
+        $contenido = [];
+        $base = 'col-md-2 border text-center';
+
+        $contenido[] = d(_titulo('Totales', 2), 'col-md-4');
+        $contenido[] = d($total_operaciones, $base);
+        $contenido[] = d($total_ventas, $base);
+        $contenido[] = d($total_proceso, $base);
+        $contenido[] = d($total_canceladas, $base);
+        $totales = d($contenido, 'row');
+
+
+        /*usuarios activos*/
+        $usuarios_activos = [];
+        $base = 'col-md-2 border text-center';
+
+        $total_vendedores = ($a - 1);
+        $usuarios_activos[] = d(_d('VENDEDORES', $total_vendedores), $base);
+        $total_vendedores_activos = count(array_unique($ids_usuarios_actividad));
+        $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), 'col-md-2 border text-center bg-primary white');
+
+        $total_vendedores_activos_ventas = count(array_unique($ids_usuarios_actividad_venta));
+        $usuarios_activos[] = d(_d('LOGRARON VENTAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
+        $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
+        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-3 border text-center');
+
+
+        $bajas = ($total_vendedores - $total_vendedores_activos);
+        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-3 border text-center bg-danger white');
+
+
+        $totales_usuarios_activos = d($usuarios_activos, 'row');
+
+
+        $data[] = d($totales_usuarios_activos, 'mt-5 col-md-12');
+        $data[] = d($totales, 'mt-5 col-md-12');
+        $data[] = d($response, 'mt-5 col-md-12');
+        return append($data);
+
+    }
 
     function tareas_vendedor($info)
     {

@@ -80,4 +80,21 @@ class Enid extends REST_Controller
 
     }
 
+    function ventas_entregas_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+            $response = $this->actividad_web_model->ventas_entregas($param);
+            if (prm_def($param, 'v') > 0) {
+
+                $response = format_reporte_ventas_reparto($response);
+            }
+        }
+        $this->response($response);
+
+    }
+
 }
