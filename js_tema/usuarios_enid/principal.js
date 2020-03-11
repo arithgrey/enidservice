@@ -11,8 +11,13 @@ let $input_apellido_paterno = $form.find('.apellido_paterno');
 let $input_apellido_materno = $form.find('.apellido_materno');
 let $input_email_registro = $form.find('.email');
 let $input_telefono_registro = $form.find('.tel_contacto');
+let $q = $('.q');
 
 $(document).ready(function () {
+
+
+    valida_busqueda();
+
 
     set_option("estado_usuario", 1);
     set_option("depto", 0);
@@ -377,4 +382,12 @@ let evalua_registro_motivo_lista_negra = function () {
 
     }
 
+};
+let valida_busqueda = function () {
+
+    let q = $q.val();
+    if (q.length) {
+        $nombre_usuario.val(q);
+        $nombre_usuario.focus();
+    }
 };
