@@ -166,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_administrador($data)) {
 
-            $response[] = _titulo('¿Como es tu cliente?', 4);
+            $response[] = _titulo('¿Como es tu cliente?', 2);
             $id_tipo_negocio = pr($usuario_tipo_negocio, "idtipo_negocio", 39);
             $negocio_registrado = pr($usuario_tipo_negocio, "nombre", '');
             $text_tipo = _titulo('tipo negocio', 5);
@@ -884,7 +884,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tiene_domilio($domicilio);
         $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
         $r[] = compras_cliente($data);
-        $r[] = seccion_usuario($usuario, $recibo, $es_vendedor);
+        $r[] = seccion_usuario($usuario, $recibo, $data);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio, $recibo);
         $r[] = create_seccion_saldos($recibo);
@@ -993,11 +993,7 @@ if (!function_exists('invierte_date_time')) {
                 ""
             );
 
-            $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)),
-                [
-                    'style' => 'background:#0740ec!important;'
-                ]
-            );
+            $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)));
 
             $link = a_enid(
                 $pedido,
@@ -2499,6 +2495,7 @@ if (!function_exists('invierte_date_time')) {
         $direccion = 'flex-column text-center col-sm-6';
         $strong = _text_('mb-4', _strong);
 
+
         $text[] = flex("envio", money($costo_envio_cliente), $direccion, $strong);
 
         $text[] = flex("total", money($total), $direccion, $strong);
@@ -2516,7 +2513,7 @@ if (!function_exists('invierte_date_time')) {
 
     function bloque($text, $ext = '')
     {
-        return d($text, _text_("border border-secondary p-3 mt-3 mb-3 row", $ext));
+        return d($text, _text_("border border-secondary p-3 mt-3 mb-3 row borde_accion solid_bottom_2", $ext));
     }
 
 
@@ -2611,7 +2608,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function seccion_usuario($usuario, $recibo, $es_vendedor)
+    function seccion_usuario($usuario, $recibo, $data)
     {
 
         $r = [];
@@ -2620,15 +2617,11 @@ if (!function_exists('invierte_date_time')) {
         foreach ($usuario as $row) {
 
             $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
-            $nombre = _text(
-                es_null($row, "nombre"),
-                es_null($row, "apellido_paterno"),
-                es_null($row, "apellido_materno")
-            );
 
-            $r[] = d($nombre);
-            $r[] = d($row["tel_contacto"]);
-            $r[] = d($row["tel_contacto_alterno"]);
+
+            $r[] = d(format_link_nombre($data, $row));
+            $r[] = d(phoneFormat($row["tel_contacto"]), 'mt-3');
+
 
             if ($row["sexo"] != 2) {
                 $r[] = d($opt[$row["sexo"]]);
@@ -2645,7 +2638,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_usuario
             ]
         );
-        $cliente = flex("CLIENTE", $icon, _text_(_between, 'col-lg-12 p-0 mb-4'), _strong);
+        $cliente = flex(_titulo("cliente",2), $icon, _text_(_between, 'col-lg-12 p-0 mb-4'), _strong);
         $response[] = $cliente;
         $response[] = d($r, _12p);
 
@@ -2666,6 +2659,8 @@ if (!function_exists('invierte_date_time')) {
 
         $ext = " ORDENES DE COMPRA QUE HA REALIZADO ESTE USUARIO ";
         $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'fp9', $total);
+
+        $response[] = d(_titulo('calificación',2));
 
         $response[] = $text_compras;
         $response[] = $starts;
@@ -2969,7 +2964,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $punto_encuentro = text_punto_encuentro($domicilio, $recibo);
-        $encabezado = d_p("punto de encuentro", _strong);
+        $encabezado = d_p(_titulo("punto de encuentro",2));
         $encuentro = d_p($punto_encuentro, "contenido_domicilio mt-3");
         $contenido = add_text($encabezado, $encuentro);
         return bloque($contenido);
@@ -3028,7 +3023,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "border form_set_usuario padding_10 row",
             ];
             $form[] = form_open($action, $attr);
-            $form[] = _titulo("Cliente");
+            $form[] = d(_titulo('cliente',2));
 
 
             $form[] = input_frm('col-sm-12 mt-5 p-0', 'NOMBRE',

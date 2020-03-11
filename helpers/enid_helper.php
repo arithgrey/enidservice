@@ -3365,3 +3365,29 @@ function es_orden_entregada($recibo, $data)
     return in_array($status, $data['restricciones']['orden_entregada']);
 
 }
+
+function phoneFormat($number)
+{
+    if (ctype_digit($number) && strlen($number) == 10) {
+        $number = '(' . substr($number, 0, 2) . ') ' . substr($number, 2, 2) . '-' . substr($number, 4, 2) . '-' . substr($number, 6, 2) . '-' . substr($number, 8, 2);
+    } else {
+        if (ctype_digit($number) && strlen($number) == 7) {
+            $number = substr($number, 0, 3) . '-' . substr($number, 3, 4);
+        }
+    }
+    return $number;
+}
+
+function format_link_nombre($data, $nombre, $email = '')
+{
+
+    if (es_administrador($data)) {
+
+        $email = es_data($nombre) ? prm_def($nombre, 'email') : $email;
+        $link = path_enid('busqueda_usuario', $email);
+        $str = es_data($nombre) ? format_nombre($nombre) : $nombre;
+        $nombre = a_enid($str, ['href' => $link, 'class' =>'black underline']);
+    }
+
+    return $nombre;
+}
