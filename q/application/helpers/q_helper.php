@@ -1682,7 +1682,6 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-
     function pendientes_reparto($data)
     {
 
@@ -1764,7 +1763,10 @@ if (!function_exists('invierte_date_time')) {
             $canceladas = ($actividad) ? $row['canceladas'] : 0;
             $total_canceladas = ($total_canceladas + $canceladas);
 
-            $nombre_completo = format_nombre($row);
+
+            $email = $row['email'];
+            $link = path_enid('busqueda_usuario', $email);
+            $nombre_completo = a_enid(format_nombre($row),$link);
 
             $contenido = [];
             $base = 'col-md-2 border text-center';
@@ -1820,11 +1822,14 @@ if (!function_exists('invierte_date_time')) {
         return append($data);
 
     }
-    function format_reporte_ventas_reparto($estadisticas)
+
+    function format_reporte_ventas_reparto($data_complete)
     {
 
+        $estadisticas = $data_complete["totales"];
+        $sin_asignacion = $data_complete['sin_asignacion'];
+        $totales_proximas_agendas = pr($sin_asignacion, 'proximas');
 
-        $response = [];
         $contenido = [];
         $base = 'col-md-2 border strong text-center';
         $contenido[] = d("#", 'col-md-1');
@@ -1843,13 +1848,14 @@ if (!function_exists('invierte_date_time')) {
 
         $ids_usuarios_actividad = [];
         $ids_usuarios_actividad_venta = [];
-
         $a = 1;
         foreach ($estadisticas as $row) {
 
             $idusuario = $row['idusuario'];
             $ids_usuarios[] = $idusuario;
             $id_usuario_entrega = $row['id_usuario_entrega'];
+            $id_repartidor = $row['id_repartidor'];
+
 
             if ($id_usuario_entrega > 0) {
                 $ids_usuarios_actividad[] = $id_usuario_entrega;
@@ -1857,6 +1863,7 @@ if (!function_exists('invierte_date_time')) {
                     $ids_usuarios_actividad_venta[] = $id_usuario_entrega;
                 }
             }
+
             $actividad = ($id_usuario_entrega > 0);
             $total = ($actividad) ? $row['total'] : 0;
             $total_operaciones = ($total_operaciones + $total);
@@ -1864,13 +1871,16 @@ if (!function_exists('invierte_date_time')) {
             $efectivas = ($actividad) ? $row['efectivas'] : 0;
             $total_ventas = ($total_ventas + $efectivas);
 
-            $en_proceso = ($actividad) ? $row['en_proceso'] : 0;
+            $en_proceso = ($id_repartidor > 0) ? $row['proximas'] : 0;
             $total_proceso = ($total_proceso + $en_proceso);
 
-            $canceladas = ($actividad) ? $row['canceladas'] : 0;
+            $canceladas = ($actividad) ? $row['lista_negra'] : 0;
             $total_canceladas = ($total_canceladas + $canceladas);
 
-            $nombre_completo = format_nombre($row);
+
+            $email = $row['email'];
+            $link = path_enid('busqueda_usuario', $email);
+            $nombre_completo = a_enid(format_nombre($row),$link);
 
             $contenido = [];
             $base = 'col-md-2 border text-center';
@@ -1902,15 +1912,20 @@ if (!function_exists('invierte_date_time')) {
         $usuarios_activos = [];
         $base = 'col-md-2 border text-center';
 
+
+        $usuarios_activos[] = d(_d('PRÓXIMAS ENTREGAS SIN REPARTIDOR ASIGNADO', $totales_proximas_agendas),
+            'col-md-3 border text-center');
+
+
         $total_vendedores = ($a - 1);
-        $usuarios_activos[] = d(_d('VENDEDORES', $total_vendedores), $base);
+        $usuarios_activos[] = d(_d('REPARTIDORES', $total_vendedores), $base);
         $total_vendedores_activos = count(array_unique($ids_usuarios_actividad));
         $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), 'col-md-2 border text-center bg-primary white');
 
         $total_vendedores_activos_ventas = count(array_unique($ids_usuarios_actividad_venta));
-        $usuarios_activos[] = d(_d('LOGRARON VENTAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
+        $usuarios_activos[] = d(_d('LOGRARON ENTREGAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
         $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
-        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-3 border text-center');
+        $usuarios_activos[] = d(_d('ACTIVOS SIN ENREGAS', $sin_ventas), 'col-md-3 border text-center');
 
 
         $bajas = ($total_vendedores - $total_vendedores_activos);

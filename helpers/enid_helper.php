@@ -2013,6 +2013,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",
+        "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "enid_login" => "https://enidservices.com/inicio/login/",
         "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg',
         "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png',
