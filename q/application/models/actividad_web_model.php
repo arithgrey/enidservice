@@ -584,9 +584,8 @@ class actividad_web_model extends CI_Model
     {
         return "SELECT 
                 COUNT(0)total, 
-                SUM(CASE WHEN saldo_cubierto > 0 THEN 1 ELSE  0 END )efectivas, 
-                SUM(CASE WHEN saldo_cubierto < 1 AND se_cancela = 0 AND  cancela_cliente = 0  THEN 1 ELSE  0 END )en_proceso ,
-                SUM(CASE WHEN se_cancela > 0 OR  cancela_cliente > 0  THEN 1 ELSE  0 END )canceladas ,
+                SUM(CASE WHEN saldo_cubierto > 0 THEN 1 ELSE  0 END )efectivas,                 
+                SUM(CASE WHEN status = 19  THEN 1 ELSE  0 END )lista_negra ,
                 id_usuario_entrega
                 FROM 
                 proyecto_persona_forma_pago                
@@ -600,6 +599,31 @@ class actividad_web_model extends CI_Model
                 COUNT(0) DESC";
     }
 
+    function recibos_proximos_repartos()
+    {
+        return "SELECT
+                COUNT(0)proximas,
+                id_usuario_entrega id_repartidor
+                FROM 
+                proyecto_persona_forma_pago                
+                WHERE 
+                status != 19 
+                AND
+                cancela_email < 1
+                AND
+                cancela_cliente < 1
+                AND
+                se_cancela < 1
+                AND
+                (fecha_contra_entrega >= CURRENT_DATE() )
+                OR
+                ( fecha_entrega >= CURRENT_DATE()) 
+                GROUP BY 
+                id_usuario_entrega
+                ORDER BY 
+                COUNT(0) 
+                DESC";
+    }
 
     function get_ventas_comisionadas($tabla_comisionistas, $tabla_recibos)
     {
@@ -610,12 +634,15 @@ class actividad_web_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
-    function get_ventas_reparto($tabla_reparto, $tabla_recibos)
+    function get_ventas_reparto($tabla_reparto, $tabla_recibos_proximos, $tabla_recibos)
     {
 
         $query_get = "SELECT * FROM " . $tabla_reparto . " u 
                       LEFT OUTER JOIN $tabla_recibos 
-                      r ON u.idusuario =  r.id_usuario_entrega";
+                      r 
+                      ON u.idusuario =  r.id_usuario_entrega
+                      LEFT OUTER JOIN $tabla_recibos_proximos p
+                      ON u.idusuario =  p.id_repartidor";
         return $this->db->query($query_get)->result_array();
     }
 
@@ -624,25 +651,37 @@ class actividad_web_model extends CI_Model
 
         $_num = mt_rand();
         $sql_repartidores = $this->repartidores();
-        $tabla_comisionistas = 'tabla_comisionistas_' . $_num;
+        $tabla_comisionistas = 'tabla_repartidores_' . $_num;
 
-        $tabla_comisionistas_usuarios = 'tabla_comisionistas_usuarios_' . $_num;
+        $tabla_repartidores_usuarios = 'tabla_reparto_usuarios_' . $_num;
         $tabla_recibos = 'tabla_recibos_' . $_num;
+        $tabla_recibos_proximos_ = 'tabla_recibos_proximos_' . $_num;
         $sql_repartidores_usuarios = $this->repartidores_usuarios($tabla_comisionistas);
         $sql_recibos = $this->recibos_fecha_reparto($param);
-
+        $sql_proximos = $this->recibos_proximos_repartos();
 
         $this->crea_tabla_temploral($tabla_comisionistas, $sql_repartidores, 0);
-        $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_repartidores_usuarios, 0);
+        $this->crea_tabla_temploral($tabla_repartidores_usuarios, $sql_repartidores_usuarios, 0);
         $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 0);
+        $this->crea_tabla_temploral($tabla_recibos_proximos_, $sql_proximos, 0);
 
-        $response = $this->get_ventas_reparto($tabla_comisionistas_usuarios, $tabla_recibos);
 
+        $response['sin_asignacion'] = $this->totales_sin_asignacion_entrega($tabla_recibos_proximos_);
+        $response['totales'] = $this->get_ventas_reparto($tabla_repartidores_usuarios, $tabla_recibos_proximos_, $tabla_recibos);
+
+        $this->crea_tabla_temploral($tabla_recibos_proximos_, $sql_proximos, 0);
         $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 1);
-        $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_repartidores_usuarios, 1);
+        $this->crea_tabla_temploral($tabla_repartidores_usuarios, $sql_repartidores_usuarios, 1);
         $this->crea_tabla_temploral($tabla_comisionistas, '', 1);
         return $response;
 
     }
+
+    function totales_sin_asignacion_entrega($tabla_recibos_proximos)
+    {
+        $query_get = "SELECT proximas FROM $tabla_recibos_proximos WHERE id_repartidor = 0";
+        return $this->db->query($query_get)->result_array();
+    }
+
 
 }

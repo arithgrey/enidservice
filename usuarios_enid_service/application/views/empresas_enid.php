@@ -6,6 +6,10 @@
                 "class" => 'id_usuario',
                 "value" => $id_usuario
             ]) ?>
+            <?= hiddens([
+                "class" => 'q',
+                "value" => $q
+            ]) ?>
             <?= d(get_format_info_usuario(), ["class" => "tab-pane active ", "id" => "tab1"]) ?>
             <?= tab_seccion(form_recurso(),'configurar_recurso',0) ?>
 

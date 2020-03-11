@@ -13,21 +13,19 @@ class Inicio extends CI_Controller
     function index()
     {
 
-        $data = $this->app->session("Grupo ventas - Enid Service - ");
+        $data = $this->app->session("");
+        $param = $this->input->get();
+        $data['q'] = prm_def($param, 'q');
 
         if ($this->app->getperfiles() === 20) {
 
             header("location:" . path_enid("area_cliente"));
         }
 
-
         $data += [
-
             "departamentos" => $this->get_departamentos_enid(),
             "perfiles_enid_service" => $this->get_perfiles_enid_service()
-
         ];
-
 
         $this->app->pagina($this->app->cssJs($data, "usuarios_enid_service"), 'empresas_enid');
     }
@@ -41,8 +39,6 @@ class Inicio extends CI_Controller
 
     private function get_departamentos_enid()
     {
-
-        return $this->app->api("departamento/index/format/json/", ["estado"=> 1]);
-
+        return $this->app->api("departamento/index/format/json/", ["estado" => 1]);
     }
 }

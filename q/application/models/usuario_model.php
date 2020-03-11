@@ -454,13 +454,14 @@ class usuario_model extends CI_Model
     {
 
         $status = $param["status"];
-        $q = prm_def($param, "q");
+        $q = trim(prm_def($param, "q"));
         $extra = (strlen($q) > 1) ? " WHERE 
         u.nombre like '%" . $q . "%'
         OR u.email like '%" . $q . "%'
         OR u.apellido_paterno like '%" . $q . "%'
         OR u.apellido_materno like '%" . $q . "%'
         OR u.tel_contacto  like '%" . $q . "%'
+        OR u.idusuario  like '%" . $q . "%'
          " : " ";
         $limit = $this->get_limit_usuarios($param);
         return "inner join usuario_perfil pu
