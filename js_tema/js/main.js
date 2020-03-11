@@ -735,7 +735,7 @@ let bloquea_form = (form) => {
 
     $("*", form).prop('disabled', true);
     valida_load(form);
-}
+};
 
 let reset_form = id => document.getElementById(id).reset();
 
@@ -1089,6 +1089,7 @@ let escucha_submmit_selector = function (e, $form, $submit = 0) {
     }
 };
 let es_formato_telefono = function ($input) {
+
 
     let len_telefono = $input.val().length;
     let tiene_formato = true;

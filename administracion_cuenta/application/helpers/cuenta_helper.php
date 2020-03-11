@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion[] = _titulo("actualizar datos de acceso");
         $seccion[] = frm_pw();
-        $actualizar = d($seccion,'col-md-8 col-md-offset-2 p-0');
+        $actualizar = d($seccion, 'col-md-8 col-md-offset-2 p-0');
 
 
         $r[] = tab_seccion($actualizar, 'tab_privacidad');
@@ -143,11 +143,10 @@ if (!function_exists('invierte_date_time')) {
 
     function frm_pw()
     {
-
-        $r[] = form_open("",
+        $response[] = form_open("",
             [
-                "id" => "form_update_password",
-                "class" => "form-horizontal mt-5",
+                "id" => "form_password",
+                "class" => "form_password",
                 "method" => "POST"
             ]
         );
@@ -161,12 +160,12 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "password",
                 "required" => "true"
             ],
-            'place_pw_1'
+            _text_password
         );
 
         $r[] = input_frm(
             'mt-5',
-            "Nueva contraseña",
+            "Nueva",
             [
                 "name" => "pw_nueva",
                 "id" => "pw_nueva",
@@ -174,12 +173,12 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'pw_nueva',
                 "required" => true
             ]
-            , 'place_pw_2'
+            , _text_password
 
         );
 
         $r[] = input_frm(
-            'mt-5', "Confirmar",
+            'mt-5', "Confirmar nueva",
             [
                 "name" => "pw_nueva_confirm",
                 "id" => "pw_nueva_confirm",
@@ -187,7 +186,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "pw_confirmacion",
                 "required" => "true"
             ],
-            'place_pw_3'
+            _text_password
         );
 
         $r[] = hiddens(
@@ -197,16 +196,11 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = place("reportesession");
-        $r[] = btn("Actualizar",
-            [
-                "id" => "inbutton",
-                "class" => "btn_save mt-5"
-            ]
-        );
-        $r[] = form_close(place("msj_password"));
+        $r[] = btn("Actualizar");
+        $response[] = d_c($r, 'mt-5');
+        $response[] = form_close(place("msj_password"));
 
-        return append($r);
+        return append($response);
     }
 
 
@@ -216,7 +210,7 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($vista < 1) {
 
-            $r[] = d(d(_titulo("SOBRE TI"), _12p), 'row mt-5 mb-5');
+            $r[] = _titulo("SOBRE TI");
             $r[] = frm_nombre($usuario);
             $r[] = frm_email($usuario);
             $r[] = frm_telefono($usuario);
@@ -229,7 +223,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = get_campo($usuario, "apellido_materno", "Tu prime apellido");
 
         }
-        return append($r);
+        return d_row(d_c($r, 'col-md-12 mt-5'));
 
     }
 
@@ -280,46 +274,27 @@ if (!function_exists('invierte_date_time')) {
 
     function frm_telefono($usuario)
     {
-        $r[] = d(input_frm(
-            '',
-            "Lada",
+        $input = input_frm('', "Teléfono",
             [
-                "id" => "lada",
-                "name" => "lada",
-                "placeholder" => "Lada",
-                "class" => "lada ",
-                "required" => true,
-                "type" => "text",
-                "maxlength" => "3",
-                "minlength" => "2",
-                "value" => pr($usuario, 'tel_lada')
-            ]
-            , 'registro_telefono_usuario_lada'
-
-        ), 'col-md-3 mb-5');
-
-
-        $r[] = d(input_frm('', "Teléfono",
-            [
-                "id" => "telefono",
+                "id" => "telefono_usuario",
                 "name" => "tel_contacto",
                 "placeholder" => "Teléfono",
                 "class" => "telefono ",
                 "required" => true,
                 "type" => "text",
-                "maxlength" => "13",
-                "minlength" => "8",
+                "maxlength" => 10,
+                "minlength" => 8,
                 "value" => pr($usuario, 'tel_contacto')
-            ], 'registro_telefono_usuario'
+            ], _text_telefono
 
-        ), 'col-md-5  mb-5');
+        );
 
-        $r[] = d(btn("Actualizar"), 'col');
 
-        $form[] = form_open("", ["class" => "form_telefono_usuario row"]);
-        $form[] = flex_md($r, 'row');
+        $form[] = form_open("", ["class" => "form_telefono_usuario"]);
+        $form[] = $input;
+        $form[] = d(btn(''), 'd-none');
         $form[] = form_close();
-        return d($form, 'mt-4 mb-4');
+        return append($form);
 
 
     }
@@ -343,11 +318,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = form_close();
-        $response[] = d(d($r, _12p), 'row mt-5 mb-3');
-        $response[] = d(d('El correo electrónico NO se mostrará públicamente', _12p), 'row mb-5');
-        return append($response);
-
-
+        return append($r);
     }
 
     function frm_nombre($usuario)
@@ -358,20 +329,21 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "form_nombre_usuario"
             ]
         );
-        $r[] = input_frm('', 'Nombre de usuario',
+        $r[] = input_frm('', 'Nombre',
             [
                 "id" => "nombre_usuario",
-                "name" => "nombre_usuario",
-                "placeholder" => "Nombre por cual te indentifican clientes y vendedores",
+                "name" => "nombre",
+                "placeholder" => "Tu nombre",
                 "class" => "nombre_usuario",
                 "required" => true,
                 "type" => "text",
-                "value" => pr($usuario, 'nombre_usuario'),
+                "value" => pr($usuario, 'nombre'),
                 "maxlength" => 30
-            ], "registro_nombre_usuario"
+            ],
+            _text_nombre
         );
         $r[] = form_close();
-        return d(d($r, _12p), 'row mt-5 mb-5');
+        return append($r);
 
     }
 

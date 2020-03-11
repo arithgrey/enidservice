@@ -173,16 +173,9 @@ class usuario extends REST_Controller
 
         $param = $this->put();
         $response = [];
-        if (fx($param, "tel_contacto,lada")) {
+        if (fx($param, "tel_contacto")) {
 
-            $params = [
-                "tel_contacto" => $param["tel_contacto"],
-                "tel_lada" => $param["lada"]
-            ];
-
-            $params_where = ["idusuario" => $this->id_usuario];
-            $response = $this->usuario_model->update($params, $params_where);
-
+            $response = $this->usuario_model->q_up("tel_contacto", $param["tel_contacto"], $this->id_usuario);
         }
         $this->response($response);
     }
@@ -336,8 +329,15 @@ class usuario extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if ($this->id_usuario > 0 && strlen($param["nombre_usuario"]) > 0) {
-            $response = $this->usuario_model->q_up("nombre_usuario", $param["nombre_usuario"], $this->id_usuario);
+        $id_usuario = $this->id_usuario;
+        if (fx($param, "nombre") && $id_usuario > 0) {
+
+            $response = $this->usuario_model->q_up(
+                "nombre",
+                $param["nombre"],
+                $id_usuario
+            );
+
         }
         $this->response($response);
     }
