@@ -1,22 +1,37 @@
 "use strict";
+let input_telefono = ".form_telefono_usuario #telefono_usuario";
+let form_telefono = ".form_telefono_usuario";
+let form_nombre_usuario = ".form_nombre_usuario";
+let form_password = '#form_password';
+let $form_telefono = $(form_telefono);
+let $form_nombre_usuario = $(form_nombre_usuario);
+let $input_telefono_usuario = $form_telefono.find('#telefono_usuario');
+let $input_nombre_usuario = $form_nombre_usuario.find('#nombre_usuario');
+let $form_password = $(form_password);
+let $input_password = $form_password.find("#password");
+let $input_nueva = $form_password.find("#pw_nueva");
+let $input_nueva_confirmacion = $form_password.find("#pw_nueva_confirm");
+
 $(document).ready(() => {
-    $(".btn_direccion").click(() =>{
+
+    $(".btn_direccion").click(() => {
         set_option("v", 1);
         direccion_usuario();
     });
-    $(".form_nombre_usuario").submit(u_nombre);
+    $form_nombre_usuario.submit(nombre);
     $(".tab_privacidad_seguridad").click(get_conceptos);
-    $(".nombre_usuario").keyup(elimina_espacio);
-    $(".tel2").keyup(() => {
-        quita_espacios(".tel2");
-    });
-    $(".lada2").keyup(() => {
-        quita_espacios(".lada2");
-    });
-    $("#form_update_password").submit(set_password);
+    $form_password.submit(password);
     $(".editar_imagen_perfil").click(carga_form_imagenes_usuario);
-    $(".form_telefono_usuario").submit(actualiza_telefono);
-    $(".f_telefono_usuario_negocio").submit(set_tel);
+
+    $form_telefono.submit(actualiza_telefono);
+    $input_telefono_usuario.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_telefono, 1);
+    });
+    $input_nombre_usuario.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_nombre_usuario, 1);
+    });
 
 
 });
@@ -47,7 +62,7 @@ let response_direccion_usuario = data => {
 };
 let registra_direccion_usuario = e => {
 
-    if (get_option("existe_codigo_postal") == 1) {
+    if (get_option("existe_codigo_postal") === 1) {
 
         let url = "../q/index.php/api/codigo_postal/direccion_usuario/format/json/";
         let data_send = $(".form_direccion_envio").serialize() + "&" + $.param({"direccion_principal": 1});
@@ -66,81 +81,85 @@ let response_registra_direccion_usuario = data => {
     set_option("v", 1);
     direccion_usuario();
 };
-let u_nombre = e => {
+let nombre = e => {
 
-    let data_send = $(".form_nombre_usuario").serialize();
-    let url = "../q/index.php/api/usuario/nombre_usuario/format/json/";
-    request_enid("PUT", data_send, url, function () {
-        seccess_enid(".registro_nombre_usuario", "Tu nombre de usuario fue actualizado!");
-    }, ".registro_nombre_usuario");
+    let respuestas = [];
+    respuestas.push(es_formato_nombre($input_nombre_usuario));
+    let $tiene_formato = (!respuestas.includes(false));
+    if ($tiene_formato) {
+
+        let data_send = $form_nombre_usuario.serialize();
+        let url = "../q/index.php/api/usuario/nombre_usuario/format/json/";
+        request_enid("PUT", data_send, url, response_actualizacion);
+    }
+
     e.preventDefault();
 };
 let actualiza_telefono = e => {
 
-    let data_send = $(".form_telefono_usuario").serialize();
-    let url = "../q/index.php/api/usuario/telefono/format/json/";
-    request_enid("PUT", data_send, url, function () {
-        seccess_enid(".registro_telefono_usuario", "Tu teléfono fue actualizado!");
-    }, ".registro_telefono_usuario");
+    let respuestas = [];
+    respuestas.push(es_formato_telefono($input_telefono_usuario));
+    let $tiene_formato = (!respuestas.includes(false));
+    if ($tiene_formato) {
 
-    e.preventDefault();
-};
-let set_tel = e => {
-
-    if (get_parameter(".tel2").length > 4 && get_parameter(".lada2").length > 1) {
-
-        let data_send = $(".f_telefono_usuario_negocio").serialize();
-        let url = "../q/index.php/api/usuario/telefono_negocio/format/json/";
-        request_enid("PUT", data_send, url, function () {
-            seccess_enid(".registro_telefono_usuario_negocio", "Tu teléfono fue actualizado!");
-        }, ".registro_telefono_usuario_negocio");
+        let data_send = $form_telefono.serialize();
+        let url = "../q/index.php/api/usuario/telefono/format/json/";
+        bloquea_form(form_telefono);
+        request_enid("PUT", data_send, url, response_actualizacion);
 
     } else {
 
-        focus_input([".tel2", ".lada2"]);
+        desbloqueda_form(form_telefono);
     }
+
     e.preventDefault();
 };
-let elimina_espacio = function () {
+let response_actualizacion = function (data) {
 
-    $(this).val(quita_espacios_text($(this).val().toLowerCase()));
+    if (data === true) {
+
+        redirect('');
+    } else {
+
+        desbloqueda_form(form_telefono);
+    }
 };
-let quita_espacios_text = v => {
 
-    let valor = "";
-    for (let a = 0; a < v.length; a++) {
-        if (v[a] != " ") {
-            valor += v[a];
+let password = e => {
+
+    let respuestas = [];
+    debugger;
+    respuestas.push(es_formato_password($input_password));
+    respuestas.push(es_formato_password($input_nueva));
+    respuestas.push(es_formato_password($input_nueva_confirmacion));
+
+    let $tiene_formato = (!respuestas.includes(false));
+
+    if ($tiene_formato) {
+
+        let password = $input_password.val();
+        let nueva = $input_nueva.val();
+        let confirmacion = $input_nueva_confirmacion.val();
+        if (nueva === confirmacion) {
+
+            if (password !== nueva) {
+
+                let anterior = "" + CryptoJS.SHA1(password);
+                let nuevo = "" + CryptoJS.SHA1(nueva);
+                let confirma = "" + CryptoJS.SHA1(confirmacion);
+                s_password(anterior, nuevo, confirma);
+
+            } else {
+                modal('Las contraseñas son las mismas');
+            }
+
+        } else {
+
+            modal('Las nuevas contraseña no coinciden');
+            $input_nueva.next().next().removeClass('d-none');
+            $input_nueva_confirmacion.next().next().removeClass('d-none');
         }
-    }
-    return valor;
-};
-let set_password = e => {
 
-    let flag = val_text_form("#password", ".place_pw_1", 7, "Texto ");
-    let flag2 = val_text_form("#pw_nueva", ".place_pw_2", 7, "Texto ");
-    let flag3 = val_text_form("#pw_nueva_confirm", ".place_pw_3", 7, "Texto ");
-    let npw = 0;
-
-    if (flag === flag2 && flag === flag3) {
-        let npw = (get_parameter("#password") != get_parameter("#pw_nueva")) ? 1 : 2;
-        npw = (get_parameter("#password") != get_parameter("#pw_nueva_confirm")) ? 1 : 2;
-    }
-
-    switch (npw) {
-        case 1:
-
-            let anterior = "" + CryptoJS.SHA1(get_parameter("#password"));
-            let nuevo = "" + CryptoJS.SHA1(get_parameter("#pw_nueva"));
-            let confirma = "" + CryptoJS.SHA1(get_parameter("#pw_nueva_confirm"));
-            s_password(anterior, nuevo, confirma);
-
-            break;
-        case 2:
-            render_enid(".msj_password", "La nueva contraseña no puede ser igual a la actual ");
-            break;
-        default:
-            break;
     }
 
     e.preventDefault();
@@ -149,18 +168,21 @@ let s_password = (anterior, nuevo, confirma) => {
 
     let url = "../q/index.php/api/usuario/pass/format/json/";
     let data_send = {"nuevo": nuevo, "anterior": anterior, "confirma": confirma, "type": 2};
-    request_enid("PUT", data_send, url, r_password, ".msj_password");
+    bloquea_form(form_password);
+    request_enid("PUT", data_send, url, response_password);
 };
-let r_password = data => {
+let response_password = data => {
 
-    if (data) {
+    if (data === true) {
 
-        seccess_enid(".msj_password", "Contraseña actualizada, inicia sessión para verificar el cambio.");
+        let $inicio = "Contraseña actualizada, inicia sessión para verificar el cambio.";
+        seccess_enid(".msj_password", $inicio);
+        debugger;
         setInterval('termina_session()', 3000);
 
     } else {
 
-        render_enid(".msj_password", data);
+        modal(data);
 
     }
 };
