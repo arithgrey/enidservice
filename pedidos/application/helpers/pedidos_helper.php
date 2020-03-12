@@ -2929,7 +2929,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($domicilio as $row) {
 
             $id = $row["id_tipo_punto_encuentro"];
-            $lugar_entrega = $row["lugar_entrega"];
+            $lugar_entrega = strong($row["lugar_entrega"]);
             $tipo = $row["tipo"];
             $nombre_linea = $row["nombre_linea"];
 
@@ -2941,8 +2941,7 @@ if (!function_exists('invierte_date_time')) {
                     $response =
                         _text_("ESTACIÓN DEL METRO ", $lugar_entrega, " LINEA ",
                             $row["numero"], $nombre_linea, " COLOR ", $row["color"],
-                            format_fecha($fecha_contra_entrega, 1),
-                            format_fecha($fecha_contra_entrega, 1)
+                            _titulo(format_fecha($fecha_contra_entrega,1),2)
                         );
                     break;
                 //2 | ESTACIÓN DEL  METRO BUS
