@@ -504,16 +504,21 @@ class actividad_web_model extends CI_Model
 
         $tabla_comisionistas_usuarios = 'tabla_comisionistas_usuarios_' . $_num;
         $tabla_recibos = 'tabla_recibos_' . $_num;
+        $tabla_recibos_proximos = 'tabla_recibos_proximos' . $_num;
         $sql_comisionistas_usuarios = $this->comisionistas_usuarios($tabla_comisionistas);
         $sql_recibos = $this->recibos_fecha($param);
+        $sql_recibos_proximos = $this->recibos_proximos_cirres();
 
 
         $this->crea_tabla_temploral($tabla_comisionistas, $sql_comisionistas, 0);
         $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_comisionistas_usuarios, 0);
         $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 0);
+        $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 0);
+        $this->crea_tabla_temploral($tabla_recibos_proximos, $sql_recibos_proximos, 0);
 
-        $response = $this->get_ventas_comisionadas($tabla_comisionistas_usuarios, $tabla_recibos);
+        $response = $this->get_ventas_comisionadas($tabla_comisionistas_usuarios, $tabla_recibos, $tabla_recibos_proximos);
 
+        $this->crea_tabla_temploral($tabla_recibos_proximos, $sql_recibos_proximos, 1);
         $this->crea_tabla_temploral($tabla_recibos, $sql_recibos, 1);
         $this->crea_tabla_temploral($tabla_comisionistas_usuarios, $sql_comisionistas_usuarios, 1);
         $this->crea_tabla_temploral($tabla_comisionistas, '', 1);
@@ -564,8 +569,7 @@ class actividad_web_model extends CI_Model
     {
         return "SELECT 
                 COUNT(0)total, 
-                SUM(CASE WHEN saldo_cubierto > 0 THEN 1 ELSE  0 END )efectivas, 
-                SUM(CASE WHEN saldo_cubierto < 1 AND se_cancela = 0 AND  cancela_cliente = 0  THEN 1 ELSE  0 END )en_proceso ,
+                SUM(CASE WHEN saldo_cubierto > 0 THEN 1 ELSE  0 END )efectivas,                 
                 SUM(CASE WHEN se_cancela > 0 OR  cancela_cliente > 0  THEN 1 ELSE  0 END )canceladas ,
                 id_usuario_referencia
                 FROM 
@@ -579,6 +583,33 @@ class actividad_web_model extends CI_Model
                 ORDER BY 
                 COUNT(0) DESC";
     }
+
+    function recibos_proximos_cirres()
+    {
+        return "SELECT
+                COUNT(0)proximas,
+                id_usuario_referencia id_usuario_agenda
+                FROM 
+                proyecto_persona_forma_pago                
+                WHERE 
+                status != 19 
+                AND
+                cancela_email < 1
+                AND
+                cancela_cliente < 1
+                AND
+                se_cancela < 1
+                AND
+                (fecha_contra_entrega >= CURRENT_DATE() )
+                OR
+                ( fecha_entrega >= CURRENT_DATE()) 
+                GROUP BY 
+                id_usuario_referencia
+                ORDER BY 
+                COUNT(0) 
+                DESC";
+    }
+
 
     function recibos_fecha_reparto($param)
     {
@@ -625,12 +656,15 @@ class actividad_web_model extends CI_Model
                 DESC";
     }
 
-    function get_ventas_comisionadas($tabla_comisionistas, $tabla_recibos)
+    function get_ventas_comisionadas($tabla_comisionistas, $tabla_recibos, $tabla_recibos_proximos)
     {
 
-        $query_get = "SELECT * FROM " . $tabla_comisionistas . " u 
+        $query_get = "SELECT * FROM  $tabla_comisionistas  u 
                       LEFT OUTER JOIN $tabla_recibos 
-                      r ON u.idusuario =  r.id_usuario_referencia";
+                      r ON u.idusuario =  r.id_usuario_referencia
+                      LEFT OUTER JOIN $tabla_recibos_proximos p 
+                      ON p.id_usuario_agenda = u.idusuario                       
+                      ";
         return $this->db->query($query_get)->result_array();
     }
 

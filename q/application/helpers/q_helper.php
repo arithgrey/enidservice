@@ -1757,7 +1757,7 @@ if (!function_exists('invierte_date_time')) {
             $efectivas = ($actividad) ? $row['efectivas'] : 0;
             $total_ventas = ($total_ventas + $efectivas);
 
-            $en_proceso = ($actividad) ? $row['en_proceso'] : 0;
+            $en_proceso = ($row['id_usuario_agenda'] > 0) ? $row['proximas'] : 0;
             $total_proceso = ($total_proceso + $en_proceso);
 
             $canceladas = ($actividad) ? $row['canceladas'] : 0;
@@ -1766,7 +1766,7 @@ if (!function_exists('invierte_date_time')) {
 
             $email = $row['email'];
             $link = path_enid('busqueda_usuario', $email);
-            $nombre_completo = a_enid(format_nombre($row),$link);
+            $nombre_completo = a_enid(format_nombre($row), $link);
 
             $contenido = [];
             $base = 'col-md-2 border text-center';
@@ -1880,7 +1880,7 @@ if (!function_exists('invierte_date_time')) {
 
             $email = $row['email'];
             $link = path_enid('busqueda_usuario', $email);
-            $nombre_completo = a_enid(format_nombre($row),$link);
+            $nombre_completo = a_enid(format_nombre($row), $link);
 
             $contenido = [];
             $base = 'col-md-2 border text-center';
