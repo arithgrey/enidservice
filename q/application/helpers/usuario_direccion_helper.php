@@ -53,12 +53,12 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        if ($registro_direccion == 0 && !es_administrador_o_vendedor($session)) {
-
-            $nombre = pr($info_usuario, "nombre");
-            $nombre_receptor = format_nombre($nombre);
+        if ($registro_direccion == 0) {
+            $nombre_receptor = format_nombre($info_usuario);
             $telefono_receptor = pr($info_usuario, "tel_contacto");
         }
+
+        $nombre_receptor = (!es_data($info_envio_direccion)) ? format_nombre($info_usuario) : $nombre_receptor;
 
         $r[] = _titulo("dirección de envío");
         $r[] = get_format_direccion_envio_pedido(
