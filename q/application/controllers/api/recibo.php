@@ -15,6 +15,18 @@ class recibo extends REST_Controller
         $this->id_usuario = $this->app->get_session("idusuario");
     }
 
+    function index_GET()
+    {
+        $param = $this->get();
+        if (fx($param, "recibo")) {
+            $id = $param['recibo'];
+            $q = prm_def($param, 'q');
+            $busqueda = (es_data($q)) ? $q : [];
+            $response = $this->recibo_model->q_get($busqueda, $id);
+        }
+        $this->response($response);
+    }
+
     function pendientes_sin_cierre_GET()
     {
 
@@ -92,12 +104,10 @@ class recibo extends REST_Controller
 
         $response = add_fields($response);
 
-        $res = [
+        return [
             "total_costos" => intval($this->get_sumatoria_costos_operativos($response)),
             "total_pagos" => $total,
         ];
-
-        return $res;
     }
 
     private function get_sumatoria_costos_operativos($in)
@@ -849,8 +859,12 @@ class recibo extends REST_Controller
         if (fx($param, "fecha_entrega,horario_entrega,recibo")) {
 
             $fecha_contra_entrega = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
-            $response = $this->recibo_model->set_fecha_contra_entrega($param["recibo"],
-                $fecha_contra_entrega);
+            $es_contra_entrega_domicilio = prm_def($param, 'contra_entrega_domicilio');
+            $response = $this->recibo_model->set_fecha_contra_entrega(
+                $param["recibo"],
+                $fecha_contra_entrega,
+                $es_contra_entrega_domicilio
+            );
         }
 
         $this->response($response);

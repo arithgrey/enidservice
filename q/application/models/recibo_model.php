@@ -614,12 +614,13 @@ class Recibo_model extends CI_Model
 
     }
 
-    function set_fecha_contra_entrega($id_recibo, $fecha)
+    function set_fecha_contra_entrega($id_recibo, $fecha, $contra_entrega_domicilio = 0)
     {
 
 
         $this->db->set('modificacion_fecha', 'modificacion_fecha + 1', FALSE);
         $this->db->set('fecha_contra_entrega', $fecha);
+        $this->db->set('contra_entrega_domicilio', $contra_entrega_domicilio);
         $this->db->where("id_proyecto_persona_forma_pago", $id_recibo);
         return $this->db->update('proyecto_persona_forma_pago');
 

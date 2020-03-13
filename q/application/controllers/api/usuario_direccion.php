@@ -136,6 +136,7 @@ class usuario_direccion extends REST_Controller
 
             $data["info_usuario"] = $usuario;
             $data['registro_direccion'] = $registro_direccion;
+
             $response = format_direccion_envio($data);
 
         }
