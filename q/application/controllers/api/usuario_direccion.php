@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH.'../../librerias/REST_Controller.php';
+require APPPATH . '../../librerias/REST_Controller.php';
 
 class usuario_direccion extends REST_Controller
 {
@@ -46,8 +46,8 @@ class usuario_direccion extends REST_Controller
         if (fx($param, "id_direccion,id_usuario")) {
 
             $in = [
-                    "id_direccion" => $param['id_direccion'],
-                    "id_usuario" => $param['id_usuario'],
+                "id_direccion" => $param['id_direccion'],
+                "id_usuario" => $param['id_usuario'],
             ];
             $set = ["status" => 0];
             $response = $this->usuario_direccion_model->update($set, $in, 10);
@@ -65,11 +65,11 @@ class usuario_direccion extends REST_Controller
             if ($param["id_usuario"] > 0 && $param["id_direccion"] > 0) {
 
                 $params_where = [
-                        "id_usuario" => $param["id_usuario"],
+                    "id_usuario" => $param["id_usuario"],
                 ];
 
                 $response =
-                        $this->usuario_direccion_model->delete($params_where, 10);
+                    $this->usuario_direccion_model->delete($params_where, 10);
 
             }
         }
@@ -99,11 +99,33 @@ class usuario_direccion extends REST_Controller
         $this->response($response);
     }
 
+    function valida_cita_domicilio($param, $id_usuario)
+    {
+        $session = $param['session'];
+        $es_administrador_o_vendedor = es_administrador_o_vendedor($session);
+        if ($es_administrador_o_vendedor) {
+
+            $id_recibo = $param['id_recibo'];
+            $qrecibo = [
+                'recibo' => $id_recibo
+            ];
+            $recibo = $this->app->api("recibo/index/format/json/", $qrecibo);
+            $id_usuario = pr($recibo, 'id_usuario');
+        }
+        return $id_usuario;
+
+
+    }
+
     function direccion_envio_pedido_GET()
     {
 
         $param = $this->get();
-        $id_usuario = $this->get_id_usuario($param);
+
+
+        $id_usuario =$this->valida_cita_domicilio($param, $this->get_id_usuario($param));
+
+
         $response = [];
         $data["id_usuario"] = $id_usuario;
         $param["id_usuario"] = $id_usuario;
@@ -137,6 +159,7 @@ class usuario_direccion extends REST_Controller
             $data["info_usuario"] = $usuario;
             $data['registro_direccion'] = $registro_direccion;
 
+
             $response = format_direccion_envio($data);
 
         }
@@ -149,14 +172,14 @@ class usuario_direccion extends REST_Controller
     {
 
         return ($this->app->is_logged_in() > 0) ? $this->id_usuario : (prm_def($param,
-                "id_usuario"));
+            "id_usuario"));
     }
 
     private function get_direccion_pedido($q)
     {
 
         return $this->app->api("proyecto_persona_forma_pago_direccion/recibo/format/json/",
-                $q);
+            $q);
 
     }
 
@@ -177,10 +200,10 @@ class usuario_direccion extends REST_Controller
 
 
         return $this->app->api(
-                "direccion/data_direccion/format/json/",
-                [
-                        "id_direccion" => $id_direccion,
-                ]
+            "direccion/data_direccion/format/json/",
+            [
+                "id_direccion" => $id_direccion,
+            ]
         );
     }
 
@@ -197,8 +220,8 @@ class usuario_direccion extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_direccion")) {
             $params = [
-                    "id_usuario" => $param["id_usuario"],
-                    'id_direccion' => $param["id_direccion"],
+                "id_usuario" => $param["id_usuario"],
+                'id_direccion' => $param["id_direccion"],
             ];
             $response = $this->usuario_direccion_model->insert($params);
         }
@@ -266,15 +289,15 @@ class usuario_direccion extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $params_where = [
-                    "id_usuario" => $param["id_usuario"],
-                    "status" => 1,
+                "id_usuario" => $param["id_usuario"],
+                "status" => 1,
             ];
 
             $direcciones = $this->usuario_direccion_model->get(
-                    [],
-                    $params_where,
-                    10,
-                    'fecha_registro');
+                [],
+                $params_where,
+                10,
+                'fecha_registro');
 
             foreach ($direcciones as $row) {
 

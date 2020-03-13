@@ -3326,16 +3326,24 @@ function format_nombre($usuario)
     $es_usuario = (is_array($usuario) && array_key_exists('nombre', $usuario));
     if ($es_usuario) {
 
+        $nombre = $usuario['nombre'];
+        $nombre = (is_null($nombre)) ? '' : $nombre;
+        $apellido_paterno = $usuario['apellido_paterno'];
+        $apellido_paterno = (is_null($apellido_paterno)) ? '' : $apellido_paterno;
         $response = _text_(
-            $usuario['nombre'],
-            $usuario['apellido_paterno']
+            $nombre,
+            $apellido_paterno
         );
     } else {
 
         if (es_data($usuario)) {
+            $nombre = pr($usuario, 'nombre');
+            $nombre = is_null($nombre) ? '' : $nombre;
+            $apellido_paterno = pr($usuario, 'apellido_paterno');
+            $apellido_paterno = is_null($apellido_paterno) ? '' : $apellido_paterno;
             $response = _text_(
-                $usuario[0]['nombre'],
-                $usuario[0]['apellido_paterno']
+                $nombre,
+                $apellido_paterno
             );
         }
 
@@ -3373,6 +3381,7 @@ function es_orden_entregada_o_cancelada($recibo, $data)
     return in_array($status, $data['restricciones']['entregada_o_cancelada']);
 
 }
+
 function es_orden_cancelada($data)
 {
 
