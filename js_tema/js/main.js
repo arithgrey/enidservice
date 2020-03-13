@@ -1154,3 +1154,33 @@ let es_formato_apellido = $input => {
     }
     return tiene_formato;
 };
+
+function _text_() {
+
+    let $response = '';
+    for (let i = 0; i < arguments.length; i++) {
+        $response += arguments[i] + ' ';
+    }
+
+    return $response;
+}
+
+function _text() {
+
+    let $response = '';
+
+    for (let i = 0; i < arguments.length; i++) {
+        $response += arguments[i];
+    }
+
+    return $response;
+}
+
+let path_enid = (indice, $extra = '') => {
+
+    let $base_url = {
+        "url_home": "reporte_enid",
+    };
+
+    return _text('../', $base_url[indice], $extra);
+};

@@ -114,17 +114,14 @@ class Home extends CI_Controller
     private function add_domicilio_entrega($param)
     {
 
-        $data = $this->app->session(
-            "",
-            "",
-            "Registra tu cuenta  y recibe  asistencia al momento.");
-
+        $data = $this->app->session();
         $data = $this->app->cssJs($data, "procesar_domicilio");
 
         $param += [
 
             "id_recibo" => $param["recibo"],
             "id_usuario" => $data['id_usuario'],
+            "session" => $data
         ];
 
         $response = $this->carga_ficha_direccion_envio($param, 1);

@@ -202,6 +202,7 @@ class Home extends CI_Controller
                 "num_domicilios" => count($domicilios),
                 "domicilio_entrega" => $domicilio_entrega,
                 "punto_entrega" => $punto_entrega,
+                "asignacion_horario_entrega" => prm_def($param, 'asignacion_horario_entrega')
 
             ];
 
@@ -253,7 +254,13 @@ class Home extends CI_Controller
                 "id_servicio" => pr($recibo, "id_servicio"),
                 "es_administrador" => $es_administrador
             ];
+            $id_usuario_compra = pr($recibo, 'id_usuario');
+            $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
+            $usuario_compra = $this->get_usuario($id_usuario_compra);
+            $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
 
+            $data["es_lista_negra"] = $es_lista_negra;
+            $data["usuario_lista_negra"] = $usuario_lista_negra;
             $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
             $data = $this->agrega_usuario_entrega_tracker($data, $es_administrador);
 
@@ -289,6 +296,7 @@ class Home extends CI_Controller
         }
         return $data;
     }
+
     private function agrega_usuario_entrega_tracker($data, $es_administrador)
     {
         if ($es_administrador && es_data($data['recibo'])) {

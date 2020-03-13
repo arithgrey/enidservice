@@ -355,8 +355,6 @@ if (!function_exists('invierte_date_time')) {
         $domicilio = $data["domicilio"];
 
         $r[] = _titulo("¿Donde se encuentra mi pedido?");
-
-
         $tiempo = tiempo($data, $recibo, $domicilio, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
 
@@ -367,40 +365,42 @@ if (!function_exists('invierte_date_time')) {
     function resumen_orden($data, $recibo, $id_servicio)
     {
 
-
         $z = [];
         $servicio = $data["servicio"];
         $es_vendedor = $data["es_vendedor"];
         $evaluacion = evaluacion($recibo, $es_vendedor);
-        $recibo = $recibo[0];
-        $se_cancela = ($recibo["cancela_cliente"] || $recibo["se_cancela"]);
+        $se_cancela = es_orden_cancelada($data);
+        $es_orden_entregada = es_orden_entregada($recibo, $data);
 
         if ($se_cancela) {
 
             $text = "ORDEN CANCELADA";
 
-        } elseif ($recibo["status"] == 15) {
+        } elseif ($es_orden_entregada) {
 
             $text = "ORDEN ENTREGADA!";
 
         } else {
 
             $es_servicio = pr($servicio, "flag_servicio");
-            $fecha_servicio = prm_def($recibo, "fecha_servicio");
-            $tipo_entrega = prm_def($recibo, "tipo_entrega");
-            $fecha_contra_entrega = prm_def($recibo, "fecha_contra_entrega");
-            $fecha_vencimiento = prm_def($recibo, "fecha_vencimiento");
-            $fecha = ($es_servicio) ? $fecha_servicio : (
-                $tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
+            $fecha_servicio = pr($recibo, "fecha_servicio");
+            $tipo_entrega = pr($recibo, "tipo_entrega");
+            $fecha_contra_entrega = pr($recibo, "fecha_contra_entrega");
+            $fecha_vencimiento = pr($recibo, "fecha_vencimiento");
+            $fecha = ($es_servicio) ? $fecha_servicio :
+                ($tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
 
-            $status = prm_def($recibo, "status");
             $text = "";
-            if (!in_array($status, [15, 9, 10]) && $tipo_entrega == 2) {
+            $es_orden_cancelada_engregada = es_orden_entregada_o_cancelada($recibo, $data);
+            if (!$es_orden_cancelada_engregada && $tipo_entrega == 2) {
 
-                $text = ($es_servicio) ?
-                    "PLANEADO PARA EL DÍA " :
-                    "FECHA EN QUE SE  ESTIMA LLEGARÁ TU PEDIDO";
-                $text = add_text($text, format_fecha($fecha), 1);
+                $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
+                $formato_domicilio = ($es_contra_entrega_domicilio) ? 'TIENES UNA CITA EL ' : "SE  ESTIMA QUE TU PEDIDO LLEGARÁ EL";
+                $text = ($es_servicio) ? "PLANEADO PARA EL DÍA " : $formato_domicilio;
+                $fecha_hora_entrega = es_contra_entrega_domicilio($recibo, 1, $fecha);
+                $text = _text_($text, $fecha_hora_entrega);
+
+
             }
 
 
@@ -408,8 +408,8 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = $evaluacion;
         $z[] = _titulo($text, 2);
-        $z[] = text_domicilio($data);
-        $id_recibo = prm_def($recibo, "id_proyecto_persona_forma_pago");
+        $z[] = d(text_domicilio($data), 'text-uppercase');
+        $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
 
@@ -426,7 +426,7 @@ if (!function_exists('invierte_date_time')) {
             a_enid(
                 img(
                     [
-                        "src" => prm_def($recibo, "url_img_servicio"),
+                        "src" => pr($recibo, "url_img_servicio"),
                     ]
                 )
                 ,
@@ -486,23 +486,11 @@ if (!function_exists('invierte_date_time')) {
                     $numero = $pe['numero'];
                     $nombre = $pe['nombre'];
 
-                    $checkout = ticket_pago($recibo, [], 2);
-                    $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
-                    $in_session = $data['in_session'];
-                    $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
-                        ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
-                    $text_pago = _text_($text_entrega, money($saldo_pendiente));
-                    $pago_pendiente = _titulo($text_pago);
-
-                    $status = pr($recibo, 'status');
-                    $se_entrego = in_array($status, [15, 9]);
-                    $es_orden_entregada = ($se_entrego && ($saldo_pendiente < 1));
-
-                    $str = (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
+                    $str = pago_en_cita($data,$recibo,1);
                     $text = _text_(
                         'TIENES UNA CITA EL DÍA ',
-                        format_fecha(pr($recibo, 'fecha_contra_entrega'), 1),
+                        strong(format_fecha(pr($recibo, 'fecha_contra_entrega'), 1)),
                         'EN',
                         'ESTACIÓN DEL METRO DE CIUDAD DE MÉXICO, ',
                         strong($nombre),
@@ -518,6 +506,7 @@ if (!function_exists('invierte_date_time')) {
 
             case 2:
 
+
                 $domicilio = $domicilio['domicilio'];
                 if (es_data($domicilio)) {
 
@@ -529,7 +518,12 @@ if (!function_exists('invierte_date_time')) {
                     $ciudad = $domicilio['ciudad'];
                     $cp = $domicilio['cp'];
 
+
+                    $str = pago_en_cita($data, $recibo);
+
+
                     $text = _text(
+                        '',
                         $calle,
                         ' #',
                         $numero_exterior,
@@ -540,7 +534,8 @@ if (!function_exists('invierte_date_time')) {
                         ' ',
                         $ciudad,
                         ' C.P. ',
-                        $cp
+                        $cp,
+                        $str
                     );
 
 
@@ -559,9 +554,32 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function render_domicilio($data)
+    function pago_en_cita($data, $recibo, $no_validar = 0)
     {
 
+        $str = '';
+        $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
+        if ($es_contra_entrega_domicilio || $no_validar) {
+            $in_session = $data['in_session'];
+            $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
+                ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
+
+            $checkout = ticket_pago($recibo, [], 2);
+            $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
+
+            $text_pago = _text_($text_entrega, money($saldo_pendiente));
+            $pago_pendiente = _titulo($text_pago);
+            $es_orden_entregada = es_orden_entregada($recibo, $data);
+            $str = (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
+
+        }
+        return $str;
+
+    }
+
+
+    function render_domicilio($data)
+    {
 
         $r = $data["recibo"];
         $punto_entrega = $data['punto_entrega'];
@@ -593,6 +611,13 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'num_domicilios',
             ]
         );
+        $response[] = hiddens(
+            [
+                "value" => $data['asignacion_horario_entrega'],
+                "class" => 'asignacion_horario_entrega',
+            ]
+        );
+
         $response[] = frm_direccion($id_recibo);
         $response[] = frm_puntos($id_recibo);
         $response[] = frm_pe_avanzado($id_recibo);
@@ -630,7 +655,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = d(hr([], 0), 'col-lg-12 p-0 mt-3 mb-5');
 
-        return d(append($response), 'col-lg-12 contenedor_domicilios');
+        return d($response, 'col-lg-12 contenedor_domicilios d-none');
 
     }
 
@@ -2386,7 +2411,7 @@ if (!function_exists('invierte_date_time')) {
 
             $tipos_fechas = [0, "fecha_contra_entrega", "fecha_entrega"];
             $id_tipo = (int)$recibo["tipo_entrega"];
-            $tipo = $tipos_fechas[$id_tipo];
+            $tipo = ($recibo['contra_entrega_domicilio']) ? $tipos_fechas[1] : $tipos_fechas[$id_tipo];
             $fecha_entrega = $recibo[$tipo];
 
 
@@ -2638,7 +2663,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_usuario
             ]
         );
-        $cliente = flex(_titulo("cliente",2), $icon, _text_(_between, 'col-lg-12 p-0 mb-4'), _strong);
+        $cliente = flex(_titulo("cliente", 2), $icon, _text_(_between, 'col-lg-12 p-0 mb-4'), _strong);
         $response[] = $cliente;
         $response[] = d($r, _12p);
 
@@ -2660,7 +2685,7 @@ if (!function_exists('invierte_date_time')) {
         $ext = " ORDENES DE COMPRA QUE HA REALIZADO ESTE USUARIO ";
         $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'fp9', $total);
 
-        $response[] = d(_titulo('calificación',2));
+        $response[] = d(_titulo('calificación', 2));
 
         $response[] = $text_compras;
         $response[] = $starts;
@@ -2695,7 +2720,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($domicilio)) {
 
             $d_domicilio = $domicilio["domicilio"];
-            $response = ($domicilio["tipo_entrega"] != 1) ? create_domicilio_entrega($d_domicilio) : create_punto_entrega($d_domicilio, $recibo);
+            $response = ($domicilio["tipo_entrega"] != 1) ? create_domicilio_entrega($d_domicilio, $recibo) : create_punto_entrega($d_domicilio, $recibo);
 
         } else {
             /*solicita dirección de envio*/
@@ -2941,7 +2966,7 @@ if (!function_exists('invierte_date_time')) {
                     $response =
                         _text_("ESTACIÓN DEL METRO ", $lugar_entrega, " LINEA ",
                             $row["numero"], $nombre_linea, " COLOR ", $row["color"],
-                            _titulo(format_fecha($fecha_contra_entrega,1),2)
+                            _titulo(format_fecha($fecha_contra_entrega, 1), 2)
                         );
                     break;
                 //2 | ESTACIÓN DEL  METRO BUS
@@ -2963,20 +2988,22 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $punto_encuentro = text_punto_encuentro($domicilio, $recibo);
-        $encabezado = d_p(_titulo("punto de encuentro",2));
+        $encabezado = d_p(_titulo("punto de encuentro", 2));
         $encuentro = d_p($punto_encuentro, "contenido_domicilio mt-3");
         $contenido = add_text($encabezado, $encuentro);
         return bloque($contenido);
 
     }
 
-    function create_domicilio_entrega($domicilio)
+    function create_domicilio_entrega($domicilio, $recibo)
     {
 
-        $direccion = "";
+        $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');
+        $fecha_contra_entrega = format_fecha(pr($recibo, 'fecha_contra_entrega'), 1);
+        $direccion = [];
         foreach ($domicilio as $row) {
 
-            $direccion =
+            $direccion[] =
                 _text_($row["calle"], "NÚMERO", $row["numero_exterior"],
                     "NÚMERO INTERIOR", $row["numero_interior"], "COLONIA",
                     $row["asentamiento"], "DELEGACIÓN/MUNICIPIO", $row["municipio"],
@@ -2985,8 +3012,20 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
+        if ($contra_entrega_domicilio > 0) {
 
-        $bloque = flex("domicilio de envío", $direccion, 'flex-column text-uppercase', _strong);
+            $direccion[] = _titulo('pago contra entrega a domicilio, se entregará el', 2);
+            $direccion[] = _titulo($fecha_contra_entrega, 2);
+        }
+
+
+        $str_direccion = append($direccion);
+        $bloque = flex(
+            "domicilio de envío",
+            $str_direccion,
+            'flex-column text-uppercase',
+            _strong
+        );
 
         return bloque($bloque);
     }
@@ -3022,7 +3061,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "border form_set_usuario padding_10 row",
             ];
             $form[] = form_open($action, $attr);
-            $form[] = d(_titulo('cliente',2));
+            $form[] = d(_titulo('cliente', 2));
 
 
             $form[] = input_frm('col-sm-12 mt-5 p-0', 'NOMBRE',
@@ -3127,26 +3166,6 @@ if (!function_exists('invierte_date_time')) {
             $response = ($saldo_cubierto > 0 && es_orden_entregada($recibo, $data));
         }
         return $response;
-    }
-
-    function es_orden_cancelada($data)
-    {
-
-        $response = false;
-        if (es_data($data['recibo'])) {
-
-            $recibo = $data['recibo'];
-            $cancela_cliente = pr($recibo, "cancela_cliente");
-            $se_cancela = pr($recibo, "se_cancela");
-            $status = pr($recibo, "status");
-
-            $es_lista_negra = es_data($data['es_lista_negra']);
-            $fue_lista_negra = es_data($data['usuario_lista_negra']);
-            $response = ($status == 10 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
-
-        }
-        return $response;
-
     }
 
     function es_lista_negra($data)

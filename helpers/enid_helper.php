@@ -3366,6 +3366,54 @@ function es_orden_entregada($recibo, $data)
 
 }
 
+function es_orden_entregada_o_cancelada($recibo, $data)
+{
+
+    $status = pr($recibo, "status");
+    return in_array($status, $data['restricciones']['entregada_o_cancelada']);
+
+}
+function es_orden_cancelada($data)
+{
+
+    $response = false;
+    if (es_data($data['recibo'])) {
+
+        $recibo = $data['recibo'];
+        $cancela_cliente = pr($recibo, "cancela_cliente");
+        $se_cancela = pr($recibo, "se_cancela");
+        $status = pr($recibo, "status");
+
+        $es_lista_negra = es_data($data['es_lista_negra']);
+        $fue_lista_negra = es_data($data['usuario_lista_negra']);
+        $response = ($status == 10 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
+
+    }
+    return $response;
+
+}
+
+function es_contra_entrega_domicilio($recibo, $format_fecha = 0, $si_no = 0)
+{
+
+    $contra_entrega_domicilio = pr($recibo, "contra_entrega_domicilio");
+    $tipo = pr($recibo, "tipo_entrega");
+    $response = ($contra_entrega_domicilio && $tipo == 2);
+    if ($response && $format_fecha > 0) {
+
+        $fecha_contra_entrega = pr($recibo, 'fecha_contra_entrega');
+        $response = format_fecha($fecha_contra_entrega, 1);
+
+    } else {
+
+        if ($si_no !== 0) {
+            $response = format_fecha($si_no, 1);
+        }
+
+    }
+    return $response;
+}
+
 function phoneFormat($number)
 {
     if (ctype_digit($number) && strlen($number) == 10) {
@@ -3386,7 +3434,7 @@ function format_link_nombre($data, $nombre, $email = '')
         $email = es_data($nombre) ? prm_def($nombre, 'email') : $email;
         $link = path_enid('busqueda_usuario', $email);
         $str = es_data($nombre) ? format_nombre($nombre) : $nombre;
-        $nombre = a_enid($str, ['href' => $link, 'class' =>'black underline']);
+        $nombre = a_enid($str, ['href' => $link, 'class' => 'black underline']);
     }
 
     return $nombre;

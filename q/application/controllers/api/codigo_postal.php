@@ -49,10 +49,18 @@ class codigo_postal extends REST_Controller
             $response["id_direccion"] = $param["id_direccion"] = $id_direccion;
 
 
-            if ($id_direccion > 0 && prm_def($param, "direccion_principal", false) != false) {
+            $es_direccion_principal = (prm_def($param, "direccion_principal", false) != false);
+            if ($id_direccion > 0 && $es_direccion_principal) {
 
+                $direccion_principal = $param["direccion_principal"];
                 $id_usuario = $this->get_id_usuario($param);
-                $response["registro_direccion_usuario"] = $this->set_direcciones_usuario($id_usuario, $id_direccion, $param["direccion_principal"]);
+                $response["registro_direccion_usuario"] =
+                    $this->set_direcciones_usuario(
+                        $param,
+                        $id_usuario,
+                        $id_direccion,
+                        $direccion_principal
+                    );
             }
 
             $response["externo"] = prm_def($param, "externo");
@@ -219,8 +227,23 @@ class codigo_postal extends REST_Controller
 
     }
 
-    private function set_direcciones_usuario($id_usuario, $id_direccion, $direccion_principal)
+    private function set_direcciones_usuario($param, $id_usuario, $id_direccion, $direccion_principal)
     {
+
+
+        $es_asignacion_horario = (prm_def($param, 'asignacion_horario') > 0);
+
+        if ($es_asignacion_horario) {
+
+            $id_recibo = $param['id_recibo'];
+            $qrecibo = [
+                'recibo' => $id_recibo
+            ];
+            $recibo = $this->app->api("recibo/index/format/json/", $qrecibo);
+            $id_usuario = pr($recibo, 'id_usuario');
+
+            $this->fecha_entrega($param, $id_recibo);
+        }
 
         $q = [
             "id_usuario" => $id_usuario,
@@ -230,6 +253,26 @@ class codigo_postal extends REST_Controller
         ];
 
         return $this->app->api("usuario_direccion/index", $q, "json", "PUT");
+    }
+
+    function fecha_entrega($param, $id_recibo)
+    {
+
+        if (fx($param, "fecha_entrega,horario_entrega")) {
+
+            $fecha_entrega = $param['fecha_entrega'];
+            $horario_entrega = $param['horario_entrega'];
+
+            $q = [
+                "fecha_entrega" => $fecha_entrega,
+                "horario_entrega" => $horario_entrega,
+                "recibo" => $id_recibo,
+                "contra_entrega_domicilio" => 1
+            ];
+            return $this->app->api("recibo/fecha_entrega/format/json/", $q, "json", "PUT");
+        }
+
+
     }
 
     private function registra_direccion_usuario($id_usuario, $id_direccion)

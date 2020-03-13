@@ -140,15 +140,6 @@ if (!function_exists('invierte_date_time')) {
 
         if ($is_mobile < 1) {
 
-            $r[] =
-                d(a_enid(
-                    "Audio",
-                    [
-                        "href" => "../../repros",
-                        "class" => 'categorias_mas_vistas ',
-                        "target" => "_black"
-                    ]
-                ), 2);
 
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 

@@ -2,12 +2,15 @@
 let $tipo_entrega = $('.tipo_entrega');
 let $num_domicilios = $('.num_domicilios');
 let $recibo = $('.recibo');
+let $asignacion_horario_entrega = $('.asignacion_horario_entrega');
+let $contenedor_domicilios = $('.contenedor_domicilios');
 $(document).ready(() => {
 
+    valida_asignacion_domicilio();
     let tipo_entrega = parseInt($tipo_entrega.val());
     let num_domicilios = parseInt($num_domicilios.val());
     if (tipo_entrega === 2 && num_domicilios < 1) {
-        $('.contenedor_domicilios').addClass('d-none');
+        $contenedor_domicilios.addClass('d-none');
         submit_enid(".form_registro_direccion");
     }
 
@@ -78,7 +81,7 @@ let response_proceso_asignacion = function (data) {
         redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
     }
 
-}
+};
 
 let asignar_punto_encuentro_existente_pedido = function () {
 
@@ -111,10 +114,19 @@ let eliminar_domicilio_base = function (id_direccion, id_recibo, tipo) {
         'tipo': tipo
     };
     request_enid("PUT", data_send, url, reponse_actualizacion_domicilio);
-}
-let reponse_actualizacion_domicilio = function (data) {
+};
+let reponse_actualizacion_domicilio = function () {
 
     redirect("");
+};
+let valida_asignacion_domicilio = function () {
 
+    if (parseInt($asignacion_horario_entrega.val()) > 0) {
 
-}
+        submit_enid(".form_registro_direccion");
+
+    } else {
+
+        $contenedor_domicilios.removeClass('d-none');
+    }
+};

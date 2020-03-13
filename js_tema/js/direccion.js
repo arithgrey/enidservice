@@ -29,7 +29,7 @@ function response_auto_complete_direccion(data) {
         set_option("existe_codigo_postal", 1);
 
     } else {
-		advierte('Ups! no encontramos esta código postal ¿Es correcto?');
+        advierte('Ups! no encontramos esta código postal ¿Es correcto?');
         let elementos = [".delegacion", ".place_colonias_info"];
         set_black(elementos);
         $(".parte_colonia_delegacion").hide();
@@ -50,10 +50,12 @@ function muestra_error_codigo(flag_error) {
 
 function registra_nueva_direccion(e) {
 
-    if (get_option("existe_codigo_postal") == 1) {
+    if (parseInt(get_option("existe_codigo_postal")) > 0) {
+
         registro_direccion();
 
     } else {
+
         muestra_error_codigo(1);
     }
     e.preventDefault();
@@ -61,13 +63,13 @@ function registra_nueva_direccion(e) {
 
 function registro_direccion() {
 
-    if (asentamiento != 0) {
+    if (parseInt(asentamiento) !== 0) {
 
         set_option("id_recibo", $(".id_recibo").val());
-
         let data_send = $(".form_direccion_envio").serialize();
         let url = "../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
         bloquea_form(".form_direccion_envio");
+        modal('Estamos procesando tu pedido ...', 1);
         request_enid("POST", data_send, url, response_registro_direccion);
     } else {
         recorre("#asentamiento");
@@ -77,16 +79,23 @@ function registro_direccion() {
 
 let response_registro_direccion = function (data) {
 
-
-    if (data != -1) {
-
-        let url_area_cliente = "../area_cliente/?action=compras&ticket=" + get_option("id_recibo") + "&primercompra=1";
-        let url_seguimiento = "../pedidos/?seguimiento=" + get_option("id_recibo") + "&&domicilio=1";
-        let url = (get_parameter(".es_seguimiento") != undefined && get_parameter(".es_seguimiento") == 1) ? url_seguimiento : url_area_cliente;
+    if (data !== -1) {
+        let $asignacion_horario = $('.asignacion_horario').val();
+        let $es_asignacion_horario = (parseInt($asignacion_horario) > 0);
+        let $id_recibo = get_option("id_recibo");
+        let url_area_cliente = _text("../area_cliente/?action=compras&ticket=", $id_recibo, "&primercompra=1");
+        let ext = ($es_asignacion_horario) ? '&asignacion=1' : '';
+        let url_seguimiento = _text("../pedidos/?seguimiento=", $id_recibo, "&&domicilio=1", ext);
+        let $es_seguimiento = (get_parameter(".es_seguimiento") !== undefined && get_parameter(".es_seguimiento") === 1);
+        let url = ($es_seguimiento) ? url_seguimiento : url_area_cliente;
+        if ($es_asignacion_horario) {
+            url = _text("../pedidos/?recibo=", $id_recibo);
+        }
         redirect(url);
 
     } else {
 
+        $("#modal-error-message").modal("hide");
         format_error(".notificacion_direccion", "VERIFICA LOS DATOS DE TU DIRECCIÓN");
         recorre(".notificacion_direccion");
     }
@@ -130,7 +139,7 @@ function informacion_envio_complete(){
 	let url 		=  "../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
 	let data_send 	=  {id_recibo : get_option("id_proyecto_persona_forma_pago")};
 	request_enid( "GET",  data_send , url , function(){
-		render_enid(".place_direccion_envio" , data);		
+		render_enid(".place_direccion_envio" , data);
 		recorre(".contenedo_compra_info");
 	}  , ".place_direccion_envio");
 }

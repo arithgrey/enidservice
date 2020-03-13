@@ -215,7 +215,7 @@ class Home extends CI_Controller
         $fecha = horario_enid();
         $hoy = $fecha->format('H:i:s');
 
-        $text = "Realiza tu pedido antes de las 6 PM y tenlo el hoy mismo!";
+        $text = "Realiza tu pedido antes de las 6 PM y tenlo hoy mismo!";
         $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
         $str = ($hoy < 18) ? $text : $mas_un_dia;
 

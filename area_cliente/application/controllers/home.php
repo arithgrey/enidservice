@@ -21,12 +21,12 @@ class Home extends CI_Controller
 
             $this->app->acceso();
             $id_ticket = prm_def($param, "ticket");
-            $this->estado_compra($id_ticket);
+            $this->estado_compra($id_ticket, $data);
 
             $resumen = $this->resumen_valoraciones($data["id_usuario"]);
 
             $data += [
-                "action" => prm_def($param, "action",""),
+                "action" => prm_def($param, "action", ""),
                 "valoraciones" => prm_def($resumen, "info_valoraciones", []),
                 "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
                 "ticket" => $id_ticket,
@@ -38,13 +38,13 @@ class Home extends CI_Controller
         }
     }
 
-    private function estado_compra($id_recibo)
+    private function estado_compra($id_recibo, $data)
     {
 
         if ($id_recibo > 0) {
             $recibo = $this->recibo($id_recibo);
             if (es_data($recibo) && pr($recibo, 'id_ciclo_facturacion') != 9) {
-                $this->gestiona_tipo_entrega($recibo, $id_recibo);
+                $this->gestiona_tipo_entrega($recibo, $id_recibo, $data);
             }
         }
     }
@@ -55,9 +55,10 @@ class Home extends CI_Controller
         return $this->app->api("recibo/id/format/json/", ["id" => $id]);
     }
 
-    private function gestiona_tipo_entrega($recibo, $id_recibo)
+    private function gestiona_tipo_entrega($recibo, $id_recibo, $data)
     {
 
+        $es_administrador_vendedor = es_administrador_o_vendedor($data);
         $tipo_entrega = pr($recibo, 'tipo_entrega');
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {
@@ -65,11 +66,12 @@ class Home extends CI_Controller
             $direcciones_registradas = $this->recibo_pago_direccion($id_recibo);
             if ($direcciones_registradas < 1) {
 
+                $extra = ($es_administrador_vendedor) ? '&asignacion_horario_entrega=1' : '';
                 $link_registro_domicilio =
                     _text(
                         "../",
                         path_enid("pedido_seguimiento", $id_recibo),
-                        "&domicilio=1"
+                        _text("&domicilio=1", $extra)
                     );
                 redirect($link_registro_domicilio);
 

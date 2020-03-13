@@ -90,6 +90,7 @@ let registro = (e) => {
 
     if ($tiene_formato) {
 
+        debugger;
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
 
@@ -129,6 +130,7 @@ let registro_cotizacion = (e) => {
 
 let respuesta_registro = (data) => {
 
+    debugger;
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
 
@@ -142,7 +144,8 @@ let respuesta_registro = (data) => {
 
         } else {
 
-            redirect("../area_cliente/?action=compras&ticket=" + data.id_recibo);
+            let $path = _text("../area_cliente/?action=compras&ticket=", data.id_recibo);
+            redirect($path);
         }
 
     } else {
