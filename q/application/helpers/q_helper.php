@@ -1383,7 +1383,21 @@ if (!function_exists('invierte_date_time')) {
                     $text_entrega = 'La entrega fué ayer';
                 }
 
-                $hora_entrega = format_hora($fecha_contra_entrega);
+
+                $tipo_entrega = $row['tipo_entrega'];
+                $es_contra_entrega = $row['es_contra_entrega'];
+                $es_contra_entrega_domicilio_sin_direccion = false;
+                $format_hora = 0;
+                if ($es_contra_entrega) {
+                    $es_contra_entrega_domicilio_sin_direccion = $row['es_contra_entrega_domicilio_sin_direccion'];
+                    $format_hora = 1;
+                    if ($es_contra_entrega_domicilio_sin_direccion) {
+                        $format_hora = 0;
+                    }
+                }
+
+                $es_formato_hora = (( $tipo_entrega == 1) || ($tipo_entrega ==  2 && $format_hora));
+                $hora_entrega = ($es_formato_hora) ? format_hora($fecha_contra_entrega) : '';
                 $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy! ' : $text_entrega;
 
                 $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
@@ -1391,9 +1405,23 @@ if (!function_exists('invierte_date_time')) {
 
                 $imagenes = d(img($row["url_img_servicio"]), "w_50");
                 $total = d(money($row["total"]), "text-left black");
-                $total_seccion = flex($total, $dia_entrega, 'flex-column');
+
+
+                $text_total = [];
+                $text_total[] = $total;
+                $text_total[] = $dia_entrega;
+                if ($es_contra_entrega) {
+                    $text_total[] = d('Es contra entrega a domicilio', 'black');
+                    if ($es_contra_entrega_domicilio_sin_direccion) {
+                        $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
+                    }
+                }
+
+
+                $total_seccion = d($text_total, 'd-flex flex-column');
 
                 $text = flex($imagenes, $total_seccion, _between);
+
 
                 $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);

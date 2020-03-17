@@ -34,9 +34,80 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_perfil")) {
             $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"], $param["id_perfil"]);
+            $response = $this->horarios_contra_entrega_pedidos($response);
         }
         $this->response($response);
 
+    }
+
+    function horarios_contra_entrega_pedidos($ordenes_compra)
+    {
+        $ids_contra_entrega_domicilio = [];
+        foreach ($ordenes_compra as $row) {
+
+            $tipo_entrega = $row['tipo_entrega'];
+            if ($tipo_entrega == 2) {
+                $ids_contra_entrega_domicilio[] = $row['id_recibo'];
+            }
+        }
+
+        $recibos_domicilio = $this->get_recibos_domicilio($ids_contra_entrega_domicilio);
+        $recibos_domicilio_contra_entrega_sin_domicilio =
+            $this->recibos_domicilio_contra_entrega_sin_domicilio($ids_contra_entrega_domicilio, $recibos_domicilio);
+
+
+        $response = $this->domicilios_contra_entrega_pedidos($ordenes_compra,$ids_contra_entrega_domicilio,$recibos_domicilio_contra_entrega_sin_domicilio);
+        $this->response($response);
+    }
+
+    function domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $sin_direccion_contra_entrega)
+    {
+
+        $recibos = [];
+        $a = 0;
+        foreach ($ordenes_compra as $row) {
+
+            $recibos[$a] = $row;
+            $id_recibo = $row['id_recibo'];
+            $es_contra_entrega_domicilio = in_array($id_recibo, $ids_contra_entrega_domicilio);
+            if ($es_contra_entrega_domicilio){
+
+                $es_contra_entrega_domicilio_sin_direccion = (in_array($id_recibo, $sin_direccion_contra_entrega));
+                $recibos[$a]['es_contra_entrega_domicilio_sin_direccion'] = $es_contra_entrega_domicilio_sin_direccion;
+            }
+            $recibos[$a]['es_contra_entrega'] = $es_contra_entrega_domicilio;
+
+            $a ++;
+        }
+        return $recibos;
+    }
+
+    function recibos_domicilio_contra_entrega_sin_domicilio($ids_contra_entrega_domicilio, $recibos_domicilio)
+    {
+
+
+        $response = [];
+        foreach ($ids_contra_entrega_domicilio as $row) {
+
+            $id_recibo = (int)$row;
+            $tiene_direccion = search_bi_array($recibos_domicilio, 'id_proyecto_persona_forma_pago', $id_recibo, FALSE, FALSE);
+            if ($tiene_direccion === false) {
+
+                $response[] = $id_recibo;
+            }
+        }
+        return $response;
+
+    }
+
+    function get_recibos_domicilio($ids_contra_entrega_domicilio)
+    {
+        $response = [];
+        if (es_data($ids_contra_entrega_domicilio)) {
+
+            $response = $this->recibos_domicilios($ids_contra_entrega_domicilio);
+        }
+        return $response;
     }
 
     function tiempo_venta_GET()
@@ -46,9 +117,7 @@ class recibo extends REST_Controller
         $param["id_usuario"] = $this->id_usuario;
         $response = false;
 
-
         if (fx($param, "id_usuario,q,fecha_inicio,fecha_termino")) {
-
             $response = $this->recibo_model->get_tiempo_venta($param);
             if (es_data($response)) {
 
@@ -1367,6 +1436,22 @@ class recibo extends REST_Controller
     {
 
         return $this->app->api("usuario/busqueda/format/json/", $q);
+
+    }
+
+    function recibos_domicilios($recibos)
+    {
+
+        $response = [];
+        if (es_data($recibos)) {
+
+            $q = [
+                'v' => 1,
+                'ids_recibos' => get_keys($recibos)
+            ];
+            $response = $this->app->api("proyecto_persona_forma_pago_direccion/recibos/format/json/", $q);
+        }
+        return $response;
 
     }
 }

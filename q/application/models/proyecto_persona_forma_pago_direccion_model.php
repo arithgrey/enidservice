@@ -72,6 +72,14 @@ class Proyecto_persona_forma_pago_direccion_model extends CI_Model
         return $this->get(["COUNT(0)total"],
                 ["id_proyecto_persona_forma_pago" => $id])[0]["total"];
     }
+    function in($ids){
+
+        $query_get = "SELECT * FROM proyecto_persona_forma_pago_direccion 
+                      WHERE 
+                      id_proyecto_persona_forma_pago  IN(".$ids.")";
+
+        return $this->db->query($query_get)->result_array();
+    }
 
 
 }

@@ -926,13 +926,15 @@ class Recibo_model extends CI_Model
 						id_usuario,
 						id_proyecto_persona_forma_pago	 id_recibo,
 						(monto_a_pagar * num_ciclos_contratados) total,
-						fecha_contra_entrega										 
+						fecha_contra_entrega,
+						tipo_entrega,
+						contra_entrega_domicilio										 
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  
 						AND " . $extra_usuario . " 						  
 						AND  se_cancela = 0
-						AND  status !=  10
+						AND  status NOT IN(10,19)  
 						AND 						
 						(
 						DATE(fecha_contra_entrega) <=  DATE(CURRENT_DATE())
