@@ -87,7 +87,7 @@ class Costo_operacion_model extends CI_Model
                         AND 
                         saldo_cubierto >  0 
                         AND 
-                        status != 10
+                        status NOT IN(10,19) 
                         AND
                         id_proyecto_persona_forma_pago 
                         NOT IN (SELECT id_recibo from costo_operacion)

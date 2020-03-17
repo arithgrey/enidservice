@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-require APPPATH.'../../librerias/REST_Controller.php';
+require APPPATH . '../../librerias/REST_Controller.php';
 
 class proyecto_persona_forma_pago_direccion extends REST_Controller
 {
@@ -33,19 +33,32 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
             if (array_key_exists('total', $param)) {
 
                 $response = $this->proyecto_persona_forma_pago_direccion_model->count(
-                        $id_recibo);
+                    $id_recibo);
 
             } else {
 
                 $response =
-                        $this->proyecto_persona_forma_pago_direccion_model->get(
-                                [],
-                                [
-                                        "id_proyecto_persona_forma_pago" => $id_recibo,
-                                ]
-                        );
+                    $this->proyecto_persona_forma_pago_direccion_model->get(
+                        [],
+                        [
+                            "id_proyecto_persona_forma_pago" => $id_recibo,
+                        ]
+                    );
             }
 
+
+        }
+        $this->response($response);
+    }
+
+    function recibos_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, 'ids_recibos,v')) {
+
+            $response = $this->proyecto_persona_forma_pago_direccion_model->in($param['ids_recibos']);
 
         }
         $this->response($response);
@@ -59,8 +72,8 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
 
         if (fx($param, 'id_recibo,id_direccion')) {
             $params = [
-                    "id_proyecto_persona_forma_pago" => $param["id_recibo"],
-                    "id_direccion" => $param["id_direccion"],
+                "id_proyecto_persona_forma_pago" => $param["id_recibo"],
+                "id_direccion" => $param["id_direccion"],
             ];
 
             if (prm_def($param, "asignacion") > 0) {
@@ -81,15 +94,15 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         $q["id_recibo"] = $id_recibo;
 
         return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/index", $q,
-                "json", "DELETE");
+            "json", "DELETE");
     }
 
     private function set_tipo_entrega($id_recibo)
     {
 
         $q = [
-                "recibo" => $id_recibo,
-                "tipo_entrega" => 2,
+            "recibo" => $id_recibo,
+            "tipo_entrega" => 2,
 
         ];
 
@@ -121,8 +134,8 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         $id_recibo = $param["id_recibo"];
         $id_direccion = $param["id_direccion"];
         $response =
-                $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo_direccion(
-                        $id_recibo, $id_direccion);
+            $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo_direccion(
+                $id_recibo, $id_direccion);
 
         $this->quita_direccion_usuario($id_direccion);
 
@@ -133,8 +146,8 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
     {
 
         $q = [
-                "id_direccion" => $id_direccion,
-                "id_usuario" => $this->id_usuario,
+            "id_direccion" => $id_direccion,
+            "id_usuario" => $this->id_usuario,
         ];
 
         return $this->app->api("usuario_direccion/quitar", $q, "json", "PUT");
@@ -146,7 +159,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         $id_recibo = $param["id_recibo"];
         $id_direccion = $param["id_direccion"];
         $response =
-                $this->delete_direccion_punto_encuentro($id_recibo);
+            $this->delete_direccion_punto_encuentro($id_recibo);
 
         $this->quita_punto_entrega($id_direccion);
 
@@ -157,8 +170,8 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
     {
 
         $q = [
-                "id_punto_encuentro" => $id_direccion,
-                "id_usuario" => $this->id_usuario,
+            "id_punto_encuentro" => $id_direccion,
+            "id_usuario" => $this->id_usuario,
         ];
 
         return $this->app->api("usuario_punto_encuentro/quitar", $q, "json", "PUT");
