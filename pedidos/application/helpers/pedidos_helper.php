@@ -465,7 +465,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function text_domicilio($data)
+    function text_domicilio($data, $mostrar_totales = 1)
     {
 
         $recibo = $data['recibo'];
@@ -487,7 +487,7 @@ if (!function_exists('invierte_date_time')) {
                     $nombre = $pe['nombre'];
 
 
-                    $str = pago_en_cita($data,$recibo,1);
+                    $str = pago_en_cita($data, $recibo, 1);
                     $text = _text_(
                         'TIENES UNA CITA EL DÍA ',
                         strong(format_fecha(pr($recibo, 'fecha_contra_entrega'), 1)),
@@ -519,21 +519,18 @@ if (!function_exists('invierte_date_time')) {
                     $cp = $domicilio['cp'];
 
 
-                    $str = pago_en_cita($data, $recibo);
+                    $str = ($mostrar_totales) ? pago_en_cita($data, $recibo) : '';
 
 
-                    $text = _text(
-                        '',
+                    $text = _text_(
                         $calle,
-                        ' #',
+                        '#',
                         $numero_exterior,
-                        ' ',
                         $asentamiento,
-                        ', ',
+                        ',',
                         $municipio,
-                        ' ',
                         $ciudad,
-                        ' C.P. ',
+                        'C.P.',
                         $cp,
                         $str
                     );
@@ -904,7 +901,7 @@ if (!function_exists('invierte_date_time')) {
         $menu = menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor);
         $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas);
+        $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas);
         $r[] = repatidor($data, $id_recibo);
         $r[] = tiene_domilio($domicilio);
         $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
@@ -965,7 +962,7 @@ if (!function_exists('invierte_date_time')) {
         return d($link);
     }
 
-    function enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $es_vendedor, $id_perfil, $recibo, $status_ventas)
+    function enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas)
     {
 
 
@@ -984,7 +981,8 @@ if (!function_exists('invierte_date_time')) {
                 $punto_encuentro = ($tipo_entrega != 1) ? "" : text_punto_encuentro($domicilio_entrega, $recibo);
             }
 
-            if ($tipo_entrega == 1) {
+
+            if ($tipo_entrega == 1 || (es_contra_entrega_domicilio($recibo))) {
 
 
                 $response[] = reparto_contra_entrega(
@@ -1007,6 +1005,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
 
         $es_orden_pagada_entregada = es_orden_pagada_entregada($data);
+        $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
         if (es_administrador_o_vendedor($data) && !$es_orden_pagada_entregada) {
 
             $status_recibo = pr($recibo, 'status');
@@ -1019,22 +1018,28 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)));
+            $id_direccion = id_direccion_recibo($data, $es_contra_entrega_domicilio);
+            $confirmar_pedido = "confirma_reparto({$id_recibo}, '{$punto_encuentro}')";
+            $text_punto_encuentro = text_domicilio($data,0);
+            $confirm_pedido_domicilio = "confirma_reparto_contra_entrega_domicilio({$id_recibo}, '{$text_punto_encuentro}')";
 
-            $link = a_enid(
-                $pedido,
-                [
-                    'class' => _text_(_mbt5_md, 'w-100'),
-                    "onclick" => "confirma_reparto({$id_recibo}, '{$punto_encuentro}')",
-                ]
-            );
+            $confirm = ($es_contra_entrega_domicilio) ? $confirm_pedido_domicilio : $confirmar_pedido;
 
+
+            $config = ['class' => _text_(_mbt5_md, 'w-100')];
+
+            if (!$es_contra_entrega_domicilio || ($es_contra_entrega_domicilio && $id_direccion > 0)) {
+
+                $config["onclick"] = $confirm;
+            }
+
+            $link = a_enid($pedido, $config);
 
             if (!in_array($status_recibo, [16])) {
 
                 $response[] = d($link, 'row mb-3');
 
             } else {
-
 
                 $path_tracker = path_enid('pedido_seguimiento', $id_recibo);
                 $link = format_link($clasificacion, ['href' => $path_tracker]);
@@ -1046,6 +1051,18 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
+    function id_direccion_recibo($data, $es_contra_entrega_domicilio)
+    {
+        $id_direccion = 0;
+        if ($es_contra_entrega_domicilio) {
+            $domicilio = $data['domicilio'];
+            if (es_data($domicilio)) {
+                $domicilio = $domicilio['domicilio'];
+                $id_direccion = pr($domicilio, 'id_direccion');
+            }
+        }
+        return $id_direccion;
+    }
 
     function imprimir_recibo($response, $recibo, $tipos_entrega, $data)
     {
@@ -1880,10 +1897,6 @@ if (!function_exists('invierte_date_time')) {
             $id = $row['id'];
             $nombre = ($id != $id_registro) ? $row['nombre'] : text_icon('fa fa-check-circle',
                 $row['nombre']);
-            $status = $row['status'];
-            $id_tipo_punto_encuentro = $row['id_tipo_punto_encuentro'];
-            $id_linea_metro = $row['id_linea_metro'];
-            $costo_envio = $row['costo_envio'];
 
             $class = ($id != $id_registro) ? "dropdown-toggle bg-white w-100 text-right border-top-0 border-right-0 border-left-0 solid_bottom_2 mt-3" :
                 "dropdown-toggle bg_black white w-100 text-right border-top-0 border-right-0 border-left-0 solid_bottom_2 mt-3";
@@ -2663,7 +2676,11 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_usuario
             ]
         );
-        $cliente = flex(_titulo("cliente", 2), $icon, _text_(_between, 'col-lg-12 p-0 mb-4'), _strong);
+        $cliente = flex(
+            _titulo("cliente", 2),
+            $icon,
+            _text_(_between, 'col-lg-12 p-0 mb-4'), _strong
+        );
         $response[] = $cliente;
         $response[] = d($r, _12p);
 

@@ -1970,25 +1970,25 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function tareas_vendedor($info)
+    function tareas_vendedor($data)
     {
 
 
         $lista = [];
         $f = 0;
-        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
+        $compras_sin_cierre = add_compras_sin_cierre($data["compras_sin_cierre"]);
         $lista[] = d($compras_sin_cierre["html"], "top_20");
         $f = $f + $compras_sin_cierre["flag"];
 
-        $reintentos_compras = add_reintentos_compras($info["reintentos_compras"]);
+        $reintentos_compras = add_reintentos_compras($data["reintentos_compras"]);
         $lista[] = d($reintentos_compras["html"], "top_20");
         $f = $f + $reintentos_compras["flag"];
 
-        $recuperacion = add_recuperacion($info["recuperacion"]);
+        $recuperacion = add_recuperacion($data["recuperacion"]);
         $lista[] = d($recuperacion["html"], "top_20");
         $f = $f + $recuperacion["flag"];
 
-        $recordatorios = add_recordatorios($info["recordatorios"]);
+        $recordatorios = add_recordatorios($data["recordatorios"]);
         $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
 
@@ -2003,7 +2003,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $lista[] = menu_ventas_semana($info);
+        $lista[] = menu_ventas_semana($data);
 
         return [
             "num_tareas_pendientes_text" => $f,

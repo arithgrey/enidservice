@@ -60,6 +60,9 @@ class productividad extends REST_Controller
                 break;
 
             case (6):
+                $response += [
+                    "recordatorios" => $this->get_recordatorios($id_usuario),
+                ];
                 $response = tareas_vendedor($response);
                 break;
 

@@ -660,7 +660,7 @@ let response_motivos_lista_negra = (data) => {
 let evalua_registro_motivo_lista_negra = function () {
 
     let $motivo = parseInt(get_valor_selected('.motivo'));
-    
+
     if (Number.isInteger($motivo)) {
         $('.agregar_botton_lista_negra').removeClass('d-none');
     } else {
@@ -712,18 +712,31 @@ let confirma_reparto = (id_recibo, punto_encuentro) => {
     }, 1000);
 
 };
+let confirma_reparto_contra_entrega_domicilio = (id_recibo, id_domicilio) => {
 
-let enviar_repatidor = function (id_recibo) {
 
+    let text = "¿DESEAS QUE EL REPARTIDOR SE DIRIJA HACER LA ENTREGA A:?";
+    show_confirm(text, id_domicilio, "SI", function () {
+        enviar_repatidor(id_recibo, 2);
+    });
+    setTimeout(function () {
+
+        let $jsSelector = $('.jconfirm-content');
+        if ($jsSelector.length) {
+            $jsSelector.find('div').addClass('rounded-0 alert border-secondary alert-light black text-uppercase text-center border');
+        }
+    }, 1000);
+
+};
+
+let enviar_repatidor = function (id_recibo, es_punto_encuentro = 1) {
 
     $('.jconfirm').addClass('d-none');
     advierte('Se está solicitando tu entrega al repartidor', 1)
     $('.text-order-name-error').addClass('h4 text-uppercase');
     let url = "../q/index.php/api/recibo/reparto/format/json/";
-    let data_send = {'id': id_recibo};
+    let data_send = {'id': id_recibo, 'es_punto_encuentro': es_punto_encuentro};
     request_enid("PUT", data_send, url, response_reparto);
-
-
 };
 let response_reparto = function () {
 

@@ -3438,13 +3438,14 @@ function phoneFormat($number)
 function format_link_nombre($data, $nombre, $email = '')
 {
 
+    $email = es_data($nombre) ? prm_def($nombre, 'email') : $email;
+    $link = path_enid('busqueda_usuario', $email);
+    $response = es_data($nombre) ? format_nombre($nombre) : $nombre;
+
     if (es_administrador($data)) {
 
-        $email = es_data($nombre) ? prm_def($nombre, 'email') : $email;
-        $link = path_enid('busqueda_usuario', $email);
-        $str = es_data($nombre) ? format_nombre($nombre) : $nombre;
-        $nombre = a_enid($str, ['href' => $link, 'class' => 'black underline']);
+        $response = a_enid($response, ['href' => $link, 'class' => 'black underline']);
     }
 
-    return $nombre;
+    return $response;
 }
