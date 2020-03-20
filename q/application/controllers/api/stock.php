@@ -15,6 +15,20 @@ class Stock extends REST_Controller
         $this->load->library(lib_def());
     }
 
+    function fecha_ingreso_PUT(){
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_stock,hora_fecha")) {
+
+            $fecha_hora =  $param['hora_fecha'];
+            $id_stock =  $param['id_stock'];
+            $response = $this->stock_model->q_up('fecha_registro', $fecha_hora, $id_stock);
+
+        }
+
+        $this->response($response);
+    }
 
     function servicio_GET()
     {

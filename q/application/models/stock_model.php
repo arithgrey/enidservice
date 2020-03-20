@@ -45,7 +45,7 @@ class stock_model extends CI_Model
 
     function q_up($q, $q2, $id)
     {
-        return $this->update([$q => $q2], ["id" => $id]);
+        return $this->update([$q => $q2], ["id_stock" => $id]);
     }
 
     function q_get($params = [], $id)
@@ -105,6 +105,7 @@ class stock_model extends CI_Model
 
         $query = "SELECT 
                     id_servicio, 
+                    id_stock,
                     unidades, 
                     consumo , 
                     (unidades - consumo )unidades_disponibles, 

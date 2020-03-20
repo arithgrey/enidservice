@@ -9,8 +9,8 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(compras(), 13);
         $response[] = listado($inventario);
-
-        return d($response, 8, 1);
+        $response[] = calendario_ingresos();
+        return d($response, 10, 1);
     }
 
     function listado($inventario)
@@ -21,6 +21,7 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d('', $base);
         $contenido[] = d('Unidades disponibles', $base);
         $contenido[] = d('Costo por unidad', $base);
+        $contenido[] = d('Ingresó el    ', $base);
         $contenido[] = d('Dias en almacen', $base);
         $contenido[] = d('Total', $base);
         $response[] = d($contenido, _text_('d-flex flex-md row mb-5 align-items-center', _strong));
@@ -33,6 +34,7 @@ if (!function_exists('invierte_date_time')) {
             $costo_unidad = $row['costo_unidad'];
             $url_img_servicio = $row['url_img_servicio'];
             $fecha_registro = $row['fecha_registro'];
+            $id_stock = $row['id_stock'];
 
             $fecha = horario_enid();
             $hoy = $fecha->format('Y-m-d');
@@ -57,11 +59,18 @@ if (!function_exists('invierte_date_time')) {
 
             );
             $base = 'col-md-2 border-right text-center';
+            $config_ingreso = [
+                'class' => 'col-md-2 border-right text-center editar_fecha',
+                'id' => $id_stock,
+                'fecha_registro' => $fecha_registro
+            ];
 
-            $base_dias = ($dias > 9) ? _text_($base, 'bg-danger  white strong') : $base;
+            $fecha = text_icon(_editar_icon, format_fecha($fecha_registro, 1));
+            $base_dias = ($dias > 9) ? _text_($base, 'bg-danger white strong') : $base;
             $contenido[] = d($link, $base);
             $contenido[] = d($unidades_disponibles, $base);
             $contenido[] = d(money($costo_unidad), $base);
+            $contenido[] = d($fecha, $config_ingreso);
             $contenido[] = d($dias, $base_dias);
             $contenido[] = d(money($total), $base);
 
@@ -87,5 +96,20 @@ if (!function_exists('invierte_date_time')) {
 
         return d($link, 'ml-auto mb-5');
     }
+
+    function calendario_ingresos()
+    {
+
+        $form[] = form_open('', ['class' => 'form_fecha_ingreso']);
+        $form[] = d(_titulo('¿Fecha que ingresó al almacen?', 2), 'text-center mb-5');
+        $form[] = input_hour_date();
+        $form[] = hiddens(['class' => 'id_stock', 'name' => 'id_stock']);
+        $form[] = d(btn('Modificar'), 'mt-5');
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'modal_form_calendario');
+
+    }
+
 
 }
