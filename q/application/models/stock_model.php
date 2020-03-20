@@ -101,6 +101,23 @@ class stock_model extends CI_Model
             WHERE id_stock =  $id_stock LIMIT 1";
         return $this->db->query($query);
     }
+    function inventario(){
+
+        $query = "SELECT 
+                    id_servicio, 
+                    unidades, 
+                    consumo , 
+                    (unidades - consumo )unidades_disponibles, 
+                    costo_unidad 
+                    FROM stock 
+                    WHERE 
+                    unidades > 0 
+                    AND es_consumo_negativo < 1 
+                    AND (unidades > consumo)
+                    ORDER BY id_servicio ASC";
+
+        return $this->db->query($query)->result_array() ;
+    }
 
 
 }

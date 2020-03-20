@@ -274,7 +274,6 @@ let muestra_input_costo = () => {
     let visible = $(".text_costo").is(":visible");
     muestra_input_visible(visible, ".input_costo", ".text_costo");
 
-
 };
 
 

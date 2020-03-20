@@ -8,22 +8,27 @@ let editar_stock_disponible = function () {
 
             $selector_carga_modal.remove('d-none');
             $selector_carga_modal.modal("show");
+            precio_pasado($id);
+
             $form_stock_servicio.submit(agregar_stock_servicio);
         }
     }
 
 };
+let precio_pasado = function ($id_servicio) {
 
+    let data_send = $.param({'id_servicio': $id_servicio, 'costo': 1});
+    let url = "../q/index.php/api/stock/servicio/format/json/";
+    request_enid("GET", data_send, url, response_precio_pasado);
+};
+let response_precio_pasado = function (data) {
+    $input_costo.val(data);
+};
 let agregar_stock_servicio = function (e) {
 
     let respuestas = [];
-    let $es_stock= es_formato_cantidad($input_stock);
+    let $es_stock = es_formato_cantidad($input_stock);
     respuestas.push($es_stock);
-    if ($es_stock){
-
-        $('.input_costo_producto_stock').removeClass('d-none');
-        $('.input_unidades_producto_stock').addClass('d-none');
-    }
 
     respuestas.push(es_formato_cantidad($input_costo));
     let $tiene_formato = (!respuestas.includes(false));
@@ -45,8 +50,6 @@ let response_form_stock_registro = function () {
     $selector_carga_modal.modal("hide");
     $input_costo.val(0);
     $input_stock.val(0);
-    $('.input_costo_producto_stock').addClass('d-none');
-    $('.input_unidades_producto_stock').removeClass('d-none');
     carga_informacion_servicio(4);
 
 };

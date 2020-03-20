@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
                 'required' => true,
                 'type' => 'number',
             ], 'Parece que el costo anda mal ¿no?'
-        ),'d-none input_costo_producto_stock');
+        ),'input_costo_producto_stock');
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
         $form[] = btn('Actualizar', ['class' => 'mt-5']);
         $form[] = form_close();
