@@ -108,7 +108,8 @@ class stock_model extends CI_Model
                     unidades, 
                     consumo , 
                     (unidades - consumo )unidades_disponibles, 
-                    costo_unidad 
+                    costo_unidad ,
+                    fecha_registro                
                     FROM stock 
                     WHERE 
                     unidades > 0 
