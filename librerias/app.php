@@ -272,7 +272,6 @@ class app extends CI_Controller
             $data["desc_web"] = $desc;
 
 
-
         } else {
 
             $data['titulo'] = $titulo;
@@ -321,6 +320,21 @@ class app extends CI_Controller
 
         $response = [
 
+            "stock" => [
+                'js' => [
+                    "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                    "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                    "js/bootstrap-daterangepicker/moment.min.js",
+                    "js/bootstrap-daterangepicker/daterangepicker.js",
+                    "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                    "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                    "js/pickers-init.js",
+                    'stock/principal.js'
+                ],
+                'css' => [
+
+                ],
+            ],
             "administracion_cuenta" =>
                 [
 
@@ -712,12 +726,9 @@ class app extends CI_Controller
                 [
                     "css" =>
                         [
-
                             "producto.css",
                             "sugerencias.css",
                             "valoracion.css",
-
-
                         ],
                     "js" =>
                         [
@@ -777,29 +788,22 @@ class app extends CI_Controller
                 [
                     "css" =>
                         [
-
                             "procesar_pago.css",
-
                         ],
                     "js" =>
                         [
                             "js/direccion.js",
                             'procesar/principal.js',
                             'procesar/sha1.js',
-
                         ]
                     ,
-
-
                 ]
             ,
             "procesar_crear" =>
                 [
                     "css" =>
                         [
-
                             'procesar_contacto.css',
-
                         ],
                     "js" =>
                         [
@@ -907,7 +911,6 @@ class app extends CI_Controller
                 [
                     "css" =>
                         [
-
                             "metricas.css",
                             "lista_deseos.css",
                             "productos_solicitados.css",
@@ -1110,6 +1113,7 @@ class app extends CI_Controller
         return $data;
 
     }
+
     function add_imgs_servicio($ordenes)
     {
 
@@ -1142,6 +1146,7 @@ class app extends CI_Controller
 
         return $response;
     }
+
     function session_enid()
     {
 
