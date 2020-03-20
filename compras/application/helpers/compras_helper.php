@@ -68,6 +68,14 @@ if (!function_exists('invierte_date_time')) {
         $x[] = form_close();
         $x[] = place("place_compras mt-5");
         $response[] = d(_titulo("planeación y compras"), 'col-lg-12 mt-5');
+
+        $link_inventario = format_link('INVENTARIO',
+            [
+                'href' => path_enid('inventario')
+            ], 0);
+        $response[] = d('', 'col-sm-9 mt-3');
+        $response[] = d($link_inventario, 'col-sm-3 mt-3');
+
         $response[] = d($x, 'col-sm-12 mt-3');
         $response[] = form_stock();
         return append($response);
@@ -77,7 +85,7 @@ if (!function_exists('invierte_date_time')) {
     function form_stock()
     {
 
-        $form[] = d(_titulo('¿Cúantos artículos iguales a este tenemos en existencia?'),'mb-5');
+        $form[] = d(_titulo('¿Cúantos artículos iguales a este tenemos en existencia?'), 'mb-5');
         $form[] = form_open("",
             [
                 "class" => "form_stock_servicio",
@@ -103,7 +111,7 @@ if (!function_exists('invierte_date_time')) {
                 'required' => true
             ]
         );
-        $form[] = hiddens(['name' => 'id_servicio','class' => 'id_servicio', 'value' => 0]);
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
         $form[] = btn('Actualizar', ['class' => 'mt-5']);
         $form[] = form_close();
 

@@ -2010,6 +2010,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "config_db" => "db/database.php",
         "config_constants" => "config/constants.php",
         "desarrollo" => "desarrollo",
+        "inventario" => "stock",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",

@@ -1110,7 +1110,38 @@ class app extends CI_Controller
         return $data;
 
     }
+    function add_imgs_servicio($ordenes)
+    {
 
+        $a = 0;
+        $response = [];
+        $path_servicio = [];
+        $servicios = [];
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_servicio = $ordenes[$a]["id_servicio"];
+            if (!in_array($id_servicio, $servicios)) {
+                $servicios[] = $id_servicio;
+                $path = $this->imgs_productos($id_servicio, 1, 1, 1);
+                $path_servicio[] = [
+                    'id_servicio' => $id_servicio,
+                    'path' => $path
+                ];
+                $orden["url_img_servicio"] = $path;
+
+            } else {
+
+                $path = search_bi_array($path_servicio, 'id_servicio', $id_servicio, 'path');
+                $orden["url_img_servicio"] = $path;
+            }
+
+            $a++;
+            $response[] = $orden;
+        }
+
+        return $response;
+    }
     function session_enid()
     {
 

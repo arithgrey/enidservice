@@ -16,11 +16,39 @@ class Stock extends REST_Controller
     }
 
 
+    function servicio_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+            if (prm_def($param, 'costo')) {
+                $in = ['id_servicio' => $param['id_servicio']];
+                $response = $this->stock_model->get(['costo_unidad'], $in, 1, 'fecha_registro', 'ASC');
+                $response = (es_data($response)) ? pr($response, 'costo_unidad') : 0;
+            } else {
+
+                $response = $this->stock_model->get();
+            }
+
+        }
+
+        $this->response($response);
+    }
+
+
+    function inventario_GET()
+    {
+
+        $param = $this->get();
+        $response = $this->stock_model->inventario();
+        $this->response($response);
+    }
+
     function disponibilidad_GET()
     {
 
         $param = $this->get();
-
         $response = false;
         if (fx($param, "id_servicio")) {
 
