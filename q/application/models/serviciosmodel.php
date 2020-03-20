@@ -57,6 +57,13 @@ class serviciosmodel extends CI_Model
         return $this->db->query($query_update);
 
     }
+    function anexo_stock($stock, $id_servicio)
+    {
+
+        $query_update = "UPDATE servicio SET stock =  stock + $stock WHERE id_servicio = $id_servicio LIMIT 1";
+        return $this->db->query($query_update);
+
+    }
 
     function update($data = [], $params_where = [], $limit = 1)
     {

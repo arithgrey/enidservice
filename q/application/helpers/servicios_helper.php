@@ -71,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = seccion_titulo($nombre, $servicio, $num_imagenes);
-            $r[] = menu_config($num, $num_imagenes, $url_productos_publico);
+            $r[] = menu_config($data, $id_servicio, $num, $num_imagenes, $url_productos_publico);
 
             $r[] = configurador(
                 $s,
@@ -158,6 +158,7 @@ if (!function_exists('invierte_date_time')) {
         $comision_venta = _text_("COMISIÓN POR VENTA", money($comision));
 
         $r[] = conf_detalle(
+            $data,
             $s["comision"],
             $s["status"],
             $s["es_publico"],
@@ -211,6 +212,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_detalle(
+        $data,
         $comision,
         $status,
         $es_publico,
@@ -239,7 +241,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = estado_publicacion($status, $id_servicio);
         $t[] = form_comision($comision, $id_perfil, $id_servicio);
         $t[] = es_publico($status, $es_publico, $id_servicio);
-        $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock);
+        $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock,$data);
         $t[] = form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping);
         $t[] = compras_casa($es_servicio, $entregas_en_casa);
         $t[] = telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio);
@@ -602,8 +604,18 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function menu_config($num, $num_imagenes, $url_productos_publico)
+    function menu_config($data, $id_servicio, $num, $num_imagenes, $url_productos_publico)
     {
+
+        $stock = '';
+        if (es_administrador($data)) {
+
+            $base_stock = [
+                'class' => 'stock_disponible cursor_pointer',
+                'id' => $id_servicio,
+            ];
+            $stock = btn("Agregar stock", $base_stock);
+        }
 
 
         $link_foto = tab(icon('fa fa-picture-o'), "#tab_imagenes");
@@ -620,7 +632,6 @@ if (!function_exists('invierte_date_time')) {
             icon('fa fa-fighter-jet menu_meta_key_words'),
             "#tab_terminos_de_busqueda"
         );
-
 
         $list = [
             li(
@@ -650,6 +661,7 @@ if (!function_exists('invierte_date_time')) {
                     "style" => valida_existencia_imagenes($num_imagenes)
                 ]
             ),
+            $stock,
             li(
                 a_enid(
                     text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN")
@@ -663,7 +675,9 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "style" => valida_existencia_imagenes($num_imagenes)
                 ]
-            )
+            ),
+
+
         ];
 
         $ext = (is_mobile() && $num_imagenes < 1) ? 'd-none' : '';
@@ -1091,14 +1105,13 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    function form_rango_entrega($es_servicio, $id_perfil, $stock)
+    function form_rango_entrega($es_servicio, $id_perfil, $stock, $data)
     {
 
         $response = "";
-        if ($es_servicio < 1 && $id_perfil == 3) {
+        if ($es_servicio < 1 && es_administrador($data)) {
 
-            $r = [];
-            $r[] = form_open("", ["class" => "form_stock"]);
+            $r[] = form_open("", ["class" => "form_stock", 'id' => 'form_stock']);
             $r[] = rango_entrega(
                 $id_perfil,
                 $stock,
@@ -1110,12 +1123,12 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 0
                 ,
-                100
+                1000
 
             );
 
             $r[] = form_close();
-            $response = d($r, 'col-md-6 mt-5 ');
+            $response = d($r, 'form_stock_select col-md-6 mt-5 ');
         }
         return $response;
     }
@@ -1357,14 +1370,14 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if ($perfil == 3) {
 
-            $text[] = text_icon(_text_(_editar_icon,'editar_comision'),
+            $text[] = text_icon(_text_(_editar_icon, 'editar_comision'),
                 _text_(
-                    d('COMISIÓN QUE PAGAS POR VENTA',_strong),
+                    d('COMISIÓN QUE PAGAS POR VENTA', _strong),
                     _titulo(money($comision), 2)
                 )
             );
 
-            $r[] = d($text,'text_comision');
+            $r[] = d($text, 'text_comision');
             $r[] = form_open("",
                 [
                     "class" => "form_comision_venta d-none"

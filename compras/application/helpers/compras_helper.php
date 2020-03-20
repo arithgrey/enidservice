@@ -69,8 +69,45 @@ if (!function_exists('invierte_date_time')) {
         $x[] = place("place_compras mt-5");
         $response[] = d(_titulo("planeación y compras"), 'col-lg-12 mt-5');
         $response[] = d($x, 'col-sm-12 mt-3');
+        $response[] = form_stock();
         return append($response);
 
+    }
+
+    function form_stock()
+    {
+
+        $form[] = d(_titulo('¿Cúantos artículos iguales a este tenemos en existencia?'),'mb-5');
+        $form[] = form_open("",
+            [
+                "class" => "form_stock_servicio",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = input_frm('', '¿Stock en almacén?',
+            [
+                'class' => 'stock',
+                'id' => 'stock',
+                'name' => 'stock',
+                'value' => 0,
+                'required' => true
+            ]
+        );
+        $form[] = input_frm('mt-5', '¿Cuanto nos cuesta el artículo?',
+            [
+                'class' => 'costo',
+                'id' => 'costo',
+                'name' => 'costo',
+                'value' => 0,
+                'required' => true
+            ]
+        );
+        $form[] = hiddens(['name' => 'id_servicio','class' => 'id_servicio', 'value' => 0]);
+        $form[] = btn('Actualizar', ['class' => 'mt-5']);
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'stock_servicio_modal');
     }
 }
 

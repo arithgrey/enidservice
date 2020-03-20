@@ -420,7 +420,7 @@ let quita_espacios_input_precio = (e) => {
 let es_float = function (str) {
 
     return /^[+-]?(([0-9]+)|([0-9]*\.[0-9]+|[0-9]+\.[0-9]*)|(([0-9]+|([0-9]*\.[0-9]+|[0-9]+\.[0-9]*))[eE][+-]?[0-9]+))$/.test(str);
-}
+};
 
 let comparer = index => {
 
@@ -920,6 +920,13 @@ let valida_formato_correo = function (e) {
     es_formato_email($(this));
 
 };
+let evita_caracteres = function (e) {
+
+    if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
+        e.preventDefault();
+    }
+};
+
 let valida_formato_telefono = function (e) {
 
     this.value = quitar_espacios_numericos(this.value);
@@ -1095,6 +1102,18 @@ let es_formato_telefono = function ($input) {
     let tiene_formato = true;
     if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono !== TELEFONO_MOBILE_LENGTH) {
 
+        $input.next().next().removeClass('d-none');
+        tiene_formato = false;
+    } else {
+        $input.next().next().addClass('d-none');
+    }
+    return tiene_formato;
+};
+let es_formato_cantidad = function ($input) {
+    let valor = parseInt($input.val());
+    let tiene_formato = true;
+
+    if (valor  < 1 ) {
         $input.next().next().removeClass('d-none');
         tiene_formato = false;
     } else {
