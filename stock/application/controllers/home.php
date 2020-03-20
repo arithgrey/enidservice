@@ -19,13 +19,7 @@ class Home extends CI_Controller
 
         $inventario = $this->inventario();
         $inventario = $this->app->add_imgs_servicio($inventario);
-
-        $data = $this->app->session(
-            "",
-            "Comprar y vender tus artículos y servicios",
-            "",
-            create_url_preview("promo.png")
-        );
+        $data = $this->app->session();
         $this->app->pagina($data, render($inventario), 1);
 
 
