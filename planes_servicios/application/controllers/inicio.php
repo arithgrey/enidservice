@@ -28,7 +28,8 @@ class Inicio extends CI_Controller
 
         $data = $this->prevenir_acceso($param, $data);
         $data["error_registro"] = valida_extension(prm_def($param, "mensaje", ""), 5, "");
-        $data["top_servicios"] = $this->get_top_servicios_usuario($data["id_usuario"]);
+//        $data["top_servicios"] = $this->get_top_servicios_usuario($data["id_usuario"]);
+        $data["top_servicios"] = [];
         $data["ciclo_facturacion"] = $this->create_ciclo_facturacion();
         $data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 

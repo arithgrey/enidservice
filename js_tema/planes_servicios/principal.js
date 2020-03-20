@@ -15,6 +15,13 @@ let $seccion_busqueda = $(seccion_busqueda);
 let $titulo_seccion = $(titulo_seccion);
 let $costo = $('.costo');
 let $form_nombre_producto = $('.form_nombre_producto');
+let $selector_carga_modal = $('#stock_servicio_modal');
+
+let $form_stock_servicio = $('.form_stock_servicio');
+let $input_stock = $form_stock_servicio.find('.stock');
+let $input_id_servicio = $form_stock_servicio.find('.id_servicio');
+let $input_costo = $form_stock_servicio.find('.costo_stock');
+
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -43,6 +50,18 @@ $(document).ready(() => {
 
 
     $costo.keypress(enter_precio);
+    $input_stock.keypress(evita_caracteres);
+    $input_costo.keypress(evita_caracteres);
+    $input_stock.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_stock_servicio, 1);
+    });
+
+    $input_costo.keyup(function (e) {
+        $(this).next().next().addClass('d-none');
+        escucha_submmit_selector(e, $form_stock_servicio, 1);
+    });
+
 
 });
 
@@ -138,6 +157,7 @@ let carga_informacion_servicio = (num = 1) => {
 };
 
 let respuesta_informacion_servicio = (data) => {
+
     add_class([seccion_busqueda, titulo_seccion], 'd-none');
     render_enid(".place_servicios", data);
     verifica_formato_default_inputs();
@@ -187,13 +207,13 @@ let respuesta_informacion_servicio = (data) => {
     $(".activar_publicacion").click(activa_publicacion);
     $(".es_publico").click(activa_visibilidad);
     $(".restablecer").click(restablecer);
-
+    $('.stock_disponible').click(editar_stock_disponible);
 
     $(".form_dropshipping").submit(modifica_dropshipping);
     $('.form_comision_venta').submit(registro_comision);
     $('.editar_comision').click(function () {
 
-        showonehideone('.form_comision_venta','.text_comision');
+        showonehideone('.form_comision_venta', '.text_comision');
     });
     if (get_option("flag_nueva_categoria") == 1) {
         recorre("#seccion_metakeywords_servicio");
@@ -202,7 +222,7 @@ let respuesta_informacion_servicio = (data) => {
         recorre(get_option("seccion_a_recorrer"));
     }
     $(".descartar_promocion").click(descartar_promocion);
-    $(".stock").change(set_cantidad_en_stock);
+    $('.form_stock_select').find(".stock").change(set_cantidad_en_stock);
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
@@ -1383,7 +1403,7 @@ let modifica_dropshipping = (e) => {
 };
 let set_cantidad_en_stock = () => {
 
-    let stock = get_parameter(".stock");
+    let stock = $('.form_stock_select').find(".stock").val();
     let id_servicio = get_parameter(".id_servicio");
     let data_send = $.param({"stock": stock, "id_servicio": id_servicio});
     let url = "../q/index.php/api/servicio/stock/format/json/";

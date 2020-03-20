@@ -57,16 +57,33 @@ class Servicio extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "id_servicio,stock")) {
+
             $id_servicio = $param["id_servicio"];
+            $stock = $param["stock"];
             if (prm_def($param, "compra") > 0) {
 
-                $response = $this->serviciosmodel->set_compra_stock($param["stock"], $id_servicio);
+                $response = $this->descuento_inventario($stock, $id_servicio, $param);
+
             } else {
-                $response = $this->serviciosmodel->q_up("stock", $param["stock"], $id_servicio);
+
+                if (prm_def($param, "anexo") > 0) {
+
+                    $response = $this->anexo_stock($stock, $id_servicio);
+
+                } else {
+
+                    $response = $this->serviciosmodel->q_up("stock", $stock, $id_servicio);
+                }
+
             }
 
         }
         $this->response($response);
+    }
+
+    private function anexo_stock($stock, $id_servicio)
+    {
+        return $this->serviciosmodel->anexo_stock($stock, $id_servicio);
     }
 
     function comision_PUT()
@@ -542,6 +559,7 @@ class Servicio extends REST_Controller
             $this->set_option("id_servicio", $param["id_servicio"]);
             $id_servicio = $this->get_option("id_servicio");
             $servicio = $this->serviciosmodel->get([], ["id_servicio" => $param["id_servicio"]]);
+            $data = $this->app->session();
             $data["servicio"] = $servicio;
             $this->set_option("servicio", $servicio);
             $data["costo_envio"] = 0;
@@ -1808,5 +1826,42 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+
+    function descuento_inventario($stock, $id_servicio, $param)
+    {
+
+        $this->serviciosmodel->set_compra_stock($stock, $id_servicio);
+        $response = $this->gestion_stock($id_servicio, $stock);
+        $this->anexa_costos_operativos($response, $param);
+        $this->response($response);
+
+    }
+
+    function anexa_costos_operativos($data_stock, $param)
+    {
+        $costo_unidad = prm_def($data_stock, 'costo_unidad');
+        $id_recibo = prm_def($param, 'recibo');
+        if ($costo_unidad > 0 && $id_recibo > 0) {
+
+            $q = [
+                "recibo" => $id_recibo,
+                "costo" => $costo_unidad,
+                "tipo" => 8
+            ];
+            return $this->app->api("costo_operacion/index", $q, "json", "POST");
+        }
+    }
+
+    function gestion_stock($id_servicio, $cantidad)
+    {
+
+        $q = [
+            'descuento' => 1,
+            'cantidad' => $cantidad,
+            'id_servicio' => $id_servicio
+        ];
+        return $this->app->api("stock/disponibilidad/format/json/", $q);
+    }
+
 
 }

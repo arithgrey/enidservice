@@ -1,6 +1,46 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function form_stock()
+    {
+
+        $form[] = d(_titulo('¿Cúantos artículos como este agregamos al stock?'), 'mb-5');
+        $form[] = d(hr());
+        $form[] = form_open("",
+            [
+                "class" => "form_stock_servicio",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = d(input_frm('mt-5', '¿Cantidad?',
+            [
+                'class' => 'stock',
+                'id' => 'stock',
+                'name' => 'stock',
+                'value' => 0,
+                'required' => true,
+                'type' => 'number',
+            ],
+            '¿Hay algo mal con esta canidad no?'
+        ),'input_unidades_producto_stock');
+        $form[] = d(input_frm('mt-5', '¿Cuanto nos costó cada unidad? MXN',
+            [
+                'class' => 'costo_stock',
+                'id' => 'costo_stock',
+                'name' => 'costo',
+                'value' => 0,
+                'required' => true,
+                'type' => 'number',
+            ], 'Parece que el costo anda mal ¿no?'
+        ),'d-none input_costo_producto_stock');
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = btn('Actualizar', ['class' => 'mt-5']);
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'stock_servicio_modal');
+    }
+
     function render_ventas($data)
     {
 
@@ -10,6 +50,7 @@ if (!function_exists('invierte_date_time')) {
         $considera_segundo = $data["considera_segundo"];
         $id_usuario = $data['id_usuario'];
         $t[] = menu($id_perfil, $action, $id_usuario);
+        $t[] = form_stock();
         $t[] = btw(
             _titulo("artículos más vistos de la semana")
             ,

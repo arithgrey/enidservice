@@ -243,7 +243,6 @@ let registra_saldo_cubierto = e => {
         let url = "../q/index.php/api/recibo/saldo_cubierto/format/json/";
         bloquea_form(".form_cantidad");
         request_enid("PUT", data_send, url, response_saldo_cubierto)
-
     }
     e.preventDefault();
 };
@@ -276,8 +275,10 @@ let descontar_articulos_stock = () => {
 
     let id_servicio = get_parameter(".id_servicio");
     let stock = get_parameter(".articulos");
-    let data_send = $.param({"id_servicio": id_servicio, "stock": stock, "compra": 1});
+    let recibo = get_parameter(".recibo");
+    let data_send = $.param({"id_servicio": id_servicio, "stock": stock, "compra": 1, 'recibo': recibo});
     let url = "../q/index.php/api/servicio/stock/format/json/";
+    $modal_estado_venta.modal('hide');
     request_enid("PUT", data_send, url, response_articulos_stock);
 
 };
@@ -478,7 +479,6 @@ let response_status_venta = data => {
         switch (parseInt(status)) {
             case 6:
                 $status_venta.prop('disabled', 'disabled');
-                debugger;
                 redirect('');
                 break;
 
