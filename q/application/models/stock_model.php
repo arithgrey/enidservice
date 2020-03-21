@@ -73,6 +73,7 @@ class stock_model extends CI_Model
 
     }
 
+
     function consumo($consumo, $id_stock)
     {
 

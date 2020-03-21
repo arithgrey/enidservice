@@ -10,6 +10,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(compras(), 13);
         $response[] = listado($inventario);
         $response[] = calendario_ingresos();
+        $response[] = unidades_diponibles_modal();
         return d($response, 10, 1);
     }
 
@@ -68,7 +69,17 @@ if (!function_exists('invierte_date_time')) {
             $fecha = text_icon(_editar_icon, format_fecha($fecha_registro, 1));
             $base_dias = ($dias > 9) ? _text_($base, 'bg-danger white strong') : $base;
             $contenido[] = d($link, $base);
-            $contenido[] = d($unidades_disponibles, $base);
+
+
+            $unidades = a_enid($unidades_disponibles,
+                [
+                    'class' => _text_(_strong, 'underline stock_unidades'),
+                    'unidades_disponibles' => $unidades_disponibles,
+                    'id' => $id_stock,
+
+                ]
+            );
+            $contenido[] = d($unidades, $base);
             $contenido[] = d(money($costo_unidad), $base);
             $contenido[] = d($fecha, $config_ingreso);
             $contenido[] = d($dias, $base_dias);
@@ -108,6 +119,31 @@ if (!function_exists('invierte_date_time')) {
         $form[] = form_close();
 
         return gb_modal(append($form), 'modal_form_calendario');
+
+    }
+
+    function unidades_diponibles_modal()
+    {
+        $form[] = form_open('', ['class' => 'form_unidades_disponibles']);
+        $form[] = d(_titulo('Unidades disponibles', 2), 'text-left mb-5');
+        $options[] =
+            [
+                "opcion" => 0,
+                "val" => 0
+            ];
+        $form[] = create_select(
+            $options,
+            'unidades',
+            'unidades',
+            'unidades',
+            'opcion',
+            'val'
+        );
+        $form[] = hiddens(['class' => 'id_stock', 'name' => 'id_stock']);
+        $form[] = d(btn('Modificar'), 'mt-5');
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'modal_unidades_disponibles');
 
     }
 
