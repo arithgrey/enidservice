@@ -54,10 +54,11 @@ let asignar_direccion_existente_pedido = function () {
 };
 let eliminar_domicilio = function () {
 
-    let id_direccion = get_parameter_enid($(this), "id");
-    let id_recibo = get_parameter_enid($(this), "id_recibo");
-    let tipo = get_parameter_enid($(this), "tipo");
-    let text = (tipo == 2) ? "SE ELIMINARÁ EL DOMICILIO ¿DESEAS CONTINUAR?" : "SE ELIMINARÁ TU PUNTO DE ENTREGA ¿DESEAS CONTINUAR?";
+    let $actual =  $(this);
+    let id_direccion = get_parameter_enid($actual, "id");
+    let id_recibo = get_parameter_enid($actual, "id_recibo");
+    let tipo = get_parameter_enid($actual, "tipo");
+    let text = (tipo === 2) ? "SE ELIMINARÁ EL DOMICILIO ¿DESEAS CONTINUAR?" : "SE ELIMINARÁ TU PUNTO DE ENTREGA ¿DESEAS CONTINUAR?";
     show_confirm(text, "", "CONTINUAR", function () {
         eliminar_domicilio_base(id_direccion, id_recibo, tipo)
     });

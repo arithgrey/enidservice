@@ -607,7 +607,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = get_campo($direccion, "direccion", "Dirección", 1);
         $r[] = get_campo($direccion, "calle", "Calle", 1);
         $r[] = get_campo($direccion, "numero_exterior", " Número exterior ", 1);
-        $r[] = get_campo($direccion, "numero_interior", " Número interior ", 1);
+        $r[] = get_campo($direccion, "numero_interior", " interior ", 1);
         $r[] = get_campo($direccion, "entre_calles", "Entre ", 1);
         $r[] = get_campo($direccion, "cp", " C.P. ", 1);
         $r[] = get_campo($direccion, "asentamiento", " Colonia ", 1);

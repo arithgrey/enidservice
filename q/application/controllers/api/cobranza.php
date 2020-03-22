@@ -610,6 +610,7 @@ class Cobranza extends REST_Controller
             "fecha_entrega" => $fecha_entrega,
             "horario_entrega" => $horario_entrega,
             "recibo" => $recibo,
+            "tipo_entrega" => 1
         ];
         return $this->app->api("recibo/fecha_entrega/format/json/", $q, "json", "PUT");
 

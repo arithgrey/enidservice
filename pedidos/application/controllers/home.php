@@ -190,8 +190,11 @@ class Home extends CI_Controller
 
         $asignacion = prm_def($param, 'asignacion');
         $tiene_domicilio = es_data($domicilio_entrega);
+        $lista = prm_def($param, 'frecuentes');
+        $asignacion_horario_entrega = prm_def($param, 'asignacion_horario_entrega');
 
-        if (!$tiene_domicilio || $asignacion) {
+        if (!$tiene_domicilio || $asignacion || $lista || $asignacion_horario_entrega) {
+
 
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);

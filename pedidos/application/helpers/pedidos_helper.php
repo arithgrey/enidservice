@@ -117,7 +117,9 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d(_titulo('¿Hay algo que hacer?'), 'mb-5  text-center');
         $x[] = tracker($id_recibo);
         $x[] = link_cambio_estado_venta();
+
         $x = link_cambio_punto_encuentro($data, $x, $recibo);
+        $x = link_cambio_domicilio($data, $x, $recibo);
         $x = link_recordatorio($recibo, $data, $x);
         $x[] = link_nota();
         $x = link_costo($x, $data, $id_recibo, $recibo, $es_vendedor);
@@ -141,21 +143,76 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_data($recibo) && !es_orden_cancelada($data)) {
 
+
             $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
             $form[] = frm_pe_avanzado($id_recibo);
             $form[] = d(
-                a_enid("CAMBIAR LA HORA Y LUGAR DE ENTREGA",
+                a_enid(
+                    text_cambio_fecha_hora($recibo, 1),
                     [
                         "class" => "lugar_horario_entrega",
                         "id" => $id_recibo,
                         "onclick" => "confirma_lugar_horario_entrega()",
-                    ])
+                    ]
+                )
             );
             $response[] = append($form);
         }
         return $response;
 
     }
+
+
+    function link_cambio_domicilio($data, $response, $recibo)
+    {
+
+        if (es_data($recibo) && !es_orden_cancelada($data)) {
+
+            $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+            $path = path_enid('pedido_seguimiento', _text($id_recibo, '&domicilio=1&asignacion_horario_entrega=1'));
+            $form[] =
+                a_enid(
+                    text_cambio_fecha_hora($recibo, 2),
+                    [
+
+                        'class' => 'black',
+                        "onclick" => "confirma_cambio_domicilio('" . $path . "')",
+                    ]
+                );
+            $response[] = append($form);
+        }
+        return $response;
+
+    }
+
+    function text_cambio_fecha_hora($recibo, $tipo)
+    {
+
+        $tipo_entrega = (int)pr($recibo, 'tipo_entrega');
+        $text = '';
+        if ($tipo === 1) { // MENU PAGO CONTRA ENTREGA
+            if ($tipo === $tipo_entrega) {
+
+                $text = _text_('CAMBIAR PUNTO U HORA DE ENCUENTRO', icon(_check_icon));
+
+            } else {
+
+                $text = 'CAMBIAR A PUNTO DE ENCUENTRO';
+            }
+
+        } else {
+
+            if ($tipo === $tipo_entrega) {
+                $text = _text_('CAMBIAR DOMICILIO DE ENTREGA', icon(_check_icon));
+            } else {
+                $text = 'CAMBIAR A DOMICILIO DE ENTREGA';
+            }
+        }
+
+
+        return $text;
+    }
+
 
     function formulario_arquetipos($data, $id_usuario,
                                    $negocios, $usuario_tipo_negocio, $unicos)
@@ -465,7 +522,49 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function text_domicilio($data, $mostrar_totales = 1)
+    function format_text_domicilio($domicilio, $data, $recibo, $adicionales = 0)
+    {
+
+        $text_domicilio = '';
+        if (es_data($domicilio)) {
+
+            $domicilio = $domicilio[0];
+            $calle = $domicilio['calle'];
+            $entre_calles = $domicilio['entre_calles'];
+            $numero_exterior = $domicilio['numero_exterior'];
+            $asentamiento = $domicilio['asentamiento'];
+            $municipio = $domicilio['municipio'];
+            $ciudad = $domicilio['ciudad'];
+            $cp = $domicilio['cp'];
+            $numero_interior = $domicilio['numero_interior'];
+
+            $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
+
+            $text_domicilio = _text_(
+                $calle,
+                '#',
+                $numero_exterior,
+                'Interior',
+                '#',
+                $numero_interior,
+                $asentamiento,
+                ', ',
+                $municipio,
+                $ciudad,
+                'C.P.',
+                $cp,
+                br(2),
+                strong('referencia o entre calles'),
+                $entre_calles,
+                $str
+            );
+
+        }
+        return $text_domicilio;
+
+    }
+
+    function text_domicilio($data)
     {
 
         $recibo = $data['recibo'];
@@ -486,7 +585,6 @@ if (!function_exists('invierte_date_time')) {
                     $numero = $pe['numero'];
                     $nombre = $pe['nombre'];
 
-
                     $str = pago_en_cita($data, $recibo, 1);
                     $text = _text_(
                         'TIENES UNA CITA EL DÍA ',
@@ -506,38 +604,8 @@ if (!function_exists('invierte_date_time')) {
 
             case 2:
 
-
                 $domicilio = $domicilio['domicilio'];
-                if (es_data($domicilio)) {
-
-                    $domicilio = $domicilio[0];
-                    $calle = $domicilio['calle'];
-                    $numero_exterior = $domicilio['numero_exterior'];
-                    $asentamiento = $domicilio['asentamiento'];
-                    $municipio = $domicilio['municipio'];
-                    $ciudad = $domicilio['ciudad'];
-                    $cp = $domicilio['cp'];
-
-
-                    $str = ($mostrar_totales) ? pago_en_cita($data, $recibo) : '';
-
-
-                    $text = _text_(
-                        $calle,
-                        '#',
-                        $numero_exterior,
-                        $asentamiento,
-                        ',',
-                        $municipio,
-                        $ciudad,
-                        'C.P.',
-                        $cp,
-                        $str
-                    );
-
-
-                }
-
+                $text = format_text_domicilio($domicilio, $data, $recibo, 1);
                 break;
 
             default:
@@ -550,6 +618,7 @@ if (!function_exists('invierte_date_time')) {
         return $text;
 
     }
+
 
     function pago_en_cita($data, $recibo, $no_validar = 0)
     {
@@ -908,7 +977,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = compras_cliente($data);
         $r[] = seccion_usuario($usuario, $recibo, $data);
         $r[] = frm_usuario($usuario);
-        $r[] = create_seccion_domicilio($domicilio, $recibo);
+        $r[] = create_seccion_domicilio($domicilio, $recibo, $data);
         $r[] = create_seccion_saldos($recibo);
         $r[] = seccion_cupon($cupon);
 
@@ -1020,7 +1089,7 @@ if (!function_exists('invierte_date_time')) {
             $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)));
             $id_direccion = id_direccion_recibo($data, $es_contra_entrega_domicilio);
             $confirmar_pedido = "confirma_reparto({$id_recibo}, '{$punto_encuentro}')";
-            $text_punto_encuentro = text_domicilio($data,0);
+            $text_punto_encuentro = text_domicilio($data, 0);
             $confirm_pedido_domicilio = "confirma_reparto_contra_entrega_domicilio({$id_recibo}, '{$text_punto_encuentro}')";
 
             $confirm = ($es_contra_entrega_domicilio) ? $confirm_pedido_domicilio : $confirmar_pedido;
@@ -2730,14 +2799,15 @@ if (!function_exists('invierte_date_time')) {
         return ($numero == 0) ? $domicilio_compra : $tiene_entrega;
     }
 
-    function create_seccion_domicilio($domicilio, $recibo)
+    function create_seccion_domicilio($domicilio, $recibo, $data)
     {
         $response = "";
 
         if (es_data($domicilio)) {
 
             $d_domicilio = $domicilio["domicilio"];
-            $response = ($domicilio["tipo_entrega"] != 1) ? create_domicilio_entrega($d_domicilio, $recibo) : create_punto_entrega($d_domicilio, $recibo);
+            $response = ($domicilio["tipo_entrega"] != 1) ? create_domicilio_entrega($d_domicilio, $recibo, $data) : create_punto_entrega($d_domicilio, $recibo);
+
 
         } else {
             /*solicita dirección de envio*/
@@ -3012,7 +3082,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function create_domicilio_entrega($domicilio, $recibo)
+    function create_domicilio_entrega($domicilio, $recibo, $data)
     {
 
         $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');

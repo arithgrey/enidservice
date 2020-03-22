@@ -930,10 +930,12 @@ class recibo extends REST_Controller
 
             $fecha_contra_entrega = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
             $es_contra_entrega_domicilio = prm_def($param, 'contra_entrega_domicilio');
+            $tipo_entrega = prm_def($param, 'tipo_entrega');
             $response = $this->recibo_model->set_fecha_contra_entrega(
                 $param["recibo"],
                 $fecha_contra_entrega,
-                $es_contra_entrega_domicilio
+                $es_contra_entrega_domicilio,
+                $tipo_entrega
             );
         }
 
