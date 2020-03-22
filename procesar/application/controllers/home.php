@@ -137,8 +137,8 @@ class Home extends CI_Controller
             "externo" => 1,
         ];
 
-        $response = $this->app->api(
-            "usuario_direccion/direccion_envio_pedido/format/json/", $q);
+        $q['session']['menu'] = '';
+        $response = $this->app->api("usuario_direccion/direccion_envio_pedido/format/json/", $q);
 
         if ($v > 0) {
 

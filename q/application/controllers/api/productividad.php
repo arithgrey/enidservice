@@ -16,6 +16,9 @@ class productividad extends REST_Controller
 
         $param = $this->get();
         $id_usuario = $this->app->get_session('idusuario');
+        $data = $this->app->session();
+        $id_empresa = $data['id_empresa'];
+
         $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
         $param["id_usuario"] = $id_usuario;
 
@@ -29,7 +32,7 @@ class productividad extends REST_Controller
 
         $prm["modalidad"] = 1;
         $prm["id_usuario"] = $id_usuario;
-        $response["info_notificaciones"]["numero_telefonico"] = $this->verifica_registro_telefono($prm);
+        $response["info_notificaciones"]["numero_telefonico"] = 1;
         $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil);
 
 
@@ -38,13 +41,13 @@ class productividad extends REST_Controller
             "preguntas" => [],
             "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
-            "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario),
-            "clientes_sin_tags_arquetipos" => $this->get_stag($id_perfil),
-            "tareas" => $this->get_tareas($id_usuario),
+            "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario, $data),
+            "clientes_sin_tags_arquetipos" => $this->get_stag($data),
+            "tareas" => $this->get_tareas($data, $id_usuario),
         ];
 
-        $response = $this->re_intentos_compras($id_usuario, $response, $id_perfil);
-        $response = $this->recuperacion($id_usuario, $response, $id_perfil);
+        $response = $this->re_intentos_compras($data, $id_usuario, $response);
+        $response = $this->recuperacion($data, $id_usuario, $response);
         switch ($id_perfil) {
 
             case 3:
@@ -59,6 +62,19 @@ class productividad extends REST_Controller
 
                 break;
 
+
+            case 4:
+
+                $response += [
+                    "recordatorios" => $this->get_recordatorios($id_usuario),
+                    "ventas_enid_service" => $this->get_ventas_enid_service(),
+                    "ventas_semana" => $this->ventas_semana($id_usuario)
+                ];
+                $response = tareas_administrador($response);
+
+                break;
+
+
             case (6):
                 $response += [
                     "recordatorios" => $this->get_recordatorios($id_usuario),
@@ -69,7 +85,7 @@ class productividad extends REST_Controller
 
             case 21:
 
-                $response['proximos_pedidos'] = $this->proximas_reparto($id_perfil, $id_usuario);
+                $response['proximos_pedidos'] = $this->proximas_reparto($id_perfil, $id_usuario, $id_empresa);
                 $response = pendientes_reparto($response);
                 break;
 
@@ -247,28 +263,46 @@ class productividad extends REST_Controller
         return $this->app->api("recibo/dia/format/json/", ["fecha" => 1]);
     }
 
-    private function get_scostos($id_usuario)
-    {
-        return $this->app->api("costo_operacion/scostos/format/json/", ["id_usuario" => $id_usuario]);
-    }
-
-    private function get_stag($id_perfil)
+    private function get_scostos($id_usuario, $data)
     {
 
         $response = [];
-        $es_administrador = [3, 4];
-        if (in_array($id_perfil, $es_administrador)) {
+        if (es_administrador($data)) {
+            $q = [
+                "id_usuario" => $id_usuario,
+                'id_empresa' => $data['id_empresa']
+            ];
 
-            $response = $this->app->api("recibo/stags_arquetipos/format/json/");
+            $response = $this->app->api("costo_operacion/scostos/format/json/", $q);
+        }
+        return $response;
+    }
+
+    private function get_stag($data)
+    {
+
+        $response = [];
+        if (es_administrador($data)) {
+
+            $q = ['id_empresa' => $data['id_empresa']];
+            $response = $this->app->api("recibo/stags_arquetipos/format/json/", $q);
         }
 
         return $response;
 
     }
 
-    function get_tareas($id_usuario)
+    function get_tareas($data, $id_usuario)
     {
-        return $this->app->api("tickets/pendientes/format/json/", ["id_usuario" => $id_usuario]);
+
+        $response = [];
+        if (es_administrador($data)) {
+
+            $in = ["id_usuario" => $id_usuario];
+            $response = $this->app->api("tickets/pendientes/format/json/", $in);
+        }
+        return $response;
+
     }
 
     function ventas_semana($id_usuario)
@@ -294,13 +328,13 @@ class productividad extends REST_Controller
 
     }
 
-    function re_intentos_compras($id_usuario, $response, $id_perfil)
+    function re_intentos_compras($data, $id_usuario, $response)
     {
 
         $q = ["id_vendedor" => $id_usuario];
 
         $pendientes = [];
-        if (in_array($id_perfil, [6, 3])) {
+        if (es_administrador_o_vendedor($data)) {
 
             $pendientes = $this->app->api("recibo/reventa/format/json/", $q);
 
@@ -311,13 +345,13 @@ class productividad extends REST_Controller
 
     }
 
-    function recuperacion($id_usuario, $response, $id_perfil)
+    function recuperacion($data, $id_usuario, $response)
     {
 
         $q = ["id_vendedor" => $id_usuario];
 
         $pendientes = [];
-        if (in_array($id_perfil, [6, 3])) {
+        if (es_administrador_o_vendedor($data)) {
 
             $pendientes = $this->app->api("recibo/recuperacion/format/json/", $q);
 
@@ -327,7 +361,7 @@ class productividad extends REST_Controller
 
     }
 
-    function proximas_reparto($id_perfil, $id_usuario)
+    function proximas_reparto($id_perfil, $id_usuario, $id_empresa)
     {
 
         $response = $this->app->api(
@@ -335,7 +369,8 @@ class productividad extends REST_Controller
             [
                 "id_perfil" => $id_perfil,
                 "id_usuario" => $id_usuario,
-                "dia" => 1
+                "dia" => 1,
+                "id_empresa" => $id_empresa
             ]
         );
         return $this->app->imgs_productos(0, 1, 1, 1, $response);

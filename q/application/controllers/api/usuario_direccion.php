@@ -121,10 +121,7 @@ class usuario_direccion extends REST_Controller
     {
 
         $param = $this->get();
-
-
         $id_usuario =$this->valida_cita_domicilio($param, $this->get_id_usuario($param));
-
 
         $response = [];
         $data["id_usuario"] = $id_usuario;

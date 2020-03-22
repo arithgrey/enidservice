@@ -13,6 +13,7 @@ class recibo extends REST_Controller
         $this->load->library('table');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("idusuario");
+
     }
 
     function index_GET()
@@ -56,7 +57,7 @@ class recibo extends REST_Controller
             $this->recibos_domicilio_contra_entrega_sin_domicilio($ids_contra_entrega_domicilio, $recibos_domicilio);
 
 
-        $response = $this->domicilios_contra_entrega_pedidos($ordenes_compra,$ids_contra_entrega_domicilio,$recibos_domicilio_contra_entrega_sin_domicilio);
+        $response = $this->domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $recibos_domicilio_contra_entrega_sin_domicilio);
         $this->response($response);
     }
 
@@ -70,14 +71,14 @@ class recibo extends REST_Controller
             $recibos[$a] = $row;
             $id_recibo = $row['id_recibo'];
             $es_contra_entrega_domicilio = in_array($id_recibo, $ids_contra_entrega_domicilio);
-            if ($es_contra_entrega_domicilio){
+            if ($es_contra_entrega_domicilio) {
 
                 $es_contra_entrega_domicilio_sin_direccion = (in_array($id_recibo, $sin_direccion_contra_entrega));
                 $recibos[$a]['es_contra_entrega_domicilio_sin_direccion'] = $es_contra_entrega_domicilio_sin_direccion;
             }
             $recibos[$a]['es_contra_entrega'] = $es_contra_entrega_domicilio;
 
-            $a ++;
+            $a++;
         }
         return $recibos;
     }
@@ -1316,7 +1317,13 @@ class recibo extends REST_Controller
     function stags_arquetipos_GET()
     {
 
-        $response = $this->recibo_model->sin_tags_arquetipo();
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_empresa")) {
+
+            $id_empresa = $param['id_empresa'];
+            $response = $this->recibo_model->sin_tags_arquetipo($id_empresa);
+        }
         $this->response($response);
 
     }
@@ -1397,10 +1404,13 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario,id_perfil")) {
+        if (fx($param, "id_usuario,id_perfil,id_empresa")) {
 
             $dia = prm_def($param, 'dia');
-            $response = $this->recibo_model->proximas($param["id_usuario"], $param["id_perfil"], $dia);
+            $id_usuario = $param["id_usuario"];
+            $id_perfil = $param["id_perfil"];
+            $id_empresa = $param['id_empresa'];
+            $response = $this->recibo_model->proximas($id_empresa, $id_usuario, $id_perfil, $dia);
         }
         $this->response($response);
     }
@@ -1415,9 +1425,10 @@ class recibo extends REST_Controller
 
             $id_usuario = $data['idusuario'];
             $id_perfil = $this->app->getperfiles();
+            $id_empresa = $data['idempresa'];
 
             $franja_horaria = $param['franja_horaria'];
-            $ordenes = $this->recibo_model->franja_horaria($franja_horaria, $id_usuario, $id_perfil);
+            $ordenes = $this->recibo_model->franja_horaria($franja_horaria, $id_usuario, $id_perfil, $id_empresa);
             $response = $this->add_imgs_servicio($ordenes);
             if ($param['v'] > 0) {
                 $response = tracker_franja_horaria($response);

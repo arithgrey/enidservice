@@ -653,7 +653,11 @@ class Recibo_model extends CI_Model
 
     function get_dia($param)
     {
-        return $this->get([" COUNT(0)num "], ["DATE(fecha_registro)" => $param["fecha"]])[0]["num"];
+
+        $in = [
+            "DATE(fecha_registro)" => $param["fecha"]
+        ];
+        return $this->get([" COUNT(0)num "], $in)[0]["num"];
 
     }
 
@@ -948,16 +952,17 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
-    function proximas($id_usuario, $id_perfil, $dia = 0)
+    function proximas($id_empresa, $id_usuario, $id_perfil, $dia = 0)
     {
 
         $casos = [
-            3 => ' 1 = 1',
+            3 => " 1 = 1 ",
+            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
         $extra_usuario = $casos[$id_perfil];
-        $extra_dia = ($dia > 0) ? ' AND  DATE(fecha_contra_entrega) =  DATE(CURRENT_DATE())' : '';
+        $extra_dia = ($dia > 0) ? ' AND DATE(fecha_contra_entrega) =  DATE(CURRENT_DATE())' : '';
 
         $query_get = "SELECT 
 						id_servicio, 
@@ -970,8 +975,8 @@ class Recibo_model extends CI_Model
 						WHERE  
 						saldo_cubierto < 1  
 						AND " . $extra_usuario . " 						  
-						AND  se_cancela = 0
-						AND  status !=  10
+						AND  se_cancela < 1 
+						AND  status NOT IN (10,19)
 						AND 					
 						(
                             DATE(fecha_contra_entrega) >=  DATE(CURRENT_DATE())
@@ -1094,7 +1099,7 @@ class Recibo_model extends CI_Model
 
     }
 
-    function sin_tags_arquetipo()
+    function sin_tags_arquetipo($id_empresa)
     {
         $query_get = "SELECT 
                         id_proyecto_persona_forma_pago id_recibo, 
@@ -1104,11 +1109,15 @@ class Recibo_model extends CI_Model
                         WHERE                    
                         saldo_cubierto >  0 
                         AND 
-                        status != 10
+                        status NOT IN (10,19)
+                        AND 
+                        es_test < 1 
                         AND
                         id_usuario 
-                        NOT IN (SELECT id_usuario from tag_arquetipo group by id_usuario)
-                        ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5 ";
+                        NOT IN (SELECT id_usuario FROM tag_arquetipo GROUP BY id_usuario)
+                        AND 
+                        id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)
+                        ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -1246,11 +1255,12 @@ class Recibo_model extends CI_Model
 
     }
 
-    function franja_horaria($franja_horaria, $id_usuario, $id_perfil)
+    function franja_horaria($franja_horaria, $id_usuario, $id_perfil,$id_empresa)
     {
 
         $casos = [
             3 => '1 = 1',
+            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];

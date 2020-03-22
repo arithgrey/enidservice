@@ -98,9 +98,12 @@ class costo_operacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario")) {
+        if (fx($param, "id_usuario,id_empresa")) {
 
-            $response = $this->costo_operacion_model->get_recibos_sin_costos($param["id_usuario"]);
+            $id_usuario = $param['id_usuario'];
+            $id_empresa = $param['id_empresa'];
+
+            $response = $this->costo_operacion_model->get_recibos_sin_costos($id_usuario, $id_empresa);
         }
 
         $this->response($response);
