@@ -1110,7 +1110,7 @@ if (!function_exists('invierte_date_time')) {
 
             $text = flex(
                 icon("fa-inbox"),
-                "SIN TAGS ARQUETIPO",
+                "SIN CARACTERÍSTICAS DEL CLIENTE",
                 "top_10 justify-content-between  mh_notificaciones border-bottom",
                 "",
                 "strong black");

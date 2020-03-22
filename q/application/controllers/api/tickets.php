@@ -22,7 +22,9 @@ class Tickets extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $response = $this->tickets_model->get(
-                ["id_ticket", "asunto"],
+                [
+                    "id_ticket", "asunto"
+                ],
                 [
                     "id_usuario" => $param["id_usuario"],
                     "status" => 1,

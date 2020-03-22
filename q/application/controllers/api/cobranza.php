@@ -356,18 +356,18 @@ class Cobranza extends REST_Controller
         return $this->app->api("usuario_punto_encuentro/index", $q, "json", "POST");
     }
 
-    function carga_ficha_direccion_envio($q)
-    {
-
-        $q += [
-            "text_direccion" => "Dirección de Envio",
-            "externo" => 1,
-
-        ];
-
-        return $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
-
-    }
+//    function carga_ficha_direccion_envio($q)
+//    {
+//
+//        $q += [
+//            "text_direccion" => "Dirección de Envio",
+//            "externo" => 1,
+//
+//        ];
+//
+//        return $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
+//
+//    }
 
     function solicitud_cambio_punto_entrega_POST()
     {
