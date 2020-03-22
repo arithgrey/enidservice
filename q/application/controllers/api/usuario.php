@@ -1107,5 +1107,19 @@ class usuario extends REST_Controller
         }
         $this->response($response);
     }
+    function gamifica_ventas_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_usuario")) {
+
+
+            $id_usuario = $param["id_usuario"];
+            $response = $this->usuario_model->gamificacion_ventas($id_usuario);
+
+        }
+        $this->response($response);
+
+    }
 
 }

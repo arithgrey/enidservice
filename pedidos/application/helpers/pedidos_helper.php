@@ -106,6 +106,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = opciones_compra($data, $domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
 
+        $response[] = hiddens(['class' => 'id_usuario_referencia', 'value' => $data['id_usuario_referencia']]);
 
         return d($response, _10auto);
 

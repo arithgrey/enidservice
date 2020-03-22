@@ -1396,7 +1396,7 @@ if (!function_exists('invierte_date_time')) {
                     }
                 }
 
-                $es_formato_hora = (( $tipo_entrega == 1) || ($tipo_entrega ==  2 && $format_hora));
+                $es_formato_hora = (($tipo_entrega == 1) || ($tipo_entrega == 2 && $format_hora));
                 $hora_entrega = ($es_formato_hora) ? format_hora($fecha_contra_entrega) : '';
                 $notificacion_hoy = ($hoy === $fecha_entrega) ? 'Se entregá hoy! ' : $text_entrega;
 
@@ -1749,7 +1749,8 @@ if (!function_exists('invierte_date_time')) {
         $contenido = [];
         $base = 'col-md-2 border strong text-center';
         $contenido[] = d("#", 'col-md-1');
-        $contenido[] = d("Vendedor", 'col-md-3');
+        $contenido[] = d("Vendedor", 'col-md-2 strong text-center');
+        $contenido[] = d("Ventas en el tiempo", 'col-md-1 strong text-center');
         $contenido[] = d("Operaciones", $base);
         $contenido[] = d("Ventas efectivas", $base);
         $contenido[] = d("En proceso", $base);
@@ -1795,12 +1796,14 @@ if (!function_exists('invierte_date_time')) {
             $email = $row['email'];
             $link = path_enid('busqueda_usuario', $email);
             $nombre_completo = a_enid(format_nombre($row), $link);
-
+            $ha_vendido = $row['ha_vendido'];
+            $extra_ventas_en_tiempo = ($ha_vendido > 0) ? 'bg-primary' : 'bg-danger white';
             $contenido = [];
             $base = 'col-md-2 border text-center';
             $extra = ($efectivas < 1) ? 'bg-danger white' : '';
             $contenido[] = d($idusuario, 'col-md-1');
-            $contenido[] = d($nombre_completo, 'col-md-3 text-uppercase');
+            $contenido[] = d($nombre_completo, 'col-md-2 text-uppercase');
+            $contenido[] = d($ha_vendido, _text_('col-md-1 border text-center', $extra_ventas_en_tiempo));
             $contenido[] = d($total, $base);
             $contenido[] = d($efectivas, _text_($base, $extra));
             $contenido[] = d($en_proceso, $base);

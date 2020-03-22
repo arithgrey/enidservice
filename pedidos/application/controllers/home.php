@@ -490,6 +490,7 @@ class Home extends CI_Controller
         $recibo = $this->get_recibo($id_recibo, 1);
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+
         propietario(
             $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
             path_enid('_area_cliente'));
