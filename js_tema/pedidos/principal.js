@@ -533,6 +533,14 @@ let confirma_lugar_horario_entrega = () => {
     });
 
 };
+let confirma_cambio_domicilio = ($path) => {
+
+    let text = "¿DESEAS CAMBIAR EL DOMICILIO DE ENTREGA?";
+    show_confirm(text, '', "SI", function () {
+        redirect($path);
+    });
+
+};
 
 let confirma_envio_lista_negra = (id_usuario) => {
 

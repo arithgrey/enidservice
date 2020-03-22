@@ -267,7 +267,8 @@ class codigo_postal extends REST_Controller
                 "fecha_entrega" => $fecha_entrega,
                 "horario_entrega" => $horario_entrega,
                 "recibo" => $id_recibo,
-                "contra_entrega_domicilio" => 1
+                "contra_entrega_domicilio" => 1,
+                "tipo_entrega" => 2
             ];
             return $this->app->api("recibo/fecha_entrega/format/json/", $q, "json", "PUT");
         }
