@@ -18,6 +18,7 @@ let $modal_opciones_compra = $('#modal_opciones_compra');
 let $menu_recibo = $('.menu_recibo');
 let $repartidor = $('.repartidor');
 let $registro_articulo_interes = $('.registro_articulo_interes');
+let $id_usuario_referencia = $('.id_usuario_referencia');
 $(document).ready(() => {
 
     $editar_estado_compra.click(function () {
@@ -273,10 +274,17 @@ let next_status = () => {
 };
 let descontar_articulos_stock = () => {
 
+
     let id_servicio = get_parameter(".id_servicio");
     let stock = get_parameter(".articulos");
     let recibo = get_parameter(".recibo");
-    let data_send = $.param({"id_servicio": id_servicio, "stock": stock, "compra": 1, 'recibo': recibo});
+    let data_send = $.param({
+        "id_servicio": id_servicio,
+        "stock": stock,
+        "compra": 1,
+        'recibo': recibo,
+        'id_usuario_referencia': $id_usuario_referencia.val()
+    });
     let url = "../q/index.php/api/servicio/stock/format/json/";
     $modal_estado_venta.modal('hide');
     request_enid("PUT", data_send, url, response_articulos_stock);

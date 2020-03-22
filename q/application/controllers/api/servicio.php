@@ -1833,7 +1833,19 @@ class Servicio extends REST_Controller
         $this->serviciosmodel->set_compra_stock($stock, $id_servicio);
         $response = $this->gestion_stock($id_servicio, $stock);
         $this->anexa_costos_operativos($response, $param);
+        $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
+        if ($id_usuario_referencia > 0) {
+            $this->gamifica_ventas_vendedor($id_usuario_referencia);
+        }
+
         $this->response($response);
+
+    }
+
+    function gamifica_ventas_vendedor($id_usuario)
+    {
+        $q = ["id_usuario" => $id_usuario];
+        return $this->app->api("usuario/gamifica_ventas", $q, "json", "PUT");
 
     }
 

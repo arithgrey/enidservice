@@ -544,7 +544,8 @@ class actividad_web_model extends CI_Model
                 u.nombre,
                 u.email,
                 u.apellido_paterno,
-                u.apellido_materno 
+                u.apellido_materno,
+                u.ha_vendido
                 FROM usuario u 
                 INNER JOIN $tabla_comisionistas up 
                 ON up.idusuario =  u.idusuario
