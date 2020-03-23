@@ -30,6 +30,10 @@
     background: #ff7266;
     color: white;
 }
+.lista_negra{
+    background: #ce0b1d;
+    color: white;
+}
 
 .menu_recibo {
     z-index: 1000;

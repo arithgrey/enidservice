@@ -213,6 +213,26 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function lista_negra_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_recibo")) {
+
+            $id_recibo = $param['id_recibo'];
+            $response = $this->recibo_model->update(
+                [
+                    'status' => 19,
+                    'se_cancela' => 1,
+                ],
+                ["id_proyecto_persona_forma_pago" => $id_recibo]
+            );
+
+        }
+        $this->response($response);
+    }
+
     function registro_articulo_interes_PUT()
     {
 
@@ -885,8 +905,9 @@ class recibo extends REST_Controller
 
                 $response = $this->add_imgs_servicio($response);
                 $response = $this->add_comisionistas($response, $param);
+                $session = $this->app->session();
                 $response = render_resumen_pedidos($response,
-                    $this->get_estatus_enid_service($param), $param);
+                    $this->get_estatus_enid_service($param), $param, $session);
 
             }
         }

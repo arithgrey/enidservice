@@ -3367,11 +3367,23 @@ function es_administrador($data)
 
 }
 
-function es_orden_entregada($recibo, $data)
+function es_orden_entregada($recibo, $data = [])
 {
 
-    $status = pr($recibo, "status");
-    return in_array($status, $data['restricciones']['orden_entregada']);
+    $response = false;
+    if (es_data($recibo)) {
+        $status = pr($recibo, "status");
+        $response = in_array($status, $data['restricciones']['orden_entregada']);
+    } else {
+
+        /*Recibo es status*/
+        if ($recibo > 0) {
+            $response = in_array($recibo, $data['restricciones']['orden_entregada']);
+        }
+
+    }
+    return $response;
+
 
 }
 
@@ -3396,11 +3408,29 @@ function es_orden_cancelada($data)
 
         $es_lista_negra = es_data($data['es_lista_negra']);
         $fue_lista_negra = es_data($data['usuario_lista_negra']);
-        $response = ($status == 10 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
+        $response = ($status == 10 || $status == 19 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
+
+    } else {
+
+
+        if (array_key_exists('se_cancela', $data)) {
+
+            $cancela_cliente = prm_def($data, "cancela_cliente");
+            $se_cancela = prm_def($data, "se_cancela");
+            $status = prm_def($data, "status");
+            $response = ($status == 10 || $status == 19 || $cancela_cliente || $se_cancela);
+
+        }
 
     }
     return $response;
 
+}
+
+function es_orden_lista_negra($recibo)
+{
+
+    return (prm_def($recibo, 'status') == 19);
 }
 
 function es_contra_entrega_domicilio($recibo, $format_fecha = 0, $si_no = 0)
