@@ -664,7 +664,8 @@ class actividad_web_model extends CI_Model
                       LEFT OUTER JOIN $tabla_recibos 
                       r ON u.idusuario =  r.id_usuario_referencia
                       LEFT OUTER JOIN $tabla_recibos_proximos p 
-                      ON p.id_usuario_agenda = u.idusuario                       
+                      ON p.id_usuario_agenda = u.idusuario
+                      ORDER BY ha_vendido DESC                       
                       ";
         return $this->db->query($query_get)->result_array();
     }

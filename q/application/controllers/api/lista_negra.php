@@ -43,6 +43,7 @@ class lista_negra extends REST_Controller
             $response = $this->lista_negra_model->insert($params, 1);
             if ($response > 0) {
                 $this->usuario_lista_negra($id_usuario);
+                $response = $this->envia_lista_negra($param['id_recibo']);
             }
 
         }
@@ -90,6 +91,12 @@ class lista_negra extends REST_Controller
         $q["id_usuario"] = $id_usuario;
         $q["status"] = 3;
         return $this->app->api("usuario/status", $q, "json", "PUT");
+    }
+
+    function envia_lista_negra($id_recibo)
+    {
+        $q["id_recibo"] = $id_recibo;
+        return $this->app->api("recibo/lista_negra", $q, "json", "PUT");
     }
 
 

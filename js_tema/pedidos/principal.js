@@ -552,6 +552,7 @@ let confirma_cambio_domicilio = ($path) => {
 
 let confirma_envio_lista_negra = (id_usuario) => {
 
+
     let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
@@ -701,7 +702,8 @@ let agregar_lista_negra = (e) => {
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 
-        let data_send = $('.form_lista_negra').serialize();
+        let $recibo = $('.recibo').val();
+        let data_send = $('.form_lista_negra').serialize() + "&" + $.param({'id_recibo': $recibo});
         let url = "../q/index.php/api/lista_negra/index/format/json/";
         $('.cargando_modal').removeClass('d-none');
         $('.motivo').prop('disabled', 'disabled');

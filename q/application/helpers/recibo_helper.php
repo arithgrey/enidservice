@@ -515,7 +515,7 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function render_resumen_pedidos($recibos, $lista_estados, $param)
+    function render_resumen_pedidos($recibos, $lista_estados, $param, $data)
     {
 
         $perfil = $param['perfil'];
@@ -561,6 +561,7 @@ if (!function_exists('invierte_date_time')) {
         $transacciones = 0;
         $linea_en_proceso = [];
         $linea_cambio_estado = [];
+        $linea_cambio_lista_negra = [];
         foreach ($recibos as $row) {
             $transacciones++;
             $recibo = $row["recibo"];
@@ -570,9 +571,10 @@ if (!function_exists('invierte_date_time')) {
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
-            $es_orden_cancelada = ($row["se_cancela"] == 1 || $row["cancela_cliente"] == 1);
 
-            $estado_compra = $es_orden_cancelada ? "CANCELACIÓN" : 0;
+            $es_orden_cancelada = es_orden_cancelada($row);
+
+            $estado_compra = ($es_orden_cancelada) ? "CANCELACIÓN" : 0;
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
             $saldo_cubierto = $row['saldo_cubierto'];
             $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
@@ -587,12 +589,14 @@ if (!function_exists('invierte_date_time')) {
             $comision = _titulo(money($row['comision_venta']), 4);
             $verificado = ($se_pago > 0) ?
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
+            $es_lista_negra = es_orden_lista_negra($row);
             if ($perfil != 6) {
 
                 $nombre_usuario = format_nombre($usuario_venta);
                 $nombre_vendedor = ($es_administrador) ? _text_('vendidor por ', $nombre_usuario) : '';
 
-                $verificado = ($se_pago > 0) ? _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
+                $verificado = ($se_pago > 0) ?
+                    _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
 
             }
 
@@ -603,8 +607,11 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
-            $extra = (in_array($status, [9, 7, 11, 12])) ? " entregado" : "";
-            $extra = ($status == 10) ? " cancelado " : $extra;
+
+            $es_orden_entregada = es_orden_entregada($status, $data);
+            $extra = ($es_orden_entregada) ? " entregado" : "";
+            $extra = ($es_orden_cancelada) ? " cancelado white" : $extra;
+            $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
             if ($se_pago > 0) {
                 $extra = 'se_pago white';
             } else if ($saldo_cubierto > 0) {
@@ -652,7 +659,16 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-                $linea_cambio_estado[] = $line;
+
+                if ($es_lista_negra) {
+
+                    $linea_cambio_lista_negra[] = $line;
+
+                } else {
+
+                    $linea_cambio_estado[] = $line;
+                }
+
             }
 
         }
@@ -671,6 +687,7 @@ if (!function_exists('invierte_date_time')) {
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
+        $listado[] = append($linea_cambio_lista_negra);
         $listado[] = append($linea_cambio_estado);
 
         $tabla = append($listado);
