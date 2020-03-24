@@ -589,6 +589,7 @@ if (!function_exists('invierte_date_time')) {
             $comision = _titulo(money($row['comision_venta']), 4);
             $verificado = ($se_pago > 0) ?
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
+
             $es_lista_negra = es_orden_lista_negra($row);
             if ($perfil != 6) {
 

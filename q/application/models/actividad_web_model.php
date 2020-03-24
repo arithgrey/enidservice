@@ -528,7 +528,7 @@ class actividad_web_model extends CI_Model
 
     function comisionistas()
     {
-        return "SELECT idusuario FROM usuario_perfil WHERE idperfil IN(3,4,6)";
+        return "SELECT idusuario FROM usuario_perfil WHERE idperfil IN(3,4,6,21)";
     }
 
     function repartidores()
