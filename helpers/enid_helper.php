@@ -2227,7 +2227,7 @@ function key_exists_bi($data, $k, $sk, $def = "")
 function pr($data, $index, $def = false)
 {
 
-    return (is_array($data) && count($data) > 0 && array_key_exists($index,
+    return (is_array($data) && count($data) > 0 && array_key_exists(0, $data) && array_key_exists($index,
             $data[0])) ? $data[0][$index] : $def;
 }
 
