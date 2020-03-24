@@ -1258,7 +1258,7 @@ class Recibo_model extends CI_Model
 
     }
 
-    function franja_horaria($franja_horaria, $id_usuario, $id_perfil,$id_empresa)
+    function franja_horaria($franja_horaria, $id_usuario, $id_perfil, $id_empresa)
     {
 
         $casos = [
@@ -1285,6 +1285,34 @@ class Recibo_model extends CI_Model
                         AND ' . $extra_usuario . ' ';
 
         return $this->db->query($query_get)->result_array();
+    }
+
+    function ordenes_por_telefono($telefono)
+    {
+
+
+        $query_get = "SELECT  id_proyecto_persona_forma_pago 
+                        FROM proyecto_persona_forma_pago 
+                        WHERE  id_usuario  
+                        IN( SELECT idusuario FROM usuario WHERE tel_contacto  = '" . $telefono . "' )";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+    function boletina_ordenes($array_ids)
+    {
+
+        $ids = get_keys($array_ids);
+        $query_update = "UPDATE 
+                            proyecto_persona_forma_pago 
+                          SET                              
+                            status          =  19 ,                           
+                            se_cancela      =  1                                           
+                          WHERE 
+                            id_proyecto_persona_forma_pago IN ($ids) 
+                          LIMIT 100";
+        return $this->db->query($query_update);
     }
 
 }   

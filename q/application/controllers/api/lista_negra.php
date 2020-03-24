@@ -13,6 +13,19 @@ class lista_negra extends REST_Controller
         $this->id_usuario = $this->app->get_session("idusuario");
     }
 
+    function desbloqueo_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_usuario,recibo")) {
+
+            $in = ['id_usuario' => $param['id_usuario']];
+            $response = $this->lista_negra_model->delete($in);
+            $response = $this->venta_en_curso($param['recibo']);
+        }
+        $this->response($response);
+    }
+
     function index_POST()
     {
 
@@ -43,7 +56,7 @@ class lista_negra extends REST_Controller
             $response = $this->lista_negra_model->insert($params, 1);
             if ($response > 0) {
                 $this->usuario_lista_negra($id_usuario);
-                $response = $this->envia_lista_negra($param['id_recibo']);
+                $response = $this->envia_lista_negra($param);
             }
 
         }
@@ -93,10 +106,23 @@ class lista_negra extends REST_Controller
         return $this->app->api("usuario/status", $q, "json", "PUT");
     }
 
-    function envia_lista_negra($id_recibo)
+    function envia_lista_negra($param)
     {
-        $q["id_recibo"] = $id_recibo;
+
+        $q["id_recibo"] = prm_def($param, 'id_recibo');
+        $q["telefono"] = prm_def($param, 'telefono');
         return $this->app->api("recibo/lista_negra", $q, "json", "PUT");
+    }
+
+    function venta_en_curso($id_recibo)
+    {
+
+        $q = [
+            'recibo' => $id_recibo,
+            'es_proceso_compra' => 1,
+            'status' => 6,
+        ];
+        return $this->app->api("recibo/status", $q, "json", "PUT");
     }
 
 

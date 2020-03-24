@@ -3430,7 +3430,8 @@ function es_orden_cancelada($data)
 function es_orden_lista_negra($recibo)
 {
 
-    return (prm_def($recibo, 'status') == 19);
+    $es_lista_negra = (es_data($recibo) && pr($recibo, 'status') == 19);
+    return (prm_def($recibo, 'status') == 19 || $es_lista_negra);
 }
 
 function es_contra_entrega_domicilio($recibo, $format_fecha = 0, $si_no = 0)

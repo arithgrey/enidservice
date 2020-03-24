@@ -19,6 +19,8 @@ let $menu_recibo = $('.menu_recibo');
 let $repartidor = $('.repartidor');
 let $registro_articulo_interes = $('.registro_articulo_interes');
 let $id_usuario_referencia = $('.id_usuario_referencia');
+let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
+let $es_lista_negra = $('.es_lista_negra');
 $(document).ready(() => {
 
     $editar_estado_compra.click(function () {
@@ -561,7 +563,21 @@ let confirma_envio_lista_negra = (id_usuario) => {
     });
 
 };
+let confirma_desbloqueo_lista_negra = (id_usuario) => {
 
+    let text_confirmacion = '¿Realmente deseas desbloquear a este usuario de la lista negra?';
+    show_confirm(text_confirmacion, '', "SI", function () {
+        let url = "../q/index.php/api/lista_negra/desbloqueo/format/json/";
+        let $recibo = $('.recibo').val();
+        let data_send = {'v': 1, 'id_usuario': id_usuario, 'recibo': $recibo};
+        request_enid("PUT", data_send, url, response_desbloqueo);
+    });
+
+};
+let response_desbloqueo = (data) => {
+
+    redirect('');
+};
 let confirma_intento_recuperacion = (id_usuario, recibo, dias) => {
 
 
@@ -702,8 +718,13 @@ let agregar_lista_negra = (e) => {
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 
+        let $telefono = $telefono_contacto_recibo.val();
+
         let $recibo = $('.recibo').val();
-        let data_send = $('.form_lista_negra').serialize() + "&" + $.param({'id_recibo': $recibo});
+        let data_send = $('.form_lista_negra').serialize() + "&" + $.param({
+            'id_recibo': $recibo,
+            'telefono': $telefono
+        });
         let url = "../q/index.php/api/lista_negra/index/format/json/";
         $('.cargando_modal').removeClass('d-none');
         $('.motivo').prop('disabled', 'disabled');
@@ -957,8 +978,12 @@ let response_nuevo_repartidor = function (data) {
 };
 let valida_registro_articulo_interes = () => {
 
+    debugger;
     let $se_registra_articulo_interes = $registro_articulo_interes.val();
-    if (parseInt($se_registra_articulo_interes) < 1) {
+    let $en_lista_negra = $es_lista_negra.val();
+
+    let no_boletinado = ($en_lista_negra.length < 1 || parseInt($en_lista_negra) < 1);
+    if (parseInt($se_registra_articulo_interes) < 1 && no_boletinado) {
 
         let $recibo = $('.recibo').val();
         let $id_usuario_compra = $('.id_usuario_compra').val();
