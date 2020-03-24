@@ -1207,6 +1207,17 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
+        $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
+        $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
+        $r[] = hiddens(
+            [
+                "name" => "perfil",
+                "class" => "perfil_consulta",
+                "value" => $data["id_perfil"],
+            ]
+        );
+
+
         $select_comisionistas = create_select(
             $data['comisionistas'], 'id_usuario_referencia', 'comisionista form-control',
             'comisionista', 'nombre_usuario', 'idusuario', 0, 1, 0, '-');
@@ -1253,14 +1264,6 @@ if (!function_exists('invierte_date_time')) {
                     "value" => $param["type"],
                 ]
             );
-            $r[] = hiddens(
-                [
-                    "name" => "perfil",
-                    "class" => "perfil_consulta",
-                    "value" => $data["id_perfil"],
-                ]
-            );
-
 
         } else {
 
@@ -1282,6 +1285,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
+
+
         return append($response);
 
 
@@ -2774,6 +2779,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $num = $data['num_compras'];
+        $ids_compras = $data['ids_compras'];
+
         $solicitudes_pasadas_usuario = $data['solicitudes_pasadas_usuario'];
         $ext = "COMPRAS A LO LARGO DEL TIEMPO ";
         $base = _text_(_between, 'mt-5');
@@ -2782,6 +2789,12 @@ if (!function_exists('invierte_date_time')) {
         $starts = ($num > 0) ? label("★★★★★", 'estrella') : "";
 
         $ext = " ORDENES DE COMPRA QUE HA REALIZADO ESTE USUARIO ";
+        $link = path_enid('busqueda_pedidos_usuarios', $ids_compras);
+        $solicitudes_pasadas_usuario = a_enid($solicitudes_pasadas_usuario,
+            [
+                'href' => $link, 'class' => 'white'
+            ]
+        );
         $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'fp9', $total);
 
         $response[] = d(_titulo('calificación', 2));
@@ -2912,9 +2925,8 @@ if (!function_exists('invierte_date_time')) {
         if (!$es_vendedor) {
 
 
-
             $id_usuario = pr($recibo, "id_usuario");
-            if (!$es_orden_lista_negra){
+            if (!$es_orden_lista_negra) {
 
                 $response[] = d(
                     a_enid("LISTA NEGRA",
@@ -2924,7 +2936,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     )
                 );
-            }else{
+            } else {
                 $response[] = d(
                     a_enid("SACAR DE LA LISTA NEGRA",
                         [

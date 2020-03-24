@@ -854,6 +854,82 @@ class recibo extends REST_Controller
         return $response;
     }
 
+    function parametros_busqueda($tipo)
+    {
+
+        $params = [
+            "p.id_proyecto_persona_forma_pago recibo ",
+            "p.saldo_cubierto",
+            "p.fecha_registro",
+            "p.monto_a_pagar",
+            "p.num_ciclos_contratados",
+            "p.cancela_cliente",
+            "p.se_cancela",
+            "p.status",
+            "p.fecha_contra_entrega",
+            "p.tipo_entrega",
+            "p.fecha_entrega",
+            "p.costo_envio_cliente",
+            "p.id_servicio",
+            "p.fecha_cancelacion",
+            "p.fecha_pago",
+            "p.flag_pago_comision",
+            "p.comision_venta",
+            "p.id_usuario_referencia",
+            "p.intento_reventa",
+            'p.intento_recuperacion'
+
+        ];
+        $params_busqueda_recibo = [
+            "id_proyecto_persona_forma_pago recibo",
+            "saldo_cubierto",
+            "fecha_registro",
+            "monto_a_pagar",
+            "num_ciclos_contratados",
+            "cancela_cliente",
+            "se_cancela",
+            "status",
+            "fecha_contra_entrega",
+            "tipo_entrega",
+            "fecha_entrega",
+            "costo_envio_cliente",
+            "id_servicio",
+            "fecha_cancelacion",
+            "fecha_pago",
+            "flag_pago_comision",
+            "comision_venta",
+            "id_usuario_referencia",
+            "intento_reventa",
+            'intento_recuperacion'
+        ];
+
+        $parametros = [$params, $params_busqueda_recibo];
+        return $parametros[$tipo];
+    }
+
+    private function busqueda_pedidos($param)
+    {
+        $response = [];
+        $ids = prm_def($param, 'ids');
+        if ($param["recibo"] > 0) {
+            /*Busqueda por número recibo*/
+            $params = $this->parametros_busqueda(1);
+            $response = $this->recibo_model->q_get($params, $param["recibo"]);
+
+        } elseif ($ids != 0) {
+
+            $params = $this->parametros_busqueda(0);
+
+            $response = $this->recibo_model->ids_usuarios($params, $ids);
+
+        } else {
+
+            $params = $this->parametros_busqueda(0);
+            $response = $this->recibo_model->get_q($params, $param);
+        }
+        return $response;
+    }
+
     function pedidos_GET()
     {
 
@@ -868,62 +944,8 @@ class recibo extends REST_Controller
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
 
-            $params = [
-                "p.id_proyecto_persona_forma_pago recibo ",
-                "p.saldo_cubierto",
-                "p.fecha_registro",
-                "p.monto_a_pagar",
-                "p.num_ciclos_contratados",
-                "p.cancela_cliente",
-                "p.se_cancela",
-                "p.status",
-                "p.fecha_contra_entrega",
-                "p.tipo_entrega",
-                "p.fecha_entrega",
-                "p.costo_envio_cliente",
-                "p.id_servicio",
-                "p.fecha_cancelacion",
-                "p.fecha_pago",
-                "p.flag_pago_comision",
-                "p.comision_venta",
-                "p.id_usuario_referencia",
-                "p.intento_reventa",
-                'p.intento_recuperacion'
+            $response = $this->busqueda_pedidos($param);
 
-            ];
-            if ($param["recibo"] > 0) {
-                /*Busqueda por número recibo*/
-                $params = [
-                    "id_proyecto_persona_forma_pago recibo",
-                    "saldo_cubierto",
-                    "fecha_registro",
-                    "monto_a_pagar",
-                    "num_ciclos_contratados",
-                    "cancela_cliente",
-                    "se_cancela",
-                    "status",
-                    "fecha_contra_entrega",
-                    "tipo_entrega",
-                    "fecha_entrega",
-                    "costo_envio_cliente",
-                    "id_servicio",
-                    "fecha_cancelacion",
-                    "fecha_pago",
-                    "flag_pago_comision",
-                    "comision_venta",
-                    "id_usuario_referencia",
-                    "intento_reventa",
-                    'intento_recuperacion'
-                ];
-
-
-                $response = $this->recibo_model->q_get($params, $param["recibo"]);
-
-            } else {
-
-
-                $response = $this->recibo_model->get_q($params, $param);
-            }
             if ($param["v"] == 1) {
 
 
@@ -1327,7 +1349,11 @@ class recibo extends REST_Controller
                         $lista[] = $row['idusuario'];
                     }
                     $ids = implode(",", $lista);
-                    $response = $this->recibo_model->get_total_compras_usuario($ids);
+                    $total = $this->recibo_model->get_total_compras_usuario($ids);
+                    $response = [
+                        'ids' => $ids,
+                        'total' => $total
+                    ];
                 }
             }
         }

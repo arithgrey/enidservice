@@ -183,7 +183,6 @@ class Home extends CI_Controller
     private function domicilios($param, $data)
     {
 
-
         $id_recibo = pr($data['recibo'], 'id_proyecto_persona_forma_pago');
         $domicilio_entrega = $this->get_domicilio_recibo($id_recibo);
         $punto_entrega = $this->get_punto_encuentro($id_recibo);
@@ -542,7 +541,9 @@ class Home extends CI_Controller
         $tipo_tag_arqquetipo = ($es_administrador) ? $this->get_tipo_tag_arqquetipo() : [];
         $tag_arquetipo = ($es_administrador) ? $this->tag_arquetipo($id_usuario) : [];
         $servicio = $this->app->servicio(pr($recibo, "id_servicio"));
-        $resumen_compras = $this->get_num_compras($id_usuario);
+        $compras_en_tiempo = $this->get_num_compras($id_usuario);
+        $ids_compras = prm_def($compras_en_tiempo, 'ids');
+        $resumen_compras = prm_def($compras_en_tiempo, 'total');
         $num_compras = prm_def($resumen_compras, 'compras');
         $solicitudes = prm_def($resumen_compras, 'solicitudes');
 
@@ -583,7 +584,8 @@ class Home extends CI_Controller
             "repartidor" => $repartidor,
             "usuario_lista_negra" => $usuario_lista_negra,
             "id_usuario_referencia" => $id_usuario_referencia,
-            "solicitudes_pasadas_usuario" => $solicitudes
+            "solicitudes_pasadas_usuario" => $solicitudes,
+            "ids_compras" => $ids_compras
         ];
 
         $this->app->pagina($data, render_pendidos($data), 1);
