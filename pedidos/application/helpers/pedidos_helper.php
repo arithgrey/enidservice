@@ -2722,13 +2722,15 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
 
         $id_usuario = pr($recibo, "id_usuario");
+        $telefonono = '';
         foreach ($usuario as $row) {
 
             $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
 
 
+            $telefonono = $row["tel_contacto"];
             $r[] = d(format_link_nombre($data, $row));
-            $r[] = d(phoneFormat($row["tel_contacto"]), 'mt-3');
+            $r[] = d(phoneFormat($telefonono), 'mt-3');
 
 
             if ($row["sexo"] != 2) {
@@ -2753,6 +2755,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = $cliente;
         $response[] = d($r, _12p);
+        $response[] = hiddens(['class' => 'telefono_contacto_recibo', 'value' => $telefonono]);
 
 
         return bloque($response);

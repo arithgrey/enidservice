@@ -19,6 +19,7 @@ let $menu_recibo = $('.menu_recibo');
 let $repartidor = $('.repartidor');
 let $registro_articulo_interes = $('.registro_articulo_interes');
 let $id_usuario_referencia = $('.id_usuario_referencia');
+let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
 $(document).ready(() => {
 
     $editar_estado_compra.click(function () {
@@ -702,8 +703,13 @@ let agregar_lista_negra = (e) => {
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 
+        let $telefono = $telefono_contacto_recibo.val();
+
         let $recibo = $('.recibo').val();
-        let data_send = $('.form_lista_negra').serialize() + "&" + $.param({'id_recibo': $recibo});
+        let data_send = $('.form_lista_negra').serialize() + "&" + $.param({
+            'id_recibo': $recibo,
+            'telefono': $telefono
+        });
         let url = "../q/index.php/api/lista_negra/index/format/json/";
         $('.cargando_modal').removeClass('d-none');
         $('.motivo').prop('disabled', 'disabled');

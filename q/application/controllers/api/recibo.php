@@ -229,8 +229,32 @@ class recibo extends REST_Controller
                 ["id_proyecto_persona_forma_pago" => $id_recibo]
             );
 
+
+            $response = $this->boletina_compras($param);
+
+
         }
         $this->response($response);
+    }
+
+    function boletina_compras($param)
+    {
+        $telefono = prm_def($param, 'telefono');
+        $response = '';
+        if ($telefono > 0) {
+
+            $response = $this->recibo_model->ordenes_por_telefono($telefono);
+            $ordenes = [];
+            foreach ($response as $row) {
+                $ordenes[] = $row['id_proyecto_persona_forma_pago'];
+            }
+
+            if (es_data($ordenes)) {
+
+                $response = $this->recibo_model->boletina_ordenes($ordenes);
+            }
+        }
+        return $response;
     }
 
     function registro_articulo_interes_PUT()
