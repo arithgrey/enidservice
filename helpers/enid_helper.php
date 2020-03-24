@@ -1956,6 +1956,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 
     $path = "";
     $base_url = [
+        "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
         "url_home" => "../reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
         "forma_pago_search" => "forma_pago/?recibo=",

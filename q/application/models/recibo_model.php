@@ -120,6 +120,15 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
+    function ids_usuarios($params, $ids)
+    {
+        $f = get_keys($params);
+
+        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p WHERE id_usuario IN(" . $ids . ")";
+        return $this->db->query($query_get)->result_array();
+
+    }
+
     function get_q($params, $param)
     {
 
@@ -129,6 +138,7 @@ class Recibo_model extends CI_Model
         $status_venta = $param["status_venta"];
         $id_usuario_venta = $param['id_usuario'];
         $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p";
+
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
@@ -154,8 +164,8 @@ class Recibo_model extends CI_Model
     private function get_servicio($param)
     {
 
-        $response = (array_key_exists("servicio", $param) && $param["servicio"] > 0) ? " AND  id_servicio = '" . $param["servicio"] . "' " : "";
-        return $response;
+        return (array_key_exists("servicio", $param) && $param["servicio"] > 0) ? " AND  id_servicio = '" . $param["servicio"] . "' " : "";
+
     }
 
     private function get_usuario($param)

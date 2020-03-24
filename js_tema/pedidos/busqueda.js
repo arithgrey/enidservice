@@ -1,7 +1,12 @@
 "use strict";
 let $form_busqueda = $(".form_busqueda_pedidos");
+let $ids = $(".ids");
+let $usurios = $(".usuarios");
 $(document).ready(() => {
 
+    $('footer').ready(function () {
+        valida_busqueda_inicial();
+    });
     $form_busqueda.submit(busqueda_pedidos);
 
 });
@@ -28,5 +33,16 @@ let response_pedidos = function (data) {
         $(".numero_recibo").val(recibo);
         $(".form_search").submit();
     });
+
+};
+let valida_busqueda_inicial = function () {
+
+
+    if (parseInt($ids.val()) > 0 && $usurios.val().length > 0) {
+
+
+        $form_busqueda.submit();
+    }
+
 
 };
