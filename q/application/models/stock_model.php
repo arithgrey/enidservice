@@ -117,7 +117,8 @@ class stock_model extends CI_Model
                     unidades > 0 
                     AND es_consumo_negativo < 1 
                     AND (unidades > consumo)
-                    ORDER BY id_servicio ASC";
+                    ORDER BY fecha_registro ASCRastrear pedido
+";
 
         return $this->db->query($query)->result_array() ;
     }

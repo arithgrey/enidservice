@@ -104,19 +104,22 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens_detalle($r);
         $tipos_entregas = $data["tipos_entregas"];
 
-        $response[] = opciones_compra($data, $domicilio, $r, $id_recibo, $usuario, $es_vendedor, $tipos_entregas);
+        $response[] = opciones_compra(
+            $data, $r, $id_recibo, $es_vendedor, $tipos_entregas, $es_venta_cancelada);
 
         $response[] = hiddens(['class' => 'id_usuario_referencia', 'value' => $data['id_usuario_referencia']]);
+
+        $response[] = hiddens(['class' => 'es_lista_negra', 'value' => es_lista_negra($data)]);
 
         return d($response, _10auto);
 
     }
 
-    function opciones_compra($data, $domicilio, $recibo, $id_recibo, $usuario, $es_vendedor, $tipos_entregas)
+    function opciones_compra($data, $recibo, $id_recibo, $es_vendedor, $tipos_entregas, $es_venta_cancelada)
     {
 
         $contenido[] = d(_titulo('¿Hay algo que hacer?'), 'mb-5  text-center');
-        $x[] = tracker($id_recibo);
+        $x[] = tracker($id_recibo, $es_venta_cancelada);
         $x[] = link_cambio_estado_venta();
 
         $x = link_cambio_punto_encuentro($data, $x, $recibo);
@@ -1018,18 +1021,24 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function tracker($id_recibo)
+    function tracker($id_recibo, $es_venta_cancelada)
     {
-        $pedido = text_icon(_share_icon, 'Rastrear pedido', [], 0);
-        $link = a_enid(
-            $pedido,
-            [
-                'href' => path_enid('pedido_seguimiento', $id_recibo),
-                'target' => '_black',
-                'class' => 'text-uppercase black'
-            ]
-        );
-        return d($link);
+        $response = '';
+        if (!$es_venta_cancelada) {
+
+            $pedido = text_icon(_share_icon, 'Rastrear pedido', [], 0);
+            $link = a_enid(
+                $pedido,
+                [
+                    'href' => path_enid('pedido_seguimiento', $id_recibo),
+                    'target' => '_black',
+                    'class' => 'text-uppercase black'
+                ]
+            );
+            $response = d($link);
+        }
+        return $response;
+
     }
 
     function enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas)
@@ -2898,16 +2907,35 @@ if (!function_exists('invierte_date_time')) {
     function lista_negra($response, $recibo, $es_vendedor)
     {
 
-        if (!$es_vendedor) {
-            $id_usuario = pr($recibo, "id_usuario");
-            $response[] = d(
-                a_enid("LISTA NEGRA",
-                    [
 
-                        "onclick" => "confirma_envio_lista_negra({$id_usuario})",
-                    ]
-                )
-            );
+        $es_orden_lista_negra = es_orden_lista_negra($recibo);
+        if (!$es_vendedor) {
+
+
+
+            $id_usuario = pr($recibo, "id_usuario");
+            if (!$es_orden_lista_negra){
+
+                $response[] = d(
+                    a_enid("LISTA NEGRA",
+                        [
+
+                            "onclick" => "confirma_envio_lista_negra({$id_usuario})",
+                        ]
+                    )
+                );
+            }else{
+                $response[] = d(
+                    a_enid("SACAR DE LA LISTA NEGRA",
+                        [
+
+                            "onclick" => "confirma_desbloqueo_lista_negra({$id_usuario})",
+                        ]
+                    )
+                );
+            }
+
+
         }
         return $response;
     }
