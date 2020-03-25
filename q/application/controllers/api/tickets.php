@@ -335,6 +335,7 @@ class Tickets extends REST_Controller
                     break;
                 case 3:
 
+                    $param['id_usuario'] = $this->id_usuario;
                     $tickets = $this->tickets_model->get_tickets($param);
                     $comparativa = $this->comparativa();
                     $response = format_tablero($tickets, $comparativa);
