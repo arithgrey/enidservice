@@ -796,10 +796,11 @@ if (!function_exists('invierte_date_time')) {
     function filtra_tarea($param)
     {
 
-        $base = ' t.status != 4 ';
+        $id_usuario = $param['id_usuario'];
+        $base = " t.status != 4 AND id_usuario = $id_usuario ";
         $busqueda = $param['keyword'];
-        $keyword = _text('AND t.asunto LIKE ', '"%', $busqueda, '%"');
-        $filtro = (strlen($busqueda) > 0) ? _text($base, $keyword) : $base;
+        $keyword = _text_('AND t.asunto LIKE ', '"%', $busqueda, '%"');
+        $filtro = (strlen($busqueda) > 0) ? _text_($base, $keyword) : $base;
         return $filtro;
 
     }
