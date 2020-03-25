@@ -1751,10 +1751,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d("#", 'col-md-1');
         $contenido[] = d("Vendedor", 'col-md-2 strong text-center');
         $contenido[] = d("Ventas en el tiempo", 'col-md-1 strong text-center');
+        $contenido[] = d("Dias desde la última venta", 'col-md-1 strong text-center');
         $contenido[] = d("Operaciones", $base);
         $contenido[] = d("Ventas efectivas", $base);
         $contenido[] = d("En proceso", $base);
-        $contenido[] = d("Ventas caidas", $base);
+        $contenido[] = d("Ventas caidas", 'col-md-1 border text-center');
 
         $response[] = d($contenido, 'row border');
 
@@ -1772,13 +1773,13 @@ if (!function_exists('invierte_date_time')) {
             $idusuario = $row['idusuario'];
             $ids_usuarios[] = $idusuario;
             $id_usuario_referencia = $row['id_usuario_referencia'];
-
             if ($id_usuario_referencia > 0) {
                 $ids_usuarios_actividad[] = $id_usuario_referencia;
                 if ($row['efectivas'] > 0) {
                     $ids_usuarios_actividad_venta[] = $id_usuario_referencia;
                 }
             }
+
             $actividad = ($id_usuario_referencia > 0);
             $total = ($actividad) ? $row['total'] : 0;
             $total_operaciones = ($total_operaciones + $total);
@@ -1792,11 +1793,18 @@ if (!function_exists('invierte_date_time')) {
             $canceladas = ($actividad) ? $row['canceladas'] : 0;
             $total_canceladas = ($total_canceladas + $canceladas);
 
-
             $email = $row['email'];
             $link = path_enid('busqueda_usuario', $email);
             $nombre_completo = a_enid(format_nombre($row), $link);
             $ha_vendido = $row['ha_vendido'];
+            $fecha_ultima_venta = $row['fecha_ultima_venta'];
+
+            $fecha = horario_enid();
+            $hoy = $fecha->format('Y-m-d');
+            $dias = date_difference($hoy, $fecha_ultima_venta);
+
+            $extra_ventas_dias = ($dias > 3 || !$ha_vendido) ? 'bg-danger white' : 'bg-primary white ';
+
             $extra_ventas_en_tiempo = ($ha_vendido > 0) ? 'bg-primary' : 'bg-danger white';
             $contenido = [];
             $base = 'col-md-2 border text-center';
@@ -1804,10 +1812,11 @@ if (!function_exists('invierte_date_time')) {
             $contenido[] = d($idusuario, 'col-md-1');
             $contenido[] = d($nombre_completo, 'col-md-2 text-uppercase');
             $contenido[] = d($ha_vendido, _text_('col-md-1 border text-center', $extra_ventas_en_tiempo));
+            $contenido[] = d($dias, _text_('col-md-1 border text-center', $extra_ventas_dias));
             $contenido[] = d($total, $base);
             $contenido[] = d($efectivas, _text_($base, $extra));
             $contenido[] = d($en_proceso, $base);
-            $contenido[] = d($canceladas, $base);
+            $contenido[] = d($canceladas, 'col-md-1 border text-center');
 
             $response[] = d($contenido, 'row border');
             $a++;
