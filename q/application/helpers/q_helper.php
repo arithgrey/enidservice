@@ -1492,7 +1492,7 @@ if (!function_exists('invierte_date_time')) {
             $direccion["html"],
             $preguntas["html"],
             $respuestas["html"],
-            d($compras_sin_cierre["html"], "top_20"),
+            d($compras_sin_cierre["html"], "mt-5"),
             $menu_ventas_semana
         ];
 
@@ -1676,9 +1676,9 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $deuda["flag"];
         $lista[] = $deuda["html"];
 
-        $num_telefonico = add_numero_telefonico($num_telefonico);
-        $f = $f + $num_telefonico["flag"];
-        $lista[] = $num_telefonico["html"];
+//        $num_telefonico = add_numero_telefonico($num_telefonico);
+//        $f = $f + $num_telefonico["flag"];
+//        $lista[] = $num_telefonico["html"];
 
 
         $new_flag = "";
@@ -1826,11 +1826,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido = [];
         $base = 'col-md-2 border text-center';
 
-        $contenido[] = d(_titulo('Totales', 2), 'col-md-4');
+        $contenido[] = d(_titulo('Totales', 2), 'col-md-5');
         $contenido[] = d($total_operaciones, $base);
         $contenido[] = d($total_ventas, $base);
         $contenido[] = d($total_proceso, $base);
-        $contenido[] = d($total_canceladas, $base);
+        $contenido[] = d($total_canceladas, "col-md-1 border text-center");
         $totales = d($contenido, 'row');
 
 
@@ -2015,7 +2015,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $lista[] = menu_ventas_semana($data);
+//        $lista[] = menu_ventas_semana($data);
 
         return [
             "num_tareas_pendientes_text" => $f,

@@ -94,7 +94,7 @@ class Costo_operacion_model extends CI_Model
                         AND cancela_cliente < 1
                         AND
                         id_proyecto_persona_forma_pago 
-                        NOT IN (SELECT id_recibo from costo_operacion)                        
+                        NOT IN (SELECT id_recibo FROM costo_operacion WHERE id_tipo_costo = 12)                        
                         AND 
                         id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)                    
                         ORDER BY  id_proyecto_persona_forma_pago DESC LIMIT 5 ";
