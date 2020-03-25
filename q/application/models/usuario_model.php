@@ -569,9 +569,15 @@ class usuario_model extends CI_Model
         $query_create = "SELECT idusuario FROM usuario " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
         return $this->db->query($query_create)->result_array();
     }
-    function gamificacion_ventas($id_usuario){
 
-        $query =  "UPDATE usuario SET ha_vendido =  ha_vendido + 1 WHERE idusuario = $id_usuario LIMIT 1";
+    function gamificacion_ventas($id_usuario)
+    {
+
+        $query = "UPDATE usuario 
+                  SET 
+                  fecha_ultima_venta = CURRENT_TIMESTAMP () ,
+                    ha_vendido =  ha_vendido + 1 
+                    WHERE idusuario = $id_usuario LIMIT 1";
         return $this->db->query($query);
 
     }
