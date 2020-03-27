@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function formulario_primer_registro_punto_encuentro(
-        $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente)
+        $data, $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente)
     {
 
         $extra = [
@@ -99,7 +99,7 @@ if (!function_exists('invierte_date_time')) {
             ]),
         ];
 
-        return frm_punto_encuentro($extra, $es_cliente);
+        return frm_punto_encuentro($data, $extra, $es_cliente);
 
     }
 
@@ -128,14 +128,31 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_punto_encuentro($extra, $es_cliente)
+    function frm_punto_encuentro($data, $extra, $es_cliente)
     {
+        $servicio = prm_def($data, 'data_servicio');
         $horarios = lista_horarios();
+
+
+        $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
+        $fecha_disponible = pr($servicio, 'fecha_disponible');
+        $fecha_disponible_stock = new DateTime($fecha_disponible);
+        $fecha = horario_enid();
+        $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
+
+
         $lista_horarios = $horarios["select"];
         $nuevo_dia = $horarios["nuevo_dia"];
         $minimo = date_format(horario_enid(), 'Y-m-d');
         $maximo = add_date($minimo, 4);
         $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
+
+
+        if ($es_proxima_fecha && $muestra_fecha_disponible > 0 ) {
+
+            $minimo = date_format($fecha_disponible_stock, 'Y-m-d');
+            $maximo = add_date($minimo, 4);
+        }
 
         $form[] = form_open("", ["class" => "form_punto_encuentro"]);
         $form[] = append($extra);
@@ -154,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
                 "minlength" => 3,
                 "required" => true,
                 'onkeyup' => "this.value = this.value.toUpperCase();"
-            ],_text_nombre
+            ], _text_nombre
         );
 
 
@@ -212,6 +229,7 @@ if (!function_exists('invierte_date_time')) {
 
         $titulo = ($es_cliente) ? _text_horario_entrega : _text_horario_entrega_vendedor;
         $sec[] = d(_titulo($titulo), 'col-lg-12 mb-5 p-md-0');
+
 
         $a = input_frm("col-lg-6 mt-5 p-md-0", "FECHA",
             [
@@ -413,14 +431,14 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session < 1) {
 
             $z[] = formulario_primer_registro_punto_encuentro(
-                $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente);
+                $data, $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente);
 
         } else {
 
 
             if (!$es_cliente) {
 
-                $z[] = formulario_primer_registro_punto_encuentro(
+                $z[] = formulario_primer_registro_punto_encuentro($data,
                     $num_ciclos, $carro_compras, $id_carro_compras, $es_cliente);
 
             } else {

@@ -978,7 +978,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen[] = d(pr($inf, "nombre_receptor"));
         $resumen[] = d(pr($inf, "telefono_receptor"));
 
-        return d(append($resumen), "informacion_resumen_envio");
+        return d($resumen, "informacion_resumen_envio");
 
     }
 

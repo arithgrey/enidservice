@@ -62,6 +62,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = _titulo("dirección de envío");
         $r[] = get_format_direccion_envio_pedido(
+            $data,
             $session,
             $nombre_receptor,
             $telefono_receptor,
@@ -217,6 +218,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function get_format_direccion_envio_pedido(
+        $data,
         $session,
         $nombre_receptor,
         $telefono_receptor,
@@ -238,7 +240,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $base = 'col-lg-6 mt-5';
-        $r[] = indicaciones_horario_entrega_domicilio($session);
+        $r[] = indicaciones_horario_entrega_domicilio($session, $data);
         $r[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
 
         $r[] = input_frm(
@@ -455,20 +457,17 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function indicaciones_horario_entrega_domicilio($data)
+    function indicaciones_horario_entrega_domicilio($session, $data)
     {
-        $es_administrador_vendedor = es_administrador_o_vendedor($data);
+        $es_administrador_vendedor = es_administrador_o_vendedor($session);
         $response = [];
         $asignacion_horario = 0;
         if ($es_administrador_vendedor) {
 
             $horarios = lista_horarios();
             $lista_horarios = $horarios["select"];
-            $nuevo_dia = $horarios["nuevo_dia"];
-            $minimo = date_format(horario_enid(), 'Y-m-d');
-            $maximo = add_date($minimo, 4);
-            $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
 
+            $min_max_disponibilidad = min_max_disponibilidad($data);
             $text_horarios = flex('hora de entrega', $lista_horarios, 'flex-column');
             $input = input_frm("",
                 "FECHA",
@@ -477,9 +476,9 @@ if (!function_exists('invierte_date_time')) {
                     "name" => 'fecha_entrega',
                     "class" => "fecha_entrega",
                     "type" => 'date',
-                    "value" => $minimo,
-                    "min" => $minimo,
-                    "max" => $maximo,
+                    "value" => $min_max_disponibilidad['minimo'],
+                    "min" => $min_max_disponibilidad['minimo'],
+                    "max" => $min_max_disponibilidad['maximo'],
                     "onChange" => "horarios_disponibles()",
                     "id" => "fecha",
                 ]
@@ -500,6 +499,42 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens(['name' => 'asignacion_horario', 'value' => $asignacion_horario, 'class' => 'asignacion_horario']);
         return append($response);
 
+    }
+
+    function min_max_disponibilidad($data)
+    {
+
+//        new DateTime('now', new DateTimeZone(config_item('time_reference')));
+        $horarios = lista_horarios();
+        $nuevo_dia = $horarios["nuevo_dia"];
+        $minimo = date_format(horario_enid(), 'Y-m-d');
+        $maximo = add_date($minimo, 4);
+        $minimo = ($nuevo_dia > 0) ? add_date($minimo, 1) : $minimo;
+
+        if (prm_def($data, 'servicio') != 0 && es_data($data['servicio'])) {
+
+            $servicio = $data['servicio'];
+            $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
+            $fecha_disponible = pr($servicio, 'fecha_disponible');
+            if ($muestra_fecha_disponible > 0) {
+
+                $fecha_disponible_stock = new DateTime($fecha_disponible);
+                $fecha = horario_enid();
+                $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
+                if ($es_proxima_fecha && $muestra_fecha_disponible > 0 ) {
+
+                    $minimo = date_format($fecha_disponible_stock, 'Y-m-d');
+                    $maximo = add_date($minimo, 4);
+                }
+
+            }
+
+        }
+
+        return [
+            'maximo' => $maximo,
+            'minimo' => $minimo,
+        ];
     }
 
     function get_parte_direccion_envio(

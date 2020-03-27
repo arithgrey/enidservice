@@ -149,7 +149,7 @@ class Home extends CI_Controller
 
             $data["costo_envio"] = $this->calcula_costo_envio($this->crea_data_costo_envio($servicio));
             $tiempo_promedio_entrega = $servicio[0]["tiempo_promedio_entrega"];
-            $data["tiempo_entrega"] = $this->valida_tiempo_entrega($tiempo_promedio_entrega);
+            $data["tiempo_entrega"] = $this->valida_tiempo_entrega($servicio, $tiempo_promedio_entrega);
         }
 
         $this->set_option("flag_precio_definido", 0);
@@ -209,15 +209,32 @@ class Home extends CI_Controller
         return $param;
     }
 
-    private function valida_tiempo_entrega($tiempo)
+    private function valida_tiempo_entrega($servicio, $tiempo)
     {
 
+
+        $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
+        $fecha_disponible = pr($servicio, 'fecha_disponible');
+        $fecha_disponible_stock = new DateTime($fecha_disponible);
+
+
         $fecha = horario_enid();
+
         $hoy = $fecha->format('H:i:s');
+
+
+        $es_proxima_fecha = ($fecha_disponible_stock > $fecha  );
 
         $text = "Realiza tu pedido antes de las 6 PM y tenlo hoy mismo!";
         $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
         $str = ($hoy < 18) ? $text : $mas_un_dia;
+
+        $text_proxima_fecha = d(_text_(
+            "Ups! lo tendremos disponible el",
+            format_fecha($fecha_disponible),
+            'Pero ... no te preocupes puedes agendar ya mismo tu entrega'
+        ),'bg-warning strong p-1');
+        $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
 
 
         $response[] = d($str, "text-uppercase mt-5 ");

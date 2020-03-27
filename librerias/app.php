@@ -708,14 +708,24 @@ class app extends CI_Controller
                             "producto.css",
                             "confirm-alert.css",
 
+
                         ],
                     "js" =>
                         [
+                            "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
+                            "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
+                            "js/bootstrap-daterangepicker/moment.min.js",
+                            "js/bootstrap-daterangepicker/daterangepicker.js",
+                            "js/bootstrap-colorpicker/js/bootstrap-colorpicker.js",
+                            "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
+                            "js/pickers-init.js",
                             'planes_servicios/principal.js',
                             'planes_servicios/img.js',
                             "alerts/jquery-confirm.js",
                             "planes_servicios/compras.js",
                             'js/summernote.js',
+
+
                         ]
                     ,
 

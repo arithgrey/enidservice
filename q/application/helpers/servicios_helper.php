@@ -45,6 +45,9 @@ if (!function_exists('invierte_date_time')) {
             $num = $data["num"];
             $num_imagenes = $data["num_imagenes"];
             $s = $servicio[0];
+            $muestra_fecha_disponible = $s['muestra_fecha_disponible'];
+            $fecha_disponible = $s['fecha_disponible'];
+
             $id_servicio = $s["id_servicio"];
             $es_servicio = $s["flag_servicio"];
             $precio = $s["precio"];
@@ -97,6 +100,8 @@ if (!function_exists('invierte_date_time')) {
 
             $res[] = agregar_imgs();
             $res[] = d($r, "contenedor_global_servicio");
+            $res[] = hiddens(['class' => 'fecha_disponible', 'value' => format_fecha($fecha_disponible)]);
+            $res[] = hiddens(['class' => 'muestra_fecha_disponible', 'value' => $muestra_fecha_disponible]);
             $response = append($res);
 
         }
@@ -241,7 +246,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = estado_publicacion($status, $id_servicio);
         $t[] = form_comision($comision, $id_perfil, $id_servicio);
         $t[] = es_publico($status, $es_publico, $id_servicio);
-        $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock,$data);
+        $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock, $data);
         $t[] = form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping);
         $t[] = compras_casa($es_servicio, $entregas_en_casa);
         $t[] = telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio);
@@ -608,6 +613,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $stock = '';
+        $fecha_stock = '';
         if (es_administrador($data)) {
 
             $base_stock = [
@@ -615,6 +621,15 @@ if (!function_exists('invierte_date_time')) {
                 'id' => $id_servicio,
             ];
             $stock = btn("Agregar stock", $base_stock);
+
+
+            $base_disponibilidad = [
+                'class' => 'stock_disponibilidad cursor_pointer',
+                'id' => $id_servicio,
+            ];
+
+            $fecha_stock = format_link("Fecha disponibilidad", $base_disponibilidad, 0);
+
         }
 
 
@@ -632,7 +647,6 @@ if (!function_exists('invierte_date_time')) {
             icon('fa fa-fighter-jet menu_meta_key_words'),
             "#tab_terminos_de_busqueda"
         );
-
         $list = [
             li(
                 $link_foto,
@@ -662,6 +676,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ),
             $stock,
+            $fecha_stock,
             li(
                 a_enid(
                     text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN")

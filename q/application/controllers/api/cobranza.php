@@ -94,7 +94,7 @@ class Cobranza extends REST_Controller
                     $data_orden = $recibo['data_orden'];
                     $data_orden['orden_creada'] = 1;
                     $data_orden["id_recibo"] = $id_recibo;
-                    $this->posterior_compra(
+                    $response = $this->posterior_compra(
                         $data_orden, $id_recibo, $id_servicio, $param, $es_nuevo);
                 }
             }
@@ -281,7 +281,7 @@ class Cobranza extends REST_Controller
         }
 
 
-        $this->acciones_posterior_orden_pago($pos);
+        $response = $this->acciones_posterior_orden_pago($pos);
         if ($param["tipo_entrega"] != 2) {
 
             $this->posterior_pe($param, $id_recibo, $pos["id_usuario"]);
@@ -304,14 +304,13 @@ class Cobranza extends REST_Controller
     {
 
         $this->notifica_deuda_cliente($param);
-        $this->crea_comentario_pedido($param);
+
     }
 
     function notifica_deuda_cliente($q)
     {
-
-
         return $this->app->api("areacliente/pago_pendiente_web/format/json/", $q);
+
     }
 
     private function crea_comentario_pedido($param)
@@ -355,19 +354,6 @@ class Cobranza extends REST_Controller
 
         return $this->app->api("usuario_punto_encuentro/index", $q, "json", "POST");
     }
-
-//    function carga_ficha_direccion_envio($q)
-//    {
-//
-//        $q += [
-//            "text_direccion" => "Dirección de Envio",
-//            "externo" => 1,
-//
-//        ];
-//
-//        return $this->app->api("usuario_direccion/direccion_envio_pedido", $q, "html");
-//
-//    }
 
     function solicitud_cambio_punto_entrega_POST()
     {
@@ -435,7 +421,8 @@ class Cobranza extends REST_Controller
         $param = $this->post();
         $prevent = 0;
         $es_pe = prm_def($param, "punto_encuentro");
-        foreach (["num_ciclos", "ciclo_facturacion", "id_servicio"] as $row) {
+        $esperados = ["num_ciclos", "ciclo_facturacion", "id_servicio"];
+        foreach ($esperados as $row) {
             if (prm_def($param, $row) === 0) {
                 $prevent++;
             };
