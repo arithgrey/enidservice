@@ -31,7 +31,7 @@ class Home extends CI_Controller
 
         } else {
 
-            redirect("../../producto/?producto=".$this->input->get("producto"));
+            redirect("../../producto/?producto=" . $this->input->get("producto"));
         }
     }
 
@@ -49,10 +49,10 @@ class Home extends CI_Controller
 
 
             $data +=
-                    [
-                            "servicio" => $param["servicio"],
-                            "num_ciclos" => $param["num_ciclos"],
-                    ];
+                [
+                    "servicio" => $param["servicio"],
+                    "num_ciclos" => $param["num_ciclos"],
+                ];
 
 
         } else {
@@ -60,6 +60,7 @@ class Home extends CI_Controller
             $data["recibo"] = $param["recibo"];
 
         }
+
 
         $this->load_vistas_punto_encuentro($param, $data);
 
@@ -80,20 +81,22 @@ class Home extends CI_Controller
         $es_punto_encuentro = (prm_def($param, "punto_encuentro") > 0);
         $id_servicio = prm_def($param, 'servicio');
         $data += [
-                "carro_compras" => $param["carro_compras"],
-                "id_carro_compras" => $param["id_carro_compras"],
-                "leneas_metro" => $this->get_lineas_metro(1, $id_servicio),
+            "carro_compras" => $param["carro_compras"],
+            "id_carro_compras" => $param["id_carro_compras"],
+            "leneas_metro" => $this->get_lineas_metro(1, $id_servicio),
         ];
 
         if ($es_avanzado && $es_punto_encuentro) {
 
             /*solo tomamos la hora del pedido*/
-            $horario= get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]);
-            $this->app->pagina($data,$horario, 1);
+            $horario = get_format_pagina_form_horario($data["recibo"], $param["punto_encuentro"]);
+            $this->app->pagina($data, $horario, 1);
 
         } else {
 
 
+
+            $data['data_servicio'] = $this->app->servicio($id_servicio, 1);
             $this->app->pagina($data, render_pm($data), 1);
 
         }
@@ -104,9 +107,9 @@ class Home extends CI_Controller
 
 
         $q = [
-                "v" => 1,
-                "tipo" => $tipo,
-                "is_mobile" => is_mobile(),
+            "v" => 1,
+            "tipo" => $tipo,
+            "is_mobile" => is_mobile(),
         ];
 
         if ($id_servicio > 0) {
@@ -129,7 +132,7 @@ class Home extends CI_Controller
     {
 
         $usuario = $this->app->api("servicio/usuario_por_servicio/format/json/",
-                ["id_servicio" => $id_servicio]);
+            ["id_servicio" => $id_servicio]);
 
         return pr($usuario, "id_usuario");
     }

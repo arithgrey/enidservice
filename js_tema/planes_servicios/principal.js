@@ -16,12 +16,17 @@ let $titulo_seccion = $(titulo_seccion);
 let $costo = $('.costo');
 let $form_nombre_producto = $('.form_nombre_producto');
 let $selector_carga_modal = $('#stock_servicio_modal');
+let $stock_fecha_servicio_modal = $('#stock_fecha_servicio_modal');
 
 let $form_stock_servicio = $('.form_stock_servicio');
+let $form_fecha_stock = $('.form_fecha_stock');
+let $ocultar_fecha_stock = $('.ocultar_fecha_stock');
 let $input_stock = $form_stock_servicio.find('.stock');
 let $input_id_servicio = $form_stock_servicio.find('.id_servicio');
 let $input_costo = $form_stock_servicio.find('.costo_stock');
-
+let $definir_feche_disponible = $('.definir_feche_disponible');
+let $opciones_definicion = $('.opciones_definicion');
+let $ultima_fecha_disponible = $('.ultima_fecha_disponible');
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -180,7 +185,6 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_servicio_url_venta").submit(actualiza_dato_url_venta);
     $(".form_servicio_afiliados").submit(actualiza_dato_servicio_afiliado);
 
-
     $(".form_servicio_desc").submit(actualiza_dato_servicio_desc);
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
@@ -208,6 +212,8 @@ let respuesta_informacion_servicio = (data) => {
     $(".es_publico").click(activa_visibilidad);
     $(".restablecer").click(restablecer);
     $('.stock_disponible').click(editar_stock_disponible);
+    $('.stock_disponibilidad').click(editar_fecha_stock_disponible);
+
 
     $(".form_dropshipping").submit(modifica_dropshipping);
     $('.form_comision_venta').submit(registro_comision);

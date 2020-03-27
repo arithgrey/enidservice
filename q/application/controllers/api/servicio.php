@@ -52,6 +52,35 @@ class Servicio extends REST_Controller
         $this->response($response);
     }
 
+    function stock_disponibilidad_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_servicio,muestra_fecha_disponible")) {
+
+            $muestra_fecha_disponible = $param['muestra_fecha_disponible'];
+            $id_servicio = $param['id_servicio'];
+            if ($muestra_fecha_disponible < 1) {
+
+                $response = $this->serviciosmodel->q_up('muestra_fecha_disponible', 0, $id_servicio);
+
+            } else {
+
+                $response = false;
+                if (array_key_exists('hora_fecha', $param)) {
+                    $set = [
+                        'muestra_fecha_disponible' => 1,
+                        'fecha_disponible' => $param['hora_fecha']
+                    ];
+                    $in = ['id_servicio' => $id_servicio];
+                    $response = $this->serviciosmodel->update($set, $in);
+                }
+            }
+        }
+        $this->response($response);
+
+    }
+
     function stock_PUT()
     {
         $param = $this->put();

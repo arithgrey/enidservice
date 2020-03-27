@@ -121,7 +121,7 @@ class usuario_direccion extends REST_Controller
     {
 
         $param = $this->get();
-        $id_usuario =$this->valida_cita_domicilio($param, $this->get_id_usuario($param));
+        $id_usuario = $this->valida_cita_domicilio($param, $this->get_id_usuario($param));
 
         $response = [];
         $data["id_usuario"] = $id_usuario;
@@ -157,11 +157,36 @@ class usuario_direccion extends REST_Controller
             $data['registro_direccion'] = $registro_direccion;
 
 
+            $data = $this->agrega_fecha_disponible_servicio($param, $data);
+
             $response = format_direccion_envio($data);
 
         }
 
         $this->response($response);
+
+    }
+
+    private function agrega_fecha_disponible_servicio($param, $data)
+    {
+
+
+        if (fx($param, "id_recibo")) {
+
+
+            $id_servicio = $this->servicio_por_recibo($param['id_recibo']);
+            $data['servicio'] = $this->app->servicio($id_servicio);
+
+        }
+        return $data;
+
+    }
+
+    private function servicio_por_recibo($id_recibo)
+    {
+
+        $q = ["id_recibo" => $id_recibo];
+        return $this->app->api("recibo/servicio_ppfp/format/json/", $q);
 
     }
 

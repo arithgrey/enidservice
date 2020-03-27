@@ -1,6 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+
     function form_stock()
     {
 
@@ -23,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
                 'type' => 'number',
             ],
             '¿Hay algo mal con esta canidad no?'
-        ),'input_unidades_producto_stock');
+        ), 'input_unidades_producto_stock');
         $form[] = d(input_frm('mt-5', '¿Cuanto nos costó cada unidad? MXN',
             [
                 'class' => 'costo_stock',
@@ -33,12 +34,45 @@ if (!function_exists('invierte_date_time')) {
                 'required' => true,
                 'type' => 'number',
             ], 'Parece que el costo anda mal ¿no?'
-        ),'input_costo_producto_stock');
+        ), 'input_costo_producto_stock');
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
         $form[] = btn('Actualizar', ['class' => 'mt-5']);
         $form[] = form_close();
 
         return gb_modal(append($form), 'stock_servicio_modal');
+    }
+
+    function form_fecha_stock()
+    {
+
+        $form[] = d(_titulo('¿Cúando estará disponible este artículo?'), 'mb-5');
+        $form[] = d(hr());
+        $form[] = place('ultima_fecha_disponible');
+        $mostrar = format_link('Mostrar fecha al Público',
+            [
+                'class' => 'definir_feche_disponible'
+            ]
+        );
+        $ocultar = format_link('Ocultar este dato',
+            [
+                'class' => 'ocultar_fecha_stock'
+            ], 0);
+        $form[] = d(flex($mostrar, $ocultar, _text_(_between,_mbt5)), 'opciones_definicion');
+
+
+        $form[] = form_open("",
+            [
+                "class" => "form_fecha_stock d-none",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = ajustar(input_hour_date(), btn("Definir fecha"), 7);
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = hiddens(['name' => 'muestra_fecha_disponible', 'value' => 1]);
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'stock_fecha_servicio_modal');
     }
 
     function render_ventas($data)
@@ -51,6 +85,7 @@ if (!function_exists('invierte_date_time')) {
         $id_usuario = $data['id_usuario'];
         $t[] = menu($id_perfil, $action, $id_usuario);
         $t[] = form_stock();
+        $t[] = form_fecha_stock($data);
         $t[] = btw(
             _titulo("artículos más vistos de la semana")
             ,
