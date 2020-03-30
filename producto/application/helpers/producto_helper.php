@@ -269,6 +269,11 @@ if (!function_exists('invierte_date_time')) {
     function get_frm($data, $id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
     {
 
+        $inf_servicio = $data["info_servicio"];
+        $servicio = $inf_servicio["servicio"];
+        $response = [];
+        $es_posible_punto_encuentro = (pr($servicio, 'es_posible_punto_encuentro') > 0);
+
 
         $r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
         $r[] = form_hidden([
@@ -289,7 +294,10 @@ if (!function_exists('invierte_date_time')) {
         $r[] = $tiempo_entrega;
         $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
 
-        $r[] = d('ó', 'text-center mt-1 mb-1 ');
+        if ($es_posible_punto_encuentro) {
+            $r[] = d('ó', 'text-center mt-1 mb-1 ');
+        }
+
 
         $path = _text("../puntos_medios/?producto=", $id_servicio);
 
@@ -311,34 +319,35 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => '']);
         $r[] = form_close();
 
+        if ($es_posible_punto_encuentro) {
+            $r[] = '<form class="form_pre_puntos_medios" action="' . $path . '" method="POST">';
+            $r[] = hiddens([
+                "class" => "servicio",
+                "name" => "servicio",
+                "value" => $id_servicio
+            ]);
+            $r[] = hiddens([
+                "class" => "id_servicio",
+                "name" => "id_servicio",
+                "value" => $id_servicio
+            ]);
 
-        $r[] = '<form class="form_pre_puntos_medios" action="' . $path . '" method="POST">';
-        $r[] = hiddens([
-            "class" => "servicio",
-            "name" => "servicio",
-            "value" => $id_servicio
-        ]);
-        $r[] = hiddens([
-            "class" => "id_servicio",
-            "name" => "id_servicio",
-            "value" => $id_servicio
-        ]);
+            $r[] = hiddens([
+                "class" => "num_ciclos",
+                "name" => "num_ciclos",
+                "value" => 1
+            ]);
 
-        $r[] = hiddens([
-            "class" => "num_ciclos",
-            "name" => "num_ciclos",
-            "value" => 1
-        ]);
+            $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
+            $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
+            $r[] = btn("Pago contra entrega", ['class' => 'mt-2']);
 
-        $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
-        $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
-        $r[] = btn("Pago contra entrega", ['class' => 'mt-2']);
-
-        $r[] = form_close();
+            $r[] = form_close();
 
 
-        return d($r, "contenedor_form");
-
+        }
+        $response[] = d($r, "contenedor_form");
+        return append($response);
 
     }
 

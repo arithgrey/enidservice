@@ -162,7 +162,7 @@ if (!function_exists('invierte_date_time')) {
 
         $comision_venta = _text_("COMISIÓN POR VENTA", money($comision));
 
-        $r[] = conf_detalle(
+        $r[] = conf_detalle($s,
             $data,
             $s["comision"],
             $s["status"],
@@ -217,6 +217,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_detalle(
+        $servicio,
         $data,
         $comision,
         $status,
@@ -248,6 +249,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = es_publico($status, $es_publico, $id_servicio);
         $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock, $data);
         $t[] = form_drop_shipping($id_perfil, $id_servicio, $link_dropshipping);
+        $t[] = vendible_en_punto_encuentro($data, $servicio);
         $t[] = compras_casa($es_servicio, $entregas_en_casa);
         $t[] = telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio);
         $t[] = contra_entrega($es_servicio, $es_entrega, $id_servicio);
@@ -260,6 +262,48 @@ if (!function_exists('invierte_date_time')) {
         $t[] = form_costo_envio($es_servicio, $costo_envio);
         $t[] = utilidad($text_comision_venta, $utilidad);
         return tab_seccion($t, "tab_info_precios", $ext_4);
+
+    }
+
+    function vendible_en_punto_encuentro($data, $servicio)
+    {
+
+        $response = [];
+        if (es_administrador($data) && es_data($servicio)) {
+
+
+            $titulo = "¿HACES ENTREGAS EN ESTACIONES DEL METRO?";
+            $es_posible_punto_encuentro = $servicio['es_posible_punto_encuentro'];
+            $atencion = "NO, SOLO HAGO ENVÍOS A DOMICILIO";
+
+            $confirmar = a_enid(
+                "SI",
+                [
+                    "id" => '1',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_en_punto_encuentro',
+                        val_class(1, $es_posible_punto_encuentro, "button_enid_eleccion_active")
+                    )
+
+                ]
+            );
+
+            $omitir = a_enid(
+                $atencion,
+                [
+                    "id" => '0',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_en_punto_encuentro',
+                        val_class(0, $es_posible_punto_encuentro, "button_enid_eleccion_active")
+                    )
+                ]
+            );
+
+
+            $response[] = eleccion($titulo, $confirmar, $omitir);
+        }
+
+        return append($response);
 
     }
 

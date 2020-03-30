@@ -1054,6 +1054,22 @@ class Servicio extends REST_Controller
         $this->response($response);
     }
 
+    function es_posible_punto_encuentro_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_servicio,es_posible_punto_encuentro")) {
+
+            $response = $this->serviciosmodel->q_up(
+                "es_posible_punto_encuentro",
+                $param["es_posible_punto_encuentro"],
+                $param["id_servicio"]
+            );
+        }
+        $this->response($response);
+    }
+
     function servicio_categoria_PUT()
     {
 

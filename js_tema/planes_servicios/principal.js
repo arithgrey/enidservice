@@ -229,6 +229,7 @@ let respuesta_informacion_servicio = (data) => {
     }
     $(".descartar_promocion").click(descartar_promocion);
     $('.form_stock_select').find(".stock").change(set_cantidad_en_stock);
+    $('.entregas_en_punto_encuentro').click(actualiza_entregas_en_punto_encuentro);
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
@@ -271,6 +272,20 @@ let actualiza_ventas_mayoreo = function (e) {
     }, ".place_sobre_el_negocio");
 };
 
+let actualiza_entregas_en_punto_encuentro = function () {
+
+    let url = "../q/index.php/api/servicio/es_posible_punto_encuentro/format/json/";
+    let $id = get_parameter_enid($(this), "id");
+    let data_send = {
+        es_posible_punto_encuentro: $id,
+        id_servicio: get_option("servicio")
+    };
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+
+
+};
 
 let muestra_input_visible = (visible, i, t) => (visible === true) ? showonehideone(i, t) : showonehideone(i, t);
 
