@@ -216,6 +216,7 @@ class Home extends CI_Controller
         $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
         $fecha_disponible = pr($servicio, 'fecha_disponible');
         $fecha_disponible_stock = new DateTime($fecha_disponible);
+        $es_posible_punto_encuentro = pr($servicio, 'es_posible_punto_encuentro');
 
 
         $fecha = horario_enid();
@@ -223,7 +224,7 @@ class Home extends CI_Controller
         $hoy = $fecha->format('H:i:s');
 
 
-        $es_proxima_fecha = ($fecha_disponible_stock > $fecha  );
+        $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
 
         $text = "Realiza tu pedido antes de las 6 PM y tenlo hoy mismo!";
         $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
@@ -233,12 +234,13 @@ class Home extends CI_Controller
             "Ups! lo tendremos disponible el",
             format_fecha($fecha_disponible),
             'Pero ... no te preocupes puedes agendar ya mismo tu entrega'
-        ),'bg-warning strong p-1');
+        ), 'bg-warning strong p-1');
         $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
 
 
         $response[] = d($str, "text-uppercase mt-5 ");
-        $response[] = d(_titulo('Tienes una de dos', 4), 'mt-5 text-center');
+        $opciones_compra =  ($es_posible_punto_encuentro > 0) ? 'Tienes una de dos' : '';
+        $response[] = d(_titulo($opciones_compra, 4), 'mt-5 text-center');
         return append($response);
     }
 
