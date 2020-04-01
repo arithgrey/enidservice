@@ -945,7 +945,8 @@ class Recibo_model extends CI_Model
 						(monto_a_pagar * num_ciclos_contratados) total,
 						fecha_contra_entrega,
 						tipo_entrega,
-						contra_entrega_domicilio										 
+						contra_entrega_domicilio,
+						id_usuario_entrega										 
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  

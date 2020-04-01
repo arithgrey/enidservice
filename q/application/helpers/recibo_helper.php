@@ -1315,14 +1315,21 @@ if (!function_exists('invierte_date_time')) {
     function elimina_ocupados($array_repartidores, $ocupados)
     {
 
-        for ($a = 0; $a < count($ocupados); $a++) {
+        if (es_data($array_repartidores)) {
 
-            $ocupado = $ocupados[$a];
-            $index = array_search($ocupado, $array_repartidores);
-            if ($index !== false) {
-                unset($array_repartidores[$index]);
+            for ($a = 0; $a < count($ocupados); $a++) {
+
+                if (array_key_exists($a, $ocupados)) {
+
+                    $ocupado = $ocupados[$a];
+                    $index = array_search($ocupado, $array_repartidores);
+                    if ($index !== false) {
+                        unset($array_repartidores[$index]);
+                    }
+                }
             }
         }
+
         return $array_repartidores;
     }
 
