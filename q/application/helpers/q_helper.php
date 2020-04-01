@@ -1363,6 +1363,7 @@ if (!function_exists('invierte_date_time')) {
         $ventas_hoy = [];
         if (es_data($recibos)) {
 
+            sksort($recibos, "fecha_contra_entrega",true);
             foreach ($recibos as $row) {
 
                 $fecha_contra_entrega = $row['fecha_contra_entrega'];
@@ -1405,18 +1406,16 @@ if (!function_exists('invierte_date_time')) {
 
                 $imagenes = d(img($row["url_img_servicio"]), "w_50");
                 $total = d(money($row["total"]), "text-left black");
+                $id_usuario_entrega = $row['id_usuario_entrega'];
 
 
-                $text_total = [];
-                $text_total[] = $total;
-                $text_total[] = $dia_entrega;
-                if ($es_contra_entrega) {
-                    $text_total[] = d('Es contra entrega a domicilio', 'black');
-                    if ($es_contra_entrega_domicilio_sin_direccion) {
-                        $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
-                    }
-                }
-
+                $text_total = ayuda_notificacion(
+                    $total,
+                    $dia_entrega,
+                    $es_contra_entrega,
+                    $es_contra_entrega_domicilio_sin_direccion,
+                    $id_usuario_entrega
+                );
 
                 $total_seccion = d($text_total, 'd-flex flex-column');
 
@@ -1455,6 +1454,30 @@ if (!function_exists('invierte_date_time')) {
             "html" => append($r),
             "flag" => $f,
         ];
+
+    }
+
+    function ayuda_notificacion($total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
+                                $id_usuario_entrega)
+    {
+        $text_total = [];
+        $icon = '';
+        if ($id_usuario_entrega > 0) {
+            $icon = d(icon(_entregas_icon));
+        }
+
+        $text_total[] = flex($total,$icon, _between);
+        $text_total[] = $dia_entrega;
+        if ($es_contra_entrega) {
+            $text_total[] = d('Es contra entrega a domicilio', 'black');
+            if ($es_contra_entrega_domicilio_sin_direccion) {
+                $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
+            }
+        }
+
+
+        return $text_total;
+
 
     }
 

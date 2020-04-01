@@ -3318,6 +3318,7 @@ function strip_tags_content($text, $tags = '', $invert = FALSE)
     } elseif ($invert == FALSE) {
         return preg_replace('@<(\w+)\b.*?>.*?</\1>@si', '', $text);
     }
+    $text = trim(strip_tags(str_replace("'", $text)));
     return $text;
 }
 
