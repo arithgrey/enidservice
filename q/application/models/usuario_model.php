@@ -237,6 +237,7 @@ class usuario_model extends CI_Model
                             ON 
                             u.idusuario = up.idusuario
                             WHERE 
+                            u.status =  1 AND 
                             u.idempresa = '" . $id_empresa . "' AND
                             up.idperfil=" . $perfil .
                 " OR up.idusuario ='" . $id_usuario . "'";

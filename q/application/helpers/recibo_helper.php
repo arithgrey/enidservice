@@ -540,7 +540,6 @@ if (!function_exists('invierte_date_time')) {
             "FECHA CONTRA ENTREGA",
         ];
 
-
         $titulos[] = "ORDEN";
         $titulos[] = "";
         $titulos[] = "STATUS";
@@ -562,12 +561,15 @@ if (!function_exists('invierte_date_time')) {
         $linea_en_proceso = [];
         $linea_cambio_estado = [];
         $linea_cambio_lista_negra = [];
+        $resumen_usuarios_por_pago = [];
+        $usuarios = [];
         foreach ($recibos as $row) {
             $transacciones++;
             $recibo = $row["recibo"];
             $intento_reventa = $row['intento_reventa'];
             $intento_recuperacion = $row['intento_recuperacion'];
             $usuario_venta = prm_def($row, 'usuario', []);
+            $usuarios[] = $usuario_venta;
             $monto_a_pagar = $row["monto_a_pagar"];
             $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
             $status = $row["status"];
@@ -579,18 +581,19 @@ if (!function_exists('invierte_date_time')) {
             $saldo_cubierto = $row['saldo_cubierto'];
             $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
 
-
+            $es_lista_negra = es_orden_lista_negra($row);
             $es_compra_efectiva = (!$es_orden_cancelada && $saldo_cubierto > 0);
-            $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada);
+            $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada && !$es_lista_negra);
             $ordenes_canceladas = totales($ordenes_canceladas, $es_orden_cancelada);
             $ordenes_pagadas = totales($ordenes_pagadas, $es_compra_efectiva);
             $ordenes_en_proceso = totales($ordenes_en_proceso, $es_orden_en_proceso);
 
-            $comision = _titulo(money($row['comision_venta']), 4);
+            $comision_venta = $row['comision_venta'];
+            $comision = _titulo(money($comision_venta), 4);
             $verificado = ($se_pago > 0) ?
                 _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
 
-            $es_lista_negra = es_orden_lista_negra($row);
+
             if ($perfil != 6) {
 
                 $nombre_usuario = format_nombre($usuario_venta);
@@ -598,6 +601,13 @@ if (!function_exists('invierte_date_time')) {
 
                 $verificado = ($se_pago > 0) ?
                     _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
+
+                if ($se_pago < 1) {
+                    $resumen_usuarios_por_pago[] = [
+                        'id_usuario' => pr($usuario_venta, 'id_usuario'),
+                        'comision' => $comision_venta
+                    ];
+                }
 
             }
 
@@ -615,7 +625,7 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
             if ($se_pago > 0) {
                 $extra = 'se_pago white';
-            } else if ($saldo_cubierto > 0) {
+            } else if ($saldo_cubierto > 0 && !$es_lista_negra) {
                 $extra = 'pago_en_proceso white';
                 $saldo_por_cobrar = $saldo_por_cobrar + $row['comision_venta'];
             }
@@ -688,11 +698,65 @@ if (!function_exists('invierte_date_time')) {
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
-        $listado[] = append($linea_cambio_lista_negra);
         $listado[] = append($linea_cambio_estado);
-
+        $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
-        return d_c([$conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales], 'col-sm-12 mt-4');
+        $por_pago_resumen = totales_comisiones($resumen_usuarios_por_pago, $usuarios);
+
+        return d_c([$conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales, $por_pago_resumen], 'col-sm-12 mt-4');
+    }
+
+    function totales_comisiones($usuarios_por_pago, $usuarios)
+    {
+
+        $totales = [];
+        if (es_data($usuarios_por_pago)) {
+
+            $ids = array_column($usuarios_por_pago, 'id_usuario');
+            $ids_usuario = array_unique($ids);
+
+            foreach ($ids_usuario as $row) {
+
+                $total = 0;
+                foreach ($usuarios_por_pago as $row2) {
+                    if ($row == $row2['id_usuario']) {
+                        $total = $total + $row2['comision'];
+                    }
+                }
+                $totales[] = [
+                    'id_usuario' => $row,
+                    'total_comisiones' => $total
+                ];
+            }
+
+        }
+
+        $response = [];
+        foreach ($totales as $row) {
+
+            $id_usuario = $row['id_usuario'];
+            $contenido = [];
+            $nombre_completo = '';
+            foreach ($usuarios as $row2) {
+
+                if (es_data($row2) && array_key_exists(0, $row2)) {
+
+                    $usuario = $row2[0];
+                    $id_usuario_busqueda = $usuario['id_usuario'];
+                    if ($id_usuario_busqueda == $id_usuario) {
+
+                        $nombre_completo =  format_nombre($usuario);
+                        break;
+                    }
+                }
+            }
+            $contenido[] = d($id_usuario,'col-md-4 border');
+            $contenido[] = d($nombre_completo,'col-md-4 border');
+            $contenido[] = d(money($row['total_comisiones']),'col-md-4 border');
+            $response[] = d($contenido, 'border row');
+
+        }
+        return append($response);
     }
 
     function monto_compra($monto, $id_perfil, $intento_reventa, $saldo_cubierto,

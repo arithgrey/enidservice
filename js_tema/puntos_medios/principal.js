@@ -10,7 +10,7 @@ let seccion_horarios_entrega = '.seccion_horarios_entrega';
 let place_estaciones_metro = '.place_estaciones_metro';
 let text_seleccion_estacion = '.text_seleccion_estacion';
 let punto_encuentro = '.punto_encuentro';
-
+let $es_primer_selector = true;
 let secciones_default = [
     ".informacion_del_cliente",
     seccion_horarios_entrega,
@@ -133,7 +133,9 @@ let muestra_estaciones = function () {
     let q = texto_buscador();
     let id = 0;
     let id_linea = get_option("id_linea");
-    if ($es_regreso < 1 && parseInt(id_linea) > 0) {
+
+
+    if ($es_regreso < 1 && id_linea !== undefined && parseInt(id_linea) > 0) {
 
         id = id_linea;
 
@@ -142,7 +144,13 @@ let muestra_estaciones = function () {
         id = get_parameter_enid($(this), "id");
         let $nombre_linea = get_parameter_enid($(this), "nombre_linea");
         set_option("nombre_linea", $nombre_linea);
-        $es_regreso--;
+        if (!$es_primer_selector){
+            $es_regreso --;
+        }else{
+            $es_primer_selector =  true;
+        }
+
+
     }
 
     if (parseInt(id) > 0) {
@@ -301,13 +309,11 @@ let agregar_nota = () => {
 };
 let valida_retorno = function () {
     let v = parseInt(get_option("vista"));
-
     switch (v) {
         case 1:
-
             break;
         case 2:
-            $es_regreso++;
+            $es_regreso ++;
             despliega(secciones_estaciones_metro, 1);
             despliega([place_estaciones_metro, ksearch, text_seleccion_estacion], 0);
             break;
@@ -392,4 +398,3 @@ let redirect_forma_pago = (id_recibo) => {
 
     redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
 };
-
