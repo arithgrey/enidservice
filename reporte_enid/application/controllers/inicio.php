@@ -34,6 +34,7 @@ class Inicio extends CI_Controller
         $desarrollo = [8, 11, 7];
         switch ($num_perfil) {
             case 4:
+
                 $module = "location:../pedidos";
                 break;
 
@@ -42,7 +43,7 @@ class Inicio extends CI_Controller
                 break;
 
             case 6:
-                $module = "location:../pedidos";
+                $module = "location:../busqueda";
                 break;
 
 
