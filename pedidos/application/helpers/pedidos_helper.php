@@ -121,7 +121,7 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d(_titulo('¿Hay algo que hacer?'), 'mb-5  text-center');
         $x[] = tracker($id_recibo, $es_venta_cancelada);
         $x[] = link_cambio_estado_venta();
-
+        $x[] = link_cambio_fecha($recibo);
         $x = link_cambio_punto_encuentro($data, $x, $recibo);
         $x = link_cambio_domicilio($data, $x, $recibo);
         $x = link_recordatorio($recibo, $data, $x);
@@ -1099,8 +1099,8 @@ if (!function_exists('invierte_date_time')) {
             $pedido = btn(_text_('Enviar al repartidor', icon(_repato_icon)));
             $id_direccion = id_direccion_recibo($data, $es_contra_entrega_domicilio);
             $confirmar_pedido = "confirma_reparto({$id_recibo}, '{$punto_encuentro}')";
-            $text_punto_encuentro =  trim(strip_tags(strip_tags_content(text_domicilio($data, 0))));
-            $text_punto_encuentro =  str_replace(PHP_EOL,'',$text_punto_encuentro);
+            $text_punto_encuentro = trim(strip_tags(strip_tags_content(text_domicilio($data, 0))));
+            $text_punto_encuentro = str_replace(PHP_EOL, '', $text_punto_encuentro);
             $confirm_pedido_domicilio = "confirma_reparto_contra_entrega_domicilio({$id_recibo}, '{$text_punto_encuentro}');";
 
             $confirm = ($es_contra_entrega_domicilio) ? $confirm_pedido_domicilio : $confirmar_pedido;
@@ -3032,10 +3032,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function link_cambio_fecha($domicilio, $recibo)
+    function link_cambio_fecha($recibo)
     {
 
-        if (prm_def($domicilio, "domicilio") != 0 && count($recibo) > 0) {
+        if (es_data($recibo)) {
 
             $recibo = $recibo[0];
             $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
@@ -3050,8 +3050,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         "class" => "editar_horario_entrega",
                         "id" => $id_recibo,
-                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '{
-                $fecha_entrega}' )",
+                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '" . $fecha_entrega . "' )",
                     ])
             );
 
