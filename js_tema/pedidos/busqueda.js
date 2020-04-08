@@ -33,6 +33,7 @@ let response_pedidos = function (data) {
         $(".numero_recibo").val(recibo);
         $(".form_search").submit();
     });
+    $('.usuario_venta').click(busqueda_usuario_selector);
 
 };
 let valida_busqueda_inicial = function () {
@@ -44,5 +45,12 @@ let valida_busqueda_inicial = function () {
         $form_busqueda.submit();
     }
 
+
+};
+let busqueda_usuario_selector = function (e) {
+
+    let id = e.target.id;
+    selecciona_valor_select('.comisionista', id);
+    $form_busqueda.submit();
 
 };
