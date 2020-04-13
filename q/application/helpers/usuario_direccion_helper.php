@@ -83,6 +83,67 @@ if (!function_exists('invierte_date_time')) {
         return d($r, "contenedor_informacion_envio col-lg-6 col-lg-offset-3 p-0");
     }
 
+    function form_ubicacion_escrita($param)
+    {
+        $id_recibo = $param['id_recibo'];
+
+        $form[] = d(_titulo('¿Tienes de dos?', 2), 'selector_ubicaciones_domicilio');
+
+        $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
+        $domicilio = format_link('Registrar domicilio completo', ['class' => 'ingreso_texto_completo'], 0);
+
+        $form[] = d(flex($ubicacion, $domicilio, _text_(_between, 'mt-5 mb-5')), 'selector_ubicaciones_domicilio');
+
+
+        $formulario[] = form_open('', ['class' => 'form_ubicacion']);
+
+
+        $horarios = lista_horarios();
+        $lista_horarios = $horarios["select"];
+
+        $min_max_disponibilidad = min_max_disponibilidad($param);
+        $text_horarios = flex('hora de entrega', $lista_horarios, 'flex-column');
+        $input = input_frm("",
+            "FECHA",
+            [
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_entrega',
+                "class" => "fecha_entrega",
+                "type" => 'date',
+                "value" => $min_max_disponibilidad['minimo'],
+                "min" => $min_max_disponibilidad['minimo'],
+                "max" => $min_max_disponibilidad['maximo'],
+                "onChange" => "horarios_disponibles()",
+                "id" => "fecha",
+            ]
+        );
+
+
+        $formulario[] = d(_titulo('¿Cual es la Ubicación?'), 'mb-3');
+        $formulario[] = d(flex_md(
+            $input,
+            $text_horarios,
+            _text_(_between, 'col-md-12'),
+            'col-sm-12 col-md-6 p-0 mt-5 mb-5',
+            _strong
+        ),13);
+        $formulario[] = d(input_frm('', 'Ubicación',
+            [
+                'class' => 'ubicacion',
+                'name' => 'ubicacion',
+                'id' => 'ubicacion',
+                'required' => true
+            ]), 'mt-3'
+        );
+        $formulario[] = hiddens(['name' => 'id_recibo','class'=>'id_recibo', 'value' => $id_recibo]);
+        $formulario[] = btn('Registrar', ['class' => 'mt-5']);
+        $formulario[] = form_close();
+
+        $form[] = d($formulario, 'd-none formulario_registro_ubicacion');
+        $modal = append($form);
+        return gb_modal($modal, "modal_ubicacion");
+    }
+
     function format_direccion($data)
     {
 
@@ -304,12 +365,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = input_frm('col-lg-12 mt-5',
+        $r[] = d(input_frm('col-lg-12 mt-5',
             'Entre la calle y la calle, o alguna referencia',
-
-
             [
-                "required" => "true",
                 "class" => "address3",
                 "name" => "referencia",
                 "value" => $entre_calles,
@@ -317,7 +375,7 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "referencias",
             ]
 
-        );
+        ), 'd-none');
 
 
         $r[] = input_frm($base, "Número Exterior",
@@ -521,7 +579,7 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_disponible_stock = new DateTime($fecha_disponible);
                 $fecha = horario_enid();
                 $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
-                if ($es_proxima_fecha && $muestra_fecha_disponible > 0 ) {
+                if ($es_proxima_fecha && $muestra_fecha_disponible > 0) {
 
                     $minimo = date_format($fecha_disponible_stock, 'Y-m-d');
                     $maximo = add_date($minimo, 4);

@@ -125,6 +125,7 @@ class Home extends CI_Controller
 
             $recibo = $recibo[0];
             $tipo_entrega = $recibo["tipo_entrega"];
+            $ubicacion = $recibo["ubicacion"];
             $response["tipo_entrega"] = $tipo_entrega;
 
             switch ($tipo_entrega) {
@@ -134,7 +135,13 @@ class Home extends CI_Controller
                     break;
 
                 case 2: //Mensajería
-                    $domicilio = $this->get_domicilio_recibo($id_recibo);
+                    if ($ubicacion > 0) {
+                        $domicilio = $this->get_ubicacion_recibo($id_recibo);
+                    } else {
+                        $domicilio = $this->get_domicilio_recibo($id_recibo);
+                    }
+
+
                     break;
                 default:
                     $domicilio = [];
@@ -171,6 +178,12 @@ class Home extends CI_Controller
         }
 
         return $domicilio;
+    }
+
+    private function get_ubicacion_recibo($id_recibo)
+    {
+        return $this->app->api("ubicacion/index/format/json/",
+            ["id_recibo" => $id_recibo]);
     }
 
     private function get_direccion($id)

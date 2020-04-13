@@ -51,6 +51,11 @@ let busqueda_usuario_selector = function (e) {
 
     let id = e.target.id;
     selecciona_valor_select('.comisionista', id);
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/tag_arquetipo/interes/format/json/";
+    request_enid("POST", data_send, url, response_tag_arquetipo);
+
     $form_busqueda.submit();
 
 };

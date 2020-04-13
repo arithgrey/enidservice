@@ -123,7 +123,7 @@ class Home extends CI_Controller
             "id_usuario" => $data['id_usuario'],
             "session" => $data
         ];
-
+        
         $response = $this->carga_ficha_direccion_envio($param, 1);
         $this->app->pagina($data, $response, 1);
 
