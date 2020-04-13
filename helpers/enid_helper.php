@@ -3094,7 +3094,7 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
 
         }
 
-        $checkout =
+        return
             [
                 'checkout' => d($response, 'checkout_resumen'),
                 'saldo_pendiente' => $saldo_pendiente,
@@ -3103,9 +3103,8 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
                 'descuento_entrega' => $costo_envio_cliente
 
             ];
-
     }
-    return $checkout;
+
 
 
 }

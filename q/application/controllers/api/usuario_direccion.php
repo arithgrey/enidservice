@@ -159,7 +159,10 @@ class usuario_direccion extends REST_Controller
 
             $data = $this->agrega_fecha_disponible_servicio($param, $data);
 
-            $response = format_direccion_envio($data);
+            $form[] = format_direccion_envio($data);
+            $form[] = form_ubicacion_escrita($param);
+            $response = append($form);
+
 
         }
 

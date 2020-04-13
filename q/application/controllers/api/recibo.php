@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class recibo extends REST_Controller
@@ -998,11 +998,14 @@ class recibo extends REST_Controller
             $fecha_contra_entrega = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
             $es_contra_entrega_domicilio = prm_def($param, 'contra_entrega_domicilio');
             $tipo_entrega = prm_def($param, 'tipo_entrega');
+            $ubicacion = prm_def($param, 'ubicacion');
+
             $response = $this->recibo_model->set_fecha_contra_entrega(
                 $param["recibo"],
                 $fecha_contra_entrega,
                 $es_contra_entrega_domicilio,
-                $tipo_entrega
+                $tipo_entrega,
+                $ubicacion
             );
         }
 

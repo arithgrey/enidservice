@@ -73,7 +73,9 @@ if (!function_exists('invierte_date_time')) {
         $seccion_arquetipos[] = formulario_arquetipos(
             $data,
             $id_cliente,
-            $negocios, $usuario_tipo_negocio, $unicos);
+            $negocios, $usuario_tipo_negocio,
+            $unicos
+        );
 
 
         $seccion_arquetipos[] = $respuestas['respuestas'];
@@ -531,37 +533,43 @@ if (!function_exists('invierte_date_time')) {
 
         $text_domicilio = '';
         if (es_data($domicilio)) {
+            if (es_data($recibo) && pr($recibo, 'ubicacion') < 1) {
 
-            $domicilio = $domicilio[0];
-            $calle = $domicilio['calle'];
-            $entre_calles = $domicilio['entre_calles'];
-            $numero_exterior = $domicilio['numero_exterior'];
-            $asentamiento = $domicilio['asentamiento'];
-            $municipio = $domicilio['municipio'];
-            $ciudad = $domicilio['ciudad'];
-            $cp = $domicilio['cp'];
-            $numero_interior = $domicilio['numero_interior'];
+                $domicilio = $domicilio[0];
+                $calle = $domicilio['calle'];
+                $entre_calles = $domicilio['entre_calles'];
+                $numero_exterior = $domicilio['numero_exterior'];
+                $asentamiento = $domicilio['asentamiento'];
+                $municipio = $domicilio['municipio'];
+                $ciudad = $domicilio['ciudad'];
+                $cp = $domicilio['cp'];
+                $numero_interior = $domicilio['numero_interior'];
 
-            $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
+                $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
 
-            $text_domicilio = _text_(
-                $calle,
-                '#',
-                $numero_exterior,
-                'Interior',
-                '#',
-                $numero_interior,
-                $asentamiento,
-                ', ',
-                $municipio,
-                $ciudad,
-                'C.P.',
-                $cp,
-                br(2),
-                strong('referencia o entre calles'),
-                $entre_calles,
-                $str
-            );
+                $text_domicilio = _text_(
+                    $calle,
+                    '#',
+                    $numero_exterior,
+                    'Interior',
+                    '#',
+                    $numero_interior,
+                    $asentamiento,
+                    ', ',
+                    $municipio,
+                    $ciudad,
+                    'C.P.',
+                    $cp,
+                    br(2),
+                    strong('referencia o entre calles'),
+                    $entre_calles,
+                    $str
+                );
+            } else {
+                $text_ubicacion = pr($domicilio, 'ubicacion');
+                $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
+                $text_domicilio = _text_($text_ubicacion, $str);
+            }
 
         }
         return $text_domicilio;
@@ -2499,7 +2507,7 @@ if (!function_exists('invierte_date_time')) {
 
         $fecha = "";
 
-        if (count(prm_def($domicilio, "domicilio")) > 0 && es_data($recibo)) {
+        if (es_data(prm_def($domicilio, "domicilio")) > 0 && es_data($recibo)) {
 
             $recibo = $recibo[0];
             $entrega = ($es_venta_cancelada) ?
@@ -3132,14 +3140,21 @@ if (!function_exists('invierte_date_time')) {
         $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');
         $fecha_contra_entrega = format_fecha(pr($recibo, 'fecha_contra_entrega'), 1);
         $direccion = [];
+        $es_ubicacion = pr($recibo, 'ubicacion');
         foreach ($domicilio as $row) {
 
-            $direccion[] =
-                _text_($row["calle"], "NÚMERO", $row["numero_exterior"],
-                    "NÚMERO INTERIOR", $row["numero_interior"], "COLONIA",
-                    $row["asentamiento"], "DELEGACIÓN/MUNICIPIO", $row["municipio"],
-                    "ESTADO ", $row["estado"], "CÓDIGO POSTAL ", $row["cp"]
-                );
+            if ($es_ubicacion < 1) {
+
+                $direccion[] =
+                    _text_($row["calle"], "NÚMERO", $row["numero_exterior"],
+                        "NÚMERO INTERIOR", $row["numero_interior"], "COLONIA",
+                        $row["asentamiento"], "DELEGACIÓN/MUNICIPIO", $row["municipio"],
+                        "ESTADO ", $row["estado"], "CÓDIGO POSTAL ", $row["cp"]
+                    );
+            } else {
+                $direccion[] = $row["ubicacion"];
+            }
+
 
         }
 
@@ -3151,10 +3166,11 @@ if (!function_exists('invierte_date_time')) {
 
 
         $str_direccion = append($direccion);
+        $extra = ($es_ubicacion) ?: 'text-uppercase';
         $bloque = flex(
             "domicilio de envío",
             $str_direccion,
-            'flex-column text-uppercase',
+            _text_('flex-column',$extra),
             _strong
         );
 

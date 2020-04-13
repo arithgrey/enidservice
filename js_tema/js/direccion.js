@@ -132,29 +132,3 @@ function response_inf_envio_complete(data, place_info) {
 
     $(".form_direccion_envio").submit(registra_nueva_direccion);
 }
-
-/*
-function informacion_envio_complete(){
-
-	let url 		=  "../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
-	let data_send 	=  {id_recibo : get_option("id_proyecto_persona_forma_pago")};
-	request_enid( "GET",  data_send , url , function(){
-		render_enid(".place_direccion_envio" , data);
-		recorre(".contenedo_compra_info");
-	}  , ".place_direccion_envio");
-}
-function oculta_delegacion_estado_pais(flag){
-
-
-	let elementos = [".delegacion_c" , ".estado_c" , ".pais_c" , ".button_c" , ".direccion_principal_c"];
-	for(let x in elementos){
-		if (flag ==  "1") {
-			$(elementos[x]).hide();
-		}else{
-			$(elementos[x]).show();
-		}
-		x ++;
-	}
-}
-
-*/

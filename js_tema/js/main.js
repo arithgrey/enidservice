@@ -1113,7 +1113,7 @@ let es_formato_cantidad = function ($input) {
     let valor = parseInt($input.val());
     let tiene_formato = true;
 
-    if (valor  < 1 ) {
+    if (valor < 1) {
         $input.next().next().removeClass('d-none');
         tiene_formato = false;
     } else {
@@ -1199,6 +1199,7 @@ let path_enid = (indice, $extra = '') => {
 
     let $base_url = {
         "url_home": "reporte_enid",
+        "recibo": "pedidos/?recibo="
     };
 
     return _text('../', $base_url[indice], $extra);
