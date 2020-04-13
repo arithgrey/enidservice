@@ -1363,7 +1363,7 @@ if (!function_exists('invierte_date_time')) {
         $ventas_hoy = [];
         if (es_data($recibos)) {
 
-            sksort($recibos, "fecha_contra_entrega",true);
+            sksort($recibos, "fecha_contra_entrega", true);
             foreach ($recibos as $row) {
 
                 $fecha_contra_entrega = $row['fecha_contra_entrega'];
@@ -1409,12 +1409,14 @@ if (!function_exists('invierte_date_time')) {
                 $id_usuario_entrega = $row['id_usuario_entrega'];
 
 
+                $ubicacion = $row['ubicacion'];
                 $text_total = ayuda_notificacion(
                     $total,
                     $dia_entrega,
                     $es_contra_entrega,
                     $es_contra_entrega_domicilio_sin_direccion,
-                    $id_usuario_entrega
+                    $id_usuario_entrega,
+                    $ubicacion
                 );
 
                 $total_seccion = d($text_total, 'd-flex flex-column');
@@ -1458,7 +1460,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function ayuda_notificacion($total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
-                                $id_usuario_entrega)
+                                $id_usuario_entrega, $ubicacion)
     {
         $text_total = [];
         $icon = '';
@@ -1466,11 +1468,11 @@ if (!function_exists('invierte_date_time')) {
             $icon = d(icon(_entregas_icon));
         }
 
-        $text_total[] = flex($total,$icon, _between);
+        $text_total[] = flex($total, $icon, _between);
         $text_total[] = $dia_entrega;
         if ($es_contra_entrega) {
             $text_total[] = d('Es contra entrega a domicilio', 'black');
-            if ($es_contra_entrega_domicilio_sin_direccion) {
+            if ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1) {
                 $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
             }
         }
