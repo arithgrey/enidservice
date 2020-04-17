@@ -405,7 +405,7 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $id_servicio,
                 "class" => "qservicio"
             ]);
-
+        $r[] = gb_modal(notifica_entrega_modal($recibo, $data), 'modal_notificacion_entrega');
         return append($r);
 
     }
@@ -642,11 +642,14 @@ if (!function_exists('invierte_date_time')) {
             $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
                 ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
 
+
+            $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega']);
+            $pago_efectivo = (puede_repartir($data)) ? $boton_pagado : '';
             $checkout = ticket_pago($recibo, [], 2);
             $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
             $text_pago = _text_($text_entrega, money($saldo_pendiente));
-            $pago_pendiente = _titulo($text_pago);
+            $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo);
             $es_orden_entregada = es_orden_entregada($recibo, $data);
             $str = (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
 
@@ -1079,12 +1082,66 @@ if (!function_exists('invierte_date_time')) {
                     $id_recibo,
                     $punto_encuentro
                 );
+
             }
         }
 
         return append($response);
 
 
+    }
+
+    function notifica_entrega_modal($recibo, $data)
+    {
+
+        $form_entrega[] = _titulo('¿Ya entregaste este pedido?');
+
+        $checkout = ticket_pago($recibo, [], 2);
+        $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+        $tipo_entrega = pr($recibo, 'tipo_entrega');
+        $id_usuario_compra = pr($recibo,'id_usuario');
+        $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
+        $form_entrega[] = form_open('', ['class' => 'form_notificacion_entrega_cliente']);
+        $form_entrega[] = hiddens(['name' => 'saldo_cubierto', 'class' => 'saldo_cubierto', 'value' => $saldo_pendiente]);
+        $form_entrega[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+        $form_entrega[] = hiddens(['name' => 'status', 'value' => 15]);
+        $form_entrega[] = hiddens(['name' => 'es_proceso_compra', 'value' => '']);
+        $form_entrega[] = hiddens(['name' => 'tipo_entrea', 'value' => $tipo_entrega]);
+        $form_entrega[] =  form_close();
+
+        $confirmacion = format_link('Si', ['class' => 'selector_entrega']);
+        $negacion = format_link('Aún no', ['class' => 'selector_negacion', 'data-dismiss' => 'modal'], 0);
+        $form_entrega[] = flex($confirmacion, $negacion, _text_(_between, _mbt5));
+        $form[] = d($form_entrega, 'form_confirmacion_entrega');
+
+        $form_otros[] = _titulo('¿El cliente tiene interés sobre otros artículos?');
+
+        $confirmacion = format_link('Si', ['class' => 'selector_interes']);
+        $negacion = format_link('no, no nos comentó', ['class' => 'selector_negacion', 'data-dismiss' => 'modal'], 0);
+        $form_otros[] = flex($confirmacion, d($negacion,'selector_negacion'), _text_(_between, _mbt5));
+
+
+        $form_otros[] = form_open('', ['class' => 'form_articulo_interes_entrega d-none mt-5']);
+        $form_otros[] = input_frm('', '¿Qué artículo?',
+            [
+                'class' => 'nuevo_articulo_interes',
+                'id' => 'nuevo_articulo_interes',
+                'name' => 'tag',
+                'placeholder' => 'Ej. camisa',
+                'type' => 'text',
+                'required' => true
+            ]
+        );
+        $form_otros[] = hiddens(['name' => 'usuario', 'value' => $id_usuario_compra]);
+        $form_otros[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+        $form_otros[] = hiddens(['name' => 'tipo', 'value' => 2]);
+        $form_otros[] = d(btn('Agregar'), 'mt-5');
+        $form_otros[] = form_close();
+
+
+
+        $form[] = d($form_otros, 'form_otros d-none');
+        return append($form);
     }
 
     function reparto_contra_entrega($data, $status_ventas, $recibo, $id_recibo, $punto_encuentro)
@@ -1096,6 +1153,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_administrador_o_vendedor($data) && !$es_orden_pagada_entregada) {
 
             $status_recibo = pr($recibo, 'status');
+            $ubicacion = pr($recibo, 'ubicacion');
             $clasificacion = search_bi_array(
                 $status_ventas,
                 "id_estatus_enid_service",
@@ -1116,7 +1174,9 @@ if (!function_exists('invierte_date_time')) {
 
             $config = ['class' => _text_(_mbt5_md, 'w-100')];
 
-            if (!$es_contra_entrega_domicilio || ($es_contra_entrega_domicilio && $id_direccion > 0)) {
+            $es_contra_entrega_domicilio_registro = ($es_contra_entrega_domicilio && $id_direccion > 0);
+            $es_contra_entrega_domicilio_ubicacion = ($es_contra_entrega_domicilio && $ubicacion > 0);
+            if (!$es_contra_entrega_domicilio || $es_contra_entrega_domicilio_registro || $es_contra_entrega_domicilio_ubicacion) {
 
                 $config["onclick"] = $confirm;
             }
@@ -3170,7 +3230,7 @@ if (!function_exists('invierte_date_time')) {
         $bloque = flex(
             "domicilio de envío",
             $str_direccion,
-            _text_('flex-column',$extra),
+            _text_('flex-column', $extra),
             _strong
         );
 

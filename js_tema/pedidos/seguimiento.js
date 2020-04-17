@@ -1,7 +1,20 @@
 "use strict";
+let $notifica_entrega = $('.notifica_entrega');
+let $selector_entrega = $('.selector_entrega');
+let $saldo_cubierto = $('.saldo_cubierto');
+let $form_notificacion_entrega_cliente = $('.form_notificacion_entrega_cliente');
+let $form_confirmacion_entrega = $('.form_confirmacion_entrega');
+let $form_otros = $('.form_otros');
+let $selector_interes = $('.selector_interes');
+let $form_articulo_interes = $('.form_articulo_interes_entrega');
+let $selector_negacion = $('.selector_negacion');
 $(document).ready(function () {
     valida_notificacion_pago();
     carga_productos_sugeridos();
+    $notifica_entrega.click(notifica_entrega_cliente);
+    $selector_entrega.click(confirma_entrega_cliente);
+    $selector_interes.click(mas_articulos);
+    $form_articulo_interes.submit(registro_articulo_interes);
 });
 let valida_notificacion_pago = () => {
 
@@ -71,3 +84,43 @@ let response_carga_productos = data => {
         render_enid(".place_tambien_podria_interezar", data);
     }
 };
+let notifica_entrega_cliente = function () {
+
+    $('#modal_notificacion_entrega').modal("show");
+};
+let confirma_entrega_cliente = function () {
+    let data_send = $form_notificacion_entrega_cliente.serialize();
+    let url = "../q/index.php/api/recibo/status/format/json/";
+    request_enid("PUT", data_send, url, response_confirma_entrega_cliente);
+}
+let response_confirma_entrega_cliente = function (data) {
+
+    if (data === true) {
+        $form_confirmacion_entrega.addClass('d-none');
+        $form_otros.removeClass('d-none');
+
+    }
+}
+let mas_articulos = function () {
+
+    $form_articulo_interes.removeClass('d-none');
+    $selector_negacion.addClass('d-none');
+}
+let registro_articulo_interes = function (e) {
+    debugger;
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/tag_arquetipo/interes/format/json/";
+    request_enid("POST", data_send, url, response_tag_arquetipo);
+    e.preventDefault();
+};
+let response_tag_arquetipo = function (data) {
+
+    let $recibo = $('.recibo').val();
+    let data_send = $.param({'v': 1, 'id': $recibo});
+    let url = "../q/index.php/api/recibo/registro_articulo_interes/format/json/";
+    request_enid("PUT", data_send, url, response_otros);
+
+};
+let response_otros = function () {
+    redirect(path_enid('entregas'));
+}

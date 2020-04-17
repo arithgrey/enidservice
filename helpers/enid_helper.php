@@ -3360,6 +3360,12 @@ function es_administrador_o_vendedor($data)
     return in_array($data['id_perfil'], $data['restricciones']['es_administrador_o_vendedor']);
 
 }
+function puede_repartir($data)
+{
+
+    return in_array($data['id_perfil'], $data['restricciones']['puede_repartir']);
+
+}
 
 function es_administrador($data)
 {
