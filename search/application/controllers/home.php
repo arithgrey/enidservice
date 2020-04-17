@@ -168,14 +168,14 @@ class Home extends CI_Controller
 
         $data = $this->get_clasificaciones(array_unique($clasificaciones));
 
-        $response = [
+        return [
             "primer_nivel" => $this->filter_nivel($primer, $data),
             "segundo_nivel" => $this->filter_nivel($segundo_nivel, $data),
             "tercer_nivel" => $this->filter_nivel($tercer_nivel, $data),
             "cuarto_nivel" => $this->filter_nivel($cuarto_nivel, $data),
             "quinto_nivel" => $this->filter_nivel($quinto_nivel, $data)
         ];
-        return $response;
+
     }
 
     private function filter_nivel($nivel, $data)

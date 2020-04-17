@@ -1378,10 +1378,14 @@ if (!function_exists('invierte_date_time')) {
                 $text_entrega_paso = _text_('La fecha de entrega fué hace ', $dias, 'días!');
                 $text_entrega = (!$es_mayor) ? $text_entrega_paso : $text_entrega;
 
+
+                $ubicacion = $row['ubicacion'];
                 if ($dias == 1 && $es_mayor) {
                     $text_entrega = 'Se entregará mañana';
                 } elseif ($dias == 1 && !$es_mayor) {
                     $text_entrega = 'La entrega fué ayer';
+                } elseif ($ubicacion > 0) {
+                    $text_entrega = '';
                 }
 
 
@@ -1394,6 +1398,9 @@ if (!function_exists('invierte_date_time')) {
                     $format_hora = 1;
                     if ($es_contra_entrega_domicilio_sin_direccion) {
                         $format_hora = 0;
+                    }
+                    if ($ubicacion > 0) {
+                        $format_hora = 1;
                     }
                 }
 
@@ -1416,7 +1423,8 @@ if (!function_exists('invierte_date_time')) {
                     $es_contra_entrega,
                     $es_contra_entrega_domicilio_sin_direccion,
                     $id_usuario_entrega,
-                    $ubicacion
+                    $ubicacion,
+                    $text_entrega
                 );
 
                 $total_seccion = d($text_total, 'd-flex flex-column');
@@ -1460,7 +1468,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function ayuda_notificacion($total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
-                                $id_usuario_entrega, $ubicacion)
+                                $id_usuario_entrega, $ubicacion, $text_entrega)
     {
         $text_total = [];
         $icon = '';
@@ -1471,7 +1479,9 @@ if (!function_exists('invierte_date_time')) {
         $text_total[] = flex($total, $icon, _between);
         $text_total[] = $dia_entrega;
         if ($es_contra_entrega) {
-            $text_total[] = d('Es contra entrega a domicilio', 'black');
+
+            $text_total[] = ($ubicacion < 1) ? 'Es contra entrega a domicilio' : $text_entrega;
+
             if ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1) {
                 $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
             }
