@@ -293,7 +293,7 @@ class Home extends CI_Controller
                 $breadcrumbs[] = $this->breadcrumbs->show();
             }
             $data['breadcrumbs'] = append($breadcrumbs);
-
+            $data['usuario_cliente'] = $usuario_compra;
 
             $this->app->pagina($data, render_seguimiento($data), 1);
         }

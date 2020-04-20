@@ -459,9 +459,23 @@ if (!function_exists('invierte_date_time')) {
 
                 $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
                 $formato_domicilio = ($es_contra_entrega_domicilio) ? 'TIENES UNA CITA EL ' : "SE  ESTIMA QUE TU PEDIDO LLEGARÁ EL";
+
+
                 $text = ($es_servicio) ? "PLANEADO PARA EL DÍA " : $formato_domicilio;
                 $fecha_hora_entrega = es_contra_entrega_domicilio($recibo, 1, $fecha);
-                $text = _text_($text, $fecha_hora_entrega);
+                $text_entrega[] = _titulo(_text_($text, $fecha_hora_entrega), 2);
+
+                if (puede_repartir($data)) {
+
+                    $usuario_cliente = $data['usuario_cliente'];
+                    $nombre_cliente = format_nombre($usuario_cliente);
+
+                    $text_entrega[] = _titulo('cliente', 3, 'underline');
+                    $text_entrega[] = d($nombre_cliente);
+                    $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+
+                }
+                $text = append($text_entrega);
 
 
             }
@@ -470,8 +484,9 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = $evaluacion;
-        $z[] = _titulo($text, 2);
-        $z[] = d(text_domicilio($data), 'text-uppercase');
+        $z[] = $text;
+        $z[] = _titulo('domicilio de entrega', 3, 'underline');
+        $z[] = d(text_domicilio($data));
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
@@ -497,12 +512,16 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $a[] = append($z);
-        $a[] = format_link('comprar nuevamente',
-            [
-                'href' => path_enid('producto', $id_servicio),
-                'class' => 'mt-5'
-            ]
-        );
+        if (!puede_repartir($data)){
+
+            $a[] = format_link('comprar nuevamente',
+                [
+                    'href' => path_enid('producto', $id_servicio),
+                    'class' => 'mt-5'
+                ]
+            );
+        }
+
 
         if ($data['es_administrador']) {
 
@@ -566,7 +585,10 @@ if (!function_exists('invierte_date_time')) {
                     $str
                 );
             } else {
+
                 $text_ubicacion = pr($domicilio, 'ubicacion');
+
+                $text_ubicacion = valida_texto_maps($text_ubicacion);
                 $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
                 $text_domicilio = _text_($text_ubicacion, $str);
             }
@@ -574,6 +596,26 @@ if (!function_exists('invierte_date_time')) {
         }
         return $text_domicilio;
 
+    }
+
+    function valida_texto_maps($domicilio)
+    {
+        $ubicacion_arreglo = explode(' ', $domicilio);
+        $text = '';
+        foreach ($ubicacion_arreglo as $row) {
+            $text .= _text_($row);
+            if (strpos($row, 'https') !== FALSE) {
+                $text .= a_enid('abrir en google maps',
+                    [
+                        'href' => $row,
+                        'target'=>'_blank',
+                        'style'=>'color:blue;',
+                        'class'=>'text-uppercase text-right mt-3'
+                    ]
+                );
+            }
+        }
+        return $text;
     }
 
     function text_domicilio($data)
@@ -643,7 +685,7 @@ if (!function_exists('invierte_date_time')) {
                 ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
 
 
-            $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega']);
+            $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega mt-4']);
             $pago_efectivo = (puede_repartir($data)) ? $boton_pagado : '';
             $checkout = ticket_pago($recibo, [], 2);
             $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
@@ -1099,7 +1141,7 @@ if (!function_exists('invierte_date_time')) {
         $checkout = ticket_pago($recibo, [], 2);
         $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
         $tipo_entrega = pr($recibo, 'tipo_entrega');
-        $id_usuario_compra = pr($recibo,'id_usuario');
+        $id_usuario_compra = pr($recibo, 'id_usuario');
         $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
         $form_entrega[] = form_open('', ['class' => 'form_notificacion_entrega_cliente']);
         $form_entrega[] = hiddens(['name' => 'saldo_cubierto', 'class' => 'saldo_cubierto', 'value' => $saldo_pendiente]);
@@ -1107,7 +1149,7 @@ if (!function_exists('invierte_date_time')) {
         $form_entrega[] = hiddens(['name' => 'status', 'value' => 15]);
         $form_entrega[] = hiddens(['name' => 'es_proceso_compra', 'value' => '']);
         $form_entrega[] = hiddens(['name' => 'tipo_entrea', 'value' => $tipo_entrega]);
-        $form_entrega[] =  form_close();
+        $form_entrega[] = form_close();
 
         $confirmacion = format_link('Si', ['class' => 'selector_entrega']);
         $negacion = format_link('Aún no', ['class' => 'selector_negacion', 'data-dismiss' => 'modal'], 0);
@@ -1118,7 +1160,7 @@ if (!function_exists('invierte_date_time')) {
 
         $confirmacion = format_link('Si', ['class' => 'selector_interes']);
         $negacion = format_link('no, no nos comentó', ['class' => 'selector_negacion', 'data-dismiss' => 'modal'], 0);
-        $form_otros[] = flex($confirmacion, d($negacion,'selector_negacion'), _text_(_between, _mbt5));
+        $form_otros[] = flex($confirmacion, d($negacion, 'selector_negacion'), _text_(_between, _mbt5));
 
 
         $form_otros[] = form_open('', ['class' => 'form_articulo_interes_entrega d-none mt-5']);
@@ -1137,7 +1179,6 @@ if (!function_exists('invierte_date_time')) {
         $form_otros[] = hiddens(['name' => 'tipo', 'value' => 2]);
         $form_otros[] = d(btn('Agregar'), 'mt-5');
         $form_otros[] = form_close();
-
 
 
         $form[] = d($form_otros, 'form_otros d-none');
