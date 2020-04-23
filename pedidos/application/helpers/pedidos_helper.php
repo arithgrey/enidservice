@@ -378,9 +378,18 @@ if (!function_exists('invierte_date_time')) {
         $recibo = $data["recibo"];
         $id_servicio = $data["id_servicio"];
 
+
         $r[] = $data['breadcrumbs'];
+        $resumen_orden_compra = resumen_orden($data, $recibo, $id_servicio);
+        if (is_mobile()) {
+
+            $z[] = $resumen_orden_compra;
+        }
         $z[] = seguimiento($recibo, $data);
-        $z[] = resumen_orden($data, $recibo, $id_servicio);
+        if (!is_mobile()) {
+            $z[] = $resumen_orden_compra;
+        }
+
         $r[] = append($z);
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
@@ -413,7 +422,6 @@ if (!function_exists('invierte_date_time')) {
     function seguimiento($recibo, $data)
     {
 
-
         $es_vendedor = $data["es_vendedor"];
         $domicilio = $data["domicilio"];
 
@@ -434,6 +442,11 @@ if (!function_exists('invierte_date_time')) {
         $evaluacion = evaluacion($recibo, $es_vendedor);
         $se_cancela = es_orden_cancelada($data);
         $es_orden_entregada = es_orden_entregada($recibo, $data);
+        $tipo_entrega = pr($recibo, "tipo_entrega");
+        $es_servicio = pr($servicio, "flag_servicio");
+        $fecha_servicio = pr($recibo, "fecha_servicio");
+        $fecha_contra_entrega = pr($recibo, "fecha_contra_entrega");
+        $fecha_vencimiento = pr($recibo, "fecha_vencimiento");
 
         if ($se_cancela) {
 
@@ -445,11 +458,7 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-            $es_servicio = pr($servicio, "flag_servicio");
-            $fecha_servicio = pr($recibo, "fecha_servicio");
-            $tipo_entrega = pr($recibo, "tipo_entrega");
-            $fecha_contra_entrega = pr($recibo, "fecha_contra_entrega");
-            $fecha_vencimiento = pr($recibo, "fecha_vencimiento");
+
             $fecha = ($es_servicio) ? $fecha_servicio :
                 ($tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
 
@@ -485,7 +494,8 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = $evaluacion;
         $z[] = $text;
-        $z[] = _titulo('domicilio de entrega', 3, 'underline');
+        $tipo_entrega_domicilio = ($tipo_entrega > 1) ? 'domicilio de entrega' : 'punto de encuentro';
+        $z[] = _titulo($tipo_entrega_domicilio, 3, 'underline');
         $z[] = d(text_domicilio($data));
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
 
@@ -512,7 +522,7 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $a[] = append($z);
-        if (!puede_repartir($data)){
+        if (!puede_repartir($data)) {
 
             $a[] = format_link('comprar nuevamente',
                 [
@@ -608,9 +618,9 @@ if (!function_exists('invierte_date_time')) {
                 $text .= a_enid('abrir en google maps',
                     [
                         'href' => $row,
-                        'target'=>'_blank',
-                        'style'=>'color:blue;',
-                        'class'=>'text-uppercase text-right mt-3'
+                        'target' => '_blank',
+                        'style' => 'color:blue;',
+                        'class' => 'text-uppercase text-right mt-3'
                     ]
                 );
             }
@@ -639,8 +649,8 @@ if (!function_exists('invierte_date_time')) {
                     $numero = $pe['numero'];
                     $nombre = $pe['nombre'];
 
-                    $str = pago_en_cita($data, $recibo, 1);
-                    $text = _text_(
+
+                    $text_entrega[] = _text_(
                         'TIENES UNA CITA EL DÍA ',
                         strong(format_fecha(pr($recibo, 'fecha_contra_entrega'), 1)),
                         'EN',
@@ -649,9 +659,22 @@ if (!function_exists('invierte_date_time')) {
                         $tipo,
                         '#',
                         $numero,
-                        $nombre_linea,
-                        $str
+                        $nombre_linea
                     );
+
+                    if (prm_def($data, 'usuario_cliente')) {
+
+                        $usuario_cliente = $data['usuario_cliente'];
+                        $nombre_cliente = format_nombre($usuario_cliente);
+                        $text_entrega[] = _titulo('cliente', 3, 'underline');
+                        $text_entrega[] = d($nombre_cliente);
+                        $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+                        $text_entrega[] = pago_en_cita($data, $recibo, 1);
+
+                    }
+
+                    $text = append($text_entrega);
+
                 }
 
                 break;
@@ -1395,10 +1418,29 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
-
+        $response[] = gb_modal(pago_usuario_comiion(), 'modal_pago_comision');
 
         return append($response);
 
+
+    }
+
+    function pago_usuario_comiion()
+    {
+
+        $form[] = form_open('', ['class' => 'form_pago_comisiones']);
+        $form[] = d(_titulo('¿Marcar como pagado?'), 'text-center');
+        $form[] = d('', 'resumen_pago_comisionista');
+        $form[] = hiddens(['class' => 'usuario_pago', 'name' => 'usuario']);
+        $form[] = hiddens(['class' => 'monto_pago', 'name' => 'monto_pago']);
+        $form[] = hiddens(['class' => 'fecha_inicio', 'name' => 'fecha_inicio']);
+        $form[] = hiddens(['class' => 'fecha_termino', 'name' => 'fecha_termino']);
+
+        $confirmacion = d(btn('Marcar como pagado!', ['class' => 'marcar_pago']),'mt-5');
+
+        $form[] = $confirmacion;
+        $form[] = form_close();
+        return append($form);
 
     }
 
@@ -1407,6 +1449,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "form_search", "method" => "GET"]);
         $r[] = hiddens(["name" => "recibo", "value" => "", "class" => "numero_recibo"]);
+
         $r[] = form_close();
 
         return append($r);

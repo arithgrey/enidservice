@@ -701,13 +701,26 @@ if (!function_exists('invierte_date_time')) {
         $listado[] = append($linea_cambio_estado);
         $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
-        $por_pago_resumen = totales_comisiones($resumen_usuarios_por_pago, $usuarios);
+        $por_pago_resumen = totales_comisiones($resumen_usuarios_por_pago, $usuarios, $param);
 
-        return d_c([$conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $tabla, $totales, $por_pago_resumen], 'col-sm-12 mt-4');
+        $render = [
+            $conversion,
+            $tb_fechas,
+            $text_saldo_por_cobrar,
+            $inicio,
+            $tabla,
+            $totales,
+            $por_pago_resumen
+        ];
+        return d_c($render, 'col-sm-12 mt-4');
     }
 
-    function totales_comisiones($usuarios_por_pago, $usuarios)
+    function totales_comisiones($usuarios_por_pago, $usuarios, $param)
     {
+
+
+        $fecha_inicio = $param['fecha_inicio'];
+        $fecha_termino = $param['fecha_termino'];
 
         $totales_en_pagos = 0;
         $totales = [];
@@ -739,6 +752,7 @@ if (!function_exists('invierte_date_time')) {
             $id_usuario = $row['id_usuario'];
             $contenido = [];
             $nombre_completo = '';
+
             foreach ($usuarios as $row2) {
 
                 if (es_data($row2) && array_key_exists(0, $row2)) {
@@ -748,24 +762,35 @@ if (!function_exists('invierte_date_time')) {
                     if ($id_usuario_busqueda == $id_usuario) {
 
                         $nombre_completo = format_nombre($usuario);
+
                         break;
                     }
                 }
             }
-            $totales_en_pagos = $totales_en_pagos + $row['total_comisiones'];
+            $total_comisiones_efectivo = $row['total_comisiones'];
+            $totales_en_pagos = $totales_en_pagos + $total_comisiones_efectivo;
+
             $total_comisiones = money($row['total_comisiones']);
 
 
             $config = ['class' => 'usuario_venta cursor_pointer col-md-4 border', 'id' => $id_usuario];
+            $config_pago = [
+                'class' => 'usuario_venta_pago cursor_pointer col-md-4 border',
+                'id' => $id_usuario,
+                'total_comisiones' => $total_comisiones_efectivo,
+                'nombre_comisionista' => $nombre_completo,
+                'fecha_inicio' => $fecha_inicio,
+                'fecha_termino' => $fecha_termino
+            ];
             $contenido[] = d($id_usuario, $config);
             $contenido[] = d($nombre_completo, $config);
-            $contenido[] = d($total_comisiones, $config);
+            $contenido[] = d($total_comisiones, $config_pago);
 
             $response[] = d($contenido, 'border row');
 
         }
         $_response[] = append($response);
-        $_response[] =  d(_titulo(money($totales_en_pagos)),'pull-right row mt-5');
+        $_response[] = d(_titulo(money($totales_en_pagos)), 'pull-right row mt-5');
         return append($_response);
 
     }
@@ -783,7 +808,6 @@ if (!function_exists('invierte_date_time')) {
         } else {
             $str = '';
         }
-
 
         $text = [
             money($monto),
