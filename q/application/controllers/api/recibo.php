@@ -1541,4 +1541,17 @@ class recibo extends REST_Controller
         return $response;
 
     }
+
+    function pago_recibos_comisiones_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "usuario")) {
+
+            $usuario = $param['usuario'];
+            $response = $this->recibo_model->pago_recibos_comisiones($usuario);
+        }
+        return $this->response($response);
+    }
 }

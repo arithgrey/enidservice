@@ -1329,4 +1329,17 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
+    function pago_recibos_comisiones($usuario)
+    {
+
+        $query_set = 'UPDATE proyecto_persona_forma_pago SET flag_pago_comision = 1 
+                    WHERE id_proyecto_persona_forma_pago IN 
+                    (SELECT * FROM (
+                    SELECT id_proyecto_persona_forma_pago FROM proyecto_persona_forma_pago 
+                    WHERE id_usuario_referencia = ' . $usuario . ' AND se_cancela < 1 AND cancela_cliente < 1 
+                    AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)';
+        return $this->db->query($query_set);
+
+    }
+
 }   

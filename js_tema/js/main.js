@@ -712,14 +712,14 @@ let cerrar_modal = () => {
 
 let div_enid = (id_padre, text, clase = '') => {
 
-    var newDiv = document.createElement("div");
-    var newContent = document.createTextNode(text);
+    let newDiv = document.createElement("div");
+    let newContent = document.createTextNode(text);
 
 
     if (clase.length > 0) {
 
         let arrClass = clase.split(" ");
-        for (var x in arrClass) {
+        for (let x in arrClass) {
             newDiv.className += arrClass[x] + " ";
         }
 
@@ -1193,6 +1193,15 @@ function _text() {
     }
 
     return $response;
+}
+
+function d(text, className = '') {
+
+    let div = document.createElement("div");
+    let text_div = document.createTextNode(text);
+    div.className = className;
+    div.appendChild(text_div);
+    return div.outerHTML;
 }
 
 let path_enid = (indice, $extra = '') => {
