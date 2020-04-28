@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class usuario_model extends CI_Model
 {
@@ -580,6 +580,21 @@ class usuario_model extends CI_Model
                     WHERE idusuario = $id_usuario LIMIT 1";
         return $this->db->query($query);
 
+    }
+
+    function get_in($in)
+    {
+
+        $query_get = 'SELECT 
+                idusuario id_usuario,
+                nombre,
+                apellido_paterno,
+                apellido_materno,
+                email,
+                nombre_usuario
+                FROM usuario WHERE idusuario in ('.$in.')';
+
+        return $this->db->query($query_get)->result_array();
     }
 
 }

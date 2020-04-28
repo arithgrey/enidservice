@@ -87,12 +87,13 @@ if (!function_exists('invierte_date_time')) {
     {
         $id_recibo = $param['id_recibo'];
 
-        $form[] = d(_titulo('¿Tienes de dos?', 2), 'selector_ubicaciones_domicilio');
+
+        $form[] = d(_titulo('¿Tienes una de dos?'), 'selector_ubicaciones_domicilio  text-center text-md-left');
 
         $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
         $domicilio = format_link('Registrar domicilio completo', ['class' => 'ingreso_texto_completo'], 0);
 
-        $form[] = d(flex($ubicacion, $domicilio, _text_(_between, 'mt-5 mb-5')), 'selector_ubicaciones_domicilio');
+        $form[] = d(flex_md($ubicacion, $domicilio, _text_(_between_md, 'mt-5 mb-5'),'mb-5 mb-md-0'), 'selector_ubicaciones_domicilio');
 
 
         $formulario[] = form_open('', ['class' => 'form_ubicacion']);

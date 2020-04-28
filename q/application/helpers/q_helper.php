@@ -1377,7 +1377,7 @@ if (!function_exists('invierte_date_time')) {
                 $text_entrega = _text_('Se entregará en ', $dias, 'días!');
                 $text_entrega_paso = _text_('La fecha de entrega fué hace ', $dias, 'días!');
                 $text_entrega = (!$es_mayor) ? $text_entrega_paso : $text_entrega;
-
+                $id_recibo = $row['id_recibo'];
 
                 $ubicacion = $row['ubicacion'];
                 if ($dias == 1 && $es_mayor) {
@@ -1412,7 +1412,8 @@ if (!function_exists('invierte_date_time')) {
                 $dia_entrega = d(_text_($notificacion_hoy, $hora_entrega), _text_('badge', $es_hoy));
 
                 $imagenes = d(img($row["url_img_servicio"]), "w_50");
-                $total = d(money($row["total"]), "text-left black");
+                $totales_recibo = money($row["total"]);
+                $total = d($totales_recibo, "text-left black");
                 $id_usuario_entrega = $row['id_usuario_entrega'];
 
 
@@ -1429,7 +1430,11 @@ if (!function_exists('invierte_date_time')) {
 
                 $total_seccion = d($text_total, 'd-flex flex-column');
 
-                $text = flex($imagenes, $total_seccion, _between);
+                $orden = _text('ORDEN #', $id_recibo);
+                $identificador = flex($orden, $row['nombre_vendedor'], 'flex-column');
+                $seccion_imagenes = flex($imagenes, $identificador, 'flex-column black fp9', '', 'font-weight-bolder');
+
+                $text = flex($seccion_imagenes, $total_seccion, _between);
 
 
                 $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
@@ -1595,12 +1600,10 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-        $response = [
+        return [
             "html" => append($r),
             "flag" => $f,
         ];
-
-        return $response;
 
     }
 
