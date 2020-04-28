@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class usuario extends REST_Controller
@@ -15,6 +15,17 @@ class usuario extends REST_Controller
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("idusuario");
         $this->id_empresa = $this->app->get_session('idempresa');
+    }
+
+    function ids_GET()
+    {
+
+        $param = $this->get();
+        $in = get_keys($param['ids']);
+        $response = $this->usuario_model->get_in($in);
+
+        $this->response($response);
+
     }
 
     function index_PUT()
@@ -1107,6 +1118,7 @@ class usuario extends REST_Controller
         }
         $this->response($response);
     }
+
     function gamifica_ventas_PUT()
     {
         $param = $this->put();

@@ -15,6 +15,7 @@ $(document).ready(function () {
     $selector_entrega.click(confirma_entrega_cliente);
     $selector_interes.click(mas_articulos);
     $form_articulo_interes.submit(registro_articulo_interes);
+    $selector_negacion.click(no_comento);
 });
 let valida_notificacion_pago = () => {
 
@@ -107,7 +108,7 @@ let mas_articulos = function () {
     $selector_negacion.addClass('d-none');
 }
 let registro_articulo_interes = function (e) {
-    debugger;
+
     let data_send = $(this).serialize();
     let url = "../q/index.php/api/tag_arquetipo/interes/format/json/";
     request_enid("POST", data_send, url, response_tag_arquetipo);
@@ -122,5 +123,8 @@ let response_tag_arquetipo = function (data) {
 
 };
 let response_otros = function () {
+    redirect(path_enid('entregas'));
+}
+let no_comento = function () {
     redirect(path_enid('entregas'));
 }

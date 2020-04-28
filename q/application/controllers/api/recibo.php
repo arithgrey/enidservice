@@ -34,8 +34,11 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario,id_perfil")) {
+
             $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"], $param["id_perfil"]);
             $response = $this->horarios_contra_entrega_pedidos($response);
+            $response = $this->usuarios_ventas_notificaciones($response);
+
         }
         $this->response($response);
 
@@ -57,8 +60,47 @@ class recibo extends REST_Controller
             $this->recibos_domicilio_contra_entrega_sin_domicilio($ids_contra_entrega_domicilio, $recibos_domicilio);
 
 
-        $response = $this->domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $recibos_domicilio_contra_entrega_sin_domicilio);
-        $this->response($response);
+        return $this->domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $recibos_domicilio_contra_entrega_sin_domicilio);
+
+    }
+
+    function usuarios_ventas_notificaciones($recibos)
+    {
+
+        $ids_usuarios = array_unique(array_column($recibos, 'id_usuario_referencia'));
+        $data_complete = [];
+        $a = 0;
+
+        $usuarios = $this->usuarios_q($ids_usuarios);
+        foreach ($recibos as $row) {
+
+            $data_complete[$a] = $row;
+            $id_usuario_referencia = $row['id_usuario_referencia'];
+
+            $nombre = '';
+            foreach ($usuarios as $row2) {
+
+                if ($id_usuario_referencia == $row2['id_usuario']) {
+
+                    $nombre = format_nombre($row2);
+
+                    break;
+                }
+            }
+
+            $data_complete[$a]['nombre_vendedor'] = $nombre;
+            $a++;
+        }
+
+        return $data_complete;
+
+    }
+
+    function usuarios_q($ids_usuarios)
+    {
+
+        $q["ids"] = $ids_usuarios;
+        return $this->app->api("usuario/ids/format/json/", $q);
     }
 
     function domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $sin_direccion_contra_entrega)

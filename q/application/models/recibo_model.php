@@ -949,7 +949,9 @@ class Recibo_model extends CI_Model
 						tipo_entrega,
 						contra_entrega_domicilio,
 						id_usuario_entrega,
-						ubicacion										 
+						ubicacion,
+						id_usuario_referencia,
+						id_usuario_venta										 
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  

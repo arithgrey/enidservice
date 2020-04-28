@@ -506,11 +506,7 @@ if (!function_exists('invierte_date_time')) {
         $perfiles_vendedores = [3, 6];
         $es_vendedor = ($data['in_session'] && in_array($data['id_perfil'], $perfiles_vendedores));
         $path = ($es_vendedor) ? $path_resumen_servicio : $path_servicio;
-
-        $a[] = btw(
-
-            _titulo($text_orden, 2, 'text-right')
-            ,
+        $a[] =
             a_enid(
                 img(
                     [
@@ -519,8 +515,10 @@ if (!function_exists('invierte_date_time')) {
                 )
                 ,
                 $path
-            )
-        );
+
+            );
+        $a[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
+
         $a[] = append($z);
         if (!puede_repartir($data)) {
 
@@ -1436,7 +1434,7 @@ if (!function_exists('invierte_date_time')) {
         $form[] = hiddens(['class' => 'fecha_inicio', 'name' => 'fecha_inicio']);
         $form[] = hiddens(['class' => 'fecha_termino', 'name' => 'fecha_termino']);
 
-        $confirmacion = d(btn('Marcar como pagado!', ['class' => 'marcar_pago']),'mt-5');
+        $confirmacion = d(btn('Marcar como pagado!', ['class' => 'marcar_pago']), 'mt-5');
 
         $form[] = $confirmacion;
         $form[] = form_close();
