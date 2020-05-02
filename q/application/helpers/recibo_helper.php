@@ -545,6 +545,8 @@ if (!function_exists('invierte_date_time')) {
         $titulos[] = "STATUS";
         $titulos[] = "MONTO COMPRA";
         if (!$es_vendedor) {
+
+
             $titulos[] = $ops_tipo_orden_text[$tipo_orden];
         }
 
@@ -647,8 +649,14 @@ if (!function_exists('invierte_date_time')) {
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $contenido = [];
             $contenido[] = d($numero_recibo, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
-            $str_fecha_contra_entrega = ($es_orden_en_proceso) ? 'se entregará el' : 'fué el';
+            $str_fecha_contra_entrega = ($es_orden_en_proceso) ? 'entregará el' : 'Entregó el';
+            $usurio_entrega = (array_key_exists('usuario_entrega', $row)) ? $row['usuario_entrega'] : [];
             $fecha_contra_entrega = _d($str_fecha_contra_entrega, format_fecha($entrega, 1));
+
+            $text_usuario_entrega = (es_data($usurio_entrega)) ? d(format_nombre($usurio_entrega),'strong fp9') : '';
+            $fecha_contra_entrega = _d($text_usuario_entrega, $fecha_contra_entrega);
+
+
             $contenido[] = d($fecha_contra_entrega, 'col-lg-2 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d($img, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');

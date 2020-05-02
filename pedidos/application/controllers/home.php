@@ -55,9 +55,7 @@ class Home extends CI_Controller
                     "servicio" => $this->app->servicio(pr($recibo, "id_servicio")),
                 ];
 
-
             $es_domicilio = prm_def($param, "domicilio");
-
 
             $data += ["recibo" => $recibo];
             $data["es_vendedor"] = (pr('id_usuario_referencia', $recibo) == $data["id_usuario"]);
@@ -70,7 +68,6 @@ class Home extends CI_Controller
                 $this->view_domicilios($data, $recibo, $param);
 
             } else {
-
 
                 $this->load_view_seguimiento($data, $param, $recibo, $id_recibo);
             }
@@ -89,7 +86,7 @@ class Home extends CI_Controller
         $es_usuario_compra = ($this->id_usuario == $id_usuario_compra);
 
         if (es_data($recibo) && $es_session && $data["id_usuario"] > 0) {
-            $es_propietario = propietario($this->id_usuario, $id_usuario_venta, $id_usuario_referencia, path_enid('_area_cliente'));
+            $es_propietario = propietario($data, $this->id_usuario, $id_usuario_venta, $id_usuario_referencia, path_enid('_area_cliente'));
             $tiene_acceso = ($es_usuario_compra || $es_propietario);
 
             if ($tiene_acceso) {
@@ -357,8 +354,7 @@ class Home extends CI_Controller
         $recibo = $this->get_recibo($id_recibo);
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
-        propietario(
-            $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
+        propietario($data, $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
             path_enid('_area_cliente'));
 
         $data = $this->app->cssJs($data, "pedidos_costos_operacion");
@@ -488,9 +484,8 @@ class Home extends CI_Controller
     private function load_detalle_pedido($param, $data)
     {
 
-        $fn = (array_key_exists("recibo",
-                $param) && ctype_digit($param["recibo"])) ? $this->carga_detalle_pedido($param,
-            $data) : redirect("../../?q=");
+        $es_recibo = array_key_exists("recibo", $param) && ctype_digit($param["recibo"]);
+        $fn = ($es_recibo) ? $this->carga_detalle_pedido($param, $data) : redirect("../../?q=");
 
     }
 
@@ -503,7 +498,7 @@ class Home extends CI_Controller
         $id_usuario_venta = pr($recibo, 'id_usuario_venta');
         $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
 
-        propietario(
+        propietario($data,
             $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
             path_enid('_area_cliente'));
 

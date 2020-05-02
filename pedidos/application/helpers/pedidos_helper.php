@@ -2,10 +2,12 @@
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
-    function propietario($usurio_actual, $usuario_venta, $id_usuario_referencia, $si_falla = FALSE)
+
+    function propietario($data, $usurio_actual, $usuario_venta, $id_usuario_referencia, $si_falla = FALSE)
     {
 
-        $es_propietario = ($usurio_actual == $usuario_venta || $usurio_actual == $id_usuario_referencia);
+        $puede_repartir =  es_repartidor($data);
+        $es_propietario = ($usurio_actual == $usuario_venta || $usurio_actual == $id_usuario_referencia || $puede_repartir);
         if ($si_falla !== FALSE) {
             if (!$es_propietario) {
 
@@ -485,11 +487,7 @@ if (!function_exists('invierte_date_time')) {
 
                 }
                 $text = append($text_entrega);
-
-
             }
-
-
         }
 
         $z[] = $evaluacion;
@@ -500,12 +498,11 @@ if (!function_exists('invierte_date_time')) {
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
-
         $path_servicio = get_url_servicio($id_servicio);
         $path_resumen_servicio = path_enid('pedidos_recibo', $id_recibo);
-        $perfiles_vendedores = [3, 6];
-        $es_vendedor = ($data['in_session'] && in_array($data['id_perfil'], $perfiles_vendedores));
-        $path = ($es_vendedor) ? $path_resumen_servicio : $path_servicio;
+        $path = (puede_repartir($data)) ? $path_resumen_servicio : $path_servicio;
+
+
         $a[] =
             a_enid(
                 img(

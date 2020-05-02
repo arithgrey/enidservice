@@ -1355,7 +1355,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function add_compras_sin_cierre($recibos, $es_reparto = 0)
+    function add_compras_sin_cierre($data, $recibos, $es_reparto = 0)
     {
         $r = [];
         $f = 0;
@@ -1368,8 +1368,8 @@ if (!function_exists('invierte_date_time')) {
 
                 $fecha_contra_entrega = $row['fecha_contra_entrega'];
                 $fecha_entrega = date_create($fecha_contra_entrega)->format('Y-m-d');
-
                 $fecha = horario_enid();
+
                 $hoy = $fecha->format('Y-m-d');
                 $es_mayor = ($fecha_entrega > $hoy);
                 $dias = date_difference($hoy, $fecha_entrega);
@@ -1431,7 +1431,9 @@ if (!function_exists('invierte_date_time')) {
                 $total_seccion = d($text_total, 'd-flex flex-column');
 
                 $orden = _text('ORDEN #', $id_recibo);
-                $identificador = flex($orden, $row['nombre_vendedor'], 'flex-column');
+                $es_vendedor = es_vendedor($data);
+                $nombre_vendedor = (!$es_vendedor) ? $row['nombre_vendedor'] : '';
+                $identificador = flex($orden, $nombre_vendedor, 'flex-column');
                 $seccion_imagenes = flex($imagenes, $identificador, 'flex-column black fp9', '', 'font-weight-bolder');
 
                 $text = flex($seccion_imagenes, $total_seccion, _between);
@@ -1457,7 +1459,8 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($recibos)) {
 
-                $r[] = d(_titulo("ventas en proceso"));
+                $titulo = es_repartidor($data) ? 'Próximas entregas' :'ventas en proceso';
+                $r[] = d(_titulo($titulo ));
                 $r[] = append($ventas_hoy);
                 $r[] = append($ventas_posteriores);
             }
@@ -1668,17 +1671,17 @@ if (!function_exists('invierte_date_time')) {
         $lista[] = $tareas["html"];
 
 
-        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
-        $lista[] = d($compras_sin_cierre["html"], "top_20");
+        $compras_sin_cierre = add_compras_sin_cierre($info,$info["compras_sin_cierre"]);
+        $lista[] = d($compras_sin_cierre["html"], "mt-5");
         $f = $f + $compras_sin_cierre["flag"];
 
 
         $reintentos_compras = add_reintentos_compras($info["reintentos_compras"]);
-        $lista[] = d($reintentos_compras["html"], "top_20");
+        $lista[] = d($reintentos_compras["html"], "mt-5");
         $f = $f + $reintentos_compras["flag"];
 
         $recuperacion = add_recuperacion($info["recuperacion"]);
-        $lista[] = d($recuperacion["html"], "top_20");
+        $lista[] = d($recuperacion["html"], "mt-5");
         $f = $f + $recuperacion["flag"];
 
         $recibos_sin_costos_operacion = add_recibos_sin_costo($info["recibos_sin_costos_operacion"]);
@@ -1753,7 +1756,7 @@ if (!function_exists('invierte_date_time')) {
 
         $f = 0;
         $recibos = $data['proximos_pedidos'];
-        $proximas_entregas = add_compras_sin_cierre($recibos, 1);
+        $proximas_entregas = add_compras_sin_cierre($data,$recibos, 1);
         $f = $f + $proximas_entregas["flag"];
         $lista[] = d($proximas_entregas["html"], "mt-5");
         $tareas_pendiente = "";
@@ -2026,16 +2029,16 @@ if (!function_exists('invierte_date_time')) {
 
         $lista = [];
         $f = 0;
-        $compras_sin_cierre = add_compras_sin_cierre($data["compras_sin_cierre"]);
-        $lista[] = d($compras_sin_cierre["html"], "top_20");
+        $compras_sin_cierre = add_compras_sin_cierre($data, $data["compras_sin_cierre"]);
+        $lista[] = d($compras_sin_cierre["html"], "mt-5");
         $f = $f + $compras_sin_cierre["flag"];
 
         $reintentos_compras = add_reintentos_compras($data["reintentos_compras"]);
-        $lista[] = d($reintentos_compras["html"], "top_20");
+        $lista[] = d($reintentos_compras["html"], "mt-5");
         $f = $f + $reintentos_compras["flag"];
 
         $recuperacion = add_recuperacion($data["recuperacion"]);
-        $lista[] = d($recuperacion["html"], "top_20");
+        $lista[] = d($recuperacion["html"], "mt-5");
         $f = $f + $recuperacion["flag"];
 
         $recordatorios = add_recordatorios($data["recordatorios"]);

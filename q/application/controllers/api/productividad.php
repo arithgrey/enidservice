@@ -70,6 +70,7 @@ class productividad extends REST_Controller
                     "ventas_enid_service" => $this->get_ventas_enid_service(),
                     "ventas_semana" => $this->ventas_semana($id_usuario)
                 ];
+
                 $response = tareas_administrador($response);
 
                 break;
@@ -86,6 +87,7 @@ class productividad extends REST_Controller
             case 21:
 
                 $response['proximos_pedidos'] = $this->proximas_reparto($id_perfil, $id_usuario, $id_empresa);
+
                 $response = pendientes_reparto($response);
                 break;
 
