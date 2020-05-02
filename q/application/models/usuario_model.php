@@ -212,7 +212,8 @@ class usuario_model extends CI_Model
                     INNER JOIN 
                     tmp_clienes_$_num up 
                     ON 
-                    u.idusuario = up.idusuario";
+                    u.idusuario = up.idusuario
+                    AND u.status = 1";
 
         $result = $this->db->query($query_get);
         $data_complete = $result->result_array();

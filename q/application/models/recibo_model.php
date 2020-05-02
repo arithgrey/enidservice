@@ -985,11 +985,13 @@ class Recibo_model extends CI_Model
 
         $query_get = "SELECT 
 						id_servicio, 
-						id_proyecto_persona_forma_pago	 id_recibo,
+						id_proyecto_persona_forma_pago id_recibo,
 						(monto_a_pagar * num_ciclos_contratados) total,
 						fecha_contra_entrega,
 						id_usuario_referencia,
-						id_usuario_entrega						 
+						id_usuario_entrega,
+						ubicacion,
+						tipo_entrega						 
 						FROM  proyecto_persona_forma_pago 
 						WHERE  
 						saldo_cubierto < 1  

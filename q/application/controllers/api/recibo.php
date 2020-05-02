@@ -574,6 +574,40 @@ class recibo extends REST_Controller
         return $response;
     }
 
+    function append_usuarios_reparto($ordenes)
+    {
+        $a = 0;
+        $ids_usuarios = [];
+        $usuarios = [];
+        $response = [];
+
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_usuario_entrega = $row['id_usuario_entrega'];
+            $response[$a] = $orden;
+            if (!in_array($id_usuario_entrega, $ids_usuarios)) {
+
+                $ids_usuarios[] = $id_usuario_entrega;
+                $usuario = $this->app->usuario($id_usuario_entrega);
+                $busqueda_usuario =
+                    [
+                        'id_usuario' => $id_usuario_entrega,
+                        'usuario_entrega' => $usuario
+                    ];
+                $response[$a]['usuario_entrega'] = $busqueda_usuario['usuario_entrega'];
+                $usuarios[] = $busqueda_usuario;
+
+            } else {
+                $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario_entrega, 'usuario_entrega');
+                $response[$a]['usuario_entrega'] = $usuario;
+            }
+            $a++;
+        }
+
+        return $response;
+    }
+
     function agrega_estados_direcciones_a_pedidos($ordenes_compra)
     {
 
@@ -918,6 +952,7 @@ class recibo extends REST_Controller
             "p.flag_pago_comision",
             "p.comision_venta",
             "p.id_usuario_referencia",
+            "p.id_usuario_entrega",
             "p.intento_reventa",
             'p.intento_recuperacion'
 
@@ -941,6 +976,7 @@ class recibo extends REST_Controller
             "flag_pago_comision",
             "comision_venta",
             "id_usuario_referencia",
+            "id_usuario_entrega",
             "intento_reventa",
             'intento_recuperacion'
         ];
@@ -993,6 +1029,7 @@ class recibo extends REST_Controller
 
                 $response = $this->add_imgs_servicio($response);
                 $response = $this->add_comisionistas($response, $param);
+                $response = $this->add_repartidores($response, $param);
                 $session = $this->app->session();
                 $response = render_resumen_pedidos($response,
                     $this->get_estatus_enid_service($param), $param, $session);
@@ -1000,6 +1037,21 @@ class recibo extends REST_Controller
             }
         }
         $this->response($response);
+
+    }
+
+    function add_repartidores($ordenes, $param)
+    {
+        $id_perfil = $param['perfil'];
+        $es_administrador = (!in_array($id_perfil, [20, 6]));
+
+
+        if ($es_administrador) {
+
+            $ordenes = $this->append_usuarios_reparto($ordenes);
+
+        }
+        return $ordenes;
 
     }
 
@@ -1529,6 +1581,8 @@ class recibo extends REST_Controller
             $id_perfil = $param["id_perfil"];
             $id_empresa = $param['id_empresa'];
             $response = $this->recibo_model->proximas($id_empresa, $id_usuario, $id_perfil, $dia);
+            $response = $this->horarios_contra_entrega_pedidos($response);
+            $response = $this->usuarios_ventas_notificaciones($response);
         }
         $this->response($response);
     }

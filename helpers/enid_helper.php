@@ -1934,7 +1934,7 @@ function format_phone($number)
     if (preg_match('/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/', $txt,
         $matches)) {
         $result = $format;
-        foreach ($matches AS $k => $v) {
+        foreach ($matches as $k => $v) {
             $str = preg_match('/\[\$' . $k . '\?(.*?)\:(.*?)\]|\[\$' . $k . '\:(.*?)\]|(\$' . $k . '){1}/',
                 $format,
                 $filterMatch);
@@ -3108,7 +3108,6 @@ function ticket_pago($recibo, $tipos_entrega, $format = 1)
     }
 
 
-
 }
 
 function keys_en_arreglo($param, $keys = [])
@@ -3310,7 +3309,7 @@ function strip_tags_content($text, $tags = '', $invert = FALSE)
     preg_match_all('/<(.+?)[\s]*\/?[\s]*>/si', trim($tags), $tags);
     $tags = array_unique($tags[1]);
 
-    if (is_array($tags) AND count($tags) > 0) {
+    if (is_array($tags) and count($tags) > 0) {
         if ($invert == FALSE) {
             return preg_replace('@<(?!(?:' . implode('|', $tags) . ')\b)(\w+)\b.*?>.*?</\1>@si', '', $text);
         } else {
@@ -3362,10 +3361,41 @@ function es_administrador_o_vendedor($data)
     return in_array($data['id_perfil'], $data['restricciones']['es_administrador_o_vendedor']);
 
 }
+
+function es_vendedor($data)
+{
+
+    $response = false;
+    if (array_key_exists('restricciones', $data)) {
+        $response = in_array($data['id_perfil'], $data['restricciones']['es_vendedor']);
+    } else {
+        $response = (prm_def($data, 'id_perfil') == 6);
+
+    }
+    return $response;
+
+}
+
 function puede_repartir($data)
 {
 
     return in_array($data['id_perfil'], $data['restricciones']['puede_repartir']);
+
+}
+
+function es_repartidor($data)
+{
+
+    $id_perfil = prm_def($data, 'id_perfil');
+    if ($id_perfil > 0) {
+
+        $response = ($id_perfil == 21);
+        
+    } else {
+        $response = in_array($data['id_perfil'], $data['restricciones']['es_repartidor']);
+    }
+
+    return $response;
 
 }
 
