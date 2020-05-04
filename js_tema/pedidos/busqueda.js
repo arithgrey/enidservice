@@ -16,7 +16,7 @@ $(document).ready(() => {
     });
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
-
+    $('.usuario_venta_pago').click(busqueda_pago_pendiente);
 });
 
 let busqueda_pedidos = function (e) {
@@ -37,7 +37,7 @@ let response_pedidos = function (data) {
     render_enid(".place_pedidos", data);
 
     $('.usuario_venta').click(busqueda_usuario_selector);
-    $('.usuario_venta_pago').click(busqueda_pago_pendiente);
+
 
     $('th').click(ordena_tabla);
     $(".desglose_orden").click(function () {
@@ -105,5 +105,5 @@ let registro_pago = function (e) {
 let response_pagos = function () {
 
     $modal_pago_comision.modal("hide");
-    $form_busqueda.submit();
+    redirect('');
 }

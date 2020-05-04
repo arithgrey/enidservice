@@ -1346,4 +1346,23 @@ class Recibo_model extends CI_Model
 
     }
 
+    function comisiones_por_pago($param)
+    {
+        $query_get = "SELECT 
+                        p.id_proyecto_persona_forma_pago,
+                        p.id_servicio,
+                        p.id_usuario_referencia, 
+                        p.comision_venta, 
+                        p.id_usuario_referencia ,
+                        u.nombre,
+                        u.apellido_paterno,
+                        u.apellido_materno                        
+                        FROM proyecto_persona_forma_pago p 
+                        INNER JOIN usuario u  ON p.id_usuario_referencia =  u.idusuario  
+                        WHERE  flag_pago_comision < 1  AND   se_cancela < 1  AND saldo_cubierto > 0 AND   
+                        p.status NOT IN (10,19)  AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+                        ORDER BY p.id_usuario_referencia";
+
+        return $this->db->query($query_get)->result_array();
+    }
 }   
