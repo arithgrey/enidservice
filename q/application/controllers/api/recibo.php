@@ -1650,4 +1650,13 @@ class recibo extends REST_Controller
         }
         return $this->response($response);
     }
+
+    function comisiones_por_pago_GET()
+    {
+
+        $param = $this->get();
+        $response = $this->recibo_model->comisiones_por_pago($param);
+        $this->response($response);
+    }
 }
+
