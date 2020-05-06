@@ -254,14 +254,123 @@ if (!function_exists('invierte_date_time')) {
         $t[] = telefono_publico($has_phone, $activo_visita_telefono, $baja_visita_telefono, $es_servicio);
         $t[] = contra_entrega($es_servicio, $es_entrega, $id_servicio);
         $t[] = venta_mayoreo($es_servicio, $venta_mayoreo);
+
         $t[] = uso_disponibilidad($existencia, $es_nuevo, $es_servicio);
         $t[] = seccion_uso_producto($es_nuevo);
         $t[] = seccion_ciclos_facturacion($ciclos, $id_ciclo_facturacion, $es_servicio);
 
         $t[] = form_costo_unidad($precio);
         $t[] = form_costo_envio($es_servicio, $costo_envio);
+        $t[] = distribucion($servicio);
+        $t[] = tipo_distribucion($servicio);
         $t[] = utilidad($text_comision_venta, $utilidad);
+
         return tab_seccion($t, "tab_info_precios", $ext_4);
+
+    }
+
+    function tipo_distribucion($servicio)
+    {
+
+        $response = [];
+        if (es_data($servicio)) {
+
+            $titulo = "¿MEDIOS POSIBLES?";
+            $moto = (int)$servicio['moto'];
+            $bicicleta = $servicio['bicicleta'];
+            $a_pie = $servicio['pie'];
+
+
+            $confirmar = a_enid(
+                "MOTO",
+                [
+                    "id" => $moto,
+                    "class" => _text_(
+                        'button_enid_eleccion moto',
+                        val_class(1, $moto, "button_enid_eleccion_active")
+                    )
+
+                ]
+            );
+
+            $omitir = a_enid(
+                'BICICLETA',
+                [
+                    "id" => $bicicleta,
+                    "class" => _text_(
+                        'button_enid_eleccion bicicleta',
+                        val_class(1, $bicicleta, "button_enid_eleccion_active")
+                    )
+                ]
+            );
+
+
+            $pie = a_enid(
+                'PIE',
+                [
+                    "id" => $a_pie,
+                    "class" => _text_(
+                        'button_enid_eleccion pie',
+                        val_class(1, $a_pie, "button_enid_eleccion_active")
+                    )
+                ]
+            );
+
+            $requiere_auto = $servicio['requiere_auto'];
+            $extra = ($requiere_auto) ? 'd-none' : '';
+            $tipo_entrega = eleccion_seleccion($titulo, $confirmar, $omitir, $pie);
+            $response[] = d($tipo_entrega, $extra);
+        }
+        return append($response);
+
+    }
+
+    function eleccion_seleccion($titulo, $a, $b, $c, $ext = '')
+    {
+
+        $response[] = titulo_bloque($titulo);
+        $contenido = [$a, $b, $c];
+        $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
+        return d($response, 'col-md-6 mt-5');
+    }
+
+    function distribucion($servicio)
+    {
+
+        $response = [];
+        if (es_data($servicio)) {
+
+            $titulo = "¿ES NECESARIO AUTO PARA SU ENTREGA?";
+            $requiere_auto = $servicio['requiere_auto'];
+            $atencion = "TAMBIÉN SE PUEDE ENTREGAR EN MOTO, BICICLETA Ó A PIE";
+
+            $confirmar = a_enid(
+                "SI",
+                [
+                    "id" => '1',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_en_auto',
+                        val_class(1, $requiere_auto, "button_enid_eleccion_active")
+                    )
+
+                ]
+            );
+
+            $omitir = a_enid(
+                $atencion,
+                [
+                    "id" => '0',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_en_auto',
+                        val_class(0, $requiere_auto, "button_enid_eleccion_active")
+                    )
+                ]
+            );
+
+
+            $response[] = eleccion($titulo, $confirmar, $omitir);
+        }
+        return append($response);
 
     }
 
@@ -521,7 +630,6 @@ if (!function_exists('invierte_date_time')) {
         if ($es_servicio < 1) {
 
             $r[] = d(articulos_disponibles($existencia), 'col-md-6 mt-5');
-//            seccion_uso_producto($es_nuevo),
 
         }
 

@@ -248,7 +248,8 @@ class usuario extends REST_Controller
                 "tel_lada",
                 "sexo"
             ];
-
+            $completo = prm_def($param, 'c');
+            $params = ($completo > 0) ? [] : $params;
             $response = $this->usuario_model->q_get($params, $param["id_usuario"]);
         }
         $this->response($response);
@@ -535,7 +536,6 @@ class usuario extends REST_Controller
     function vendedor_POST()
     {
 
-
         if ($this->input->is_ajax_request()) {
             $param = $this->post();
 
@@ -544,14 +544,17 @@ class usuario extends REST_Controller
             if ($response["usuario_existe"] == 0) {
 
                 $email = $param["email"];
-
                 $params = [
                     "email" => $email,
-                    "idempresa" => '1',
+                    "idempresa" => 1,
                     "id_departamento" => 9,
                     "password" => $param["password"],
                     "nombre" => $param["nombre"],
-                    "id_usuario_referencia" => 180
+                    "id_usuario_referencia" => 180,
+                    'tiene_auto' => prm_def($param, 'tiene_auto'),
+                    'tiene_moto' => prm_def($param, 'tiene_moto'),
+                    'tiene_bicicleta' => prm_def($param, 'tiene_bicicleta'),
+                    'reparte_a_pie' => prm_def($param, 'reparte_a_pie')
                 ];
 
                 $response["id_usuario"] = $this->usuario_model->insert($params, 1);
@@ -1133,5 +1136,70 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+    function auto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "auto")) {
+
+            $status = ($param["auto"] == 1) ? 0 : 1;
+
+            $response = $this->usuario_model->q_up("tiene_auto", $status, $this->id_usuario);
+        }
+
+        $this->response($response);
+
+    }
+    function moto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "moto")) {
+
+            $status = ($param["moto"] == 1) ? 0 : 1;
+
+            $response = $this->usuario_model->q_up("tiene_moto", $status, $this->id_usuario);
+        }
+
+        $this->response($response);
+
+    }
+    function bicicleta_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "bicicleta")) {
+
+            $status = ($param["bicicleta"] == 1) ? 0 : 1;
+
+            $response = $this->usuario_model->q_up("tiene_bicicleta", $status, $this->id_usuario);
+        }
+
+        $this->response($response);
+
+    }
+    function pie_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "pie")) {
+
+            $status = ($param["pie"] == 1) ? 0 : 1;
+
+            $response = $this->usuario_model->q_up("reparte_a_pie", $status, $this->id_usuario);
+        }
+
+        $this->response($response);
+
+    }
+
 
 }

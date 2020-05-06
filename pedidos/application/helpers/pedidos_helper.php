@@ -1303,7 +1303,6 @@ if (!function_exists('invierte_date_time')) {
     function get_form_busqueda_pedidos($data, $param)
     {
 
-
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
         $status_ventas = $data["status_ventas"];
@@ -1413,9 +1412,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
-
-
-
 
 
         $secciones_tabs[] = tab_seccion(append($response), 'buscador_seccion', 1);

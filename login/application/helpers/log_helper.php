@@ -126,8 +126,11 @@ if (!function_exists('invierte_date_time')) {
     function frm_registro()
     {
 
-        $r[] = form_open("", ["class" => "form-miembro-enid-service", "id" => "form-miembro-enid-service"]);
-
+        $config = [
+            "class" => "form-miembro-enid-service",
+            "id" => "form-miembro-enid-service"
+        ];
+        $r[] = form_open("", $config);
         $r[] = input_frm(
             "mt-5", "TU NOMBRE",
             [
@@ -188,15 +191,115 @@ if (!function_exists('invierte_date_time')) {
             'id_perfil'
         );
         $r[] = place("place_password_afiliado");
+        $r[] = tipo_distribucion();
+
+
         $r[] = btn('Registrar',
             [
                 "class" => "mt-5 botton_registro",
             ]
         );
+
         $r[] = form_close(place("place_registro_miembro"));
 
         return append($r);
 
+    }
+
+    function tipo_distribucion()
+    {
+
+        $response = [];
+
+        $titulo = "¿EN QUÉ PUEDES REPARTIR?";
+
+        $reparto_auto =a_enid(
+            "AUTO",
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion auto'
+                )
+
+            ]
+        );
+
+        $confirmar = a_enid(
+            "MOTO",
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion moto'
+                )
+
+            ]
+        );
+
+        $omitir = a_enid(
+            'BICICLETA',
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion bicicleta'
+                )
+            ]
+        );
+
+        $pie = a_enid(
+            'PIE',
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion pie'
+                )
+            ]
+        );
+
+        $seccion_entrega = eleccion_seleccion($titulo,$reparto_auto, $confirmar, $omitir, $pie);
+
+        $response[] = hiddens(
+            [
+                "name" => "auto",
+                "class" => "tiene_auto",
+                "value" => 0
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "moto",
+                "class" => "tiene_moto",
+                "value" => 0
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "bicicleta",
+                "class" => "tiene_bicicleta",
+                "value" => 0
+            ]
+        );
+
+        $response[] = hiddens(
+            [
+                "name" => "reparte_a_pie",
+                "class" => "reparte_a_pie",
+                "value" => 0
+            ]
+        );
+
+
+        $response[] = d($seccion_entrega, 'seccion_entrega mt-5 d-none');
+
+        return append($response);
+
+    }
+    function eleccion_seleccion($titulo,$reparto_auto, $a, $b, $c, $ext = '')
+    {
+
+        $response[] = _titulo($titulo);
+        $contenido = [$reparto_auto,$a, $b, $c];
+        $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
+        return d($response);
     }
 
     function frm_login()
