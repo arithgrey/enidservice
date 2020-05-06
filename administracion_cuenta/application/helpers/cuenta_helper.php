@@ -30,9 +30,83 @@ if (!function_exists('invierte_date_time')) {
         $r[] = tab_seccion($actualizar, 'tab_privacidad');
         $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
         $r[] = tab_seccion(calma(), 'tab_direccion');
+        $r[] = tab_seccion(formas_entrega($usuario), 'tab_entregas');
 
         return d(tab_content($r), _10_12);
 
+    }
+
+    function formas_entrega($usuario)
+    {
+
+        $titulo = "¿EN QUÉ PUEDES REPARTIR?";
+        $tiene_auto = pr($usuario,'tiene_auto');
+        $tiene_moto = pr($usuario,'tiene_moto');
+        $tiene_bicicleta = pr($usuario,'tiene_bicicleta');
+        $reparte_a_pie = pr($usuario,'reparte_a_pie');
+
+
+        $reparto_auto = a_enid(
+            "AUTO",
+            [
+                "id" => $tiene_auto,
+                "class" => _text_(
+                    'button_enid_eleccion auto',
+                    val_class(1, $tiene_auto, "button_enid_eleccion_active")
+                )
+
+            ]
+        );
+
+        $confirmar = a_enid(
+            "MOTO",
+            [
+                "id" => $tiene_moto,
+                "class" => _text_(
+                    'button_enid_eleccion moto',
+                    val_class(1, $tiene_moto, "button_enid_eleccion_active")
+                )
+
+            ]
+        );
+
+        $omitir = a_enid(
+            'BICICLETA',
+            [
+                "id" => $tiene_bicicleta,
+                "class" => _text_(
+                    'button_enid_eleccion bicicleta',
+                    val_class(1, $tiene_bicicleta, "button_enid_eleccion_active")
+                )
+            ]
+        );
+
+        $pie = a_enid(
+            'PIE',
+            [
+                "id" => $reparte_a_pie,
+                "class" => _text_(
+                    'button_enid_eleccion pie',
+                    val_class(1, $reparte_a_pie, "button_enid_eleccion_active")
+                )
+            ]
+        );
+
+        $seccion_entrega =
+            eleccion_seleccion($titulo, $reparto_auto, $confirmar, $omitir, $pie);
+
+        $response[] = d($seccion_entrega, 'seccion_entrega mt-5 col-md-6 col-md-offset-3');
+
+        return append($response);
+    }
+
+    function eleccion_seleccion($titulo, $reparto_auto, $a, $b, $c, $ext = '')
+    {
+
+        $response[] = _titulo($titulo);
+        $contenido = [$reparto_auto, $a, $b, $c];
+        $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
+        return d($response);
     }
 
     function foto($id_usuario, $usuario)
@@ -373,6 +447,16 @@ if (!function_exists('invierte_date_time')) {
             ]
 
         );
+
+        $link_entregas = tab(
+            text_icon("fa  fa-fighter-jet", "ENTREGAS"),
+            '#tab_entregas',
+            [
+                "id" => 'btn_entregas',
+                "class" => 'btn_entregas'
+            ]
+        );
+
         $link_pw = tab(
             text_icon("fa fa-unlock-alt", "CONTRASEÑA"),
             "#tab_privacidad",
@@ -394,12 +478,12 @@ if (!function_exists('invierte_date_time')) {
                 'href' => path_enid('lista_deseos_preferencias'),
                 'class' => 'text-right'
             ]
-
         );
-
 
         $list = [
             $link_cuenta
+            ,
+            $link_entregas
             ,
             $link_direccion_envio
             ,

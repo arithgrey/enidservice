@@ -324,6 +324,71 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+    function moto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "moto,id_servicio")) {
+
+            $status = ($param["moto"] == 1) ? 0 : 1;
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("moto", $status, $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
+    function bicicleta_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "bicicleta,id_servicio")) {
+
+            $status = ($param["bicicleta"] == 1) ? 0 : 1;
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("bicicleta", $status, $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
+    function pie_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "pie,id_servicio")) {
+
+            $status = ($param["pie"] == 1) ? 0 : 1;
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("pie", $status, $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
+
+    function requiere_auto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id_servicio,requiere_auto")) {
+
+            $requiere_auto =  $param['requiere_auto'];
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("requiere_auto", $requiere_auto, $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
 
     function espublico_PUT()
     {

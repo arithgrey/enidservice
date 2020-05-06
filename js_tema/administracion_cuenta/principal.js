@@ -12,6 +12,11 @@ let $input_password = $form_password.find("#password");
 let $input_nueva = $form_password.find("#pw_nueva");
 let $input_nueva_confirmacion = $form_password.find("#pw_nueva_confirm");
 
+let $auto = $(".auto");
+let $moto = $(".moto");
+let $bicicleta = $(".bicicleta");
+let $pie = $(".pie");
+
 $(document).ready(() => {
 
     $(".btn_direccion").click(() => {
@@ -33,8 +38,59 @@ $(document).ready(() => {
         escucha_submmit_selector(e, $form_nombre_usuario, 1);
     });
 
+    $auto.click(auto);
+    $moto.click(moto);
+    $bicicleta.click(bicicleta);
+    $pie.click(pie);
+
 
 });
+let auto = function (e) {
+
+    let url = "../q/index.php/api/usuario/auto/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let data_send = {
+        auto: id,
+    };
+
+    request_enid("PUT", data_send, url, response_tipos_entregas);
+}
+let moto = function (e) {
+
+    let url = "../q/index.php/api/usuario/moto/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let data_send = {
+        moto: id,
+    };
+    
+    request_enid("PUT", data_send, url, response_tipos_entregas);
+}
+let bicicleta = function (e) {
+
+    let url = "../q/index.php/api/usuario/bicicleta/format/json/";
+    let id = get_parameter_enid($(this), "id");
+
+    let data_send = {
+        bicicleta: id,
+    };
+
+    request_enid("PUT", data_send, url, response_tipos_entregas);
+}
+let pie = function (e) {
+
+    let url = "../q/index.php/api/usuario/pie/format/json/";
+    let id = get_parameter_enid($(this), "id");
+
+    let data_send = {
+        pie: id,
+    };
+
+    request_enid("PUT", data_send, url, response_tipos_entregas);
+}
+let response_tipos_entregas = function (data) {
+
+    redirect('');
+}
 let direccion_usuario = () => {
 
     let url = "../q/index.php/api/usuario_direccion/index/format/json/";
@@ -128,7 +184,6 @@ let response_actualizacion = function (data) {
 let password = e => {
 
     let respuestas = [];
-    debugger;
     respuestas.push(es_formato_password($input_password));
     respuestas.push(es_formato_password($input_nueva));
     respuestas.push(es_formato_password($input_nueva_confirmacion));

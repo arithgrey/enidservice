@@ -25,13 +25,23 @@ let $nombre_persona = $form_registro.find(nombre_persona);
 let $registro_email = $form_registro.find('.registro_email');
 let $registro_pw = $form_registro.find('.registro_pw');
 let $botton_registro = $form_registro.find('.botton_registro');
-
-
+let $perfil = $form_registro.find('.perfil');
 let $input_correo_inicio = $form_inicio.find('.correo');
 let $input_password_inicio = $form_inicio.find('#pw');
+let $seccion_entrega = $form_registro.find('.seccion_entrega');
+
+let $auto = $form_registro.find('.auto');
+let $moto = $form_registro.find('.moto');
+let $bicicleta = $form_registro.find('.bicicleta');
+let $pie = $form_registro.find('.pie');
+
+let $tiene_auto = $form_registro.find('.tiene_auto');
+let $tiene_moto = $form_registro.find('.tiene_moto');
+let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
+let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
+
 
 $(document).on('ready', () => {
-
 
     $('footer').ready(valida_seccion_inicial);
     $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);
@@ -67,8 +77,6 @@ $(document).on('ready', () => {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_registro, 1);
     });
-
-
     /*Acceso*/
     $input_correo_inicio.keyup(function (e) {
         $(this).next().next().addClass('d-none');
@@ -79,6 +87,13 @@ $(document).on('ready', () => {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_inicio, 1);
     });
+
+    $perfil.change(seleccion_entrega);
+
+    $auto.click(evaluacion_auto);
+    $moto.click(evaluacion_moto);
+    $bicicleta.click(evaluacion_bicicleta);
+    $pie.click(evaluacion_pie);
 
 });
 
@@ -182,6 +197,7 @@ let agrega_usuario = (e) => {
         let tmp_password = '' + CryptoJS.SHA1($registro_pw.val());
         let nombre = $nombre_persona.val();
         let email = $registro_email.val();
+
         set_option({
             'tmp_password': tmp_password,
             'email': email,
@@ -194,8 +210,13 @@ let agrega_usuario = (e) => {
             'email': email,
             'password': tmp_password,
             'simple': 1,
-            'perfil': perfil
+            'perfil': perfil,
+            'tiene_auto': $tiene_auto.val(),
+            'tiene_moto': $tiene_moto.val(),
+            'tiene_bicicleta': $tiene_bicicleta.val(),
+            'reparte_a_pie': $reparte_a_pie.val()
         };
+
         request_enid('POST', data_send, url, response_usuario_registro);
 
     }
@@ -247,6 +268,7 @@ let valida_seccion_inicial = () => {
         default:
     }
 };
+
 let facilita_acceso = () => {
 
     let secciones = [
@@ -258,4 +280,85 @@ let facilita_acceso = () => {
         '.contenedor-lateral-menu'
     ];
     despliega(secciones, 0);
+};
+
+let seleccion_entrega = () => {
+
+    let $id_perfil = parseInt(get_valor_selected('.perfil'));
+
+    if ($id_perfil !== 21) {
+        $seccion_entrega.addClass('d-none');
+    } else {
+        $seccion_entrega.removeClass('d-none');
+    }
+};
+
+let evaluacion_auto = function (e) {
+
+    let $id = parseInt(e.target.id);
+    if ($id > 0) {
+
+        $auto.removeClass('button_enid_eleccion_active');
+        $(this).attr('id', 0);
+        $tiene_auto.val(0);
+
+    } else {
+
+        $auto.addClass('button_enid_eleccion_active');
+        $(this).attr('id', 1);
+        $tiene_auto.val(1);
+    }
+
+};
+
+let evaluacion_moto = function (e) {
+
+    let $id = parseInt(e.target.id);
+    if ($id > 0) {
+
+        $moto.removeClass('button_enid_eleccion_active');
+        $(this).attr('id', 0);
+        $tiene_moto.val(0);
+
+    } else {
+
+        $moto.addClass('button_enid_eleccion_active');
+        $(this).attr('id', 1);
+        $tiene_moto.val(1);
+    }
+
+};
+
+let evaluacion_bicicleta = function (e) {
+
+    let $id = parseInt(e.target.id);
+    if ($id > 0) {
+
+        $bicicleta.removeClass('button_enid_eleccion_active');
+        $(this).attr('id', 0);
+        $tiene_bicicleta.val(0);
+
+    } else {
+
+        $bicicleta.addClass('button_enid_eleccion_active');
+        $(this).attr('id', 1);
+        $tiene_bicicleta.val(1);
+    }
+};
+
+let evaluacion_pie = function (e) {
+
+    let $id = parseInt(e.target.id);
+    if ($id > 0) {
+
+        $pie.removeClass('button_enid_eleccion_active');
+        $(this).attr('id', 0);
+        $reparte_a_pie.val(0);
+
+    } else {
+
+        $pie.addClass('button_enid_eleccion_active');
+        $(this).attr('id', 1);
+        $reparte_a_pie.val(1);
+    }
 };

@@ -204,6 +204,11 @@ let respuesta_informacion_servicio = (data) => {
     $(".entregas_en_casa").click(actualiza_entregas_en_casa);
     $(".telefono_visible").click(actualiza_telefono_visible);
     $(".venta_mayoreo").click(actualiza_ventas_mayoreo);
+    $(".entregas_en_auto").click(entregas_en_auto);
+    $(".moto").click(moto);
+    $(".bicicleta").click(bicicleta);
+    $(".pie").click(pie);
+
     $(".detalle").click(carga_tallas);
     $(".actilet_publicacion").click(activa_publicacion);
     $(".tiempo_entrega").change(set_tiempo_entrega);
@@ -271,7 +276,66 @@ let actualiza_ventas_mayoreo = function (e) {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
 };
+let entregas_en_auto = function (e) {
 
+    let url = "../q/index.php/api/servicio/requiere_auto/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let $id_servicio =  get_option("servicio");
+
+    let data_send = {
+        requiere_auto: id,
+        id_servicio: $id_servicio
+    };
+
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+}
+let moto = function (e) {
+
+    let url = "../q/index.php/api/servicio/moto/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let $id_servicio =  get_option("servicio");
+
+    let data_send = {
+        moto: id,
+        id_servicio: $id_servicio
+    };
+
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+}
+let bicicleta = function (e) {
+
+    let url = "../q/index.php/api/servicio/bicicleta/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let $id_servicio =  get_option("servicio");
+
+    let data_send = {
+        bicicleta: id,
+        id_servicio: $id_servicio
+    };
+
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+}
+let pie = function (e) {
+
+    let url = "../q/index.php/api/servicio/pie/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let $id_servicio =  get_option("servicio");
+
+    let data_send = {
+        pie: id,
+        id_servicio: $id_servicio
+    };
+
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+}
 let actualiza_entregas_en_punto_encuentro = function () {
 
     let url = "../q/index.php/api/servicio/es_posible_punto_encuentro/format/json/";
