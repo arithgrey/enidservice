@@ -61,6 +61,7 @@ if (!function_exists('invierte_date_time')) {
         $nombre_receptor = (!es_data($info_envio_direccion)) ? format_nombre($info_usuario) : $nombre_receptor;
 
         $r[] = _titulo("dirección de envío");
+        $r[] =  texto_envio_gratis();
         $r[] = get_format_direccion_envio_pedido(
             $data,
             $session,
@@ -83,15 +84,18 @@ if (!function_exists('invierte_date_time')) {
         return d($r, "contenedor_informacion_envio col-lg-6 col-lg-offset-3 p-0");
     }
 
+    function texto_envio_gratis(){
+        return d('envío gratis en Ciudad de México ','mt-5 mb-5 alert alert-light text-uppercase border black text-center');
+    }
     function form_ubicacion_escrita($param)
     {
         $id_recibo = $param['id_recibo'];
 
 
-        $form[] = d(_titulo('¿Tienes una de dos?'), 'selector_ubicaciones_domicilio  text-center text-md-left');
 
+        $form[] = d(_titulo('¿Tienes una de dos?'), 'selector_ubicaciones_domicilio  text-center text-md-left');
         $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
-        $domicilio = format_link('Registrar domicilio completo', ['class' => 'ingreso_texto_completo'], 0);
+        $domicilio = format_link('Registrar domicilio', ['class' => 'ingreso_texto_completo'], 0);
 
         $form[] = d(flex_md($ubicacion, $domicilio, _text_(_between_md, 'mt-5 mb-5'),'mb-5 mb-md-0'), 'selector_ubicaciones_domicilio');
 
@@ -121,6 +125,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $formulario[] = d(_titulo('¿Cual es la Ubicación?'), 'mb-3');
+        $formulario[] = texto_envio_gratis();
         $formulario[] = d(flex_md(
             $input,
             $text_horarios,
