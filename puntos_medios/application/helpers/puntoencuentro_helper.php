@@ -173,6 +173,17 @@ if (!function_exists('invierte_date_time')) {
                 'onkeyup' => "this.value = this.value.toUpperCase();"
             ], _text_nombre
         );
+        $form[] = input_frm("col-lg-6 mt-5", "TELÉFONO ",
+            [
+                "id" => "tel",
+                "name" => "telefono",
+                "type" => "tel",
+                "class" => "telefono ",
+                "required" => true,
+                "placeholder" => "5552...",
+                "maxlength" => 10,
+                "minlength" => 8,
+            ], _text_telefono);
 
 
         $config_email = [
@@ -189,24 +200,18 @@ if (!function_exists('invierte_date_time')) {
             $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
         }
 
+        if (!$data['in_session']){
+
+            $form[] = d('Crea una cuenta para finalizar tu compra','mt-5 text-uppercase black col-sm-12 h4');
+        }
+
+
         $form[] = input_frm(
             _text_("col-lg-6 mt-5", $es_cliente_class),
             "CORREO",
             $config_email, _text_correo
         );
 
-
-        $form[] = input_frm("col-lg-6 mt-5", "TELÉFONO ",
-            [
-                "id" => "tel",
-                "name" => "telefono",
-                "type" => "tel",
-                "class" => "telefono ",
-                "required" => true,
-                "placeholder" => "5552...",
-                "maxlength" => 10,
-                "minlength" => 8,
-            ], _text_telefono);
 
 
         $config = [

@@ -103,8 +103,8 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
 
-            $titulo = ($es_cliente) ? "información de compra" : 'Datos del cliente';
-            $r[] = _titulo($titulo);
+            $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
+            $r[] = d(_titulo($titulo),'mb-5');
             $z[] = input_frm(
                 "col-lg-6 mt-5", "NOMBRE",
                 [
@@ -118,6 +118,25 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 _text_nombre
             );
+
+            $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO",
+                [
+                    "id" => "telefono",
+                    "class" => "telefono",
+                    "type" => "tel",
+                    "maxlength" => 10,
+                    "minlength" => 8,
+                    "name" => "telefono",
+                    "required" => "true",
+                    "placeholder" => "555296...",
+
+                ], _text_telefono
+            );
+
+            if (!$in_session){
+
+                $z[] = d('Crea una cuenta para realizar tu compra','mt-5 text-uppercase black text- col-sm-12 h4');
+            }
 
 
             $config_email = [
@@ -136,7 +155,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = input_frm(
                 _text_("col-lg-6 mt-5", $es_cliente_class),
-                "EMAIL",
+                "CORREO",
                 $config_email, _text_correo
             );
 
@@ -156,19 +175,7 @@ if (!function_exists('invierte_date_time')) {
                 $config_password, _text_pass);
 
 
-            $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO",
-                [
-                    "id" => "telefono",
-                    "class" => "telefono",
-                    "type" => "tel",
-                    "maxlength" => 10,
-                    "minlength" => 8,
-                    "name" => "telefono",
-                    "required" => "true",
-                    "placeholder" => "555296...",
 
-                ], _text_telefono
-            );
 
 
             $r[] = d($z, 13);
