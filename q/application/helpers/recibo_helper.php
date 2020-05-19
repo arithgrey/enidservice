@@ -1319,6 +1319,7 @@ if (!function_exists('invierte_date_time')) {
     function repartidor_disponible($repartidores_en_entrega, $repartidores)
     {
 
+
         $array_repartidores = array_column($repartidores, 'idusuario');
         $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
 

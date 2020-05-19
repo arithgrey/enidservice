@@ -3376,6 +3376,28 @@ function es_vendedor($data)
 
 }
 
+function es_cliente($data)
+{
+
+    $response = false;
+    $key = 'id_perfil';
+    if (array_key_exists('restricciones', $data)) {
+
+        $response = in_array($data[$key], $data['restricciones']['es_cliente']);
+
+    } else if (array_key_exists('perfiles', $data) && es_data($data['perfiles'])) {
+
+
+        $response = (pr($data['perfiles'], $key) == 20);
+
+    } else {
+        $response = (prm_def($data, $key) == 20);
+
+    }
+    return $response;
+
+}
+
 function puede_repartir($data)
 {
 
@@ -3390,7 +3412,7 @@ function es_repartidor($data)
     if ($id_perfil > 0) {
 
         $response = ($id_perfil == 21);
-        
+
     } else {
         $response = in_array($data['id_perfil'], $data['restricciones']['es_repartidor']);
     }

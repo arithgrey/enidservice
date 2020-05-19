@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class usuario_perfil extends REST_Controller
@@ -69,14 +69,54 @@ class usuario_perfil extends REST_Controller
 
     function repartidores_GET()
     {
-
+        $param = $this->get();
         $params =
             [
                 "idperfil" => 21,
                 "status" => 1
             ];
         $response = $this->usuario_perfil_model->get([], $params, 100);
+
+        if (fx($param, "requiere_auto,moto,bicicleta,pie")) {
+            $response = $this->usuarios_entregas($response, $param);
+        }
+
         $this->response($response);
+    }
+
+    private function usuarios_entregas($usuarios, $filtros)
+    {
+
+        $ids = [];
+        foreach ($usuarios as $row) {
+
+            $ids[] = $row['idusuario'];
+        }
+
+        $q = [
+            'ids' => get_keys($ids),
+            'requiere_auto' => $filtros['requiere_auto'],
+            'moto' => $filtros['moto'],
+            'bicicleta' => $filtros['bicicleta'],
+            'pie' => $filtros['pie']
+        ];
+
+        $response = $this->app->api("usuario/entrega/format/json/", $q);
+
+        $repartidores =  [];
+        foreach ($usuarios as $row){
+
+            $idusuario =  $row['idusuario'];
+            foreach ($response as $usr){
+
+                $id_usuario_filtro = (!es_data($usr['idusuario'])) ? $usr['idusuario'] : $usr['idusuario']['id_usuario'];
+                if($idusuario == $id_usuario_filtro){
+                    $repartidores[] = $row;
+                }
+            }
+        }
+        return $repartidores;
+
     }
 
     private function concatena_nombres($data)

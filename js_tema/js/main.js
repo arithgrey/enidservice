@@ -466,7 +466,7 @@ let array_key_exists = (key, array) => {
     let response = 0;
     if (array.hasOwnProperty(key)) {
         let second_exists = (key in array);
-        if (second_exists == true) {
+        if (second_exists === true) {
             console.log("existe");
             response = 1;
         }

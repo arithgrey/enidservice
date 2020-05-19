@@ -730,6 +730,7 @@ if (!function_exists('invierte_date_time')) {
         $id_recibo = $r["id_proyecto_persona_forma_pago"];
         $tipo_entrega = $r["tipo_entrega"];
         $domicilio_entrega = $data['domicilio_entrega'];
+        $ubicaciones = $data['ubicaciones'];
 
         $response[] = $data['breadcrumbs'];
         $response[] =
@@ -767,10 +768,10 @@ if (!function_exists('invierte_date_time')) {
                 d_p(
                     'Haz click en el boton "Enviar a esta dirección". 
                         También puedes registrar un',
-                    'mt-1'
+                    'mt-5 mt-md-1'
                 ),
                 agregar_nueva_direccion(0),
-                d(' ó ', 'ml-2 '),
+                d(' ó ', 'ml-2 text-center'),
                 agregar_nueva_direccion()
             ),
             'mt-1 letter-spacing-1 d-lg-flex'
@@ -780,7 +781,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hr(['class' => 'mt-5 mb-5'], 0);
 
         $response[] = d(
-            h('usadas recientemente', 4, 'text-uppercase strong ')
+            h('Direcciones usadas recientemente', 4, 'text-uppercase strong ')
         );
 
 
@@ -789,17 +790,46 @@ if (!function_exists('invierte_date_time')) {
             crea_puntos_entrega($punto_entrega, $lista_puntos_encuentro, $id_recibo),
             10
         );
+
+        $response[] = d($registradas, 'col-lg-12 p-0 mt-5 mb-5');
         $response[] = d(
-            $registradas
-            ,
-            'col-lg-12 p-0 mt-5 mb-5'
+            h('Ubicaciones frecuentes', 4, 'text-uppercase strong ')
         );
+        $response[] = d(crea_ubicaciones($ubicaciones, $id_recibo), 'col-lg-12 mt-5 mb-5');
         $response[] = d(hr([], 0), 'col-lg-12 p-0 mt-3 mb-5');
 
         return d($response, 'col-lg-12 contenedor_domicilios d-none');
 
     }
 
+    function crea_ubicaciones($ubicaciones, $id_recibo)
+    {
+
+        $response = [];
+        if (es_data($ubicaciones)) {
+
+            $ubicaciones = unique_multidim_array($ubicaciones, 'ubicacion');
+            foreach ($ubicaciones as $row) {
+
+                $id_ubicacion = $row["id_ubicacion"];
+                $text = [];
+                $text[] = d($row['ubicacion'], 'p-1');
+
+                $text[] = d(btn(
+                    "usar esta ubicacion",
+                    [
+                        "class" => "establecer_ubicacion mt-2",
+                        "id" => $id_ubicacion,
+                        "id_recibo" => $id_recibo,
+                        'tipo' => 2,
+
+                    ]
+                ), 'p-1');
+                $response[] = d(append($text), _text("col-lg-3 mt-5 "));
+            }
+        }
+        return append($response);
+    }
 
     function frm_pedidos($data, $recibo, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta)
     {
@@ -1419,9 +1449,10 @@ if (!function_exists('invierte_date_time')) {
         $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
 
-        $menu_pedidos = tab('Pedidos', '#buscador_seccion',['class'=>'strong']);
+        $menu_pedidos = tab('Pedidos', '#buscador_seccion', ['class' => 'strong']);
         $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => 'ml-5 strong']);
-        $menu = flex($menu_pedidos, $menu_pendientes,'justify-content-end');
+        $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
+        $menu = flex($menu_pedidos, $menu_pendientes, 'justify-content-end');
         $data_complete[] = d($menu, 10, 1);
         $data_complete[] = d(tab_content($secciones_tabs), 12);
         return append($data_complete);
@@ -1429,7 +1460,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function comisiones_por_pago($data,$modal)
+    function comisiones_por_pago($data, $modal)
     {
 
         $ordenes = $data['comisiones_por_pago'];
@@ -1476,6 +1507,7 @@ if (!function_exists('invierte_date_time')) {
                 $total_comisiones_efectivo = $row['total_comisiones'];
 
                 $total_comisiones = money($row['total_comisiones']);
+                $totales_en_pagos = $totales_en_pagos + $row['total_comisiones'];
 
 
                 $config = ['class' => 'usuario_venta cursor_pointer col-md-4 border', 'id' => $id_usuario];
@@ -1494,7 +1526,13 @@ if (!function_exists('invierte_date_time')) {
                 $response[] = d($contenido, 'border row');
             }
 
+
+            $totales_[] = d('', 'col-lg-9');
+            $totales_[] = d(money($totales_en_pagos), 'col-lg-3');
+
+            $response[] = d($totales_, 'row text-right h3 strong');
             $response[] = d('', 'mt-5 mb-5 row');
+
             foreach ($ordenes as $row) {
 
 
@@ -1535,10 +1573,10 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(_titulo(_text_('Cuenta por pagar', $total)), 'text-right mt-5');
         }
 
-        $_response[] = d(_titulo('Cuentas por pagar',2),13);
-        $_response[] =  append($response);
+        $_response[] = d(_titulo('Cuentas por pagar', 2), 13);
+        $_response[] = append($response);
         $_response[] = $modal;
-        return d($_response,10,1);
+        return d($_response, 10, 1);
     }
 
 
@@ -1570,6 +1608,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response = [];
+        $totales = 0;
         foreach ($totales as $row) {
 
             $id_usuario = $row['id_usuario'];
@@ -1592,7 +1631,6 @@ if (!function_exists('invierte_date_time')) {
             }
             $total_comisiones_efectivo = $row['total_comisiones'];
             $totales_en_pagos = $totales_en_pagos + $total_comisiones_efectivo;
-
             $total_comisiones = money($row['total_comisiones']);
 
 
@@ -1604,6 +1642,7 @@ if (!function_exists('invierte_date_time')) {
                 'nombre_comisionista' => $nombre_completo,
 
             ];
+
             $contenido[] = d($id_usuario, $config);
             $contenido[] = d($nombre_completo, $config);
             $contenido[] = d($total_comisiones, $config_pago);
@@ -2193,7 +2232,7 @@ if (!function_exists('invierte_date_time')) {
                     ],
                     "Domicilio de envío"
                 )
-                , 'ml-lg-3 mt-2'
+                , 'ml-lg-3 mt-md-2 mt-5'
             );
 
     }
@@ -2346,7 +2385,7 @@ if (!function_exists('invierte_date_time')) {
                 $acciones[] = format_link(
                     "Entregar en esta estación",
                     [
-                        "class" => "establecer_direccion mt-2 mt-3",
+                        "class" => "establecer_punto_encuentro mt-2 mt-3",
                         "id" => $id,
                         'tipo' => 1,
                         "id_recibo" => $id_recibo,
