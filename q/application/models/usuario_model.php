@@ -593,9 +593,74 @@ class usuario_model extends CI_Model
                 apellido_materno,
                 email,
                 nombre_usuario
-                FROM usuario WHERE idusuario in ('.$in.')';
+                FROM usuario WHERE idusuario in (' . $in . ')';
 
         return $this->db->query($query_get)->result_array();
     }
+
+    function entregas($ids, $moto, $bicicleta, $pie)
+    {
+        $extra_moto = ($moto > 0) ? ' AND tiene_moto > 0  ' : ' ';
+        $extra_bicicleta = ($bicicleta > 0) ? ' AND tiene_bicicleta > 0  ' : ' ';
+        $extra_pie = ($pie > 0) ? ' AND reparte_a_pie > 0  ' : ' ';
+
+        $response = [];
+        if ($moto > 0) {
+
+            $query_get = "SELECT 
+                idusuario id_usuario            
+                FROM usuario 
+                WHERE       
+                1 = 1
+                " . $extra_moto . "
+                AND  idusuario in ( $ids )";
+
+            $response[] = $this->db->query($query_get)->result_array();
+        }
+
+        if ($bicicleta > 0) {
+
+            $query_get = "SELECT 
+                idusuario id_usuario              
+                FROM usuario 
+                WHERE
+                1 = 1        
+                " . $extra_bicicleta . "
+                AND  idusuario in ( $ids )";
+
+            $response[] = $this->db->query($query_get)->result_array();
+        }
+
+        if ($pie > 0) {
+            $query_get = "SELECT 
+                idusuario id_usuario           
+                FROM usuario 
+                WHERE    
+                1 = 1   
+                " . $extra_pie . "
+                AND  idusuario in ( $ids )";
+
+            $response[] = $this->db->query($query_get)->result_array();
+        }
+
+        return $response;
+
+    }
+
+    function entregas_auto($ids)
+    {
+
+        $query_get = "SELECT 
+                idusuario id_usuario         
+                FROM usuario 
+                WHERE
+                 tiene_auto > 0 
+                 AND 
+                idusuario in ($ids)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
 }

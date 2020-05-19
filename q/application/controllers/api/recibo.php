@@ -345,6 +345,9 @@ class recibo extends REST_Controller
         if (fx($param, "id")) {
 
             $id_recibo = $param['id'];
+            $id_servicio = $this->servicio_recibo($id_recibo);
+
+
             $params = [
                 "status" => 16,
                 "saldo_cubierto" => 0,
@@ -353,7 +356,7 @@ class recibo extends REST_Controller
             ];
 
             $in = ["id_proyecto_persona_forma_pago" => $id_recibo];
-            $repartidores = $this->repartidores();
+            $repartidores = $this->repartidores($id_servicio);
             $repartidores_en_entrega = $this->recibo_model->espacios($id_recibo);
             $id_usuario = repartidor_disponible($repartidores_en_entrega, $repartidores);
             $params['id_usuario_entrega'] = $id_usuario;
@@ -371,8 +374,7 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "id_recibo")) {
 
-            $recibo = $this->recibo_model->q_get(["id_servicio"], $param["id_recibo"]);
-            $response = pr($recibo, "id_servicio", 0);
+            $response = $this->servicio_recibo($param["id_recibo"]);
 
         }
         $this->response($response);
@@ -1130,6 +1132,20 @@ class recibo extends REST_Controller
 
     }
 
+    function ubicacion_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_recibo")) {
+            $id_recibo = $param['id_recibo'];
+            $set = ['ubicacion' => 1, 'contra_entrega_domicilio' => 1];
+            $respose = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
+        }
+        $this->response($respose);
+
+    }
+
     function deuda_cliente_GET()
     {
 
@@ -1609,10 +1625,20 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
-    function repartidores()
+    function repartidores($id_servicio)
     {
+        $servicio = $this->app->servicio($id_servicio);
 
-        return $this->app->api("usuario_perfil/repartidores/format/json/");
+        $q = [
+            'requiere_auto' => pr($servicio, 'requiere_auto'),
+            'moto' => pr($servicio, 'moto'),
+            'bicicleta' => pr($servicio, 'bicicleta'),
+            'pie' => pr($servicio, 'pie'),
+
+        ];
+
+
+        return $this->app->api("usuario_perfil/repartidores/format/json/", $q);
     }
 
     function usuarios_similares($q)
@@ -1657,6 +1683,14 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = $this->recibo_model->comisiones_por_pago($param);
         $this->response($response);
+    }
+
+    private function servicio_recibo($id_recibo)
+    {
+
+        $recibo = $this->recibo_model->q_get(["id_servicio"], $id_recibo);
+        return pr($recibo, "id_servicio", 0);
+
     }
 }
 

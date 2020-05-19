@@ -8,10 +8,8 @@ let formulario_registro_ubicacion = '.formulario_registro_ubicacion';
 let $formulario_registro_ubicacion = $('.formulario_registro_ubicacion');
 let $form_ubicacion = $('.form_ubicacion');
 let $fecha_entrega_ubicacion = $form_ubicacion.find('.fecha_entrega');
-let $horario_entrega_ubicacion = $form_ubicacion.find('.horario_entrega');
 
 $(document).ready(() => {
-
 
     $('footer').addClass('d-none');
     $(".codigo_postal").keyup(auto_completa_direccion);
@@ -79,7 +77,6 @@ let ingreso_ubicacion = () => {
 };
 let registro_ubicacion = (e) => {
 
-
     let url = "../q/index.php/api/ubicacion/index/format/json/";
     let data_send = $form_ubicacion.serialize();
     bloquea_form(formulario_registro_ubicacion);
@@ -89,7 +86,8 @@ let registro_ubicacion = (e) => {
 };
 let response_ubicacion = function (data) {
 
-    let id_recibo = $form_ubicacion.find('.id_recibo').val();
-    redirect(path_enid('recibo', id_recibo));
+    if (array_key_exists('id_recibo', data)) {
 
+        redirect(data.siguiente);
+    }
 };

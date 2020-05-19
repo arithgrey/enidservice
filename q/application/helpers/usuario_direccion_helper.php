@@ -353,7 +353,7 @@ if (!function_exists('invierte_date_time')) {
                 "required" => "required",
                 "class" => "codigo_postal",
                 "id" => "codigo_postal",
-                "type" => "text",
+                "type" => "tel",
             ], '¿Es correcto el C.P.?'
         );
 

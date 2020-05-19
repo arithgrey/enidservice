@@ -1136,6 +1136,7 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+
     function auto_PUT()
     {
 
@@ -1152,6 +1153,7 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+
     function moto_PUT()
     {
 
@@ -1168,6 +1170,7 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+
     function bicicleta_PUT()
     {
 
@@ -1184,6 +1187,7 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+
     function pie_PUT()
     {
 
@@ -1199,6 +1203,51 @@ class usuario extends REST_Controller
 
         $this->response($response);
 
+    }
+
+    function entrega_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if (fx($param, "ids,requiere_auto,moto,bicicleta,pie")) {
+
+            $ids = $param['ids'];
+            $requiere_auto = $param['requiere_auto'];
+            $moto = $param['moto'];
+            $bicicleta = $param['bicicleta'];
+            $pie = $param['pie'];
+
+            if ($requiere_auto > 0) {
+
+                $data_complete = $this->usuario_model->entregas_auto($ids);
+
+            } else {
+
+
+                $data_complete = $this->usuario_model->entregas($ids
+                    , $moto
+                    , $bicicleta
+                    , $pie
+                );
+
+
+            }
+            if(es_data($data_complete)){
+
+                foreach ($data_complete  as $row){
+
+                    foreach ($row as $temp){
+
+                        $response[]['idusuario'] = $temp;
+                    }
+                }
+            }
+
+        }
+
+        $this->response($response);
     }
 
 

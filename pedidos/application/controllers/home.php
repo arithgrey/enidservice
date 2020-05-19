@@ -207,10 +207,12 @@ class Home extends CI_Controller
 
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);
+            $ubicaciones = $this->get_ubicaciones_usuario($id_usuario);
 
             $data += [
                 "lista_direcciones" => $domicilios,
                 "puntos_encuentro" => $this->get_puntos_encuentro($id_usuario),
+                "ubicaciones" => $ubicaciones,
                 "num_domicilios" => count($domicilios),
                 "domicilio_entrega" => $domicilio_entrega,
                 "punto_entrega" => $punto_entrega,
@@ -233,6 +235,11 @@ class Home extends CI_Controller
 
     }
 
+    private function get_ubicaciones_usuario($id_usuario){
+
+        return $this->app->api("ubicacion/usuario/format/json/",
+            ["id_usuario" => $id_usuario]);
+    }
     private function get_direcciones_usuario($id_usuario)
     {
 

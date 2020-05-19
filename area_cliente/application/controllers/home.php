@@ -60,10 +60,13 @@ class Home extends CI_Controller
 
         $es_administrador_vendedor = es_administrador_o_vendedor($data);
         $tipo_entrega = pr($recibo, 'tipo_entrega');
+        $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');
+
+
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {
             /*Verifico que tenga saldo pendiente*/
-            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo);
+            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo, $contra_entrega_domicilio);
             if ($direcciones_registradas < 1) {
 
                 $extra = ($es_administrador_vendedor) ? '&asignacion_horario_entrega=1' : '';
@@ -91,29 +94,42 @@ class Home extends CI_Controller
         }
     }
 
-    private function recibo_pago_direccion($id_recibo)
+    private function recibo_pago_direccion($id_recibo, $contra_entrega_domicilio)
     {
 
-        return $this->app->api(
-            "proyecto_persona_forma_pago_direccion/recibo/format/json/",
-            [
-                "id_recibo" => $id_recibo,
-                "total" => 1,
-            ]
-        );
+        $response = false;
+        if ($contra_entrega_domicilio > 0) {
+
+            $response = $this->app->api(
+                "proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/",
+                [
+                    "id_recibo" => $id_recibo
+                ]
+            );
+
+        } else {
+
+            $response = $this->app->api(
+                "proyecto_persona_forma_pago_direccion/recibo/format/json/",
+                [
+                    "id_recibo" => $id_recibo,
+                    "total" => 1,
+                ]
+            );
+        }
+        return $response;
+
 
     }
 
     private function resumen_valoraciones($id_usuario)
     {
-
         return $this->app->api("valoracion/usuario/format/json/",
             ["id_usuario" => $id_usuario]);
     }
 
     private function get_alcance($id_usuario)
     {
-
 
         return $this->app->api("servicio/alcance_usuario/format/json/",
             ["id_usuario" => $id_usuario]);

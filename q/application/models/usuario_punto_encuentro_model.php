@@ -61,6 +61,7 @@ class Usuario_punto_encuentro_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+
     function update($data = [], $params_where = [], $limit = 1)
     {
         foreach ($params_where as $key => $value) {
