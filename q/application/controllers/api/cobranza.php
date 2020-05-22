@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Cobranza extends REST_Controller
@@ -375,6 +375,7 @@ class Cobranza extends REST_Controller
             if ($response) {
                 $this->fecha_entrega($param['fecha_entrega'], $param['horario_entrega'], $id_recibo);
             }
+            $this->valida_costo_envio($id_recibo, $param['punto_encuentro']);
             $data =
                 [
                     'restricciones' => $this->config->item('restricciones'),
@@ -597,9 +598,23 @@ class Cobranza extends REST_Controller
             "fecha_entrega" => $fecha_entrega,
             "horario_entrega" => $horario_entrega,
             "recibo" => $recibo,
-            "tipo_entrega" => 1
+            "tipo_entrega" => 1,
+
         ];
         return $this->app->api("recibo/fecha_entrega/format/json/", $q, "json", "PUT");
+
+    }
+
+    private function valida_costo_envio($id_recibo, $punto_encuentro)
+    {
+        $q = ['punto_encuentro' => $punto_encuentro];
+        $costo_entrega =  $this->get_costo_envio_punto_encuentro($q);
+
+        $q = [
+            "recibo" => $id_recibo,
+            "costo_envio" => $costo_entrega
+        ];
+        return $this->app->api("recibo/costo_envio/format/json/", $q, "json", "PUT");
 
     }
 

@@ -235,7 +235,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $omitir = a_enid(
+        $bicicleta_reparto = a_enid(
             'BICICLETA',
             [
                 "id" => 0,
@@ -255,7 +255,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $seccion_entrega = eleccion_seleccion($titulo,$reparto_auto, $confirmar, $omitir, $pie);
+        $seccion_entrega = eleccion_seleccion($titulo,$reparto_auto, $confirmar, $bicicleta_reparto, $pie);
 
         $response[] = hiddens(
             [

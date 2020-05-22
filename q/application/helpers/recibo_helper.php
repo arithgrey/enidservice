@@ -653,7 +653,7 @@ if (!function_exists('invierte_date_time')) {
             $usurio_entrega = (array_key_exists('usuario_entrega', $row)) ? $row['usuario_entrega'] : [];
             $fecha_contra_entrega = _d($str_fecha_contra_entrega, format_fecha($entrega, 1));
 
-            $text_usuario_entrega = (es_data($usurio_entrega)) ? d(format_nombre($usurio_entrega),'strong fp9') : '';
+            $text_usuario_entrega = (es_data($usurio_entrega)) ? d(format_nombre($usurio_entrega), 'strong fp9') : '';
             $fecha_contra_entrega = _d($text_usuario_entrega, $fecha_contra_entrega);
 
 
@@ -720,7 +720,6 @@ if (!function_exists('invierte_date_time')) {
         ];
         return d_c($render, 'col-sm-12 mt-4');
     }
-
 
 
     function monto_compra($monto, $id_perfil, $intento_reventa, $saldo_cubierto,
@@ -1320,20 +1319,24 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $array_repartidores = array_column($repartidores, 'idusuario');
-        $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
-
         $id_usuario = 1;
-        if (es_data($array_repartidores_entrega) && $array_repartidores_entrega[0] < 1) {
+        if (es_data($repartidores)) {
 
-            $id_usuario = $array_repartidores[0];
+            $array_repartidores = array_column($repartidores, 'idusuario');
+            $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
 
-        } else {
 
-            $ocupados = array_intersect($array_repartidores, $array_repartidores_entrega);
-            $disponibles = elimina_ocupados($array_repartidores, $ocupados);
-            $id_usuario = proximo_disponible($disponibles, $id_usuario);
+            if (es_data($array_repartidores_entrega) && $array_repartidores_entrega[0] < 1) {
 
+                $id_usuario = $array_repartidores[0];
+
+            } else {
+
+                $ocupados = array_intersect($array_repartidores, $array_repartidores_entrega);
+                $disponibles = elimina_ocupados($array_repartidores, $ocupados);
+                $id_usuario = proximo_disponible($disponibles, $id_usuario);
+
+            }
         }
 
         return $id_usuario;

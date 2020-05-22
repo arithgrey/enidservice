@@ -1095,16 +1095,44 @@ class recibo extends REST_Controller
             $es_contra_entrega_domicilio = prm_def($param, 'contra_entrega_domicilio');
             $tipo_entrega = prm_def($param, 'tipo_entrega');
             $ubicacion = prm_def($param, 'ubicacion');
+            $id_recibo = $param['recibo'];
+
+            $costo_envio_cliente = 0;
+            if ($ubicacion < 1) {
+                $id_servicio = $this->servicio_recibo($id_recibo);
+                $servicio = $this->app->servicio($id_servicio);
+
+                $data_servicio = [
+                    'flag_envio_gratis' => pr($servicio, 'flag_envio_gratis'),
+                    'tipo_entrega' => pr($servicio, 'tipo_entrega')
+                ];
+                $costos =  get_costo_envio($data_servicio);
+                $costo_envio_cliente =  $costos['costo_envio_cliente'];
+            }
 
             $response = $this->recibo_model->set_fecha_contra_entrega(
                 $param["recibo"],
                 $fecha_contra_entrega,
                 $es_contra_entrega_domicilio,
                 $tipo_entrega,
-                $ubicacion
+                $ubicacion,
+                $costo_envio_cliente
             );
         }
 
+        $this->response($response);
+    }
+    function costo_envio_PUT(){
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "recibo,costo_envio")) {
+
+            $id_recibo =  $param['recibo'];
+            $costo_envio =  $param['costo_envio'];
+            $response = $this->recibo_model->q_up('costo_envio_cliente', $costo_envio, $id_recibo);
+
+        }
         $this->response($response);
     }
 

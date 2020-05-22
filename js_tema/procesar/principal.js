@@ -90,7 +90,7 @@ let registro = (e) => {
 
     if ($tiene_formato) {
 
-        debugger;
+
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
 

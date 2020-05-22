@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Servicio extends REST_Controller
@@ -324,6 +324,7 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+
     function moto_PUT()
     {
 
@@ -340,6 +341,7 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+
     function bicicleta_PUT()
     {
 
@@ -356,6 +358,7 @@ class Servicio extends REST_Controller
         $this->response($response);
 
     }
+
     function pie_PUT()
     {
 
@@ -381,7 +384,7 @@ class Servicio extends REST_Controller
 
         if (fx($param, "id_servicio,requiere_auto")) {
 
-            $requiere_auto =  $param['requiere_auto'];
+            $requiere_auto = $param['requiere_auto'];
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("requiere_auto", $requiere_auto, $id_servicio);
         }
@@ -481,7 +484,8 @@ class Servicio extends REST_Controller
         $next = ($param["flag_servicio"] == 0 && $param["precio"] == 0) ? 0 : 1;
         $data_complete["mensaje"] = ($next == 1) ? "" : "TU PRODUCTO DEBE TENER ALGÚN PRECIO";
         if ($next) {
-
+            $id_empresa = $this->app->get_session('idempresa');
+            $empresa = $this->app->empresa($id_empresa);
             $tags = $this->create_tags($param);
             $text_tags = implode($tags, ",");
             $param["metakeyword"] = $text_tags;
@@ -492,7 +496,7 @@ class Servicio extends REST_Controller
             $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0) ? 1 : 0;
             $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0) ? 1 : 0;
 
-            $data_complete["servicio"] = $this->create_servicio($param);
+            $data_complete["servicio"] = $this->create_servicio($param, $empresa);
 
         }
 
@@ -553,7 +557,7 @@ class Servicio extends REST_Controller
         return $this->app->api("privacidad_usuario/servicio/format/json/", $q);
     }
 
-    function create_servicio($param)
+    function create_servicio($param, $empresa)
     {
 
         $nombre_servicio = strip_tags($param["nombre_servicio"]);
@@ -586,7 +590,6 @@ class Servicio extends REST_Controller
             $id_ciclo_facturacion = $param["ciclo_facturacion"];
         }
 
-
         $params = [
             "nombre_servicio" => $nombre_servicio,
             "flag_servicio" => $es_servicio,
@@ -601,7 +604,10 @@ class Servicio extends REST_Controller
             "precio" => $precio,
             "id_ciclo_facturacion" => $id_ciclo_facturacion,
             "entregas_en_casa" => $entregas_en_casa,
-            "telefono_visible" => $telefonos_visibles];
+            "telefono_visible" => $telefonos_visibles,
+            "flag_envio_gratis" => pr($empresa, 'envios_gratis'),
+            "comision" => pr($empresa, 'comision_venta')
+        ];
 
 
         if ($this->app->getperfiles() == 3) {

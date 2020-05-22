@@ -87,6 +87,10 @@ class usuario_model extends CI_Model
                       u.turno,
                       u.sexo, 
                       u.id_departamento,
+                      u.tiene_auto,
+                      u.tiene_moto,
+                      u.tiene_bicicleta,
+                      u.reparte_a_pie,
                       up.idperfil
                       FROM usuario u
                       INNER JOIN usuario_perfil up 
@@ -487,13 +491,22 @@ class usuario_model extends CI_Model
             "turno" => $param["turno"],
             "sexo" => $param["sexo"],
             "id_departamento" => $param["departamento"],
-            "status" => $param["status"]
+            "status" => $param["status"],
+
         ];
 
         $tel_contacto = $param["tel_contacto"];
 
         if (strlen($tel_contacto) > 3) {
             $params["tel_contacto"] = $tel_contacto;
+        }
+        if (array_key_exists('auto', $param)) {
+
+            $params['tiene_auto'] = $param['auto'];
+            $params['tiene_moto'] = $param['moto'];
+            $params['tiene_bicicleta'] = $param['bicicleta'];
+            $params['reparte_a_pie'] = $param['reparte_a_pie'];
+
         }
 
         $this->update($params, ["idusuario" => $id_usuario]);

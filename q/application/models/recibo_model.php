@@ -624,7 +624,7 @@ class Recibo_model extends CI_Model
 
     }
 
-    function set_fecha_contra_entrega($id_recibo, $fecha, $contra_entrega_domicilio = 0, $tipo_entrega = 0, $ubicacion = 0)
+    function set_fecha_contra_entrega($id_recibo, $fecha, $contra_entrega_domicilio = 0, $tipo_entrega = 0, $ubicacion = 0, $costo_envio_cliente = 0)
     {
 
 
@@ -634,6 +634,15 @@ class Recibo_model extends CI_Model
         if ($tipo_entrega > 0) {
             $this->db->set('tipo_entrega', $tipo_entrega);
         }
+
+        if ($ubicacion > 0) {
+
+            $this->db->set('costo_envio_cliente', 0);
+        } else {
+
+            $this->db->set('costo_envio_cliente', $costo_envio_cliente);
+        }
+
         $this->db->set('ubicacion', $ubicacion);
 
         $this->db->where("id_proyecto_persona_forma_pago", $id_recibo);

@@ -266,6 +266,12 @@ class app extends CI_Controller
         return $this->api("servicio/base/format/json/", $q);
     }
 
+    function empresa($id_empresa)
+    {
+        $q = ["id_empresa" => $id_empresa];
+        return $this->api("empresa/id/format/json/", $q);
+    }
+
     function paginacion($q)
     {
 
