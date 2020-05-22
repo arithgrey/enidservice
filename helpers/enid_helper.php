@@ -1181,7 +1181,7 @@ function get_costo_envio($param)
     $gratis = $param["flag_envio_gratis"];
     $tipo_entrega = $param['tipo_entrega'];
     $r = [];
-    if ($gratis == 1) {
+    if ($gratis > 0) {
 
         $r["costo_envio_cliente"] = 0;
         $r["costo_envio_vendedor"] = 100;

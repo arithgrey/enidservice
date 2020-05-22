@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class tipificacion extends REST_Controller
@@ -18,11 +18,12 @@ class tipificacion extends REST_Controller
         $response = [];
         if (fx($param, "tipo")) {
 
-            $in = ["tipo" => $param["tipo"]];
+            $in = ["tipo" => $param["tipo"], "status" => 1];
 
             $response = $this->tipificacion_model->get([], $in, 100, 'nombre_tipificacion');
 
         } else {
+
             $response = $this->tipificacion_model->get([], [], 100);
         }
         if (array_key_exists("v", $param) && $param["v"] == 1) {

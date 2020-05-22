@@ -162,7 +162,7 @@ class ubicacion extends REST_Controller
             'recibo' => $id_recibo,
             'contra_entrega_domicilio' => 1,
             'tipo_entrega' => 2,
-            'ubicacion' => 1
+            'ubicacion' => 1,
         ];
         $this->app->api("recibo/fecha_entrega", $q, "json", "PUT");
     }

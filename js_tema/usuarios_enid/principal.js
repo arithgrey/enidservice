@@ -13,7 +13,19 @@ let $input_email_registro = $form.find('.email');
 let $input_telefono_registro = $form.find('.tel_contacto');
 let $q = $('.q');
 
+let $auto = $form.find(".auto");
+let $moto = $form.find(".moto");
+let $bicicleta = $form.find(".bicicleta");
+let $pie = $form.find(".pie");
+
+let $tiene_auto = $form.find(".tiene_auto");
+let $tiene_moto = $form.find(".tiene_moto");
+let $tiene_bicicleta = $form.find(".tiene_bicicleta");
+let $reparte_a_pie = $form.find(".reparte_a_pie");
+
+
 $(document).ready(function () {
+
     valida_busqueda();
     set_option("estado_usuario", 1);
     set_option("depto", 0);
@@ -121,6 +133,7 @@ let response_carga_usuario = (data) => {
     });
     $(".pagination > li > a, .pagination > li > span").css("color", "white");
     recorre(".tab-content");
+
     $(".usuario_enid_service").click(carga_data_usuario);
 };
 let pre_nuevo_usuario = () => {
@@ -136,6 +149,12 @@ let carga_data_usuario = (e) => {
 
     let id = e.target.id;
     if (parseInt(id) > 0) {
+
+        let tipo_reparto = [$auto, $moto,$bicicleta,$pie];
+        for(let x in tipo_reparto){
+            tipo_reparto[x].removeClass('button_enid_eleccion_active');
+        }
+        
         document.getElementById("form-miembro-enid-service").reset();
         $(".place_correo_incorrecto").empty();
         recorre(".tab-content");
@@ -149,8 +168,10 @@ let carga_data_usuario = (e) => {
 };
 let response_carga_data_usuario = (data) => {
 
+
     $(".place_config_usuario").empty();
     data = data[0];
+
     let nombre = data.nombre;
     let apellido_paterno = data.apellido_paterno;
     let apellido_materno = data.apellido_materno;
@@ -163,6 +184,10 @@ let response_carga_data_usuario = (data) => {
     let status = data.status;
     let tel_contacto = data.tel_contacto;
     let id_perfil = data.idperfil;
+    let tiene_auto = data.tiene_auto;
+    let tiene_moto = data.tiene_moto;
+    let tiene_bicicleta = data.tiene_bicicleta;
+    let reparte_a_pie = data.reparte_a_pie;
 
     set_option("perfil", data.idperfil);
     set_option("id_usuario", data.idusuario);
@@ -171,6 +196,32 @@ let response_carga_data_usuario = (data) => {
     $form.find(".apellido_materno").val(apellido_materno);
     $form.find(".email").val(email);
     $form.find(".tel_contacto").val(tel_contacto);
+
+
+    $tiene_auto.val(tiene_auto);
+    $tiene_moto.val(tiene_moto);
+    $tiene_bicicleta.val(tiene_bicicleta);
+    $reparte_a_pie.val(reparte_a_pie);
+
+
+    if (parseInt(tiene_auto) > 0) {
+        $auto.addClass('button_enid_eleccion_active');
+    }
+    if (parseInt(tiene_moto) > 0) {
+        $moto.addClass('button_enid_eleccion_active');
+    }
+    if (parseInt(tiene_bicicleta) > 0) {
+        $bicicleta.addClass('button_enid_eleccion_active');
+    }
+    if (parseInt(reparte_a_pie) > 0) {
+        $pie.addClass('button_enid_eleccion_active');
+    }
+
+    $auto.click(selector_auto);
+    $moto.click(selector_moto);
+    $bicicleta.click(selector_bicicleta);
+    $pie.click(selector_pie);
+
 
     selecciona_select(".form-miembro-enid-service .perfil", id_perfil);
     selecciona_select(".form-miembro-enid-service .depto", id_departamento);
@@ -386,3 +437,49 @@ let valida_busqueda = function () {
         $nombre_usuario.focus();
     }
 };
+
+let selector_auto = function () {
+
+    if ($auto.hasClass('button_enid_eleccion_active')) {
+        $tiene_auto.val(0);
+        $auto.removeClass('button_enid_eleccion_active');
+
+    } else {
+        $tiene_auto.val(1);
+        $auto.addClass('button_enid_eleccion_active');
+    }
+}
+let selector_moto = function () {
+
+    if ($moto.hasClass('button_enid_eleccion_active')) {
+        $tiene_moto.val(0);
+        $moto.removeClass('button_enid_eleccion_active');
+
+    } else {
+        $tiene_moto.val(1);
+        $moto.addClass('button_enid_eleccion_active');
+    }
+}
+
+let selector_bicicleta = function () {
+
+    if ($bicicleta.hasClass('button_enid_eleccion_active')) {
+        $tiene_bicicleta.val(0);
+        $bicicleta.removeClass('button_enid_eleccion_active');
+
+    } else {
+        $tiene_bicicleta.val(1);
+        $bicicleta.addClass('button_enid_eleccion_active');
+    }
+}
+let selector_pie = function () {
+
+    if ($pie.hasClass('button_enid_eleccion_active')) {
+        $reparte_a_pie.val(0);
+        $pie.removeClass('button_enid_eleccion_active');
+
+    } else {
+        $reparte_a_pie.val(1);
+        $pie.addClass('button_enid_eleccion_active');
+    }
+}

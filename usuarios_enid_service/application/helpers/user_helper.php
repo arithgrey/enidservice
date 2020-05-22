@@ -228,6 +228,82 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
+        $titulo = "¿EN QUÉ PUEDE REPARTIR?";
+
+        $reparto_auto = a_enid(
+            "AUTO",
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion auto'
+                )
+
+            ]
+        );
+
+        $confirmar = a_enid(
+            "MOTO",
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion moto'
+                )
+
+            ]
+        );
+
+        $bicicleta_reparto = a_enid(
+            'BICICLETA',
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion bicicleta'
+                )
+            ]
+        );
+
+        $pie = a_enid(
+            'PIE',
+            [
+                "id" => 0,
+                "class" => _text_(
+                    'button_enid_eleccion pie'
+                )
+            ]
+        );
+
+        $r[] = eleccion_seleccion($titulo, $reparto_auto, $confirmar, $bicicleta_reparto, $pie);
+
+        $r[] = hiddens(
+            [
+                "name" => "auto",
+                "class" => "tiene_auto",
+                "value" => 0
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "name" => "moto",
+                "class" => "tiene_moto",
+                "value" => 0
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "name" => "bicicleta",
+                "class" => "tiene_bicicleta",
+                "value" => 0
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "reparte_a_pie",
+                "class" => "reparte_a_pie",
+                "value" => 0
+            ]
+        );
+
         $r[] = d(btn("Registrar", ['class' => 'submit_enid']), 'col-md-12 mt-5');
         $r[] = form_close();
         $r[] = place("place_config_usuario");
@@ -235,6 +311,16 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+
+    function eleccion_seleccion($titulo, $reparto_auto, $a, $b, $c, $ext = '')
+    {
+
+        $response[] = _titulo($titulo,2);
+        $contenido = [$reparto_auto, $a, $b, $c];
+        $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
+        return d($response,'col-md-12 mt-4');
+    }
+
 
     function form_recurso()
     {
