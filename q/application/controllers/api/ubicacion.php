@@ -175,5 +175,19 @@ class ubicacion extends REST_Controller
         return $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
 
     }
+    function ids_recibo_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "ids")) {
+
+            $response = $this->ubicacion_model->in_recibo($param['ids']);
+
+        }
+        $this->response($response);
+    }
+
+
 
 }

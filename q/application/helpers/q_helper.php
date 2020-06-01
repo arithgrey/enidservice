@@ -1372,7 +1372,11 @@ if (!function_exists('invierte_date_time')) {
 
                 $hoy = $fecha->format('Y-m-d');
                 $es_mayor = ($fecha_entrega > $hoy);
+
+
                 $dias = date_difference($hoy, $fecha_entrega);
+
+                $es_menor = ($dias > 0 && !$es_mayor);
 
                 $text_entrega = _text_('Se entregará en ', $dias, 'días!');
                 $text_entrega_paso = _text_('La fecha de entrega fué hace ', $dias, 'días!');
@@ -1438,14 +1442,13 @@ if (!function_exists('invierte_date_time')) {
 
                 $text = flex($seccion_imagenes, $total_seccion, _between);
 
-
                 $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);
                 $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
 
-
-                $linea = d(a_enid($text, $url), "border-bottom");
-                if ($es_hoy) {
+                $extra_class = ($es_hoy || $es_menor) ? '' : 'venta_futura d-none';
+                $linea = d(a_enid($text, $url), _text_("border-bottom", $extra_class));
+                if ($es_hoy || $es_menor) {
 
                     $ventas_hoy[] = $linea;
 
@@ -1459,10 +1462,12 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($recibos)) {
 
-                $titulo = es_repartidor($data) ? 'Próximas entregas' :'ventas en proceso';
-                $r[] = d(_titulo($titulo ));
+                $titulo = es_repartidor($data) ? 'Próximas entregas' : 'ventas en proceso';
+                $r[] = d(_titulo($titulo));
                 $r[] = append($ventas_hoy);
                 $r[] = append($ventas_posteriores);
+                $r[] = d(icon(_text_(_mas_opciones_bajo_icon, 'fa-2x mt-3 mas_ventas_notificacion')),'text-center ');
+                $r[] = d(icon(_text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none')),'text-center ');
             }
 
         }
@@ -1671,7 +1676,7 @@ if (!function_exists('invierte_date_time')) {
         $lista[] = $tareas["html"];
 
 
-        $compras_sin_cierre = add_compras_sin_cierre($info,$info["compras_sin_cierre"]);
+        $compras_sin_cierre = add_compras_sin_cierre($info, $info["compras_sin_cierre"]);
         $lista[] = d($compras_sin_cierre["html"], "mt-5");
         $f = $f + $compras_sin_cierre["flag"];
 
@@ -1717,10 +1722,6 @@ if (!function_exists('invierte_date_time')) {
         $f = $f + $deuda["flag"];
         $lista[] = $deuda["html"];
 
-//        $num_telefonico = add_numero_telefonico($num_telefonico);
-//        $f = $f + $num_telefonico["flag"];
-//        $lista[] = $num_telefonico["html"];
-
 
         $new_flag = "";
         if ($f > 0) {
@@ -1756,7 +1757,7 @@ if (!function_exists('invierte_date_time')) {
 
         $f = 0;
         $recibos = $data['proximos_pedidos'];
-        $proximas_entregas = add_compras_sin_cierre($data,$recibos, 1);
+        $proximas_entregas = add_compras_sin_cierre($data, $recibos, 1);
         $f = $f + $proximas_entregas["flag"];
         $lista[] = d($proximas_entregas["html"], "mt-5");
         $tareas_pendiente = "";

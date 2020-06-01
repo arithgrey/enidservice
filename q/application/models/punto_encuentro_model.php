@@ -71,5 +71,13 @@ class Punto_encuentro_model extends CI_Model
         return $response;
 
     }
+    function in($ids){
+
+        $query_get = "SELECT * FROM punto_encuentro 
+                      WHERE 
+                      id  IN(".$ids.")";
+
+        return $this->db->query($query_get)->result_array();
+    }
 
 }

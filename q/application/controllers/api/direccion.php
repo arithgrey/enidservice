@@ -44,6 +44,17 @@ class direccion extends REST_Controller
 		}
 		$this->response($response);
 	}
+    function ids_GET()
+    {
 
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "ids")) {
+
+            $response = $this->direccion_model->in($param['ids']);
+
+        }
+        $this->response($response);
+    }
 
 }

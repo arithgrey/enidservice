@@ -152,6 +152,18 @@ class Punto_encuentro extends REST_Controller
         }
         $this->response($response);
     }
+    function ids_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "ids")) {
+
+            $response = $this->punto_encuentro_model->in($param['ids']);
+
+        }
+        $this->response($response);
+    }
 
     private function envio_gratis($id_servicio)
     {
@@ -169,4 +181,13 @@ class Punto_encuentro extends REST_Controller
         return $this->app->api("recibo/servicio_ppfp/format/json/", $q);
 
     }
+    function in($ids){
+
+        $query_get = "SELECT * FROM punto_encuentro 
+                      WHERE 
+                      id  IN(".$ids.")";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 }

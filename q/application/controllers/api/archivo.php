@@ -29,7 +29,7 @@ class Archivo extends REST_Controller
         $config =  [
             'upload_path' => APPPATH . '../../img_tema/productos/',
             'allowed_types' => "*",
-            'max_size' => 3500,
+            'max_size' => 35000,
             'max_width' => 4024,
             'max_height' => 7680
         ];

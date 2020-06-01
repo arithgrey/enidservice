@@ -112,5 +112,6 @@ if (!isset($view_folder[0]) && is_dir(APPPATH . 'views' . DIRECTORY_SEPARATOR)) 
 }
 
 define('VIEWPATH', $view_folder . DIRECTORY_SEPARATOR);
-ini_set('memory_limit', '32M');
+ini_set('post_max_size', '64M');
+ini_set('upload_max_filesize', '64M');
 require_once BASEPATH . 'core/CodeIgniter.php';

@@ -1358,6 +1358,7 @@ class Recibo_model extends CI_Model
     function comisiones_por_pago($param)
     {
         $query_get = "SELECT 
+                        p.id_usuario,
                         p.id_proyecto_persona_forma_pago,
                         p.id_servicio,
                         p.id_usuario_referencia, 
