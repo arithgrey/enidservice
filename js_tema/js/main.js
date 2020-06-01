@@ -21,7 +21,8 @@ $("footer").ready(() => {
     });
 
     $("#form_contacto").submit(envia_comentario);
-    $(".menu_notificaciones_progreso_dia").click(metricas_perfil);
+    $(".enid").click(metricas_perfil);
+
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));
     $(".precio").keypress(quita_espacios_input_precio);
@@ -297,6 +298,9 @@ let response_metricas_perfil = data => {
     if (parseInt(deuda_cliente) > 0) {
         render_enid(".place_num_pagos_por_realizar", "<span class='notificacion_enid'>" + deuda_cliente + "MXN</span>");
     }
+    $('.mas_ventas_notificacion').click(ver_notificaciones_ordenes_compra);
+    $('.menos_ventas_notificacion').click(ver_menos_notificaciones_ordenes_compra);
+
 };
 
 let notifica_usuario_pendientes = num_pendientes => {
@@ -1214,3 +1218,15 @@ let path_enid = (indice, $extra = '') => {
 
     return _text('../', $base_url[indice], $extra);
 };
+let ver_notificaciones_ordenes_compra = function () {
+
+    $('.venta_futura').removeClass('d-none');
+    $('.mas_ventas_notificacion').addClass('d-none');
+    $('.menos_ventas_notificacion').removeClass('d-none');
+}
+let ver_menos_notificaciones_ordenes_compra = function () {
+
+    $('.venta_futura').addClass('d-none');
+    $('.mas_ventas_notificacion').removeClass('d-none');
+    $('.menos_ventas_notificacion').addClass('d-none');
+}

@@ -35,4 +35,15 @@ class Ubicacion_model extends CI_Model
     {
         return $this->get($params, ["id_ubicacion" => $id]);
     }
+
+    function in_recibo($ids)
+    {
+
+        $query_get = "SELECT * FROM ubicacion
+                      WHERE 
+                      id_recibo IN(" . $ids . ") ORDER BY id_ubicacion DESC";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 }

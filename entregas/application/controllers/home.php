@@ -14,6 +14,7 @@ class Home extends CI_Controller
         $this->id_usuario = $this->app->get_session("idusuario");
     }
 
+
     function index()
     {
 
@@ -23,8 +24,9 @@ class Home extends CI_Controller
         $id_usuario = $data['id_usuario'];
         $id_perfil = $data['id_perfil'];
         $id_empresa = $data['id_empresa'];
-        $data['proximas_entregas'] = $this->proximas_reparto($id_perfil, $id_usuario, $id_empresa);
-        $this->app->pagina($data, calendario($data), 1);
+        $proximas_entregas = $this->proximas_reparto($id_perfil, $id_usuario, $id_empresa);
+        $data['proximas_entregas'] = $this->app->imgs_productos(0, 1, 1, 1, $proximas_entregas);
+        $this->app->pagina($data, calendario_entregas($data), 1);
 
 
     }
@@ -33,11 +35,12 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-            "recibo/proximas_reparto/format/json/",
+            "recibo/pendientes_sin_cierre/format/json/",
             [
                 "id_perfil" => $id_perfil,
                 "id_usuario" => $id_usuario,
-                "id_empresa" => $id_empresa
+                "id_empresa" => $id_empresa,
+                "domicilios" => 1
             ]
         );
     }

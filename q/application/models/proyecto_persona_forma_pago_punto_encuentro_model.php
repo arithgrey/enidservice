@@ -38,5 +38,12 @@ class proyecto_persona_forma_pago_punto_encuentro_model extends CI_Model
 		}
 		return $this->db->get("proyecto_persona_forma_pago_punto_encuentro")->result_array();
 	}
+    function in($ids){
 
+        $query_get = "SELECT * FROM proyecto_persona_forma_pago_punto_encuentro 
+                      WHERE 
+                      id_proyecto_persona_forma_pago  IN(".$ids.")";
+
+        return $this->db->query($query_get)->result_array();
+    }
 }

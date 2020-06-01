@@ -603,25 +603,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function valida_texto_maps($domicilio)
-    {
-        $ubicacion_arreglo = explode(' ', $domicilio);
-        $text = '';
-        foreach ($ubicacion_arreglo as $row) {
-            $text .= _text_($row);
-            if (strpos($row, 'https') !== FALSE) {
-                $text .= a_enid('abrir en google maps',
-                    [
-                        'href' => $row,
-                        'target' => '_blank',
-                        'style' => 'color:blue;',
-                        'class' => 'text-uppercase text-right mt-3'
-                    ]
-                );
-            }
-        }
-        return $text;
-    }
 
     function text_domicilio($data)
     {
@@ -1460,10 +1441,64 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function total_comision($ids_usuario, $ordenes)
+    {
+        $totales = [];
+        foreach ($ids_usuario as $row) {
+
+            $total = 0;
+            $id_cliente = 0;
+            foreach ($ordenes as $row2) {
+                if ($row == $row2['id_usuario_referencia']) {
+                    $total = $total + $row2['comision_venta'];
+                    $id_cliente = $row2['id_usuario'];
+                }
+            }
+            $totales[] = [
+                'id_usuario' => $row,
+                'total_comisiones' => $total,
+                'id_cliente' => $id_cliente
+            ];
+
+        }
+        return $totales;
+    }
+
+    function formato_nombre_comisionista($ordenes, $id_usuario)
+    {
+        $nombre_completo = '';
+        foreach ($ordenes as $row2) {
+
+            if ($row2['id_usuario_referencia'] == $id_usuario) {
+
+                $nombre_completo = format_nombre($row2);
+
+                break;
+            }
+        }
+        return $nombre_completo;
+    }
+    function formato_nombre_cliente($clientes, $id_usuario)
+    {
+        $nombre_completo = '';
+        foreach ($clientes as $row) {
+
+            if ($row['id_usuario'] == $id_usuario) {
+
+                $nombre_completo = format_nombre($row);
+
+                break;
+            }
+        }
+        return $nombre_completo;
+    }
+
     function comisiones_por_pago($data, $modal)
     {
 
         $ordenes = $data['comisiones_por_pago'];
+        $clientes_por_pago = $data['clientes_por_pago'];
+
         $totales_en_pagos = 0;
         $response = [];
         $total_pago_comisiones = 0;
@@ -1472,38 +1507,14 @@ if (!function_exists('invierte_date_time')) {
 
             $ids = array_column($ordenes, 'id_usuario_referencia');
             $ids_usuario = array_unique($ids);
+            $totales = total_comision($ids_usuario, $ordenes);
 
-            foreach ($ids_usuario as $row) {
-
-                $total = 0;
-                foreach ($ordenes as $row2) {
-                    if ($row == $row2['id_usuario_referencia']) {
-                        $total = $total + $row2['comision_venta'];
-                    }
-                }
-                $totales[] = [
-                    'id_usuario' => $row,
-                    'total_comisiones' => $total,
-                ];
-
-
-            }
             foreach ($totales as $row) {
 
                 $id_usuario = $row['id_usuario'];
+
                 $contenido = [];
-                $nombre_completo = '';
-
-                foreach ($ordenes as $row2) {
-
-                    if ($row2['id_usuario_referencia'] == $id_usuario) {
-
-                        $nombre_completo = format_nombre($row2);
-
-                        break;
-                    }
-
-                }
+                $nombre_completo = formato_nombre_comisionista($ordenes, $id_usuario);
                 $total_comisiones_efectivo = $row['total_comisiones'];
 
                 $total_comisiones = money($row['total_comisiones']);
@@ -1520,6 +1531,7 @@ if (!function_exists('invierte_date_time')) {
                 ];
                 $contenido[] = d($id_usuario, $config);
                 $contenido[] = d($nombre_completo, $config);
+
                 $config_pago['class'] = _text_($config_pago['class'], 'strong text-right');
                 $contenido[] = d($total_comisiones, $config_pago);
 
@@ -1538,12 +1550,12 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_proyecto_persona_forma_pago = $row['id_proyecto_persona_forma_pago'];
                 $comision_venta = $row['comision_venta'];
-
-
                 $nombre_usuario = format_nombre($row);
+
+                $nombre_usuario_cliente = formato_nombre_cliente($clientes_por_pago,$row['id_usuario']);
                 $contenido = [];
 
-                $class = 'col-md-4 ';
+                $class = 'col-md-3 ';
                 $img = img(
                     [
                         "src" => $row["url_img_servicio"],
@@ -1555,6 +1567,8 @@ if (!function_exists('invierte_date_time')) {
 
                 $contenido[] = d($img, $class);
                 $contenido[] = d($nombre_usuario, $class);
+                $contenido[] = d($nombre_usuario_cliente, $class);
+
                 $contenido[] = d(money($comision_venta), _text_($class, 'strong'));
 
                 $path = path_enid('pedidos_recibo', $id_proyecto_persona_forma_pago);

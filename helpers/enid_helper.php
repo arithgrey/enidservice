@@ -3542,3 +3542,37 @@ function format_link_nombre($data, $nombre, $email = '')
 
     return $response;
 }
+
+function valida_texto_maps($domicilio, $estilos = 1)
+{
+    $ubicacion_arreglo = explode(' ', $domicilio);
+    $text = '';
+    foreach ($ubicacion_arreglo as $row) {
+        $text .= _text_($row);
+        if (strpos($row, 'https') !== FALSE) {
+
+            $config = [
+                'href' => $row,
+                'target' => '_blank',
+                'style' => 'color:blue;',
+                'class' => 'text-uppercase text-right mt-3'
+            ];
+            $configurador = [
+                'href' => $row,
+                'target' => '_blank',
+                'class' => 'text-uppercase black mt-3'
+            ];
+            $conf = ($estilos > 0) ? $config : $configurador;
+            if ($estilos < 1){
+
+                $text .= format_link('abrir en google maps', $conf);
+            }else{
+                $text .= a_enid('abrir en google maps', $conf);
+
+            }
+
+
+        }
+    }
+    return $text;
+}

@@ -36,31 +36,165 @@ class recibo extends REST_Controller
         if (fx($param, "id_usuario,id_perfil")) {
 
             $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"], $param["id_perfil"]);
-            $response = $this->horarios_contra_entrega_pedidos($response);
-            $response = $this->usuarios_ventas_notificaciones($response);
+            $recibos = $this->horarios_contra_entrega_pedidos($response);
+            $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
+            if (prm_def($param, 'domicilios') > 0) {
+
+                $response = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
+            }
 
         }
         $this->response($response);
 
     }
 
+    function domicilios_puntos_encuentro_ubicaciones($domicilios)
+    {
+
+        $a = 0;
+        if (es_data($domicilios)) {
+
+            $recibos_puntos_encuentro = prm_def($domicilios, 'recibos_puntos_encuentro');
+            $recibos_domicilio = prm_def($domicilios, 'recibos_domicilio');
+            $ids_ubicaciones = prm_def($domicilios, 'recibos_ubicaciones');
+
+
+            $ids_punto_encuentro = es_data($recibos_puntos_encuentro) ? array_column($recibos_puntos_encuentro, 'id_punto_encuentro') : [];
+            $ids_direccion = es_data($recibos_domicilio) ? array_column($recibos_domicilio, 'id_direccion') : [];
+
+
+            $data_puntos_encuentro = $this->get_puntos_encuentro_ids($ids_punto_encuentro);
+            $data_direcciones = $this->get_direcciones_ids($ids_direccion);
+            $data_ubicaciones = $this->get_ubicaciones_ids($ids_ubicaciones);
+
+
+            $recibos = $domicilios['recibos'];
+            $data_recibos = [];
+
+            foreach ($recibos as $row) {
+
+                $tipo_entrega = $row['tipo_entrega'];
+
+                $es_contra_entrega = $row['es_contra_entrega'];
+                $id_recibo = $row['id_recibo'];
+                $id_punto_encuentro = $row['id_punto_encuentro'];
+                $ubicacion = $row['ubicacion'];
+
+
+                $domicilio = [];
+                $punto_encuentro = [];
+                $localizacion = [];
+                switch ($tipo_entrega) {
+                    case 1:
+                        /*Punto de encuentro*/
+
+                        if ($id_punto_encuentro > 0) {
+                            $pos = search_bi_array($data_puntos_encuentro, 'id', $id_punto_encuentro);
+                            $punto_encuentro = $data_puntos_encuentro[$pos];
+                        }
+
+
+                        break;
+
+                    case 2:
+                        /*A domicilio*/
+                        $id_domicilio = $row['id_domicilio'];
+                        if ($id_domicilio > 0) {
+
+                            $pos = search_bi_array($data_direcciones, 'id_direccion', $id_domicilio);
+                            $domicilio = $data_direcciones[$pos];
+                        }
+
+
+                        $localizacion = $this->get_data_ubicacion($data_ubicaciones, $id_recibo);
+
+
+                        break;
+                    default:
+                        break;
+                }
+
+                $data_recibos[$a] = $row;
+                $data_recibos[$a]['data_punto_encuentro'] = $punto_encuentro;
+                $data_recibos[$a]['data_domicilio'] = $domicilio;
+                $data_recibos[$a]['data_ubicacion'] = $localizacion;
+
+                $a++;
+
+            }
+        }
+
+        return $data_recibos;
+    }
+
+    function get_data_ubicacion($data_ubicaciones, $id_recibo)
+    {
+
+        $response = [];
+        foreach ($data_ubicaciones as $row) {
+
+            $id_recibo_ubicacion = $row['id_recibo'];
+            if ($id_recibo == $id_recibo_ubicacion) {
+                $response = $row;
+                break;
+            }
+        }
+        return $response;
+    }
+
     function horarios_contra_entrega_pedidos($ordenes_compra)
     {
         $ids_contra_entrega_domicilio = [];
+        $ids_puntos_encuentro = [];
+        $ids_ubicaciones = [];
+
         foreach ($ordenes_compra as $row) {
 
             $tipo_entrega = $row['tipo_entrega'];
-            if ($tipo_entrega == 2) {
-                $ids_contra_entrega_domicilio[] = $row['id_recibo'];
+            $id_recibo = $row['id_recibo'];
+            $ubicacion = $row['ubicacion'];
+            switch ($tipo_entrega) {
+                case 1:
+
+                    $ids_puntos_encuentro[] = $id_recibo;
+                    break;
+
+                case 2:
+
+                    $ids_contra_entrega_domicilio[] = $id_recibo;
+                    if ($ubicacion > 0) {
+                        $ids_ubicaciones[] = $id_recibo;
+                    }
+
+                    break;
+                default:
             }
         }
 
         $recibos_domicilio = $this->get_recibos_domicilio($ids_contra_entrega_domicilio);
+        $recibos_puntos_encuentro = $this->get_recibos_puntos_encuentro($ids_puntos_encuentro);
+
+
         $recibos_domicilio_contra_entrega_sin_domicilio =
-            $this->recibos_domicilio_contra_entrega_sin_domicilio($ids_contra_entrega_domicilio, $recibos_domicilio);
+            $this->recibos_domicilio_contra_entrega_sin_domicilio(
+                $ids_contra_entrega_domicilio, $recibos_domicilio);
 
 
-        return $this->domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $recibos_domicilio_contra_entrega_sin_domicilio);
+        $recibos = $this->domicilios_contra_entrega_pedidos(
+            $ordenes_compra,
+            $ids_contra_entrega_domicilio,
+            $recibos_domicilio_contra_entrega_sin_domicilio,
+            $recibos_domicilio,
+            $recibos_puntos_encuentro
+        );
+
+        return [
+            'recibos' => $recibos,
+            'recibos_domicilio' => $recibos_domicilio,
+            'recibos_puntos_encuentro' => $recibos_puntos_encuentro,
+            'recibos_ubicaciones' => $ids_ubicaciones
+        ];
+
 
     }
 
@@ -103,7 +237,10 @@ class recibo extends REST_Controller
         return $this->app->api("usuario/ids/format/json/", $q);
     }
 
-    function domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio, $sin_direccion_contra_entrega)
+    function domicilios_contra_entrega_pedidos($ordenes_compra, $ids_contra_entrega_domicilio,
+                                               $sin_direccion_contra_entrega,
+                                               $recibos_domicilio,
+                                               $recibos_puntos_encuentro)
     {
 
         $recibos = [];
@@ -116,8 +253,15 @@ class recibo extends REST_Controller
             if ($es_contra_entrega_domicilio) {
 
                 $es_contra_entrega_domicilio_sin_direccion = (in_array($id_recibo, $sin_direccion_contra_entrega));
+                $id_domicilio = search_bi_array($recibos_domicilio, 'id_proyecto_persona_forma_pago', $id_recibo, 'id_direccion', 0);
                 $recibos[$a]['es_contra_entrega_domicilio_sin_direccion'] = $es_contra_entrega_domicilio_sin_direccion;
+                $recibos[$a]['id_domicilio'] = $id_domicilio;
+
             }
+
+            $id_punto_encuentro = search_bi_array($recibos_puntos_encuentro, 'id_proyecto_persona_forma_pago', $id_recibo, 'id_punto_encuentro', 0);
+
+            $recibos[$a]['id_punto_encuentro'] = $id_punto_encuentro;
             $recibos[$a]['es_contra_entrega'] = $es_contra_entrega_domicilio;
 
             $a++;
@@ -152,6 +296,62 @@ class recibo extends REST_Controller
         }
         return $response;
     }
+
+    function get_recibos_puntos_encuentro($ids_recibos)
+    {
+        $response = [];
+        if (es_data($ids_recibos)) {
+
+            $response = $this->recibos_puntos_encuentro($ids_recibos);
+        }
+        return $response;
+    }
+
+    function get_puntos_encuentro_ids($ids)
+    {
+        $response = [];
+        if (es_data($ids)) {
+
+            $q = [
+                'v' => 1,
+                'ids' => get_keys($ids)
+            ];
+
+            $response = $this->app->api("punto_encuentro/ids/format/json/", $q);
+        }
+        return $response;
+    }
+
+    function get_direcciones_ids($ids)
+    {
+        $response = [];
+        if (es_data($ids)) {
+
+            $q = [
+                'v' => 1,
+                'ids' => get_keys($ids)
+            ];
+
+            $response = $this->app->api("direccion/ids/format/json/", $q);
+        }
+        return $response;
+    }
+
+    function get_ubicaciones_ids($ids)
+    {
+        $response = [];
+        if (es_data($ids)) {
+
+            $q = [
+                'v' => 1,
+                'ids' => get_keys($ids)
+            ];
+
+            $response = $this->app->api("ubicacion/ids_recibo/format/json/", $q);
+        }
+        return $response;
+    }
+
 
     function tiempo_venta_GET()
     {
@@ -1106,8 +1306,8 @@ class recibo extends REST_Controller
                     'flag_envio_gratis' => pr($servicio, 'flag_envio_gratis'),
                     'tipo_entrega' => pr($servicio, 'tipo_entrega')
                 ];
-                $costos =  get_costo_envio($data_servicio);
-                $costo_envio_cliente =  $costos['costo_envio_cliente'];
+                $costos = get_costo_envio($data_servicio);
+                $costo_envio_cliente = $costos['costo_envio_cliente'];
             }
 
             $response = $this->recibo_model->set_fecha_contra_entrega(
@@ -1122,14 +1322,16 @@ class recibo extends REST_Controller
 
         $this->response($response);
     }
-    function costo_envio_PUT(){
+
+    function costo_envio_PUT()
+    {
 
         $param = $this->put();
         $response = false;
         if (fx($param, "recibo,costo_envio")) {
 
-            $id_recibo =  $param['recibo'];
-            $costo_envio =  $param['costo_envio'];
+            $id_recibo = $param['recibo'];
+            $costo_envio = $param['costo_envio'];
             $response = $this->recibo_model->q_up('costo_envio_cliente', $costo_envio, $id_recibo);
 
         }
@@ -1625,8 +1827,9 @@ class recibo extends REST_Controller
             $id_perfil = $param["id_perfil"];
             $id_empresa = $param['id_empresa'];
             $response = $this->recibo_model->proximas($id_empresa, $id_usuario, $id_perfil, $dia);
-            $response = $this->horarios_contra_entrega_pedidos($response);
-            $response = $this->usuarios_ventas_notificaciones($response);
+            $recibos = $this->horarios_contra_entrega_pedidos($response);
+
+            $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
         }
         $this->response($response);
     }
@@ -1676,6 +1879,23 @@ class recibo extends REST_Controller
 
     }
 
+
+    function recibos_puntos_encuentro($ids_recibos)
+    {
+
+
+        $response = [];
+        if (es_data($ids_recibos)) {
+
+            $q = [
+                'v' => 1,
+                'ids_recibos' => get_keys($ids_recibos)
+            ];
+            $response = $this->app->api("proyecto_persona_forma_pago_punto_encuentro/recibos/format/json/", $q);
+        }
+        return $response;
+    }
+
     function recibos_domicilios($recibos)
     {
 
@@ -1710,7 +1930,30 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = $this->recibo_model->comisiones_por_pago($param);
+        $response = $this->agrega_usuario_compra($response);
         $this->response($response);
+    }
+
+    private function agrega_usuario_compra($ordenes)
+    {
+
+        $clientes = [];
+        if (es_data($ordenes)) {
+
+            $ids_usuarios = [];
+            foreach ($ordenes as $row) {
+
+                $ids_usuarios[] = $row['id_usuario'];
+            }
+
+            $clientes = $this->usuarios_q($ids_usuarios);
+
+        }
+        return [
+            'ordenes' => $ordenes,
+            'clientes' => $clientes
+        ];
+
     }
 
     private function servicio_recibo($id_recibo)

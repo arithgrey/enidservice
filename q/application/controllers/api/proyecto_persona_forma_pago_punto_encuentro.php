@@ -9,6 +9,19 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
         $this->load->model("proyecto_persona_forma_pago_punto_encuentro_model");
         $this->load->library(lib_def());
     }
+    function recibos_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, 'ids_recibos,v')) {
+
+            $response = $this->proyecto_persona_forma_pago_punto_encuentro_model->in($param['ids_recibos']);
+
+        }
+        $this->response($response);
+    }
+
 
     function index_POST()
     {

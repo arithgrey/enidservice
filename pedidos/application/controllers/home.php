@@ -472,9 +472,9 @@ class Home extends CI_Controller
             $comisionistas = $this->usuarios_comisionistas();
         }
         $data['comisionistas'] = $comisionistas;
-        $data['comisiones_por_pago'] =
-            $this->app->add_imgs_servicio($this->comisiones_por_pago());
-
+        $ordenes = $this->comisiones_por_pago();
+        $data['comisiones_por_pago'] = $this->app->add_imgs_servicio($ordenes['ordenes']);
+        $data['clientes_por_pago'] = $ordenes['clientes'];
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
 
     }
