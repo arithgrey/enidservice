@@ -3562,10 +3562,11 @@ function valida_texto_maps($domicilio, $estilos = 1)
                 'target' => '_blank',
                 'class' => 'text-uppercase black mt-3'
             ];
-            $conf = ($estilos > 0) ? $config : $configurador;
+            $conf = ($estilos < 0) ? $config : $configurador;
             if ($estilos < 1){
 
-                $text .= format_link('abrir en google maps', $conf);
+                $text = format_link('abrir en google maps', $conf);
+
             }else{
                 $text .= a_enid('abrir en google maps', $conf);
 
