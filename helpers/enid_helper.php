@@ -3358,15 +3358,26 @@ function format_nombre($usuario)
 function es_administrador_o_vendedor($data)
 {
 
-    return in_array($data['id_perfil'], $data['restricciones']['es_administrador_o_vendedor']);
+    if (hay_restricciones($data)) {
+
+        $response = in_array($data['id_perfil'], $data['restricciones']['es_administrador_o_vendedor']);
+
+    } else {
+
+        $id_perfil = prm_def($data, 'id_perfil');
+        $perfiles = [3, 4, 6, 10];
+        $response = in_array($id_perfil, $perfiles);
+    }
+    return $response;
+
 
 }
 
 function es_vendedor($data)
 {
 
-    $response = false;
-    if (array_key_exists('restricciones', $data)) {
+
+    if (hay_restricciones($data)) {
         $response = in_array($data['id_perfil'], $data['restricciones']['es_vendedor']);
     } else {
         $response = (prm_def($data, 'id_perfil') == 6);
@@ -3374,6 +3385,12 @@ function es_vendedor($data)
     }
     return $response;
 
+}
+
+function hay_restricciones($data)
+{
+
+    return array_key_exists('restricciones', $data);
 }
 
 function es_cliente($data)
@@ -3563,11 +3580,11 @@ function valida_texto_maps($domicilio, $estilos = 1)
                 'class' => 'text-uppercase black mt-3'
             ];
             $conf = ($estilos < 0) ? $config : $configurador;
-            if ($estilos < 1){
+            if ($estilos < 1) {
 
                 $text = format_link('abrir en google maps', $conf);
 
-            }else{
+            } else {
                 $text .= a_enid('abrir en google maps', $conf);
 
             }

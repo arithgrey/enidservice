@@ -7,9 +7,9 @@ let $modal_pago_comision = $('#modal_pago_comision');
 let $usuario_pago = $('.usuario_pago');
 let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
+let $input_busqueda = $form_busqueda.find('.input_busqueda');
 
 $(document).ready(() => {
-
 
     $('footer').ready(function () {
         valida_busqueda_inicial();
@@ -17,6 +17,7 @@ $(document).ready(() => {
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
+    $input_busqueda.keyup(elimina_guienes);
 });
 
 let busqueda_pedidos = function (e) {
@@ -96,7 +97,7 @@ let busqueda_pago_pendiente = function (e) {
 
 }
 let registro_pago = function (e) {
-    
+
     let data_send = $(this).serialize();
     let url = '../q/index.php/api/recibo/pago_recibos_comisiones/format/json/';
     request_enid("PUT", data_send, url, response_pagos);
@@ -106,4 +107,20 @@ let response_pagos = function () {
 
     $modal_pago_comision.modal("hide");
     redirect('');
+}
+let elimina_guienes = function (e) {
+
+    if (e.keyCode === 173) {
+        let texto = this.value;
+        texto = texto.replace(/-/g,'');
+        this.value =  texto;
+    }
+}
+let paste_busqueda = function () {
+
+    event.preventDefault();
+    if (event.clipboardData) {
+        let str = event.clipboardData.getData("text/plain");
+        event.target.value = str.replace(/-/g,'');
+    }
 }

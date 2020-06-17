@@ -1568,9 +1568,7 @@ if (!function_exists('invierte_date_time')) {
                 $contenido[] = d($img, $class);
                 $contenido[] = d($nombre_usuario, $class);
                 $contenido[] = d($nombre_usuario_cliente, $class);
-
                 $contenido[] = d(money($comision_venta), _text_($class, 'strong'));
-
                 $path = path_enid('pedidos_recibo', $id_proyecto_persona_forma_pago);
 
                 $response[] = a_enid(append($contenido),
@@ -1716,6 +1714,8 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "cliente",
                 "id" => "cliente",
                 "placeholder" => "Nombre, correo, telefono ...",
+                "class" => "input_busqueda",
+                "onpaste" => "paste_busqueda();"
             ]);
 
 
