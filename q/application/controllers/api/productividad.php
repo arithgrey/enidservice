@@ -33,7 +33,7 @@ class productividad extends REST_Controller
         $prm["modalidad"] = 1;
         $prm["id_usuario"] = $id_usuario;
         $response["info_notificaciones"]["numero_telefonico"] = 1;
-        $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil);
+        $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa);
 
 
         $response += [
@@ -225,12 +225,13 @@ class productividad extends REST_Controller
 
     }
 
-    private function pendientes_ventas_usuario($id_usuario, $id_perfil)
+    private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
     {
         $usuarios = $this->app->api("recibo/pendientes_sin_cierre/format/json/",
             [
                 "id_usuario" => $id_usuario,
-                "id_perfil" => $id_perfil
+                "id_perfil" => $id_perfil,
+                "id_empresa" => $id_empresa
             ]
         );
         $usuarios = $this->usuarios_en_lista_negra($usuarios);
@@ -238,10 +239,11 @@ class productividad extends REST_Controller
 
     }
 
-    private function usuarios_en_lista_negra($usuarios)
+    private function usuarios_en_lista_negra(array $usuarios)
     {
         $lista = [];
         $lista_completa = [];
+
         foreach ($usuarios as $row) {
 
             $lista[] = $row['id_usuario'];
@@ -249,6 +251,7 @@ class productividad extends REST_Controller
 
         $q['usuarios'] = get_keys($lista);
         $usuarios_lista_negra = $this->app->api("lista_negra/q/format/json/", $q);
+
         foreach ($usuarios as $row) {
 
             $es_lista_negra = search_bi_array($usuarios_lista_negra, 'id_usuario', $row['id_usuario']);

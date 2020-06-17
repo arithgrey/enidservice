@@ -6,7 +6,6 @@ if (!function_exists('invierte_date_time')) {
     function calendario_entregas($data)
     {
         $proximas_entregas = $data['proximas_entregas'];
-
         $franja[] = franja_entregas($proximas_entregas, $data);
         $franja_horaria[] = append($franja);
 
@@ -57,6 +56,9 @@ if (!function_exists('invierte_date_time')) {
         $es_reparto = 1;
         $f = 0;
         $ventas_hoy = [];
+        $ids_usuario_entrega = [];
+        $repartidores = [];
+
         if (es_data($recibos)) {
 
             sksort($recibos, "fecha_contra_entrega", true);
@@ -100,20 +102,44 @@ if (!function_exists('invierte_date_time')) {
                     $es_contra_entrega_domicilio_sin_direccion,
                     $ubicacion,
                     $text_entrega,
-                    $row, $id_recibo
+                    $row
                 );
 
                 $abrir_en_google = $nota_pedido['abrir_en_google'];
                 $maps_link = $nota_pedido['maps_link'];
                 $descripcion_domicilio = $nota_pedido['descripcion_domicilio'];
-
+                $nombre_vendedor = $nota_pedido['nombre_vendedor'];
+                $nombre_cliente = $nota_pedido['nombre_cliente'];
+                $nombre_usuario_entrega = $nota_pedido['nombre_usuario_entrega'];
                 $orden = d(_text('#', $id_recibo), 'text-center');
+                $usuario_entrega = $nota_pedido['usuario_entrega'];
+                $solicitar_ubicacion = $nota_pedido['solicitar_ubicacion'];
 
                 $icon = d(icon(_text_(_entregas_icon, 'fa-2x')), 'black text-right');
                 $indicador_entrega = ($id_usuario_entrega > 0) ? $icon : '';
                 $filtro = ($id_usuario_entrega > 0) ? 'reparto_asignado' : '';
+                $filtros_direccion = ($solicitar_ubicacion > 0) ? 'ubicacion_asignada' : '';
 
-                $text = _d($indicador_entrega, $imagenes, $orden, $descripcion_domicilio);
+                if ($id_usuario_entrega > 0) {
+
+                    $ids_usuario_entrega[] = $id_usuario_entrega;
+                    $repartidores[] = [
+                        'id' => $id_usuario_entrega,
+                        'nombre_usuario_entrega' => $nombre_usuario_entrega
+                    ];
+                }
+
+
+                $text = _d(
+                    $indicador_entrega,
+                    $imagenes,
+                    $orden,
+                    $nombre_cliente,
+                    $nombre_vendedor,
+                    $usuario_entrega,
+                    $descripcion_domicilio
+
+                );
 
                 $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
                 $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);
@@ -125,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
                 $pedido = [];
-                $pedido[] = d($link, "row");
+                $pedido[] = d($link, "row border-bottom mb-5");
 
                 if ($abrir_en_google > 0) {
                     $seccion_maps = d($maps_link, 'col-md-4 col-md-offset-4');
@@ -133,19 +159,34 @@ if (!function_exists('invierte_date_time')) {
                 }
 
                 if ($es_hoy || $es_menor) {
-                    $ventas_hoy[] = d($pedido,$filtro);
+                    $filtros = _text_($filtro, $filtros_direccion);
+                    $ventas_hoy[] = d($pedido, $filtros);
                 }
 
                 $f++;
             }
 
+
             if (es_data($recibos)) {
 
-                $r[] = d(_titulo('Entregas en proceso'), 'mb-5');
-                $r[] = d(icon(_text_(_mas_opciones_icon,'fa-2x filtro_menos_opciones')   ),
-                    ['class' => 'mx-auto mb-5'], 13);
-                $r[] = d(icon(_text_(_mas_opciones_bajo_icon,'fa-2x filtro_mas_opciones d-none')   ),
-                    ['class' => 'mx-auto mb-5'], 13);
+                $r[] = d(_titulo(_text_(count($recibos), 'Entregas en proceso')), 'mb-5');
+                $r[] = reporte_reparto($ids_usuario_entrega, $repartidores, $data);
+
+                $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_menos_opciones text-secondary')),
+                    ['class' => 'mx-auto '], 13);
+                $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_mas_opciones black d-none')),
+                    ['class' => 'mx-auto '], 13);
+
+                $filtros_ubicacion[] = d(icon(_text_(_maps_icon, 'fa-2x filtro_sin_ubicacion text-secondary')),
+                    ['class' => 'mx-auto '], 13);
+
+                $filtros_ubicacion[] = d(icon(_text_(_maps_icon, 'fa-2x filtro_ubicacion d-none')),
+                    ['class' => 'mx-auto '], 13);
+
+
+                $ubicacion = append($filtros_reparto);
+                $reparto = append($filtros_ubicacion);
+                $r[] = d(d(flex($ubicacion, $reparto, _between), 'col-md-4 col-md-offset-4'), 13);
                 $r[] = append($ventas_hoy);
 
             }
@@ -155,9 +196,30 @@ if (!function_exists('invierte_date_time')) {
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
     }
 
+    function reporte_reparto(&$ids_usuarios_entregas, &$repartidores, &$data)
+    {
+
+        $entregas_asignadas = array_count_values($ids_usuarios_entregas);
+        $response = [];
+        $es_administrador = es_administrador($data);
+        if ($es_administrador){
+
+            foreach ($entregas_asignadas as $clave => $valor) {
+
+                $nombre_usuario_entrega = search_bi_array($repartidores, 'id', $clave, 'nombre_usuario_entrega');
+                $contenido = flex($nombre_usuario_entrega, $valor, _text_(_between,'border-bottom'),'text-uppercase');
+                $response[] = d(d($contenido ,4,1),13);
+
+            }
+        }
+
+        return d($response,'mb-5');
+
+    }
+
     function nota_pedido($total, $dia_entrega, $es_contra_entrega,
                          $es_contra_entrega_domicilio_sin_direccion,
-                         $ubicacion, $text_entrega, $row, $id_recibo)
+                         $ubicacion, $text_entrega, $row)
     {
         $response = [];
         $response[] = d($total);
@@ -165,11 +227,9 @@ if (!function_exists('invierte_date_time')) {
         $tipo_entrega = $row['tipo_entrega'];
         $abrir_en_google = 0;
         $maps_link = '';
+        $solicitar_ubicacion = 0;
+        $nombre_usuario_entrega = '';
 
-        if ($id_recibo == 1419) {
-
-            $a = 0;
-        }
         switch ($tipo_entrega) {
             case 1:
 
@@ -194,6 +254,7 @@ if (!function_exists('invierte_date_time')) {
                 $abrir_en_google = $descripcion_domicilio['abrir_en_google'];
                 $maps_link = $descripcion_domicilio['maps_link'];
                 $response[] = $descripcion_domicilio['texto_direccion'];
+                $solicitar_ubicacion = $descripcion_domicilio['solicitar_ubicacion'];
 
                 break;
 
@@ -201,12 +262,33 @@ if (!function_exists('invierte_date_time')) {
                 break;
         }
 
+        $vendedor = prm_def($row, 'nombre_vendedor', '');
+        $text_vendedor = d(_text_(strong('Agenda'), $vendedor), 'text-uppercase black');
+        $nombre_vendedor = (strlen($vendedor) > 0) ? $text_vendedor : '';
+
+        $usuario_entrega = $row['usuario_entrega'];
+        $usuario_entrega = format_nombre($usuario_entrega);
+        $nombre_usuario_entrega = $usuario_entrega;
+        $usuario_cliente = $row['usuario_cliente'];
+        $nombre_cliente = format_nombre($usuario_cliente);
+        $telefono_cliente = phoneFormat(pr($usuario_cliente, 'tel_contacto'));
+
+        $cliente = d(_text_(strong('cliente'), $nombre_cliente, $telefono_cliente), 'text-uppercase black');
+        $repartidor = d(_text_(strong('Entregará'), $usuario_entrega), 'text-uppercase black');
+        $nombre_repartidor = (strlen($usuario_entrega) > 0) ? $repartidor : '';
+
 
         return
             [
                 'descripcion_domicilio' => $response,
                 'abrir_en_google' => $abrir_en_google,
-                'maps_link' => $maps_link
+                'maps_link' => $maps_link,
+                'nombre_vendedor' => $nombre_vendedor,
+                'usuario_entrega' => $nombre_repartidor,
+                'solicitar_ubicacion' => $solicitar_ubicacion,
+                'nombre_cliente' => $cliente,
+                'telefono_cliente' => $telefono_cliente,
+                'nombre_usuario_entrega' => $nombre_usuario_entrega
             ];
 
     }

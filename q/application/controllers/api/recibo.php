@@ -33,12 +33,26 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario,id_perfil")) {
+        if (fx($param, "id_usuario,id_perfil,id_empresa")) {
 
-            $response = $this->recibo_model->pendientes_sin_cierre($param["id_usuario"], $param["id_perfil"]);
+            $id_empresa  =  $param['id_empresa'];
+            $id_usuario = $param["id_usuario"];
+            $id_perfil = $param['id_perfil'];
+            $response = $this->recibo_model->pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
             if (prm_def($param, 'domicilios') > 0) {
+
+                $recibos['recibos'] = $response;
+                $es_cliente =
+                    es_cliente($param);
+                if (!$es_cliente){
+
+                    $ordenes = $this->append_usuarios_reparto($recibos['recibos']);
+                    $ordenes = $this->append_usuario_cliente($ordenes);
+
+                    $recibos['recibos'] = $ordenes;
+                }
 
                 $response = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
             }
@@ -52,6 +66,7 @@ class recibo extends REST_Controller
     {
 
         $a = 0;
+
         if (es_data($domicilios)) {
 
             $recibos_puntos_encuentro = prm_def($domicilios, 'recibos_puntos_encuentro');
@@ -118,7 +133,6 @@ class recibo extends REST_Controller
                 $data_recibos[$a]['data_punto_encuentro'] = $punto_encuentro;
                 $data_recibos[$a]['data_domicilio'] = $domicilio;
                 $data_recibos[$a]['data_ubicacion'] = $localizacion;
-
                 $a++;
 
             }
@@ -803,6 +817,39 @@ class recibo extends REST_Controller
             } else {
                 $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario_entrega, 'usuario_entrega');
                 $response[$a]['usuario_entrega'] = $usuario;
+            }
+            $a++;
+        }
+
+        return $response;
+    }
+    function append_usuario_cliente($ordenes)
+    {
+        $a = 0;
+        $ids_usuarios = [];
+        $usuarios = [];
+        $response = [];
+
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_usuario = $row['id_usuario'];
+            $response[$a] = $orden;
+            if (!in_array($id_usuario, $ids_usuarios)) {
+
+                $ids_usuarios[] = $id_usuario;
+                $usuario = $this->app->usuario($id_usuario);
+                $busqueda_usuario =
+                    [
+                        'id_usuario' => $id_usuario,
+                        'usuario_cliente' => $usuario
+                    ];
+                $response[$a]['usuario_cliente'] = $busqueda_usuario['usuario_cliente'];
+                $usuarios[] = $busqueda_usuario;
+
+            } else {
+                $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario, 'usuario_cliente');
+                $response[$a]['usuario_cliente'] = $usuario;
             }
             $a++;
         }

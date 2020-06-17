@@ -121,7 +121,7 @@ let response_inicio_session = data => {
     } else {
 
         desbloqueda_form(form_inicio);
-        advierte('Verifica tus datos de acceso');
+        advierte('VERIFICA TUS DATOS DE ACCESO');
         $(selector_acceso_sistema).addClass('d-none');
 
     }

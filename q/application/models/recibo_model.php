@@ -943,12 +943,23 @@ class Recibo_model extends CI_Model
 
     }
 
-    function pendientes_sin_cierre($id_usuario, $id_perfil)
+    function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa)
     {
 
+        /*
         $extra_usuario = ($id_perfil != 6) ?
             " id_usuario_venta ='" . $id_usuario . "' " :
             "( id_usuario_venta ='" . $id_usuario . "' OR id_usuario_referencia ='" . $id_usuario . "' )";
+        */
+
+        $casos = [
+            3 => " 1 = 1 ",
+            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
+            6 => 'id_usuario_referencia = "' . $id_usuario . '"',
+            21 => 'id_usuario_entrega = "' . $id_usuario . '"',
+        ];
+
+        $extra_usuario = $casos[$id_perfil];
         $query_get = "SELECT 
 						id_servicio, 
 						id_usuario,
