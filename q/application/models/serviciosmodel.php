@@ -479,8 +479,15 @@ class serviciosmodel extends CI_Model
         $orden = $this->get_orden($param);
 
         $sql_match = ($num_q > 0) ?
-            "   AND MATCH(metakeyword , metakeyword_usuario) 
-                AGAINST ('" . $q . "*' IN BOOLEAN MODE) " : "";
+            "  AND (
+                    MATCH(metakeyword , metakeyword_usuario) 
+                    AGAINST ('" . $q . "*' IN BOOLEAN MODE)
+                    OR 
+                    nombre_servicio LIKE '%" . $q . "%'
+                    OR 
+                    precio = '" . $q . "'                     
+                )
+                " : "";
 
         $no_empresa = (prm_def($param, 'es_empresa') < 1) ? 'AND  es_publico >  0' : ' ';
         return " WHERE                     

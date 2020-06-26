@@ -139,7 +139,7 @@ if (!function_exists('invierte_date_time')) {
                 'name' => 'ubicacion',
                 'id' => 'ubicacion',
                 'required' => true
-            ]), 'mt-3'
+            ]), 'mt-5'
         );
         $formulario[] = hiddens(['name' => 'id_recibo','class'=>'id_recibo', 'value' => $id_recibo]);
         $formulario[] = btn('Registrar', ['class' => 'mt-5']);
