@@ -1,4 +1,10 @@
-.input_nuevo, .contenedor_costo, .form_servicio_youtube , .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
+.boton_editar_imagenes {
+    border: solid 3px #0d0004;
+    padding: 7px;
+    background: white;
+}
+
+.input_nuevo, .contenedor_costo, .form_servicio_youtube, .input_desc_servicio_facturacion, .input_servicio_color, .input_cantidad {
     display: none;
 }
 
@@ -14,6 +20,7 @@
 .fa-youtube-play {
     color: red;
 }
+
 .contenedor_imagen_muestra_producto {
     border-style: solid;
     position: absolute;
@@ -173,7 +180,7 @@
         background: #07206b !important;
     }
 
-     .btn_guardar_ciclo_facturacion {
+    .btn_guardar_ciclo_facturacion {
         width: 100% !important;
         background: black !important;
         padding: 5px;

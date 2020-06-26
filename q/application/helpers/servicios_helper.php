@@ -261,6 +261,8 @@ if (!function_exists('invierte_date_time')) {
 
         $t[] = form_costo_unidad($precio);
         $t[] = form_costo_envio($es_servicio, $costo_envio);
+
+        $t[] = solo_metro($servicio);
         $t[] = distribucion($servicio);
         $t[] = tipo_distribucion($servicio);
         $t[] = utilidad($text_comision_venta, $utilidad);
@@ -363,6 +365,46 @@ if (!function_exists('invierte_date_time')) {
                     "class" => _text_(
                         'button_enid_eleccion entregas_en_auto',
                         val_class(0, $requiere_auto, "button_enid_eleccion_active")
+                    )
+                ]
+            );
+
+
+            $response[] = eleccion($titulo, $confirmar, $omitir);
+        }
+        return append($response);
+
+    }
+
+    function solo_metro($servicio)
+    {
+
+        $response = [];
+        if (es_data($servicio)) {
+
+            $titulo = "¿SE ENTREGA SÓLO EN ESTACIONES DEL METRO?";
+            $solo_metro = $servicio['solo_metro'];
+
+
+            $confirmar = a_enid(
+                "SI",
+                [
+                    "id" => '1',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_solo_metro',
+                        val_class(1, $solo_metro, "button_enid_eleccion_active")
+                    )
+
+                ]
+            );
+
+            $omitir = a_enid(
+                'NO, EL CLIENTE PUEDE RECIBIR EN MÁS LUGARES',
+                [
+                    "id" => '0',
+                    "class" => _text_(
+                        'button_enid_eleccion entregas_solo_metro',
+                        val_class(0, $solo_metro, "button_enid_eleccion_active")
                     )
                 ]
             );
@@ -982,7 +1024,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-        return dropdown(icon("fa fa fa-pencil"), $menu, 'mt-5 mt-md-1');
+        return dropdown(icon("fa fa fa-pencil boton_editar_imagenes"), $menu, 'mt-5 mt-md-1');
 
 
     }

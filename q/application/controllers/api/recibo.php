@@ -35,10 +35,15 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_perfil,id_empresa")) {
 
-            $id_empresa  =  $param['id_empresa'];
+            $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
-            $response = $this->recibo_model->pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa);
+            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1);
+
+            $idusuarios_empresa = array_column($usuarios_empresa, 'idusuario');
+            $idusuarios_empresa = array_unique($idusuarios_empresa);
+
+            $response = $this->recibo_model->pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
             if (prm_def($param, 'domicilios') > 0) {
@@ -46,7 +51,7 @@ class recibo extends REST_Controller
                 $recibos['recibos'] = $response;
                 $es_cliente =
                     es_cliente($param);
-                if (!$es_cliente){
+                if (!$es_cliente) {
 
                     $ordenes = $this->append_usuarios_reparto($recibos['recibos']);
                     $ordenes = $this->append_usuario_cliente($ordenes);
@@ -823,6 +828,7 @@ class recibo extends REST_Controller
 
         return $response;
     }
+
     function append_usuario_cliente($ordenes)
     {
         $a = 0;
@@ -1976,9 +1982,31 @@ class recibo extends REST_Controller
     {
 
         $param = $this->get();
-        $response = $this->recibo_model->comisiones_por_pago($param);
-        $response = $this->agrega_usuario_compra($response);
+        $response = false;
+        if (fx($param, "id_empresa")) {
+
+            $id_empresa = $param['id_empresa'];
+
+            $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1);
+            $ids_usuarios = array_column($usuarios, 'idusuario');
+
+
+            $response = $this->recibo_model->comisiones_por_pago($id_empresa, $ids_usuarios);
+            $response = $this->agrega_usuario_compra($response);
+        }
+
         $this->response($response);
+    }
+
+    private function usuarios_empresa_perfil($id_empresa, $grupo)
+    {
+        $q = [
+            'id_empresa' => $id_empresa,
+            'grupo' => $grupo
+        ];
+
+        return $this->app->api("usuario/empresa_perfil/format/json/", $q);
+
     }
 
     private function agrega_usuario_compra($ordenes)

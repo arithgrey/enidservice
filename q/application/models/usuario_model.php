@@ -675,5 +675,17 @@ class usuario_model extends CI_Model
 
     }
 
+    function empresa_perfil($id_empresa, $in)
+    {
+
+        $query_get = "SELECT u.idusuario FROM usuario u 
+                        INNER JOIN usuario_perfil up  
+                        ON u.idusuario = up.idusuario  
+                        WHERE idempresa = $id_empresa 
+                        AND up.idperfil in ($in)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
 
 }

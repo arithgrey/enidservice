@@ -273,6 +273,7 @@ if (!function_exists('invierte_date_time')) {
         $servicio = $inf_servicio["servicio"];
         $response = [];
         $es_posible_punto_encuentro = (pr($servicio, 'es_posible_punto_encuentro') > 0);
+        $solo_metro = pr($servicio, 'solo_metro');
 
 
         $r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
@@ -292,9 +293,13 @@ if (!function_exists('invierte_date_time')) {
             , _between
         );
         $r[] = $tiempo_entrega;
-        $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
 
-        if ($es_posible_punto_encuentro) {
+        if ($solo_metro < 1) {
+            $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
+        }
+
+
+        if ($es_posible_punto_encuentro && $solo_metro < 1) {
             $r[] = d('ó', 'text-center mt-1 mb-1 ');
         }
 

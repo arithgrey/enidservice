@@ -943,14 +943,8 @@ class Recibo_model extends CI_Model
 
     }
 
-    function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa)
+    function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa)
     {
-
-        /*
-        $extra_usuario = ($id_perfil != 6) ?
-            " id_usuario_venta ='" . $id_usuario . "' " :
-            "( id_usuario_venta ='" . $id_usuario . "' OR id_usuario_referencia ='" . $id_usuario . "' )";
-        */
 
         $casos = [
             3 => " 1 = 1 ",
@@ -959,6 +953,7 @@ class Recibo_model extends CI_Model
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
 
+        $ids =  get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
         $query_get = "SELECT 
 						id_servicio, 
@@ -987,6 +982,7 @@ class Recibo_model extends CI_Model
 						DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
 						)   
 						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+						AND id_servicio IN (select id_servicio from servicio where id_usuario in ($ids));
 						";
         return $this->db->query($query_get)->result_array();
     }
@@ -1366,8 +1362,16 @@ class Recibo_model extends CI_Model
 
     }
 
-    function comisiones_por_pago($param)
+    function comisiones_por_pago($id_empresa, $ids_usuarios_empresa)
     {
+        $in_usuarios = get_keys($ids_usuarios_empresa);
+        $extra_tipo_usuario = "AND 
+                        (
+                        p.id_usuario_venta IN($in_usuarios) || 
+                        p.id_usuario_referencia IN($in_usuarios) || 
+                        p.id_usuario_entrega IN($in_usuarios) || 
+                        p.id_usuario IN($in_usuarios)  
+                        )";
         $query_get = "SELECT 
                         p.id_usuario,
                         p.id_proyecto_persona_forma_pago,
@@ -1379,9 +1383,15 @@ class Recibo_model extends CI_Model
                         u.apellido_paterno,
                         u.apellido_materno                        
                         FROM proyecto_persona_forma_pago p 
-                        INNER JOIN usuario u  ON p.id_usuario_referencia =  u.idusuario  
-                        WHERE  flag_pago_comision < 1  AND   se_cancela < 1  AND saldo_cubierto > 0 AND   
-                        p.status NOT IN (10,19)  AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+                        INNER JOIN usuario u  
+                        ON p.id_usuario_referencia =  u.idusuario  
+                        WHERE  
+                        flag_pago_comision < 1  
+                        AND se_cancela < 1  
+                        AND saldo_cubierto > 0 
+                        " . $extra_tipo_usuario . "
+                        AND  p.status 
+                        NOT IN (10,19)  AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
                         ORDER BY p.id_usuario_referencia";
 
         return $this->db->query($query_get)->result_array();

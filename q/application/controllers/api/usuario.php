@@ -109,6 +109,31 @@ class usuario extends REST_Controller
         $this->response($response);
     }
 
+    function empresa_perfil_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if (fx($param, "id_empresa,grupo")) {
+            $id_empresa = $param['id_empresa'];
+            $grupo = $param['grupo'];
+            $in = 0;
+                $data = $this->app->session();
+            switch ($grupo) {
+                case 1:
+
+                    $in = get_keys($data['restricciones']['puede_repartir']);
+
+                    break;
+                default:
+                    break;
+            }
+            $response = $this->usuario_model->empresa_perfil($id_empresa, $in);
+        }
+        $this->response($response);
+    }
+
     function perfiles_GET()
     {
 
@@ -1234,11 +1259,11 @@ class usuario extends REST_Controller
 
 
             }
-            if(es_data($data_complete)){
+            if (es_data($data_complete)) {
 
-                foreach ($data_complete  as $row){
+                foreach ($data_complete as $row) {
 
-                    foreach ($row as $temp){
+                    foreach ($row as $temp) {
 
                         $response[]['idusuario'] = $temp;
                     }

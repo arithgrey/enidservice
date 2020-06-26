@@ -14,7 +14,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
     function text_tiempo_entrega($dias, $es_mayor, $ubicacion)
     {
         $response = '';
@@ -191,6 +190,8 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
+        } else {
+            $r[] = d( _titulo('Ups! no hay repartos aún asigandos'), 'mb-5');
         }
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
@@ -202,18 +203,18 @@ if (!function_exists('invierte_date_time')) {
         $entregas_asignadas = array_count_values($ids_usuarios_entregas);
         $response = [];
         $es_administrador = es_administrador($data);
-        if ($es_administrador){
+        if ($es_administrador) {
 
             foreach ($entregas_asignadas as $clave => $valor) {
 
                 $nombre_usuario_entrega = search_bi_array($repartidores, 'id', $clave, 'nombre_usuario_entrega');
-                $contenido = flex($nombre_usuario_entrega, $valor, _text_(_between,'border-bottom'),'text-uppercase');
-                $response[] = d(d($contenido ,4,1),13);
+                $contenido = flex($nombre_usuario_entrega, $valor, _text_(_between, 'border-bottom'), 'text-uppercase');
+                $response[] = d(d($contenido, 4, 1), 13);
 
             }
         }
 
-        return d($response,'mb-5');
+        return d($response, 'mb-5');
 
     }
 

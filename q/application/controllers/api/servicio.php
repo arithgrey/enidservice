@@ -19,6 +19,7 @@ class Servicio extends REST_Controller
         $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("idusuario");
     }
 
+
     function envio_gratis_GET()
     {
 
@@ -370,6 +371,23 @@ class Servicio extends REST_Controller
             $status = ($param["pie"] == 1) ? 0 : 1;
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("pie", $status, $id_servicio);
+        }
+
+        $this->response($response);
+
+    }
+
+    function solo_metro_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id_servicio,solo_metro")) {
+
+            $solo_metro = $param['solo_metro'];
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("solo_metro", $solo_metro, $id_servicio);
         }
 
         $this->response($response);
