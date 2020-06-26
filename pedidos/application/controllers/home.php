@@ -472,17 +472,18 @@ class Home extends CI_Controller
             $comisionistas = $this->usuarios_comisionistas();
         }
         $data['comisionistas'] = $comisionistas;
-        $ordenes = $this->comisiones_por_pago();
+        $ordenes = $this->comisiones_por_pago($data);
         $data['comisiones_por_pago'] = $this->app->add_imgs_servicio($ordenes['ordenes']);
         $data['clientes_por_pago'] = $ordenes['clientes'];
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
 
     }
 
-    private function comisiones_por_pago()
+    private function comisiones_por_pago($data)
     {
 
-        return $this->app->api("recibo/comisiones_por_pago/format/json/");
+        $q =  ['id_empresa' => $data['id_empresa']];
+        return $this->app->api("recibo/comisiones_por_pago/format/json/",$q);
     }
 
     private function usuarios_comisionistas()

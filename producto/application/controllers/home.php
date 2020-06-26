@@ -220,10 +220,7 @@ class Home extends CI_Controller
 
 
         $fecha = horario_enid();
-
         $hoy = $fecha->format('H:i:s');
-
-
         $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
 
         $text = "Realiza tu pedido antes de las 6 PM y tenlo hoy mismo!";
@@ -238,8 +235,10 @@ class Home extends CI_Controller
         $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
 
 
+
         $response[] = d($str, "text-uppercase mt-5 ");
-        $opciones_compra =  ($es_posible_punto_encuentro > 0) ? 'Tienes una de dos' : '';
+        $solo_metro =  pr($servicio,'solo_metro');
+        $opciones_compra =  ($es_posible_punto_encuentro > 0 && $solo_metro < 1) ? 'Tienes una de dos' : '';
         $response[] = d(_titulo($opciones_compra, 4), 'mt-5 text-center');
         return append($response);
     }

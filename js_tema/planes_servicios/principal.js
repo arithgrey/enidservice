@@ -205,6 +205,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".telefono_visible").click(actualiza_telefono_visible);
     $(".venta_mayoreo").click(actualiza_ventas_mayoreo);
     $(".entregas_en_auto").click(entregas_en_auto);
+    $(".entregas_solo_metro").click(entregas_solo_metro);
     $(".moto").click(moto);
     $(".bicicleta").click(bicicleta);
     $(".pie").click(pie);
@@ -276,6 +277,22 @@ let actualiza_ventas_mayoreo = function (e) {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
 };
+let entregas_solo_metro = function(e){
+
+    let url = "../q/index.php/api/servicio/solo_metro/format/json/";
+    let id = get_parameter_enid($(this), "id");
+    let $id_servicio =  get_option("servicio");
+
+    let data_send = {
+        solo_metro: id,
+        id_servicio: $id_servicio
+    };
+
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    }, ".place_sobre_el_negocio");
+
+}
 let entregas_en_auto = function (e) {
 
     let url = "../q/index.php/api/servicio/requiere_auto/format/json/";
