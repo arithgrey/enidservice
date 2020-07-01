@@ -144,7 +144,10 @@ if (!function_exists('invierte_date_time')) {
         $xx[] = $boton_editar;
         $xx[] = append($response);
         $compra = append($xx);
-        return dd($producto, $compra);
+
+        $data_response[] =  d($producto, 12);
+        $data_response[] = d($compra, 12);
+        return append($data_response);
 
 
     }
@@ -708,16 +711,11 @@ if (!function_exists('invierte_date_time')) {
 
         if ($proceso_compra == 0) {
 
-            $btn = a_enid(
+            $response = a_enid(
 
                 d(
-                    text_icon("fa fa-long-arrow-right", "Lo deseo ", [], 0)
-                    ,
-                    [
-                        'class' => 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark p-2',
-
-                    ]
-
+                    text_icon("fa fa-long-arrow-right ", "Lo deseo ", [], 0)
+                    , 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark p-2'
                 )
                 ,
                 path_enid("login")
@@ -725,17 +723,16 @@ if (!function_exists('invierte_date_time')) {
             );
 
             if ($in_session > 0) {
-                $btn =
+                $response =
                     d(
                         text_icon("fa fa-long-arrow-right", "Lo deseo", [], 0),
                         [
                             "id" => 'agregar_a_lista_deseos_add',
-                            "class" => "cursor_pointer border agregar_a_lista_deseos l_deseos p-1 border-dark mt-3 text-uppercase strong border_bottom_big p-2"
-
+                            "class" => "cursor_pointer border agregar_a_lista_deseos l_deseos p-1 border-dark mt-3 text-uppercase strong border_bottom_big p-2 black"
                         ]
                     );
             }
-            return $btn;
+            return $response;
 
         }
     }

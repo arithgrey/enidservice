@@ -1,3 +1,12 @@
+.borde_amarillo{
+    border: solid 2px #deff05;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
+.borde_amarillo:hover{
+    background: #005bac;
+}
+
 .navbar .searchbox .dropdown-menu {
     width: 270px
 }
@@ -122,12 +131,6 @@ a.changecolor {
 
 th:hover {
     cursor: pointer;
-}
-
-.notificacion_tareas_pendientes_enid_service {
-    font-weight: bold;
-    font-size: 1.5em;
-    color: #bdddff;
 }
 
 .dropdown-toggle::after {
