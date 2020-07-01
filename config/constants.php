@@ -17,7 +17,7 @@ define('ICONV_ENABLED', TRUE);
 /**TEXTOS DE VALIDACIÓN*/
 define('_text_pass', "Ingresa una contraseña de por lo menos 5 caracteres!");
 define('_text_password', "Ups! parece que algo anda mal con tu contraseña");
-define('_text_telefono', "Ingresa un teléfono de 8 o 10 caracteres!");
+define('_text_telefono', "Ingresa un teléfono de 8 o 12 caracteres!");
 define('_text_horario_entrega', "¿En qué horario te gustaría recibir tu pedido?");
 define('_text_horario_entrega_vendedor', "¿En qué horario recibirá el pedido tu cliente?");
 define('_text_correo', 'Hey! no tan rápido, valida tu correo!');
@@ -94,6 +94,7 @@ define('_mas_opciones_bajo_icon', 'fa-chevron-circle-down');
 define('_mas_opciones_icon', 'fa-chevron-circle-up');
 define('_entregas_icon', 'fa fa-motorcycle');
 define('_maps_icon', 'fa fa-map-marker');
+define('_compras_icon','fa-shopping-bag');
 
 
 

@@ -249,7 +249,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                 $attributes["class"] = (array_key_exists("class",
                     $attributes)) ? ($attributes["class"] . " telefono ") : " telefono ";
                 $attributes["minlength"] = 8;
-                $attributes["maxlength"] = 10;
+                $attributes["maxlength"] = 12;
                 $attributes["required"] = true;
 
                 break;
@@ -1730,14 +1730,10 @@ function get_menu_session($in_session, $proceso_compra = 1)
             ], 0
         );
         $session = a_enid(
-            text_icon("fa fa-user", " iniciar sesión",
-                [],
-                0
-            )
-            ,
+            " iniciar sesión",
             [
                 "href" => path_enid('login'),
-                "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white",
+                "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white borde_amarillo iniciar_session_boton strong",
             ]
         );
 
@@ -2655,10 +2651,16 @@ function tmp_menu($id_usuario, $menu)
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
 
     $seccion = append($contenido);
-    $notificaciones = btw(
+
+    $icono_compras = icon(_text_(_compras_icon, 'mr-2'));
+    $place_compras = d('', 'place_numero_deseo');
+    $deseos = flex($icono_compras, $place_compras, 'borde_amarillo');
+    $deseo_pedido = a_enid($deseos,['href'=>path_enid('lista_deseos'), 'class' => 'white']);
+    $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
+    $notificaciones[] = btw(
         a_enid(
             flex(
-                icon("fa fa-bell white"),
+                icon("fa fa-bell white mr-2"),
                 d("", "num_tareas_dia_pendientes_usr"),
                 "",
                 "align-self-center"
@@ -2676,7 +2678,7 @@ function tmp_menu($id_usuario, $menu)
             "row dropdown-menu menu_dropdown_enid"
         )
         ,
-        "dropdown dropleft menu_notificaciones_progreso_dia mr-2 "
+        "dropdown dropleft menu_notificaciones_progreso_dia mr-2 borde_amarillo"
     );
 
 
@@ -2688,9 +2690,9 @@ function tmp_menu($id_usuario, $menu)
         ]
     );
 
-    $cerrar_menu = addNRow(terminar_dropdown('', 'p-0'));
+//    $cerrar_menu = addNRow(terminar_dropdown('', 'p-0'));
 
-    $link_tienda = a_enid(btn('Productos en venta'), get_url_tienda($id_usuario));
+//    $link_tienda = a_enid(btn('Productos en venta'), get_url_tienda($id_usuario));
 
 
     $menu_usuario = [
@@ -2720,7 +2722,7 @@ function tmp_menu($id_usuario, $menu)
     ];
     $menu = d($extra_menu, 'dropdown dropleft');
 
-    return flex($notificaciones, $menu, "mr-md-5 mt-3 mt-md-0");
+    return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 mt-3 mt-md-0");
 
 }
 

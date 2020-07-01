@@ -845,7 +845,7 @@ if (!function_exists('invierte_date_time')) {
 
             $new_flag = d($f,
                 [
-                    "class" => 'notificacion_tareas_pendientes_enid_service',
+                    "class" => 'notificacion_tareas_pendientes_enid_service strong white ml-1',
                     "id" => $f,
                 ]
             );
@@ -1729,7 +1729,7 @@ if (!function_exists('invierte_date_time')) {
             $new_flag = d($f,
                 [
                     "id" => $f,
-                    "class" => 'notificacion_tareas_pendientes_enid_service',
+                    "class" => 'notificacion_tareas_pendientes_enid_service strong white ml-1',
                 ]);
 
         }
@@ -1767,7 +1767,7 @@ if (!function_exists('invierte_date_time')) {
                 $f,
                 [
                     "id" => $f,
-                    "class" => 'notificacion_tareas_pendientes_enid_service',
+                    "class" => 'notificacion_tareas_pendientes_enid_service strong white ml-1',
                 ]
             );
 
@@ -2052,7 +2052,7 @@ if (!function_exists('invierte_date_time')) {
             $new_flag = d($f,
                 [
                     "id" => $f,
-                    "class" => 'notificacion_tareas_pendientes_enid_service',
+                    "class" => 'notificacion_tareas_pendientes_enid_service strong white ml-1',
                 ]);
 
         }

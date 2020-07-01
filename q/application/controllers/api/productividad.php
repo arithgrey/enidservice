@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class productividad extends REST_Controller
@@ -29,21 +29,21 @@ class productividad extends REST_Controller
             "id_perfil" => $param["id_perfil"],
         ];
 
-
         $prm["modalidad"] = 1;
         $prm["id_usuario"] = $id_usuario;
         $response["info_notificaciones"]["numero_telefonico"] = 1;
         $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa);
-
 
         $response += [
             "id_usuario" => $id_usuario,
             "preguntas" => [],
             "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
-            "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario, $data),
-            "clientes_sin_tags_arquetipos" => $this->get_stag($data),
-            "tareas" => $this->get_tareas($data, $id_usuario),
+//            "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario, $data),
+            "recibos_sin_costos_operacion" => [],
+//            "clientes_sin_tags_arquetipos" => $this->get_stag($data),
+            "clientes_sin_tags_arquetipos" => [],
+            "tareas" => $this->get_tareas($data, $id_usuario)
         ];
 
         $response = $this->re_intentos_compras($data, $id_usuario, $response);
@@ -101,8 +101,19 @@ class productividad extends REST_Controller
             default:
                 break;
         }
-
+        $response += ["lista_deseo" => $this->get_lista_deseo($id_usuario) ];
         $this->response($response);
+
+    }
+
+    private function get_lista_deseo($id_usuario)
+    {
+        $q = [
+            "id_usuario" => $id_usuario,
+            "status" => 0,
+        ];
+
+        return $this->app->api("usuario_deseo/deseos/format/json/", $q);
 
     }
 

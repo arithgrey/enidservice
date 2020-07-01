@@ -14,7 +14,8 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $q = (prm_def($this->input->get(), "q") === "preferencias") ?
+        $param = $this->input->get();
+        $q = (prm_def($param, "q") === "preferencias") ?
             $this->render_preferencias($data) :
             $this->load_lista_deseos($data);
 
@@ -36,9 +37,8 @@ class Home extends CI_Controller
 
     private function load_lista_deseos($data)
     {
-
-
-        $data["productos_deseados"] = $this->add_imagenes($this->get_lista_deseos($data["id_usuario"]));
+        $lista_deseo = $this->get_lista_deseos($data["id_usuario"]);
+        $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
         if (count($data["productos_deseados"]) > 0) {
 
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");

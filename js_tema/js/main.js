@@ -265,7 +265,7 @@ let selecciona_select = (class_select, valor_a_seleccionar) => {
 let metricas_perfil = () => {
 
 
-    if (get_option("in_session") == 1) {
+    if (parseInt(get_option("in_session")) === 1) {
 
         let url = "../q/index.php/api/productividad/notificaciones/format/json/";
         let data_send = {"id_usuario": get_parameter(".id_usuario")};
@@ -276,6 +276,13 @@ let response_metricas_perfil = data => {
 
     render_enid(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
     render_enid(".place_notificaciones_usuario", data.lista_pendientes);
+    let total_deseo = parseInt(data.lista_deseo);
+    if(total_deseo > 0){
+        render_enid(".place_numero_deseo", total_deseo);
+        $('.numero_deseo').removeClass('d-none');
+
+    }
+
     let num_pendientes = data.num_tareas_pendientes_text;
     set_option("num_pendientes", num_pendientes);
     $(document).on('visibilitychange', function () {
@@ -1101,10 +1108,12 @@ let escucha_submmit_selector = function (e, $form, $submit = 0) {
 };
 let es_formato_telefono = function ($input) {
 
-
     let len_telefono = $input.val().length;
     let tiene_formato = true;
-    if (len_telefono <= MIN_TELEFONO_LENGTH || len_telefono !== TELEFONO_MOBILE_LENGTH) {
+    let es_foraneo = (len_telefono > 10 && len_telefono < 13);
+    let es_menor =  (len_telefono <= MIN_TELEFONO_LENGTH);
+    let es_format_mobile =  (len_telefono !== TELEFONO_MOBILE_LENGTH && !es_foraneo);
+    if (es_menor || es_format_mobile) {
 
         $input.next().next().removeClass('d-none');
         tiene_formato = false;
