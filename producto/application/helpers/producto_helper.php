@@ -145,7 +145,7 @@ if (!function_exists('invierte_date_time')) {
         $xx[] = append($response);
         $compra = append($xx);
 
-        $data_response[] =  d($producto, 12);
+        $data_response[] = d($producto, 12);
         $data_response[] = d($compra, 12);
         return append($data_response);
 
@@ -430,6 +430,7 @@ if (!function_exists('invierte_date_time')) {
     function desc_servicio($servicio, $proceso_compra, $data, $imgs, $in_session)
     {
 
+        $id_servicio = pr($servicio, 'id_servicio');
         $usuario = $data["usuario"];
         $tel_visible = pr($servicio, "telefono_visible");
         $id_publicador = $data["id_publicador"];
@@ -469,7 +470,7 @@ if (!function_exists('invierte_date_time')) {
 
         $contenido_descripcion = append($z);
 
-        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session);
+        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session, $id_servicio);
         $imagen = flex_md($i["img"], $agregar_lista_deseos, 'flex-column');
         $r[] = flex(
             $contenido_descripcion,
@@ -706,8 +707,9 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function agregar_lista_deseos($proceso_compra, $in_session)
+    function agregar_lista_deseos($proceso_compra, $in_session, $id_servicio)
     {
+
 
         if ($proceso_compra == 0) {
 
@@ -716,9 +718,11 @@ if (!function_exists('invierte_date_time')) {
                 d(
                     text_icon("fa fa-long-arrow-right ", "Lo deseo ", [], 0)
                     , 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark p-2'
-                )
-                ,
-                path_enid("login")
+                ),
+                [
+                    'class' => 'agregar_deseos_sin_antecedente',
+                    'id' => $id_servicio
+                ]
 
             );
 

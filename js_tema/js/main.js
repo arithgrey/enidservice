@@ -69,7 +69,7 @@ let set_option = (key, value = 0) => {
 
     if (isArray(key)) {
 
-        for (var i = 0; i < key.length; i++) {
+        for (let i = 0; i < key.length; i++) {
             let indice = key[i];
             i++;
             let valor = key[i];
@@ -270,14 +270,34 @@ let metricas_perfil = () => {
         let url = "../q/index.php/api/productividad/notificaciones/format/json/";
         let data_send = {"id_usuario": get_parameter(".id_usuario")};
         request_enid("GET", data_send, url, response_metricas_perfil);
+
+    } else {
+
+        let url = "../q/index.php/api/usuario_deseo_compra/total/format/json/";
+        let data_send = {};
+        request_enid("GET", data_send, url, response_deseo_compra);
+
     }
 };
+let response_deseo_compra = function (data) {
+
+    if (parseInt(data) > 0) {
+
+        render_enid('.place_resumen_deseo_compra', data);
+        $('.icono_compras_pendientes').addClass('borde_amarillo');
+        $('.icono_compras_pendientes').attr('href', '../lista_deseos');
+
+        $('.place_resumen_deseo_compra').addClass('mr-2 ');
+
+    }
+
+}
 let response_metricas_perfil = data => {
 
     render_enid(".num_tareas_dia_pendientes_usr", data.num_tareas_pendientes);
     render_enid(".place_notificaciones_usuario", data.lista_pendientes);
     let total_deseo = parseInt(data.lista_deseo);
-    if(total_deseo > 0){
+    if (total_deseo > 0) {
         render_enid(".place_numero_deseo", total_deseo);
         $('.numero_deseo').removeClass('d-none');
 
@@ -1111,8 +1131,8 @@ let es_formato_telefono = function ($input) {
     let len_telefono = $input.val().length;
     let tiene_formato = true;
     let es_foraneo = (len_telefono > 10 && len_telefono < 13);
-    let es_menor =  (len_telefono <= MIN_TELEFONO_LENGTH);
-    let es_format_mobile =  (len_telefono !== TELEFONO_MOBILE_LENGTH && !es_foraneo);
+    let es_menor = (len_telefono <= MIN_TELEFONO_LENGTH);
+    let es_format_mobile = (len_telefono !== TELEFONO_MOBILE_LENGTH && !es_foraneo);
     if (es_menor || es_format_mobile) {
 
         $input.next().next().removeClass('d-none');

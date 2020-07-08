@@ -6,6 +6,7 @@ class Usuario_deseo_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->database();
+
 	}
 	function q_up($q, $q2, $id)
 	{

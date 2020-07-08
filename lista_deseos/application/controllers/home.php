@@ -7,17 +7,25 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->library(lib_def());
         $this->load->helper("deseos");
-        $this->app->acceso();
+
     }
 
     function index()
     {
 
         $data = $this->app->session();
-        $param = $this->input->get();
-        $q = (prm_def($param, "q") === "preferencias") ?
-            $this->render_preferencias($data) :
-            $this->load_lista_deseos($data);
+        $in_session = $data['in_session'];
+        if ($in_session) {
+
+            $this->app->acceso();
+            $param = $this->input->get();
+            $q = (prm_def($param, "q") === "preferencias") ?
+                $this->render_preferencias($data) :
+                $this->load_lista_deseos($data);
+
+        } else {
+            $this->explorar_deseos($data);
+        }
 
     }
 
@@ -39,7 +47,7 @@ class Home extends CI_Controller
     {
         $lista_deseo = $this->get_lista_deseos($data["id_usuario"]);
         $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
-        if (count($data["productos_deseados"]) > 0) {
+        if (es_data($data["productos_deseados"])) {
 
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
             $this->app->pagina($data, productos_deseados($data["productos_deseados"]), 1);
@@ -49,6 +57,20 @@ class Home extends CI_Controller
 
             $this->app->pagina($data, sin_productos(), 1);
 
+        }
+    }
+
+    private function explorar_deseos($data)
+    {
+        $lista_deseo = $this->app->api("usuario_deseo_compra/index/format/json/");
+
+        if (es_data($lista_deseo)) {
+
+            $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
+            $this->app->pagina($data, productos_deseados($lista_deseo,1), 1);
+
+        }else{
+            $this->app->pagina($data, sin_productos(), 1);
         }
     }
 
@@ -67,6 +89,7 @@ class Home extends CI_Controller
         return $response;
 
     }
+
 
     private function get_lista_deseos($id_usuario)
     {
