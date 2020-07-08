@@ -2655,7 +2655,7 @@ function tmp_menu($id_usuario, $menu)
     $icono_compras = icon(_text_(_compras_icon, 'mr-2'));
     $place_compras = d('', 'place_numero_deseo');
     $deseos = flex($icono_compras, $place_compras, 'borde_amarillo');
-    $deseo_pedido = a_enid($deseos,['href'=>path_enid('lista_deseos'), 'class' => 'white']);
+    $deseo_pedido = a_enid($deseos, ['href' => path_enid('lista_deseos'), 'class' => 'white']);
     $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
     $notificaciones[] = btw(
         a_enid(
@@ -2755,20 +2755,14 @@ function frm_search(
 
     if (!$in_session) {
 
-        $contenido = [
 
-            a_enid(_titulo("tu carrito"),
-                [
-                    'class' => 'dropdown-item'
-                ]
-            )
-        ];
-        $r[] = d(
-            dropdown(
-                icon("fa fa-shopping-bag  white"),
-                $contenido
-            ), 'mr-5 mt-2'
+
+        $notificacion_deseo_compra = flex(
+            d('', 'place_resumen_deseo_compra white strong'),
+            icon("fa fa-shopping-bag  white"),
+            _between
         );
+        $r[] = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
     }
 
 

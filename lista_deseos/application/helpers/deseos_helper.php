@@ -49,10 +49,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function productos_deseados($productos)
+    function productos_deseados($productos, $externo = 0)
     {
 
-        return d(format_productos_deseados($productos), "mt-5");
+        return d(format_productos_deseados($productos, $externo), "mt-5");
 
     }
 
@@ -207,12 +207,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_productos_deseados($productos_deseados)
+    function format_productos_deseados($productos_deseados, $externo)
     {
 
 
         $r[] = d(menu(), 2);
-        $r[] = d(lista_deseo($productos_deseados), 7);
+        $r[] = d(lista_deseo($productos_deseados, $externo), 7);
         $r[] = btw(
             _titulo("TU LISTA DE DESEOS")
             ,
@@ -314,16 +314,17 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function lista_deseo($productos_deseados)
+    function lista_deseo($productos_deseados, $externo)
     {
 
         $response = [];
         foreach ($productos_deseados as $row) {
 
 
-            $id = $row["id"];
-            $id_producto = $row["id_servicio"];
+            $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
             $descripcion = $row["descripcion"];
+            $id_producto = $row["id_servicio"];
+
             $precio = $row["precio"];
             $articulos = $row["articulos"];
             $descripcion = preg_replace('/<[^<|>]+?>/', '', htmlspecialchars_decode($descripcion));
@@ -361,11 +362,12 @@ if (!function_exists('invierte_date_time')) {
             $text_productos = ($articulos > 1) ? $articulos . " productos " : " un producto";
             $text_cancelar = _text(" Cancelar ", $text_productos);
 
+            $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
             $opiniones = d(
                 $text_cancelar,
                 [
                     "class" => "cursor_pointer hover_black",
-                    "onclick" => "cancela_productos('{$id}');"
+                    "onclick" => $tipo
                 ]
             );
             $x[] = d($opiniones, "label-rating");

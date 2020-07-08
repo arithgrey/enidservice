@@ -1,5 +1,6 @@
 "use strict";
 let $num_ciclos = $('#num_ciclos');
+let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
 $(document).ready(function () {
 
     oculta_acceder();
@@ -16,6 +17,7 @@ $(document).ready(function () {
     $(".descripcion_producto ").click(tab_descripcion);
     $(".descripcion_detallada ").click(tab_descripcion_avanzada);
     $num_ciclos.change(articulos_seleccionados);
+    $agregar_deseos_sin_antecedente.click(agregar_deseos);
 
 
 });
@@ -166,5 +168,25 @@ let articulos_seleccionados = function () {
     let numero_articulos = this.value;
     if (parseInt(numero_articulos) > 0) {
         $('.num_ciclos').val(numero_articulos);
+    }
+}
+let agregar_deseos = function () {
+
+    let $id_servicio = $(this).attr('id');
+
+    if (parseInt($id_servicio) > 0) {
+
+        let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
+        let data_send = {"id_servicio": $id_servicio};
+        request_enid("POST", data_send, url, anexar_deseo);
+    }
+}
+let anexar_deseo = function (data) {
+
+    if (parseInt(data) > 0) {
+
+        let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
+        let data_send = {"id_servicio": $id_servicio};
+        request_enid("GET", data_send, url, anexar_deseo);
     }
 }
