@@ -55,6 +55,7 @@ if (!function_exists('invierte_date_time')) {
 
         $saldo_cubierto = pr($r, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
+
         $re[] = frm_pedidos($data, $r, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
         $re[] = d(crea_estado_venta($status_ventas, $r));
         $re[] = crea_seccion_solicitud($r);
@@ -537,7 +538,12 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre = _text_('Entregará ', $usuario_entrega);
             $nombre = ($se_define_repartidor) ? $nombre : 'aún no hay repartidor asignado :(';
-            $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
+
+            if (!$es_orden_entregada && !$se_define_repartidor){
+
+                $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
+            }
+
 
 
             $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
@@ -555,7 +561,8 @@ if (!function_exists('invierte_date_time')) {
     function format_text_domicilio($domicilio, $data, $recibo, $adicionales = 0)
     {
 
-        $text_domicilio = '';
+
+        $text_domicilio = pago_en_cita($data, $recibo);
         if (es_data($domicilio)) {
             if (es_data($recibo) && pr($recibo, 'ubicacion') < 1) {
 
@@ -589,16 +596,20 @@ if (!function_exists('invierte_date_time')) {
                     $entre_calles,
                     $str
                 );
+
             } else {
 
-                $text_ubicacion = pr($domicilio, 'ubicacion');
 
+                $text_ubicacion = pr($domicilio, 'ubicacion');
                 $text_ubicacion = valida_texto_maps($text_ubicacion);
                 $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
                 $text_domicilio = _text_($text_ubicacion, $str);
             }
 
+
         }
+
+
         return $text_domicilio;
 
     }
@@ -676,9 +687,6 @@ if (!function_exists('invierte_date_time')) {
     function pago_en_cita($data, $recibo, $no_validar = 0)
     {
 
-        $str = '';
-        $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
-        if ($es_contra_entrega_domicilio || $no_validar) {
             $in_session = $data['in_session'];
             $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
                 ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
@@ -692,10 +700,8 @@ if (!function_exists('invierte_date_time')) {
             $text_pago = _text_($text_entrega, money($saldo_pendiente));
             $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo);
             $es_orden_entregada = es_orden_entregada($recibo, $data);
-            $str = (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
+            return  (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
 
-        }
-        return $str;
 
     }
 
@@ -825,16 +831,22 @@ if (!function_exists('invierte_date_time')) {
 
 
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
+
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
         $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _text(_between_md, 'text-left'));
 
 
         $r[] = d($recibo_vendedor, 'row mt-3');
 
+        $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará' ;
+        $text_nombre = _text_($text ,format_nombre($data['repartidor']));
+        $r[]= d($text_nombre, 'row mt-3');
+
 
         $saldo_cubierto = pr($recibo, 'saldo_cubierto');
         $se_paga_comision = pr($recibo, 'flag_pago_comision');
         $es_vendedor = in_array($id_perfil, [6, 3]);
+
 
 
         if ($saldo_cubierto > 0 && $se_paga_comision > 0 && $es_vendedor) {
@@ -866,6 +878,7 @@ if (!function_exists('invierte_date_time')) {
                 $comisionista['apellido_materno']
             );
             $response[] = p($vendedor, _text_('blue_enid3 pl-3 pr-3  white', _strong));
+
 
         } else {
 
@@ -1314,6 +1327,9 @@ if (!function_exists('invierte_date_time')) {
     function get_form_busqueda_pedidos($data, $param)
     {
 
+        $es_busqueda_reparto = prm_def($param, 'reparto');
+
+
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
         $status_ventas = $data["status_ventas"];
@@ -1347,6 +1363,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
         $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
         $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
+        $r[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => $es_busqueda_reparto]);
         $r[] = hiddens(
             [
                 "name" => "perfil",
@@ -1478,6 +1495,7 @@ if (!function_exists('invierte_date_time')) {
         }
         return $nombre_completo;
     }
+
     function formato_nombre_cliente($clientes, $id_usuario)
     {
         $nombre_completo = '';
@@ -1552,7 +1570,7 @@ if (!function_exists('invierte_date_time')) {
                 $comision_venta = $row['comision_venta'];
                 $nombre_usuario = format_nombre($row);
 
-                $nombre_usuario_cliente = formato_nombre_cliente($clientes_por_pago,$row['id_usuario']);
+                $nombre_usuario_cliente = formato_nombre_cliente($clientes_por_pago, $row['id_usuario']);
                 $contenido = [];
 
                 $class = 'col-md-3 ';
@@ -1770,7 +1788,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $busqueda_orden = create_select_selected($fechas, 'val', 'fecha', 5, 'tipo_orden', 'form-control');
+        $busqueda_orden = create_select_selected($fechas, 'val', 'fecha', 5, 'tipo_orden', 'tipo_orden form-control');
         $r[] = flex(
             "Ordenar",
             $busqueda_orden,

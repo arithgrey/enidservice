@@ -2,12 +2,15 @@
 let $form_busqueda = $(".form_busqueda_pedidos");
 let $ids = $(".ids");
 let $usurios = $(".usuarios");
+let $reparto = $(".reparto");
+let $es_busqueda_reparto = $form_busqueda.find('.es_busqueda_reparto');
 let $form_pago_comisiones = $('.form_pago_comisiones');
 let $modal_pago_comision = $('#modal_pago_comision');
 let $usuario_pago = $('.usuario_pago');
 let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
 let $input_busqueda = $form_busqueda.find('.input_busqueda');
+let $tipo_orden = $form_busqueda.find('.tipo_orden');
 
 $(document).ready(() => {
 
@@ -51,13 +54,15 @@ let response_pedidos = function (data) {
 };
 let valida_busqueda_inicial = function () {
 
-
     if (parseInt($ids.val()) > 0 && $usurios.val().length > 0) {
 
+        $form_busqueda.submit();
 
+    } else if (parseInt($es_busqueda_reparto.val()) > 0) {
+
+        selecciona_valor_select('.form_busqueda_pedidos .tipo_orden', 2);
         $form_busqueda.submit();
     }
-
 
 };
 let busqueda_usuario_selector = function (e) {
@@ -112,8 +117,8 @@ let elimina_guienes = function (e) {
 
     if (e.keyCode === 173) {
         let texto = this.value;
-        texto = texto.replace(/-/g,'');
-        this.value =  texto;
+        texto = texto.replace(/-/g, '');
+        this.value = texto;
     }
 }
 let paste_busqueda = function () {
@@ -121,6 +126,6 @@ let paste_busqueda = function () {
     event.preventDefault();
     if (event.clipboardData) {
         let str = event.clipboardData.getData("text/plain");
-        event.target.value = str.replace(/-/g,'');
+        event.target.value = str.replace(/-/g, '');
     }
 }

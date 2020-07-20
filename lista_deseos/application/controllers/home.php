@@ -62,7 +62,8 @@ class Home extends CI_Controller
 
     private function explorar_deseos($data)
     {
-        $lista_deseo = $this->app->api("usuario_deseo_compra/index/format/json/");
+        $q  = ['ip' => $this->input->ip_address()];
+        $lista_deseo = $this->app->api("usuario_deseo_compra/index/format/json/", $q);
 
         if (es_data($lista_deseo)) {
 

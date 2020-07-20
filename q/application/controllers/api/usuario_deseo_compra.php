@@ -47,9 +47,15 @@ class usuario_deseo_compra extends REST_Controller
     function index_GET()
     {
 
-        $ip = $this->input->ip_address();
-        $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);
-        $response = $this->app->add_imgs_servicio($lista_deseos);
+        $param =  $this->get();
+        $response = false;
+
+        if (fx($param, "ip")) {
+
+            $ip =  $param["ip"];
+            $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);
+            $response = $this->app->add_imgs_servicio($lista_deseos);
+        }
         $this->response($response);
 
     }

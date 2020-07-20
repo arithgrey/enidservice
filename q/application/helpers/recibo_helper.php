@@ -625,14 +625,20 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($es_orden_entregada) ? " entregado" : "";
             $extra = ($es_orden_cancelada) ? " cancelado white" : $extra;
             $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
+
             if ($se_pago > 0) {
+
                 $extra = 'se_pago white';
+
             } else if ($saldo_cubierto > 0 && !$es_lista_negra) {
                 $extra = 'pago_en_proceso white';
                 $saldo_por_cobrar = $saldo_por_cobrar + $row['comision_venta'];
+                $total += $monto_a_pagar;
+
             }
+
             $url_img = $row["url_img_servicio"];
-            $total += $monto_a_pagar;
+
             $img = img(
                 [
                     "src" => $url_img,
@@ -702,13 +708,15 @@ if (!function_exists('invierte_date_time')) {
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
-        $totales = _titulo(_text_('Total', money($total)), 1);
+        $totales = _titulo(_text_('Tota cobrado', money($total)));
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
         $listado[] = append($linea_cambio_estado);
         $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
+
+
         $render = [
             $conversion,
             $tb_fechas,
@@ -716,7 +724,6 @@ if (!function_exists('invierte_date_time')) {
             $inicio,
             $tabla,
             $totales
-
         ];
         return d_c($render, 'col-sm-12 mt-4');
     }
@@ -1206,7 +1213,7 @@ if (!function_exists('invierte_date_time')) {
                 img(
                     [
                         "src" => $row["url_img_servicio"],
-                        "class" => 'imagen_articulo',
+                        "class" => 'imagen_articulo_compras',
                     ]
                 )
                 ,

@@ -1228,9 +1228,19 @@ function _text() {
     return $response;
 }
 
+
 function d(text, className = '') {
 
     let div = document.createElement("div");
+    let text_div = document.createTextNode(text);
+    div.className = className;
+    div.appendChild(text_div);
+    return div.outerHTML;
+}
+
+function tag(tipo,text, className = '') {
+
+    let div = document.createElement(tipo);
     let text_div = document.createTextNode(text);
     div.className = className;
     div.appendChild(text_div);
