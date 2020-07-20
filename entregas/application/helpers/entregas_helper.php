@@ -69,6 +69,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $hoy = $fecha->format('Y-m-d');
                 $es_mayor = ($fecha_entrega > $hoy);
+
                 $dias = date_difference($hoy, $fecha_entrega);
                 $es_menor = ($dias > 0 && !$es_mayor);
                 $id_recibo = $row['id_recibo'];
@@ -158,8 +159,12 @@ if (!function_exists('invierte_date_time')) {
                 }
 
                 if ($es_hoy || $es_menor) {
-                    $filtros = _text_($filtro, $filtros_direccion);
+                    $filtros = _text_($filtro, $filtros_direccion, 'se_entrega_hoy');
                     $ventas_hoy[] = d($pedido, $filtros);
+                } else {
+
+                    $proximas_entregas[] = d($pedido, 'se_entregara_despues d-none');
+
                 }
 
                 $f++;
@@ -168,8 +173,32 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($recibos)) {
 
+                $extregas = a_enid('Ordenes liberadas', ['href' => path_enid('pedidos_reparto'), 'class' => 'strong black underline']);
                 $r[] = d(_titulo(_text_(count($recibos), 'Entregas en proceso')), 'mb-5');
+
+                $r[] = d($extregas, 'mb-5');
                 $r[] = reporte_reparto($ids_usuario_entrega, $repartidores, $data);
+
+
+                $link_proximas_entregas =
+                    a_enid('Entregas que serán mañana',
+                        [
+                            'class' => 'strong black underline'
+                        ]
+                    );
+                $r[] = d(
+                    $link_proximas_entregas,
+                    'mostrar_proximas_entregas'
+                );
+                $link_entregas = a_enid('Entregas por liberar hoy',
+                    [
+                        'class' => 'strong black underline'
+                    ]
+                );
+                $r[] = d(
+                    $link_entregas,
+                    'entregas_por_liberar_hoy d-none'
+                );
 
                 $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_menos_opciones text-secondary')),
                     ['class' => 'mx-auto '], 13);
@@ -188,14 +217,18 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d(d(flex($ubicacion, $reparto, _between), 'col-md-4 col-md-offset-4'), 13);
                 $r[] = append($ventas_hoy);
 
+
+                $r[] = append($proximas_entregas);
+
             }
 
         } else {
-            $r[] = d( _titulo('Ups! no hay repartos aún asigandos'), 'mb-5');
+            $r[] = d(_titulo('Ups! no hay repartos aún asigandos'), 'mb-5');
         }
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
     }
+
 
     function reporte_reparto(&$ids_usuarios_entregas, &$repartidores, &$data)
     {

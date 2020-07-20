@@ -53,7 +53,7 @@ class Usuario_deseo_compra_model extends CI_Model
     function total_ip($ip)
     {
 
-        return $this->get(["COUNT(0)num"], ['ip' => $ip])[0]["num"];
+        return $this->get(["COUNT(0)num"], ['ip' => $ip,'status' => 0])[0]["num"];
     }
 
     function compra($ip)

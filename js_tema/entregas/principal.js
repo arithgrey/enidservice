@@ -4,6 +4,11 @@ let $filtro_menos_opciones = $('.filtro_menos_opciones');
 let $filtro_mas_opciones = $('.filtro_mas_opciones');
 let $filtro_sin_ubicacion = $('.filtro_sin_ubicacion');
 let $filtro_ubicacion = $('.filtro_ubicacion');
+let $mostrar_proximas_entregas = $('.mostrar_proximas_entregas');
+let $se_entrega_hoy = $('.se_entrega_hoy');
+let $se_entregara_despues = $('.se_entregara_despues');
+let $entregas_por_liberar = $('.entregas_por_liberar');
+let $entregas_por_liberar_hoy = $('.entregas_por_liberar_hoy');
 $(document).ready(function () {
 
     $mostrar_todo.click(muestra_franja_horaria);
@@ -11,6 +16,9 @@ $(document).ready(function () {
     $filtro_mas_opciones.click(mas_opciones);
     $filtro_sin_ubicacion.click(sin_ubicacion);
     $filtro_ubicacion.click(ubicacion);
+    $mostrar_proximas_entregas.click(mostrar_proximas_entregas);
+    $entregas_por_liberar_hoy.click(mostrar_entregas_por_liberar_hoy);
+
 });
 let busqueda_ordenes_franja_horaria = (franja) => {
 
@@ -66,5 +74,25 @@ let ubicacion = () => {
     $('.ubicacion_asignada').removeClass('d-none');
     $filtro_sin_ubicacion.removeClass('d-none');
     $filtro_ubicacion.addClass('d-none');
+
+}
+let mostrar_proximas_entregas = () => {
+
+    $se_entrega_hoy.addClass('d-none');
+    $se_entregara_despues.removeClass('d-none');
+
+
+    $mostrar_proximas_entregas.addClass('d-none');
+    $entregas_por_liberar_hoy.removeClass('d-none');
+
+}
+let mostrar_entregas_por_liberar_hoy = () => {
+
+    $se_entrega_hoy.removeClass('d-none');
+    $se_entregara_despues.addClass('d-none');
+
+    $mostrar_proximas_entregas.removeClass('d-none');
+    $entregas_por_liberar_hoy.addClass('d-none');
+
 
 }

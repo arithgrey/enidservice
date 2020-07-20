@@ -6,6 +6,8 @@ if (!function_exists('invierte_date_time')) {
         $action = $data["action"];
 
         $r[] = hiddens_tickects($action, $data["ticket"]);
+
+
         $r[] = tab_seccion(
             d('',
                 "place_servicios_contratados col-md-10 col-md-offset-1 p-0"
@@ -38,10 +40,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
+
         $response[] = paseo();
         $response[] = d(tab_content($r), 12);
-//        $response[] = menu($action);
-
         return append($response);
 
     }

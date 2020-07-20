@@ -1,13 +1,13 @@
-.contenedor_detalle_entrega{
+.contenedor_detalle_entrega {
     min-height: 110px;
     line-height: 1.9;
-
 }
 
 .pregunta:hover {
     cursor: pointer;
     background: black !important;
 }
+
 .contenedor_preguntas {
     margin-top: 15px;
 }
@@ -167,10 +167,12 @@
     background: #034fa5;
     color: white;
     padding: 10px;
-    //border-style: solid;
-    // border-width: 2px;
-    //border-color: black;
     text-align: justify;
     text-transform: uppercase;
-
+}
+.min_block{
+    max-height: 130px!important;
+}
+.imagen_articulo_compras{
+    height: 75px!important;
 }

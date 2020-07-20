@@ -193,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = busqueda_error();
-        $r[] = h("UPS AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
+        $r[] = h("UPS! AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
 //
         $r[] = a_enid(btn("Explorar ahora!",
             [
@@ -372,18 +372,20 @@ if (!function_exists('invierte_date_time')) {
             );
             $x[] = d($opiniones, "label-rating");
             $x[] = p($descripcion);
-            $r[] = d(append($x), 6);
+            $r[] = d($x, 6);
             $z = [];
             $text_precio = $precio * $articulos;
             $z[] = h(money($text_precio));
             $z[] = d($text_envio, "text-success text-center");
             $z[] = frm_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
-            $z[] = btn("Detalles", [], 1, 1, 0, get_url_servicio($id_producto));
-            $r[] = d(append($z), 3);
-            $response[] = addNRow(append($r), ["class" => "card "], ["class" => "border top_20"]);
+
+            $r[] = d($z, 3);
+            $response[] = d($r,'col-md-12 mb-5');
+            $response[] = d('','col-md-12 mt-5 mb-5 border-bottom');
+
 
         }
-        return append($response);
+        return d($response,'row');
     }
 
     function frm_pre_pedido($id, $id_servicio, $extension_dominio = "", $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)

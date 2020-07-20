@@ -267,33 +267,44 @@ let compras_usuario = () => {
     let modalidad = get_option("modalidad_ventas");
     let url = "../q/index.php/api/recibo/recibos/format/json/";
     let data_send = {"status": get_option("estado_compra"), "modalidad": modalidad};
+    advierte('Procesando...', 1);
     request_enid("GET", data_send, url, r_compras_usuario);
 
 };
 let r_compras_usuario = function (data) {
 
 
+    cerrar_modal();
+    let place = get_lugar_por_status_compra();
+    render_enid(place, data);
+    $(".solicitar_desarrollo").click(function (e) {
 
-    // if (data.hasOwnProperty('total') && parseInt(data.total) > 0) {
+        set_option("id_proyecto", get_parameter_enid($(this), "id"));
+        tikets_usuario_servicio();
+
+    });
+    $(".form_q_servicios").submit();
+    $(".resumen_pagos_pendientes").click(inf_ticket);
+    $(".btn_direccion_envio").click(inf_envio);
+    $(".ver_mas_compras_o_ventas").click(compras_ventas_concluidas);
+
+    let modalidad = get_option("modalidad_ventas");
+
+    if (parseInt(data.total) < 1 ) {
+        
+        if (parseInt(modalidad) < 1) {
 
 
-        let place = get_lugar_por_status_compra();
-        render_enid(place, data);
-        $(".solicitar_desarrollo").click(function (e) {
+            let text = 'UPS! AÚN NO HAZ HECHO ALGÚN PEDIDO';
+            let titulo= tag('h2',text,'text-center mb-5');
+            let accion= tag('a','explorar','visitar_sitio d-block mt-5 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold text-center');
+            render_enid(place, _text_(titulo,accion));
+            $('.visitar_sitio').attr('href','../');
+            $(place).removeClass('col-md-10 col-md-offset-1').addClass('col-md-2 col-md-offset-5 text-center');
 
-            set_option("id_proyecto", get_parameter_enid($(this), "id"));
-            tikets_usuario_servicio();
+        }
+    }
 
-        });
-        $(".form_q_servicios").submit();
-        $(".resumen_pagos_pendientes").click(inf_ticket);
-        $(".btn_direccion_envio").click(inf_envio);
-        $(".ver_mas_compras_o_ventas").click(compras_ventas_concluidas);
-
-    // } else {
-    //
-    //     $visita_tienda.removeClass('d-none');
-    // }
 
 };
 let inf_envio = function (e) {

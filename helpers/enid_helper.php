@@ -1376,11 +1376,20 @@ function get_logo($is_mobile, $tipo = 0)
 
     if ($is_mobile == 1) {
 
-        $en_mobile = d("☰ ENID SERVICE",
-            [
-                "class" => "smallnav menu white f12 mt-4 ",
-                "onclick" => "openNav()"
-            ]
+
+        $texto = d("☰ ENID SERVICE", ["onclick" => "openNav()"]);
+        $notificacion_deseo_compra = flex(
+            d('', 'place_resumen_deseo_compra white strong'),
+            icon("fa fa-shopping-bag  white"),
+            _between
+        );
+        $carro = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
+
+        $carro_logo = flex($texto, $carro, _between);
+        $carro_logo = ($tipo > 0 ) ? $texto :  $carro_logo;
+        $en_mobile = d(
+            $carro_logo,
+            "smallnav menu white f12 mt-4 "
         );
         $class = "col-lg-12";
         switch ($tipo) {
@@ -1977,6 +1986,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "paypal_enid" => "https://www.paypal.me/eniservice/",
         "home" => "",
         "pedidos" => "pedidos",
+        "pedidos_reparto" => "pedidos/?reparto=1",
         "pedido_seguimiento" => "pedidos/?seguimiento=",
         "producto" => "producto/?producto=",
         "pedidos_recibo" => "pedidos/?recibo=",
@@ -2754,7 +2764,6 @@ function frm_search(
     $r[] = form_close();
 
     if (!$in_session) {
-
 
 
         $notificacion_deseo_compra = flex(
