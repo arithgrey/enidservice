@@ -539,11 +539,10 @@ if (!function_exists('invierte_date_time')) {
             $nombre = _text_('Entregará ', $usuario_entrega);
             $nombre = ($se_define_repartidor) ? $nombre : 'aún no hay repartidor asignado :(';
 
-            if (!$es_orden_entregada && !$se_define_repartidor){
+            if (!$es_orden_entregada && !$se_define_repartidor) {
 
                 $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
             }
-
 
 
             $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
@@ -687,20 +686,20 @@ if (!function_exists('invierte_date_time')) {
     function pago_en_cita($data, $recibo, $no_validar = 0)
     {
 
-            $in_session = $data['in_session'];
-            $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
-                ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
+        $in_session = $data['in_session'];
+        $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
+            ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
 
 
-            $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega mt-4']);
-            $pago_efectivo = (puede_repartir($data)) ? $boton_pagado : '';
-            $checkout = ticket_pago($recibo, [], 2);
-            $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
+        $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega mt-4']);
+        $pago_efectivo = (puede_repartir($data)) ? $boton_pagado : '';
+        $checkout = ticket_pago($recibo, [], 2);
+        $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
-            $text_pago = _text_($text_entrega, money($saldo_pendiente));
-            $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo);
-            $es_orden_entregada = es_orden_entregada($recibo, $data);
-            return  (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
+        $text_pago = _text_($text_entrega, money($saldo_pendiente));
+        $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo);
+        $es_orden_entregada = es_orden_entregada($recibo, $data);
+        return (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
 
 
     }
@@ -831,22 +830,27 @@ if (!function_exists('invierte_date_time')) {
 
 
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
-
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
         $recibo_vendedor = flex_md($numero_orden, $nombre_vendedor, _text(_between_md, 'text-left'));
 
-
         $r[] = d($recibo_vendedor, 'row mt-3');
 
-        $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará' ;
-        $text_nombre = _text_($text ,format_nombre($data['repartidor']));
-        $r[]= d($text_nombre, 'row mt-3');
+        $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará';
+        $id_usuario_reparto =  pr($data['repartidor'],'id_usuario');
+        $repartidor = a_enid(
+            format_nombre($data['repartidor']),
+            [
+                'class' => 'ml-3 underline black',
+                'href' => path_enid('usuario_contacto', $id_usuario_reparto)
+            ]
+        );
+        $text_nombre = _text_($text, $repartidor);
+        $r[] = d($text_nombre, 'row mt-3');
 
 
         $saldo_cubierto = pr($recibo, 'saldo_cubierto');
         $se_paga_comision = pr($recibo, 'flag_pago_comision');
         $es_vendedor = in_array($id_perfil, [6, 3]);
-
 
 
         if ($saldo_cubierto > 0 && $se_paga_comision > 0 && $es_vendedor) {
@@ -1447,10 +1451,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
 
+        $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
         $menu_pedidos = tab('Pedidos', '#buscador_seccion', ['class' => 'strong']);
         $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => 'ml-5 strong']);
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
-        $menu = flex($menu_pedidos, $menu_pendientes, 'justify-content-end');
+        $menu = flex(d($menu_pedidos, $class_pedidos), $menu_pendientes, 'justify-content-end');
         $data_complete[] = d($menu, 10, 1);
         $data_complete[] = d(tab_content($secciones_tabs), 12);
         return append($data_complete);
