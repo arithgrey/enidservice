@@ -245,6 +245,7 @@ class app extends CI_Controller
     }
 
     function usuario($id_usuario, $completo = 0)
+
     {
 
         $q = [
@@ -401,6 +402,11 @@ class app extends CI_Controller
 
         $response = [
 
+            "usuario_contacto" =>[
+                "css" =>[
+                    "usuario_contacto.css"
+                ]
+            ],
             "stock" => [
                 'js' => [
                     "js/bootstrap-datepicker/js/bootstrap-datepicker.js",

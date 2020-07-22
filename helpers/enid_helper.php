@@ -1386,7 +1386,7 @@ function get_logo($is_mobile, $tipo = 0)
         $carro = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
 
         $carro_logo = flex($texto, $carro, _between);
-        $carro_logo = ($tipo > 0 ) ? $texto :  $carro_logo;
+        $carro_logo = ($tipo > 0) ? $texto : $carro_logo;
         $en_mobile = d(
             $carro_logo,
             "smallnav menu white f12 mt-4 "
@@ -2020,6 +2020,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "config_constants" => "config/constants.php",
         "desarrollo" => "desarrollo",
         "inventario" => "stock",
+        "usuario_contacto" => "usuario_contacto/?id_usuario=",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",
@@ -3381,9 +3382,10 @@ function es_administrador_o_vendedor($data)
 function es_vendedor($data)
 {
 
-
     if (hay_restricciones($data)) {
+
         $response = in_array($data['id_perfil'], $data['restricciones']['es_vendedor']);
+
     } else {
         $response = (prm_def($data, 'id_perfil') == 6);
 
