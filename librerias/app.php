@@ -220,7 +220,7 @@ class app extends CI_Controller
         $json = $this->Utf8_ansi($json);
         $json = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $json);
         $json = str_replace(array("\n", "\r"), "", $json);
-        //$json = preg_replace('/([{,]+)(\s*)([^"]+?)\s*:/', '$1"$3":', $json);
+
         $json = preg_replace('/(,)\s*}$/', '}', $json);
         $json = preg_replace('/,\s*([\]}])/m', '$1', $json);
 
@@ -293,6 +293,7 @@ class app extends CI_Controller
         $is_logged_in = $this->session->userdata('logged_in');
 
         return (!isset($is_logged_in) || $is_logged_in != true) ? 0 : 1;
+
 
     }
 

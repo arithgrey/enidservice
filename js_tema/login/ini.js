@@ -103,6 +103,7 @@ let inicio_session = () => {
     let data_send = {secret: get_option('tmp_password'), 'email': get_option('email')};
     if (get_parameter('#mail_acceso').length > 5 && get_parameter(pw).length > 5) {
         let url = get_option('url');
+
         bloquea_form(form_inicio);
         sload(selector_acceso_sistema);
         request_enid('POST', data_send, url, response_inicio_session);

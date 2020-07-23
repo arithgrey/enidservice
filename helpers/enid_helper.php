@@ -1371,11 +1371,10 @@ function evita_basura($text)
     return $b;
 }
 
-function get_logo($is_mobile, $tipo = 0)
+function get_logo( $session = 0)
 {
 
-    if ($is_mobile == 1) {
-
+    if (is_mobile()) {
 
         $texto = d("☰ ENID SERVICE", ["onclick" => "openNav()"]);
         $notificacion_deseo_compra = flex(
@@ -1386,13 +1385,13 @@ function get_logo($is_mobile, $tipo = 0)
         $carro = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
 
         $carro_logo = flex($texto, $carro, _between);
-        $carro_logo = ($tipo > 0) ? $texto : $carro_logo;
+        $carro_logo = ($session > 0) ? $texto : $carro_logo;
         $en_mobile = d(
             $carro_logo,
             "smallnav menu white f12 mt-4 "
         );
         $class = "col-lg-12";
-        switch ($tipo) {
+        switch ($session) {
 
             case 1:
                 $class = "col-lg-3";
@@ -2701,11 +2700,6 @@ function tmp_menu($id_usuario, $menu)
         ]
     );
 
-//    $cerrar_menu = addNRow(terminar_dropdown('', 'p-0'));
-
-//    $link_tienda = a_enid(btn('Productos en venta'), get_url_tienda($id_usuario));
-
-
     $menu_usuario = [
 
         $menu,
@@ -3176,10 +3170,10 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
         if (!$is_mobile) {
 
             $response[] = get_menu_session($in_session, $proceso_compra);
-            $response[] = d([get_logo($is_mobile), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
+            $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
             $response[] = frm_search($clasificaciones_departamentos, $in_session);
         } else {
-            $response[] = get_logo($is_mobile, $in_session);
+            $response[] = get_logo($in_session);
         }
 
     } else {
@@ -3187,7 +3181,7 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
         if (!$is_mobile) {
 
             $response[] = flex(
-                ajustar(get_logo($is_mobile), $frecuentes, 2),
+                ajustar(get_logo(), $frecuentes, 2),
                 frm_search($clasificaciones_departamentos, $in_session, $id_usuario, $menu)
                 ,
                 "",
@@ -3199,7 +3193,7 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
         } else {
 
             $response[] = ajustar(
-                get_logo($is_mobile, $in_session),
+                get_logo($in_session),
                 tmp_menu($id_usuario, $menu)
             );
         }
