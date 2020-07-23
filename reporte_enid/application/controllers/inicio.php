@@ -68,9 +68,6 @@ class Inicio extends CI_Controller
 
     }
 
-    /**
-     * @param $module
-     */
     private function valida_es_cliente($module)
     {
         if ($module != 1) {

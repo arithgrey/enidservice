@@ -31,6 +31,7 @@ class Sess extends REST_Controller
                     $id_empresa = $usuario["idempresa"];
                     $response = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
 
+
                     if (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer')) {
                         $this->response($response);
                     }
@@ -105,7 +106,7 @@ class Sess extends REST_Controller
                     "empresa_recurso" => $empresa_recurso,
                     "data_navegacion" => $navegacion,
                     "info_empresa" => $empresa,
-                    'logged_in' => 1
+                    "logged_in" => 1
                 ];
 
                 $this->app->set_userdata($session);

@@ -24,8 +24,11 @@ class Startsession extends CI_Controller
 
     function validate_user_sesssion()
     {
-        if ($this->app->is_logged_in() > 0) {
+
+        if (intval($this->app->is_logged_in()) > 0) {
+
             redirect(path_enid("url_home"));
+
         }
     }
 
