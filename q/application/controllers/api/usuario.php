@@ -119,7 +119,7 @@ class usuario extends REST_Controller
             $id_empresa = $param['id_empresa'];
             $grupo = $param['grupo'];
             $in = 0;
-                $data = $this->app->session();
+            $data = $this->app->session();
             switch ($grupo) {
                 case 1:
 
@@ -271,7 +271,8 @@ class usuario extends REST_Controller
                 "tel_contacto_alterno",
                 "lada_negocio",
                 "tel_lada",
-                "sexo"
+                "sexo",
+                "id_departamento"
             ];
             $completo = prm_def($param, 'c');
             $params = ($completo > 0) ? [] : $params;

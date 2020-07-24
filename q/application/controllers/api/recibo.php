@@ -1289,6 +1289,9 @@ class recibo extends REST_Controller
                 $response = render_resumen_pedidos($response,
                     $this->get_estatus_enid_service($param), $param, $session);
 
+            }else{
+                $response = $this->add_comisionistas($response, $param);
+                $response = $this->add_repartidores($response, $param);
             }
         }
         $this->response($response);
