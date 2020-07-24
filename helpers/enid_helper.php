@@ -1737,8 +1737,10 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 "class" => ' white text-uppercase strong text_agilizar ',
             ], 0
         );
+
+        $path = path_enid('login');
         $session = a_enid(
-            " iniciar sesión",
+            "Acceder",
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white borde_amarillo iniciar_session_boton strong",
@@ -1962,6 +1964,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 
     $path = "";
     $base_url = [
+        "top_competencia" => "competencias",
+        "top_competencias" => "competencias/?tipo_top=",
         "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
         "url_home" => "../reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
@@ -2024,10 +2028,10 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
-        "enid_login" => "https://enidservices.com/inicio/login/",
+        "enid_login" => "http://enidservices.com/inicio/login/",
         "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg',
         "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png',
-        "rastreo_pedido" => 'http://enidservices.com/inicio/img_tema/seguimiento.png'
+        "rastreo_pedido" => 'http://enidservices.com/inicio/img_tema/seguimiento.png',
     ];
 
 

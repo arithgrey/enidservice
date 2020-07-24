@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Sess extends REST_Controller
@@ -31,14 +31,13 @@ class Sess extends REST_Controller
                     $id_empresa = $usuario["idempresa"];
                     $response = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
 
-
                     if (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer')) {
+
                         $this->response($response);
                     }
-                    $response = ($response != 0) ? $url : 0;
+
+                    $response = (is_array($response)) ? $url : 0;
                 }
-
-
             }
         }
         $this->response($response);
@@ -87,7 +86,7 @@ class Sess extends REST_Controller
         $perfildata = $this->get_perfil_data($id_usuario);
         $empresa_permiso = $this->get_empresa_permiso($id_empresa);
         $empresa_recurso = $this->get_empresa_recursos($id_empresa);
-
+        $response = 0;
 
         if (es_data($perfiles)) {
 
@@ -95,7 +94,7 @@ class Sess extends REST_Controller
 
             if (es_data($navegacion)) {
 
-                $session = [
+                $response = [
                     "idusuario" => $id_usuario,
                     "nombre" => $nombre,
                     "email" => $email,
@@ -109,12 +108,11 @@ class Sess extends REST_Controller
                     "logged_in" => 1
                 ];
 
-                $this->app->set_userdata($session);
-                return $session;
+                $this->app->set_userdata($response);
             }
-            return 0;
+
         }
-        return 0;
+        return $response;
     }
 
     private function get_empresa($id_empresa)

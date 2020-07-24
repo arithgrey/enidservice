@@ -150,7 +150,7 @@ if (!function_exists('invierte_date_time')) {
                             $nombre,
                             [
                                 "href" => "?q=&q2=" . $row['primer_nivel'],
-                                "class" => 'categorias_mas_vistas '
+                                "class" => "categorias_mas_vistas "
                             ]
                         ),
                         2

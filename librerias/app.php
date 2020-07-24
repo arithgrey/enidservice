@@ -402,10 +402,15 @@ class app extends CI_Controller
     {
 
         $response = [
-
-            "usuario_contacto" =>[
-                "css" =>[
+            
+            "usuario_contacto" => [
+                "css" => [
                     "usuario_contacto.css"
+                ]
+            ],
+            "competencias" => [
+                "css" => [
+                    "competencias.css"
                 ]
             ],
             "stock" => [
@@ -490,7 +495,6 @@ class app extends CI_Controller
                 "css" =>
                     [
                         "contact.css",
-
                     ],
                 "url_img_post" => create_url_preview("images_1.jpg"),
                 "meta_keywords" => "Solicita una llamada aquí",

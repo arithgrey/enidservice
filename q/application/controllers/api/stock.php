@@ -695,8 +695,7 @@ class Stock extends REST_Controller
         return $this->app->api("recibo/solicitudes_periodo_servicio/format/json/", $q);
     }
 
-    private
-    function get_solicitudes_contra_entrega($param)
+    private function get_solicitudes_contra_entrega($param)
     {
 
         $q["cliente"] = "";
