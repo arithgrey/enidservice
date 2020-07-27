@@ -402,7 +402,12 @@ class app extends CI_Controller
     {
 
         $response = [
-            
+            "sobre_ventas" =>[
+                "css" => [
+                    "sobre_vender.css"
+                ]
+
+            ],
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css"
