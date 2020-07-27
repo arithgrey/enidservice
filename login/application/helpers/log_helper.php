@@ -190,6 +190,12 @@ if (!function_exists('invierte_date_time')) {
             'nombre_perfil',
             'id_perfil'
         );
+        $r[] = d(a_enid('¿Cómo funciona?',
+            [
+                "href" => path_enid('sobre_vender'),
+                "class" => "mt-2 black underline"
+            ]
+        ), 'link_como_vender');
         $r[] = place("place_password_afiliado");
         $r[] = tipo_distribucion();
 
@@ -213,7 +219,7 @@ if (!function_exists('invierte_date_time')) {
 
         $titulo = "¿EN QUÉ PUEDES REPARTIR?";
 
-        $reparto_auto =a_enid(
+        $reparto_auto = a_enid(
             "AUTO",
             [
                 "id" => 0,
@@ -255,7 +261,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $seccion_entrega = eleccion_seleccion($titulo,$reparto_auto, $confirmar, $bicicleta_reparto, $pie);
+        $seccion_entrega = eleccion_seleccion($titulo, $reparto_auto, $confirmar, $bicicleta_reparto, $pie);
 
         $response[] = hiddens(
             [
@@ -293,11 +299,12 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
 
     }
-    function eleccion_seleccion($titulo,$reparto_auto, $a, $b, $c, $ext = '')
+
+    function eleccion_seleccion($titulo, $reparto_auto, $a, $b, $c, $ext = '')
     {
 
         $response[] = _titulo($titulo);
-        $contenido = [$reparto_auto,$a, $b, $c];
+        $contenido = [$reparto_auto, $a, $b, $c];
         $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
         return d($response);
     }

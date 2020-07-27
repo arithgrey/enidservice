@@ -39,6 +39,7 @@ let $tiene_auto = $form_registro.find('.tiene_auto');
 let $tiene_moto = $form_registro.find('.tiene_moto');
 let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
 let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
+let $link_como_vender = $form_registro.find('.link_como_vender');
 
 
 $(document).on('ready', () => {
@@ -285,7 +286,16 @@ let facilita_acceso = () => {
 
 let seleccion_entrega = () => {
 
+
     let $id_perfil = parseInt(get_valor_selected('.perfil'));
+
+
+    if ($id_perfil !== 6){
+
+        $link_como_vender.addClass('d-none');
+    }else{
+        $link_como_vender.removeClass('d-none');
+    }
 
     if ($id_perfil !== 21) {
         $seccion_entrega.addClass('d-none');
