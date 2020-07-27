@@ -30,7 +30,11 @@
                         <div>
                             <?= icon('fa fa-check-square mr-5') ?>Entregamos el mismo día que agendas el pedido
                         </div>
-                        <?= format_link('Registra tu cuenta ahora!', ['href' => path_enid('nuevo_usuario'), 'class' => 'mt-5']) ?>
+                        <?php if ($in_session < 1):?>
+                            <?= format_link('Registra tu cuenta ahora!', ['href' => path_enid('nuevo_usuario'), 'class' => 'mt-5']) ?>
+                        <?php  else:?>
+                            <?= format_link('Explorar artículos!', ['href' => path_enid('home'), 'class' => 'mt-5']) ?>
+                        <?php endif;?>
                     </div>
                 </div>
             </div>

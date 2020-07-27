@@ -2641,13 +2641,26 @@ function menu_session_mobil($in_session)
 
 
         $r[] = d(
-            a_enid("accede a tu cuenta",
-                [
-                    "class" => "white font-weight-bold contenedor-lateral-menu w-100 text-uppercase text-right",
-                    "href" => "../login",
-                ]
-            ), 'row w-100'
+            flex(
+                a_enid("Vender",
+                    [
+                        "class" => "white font-weight-bold text-uppercase",
+                        "href" => path_enid('sobre_vender'),
+                    ]
+                )
+                ,
+                a_enid("acceder",
+                    [
+                        "class" => "white font-weight-bold text-uppercase mr-3",
+                        "href" => path_enid('login'),
+                    ]
+                ),
+                _text_(_between,'contenedor-lateral-menu')
+
+            )
+
         );
+
     }
 
 
