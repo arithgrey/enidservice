@@ -1735,7 +1735,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
         $vender = a_enid(
             "vender",
             [
-                "href" => "../login/?action=nuevo",
+                "href" => path_enid('sobre_vender'),
                 "class" => ' white text-uppercase strong text_agilizar ',
             ], 0
         );
@@ -1966,6 +1966,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 
     $path = "";
     $base_url = [
+        "sobre_vender" => "sobre_ventas",
         "top_competencia" => "competencias",
         "top_competencias" => "competencias/?tipo_top=",
         "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
@@ -2034,6 +2035,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "logo_enid" => _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
         "logo_oxxo" => _text("http://enidservices.com/", _web, "/img_tema/portafolio/oxxo-logo.png"),
         "rastreo_pedido" => _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
+        "dispositivo" => "img_tema/dispositivo.png"
     ];
 
 
