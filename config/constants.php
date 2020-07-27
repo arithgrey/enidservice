@@ -13,6 +13,7 @@ define('FOPEN_WRITE_CREATE_STRICT', 'xb');
 define('FOPEN_READ_WRITE_CREATE_STRICT', 'x+b');
 define('version_enid', 'v=1.9.1' . rand());
 define('ICONV_ENABLED', TRUE);
+define('_web', 'web');
 
 /**TEXTOS DE VALIDACIÓN*/
 define('_text_pass', "Ingresa una contraseña de por lo menos 5 caracteres!");

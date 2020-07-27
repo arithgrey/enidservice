@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
                 "puedes hacerlo aquí.",
                 [
                     "style" => "background: blue;color: white;padding: 5px;",
-                    "href" => "http://enidservices.com/inicio/valoracion/?servicio=" . $info["id_recibo"],
+                    "href" => _text("https://enidservices.com/",_web,"/valoracion/?servicio=" , $info["id_recibo"]),
                 ]
             );
             $r[] = d("Estamos en contacto y no dudes en contactarnos para este u otro tema relacionado!");
@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = a_enid("Le recordamos que puede acceder a su cuenta Enid Service a través de este enlace",
             [
-                "href" => "http://enidservices.com/inicio/login",
+                "href" => _text("https://enidservices.com/",_web,"/login"),
                 "style" => "background: blue;color: white;padding: 5px;",
             ]);
 
@@ -132,16 +132,16 @@ if (!function_exists('invierte_date_time')) {
           que están en busca de lo que ofreces! ");
         $r[] = a_enid("Puedes acceder a su cuenta Enid Service aquí!",
             [
-                "href" => "http://enidservices.com/inicio/login",
+                "href" => _text("https://enidservices.com/",_web,"/login"),
                 "style" => "background: blue;color: white;padding: 5px;",
             ]);
 
         $r[] = a_enid(img([
-            "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+            "src" => _text("https://enidservices.com/",_web,"/img_tema/enid_service_logo.jpg"),
             "width" => "300px",
         ]),
             [
-                "href" => "http://enidservices.com/",
+                "href" => "https://enidservices.com/",
             ]);
         $r[] = hr();
 

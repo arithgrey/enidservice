@@ -54,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
 
         $buzon = a_enid("buzón aquí",
             [
-                "href" => "https://enidservices.com/inicio/login/"
+                "href" => _text("https://enidservices.com/",_web,"/login/")
             ]
         );
         $asunto = "HOLA {$nombre} TIENES UNA 
@@ -81,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $buzon = a_enid("buzón aquí",
             [
-                "href" => "https://enidservices.com/inicio/login/"
+                "href" => _text("https://enidservices.com/",_web,"/login/")
             ]
         );
         $asunto = "HOLA {$nombre} TIENES UNA NUEVA RESPUESTA EN TU BUZÓN";
@@ -222,27 +222,4 @@ if (!function_exists('invierte_date_time')) {
         return $text;
     }
 
-//
-//    function get_notificacion_pregunta($usuario)
-//    {
-//
-//        $response = [];
-//        if (es_data($usuario)) {
-//
-//            $usuario = $usuario[0];
-//            $nombre = $usuario["nombre"];
-//            $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO
-//            EN UNO DE TUS ARTÍCULOS";
-//            $text = "Que tal {$nombre} un nuevo cliente desea saber más sobre uno de tu
-//            artículos, puedes ver la pregunta que te envió en tu !";
-//            $link = a_enid("buzón aquí", "https://enidservices.com/inicio/login/");
-//            $cuerpo[] = img_enid([], 1, 1);
-//            $cuerpo[] = h(_text($text, $link), 5);
-//            $response = append($cuerpo);
-//
-//            $response = get_request_email($usuario["email"], $asunto, $response);
-//        }
-//
-//        return $response;
-//    }
 }

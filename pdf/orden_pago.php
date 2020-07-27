@@ -51,7 +51,7 @@ class Imprimir
         $pdf->Text(28, 160, $numero_cuenta);
 
 
-        $pdf->Image("http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+        $pdf->Image(_text("http://enidservices.com/",_web,"/img_tema/enid_service_logo.jpg"),
             120,
             90,
             60,

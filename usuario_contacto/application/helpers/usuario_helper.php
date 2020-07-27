@@ -24,11 +24,18 @@ if (!function_exists('invierte_date_time')) {
             $nombre = format_nombre($usuario_busqueda);
             $descripcion[] = h($nombre, 1, ['class' => 'display-2 text-uppercase strong']);
 
-            $contenido[] = img(
-                [
-                    'src' => path_enid("imagen_usuario", $id_usuario),
-                    "onerror" => "this.src='../img_tema/user/user.png'"
-                ]
+            $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
+
+            $contenido[] = a_enid(
+                img(
+                    [
+                        "src" => path_enid("imagen_usuario", $id_usuario),
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        "class" => "rounded-circle img_servicio_def"
+                    ]
+                )
+                ,
+                $link
             );
 
             $texto_puesto = _text_('Equipo', strong($nombre_perfil));

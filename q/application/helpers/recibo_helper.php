@@ -317,7 +317,7 @@ if (!function_exists('invierte_date_time')) {
 
             $usuario = $usuario[0];
 
-            $url = "https://enidservices.com/inicio/valoracion/?servicio=" . $id_servicio;
+            $url = _text("https://enidservices.com/",_web,"/valoracion/?servicio=" , $id_servicio);
             $r[] = img_enid([], 1, 1);
             $r[] = h("¿Valorarías tu experiencia de compra en Enid Service?", 3);
             $r[] = d("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");

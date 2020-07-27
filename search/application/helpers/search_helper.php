@@ -30,11 +30,13 @@ if (!function_exists('invierte_date_time')) {
         $busqueda = $data["busqueda"];
 
 
-        $x[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile),13);
-        $x[] = d($data["lista_productos"],13);
+
+        $x[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
+        $x[] = d($data["lista_productos"], 13);
+
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = d(_titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 '),13);
+        $z[] = d(_titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 '), 13);
 
         if ($is_mobile < 1) {
             $z[] = d(img(
@@ -42,11 +44,11 @@ if (!function_exists('invierte_date_time')) {
                     "src" => "../img_tema/productos/ejemplo.png",
                     'class' => 'd-none d-md-block'
                 ]
-            ),'row mt-4');
+            ), 'row mt-4');
         }
 
 
-        $z[] = d(get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda),13);
+        $z[] = d(get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda), 13);
 
         $fil[] = d($z, 3);
 
@@ -72,7 +74,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
-        $r[] = d(h('"' . prm_def($param, "q","") . '".', 4, "strong letter-spacing-15 fz_30"));
+        $r[] = d(h('"' . prm_def($param, "q", "") . '".', 4, "strong letter-spacing-15 fz_30"));
         $r[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
 
         $z[] = "<form action='../search' class='mt-5'>";
@@ -235,7 +237,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($t);
         $r[] = append($sec);
 
-        return d(d($r, ' mt-5 d-md-flex  align-items-center ' . $extra),13);
+        return d(d($r, ' mt-5 d-md-flex  align-items-center ' . $extra), 13);
 
     }
 

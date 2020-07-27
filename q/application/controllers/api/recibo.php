@@ -1118,7 +1118,7 @@ class recibo extends REST_Controller
             }
 
 
-            $url_request = "https://enidservices.com/inicio/";
+            $url_request = _text("https://enidservices.com/", _web, "/");
             $url_pago_oxxo = _text(
                 $url_request,
                 "orden_pago_oxxo/?q=",
@@ -1131,11 +1131,11 @@ class recibo extends REST_Controller
 
             $url_pago_paypal = "https://www.paypal.me/eniservice/" . $saldo_pendiente;
             $config_log = [
-                'src' => "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+                'src' => _text_("https://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
                 'width' => '100',
             ];
-            $img_oxxo = "https://enidservices.com/inicio/img_tema/pago-oxxo.jpeg";
-            $img_paypal = "https://enidservices.com/inicio/img_tema/explicacion-pago-en-linea.png";
+            $img_oxxo = _text("https://enidservices.com/",_web,"/img_tema/pago-oxxo.jpeg");
+            $img_paypal = _text("https://enidservices.com/",_web,"/img_tema/explicacion-pago-en-linea.png");
             $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
 
 
@@ -1289,7 +1289,7 @@ class recibo extends REST_Controller
                 $response = render_resumen_pedidos($response,
                     $this->get_estatus_enid_service($param), $param, $session);
 
-            }else{
+            } else {
                 $response = $this->add_comisionistas($response, $param);
                 $response = $this->add_repartidores($response, $param);
             }

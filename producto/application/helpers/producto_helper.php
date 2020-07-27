@@ -383,7 +383,7 @@ if (!function_exists('invierte_date_time')) {
 
     function url_post($id_servicio)
     {
-        return "http://enidservices.com/inicio/img_tema/productos/" . $id_servicio;
+        return _text("http://enidservices.com/",_web,"/img_tema/productos/" . $id_servicio);
     }
 
     function costruye_meta_keyword($servicio)

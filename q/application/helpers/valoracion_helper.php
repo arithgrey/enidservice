@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
             $email = $u["email"];
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 
-            puedes consultarla aquí " . a_enid("buzón aquí", ["href" => "https://enidservices.com/inicio/producto/?producto={$id_servicio}&valoracion=1"]);
+            puedes consultarla aquí " . a_enid("buzón aquí", ["href" => "https://enidservices.com/web/producto/?producto={$id_servicio}&valoracion=1"]);
             $cuerpo = img_enid([], 1, 1) . h($text, 5);
             return get_request_email($email, $asunto, $cuerpo);
 

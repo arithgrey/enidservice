@@ -692,11 +692,11 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = h(add_text("HOLA, ", strtoupper($nombre)), 3);
         $r[] = d(img([
-            "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+            "src" => _text("https://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
             "style" => "width: 100%",
         ]));
         $r[] = d("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
-        $r[] = d("Si es así ignora este correo, en caso contrario notificanos aquí http://enidservices.com/inicio/contact/");
+        $r[] = d(_text("Si es así ignora este correo, en caso contrario notificanos aquí https://enidservices.com/",_web,"/contact/"));
 
         return append($r);
 
@@ -711,7 +711,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
             img(
                 [
-                    "src" => "http://enidservices.com/inicio/img_tema/enid_service_logo.jpg",
+                    "src" => _text("https://enidservices.com/",_web,"/img_tema/enid_service_logo.jpg"),
                     "style" => "width: 100%",
                 ]),
             [
@@ -724,7 +724,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br();
         $r[] = a_enid("ACCEDE A TU CUENTA AHORA!",
             [
-                "href" => "http://enidservices.com/inicio/login/",
+                "href" => _text("https://enidservices.com/",_web,"/login/"),
                 "target" => "_blank",
                 "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;",
             ]);
@@ -1466,8 +1466,8 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d(_titulo($titulo));
                 $r[] = append($ventas_hoy);
                 $r[] = append($ventas_posteriores);
-                $r[] = d(icon(_text_(_mas_opciones_bajo_icon, 'fa-2x mt-3 mas_ventas_notificacion')),'text-center ');
-                $r[] = d(icon(_text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none')),'text-center ');
+                $r[] = d(icon(_text_(_mas_opciones_bajo_icon, 'fa-2x mt-3 mas_ventas_notificacion')), 'text-center ');
+                $r[] = d(icon(_text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none')), 'text-center ');
             }
 
         }

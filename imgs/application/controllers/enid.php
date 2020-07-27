@@ -21,7 +21,7 @@ class Enid extends CI_Controller
     function get_img_contents($data)
     {
 
-        $path = "http://" . $_SERVER['HTTP_HOST'] . "/inicio/img_tema/productos/" . $data["nombre_imagen"];
+        $path = _text("http://", $_SERVER['HTTP_HOST'], "/", _web, "/img_tema/productos/", $data["nombre_imagen"]);
         return $this->output->set_content_type('png')->set_output(file_get_contents($path));
 
     }

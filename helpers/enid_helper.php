@@ -546,7 +546,9 @@ function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
 function get_url_request($extra)
 {
 
-    return _text("http://", $_SERVER['HTTP_HOST'], "/inicio/", $extra);
+    $web = _text("https://", $_SERVER['HTTP_HOST'], "/", _web, "/", $extra);
+    $local = _text("http://", $_SERVER['HTTP_HOST'], "/", _web, "/", $extra);
+    return (es_local()) ? $local : $web;
 
 }
 
@@ -809,7 +811,7 @@ function img_enid($extra = [], $row_12 = 0, $external = 0)
 
     $conf["src"] = ($external == 0) ?
         "../img_tema/enid_service_logo.jpg" :
-        "https://enidservices.com/inicio/img_tema/enid_service_logo.jpg";
+        _text("https://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg");
 
     if (es_data($extra)) {
         $conf += $extra;
@@ -937,7 +939,7 @@ function get_url_tienda($id_usuario)
 {
 
     return _text(
-        "http://", $_SERVER['HTTP_HOST'], "/inicio/search/?q3=", $id_usuario, '&tienda=1');
+        "https://", $_SERVER['HTTP_HOST'], "/", _web, "/search/?q3=", $id_usuario, '&tienda=1');
 
 }
 
@@ -1371,7 +1373,7 @@ function evita_basura($text)
     return $b;
 }
 
-function get_logo( $session = 0)
+function get_logo($session = 0)
 {
 
     if (is_mobile()) {
@@ -1635,7 +1637,7 @@ function img_servicio($id, $external = 0)
 {
     $url = ($external > 0) ?
         _text(
-            "http://enidservices.com/inicio/imgs/index.php/enid/imagen_servicio/", $id
+            "http://enidservices.com/", _web, "/imgs/index.php/enid/imagen_servicio/", $id
         ) :
         get_url_request(_text("imgs/index.php/enid/imagen_servicio/", $id));
 
@@ -2028,10 +2030,10 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "valoracion_servicio" => "valoracion/?servicio=",
         "enid" => "https://enidservices.com",
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
-        "enid_login" => "http://enidservices.com/inicio/login/",
-        "logo_enid" => 'http://enidservices.com/inicio/img_tema/enid_service_logo.jpg',
-        "logo_oxxo" => 'http://enidservices.com/inicio/img_tema/portafolio/oxxo-logo.png',
-        "rastreo_pedido" => 'http://enidservices.com/inicio/img_tema/seguimiento.png',
+        "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
+        "logo_enid" => _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
+        "logo_oxxo" => _text("http://enidservices.com/", _web, "/img_tema/portafolio/oxxo-logo.png"),
+        "rastreo_pedido" => _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
     ];
 
 
@@ -3176,6 +3178,7 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
             $response[] = get_menu_session($in_session, $proceso_compra);
             $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
             $response[] = frm_search($clasificaciones_departamentos, $in_session);
+            $response[] = d(p('Realiza tu pedido y paga hasta tu entrega!', 'white f12'), 'd-md-flex justify-content-end mt-3');
         } else {
             $response[] = get_logo($in_session);
         }

@@ -120,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
 
             img(
                 [
-                    "src" => "http://enidservices.com/inicio/img_tema/bancos/4.png",
+                    "src" => _text("http://enidservices.com/",_web,"/img_tema/bancos/4.png"),
                     "style" => "width:110px!important;",
                     'class' => 'ml-2'
                 ]
