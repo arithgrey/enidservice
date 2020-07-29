@@ -317,7 +317,7 @@ if (!function_exists('invierte_date_time')) {
 
             $usuario = $usuario[0];
 
-            $url = _text("https://enidservices.com/",_web,"/valoracion/?servicio=" , $id_servicio);
+            $url = _text("https://enidservices.com/", _web, "/valoracion/?servicio=", $id_servicio);
             $r[] = img_enid([], 1, 1);
             $r[] = h("¿Valorarías tu experiencia de compra en Enid Service?", 3);
             $r[] = d("Nos encantará hacer todo lo necesario para que tu experiencia de compra sea la mejor");
@@ -1322,25 +1322,24 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function repartidor_disponible($repartidores_en_entrega, $repartidores)
+    function repartidor_disponible(array $repartidores_en_entrega, array $repartidores)
     {
 
 
         $id_usuario = 1;
         if (es_data($repartidores)) {
 
-            $array_repartidores = array_column($repartidores, 'idusuario');
             $array_repartidores_entrega = array_column($repartidores_en_entrega, 'id_usuario_entrega');
-
+            $array_repartidores_entrega = array_unique($array_repartidores_entrega);
 
             if (es_data($array_repartidores_entrega) && $array_repartidores_entrega[0] < 1) {
 
-                $id_usuario = $array_repartidores[0];
+                $id_usuario = $repartidores[0];
 
             } else {
 
-                $ocupados = array_intersect($array_repartidores, $array_repartidores_entrega);
-                $disponibles = elimina_ocupados($array_repartidores, $ocupados);
+                $ocupados = array_intersect($repartidores, $array_repartidores_entrega);
+                $disponibles = elimina_ocupados($repartidores, $ocupados);
                 $id_usuario = proximo_disponible($disponibles, $id_usuario);
 
             }

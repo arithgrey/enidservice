@@ -626,9 +626,11 @@ class usuario_model extends CI_Model
                 WHERE       
                 1 = 1
                 " . $extra_moto . "
-                AND  idusuario in ( $ids )";
+                AND  idusuario IN ( $ids )";
 
-            $response[] = $this->db->query($query_get)->result_array();
+            $usuarios_moto = $this->db->query($query_get)->result_array();
+            $response = $this->simplifica_usuarios($response, $usuarios_moto);
+
         }
 
         if ($bicicleta > 0) {
@@ -639,9 +641,10 @@ class usuario_model extends CI_Model
                 WHERE
                 1 = 1        
                 " . $extra_bicicleta . "
-                AND  idusuario in ( $ids )";
+                AND  idusuario IN ( $ids )";
 
-            $response[] = $this->db->query($query_get)->result_array();
+            $usuarios_bicicleta = $this->db->query($query_get)->result_array();
+            $response = $this->simplifica_usuarios($response, $usuarios_bicicleta);
         }
 
         if ($pie > 0) {
@@ -651,13 +654,29 @@ class usuario_model extends CI_Model
                 WHERE    
                 1 = 1   
                 " . $extra_pie . "
-                AND  idusuario in ( $ids )";
+                AND  idusuario IN ( $ids )";
 
-            $response[] = $this->db->query($query_get)->result_array();
+            $usuarios_pie = $this->db->query($query_get)->result_array();
+            $response = $this->simplifica_usuarios($response, $usuarios_pie);
         }
 
         return $response;
 
+    }
+
+    function simplifica_usuarios($data_base, $usuarios)
+    {
+
+        if (es_data($usuarios)) {
+
+            foreach ($usuarios as $row) {
+
+
+                $data_base[] = $row['id_usuario'];
+            }
+
+        }
+        return $data_base;
     }
 
     function entregas_auto($ids)
@@ -671,7 +690,8 @@ class usuario_model extends CI_Model
                  AND 
                 idusuario in ($ids)";
 
-        return $this->db->query($query_get)->result_array();
+        $usuarios_auto = $this->db->query($query_get)->result_array();
+        return $this->simplifica_usuarios([], $usuarios_auto);
 
     }
 

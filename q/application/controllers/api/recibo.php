@@ -566,7 +566,6 @@ class recibo extends REST_Controller
             $id_recibo = $param['id'];
             $id_servicio = $this->servicio_recibo($id_recibo);
 
-
             $params = [
                 "status" => 16,
                 "saldo_cubierto" => 0,
@@ -1921,9 +1920,7 @@ class recibo extends REST_Controller
             'moto' => pr($servicio, 'moto'),
             'bicicleta' => pr($servicio, 'bicicleta'),
             'pie' => pr($servicio, 'pie'),
-
         ];
-
 
         return $this->app->api("usuario_perfil/repartidores/format/json/", $q);
     }

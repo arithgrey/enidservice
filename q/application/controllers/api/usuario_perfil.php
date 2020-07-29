@@ -77,44 +77,48 @@ class usuario_perfil extends REST_Controller
             ];
         $response = $this->usuario_perfil_model->get([], $params, 100);
 
-        if (fx($param, "requiere_auto,moto,bicicleta,pie")) {
-            $response = $this->usuarios_entregas($response, $param);
-        }
+        $requiere_auto = array_key_exists("requiere_auto", $param);
+        $moto = array_key_exists("moto", $param);
+        $bicicleta = array_key_exists("bicicleta", $param);
+        $pie = array_key_exists("pie", $param);
 
+        if ($requiere_auto) {
+            if ($moto === $bicicleta && $bicicleta === $pie) {
+                $response = $this->usuarios_entregas($response, $param);
+            }
+        }
         $this->response($response);
     }
 
     private function usuarios_entregas($usuarios, $filtros)
     {
 
-        $ids = [];
-        foreach ($usuarios as $row) {
+        $repartidores = [];
+        if (es_data($usuarios)) {
 
-            $ids[] = $row['idusuario'];
-        }
+            $q = [
+                'ids' => array_column($usuarios, "idusuario"),
+                'requiere_auto' => $filtros['requiere_auto'],
+                'moto' => $filtros['moto'],
+                'bicicleta' => $filtros['bicicleta'],
+                'pie' => $filtros['pie']
+            ];
 
-        $q = [
-            'ids' => get_keys($ids),
-            'requiere_auto' => $filtros['requiere_auto'],
-            'moto' => $filtros['moto'],
-            'bicicleta' => $filtros['bicicleta'],
-            'pie' => $filtros['pie']
-        ];
+            $usuarios_entrega = $this->app->api("usuario/entrega/format/json/", $q);
 
-        $response = $this->app->api("usuario/entrega/format/json/", $q);
+            if (es_data($usuarios_entrega)) {
 
-        $repartidores =  [];
-        foreach ($usuarios as $row){
+                foreach ($usuarios as $row) {
 
-            $idusuario =  $row['idusuario'];
-            foreach ($response as $usr){
+                    $idusuario = $row['idusuario'];
+                    if (in_array($idusuario, $usuarios_entrega)) {
+                        $repartidores[] = $idusuario;
+                    }
 
-                $id_usuario_filtro = (!es_data($usr['idusuario'])) ? $usr['idusuario'] : $usr['idusuario']['id_usuario'];
-                if($idusuario == $id_usuario_filtro){
-                    $repartidores[] = $row;
                 }
             }
         }
+
         return $repartidores;
 
     }

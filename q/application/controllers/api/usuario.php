@@ -1237,9 +1237,10 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
 
-        if (fx($param, "ids,requiere_auto,moto,bicicleta,pie")) {
+        if (fx($param, "requiere_auto,moto,bicicleta,pie") && array_key_exists("ids", $param)) {
 
-            $ids = $param['ids'];
+            $ids_usuario = $param["ids"];
+            $ids = (is_array($ids_usuario)) ? get_keys($ids_usuario) : $ids_usuario;
             $requiere_auto = $param['requiere_auto'];
             $moto = $param['moto'];
             $bicicleta = $param['bicicleta'];
@@ -1247,28 +1248,16 @@ class usuario extends REST_Controller
 
             if ($requiere_auto > 0) {
 
-                $data_complete = $this->usuario_model->entregas_auto($ids);
+                $response = $this->usuario_model->entregas_auto($ids);
 
             } else {
 
-
-                $data_complete = $this->usuario_model->entregas($ids
+                $response = $this->usuario_model->entregas($ids
                     , $moto
                     , $bicicleta
                     , $pie
                 );
 
-
-            }
-            if (es_data($data_complete)) {
-
-                foreach ($data_complete as $row) {
-
-                    foreach ($row as $temp) {
-
-                        $response[]['idusuario'] = $temp;
-                    }
-                }
             }
 
         }

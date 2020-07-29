@@ -105,18 +105,26 @@ class ubicacion extends REST_Controller
                 $seguimiento = path_enid('pedidos_recibo', $id_recibo);
                 $siguiente = ($es_cliente) ? $area_cliente : $seguimiento;
 
+                $reparto = $this->asigna_reparto($id_recibo);
                 $response = [
                     'id_ubicacion' => $id_ubicacion,
                     'es_cliente' => $es_cliente,
                     'id_recibo' => $id_recibo,
-                    'siguiente' => $siguiente
+                    'siguiente' => $siguiente,
+                    'asignacion_repatidor' => $reparto
                 ];
+
             }
 
 
         }
         $this->response($response);
     }
+    private function asigna_reparto($id_recibo)
+    {
+        return $this->app->api("recibo/reparto", ['id' => $id_recibo], "json", "PUT");
+    }
+
 
     function index_GET()
     {

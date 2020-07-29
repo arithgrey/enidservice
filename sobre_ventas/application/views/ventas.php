@@ -7,28 +7,30 @@
                         <?= icon(_mas_opciones_icon) ?>
                     </div>
                     <div class="feature-content">
-                        <h2>Aumenta tus ingresos a tus tiempos sin alguna inversión </h2>
+                        <h2>Aumenta tus ingresos desde tu hogar</h2>
                         <p class="lead"></p>
                         <hr class="m-t-30 m-b-30">
-                        <p>Conecta nuevos clientes a tu cuenta y gana por por tu referencia una comisión, tu agendas el
-                            pedido y nosotros lo entregamos, cuando el cliente recibe nosotros te transferimos tu
-                            ganancia!</p>
-                        <div>
+                        <p>
+                            Recomienda clientes y gana por tu referencia, tu agendas el pedido y nosotros entregamos, cuando el cliente recibe nosotros te pagamos tu ganancia!
+                        </p>
+
+                        <div class="mt-1">
+                            <?= icon('fa fa-check-square mr-5') ?>Se tu propio jefe y administra tus tiempos
+                        </div>
+                        <div class="mt-1">
                             <?= icon('fa fa-check-square mr-5') ?>No es necesaria ninguna inversión
                         </div>
-                        <div>
+                        <div class="mt-1">
                             <?= icon('fa fa-check-square mr-5') ?>El cliente paga cuando recibe
                         </div>
-                        <div>
-                            <?= icon('fa fa-check-square mr-5') ?>Sólo te concentras en agendar pedidos mientras
-                            nosotros hacemos las entregas
+                        <div class="mt-1">
+                            <?= icon('fa fa-check-square mr-5') ?>Realizas la venta, nosotros entregamos
                         </div>
-                        <div>
-                            <?= icon('fa fa-check-square mr-5') ?>Puedes agendar pedidos que provengan desde cualquier
-                            red social e incluso a tus conocidos
+                        <div class="mt-1">
+                            <?= icon('fa fa-check-square mr-5') ?>Entregamos el mismo día
                         </div>
-                        <div>
-                            <?= icon('fa fa-check-square mr-5') ?>Entregamos el mismo día que agendas el pedido
+                        <div class="mt-1">
+                            <?= icon('fa fa-check-square mr-5') ?>Puedes traer clientes desde cualquier red social e incluso  recomendarnos con tus  conocidos
                         </div>
                         <?php if ($in_session < 1):?>
                             <?= format_link('Registra tu cuenta ahora!', ['href' => path_enid('nuevo_usuario'), 'class' => 'mt-5']) ?>

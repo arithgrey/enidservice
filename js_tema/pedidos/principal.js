@@ -978,7 +978,7 @@ let response_nuevo_repartidor = function (data) {
 };
 let valida_registro_articulo_interes = () => {
 
-    debugger;
+
     let $se_registra_articulo_interes = $registro_articulo_interes.val();
     let $en_lista_negra = $es_lista_negra.val();
 
@@ -993,6 +993,7 @@ let valida_registro_articulo_interes = () => {
 
     }
 };
+
 let response_form_interes = function (data) {
 
     modal(data);
