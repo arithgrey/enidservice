@@ -2655,7 +2655,7 @@ function menu_session_mobil($in_session)
                         "href" => path_enid('login'),
                     ]
                 ),
-                _text_(_between,'contenedor-lateral-menu')
+                _text_(_between, 'contenedor-lateral-menu')
 
             )
 

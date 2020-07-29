@@ -94,12 +94,19 @@ class Cobranza extends REST_Controller
                     $data_orden = $recibo['data_orden'];
                     $data_orden['orden_creada'] = 1;
                     $data_orden["id_recibo"] = $id_recibo;
+                    $data_orden['asignacion_reparto'] = $this->asigna_reparto($id_recibo);
+
                     $response = $this->posterior_compra(
                         $data_orden, $id_recibo, $id_servicio, $param, $es_nuevo);
                 }
             }
         }
         $this->response($data_orden);
+    }
+
+    private function asigna_reparto($id_recibo)
+    {
+        return $this->app->api("recibo/reparto", ['id' => $id_recibo], "json", "PUT");
     }
 
     function get_precio_id_servicio($id_servicio)
@@ -241,6 +248,7 @@ class Cobranza extends REST_Controller
 
         return $this->app->api("recibo_comentario/index", $q, "json", "POST");
     }
+
 
     function posterior_compra($data_orden, $id_recibo, $id_servicio, $param, $es_nuevo)
     {
@@ -608,7 +616,7 @@ class Cobranza extends REST_Controller
     private function valida_costo_envio($id_recibo, $punto_encuentro)
     {
         $q = ['punto_encuentro' => $punto_encuentro];
-        $costo_entrega =  $this->get_costo_envio_punto_encuentro($q);
+        $costo_entrega = $this->get_costo_envio_punto_encuentro($q);
 
         $q = [
             "recibo" => $id_recibo,
