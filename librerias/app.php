@@ -402,7 +402,16 @@ class app extends CI_Controller
     {
 
         $response = [
-            "sobre_ventas" =>[
+            "puntuacion" => [
+                "css" => [
+                    "puntuacion.css",
+
+                ],
+                "js" => [
+                    "principal.js"
+                ]
+            ],
+            "sobre_ventas" => [
                 "css" => [
                     "sobre_vender.css"
                 ]
@@ -411,6 +420,9 @@ class app extends CI_Controller
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css"
+                ],
+                "js" => [
+                    "usuario_contacto/principal.js"
                 ]
             ],
             "competencias" => [

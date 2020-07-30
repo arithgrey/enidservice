@@ -1282,7 +1282,7 @@ select {
 }
 
 .bg_white {
-    background: white;
+    background: white!important;
 }
 
 .bg_custom_blue {

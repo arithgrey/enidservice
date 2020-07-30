@@ -60,11 +60,4 @@ class Home extends CI_Controller
 
         }
     }
-
-//    private function frm_valoracion($q)
-//    {
-//
-//        return $this->app->api("valoracion/valoracion_form/format/json/", $q);
-//
-//    }
 }

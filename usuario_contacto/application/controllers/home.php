@@ -25,8 +25,18 @@ class Home extends CI_Controller
 
         $data['usuario_busqueda'] = $this->app->usuario($id_usuario);
         $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
+        $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
+        $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session']);
+        $data['encuesta'] =  prm_def($this->input->get(),'encuesta');
         $this->app->pagina($data, render($data), 1);
 
+    }
+
+    private function tipo_tipificciones($in_session)
+    {
+
+        $in_session = ($in_session) ? 1 : 0;
+        return $this->app->api("tipo_puntuacion/tipo/format/json/", ["in_session" => $in_session]);
 
     }
 
@@ -34,7 +44,14 @@ class Home extends CI_Controller
     {
 
         $q["id_usuario"] = $id_usuario;
-        $api = "perfiles/data_usuario/format/json/";
+        return $this->app->api("perfiles/data_usuario/format/json/", $q);
+    }
+
+    private function usuario_calificacion($id_usuario)
+    {
+
+        $q["id_usuario"] = $id_usuario;
+        $api = "puntuacion/general/format/json/";
         return $this->app->api($api, $q);
     }
 
