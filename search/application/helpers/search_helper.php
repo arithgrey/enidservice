@@ -36,21 +36,21 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = d(_titulo("filtra tu búsqueda", 0, 'mt-5 mt-md-0 '), 13);
+        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2');
 
         if ($is_mobile < 1) {
-            $z[] = d(img(
+            $z[] = img(
                 [
-                    "src" => "../img_tema/productos/ejemplo.png",
+                    "src" => "../img_tema/productos/runner.jpeg",
                     'class' => 'd-none d-md-block'
                 ]
-            ), 'row mt-4');
+            );
         }
 
 
-        $z[] = d(get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda), 13);
+        $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
-        $fil[] = d($z, 3);
+        $fil[] = d( d($z,'seccion_categorias_desglose p-3 '), 'col-sm-2');
 
 
         $seccion = _text(
@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $fil[] = d($seccion, 'col-lg-9');
+        $fil[] = d($seccion, 'col-lg-8 col-md-offset-1');
         $r[] = d($fil, "col-lg-12 mt-md-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
         $r[] = append($cat);
@@ -161,8 +161,8 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return d(
-            d($r, "col-lg-8 col-lg-offset-2 d-flex  flex-row align-items-end text-center black strong"),
-            'contenedor_anuncios_home col-lg-12  mb-5 p-3 bg-light d-none d-md-block');
+            d($r, "col-lg-8 col-lg-offset-2 d-flex flex-row align-items-end text-center white strong"),
+            'contenedor_anuncios_home col-lg-12  mb-5 p-3 d-none d-md-block');
 
 
     }
@@ -203,7 +203,7 @@ if (!function_exists('invierte_date_time')) {
             $response = d($r, "contenedor_sub_categorias");
 
         }
-        return d(d($response, 'contenedor_menu_productos_sugeridos'), "d-none d-md-block  mt-md-5 w-100");
+        return d(d($response, 'contenedor_menu_productos_sugeridos p-3 bg_white'), "d-none d-md-block  mt-md-5 w-100");
     }
 
     function crea_sub_menu_categorias_destacadas($param)

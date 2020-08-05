@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
 
         $a = _text_(
-            _titulo("SELECCIONA TU TIPO DE ENTREGA")
+            h("SELECCIONA TU TIPO DE ENTREGA",3,'white')
             ,
             punto_entrega($id_servicio, $orden_pedido)
             ,
@@ -33,7 +33,7 @@ if (!function_exists('invierte_date_time')) {
 
             "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center p-md-0"
             ,
-            "col-lg-4 p-0",
+            "col-lg-4 p-3 azul_contraste_deporte",
             "col-lg-8 mt-sm-5 text-center"
         );
         return d($r, 'mt-5 w-100');
@@ -69,12 +69,12 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
 
-            d($imagenes["preview"], " align-self-center col-lg-2 d-none d-lg-block d-xl-block d-md-block d-xl-none "),
+            d($imagenes["preview"], " align-self-center mx-auto col-lg-2 d-none d-lg-block d-xl-block d-md-block d-xl-none aviso_comision pt-3 pb-3"),
             d($imagenes["imagenes_contenido"], " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 col-lg-6 col-lg-offset-3 align-self-center"),
             "d-flex col-lg-9 mb-5"
         );
 
-        $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row bg-light");
+        $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
 
         $titulo = substr(strtoupper($nombre), 0, 70);
         if ($es_servicio < 1):
@@ -133,7 +133,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
 
-        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, "strong mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
+        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, " mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100"), 10, 1);
 
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
@@ -230,19 +230,16 @@ if (!function_exists('invierte_date_time')) {
     function mensajeria($id_servicio, $orden_pedido)
     {
 
-        $r[] = d(icon('fa fa-truck fa-3x'));
+        $r[] = d(icon('fa fa-truck fa-3x black'));
         $r[] = h("MENSAJERÍA", 4, "strong black");
-        $r[] = d("LO ENVIAMOS A CASA U OFICINA", "text");
+        $r[] = d("lo llevamos a tu domicilio", "text text-uppercase black");
 
-        $response = d($r,
+        return  d($r,
             [
                 "class" => "cursor_pointer p-4 mt-5 bg-light mb-5 mh-selector d-flex flex-column justify-content-center selector_entrega ",
                 "onclick" => "carga_opcion_entrega(2, " . $id_servicio . " , " . $orden_pedido . " );"
             ]
         );
-
-        return $response;
-
 
     }
 
@@ -617,7 +614,7 @@ if (!function_exists('invierte_date_time')) {
                     [
                         'src' => $url,
                         'alt' => $nombre_servicio,
-                        'class' => 'col-lg-8 mt-2 border cursor_pointer ' . $extra_class,
+                        'class' => 'col-lg-8 mt-2 border cursor_pointer col-lg-offset-2 bg_white ' . $extra_class,
                         'id' => $z,
                         'data-toggle' => 'tab',
                         'href' => "#imagen_tab_" . $z
@@ -753,14 +750,13 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(img(["src" => "../img_tema/linea_metro/metro.jpg", "class" => "icono_metro"]));
         $r[] = h("PUNTO MEDIO", 4, "strong");
-        $r[] = d(d("PAGO CONTRA ENTREGA "), "text");
-        $response = d($r,
+        $r[] = d(d("PAGO CONTRA ENTREGA ", 'black'), "text");
+        return d($r,
             [
                 "class" => " cursor_pointer p-4 bg-light mh-selector d-flex flex-column justify-content-center selector_entrega mt-5",
                 "onclick" => "carga_opcion_entrega(1, " . $id_servicio . " , " . $orden_pedido . " );"
             ]
         );
-        return $response;
 
     }
 

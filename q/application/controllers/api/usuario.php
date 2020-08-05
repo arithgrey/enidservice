@@ -44,6 +44,22 @@ class usuario extends REST_Controller
 
     }
 
+    function puntuacion_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "puntuacion,id_usuario")) {
+
+            $id_usuario = $param["id_usuario"];
+            $puntuacion = $param["puntuacion"];
+
+            $response = $this->usuario_model->q_up("puntuacion", $puntuacion, $id_usuario);
+
+        }
+        $this->response($response);
+
+    }
+
     function status_PUT()
     {
         $param = $this->put();

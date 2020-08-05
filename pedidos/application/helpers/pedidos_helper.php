@@ -3,6 +3,37 @@
 }
 if (!function_exists('invierte_date_time')) {
 
+    function texto_pre_pedido($recibo, $data)
+    {
+
+
+        $path = pr($recibo, "url_img_servicio");
+        $nombre_cliente = '';
+        $numero_telefonico = '';
+
+        $usuario_cliente = prm_def($data,'usuario_cliente');
+        if (es_data($usuario_cliente)) {
+            $nombre_cliente = format_nombre($usuario_cliente);
+            $numero_telefonico = phoneFormat(pr($usuario_cliente, 'tel_contacto'));
+
+        }
+
+        $texto_previo = _text_(
+            'Orden de compra #',
+            pr($recibo,'id_proyecto_persona_forma_pago'),
+            'cliente',
+            $nombre_cliente,
+            'tel',
+            $numero_telefonico
+        );
+
+        $data['url_img_post'] = path_imagen_web($path);
+        $data['titulo'] = strtoupper($texto_previo);
+        return $data;
+
+
+    }
+
     function propietario($data, $usurio_actual, $usuario_venta, $id_usuario_referencia, $si_falla = FALSE)
     {
 
@@ -381,8 +412,6 @@ if (!function_exists('invierte_date_time')) {
         $recibo = $data["recibo"];
         $id_servicio = $data["id_servicio"];
 
-
-        $r[] = $data['breadcrumbs'];
         $resumen_orden_compra = resumen_orden($data, $recibo, $id_servicio);
         if (is_mobile()) {
 
@@ -418,7 +447,10 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "qservicio"
             ]);
         $r[] = gb_modal(notifica_entrega_modal($recibo, $data), 'modal_notificacion_entrega');
-        return append($r);
+
+        $response[] = d($data['breadcrumbs'],'col-md-8 col-md-offset-2 mt-5 mb-3');
+        $response[] = d($r,8,1);
+        return append($response);
 
     }
 
@@ -428,11 +460,11 @@ if (!function_exists('invierte_date_time')) {
         $es_vendedor = $data["es_vendedor"];
         $domicilio = $data["domicilio"];
 
-        $r[] = _titulo("¿Donde se encuentra mi pedido?");
+        $r[] = _titulo("¿Dónde se encuentra mi pedido?");
         $tiempo = tiempo($data, $recibo, $domicilio, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
 
-        return d($r, 'col-sm-8 mt-5');
+        return d($r, 'col-sm-8');
 
     }
 
@@ -477,12 +509,13 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_hora_entrega = es_contra_entrega_domicilio($recibo, 1, $fecha);
                 $text_entrega[] = _titulo(_text_($text, $fecha_hora_entrega), 2);
 
-                if (puede_repartir($data)) {
+                $usuario_cliente = prm_def($data,'usuario_cliente');
+                if (es_data($usuario_cliente)) {
 
-                    $usuario_cliente = $data['usuario_cliente'];
+
                     $nombre_cliente = format_nombre($usuario_cliente);
 
-                    $text_entrega[] = _titulo('cliente', 3, 'underline');
+                    $text_entrega[] = _titulo('cliente', 3, 'underline mt-4');
                     $text_entrega[] = d($nombre_cliente);
                     $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
 
@@ -509,18 +542,19 @@ if (!function_exists('invierte_date_time')) {
                 img(
                     [
                         "src" => pr($recibo, "url_img_servicio"),
+                        "class"=>"mx-auto d-block"
                     ]
                 )
                 ,
                 $path
 
             );
-        $a[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
+        $texto[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
 
-        $a[] = append($z);
+        $texto[] = append($z);
         if (!puede_repartir($data)) {
 
-            $a[] = format_link('comprar nuevamente',
+            $texto[] = format_link('comprar nuevamente',
                 [
                     'href' => path_enid('producto', $id_servicio),
                     'class' => 'mt-5'
@@ -541,18 +575,19 @@ if (!function_exists('invierte_date_time')) {
 
             if (!$es_orden_entregada && !$se_define_repartidor) {
 
-                $a[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
+                $texto[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
             }
 
 
             $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
             $nombre = _text_('Agenda ', $usuario_venta);
-            $a[] = d($nombre, 'mt-3 text-center p-2 text-uppercase  bg-light border border-secondary');
+            $texto[] = d($nombre, 'mt-3 text-center p-2 text-uppercase  bg-light border border-secondary');
 
         }
 
+        $a[] = d($texto,'texto_pedido bg_white p-3');
 
-        return d($a, 3);
+        return d(d($a,'p-3 azul_contraste_deporte'), 'col-sm-4');
 
 
     }
@@ -836,7 +871,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($recibo_vendedor, 'row mt-3');
 
         $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará';
-        $id_usuario_reparto =  pr($data['repartidor'],'id_usuario');
+        $id_usuario_reparto = pr($data['repartidor'], 'id_usuario');
         $repartidor = a_enid(
             format_nombre($data['repartidor']),
             [
@@ -2653,7 +2688,7 @@ if (!function_exists('invierte_date_time')) {
                 'ENTREGADO'
                 ,
 
-                "timeline__item__content__description strong"
+                "timeline__item__content__description strong black"
 
             ),
             "timeline__item__content");
@@ -2668,7 +2703,7 @@ if (!function_exists('invierte_date_time')) {
                 'ORDEN REALIZADA    '
                 ,
 
-                "timeline__item__content__description strong"
+                "timeline__item__content__description strong black"
 
             ),
             "timeline__item__content");
@@ -3564,7 +3599,7 @@ if (!function_exists('invierte_date_time')) {
                         "ESTADO ", $row["estado"], "CÓDIGO POSTAL ", $row["cp"]
                     );
             } else {
-                $direccion[] = $row["ubicacion"];
+                $direccion[] = valida_texto_maps($row["ubicacion"]);
             }
 
 

@@ -18,7 +18,6 @@ class app extends CI_Controller
         $data = []
     )
     {
-        $response = [];
 
         if (es_data($data)) {
 

@@ -236,11 +236,13 @@ class Home extends CI_Controller
 
     }
 
-    private function get_ubicaciones_usuario($id_usuario){
+    private function get_ubicaciones_usuario($id_usuario)
+    {
 
         return $this->app->api("ubicacion/usuario/format/json/",
             ["id_usuario" => $id_usuario]);
     }
+
     private function get_direcciones_usuario($id_usuario)
     {
 
@@ -259,6 +261,8 @@ class Home extends CI_Controller
     {
 
         $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
+
+
         if (es_data($recibo)) {
 
             $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
@@ -301,11 +305,13 @@ class Home extends CI_Controller
             $data['usuario_cliente'] = $usuario_compra;
 
 
+            $data = texto_pre_pedido($recibo, $data);
             $this->app->pagina($data, render_seguimiento($data), 1);
         }
 
 
     }
+
 
     private function agrega_usuario_referencia_tracker($data, $es_administrador)
     {
@@ -484,8 +490,8 @@ class Home extends CI_Controller
     private function comisiones_por_pago($data)
     {
 
-        $q =  ['id_empresa' => $data['id_empresa']];
-        return $this->app->api("recibo/comisiones_por_pago/format/json/",$q);
+        $q = ['id_empresa' => $data['id_empresa']];
+        return $this->app->api("recibo/comisiones_por_pago/format/json/", $q);
     }
 
     private function usuarios_comisionistas()

@@ -1624,6 +1624,11 @@ function lista_horarios($dia_busqueda = 0)
 
 }
 
+function path_imagen_web($path_imagen)
+{
+
+    return get_url_request(substr($path_imagen, 3, strlen($path_imagen)));
+}
 
 function get_url_servicio($id_servicio, $n = 0)
 {
@@ -3588,7 +3593,7 @@ function valida_texto_maps($domicilio, $estilos = 1)
     $ubicacion_arreglo = explode(' ', $domicilio);
     $text = '';
     foreach ($ubicacion_arreglo as $row) {
-        $text .= _text_($row);
+
         if (strpos($row, 'https') !== FALSE) {
 
             $config = [
@@ -3600,12 +3605,12 @@ function valida_texto_maps($domicilio, $estilos = 1)
             $configurador = [
                 'href' => $row,
                 'target' => '_blank',
-                'class' => 'text-uppercase black mt-3'
+                'class' => 'text-uppercase black mt-3 border border-info text-center'
             ];
             $conf = ($estilos < 0) ? $config : $configurador;
             if ($estilos < 1) {
 
-                $text = format_link('abrir en google maps', $conf);
+                $text .= format_link('abrir en google maps', $conf);
 
             } else {
                 $text .= a_enid('abrir en google maps', $conf);
@@ -3613,6 +3618,8 @@ function valida_texto_maps($domicilio, $estilos = 1)
             }
 
 
+        } else {
+            $text .= _text_($row);
         }
     }
     return $text;

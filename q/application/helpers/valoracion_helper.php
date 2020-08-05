@@ -132,7 +132,7 @@ if (!function_exists('invierte_date_time')) {
                 ,
                 crea_estrellas($promedio)
                 ,
-                'contenedor_promedios border border-secondary text-center p-3 flex-column mt-5 mb-5'
+                'contenedor_promedios border border-secondary text-center p-3 flex-column mt-5 mb-5 azul_deporte'
             );
             if ($persona > 0) {
 
