@@ -429,7 +429,7 @@ if (!function_exists('invierte_date_time')) {
                 $conf = [
                     'href' => $row,
                     'target' => '_blank',
-                    'class' => 'text-uppercase black mt-3'
+                    'class' => 'text-uppercase black mt-3 border border-info text-center'
                 ];
 
                 $text = format_link('abrir en google maps', $conf);

@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
             $calificacion = $data['usuario_calificacion'];
             $sexo = pr($usuario_busqueda, 'sexo');
             $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
-            $texto_sexo = $opt[$sexo];
+//            $texto_sexo = $opt[$sexo];
 
             $perfil_busqueda = $data['perfil_busqueda'];
             $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
@@ -25,6 +25,7 @@ if (!function_exists('invierte_date_time')) {
             $descripcion[] = h($nombre, 1, ['class' => 'display-2 text-uppercase strong']);
 
             $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
+            $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
 
             $imagen = a_enid(
                 img(
@@ -38,9 +39,23 @@ if (!function_exists('invierte_date_time')) {
                 $link
             );
 
-            $seccion_calificacion = posibilidades($calificacion, $id_usuario, $data);
+
+            $seccion_calificacion = posibilidades($calificacion, $id_usuario, $data, $es_propietario);
+
+
+            if ($es_propietario) {
+
+                $icono_link = icon(_text_(_editar_icon, 'black border p-5 border-info'));
+                $contenido[] = a_enid(
+                    $icono_link,
+                    [
+                        'href' => path_enid('administracion_cuenta')
+                    ]
+                );
+            }
 
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
+
 
             $texto_puesto = _text_('Equipo', strong($nombre_perfil));
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
@@ -48,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
 
             $whats = p(_text_('WhatsApp', a_enid($tel_contacto, ['class' => 'strong black'])), 'black');
 
-            $contenido[] = d(d(_text_($texto_titulo, $descripcion_puesto, $texto_sexo, $whats), 'caption'), 'circle');
+            $contenido[] = d(d(_text_($texto_titulo, $descripcion_puesto, $whats), 'caption'), 'circle');
             $contenido[] = p($nombre_usuario, 'update-note');
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => 'header col-md-12', 'id' => 'header1']);
@@ -81,11 +96,11 @@ if (!function_exists('invierte_date_time')) {
             [
                 "href" => path_enid("home")
             ]
-        ),'col-md-4 col-md-offset-4 mt-5');
+        ), 'col-md-4 col-md-offset-4 mt-5');
         return append($response);
     }
 
-    function posibilidades($calificacion, $id_usuario, $data)
+    function posibilidades($calificacion, $id_usuario, $data, $es_propietario)
     {
         $response = [];
         for ($x = 1; $x <= 5; $x++) {
@@ -110,15 +125,23 @@ if (!function_exists('invierte_date_time')) {
             );
 
         }
-        $response[] = d(_titulo($calificacion), 'text-center');
+
+        $response[] = d(_titulo(round($calificacion, 2)), 'text-center');
         $response[] = d($estrellas);
-        $response[] = d(
-            format_link('Califícame',
-                [
-                    'class' => 'calificame',
-                    'id' => $id_usuario
-                ])
-        );
+
+
+        if (!$es_propietario) {
+
+            $response[] = d(
+                format_link('Califícame',
+                    [
+                        'class' => 'calificame',
+                        'id' => $id_usuario
+                    ]
+                )
+            );
+
+        }
 
 
         $id_usuario_califica = ($data['in_session']) ? $data['id_usuario'] : 0;
