@@ -365,7 +365,8 @@ class usuario_model extends CI_Model
                         s.segundo_nivel ,
                         s.tercer_nivel ,
                         s.cuarto_nivel , 
-                        s.quinto_nivel             
+                        s.quinto_nivel,
+                        s.es_publico             
                     FROM usuario_deseo us
                     INNER JOIN servicio s  
                     ON us.id_servicio =  s.id_servicio
@@ -626,7 +627,8 @@ class usuario_model extends CI_Model
                 WHERE       
                 1 = 1
                 " . $extra_moto . "
-                AND  idusuario IN ( $ids )";
+                AND  idusuario IN ( $ids ) 
+                ORDER BY puntuacion DESC";
 
             $usuarios_moto = $this->db->query($query_get)->result_array();
             $response = $this->simplifica_usuarios($response, $usuarios_moto);
@@ -688,7 +690,8 @@ class usuario_model extends CI_Model
                 WHERE
                  tiene_auto > 0 
                  AND 
-                idusuario in ($ids)";
+                idusuario in ($ids) 
+                ORDER BY puntuacion DESC";
 
         $usuarios_auto = $this->db->query($query_get)->result_array();
         return $this->simplifica_usuarios([], $usuarios_auto);

@@ -389,6 +389,8 @@ class recibo extends REST_Controller
                     $param["fecha_inicio"], $param["fecha_termino"]);
                 $response = get_format_tiempo_entrega($response, $total, $param);
 
+            }else{
+                $response = sin_resultados_busqueda();
             }
 
         }
@@ -1207,6 +1209,7 @@ class recibo extends REST_Controller
             "p.comision_venta",
             "p.id_usuario_referencia",
             "p.id_usuario_entrega",
+            "p.id_usuario",
             "p.intento_reventa",
             'p.intento_recuperacion'
 
@@ -1231,6 +1234,7 @@ class recibo extends REST_Controller
             "comision_venta",
             "id_usuario_referencia",
             "id_usuario_entrega",
+            "id_usuario",
             "intento_reventa",
             'intento_recuperacion'
         ];
@@ -1280,10 +1284,11 @@ class recibo extends REST_Controller
 
             if ($param["v"] == 1) {
 
-
                 $response = $this->add_imgs_servicio($response);
                 $response = $this->add_comisionistas($response, $param);
                 $response = $this->add_repartidores($response, $param);
+                $response = $this->add_clientes($response, $param);
+
                 $session = $this->app->session();
                 $response = render_resumen_pedidos($response,
                     $this->get_estatus_enid_service($param), $param, $session);
@@ -1311,6 +1316,45 @@ class recibo extends REST_Controller
         return $ordenes;
 
     }
+    function add_clientes($ordenes)
+    {
+
+
+        $a = 0;
+        $ids_usuarios = [];
+        $usuarios = [];
+        $response = [];
+
+        foreach ($ordenes as $row) {
+
+            $orden = $row;
+            $id_usuario_cliente = $row['id_usuario'];
+            $response[$a] = $orden;
+            if (!in_array($id_usuario_cliente, $ids_usuarios)) {
+
+                $ids_usuarios[] = $id_usuario_cliente;
+                $usuario = $this->app->usuario($id_usuario_cliente);
+                $busqueda_usuario =
+                    [
+                        'id_usuario' => $id_usuario_cliente,
+                        'usuario_cliente' => $usuario
+                    ];
+                $response[$a]['usuario_cliente'] = $busqueda_usuario['usuario_cliente'];
+                $usuarios[] = $busqueda_usuario;
+
+            } else {
+                $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario_cliente, 'usuario_cliente');
+                $response[$a]['usuario_cliente'] = $usuario;
+            }
+            $a++;
+        }
+
+        return $response;
+
+
+
+    }
+
 
     function reparto_recoleccion_GET()
     {

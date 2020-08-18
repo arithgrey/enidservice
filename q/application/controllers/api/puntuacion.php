@@ -15,7 +15,6 @@ class Puntuacion extends REST_Controller
     function index_POST()
     {
 
-
         $param = $this->post();
         $response = false;
         if (fx($param, "cantidad,tipo_puntuacion,id_usuario,comentario,id_usuario_califica")) {

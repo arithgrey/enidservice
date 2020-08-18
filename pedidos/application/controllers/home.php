@@ -306,7 +306,8 @@ class Home extends CI_Controller
 
 
             $data = texto_pre_pedido($recibo, $data);
-            $this->app->pagina($data, render_seguimiento($data), 1);
+            $params = $this->input->get();
+            $this->app->pagina($data, render_seguimiento($data, $params), 1);
         }
 
 

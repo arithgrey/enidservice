@@ -696,7 +696,7 @@ if (!function_exists('invierte_date_time')) {
             "style" => "width: 100%",
         ]));
         $r[] = d("Observamos un cambio de contraseña en tu cuenta. ¿Fuiste tú?");
-        $r[] = d(_text("Si es así ignora este correo, en caso contrario notificanos aquí https://enidservices.com/",_web,"/contact/"));
+        $r[] = d(_text("Si es así ignora este correo, en caso contrario notificanos aquí https://enidservices.com/", _web, "/contact/"));
 
         return append($r);
 
@@ -711,7 +711,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(
             img(
                 [
-                    "src" => _text("https://enidservices.com/",_web,"/img_tema/enid_service_logo.jpg"),
+                    "src" => _text("https://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
                     "style" => "width: 100%",
                 ]),
             [
@@ -724,7 +724,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = br();
         $r[] = a_enid("ACCEDE A TU CUENTA AHORA!",
             [
-                "href" => _text("https://enidservices.com/",_web,"/login/"),
+                "href" => _text("https://enidservices.com/", _web, "/login/"),
                 "target" => "_blank",
                 "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;",
             ]);
@@ -1835,9 +1835,8 @@ if (!function_exists('invierte_date_time')) {
             $canceladas = ($actividad) ? $row['canceladas'] : 0;
             $total_canceladas = ($total_canceladas + $canceladas);
 
-            $email = $row['email'];
-            $link = path_enid('busqueda_usuario', $email);
-            $nombre_completo = a_enid(format_nombre($row), $link);
+            $link = path_enid('usuario_contacto', $idusuario);
+            $nombre_completo = a_enid(format_nombre($row), ['href' => $link]);
             $ha_vendido = $row['ha_vendido'];
             $fecha_ultima_venta = $row['fecha_ultima_venta'];
 

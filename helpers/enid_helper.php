@@ -3161,7 +3161,7 @@ function opciones_populares()
         "POPULARES",
         [
             "class" => "white f11 border-right frecuentes border-right-enid",
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=1&order=4")
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
     $response[] = a_enid(
@@ -3169,7 +3169,7 @@ function opciones_populares()
         [
             "class" => "white  f11 border-right frecuentes border-right-enid"
             ,
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=1"
+            "href" => path_enid("search", "/?q2=0&q=&order=2"
             )
         ]
     );
@@ -3178,7 +3178,7 @@ function opciones_populares()
         "SERVICIOS",
         [
             "class" => "   white  f11  frecuentes",
-            "href" => path_enid("search", "?q2=0&q=&order=2&order=1&order=9")
+            "href" => path_enid("search", "?q2=0&q=&order=2&order=9")
         ]
     );
     return flex($response);

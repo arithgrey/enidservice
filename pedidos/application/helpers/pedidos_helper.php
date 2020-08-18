@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
         $nombre_cliente = '';
         $numero_telefonico = '';
 
-        $usuario_cliente = prm_def($data,'usuario_cliente');
+        $usuario_cliente = prm_def($data, 'usuario_cliente');
         if (es_data($usuario_cliente)) {
             $nombre_cliente = format_nombre($usuario_cliente);
             $numero_telefonico = phoneFormat(pr($usuario_cliente, 'tel_contacto'));
@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
 
         $texto_previo = _text_(
             'Orden de compra #',
-            pr($recibo,'id_proyecto_persona_forma_pago'),
+            pr($recibo, 'id_proyecto_persona_forma_pago'),
             'cliente',
             $nombre_cliente,
             'tel',
@@ -406,7 +406,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function render_seguimiento($data)
+    function render_seguimiento($data, $params)
     {
 
         $recibo = $data["recibo"];
@@ -448,9 +448,47 @@ if (!function_exists('invierte_date_time')) {
             ]);
         $r[] = gb_modal(notifica_entrega_modal($recibo, $data), 'modal_notificacion_entrega');
 
-        $response[] = d($data['breadcrumbs'],'col-md-8 col-md-offset-2 mt-5 mb-3');
-        $response[] = d($r,8,1);
+        $response[] = d($data['breadcrumbs'], 'col-md-8 col-md-offset-2 mt-5 mb-3');
+        $response[] = d($r, 8, 1);
+        $response[] = modal_opciones_cancelacion($data, $params);
         return append($response);
+
+    }
+
+    function modal_opciones_cancelacion($data, $params)
+    {
+        $response = '';
+        if ($data['in_session']) {
+
+
+            $nueva_fecha = btn(
+                'Cambiar fecha de entrega',
+                [
+                    'class' => 'mt-4'
+                ]
+            );
+
+            $razon_cancelacion = btn(
+                'Cancelar orden de compra',
+                [
+                    'class' => 'mt-4 confirma_cancelacion',
+                    'style' => 'background:red!important;'
+                ]
+            );
+
+
+            $id_recibo = prm_def($params, 'seguimiento');
+            $link = path_enid('pedidos_recibo', _text($id_recibo, '&fecha_entrega=1'));
+
+            $botones[] = a_enid($nueva_fecha, ['href' => $link]);
+            $botones[] = $razon_cancelacion;
+            $contenido[] = d($botones, 'seccion_opciones');
+            $contenido[] = d('', 'seccione_opciones_cancelado d-none');
+            $contenido[] = hiddens(['class' => 'recibo', 'id' => 'recibo', 'value' => $id_recibo]);
+
+            $response = gb_modal(append($contenido), 'modal_opciones_cancelacion');
+        }
+        return $response;
 
     }
 
@@ -509,7 +547,7 @@ if (!function_exists('invierte_date_time')) {
                 $fecha_hora_entrega = es_contra_entrega_domicilio($recibo, 1, $fecha);
                 $text_entrega[] = _titulo(_text_($text, $fecha_hora_entrega), 2);
 
-                $usuario_cliente = prm_def($data,'usuario_cliente');
+                $usuario_cliente = prm_def($data, 'usuario_cliente');
                 if (es_data($usuario_cliente)) {
 
 
@@ -542,7 +580,7 @@ if (!function_exists('invierte_date_time')) {
                 img(
                     [
                         "src" => pr($recibo, "url_img_servicio"),
-                        "class"=>"mx-auto d-block"
+                        "class" => "mx-auto d-block"
                     ]
                 )
                 ,
@@ -585,9 +623,9 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-        $a[] = d($texto,'texto_pedido bg_white p-3');
+        $a[] = d($texto, 'texto_pedido bg_white p-3');
 
-        return d(d($a,'p-3 azul_contraste_deporte'), 'col-sm-4');
+        return d(d($a, 'p-3 azul_contraste_deporte'), 'col-sm-4');
 
 
     }
@@ -726,13 +764,34 @@ if (!function_exists('invierte_date_time')) {
             ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
 
 
-        $boton_pagado = btn('Notificar como entregado!', ['class' => 'notifica_entrega mt-4']);
-        $pago_efectivo = (puede_repartir($data)) ? $boton_pagado : '';
+        $boton_pagado = btn('Notificar como entregado!',
+            [
+                'class' => 'notifica_entrega mt-4'
+            ]
+        );
+
+        $boton_cancelar = '';
+        if ($data['in_session']) {
+
+            $boton_cancelar = btn(
+                'informar cancelación!',
+                [
+                    'class' => 'notifica_entrega_cancelada mt-4',
+                    'style' => 'background:red!important;'
+                ]
+            );
+        }
+
+        $puede_repartir = puede_repartir($data);
+        $boton_cancelar = (!es_cliente($data)) ? $boton_cancelar : '';
+        $pago_efectivo = ($puede_repartir) ? $boton_pagado : '';
+
         $checkout = ticket_pago($recibo, [], 2);
         $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
 
         $text_pago = _text_($text_entrega, money($saldo_pendiente));
-        $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo);
+        $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar);
+
         $es_orden_entregada = es_orden_entregada($recibo, $data);
         return (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
 
@@ -2032,7 +2091,10 @@ if (!function_exists('invierte_date_time')) {
     function get_form_fecha_entrega($data)
     {
 
+
         $orden = $data["orden"];
+        $recibo = $data["recibo"];
+
         $r[] = form_open("", ["class" => "form_fecha_entrega"]);
         $r[] = d(_titulo("FECHA DE ENTREGA"), _mbt5);
         $r[] =
@@ -2046,7 +2108,8 @@ if (!function_exists('invierte_date_time')) {
                     "value" => date("Y-m-d"),
                     "min" => add_date(date("Y-m-d"), -15),
                     "max" => add_date(date("Y-m-d"), 15),
-                ]);
+                ]
+            );
 
         $horario_text = text_icon("fa fa-clock-o", "HORA DE ENCUENTRO");
         $horario = lista_horarios()["select"];
@@ -2059,6 +2122,36 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "recibo",
                 "value" => $orden,
             ]);
+        $r[] = hiddens(
+            [
+                "class" => "ubicacion",
+                "name" => "ubicacion",
+                "value" => pr($recibo, "ubicacion"),
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "class" => "tipo_entrega",
+                "name" => "tipo_entrega",
+                "value" => pr($recibo, "tipo_entrega"),
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "class" => "fecha_contra_entrega",
+                "name" => "fecha_contra_entrega",
+                "value" => pr($recibo, "fecha_contra_entrega"),
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "class" => "contra_entrega_domicilio",
+                "name" => "contra_entrega_domicilio",
+                "value" => pr($recibo, "contra_entrega_domicilio"),
+            ]
+        );
+
         $r[] = btn("CONTINUAR", ["class" => "mt-5"]);
         $r[] = format_load();
         $r[] = form_close(place("place_fecha_entrega"));
@@ -2952,8 +3045,6 @@ if (!function_exists('invierte_date_time')) {
     function create_fecha_contra_entrega($recibo, $domicilio, $es_venta_cancelada)
     {
 
-        $fecha = "";
-
         if (es_data(prm_def($domicilio, "domicilio")) > 0 && es_data($recibo)) {
 
             $recibo = $recibo[0];
@@ -3499,13 +3590,15 @@ if (!function_exists('invierte_date_time')) {
             $monto_a_pagar = $recibo["monto_a_pagar"];
             $se_cancela = $recibo["se_cancela"];
             $fecha_entrega = $recibo["fecha_entrega"];
+            $ubicacion = $recibo["ubicacion"];
+            $tipo_entrega = $recibo["tipo_entrega"];
 
             return d(
                 a_enid("MODIFICAR LA FECHA DE ENTREGA",
                     [
                         "class" => "editar_horario_entrega",
                         "id" => $id_recibo,
-                        "onclick" => "confirma_cambio_horario({$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '" . $fecha_entrega . "' )",
+                        "onclick" => "confirma_cambio_horario({$tipo_entrega}, {$ubicacion}, {$id_recibo} , {$status } , {$saldo_cubierto_envio} , {$monto_a_pagar} , {$se_cancela} , '" . $fecha_entrega . "' )",
                     ])
             );
 
@@ -3744,9 +3837,7 @@ if (!function_exists('invierte_date_time')) {
             $form[] = form_close(place("place_form_set_usuario"));
             return d($form, ["id" => "contenedor_form_usuario"]);
 
-
         }
-
 
     }
 
@@ -3773,6 +3864,5 @@ if (!function_exists('invierte_date_time')) {
         return ($data['id_usuario_referencia'] === $data['id_usuario']);
 
     }
-
 
 }

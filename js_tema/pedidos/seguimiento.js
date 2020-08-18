@@ -1,5 +1,6 @@
 "use strict";
 let $notifica_entrega = $('.notifica_entrega');
+let $notifica_entrega_cancelada = $('.notifica_entrega_cancelada');
 let $selector_entrega = $('.selector_entrega');
 let $saldo_cubierto = $('.saldo_cubierto');
 let $form_notificacion_entrega_cliente = $('.form_notificacion_entrega_cliente');
@@ -8,7 +9,13 @@ let $form_otros = $('.form_otros');
 let $selector_interes = $('.selector_interes');
 let $form_articulo_interes = $('.form_articulo_interes_entrega');
 let $selector_negacion = $('.selector_negacion');
+let $modal_opciones_cancelacion = $('#modal_opciones_cancelacion');
+let $confirma_cancelacion = $('.confirma_cancelacion');
+let $seccione_opciones_cancelado = $('.seccione_opciones_cancelado');
+let $seccion_opciones = $('.seccion_opciones');
+
 $(document).ready(function () {
+
     valida_notificacion_pago();
     carga_productos_sugeridos();
     $notifica_entrega.click(notifica_entrega_cliente);
@@ -16,6 +23,10 @@ $(document).ready(function () {
     $selector_interes.click(mas_articulos);
     $form_articulo_interes.submit(registro_articulo_interes);
     $selector_negacion.click(no_comento);
+    $notifica_entrega_cancelada.click(notificar_cancelacion);
+    $confirma_cancelacion.click(lista_motivos_cancelacion);
+
+
 });
 let valida_notificacion_pago = () => {
 
@@ -128,3 +139,42 @@ let response_otros = function () {
 let no_comento = function () {
     redirect(path_enid('entregas'));
 }
+let notificar_cancelacion = function () {
+
+    $modal_opciones_cancelacion.modal("show");
+
+}
+let lista_motivos_cancelacion = function () {
+
+    let data_send = {"v": 1, tipo: 2, "text": "MOTIVO DE CANCELACIÓN"};
+    let url = "../q/index.php/api/tipificacion/index/format/json/";
+    request_enid("GET", data_send, url, motivos_cancelacion)
+}
+
+let motivos_cancelacion = data => {
+
+    render_enid('.seccione_opciones_cancelado', data);
+    $seccione_opciones_cancelado.removeClass('d-none');
+    $seccion_opciones.addClass('d-none');
+    $(".tipificacion").change(notifica_motivo_cancelacion);
+};
+
+let notifica_motivo_cancelacion = () => {
+
+    let data_send = $.param({
+        "recibo": get_parameter(".recibo"),
+        "status": 10,
+        "tipificacion": get_valor_selected(".tipificacion"),
+        "cancelacion": 1
+    });
+    let url = "../q/index.php/api/recibo/status/format/json/";
+    bloquea_form(".selector_estados_ventas");
+    request_enid("PUT", data_send, url, despues_de_cancer);
+};
+
+let despues_de_cancer = data => {
+
+
+    $('.tipificacion').prop('disabled', 'disabled');
+    redirect(path_enid('entregas'));
+};
