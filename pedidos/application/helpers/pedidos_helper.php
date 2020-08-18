@@ -2097,8 +2097,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_open("", ["class" => "form_fecha_entrega"]);
         $r[] = d(_titulo("FECHA DE ENTREGA"), _mbt5);
-        $r[] =
-            input_frm('mt-5', 'NUEVA',
+        $r[] = input_frm('mt-5', 'NUEVA',
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_entrega',
@@ -2156,7 +2155,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = format_load();
         $r[] = form_close(place("place_fecha_entrega"));
         $response = append($r);
-        $response = d($response, 6, 1);
+        $response = d($response, 4, 1);
 
         return $response;
 

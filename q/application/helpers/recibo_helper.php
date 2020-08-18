@@ -168,11 +168,14 @@ if (!function_exists('invierte_date_time')) {
         return get_format_entrega($response, $param);
 
     }
-    function sin_resultados_busqueda(){
+
+    function sin_resultados_busqueda()
+    {
 
         $response[] = _titulo('ups! parece que no hubo pedidos');
-        return d($response,'row mt-5 alert alert-info border-0');
+        return d($response, 'row mt-5 alert alert-info border-0');
     }
+
     function get_format_entrega($data, $param)
     {
 
@@ -569,7 +572,9 @@ if (!function_exists('invierte_date_time')) {
         $linea_cambio_lista_negra = [];
         $resumen_usuarios_por_pago = [];
         $usuarios = [];
+        $recibos_ventas = [];
         foreach ($recibos as $row) {
+            $id_servicio = $row['id_servicio'];
             $transacciones++;
             $recibo = $row["recibo"];
             $intento_reventa = $row['intento_reventa'];
@@ -577,7 +582,8 @@ if (!function_exists('invierte_date_time')) {
             $usuario_venta = prm_def($row, 'usuario', []);
             $usuarios[] = $usuario_venta;
             $monto_a_pagar = $row["monto_a_pagar"];
-            $monto_a_pagar = ($monto_a_pagar * $row["num_ciclos_contratados"]) + $row["costo_envio_cliente"];
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+            $monto_a_pagar = ($monto_a_pagar * $num_ciclos_contratados) + $row["costo_envio_cliente"];
             $status = $row["status"];
 
             $es_orden_cancelada = es_orden_cancelada($row);
@@ -586,7 +592,6 @@ if (!function_exists('invierte_date_time')) {
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
             $saldo_cubierto = $row['saldo_cubierto'];
             $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
-
             $es_lista_negra = es_orden_lista_negra($row);
             $es_compra_efectiva = (!$es_orden_cancelada && $saldo_cubierto > 0);
             $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada && !$es_lista_negra);
@@ -630,14 +635,18 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($es_orden_cancelada) ? " cancelado white" : $extra;
             $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
 
+
             if ($se_pago > 0) {
 
                 $extra = 'se_pago white';
+                $recibos_ventas = conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados);
 
             } else if ($saldo_cubierto > 0 && !$es_lista_negra) {
+
                 $extra = 'pago_en_proceso white';
                 $saldo_por_cobrar = $saldo_por_cobrar + $row['comision_venta'];
                 $total += $monto_a_pagar;
+                $recibos_ventas = conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados);
 
             }
 
@@ -652,9 +661,8 @@ if (!function_exists('invierte_date_time')) {
 
             $items = [];
             $numero_recibo = span($recibo, 'd-md-block d-none');
-
             $nombre_cliente = format_nombre($row['usuario_cliente']);
-            $items[] = flex(_text_('cliente',$nombre_cliente), $estado_compra, 'flex-column', 'fp9 strong text-uppercase', 'mt-2 estado_compra');
+            $items[] = flex(_text_('cliente', $nombre_cliente), $estado_compra, 'flex-column', 'fp9 strong text-uppercase', 'mt-2 estado_compra');
             $items[] = monto_compra($monto_a_pagar, $perfil, $intento_reventa, $saldo_cubierto, $es_orden_cancelada, $intento_recuperacion);
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
@@ -713,14 +721,14 @@ if (!function_exists('invierte_date_time')) {
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
-        $totales = _titulo(_text_('Total cobrado', money($total)));
+        $totales = d(_titulo(_text_('Total cobrado', money($total))), 13);
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
         $listado[] = append($linea_cambio_estado);
         $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
-
+        $sintesis = sintesis_compras($recibos_ventas, $recibos);
 
         $render = [
             $conversion,
@@ -728,11 +736,82 @@ if (!function_exists('invierte_date_time')) {
             $text_saldo_por_cobrar,
             $inicio,
             $tabla,
-            $totales
+            $totales,
+            $sintesis
         ];
         return d_c($render, 'col-sm-12 mt-4');
     }
 
+    function conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados)
+    {
+
+        if (es_data($recibos_ventas)) {
+
+            $index = search_bi_array($recibos_ventas, "id_servicio", $id_servicio);
+            if ($index === FALSE) {
+
+                $recibos_ventas[] =
+                    [
+                        "id_servicio" => $id_servicio,
+                        "cantidad" => $num_ciclos_contratados
+                    ];
+            } else {
+
+                $recibos_ventas[$index]['cantidad'] = ($recibos_ventas[$index]['cantidad'] + $num_ciclos_contratados);
+
+            }
+
+        } else {
+            $recibos_ventas[] =
+                [
+                    "id_servicio" => $id_servicio,
+                    "cantidad" => $num_ciclos_contratados
+                ];
+        }
+        return $recibos_ventas;
+    }
+
+
+    function sintesis_compras(&$servicios, &$recibos)
+    {
+        
+        $response[] = d(_titulo('Resumen', 2), 13);
+        if (es_data($servicios)) {
+
+            foreach ($servicios as  $row) {
+
+                $id_servicio =  $row['id_servicio'];
+                $cantidad  = $row["cantidad"];
+
+                $path_imagen_servicio = search_bi_array(
+                    $recibos,
+                    "id_servicio",
+                    $id_servicio,
+                    "url_img_servicio",
+                    ""
+                );
+
+                $img = img(
+                    [
+                        "src" => $path_imagen_servicio,
+                        "class" => "mx-auto d-block pedido_img"
+                    ]
+                );
+
+                $fila = flex(
+                    $img,
+                    _titulo($cantidad, 2),
+                    _text_(_between, 'border'),
+                    '',
+                    'mr-3'
+                );
+                $response[] = d($fila, 13);
+
+            }
+        }
+        return d($response, 'mt-5');
+
+    }
 
     function monto_compra($monto, $id_perfil, $intento_reventa, $saldo_cubierto,
                           $es_orden_cancelada, $intento_recuperacion)
