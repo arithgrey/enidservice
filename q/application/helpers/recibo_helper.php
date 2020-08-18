@@ -168,7 +168,11 @@ if (!function_exists('invierte_date_time')) {
         return get_format_entrega($response, $param);
 
     }
+    function sin_resultados_busqueda(){
 
+        $response[] = _titulo('ups! parece que no hubo pedidos');
+        return d($response,'row mt-5 alert alert-info border-0');
+    }
     function get_format_entrega($data, $param)
     {
 
@@ -258,7 +262,7 @@ if (!function_exists('invierte_date_time')) {
                 "col-lg-3 text-center align-self-center"
             );
 
-            $response[] = d(append($x), "row border  top_30");
+            $response[] = d($x, "row border  top_30");
 
         }
 
@@ -649,7 +653,8 @@ if (!function_exists('invierte_date_time')) {
             $items = [];
             $numero_recibo = span($recibo, 'd-md-block d-none');
 
-            $items[] = span($estado_compra, 'font-weight-bold estado_compra');
+            $nombre_cliente = format_nombre($row['usuario_cliente']);
+            $items[] = flex(_text_('cliente',$nombre_cliente), $estado_compra, 'flex-column', 'fp9 strong text-uppercase', 'mt-2 estado_compra');
             $items[] = monto_compra($monto_a_pagar, $perfil, $intento_reventa, $saldo_cubierto, $es_orden_cancelada, $intento_recuperacion);
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
@@ -672,7 +677,7 @@ if (!function_exists('invierte_date_time')) {
             $path = path_enid('pedidos_recibo', $recibo);
             $config = [
                 'id' => $recibo,
-                'class' => _text_('black row  mt-md-0  text-center text-md-left mt-5', $extra),
+                'class' => _text_('black row mt-md-0 text-center text-md-left mt-5', $extra),
                 'href' => $path
             ];
             $line = a_enid(append($contenido), $config, 0);
@@ -708,7 +713,7 @@ if (!function_exists('invierte_date_time')) {
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
-        $totales = _titulo(_text_('Tota cobrado', money($total)));
+        $totales = _titulo(_text_('Total cobrado', money($total)));
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);

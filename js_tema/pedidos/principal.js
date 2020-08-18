@@ -132,7 +132,7 @@ let response_recordatorio = function (data) {
 
     if (data == true) {
         $(".place_recordatorio").empty();
-        let url = "../pedidos/?recibo=" + get_parameter(".recibo");
+        let url = "../pedidos/seguimiento?recibo=" + get_parameter(".recibo");
         redirect(url);
     } else {
         desbloqueda_form(".form_fecha_recordatorio");
@@ -506,7 +506,7 @@ let response_status_venta = data => {
 
 };
 
-let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) => {
+let confirma_cambio_horario = (tipo_entrega, ubicacion, id_recibo, status, saldo_cubierto_envio, monto_a_pagar, se_cancela, fecha_entrega) => {
 
 
     let text = "¿DESEAS EDITAR EL HORARIO DE ENTREGA DEL PEDIDO?";
@@ -529,7 +529,7 @@ let confirma_cambio_horario = (id_recibo, status, saldo_cubierto_envio, monto_a_
     }
 
     show_confirm(text, text_confirmacion, "SI", function () {
-        let url = "../pedidos/?recibo=" + id_recibo + "&fecha_entrega=1";
+        let url = _text("../pedidos/?recibo=" , id_recibo , "&fecha_entrega=1&ubicacion=",ubicacion, "&tipo_entrega=", tipo_entrega);
         redirect(url);
     });
 
@@ -941,6 +941,7 @@ let editar_usuario_tipo_negocio = function () {
     $form_usuario_tipo_negocio.removeClass('d-none');
 };
 let opciones_recibo = () => {
+    $form_cantidad_post_venta.hide();
     $modal_opciones_compra.modal('show');
 };
 let oculta_opciones_recibo = () => {

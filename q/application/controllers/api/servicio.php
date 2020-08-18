@@ -1430,7 +1430,6 @@ class Servicio extends REST_Controller
             $param["resultados_por_pagina"] = $param["limit"];
             $param["agrega_clasificaciones"] = 0;
             $servicios = $this->serviciosmodel->busqueda_producto($param);
-
             $response = prm_def($servicios, "servicio", []);
 
         }
@@ -1821,7 +1820,8 @@ class Servicio extends REST_Controller
         if (fx($param, "id_servicio")) {
 
             $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"]);
-            $response = (es_data($clasificaciones)) ? $response = $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
+            $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
+
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
 
@@ -1866,7 +1866,7 @@ class Servicio extends REST_Controller
     {
 
         $in_session = $this->app->is_logged_in();
-        $existentes = count($servicios);
+        $existentes = (es_data($servicios)) ? count($servicios) : 0;
         $sugerencia = ($existentes > 0) ? $servicios : [];
 
         if ($existentes < 8) {
@@ -1883,13 +1883,19 @@ class Servicio extends REST_Controller
                 $nuevo = $this->busqueda_producto_por_palabra_clave($param);
             }
 
-            foreach ($nuevo as $row) {
-                $sugerencia[] = $row;
+            if (es_data($nuevo)) {
+
+                foreach ($nuevo as $row) {
+
+                    if ($row['es_publico'] > 0) {
+                        $sugerencia[] = $row;
+                    }
+
+                }
             }
 
-
-            $sugerencia =
-                array_intersect_key($sugerencia, array_unique(array_column($sugerencia, 'id_servicio')));
+            $unicos =  array_unique(array_column($sugerencia, 'id_servicio'));
+            $sugerencia = array_intersect_key($sugerencia, $unicos);
 
         }
         return $sugerencia;

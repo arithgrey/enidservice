@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class serviciosmodel extends CI_Model
 {
@@ -57,6 +57,7 @@ class serviciosmodel extends CI_Model
         return $this->db->query($query_update);
 
     }
+
     function anexo_stock($stock, $id_servicio)
     {
 
@@ -437,7 +438,7 @@ class serviciosmodel extends CI_Model
 
     function agrega_servicios_list($servicio)
     {
-        if (count($servicio) > 0) {
+        if (es_data($servicio)) {
             array_push($this->lista_servicios, $servicio[0]);
         }
     }
@@ -571,13 +572,12 @@ class serviciosmodel extends CI_Model
     function get_producto_por_clasificacion($param)
     {
 
-
         $this->set_option("sql_distintos", "");
         $this->agrega_elemento_distinto($param["id_servicio"]);
         $n_servicio = $this->get_producto_clasificacion_nivel(1, $param["primer_nivel"]);
 
 
-        if (count($n_servicio) > 0) {
+        if (es_data($n_servicio)) {
             $this->agrega_servicios_list($n_servicio);
             $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
 
@@ -586,7 +586,7 @@ class serviciosmodel extends CI_Model
             $this->agrega_servicios_list($n_servicio);
 
 
-            if (count($n_servicio) > 0) {
+            if (es_data($n_servicio)) {
 
                 $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                 $n_servicio =
@@ -594,14 +594,14 @@ class serviciosmodel extends CI_Model
                 $this->agrega_servicios_list($n_servicio);
 
 
-                if (count($n_servicio) > 0) {
+                if (es_data($n_servicio)) {
                     $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                     $n_servicio =
                         $this->get_producto_clasificacion_nivel(4, $param["cuarto_nivel"]);
                     $this->agrega_servicios_list($n_servicio);
 
 
-                    if (count($n_servicio) > 0) {
+                    if (es_data($n_servicio)) {
                         $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                         $n_servicio =
                             $this->get_producto_clasificacion_nivel(5, $param["quinto_nivel"]);
@@ -613,15 +613,10 @@ class serviciosmodel extends CI_Model
         }
 
 
-        return $this->get_lista_servicios();
-
-    }
-
-    function get_lista_servicios()
-    {
-
         return $this->lista_servicios;
+
     }
+
 
     function get_producto_clasificacion_nivel($nivel, $id_clasificacion)
     {
@@ -648,7 +643,8 @@ class serviciosmodel extends CI_Model
                         quinto_nivel, 
                         color,
                         precio,
-                        id_ciclo_facturacion
+                        id_ciclo_facturacion,
+                        es_publico
                         FROM 
                         servicio
                         WHERE 
@@ -771,7 +767,7 @@ class serviciosmodel extends CI_Model
             $query_create = _text_("CREATE TABLE tmp_producto_$_num AS 
                 SELECT  id_servicio, nombre_servicio, id_usuario, 
                 metakeyword, primer_nivel , segundo_nivel , 
-                tercer_nivel , cuarto_nivel , quinto_nivel FROM servicio ", $where);
+                tercer_nivel , cuarto_nivel , quinto_nivel, es_publico FROM servicio ", $where);
             $response = $this->db->query($query_create);
 
         }

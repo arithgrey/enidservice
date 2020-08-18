@@ -13,7 +13,14 @@
                         <p>
                             Recomienda clientes y gana por tu referencia, tu agendas el pedido y nosotros entregamos, cuando el cliente recibe nosotros te pagamos tu ganancia!
                         </p>
-
+                        <div class="mt-1">
+                            <h5 class="cursor_pointer">
+                                ¿Por qué ser parte de nuestro equipo
+                                <strong class="link_nuba">
+                                    nuba seller?
+                                </strong>
+                            </h5>
+                        </div>
                         <div class="mt-1">
                             <?= icon('fa fa-check-square mr-5') ?>Se tu propio jefe y administra tus tiempos
                         </div>
@@ -47,6 +54,24 @@
                          alt="App Landing Page Template - Quanto">
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="definicion_nuba_seller d-none">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                <div class="feature-block-v7 feature-block">
+                    <div class="feature-content">
+                        <h2>Nuba seller</h2>
+                    </div>
+                    <p>
+                        Equipo apasionado por competir, qué conecta personas con artículos que dan solución a una de sus problemáticas.
+                    </p>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>

@@ -413,6 +413,9 @@ class app extends CI_Controller
             "sobre_ventas" => [
                 "css" => [
                     "sobre_vender.css"
+                ],
+                "js" => [
+                    "sobre_ventas/principal.js"
                 ]
 
             ],

@@ -1092,7 +1092,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($in_session > 0 && $id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil != 20)) {
-            $response = icon("top_40  bottom_40 servicio fa fa-pencil", ["id" => $id_servicio]);
+            $response = icon("mt-5 mb-5 boton_editar_articulo servicio fa fa-pencil", ["id" => $id_servicio]);
         }
 
         return $response;

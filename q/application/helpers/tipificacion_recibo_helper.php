@@ -16,7 +16,7 @@ if (!function_exists('invierte_date_time')) {
                 $total = $row['total'];
 
                 $response[] = flex(
-                    $total, $tipificacion, _text_(_between, 'border p-2'),_strong);
+                    $total, $tipificacion, _text_(_between, 'text-uppercase border p-2'),_strong);
 
             }
         }

@@ -560,29 +560,6 @@ class Recibo_model extends CI_Model
 
     }
 
-    /*
-    function get_ventas_usuario($param)
-    {
-
-        $where = $this->get_where_estado_venta($param, 1);
-        $query_get = "SELECT
-                        id_proyecto_persona_forma_pago ,
-                        resumen_pedido,
-                        id_servicio,
-                        monto_a_pagar,
-                        costo_envio_cliente,
-                        saldo_cubierto,
-                        status,
-                        fecha_registro,
-                        num_ciclos_contratados,
-                        estado_envio
-                        FROM
-                          proyecto_persona_forma_pago
-                        " . $where . " ORDER BY fecha_registro DESC";
-        $response["data"] = $this->db->query($query_get)->result_array();
-        return $response;
-    }
-    */
     function get_compras_usuario($param, $status = 0)
     {
 
