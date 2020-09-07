@@ -53,6 +53,24 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
+    function info_estado_venta($status_ventas, $recibo, $data, $es_venta_cancelada, $domicilio, $id_recibo)
+    {
+
+        if (!is_mobile()) {
+
+            $response = d(crea_estado_venta($status_ventas, $recibo));
+
+        } else {
+
+            $contenido[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas);
+            $contenido[] = repatidor($data, $id_recibo);
+            $response = append($contenido);
+        }
+        return $response;
+
+
+    }
+
     function render_pendidos($data)
     {
 
@@ -88,7 +106,9 @@ if (!function_exists('invierte_date_time')) {
         $re[] = notificacion_lista_negra($data);
 
         $re[] = frm_pedidos($data, $r, $id_perfil, $es_venta_comisionada, $usuario_comision, $orden, $text_estado_venta);
-        $re[] = d(crea_estado_venta($status_ventas, $r));
+        $re[] = info_estado_venta($status_ventas, $r, $data, $es_venta_cancelada, $domicilio, $id_recibo);
+
+
         $re[] = crea_seccion_solicitud($r);
         $re[] = crea_seccion_productos($r);
         $re[] = crea_fecha_entrega($r);
@@ -1167,8 +1187,15 @@ if (!function_exists('invierte_date_time')) {
         $menu = menu($domicilio, $recibo, $id_recibo, $usuario, $es_vendedor);
         $r[] = d($menu, 'd-none d-md-block');
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
-        $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas);
-        $r[] = repatidor($data, $id_recibo);
+
+        if (!is_mobile()) {
+
+            $r[] = enviar_a_reparto($data, $es_venta_cancelada, $domicilio, $id_recibo, $recibo, $status_ventas);
+            $r[] = repatidor($data, $id_recibo);
+
+        }
+
+
         $r[] = tiene_domilio($domicilio);
         $r[] = format_estados_venta($data, $status_ventas, $recibo, $es_vendedor);
         $r[] = compras_cliente($data);
@@ -2098,17 +2125,17 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_open("", ["class" => "form_fecha_entrega"]);
         $r[] = d(_titulo("FECHA DE ENTREGA"), _mbt5);
         $r[] = input_frm('mt-5', 'NUEVA',
-                [
-                    "data-date-format" => "yyyy-mm-dd",
-                    "name" => 'fecha_entrega',
-                    "class" => "fecha_entrega",
-                    'id' => 'fecha_entrega',
-                    "type" => 'date',
-                    "value" => date("Y-m-d"),
-                    "min" => add_date(date("Y-m-d"), -15),
-                    "max" => add_date(date("Y-m-d"), 15),
-                ]
-            );
+            [
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_entrega',
+                "class" => "fecha_entrega",
+                'id' => 'fecha_entrega',
+                "type" => 'date',
+                "value" => date("Y-m-d"),
+                "min" => add_date(date("Y-m-d"), -15),
+                "max" => add_date(date("Y-m-d"), 15),
+            ]
+        );
 
         $horario_text = text_icon("fa fa-clock-o", "HORA DE ENCUENTRO");
         $horario = lista_horarios()["select"];

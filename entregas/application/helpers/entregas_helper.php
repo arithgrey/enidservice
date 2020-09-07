@@ -58,6 +58,7 @@ if (!function_exists('invierte_date_time')) {
         $ids_usuario_entrega = [];
         $repartidores = [];
 
+        $proximas_entregas = [];
         if (es_data($recibos)) {
 
             sksort($recibos, "fecha_contra_entrega", true);
@@ -153,17 +154,31 @@ if (!function_exists('invierte_date_time')) {
                 $pedido = [];
                 $pedido[] = d($link, "row border-bottom mb-5");
 
+                $indicador = _text('linea_', $id_usuario_entrega);
+
                 if ($abrir_en_google > 0) {
                     $seccion_maps = d($maps_link, 'col-md-4 col-md-offset-4');
                     $pedido[] = d($seccion_maps, "row mt-1 mb-5 ");
                 }
 
                 if ($es_hoy || $es_menor) {
-                    $filtros = _text_($filtro, $filtros_direccion, 'se_entrega_hoy');
+
+                    $filtros = _text_(
+                        $filtro,
+                        $filtros_direccion,
+                        'ubicacion_asignada se_entrega_hoy ',
+                        $indicador
+                    );
+
                     $ventas_hoy[] = d($pedido, $filtros);
+
                 } else {
 
-                    $proximas_entregas[] = d($pedido, 'se_entregara_despues d-none');
+                    $proximas_entregas[] = d(
+                        $pedido,
+                        'ubicacion_asignada se_entregara_despues d-none',
+                        $indicador
+                    );
 
                 }
 
@@ -173,7 +188,12 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($recibos)) {
 
-                $extregas = a_enid('Ordenes liberadas', ['href' => path_enid('pedidos_reparto'), 'class' => 'strong black underline']);
+                $extregas = a_enid('Ordenes liberadas',
+                    [
+                        'href' => path_enid('pedidos_reparto'),
+                        'class' => 'strong black underline'
+                    ]
+                );
                 $r[] = d(_titulo(_text_(count($recibos), 'Entregas en proceso')), 'mb-5');
 
                 $r[] = d($extregas, 'mb-5');
@@ -205,8 +225,10 @@ if (!function_exists('invierte_date_time')) {
                 $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_mas_opciones black d-none')),
                     ['class' => 'mx-auto '], 13);
 
-                $filtros_ubicacion[] = d(icon(_text_(_maps_icon, 'fa-2x filtro_sin_ubicacion text-secondary')),
-                    ['class' => 'mx-auto '], 13);
+                $filtros_ubicacion[] =
+                    d(
+                        icon(_text_(_maps_icon, 'fa-2x filtro_sin_ubicacion text-secondary')),
+                        ['class' => 'mx-auto '], 13);
 
                 $filtros_ubicacion[] = d(icon(_text_(_maps_icon, 'fa-2x filtro_ubicacion d-none')),
                     ['class' => 'mx-auto '], 13);
@@ -216,8 +238,6 @@ if (!function_exists('invierte_date_time')) {
                 $reparto = append($filtros_ubicacion);
                 $r[] = d(d(flex($ubicacion, $reparto, _between), 'col-md-4 col-md-offset-4'), 13);
                 $r[] = append($ventas_hoy);
-
-
                 $r[] = append($proximas_entregas);
 
             }
@@ -242,7 +262,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $nombre_usuario_entrega = search_bi_array($repartidores, 'id', $clave, 'nombre_usuario_entrega');
                 $contenido = flex($nombre_usuario_entrega, $valor, _text_(_between, 'border-bottom'), 'text-uppercase');
-                $response[] = d(d($contenido, 4, 1), 13);
+                $response[] = d(d($contenido, 4, 1), ['class' => 'row repartidor cursor_pointer black_cursor_pointer', 'id' => $clave]);
 
             }
         }

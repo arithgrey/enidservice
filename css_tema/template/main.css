@@ -1100,7 +1100,10 @@ table {
     margin-bottom: 100px;
     display: block;
 }
-
+.black_cursor_pointer:hover{
+    color: #000 !important;
+    font-weight: bold;
+}
 .cursor_pointer:hover {
     cursor: pointer;
 }

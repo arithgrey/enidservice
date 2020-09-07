@@ -478,6 +478,56 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
+    function format_encuesta($data)
+    {
+
+        $response[] = $data["paginacion"];
+        $mientros = $data["miembros"];
+
+        if (es_data($mientros)) {
+
+            foreach ($mientros as $row) {
+
+                $contenido = [];
+
+                $id_usuario = $row["id_usuario"];
+                $persona = format_nombre($row);
+                $link_usuarios =  path_enid('usuario_contacto', $id_usuario);
+                $imagen =
+                    img(
+                        [
+                            "src" => path_enid('imagen_usuario', $id_usuario),
+                            "onerror" => "this.src='../img_tema/user/user.png'",
+                            'class' => 'mx-auto d-block rounded-circle mah_50'
+                        ]
+                    );
+
+                $contenido[] = d($imagen);
+                $contenido[] = flex(
+                    format_fecha($row["fecha_registro"]),
+                    _titulo($persona, 4),
+                    'flex-column'
+                );
+
+                $elemento = d_c($contenido, ['class' => 'col-sm-4 text-md-left text-center']);
+                $response[] = a_enid(d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row linea cursor_pointer', _between)),$link_usuarios);
+
+            }
+
+        } else {
+
+            $texto[] = h(_text_(strong('Ups!'), 'no encontramos a este ', strong('usuario')), 1, 'text-center  text-uppercase');
+            $texto[] = d('Intenta con otro nombre, email ó teléfono', 'text-center text-danger mt-5 border border-secondary');
+            $response[] = d($texto, 'col-md-4 col-md-offset-4 mt-5 bg-light p-5');
+
+        }
+
+
+        return append($response);
+
+    }
+
     function format_miembros($data)
     {
 
@@ -488,15 +538,16 @@ if (!function_exists('invierte_date_time')) {
             $contenido = [];
             $id_usuario = $row["id_usuario"];
             $persona = _text_($row["nombre"], $row["apellido_paterno"], $row["apellido_materno"]);
-
-
-            $imagen = img(
-                [
-                    "src" => path_enid('imagen_usuario', $id_usuario),
-                    "onerror" => "this.src='../img_tema/user/user.png'",
-                    'class' => 'w_50 mw-100 mx-auto'
-                ]
+            $imagen = a_enid(
+                img(
+                    [
+                        "src" => path_enid('imagen_usuario', $id_usuario),
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'mx-auto d-block rounded-circle mah_50'
+                    ]
+                ), path_enid('usuario_contacto', $id_usuario)
             );
+
             $contenido[] = d($imagen);
             $contenido[] = flex(
                 format_fecha($row["fecha_registro"]),
@@ -557,7 +608,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = tr($lista_fechas_text);
-
         $sl[] = td("Solicitudes", $style_solicitudes);
         $sl[] = td($totales_solicitudes, $style_solicitudes);
         $sl[] = $lista_solicitudes;
@@ -1421,8 +1471,10 @@ if (!function_exists('invierte_date_time')) {
                 $id_usuario_entrega = $row['id_usuario_entrega'];
 
 
+                $usuario_entrega  = $row['usuario_entrega'];
                 $ubicacion = $row['ubicacion'];
                 $text_total = ayuda_notificacion(
+                    $usuario_entrega,
                     $total,
                     $dia_entrega,
                     $es_contra_entrega,
@@ -1480,13 +1532,18 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function ayuda_notificacion($total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
+    function ayuda_notificacion($usuario_entrega, $total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
                                 $id_usuario_entrega, $ubicacion, $text_entrega)
     {
         $text_total = [];
         $icon = '';
         if ($id_usuario_entrega > 0) {
-            $icon = d(icon(_entregas_icon));
+
+            $icono = d(icon(_entregas_icon));
+            $nombre_repatidor = format_nombre($usuario_entrega);
+            $icon =  flex($icono, $nombre_repatidor,'flex-column justify-content-center', 'ml-auto');
+
+
         }
 
         $text_total[] = flex($total, $icon, _between);

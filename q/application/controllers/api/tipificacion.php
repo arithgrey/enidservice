@@ -29,17 +29,22 @@ class tipificacion extends REST_Controller
         if (array_key_exists("v", $param) && $param["v"] == 1) {
 
             $extra = (array_key_exists("text", $param)) ? d(strong($param["text"]), 1) : "";
-            $response =
-                $extra . create_select($response,
-                    "tipificacion",
-                    "tipificacion form-control",
-                    "tipificacion",
-                    "nombre_tipificacion",
-                    "id_tipificacion",
-                    0,
-                    1,
-                    0,
-                    "-");
+            $select = create_select(
+                $response,
+                "tipificacion",
+                "tipificacion form-control",
+                "tipificacion",
+                "nombre_tipificacion",
+                "id_tipificacion",
+                0,
+                1,
+                0,
+                "-",
+                [],
+                1
+            );
+
+            $response = _text($extra, $select);
         }
 
         $this->response($response);

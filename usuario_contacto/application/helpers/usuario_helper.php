@@ -1,6 +1,23 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function render_busqueda($data){
+
+        $response[] = d(_titulo('Busqueda', 2), _mbt5);
+        $response[] = input_frm('', '¿A quién buscamos? Nombre, email, telefono', [
+                'name' => 'q',
+                'id' => 'q',
+                'class' => 'q nombre_usuario'
+            ]
+        );
+
+        $contenido[] =  d($response,8,1);
+        $contenido[] =  d(place("seccion_usuarios"),8,1);
+
+        return append($contenido);
+
+    }
+
     function render($data)
     {
 
@@ -8,10 +25,12 @@ if (!function_exists('invierte_date_time')) {
         $usuario_busqueda = $data['usuario_busqueda'];
         if (es_data($usuario_busqueda)) {
 
-            $calificacion = $data['usuario_calificacion'];
+            $usuario_calificacion = $data['usuario_calificacion'];
+            $calificacion = $usuario_calificacion['promedio'];
+            $encuestas = $usuario_calificacion['encuestas'];
+
             $sexo = pr($usuario_busqueda, 'sexo');
             $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
-//            $texto_sexo = $opt[$sexo];
 
             $perfil_busqueda = $data['perfil_busqueda'];
             $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
@@ -40,7 +59,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $seccion_calificacion = posibilidades($calificacion, $id_usuario, $data, $es_propietario);
+            $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
 
 
             if ($es_propietario) {
@@ -100,7 +119,7 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function posibilidades($calificacion, $id_usuario, $data, $es_propietario)
+    function posibilidades($calificacion, $encuestas,  $id_usuario, $data, $es_propietario)
     {
         $response = [];
         for ($x = 1; $x <= 5; $x++) {
@@ -127,6 +146,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = d(_titulo(round($calificacion, 2)), 'text-center');
+        $response[] = d(_text_( 'Valoraciones', strong($encuestas)),'text-center');
         $response[] = d($estrellas);
 
 
@@ -152,6 +172,7 @@ if (!function_exists('invierte_date_time')) {
 
     function formulario_calificacion($data)
     {
+
         $usuario_busqueda = $data['usuario_busqueda'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
         $titulo = _titulo('¿Qué calificación me darías?');

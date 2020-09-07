@@ -20,6 +20,16 @@ class Competencias extends REST_Controller
 
         $this->response($response);
     }
+    function liberaciones_GET()
+    {
+
+        $param = $this->get();
+        $tipo = prm_def($param, 'tipo_top');
+        $ventas_dia = $this->ventas_dia_semana($tipo);
+        $response = $this->repartidor($ventas_dia);
+
+        $this->response($response);
+    }
 
     private function ventas_dia_semana($tipo)
     {
@@ -94,6 +104,32 @@ class Competencias extends REST_Controller
                 'nombre_vendedor' => format_nombre($vendedor),
                 'path_imagen' => path_enid("imagen_usuario", $id_vendedor)
             ];
+
+        }
+
+        sksort($response, 'ventas');
+        return $response;
+
+    }
+    private function repartidor($ventas)
+    {
+
+        $repartidores = array_column($ventas, 'id_usuario_entrega');
+        $ventas_comisionistas = array_count_values($repartidores);
+        $response = [];
+
+        foreach ($ventas_comisionistas as $id_reparto => $valor) {
+            if($id_reparto > 0){
+
+            $repartidor = search_bi_array($ventas, 'id_usuario_entrega', $id_reparto, "usuario_entrega");
+            $response[] = [
+                'id_vendedor' => $id_reparto,
+                'ventas' => $valor,
+                'nombre_vendedor' => format_nombre($repartidor),
+                'path_imagen' => path_enid("imagen_usuario", $id_reparto)
+            ];
+
+            }
 
         }
 

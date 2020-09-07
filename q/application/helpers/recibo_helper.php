@@ -573,6 +573,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen_usuarios_por_pago = [];
         $usuarios = [];
         $recibos_ventas = [];
+        $tota_cancelaciones = 0;
         foreach ($recibos as $row) {
             $id_servicio = $row['id_servicio'];
             $transacciones++;
@@ -635,6 +636,9 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($es_orden_cancelada) ? " cancelado white" : $extra;
             $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
 
+            if ($es_orden_cancelada && !$es_lista_negra) {
+                $tota_cancelaciones++;
+            }
 
             if ($se_pago > 0) {
 
@@ -651,7 +655,6 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $url_img = $row["url_img_servicio"];
-
             $img = img(
                 [
                     "src" => $url_img,
@@ -675,12 +678,10 @@ if (!function_exists('invierte_date_time')) {
             $text_usuario_entrega = (es_data($usurio_entrega)) ? d(format_nombre($usurio_entrega), 'strong fp9') : '';
             $fecha_contra_entrega = _d($text_usuario_entrega, $fecha_contra_entrega);
 
-
             $contenido[] = d($fecha_contra_entrega, 'col-lg-2 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d($img, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
             $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
-
 
             $path = path_enid('pedidos_recibo', $recibo);
             $config = [
@@ -723,12 +724,13 @@ if (!function_exists('invierte_date_time')) {
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
         $totales = d(_titulo(_text_('Total cobrado', money($total))), 13);
 
+
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
         $listado[] = append($linea_cambio_estado);
         $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
-        $sintesis = sintesis_compras($recibos_ventas, $recibos);
+        $sintesis = sintesis_compras($recibos_ventas, $recibos, $linea_cambio_lista_negra, $tota_cancelaciones);
 
         $render = [
             $conversion,
@@ -772,17 +774,21 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function sintesis_compras(&$servicios, &$recibos)
+    function sintesis_compras(&$servicios, &$recibos, &$linea_cambio_lista_negra, &$tota_cancelaciones)
     {
-        
+
+        $totales = 0;
         $response[] = d(_titulo('Resumen', 2), 13);
         if (es_data($servicios)) {
 
-            foreach ($servicios as  $row) {
 
-                $id_servicio =  $row['id_servicio'];
-                $cantidad  = $row["cantidad"];
+            sksort($servicios, 'cantidad');
+            foreach ($servicios as $row) {
 
+                $id_servicio = $row['id_servicio'];
+                $cantidad = $row["cantidad"];
+
+                $totales = $totales + $cantidad;
                 $path_imagen_servicio = search_bi_array(
                     $recibos,
                     "id_servicio",
@@ -798,16 +804,23 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
+                $link = path_enid('producto', $id_servicio);
+                $link_imagen = a_enid($img, $link);
+
                 $fila = flex(
-                    $img,
+                    $link_imagen,
                     _titulo($cantidad, 2),
                     _text_(_between, 'border'),
                     '',
                     'mr-3'
                 );
+
                 $response[] = d($fila, 13);
 
             }
+            $response[] = d(p(_text_('Cancelaciones', strong($tota_cancelaciones)), 'ml-auto mt-5 black text-uppercase'), 13);
+            $response[] = d(p(_text_('Ordenes en lista negra', count($linea_cambio_lista_negra)), 'ml-auto black text-uppercase'), 13);
+            $response[] = d(p(_text_('Artículos vendidos', $totales), 'ml-auto black text-uppercase strong p-2 border border-dark'), 13);
         }
         return d($response, 'mt-5');
 

@@ -19,16 +19,41 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $this->app->acceso();
-        $data = $this->app->cssJs($data, "usuario_contacto");
         $param = $this->input->get();
-        $id_usuario = prm_def($param, 'id_usuario');
+        $q = prm_def($param, 'q');
 
+        $data = $this->app->cssJs($data, "usuario_contacto");
+
+        if ($q !== 0) {
+
+            $this->busqueda($param, $data, $q);
+
+        } else {
+
+            $this->encuesta($param, $data);
+
+        }
+
+    }
+
+    private function encuesta($param, $data)
+    {
+
+        $id_usuario = prm_def($param, 'id_usuario');
         $data['usuario_busqueda'] = $this->app->usuario($id_usuario);
         $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
         $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session']);
-        $data['encuesta'] =  prm_def($this->input->get(),'encuesta');
+        $data['encuesta'] = prm_def($this->input->get(), 'encuesta');
         $this->app->pagina($data, render($data), 1);
+
+    }
+
+    private function busqueda($param, $data, $q)
+    {
+
+        $len = strlen($q);
+        $this->app->pagina($data, render_busqueda($data), 1);
 
     }
 

@@ -13,6 +13,11 @@ let $input_comentario = $('.input_comentario');
 let $input_id_usuario = $('.input_id_usuario');
 let $input_id_usuario_califica = $('.input_id_usuario_califica');
 
+let $nombre_usuario = $();
+if (parseInt($('.nombre_usuario').length) > 0) {
+    $nombre_usuario = $('.nombre_usuario');
+}
+
 $(document).ready(function () {
 
     $calificame.click(formulario_calificacion);
@@ -21,6 +26,17 @@ $(document).ready(function () {
     $tipificacion.click(selecciona_tipificacion);
     $enviar_formulario_boton.removeClass('bg_black');
     $enviar_formulario_boton.click(enviar_puntuacion);
+    set_option("estado_usuario", 1);
+    set_option("depto", 0);
+    set_option("page", 1);
+
+    $nombre_usuario.keypress(function (e) {
+
+        let keycode = e.keyCode;
+        if (keycode === 13) {
+            busqueda_usuarios();
+        }
+    });
 
 });
 
@@ -72,7 +88,7 @@ let enviar_puntuacion = function () {
     let url = "../q/index.php/api/puntuacion/index/format/json/";
     $input_comentario.prop('disabled', true);
     $enviar_formulario_boton.prop('disabled', true).removeClass('bg_black');
-    modal('Procesando...',1);
+    modal('Procesando...', 1);
     request_enid("POST", data_send, url, response_puntuacion);
 
 }
@@ -82,3 +98,33 @@ let response_puntuacion = function (data) {
     cerrar_modal();
 
 }
+let busqueda_usuarios = () => {
+
+
+
+    let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
+    let data_send = {
+        "status": get_option("estado_usuario"),
+        "id_departamento": get_option("depto"),
+        "page": get_option("page"),
+        "q": $nombre_usuario.val(),
+        "v": 2,
+    };
+    request_enid("GET", data_send, url, carga_usuario);
+
+
+};
+
+let carga_usuario = (data) => {
+
+    render_enid('.seccion_usuarios', data);
+    $(".pagination > li > a, .pagination > li > span").click(function (e) {
+
+        e.preventDefault();
+        set_option("page", $(this).text());
+        busqueda_usuarios();
+
+    });
+    $(".pagination > li > a, .pagination > li > span").css("color", "white");
+
+};

@@ -1,3 +1,7 @@
+.linea:hover{
+    background: #daeeff;
+
+}
 .tipificacion_seleccion {
     background: black;
     color: white !important;

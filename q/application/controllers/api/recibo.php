@@ -35,10 +35,12 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_perfil,id_empresa")) {
 
+
+            $data = $this->app->session();
             $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
-            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1);
+            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
 
             $idusuarios_empresa = array_column($usuarios_empresa, 'idusuario');
             $idusuarios_empresa = array_unique($idusuarios_empresa);
@@ -389,7 +391,7 @@ class recibo extends REST_Controller
                     $param["fecha_inicio"], $param["fecha_termino"]);
                 $response = get_format_tiempo_entrega($response, $total, $param);
 
-            }else{
+            } else {
                 $response = sin_resultados_busqueda();
             }
 
@@ -802,7 +804,6 @@ class recibo extends REST_Controller
         $ids_usuarios = [];
         $usuarios = [];
         $response = [];
-
         foreach ($ordenes as $row) {
 
             $orden = $row;
@@ -830,34 +831,29 @@ class recibo extends REST_Controller
         return $response;
     }
 
-    function append_usuario_cliente($ordenes)
+    function append_usuario_cliente(&$ordenes)
     {
-        $a = 0;
-        $ids_usuarios = [];
-        $usuarios = [];
-        $response = [];
 
+        $ids_ordenes = array_column($ordenes, "id_usuario");
+        $ids_usuarios = array_unique($ids_ordenes);
+        $usuarios = $this->usuarios_q($ids_usuarios);
+        $a = 0;
+
+        $response  =  [];
         foreach ($ordenes as $row) {
 
-            $orden = $row;
-            $id_usuario = $row['id_usuario'];
-            $response[$a] = $orden;
-            if (!in_array($id_usuario, $ids_usuarios)) {
+            $id_usuario = (int)$row['id_usuario'];
+            $response[$a] = $row;
+            $index = search_bi_array($usuarios, "id_usuario", $id_usuario, FALSE, FALSE);
 
-                $ids_usuarios[] = $id_usuario;
-                $usuario = $this->app->usuario($id_usuario);
-                $busqueda_usuario =
-                    [
-                        'id_usuario' => $id_usuario,
-                        'usuario_cliente' => $usuario
-                    ];
-                $response[$a]['usuario_cliente'] = $busqueda_usuario['usuario_cliente'];
-                $usuarios[] = $busqueda_usuario;
+            if ($index !== FALSE) {
+
+                $response[$a]['usuario_cliente'] = $usuarios[$index];
 
             } else {
-                $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario, 'usuario_cliente');
-                $response[$a]['usuario_cliente'] = $usuario;
+                $response[$a]['usuario_cliente'] = [];
             }
+
             $a++;
         }
 
@@ -1135,8 +1131,8 @@ class recibo extends REST_Controller
                 'src' => _text_("https://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
                 'width' => '100',
             ];
-            $img_oxxo = _text("https://enidservices.com/",_web,"/img_tema/pago-oxxo.jpeg");
-            $img_paypal = _text("https://enidservices.com/",_web,"/img_tema/explicacion-pago-en-linea.png");
+            $img_oxxo = _text("https://enidservices.com/", _web, "/img_tema/pago-oxxo.jpeg");
+            $img_paypal = _text("https://enidservices.com/", _web, "/img_tema/explicacion-pago-en-linea.png");
             $url_seguimiento_pago = $url_request . "pedidos/?seguimiento=$id_recibo&notificar=1";
 
 
@@ -1316,6 +1312,7 @@ class recibo extends REST_Controller
         return $ordenes;
 
     }
+
     function add_clientes($ordenes)
     {
 
@@ -1350,7 +1347,6 @@ class recibo extends REST_Controller
         }
 
         return $response;
-
 
 
     }
@@ -1927,7 +1923,6 @@ class recibo extends REST_Controller
             $id_empresa = $param['id_empresa'];
             $response = $this->recibo_model->proximas($id_empresa, $id_usuario, $id_perfil, $dia);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
-
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
         }
         $this->response($response);
@@ -2031,7 +2026,8 @@ class recibo extends REST_Controller
 
             $id_empresa = $param['id_empresa'];
 
-            $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1);
+            $data = $this->app->session();
+            $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
             $ids_usuarios = array_column($usuarios, 'idusuario');
 
 
@@ -2042,11 +2038,12 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
-    private function usuarios_empresa_perfil($id_empresa, $grupo)
+    private function usuarios_empresa_perfil($id_empresa, $grupo, $data)
     {
         $q = [
             'id_empresa' => $id_empresa,
-            'grupo' => $grupo
+            'grupo' => $grupo,
+            'data' => $data
         ];
 
         return $this->app->api("usuario/empresa_perfil/format/json/", $q);

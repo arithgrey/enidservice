@@ -724,7 +724,8 @@ function create_select(
     $def = 0,
     $valor = 0,
     $text_def = "",
-    $menos = []
+    $menos = [],
+    $mayusculas = 0
 )
 {
 
@@ -738,7 +739,8 @@ function create_select(
 
         if (!in_array($item[$val], $menos)) {
 
-            $select[] = "<option value='" . $item[$val] . "'>" . $item[$text_option] . " </option>";
+            $texto = ($mayusculas > 0) ? strtoupper($item[$text_option]) : $item[$text_option];
+            $select[] = "<option value='" . $item[$val] . "'>" . $texto . " </option>";
         }
     }
 
@@ -1973,7 +1975,10 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
     $base_url = [
         "sobre_vender" => "sobre_ventas",
         "top_competencia" => "competencias",
+        "top_competencia_entrega" => "competencias_entrega",
         "top_competencias" => "competencias/?tipo_top=",
+        "top_competencia_entregas" => "competencias_entregas",
+        "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
         "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
         "url_home" => "../reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
