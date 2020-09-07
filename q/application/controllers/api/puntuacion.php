@@ -36,7 +36,7 @@ class Puntuacion extends REST_Controller
 
     private function asigna_puntuacion_usuario($id_usuario)
     {
-        
+
         return $this->app->api("usuario/puntuacion",
             [
                 "id_usuario" => $id_usuario,
@@ -53,13 +53,27 @@ class Puntuacion extends REST_Controller
 
     }
 
+    private function encuestas($id_usuario)
+    {
+
+        return $this->puntuacion_model->get(
+            ["COUNT(0)total"],
+            ["id_usuario" => $id_usuario])[0]["total"];
+
+    }
+
     function general_GET()
     {
         $response = false;
         $param = $this->get();
         if (fx($param, "id_usuario")) {
 
-            $response = $this->promedio($param['id_usuario']);
+
+            $id_usuario = $param['id_usuario'];
+            $response = [
+                'promedio' => $this->promedio($id_usuario),
+                'encuestas' => $this->encuestas($id_usuario)
+            ];
 
         }
         $this->response($response);

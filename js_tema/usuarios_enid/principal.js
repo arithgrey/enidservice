@@ -115,12 +115,12 @@ let carga_usuarios = () => {
     let $nombre_usuario = $('.nombre_usuario').val();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
-            "status": get_option("estado_usuario"),
-            "id_departamento": get_option("depto"),
-            "page": get_option("page"),
-            "q": $nombre_usuario,
-        }
-    ;
+        "status": get_option("estado_usuario"),
+        "id_departamento": get_option("depto"),
+        "page": get_option("page"),
+        "q": $nombre_usuario,
+        "v": 1,
+    };
     request_enid("GET", data_send, url, response_carga_usuario);
 };
 let response_carga_usuario = (data) => {
@@ -150,11 +150,11 @@ let carga_data_usuario = (e) => {
     let id = e.target.id;
     if (parseInt(id) > 0) {
 
-        let tipo_reparto = [$auto, $moto,$bicicleta,$pie];
-        for(let x in tipo_reparto){
+        let tipo_reparto = [$auto, $moto, $bicicleta, $pie];
+        for (let x in tipo_reparto) {
             tipo_reparto[x].removeClass('button_enid_eleccion_active');
         }
-        
+
         document.getElementById("form-miembro-enid-service").reset();
         $(".place_correo_incorrecto").empty();
         recorre(".tab-content");

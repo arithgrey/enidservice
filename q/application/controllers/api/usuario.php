@@ -23,7 +23,6 @@ class usuario extends REST_Controller
         $param = $this->get();
         $in = get_keys($param['ids']);
         $response = $this->usuario_model->get_in($in);
-
         $this->response($response);
 
     }
@@ -133,9 +132,10 @@ class usuario extends REST_Controller
 
         if (fx($param, "id_empresa,grupo")) {
             $id_empresa = $param['id_empresa'];
+            $data =  $param['data'];
             $grupo = $param['grupo'];
             $in = 0;
-            $data = $this->app->session();
+
             switch ($grupo) {
                 case 1:
 
@@ -716,11 +716,13 @@ class usuario extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_departamento")) {
+        if (fx($param, "id_departamento,v")) {
             $total = $this->usuario_model->num_total($param);
             $per_page = 10;
+            $v =  $param["v"];
             $param["resultados_por_pagina"] = $per_page;
             $data["miembros"] = $this->usuario_model->get_equipo_enid_service($param);
+
             $conf["page"] = prm_def($param, "page");
             $conf["totales_elementos"] = $total;
             $conf["per_page"] = $per_page;
@@ -728,7 +730,24 @@ class usuario extends REST_Controller
             $conf["q2"] = "";
             $data["paginacion"] = $this->app->paginacion($conf);
             $data["modo_edicion"] = 1;
-            $response = format_miembros($data);
+
+            switch ($v) {
+
+                case 1:
+
+                    $response = format_miembros($data);
+
+                    break;
+                case 2:
+
+                    $response = format_encuesta($data);
+
+                    break;
+                default:
+                    break;
+            }
+
+
         }
         $this->response($response);
 

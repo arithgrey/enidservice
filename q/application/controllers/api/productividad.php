@@ -39,9 +39,7 @@ class productividad extends REST_Controller
             "preguntas" => [],
             "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
-//            "recibos_sin_costos_operacion" => $this->get_scostos($id_usuario, $data),
             "recibos_sin_costos_operacion" => [],
-//            "clientes_sin_tags_arquetipos" => $this->get_stag($data),
             "clientes_sin_tags_arquetipos" => [],
             "tareas" => $this->get_tareas($data, $id_usuario)
         ];
@@ -242,7 +240,8 @@ class productividad extends REST_Controller
             [
                 "id_usuario" => $id_usuario,
                 "id_perfil" => $id_perfil,
-                "id_empresa" => $id_empresa
+                "id_empresa" => $id_empresa,
+                "domicilios" => 1
             ]
         );
         $usuarios = $this->usuarios_en_lista_negra($usuarios);
