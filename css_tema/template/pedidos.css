@@ -1,3 +1,7 @@
+.selector{
+    background: darkslategrey;
+    color: whitesmoke;
+}
 .sin_seleccion {
 
     border: 1px solid rgb(13, 62, 86);

@@ -1674,12 +1674,13 @@ if (!function_exists('invierte_date_time')) {
 
                 ];
                 $contenido[] = d($id_usuario, $config);
-                $contenido[] = d($nombre_completo, $config);
+                $config_venta = ['class' => 'nombre_usuario_venta text-uppercase cursor_pointer col-md-4 border', 'id' => $id_usuario];
+                $contenido[] = d($nombre_completo, $config_venta);
 
                 $config_pago['class'] = _text_($config_pago['class'], 'strong text-right');
                 $contenido[] = d($total_comisiones, $config_pago);
+                $response[] = d($contenido, _text_('border row', _text('sintesis nombre_vendedor_sintesis_', $id_usuario)));
 
-                $response[] = d($contenido, 'border row');
             }
 
 
@@ -1695,6 +1696,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_proyecto_persona_forma_pago = $row['id_proyecto_persona_forma_pago'];
                 $comision_venta = $row['comision_venta'];
                 $nombre_usuario = format_nombre($row);
+                $id_usuario_referencia = $row['id_usuario_referencia'];
 
                 $nombre_usuario_cliente = formato_nombre_cliente($clientes_por_pago, $row['id_usuario']);
                 $contenido = [];
@@ -1715,12 +1717,15 @@ if (!function_exists('invierte_date_time')) {
                 $contenido[] = d(money($comision_venta), _text_($class, 'strong'));
                 $path = path_enid('pedidos_recibo', $id_proyecto_persona_forma_pago);
 
-                $response[] = a_enid(append($contenido),
-                    [
-                        'class' => 'd-flex align-items-center row text-center border black',
-                        'href' => $path,
-                        'target' => '_blank'
-                    ]
+                $tag_usuario = _text('usuario_', $id_usuario_referencia);
+                $response[] = d(
+                    a_enid(append($contenido),
+                        [
+                            'class' => 'd-flex align-items-center row text-center border black',
+                            'href' => $path,
+                            'target' => '_blank',
+                        ]
+                    ), _text_('linea_venta', $tag_usuario)
                 );
 
             }

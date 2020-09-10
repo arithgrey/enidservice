@@ -1543,7 +1543,6 @@ if (!function_exists('invierte_date_time')) {
             $nombre_repatidor = format_nombre($usuario_entrega);
             $icon =  flex($icono, $nombre_repatidor,'flex-column justify-content-center', 'ml-auto');
 
-
         }
 
         $text_total[] = flex($total, $icon, _between);
