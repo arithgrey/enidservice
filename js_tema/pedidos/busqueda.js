@@ -11,7 +11,8 @@ let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
 let $input_busqueda = $form_busqueda.find('.input_busqueda');
 let $tipo_orden = $form_busqueda.find('.tipo_orden');
-
+let $nombre_usuario_venta = $('.nombre_usuario_venta');
+let $sintesis = $('.sintesis');
 $(document).ready(() => {
 
     $('footer').ready(function () {
@@ -21,6 +22,7 @@ $(document).ready(() => {
     $form_pago_comisiones.submit(registro_pago);
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
     $input_busqueda.keyup(elimina_guienes);
+    $nombre_usuario_venta.click(filtro_ordenes_vendedor);
 });
 
 let busqueda_pedidos = function (e) {
@@ -128,4 +130,23 @@ let paste_busqueda = function () {
         let str = event.clipboardData.getData("text/plain");
         event.target.value = str.replace(/-/g, '');
     }
+}
+let filtro_ordenes_vendedor = function (e) {
+
+    let $id = e.target.id;
+    if (parseInt($id) > 0) {
+
+        $('.linea_venta').addClass('d-none').removeClass('d-block');
+        let linea = _text('.usuario_', $id);
+        $(linea).removeClass('d-none');
+        $sintesis.removeClass('selector');
+
+
+        $('sintesis').removeClass('selector');
+        let linea_selector = _text('.nombre_vendedor_sintesis_', $id);
+        $(linea_selector).addClass('selector');
+
+    }
+
+
 }
