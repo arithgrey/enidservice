@@ -30,7 +30,6 @@ if (!function_exists('invierte_date_time')) {
         $busqueda = $data["busqueda"];
 
 
-
         $x[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
         $x[] = d($data["lista_productos"], 13);
 
@@ -50,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
-        $fil[] = d( d($z,'seccion_categorias_desglose p-3 '), 'col-sm-2');
+        $fil[] = d(d($z, 'seccion_categorias_desglose p-3 '), 'col-sm-2');
 
 
         $seccion = _text(
@@ -162,7 +161,7 @@ if (!function_exists('invierte_date_time')) {
         }
         return d(
             d($r, "col-lg-8 col-lg-offset-2 d-flex flex-row align-items-end text-center white strong"),
-            'contenedor_anuncios_home col-lg-12  mb-5 p-3 d-none d-md-block');
+            'contenedor_anuncios_home col-lg-12 mb-5 p-3 d-none d-md-block');
 
 
     }
@@ -277,10 +276,34 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r = [];
+        $categorias = [];
+        $a = 0;
         foreach ($info as $row) {
 
-            $url = path_enid("search", "?q=" . $busqueda . "&q2=" . $row["id_clasificacion"]);
-            $r[] = a_enid($row["nombre_clasificacion"], ["href" => $url, "class" => 'categoria_text black'], 1);
+            $nombre_clasificacion = $row["nombre_clasificacion"];
+            if ($a < 1) {
+
+                $categorias[] = $nombre_clasificacion;
+                $a++;
+
+            } else {
+
+                if (!in_array($nombre_clasificacion, $categorias)) {
+
+                    $extra_busqueda = _text("?q=", $busqueda, "&q2=", $row["id_clasificacion"]);
+                    $url = path_enid("search", $extra_busqueda);
+                    $r[] = a_enid(
+                        $nombre_clasificacion,
+                        [
+                            "href" => $url,
+                            "class" => 'categoria_text black'
+                        ], 1
+                    );
+                    $categorias[] = $nombre_clasificacion;
+                }
+
+            }
+
         }
 
         return [
