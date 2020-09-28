@@ -216,7 +216,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btw(
             _titulo("TU LISTA DE DESEOS")
             ,
-            a_enid("EXPLORAR MÁS ARTÍCULOS", path_enid('search'))
+            a_enid("EXPLORAR MÁS ARTÍCULOS", path_enid('search',"/?q2=0&q=&order=2&order=4"))
             ,
             3
         );

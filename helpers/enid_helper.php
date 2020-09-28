@@ -1380,7 +1380,8 @@ function get_logo($session = 0)
 
     if (is_mobile()) {
 
-        $texto = d("☰ ENID SERVICE", ["onclick" => "openNav()"]);
+        $texto = d("☰ ENID SERVICE", ["onclick" => "openNav()", "class" => "titulo_enid_service  pr-5  pl-2
+         pb-1 pt-1 border"]);
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
@@ -1417,12 +1418,13 @@ function get_logo($session = 0)
 }
 
 
-function get_img_usuario($id_usuario)
+function get_img_usuario($id_usuario, $extra_class='')
 {
+
     $url_img = "../imgs/index.php/enid/imagen_usuario/" . $id_usuario;
     $img_conf = [
         "id" => "imagen_usuario",
-        "class" => "imagen_usuario",
+        "class" => _text_("imagen_usuario", $extra_class),
         "src" => $url_img,
         "onerror" => "this.src='../img_tema/user/user.png'",
         "style" => "width: 40px!important;height: 35px!important;",

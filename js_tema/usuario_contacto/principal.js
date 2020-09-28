@@ -100,8 +100,6 @@ let response_puntuacion = function (data) {
 }
 let busqueda_usuarios = () => {
 
-
-
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
         "status": get_option("estado_usuario"),
@@ -111,7 +109,6 @@ let busqueda_usuarios = () => {
         "v": 2,
     };
     request_enid("GET", data_send, url, carga_usuario);
-
 
 };
 

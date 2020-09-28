@@ -87,7 +87,9 @@ a.changecolor {
     width: 100%;
     z-index: 100000;
 }
-
+.titulo_enid_service{
+    background: #15c4c4!important;
+}
 .osahanloading {
     animation: 1.5s linear 0s normal none infinite running osahanloading;
     background: blue none repeat scroll 0 0;
@@ -1107,6 +1109,9 @@ table {
 .cursor_pointer:hover {
     cursor: pointer;
 }
+.decoration_underline:hover {
+    text-decoration: underline!important;
+}
 
 .underline {
     text-decoration: underline !important;
@@ -1292,6 +1297,9 @@ select {
 
 .bg_white {
     background: white!important;
+}
+.bg_blue {
+    background: #041028!important;
 }
 
 .bg_custom_blue {

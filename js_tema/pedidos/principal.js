@@ -529,7 +529,7 @@ let confirma_cambio_horario = (tipo_entrega, ubicacion, id_recibo, status, saldo
     }
 
     show_confirm(text, text_confirmacion, "SI", function () {
-        let url = _text("../pedidos/?recibo=" , id_recibo , "&fecha_entrega=1&ubicacion=",ubicacion, "&tipo_entrega=", tipo_entrega);
+        let url = _text("../pedidos/?recibo=", id_recibo, "&fecha_entrega=1&ubicacion=", ubicacion, "&tipo_entrega=", tipo_entrega);
         redirect(url);
     });
 
@@ -558,7 +558,7 @@ let confirma_envio_lista_negra = (id_usuario) => {
     let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
-        let data_send = {'v': 1, 'id_usuario': id_usuario};
+        let data_send = {'v': 1, 'id_usuario': id_usuario, 'tipo': 0};
         request_enid("GET", data_send, url, response_motivos_lista_negra);
     });
 

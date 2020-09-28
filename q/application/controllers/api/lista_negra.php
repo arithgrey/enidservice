@@ -45,7 +45,8 @@ class lista_negra extends REST_Controller
             } else {
 
                 $q = [
-                    'motivo' => $param['motivo_lista_negra']
+                    'motivo' => $param['motivo_lista_negra'],
+                    'tipo' => $param['tipo']
                 ];
                 $id_motivo = $this->registro_motivo_lista_negra($q);
                 $params = [
