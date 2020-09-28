@@ -35,7 +35,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2');
+        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2 strong');
 
         if ($is_mobile < 1) {
             $z[] = img(
@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
 
-        $fil[] = d(d($z, 'seccion_categorias_desglose p-3 '), 'col-sm-2');
+        $fil[] = d(d($z, 'seccion_categorias_desglose p-3 d-none d-lg-block'), 'col-sm-2');
 
 
         $seccion = _text(
@@ -101,8 +101,9 @@ if (!function_exists('invierte_date_time')) {
 
         $paginacion = d($paginacion, 'd-none d-md-block');
         $filtro = filtro($filtros, $order);
+        $extra = ($is_mobile) ? 'w-100' : '';
         return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 p-0') :
-            flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0');
+            flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0',$extra);
 
 
     }
@@ -214,8 +215,8 @@ if (!function_exists('invierte_date_time')) {
             $response [] = a_enid(
                 $row["nombre_clasificacion"],
                 [
-                    "href" => "?q=&q2=" . $row["primer_nivel"],
-                    "class" => ' text-uppercase black fp9 mt-1 mt-md-0'
+                    "href" => _text("?q=&q2=", $row["primer_nivel"]),
+                    "class" => 'text-uppercase white fp9 mt-1 mt-md-0 decoration_underline'
                 ]
 
             );
@@ -230,13 +231,13 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ), 'col-md-6 col-sm-12 ' . $extra);
 
-        $s[] = _titulo("Más categorías", 0);
-        $s[] = p(d($response, 'mt-4'));
+        $s[] = h("Más categorías", 1, 'text-uppercase white strong');
+        $s[] = p(d($response, 'mt-4 bg_blue p-3'));
         $sec[] = d($s, 'col-md-6 col-sm-12 mt-3 mt-md-0');
         $r[] = append($t);
         $r[] = append($sec);
 
-        return d(d($r, ' mt-5 d-md-flex  align-items-center ' . $extra), 13);
+        return d(d($r, ' mt-5 d-md-flex  align-items-center categorias_extras ' . $extra), 13);
 
     }
 

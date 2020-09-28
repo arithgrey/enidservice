@@ -562,14 +562,12 @@ if (!function_exists('invierte_date_time')) {
                 $es_contra_entrega_domicilio = es_contra_entrega_domicilio($recibo);
                 $formato_domicilio = ($es_contra_entrega_domicilio) ? 'TIENES UNA CITA EL ' : "SE  ESTIMA QUE TU PEDIDO LLEGARÁ EL";
 
-
                 $text = ($es_servicio) ? "PLANEADO PARA EL DÍA " : $formato_domicilio;
                 $fecha_hora_entrega = es_contra_entrega_domicilio($recibo, 1, $fecha);
                 $text_entrega[] = _titulo(_text_($text, $fecha_hora_entrega), 2);
 
                 $usuario_cliente = prm_def($data, 'usuario_cliente');
                 if (es_data($usuario_cliente)) {
-
 
                     $nombre_cliente = format_nombre($usuario_cliente);
 
@@ -578,15 +576,22 @@ if (!function_exists('invierte_date_time')) {
                     $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
 
                 }
+
                 $text = append($text_entrega);
             }
         }
 
         $z[] = $evaluacion;
         $z[] = $text;
+
         $tipo_entrega_domicilio = ($tipo_entrega > 1) ? 'domicilio de entrega' : 'punto de encuentro';
+
         $z[] = _titulo($tipo_entrega_domicilio, 3, 'underline');
+
+        /**/
+
         $z[] = d(text_domicilio($data));
+
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
 
         $text_orden = _text("ORDEN #", $id_recibo);
@@ -595,21 +600,19 @@ if (!function_exists('invierte_date_time')) {
         $path = (puede_repartir($data)) ? $path_resumen_servicio : $path_servicio;
 
 
-        $a[] =
-            a_enid(
-                img(
-                    [
-                        "src" => pr($recibo, "url_img_servicio"),
-                        "class" => "mx-auto d-block"
-                    ]
-                )
-                ,
-                $path
+        $imagen = img(
+            [
+                "src" => pr($recibo, "url_img_servicio"),
+                "class" => "mx-auto d-block"
+            ]
+        );
 
-            );
+        $a[] = a_enid($imagen, $path);
         $texto[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
-
         $texto[] = append($z);
+
+
+
         if (!puede_repartir($data)) {
 
             $texto[] = format_link('comprar nuevamente',
@@ -643,6 +646,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
+
         $a[] = d($texto, 'texto_pedido bg_white p-3');
 
         return d(d($a, 'p-3 azul_contraste_deporte'), 'col-sm-4');
@@ -650,12 +654,31 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function format_imagen_repartidor($recibo){
+
+        $id_usuario_entrega =  pr($recibo,'id_usuario_entrega');
+        $path = path_enid('usuario_contacto', $id_usuario_entrega);
+        $imagen = get_img_usuario($id_usuario_entrega, 'rounded-circle');
+
+        $estrellas = crea_estrellas(4);
+        $texto_calificacion  = flex('califícame', $estrellas,'flex-column');
+
+        $evalua_cliente  = flex($imagen, $texto_calificacion,'black flex-column strong text-uppercase');
+        $evalua_cliente = a_enid($evalua_cliente,$path);
+        $titulo_entrega = _titulo('Entrega', 5, 'underline');
+
+        return flex($titulo_entrega, $evalua_cliente, _between_md);
+
+
+    }
     function format_text_domicilio($domicilio, $data, $recibo, $adicionales = 0)
     {
 
 
         $text_domicilio = pago_en_cita($data, $recibo);
+        $imagen_texto_entrega =  format_imagen_repartidor($recibo);
         if (es_data($domicilio)) {
+
             if (es_data($recibo) && pr($recibo, 'ubicacion') < 1) {
 
                 $domicilio = $domicilio[0];
@@ -691,16 +714,14 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-
                 $text_ubicacion = pr($domicilio, 'ubicacion');
                 $text_ubicacion = valida_texto_maps($text_ubicacion);
                 $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
-                $text_domicilio = _text_($text_ubicacion, $str);
+                $text_domicilio = _text_($text_ubicacion,$imagen_texto_entrega, $str);
+
             }
-
-
+            
         }
-
 
         return $text_domicilio;
 
@@ -714,6 +735,9 @@ if (!function_exists('invierte_date_time')) {
         $domicilio = $data['domicilio'];
         $tipo_entrega = $domicilio['tipo_entrega'];
         $text = "";
+
+        $imagen_texto_entrega = format_imagen_repartidor($recibo);
+
 
         switch ($tipo_entrega) {
 
@@ -745,10 +769,12 @@ if (!function_exists('invierte_date_time')) {
 
                         $usuario_cliente = $data['usuario_cliente'];
                         $nombre_cliente = format_nombre($usuario_cliente);
-                        $text_entrega[] = _titulo('cliente', 3, 'underline');
+                        $text_entrega[] = _titulo('cliente', 5, 'underline');
                         $text_entrega[] = d($nombre_cliente);
                         $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+                        $text_entrega[] = $imagen_texto_entrega;
                         $text_entrega[] = pago_en_cita($data, $recibo, 1);
+
 
                     }
 
@@ -762,6 +788,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $domicilio = $domicilio['domicilio'];
                 $text = format_text_domicilio($domicilio, $data, $recibo, 1);
+
                 break;
 
             default:

@@ -18,7 +18,6 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session();
-        $this->app->acceso();
         $param = $this->input->get();
         $q = prm_def($param, 'q');
 

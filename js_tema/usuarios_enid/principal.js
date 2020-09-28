@@ -379,7 +379,7 @@ let confirma_lista_negra = function () {
     let id_usuario = get_option("id_usuario");
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
-        let data_send = {'v': 1, 'id_usuario': id_usuario};
+        let data_send = {'v': 1, 'id_usuario': id_usuario, 'tipo': 1};
         request_enid("GET", data_send, url, response_motivos_lista_negra);
     });
 };

@@ -18,9 +18,10 @@ class motivo_lista_negra extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "motivo")) {
+        if (fx($param, "motivo,tipo")) {
 
-            $params = ["motivo" => $param['motivo']];
+
+            $params = ["motivo" => $param['motivo'], "tipo" => $param["tipo"]];
             $response = $this->motivo_lista_negra_model->insert($params, 1);
         }
         $this->response($response);
@@ -33,9 +34,12 @@ class motivo_lista_negra extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, 'v,id_usuario')) {
+        if (fx($param, 'v,id_usuario,tipo')) {
 
-            $response = $this->motivo_lista_negra_model->get([], [], 100);
+
+            $tipo = $param['tipo'];
+            $in = ['tipo' => $tipo];
+            $response = $this->motivo_lista_negra_model->get([], $in, 100);
             if ($param['v'] > 0) {
 
                 $render[] = form_open("", ["class" => "form_lista_negra", "method" => "post"]);
@@ -56,6 +60,7 @@ class motivo_lista_negra extends REST_Controller
                     ]
                 ), 'input_agregar_motivo mt-5 mb-5 d-none');
                 $render[] = hiddens(['name' => 'id_usuario', 'value' => $param['id_usuario']]);
+                $render[] = hiddens(['name' => 'tipo', 'value' => $tipo ]);
 
                 $render[] = d(btn('agregar'),'agregar_botton_lista_negra d-none');
                 $render[] = form_close();

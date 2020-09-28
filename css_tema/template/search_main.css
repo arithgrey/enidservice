@@ -1,11 +1,14 @@
 .filtra_busqueda{
     background:  #131440!important;
 }
+.categorias_extras{
+    background: #1559c4!important;
+}
 .seccion_categorias_desglose{
-    background: #15abc4!important;
+    background: #15c4c4!important;
 }
 .contenedor_anuncios_home {
-    background: #15abc4!important;
+    background: #15c4c4!important;
 }
 .text_precio:hover {
     color: white !important;

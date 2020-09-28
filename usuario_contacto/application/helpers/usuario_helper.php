@@ -29,8 +29,6 @@ if (!function_exists('invierte_date_time')) {
             $calificacion = $usuario_calificacion['promedio'];
             $encuestas = $usuario_calificacion['encuestas'];
 
-            $sexo = pr($usuario_busqueda, 'sexo');
-            $opt = ["MUJER", "HOMBRE", "INDEFINIDO"];
 
             $perfil_busqueda = $data['perfil_busqueda'];
             $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
@@ -75,12 +73,13 @@ if (!function_exists('invierte_date_time')) {
 
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
 
-
             $texto_puesto = _text_('Equipo', strong($nombre_perfil));
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
             $descripcion_puesto = a_enid($email, ['class' => 'black']);
-
-            $whats = p(_text_('WhatsApp', a_enid($tel_contacto, ['class' => 'strong black'])), 'black');
+            
+            $texto = p(_text_('WhatsApp', a_enid($tel_contacto, ['class' => 'strong black'])), 'black');
+            $texto_whatsApp = ($data['in_session'] > 0 ) ? $texto : '';
+            $whats = $texto_whatsApp;
 
             $contenido[] = d(d(_text_($texto_titulo, $descripcion_puesto, $whats), 'caption'), 'circle');
             $contenido[] = p($nombre_usuario, 'update-note');
