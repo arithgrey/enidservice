@@ -1411,6 +1411,10 @@ h5 {
 
     min-height: 15px;
 }
+.mah_500 {
+
+    max-height: 500px !important;
+}
 
 .mh_25 {
 
@@ -1464,6 +1468,10 @@ h5 {
 .mah_500 {
 
     max-height: 500px !important;
+}
+.mah_25 {
+
+    max-height: 25px !important;
 }
 .mah_50 {
 

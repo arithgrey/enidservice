@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class tipificacion_recibo extends REST_Controller
@@ -63,8 +63,32 @@ class tipificacion_recibo extends REST_Controller
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino,v")) {
 
-            $response = $this->tipificacion_recibo_model->fecha(
-                $param['fecha_inicio'], $param['fecha_termino']);
+            $response =
+                $this->tipificacion_recibo_model->fecha(
+                    $param['fecha_inicio'],
+                    $param['fecha_termino']
+                );
+            if ($param['v'] == 1) {
+
+                $response = reporte($response);
+            }
+
+        }
+        $this->response($response);
+    }
+    function cancelacion_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino,v")) {
+
+            $response =
+                $this->tipificacion_recibo_model->fecha_cancelacion(
+                    $param['fecha_inicio'],
+                    $param['fecha_termino']
+                );
+
             if ($param['v'] == 1) {
 
                 $response = reporte($response);

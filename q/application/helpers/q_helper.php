@@ -493,7 +493,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_usuario = $row["id_usuario"];
                 $persona = format_nombre($row);
-                $link_usuarios =  path_enid('usuario_contacto', $id_usuario);
+                $link_usuarios = path_enid('usuario_contacto', $id_usuario);
                 $imagen =
                     img(
                         [
@@ -511,7 +511,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $elemento = d_c($contenido, ['class' => 'col-sm-4 text-md-left text-center']);
-                $response[] = a_enid(d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row linea cursor_pointer', _between)),$link_usuarios);
+                $response[] = a_enid(d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row linea cursor_pointer', _between)), $link_usuarios);
 
             }
 
@@ -537,7 +537,10 @@ if (!function_exists('invierte_date_time')) {
 
             $contenido = [];
             $id_usuario = $row["id_usuario"];
-            $persona = _text_($row["nombre"], $row["apellido_paterno"], $row["apellido_materno"]);
+            $persona = format_nombre($row);
+            $puntuacion = $row['puntuacion'];
+            $calificacon = crea_estrellas($puntuacion);
+
             $imagen = a_enid(
                 img(
                     [
@@ -555,6 +558,12 @@ if (!function_exists('invierte_date_time')) {
                 'flex-column'
             );
 
+            $calificacion_usuario = flex($puntuacion, $calificacon, 'flex-column', 'mx-auto', 'mx-auto');
+            $contenido[] = a_enid(
+                $calificacion_usuario,
+                path_enid('usuario_contacto', $id_usuario)
+            );
+
             if ($data["modo_edicion"] > 0):
                 $contenido[] = tab(
                     text_icon('usuario_enid_service fa fa-pencil', '', ["id" => $id_usuario]),
@@ -566,7 +575,7 @@ if (!function_exists('invierte_date_time')) {
 
             endif;
 
-            $elemento = d_c($contenido, ['class' => 'col-sm-4 text-md-left text-center']);
+            $elemento = d_c($contenido, ['class' => 'col-sm-3 text-md-left text-center']);
             $response[] = d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row', _between));
 
         }
@@ -1471,7 +1480,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_usuario_entrega = $row['id_usuario_entrega'];
 
 
-                $usuario_entrega  = $row['usuario_entrega'];
+                $usuario_entrega = $row['usuario_entrega'];
                 $ubicacion = $row['ubicacion'];
                 $text_total = ayuda_notificacion(
                     $usuario_entrega,
@@ -1541,7 +1550,7 @@ if (!function_exists('invierte_date_time')) {
 
             $icono = d(icon(_entregas_icon));
             $nombre_repatidor = format_nombre($usuario_entrega);
-            $icon =  flex($icono, $nombre_repatidor,'flex-column justify-content-center', 'ml-auto');
+            $icon = flex($icono, $nombre_repatidor, 'flex-column justify-content-center', 'ml-auto');
 
         }
 

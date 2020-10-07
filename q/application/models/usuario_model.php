@@ -448,7 +448,8 @@ class usuario_model extends CI_Model
                               u.apellido_materno,                                    
                               u.email,                              
                               u.id_departamento ,
-                              u.fecha_registro
+                              u.fecha_registro,
+                              u.puntuacion
                             FROM 
                               usuario u
                             " . $where;
