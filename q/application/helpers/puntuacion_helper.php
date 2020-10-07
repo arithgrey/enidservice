@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($evaluaciones)) {
 
             $items = ["Miembro", "Evaluaciones - recibos", "Promedio general"];
-            $linea = d(d_c($items, 'col-lg-4 strong text-uppercase mt-5 black'), 'container');
+            $linea = d(d_c($items, 'col-lg-4 strong text-uppercase mt-5 black'),13);
             $response[] = $linea;
             foreach ($evaluaciones as $row) {
 
@@ -32,13 +32,13 @@ if (!function_exists('invierte_date_time')) {
                     $estrellas_puntuacion,
                     $promedio
                 ];
-                $linea = d(d_c($items, 'col-lg-4'), 'container border-bottom mt-2');
+                $linea = d(d_c($items, 'col-lg-4'), 'row border-bottom mt-2');
                 $response[] = $linea;
 
             }
 
         }
-        return append($response);
+        return d($response,12);
     }
 
 }

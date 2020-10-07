@@ -781,7 +781,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(_titulo('Resumen', 2), 13);
         if (es_data($servicios)) {
 
-
             sksort($servicios, 'cantidad');
             foreach ($servicios as $row) {
 
