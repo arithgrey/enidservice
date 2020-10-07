@@ -2,8 +2,11 @@
 let incidencia = 0;
 let $form_arquetipos = $('.form_arquetipos');
 let $form_tipificaciones = $('.form_tipificaciones');
+let $form_evaluaciones = $('.form_evaluaciones');
 let $form_ventas_comisionistas = $('.form_ventas_comisionistas');
 let $form_entregas = $('.form_entregas');
+let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
+let $form_top_ventas = $('.form_top_ventas');
 
 
 $(document).ready(() => {
@@ -36,8 +39,12 @@ $(document).ready(() => {
     });
     $form_arquetipos.submit(arquetipos)
     $form_tipificaciones.submit(tipificaciones);
+    $form_evaluaciones.submit(evaluaciones);
     $form_ventas_comisionistas.submit(ventas_comisionistas);
     $form_entregas.submit(ventas_entregadas);
+    $form_motivos_cancelaciones.submit(motovos_cancelaciones_busqueda);
+    $form_top_ventas.submit(top_ventas);
+
 });
 let carga_nuevos_miembros = function () {
 
@@ -343,7 +350,6 @@ let arquetipos = function (e) {
 };
 let tipificaciones = function (e) {
 
-
     let f_inicio = get_parameter(".form_tipificaciones #datetimepicker4");
     let f_termino = get_parameter(".form_tipificaciones #datetimepicker5");
 
@@ -359,7 +365,24 @@ let tipificaciones = function (e) {
     }
     e.preventDefault();
 };
+let evaluaciones = function (e){
 
+    let f_inicio = get_parameter(".form_evaluaciones #datetimepicker4");
+    let f_termino = get_parameter(".form_evaluaciones #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_evaluaciones.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/puntuacion/recibos/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_evaluaciones #datetimepicker5", ".form_evaluaciones #datetimepicker4"]);
+
+    }
+    e.preventDefault();
+}
 let set_menu = go => show_tabs(["#btn_repo_afiliacion", go]);
 
 let ventas_comisionistas = function (e) {
@@ -381,6 +404,7 @@ let ventas_comisionistas = function (e) {
     e.preventDefault();
 };
 let ventas_entregadas = function (e) {
+
     let f_inicio = get_parameter(".form_entregas #datetimepicker4");
     let f_termino = get_parameter(".form_entregas #datetimepicker5");
 
@@ -396,3 +420,34 @@ let ventas_entregadas = function (e) {
     }
     e.preventDefault();
 };
+let motovos_cancelaciones_busqueda =  function (e){
+
+    let f_inicio = get_parameter(".form_motivos_cancelaciones #datetimepicker4");
+    let f_termino = get_parameter(".form_motivos_cancelaciones #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_motivos_cancelaciones.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/tipificacion_recibo/cancelacion/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    }
+    
+    e.preventDefault();
+}
+
+let top_ventas =  function (e){
+
+    let f_inicio = get_parameter(".form_top_ventas #datetimepicker4");
+    let f_termino = get_parameter(".form_top_ventas #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $form_top_ventas.serialize() + "&" + $.param({'v': 1});
+        let url = "../q/index.php/api/recibo/top/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    }
+
+    e.preventDefault();
+}

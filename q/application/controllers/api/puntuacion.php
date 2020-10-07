@@ -9,6 +9,7 @@ class Puntuacion extends REST_Controller
     {
         parent::__construct();
         $this->load->model("puntuacion_model");
+        $this->load->helper("puntuacion");
         $this->load->library(lib_def());
     }
 
@@ -27,6 +28,9 @@ class Puntuacion extends REST_Controller
                 "comentario" => $param["comentario"],
                 "id_usuario_califica" => $param["id_usuario_califica"]
             ];
+            if (prm_def($param, 'id_servicio')) {
+                $insert["id_servicio"] = $param["id_servicio"];
+            }
             $response = $this->puntuacion_model->insert($insert, 1);
             $this->asigna_puntuacion_usuario($id_usuario);
         }
@@ -68,12 +72,31 @@ class Puntuacion extends REST_Controller
         $param = $this->get();
         if (fx($param, "id_usuario")) {
 
-
             $id_usuario = $param['id_usuario'];
             $response = [
                 'promedio' => $this->promedio($id_usuario),
                 'encuestas' => $this->encuestas($id_usuario)
             ];
+
+        }
+        $this->response($response);
+    }
+
+    function recibos_GET()
+    {
+        $response = false;
+        $param = $this->get();
+        if (fx($param, "fecha_inicio,fecha_termino,v")) {
+
+            $response = $this->puntuacion_model->promedio_recibos(
+                $param['fecha_inicio'],
+                $param['fecha_termino']
+            );
+
+            if ($param['v'] > 0) {
+
+                $response =  recibos_evaluaciones($response);
+            }
 
         }
         $this->response($response);

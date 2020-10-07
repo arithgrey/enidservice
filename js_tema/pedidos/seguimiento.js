@@ -8,8 +8,10 @@ let $form_confirmacion_entrega = $('.form_confirmacion_entrega');
 let $form_otros = $('.form_otros');
 let $selector_interes = $('.selector_interes');
 let $form_articulo_interes = $('.form_articulo_interes_entrega');
+let $form_ingreso_cancelacion  =  $('.form_ingreso_cancelacion');
 let $selector_negacion = $('.selector_negacion');
 let $modal_opciones_cancelacion = $('#modal_opciones_cancelacion');
+let $modal_ingresar_cancelacion =  $('#modal_ingresar_cancelacion');
 let $confirma_cancelacion = $('.confirma_cancelacion');
 let $seccione_opciones_cancelado = $('.seccione_opciones_cancelado');
 let $seccion_opciones = $('.seccion_opciones');
@@ -25,7 +27,7 @@ $(document).ready(function () {
     $selector_negacion.click(no_comento);
     $notifica_entrega_cancelada.click(notificar_cancelacion);
     $confirma_cancelacion.click(lista_motivos_cancelacion);
-
+    $form_ingreso_cancelacion.submit(ingreso_cancelacion);
 
 });
 let valida_notificacion_pago = () => {
@@ -146,6 +148,7 @@ let notificar_cancelacion = function () {
 }
 let lista_motivos_cancelacion = function () {
 
+
     let data_send = {"v": 1, tipo: 2, "text": "MOTIVO DE CANCELACIÓN"};
     let url = "../q/index.php/api/tipificacion/index/format/json/";
     request_enid("GET", data_send, url, motivos_cancelacion)
@@ -161,20 +164,38 @@ let motivos_cancelacion = data => {
 
 let notifica_motivo_cancelacion = () => {
 
-    let data_send = $.param({
-        "recibo": get_parameter(".recibo"),
-        "status": 10,
-        "tipificacion": get_valor_selected(".tipificacion"),
-        "cancelacion": 1
-    });
-    let url = "../q/index.php/api/recibo/status/format/json/";
-    bloquea_form(".selector_estados_ventas");
-    request_enid("PUT", data_send, url, despues_de_cancer);
+    let $id = get_valor_selected(".tipificacion");
+    if (parseInt($id) !== 39) {
+
+        let data_send = $.param({
+            "recibo": get_parameter(".recibo"),
+            "status": 10,
+            "tipificacion": $id,
+            "cancelacion": 1
+        });
+        let url = "../q/index.php/api/recibo/status/format/json/";
+        bloquea_form(".selector_estados_ventas");
+        request_enid("PUT", data_send, url, despues_de_cancer);
+
+    } else {
+
+        $('#modal_notificacion_entrega').modal("hide");
+        $modal_opciones_cancelacion.modal("hide");
+        $modal_ingresar_cancelacion.modal("show");
+    }
+
 };
 
 let despues_de_cancer = data => {
 
-
     $('.tipificacion').prop('disabled', 'disabled');
     redirect(path_enid('entregas'));
 };
+let ingreso_cancelacion =  function (e){
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/tipificacion/index/format/json/";
+    request_enid("POST", data_send, url, despues_de_cancer);
+    e.preventDefault();
+
+}

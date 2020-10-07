@@ -4,7 +4,7 @@ if (!function_exists('invierte_date_time')) {
     function render_busqueda($data){
 
         $response[] = d(_titulo('Busqueda', 2), _mbt5);
-        $response[] = input_frm('', '¿A quién buscamos? Nombre, email, telefono', [
+        $response[] = input_frm('', '¿A quién buscamos? Nombre, email, teléfono', [
                 'name' => 'q',
                 'id' => 'q',
                 'class' => 'q nombre_usuario'
@@ -205,6 +205,7 @@ if (!function_exists('invierte_date_time')) {
 
     function formulario_calificacion_tipificacion($data)
     {
+
         $usuario_busqueda = $data['usuario_busqueda'];
         $tipificaciones = $data['tipificaciones'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
@@ -244,6 +245,9 @@ if (!function_exists('invierte_date_time')) {
             ]), 'mt-5 row');
 
         $response[] = $input;
+
+
+        $response[] = hiddens(["class" => "input_id_servicio", "value" => prm_def($data,"id_servicio")]);
         $enviar_puntuacion = btn('Enviár',
             [
                 'class' => 'enviar_formulario_boton col-md-3 ml-auto'

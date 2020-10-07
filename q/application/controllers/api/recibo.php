@@ -839,7 +839,7 @@ class recibo extends REST_Controller
         $usuarios = $this->usuarios_q($ids_usuarios);
         $a = 0;
 
-        $response  =  [];
+        $response = [];
         foreach ($ordenes as $row) {
 
             $id_usuario = (int)$row['id_usuario'];
@@ -2079,5 +2079,29 @@ class recibo extends REST_Controller
         return pr($recibo, "id_servicio", 0);
 
     }
+
+    function top_GET()
+    {
+
+        $param = $this->get();
+        $response =  false;
+        if (fx($param, "fecha_inicio,fecha_termino,v")) {
+
+            $response = $this->recibo_model->top(
+                $param['fecha_inicio'],
+                $param['fecha_termino']
+            );
+
+            if ($param["v"] == 1 ){
+
+                $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
+                $response = top($response);
+
+            }
+        }
+        $this->response($response);
+
+    }
+
 }
 

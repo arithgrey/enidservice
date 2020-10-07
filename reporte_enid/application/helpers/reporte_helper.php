@@ -15,6 +15,10 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_comisionistas($data);
         $response[] = format_entregas();
         $response[] = format_tipificaciones();
+        $response[] = format_motivos_cancelaciones();
+        $response[] = format_evaluaciones();
+        $response[] = format_top_ventas();
+
 
         $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 p-0 contenedor_menu");
@@ -40,11 +44,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /**
-     * @param array $b
-     * @param array $response
-     * @return array
-     */
     function format_productos_solicitados()
     {
         $form = base_busqueda_form('PRODUCTOS MÁS BUSCADOS POR CLIENTES',
@@ -117,6 +116,55 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
+    function format_evaluaciones()
+    {
+
+        $hoy = date_format(horario_enid(), 'Y-m-d');
+        $ayer = add_date(date("Y-m-d"), -30);
+
+
+
+        $form = base_busqueda_form('Evaluaciones',
+            'form_evaluaciones', 'place_keywords', $ayer ,  $hoy);
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_evaluaciones",
+            ]
+        );
+    }
+
+    function format_top_ventas(){
+
+        $hoy = date_format(horario_enid(), 'Y-m-d');
+        $ayer = add_date(date("Y-m-d"), -30);
+
+        $form = base_busqueda_form('Top artículos vendidos',
+            'form_top_ventas', 'place_keywords', $ayer ,  $hoy);
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_top_ventas",
+            ]
+        );
+    }
+    function format_motivos_cancelaciones()
+    {
+
+        $form = base_busqueda_form('MOTIVOS CANCELACIONES',
+            'form_motivos_cancelaciones', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_motivos_cancelaciones",
+            ]
+        );
+    }
+
     function format_actividad()
     {
 
@@ -132,11 +180,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /**
-     * @param array $p
-     * @param array $response
-     * @return array
-     */
     function format_tipo_entrega()
     {
 
@@ -168,18 +211,14 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    /**
-     * @param array $r
-     * @return array
-     */
-    function base_busqueda_form($titulo_seccion, $clase_form, $place)
+    function base_busqueda_form($titulo_seccion, $clase_form, $place, $fecha_inicio = 0, $fecha_termino = 0)
     {
 
         $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
         $r[] = form_open("", ["class" => $clase_form]);
-        $r[] = frm_fecha_busqueda();
+        $r[] = frm_fecha_busqueda($fecha_inicio, $fecha_termino);
         $r[] = form_close();
-        $r[] = place($place . " mt-5");
+        $r[] = place(_text_($place, "mt-5"));
 
         return append($r);
     }
@@ -201,20 +240,6 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-
-//
-//    function frm_busqueda_desarrollo()
-//    {
-//
-//        $f[] = form_open("", ["class" => 'form_busqueda_desarrollo_solicitudes']);
-//        $f[] = frm_fecha_busqueda();
-//        $f[] = form_close();
-//        $r[] = addNRow(append($f));
-//        $r[] = addNRow(place("place_metricas_servicio"));
-//
-//        return append($r);
-//
-//    }
 
     function crea_repo_categorias_destacadas($param)
     {
@@ -241,8 +266,6 @@ if (!function_exists('invierte_date_time')) {
 
     function menu()
     {
-
-
         $link_indicadores = tab(
             text_icon('fa fa-globe', "indicadores"),
             '#tab_default_1',
@@ -272,21 +295,27 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $link_ventas_categorias = tab(
-            text_icon("fa-check-circle", "ventas por categorias"),
+            text_icon("fa-check-circle", "ventas por categorías"),
             "#tab_productos_publicos"
         );
 
-
-        $link_dispositivos = tab(
-            text_icon("fa fa-mobile", "dispositivos"),
-            "#tab_dispositivos",
-            [
-                "id" => "btn_servicios",
-                "class" => "text-uppercase black dispositivos",
-            ]
+        $link_motivos_cancelaciones = tab(
+            text_icon("fa-check-circle", "motivos - cancelaciones"),
+            "#tab_motivos_cancelaciones"
         );
-        $list = [
 
+        $link_evaluaciones = tab(
+            text_icon("fa-check-circle", "Evaluaciones"),
+            "#tab_evaluaciones"
+        );
+
+        $link_top_ventas = tab(
+            text_icon("fa-check-circle", "Top artículos vendidos"),
+            "#tab_top_ventas"
+        );
+
+
+        $list = [
             tab(
                 text_icon(_mas_opciones_icon, "Comisiones"),
                 '#tab_comisionistas'
@@ -314,7 +343,6 @@ if (!function_exists('invierte_date_time')) {
                 '#tab_tipificaciones'
             )
             ,
-
             a_enid(text_icon("fa-shopping-bag", "compras"),
                 [
                     "id" => "btn_servicios",
@@ -325,16 +353,13 @@ if (!function_exists('invierte_date_time')) {
             ,
             $link_indicadores
             ,
-
             a_enid(text_icon('fa fa-clock-o', "tiempo de venta"),
                 [
                     "href" => path_enid("tiempo_venta"),
                     "class" => 'text-uppercase black',
                 ]
             )
-
             ,
-
             a_enid(text_icon('fa fa-exchange', "puntos de encuentro"),
                 [
                     "href" => path_enid("ventas_encuentro"),
@@ -350,6 +375,12 @@ if (!function_exists('invierte_date_time')) {
             $link_usuarios
             ,
             $link_ventas_categorias
+            ,
+            $link_motivos_cancelaciones
+            ,
+            $link_evaluaciones
+            ,
+            $link_top_ventas
         ];
 
         return append($list);

@@ -77,4 +77,22 @@ class tipificacion_recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+    function fecha_cancelacion($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                        nombre_tipificacion, 
+                        COUNT(0)total FROM tipificacion_recibo 
+                        tr 
+                        INNER JOIN tipificacion t  ON 
+                        tr.id_tipificacion =  t.id_tipificacion 
+                        WHERE DATE(fecha_registro)BETWEEN 
+                                '" . $fecha_inicio . "' 
+                                AND 
+                                '" . $fecha_termino . "'
+                        GROUP by(nombre_tipificacion) ORDER BY COUNT(0) DESC";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
 }

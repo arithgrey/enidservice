@@ -930,7 +930,7 @@ class Recibo_model extends CI_Model
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
 
-        $ids =  get_keys($idusuarios_empresa);
+        $ids = get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
         $query_get = "SELECT 
 						id_servicio, 
@@ -1372,5 +1372,28 @@ class Recibo_model extends CI_Model
                         ORDER BY p.id_usuario_referencia";
 
         return $this->db->query($query_get)->result_array();
+    }
+
+    function top($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT id_servicio , 
+                        SUM(num_ciclos_contratados) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE saldo_cubierto > 0 
+                        AND 
+                        DATE(fecha_entrega) 
+                        BETWEEN 
+                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'                      
+                        AND status not IN ( 10, 19 ) 
+                        AND 
+                        se_cancela < 1 
+                        AND 
+                        cancela_cliente < 1 
+                        GROUP BY id_servicio 
+                        ORDER BY COUNT(0) DESC LIMIT 10";
+        
+        return $this->db->query($query_get)->result_array();
+
     }
 }   

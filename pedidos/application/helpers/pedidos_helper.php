@@ -471,6 +471,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($data['breadcrumbs'], 'col-md-8 col-md-offset-2 mt-5 mb-3');
         $response[] = d($r, 8, 1);
         $response[] = modal_opciones_cancelacion($data, $params);
+        $response[] = modal_ingreso_cancelacion($data, $params);
         return append($response);
 
     }
@@ -507,6 +508,38 @@ if (!function_exists('invierte_date_time')) {
             $contenido[] = hiddens(['class' => 'recibo', 'id' => 'recibo', 'value' => $id_recibo]);
 
             $response = gb_modal(append($contenido), 'modal_opciones_cancelacion');
+        }
+        return $response;
+
+    }
+
+    function modal_ingreso_cancelacion($data, $params)
+    {
+        $response = '';
+        if ($data['in_session']) {
+
+
+            $form_otros[] = _titulo('¿Cual fue el motivo?');
+            $form_otros[] = form_open('', ['class' => 'form_ingreso_cancelacion mt-5']);
+            $form_otros[] = input_frm('', '¿Motivo?',
+                [
+                    'class' => 'tipificacion',
+                    'id' => 'tipificacion',
+                    'name' => 'tipificacion',
+                    'placeholder' => '',
+                    'type' => 'text',
+                    'required' => true
+                ]
+            );
+            $id_recibo = prm_def($params, 'seguimiento');
+            $form_otros[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+            $form_otros[] = hiddens(['name' => 'tipo', 'value' => 2]);
+            $form_otros[] = hiddens(['name' => 'status', 'value' => 2]);
+            $form_otros[] = hiddens(['name' => 'cancelacion', 'value' => 1]);
+            $form_otros[] = d(btn('Agregar'), 'mt-5');
+            $form_otros[] = form_close();
+
+            $response = gb_modal($form_otros, 'modal_ingresar_cancelacion');
         }
         return $response;
 
@@ -587,9 +620,6 @@ if (!function_exists('invierte_date_time')) {
         $tipo_entrega_domicilio = ($tipo_entrega > 1) ? 'domicilio de entrega' : 'punto de encuentro';
 
         $z[] = _titulo($tipo_entrega_domicilio, 3, 'underline');
-
-        /**/
-
         $z[] = d(text_domicilio($data));
 
         $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
@@ -610,7 +640,6 @@ if (!function_exists('invierte_date_time')) {
         $a[] = a_enid($imagen, $path);
         $texto[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
         $texto[] = append($z);
-
 
 
         if (!puede_repartir($data)) {
@@ -654,29 +683,32 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_imagen_repartidor($recibo){
+    function format_imagen_repartidor($recibo)
+    {
 
-        $id_usuario_entrega =  pr($recibo,'id_usuario_entrega');
-        $path = path_enid('usuario_contacto', $id_usuario_entrega);
+        $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
+        $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+        $path = path_enid('usuario_contacto', _text($id_usuario_entrega, _text('&servicio=', $id_recibo)));
         $imagen = get_img_usuario($id_usuario_entrega, 'rounded-circle');
 
         $estrellas = crea_estrellas(4);
-        $texto_calificacion  = flex('califícame', $estrellas,'flex-column');
+        $texto_calificacion = flex('califícame', $estrellas, 'flex-column');
 
-        $evalua_cliente  = flex($imagen, $texto_calificacion,'black flex-column strong text-uppercase');
-        $evalua_cliente = a_enid($evalua_cliente,$path);
+        $evalua_cliente = flex($imagen, $texto_calificacion, 'black flex-column strong text-uppercase');
+        $evalua_cliente = a_enid($evalua_cliente, $path);
         $titulo_entrega = _titulo('Entrega', 5, 'underline');
 
         return flex($titulo_entrega, $evalua_cliente, _between_md);
 
 
     }
+
     function format_text_domicilio($domicilio, $data, $recibo, $adicionales = 0)
     {
 
 
         $text_domicilio = pago_en_cita($data, $recibo);
-        $imagen_texto_entrega =  format_imagen_repartidor($recibo);
+        $imagen_texto_entrega = format_imagen_repartidor($recibo);
         if (es_data($domicilio)) {
 
             if (es_data($recibo) && pr($recibo, 'ubicacion') < 1) {
@@ -717,10 +749,10 @@ if (!function_exists('invierte_date_time')) {
                 $text_ubicacion = pr($domicilio, 'ubicacion');
                 $text_ubicacion = valida_texto_maps($text_ubicacion);
                 $str = ($adicionales > 0) ? pago_en_cita($data, $recibo) : '';
-                $text_domicilio = _text_($text_ubicacion,$imagen_texto_entrega, $str);
+                $text_domicilio = _text_($text_ubicacion, $imagen_texto_entrega, $str);
 
             }
-            
+
         }
 
         return $text_domicilio;
@@ -806,6 +838,7 @@ if (!function_exists('invierte_date_time')) {
     function pago_en_cita($data, $recibo, $no_validar = 0)
     {
 
+        $es_orden_cancelada = es_orden_cancelada($data);
         $in_session = $data['in_session'];
         $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
             ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
@@ -818,7 +851,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $boton_cancelar = '';
-        if ($data['in_session']) {
+
+        if ($data['in_session'] && !$es_orden_cancelada) {
 
             $boton_cancelar = btn(
                 'informar cancelación!',
@@ -978,8 +1012,24 @@ if (!function_exists('invierte_date_time')) {
 
         $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará';
         $id_usuario_reparto = pr($data['repartidor'], 'id_usuario');
+        $imagen =
+            img(
+                [
+                    "src" => path_enid('imagen_usuario', $id_usuario_reparto),
+                    "onerror" => "this.src='../img_tema/user/user.png'",
+                    'class' => 'mx-auto d-block rounded-circle mah_25'
+                ]
+            );
+
+
+        $nombre_reparto = format_nombre($data['repartidor']);
         $repartidor = a_enid(
-            format_nombre($data['repartidor']),
+            flex(
+                $nombre_reparto,
+                $imagen,
+                'd-flex  align-items-start   w-100',
+                'mr-5'
+            ),
             [
                 'class' => 'ml-3 underline black',
                 'href' => path_enid('usuario_contacto', $id_usuario_reparto)
@@ -1013,16 +1063,26 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if ($es_venta_comisionada && es_data($usuario_comision)) {
 
-
             $comisionista = $usuario_comision[0];
+            $id_vendedor = $comisionista['id_usuario'];
+            $imagen =
+                img(
+                    [
+                        "src" => path_enid('imagen_usuario', $id_vendedor),
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'mx-auto d-block rounded-circle mah_25'
+                    ]
+                );
 
-            $vendedor = _text_(
-                'agenda',
-                $comisionista['nombre'],
-                $comisionista['apellido_paterno'],
-                $comisionista['apellido_materno']
+
+            $vendedor = _text_('agenda', format_nombre($comisionista));
+            $response[] =
+            a_enid(
+                flex($vendedor, $imagen, 'borde_amarillo blue_enid3 white text-capitalize', 'mr-5')
+                ,
+                path_enid('usuario_contacto', $id_vendedor)
+
             );
-            $response[] = p($vendedor, _text_('blue_enid3 pl-3 pr-3  white', _strong));
 
 
         } else {
@@ -1032,7 +1092,6 @@ if (!function_exists('invierte_date_time')) {
             $comision = pr($recibo, 'comision_venta');
             $text = d(_text_('Lograsté una comisión de ', money($comision)), 'underline');
             $se_entrego = es_orden_pagada_entregada($data);
-
             $response[] = (es_usuario_referencia($data) && $se_entrego) ? $text : '';
 
         }

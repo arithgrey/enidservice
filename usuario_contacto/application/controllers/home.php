@@ -39,11 +39,14 @@ class Home extends CI_Controller
     {
 
         $id_usuario = prm_def($param, 'id_usuario');
+        $prm = $this->input->get();
         $data['usuario_busqueda'] = $this->app->usuario($id_usuario);
         $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
         $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session']);
-        $data['encuesta'] = prm_def($this->input->get(), 'encuesta');
+        $data['encuesta'] = prm_def($prm, 'encuesta');
+        $data['id_servicio'] =  prm_def($prm, 'servicio');
+
         $this->app->pagina($data, render($data), 1);
 
     }

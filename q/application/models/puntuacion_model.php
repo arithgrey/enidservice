@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class Puntuacion_model extends CI_Model
 {
@@ -47,10 +47,41 @@ class Puntuacion_model extends CI_Model
     {
         return $this->get($params, ["id" => $id]);
     }
-    function avg($id_usuario){
+
+    function avg($id_usuario)
+    {
 
         $query = "SELECT AVG(cantidad)promedio FROM puntuacion WHERE id_usuario = $id_usuario";
         return $this->db->query($query)->result_array();
     }
+
+    function promedio_recibos($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                        AVG(p.cantidad)promedio , 
+                        p.id_usuario , 
+                        u.nombre, 
+                        u.apellido_paterno , 
+                        u.apellido_materno ,  
+                        u.puntuacion   
+                        FROM 
+                        puntuacion p 
+                        INNER JOIN  
+                        usuario u ON p.id_usuario = u.idusuario 
+                        WHERE 
+                            id_servicio > 0 
+                        AND  
+                            DATE(p.fecha_registro) 
+                        BETWEEN 
+                          '" . $fecha_inicio . "' 
+                        AND  
+                          '" . $fecha_termino . "' 
+                          GROUP BY id_usuario ";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
 }

@@ -1528,4 +1528,33 @@ if (!function_exists('invierte_date_time')) {
         }
         return append($response);
     }
+
+    function top($articulos)
+    {
+
+        $response = [];
+        if (es_data($articulos)) {
+
+            $top = flex(_titulo('Ventas',4), _titulo("Artículo",4), _between);
+            $response[] =  d($top,4,1);
+
+
+            foreach ($articulos as $row) {
+
+                $url_img_servicio = $row['url_img_servicio'];
+                $img = img(
+                    [
+                        "src" => $url_img_servicio,
+                        "class" => "img_servicio_def p-2 w_50",
+                    ]
+                );
+
+                $top = flex(_titulo($row['total']), $img, _between);
+                $response[] =  d($top,4,1);
+
+            }
+        }
+
+        return append($response);
+    }
 }

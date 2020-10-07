@@ -401,7 +401,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = d(_titulo('Busqueda', 3), _mbt5);
-        $response[] = input_frm('', '¿a quién buscamos? Nombre, email, telefono', [
+        $response[] = input_frm('', '¿a quién buscamos? Nombre, email, teléfono', [
                 'name' => 'q',
                 'id' => 'q',
                 'class' => 'q nombre_usuario'

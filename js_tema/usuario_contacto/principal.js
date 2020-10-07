@@ -11,6 +11,7 @@ let $enviar_formulario_boton = $('.enviar_formulario_boton');
 let $input_comentario = $('.input_comentario');
 
 let $input_id_usuario = $('.input_id_usuario');
+let $input_id_servicio = $('.input_id_servicio');
 let $input_id_usuario_califica = $('.input_id_usuario_califica');
 
 let $nombre_usuario = $();
@@ -83,7 +84,8 @@ let enviar_puntuacion = function () {
         'cantidad': $calificacion_usuario,
         'comentario': $input_comentario.val(),
         'id_usuario': $input_id_usuario.val(),
-        'id_usuario_califica': $input_id_usuario_califica.val()
+        'id_usuario_califica': $input_id_usuario_califica.val(),
+        'id_servicio': $input_id_servicio.val()
     });
     let url = "../q/index.php/api/puntuacion/index/format/json/";
     $input_comentario.prop('disabled', true);
