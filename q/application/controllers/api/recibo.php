@@ -1266,7 +1266,7 @@ class recibo extends REST_Controller
     {
 
         $param = $this->get();
-        $response = [];
+        $response = false;
         $es_usuario = ($this->id_usuario > 0 || fx($param, 'id_usuario'));
 
         if ($this->id_usuario > 0) {
@@ -1275,24 +1275,32 @@ class recibo extends REST_Controller
 
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
-
             $response = $this->busqueda_pedidos($param);
 
-            if ($param["v"] == 1) {
+            switch ($param["v"]){
 
-                $response = $this->add_imgs_servicio($response);
-                $response = $this->add_comisionistas($response, $param);
-                $response = $this->add_repartidores($response, $param);
-                $response = $this->add_clientes($response, $param);
+                case 1:
 
-                $session = $this->app->session();
-                $response = render_resumen_pedidos($response,
-                    $this->get_estatus_enid_service($param), $param, $session);
+                    $response = $this->add_imgs_servicio($response);
+                    $response = $this->add_comisionistas($response, $param);
+                    $response = $this->add_repartidores($response, $param);
+                    $response = $this->add_clientes($response, $param);
+                    $session = $this->app->session();
 
-            } else {
-                $response = $this->add_comisionistas($response, $param);
-                $response = $this->add_repartidores($response, $param);
+                    $response = render_resumen_pedidos($response,
+                        $this->get_estatus_enid_service($param), $param, $session);
+                    break;
+
+                case 2:/*No me elimines regresa el json puro*/ break;
+
+                default:
+
+                    $response = $this->add_comisionistas($response, $param);
+                    $response = $this->add_repartidores($response, $param);
+                    break;
+
             }
+
         }
         $this->response($response);
 
