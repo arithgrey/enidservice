@@ -4,6 +4,32 @@ if (!function_exists('invierte_date_time')) {
     function sin_ventas()
     {
 
+        $links[] = a_enid('Top del día',
+            [
+                'class' => 'black mr-5 mt-5 mb-5 underline',
+                'href' => path_enid('top_competencia')
+            ]
+        );
+        $links[] = a_enid('Top semanal',
+            [
+                'class' => 'black mr-5 mt-5 mb-5 underline',
+                'href' => path_enid('top_competencias', 1)
+            ]
+        );
+        $links[] = a_enid('Top mensual',
+            [
+                'class' => 'black mr-5 mt-5 mb-5 underline',
+                'href' => path_enid('top_competencias', 2)
+            ]
+        );
+        $links[] = a_enid('Top anual',
+            [
+                'class' => 'black mr-5 mt-5 mb-5 underline',
+                'href' => path_enid('top_competencias', 3)
+            ]
+        );
+
+
         $texto = 'Ups! parece que algo anda mal, no hay ventas, 
         tenemos que regresar a conseguir clientes!';
         $response[] = d(_titulo($texto), 4, 1);
@@ -13,6 +39,9 @@ if (!function_exists('invierte_date_time')) {
                 'href' => path_enid('home')
             ]
         ),_text_(_4auto,'mt-5'));
+
+        $response[] = d(flex($links),4,1);
+
         return append($response);
 
     }

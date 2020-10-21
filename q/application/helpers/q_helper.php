@@ -1848,7 +1848,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_reporte_ventas_comisionadas($estadisticas)
+    function format_reporte_ventas_comisionadas($estadisticas, $usuarios)
     {
 
 
@@ -1945,6 +1945,10 @@ if (!function_exists('invierte_date_time')) {
         $base = 'col-md-2 border text-center';
 
         $total_vendedores = ($a - 1);
+
+        $usuarios_activos[] = d(_d('NUEVOS', $usuarios), $base);
+
+
         $usuarios_activos[] = d(_d('VENDEDORES', $total_vendedores), $base);
         $total_vendedores_activos = count(array_unique($ids_usuarios_actividad));
         $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), 'col-md-2 border text-center bg-primary white');
@@ -1952,11 +1956,11 @@ if (!function_exists('invierte_date_time')) {
         $total_vendedores_activos_ventas = count(array_unique($ids_usuarios_actividad_venta));
         $usuarios_activos[] = d(_d('LOGRARON VENTAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
         $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
-        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-3 border text-center');
+        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-2 border text-center');
 
 
         $bajas = ($total_vendedores - $total_vendedores_activos);
-        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-3 border text-center bg-danger white');
+        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-2 border text-center bg-danger white');
 
 
         $totales_usuarios_activos = d($usuarios_activos, 'row');
@@ -1969,7 +1973,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_reporte_ventas_reparto($data_complete)
+    function format_reporte_ventas_reparto($data_complete, $usuarios)
     {
 
         $estadisticas = $data_complete["totales"];
@@ -2057,10 +2061,13 @@ if (!function_exists('invierte_date_time')) {
         /*usuarios activos*/
         $usuarios_activos = [];
         $base = 'col-md-2 border text-center';
+        
+        $usuarios_activos[] = d(_d('Nuevos', $usuarios),
+            'col-md-2 border text-center text-uppercase');
 
 
         $usuarios_activos[] = d(_d('PRÓXIMAS ENTREGAS SIN REPARTIDOR ASIGNADO', $totales_proximas_agendas),
-            'col-md-3 border text-center');
+            'col-md-2 border text-center');
 
 
         $total_vendedores = ($a - 1);
@@ -2071,11 +2078,11 @@ if (!function_exists('invierte_date_time')) {
         $total_vendedores_activos_ventas = count(array_unique($ids_usuarios_actividad_venta));
         $usuarios_activos[] = d(_d('LOGRARON ENTREGAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
         $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
-        $usuarios_activos[] = d(_d('ACTIVOS SIN ENREGAS', $sin_ventas), 'col-md-3 border text-center');
+        $usuarios_activos[] = d(_d('ACTIVOS SIN ENREGAS', $sin_ventas), 'col-md-2 border text-center');
 
 
         $bajas = ($total_vendedores - $total_vendedores_activos);
-        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-3 border text-center bg-danger white');
+        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-2 border text-center bg-danger white');
 
 
         $totales_usuarios_activos = d($usuarios_activos, 'row');

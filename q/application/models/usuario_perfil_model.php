@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class Usuario_perfil_model extends CI_Model
 {
@@ -57,5 +57,25 @@ class Usuario_perfil_model extends CI_Model
                           WHERE up.idperfil IN (3,6)
                           and u.status =1 ';
         return $this->db->query($query_get)->result_array();
+
+    }
+
+    function total_periodo($fecha_inicio, $fecha_termino, $id_perfil, $status)
+    {
+
+
+        $fecha = _text_(
+            "DATE(fecha_registro) BETWEEN '" ,
+            $fecha_inicio , "' AND  '" , $fecha_termino , "'");
+        $qperfil = _text_('AND idperfil = ', $id_perfil );
+        $qstatus = _text_('AND status = ', $status );
+
+        $query_get = _text('SELECT 
+                        COUNT(0)num
+                        FROM usuario_perfil 
+                          WHERE ' , $fecha , $qperfil, $qstatus);
+        return $this->db->query($query_get)->result_array()[0]["num"];
+
+
     }
 }

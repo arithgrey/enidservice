@@ -90,6 +90,24 @@ class usuario_perfil extends REST_Controller
         $this->response($response);
     }
 
+    function total_periodo_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino,perfil,status")) {
+
+
+            $response =
+                $this->usuario_perfil_model->total_periodo(
+                    $param["fecha_inicio"], $param["fecha_termino"], $param["perfil"], $param["status"]);
+
+        }
+
+        $this->response($response);
+    }
+
+
     private function usuarios_entregas($usuarios, $filtros)
     {
 

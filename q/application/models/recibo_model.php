@@ -1392,8 +1392,130 @@ class Recibo_model extends CI_Model
                         cancela_cliente < 1 
                         GROUP BY id_servicio 
                         ORDER BY COUNT(0) DESC LIMIT 10";
-        
+
         return $this->db->query($query_get)->result_array();
 
     }
+
+    function top_cancelaciones($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT id_servicio , 
+                        SUM(num_ciclos_contratados) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE 
+                        DATE(fecha_cancelacion) 
+                        BETWEEN 
+                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'                      
+                        AND 
+                        ( 
+                        status  IN ( 10, 19 ) 
+                        OR 
+                        se_cancela < 1 
+                        OR 
+                        cancela_cliente < 1
+                        ) 
+                        GROUP BY id_servicio 
+                        ORDER BY COUNT(0) DESC LIMIT 10";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+    function top_fecha($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                        DATE(fecha_entrega)fecha , 
+                        SUM(num_ciclos_contratados) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE saldo_cubierto > 0 
+                        AND 
+                        DATE(fecha_entrega) 
+                        BETWEEN 
+                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'            
+                        AND status not IN ( 10, 19 ) 
+                        AND 
+                        se_cancela < 1 
+                        AND 
+                        cancela_cliente < 1 
+                        GROUP BY DATE(fecha_entrega)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+    function top_horas($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                        HOUR(fecha_entrega)hora , 
+                        SUM(num_ciclos_contratados) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE saldo_cubierto > 0 
+                        AND 
+                        DATE(fecha_entrega)
+                        BETWEEN 
+                                                '" . $fecha_inicio . "' AND '" . $fecha_termino . "'            
+                                               AND status not IN ( 10, 19 ) 
+                        AND 
+                        se_cancela < 1 
+                        AND 
+                        cancela_cliente < 1 
+                        GROUP 
+                        BY HOUR(fecha_entrega)
+                        ORDER BY SUM(num_ciclos_contratados) DESC";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+
+    function top_fecha_cancelaciones($fecha_inicio, $fecha_termino)
+    {
+
+        $query_get = "SELECT 
+                        DATE(fecha_cancelacion)fecha , 
+                        SUM(num_ciclos_contratados) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE 
+                        DATE(fecha_cancelacion) 
+                        BETWEEN 
+                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'            
+                        AND 
+                        ( 
+                            status  IN ( 10, 19 ) 
+                            OR  
+                            se_cancela < 1 
+                            OR  
+                            cancela_cliente < 1
+                        ) 
+                        GROUP BY DATE(fecha_cancelacion)";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+
+    function ventas_menos_tiempo($dias = '')
+    {
+        $tiempo = _text_(" DATE(fecha_entrega) = DATE(CURRENT_DATE())", $dias);
+
+        $query_get = "SELECT                          
+                        COUNT(0) total  
+                        FROM proyecto_persona_forma_pago 
+                        WHERE saldo_cubierto > 0 
+                        AND                                                 
+                        " . $tiempo . "           
+                        AND status NOT IN ( 10, 19 ) 
+                        AND 
+                        se_cancela < 1 
+                        AND 
+                        cancela_cliente < 1 ";
+
+        return $this->db->query($query_get)->result_array()[0]['total'];
+
+    }
+
+
 }   

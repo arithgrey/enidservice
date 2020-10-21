@@ -1421,7 +1421,6 @@ if (!function_exists('invierte_date_time')) {
     function repartidor_disponible(array $repartidores_en_entrega, array $repartidores)
     {
 
-
         $id_usuario = 1;
         if (es_data($repartidores)) {
 
@@ -1528,15 +1527,99 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function top($articulos)
+    function identificador($dias)
+    {
+
+        $mayor = 0;
+        foreach ($dias as $row) {
+
+            if ($row > $mayor) {
+
+                $mayor = $row;
+            }
+
+        }
+        return $mayor;
+    }
+
+    function format_top_semanal($fechas, $titulo, $class = '')
+    {
+
+        $dias = [];
+
+        foreach ($fechas as $row) {
+
+            $fecha = $row["fecha"];
+            $total = $row["total"];
+            $numero_dia = intval(date_create($fecha)->format("w"));
+            $dias[$numero_dia] = array_key_exists($numero_dia, $dias) ? ($dias[$numero_dia] + $total) : $total;
+
+        }
+
+        $dias_texto = [
+            "Domingo", "Lunes", "Martes",
+            "Miércoles", "Jueves", "Viernes", "Sábado"];
+
+        $a = 0;
+        $total_ventas = 0;
+
+
+        $mayor = identificador($dias);
+        foreach ($dias_texto as $row) {
+
+            if (array_key_exists($a, $dias)) {
+                $clase_extra = ($dias[$a] == $mayor) ? 'mayor' : '';
+
+                $top_dia[] = flex(
+                    $row, $dias[$a],
+                    'flex-column',
+                    'strong black text-uppercase',
+                    $clase_extra
+                );
+
+                $total_ventas = $total_ventas + $dias[$a];
+
+
+            } else {
+
+                $top_dia[] = flex($row, 0, 'flex-column', 'strong black text-uppercase');
+            }
+
+            $a++;
+        }
+
+        $clase_top = 'd-flex justify-content-between 
+        align-items-center w-100 text-center col-lg-10 col-lg-offset-1';
+
+        $classe_completa = _text_($clase_top, $class);
+        $contenido[] = d(d($titulo, $classe_completa), 'row mt-5 mb-5');
+        $contenido[] = d(d($top_dia, $clase_top), 'row mt-5 mb-5');
+
+        return [
+            "render" => append($contenido),
+            "dias" => $dias,
+            "totales" => $total_ventas
+        ];
+
+
+    }
+
+    function top($articulos, $top_horas, $articulos_cancelados, $fechas, $fechas_cancelaciones, $ventas_hoy, $ventas_menos_7)
     {
 
         $response = [];
         if (es_data($articulos)) {
 
-            $top = flex(_titulo('Ventas',4), _titulo("Artículo",4), _between);
-            $response[] =  d($top,4,1);
+            $format_semanal =
+                format_top_semanal(
+                    $fechas, 'Dias - ventas', 'text-uppercase strong black');
 
+            $ventas = $format_semanal["dias"];
+            $totales_ventas = $format_semanal["totales"];
+
+            $response[] = $format_semanal["render"];
+            $top = flex(_titulo('Ventas', 4), _titulo("Artículo", 4), _between);
+            $contenido_top[] = d($top);
 
             foreach ($articulos as $row) {
 
@@ -1549,11 +1632,116 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $top = flex(_titulo($row['total']), $img, _between);
-                $response[] =  d($top,4,1);
+                $contenido_top[] = d($top);
 
             }
+
+
+            $top_articulos = d($contenido_top, 'col-md-8 mt-5 mb-5');
+            $top_horas_ventas = d(formato_horas_ventas($top_horas),'col-md-4 mt-5 mb-5');
+
+
+            $response[] = d(d([$top_articulos, $top_horas_ventas],'col-md-10 col-md-offset-1'),'row mt-5 mb-5');
+
+            $formato_semanal_caidas =
+                format_top_semanal(
+                    $fechas_cancelaciones, 'Días - cancelaciones', 'text-uppercase red_enid strong');
+
+            $response[] = $formato_semanal_caidas["render"];
+            $caidas = $formato_semanal_caidas["dias"];
+            $totales_caidas = $formato_semanal_caidas["totales"];
+
+            $response[] = formato_dias_caidas($ventas, $caidas, $totales_ventas, $totales_caidas, $ventas_hoy, $ventas_menos_7);
+
+
+
+        }
+
+        return d($response, 12);
+    }
+
+    function formato_horas_ventas($top_horas)
+    {
+
+
+        $response[]= flex('franja horaria', 'ventas en hora', _text_(_between,'text-uppercase blue_enid3 white strong p-2'));
+        foreach ($top_horas as $row) {
+
+            $formato = 'Y-m-d H:i:s';
+            $hora =  $row["hora"];
+
+            $fecha = horario_enid();
+            $hoy = $fecha->format('Y-m-d');
+            $fecha_hora = DateTime::createFromFormat($formato, _text($hoy,' ',$hora,':00:00'));
+
+
+
+            $total =  $row["total"];
+
+            $response[]= flex($fecha_hora->format('H:i'), $total, _text_(_between,'text-center mt-3dae'),'underline black strong');
         }
 
         return append($response);
+    }
+
+    function formato_dias_caidas($ventas, $caidas, $totales_ventas, $totales_caidas, $ventas_hoy, $ventas_menos_7)
+    {
+
+        $response = [];
+        $total_negativo = 0;
+        $dias_negativos = 0;
+
+        $total_positivos = 0;
+        $dias_positivos = 0;
+
+
+        for ($a = 0; $a < 7; $a++) {
+
+            $numero_caidas = array_key_exists($a, $caidas) ? $caidas[$a] : 0;
+            $numero_ventas = array_key_exists($a, $ventas) ? $ventas[$a] : 0;
+
+            $diferencia = (intval($numero_ventas) - intval($numero_caidas));
+            if ($diferencia < 0) {
+
+                $total_negativo = ($total_negativo + ($diferencia * -1));
+                $dias_negativos++;
+
+            } else {
+
+                $total_positivos = ($total_positivos + $diferencia);
+                $dias_positivos++;
+
+            }
+
+            $response[] = d($diferencia, 'strong black text-uppercase text-center');
+
+
+        }
+
+        $clase = 'd-flex justify-content-between 
+        align-items-center w-100 text-center 
+        col-lg-10 col-lg-offset-1 strong black 
+        text-uppercase border-bottom';
+
+        $contenido[] = d(d("Diferencia", $clase), 'row mt-5 mb-5');
+        $contenido[] = d(d($response, $clase), 'row mt-5 mb-5');
+
+        $despliegue_caidas[] = flex("Hoy", $ventas_hoy, "flex-column");
+        $despliegue_caidas[] = flex("Hace 7", $ventas_menos_7, "flex-column");
+
+
+        $despliegue_caidas[] = flex("Ventas en periodo", $totales_ventas, "flex-column");
+        $despliegue_caidas[] = flex("Caidas en periodo", $totales_caidas, "flex-column");
+        $despliegue_caidas[] = flex("Caidas contra entregas", $total_negativo, "flex-column red_enid");
+        $despliegue_caidas[] = flex("Entregas contra caidas", $total_positivos, "flex-column black");
+        $despliegue_caidas[] = flex("Días positivos", $dias_positivos, "flex-column black");
+        $despliegue_caidas[] = flex("Días negativos", $dias_negativos, "flex-column red_enid");
+
+
+        $contenido[] = d(d($despliegue_caidas, $clase), 'row mt-5 mb-5');
+
+
+        return append($contenido);
+
     }
 }

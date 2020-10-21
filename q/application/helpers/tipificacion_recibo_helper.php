@@ -10,18 +10,35 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_data($data)) {
 
+            $class = _text_(_between, 'text-uppercase border p-2 col-md-4 text-center');
+            $titulos[] = d_c(
+                [
+                    "id",
+                    "Veces que se canceló por está razón",
+                    "Motivo cancelación"
+                ],
+                _text_($class,'blue_enid3 white')
+            );
+
+            $response[] = d($titulos);
+
+
             foreach ($data as $row) {
 
                 $tipificacion = $row['nombre_tipificacion'];
                 $total = $row['total'];
-                $class = _text_(_between, 'text-uppercase border p-2');
 
-                $response[] = flex(
-                    $total,
-                    $tipificacion,
-                    $class,
-                    _strong
+                $id_tipificacion = $row["id_tipificacion"];
+
+                $contenido[] = d_c(
+                    [
+                        $id_tipificacion,
+                        $total,
+                        $tipificacion
+                    ],$class
                 );
+
+                $response[] = d($contenido);
 
             }
         }

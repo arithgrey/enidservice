@@ -32,15 +32,20 @@ if (!function_exists('invierte_date_time')) {
         $ventas_actuales = flex('Logros a la fecha', $total_ventas_semana, 'flex-column');
         $restantes = flex('Restantes', $restantes, 'flex-column strong');
 
-
-
         $r[] = d_c(
             [$seccion_meta, $ventas_actuales, $restantes],
             'col-lg-4 mx-auto text-right mt-5');
         $r[] = a_enid('Mis ventas',
             [
-                'class' => 'underline text-right black',
+                'class' => 'underline text-right black mt-5 col-md-12 p-0',
                 'href' => path_enid('pedidos')
+            ]
+        );
+
+        $r[] = a_enid('Top ventas',
+            [
+                'class' => 'underline text-right black col-md-12 p-0',
+                'href' => path_enid('top_competencia')
             ]
         );
 

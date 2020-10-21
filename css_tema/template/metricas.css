@@ -1,86 +1,11 @@
-/*
-.lista_deseos_num {
-    color: blue;
-    font-weight: bold;
-}
-
-.lista_deseos_num:hover {
-    cursor: pointer;
-}
-
-.text-tb {
-    font-size: .8em !important;
-}
-
-.proyectos_registrados:hover {
-    cursor: pointer;
-}
-
-.clientes_info:hover {
-    cursor: pointer;
-}
-
-.posibles_clientes_contacto:hover {
-    cursor: pointer;
-}
-
-.num_prospectos_sistema:hover {
-    cursor: pointer;
-}
-
-.num_afiliados:hover {
-    cursor: pointer;
-}
-
-.contactos_registrados:hover {
-    cursor: pointer;
-}
-
-.num_contactos_promociones:hover {
-    cursor: pointer;
-}
-
-.table_enid_service {
-    font-size: .8em !important;
-}
-
-.usuarios, .contactos, .solicitudes, .valoraciones {
-    color: blue !important;
-    font-weight: bold;
-}
-
-.usuarios:hover {
-    cursor: pointer;
-}
-
-.contactos:hover, .solicitudes:hover, .valoraciones:hover {
-    cursor: pointer;
-}
-
-.contenedor_reporte {
-    margin-top: 100px !important;
-}
-
-.servicios {
-    cursor: pointer;
-    color: blue;
-    font-weight: bold;
-}
-
-.clasificaciones_sub_menu_ul {
-    display: inline-table;
-}
-
-.clasificaciones_sub_menu_ul {
-    display: inline-table;
-}
-
-.total_categoria {
-    background: black;
-    padding: 5px;
-    color: white;
-}*/
 .contenedor_menu a {
     margin-top: 10px;
     font-size:.9em;
+}
+.mayor{
+    background: deeppink;
+    border-bottom: 2px solid;
+}
+.form_sin_ventas label, .form_sin_ventas input{
+    display: none;
 }

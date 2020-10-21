@@ -1894,7 +1894,7 @@ class Servicio extends REST_Controller
                 }
             }
 
-            $unicos =  array_unique(array_column($sugerencia, 'id_servicio'));
+            $unicos = array_unique(array_column($sugerencia, 'id_servicio'));
             $sugerencia = array_intersect_key($sugerencia, $unicos);
 
         }
@@ -2013,6 +2013,22 @@ class Servicio extends REST_Controller
             'id_servicio' => $id_servicio
         ];
         return $this->app->api("stock/disponibilidad/format/json/", $q);
+    }
+
+    function sin_ventas_GET()
+    {
+        $param = $this->get();
+        if (fx($param, "v")) {
+            $servicios = $this->serviciosmodel->sin_ventas();
+
+            $servicios = $this->app->imgs_productos(0, 1, 1, 1, $servicios);
+
+
+            $formato = format_atencion($servicios);
+            $this->response($formato);
+
+        }
+
     }
 
 
