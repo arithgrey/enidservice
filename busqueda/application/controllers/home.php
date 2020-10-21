@@ -55,7 +55,7 @@ class Home extends CI_Controller
             $q['fecha_inicio'] = $fecha_inicio;
             $q['fecha_termino'] = $hoy;
             $q['consulta'] = 1;
-            $q['recibo'] = 1;
+            $q['recibo'] = '';
 
             return $this->app->api("recibo/pedidos/format/json/", $q);
 

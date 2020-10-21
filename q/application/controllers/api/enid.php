@@ -55,11 +55,12 @@ class Enid extends REST_Controller
         if (fx($param, "fecha_inicio,fecha_termino")) {
 
             $response = $this->actividad_web_model->ventas_comisionadas($param);
+            $usuarios =  $this->total_usuarios($param["fecha_inicio"],$param["fecha_termino"], 6,1);
+
             if (prm_def($param, 'v') > 0) {
-
-                $response = format_reporte_ventas_comisionadas($response);
+                
+                $response = format_reporte_ventas_comisionadas($response, $usuarios);
             }
-
 
         }
         $this->response($response);
@@ -72,15 +73,33 @@ class Enid extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino")) {
+            $usuarios =  $this->total_usuarios($param["fecha_inicio"],$param["fecha_termino"], 21,1);
 
             $response = $this->actividad_web_model->ventas_entregas($param);
             if (prm_def($param, 'v') > 0) {
 
-                $response = format_reporte_ventas_reparto($response);
+                $response = format_reporte_ventas_reparto($response,$usuarios);
+
             }
         }
         $this->response($response);
 
     }
+    private function total_usuarios($fecha_inicio,$fecha_termino,$id_perfil, $status){
+
+        $q = [
+            "fecha_inicio"=> $fecha_inicio,
+            "fecha_termino"=> $fecha_termino,
+            "perfil"=> $id_perfil,
+            "status"=> $status
+        ];
+
+
+        $api = "usuario_perfil/total_periodo/format/json/";
+        return $this->app->api($api, $q);
+
+
+    }
+
 
 }

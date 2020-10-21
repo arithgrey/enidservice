@@ -1724,4 +1724,40 @@ if (!function_exists('invierte_date_time')) {
     {
         return h($str, 5, 'text-uppercase strong');
     }
+
+    function format_atencion($servicios)
+    {
+
+
+        $class = _text_('blue_enid3 white mb-5 mt-5 text-uppercase border-bottom', _between);
+        $titulos = flex(
+            'días publicados sin ventas', 'artículo', $class);
+        $response[] = d($titulos, 4, 1);
+        foreach ($servicios as $row) {
+
+            $dias = $row["dias"];
+            $url_img_servicio = $row['url_img_servicio'];
+            $path = path_enid("editar_producto", $row["id_servicio"]);
+
+            $imagen = img(
+                [
+                    "src" => $url_img_servicio,
+                    "class" => "mx-auto d-block img_servicio_def p-2"
+                ]
+            );
+            $item = flex($dias, $imagen, _text_(' border-bottom', _between), 'black strong ');
+            $link = a_enid(
+                $item,
+                [
+                    'href' => $path,
+                    "target" => "_blank"
+                ]
+            );
+            $response[] = d($link, 4, 1);
+
+
+        }
+        return $response;
+
+    }
 }

@@ -1977,7 +1977,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
     $base_url = [
         "sobre_vender" => "sobre_ventas",
         "top_competencia" => "competencias",
-        "top_competencia_entrega" => "competencias_entrega",
+        "top_competencia_entrega" => "competencias_entregas",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
         "top_competencias_entregas" => "competencias_entregas/?tipo_top=",

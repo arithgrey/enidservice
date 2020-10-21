@@ -842,4 +842,20 @@ class serviciosmodel extends CI_Model
         return $this->db->query($query_update);
     }
 
+    function sin_ventas()
+    {
+
+        $query_update = "SELECT s.id_servicio, s.fecha_registro , DATEDIFF(s.fecha_registro, CURRENT_DATE()) dias
+                            FROM 
+                            servicio s 
+                            LEFT JOIN proyecto_persona_forma_pago p  
+                            ON s.id_servicio =  p.id_servicio
+                            WHERE 
+                            s.fecha_registro < DATE_ADD(current_date() , INTERVAL  - 7 DAY) AND s.status = 1
+                            and 
+                            p.id_servicio IS NULL";
+        return $this->db->query($query_update)->result_array();
+
+    }
+
 }

@@ -1277,7 +1277,7 @@ class recibo extends REST_Controller
             $param['perfil'] = $this->app->getperfiles();
             $response = $this->busqueda_pedidos($param);
 
-            switch ($param["v"]){
+            switch ($param["v"]) {
 
                 case 1:
 
@@ -2092,18 +2092,47 @@ class recibo extends REST_Controller
     {
 
         $param = $this->get();
-        $response =  false;
+        $response = false;
         if (fx($param, "fecha_inicio,fecha_termino,v")) {
 
-            $response = $this->recibo_model->top(
-                $param['fecha_inicio'],
-                $param['fecha_termino']
+
+            $fecha_inicio = $param['fecha_inicio'];
+            $fecha_termino =    $param['fecha_termino'];
+
+            $top = $this->recibo_model->top(
+                $fecha_inicio,
+                $fecha_termino
             );
 
-            if ($param["v"] == 1 ){
+            $top_cancelaciones = $this->recibo_model->top_cancelaciones(
+                $fecha_inicio,
+                $fecha_termino
+            );
 
-                $response = $this->app->imgs_productos(0, 1, 1, 1, $response);
-                $response = top($response);
+
+            $fechas = $this->recibo_model->top_fecha(
+                $fecha_inicio,
+                $fecha_termino
+            );
+
+            $fechas_cancelaciones = $this->recibo_model->top_fecha_cancelaciones(
+                $fecha_inicio,
+                $fecha_termino
+            );
+
+            $top_horas =  $this->recibo_model->top_horas(
+                $fecha_inicio,
+                $fecha_termino
+            );
+            $ventas_hoy =  $this->recibo_model->ventas_menos_tiempo();
+            $ventas_menos_7 =  $this->recibo_model->ventas_menos_tiempo('-7');
+
+
+
+            if ($param["v"] == 1) {
+
+                $top = $this->app->imgs_productos(0, 1, 1, 1, $top);
+                $response = top($top, $top_horas, $top_cancelaciones, $fechas, $fechas_cancelaciones, $ventas_hoy, $ventas_menos_7);
 
             }
         }

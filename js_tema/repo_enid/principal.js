@@ -7,6 +7,7 @@ let $form_ventas_comisionistas = $('.form_ventas_comisionistas');
 let $form_entregas = $('.form_entregas');
 let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
 let $form_top_ventas = $('.form_top_ventas');
+let $form_sin_ventas = $('.form_sin_ventas');
 
 
 $(document).ready(() => {
@@ -44,6 +45,7 @@ $(document).ready(() => {
     $form_entregas.submit(ventas_entregadas);
     $form_motivos_cancelaciones.submit(motovos_cancelaciones_busqueda);
     $form_top_ventas.submit(top_ventas);
+    $form_sin_ventas.submit(sin_ventas);
 
 });
 let carga_nuevos_miembros = function () {
@@ -365,7 +367,7 @@ let tipificaciones = function (e) {
     }
     e.preventDefault();
 };
-let evaluaciones = function (e){
+let evaluaciones = function (e) {
 
     let f_inicio = get_parameter(".form_evaluaciones #datetimepicker4");
     let f_termino = get_parameter(".form_evaluaciones #datetimepicker5");
@@ -420,7 +422,7 @@ let ventas_entregadas = function (e) {
     }
     e.preventDefault();
 };
-let motovos_cancelaciones_busqueda =  function (e){
+let motovos_cancelaciones_busqueda = function (e) {
 
     let f_inicio = get_parameter(".form_motivos_cancelaciones #datetimepicker4");
     let f_termino = get_parameter(".form_motivos_cancelaciones #datetimepicker5");
@@ -432,11 +434,11 @@ let motovos_cancelaciones_busqueda =  function (e){
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
     }
-    
+
     e.preventDefault();
 }
 
-let top_ventas =  function (e){
+let top_ventas = function (e) {
 
     let f_inicio = get_parameter(".form_top_ventas #datetimepicker4");
     let f_termino = get_parameter(".form_top_ventas #datetimepicker5");
@@ -445,9 +447,23 @@ let top_ventas =  function (e){
 
         let data_send = $form_top_ventas.serialize() + "&" + $.param({'v': 1});
         let url = "../q/index.php/api/recibo/top/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+        request_enid("GET", data_send, url, render_top_ventas);
 
     }
 
     e.preventDefault();
+}
+let sin_ventas = function (e) {
+
+    let data_send = {'v':1};
+    let url = "../q/index.php/api/servicio/sin_ventas/format/json/";
+    request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    e.preventDefault();
+}
+
+let render_top_ventas = function (data) {
+
+    render_enid(".place_keywords", data);
+
 }

@@ -261,8 +261,7 @@ class usuario_model extends CI_Model
     function num_registros_preriodo($param)
     {
 
-        $q =
-            ["DATE(fecha_registro)" => "BETWEEN '" . $param["fecha_inicio"] . "' AND  '" . $param["fecha_termino"] . "'"];
+        $q = ["DATE(fecha_registro)" => "BETWEEN '" . $param["fecha_inicio"] . "' AND  '" . $param["fecha_termino"] . "'"];
         return $this->get(["COUNT(0)num"], $q)[0]["num"];
 
     }

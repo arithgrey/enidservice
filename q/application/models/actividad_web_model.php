@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class actividad_web_model extends CI_Model
 {
@@ -528,12 +528,22 @@ class actividad_web_model extends CI_Model
 
     function comisionistas()
     {
-        return "SELECT idusuario FROM usuario_perfil WHERE idperfil IN(3,4,6,21)";
+        return _text_($this->base_usr(), 'IN(3,4,6,21)');
+
     }
 
     function repartidores()
     {
-        return "SELECT idusuario FROM usuario_perfil WHERE idperfil IN(21,3,4)";
+        return _text_($this->base_usr(), 'IN(21,3,4)');
+
+
+    }
+
+    function base_usr()
+    {
+
+        return "SELECT idusuario FROM usuario_perfil WHERE idperfil";
+
     }
 
 
@@ -666,8 +676,7 @@ class actividad_web_model extends CI_Model
                       r ON u.idusuario =  r.id_usuario_referencia
                       LEFT OUTER JOIN $tabla_recibos_proximos p 
                       ON p.id_usuario_agenda = u.idusuario
-                      ORDER BY ha_vendido DESC                       
-                      ";
+                      ORDER BY ha_vendido DESC ";
         return $this->db->query($query_get)->result_array();
     }
 
@@ -688,11 +697,11 @@ class actividad_web_model extends CI_Model
 
         $_num = mt_rand();
         $sql_repartidores = $this->repartidores();
-        $tabla_comisionistas = 'tabla_repartidores_' . $_num;
+        $tabla_comisionistas = _text('tabla_repartidores_', $_num);
 
-        $tabla_repartidores_usuarios = 'tabla_reparto_usuarios_' . $_num;
-        $tabla_recibos = 'tabla_recibos_' . $_num;
-        $tabla_recibos_proximos_ = 'tabla_recibos_proximos_' . $_num;
+        $tabla_repartidores_usuarios = _text('tabla_reparto_usuarios_', $_num);
+        $tabla_recibos = _text('tabla_recibos_', $_num);
+        $tabla_recibos_proximos_ = _text('tabla_recibos_proximos_', $_num);
         $sql_repartidores_usuarios = $this->repartidores_usuarios($tabla_comisionistas);
         $sql_recibos = $this->recibos_fecha_reparto($param);
         $sql_proximos = $this->recibos_proximos_repartos();
