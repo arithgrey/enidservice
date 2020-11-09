@@ -606,7 +606,10 @@ class usuario_model extends CI_Model
                 apellido_paterno,
                 apellido_materno,
                 email,
-                nombre_usuario
+                nombre_usuario,
+                num_compras,
+                num_cancelaciones,
+                puntuacion
                 FROM usuario WHERE idusuario in (' . $in . ')';
 
         return $this->db->query($query_get)->result_array();

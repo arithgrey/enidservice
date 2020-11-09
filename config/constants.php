@@ -53,6 +53,8 @@ define('_12', "col-sm-12");
 
 
 define('_between', 'justify-content-between align-items-center w-100');
+define('_between_start', 'd-flex justify-content-start align-items-center w-100');
+
 define('_between_md', 'justify-content-between align-items-center w-100 text-center');
 define('_between_end', 'justify-content-between align-items-end w-100');
 define('_flex_right', 'justify-content-end');
@@ -96,6 +98,7 @@ define('_mas_opciones_icon', 'fa-chevron-circle-up');
 define('_entregas_icon', 'fa fa-motorcycle');
 define('_maps_icon', 'fa fa-map-marker');
 define('_compras_icon','fa-shopping-bag');
+define('_estrellas_icon','fa fa-star');
 
 
 

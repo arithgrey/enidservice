@@ -1,4 +1,4 @@
-.boton_editar_imagenes, .boton_editar_articulo {
+.boton_editar_imagenes, .boton_editar_articulo , .boton_agregar_articulo,.quitar_servicio_relacionado{
     border: solid 3px #0d0004;
     padding: 7px;
     background: white;

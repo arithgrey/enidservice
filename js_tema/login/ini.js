@@ -21,7 +21,12 @@ let seccion_registro_usuario = '.seccion_registro_nuevo_usuario_enid_service';
 let registro_pw = '.registro_pw';
 let $form_inicio = $(form_inicio);
 let $form_registro = $(form_registro);
+
 let $nombre_persona = $form_registro.find(nombre_persona);
+
+
+let $texto_telefono = $form_registro.find('.texto_telefono');
+
 let $registro_email = $form_registro.find('.registro_email');
 let $registro_pw = $form_registro.find('.registro_pw');
 let $botton_registro = $form_registro.find('.botton_registro');
@@ -192,6 +197,8 @@ let agrega_usuario = (e) => {
     respuestas.push(es_formato_password($registro_pw));
     respuestas.push(es_formato_email($registro_email));
     respuestas.push(es_formato_nombre($nombre_persona));
+    respuestas.push(es_formato_telefono($texto_telefono));
+
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
@@ -216,7 +223,8 @@ let agrega_usuario = (e) => {
             'tiene_auto': $tiene_auto.val(),
             'tiene_moto': $tiene_moto.val(),
             'tiene_bicicleta': $tiene_bicicleta.val(),
-            'reparte_a_pie': $reparte_a_pie.val()
+            'reparte_a_pie': $reparte_a_pie.val(),
+            'tel_contacto': $texto_telefono.val()
         };
 
         request_enid('POST', data_send, url, response_usuario_registro);
@@ -290,10 +298,10 @@ let seleccion_entrega = () => {
     let $id_perfil = parseInt(get_valor_selected('.perfil'));
 
 
-    if ($id_perfil !== 6){
+    if ($id_perfil !== 6) {
 
         $link_como_vender.addClass('d-none');
-    }else{
+    } else {
         $link_como_vender.removeClass('d-none');
     }
 
