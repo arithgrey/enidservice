@@ -1582,7 +1582,7 @@ a {
 }
 
 .azul_estrella {
-/ / color: #0070dd;
+
     color: #000;
     font-size: 1.5em;
 }
@@ -1753,6 +1753,11 @@ input:focus:invalid {
 .w_articulos_postulados {
     width: 44px !important;
     height: 44px;
+}
+
+.w_articulos_relacionados {
+    width: 150px !important;
+    height: 150px;
 }
 
 .h_310 {

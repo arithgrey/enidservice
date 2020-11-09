@@ -27,6 +27,8 @@ let $input_costo = $form_stock_servicio.find('.costo_stock');
 let $definir_feche_disponible = $('.definir_feche_disponible');
 let $opciones_definicion = $('.opciones_definicion');
 let $ultima_fecha_disponible = $('.ultima_fecha_disponible');
+
+
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -236,6 +238,14 @@ let respuesta_informacion_servicio = (data) => {
     $(".descartar_promocion").click(descartar_promocion);
     $('.form_stock_select').find(".stock").change(set_cantidad_en_stock);
     $('.entregas_en_punto_encuentro').click(actualiza_entregas_en_punto_encuentro);
+
+    verifica_formato_default_inputs();
+    $(".input_enid_format :input").focus(next_label_input_focus);
+
+    $(".busqueda_producto_relacionado").keyup(busqueda_posibles_relaciones);
+    $(".quitar_servicio_relacionado").click(quitar_servicio_relacionado);
+
+
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
@@ -277,11 +287,11 @@ let actualiza_ventas_mayoreo = function (e) {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
 };
-let entregas_solo_metro = function(e){
+let entregas_solo_metro = function (e) {
 
     let url = "../q/index.php/api/servicio/solo_metro/format/json/";
     let id = get_parameter_enid($(this), "id");
-    let $id_servicio =  get_option("servicio");
+    let $id_servicio = get_option("servicio");
 
     let data_send = {
         solo_metro: id,
@@ -297,7 +307,7 @@ let entregas_en_auto = function (e) {
 
     let url = "../q/index.php/api/servicio/requiere_auto/format/json/";
     let id = get_parameter_enid($(this), "id");
-    let $id_servicio =  get_option("servicio");
+    let $id_servicio = get_option("servicio");
 
     let data_send = {
         requiere_auto: id,
@@ -312,7 +322,7 @@ let moto = function (e) {
 
     let url = "../q/index.php/api/servicio/moto/format/json/";
     let id = get_parameter_enid($(this), "id");
-    let $id_servicio =  get_option("servicio");
+    let $id_servicio = get_option("servicio");
 
     let data_send = {
         moto: id,
@@ -327,7 +337,7 @@ let bicicleta = function (e) {
 
     let url = "../q/index.php/api/servicio/bicicleta/format/json/";
     let id = get_parameter_enid($(this), "id");
-    let $id_servicio =  get_option("servicio");
+    let $id_servicio = get_option("servicio");
 
     let data_send = {
         bicicleta: id,
@@ -342,7 +352,7 @@ let pie = function (e) {
 
     let url = "../q/index.php/api/servicio/pie/format/json/";
     let id = get_parameter_enid($(this), "id");
-    let $id_servicio =  get_option("servicio");
+    let $id_servicio = get_option("servicio");
 
     let data_send = {
         pie: id,
@@ -839,12 +849,14 @@ let listar_categorias = (data) => {
 
                     case 4:
 
+
                         set_option("selected_4", 1);
                         set_option("selected_num_4", id_clasificacion);
                         carga_listado_categorias_cuarto_nivel();
                         set_option("padre", id_clasificacion);
                         set_option("cuarto_nivel", id_clasificacion);
                         break;
+
                     default:
                 }
             }
@@ -1646,7 +1658,7 @@ let restablecer_promocion = function () {
 };
 let enter_precio = function (e) {
 
-    if (e.keyCode == 13) {
+    if (e.keyCode === 13) {
         $form_nombre_producto.submit();
     }
 };
@@ -1660,3 +1672,68 @@ let registro_comision = function (e) {
     });
 
 };
+let busqueda_posibles_relaciones = function (e) {
+
+    let keycode = e.keyCode;
+
+    if (keycode === 13) {
+
+        let url = "../q/index.php/api/servicio/relacionados/format/json/";
+        let ids_relacionados = $('.ids_relacionados').val();
+        let  ids = (ids_relacionados.length > 0) ? ids_relacionados : 0;
+        let data_send = {
+            "q": $('.busqueda_producto_relacionado').val(),
+            "page": 1,
+            "order": 1,
+            "global": 0,
+            "id_servicio": get_option("servicio"),
+            "ids_relacionados": ids
+        };
+
+        request_enid("GET", data_send, url, respuesta_busqueda_servicio, ".place_servicios", () => {
+
+        });
+
+    }
+
+}
+let quitar_servicio_relacionado = function (e) {
+
+    let id_servicio_relacion = e.target.id;
+    let id_servicio = get_option("servicio");
+
+    let url = "../q/index.php/api/servicio_relacion/index/format/json/";
+    let data_send = {
+        'id_servicio_relacion': id_servicio_relacion,
+        'id_servicio_dominante': id_servicio
+    };
+
+    request_enid("DELETE", data_send, url, function () {
+        carga_informacion_servicio(5);
+    });
+
+
+}
+
+let respuesta_busqueda_servicio = function (data) {
+
+    render_enid('.lista_productos_relacionados', data);
+    $('.boton_agregar_articulo').click(relacionar_servicio);
+
+}
+let relacionar_servicio = function (e) {
+
+    let id_servicio_relacion = e.target.id;
+    let id_servicio = get_option("servicio");
+
+    let url = "../q/index.php/api/servicio_relacion/index/format/json/";
+    let data_send = {
+        'id_servicio_relacion': id_servicio_relacion,
+        'id_servicio_dominante': id_servicio
+    };
+
+    request_enid("POST", data_send, url, function () {
+        carga_informacion_servicio(5);
+    });
+
+}

@@ -700,6 +700,7 @@ class Servicio extends REST_Controller
             $data["num_imagenes"] = count($imagenes);
             $data["images"] = $this->create_table_images($imagenes, $data["is_mobile"]);
             $data["id_perfil"] = $this->app->getperfiles();
+            $data["servicios_relacionados"] = $this->servicios_relacionados($id_servicio);
             $this->response(render_configurador($data));
 
         } else {
@@ -890,6 +891,51 @@ class Servicio extends REST_Controller
 
     }
 
+    function relacionados_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        $param["q"] = prm_def($param, 'q', '');
+        if (fx($param, 'q,page,order,id_servicio')) {
+
+            $id_servicio = $param["id_servicio"];
+            $param["id_usuario"] = $this->id_usuario;
+            $param["id_clasificacion"] = prm_def($param, "q2");
+            $param["extra"] = $param;
+            $param["resultados_por_pagina"] = 12;
+            $param["agrega_clasificaciones"] = 0;
+            $param["vendedor"] = 0;
+
+            $servicios = $this->get_servicios_empresa($param);
+
+            if (es_data($servicios) && array_key_exists('num_servicios', $servicios)) {
+
+                $ids_relacionados = [];
+                if (prm_def($param, 'ids_relacionados') !== 0) {
+                    $ids_relacionados = explode(",", $param["ids_relacionados"]);
+                    
+                    array_push($ids_relacionados, $id_servicio);
+
+                }
+                $ids_relacionados[] = $id_servicio;
+
+
+                $response = $this->get_view_relacionados($servicios, $param, $ids_relacionados);
+
+            } else {
+
+                $response = $servicios;
+
+            }
+
+
+        }
+        $this->response($response);
+
+
+    }
+
     private function get_servicios_empresa($q)
     {
 
@@ -923,7 +969,33 @@ class Servicio extends REST_Controller
 
     }
 
-    private function agrega_vista_servicios($data)
+    private function get_view_relacionados($servicios, $param, $id_servicios_menos)
+    {
+
+        $config["totales_elementos"] = $servicios["num_servicios"];
+        $config["per_page"] = 12;
+        $config["q"] = $param["q"];
+        $config["q2"] = 0;
+        $config["page"] = prm_def($this->input->get(), "page");
+        $busqueda = $param["q"];
+        $num_servicios = $servicios["num_servicios"];
+        $this->set_option("in_session", 1);
+        $this->set_option("id_usuario", $this->id_usuario);
+        $this->set_option("id_perfil", 0);
+        if ($this->app->is_logged_in()) {
+
+            $this->set_option("id_perfil", $this->app->getperfiles());
+        }
+
+
+        $lista_productos = $this->agrega_vista_servicios($servicios["servicios"], 1, $id_servicios_menos);
+
+        return get_base_empresa($this->app->paginacion($config), $busqueda, $num_servicios, $lista_productos);
+
+
+    }
+
+    private function agrega_vista_servicios($data, $agregar = 0, $ids_menos = [])
     {
         $response = [];
         $in_session = $this->get_option("in_session");
@@ -931,12 +1003,20 @@ class Servicio extends REST_Controller
         $id_perfil = $this->get_option("id_perfil");
 
         foreach ($data as $row) {
-            $row["in_session"] = $in_session;
-            $row["id_perfil"] = $id_perfil;
-            $row["id_usuario_actual"] = $id_usuario;
+
+
             $id_servicio = $row["id_servicio"];
-            $row["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
-            $response[] = create_vista($row);
+
+            if (!in_array($id_servicio, $ids_menos)) {
+
+                $row["in_session"] = $in_session;
+                $row["id_perfil"] = $id_perfil;
+                $row["id_usuario_actual"] = $id_usuario;
+                $row["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
+                $response[] = create_vista($row, $agregar);
+            }
+
+
         }
         return $response;
     }
@@ -1931,6 +2011,11 @@ class Servicio extends REST_Controller
     {
 
         return $this->app->api("servicio/qmetakeyword/format/json/", $q);
+    }
+
+    private function servicios_relacionados($id_servicio)
+    {
+        return $this->app->api("servicio_relacion/index/format/json/", ['id_servicio' => $id_servicio]);
     }
 
     function colores_GET()

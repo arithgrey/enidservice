@@ -69,6 +69,38 @@ class recibo extends REST_Controller
 
     }
 
+    function usuario_relacion_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_usuario,es_pago")) {
+
+            $response = [];
+            $recibo = $this->recibo_model->q_usuario($param["id_usuario"], 100);
+            if (es_data($recibo)){
+
+                $id_usuario =  prm_def($param,'id_usuario');
+                $usuario = $this->app->usuario($id_usuario);
+                $email = pr($usuario, "email");
+                $tel_contacto = pr($usuario, "tel_contacto");
+                $q = ["id_usuario" => $id_usuario, "email" => $email, "tel_contacto" => $tel_contacto];
+                $usuarios = $this->usuarios_similares($q);
+                $ids_usuarios= array_column($usuarios,'idusuario');
+
+                if (es_data($ids_usuarios)){
+
+                    $params = $this->parametros_busqueda(0);
+                    $response = $this->recibo_model->ids_usuarios($params, get_keys($ids_usuarios), $param["es_pago"]);
+                }
+
+            }
+
+        }
+
+        $this->response($response);
+
+    }
+
     function domicilios_puntos_encuentro_ubicaciones($domicilios)
     {
 
@@ -79,7 +111,6 @@ class recibo extends REST_Controller
             $recibos_puntos_encuentro = prm_def($domicilios, 'recibos_puntos_encuentro');
             $recibos_domicilio = prm_def($domicilios, 'recibos_domicilio');
             $ids_ubicaciones = prm_def($domicilios, 'recibos_ubicaciones');
-
 
             $ids_punto_encuentro = es_data($recibos_puntos_encuentro) ? array_column($recibos_puntos_encuentro, 'id_punto_encuentro') : [];
             $ids_direccion = es_data($recibos_domicilio) ? array_column($recibos_domicilio, 'id_direccion') : [];
@@ -2097,7 +2128,7 @@ class recibo extends REST_Controller
 
 
             $fecha_inicio = $param['fecha_inicio'];
-            $fecha_termino =    $param['fecha_termino'];
+            $fecha_termino = $param['fecha_termino'];
 
             $top = $this->recibo_model->top(
                 $fecha_inicio,
@@ -2120,13 +2151,12 @@ class recibo extends REST_Controller
                 $fecha_termino
             );
 
-            $top_horas =  $this->recibo_model->top_horas(
+            $top_horas = $this->recibo_model->top_horas(
                 $fecha_inicio,
                 $fecha_termino
             );
-            $ventas_hoy =  $this->recibo_model->ventas_menos_tiempo();
-            $ventas_menos_7 =  $this->recibo_model->ventas_menos_tiempo('-7');
-
+            $ventas_hoy = $this->recibo_model->ventas_menos_tiempo();
+            $ventas_menos_7 = $this->recibo_model->ventas_menos_tiempo('-7');
 
 
             if ($param["v"] == 1) {
@@ -2139,6 +2169,7 @@ class recibo extends REST_Controller
         $this->response($response);
 
     }
+
 
 }
 

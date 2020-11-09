@@ -155,6 +155,18 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "registro_email",
             ], _text_correo
         );
+
+        $r[] = input_frm(
+            "mt-5", "NÚMERO TELÉFONICO",
+            [
+                "id" => "tel",
+                "class" => "tel texto_telefono",
+                "type" => "tel",
+                "required" => true,
+
+            ], _text_telefono
+        );
+
         $r[] = place("place_correo_incorrecto");
         $r[] = input_frm(
             "mt-5", "UNA CONTRASEÑA",
@@ -168,6 +180,7 @@ if (!function_exists('invierte_date_time')) {
 
             ], _text_pass
         );
+
 
         $perfil[] = [
             'nombre_perfil' => 'Quiero vender',

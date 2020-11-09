@@ -49,10 +49,11 @@ class usuario extends REST_Controller
         $response = false;
         if (fx($param, "puntuacion,id_usuario")) {
 
-            $id_usuario = $param["id_usuario"];
-            $puntuacion = $param["puntuacion"];
-
-            $response = $this->usuario_model->q_up("puntuacion", $puntuacion, $id_usuario);
+            $response = $this->usuario_model->q_up(
+                "puntuacion",
+                $param["puntuacion"],
+                $param["id_usuario"]
+            );
 
         }
         $this->response($response);
@@ -596,7 +597,8 @@ class usuario extends REST_Controller
                     'tiene_auto' => prm_def($param, 'tiene_auto'),
                     'tiene_moto' => prm_def($param, 'tiene_moto'),
                     'tiene_bicicleta' => prm_def($param, 'tiene_bicicleta'),
-                    'reparte_a_pie' => prm_def($param, 'reparte_a_pie')
+                    'reparte_a_pie' => prm_def($param, 'reparte_a_pie'),
+                    'tel_contacto' => prm_def($param, 'tel_contacto')
                 ];
 
                 $response["id_usuario"] = $this->usuario_model->insert($params, 1);

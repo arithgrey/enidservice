@@ -10,8 +10,16 @@ class Home extends CI_Controller
 
     function index()
     {
-        $data = $this->app->session();
+
+        $data = $this->app->session(
+            "",
+            "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
+            "",
+            create_url_preview("comisionistas.png")
+        );
+
         $data = $this->app->cssJs($data, "sobre_ventas");
+
 
         $this->app->pagina($data, 'ventas');
     }

@@ -1252,7 +1252,8 @@ let path_enid = (indice, $extra = '') => {
     let $base_url = {
         "url_home": "reporte_enid",
         "recibo": "pedidos/?recibo=",
-        "entregas": 'entregas'
+        "entregas": 'entregas',
+        "reventa": 'reventa'
     };
 
     return _text('../', $base_url[indice], $extra);

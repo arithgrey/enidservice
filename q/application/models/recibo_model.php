@@ -120,11 +120,24 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
-    function ids_usuarios($params, $ids)
+    function ids_usuarios($params, $ids, $es_pago = 0)
     {
         $f = get_keys($params);
 
-        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p WHERE id_usuario IN(" . $ids . ")";
+
+        $extra = "";
+        if ($es_pago > 0 ){
+
+            $extra = "AND se_cancela < 1  
+                        AND saldo_cubierto > 0                         
+                        AND  p.status 
+                        NOT IN (10,19)  
+                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)";
+        }
+
+        $query_get = _text_(
+            "SELECT ", $f, " FROM proyecto_persona_forma_pago p WHERE id_usuario IN(", $ids, ")", $extra
+        );
         return $this->db->query($query_get)->result_array();
 
     }
@@ -637,6 +650,12 @@ class Recibo_model extends CI_Model
         return $this->update([$q => $q2], ["id_proyecto_persona_forma_pago" => $id_recibo]);
     }
 
+    function q_usuario($id_usuario, $limit = 1)
+    {
+
+        return $this->get([], ["id_usuario" => $id_usuario], $limit);
+    }
+
     private function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
     {
 
@@ -1139,7 +1158,7 @@ class Recibo_model extends CI_Model
     function reventa($id_vendedor)
     {
         $query_get = "SELECT  
-                        id_proyecto_persona_forma_pago id_recibo, id_servicio FROM proyecto_persona_forma_pago 
+                        id_proyecto_persona_forma_pago id_recibo, id_servicio, id_usuario FROM proyecto_persona_forma_pago 
                         WHERE saldo_cubierto > 0 
                         AND intento_reventa < 1 AND fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
                         AND se_cancela < 1 AND cancela_cliente < 1
@@ -1147,8 +1166,8 @@ class Recibo_model extends CI_Model
                         (
                             id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "'
                         ) 
-                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
-                        LIMIT 5";
+                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)                        
+                        LIMIT 500";
 
         return $this->db->query($query_get)->result_array();
     }

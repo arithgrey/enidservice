@@ -2041,6 +2041,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "usuario_contacto" => "usuario_contacto/?id_usuario=",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
+        "cross_selling" =>"cross_selling/?id_usuario=",
         "enid" => "https://enidservices.com",
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "enid_login" => _text("http://enidservices.com/", _web, "/login/"),

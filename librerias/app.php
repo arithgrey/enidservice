@@ -1211,6 +1211,27 @@ class app extends CI_Controller
                         ],
 
                 ],
+            "cross_selling" =>
+                [
+                    "js" =>
+                        [
+                            "cross_selling/principal.js"
+                        ],
+                    "css" =>
+                        [],
+
+                ],
+            "reventa" =>
+                [
+                    "js" =>
+                        [
+
+                        ],
+                    "css" =>
+                        [],
+
+                ],
+
 
 
         ];
@@ -1235,7 +1256,7 @@ class app extends CI_Controller
 
     }
 
-    function add_imgs_servicio($ordenes)
+    function add_imgs_servicio($ordenes, $key="id_servicio")
     {
 
         $a = 0;
@@ -1245,7 +1266,7 @@ class app extends CI_Controller
         foreach ($ordenes as $row) {
 
             $orden = $row;
-            $id_servicio = $ordenes[$a]["id_servicio"];
+            $id_servicio = $ordenes[$a][$key];
             if (!in_array($id_servicio, $servicios)) {
                 $servicios[] = $id_servicio;
                 $path = $this->imgs_productos($id_servicio, 1, 1, 1);

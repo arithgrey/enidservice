@@ -193,9 +193,85 @@ if (!function_exists('invierte_date_time')) {
             $s["metakeyword_usuario"],
             tab_activa($num, 3)
         );
+        $r[] = conf_productos_relacionados(
+            $data,
+            $id_servicio,
+            tab_activa($num, 5)
+        );
+
 
         return tab_content($r);
 
+
+    }
+
+    function conf_productos_relacionados(
+        $data,
+        $id_servicio,
+        $extra_5)
+
+    {
+
+        $response[] = d(_titulo('Artículos relacionados ', 2), 13);
+        $response[] = formato_servicios_relacionados($data["servicios_relacionados"], $id_servicio);
+        $response[] = input_frm("row", "Producto relacionado",
+            [
+                "type" => "text",
+                "name" => "busqueda_producto_relacionado",
+                "required" => true,
+                "placeholder" => "artículo",
+                "class" => "busqueda_producto_relacionado",
+                "id" => "busqueda_producto_relacionado"
+            ]
+        );
+
+
+        $response[] = place('lista_productos_relacionados');
+
+        return tab_seccion($response, "tab_productos_relacionados", $extra_5);
+
+
+    }
+
+    function formato_servicios_relacionados($servicios_relacionados, $id_servicio)
+    {
+
+        $response = [];
+        $ids = [];
+
+        if (es_data($servicios_relacionados)) {
+
+            $lista = [];
+            foreach ($servicios_relacionados as $row) {
+
+
+                $id = $row["id_servicio_relacion"];
+                $ids[] = $id;
+                if (!in_array($id, [$id_servicio])) {
+                    $path_imagen_servicio = link_imagen_servicio($id);
+
+                    $img = img(
+                        [
+                            "src" => $path_imagen_servicio,
+                            "class" => "w_articulos_relacionados",
+                        ]
+                    );
+
+                    $icono = icon(_text_("mt-5 mb-5 quitar_servicio_relacionado", _eliminar_icon), ["id" => $id]);
+                    $lista[] = flex($icono, $img, 'flex-column');
+
+
+                }
+
+            }
+            $seccion = d(d($lista, 'd-flex col-md-12'), 'row mb-5');
+            $response[] = d($seccion, 'row mb-5');
+            $response[] = hiddens(['class' => 'ids_relacionados',  "value" => implode(',', $ids)]);
+        }else{
+
+            $response[] = hiddens(['class' => 'ids_relacionados',  "value" => implode(',', [])]);
+        }
+        return append($response);
 
     }
 
@@ -729,7 +805,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function create_vista($s)
+    function create_vista($s, $agregar_servicio = 0)
     {
         $id_servicio = $s["id_servicio"];
         $in_session = $s["in_session"];
@@ -748,13 +824,36 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(a_enid($img, $path_servicio));
-            $response[] = d(editar_servicio(
-                $in_session,
-                $id_servicio,
-                $s["id_usuario"],
-                $s["id_usuario_actual"],
-                $id_perfil
-            ));
+
+            if ($agregar_servicio > 0) {
+
+                $response[] = d(
+                    agregar_servicio(
+                        $in_session,
+                        $id_servicio,
+                        $s["id_usuario"],
+                        $s["id_usuario_actual"],
+                        $id_perfil
+                    )
+                );
+
+
+            } else {
+
+                $response[] = d(
+                    editar_servicio(
+                        $in_session,
+                        $id_servicio,
+                        $s["id_usuario"],
+                        $s["id_usuario_actual"],
+                        $id_perfil
+                    )
+                );
+
+
+            }
+
+
             $response = d($response,
                 "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
             );
@@ -841,6 +940,11 @@ if (!function_exists('invierte_date_time')) {
             icon('fa fa-fighter-jet menu_meta_key_words'),
             "#tab_terminos_de_busqueda"
         );
+        $link_relacionados = tab(
+            icon('fa-superpowers'),
+            "#tab_productos_relacionados"
+        );
+
         $list = [
             li(
                 $link_foto,
@@ -864,6 +968,14 @@ if (!function_exists('invierte_date_time')) {
             ),
             li(
                 $link_busqueda,
+                [
+                    "class" => valida_active($num, 3),
+                    "style" => valida_existencia_imagenes($num_imagenes)
+                ]
+            )
+            ,
+            li(
+                $link_relacionados,
                 [
                     "class" => valida_active($num, 3),
                     "style" => valida_existencia_imagenes($num_imagenes)
@@ -1098,6 +1210,19 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
+
+    function agregar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
+    {
+
+        $response = "";
+        if ($in_session > 0 && $id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil != 20)) {
+            $response = icon("mt-5 mb-5 boton_agregar_articulo fa fa-plus", ["id" => $id_servicio]);
+        }
+
+        return $response;
+
+    }
+
 
     function rango_entrega($id_perfil, $actual, $attributes = [], $titulo, $minimo = 1, $maximo = 10)
     {
