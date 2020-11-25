@@ -38,7 +38,7 @@ class Usuario_servicio_propuesta_model extends CI_Model
         $query_get = "SELECT * FROM  
                         usuario_servicio_propuesta 
                         WHERE DATE(fecha_registro ) >  
-                        DATE_ADD(CURRENT_DATE() , INTERVAL - 20 DAY )
+                        DATE_ADD(CURRENT_DATE() , INTERVAL - 50 DAY )
                         AND es_contactable > 0";
         $result = $this->db->query($query_get);
         return $result->result_array();

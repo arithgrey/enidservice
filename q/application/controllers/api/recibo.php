@@ -28,6 +28,21 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function clientes_frecuentes_GET(){
+
+        $response =  $this->recibo_model->clientes_frecuentes();
+        $this->response($response);
+    }
+
+    function compras_usuario_GET()
+    {
+
+        $param = $this->get();
+        $response = [];
+        $this->response($response);
+
+    }
+
     function pendientes_sin_cierre_GET()
     {
 
@@ -77,17 +92,17 @@ class recibo extends REST_Controller
 
             $response = [];
             $recibo = $this->recibo_model->q_usuario($param["id_usuario"], 100);
-            if (es_data($recibo)){
+            if (es_data($recibo)) {
 
-                $id_usuario =  prm_def($param,'id_usuario');
+                $id_usuario = prm_def($param, 'id_usuario');
                 $usuario = $this->app->usuario($id_usuario);
                 $email = pr($usuario, "email");
                 $tel_contacto = pr($usuario, "tel_contacto");
                 $q = ["id_usuario" => $id_usuario, "email" => $email, "tel_contacto" => $tel_contacto];
                 $usuarios = $this->usuarios_similares($q);
-                $ids_usuarios= array_column($usuarios,'idusuario');
+                $ids_usuarios = array_column($usuarios, 'idusuario');
 
-                if (es_data($ids_usuarios)){
+                if (es_data($ids_usuarios)) {
 
                     $params = $this->parametros_busqueda(0);
                     $response = $this->recibo_model->ids_usuarios($params, get_keys($ids_usuarios), $param["es_pago"]);
@@ -1282,7 +1297,6 @@ class recibo extends REST_Controller
         } elseif ($ids != 0) {
 
             $params = $this->parametros_busqueda(0);
-
             $response = $this->recibo_model->ids_usuarios($params, $ids);
 
         } else {
@@ -1322,7 +1336,7 @@ class recibo extends REST_Controller
                         $this->get_estatus_enid_service($param), $param, $session);
                     break;
 
-                case 2:/*No me elimines regresa el json puro*/ break;
+                case 2: /*No me elimines regresa el json puro*/ break;
 
                 default:
 
@@ -1337,11 +1351,30 @@ class recibo extends REST_Controller
 
     }
 
+    function ventas_periodo_ids_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino") ) {
+
+            $ids = prm_def($param, 'ids');
+            $params = $this->parametros_busqueda(0);
+            $ids = get_keys($ids);
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $response = $this->recibo_model->ids_usuarios_periodo($params, $ids, $fecha_inicio, $fecha_termino);
+
+        }
+        $this->response($response);
+
+    }
+
+
     function add_repartidores($ordenes, $param)
     {
         $id_perfil = $param['perfil'];
         $es_administrador = (!in_array($id_perfil, [20, 6]));
-
 
         if ($es_administrador) {
 
@@ -2053,6 +2086,15 @@ class recibo extends REST_Controller
             $usuario = $param['usuario'];
             $response = $this->recibo_model->pago_recibos_comisiones($usuario);
         }
+        return $this->response($response);
+    }
+
+    function pago_recibos_comisiones_ids_PUT()
+    {
+
+        $param = $this->put();
+        $ids = $param['ids'];
+        $response = $this->recibo_model->pago_recibos_comisiones_ids($ids);
         return $this->response($response);
     }
 

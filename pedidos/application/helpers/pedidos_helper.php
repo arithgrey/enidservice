@@ -1077,12 +1077,12 @@ if (!function_exists('invierte_date_time')) {
 
             $vendedor = _text_('agenda', format_nombre($comisionista));
             $response[] =
-            a_enid(
-                flex($vendedor, $imagen, 'borde_amarillo blue_enid3 white text-capitalize', 'mr-5')
-                ,
-                path_enid('usuario_contacto', $id_vendedor)
+                a_enid(
+                    flex($vendedor, $imagen, 'borde_amarillo blue_enid3 white text-capitalize', 'mr-5')
+                    ,
+                    path_enid('usuario_contacto', $id_vendedor)
 
-            );
+                );
 
 
         } else {
@@ -1655,14 +1655,20 @@ if (!function_exists('invierte_date_time')) {
 
         $secciones_tabs[] = tab_seccion(append($response), 'buscador_seccion', 1);
         $modal = gb_modal(pago_usuario_comisiones(), 'modal_pago_comision');
+
+        $modal_comisiones = gb_modal(pago_comisiones(), 'modal_pago_comisiones');
+
         $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
+
 
         $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
         $menu_pedidos = tab('Pedidos', '#buscador_seccion', ['class' => 'strong']);
         $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => 'ml-5 strong']);
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
         $menu = flex(d($menu_pedidos, $class_pedidos), $menu_pendientes, 'justify-content-end');
+
+        $data_complete[] = $modal_comisiones;
         $data_complete[] = d($menu, 10, 1);
         $data_complete[] = d(tab_content($secciones_tabs), 12);
         return append($data_complete);
@@ -1733,6 +1739,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $total_pago_comisiones = 0;
         $response[] = d('', 'mt-5 mb-5 row');
+        $ids_cuentas_pagos = [];
         if (es_data($ordenes)) {
 
             $ids = array_column($ordenes, 'id_usuario_referencia');
@@ -1752,6 +1759,7 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $config = ['class' => 'usuario_venta cursor_pointer col-md-4 border', 'id' => $id_usuario];
+                $ids_cuentas_pagos[] = $id_usuario;
                 $config_pago = [
                     'class' => 'usuario_venta_pago cursor_pointer col-md-4 border',
                     'id' => $id_usuario,
@@ -1821,8 +1829,20 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $_response[] = d(_titulo('Cuentas por pagar', 2), 13);
+        if (es_data($ids_cuentas_pagos)){
+            $_response[] = d(
+                format_link('Marcar todos como pagados',
+                    [
+                        "class" => "marcar_pagos col-sm-3"
+                    ]
+                )
+                , 13);
+        }
+
+
         $_response[] = append($response);
         $_response[] = $modal;
+        $_response[] = hiddens(["class" => "ids_pagos", "value" => implode(",",$ids_cuentas_pagos)]);
         return d($_response, 10, 1);
     }
 
@@ -1856,6 +1876,8 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $totales = 0;
+
+
         foreach ($totales as $row) {
 
             $id_usuario = $row['id_usuario'];
@@ -1871,6 +1893,7 @@ if (!function_exists('invierte_date_time')) {
                     if ($id_usuario_busqueda == $id_usuario) {
 
                         $nombre_completo = format_nombre($usuario);
+
 
                         break;
                     }
@@ -1899,6 +1922,7 @@ if (!function_exists('invierte_date_time')) {
         }
         $_response[] = append($response);
         $_response[] = d(_titulo(money($totales_en_pagos)), 'pull-right row mt-5');
+
         return append($_response);
 
     }
@@ -1915,6 +1939,20 @@ if (!function_exists('invierte_date_time')) {
         $form[] = hiddens(['class' => 'fecha_termino', 'name' => 'fecha_termino']);
 
         $confirmacion = d(btn('Marcar como pagado!', ['class' => 'marcar_pago']), 'mt-5');
+
+        $form[] = $confirmacion;
+        $form[] = form_close();
+        return append($form);
+
+    }
+
+    function pago_comisiones()
+    {
+
+        $form[] = form_open('', ['class' => 'form_pago_comisiones']);
+        $form[] = d(_titulo('¿Notificarás todas las cuentas como pagadas?'), 'text-center');
+        $form[] = d('', 'resumen_pago_comisionista');
+        $confirmacion = d(btn('Marcar como pagado!', ['class' => 'marcar_cuentas_pagas']), 'mt-5');
 
         $form[] = $confirmacion;
         $form[] = form_close();

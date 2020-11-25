@@ -6,7 +6,7 @@ let $id_usuario_cliente = $('.id_usuario_cliente');
 let $id_servicio_relacion = $('.id_servicio_relacion');
 let $selector_sugerido = $('.selector_sugerido');
 let $marcar_sugerencia_seccion = $(".marcar_sugerencia_seccion");
-let $total_seleccion = 0;
+let $seleccionar_todo = $(".seleccionar_todo");
 
 $(document).ready(() => {
 
@@ -14,6 +14,7 @@ $(document).ready(() => {
     $servicio_intento_reventa.click(marcar_intento_reventa);
     $selector_sugerido.click(marca_selector_sugerido);
     $marcar_sugerencia_seccion.click(enviar_productos_sugerencias);
+    $seleccionar_todo.click(seleccionar_todos);
 
 });
 
@@ -31,14 +32,12 @@ let opciones_reventa = function () {
 };
 let marcar_intento_reventa = function () {
 
-
     let $id_usuario = $id_usuario_cliente.val();
     let url = "../q/index.php/api/usuario_servicio_propuesta/index/format/json/";
     let data_send = {'id_usuario': $id_usuario, 'id_servicio': $id_servicio_relacion.val()};
     $modal_opciones_reventa.modal('hide');
     modal('Notificando ...', 1);
     request_enid("POST", data_send, url, response_intento_reventa);
-
 
 }
 let marca_selector_sugerido = function () {
@@ -78,9 +77,7 @@ let enviar_productos_sugerencias = function (){
         }
     }
 
-
     if (ids.length > 0){
-
 
         let $id_usuario = $id_usuario_cliente.val();
         let url = "../q/index.php/api/usuario_servicio_propuesta/ids/format/json/";
@@ -89,8 +86,25 @@ let enviar_productos_sugerencias = function (){
         modal('Notificando ...', 1);
         request_enid("POST", data_send, url, response_intento_reventa);
 
-
     }
 
+}
+let seleccionar_todos = function (){
 
+    if ($(this).is(":checked")) {
+
+        for (let x in $selector_sugerido){
+            let $item = $selector_sugerido[x];
+            if (!$item.checked){
+                $item.click();
+            }
+        }
+    }else{
+        for (let x in $selector_sugerido) {
+            let $item = $selector_sugerido[x];
+            if ($item.checked) {
+                $item.click();
+            }
+        }
+    }
 }

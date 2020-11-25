@@ -85,7 +85,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function texto_envio_gratis(){
-        return d('envío gratis en Ciudad de México ','mt-5 mb-5 alert alert-light text-uppercase border black text-center');
+        return d(
+            d('envíos gratis en Ciudad de México, estado de México 100 pesos adicionales,
+             tiempo promedio de entrega 1 hora con 30 minutos ')
+            ,
+            'mt-5 mb-5 alert alert-light text-uppercase border black text-center');
     }
     function form_ubicacion_escrita($param)
     {
@@ -97,7 +101,10 @@ if (!function_exists('invierte_date_time')) {
         $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
         $domicilio = format_link('Registrar domicilio', ['class' => 'ingreso_texto_completo'], 0);
 
-        $form[] = d(flex_md($ubicacion, $domicilio, _text_(_between_md, 'mt-5 mb-5'),'mb-5 mb-md-0'), 'selector_ubicaciones_domicilio');
+        $form[] = d(
+            flex_md($ubicacion, $domicilio, _text_(_between_md, 'mt-5 mb-5'),'mb-5 mb-md-0'),
+            'selector_ubicaciones_domicilio'
+        );
 
 
         $formulario[] = form_open('', ['class' => 'form_ubicacion']);
@@ -132,7 +139,7 @@ if (!function_exists('invierte_date_time')) {
             _text_(_between, 'col-md-12'),
             'col-sm-12 col-md-6 p-0 mt-5 mb-5',
             _strong
-        ),13);
+        ),'row d-none');
         $formulario[] = d(input_frm('', 'Ubicación',
             [
                 'class' => 'ubicacion',
