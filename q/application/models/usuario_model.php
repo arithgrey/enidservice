@@ -609,8 +609,12 @@ class usuario_model extends CI_Model
                 nombre_usuario,
                 num_compras,
                 num_cancelaciones,
-                puntuacion
-                FROM usuario WHERE idusuario in (' . $in . ')';
+                puntuacion,
+                tel_contacto
+                FROM 
+                usuario
+                 WHERE 
+                 idusuario in (' . $in . ')';
 
         return $this->db->query($query_get)->result_array();
     }

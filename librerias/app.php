@@ -1108,8 +1108,6 @@ class app extends CI_Controller
                 [
                     "js" =>
                         [
-
-
                             "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js",
                             "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
                             "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
@@ -1123,7 +1121,6 @@ class app extends CI_Controller
                             'usuarios_enid/categorias.js',
                             "js/clasificaciones.js",
                             "alerts/jquery-confirm.js",
-
                         ],
                     "css" => [
                         "confirm-alert.css",
@@ -1221,6 +1218,40 @@ class app extends CI_Controller
                         [],
 
                 ],
+            "top_clientes" =>
+                [
+                    "js" =>
+                        [
+                            "cross_selling/principal.js"
+                        ],
+                    "css" =>
+                        [],
+
+                ],
+            "metricas_recursos" =>
+                [
+                    "js" =>
+                        [
+
+                        ],
+                    "css" =>
+                        [
+
+                            "metricas_recursos.css"
+                        ],
+                ],
+            "metricas_registros" =>
+                [
+                    "js" =>
+                        [
+
+                        ],
+                    "css" =>
+                        [
+
+
+                        ],
+                ],
             "reventa" =>
                 [
                     "js" =>
@@ -1231,7 +1262,6 @@ class app extends CI_Controller
                         [],
 
                 ],
-
 
 
         ];
@@ -1256,7 +1286,7 @@ class app extends CI_Controller
 
     }
 
-    function add_imgs_servicio($ordenes, $key="id_servicio")
+    function add_imgs_servicio($ordenes, $key = "id_servicio")
     {
 
         $a = 0;

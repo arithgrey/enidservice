@@ -126,7 +126,7 @@ class Recibo_model extends CI_Model
 
 
         $extra = "";
-        if ($es_pago > 0 ){
+        if ($es_pago > 0) {
 
             $extra = "AND se_cancela < 1  
                         AND saldo_cubierto > 0                         
@@ -137,6 +137,30 @@ class Recibo_model extends CI_Model
 
         $query_get = _text_(
             "SELECT ", $f, " FROM proyecto_persona_forma_pago p WHERE id_usuario IN(", $ids, ")", $extra
+        );
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+    function ids_usuarios_periodo($params, $ids, $fecha_inicio, $fecha_termino)
+    {
+
+        $f = get_keys($params);
+        $extra = "AND se_cancela < 1  
+                        AND saldo_cubierto > 0                         
+                        AND  p.status 
+                        NOT IN (10,19)  
+                        AND id_usuario NOT IN 
+                        (SELECT id_usuario FROM lista_negra)                        
+                        AND 
+                        DATE(p.fecha_entrega) 
+                        BETWEEN '" . $fecha_inicio . "' AND 
+                        '" . $fecha_termino . "' ";
+
+
+        $query_get = _text_(
+            "SELECT ", $f, " FROM proyecto_persona_forma_pago p WHERE id_usuario_referencia 
+            IN(", $ids, ")", $extra
         );
         return $this->db->query($query_get)->result_array();
 
@@ -1158,7 +1182,10 @@ class Recibo_model extends CI_Model
     function reventa($id_vendedor)
     {
         $query_get = "SELECT  
-                        id_proyecto_persona_forma_pago id_recibo, id_servicio, id_usuario FROM proyecto_persona_forma_pago 
+                        id_proyecto_persona_forma_pago id_recibo, 
+                        id_servicio, 
+                        id_usuario 
+                        FROM proyecto_persona_forma_pago 
                         WHERE saldo_cubierto > 0 
                         AND intento_reventa < 1 AND fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
                         AND se_cancela < 1 AND cancela_cliente < 1
@@ -1358,6 +1385,22 @@ class Recibo_model extends CI_Model
 
     }
 
+    function pago_recibos_comisiones_ids($ids)
+    {
+
+        $query_set = _text_('UPDATE 
+                    proyecto_persona_forma_pago SET flag_pago_comision = 1 
+                    WHERE id_proyecto_persona_forma_pago IN 
+                    (SELECT * FROM (
+                    SELECT id_proyecto_persona_forma_pago FROM proyecto_persona_forma_pago 
+                    WHERE id_usuario_referencia IN(', $ids, ') 
+                    AND se_cancela < 1 AND cancela_cliente < 1 
+                    AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)');
+        return $this->db->query($query_set);
+
+    }
+
+
     function comisiones_por_pago($id_empresa, $ids_usuarios_empresa)
     {
         $in_usuarios = get_keys($ids_usuarios_empresa);
@@ -1378,7 +1421,8 @@ class Recibo_model extends CI_Model
                         u.nombre,
                         u.apellido_paterno,
                         u.apellido_materno                        
-                        FROM proyecto_persona_forma_pago p 
+                        FROM 
+                        proyecto_persona_forma_pago p 
                         INNER JOIN usuario u  
                         ON p.id_usuario_referencia =  u.idusuario  
                         WHERE  
@@ -1403,7 +1447,9 @@ class Recibo_model extends CI_Model
                         AND 
                         DATE(fecha_entrega) 
                         BETWEEN 
-                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'                      
+                        '" . $fecha_inicio . "' 
+                        AND 
+                        '" . $fecha_termino . "'                      
                         AND status not IN ( 10, 19 ) 
                         AND 
                         se_cancela < 1 
@@ -1475,8 +1521,8 @@ class Recibo_model extends CI_Model
                         AND 
                         DATE(fecha_entrega)
                         BETWEEN 
-                                                '" . $fecha_inicio . "' AND '" . $fecha_termino . "'            
-                                               AND status not IN ( 10, 19 ) 
+                        '" . $fecha_inicio . "' AND '" . $fecha_termino . "'            
+                        AND status not IN ( 10, 19 ) 
                         AND 
                         se_cancela < 1 
                         AND 
@@ -1533,6 +1579,60 @@ class Recibo_model extends CI_Model
                         cancela_cliente < 1 ";
 
         return $this->db->query($query_get)->result_array()[0]['total'];
+
+    }
+
+    function clientes_frecuentes()
+    {
+
+        $_num = mt_rand();
+        $this->crea_tabla_clientes_frecuentes($_num, 0);
+        $query_get = _text_(
+            "SELECT * FROM ",
+            "tmp_clientes_$_num"
+
+        );
+        $response = $this->db->query($query_get)->result_array();
+        $this->crea_tabla_clientes_frecuentes($_num, 1);
+        return $response;
+
+
+    }
+
+    function crea_tabla_clientes_frecuentes($_num, $flag)
+    {
+
+        $response = $this->db->query(get_drop("tmp_clientes_$_num"));
+        if ($flag == 0) {
+            $query_create = "CREATE TABLE tmp_clientes_$_num 
+                            AS
+                            SELECT  
+                            p.id_usuario,                             
+                            u.tel_contacto, 
+                            u.email,
+                            u.nombre,
+                            u.apellido_paterno,
+                            u.apellido_materno                                                     
+                            FROM  
+                            proyecto_persona_forma_pago p 
+                            INNER JOIN  usuario u  
+                            ON u.idusuario =  p.id_usuario 
+                            WHERE  
+                            p.status != 19  
+                            AND 
+                            p.cancela_email < 1 
+                            AND 
+                            p.cancela_cliente < 1 
+                            AND 
+                            p.se_cancela < 1 
+                            AND 
+                            p.saldo_cubierto > 0
+                            AND u.tel_contacto 
+                            IS NOT NULL
+                            GROUP BY u.email";
+            $response = $this->db->query($query_create);
+        }
+        return $response;
 
     }
 

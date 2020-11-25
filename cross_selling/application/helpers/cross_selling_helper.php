@@ -38,6 +38,21 @@ if (!function_exists('invierte_date_time')) {
             , 5);
 
         $linea[] = d(flex(icon(_text_(_estrellas_icon, 'fa-2x black')), $texto, _between_start, 'mr-2'), 'row mt-5 mb-5');
+
+        $seleccionar_todo = input(
+            [
+                "type" => "checkbox",
+                "class" => "seleccionar_todo",
+                "id" => "seleccionar_todo"
+            ]
+        );
+        $texto_seleccion = label('Seleccionar todos',
+            [
+                "for" =>"seleccionar_todo",
+                "class" => "cursor_pointer"
+            ]
+        );
+        $linea[] = d(flex($seleccionar_todo, $texto_seleccion, '', 'mr-4'));
         $linea[] = formato_productos_relacionados($servicios_sugeridos, $recibos);
 
         $formato_vendidos = formato_productos_vendidos($recibos_pagos);
@@ -112,7 +127,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $selector = flex($item, $input, _text_('flex-column', _between),'mb-5');
+            $selector = flex($item, $input, _text_('flex-column', _between), 'mb-5');
             $response[] = d($selector, 2);
             $numero_servicio++;
             $ids[] = a_enid(
@@ -128,18 +143,18 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = d(
                 format_link(
-                "Marcar como sugeridos al cliente",
-                [
-                    "class" => "marcar_sugerencia",
+                    "Marcar como sugeridos al cliente",
+                    [
+                        "class" => "marcar_sugerencia",
 
-                ]
-            ),"col-md-2 d-none marcar_sugerencia_seccion"
+                    ]
+                ), "col-md-2 d-none marcar_sugerencia_seccion"
             );
         }
 
 
         $contenido[] = d($response, 'row mt-5');
-        $contenido[] = d($ids,'mt-5');
+        $contenido[] = d($ids, 'mt-5');
         return append($contenido);
 
 

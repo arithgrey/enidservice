@@ -6,13 +6,18 @@ let $reparto = $(".reparto");
 let $es_busqueda_reparto = $form_busqueda.find('.es_busqueda_reparto');
 let $form_pago_comisiones = $('.form_pago_comisiones');
 let $modal_pago_comision = $('#modal_pago_comision');
+let $modal_pago_comisiones = $('#modal_pago_comisiones');
 let $usuario_pago = $('.usuario_pago');
 let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
 let $input_busqueda = $form_busqueda.find('.input_busqueda');
 let $tipo_orden = $form_busqueda.find('.tipo_orden');
 let $nombre_usuario_venta = $('.nombre_usuario_venta');
+let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
+
 let $sintesis = $('.sintesis');
+let $marcar_pagos = $('.marcar_pagos');
+let $ids_pagos = $('.ids_pagos');
 $(document).ready(() => {
 
     $('footer').ready(function () {
@@ -23,6 +28,8 @@ $(document).ready(() => {
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
     $input_busqueda.keyup(elimina_guienes);
     $nombre_usuario_venta.click(filtro_ordenes_vendedor);
+    $marcar_pagos.click(marcar_pagos);
+    $marcar_cuentas_pagas.click(marcar_cuentas_pagas);
 });
 
 let busqueda_pedidos = function (e) {
@@ -147,6 +154,20 @@ let filtro_ordenes_vendedor = function (e) {
         $(linea_selector).addClass('selector');
 
     }
+
+
+}
+let marcar_pagos = function () {
+
+    $modal_pago_comisiones.modal("show");
+}
+let marcar_cuentas_pagas = function () {
+
+
+    let data_send = $.param({'ids' : $ids_pagos.val()});
+    let url = '../q/index.php/api/recibo/pago_recibos_comisiones_ids/format/json/';
+    request_enid("PUT", data_send, url, response_pagos);
+    e.preventDefault();
 
 
 }

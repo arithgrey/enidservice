@@ -23,12 +23,13 @@ class Home extends CI_Controller
         if (es_data($clientes)) {
 
             $usuarios = $this->usuarios_q($clientes);
-            sksort($usuarios, "num_compras");
+            $usuarios_num_compras  =  $this->usuarios_numero_compras($usuarios);
+            sksort($usuarios_num_compras, "num_compras");
             $intentos = $this->intentos_reventa();
 
         }
 
-        $this->app->pagina($data, render($usuarios, $intentos), 1);
+        $this->app->pagina($data, render($usuarios_num_compras, $intentos), 1);
 
 
     }
@@ -64,6 +65,27 @@ class Home extends CI_Controller
     {
 
         return $this->app->api("usuario/ids/format/json/", ["ids" => $ids_usuarios]);
+    }
+
+    private function usuarios_numero_compras($usuarios){
+
+        $response = [];
+        $a = 0;
+        if (es_data($usuarios)){
+
+            foreach ($usuarios as $row){
+
+
+                $num_compras = $this->app->api("recibo/num_compras_usuario/format/json/", ["id_usuario" => $row["id_usuario"]]);
+                $response[$a] =  $row;
+                $response[$a]['total_compras'] = $num_compras;
+
+                $a ++;
+            }
+
+        }
+
+        return $response;
     }
 
 }

@@ -51,11 +51,42 @@ class Usuario_perfil_model extends CI_Model
 
     function comisionistas()
     {
-        $query_get = 'SELECT u.nombre , u.apellido_paterno, u.apellido_materno , u.idusuario 
+        $query_get = 'SELECT 
+                        u.nombre , 
+                        u.apellido_paterno, 
+                        u.apellido_materno , 
+                        u.idusuario,
+                        u.fecha_registro 
                         FROM usuario_perfil up INNER JOIN
                          usuario u on u.idusuario = up.idusuario
                           WHERE up.idperfil IN (3,6)
                           and u.status =1 ';
+        return $this->db->query($query_get)->result_array();
+
+    }
+
+    function comisionistas_periodo($fecha_inicio, $fecha_termino)
+    {
+        $query_get = _text_("SELECT 
+                        u.nombre , 
+                        u.apellido_paterno, 
+                        u.apellido_materno , 
+                        u.idusuario,
+                        DATE(u.fecha_registro) fecha_registro 
+                        FROM usuario_perfil up 
+                        INNER JOIN
+                        usuario u 
+                        ON 
+                        u.idusuario = up.idusuario
+                        WHERE up.idperfil IN (3,6) 
+                        AND 
+                        u.status = 1 
+                        AND ",
+            "DATE(u.fecha_registro)
+             BETWEEN '", $fecha_inicio, "' AND  '", $fecha_termino, "' 
+             ORDER BY fecha_registro DESC"
+        );
+
         return $this->db->query($query_get)->result_array();
 
     }
@@ -65,15 +96,15 @@ class Usuario_perfil_model extends CI_Model
 
 
         $fecha = _text_(
-            "DATE(fecha_registro) BETWEEN '" ,
-            $fecha_inicio , "' AND  '" , $fecha_termino , "'");
-        $qperfil = _text_('AND idperfil = ', $id_perfil );
-        $qstatus = _text_('AND status = ', $status );
+            "DATE(fecha_registro) BETWEEN '",
+            $fecha_inicio, "' AND  '", $fecha_termino, "'");
+        $qperfil = _text_('AND idperfil = ', $id_perfil);
+        $qstatus = _text_('AND status = ', $status);
 
         $query_get = _text('SELECT 
                         COUNT(0)num
                         FROM usuario_perfil 
-                          WHERE ' , $fecha , $qperfil, $qstatus);
+                          WHERE ', $fecha, $qperfil, $qstatus);
         return $this->db->query($query_get)->result_array()[0]["num"];
 
 

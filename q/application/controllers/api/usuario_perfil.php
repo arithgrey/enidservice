@@ -67,6 +67,21 @@ class usuario_perfil extends REST_Controller
         $this->response($this->concatena_nombres($response));
     }
 
+    function comisionistas_periodo_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+            $fecha_inicio =  $param["fecha_inicio"];
+            $fecha_termino =  $param["fecha_termino"];
+            $response = $this->usuario_perfil_model->comisionistas_periodo($fecha_inicio,$fecha_termino);
+            $response = $this->concatena_nombres($response);
+        }
+        $this->response($response);
+
+    }
+
     function repartidores_GET()
     {
         $param = $this->get();

@@ -45,6 +45,10 @@ class Inicio extends CI_Controller
                 $module = "location:../busqueda";
                 break;
 
+            case 9:
+                $module = "location:../metricas_registros";
+                break;
+
 
             case in_array($num_perfil, $desarrollo):
                 $module = "location:../desarrollo";
