@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class Tickets_model extends CI_Model
 {
@@ -253,6 +253,13 @@ class Tickets_model extends CI_Model
             "id_ticket" => $param["id_ticket"]
         ];
         return $this->get(["count(*)num"], $params_where)[0]["num"];
+    }
+
+    function liberar()
+    {
+        $query_get = "UPDATE ticket SET status = 4 WHERE status = 2 LIMIT 50";
+        return $this->db->query($query_get);
+
     }
 
 }

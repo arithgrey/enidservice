@@ -8,11 +8,6 @@ class Status_enid_service_model extends CI_Model
 		$this->load->database();
 	}
 
-	/*
-	function get_status_enid_service($param){
-		return $this->get(["id_estatus_enid_service", "nombre"], [], 100);
-	}
-	*/
 	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
 	{
 

@@ -999,18 +999,18 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function carga_estado_compra($id_recibo, $vendedor = 0)
+    function carga_estado_compra($data, $id_status, $id_recibo, $vendedor = 0)
     {
 
+        $texto = texto_status_orden($data, $id_status, $vendedor);
 
-        $text_icono =
-            ($vendedor == 1) ?
-                "DETALLES DE LA COMPRA " : text_icon(_money_icon,
-                "DETALLES DE TU COMPRA ");
+        $detalles = text_icon(_money_icon, "DETALLES DE TU COMPRA ");
+        $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : $detalles;
+
+        $texto_completo = flex( $text_icono, $texto, "d-flex flex-column");
 
         $text = tab(
-            $text_icono,
-            "#tab_renovar_servicio",
+            $texto_completo, "#tab_renovar_servicio",
             [
                 "class" => 'resumen_pagos_pendientes mt-4 mb-4 strong black',
                 "id" => $id_recibo,
@@ -1290,46 +1290,57 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(get_text_modalidad($modalidad, $ordenes), 'mt-5');
         $text = ($modalidad == 1) ? "ÚLTIMAS VENTAS" : "ÚLTIMAS COMPRAS";
-        $r[] = d(d(btn($text, ["class" => "ver_mas_compras_o_ventas mt-5 mb-5 col-sm-3"]), 12), 'row');
-        $r[] = create_listado_compra_venta($ordenes, $modalidad, $data["id_perfil"]);
+        $boton = btn($text, ["class" => "ver_mas_compras_o_ventas mt-5 mb-5 col-sm-3"]);
+        $r[] = d(d($boton, 12), 13);
+
+        $r[] = create_listado_compra_venta($data);
         $r[] = d(place("contenedor_ventas_compras_anteriores"), 13);
 
         return d($r);
     }
 
-    function create_listado_compra_venta($ordenes, $modalidad, $id_perfil = 0)
+    function create_listado_compra_venta($data)
     {
 
         $list = [];
-        foreach ($ordenes as $row) {
+        $ordenes = $data["ordenes"];
+        $modalidad = $data["modalidad"];
+        $id_perfil = $data["id_perfil"];
+
+        $hay_ordenes = es_data($data["ordenes"]);
+        if (fx($data, "modalidad,id_usuario") && $hay_ordenes) {
 
 
-            $id_recibo = $row["id_proyecto_persona_forma_pago"];
-            $t = a_enid(
-                img(
+            foreach ($ordenes as $row) {
+
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $imagen = img(
                     [
                         "src" => $row["url_img_servicio"],
                         "class" => 'imagen_articulo_compras',
                     ]
-                )
-                ,
-                path_enid("producto", $row["id_servicio"])
+                );
 
-            );
+                $t = a_enid($imagen, path_enid("producto", $row["id_servicio"]));
+                $status = $row["status"];
+                $t = _text_($t, carga_estado_compra($data, $status, $id_recibo, $modalidad));
 
+                if ($id_perfil == 3) {
 
-            $t .= carga_estado_compra($id_recibo, $modalidad);
+                    $url = path_enid("pedidos_recibo", $id_recibo);
+                    $avanzado = btn("AVANZADO", [], 1, 1, 0, $url);
+                    $t = _text_($t, $avanzado);
 
-            if ($id_perfil == 3) {
-                $url = path_enid("pedidos_recibo", $id_recibo);
-                $t .= btn("AVANZADO", [], 1, 1, 0, $url);
+                }
+
+                $clase = 'align-items-center d-md-flex border 
+            border border-secondary mt-4 mb-4 p-4 justify-content-between min_block text-center';
+
+                $list[] = d(d($t, $clase), 1);
+
             }
-
-            $list[] = d(
-                d($t,
-                    "align-items-center d-md-flex border border border-secondary mt-4 mb-4 p-4 justify-content-between min_block text-center"),
-                1);
         }
+
 
         return append($list);
 
@@ -1638,10 +1649,10 @@ if (!function_exists('invierte_date_time')) {
 
 
             $top_articulos = d($contenido_top, 'col-md-8 mt-5 mb-5');
-            $top_horas_ventas = d(formato_horas_ventas($top_horas),'col-md-4 mt-5 mb-5');
+            $top_horas_ventas = d(formato_horas_ventas($top_horas), 'col-md-4 mt-5 mb-5');
 
 
-            $response[] = d(d([$top_articulos, $top_horas_ventas],'col-md-10 col-md-offset-1'),'row mt-5 mb-5');
+            $response[] = d(d([$top_articulos, $top_horas_ventas], 'col-md-10 col-md-offset-1'), 'row mt-5 mb-5');
 
             $formato_semanal_caidas =
                 format_top_semanal(
@@ -1654,7 +1665,6 @@ if (!function_exists('invierte_date_time')) {
             $response[] = formato_dias_caidas($ventas, $caidas, $totales_ventas, $totales_caidas, $ventas_hoy, $ventas_menos_7);
 
 
-
         }
 
         return d($response, 12);
@@ -1664,21 +1674,20 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $response[]= flex('franja horaria', 'ventas en hora', _text_(_between,'text-uppercase blue_enid3 white strong p-2'));
+        $response[] = flex('franja horaria', 'ventas en hora', _text_(_between, 'text-uppercase blue_enid3 white strong p-2'));
         foreach ($top_horas as $row) {
 
             $formato = 'Y-m-d H:i:s';
-            $hora =  $row["hora"];
+            $hora = $row["hora"];
 
             $fecha = horario_enid();
             $hoy = $fecha->format('Y-m-d');
-            $fecha_hora = DateTime::createFromFormat($formato, _text($hoy,' ',$hora,':00:00'));
+            $fecha_hora = DateTime::createFromFormat($formato, _text($hoy, ' ', $hora, ':00:00'));
 
 
+            $total = $row["total"];
 
-            $total =  $row["total"];
-
-            $response[]= flex($fecha_hora->format('H:i'), $total, _text_(_between,'text-center mt-3dae'),'underline black strong');
+            $response[] = flex($fecha_hora->format('H:i'), $total, _text_(_between, 'text-center mt-3dae'), 'underline black strong');
         }
 
         return append($response);

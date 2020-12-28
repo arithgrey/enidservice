@@ -321,6 +321,7 @@ let response_carga_tickets = function (data) {
     });
     $(".estatus_tickets").change(tikets_usuario);
 
+    $(".liberar").click(liberar_tareas);
 
 };
 let actualiza_tareas = function (e) {
@@ -555,3 +556,10 @@ let tiempo_tarea = function () {
     }
 
 };
+let liberar_tareas = function () {
+    
+    let url = "../q/index.php/api/tickets/liberacion/format/json/";
+    let data_send = $.param({'v': 1});
+    request_enid("PUT", data_send, url, tikets_usuario);
+
+}

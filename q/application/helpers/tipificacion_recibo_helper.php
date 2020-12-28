@@ -17,12 +17,12 @@ if (!function_exists('invierte_date_time')) {
                     "Veces que se canceló por está razón",
                     "Motivo cancelación"
                 ],
-                _text_($class,'blue_enid3 white')
+                _text_($class, 'blue_enid3 white')
             );
 
             $response[] = d($titulos);
 
-
+            $contenido = [];
             foreach ($data as $row) {
 
                 $tipificacion = $row['nombre_tipificacion'];
@@ -35,12 +35,11 @@ if (!function_exists('invierte_date_time')) {
                         $id_tipificacion,
                         $total,
                         $tipificacion
-                    ],$class
+                    ], $class
                 );
 
-                $response[] = d($contenido);
-
             }
+            $response[] = d($contenido);
         }
         return d($response, 'mt-5 col-sm-12 p-0');
     }

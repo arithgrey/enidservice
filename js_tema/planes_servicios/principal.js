@@ -195,6 +195,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_tag").submit(agrega_metakeyword);
     $(".text_nuevo").click(muestra_input_producto_nuevo);
     $(".text_ciclo_facturacion").click(muestra_input_ciclo_facturacion);
+
     $(".text_cantidad").click(muestra_input_cantidad);
     $(".btn_guardar_producto_nuevo").click(actualiza_servicio_usado);
     $(".btn_guardar_ciclo_facturacion").click(actualiza_ciclo_facturacion);
@@ -221,6 +222,35 @@ let respuesta_informacion_servicio = (data) => {
     $(".restablecer").click(restablecer);
     $('.stock_disponible').click(editar_stock_disponible);
     $('.stock_disponibilidad').click(editar_fecha_stock_disponible);
+
+    $(".form_marca").submit(actualiza_marca);
+    $(".marca").blur(actualiza_marca);
+
+
+    $(".form_modelo").submit(actualiza_modelo);
+
+
+    $(".form_dimension").submit(actualiza_dimensiones);
+    $(".dimensiones").blur(actualiza_dimensiones);
+
+
+    $(".form_servicio_materiales").submit(servicio_materiales);
+    $(".capacidad").keyup(servicio_capacidad);
+    $(".capacidad").keyup(capacidad);
+
+    $(".peso").keyup(actualiza_peso);
+    $(".peso").blur(peso);
+
+    $(".texto_marca").click(editor_marca);
+    $(".texto_dimensiones").click(editor_dimensiones);
+    $(".texto_peso").click(editor_peso);
+    $(".texto_capacidad").click(editor_capacidad);
+    $(".texto_modelo").click(editor_modelo);
+
+    $(".agregar_material").click(agregar_material);
+
+
+    $(".eliminar_material").click(eliminar_material);
 
 
     $(".form_dropshipping").submit(modifica_dropshipping);
@@ -502,6 +532,7 @@ let actualiza_dato_servicio = e => {
     });
     e.preventDefault();
 };
+
 let actualiza_dato_url_venta = e => {
     let url = "../q/index.php/api/servicio/q/format/json/";
     let data_send = $(".form_servicio_url_venta").serialize() + "&" + $.param({
@@ -513,6 +544,111 @@ let actualiza_dato_url_venta = e => {
     e.preventDefault();
 };
 
+let servicio_capacidad = e => {
+
+
+    let keycode = e.keyCode;
+    if (!/^[A-Za-záéíóúñ0-9 ]*$/.test(String.fromCharCode(keycode))) {
+        if (keycode === 13) {
+
+            let url = "../q/index.php/api/servicio/q/format/json/";
+            let data_send = $(".form_capacidad").serialize() + "&" + $.param({
+                "id_servicio": get_option("servicio")
+            });
+
+            request_enid("PUT", data_send, url, function (data) {
+                carga_informacion_servicio(2);
+            });
+        }
+    }
+
+
+    e.preventDefault();
+};
+
+let capacidad = e => {
+
+    let url = "../q/index.php/api/servicio/q/format/json/";
+    let data_send = $(".form_capacidad").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(2);
+    });
+
+};
+
+let actualiza_marca = e => {
+    let url = "../q/index.php/api/servicio/q/format/json/";
+
+    let data_send = $(".form_marca").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(2);
+    });
+    e.preventDefault();
+};
+
+let actualiza_modelo = e => {
+
+    let url = "../q/index.php/api/servicio/q/format/json/";
+
+    let data_send = $(".form_modelo").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(2);
+    });
+    e.preventDefault();
+
+}
+let actualiza_dimensiones = e => {
+    let url = "../q/index.php/api/servicio/q/format/json/";
+
+    let data_send = $(".form_dimension").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(2);
+    });
+    e.preventDefault();
+};
+
+let actualiza_peso = e => {
+
+    let keycode = e.keyCode;
+    if (!/^[A-Za-záéíóúñ0-9 ]*$/.test(String.fromCharCode(keycode))) {
+        if (keycode === 13) {/*Solo se permite enter*/
+
+            let url = "../q/index.php/api/servicio/q/format/json/";
+            let data_send = $(".form_peso").serialize() + "&" + $.param({
+                "id_servicio": get_option("servicio")
+            });
+            request_enid("PUT", data_send, url, function (data) {
+                carga_informacion_servicio(2);
+            });
+            e.preventDefault();
+        }
+    }
+};
+
+let peso = e => {
+
+    let url = "../q/index.php/api/servicio/q/format/json/";
+    let data_send = $(".form_peso").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(2);
+    });
+    e.preventDefault();
+
+};
 
 let actualiza_dato_servicio_afiliado = e => {
 
@@ -1680,7 +1816,7 @@ let busqueda_posibles_relaciones = function (e) {
 
         let url = "../q/index.php/api/servicio/relacionados/format/json/";
         let ids_relacionados = $('.ids_relacionados').val();
-        let  ids = (ids_relacionados.length > 0) ? ids_relacionados : 0;
+        let ids = (ids_relacionados.length > 0) ? ids_relacionados : 0;
         let data_send = {
             "q": $('.busqueda_producto_relacionado').val(),
             "page": 1,
@@ -1712,7 +1848,6 @@ let quitar_servicio_relacionado = function (e) {
         carga_informacion_servicio(5);
     });
 
-
 }
 
 let respuesta_busqueda_servicio = function (data) {
@@ -1735,5 +1870,69 @@ let relacionar_servicio = function (e) {
     request_enid("POST", data_send, url, function () {
         carga_informacion_servicio(5);
     });
+
+}
+
+let servicio_materiales = function (e) {
+
+    let url = "../q/index.php/api/servicio_material/index/format/json/";
+    let data_send = $(this).serialize() + "&" + $.param({'id_servicio': get_option("servicio")});
+    request_enid("POST", data_send, url, function () {
+        carga_informacion_servicio(2);
+    });
+    e.preventDefault();
+
+}
+
+let editor_marca = function (e) {
+
+    $('.input_marca').removeClass('d-none');
+    $('.texto_marca').addClass('d-none').removeClass('d-flex');
+}
+
+let editor_dimensiones = function (e) {
+
+    $('.input_dimensiones').removeClass('d-none');
+    $('.texto_dimensiones').addClass('d-none').removeClass('d-flex');
+}
+
+let editor_peso = function (e) {
+
+    $('.input_peso').removeClass('d-none');
+    $('.texto_peso').addClass('d-none').removeClass('d-flex');
+}
+
+let editor_capacidad = function (e) {
+
+    $('.input_capacidad').removeClass('d-none');
+    $('.texto_capacidad').addClass('d-none').removeClass('d-flex');
+}
+let editor_modelo = function (e) {
+
+    $('.input_modelo').removeClass('d-none');
+    $('.texto_modelo').addClass('d-none').removeClass('d-flex');
+
+}
+let agregar_material = function (e) {
+
+    $('.form_servicio_materiales').removeClass('d-none');
+    $('.agregar_material').addClass("d-none");
+
+}
+let eliminar_material = function (e) {
+
+    let id_material = e.target.id;
+    let id_servicio = get_option("servicio");
+
+    let url = "../q/index.php/api/servicio_material/index/format/json/";
+    let data_send = {
+        'id_servicio': id_servicio,
+        'id_material': id_material
+    };
+
+    request_enid("DELETE", data_send, url, function () {
+        carga_informacion_servicio(2);
+    });
+
 
 }

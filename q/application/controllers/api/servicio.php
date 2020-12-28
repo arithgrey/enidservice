@@ -701,6 +701,9 @@ class Servicio extends REST_Controller
             $data["images"] = $this->create_table_images($imagenes, $data["is_mobile"]);
             $data["id_perfil"] = $this->app->getperfiles();
             $data["servicios_relacionados"] = $this->servicios_relacionados($id_servicio);
+            $data["servicio"]["servicio_materiales"] = $this->servicio_materiales($id_servicio);
+            $data["servicio"]["materiales"] = $this->materiales();
+
             $this->response(render_configurador($data));
 
         } else {
@@ -914,7 +917,7 @@ class Servicio extends REST_Controller
                 $ids_relacionados = [];
                 if (prm_def($param, 'ids_relacionados') !== 0) {
                     $ids_relacionados = explode(",", $param["ids_relacionados"]);
-                    
+
                     array_push($ids_relacionados, $id_servicio);
 
                 }
@@ -2016,6 +2019,18 @@ class Servicio extends REST_Controller
     private function servicios_relacionados($id_servicio)
     {
         return $this->app->api("servicio_relacion/index/format/json/", ['id_servicio' => $id_servicio]);
+    }
+
+    private function servicio_materiales($id_servicio)
+    {
+        return $this->app->api("servicio_material/id/format/json/", ['id_servicio' => $id_servicio]);
+
+    }
+
+    private function materiales()
+    {
+        return $this->app->api("material/index/format/json/");
+
     }
 
     function colores_GET()

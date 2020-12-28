@@ -121,7 +121,11 @@ class usuario_direccion extends REST_Controller
     {
 
         $param = $this->get();
-        $id_usuario = $this->valida_cita_domicilio($param, $this->get_id_usuario($param));
+        $id = $this->get_id_usuario($param);
+        $param["session"] = $this->app->session();
+
+
+        $id_usuario = $this->valida_cita_domicilio($param, $id);
 
         $response = [];
         $data["id_usuario"] = $id_usuario;

@@ -74,6 +74,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             $r[] = seccion_titulo($nombre, $servicio, $num_imagenes);
+            $r[] = indicadores_faltantes($servicio);
+
             $r[] = menu_config($data, $id_servicio, $num, $num_imagenes, $url_productos_publico);
 
             $r[] = configurador(
@@ -108,6 +110,66 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
+
+    function indicadores_faltantes($servicio)
+    {
+
+        $descripcion = pr($servicio, "descripcion");
+        $marca = pr($servicio, "marca");
+        $dimensiones = pr($servicio, "dimension");
+        $servicio_materiales = $servicio["servicio_materiales"];
+        $metakeyword_usuario = pr($servicio, "metakeyword_usuario");
+
+
+        $response[] = es_texto($descripcion, 'Descripción');
+        $response[] = es_texto($marca, 'Marca');
+        $response[] = es_texto($dimensiones, 'Dimensiones');
+        $response[] = (es_data($servicio_materiales)) ? '' :
+            flex(icon(_text_(_eliminar_icon, 'fa-2x color_red')), 'Materiales', 'd-flex align-items-center');
+        $response[] = es_texto($metakeyword_usuario, 'Palabras clave');
+
+        return d(d($response, 3), 13);
+
+
+    }
+
+    function tiene_atributos($servicio)
+    {
+
+        $descripcion = $servicio["descripcion"];
+        $marca = $servicio["marca"];
+        $dimensiones = $servicio["dimension"];
+        $metakeyword_usuario = $servicio["metakeyword_usuario"];
+
+
+        $valicacion[] = es_texto($descripcion, '', 1);
+        $valicacion[] = es_texto($marca, '', 1);
+        $valicacion[] = es_texto($dimensiones, '', 1);
+        $valicacion[] = es_texto($metakeyword_usuario, '', 1);
+
+        return (in_array(false, $valicacion)) ? d('','border-bottom border-danger') : '';
+
+
+
+    }
+
+    function es_texto($texto, $atributo, $booleano = 0)
+    {
+
+        if ($booleano) {
+
+            $response = (strlen($texto) > 2);
+
+        } else {
+
+            $response = (strlen($texto) > 2) ? '' :
+                flex(icon(_text_(_eliminar_icon, 'fa-2x color_red')), $atributo, 'd-flex align-items-center');
+        }
+        return $response;
+
+
+    }
+
 
     function configurador($s, $data, $num,
                           $num_imagenes,
@@ -152,6 +214,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = conf_producto(
+            $servicio,
             $n_titulo,
             $in_descripcion,
             $n_descripcion,
@@ -266,10 +329,10 @@ if (!function_exists('invierte_date_time')) {
             }
             $seccion = d(d($lista, 'd-flex col-md-12'), 'row mb-5');
             $response[] = d($seccion, 'row mb-5');
-            $response[] = hiddens(['class' => 'ids_relacionados',  "value" => implode(',', $ids)]);
-        }else{
+            $response[] = hiddens(['class' => 'ids_relacionados', "value" => implode(',', $ids)]);
+        } else {
 
-            $response[] = hiddens(['class' => 'ids_relacionados',  "value" => implode(',', [])]);
+            $response[] = hiddens(['class' => 'ids_relacionados', "value" => implode(',', [])]);
         }
         return append($response);
 
@@ -535,6 +598,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_producto(
+        $servicio,
         $n_titulo_producto,
         $inf_n_descripcion,
         $nueva_descripcion,
@@ -548,6 +612,7 @@ if (!function_exists('invierte_date_time')) {
         $d[] = place("place_tallas_disponibles");
         $d[] = $inf_n_descripcion;
         $d[] = form_descripcion($nueva_descripcion);
+        $d[] = format_atributos($servicio);
         $d[] = format_colores($es_servicio, $info_colores);
         return tab_seccion($d, "tab_info_producto", $ext_2);
 
@@ -639,13 +704,243 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
+    function format_atributos($servicio)
+    {
+
+        $marca = pr($servicio, "marca");
+        $modelo = pr($servicio, "modelo");
+        $dimension = pr($servicio, "dimension");
+        $peso = pr($servicio, "peso");
+        $capacidad = pr($servicio, "capacidad");
+
+        $r[] = form_open("", ["class" => "col-sm-4 form_marca mt-5"]);
+        $r[] = flex(
+            icon('fa fa-pencil'),
+            _text_(strong("Marca:"), $marca),
+            "texto_marca cursor_pointer",
+            "mr-1"
+        );
+
+        $r[] = input_frm("d-none input_marca", "Marca",
+            [
+                "name" => 'q2',
+                "class" => "marca",
+                "id" => "marca",
+                "value" => $marca,
+                "required" => true
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "q",
+                "class" => "marca",
+                "id" => "marca",
+                "value" => "marca",
+            ]
+        );
+
+        $r[] = form_close();
+
+
+
+        $r[] = form_open("", ["class" => "col-sm-4 form_modelo mt-5"]);
+        $r[] = flex(
+            icon('fa fa-pencil'),
+            _text_(strong("Modelo:"), $modelo),
+            "texto_modelo cursor_pointer",
+            "mr-1"
+        );
+
+        $r[] = input_frm("d-none input_modelo", "Modelo",
+            [
+                "name" => 'q2',
+                "class" => "modelo",
+                "id" => "modelo",
+                "value" => $modelo,
+                "required" => true
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "q",
+                "class" => "modelo",
+                "id" => "modelo",
+                "value" => "modelo",
+            ]
+        );
+
+        $r[] = form_close();
+
+        $r[] = form_open("",
+            [
+                "class" => "col-sm-4 form_dimension mt-5"
+            ]
+        );
+        $r[] = flex(
+            icon('fa fa-pencil'),
+            _text_(strong("Dimensiones:"), $dimension),
+            "texto_dimensiones cursor_pointer",
+            "mr-1"
+        );
+
+        $r[] = input_frm("d-none input_dimensiones", "Dimensiones",
+            [
+                "name" => "q2",
+                "class" => "dimensiones",
+                "id" => "dimensiones",
+                "value" => $dimension,
+                "required" => true
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "q",
+                "class" => "dimension",
+                "id" => "dimension",
+                "value" => "dimension",
+            ]
+        );
+
+        $r[] = form_close();
+
+        $r[] = form_open("",
+            [
+                "class" => "col-sm-4 form_peso mt-5"
+            ]
+        );
+        $r[] = flex(
+            icon('fa fa-pencil'),
+            _text_(strong("Peso:"), $peso, 'KG'),
+            "texto_peso cursor_pointer",
+            "mr-1"
+        );
+        $r[] = input_frm("d-none input_peso", "Peso en (KG)",
+            [
+                "name" => "q2",
+                "class" => "peso",
+                "id" => "peso",
+                "type" => "float",
+                "value" => $peso
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "q",
+                "class" => "peso",
+                "id" => "peso",
+                "value" => "peso",
+            ]
+        );
+        $r[] = form_close();
+
+        $r[] = seccion_materiales($servicio);
+        $r[] = form_open("",
+            [
+                "class" => "col-sm-4 form_capacidad mt-5"
+            ]
+        );
+
+        $r[] = flex(
+            icon('fa fa-pencil'),
+            _text_(strong("Capacidad:"), $capacidad, 'KG'),
+            "texto_capacidad cursor_pointer",
+            "mr-1"
+        );
+
+        $r[] = input_frm("d-none input_capacidad",
+            "Capacidad en (KG)",
+            [
+                "name" => "q2",
+                "class" => "capacidad",
+                "id" => "capacidad",
+                "type" => "float",
+                "value" => $capacidad
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => "q",
+                "class" => "capacidad",
+                "id" => "capacidad",
+                "value" => "capacidad",
+            ]
+        );
+
+        $r[] = form_close();
+
+
+        return d($r, "row mt-5 mb-5");
+    }
+
+    function seccion_materiales($servicio)
+    {
+
+        $materiales = $servicio["materiales"];
+        $servicio_materiales = $servicio["servicio_materiales"];
+        $seccion_tags = [];
+        $ids = [];
+        if (es_data($servicio_materiales)) {
+
+            foreach ($servicio_materiales as $row) {
+
+                $id_material = $row["id_material"];
+                $id = search_bi_array($materiales, "id_material", $id_material);
+                $material = $materiales[$id];
+
+                $tag = create_solo_tag(
+                    $material,
+                    "material_servicio_tag text-uppercase bg_white",
+                    "id_material",
+                    "nombre"
+                );
+
+                $ids[] = $material["id_material"];
+                $icon = icon(
+                    _text_(_eliminar_icon, 'mr-5 eliminar_material'),
+                    [
+                        "id" => $id_material
+                    ]
+                );
+                $seccion_tags[] = flex($icon, $tag);
+            }
+        }
+
+        $seccion_tags[] = d(d(btn("+ Nuevo", ["class" => "agregar_material mt-3"]), 6), 'row');
+        $response[] = d("Materiales", "strong text-uppercase mb-3");
+        $response[] = d($seccion_tags);
+        $response[] = form_open("", ["class" => "form_servicio_materiales d-none"]);
+
+        $selector = create_select(
+            $materiales,
+            "material",
+            "material mt-5",
+            "material",
+            "nombre",
+            "id_material",
+            0,
+            1,
+            0,
+            "-",
+            $ids
+        );
+
+        $registro = btn("Agregar");
+        $response[] = flex($selector, $registro, _between);
+        $response[] = form_close();
+
+        return d($response, 'col-sm-4 mt-5');
+
+    }
 
     function venta_mayoreo($es_servicio, $venta_mayoreo)
     {
 
-
         $r = [];
-
         if ($es_servicio < 1) {
 
             $mayoreo = a_enid("SI",
@@ -817,7 +1112,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 'src' => $s["url_img_servicio"],
                 'alt' => $s["metakeyword"],
-                'class' => 'mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310  mh-auto mt-5',
+                'class' => 'mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310 mh-auto mt-5',
             ]
         );
 
@@ -840,15 +1135,18 @@ if (!function_exists('invierte_date_time')) {
 
             } else {
 
-                $response[] = d(
-                    editar_servicio(
-                        $in_session,
-                        $id_servicio,
-                        $s["id_usuario"],
-                        $s["id_usuario_actual"],
-                        $id_perfil
-                    )
+                $icono_editar = editar_servicio(
+                    $s,
+                    $in_session,
+                    $id_servicio,
+                    $id_perfil
                 );
+
+                $indicador = tiene_atributos($s);
+
+
+                $response[] = d($icono_editar);
+                $response[] = d($indicador);
 
 
             }
@@ -872,6 +1170,7 @@ if (!function_exists('invierte_date_time')) {
         return $response;
 
     }
+
 
     function get_base_empresa($paginacion, $busqueda, $num_servicios, $productos)
     {
@@ -1199,12 +1498,17 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function editar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
+    function editar_servicio($servicio, $in_session, $id_servicio, $id_perfil)
     {
 
         $response = "";
-        if ($in_session > 0 && $id_usuario == $id_usuario_registro_servicio || ($id_perfil > 0 && $id_perfil != 20)) {
-            $response = icon("mt-5 mb-5 boton_editar_articulo servicio fa fa-pencil", ["id" => $id_servicio]);
+        $id_usuario = $servicio["id_usuario"];
+        $id_usuario_registro_servicio = $servicio["id_usuario_actual"];
+        $en_session_propietario = ($in_session > 0 && $id_usuario == $id_usuario_registro_servicio);
+        $no_cliente = ($id_perfil > 0 && $id_perfil != 20);
+        if ($en_session_propietario || $no_cliente) {
+            $clase = "mt-5 mb-5 boton_editar_articulo servicio fa fa-pencil";
+            $response = icon($clase, ["id" => $id_servicio]);
         }
 
         return $response;
@@ -1660,7 +1964,8 @@ if (!function_exists('invierte_date_time')) {
     function form_costo_unidad($precio)
     {
 
-        $precio_unidad = text_icon('fa fa-pencil',
+        $precio_unidad = text_icon(
+            'fa fa-pencil',
             _text("precio por unidad:", money($precio))
         );
         $r[] = titulo_bloque("precio por unidad");

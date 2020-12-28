@@ -172,9 +172,23 @@ class Home extends CI_Controller
         $data["desc_web"] = $this->get_option("desc_web");
         $data["id_servicio"] = $id_servicio;
         $data["existencia"] = $this->get_existencia($id_servicio);
+        $data["servicio_materiales"] = $this->servicio_materiales($id_servicio);
+
 
         $data = $this->app->cssJs($data, "producto");
         $this->app->pagina($data, render_producto($data), 1);
+
+    }
+
+    private function servicio_materiales($id_servicio)
+    {
+
+        return $this->app->api("servicio_material/id/format/json/",
+            [
+                'id_servicio' => $id_servicio,
+                "materiales" => 1
+            ]
+        );
 
     }
 
@@ -235,10 +249,9 @@ class Home extends CI_Controller
         $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
 
 
-
         $response[] = d($str, "text-uppercase mt-5 ");
-        $solo_metro =  pr($servicio,'solo_metro');
-        $opciones_compra =  ($es_posible_punto_encuentro > 0 && $solo_metro < 1) ? 'Tienes una de dos' : '';
+        $solo_metro = pr($servicio, 'solo_metro');
+        $opciones_compra = ($es_posible_punto_encuentro > 0 && $solo_metro < 1) ? 'Tienes una de dos' : '';
         $response[] = d(_titulo($opciones_compra, 4), 'mt-5 text-center');
         return append($response);
     }

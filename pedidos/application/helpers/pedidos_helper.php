@@ -1575,6 +1575,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
         $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
         $r[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => $es_busqueda_reparto]);
+        $r[] = hiddens(['class' => 'es_admistrador', 'name' => 'es_admistrador', 'value' => es_administrador($data)]);
         $r[] = hiddens(
             [
                 "name" => "perfil",
@@ -1582,6 +1583,7 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $data["id_perfil"],
             ]
         );
+
 
 
         $select_comisionistas = create_select(

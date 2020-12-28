@@ -1229,16 +1229,17 @@ function _text() {
 }
 
 
-function d(text, className = '') {
+function d(text, className = '', id = '') {
 
     let div = document.createElement("div");
     let text_div = document.createTextNode(text);
     div.className = className;
+    div.id = id;
     div.appendChild(text_div);
     return div.outerHTML;
 }
 
-function tag(tipo,text, className = '') {
+function tag(tipo, text, className = '') {
 
     let div = document.createElement(tipo);
     let text_div = document.createTextNode(text);

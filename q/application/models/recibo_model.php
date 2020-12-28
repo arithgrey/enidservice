@@ -174,7 +174,9 @@ class Recibo_model extends CI_Model
         $tipo_entrega = $param["tipo_entrega"];
         $status_venta = $param["status_venta"];
         $id_usuario_venta = $param['id_usuario'];
+        $es_admistrador = $param['es_admistrador'];
         $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p";
+
 
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
@@ -185,14 +187,13 @@ class Recibo_model extends CI_Model
 
         $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
         $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
-        $extra_usuario_venta = ($id_usuario_venta == 1) ? " " :
+        $extra_usuario_venta = ($id_usuario_venta == 1 or intval($es_admistrador) === 1) ? " " :
             "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-        $query_get .= _text_($ext_usuario, $usuario_referencia, $ext_contra_entrega,
-            $extra_extatus_venta, $extra_usuario_venta, $ext_fecha,
+        $query_get .= _text_($ext_usuario, $usuario_referencia, $ext_contra_entrega, $extra_extatus_venta, $extra_usuario_venta, $ext_fecha,
             $ext_servicio, " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC");
         return $this->db->query($query_get)->result_array();
 
@@ -756,7 +757,7 @@ class Recibo_model extends CI_Model
                     $sql = " WHERE 
                       id_usuario = $id_usuario  
                       AND  
-                      status IN (1, 6, 7,9, 11, 12)
+                      status IN (1, 6, 7, 9, 11, 12, 16)
                       AND se_cancela =0";
                     break;
 
@@ -1194,7 +1195,7 @@ class Recibo_model extends CI_Model
                             id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "'
                         ) 
                         AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)                        
-                        LIMIT 500";
+                         ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 50";
 
         return $this->db->query($query_get)->result_array();
     }

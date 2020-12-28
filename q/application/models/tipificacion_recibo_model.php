@@ -87,11 +87,11 @@ class tipificacion_recibo_model extends CI_Model
                         FROM tipificacion_recibo tr                         
                         INNER JOIN tipificacion t  ON 
                         tr.id_tipificacion =  t.id_tipificacion 
-                        WHERE DATE(fecha_registro)BETWEEN 
+                        WHERE DATE(fecha_registro) BETWEEN 
                                 '" . $fecha_inicio . "' 
                                 AND 
                                 '" . $fecha_termino . "'
-                        GROUP by(t.id_tipificacion) 
+                        GROUP BY t.id_tipificacion 
                         ORDER BY COUNT(0) DESC";
 
         return $this->db->query($query_get)->result_array();

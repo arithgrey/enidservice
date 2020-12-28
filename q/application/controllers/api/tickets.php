@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Tickets extends REST_Controller
@@ -388,6 +388,7 @@ class Tickets extends REST_Controller
         $this->response($response);
     }
 
+
     function tiempo_estimado_PUT()
     {
 
@@ -470,6 +471,12 @@ class Tickets extends REST_Controller
                 $param["id_ticket"]);
         }
         $this->response($response);
+    }
+
+    function liberacion_PUT()
+    {
+
+        $this->response($this->tickets_model->liberar());
     }
 
 
