@@ -28,9 +28,10 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
-    function clientes_frecuentes_GET(){
+    function clientes_frecuentes_GET()
+    {
 
-        $response =  $this->recibo_model->clientes_frecuentes();
+        $response = $this->recibo_model->clientes_frecuentes();
         $this->response($response);
     }
 
@@ -719,7 +720,17 @@ class recibo extends REST_Controller
 
             $compras = $this->recibo_model->compras_ventas_efectivas_usuario($param);
             $compras = $this->app->imgs_productos(0, 1, 1, 1, $compras);
-            $response = d(create_listado_compra_venta($compras, $param["modalidad"]), 1);
+
+            $data = $this->app->session();
+            $data += [
+                "ordenes" => $compras,
+                "modalidad" => $param["modalidad"],
+                "id_perfil" => 0
+            ];
+
+            $lista_compras = create_listado_compra_venta($data);
+            $response = d($lista_compras, 1);
+
         }
 
         $this->response($response);
@@ -734,6 +745,7 @@ class recibo extends REST_Controller
     {
 
         $param = $this->get();
+        $data = $this->app->session();
         $response = false;
         if (fx($param, "modalidad")) {
 
@@ -745,7 +757,7 @@ class recibo extends REST_Controller
 
             if (es_data($ordenes)) {
 
-                $data = [
+                $data += [
                     "id_usuario" => $id_usuario,
                     "ordenes" => $ordenes,
                     "modalidad" => $modalidad,
@@ -1320,6 +1332,8 @@ class recibo extends REST_Controller
 
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
             $param['perfil'] = $this->app->getperfiles();
+            $param['es_administrador'] = prm_def($param, 'es_admistrador');
+
             $response = $this->busqueda_pedidos($param);
 
             switch ($param["v"]) {
@@ -1356,7 +1370,7 @@ class recibo extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "fecha_inicio,fecha_termino") ) {
+        if (fx($param, "fecha_inicio,fecha_termino")) {
 
             $ids = prm_def($param, 'ids');
             $params = $this->parametros_busqueda(0);

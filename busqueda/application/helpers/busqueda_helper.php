@@ -24,7 +24,9 @@ if (!function_exists('invierte_date_time')) {
 
 
         $meta_semanal_comisionista = $data['meta_semanal_comisionista'];
-        $total_ventas_semana = count($data['ventas_semana']);
+        $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
+
+
 
 
         $restantes = ($meta_semanal_comisionista - $total_ventas_semana );

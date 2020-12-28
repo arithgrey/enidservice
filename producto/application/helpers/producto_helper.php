@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
 
         $a = _text_(
-            h("SELECCIONA TU TIPO DE ENTREGA",3,'white')
+            h("SELECCIONA TU TIPO DE ENTREGA", 3, 'white')
             ,
             punto_entrega($id_servicio, $orden_pedido)
             ,
@@ -131,6 +131,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5  ");
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session), 10, 1);
 
+
         $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
 
         $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, " mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
@@ -234,7 +235,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = h("MENSAJERÍA", 4, "strong black");
         $r[] = d("lo llevamos a tu domicilio", "text text-uppercase black");
 
-        return  d($r,
+        return d($r,
             [
                 "class" => "cursor_pointer p-4 mt-5 bg-light mb-5 mh-selector d-flex flex-column justify-content-center selector_entrega ",
                 "onclick" => "carga_opcion_entrega(2, " . $id_servicio . " , " . $orden_pedido . " );"
@@ -380,13 +381,15 @@ if (!function_exists('invierte_date_time')) {
 
     function url_post($id_servicio)
     {
-        return _text("http://enidservices.com/",_web,"/img_tema/productos/" . $id_servicio);
+        return _text("http://enidservices.com/", _web, "/img_tema/productos/" . $id_servicio);
     }
 
     function costruye_meta_keyword($servicio)
     {
 
         if (es_data($servicio)) {
+
+
 
             $servicio = $servicio[0];
             $meta_usuario = $servicio["metakeyword_usuario"];
@@ -436,6 +439,11 @@ if (!function_exists('invierte_date_time')) {
         $color = pr($servicio, "color");
         $es_servicio = pr($servicio, "flag_servicio");
         $es_nuevo = pr($servicio, "flag_nuevo");
+        $marca = pr($servicio, "marca");
+        $dimension = pr($servicio, "dimension");
+        $peso = pr($servicio, "peso");
+        $capacidad = pr($servicio, "capacidad");
+        $servicio_materiales = $data["servicio_materiales"];
 
         $z[] = d(_titulo($nombre), "mb-4");
 
@@ -453,8 +461,23 @@ if (!function_exists('invierte_date_time')) {
             $z[] = _titulo($phone, 4, 'mt-4 mb-4');
         }
 
+        $z[] = validador_atributo($marca, 'Marca');
+        $z[] = validador_atributo($dimension, 'Dimensiones');
+        if ($peso > 0) {
+            $z[] = validador_atributo($peso, 'Peso', 'KG');
+        }
+
+        if ($capacidad > 0) {
+            $z[] = validador_atributo($capacidad, 'Capacidad', "KG");
+        }
+
+        $z[] = valida_materiales($servicio_materiales);
+
+
         $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
         $z[] = tb_colores($color, $es_servicio);
+
+
         $yt = pr($servicio, "url_vide_youtube");
 
         $r = [];
@@ -482,6 +505,36 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function valida_materiales($servicio_materiales)
+    {
+
+        $response = [];
+        if (es_data($servicio_materiales)) {
+            foreach ($servicio_materiales as $row) {
+
+                $response[] = create_solo_tag(
+                    $row,
+                    "material_servicio_tag text-uppercase bg_white",
+                    "id_material",
+                    "nombre"
+                );
+            }
+        }
+
+        return append($response);
+
+    }
+
+    function validador_atributo($atributo, $texto, $extra = '')
+    {
+
+        $response = '';
+        if (strlen($atributo) > 0) {
+
+            $response = d(_text_(strong($texto), $atributo, $extra));
+        }
+        return $response;
+    }
 
     function crea_nombre_publicador_info($usuario, $id_usuario)
     {

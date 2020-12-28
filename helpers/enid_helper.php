@@ -617,6 +617,23 @@ function create_tag($param, $class, $val_id, $text)
 
 }
 
+function create_solo_tag($param, $class, $val_id, $text)
+{
+
+    $tags = add_element(
+        $param[$text],
+        "button",
+        [
+            'class' => $class,
+            'id' => $param[$val_id],
+        ]
+    );
+
+    return add_element($tags, "d", ['class' => 'tags']);
+
+}
+
+
 function get_array_json($val)
 {
 
@@ -1418,7 +1435,7 @@ function get_logo($session = 0)
 }
 
 
-function get_img_usuario($id_usuario, $extra_class='')
+function get_img_usuario($id_usuario, $extra_class = '')
 {
 
     $url_img = "../imgs/index.php/enid/imagen_usuario/" . $id_usuario;
@@ -2041,7 +2058,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "usuario_contacto" => "usuario_contacto/?id_usuario=",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
-        "cross_selling" =>"cross_selling/?id_usuario=",
+        "cross_selling" => "cross_selling/?id_usuario=",
         "enid" => "https://enidservices.com",
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
@@ -3478,6 +3495,17 @@ function es_administrador($data)
 {
 
     return in_array($data['id_perfil'], $data['restricciones']['es_administrador']);
+
+}
+
+function texto_status_orden($data, $id_status, $tipo = 0)
+{
+
+    $tipo_texto = ["text_cliente", "text_vendedor", "nombre"];
+    $data_status_enid = $data["data_status_enid"];
+    return search_bi_array(
+        $data_status_enid, 'id_estatus_enid_service', $id_status, $tipo_texto[$tipo]);
+
 
 }
 

@@ -25,7 +25,6 @@ class Inicio extends CI_Controller
             "extra_servicio" => 0,
         ];
 
-
         $data = $this->prevenir_acceso($param, $data);
         $data["error_registro"] = valida_extension(prm_def($param, "mensaje", ""), 5, "");
         $data["top_servicios"] = [];

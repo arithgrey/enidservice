@@ -226,7 +226,9 @@ if (!function_exists('invierte_date_time')) {
                 "id" => 1,
             ]
         );
-        $response[] = d($hecho,
+        $response[] = d(
+
+            $hecho,
             [
                 "class" => _text($base, " bloque_hecho"),
                 "id" => 2,
@@ -240,6 +242,13 @@ if (!function_exists('invierte_date_time')) {
 
 
         $contenido[] = contaiter(seccion_comparativa($comparativa), 'mt-5 mb-5');
+        $link_liberacion = format_link(
+            "Liberar tareas realizadas",
+            [
+                "class" => "liberar col-sm-3"
+            ]
+        );
+        $contenido[] = contaiter($link_liberacion, 'mt-5 mb-5');
         $contenido[] = contaiter($response);
         return append($contenido);
 
@@ -330,14 +339,14 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(_titulo('¿cual es la tarea?', 0, 'mb-5'));
 
-        $label_tiempo = _titulo('¿tiempo estimado que se invertirá en realizar esta tarea?',3);
+        $label_tiempo = _titulo('¿tiempo estimado que se invertirá en realizar esta tarea?', 3);
         $tiempo_estimado_select = create_select(tiempos(), 'tiempo_estimado',
             'form-control',
             'tiempo_estimado', 'tiempo_estimado', 'tiempo');
 
 
         $tiempos[] = dd($label_tiempo, $tiempo_estimado_select);
-        $tiempos[] =  d(btn('Registrar'),'mt-3 registro_tiempo_tarea');
+        $tiempos[] = d(btn('Registrar'), 'mt-3 registro_tiempo_tarea');
 
         $r[] = flex_md($solicitud, $registro, _between, _8p, _4p);
 
@@ -346,7 +355,6 @@ if (!function_exists('invierte_date_time')) {
         $reponse[] = d($r, 'col-lg-8 col-lg-offset-2 mb-5 p-0');
         $reponse[] = gb_modal(append($tiempos), 'modal_tiempo_tarea');
         return append($reponse);
-
 
 
     }

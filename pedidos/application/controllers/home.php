@@ -313,7 +313,6 @@ class Home extends CI_Controller
 
     }
 
-
     private function agrega_usuario_referencia_tracker($data, $es_administrador)
     {
         if ($es_administrador && es_data($data['recibo'])) {

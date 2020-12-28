@@ -352,7 +352,7 @@ class app extends CI_Controller
             $data["id_empresa"] = $session["idempresa"];
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
-
+            $data["data_status_enid"] = $session["data_status_enid"];
 
         } else {
 
@@ -367,7 +367,9 @@ class app extends CI_Controller
             $data["desc_web"] = $desc;
             $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
             $data["menu"] = "";
+            $data["data_status_enid"] = "";
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
+
 
         }
 
@@ -1260,6 +1262,22 @@ class app extends CI_Controller
                         ],
                     "css" =>
                         [],
+
+                ],
+            "preguntas_frecuentes" =>
+                [
+                    "js" =>
+                        [
+                            "preguntas_frecuentes/principal.js",
+                            "alerts/jquery-confirm.js",
+                            'js/summernote.js',
+                        ],
+                    "css" =>
+                        [
+                            "preguntas_frecuentes.css",
+                            "confirm-alert.css",
+                            "summernote.css",
+                        ],
 
                 ],
 

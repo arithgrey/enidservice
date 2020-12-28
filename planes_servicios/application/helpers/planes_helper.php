@@ -11,8 +11,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "form_stock_servicio",
                 "method" => "post"
-            ]
-        );
+            ]);
 
         $form[] = d(input_frm('mt-5', '¿Cantidad?',
             [
@@ -25,6 +24,7 @@ if (!function_exists('invierte_date_time')) {
             ],
             '¿Hay algo mal con esta canidad no?'
         ), 'input_unidades_producto_stock');
+
         $form[] = d(input_frm('mt-5', '¿Cuanto nos costó cada unidad? MXN',
             [
                 'class' => 'costo_stock',
@@ -35,6 +35,7 @@ if (!function_exists('invierte_date_time')) {
                 'type' => 'number',
             ], 'Parece que el costo anda mal ¿no?'
         ), 'input_costo_producto_stock');
+
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
         $form[] = btn('Actualizar', ['class' => 'mt-5']);
         $form[] = form_close();
@@ -254,6 +255,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = _titulo("configurar artículos");
+
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);

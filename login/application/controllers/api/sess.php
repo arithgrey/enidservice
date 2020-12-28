@@ -86,6 +86,7 @@ class Sess extends REST_Controller
         $perfildata = $this->get_perfil_data($id_usuario);
         $empresa_permiso = $this->get_empresa_permiso($id_empresa);
         $empresa_recurso = $this->get_empresa_recursos($id_empresa);
+        $status_enid = $this->estatus_enid_service();
         $response = 0;
 
         if (es_data($perfiles)) {
@@ -105,6 +106,7 @@ class Sess extends REST_Controller
                     "empresa_recurso" => $empresa_recurso,
                     "data_navegacion" => $navegacion,
                     "info_empresa" => $empresa,
+                    "data_status_enid" => $status_enid,
                     "logged_in" => 1
                 ];
 
@@ -113,6 +115,12 @@ class Sess extends REST_Controller
 
         }
         return $response;
+    }
+
+    private function estatus_enid_service($q = [])
+    {
+
+        return $this->app->api("status_enid_service/textos/format/json/", $q);
     }
 
     private function get_empresa($id_empresa)

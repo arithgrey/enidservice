@@ -116,14 +116,12 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "procesar_domicilio");
-
         $param += [
 
             "id_recibo" => $param["recibo"],
             "id_usuario" => $data['id_usuario'],
-            "session" => $data
         ];
-        
+
         $response = $this->carga_ficha_direccion_envio($param, 1);
         $this->app->pagina($data, $response, 1);
 
@@ -132,12 +130,10 @@ class Home extends CI_Controller
     private function carga_ficha_direccion_envio($q, $v = 0)
     {
 
-        $q += [
-            "text_direccion" => "Dirección de Envio",
-            "externo" => 1,
-        ];
 
-        $q['session']['menu'] = '';
+        $q["text_direccion"] = "Dirección de Envio";
+        $q["externo"] = 1;
+
         $response = $this->app->api("usuario_direccion/direccion_envio_pedido/format/json/", $q);
 
         if ($v > 0) {
