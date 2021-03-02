@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Tag_arquetipo extends REST_Controller
@@ -120,17 +120,24 @@ class Tag_arquetipo extends REST_Controller
     private function reventa($param, $data_arquetipo)
     {
 
-        $response = $this->app->api("recibo/reventa", $param, 'json', 'PUT');
+        $response = false;
+        $id_orden_compra = $param["orden_compra"];
+        $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+        foreach ($productos_orden_compra as $row) {
 
+            $id_recibo
+                = $row["id_proyecto_persona_forma_pago"];
 
-        if (fx($param, "recibo,accion_reventa")) {
+            $response = $this->app->api("recibo/reventa", ["recibo" => $id_recibo], 'json', 'PUT');
 
-            $data_comentarios = [
-                'id_recibo' => $param['recibo'],
-                'comentarios' => $param['accion_reventa']
-            ];
-            $this->app->api("recibo_comentario/index", $data_comentarios, 'json', 'POST');
+            if (fx($param, "accion_reventa")) {
 
+                $data_comentarios = [
+                    'id_recibo' => $id_recibo,
+                    'comentarios' => $param['accion_reventa']
+                ];
+                $this->app->api("recibo_comentario/index", $data_comentarios, 'json', 'POST');
+            }
         }
 
         if (prm_def($param, 'interes')) {

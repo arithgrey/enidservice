@@ -62,7 +62,7 @@ class Home extends CI_Controller
     private function get_recibo_forma_pago($id_recibo)
     {
 
-        return $this->app->api("recibo/resumen_desglose_pago", ['id_recibo' => $id_recibo], "html");
+        return $this->app->api("recibo/resumen_desglose_pago", ['id_orden_compra' => $id_recibo], "html");
 
     }
 

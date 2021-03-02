@@ -32,8 +32,8 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
             $id_recibo = $param["id_recibo"];
             if (array_key_exists('total', $param)) {
 
-                $response = $this->proyecto_persona_forma_pago_direccion_model->count(
-                    $id_recibo);
+                $response =
+                    $this->proyecto_persona_forma_pago_direccion_model->count($id_recibo);
 
             } else {
 

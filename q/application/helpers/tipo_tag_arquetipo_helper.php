@@ -8,7 +8,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_usuario = $data['id_usuario'];
-        $id_recibo = $data['recibo'];
+        $id_orden_compra = $data['id_orden_compra'];
         $form[] = form_open("",
             [
                 "class" => "form_reventa",
@@ -51,7 +51,7 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = hiddens(['name' => 'interes', 'value' => 0, 'class' => 'interes']);
         $form[] = hiddens(['name' => 'tipo', 'value' => 2]);
-        $form[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+        $form[] = hiddens(['name' => 'orden_compra', 'value' => $id_orden_compra]);
         $form[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
         $form[] = d(btn('Registrar', ['class' => 'mt-5']), 'd-none registro_articulo');
         $form[] = form_close();

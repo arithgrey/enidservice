@@ -106,13 +106,14 @@ if (!function_exists('invierte_date_time')) {
                     $row
                 );
 
+                $id_orden_compra = $row["id_orden_compra"];
                 $abrir_en_google = $nota_pedido['abrir_en_google'];
                 $maps_link = $nota_pedido['maps_link'];
                 $descripcion_domicilio = $nota_pedido['descripcion_domicilio'];
                 $nombre_vendedor = $nota_pedido['nombre_vendedor'];
                 $nombre_cliente = $nota_pedido['nombre_cliente'];
                 $nombre_usuario_entrega = $nota_pedido['nombre_usuario_entrega'];
-                $orden = d(_text('#', $id_recibo), 'text-center');
+                $orden = d(_text('#', $id_orden_compra), 'text-center');
                 $usuario_entrega = $nota_pedido['usuario_entrega'];
                 $solicitar_ubicacion = $nota_pedido['solicitar_ubicacion'];
 
@@ -142,8 +143,9 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-                $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
-                $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);
+                $id_orden_compra =  $row["id_orden_compra"];
+                $desglose_pedido = path_enid("pedidos_recibo", $id_orden_compra);
+                $tracker = path_enid("pedido_seguimiento", $id_orden_compra);
                 $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
                 $link = a_enid($text,
                     [
@@ -282,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
         $abrir_en_google = 0;
         $maps_link = '';
         $solicitar_ubicacion = 0;
-        $nombre_usuario_entrega = '';
+
 
         switch ($tipo_entrega) {
             case 1:

@@ -76,7 +76,6 @@ class Home extends CI_Controller
     private function load_vistas_punto_encuentro($param, $data)
     {
 
-
         $es_avanzado = (prm_def($param, "avanzado") > 0);
         $es_punto_encuentro = (prm_def($param, "punto_encuentro") > 0);
         $id_servicio = prm_def($param, 'servicio');

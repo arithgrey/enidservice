@@ -165,7 +165,7 @@ let inf_ticket = function (e) {
     if (id_recibo > 0) {
         set_option("id_recibo", id_recibo);
         let url = "../q/index.php/api/recibo/resumen_desglose_pago/format/json/";
-        let data_send = {"id_recibo": get_option("id_recibo"), "cobranza": 1};
+        let data_send = {"id_orden_compra": get_option("id_recibo"), "cobranza": 1};
         request_enid("GET", data_send, url, r_carga_info_resumen_pago_pendiente, ".place_resumen_servicio");
     }
 };
@@ -186,10 +186,10 @@ let resposponse_confirma_cancelacion = data => {
 };
 let cancela_compra = function () {
 
-    let id_recibo = get_parameter_enid($(this), "id");
+    let id_orden_compra = get_parameter_enid($(this), "id");
     let url = "../q/index.php/api/tickets/cancelar/format/json/";
     let data_send = {
-        "id_recibo": id_recibo,
+        "id_orden_compra": id_orden_compra,
         "modalidad": get_option("modalidad_ventas")
     };
     request_enid("PUT", data_send, url, response_cancelacion_compra);
@@ -223,7 +223,7 @@ let conf_cancelacion_compra = function () {
     set_option({
 
         "modalidad_ventas": get_attr(this, "modalidad"),
-        "id_recibo": get_attr(this, "id"),
+        "id_orden_compra": get_attr(this, "id"),
         "vista": 2,
 
     });
@@ -231,7 +231,7 @@ let conf_cancelacion_compra = function () {
     if (get_option("id_recibo") > 0) {
         let url = "../q/index.php/api/tickets/cancelar_form/format/json/";
         let data_send = {
-            "id_recibo": get_option("id_recibo"),
+            "id_orden_compra": get_option("id_orden_compra"),
             "modalidad": get_option("modalidad_ventas")
         };
         request_enid("GET", data_send, url, resposponse_confirma_cancelacion);

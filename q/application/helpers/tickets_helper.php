@@ -360,30 +360,34 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function form_cancelar_compra($recibo, $modalidad)
+    function form_cancelar_compra($id_orden_compra, $recibo, $modalidad)
     {
+        $r = [];
+        foreach ($recibo as $row){
 
-        $x[] = _titulo("¿REALMENTE DESEAS CANCELAR LA COMPRA?");
-        $x[] = d($recibo["resumen"], 'mt-5 mb-5');
-        $r[] = d(d($x));
-        $url = path_enid("area_cliente_compras", $recibo['id_recibo']);
-        $r[] = btn("SEGUIR COMPRANDO",
-            [
+            $x[] = _titulo("¿REALMENTE DESEAS CANCELAR LA COMPRA?");
+            $x[] = d($row["resumen"], 'mt-5 mb-5');
+            $r[] = d($x);
+            $url = path_enid("area_cliente_compras", $id_orden_compra);
+            $r[] = btn("SEGUIR COMPRANDO",
+                [
 
-                "class" => "top_30",
+                    "class" => "top_30",
 
-            ],
-            1,
-            1, 0, $url);
+                ],
+                1,
+                1, 0, $url);
 
-        $r[] = btn("CANCELAR ÓRDEN DE COMPRA",
-            [
-                "class" => "cancelar_orden_compra top_20",
-                "id" => $recibo['id_recibo'],
-                "modalidad" => $modalidad,
-            ],
-            1,
-            1);
+            $r[] = btn("CANCELAR ÓRDEN DE COMPRA",
+                [
+                    "class" => "cancelar_orden_compra top_20",
+                    "id" => $id_orden_compra,
+                    "modalidad" => $modalidad,
+                ],
+                1,
+                1);
+
+        }
 
 
         return d($r, _6auto);

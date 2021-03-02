@@ -12,12 +12,11 @@ class Areacliente extends REST_Controller
     function pago_pendiente_web_GET()
     {
 
-
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_recibo, email")) {
+        if (fx($param, "orden_compra,email")) {
 
-            $respose = true;
+            $response = true;
             $cuerpo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);
             if (strlen($cuerpo) > 30) {
 
@@ -33,7 +32,7 @@ class Areacliente extends REST_Controller
     function carga_pago_pendiente_por_recibo($id_recibo)
     {
 
-        $q["id_recibo"] = $id_recibo;
+        $q["id_orden_compra"] = $id_recibo;
         return $this->app->api("recibo/resumen_desglose_pago/format/json/", $q);
     }
 }

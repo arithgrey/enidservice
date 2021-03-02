@@ -38,10 +38,9 @@ class tipificacion_recibo_model extends CI_Model
         return $this->db->update("tipificacion_recibo", $data);
     }
 
-    function get_recibo($param)
+    function get_recibo($id_recibo)
     {
 
-        $id_recibo = $param["recibo"];
         $query_get =
             "SELECT 
       tr.fecha_registro , 

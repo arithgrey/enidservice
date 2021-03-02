@@ -11,24 +11,25 @@ let $fecha_entrega_ubicacion = $form_ubicacion.find('.fecha_entrega');
 
 $(document).ready(() => {
 
-    $('footer').addClass('d-none');
-    $(".codigo_postal").keyup(auto_completa_direccion);
-    $(".numero_exterior").keyup(() => quita_espacios(".numero_exterior"));
-    $(".numero_interior").keyup(() => quita_espacios(".numero_interior"));
-    $(".form_direccion_envio").submit(registra_nueva_direccion);
+        $('footer').addClass('d-none');
+        $(".codigo_postal").keyup(auto_completa_direccion);
+        $(".numero_exterior").keyup(() => quita_espacios(".numero_exterior"));
+        $(".numero_interior").keyup(() => quita_espacios(".numero_interior"));
+        $(".form_direccion_envio").submit(registra_nueva_direccion);
 
-    if ($('.form_direccion_envio .fecha_entrega').length) {
+        if ($('.form_direccion_envio .fecha_entrega').length) {
 
-        $('.form_direccion_envio .fecha_entrega').change(horarios_disponibles);
+            $('.form_direccion_envio .fecha_entrega').change(horarios_disponibles);
+        }
+        $fecha_entrega_ubicacion.change(horarios_disponibles_ubicacion);
+        $ingreso_texto_completo.click(ingreso_completo);
+        $ingreso_ubicacion.click(ingreso_ubicacion);
+        $form_ubicacion.submit(registro_ubicacion);
+        valida_indicacion_ubicacion();
+
     }
-    $fecha_entrega_ubicacion.change(horarios_disponibles_ubicacion);
-    $ingreso_texto_completo.click(ingreso_completo);
-    $ingreso_ubicacion.click(ingreso_ubicacion);
-    $form_ubicacion.submit(registro_ubicacion);
-    valida_indicacion_ubicacion();
+);
 
-
-});
 let horarios_disponibles = () => {
 
     let url = "../q/index.php/api/punto_encuentro/horario_disponible/format/json/";
@@ -49,6 +50,7 @@ let response_horario = (data) => {
         render_enid(".horario_entrega", data);
     }
 };
+
 let response_horario_ubicacion = (data) => {
 
     if (!isArray(data)) {
@@ -61,8 +63,8 @@ let valida_indicacion_ubicacion = () => {
 
     $informacion_resumen_envio.addClass('d-none');
     $modal_ubicacion.modal("show");
-
 };
+
 let ingreso_completo = () => {
 
     $informacion_resumen_envio.removeClass('d-none');
@@ -75,6 +77,7 @@ let ingreso_ubicacion = () => {
     $selector_ubicaciones_domicilio.addClass('d-none');
     $formulario_registro_ubicacion.removeClass('d-none');
 };
+
 let registro_ubicacion = (e) => {
 
     let url = "../q/index.php/api/ubicacion/index/format/json/";
@@ -84,10 +87,10 @@ let registro_ubicacion = (e) => {
 
     e.preventDefault();
 };
+
 let response_ubicacion = function (data) {
 
-    if (array_key_exists('id_recibo', data)) {
-
+    if (array_key_exists('orden_compra', data)) {
         redirect(data.siguiente);
     }
 };

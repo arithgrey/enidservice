@@ -1420,6 +1420,7 @@ if (!function_exists('invierte_date_time')) {
         $f = 0;
         $ventas_posteriores = [];
         $ventas_hoy = [];
+        $es_cliente = es_cliente($data);
         if (es_data($recibos)) {
 
             sksort($recibos, "fecha_contra_entrega", true);
@@ -1432,40 +1433,20 @@ if (!function_exists('invierte_date_time')) {
                 $hoy = $fecha->format('Y-m-d');
                 $es_mayor = ($fecha_entrega > $hoy);
 
-
                 $dias = date_difference($hoy, $fecha_entrega);
-
                 $es_menor = ($dias > 0 && !$es_mayor);
 
                 $text_entrega = _text_('Se entregará en ', $dias, 'días!');
                 $text_entrega_paso = _text_('La fecha de entrega fué hace ', $dias, 'días!');
                 $text_entrega = (!$es_mayor) ? $text_entrega_paso : $text_entrega;
-                $id_recibo = $row['id_recibo'];
-
+                $id_orden_compra = $row['id_orden_compra'];
                 $ubicacion = $row['ubicacion'];
-                if ($dias == 1 && $es_mayor) {
-                    $text_entrega = 'Se entregará mañana';
-                } elseif ($dias == 1 && !$es_mayor) {
-                    $text_entrega = 'La entrega fué ayer';
-                } elseif ($ubicacion > 0) {
-                    $text_entrega = '';
-                }
-
+                $text_entrega = formato_texto_entrega($text_entrega, $row, $dias, $es_mayor);
 
                 $tipo_entrega = $row['tipo_entrega'];
                 $es_contra_entrega = $row['es_contra_entrega'];
                 $es_contra_entrega_domicilio_sin_direccion = false;
-                $format_hora = 0;
-                if ($es_contra_entrega) {
-                    $es_contra_entrega_domicilio_sin_direccion = $row['es_contra_entrega_domicilio_sin_direccion'];
-                    $format_hora = 1;
-                    if ($es_contra_entrega_domicilio_sin_direccion) {
-                        $format_hora = 0;
-                    }
-                    if ($ubicacion > 0) {
-                        $format_hora = 1;
-                    }
-                }
+                $format_hora = formato_hora_contra_entrega($es_contra_entrega, $row, $ubicacion);
 
                 $es_formato_hora = (($tipo_entrega == 1) || ($tipo_entrega == 2 && $format_hora));
                 $hora_entrega = ($es_formato_hora) ? format_hora($fecha_contra_entrega) : '';
@@ -1473,16 +1454,15 @@ if (!function_exists('invierte_date_time')) {
 
                 $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
                 $dia_entrega = d(_text_($notificacion_hoy, $hora_entrega), _text_('badge', $es_hoy));
-
                 $imagenes = d(img($row["url_img_servicio"]), "w_50");
                 $totales_recibo = money($row["total"]);
                 $total = d($totales_recibo, "text-left black");
                 $id_usuario_entrega = $row['id_usuario_entrega'];
 
-
-                $usuario_entrega = $row['usuario_entrega'];
+                $usuario_entrega = ($es_cliente) ? [] : $row['usuario_entrega'];
                 $ubicacion = $row['ubicacion'];
                 $text_total = ayuda_notificacion(
+                    $data,
                     $usuario_entrega,
                     $total,
                     $dia_entrega,
@@ -1495,19 +1475,19 @@ if (!function_exists('invierte_date_time')) {
 
                 $total_seccion = d($text_total, 'd-flex flex-column');
 
-                $orden = _text('ORDEN #', $id_recibo);
+                $orden = _text('ORDEN #', $id_orden_compra);
                 $es_vendedor = es_vendedor($data);
-                $nombre_vendedor = (!$es_vendedor) ? $row['nombre_vendedor'] : '';
+                $nombre_vendedor = (!$es_vendedor && !$es_cliente) ? $row['nombre_vendedor'] : '';
                 $identificador = flex($orden, $nombre_vendedor, 'flex-column');
                 $seccion_imagenes = flex($imagenes, $identificador, 'flex-column black fp9', '', 'font-weight-bolder');
 
                 $text = flex($seccion_imagenes, $total_seccion, _between);
 
-                $desglose_pedido = path_enid("pedidos_recibo", $row["id_recibo"]);
-                $tracker = path_enid("pedido_seguimiento", $row["id_recibo"]);
-                $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
+                $desglose_pedido = path_enid("pedidos_recibo", $id_orden_compra);
+                $tracker = path_enid("pedido_seguimiento", $id_orden_compra);
+                $url = ($es_cliente || $es_reparto > 0) ? $tracker : $desglose_pedido;
+                $extra_class = ($es_hoy || $es_menor || $es_cliente) ? '' : 'venta_futura d-none';
 
-                $extra_class = ($es_hoy || $es_menor) ? '' : 'venta_futura d-none';
                 $linea = d(a_enid($text, $url), _text_("border-bottom", $extra_class));
                 if ($es_hoy || $es_menor) {
 
@@ -1516,6 +1496,7 @@ if (!function_exists('invierte_date_time')) {
                 } else {
 
                     $ventas_posteriores[] = $linea;
+
                 }
 
                 $f++;
@@ -1524,6 +1505,8 @@ if (!function_exists('invierte_date_time')) {
             if (es_data($recibos)) {
 
                 $titulo = es_repartidor($data) ? 'Próximas entregas' : 'ventas en proceso';
+                $titulo = es_cliente($data) ? 'Tus pedidos en curso' : $titulo;
+
                 $r[] = d(_titulo($titulo));
                 $r[] = append($ventas_hoy);
                 $r[] = append($ventas_posteriores);
@@ -1533,7 +1516,6 @@ if (!function_exists('invierte_date_time')) {
 
         }
 
-
         return [
             "html" => append($r),
             "flag" => $f,
@@ -1541,16 +1523,50 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function ayuda_notificacion($usuario_entrega, $total, $dia_entrega, $es_contra_entrega, $es_contra_entrega_domicilio_sin_direccion,
+    function formato_texto_entrega($text_entrega, $row, $dias, $es_mayor)
+    {
+
+        $ubicacion = $row['ubicacion'];
+        if ($dias == 1 && $es_mayor) {
+            $text_entrega = 'Se entregará mañana';
+        } elseif ($dias == 1 && !$es_mayor) {
+            $text_entrega = 'La entrega fué ayer';
+        } elseif ($ubicacion > 0) {
+            $text_entrega = '';
+        }
+        return $text_entrega;
+    }
+
+    function formato_hora_contra_entrega($es_contra_entrega, $row, $ubicacion)
+    {
+        $format_hora = 0;
+        if ($es_contra_entrega) {
+            $es_contra_entrega_domicilio_sin_direccion = $row['es_contra_entrega_domicilio_sin_direccion'];
+            $format_hora = 1;
+            if ($es_contra_entrega_domicilio_sin_direccion) {
+                $format_hora = 0;
+            }
+            if ($ubicacion > 0) {
+                $format_hora = 1;
+            }
+        }
+        return $format_hora;
+
+    }
+
+    function ayuda_notificacion($data, $usuario_entrega, $total, $dia_entrega, $es_contra_entrega,
+                                $es_contra_entrega_domicilio_sin_direccion,
                                 $id_usuario_entrega, $ubicacion, $text_entrega)
     {
         $text_total = [];
         $icon = '';
+        $es_cliente = es_cliente($data);
         if ($id_usuario_entrega > 0) {
 
             $icono = d(icon(_entregas_icon));
             $nombre_repatidor = format_nombre($usuario_entrega);
-            $icon = flex($icono, $nombre_repatidor, 'flex-column justify-content-center', 'ml-auto');
+            $texto_icono = flex($icono, $nombre_repatidor, 'flex-column justify-content-center', 'ml-auto');
+            $icon = ($es_cliente) ? '' : $texto_icono;
 
         }
 
@@ -1558,11 +1574,14 @@ if (!function_exists('invierte_date_time')) {
         $text_total[] = $dia_entrega;
         if ($es_contra_entrega) {
 
-            $text_total[] = ($ubicacion < 1) ? 'Es contra entrega a domicilio' : $text_entrega;
+            $texto_total = ($ubicacion < 1) ? 'Es contra entrega a domicilio' : $text_entrega;
+            $text_total[] = ($es_cliente) ? '' : $texto_total;
 
-            if ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1) {
-                $text_total[] = d('Falta la direccion y hora de entrega', 'text-danger strong');
-            }
+            $sin_ubicacion = ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1);
+            $texto_sin_direccion = d('Falta la direccion', 'text-danger strong');
+            $text_total[] = ($sin_ubicacion) ? $texto_sin_direccion : '';
+            $text_total[] = ($es_cliente && $ubicacion < 1) ? $texto_sin_direccion : '';
+
         }
 
 
@@ -1571,13 +1590,13 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function pendientes_cliente($info)
+    function pendientes_cliente($data, $info)
     {
 
         $f = 0;
         $inf_notificacion = $info["info_notificaciones"];
 
-        $compras_sin_cierre = add_compras_sin_cierre($info["compras_sin_cierre"]);
+        $compras_sin_cierre = add_compras_sin_cierre($data, $info["compras_sin_cierre"]);
         $f = $f + $compras_sin_cierre["flag"];
 
 
@@ -2061,7 +2080,7 @@ if (!function_exists('invierte_date_time')) {
         /*usuarios activos*/
         $usuarios_activos = [];
         $base = 'col-md-2 border text-center';
-        
+
         $usuarios_activos[] = d(_d('Nuevos', $usuarios),
             'col-md-2 border text-center text-uppercase');
 

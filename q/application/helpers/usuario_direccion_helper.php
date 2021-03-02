@@ -28,10 +28,8 @@ if (!function_exists('invierte_date_time')) {
 
         $param = $data["param"];
         $session = $param['session'];
-        $id_recibo = $param["id_recibo"];
-        $info_envio_direccion = $data["info_envio_direccion"];
-        $registro_direccion = $data["registro_direccion"];
-        $info_usuario = $data["info_usuario"];
+        $id_orden_compra = $param["id_orden_compra"];
+        $direcciones_orden_compra = $data["direcciones_orden_compra"];
         $id_usuario = $data["id_usuario"];
 
         $calle = "";
@@ -43,22 +41,9 @@ if (!function_exists('invierte_date_time')) {
         $municipio = "";
         $estado = "";
         $direccion_visible = "style='display:none;'";
-        $nombre_receptor = "";
-        $telefono_receptor = "";
+        $nombre_receptor = pr($direcciones_orden_compra, "nombre_receptor");
+        $telefono_receptor = pr($direcciones_orden_compra,"telefono_receptor");
 
-        foreach ($info_envio_direccion as $row) {
-
-            $nombre_receptor = $row["nombre_receptor"];
-            $telefono_receptor = $row["telefono_receptor"];
-        }
-
-
-        if ($registro_direccion == 0) {
-            $nombre_receptor = format_nombre($info_usuario);
-            $telefono_receptor = pr($info_usuario, "tel_contacto");
-        }
-
-        $nombre_receptor = (!es_data($info_envio_direccion)) ? format_nombre($info_usuario) : $nombre_receptor;
 
         $r[] = _titulo("dirección de envío");
         $r[] =  texto_envio_gratis();
@@ -77,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
             $asentamiento,
             $municipio,
             $estado,
-            $id_recibo
+            $id_orden_compra
         );
 
 
@@ -93,10 +78,8 @@ if (!function_exists('invierte_date_time')) {
     }
     function form_ubicacion_escrita($param)
     {
-        $id_recibo = $param['id_recibo'];
 
-
-
+        $id_orden_compra = $param['id_orden_compra'];
         $form[] = d(_titulo('¿Tienes una de dos?'), 'selector_ubicaciones_domicilio  text-center text-md-left');
         $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
         $domicilio = format_link('Registrar domicilio', ['class' => 'ingreso_texto_completo'], 0);
@@ -106,9 +89,7 @@ if (!function_exists('invierte_date_time')) {
             'selector_ubicaciones_domicilio'
         );
 
-
         $formulario[] = form_open('', ['class' => 'form_ubicacion']);
-
 
         $horarios = lista_horarios();
         $lista_horarios = $horarios["select"];
@@ -148,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
                 'required' => true
             ]), 'mt-5'
         );
-        $formulario[] = hiddens(['name' => 'id_recibo','class'=>'id_recibo', 'value' => $id_recibo]);
+        $formulario[] = hiddens(['name' => 'id_orden_compra','class'=>'id_orden_compra', 'value' => $id_orden_compra]);
         $formulario[] = btn('Registrar', ['class' => 'mt-5']);
         $formulario[] = form_close();
 
@@ -306,13 +287,11 @@ if (!function_exists('invierte_date_time')) {
         $asentamiento,
         $municipio,
         $estado,
-        $id_recibo
+        $id_orden_compra
     )
     {
 
         $r[] = form_open("", ["class" => "form_direccion_envio row",]);
-
-
         $base = 'col-lg-6 mt-5';
         $r[] = indicaciones_horario_entrega_domicilio($session, $data);
         $r[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
@@ -513,9 +492,9 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = hiddens(
             [
-                "name" => "id_recibo",
-                "value" => $id_recibo,
-                "class" => "id_recibo",
+                "name" => "id_orden_compra",
+                "value" => $id_orden_compra,
+                "class" => "id_orden_compra",
             ]
         );
 

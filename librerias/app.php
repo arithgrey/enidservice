@@ -61,6 +61,14 @@ class app extends CI_Controller
         return $response;
     }
 
+    function productos_ordenes_compra($id_orden_compra)
+    {
+
+        $q = ['id' => $id_orden_compra];
+        $productos_ordenes_compra = $this->api("producto_orden_compra/orden_compra/format/json/", $q);
+        return $this->add_imgs_servicio($productos_ordenes_compra);
+
+    }
 
     private function get_img($id_servicio, $completo = 0, $limit = 1, $path = 0)
     {
@@ -1355,6 +1363,141 @@ class app extends CI_Controller
     {
 
         $this->session->set_flashdata($newdata, $newval);
+    }
+
+    function saldos_pendientes_orden_compra($id_orden_compra)
+    {
+
+        $saldos = [];
+        $productos_orden_compra = $this->productos_ordenes_compra($id_orden_compra);
+
+        foreach ($productos_orden_compra as $row) {
+
+            $saldos[] = $this->get_recibo_saldo_pendiente($row["id_proyecto_persona_forma_pago"]);
+
+        }
+        return $saldos;
+    }
+
+    private function get_recibo_saldo_pendiente($id_recibo)
+    {
+
+        return $this->api("recibo/saldo_pendiente_recibo/format/json/", ["id_recibo" => $id_recibo]);
+    }
+
+    function direccion($id)
+    {
+
+        return $this->api("direccion/data_direccion/format/json/", ["id_direccion" => $id]);
+    }
+
+    function get_direccion_pedido($id_recibo)
+    {
+
+        $request =
+            [
+                "id_recibo" => $id_recibo
+            ];
+        return $this->api(
+            "proyecto_persona_forma_pago_direccion/recibo/format/json/", $request);
+
+    }
+
+    /*Recibe los productos ordenes de compra o el id de la orden de compra*/
+    function domicilios_orden_compra($productos_orden_compra)
+    {
+
+        $es_data = !is_array($productos_orden_compra);
+        $es_num = ($productos_orden_compra > 0);
+        if ($es_data && $es_num) {
+            $productos_orden_compra =
+                $this->productos_ordenes_compra($productos_orden_compra);
+        }
+        $response = [];
+        foreach ($productos_orden_compra as $row) {
+            $recibo[0] = $row;
+            $domicilio = $this->get_domicilio_entrega($recibo);
+            if (es_data($domicilio)) {
+                if (es_data($domicilio)) {
+
+                    $response[] = $domicilio[0];
+
+                }
+            }
+        }
+        return $response;
+    }
+
+    function get_domicilio_entrega($producto_orden_compra)
+    {
+
+        $response = [];
+        foreach ($producto_orden_compra as $row) {
+
+            $tipo_entrega = $row["tipo_entrega"];
+            $ubicacion = $row["ubicacion"];
+            $id_recibo = $row["id_proyecto_persona_forma_pago"];
+
+
+            switch ($tipo_entrega) {
+
+                case 1: //Puntos encuentro
+                    $response = $this->get_punto_encuentro($id_recibo);
+                    break;
+
+                case 2: //Mensajería
+                    if ($ubicacion > 0) {
+                        $response = $this->get_ubicacion_recibo($id_recibo);
+
+                    } else {
+                        $response = $this->get_domicilio_recibo($id_recibo);
+                    }
+                    break;
+                default:
+            }
+
+            if (es_data($response)){
+
+
+                $response[0]["tipo_entrega"] = $tipo_entrega;
+                $response[0]["es_ubicacion"] = $ubicacion;
+
+            }
+
+        }
+
+
+        return $response;
+
+    }
+
+    private function get_punto_encuentro($id_recibo)
+    {
+
+        $api = "proyecto_persona_forma_pago_punto_encuentro/complete/format/json/";
+        return $this->api($api, ["id_recibo" => $id_recibo]);
+    }
+
+    private function get_domicilio_recibo($id_recibo)
+    {
+
+        $direccion = $this->get_direccion_pedido($id_recibo);
+        $domicilio = [];
+
+        $id_direccion = pr($direccion, "id_direccion");
+        if ($id_direccion > 0) {
+
+            $domicilio = $this->direccion($id_direccion);
+
+        }
+
+        return $domicilio;
+    }
+
+    private function get_ubicacion_recibo($id_recibo)
+    {
+        return $this->api("ubicacion/index/format/json/",
+            ["id_recibo" => $id_recibo]);
     }
 
 }

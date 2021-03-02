@@ -1318,7 +1318,7 @@ class Servicio extends REST_Controller
 
         $response["tipo"] = "USUARIO CANCELA COMPRA";
         /*Se notifica que el usuario cancela su compra*/
-        $api = "usuario/cancelacion_compra/format/json/";
+        $api = "usuario/cancelacion_compra";
         $cancelacion_compra = $this->app->api($api, $param, "json", "PUT");
         $response["gamificacion_cancelacion_compra"] = $cancelacion_compra;
 

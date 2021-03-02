@@ -168,7 +168,7 @@ let notifica_motivo_cancelacion = () => {
     if (parseInt($id) !== 39) {
 
         let data_send = $.param({
-            "recibo": get_parameter(".recibo"),
+            "orden_compra": get_parameter(".recibo"),
             "status": 10,
             "tipificacion": $id,
             "cancelacion": 1

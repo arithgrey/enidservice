@@ -103,15 +103,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_pagina_form_horario($recibo, $punto_encuentro)
+    function get_format_pagina_form_horario($id_orden_compra, $punto_encuentro)
     {
 
         $response = frm_punto_encuentro_horario([
             hiddens(
                 [
-                    "class" => "recibo",
-                    "name" => "recibo",
-                    "value" => $recibo,
+                    "class" => "orden_compra",
+                    "name" => "orden_compra",
+                    "value" => $id_orden_compra,
                 ]
             ),
 
@@ -474,8 +474,8 @@ if (!function_exists('invierte_date_time')) {
                     ),
                     hiddens(
                         [
-                            "class" => "recibo",
-                            "name" => "recibo",
+                            "class" => "orden_compra",
+                            "name" => "orden_compra",
                             "value" => $data["recibo"],
                         ]
                     ),

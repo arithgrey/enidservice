@@ -51,7 +51,7 @@ class tipificacion_recibo extends REST_Controller
         $response = false;
         if (fx($param, "recibo")) {
 
-            $response = $this->tipificacion_recibo_model->get_recibo($param);
+            $response = $this->tipificacion_recibo_model->get_recibo($param["recibo"]);
         }
         $this->response($response);
     }

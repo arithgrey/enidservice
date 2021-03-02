@@ -131,16 +131,6 @@ if (!function_exists('invierte_date_time')) {
 
     function menu()
     {
-        $link_pagos = tab(
-            "",
-            "#tab_pagos",
-            [
-                'class' => 'tab_pagos',
-                'id' => 'btn_pagos'
-            ]
-        );
-
-
 
         $link_compras = tab(
             text_icon('fa fa-credit-card-alt', " COMPRAS"),
@@ -150,8 +140,6 @@ if (!function_exists('invierte_date_time')) {
             ]
 
         );
-
-
 
         $list = [
             $link_compras,

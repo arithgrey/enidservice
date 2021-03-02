@@ -16,20 +16,20 @@ class Home extends CI_Controller
     function index()
     {
 
-
         $param = $this->input->post();
         $tiene_num_ciclos = array_key_exists("num_ciclos", $param);
         $num_ciclos = ($tiene_num_ciclos) ? ctype_digit($param["num_ciclos"]) : 0;
         $id_servicio = prm_def($param, 'id_servicio');
         $es_servicio = prm_def($param, "es_servicio");
-        $id_recibo = prm_def($param, "recibo", 0, 1);
+        $id_orden_compra = prm_def($param, "orden_compra", 0, 1);
+
         if ($num_ciclos > 0 && $id_servicio > 0 || $es_servicio) {
 
             $fn = ($es_servicio) ? $this->crea_orden_compra_servicio($param) : $this->crea_orden_compra($param);
 
         } else {
 
-            $fb = ($id_recibo > 0) ? $this->add_domicilio_entrega($param) : redirect("../../");
+            $fb = ($id_orden_compra > 0) ? $this->add_domicilio_entrega($param) : redirect("../../");
 
         }
     }
@@ -118,7 +118,7 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "procesar_domicilio");
         $param += [
 
-            "id_recibo" => $param["recibo"],
+            "id_orden_compra" => $param["orden_compra"],
             "id_usuario" => $data['id_usuario'],
         ];
 
@@ -129,7 +129,6 @@ class Home extends CI_Controller
 
     private function carga_ficha_direccion_envio($q, $v = 0)
     {
-
 
         $q["text_direccion"] = "Dirección de Envio";
         $q["externo"] = 1;
@@ -147,7 +146,8 @@ class Home extends CI_Controller
                             "value" => 1,
                         ]
                     ),
-                ]);
+                ]
+            );
         }
 
         return $response;

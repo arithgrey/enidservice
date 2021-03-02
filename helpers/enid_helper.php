@@ -1196,35 +1196,39 @@ function debug($msg, $array = 0)
 
 }
 
-function get_costo_envio($param)
+function get_costo_envio($recibos)
 {
 
-    $gratis = $param["flag_envio_gratis"];
-    $tipo_entrega = $param['tipo_entrega'];
-    $r = [];
-    if ($gratis > 0) {
+    $response = [];
+    foreach ($recibos as $row) {
+        $gratis = $row["flag_envio_gratis"];
+        $tipo_entrega = $row['tipo_entrega'];
 
-        $r["costo_envio_cliente"] = 0;
-        $r["costo_envio_vendedor"] = 100;
-        $r["text_envio"] = texto_costo_envio_info_publico(
-            $gratis,
-            $r["costo_envio_cliente"],
-            $r["costo_envio_vendedor"],
-            $tipo_entrega
-        );
-    } else {
+        if ($gratis > 0) {
 
-        $r["costo_envio_cliente"] = 100;
-        $r["costo_envio_vendedor"] = 0;
-        $r["text_envio"] = texto_costo_envio_info_publico(
-            $gratis,
-            $r["costo_envio_cliente"],
-            $r["costo_envio_vendedor"],
-            $tipo_entrega
-        );
+            $response["costo_envio_cliente"] = 0;
+            $response["costo_envio_vendedor"] = 100;
+            $response["text_envio"] = texto_costo_envio_info_publico(
+                $gratis,
+                $response["costo_envio_cliente"],
+                $response["costo_envio_vendedor"],
+                $tipo_entrega
+            );
+        } else {
+
+            $response["costo_envio_cliente"] = 100;
+            $response["costo_envio_vendedor"] = 0;
+            $response["text_envio"] = texto_costo_envio_info_publico(
+                $gratis,
+                $response["costo_envio_cliente"],
+                $response["costo_envio_vendedor"],
+                $tipo_entrega
+            );
+        }
+
     }
 
-    return $r;
+    return $response;
 }
 
 function texto_costo_envio_info_publico(
@@ -1699,7 +1703,9 @@ function append($array, $col = 0, $num_col = 0)
 
         $callback = function ($a, $b) {
             if (!is_null($b)) {
+
                 return " " . $a . $b;
+
             }
         };
 
@@ -3004,7 +3010,6 @@ function format_fecha($date, $horas = 0)
 function format_hora($date)
 {
 
-
     return format_time(date_format(date_create($date), 'H:i'));
 
 }
@@ -3102,60 +3107,69 @@ function _d()
 
 }
 
-function ticket_pago($recibo, $tipos_entrega, $format = 1)
+function ticket_pago(&$recibo, $tipos_entrega, $format = 1)
 {
 
     $response = [];
     if (es_data($recibo)) {
 
-        $r = $recibo[0];
+        foreach ($recibo as $row) {
 
-        $monto = $r['monto_a_pagar'];
-        $ciclos = $r['num_ciclos_contratados'];
-        $abono = $r['saldo_cubierto'];
-        $costo_envio_cliente = $r['costo_envio_cliente'];
-        $entrega_tipo = $r['tipo_entrega'];
-        $tipo_entrega = ($entrega_tipo - 1);
-        $subtotal = ($monto * $ciclos);
-        $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
-        $abono_format = ($abono > 0) ? _text('- ', money($abono)) : '';
-        $abono_format_text = ($abono > 0) ? 'Abono' : '';
-        $es_abono = ($abono > 0);
-        $saldo_pendiente = ($subtotal - $abono) + $costo_envio_cliente;
-        $saldo_pendiente_pago_contra_entrega = ($subtotal - $abono);
+            $monto = $row['monto_a_pagar'];
+            $ciclos = $row['num_ciclos_contratados'];
+            $abono = $row['saldo_cubierto'];
+            $costo_envio_cliente = $row['costo_envio_cliente'];
+            $entrega_tipo = $row['tipo_entrega'];
+            $tipo_entrega = ($entrega_tipo - 1);
+            $subtotal = ($monto * $ciclos);
+            $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
+            $abono_format = ($abono > 0) ? _text('- ', money($abono)) : '';
+            $abono_format_text = ($abono > 0) ? 'Abono' : '';
+            $es_abono = ($abono > 0);
+            $saldo_pendiente = ($subtotal - $abono) + $costo_envio_cliente;
+            $saldo_pendiente_pago_contra_entrega = ($subtotal - $abono);
 
 
-        switch ($format) {
+            switch ($format) {
 
-            case 1:
+                case 1:
 
-                $espacio = 'justify-content-between mt-3 ';
-                $response[] = hr('mb-4 border_big', 0);
-                $response[] = flex('Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
-                $response[] = flex($tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio, 'envio_text', 'envio_money text-uppercase');
-                if ($es_abono) {
-                    $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
-                }
-                $response[] = hr('mt-4 border_big', 0);
-                $response[] = flex('Total', money($saldo_pendiente), 'justify-content-between', 'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
-                $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
+                    $espacio = 'justify-content-between mt-3 ';
+                    $response[] = hr('mb-4 border_big', 0);
+                    $response[] = flex('Subtotal', money($subtotal),
+                        $espacio, 'subtotal_text', 'subtotal_money');
+                    $response[] = flex(
+                        $tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio,
+                        'envio_text', 'envio_money text-uppercase');
+                    if ($es_abono) {
+                        $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
+                    }
+                    $response[] = hr('mt-4 border_big', 0);
+                    $response[] = flex('Total',
+                        money($saldo_pendiente), 'justify-content-between',
+                        'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
+                    $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
 
-                break;
-            default:
+                    break;
+                default:
 
-                break;
+                    break;
+
+            }
+
+            return
+                [
+                    'checkout' => d($response, 'checkout_resumen'),
+                    'saldo_pendiente' => $saldo_pendiente,
+                    'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
+                    'tipo_entrega' => $entrega_tipo,
+                    'descuento_entrega' => $costo_envio_cliente
+
+                ];
 
         }
 
-        return
-            [
-                'checkout' => d($response, 'checkout_resumen'),
-                'saldo_pendiente' => $saldo_pendiente,
-                'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
-                'tipo_entrega' => $entrega_tipo,
-                'descuento_entrega' => $costo_envio_cliente
 
-            ];
     }
 
 
@@ -3509,18 +3523,31 @@ function texto_status_orden($data, $id_status, $tipo = 0)
 
 }
 
-function es_orden_entregada($recibo, $data = [])
+function es_orden_entregada($data = [])
 {
 
     $response = false;
-    if (es_data($recibo)) {
-        $status = pr($recibo, "status");
-        $response = in_array($status, $data['restricciones']['orden_entregada']);
+    $productos_orden_compra = $data["productos_orden_compra"];
+    $restricciones = $data['restricciones']['orden_entregada'];
+    if (es_data($productos_orden_compra)) {
+
+        $no_entregado = 0;
+        foreach ($productos_orden_compra as $row) {
+
+            $status = $row["status"];
+            if (!in_array($status, $restricciones)) {
+
+                $no_entregado++;
+            }
+        }
+
+        $response = ($no_entregado < 1);
+
     } else {
 
-        /*Recibo es status*/
-        if ($recibo > 0) {
-            $response = in_array($recibo, $data['restricciones']['orden_entregada']);
+        /*$productos_orden_compra es status*/
+        if ($productos_orden_compra > 0) {
+            $response = in_array($productos_orden_compra, $restricciones);
         }
 
     }
@@ -3529,11 +3556,21 @@ function es_orden_entregada($recibo, $data = [])
 
 }
 
-function es_orden_entregada_o_cancelada($recibo, $data)
+function es_orden_entregada_o_cancelada($productos_orden_compra, $data)
 {
 
-    $status = pr($recibo, "status");
-    return in_array($status, $data['restricciones']['entregada_o_cancelada']);
+    $restricciones = $data['restricciones']['entregada_o_cancelada'];
+    $no_entregada_cancelada = 0;
+
+    foreach ($productos_orden_compra as $row) {
+
+        $status = $row["status"];
+        if (!in_array($status, $restricciones)) {
+            $no_entregada_cancelada++;
+        }
+    }
+    return ($no_entregada_cancelada < 1);
+
 
 }
 
@@ -3541,20 +3578,30 @@ function es_orden_cancelada($data)
 {
 
     $response = false;
-    if (es_data($data['recibo'])) {
+    $productos_orden_compra = $data["productos_orden_compra"];
 
-        $recibo = $data['recibo'];
-        $cancela_cliente = pr($recibo, "cancela_cliente");
-        $se_cancela = pr($recibo, "se_cancela");
-        $status = pr($recibo, "status");
+    if (es_data($productos_orden_compra)) {
 
-        $es_lista_negra = es_data($data['es_lista_negra']);
-        $fue_lista_negra = es_data($data['usuario_lista_negra']);
-        $response = ($status == 10 || $status == 19 || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra);
+        $cancelada = 0;
+        foreach ($productos_orden_compra as $row) {
+
+            $cancela_cliente = $row["cancela_cliente"];
+            $se_cancela = $row["se_cancela"];
+            $status = $row["status"];
+            $es_lista_negra = es_data($data['es_lista_negra']);
+            $fue_lista_negra = es_data($data['usuario_lista_negra']);
+            $por_status = ($status == 10 || $status == 19);
+            if ($por_status || $cancela_cliente || $se_cancela || $es_lista_negra || $fue_lista_negra) {
+                $cancelada++;
+            }
+
+        }
+        $response = ($cancelada > 0);
 
     } else {
 
 
+        /*Verificar que haga lo que debe con el nuevo cambio*/
         if (array_key_exists('se_cancela', $data)) {
 
             $cancela_cliente = prm_def($data, "cancela_cliente");
@@ -3576,21 +3623,27 @@ function es_orden_lista_negra($recibo)
     return (prm_def($recibo, 'status') == 19 || $es_lista_negra);
 }
 
-function es_contra_entrega_domicilio($recibo, $format_fecha = 0, $si_no = 0)
+function es_contra_entrega_domicilio($productos_orden_compra, $format_fecha = 0, $si_no = 0)
 {
 
-    $contra_entrega_domicilio = pr($recibo, "contra_entrega_domicilio");
-    $tipo = pr($recibo, "tipo_entrega");
-    $response = ($contra_entrega_domicilio && $tipo == 2);
-    if ($response && $format_fecha > 0) {
 
-        $fecha_contra_entrega = pr($recibo, 'fecha_contra_entrega');
-        $response = format_fecha($fecha_contra_entrega, 1);
+    $response = "";
+    foreach ($productos_orden_compra as $row) {
 
-    } else {
+        $contra_entrega_domicilio = $row["contra_entrega_domicilio"];
+        $tipo = $row["tipo_entrega"];
+        $response = ($contra_entrega_domicilio && $tipo == 2);
+        if ($response && $format_fecha > 0) {
 
-        if ($si_no !== 0) {
-            $response = format_fecha($si_no, 1);
+            $fecha_contra_entrega = $row['fecha_contra_entrega'];
+            $response = format_fecha($fecha_contra_entrega, 1);
+
+        } else {
+
+            if ($si_no !== 0) {
+                $response = format_fecha($si_no, 1);
+            }
+
         }
 
     }
@@ -3622,6 +3675,32 @@ function format_link_nombre($data, $nombre, $email = '')
     }
 
     return $response;
+}
+
+function tiene_domilio($domicilios, $numero = 0)
+{
+
+    $domicilio_compra = "";
+    $tiene_entrega = 0;
+
+
+    $hay_domicilios = es_data($domicilios) && array_key_exists(0, $domicilios);
+    if ($hay_domicilios && es_data($domicilios[0])) {
+
+        $tiene_entrega++;
+
+    } else {
+
+        $str = text_icon(_close_icon, del("SIN DOMICILIO", _strong));
+        $domicilio_compra = bloque($str);
+    }
+
+    return ($numero == 0) ? $domicilio_compra : $tiene_entrega;
+}
+
+function bloque($text, $ext = '')
+{
+    return d($text, _text_("border border-secondary p-3 mt-3 mb-3 row borde_accion solid_bottom_2", $ext));
 }
 
 function valida_texto_maps($domicilio, $estilos = 1)
@@ -3659,4 +3738,24 @@ function valida_texto_maps($domicilio, $estilos = 1)
         }
     }
     return $text;
+}
+
+function imagenes_orden_compra($productos_orden_compra)
+{
+
+    $imgs =  array_column($productos_orden_compra,"url_img_servicio");
+    $imagenes_orden_compra = "";
+    foreach ($imgs as $row) {
+
+        $seccion_imagen = img(
+            [
+                "src" => $row,
+                "class" => "img_servicio_def p-2",
+            ]
+        );
+        $imagenes_orden_compra = _text_($imagenes_orden_compra, $seccion_imagen);
+
+    }
+    return $imagenes_orden_compra;
+
 }

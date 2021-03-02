@@ -20,7 +20,7 @@ class Tipo_tag_arquetipo extends REST_Controller
     {
 
         $param = $this->get();
-        if (fx($param, "id_usuario,recibo,v")) {
+        if (fx($param, "id_usuario,id_orden_compra,v")) {
 
             $this->response(form_reventa($param));
 

@@ -107,7 +107,7 @@ class tipificacion extends REST_Controller
         if ($tipificar) {
 
             $q = [
-                "recibo" => $id_recibo,
+                "orden_compra" => $id_recibo,
                 "status" => 10,
                 "tipificacion" => $id_tipificacion,
                 "cancelacion" => $cancelacion

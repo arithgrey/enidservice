@@ -133,7 +133,7 @@ class usuario extends REST_Controller
 
         if (fx($param, "id_empresa,grupo")) {
             $id_empresa = $param['id_empresa'];
-            $data =  $param['data'];
+            $data = $param['data'];
             $grupo = $param['grupo'];
             $in = 0;
 
@@ -239,7 +239,9 @@ class usuario extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $response = $this->usuario_model->q_up("num_cancelaciones", "num_cancelaciones + 1 ", $param["id_usuario"]);
+
+            $response = $this->usuario_model->cancelacion_compra($param["id_usuario"]);
+
         }
         $this->response($response);
     }
@@ -721,7 +723,7 @@ class usuario extends REST_Controller
         if (fx($param, "id_departamento,v")) {
             $total = $this->usuario_model->num_total($param);
             $per_page = 10;
-            $v =  $param["v"];
+            $v = $param["v"];
             $param["resultados_por_pagina"] = $per_page;
             $data["miembros"] = $this->usuario_model->get_equipo_enid_service($param);
 
