@@ -72,19 +72,19 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $recibo = $data["recibo"];
-        $id_recibo = $data["id_recibo"];
+        $id_orden_compra = $data["id_orden_compra"];
         $usuario_venta = $data["usuario_venta"];
         $saldo_cubierto = pr($recibo, "saldo_cubierto");
         $costo_envio_cliente = pr($recibo, "costo_envio_cliente");
         $total_cubierto = $saldo_cubierto + $costo_envio_cliente;
         $monto_a_pagar = pr($recibo, "monto_a_pagar");
-        $url_seguimiento = path_enid('pedido_seguimiento', $id_recibo);
+        $url_seguimiento = path_enid('pedido_seguimiento', $id_orden_compra);
 
         $_response[] = validate_format_cancelacion(
-            $total_cubierto, $id_recibo, $data["modalidad"]
+            $total_cubierto, $id_orden_compra, $data["modalidad"]
         );
 
-        $response[] = get_format_transaccion($id_recibo);
+        $response[] = get_format_transaccion($id_orden_compra);
         $pg[] = td(h("Pago enviado a ", 4));
         $pg[] = td(h("Importe ", 4));
         $pa[] = tr($pg);
@@ -922,9 +922,15 @@ if (!function_exists('invierte_date_time')) {
         $response = 0;
         if ($saldo_pendiente > 0) {
 
+            $total =
+                $saldo_pendiente +
+                porcentaje(
+                    $saldo_pendiente, 3.7, 2, 0);
+
             $response = path_enid(
                 "paypal_enid",
-                $saldo_pendiente + porcentaje($saldo_pendiente, 3.7, 2, 0),
+                $total
+                ,
                 1
             );
 
@@ -979,19 +985,19 @@ if (!function_exists('invierte_date_time')) {
         $response["cuenta_correcta"] = 0;
         if (es_data($param)) {
 
-            $recibo = $param[0];
-            $response = [
-                "saldo_pendiente" => (($recibo["precio"] * $recibo["num_ciclos_contratados"]) + $recibo["costo_envio_cliente"]),
-                "cuenta_correcta" => 1,
-                "resumen" => $recibo["resumen_pedido"],
-                "costo_envio_cliente" => $recibo["costo_envio_cliente"],
-                "flag_envio_gratis" => $recibo["flag_envio_gratis"],
-                "id_recibo" => $recibo["id_proyecto_persona_forma_pago"],
-                "id_usuario" => $recibo["id_usuario"],
-                "id_usuario_venta" => $recibo["id_usuario_venta"],
-                "id_servicio" => $recibo['id_servicio']
-            ];
-
+            foreach ($param as $recibo) {
+                $response = [
+                    "saldo_pendiente" => (($recibo["precio"] * $recibo["num_ciclos_contratados"]) + $recibo["costo_envio_cliente"]),
+                    "cuenta_correcta" => 1,
+                    "resumen" => $recibo["resumen_pedido"],
+                    "costo_envio_cliente" => $recibo["costo_envio_cliente"],
+                    "flag_envio_gratis" => $recibo["flag_envio_gratis"],
+                    "id_recibo" => $recibo["id_proyecto_persona_forma_pago"],
+                    "id_usuario" => $recibo["id_usuario"],
+                    "id_usuario_venta" => $recibo["id_usuario_venta"],
+                    "id_servicio" => $recibo['id_servicio']
+                ];
+            }
         }
 
         return $response;
@@ -999,7 +1005,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function carga_estado_compra($data, $id_status, $id_recibo, $vendedor = 0)
+    function carga_estado_compra($data, $id_status, $id_orden_compra, $vendedor = 0)
     {
 
         $texto = texto_status_orden($data, $id_status, $vendedor);
@@ -1007,13 +1013,13 @@ if (!function_exists('invierte_date_time')) {
         $detalles = text_icon(_money_icon, "DETALLES DE TU COMPRA ");
         $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : $detalles;
 
-        $texto_completo = flex( $text_icono, $texto, "d-flex flex-column");
+        $texto_completo = flex($text_icono, $texto, "d-flex flex-column");
 
         $text = tab(
             $texto_completo, "#tab_renovar_servicio",
             [
                 "class" => 'resumen_pagos_pendientes mt-4 mb-4 strong black',
-                "id" => $id_recibo,
+                "id" => $id_orden_compra,
             ]
         );
 
@@ -1111,22 +1117,16 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_concepto($resumen_pedido, $url_img_servicio, $monto_a_pagar, $recibo, $tipos_entrega)
-    {
 
+
+    function format_concepto($resumen_pedido,  $monto_a_pagar, $productos_orden_compra, $tipos_entrega)
+    {
 
         $text_money = money($monto_a_pagar);
         $resume_articulo[] = d($resumen_pedido, ' text-right');
         $resume_articulo[] = d($text_money, ' text-right mr-3 h4');
         $descripcion_compra = append($resume_articulo);
-
-        $articulo =
-            img(
-                [
-                    "src" => $url_img_servicio,
-                    "class" => "img_servicio_def p-2",
-                ]
-            );
+        $articulo = imagenes_orden_compra($productos_orden_compra);
 
         $r[] = flex(
             $articulo,
@@ -1135,8 +1135,7 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $ticket_pago = ticket_pago($recibo, $tipos_entrega);
-
+        $ticket_pago = ticket_pago($productos_orden_compra, $tipos_entrega);
         $r[] = $ticket_pago['checkout'];
 
 
@@ -1208,12 +1207,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function getPayButtons($recibo, $url_request, $id_usuario_venta, $checkout)
+    function getPayButtons($data, $url_request, $id_usuario_venta, $checkout)
     {
 
+        $id_orden_compra = $data["id_orden_compra"];
+        $tipo_entrega = $checkout["tipo_entrega"];
 
-        $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
-        $tipo_entrega = $recibo["tipo_entrega"];
         $descuento_entrega = $checkout['descuento_entrega'];
         $es_descuento = ($tipo_entrega == 1 && $descuento_entrega > 0);
         $saldo_pendiente = ($es_descuento) ? $checkout['saldo_pendiente_pago_contra_entrega'] : $checkout['saldo_pendiente'];
@@ -1227,7 +1226,7 @@ if (!function_exists('invierte_date_time')) {
         $texto_cambio_contra_entrega = a_enid(
             $texto_cambio_contra_entrega,
             [
-                'href' => path_enid('pedido_seguimiento', _text($id_recibo, '&domicilio=1&asignacion=1')),
+                'href' => path_enid('pedido_seguimiento', _text($id_orden_compra, '&domicilio=1&asignacion=1')),
                 'class' => 'black'
             ]
         );
@@ -1246,8 +1245,8 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 [
                     "class" => 'text-center sombra_boton border_big m-auto mt-5',
-                    "recibo" => $id_recibo,
-                    "onclick" => "notifica_tipo_compra(2 ,  '" . $id_recibo . "');",
+                    "recibo" => $id_orden_compra,
+                    "onclick" => "notifica_tipo_compra(2 ,  '" . $id_orden_compra . "');",
                     "href" => paypal($saldo_pendiente),
 
                 ]
@@ -1262,12 +1261,12 @@ if (!function_exists('invierte_date_time')) {
                 [
 
                     "class" => " mt-4 mb-5",
-                    "onclick" => "notifica_tipo_compra(4 , '" . $id_recibo . "');",
+                    "onclick" => "notifica_tipo_compra(4 , '" . $id_orden_compra . "');",
                     "href" =>
                         pago_oxxo(
                             $url_request,
                             $saldo_pendiente,
-                            $id_recibo,
+                            $id_orden_compra,
                             $id_usuario_venta),
                 ]
             );
@@ -1313,7 +1312,7 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($ordenes as $row) {
 
-                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $id_orden_compra = $row["id_orden_compra"];
                 $imagen = img(
                     [
                         "src" => $row["url_img_servicio"],
@@ -1323,18 +1322,19 @@ if (!function_exists('invierte_date_time')) {
 
                 $t = a_enid($imagen, path_enid("producto", $row["id_servicio"]));
                 $status = $row["status"];
-                $t = _text_($t, carga_estado_compra($data, $status, $id_recibo, $modalidad));
+                $t = _text_($t, carga_estado_compra($data, $status, $id_orden_compra, $modalidad));
 
                 if ($id_perfil == 3) {
 
-                    $url = path_enid("pedidos_recibo", $id_recibo);
+                    $url = path_enid("pedidos_recibo", $id_orden_compra);
                     $avanzado = btn("AVANZADO", [], 1, 1, 0, $url);
                     $t = _text_($t, $avanzado);
 
                 }
 
                 $clase = 'align-items-center d-md-flex border 
-            border border-secondary mt-4 mb-4 p-4 justify-content-between min_block text-center';
+                          border border-secondary mt-4 mb-4 
+                          p-4 justify-content-between min_block text-center';
 
                 $list[] = d(d($t, $clase), 1);
 
@@ -1391,25 +1391,28 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function rastreo_compra($id_recibo, $seccion_compra)
+    function rastreo_compra($data, $id_orden_compra, $seccion_compra)
     {
-        $response[] = d($seccion_compra, 'd-md-none row');
-        $seccion[] = d(format_link(
-            "Rastrea tu orden",
-            [
 
-                "href" => path_enid('pedido_seguimiento', _text($id_recibo)),
-                'class' => 'text-right mt-5',
-            ]
-            , 1, 0
-        ), _12p);
+        $response[] = d($seccion_compra, 'd-md-none row');
+        $response[] = _titulo("¿Necesitas hacer algo más?", 5);
+        $seccion[] = d(
+            format_link(
+                "Rastrea tu orden",
+                [
+
+                    "href" => path_enid('pedido_seguimiento', _text($id_orden_compra)),
+                    'class' => 'text-right mt-5',
+                ]
+                , 1, 0
+            ), _12p);
 
         $seccion[] = d(format_link(
             "Cambia la dirección de entrega",
             [
 
                 "href" => path_enid('pedido_seguimiento',
-                    _text($id_recibo,
+                    _text($id_orden_compra,
                         '&domicilio=1&asignacion=1')),
                 'class' => 'mt-3',
             ]
@@ -1417,10 +1420,23 @@ if (!function_exists('invierte_date_time')) {
             0, 0
         ), _12p);
 
+
+        $domicilios = $data["domicilios"];
+        $tiene_domicilio = (tiene_domilio($domicilios, 1) > 0);
+        if (!$tiene_domicilio) {
+
+            $texto = "Ups! parece que 
+            aún no nos indicas donde 
+            debemos llevar tu pedido";
+            $seccion[] = d($texto, _text_(_12p, 'red_enid strong text-center mt-3'));
+
+        }
+
+
         $seccion[] = d(format_link('Cancelar compra',
             [
                 "class" => "cancelar_compra mt-3 text-right text-uppercase",
-                "id" => $id_recibo, "modalidad" => '0',
+                "id" => $id_orden_compra, "modalidad" => '0',
             ], 0, 0
         ), _12p);
 

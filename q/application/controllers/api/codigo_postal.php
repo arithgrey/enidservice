@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class codigo_postal extends REST_Controller
@@ -38,49 +38,70 @@ class codigo_postal extends REST_Controller
         $param = $this->post();
         $response = false;
 
-
         if (fx($param, "cp")) {
-            $id_direccion = $this->registra_direccion_envio($param);
+
+            $id_orden_compra = $param["id_orden_compra"];
+            $response["id_orden_compra"] = $id_orden_compra;
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            $id_direccion = $this->registra_direccion_envio($param, $productos_orden_compra);
             if ($id_direccion == 0) {
 
                 $this->response(false);
             }
 
-            $response["id_direccion"] = $param["id_direccion"] = $id_direccion;
+            $response["id_direccion"] = $id_direccion;
+            $param["id_direccion"] = $id_direccion;
 
+            $direccion_principal = prm_def(
+                $param,
+                "direccion_principal",
+                false
+            );
 
-            $es_direccion_principal = (prm_def($param, "direccion_principal", false) != false);
+            $es_direccion_principal = ($direccion_principal != false);
+
             if ($id_direccion > 0 && $es_direccion_principal) {
 
                 $direccion_principal = $param["direccion_principal"];
                 $id_usuario = $this->get_id_usuario($param);
-                $response["registro_direccion_usuario"] =
-                    $this->set_direcciones_usuario(
-                        $param,
-                        $id_usuario,
-                        $id_direccion,
-                        $direccion_principal
-                    );
+
+
+                $registro_direccion_usuario = $this->set_direcciones_usuario(
+                    $param,
+                    $id_usuario,
+                    $id_direccion,
+                    $direccion_principal
+                );
+
+                $response["registro_direccion_usuario"] = $registro_direccion_usuario;
             }
 
             $response["externo"] = prm_def($param, "externo");
+            $response["asignacion_horario"] = 1;
         }
 
         $this->response($response);
     }
 
-    function registra_direccion_envio($param)
+    function registra_direccion_envio($param, $productos_orden_compra)
     {
-
 
         $param["id_codigo_postal"] = $this->codigo_postal_model->get_id_codigo_postal_por_patron($param);
         $response = 0;
         if ($param["id_codigo_postal"] > 0) {
 
-            $param["id_direccion"] = $this->crea_direccion($param);
-            $this->elimina_direccion_previa_envio($param);
-            $this->agrega_direccion_a_compra($param);
-            $response = $param["id_direccion"];
+            foreach ($productos_orden_compra as $row) {
+
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $param["id_direccion"] = $this->crea_direccion($param);
+                $id_direccion = $param["id_direccion"];
+
+                $eliminacion = $this->elimina_direccion_previa_envio($id_recibo);
+                $registro = $this->agrega_direccion_a_compra($id_recibo, $id_direccion);
+                $response = $id_direccion;
+
+            }
+
         }
         return $response;
     }
@@ -230,32 +251,28 @@ class codigo_postal extends REST_Controller
     private function set_direcciones_usuario($param, $id_usuario, $id_direccion, $direccion_principal)
     {
 
+//        $asignacion_horario = prm_def($param, 'asignacion_horario');
+//        if ($asignacion_horario > 0) {
+//            $id_recibo = $param['id_recibo'];
+//            $qrecibo = [
+//                'recibo' => $id_recibo
+//            ];
+//            $recibo = $this->app->api("recibo/index/format/json/", $qrecibo);
+//            $id_usuario = pr($recibo, 'id_usuario');
+//            $this->fecha_entrega($param, $id_recibo);
+//        }
 
-        $es_asignacion_horario = (prm_def($param, 'asignacion_horario') > 0);
-
-        if ($es_asignacion_horario) {
-
-            $id_recibo = $param['id_recibo'];
-            $qrecibo = [
-                'recibo' => $id_recibo
+        $q =
+            [
+                "id_usuario" => $id_usuario,
+                "id_direccion" => $id_direccion,
+                "principal" => $direccion_principal,
             ];
-            $recibo = $this->app->api("recibo/index/format/json/", $qrecibo);
-            $id_usuario = pr($recibo, 'id_usuario');
-
-            $this->fecha_entrega($param, $id_recibo);
-        }
-
-        $q = [
-            "id_usuario" => $id_usuario,
-            "id_direccion" => $id_direccion,
-            "principal" => $direccion_principal,
-
-        ];
 
         return $this->app->api("usuario_direccion/index", $q, "json", "PUT");
     }
 
-    function fecha_entrega($param, $id_recibo)
+    function fecha_entrega($param, $id_orden_compra)
     {
 
         if (fx($param, "fecha_entrega,horario_entrega")) {
@@ -266,7 +283,7 @@ class codigo_postal extends REST_Controller
             $q = [
                 "fecha_entrega" => $fecha_entrega,
                 "horario_entrega" => $horario_entrega,
-                "recibo" => $id_recibo,
+                "orden_compra" => $id_orden_compra,
                 "contra_entrega_domicilio" => 1,
                 "tipo_entrega" => 2
             ];
@@ -287,16 +304,20 @@ class codigo_postal extends REST_Controller
         return $this->app->api("usuario_direccion/index", $q, "json", "POST");
     }
 
-    private function elimina_direccion_previa_envio($q)
+    private function elimina_direccion_previa_envio($id_recibo)
     {
 
-
+        $q = ["id_recibo" => $id_recibo];
         return $this->app->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "DELETE");
     }
 
-    private function agrega_direccion_a_compra($q)
+    private function agrega_direccion_a_compra($id_recibo, $id_direccion)
     {
 
+        $q = [
+            "id_recibo" => $id_recibo,
+            "id_direccion" => $id_direccion
+        ];
         return $this->app->api("proyecto_persona_forma_pago_direccion/index", $q, "json", "POST");
     }
 

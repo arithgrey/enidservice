@@ -119,7 +119,7 @@ class lista_negra extends REST_Controller
     {
 
         $q = [
-            'recibo' => $id_recibo,
+            'orden_compra' => $id_recibo,
             'es_proceso_compra' => 1,
             'status' => 6,
         ];

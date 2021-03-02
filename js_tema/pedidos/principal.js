@@ -20,7 +20,13 @@ let $repartidor = $('.repartidor');
 let $registro_articulo_interes = $('.registro_articulo_interes');
 let $id_usuario_referencia = $('.id_usuario_referencia');
 let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
+let $edicion_cantidad = $('.edicion_cantidad');
 let $es_lista_negra = $('.es_lista_negra');
+let $seccion_cantidad = $('.seccion_cantidad');
+let $seccion_edicion_cantidad = $('.seccion_edicion_cantidad');
+let $botton_actualizar = $('.botton_actualizar');
+
+
 $(document).ready(() => {
 
     $editar_estado_compra.click(function () {
@@ -61,7 +67,9 @@ $(document).ready(() => {
     $usuario_tipo_negocio.change(usuario_tipo_negocio);
     $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
     $repartidor.click(cambio_reparto);
-    valida_registro_articulo_interes();
+    $edicion_cantidad.click(habilita_edicion);
+    $botton_actualizar.click(actualizar_cantidad);
+    // valida_registro_articulo_interes();
 
 });
 let editar_horario_entrega = function (e) {
@@ -346,7 +354,7 @@ let registra_motivo_cancelacion = () => {
     let status_venta = get_valor_selected(".status_venta");
     let tipificacion = get_valor_selected(".tipificacion");
     let data_send = $.param({
-        "recibo": get_parameter(".recibo"),
+        "orden_compra": get_parameter(".recibo"),
         "status": status_venta,
         "tipificacion": tipificacion,
         "cancelacion": 1
@@ -469,7 +477,7 @@ let registra_data_nuevo_estado = status_venta => {
 
     bloquea_form(".selector_estados_ventas");
     let data_send = $.param({
-        "recibo": get_parameter(".recibo"),
+        "orden_compra": get_parameter(".recibo"),
         "status": status_venta,
         "saldo_cubierto": get_parameter(".saldo_cubierto_pos_venta"),
         "es_proceso_compra": get_option("es_proceso_compra"),
@@ -624,11 +632,12 @@ let response_intento_recuperacion = (data) => {
     });
 
 };
-let confirma_intento_reventa = (id_usuario, recibo) => {
+let confirma_intento_reventa = (id_usuario, id_orden_compra) => {
+
 
     oculta_opciones_recibo();
     let url = "../q/index.php/api/tipo_tag_arquetipo/reventa/format/json/";
-    let data_send = {'v': 1, 'id_usuario': id_usuario, 'recibo': recibo};
+    let data_send = {'v': 1, 'id_usuario': id_usuario, 'id_orden_compra': id_orden_compra};
     request_enid("GET", data_send, url, response_reventa);
 
 };
@@ -715,14 +724,14 @@ let evalua_registro_motivo_lista_negra = function () {
 };
 let agregar_lista_negra = (e) => {
 
+    debugger;
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 
         let $telefono = $telefono_contacto_recibo.val();
-
-        let $recibo = $('.recibo').val();
+        let $orden_compra = $('.recibo').val();
         let data_send = $('.form_lista_negra').serialize() + "&" + $.param({
-            'id_recibo': $recibo,
+            'orden_compra': $orden_compra,
             'telefono': $telefono
         });
         let url = "../q/index.php/api/lista_negra/index/format/json/";
@@ -1024,4 +1033,23 @@ let registro_aun_sin_articulo_interes = function () {
     let data_send = $.param({'v': 1, 'id': $recibo});
     let url = "../q/index.php/api/recibo/registro_articulo_interes/format/json/";
     request_enid("PUT", data_send, url, response_tag_arquetipo);
+};
+let habilita_edicion = function () {
+
+    $seccion_edicion_cantidad.removeClass('d-none');
+    $seccion_cantidad.addClass("d-none");
+
+};
+let actualizar_cantidad = function () {
+
+    let $recibo = $('.recibo').val();
+    let $cantidad = $('.cantidad').val();
+    $('.texto_cantidad').text($cantidad);
+    let data_send = $.param({'id': $recibo, 'cantidad': $cantidad });
+    let url = "../q/index.php/api/recibo/cantidad/format/json/";
+    $seccion_edicion_cantidad.addClass('d-none');
+    $seccion_cantidad.removeClass("d-none");
+
+    request_enid("PUT", data_send, url, response_tag_arquetipo);
+
 };

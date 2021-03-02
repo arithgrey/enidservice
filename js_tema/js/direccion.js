@@ -71,6 +71,7 @@ function registro_direccion() {
         bloquea_form(".form_direccion_envio");
         modal('Estamos procesando tu pedido ...', 1);
         request_enid("POST", data_send, url, response_registro_direccion);
+
     } else {
         recorre("#asentamiento");
         render_enid(".place_asentamiento", "<span class='alerta_enid'>Seleccione</span>");
@@ -80,16 +81,17 @@ function registro_direccion() {
 let response_registro_direccion = function (data) {
 
     if (data !== -1) {
-        let $asignacion_horario = $('.asignacion_horario').val();
+
+        let $asignacion_horario = data.asignacion_horario;
         let $es_asignacion_horario = (parseInt($asignacion_horario) > 0);
-        let $id_recibo = get_option("id_recibo");
-        let url_area_cliente = _text("../area_cliente/?action=compras&ticket=", $id_recibo, "&primercompra=1");
+        let id_orden_compra = data.id_orden_compra;
+        let url_area_cliente = _text("../area_cliente/?action=compras&ticket=", id_orden_compra, "&primercompra=1");
         let ext = ($es_asignacion_horario) ? '&asignacion=1' : '';
-        let url_seguimiento = _text("../pedidos/?seguimiento=", $id_recibo, "&&domicilio=1", ext);
+        let url_seguimiento = _text("../pedidos/?seguimiento=", id_orden_compra, "&&domicilio=1", ext);
         let $es_seguimiento = (get_parameter(".es_seguimiento") !== undefined && get_parameter(".es_seguimiento") === 1);
         let url = ($es_seguimiento) ? url_seguimiento : url_area_cliente;
         if ($es_asignacion_horario) {
-            url = _text("../pedidos/?recibo=", $id_recibo);
+            url = _text("../pedidos/?recibo=", id_orden_compra);
         }
         redirect(url);
 

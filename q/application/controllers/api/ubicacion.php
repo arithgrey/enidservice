@@ -78,51 +78,72 @@ class ubicacion extends REST_Controller
         $param = $this->post();
         $response = false;
 
-        if (fx($param, 'id_recibo,ubicacion,fecha_entrega,horario_entrega')) {
+        if (fx($param, 'id_orden_compra,ubicacion,fecha_entrega,horario_entrega')) {
 
-            $id_recibo = $param['id_recibo'];
+            $id_orden_compra = $param['id_orden_compra'];
             $fecha_entrega = $param['fecha_entrega'];
             $horario_entrega = $param['horario_entrega'];
-            $recibo = $this->app->api("recibo/id/format/json/", ["id" => $id_recibo]);
 
-            if (es_data($recibo)) {
+            $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            $reparto = false;
+            foreach ($productos_ordenes_compra as $row) {
+
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
                 $params =
                     [
                         'ubicacion' => $param['ubicacion'],
                         'id_recibo' => $id_recibo,
-                        'id_usuario' => pr($recibo, 'id_usuario')
+                        'id_usuario' => $row['id_usuario']
                     ];
 
-                $id_ubicacion = $this->ubicacion_model->insert($params, 1);
-
-                if ($id_ubicacion > 0) {
-
-                    $id = $this->cambio_fecha_entrega($id_recibo, $fecha_entrega, $horario_entrega);
-                }
-
-                $es_cliente = es_cliente($this->app->session());
-                $area_cliente = path_enid('area_cliente_compras', _text($id_recibo, "&primercompra=1"));
-                $seguimiento = path_enid('pedidos_recibo', $id_recibo);
-                $siguiente = ($es_cliente) ? $area_cliente : $seguimiento;
-
-                $reparto = $this->asigna_reparto($id_recibo);
-                $response = [
-                    'id_ubicacion' => $id_ubicacion,
-                    'es_cliente' => $es_cliente,
-                    'id_recibo' => $id_recibo,
-                    'siguiente' => $siguiente,
-                    'asignacion_repatidor' => $reparto
-                ];
+                $this->ubicacion_model->insert($params, 1);
 
             }
 
+            $reparto = $this->asigna_reparto($id_orden_compra);
+            $this->cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_entrega);
+            $es_cliente = es_cliente($this->app->session());
 
+            $area_cliente = path_enid('area_cliente_compras', _text($id_orden_compra, "&primercompra=1"));
+            $seguimiento = path_enid('pedidos_recibo', $id_orden_compra);
+            $siguiente = ($es_cliente) ? $area_cliente : $seguimiento;
+
+            $response = [
+                'es_cliente' => $es_cliente,
+                'siguiente' => $siguiente,
+                'asignacion_repatidor' => $reparto,
+                'orden_compra' => $id_orden_compra
+
+            ];
         }
+
         $this->response($response);
     }
-    private function asigna_reparto($id_recibo)
+
+    private function orden_compra_por_producto($id_recibo_producto)
     {
-        return $this->app->api("recibo/reparto", ['id' => $id_recibo], "json", "PUT");
+
+        $id = 0;
+        $producto_orden_compra =
+            $this->app->api(
+                "producto_orden_compra/recibo/format/json/",
+                [
+                    'id' => $id_recibo_producto
+                ]
+            );
+
+        if (es_data($producto_orden_compra)) {
+
+            $id = array_column($producto_orden_compra, 'id')[0];
+
+        }
+        return $id;
+
+    }
+
+    private function asigna_reparto($id_orden_compra)
+    {
+        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
     }
 
 
@@ -162,17 +183,17 @@ class ubicacion extends REST_Controller
 
     }
 
-    private function cambio_fecha_entrega($id_recibo, $fecha_entrega, $horario_engrega)
+    private function cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_engrega)
     {
         $q = [
             'fecha_entrega' => $fecha_entrega,
             'horario_entrega' => $horario_engrega,
-            'recibo' => $id_recibo,
+            'orden_compra' => $id_orden_compra,
             'contra_entrega_domicilio' => 1,
             'tipo_entrega' => 2,
             'ubicacion' => 1,
         ];
-        $this->app->api("recibo/fecha_entrega", $q, "json", "PUT");
+        return $this->app->api("recibo/fecha_entrega", $q, "json", "PUT");
     }
 
     private function get_recibo($id_recibo)
@@ -183,6 +204,7 @@ class ubicacion extends REST_Controller
         return $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
 
     }
+
     function ids_recibo_GET()
     {
 
@@ -195,7 +217,6 @@ class ubicacion extends REST_Controller
         }
         $this->response($response);
     }
-
 
 
 }

@@ -178,15 +178,25 @@ class Tickets extends REST_Controller
         $param = $this->get();
         $param["id_usuario"] = $this->id_usuario;
         $response = false;
-        if (fx($param, "id_recibo,modalidad")) {
+        if (fx($param, "id_orden_compra,modalidad")) {
             $modalidad = $param["modalidad"];
+            $id_orden_compra = $param["id_orden_compra"];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
 
-            $recibo = ($modalidad == 1) ?
-                $this->get_recibo_por_enviar($param) :
-                $this->get_recibo_por_pagar($param);
+            $recibos = [];
+            foreach ($productos_orden_compra as $row) {
 
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $param["id_recibo"] = $id_recibo;
 
-            $response = form_cancelar_compra($recibo, $modalidad);
+                $recibos[] = ($modalidad == 1) ?
+                    $this->get_recibo_por_enviar($param) :
+                    $this->get_recibo_por_pagar($id_recibo, $this->id_usuario);
+
+            }
+
+            $response = form_cancelar_compra($id_orden_compra, $recibos, $modalidad);
+
         }
         $this->response($response);
 
@@ -198,10 +208,16 @@ class Tickets extends REST_Controller
         return $this->app->api("recibo/recibo_por_enviar_usuario/format/json/", $q);
     }
 
-    private function get_recibo_por_pagar($q)
+    private function get_recibo_por_pagar($id_recibo, $id_usuario)
     {
 
+        $q = [
+            "id_recibo" => $id_recibo,
+            "id_usuario" => $id_usuario
+        ];
+
         return $this->app->api("recibo/recibo_por_pagar_usuario/format/json/", $q);
+
     }
 
     function cancelar_PUT()
@@ -214,15 +230,26 @@ class Tickets extends REST_Controller
 
         if ($param["modalidad"] == 0) {
 
-            $data["recibo"] = $this->get_recibo_por_pagar($param);
-            $data_complete['id_servicio'] = $data["recibo"];
-            if ($data["recibo"]["cuenta_correcta"] > 0) {
+            $productos_orden_compra = $this->app->productos_ordenes_compra($param["id_orden_compra"]);
 
-                $param["cancela_cliente"] = ($data["recibo"]["id_usuario"] == $param["id_usuario"]);
-                $data_complete["registro"] = $this->cancelar_orden_compra($param);
+            foreach ($productos_orden_compra as $row) {
+
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $param["id_recibo"] = $id_recibo;
+                $data["recibo"] = $this->get_recibo_por_pagar($id_recibo, $this->id_usuario);
+                $data_complete['id_servicio'] = $data["recibo"];
+                $recibo = $data["recibo"];
+                $es_cuenta_correcta = $recibo["cuenta_correcta"];
+                if (intval($es_cuenta_correcta) > 0) {
 
 
+                    $param["cancela_cliente"] = ($recibo["id_usuario"] == $param["id_usuario"]);
+                    $param["id_servicio"] = $row["id_servicio"];
+                    $data_complete["registro"] = $this->cancelar_orden_compra($param);
+
+                }
             }
+
 
         } else {
 
@@ -231,8 +258,10 @@ class Tickets extends REST_Controller
                 $param["cancela_cliente"] =
                     ($data["recibo"]["id_usuario_venta"] == $param["id_usuario"]) ? 0 : 1;
 
-                /*Si la cuenta pertenece hay que realizar la cancelación del la órden de pago*/
-                $data_complete["registro"] = $this->cancelar_orden_compra($param);
+                /*Si la cuenta pertenece hay que
+                realizar la cancelación del la órden de pago*/
+                $data_complete["registro"] =
+                    $this->cancelar_orden_compra($param);
                 $prm["id_recibo"] = $param["id_recibo"];
                 $prm["usuario_notificado"] =
                 $data_complete["info_cliente"] = $this->app->usuario($data["recibo"]["id_usuario"]);
@@ -245,21 +274,24 @@ class Tickets extends REST_Controller
 
     private function cancelar_orden_compra($param)
     {
-
-        $this->cancela_orden_compra($param);
-        $id_servicio = $this->get_servicio_ppfp($param["id_recibo"]);
+        $id_recibo = $param["id_recibo"];
+        $id_servicio = $param["id_servicio"];
+        $this->cancela_orden_compra($id_recibo, $id_servicio);
+        $gamificacion = $this->gamificacion_negativa($id_servicio, $param["id_usuario"]);
 
         return [
             "id_servicio" => $id_servicio,
-            "gamificacion" => $this->gamificacion_negativa($id_servicio,
-                $param["id_usuario"]),
+            "gamificacion" => $gamificacion,
         ];
 
     }
 
-    private function cancela_orden_compra($q)
+    private function cancela_orden_compra($id_recibo)
     {
 
+        $q = [
+            "id_recibo" => $id_recibo
+        ];
         return $this->app->api("recibo/cancelar", $q, "json", "PUT");
     }
 

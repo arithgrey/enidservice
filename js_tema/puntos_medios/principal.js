@@ -103,6 +103,7 @@ $(document).ready(() => {
 
 let estaciones = function (id, q) {
 
+
     let url = "../q/index.php/api/punto_encuentro/linea_metro/format/json/";
     set_option("id_linea", id);
 
@@ -117,10 +118,11 @@ let estaciones = function (id, q) {
         };
 
     } else {
+
         data_send = {
             "id": id,
             "v": 2,
-            "recibo": get_parameter(".recibo"),
+            "recibo": get_parameter(".orden_compra"),
             "q": q
         };
     }
@@ -181,8 +183,8 @@ let muestra_horarios = function () {
 
 let registra_usuario = (e) => {
 
-    verifica_formato_default_inputs(0);
 
+    verifica_formato_default_inputs(0);
     reset_posibles_errores();
     let $tiene_formato = focus_inputs_form();
     if ($tiene_formato) {
@@ -230,10 +232,10 @@ let response_registro_usuario = (data) => {
 
     } else {
 
-        if (data.hasOwnProperty('id_recibo') && parseInt(data.id_recibo) > 0) {
+        if (data.hasOwnProperty('id_orden_compra') && parseInt(data.id_orden_compra) > 0) {
             if (data.hasOwnProperty('session_creada') && parseInt(data.session_creada) > 0) {
                 let es_cliente = $('.es_cliente').val();
-                let id = data.id_recibo;
+                let id = data.id_orden_compra;
                 if (parseInt(es_cliente)) {
 
                     redirect_forma_pago(id);
@@ -276,7 +278,7 @@ let notifica_punto_entrega = e => {
     e.preventDefault();
 };
 let response_notificacion_punto_entrega = (data) => {
-    debugger;
+
     despliega([".place_notificacion_punto_encuentro", form_punto_encuentro_horario], 0);
 
     if (data.es_administrador) {
@@ -286,9 +288,9 @@ let response_notificacion_punto_entrega = (data) => {
     } else {
 
         if (parseInt(get_parameter(".primer_registro")) > 0) {
-            redirect_forma_pago(data.id_recibo);
+            redirect_forma_pago(data.id_orden_compra);
         } else {
-            redirect_forma_pago(data.id_recibo);
+            redirect_forma_pago(data.id_orden_compra);
         }
     }
 

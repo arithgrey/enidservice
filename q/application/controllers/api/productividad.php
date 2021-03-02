@@ -48,28 +48,15 @@ class productividad extends REST_Controller
         $response = $this->recuperacion($data, $id_usuario, $response);
         switch ($id_perfil) {
 
-            case 3:
+            case (3):
 
-                $response += [
-                    "recordatorios" => $this->get_recordatorios($id_usuario),
-                    "ventas_enid_service" => $this->get_ventas_enid_service(),
-                    "ventas_semana" => $this->ventas_semana($id_usuario)
-                ];
-
-                $response = tareas_administrador($response);
+                $response = $this->caso_administrador($response, $id_usuario);
 
                 break;
 
+            case (4):
 
-            case 4:
-
-                $response += [
-                    "recordatorios" => $this->get_recordatorios($id_usuario),
-                    "ventas_enid_service" => $this->get_ventas_enid_service(),
-                    "ventas_semana" => $this->ventas_semana($id_usuario)
-                ];
-
-                $response = tareas_administrador($response);
+                $response = $this->caso_administrador($response, $id_usuario);
 
                 break;
 
@@ -93,14 +80,26 @@ class productividad extends REST_Controller
             case (20):
 
 
-                $response = pendientes_cliente($response);
+                $response = pendientes_cliente($data, $response);
                 break;
 
             default:
                 break;
         }
-        $response += ["lista_deseo" => $this->get_lista_deseo($id_usuario) ];
+        $response += ["lista_deseo" => $this->get_lista_deseo($id_usuario)];
         $this->response($response);
+
+    }
+
+    private function caso_administrador($response, $id_usuario)
+    {
+        $response += [
+            "recordatorios" => $this->get_recordatorios($id_usuario),
+            "ventas_enid_service" => $this->get_ventas_enid_service(),
+            "ventas_semana" => $this->ventas_semana($id_usuario)
+        ];
+
+        return tareas_administrador($response);
 
     }
 

@@ -350,7 +350,6 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = form_close();
 
-
         }
         $response[] = d($r, "contenedor_form");
         return append($response);
@@ -360,7 +359,6 @@ if (!function_exists('invierte_date_time')) {
     function frm_servicio($id_servicio)
     {
 
-
         $ext = (prm_def($_GET, "debug")) ? "&debug=1" : "";
         $url = "../procesar/?w=1" . $ext;
         $r[] = '<form action="' . $url . '" method="POST" >';
@@ -368,7 +366,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = btn(text_icon("fa fa fa-long-arrow-right", "COTIZAR ", [], 0));
         $r[] = form_close();
         return d(append($r), "contenedor_form mt-5");
-
 
     }
 

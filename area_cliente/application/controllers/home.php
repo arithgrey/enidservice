@@ -20,8 +20,9 @@ class Home extends CI_Controller
 
 
             $this->app->acceso();
-            $id_ticket = prm_def($param, "ticket");
-            $this->estado_compra($id_ticket, $data);
+            $id_orden_compra = prm_def($param, "ticket");
+
+            $this->estado_compra($id_orden_compra, $data);
 
             $resumen = $this->resumen_valoraciones($data["id_usuario"]);
 
@@ -29,7 +30,7 @@ class Home extends CI_Controller
                 "action" => prm_def($param, "action", ""),
                 "valoraciones" => prm_def($resumen, "info_valoraciones", []),
                 "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
-                "ticket" => $id_ticket,
+                "ticket" => $id_orden_compra,
             ];
 
             $data = $this->app->cssJs($data, "area_cliente");
@@ -38,16 +39,39 @@ class Home extends CI_Controller
         }
     }
 
-    private function estado_compra($id_recibo, $data)
+    private function productos($producto_orden_compra)
     {
 
-        if ($id_recibo > 0) {
-            $recibo = $this->recibo($id_recibo);
-            if (es_data($recibo) && pr($recibo, 'id_ciclo_facturacion') != 9) {
-                $this->gestiona_tipo_entrega($recibo, $id_recibo, $data);
+        $response = [];
+        if (es_data($producto_orden_compra)) {
+
+            $ids = array_column($producto_orden_compra, "id_proyecto_persona_forma_pago");
+            $response = $this->app->api("recibo/ids/format/json/", ["ids" => $ids]);
+        }
+        return $response;
+
+    }
+
+
+    private function estado_compra($id_orden_compra, $data)
+    {
+
+        if ($id_orden_compra > 0) {
+            $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            if (es_data($productos_ordenes_compra)) {
+
+                foreach ($productos_ordenes_compra as $row) {
+
+                    $id_recibo_producto = $row["id_proyecto_persona_forma_pago"];
+                    $recibo = $this->recibo($id_recibo_producto);
+                    if (es_data($recibo) && pr($recibo, 'id_ciclo_facturacion') != 9) {
+                        $this->gestiona_tipo_entrega($recibo,  $data, $id_orden_compra);
+                    }
+                }
             }
         }
     }
+
 
     private function recibo($id)
     {
@@ -55,28 +79,29 @@ class Home extends CI_Controller
         return $this->app->api("recibo/id/format/json/", ["id" => $id]);
     }
 
-    private function gestiona_tipo_entrega($recibo, $id_recibo, $data)
+    private function gestiona_tipo_entrega($recibo,  $data, $id_orden_compra)
     {
 
         $es_administrador_vendedor = es_administrador_o_vendedor($data);
         $tipo_entrega = pr($recibo, 'tipo_entrega');
         $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');
 
-
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {
             /*Verifico que tenga saldo pendiente*/
-            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo, $contra_entrega_domicilio);
+            $direcciones_registradas = $this->recibo_pago_direccion($id_orden_compra, $contra_entrega_domicilio);
             if ($direcciones_registradas < 1) {
 
                 $extra = ($es_administrador_vendedor) ? '&asignacion_horario_entrega=1' : '';
                 $link_registro_domicilio =
                     _text(
                         "../",
-                        path_enid("pedido_seguimiento", $id_recibo),
+                        path_enid("pedido_seguimiento", $id_orden_compra),
                         _text("&domicilio=1", $extra)
                     );
+
                 redirect($link_registro_domicilio);
+
 
             } else {
 
@@ -86,7 +111,7 @@ class Home extends CI_Controller
                     $link_registro_domicilio =
                         _text(
                             "../",
-                            path_enid("pedido_seguimiento", $id_recibo)
+                            path_enid("pedido_seguimiento", $id_orden_compra)
                         );
                     redirect($link_registro_domicilio);
                 }
@@ -97,7 +122,6 @@ class Home extends CI_Controller
     private function recibo_pago_direccion($id_recibo, $contra_entrega_domicilio)
     {
 
-        $response = false;
         if ($contra_entrega_domicilio > 0) {
 
             $response = $this->app->api(

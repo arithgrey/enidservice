@@ -20,10 +20,10 @@ class Cobranza extends REST_Controller
         $this->response($this->get_costo_envio($this->get()));
     }
 
-    function get_costo_envio($param)
+    function get_costo_envio($servicio)
     {
 
-        $costo = get_costo_envio($param);
+        $costo = get_costo_envio($servicio);
         $texto = key_exists_bi($costo, "text_envio", "cliente");
         $costo["text_envio"]["cliente"] = d($texto, 'texto_envio');
 
@@ -78,35 +78,43 @@ class Cobranza extends REST_Controller
         $precio = $this->get_precio_id_servicio($id_servicio);
         $es_nuevo = prm_def($param, "usuario_nuevo");
         $data_orden['orden_creada'] = 0;
+
         if (es_data($precio)) {
 
+
             $info_existencia = $this->disponibilidad_servicio($id_servicio, $num_ciclos);
+
             if ($info_existencia["en_existencia"] > 0) {
 
-                $servicio = $info_existencia["info_servicio"][0];
-                $recibo = $this->orden(
+                $servicio = $info_existencia["info_servicio"];
+                $orden_compra = $this->orden(
                     $servicio, $param, $precio, $es_nuevo, $info_existencia);
 
-                $id_recibo = $recibo['id_recibo'];
+                $id_orden_compra = $orden_compra['id_orden_compra'];
 
-                if ($id_recibo > 0) {
 
-                    $data_orden = $recibo['data_orden'];
+                if ($id_orden_compra > 0) {
+
+                    $data_orden = $orden_compra['data_orden'];
                     $data_orden['orden_creada'] = 1;
-                    $data_orden["id_recibo"] = $id_recibo;
-                    $data_orden['asignacion_reparto'] = $this->asigna_reparto($id_recibo);
+                    $data_orden["id_orden_compra"] = $id_orden_compra;
+                    $data_orden['asignacion_reparto'] = $this->asigna_reparto($id_orden_compra);
 
-                    $response = $this->posterior_compra(
-                        $data_orden, $id_recibo, $id_servicio, $param, $es_nuevo);
+                    $this->posterior_compra(
+                        $data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo);
                 }
+
             }
+
         }
+
         $this->response($data_orden);
     }
 
-    private function asigna_reparto($id_recibo)
+    private function asigna_reparto($id_orden_compra)
     {
-        return $this->app->api("recibo/reparto", ['id' => $id_recibo], "json", "PUT");
+
+        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
     }
 
     function get_precio_id_servicio($id_servicio)
@@ -133,35 +141,36 @@ class Cobranza extends REST_Controller
         $data["id_ciclo_facturacion"] = pr($precio, "id_ciclo_facturacion");
         $data["precio"] = pr($precio, "precio");
         $data["servicio"] = $servicio;
-        $data["costo_envio"] = $this->costo_envio_tipo_orden($data, $param);
+        $data["costo_envio"] = $this->costo_envio_tipo_orden($servicio, $param);
         $data = $this->tipo_usuario($data, $es_nuevo, $param);
         $data["data_por_usuario"] = $param;
         $data["talla"] = prm_def($param, "talla");
 
-        $id_recibo = $this->genera_orden_compra($data, $param);
+        $id_orden_compra = $this->genera_orden_compra($data);
 
         return
             [
                 'data_orden' => $data,
-                'id_recibo' => $id_recibo,
+                'id_orden_compra' => $id_orden_compra,
             ];
     }
 
-    function costo_envio_tipo_orden($data_orden, $param)
+    function costo_envio_tipo_orden($servicio, $param)
     {
 
         $response = 0;
-        if (key_exists_bi($data_orden, "servicio", "flag_servicio", 0) < 1) {
-            if (prm_def($param, "tipo_entrega") == 1) {
+        $es_servicio = pr($servicio, "flag_servicio");
+        if ($es_servicio < 1) {
+            $tipo_entrega = prm_def($param, "tipo_entrega");
+            $servicio[0]["tipo_entrega"] = $tipo_entrega;
+
+            if ($tipo_entrega == 1) {
 
                 $response = $this->get_costo_envio_punto_encuentro($param);
 
-
             } else {
 
-                $param["flag_envio_gratis"] = key_exists_bi(
-                    $data_orden, "servicio", "flag_envio_gratis", 0);
-                $response = $this->get_costo_envio($param);
+                $response = $this->get_costo_envio($servicio);
 
             }
 
@@ -229,18 +238,11 @@ class Cobranza extends REST_Controller
 
     }
 
-    private function genera_orden_compra($q, $param)
+    private function genera_orden_compra($q)
     {
 
-        $id_recibo = $this->app->api("recibo/orden_de_compra", $q, "json", "POST");
+        return $this->app->api("recibo/orden_de_compra", $q, "json", "POST");
 
-        if ($id_recibo > 0 && prm_def($param,
-                "comentarios") !== 0 && strlen(trim($param["comentarios"])) > 5) {
-            $param["id_recibo"] = $id_recibo;
-            $this->agrega_notas_pedido($param);
-        }
-
-        return $id_recibo;
     }
 
     private function agrega_notas_pedido($q)
@@ -250,15 +252,15 @@ class Cobranza extends REST_Controller
     }
 
 
-    function posterior_compra($data_orden, $id_recibo, $id_servicio, $param, $es_nuevo)
+    function posterior_compra($data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo)
     {
 
-        $gamificacion = $this->gamificacion_deseo($id_servicio, 2);
+        $this->gamificacion_deseo($id_servicio, 2);
         $id_usuario_venta = key_exists_bi($data_orden, "servicio", "id_usuario_venta", 0);
 
         $pos =
             [
-                "id_recibo" => $id_recibo,
+                "id_orden_compra" => $id_orden_compra,
                 "id_usuario_venta" => $id_usuario_venta,
                 "id_servicio" => $id_servicio,
                 "es_usuario_nuevo" => $es_nuevo,
@@ -288,11 +290,10 @@ class Cobranza extends REST_Controller
 
         }
 
-
-        $response = $this->acciones_posterior_orden_pago($pos);
+        $this->notifica_deuda_cliente($pos);
         if ($param["tipo_entrega"] != 2) {
 
-            $this->posterior_pe($param, $id_recibo, $pos["id_usuario"]);
+            $this->posterior_pe($param, $id_orden_compra, $pos["id_usuario"]);
 
         }
     }
@@ -308,12 +309,6 @@ class Cobranza extends REST_Controller
         return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
     }
 
-    function acciones_posterior_orden_pago($param)
-    {
-
-        $this->notifica_deuda_cliente($param);
-
-    }
 
     function notifica_deuda_cliente($q)
     {
@@ -339,14 +334,24 @@ class Cobranza extends REST_Controller
 
     }
 
-    private function posterior_pe($param, $id_recibo, $id_usuario)
+    private function posterior_pe($param, $id_orden_compra, $id_usuario)
     {
 
-        $param["id_recibo"] = $id_recibo;
-        $param["id_usuario"] = $id_usuario;
-        $this->create_orden_punto_entrega($param);
+        $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+        $response = false;
+        foreach ($productos_orden_compra as $row) {
 
-        return $this->agrega_punto_encuentro_usuario($param);
+            $q = [
+                "id_recibo" => $row["id_proyecto_persona_forma_pago"],
+                "id_usuario" => $id_usuario,
+                "punto_encuentro" => $param["punto_encuentro"]
+            ];
+            $status = $this->create_orden_punto_entrega($q);
+            $response = $this->agrega_punto_encuentro_usuario($q);
+        }
+
+
+        return $response;
     }
 
 
@@ -368,32 +373,38 @@ class Cobranza extends REST_Controller
 
         $param = $this->post();
         $response = [];
-        if (fx($param, "punto_encuentro,fecha_entrega,horario_entrega,recibo")) {
+        if (fx($param, "punto_encuentro,fecha_entrega,horario_entrega,orden_compra")) {
 
-            /*modifico hora de entrega*/
-            $id_recibo = $param["recibo"];
-            /*Lo modifico en la orden*/
-            $param['id_recibo'] = $id_recibo;
-            $response = $this->create_orden_punto_entrega($param);
-            /*Lo agrego en el diccionario para el usuario*/
-            $param["id_usuario"] = $this->id_usuario;
-            $nuevo = $this->agrega_punto_encuentro_usuario($param);
-            $response = $this->quita_domicilio_entrega_por_recibo($id_recibo);
+            $id_orden_compra = $param["orden_compra"];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
 
-            if ($response) {
-                $this->fecha_entrega($param['fecha_entrega'], $param['horario_entrega'], $id_recibo);
+            foreach ($productos_orden_compra as $row) {
+
+                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                /*Lo modifico en la orden*/
+                $param['id_recibo'] = $id_recibo;
+                $response = $this->create_orden_punto_entrega($param);
+                /*Lo agrego en el diccionario para el usuario*/
+                $param["id_usuario"] = $this->id_usuario;
+                $nuevo = $this->agrega_punto_encuentro_usuario($param);
+                $response_domicilio = $this->quita_domicilio_entrega_por_recibo($id_recibo);
+                $response = $this->valida_costo_envio($id_recibo, $param['punto_encuentro']);
+
             }
-            $this->valida_costo_envio($id_recibo, $param['punto_encuentro']);
+
+            $this->fecha_entrega($param['fecha_entrega'], $param['horario_entrega'], $id_orden_compra);
+
             $data =
                 [
                     'restricciones' => $this->config->item('restricciones'),
                     'id_perfil' => $this->app->getperfiles()
                 ];
 
-            $path_seguimiento = path_enid('pedidos_recibo', $id_recibo);
+            $path_seguimiento = path_enid('pedidos_recibo', $id_orden_compra);
+
             $response = [
                 'punto_nuevo' => $nuevo,
-                'id_recibo' => $id_recibo,
+                'id_orden_compra' => $id_orden_compra,
                 'es_administrador' => es_administrador_o_vendedor($data),
                 'path_seguimiento' => $path_seguimiento
             ];
@@ -453,7 +464,6 @@ class Cobranza extends REST_Controller
                     "id_usuario" => $usuario["id_usuario"],
                     "usuario_existe" => 0,
                 ];
-
 
                 if ($es_pe > 0) {
 
@@ -519,7 +529,8 @@ class Cobranza extends REST_Controller
         $response = false;
         if (valida_fecha_entrega($param["fecha_entrega"]) && valida_horario_entrega($param["horario_entrega"])) {
 
-            $param["fecha_entrega"] = $param["fecha_entrega"] . " " . $param["horario_entrega"] . ":00";
+            $parte = _text_($param["fecha_entrega"], $param["horario_entrega"]);
+            $param["fecha_entrega"] = _text($parte, ":00");
             $param["tipo_entrega"] = 1;
             $param["id_ciclo_facturacion"] = 5;
 
@@ -599,13 +610,13 @@ class Cobranza extends REST_Controller
         return $this->app->api("servicio/nombre_estado_enid/format/json/", $q);
     }
 
-    function fecha_entrega($fecha_entrega, $horario_entrega, $recibo)
+    function fecha_entrega($fecha_entrega, $horario_entrega, $id_orden_compra)
     {
 
         $q = [
             "fecha_entrega" => $fecha_entrega,
             "horario_entrega" => $horario_entrega,
-            "recibo" => $recibo,
+            "orden_compra" => $id_orden_compra,
             "tipo_entrega" => 1,
 
         ];

@@ -166,6 +166,15 @@ class Recibo_model extends CI_Model
 
     }
 
+    function ids($ids)
+    {
+        $query_get = _text_(
+            "SELECT * FROM proyecto_persona_forma_pago p",
+            " WHERE id_proyecto_persona_forma_pago IN(", $ids, ")");
+        return $this->db->query($query_get)->result_array();
+
+    }
+
     function get_q($params, $param)
     {
 
@@ -474,18 +483,17 @@ class Recibo_model extends CI_Model
 
     }
 
-    function cancela_orden_compra($param)
+    function cancela_orden_compra($id_recibo)
     {
 
-        $cancelar = ($param["cancela_cliente"] == 1) ? 1 : 0;
         $query_update =
             "UPDATE proyecto_persona_forma_pago 
           SET 
           status            = 10,
           fecha_cancelacion = CURRENT_DATE(), 
-          cancela_cliente   = $cancelar,
+          cancela_cliente   = 1,
           se_cancela        = 1
-          WHERE  id_proyecto_persona_forma_pago =  '" . $param["id_recibo"] . "' LIMIT 1";
+          WHERE  id_proyecto_persona_forma_pago =  '" .  $id_recibo . "' LIMIT 1";
 
         return $this->db->query($query_update);
 
@@ -561,20 +569,18 @@ class Recibo_model extends CI_Model
     function valida_recibo_por_pagar_usuario($param)
     {
 
-        $propietarios = "( 
-        id_usuario =  '" . $param["id_usuario"] . "' OR 
-        id_usuario_referencia =  '" . $param["id_usuario"] . "' OR
-        id_usuario_venta =  '" . $param["id_usuario"] . "' 
-        )  ";
+//        $propietarios = "(
+//        id_usuario =  '" . $param["id_usuario"] . "' OR
+//        id_usuario_referencia =  '" . $param["id_usuario"] . "' OR
+//        id_usuario_venta =  '" . $param["id_usuario"] . "'
+//        )  ";
+
         $query_get = "SELECT 
                     *
                   FROM proyecto_persona_forma_pago 
                   WHERE 
                     id_proyecto_persona_forma_pago = '" . $param["id_recibo"] . "'
-                  AND 
-                   " . $propietarios . "
-                  AND 
-                    monto_a_pagar > saldo_cubierto 
+             
                   LIMIT 1";
 
         return $this->db->query($query_get)->result_array();
@@ -603,19 +609,22 @@ class Recibo_model extends CI_Model
 
         $where = $this->get_where_estado_venta($param, $status);
         $query_get = "SELECT
-                    id_proyecto_persona_forma_pago ,
-                    resumen_pedido,
-                    id_servicio,
-                    monto_a_pagar,
-                    costo_envio_cliente,
-                    saldo_cubierto,
-                    status,
-                    fecha_registro,
-                    num_ciclos_contratados,
-                    estado_envio
-                  FROM
-                  proyecto_persona_forma_pago
-                  " . $where . " ORDER BY fecha_registro DESC";
+                        p.id_proyecto_persona_forma_pago ,
+                        p.resumen_pedido,
+                        p.id_servicio,
+                        p.monto_a_pagar,
+                        p.costo_envio_cliente,
+                        p.saldo_cubierto,
+                        p.status,
+                        p.fecha_registro,
+                        p.num_ciclos_contratados,
+                        p.estado_envio,
+                        o.id_orden_compra
+                        FROM
+                        proyecto_persona_forma_pago p 
+                        INNER JOIN producto_orden_compra o 
+                        ON p.id_proyecto_persona_forma_pago = o.id_proyecto_persona_forma_pago
+                                          " . $where . " ORDER BY p.fecha_registro DESC";
 
 
         return $this->db->query($query_get)->result_array();
@@ -769,24 +778,24 @@ class Recibo_model extends CI_Model
         return $sql;
     }
 
-    function crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
+    function crea_resumen_compra(&$servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
     {
 
+        $response = "";
+        $texto_servicio = pr($servicio, "nombre_servicio");
         if ($tipo_entrega == 0) {
 
-            $resumen = "";
-            $resumen = $num_ciclos . " " . $servicio["nombre_servicio"];
+            $response = _text_($num_ciclos, $texto_servicio);
 
             if ($flag_envio_gratis == 1) {
-                $resumen .= " - Envío gratis";
+                $response .= " - Envío gratis";
             }
-            return $resumen;
 
         } else {
-            $resumen = "";
-            $resumen = $num_ciclos . " " . $servicio["nombre_servicio"];
-            return $resumen;
+            $response = _text_($num_ciclos, $texto_servicio);
+
         }
+        return $response;
 
     }
 
@@ -815,37 +824,34 @@ class Recibo_model extends CI_Model
         $saldo_cubierto = 0;
         $status = 6;
         $data_usuario = $param["data_por_usuario"];
-
         $tipo_entrega = $data_usuario["tipo_entrega"];
-        if ($data_usuario["tipo_entrega"] != 2) {
-            $tipo_entrega = $data_usuario["tipo_entrega"];
-        }
+
 
         $id_forma_pago = ($tipo_entrega == 1) ? 8 : 6;
         $fecha_vencimiento = "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";
         $id_usuario = $param["id_usuario"];
 
 
-        $id_usuario_referencia =
-            (prm_def($data_usuario, "usuario_referencia") == 0)
-                ? $id_usuario : $data_usuario["usuario_referencia"];
+        $usuario_referencia = prm_def($data_usuario, "usuario_referencia");
+        $id_usuario_referencia = ($usuario_referencia == 0) ? $id_usuario : $usuario_referencia;
 
 
         $num_ciclos = $data_usuario["num_ciclos"];
         $servicio = $param["servicio"];
-        $id_servicio = $servicio["id_servicio"];
-        $flag_envio_gratis = $servicio["flag_envio_gratis"];
-        $id_usuario_venta = $servicio["id_usuario_venta"];
-        $precio = $servicio["precio"];
-        $comision = $servicio['comision'];
+
+        $id_servicio = pr($servicio, "id_servicio");
+        $flag_envio_gratis = pr($servicio, "flag_envio_gratis");
+        $id_usuario_venta = pr($servicio, "id_usuario_venta");
+        $precio = pr($servicio, "precio");
+        $comision = pr($servicio, 'comision');
 
         $resumen_compra = $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
+
         $costo_envio_cliente = 0;
         $costo_envio_vendedor = 0;
-        $es_servicio = ($tipo_entrega < 5) ? 0 : $servicio["flag_servicio"];
-        if ($servicio["flag_servicio"] > 0) {
-            $es_servicio = 1;
-        }
+        $es_servicio = ($tipo_entrega < 5) ? 0 : pr($servicio, "flag_servicio");
+        $es_servicio = (pr($servicio, "flag_servicio") > 0) ? 1 : $es_servicio;
+
 
         $monto_a_pagar = $precio;
         if ($es_servicio < 1 && $tipo_entrega > 1) {
@@ -889,7 +895,6 @@ class Recibo_model extends CI_Model
             "comision_venta"
         ];
 
-
         $array_values =
             [
                 $id_forma_pago,
@@ -922,7 +927,7 @@ class Recibo_model extends CI_Model
                 array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
                 break;
 
-            case (2 && $servicio["flag_servicio"] > 0):
+            case (2 && pr($servicio, "flag_servicio") > 0):
 
                 array_push($array_keys, "fecha_servicio");
                 array_push($array_values, "'" . $data_usuario["fecha_servicio"] . "'");
@@ -934,15 +939,13 @@ class Recibo_model extends CI_Model
 
         }
 
-
         $query_insert = "INSERT INTO 
                         proyecto_persona_forma_pago(" . get_keys($array_keys) . ") 
                         VALUES(" . get_keys($array_values) . ")";
 
 
         $this->db->query($query_insert);
-        $id_recibo = $this->db->insert_id();
-        return $id_recibo;
+        return $this->db->insert_id();
 
 
     }
@@ -971,40 +974,45 @@ class Recibo_model extends CI_Model
             3 => " 1 = 1 ",
             4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
+            20 => 'id_usuario = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
 
         $ids = get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
         $query_get = "SELECT 
-						id_servicio, 
-						id_usuario,
-						id_proyecto_persona_forma_pago	 id_recibo,
-						(monto_a_pagar * num_ciclos_contratados) total,
-						fecha_contra_entrega,
-						tipo_entrega,
-						contra_entrega_domicilio,
-						id_usuario_entrega,
-						ubicacion,
-						id_usuario_referencia,
-						id_usuario_venta										 
-						FROM  proyecto_persona_forma_pago 
+						p.id_servicio, 
+						p.id_usuario,
+						p.id_proyecto_persona_forma_pago id_recibo,
+						(p.monto_a_pagar * p.num_ciclos_contratados) total,
+						p.fecha_contra_entrega,
+						p.tipo_entrega,
+						p.contra_entrega_domicilio,
+						p.id_usuario_entrega,
+						p.ubicacion,
+						p.id_usuario_referencia,
+						p.id_usuario_venta,
+                        po.id_orden_compra
+						FROM  
+						     proyecto_persona_forma_pago p
+                        INNER JOIN  
+						         producto_orden_compra po 
+                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
 						WHERE  
-						saldo_cubierto < 1  
+						p.saldo_cubierto < 1  
 						AND " . $extra_usuario . " 						  
-						AND  se_cancela = 0
-						AND  status NOT IN(10,19)  
+						AND  p.se_cancela = 0
+						AND  p.status NOT IN(10,19)  
 						AND 						
 						(
-						DATE(fecha_contra_entrega) <=  DATE(CURRENT_DATE())
+						DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())
 						OR
-						DATE(fecha_vencimiento) <=  DATE(CURRENT_DATE())
+						DATE(p.fecha_vencimiento) <=  DATE(CURRENT_DATE())
 						OR
-						DATE(fecha_entrega) <=  DATE(CURRENT_DATE())						
+						DATE(p.fecha_entrega) <=  DATE(CURRENT_DATE())						
 						)   
-						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
-						AND id_servicio IN (select id_servicio from servicio where id_usuario in ($ids));
-						";
+						AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+						AND p.id_servicio IN (select id_servicio from servicio where id_usuario in ($ids))";
         return $this->db->query($query_get)->result_array();
     }
 

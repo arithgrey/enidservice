@@ -66,6 +66,7 @@ class usuario_model extends CI_Model
         return $this->get(["idusuario"], ["email" => 'ventas@enidservices.com']);
     }
 
+
     function get_miembro($param)
     {
 
@@ -101,6 +102,19 @@ class usuario_model extends CI_Model
 
         $result = $this->db->query($query_get);
         return $result->result_array();
+    }
+
+
+    function cancelacion_compra($id_usuario)
+    {
+
+        $query_update = "UPDATE usuario 
+                        SET num_cancelaciones = num_cancelaciones + 1 
+                        WHERE idusuario = $id_usuario 
+                        LIMIT 1";
+
+        return $this->db->query($query_update);
+
     }
 
     function registros($param)
