@@ -10,6 +10,13 @@
 
 namespace setasign\Fpdi\PdfParser\Filter;
 
+use function current;
+use function pack;
+use function preg_replace;
+use function rtrim;
+use function strlen;
+use function unpack;
+
 /**
  * Class for handling ASCII hexadecimal encoded data
  *
@@ -25,12 +32,12 @@ class AsciiHex implements FilterInterface
 	 */
 	public function decode($data)
 	{
-		$data = \preg_replace('/[^0-9A-Fa-f]/', '', \rtrim($data, '>'));
-		if ((\strlen($data) % 2) === 1) {
+		$data = preg_replace('/[^0-9A-Fa-f]/', '', rtrim($data, '>'));
+		if ((strlen($data) % 2) === 1) {
 			$data .= '0';
 		}
 
-		return \pack('H*', $data);
+		return pack('H*', $data);
 	}
 
 	/**
@@ -42,8 +49,8 @@ class AsciiHex implements FilterInterface
 	 */
 	public function encode($data, $leaveEOD = false)
 	{
-		$t = \unpack('H*', $data);
-		return \current($t)
+		$t = unpack('H*', $data);
+		return current($t)
 			. ($leaveEOD ? '' : '>');
 	}
 }

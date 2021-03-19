@@ -18,9 +18,11 @@ if (!function_exists('invierte_date_time')) {
     function render_procesar($data)
     {
 
-
         $servicio = $data["servicio"];
         $inf_ext = $data["info_solicitud_extra"];
+        $es_carro_compras = $inf_ext["es_carro_compras"];
+        $producto_carro_compra = $inf_ext["producto_carro_compra"];
+
         $costo_envio = $data["costo_envio"];
         $is_mobile = $data["is_mobile"];
         $q2 = $data["q2"];
@@ -31,16 +33,17 @@ if (!function_exists('invierte_date_time')) {
         $producto = desglose_servicio($servicio, $inf_ext);
         $precio = pr($servicio, "precio");
         $monto_total = floatval($precio) * floatval($inf_ext["num_ciclos"]);
-        $costo_envio_cliente =
-            (pr($servicio, "flag_servicio") < 1) ?
-                $costo_envio["costo_envio_cliente"] : 0;
-
+        $flag_servicio = pr($servicio, "flag_servicio");
+        $costo_envio_cliente = ($flag_servicio < 1 && !$es_carro_compras) ? $costo_envio["costo_envio_cliente"] : 0;
 
         $ext = $inf_ext;
+        $ext["q2"] = $q2;
         $talla = (array_key_exists("talla", $inf_ext)) ? $inf_ext["talla"] : 0;
 
         $r[] = place("info_articulo", ["id" => 'info_articulo']);
         $total_con_costo_envio = ($monto_total + $costo_envio_cliente);
+
+
         $z[] = format_resumen(
             $producto["resumen_producto"],
             $producto["resumen_servicio_info"],
@@ -59,16 +62,15 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
         $z[] = frm_miembro_enid_service_hidden(
             $q2,
             $ext["id_servicio"],
             $ext["num_ciclos"],
             $ext["ciclo_facturacion"],
             $talla,
-            $data["carro_compras"],
-            $data["id_carro_compras"],
-            $es_cliente
+            $es_cliente,
+            $es_carro_compras,
+            $producto_carro_compra
         );
         $z[] = frm_primer_registro($in_session, $ext, $es_cliente);
         $z[] = hiddens(
@@ -97,14 +99,16 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_primer_registro($in_session, $info_ext, $es_cliente)
+    function frm_primer_registro($in_session, $param, $es_cliente)
     {
+
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
 
+            $producto_carro_compra = $param["producto_carro_compra"];
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
-            $r[] = d(_titulo($titulo),'mb-5');
+            $r[] = d(_titulo($titulo), 'mb-5');
             $z[] = input_frm(
                 "col-lg-6 mt-5", "NOMBRE",
                 [
@@ -133,9 +137,24 @@ if (!function_exists('invierte_date_time')) {
                 ], _text_telefono
             );
 
-            if (!$in_session){
+            $inputs = [];
 
-                $z[] = d('Crea una cuenta para realizar tu compra','mt-5 text-uppercase black text- col-sm-12 h4');
+            for ($a = 0; $a < count($producto_carro_compra); $a++) {
+
+                $inputs[] = hiddens(
+                    [
+                        "name" => "producto_carro_compra[]",
+                        "value" => $producto_carro_compra[$a],
+                        "class" => "producto_carro_compra"
+                    ]
+                );
+
+            }
+
+            $z[] = append($inputs);
+            if (!$in_session) {
+
+                $z[] = d('Crea una cuenta para realizar tu compra', 'mt-5 text-uppercase black text- col-sm-12 h4');
             }
 
 
@@ -159,11 +178,10 @@ if (!function_exists('invierte_date_time')) {
                 $config_email, _text_correo
             );
 
-
             $config_password =
                 [
                     "id" => "password_registro",
-                    "class" => " input-sm password",
+                    "class" => "input-sm password",
                     "type" => "password",
                     "required" => "true",
                     "placeholder" => "***",
@@ -175,13 +193,10 @@ if (!function_exists('invierte_date_time')) {
                 $config_password, _text_pass);
 
 
-
-
-
             $r[] = d($z, 13);
             $r[] = d("", 9);
             $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid'], 0), "col-lg-3 mt-5 p-0 mb-5");
-            $r[] = text_acceder_cuenta($info_ext, $es_cliente);
+            $r[] = text_acceder_cuenta($param, $es_cliente);
             $r[] = form_close();
 
         }
@@ -463,15 +478,37 @@ if (!function_exists('invierte_date_time')) {
         $num_ciclos,
         $ciclo_facturacion,
         $talla,
-        $carro_compras,
-        $id_carro_compras,
-        $es_cliente
-    )
+        $es_cliente,
+        $es_carro_compras,
+        $producto_carro_compra)
     {
 
 
+        $inputs = [];
+
+        for ($a = 0; $a < count($producto_carro_compra); $a++) {
+
+            $inputs[] = hiddens(
+                [
+                    "name" => "producto_carro_compra[]",
+                    "value" => $producto_carro_compra[$a],
+                    "class" => "producto_carro_compra"
+                ]
+            );
+
+        }
+
         return append(
             [
+                append($inputs)
+                ,
+                hiddens(
+                    [
+                        "name" => "es_carro_compras",
+                        "value" => $es_carro_compras,
+                        "class" => "es_carro_compras"
+                    ]
+                ),
 
                 hiddens(
                     [
@@ -513,20 +550,6 @@ if (!function_exists('invierte_date_time')) {
                         "name" => "talla",
                         "class" => "talla",
                         "value" => $talla,
-                    ]
-                ),
-                hiddens(
-                    [
-                        "name" => "carro_compras",
-                        "class" => "carro_compras",
-                        "value" => $carro_compras,
-                    ]
-                ),
-                hiddens(
-                    [
-                        "name" => "id_carro_compras",
-                        "class" => "id_carro_compras",
-                        "value" => $id_carro_compras,
                     ]
                 ),
                 hiddens(
@@ -588,7 +611,6 @@ if (!function_exists('invierte_date_time')) {
     function desglose_servicio($servicio, $inf_ext)
     {
 
-
         $duracion = $inf_ext["num_ciclos"];
         $nombre_servicio = pr($servicio, "nombre_servicio");
         $id_ciclo_facturacion = pr($servicio, "id_ciclo_facturacion");
@@ -608,8 +630,6 @@ if (!function_exists('invierte_date_time')) {
         ];
 
     }
-
-
     function text_acceder_cuenta($param, $es_cliente)
     {
 
@@ -619,12 +639,10 @@ if (!function_exists('invierte_date_time')) {
             $ext =
                 [
                     "id_servicio" => $param["is_servicio"],
-                    "extension_dominio" => "",
                     "ciclo_facturacion" => $param["ciclo_facturacion"],
-                    "is_servicio" => $param["is_servicio"],
                     "q2" => $param["q2"],
-                    "num_ciclos" => $param["num_ciclos"],
-                    "class" => "text-right link_acceso cursor_pointer  strong link_acceso cursor_pointer text_total  text-uppercase letter-spacing-5   mb-5 ",
+                    "class" => "text-right link_acceso cursor_pointer
+                      strong link_acceso cursor_pointer text_total text-uppercase letter-spacing-5 mb-5 ",
                 ];
 
 

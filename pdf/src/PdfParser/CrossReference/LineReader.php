@@ -12,6 +12,17 @@ namespace setasign\Fpdi\PdfParser\CrossReference;
 
 use setasign\Fpdi\PdfParser\PdfParser;
 use setasign\Fpdi\PdfParser\StreamReader;
+use function array_count_values;
+use function count;
+use function explode;
+use function implode;
+use function max;
+use function preg_match_all;
+use function preg_split;
+use function sprintf;
+use function strpos;
+use function substr;
+use function trim;
 
 /**
  * Class LineReader
@@ -78,7 +89,7 @@ class LineReader extends AbstractReader implements ReaderInterface
 		$reader->reset(null, $bytesPerCycle);
 
 		while (
-			($trailerPos = \strpos($reader->getBuffer(false), 'trailer', \max($bytesPerCycle * $cycles++, 0))) === false
+			($trailerPos = strpos($reader->getBuffer(false), 'trailer', max($bytesPerCycle * $cycles++, 0))) === false
 		) {
 			if (false === $reader->increaseLength($bytesPerCycle)) {
 				break;
@@ -92,7 +103,7 @@ class LineReader extends AbstractReader implements ReaderInterface
 			);
 		}
 
-		$xrefContent = \substr($reader->getBuffer(false), 0, $trailerPos);
+		$xrefContent = substr($reader->getBuffer(false), 0, $trailerPos);
 		$reader->reset($reader->getPosition() + $trailerPos);
 
 		return $xrefContent;
@@ -107,9 +118,9 @@ class LineReader extends AbstractReader implements ReaderInterface
 	protected function read($xrefContent)
 	{
 		// get eol markers in the first 100 bytes
-		\preg_match_all("/(\r\n|\n|\r)/", \substr($xrefContent, 0, 100), $m);
+		preg_match_all("/(\r\n|\n|\r)/", substr($xrefContent, 0, 100), $m);
 
-		if (\count($m[0]) === 0) {
+		if (count($m[0]) === 0) {
 			throw new CrossReferenceException(
 				'No data found in cross-reference.',
 				CrossReferenceException::INVALID_DATA
@@ -119,15 +130,15 @@ class LineReader extends AbstractReader implements ReaderInterface
 		// count(array_count_values()) is faster then count(array_unique())
 		// @see https://github.com/symfony/symfony/pull/23731
 		// can be reverted for php7.2
-		$differentLineEndings = \count(\array_count_values($m[0]));
+		$differentLineEndings = count(array_count_values($m[0]));
 		if ($differentLineEndings > 1) {
-			$lines = \preg_split("/(\r\n|\n|\r)/", $xrefContent, -1, PREG_SPLIT_NO_EMPTY);
+			$lines = preg_split("/(\r\n|\n|\r)/", $xrefContent, -1, PREG_SPLIT_NO_EMPTY);
 		} else {
-			$lines = \explode($m[0][0], $xrefContent);
+			$lines = explode($m[0][0], $xrefContent);
 		}
 
 		unset($differentLineEndings, $m);
-		$linesCount = \count($lines);
+		$linesCount = count($lines);
 		$start = null;
 		$entryCount = 0;
 
@@ -135,11 +146,11 @@ class LineReader extends AbstractReader implements ReaderInterface
 
 		/** @noinspection ForeachInvariantsInspection */
 		for ($i = 0; $i < $linesCount; $i++) {
-			$line = \trim($lines[$i]);
+			$line = trim($lines[$i]);
 			if ($line) {
-				$pieces = \explode(' ', $line);
+				$pieces = explode(' ', $line);
 
-				$c = \count($pieces);
+				$c = count($pieces);
 				switch ($c) {
 					case 2:
 						$start = (int)$pieces[0];
@@ -161,7 +172,7 @@ class LineReader extends AbstractReader implements ReaderInterface
 
 					default:
 						throw new CrossReferenceException(
-							\sprintf('Unexpected data in xref table (%s)', \implode(' ', $pieces)),
+							sprintf('Unexpected data in xref table (%s)', implode(' ', $pieces)),
 							CrossReferenceException::INVALID_DATA
 						);
 				}

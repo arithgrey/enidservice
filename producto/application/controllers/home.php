@@ -86,8 +86,8 @@ class Home extends CI_Controller
             "q2" => $param["q2"],
             "num_ciclos" => $param["num_ciclos"],
             "orden_pedido" => 1,
-            "carro_compras" => prm_def($data, "carro_compras"),
-            "id_carro_compras" => prm_def($data, "id_carro_compras"),
+            "carro_compras" => prm_def($param, "carro_compras"),
+            "id_carro_compras" => prm_def($param, "id_carro_compras"),
             "url_imagen_servicio" => $path_servicio
 
         ];
@@ -123,7 +123,6 @@ class Home extends CI_Controller
 
     private function vista($param, $data)
     {
-
 
         $id_servicio = $this->get_option("id_servicio");
         $data["q2"] = prm_def($param, "q2");
@@ -230,8 +229,6 @@ class Home extends CI_Controller
         $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
         $fecha_disponible = pr($servicio, 'fecha_disponible');
         $fecha_disponible_stock = new DateTime($fecha_disponible);
-        $es_posible_punto_encuentro = pr($servicio, 'es_posible_punto_encuentro');
-
 
         $fecha = horario_enid();
         $hoy = $fecha->format('H:i:s');
@@ -246,13 +243,11 @@ class Home extends CI_Controller
             format_fecha($fecha_disponible),
             'Pero ... no te preocupes puedes agendar ya mismo tu entrega'
         ), 'bg-warning strong p-1');
+
+
         $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
+        $response[] = d(_titulo($str, 5), 'mt-5 text-center');
 
-
-        $response[] = d($str, "text-uppercase mt-5 ");
-        $solo_metro = pr($servicio, 'solo_metro');
-        $opciones_compra = ($es_posible_punto_encuentro > 0 && $solo_metro < 1) ? 'Tienes una de dos' : '';
-        $response[] = d(_titulo($opciones_compra, 4), 'mt-5 text-center');
         return append($response);
     }
 

@@ -14,6 +14,54 @@ class usuario_deseo extends REST_Controller
 
     }
 
+    function envio_pago_PUT()
+    {
+
+        $param = $this->put();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_model->envio_pago($ids);
+        $this->response($response);
+    }
+
+    function envio_pago_GET()
+    {
+
+        $param = $this->get();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_model->por_pago($ids);
+        $this->response($response);
+    }
+
+    function cantidad_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,cantidad")) {
+
+
+            $in_session = $this->app->session()["in_session"];
+            if ($in_session > 0) {
+
+                $response = $this->usuario_deseo_model->q_up("articulos", $param["cantidad"], $param["id"]);
+
+            } else {
+
+                $response = $this->cantidad_usuario_deseo($param);
+            }
+
+
+        }
+        $this->response($response);
+    }
+
+    private function cantidad_usuario_deseo($param)
+    {
+
+        return $this->app->api("usuario_deseo_compra/cantidad", $param, "json", "PUT");
+
+    }
+
     function deseos_GET()
     {
         $param = $this->get();
@@ -78,6 +126,22 @@ class usuario_deseo extends REST_Controller
     }
 
     function servicio_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "servicio") > 0 && $this->id_usuario > 0) {
+
+            $params = [
+                "id_usuario" => $this->id_usuario,
+                "id_servicio" => $param["servicio"]
+            ];
+            $response = $this->usuario_deseo_model->insert($params);
+        }
+        $this->response($response);
+    }
+
+    function status_POST()
     {
 
         $param = $this->post();
@@ -164,6 +228,7 @@ class usuario_deseo extends REST_Controller
         $this->response($response);
     }
 
+
     private function agrega_interes_usuario($q)
     {
 
@@ -176,11 +241,4 @@ class usuario_deseo extends REST_Controller
         return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
 
     }
-
-    /*
-    function add_lista_deseos($q){
-        $api    =  "usuario_deseo/add_lista_deseos/format/json/";
-        return $this->app->api( $api , $q , "json" , "PUT");
-    }
-    */
 }

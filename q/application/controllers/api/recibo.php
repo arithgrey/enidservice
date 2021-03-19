@@ -717,20 +717,37 @@ class recibo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "id_usuario,id_ciclo_facturacion,talla")) {
+        if (fx($param, "id_usuario,id_ciclo_facturacion,talla,orden_compra")) {
 
             $id = $this->recibo_model->crea_orden_de_compra($param);
-            $response = $this->recibo($id);
+            $id_orden_compra = $param["orden_compra"];
+            $response = $this->recibo($id, $id_orden_compra);
 
         }
         $this->response($response);
     }
 
-    private function recibo($id)
+    private function recibo($id_producto, $id_orden_compra)
     {
 
-        $q = ["id" => $id];
-        return $this->app->api("orden_compra/index", $q, "json", "POST");
+        if ($id_orden_compra < 1) {
+
+            $q = ["id" => $id_producto];
+            $id_orden_compra_generada = $this->app->api("orden_compra/index", $q, "json", "POST");
+
+        } else {
+
+            $q = [
+                "id_producto" => $id_producto,
+                "id_orden_compra" => $id_orden_compra
+            ];
+            $id_orden_compra_generada = $id_orden_compra;
+            $response = $this->app->api("producto_orden_compra/index", $q, "json", "POST");
+
+        }
+
+        return $id_orden_compra_generada;
+
     }
 
     function precio_servicio_GET()
@@ -984,7 +1001,7 @@ class recibo extends REST_Controller
         if ($id_orden_compra > 0) {
 
             $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
-
+            $deuda = total_pago_pendiente($productos_orden_compra);
             $dc = [
                 "url_request" => get_url_request(""),
                 "recibo" => $productos_orden_compra,
@@ -994,28 +1011,16 @@ class recibo extends REST_Controller
                 "productos_orden_compra" => $productos_orden_compra
             ];
 
-            /*Este método debe ser para la orden de compra total no por un item*/
-            $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
-            $monto_a_pagar = pr($productos_orden_compra, "monto_a_pagar");
+
+            $saldo_cubierto = $deuda["monto_pagado"];
+            $monto_a_pagar = $deuda["subtotal"];
             $flag_servicio = pr($productos_orden_compra, "flag_servicio");
-            $id_usuario_venta = pr($productos_orden_compra, "id_usuario_venta");
+            $id_usuario_venta = $deuda["id_usuario_venta"];
             if (($monto_a_pagar > $saldo_cubierto) || $flag_servicio > 0) {
 
-                if ($flag_servicio > 0) {
-
-                    $dc += [
-                        "usuario_venta" => $this->app->usuario($id_usuario_venta),
-                        "modalidad" => 1,
-                        "id_usuario_venta" => $id_usuario_venta
-                    ];
-
-                    $response = notificacion_cotizacion($dc);
-
-                } else {
 
                     $response = $this->ticket_pendiente_pago($param, $dc);
 
-                }
 
 
             } else {
@@ -1072,31 +1077,23 @@ class recibo extends REST_Controller
 
         $productos_orden_compra = $data["productos_orden_compra"];
         $data["costo_envio_sistema"] = get_costo_envio($productos_orden_compra);
-        $tipo_entrega = pr($productos_orden_compra, "tipo_entrega");
+        $es_cobranza = prm_def($param, "cobranza");
 
-        if ($tipo_entrega == 1) {
+        if ($es_cobranza > 0) {
 
-            return $this->ticket_pendiente_pago_contra_entrega($param, $productos_orden_compra, $data);
+            $data = $this->get_data_saldo($param, $productos_orden_compra, $data);
+            $data["es_punto_encuentro"] = 0;
+
+            $response = $this->pagar($data);
+
 
         } else {
 
-            $es_cobranza = prm_def($param, "cobranza");
-            if ($es_cobranza > 0) {
-
-                $data = $this->get_data_saldo($param, $productos_orden_compra, $data);
-                $data["es_punto_encuentro"] = 0;
-
-                $response = $this->pagar($data);
-
-
-            } else {
-
-                $usuario = $this->app->usuario($productos_orden_compra["id_usuario"]);
-                $response = $this->get_mensaje_no_aplica(
-                    $productos_orden_compra, get_costo_envio($productos_orden_compra), $usuario, $data);
-            }
-
+            $usuario = $this->app->usuario($productos_orden_compra["id_usuario"]);
+            $response = $this->get_mensaje_no_aplica(
+                $productos_orden_compra, get_costo_envio($productos_orden_compra), $usuario, $data);
         }
+
 
         return $response;
 
@@ -1179,7 +1176,7 @@ class recibo extends REST_Controller
     {
 
         $q["id_recibo"] = $id_recibo;
-        $end_poinyt= "proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/";
+        $end_poinyt = "proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo/format/json/";
         $ppfppe = $this->app->api($end_poinyt,
             $q);
 
@@ -1192,19 +1189,17 @@ class recibo extends REST_Controller
 
         $response = [];
         $productos_orden_compra = $data["productos_orden_compra"];
-
-
         $id_orden_compra = $data["id_orden_compra"];
         $tipos_entrega = $data["tipos_entregas"];
         $url_request = $data["url_request"];
 
-        /*Reparar*/
-        $monto_a_pagar = pr($productos_orden_compra, "monto_a_pagar");
+
+        $deuda = total_pago_pendiente($productos_orden_compra);
+        $monto_a_pagar = $deuda["subtotal"];
         $id_usuario_venta = pr($productos_orden_compra, "id_usuario_venta");
-        $resumen_pedido = pr($productos_orden_compra, "resumen_pedido");
+
 
         $checkout = format_concepto(
-            $resumen_pedido,
             $monto_a_pagar,
             $productos_orden_compra,
             $tipos_entrega
@@ -1360,9 +1355,10 @@ class recibo extends REST_Controller
             "p.id_usuario_entrega",
             "p.id_usuario",
             "p.intento_reventa",
-            'p.intento_recuperacion'
-
+            'p.intento_recuperacion',
+            "po.id_orden_compra"
         ];
+
         $params_busqueda_recibo = [
             "id_proyecto_persona_forma_pago recibo",
             "saldo_cubierto",
@@ -1394,7 +1390,6 @@ class recibo extends REST_Controller
 
     private function busqueda_pedidos($param)
     {
-        $response = [];
         $ids = prm_def($param, 'ids');
         if ($param["recibo"] > 0) {
             /*Busqueda por número recibo*/
@@ -2262,11 +2257,9 @@ class recibo extends REST_Controller
         if (fx($param, "id_empresa")) {
 
             $id_empresa = $param['id_empresa'];
-
             $data = $this->app->session();
             $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
             $ids_usuarios = array_column($usuarios, 'idusuario');
-
 
             $response = $this->recibo_model->comisiones_por_pago($id_empresa, $ids_usuarios);
             $response = $this->agrega_usuario_compra($response);

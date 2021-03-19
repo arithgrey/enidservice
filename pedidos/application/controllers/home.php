@@ -550,18 +550,9 @@ class Home extends CI_Controller
     private function carga_detalle_pedido($param, $data)
     {
 
-        $id_perfil = $data['id_perfil'];
         $id_orden_compra = $param["recibo"];
-
         $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
-        $productos_orden_compra = $this->imagenes_recibos($productos_orden_compra);
-
-//        $id_usuario_venta = pr($recibo, 'id_usuario_venta');
-//        $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
-
-//        propietario($data,
-//            $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
-//            path_enid('_area_cliente'));
+//        $productos_orden_compra = $this->imagenes_recibos($productos_orden_compra);
 
         if (es_data($productos_orden_compra) > 0) {
 

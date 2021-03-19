@@ -1,6 +1,9 @@
 "use strict";
 let $num_ciclos = $('#num_ciclos');
+let $se_agrego = $('.se_agrego');
+let $se_agregara = $('.se_agregara');
 let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
+
 $(document).ready(function () {
 
     oculta_acceder();
@@ -116,23 +119,22 @@ let ordenar_valoraciones = function (e) {
 };
 let agregar_a_lista_deseos = () => {
 
+    let $numero_articulos = get_valor_selected("#num_ciclos");
+    if ($numero_articulos > 0) {
 
-    let articulos = get_valor_selected("#num_ciclos");
-    if (articulos > 0) {
+        $se_agrego.removeClass('d-none');
+        $se_agregara.addClass('d-none');
 
         let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
-        let data_send = {"id_servicio": get_option("servicio"), "articulos": articulos};
+        let data_send = {"id_servicio": get_option("servicio"), "articulos": $numero_articulos};
         request_enid("PUT", data_send, url, respuesta_add_valoracion);
+
     }
 };
 
 let respuesta_add_valoracion = data => {
 
-
-    $("#agregar_a_lista_deseos_add").empty();
-    render_enid("#agregar_a_lista_deseos_add", "<div class='btn_add_list'>AÑADISTE A TU LISTA DE DESEOS ESTE PRODUCTO! <i class='fa fa-gift'></i></div><br>");
     redirect("../lista_deseos");
-
 
 };
 
@@ -175,18 +177,9 @@ let agregar_deseos = function () {
     let $id_servicio = $(this).attr('id');
 
     if (parseInt($id_servicio) > 0) {
-
+        let $articulos = $num_ciclos.val();
         let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-        let data_send = {"id_servicio": $id_servicio};
-        request_enid("POST", data_send, url, anexar_deseo);
-    }
-}
-let anexar_deseo = function (data) {
-
-    if (parseInt(data) > 0) {
-
-        let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-        let data_send = {"id_servicio": $id_servicio};
-        request_enid("GET", data_send, url, anexar_deseo);
+        let data_send = {"id_servicio": $id_servicio, "articulos": $articulos};
+        request_enid("POST", data_send, url, respuesta_add_valoracion);
     }
 }

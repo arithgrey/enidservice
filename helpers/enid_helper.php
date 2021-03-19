@@ -3107,70 +3107,58 @@ function _d()
 
 }
 
-function ticket_pago(&$recibo, $tipos_entrega, $format = 1)
+function ticket_pago(&$productos_orden_compra, $tipos_entrega, $format = 1)
 {
 
+    $deuda = total_pago_pendiente($productos_orden_compra);
+    $subtotal = $deuda["subtotal"];
+    $tipo_entrega = ($deuda["tipo_entrega"] - 1);
+
+    $format_envio = $deuda["format_envio"];
+    $es_abono = $deuda["es_abono"];
+    $abono_format_text = $deuda["abono_format_text"];
+    $abono_format = $deuda["abono_format"];
+    $saldo_pendiente = $deuda["saldo_pendiente"];
+    $saldo_pendiente_pago_contra_entrega = $deuda["saldo_pendiente_pago_contra_entrega"];
+    $costo_envio_cliente = $deuda["costo_envio_cliente"];
     $response = [];
-    if (es_data($recibo)) {
 
-        foreach ($recibo as $row) {
+    switch ($format) {
 
-            $monto = $row['monto_a_pagar'];
-            $ciclos = $row['num_ciclos_contratados'];
-            $abono = $row['saldo_cubierto'];
-            $costo_envio_cliente = $row['costo_envio_cliente'];
-            $entrega_tipo = $row['tipo_entrega'];
-            $tipo_entrega = ($entrega_tipo - 1);
-            $subtotal = ($monto * $ciclos);
-            $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
-            $abono_format = ($abono > 0) ? _text('- ', money($abono)) : '';
-            $abono_format_text = ($abono > 0) ? 'Abono' : '';
-            $es_abono = ($abono > 0);
-            $saldo_pendiente = ($subtotal - $abono) + $costo_envio_cliente;
-            $saldo_pendiente_pago_contra_entrega = ($subtotal - $abono);
+        case 1:
 
-
-            switch ($format) {
-
-                case 1:
-
-                    $espacio = 'justify-content-between mt-3 ';
-                    $response[] = hr('mb-4 border_big', 0);
-                    $response[] = flex('Subtotal', money($subtotal),
-                        $espacio, 'subtotal_text', 'subtotal_money');
-                    $response[] = flex(
-                        $tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio,
-                        'envio_text', 'envio_money text-uppercase');
-                    if ($es_abono) {
-                        $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
-                    }
-                    $response[] = hr('mt-4 border_big', 0);
-                    $response[] = flex('Total',
-                        money($saldo_pendiente), 'justify-content-between',
-                        'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
-                    $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
-
-                    break;
-                default:
-
-                    break;
-
+            $espacio = 'justify-content-between mt-3 ';
+            $response[] = hr('mb-4 border_big', 0);
+            $response[] = flex('Subtotal', money($subtotal),
+                $espacio, 'subtotal_text', 'subtotal_money');
+            $response[] = flex(
+                $tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio,
+                'envio_text', 'envio_money text-uppercase');
+            if ($es_abono) {
+                $response[] = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
             }
+            $response[] = hr('mt-4 border_big', 0);
+            $response[] = flex('Total',
+                money($saldo_pendiente), 'justify-content-between',
+                'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
+            $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
 
-            return
-                [
-                    'checkout' => d($response, 'checkout_resumen'),
-                    'saldo_pendiente' => $saldo_pendiente,
-                    'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
-                    'tipo_entrega' => $entrega_tipo,
-                    'descuento_entrega' => $costo_envio_cliente
+            break;
+        default:
 
-                ];
-
-        }
-
+            break;
 
     }
+
+    return
+        [
+            'checkout' => d($response, 'checkout_resumen'),
+            'saldo_pendiente' => $saldo_pendiente,
+            'saldo_pendiente_pago_contra_entrega' => $saldo_pendiente_pago_contra_entrega,
+            'tipo_entrega' => $tipo_entrega,
+            'descuento_entrega' => $costo_envio_cliente
+
+        ];
 
 
 }
@@ -3523,20 +3511,19 @@ function texto_status_orden($data, $id_status, $tipo = 0)
 
 }
 
-function es_orden_entregada($data = [])
+function es_orden_entregada($data = [], $restricciones = [])
 {
 
-    $response = false;
-    $productos_orden_compra = $data["productos_orden_compra"];
-    $restricciones = $data['restricciones']['orden_entregada'];
-    if (es_data($productos_orden_compra)) {
+    if (array_key_exists("productos_orden_compra", $data)) {
 
+        $productos_orden_compra = $data["productos_orden_compra"];
+        $restricciones = $data['restricciones']['orden_entregada'];
         $no_entregado = 0;
+
         foreach ($productos_orden_compra as $row) {
 
             $status = $row["status"];
             if (!in_array($status, $restricciones)) {
-
                 $no_entregado++;
             }
         }
@@ -3545,10 +3532,9 @@ function es_orden_entregada($data = [])
 
     } else {
 
-        /*$productos_orden_compra es status*/
-        if ($productos_orden_compra > 0) {
-            $response = in_array($productos_orden_compra, $restricciones);
-        }
+        $restricciones_orden_entregada = ['orden_entregada'];
+        $response = in_array($data["status"], $restricciones_orden_entregada);
+
 
     }
     return $response;
@@ -3577,11 +3563,9 @@ function es_orden_entregada_o_cancelada($productos_orden_compra, $data)
 function es_orden_cancelada($data)
 {
 
-    $response = false;
-    $productos_orden_compra = $data["productos_orden_compra"];
+    if (array_key_exists("productos_orden_compra", $data)) {
 
-    if (es_data($productos_orden_compra)) {
-
+        $productos_orden_compra = $data["productos_orden_compra"];
         $cancelada = 0;
         foreach ($productos_orden_compra as $row) {
 
@@ -3596,23 +3580,16 @@ function es_orden_cancelada($data)
             }
 
         }
-        $response = ($cancelada > 0);
 
+        return ($cancelada > 0);
     } else {
 
-
-        /*Verificar que haga lo que debe con el nuevo cambio*/
-        if (array_key_exists('se_cancela', $data)) {
-
-            $cancela_cliente = prm_def($data, "cancela_cliente");
-            $se_cancela = prm_def($data, "se_cancela");
-            $status = prm_def($data, "status");
-            $response = ($status == 10 || $status == 19 || $cancela_cliente || $se_cancela);
-
-        }
+        $cancela_cliente = prm_def($data, "cancela_cliente");
+        $se_cancela = prm_def($data, "se_cancela");
+        $status = prm_def($data, "status");
+        return ($status == 10 || $status == 19 || $cancela_cliente || $se_cancela);
 
     }
-    return $response;
 
 }
 
@@ -3743,7 +3720,7 @@ function valida_texto_maps($domicilio, $estilos = 1)
 function imagenes_orden_compra($productos_orden_compra)
 {
 
-    $imgs =  array_column($productos_orden_compra,"url_img_servicio");
+    $imgs = array_column($productos_orden_compra, "url_img_servicio");
     $imagenes_orden_compra = "";
     foreach ($imgs as $row) {
 
@@ -3758,4 +3735,92 @@ function imagenes_orden_compra($productos_orden_compra)
     }
     return $imagenes_orden_compra;
 
+}
+
+function select_cantidad_compra($es_servicio, $existencia, $valor_seleccionado = 1, $clase_extra = '', $identificador = 0)
+{
+
+    $config = [
+        "name" => "num_ciclos",
+        "class" => _text_("telefono_info_contacto select_cantidad form-control ", $clase_extra),
+        "id" => "num_ciclos",
+        "identificador" => $identificador
+    ];
+
+    $select[] = "<select " . add_attributes($config) . ">";
+    for ($a = 1; $a < max_compra($es_servicio, $existencia); $a++) {
+
+        if ($a == $valor_seleccionado) {
+            $select[] = "<option selected value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
+
+        } else {
+            $select[] = "<option value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
+        }
+
+    }
+    $select[] = "</select>";
+    return append($select);
+}
+
+function max_compra($es_servicio, $existencia)
+{
+
+    return ($es_servicio == 1) ? 100 : $existencia;
+
+}
+
+function total_pago_pendiente($productos_orden_compra)
+{
+
+    $subtotal = 0;
+    $monto_pagado = 0;
+    $tipo_entrega = 0;
+    $tipo_entrega_por_producto = [];
+    $costo_envio_cliente = 0;
+    $costos_envio_cliente = [];
+    $id_usuario_venta = 0;
+    foreach ($productos_orden_compra as $row) {
+
+        $pagado = $row["saldo_cubierto"];
+        $total = ($row["precio"] * $row["num_ciclos_contratados"]);
+        $subtotal = ($subtotal + $total);
+        $monto_pagado = ($monto_pagado + $pagado);
+        $tipo_entrega = $row["tipo_entrega"];
+        $tipo_entrega_por_producto[] = $tipo_entrega;
+        $costo_envio_cliente = $row["costo_envio_cliente"];
+        $costos_envio_cliente[] = $costo_envio_cliente;
+        $id_usuario_venta = $row["id_usuario_venta"];
+
+    }
+
+    $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
+    $espacio = 'justify-content-between mt-3 ';
+    $abono_format_text = ($subtotal > 0) ? 'Abono' : '';
+    $abono_format = ($monto_pagado > 0) ? _text('- ', money($monto_pagado)) : '';
+    $es_abono = 0;
+    $format_abonado = '';
+    if ($monto_pagado > 0) {
+        $es_abono++;
+        $format_abonado = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
+    }
+
+    $saldo_pendiente = ($subtotal - $monto_pagado) + $costo_envio_cliente;
+
+    return [
+        "subtotal" => $subtotal,
+        "monto_pagado" => $monto_pagado,
+        "tipo_entrega" => $tipo_entrega,
+        "tipo_entrega_por_producto" => $tipo_entrega_por_producto,
+        "format_envio" => $format_envio,
+        "costos_envio_cliente" => $costos_envio_cliente,
+        "costo_envio_cliente" => $costo_envio_cliente,
+        "es_abono" => $es_abono,
+        "abono_format" => $abono_format,
+        "format_abono" => $format_abonado,
+        "abono_format_text" => $abono_format_text,
+        "saldo_pendiente" => $saldo_pendiente,
+        "saldo_pendiente_pago_contra_entrega" => ($subtotal - $monto_pagado),
+        "id_usuario_venta" => $id_usuario_venta
+
+    ];
 }

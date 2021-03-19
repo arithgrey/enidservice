@@ -69,46 +69,115 @@ class Cobranza extends REST_Controller
         return $this->app->api("tickets/servicio_recibo/format/json/", $q);
     }
 
-    function solicitud_proceso_pago_POST()
+    private function productos_deseaos_tipo_cliente($es_cliente, $param)
     {
 
-        $param = $this->post();
-        $id_servicio = $param["id_servicio"];
-        $num_ciclos = $param['num_ciclos'];
-        $precio = $this->get_precio_id_servicio($id_servicio);
-        $es_nuevo = prm_def($param, "usuario_nuevo");
-        $data_orden['orden_creada'] = 0;
+        $producto_carro_compra = $param["producto_carro_compra"];
+        if ($es_cliente) {
 
-        if (es_data($precio)) {
+            $productos_deseados_carro_compra = $this->productos_envio_pago_nuevo_usuario($producto_carro_compra);
 
+        } else {
 
-            $info_existencia = $this->disponibilidad_servicio($id_servicio, $num_ciclos);
+            $productos_deseados_carro_compra = $this->productos_envio_pago_usuario($producto_carro_compra);
 
-            if ($info_existencia["en_existencia"] > 0) {
+        }
+        return $productos_deseados_carro_compra;
 
-                $servicio = $info_existencia["info_servicio"];
-                $orden_compra = $this->orden(
-                    $servicio, $param, $precio, $es_nuevo, $info_existencia);
+    }
 
-                $id_orden_compra = $orden_compra['id_orden_compra'];
+    private function posteriores_compra($id_orden_compra, $orden_compra)
+    {
 
+        $orden_compra['orden_creada'] = 0;
+        if ($id_orden_compra > 0) {
 
-                if ($id_orden_compra > 0) {
-
-                    $data_orden = $orden_compra['data_orden'];
-                    $data_orden['orden_creada'] = 1;
-                    $data_orden["id_orden_compra"] = $id_orden_compra;
-                    $data_orden['asignacion_reparto'] = $this->asigna_reparto($id_orden_compra);
-
-                    $this->posterior_compra(
-                        $data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo);
-                }
-
-            }
+            $orden_compra['orden_creada'] = 1;
+            $orden_compra["id_orden_compra"] = $id_orden_compra;
 
         }
 
-        $this->response($data_orden);
+        return $orden_compra;
+    }
+
+    private function notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente)
+    {
+
+        if ($es_cliente) {
+
+            $ids = array_column(
+                $productos_deseados_carro_compra, "id_usuario_deseo_compra");
+            $this->notifica_productos_envio_pago_nuevo_usuario($ids);
+
+        }
+
+    }
+
+    function solicitud_proceso_pago_POST()
+    {
+        $param = $this->post();
+        $a = 0;
+        $es_cliente = $param["es_cliente"];
+        $productos_deseados_carro_compra = $this->productos_deseaos_tipo_cliente($es_cliente, $param);
+        $id_orden_compra = 0;
+        $response = [];
+
+        foreach ($productos_deseados_carro_compra as $data_servicio) {
+
+            if ($a < 1) {
+
+                $orden_compra = $this->orden($param, $data_servicio);
+                $id_orden_compra = $orden_compra["id_orden_compra"];
+
+            } else {
+
+                $orden_compra = $this->orden($param, $data_servicio, $id_orden_compra);
+                $id_orden_compra = $orden_compra["id_orden_compra"];
+            }
+
+            $response[] = $this->posteriores_compra($id_orden_compra, $orden_compra);
+
+            $a++;
+        }
+
+        $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
+        //$this->posterior_compra($data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo);
+        $this->response($response);
+    }
+
+    private function notifica_productos_envio_pago_nuevo_usuario($ids)
+    {
+
+        $response = false;
+        if (es_data($ids)) {
+
+            $response = $this->app->api(
+                "usuario_deseo_compra/envio_pago",
+                ["ids" => $ids] , "json", "PUT");
+        }
+
+        return $response;
+    }
+
+    private function productos_envio_pago_usuario($producto_carro_compra)
+    {
+
+        $response = [];
+        if (es_data($producto_carro_compra)) {
+
+            $response = $this->app->api("usuario_deseo/envio_pago/format/json/", ["ids" => $producto_carro_compra]);
+        }
+
+        return $response;
+
+    }
+
+    private function productos_envio_pago_nuevo_usuario($producto_carro_compra)
+    {
+        return $this->app->api("usuario_deseo_compra/envio_pago/format/json/",
+            ["ids" => $producto_carro_compra]
+        );
+
     }
 
     private function asigna_reparto($id_orden_compra)
@@ -134,25 +203,21 @@ class Cobranza extends REST_Controller
         return $this->app->api("servicio/info_disponibilidad_servicio/format/json/", $q);
     }
 
-    private function orden($servicio, $param, $precio, $es_nuevo, $info_existencia)
+    private function orden($param, $data_servicio, $orden_compra = 0)
     {
-        $data['es_usuario_nuevo'] = 1;
-        $data["existencia"] = $info_existencia;
-        $data["id_ciclo_facturacion"] = pr($precio, "id_ciclo_facturacion");
-        $data["precio"] = pr($precio, "precio");
-        $data["servicio"] = $servicio;
-        $data["costo_envio"] = $this->costo_envio_tipo_orden($servicio, $param);
-        $data = $this->tipo_usuario($data, $es_nuevo, $param);
-        $data["data_por_usuario"] = $param;
-        $data["talla"] = prm_def($param, "talla");
 
-        $id_orden_compra = $this->genera_orden_compra($data);
+        $servicio[0] = $data_servicio;
+        $es_nuevo = prm_def($param, "usuario_nuevo");
+        $data_servicio['es_usuario_nuevo'] = 1;
+        $data_servicio["costo_envio"] = $this->costo_envio_tipo_orden($servicio, $param);
+        $data_servicio = $this->tipo_usuario($data_servicio, $es_nuevo, $param);
+        $data_servicio["data_por_usuario"] = $param;
+        $data_servicio["talla"] = prm_def($param, "talla");
+        $data_servicio["orden_compra"] = $orden_compra;
+        $id_orden_compra = $this->genera_orden_compra($data_servicio);
+        $data_servicio["id_orden_compra"] = $id_orden_compra;
 
-        return
-            [
-                'data_orden' => $data,
-                'id_orden_compra' => $id_orden_compra,
-            ];
+        return $data_servicio;
     }
 
     function costo_envio_tipo_orden($servicio, $param)
@@ -194,14 +259,9 @@ class Cobranza extends REST_Controller
     private function quita_carro_compras($param)
     {
 
-        if (array_key_exists("carro_compras", $param)
-            &&
-            $param["carro_compras"] > 0
-            &&
-            array_key_exists("id_carro_compras", $param)
-            &&
-            $param["id_carro_compras"] > 0
-        ) {
+        $carro_compras = prm_def($param, "carro_compras");
+        $id_carro_compras = prm_def($param, "id_carro_compras");
+        if ($carro_compras > 0 && $id_carro_compras > 0) {
 
             $q = [
                 "status" => 1,
@@ -439,70 +499,61 @@ class Cobranza extends REST_Controller
     {
 
         $param = $this->post();
-        $prevent = 0;
-        $es_pe = prm_def($param, "punto_encuentro");
-        $esperados = ["num_ciclos", "ciclo_facturacion", "id_servicio"];
-        foreach ($esperados as $row) {
-            if (prm_def($param, $row) === 0) {
-                $prevent++;
-            };
-        }
         $usuario_referencia = $this->usuario_referencia($param);
         if ($usuario_referencia > 0) {
-
             $param['usuario_referencia'] = $usuario_referencia;
         }
-        if ($prevent < 1 || $es_pe) {
 
-            $usuario = $this->crea_usuario($param);
-            if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {
-                $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
-                $param += [
-                    "es_usuario_nuevo" => 1,
-                    "usuario_nuevo" => 1,
-                    "usuario_referencia" => $usuario_referencia,
-                    "id_usuario" => $usuario["id_usuario"],
-                    "usuario_existe" => 0,
-                ];
+        $usuario = $this->crea_usuario($param);
+        if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {
+            $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
+            $param += [
+                "es_usuario_nuevo" => 1,
+                "usuario_nuevo" => 1,
+                "usuario_referencia" => $usuario_referencia,
+                "id_usuario" => $usuario["id_usuario"],
+                "usuario_existe" => 0,
+            ];
 
-                if ($es_pe > 0) {
+            $response = $this->crea_orden($param);
+            $response = $this->has_login($response, $param);
+            $response += $param;
 
-                    $response = $this->crea_orden_punto_entrega($param);
-
-                } else {
-
-                    /*Para ordenes por entrega DHL, FEDEX ETC*/
-                    $response = $this->crea_orden($param);
-
-                }
-
-                if (is_array($response) && $response != false) {
-
-                    $response = $this->has_login($response, $param);
-                }
-
-                $this->response($response);
-            }
-            $this->response($usuario);
-        } else {
-            $this->response(-1);
+            $this->response($response);
         }
+        $this->response($usuario);
+
     }
 
-    private function has_login($response, $param)
+    private function has_login($productos_orden_compra, $param)
     {
 
-        $response["session_creada"] = 0;
-        if ($response['orden_creada'] > 0 && $param['es_cliente'] > 0) {
-            $session = $this->create_session($param);
-            if (es_data($session)) {
-                $response["session_creada"] = 1;
-                $this->app->set_userdata($session);
+        $productos_orden_compra["session_creada"] = 0;
+        if (es_data($productos_orden_compra)) {
+
+            $ordenes_creadas = array_column($productos_orden_compra, 'orden_creada');
+            $ids_ordenes_compra = array_column($productos_orden_compra, 'id_orden_compra');
+            $id_orden_compra = array_unique($ids_ordenes_compra)[0];
+
+            $es_orden_creada = (!in_array(0, $ordenes_creadas));
+
+
+            if ($es_orden_creada && $param['es_cliente'] > 0) {
+                $session = $this->create_session($param);
+                if (es_data($session)) {
+                    $productos_orden_compra["session_creada"] = 1;
+                    $productos_orden_compra["id_orden_compra"] = $id_orden_compra;
+                    $this->app->set_userdata($session);
+
+                }
+            } else {
+
+                $productos_orden_compra["session_creada"] = 1;
+                $productos_orden_compra["id_orden_compra"] = $id_orden_compra;
             }
-        } else {
-            $response["session_creada"] = 1;
         }
-        return $response;
+
+        return $productos_orden_compra;
     }
 
     function crea_usuario($q)
@@ -513,7 +564,6 @@ class Cobranza extends REST_Controller
 
     private function crea_orden_punto_entrega($param)
     {
-
 
         if (!ctype_digit($param["id_servicio"])
             ||
@@ -549,7 +599,6 @@ class Cobranza extends REST_Controller
 
     function create_session($q)
     {
-
 
         $q += [
             "t" => $this->config->item('barer'),

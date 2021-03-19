@@ -3,10 +3,11 @@ if (!function_exists('invierte_date_time')) {
 
     function render_tipo_entrega($data)
     {
+
         $orden_pedido = $data["orden_pedido"];
         $id_servicio = $data["id_servicio"];
 
-        $a = _text_(
+        $seccion_tipo_entrega = _text_(
             h("SELECCIONA TU TIPO DE ENTREGA", 3, 'white')
             ,
             punto_entrega($id_servicio, $orden_pedido)
@@ -14,11 +15,10 @@ if (!function_exists('invierte_date_time')) {
             mensajeria($id_servicio, $orden_pedido)
         );
 
-        $b = pre_pedido(
+        $seccion_entrega = pre_pedido(
             $data["url_imagen_servicio"],
             $orden_pedido,
             $id_servicio,
-            $data["extension_dominio"],
             $data["ciclo_facturacion"],
             $data["is_servicio"],
             $data["q2"],
@@ -28,8 +28,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = flex(
-            $a,
-            $b,
+            $seccion_tipo_entrega,
+            $seccion_entrega,
 
             "d-lg-flex col-lg-8 col-lg-offset-2 mb-5 justify-content-between align-items-center p-md-0"
             ,
@@ -260,7 +260,7 @@ if (!function_exists('invierte_date_time')) {
             $comision = pr($servicio, 'comision');
             $text_comisionn = strong(money($comision), 'white f14');
             $text = _text_('gana', $text_comisionn, 'al verderlo!');
-            $class = 'aviso_comision mb-2 white text-uppercase border shadow text-right p-2';
+            $class = 'aviso_comision mb-2 white text-uppercase border shadow text-right p-2 mb-5';
             $response[] = d($text, $class);
         }
         return append($response);
@@ -270,23 +270,10 @@ if (!function_exists('invierte_date_time')) {
     function get_frm($data, $id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
     {
 
-        $inf_servicio = $data["info_servicio"];
-        $servicio = $inf_servicio["servicio"];
+
         $response = [];
-        $es_posible_punto_encuentro = (pr($servicio, 'es_posible_punto_encuentro') > 0);
-        $solo_metro = pr($servicio, 'solo_metro');
-
-
-        $r[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
-        $r[] = form_hidden([
-            "id_servicio" => $id_servicio,
-            "extension_dominio" => "",
-            "ciclo_facturacion" => "",
-            "is_servicio" => $es_servicio,
-            "q2" => $q2
-        ]);
+        $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
-
         $r[] = ganancia_comisionista($data);
         $r[] = flex(
             _titulo("PIEZAS", $tipo),
@@ -294,63 +281,7 @@ if (!function_exists('invierte_date_time')) {
             , _between
         );
         $r[] = $tiempo_entrega;
-
-        if ($solo_metro < 1) {
-            $r[] = btn("Envio a domicilio", ["class" => "text-left mt-5 text-uppercase"]);
-        }
-
-
-        if ($es_posible_punto_encuentro && $solo_metro < 1) {
-            $r[] = d('ó', 'text-center mt-1 mb-1 ');
-        }
-
-
-        $path = _text("../puntos_medios/?producto=", $id_servicio);
-
-        $r[] = form_hidden([
-            "id_servicio" => $id_servicio,
-            "extension_dominio" => "",
-            "ciclo_facturacion" => "",
-            "is_servicio" => $es_servicio,
-            "q2" => $q2
-        ]);
-        $r[] = hiddens([
-            "class" => "servicio",
-            "name" => "servicio",
-            "value" => $id_servicio
-        ]);
-
-        $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
-        $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
-        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => '']);
-        $r[] = form_close();
-
-        if ($es_posible_punto_encuentro) {
-            $r[] = '<form class="form_pre_puntos_medios" action="' . $path . '" method="POST">';
-            $r[] = hiddens([
-                "class" => "servicio",
-                "name" => "servicio",
-                "value" => $id_servicio
-            ]);
-            $r[] = hiddens([
-                "class" => "id_servicio",
-                "name" => "id_servicio",
-                "value" => $id_servicio
-            ]);
-
-            $r[] = hiddens([
-                "class" => "num_ciclos",
-                "name" => "num_ciclos",
-                "value" => 1
-            ]);
-
-            $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 0]);
-            $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => 0]);
-            $r[] = btn("Punto de encuentro", ['class' => 'mt-2']);
-
-            $r[] = form_close();
-
-        }
+        $r[] = agregar_lista_deseos($en_session, $id_servicio);
         $response[] = d($r, "contenedor_form");
         return append($response);
 
@@ -369,12 +300,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function max_compra($es_servicio, $existencia)
-    {
-
-        return ($es_servicio == 1) ? 100 : $existencia;
-
-    }
 
     function url_post($id_servicio)
     {
@@ -385,7 +310,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         if (es_data($servicio)) {
-
 
 
             $servicio = $servicio[0];
@@ -402,25 +326,6 @@ if (!function_exists('invierte_date_time')) {
             return strip_tags(implode(",", $array));
         }
 
-    }
-
-
-    function select_cantidad_compra($es_servicio, $existencia)
-    {
-
-        $config = [
-            "name" => "num_ciclos",
-            "class" => "telefono_info_contacto select_cantidad form-control ",
-            "id" => "num_ciclos"
-        ];
-
-        $select[] = "<select " . add_attributes($config) . ">";
-        for ($a = 1; $a < max_compra($es_servicio, $existencia); $a++) {
-
-            $select[] = "<option value=" . $a . ">" . $a . "</option>";
-        }
-        $select[] = "</select>";
-        return append($select);
     }
 
 
@@ -487,8 +392,8 @@ if (!function_exists('invierte_date_time')) {
 
         $contenido_descripcion = append($z);
 
-        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session, $id_servicio);
-        $imagen = flex_md($i["img"], $agregar_lista_deseos, 'flex-column');
+//        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session, $id_servicio);
+        $imagen = $i["img"];
         $r[] = flex(
             $contenido_descripcion,
             $imagen,
@@ -754,17 +659,31 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function agregar_lista_deseos($proceso_compra, $in_session, $id_servicio)
+    function agregar_lista_deseos($in_session, $id_servicio)
     {
 
 
-        if ($proceso_compra == 0) {
+        if ($in_session > 0) {
 
-            $response = a_enid(
+            $response[] = d(format_link(
+                d("Agrégalo al Carrito",'border'),
+                [
+                    "id" => 'agregar_a_lista_deseos_add',
+                    "class" => "agregar_a_lista_deseos l_deseos"
+                ]
+            ),'se_agregara');
+
+
+            $response[] = d(format_link('Se agregó!',[],0),'se_agrego d-none');
+
+
+        } else {
+
+            $response[] = format_link(
 
                 d(
-                    text_icon("fa fa-long-arrow-right ", "Lo deseo ", [], 0)
-                    , 'agregar_a_lista text-uppercase black strong mt-3 border l_deseos p-1 border-dark p-2'
+                    "Lo deseo "
+                    , 'agregar_a_lista border l_deseos'
                 ),
                 [
                     'class' => 'agregar_deseos_sin_antecedente',
@@ -772,20 +691,11 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
-
-            if ($in_session > 0) {
-                $response =
-                    d(
-                        text_icon("fa fa-long-arrow-right", "Lo deseo", [], 0),
-                        [
-                            "id" => 'agregar_a_lista_deseos_add',
-                            "class" => "cursor_pointer border agregar_a_lista_deseos l_deseos p-1 border-dark mt-3 text-uppercase strong border_bottom_big p-2 black"
-                        ]
-                    );
-            }
-            return $response;
-
         }
+
+        return append($response);
+
+
     }
 
     function nombre_vendedor($proceso_compra, $usuario, $id_vendedor)
@@ -811,7 +721,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function pre_pedido($url_imagen_servicio, $orden_pedido,
-                        $id_servicio, $extension_dominio,
+                        $id_servicio,
                         $ciclo_facturacion, $is_servicio,
                         $q2, $num_ciclos,
                         $carro_compras, $id_carro_compras)
@@ -828,7 +738,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
 
                 );
-            $r[] = frm_pre_pedido($id_servicio, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras);
+            $r[] = frm_pre_pedido($id_servicio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras);
             $r[] = frm_pre_contact($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras);
             $r[] = form_pre_puntos_medios($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras);
 
@@ -838,12 +748,12 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_pre_pedido($id_servicio, $extension_dominio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras)
+    function frm_pre_pedido($id_servicio, $ciclo_facturacion, $is_servicio, $q2, $num_ciclos, $carro_compras, $id_carro_compras)
     {
 
         $r[] = '<form class="form_pre_pedido d-none" action="../procesar/?w=1" method="POST">';
         $r[] = hiddens(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
-        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => $extension_dominio]);
+        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => ""]);
         $r[] = hiddens(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $ciclo_facturacion]);
         $r[] = hiddens(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
         $r[] = hiddens(["class" => "q2", "name" => "q2", "value" => $q2]);
@@ -871,7 +781,6 @@ if (!function_exists('invierte_date_time')) {
 
     function form_pre_puntos_medios($id_servicio, $num_ciclos, $carro_compras, $id_carro_compras)
     {
-
 
         $ext = prm_def($_GET, "debug") ? "&debug=1" : "";
         $url = "../puntos_medios/?producto=" . $id_servicio . $ext;

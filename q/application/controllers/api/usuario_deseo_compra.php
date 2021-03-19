@@ -19,13 +19,15 @@ class usuario_deseo_compra extends REST_Controller
         $param = $this->post();
         $response = false;
 
-        if (fx($param, "id_servicio")) {
+        if (fx($param, "id_servicio,articulos")) {
 
             $ip = $this->input->ip_address();
-
+            $articulos = $param["articulos"];
+            
             $paras = [
                 "id_servicio" => $param["id_servicio"],
-                "ip" => $ip
+                "ip" => $ip,
+                "articulos" => $articulos
             ];
             $response = $this->usuario_deseo_compra_model->insert($paras, 1);
 
@@ -47,12 +49,12 @@ class usuario_deseo_compra extends REST_Controller
     function index_GET()
     {
 
-        $param =  $this->get();
+        $param = $this->get();
         $response = false;
 
         if (fx($param, "ip")) {
 
-            $ip =  $param["ip"];
+            $ip = $param["ip"];
             $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);
             $response = $this->app->add_imgs_servicio($lista_deseos);
         }
@@ -75,4 +77,33 @@ class usuario_deseo_compra extends REST_Controller
         $this->response($response);
     }
 
+    function envio_pago_PUT()
+    {
+
+        $param = $this->put();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_compra_model->envio_pago($ids);
+        $this->response($response);
+    }
+
+    function envio_pago_GET()
+    {
+
+        $param = $this->get();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_compra_model->por_pago($ids);
+        $this->response($response);
+    }
+    function cantidad_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,cantidad")) {
+
+            $response = $this->usuario_deseo_compra_model->q_up("articulos", $param["cantidad"], $param["id"]);
+
+        }
+        $this->response($response);
+    }
 }

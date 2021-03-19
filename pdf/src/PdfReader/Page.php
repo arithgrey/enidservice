@@ -19,6 +19,10 @@ use setasign\Fpdi\PdfParser\Type\PdfNumeric;
 use setasign\Fpdi\PdfParser\Type\PdfStream;
 use setasign\Fpdi\PdfParser\Type\PdfType;
 use setasign\Fpdi\PdfReader\DataStructure\Rectangle;
+use function array_filter;
+use function count;
+use function implode;
+use function in_array;
 
 /**
  * Class representing a page of a PDF document
@@ -101,14 +105,14 @@ class Page
 		}
 
 		$inheritedKeys = ['Resources', 'MediaBox', 'CropBox', 'Rotate'];
-		if ($inherited && \in_array($name, $inheritedKeys, true)) {
+		if ($inherited && in_array($name, $inheritedKeys, true)) {
 			if (null === $this->inheritedAttributes) {
 				$this->inheritedAttributes = [];
-				$inheritedKeys = \array_filter($inheritedKeys, function ($key) use ($dict) {
+				$inheritedKeys = array_filter($inheritedKeys, function ($key) use ($dict) {
 					return !isset($dict->value[$key]);
 				});
 
-				if (\count($inheritedKeys) > 0) {
+				if (count($inheritedKeys) > 0) {
 					$parentDict = PdfType::resolve(PdfDictionary::get($dict, 'Parent'), $this->parser);
 					while ($parentDict instanceof PdfDictionary) {
 						foreach ($inheritedKeys as $index => $key) {
@@ -119,7 +123,7 @@ class Page
 						}
 
 						/** @noinspection NotOptimalIfConditionsInspection */
-						if (isset($parentDict->value['Parent']) && \count($inheritedKeys) > 0) {
+						if (isset($parentDict->value['Parent']) && count($inheritedKeys) > 0) {
 							$parentDict = PdfType::resolve(PdfDictionary::get($parentDict, 'Parent'), $this->parser);
 						} else {
 							break;
@@ -236,7 +240,7 @@ class Page
 				$result[] = $content->getUnfilteredStream();
 			}
 
-			return \implode("\n", $result);
+			return implode("\n", $result);
 		}
 
 		if ($contents instanceof PdfStream) {

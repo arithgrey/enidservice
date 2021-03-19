@@ -13,6 +13,7 @@ namespace setasign\Fpdi\PdfParser\CrossReference;
 use setasign\Fpdi\PdfParser\PdfParser;
 use setasign\Fpdi\PdfParser\Type\PdfDictionary;
 use setasign\Fpdi\PdfParser\Type\PdfToken;
+use function sprintf;
 
 /**
  * Abstract class for cross-reference reader classes.
@@ -65,7 +66,7 @@ abstract class AbstractReader
 			$trailerKeyword->value !== 'trailer'
 		) {
 			throw new CrossReferenceException(
-				\sprintf(
+				sprintf(
 					'Unexpected end of cross reference. "trailer"-keyword expected, got: %s',
 					$trailerKeyword instanceof PdfToken ? $trailerKeyword->value : 'nothing'
 				),

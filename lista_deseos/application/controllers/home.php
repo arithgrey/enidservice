@@ -19,9 +19,17 @@ class Home extends CI_Controller
 
             $this->app->acceso();
             $param = $this->input->get();
-            $q = (prm_def($param, "q") === "preferencias") ?
-                $this->render_preferencias($data) :
+
+            if (prm_def($param, "q") === "preferencias") {
+
+                $this->render_preferencias($data);
+
+            } else {
+
                 $this->load_lista_deseos($data);
+
+            }
+
 
         } else {
             $this->explorar_deseos($data);
@@ -62,15 +70,15 @@ class Home extends CI_Controller
 
     private function explorar_deseos($data)
     {
-        $q  = ['ip' => $this->input->ip_address()];
+        $q = ['ip' => $this->input->ip_address()];
         $lista_deseo = $this->app->api("usuario_deseo_compra/index/format/json/", $q);
 
         if (es_data($lista_deseo)) {
 
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
-            $this->app->pagina($data, productos_deseados($lista_deseo,1), 1);
+            $this->app->pagina($data, productos_deseados($lista_deseo, 1), 1);
 
-        }else{
+        } else {
             $this->app->pagina($data, sin_productos(), 1);
         }
     }
