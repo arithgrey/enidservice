@@ -390,7 +390,7 @@ if (!function_exists('invierte_date_time')) {
             "departamento form-control input_enid col-sm-9",
             "departamento",
             "nombre",
-            "id_departamento");;
+            "id_departamento");
         $r[] = d("Nombre", 2);
         $r[] = d(
             input([

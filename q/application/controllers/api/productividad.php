@@ -80,7 +80,8 @@ class productividad extends REST_Controller
             case (20):
 
 
-                $response = pendientes_cliente($data, $response);
+                $response =
+                    pendientes_cliente($data, $response);
                 break;
 
             default:

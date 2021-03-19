@@ -40,6 +40,8 @@ let $input_telefono_registro_envio = $form_miembro.find('.telefono');
 
 let $input_fecha_servicio = $(fecha_servicio);
 let $input_es_cliente = $('.es_cliente');
+let $es_carro_compras = $(".es_carro_compras");
+let $producto_carro_compra = $(".producto_carro_compra");
 
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
@@ -92,26 +94,31 @@ let registro = (e) => {
 
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
-
+        let $producto_carro_compra = $("input[name='producto_carro_compra[]']").map(function () {
+            return $(this).val();
+        }).get();
         let text_password = $.trim($input_password_registro_envio.val());
-        let pwpost = "" + CryptoJS.SHA1(text_password);
-        let data_send = {
-            "password": pwpost,
+        let $secret = "" + CryptoJS.SHA1(text_password);
+
+        let $data_send = {
+            "password": $secret,
             "email": $input_email_registro_envio.val(),
             "nombre": $input_nombre_registro_envio.val(),
             "telefono": $input_telefono_registro_envio.val(),
             "id_servicio": $id_servicio.val(),
-            "num_ciclos": $num_ciclos.val(),
-            "descripcion_servicio": $descripcion_servicio.val(),
             "ciclo_facturacion": $id_ciclo_facturacion.val(),
             "usuario_referencia": $usuario_referencia.val(),
             "talla": $talla.val(),
             "tipo_entrega": 2,
             "fecha_servicio": $input_fecha_servicio.val(),
             "es_cliente": $input_es_cliente.val(),
+            "es_carro_compras": $es_carro_compras.val(),
+            "producto_carro_compra": $producto_carro_compra
+
         };
+
         bloquea_form(form_miembro);
-        request_enid("POST", data_send, url, respuesta_registro, 0);
+        request_enid("POST", $data_send, url, respuesta_registro, 0);
 
     }
     e.preventDefault();
@@ -142,6 +149,7 @@ let respuesta_registro = (data) => {
 
         } else {
 
+            debugger;
             let $path = _text("../area_cliente/?action=compras&ticket=", data.id_orden_compra);
             redirect($path);
         }

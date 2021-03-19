@@ -10,6 +10,12 @@
 
 namespace setasign\Fpdi\PdfParser\Filter;
 
+use function extension_loaded;
+use function gzinflate;
+use function gzuncompress;
+use function strlen;
+use function substr;
+
 /**
  * Class for handling zlib/deflate encoded data
  *
@@ -27,7 +33,7 @@ class Flate implements FilterInterface
 	 */
 	protected function extensionLoaded()
 	{
-		return \extension_loaded('zlib');
+		return extension_loaded('zlib');
 	}
 
 	/**
@@ -41,12 +47,12 @@ class Flate implements FilterInterface
 	{
 		if ($this->extensionLoaded()) {
 			$oData = $data;
-			$data = @((\strlen($data) > 0) ? \gzuncompress($data) : '');
+			$data = @((strlen($data) > 0) ? gzuncompress($data) : '');
 			if (false === $data) {
 				// Try this fallback
 				$tries = 1;
-				while ($tries < 10 && ($data === false || \strlen($data) < (\strlen($oData) - $tries - 1))) {
-					$data = @(\gzinflate(\substr($oData, $tries)));
+				while ($tries < 10 && ($data === false || strlen($data) < (strlen($oData) - $tries - 1))) {
+					$data = @(gzinflate(substr($oData, $tries)));
 					$tries++;
 				}
 

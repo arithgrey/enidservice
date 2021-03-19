@@ -82,9 +82,9 @@ if (!function_exists('invierte_date_time')) {
         $status_ventas = $data["status_ventas"];
         $productos_orden_compra = $data["productos_orden_compra"];
 
-        $productos_orden_compra += [
-            "id_usuaario_actual" => $data['id_usuaario_actual']
-        ];
+//        $productos_orden_compra += [
+//            "id_usuaario_actual" => $data['id_usuaario_actual']
+//        ];
 
         $es_venta_comisionada = $data['es_venta_comisionada'];
         $usuario_comision = $data['usuario_comision'];
@@ -896,11 +896,8 @@ if (!function_exists('invierte_date_time')) {
         $puede_repartir = puede_repartir($data);
         $boton_cancelar = (!es_cliente($data)) ? $boton_cancelar : '';
         $pago_efectivo = ($puede_repartir) ? $boton_pagado : '';
-
-        $checkout = ticket_pago($productos_orden_compra, [], 2);
-        $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
-
-        $text_pago = _text_($text_entrega, money($saldo_pendiente));
+        $deuda = total_pago_pendiente($productos_orden_compra);
+        $text_pago = _text_($text_entrega, money($deuda["subtotal"]));
         $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar);
 
         $es_orden_entregada = es_orden_entregada($data);
@@ -1006,8 +1003,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $text = [];
-                $ubicacion= $row['ubicacion'];
-                $texto_ubicacion = ($es_seleccion ) ? text_icon('fa fa-check-circle', $ubicacion): $ubicacion;
+                $ubicacion = $row['ubicacion'];
+                $texto_ubicacion = ($es_seleccion) ? text_icon('fa fa-check-circle', $ubicacion) : $ubicacion;
                 $text[] = d($texto_ubicacion, 'p-1');
 
                 $text[] = d(btn(
@@ -1574,8 +1571,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $es_busqueda_reparto = prm_def($param, 'reparto');
-
-
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
         $status_ventas = $data["status_ventas"];
@@ -1605,7 +1600,6 @@ if (!function_exists('invierte_date_time')) {
                 "val" => 4,
             ];
 
-
         $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
         $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
         $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
@@ -1619,11 +1613,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
         $select_comisionistas = create_select(
             $data['comisionistas'], 'id_usuario_referencia', 'comisionista form-control',
             'comisionista', 'nombre_usuario', 'idusuario', 0, 1, 0, '-');
-
 
         $r[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas);
         $es_busqueda = keys_en_arreglo($param,
@@ -1635,7 +1627,6 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
         $visibilidad = (!es_data($data['comisionistas'])) ? 'd-none' : '';
         $r[] = flex_md('Filtrar por vendedor', $select_comisionistas,
             _text_('col-sm-12 mt-md-m5 mt-3 p-0', _between_md, $visibilidad),
@@ -1644,7 +1635,8 @@ if (!function_exists('invierte_date_time')) {
         );
         if ($es_busqueda) {
 
-            $r[] = frm_fecha_busqueda($param["fecha_inicio"], $param["fecha_termino"], $ancho_fechas, $ancho_fechas);
+            $r[] = frm_fecha_busqueda(
+                $param["fecha_inicio"], $param["fecha_termino"], $ancho_fechas, $ancho_fechas);
             $r[] = hiddens(
                 [
                     "name" => "consulta",
@@ -1688,16 +1680,11 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
         $response[] = d($z, 10, 1);
 
-
         $secciones_tabs[] = tab_seccion(append($response), 'buscador_seccion', 1);
         $modal = gb_modal(pago_usuario_comisiones(), 'modal_pago_comision');
-
         $modal_comisiones = gb_modal(pago_comisiones(), 'modal_pago_comisiones');
-
         $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
-
-
         $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
         $menu_pedidos = tab('Pedidos', '#buscador_seccion', ['class' => 'strong']);
         $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => 'ml-5 strong']);
@@ -1792,8 +1779,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $total_comisiones = money($row['total_comisiones']);
                 $totales_en_pagos = $totales_en_pagos + $row['total_comisiones'];
-
-
                 $config = ['class' => 'usuario_venta cursor_pointer col-md-4 border', 'id' => $id_usuario];
                 $ids_cuentas_pagos[] = $id_usuario;
                 $config_pago = [
@@ -1804,12 +1789,17 @@ if (!function_exists('invierte_date_time')) {
 
                 ];
                 $contenido[] = d($id_usuario, $config);
-                $config_venta = ['class' => 'nombre_usuario_venta text-uppercase cursor_pointer col-md-4 border', 'id' => $id_usuario];
+                $config_venta =
+                    [
+                        'class' => 'nombre_usuario_venta text-uppercase cursor_pointer col-md-4 border',
+                        'id' => $id_usuario
+                    ];
                 $contenido[] = d($nombre_completo, $config_venta);
 
                 $config_pago['class'] = _text_($config_pago['class'], 'strong text-right');
                 $contenido[] = d($total_comisiones, $config_pago);
-                $response[] = d($contenido, _text_('border row', _text('sintesis nombre_vendedor_sintesis_', $id_usuario)));
+                $response[] = d(
+                    $contenido, _text_('border row', _text('sintesis nombre_vendedor_sintesis_', $id_usuario)));
 
             }
 
@@ -1822,8 +1812,7 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($ordenes as $row) {
 
-
-                $id_proyecto_persona_forma_pago = $row['id_proyecto_persona_forma_pago'];
+                $id_orden_compra = $row['id_orden_compra'];
                 $comision_venta = $row['comision_venta'];
                 $nombre_usuario = format_nombre($row);
                 $id_usuario_referencia = $row['id_usuario_referencia'];
@@ -1845,7 +1834,7 @@ if (!function_exists('invierte_date_time')) {
                 $contenido[] = d($nombre_usuario, $class);
                 $contenido[] = d($nombre_usuario_cliente, $class);
                 $contenido[] = d(money($comision_venta), _text_($class, 'strong'));
-                $path = path_enid('pedidos_recibo', $id_proyecto_persona_forma_pago);
+                $path = path_enid('pedidos_recibo', $id_orden_compra);
 
                 $tag_usuario = _text('usuario_', $id_usuario_referencia);
                 $response[] = d(
@@ -2663,10 +2652,8 @@ if (!function_exists('invierte_date_time')) {
                 $telefono
             );
 
-
             $id_direccion = $row["id_direccion"];
-            $en_uso = es_selecccion($id_direccion, $domicilios_orden_compra,2);
-
+            $en_uso = es_selecccion($id_direccion, $domicilios_orden_compra, 2);
             $extra = ($en_uso) ? 'bg-light' : '';
 
             $text[] = d($direccion, 'text-uppercase mb-5 letter-spacing-1 p-2 ');
@@ -2718,7 +2705,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($puntos_encuentro_usuario as $row) {
 
             $id = $row['id'];
-            $es_seleccion = es_selecccion($id, $domicilios_orden_compra,1);
+            $es_seleccion = es_selecccion($id, $domicilios_orden_compra, 1);
 
             $nombre = (!$es_seleccion) ? $row['nombre'] : text_icon('fa fa-check-circle', $row['nombre']);
 
@@ -2786,7 +2773,7 @@ if (!function_exists('invierte_date_time')) {
         $response = false;
         foreach ($domicilios_orden_compra as $row) {
 
-            switch ($tipo){
+            switch ($tipo) {
 
                 /*Punto de encuentro**/
                 case 1:
@@ -3251,81 +3238,83 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
+        foreach ($tipificaciones as $row) {
 
-        if (es_data($tipificaciones)) {
-            foreach ($tipificaciones as $row) {
+            $response[] = flex(
 
-                $response[] = flex(
-
-                    text_icon("fa fa-clock-o", $row["fecha_registro"])
-                    ,
-                    $row["nombre_tipificacion"]
-                    ,
-                    "row mt-4 d-flex align-items-center  border-bottom",
-                    "col-lg-4 p-0", "col-lg-8 p-0 text-right"
-                );
-
-            }
+                text_icon("fa fa-clock-o", $row["fecha_registro"])
+                ,
+                $row["nombre_tipificacion"]
+                ,
+                "row mt-4 d-flex align-items-center  border-bottom",
+                "col-lg-4 p-0", "col-lg-8 p-0 text-right"
+            );
         }
-        return $response;
+        return append($response);
 
     }
 
-    function crea_seccion_productos($recibo)
+    function crea_seccion_productos($productos_orden_compra)
     {
 
-        $recibo = $recibo[0];
+
         $response = [];
-        $total = $recibo["num_ciclos_contratados"];
+        foreach ($productos_orden_compra as $row) {
+            $linea_producto_orden_compra = [];
+            $total = $row["num_ciclos_contratados"];
 
-        $imagen =
-            img(
+            $imagen =
+                img(
+                    [
+                        "src" => $row["url_img_servicio"],
+                        "class" => "img_servicio mah_200",
+
+                    ]
+                );
+            $imagen = a_enid(
+                $imagen,
                 [
-                    "src" => $recibo["url_img_servicio"],
-                    "class" => "img_servicio mah_200",
-
+                    "href" => path_enid("producto", $row["id_servicio"]),
+                    "target" => "_black",
                 ]
             );
-        $imagen = a_enid(
-            $imagen,
-            [
-                "href" => path_enid("producto", $recibo["id_servicio"]),
-                "target" => "_black",
-            ]
-        );
 
 
-        $precios = d(money($recibo["precio"]), 'strong h4 mx-auto');
-        $texto_precio = flex("Costo por unidad", $precios, 'flex-column');
+            $precios = d(money($row["precio"]), 'strong h4 mx-auto');
+            $texto_precio = flex("Costo por unidad", $precios, 'flex-column');
 
-        $editar_cantidad = icon(_text_(_editar_icon, "edicion_cantidad"));
-        $selector_cantidad = selector_cantidad(0, 100);
-
-
-        $icon = flex($total, $editar_cantidad, '', 'mr-3 f11 texto_cantidad');
-        $actualizar = format_link("actualizar", ["class" => "botton_actualizar"]);
-
-        $elementos = [
-            d($icon, 'seccion_cantidad'),
-            d($selector_cantidad, 'seccion_edicion_cantidad d-none'),
-            d($actualizar, 'seccion_edicion_cantidad d-none mt-3')
-        ];
-
-        $icono_edicion = d($elementos, 'flex-column');
-
-        $linea = [
-            $imagen,
-            $texto_precio,
-            $icono_edicion
-        ];
+            $editar_cantidad = icon(_text_(_editar_icon, "edicion_cantidad"));
+            $selector_cantidad = selector_cantidad(0, 100);
 
 
-        $clases = _text_(_between_md, 'mt-5 border-bottom d-flex');
-        $contenido = d($linea, $clases);
-        $response[] = d_row($contenido);
+            $icon = flex($total, $editar_cantidad, '', 'mr-3 f11 texto_cantidad');
+            $actualizar = format_link("actualizar", ["class" => "botton_actualizar"]);
+
+            $elementos = [
+                d($icon, 'seccion_cantidad'),
+                d($selector_cantidad, 'seccion_edicion_cantidad d-none'),
+                d($actualizar, 'seccion_edicion_cantidad d-none mt-3')
+            ];
+
+            $icono_edicion = d($elementos, 'flex-column');
+
+            $linea = [
+                $imagen,
+                $texto_precio,
+                $icono_edicion
+            ];
 
 
+            $clases = _text_(_between_md, 'mt-5 border-bottom d-flex');
+            $contenido = d($linea, $clases);
+            $linea_producto_orden_compra[] = d_row($contenido);
+
+
+            $response[] = append($linea_producto_orden_compra);
+
+        }
         return append($response);
+
 
     }
 
@@ -3346,13 +3335,6 @@ if (!function_exists('invierte_date_time')) {
         $select[] = "</select>";
 
         return append($select);
-    }
-
-    function max_compra($es_servicio, $existencia)
-    {
-
-        return ($es_servicio == 1) ? 100 : $existencia;
-
     }
 
 
@@ -3465,29 +3447,25 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    function create_seccion_saldos($recibo)
+    function create_seccion_saldos($productos_orden_compra)
     {
 
-        $recibo = $recibo[0];
-        $pagado = $recibo["saldo_cubierto"];
+        $costo_envio_cliente = 100;
+        $deuda = total_pago_pendiente($productos_orden_compra);
+        $monto_total = $deuda["subtotal"];
+        $monto_pagado = $deuda["monto_pagado"];
 
-        $costo_envio_cliente = $recibo["costo_envio_cliente"];
-
-        $total = ($recibo["precio"] * $recibo["num_ciclos_contratados"]) + $costo_envio_cliente;
         $direccion = 'flex-column text-center col-sm-6';
         $strong = _text_('mb-4', _strong);
 
-
         $text[] = flex("envio", money($costo_envio_cliente), $direccion, $strong);
+        $text[] = flex("total", money($monto_total), $direccion, $strong);
 
-        $text[] = flex("total", money($total), $direccion, $strong);
-
-        $ext = ($pagado < 1) ? "sin_pago" : "pago_realizado";
-        $flex = _text_(
-            'justify-content-center col-sm-12 flex-column text-center mt-5', $ext, _strong);
+        $ext = ($monto_pagado < 1) ? "sin_pago" : "pago_realizado";
+        $flex = _text_('justify-content-center col-sm-12 flex-column text-center mt-5', $ext, _strong);
 
 
-        $text[] = flex("abonado", money($pagado), $flex);
+        $text[] = flex("abonado", money($monto_pagado), $flex);
 
         return bloque($text);
 

@@ -53,21 +53,44 @@ class Usuario_deseo_compra_model extends CI_Model
     function total_ip($ip)
     {
 
-        return $this->get(["COUNT(0)num"], ['ip' => $ip,'status' => 0])[0]["num"];
+        return $this->get(["COUNT(0)num"], ['ip' => $ip, 'status' => 0])[0]["num"];
     }
 
     function compra($ip)
     {
 
         $query_get = "SELECT d.*, 
-                        s.descripcion, 
-                        s.precio, s.flag_envio_gratis, s.nombre_servicio, s.deseado, s.valoracion 
+                        d.id_usuario_deseo_compra id,
+                        s.* 
                         FROM usuario_deseo_compra d 
                         INNER JOIN servicio s on d.id_servicio =  s.id_servicio 
                         WHERE 
-                        d.ip = '".$ip."' 
+                        d.ip = '" . $ip . "' 
                         AND d.status = 0";
         return $this->db->query($query_get)->result_array();
+    }
+
+    function envio_pago($ids)
+    {
+
+        $query_update = "UPDATE usuario_deseo_compra SET status = 3 
+                        WHERE id_usuario_deseo_compra IN(" . $ids . ") LIMIT 100";
+        return $this->db->query($query_update);
+    }
+
+    function por_pago($ids)
+    {
+
+        $query_get = "
+        SELECT u.*,
+                s.* ,
+                s.id_usuario id_usuario_venta
+                FROM  usuario_deseo_compra u 
+                INNER JOIN servicio s
+                ON u.id_servicio =  s.id_servicio 
+                WHERE  id_usuario_deseo_compra IN(" . $ids . ") ";
+        return $this->db->query($query_get)->result_array();
+
     }
 
 

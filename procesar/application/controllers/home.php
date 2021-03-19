@@ -22,8 +22,10 @@ class Home extends CI_Controller
         $id_servicio = prm_def($param, 'id_servicio');
         $es_servicio = prm_def($param, "es_servicio");
         $id_orden_compra = prm_def($param, "orden_compra", 0, 1);
+        $es_carro_compras = prm_def($param, "es_carro_compras");
 
-        if ($num_ciclos > 0 && $id_servicio > 0 || $es_servicio) {
+        if ($num_ciclos > 0 && $id_servicio > 0 || $es_servicio || $es_carro_compras) {
+
 
             $fn = ($es_servicio) ? $this->crea_orden_compra_servicio($param) : $this->crea_orden_compra($param);
 
@@ -59,41 +61,109 @@ class Home extends CI_Controller
         return $this->app->api("servicio/resumen/format/json/", $q);
     }
 
+    private function costo_envio_orden_compra($es_carro_compras, $data)
+    {
+
+        $response = "";
+        if (!$es_carro_compras) {
+            if ($data["servicio"][0]["flag_servicio"] == 0) {
+                $response = $this->calcula_costo_envio($this->crea_data_costo_envio($data));
+            }
+        }
+        return $response;
+
+    }
+
+    private function vendedor_orden_compra($es_carro_compras, $data)
+    {
+
+        $response = "";
+        if (!$es_carro_compras) {
+            if ($data["servicio"][0]["telefono_visible"] == 1) {
+                $response =
+                    $this->app->usuario($data["servicio"][0]["id_usuario"]);
+            }
+        }
+        return $response;
+
+    }
+
+    private function complementos_carro_orden_compra($data, $es_carro_compras)
+    {
+
+        if ($es_carro_compras) {
+
+            $data["info_solicitud_extra"]["num_ciclos"] = 0;
+            $data["info_solicitud_extra"]["es_servicio"] = 0;
+            $data["info_solicitud_extra"]["is_servicio"] = 0;
+            $data["info_solicitud_extra"]["id_servicio"] = 0;
+            $data["info_solicitud_extra"]["ciclo_facturacion"] = 0;
+
+        }
+
+        return $data;
+    }
+
     private function crea_orden_compra($param)
     {
 
-        $data = $this->app->session(
-            "",
-            "",
-            "Registra tu cuenta  y recibe  asistencia al momento.",
-            create_url_preview("recomendacion.jpg")
-        );
+        $data = $this->app->session();
+        $es_carro_compras = $param["es_carro_compras"];
 
-        $num_usuario_referencia = usuario($this->input->get("q2"));
-        $data["q2"] = $num_usuario_referencia;
-        $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
-        $data["costo_envio"] = "";
+        if ($es_carro_compras) {
 
-        if ($data["servicio"][0]["flag_servicio"] == 0) {
-            $data["costo_envio"] =
-                $this->calcula_costo_envio($this->crea_data_costo_envio($data));
+            /*Debemos cambiar el status del carrito de compras*/
+            $this->notifica_productos_carro_compra($param);
 
         }
+
+
+        $id_usuario = prm_def($param, "q2");
+        $num_usuario_referencia = usuario($id_usuario);
+
+        $data["q2"] = $num_usuario_referencia;
+        $data["servicio"] = ($es_carro_compras) ? "" : $this->resumen_servicio($param["id_servicio"]);
+        $data["costo_envio"] = $this->costo_envio_orden_compra($es_carro_compras, $data);
 
         $data["info_solicitud_extra"] = $param;
         $data["clasificaciones_departamentos"] = "";
-        $data["vendedor"] = "";
-        if ($data["servicio"][0]["telefono_visible"] == 1) {
-            $data["vendedor"] =
-                $this->app->usuario($data["servicio"][0]["id_usuario"]);
-        }
-
+        $data["vendedor"] = $this->vendedor_orden_compra($es_carro_compras, $data);
         $data = $this->app->cssJs($data, "procesar");
-        $data["carro_compras"] = $param["carro_compras"];
-        $data["id_carro_compras"] = $param["id_carro_compras"];
+        $data = $this->complementos_carro_orden_compra($data, $es_carro_compras);
+
 
         $this->app->pagina($data, render_procesar($data), 1);
 
+    }
+
+    private function notifica_productos_carro_compra($params)
+    {
+
+        $producto_carro_compra = $params["producto_carro_compra"];
+        $response = false;
+        if (es_data($producto_carro_compra)) {
+
+
+            $response = $this->app->api(
+                "usuario_deseo/envio_pago", ["ids" => $producto_carro_compra], "json", "PUT");
+
+        }
+        return $response;
+
+    }
+
+    private function notifica_productos_carro_compra_deseo($params)
+    {
+
+        $producto_carro_compra = $params["producto_carro_compra"];
+        $response = false;
+        if (es_data($producto_carro_compra)) {
+
+            $response = $this->app->api(
+                "usuario_deseo_compra/envio_pago", ["ids" => $producto_carro_compra], "json", "PUT");
+
+        }
+        return $response;
     }
 
     private function calcula_costo_envio($q)

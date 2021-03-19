@@ -1438,12 +1438,11 @@ class app extends CI_Controller
             $ubicacion = $row["ubicacion"];
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
 
-
             switch ($tipo_entrega) {
 
                 case 1: //Puntos encuentro
-                    $response = $this->get_punto_encuentro($id_recibo);
-                    break;
+//                    $response = $this->get_punto_encuentro($id_recibo);
+//                    break;
 
                 case 2: //Mensajería
                     if ($ubicacion > 0) {
@@ -1458,7 +1457,6 @@ class app extends CI_Controller
 
             if (es_data($response)){
 
-
                 $response[0]["tipo_entrega"] = $tipo_entrega;
                 $response[0]["es_ubicacion"] = $ubicacion;
 
@@ -1471,12 +1469,6 @@ class app extends CI_Controller
 
     }
 
-    private function get_punto_encuentro($id_recibo)
-    {
-
-        $api = "proyecto_persona_forma_pago_punto_encuentro/complete/format/json/";
-        return $this->api($api, ["id_recibo" => $id_recibo]);
-    }
 
     private function get_domicilio_recibo($id_recibo)
     {

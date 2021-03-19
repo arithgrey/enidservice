@@ -5,6 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function render_deseos($data)
     {
 
+
         $r[] = hrz(menu(), list_clasificaciones($data), 2);
         $r[] = hr();
         $r[] = slider_preferencias();
@@ -52,7 +53,7 @@ if (!function_exists('invierte_date_time')) {
     function productos_deseados($productos, $externo = 0)
     {
 
-        return d(format_productos_deseados($productos, $externo), "mt-5");
+        return format_productos_deseados($productos, $externo);
 
     }
 
@@ -191,10 +192,8 @@ if (!function_exists('invierte_date_time')) {
     function sin_productos()
     {
 
-
         $r[] = busqueda_error();
         $r[] = h("UPS! AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-//
         $r[] = a_enid(btn("Explorar ahora!",
             [
 
@@ -204,27 +203,56 @@ if (!function_exists('invierte_date_time')) {
         ), path_enid("home"));
         return d($r, 'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
 
-
     }
 
     function format_productos_deseados($productos_deseados, $externo)
     {
 
 
-        $r[] = d(menu(), 2);
-        $r[] = d(lista_deseo($productos_deseados, $externo), 7);
-        $r[] = btw(
-            _titulo("TU LISTA DE DESEOS")
-            ,
-            a_enid("EXPLORAR MÁS ARTÍCULOS", path_enid('search',"/?q2=0&q=&order=2&order=4"))
-            ,
-            3
-        );
+        $lista_deseo = lista_deseo($productos_deseados, $externo);
+        $response[] = d($lista_deseo, 8);
+        $response[] = d(seccion_procesar_pago($productos_deseados), 4);
 
-        return append($r);
+        return d($response,10,1);
 
     }
 
+    function seccion_procesar_pago($productos_deseados)
+    {
+        $subtotal = 0;
+        $total_articulo = 0;
+        $inputs = [];
+
+        foreach ($productos_deseados as $row) {
+
+            $articulos = $row["articulos"];
+            $precios = $row["precio"];
+            $total_articulo = ($total_articulo + $articulos);
+            $total = ($articulos * $precios);
+            $subtotal = ($subtotal + $total);
+
+            $config =
+                [
+                    "name" => "producto_carro_compra[]",
+                    "value" => $row["id"],
+                    "type" => "checkbox"
+                ];
+            $inputs[] = hiddens($config);
+
+        }
+
+        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
+        $response[] = _titulo(money($subtotal), 4);
+
+        $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
+        $response[] = append($inputs);
+        $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
+        $response[] = btn("Enviar orden",["class" => "mt-5"]);
+        $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5');
+        $response[] = form_close();
+        return append($response);
+
+    }
 
     function format_slide_accesorios()
     {
@@ -235,7 +263,6 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
-
 
     function temporada()
     {
@@ -320,89 +347,99 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($productos_deseados as $row) {
 
-
             $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
-            $descripcion = $row["descripcion"];
             $id_producto = $row["id_servicio"];
-
             $precio = $row["precio"];
             $articulos = $row["articulos"];
-            $descripcion = preg_replace('/<[^<|>]+?>/', '', htmlspecialchars_decode($descripcion));
-            $descripcion = htmlentities($descripcion, ENT_QUOTES, "UTF-8");
-            $descripcion = substr($descripcion, 40);
-            $text_envio = ($row["flag_envio_gratis"] > 0) ? "Envio gratis!" : "Más 100mxn de envio";
 
 
             $r = [];
-            $r[] = d(img($row["url_img_servicio"]), "col-sm-3 border");
+            $url_servicio = get_url_servicio($id_producto);
+            $config = ["href" => $url_servicio, "target" => "_black"];
+            $imagen = a_enid(img($row["url_img_servicio"]), $config);
+
+            $seleccionar_envio = input(
+                [
+                    "type" => "checkbox",
+                    "class" => "mx-auto my-auto seleccion_producto_carro_compra",
+                    "checked" => "checked"
+                ]
+            );
+
+            $seccion_imagen_seleccion_envio =
+                flex($seleccionar_envio, $imagen, _between_start, 'mr-5');
+            $r[] = d($seccion_imagen_seleccion_envio, "col-sm-3");
             $x = [];
 
 
-            $url_servicio = get_url_servicio($id_producto);
             $nombre_servicio = $row["nombre_servicio"];
-            $x[] = h(a_enid($nombre_servicio,
-                [
-                    "href" => $url_servicio,
-                    "target" => "_blank",
-                    "class" => "black"
-                ]
-            ), 4);
+            $x[] = h(
+                a_enid($nombre_servicio,
+                    [
+                        "href" => $url_servicio,
+                        "target" => "_blank",
+                        "class" => "black"
+                    ]
+                ), 4
+            );
             $x[] = str_repeat(icon("fa fa-star"), 5);
             $x[] = d($row["deseado"] . " veces comprado", "label-rating");
 
-            $str_reseñas = _text(
-                $row["valoracion"],
-                " reseñas"
-            );
-            $path_servicio = _text($url_servicio, "#opiniones");
-            $opiniones = a_enid($str_reseñas, $path_servicio);
-            $x[] = d($opiniones, "label-rating");
+            $selector =
+                select_cantidad_compra(
+                    0, 10, $articulos, 'cantidad_articulos_deseados', $id
+                );
+            $x[] = d($selector, 'col-lg-6 p-0');
 
-
-            $text_productos = ($articulos > 1) ? $articulos . " productos " : " un producto";
-            $text_cancelar = _text(" Cancelar ", $text_productos);
 
             $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
-            $opiniones = d(
-                $text_cancelar,
+            $eliminar = d(
+                "Eliminar",
                 [
                     "class" => "cursor_pointer hover_black",
                     "onclick" => $tipo
                 ]
             );
-            $x[] = d($opiniones, "label-rating");
-            $x[] = p($descripcion);
+
             $r[] = d($x, 6);
             $z = [];
             $text_precio = $precio * $articulos;
-            $z[] = h(money($text_precio));
-            $z[] = d($text_envio, "text-success text-center");
-            $z[] = frm_pre_pedido($id, $id_producto, "", 5, 0, 1, $articulos);
+            $z[] = h(money($text_precio), 4, 'strong');
+            $z[] = d($eliminar, "text-primary text-center");
+            $es_servicio = $row["flag_servicio"];
+            $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
+            $z[] = formulario_orden_compra_deseo_cliente($id, $id_producto, 1, $articulos, $es_servicio, $id_ciclo_facturacion);
 
-            $r[] = d($z, 3);
-            $response[] = d($r,'col-md-12 mb-5');
-            $response[] = d('','col-md-12 mt-5 mb-5 border-bottom');
+            $r[] = d($z, 'col-lg-3 text-center');
+            $response[] = d($r, 'col-md-12 mb-5');
+            $response[] = d('', 'col-md-12 mt-5 mb-5 border-bottom');
 
 
         }
-        return d($response,'row');
+
+        $texto = p(
+            "Deseleccionar todos los artículos",
+            'cursor_pointer texto_deseleccionar mt-3 text-primary'
+        );
+
+        $data_response[] = d(_titulo("Carrito"), 13);
+        $data_response[] = d($texto, 13);
+        $data_response[] = hr();
+        $data_response[] = d($response, 'row');
+        return append($data_response);
     }
 
-    function frm_pre_pedido($id, $id_servicio, $extension_dominio = "", $ciclo_facturacion, $is_servicio, $q2, $num_ciclos)
+    function formulario_orden_compra_deseo_cliente($id, $id_servicio, $q2, $num_ciclos, $es_servicio, $id_ciclo_facturacion)
     {
 
-        $url = path_enid('producto', _text($id_servicio, "&pre=1"));
-        $r[] = '<form action="' . $url . '" method="POST" >';
         $r[] = hiddens(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
-        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => $extension_dominio]);
-        $r[] = hiddens(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $ciclo_facturacion]);
-        $r[] = hiddens(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
+        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => ""]);
+        $r[] = hiddens(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $id_ciclo_facturacion]);
+        $r[] = hiddens(["class" => "is_servicio", "name" => "is_servicio", "value" => $es_servicio]);
         $r[] = hiddens(["class" => "q2", "name" => "q2", "value" => $q2]);
         $r[] = hiddens(["class" => "num_ciclos", "name" => "num_ciclos", "value" => $num_ciclos]);
         $r[] = hiddens(["class" => "carro_compras", "name" => "carro_compras", "value" => 1]);
         $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id]);
-        $r[] = btn("Comprar ", [], 1, 1, 0, get_url_servicio($id_servicio));
-        $r[] = form_close();
 
         return append($r);
 

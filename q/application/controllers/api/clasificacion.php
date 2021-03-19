@@ -453,7 +453,7 @@ class Clasificacion extends REST_Controller
             $easy_butons = d($easy_butons,   'contenedor_tallas_disponibles');
             $titulo = d("TALLAS QUE TIENES DISPONIBLES",  'titulo_talla');
 
-            $response["options"] = d($titulo . $easy_butons,  'contenedor_tallas');;
+            $response["options"] = d($titulo . $easy_butons,  'contenedor_tallas');
         }
         return $response;
     }

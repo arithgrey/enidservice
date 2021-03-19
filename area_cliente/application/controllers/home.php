@@ -18,12 +18,9 @@ class Home extends CI_Controller
         $param = $this->input->get();
         if (prm_def($param, "transfer") < 1) {
 
-
             $this->app->acceso();
             $id_orden_compra = prm_def($param, "ticket");
-
             $this->estado_compra($id_orden_compra, $data);
-
             $resumen = $this->resumen_valoraciones($data["id_usuario"]);
 
             $data += [
@@ -59,14 +56,17 @@ class Home extends CI_Controller
         if ($id_orden_compra > 0) {
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             if (es_data($productos_ordenes_compra)) {
-
+                $a = 0;
                 foreach ($productos_ordenes_compra as $row) {
 
-                    $id_recibo_producto = $row["id_proyecto_persona_forma_pago"];
-                    $recibo = $this->recibo($id_recibo_producto);
-                    if (es_data($recibo) && pr($recibo, 'id_ciclo_facturacion') != 9) {
-                        $this->gestiona_tipo_entrega($recibo,  $data, $id_orden_compra);
+                    if ($a < 1) {
+
+                        $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
+                        if ($id_ciclo_facturacion != 9) {
+                            $this->gestiona_tipo_entrega($row, $data, $id_orden_compra);
+                        }
                     }
+                    $a++;
                 }
             }
         }
@@ -79,17 +79,18 @@ class Home extends CI_Controller
         return $this->app->api("recibo/id/format/json/", ["id" => $id]);
     }
 
-    private function gestiona_tipo_entrega($recibo,  $data, $id_orden_compra)
+    private function gestiona_tipo_entrega($recibo, $data, $id_orden_compra)
     {
 
         $es_administrador_vendedor = es_administrador_o_vendedor($data);
-        $tipo_entrega = pr($recibo, 'tipo_entrega');
-        $contra_entrega_domicilio = pr($recibo, 'contra_entrega_domicilio');
+        $tipo_entrega = $recibo['tipo_entrega'];
+        $contra_entrega_domicilio = $recibo['contra_entrega_domicilio'];
+        $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
 
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {
             /*Verifico que tenga saldo pendiente*/
-            $direcciones_registradas = $this->recibo_pago_direccion($id_orden_compra, $contra_entrega_domicilio);
+            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo, $contra_entrega_domicilio);
             if ($direcciones_registradas < 1) {
 
                 $extra = ($es_administrador_vendedor) ? '&asignacion_horario_entrega=1' : '';
@@ -106,7 +107,7 @@ class Home extends CI_Controller
             } else {
 
 
-                if (pr($recibo, 'saldo_cubierto') > 0) {
+                if ($recibo['saldo_cubierto'] > 0) {
 
                     $link_registro_domicilio =
                         _text(

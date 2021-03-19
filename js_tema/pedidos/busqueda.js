@@ -40,8 +40,6 @@ let busqueda_pedidos = function (e) {
 
 
         let data_send = $form_busqueda.serialize();
-        debugger;
-
         let url = "../q/index.php/api/recibo/pedidos/format/json/";
         request_enid("GET", data_send, url, response_pedidos, ".place_pedidos");
 

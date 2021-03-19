@@ -35,7 +35,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             if ($faq > 0) {
-                $response[] = get_lista_faq($data["respuesta"], $data);;
+                $response[] = get_lista_faq($data["respuesta"], $data);
             }
 
 

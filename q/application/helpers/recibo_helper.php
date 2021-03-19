@@ -522,13 +522,63 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
+    function conteo_cancelaciones($tota_cancelaciones, $es_orden_cancelada, $es_lista_negra)
+    {
+        if ($es_orden_cancelada && !$es_lista_negra) {
+            $tota_cancelaciones++;
+        }
+        return $tota_cancelaciones;
+    }
+
+
+    function comision_producto_orden_compra($row, $perfil)
+    {
+
+        $resumen_usuarios_por_pago = [];
+        $comision_venta = $row['comision_venta'];
+        $comision = _titulo(money($comision_venta), 4);
+        $es_orden_cancelada = es_orden_cancelada($row);
+        $saldo_cubierto = $row['saldo_cubierto'];
+        $usuario_venta = prm_def($row, 'usuario', []);
+        $es_administrador = (!in_array($perfil, [20, 6]));
+        $es_comisionista = in_array($perfil, [6]);
+
+        $nombre_vendedor = '';
+        $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
+        $texto_cobro = ($se_pago > 0) ? 'cobraste!' : 'YA SE ENTREGÓ, TU PAGO ESTÁ EN PROCESO';
+        $verificado = _d($texto_cobro, $comision);
+        $es_compra_efectiva = (!$es_orden_cancelada && $saldo_cubierto > 0);
+        $es_lista_negra = es_orden_lista_negra($row);
+        $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada && !$es_lista_negra);
+
+        if ($perfil != 6) {
+
+            $nombre_usuario = format_nombre($usuario_venta);
+            $nombre_vendedor = ($es_administrador) ? _text_('vendidor por ', $nombre_usuario) : '';
+            $verificado = ($se_pago > 0) ?
+                _d('pagaste!', $comision, $nombre_vendedor) :
+                _d('cuenta por pagar', $comision, $nombre_vendedor);
+
+
+        }
+
+        $por_ganar = _d('Cuando el cliente reciba su compra', $comision);
+        $comision = ($saldo_cubierto > 0) ? $verificado : $por_ganar;
+
+        if ($es_orden_cancelada || $es_orden_en_proceso && !$es_comisionista) {
+            $comision = ($es_administrador) ? $nombre_vendedor : '';
+        }
+
+        return $comision;
+
+    }
+
     function render_resumen_pedidos($recibos, $lista_estados, $param, $data)
     {
 
         $perfil = $param['perfil'];
-        $es_administrador = (!in_array($perfil, [20, 6]));
+        $restricciones = $data['restricciones']['orden_entregada'];
         $es_vendedor = in_array($perfil, [6, 3]);
-        $es_comisionista = in_array($perfil, [6]);
         $tipo_orden = $param["tipo_orden"];
         $ops_tipo_orden = [
             "",
@@ -552,14 +602,12 @@ if (!function_exists('invierte_date_time')) {
         $titulos[] = "STATUS";
         $titulos[] = "MONTO COMPRA";
         if (!$es_vendedor) {
-
-
             $titulos[] = $ops_tipo_orden_text[$tipo_orden];
         }
 
-
         $titulos_reporte[] = d_c($titulos, "font-weight-bold col-lg-2 ");
-        $titulos_reporte[] = d('TUS GANANCIAS', "bg_black white font-weight-bold col-lg-4 text-center");
+        $clases_titulos = "bg_black white font-weight-bold col-lg-4 text-center";
+        $titulos_reporte[] = d('TUS GANANCIAS', $clases_titulos);
         $linea_titulos[] = d($titulos_reporte, 'mb-3 mt-3 d-none d-md-block row');
         $total = 0;
         $saldo_por_cobrar = 0;
@@ -570,14 +618,13 @@ if (!function_exists('invierte_date_time')) {
         $linea_en_proceso = [];
         $linea_cambio_estado = [];
         $linea_cambio_lista_negra = [];
-        $resumen_usuarios_por_pago = [];
         $usuarios = [];
         $recibos_ventas = [];
         $tota_cancelaciones = 0;
+
         foreach ($recibos as $row) {
             $id_servicio = $row['id_servicio'];
             $transacciones++;
-            $recibo = $row["recibo"];
             $intento_reventa = $row['intento_reventa'];
             $intento_recuperacion = $row['intento_recuperacion'];
             $usuario_venta = prm_def($row, 'usuario', []);
@@ -586,118 +633,79 @@ if (!function_exists('invierte_date_time')) {
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
             $monto_a_pagar = ($monto_a_pagar * $num_ciclos_contratados) + $row["costo_envio_cliente"];
             $status = $row["status"];
-
             $es_orden_cancelada = es_orden_cancelada($row);
 
             $estado_compra = ($es_orden_cancelada) ? "CANCELACIÓN" : 0;
             $estado_compra = ($estado_compra == 0) ? get_text_status($lista_estados, $status) : $estado_compra;
             $saldo_cubierto = $row['saldo_cubierto'];
-            $se_pago = ($row['flag_pago_comision'] > 0 && !$es_orden_cancelada && $saldo_cubierto > 0);
             $es_lista_negra = es_orden_lista_negra($row);
             $es_compra_efectiva = (!$es_orden_cancelada && $saldo_cubierto > 0);
             $es_orden_en_proceso = (!$es_compra_efectiva && !$es_orden_cancelada && !$es_lista_negra);
+
             $ordenes_canceladas = totales($ordenes_canceladas, $es_orden_cancelada);
             $ordenes_pagadas = totales($ordenes_pagadas, $es_compra_efectiva);
             $ordenes_en_proceso = totales($ordenes_en_proceso, $es_orden_en_proceso);
-
-            $comision_venta = $row['comision_venta'];
-            $comision = _titulo(money($comision_venta), 4);
-            $verificado = ($se_pago > 0) ?
-                _d('cobraste!', $comision) : _d('YA SE ENTREGÓ AL CLIENTE, TU PAGO ESTÁ EN PROCESO', $comision);
-
-
-            if ($perfil != 6) {
-
-                $nombre_usuario = format_nombre($usuario_venta);
-                $nombre_vendedor = ($es_administrador) ? _text_('vendidor por ', $nombre_usuario) : '';
-
-                $verificado = ($se_pago > 0) ?
-                    _d('pagaste!', $comision, $nombre_vendedor) : _d('cuenta por pagar', $comision, $nombre_vendedor);
-
-                if ($se_pago < 1 && $es_compra_efectiva > 0) {
-                    $resumen_usuarios_por_pago[] = [
-                        'id_usuario' => pr($usuario_venta, 'id_usuario'),
-                        'comision' => $comision_venta
-                    ];
-                }
-
-            }
-
-            $por_ganar = _d('Cuando el cliente reciba su compra', $comision);
-            $comision = ($saldo_cubierto > 0) ? $verificado : $por_ganar;
-            if ($es_orden_cancelada || $es_orden_en_proceso && !$es_comisionista) {
-                $comision = ($es_administrador) ? $nombre_vendedor : '';
-            }
+            $id_orden_compra = $row["id_orden_compra"];
 
             $entrega = $row[$ops_tipo_orden[$tipo_orden]];
-
-            $es_orden_entregada = es_orden_entregada($status, $data);
+            $es_orden_entregada = es_orden_entregada($row, $restricciones);
             $extra = ($es_orden_entregada) ? " entregado" : "";
             $extra = ($es_orden_cancelada) ? " cancelado white" : $extra;
             $extra = ($es_lista_negra) ? " lista_negra white" : $extra;
+            $tota_cancelaciones = conteo_cancelaciones($tota_cancelaciones, $es_orden_cancelada, $es_lista_negra);
+            $comision = comision_producto_orden_compra($row, $perfil);
+            $recibos_ventas = conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados);
 
-            if ($es_orden_cancelada && !$es_lista_negra) {
-                $tota_cancelaciones++;
-            }
-
-            if ($se_pago > 0) {
-
-                $extra = 'se_pago white';
-                $recibos_ventas = conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados);
-
-            } else if ($saldo_cubierto > 0 && !$es_lista_negra) {
+            if ($saldo_cubierto > 0 && !$es_lista_negra) {
 
                 $extra = 'pago_en_proceso white';
                 $saldo_por_cobrar = $saldo_por_cobrar + $row['comision_venta'];
                 $total += $monto_a_pagar;
-                $recibos_ventas = conteo_servicio($recibos_ventas, $id_servicio, $num_ciclos_contratados);
-
             }
 
-            $url_img = $row["url_img_servicio"];
-            $img = img(
-                [
-                    "src" => $url_img,
-                    "class" => "mx-auto d-block pedido_img"
-                ]
-            );
-
+            $img = img(["src" => $row["url_img_servicio"], "class" => "mx-auto d-block pedido_img"]);
             $items = [];
-            $numero_recibo = span($recibo, 'd-md-block d-none');
+            $numero_recibo = span($id_orden_compra, 'd-md-block d-none');
             $nombre_cliente = format_nombre($row['usuario_cliente']);
-            $items[] = flex(_text_('cliente', $nombre_cliente), $estado_compra, 'flex-column', 'fp9 strong text-uppercase', 'mt-2 estado_compra');
-            $items[] = monto_compra($monto_a_pagar, $perfil, $intento_reventa, $saldo_cubierto, $es_orden_cancelada, $intento_recuperacion);
+            $cliente = _text_('cliente', $nombre_cliente);
+            $items[] = flex(
+                $cliente, $estado_compra,
+                'flex-column', 'fp9 strong text-uppercase', 'mt-2 estado_compra');
+            $items[] = monto_compra(
+                $monto_a_pagar, $perfil, $intento_reventa, $saldo_cubierto,
+                $es_orden_cancelada, $intento_recuperacion);
 
             $tb[] = hr('d-md-none mt-sm-5 mt-md-0 solid_bottom_2');
             $contenido = [];
-            $contenido[] = d($numero_recibo, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
+            $clase_contenido = 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase';
+            $contenido[] = d($numero_recibo, $clase_contenido);
             $str_fecha_contra_entrega = ($es_orden_en_proceso) ? 'entregará el' : 'Entregó el';
             $usurio_entrega = (array_key_exists('usuario_entrega', $row)) ? $row['usuario_entrega'] : [];
             $fecha_contra_entrega = _d($str_fecha_contra_entrega, format_fecha($entrega, 1));
-
-            $text_usuario_entrega = (es_data($usurio_entrega)) ? d(format_nombre($usurio_entrega), 'strong fp9') : '';
+            $formato_reparidor = format_nombre($usurio_entrega);
+            $text_usuario_entrega = (es_data($usurio_entrega)) ? d($formato_reparidor, 'strong fp9') : '';
             $fecha_contra_entrega = _d($text_usuario_entrega, $fecha_contra_entrega);
-
-            $contenido[] = d($fecha_contra_entrega, 'col-lg-2 border descripcion_compra fp8 text-center text-uppercase');
+            $clase_fecha_conta_entrega = 'col-lg-2 border descripcion_compra fp8 text-center text-uppercase';
+            $contenido[] = d($fecha_contra_entrega, $clase_fecha_conta_entrega);
             $contenido[] = d($img, 'col-lg-1 border descripcion_compra fp8 text-center text-uppercase');
             $contenido[] = d_c($items, 'col-lg-2 border descripcion_compra fp8');
-            $contenido[] = d($comision, 'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
+            $contenido[] = d($comision,
+                'col-lg-4 border descripcion_compra fp8 text-center text-uppercase');
 
-            $path = path_enid('pedidos_recibo', $recibo);
+
+            $path = path_enid('pedidos_recibo', $id_orden_compra);
             $config = [
-                'id' => $recibo,
+                'id' => $id_orden_compra,
                 'class' => _text_('black row mt-md-0 text-center text-md-left mt-5', $extra),
                 'href' => $path
             ];
+
             $line = a_enid(append($contenido), $config, 0);
-
-
             if ($es_orden_en_proceso) {
 
                 $linea_en_proceso[] = $line;
 
             } else {
-
 
                 if ($es_lista_negra) {
 
@@ -707,30 +715,36 @@ if (!function_exists('invierte_date_time')) {
 
                     $linea_cambio_estado[] = $line;
                 }
-
             }
 
         }
 
         $es_administrador = in_array($perfil, [20, 6]);
         $text_saldo = ($es_administrador) ? 'saldo por cobrar' : 'total por pagar';
-        $text_saldo_por_cobrar = d_row(
-            flex($text_saldo, money($saldo_por_cobrar),
-                _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md)
-            )
-        );
+        $clase_saldos = _text_('col-sm-4 ml-auto text-uppercase h4', _strong, _between_md);
+        $saldos = flex($text_saldo, money($saldo_por_cobrar), $clase_saldos);
+        $text_saldo_por_cobrar = d_row($saldos);
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
         $tb_fechas = tb_fechas($recibos, $ops_tipo_orden, $tipo_orden);
         $inicio = _titulo(_text(count($recibos), " resultados "), 1, "mt-5");
         $totales = d(_titulo(_text_('Total cobrado', money($total))), 13);
 
+        return compras_pedidos($linea_titulos, $linea_en_proceso, $linea_cambio_estado,
+            $linea_cambio_lista_negra, $conversion, $tb_fechas, $text_saldo_por_cobrar, $inicio, $totales);
+    }
+
+    function compras_pedidos($linea_titulos, $linea_en_proceso, $linea_cambio_estado,
+                     $linea_cambio_lista_negra, $conversion, $tb_fechas, $text_saldo_por_cobrar,
+                     $inicio, $totales)
+    {
 
         $listado[] = append($linea_titulos);
         $listado[] = append($linea_en_proceso);
         $listado[] = append($linea_cambio_estado);
         $listado[] = append($linea_cambio_lista_negra);
         $tabla = append($listado);
-        $sintesis = sintesis_compras($recibos_ventas, $recibos, $linea_cambio_lista_negra, $tota_cancelaciones);
+        $sintesis = sintesis_compras(
+            $recibos_ventas, $recibos, $linea_cambio_lista_negra, $tota_cancelaciones);
 
         $render = [
             $conversion,
@@ -741,6 +755,7 @@ if (!function_exists('invierte_date_time')) {
             $totales,
             $sintesis
         ];
+
         return d_c($render, 'col-sm-12 mt-4');
     }
 
@@ -1118,29 +1133,18 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-
-    function format_concepto($resumen_pedido,  $monto_a_pagar, $productos_orden_compra, $tipos_entrega)
+    function format_concepto($monto_a_pagar, $productos_orden_compra, $tipos_entrega)
     {
 
         $text_money = money($monto_a_pagar);
-        $resume_articulo[] = d($resumen_pedido, ' text-right');
         $resume_articulo[] = d($text_money, ' text-right mr-3 h4');
-        $descripcion_compra = append($resume_articulo);
-        $articulo = imagenes_orden_compra($productos_orden_compra);
-
-        $r[] = flex(
-            $articulo,
-            $descripcion_compra,
-            'align-items-center justify-content-between  '
-
-        );
-
+        $r[] = d(imagenes_orden_compra($productos_orden_compra), 'mx-auto text-center');
         $ticket_pago = ticket_pago($productos_orden_compra, $tipos_entrega);
         $r[] = $ticket_pago['checkout'];
 
 
         return [
-            'checkout_resumen' => d_row(d($r, 'bg-light p-5')),
+            'checkout_resumen' => d_row(d($r, 'bg-light p-5 w-100')),
             'checkout' => $ticket_pago
         ];
 

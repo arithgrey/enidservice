@@ -10,12 +10,17 @@
 
 namespace setasign\Fpdi\PdfReader;
 
+use InvalidArgumentException;
 use setasign\Fpdi\PdfParser\PdfParser;
 use setasign\Fpdi\PdfParser\Type\PdfArray;
 use setasign\Fpdi\PdfParser\Type\PdfDictionary;
 use setasign\Fpdi\PdfParser\Type\PdfIndirectObjectReference;
 use setasign\Fpdi\PdfParser\Type\PdfNumeric;
 use setasign\Fpdi\PdfParser\Type\PdfType;
+use function count;
+use function implode;
+use function is_numeric;
+use function sprintf;
 
 /**
  * A PDF reader class
@@ -79,7 +84,7 @@ class PdfReader
 	 */
 	public function getPdfVersion()
 	{
-		return \implode('.', $this->parser->getPdfVersion());
+		return implode('.', $this->parser->getPdfVersion());
 	}
 
 	/**
@@ -109,15 +114,15 @@ class PdfReader
 	 */
 	public function getPage($pageNumber)
 	{
-		if (!\is_numeric($pageNumber)) {
-			throw new \InvalidArgumentException(
+		if (!is_numeric($pageNumber)) {
+			throw new InvalidArgumentException(
 				'Page number needs to be a number.'
 			);
 		}
 
 		if ($pageNumber < 1 || $pageNumber > $this->getPageCount()) {
-			throw new \InvalidArgumentException(
-				\sprintf(
+			throw new InvalidArgumentException(
+				sprintf(
 					'Page number "%s" out of available page range (1 - %s)',
 					$pageNumber,
 					$this->getPageCount()
@@ -171,13 +176,13 @@ class PdfReader
 	 */
 	protected function readPages()
 	{
-		if (\count($this->pages) > 0) {
+		if (count($this->pages) > 0) {
 			return;
 		}
 
 		$readPages = function ($kids, $count) use (&$readPages) {
 			$kids = PdfArray::ensure($kids);
-			$isLeaf = $count->value === \count($kids->value);
+			$isLeaf = $count->value === count($kids->value);
 
 			foreach ($kids->value as $reference) {
 				$reference = PdfIndirectObjectReference::ensure($reference);

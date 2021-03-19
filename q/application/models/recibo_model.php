@@ -184,15 +184,18 @@ class Recibo_model extends CI_Model
         $status_venta = $param["status_venta"];
         $id_usuario_venta = $param['id_usuario'];
         $es_admistrador = $param['es_admistrador'];
-        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p";
+        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p INNER JOIN producto_orden_compra po 
+        ON po.id_proyecto_persona_forma_pago = p.id_proyecto_persona_forma_pago ";
 
 
         $ext_usuario = $this->get_usuario($param);
         $ext_contra_entrega = ($tipo_entrega == 0) ? "" : " AND  p.tipo_entrega = '" . $tipo_entrega . "'";
         $extra_extatus_venta = ($status_venta == 0) ? "" : "  AND p.status = '" . $status_venta . "' ";
         $extra_extatus_venta = ($status_venta == 14) ? " AND p.saldo_cubierto >  0 " : $extra_extatus_venta;
-        $extra_extatus_venta = ($status_venta == 17) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
-        $extra_extatus_venta = ($status_venta == 18) ? "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
+        $extra_extatus_venta = ($status_venta == 17) ?
+            "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
+        $extra_extatus_venta = ($status_venta == 18) ?
+            "AND p.saldo_cubierto >  0  AND  flag_pago_comision < 1 " : $extra_extatus_venta;
 
         $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
         $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
@@ -202,8 +205,9 @@ class Recibo_model extends CI_Model
 
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-        $query_get .= _text_($ext_usuario, $usuario_referencia, $ext_contra_entrega, $extra_extatus_venta, $extra_usuario_venta, $ext_fecha,
-            $ext_servicio, " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC");
+        $order = " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC";
+        $query_get .= _text_($ext_usuario, $usuario_referencia, $ext_contra_entrega, $extra_extatus_venta,
+            $extra_usuario_venta, $ext_fecha, $ext_servicio, $order);
         return $this->db->query($query_get)->result_array();
 
     }
@@ -778,11 +782,9 @@ class Recibo_model extends CI_Model
         return $sql;
     }
 
-    function crea_resumen_compra(&$servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
+    function crea_resumen_compra($texto_servicio,$num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
     {
 
-        $response = "";
-        $texto_servicio = pr($servicio, "nombre_servicio");
         if ($tipo_entrega == 0) {
 
             $response = _text_($num_ciclos, $texto_servicio);
@@ -826,7 +828,6 @@ class Recibo_model extends CI_Model
         $data_usuario = $param["data_por_usuario"];
         $tipo_entrega = $data_usuario["tipo_entrega"];
 
-
         $id_forma_pago = ($tipo_entrega == 1) ? 8 : 6;
         $fecha_vencimiento = "DATE_ADD(CURRENT_DATE(), INTERVAL 2 DAY)";
         $id_usuario = $param["id_usuario"];
@@ -836,21 +837,23 @@ class Recibo_model extends CI_Model
         $id_usuario_referencia = ($usuario_referencia == 0) ? $id_usuario : $usuario_referencia;
 
 
-        $num_ciclos = $data_usuario["num_ciclos"];
-        $servicio = $param["servicio"];
+        $num_ciclos = $param["articulos"];
 
-        $id_servicio = pr($servicio, "id_servicio");
-        $flag_envio_gratis = pr($servicio, "flag_envio_gratis");
-        $id_usuario_venta = pr($servicio, "id_usuario_venta");
-        $precio = pr($servicio, "precio");
-        $comision = pr($servicio, 'comision');
 
-        $resumen_compra = $this->crea_resumen_compra($servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
+        $id_servicio = $param["id_servicio"];
+        $flag_envio_gratis = $param["flag_envio_gratis"];
+        $id_usuario_venta = $param[ "id_usuario_venta"];
+        $precio = $param["precio"];
+        $comision = $param["comision"];
+        $nombre_servicio = $param["nombre_servicio"];
+        $flag_servicio = $param["flag_servicio"];
+
+        $resumen_compra = $this->crea_resumen_compra($nombre_servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
 
         $costo_envio_cliente = 0;
         $costo_envio_vendedor = 0;
-        $es_servicio = ($tipo_entrega < 5) ? 0 : pr($servicio, "flag_servicio");
-        $es_servicio = (pr($servicio, "flag_servicio") > 0) ? 1 : $es_servicio;
+        $es_servicio = ($tipo_entrega < 5) ? 0 : $flag_servicio;
+        $es_servicio = ($flag_servicio > 0) ? 1 : $es_servicio;
 
 
         $monto_a_pagar = $precio;
@@ -927,7 +930,7 @@ class Recibo_model extends CI_Model
                 array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
                 break;
 
-            case (2 && pr($servicio, "flag_servicio") > 0):
+            case (2 && $flag_servicio > 0):
 
                 array_push($array_keys, "fecha_servicio");
                 array_push($array_values, "'" . $data_usuario["fecha_servicio"] . "'");
@@ -1429,18 +1432,24 @@ class Recibo_model extends CI_Model
                         p.id_usuario_referencia ,
                         u.nombre,
                         u.apellido_paterno,
-                        u.apellido_materno                        
+                        u.apellido_materno,
+                        po.id_orden_compra
                         FROM 
                         proyecto_persona_forma_pago p 
                         INNER JOIN usuario u  
-                        ON p.id_usuario_referencia =  u.idusuario  
+                        ON p.id_usuario_referencia =  u.idusuario
+                        INNER JOIN
+                            producto_orden_compra po 
+                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
                         WHERE  
                         flag_pago_comision < 1  
                         AND se_cancela < 1  
                         AND saldo_cubierto > 0 
                         " . $extra_tipo_usuario . "
                         AND  p.status 
-                        NOT IN (10,19)  AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+                        NOT IN (10,19)  
+                        AND id_usuario 
+                        NOT IN (SELECT id_usuario FROM lista_negra)
                         ORDER BY p.id_usuario_referencia";
 
         return $this->db->query($query_get)->result_array();

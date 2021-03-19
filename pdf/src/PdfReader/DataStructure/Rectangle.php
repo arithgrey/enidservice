@@ -14,6 +14,8 @@ use setasign\Fpdi\PdfParser\PdfParser;
 use setasign\Fpdi\PdfParser\Type\PdfArray;
 use setasign\Fpdi\PdfParser\Type\PdfNumeric;
 use setasign\Fpdi\PdfParser\Type\PdfType;
+use function max;
+use function min;
 
 /**
  * Class representing a rectangle
@@ -70,10 +72,10 @@ class Rectangle
 	 */
 	public function __construct($ax, $ay, $bx, $by)
 	{
-		$this->llx = \min($ax, $bx);
-		$this->lly = \min($ay, $by);
-		$this->urx = \max($ax, $bx);
-		$this->ury = \max($ay, $by);
+		$this->llx = min($ax, $bx);
+		$this->lly = min($ay, $by);
+		$this->urx = max($ax, $bx);
+		$this->ury = max($ay, $by);
 	}
 
 	/**
