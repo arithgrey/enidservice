@@ -3129,8 +3129,8 @@ function ticket_pago(&$productos_orden_compra, $tipos_entrega, $format = 1)
 
             $espacio = 'justify-content-between mt-3 ';
             $response[] = hr('mb-4 border_big', 0);
-            $response[] = flex('Subtotal', money($subtotal),
-                $espacio, 'subtotal_text', 'subtotal_money');
+            $response[] = flex(
+                'Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
             $response[] = flex(
                 $tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio,
                 'envio_text', 'envio_money text-uppercase');

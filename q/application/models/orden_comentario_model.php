@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Recibo_comentario_model extends CI_Model
+class Orden_comentario_model extends CI_Model
 {
 	function __construct()
 	{
@@ -19,7 +19,7 @@ class Recibo_comentario_model extends CI_Model
 			$this->db->where($key, $value);
 		}
 		$this->db->limit($limit);
-		return $this->db->update("recibo_comentario", $data);
+		return $this->db->update("orden_comentario", $data);
 	}
 
 	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -33,18 +33,18 @@ class Recibo_comentario_model extends CI_Model
 		if ($order != '') {
 			$this->db->order_by($order, $type_order);
 		}
-		return $this->db->get("recibo_comentario")->result_array();
+		return $this->db->get("orden_comentario")->result_array();
 	}
 
 	function insert($params, $return_id = 0)
 	{
-		$insert = $this->db->insert("recibo_comentario", $params);
+		$insert = $this->db->insert("orden_comentario", $params);
 		return ($return_id == 1) ? $this->db->insert_id() : $insert;
 	}
 
 	function q_get($params = [], $id)
 	{
-		return $this->get($params, ["id_recibo_comentario" => $id]);
+		return $this->get($params, ["id_orden_comentario" => $id]);
 	}
 
 }

@@ -81,11 +81,6 @@ if (!function_exists('invierte_date_time')) {
         $id_orden_compra = $data["orden"];
         $status_ventas = $data["status_ventas"];
         $productos_orden_compra = $data["productos_orden_compra"];
-
-//        $productos_orden_compra += [
-//            "id_usuaario_actual" => $data['id_usuaario_actual']
-//        ];
-
         $es_venta_comisionada = $data['es_venta_comisionada'];
         $usuario_comision = $data['usuario_comision'];
         $id_cliente = pr($productos_orden_compra, 'id_usuario');
@@ -104,9 +99,6 @@ if (!function_exists('invierte_date_time')) {
 
         $id_status = pr($productos_orden_compra, 'status');
 
-        $text_estado_venta = search_bi_array(
-            $status_ventas, 'id_estatus_enid_service', $id_status, 'text_vendedor');
-
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
 
@@ -123,10 +115,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $re[] = crea_seccion_recordatorios($data["recordatorios"]);
-
         $re[] = create_seccion_tipificaciones($data["tipificaciones"]);
 
-        $re[] = frm_nota($id_recibo);
+        $re[] = frm_nota($id_orden_compra);
         $re[] = create_seccion_comentarios($data["comentarios"]);
         $respuestas = tags_arquetipo($data);
         $unicos = $respuestas['unicos'];
@@ -2210,15 +2201,6 @@ if (!function_exists('invierte_date_time')) {
     function form_fecha_recordatorio($data, $tipo_recortario)
     {
 
-        $recibo = prm_def($data, "recibo");
-        $str = pr($recibo, "resumen_pedido");
-        $usuario = prm_def($data, "usuario");
-        if (es_data($usuario)) {
-
-            $str .= " \n%0A" . pr($usuario, "nombre") . "\n%0A";
-            $str .= pr($usuario, "tel_contacto");
-        }
-
         $x = _titulo("RECORDATORIO", 0, 'mt-5');
         $r[] = form_open("",
             ["class" => "form_fecha_recordatorio"]);
@@ -2252,7 +2234,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(
             [
                 "class" => "recibo",
-                "name" => "recibo",
+                "name" => "orden_compra",
                 "value" => $data["orden"],
             ]
         );
@@ -2263,7 +2245,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "descripcion",
                 "class" => "descripcion_recordatorio mt-5",
                 "rows" => 5,
-            ], 0, $str);
+            ], 0);
         $r[] = place("nota_recordatorio d-none ");
         $r[] = btn("CONTINUAR", ['class' => 'mt-5']);
         $r[] = form_close();
@@ -2543,7 +2525,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function frm_nota($id_recibo)
+    function frm_nota($id_orden_compra)
     {
 
         $r[] = form_open("", [
@@ -2555,7 +2537,7 @@ if (!function_exists('invierte_date_time')) {
             "name" => "comentarios",
             "class" => "comentarios form-control top_30 bottom_30",
         ]);
-        $r[] = hiddens(["name" => "id_recibo", "value" => $id_recibo]);
+        $r[] = hiddens(["name" => "orden_compra", "value" => $id_orden_compra]);
         $r[] = btn("AGREGAR", ["name" => "comentarios"]);
         $r[] = form_close(place("place_nota row"));
 
@@ -3143,7 +3125,6 @@ if (!function_exists('invierte_date_time')) {
 
             $nota[] = _titulo("Seguimiento al cliente", 4);
 
-
             foreach ($data as $row) {
 
                 $registro = date_format(date_create($row["fecha_registro"]), 'd M Y H:i:s');
@@ -3153,16 +3134,13 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-
         $response = d(d($nota, 12), 'row mt-5 mb-5 border');
         return es_data($data) ? $response : '';
-
 
     }
 
     function crea_seccion_recordatorios($recordatorios)
     {
-
 
         $response = [];
         if (es_data($recordatorios)) {
