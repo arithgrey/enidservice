@@ -97,6 +97,7 @@ let registro = (e) => {
         let $producto_carro_compra = $("input[name='producto_carro_compra[]']").map(function () {
             return $(this).val();
         }).get();
+
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
 

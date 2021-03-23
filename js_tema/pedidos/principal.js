@@ -82,7 +82,6 @@ let editar_horario_entrega = function (e) {
 };
 let crea_recordatorio = function (e) {
 
-
     let descripcion = get_parameter(".descripcion_recordatorio").trim();
     if (descripcion.length > 5) {
 
@@ -138,9 +137,9 @@ let google_path = function (desc_google, hora_fecha, details) {
 };
 let response_recordatorio = function (data) {
 
-    if (data == true) {
+    if (data === true) {
         $(".place_recordatorio").empty();
-        let url = "../pedidos/seguimiento?recibo=" + get_parameter(".recibo");
+        let url = "../pedidos/?recibo=" + get_parameter(".recibo");
         redirect(url);
     } else {
         desbloqueda_form(".form_fecha_recordatorio");
@@ -803,7 +802,7 @@ let agregar_nota = () => {
 };
 let registrar_nota = e => {
 
-    let url = "../q/index.php/api/recibo_comentario/index/format/json/";
+    let url = "../q/index.php/api/orden_comentario/index/format/json/";
     let comentario = get_parameter(".comentarios");
     let texto = comentario.trim().length;
     if (texto > 10) {

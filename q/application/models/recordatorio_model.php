@@ -37,13 +37,12 @@ class Recordatorio_model extends CI_Model
 		return $this->db->get("recordatorio")->result_array();
 	}
 
-	function get_complete($id_recibo)
+	function get_complete($id_orden_compra)
 	{
 
-		$sql =
-			"SELECT r.* , t.tipo FROM recordatorio r  INNER JOIN tipo_recordatorio t ON
+		$sql = "SELECT r.* , t.tipo FROM recordatorio r  INNER JOIN tipo_recordatorio t ON
               r.id_tipo = t.idtipo_recordatorio 
-            WHERE id_recibo = $id_recibo  ORDER BY id_recordatorio DESC LIMIT 10";
+            WHERE id_orden_compra = $id_orden_compra  ORDER BY id_recordatorio DESC LIMIT 10";
 
 		return $this->db->query($sql)->result_array();
 

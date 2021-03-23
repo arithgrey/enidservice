@@ -15,8 +15,8 @@ class recordatorio extends REST_Controller
 	{
 		$response = false;
 		$param = $this->get();
-		if (fx($param, "id_recibo")) {
-			$response = $this->recordatorio_model->get_complete($param["id_recibo"]);
+		if (fx($param, "orden_compra")) {
+			$response = $this->recordatorio_model->get_complete($param["orden_compra"]);
 		}
 		$this->response($response);
 	}
@@ -25,11 +25,11 @@ class recordatorio extends REST_Controller
 	{
 		$response = false;
 		$param = $this->post();
-		if (fx($param, "fecha_cordatorio,horario_entrega,recibo,tipo,descripcion")) {
+		if (fx($param, "fecha_cordatorio,horario_entrega,orden_compra,tipo,descripcion")) {
 
 			$params = [
 				"fecha_cordatorio" =>  $param["fecha_cordatorio"] . " " . $param["horario_entrega"] . ":00",
-				"id_recibo" => $param["recibo"],
+				"id_orden_compra" => $param["orden_compra"],
 				"id_tipo" => $param["tipo"],
 				"descripcion" => $param["descripcion"],
 				"id_usuario" => $this->app->get_session("idusuario")

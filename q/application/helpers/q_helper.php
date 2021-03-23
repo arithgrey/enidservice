@@ -1339,7 +1339,7 @@ if (!function_exists('invierte_date_time')) {
                     align-items-center"
             );
             $r[] = a_enid($text, path_enid(
-                "pedidos_recibo", $row["id_recibo"] . "#listado_recordatorios"));
+                "pedidos_recibo", $row["id_orden_compra"] . "#listado_recordatorios"));
             $f++;
         }
 

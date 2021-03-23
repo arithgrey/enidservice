@@ -308,7 +308,7 @@ class Cobranza extends REST_Controller
     private function agrega_notas_pedido($q)
     {
 
-        return $this->app->api("recibo_comentario/index", $q, "json", "POST");
+        return $this->app->api("orden_comentario/index", $q, "json", "POST");
     }
 
 

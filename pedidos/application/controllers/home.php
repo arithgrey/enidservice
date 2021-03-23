@@ -552,9 +552,8 @@ class Home extends CI_Controller
 
         $id_orden_compra = $param["recibo"];
         $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
-//        $productos_orden_compra = $this->imagenes_recibos($productos_orden_compra);
 
-        if (es_data($productos_orden_compra) > 0) {
+        if (es_data($productos_orden_compra)) {
 
             $data += [
                 "orden" => $id_orden_compra,
@@ -571,12 +570,8 @@ class Home extends CI_Controller
             } elseif (prm_def($param, "recordatorio") > 0) {
 
 
-                $id_usuario = pr($data["recibo"], "id_usuario");
-                if ($id_usuario > 0) {
-                    $data["usuario"] = $this->app->usuario($id_usuario);
-                }
-                $form = form_fecha_recordatorio($data, $this->get_tipo_recordatorio());
-                $this->app->pagina($data, $form, 1);
+                $this->seccion_recordatorio($data);
+
 
             } else {
 
@@ -589,6 +584,18 @@ class Home extends CI_Controller
             $this->app->pagina($data, get_error_message(), 1);
         }
 
+    }
+
+    private function seccion_recordatorio($data)
+    {
+
+        $productos_orden_compra = $data["productos_orden_compra"];
+        $id_usuario = pr($productos_orden_compra, "id_usuario");
+        if ($id_usuario > 0) {
+            $data["usuario"] = $this->app->usuario($id_usuario);
+        }
+        $form = form_fecha_recordatorio($data, $this->get_tipo_recordatorio());
+        $this->app->pagina($data, $form, 1);
     }
 
     private function pedido($data)
@@ -628,7 +635,7 @@ class Home extends CI_Controller
             "usuario" => $usuario_compra,
             "status_ventas" => $this->get_estatus_enid_service(),
             "tipificaciones" => $this->get_tipificaciones($productos_orden_compra),
-            "comentarios" => $this->get_recibo_comentarios($id_orden_compra),
+            "comentarios" => $this->get_orden_comentarios($id_orden_compra),
             "recordatorios" => $this->get_recordatorios($id_orden_compra),
             "id_recibo" => $id_orden_compra,
             "tipo_recortario" => $this->get_tipo_recordatorio(),
@@ -698,20 +705,19 @@ class Home extends CI_Controller
         return $this->app->usuario($id_usuario);
     }
 
-    private function get_recibo_comentarios($id_recibo)
+    private function get_orden_comentarios($orden_compra)
     {
 
-        return $this->app->api("recibo_comentario/index/format/json/",
-            ["id_recibo" => $id_recibo]);
+        return $this->app->api("orden_comentario/index/format/json/",
+            ["orden_compra" => $orden_compra]);
 
     }
 
-    /*Solo se genera cupon en primer compra*/
     private function get_recordatorios($id_recibo)
     {
 
         return $this->app->api(
-            "recordatorio/index/format/json/", ["id_recibo" => $id_recibo]);
+            "recordatorio/index/format/json/", ["orden_compra" => $id_recibo]);
     }
 
     private function get_tipo_tag_arqquetipo()

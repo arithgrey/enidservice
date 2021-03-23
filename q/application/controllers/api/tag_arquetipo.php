@@ -136,7 +136,7 @@ class Tag_arquetipo extends REST_Controller
                     'id_recibo' => $id_recibo,
                     'comentarios' => $param['accion_reventa']
                 ];
-                $this->app->api("recibo_comentario/index", $data_comentarios, 'json', 'POST');
+                $this->app->api("orden_comentario/index", $data_comentarios, 'json', 'POST');
             }
         }
 
