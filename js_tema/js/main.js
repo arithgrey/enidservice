@@ -746,15 +746,12 @@ let div_enid = (id_padre, text, clase = '') => {
     let newDiv = document.createElement("div");
     let newContent = document.createTextNode(text);
 
-
     if (clase.length > 0) {
 
         let arrClass = clase.split(" ");
         for (let x in arrClass) {
             newDiv.className += arrClass[x] + " ";
         }
-
-
     }
 
     newDiv.appendChild(newContent);
@@ -1103,6 +1100,7 @@ let valida_load = function (form_previo = '') {
     }
 };
 let oculta_acceder = function () {
+
     if ($('.contenedor-lateral-menu').length && is_mobile() === true) {
 
         $('.contenedor-lateral-menu').addClass('d-none').removeClass('d-block');

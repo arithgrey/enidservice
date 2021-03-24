@@ -1035,20 +1035,24 @@ let registro_aun_sin_articulo_interes = function () {
 };
 let habilita_edicion = function () {
 
-    $seccion_edicion_cantidad.removeClass('d-none');
-    $seccion_cantidad.addClass("d-none");
+    let $id = $(this).attr("id");
+    let $seccion_edicion_cantidad_ = $(_text(".seccion_edicion_cantidad_", $id));
+    let $icono_edicion_cantidad_ = $(_text(".icono_edicion_cantidad_", $id));
+    $(".id_producto_orden_compra").val($id);
+
+    $seccion_edicion_cantidad_.removeClass('d-none');
+    $icono_edicion_cantidad_.addClass("d-none");
+
 
 };
 let actualizar_cantidad = function () {
 
-    let $recibo = $('.recibo').val();
-    let $cantidad = $('.cantidad').val();
-    $('.texto_cantidad').text($cantidad);
-    let data_send = $.param({'id': $recibo, 'cantidad': $cantidad });
+
+    let $id_producto_orden_compra = $(".id_producto_orden_compra").val();
+    let $cantidad = $(_text('.cantidad_',$id_producto_orden_compra)).val();
+    let data_send = $.param({'id': $id_producto_orden_compra, 'cantidad': $cantidad});
     let url = "../q/index.php/api/recibo/cantidad/format/json/";
     $seccion_edicion_cantidad.addClass('d-none');
-    $seccion_cantidad.removeClass("d-none");
-
     request_enid("PUT", data_send, url, response_tag_arquetipo);
 
 };
