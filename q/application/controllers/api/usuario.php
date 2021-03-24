@@ -191,7 +191,7 @@ class usuario extends REST_Controller
                 'usuario',
                 'reparto form-control'
             );
-            $contenido[] = hiddens(['name' => 'recibo', 'value' => $id_recibo]);
+            $contenido[] = hiddens(['name' => 'orden_compra', 'value' => $id_recibo]);
             $contenido[] = btn('Modificar', ['class' => 'mt-5 cambio_usuario_entrega']);
             $contenido[] = form_close();
             $usuarios = append($contenido);

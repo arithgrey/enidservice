@@ -970,8 +970,8 @@ let response_cambio_reparto = function (data) {
     modal(data);
     $('.form_cambio_reparto').submit(nuevo_repartidor);
 
-
 };
+
 let nuevo_repartidor = function (e) {
 
     $('.cargando_modal').removeClass('d-none');
@@ -981,10 +981,12 @@ let nuevo_repartidor = function (e) {
     bloquea_form(".form_cambio_reparto");
     e.preventDefault();
 };
+
 let response_nuevo_repartidor = function (data) {
 
     redirect('');
 };
+
 let valida_registro_articulo_interes = () => {
 
 
@@ -1049,7 +1051,7 @@ let actualizar_cantidad = function () {
 
 
     let $id_producto_orden_compra = $(".id_producto_orden_compra").val();
-    let $cantidad = $(_text('.cantidad_',$id_producto_orden_compra)).val();
+    let $cantidad = $(_text('.cantidad_', $id_producto_orden_compra)).val();
     let data_send = $.param({'id': $id_producto_orden_compra, 'cantidad': $cantidad});
     let url = "../q/index.php/api/recibo/cantidad/format/json/";
     $seccion_edicion_cantidad.addClass('d-none');

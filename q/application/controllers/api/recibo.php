@@ -607,10 +607,20 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $response = false;
-        if (fx($param, "recibo,usuario")) {
+        if (fx($param, "orden_compra,usuario")) {
 
-            $response = $this->recibo_model->q_up("id_usuario_entrega", $param['usuario'], $param['recibo']);
+            $orden_compra = $param['orden_compra'];
+            $productos_ordenes_compra =
+                $this->app->productos_ordenes_compra($orden_compra);
+            $usuario = $param['usuario'];
 
+            foreach ($productos_ordenes_compra as $row) {
+
+                $id_orden_compra = $row["id_proyecto_persona_forma_pago"];
+                $response = $this->recibo_model->q_up(
+                    "id_usuario_entrega", $usuario, $id_orden_compra);
+
+            }
         }
         $this->response($response);
     }
@@ -1019,8 +1029,7 @@ class recibo extends REST_Controller
             if (($monto_a_pagar > $saldo_cubierto) || $flag_servicio > 0) {
 
 
-                    $response = $this->ticket_pendiente_pago($param, $dc);
-
+                $response = $this->ticket_pendiente_pago($param, $dc);
 
 
             } else {
