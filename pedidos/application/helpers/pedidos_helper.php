@@ -3235,12 +3235,12 @@ if (!function_exists('invierte_date_time')) {
     function crea_seccion_productos($productos_orden_compra)
     {
 
-
         $response = [];
         foreach ($productos_orden_compra as $row) {
+
             $linea_producto_orden_compra = [];
             $total = $row["num_ciclos_contratados"];
-
+            $id_proyecto_persona_forma_pago = $row["id_proyecto_persona_forma_pago"];
             $imagen =
                 img(
                     [
@@ -3257,24 +3257,43 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-
             $precios = d(money($row["precio"]), 'strong h4 mx-auto');
             $texto_precio = flex("Costo por unidad", $precios, 'flex-column');
 
-            $editar_cantidad = icon(_text_(_editar_icon, "edicion_cantidad"));
-            $selector_cantidad = selector_cantidad(0, 100);
+            $editar_cantidad = icon(
+                _text_(_editar_icon, "edicion_cantidad"),
+                [
 
+                    "id" => $id_proyecto_persona_forma_pago
+                ]
+            );
 
+            $clase_cantidad = _text(
+                "cantidad_", $id_proyecto_persona_forma_pago);
+
+            $selector_cantidad = selector_cantidad(0, 100, $clase_cantidad);
             $icon = flex($total, $editar_cantidad, '', 'mr-3 f11 texto_cantidad');
             $actualizar = format_link("actualizar", ["class" => "botton_actualizar"]);
 
+
+            $clase_cantidades = _text(
+                "seccion_edicion_cantidad_", $id_proyecto_persona_forma_pago);
+
+            $clase_icono_cantidades = _text(
+                "icono_edicion_cantidad_", $id_proyecto_persona_forma_pago);
+
             $elementos = [
-                d($icon, 'seccion_cantidad'),
-                d($selector_cantidad, 'seccion_edicion_cantidad d-none'),
-                d($actualizar, 'seccion_edicion_cantidad d-none mt-3')
+                d($icon, _text_('seccion_cantidad', $clase_icono_cantidades)),
+                d($selector_cantidad, _text_($clase_cantidades, 'd-none')),
+                d($actualizar, _text_($clase_cantidades, 'mt-3 d-none'))
             ];
 
-            $icono_edicion = d($elementos, 'flex-column');
+            $clase_iconos = _text_(
+                'flex-column ',
+                _text("seccion_edicion_cantidad_", $id_proyecto_persona_forma_pago)
+            );
+
+            $icono_edicion = d($elementos, $clase_iconos);
 
             $linea = [
                 $imagen,
@@ -3282,26 +3301,28 @@ if (!function_exists('invierte_date_time')) {
                 $icono_edicion
             ];
 
-
             $clases = _text_(_between_md, 'mt-5 border-bottom d-flex');
             $contenido = d($linea, $clases);
             $linea_producto_orden_compra[] = d_row($contenido);
 
-
             $response[] = append($linea_producto_orden_compra);
 
         }
+
+        $response[] = hiddens(["class" => "id_producto_orden_compra"]);
+
+
         return append($response);
 
 
     }
 
-    function selector_cantidad($es_servicio, $existencia)
+    function selector_cantidad($es_servicio, $existencia, $extra='')
     {
 
         $config = [
             "name" => "cantidad",
-            "class" => "cantidad form-control ",
+            "class" => _text_("cantidad form-control ", $extra),
             "id" => "cantidad"
         ];
 
