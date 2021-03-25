@@ -65,12 +65,13 @@ function registro_direccion() {
 
     if (parseInt(asentamiento) !== 0) {
 
-        set_option("id_recibo", $(".id_recibo").val());
-        let data_send = $(".form_direccion_envio").serialize();
+         let $id_orden_compra = $(".id_recibo").val();
+        set_option("id_recibo", $id_orden_compra);
+        let $data_send = $(".form_direccion_envio").serialize();
         let url = "../q/index.php/api/codigo_postal/direccion_envio_pedido/format/json/";
         bloquea_form(".form_direccion_envio");
         modal('Estamos procesando tu pedido ...', 1);
-        request_enid("POST", data_send, url, response_registro_direccion);
+        request_enid("POST", $data_send, url, response_registro_direccion);
 
     } else {
         recorre("#asentamiento");

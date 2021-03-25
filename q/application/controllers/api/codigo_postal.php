@@ -59,28 +59,31 @@ class codigo_postal extends REST_Controller
             );
 
             $es_direccion_principal = ($direccion_principal != false);
-
-            if ($id_direccion > 0 && $es_direccion_principal) {
-
-                $direccion_principal = $param["direccion_principal"];
-                $id_usuario = $this->get_id_usuario($param);
-
-
-                $registro_direccion_usuario = $this->set_direcciones_usuario(
-                    $param,
-                    $id_usuario,
-                    $id_direccion,
-                    $direccion_principal
-                );
-
-                $response["registro_direccion_usuario"] = $registro_direccion_usuario;
-            }
+            $response = $this->direccion_principal($response, $id_direccion, $es_direccion_principal, $param);
 
             $response["externo"] = prm_def($param, "externo");
             $response["asignacion_horario"] = 1;
         }
 
         $this->response($response);
+    }
+
+    private function direccion_principal($response, $id_direccion, $es_direccion_principal, $param)
+    {
+
+        if ($id_direccion > 0 && $es_direccion_principal) {
+
+            $direccion_principal = $param["direccion_principal"];
+            $id_usuario = $this->get_id_usuario($param);
+            $registro_direccion_usuario = $this->set_direcciones_usuario(
+                $id_usuario,
+                $id_direccion,
+                $direccion_principal
+            );
+
+            $response["registro_direccion_usuario"] = $registro_direccion_usuario;
+        }
+        return $response;
     }
 
     function registra_direccion_envio($param, $productos_orden_compra)
@@ -98,6 +101,7 @@ class codigo_postal extends REST_Controller
 
                 $eliminacion = $this->elimina_direccion_previa_envio($id_recibo);
                 $registro = $this->agrega_direccion_a_compra($id_recibo, $id_direccion);
+                $identificacion = $this->identifica_direccion_entrega($id_recibo, 0, 2);
                 $response = $id_direccion;
 
             }
@@ -248,19 +252,8 @@ class codigo_postal extends REST_Controller
 
     }
 
-    private function set_direcciones_usuario($param, $id_usuario, $id_direccion, $direccion_principal)
+    private function set_direcciones_usuario($id_usuario, $id_direccion, $direccion_principal)
     {
-
-//        $asignacion_horario = prm_def($param, 'asignacion_horario');
-//        if ($asignacion_horario > 0) {
-//            $id_recibo = $param['id_recibo'];
-//            $qrecibo = [
-//                'recibo' => $id_recibo
-//            ];
-//            $recibo = $this->app->api("recibo/index/format/json/", $qrecibo);
-//            $id_usuario = pr($recibo, 'id_usuario');
-//            $this->fecha_entrega($param, $id_recibo);
-//        }
 
         $q =
             [
@@ -302,6 +295,18 @@ class codigo_postal extends REST_Controller
         ];
 
         return $this->app->api("usuario_direccion/index", $q, "json", "POST");
+    }
+
+    private function identifica_direccion_entrega($id_recibo, $ubicacion, $tipo_entrega)
+    {
+        $q = [
+            "id_recibo" => $id_recibo,
+            "ubicacion" => $ubicacion,
+            "tipo_entrega" => $tipo_entrega
+
+        ];
+
+        return $this->app->api("recibo/tipo_entrega_orden", $q, "json", "PUT");
     }
 
     private function elimina_direccion_previa_envio($id_recibo)
