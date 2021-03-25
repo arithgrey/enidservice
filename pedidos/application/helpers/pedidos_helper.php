@@ -6,7 +6,6 @@ if (!function_exists('invierte_date_time')) {
     function texto_pre_pedido($recibo, $data)
     {
 
-
         $path = pr($recibo, "url_img_servicio");
         $nombre_cliente = '';
         $numero_telefonico = '';
@@ -557,6 +556,79 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function texto_no_puede_repartir($data, $texto, $saldo_cubierto, $id_orden_compra, $id_servicio)
+    {
+        if (!puede_repartir($data)) {
+
+            $texto[] = nota_compra($saldo_cubierto, $id_orden_compra);
+            $texto[] = format_link(
+                'comprar nuevamente',
+                [
+                    'href' => path_enid('producto', $id_servicio),
+                    'class' => 'mt-5'
+                ]
+            );
+
+
+        }
+        return $texto;
+    }
+
+    function texto_orden_administrador($data, $es_orden_entregada, $texto)
+    {
+
+        if ($data['es_administrador']) {
+
+            $se_define_repartidor = (es_data($data['usuario_entrega']));
+            $usuario_entrega = ($se_define_repartidor) ? format_nombre($data['usuario_entrega']) : '';
+
+            $nombre = _text_('Entregará ', $usuario_entrega);
+            $nombre = ($se_define_repartidor) ? $nombre : 'aún no hay repartidor asignado :(';
+
+            if (!$es_orden_entregada && !$se_define_repartidor) {
+
+                $texto[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
+            }
+
+            $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
+            $nombre = _text_('Agenda ', $usuario_venta);
+            $texto[] = d($nombre, 'mt-3 text-center p-2 text-uppercase bg-light border border-secondary');
+
+        }
+        return $texto;
+    }
+
+    function seccion_orden_por_entregar($productos_orden_compra, $data, $tipo_entrega, $es_servicio, $fecha)
+    {
+
+        $response = "";
+        $es_orden_cancelada_engregada = es_orden_entregada_o_cancelada($productos_orden_compra, $data);
+        if (!$es_orden_cancelada_engregada && $tipo_entrega == 2) {
+
+            $es_contra_entrega_domicilio = es_contra_entrega_domicilio($productos_orden_compra);
+            $formato_domicilio = ($es_contra_entrega_domicilio) ?
+                'TIENES UNA CITA EL ' : "SE  ESTIMA QUE TU PEDIDO LLEGARÁ EL";
+
+            $response = ($es_servicio) ? "PLANEADO PARA EL DÍA " : $formato_domicilio;
+            $fecha_hora_entrega = es_contra_entrega_domicilio($productos_orden_compra, 1, $fecha);
+            $text_entrega[] = _titulo(_text_($response, $fecha_hora_entrega), 2);
+
+            $usuario_cliente = prm_def($data, 'usuario_cliente');
+            if (es_data($usuario_cliente)) {
+
+                $nombre_cliente = format_nombre($usuario_cliente);
+
+                $text_entrega[] = _titulo('cliente', 3, 'underline mt-4');
+                $text_entrega[] = d($nombre_cliente);
+                $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+
+            }
+
+            $response = append($text_entrega);
+        }
+        return $response;
+    }
+
     function resumen_orden($data)
     {
 
@@ -586,96 +658,33 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
 
-            $fecha = ($es_servicio) ? $fecha_servicio :
-                ($tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
+            $fecha =
+                ($es_servicio) ? $fecha_servicio : ($tipo_entrega == 2) ?
+                    $fecha_contra_entrega : $fecha_vencimiento;
+            $text = seccion_orden_por_entregar(
+                $productos_orden_compra, $data, $tipo_entrega, $es_servicio, $fecha);
 
-            $text = "";
-            $es_orden_cancelada_engregada = es_orden_entregada_o_cancelada($productos_orden_compra, $data);
-            if (!$es_orden_cancelada_engregada && $tipo_entrega == 2) {
-
-                $es_contra_entrega_domicilio = es_contra_entrega_domicilio($productos_orden_compra);
-                $formato_domicilio = ($es_contra_entrega_domicilio) ? 'TIENES UNA CITA EL ' : "SE  ESTIMA QUE TU PEDIDO LLEGARÁ EL";
-
-                $text = ($es_servicio) ? "PLANEADO PARA EL DÍA " : $formato_domicilio;
-                $fecha_hora_entrega = es_contra_entrega_domicilio($productos_orden_compra, 1, $fecha);
-                $text_entrega[] = _titulo(_text_($text, $fecha_hora_entrega), 2);
-
-                $usuario_cliente = prm_def($data, 'usuario_cliente');
-                if (es_data($usuario_cliente)) {
-
-                    $nombre_cliente = format_nombre($usuario_cliente);
-
-                    $text_entrega[] = _titulo('cliente', 3, 'underline mt-4');
-                    $text_entrega[] = d($nombre_cliente);
-                    $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
-
-                }
-
-                $text = append($text_entrega);
-            }
         }
 
         $z[] = $evaluacion;
         $z[] = $text;
-
-        $tipo_entrega_domicilio = ($tipo_entrega > 1) ? 'domicilio de entrega' : 'punto de encuentro';
-
-        $z[] = _titulo($tipo_entrega_domicilio, 3, 'underline');
+        $z[] = _titulo('domicilio de entrega', 3, 'underline');
         $z[] = d(text_domicilio($data));
-
-
         $id_servicio = pr($productos_orden_compra, "id_servicio");
         $text_orden = _text("ORDEN #", $id_orden_compra);
         $path_servicio = get_url_servicio($id_servicio);
         $path_resumen_servicio = path_enid('pedidos_recibo', $id_orden_compra);
         $path = (puede_repartir($data)) ? $path_resumen_servicio : $path_servicio;
-
-
         $imagenes = imagenes_orden_compra($productos_orden_compra);
 
         $a[] = a_enid($imagenes, $path);
-        $texto[] = a_enid(_titulo($text_orden, 2, 'text-right mb-5'), $path);
+        $titulo = _titulo($text_orden, 2, 'text-right mb-5');
+        $texto[] = a_enid($titulo, $path);
         $texto[] = append($z);
+        $texto = texto_no_puede_repartir(
+            $data, $texto, $saldo_cubierto, $id_orden_compra, $id_servicio);
 
-
-        if (!puede_repartir($data)) {
-
-            $texto[] = nota_compra($saldo_cubierto, $id_orden_compra);
-
-            $texto[] = format_link('comprar nuevamente',
-                [
-                    'href' => path_enid('producto', $id_servicio),
-                    'class' => 'mt-5'
-                ]
-            );
-
-
-        }
-
-
-        if ($data['es_administrador']) {
-
-
-            $se_define_repartidor = (es_data($data['usuario_entrega']));
-            $usuario_entrega = ($se_define_repartidor) ? format_nombre($data['usuario_entrega']) : '';
-
-
-            $nombre = _text_('Entregará ', $usuario_entrega);
-            $nombre = ($se_define_repartidor) ? $nombre : 'aún no hay repartidor asignado :(';
-
-            if (!$es_orden_entregada && !$se_define_repartidor) {
-
-                $texto[] = d($nombre, 'mt-5 text-center p-2 text-uppercase  bg-light border border-secondary');
-            }
-
-
-            $usuario_venta = (es_data($data['vendedor'])) ? format_nombre($data['vendedor']) : '';
-            $nombre = _text_('Agenda ', $usuario_venta);
-            $texto[] = d($nombre, 'mt-3 text-center p-2 text-uppercase bg-light border border-secondary');
-
-        }
-
-
+        $texto = texto_orden_administrador($data, $es_orden_entregada, $texto);
         $a[] = d($texto, 'texto_pedido bg_white p-3');
 
         return d(d($a, 'p-3 azul_contraste_deporte'), 'col-sm-4');
@@ -3317,7 +3326,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function selector_cantidad($es_servicio, $existencia, $extra='')
+    function selector_cantidad($es_servicio, $existencia, $extra = '')
     {
 
         $config = [
@@ -3945,38 +3954,49 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function seccion_texto_ubicacion($domicilios, $es_ubicacion)
+    {
+        $response = [];
+
+        foreach ($domicilios as $row) {
+
+            if ($es_ubicacion < 1) {
+
+                $response[] =
+                    _text_(
+                        $row["calle"],
+                        "NÚMERO", $row["numero_exterior"],
+                        "NÚMERO INTERIOR", $row["numero_interior"],
+                        "COLONIA", $row["asentamiento"],
+                        "DELEGACIÓN/MUNICIPIO", $row["municipio"],
+                        "ESTADO ", $row["estado"],
+                        "CÓDIGO POSTAL ", $row["cp"]
+                    );
+
+
+            } else {
+
+                $response[] = valida_texto_maps($row["ubicacion"]);
+            }
+
+            break;
+        }
+        return $response;
+    }
+
     function create_domicilio_entrega($domicilios, $productos_orden_compra)
     {
 
         $contra_entrega_domicilio = pr($productos_orden_compra, 'contra_entrega_domicilio');
         $fecha_contra_entrega = format_fecha(pr($productos_orden_compra, 'fecha_contra_entrega'), 1);
-        $direccion = [];
         $es_ubicacion = pr($productos_orden_compra, 'ubicacion');
-        foreach ($domicilios as $row) {
-
-            if ($es_ubicacion < 1) {
-
-                $direccion[] =
-                    _text_($row["calle"], "NÚMERO", $row["numero_exterior"],
-                        "NÚMERO INTERIOR", $row["numero_interior"], "COLONIA",
-                        $row["asentamiento"], "DELEGACIÓN/MUNICIPIO", $row["municipio"],
-                        "ESTADO ", $row["estado"], "CÓDIGO POSTAL ", $row["cp"]
-                    );
-            } else {
-
-                $ubicacion = $row["ubicacion"];
-                $direccion[] = valida_texto_maps($ubicacion);
-            }
-
-
-        }
+        $direccion = seccion_texto_ubicacion($domicilios, $es_ubicacion);
 
         if ($contra_entrega_domicilio > 0) {
 
             $direccion[] = _titulo('pago contra entrega a domicilio, se entregará el', 2);
             $direccion[] = _titulo($fecha_contra_entrega, 2);
         }
-
 
         $str_direccion = append($direccion);
         $extra = ($es_ubicacion) ?: 'text-uppercase';
@@ -3996,7 +4016,6 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $fue_lista_negra = es_data($data['usuario_lista_negra']);
         if (es_data($data['es_lista_negra']) || $fue_lista_negra) {
-
 
             $texto = ($fue_lista_negra) ?
                 'Ya no vendemos a esta persona quedó mal en el pasado, fue enviado a lista negra' :
