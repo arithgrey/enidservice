@@ -179,12 +179,9 @@ if (!function_exists('invierte_date_time')) {
         $x[] = link_cambio_estado_venta();
 
         $x[] = link_cambio_fecha($recibo, $id_orden_compra);
-
-        $x = link_cambio_punto_encuentro($data, $x, $recibo);
-        $x = link_cambio_domicilio($data, $x, $recibo);
+        $x = link_cambio_domicilio($data, $x);
         $x = link_recordatorio($data, $x);
         $x[] = link_nota();
-        $x = link_costo($x, $data, $recibo, $es_vendedor);
         $x = lista_negra($x, $recibo, $es_vendedor);
 
         $text = intento_recuperacion($recibo, $data);
@@ -199,77 +196,25 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function link_cambio_punto_encuentro($data, $response, $recibo)
-    {
-
-
-        if (es_data($recibo) && !es_orden_cancelada($data)) {
-
-            $id_orden_compra = $data["orden"];
-            $form[] = frm_pe_avanzado($id_orden_compra);
-            $form[] = d(
-                a_enid(
-                    text_cambio_fecha_hora($recibo, 1),
-                    [
-                        "class" => "lugar_horario_entrega",
-                        "id" => $id_orden_compra,
-                        "onclick" => "confirma_lugar_horario_entrega()",
-                    ]
-                )
-            );
-            $response[] = append($form);
-        }
-        return $response;
-
-    }
-
-
-    function link_cambio_domicilio($data, $response, $recibo)
+    function link_cambio_domicilio($data, $response)
     {
 
         $id_orden_compra = $data["orden"];
-        if (es_data($recibo) && !es_orden_cancelada($data)) {
-
+        if (!es_orden_cancelada($data)) {
+            $path = path_enid(
+                'pedido_seguimiento', _text($id_orden_compra, '&domicilio=1&asignacion_horario_entrega=1'));
             $form[] =
                 a_enid(
-                    text_cambio_fecha_hora($recibo, 2),
+                    "Cambiar dirección de entrega",
                     [
-                        'class' => 'black',
-                        "onclick" => "confirma_cambio_domicilio('" . $id_orden_compra . "')",
+                        'class' => 'black text-uppercase',
+                        "onclick" => "confirma_cambio_domicilio('" . $path . "')",
                     ]
                 );
             $response[] = append($form);
         }
         return $response;
 
-    }
-
-    function text_cambio_fecha_hora($recibo, $tipo)
-    {
-
-        $tipo_entrega = (int)pr($recibo, 'tipo_entrega');
-        $text = '';
-        if ($tipo === 1) { // MENU PAGO CONTRA ENTREGA
-            if ($tipo === $tipo_entrega) {
-
-                $text = _text_('CAMBIAR PUNTO U HORA DE ENCUENTRO', icon(_check_icon));
-
-            } else {
-
-                $text = 'CAMBIAR A PUNTO DE ENCUENTRO';
-            }
-
-        } else {
-
-            if ($tipo === $tipo_entrega) {
-                $text = _text_('CAMBIAR DOMICILIO DE ENTREGA', icon(_check_icon));
-            } else {
-                $text = 'CAMBIAR A DOMICILIO DE ENTREGA';
-            }
-        }
-
-
-        return $text;
     }
 
 
@@ -912,13 +857,10 @@ if (!function_exists('invierte_date_time')) {
 
         $productos_ordenes_compra = $data["productos_orden_compra"];
         $id_orden_compra = $data["id_orden_compra"];
-        $puntos_encuentro_usuario = $data['puntos_encuentro_usuario'];
         $lista_direcciones = $data["lista_direcciones"];
         $domicilios_orden_compra = $data["domicilios_orden_compra"];
         $tipo_entrega = pr($productos_ordenes_compra, "tipo_entrega");
-        $domicilio_entrega = $data['domicilio_entrega'];
         $ubicaciones = $data['ubicaciones'];
-
         $response[] = $data['breadcrumbs'];
         $response[] =
             d(
@@ -948,8 +890,6 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $response[] = frm_direccion($id_orden_compra);
-        $response[] = frm_puntos($id_orden_compra);
-        $response[] = frm_pe_avanzado($id_orden_compra);
         $response[] = d(
             _text(
                 d_p(
@@ -971,12 +911,8 @@ if (!function_exists('invierte_date_time')) {
             h('Direcciones usadas recientemente', 4, 'text-uppercase strong ')
         );
 
-
-        $registradas = dd(
-            create_direcciones($domicilios_orden_compra, $lista_direcciones, $id_orden_compra),
-            crea_puntos_entrega($puntos_encuentro_usuario, $domicilios_orden_compra, $id_orden_compra),
-            10
-        );
+        $direcciones = create_direcciones($domicilios_orden_compra, $lista_direcciones, $id_orden_compra);
+        $registradas = d($direcciones, 10);
 
         $response[] = d($registradas, 'col-lg-12 p-0 mt-5 mb-5');
         $response[] = d(
@@ -2580,6 +2516,7 @@ if (!function_exists('invierte_date_time')) {
 
     function create_direcciones($domicilios_orden_compra, $lista, $id_recibo)
     {
+
         $r = [];
         foreach ($lista as $row) {
 
@@ -2688,98 +2625,25 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    function crea_puntos_entrega($puntos_encuentro_usuario, $domicilios_orden_compra, $id_orden_compra)
-    {
-
-        $id_registro = pr($puntos_encuentro_usuario, 'id', 0);
-        $r = [];
-        foreach ($puntos_encuentro_usuario as $row) {
-
-            $id = $row['id'];
-            $es_seleccion = es_selecccion($id, $domicilios_orden_compra, 1);
-
-            $nombre = (!$es_seleccion) ? $row['nombre'] : text_icon('fa fa-check-circle', $row['nombre']);
-
-            $class = (!$es_seleccion) ?
-                "dropdown-toggle bg-white w-100 text-right border-top-0 border-right-0 
-                    border-left-0 solid_bottom_2 mt-3" :
-                "dropdown-toggle bg_black white w-100 text-right border-top-0 
-                    border-right-0 border-left-0 solid_bottom_2 mt-3";
-            $button = form_button(
-                [
-                    "class" => $class,
-                    "data-toggle" => "dropdown",
-                    "aria-haspopup" => true,
-                    "aria-expanded" => false,
-
-                ], $nombre
-            );
-
-            $acciones = [];
-            $acciones[] = d_p($nombre, 'strong');
-            if ($id != $id_registro) {
-
-                $acciones[] = format_link(
-                    "Entregar en esta estación",
-                    [
-                        "class" => "establecer_punto_encuentro mt-2 mt-3",
-                        "id" => $id,
-                        'tipo' => 1,
-                        "id_orden_compra" => $id_orden_compra,
-
-                    ]
-                );
-            }
-
-            $acciones[] = format_link(
-                "Eliminar",
-                [
-                    'class' => 'eliminar_domicilio mt-3',
-                    "id" => $id,
-                    'tipo' => 1,
-                    "id_orden_compra" => $id_orden_compra,
-
-                ],
-                0
-            );
-
-            $menu = d($acciones,
-                [
-                    "class" => "dropdown-menu mw_300 mh_100 p-4 border-0",
-
-                ]
-            );
-            $punto_encuentro = d(add_text($button, $menu), 'dropleft');
-            $r[] = d($punto_encuentro, 'text-right col-lg-12 p-0 mt-3');
-
-
-        }
-
-        return append($r);
-    }
-
     function es_selecccion($id, $domicilios_orden_compra, $tipo)
     {
 
         $response = false;
         foreach ($domicilios_orden_compra as $row) {
 
+            $tipo_entrega = intval($row["tipo_entrega"]);
+            $es_ubicacion = $row["es_ubicacion"];
+            $es_entrega_domicilio = ($tipo_entrega === 2);
+            $es_domicilio = ($es_entrega_domicilio && $es_ubicacion < 1 && array_key_exists("id", $row));
+            $es_entrega_ubicacion = (
+                $es_entrega_domicilio && $es_ubicacion > 0 && array_key_exists("id_ubicacion", $row));
+
             switch ($tipo) {
 
-                /*Punto de encuentro**/
-                case 1:
-                    $tipo_entrega = intval($row["tipo_entrega"]);
-                    if ($tipo_entrega === 1 && $id === $row["id"]) {
-                        $response = true;
-                        break;
-                    }
-                    break;
-
                 /*Domicilio**/
-
                 case 2:
-                    $tipo_entrega = intval($row["tipo_entrega"]);
-                    if ($tipo_entrega === 2 && $id === $row["id"] && $row["ubicacion"] < 1) {
+
+                    if ($es_domicilio && $id === $row["id"]) {
                         $response = true;
                         break;
                     }
@@ -2787,8 +2651,8 @@ if (!function_exists('invierte_date_time')) {
 
                 /*Ubicación**/
                 case 3:
-                    $tipo_entrega = intval($row["tipo_entrega"]);
-                    if ($tipo_entrega === 2 && $id === $row["id_ubicacion"] && $row["ubicacion"] > 0) {
+
+                    if ($es_entrega_ubicacion && $id === $row["id_ubicacion"]) {
                         $response = true;
                         break;
                     }
@@ -3656,7 +3520,7 @@ if (!function_exists('invierte_date_time')) {
 
             $tipo_entrega = pr($productos_orden_compra, "tipo_entrega");
             $response = ($tipo_entrega != 1) ?
-                create_domicilio_entrega($domicilio, $productos_orden_compra) :
+                create_domicilio_entrega($domicilio, $productos_orden_compra, $data) :
                 create_punto_entrega($domicilio, $productos_orden_compra);
 
         } else {
@@ -3984,7 +3848,7 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function create_domicilio_entrega($domicilios, $productos_orden_compra)
+    function create_domicilio_entrega($domicilios, $productos_orden_compra, $data)
     {
 
         $contra_entrega_domicilio = pr($productos_orden_compra, 'contra_entrega_domicilio');
@@ -3998,8 +3862,19 @@ if (!function_exists('invierte_date_time')) {
             $direccion[] = _titulo($fecha_contra_entrega, 2);
         }
 
+        $path = path_enid(
+            'pedido_seguimiento', _text($data["orden"], '&domicilio=1&asignacion_horario_entrega=1'));
+
+        $direccion[] = d(
+            icon(
+                _editar_icon,
+                [
+                    "onclick" => "confirma_cambio_domicilio('" . $path . "')"])
+            , 'text-right');
+
         $str_direccion = append($direccion);
         $extra = ($es_ubicacion) ?: 'text-uppercase';
+
         $bloque = flex(
             "domicilio de envío",
             $str_direccion,
@@ -4177,5 +4052,42 @@ if (!function_exists('invierte_date_time')) {
         return ($data['id_usuario_referencia'] === $data['id_usuario']);
 
     }
+
+
+//    function text_cambio_fecha_hora($recibo, $tipo)
+//    {
+//
+//        $tipo_entrega = (int)pr($recibo, 'tipo_entrega');
+//        $text = 'CAMBIAR A DOMICILIO DE ENTREGA';
+//        if ($tipo === $tipo_entrega) {
+//            $text = _text_('CAMBIAR DOMICILIO DE ENTREGA', icon(_check_icon));
+//        }
+//        return $text;
+//    }
+
+//    function link_cambio_punto_encuentro($data, $response, $recibo)
+//    {
+//
+//
+//        if (es_data($recibo) && !es_orden_cancelada($data)) {
+//
+//            $id_orden_compra = $data["orden"];
+//            $form[] = frm_pe_avanzado($id_orden_compra);
+//            $form[] = d(
+//                a_enid(
+//                    text_cambio_fecha_hora($recibo, 1),
+//                    [
+//                        "class" => "lugar_horario_entrega",
+//                        "id" => $id_orden_compra,
+//                        "onclick" => "confirma_lugar_horario_entrega()",
+//                    ]
+//                )
+//            );
+//            $response[] = append($form);
+//        }
+//        return $response;
+//
+//    }
+
 
 }

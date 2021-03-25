@@ -45,9 +45,13 @@ class Home extends CI_Controller
         $es_costo_operacion = ($costos_operacion > 0);
 
         if ($es_costo_operacion && ctype_digit($costos_operacion)) {
+
             $this->carga_vista_costos_operacion($param, $data);
+
         } else {
+
             $this->seguimiento_pedido($param, $data);
+
         }
 
     }
@@ -68,7 +72,6 @@ class Home extends CI_Controller
 
 
         $data["es_vendedor"] = ($id_usuario_referencia == $data["id_usuario"]);
-
         $es_domicilio = prm_def($param, "domicilio");
 
         if ($es_domicilio) {
@@ -113,50 +116,37 @@ class Home extends CI_Controller
 
         }
     }
+//
+//    private function get_recibo($id_recibo, $add_img = 0)
+//    {
+//
+//        $q["id"] = $id_recibo;
+//        $response = $this->app->api("recibo/id/format/json/", $q);
+//
+//        if (es_data($response) && $add_img > 0) {
+//
+//            $a = 0;
+//            foreach ($response as $row) {
+//                $response[$a]["url_img_servicio"] =
+//                    $this->app->imgs_productos(
+//                        $response[$a]["id_servicio"], 1, 1, 1);
+//                $a++;
+//            }
+//        }
+//
+//        return $response;
+//    }
 
-    private function get_recibo($id_recibo, $add_img = 0)
-    {
-
-        $q["id"] = $id_recibo;
-        $response = $this->app->api("recibo/id/format/json/", $q);
-
-        if (es_data($response) && $add_img > 0) {
-
-            $a = 0;
-            foreach ($response as $row) {
-                $response[$a]["url_img_servicio"] =
-                    $this->app->imgs_productos(
-                        $response[$a]["id_servicio"], 1, 1, 1);
-                $a++;
-            }
-        }
-
-        return $response;
-    }
-
-    private function imagenes_recibos($recibos)
-    {
-
-        $a = 0;
-        foreach ($recibos as $row) {
-            $recibos[$a]["url_img_servicio"] =
-                $this->app->imgs_productos($recibos[$a]["id_servicio"], 1, 1, 1);
-            $a++;
-        }
-
-        return $recibos;
-    }
 
     private function domicilios($param, $data)
     {
 
         $id_orden_compra = $param["seguimiento"];
-        $domicilio_entrega = $data["domicilios"];
+        $domicilios_orden_compra = $data["domicilios"];
         $asignacion = prm_def($param, 'asignacion');
-        $tiene_domicilio = es_data($domicilio_entrega);
+        $tiene_domicilio = es_data($domicilios_orden_compra);
         $lista = prm_def($param, 'frecuentes');
         $asignacion_horario_entrega = prm_def($param, 'asignacion_horario_entrega');
-        $productos_orden_compra = $data["productos_orden_compra"];
 
 
         if (!$tiene_domicilio || $asignacion || $lista || $asignacion_horario_entrega) {
@@ -164,17 +154,15 @@ class Home extends CI_Controller
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);
             $ubicaciones = $this->get_ubicaciones_usuario($id_usuario);
-            $domicilios_orden_compra = $this->app->domicilios_orden_compra($productos_orden_compra);
 
 
             $data += [
                 "domicilios_orden_compra" => $domicilios_orden_compra,
                 "lista_direcciones" => $domicilios,
-                "puntos_encuentro_usuario" => $this->get_puntos_encuentro_usuario($id_usuario),
                 "ubicaciones" => $ubicaciones,
                 "num_domicilios" => count($domicilios),
-                "domicilio_entrega" => $domicilio_entrega,
-                "asignacion_horario_entrega" => prm_def($param, 'asignacion_horario_entrega')
+                "domicilio_entrega" => $domicilios_orden_compra,
+                "asignacion_horario_entrega" => $asignacion_horario_entrega
 
             ];
 
@@ -321,7 +309,6 @@ class Home extends CI_Controller
         return $data;
     }
 
-
     private function get_estatus_enid_service($q = [])
     {
 
@@ -365,13 +352,12 @@ class Home extends CI_Controller
 
         $id_orden_compra = $param['costos_operacion'];
         $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+        $tipos_costos_operativos = $this->get_tipo_costo_operacion();
 
         foreach ($productos_ordenes_compra as $row) {
 
-            $id_recibo = $row["id_proyecto_persona_forma_pago"];
-            $recibo = $this->get_recibo($id_recibo);
-            $id_usuario_venta = pr($recibo, 'id_usuario_venta');
-            $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+            $id_usuario_venta = $row['id_usuario_venta'];
+            $id_usuario_referencia = $row['id_usuario_referencia'];
             propietario($data, $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
                 path_enid('_area_cliente'));
 
@@ -398,13 +384,10 @@ class Home extends CI_Controller
                 ));
             }
 
-
-            $id_usuario = pr($recibo, 'id_usuario');
-
-            $id_usuario_referencia = pr($recibo, 'id_usuario_referencia');
+            $id_usuario = $row['id_usuario'];
+            $id_usuario_referencia = $row['id_usuario_referencia'];
             $usuario_comision = $this->get_usuario($id_usuario_referencia);
             $usuario_compra = $this->get_usuario($id_usuario);
-
 
             $tb = $this->table->generate();
             $utilidad = $param["saldado"] - $total;
@@ -421,7 +404,7 @@ class Home extends CI_Controller
                 $data,
                 $tb,
                 $totales,
-                $this->get_tipo_costo_operacion(),
+                $tipos_costos_operativos,
                 $param["costos_operacion"],
                 $path,
                 $costos_operacion,
@@ -451,7 +434,6 @@ class Home extends CI_Controller
 
     private function get_tipo_costo_operacion()
     {
-
         return $this->app->api("tipo_costo/index/format/json/", ["x" => 1]);
 
     }
@@ -533,19 +515,6 @@ class Home extends CI_Controller
 
     }
 
-//    private function productos($producto_orden_compra)
-//    {
-//
-//        $response = [];
-//        if (es_data($producto_orden_compra)) {
-//
-//            $ids = array_column($producto_orden_compra, "id_proyecto_persona_forma_pago");
-//            $response = $this->app->api("recibo/ids/format/json/", ["ids" => $ids]);
-//        }
-//        return $response;
-//
-//    }
-
 
     private function carga_detalle_pedido($param, $data)
     {
@@ -615,8 +584,6 @@ class Home extends CI_Controller
         $resumen_compras = prm_def($compras_en_tiempo, 'total');
         $num_compras = prm_def($resumen_compras, 'compras');
         $solicitudes = prm_def($resumen_compras, 'solicitudes');
-
-//        $cupon = ($data['id_perfil'] != 6 && $es_administrador) ? $this->cupon($id_recibo, $servicio, $num_compras) : [];
         $cupon = [];
 
         $id_usuario_referencia = pr($productos_orden_compra, 'id_usuario_referencia');

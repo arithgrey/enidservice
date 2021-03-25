@@ -1676,9 +1676,9 @@ class recibo extends REST_Controller
         if (fx($param, "id_recibo")) {
             $id_recibo = $param['id_recibo'];
             $set = ['ubicacion' => 1, 'contra_entrega_domicilio' => 1];
-            $respose = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
+            $response = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
         }
-        $this->response($respose);
+        $this->response($response);
 
     }
 
@@ -1896,12 +1896,35 @@ class recibo extends REST_Controller
         $param = $this->put();
         $response = [];
         if (fx($param, "recibo,tipo_entrega")) {
-            $response = $this->recibo_model->q_up("tipo_entrega", $param["tipo_entrega"],
-                $param["recibo"]);
+            $response = $this->recibo_model->q_up(
+                "tipo_entrega", $param["tipo_entrega"], $param["recibo"]);
             if ($response) {
                 $param["tipificacion"] = 31;
                 $this->add_tipificacion($param);
             }
+        }
+        $this->response($response);
+
+    }
+
+    function tipo_entrega_orden_PUT()
+    {
+
+        $param = $this->put();
+        $response = [];
+        if (fx($param, "id_recibo,tipo_entrega,ubicacion")) {
+
+            $id_recibo = $param['id_recibo'];
+            $ubicacion = $param['ubicacion'];
+            $tipo_entrega = $param['tipo_entrega'];
+
+            $set = [
+                'ubicacion' => $ubicacion,
+                'contra_entrega_domicilio' => 1,
+                'tipo_entrega' => $tipo_entrega
+
+            ];
+            $response = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
         }
         $this->response($response);
 
