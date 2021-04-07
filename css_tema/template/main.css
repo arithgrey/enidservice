@@ -544,9 +544,10 @@ li {
 
 .input_enid_format label {
     bottom: 0;
-    color: silver;
+    color: #dbdbdb;
     left: 3px;
     position: absolute;
+    font-weight: inherit;
 
 }
 
@@ -557,6 +558,7 @@ li {
     transition: all 1s ease;
     left: 0px !important;
     height: 25px;
+
 }
 
 .input_focus::-webkit-input-placeholder {

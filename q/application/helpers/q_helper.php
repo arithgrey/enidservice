@@ -531,15 +531,15 @@ if (!function_exists('invierte_date_time')) {
     function format_miembros($data)
     {
 
-
         $response[] = $data["paginacion"];
+
         foreach ($data["miembros"] as $row) {
 
-            $contenido = [];
             $id_usuario = $row["id_usuario"];
             $persona = format_nombre($row);
             $puntuacion = $row['puntuacion'];
-            $calificacon = crea_estrellas($puntuacion);
+            $calificacion = crea_estrellas($puntuacion);
+            $es_provedor = $data["es_proveedor"];
 
             $imagen = a_enid(
                 img(
@@ -551,29 +551,26 @@ if (!function_exists('invierte_date_time')) {
                 ), path_enid('usuario_contacto', $id_usuario)
             );
 
+            $fecha_registro = format_fecha($row["fecha_registro"]);
+            $fecha_registro = (!$es_provedor) ? $fecha_registro : '';
+            $contenido = control_asociacion($data, $id_usuario);
             $contenido[] = d($imagen);
             $contenido[] = flex(
-                format_fecha($row["fecha_registro"]),
-                _titulo($persona, 4),
+                $fecha_registro,
+                $persona,
                 'flex-column'
             );
 
-            $calificacion_usuario = flex($puntuacion, $calificacon, 'flex-column', 'mx-auto', 'mx-auto');
-            $contenido[] = a_enid(
-                $calificacion_usuario,
-                path_enid('usuario_contacto', $id_usuario)
+            $calificacion_usuario = flex(
+                $puntuacion,
+                $calificacion,
+                'flex-column',
+                'mx-auto',
+                'mx-auto'
             );
 
-            if ($data["modo_edicion"] > 0):
-                $contenido[] = tab(
-                    text_icon('usuario_enid_service fa fa-pencil', '', ["id" => $id_usuario]),
-                    '#tab_mas_info_usuario',
-                    [
-                        "class" => 'ml-auto',
-                    ]
-                );
-
-            endif;
+            $contenido = seccion_calificacion($data, $contenido, $calificacion_usuario, $id_usuario);
+            $contenido = control_edicion($data, $id_usuario, $contenido);
 
             $elemento = d_c($contenido, ['class' => 'col-sm-3 text-md-left text-center']);
             $response[] = d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row', _between));
@@ -581,6 +578,111 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return append($response);
+
+    }
+
+    function format_proveedores($usuarios)
+    {
+
+        $response = [];
+
+        $titulos[] = d(_titulo("Proveedor",3),6);
+        $titulos[] = d(_titulo("Costo de compra",3),6);
+        $response[] = d(append($titulos),'row border-bottom mt-5');
+
+        foreach ($usuarios as $row) {
+
+
+            $contenido = [];
+            $id_usuario = $row["id_usuario"];
+            $costo = $row["costo"];
+            $persona = format_nombre($row);
+            $id = $row["id"];
+            $imagen = a_enid(
+                img(
+                    [
+                        "src" => path_enid('imagen_usuario', $id_usuario),
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'mx-auto d-block rounded-circle mah_50'
+                    ]
+                ), path_enid('usuario_contacto', $id_usuario)
+            );
+
+            $clase = _text_(_editar_icon, 'editar_proveedor_servicio');
+            $editar = icon(
+                $clase,
+                [
+                    "id" => $id,
+                    "usuario" => $id_usuario
+                ]
+            );
+
+            $contenido[] = d($imagen);
+            $contenido[] = d($persona);
+            $contenido[] = d(money($costo));
+            $contenido[] = d($editar);
+
+            $elemento = d_c($contenido, ['class' => 'col-sm-3 text-md-left text-center']);
+            $response[] = d($elemento, _text_('d-flex border-bottom mb-5 mt-3 row', _between));
+
+        }
+
+        return append($response);
+
+    }
+
+    function seccion_calificacion($data, $contenido, $calificacion_usuario, $id_usuario)
+    {
+
+        $es_provedor = $data["es_proveedor"];
+        if (!$es_provedor) {
+
+            $contenido[] = a_enid(
+                $calificacion_usuario,
+                path_enid('usuario_contacto', $id_usuario)
+            );
+        }
+        return $contenido;
+
+    }
+
+    function control_edicion($data, $id_usuario, $contenido)
+    {
+        $es_provedor = $data["es_proveedor"];
+        $edicion = $data["modo_edicion"];
+
+        if ($edicion > 0 && !$es_provedor) {
+
+            $contenido[] = tab(
+                text_icon('usuario_enid_service fa fa-pencil', '', ["id" => $id_usuario]),
+                '#tab_mas_info_usuario',
+                [
+                    "class" => 'ml-auto',
+                ]
+            );
+
+        }
+
+        return $contenido;
+
+    }
+
+    function control_asociacion($data, $id_usuario)
+    {
+        $es_provedor = $data["es_proveedor"];
+        $contenido = [];
+
+        if ($es_provedor) {
+
+            $contenido[] = icon(
+                _text_(_agregar_icon, 'asociar_proveedor'),
+                [
+                    "id" => $id_usuario
+                ]
+            );
+        }
+
+        return $contenido;
 
     }
 

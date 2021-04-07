@@ -578,6 +578,48 @@ class usuario extends REST_Controller
 
     }
 
+    function proveedor_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+
+        if (fx($param, "nombre,email,password,telefono")) {
+
+            $email = $param["email"];
+            $telefono = $param["telefono"];
+            $password = $param["password"];
+            $nombre = $param["nombre"];
+
+            $params = [
+                "email" => $email,
+                "idempresa" => 1,
+                "id_departamento" => 11,
+                "password" => $password,
+                "nombre" => $nombre,
+                "id_usuario_referencia" => 180,
+                "tel_contacto" => $telefono
+            ];
+
+            $response["id_usuario"] = $this->usuario_model->insert($params, 1);
+            if ($response["id_usuario"] > 0) {
+
+                $q = [
+                    "id_usuario" => $response["id_usuario"],
+                    "puesto" => 18
+                ];
+                $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+                if ($response["usuario_permisos"] > 0) {
+                    $response["email"] = $email;
+                    $response["usuario_registrado"] = 1;
+                }
+            }
+        }
+
+        $this->response($response);
+
+    }
+
     function vendedor_POST()
     {
 
@@ -687,7 +729,6 @@ class usuario extends REST_Controller
     {
 
         $email = $param["email"];
-
         $params = [
             "email" => $email,
             "idempresa" => 1,
@@ -734,6 +775,7 @@ class usuario extends REST_Controller
             $conf["q2"] = "";
             $data["paginacion"] = $this->app->paginacion($conf);
             $data["modo_edicion"] = 1;
+            $data["es_proveedor"] = 0;
 
             switch ($v) {
 
@@ -747,6 +789,13 @@ class usuario extends REST_Controller
                     $response = format_encuesta($data);
 
                     break;
+                case 3:
+
+
+                    $data["es_proveedor"] = 1;
+                    $response = format_miembros($data);
+
+                    break;
                 default:
                     break;
             }
@@ -757,6 +806,25 @@ class usuario extends REST_Controller
 
     }
 
+    function proveedores_servicio_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_servicio,v")) {
+
+            $q = [
+                "status" => 1,
+                "id_departamento" => 11,
+                "id_servicio" => $param["id_servicio"]
+            ];
+            $response = $this->usuario_model->proveedores_servicio($q);
+            $response  = format_proveedores($response);
+
+        }
+        $this->response($response);
+
+    }
     function usuarios_GET()
     {
 

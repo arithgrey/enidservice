@@ -60,7 +60,7 @@ class codigo_postal extends REST_Controller
 
             $es_direccion_principal = ($direccion_principal != false);
             $response = $this->direccion_principal($response, $id_direccion, $es_direccion_principal, $param);
-
+            $response["asigna_reparto"] = $this->app->asigna_reparto($id_orden_compra);
             $response["externo"] = prm_def($param, "externo");
             $response["asignacion_horario"] = 1;
         }

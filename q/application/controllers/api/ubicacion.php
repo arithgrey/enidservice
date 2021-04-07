@@ -100,7 +100,7 @@ class ubicacion extends REST_Controller
 
             }
 
-            $reparto = $this->asigna_reparto($id_orden_compra);
+            $reparto = $this->app->asigna_reparto($id_orden_compra);
             $this->cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_entrega);
             $es_cliente = es_cliente($this->app->session());
 
@@ -120,31 +120,31 @@ class ubicacion extends REST_Controller
         $this->response($response);
     }
 
-    private function orden_compra_por_producto($id_recibo_producto)
-    {
+//    private function orden_compra_por_producto($id_recibo_producto)
+//    {
+//
+//        $id = 0;
+//        $producto_orden_compra =
+//            $this->app->api(
+//                "producto_orden_compra/recibo/format/json/",
+//                [
+//                    'id' => $id_recibo_producto
+//                ]
+//            );
+//
+//        if (es_data($producto_orden_compra)) {
+//
+//            $id = array_column($producto_orden_compra, 'id')[0];
+//
+//        }
+//        return $id;
+//
+//    }
 
-        $id = 0;
-        $producto_orden_compra =
-            $this->app->api(
-                "producto_orden_compra/recibo/format/json/",
-                [
-                    'id' => $id_recibo_producto
-                ]
-            );
-
-        if (es_data($producto_orden_compra)) {
-
-            $id = array_column($producto_orden_compra, 'id')[0];
-
-        }
-        return $id;
-
-    }
-
-    private function asigna_reparto($id_orden_compra)
-    {
-        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
-    }
+//    private function asigna_reparto($id_orden_compra)
+//    {
+//        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
+//    }
 
 
     function index_GET()
