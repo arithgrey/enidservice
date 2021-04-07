@@ -37,6 +37,7 @@ define('_8auto', "col-sm-8 col-sm-offset-2 row");
 define('_10auto', "col-sm-10 col-sm-offset-1 row");
 
 define('_6p', "col-sm-6 p-0");
+define('_3p', "col-sm-3 p-0");
 define('_4p', "col-sm-4 p-0");
 define('_5p', "col-sm-5 p-0");
 define('_7p', "col-sm-7 p-0");
@@ -90,6 +91,7 @@ define('_delivery_icon', 'fa fa-fighter-jet');
 define('_share_icon', 'fa fa-share');
 define('_bomb_icon', 'fa fa-bomb');
 define('_repato_icon', 'fa fa-bicycle');
+define('_busqueda_icon', 'fa fa-search');
 define('_check_icon', 'fa fa fa-check-circle-o');
 define('_flecha_derecha', 'fa-chevron-circle-right');
 define('_calendario_icon', 'fa fa-calendar');
@@ -99,6 +101,8 @@ define('_entregas_icon', 'fa fa-motorcycle');
 define('_maps_icon', 'fa fa-map-marker');
 define('_compras_icon','fa-shopping-bag');
 define('_estrellas_icon','fa fa-star');
+define('_agregar_icon','fa-plus-circle');
+
 
 
 

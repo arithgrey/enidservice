@@ -1,8 +1,8 @@
 "use strict";
 let $selector_carga_modal = $('#stock_servicio_modal');
 let $form_stock_servicio = $('.form_stock_servicio');
-let $input_stock =  $form_stock_servicio.find('.stock');
-let $input_id_servicio =  $form_stock_servicio.find('.id_servicio');
+let $input_stock = $form_stock_servicio.find('.stock');
+let $input_id_servicio = $form_stock_servicio.find('.id_servicio');
 $(document).ready(() => {
 
     $(".form_compras").submit(busqueda);
@@ -26,7 +26,7 @@ let editar_stock_disponible = function () {
     let $id = get_parameter_enid($(this), "id");
     let $total = get_parameter_enid($(this), "total");
     $input_id_servicio.val($id);
-    if (parseInt($id) > 0 ) {
+    if (parseInt($id) > 0) {
 
         $selector_carga_modal.remove('d-none');
         $selector_carga_modal.modal("show");
@@ -35,7 +35,7 @@ let editar_stock_disponible = function () {
     }
 };
 
-let stock_servicio = function(e){
+let stock_servicio = function (e) {
 
     let data_send = $form_stock_servicio.serialize();
     let url = "../q/index.php/api/servicio/stock/format/json/";

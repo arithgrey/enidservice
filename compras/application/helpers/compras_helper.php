@@ -78,6 +78,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d($x, 'col-sm-12 mt-3');
         $response[] = form_stock();
+
         return append($response);
 
     }
@@ -117,5 +118,7 @@ if (!function_exists('invierte_date_time')) {
 
         return gb_modal(append($form), 'stock_servicio_modal');
     }
+
+
 }
 

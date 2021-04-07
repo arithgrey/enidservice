@@ -1017,13 +1017,13 @@ let paste_search = function () {
 };
 let next_label_input_focus = function () {
 
-    $(this).next('label').addClass('focused_input');
+    $(this).next('label').addClass('focused_input strong');
     $(this).addClass('input_focus');
 };
 let next_label_focus_out = function () {
 
     if ($(this).val() === '') {
-        $(this).next('label').removeClass('focused_input');
+        $(this).next('label').removeClass('focused_input strong');
         $(this).removeClass('input_focus');
     }
 };

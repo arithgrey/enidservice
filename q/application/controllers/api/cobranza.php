@@ -179,29 +179,29 @@ class Cobranza extends REST_Controller
         );
 
     }
-
-    private function asigna_reparto($id_orden_compra)
-    {
-
-        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
-    }
-
-    function get_precio_id_servicio($id_servicio)
-    {
-
-        return $this->app->api("recibo/precio_servicio/format/json/",
-            ["id_servicio" => $id_servicio]);
-    }
-
-    function disponibilidad_servicio($id_servicio, $num_ciclos)
-    {
-        $q = [
-            "id_servicio" => $id_servicio,
-            "articulos_solicitados" => $num_ciclos,
-        ];
-
-        return $this->app->api("servicio/info_disponibilidad_servicio/format/json/", $q);
-    }
+//
+//    private function asigna_reparto($id_orden_compra)
+//    {
+//
+//        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
+//    }
+//
+//    function get_precio_id_servicio($id_servicio)
+//    {
+//
+//        return $this->app->api("recibo/precio_servicio/format/json/",
+//            ["id_servicio" => $id_servicio]);
+//    }
+//
+//    function disponibilidad_servicio($id_servicio, $num_ciclos)
+//    {
+//        $q = [
+//            "id_servicio" => $id_servicio,
+//            "articulos_solicitados" => $num_ciclos,
+//        ];
+//
+//        return $this->app->api("servicio/info_disponibilidad_servicio/format/json/", $q);
+//    }
 
     private function orden($param, $data_servicio, $orden_compra = 0)
     {
@@ -305,11 +305,11 @@ class Cobranza extends REST_Controller
 
     }
 
-    private function agrega_notas_pedido($q)
-    {
-
-        return $this->app->api("orden_comentario/index", $q, "json", "POST");
-    }
+//    private function agrega_notas_pedido($q)
+//    {
+//
+//        return $this->app->api("orden_comentario/index", $q, "json", "POST");
+//    }
 
 
     function posterior_compra($data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo)

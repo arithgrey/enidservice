@@ -371,7 +371,10 @@ let cerrar_ticket = (id) => {
     id = parseInt(id);
     if (id > 0) {
         set_option("id_ticket", id);
-        show_confirm("¿DESEAS CERRAR EL TICKET?", "Se descartarán todas sus tareas incluidas", "CERRAR TICKET", confirmacion_cerrar_ticket);
+        show_confirm(
+            "¿DESEAS CERRAR EL TICKET?",
+            "Se descartarán todas sus tareas incluidas",
+            "CERRAR TICKET", confirmacion_cerrar_ticket);
     }
 
 };

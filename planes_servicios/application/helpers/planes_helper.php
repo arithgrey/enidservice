@@ -58,7 +58,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 'class' => 'ocultar_fecha_stock'
             ], 0);
-        $form[] = d(flex($mostrar, $ocultar, _text_(_between,_mbt5)), 'opciones_definicion');
+        $form[] = d(flex($mostrar, $ocultar, _text_(_between, _mbt5)), 'opciones_definicion');
 
 
         $form[] = form_open("",
@@ -76,6 +76,188 @@ if (!function_exists('invierte_date_time')) {
         return gb_modal(append($form), 'stock_fecha_servicio_modal');
     }
 
+    function form_busqueda()
+    {
+        $form[] = form_open("",
+            [
+                "class" => "form_busqueda_proveedor",
+                "id" => "form_busqueda_proveedor",
+                "method" => "post"
+            ]
+        );
+        $form[] = input_frm(
+            'mt-5',
+            "Búsqueda",
+            [
+                "id" => "q_proveedor",
+                "name" => "q",
+                "class" => "q_proveedor",
+                "type" => "text",
+                "required" => true,
+                "placeholder" => "Busqueda",
+                "no_validar" => 1
+            ]
+        );
+
+        $form[] = hiddens(["name" => "status", "value" => 1]);
+        $form[] = hiddens(["name" => "id_departamento", "value" => 11]);
+        $form[] = hiddens(["name" => "page", "value" => 1]);
+        $form[] = hiddens(["name" => "v", "value" => 3]);
+
+        $form[] = form_close();
+        $form[] = place("seccion_usuarios");
+        return append($form);
+    }
+
+    function form_proveedores()
+
+    {
+
+        $form[] = d(_titulo('¿Quién te distribuye este artículo?'), 'mb-5');
+        $form[] = form_open("",
+            [
+                "class" => "form_proveedor",
+                "id" => "form_proveedor",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = input_frm(
+            'mt-5',
+            "Proveedor",
+            [
+                "id" => "proveedor",
+                "name" => "proveedor",
+                "class" => "proveedor",
+                "type" => "text",
+                "onkeyup" => "transforma_mayusculas(this)",
+                "required" => true,
+                "placeholder" => "Nombre el proveedor",
+                "no_validar" => 1
+            ]
+        );
+
+        $form[] = input_frm(
+            'mt-5',
+            "Teléfono",
+            [
+                "id" => "telefono",
+                "name" => "telefono",
+                "placeholder" => "Teléfono",
+                "class" => "telefono ",
+                "required" => true,
+                "type" => "text",
+                "maxlength" => 10,
+                "minlength" => 8,
+                "value" => ""
+            ], _text_telefono
+
+        );
+
+        $form[] = input_frm(
+            "mt-5",
+            "Página web",
+            [
+                "id" => "pagina_web",
+                "class" => "pagina_web",
+                "name" => "pagina_web",
+                "placeholder" => "Link de compra",
+                "type" => "url",
+            ]
+        );
+
+        $form[] = input_frm('mt-5', "Precio en que vende este artículo",
+            [
+                "type" => "number",
+                "required" => true,
+                "class" => "costo",
+                "name" => "costo",
+                "id" => "precio",
+            ]
+        );
+
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = btn('Registrar', ['class' => 'mt-5']);
+        $form[] = form_close();
+        $form[] = d(d("Ó", "ml-auto"), 'col-sm-12 mt-5 text-right texto_baja_proveedor d-none');
+        $form[] = d(
+            d("Puedes eliminar este proveedor de la lista",
+                [
+                    "class" => "ml-auto underline eliminar_provedor_servicio cursor_pointer",
+                ]
+            )
+            , 'col-sm-12 mt-3 text-right texto_baja_proveedor d-none'
+        );
+        return append($form);
+
+    }
+
+    function distribucion_proveedores()
+    {
+
+        $link_formulario =
+            tab("Registro", "#tab_formulario_proveedores");
+
+        $link_busqueda =
+            tab("Búsqueda", "#tab_busqueda_proveedores");
+
+        $list = [
+
+            li(
+                $link_busqueda,
+                [
+                    "class" => 1,
+                ]
+            ),
+            li(
+                $link_formulario
+            )
+        ];
+
+        return ul($list, "nav nav-tabs");
+
+    }
+
+    function proveedores()
+    {
+
+//        $response[] = distribucion_proveedores();
+        $seccion[] = tab_seccion(form_proveedores(), "tab_formulario_proveedores", 1);
+//        $seccion[] = tab_seccion(form_busqueda(), "tab_busqueda_proveedores",1);
+//        $response[] = tab_content($seccion);
+        return gb_modal($seccion, 'proveedor_servicio_modal');
+    }
+
+    function costo_proveedor()
+    {
+
+        $form[] = d(_titulo('¿En qué precio te vende este artículo?'), 'mb-5');
+        $form[] = form_open("",
+            [
+                "class" => "form_costo_proveedor",
+                "id" => "form_costo_proveedor",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = input_frm('mt-5', "Precio",
+            [
+                "type" => "number",
+                "required" => true,
+                "class" => "costo",
+                "name" => "costo",
+                "id" => "precio",
+            ]
+        );
+
+        $form[] = hiddens(['name' => 'id_usuario', 'class' => 'id_usuario', 'value' => 0]);
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = btn('Registrar', ['class' => 'mt-5']);
+        $form[] = form_close();
+
+        return gb_modal($form, 'proveedor_costo_servicio_modal');
+    }
+
     function render_ventas($data)
     {
 
@@ -83,9 +265,11 @@ if (!function_exists('invierte_date_time')) {
         $action = $data["action"];
         $top_servicios = $data["top_servicios"];
         $considera_segundo = $data["considera_segundo"];
-        $id_usuario = $data['id_usuario'];
-        $t[] = menu($id_perfil, $action, $id_usuario);
+
+        $t[] = menu($id_perfil, $action);
         $t[] = form_stock();
+        $t[] = proveedores();
+        $t[] = costo_proveedor();
         $t[] = form_fecha_stock($data);
         $t[] = btw(
             _titulo("artículos más vistos de la semana")
@@ -102,12 +286,7 @@ if (!function_exists('invierte_date_time')) {
             'tab_servicios',
             tab_activa(0, $action, $considera_segundo)
         );
-        $z[] = tab_seccion(
-            puntos_venta()
-            ,
-            'tab_puntos_venta',
-            tab_activa(0, $action, $considera_segundo)
-        );
+
         $z[] = tab_seccion(
             form_ventas($data["ciclo_facturacion"], $data["error_registro"]),
             'tab_form_servicio',
@@ -259,15 +438,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);
-    }
-
-    function puntos_venta()
-    {
-
-        $r[] = _titulo("puntos de venta");
-        $r[] = d(place("place_puntos_venta top_50"), 1);
-        return append($r);
-
     }
 
 
@@ -440,17 +610,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function menu($perfil, $action, $id_usuario)
+    function menu($perfil, $action)
     {
 
         $is_mobile = is_mobile();
-        $punto_venta = tab(
-            text_icon('fa fa-map', " puntos de entrega "),
-            "#tab_puntos_venta",
-            [
-                'class' => "puntos_venta"
-            ]
-        );
 
         $venta = tab(
             text_icon("fa fa-shopping-cart", "configurar artículos"),
@@ -475,10 +638,6 @@ if (!function_exists('invierte_date_time')) {
                 _text(tab_activa('nuevo', $action), " ")
             );
 
-            $list[] = li(
-                $punto_venta,
-                _text(tab_activa('puntos_venta', $action), " mt-3")
-            );
 
             $list[] =
                 li(

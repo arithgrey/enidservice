@@ -11,11 +11,12 @@ let $menu = $('.menu');
 let seccion_busqueda = '.contenedor_busqueda_articulos';
 let titulo_seccion = '.titulo_seccion';
 
-let $seccion_busqueda = $(seccion_busqueda);
-let $titulo_seccion = $(titulo_seccion);
 let $costo = $('.costo');
 let $form_nombre_producto = $('.form_nombre_producto');
 let $selector_carga_modal = $('#stock_servicio_modal');
+let $selector_carga_modal_proveedor = $('#proveedor_servicio_modal');
+let $selector_costo_servicio_modal = $('#proveedor_costo_servicio_modal');
+
 let $stock_fecha_servicio_modal = $('#stock_fecha_servicio_modal');
 
 let $form_stock_servicio = $('.form_stock_servicio');
@@ -27,8 +28,10 @@ let $input_costo = $form_stock_servicio.find('.costo_stock');
 let $definir_feche_disponible = $('.definir_feche_disponible');
 let $opciones_definicion = $('.opciones_definicion');
 let $ultima_fecha_disponible = $('.ultima_fecha_disponible');
-
-
+let $form_costo_proveedor = $(".form_costo_proveedor");
+let $eliminar_provedor_servicio = $(".eliminar_provedor_servicio");
+let $texto_baja_proveedor = $(".texto_baja_proveedor");
+let $form_proveedor = $(".form_proveedor");
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -48,12 +51,14 @@ $(document).ready(() => {
     $(".li_menu_servicio").click(() => {
         despliega([".btn_agregar_servicios", ".contenedor_top"], 1);
     });
-    $(".puntos_venta").click(puntos_venta);
+
 
     despliega([".contenedor_busqueda_global_enid_service"], 0);
     $(".ci_facturacion").change(evalua_precio);
     $(".cancelar_registro").click(cancelar_registro);
     def_contenedores();
+
+    $('.form_proveedor').submit(registro_proveedor);
 
 
     $costo.keypress(enter_precio);
@@ -68,7 +73,10 @@ $(document).ready(() => {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_stock_servicio, 1);
     });
+    $eliminar_provedor_servicio.click(elimina_proveedor_servicio);
+    $form_costo_proveedor.submit(costo_servicio_proveedor);
 
+    proveedores_servicio();
 
 });
 
@@ -222,6 +230,11 @@ let respuesta_informacion_servicio = (data) => {
     $(".restablecer").click(restablecer);
     $('.stock_disponible').click(editar_stock_disponible);
     $('.stock_disponibilidad').click(editar_fecha_stock_disponible);
+    $('.link_proveedor').click(proveedores);
+    // $('.link_busqueda').click(link_busqueda);
+    $(".boton_asociados").click(link_asociados);
+    $(".boton_busqueda").click(boton_busqueda);
+
 
     $(".form_marca").submit(actualiza_marca);
     $(".marca").blur(actualiza_marca);
@@ -246,10 +259,9 @@ let respuesta_informacion_servicio = (data) => {
     $(".texto_peso").click(editor_peso);
     $(".texto_capacidad").click(editor_capacidad);
     $(".texto_modelo").click(editor_modelo);
-
     $(".agregar_material").click(agregar_material);
 
-
+    $('.form_busqueda_proveedor').submit(busqueda_proveedor);
     $(".eliminar_material").click(eliminar_material);
 
 
@@ -267,14 +279,13 @@ let respuesta_informacion_servicio = (data) => {
     }
     $(".descartar_promocion").click(descartar_promocion);
     $('.form_stock_select').find(".stock").change(set_cantidad_en_stock);
-    $('.entregas_en_punto_encuentro').click(actualiza_entregas_en_punto_encuentro);
 
     verifica_formato_default_inputs();
     $(".input_enid_format :input").focus(next_label_input_focus);
 
     $(".busqueda_producto_relacionado").keyup(busqueda_posibles_relaciones);
     $(".quitar_servicio_relacionado").click(quitar_servicio_relacionado);
-
+    $(".listado_proveedores").click(proveedores_servicio);
 
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
@@ -393,20 +404,6 @@ let pie = function (e) {
         carga_informacion_servicio(4);
     }, ".place_sobre_el_negocio");
 }
-let actualiza_entregas_en_punto_encuentro = function () {
-
-    let url = "../q/index.php/api/servicio/es_posible_punto_encuentro/format/json/";
-    let $id = get_parameter_enid($(this), "id");
-    let data_send = {
-        es_posible_punto_encuentro: $id,
-        id_servicio: get_option("servicio")
-    };
-    request_enid("PUT", data_send, url, function () {
-        carga_informacion_servicio(4);
-    }, ".place_sobre_el_negocio");
-
-
-};
 
 let muestra_input_visible = (visible, i, t) => (visible === true) ? showonehideone(i, t) : showonehideone(i, t);
 
@@ -896,8 +893,9 @@ let configuracion_inicial = function () {
 
 let simula_envio = (e) => {
 
-    let costo = $costo.val();
-    let next = (get_option("modalidad") == 0 && costo == 0) ? 0 : 1;
+
+    let costo = $form_nombre_producto.find(".costo").val();
+    let next = (parseFloat(costo) < 1) ? 0 : 1;
     next_error($costo, 0);
     if (next) {
 
@@ -1704,71 +1702,7 @@ let retorno = () => {
             break;
     }
 };
-let puntos_venta = () => {
 
-    let url = "../q/index.php/api/linea_metro/disponibilidad/format/json/";
-    let data_send = {};
-    request_enid("GET", data_send, url, r_lineas);
-};
-let r_lineas = function (data) {
-
-    render_enid(".place_puntos_venta", data);
-    $(".agregar_linea").click(agregar_linea);
-    $(".quitar_linea").click(quitar_linea);
-    $(".puntos_encuentro").click(puntos_encuentro);
-
-
-};
-let agregar_linea = function () {
-
-    let id = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra": 0, "id": id};
-    request_enid("PUT", data_send, url, puntos_venta);
-};
-let quitar_linea = function () {
-
-    let id = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/linea_lista_negra/index/format/json/";
-    let data_send = {"lista_negra": 1, "id": id};
-    request_enid("PUT", data_send, url, puntos_venta);
-};
-let puntos_encuentro = function () {
-
-    let id = (get_parameter_enid($(this), "id") > 0) ? get_parameter_enid($(this), "id") : get_option("id_punto_encuentro");
-    set_option("id_punto_encuentro", id);
-    if (id > 0) {
-
-        let url = "../q/index.php/api/punto_encuentro/disponibilidad/format/json/";
-        let data_send = {"id": id, "v": 1};
-        request_enid("GET", data_send, url, r_puntos_encuentro);
-    }
-};
-let r_puntos_encuentro = function (data) {
-
-    render_enid(".place_puntos_venta", data);
-    $(".quitar_punto").click(quitar_punto);
-    $(".agregar_punto").click(agregar_punto);
-
-
-};
-let quitar_punto = function () {
-
-
-    let id = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra": 1, "id": id};
-    request_enid("PUT", data_send, url, puntos_encuentro);
-
-};
-let agregar_punto = function () {
-
-
-    let id = get_parameter_enid($(this), "id");
-    let url = "../q/index.php/api/lista_negra_encuentro/index/format/json/";
-    let data_send = {"lista_negra": 0, "id": id};
-    request_enid("PUT", data_send, url, puntos_encuentro);
-};
 let restablecer = function () {
 
     let id = get_parameter_enid($(this), "id");
@@ -1782,14 +1716,12 @@ let restablecer = function () {
 };
 let restablecer_promocion = function () {
 
-
     let id = get_option("id_servicio");
     let url = "../q/index.php/api/servicio/restablecer/format/json/";
     let data_send = {"id": id};
     request_enid("PUT", data_send, url, () => {
         carga_informacion_servicio();
     });
-
 
 };
 let enter_precio = function (e) {
@@ -1808,10 +1740,68 @@ let registro_comision = function (e) {
     });
 
 };
+let busqueda_proveedor = function (e) {
+
+
+    e.preventDefault();
+
+    let $data_send = $('.form_busqueda_proveedor').serialize();
+    let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
+    request_enid("GET", $data_send, url, listado_proveedores);
+
+
+}
+
+let listado_proveedores = (data) => {
+
+    render_enid('.seccion_usuarios', data);
+    $(".pagination > li > a, .pagination > li > span").click(function (e) {
+
+        e.preventDefault();
+        set_option("page", $(this).text());
+        busqueda_proveedor();
+
+    });
+    $(".asociar_proveedor").click(asociar_proveedor);
+    $(".pagination > li > a, .pagination > li > span").css("color", "white");
+
+};
+let asociar_proveedor = function (e) {
+
+    let $id = e.target.id;
+    desbloqueda_form(".form_costo_proveedor");
+    reset_form("form_costo_proveedor");
+    $(".id_servicio").val(get_option("servicio"));
+    $selector_carga_modal_proveedor.modal("hide");
+    $selector_costo_servicio_modal.modal("show");
+    $form_costo_proveedor.find(".id_usuario").val($id);
+
+
+}
+let registro_proveedor = function (e) {
+
+    e.preventDefault();
+    $(".id_servicio").val(get_option("servicio"));
+    let $form = $('.form_proveedor');
+    let $data_send = $form.serialize();
+    let $proveedor = $form.find(".proveedor").val();
+    let url = "../q/index.php/api/proveedor_servicio/index/format/json/";
+    let $form_busqueda_proveedor = $(".form_busqueda_proveedor");
+    let $q_vendedor = $form_busqueda_proveedor.find(".q_proveedor");
+    $q_vendedor.val($proveedor);
+    $q_vendedor.click();
+
+    request_enid("POST", $data_send, url, function () {
+        reset_form("form_proveedor");
+        $selector_carga_modal_proveedor.modal("hide");
+        $form_busqueda_proveedor.submit();
+
+    });
+}
+
 let busqueda_posibles_relaciones = function (e) {
 
     let keycode = e.keyCode;
-
     if (keycode === 13) {
 
         let url = "../q/index.php/api/servicio/relacionados/format/json/";
@@ -1829,9 +1819,7 @@ let busqueda_posibles_relaciones = function (e) {
         request_enid("GET", data_send, url, respuesta_busqueda_servicio, ".place_servicios", () => {
 
         });
-
     }
-
 }
 let quitar_servicio_relacionado = function (e) {
 
@@ -1936,3 +1924,107 @@ let eliminar_material = function (e) {
 
 
 }
+let proveedores = function () {
+
+
+    $texto_baja_proveedor.addClass("d-none");
+    $selector_carga_modal_proveedor.modal("show");
+}
+
+let editar_proveedor_servicio = function (e) {
+
+    let $id_proveedor = e.target.id;
+
+    if (parseFloat($id_proveedor) > 0) {
+
+        set_option("proveedor_servicio", $id_proveedor);
+        $texto_baja_proveedor.removeClass("d-none");
+        $selector_carga_modal_proveedor.modal("show");
+
+        let url = "../q/index.php/api/usuario/q/format/json/";
+        let $id_usuario = $(this).attr("usuario");
+
+        let data_send = {"id_usuario": $id_usuario};
+        request_enid("GET", data_send, url, auto_llenado);
+
+    }
+
+}
+
+let auto_llenado = function (data) {
+
+    debugger;
+    $form_proveedor.find(".proveedor").val(data[0].nombre);
+    $form_proveedor.find(".telefono").val(data[0].tel_contacto);
+
+
+
+}
+
+let costo_servicio_proveedor = function (e) {
+
+    e.preventDefault();
+    let $data_send = $form_costo_proveedor.serialize();
+    let url = "../q/index.php/api/proveedor_servicio/costo/format/json/";
+    request_enid("POST", $data_send, url, function () {
+
+        $selector_costo_servicio_modal.modal("hide");
+        bloquea_form(".form_costo_proveedor");
+        proveedores_servicio();
+
+
+    });
+}
+
+let proveedores_servicio = function () {
+
+    let $id_servicio = get_option("servicio");
+    if (parseFloat($id_servicio) > 0) {
+
+        $(".proveedores_existentes").removeClass("d-none");
+        let $data_send = $.param({"id_servicio": get_option("servicio"), "v": 2});
+        let url = "../q/index.php/api/usuario/proveedores_servicio/format/json/";
+        request_enid("GET", $data_send, url, function (data) {
+
+            render_enid(".proveedores_existentes", data);
+            $('.editar_proveedor_servicio').click(editar_proveedor_servicio);
+            $(".busqueda_proveedores").addClass("d-none");
+        });
+    }
+
+}
+
+let elimina_proveedor_servicio = function () {
+
+    let $texto = "¿Deseas quitar este proveedor de la lista?";
+    $selector_carga_modal_proveedor.modal("hide");
+    show_confirm($texto, "", "Eliminar", confirmar_baja_proveedor);
+}
+let confirmar_baja_proveedor = function () {
+
+    let $data_send = $.param({"id": get_option("proveedor_servicio")});
+    let url = "../q/index.php/api/proveedor_servicio/index/format/json/";
+    request_enid("DELETE", $data_send, url, function (data) {
+
+        proveedores_servicio();
+
+    });
+
+}
+let link_asociados = function () {
+
+    $(".boton_asociados").addClass("d-none");
+    $('.boton_busqueda').removeClass("d-none");
+    $(".proveedores_existentes").removeClass("d-none");
+    $(".busqueda_proveedores").addClass("d-none");
+}
+let boton_busqueda = function () {
+
+    $(".boton_asociados").removeClass("d-none");
+    $('.boton_busqueda').addClass("d-none");
+    $(".proveedores_existentes").addClass("d-none");
+    $(".busqueda_proveedores").removeClass("d-none");
+
+
+}
+

@@ -1427,6 +1427,10 @@ class app extends CI_Controller
         }
         return $response;
     }
+    function asigna_reparto($id_orden_compra)
+    {
+        return $this->api("recibo/reparto", ["orden_compra" => $id_orden_compra], "json", "PUT");
+    }
 
     function get_domicilio_entrega($producto_orden_compra)
     {
@@ -1485,5 +1489,6 @@ class app extends CI_Controller
         return $this->api("ubicacion/index/format/json/",
             ["id_recibo" => $id_recibo]);
     }
+
 
 }

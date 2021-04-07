@@ -335,7 +335,8 @@ class usuario_model extends CI_Model
 
     function num_total($param)
     {
-        $where = $this->get_where_usuarios_total($param);
+        $where =
+            $this->get_where_usuarios_total($param);
         $query_get = _text_("SELECT COUNT(0)num FROM usuario u", $where);
         $result = $this->db->query($query_get);
         return $result->result_array()[0]["num"];
@@ -346,20 +347,26 @@ class usuario_model extends CI_Model
 
         $status = $param["status"];
         $q = prm_def($param, "q");
+        $es_perfil = (array_key_exists("id_departamento", $param));
+        $departamento = "AND u.id_departamento = ";
+        $extra_perfil = ($es_perfil) ? _text_($departamento, $param["id_departamento"]) : "";
+
         $extra = (strlen($q) > 1) ? " WHERE 
         u.nombre like '%" . $q . "%'
         OR u.email like '%" . $q . "%'
         OR u.apellido_paterno like '%" . $q . "%'
         OR u.apellido_materno like '%" . $q . "%'
         OR u.tel_contacto  like '%" . $q . "%'
-         " : '';
+         " : " ";
+
 
         return "   inner join usuario_perfil pu
                     on 
                     pu.idusuario = u.idusuario
-                    AND pu.idperfil != 20                    
+                    AND 
+                    pu.idperfil != 20                    
                     AND u.status = $status
-                    " . $extra . " 
+                    " . $extra . $extra_perfil . " 
                     ORDER BY u.fecha_registro DESC";
 
 
@@ -447,13 +454,34 @@ class usuario_model extends CI_Model
         return $data_complete;
     }
 
+    function proveedores_servicio($param)
+    {
+
+        $_num = mt_rand();
+        $this->create_usuarios_enid_service(0, $_num, $param);
+
+
+        $id_servicio = $param["id_servicio"];
+        $query_get = "SELECT u.*, ps.* FROM tmp_usuarios_enid_service_$_num u 
+                    INNER JOIN proveedor_servicio ps 
+                    ON u.id_usuario = ps.id_usuario
+                    AND ps.id_servicio = $id_servicio";
+
+        $data_complete = $this->db->query($query_get)->result_array();
+        $this->create_usuarios_enid_service(1, $_num, $param);
+        return $data_complete;
+    }
+
+
     function create_usuarios_enid_service($flag, $_num, $param)
     {
 
         $this->db->query(get_drop("tmp_usuarios_enid_service_$_num"));
         if ($flag == 0) {
+
             $where = $this->get_where_usuarios($param);
-            $query_create = "CREATE TABLE tmp_usuarios_enid_service_$_num AS 
+            $query_create = "CREATE TABLE 
+                            tmp_usuarios_enid_service_$_num AS 
                             SELECT      
                               u.idusuario id_usuario,
                               u.nombre,                   
@@ -475,21 +503,30 @@ class usuario_model extends CI_Model
 
         $status = $param["status"];
         $q = trim(prm_def($param, "q"));
-        $extra = (strlen($q) > 1) ? " WHERE 
-        u.nombre like '%" . $q . "%'
-        OR u.email like '%" . $q . "%'
-        OR u.apellido_paterno like '%" . $q . "%'
-        OR u.apellido_materno like '%" . $q . "%'
-        OR u.tel_contacto  like '%" . $q . "%'
-        OR u.idusuario  like '%" . $q . "%'
-         " : " ";
+
+        $es_departamento = (array_key_exists("id_departamento", $param));
+        $departamento = "AND u.id_departamento = ";
+        $extra_perfil = ($es_departamento) ? _text_($departamento, $param["id_departamento"]) : "";
+
+
+        $extra = (strlen($q) > 1) ?
+            " WHERE 
+            u.nombre like '%" . $q . "%'
+            OR u.email like '%" . $q . "%'
+            OR u.apellido_paterno like '%" . $q . "%'
+            OR u.apellido_materno like '%" . $q . "%'
+            OR u.tel_contacto  like '%" . $q . "%'
+            OR u.idusuario  like '%" . $q . "%'
+             " : " ";
+
         $limit = $this->get_limit_usuarios($param);
         return "inner join usuario_perfil pu
                     on 
                     pu.idusuario = u.idusuario
                     AND pu.idperfil != 20                    
                     AND u.status = $status
-                     " . $extra . " ORDER BY u.fecha_registro DESC " . $limit;
+                     " . $extra . $extra_perfil .
+            " ORDER BY u.fecha_registro DESC " . $limit;
     }
 
     function set_miembro($param)
