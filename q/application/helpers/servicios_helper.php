@@ -2130,18 +2130,6 @@ if (!function_exists('invierte_date_time')) {
         return append($imagenes);
     }
 
-    function eleccion($titulo, $a, $b, $ext = '')
-    {
-
-        $response[] = titulo_bloque($titulo);
-        $response[] = flex($a, $b, _text_('mt-5 justify-content-between ', $ext));
-        return d($response, 'col-md-6 mt-5');
-    }
-
-    function titulo_bloque($str)
-    {
-        return h($str, 5, 'text-uppercase strong');
-    }
 
     function format_atencion($servicios)
     {

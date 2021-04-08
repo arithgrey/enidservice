@@ -14,33 +14,75 @@ class Proveedor_servicio extends REST_Controller
     {
         $response = false;
         $param = $this->post();
+        $parametros =
+            "id_servicio,costo,telefono,proveedor,pagina_web,ubicacion,es_fabricante,edicion,id_usuario";
 
-        if (fx($param, "id_servicio,costo,telefono,proveedor,pagina_web")) {
+        if (fx($param, $parametros)) {
 
-            $proveedor = $param["proveedor"];
-            $telefono = $param["telefono"];
-            $usuario = $this->registro_usuario($proveedor, $telefono);
+            if ($param["edicion"] > 0) {
 
-            if (es_data($usuario)) {
+                $response = $this->edicion($param);
+            } else {
 
-                $id_usuario = $usuario["id_usuario"];
-                $id_servicio = $param["id_servicio"];
-
-                $params =
-                    [
-
-                        "id_servicio" => $id_servicio,
-                        "id_usuario" => $id_usuario,
-                        "costo" => $param["costo"],
-                        "pagina_web" => $param["pagina_web"]
-                    ];
-
-                $response = $this->proveedor_servicio_model->insert($params);
-
+                $response = $this->registro($param);
             }
 
         }
         $this->response($response);
+    }
+
+    function edicion($param)
+    {
+
+        $id_usuario = $param["id_usuario"];
+        $proveedor = $param["proveedor"];
+        $tel = $param["telefono"];
+        $this->proveedor_servicio_model->set_proveedor($id_usuario, $proveedor, $tel);
+
+        $params =
+            [
+                "costo" => $param["costo"],
+                "pagina_web" => $param["pagina_web"],
+                "ubicacion" => $param["ubicacion"],
+                "es_fabricante" => $param["es_fabricante"]
+            ];
+
+        return $this->proveedor_servicio_model->update($params,
+            [
+                "id" => $param["id"]
+            ]
+        );
+
+
+    }
+
+    function registro($param)
+    {
+
+        $response = false;
+        $proveedor = $param["proveedor"];
+        $telefono = $param["telefono"];
+        $usuario = $this->registro_usuario($proveedor, $telefono);
+
+        if (es_data($usuario)) {
+
+            $id_usuario = $usuario["id_usuario"];
+            $id_servicio = $param["id_servicio"];
+
+            $params =
+                [
+                    "id_servicio" => $id_servicio,
+                    "id_usuario" => $id_usuario,
+                    "costo" => $param["costo"],
+                    "pagina_web" => $param["pagina_web"],
+                    "ubicacion" => $param["ubicacion"],
+                    "es_fabricante" => $param["es_fabricante"]
+                ];
+
+            $response = $this->proveedor_servicio_model->insert($params);
+
+        }
+        return $response;
     }
 
     function index_DELETE()
@@ -56,6 +98,7 @@ class Proveedor_servicio extends REST_Controller
 
         $this->response($response);
     }
+
     function index_GET()
     {
         $response = false;
@@ -69,7 +112,6 @@ class Proveedor_servicio extends REST_Controller
 
         $this->response($response);
     }
-
 
 
     function costo_POST()
@@ -112,6 +154,18 @@ class Proveedor_servicio extends REST_Controller
             "telefono" => $telefono
         ];
         return $this->app->api("usuario/proveedor", $q, "json", "POST");
+    }
+
+    function id_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $response = $this->proveedor_servicio_model->q($param["id"]);
+        }
+        $this->response($response);
     }
 
 

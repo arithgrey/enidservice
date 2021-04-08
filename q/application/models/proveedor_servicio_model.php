@@ -64,5 +64,38 @@ class Proveedor_servicio_model extends CI_Model
         return $this->db->delete($this->table, $params_where);
     }
 
+    function q($id)
+    {
+
+        $query_get = "SELECT 
+                      u.idusuario,
+                      u.nombre,                   
+                      u.apellido_paterno ,                 
+                      u.apellido_materno,                                    
+                      u.tel_contacto,
+                      u.tel_contacto_alterno,
+                      ps.*
+                      
+            FROM proveedor_servicio ps 
+                INNER JOIN usuario u ON ps.id_usuario = u.idusuario WHERE id = $id";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+    function set_proveedor($id_usuario,$nombre,$tel)
+    {
+
+        $query_update = "UPDATE usuario 
+                        SET 
+                            nombre = '".$nombre."',
+                             tel_contacto = $tel
+                        WHERE idusuario = $id_usuario 
+                        LIMIT 1";
+
+        return $this->db->query($query_update);
+
+    }
+
+
 
 }
