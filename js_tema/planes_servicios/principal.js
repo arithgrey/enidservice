@@ -32,6 +32,11 @@ let $form_costo_proveedor = $(".form_costo_proveedor");
 let $eliminar_provedor_servicio = $(".eliminar_provedor_servicio");
 let $texto_baja_proveedor = $(".texto_baja_proveedor");
 let $form_proveedor = $(".form_proveedor");
+let $no_fabricante = $(".no_fabricante");
+let $fabricante = $(".fabricante");
+let $es_fabricante = $(".es_fabricante");
+let $edicion = $(".edicion");
+
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -75,10 +80,12 @@ $(document).ready(() => {
     });
     $eliminar_provedor_servicio.click(elimina_proveedor_servicio);
     $form_costo_proveedor.submit(costo_servicio_proveedor);
-
+    $no_fabricante.click(no_fabricante);
+    $fabricante.click(fabricante);
     proveedores_servicio();
 
 });
+
 
 let def_contenedores = () => {
 
@@ -231,7 +238,6 @@ let respuesta_informacion_servicio = (data) => {
     $('.stock_disponible').click(editar_stock_disponible);
     $('.stock_disponibilidad').click(editar_fecha_stock_disponible);
     $('.link_proveedor').click(proveedores);
-    // $('.link_busqueda').click(link_busqueda);
     $(".boton_asociados").click(link_asociados);
     $(".boton_busqueda").click(boton_busqueda);
 
@@ -1926,25 +1932,34 @@ let eliminar_material = function (e) {
 }
 let proveedores = function () {
 
+    $edicion.val(0);
+    $es_fabricante.val(0);
+    $form_proveedor.find(".id_usuario").val(0);
+    $no_fabricante.addClass("button_enid_eleccion_active");
+    $fabricante.removeClass("button_enid_eleccion_active");
 
+    reset_form("form_proveedor");
     $texto_baja_proveedor.addClass("d-none");
     $selector_carga_modal_proveedor.modal("show");
 }
 
 let editar_proveedor_servicio = function (e) {
 
+    $edicion.val(1);
     let $id_proveedor = e.target.id;
-
+    $form_proveedor.find(".id").val($id_proveedor);
     if (parseFloat($id_proveedor) > 0) {
+
+        let $id_usuario= $(this).attr("usuario");
+        $form_proveedor.find(".id_usuario").val($id_usuario);
 
         set_option("proveedor_servicio", $id_proveedor);
         $texto_baja_proveedor.removeClass("d-none");
         $selector_carga_modal_proveedor.modal("show");
 
-        let url = "../q/index.php/api/usuario/q/format/json/";
-        let $id_usuario = $(this).attr("usuario");
+        let url = "../q/index.php/api/proveedor_servicio/id/format/json/";
+        let data_send = {"id": $id_proveedor};
 
-        let data_send = {"id_usuario": $id_usuario};
         request_enid("GET", data_send, url, auto_llenado);
 
     }
@@ -1953,11 +1968,27 @@ let editar_proveedor_servicio = function (e) {
 
 let auto_llenado = function (data) {
 
-    debugger;
-    $form_proveedor.find(".proveedor").val(data[0].nombre);
-    $form_proveedor.find(".telefono").val(data[0].tel_contacto);
+    let $data = data[0];
+    $form_proveedor.find(".proveedor").val($data.nombre);
+    $form_proveedor.find(".telefono").val($data.tel_contacto);
+    $form_proveedor.find(".costo").val($data.costo);
+    $form_proveedor.find(".pagina_web").val($data.pagina_web);
+    $form_proveedor.find(".ubicacion").val($data.ubicacion);
 
 
+    if (parseInt($data.es_fabricante) < 1) {
+
+        $es_fabricante.val(0);
+        $no_fabricante.addClass("button_enid_eleccion_active");
+        $fabricante.removeClass("button_enid_eleccion_active");
+
+    }else {
+
+        $es_fabricante.val(1);
+        $no_fabricante.removeClass("button_enid_eleccion_active");
+        $fabricante.addClass("button_enid_eleccion_active");
+
+    }
 
 }
 
@@ -2025,6 +2056,20 @@ let boton_busqueda = function () {
     $(".proveedores_existentes").addClass("d-none");
     $(".busqueda_proveedores").removeClass("d-none");
 
+}
+let no_fabricante = () => {
+
+    $es_fabricante.val(0);
+    $no_fabricante.addClass("button_enid_eleccion_active");
+    $fabricante.removeClass("button_enid_eleccion_active");
+
+}
+
+let fabricante = () => {
+
+    $es_fabricante.val(1);
+    $no_fabricante.removeClass("button_enid_eleccion_active");
+    $fabricante.addClass("button_enid_eleccion_active");
 
 }
 

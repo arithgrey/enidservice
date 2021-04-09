@@ -460,7 +460,6 @@ class usuario_model extends CI_Model
         $_num = mt_rand();
         $this->create_usuarios_enid_service(0, $_num, $param);
 
-
         $id_servicio = $param["id_servicio"];
         $query_get = "SELECT u.*, ps.* FROM tmp_usuarios_enid_service_$_num u 
                     INNER JOIN proveedor_servicio ps 

@@ -3824,3 +3824,16 @@ function total_pago_pendiente($productos_orden_compra)
 
     ];
 }
+
+function eleccion($titulo, $a, $b, $ext = '')
+{
+
+    $response[] = titulo_bloque($titulo);
+    $response[] = flex($a, $b, _text_('mt-5 justify-content-between ', $ext));
+    return d($response, 'col-md-12 mt-5');
+}
+
+function titulo_bloque($str)
+{
+    return _titulo($str, 5);
+}

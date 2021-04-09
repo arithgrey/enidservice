@@ -176,7 +176,23 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $form[] = input_frm('mt-5', "Ubicación de entrega",
+            [
+                "type" => "text",
+                "required" => true,
+                "class" => "ubicacion",
+                "name" => "ubicacion",
+                "id" => "ubicacion",
+            ]
+        );
+        $form[] = es_fabricante();
+
+
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = hiddens(['name' => 'id', 'class' => 'id', 'value' => 0]);
+        $form[] = hiddens(['name' => 'id_usuario', 'class' => 'id_usuario', 'value' => 0]);
+        $form[] = hiddens(['name' => 'edicion', 'class' => 'edicion', 'value' => 0]);
+        $form[] = hiddens(['name' => 'es_fabricante', 'class' => 'es_fabricante', 'value' => 0]);
         $form[] = btn('Registrar', ['class' => 'mt-5']);
         $form[] = form_close();
         $form[] = d(d("Ó", "ml-auto"), 'col-sm-12 mt-5 text-right texto_baja_proveedor d-none');
@@ -189,6 +205,36 @@ if (!function_exists('invierte_date_time')) {
             , 'col-sm-12 mt-3 text-right texto_baja_proveedor d-none'
         );
         return append($form);
+
+    }
+
+    function es_fabricante()
+    {
+
+        $texto_fabricante = "¿Es fabricante?";
+        $es_fabricante = a_enid(
+            "SI",
+            [
+                'id' => 1,
+                'class' => 'button_enid_eleccion fabricante'
+
+            ]
+
+        );
+
+
+        $es_intermediario = a_enid(
+            "NO",
+            [
+                'id' => 0,
+                'class' => 'button_enid_eleccion  no_fabricante button_enid_eleccion_active',
+
+            ]
+
+        );
+
+
+        return eleccion($texto_fabricante, $es_fabricante, $es_intermediario);
 
     }
 
