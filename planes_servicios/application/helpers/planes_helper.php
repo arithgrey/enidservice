@@ -479,8 +479,7 @@ if (!function_exists('invierte_date_time')) {
     function articulos_venta($list_orden)
     {
 
-        $r[] = _titulo("configurar artículos");
-
+        $r[] = _titulo("Tus publicaciones");
         $r[] = d(get_format_busqueda($list_orden), "contenedor_busqueda_articulos");
         $r[] = place("place_servicios");
         return append($r);
@@ -662,10 +661,10 @@ if (!function_exists('invierte_date_time')) {
         $is_mobile = is_mobile();
 
         $venta = tab(
-            text_icon("fa fa-shopping-cart", "configurar artículos"),
+            text_icon("fa fa-shopping-cart", "tus publicaciones"),
             "#tab_servicios",
             [
-                'class' => "black btn_serv mt-3",
+                'class' => "black mt-3",
             ]
         );
 
@@ -673,7 +672,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = li(
                 a_enid(
-                    text_icon('fa fa-share', "publicar producto")
+                    text_icon('fa fa-share', "Vender artículo")
                     ,
                     [
                         "href" => path_enid('vender_nuevo'),
@@ -702,7 +701,7 @@ if (!function_exists('invierte_date_time')) {
             if ($perfil == 3) {
 
                 $link_articulos_venta = tab(
-                    text_icon("fa fa-globe", "articulos en venta"),
+                    text_icon("fa fa-globe", "En venta"),
                     "#tab_servicios",
                     [
                         'class' => "black  btn_serv mt-3",
@@ -724,7 +723,7 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
             }
-            $response = ul($list);
+            $response = ul($list,'col-md-12 ');
         } else {
 
 
