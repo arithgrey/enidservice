@@ -123,8 +123,6 @@ class Recibo_model extends CI_Model
     function ids_usuarios($params, $ids, $es_pago = 0)
     {
         $f = get_keys($params);
-
-
         $extra = "";
         if ($es_pago > 0) {
 
@@ -988,6 +986,7 @@ class Recibo_model extends CI_Model
 						p.id_usuario,
 						p.id_proyecto_persona_forma_pago id_recibo,
 						(p.monto_a_pagar * p.num_ciclos_contratados) total,
+                        p.num_ciclos_contratados,
 						p.fecha_contra_entrega,
 						p.tipo_entrega,
 						p.contra_entrega_domicilio,
