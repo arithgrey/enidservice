@@ -1605,24 +1605,22 @@ if (!function_exists('invierte_date_time')) {
     function linea_compra_productos($recibos, $id, $es_cliente, $data, $es_reparto, $total)
     {
 
-        $linea = "";
         $recibo = [];
         $a = 0;
         $id_orden = 0;
         $total_orden_compra = 0;
         $total_articulos = 0;
         foreach ($recibos as $row) {
-            $id_orden_compra = $row['id_orden_compra'];
 
+            $id_orden_compra = $row['id_orden_compra'];
             if ($id_orden_compra == $id) {
                 $total_articulos = ($total_articulos + $row["num_ciclos_contratados"]);
                 $id_orden = $id_orden_compra;
-                $total_orden_compra = ($total_orden_compra  + $row["total"]);
+                $total_orden_compra = ($total_orden_compra + $row["total"]);
 
                 if ($a < 1) {
 
                     $recibo = $row;
-
 
                 } else {
                     $a = 0;
@@ -1631,13 +1629,13 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $linea = linea_compra(
-            $recibo, $es_cliente, $data, $id_orden, $es_reparto,$total_orden_compra,$total_articulos);
-        return $linea;
+        return linea_compra(
+            $recibo, $es_cliente, $data, $id_orden, $es_reparto, $total_orden_compra, $total_articulos);
+
     }
 
     function linea_compra(
-        $row, $es_cliente, $data, $id_orden_compra, $es_reparto,$total_orden_compra=0, $total_articulos = 0)
+        $row, $es_cliente, $data, $id_orden_compra, $es_reparto, $total_orden_compra = 0, $total_articulos = 0)
     {
 
         $fecha_contra_entrega = $row['fecha_contra_entrega'];
@@ -1657,7 +1655,7 @@ if (!function_exists('invierte_date_time')) {
 
         $tipo_entrega = $row['tipo_entrega'];
         $es_contra_entrega = $row['es_contra_entrega'];
-        $es_contra_entrega_domicilio_sin_direccion = false;
+
         $format_hora = formato_hora_contra_entrega($es_contra_entrega, $row, $ubicacion);
 
         $es_formato_hora = (($tipo_entrega == 1) || ($tipo_entrega == 2 && $format_hora));
@@ -1667,32 +1665,33 @@ if (!function_exists('invierte_date_time')) {
         $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
         $dia_entrega = d(_text_($notificacion_hoy, $hora_entrega), _text_('badge mt-4 mb-4', $es_hoy));
         $imagenes = d(img($row["url_img_servicio"]), "w_50");
-        $totales_recibo = ($total_orden_compra > 0 ) ? money($total_orden_compra) : money($row["total"]);
+        $totales_recibo = ($total_orden_compra > 0) ? money($total_orden_compra) : money($row["total"]);
         $total = d($totales_recibo, "text-left black");
         $id_usuario_entrega = $row['id_usuario_entrega'];
 
         $usuario_entrega = ($es_cliente) ? [] : $row['usuario_entrega'];
         $ubicacion = $row['ubicacion'];
+        $es_contra_entrega_domicilio_sin_direccion = $row["es_contra_entrega_domicilio_sin_direccion"];
         $text_total = ayuda_notificacion(
             $data,
             $usuario_entrega,
             $total,
             $dia_entrega,
             $es_contra_entrega,
-            $es_contra_entrega_domicilio_sin_direccion,
             $id_usuario_entrega,
             $ubicacion,
-            $text_entrega,
-            $total_articulos
+            $total_articulos,
+            $es_contra_entrega_domicilio_sin_direccion
+
         );
 
         $total_seccion = d($text_total, 'd-flex flex-column');
         $orden = _text('ORDEN #', $id_orden_compra);
         $es_vendedor = es_vendedor($data);
         $agenda = flex("Agenda", $row['nombre_vendedor'], "flex-column");
-        $nombre_vendedor = (!$es_vendedor && !$es_cliente) ? $agenda  :
+        $nombre_vendedor = (!$es_vendedor && !$es_cliente) ? $agenda :
             '';
-        $identificador = flex($orden, $nombre_vendedor, 'flex-column',"strong h5 mt-5");
+        $identificador = flex($orden, $nombre_vendedor, 'flex-column', "strong h5 mt-5");
         $seccion_imagenes = flex($imagenes, $identificador, 'flex-column black', '', 'fp8');
         $text = flex($seccion_imagenes, $total_seccion, _between);
 
@@ -1759,8 +1758,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function ayuda_notificacion($data, $usuario_entrega, $total, $dia_entrega, $es_contra_entrega,
-                                $es_contra_entrega_domicilio_sin_direccion,
-                                $id_usuario_entrega, $ubicacion, $text_entrega, $total_articulos)
+                                $id_usuario_entrega, $ubicacion, $total_articulos,
+                                $es_contra_entrega_domicilio_sin_direccion)
     {
         $text_total = [];
         $icon = '';
@@ -1769,38 +1768,29 @@ if (!function_exists('invierte_date_time')) {
 
             $icono = icon(_entregas_icon);
             $nombre_repatidor = format_nombre($usuario_entrega);
-            $texto_icono = flex($icono, $nombre_repatidor, "justify-content-end","mr-1");
+            $texto_icono = flex($icono, $nombre_repatidor, "justify-content-end", "mr-1");
             $icon = ($es_cliente) ? '' : $texto_icono;
 
         }
 
-
-        $text_total[] = d($total,"ml-auto h4 strong");
-        if ($total_articulos > 0 ){
-            $text_total[] = flex($total_articulos, "artículos", _text_("black","justify-content-end text-secondary mt-2")
-                ,"mr-1");
+        $text_total[] = d($total, "ml-auto h4 strong");
+        if ($total_articulos > 0) {
+            $clases = _text_("black", "justify-content-end text-secondary mt-2");
+            $text_total[] = flex($total_articulos, "artículos", $clases, "mr-1");
         }
 
-        $text_total[] = d($icon,"black");
-
-
+        $text_total[] = d($icon, "black");
         $text_total[] = $dia_entrega;
-        if ($es_contra_entrega) {
 
-            $texto_total = ($ubicacion < 1) ? 'Es contra entrega a domicilio' : $text_entrega;
-            $text_total[] = ($es_cliente) ? '' : $texto_total;
 
-            $sin_ubicacion = ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1);
-            $texto_sin_direccion = d('Falta la direccion', 'text-danger strong');
-            $text_total[] = ($sin_ubicacion) ? $texto_sin_direccion : '';
-            $text_total[] = ($es_cliente && $ubicacion < 1) ? $texto_sin_direccion : '';
-
-        }
-
+        $sin_ubicacion = ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1);
+        $clase_notificacion_ubiacion =
+            'text-danger text-danger border p-1 border-danger border-top-0 border-right-0 border-left-0';
+        $texto_sin_direccion = d('Falta la dirección', $clase_notificacion_ubiacion);
+        $text_total[] = ($sin_ubicacion) ? $texto_sin_direccion : '';
 
 
         return $text_total;
-
 
     }
 

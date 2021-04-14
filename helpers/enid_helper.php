@@ -2097,8 +2097,9 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
 {
 
     $es_derecho = (!is_array($att) && $att == 0);
-    $izquierdo = (flex(icon($class_icono, $att), $text, _between));
-    $derecho = (flex($text, icon($class_icono, $att), _between));
+    $clase = "rounded-circle p-2 border border-secondary border-dark";
+    $izquierdo = (flex(icon(_text_($clase, $class_icono), $att), $text, "","mr-3"));
+    $derecho = (flex($text, icon(_text_($class_icono, $clase), $att), "","","ml-3"));
     return ($left > 0 && !$es_derecho) ? $izquierdo : $derecho;
 
 }
