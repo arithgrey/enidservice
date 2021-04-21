@@ -134,7 +134,11 @@ class Recibo_model extends CI_Model
         }
 
         $query_get = _text_(
-            "SELECT ", $f, " FROM proyecto_persona_forma_pago p WHERE id_usuario IN(", $ids, ")", $extra
+            "SELECT ", $f, " FROM proyecto_persona_forma_pago p 
+            INNER JOIN producto_orden_compra po ON 
+            p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago   
+            WHERE id_usuario IN(", $ids, ")",
+            $extra
         );
         return $this->db->query($query_get)->result_array();
 

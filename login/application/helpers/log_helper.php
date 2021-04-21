@@ -27,12 +27,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = frm_login();
         if ($action === "registro") {
 
-            $r[] = d(
-                d("Tu usuario fué registrado, accede ahora!",
-                    "inf_usuario_registrado strong mt-5 bg-light p-2 text-right"
-                )
-
-            );
+            $clases = "inf_usuario_registrado strong mt-5 bg-light p-2 text-right";
+            $r[] = d("Tu usuario fué registrado, accede ahora!", $clases);
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5");
         $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong']);
@@ -71,14 +67,14 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = img_default();
         $r[] = h('RECUPERA TUS DATOS DE ACCESO', 3);
-        $r[] = "<form class='form-pass' id='form-pass' action='" . url_recuperacion_password() . "'>";
+        $r[] = _text("<form class='form-pass' id='form-pass' action='", url_recuperacion_password(), "'>");
         $r[] = input(
             [
                 "type" => "email",
                 "id" => "email_recuperacion",
                 "name" => 'mail',
                 "placeholder" => "Email",
-                "class" => " top_10",
+                "class" => "mt-3",
                 "required" => true,
             ]
         );
@@ -88,13 +84,11 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "btn_nnuevo recupera_password  a_enid_blue top_20",
             ]
         );
-        $extra = add_text(
-            place("place_recuperacion_pw"), place("recuperacion_pw"));
+        $extra = _text_(place("place_recuperacion_pw"), place("recuperacion_pw"));
         $r[] = form_close($extra);
         $r[] = ya_registro();
-        $response = d(append($r), "contenedor_recuperacion_password display_none");
 
-        return $response;
+        return d($r, "contenedor_recuperacion_password display_none");
 
     }
 
@@ -203,16 +197,15 @@ if (!function_exists('invierte_date_time')) {
             'nombre_perfil',
             'id_perfil'
         );
-        $r[] = d(a_enid('¿Cómo funciona?',
+
+        $r[] = a_texto('¿Cómo funciona?',
             [
                 "href" => path_enid('sobre_vender'),
-                "class" => "mt-2 black underline"
+                "class" =>  "mt-3"
             ]
-        ), 'link_como_vender');
+        );
         $r[] = place("place_password_afiliado");
         $r[] = tipo_distribucion();
-
-
         $r[] = btn('Registrar',
             [
                 "class" => "mt-5 botton_registro",
@@ -306,9 +299,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
         $response[] = d($seccion_entrega, 'seccion_entrega mt-5 d-none');
-
         return append($response);
 
     }
@@ -333,22 +324,23 @@ if (!function_exists('invierte_date_time')) {
                 "action" => base_url('index.php/api/sess/start/format/json'),
             ]
         );
-        $r[] = "<form " . $attr . ">";
-        $r[] = input(
+        $form[] = "<form " . $attr . ">";
+        $form[] = input(
             [
                 "name" => mt_rand(),
                 "value" => mt_rand(),
                 "type" => "hidden",
             ]
         );
-        $r[] = input(
+        $form[] = input(
             [
                 "type" => 'hidden',
                 "name" => 'secret',
                 "id" => "secret",
             ]
         );
-        $r[] = input_frm(
+
+        $form[] = input_frm(
             " mt-4", "CORREO ELECTRÓNICO",
             [
 
@@ -359,22 +351,31 @@ if (!function_exists('invierte_date_time')) {
                 "placeholder" => "ej. jonathan@gmail.com",
             ], _text_correo
         );
-        $r[] = input_frm(
+
+
+        $input_password = input_frm(
             "mt-5", "PASSWORD",
             [
                 "type" => "password",
                 "placeholder" => "Tu contraseña",
                 "name" => 'pw',
                 "id" => "pw",
-
                 "placeholder" => "****",
             ],
             _text_password
         );
-        $r[] = btn("INICIAR", ["class" => "mt-5"]);
-        $r[] = form_close();
 
-        return append($r);
+        $iconos = _text_(
+            icon("fa fa-eye mostrar_password"),
+            icon("fa fa-eye-slash ocultar_password d-none")
+        );
+        $form[] = flex($input_password, $iconos, _between, "w-100", "mt-5");
+
+
+        $form[] = btn("INICIAR", ["class" => "mt-5"]);
+        $form[] = form_close();
+
+        return append($form);
 
     }
 

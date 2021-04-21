@@ -753,7 +753,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = '<form class="form_pre_pedido d-none" action="../procesar/?w=1" method="POST">';
         $r[] = hiddens(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
-        $r[] = hiddens(["class" => "extension_dominio", "name" => "extension_dominio", "value" => ""]);
         $r[] = hiddens(["class" => "ciclo_facturacion", "name" => "ciclo_facturacion", "value" => $ciclo_facturacion]);
         $r[] = hiddens(["class" => "is_servicio", "name" => "is_servicio", "value" => $is_servicio]);
         $r[] = hiddens(["class" => "q2", "name" => "q2", "value" => $q2]);

@@ -484,12 +484,15 @@ let openNav = () => {
 
     document.getElementById("mySidenav").style.width = "100%";
     document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+    $(".acceder_vender").removeClass("d-flex").addClass("d-none");
 
 };
 
 let closeNav = () => {
+
     document.getElementById("mySidenav").style.width = "0";
     document.body.style.backgroundColor = "rgba(0,0,0,0)";
+    $(".acceder_vender").addClass("d-flex").removeClass("d-none");
 };
 
 let array_key_exists = (key, array) => {

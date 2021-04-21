@@ -28,7 +28,6 @@ if (!function_exists('invierte_date_time')) {
                 $compras = $total["compras"];
                 $solicitudes = $total["solicitudes"];
 
-
                 if (!in_array($id_usuario,$ids_usuario_reventa)){
 
                     $linea = [];

@@ -96,7 +96,6 @@ class app extends CI_Controller
     )
     {
 
-        $e = 1;
 
         foreach ($q as $clave => $row) {
 
@@ -311,6 +310,13 @@ class app extends CI_Controller
         redirect(path_enid("_login"));
     }
 
+    function set_userdata($newdata = array(), $newval = '')
+    {
+
+        $this->session->set_userdata($newdata, $newval);
+
+    }
+
     function pagina($data, $center_page, $pagina_base = 0)
     {
 
@@ -338,6 +344,7 @@ class app extends CI_Controller
     function session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
+
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->get_departamentos();
@@ -345,6 +352,7 @@ class app extends CI_Controller
         if ($this->is_logged_in() > 0) {
 
             $session = $this->get_session();
+
             $nombre = $session["nombre"];
             $data['titulo'] = $titulo;
             $data["menu"] = create_contenido_menu($session);
@@ -377,7 +385,6 @@ class app extends CI_Controller
             $data["menu"] = "";
             $data["data_status_enid"] = "";
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
-
 
         }
 
@@ -1352,12 +1359,6 @@ class app extends CI_Controller
 
     }
 
-    function set_userdata($newdata = array(), $newval = '')
-    {
-
-        $this->session->set_userdata($newdata, $newval);
-
-    }
 
     function set_flashdata($newdata = array(), $newval = '')
     {
@@ -1427,6 +1428,7 @@ class app extends CI_Controller
         }
         return $response;
     }
+
     function asigna_reparto($id_orden_compra)
     {
         return $this->api("recibo/reparto", ["orden_compra" => $id_orden_compra], "json", "PUT");
@@ -1455,7 +1457,7 @@ class app extends CI_Controller
                 default:
             }
 
-            if (es_data($response)){
+            if (es_data($response)) {
 
                 $response[0]["tipo_entrega"] = $tipo_entrega;
                 $response[0]["es_ubicacion"] = $ubicacion;

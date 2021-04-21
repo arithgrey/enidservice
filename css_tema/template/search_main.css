@@ -4,11 +4,9 @@
 .categorias_extras{
     background: #1559c4!important;
 }
-.seccion_categorias_desglose{
-    background: #15c4c4!important;
-}
-.contenedor_anuncios_home {
-    background: #15c4c4!important;
+
+.contenedor_anuncios_home, .seccion_categorias_desglose {
+    background: #000 !important;
 }
 .text_precio:hover {
     color: white !important;
@@ -20,7 +18,7 @@
 .categorias_mas_vistas {
     color: white !important;
     text-transform: uppercase;
-    font-size: .9em;
+    font-size: 1.2em;
 }
 
 .anuncia_articulos, .btn_formas_pago {

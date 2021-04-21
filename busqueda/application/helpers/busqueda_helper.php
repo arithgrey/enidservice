@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
             , "input-icons w-100");
         $z[] = form_close();
         $ext = (is_mobile() < 1) ? "" : "top_200";
-        $r[] = d($z, "mt-5 " . $ext);
+        $r[] = d($z, _text("mt-5 " , $ext));
 
 
         $meta_semanal_comisionista = $data['meta_semanal_comisionista'];

@@ -105,7 +105,7 @@ class recibo extends REST_Controller
 
                 if (es_data($ids_usuarios)) {
 
-                    $params = $this->parametros_busqueda(1);
+                    $params = $this->parametros_busqueda(0);
                     $keys = get_keys($ids_usuarios);
                     $response = $this->recibo_model->ids_usuarios($params, $keys, $param["es_pago"]);
                 }

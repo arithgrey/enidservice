@@ -1824,6 +1824,7 @@ if (!function_exists('invierte_date_time')) {
         $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
         $menu_ventas_semana = menu_ventas_semana($info);
         $list = [
+
             $deuda["html"],
             $direccion["html"],
             $preguntas["html"],
@@ -2319,7 +2320,6 @@ if (!function_exists('invierte_date_time')) {
     function tareas_vendedor($data)
     {
 
-
         $lista = [];
         $f = 0;
         $compras_sin_cierre = sin_cierre($data, $data["compras_sin_cierre"]);
@@ -2347,9 +2347,13 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'notificacion_tareas_pendientes_enid_service strong white ml-1',
                 ]);
 
+        }else{
+
+            $lista = [];
+            $lista[] = d("Sin notificaciones",'display-4 ');
         }
 
-//        $lista[] = menu_ventas_semana($data);
+
 
         return [
             "num_tareas_pendientes_text" => $f,

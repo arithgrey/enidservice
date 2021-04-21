@@ -190,7 +190,6 @@ let respuesta_proceso_usuario_activo = (data) => {
 let set_link = function () {
 
     let id = get_parameter_enid($(this), "id_servicio");
-    let extension_dominio = get_parameter_enid($(this), "extension_dominio");
     let ciclo_facturacion = get_parameter_enid($(this), "ciclo_facturacion");
     let is_servicio = get_parameter_enid($(this), "is_servicio");
     let q2 = get_parameter_enid($(this), "q2");
@@ -198,7 +197,6 @@ let set_link = function () {
 
     let data_send = $.param({
         "id_servicio": id,
-        "extension_dominio": extension_dominio,
         "ciclo_facturacion": ciclo_facturacion,
         is_servicio: is_servicio,
         "q2": q2,

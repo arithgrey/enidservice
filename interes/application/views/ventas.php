@@ -16,11 +16,11 @@
                 <?= icon('fa fa-search') ?>
             </a>
         </div>
-
         <?= form_close() ?>
     </div>
 </div>
 <?= place('respuestas') ?>
 <?= form_ingreso() ?>
 <?= tags() ?>
+
 
