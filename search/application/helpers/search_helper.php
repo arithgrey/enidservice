@@ -35,7 +35,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
 
-        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2 strong');
+        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2 ');
 
         if ($is_mobile < 1) {
             $z[] = img(
@@ -112,7 +112,7 @@ if (!function_exists('invierte_date_time')) {
     function filtro($filtros, $order)
     {
 
-        $r[] = '<select class="form-control order" name="order" id="order">';
+        $r[] = '<select class="form-control order border border-dark filtro_orden_categorias " name="order" id="order">';
         $a = 0;
         foreach ($filtros as $row):
             $str = strtoupper($row);
@@ -161,7 +161,7 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return d(
-            d($r, "col-lg-8 col-lg-offset-2 d-flex flex-row align-items-end text-center white strong"),
+            d($r, "col-lg-8 col-lg-offset-2 d-flex flex-row align-items-end text-center white "),
             'contenedor_anuncios_home col-lg-12 mb-5 p-3 d-none d-md-block');
 
 

@@ -80,7 +80,6 @@ class Home extends CI_Controller
             $this->app->imgs_productos($param["id_servicio"], 1, 1));
         $data += [
             "id_servicio" => $param["id_servicio"],
-            "extension_dominio" => $param["extension_dominio"],
             "ciclo_facturacion" => $param["ciclo_facturacion"],
             "is_servicio" => $param["is_servicio"],
             "q2" => $param["q2"],

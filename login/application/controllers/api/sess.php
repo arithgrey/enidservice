@@ -13,15 +13,14 @@ class Sess extends REST_Controller
     {
 
         $param = $this->post();
-        $url = $this->create_url();
         $response = false;
         $es_ajax = $this->input->is_ajax_request();
         $es_barer = (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer'));
         if ($es_ajax || $es_barer) {
-
+            $response = [];
             if (fx($param, "email,secret")) {
                 $usuario = $this->get_es_usuario($param);
-                $response = 0;
+                $response["usuario"] = $usuario;
                 if (es_data($usuario)) {
 
                     $usuario = $usuario[0];
@@ -29,14 +28,16 @@ class Sess extends REST_Controller
                     $nombre = $usuario["nombre"];
                     $email = $usuario["email"];
                     $id_empresa = $usuario["idempresa"];
-                    $response = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
+                    $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
+                    $response["session"] = $session;
+                    $response["session_creada"] = $this->app->get_session();
 
-                    if (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer')) {
+                    if ($es_barer) {
 
-                        $this->response($response);
+                        $this->response($session);
                     }
 
-                    $response = (is_array($response)) ? $url : 0;
+                    $response["login"] = (is_array($session)) ? path_enid("login") : false;
                 }
             }
         }
@@ -44,38 +45,11 @@ class Sess extends REST_Controller
 
     }
 
-    private function create_url()
-    {
-
-
-        $pregunta = $this->app->get_session("servicio_pregunta");
-        if ($this->app->get_session("id_servicio") > 0) {
-            $plan = $this->app->get_session("id_servicio");
-            $extension_dominio = $this->app->get_session("extension_dominio");
-            $ciclo_facturacion = $this->app->get_session("ciclo_facturacion");
-            $is_servicio = $this->app->get_session("is_servicio");
-            $q2 = $this->app->get_session("q2");
-            $num_ciclos = $this->app->get_session("num_ciclos");
-
-            $url =
-                "../procesar/?plan=" . $plan . "&extension_dominio=" . $extension_dominio . "&ciclo_facturacion=" . $ciclo_facturacion . "&is_servicio=" . $is_servicio . "&q2=" . $q2 . "&num_ciclos=" . $num_ciclos;
-
-        } else if ($pregunta > 0) {
-
-            $url = "../pregunta/?tag=" . $pregunta;
-
-        } else {
-
-            $url = "../login";
-
-        }
-        return $url;
-    }
 
     private function get_es_usuario($q)
     {
-        $api = "usuario/es";
-        return $this->app->api($api, $q, "json", "POST");
+
+        return $this->app->api("usuario/es", $q, "json", "POST");
     }
 
     private function crea_session($id_usuario, $nombre, $email, $id_empresa)
@@ -101,7 +75,7 @@ class Sess extends REST_Controller
                     "email" => $email,
                     "perfiles" => $perfiles,
                     "perfildata" => $perfildata,
-                    "idempresa" => $empresa[0]["idempresa"],
+                    "idempresa" => pr($empresa, "idempresa"),
                     "empresa_permiso" => $empresa_permiso,
                     "empresa_recurso" => $empresa_recurso,
                     "data_navegacion" => $navegacion,

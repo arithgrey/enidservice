@@ -405,6 +405,18 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
     return get_base_html("a", $title, $att);
 }
 
+function a_texto($title = '', $attributes = [], $format_block = 1)
+{
+
+    $clases_base = "enid_link black border-bottom border-dark text-capitalize";
+    $class = (es_data($attributes) && array_key_exists("class", $attributes)) ?
+        _text_($attributes["class"], $clases_base) : $clases_base;
+    $attributes["class"] = $class;
+
+    return a_enid($title, $attributes, $format_block);
+}
+
+
 function tab($text, $accion, $attributes = [])
 {
 
@@ -563,7 +575,7 @@ function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
 {
 
     $attr = add_attributes($attributes);
-    $base = "<i class='fa " . $class . "'" . $attr . " ></i>";
+    $base = "<i class='fa black " . $class . "'" . $attr . " ></i>";
     $base2 = span($extra_text, $attributes);
 
     return ($row_12 == 0) ? $base . $base2 : addNRow($base) . $base2;
@@ -1401,8 +1413,7 @@ function get_logo($session = 0)
 
     if (is_mobile()) {
 
-        $texto = d("☰ ENID SERVICE", ["onclick" => "openNav()", "class" => "titulo_enid_service  pr-5  pl-2
-         pb-1 pt-1 border"]);
+        $texto = d("<strong>☰ Enid </strong> Service", ["onclick" => "openNav()", "class" => "titulo_enid_service"]);
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
@@ -2098,8 +2109,8 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
 
     $es_derecho = (!is_array($att) && $att == 0);
     $clase = "rounded-circle p-2 border border-secondary border-dark";
-    $izquierdo = (flex(icon(_text_($clase, $class_icono), $att), $text, "","mr-3"));
-    $derecho = (flex($text, icon(_text_($class_icono, $clase), $att), "","","ml-3"));
+    $izquierdo = (flex(icon(_text_($clase, $class_icono), $att), $text, "", "mr-3"));
+    $derecho = (flex($text, icon(_text_($class_icono, $clase), $att), "", "", "ml-3"));
     return ($left > 0 && !$es_derecho) ? $izquierdo : $derecho;
 
 }
@@ -2641,7 +2652,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
 function menu_session_mobil($in_session)
 {
 
-    $r[] = d(
+    $cerrar_opciones = d(
         a_enid("×",
             [
                 "href" => "javascript:void(0)",
@@ -2651,6 +2662,28 @@ function menu_session_mobil($in_session)
         ), 'ml-auto mr-5 mt-5 '
     );
 
+    $form_busqueda = form_busqueda_productos();
+    $opciones_acceso = opciones_acceso($in_session);
+
+    $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-100'";
+    $columna = d([$cerrar_opciones, $form_busqueda, $opciones_acceso], $clases_columnas);
+
+    $menu_lateral = d(
+
+            $columna
+        ,
+        [
+            "id" => "mySidenav",
+            "class" => "sidenav"
+        ]
+    );
+
+    return addNRow($menu_lateral);
+
+}
+
+function form_busqueda_productos()
+{
     $form[] = open_form(['action' => "../search"]);
     $form[] = flex(
         input(
@@ -2666,50 +2699,45 @@ function menu_session_mobil($in_session)
                 'class' => 'boton-busqueda'
             ]
         ),
-        "justify-content-between "
+        _between,
+        "col-sm-10 p-0",
+        "col-sm-2 p-0"
     );
     $form[] = form_close();
+    return d($form,'my-auto col-sm-12');
 
+}
 
-    $r[] = d($form);
-
-
+function opciones_acceso($in_session)
+{
+    $response = "";
     if ($in_session < 1) {
 
 
-        $r[] = d(
+        $response = d(
             flex(
                 a_enid("Vender",
                     [
-                        "class" => "white font-weight-bold text-uppercase",
                         "href" => path_enid('sobre_vender'),
+                        "class" => "white"
                     ]
                 )
                 ,
                 a_enid("acceder",
                     [
-                        "class" => "white font-weight-bold text-uppercase mr-3",
                         "href" => path_enid('login'),
+                        "class" => "white"
                     ]
                 ),
-                _text_(_between, 'contenedor-lateral-menu')
+                _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender'),
+                "mx-auto strong",
+                "mx-auto strong"
 
             )
-
         );
 
     }
-
-
-    $menu_lateral = d(
-        flex($r, 'd-flex flex-column  align-items-center justify-content-between h-100'),
-        [
-            "id" => "mySidenav",
-            "class" => "sidenav"
-        ]
-    );
-
-    return addNRow($menu_lateral);
+    return $response;
 
 }
 

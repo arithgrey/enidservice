@@ -48,22 +48,15 @@ if (!function_exists('invierte_date_time')) {
         );
         $texto_seleccion = label('Seleccionar todos',
             [
-                "for" =>"seleccionar_todo",
-                "class" => "cursor_pointer"
+                "for" => "seleccionar_todo",
+                "class" => "cursor_pointer black"
             ]
         );
-        $linea[] = d(flex($seleccionar_todo, $texto_seleccion, '', 'mr-4'));
+        $seleccionar_sugerencias = flex($seleccionar_todo, $texto_seleccion, '', 'mr-4');
+        $linea[] = d($seleccionar_sugerencias, 13);
         $linea[] = formato_productos_relacionados($servicios_sugeridos, $recibos);
 
-        $formato_vendidos = formato_productos_vendidos($recibos_pagos);
-
-        $texto = _titulo(_text_($formato_vendidos["total"], 'articulos que el cliente ha comprado'), 5);
-        $linea[] = d(flex(icon(_entregas_icon), $texto, _between_start, 'mr-2'), 'row mt-5');
-
-        $texto = _titulo(_text_($formato_vendidos["total_distintos"], ' distintos'), 5);
-        $linea[] = d(flex(icon('fa fa-circle'), $texto, _between_start, 'mr-2'), 'row mb-5');
-
-        $linea[] = $formato_vendidos["html"];
+        $linea[] = formato_productos_comprados($recibos_pagos);
         $linea[] = hiddens(['class' => 'id_usuario_cliente', 'value' => pr($cliente, 'id_usuario')]);
         $linea[] = hiddens(['class' => 'id_servicio_relacion', 'value' => 0]);
 
@@ -84,8 +77,30 @@ if (!function_exists('invierte_date_time')) {
 
         $linea[] = gb_modal(opciones_reventa(), 'modal_opciones_reventa');
 
-        return d($linea, 8, 1);
+        return d($linea, 10, 1);
 
+    }
+
+    function formato_productos_comprados($recibos_pagos)
+    {
+
+        $contenido[] = h("artículos que ya compró", 2);
+        $formato_vendidos = formato_productos_vendidos($recibos_pagos);
+
+        $texto = d(_text_($formato_vendidos["total"], 'compras'));
+        $icono = icon("fa fa-check-circle");
+        $texto_total_compras = flex($icono, $texto, _between_start, 'mr-2');
+
+        $texto = d(_text_($formato_vendidos["total_distintos"], ' distintos'));
+        $icono = icon('fa fa-circle');
+        $texto_distintos = flex($icono, $texto, _between_start, 'mr-2');
+
+
+        $elementos = _d($texto_total_compras, "/", $texto_distintos);
+        $contenido[] = d($elementos, ["class" => _text_(_between, 'd-flex')]);
+        $contenido[] = $formato_vendidos["html"];
+
+        return d($contenido, 'border p-5 ');
     }
 
     function formato_productos_relacionados($servicios, $recibos)
@@ -128,9 +143,11 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $selector = flex($item, $input, _text_('flex-column', _between), 'mb-5');
-            $response[] = d($selector, 2);
+            $response[] = d($selector, 3);
             $numero_servicio++;
-            $ids[] = a_enid(
+
+
+            $ids[] = a_texto(
                 _text("servicio", $numero_servicio),
                 [
                     'href' => path_enid("producto", $id_servicio_relacion),
@@ -148,7 +165,7 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "marcar_sugerencia",
 
                     ]
-                ), "col-md-2 d-none marcar_sugerencia_seccion"
+                ), "col-md-3 d-none marcar_sugerencia_seccion"
             );
         }
 
@@ -162,52 +179,19 @@ if (!function_exists('invierte_date_time')) {
 
     function formato_productos_vendidos($recibos)
     {
-
-
         $response = [];
         $ids = [];
-
         $ids_servicios = array_column($recibos, 'id_servicio');
         $servicios_comprados = array_count_values($ids_servicios);
         $a = 0;
 
         foreach ($recibos as $row) {
 
-            $id_recibo = $row["recibo"];
             $id_servicio = $row["id_servicio"];
             if (!in_array($id_servicio, $ids)) {
 
-                $imagen = img(
-                    [
-                        "src" => $row["url_img_servicio"],
-                        "class" => "mx-auto my-auto d-block mh_270 mh_250 mh_sm_310 mh-auto mt-5"
-                    ]
-                );
-
-                $imagen = a_enid($imagen,
-                    [
-                        "href" => path_enid("pedidos_recibo", $id_recibo),
-                        "target" => "_blank"
-                    ]
-                );
-
-                $numero_compras = 0;
-
-                foreach ($servicios_comprados as $clave => $valor) {
-                    if ($clave == $id_servicio) {
-                        $numero_compras = $valor;
-                        break;
-                    }
-                }
-
-                $elemento = flex(
-                    $numero_compras,
-                    $imagen,
-                    _text_('flex-column', _between),
-                    'bg_black white p-2 mt-3 mb-3'
-                );
-                $response[] = d($elemento, 2);
-
+                $elemento = formato_producto_vendido($row, $servicios_comprados, $id_servicio);
+                $response[] = d($elemento, 3);
                 $ids[] = $id_servicio;
                 $a++;
             }
@@ -222,6 +206,44 @@ if (!function_exists('invierte_date_time')) {
             ];
     }
 
+    function formato_producto_vendido($row, $servicios_comprados, $id_servicio)
+    {
+        $id_orde_compra = $row["id_orden_compra"];
+        $imagen = img(
+            [
+                "src" => $row["url_img_servicio"],
+                "class" => "mx-auto my-auto d-block mh_270 mh_250 mh_sm_310 mh-auto mt-5"
+            ]
+        );
+
+        $path = path_enid("pedidos_recibo", $id_orde_compra);
+        $imagen = a_enid($imagen,
+            [
+                "href" => $path,
+                "target" => "_blank"
+            ]
+        );
+
+        $numero_compras = 0;
+        foreach ($servicios_comprados as $clave => $valor) {
+            if ($clave == $id_servicio) {
+                $numero_compras = $valor;
+                break;
+            }
+        }
+
+        $texto_ventas = flex('compras', $numero_compras, _between, "mr-1");
+        $texto_ventas_link = a_texto($texto_ventas, ["href" => $path]);
+        return flex(
+            $imagen,
+            $texto_ventas_link,
+            _text_('flex-column', _between),
+            'bg_black p-2 mt-3 mb-3'
+
+
+        );
+
+    }
 
     function fue_vendido($id_servicio_relacion, $recibos)
     {

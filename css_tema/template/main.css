@@ -1,15 +1,33 @@
-.azul_contraste_deporte{
-    background: #041f6f!important;
+.filtro_orden_categorias {
+
+    background: transparent !important;
+    color: #000 !important;
+    font-size: 18px !important;
+    text-align:left!important;
 }
-.azul_deporte{
-    background: #15abc4!important;
+.filtro_orden_categorias:focus {
+    outline: none!important;
 }
-.borde_amarillo{
+
+.form-control::placeholder {
+    color: #dbdbdb !important;
+}
+
+.azul_contraste_deporte {
+    background: #041f6f !important;
+}
+
+.azul_deporte {
+    background: #15abc4 !important;
+}
+
+.borde_amarillo {
     border: solid 2px #deff05;
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
-.borde_amarillo:hover{
+
+.borde_amarillo:hover {
     background: #005bac;
 }
 
@@ -21,6 +39,11 @@
     position: relative;
     margin: 15px;
     margin-bottom: 0
+}
+
+.enid_link:hover {
+    background: black;
+    color: white !important;
 }
 
 .search input[type="search"] {
@@ -87,9 +110,11 @@ a.changecolor {
     width: 100%;
     z-index: 100000;
 }
-.titulo_enid_service{
-    background: #15c4c4!important;
+
+.titulo_enid_service {
+    font-size: 1.5em;
 }
+
 .osahanloading {
     animation: 1.5s linear 0s normal none infinite running osahanloading;
     background: blue none repeat scroll 0 0;
@@ -646,7 +671,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background: linear-gradient(to right, #101c5b, #010615);
+    background: #000000 !important;
     min-height: 90px;
 }
 
@@ -1104,15 +1129,18 @@ table {
     margin-bottom: 100px;
     display: block;
 }
-.black_cursor_pointer:hover{
+
+.black_cursor_pointer:hover {
     color: #000 !important;
     font-weight: bold;
 }
+
 .cursor_pointer:hover {
     cursor: pointer;
 }
+
 .decoration_underline:hover {
-    text-decoration: underline!important;
+    text-decoration: underline !important;
 }
 
 .underline {
@@ -1298,10 +1326,11 @@ select {
 }
 
 .bg_white {
-    background: white!important;
+    background: white !important;
 }
+
 .bg_blue {
-    background: #041028!important;
+    background: #041028 !important;
 }
 
 .bg_custom_blue {
@@ -1361,9 +1390,11 @@ h5 {
 .fp9 {
     font-size: .9em !important;
 }
+
 .fp7 {
     font-size: .7em !important;
 }
+
 .f16 {
     font-size: 1.6em;
 }
@@ -1413,6 +1444,7 @@ h5 {
 
     min-height: 15px;
 }
+
 .mah_500 {
 
     max-height: 500px !important;
@@ -1471,10 +1503,12 @@ h5 {
 
     max-height: 500px !important;
 }
+
 .mah_25 {
 
     max-height: 25px !important;
 }
+
 .mah_50 {
 
     max-height: 50px !important;

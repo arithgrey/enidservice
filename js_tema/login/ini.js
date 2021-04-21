@@ -11,41 +11,33 @@ let form_registro = '.form-miembro-enid-service';
 let nombre_persona = '.nombre_persona';
 let email = '#mail';
 let pw = '#pw';
-let $pw = $('#pw');
 let selector_acceso_sistema = '.place_acceso_sistema';
 let place_recuperacion = '.place_recuperacion_pw';
 let $olvide_pass = $('.olvide_pass');
 let wr = '.wrapper_login';
 let contenedor_recuperacion_password = '.contenedor_recuperacion_password';
 let seccion_registro_usuario = '.seccion_registro_nuevo_usuario_enid_service';
-let registro_pw = '.registro_pw';
 let $form_inicio = $(form_inicio);
 let $form_registro = $(form_registro);
-
 let $nombre_persona = $form_registro.find(nombre_persona);
-
-
 let $texto_telefono = $form_registro.find('.texto_telefono');
-
 let $registro_email = $form_registro.find('.registro_email');
 let $registro_pw = $form_registro.find('.registro_pw');
-let $botton_registro = $form_registro.find('.botton_registro');
 let $perfil = $form_registro.find('.perfil');
 let $input_correo_inicio = $form_inicio.find('.correo');
 let $input_password_inicio = $form_inicio.find('#pw');
 let $seccion_entrega = $form_registro.find('.seccion_entrega');
-
+let $icono_mostrar_password = $form_inicio.find('.mostrar_password');
+let $icono_ocultar_password = $form_inicio.find('.ocultar_password');
 let $auto = $form_registro.find('.auto');
 let $moto = $form_registro.find('.moto');
 let $bicicleta = $form_registro.find('.bicicleta');
 let $pie = $form_registro.find('.pie');
-
 let $tiene_auto = $form_registro.find('.tiene_auto');
 let $tiene_moto = $form_registro.find('.tiene_moto');
 let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
 let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
 let $link_como_vender = $form_registro.find('.link_como_vender');
-
 
 $(document).on('ready', () => {
 
@@ -62,7 +54,7 @@ $(document).on('ready', () => {
 
     despliega('.extra_menu_simple', 1);
     despliega(['.base_compras', '.base_paginas_extra', '.info_metodos_pago'], 0);
-    /*REGISTRO*/
+
     $nombre_persona.keyup(function (e) {
         transforma_mayusculas(this);
         $(this).next().next().addClass('d-none');
@@ -83,7 +75,7 @@ $(document).on('ready', () => {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_registro, 1);
     });
-    /*Acceso*/
+
     $input_correo_inicio.keyup(function (e) {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_inicio, 1);
@@ -101,29 +93,32 @@ $(document).on('ready', () => {
     $bicicleta.click(evaluacion_bicicleta);
     $pie.click(evaluacion_pie);
 
+    $icono_mostrar_password.click(mostrar_password);
+    $icono_ocultar_password.click(ocultar_password);
 });
 
 
 let inicio_session = () => {
 
     let data_send = {secret: get_option('tmp_password'), 'email': get_option('email')};
-    if (get_parameter('#mail_acceso').length > 5 && get_parameter(pw).length > 5) {
-        let url = get_option('url');
+    let $min_mail = get_parameter('#mail_acceso').length > MIN_CORREO_LENGTH;
+    let $min_pw = get_parameter(pw).length > MIN_PW_LENGTH;
+    if ($min_mail && $min_pw) {
 
-        bloquea_form(form_inicio);
         sload(selector_acceso_sistema);
+        let url = get_option('url');
+        bloquea_form(form_inicio);
         request_enid('POST', data_send, url, response_inicio_session);
 
-    } else {
-        focus_input(['#email', pw]);
     }
 };
 
 let response_inicio_session = data => {
 
-    if (data !== 0) {
 
-        redirect(data);
+    if (data.login !== false) {
+
+        redirect(data.login);
 
     } else {
 
@@ -381,3 +376,18 @@ let evaluacion_pie = function (e) {
         $reparte_a_pie.val(1);
     }
 };
+let mostrar_password = function (){
+
+
+    $input_password_inicio.attr('type', 'text');
+    $(this).addClass("d-none");
+    $icono_ocultar_password.removeClass("d-none");
+}
+
+let ocultar_password = function (){
+
+    $input_password_inicio.attr('type', 'password');
+    $(this).addClass("d-none");
+    $icono_mostrar_password.removeClass('d-none');
+
+}

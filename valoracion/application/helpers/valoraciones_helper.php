@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = flex(
+        $r[] = flex_md(
             h("¿Qué valoración darías a este artículo?", 3, ' strong mr-3 '),
             posibilidades(
                 [
@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
                     "Excelente"
                 ]
             ),
-            "d-flex align-items-end", "text-valoracion"
+            _between, "text-valoracion"
         );
         $r[] = d("¿Recomendarías este producto?*", "text_recomendarias text-valoracion strong mb-5 mt-5");
         $r[] = btw(

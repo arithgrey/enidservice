@@ -18,7 +18,7 @@ class Home extends CI_Controller
         $this->app->acceso();
         $data = $this->app->cssJs($data, "reventa");
         $clientes = $this->clientes($data["id_usuario"]);
-        $usuarios = [];
+        $usuarios_num_compras = [];
         $intentos  = [];
         if (es_data($clientes)) {
 

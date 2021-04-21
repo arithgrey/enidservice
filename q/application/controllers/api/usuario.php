@@ -500,12 +500,14 @@ class usuario extends REST_Controller
         $param = $this->post();
         $response = [];
         if (fx($param, "email,secret")) {
+
             $params = ["idusuario", "nombre", "email", "fecha_registro", "idempresa"];
             $secret = $param["secret"];
             $params_where = [
                 "email" => $param["email"],
                 "password" => $secret
             ];
+
             $response = $this->usuario_model->get($params, $params_where);
             if (!es_data($response)) {
 
