@@ -5,13 +5,37 @@ let $seleccion_producto_carro_compra = $(".seleccion_producto_carro_compra");
 let $carro_compras_total = $(".carro_compras_total");
 let $subtotal_carrito = $(".subtotal_carrito");
 let $seccion_enviar_orden = $(".seccion_enviar_orden");
+let $form_segunda_compra = $(".form_segunda_compra");
+
 $(document).ready(function () {
 
     $('.cantidad_articulos_deseados').change(modifica_cantidad_articulos_deseados);
     $texto_deseleccionar.click(deseleccionar);
     $texto_seleccionar.click(seleccionar);
     $seleccion_producto_carro_compra.click(check_producto_carro_compra);
+    $form_segunda_compra.submit(segunda_compra);
 });
+
+let segunda_compra = function (e) {
+
+    e.preventDefault();
+
+    let $data_send = $form_segunda_compra.serialize();
+    let url = "../q/index.php/api/cobranza/siguiente_compra/format/json/";
+    request_enid("POST", $data_send, url, response_segunda_compra);
+
+}
+let response_segunda_compra = function (data) {
+
+    if (data.hasOwnProperty('id_orden_compra') && parseInt(data.id_orden_compra) > 0) {
+
+        let id = data.id_orden_compra;
+
+        redirect(_text("../pedidos/?seguimiento=", id, "&domicilio=1&asignacion_horario_entrega=1"))
+
+    }
+
+}
 let modifica_cantidad_articulos_deseados = function () {
 
     let $cantidad = $(this).val();

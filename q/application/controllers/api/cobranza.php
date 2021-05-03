@@ -75,7 +75,15 @@ class Cobranza extends REST_Controller
         $producto_carro_compra = $param["producto_carro_compra"];
         if ($es_cliente) {
 
-            $productos_deseados_carro_compra = $this->productos_envio_pago_nuevo_usuario($producto_carro_compra);
+            if (prm_def($param, "es_usuario_nuevo") < 1) {
+
+                $productos_deseados_carro_compra = $this->productos_envio_pago_usuario($producto_carro_compra, 1);
+
+            } else {
+
+                $productos_deseados_carro_compra = $this->productos_envio_pago_nuevo_usuario($producto_carro_compra);
+            }
+
 
         } else {
 
@@ -141,7 +149,6 @@ class Cobranza extends REST_Controller
         }
 
         $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
-        //$this->posterior_compra($data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo);
         $this->response($response);
     }
 
@@ -153,19 +160,24 @@ class Cobranza extends REST_Controller
 
             $response = $this->app->api(
                 "usuario_deseo_compra/envio_pago",
-                ["ids" => $ids] , "json", "PUT");
+                ["ids" => $ids], "json", "PUT");
         }
 
         return $response;
     }
 
-    private function productos_envio_pago_usuario($producto_carro_compra)
+    private function productos_envio_pago_usuario($producto_carro_compra, $envia_cliente = 0)
     {
 
         $response = [];
         if (es_data($producto_carro_compra)) {
 
-            $response = $this->app->api("usuario_deseo/envio_pago/format/json/", ["ids" => $producto_carro_compra]);
+            $response = $this->app->api("usuario_deseo/envio_pago/format/json/",
+                [
+                    "ids" => $producto_carro_compra,
+                    "envia_cliente" => $envia_cliente
+                ]
+            );
         }
 
         return $response;
@@ -179,29 +191,6 @@ class Cobranza extends REST_Controller
         );
 
     }
-//
-//    private function asigna_reparto($id_orden_compra)
-//    {
-//
-//        return $this->app->api("recibo/reparto", ['orden_compra' => $id_orden_compra], "json", "PUT");
-//    }
-//
-//    function get_precio_id_servicio($id_servicio)
-//    {
-//
-//        return $this->app->api("recibo/precio_servicio/format/json/",
-//            ["id_servicio" => $id_servicio]);
-//    }
-//
-//    function disponibilidad_servicio($id_servicio, $num_ciclos)
-//    {
-//        $q = [
-//            "id_servicio" => $id_servicio,
-//            "articulos_solicitados" => $num_ciclos,
-//        ];
-//
-//        return $this->app->api("servicio/info_disponibilidad_servicio/format/json/", $q);
-//    }
 
     private function orden($param, $data_servicio, $orden_compra = 0)
     {
@@ -279,7 +268,8 @@ class Cobranza extends REST_Controller
     {
 
 
-        $data["id_usuario"] = ($es_nuevo < 1) ? $this->id_usuario : $param["id_usuario"];
+        $envia_cliente = prm_def($param, "envia_cliente");
+        $data["id_usuario"] = ($envia_cliente < 1 && $es_nuevo < 1) ? $this->id_usuario : $param["id_usuario"];
         $data["es_usuario_nuevo"] = ($es_nuevo == 0) ? 0 : 1;
 
         if ($es_nuevo < 1) {
@@ -304,13 +294,6 @@ class Cobranza extends REST_Controller
         return $this->app->api("recibo/orden_de_compra", $q, "json", "POST");
 
     }
-
-//    private function agrega_notas_pedido($q)
-//    {
-//
-//        return $this->app->api("orden_comentario/index", $q, "json", "POST");
-//    }
-
 
     function posterior_compra($data_orden, $id_orden_compra, $id_servicio, $param, $es_nuevo)
     {
@@ -492,6 +475,7 @@ class Cobranza extends REST_Controller
 
             $usuario_referencia = $this->id_usuario;
         }
+
         return $usuario_referencia;
     }
 
@@ -503,9 +487,10 @@ class Cobranza extends REST_Controller
         if ($usuario_referencia > 0) {
             $param['usuario_referencia'] = $usuario_referencia;
         }
-
         $usuario = $this->crea_usuario($param);
+
         if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {
+
             $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
             $param += [
                 "es_usuario_nuevo" => 1,
@@ -525,20 +510,47 @@ class Cobranza extends REST_Controller
 
     }
 
+    function siguiente_compra_POST()
+    {
+
+        $param = $this->post();
+        $session = $this->app->get_session();
+        $en_session = $session["logged_in"];
+        $response = false;
+        if ($en_session) {
+
+            $param += [
+                "es_usuario_nuevo" => 0,
+                "usuario_nuevo" => 0,
+                "usuario_existe" => 0,
+                "es_cliente" => 1,
+                "envia_cliente" => 1
+            ];
+            $response = $this->crea_orden($param);
+            $response = $this->has_login($response, $param);
+
+        }
+
+        $this->response($response);
+
+
+    }
+
     private function has_login($productos_orden_compra, $param)
     {
 
-        $productos_orden_compra["session_creada"] = 0;
+
         if (es_data($productos_orden_compra)) {
 
             $ordenes_creadas = array_column($productos_orden_compra, 'orden_creada');
             $ids_ordenes_compra = array_column($productos_orden_compra, 'id_orden_compra');
             $id_orden_compra = array_unique($ids_ordenes_compra)[0];
-
             $es_orden_creada = (!in_array(0, $ordenes_creadas));
+            $productos_orden_compra["session_creada"] = 0;
 
 
-            if ($es_orden_creada && $param['es_cliente'] > 0) {
+            $envia_cliente = prm_def($param, "envia_cliente");
+            if ($es_orden_creada && $param['es_cliente'] > 0 && $envia_cliente < 1) {
                 $session = $this->create_session($param);
                 if (es_data($session)) {
                     $productos_orden_compra["session_creada"] = 1;

@@ -28,7 +28,9 @@ class Sess extends REST_Controller
                     $nombre = $usuario["nombre"];
                     $email = $usuario["email"];
                     $id_empresa = $usuario["idempresa"];
-                    $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa);
+
+                    $recien_creado  = ($es_barer);
+                    $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado);
                     $response["session"] = $session;
                     $response["session_creada"] = $this->app->get_session();
 
@@ -52,7 +54,7 @@ class Sess extends REST_Controller
         return $this->app->api("usuario/es", $q, "json", "POST");
     }
 
-    private function crea_session($id_usuario, $nombre, $email, $id_empresa)
+    private function crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado = 0)
     {
 
         $empresa = $this->get_empresa($id_empresa);
@@ -81,7 +83,8 @@ class Sess extends REST_Controller
                     "data_navegacion" => $navegacion,
                     "info_empresa" => $empresa,
                     "data_status_enid" => $status_enid,
-                    "logged_in" => 1
+                    "logged_in" => 1,
+                    "recien_creado" => $recien_creado
                 ];
 
                 $this->app->set_userdata($response);

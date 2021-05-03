@@ -28,7 +28,8 @@ class usuario_deseo extends REST_Controller
 
         $param = $this->get();
         $ids = get_keys($param["ids"]);
-        $response = $this->usuario_deseo_model->por_pago($ids);
+        $envia_cliente = prm_def($param , "envia_cliente");
+        $response = $this->usuario_deseo_model->por_pago($ids, $envia_cliente);
         $this->response($response);
     }
 

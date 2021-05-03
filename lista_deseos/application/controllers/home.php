@@ -13,6 +13,7 @@ class Home extends CI_Controller
     function index()
     {
 
+
         $data = $this->app->session();
         $in_session = $data['in_session'];
         if ($in_session) {
@@ -21,6 +22,7 @@ class Home extends CI_Controller
             $param = $this->input->get();
 
             if (prm_def($param, "q") === "preferencias") {
+
 
                 $this->render_preferencias($data);
 
@@ -53,12 +55,14 @@ class Home extends CI_Controller
 
     private function load_lista_deseos($data)
     {
+
         $lista_deseo = $this->get_lista_deseos($data["id_usuario"]);
         $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
         if (es_data($data["productos_deseados"])) {
 
+
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
-            $this->app->pagina($data, productos_deseados($data["productos_deseados"]), 1);
+            $this->app->pagina($data, productos_deseados($data, $data["productos_deseados"] ), 1);
 
 
         } else {
@@ -75,8 +79,9 @@ class Home extends CI_Controller
 
         if (es_data($lista_deseo)) {
 
+
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
-            $this->app->pagina($data, productos_deseados($lista_deseo, 1), 1);
+            $this->app->pagina($data, productos_deseados($data,  $lista_deseo, 1), 1);
 
         } else {
             $this->app->pagina($data, sin_productos(), 1);

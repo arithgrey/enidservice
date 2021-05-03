@@ -1431,11 +1431,12 @@ class recibo extends REST_Controller
         }
 
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
+
             $param['perfil'] = $this->app->getperfiles();
-            $param['es_administrador'] = prm_def($param, 'es_admistrador');
+            $param['es_administrador'] = prm_def($param, 'es_administrador');
+
 
             $response = $this->busqueda_pedidos($param);
-
             switch ($param["v"]) {
 
                 case 1:
@@ -1461,6 +1462,7 @@ class recibo extends REST_Controller
             }
 
         }
+
         $this->response($response);
 
     }

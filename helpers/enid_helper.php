@@ -408,7 +408,7 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
 function a_texto($title = '', $attributes = [], $format_block = 1)
 {
 
-    $clases_base = "enid_link black border-bottom border-dark text-capitalize";
+    $clases_base = "enid_link black underline text-capitalize";
     $class = (es_data($attributes) && array_key_exists("class", $attributes)) ?
         _text_($attributes["class"], $clases_base) : $clases_base;
     $attributes["class"] = $class;

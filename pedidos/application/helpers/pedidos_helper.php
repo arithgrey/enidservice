@@ -979,7 +979,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($recibo_vendedor, 'row mt-3');
 
-        $text = es_orden_pagada_entregada($data) ? 'Entregó' : 'Entregará';
+        $text = es_orden_pagada_entregada($data) ? 'Vendió' : 'Agendó';
         $id_usuario_reparto = pr($data['repartidor'], 'id_usuario');
         $imagen =
             img(
@@ -1540,7 +1540,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
         $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
         $r[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => $es_busqueda_reparto]);
-        $r[] = hiddens(['class' => 'es_admistrador', 'name' => 'es_admistrador', 'value' => es_administrador($data)]);
+        $r[] = hiddens(['class' => 'es_administrador', 'name' => 'es_administrador',
+            'value' => es_administrador($data)]);
+
         $r[] = hiddens(
             [
                 "name" => "perfil",
@@ -1676,13 +1678,15 @@ if (!function_exists('invierte_date_time')) {
     function formato_nombre_cliente($clientes, $id_usuario)
     {
         $nombre_completo = '';
-        foreach ($clientes as $row) {
+        if (es_data($clientes)) {
+            foreach ($clientes as $row) {
 
-            if ($row['id_usuario'] == $id_usuario) {
+                if ($row['id_usuario'] == $id_usuario) {
 
-                $nombre_completo = format_nombre($row);
+                    $nombre_completo = format_nombre($row);
 
-                break;
+                    break;
+                }
             }
         }
         return $nombre_completo;

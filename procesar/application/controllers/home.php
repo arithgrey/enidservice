@@ -117,10 +117,8 @@ class Home extends CI_Controller
 
         }
 
-
         $id_usuario = prm_def($param, "q2");
         $num_usuario_referencia = usuario($id_usuario);
-
         $data["q2"] = $num_usuario_referencia;
         $data["servicio"] = ($es_carro_compras) ? "" : $this->resumen_servicio($param["id_servicio"]);
         $data["costo_envio"] = $this->costo_envio_orden_compra($es_carro_compras, $data);
