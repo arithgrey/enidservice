@@ -122,9 +122,10 @@ class Usuario_deseo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
-    function por_pago($ids)
+    function por_pago($ids, $envia_cliente = 0)
     {
 
+        $extra = ($envia_cliente < 1) ? "AND u.status = 3" : "";
         $query_get = "SELECT 
 				u.id, 
 				u.num_deseo,
@@ -134,8 +135,9 @@ class Usuario_deseo_model extends CI_Model
 				FROM  usuario_deseo u 
 				INNER JOIN servicio s
                 ON u.id_servicio =  s.id_servicio 
-				WHERE  id IN(" . $ids . ") 
-				AND u.status = 3";
+				WHERE  id IN(" . $ids . ")";
+
+        $query_get = _text_($query_get, $extra);
         return $this->db->query($query_get)->result_array();
 
     }

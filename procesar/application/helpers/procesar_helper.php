@@ -18,41 +18,19 @@ if (!function_exists('invierte_date_time')) {
     function render_procesar($data)
     {
 
-        $servicio = $data["servicio"];
         $inf_ext = $data["info_solicitud_extra"];
         $es_carro_compras = $inf_ext["es_carro_compras"];
         $producto_carro_compra = $inf_ext["producto_carro_compra"];
-
-        $costo_envio = $data["costo_envio"];
         $is_mobile = $data["is_mobile"];
         $q2 = $data["q2"];
         $in_session = $data["in_session"];
         $es_cliente = ($data['id_perfil'] == 20) ? 1 : 0;
         $es_cliente = ($in_session) ? $es_cliente : 1;
 
-        $producto = desglose_servicio($servicio, $inf_ext);
-        $precio = pr($servicio, "precio");
-        $monto_total = floatval($precio) * floatval($inf_ext["num_ciclos"]);
-        $flag_servicio = pr($servicio, "flag_servicio");
-        $costo_envio_cliente = ($flag_servicio < 1 && !$es_carro_compras) ? $costo_envio["costo_envio_cliente"] : 0;
-
         $ext = $inf_ext;
         $ext["q2"] = $q2;
         $talla = (array_key_exists("talla", $inf_ext)) ? $inf_ext["talla"] : 0;
-
         $r[] = place("info_articulo", ["id" => 'info_articulo']);
-        $total_con_costo_envio = ($monto_total + $costo_envio_cliente);
-
-
-        $z[] = format_resumen(
-            $producto["resumen_producto"],
-            $producto["resumen_servicio_info"],
-            $monto_total,
-            $costo_envio_cliente,
-            $total_con_costo_envio,
-            $in_session,
-            $es_cliente
-        );
 
         $z[] = str_title($in_session, $is_mobile);
         $z[] = form_open("",
@@ -72,17 +50,20 @@ if (!function_exists('invierte_date_time')) {
             $es_carro_compras,
             $producto_carro_compra
         );
-        $z[] = frm_primer_registro($in_session, $ext, $es_cliente);
+        $z[] = formulario_primer_registro($in_session, $ext, $es_cliente);
         $z[] = hiddens(
             [
                 "value" => $data["email"],
                 "class" => 'email_s'
             ]
         );
-        $r[] = d(d(d($z, "contenedo_compra_info"), "contenedor_compra"),
-            "col-lg-8 col-lg-offset-2 top_100 bottom_100");
+
+        $contenedor = d($z, "contenedo_compra_info");
+        $contendor_compra = d($contenedor, "contenedor_compra");
+        $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2 mt-5 mb-5");
 
         return append($r);
+
 
     }
 
@@ -99,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function frm_primer_registro($in_session, $param, $es_cliente)
+    function formulario_primer_registro($in_session, $param, $es_cliente)
     {
 
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
@@ -154,7 +135,9 @@ if (!function_exists('invierte_date_time')) {
             $z[] = append($inputs);
             if (!$in_session) {
 
-                $z[] = d('Crea una cuenta para realizar tu compra', 'mt-5 text-uppercase black text- col-sm-12 h4');
+
+                $clase = 'mt-5 text-uppercase black text- col-sm-12 h4';
+                $z[] = d('Crea una cuenta para realizar tu compra', $clase);
             }
 
 
@@ -430,48 +413,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
-    function format_resumen(
-        $resumen,
-        $resumen_servicio_info,
-        $monto_total,
-        $costo_envio_cliente,
-        $monto_total_con_envio,
-        $in_session,
-        $es_cliente
-    )
-    {
-
-        $r = [];
-        if ($in_session > 0 && $es_cliente) {
-            $r[] = $resumen;
-            $r[] = hiddens(
-                [
-                    "name" => "resumen_producto",
-                    "class" => "resumen_producto",
-                    "value" => $resumen_servicio_info,
-                ]
-            );
-            $x[] = h("MONTO " . money($monto_total), 5, "strong");
-            $x[] = h("ENVÍO " . money($costo_envio_cliente), 5, "strong");
-            $x[] = h("TOTAL " . money($monto_total_con_envio), 3,
-                "text_total underline letter-spacing-15");
-            $r[] = d($x, "text-right mt-5");
-
-            $r[] = d(btn("ORDENAR COMPRA",
-                [
-                    "class" => 'btn_procesar_pedido_cliente',
-                ]
-            ), 'col-sm-4 row pull-right');
-            $r[] = place('place_proceso_compra mt-5');
-        }
-
-
-        return d($r, "compra_resumen");
-
-    }
-
-
     function frm_miembro_enid_service_hidden(
         $q2,
         $plan,
@@ -507,13 +448,6 @@ if (!function_exists('invierte_date_time')) {
                         "name" => "es_carro_compras",
                         "value" => $es_carro_compras,
                         "class" => "es_carro_compras"
-                    ]
-                ),
-
-                hiddens(
-                    [
-                        "name" => "descripcion",
-                        "value" => "",
                     ]
                 ),
                 hiddens(

@@ -1461,9 +1461,9 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($recibos as $row) {
 
-
+                $id_orden_compra = $row["id_orden_compra"];
                 $text = d('Podrías vender nuevamente a este cliente!', 'black strong text-right');
-                $url = path_enid("pedidos_recibo", $row["id_recibo"]);
+                $url = path_enid("pedidos_recibo", $id_orden_compra);
                 $r[] = d(a_enid($text, $url), "border-bottom");
                 $f++;
             }

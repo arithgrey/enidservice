@@ -428,7 +428,7 @@ if (!function_exists('invierte_date_time')) {
         $iconos[] = d(get_url_facebook(get_url_tienda($id_usuario), 1));
         $iconos[] = d(get_url_twitter(get_url_tienda($id_usuario), "VISITA MI TIENDA EN LÍNEA!", 1), $separacion);
         $iconos[] = d(get_url_pinterest(get_url_tienda($id_usuario), 1), $separacion);
-        $final = flex($iconos);
+        $final = flex($iconos,'iconos_sociales bg_black p-1');
 
         $link_cuenta = tab(
             text_icon("fa fa-address-book-o", "CUENTA"),
@@ -476,7 +476,6 @@ if (!function_exists('invierte_date_time')) {
             text_icon('fa fa-gift', 'INTERESES Y PREFERENCIAS'),
             [
                 'href' => path_enid('lista_deseos_preferencias'),
-                'class' => 'text-right'
             ]
         );
 

@@ -46,6 +46,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
     function render($data)
     {
         if (es_data($data["metricas"])) {
@@ -58,7 +59,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $id_vendedor = $row['id_vendedor'];
                 if (in_array($id_vendedor, $ids_comisionistas)) {
-
 
                     $ventas = $row['ventas'];
                     $nombre_vendedor = substr($row['nombre_vendedor'], 0, 17);
@@ -84,35 +84,42 @@ if (!function_exists('invierte_date_time')) {
 
             $textos_top = ['del día', 'de la semana', 'del mes', 'del año'];
             $texto_top = $textos_top[$data['tipo_top']];
-            $tablero[] = _titulo(_text_('Top de ventas', $texto_top));
+            $tablero[] = d(_titulo(_text_('Top de ventas', $texto_top)), 'text-center');
+            $tablero[] = d("Aquí verás el top de personas que han vendido más en este tiempo","text-center");
 
-            $links[] = a_enid('Top del día',
+
+            $links[] = a_texto(
+                'Top del día',
                 [
                     'class' => 'black mr-5 mt-5 mb-5 underline',
                     'href' => path_enid('top_competencia')
                 ]
             );
-            $links[] = a_enid('Top semanal',
+            $links[] = a_texto(
+                'Top semanal',
                 [
                     'class' => 'black mr-5 mt-5 mb-5 underline',
                     'href' => path_enid('top_competencias', 1)
                 ]
             );
-            $links[] = a_enid('Top mensual',
+            $links[] = a_texto(
+                'Top mensual',
                 [
                     'class' => 'black mr-5 mt-5 mb-5 underline',
                     'href' => path_enid('top_competencias', 2)
                 ]
             );
-            $links[] = a_enid('Top anual',
+            $links[] = a_texto(
+                'Top anual',
                 [
                     'class' => 'black mr-5 mt-5 mb-5 underline',
                     'href' => path_enid('top_competencias', 3)
                 ]
             );
-            $tablero[] = flex($links);
 
-            $tablero[] = d(d($response, 13), 'container-fluid');
+            $tablero[] = flex($links, ' justify-content-center f12');
+            $fotos_top = d($response, 'row justify-content-center ');
+            $tablero[] = d($fotos_top, 'container-fluid');
             return d($tablero, 10, 1);
         } else {
 

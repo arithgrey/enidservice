@@ -50,10 +50,10 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function productos_deseados($productos, $externo = 0)
+    function productos_deseados($data, $productos, $externo = 0)
     {
 
-        return format_productos_deseados($productos, $externo);
+        return format_productos_deseados($data, $productos, $externo);
 
     }
 
@@ -205,19 +205,19 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function format_productos_deseados($productos_deseados, $externo)
+    function format_productos_deseados($data, $productos_deseados, $externo)
     {
 
 
         $lista_deseo = lista_deseo($productos_deseados, $externo);
         $response[] = d($lista_deseo, 8);
-        $response[] = d(seccion_procesar_pago($productos_deseados), 4);
+        $response[] = d(seccion_procesar_pago($data, $productos_deseados), 4);
 
         return d($response, 10, 1);
 
     }
 
-    function seccion_procesar_pago($productos_deseados)
+    function seccion_procesar_pago($data, $productos_deseados)
     {
         $subtotal = 0;
         $total_articulo = 0;
@@ -240,21 +240,53 @@ if (!function_exists('invierte_date_time')) {
                     "class" => _text("producto_", $id)
                 ];
             $inputs[] = hiddens($config);
+        }
+
+        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
+        $response[] = _titulo(money($subtotal), 4, 'subtotal_carrito');
+        $response[] = form_procesar_carro_compras($data, $inputs, $subtotal);
+
+        return append($response);
+
+    }
+
+    function form_procesar_carro_compras($data, $inputs, $subtotal)
+    {
+
+
+        $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
+        if (!$es_recien_creado) {
+
+            $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
+            $response[] = append($inputs);
+            $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
+            $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
+            $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline');
+            $response[] = form_close();
+            return append($response);
+        } else {
+
+
+            $response[] = '<form class="form_segunda_compra" action="" method="POST">';
+            $response[] = append($inputs);
+            $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
+            $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
+            $response[] = hiddens(["class" => "tipo_entrega", "name" => "tipo_entrega", "value" => 2]);
+            $response[] = hiddens([
+                "class" => "usuario_referencia",
+                "name" => "usuario_referencia",
+                "value" => $data["id_usuario"]
+            ]);
+            $response[] = hiddens(["class" => "id_usuario", "name" => "id_usuario", "value" => $data["id_usuario"]]);
+
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
+            $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline');
+            $response[] = form_close();
+            return append($response);
 
         }
 
-
-        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
-        $response[] = _titulo(money($subtotal), 4,'subtotal_carrito');
-
-        $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
-        $response[] = append($inputs);
-        $response[] = hiddens(["class" => "carro_compras_total",  "value" => $subtotal]);
-        $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
-        $response[] = d(btn("Enviar orden", ["class" => "mt-5"]),'seccion_enviar_orden');
-        $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5');
-        $response[] = form_close();
-        return append($response);
 
     }
 

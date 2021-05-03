@@ -143,7 +143,7 @@ if (!function_exists('invierte_date_time')) {
 
                 );
 
-                $id_orden_compra =  $row["id_orden_compra"];
+                $id_orden_compra = $row["id_orden_compra"];
                 $desglose_pedido = path_enid("pedidos_recibo", $id_orden_compra);
                 $tracker = path_enid("pedido_seguimiento", $id_orden_compra);
                 $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
@@ -196,30 +196,33 @@ if (!function_exists('invierte_date_time')) {
                         'class' => 'strong black underline'
                     ]
                 );
-                $r[] = d(_titulo(_text_(count($recibos), 'Entregas en proceso')), 'mb-5');
 
+                $texto = (count($recibos) > 1) ? 'Entregas' : "Entrega";
+                $texto_entregas = _text_(count($recibos), $texto, ' en proceso');
+                $clase = 'display-4 white bg_black col-md-8 col-md-offset-2 col-sm-12';
+                $r[] = d(d($texto_entregas, $clase), 'mb-5 row');
                 $r[] = d($extregas, 'mb-5');
                 $r[] = reporte_reparto($ids_usuario_entrega, $repartidores, $data);
 
 
                 $link_proximas_entregas =
-                    a_enid('Entregas que serán mañana',
+                    a_enid('Ver entregas que serán mañana',
                         [
-                            'class' => 'strong black underline'
+                            'class' => 'black underline diplay-6'
                         ]
                     );
                 $r[] = d(
                     $link_proximas_entregas,
                     'mostrar_proximas_entregas'
                 );
-                $link_entregas = a_enid('Entregas por liberar hoy',
+                $link_entregas = a_enid('Ver entregas por liberar hoy',
                     [
-                        'class' => 'strong black underline'
+                        'class' => ' black underline'
                     ]
                 );
                 $r[] = d(
                     $link_entregas,
-                    'entregas_por_liberar_hoy d-none'
+                    'entregas_por_liberar_hoy d-none diplay-6'
                 );
 
                 $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_menos_opciones text-secondary')),
@@ -245,7 +248,30 @@ if (!function_exists('invierte_date_time')) {
             }
 
         } else {
-            $r[] = d(_titulo('Ups! no hay repartos aún asigandos'), 'mb-5');
+
+
+            $r[] = d(
+                'Ups! parece que algo anda mal, no hay ventas, tenemos que regresar a conseguir clientes!',
+                _text_('h3 text-uppercase black font-weight-bold', _6auto));
+
+            $r[] = d(
+                format_link('Ver artículos disponibles',
+                    [
+                        'href' => path_enid('home')
+                    ]
+                ), _text_(_4auto, 'mt-5'));
+            $r[] = d(
+
+                img(
+                    [
+                        "src" => "https://media.giphy.com/media/3orif8pKLiSeJP0paw/giphy.gif",
+                        "class" => "mt-5 mx-auto"
+                    ]
+                )
+                ,_6auto
+            );
+
+
         }
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');

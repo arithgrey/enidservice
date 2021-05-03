@@ -309,7 +309,7 @@ a:hover {
 }
 
 .modal-enid .modal-content {
-/ / margin-top: 5 %;
+
     border-radius: 0px;
     border-left-width: 0px;
     border-right-width: 0px;
@@ -381,7 +381,6 @@ a:hover {
     padding: 10px !important;
 }
 
-
 li {
     list-style: none !important;
 }
@@ -400,6 +399,17 @@ li {
 
 .w_15 {
     width: 15px !important;
+}
+.diplay-5{
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.diplay-6{
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
 }
 
 @media only screen and (max-width: 991px) {
@@ -1223,10 +1233,6 @@ h2 {
 .input_select_busqueda {
     width: 45% !important;
 }
-
-/*.flipkart-navbar-button {*/
-/*    height: 30px !important;*/
-/*}*/
 
 .f19 {
 

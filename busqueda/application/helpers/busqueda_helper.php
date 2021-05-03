@@ -27,8 +27,6 @@ if (!function_exists('invierte_date_time')) {
         $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
 
 
-
-
         $restantes = ($meta_semanal_comisionista - $total_ventas_semana );
         $seccion_meta = flex('Meta semanal', $meta_semanal_comisionista, 'flex-column');
         $ventas_actuales = flex('Logros a la fecha', $total_ventas_semana, 'flex-column');
@@ -36,21 +34,22 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $link_ventas = a_enid('Mis ventas',
+        $link_ventas = a_texto('Mis ventas',
             [
-                'class' => 'underline text-center black',
+                'class' => 'text-center ',
                 'href' => path_enid('pedidos')
             ]
         );
 
-        $link_top_ventas = a_enid('Top ventas',
+        $link_top_ventas = a_texto('Top ventas',
             [
-                'class' => 'underline text-center black',
+                'class' => 'text-center black',
                 'href' => path_enid('top_competencia')
             ]
         );
 
-        $r[] = d(d_c(
+        $r[] = d(
+            d_c(
             [
                 $seccion_meta,
                 $ventas_actuales,
@@ -58,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
                 $link_ventas,
                 $link_top_ventas
             ],
-            'col-lg-2 mx-auto text-center mt-5'),'row mt-5');
+            'f11 col-lg-2 mx-auto text-center mt-5'),'row mt-5 black');
 
 
 

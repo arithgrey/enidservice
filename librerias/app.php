@@ -369,6 +369,7 @@ class app extends CI_Controller
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = $desc;
             $data["data_status_enid"] = $session["data_status_enid"];
+            $data["recien_creado"] = $session["recien_creado"];
 
         } else {
 

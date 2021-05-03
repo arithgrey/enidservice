@@ -20,6 +20,7 @@ class Competencias extends REST_Controller
 
         $this->response($response);
     }
+
     function liberaciones_GET()
     {
 
@@ -31,7 +32,7 @@ class Competencias extends REST_Controller
         $this->response($response);
     }
 
-    private function ventas_dia_semana($tipo)
+    private function formato_fecha_pedidos($tipo)
     {
 
         $hoy = now_enid();
@@ -62,7 +63,16 @@ class Competencias extends REST_Controller
             default:
                 break;
         }
+        return $fecha_inicio;
 
+
+    }
+
+    private function ventas_dia_semana($tipo)
+    {
+
+        $hoy = now_enid();
+        $fecha_inicio = $this->formato_fecha_pedidos($tipo);
 
         $q = [
             "cliente" => "",
@@ -111,6 +121,7 @@ class Competencias extends REST_Controller
         return $response;
 
     }
+
     private function repartidor($ventas)
     {
 
@@ -119,15 +130,15 @@ class Competencias extends REST_Controller
         $response = [];
 
         foreach ($ventas_comisionistas as $id_reparto => $valor) {
-            if($id_reparto > 0){
+            if ($id_reparto > 0) {
 
-            $repartidor = search_bi_array($ventas, 'id_usuario_entrega', $id_reparto, "usuario_entrega");
-            $response[] = [
-                'id_vendedor' => $id_reparto,
-                'ventas' => $valor,
-                'nombre_vendedor' => format_nombre($repartidor),
-                'path_imagen' => path_enid("imagen_usuario", $id_reparto)
-            ];
+                $repartidor = search_bi_array($ventas, 'id_usuario_entrega', $id_reparto, "usuario_entrega");
+                $response[] = [
+                    'id_vendedor' => $id_reparto,
+                    'ventas' => $valor,
+                    'nombre_vendedor' => format_nombre($repartidor),
+                    'path_imagen' => path_enid("imagen_usuario", $id_reparto)
+                ];
 
             }
 
