@@ -524,7 +524,6 @@ class app extends CI_Controller
                     "meta_keywords" => "",
                     "desc_web" => "",
 
-
                 ]
             ,
             "contacto" => [
@@ -1294,6 +1293,47 @@ class app extends CI_Controller
                             "confirm-alert.css",
                             "summernote.css",
                         ],
+
+                ],
+            "busqueda" =>
+                [
+                    "js" =>
+                        [
+                            "busqueda/principal.js",
+                        ],
+                    "css" =>
+                        [
+                            "search_sin_encontrar.css",
+                        ],
+
+                ],
+
+            "conexiones" =>
+                [
+                    "js" =>
+                        [
+                            "conexiones/principal.js",
+                        ],
+                    "css" =>
+                        [
+                            "search_sin_encontrar.css",
+                        ],
+
+
+                ],
+            "seguidores" =>
+                [
+                    "js" =>
+                        [
+                            "seguidores/principal.js",
+                            "alerts/jquery-confirm.js",
+                        ],
+                    "css" =>
+                        [
+                            "search_sin_encontrar.css",
+                            "confirm-alert.css"
+                        ],
+
 
                 ],
 

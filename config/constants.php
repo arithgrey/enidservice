@@ -93,6 +93,7 @@ define('_bomb_icon', 'fa fa-bomb');
 define('_repato_icon', 'fa fa-bicycle');
 define('_busqueda_icon', 'fa fa-search');
 define('_check_icon', 'fa fa fa-check-circle-o');
+define('_checked_icon', 'fa-check-circle');
 define('_flecha_derecha', 'fa-chevron-circle-right');
 define('_calendario_icon', 'fa fa-calendar');
 define('_mas_opciones_bajo_icon', 'fa-chevron-circle-down');
@@ -102,7 +103,8 @@ define('_maps_icon', 'fa fa-map-marker');
 define('_compras_icon','fa-shopping-bag');
 define('_estrellas_icon','fa fa-star');
 define('_agregar_icon','fa-plus-circle');
-
+define('_spinner','fa-spinner');
+define('_dolar_icon','fa fa-usd');
 
 
 
