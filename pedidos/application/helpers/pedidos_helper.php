@@ -979,7 +979,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($recibo_vendedor, 'row mt-3');
 
-        $text = es_orden_pagada_entregada($data) ? 'Vendió' : 'Agendó';
+        $text = es_orden_pagada_entregada($data) ? 'Entregará' : 'Entregó';
         $id_usuario_reparto = pr($data['repartidor'], 'id_usuario');
         $imagen =
             img(

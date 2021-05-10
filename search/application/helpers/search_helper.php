@@ -226,7 +226,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = d(
             img(
                 [
-                    "src" => "../img_tema/productos/ejemplo2.jpg",
+                    "src" => "https://media.giphy.com/media/2hAjRJoLzYLqoRHvq2/giphy.gif",
                     "class" => "card-img"
                 ]
             ), 'col-md-6 col-sm-12 ' . $extra);

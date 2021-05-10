@@ -13,13 +13,11 @@ class Home extends CI_Controller
     {
         $param = $this->input->get();
         $data = $this->app->session();
-        $data["css"] = ["search_sin_encontrar.css"];
+        $data = $this->app->cssJs($data, "busqueda");
 
         $session = $this->app->session();
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
-
         $ventas_semana = $this->ventas_semana();
-
 
         $param["meta_semanal_comisionista"] = $meta_semanal_comisionista;
         $param["ventas_semana"] = $ventas_semana;

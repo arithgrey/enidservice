@@ -1,3 +1,7 @@
+.rounded_enid{
+
+    border-radius: 1.25rem !important;
+}
 .input-icons i {
     position: absolute;
 }

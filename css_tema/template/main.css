@@ -268,6 +268,7 @@ th:hover {
 
 .strong {
     font-weight: bold !important;
+    color: #000;
 }
 
 .btn {
@@ -1341,6 +1342,9 @@ select {
 
 .bg_custom_blue {
     background: #301fac !important;
+}
+.bg_custom_green {
+    background: #0b1e42 !important
 }
 
 html {

@@ -2011,6 +2011,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
     $base_url = [
         "sobre_vender" => "sobre_ventas",
         "top_competencia" => "competencias",
+        "conexiones" => "conexiones",
         "top_competencia_entrega" => "competencias_entregas",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
@@ -2027,6 +2028,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "_login" => "../login",
         "vender" => "planes_servicios",
         "entregas" => "entregas",
+        "seguidores" => "seguidores",
         "vender_nuevo" => "planes_servicios/?action=nuevo",
         "editar_producto" => "planes_servicios/?action=editar&servicio=",
         "sobre_enid" => "sobre_enidservice",
@@ -2038,6 +2040,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "paypal_enid" => "https://www.paypal.me/eniservice/",
         "home" => "",
         "pedidos" => "pedidos",
+        "busqueda" => "busqueda",
         "pedidos_reparto" => "pedidos/?reparto=1",
         "pedido_seguimiento" => "pedidos/?seguimiento=",
         "producto" => "producto/?producto=",
