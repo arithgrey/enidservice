@@ -22,7 +22,8 @@ class Home extends CI_Controller
         $param["meta_semanal_comisionista"] = $meta_semanal_comisionista;
         $param["ventas_semana"] = $ventas_semana;
 
-        $this->app->pagina($data, form($param), 1);
+
+        $this->app->pagina($data, render($param), 1);
 
 
     }

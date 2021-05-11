@@ -1,7 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function form($data)
+    function render($data)
     {
 
         $z[] = "<form action='../search' class='mt-5'>";
@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(posiciones(), 'col-md-10 mt-5 col-md-offset-1');
         $response[] = d(place('seccion_sugerencias'), 'col-md-10 mt-5 col-md-offset-1');
         $response[] = d(conexiones(), 'col-md-10 mt-5 col-md-offset-1');
-
+        $response[] = d(d("", "seccion_noticias"), 'col-md-10 mt-5 col-md-offset-1');
 
         return append($response);
 
@@ -105,3 +105,4 @@ if (!function_exists('invierte_date_time')) {
 
     }
 }
+

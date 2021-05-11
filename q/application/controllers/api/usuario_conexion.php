@@ -91,6 +91,25 @@ class Usuario_conexion extends REST_Controller
         $this->response($response);
     }
 
+    function noticias_seguimiento_GET()
+    {
+
+        $response = false;
+        $param = $this->get();
+
+        $id_seguidor = $this->id_usuario;
+        if ($id_seguidor > 0) {
+
+
+            $response = $this->usuario_conexion_model->noticias_seguimiento($id_seguidor);
+            $response = $this->imagenes_sugerencias($response, "id_usuario", "path_imagen_usuario");
+            $response = $this->app->add_imgs_servicio($response);
+            $response = render_actividad($response);
+        }
+
+        $this->response($response);
+    }
+
     function ranking_GET()
     {
 
@@ -137,7 +156,7 @@ class Usuario_conexion extends REST_Controller
         $this->response($response);
     }
 
-    private function imagenes_sugerencias($usuarios, $tipo_usuario)
+    private function imagenes_sugerencias($usuarios, $tipo_usuario, $key = 'path_imagen')
     {
 
         $response = [];
@@ -146,7 +165,7 @@ class Usuario_conexion extends REST_Controller
 
             $id = $row[$tipo_usuario];
             $response[$a] = $row;
-            $response[$a]["path_imagen"] = path_enid("imagen_usuario", $id);
+            $response[$a][$key] = path_enid("imagen_usuario", $id);
             $a++;
         }
 

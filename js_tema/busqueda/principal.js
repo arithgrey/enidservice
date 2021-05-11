@@ -2,6 +2,7 @@
 $(document).ready(() => {
 
     otras_conexiones();
+    noticias();
 
 });
 
@@ -40,4 +41,16 @@ let conexion = function (e) {
     });
 
     e.preventDefault();
+}
+
+
+let noticias = function () {
+
+    let url = "../q/index.php/api/usuario_conexion/noticias_seguimiento/format/json/";
+    let data_send = $.param({"v":1});
+    request_enid("GET", data_send, url, function (data) {
+
+        render_enid('.seccion_noticias', data);
+
+    });
 }
