@@ -115,6 +115,31 @@ class Usuario_conexion_model extends CI_Model
 
     }
 
+    function noticias_seguimiento($id_seguidor)
+    {
+
+        $query_get = "SELECT
+       uc.*,
+       u.nombre,
+       u.apellido_paterno,
+       u.apellido_materno,
+       p.*
+    FROM usuario_conexion uc
+    INNER JOIN usuario u 
+        ON u.idusuario = uc.id_usuario
+    INNER JOIN proyecto_persona_forma_pago p
+    ON uc.id_usuario = p.id_usuario_referencia
+    WHERE 
+          uc.id_seguidor =  $id_seguidor
+    AND uc.status > 0   
+    AND p.status NOT IN ( 10, 19 ) 
+  AND p.se_cancela < 1 AND p.cancela_cliente < 1                     
+    AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.saldo_cubierto > 0";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
     function ranking($id_seguidor)
     {

@@ -9,13 +9,13 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (count($usuarios) > 0) {
 
-            $response[] = d(_titulo("descubre otras cuentas", 4),'titulo_otras_cuentas');
+            $response[] = d(_titulo("descubre otras cuentas", 4), 'titulo_otras_cuentas');
         }
 
         foreach ($usuarios as $row) {
 
             $id_vendedor = $row['idusuario'];
-            if ($id_vendedor !== $id_seguidor){
+            if ($id_vendedor !== $id_seguidor) {
                 $nombre_vendedor = substr(format_nombre($row), 0, 17);
                 $path_imagen = $row['path_imagen'];
                 $seccion_nombre_vendedor = p($nombre_vendedor, 'black fp7');
@@ -56,5 +56,75 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
+    function render_actividad($actividades)
+    {
+        $response[] = d(_titulo("noticias", 4), "mt-5 text-center");
+        $response[] = d("Esta es la actividad de las personas que sigues", 'text-secondary text-center');
+        $response[] = actividad($actividades);
+        return d($response);
+
+    }
+
+    function actividad($actividades)
+    {
+
+        $response = [];
+        foreach ($actividades as $row) {
+
+            $path_imagen_usuario = $row["path_imagen_usuario"];
+            $url_img_servicio = $row["url_img_servicio"];
+            $vendedor = format_nombre($row);
+            $fecha_entrega = date_create($row["fecha_entrega"])->format('Y-m-d');
+
+
+            $fecha = horario_enid();
+            $hoy = $fecha->format('Y-m-d');
+            $dias = date_difference($hoy, $fecha_entrega);
+
+            $texto = ($dias > 1) ? _text_('Hace', $dias, 'días') : 'ayer';
+            $texto_dias = ($dias < 1) ? "hoy" : $texto;
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+            $comision_venta = money($row["comision_venta"] * $num_ciclos_contratados);
+
+            $imagen_usuario = d(
+                img(
+                    [
+                        "src" => $path_imagen_usuario,
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'px-auto mt-4',
+                        "style" => "width: 40px!important;height: 35px!important;",
+                    ]
+                ), ""
+            );
+
+            $vendedor_entrega = flex($vendedor, $texto_dias, 'flex-column', "strong", "fp8 text-secondary");
+            $imagen_nombre = flex($imagen_usuario, $vendedor_entrega, "align-items-center ", "mr-5");
+
+            $elemento = [];
+            $elemento[] = $imagen_nombre;
+
+            $estrella = d("", _text_(_estrellas_icon, "blue_enid"));
+            $elemento[] = flex($estrella, "Vendió", " strong mt-3", "mr-4");
+
+
+            $texto_comision = flex("Ganancia", $comision_venta, "mr-4", "mr-2");
+            $texto_productos_vendidos = flex("Artículos", $num_ciclos_contratados, "", "mr-2");
+            $elemento[] = d([$texto_comision, $texto_productos_vendidos], "d-flex fp8 black");
+
+            $imagen = img(
+                [
+                    "src" => $url_img_servicio,
+                    "class" => "mh_270 mh_250 mh_sm_310 mh-auto"
+                ]
+            );
+
+
+            $elemento[] = d($imagen,"d-block mt-4");
+            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white");
+
+
+        }
+        return d($response, "mt-5 bg-light ");
+    }
 
 }
