@@ -526,6 +526,7 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+
     function cantidad_PUT()
     {
 
@@ -2168,6 +2169,20 @@ class recibo extends REST_Controller
 
     }
 
+    function total_like_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,tipo")) {
+
+            $id = $param['id'];
+            $tipo = $param['tipo'];
+            $response = $this->recibo_model->set_total_like($id, $tipo);
+
+        }
+        $this->response($response);
+
+    }
     function proximas_reparto_GET()
     {
 
@@ -2395,6 +2410,7 @@ class recibo extends REST_Controller
         $this->response($response);
 
     }
+
 
 
 }

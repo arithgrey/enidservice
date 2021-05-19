@@ -21,6 +21,7 @@ class Sess extends REST_Controller
             if (fx($param, "email,secret")) {
                 $usuario = $this->get_es_usuario($param);
                 $response["usuario"] = $usuario;
+                $response["login"] = false;
                 if (es_data($usuario)) {
 
                     $usuario = $usuario[0];

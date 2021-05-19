@@ -95,11 +95,8 @@ class Usuario_conexion extends REST_Controller
     {
 
         $response = false;
-        $param = $this->get();
-
         $id_seguidor = $this->id_usuario;
         if ($id_seguidor > 0) {
-
 
             $response = $this->usuario_conexion_model->noticias_seguimiento($id_seguidor);
             $response = $this->imagenes_sugerencias($response, "id_usuario", "path_imagen_usuario");
