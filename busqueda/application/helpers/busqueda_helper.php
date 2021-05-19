@@ -4,26 +4,35 @@ if (!function_exists('invierte_date_time')) {
     function render($data)
     {
 
-        $z[] = "<form action='../search' class='mt-5'>";
-        $input = input(
-            [
-                "class" => "input-field mh_50 border border-dark solid_bottom_hover_3 ",
-                "placeholder" => "¿Qué artículo agendarás?",
-                "name" => "q"
-            ]
-        );
-        $z[] = d(
-            _text_(
-                icon('fa fa-search icon'),
-                $input
-            )
-            , "input-icons w-100");
-        $z[] = form_close();
-        $ext = (is_mobile() < 1) ? "" : "top_200";
-        $r[] = d($z, _text("mt-5 ", $ext));
+        $response[] = d(seccion_izquierda($data),'col-md-4 d-none d-md-block');
+        $response[] = d(seccion_noticias_notificaciones(), 'col-md-8 d-md-block');
+        return d($response,10,1);
+
+    }
+
+    function seccion_noticias_notificaciones(){
+
+        $response[] = place('seccion_sugerencias');
+        $response[] = d(d("", "seccion_noticias"), 13);
+
+        return append($response);
+
+    }
+    function seccion_izquierda($data){
+
+        $clase = 'col-md-8 mt-5 col-md-offset-2';
+        $r[] = seccion_estadisticas($data);
+        $response[] = d(d($r), $clase);
+        $response[] = d(posiciones(), $clase);
+        $response[] = d(conexiones(), $clase);
+        return append($response);
+
+    }
+    function seccion_estadisticas($data)
+    {
+
         $r[] = d(_titulo("estadísticas", 4), "mt-5");
         $r[] = d(p("Actividades en los últimos 30 días", "text-secondary"));
-
 
         $meta_semanal_comisionista = $data['meta_semanal_comisionista'];
         $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
@@ -31,13 +40,13 @@ if (!function_exists('invierte_date_time')) {
         $restantes = ($meta_semanal_comisionista - $total_ventas_semana);
 
         $icono_meta = text_icon(_dolar_icon, 'Meta semanal');
-        $seccion_meta = flex($icono_meta, $meta_semanal_comisionista, 'flex-column');
+        $seccion_meta = flex($icono_meta, $meta_semanal_comisionista, _between);
 
         $icono_logros = text_icon(_checked_icon, 'Logros fecha');
-        $ventas_actuales = flex($icono_logros, $total_ventas_semana, 'flex-column');
+        $ventas_actuales = flex($icono_logros, $total_ventas_semana, _between);
 
         $icono_restantes = text_icon(_spinner, "restantes");
-        $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
+        $restantes = flex($icono_restantes, $restantes,  'strong black');
 
 
         $link_ventas = a_texto('Mis ventas',
@@ -50,7 +59,6 @@ if (!function_exists('invierte_date_time')) {
         $texto_top = 'Identifica tus ordenes de compras enviadas';
         $texto_ventas = flex(
             $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
-
 
         $link_top_ventas = a_texto('Top ventas',
             [
@@ -73,18 +81,11 @@ if (!function_exists('invierte_date_time')) {
                     $texto_ventas,
                     $texto_top_ventas
                 ],
-                'f11 col-lg-2 mx-auto text-center mt-5'), 'row black');
-
-
-        $response[] = d(d($r), 'col-md-10 mt-5 col-md-offset-1');
-        $response[] = d(posiciones(), 'col-md-10 mt-5 col-md-offset-1');
-        $response[] = d(place('seccion_sugerencias'), 'col-md-10 mt-5 col-md-offset-1');
-        $response[] = d(conexiones(), 'col-md-10 mt-5 col-md-offset-1');
-        $response[] = d(d("", "seccion_noticias"), 'col-md-10 mt-5 col-md-offset-1');
-
-        return append($response);
+                'f11 col-lg-12 mx-auto mt-5'), 'row black');
+        return append($r);
 
     }
+
     function posiciones()
     {
         $response[] = d(_titulo("Ranking", 4), "mt-5");

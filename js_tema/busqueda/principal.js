@@ -43,14 +43,26 @@ let conexion = function (e) {
     e.preventDefault();
 }
 
-
 let noticias = function () {
 
     let url = "../q/index.php/api/usuario_conexion/noticias_seguimiento/format/json/";
-    let data_send = $.param({"v":1});
+    let data_send = $.param({"v": 1});
     request_enid("GET", data_send, url, function (data) {
 
         render_enid('.seccion_noticias', data);
+        $(".like_actividad").click(like_actividad);
 
     });
+}
+let like_actividad = function (e) {
+
+    let $id = e.target.id;
+    let data_send = $.param({"id_recibo": $id});
+    let url = "../q/index.php/api/venta_like/index/format/json/";
+    request_enid("POST", data_send, url, response_like_actividad);
+    e.preventDefault();
+
+}
+let response_like_actividad = function (data) {
+
 }

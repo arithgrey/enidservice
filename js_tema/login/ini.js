@@ -115,7 +115,7 @@ let inicio_session = () => {
 
 let response_inicio_session = data => {
 
-
+    debugger;
     if (data.login !== false) {
 
         redirect(data.login);
@@ -130,6 +130,7 @@ let response_inicio_session = data => {
 };
 
 let valida_form_session = e => {
+
 
     let respuestas = [];
     respuestas.push(es_formato_password($input_password_inicio));

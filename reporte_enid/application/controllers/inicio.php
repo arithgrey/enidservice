@@ -29,47 +29,9 @@ class Inicio extends CI_Controller
 
     private function module_redirect($num_perfil)
     {
-
-        $module = 1;
-        $desarrollo = [8, 11, 7];
-        switch ($num_perfil) {
-            case 4:
-                $module = "location:../pedidos";
-                break;
-
-            case 5:
-                $module = "location:../cargar_base";
-                break;
-
-            case 6:
-                $module = "location:../busqueda";
-                break;
-
-            case 9:
-                $module = "location:../metricas_registros";
-                break;
-
-
-            case in_array($num_perfil, $desarrollo):
-                $module = "location:../desarrollo";
-                break;
-
-
-            case 20:
-                $module = "location:../area_cliente";
-                break;
-
-            case 21:
-                $module = "location:../entregas";
-                break;
-
-            default:
-
-                break;
-        }
-
-        return $module;
-
+        $area_cliente = "location:../area_cliente";
+        $noticias = "location:../busqueda";
+        return ($num_perfil == 20) ? $area_cliente : $noticias;
     }
 
     private function valida_es_cliente($module)

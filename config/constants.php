@@ -87,6 +87,8 @@ define('_money_icon', 'fa fa-money');
 define('_historia_icon', 'fa fa-history');
 define('_tiempo_icon', 'fa fa-clock-o');
 define('_eliminar_icon', 'fa fa-times');
+define('_like_icon', 'fa fa-thumbs-o-up');
+
 define('_delivery_icon', 'fa fa-fighter-jet');
 define('_share_icon', 'fa fa-share');
 define('_bomb_icon', 'fa fa-bomb');

@@ -1,7 +1,8 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function render_busqueda($data){
+    function render_busqueda($data)
+    {
 
         $response[] = d(_titulo('Busqueda', 2), _mbt5);
         $response[] = input_frm('', '¿A quién buscamos? Nombre, email, teléfono', [
@@ -11,8 +12,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $contenido[] =  d($response,8,1);
-        $contenido[] =  d(place("seccion_usuarios"),8,1);
+        $contenido[] = d($response, 8, 1);
+        $contenido[] = d(place("seccion_usuarios"), 8, 1);
 
         return append($contenido);
 
@@ -29,13 +30,9 @@ if (!function_exists('invierte_date_time')) {
             $calificacion = $usuario_calificacion['promedio'];
             $encuestas = $usuario_calificacion['encuestas'];
 
-
             $perfil_busqueda = $data['perfil_busqueda'];
             $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
             $nombre_usuario = pr($usuario_busqueda, 'nombre_usuario');
-
-            $tel_contacto = format_phone(pr($usuario_busqueda, 'tel_contacto'));
-            $email = pr($usuario_busqueda, 'email');
 
             $id_usuario = pr($usuario_busqueda, 'id_usuario');
             $nombre = format_nombre($usuario_busqueda);
@@ -59,7 +56,6 @@ if (!function_exists('invierte_date_time')) {
 
             $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
 
-
             if ($es_propietario) {
 
                 $icono_link = icon(_text_(_editar_icon, 'black border p-5 border-info'));
@@ -72,22 +68,17 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
-
             $texto_puesto = _text_('Equipo', strong($nombre_perfil));
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
-            $descripcion_puesto = a_enid($email, ['class' => 'black']);
-            
-            $texto = p(_text_('WhatsApp', a_enid($tel_contacto, ['class' => 'strong black'])), 'black');
-            $texto_whatsApp = ($data['in_session'] > 0 ) ? $texto : '';
-            $whats = $texto_whatsApp;
 
-            $contenido[] = d(d(_text_($texto_titulo, $descripcion_puesto, $whats), 'caption'), 'circle');
+            $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
             $contenido[] = p($nombre_usuario, 'update-note');
             $response[] = d($descripcion, 'demo-title col-md-12');
-            $response[] = get_base_html("header", append($contenido), ['class' => 'header col-md-12', 'id' => 'header1']);
+            $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
 
-
+            $response[] = d(seccion_estadisticas($data),"col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-6 col-md-offset-3  bg-light p-5 contenedor_perfil');
+
             $contenedor[] = d(formulario_calificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
             $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
 
@@ -106,6 +97,64 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function seccion_estadisticas($data)
+    {
+
+        $r[] = d(_titulo("estadísticas", 4), "mt-5");
+        $r[] = d(p("Actividades en los últimos 30 días", "text-secondary"));
+
+        $meta_semanal_comisionista = $data['meta_semanal_comisionista'];
+        $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
+
+        $restantes = ($meta_semanal_comisionista - $total_ventas_semana);
+
+        $icono_meta = text_icon(_dolar_icon, 'Meta semanal');
+        $seccion_meta = flex($icono_meta, $meta_semanal_comisionista, 'flex-column');
+
+        $icono_logros = text_icon(_checked_icon, 'Logros fecha');
+        $ventas_actuales = flex($icono_logros, $total_ventas_semana, 'flex-column');
+
+        $icono_restantes = text_icon(_spinner, "restantes");
+        $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
+
+
+        $link_ventas = a_texto('Mis ventas',
+            [
+                'class' => 'text-center ',
+                'href' => path_enid('pedidos')
+            ]
+        );
+        $text_ventas = text_icon(_bomb_icon, $link_ventas);
+        $texto_top = 'Identifica tus ordenes de compras enviadas';
+        $texto_ventas = flex(
+            $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+
+        $link_top_ventas = a_texto('Top ventas',
+            [
+                'class' => 'text-center black',
+                'href' => path_enid('top_competencia')
+            ]
+        );
+
+        $icono_top = text_icon(_estrellas_icon, $link_top_ventas);
+        $texto_top = 'Mira qué posición ocupas en la tabla';
+        $texto_top_ventas = flex(
+            $icono_top, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+
+        $r[] = d(
+            d_c(
+                [
+                    $seccion_meta,
+                    $ventas_actuales,
+                    $restantes,
+                    $texto_ventas,
+                    $texto_top_ventas
+                ],
+                'f11 col-lg-2 mx-auto text-center mt-5'), 'row black');
+        return append($r);
+
+    }
+
     function notificacion_encuesta()
     {
 
@@ -118,7 +167,7 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function posibilidades($calificacion, $encuestas,  $id_usuario, $data, $es_propietario)
+    function posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario)
     {
         $response = [];
         for ($x = 1; $x <= 5; $x++) {
@@ -145,7 +194,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = d(_titulo(round($calificacion, 2)), 'text-center');
-        $response[] = d(_text_( 'Valoraciones', strong($encuestas)),'text-center');
+        $response[] = d(_text_('Valoraciones', strong($encuestas)), 'text-center');
         $response[] = d($estrellas);
 
 
@@ -247,7 +296,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = $input;
 
 
-        $response[] = hiddens(["class" => "input_id_servicio", "value" => prm_def($data,"id_servicio")]);
+        $response[] = hiddens(["class" => "input_id_servicio", "value" => prm_def($data, "id_servicio")]);
         $enviar_puntuacion = btn('Enviár',
             [
                 'class' => 'enviar_formulario_boton col-md-3 ml-auto'

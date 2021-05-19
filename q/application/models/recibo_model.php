@@ -497,7 +497,7 @@ class Recibo_model extends CI_Model
           fecha_cancelacion = CURRENT_DATE(), 
           cancela_cliente   = 1,
           se_cancela        = 1
-          WHERE  id_proyecto_persona_forma_pago =  '" .  $id_recibo . "' LIMIT 1";
+          WHERE  id_proyecto_persona_forma_pago =  '" . $id_recibo . "' LIMIT 1";
 
         return $this->db->query($query_update);
 
@@ -782,7 +782,7 @@ class Recibo_model extends CI_Model
         return $sql;
     }
 
-    function crea_resumen_compra($texto_servicio,$num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
+    function crea_resumen_compra($texto_servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega = 0)
     {
 
         if ($tipo_entrega == 0) {
@@ -838,7 +838,7 @@ class Recibo_model extends CI_Model
 
         $id_servicio = $param["id_servicio"];
         $flag_envio_gratis = $param["flag_envio_gratis"];
-        $id_usuario_venta = $param[ "id_usuario_venta"];
+        $id_usuario_venta = $param["id_usuario_venta"];
         $precio = $param["precio"];
         $comision = $param["comision"];
         $nombre_servicio = $param["nombre_servicio"];
@@ -1190,7 +1190,7 @@ class Recibo_model extends CI_Model
 
     function reventa($id_vendedor)
     {
-        $a=  0;
+        $a = 0;
         $query_get = "SELECT  
                         p.id_proyecto_persona_forma_pago id_recibo, 
                         p.id_servicio, 
@@ -1654,6 +1654,16 @@ class Recibo_model extends CI_Model
         }
         return $response;
 
+    }
+
+    function set_total_like($id, $tipo)
+    {
+
+        $tipo_like = ($tipo > 0) ? "total_like = total_like + 1" : "total_like = total_like - 1";
+        $query_update = _text_("UPDATE proyecto_persona_forma_pago SET",
+            $tipo_like, "WHERE id_proyecto_persona_forma_pago =", $id);
+
+        return $this->db->query($query_update);
     }
 
 

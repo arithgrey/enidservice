@@ -7,11 +7,6 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        if (count($usuarios) > 0) {
-
-            $response[] = d(_titulo("descubre otras cuentas", 4), 'titulo_otras_cuentas');
-        }
-
         foreach ($usuarios as $row) {
 
             $id_vendedor = $row['idusuario'];
@@ -46,20 +41,24 @@ if (!function_exists('invierte_date_time')) {
                 ];
                 $seccion[] = d($seguir, $atributos);
 
-                $response[] = d($seccion, 'col col-md-2 border d-flex flex-column justify-content-between h-100 p-3');
+                $response[] = d($seccion, 'col-md-2 col-xs-6 border d-flex flex-column justify-content-between h-100 p-3');
 
             }
 
         }
+        if (count($usuarios) > 0) {
 
-        return append($response);
+            $contenido[] = d(_titulo("descubre otras cuentas", 4), 'titulo_otras_cuentas row');
+        }
+
+        $contenido[] =  d($response,13);
+        return append($contenido);
     }
 
 
     function render_actividad($actividades)
     {
-        $response[] = d(_titulo("noticias", 4), "mt-5 text-center");
-        $response[] = d("Esta es la actividad de las personas que sigues", 'text-secondary text-center');
+        $response[] = d(_titulo("noticias", 4), "mt-5 d-block d-md-none  text-center");
         $response[] = actividad($actividades);
         return d($response);
 
@@ -68,14 +67,15 @@ if (!function_exists('invierte_date_time')) {
     function actividad($actividades)
     {
 
+        sksort($actividades, "fecha_registro");
         $response = [];
         foreach ($actividades as $row) {
 
+            $id_usuario_conexion = $row["id_proyecto_persona_forma_pago"];
             $path_imagen_usuario = $row["path_imagen_usuario"];
             $url_img_servicio = $row["url_img_servicio"];
             $vendedor = format_nombre($row);
             $fecha_entrega = date_create($row["fecha_entrega"])->format('Y-m-d');
-
 
             $fecha = horario_enid();
             $hoy = $fecha->format('Y-m-d');
@@ -97,7 +97,24 @@ if (!function_exists('invierte_date_time')) {
                 ), ""
             );
 
-            $vendedor_entrega = flex($vendedor, $texto_dias, 'flex-column', "strong", "fp8 text-secondary");
+            $nombre_vendedor = a_enid($vendedor,
+                [
+                    "href" => path_enid("usuario_contacto", $id_usuario_conexion),
+                    "target" => "_black",
+                    "class" => "black"
+                ]
+            );
+
+            $imagen_usuario = a_enid(
+                $imagen_usuario,
+                [
+                    "href" => path_enid("usuario_contacto", $id_usuario_conexion),
+                    "target" => "_black",
+                    "class" => "black"
+                ]
+            );
+
+            $vendedor_entrega = flex($nombre_vendedor, $texto_dias, 'flex-column', "strong", "fp8 text-secondary");
             $imagen_nombre = flex($imagen_usuario, $vendedor_entrega, "align-items-center ", "mr-5");
 
             $elemento = [];
@@ -106,7 +123,6 @@ if (!function_exists('invierte_date_time')) {
             $estrella = d("", _text_(_estrellas_icon, "blue_enid"));
             $elemento[] = flex($estrella, "Vendió", " strong mt-3", "mr-4");
 
-
             $texto_comision = flex("Ganancia", $comision_venta, "mr-4", "mr-2");
             $texto_productos_vendidos = flex("Artículos", $num_ciclos_contratados, "", "mr-2");
             $elemento[] = d([$texto_comision, $texto_productos_vendidos], "d-flex fp8 black");
@@ -114,14 +130,22 @@ if (!function_exists('invierte_date_time')) {
             $imagen = img(
                 [
                     "src" => $url_img_servicio,
-                    "class" => "mh_270 mh_250 mh_sm_310 mh-auto"
+                    "class" => "mh-auto"
                 ]
             );
 
+            $elemento[] = d($imagen, "d-block mt-4");
+            $total_like = $row["total_like"];
+            $extra = ($total_like > 0) ? 'text-info strong' : 'text-secondary';
 
-            $elemento[] = d($imagen,"d-block mt-4");
+            $attr = [
+                "class" => _text_(_like_icon, 'mt-4 mb-4 like_actividad', $extra),
+                "id" => $id_usuario_conexion,
+                "cantidad" => $total_like
+            ];
+
+            $elemento[] = flex(d("", $attr), $total_like, "align-items-center ", "mr-2");
             $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white");
-
 
         }
         return d($response, "mt-5 bg-light ");
