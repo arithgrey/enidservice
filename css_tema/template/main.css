@@ -230,6 +230,10 @@ th:hover {
     background: #006FA6 !important;
 }
 
+.blue_linkeding {
+    color: #006FA6 !important;
+}
+
 .tel_contacto_btn {
     display: none;
 }

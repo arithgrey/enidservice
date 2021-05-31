@@ -45,18 +45,20 @@ class Home extends CI_Controller
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
         $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session']);
         $data['encuesta'] = prm_def($prm, 'encuesta');
-        $data['id_servicio'] =  prm_def($prm, 'servicio');
+        $data['id_servicio'] = prm_def($prm, 'servicio');
 
         $session = $this->app->session();
         $ventas_semana = $this->ventas_semana($id_usuario);
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
 
         $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
-
         $data["ventas_semana"] = $ventas_semana;
+        $data["total_seguidores"] = $this->app->totales_seguidores($id_usuario);
+
         $this->app->pagina($data, render($data), 1);
 
     }
+
 
     private function ventas_semana($id_usuario)
     {
@@ -91,6 +93,7 @@ class Home extends CI_Controller
         }
 
     }
+
     private function busqueda($param, $data, $q)
     {
 

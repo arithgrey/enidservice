@@ -15,7 +15,8 @@ let otras_cuentas = function () {
 let otras_conexiones = function () {
 
     let url = "../q/index.php/api/usuario_conexion/sugerencias/format/json/";
-    let data_send = {tipo: get_parameter_enid($(this), "id")};
+    let $id_usuario = $(".id_usuario").val();
+    let data_send = {tipo: get_parameter_enid($(this), "id") , id_usuario : $id_usuario};
     request_enid("GET", data_send, url, function (data) {
 
         render_enid('.seccion_sugerencias', data);

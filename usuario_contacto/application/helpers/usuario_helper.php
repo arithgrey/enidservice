@@ -76,7 +76,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
 
-            $response[] = d(seccion_estadisticas($data),"col-md-12 mt-5");
+            $response[] = d(d($data["total_seguidores"],_4p), "col-md-12");
+
+            $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-6 col-md-offset-3  bg-light p-5 contenedor_perfil');
 
             $contenedor[] = d(formulario_calificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
@@ -97,6 +99,7 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
     function seccion_estadisticas($data)
     {
 
@@ -116,7 +119,6 @@ if (!function_exists('invierte_date_time')) {
 
         $icono_restantes = text_icon(_spinner, "restantes");
         $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
-
 
         $link_ventas = a_texto('Mis ventas',
             [

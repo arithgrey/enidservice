@@ -1533,5 +1533,12 @@ class app extends CI_Controller
             ["id_recibo" => $id_recibo]);
     }
 
+    function totales_seguidores($id_usuario)
+    {
+
+        return $this->api("usuario_conexion/totales_seguidores/format/json/", ["id_usuario" => $id_usuario]);
+
+    }
+
 
 }

@@ -2791,6 +2791,18 @@ function tmp_menu($id_usuario, $menu)
 
     $menu_usuario = [
 
+        a_enid("noticias",
+            [
+                "href" => path_enid('busqueda'),
+                "class" => 'black text-uppercase mt-2',
+            ]
+        ),
+        a_enid("Perfil",
+            [
+                "href" => path_enid('usuario_contacto', $id_usuario),
+                "class" => 'black text-uppercase mt-2',
+            ]
+        ),
         $menu,
         a_enid("Configuración",
             [

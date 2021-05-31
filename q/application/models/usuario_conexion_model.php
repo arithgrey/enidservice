@@ -68,11 +68,9 @@ class Usuario_conexion_model extends CI_Model
                     WHERE 
                     u.idusuario != $id_seguidor 
                     AND
-                    up.idperfil IN (3,6) 
-                    AND  
-                    u.ha_vendido > 0
+                    up.idperfil IN (3,6)                     
                     AND 
-                    u.status = 1                     
+                    u.status > 0                     
                     AND  
                     u.idusuario NOT IN (SELECT id_usuario FROM usuario_conexion WHERE id_seguidor = $id_seguidor )
                     ORDER BY u.fecha_registro DESC
@@ -81,6 +79,22 @@ class Usuario_conexion_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+
+    function total_seguidores($id_seguidor)
+    {
+
+        $query_get = "select count(0)total from usuario_conexion where id_usuario =  $id_seguidor";
+        return $this->db->query($query_get)->result_array();
+
+    }
+    function total_siguiendo($id_seguidor)
+    {
+
+        $query_get = "select count(0)total from usuario_conexion where id_seguidor =  $id_seguidor";
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
     function seguidores($id_usuario)
     {
@@ -126,7 +140,7 @@ INNER JOIN proyecto_persona_forma_pago p ON uc.id_usuario = p.id_usuario_referen
 WHERE uc.id_seguidor = $id_seguidor
 AND uc.status > 0 AND p.status NOT IN ( 10, 19 ) AND p.se_cancela < 1 AND p.cancela_cliente < 1 
 AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.saldo_cubierto > 0 
-GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 100) t
+GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 200) t
 UNION 
 SELECT s.* FROM (
 SELECT u.nombre, u.apellido_paterno, u.apellido_materno, p.* 

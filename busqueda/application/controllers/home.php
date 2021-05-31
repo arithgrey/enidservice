@@ -11,7 +11,6 @@ class Home extends CI_Controller
 
     function index()
     {
-        $param = $this->input->get();
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "busqueda");
 
@@ -19,11 +18,11 @@ class Home extends CI_Controller
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
         $ventas_semana = $this->ventas_semana();
 
-        $param["meta_semanal_comisionista"] = $meta_semanal_comisionista;
-        $param["ventas_semana"] = $ventas_semana;
+        $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
+        $data["ventas_semana"] = $ventas_semana;
 
 
-        $this->app->pagina($data, render($param), 1);
+        $this->app->pagina($data, render($data), 1);
 
 
     }

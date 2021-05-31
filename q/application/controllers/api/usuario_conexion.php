@@ -50,9 +50,10 @@ class Usuario_conexion extends REST_Controller
     {
 
         $response = false;
-        $id_seguidor = $this->id_usuario;
-        if ($id_seguidor > 0) {
+        $param = $this->get();
+        if (fx($param, 'id_usuario')) {
 
+            $id_seguidor = $param["id_usuario"];
             $response = $this->usuario_conexion_model->sugerencias($id_seguidor);
             $response = $this->imagenes_sugerencias($response, "idusuario");
             $response = conexiones($response, $id_seguidor);
@@ -60,6 +61,64 @@ class Usuario_conexion extends REST_Controller
 
         $this->response($response);
     }
+
+    function totales_seguidores_GET()
+    {
+
+        $response = false;
+        $param = $this->get();
+        $id_seguidor = $this->id_usuario;
+        if (fx($param, 'id_usuario')) {
+
+            $id_usuario = $param["id_usuario"];
+            $total = $this->usuario_conexion_model->total_seguidores($id_usuario);
+            $total_seguidores = es_data($total) ? pr($total, "total") : 0;
+
+            $total = $this->usuario_conexion_model->total_siguiendo($id_usuario);
+            $total_siguiendo = es_data($total) ? pr($total, "total") : 0;
+
+            $response = [
+                "total_seguidores" => $total_seguidores,
+                "total_siguiendo" => $total_siguiendo,
+                "id_usuario" => $id_usuario,
+                "id_seguidor" => $id_seguidor
+            ];
+            $response = seccion_totales_seguimiento($response);
+        }
+
+        $this->response($response);
+    }
+
+    function total_seguidores_GET()
+    {
+
+        $response = false;
+        $param = $this->get();
+        if (fx($param, 'id_usuario')) {
+
+            $id_usuario = $param["id_usuario"];
+            $total = $this->usuario_conexion_model->total_seguidores($id_usuario);
+            $response = es_data($total) ? pr($total, "total") : 0;
+        }
+
+        $this->response($response);
+    }
+
+    function total_siguiendo_GET()
+    {
+
+        $response = false;
+        $param = $this->get();
+        if (fx($param, 'id_usuario')) {
+
+            $id_usuario = $param["id_usuario"];
+            $total = $this->usuario_conexion_model->total_siguiendo($id_usuario);
+            $response = es_data($total) ? pr($total, "total") : 0;
+        }
+
+        $this->response($response);
+    }
+
 
     function seguidores_GET()
     {
@@ -99,7 +158,7 @@ class Usuario_conexion extends REST_Controller
         if ($id_seguidor > 0) {
 
             $response = $this->usuario_conexion_model->noticias_seguimiento($id_seguidor);
-            $response = $this->imagenes_sugerencias($response, "id_usuario", "path_imagen_usuario");
+            $response = $this->imagenes_sugerencias($response, "id_usuario_referencia", "path_imagen_usuario");
             $response = $this->app->add_imgs_servicio($response);
             $response = render_actividad($response);
         }
