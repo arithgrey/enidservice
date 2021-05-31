@@ -15,14 +15,21 @@ if (!function_exists('invierte_date_time')) {
 
         $conexiones_ranking = $data["conexiones_ranking"];
         $id_seguidor = $data["id_seguidor"];
-        $response = "";
+
         if (es_data($conexiones_ranking)){
-            $response = d(ranking($conexiones_ranking, $id_seguidor), 10, 1);
+            $response[] = d(ranking($conexiones_ranking, $id_seguidor), 10, 1);
         }else{
 
-            $response = sin_seguir();
+            $response[] = sin_seguir();
         }
-        return $response;
+        $response[] = hiddens(
+            [
+                "name" => "id_usuario",
+                "class" => "id_usuario",
+                "value" => $id_seguidor
+            ]
+        );
+        return append($response);
 
     }
 
@@ -42,10 +49,6 @@ if (!function_exists('invierte_date_time')) {
         $texto = flex(icon(_flecha_derecha), "Mira tus estadísticas ", "", "mr-3");
         $path = path_enid("busqueda");
         $response[] = d(a_enid($texto, ['href' => $path , "class" => "f12 black cursor_pointer"]), "link_estadisticas d-none");
-
-
-
-
 
         $titulos = flex("Participantes", "Ventas", _text_(_between, 'f12 black text-secondary'));
         $response[] = d($titulos," mt-5");
@@ -82,6 +85,8 @@ if (!function_exists('invierte_date_time')) {
 
             $a++;
         }
+
+
         return append($response);
 
     }

@@ -11,7 +11,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id_vendedor = $row['idusuario'];
             if ($id_vendedor !== $id_seguidor) {
-                $nombre_vendedor = substr(format_nombre($row), 0, 17);
+                $nombre_vendedor = format_nombre($row);
                 $path_imagen = $row['path_imagen'];
                 $seccion_nombre_vendedor = p($nombre_vendedor, 'black fp7');
 
@@ -21,16 +21,15 @@ if (!function_exists('invierte_date_time')) {
                 $atributos = ["id" => $id_vendedor];
 
                 $seccion[] = d(icon($class, $atributos), 'text-right');
-                $seccion[] = d(
-                    a_enid(
-                        img(
-                            [
-                                "src" => $path_imagen,
-                                "onerror" => "this.src='../img_tema/user/user.png'",
-                                'class' => 'mx-auto d-block rounded-circle mah_50'
-                            ]
-                        ), path_enid('usuario_contacto', $id_vendedor)
-                    ), 'mt-4');
+                $imagen = img(
+                    [
+                        "src" => $path_imagen,
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'mx-auto d-block rounded-circle mah_50'
+                    ]
+                );
+                $imagen_link = a_enid($imagen, path_enid('usuario_contacto', $id_vendedor));
+                $seccion[] = d($imagen_link, 'mt-4');
 
                 $seccion[] = d($seccion_nombre_vendedor, 'text-center text-uppercase mt-4');
                 $seguir = d("seguir", ['class' => 'strong black', "id" => $id_vendedor]);
@@ -46,15 +45,34 @@ if (!function_exists('invierte_date_time')) {
             }
 
         }
-        if (count($usuarios) > 0) {
+
+        if (es_data($usuarios)) {
 
             $contenido[] = d(_titulo("descubre otras cuentas", 4), 'titulo_otras_cuentas row');
         }
 
-        $contenido[] =  d($response,13);
+        $contenido[] = d($response, 13);
         return append($contenido);
     }
 
+
+    function seccion_totales_seguimiento($data)
+    {
+
+        $seguidores = $data["total_seguidores"];
+        $siguiendo = $data["total_siguiendo"];
+        $id_usuario = $data["id_usuario"];
+        $id_seguidor = $data["id_seguidor"];
+
+        $texto_seguidores = flex($seguidores, "Seguidores", "font-weight-bold blue_linkeding", "mr-2");
+        $texto_seguiendo = flex($siguiendo, "Siguiendo", "font-weight-bold blue_linkeding", "mr-2");
+        $line = d("|", "text-secondary");
+        $elementos = [$texto_seguidores, $line, $texto_seguiendo];
+        $resumen =  d($elementos, _text_("d-flex ", _between));
+        return ($id_seguidor ==  $id_usuario) ? a_enid($resumen, path_enid("conexiones")): $resumen;
+
+
+    }
 
     function render_actividad($actividades)
     {
@@ -71,6 +89,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($actividades as $row) {
 
+            $id_usuario_venta = $row["id_usuario_referencia"];
             $id_usuario_conexion = $row["id_proyecto_persona_forma_pago"];
             $path_imagen_usuario = $row["path_imagen_usuario"];
             $url_img_servicio = $row["url_img_servicio"];
@@ -99,7 +118,7 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre_vendedor = a_enid($vendedor,
                 [
-                    "href" => path_enid("usuario_contacto", $id_usuario_conexion),
+                    "href" => path_enid("usuario_contacto", $id_usuario_venta),
                     "target" => "_black",
                     "class" => "black"
                 ]
