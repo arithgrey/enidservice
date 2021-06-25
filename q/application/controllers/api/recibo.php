@@ -479,10 +479,15 @@ class recibo extends REST_Controller
 
         $response = [];
         $total = 0;
+        $total_costo_producto = 0;
         foreach ($data as $row) {
 
             $response[] = $row["recibo"];
             $total = ($total + $row["saldo_cubierto"]);
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+            $costo = ($row["costo"] * $num_ciclos_contratados);
+            $total_costo_producto = $total_costo_producto +  $costo;
+
         }
 
         $response = add_fields($response);
@@ -490,6 +495,7 @@ class recibo extends REST_Controller
         return [
             "total_costos" => intval($this->get_sumatoria_costos_operativos($response)),
             "total_pagos" => $total,
+            "total_costo_producto" => $total_costo_producto
         ];
     }
 
@@ -1954,6 +1960,7 @@ class recibo extends REST_Controller
         if (fx($param, "fecha_inicio,fecha_termino,tipo")) {
 
             $compras = $this->recibo_model->get_compras_tipo_periodo($param);
+            $compras = $this->app->add_imgs_servicio($compras);
             if ($param["v"] == 1) {
                 $response = get_view_compras($this->status_enid(), $compras,
                     $param["tipo"]);

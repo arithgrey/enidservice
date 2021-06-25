@@ -378,7 +378,6 @@ if (!function_exists('invierte_date_time')) {
 
         $resumen_orden_compra = resumen_orden($data);
         if (is_mobile()) {
-
             $z[] = $resumen_orden_compra;
         }
         $z[] = seguimiento($data);
@@ -663,7 +662,9 @@ if (!function_exists('invierte_date_time')) {
         $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
         $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
         $path = path_enid('usuario_contacto', _text($id_usuario_entrega, _text('&servicio=', $id_recibo)));
-        $imagen = get_img_usuario($id_usuario_entrega, 'rounded-circle');
+
+        $path_img_usuario_entrega = pr($recibo, "url_img_usuario");
+        $imagen = get_img_usuario($path_img_usuario_entrega, 'rounded-circle');
 
         $estrellas = crea_estrellas(4);
         $texto_calificacion = flex('califícame', $estrellas, 'flex-column');
@@ -980,23 +981,29 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($recibo_vendedor, 'row mt-3');
 
         $text = es_orden_pagada_entregada($data) ? 'Entregará' : 'Entregó';
-        $id_usuario_reparto = pr($data['repartidor'], 'id_usuario');
+        $repartidor = $data['repartidor'];
+        $id_usuario_reparto = pr($repartidor, 'id_usuario');
+        $url_img_usuario = pr($repartidor, 'url_img_usuario');
+
+
+
         $imagen =
             img(
                 [
-                    "src" => path_enid('imagen_usuario', $id_usuario_reparto),
+                    "src" => $url_img_usuario,
                     "onerror" => "this.src='../img_tema/user/user.png'",
-                    'class' => 'mx-auto d-block rounded-circle mah_25'
+                    'class' => 'mx-auto d-block rounded-circle mah_25 uuuuuuuuuuu'
                 ]
             );
 
 
-        $nombre_reparto = format_nombre($data['repartidor']);
+        $nombre_reparto = format_nombre($repartidor);
+
         $repartidor = a_enid(
             flex(
                 $nombre_reparto,
                 $imagen,
-                'd-flex  align-items-start   w-100',
+                'd-flex align-items-start   w-100',
                 'mr-5'
             ),
             [
@@ -3452,7 +3459,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $telefonono = $row["tel_contacto"];
-            $r[] = d(format_link_nombre($data, $row));
+            $r[] = d(format_link_nombre_perfil($row));
             $r[] = d(phoneFormat($telefonono), 'mt-3');
 
 

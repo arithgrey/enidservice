@@ -589,7 +589,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $ext = ($is_mobile < 1) ? "mh_450 mah_450" : "";
+            $ext = ($is_mobile < 1) ? " mh_450 " : "";
 
             $imgs_grandes[] =
                 img(

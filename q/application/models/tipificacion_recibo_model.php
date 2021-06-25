@@ -62,8 +62,10 @@ class tipificacion_recibo_model extends CI_Model
     {
 
         $query_get = "SELECT 
-                        nombre_tipificacion, 
-                        COUNT(0)total FROM tipificacion_recibo 
+                        nombre_tipificacion,                        
+                        COUNT(0)total 
+                        FROM 
+                             tipificacion_recibo 
                         tr 
                         INNER JOIN tipificacion t  ON 
                         tr.id_tipificacion =  t.id_tipificacion 

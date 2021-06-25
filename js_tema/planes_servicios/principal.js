@@ -899,8 +899,8 @@ let configuracion_inicial = function () {
 
 let simula_envio = (e) => {
 
-
     let costo = $form_nombre_producto.find(".costo").val();
+    let costo_compra = $form_nombre_producto.find(".costo_compra").val();
     let next = (parseFloat(costo) < 1) ? 0 : 1;
     next_error($costo, 0);
     if (next) {
@@ -911,6 +911,7 @@ let simula_envio = (e) => {
             despliega([".contenedor_top"], 0);
             set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
             set_option("costo", costo);
+            set_option("costo_compra", costo_compra);
             $(".extra_precio").text("");
             verifica_existencia_categoria();
 
@@ -1026,7 +1027,6 @@ let clean_data_categorias = () => {
 };
 
 let carga_listado_categorias = () => {
-
 
     let nombre = get_parameter(".nuevo_producto_nombre");
     clean_data_categorias();
@@ -1227,7 +1227,8 @@ let agregar_categoria_servicio = function () {
 
     let id_clasificacion = get_parameter_enid($(this), "id");
     set_option("id_clasificacion", id_clasificacion);
-    let id_ciclo_facturacion = (get_option("modalidad") == 0) ? 5 : get_parameter("#ciclo");
+    let $modalidad = (get_option("modalidad") == 0);
+    let id_ciclo_facturacion = ($modalidad) ? 5 : get_parameter("#ciclo");
     set_option("id_ciclo_facturacion", id_ciclo_facturacion);
     registra_nuevo_servicio();
 };
@@ -1245,7 +1246,8 @@ let registra_nuevo_servicio = () => {
         "segundo_nivel": get_option("segundo_nivel"),
         "tercer_nivel": get_option("tercer_nivel"),
         "cuarto_nivel": get_option("cuarto_nivel"),
-        "quinto_nivel": get_option("quinto_nivel")
+        "quinto_nivel": get_option("quinto_nivel"),
+        "costo" : get_option("costo_compra")
     };
     request_enid("POST", data_send, url, response_registro);
 };

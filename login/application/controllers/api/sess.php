@@ -69,6 +69,8 @@ class Sess extends REST_Controller
         if (es_data($perfiles)) {
 
             $navegacion = $this->get_recursos_perfiles($perfiles);
+            $usuario[] = ["idusuario" => $id_usuario];
+            $path_img_usuario = $this->app->add_imgs_usuario($usuario);
 
             if (es_data($navegacion)) {
 
@@ -85,7 +87,8 @@ class Sess extends REST_Controller
                     "info_empresa" => $empresa,
                     "data_status_enid" => $status_enid,
                     "logged_in" => 1,
-                    "recien_creado" => $recien_creado
+                    "recien_creado" => $recien_creado,
+                    "path_img_usuario" => pr($path_img_usuario, "url_img_usuario")
                 ];
 
                 $this->app->set_userdata($response);

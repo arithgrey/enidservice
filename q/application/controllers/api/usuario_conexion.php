@@ -55,7 +55,7 @@ class Usuario_conexion extends REST_Controller
 
             $id_seguidor = $param["id_usuario"];
             $response = $this->usuario_conexion_model->sugerencias($id_seguidor);
-            $response = $this->imagenes_sugerencias($response, "idusuario");
+            $response = $this->app->add_imgs_usuario($response);
             $response = conexiones($response, $id_seguidor);
         }
 
@@ -158,13 +158,25 @@ class Usuario_conexion extends REST_Controller
         if ($id_seguidor > 0) {
 
             $response = $this->usuario_conexion_model->noticias_seguimiento($id_seguidor);
-            $response = $this->imagenes_sugerencias($response, "id_usuario_referencia", "path_imagen_usuario");
+            $ventas_like = $this->ids_ventas_like($response);
+//            $response = $this->imagenes_sugerencias($response, "id_usuario_referencia", "path_imagen_usuario");
+            $response = $this->app->add_imgs_usuario($response, "id_usuario_referencia");
             $response = $this->app->add_imgs_servicio($response);
-            $response = render_actividad($response);
+            $response = render_actividad($response, $ventas_like, $id_seguidor);
         }
 
         $this->response($response);
     }
+
+    private function ids_ventas_like($recibos)
+    {
+
+        $ids = array_column($recibos, "id_proyecto_persona_forma_pago");
+        return $this->usuario_conexion_model->conteo_recibo(get_keys($ids));
+
+
+    }
+
 
     function ranking_GET()
     {

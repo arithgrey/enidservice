@@ -95,7 +95,7 @@ class Puntuacion extends REST_Controller
 
             if ($param['v'] > 0) {
 
-                $response =  recibos_evaluaciones($response);
+                $response = recibos_evaluaciones($response);
             }
 
         }

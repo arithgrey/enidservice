@@ -7,16 +7,16 @@ if (!function_exists('invierte_date_time')) {
 
         $id_usuario = $data["id_usuario"];
         $response[] = menu($id_usuario);
-        $response[] = format_cuenta($id_usuario, $data["usuario"]);
+        $response[] = format_cuenta($data["usuario"]);
         return append($response);
 
     }
 
-    function format_cuenta($id_usuario, $usuario)
+    function format_cuenta($usuario)
     {
 
         $r[] = tab_seccion(
-            foto($id_usuario, $usuario),
+            foto($usuario),
             'tab_mis_datos',
             1
 
@@ -109,15 +109,13 @@ if (!function_exists('invierte_date_time')) {
         return d($response);
     }
 
-    function foto($id_usuario, $usuario)
+    function foto( $usuario)
     {
 
-        $perfil[] = perfil_usuario($id_usuario);
+        $perfil[] = perfil_usuario($usuario);
         $perfil[] = place("place_form_img");
         $r[] = d_row(d($perfil, 8, 1));
-
         $r[] = d(d(format_user($usuario), "page-header menu_info_usuario col-sm-12"), 13);
-
         $response[] = d($r, 7);
         $response[] = d(resumen_cuenta($usuario), _5p);
         return append($response);
@@ -164,13 +162,14 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function perfil_usuario($id_usuario)
+    function perfil_usuario($usuario)
     {
 
+        $url_img_usuario = pr($usuario, "url_img_usuario");
         $r[] = d(
             img(
                 [
-                    "src" => path_enid("imagen_usuario", $id_usuario),
+                    "src" => $url_img_usuario,
                     "onerror" => "this.src='../img_tema/user/user.png'",
                     'class' => 'px-auto mt-4'
                 ]

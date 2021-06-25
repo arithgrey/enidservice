@@ -586,18 +586,18 @@ function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
 function template_table_enid()
 {
     return [
-        'table_open' => '<table   class="table " >',
-        'thead_open' => '<thead class="black_enid_background2 white ">',
+        'table_open' => '<table   class="table text-center" >',
+        'thead_open' => '<thead class="black_enid_background2 white">',
         'thead_close' => '</thead>',
         'heading_row_start' => '<tr class="text-center">',
         'heading_row_end' => '</tr>',
-        'heading_cell_start' => '<th>',
+        'heading_cell_start' => '<th class="text-center">',
         'heading_cell_end' => '</th>',
         'tbody_open' => '<tbody>',
         'tbody_close' => '</tbody>',
-        'row_start' => '<tr>',
+        'row_start' => '<tr class="text-center">',
         'row_end' => '</tr>',
-        'cell_start' => '<td>',
+        'cell_start' => '<td class="text-center">',
         'cell_end' => '</td>',
         'row_alt_start' => '<tr>',
         'row_alt_end' => '</tr>',
@@ -1450,14 +1450,14 @@ function get_logo($session = 0)
 }
 
 
-function get_img_usuario($id_usuario, $extra_class = '')
+function get_img_usuario($path_img_usuario, $extra_class = '')
 {
 
-    $url_img = "../imgs/index.php/enid/imagen_usuario/" . $id_usuario;
+
     $img_conf = [
         "id" => "imagen_usuario",
         "class" => _text_("imagen_usuario", $extra_class),
-        "src" => $url_img,
+        "src" => $path_img_usuario,
         "onerror" => "this.src='../img_tema/user/user.png'",
         "style" => "width: 40px!important;height: 35px!important;",
     ];
@@ -1670,6 +1670,13 @@ function get_url_servicio($id_servicio, $n = 0)
 {
 
     return ($n > 0) ? "../img_tema/productos/" . $id_servicio : "../producto/?producto=" . $id_servicio;
+
+}
+
+function get_url_usuario($nombre_imagen, $n = 0)
+{
+
+    return _text("../img_tema/personas/", $nombre_imagen);
 
 }
 
@@ -1976,6 +1983,12 @@ function get_img_serv($img)
 {
 
     return (es_data($img)) ? get_url_servicio($img[0]["nombre_imagen"], 1) : "";
+}
+
+function get_img_usr($img)
+{
+
+    return (es_data($img)) ? get_url_usuario($img[0]["nombre_imagen"], 1) : "";
 }
 
 function format_phone($number)
@@ -2639,12 +2652,12 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     $modal = d(
         $contenido,
         [
-
             "class" => "modal",
             "tabindex" => "-1",
             "role" => "dialog",
             "id" => $id_modal,
-
+            "data-backdrop" => "static",
+            "data-keyboard" => "false"
         ]
     );
 
@@ -2673,7 +2686,7 @@ function menu_session_mobil($in_session)
 
     $menu_lateral = d(
 
-            $columna
+        $columna
         ,
         [
             "id" => "mySidenav",
@@ -2707,7 +2720,7 @@ function form_busqueda_productos()
         "col-sm-2 p-0"
     );
     $form[] = form_close();
-    return d($form,'my-auto col-sm-12');
+    return d($form, 'my-auto col-sm-12');
 
 }
 
@@ -2744,13 +2757,11 @@ function opciones_acceso($in_session)
 
 }
 
-function tmp_menu($id_usuario, $menu)
+function tmp_menu($path_img_usuario, $id_usuario, $menu)
 {
 
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
-
     $seccion = append($contenido);
-
     $icono_compras = icon(_text_(_compras_icon, 'mr-2'));
     $place_compras = d('', 'place_numero_deseo');
     $deseos = flex($icono_compras, $place_compras, 'borde_amarillo');
@@ -2782,7 +2793,7 @@ function tmp_menu($id_usuario, $menu)
 
 
     $imagen_usuario = a_enid(
-        get_img_usuario($id_usuario),
+        get_img_usuario($path_img_usuario),
         [
             "class" => "dropdown-toggle",
             "data-toggle" => "dropdown",
@@ -2833,10 +2844,13 @@ function tmp_menu($id_usuario, $menu)
 }
 
 function frm_search(
+    $path_img_usuario,
     $clasificaciones_departamentos,
     $in_session = 0,
     $id_usuario = 0,
     $menu = 0
+
+
 )
 {
 
@@ -2861,7 +2875,6 @@ function frm_search(
 
     if (!$in_session) {
 
-
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
@@ -2878,7 +2891,7 @@ function frm_search(
 
     } else {
 
-        $response[] = dd($r, tmp_menu($id_usuario, $menu));
+        $response[] = dd($r, tmp_menu($path_img_usuario, $id_usuario, $menu));
 
     }
 
@@ -3255,7 +3268,7 @@ function opciones_populares()
     return flex($response);
 }
 
-function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
+function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
 {
 
     $is_mobile = is_mobile();
@@ -3268,7 +3281,7 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 
             $response[] = get_menu_session($in_session, $proceso_compra);
             $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
-            $response[] = frm_search($clasificaciones_departamentos, $in_session);
+            $response[] = frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session);
             $response[] = d(p('Realiza tu pedido y paga hasta tu entrega!', 'white f12'), 'd-md-flex justify-content-end mt-3');
         } else {
             $response[] = get_logo($in_session);
@@ -3280,7 +3293,7 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 
             $response[] = flex(
                 ajustar(get_logo(), $frecuentes, 2),
-                frm_search($clasificaciones_departamentos, $in_session, $id_usuario, $menu)
+                frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session, $id_usuario, $menu)
                 ,
                 "",
                 "col-md-7 align-self-center mt-4 pupulares d-none d-md-block",
@@ -3292,13 +3305,11 @@ function navegacion($in_session, $clasificaciones_departamentos, $proceso_compra
 
             $response[] = ajustar(
                 get_logo($in_session),
-                tmp_menu($id_usuario, $menu)
+                tmp_menu($path_img_usuario, $id_usuario, $menu)
             );
         }
 
-
     }
-
 
     $navegacion = d(
         $response,
@@ -3506,6 +3517,10 @@ function es_cliente($data)
 
         $response = (pr($data['perfiles'], $key) == 20);
 
+    } else if (pr($data, "id_departamento") == 9) {
+
+        $response = true;
+
     } else {
         $response = (prm_def($data, $key) == 20);
 
@@ -3696,6 +3711,17 @@ function format_link_nombre($data, $nombre, $email = '')
     }
 
     return $response;
+}
+
+function format_link_nombre_perfil($row)
+{
+
+    $id = prm_def($row, "id_usuario");
+    $link = path_enid('usuario_contacto', $id);
+    $formato_nombre = format_nombre($row);
+
+    return a_enid($formato_nombre, ['href' => $link, 'class' => 'black underline']);
+
 }
 
 function tiene_domilio($domicilios, $numero = 0)

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Archivo extends REST_Controller
@@ -19,15 +19,42 @@ class Archivo extends REST_Controller
     {
         $str = implode("", explode("\\", $str));
         $str = explode(".", $str);
-        $str = strtolower(end($str));
-        return $str;
+        return strtolower(end($str));
+
+    }
+
+    private function path_upload($param)
+    {
+
+        $response = '';
+        switch ($param["q"]) {
+            case 'faq':
+
+                $response = '../../img_tema/productos/';
+                break;
+
+            case 'perfil_usuario':
+
+                $response = '../../img_tema/personas/';
+                break;
+
+            case 'servicio':
+                $response = '../../img_tema/productos/';
+                break;
+
+            default:
+
+                break;
+        }
+        return $response;
     }
 
     function imgs_POST()
     {
 
-        $config =  [
-            'upload_path' => APPPATH . '../../img_tema/productos/',
+        $param = $this->post();
+        $config = [
+            'upload_path' => APPPATH . $this->path_upload($param),
             'allowed_types' => "*",
             'max_size' => 35000,
             'max_width' => 4024,
@@ -59,7 +86,7 @@ class Archivo extends REST_Controller
 
 
             $this->image_lib->initialize($config);
-            $param = $this->post();
+
 
             $param += [
                 "nombre_archivo" => $nombre_imagen,
@@ -80,7 +107,7 @@ class Archivo extends REST_Controller
     function gestiona_imagenes($param)
     {
 
-        $param +=  [
+        $param += [
             "id_empresa" => $this->app->get_session("idempresa"),
             "id_usuario" => $this->id_usuario,
         ];
@@ -95,7 +122,7 @@ class Archivo extends REST_Controller
 
             case 'perfil_usuario':
 
-                $response = $this->create_perfil_usuario($param);
+                $response = $this->crea_imagen_usuario($param);
                 break;
 
             case 'servicio':
@@ -113,7 +140,7 @@ class Archivo extends REST_Controller
     function response_status_img($status)
     {
 
-        return  ($status == 1) ? "Error al cargar la image" : "Imagen guardada .!";
+        return ($status == 1) ? "Error al cargar la image" : "Imagen guardada .!";
 
     }
 
@@ -147,16 +174,6 @@ class Archivo extends REST_Controller
         return $this->app->api("imagen_usuario/index", $q, "json", "POST");
     }
 
-    private function create_perfil_usuario($param)
-    {
-
-        $id_imagen = $this->img_model->insert_img($param, 1);
-        if ($id_imagen > 0 && $this->id_usuario > 0) {
-            $prm["id_imagen"] = $id_imagen;
-            $prm["id_usuario"] = $this->id_usuario;
-            return $this->create_imagen_usuario($prm);
-        }
-    }
 
     private function create_imagen_servicio($param)
     {
@@ -181,6 +198,33 @@ class Archivo extends REST_Controller
                         $response["status_notificacion"] = $this->notifica_producto_imagen($prm);
 
                     }
+                    $response["status_notificacion"] = 2;
+                }
+                return $response;
+            }
+            $response["params_error"] = 1;
+            return $response;
+        }
+        $response["session_exp"] = 1;
+        return $response;
+    }
+
+    private function crea_imagen_usuario($param)
+    {
+
+        $response = [];
+        if ($param["id_usuario"] > 0) {
+            $existen = "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension";
+            if (fx($param, $existen)) {
+                $id_imagen = $this->img_model->insert_img($param, 1);
+                if ($id_imagen > 0) {
+
+                    $prm = [
+                        "id_imagen" => $id_imagen,
+                        "id_usuario" => $param["id_usuario"],
+                    ];
+
+                    $response["status_imagen_usuario"] = $this->create_imagen_usuario($prm);
                     $response["status_notificacion"] = 2;
                 }
                 return $response;

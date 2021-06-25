@@ -69,7 +69,7 @@ class Cobranza extends REST_Controller
         return $this->app->api("tickets/servicio_recibo/format/json/", $q);
     }
 
-    private function productos_deseaos_tipo_cliente($es_cliente, $param)
+    private function productos_deseados_tipo_cliente($es_cliente, $param)
     {
 
         $producto_carro_compra = $param["producto_carro_compra"];
@@ -126,7 +126,7 @@ class Cobranza extends REST_Controller
         $param = $this->post();
         $a = 0;
         $es_cliente = $param["es_cliente"];
-        $productos_deseados_carro_compra = $this->productos_deseaos_tipo_cliente($es_cliente, $param);
+        $productos_deseados_carro_compra = $this->productos_deseados_tipo_cliente($es_cliente, $param);
         $id_orden_compra = 0;
         $response = [];
 
@@ -148,8 +148,19 @@ class Cobranza extends REST_Controller
             $a++;
         }
 
+        /*Gamifica*/
+        if ($id_orden_compra > 0){
+
+            $this->gamifica_ventas_vendedor($param["usuario_referencia"]);
+        }
         $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
         $this->response($response);
+    }
+    private function gamifica_ventas_vendedor($id_usuario)
+    {
+        $q = ["id_usuario" => $id_usuario];
+        return $this->app->api("usuario/gamifica_ventas", $q, "json", "PUT");
+
     }
 
     private function notifica_productos_envio_pago_nuevo_usuario($ids)
@@ -572,35 +583,6 @@ class Cobranza extends REST_Controller
     {
 
         return $this->app->api("usuario/prospecto", $q, "json", "POST");
-    }
-
-    private function crea_orden_punto_entrega($param)
-    {
-
-        if (!ctype_digit($param["id_servicio"])
-            ||
-            !ctype_digit($param["num_ciclos"])
-            ||
-            !ctype_digit($param["punto_encuentro"])) {
-
-            return false;
-
-        }
-
-
-        $response = false;
-        if (valida_fecha_entrega($param["fecha_entrega"]) && valida_horario_entrega($param["horario_entrega"])) {
-
-            $parte = _text_($param["fecha_entrega"], $param["horario_entrega"]);
-            $param["fecha_entrega"] = _text($parte, ":00");
-            $param["tipo_entrega"] = 1;
-            $param["id_ciclo_facturacion"] = 5;
-
-            $response = $this->crea_orden($param);
-
-        }
-
-        return $response;
     }
 
     function crea_orden($q)

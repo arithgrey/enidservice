@@ -452,12 +452,19 @@ class Servicio extends REST_Controller
     }
 
     function index_POST()
+
+
+
+
+
+
+
     {
 
         $response = false;
         if ($this->input->is_ajax_request()) {
             $param = $this->post();
-            if (fx($param, "precio,flag_servicio")) {
+            if (fx($param, "costo,precio,flag_servicio")) {
                 $precio = $param["precio"];
                 $es_float = $this->es_float($precio);
                 $es_cantidad = ($param["precio"] >= 0);
@@ -599,6 +606,7 @@ class Servicio extends REST_Controller
         $descripcion = "";
         $metakeyword = $param["metakeyword"];
         $id_usuario = $param["id_usuario"];
+        $costo = $param["costo"];
         $entregas_en_casa = $param["entregas_en_casa"];
         $telefonos_visibles = $param["telefonos_visibles"];
 
@@ -620,6 +628,7 @@ class Servicio extends REST_Controller
             "metakeyword" => $metakeyword,
             "id_usuario" => $id_usuario,
             "precio" => $precio,
+            "costo" => $costo,
             "id_ciclo_facturacion" => $id_ciclo_facturacion,
             "entregas_en_casa" => $entregas_en_casa,
             "telefono_visible" => $telefonos_visibles,
@@ -1578,13 +1587,15 @@ class Servicio extends REST_Controller
         $response = false;
         if (fx($param, "fecha_inicio", "fecha_termino")) {
             $response = $this->serviciosmodel->periodo($param);
+            $response = $this->app->add_imgs_servicio($response);
             $v = (array_key_exists("v", $param) && $param["v"] > 0) ? $param["v"] : 0;
+
             switch ($v) {
                 case 1:
+
                     $data["servicios"] = $response;
                     $data["css"] = ["productos_periodo.css"];
                     $response = format_simple($data);
-
 
                     break;
 
@@ -1633,6 +1644,9 @@ class Servicio extends REST_Controller
                 $param["metakeyword_usuario"] = remove_comma($param["metakeyword_usuario"]);
                 $meta = $this->serviciosmodel->get_palabras_clave($param["id_servicio"]);
                 $metakeyword_usuario = $param["metakeyword_usuario"];
+
+
+
                 $metakeyword_usuario = $meta . "," . $metakeyword_usuario;
 
                 $response["add"] = $this->serviciosmodel->q_up("metakeyword_usuario", $metakeyword_usuario, $param["id_servicio"]);
@@ -1783,33 +1797,25 @@ class Servicio extends REST_Controller
                 $servicios = $this->serviciosmodel->get_tipos_entregas($param);
                 $tipos_entregas_servicios = $this->get_tipos_intentos_entregas($param);
                 $servicios = une_data($servicios, $tipos_entregas_servicios);
-
+                $servicios = $this->app->add_imgs_servicio($servicios);
 
                 $this->table->set_heading(
                     "Servicio",
                     'Vistas',
-                    'Entregas por envío',
-                    'Entregas en negocio',
-                    'Entregas en punto medio',
-                    'deseado',
-                    'valorado',
-                    'intentos'
+                    'En carro de compras',
+                    'Valorado'
                 );
-
 
                 foreach ($servicios as $row) {
 
-
                     $vista = $row["vista"];
-                    $tipo_entrega_envio = $row["mensajeria"];
-                    $tipo_entrega_visita = $row["visita_negocio"];
-                    $tipo_entrega_punto_medio = $row["punto_encuentro"];
                     $deseado = $row["deseado"];
                     $valoracion = $row["valoracion"];
                     $id_servicio = $row["id_servicio"];
+                    $id_error = _text("imagen_" , $id_servicio);
 
-                    $id_error = "imagen_" . $id_servicio;
-                    $url_img = link_imagen_servicio($id_servicio);
+                    $url_img = $row["url_img_servicio"];
+
                     $img = img(
                         [
                             "src" => $url_img,
@@ -1819,17 +1825,17 @@ class Servicio extends REST_Controller
                         ]);
 
 
+                    $imagen_producto = a_enid($img,
+                        [
+                            "href" => "../producto/?producto=" . $id_servicio,
+                            "target" => "_black"
+                        ]
+                    );
+
                     $array =
-                        [a_enid($img,
-                            [
-                                "href" => "../producto/?producto=" . $id_servicio,
-                                "target" => "_black"
-                            ]
-                        ),
+                        [
+                            $imagen_producto,
                             $vista,
-                            $tipo_entrega_envio,
-                            $tipo_entrega_visita,
-                            $tipo_entrega_punto_medio,
                             $deseado,
                             $valoracion
                         ];
@@ -1842,7 +1848,7 @@ class Servicio extends REST_Controller
                 $this->table->set_template(template_table_enid());
                 $tb_general = $this->table->generate();
                 $tb_headers = $this->get_headers_tipo_entrega($servicios);
-                $total = $tb_headers . hr() . $tb_general;
+                $total = _text_($tb_headers , hr() , $tb_general);
                 $response = $total;
 
 
@@ -1864,18 +1870,12 @@ class Servicio extends REST_Controller
         $this->table->set_heading(
 
             'Vistas',
-            'Entregas por envíos',
-            'Entregas en negocio',
-            'Entregas en puntos medios',
-            'deseados',
-            'valoraciones'
+            'Deseados',
+            'Valoraciones'
         );
 
         $this->table->add_row(
             sumatoria_array($array, "vista"),
-            sumatoria_array($array, "mensajeria"),
-            sumatoria_array($array, "visita_negocio"),
-            sumatoria_array($array, "punto_encuentro"),
             sumatoria_array($array, "deseado"),
             sumatoria_array($array, "valoracion")
 

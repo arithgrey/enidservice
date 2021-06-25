@@ -37,6 +37,10 @@ if (!function_exists('invierte_date_time')) {
 
             }
 
+        }else{
+
+            $titulo = _titulo("Aún no hay valoraciones",3);
+            $response[] = d($titulo,'text-center');
         }
         return d($response,12);
     }

@@ -24,7 +24,9 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "competencias");
         $data['metricas'] = $this->metricas_dia($tipo_top);
         $data['tipo_top'] = $tipo_top;
-        $data['comisionistas'] = $this->usuarios_comisionistas();
+
+        $comisionistas = $this->usuarios_comisionistas();
+        $data['comisionistas'] = $comisionistas;
         $this->app->pagina($data, render($data), 1);
 
     }

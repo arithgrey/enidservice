@@ -20,37 +20,17 @@ class Home extends CI_Controller
         $tiene_num_ciclos = array_key_exists("num_ciclos", $param);
         $num_ciclos = ($tiene_num_ciclos) ? ctype_digit($param["num_ciclos"]) : 0;
         $id_servicio = prm_def($param, 'id_servicio');
-        $es_servicio = prm_def($param, "es_servicio");
-        $id_orden_compra = prm_def($param, "orden_compra", 0, 1);
         $es_carro_compras = prm_def($param, "es_carro_compras");
 
-        if ($num_ciclos > 0 && $id_servicio > 0 || $es_servicio || $es_carro_compras) {
+        if ($num_ciclos > 0 && $id_servicio > 0 || $es_carro_compras) {
 
-
-            $fn = ($es_servicio) ? $this->crea_orden_compra_servicio($param) : $this->crea_orden_compra($param);
+            $this->crea_orden_compra($param);
 
         } else {
 
-            $fb = ($id_orden_compra > 0) ? $this->add_domicilio_entrega($param) : redirect("../../");
+            $this->add_domicilio_entrega($param);
 
         }
-    }
-
-    function crea_orden_compra_servicio($param)
-    {
-
-        $data = $this->app->session(
-            "",
-            "",
-            "Registra tu cuenta  y recibe  asistencia al momento.",
-            create_url_preview("recomendacion.jpg")
-        );
-
-        $data["servicio"] = $this->resumen_servicio($param["id_servicio"]);
-
-        $this->app->pagina($this->app->cssJs($data, "procesar_crear"),
-            render_procesar_contacto($data), 1);
-
     }
 
     private function resumen_servicio($id_servicio)

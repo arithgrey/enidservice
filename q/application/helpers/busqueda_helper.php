@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
             $id_vendedor = $row['idusuario'];
             if ($id_vendedor !== $id_seguidor) {
                 $nombre_vendedor = format_nombre($row);
-                $path_imagen = $row['path_imagen'];
+                $path_imagen = $row['url_img_usuario'];
                 $seccion_nombre_vendedor = p($nombre_vendedor, 'black fp7');
 
                 $seccion = [];
@@ -35,7 +35,8 @@ if (!function_exists('invierte_date_time')) {
                 $seguir = d("seguir", ['class' => 'strong black', "id" => $id_vendedor]);
 
                 $atributos = [
-                    "class" => 'text-center border border-info rounded_enid col-sm-6 col-sm-offset-3 cursor_pointer conexion',
+                    "class" => 'text-center border border-info rounded_enid
+                     col-sm-8 col-sm-offset-2 cursor_pointer conexion',
                     "id" => $id_vendedor
                 ];
                 $seccion[] = d($seguir, $atributos);
@@ -68,22 +69,23 @@ if (!function_exists('invierte_date_time')) {
         $texto_seguiendo = flex($siguiendo, "Siguiendo", "font-weight-bold blue_linkeding", "mr-2");
         $line = d("|", "text-secondary");
         $elementos = [$texto_seguidores, $line, $texto_seguiendo];
-        $resumen =  d($elementos, _text_("d-flex ", _between));
-        return ($id_seguidor ==  $id_usuario) ? a_enid($resumen, path_enid("conexiones")): $resumen;
+        $resumen = d($elementos, _text_("d-flex ", _between));
+        return ($id_seguidor == $id_usuario) ? a_enid($resumen, path_enid("conexiones")) : $resumen;
 
 
     }
 
-    function render_actividad($actividades)
+    function render_actividad($actividades, $ventas_like, $id_seguidor)
     {
         $response[] = d(_titulo("noticias", 4), "mt-5 d-block d-md-none  text-center");
-        $response[] = actividad($actividades);
+        $response[] = actividad($actividades, $ventas_like, $id_seguidor);
         return d($response);
 
     }
 
-    function actividad($actividades)
+    function actividad($actividades, $ventas_like, $id_seguidor)
     {
+
 
         sksort($actividades, "fecha_registro");
         $response = [];
@@ -91,7 +93,8 @@ if (!function_exists('invierte_date_time')) {
 
             $id_usuario_venta = $row["id_usuario_referencia"];
             $id_usuario_conexion = $row["id_proyecto_persona_forma_pago"];
-            $path_imagen_usuario = $row["path_imagen_usuario"];
+            $id_recibo = $row["id_proyecto_persona_forma_pago"];
+            $path_imagen_usuario = $row["url_img_usuario"];
             $url_img_servicio = $row["url_img_servicio"];
             $vendedor = format_nombre($row);
             $fecha_entrega = date_create($row["fecha_entrega"])->format('Y-m-d');
@@ -155,7 +158,11 @@ if (!function_exists('invierte_date_time')) {
 
             $elemento[] = d($imagen, "d-block mt-4");
             $total_like = $row["total_like"];
-            $extra = ($total_like > 0) ? 'text-info strong' : 'text-secondary';
+            $es_like = valida_venta_like($ventas_like, $id_recibo, $id_seguidor);
+            $extra = ($es_like > 0) ? 'text-info strong' : 'text-secondary';
+
+
+
 
             $attr = [
                 "class" => _text_(_like_icon, 'mt-4 mb-4 like_actividad', $extra),
@@ -168,6 +175,22 @@ if (!function_exists('invierte_date_time')) {
 
         }
         return d($response, "mt-5 bg-light ");
+    }
+
+    function valida_venta_like($ventas_like, $id_recibo, $id_usuario)
+    {
+
+        $lke = 0;
+        foreach ($ventas_like as $row) {
+
+            $id_recibo_like = $row["id_recibo"];
+            $id_usuario_like = $row["id_usuario"];
+
+            if ($id_recibo_like == $id_recibo && $id_usuario_like == $id_usuario) {
+                $lke++;
+            }
+        }
+        return $lke;
     }
 
 }

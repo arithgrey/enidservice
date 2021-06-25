@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $numero_usuarios = 0;
-        $response = busqueda_clientes();
+
         if (es_data($usuarios)) {
 
             $ids_usuario_reventa = array_unique(array_column($intentos_reventa, 'id_usuario'));
@@ -14,7 +14,9 @@ if (!function_exists('invierte_date_time')) {
             $titulos[] = d("# Cancelaciones", 2);
             $titulos[] = d("# Solicitudes", 2);
             $titulos[] = d("Puntuación", 2);
-            $response[] = d($titulos, "row strong black text-uppercase mb-5");
+
+            $formato_titulos = d($titulos, "row strong black text-uppercase mb-5");
+            $response[] = $formato_titulos;
 
             foreach ($usuarios as $row) {
 
@@ -58,6 +60,8 @@ if (!function_exists('invierte_date_time')) {
 
             array_unshift($response, $texto_total);
 
+        }else{
+            $response[] = busqueda_clientes();
         }
 
 

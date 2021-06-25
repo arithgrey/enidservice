@@ -103,6 +103,7 @@ class Competencias extends REST_Controller
         $ventas_comisionistas = array_count_values($comisionistas);
         $response = [];
         $ids = [];
+
         foreach ($ventas_comisionistas as $id_vendedor => $valor) {
 
             $vendedor = search_bi_array($ventas, 'id_usuario_referencia', $id_vendedor, "usuario");
@@ -112,13 +113,13 @@ class Competencias extends REST_Controller
                 'id_vendedor' => $id_vendedor,
                 'ventas' => $valor,
                 'nombre_vendedor' => format_nombre($vendedor),
-                'path_imagen' => path_enid("imagen_usuario", $id_vendedor)
             ];
 
         }
 
         sksort($response, 'ventas');
-        return $response;
+        return $this->app->add_imgs_usuario($response, 'id_vendedor');
+
 
     }
 
@@ -137,7 +138,6 @@ class Competencias extends REST_Controller
                     'id_vendedor' => $id_reparto,
                     'ventas' => $valor,
                     'nombre_vendedor' => format_nombre($repartidor),
-                    'path_imagen' => path_enid("imagen_usuario", $id_reparto)
                 ];
 
             }
@@ -145,7 +145,7 @@ class Competencias extends REST_Controller
         }
 
         sksort($response, 'ventas');
-        return $response;
+        return $this->app->add_imgs_usuario($response, 'id_usuario_entrega');
 
     }
 

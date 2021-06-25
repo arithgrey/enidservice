@@ -20,12 +20,12 @@ class Tipo_puntuacion extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "in_session")) {
+        if (fx($param, "tipo")) {
 
             $this->response($this->tipo_puntuacion_model->get(
                 [],
                 [
-                    "tipo" => $param['in_session']
+                    "tipo" => $param['tipo']
                 ], 100)
             );
         }

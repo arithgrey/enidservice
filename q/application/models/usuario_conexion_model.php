@@ -87,6 +87,7 @@ class Usuario_conexion_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+
     function total_siguiendo($id_seguidor)
     {
 
@@ -152,6 +153,14 @@ WHERE p.id_usuario_referencia = $id_seguidor
 AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.saldo_cubierto > 0 
 ORDER BY p.fecha_registro DESC  LIMIT 20) s";
 
+        return $this->db->query($query_get)->result_array();
+
+
+    }
+
+    function conteo_recibo($ids)
+    {
+        $query_get = "SELECT * FROM  venta_like WHERE id_recibo IN($ids)";
         return $this->db->query($query_get)->result_array();
 
     }

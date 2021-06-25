@@ -768,7 +768,9 @@ class usuario extends REST_Controller
             $per_page = 10;
             $v = $param["v"];
             $param["resultados_por_pagina"] = $per_page;
-            $data["miembros"] = $this->usuario_model->get_equipo_enid_service($param);
+
+            $miembros = $this->usuario_model->get_equipo_enid_service($param);
+            $data["miembros"] = $this->app->add_imgs_usuario($miembros, "id_usuario");
 
             $conf["page"] = prm_def($param, "page");
             $conf["totales_elementos"] = $total;
