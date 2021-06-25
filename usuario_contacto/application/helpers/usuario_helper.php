@@ -29,22 +29,18 @@ if (!function_exists('invierte_date_time')) {
             $usuario_calificacion = $data['usuario_calificacion'];
             $calificacion = $usuario_calificacion['promedio'];
             $encuestas = $usuario_calificacion['encuestas'];
-
-            $perfil_busqueda = $data['perfil_busqueda'];
-            $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
             $nombre_usuario = pr($usuario_busqueda, 'nombre_usuario');
-
             $id_usuario = pr($usuario_busqueda, 'id_usuario');
+            $url_img_usuario = pr($usuario_busqueda, 'url_img_usuario');
             $nombre = format_nombre($usuario_busqueda);
             $descripcion[] = h($nombre, 1, ['class' => 'display-2 text-uppercase strong']);
-
             $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
             $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
 
             $imagen = a_enid(
                 img(
                     [
-                        "src" => path_enid("imagen_usuario", $id_usuario),
+                        "src" => $url_img_usuario,
                         "onerror" => "this.src='../img_tema/user/user.png'",
                         "class" => "rounded-circle img_servicio_def"
                     ]
@@ -68,16 +64,13 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
-            $texto_puesto = _text_('Equipo', strong($nombre_perfil));
+            $texto_puesto = roll($data);
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
-
             $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
             $contenido[] = p($nombre_usuario, 'update-note');
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
-
-            $response[] = d(d($data["total_seguidores"],_4p), "col-md-12");
-
+            $response[] = seguidores($data);
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-6 col-md-offset-3  bg-light p-5 contenedor_perfil');
 
@@ -94,65 +87,93 @@ if (!function_exists('invierte_date_time')) {
             $contenedor[] = d($texto, 'col-md-4 col-md-offset-4 mt-5 bg-light p-5');
         }
 
-
         return append($contenedor);
 
     }
 
 
-    function seccion_estadisticas($data)
+    function seguidores($data)
+    {
+        $response = "";
+        $usuario_busqueda = $data["usuario_busqueda"];
+        if (!es_cliente($usuario_busqueda)) {
+            $response = d(d($data["total_seguidores"], _4p), "col-md-12");
+        }
+        return $response;
+    }
+
+    function roll($data)
     {
 
-        $r[] = d(_titulo("estadísticas", 4), "mt-5");
-        $r[] = d(p("Actividades en los últimos 30 días", "text-secondary"));
+        $usuario_busqueda = $data["usuario_busqueda"];
+        $texto_puesto = "";
+        if (!es_cliente($usuario_busqueda)) {
+            $perfil_busqueda = $data['perfil_busqueda'];
+            $nombre_perfil = pr($perfil_busqueda, 'nombreperfil');
+            $texto_puesto = _text_('Equipo', strong($nombre_perfil));
+        }
 
-        $meta_semanal_comisionista = $data['meta_semanal_comisionista'];
-        $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
+        return $texto_puesto;
+    }
 
-        $restantes = ($meta_semanal_comisionista - $total_ventas_semana);
+    function seccion_estadisticas($data)
+    {
+        $usuario_busqueda = $data["usuario_busqueda"];
+        $r = [];
+        if (!es_cliente($usuario_busqueda)) {
 
-        $icono_meta = text_icon(_dolar_icon, 'Meta semanal');
-        $seccion_meta = flex($icono_meta, $meta_semanal_comisionista, 'flex-column');
+            $r[] = d(_titulo("estadísticas", 4), "mt-5");
+            $r[] = d(p("Actividades en los últimos 30 días", "text-secondary"));
 
-        $icono_logros = text_icon(_checked_icon, 'Logros fecha');
-        $ventas_actuales = flex($icono_logros, $total_ventas_semana, 'flex-column');
+            $meta_semanal_comisionista = $data['meta_semanal_comisionista'];
+            $total_ventas_semana = (es_data($data['ventas_semana'])) ? count($data['ventas_semana']) : 0;
 
-        $icono_restantes = text_icon(_spinner, "restantes");
-        $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
+            $restantes = ($meta_semanal_comisionista - $total_ventas_semana);
 
-        $link_ventas = a_texto('Mis ventas',
-            [
-                'class' => 'text-center ',
-                'href' => path_enid('pedidos')
-            ]
-        );
-        $text_ventas = text_icon(_bomb_icon, $link_ventas);
-        $texto_top = 'Identifica tus ordenes de compras enviadas';
-        $texto_ventas = flex(
-            $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+            $icono_meta = text_icon(_dolar_icon, 'Meta semanal');
+            $seccion_meta = flex($icono_meta, $meta_semanal_comisionista, 'flex-column');
 
-        $link_top_ventas = a_texto('Top ventas',
-            [
-                'class' => 'text-center black',
-                'href' => path_enid('top_competencia')
-            ]
-        );
+            $icono_logros = text_icon(_checked_icon, 'Logros fecha');
+            $ventas_actuales = flex($icono_logros, $total_ventas_semana, 'flex-column');
 
-        $icono_top = text_icon(_estrellas_icon, $link_top_ventas);
-        $texto_top = 'Mira qué posición ocupas en la tabla';
-        $texto_top_ventas = flex(
-            $icono_top, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+            $icono_restantes = text_icon(_spinner, "restantes");
+            $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
 
-        $r[] = d(
-            d_c(
+            $link_ventas = a_texto('Mis ventas',
                 [
-                    $seccion_meta,
-                    $ventas_actuales,
-                    $restantes,
-                    $texto_ventas,
-                    $texto_top_ventas
-                ],
-                'f11 col-lg-2 mx-auto text-center mt-5'), 'row black');
+                    'class' => 'text-center ',
+                    'href' => path_enid('pedidos')
+                ]
+            );
+            $text_ventas = text_icon(_bomb_icon, $link_ventas);
+            $texto_top = 'Identifica tus ordenes de compras enviadas';
+            $texto_ventas = flex(
+                $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+
+            $link_top_ventas = a_texto('Top ventas',
+                [
+                    'class' => 'text-center black',
+                    'href' => path_enid('top_competencia')
+                ]
+            );
+
+            $icono_top = text_icon(_estrellas_icon, $link_top_ventas);
+            $texto_top = 'Mira qué posición ocupas en la tabla';
+            $texto_top_ventas = flex(
+                $icono_top, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+
+            $r[] = d(
+                d_c(
+                    [
+                        $seccion_meta,
+                        $ventas_actuales,
+                        $restantes,
+                        $texto_ventas,
+                        $texto_top_ventas
+                    ],
+                    'f11 col-lg-2 mx-auto text-center mt-5'), 'row black');
+
+        }
         return append($r);
 
     }

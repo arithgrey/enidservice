@@ -108,7 +108,6 @@ if (!function_exists('invierte_date_time')) {
 
         $fecha_inicio = $envio_usuario["fecha_inicio"];
         $fecha_termino = $envio_usuario["fecha_termino"];
-        $conversaciones = "";
         $lista_deseos = "";
 
 
@@ -120,7 +119,6 @@ if (!function_exists('invierte_date_time')) {
             $table .= "<tr>";
             $table .= td("Usuarios", "class='strong' ");
             $table .= td("Servicios postulados", "class='strong' ");
-            $table .= td("Ingresos a Enid", $ext_td_usablidad);
             $table .= "</tr>";
             $table .= "<tr>";
 
@@ -431,27 +429,19 @@ if (!function_exists('invierte_date_time')) {
             ["style" => 'background: #2372e9;color: white !important;text-align: center;']);
         $b[] = $nuevos_usuarios;
 
-        $c[] = td("CONVERSACIONES",
-            ["style" => 'background: #006475;color: white !important;text-align: center;']);
-        $c[] = $conversaciones;
 
         $d[] = td("TRANSACCIONES",
             ["style" => 'background: #002763;color: white !important;text-align: center;']);
         $d[] = $transacciones;
 
-        $e[] = td("VALORACIONES", $ext_valoraciones);
-        $e[] = $total_valoraciones;
+
 
         $f[] = td("VALORACIONES", $ext_valoraciones);
         $f[] = $total_valoraciones;
 
 
-        $g[] = td("ACCESOS",
-            ["style" => 'background: #00b7ff;color: white !important;text-align:center;']);
-        $g[] = $accesos;
 
-        $h[] = td("CONTACTO", ["style" => 'text-align: center;']);
-        $h[] = $contacto;
+
 
         $i[] = td("LABORES RESUELTAS",
             ["style" => 'text-align: center;background: #1c404e;color: white !important;']);
@@ -464,12 +454,9 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = tr(append($a));
         $response[] = tr(append($b));
-        $response[] = tr(append($c));
         $response[] = tr(append($d));
-        $response[] = tr(append($e));
         $response[] = tr(append($f));
-        $response[] = tr(append($g));
-        $response[] = tr(append($h));
+
         $response[] = tr(append($i));
         $response[] = tr(append($j));
 
@@ -533,25 +520,28 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = $data["paginacion"];
 
-        foreach ($data["miembros"] as $row) {
+        $usuarios = $data["miembros"];
+        foreach ($usuarios as $row) {
 
             $id_usuario = $row["id_usuario"];
             $persona = format_nombre($row);
             $puntuacion = $row['puntuacion'];
             $calificacion = crea_estrellas($puntuacion);
             $es_provedor = $data["es_proveedor"];
+            $url_img_usuario = $row["url_img_usuario"];
+            $fecha_registro = $row["fecha_registro"];
 
             $imagen = a_enid(
                 img(
                     [
-                        "src" => path_enid('imagen_usuario', $id_usuario),
+                        "src" => $url_img_usuario,
                         "onerror" => "this.src='../img_tema/user/user.png'",
                         'class' => 'mx-auto d-block rounded-circle mah_50'
                     ]
                 ), path_enid('usuario_contacto', $id_usuario)
             );
 
-            $fecha_registro = format_fecha($row["fecha_registro"]);
+            $fecha_registro = format_fecha($fecha_registro);
             $fecha_registro = (!$es_provedor) ? $fecha_registro : '';
             $contenido = control_asociacion($data, $id_usuario);
             $contenido[] = d($imagen);
@@ -2153,7 +2143,6 @@ if (!function_exists('invierte_date_time')) {
 
         $contenido = [];
         $base = 'col-md-2 border text-center';
-
         $contenido[] = d(_titulo('Totales', 2), 'col-md-5');
         $contenido[] = d($total_operaciones, $base);
         $contenido[] = d($total_ventas, $base);
@@ -2167,10 +2156,7 @@ if (!function_exists('invierte_date_time')) {
         $base = 'col-md-2 border text-center';
 
         $total_vendedores = ($a - 1);
-
         $usuarios_activos[] = d(_d('NUEVOS', $usuarios), $base);
-
-
         $usuarios_activos[] = d(_d('VENDEDORES', $total_vendedores), $base);
         $total_vendedores_activos = count(array_unique($ids_usuarios_actividad));
         $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), 'col-md-2 border text-center bg-primary white');
@@ -2180,13 +2166,9 @@ if (!function_exists('invierte_date_time')) {
         $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
         $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-2 border text-center');
 
-
         $bajas = ($total_vendedores - $total_vendedores_activos);
         $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-2 border text-center bg-danger white');
-
-
         $totales_usuarios_activos = d($usuarios_activos, 'row');
-
 
         $data[] = d($totales_usuarios_activos, 'mt-5 col-md-12');
         $data[] = d($totales, 'mt-5 col-md-12');
@@ -2205,7 +2187,7 @@ if (!function_exists('invierte_date_time')) {
         $contenido = [];
         $base = 'col-md-2 border strong text-center';
         $contenido[] = d("#", 'col-md-1');
-        $contenido[] = d("Vendedor", 'col-md-3');
+        $contenido[] = d("Repartidor", 'col-md-3');
         $contenido[] = d("Operaciones", $base);
         $contenido[] = d("Ventas efectivas", $base);
         $contenido[] = d("En proceso", $base);
@@ -2248,7 +2230,6 @@ if (!function_exists('invierte_date_time')) {
 
             $canceladas = ($actividad) ? $row['lista_negra'] : 0;
             $total_canceladas = ($total_canceladas + $canceladas);
-
 
             $email = $row['email'];
             $link = path_enid('busqueda_usuario', $email);

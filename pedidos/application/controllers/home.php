@@ -261,6 +261,9 @@ class Home extends CI_Controller
         $data['usuario_cliente'] = $usuario_compra;
 
 
+        $productos_orden_compra = $data["productos_orden_compra"];
+        $data["productos_orden_compra"] =
+            $this->app->add_imgs_usuario($productos_orden_compra, "id_usuario_entrega");
         $data = texto_pre_pedido($productos_orden_compra, $data);
         $params = $this->input->get();
         $this->app->pagina($data, render_seguimiento($data, $params), 1);
@@ -507,9 +510,6 @@ class Home extends CI_Controller
 
             $this->carga_detalle_pedido($param, $data);
 
-        } else {
-
-//            redirect("../../?q=");
         }
 
 
@@ -595,6 +595,7 @@ class Home extends CI_Controller
 
         $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : $data['id_usuario'];
         $repartidor = $this->get_usuario($id_repartidor);
+        $repartidor = $this->app->add_imgs_usuario($repartidor, $key = "id_usuario");
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
         $data += [

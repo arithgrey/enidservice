@@ -28,7 +28,7 @@ class usuario_deseo extends REST_Controller
 
         $param = $this->get();
         $ids = get_keys($param["ids"]);
-        $envia_cliente = prm_def($param , "envia_cliente");
+        $envia_cliente = prm_def($param, "envia_cliente");
         $response = $this->usuario_deseo_model->por_pago($ids, $envia_cliente);
         $this->response($response);
     }
@@ -204,7 +204,14 @@ class usuario_deseo extends REST_Controller
         $this->procesa_deseo($param);
         $this->agrega_interes_usuario($param);
         $this->gamificacion_deseo($param);
+        $this->deseo_compra($param);
         $this->response(true);
+    }
+
+    function deseo_compra($param)
+    {
+        $q = ["tipo" => 2 , "id_servicio" =>  $param["id_servicio"]];
+        return $this->app->api("intento_tipo_entrega/index", $q, "json", "POST");
     }
 
     function usuario_GET()
@@ -240,6 +247,7 @@ class usuario_deseo extends REST_Controller
     {
 
         return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
+
 
     }
 }

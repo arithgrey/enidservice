@@ -39,7 +39,15 @@ class Imagen_usuario_model extends CI_Model
 
 	function get_img_usuario($id_usuario)
 	{
-		return $this->get(["id_imagen"], ["idusuario" => $id_usuario]);
+        $query_get =  "SELECT i.nombre_imagen , iss.* FROM  
+							imagen_usuario  iss 
+							INNER JOIN imagen i 
+							ON  
+							iss.id_imagen =  i.idimagen
+							WHERE iss.idusuario =  $id_usuario 
+							ORDER BY iss.fecha_registro DESC LIMIT 1";
+
+        return  $this->db->query($query_get)->result_array();
 	}
 
 	function img_perfil($param)

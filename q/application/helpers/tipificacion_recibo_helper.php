@@ -10,10 +10,9 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_data($data)) {
 
-            $class = _text_(_between, 'text-uppercase border p-2 col-md-4 text-center');
+            $class = _text_(_between, 'text-uppercase border p-2 col-md-6 text-center');
             $titulos[] = d_c(
                 [
-                    "id",
                     "Veces que se canceló por está razón",
                     "Motivo cancelación"
                 ],
@@ -27,12 +26,8 @@ if (!function_exists('invierte_date_time')) {
 
                 $tipificacion = $row['nombre_tipificacion'];
                 $total = $row['total'];
-
-                $id_tipificacion = $row["id_tipificacion"];
-
                 $contenido[] = d_c(
                     [
-                        $id_tipificacion,
                         $total,
                         $tipificacion
                     ], $class
@@ -40,6 +35,11 @@ if (!function_exists('invierte_date_time')) {
 
             }
             $response[] = d($contenido);
+        }else{
+
+            $titulo = _titulo("Aún no hay tipificaciones",3);
+            $response[] = d($titulo,'text-center');
+
         }
         return d($response, 'mt-5 col-sm-12 p-0');
     }

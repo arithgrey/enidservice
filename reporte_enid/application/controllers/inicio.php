@@ -16,13 +16,13 @@ class Inicio extends CI_Controller
     {
         $data = $this->app->session("Métricas Enid Service");
         $num_perfil = $this->app->getperfiles();
-        $module = $this->module_redirect($num_perfil);
-        $this->valida_es_cliente($module);
+        $this->module_redirect($num_perfil);
+
 
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
         $data["tipo_tag_arquetipo"] = $this->tipo_tag_arquetipo();
         $data = $this->app->cssJs($data, "reporte_enid");
-        
+
         $this->app->pagina($data, render_reporte($data), 1);
 
     }
@@ -31,14 +31,16 @@ class Inicio extends CI_Controller
     {
         $area_cliente = "location:../area_cliente";
         $noticias = "location:../busqueda";
-        return ($num_perfil == 20) ? $area_cliente : $noticias;
-    }
 
-    private function valida_es_cliente($module)
-    {
-        if ($module != 1) {
-            header($module);
+        $modulo = ($num_perfil == 20) ? $area_cliente : $noticias;
+        if ($num_perfil != 3) {
+
+            if ($modulo != 1) {
+                header($modulo);
+            }
         }
+
+
     }
 
     private function carga_categorias_destacadas($q = [])

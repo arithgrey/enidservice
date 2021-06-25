@@ -102,6 +102,7 @@ class usuario_perfil extends REST_Controller
                 $response = $this->usuarios_entregas($response, $param);
             }
         }
+
         $this->response($response);
     }
 

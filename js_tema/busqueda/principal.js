@@ -68,4 +68,5 @@ let like_actividad = function (e) {
 }
 let response_like_actividad = function (data) {
 
+    redirect("");
 }

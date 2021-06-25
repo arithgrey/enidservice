@@ -34,6 +34,56 @@ class app extends CI_Controller
 
     }
 
+    function imgs_usuarios(
+        $id_usuario,
+        $completo = 0,
+        $limit = 1,
+        $path = 0,
+        $data = []
+    )
+    {
+
+        if (es_data($data)) {
+
+            $response = $this->path_imagenes_usuario($data);
+
+        } else {
+
+            $response = $this->get_img_usuario($id_usuario, $completo, $limit, $path);
+
+        }
+
+        return $response;
+
+
+    }
+    private function path_imagenes_usuario($data)
+    {
+        $response = [];
+        $a = 0;
+        $usuarios = [];
+        $usuarios_path = [];
+        foreach ($data as $row) {
+            $id = $data[$a]["id_usuario"];
+            if (!in_array($id, $usuarios)) {
+
+                $usuarios[] = $id;
+                $path = $this->get_img_usuario($id, 1, 1, 1);
+                $usuarios_path[] = [
+                    'id' => $id,
+                    'path' => $path
+                ];
+            } else {
+                $path = search_bi_array($usuarios_path, 'id', $id, 'path');
+            }
+
+            $row["url_img_usuario"] = $path;
+            $response[] = $row;
+            $a++;
+        }
+        return $response;
+    }
+
     private function path_imagenes($data)
     {
         $response = [];
@@ -80,6 +130,21 @@ class app extends CI_Controller
         $response = $this->api($api, $q);
         if ($path > 0) {
             $response = get_img_serv($response);
+        }
+
+        return $response;
+    }
+
+    private function get_img_usuario($id_usuario, $completo = 0, $limit = 1, $path = 0)
+    {
+
+        $q["id_usuario"] = $id_usuario;
+        $q["c"] = $completo;
+        $q["l"] = $limit;
+        $api = "imagen_usuario/usuario/format/json/";
+        $response = $this->api($api, $q);
+        if ($path > 0) {
+            $response = get_img_usr($response);
         }
 
         return $response;
@@ -370,6 +435,8 @@ class app extends CI_Controller
             $data["desc_web"] = $desc;
             $data["data_status_enid"] = $session["data_status_enid"];
             $data["recien_creado"] = $session["recien_creado"];
+            $data["path_img_usuario"] = $session["path_img_usuario"];
+
 
         } else {
 
@@ -386,6 +453,7 @@ class app extends CI_Controller
             $data["menu"] = "";
             $data["data_status_enid"] = "";
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
+            $data["path_img_usuario"] = "";
 
         }
 
@@ -1392,6 +1460,39 @@ class app extends CI_Controller
 
         return $response;
     }
+    function add_imgs_usuario($usuarios, $key = "idusuario")
+    {
+
+        $a = 0;
+        $response = [];
+        $path_usuario = [];
+        $nuevos_usuarios = [];
+        foreach ($usuarios as $row) {
+
+            $orden = $row;
+            $id_usuario = $usuarios[$a][$key];
+            if (!in_array($id_usuario, $nuevos_usuarios)) {
+                $nuevos_usuarios[] = $id_usuario;
+                $path = $this->imgs_usuarios($id_usuario, 1, 1, 1);
+                $path_usuario[] = [
+                    'id_usuario' => $id_usuario,
+                    'path' => $path
+                ];
+                $orden["url_img_usuario"] = $path;
+
+            } else {
+
+                $path = search_bi_array($path_usuario, 'id_usuario', $id_usuario, 'path');
+                $orden["url_img_usuario"] = $path;
+            }
+
+            $a++;
+            $response[] = $orden;
+        }
+
+        return $response;
+    }
+
 
     function session_enid()
     {

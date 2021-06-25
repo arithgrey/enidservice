@@ -9,11 +9,14 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data["servicios"] as $row) {
 
             $id_servicio = $row["id_servicio"];
+            $url_img_servicio = $row["url_img_servicio"];
+
             $r = [];
             $r[] = img(
                 [
-                    "src" => link_imagen_servicio($id_servicio),
+                    "src" => $url_img_servicio,
                     "class" => "w_articulos_postulados",
+                    "onerror" => "this.src='../img_tema/portafolio/producto.png'",
                 ]
             );
             $r[] = d(_text("alcance", $row["vista"]));

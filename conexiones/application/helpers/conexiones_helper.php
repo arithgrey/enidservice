@@ -7,18 +7,19 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(_titulo("Sigue a otros para ver qué posición ocupas en la tabla", 4), "mt-5");
         $response[] = d("", "seccion_sugerencias mt-5");
-        return d($response,10,1);
+        return d($response, 10, 1);
 
     }
+
     function render($data)
     {
 
         $conexiones_ranking = $data["conexiones_ranking"];
         $id_seguidor = $data["id_seguidor"];
 
-        if (es_data($conexiones_ranking)){
+        if (es_data($conexiones_ranking)) {
             $response[] = d(ranking($conexiones_ranking, $id_seguidor), 10, 1);
-        }else{
+        } else {
 
             $response[] = sin_seguir();
         }
@@ -36,22 +37,33 @@ if (!function_exists('invierte_date_time')) {
     function ranking($usuarios, $id_seguidor)
     {
         sksort($usuarios, "ventas", false);
-        $response = [];
-        $a = 1;
         $response[] = d(_titulo("Clasificación", 4), 'text-center');
-
-
-
         $texto = flex(icon(_flecha_derecha), "Descubre otras cuentas ", "", "mr-3");
         $response[] = d($texto, 'f12 black cursor_pointer otras_cuentas');
-        $response[] = d(d("","seccion_sugerencias"), 'seccion_sugerencias_disponibles col-sm-12 d-none mt-5 mb-5');
-
+        $seccion = d("", "seccion_sugerencias");
+        $response[] = d($seccion, 'seccion_sugerencias_disponibles col-sm-12 d-none mt-5 mb-5');
         $texto = flex(icon(_flecha_derecha), "Mira tus estadísticas ", "", "mr-3");
         $path = path_enid("busqueda");
-        $response[] = d(a_enid($texto, ['href' => $path , "class" => "f12 black cursor_pointer"]), "link_estadisticas d-none");
+        $link = a_enid(
+            $texto,
+            [
+                'href' => $path,
+                "class" => "f12 black cursor_pointer"
+            ]);
 
+        $response[] = d($link, "link_estadisticas d-none");
         $titulos = flex("Participantes", "Ventas", _text_(_between, 'f12 black text-secondary'));
-        $response[] = d($titulos," mt-5");
+        $response[] = d($titulos, " mt-5");
+        $response = linea_ranking($response, $usuarios, $id_seguidor);
+
+        return append($response);
+
+    }
+
+    function linea_ranking($response, $usuarios, $id_seguidor)
+    {
+
+        $a = 1;
         foreach ($usuarios as $row) {
 
             $id_usuario = $row["id_usuario"];
@@ -59,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
             $path_imagen = $row['path_imagen'];
             $seccion_nombre_vendedor = p($nombre_vendedor, 'fp9');
             $seccion = [];
-            $ext = ($id_usuario == $id_seguidor) ? 'bg_custom_green white':'';
+            $ext = ($id_usuario == $id_seguidor) ? 'bg_custom_green white' : '';
             $imagen = a_enid(
                 img(
                     [
@@ -73,7 +85,17 @@ if (!function_exists('invierte_date_time')) {
             $posicion = d($a, 'bg_custom_green p-2 white');
             $seccion[] = flex($imagen, $posicion, 'mt-4');
 
-            $seccion[] = d($seccion_nombre_vendedor, 'my-auto text-uppercase mr-auto ml-5');
+            $color = ($id_usuario == $id_seguidor) ? 'white':'black';
+            $link = a_enid(
+                $seccion_nombre_vendedor
+                , [
+
+                    "href" => path_enid('usuario_contacto', $id_usuario),
+                    "class" => $color
+                ]
+            );
+
+            $seccion[] = d($link, 'my-auto text-uppercase mr-auto ml-5');
             $ventas = $row["ventas"];
 
             $atributos = [
@@ -86,9 +108,7 @@ if (!function_exists('invierte_date_time')) {
             $a++;
         }
 
-
-        return append($response);
-
+        return $response;
     }
 
 

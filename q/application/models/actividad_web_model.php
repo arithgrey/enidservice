@@ -535,8 +535,6 @@ class actividad_web_model extends CI_Model
     function repartidores()
     {
         return _text_($this->base_usr(), 'IN(21,3,4)');
-
-
     }
 
     function base_usr()
@@ -545,7 +543,6 @@ class actividad_web_model extends CI_Model
         return "SELECT idusuario FROM usuario_perfil WHERE idperfil";
 
     }
-
 
     function comisionistas_usuarios($tabla_comisionistas)
     {
@@ -563,7 +560,7 @@ class actividad_web_model extends CI_Model
                 WHERE u.status = 1";
     }
 
-    function repartidores_usuarios($tabla_comisionistas)
+    function repartidores_usuarios($tabla_reparto)
     {
         return "SELECT 
                 u.idusuario,
@@ -572,7 +569,7 @@ class actividad_web_model extends CI_Model
                 u.apellido_paterno,
                 u.apellido_materno 
                 FROM usuario u 
-                INNER JOIN $tabla_comisionistas up 
+                INNER JOIN $tabla_reparto up 
                 ON up.idusuario =  u.idusuario
                 WHERE u.status = 1";
     }

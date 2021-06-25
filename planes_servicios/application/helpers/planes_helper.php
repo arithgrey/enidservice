@@ -342,7 +342,6 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
         $r[] = tab_content($z, 10);
         $r[] = d(top_articulos($top_servicios), 2);
         $r[] = frm_hiddens($action, $data["extra_servicio"]);
@@ -408,6 +407,19 @@ if (!function_exists('invierte_date_time')) {
                 "placehorder" => "880",
             ], _text_cantidad
         );
+        $seccion_costo = input_frm('contenedor_precio mt-5 mt-md-5',
+            'Costo MXN',
+            [
+                "id" => "costo_compra",
+                "class" => "costo_compra border-top-0 border-right-0 border-left-0 border_bottom_big",
+                "name" => "costo_compra",
+                "required" => true,
+                "step" => "any",
+                "type" => "float",
+                "placehorder" => "880",
+            ], _text_cantidad
+        );
+
 
         $seccion_ciclo_facturacion = d(
             [
@@ -433,6 +445,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = _d(
             $nombre,
             $seccion_precio,
+            $seccion_costo,
             $seccion_ciclo_facturacion
         );
 

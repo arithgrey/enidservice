@@ -445,7 +445,7 @@ class Recibo_model extends CI_Model
                 break;
             case 2:
 
-                return " (fecha_termino)
+                return " DATE(fecha_termino)
                    BETWEEN 
                    '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ";
                 break;
@@ -459,7 +459,7 @@ class Recibo_model extends CI_Model
 
             case 7:
 
-                return " (fecha_pago)
+                return " DATE(fecha_pago)
                    BETWEEN 
                    '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ";
                 break;
@@ -467,7 +467,7 @@ class Recibo_model extends CI_Model
 
             case 9:
 
-                return " (fecha_pago)
+                return " DATE(fecha_pago)
                    BETWEEN 
                    '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ";
                 break;
@@ -475,7 +475,7 @@ class Recibo_model extends CI_Model
 
             case 10:
 
-                return " (fecha_cancelacion)
+                return " DATE(fecha_cancelacion)
                    BETWEEN 
                    '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ";
                 break;
@@ -838,6 +838,7 @@ class Recibo_model extends CI_Model
 
         $id_servicio = $param["id_servicio"];
         $flag_envio_gratis = $param["flag_envio_gratis"];
+        $costo = $param["costo"];
         $id_usuario_venta = $param["id_usuario_venta"];
         $precio = $param["precio"];
         $comision = $param["comision"];
@@ -891,7 +892,8 @@ class Recibo_model extends CI_Model
             "resumen_pedido",
             "talla",
             "tipo_entrega",
-            "comision_venta"
+            "comision_venta",
+            "costo"
         ];
 
         $array_values =
@@ -914,7 +916,8 @@ class Recibo_model extends CI_Model
                 "'" . $resumen_compra . "'",
                 $talla,
                 $tipo_entrega,
-                $comision
+                $comision,
+                $costo
             ];
 
 
@@ -1085,12 +1088,10 @@ class Recibo_model extends CI_Model
 
         }
 
-        $query_get = "";
         if ($total > 0) {
 
             $query_get = "
-	            SELECT  
-                  
+	            SELECT                    
                 COUNT(0)total , 
                 p.id_servicio 
                 FROM 
@@ -1152,7 +1153,9 @@ class Recibo_model extends CI_Model
         }
         $query_get = "SELECT 
                             p.id_proyecto_persona_forma_pago  recibo,
-                            p.saldo_cubierto  
+                            p.saldo_cubierto,
+                            p.costo,
+                            p.num_ciclos_contratados
                             FROM proyecto_persona_forma_pago p 
                             WHERE                             
                             p.saldo_cubierto > 1

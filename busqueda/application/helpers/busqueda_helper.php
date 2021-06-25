@@ -75,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
         $link_top_ventas = a_texto('Top ventas',
             [
                 'class' => 'text-center black',
-                'href' => path_enid('top_competencia')
+                'href' => path_enid('top_competencias',2)
             ]
         );
 

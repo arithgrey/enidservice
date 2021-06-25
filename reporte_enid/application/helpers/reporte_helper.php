@@ -378,11 +378,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "text-uppercase black   dispositivos",
                 ]
             )
-            ,
-            tab(
-                text_icon(_bomb_icon, "tipificaciones"),
-                '#tab_tipificaciones'
-            )
+
             ,
             a_enid(text_icon("fa-shopping-bag", "compras"),
                 [
@@ -401,13 +397,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             )
             ,
-            a_enid(text_icon('fa fa-exchange', "puntos de encuentro"),
-                [
-                    "href" => path_enid("ventas_encuentro"),
-                    "class" => 'text-uppercase black  active',
-                ]
-            )
-            ,
+
             $link_productos_solicitados
             ,
             $link_tipos_entregas

@@ -25,7 +25,7 @@ class Home extends CI_Controller
             $usuarios = $this->usuarios_q($clientes);
             $usuarios_num_compras  =  $this->usuarios_numero_compras($usuarios);
             sksort($usuarios_num_compras, "num_compras");
-            $intentos = $this->intentos_reventa();
+            $intentos = $this-> intentos_reventa();
 
         }
 

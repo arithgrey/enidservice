@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
 
                     $ventas = $row['ventas'];
                     $nombre_vendedor = substr($row['nombre_vendedor'], 0, 17);
-                    $path_imagen = $row['path_imagen'];
+                    $url_img_usuario = $row['url_img_usuario'];
 
                     $seccion_ventas = d($ventas, 'strong');
                     $seccion_nombre_vendedor = p($nombre_vendedor, 'text-underline text-uppercase fp7');
@@ -71,7 +71,7 @@ if (!function_exists('invierte_date_time')) {
                     $seccion[] = a_enid(
                         img(
                             [
-                                "src" => $path_imagen,
+                                "src" => $url_img_usuario,
                                 "onerror" => "this.src='../img_tema/user/user.png'",
                                 'class' => 'mx-auto d-block rounded-circle mah_50'
                             ]

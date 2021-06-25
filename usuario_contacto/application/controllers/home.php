@@ -40,10 +40,11 @@ class Home extends CI_Controller
 
         $id_usuario = prm_def($param, 'id_usuario');
         $prm = $this->input->get();
-        $data['usuario_busqueda'] = $this->app->usuario($id_usuario);
+        $usuario = $this->app->usuario($id_usuario);
+        $data['usuario_busqueda'] = $this->app->add_imgs_usuario($usuario, "id_usuario");
         $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
-        $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session']);
+        $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session'], $data);
         $data['encuesta'] = prm_def($prm, 'encuesta');
         $data['id_servicio'] = prm_def($prm, 'servicio');
 
@@ -96,17 +97,24 @@ class Home extends CI_Controller
 
     private function busqueda($param, $data, $q)
     {
-
-        $len = strlen($q);
+        
         $this->app->pagina($data, render_busqueda($data), 1);
 
     }
 
-    private function tipo_tipificciones($in_session)
+    private function tipo_tipificciones($in_session, $data)
     {
+        $perfil_busqueda = $data['perfil_busqueda'];
+        $id_perfil = pr($perfil_busqueda, "idperfil");
 
-        $in_session = ($in_session) ? 1 : 0;
-        return $this->app->api("tipo_puntuacion/tipo/format/json/", ["in_session" => $in_session]);
+        $tipo = ($id_perfil > 1 ) ? $id_perfil : $in_session;
+        $tipo_busqueda = ($in_session) ? $tipo : 0;
+
+        return $this->app->api("tipo_puntuacion/tipo/format/json/",
+            [
+                "tipo" => $tipo_busqueda
+            ]
+        );
 
     }
 

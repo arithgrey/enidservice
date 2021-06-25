@@ -204,7 +204,9 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
             $text = [];
-            $text[] = d(h($row["porcentaje"] . "%", 3), "text-center");
+            $texto_porcentaje = d(_text_($row["porcentaje"], "% de las solicitudes son ventas efectivas"));
+            $texto_porcentaje = h($texto_porcentaje, 3);
+            $text[] = d($texto_porcentaje, "text-center");
 
 
             $form = [];
@@ -213,7 +215,7 @@ if (!function_exists('invierte_date_time')) {
             $form[] = hiddens(["name" => "fecha_termino", "value" => $fecha_termino]);
             $form[] = hiddens(["name" => "type", "value" => 13]);
             $form[] = hiddens(["name" => "servicio", "value" => $id_servicio]);
-            $form[] = btn($row["solicitudes"] . " SOLICITUDES ");
+            $form[] = d(_text_($row["solicitudes"], "SOLICITUDES"), 'text-center');
             $form[] = form_close();
             $text[] = append($form);
 
@@ -231,24 +233,23 @@ if (!function_exists('invierte_date_time')) {
             $text[] = append($form);
 
             $x[] = d(
-                append($text),
+                $text,
                 "col-lg-3 d-flex flex-column justify-content-between"
             );
 
-            $dias_venta = _text(
+            $dias_venta = _text_(
                 "Tiempo promedio de venta ", substr($row["dias"], 0, 5), "días");
 
             $x[] = d(h($dias_venta, 4), "col-lg-3 text-center align-self-center");
-
 
             $total_costos_operativos = $row["total_costos_operativos"];
             $utilidad = h("Sin costos operativos registrados", 5);
 
             if (es_data($total_costos_operativos)) {
 
-                $total_costos = $total_costos_operativos["total_costos"];
                 $total_pagos = $total_costos_operativos["total_pagos"];
-                $utilidad = ($total_pagos - $total_costos);
+                $total_costo_producto = $total_costos_operativos["total_costo_producto"];
+                $utilidad = ($total_pagos - $total_costo_producto);
                 $utilidad_global = $utilidad_global + $utilidad;
             }
 
@@ -734,8 +735,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function compras_pedidos($linea_titulos, $linea_en_proceso, $linea_cambio_estado,
-                     $linea_cambio_lista_negra, $conversion, $tb_fechas, $text_saldo_por_cobrar,
-                     $inicio, $totales)
+                             $linea_cambio_lista_negra, $conversion, $tb_fechas, $text_saldo_por_cobrar,
+                             $inicio, $totales)
     {
 
         $listado[] = append($linea_titulos);
@@ -907,16 +908,15 @@ if (!function_exists('invierte_date_time')) {
         $ventas_fecha = array_count_values($fechas);
         $fechas_keys = array_keys($ventas_fecha);
         $cb = function ($a, $b) {
-            return " " . $a . td($b);
+            return  flex($a , $b, "flex-column");
         };
-        $titulos = "<td>" . implode("</td><td>", $fechas_keys) . "</td>";
+
+        $titulos = $fechas_keys;
         $valores = array_reduce($ventas_fecha, $cb, '');
 
 
-        $r[] = tr($titulos);
-        $r[] = tr($valores);
+        return flex($titulos, $valores, "flex-column");
 
-        return d_row(tb($r));
     }
 
     function get_text_status($lista, $estado_compra)
@@ -1353,45 +1353,37 @@ if (!function_exists('invierte_date_time')) {
     function get_view_compras($status_enid_service, $compras, $tipo)
     {
 
-        $tipo_solicitud =
-            _titulo(
-                search_bi_array(
-                    $status_enid_service,
-                    "id_estatus_enid_service",
-                    $tipo,
-                    "nombre"
-                )
+        $tipo_transaccion = search_bi_array(
+            $status_enid_service,
+            "id_estatus_enid_service",
+            $tipo,
+            "nombre"
+        );
 
-            );
+        $tipo_solicitud = d(d(_titulo($tipo_transaccion), 12), 13);
+
         $r = [];
         foreach ($compras as $row) {
 
             $response = [];
-            $id_servicio = $row["id_servicio"];
-            $url_imagen = link_imagen_servicio($id_servicio);
-
+            $url_imagen = $row["url_img_servicio"];
 
             $response[] = img(
                 [
                     "src" => $url_imagen,
                     "onerror" => "this.src='../img_tema/portafolio/producto.png'",
-                    "class" => "col-md-3"
+                    "class" => "col-md-12"
                 ]
             );
 
-            $response[] = _titulo(money($row["monto_a_pagar"]), 1);
-
-            $r[] = d(
-                $response,
-                "d-md-flex align-items-center 
-                justify-content-between border shadow mt-5 p-5 text-center"
-            );
+            $monto_a_pagar = $row["monto_a_pagar"];
+            $response[] = d(_titulo(money($monto_a_pagar), 2), 12);
+            $r[] = d($response, "border-bottom mt-5 p-5 text-center row mt-5");
 
         }
 
         array_unshift($r, $tipo_solicitud);
-
-        return append($r);
+        return d($r, 6, 1);
 
     }
 

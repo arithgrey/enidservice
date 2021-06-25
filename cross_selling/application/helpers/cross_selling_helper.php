@@ -15,7 +15,7 @@ if (!function_exists('invierte_date_time')) {
         $nombre_cliente = _titulo(format_nombre($cliente));
         $linea[] = d($nombre_cliente, 13);
 
-        $telefono_cliente = _titulo(format_phone(pr($cliente, 'tel_contacto')), 5);
+        $telefono_cliente = _titulo(pr($cliente, 'tel_contacto'), 5);
         $linea[] = d($telefono_cliente, 13);
 
         $texto = flex(count($recibos_pagos), 'Compras efectivas', '', 'mr-2 strong black');
@@ -37,7 +37,9 @@ if (!function_exists('invierte_date_time')) {
             )
             , 5);
 
-        $linea[] = d(flex(icon(_text_(_estrellas_icon, 'fa-2x black')), $texto, _between_start, 'mr-2'), 'row mt-5 mb-5');
+        $icono = icon(_text_(_estrellas_icon, 'fa-2x black'));
+        $estrellas = flex($icono, $texto, _between_start, 'mr-2');
+        $linea[] = d($estrellas, 'row mt-5 mb-5');
 
         $seleccionar_todo = input(
             [
