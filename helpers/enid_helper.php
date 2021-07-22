@@ -3641,6 +3641,7 @@ function es_orden_cancelada($data)
         }
 
         return ($cancelada > 0);
+
     } else {
 
         $cancela_cliente = prm_def($data, "cancela_cliente");
@@ -3901,6 +3902,42 @@ function eleccion($titulo, $a, $b, $ext = '')
     $response[] = titulo_bloque($titulo);
     $response[] = flex($a, $b, _text_('mt-5 justify-content-between ', $ext));
     return d($response, 'col-md-12 mt-5');
+}
+
+function get_orden()
+{
+    return [
+        "ORDENAR POR",
+        "LAS NOVEDADES PRIMERO",
+        "LO MÁS VENDIDO",
+        "LOS MÁS VOTADOS",
+        "LOS MÁS POPULARES ",
+        "PRECIO  [de mayor a menor]",
+        "PRECIO  [de menor a mayor]",
+        "NOMBRE DEL PRODUCTO [A-Z]",
+        "NOMBRE DEL PRODUCTO [Z-A]",
+        "SÓLO  SERVICIO",
+        "SÓLO PRODUCTOS"
+    ];
+
+}
+
+function list_orden($list_orden, $default)
+{
+
+    $r[] = '<select class="form-control" name="orden" id="orden">';
+    $a = 0;
+    foreach ($list_orden as $row) {
+
+        $selected = ($a == $default) ? "selected" : "";
+        $r[] = _text("<option value='", $a, "' ", $selected, ">");
+        $r[] = $row;
+        $r[] = '</option>';
+        $a++;
+    }
+    $r[] = '</select>';
+
+    return append($r);
 }
 
 function titulo_bloque($str)

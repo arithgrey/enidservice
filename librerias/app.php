@@ -57,6 +57,7 @@ class app extends CI_Controller
 
 
     }
+
     private function path_imagenes_usuario($data)
     {
         $response = [];
@@ -1460,6 +1461,7 @@ class app extends CI_Controller
 
         return $response;
     }
+
     function add_imgs_usuario($usuarios, $key = "idusuario")
     {
 
@@ -1639,6 +1641,18 @@ class app extends CI_Controller
 
         return $this->api("usuario_conexion/totales_seguidores/format/json/", ["id_usuario" => $id_usuario]);
 
+    }
+
+    function recibos_usuario($id_usuario, $es_pago = 0)
+    {
+
+        return $this->api(
+            "recibo/usuario_relacion/format/json/",
+            [
+                "id_usuario" => $id_usuario,
+                "es_pago" => $es_pago
+            ]
+        );
     }
 
 

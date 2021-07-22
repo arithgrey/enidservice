@@ -291,7 +291,9 @@ class usuario extends REST_Controller
                 "lada_negocio",
                 "tel_lada",
                 "sexo",
-                "id_departamento"
+                "id_departamento",
+                "facebook",
+                "orden_producto"
             ];
             $completo = prm_def($param, 'c');
             $params = ($completo > 0) ? [] : $params;
@@ -1341,6 +1343,21 @@ class usuario extends REST_Controller
         $this->response($response);
 
     }
+    function orden_producto_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "orden")) {
+
+            $orden_producto = $param["orden"];
+            $response = $this->usuario_model->q_up("orden_producto", $orden_producto, $this->id_usuario);
+        }
+
+        $this->response($response);
+
+    }
 
     function entrega_GET()
     {
@@ -1375,6 +1392,7 @@ class usuario extends REST_Controller
 
         $this->response($response);
     }
+
 
 
 }

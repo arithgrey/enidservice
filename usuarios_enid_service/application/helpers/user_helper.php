@@ -312,13 +312,36 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function get_format_view_orden($empresa)
+    {
+
+        $orden_producto = pr($empresa, "orden_producto");
+        $id_empresa = pr($empresa, "idempresa");
+        $lista_orden = list_orden(get_orden(), $orden_producto);
+        $texto = _titulo("Filtro principal", 5);
+        $lista = flex($texto, $lista_orden, _between, "mr-3");
+        $boton_cambio = btn("Modificar");
+        $response[] = form_open("",
+            [
+                "class" => "form_orden_productos",
+                "method" => "post"
+            ]
+        );
+        $response[] = hiddens(["name" => "id_empresa", "value" => $id_empresa]);
+        $response[] = flex($lista, $boton_cambio, _between);
+        $response[] = form_close();
+
+
+        return d($response, 8, 1);
+    }
+
     function eleccion_seleccion($titulo, $reparto_auto, $a, $b, $c, $ext = '')
     {
 
-        $response[] = _titulo($titulo,2);
+        $response[] = _titulo($titulo, 2);
         $contenido = [$reparto_auto, $a, $b, $c];
         $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
-        return d($response,'col-md-12 mt-4');
+        return d($response, 'col-md-12 mt-4');
     }
 
 
@@ -350,9 +373,16 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function get_format_info_usuario()
+    function get_format_info_usuario($departamentos)
     {
 
+        $select_perfiles = create_select(
+            $departamentos,
+            "id_departamento",
+            "id_departamento_busqueda",
+            "id_departamento",
+            "nombre",
+            "id_departamento");
 
         $link_miembros = tab(
             text_icon("fa fa-trophy", "Miembros activos"),
@@ -396,19 +426,19 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        $response[] = _titulo("Equipo");
+        $response[] = _titulo("usuarios Enid Service");
         $response[] = ul($l, "nav nav-tabs mb-5 mt-5");
-
-
         $response[] = d(_titulo('Busqueda', 3), _mbt5);
-        $response[] = input_frm('', '¿a quién buscamos? Nombre, email, teléfono', [
+
+        $input = input_frm('', '¿a quién buscamos? Nombre, email, teléfono', [
                 'name' => 'q',
                 'id' => 'q',
                 'class' => 'q nombre_usuario'
             ]
         );
 
-
+        $seccion_busqueda = flex($select_perfiles, $input, "", "col-md-4", "col-md-8");
+        $response[] = d($seccion_busqueda);
         $contenido[] = place("usuarios_enid_service mt-5");
         $response[] = tab_seccion($contenido, 'tab_usuarios_activos', 1);
 
@@ -595,13 +625,21 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
+        $link_orden = tab(
+            text_icon("fa fa-circle", "ORDEN EN PÁGINA"),
+            "#tab_orden",
+            [
+                "id" => 'orden_web',
+                "class" => 'orden_web',
+            ]
+        );
         $list = [
             $link_equipo,
             $link_afiliados,
             $link_perfiles_permisos,
             $link_categorias,
-            $link_tallas
+            $link_tallas,
+            $link_orden
         ];
         return ul($list, ["class" => "nav tabs"]);
 

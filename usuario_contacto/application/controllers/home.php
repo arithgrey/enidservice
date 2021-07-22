@@ -25,7 +25,7 @@ class Home extends CI_Controller
 
         if ($q !== 0) {
 
-            $this->busqueda($param, $data, $q);
+            $this->busqueda($data);
 
         } else {
 
@@ -39,9 +39,11 @@ class Home extends CI_Controller
     {
 
         $id_usuario = prm_def($param, 'id_usuario');
+
         $prm = $this->input->get();
         $usuario = $this->app->usuario($id_usuario);
-        $data['usuario_busqueda'] = $this->app->add_imgs_usuario($usuario, "id_usuario");
+        $usuario_busqueda = $this->app->add_imgs_usuario($usuario, "id_usuario");
+        $data['usuario_busqueda'] = $usuario_busqueda;
         $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
         $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session'], $data);
@@ -56,8 +58,25 @@ class Home extends CI_Controller
         $data["ventas_semana"] = $ventas_semana;
         $data["total_seguidores"] = $this->app->totales_seguidores($id_usuario);
 
+        $data["recibos_pago"] = [];
+        $data["recibos_sin_pago"] = [];
+        $data["otros_productos_interes"] = [];
+
+        if (es_cliente($usuario_busqueda)) {
+
+            $data["recibos_pago"] = $this->app->recibos_usuario($id_usuario, 1 );
+            $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0 );
+            $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
+
+        }
+
         $this->app->pagina($data, render($data), 1);
 
+    }
+
+    private function articulo_busqueda($id_usuario)
+    {
+        return $this->app->api("tag_arquetipo/index/format/json/",["usuario" => $id_usuario]);
     }
 
 
@@ -68,7 +87,6 @@ class Home extends CI_Controller
         $dias = $fecha->format("w");
         $hoy = now_enid();
         $fecha_inicio = add_date($hoy, -$dias);
-
 
         if ($id_usuario > 0) {
 
@@ -95,9 +113,9 @@ class Home extends CI_Controller
 
     }
 
-    private function busqueda($param, $data, $q)
+    private function busqueda($data)
     {
-        
+
         $this->app->pagina($data, render_busqueda($data), 1);
 
     }
@@ -107,7 +125,7 @@ class Home extends CI_Controller
         $perfil_busqueda = $data['perfil_busqueda'];
         $id_perfil = pr($perfil_busqueda, "idperfil");
 
-        $tipo = ($id_perfil > 1 ) ? $id_perfil : $in_session;
+        $tipo = ($id_perfil > 1) ? $id_perfil : $in_session;
         $tipo_busqueda = ($in_session) ? $tipo : 0;
 
         return $this->app->api("tipo_puntuacion/tipo/format/json/",

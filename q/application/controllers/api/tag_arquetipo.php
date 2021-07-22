@@ -14,7 +14,6 @@ class Tag_arquetipo extends REST_Controller
     function index_GET()
     {
 
-
         $param = $this->get();
         $es_usuario = array_key_exists('usuario', $param);
         if ($es_usuario) {
@@ -97,6 +96,27 @@ class Tag_arquetipo extends REST_Controller
 
                 $response = $this->notifica_registro_articulo_interes($param['recibo']);
             }
+
+        }
+        $this->response($response);
+
+    }
+    function interes_compra_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+
+        if (fx($param, "tag,tipo,usuario,recibo")) {
+
+            $params = [
+                'tag' => $param['tag'],
+                'id_tipo_tag_arquetipo' => $param['tipo'],
+                'id_usuario' => $param['usuario']
+            ];
+
+            $response = $this->tag_arquetipo_model->insert($params);
+
 
         }
         $this->response($response);

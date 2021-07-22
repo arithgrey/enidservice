@@ -29,6 +29,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = tab_seccion($actualizar, 'tab_privacidad');
         $r[] = tab_seccion(privacidad(), 'tab_privacidad_seguridad');
+        $r[] = tab_seccion(orden_productos($usuario), 'tab_orden_productos');
         $r[] = tab_seccion(calma(), 'tab_direccion');
         $r[] = tab_seccion(formas_entrega($usuario), 'tab_entregas');
 
@@ -36,6 +37,31 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function orden_productos($usuario){
+
+
+        $orden_producto = pr($usuario, "orden_producto");
+        $id_empresa = pr($usuario, "idempresa");
+        $lista_orden = list_orden(get_orden(), $orden_producto);
+        $texto = _titulo("Filtro principal", 5);
+        $lista = flex($texto, $lista_orden, _between, "mr-3");
+        $boton_cambio = btn("Modificar");
+
+        $response[]= d(_titulo("Ordena los artículos según tus intereses"));
+        $leyenda = "Con esto cada que consultes los artículos en sección principal, se listarán según tus criterios";
+        $response[]= d(p($leyenda), 'mb-5');
+        $response[] = form_open("",
+            [
+                "class" => "form_orden_productos",
+                "method" => "post"
+            ]
+        );
+        $response[] = hiddens(["name" => "id_empresa", "value" => $id_empresa]);
+        $response[] = flex($lista, $boton_cambio, _between);
+        $response[] = form_close();
+
+        return d($response, 8, 1);
+    }
     function formas_entrega($usuario)
     {
 
@@ -471,6 +497,14 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'tab_privacidad_seguridad'
             ]
         );
+
+        $link_orden_productos = tab(
+            text_icon("fa fa-shield", "Ordenar productos"),
+            '#tab_orden_productos',
+            [
+                "class" => 'tab_orden_productos'
+            ]
+        );
         $link_preferencias = a_enid(
             text_icon('fa fa-gift', 'INTERESES Y PREFERENCIAS'),
             [
@@ -490,6 +524,8 @@ if (!function_exists('invierte_date_time')) {
             $link_privacidad
             ,
             $link_preferencias
+            ,
+            $link_orden_productos
             ,
             $final
 

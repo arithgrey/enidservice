@@ -23,8 +23,8 @@ class Home extends CI_Controller
         if ($id_usuario > 0) {
 
             $data["cliente"] = $this->app->usuario($id_usuario);
-            $data["recibos"] = $this->recibos_usuario($id_usuario);
-            $recibos_pagos = $this->recibos_usuario($id_usuario,1);
+            $data["recibos"] = $this->app->recibos_usuario($id_usuario);
+            $recibos_pagos = $this->app->recibos_usuario($id_usuario,1);
             $recibos_pagos = $this->app->add_imgs_servicio($recibos_pagos);
             $data["recibos_pagos"] = $recibos_pagos;
 
@@ -38,17 +38,7 @@ class Home extends CI_Controller
     }
 
 
-    private function recibos_usuario($id_usuario, $es_pago = 0)
-    {
 
-        return $this->app->api(
-            "recibo/usuario_relacion/format/json/",
-            [
-                "id_usuario" => $id_usuario,
-                "es_pago" => $es_pago
-            ]
-        );
-    }
 
     private function servicios_relacionados($id_usuario)
     {

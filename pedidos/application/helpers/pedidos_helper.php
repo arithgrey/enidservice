@@ -3929,7 +3929,7 @@ if (!function_exists('invierte_date_time')) {
             $form[] = d(_titulo('cliente', 2));
 
 
-            $form[] = input_frm('col-sm-12 mt-5 p-0', 'NOMBRE',
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Nombre',
                 [
                     "name" => "nombre",
                     "value" => $usuario["nombre"],
@@ -3942,7 +3942,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $form[] = input_frm('col-sm-12 mt-5 p-0', 'APELLIDO PATERNO:',
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Apellido paterno:',
                 ([
                     "name" => "apellido_paterno",
                     "class" => "apellido_paterno",
@@ -3954,7 +3954,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $form[] = input_frm('col-sm-12 mt-5 p-0', 'APELLIDO MATERNO:',
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Apellido materno:',
                 ([
                     "name" => "apellido_materno",
                     'class' => 'apellido_materno',
@@ -3965,8 +3965,18 @@ if (!function_exists('invierte_date_time')) {
                 ])
             );
 
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Facebook:',
+                ([
+                    'name' => 'facebook',
+                    'value' => $usuario["facebook"],
+                    "class" => "facebook",
+                    "id" => "facebook_cliente",
+                    "onkeypress" => "minusculas(this);",
+                ])
+            );
 
-            $form[] = input_frm('col-sm-12 mt-5 p-0', 'CORREO ELECTRÓNICO:',
+
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Correo electrónico:',
                 ([
                     'name' => 'email',
                     'value' => $usuario["email"],
@@ -3978,7 +3988,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $form[] = input_frm('col-sm-12 mt-5 p-0', 'TELÉFONO:',
+            $form[] = input_frm('col-sm-12 mt-5 p-0', 'Teléfono:',
                 ([
                     'name' => 'tel_contacto',
                     'value' => $usuario["tel_contacto"],

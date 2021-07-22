@@ -9,15 +9,16 @@ let $texto_calificacion = $('.texto_calificacion');
 let $tipificacion = $('.tipificacion');
 let $enviar_formulario_boton = $('.enviar_formulario_boton');
 let $input_comentario = $('.input_comentario');
-
+let $form_articulo_interes = $('.form_articulo_interes_entrega');
 let $input_id_usuario = $('.input_id_usuario');
 let $input_id_servicio = $('.input_id_servicio');
 let $input_id_usuario_califica = $('.input_id_usuario_califica');
-
+let $input_deseos_cliente = $(".deseos_cliente");
 let $nombre_usuario = $();
 if (parseInt($('.nombre_usuario').length) > 0) {
     $nombre_usuario = $('.nombre_usuario');
 }
+
 
 $(document).ready(function () {
 
@@ -39,8 +40,28 @@ $(document).ready(function () {
         }
     });
 
-});
+    $input_deseos_cliente.click(function () {
 
+        $('#modal_otros').modal("show");
+    });
+
+    $form_articulo_interes.submit(registro_articulo_interes);
+});
+let registro_articulo_interes = function (e) {
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/tag_arquetipo/interes_compra/format/json/";
+    advierte('Procesando', 1);
+    $('#modal_otros').modal("hide");
+    request_enid("POST", data_send, url, response_tag_arquetipo);
+
+    e.preventDefault();
+};
+
+let response_tag_arquetipo = function (data) {
+
+    redirect("");
+};
 let valida_color_calificacion = function () {
 
     let $texto = get_parameter_enid($(this), "texto_calificacion");
