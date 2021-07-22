@@ -518,22 +518,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function list_orden($list_orden)
-    {
-
-        $r[] = '<select class="form-control" name="orden" id="orden">';
-        $a = 1;
-        foreach ($list_orden as $row) {
-            $r[] = '<option value="' . $a . '">';
-            $r[] = $row;
-            $r[] = '</option>';
-            $a++;
-        }
-        $r[] = '</select>';
-
-        return append($r);
-    }
-
 
     function top_articulos($top)
     {

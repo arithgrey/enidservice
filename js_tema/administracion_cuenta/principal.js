@@ -16,6 +16,8 @@ let $auto = $(".auto");
 let $moto = $(".moto");
 let $bicicleta = $(".bicicleta");
 let $pie = $(".pie");
+let $form_orden_productos = $(".form_orden_productos");
+
 
 $(document).ready(() => {
 
@@ -42,6 +44,7 @@ $(document).ready(() => {
     $moto.click(moto);
     $bicicleta.click(bicicleta);
     $pie.click(pie);
+    $form_orden_productos.submit(orden_productos);
 
 
 });
@@ -241,3 +244,17 @@ let response_password = data => {
 
     }
 };
+let orden_productos = function (e) {
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/usuario/orden_producto/format/json/";
+    advierte('Procesando', 1);
+    bloquea_form("form_orden_productos");
+    request_enid("PUT", data_send, url, response_orden_productos);
+
+    e.preventDefault();
+}
+let response_orden_productos = function (data) {
+
+    redirect(path_enid("galeria"));
+}

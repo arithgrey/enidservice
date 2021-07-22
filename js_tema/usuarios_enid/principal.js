@@ -22,7 +22,8 @@ let $tiene_auto = $form.find(".tiene_auto");
 let $tiene_moto = $form.find(".tiene_moto");
 let $tiene_bicicleta = $form.find(".tiene_bicicleta");
 let $reparte_a_pie = $form.find(".reparte_a_pie");
-
+let $id_departamento_busqueda = $(".id_departamento_busqueda");
+let $form_orden_productos = $(".form_orden_productos");
 
 $(document).ready(function () {
 
@@ -31,6 +32,7 @@ $(document).ready(function () {
     set_option("depto", 0);
     set_option("page", 1);
     $("footer").ready(carga_usuarios);
+    $form_orden_productos.submit(orden_productos);
     $nombre_usuario.keypress(function (e) {
 
         let keycode = e.keyCode;
@@ -112,11 +114,12 @@ let get_place_usuarios = () => {
 };
 let carga_usuarios = () => {
 
+
     let $nombre_usuario = $('.nombre_usuario').val();
     let url = "../q/index.php/api/usuario/miembros_activos/format/json/";
     let data_send = {
         "status": get_option("estado_usuario"),
-        "id_departamento": get_option("depto"),
+        "id_departamento": $id_departamento_busqueda.val(),
         "page": get_option("page"),
         "q": $nombre_usuario,
         "v": 1,
@@ -482,4 +485,19 @@ let selector_pie = function () {
         $reparte_a_pie.val(1);
         $pie.addClass('button_enid_eleccion_active');
     }
+}
+
+let orden_productos = function (e) {
+
+    let data_send = $(this).serialize();
+    let url = "../q/index.php/api/empresa/orden_productos/format/json/";
+    advierte('Procesando', 1);
+    bloquea_form("form_orden_productos");
+    request_enid("POST", data_send, url, response_orden_productos);
+
+    e.preventDefault();
+}
+let response_orden_productos = function (data) {
+
+    redirect(path_enid("galeria"));
 }

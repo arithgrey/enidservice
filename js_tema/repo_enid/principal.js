@@ -9,14 +9,12 @@ let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
 let $form_top_ventas = $('.form_top_ventas');
 let $form_sin_ventas = $('.form_sin_ventas');
 
-
 $(document).ready(() => {
 
     set_option("page", 0);
     $("#nuevos_miembros").click(carga_nuevos_miembros);
     $(".mail_marketing").click(carga_metricas_mail_marketing);
     $(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
-
 
     $(".form_busqueda_global_enid").submit(indicadores);
     $("#form_metas").submit(registra_metas);
@@ -30,7 +28,6 @@ $(document).ready(() => {
     $(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
 
     $(".form_tipos_entregas").submit(carga_repo_tipos_entregas);
-
 
     $(".cotizaciones").click(() => {
         set_menu("#btn_menu_tab");
@@ -46,6 +43,7 @@ $(document).ready(() => {
     $form_motivos_cancelaciones.submit(motovos_cancelaciones_busqueda);
     $form_top_ventas.submit(top_ventas);
     $form_sin_ventas.submit(sin_ventas);
+
 
 });
 let carga_nuevos_miembros = function () {
@@ -455,7 +453,7 @@ let top_ventas = function (e) {
 }
 let sin_ventas = function (e) {
 
-    let data_send = {'v':1};
+    let data_send = {'v': 1};
     let url = "../q/index.php/api/servicio/sin_ventas/format/json/";
     request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 

@@ -64,6 +64,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
+            $contenido[] = seccion_facebook($data);
             $texto_puesto = roll($data);
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
             $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
@@ -72,8 +73,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
             $response[] = seguidores($data);
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
+            $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
+            $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-6 col-md-offset-3  bg-light p-5 contenedor_perfil');
-
             $contenedor[] = d(formulario_calificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
             $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
 
@@ -91,6 +93,25 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+
+    function seccion_facebook($data)
+    {
+        $response = [];
+        $usuario_busqueda = $data["usuario_busqueda"];
+        if (es_cliente($usuario_busqueda)) {
+
+            $link_facebook = pr($usuario_busqueda, "facebook");
+            if (strlen($link_facebook) > 11) {
+
+                $icon = icon(_facebook_icon);
+                $config = ["href" => $link_facebook, "target" => "_blac"];
+                $response[] = a_enid($icon, $config);
+            }
+
+        }
+        return append($response);
+
+    }
 
     function seguidores($data)
     {
@@ -178,6 +199,84 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function seccion_estadisticas_compras($data)
+    {
+
+        $response = [];
+        $usuario_busqueda = $data["usuario_busqueda"];
+        if (es_cliente($usuario_busqueda)) {
+
+            $recibos_pago = $data["recibos_pago"];
+            $recibos_sin_pago = $data["recibos_sin_pago"];
+
+            $total_recibos_pago = totales($recibos_pago);
+            $total_recibos_sin_pago = totales($recibos_sin_pago);
+            $total = $total_recibos_pago + $total_recibos_sin_pago;
+            $total_cancelaciones = total_cancelaciones($recibos_sin_pago);
+            $total_proceso = $total_recibos_sin_pago - $total_cancelaciones;
+
+            $response[] = flex("Artículos solicitados", $total, _between, "", "f11 rounded-circle");
+            $response[] = flex("Comprados", $total_recibos_pago, _between, "", "f11");
+            $response[] = flex("En proceso de compra", $total_proceso, _between, "", "f11");
+            $response[] = flex("Cancelaciones", $total_cancelaciones, _between, "", "f11");
+            $response[] = d(deseos($data), _text_(_4p, 'mt-2'));
+            $response[] = add_deseos($data);
+
+
+        }
+
+        return append($response);
+    }
+
+    function seccion_deseos_compra($data)
+    {
+        $usuario_busqueda = $data["usuario_busqueda"];
+        $response = [];
+        if (es_cliente($usuario_busqueda)) {
+
+            $otros_productos_interes = $data["otros_productos_interes"];
+            foreach ($otros_productos_interes as $row) {
+
+                $icon = icon(_eliminar_icon);
+                $tag = flex($icon, $row["tag"], "", "mr-3");
+
+                $response[] = d($tag, "border-bottom border-info mt-1");
+
+            }
+        }
+        return append($response);
+
+    }
+
+    function total_cancelaciones($recibos)
+    {
+
+        $total = 0;
+        foreach ($recibos as $row) {
+
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+            if (es_orden_cancelada($row)) {
+
+                $total = $total + $num_ciclos_contratados;
+            }
+
+        }
+        return $total;
+    }
+
+    function totales($recibos)
+    {
+
+        $total = 0;
+        foreach ($recibos as $row) {
+
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+
+            $total = $total + $num_ciclos_contratados;
+        }
+        return $total;
+    }
+
     function notificacion_encuesta()
     {
 
@@ -232,6 +331,7 @@ if (!function_exists('invierte_date_time')) {
                 )
             );
 
+
         }
 
 
@@ -240,6 +340,58 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens(['class' => 'input_id_usuario_califica', 'value' => $id_usuario_califica]);
         return append($response);
     }
+
+    function add_deseos($data)
+    {
+
+        $usuario_busqueda = $data["usuario_busqueda"];
+        $id_usuario = pr($usuario_busqueda, "id_usuario");
+
+        $form_otros[] = _titulo('¿El cliente tiene interés sobre otros artículos?');
+        $form_otros[] = form_open('', ['class' => 'form_articulo_interes_entrega mt-5']);
+        $form_otros[] = input_frm('', '¿Qué artículo?',
+            [
+                'class' => 'nuevo_articulo_interes',
+                'id' => 'nuevo_articulo_interes',
+                'name' => 'tag',
+                'placeholder' => 'Ej. camisa',
+                'type' => 'text',
+                'required' => true
+            ]
+        );
+        $form_otros[] = hiddens(['name' => 'usuario', 'value' => $id_usuario]);
+        $form_otros[] = hiddens(['name' => 'recibo', 'value' => ""]);
+        $form_otros[] = hiddens(['name' => 'tipo', 'value' => 2]);
+        $form_otros[] = d(btn('Agregar'), 'mt-5');
+        $form_otros[] = form_close();
+
+
+        return gb_modal(d($form_otros, 'form_otros'), "modal_otros");
+
+    }
+
+    function deseos($data)
+    {
+
+        $response = [];
+        $usuario_busqueda = $data["usuario_busqueda"];
+
+        if (es_cliente($usuario_busqueda)) {
+
+            $id_usuario = pr($usuario_busqueda, "id_usuario");
+            $response[] = d(
+                format_link('deseos',
+                    [
+                        'class' => 'deseos_cliente',
+                        'id' => $id_usuario
+                    ], 0
+                )
+            );
+        }
+
+        return append($response);
+    }
+
 
     function formulario_calificacion($data)
     {

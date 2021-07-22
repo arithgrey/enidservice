@@ -3,24 +3,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function get_orden()
-    {
-        return [
-            "ORDENAR POR",
-            "LAS NOVEDADES PRIMERO",
-            "LO MÁS VENDIDO",
-            "LOS MÁS VOTADOS",
-            "LOS MÁS POPULARES ",
-            "PRECIO  [de mayor a menor]",
-            "PRECIO  [de menor a mayor]",
-            "NOMBRE DEL PRODUCTO [A-Z]",
-            "NOMBRE DEL PRODUCTO [Z-A]",
-            "SÓLO  SERVICIO",
-            "SÓLO PRODUCTOS"
-        ];
-
-    }
-
+    
     function render_search($data)
     {
 

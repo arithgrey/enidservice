@@ -33,7 +33,7 @@ class Inicio extends CI_Controller
 
         $data = $this->app->cssJs($data, "planes_servicios");
 
-        $data["list_orden"] = $this->get_orden();
+        $data["list_orden"] = get_orden();
         $data["id_perfil"] = $this->app->getperfiles();
         $this->app->pagina($data, render_ventas($data), 1);
 
@@ -90,22 +90,6 @@ class Inicio extends CI_Controller
 
     }
 
-    private function get_orden()
-    {
-        return [
-            "Las novedades primero",
-            "Lo     más vendido",
-            "Los más votados",
-            "Los más populares ",
-            "Precio [de mayor a menor]",
-            "Precio [de menor a mayor]",
-            "Nombre del producto [A-Z]",
-            "Nombre del producto [Z-A]",
-            "Sólo servicios",
-            "Sólo productos"
-        ];
-
-    }
 
     private function create_ciclo_facturacion($q = [])
     {

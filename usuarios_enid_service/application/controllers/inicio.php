@@ -19,13 +19,14 @@ class Inicio extends CI_Controller
 
         if ($this->app->getperfiles() === 20) {
 
-            header("location:" . path_enid("area_cliente"));
+            header(_text("location:", path_enid("area_cliente")));
         }
 
         $data += [
             "departamentos" => $this->get_departamentos_enid(),
             "perfiles_enid_service" => $this->get_perfiles_enid_service()
         ];
+
 
         $this->app->pagina($this->app->cssJs($data, "usuarios_enid_service"), 'empresas_enid');
     }

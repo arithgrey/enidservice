@@ -31,24 +31,57 @@ class Home extends CI_Controller
             create_url_preview("promo.png")
         );
 
+        $orden = $this->orden($param, $data);
+        $pagina = prm_def($param, "page");
+        $is_mobile = $data["is_mobile"];
+
+
         $data_send = [
             "q" => prm_def($param, "q", ""),
             "vendedor" => prm_def($param, "q3"),
             "id_clasificacion" => prm_def($param, "q2"),
             "extra" => $param,
-            "order" => prm_def($param, "order", 11),
-            "resultados_por_pagina" => 40,
-            "agrega_clasificaciones" => ($this->agent->is_mobile()) ? 0 : 1,
+            "order" => $orden,
+            "resultados_por_pagina" => 50,
+            "agrega_clasificaciones" => $is_mobile,
             "in_session" => 0,
-            "page" => prm_def($param, "page")
+            "page" => $pagina
 
         ];
 
-
         $data["servicios"] = $this->busqueda_producto_por_palabra_clave($data_send);
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
-        $fn = ($son_servicio > 0) ?
-            $this->servicios($data, $data_send) : $this->sin_resultados($param, $data);
+        if ($son_servicio > 0) {
+            $this->servicios($data, $data_send);
+        } else {
+            $this->sin_resultados($param, $data);
+        }
+
+    }
+
+    function orden($param, $data)
+    {
+
+        $orden = prm_def($param, "order");
+        $es_session = $data["in_session"];
+
+        if ($orden < 1) {
+
+            if($es_session){
+
+                $id_usuario = $data["id_usuario"];
+                $usuario = $this->app->usuario($id_usuario);
+                $orden = pr($usuario, "orden_producto");
+
+            }else{
+
+                $empresa = $this->app->empresa(1);
+                $orden = pr($empresa, "orden_producto");
+
+            }
+
+        }
+        return $orden;
 
     }
 
