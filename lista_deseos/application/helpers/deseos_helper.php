@@ -222,15 +222,28 @@ if (!function_exists('invierte_date_time')) {
         $subtotal = 0;
         $total_articulo = 0;
         $inputs = [];
+        $es_premium = 0;
+
+        if (array_key_exists("usuario", $data)) {
+
+            $usuario = $data["usuario"];
+            $es_premium = es_premium($data, $usuario);
+
+        }
+
+        $total_descuento = 0;
 
         foreach ($productos_deseados as $row) {
 
+            $descuento_especial = $row["descuento_especial"];
             $articulos = $row["articulos"];
             $precios = $row["precio"];
             $total_articulo = ($total_articulo + $articulos);
             $total = ($articulos * $precios);
             $subtotal = ($subtotal + $total);
             $id = $row["id"];
+            $total_descuento_articulo = ($descuento_especial * $articulos);
+            $total_descuento = ($total_descuento + $total_descuento_articulo);
 
             $config =
                 [
@@ -243,7 +256,17 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
-        $response[] = _titulo(money($subtotal), 4, 'subtotal_carrito');
+        if ($es_premium) {
+
+            $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
+            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
+            $total_menos_descuento = ($subtotal - $total_descuento);
+            $response[] = d(money($total_menos_descuento), "display-4 black");
+
+
+        } else {
+            $response[] = _titulo(money($subtotal), 4, 'subtotal_carrito');
+        }
         $response[] = form_procesar_carro_compras($data, $inputs, $subtotal);
 
         return append($response);
@@ -411,10 +434,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($seccion_imagen_seleccion_envio, "col-sm-3");
             $x = [];
 
-
             $nombre_servicio = $row["nombre_servicio"];
-
-
             $link = a_enid($nombre_servicio,
                 [
                     "href" => $url_servicio,
@@ -444,7 +464,6 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($x, 6);
             $z = [];
-
             $z[] = h(money($text_precio), 4, 'strong');
             $z[] = d($eliminar, "text-primary text-center");
             $es_servicio = $row["flag_servicio"];

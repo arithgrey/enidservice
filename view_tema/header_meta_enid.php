@@ -19,7 +19,6 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="geo.placename" content="Ciudad de Mexico"/>
 <meta name="ICBM" content="23.634501, -102.552784"/>
 <meta name="revisit-after" content="1 days"/>
-<meta name="p:domain_verify" content="ed4f86be0c9d41f8889e945d5b65a701"/>
 <meta property="og:locale" content="es_ES"/>
 <meta property="og:type" content="article"/>
 <meta property="og:title" content="<?= $desc_web; ?>"/>
@@ -52,6 +51,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="address" content="">
 <meta itemprop="url" content="<?= base_url() ?>">
 <meta itemprop="photo" content="<?= $url_img_post ?>">
+<meta name="p:domain_verify" content="db70882d0b8730259e2a264f997224b3"/>
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
 <script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>

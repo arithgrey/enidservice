@@ -280,7 +280,8 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $params = ["idusuario id_usuario",
+            $params = [
+                "idusuario id_usuario",
                 "nombre",
                 "apellido_paterno",
                 "apellido_materno",
@@ -293,7 +294,9 @@ class usuario extends REST_Controller
                 "sexo",
                 "id_departamento",
                 "facebook",
-                "orden_producto"
+                "orden_producto",
+                "idtipo_comisionista"
+
             ];
             $completo = prm_def($param, 'c');
             $params = ($completo > 0) ? [] : $params;

@@ -14,7 +14,7 @@ class Inicio extends CI_Controller
 
     function index()
     {
-        $data = $this->app->session("Métricas Enid Service");
+        $data = $this->app->session(8,"Métricas Enid Service");
         $num_perfil = $this->app->getperfiles();
         $this->module_redirect($num_perfil);
 

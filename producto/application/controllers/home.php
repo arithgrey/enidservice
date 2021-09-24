@@ -100,7 +100,7 @@ class Home extends CI_Controller
     {
         $id_servicio = prm_def($param, "producto", 0, 1);
         $this->set_option("id_servicio", $id_servicio);
-        $data = $this->app->session();
+        $data = $this->app->session(3);
 
         $data["proceso_compra"] = (!$data["in_session"]) ? prm_def($param, "proceso") : 1;
 

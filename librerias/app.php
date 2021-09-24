@@ -407,7 +407,7 @@ class app extends CI_Controller
         return $this->session->userdata('perfiles')[0]["idperfil"];
     }
 
-    function session($titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
+    function session($pagina = 0, $titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
     {
 
 
@@ -437,7 +437,7 @@ class app extends CI_Controller
             $data["data_status_enid"] = $session["data_status_enid"];
             $data["recien_creado"] = $session["recien_creado"];
             $data["path_img_usuario"] = $session["path_img_usuario"];
-
+            $data["tipo_comisionista"] = $session["tipo_comisionista"];
 
         } else {
 
@@ -458,6 +458,7 @@ class app extends CI_Controller
 
         }
 
+        $this->log_acceso($data, $pagina);
         $data['restricciones'] = $this->config->item('restricciones');
         return $data;
     }
@@ -1187,6 +1188,19 @@ class app extends CI_Controller
                             'tiempo_entrega/principal.js',
                         ],
                 ]
+            ,
+            "clientes" =>
+                [
+                    "js" =>
+                        [
+                            "clientes/principal.js"
+                        ],
+                    "css" =>
+                        [
+
+                            "clientes.css"
+                        ]
+                ]
 
 
             ,
@@ -1361,6 +1375,17 @@ class app extends CI_Controller
                             "preguntas_frecuentes.css",
                             "confirm-alert.css",
                             "summernote.css",
+                        ],
+
+                ],
+            "vinculo" =>
+                [
+                    "js" =>
+                        [
+
+                        ],
+                    "css" =>
+                        [
                         ],
 
                 ],
@@ -1653,6 +1678,29 @@ class app extends CI_Controller
                 "es_pago" => $es_pago
             ]
         );
+    }
+
+    function log_acceso($data, $pagina)
+    {
+
+        if ($pagina > 0){
+            $q = [
+                "in_session" => $data["in_session"],
+                "is_mobile" => $data["is_mobile"],
+                "pagina_id" => $pagina
+            ];
+
+            $api = "acceso/index";
+            return $this->api($api, $q, "json", "POST");
+
+        }
+
+    }
+
+    function tipo_comisionistas()
+    {
+
+        return $this->api("tipo_comisionista/usuarioindex/format/json/");
     }
 
 

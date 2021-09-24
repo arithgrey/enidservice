@@ -171,12 +171,15 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function configurador($s, $data, $num,
+    function configurador($s,
+                          $data,
+                          $num,
                           $num_imagenes,
                           $id_servicio,
                           $id_perfil,
                           $tipo_promocion,
-                          $val_youtube, $valor_youtube,
+                          $val_youtube,
+                          $valor_youtube,
                           $ext_1,
                           $n_descripcion,
                           $es_servicio,
@@ -223,7 +226,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = conf_detalle($s,
+        $r[] = conf_detalle(
+            $s,
             $data,
             $s["comision"],
             $s["status"],
@@ -319,14 +323,13 @@ if (!function_exists('invierte_date_time')) {
 
 
         $icono_registros = icon(_text_("fa-address-book-o", 'mr-5'));
-        $flex_registros = d([d($icono_registros), d("Proveedores asociados","")], "d-flex cursor_pointer");
+        $flex_registros = d([d($icono_registros), d("Proveedores asociados", "")], "d-flex cursor_pointer");
         $registros = d($flex_registros, $base_busqueda);
-
 
 
         $titulo = _titulo('¿Qué proveedores te distribuyen este artículo? ', 2);
 
-        $registros_asociados= flex($busqueda, $registros,"","boton_busqueda","listado_proveedores boton_asociados d-none");
+        $registros_asociados = flex($busqueda, $registros, "", "boton_busqueda", "listado_proveedores boton_asociados d-none");
         $controles = flex($registros_asociados, $proveedores);
         $response[] = flex_md($titulo, $controles, _between);
         $response[] = place("proveedores_existentes");
@@ -443,7 +446,9 @@ if (!function_exists('invierte_date_time')) {
         $status,
         $es_publico,
         $id_servicio,
-        $es_servicio, $id_perfil, $stock,
+        $es_servicio,
+        $id_perfil,
+        $stock,
         $entregas_en_casa,
         $telefono_visible,
         $es_entrega,
@@ -457,13 +462,18 @@ if (!function_exists('invierte_date_time')) {
         $costo_envio,
         $utilidad,
         $ext_4
+
     )
     {
 
+        $descuento_especial = $servicio["descuento_especial"];
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
         $baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
         $t[] = estado_publicacion($status, $id_servicio);
+        $t[] = form_costo_unidad($precio, $comision, $descuento_especial);
         $t[] = form_comision($comision, $id_perfil, $id_servicio);
+        $t[] = form_descuento_especial($descuento_especial, $id_perfil, $id_servicio);
+
         $t[] = es_publico($status, $es_publico, $id_servicio);
         $t[] = form_rango_entrega($es_servicio, $id_perfil, $stock, $data);
 
@@ -479,7 +489,7 @@ if (!function_exists('invierte_date_time')) {
         $t[] = form_costo_envio($es_servicio, $costo_envio);
         $t[] = distribucion($servicio);
         $t[] = tipo_distribucion($servicio);
-        $t[] = form_costo_unidad($precio);
+
         $t[] = utilidad($utilidad);
 
         return tab_seccion($t, "tab_info_precios", $ext_4);
@@ -608,6 +618,9 @@ if (!function_exists('invierte_date_time')) {
         $d[] = form_descripcion($nueva_descripcion);
         $d[] = format_atributos($servicio);
         $d[] = format_colores($es_servicio, $info_colores);
+        $d[] = link_amazon($servicio);
+        $d[] = link_ml($servicio);
+
         return tab_seccion($d, "tab_info_producto", $ext_2);
 
 
@@ -696,6 +709,117 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return append($r);
+    }
+
+    function link_amazon($servicio)
+    {
+
+        $id_servicio = pr($servicio,"id_servicio");
+        $link_amazon = pr($servicio, "link_amazon");
+
+        $icono = d(
+            icon("fa fa fa-pencil"),
+            [
+                "class" => "text_link_amazon",
+                "onclick" => "muestra_cambio_link_amazon('" . $id_servicio . "')"
+            ]
+        );
+
+        $titulo = titulo_bloque("Link venta en amazon");
+        $titulo = btw($titulo, $icono, "display_flex_enid");
+
+        $r[] = form_open("", ["class" => "form_amazon"]);
+        $x[] = input(
+            [
+                "class" => "form-control d-none input_link_amazon link_amazon",
+                "name" => "link_amazon",
+                "required" => "true",
+                "placeholder" => "Link de compra en amazon",
+                "type" => "url",
+                "value" => $link_amazon
+            ]
+        );
+
+        $x[] = hiddens(
+            [
+                "name" => "servicio",
+                "value" => $id_servicio
+            ]
+        );
+        $x[] = btn("GUARDAR",["class"=>"input_link_amazon d-none"]);
+        $x[] = form_close();
+
+        if (strlen($link_amazon) > 10) {
+
+            $r[] = a_enid("Link",
+                [
+                    "href" => $link_amazon,
+                    "class" => "underline",
+                    "target" => "_black"
+                ]
+            );
+        }
+        $x[] = place("response_link_amazon");
+
+        $r[] = d($x, "input_link_amazon");
+        $response[]=  append([$titulo, append($r)]);
+        return d($response,6);
+
+    }
+    function link_ml($servicio)
+    {
+
+        $id_servicio = pr($servicio,"id_servicio");
+        $link_ml = pr($servicio, "link_ml");
+
+        $icono = d(
+            icon("fa fa fa-pencil"),
+            [
+                "class" => "text_link_ml",
+                "onclick" => "muestra_cambio_link_ml('" . $id_servicio . "')"
+            ]
+        );
+
+        $titulo = titulo_bloque("Link venta en Mercado libre");
+        $titulo = btw($titulo, $icono, "display_flex_enid");
+
+        $r[] = form_open("", ["class" => "form_ml"]);
+        $x[] = input(
+            [
+                "class" => "form-control d-none input_link_ml link_ml",
+                "name" => "link_ml",
+                "required" => "true",
+                "placeholder" => "Link de compra en mercado libre",
+                "type" => "url",
+                "value" => $link_ml
+            ]
+        );
+
+        $x[] = hiddens(
+            [
+                "name" => "servicio",
+                "value" => $id_servicio
+            ]
+        );
+        $x[] = btn("GUARDAR",["class"=>"input_link_ml d-none"]);
+        $x[] = form_close();
+
+        if (strlen($link_ml) > 10) {
+
+            $r[] = a_enid("Link",
+                [
+                    "href" => $link_ml,
+                    "class" => "underline",
+                    "target" => "_black"
+                ]
+            );
+        }
+        $x[] = place("response_link_ml");
+
+        $r[] = d($x, "input_link_ml");
+        $response[]=  append([$titulo, append($r)]);
+        return d($response,6);
+
     }
 
     function format_atributos($servicio)
@@ -1952,20 +2076,33 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function form_costo_unidad($precio)
+    function form_costo_unidad($precio, $comision, $descuento_especial)
     {
 
         $precio_unidad = text_icon(
             'fa fa-pencil',
-            _text("Precio por unidad:", money($precio))
+            _text_("Precio por unidad:", money($precio))
         );
-        $r[] = titulo_bloque("precio por unidad");
+
+
+        $precio_comision = ($precio - $comision);
+        $precio_comision_premium = ($precio_comision - $descuento_especial);
+        $texto = _text_("Ganancia menos comisión:", money($precio_comision));
+        $precio_menos_comision = d($texto, "ml-auto");
+        $textos_precios = d($precio_unidad, "strong text-uppercase");
+        $texto_premium = _text_("Utilidad después de precios premium:", money($precio_comision_premium));
+
+        $textos_comisiones = flex($textos_precios, $precio_menos_comision, "flex-column", "", "ml-5");
+
+        $textos_comisiones_premium = flex($textos_comisiones, $texto_premium, "flex-column", "", "ml-5");
+
         $r[] = a_enid(
-            $precio_unidad,
+            $textos_comisiones_premium,
             [
-                "class" => "a_precio_unidad text_costo informacion_precio_unidad"
+                "class" => "text_costo informacion_precio_unidad"
             ]
         );
+
         $r[] = form_open("",
             [
                 "class" => "form_costo input_costo contenedor_costo mt-5"
@@ -1984,7 +2121,6 @@ if (!function_exists('invierte_date_time')) {
             _text_cantidad
         );
 
-
         $r[] = btn("GUARDAR", ["class" => "mt-5"]);
         $r[] = form_close(place("place_registro_costo"));
 
@@ -1998,43 +2134,84 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        if ($perfil == 3) {
 
-            $text[] = text_icon(_text_(_editar_icon, 'editar_comision'),
-                _text_(
-                    d('COMISIÓN QUE PAGAS POR VENTA', _strong),
-                    _titulo(money($comision), 2)
-                )
-            );
+        $text[] = text_icon(_text_(_editar_icon, 'editar_comision'),
+            _text_(
+                d('COMISIÓN QUE PAGAS POR VENTA', _strong),
+                _titulo(money($comision), 2)
+            )
+        );
 
-            $r[] = d($text, 'text_comision');
-            $r[] = form_open("",
-                [
-                    "class" => "form_comision_venta d-none"
-                ]
-            );
+        $r[] = d($text, 'text_comision');
+        $r[] = form_open("",
+            [
+                "class" => "form_comision_venta d-none"
+            ]
+        );
 
-            $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
-            $input = input_frm('', 'COMISIÓN QUE PAGAS POR VENTA',
-                [
-                    "type" => "float",
-                    "name" => "comision",
-                    "step" => "any",
-                    "class" => "comision",
-                    "id" => "comision",
-                    "value" => $comision
+        $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
+        $input = input_frm('', 'COMISIÓN QUE PAGAS POR VENTA',
+            [
+                "type" => "float",
+                "name" => "comision",
+                "step" => "any",
+                "class" => "comision",
+                "id" => "comision",
+                "value" => $comision
 
-                ],
-                _text_cantidad
-            );
+            ],
+            _text_cantidad
+        );
 
 
-            $guardar = btn("GUARDAR");
-            $r[] = flex_md($input, $guardar, _text_(_between_md, 'row'), 8, 4);
+        $guardar = btn("GUARDAR");
+        $r[] = flex_md($input, $guardar, _text_(_between_md, 'row'), 8, 4);
+        $r[] = form_close();
+        $response[] = append($r);
 
-            $response[] = append($r);
-        }
         return d($response, 'col-md-6 mt-5');
+
+
+    }
+
+    function form_descuento_especial($descuento_especial, $perfil, $id_servicio)
+    {
+
+        $response = [];
+        $text[] = text_icon(_text_(_editar_icon, 'editar_descuento_espcial'),
+            _text_(
+                d('Descuento especial para comisionistas premium', _strong),
+                _titulo(money($descuento_especial), 2)
+            )
+        );
+
+        $r[] = d($text, 'text_descuento_especial');
+        $r[] = form_open("",
+            [
+                "class" => "form_descuento_especial d-none"
+            ]
+        );
+
+        $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
+        $input = input_frm('', 'Descuento que ',
+            [
+                "type" => "float",
+                "name" => "descuento_especial",
+                "step" => "any",
+                "class" => "descuento_especial",
+                "id" => "descuento_especial",
+                "value" => $descuento_especial
+
+            ],
+            _text_cantidad
+        );
+
+        $guardar = btn("GUARDAR");
+        $r[] = flex_md($input, $guardar, _text_(_between_md, 'row'), 8, 4);
+        $r[] = form_close();
+        $response[] = append($r);
+
+        return d($response, 'col-md-12 mt-5');
 
 
     }

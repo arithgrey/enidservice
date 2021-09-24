@@ -114,6 +114,65 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function formulario_imagen_cliente($nombre_archivo = 'cliente')
+    {
+        $r[] = form_open_multipart('',
+            [
+                "accept-charset" => "utf-8",
+                "method" => "POST",
+                "id" => "form_img_enid",
+                "class" => "form_img_enid",
+                "enctype" => "multipart/form-data"
+            ]
+        );
+
+        $r[] = input(
+            [
+                "type" => "file",
+                "id" => "imagen_img",
+                "class" => "imagen_img",
+                "name" => "imagen"
+            ]
+        );
+
+        $r[] = hiddens(
+            [
+                "name" => 'q',
+                "value" => $nombre_archivo
+            ]
+        );
+        $r[] = hiddens(
+            [
+                "class" => 'dinamic_img',
+                "id" => 'dinamic_img',
+                "name" => 'dinamic_img'
+            ]
+        );
+
+        $r[] = btn(
+            text_icon("fa fa-check", "AGREGAR IMAGEN")
+            ,
+            [
+                "class" => 'guardar_img_enid display_none bottom_30 display_none',
+                "id" => 'guardar_img'
+            ],
+            1,
+            1
+        );
+
+        $r[] = place(
+            "place_load_img",
+            [
+                "id" => "place_load_img"
+            ]
+        );
+        $r[] = form_close();
+
+        return append($r);
+
+    }
+
+
     function form_img($q, $q2, $q3)
     {
 

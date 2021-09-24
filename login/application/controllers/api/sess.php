@@ -30,7 +30,7 @@ class Sess extends REST_Controller
                     $email = $usuario["email"];
                     $id_empresa = $usuario["idempresa"];
 
-                    $recien_creado  = ($es_barer);
+                    $recien_creado = ($es_barer);
                     $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado);
                     $response["session"] = $session;
                     $response["session_creada"] = $this->app->get_session();
@@ -88,7 +88,8 @@ class Sess extends REST_Controller
                     "data_status_enid" => $status_enid,
                     "logged_in" => 1,
                     "recien_creado" => $recien_creado,
-                    "path_img_usuario" => pr($path_img_usuario, "url_img_usuario")
+                    "path_img_usuario" => pr($path_img_usuario, "url_img_usuario"),
+                    "tipo_comisionista" => $this->app->tipo_comisionistas()
                 ];
 
                 $this->app->set_userdata($response);

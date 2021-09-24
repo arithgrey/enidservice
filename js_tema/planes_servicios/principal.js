@@ -272,11 +272,20 @@ let respuesta_informacion_servicio = (data) => {
 
 
     $(".form_dropshipping").submit(modifica_dropshipping);
+    $(".form_amazon").submit(modifica_amazon);
+    $(".form_ml").submit(modifica_ml);
+
     $('.form_comision_venta').submit(registro_comision);
+    $('.form_descuento_especial').submit(registro_descuento_especial);
     $('.editar_comision').click(function () {
 
         showonehideone('.form_comision_venta', '.text_comision');
     });
+    $('.editar_descuento_espcial').click(function () {
+
+        showonehideone('.form_descuento_especial', '.text_descuento_especial');
+    });
+
     if (get_option("flag_nueva_categoria") == 1) {
         recorre("#seccion_metakeywords_servicio");
     }
@@ -1247,7 +1256,7 @@ let registra_nuevo_servicio = () => {
         "tercer_nivel": get_option("tercer_nivel"),
         "cuarto_nivel": get_option("cuarto_nivel"),
         "quinto_nivel": get_option("quinto_nivel"),
-        "costo" : get_option("costo_compra")
+        "costo": get_option("costo_compra")
     };
     request_enid("POST", data_send, url, response_registro);
 };
@@ -1647,10 +1656,38 @@ let muestra_cambio_link_dropshipping = (id_servicio) => {
     showonehideone(".input_link_dropshipping", ".text_link_dropshipping");
 
 };
+let muestra_cambio_link_amazon = (id_servicio) => {
+
+    $(".input_link_amazon").removeClass('d-none');
+
+};
+let muestra_cambio_link_ml = (id_servicio) => {
+
+    $(".input_link_ml").removeClass('d-none');
+
+};
 let modifica_dropshipping = (e) => {
 
     let data_send = $(".form_dropshipping").serialize();
     let url = "../q/index.php/api/servicio/dropshiping/format/json/";
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    });
+    e.preventDefault();
+};
+let modifica_amazon = (e) => {
+
+    let data_send = $(".form_amazon").serialize();
+    let url = "../q/index.php/api/servicio/amazon/format/json/";
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    });
+    e.preventDefault();
+};
+let modifica_ml = (e) => {
+
+    let data_send = $(".form_ml").serialize();
+    let url = "../q/index.php/api/servicio/ml/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
     });
@@ -1748,6 +1785,17 @@ let registro_comision = function (e) {
     });
 
 };
+let registro_descuento_especial = function (e) {
+
+    e.preventDefault();
+    let data_send = $('.form_descuento_especial').serialize();
+    let url = "../q/index.php/api/servicio/descuento_especial/format/json/";
+    request_enid("PUT", data_send, url, function () {
+        carga_informacion_servicio(4);
+    });
+
+};
+
 let busqueda_proveedor = function (e) {
 
 
@@ -1952,7 +2000,7 @@ let editar_proveedor_servicio = function (e) {
     $form_proveedor.find(".id").val($id_proveedor);
     if (parseFloat($id_proveedor) > 0) {
 
-        let $id_usuario= $(this).attr("usuario");
+        let $id_usuario = $(this).attr("usuario");
         $form_proveedor.find(".id_usuario").val($id_usuario);
 
         set_option("proveedor_servicio", $id_proveedor);
@@ -1984,7 +2032,7 @@ let auto_llenado = function (data) {
         $no_fabricante.addClass("button_enid_eleccion_active");
         $fabricante.removeClass("button_enid_eleccion_active");
 
-    }else {
+    } else {
 
         $es_fabricante.val(1);
         $no_fabricante.removeClass("button_enid_eleccion_active");

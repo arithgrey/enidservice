@@ -75,15 +75,15 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function render_actividad($actividades, $ventas_like, $id_seguidor)
+    function render_actividad($actividades, $ventas_like, $id_seguidor, $obj_session)
     {
         $response[] = d(_titulo("noticias", 4), "mt-5 d-block d-md-none  text-center");
-        $response[] = actividad($actividades, $ventas_like, $id_seguidor);
+        $response[] = actividad($actividades, $ventas_like, $id_seguidor, $obj_session);
         return d($response);
 
     }
 
-    function actividad($actividades, $ventas_like, $id_seguidor)
+    function actividad($actividades, $ventas_like, $id_seguidor, $obj_session)
     {
 
 
@@ -92,6 +92,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($actividades as $row) {
 
             $id_usuario_venta = $row["id_usuario_referencia"];
+            $idtipo_comisionista = $row["idtipo_comisionista"];
             $id_usuario_conexion = $row["id_proyecto_persona_forma_pago"];
             $id_recibo = $row["id_proyecto_persona_forma_pago"];
             $path_imagen_usuario = $row["url_img_usuario"];
@@ -119,7 +120,9 @@ if (!function_exists('invierte_date_time')) {
                 ), ""
             );
 
-            $nombre_vendedor = a_enid($vendedor,
+            $tipo_comisionista = format_tipo_comisionista($obj_session, $idtipo_comisionista);
+            $nombre_categoria = flex($vendedor, $tipo_comisionista, "flex-column", "strong","fp9");
+            $nombre_vendedor = a_enid($nombre_categoria,
                 [
                     "href" => path_enid("usuario_contacto", $id_usuario_venta),
                     "target" => "_black",
@@ -136,7 +139,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $vendedor_entrega = flex($nombre_vendedor, $texto_dias, 'flex-column', "strong", "fp8 text-secondary");
+            $vendedor_entrega = flex($nombre_vendedor, $texto_dias, 'flex-column', "", "fp8 text-secondary");
             $imagen_nombre = flex($imagen_usuario, $vendedor_entrega, "align-items-center ", "mr-5");
 
             $elemento = [];
@@ -160,8 +163,6 @@ if (!function_exists('invierte_date_time')) {
             $total_like = $row["total_like"];
             $es_like = valida_venta_like($ventas_like, $id_recibo, $id_seguidor);
             $extra = ($es_like > 0) ? 'text-info strong' : 'text-secondary';
-
-
 
 
             $attr = [

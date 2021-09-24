@@ -19,11 +19,29 @@ $(document).ready(function () {
     $(".talla").click(agregar_talla);
     $(".descripcion_producto ").click(tab_descripcion);
     $(".descripcion_detallada ").click(tab_descripcion_avanzada);
+
+    $(".click_amazon_link").click(function () {
+        log_operaciones_externas(15);
+    });
+    $(".click_ml_link").click(function () {
+        log_operaciones_externas(16);
+    });
+
+    $(".texto_externo_compra").click(operaciones_compra_externas);
     $num_ciclos.change(articulos_seleccionados);
     $agregar_deseos_sin_antecedente.click(agregar_deseos);
 
 
 });
+
+let operaciones_compra_externas = () => {
+
+    log_operaciones_externas(14);
+    $(".link_externo_compra").removeClass("d-none");
+    $(".texto_externo_compra").addClass("d-none");
+
+}
+
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
@@ -182,4 +200,6 @@ let agregar_deseos = function () {
         let data_send = {"id_servicio": $id_servicio, "articulos": $articulos};
         request_enid("POST", data_send, url, respuesta_add_valoracion);
     }
+}
+let response_log = function (data) {
 }

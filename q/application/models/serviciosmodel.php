@@ -461,9 +461,11 @@ class serviciosmodel extends CI_Model
         $sql_match = ($num_q > 0) ?
             "  AND (
                     MATCH(metakeyword , metakeyword_usuario) 
-                    AGAINST ('" . $q . "*' IN BOOLEAN MODE)
+                    AGAINST ('" . $q . "*')
                     OR 
                     nombre_servicio LIKE '%" . $q . "%'
+                    OR 
+                    descripcion LIKE '%" . $q . "%'
                     OR 
                     precio = '" . $q . "'                     
                 )
@@ -762,7 +764,7 @@ class serviciosmodel extends CI_Model
 
         $response = $this->db->query("DROP TABLE IF exists tmp_producto_$_num");
         if ($flag < 1) {
-            $query_create = _text_("CREATE TABLE tmp_producto_$_num AS 
+            $query_create = _text_("CREATE TABLE tmp_producto_$_num IGNORE AS 
                 SELECT  id_servicio, nombre_servicio, id_usuario, descripcion, marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
                 tercer_nivel , cuarto_nivel , quinto_nivel, es_publico FROM servicio ", $where);

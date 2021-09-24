@@ -30,6 +30,16 @@
 .borde_amarillo:hover {
     background: #005bac;
 }
+.display-5{
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+.display-6{
+    font-size: 2rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
 
 .navbar .searchbox .dropdown-menu {
     width: 270px

@@ -42,6 +42,12 @@ class Archivo extends REST_Controller
                 $response = '../../img_tema/productos/';
                 break;
 
+            case 'cliente':
+
+                $response = '../../img_tema/clientes/';
+                break;
+
+
             default:
 
                 break;
@@ -87,7 +93,6 @@ class Archivo extends REST_Controller
 
             $this->image_lib->initialize($config);
 
-
             $param += [
                 "nombre_archivo" => $nombre_imagen,
                 "extension" => $upload_data["file_ext"],
@@ -119,7 +124,6 @@ class Archivo extends REST_Controller
                 $response = $this->create_imagen_faq($param);
                 break;
 
-
             case 'perfil_usuario':
 
                 $response = $this->crea_imagen_usuario($param);
@@ -129,6 +133,9 @@ class Archivo extends REST_Controller
                 $response = $this->create_imagen_servicio($param);
                 break;
 
+            case 'cliente':
+                $response = $this->crea_imagen_cliente($param);
+                break;
 
             default:
 
@@ -154,6 +161,13 @@ class Archivo extends REST_Controller
     {
 
         return $this->app->api("imagen_servicio/index", $q, "json", "POST");
+
+    }
+
+    function insert_imagen_cliente_empresa($q)
+    {
+
+        return $this->app->api("imagen_cliente_empresa/index", $q, "json", "POST");
     }
 
     function create_imagen_faq($param)
@@ -174,6 +188,32 @@ class Archivo extends REST_Controller
         return $this->app->api("imagen_usuario/index", $q, "json", "POST");
     }
 
+
+    private function crea_imagen_cliente($param)
+    {
+
+        $response = [];
+        if ($param["id_usuario"] > 0) {
+            $existen = "nombre_archivo,id_usuario,id_empresa,imagenBinaria,extension";
+            if (fx($param, $existen)) {
+                $id_imagen = $this->img_model->insert_img($param, 1);
+                if ($id_imagen > 0) {
+
+                    $prm = [
+                        "id_imagen" => $id_imagen,
+                        "id_empresa" => $param["id_empresa"],
+                    ];
+
+                    $response["status_imagen_servicio"] = $this->insert_imagen_cliente_empresa($prm);
+                }
+                return $response;
+            }
+            $response["params_error"] = 1;
+            return $response;
+        }
+        $response["session_exp"] = 1;
+        return $response;
+    }
 
     private function create_imagen_servicio($param)
     {

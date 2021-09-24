@@ -11,6 +11,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_tipo_entrega();
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
+        $response[] = format_accesos();
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
         $response[] = format_entregas();
@@ -54,6 +55,20 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "tab-pane",
                 "id" => "tab_busqueda_productos",
+            ]
+        );
+
+
+    }
+    function format_accesos()
+    {
+        $form = base_busqueda_form('ACCESOS POR PÁGINA',
+            'form_busqueda_accesos_pagina', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_pagina",
             ]
         );
 
@@ -284,6 +299,14 @@ if (!function_exists('invierte_date_time')) {
 
     function menu()
     {
+        $link_accesos_pagina = tab(
+            text_icon("fa-check-circle", "Accesos por página"),
+            '#tab_accesos_pagina',
+            [
+                "class" => "btn_acceso_paginas"
+            ]
+        );
+
         $link_indicadores = tab(
             text_icon('fa fa-globe', "indicadores"),
             '#tab_default_1',
@@ -296,6 +319,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-shopping-cart", "productos solicitados"),
             '#tab_busqueda_productos'
         );
+
 
         $link_tipos_entregas = tab(
 
@@ -384,7 +408,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "id" => "btn_servicios",
                     "href" => path_enid("compras"),
-                    "class" => "text-uppercase black  dispositivos",
+                    "class" => "text-uppercase black dispositivos",
                 ]
             )
             ,
@@ -417,6 +441,8 @@ if (!function_exists('invierte_date_time')) {
             $link_vendedores
             ,
             $link_reparto
+            ,
+            $link_accesos_pagina
 
         ];
 

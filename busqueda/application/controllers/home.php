@@ -11,7 +11,7 @@ class Home extends CI_Controller
 
     function index()
     {
-        $data = $this->app->session();
+        $data = $this->app->session(9);
         $data = $this->app->cssJs($data, "busqueda");
 
         $session = $this->app->session();
@@ -20,8 +20,6 @@ class Home extends CI_Controller
 
         $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
         $data["ventas_semana"] = $ventas_semana;
-
-
         $this->app->pagina($data, render($data), 1);
 
 

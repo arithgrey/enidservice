@@ -145,6 +145,7 @@ class Usuario_conexion extends REST_Controller
             $id_usuario = $param["id_usuario"];
             $response = $this->usuario_conexion_model->seguimiento($id_usuario);
             $response = $this->imagenes_sugerencias($response, "id_usuario");
+
         }
 
         $this->response($response);
@@ -159,10 +160,10 @@ class Usuario_conexion extends REST_Controller
 
             $response = $this->usuario_conexion_model->noticias_seguimiento($id_seguidor);
             $ventas_like = $this->ids_ventas_like($response);
-//            $response = $this->imagenes_sugerencias($response, "id_usuario_referencia", "path_imagen_usuario");
             $response = $this->app->add_imgs_usuario($response, "id_usuario_referencia");
             $response = $this->app->add_imgs_servicio($response);
-            $response = render_actividad($response, $ventas_like, $id_seguidor);
+            $obj_session = $this->app->get_session();
+            $response = render_actividad($response, $ventas_like, $id_seguidor, $obj_session);
         }
 
         $this->response($response);

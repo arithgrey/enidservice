@@ -20,7 +20,7 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        $data = $this->app->session();
+        $data = $this->app->session(10);
 
         $seguimiento = prm_def($param, "seguimiento");
         $es_seguimiento = ($seguimiento > 0);

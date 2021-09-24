@@ -583,10 +583,11 @@ function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
 }
 
 
-function template_table_enid()
+function template_table_enid($extra_class = '')
 {
+    $class = _text_('table text-center', $extra_class);
     return [
-        'table_open' => '<table   class="table text-center" >',
+        'table_open' => '<table   class="'.$class.'" >',
         'thead_open' => '<thead class="black_enid_background2 white">',
         'thead_close' => '</thead>',
         'heading_row_start' => '<tr class="text-center">',
@@ -2023,8 +2024,9 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
     $path = "";
     $base_url = [
         "sobre_vender" => "sobre_ventas",
+        "clientes" => "clientes",
         "top_competencia" => "competencias",
-        "conexiones" => "conexiones",
+        "conexiones" => "conexio    nes",
         "top_competencia_entrega" => "competencias_entregas",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
@@ -2046,6 +2048,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "editar_producto" => "planes_servicios/?action=editar&servicio=",
         "sobre_enid" => "sobre_enidservice",
         "img_logo" => "img_tema/enid_service_logo.jpg",
+        "img_logo_amazon" => "img_tema/amazon_compra.png",
+        "img_logo_ml" => "img_tema/logo_compra_ml.png",
         "pregunta" => "pregunta",
         "pregunta_search" => "pregunta/?tag=",
         "search" => "search",
@@ -2089,6 +2093,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "desarrollo" => "desarrollo",
         "inventario" => "stock",
         "usuario_contacto" => "usuario_contacto/?id_usuario=",
+        "vinculo" => "vinculo/?tag=",
         "go_home" => "../",
         "valoracion_servicio" => "valoracion/?servicio=",
         "cross_selling" => "cross_selling/?id_usuario=",
@@ -3431,6 +3436,24 @@ function strip_tags_content($text, $tags = '', $invert = FALSE)
     return $text;
 }
 
+function format_tipo_comisionista($objet_session, $id_tipo_comisionista)
+{
+
+    $tipo = "";
+    if (is_array($objet_session)) {
+
+        $tipo_comisionista = $objet_session["tipo_comisionista"];
+        $cantidad = intval($id_tipo_comisionista) - 1;
+        $tipo_tipo = $tipo_comisionista[$cantidad]["nombre"];
+        $estrellas = $tipo_comisionista[$cantidad]["estrella"];
+        $text_estrellas = crea_estrellas($estrellas);
+        $tipo = _text_("Nivel", $tipo_tipo, $text_estrellas);
+
+    }
+    return $tipo;
+
+}
+
 function format_nombre($usuario)
 {
 
@@ -3556,6 +3579,17 @@ function es_administrador($data)
 {
 
     return in_array($data['id_perfil'], $data['restricciones']['es_administrador']);
+
+}
+
+function es_premium($data, $usuario)
+{
+
+    $es_vendedor = es_vendedor($data);
+    $es_administrador = es_administrador($data);
+    $administrador_vendedor = ($es_vendedor || $es_administrador);
+    $idtipo_comisionista = pr($usuario, "idtipo_comisionista");
+    return ($administrador_vendedor && $idtipo_comisionista > 1);
 
 }
 
@@ -3850,6 +3884,7 @@ function total_pago_pendiente($productos_orden_compra)
     $costo_envio_cliente = 0;
     $costos_envio_cliente = [];
     $id_usuario_venta = 0;
+    $descuento_aplicado = 0;
     foreach ($productos_orden_compra as $row) {
 
         $pagado = $row["saldo_cubierto"];
@@ -3861,6 +3896,8 @@ function total_pago_pendiente($productos_orden_compra)
         $costo_envio_cliente = $row["costo_envio_cliente"];
         $costos_envio_cliente[] = $costo_envio_cliente;
         $id_usuario_venta = $row["id_usuario_venta"];
+        $descuento_premium =  $row["descuento_premium"];
+        $descuento_aplicado = ($descuento_aplicado + $descuento_premium);
 
     }
 
@@ -3891,7 +3928,8 @@ function total_pago_pendiente($productos_orden_compra)
         "abono_format_text" => $abono_format_text,
         "saldo_pendiente" => $saldo_pendiente,
         "saldo_pendiente_pago_contra_entrega" => ($subtotal - $monto_pagado),
-        "id_usuario_venta" => $id_usuario_venta
+        "id_usuario_venta" => $id_usuario_venta,
+        "descuento_aplicado" => $descuento_aplicado,
 
     ];
 }

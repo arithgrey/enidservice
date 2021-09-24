@@ -843,7 +843,9 @@ if (!function_exists('invierte_date_time')) {
         $boton_cancelar = (!es_cliente($data)) ? $boton_cancelar : '';
         $pago_efectivo = ($puede_repartir) ? $boton_pagado : '';
         $deuda = total_pago_pendiente($productos_orden_compra);
-        $text_pago = _text_($text_entrega, money($deuda["subtotal"]));
+        $descuento_aplicado = $deuda["descuento_aplicado"];
+        $descuento_subtotal = ( $deuda["subtotal"] - $descuento_aplicado );
+        $text_pago = _text_($text_entrega, $descuento_subtotal  );
         $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar);
 
         $es_orden_entregada = es_orden_entregada($data);
@@ -3335,20 +3337,23 @@ if (!function_exists('invierte_date_time')) {
 
         $costo_envio_cliente = 100;
         $deuda = total_pago_pendiente($productos_orden_compra);
+        $descuento_premium = $deuda["descuento_aplicado"];
         $monto_total = $deuda["subtotal"];
         $monto_pagado = $deuda["monto_pagado"];
 
-        $direccion = 'flex-column text-center col-sm-6';
-        $strong = _text_('mb-4', _strong);
 
-        $text[] = flex("envio", money($costo_envio_cliente), $direccion, $strong);
-        $text[] = flex("total", money($monto_total), $direccion, $strong);
+        $ext = ($monto_pagado < 1) ? "text-danger" : "text-primary";
 
-        $ext = ($monto_pagado < 1) ? "sin_pago" : "pago_realizado";
-        $flex = _text_('justify-content-center col-sm-12 flex-column text-center mt-5', $ext, _strong);
+        $subtotal_descuento = 'col-md-12 text-secondary';
 
+        $text[] = d(_text_("Subtotal", money($monto_total)),$subtotal_descuento);
+        $total = ($monto_total - $descuento_premium);
 
-        $text[] = flex("abonado", money($monto_pagado), $flex);
+        $text[] = d(_text_("Descuento", _text("-",money($descuento_premium))),$subtotal_descuento);
+        $text[] = d(_text_("Total", money($total)),"col-md-12 mt-3 black display-5");
+
+        $text[] = d(_text_("Abonado", money($monto_pagado)),_text_($ext, 'col-md-12 text-right'));
+
 
         return bloque($text);
 
