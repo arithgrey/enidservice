@@ -12,6 +12,7 @@ class Home extends CI_Controller
     {
 
         $data = $this->app->session(
+            5,
             "",
             "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
             "",

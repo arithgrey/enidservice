@@ -17,7 +17,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $data = $this->app->session();
+        $data = $this->app->session(11);
         $param = $this->input->get();
         $q = prm_def($param, 'q');
 

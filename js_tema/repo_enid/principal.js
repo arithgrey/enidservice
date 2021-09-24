@@ -24,6 +24,10 @@ $(document).ready(() => {
     $(".form_busqueda_afiliacion").submit(carga_repo_afiliacion);
     $(".form_busqueda_afiliacion_productividad").submit(carga_repo_afiliacion_productividad);
     $(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);
+    $(".btn_acceso_paginas").click(carga_accesos_pagina);
+    $(".form_busqueda_accesos_pagina").submit(carga_accesos_pagina);
+
+
     $(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
     $(".f_actividad_productos_usuarios").submit(carga_repo_usabilidad);
 
@@ -193,6 +197,22 @@ let carga_productos_mas_solicitados = function (e) {
     }
     e.preventDefault();
 };
+let carga_accesos_pagina = function (e){
+
+
+    if (get_parameter(".form_busqueda_accesos_pagina #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_pagina #datetimepicker5").length > 5) {
+
+        let url = "../q/index.php/api/acceso/busqueda_fecha/format/json/";
+        let data_send = $(".form_busqueda_accesos_pagina").serialize();
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_busqueda_productos_solicitados #datetimepicker4", ".form_busqueda_productos_solicitados #datetimepicker5"]);
+
+    }
+    e.preventDefault();
+}
 let resumen_usuarios = function () {
 
     let url = "../q/index.php/api/usuario/usuarios/format/json/";

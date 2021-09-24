@@ -833,6 +833,8 @@ class Recibo_model extends CI_Model
         $id_usuario = $param["id_usuario"];
 
         $usuario_referencia = prm_def($data_usuario, "usuario_referencia");
+        $es_premium = prm_def($data_usuario, "es_premium");
+
         $id_usuario_referencia = ($usuario_referencia == 0) ? $id_usuario : $usuario_referencia;
         $num_ciclos = $param["articulos"];
 
@@ -843,6 +845,8 @@ class Recibo_model extends CI_Model
         $precio = $param["precio"];
         $comision = $param["comision"];
         $nombre_servicio = $param["nombre_servicio"];
+
+        $descuento_premium = ($es_premium > 0) ? $param["descuento_especial"]: 0;
         $flag_servicio = $param["flag_servicio"];
 
         $resumen_compra = $this->crea_resumen_compra($nombre_servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
@@ -893,7 +897,8 @@ class Recibo_model extends CI_Model
             "talla",
             "tipo_entrega",
             "comision_venta",
-            "costo"
+            "costo",
+            "descuento_premium"
         ];
 
         $array_values =
@@ -917,7 +922,8 @@ class Recibo_model extends CI_Model
                 $talla,
                 $tipo_entrega,
                 $comision,
-                $costo
+                $costo,
+                $descuento_premium
             ];
 
 

@@ -105,7 +105,8 @@ if (!function_exists('invierte_date_time')) {
             $str_servicio = text_servicio(
                 $es_servicio,
                 $precio,
-                $id_ciclo_facturacion
+                $id_ciclo_facturacion,
+                $data
             );
 
             if (strlen($str_servicio) > 0) {
@@ -186,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
             )
         );
         $r[] = ($es_mobile > 0) ? "" : $nombre_producto;
-        $r[] = d(h(text_servicio($es_servicio, $precio, $id_ciclo_facturacion), 2, "mt-4 mb-4 strong color_venta"));
+        $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
 
         $r[] = frm_compra(
@@ -281,7 +282,7 @@ if (!function_exists('invierte_date_time')) {
             , _between
         );
         $r[] = $tiempo_entrega;
-        $r[] = agregar_lista_deseos($en_session, $id_servicio);
+        $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
         $response[] = d($r, "contenedor_form");
         return append($response);
 
@@ -357,11 +358,13 @@ if (!function_exists('invierte_date_time')) {
         $z[] = nombre_vendedor($proceso_compra, $usuario, $id_publicador);
         $z[] = get_tipo_articulo($es_nuevo, $es_servicio);
 
+
         if ($tel_visible > 0) {
 
             $phone = format_phone(pr($usuario, "tel_contacto"));
-            $z[] = _titulo($phone, 4, 'mt-4 mb-4');
+            $z[] = _titulo($phone, 4, 'mt-4');
         }
+
 
         $z[] = validador_atributo($marca, 'Marca');
         $z[] = validador_atributo($dimension, 'Dimensiones');
@@ -377,11 +380,15 @@ if (!function_exists('invierte_date_time')) {
 
 
         $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
-        $z[] = tb_colores($color, $es_servicio);
-
-
+        $z[] = d(tb_colores($color, $es_servicio), 12);
         $yt = pr($servicio, "url_vide_youtube");
 
+        $z[] = d(format_link("Nuestros clientes",
+            [
+                "href" => path_enid("clientes"),
+                "target" => "_black"
+            ]
+        ), 'col-md-12 mt-5');
         $r = [];
 
 
@@ -391,8 +398,6 @@ if (!function_exists('invierte_date_time')) {
         $flex = ($i["es_imagen"] > 0) ? "align-items-center" : ["d-lg-flex "];
 
         $contenido_descripcion = append($z);
-
-//        $agregar_lista_deseos = agregar_lista_deseos(0, $in_session, $id_servicio);
         $imagen = $i["img"];
         $r[] = flex(
             $contenido_descripcion,
@@ -527,17 +532,72 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function text_servicio($es_servicio, $precio_unidad, $id_ciclo_facturacion)
+    function texto_tipo_comision($data, $precio_unidad)
+    {
+
+        $servicio = $data["info_servicio"]["servicio"];
+        $descuento_especial = pr($servicio, "descuento_especial");
+        $precio_menos_descuento = ($precio_unidad - $descuento_especial);
+        $usuario = $data["usuario"];
+        $es_premium = es_premium($data, $usuario);
+        $texto_precio_base = ($precio_unidad > 0) ? _text($precio_unidad, "MXN") : "A CONVENIR";
+
+        if ($es_premium) {
+
+            $texto = d(del($texto_precio_base), "f11 text-secondary");
+            $texto_precio = money($precio_menos_descuento);
+            $texto_premium = flex(
+                $texto_precio,
+                "Puedes venderlo a este precio por ser premium",
+                " black w-100 flex-column mt-1",
+                "f16",
+                "text-muted "
+            );
+
+            $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
+
+        } else {
+
+
+            $in_session = $data["in_session"];
+            $texto = d($texto_precio_base, "f16 black");
+
+            if ($in_session && $descuento_especial > 0) {
+
+                $texto_precio = money($precio_menos_descuento);
+                $texto_premium = flex(
+                    del($texto_precio),
+                    "Puedes venderlo a este precio aumentando tus ventas semanales",
+                    "black w-100 flex-column mt-1",
+                    "fp9",
+                    "text-muted fp8"
+                );
+
+                $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
+
+            } else {
+
+                $response = d($texto, "flex-column mb-3 mt-3");
+
+            }
+
+        }
+        return $response;
+    }
+
+    function text_servicio($es_servicio, $precio_unidad, $id_ciclo_facturacion, $data)
     {
 
         if ($es_servicio == 1) {
 
-            $response = ($id_ciclo_facturacion != 9 && $precio_unidad > 0) ? add_text(
-                $precio_unidad, "MXN") : "";
+            $response = ($id_ciclo_facturacion != 9 && $precio_unidad > 0) ?
+                add_text($precio_unidad, "MXNs") : "";
+
 
         } else {
 
-            $response = ($precio_unidad > 0) ? $precio_unidad . "MXN" : "A CONVENIR";
+            $response = texto_tipo_comision($data, $precio_unidad);
+
         }
 
         return $response;
@@ -659,22 +719,22 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function agregar_lista_deseos($in_session, $id_servicio)
+    function agregar_lista_deseos($data, $in_session, $id_servicio)
     {
 
 
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Agrégalo al Carrito",'border'),
+                d("Agrégalo al Carrito", 'border'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos"
                 ]
-            ),'se_agregara');
+            ), 'se_agregara');
 
 
-            $response[] = d(format_link('Se agregó!',[],0),'se_agrego d-none');
+            $response[] = d(format_link('Se agregó!', [], 0), 'se_agrego d-none');
 
 
         } else {
@@ -682,7 +742,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    "Lo deseo "
+                    "Lo deseo"
                     , 'agregar_a_lista border l_deseos'
                 ),
                 [
@@ -691,10 +751,58 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
-        }
 
+
+
+        }
+        $response[] = formas_acionales_compra($data);
         return append($response);
 
+
+    }
+
+    function formas_acionales_compra($data)
+    {
+
+        $servicio = $data["info_servicio"]["servicio"];
+        $link_amazon = pr($servicio, "link_amazon");
+        $link_ml = pr($servicio, "link_ml");
+
+        $len_amazon = ((strlen($link_amazon)) > 0);
+        $len_ml = ((strlen($link_ml)) > 0);
+
+        $response = [];
+        if ($len_amazon || $len_ml) {
+
+            $response[] = d("Más opciones de compra", "text-secondary mt-3 text-right cursor_pointer col-md-12 texto_externo_compra");
+            if ($len_amazon) {
+
+                $path = path_enid("img_logo_amazon");
+                $imagen = a_enid(img(["src" => $path]),
+                    [
+                        "href" => $link_amazon,
+                        "target" => "_black",
+                        "class" => "click_amazon_link"
+                    ]
+                );
+                $response[] = d($imagen, "text-right cursor_pointer col-md-12 link_externo_compra d-none mt-5");
+            }
+
+            if ($len_ml) {
+
+                $path = path_enid("img_logo_ml");
+                $imagen = a_enid(img(["src" => $path]),
+                    [
+                        "href" => $link_ml,
+                        "target" => "_black",
+                        "class" => "click_ml_link"
+                    ]
+                );
+                $response[] = d($imagen, "text-right cursor_pointer col-md-12 link_externo_compra d-none");
+            }
+        }
+
+        return d($response, 13);
 
     }
 

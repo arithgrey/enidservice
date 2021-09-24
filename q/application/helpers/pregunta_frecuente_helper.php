@@ -12,7 +12,8 @@ if (!function_exists('invierte_date_time')) {
             foreach ($data as $row) {
 
                 $id = $row["id"];
-                $titulos = $row["titulo"];
+                $link = path_enid("vinculo", $id);
+                $titulos = a_enid($row["titulo"],$link);
                 $respuesta = $row["respuesta"];
                 $tags = $row["tags"];
                 $contenido = [];

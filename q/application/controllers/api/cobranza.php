@@ -149,13 +149,15 @@ class Cobranza extends REST_Controller
         }
 
         /*Gamifica*/
-        if ($id_orden_compra > 0){
+        if ($id_orden_compra > 0) {
 
             $this->gamifica_ventas_vendedor($param["usuario_referencia"]);
+
         }
         $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
         $this->response($response);
     }
+
     private function gamifica_ventas_vendedor($id_usuario)
     {
         $q = ["id_usuario" => $id_usuario];
@@ -214,6 +216,7 @@ class Cobranza extends REST_Controller
         $data_servicio["data_por_usuario"] = $param;
         $data_servicio["talla"] = prm_def($param, "talla");
         $data_servicio["orden_compra"] = $orden_compra;
+
         $id_orden_compra = $this->genera_orden_compra($data_servicio);
         $data_servicio["id_orden_compra"] = $id_orden_compra;
 
@@ -490,14 +493,39 @@ class Cobranza extends REST_Controller
         return $usuario_referencia;
     }
 
+    function usuario_referencia_es_premium($param)
+    {
+        $es_premium = 0;
+        if (array_key_exists('es_cliente', $param) && $param['es_cliente'] < 1) {
+
+            $usuario = $this->app->usuario($this->id_usuario);
+            $data = $this->app->session();
+            $es_premium = es_premium($data, $usuario);
+        }
+
+        return $es_premium;
+    }
+
+
+    function referencia_usuario($param, $usuario_referencia)
+    {
+
+        $param["es_premium"] = 0;
+        if ($usuario_referencia > 0) {
+
+            $param['usuario_referencia'] = $usuario_referencia;
+            $param["es_premium"] = $this->usuario_referencia_es_premium($param);
+
+        }
+        return $param;
+    }
+
     function primer_orden_POST()
     {
 
         $param = $this->post();
         $usuario_referencia = $this->usuario_referencia($param);
-        if ($usuario_referencia > 0) {
-            $param['usuario_referencia'] = $usuario_referencia;
-        }
+        $param = $this->referencia_usuario($param, $usuario_referencia);
         $usuario = $this->crea_usuario($param);
 
         if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {

@@ -55,6 +55,12 @@ class Img extends REST_Controller
 		$this->response(form_img_usuario());
 
 	}
+    function formulario_imagen_cliente_GET()
+    {
+
+        $this->response(formulario_imagen_cliente());
+
+    }
 
 	function form_img_servicio_producto_GET()
 	{

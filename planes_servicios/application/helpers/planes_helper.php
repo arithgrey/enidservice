@@ -512,7 +512,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = d(list_orden($list_orden), 4);
+        $r[] = d(list_orden($list_orden,2), 4);
 
         return d($r, 'd-md-flex row mt-5 mb-5');
 

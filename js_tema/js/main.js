@@ -64,6 +64,17 @@ $("footer").ready(() => {
 
 
 });
+let log_operaciones_externas = function (pagina_id) {
+
+    let url = "../q/index.php/api/acceso/index/format/json/";
+    let data_send = {
+        "in_session": get_option("in_session"),
+        "is_mobile": get_option("is_mobile"),
+        "pagina_id": pagina_id
+    };
+
+    request_enid("POST", data_send, url, response_log);
+}
 let set_option = (key, value = 0) => {
 
 

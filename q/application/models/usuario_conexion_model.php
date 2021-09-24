@@ -59,6 +59,7 @@ class Usuario_conexion_model extends CI_Model
                     u.apellido_paterno, 
                     u.apellido_materno , 
                     u.idusuario,
+                    u.idtipo_comisionista,
                     DATE(u.fecha_registro) fecha_registro 
                     FROM usuario_perfil up 
                     INNER JOIN
@@ -135,7 +136,7 @@ class Usuario_conexion_model extends CI_Model
     {
 
         $query_get = "SELECT t.* FROM (
-SELECT u.nombre, u.apellido_paterno, u.apellido_materno, p.* FROM usuario_conexion uc 
+SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* FROM usuario_conexion uc 
 INNER JOIN usuario u ON u.idusuario = uc.id_usuario 
 INNER JOIN proyecto_persona_forma_pago p ON uc.id_usuario = p.id_usuario_referencia
 WHERE uc.id_seguidor = $id_seguidor
@@ -144,7 +145,7 @@ AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.sal
 GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 200) t
 UNION 
 SELECT s.* FROM (
-SELECT u.nombre, u.apellido_paterno, u.apellido_materno, p.* 
+SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 
 FROM usuario u 
 INNER JOIN proyecto_persona_forma_pago p 
 ON u.idusuario = p.id_usuario_referencia

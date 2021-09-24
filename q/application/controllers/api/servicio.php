@@ -129,6 +129,20 @@ class Servicio extends REST_Controller
         $this->response($response);
     }
 
+    function descuento_especial_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,descuento_especial")) {
+
+            $id_servicio = $param["id"];
+            $response = $this->serviciosmodel->q_up("descuento_especial", $param["descuento_especial"], $id_servicio);
+
+        }
+        $this->response($response);
+    }
+
+
     function contra_entrega_PUT()
     {
 
@@ -452,11 +466,6 @@ class Servicio extends REST_Controller
     }
 
     function index_POST()
-
-
-
-
-
 
 
     {
@@ -1127,6 +1136,32 @@ class Servicio extends REST_Controller
 
     }
 
+    function amazon_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "servicio,link_amazon")) {
+
+            $response = $this->serviciosmodel->q_up("link_amazon", $param["link_amazon"], $param["servicio"]);
+        }
+        $this->response($response);
+
+    }
+
+    function ml_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "servicio,link_ml")) {
+
+            $response = $this->serviciosmodel->q_up("link_ml", $param["link_ml"], $param["servicio"]);
+        }
+        $this->response($response);
+
+    }
+
     function gamificacion_deseo_PUT()
     {
 
@@ -1646,7 +1681,6 @@ class Servicio extends REST_Controller
                 $metakeyword_usuario = $param["metakeyword_usuario"];
 
 
-
                 $metakeyword_usuario = $meta . "," . $metakeyword_usuario;
 
                 $response["add"] = $this->serviciosmodel->q_up("metakeyword_usuario", $metakeyword_usuario, $param["id_servicio"]);
@@ -1812,7 +1846,7 @@ class Servicio extends REST_Controller
                     $deseado = $row["deseado"];
                     $valoracion = $row["valoracion"];
                     $id_servicio = $row["id_servicio"];
-                    $id_error = _text("imagen_" , $id_servicio);
+                    $id_error = _text("imagen_", $id_servicio);
 
                     $url_img = $row["url_img_servicio"];
 
@@ -1848,7 +1882,7 @@ class Servicio extends REST_Controller
                 $this->table->set_template(template_table_enid());
                 $tb_general = $this->table->generate();
                 $tb_headers = $this->get_headers_tipo_entrega($servicios);
-                $total = _text_($tb_headers , hr() , $tb_general);
+                $total = _text_($tb_headers, hr(), $tb_general);
                 $response = $total;
 
 

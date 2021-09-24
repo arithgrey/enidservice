@@ -14,7 +14,7 @@ class Startsession extends CI_Controller
 
         $param = $this->input->get();
         $this->validate_user_sesssion();
-        $data = $this->app->session();
+        $data = $this->app->session(4);
         $data = $this->app->cssJs($data, "login");
         $data['footer_visible'] = false;
         $this->app->pagina($data, page_sigin(prm_def($param, "action")), 1);

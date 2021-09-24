@@ -87,7 +87,7 @@ class Home extends CI_Controller
     private function crea_orden_compra($param)
     {
 
-        $data = $this->app->session();
+        $data = $this->app->session(7);
         $es_carro_compras = $param["es_carro_compras"];
 
         if ($es_carro_compras) {
@@ -162,7 +162,7 @@ class Home extends CI_Controller
     private function add_domicilio_entrega($param)
     {
 
-        $data = $this->app->session();
+        $data = $this->app->session(7);
         $data = $this->app->cssJs($data, "procesar_domicilio");
         $param += [
 

@@ -14,7 +14,7 @@ class Home extends CI_Controller
     {
 
 
-        $data = $this->app->session();
+        $data = $this->app->session(6);
         $in_session = $data['in_session'];
         if ($in_session) {
 
@@ -34,6 +34,7 @@ class Home extends CI_Controller
 
 
         } else {
+
             $this->explorar_deseos($data);
         }
 
@@ -60,10 +61,9 @@ class Home extends CI_Controller
         $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
         if (es_data($data["productos_deseados"])) {
 
-
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
+            $data["usuario"] = $this->app->usuario($data["id_usuario"]);
             $this->app->pagina($data, productos_deseados($data, $data["productos_deseados"] ), 1);
-
 
         } else {
 
