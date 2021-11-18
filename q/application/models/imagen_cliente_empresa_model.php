@@ -52,4 +52,16 @@ class Imagen_cliente_empresa_model extends CI_Model
 
         return  $this->db->query($query_get)->result_array();
     }
+    function clientes_servicio($id_empresa, $id_servicio)
+    {
+        $query_get =  "SELECT i.nombre_imagen , ice.* FROM  
+							imagen_cliente_empresa  ice 
+							INNER JOIN imagen i 
+							ON  
+							ice.id_imagen =  i.idimagen
+							WHERE ice.id_empresa =  $id_empresa 
+							ORDER BY ice.fecha_registro DESC";
+
+        return  $this->db->query($query_get)->result_array();
+    }
 }

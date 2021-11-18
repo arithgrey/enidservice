@@ -21,14 +21,17 @@ class usuario_deseo_compra extends REST_Controller
 
         if (fx($param, "id_servicio,articulos")) {
 
-            $ip = $this->input->ip_address();
+            $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] :  $this->input->ip_address();
             $articulos = $param["articulos"];
+            $id_recompensa = prm_def($param, "id_recompensa");
 
             $paras = [
                 "id_servicio" => $param["id_servicio"],
                 "ip" => $ip,
-                "articulos" => $articulos
+                "articulos" => $articulos, 
+                "id_recompensa" => $id_recompensa
             ];
+
             $response = $this->usuario_deseo_compra_model->insert($paras, 1);
 
         }
@@ -55,11 +58,38 @@ class usuario_deseo_compra extends REST_Controller
         if (fx($param, "ip")) {
 
             $ip = $param["ip"];
-            $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);
-            $response = $this->app->add_imgs_servicio($lista_deseos);
+            $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);                    
+            $listado = $this->app->add_imgs_servicio($lista_deseos);
+
+            $ids = array_column($listado, "id_recompensa");
+            $recompensa = [];
+            if(es_data($ids)){
+
+                $ids_recompensa = array_unique($ids);
+                $recompensa = $this->recompensa_ids($ids_recompensa);
+
+            }
+
+
+            $response = [
+                "listado" => $listado,
+                "recompensas" => $recompensa
+            ];
+            
+            
+
         }
         $this->response($response);
 
+    }
+    private function recompensa_ids($ids)
+    {   
+
+
+        $q  = ["ids" =>  $ids];
+        return $this->app->api("recompensa/ids/format/json/", $q);
+
+        
     }
 
     function id_PUT()

@@ -8,6 +8,7 @@ window.onpopstate = function (event) {
     }
 };
 
+
 let form_miembro = '#form-miembro-enid-service';
 let form_cotizacion = ".form_cotizacion_enid_service";
 
@@ -98,6 +99,11 @@ let registro = (e) => {
             return $(this).val();
         }).get();
 
+        let $recompensas = $("input[name='recompensas[]']").map(function () {
+            return $(this).val();
+        }).get();
+
+
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
 
@@ -114,7 +120,8 @@ let registro = (e) => {
             "fecha_servicio": $input_fecha_servicio.val(),
             "es_cliente": $input_es_cliente.val(),
             "es_carro_compras": $es_carro_compras.val(),
-            "producto_carro_compra": $producto_carro_compra
+            "producto_carro_compra": $producto_carro_compra,
+            "recompensas": $recompensas,
 
         };
 

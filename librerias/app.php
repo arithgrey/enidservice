@@ -120,6 +120,28 @@ class app extends CI_Controller
         return $this->add_imgs_servicio($productos_ordenes_compra);
 
     }
+    function recompensa_orden_compra($id_orden_compra, $descuento = 1)
+    {
+
+        $q = ['id' => $id_orden_compra];
+        $recompensa  =  $this->api("recompensa_orden_compra/id/format/json/", $q);        
+        $total_descuento = 0;
+        
+        if ($descuento > 0 ) {
+            if (es_data($recompensa)) {
+                
+                $descuentos = array_column($recompensa, "descuento");
+                $total_descuento = array_sum($descuentos);
+
+            }    
+            return $total_descuento;    
+        }
+        return $recompensa;
+        
+        
+
+
+    }
 
     private function get_img($id_servicio, $completo = 0, $limit = 1, $path = 0)
     {
@@ -708,8 +730,24 @@ class app extends CI_Controller
 
                         ],
 
+                ]
+                ,
+            "recompensa" =>
+                [
+                    "css" =>
+                        [
+                            
 
-                ],
+                        ],
+                    "js" =>
+                        [
+                            
+                            "recompensa/principal.js",
+
+                        ],
+
+                ]
+                ,
             "lista_deseos_productos_deseados" => [
                 "css" =>
                     [
@@ -1454,7 +1492,7 @@ class app extends CI_Controller
 
     }
 
-    function add_imgs_servicio($ordenes, $key = "id_servicio")
+    function add_imgs_servicio($ordenes, $key = "id_servicio", $index='url_img_servicio')
     {
 
         $a = 0;
@@ -1472,12 +1510,12 @@ class app extends CI_Controller
                     'id_servicio' => $id_servicio,
                     'path' => $path
                 ];
-                $orden["url_img_servicio"] = $path;
+                $orden[$index] = $path;
 
             } else {
 
                 $path = search_bi_array($path_servicio, 'id_servicio', $id_servicio, 'path');
-                $orden["url_img_servicio"] = $path;
+                $orden[$index] = $path;
             }
 
             $a++;
@@ -1700,7 +1738,7 @@ class app extends CI_Controller
     function tipo_comisionistas()
     {
 
-        return $this->api("tipo_comisionista/usuarioindex/format/json/");
+        return $this->api("tipo_comisionista/index/format/json/");
     }
 
 

@@ -100,10 +100,8 @@ if (!function_exists('invierte_date_time')) {
 
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
-
         $re[] = frm_pedidos($data, $es_venta_comisionada, $usuario_comision, $id_orden_compra);
         $re[] = info_estado_venta($status_ventas, $productos_orden_compra, $data, $es_venta_cancelada, $id_recibo);
-
         $re[] = crea_seccion_solicitud($productos_orden_compra);
         $re[] = crea_seccion_productos($productos_orden_compra);
         $re[] = crea_fecha_entrega($productos_orden_compra);
@@ -162,7 +160,6 @@ if (!function_exists('invierte_date_time')) {
             $data, $productos_orden_compra, $id_recibo, $es_vendedor, $tipos_entregas, $es_venta_cancelada);
 
         $response[] = hiddens(['class' => 'id_usuario_referencia', 'value' => $data['id_usuario_referencia']]);
-
         $response[] = hiddens(['class' => 'es_lista_negra', 'value' => es_lista_negra($data)]);
 
         return d($response, _10auto);
@@ -814,6 +811,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $productos_orden_compra = $data["productos_orden_compra"];
+        $recompensa = $data["recompensa"];        
         $es_orden_cancelada = es_orden_cancelada($data);
         $in_session = $data['in_session'];
         $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
@@ -839,10 +837,11 @@ if (!function_exists('invierte_date_time')) {
             );
         }
 
+
         $puede_repartir = puede_repartir($data);
         $boton_cancelar = (!es_cliente($data)) ? $boton_cancelar : '';
         $pago_efectivo = ($puede_repartir) ? $boton_pagado : '';
-        $deuda = total_pago_pendiente($productos_orden_compra);
+        $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
         $descuento_aplicado = $deuda["descuento_aplicado"];
         $descuento_subtotal = ( $deuda["subtotal"] - $descuento_aplicado );
         $text_pago = _text_($text_entrega, $descuento_subtotal  );
@@ -1236,9 +1235,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function compra($es_venta_cancelada,
-                    $recibo, $domicilio,
-                    $usuario, $id_recibo,
-                    $cupon, $es_vendedor,
+                    $recibo, 
+                    $domicilio,
+                    $usuario, 
+                    $id_recibo,
+                    $cupon, 
+                    $es_vendedor,
                     $id_perfil,
                     $status_ventas,
                     $data
@@ -1265,7 +1267,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = seccion_usuario($usuario, $recibo, $data);
         $r[] = frm_usuario($usuario);
         $r[] = create_seccion_domicilio($domicilio, $data);
-        $r[] = create_seccion_saldos($recibo);
+        $r[] = create_seccion_saldos($recibo, $data);
         $r[] = seccion_cupon($cupon);
 
 
@@ -1367,7 +1369,13 @@ if (!function_exists('invierte_date_time')) {
 
         $id_orden_compra = $data["id_orden_compra"];
         $form_entrega[] = _titulo('¿Ya entregaste este pedido?');
-        $checkout = ticket_pago($recibo, [], 2);
+
+        $productos_orden_compra = $data["productos_orden_compra"];
+        $recompensa = $data["recompensa"];       
+        $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
+
+
+        $checkout = ticket_pago($deuda, [], 2);        
         $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
         $tipo_entrega = pr($recibo, 'tipo_entrega');
         $id_usuario_compra = pr($recibo, 'id_usuario');
@@ -1485,8 +1493,12 @@ if (!function_exists('invierte_date_time')) {
     function imprimir_recibo($response, $recibo, $tipos_entrega, $data)
     {
 
-        $id_orden_compra = $data["orden"];
-        $checkout = ticket_pago($recibo, $tipos_entrega, $format = 1);
+        $id_orden_compra = $data["orden"];        
+        $productos_orden_compra = $data["productos_orden_compra"];
+        $recompensa = $data["recompensa"];       
+        $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
+
+        $checkout = ticket_pago($deuda, $tipos_entrega);
         $es_lista_negra = es_lista_negra($data);
         if (es_data($checkout) && es_data($recibo) && !$es_lista_negra) {
 
@@ -1617,7 +1629,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
-        $titulo = _titulo("TUS ORDENES DE COMPRA");
+        $titulo = _titulo("ORDENES DE COMPRA");
         $busqueda = _titulo("busqueda", 3);
 
         $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
@@ -3332,15 +3344,17 @@ if (!function_exists('invierte_date_time')) {
         }
     }
 
-    function create_seccion_saldos($productos_orden_compra)
+    function create_seccion_saldos($productos_orden_compra, $data)
     {
 
+
+        $recompensa = $data["recompensa"];
         $costo_envio_cliente = 100;
-        $deuda = total_pago_pendiente($productos_orden_compra);
+        $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
         $descuento_premium = $deuda["descuento_aplicado"];
         $monto_total = $deuda["subtotal"];
         $monto_pagado = $deuda["monto_pagado"];
-
+        $monto_pagado_recompensa = ($monto_pagado > 0  )? ($monto_pagado - $recompensa):0;        
 
         $ext = ($monto_pagado < 1) ? "text-danger" : "text-primary";
 
@@ -3348,11 +3362,9 @@ if (!function_exists('invierte_date_time')) {
 
         $text[] = d(_text_("Subtotal", money($monto_total)),$subtotal_descuento);
         $total = ($monto_total - $descuento_premium);
-
-        $text[] = d(_text_("Descuento", _text("-",money($descuento_premium))),$subtotal_descuento);
+        $text[] = d(_text_("Descuento", _text(money($descuento_premium))),$subtotal_descuento);
         $text[] = d(_text_("Total", money($total)),"col-md-12 mt-3 black display-5");
-
-        $text[] = d(_text_("Abonado", money($monto_pagado)),_text_($ext, 'col-md-12 text-right'));
+        $text[] = d(_text_("Abonado", money($monto_pagado_recompensa)),_text_($ext, 'col-md-12 text-right f12'));
 
 
         return bloque($text);

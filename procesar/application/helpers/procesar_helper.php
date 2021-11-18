@@ -83,11 +83,14 @@ if (!function_exists('invierte_date_time')) {
     function formulario_primer_registro($in_session, $param, $es_cliente)
     {
 
+
+
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
 
             $producto_carro_compra = $param["producto_carro_compra"];
+            $recompensas = $param["recompensas"];
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
             $r[] = d(_titulo($titulo), 'mb-5');
             $z[] = input_frm(
@@ -95,7 +98,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "name" => "nombre",
                     "id" => "nombre",
-                    "placeholder" => "Ej. Jonathan",
+                    "placeholder" => "Aquí va tu nombre",
                     "class" => "nombre",
                     "type" => "text",
                     "required" => "true",
@@ -113,7 +116,7 @@ if (!function_exists('invierte_date_time')) {
                     "minlength" => 8,
                     "name" => "telefono",
                     "required" => "true",
-                    "placeholder" => "555296...",
+                    "placeholder" => "Aquí va tu teléfono",
 
                 ], _text_telefono
             );
@@ -133,6 +136,26 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $z[] = append($inputs);
+
+
+
+
+            $inputs = [];
+
+            for ($a = 0; $a < count($recompensas); $a++) {
+
+                $inputs[] = hiddens(
+                    [
+                        "name" => "recompensas[]",
+                        "value" => $recompensas[$a],
+                        "class" => "recompensas"
+                    ]
+                );
+
+            }
+
+            $z[] = append($inputs);
+
             if (!$in_session) {
 
 
@@ -143,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
 
             $config_email = [
                 "name" => "email",
-                "placeholder" => "ej. jonathan@enidservices.com",
+                "placeholder" => "Pon aquí tu email",
                 "class" => "email",
                 "id" => "email",
                 "type" => "email",

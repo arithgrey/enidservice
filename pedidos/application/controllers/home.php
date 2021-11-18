@@ -32,6 +32,7 @@ class Home extends CI_Controller
 
         } else {
 
+
             $this->valida_seguimiento($param, $data);
 
         }
@@ -50,6 +51,7 @@ class Home extends CI_Controller
 
         } else {
 
+
             $this->seguimiento_pedido($param, $data);
 
         }
@@ -58,6 +60,8 @@ class Home extends CI_Controller
 
     private function vista_seguimiento($param, $data)
     {
+
+
         $data = $this->app->cssJs($data, "pedidos_seguimiento");
         $id_orden_compra = $this->input->get("seguimiento");
         $data["id_orden_compra"] = $id_orden_compra;
@@ -75,10 +79,12 @@ class Home extends CI_Controller
         $es_domicilio = prm_def($param, "domicilio");
 
         if ($es_domicilio) {
+            
 
             $this->view_domicilios($data, $param);
 
         } else {
+
 
             $this->load_view_seguimiento($data, $param);
         }
@@ -210,7 +216,9 @@ class Home extends CI_Controller
     private function load_view_seguimiento($data, $param)
     {
 
-        $id_orden_pago = $data["id_orden_compra"];
+        
+        
+        $id_orden_compra = $data["id_orden_compra"];
         $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
         $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
 
@@ -220,16 +228,17 @@ class Home extends CI_Controller
         $notificacion = pr($productos_orden_compra, "notificacion_pago");
         $id_servicio = pr($productos_orden_compra, "id_servicio");
         $id_usuario_compra = pr($productos_orden_compra, "id_usuario");
-
+        $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
 
         $data += [
             "notificacion_pago" => ($notificacion > 0) ? 0 : $notificacion_pago,
-            "orden" => $id_orden_pago,
+            "orden" => $id_orden_compra,
             "status_ventas" => $this->get_estatus_enid_service(),
             "evaluacion" => 1,
             "tipificaciones" => $this->get_tipificaciones($productos_orden_compra),
             "id_servicio" => $id_servicio,
-            "es_administrador" => $es_administrador
+            "es_administrador" => $es_administrador,
+            "recompensa" => $recompensa
         ];
 
         $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
@@ -252,7 +261,7 @@ class Home extends CI_Controller
         $breadcrumbs = [];
         if ($data['in_session']) {
 
-            $path = path_enid('area_cliente_compras', $id_orden_pago);
+            $path = path_enid('area_cliente_compras', $id_orden_compra);
             $this->breadcrumbs->push('Orden de compra', $path);
             $this->breadcrumbs->push('Seguimiento', '/');
             $breadcrumbs[] = $this->breadcrumbs->show();
@@ -458,6 +467,7 @@ class Home extends CI_Controller
 
 
         if ($es_busqueda < 1) {
+
             $this->detalle_pedido($param, $data);
         } else {
             $this->busqueda_pedidos($param, $data);
@@ -504,6 +514,7 @@ class Home extends CI_Controller
     private function detalle_pedido($param, $data)
     {
 
+
         $id_recibo = prm_def($param, "recibo");
         $es_recibo = ($id_recibo > 0);
         if ($es_recibo) {
@@ -544,6 +555,7 @@ class Home extends CI_Controller
 
             } else {
 
+
                 $this->pedido($data);
             }
 
@@ -570,6 +582,7 @@ class Home extends CI_Controller
     private function pedido($data)
     {
 
+        /**/
         $id_orden_compra = $data["orden"];
         $id_perfil = $data["id_perfil"];
         $productos_orden_compra = $data["productos_orden_compra"];
@@ -598,6 +611,7 @@ class Home extends CI_Controller
         $repartidor = $this->app->add_imgs_usuario($repartidor, $key = "id_usuario");
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
+        $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,
@@ -623,7 +637,8 @@ class Home extends CI_Controller
             "usuario_lista_negra" => $usuario_lista_negra,
             "id_usuario_referencia" => $id_usuario_referencia,
             "solicitudes_pasadas_usuario" => $solicitudes,
-            "ids_compras" => $ids_compras
+            "ids_compras" => $ids_compras,
+            "recompensa" => $recompensa
         ];
 
 

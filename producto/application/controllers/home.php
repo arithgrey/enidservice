@@ -73,11 +73,15 @@ class Home extends CI_Controller
 
         $session = $this->app->session();
         $data = $this->app->cssJs($session, "producto_pre");
-        $data["id_servicio"] = $this->input->get("producto");
+        $id_servicio = $this->input->get("producto");
+
+        $data["id_servicio"] = $id_servicio;
         $data["proceso_compra"] = 1;
         $param = $this->input->post();
         $path_servicio = get_img_serv(
-            $this->app->imgs_productos($param["id_servicio"], 1, 1));
+            $this->app->imgs_productos($id_servicio, 1, 1));
+
+
         $data += [
             "id_servicio" => $param["id_servicio"],
             "ciclo_facturacion" => $param["ciclo_facturacion"],
@@ -87,7 +91,7 @@ class Home extends CI_Controller
             "orden_pedido" => 1,
             "carro_compras" => prm_def($param, "carro_compras"),
             "id_carro_compras" => prm_def($param, "id_carro_compras"),
-            "url_imagen_servicio" => $path_servicio
+            "url_imagen_servicio" => $path_servicio,
 
         ];
 
@@ -171,7 +175,7 @@ class Home extends CI_Controller
         $data["id_servicio"] = $id_servicio;
         $data["existencia"] = $this->get_existencia($id_servicio);
         $data["servicio_materiales"] = $this->servicio_materiales($id_servicio);
-
+        $data["recompensa"] = $this->recompensa($id_servicio);
 
         $data = $this->app->cssJs($data, "producto");
         $this->app->pagina($data, render_producto($data), 1);
@@ -288,6 +292,14 @@ class Home extends CI_Controller
         $q["id_servicio"] = $id_servicio;
         $api = "servicio/existencia/format/json/";
         return $this->app->api($api, $q);
+    }
+
+    private function recompensa($id_servicio)
+    {
+
+        $api = "recompensa/visible/format/json/";
+        return $this->app->api($api, ["id_servicio" => $id_servicio]);
+
     }
 
     function view_recibo_registrado()

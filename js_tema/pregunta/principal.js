@@ -62,7 +62,11 @@ let response_carga_productos_sugeridos = (data) => {
 let carga_valoraciones = () => {
 
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
-    let data_send = {"id_servicio": get_option("servicio"), "respuesta_valorada": get_option("respuesta_valorada")};
+    let data_send = {
+        "id_servicio": get_option("servicio"),
+        "respuesta_valorada": get_option("respuesta_valorada"),
+
+    };
     request_enid("GET", data_send, url, response_carga_valoraciones, ".place_registro_afiliado");
 };
 

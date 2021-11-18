@@ -64,12 +64,15 @@ if (!function_exists('invierte_date_time')) {
         $siguiendo = $data["total_siguiendo"];
         $id_usuario = $data["id_usuario"];
         $id_seguidor = $data["id_seguidor"];
+        $ventas = $data["ventas"];
 
-        $texto_seguidores = flex($seguidores, "Seguidores", "font-weight-bold blue_linkeding", "mr-2");
-        $texto_seguiendo = flex($siguiendo, "Siguiendo", "font-weight-bold blue_linkeding", "mr-2");
+        $texto_seguidores = flex($seguidores, "Seguidores", "font-weight-bold blue_linkeding", "mr-2 ");
+        $texto_seguiendo = flex($siguiendo, "Siguiendo", "font-weight-bold blue_linkeding", "mr-2 ml-2");
+        $texto_ventas = flex($ventas, "Ventas", "font-weight-bold blue_linkeding", "mr-2 ml-2");
+
         $line = d("|", "text-secondary");
-        $elementos = [$texto_seguidores, $line, $texto_seguiendo];
-        $resumen = d($elementos, _text_("d-flex ", _between));
+        $elementos = [$texto_seguidores, $line, $texto_seguiendo,$line, $texto_ventas];
+        $resumen = d($elementos, _text_("d-flex", _between));
         return ($id_seguidor == $id_usuario) ? a_enid($resumen, path_enid("conexiones")) : $resumen;
 
 
@@ -133,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
             $imagen_usuario = a_enid(
                 $imagen_usuario,
                 [
-                    "href" => path_enid("usuario_contacto", $id_usuario_conexion),
+                    "href" => path_enid("usuario_contacto", $id_usuario_venta),
                     "target" => "_black",
                     "class" => "black"
                 ]

@@ -23,6 +23,7 @@ class Home extends CI_Controller
             $this->estado_compra($id_orden_compra, $data);
             $resumen = $this->resumen_valoraciones($data["id_usuario"]);
 
+            
             $data += [
                 "action" => prm_def($param, "action", ""),
                 "valoraciones" => prm_def($resumen, "info_valoraciones", []),

@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Valoracion extends REST_Controller
@@ -8,8 +8,8 @@ class Valoracion extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->helper("valoracion");
         $this->load->model("valoracion_model");
+        $this->load->helper("valoracion");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("idusuario");
     }
@@ -150,8 +150,12 @@ class Valoracion extends REST_Controller
     {
 
         $param = $this->get();
+        $session = $this->app->session();
         $valoraciones = $this->valoracion_model->get_valoraciones_articulo($param);
         $usuario = $this->get_usuario_por_servicio($param);
+
+        $resferencias_fotograficas = $this->referencias($param);
+        $es_administrador = es_administrador($session);
 
         $data = [
             "servicio" => $param["id_servicio"],
@@ -159,26 +163,13 @@ class Valoracion extends REST_Controller
             "comentarios" => $this->valoracion_model->get_valoraciones($param),
             "numero_valoraciones" => $valoraciones,
             "respuesta_valorada" => $param["respuesta_valorada"],
+            "referencia_fotografica" => $resferencias_fotograficas,
+            "es_administrador" => $es_administrador,
         ];
 
         $this->response(render_articulo($data));
 
     }
-//
-//    function valoracion_form_GET()
-//    {
-//
-//        $param = $this->get();
-//        $response = false;
-//        if (fx($param, 'id_servicio')) {
-//
-//            $id_servicio = $param["id_servicio"];
-//            $servicio = $this->app->servicio($id_servicio);
-//            $response = get_form_valoracion($servicio, $param, $id_servicio);
-//        }
-//
-//        $this->response($response);
-//    }
 
     function index_POST()
     {
@@ -217,6 +208,17 @@ class Valoracion extends REST_Controller
 
         $sender = get_notificacion_valoracion($this->get_usuario_servicio($id_servicio), $id_servicio);
         $this->app->send_email($sender, 1);
+
+    }
+
+    private function referencias($param)
+    {
+
+        if (fx($param, "id_servicio")) {
+
+            $id_servicio = $param["id_servicio"];
+            return $this->app->api("referencia/servicio/format/json/", ["id_servicio" => $id_servicio]);
+        }
 
     }
 

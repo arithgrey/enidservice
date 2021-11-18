@@ -23,21 +23,24 @@ if (!function_exists('invierte_date_time')) {
     function catalogo_metakeyword($catalogo)
     {
 
-        $response[] = d("ÚLTIMAS EMPLEADAS ");
+
+        $response[] = '';
         foreach ($catalogo as $row) {
 
-            array_push(
-                $response,
-                a_enid(
-                    $row,
-                    [
-                        'class' => 'white tag_catalogo',
-                        'id' => $row,
-                    ]
-                )
+            $etiqueta = a_enid(
+                flex(icon(_text_(_agregar_icon,'white')), $row,"","mr-2"),
+                [
+                    'class' => 'white tag_catalogo',
+                    'id' => $row,
+                ]
             );
+
+            $etiqueta = d($etiqueta, 'col-md-3');
+            array_push($response, $etiqueta);
         }
 
-        return append($response);
+        $r[] = _titulo("Etiquetas recien utilizadas", 3, "mt-5");
+        $r[] = d($response, 13);
+        return append($r);
     }
 }

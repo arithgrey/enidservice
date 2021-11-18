@@ -224,6 +224,8 @@ if (!function_exists('invierte_date_time')) {
         $inputs = [];
         $es_premium = 0;
 
+        
+
         if (array_key_exists("usuario", $data)) {
 
             $usuario = $data["usuario"];
@@ -256,7 +258,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
-        if ($es_premium) {
+        $total_en_descuento = descuento_recompensa($data);
+        if ($es_premium && $total_en_descuento < 1) {
 
             $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
             $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
@@ -265,23 +268,96 @@ if (!function_exists('invierte_date_time')) {
 
 
         } else {
-            $response[] = _titulo(money($subtotal), 4, 'subtotal_carrito');
+
+
+            $response = formato_subtotal($response ,$data, $subtotal);
+            
+
         }
-        $response[] = form_procesar_carro_compras($data, $inputs, $subtotal);
+
+        $inputs_recompensa= valida_envio_descuento($data);
+        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal);
 
         return append($response);
 
     }
-
-    function form_procesar_carro_compras($data, $inputs, $subtotal)
+    function valida_envio_descuento($data)
     {
 
+        $recompensas = $data["recompensas"];
+        $config =
+        [
+            "name" => "recompensas[]",
+            "value" => 0,
+            "type" => "checkbox",
+            "class" => _text("recompensa_", 0)
+        ];
+        $inputs[] = hiddens($config);
 
+        if (es_data($recompensas)) {
+            
+            $descuentos = array_column($recompensas, "descuento");    
+            $total_descuento = array_sum($descuentos);
+            
+            if ($total_descuento > 0) {
+            
+
+                foreach($recompensas as $row){
+
+                    $id_recompensa = $row["id_recompensa"];
+                    $config =
+                    [
+                        "name" => "recompensas[]",
+                        "value" => $id_recompensa,
+                        "type" => "checkbox",
+                        "class" => _text("recompensa_", $id_recompensa)
+                    ];
+
+                    $inputs[] = hiddens($config);
+                }            
+
+            }
+        }
+
+        return $inputs;
+        
+     
+    }
+    function formato_subtotal($response, $data, $subtotal){
+        
+        $total_en_descuento = descuento_recompensa($data);
+        
+        if ($total_en_descuento > 0) {
+
+            $nuevo_total = $subtotal - $total_en_descuento;
+            $response[] =  d(del(money($subtotal), "display-6 red_enid"));
+            $response[] =  d(money($nuevo_total), "display-6 black");
+
+        }else{
+
+            $response[] =  d(money($subtotal), "display-5 black");
+        }
+        return $response;
+
+    }
+    function descuento_recompensa($data){
+
+        $recompensas = $data["recompensas"];
+        $descuentos = array_column($recompensas, "descuento");
+        return array_sum($descuentos);
+
+    }
+
+    function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
+    {
+
+    
         $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
         if (!$es_recien_creado) {
 
             $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
             $response[] = append($inputs);
+            $response[] = append($inputs_recompensa);
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
@@ -293,6 +369,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = '<form class="form_segunda_compra" action="" method="POST">';
             $response[] = append($inputs);
+            $response[] = append($inputs_recompensa);
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = hiddens(["class" => "tipo_entrega", "name" => "tipo_entrega", "value" => 2]);
@@ -404,12 +481,15 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
+        
         foreach ($productos_deseados as $row) {
-
+                    
+            
             $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
             $articulos = $row["articulos"];
+            $id_recompensa = $row["id_recompensa"];
 
 
             $r = [];
@@ -474,7 +554,8 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($r, 'col-md-12 mb-5');
             $response[] = d('', 'col-md-12 mt-5 mb-5 border-bottom');
 
-        }
+
+    }
 
         $texto = p(
             "Deseleccionar todos los artículos",

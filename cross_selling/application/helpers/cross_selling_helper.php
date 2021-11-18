@@ -214,7 +214,7 @@ if (!function_exists('invierte_date_time')) {
         $imagen = img(
             [
                 "src" => $row["url_img_servicio"],
-                "class" => "mx-auto my-auto d-block mh_270 mh_250 mh_sm_310 mh-auto mt-5"
+                "class" => "producto_lista mx-auto my-auto d-block mh_270 mh_250 mh_sm_310 mh-auto mt-5"
             ]
         );
 

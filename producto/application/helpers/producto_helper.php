@@ -55,7 +55,6 @@ if (!function_exists('invierte_date_time')) {
         $id_publicador = $data["id_publicador"];
         $s = $inf_servicio["servicio"];
         $s['in_session'] = $in_session;
-
         $id_servicio = pr($s, "id_servicio");
         $nombre = pr($s, "nombre_servicio");
         $es_servicio = pr($s, "flag_servicio");
@@ -63,21 +62,29 @@ if (!function_exists('invierte_date_time')) {
         $precio = pr($s, "precio");
         $id_ciclo_facturacion = pr($s, "id_ciclo_facturacion");
         $nombre = substr(strtoupper($nombre), 0, 70);
-        $boton_editar = editar(pr($s, "id_usuario"), $data["id_usuario"], $in_session, $id_servicio, $data["id_perfil"]);
+        $id_usuario = pr($s, "id_usuario");
+        $boton_editar = editar(
+            $id_usuario, $data["id_usuario"], $in_session, $id_servicio, $data["id_perfil"]);
+
         $imagenes = img_lateral($imgs, $nombre, $is_mobile);
 
+        $clases = " align-self-center mx-auto col-lg-2 d-none d-lg-block d-xl-block 
+            d-md-block d-xl-none aviso_comision pt-3 pb-3";
+        $clases_imagenes =
+            " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 
+            col-lg-6 col-lg-offset-3 align-self-center";
 
         $r[] = btw(
-
-            d($imagenes["preview"], " align-self-center mx-auto col-lg-2 d-none d-lg-block d-xl-block d-md-block d-xl-none aviso_comision pt-3 pb-3"),
-            d($imagenes["imagenes_contenido"], " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 col-lg-6 col-lg-offset-3 align-self-center"),
+            d($imagenes["preview"], $clases),
+            d($imagenes["imagenes_contenido"], $clases_imagenes),
             "d-flex col-lg-9 mb-5"
         );
 
         $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
-
         $titulo = substr(strtoupper($nombre), 0, 70);
+
         if ($es_servicio < 1):
+
             $nombre_producto = _titulo($titulo);
             $x[] = venta_producto(
                 $data,
@@ -100,60 +107,83 @@ if (!function_exists('invierte_date_time')) {
         else:
 
 
-            $f[] = _titulo($titulo);
-
-            $str_servicio = text_servicio(
-                $es_servicio,
-                $precio,
-                $id_ciclo_facturacion,
-                $data
-            );
-
-            if (strlen($str_servicio) > 0) {
-                $f[] = h($str_servicio, 3, 'card-title pricing-card-title ');
-            }
-
-
-            $f[] = frm_compra(
-                $s,
-                $es_servicio,
-                $existencia,
-                $id_servicio,
-                $q2,
-                $tiempo_entrega,
-                $proceso_compra
-            );
-            $x[] = d($f);
+            $x[] = seccion_form_compra(
+                $titulo, $es_servicio, $precio, $id_ciclo_facturacion, $data, $s, $existencia,
+                $id_servicio, $q2, $tiempo_entrega, $proceso_compra);
 
         endif;
 
-        $r[] = d($x, 3);
+        $r[] = d($x, "col-xs-12 col-sm-12 col-md-3");
         $producto = append($r);
-        $response[] = d(flex("DESCRIPCIÓN", "DETALLES", "flex-row mt-5 mb-5 cursor_pointer", "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer", "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"), "col-lg-10 col-lg-offset-1 mt-5  ");
-        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session), 10, 1);
-
-
-        $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
-
-        $response[] = d(h("TAMBIÉN PODRÍA INTERESARTE", 2, " mt-5"), "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
-        $response[] = d(d("", "place_tambien_podria_interezar bottom_100"), 10, 1);
-
-        $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
-        $response[] = hiddens(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
-        $response[] = hiddens(["name" => "desde_valoracion", "value" => $data["desde_valoracion"], "class" => 'desde_valoracion']);
-
-
-        $xx[] = $boton_editar;
-        $xx[] = append($response);
-        $compra = append($xx);
-
+        $interes_re_venta = 
+        interes_re_venta($s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio);
+        $recompensa = recompensa($data);
         $data_response[] = d($producto, 12);
-        $data_response[] = d($compra, 12);
+        $data_response[] = d($boton_editar, 12);        
+        $data_response[] = d($recompensa, 12);
+        $data_response[] = d($interes_re_venta, 12);
+
         return append($data_response);
 
 
     }
 
+    function seccion_form_compra(
+        $titulo, $es_servicio, $precio, $id_ciclo_facturacion, $data,
+        $s, $existencia, $id_servicio, $q2, $tiempo_entrega, $proceso_compra)
+    {
+
+        $response[] = _titulo($titulo);
+        $str_servicio = text_servicio(
+            $es_servicio,
+            $precio,
+            $id_ciclo_facturacion,
+            $data
+        );
+
+        if (strlen($str_servicio) > 0) {
+            $response[] = h($str_servicio, 3, 'card-title pricing-card-title ');
+        }
+
+        $response[] = frm_compra(
+            $s,
+            $es_servicio,
+            $existencia,
+            $id_servicio,
+            $q2,
+            $tiempo_entrega,
+            $proceso_compra
+        );
+        return $response;
+
+    }
+
+    function interes_re_venta($s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio)
+    {
+        $descripcion = flex(
+            "DESCRIPCIÓN",
+            "DETALLES",
+            "flex-row mt-5 mb-5 cursor_pointer",
+            "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer",
+            "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer");
+
+        $response[] = d($descripcion, "col-lg-10 col-lg-offset-1 mt-5  ");
+        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session), 10, 1);
+        $response[] = d("", "place_valoraciones mt-5 col-sm-10 col-sm-offset-1");
+        $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, " mt-5");
+        $response[] = d($interes, "col-lg-10 col-lg-offset-1 mt-5 text_sugerencias d-none ");
+        $response[] = d(d("", "place_tambien_podria_interezar bottom_100"), 10, 1);
+        $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
+        $response[] = hiddens(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
+        $response[] = hiddens(
+            [
+                "name" => "desde_valoracion",
+                "value" => $data["desde_valoracion"],
+                "class" => 'desde_valoracion'
+            ]
+        );
+        return $response;
+    }
 
     function venta_producto(
         $data,
@@ -173,19 +203,20 @@ if (!function_exists('invierte_date_time')) {
     )
     {
 
-
-        $r[] = d(
-            a_enid(
-                d("",
-                    [
-                        'class' => 'valoracion_persona_principal valoracion_persona'
-                    ]),
-                [
-                    'class' => 'lee_valoraciones ',
-                    'href' => '../search/?q3=' . $id_publicador
-                ]
-            )
+        $place_valoraciones = d("",
+            [
+                'class' => 'valoracion_persona_principal valoracion_persona'
+            ]
         );
+
+        $link_valoraciones = a_enid($place_valoraciones,
+            [
+                'class' => 'lee_valoraciones ',
+                'href' => path_enid('search_q3', $id_publicador)
+            ]
+        );
+
+        $r[] = d($link_valoraciones);
         $r[] = ($es_mobile > 0) ? "" : $nombre_producto;
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
@@ -333,9 +364,8 @@ if (!function_exists('invierte_date_time')) {
     function desc_servicio($servicio, $proceso_compra, $data, $imgs, $in_session)
     {
 
-        $id_servicio = pr($servicio, 'id_servicio');
+
         $usuario = $data["usuario"];
-        $tel_visible = pr($servicio, "telefono_visible");
         $id_publicador = $data["id_publicador"];
         $descripcion = pr($servicio, "descripcion");
         $nombre = pr($servicio, "nombre_servicio");
@@ -358,14 +388,6 @@ if (!function_exists('invierte_date_time')) {
         $z[] = nombre_vendedor($proceso_compra, $usuario, $id_publicador);
         $z[] = get_tipo_articulo($es_nuevo, $es_servicio);
 
-
-        if ($tel_visible > 0) {
-
-            $phone = format_phone(pr($usuario, "tel_contacto"));
-            $z[] = _titulo($phone, 4, 'mt-4');
-        }
-
-
         $z[] = validador_atributo($marca, 'Marca');
         $z[] = validador_atributo($dimension, 'Dimensiones');
         if ($peso > 0) {
@@ -377,18 +399,17 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = valida_materiales($servicio_materiales);
-
-
         $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
         $z[] = d(tb_colores($color, $es_servicio), 12);
         $yt = pr($servicio, "url_vide_youtube");
 
-        $z[] = d(format_link("Nuestros clientes",
-            [
-                "href" => path_enid("clientes"),
-                "target" => "_black"
-            ]
-        ), 'col-md-12 mt-5');
+        $z[] = d(
+            format_link("Nuestros clientes",
+                [
+                    "href" => path_enid("clientes"),
+                    "target" => "_black"
+                ]
+            ), 'col-md-12 mt-5');
         $r = [];
 
 
@@ -517,20 +538,195 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($in_session == 1) {
 
-            $editar_button = d(
-                a_enid(
-                    text_icon('fa fa-pencil', "EDITAR"),
-                    [
-                        "href" => path_enid("editar_producto", $id_servicio),
-                        "class" => "black strong border-bottom p-3"
-                    ]
-                ), ' mr-5 col-lg-12 text-right '
+            $editar = a_enid(
+                text_icon('fa fa-pencil', "EDITAR"),
+                [
+                    "href" => path_enid("editar_producto", $id_servicio),
+                    "class" => "black strong  p-3 col-lg-2"
+                ]
             );
+            $texto_editar = d($editar, 13);
+            $editar_button = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
 
             $response = ($id_usuario == $usuario_servicio) ? $editar_button : "";
         }
         return $response;
     }
+
+    function recompensa($data)
+    {
+        $recompensa = $data["recompensa"];
+        $response[] = "";
+        $id_servicio_recompesa = 0;
+
+        $es_recompensa = es_data($recompensa);
+        
+        if (es_administrador($data)) {
+            $response[] = agregar_oferta($data);
+        }
+
+
+        if ($es_recompensa) {
+
+            $texto = "Compra en conjunto y obten recompensas ";
+            $response[] = d($texto, ["class" => "mt-5 h4 text-uppercase black font-weight-bold"]);
+            foreach ($recompensa as $row) {
+
+                $id_servicio = $row["id_servicio"];
+                $id_servicio_recompesa = $id_servicio;
+                $id_servicio_conjunto = $row["id_servicio_conjunto"];
+                $url_img_servicio = $row["url_img_servicio"];
+                $url_img_servicio_conjunto = $row["url_img_servicio_conjunto"];
+                $id_recompensa = $row["id_recompensa"];
+
+                $texto_total = total_recompensa($row);
+                $imagen_servicio = imagen_recompensa($url_img_servicio, $id_servicio);
+                $imagen_servicio_conjunto =
+                    imagen_recompensa_conjunto($url_img_servicio_conjunto, $id_servicio_conjunto);
+
+                $agregar_a_carrito = anexar_carro_compra($id_recompensa, $data["in_session"]);
+
+                $clase_imagen = 'col-xs-4';
+
+                $promocion = [
+                    d($imagen_servicio, $clase_imagen),
+                    d("+"),
+                    d($imagen_servicio_conjunto, $clase_imagen),
+                    d($texto_total, _text_($clase_imagen)),
+
+                ];
+
+                $seccion_fotos = d($promocion, _text_('d-flex', _between));
+                $clase_flex = _text_(_between, "row");
+                $clase_izquierda = "col-xs-8";
+                $clase_derecha = "col-xs-4 p-0";
+                $seccion_fotos_compra = flex(
+                    $seccion_fotos, $agregar_a_carrito, $clase_flex, $clase_izquierda, $clase_derecha);
+
+                $extra = is_mobile() ? "border-bottom" : "";
+                $response[] = d($seccion_fotos_compra, _text_("row mt-5", $extra));
+
+
+            }
+
+            $ofertas = count($recompensa);
+            if ($ofertas > 1) {
+
+                $path = path_enid("recompensas", $id_servicio_recompesa);
+                $link = a_enid(
+                    "Ver más ofertas",
+                    [
+                        "class" => "text-secondary",
+                        "href" => $path
+                    ],
+                    0);
+
+                $response[] = d(d($link, "col-xs-12 text-right"), "row mt-2");
+            }
+
+        }
+
+
+        return d($response, 'col-xs-12 col-sm-12 col-md-12 col-lg-6');
+
+
+    }
+
+    function agregar_oferta($data){
+
+        $servicio = $data["info_servicio"]["servicio"];
+        $id_servicio = pr($servicio, "id_servicio");
+
+
+        $path = path_enid("recompensas", $id_servicio);
+        $link = format_link(
+                    "+ Agregar oferta",
+                    [                        
+                        "href" => $path,
+                        "class" => "col-md-3"
+                    ]
+                );
+
+
+                return d($link,13);
+                
+
+
+    }
+    function anexar_carro_compra($id_recompensa, $antecedentes)
+    {
+        return d("Agregar al carrito",
+            [
+                "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa white border text-center",
+                "id" => $id_recompensa, 
+                "antecedente_compra" => $antecedentes
+            ]
+
+
+        );
+    }
+
+    function total_recompensa($row)
+    {
+
+        $precio_servicio = $row["precio"];
+        $precio_conjunto = $row["precio_conjunto"];
+        $descuento = $row["descuento"];
+
+        $total = ($precio_conjunto + $precio_servicio) - $descuento;
+        $total_sin_descuento = ($precio_conjunto + $precio_servicio);
+
+        $total_sin_descuento = ($descuento > 0) ? del(money($total_sin_descuento), 'fp9') : '';
+
+
+        $por_cobrar = money($total);
+        $elementos = [
+            d("Total", 'strong'),
+            d($total_sin_descuento),
+            d($por_cobrar, 'red_enid strong'),
+        ];
+
+        return d($elementos, "d-flex flex-column");
+
+    }
+
+    function imagen_recompensa($url_img_servicio, $id_servicio)
+    {
+
+        $link_servicio = path_enid("producto", $id_servicio);
+        return img(
+            [
+                'src' => $url_img_servicio,
+                'class' => 'w-100',
+                'href' => $link_servicio,
+                'onClick'=>'log_operaciones_externas(22)'
+            ]
+        );
+
+
+    }
+
+    function imagen_recompensa_conjunto($url_img_servicio_conjunto, $id_servicio_conjunto)
+    {
+
+        $link_servicio_conjunto = path_enid("producto", $id_servicio_conjunto);
+        $imagen_servicio_conjunto = img(
+            [
+                'src' => $url_img_servicio_conjunto,
+                'class' => 'w-100',
+                'onClick'=>'log_operaciones_externas(22)'
+            ]
+        );
+        return a_enid($imagen_servicio_conjunto,
+            [
+                "href" => $link_servicio_conjunto,
+                "target" => "_blank"
+            ]
+        );
+
+
+    }
+
 
     function texto_tipo_comision($data, $precio_unidad)
     {
@@ -751,7 +947,6 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
-
 
 
         }

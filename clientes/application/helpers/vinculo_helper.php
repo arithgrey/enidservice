@@ -7,9 +7,35 @@ if (!function_exists('invierte_date_time')) {
     function render($data)
     {
 
-        $response[] = foto_link($data);
-        $response[] = add_imgs_cliente_empresa($data);
-        return d($response," bg_black shadow p-5 text-center");
+        $link_facebook = format_link("Facebook",
+            [
+                "href" => path_enid("fotos_clientes_facebook",0,1),
+                "target" => "_black",
+                "class" => "click_facebook_clientes"
+            ],0
+        );
+
+        $link_instagram = format_link("Instagram",
+            [
+                "href" => path_enid("fotos_clientes_instagram",0,1),
+                "target" => "_black",
+                "class" => "click_instagram_clientes"
+            ],0
+        );
+        $link_amazon = format_link("Amazon",
+            [
+                "href" => path_enid("amazon",0,1),
+                "target" => "_black",
+                "class" => "click_amazon_clientes"
+            ],0
+        );
+
+        $class = "justify-content-between align-items-center w-100 d-flex mb-3";
+        $redes_sociales = d([$link_facebook, $link_instagram,$link_amazon], $class);
+        $response[] = d($redes_sociales,10,1);
+        $response[] = d(foto_link($data),10,1);
+        $response[] = d(add_imgs_cliente_empresa($data),10,1);
+        return d($response, " bg_black shadow p-5 text-center");
 
     }
 
@@ -31,7 +57,8 @@ if (!function_exists('invierte_date_time')) {
     function foto_link($data)
     {
         $response = [];
-        if ($data["in_session"] > 0) {
+        $es_administrador = es_administrador($data);
+        if ($data["in_session"] > 0 && $es_administrador                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ) {
 
             $response[] = format_link("Agrega foto", ["class" => "anexar_foto_link"]);
             $response[] = d("", "formulario_fotos_clientes ");

@@ -131,12 +131,18 @@ class usuario_deseo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "servicio") > 0 && $this->id_usuario > 0) {
+        $id = $this->id_usuario;
+        $id_usuario = ($id > 0) ? $id : prm_def($param, "id_usuario");
 
+        if (fx($param, "servicio") > 0 && $id_usuario > 0) {
+
+            $id_recompensa = prm_def($param, "id_recompensa");
             $params = [
-                "id_usuario" => $this->id_usuario,
-                "id_servicio" => $param["servicio"]
+                "id_usuario" => $id_usuario,
+                "id_servicio" => $param["servicio"],
+                "id_recompensa" => $id_recompensa
             ];
+
             $response = $this->usuario_deseo_model->insert($params);
         }
         $this->response($response);
@@ -163,7 +169,6 @@ class usuario_deseo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_servicio")) {
             $response = 0;
-            /*if ($this->get_num_deseo_servicio_usuario($param) == 0) {*/
 
             $params = [
                 "id_usuario" => $param["id_usuario"],
@@ -174,13 +179,6 @@ class usuario_deseo extends REST_Controller
 
             $response = $this->usuario_deseo_model->insert($params);
 
-            /*
-                    } else {
-
-                        $response = $this->usuario_deseo_model->aumenta_deseo($param);
-
-                    }
-                */
         }
         return $response;
     }
@@ -224,7 +222,22 @@ class usuario_deseo extends REST_Controller
             $id_usuario = $param["id_usuario"];
             if (array_key_exists("c", $param) && $param["c"] > 0) {
 
-                $response = $this->usuario_deseo_model->get_usuario_deseo($id_usuario);
+                $listado = $this->usuario_deseo_model->get_usuario_deseo($id_usuario);
+                $ids = array_column($listado, "id_recompensa");
+                $recompensa = [];
+
+                if(es_data($ids)){
+
+                    $ids_recompensa = array_unique($ids);
+                    $recompensa = $this->recompensa_ids($ids_recompensa);
+
+                }
+                
+                $response = [
+                    "listado" => $listado,
+                    "recompensas" => $recompensa
+                ];
+
 
             } else {
 
@@ -235,7 +248,15 @@ class usuario_deseo extends REST_Controller
         }
         $this->response($response);
     }
+    private function recompensa_ids($ids)
+    {   
 
+
+        $q  = ["ids" =>  $ids];
+        return $this->app->api("recompensa/ids/format/json/", $q);
+
+        
+    }
 
     private function agrega_interes_usuario($q)
     {

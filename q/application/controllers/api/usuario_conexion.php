@@ -70,18 +70,21 @@ class Usuario_conexion extends REST_Controller
         $id_seguidor = $this->id_usuario;
         if (fx($param, 'id_usuario')) {
 
+
             $id_usuario = $param["id_usuario"];
             $total = $this->usuario_conexion_model->total_seguidores($id_usuario);
             $total_seguidores = es_data($total) ? pr($total, "total") : 0;
 
             $total = $this->usuario_conexion_model->total_siguiendo($id_usuario);
             $total_siguiendo = es_data($total) ? pr($total, "total") : 0;
+            $usuario = $this->app->usuario($id_usuario);
 
             $response = [
                 "total_seguidores" => $total_seguidores,
                 "total_siguiendo" => $total_siguiendo,
                 "id_usuario" => $id_usuario,
-                "id_seguidor" => $id_seguidor
+                "id_seguidor" => $id_seguidor,
+                "ventas" => pr($usuario, "ha_vendido")
             ];
             $response = seccion_totales_seguimiento($response);
         }
