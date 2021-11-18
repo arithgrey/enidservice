@@ -62,6 +62,7 @@ $(document).on('ready', () => {
     });
 
     $registro_email.keyup(function (e) {
+
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_registro, 1);
     });
@@ -77,6 +78,7 @@ $(document).on('ready', () => {
     });
 
     $input_correo_inicio.keyup(function (e) {
+
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_inicio, 1);
     });
@@ -99,6 +101,7 @@ $(document).on('ready', () => {
 
 
 let inicio_session = () => {
+
 
     let data_send = {secret: get_option('tmp_password'), 'email': get_option('email')};
     let $min_mail = get_parameter('#mail_acceso').length > MIN_CORREO_LENGTH;
@@ -130,7 +133,6 @@ let response_inicio_session = data => {
 };
 
 let valida_form_session = e => {
-
 
     let respuestas = [];
     respuestas.push(es_formato_password($input_password_inicio));

@@ -1,3 +1,6 @@
+.bottom_carro_compra_recompensa{
+    background: #031120!important;
+}
 .filtro_orden_categorias {
 
     background: transparent !important;
@@ -613,6 +616,9 @@ li {
 
 .input_focus::-webkit-input-placeholder {
     color: red !important;
+    font-size: .9em;
+    text-transform: lowercase!important;
+
 }
 
 .input_focus:-moz-placeholder {
@@ -1429,6 +1435,9 @@ h5 {
 
 .f14 {
     font-size: 1.4em;
+}
+.f13 {
+    font-size: 1.3em;
 }
 
 .f12 {

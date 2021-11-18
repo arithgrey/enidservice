@@ -151,11 +151,29 @@ class Cobranza extends REST_Controller
         /*Gamifica*/
         if ($id_orden_compra > 0) {
 
+            /*notifica recompensa(compra de más de un artículo con descuento)*/
+            $this->orden_compra_recompensa($id_orden_compra, $param);
             $this->gamifica_ventas_vendedor($param["usuario_referencia"]);
 
         }
         $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
         $this->response($response);
+    }
+    private function orden_compra_recompensa($id_orden_compra, $param)
+    {
+        
+        $recompensas = $param["recompensas"];
+        $response = "";
+        if (es_data($recompensas)) {
+            
+            $q = ["ids" => $recompensas, "id_orden_compra" => $id_orden_compra];
+            $response = $this->app->api("recompensa_orden_compra/ids", $q, "json", "POST");
+    
+
+        }
+        return $response;
+            
+
     }
 
     private function gamifica_ventas_vendedor($id_usuario)
@@ -539,7 +557,7 @@ class Cobranza extends REST_Controller
                 "usuario_existe" => 0,
             ];
 
-            $response = $this->crea_orden($param);
+            $response = $this->crea_orden($param);            
             $response = $this->has_login($response, $param);
             $response += $param;
 

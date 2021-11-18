@@ -87,6 +87,7 @@ class Home extends CI_Controller
     private function crea_orden_compra($param)
     {
 
+        
         $data = $this->app->session(7);
         $es_carro_compras = $param["es_carro_compras"];
 

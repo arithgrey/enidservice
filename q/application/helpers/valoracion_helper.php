@@ -5,27 +5,33 @@ if (!function_exists('invierte_date_time')) {
     function render_articulo($data)
     {
 
-
         $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
-
-
         $promedio_valoraciones = valorados($num);
+
         $z[] = place("table_orden_1");
         $z[] = criterios($comentarios);
-        $z[] = add_text(
-            comentarios($comentarios, $data["respuesta_valorada"]),
-            d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between")
-        );
+
+        $z[] = comentarios($comentarios, $data["respuesta_valorada"]);
+        $z[] = referencias_fotograficas($data);
+        $z[] = d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between");
 
         $b = d($z);
         if (es_data($comentarios)) {
             $response[] = _titulo("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
         }
         $response[] = dd($promedio_valoraciones, $b);
+        $response[] = modal_referencia($data);
 
         return append($response);
 
+    }
+
+    function modal_referencia($data)
+    {
+
+        $contenido[] = place("galeria_referencias");
+        return gb_modal($contenido, 'modal_referencia_fotografica');
     }
 
     function get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio)
@@ -97,21 +103,21 @@ if (!function_exists('invierte_date_time')) {
             $r = [];
             for ($z = 0; $z < count($criterios); $z++) {
                 $extra_criterios = [
-                    "class" => 'col-lg-6  criterio_busqueda ordenar_valoraciones_button  padding_5 border  text-center',
+                    "class" => 'col-lg-6 criterio_busqueda ordenar_valoraciones_button  padding_5 border  text-center',
                     "id" => $z
                 ];
                 if ($z == 0) {
 
                     $extra_criterios =
                         [
-                            "class" => 'col-lg-6  criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg_black',
+                            "class" => 'col-lg-6 criterio_busqueda white ordenar_valoraciones_button  padding_5 white text-center bg_black',
                             "id" => $z
                         ];
                 }
                 $r[] = d($criterios[$z], $extra_criterios);
             }
 
-            $response[] = _titulo("ordernar por",4, 'mb-2');
+            $response[] = _titulo("ordernar por", 4, 'mb-2');
             $response[] = d(append($r), "d-flex mb-5");
 
         }
@@ -128,7 +134,7 @@ if (!function_exists('invierte_date_time')) {
             $promedio = number_format($valoracion["promedio"], 1, '.', '');
             $parte_promedio = flex(
 
-                _titulo($promedio,0,'mb-4 mt-4')
+                _titulo($promedio, 0, 'mb-4 mt-4')
                 ,
                 crea_estrellas($promedio)
                 ,
@@ -153,6 +159,62 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function referencias_fotograficas($data)
+    {
+
+        $referencia_fotografica = $data["referencia_fotografica"];
+        $id_servicio = $data["servicio"];
+        $r = [];
+        if (es_data($referencia_fotografica)) {
+
+            foreach ($referencia_fotografica as $row) {
+
+                $path_referencia = _text("../img_tema/clientes/", $row["nombre_imagen"]);
+
+                $imagen = img($path_referencia);
+                $id_imagen = $row["idimagen"];
+                $icono_eliminar = icon(_text_(_close_icon, "eliminar_foto_referencia"),
+                    [
+                        "id_servicio" => $id_servicio,
+                        "id_imagen" => $id_imagen
+                    ]
+                );
+                $icono_eliminar = ($data["es_administrador"]) ? $icono_eliminar : "";
+                $formato_imagen = flex($icono_eliminar,$imagen);
+                $r[] = d($formato_imagen, "col-sm-2");
+            }
+        }
+
+        $response[] = d(d("Comentarios con imágenes", 'strong col-sm-12'), 13);
+        $response[] = d(a_enid("Ve fotos recientes",
+            [
+                "href" => path_enid("clientes"),
+                "class" => 'col-sm-12 text-secondary',
+                "target" => "black"
+
+            ]
+        ), 13);
+
+        $referencias_boton = format_link("agregar foto",
+            [
+                "class" => "col-sm-3 pull-right agregar_foto agregar_referencia_fotografica",
+                "id" => $id_servicio
+            ]
+        );
+
+
+        $texto = d($referencias_boton, "referencia_compra col-sm-12 text-right");
+        $es_administrador = $data["es_administrador"];
+        if ($es_administrador){
+            $response[] = d($texto, 13);
+        }
+        $response[] = d($r, "row mt-3 mb-4");
+        return append($response);
+
+
+    }
+
+
     function comentarios($comentarios, $es_valorado)
     {
 
@@ -162,7 +224,11 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id_valoracion"];
             $num_util = $row["num_util"];
             $fecha_registro = $row["fecha_registro"];
-            $r[] = flex(crea_estrellas($row["valoracion"], 1), format_fecha($fecha_registro), 'justify-content-between');
+            $r[] = flex(
+                crea_estrellas($row["valoracion"], 1),
+                format_fecha($fecha_registro),
+                'justify-content-between'
+            );
             $r[] = h($row["titulo"], 4, "strong text-uppercase");
             $r[] = p($row["comentario"], "mb-3");
 

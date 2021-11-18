@@ -5,6 +5,16 @@ $(document).ready(() => {
     $("footer").removeClass("blue_enid3");
     $anexar_foto_link.click(expon_formulario_fotos);
 
+    $(".click_facebook_clientes").click(function () {
+        log_operaciones_externas(18);
+    });
+    $(".click_amazon_clientes").click(function () {
+        log_operaciones_externas(19);
+    });
+    $(".click_instagram_clientes").click(function () {
+        log_operaciones_externas(20);
+    });
+
 });
 
 let expon_formulario_fotos = function () {

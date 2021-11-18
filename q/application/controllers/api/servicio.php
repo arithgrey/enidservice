@@ -207,8 +207,10 @@ class Servicio extends REST_Controller
         $param = $this->delete();
         $response = false;
         if (fx($param, "tag,id_servicio")) {
-            $response = $this->delete_tag_servicio($param);
-            $response = $this->set_metakeyword_usuario($response);
+            $palabras_claves = $this->delete_tag_servicio($param);
+            $response = $this->serviciosmodel->q_up("metakeyword_usuario", $palabras_claves["metakeyword_usuario"], $param["id_servicio"]);
+
+
         }
         $this->response($response);
 
@@ -219,7 +221,7 @@ class Servicio extends REST_Controller
 
         $tag = $param["tag"];
         $id_servicio = $param["id_servicio"];
-        $palabras_clave = $this->serviciosmodel->q_get(["metakeyword"], $id_servicio)[0]["metakeyword"];
+        $palabras_clave = $this->serviciosmodel->q_get(["metakeyword_usuario"], $id_servicio)[0]["metakeyword_usuario"];
         $tag_arreglo = explode(",", $palabras_clave);
         $posicion = $this->busqueda_meta_key_word($tag_arreglo, $tag);
         unset($tag_arreglo[$posicion]);
@@ -529,6 +531,7 @@ class Servicio extends REST_Controller
             $terminos = $terminos_usuario[0];
             $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0) ? 1 : 0;
             $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0) ? 1 : 0;
+            $param["comision"] = comision_por_precio($param["precio"]);
 
             $data_complete["servicio"] = $this->create_servicio($param, $empresa);
 
@@ -642,7 +645,7 @@ class Servicio extends REST_Controller
             "entregas_en_casa" => $entregas_en_casa,
             "telefono_visible" => $telefonos_visibles,
             "flag_envio_gratis" => pr($empresa, 'envios_gratis'),
-            "comision" => pr($empresa, 'comision_venta')
+            "comision" => $param["comision"]
         ];
 
 
@@ -894,15 +897,6 @@ class Servicio extends REST_Controller
             } else {
 
                 $response = $servicios;
-//
-//            $data_complete["num_servicios"] = 0;
-//            $data_complete["info_servicios"] = btw(
-//                icon("fa fa-search")
-//                ,
-//                _text_("Tu búsqueda de ", $param["q"], " (0 Productos) "),
-//                ""
-//            );
-//            $this->response($data_complete);
             }
 
 
@@ -911,7 +905,7 @@ class Servicio extends REST_Controller
 
 
     }
-
+    
     function relacionados_GET()
     {
 
@@ -983,12 +977,13 @@ class Servicio extends REST_Controller
         }
 
 
-        $lista_productos = $this->agrega_vista_servicios($servicios["servicios"]);
-
-        return get_base_empresa($this->app->paginacion($config), $busqueda, $num_servicios, $lista_productos);
+        $lista_productos = $this->agrega_vista_servicios($servicios["servicios"], 0, [], 1);
+        $config_paginacion = $this->app->paginacion($config);
+        return get_base_empresa($config_paginacion, $busqueda, $num_servicios, $lista_productos);
 
 
     }
+
 
     private function get_view_relacionados($servicios, $param, $id_servicios_menos)
     {
@@ -1016,7 +1011,7 @@ class Servicio extends REST_Controller
 
     }
 
-    private function agrega_vista_servicios($data, $agregar = 0, $ids_menos = [])
+    private function agrega_vista_servicios($data, $agregar = 0, $ids_menos = [], $es_recompensa = 0)
     {
         $response = [];
         $in_session = $this->get_option("in_session");
@@ -1034,7 +1029,7 @@ class Servicio extends REST_Controller
                 $row["id_perfil"] = $id_perfil;
                 $row["id_usuario_actual"] = $id_usuario;
                 $row["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
-                $response[] = create_vista($row, $agregar);
+                $response[] = create_vista($row, $agregar, $es_recompensa);
             }
 
 
@@ -2107,21 +2102,10 @@ class Servicio extends REST_Controller
         $this->serviciosmodel->set_compra_stock($stock, $id_servicio);
         $response = $this->gestion_stock($id_servicio, $stock);
         $this->anexa_costos_operativos($response, $param);
-        $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
-        if ($id_usuario_referencia > 0) {
-            $this->gamifica_ventas_vendedor($id_usuario_referencia);
-        }
-
         $this->response($response);
 
     }
 
-    function gamifica_ventas_vendedor($id_usuario)
-    {
-        $q = ["id_usuario" => $id_usuario];
-        return $this->app->api("usuario/gamifica_ventas", $q, "json", "PUT");
-
-    }
 
     function anexa_costos_operativos($data_stock, $param)
     {

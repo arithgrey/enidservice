@@ -2153,21 +2153,22 @@ if (!function_exists('invierte_date_time')) {
 
         /*usuarios activos*/
         $usuarios_activos = [];
-        $base = 'col-md-2 border text-center';
+        $base = 'col-md-2 border text-center border-dark';
 
         $total_vendedores = ($a - 1);
         $usuarios_activos[] = d(_d('NUEVOS', $usuarios), $base);
         $usuarios_activos[] = d(_d('VENDEDORES', $total_vendedores), $base);
         $total_vendedores_activos = count(array_unique($ids_usuarios_actividad));
-        $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), 'col-md-2 border text-center bg-primary white');
+        $clases_titulos= 'col-md-2 border border-dark text-center bg-primary white';
+        $usuarios_activos[] = d(_d('ACTIVOS', $total_vendedores_activos), $clases_titulos);
 
         $total_vendedores_activos_ventas = count(array_unique($ids_usuarios_actividad_venta));
-        $usuarios_activos[] = d(_d('LOGRARON VENTAS', $total_vendedores_activos_ventas), 'bg-light col-md-2 border text-center');
+        $usuarios_activos[] = d(_d('LOGRARON VENTAS', $total_vendedores_activos_ventas), 'bg-light border-dark col-md-2 border text-center');
         $sin_ventas = ($total_vendedores_activos - $total_vendedores_activos_ventas);
-        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'col-md-2 border text-center');
+        $usuarios_activos[] = d(_d('ACTIVOS SIN VENTAS', $sin_ventas), 'border-dark col-md-2 border text-center');
 
         $bajas = ($total_vendedores - $total_vendedores_activos);
-        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'col-md-2 border text-center bg-danger white');
+        $usuarios_activos[] = d(_d('SIN ACTIVIDAD', $bajas), 'border-dark col-md-2 border text-center bg-danger white');
         $totales_usuarios_activos = d($usuarios_activos, 'row');
 
         $data[] = d($totales_usuarios_activos, 'mt-5 col-md-12');

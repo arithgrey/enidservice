@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d("Tu usuario fué registrado, accede ahora!", $clases);
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5");
-        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong']);
+        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong mt-1']);
         $x[] = a_enid(
             "¿OLVIDASTE TU CONTRASEÑA?",
             [
@@ -341,14 +341,13 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $form[] = input_frm(
-            " mt-4", "CORREO ELECTRÓNICO",
+            " mt-4 mb-2", "CORREO ELECTRÓNICO",
             [
-
                 "type" => "email",
                 "name" => 'mail',
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
-                "placeholder" => "ej. jonathan@gmail.com",
+                "placeholder" => "Aquí va tu email",
             ], _text_correo
         );
 

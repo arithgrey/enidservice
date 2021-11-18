@@ -184,7 +184,7 @@ let respuesta_informacion_servicio = (data) => {
     render_enid(".place_servicios", data);
     verifica_formato_default_inputs();
     $(".cancelar_carga_imagen").click(cancelar_carga_imagen);
-    $(".menu_meta_key_words").click(carga_sugerencias_meta_key_words);
+    carga_sugerencias_meta_key_words();
     $(".agregar_img_servicio").click(carga_form_img);
     $(".text_costo").click(muestra_input_costo);
     $(".text_ciclo_facturacion").click(muestra_select_ciclo_facturacion);

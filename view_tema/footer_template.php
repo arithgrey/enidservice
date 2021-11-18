@@ -1,4 +1,9 @@
 <?= gb_modal() ?>
+<h1 class="d-none">
+    mancuernas walmart, mancuernas baratas, set mancuernas, mancuernas aurrera
+    mancuernas soriana, mancuernas gym, mancuernas ajustables, mancuernas chedraui,
+    CDMX
+</h1>
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
         <?php if (file_exists($link)): ?>

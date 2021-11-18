@@ -30,16 +30,18 @@ if (!function_exists('invierte_date_time')) {
         foreach ($tags as $row) {
 
             $response[] = d(
-                text_icon('fa fa-times', $row),
+                text_icon('fa fa-times white', $row),
                 [
-                    "class" => 'tag_servicio btn btn-primary btn-sm',
+                    "class" => 'tag_servicio tag_en_producto col-md-2',
                     "id" => $row,
                     "onclick" => "eliminar_tag('" . $row . "' ,  '" . $id_servicio . "' );",
                 ]
             );
         }
 
-        return append($response);
+        return d($response,12);
+
+
     }
 
     function valida_existencia_imagenes($num_images)

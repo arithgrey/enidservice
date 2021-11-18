@@ -36,6 +36,9 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(d($r), $clase);
         $response[] = d(posiciones(), $clase);
         $response[] = d(conexiones(), $clase);
+        $response[] = d(nuba_seller_club(), $clase);
+        $response[] = d(enid_service_web(), $clase);
+
         return append($response);
 
     }
@@ -75,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
         $link_top_ventas = a_texto('Top ventas',
             [
                 'class' => 'text-center black',
-                'href' => path_enid('top_competencias',2)
+                'href' => path_enid('top_competencias', 2)
             ]
         );
 
@@ -118,5 +121,28 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
 
     }
+
+    function nuba_seller_club()
+    {
+
+        $imagen = img(path_enid("nuba_seller_club"));
+        $path = path_enid("nuba_seller",0,1);
+        $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
+        $response[] = a_enid('Nuba seller club', ["href" => $path, "target" => "_black", "class" => "black"]);
+
+        return append($response);
+    }
+    function enid_service_web()
+    {
+
+        $imagen = img(path_enid("pagina_enid_service_facebook"));
+        $path = path_enid("enid_service_facebook",0,1);
+        $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
+
+        $response[] = a_enid('Enid service', ["href" => $path, "target" => "_black", "class" => "black"]);
+
+        return append($response);
+    }
+
 }
 

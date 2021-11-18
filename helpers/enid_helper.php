@@ -2023,10 +2023,15 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
 
     $path = "";
     $base_url = [
+        "amazon" =>"https://www.amazon.com.mx/s?me=A2ZBGOMVSPRBHV&marketplaceID=A1AM78C64UM0Y8",
+        "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",
+        "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
+        "whatsapp" => "https://wa.me/c/5215552967027",
         "sobre_vender" => "sobre_ventas",
+        "recompensas" => "recompensa/?&id=",
         "clientes" => "clientes",
         "top_competencia" => "competencias",
-        "conexiones" => "conexio    nes",
+        "conexiones" => "conexiones",
         "top_competencia_entrega" => "competencias_entregas",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
@@ -2050,6 +2055,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "img_logo" => "img_tema/enid_service_logo.jpg",
         "img_logo_amazon" => "img_tema/amazon_compra.png",
         "img_logo_ml" => "img_tema/logo_compra_ml.png",
+        "nuba_seller_club" =>  "/img_tema/portafolio/nuba_seller.png",
+        "pagina_enid_service_facebook" =>  "/img_tema/portafolio/facebook_enid_service.jpg",
         "pregunta" => "pregunta",
         "pregunta_search" => "pregunta/?tag=",
         "search" => "search",
@@ -2098,6 +2105,8 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "valoracion_servicio" => "valoracion/?servicio=",
         "cross_selling" => "cross_selling/?id_usuario=",
         "enid" => "https://enidservices.com",
+        "nuba_seller" =>"https://www.facebook.com/groups/810697523192704",
+        "enid_service_facebook" =>"https://www.facebook.com/enidservicemx",
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
         "logo_enid" => _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
@@ -2737,10 +2746,17 @@ function opciones_acceso($in_session)
 
         $response = d(
             flex(
-                a_enid("Vender",
+                /**a_enid("Vender",
                     [
                         "href" => path_enid('sobre_vender'),
                         "class" => "white"
+                    ]
+                )**/
+                a_enid("WhatsApp",
+                    [
+                        "href" => path_enid('whatsapp',0,1),
+                        "class" => "white whatsapp_trigger",
+                        "target" => "_black"
                     ]
                 )
                 ,
@@ -3082,7 +3098,7 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
     $clase = ($primario > 0) ?
         "text-center borde_accion p-2 bg_black white  text-uppercase col " :
-        "text-center borde_accion p-2 border_enid col black text-uppercase ";
+        "text-center bg-white borde_accion p-2 border_enid col black text-uppercase ";
 
     $clase .= ($texto_strong) ? ' font-weight-bold ' : '';
 
@@ -3169,13 +3185,12 @@ function _d()
 
 }
 
-function ticket_pago(&$productos_orden_compra, $tipos_entrega, $format = 1)
+function ticket_pago(&$deuda, $tipos_entrega, $format = 1)
 {
 
-    $deuda = total_pago_pendiente($productos_orden_compra);
     $subtotal = $deuda["subtotal"];
+    $descuento_recompensa = $deuda["descuento_recompensa"];
     $tipo_entrega = ($deuda["tipo_entrega"] - 1);
-
     $format_envio = $deuda["format_envio"];
     $es_abono = $deuda["es_abono"];
     $abono_format_text = $deuda["abono_format_text"];
@@ -3193,6 +3208,15 @@ function ticket_pago(&$productos_orden_compra, $tipos_entrega, $format = 1)
             $response[] = hr('mb-4 border_big', 0);
             $response[] = flex(
                 'Subtotal', money($subtotal), $espacio, 'subtotal_text', 'subtotal_money');
+
+            if ($descuento_recompensa > 0) {
+                $response[] = flex(
+                'Descuento aplicado', 
+                money($descuento_recompensa), 
+                $espacio, 
+                'subtotal_text red_enid', 'subtotal_money red_enid');
+            }
+            
             $response[] = flex(
                 $tipos_entrega[$tipo_entrega]['texto_envio'], $format_envio, $espacio,
                 'envio_text', 'envio_money text-uppercase');
@@ -3202,7 +3226,7 @@ function ticket_pago(&$productos_orden_compra, $tipos_entrega, $format = 1)
             $response[] = hr('mt-4 border_big', 0);
             $response[] = flex('Total',
                 money($saldo_pendiente), 'justify-content-between',
-                'saldo_pendiente_text h3', 'h3 saldo_pendiente_money');
+                'saldo_pendiente_text h3', 'strong h3 saldo_pendiente_money');
             $response[] = d_p($tipos_entrega[$tipo_entrega]['nombre_publico'], 'text-right h4 strong ');
 
             break;
@@ -3874,7 +3898,7 @@ function max_compra($es_servicio, $existencia)
 
 }
 
-function total_pago_pendiente($productos_orden_compra)
+function total_pago_pendiente($productos_orden_compra, $recompensa = 0)
 {
 
     $subtotal = 0;
@@ -3885,6 +3909,7 @@ function total_pago_pendiente($productos_orden_compra)
     $costos_envio_cliente = [];
     $id_usuario_venta = 0;
     $descuento_aplicado = 0;
+    $es_premium = 0;
     foreach ($productos_orden_compra as $row) {
 
         $pagado = $row["saldo_cubierto"];
@@ -3896,10 +3921,17 @@ function total_pago_pendiente($productos_orden_compra)
         $costo_envio_cliente = $row["costo_envio_cliente"];
         $costos_envio_cliente[] = $costo_envio_cliente;
         $id_usuario_venta = $row["id_usuario_venta"];
-        $descuento_premium =  $row["descuento_premium"];
+        $descuento_premium =  $row["descuento_premium"];        
+        if ($descuento_premium > 0 ) {
+            $es_premium ++;
+        }
+
         $descuento_aplicado = ($descuento_aplicado + $descuento_premium);
 
     }
+
+    $es_premium = ($es_premium > 0)? 1:0;
+    $descuento_aplicado = ($recompensa > 0) ? $recompensa : $descuento_aplicado;
 
     $format_envio = ($costo_envio_cliente > 0) ? money($costo_envio_cliente) : 'gratis!';
     $espacio = 'justify-content-between mt-3 ';
@@ -3912,7 +3944,7 @@ function total_pago_pendiente($productos_orden_compra)
         $format_abonado = flex($abono_format_text, $abono_format, $espacio, 'abono_text', 'abono_money');
     }
 
-    $saldo_pendiente = ($subtotal - $monto_pagado) + $costo_envio_cliente;
+    $saldo_pendiente = ($subtotal - $monto_pagado - $recompensa ) + $costo_envio_cliente;
 
     return [
         "subtotal" => $subtotal,
@@ -3930,6 +3962,9 @@ function total_pago_pendiente($productos_orden_compra)
         "saldo_pendiente_pago_contra_entrega" => ($subtotal - $monto_pagado),
         "id_usuario_venta" => $id_usuario_venta,
         "descuento_aplicado" => $descuento_aplicado,
+        "descuento_recompensa" => $recompensa,
+        "es_premium" => $es_premium 
+
 
     ];
 }

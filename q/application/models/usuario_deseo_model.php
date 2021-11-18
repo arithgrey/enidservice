@@ -101,6 +101,7 @@ class Usuario_deseo_model extends CI_Model
 
         $query_get = "SELECT 
 				u.id, 
+                u.id_recompensa, 
 				u.num_deseo,
 				u.articulos,
 				s.*  

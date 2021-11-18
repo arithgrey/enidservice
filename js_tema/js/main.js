@@ -34,7 +34,6 @@ $("footer").ready(() => {
         $busqueda_producto.keypress(valida_formato_search);
     }
 
-
     if (document.body.querySelector(".telefono")) {
 
         $telefono = $(".telefono");
@@ -50,10 +49,7 @@ $("footer").ready(() => {
 
     }
 
-
     $(".validar_nombre").keypress(valida_formato_nombre);
-    $(".correo").keypress(valida_formato_correo);
-
     verifica_formato_default_inputs();
 
     if (document.body.querySelector('form')) {
@@ -61,6 +57,10 @@ $("footer").ready(() => {
             verifica_formato_default_inputs(0);
         });
     }
+
+    $(".whatsapp_trigger").click(function (){
+        log_operaciones_externas(17);
+    });
 
 
 });
@@ -75,6 +75,7 @@ let log_operaciones_externas = function (pagina_id) {
 
     request_enid("POST", data_send, url, response_log);
 }
+let response_log = function (data) {}
 let set_option = (key, value = 0) => {
 
 
@@ -948,6 +949,7 @@ let valida_formato_search = function (e) {
         }
     }
 };
+/**
 let valida_formato_correo = function (e) {
 
     let c = String.fromCharCode(e.keyCode);
@@ -962,6 +964,7 @@ let valida_formato_correo = function (e) {
     es_formato_email($(this));
 
 };
+ **/
 let evita_caracteres = function (e) {
 
     if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
@@ -1103,7 +1106,6 @@ let valida_load = function (form_previo = '') {
 
     if (document.body.querySelector(".cargando_form")) {
 
-
         let $load = $('.cargando_form');
         if ($load.hasClass('d-none')) {
             $load.removeClass('d-none');
@@ -1181,6 +1183,7 @@ let es_formato_password = function ($input) {
 };
 let es_formato_email = selector => {
 
+
     let valor = selector.val();
     let es_valido = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/.test(valor);
     let $selector_mensaje = selector.next('label').next('div');
@@ -1189,6 +1192,7 @@ let es_formato_email = selector => {
         $selector_mensaje.removeClass('d-none');
 
     } else {
+
 
         $selector_mensaje.addClass('d-none');
     }

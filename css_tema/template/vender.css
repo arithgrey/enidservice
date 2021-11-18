@@ -35,13 +35,23 @@
 }
 
 .tag_catalogo {
-    background: #295d98;
-    padding: 3px;
+    background: #040b13;
+    padding: 2px;
     color: white;
     margin-top: 10px;
     border-radius: 4px;
-    font-size: .95em;
+    font-size: .8em;
 }
+
+.tag_en_producto {
+    background: #0454ae;
+    padding: 2px;
+    color: white;
+    margin-top: 10px;
+    border-radius: 4px;
+    font-size: .8em;
+}
+
 
 .tag_catalogo:hover {
     cursor: pointer;

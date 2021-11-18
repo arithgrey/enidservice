@@ -295,7 +295,8 @@ class usuario extends REST_Controller
                 "id_departamento",
                 "facebook",
                 "orden_producto",
-                "idtipo_comisionista"
+                "idtipo_comisionista",
+                "ha_vendido"
 
             ];
             $completo = prm_def($param, 'c');

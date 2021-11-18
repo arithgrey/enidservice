@@ -57,7 +57,10 @@ class Home extends CI_Controller
     private function load_lista_deseos($data)
     {
 
-        $lista_deseo = $this->get_lista_deseos($data["id_usuario"]);
+        $lista = $this->get_lista_deseos($data["id_usuario"]);
+        $lista_deseo = $lista["listado"];
+        $data["recompensas"]= $lista["recompensas"];
+
         $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
         if (es_data($data["productos_deseados"])) {
 
@@ -76,12 +79,15 @@ class Home extends CI_Controller
     {
         $q = ['ip' => $this->input->ip_address()];
         $lista_deseo = $this->app->api("usuario_deseo_compra/index/format/json/", $q);
-
-        if (es_data($lista_deseo)) {
+        $listado = $lista_deseo["listado"];
+        $recompensas = $lista_deseo["recompensas"];
+        $data["recompensas"] = $recompensas;
+        
+        if (es_data($listado)) {
 
 
             $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
-            $this->app->pagina($data, productos_deseados($data,  $lista_deseo, 1), 1);
+            $this->app->pagina($data, productos_deseados($data,  $listado, 1), 1);
 
         } else {
             $this->app->pagina($data, sin_productos(), 1);

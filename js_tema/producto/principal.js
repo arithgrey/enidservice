@@ -3,9 +3,11 @@ let $num_ciclos = $('#num_ciclos');
 let $se_agrego = $('.se_agrego');
 let $se_agregara = $('.se_agregara');
 let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
+let $bottom_carro_compra_recompensa = $(".bottom_carro_compra_recompensa");
 
 $(document).ready(function () {
 
+    
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
@@ -28,12 +30,40 @@ $(document).ready(function () {
     });
 
     $(".texto_externo_compra").click(operaciones_compra_externas);
+
     $num_ciclos.change(articulos_seleccionados);
     $agregar_deseos_sin_antecedente.click(agregar_deseos);
+    $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
 
 
 });
 
+let carro_compra_recompensa  = function(){
+
+    let $id = $(this).attr('id');
+    let $antecedente_compra = $(this).attr('antecedente_compra');
+
+    if (parseInt($id) > 0) {
+
+        $("#modal-error-message").modal("show");            
+            
+        let $selector_carga_modal = $('.cargando_modal');
+        $selector_carga_modal.removeClass('d-none');
+        $(".text-order-name-error").text("Procesando ...");    
+        $(this).addClass("d-none");
+        let url = "../q/index.php/api/recompensa/deseo_compra/index/format/json/";
+        let data_send = {"id": $id, "antecedente_compra" : $antecedente_compra};
+        request_enid("POST", data_send, url, response_deseo_compra_recompensa);
+        
+        
+    }
+}
+
+let response_deseo_compra_recompensa = function(data){
+    $("#modal-error-message").modal("hide");            
+    redirect("../lista_deseos");
+
+}
 let operaciones_compra_externas = () => {
 
     log_operaciones_externas(14);
@@ -62,6 +92,7 @@ let response_carga_productos = data => {
 };
 
 let carga_valoraciones = () => {
+
     let url = "../q/index.php/api/valoracion/articulo/format/json/";
     let data_send = {
         "id_servicio": get_option("servicio"),
@@ -71,7 +102,10 @@ let carga_valoraciones = () => {
 };
 
 let response_carga_valoraciones = data => {
+
     render_enid(".place_valoraciones", data);
+    $('.agregar_referencia_fotografica').click(agregar_referencia_fotografica);
+    $(".eliminar_foto_referencia").click(elimina_imagen_referencia);
 
     if (get_option("desde_valoracion") == 1) {
         recorre(".place_valoraciones");
@@ -201,5 +235,49 @@ let agregar_deseos = function () {
         request_enid("POST", data_send, url, respuesta_add_valoracion);
     }
 }
-let response_log = function (data) {
+
+let agregar_referencia_fotografica = function () {
+
+
+    let $id_servicio = $(this).attr('id');
+    let $data_send = {"id_servicio": $id_servicio};
+    let url = "../q/index.php/api/imagen_cliente_empresa/referencia_servicio/format/json/";
+    request_enid("GET", $data_send, url, catalogo_referencias);
+
+    $("#modal_referencia_fotografica").modal('show');
+
+}
+let catalogo_referencias = function (data) {
+
+    render_enid("#galeria_referencias", data);
+    $(".imagen_referencia_muestra").click(anexar_galeria);
+
+
+}
+let anexar_galeria = function (e) {
+
+    let $id_imagen = $(this).attr('id');
+    let $id_servicio = $(this).attr('id_servicio');
+
+    let $data_send = {"id_servicio": $id_servicio, "id_imagen": $id_imagen};
+    let url = "../q/index.php/api/referencia/index/format/json/";
+    $("#modal_referencia_fotografica").modal('hide');
+
+    request_enid("POST", $data_send, url, function (data) {
+        carga_valoraciones();
+    });
+
+}
+let elimina_imagen_referencia = function (e) {
+    
+    let $id_imagen = $(this).attr('id_imagen');
+    let $id_servicio = $(this).attr('id_servicio');
+
+    let $data_send = {"id_servicio": $id_servicio, "id_imagen": $id_imagen};
+    let url = "../q/index.php/api/referencia/index/format/json/";
+
+    request_enid("DELETE", $data_send, url, function (data) {
+        carga_valoraciones();
+    });
+
 }

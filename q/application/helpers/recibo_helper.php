@@ -906,16 +906,18 @@ if (!function_exists('invierte_date_time')) {
 
         $fechas = array_map($calback, $fechas);
         $ventas_fecha = array_count_values($fechas);
-        $fechas_keys = array_keys($ventas_fecha);
-        $cb = function ($a, $b) {
-            return  flex($a , $b, "flex-column");
-        };
 
-        $titulos = $fechas_keys;
-        $valores = array_reduce($ventas_fecha, $cb, '');
+        $response = [];
+        foreach ($ventas_fecha as $clave =>  $value ){
+            $response[] = flex(
+                $clave , $value,
+                "flex-column border text-center border-secondary p-2","fp9", "strong");
 
 
-        return flex($titulos, $valores, "flex-column");
+        }
+        return d($response,13);
+
+
 
     }
 
@@ -1133,13 +1135,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function format_concepto($monto_a_pagar, $productos_orden_compra, $tipos_entrega)
+    function format_concepto($productos_orden_compra, $deuda, $tipos_entrega)
     {
 
-        $text_money = money($monto_a_pagar);
-        $resume_articulo[] = d($text_money, ' text-right mr-3 h4');
+        
         $r[] = d(imagenes_orden_compra($productos_orden_compra), 'mx-auto text-center');
-        $ticket_pago = ticket_pago($productos_orden_compra, $tipos_entrega);
+        $ticket_pago = ticket_pago($deuda, $tipos_entrega);
         $r[] = $ticket_pago['checkout'];
 
 
