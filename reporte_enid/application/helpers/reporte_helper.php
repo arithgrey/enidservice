@@ -12,6 +12,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
         $response[] = format_accesos();
+        $response[] = funnel_ventas();        
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
         $response[] = format_entregas();
@@ -75,6 +76,29 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function funnel_ventas()
+    {
+        $form = base_funnel('Funnel ventas','funnel_ventas');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_funnel_ventas",
+            ]
+        );
+
+
+    }    
+    
+    
+
+    function base_funnel($titulo_seccion,  $place){
+
+        $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");                
+        $r[] = place(_text_($place, "mt-5"));
+
+        return append($r);
+    }
     function format_arquetipos($data)
     {
         $form = busqueda_arquetipo($data['tipo_tag_arquetipo'], 'HISTORIAS DE USUARIO (ARQUETIPOS)',
@@ -244,8 +268,9 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function base_busqueda_form($titulo_seccion, $clase_form, $place, $fecha_inicio = 0, $fecha_termino = 0)
-    {
+    function base_busqueda_form(
+        $titulo_seccion, $clase_form, $place, $fecha_inicio = 0, $fecha_termino = 0){
+
 
         $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
         $r[] = form_open("", ["class" => $clase_form]);
@@ -379,8 +404,32 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $link_funnel = tab(
+            text_icon("fa fa-shopping-cart", "Funnel ventas"),
+            '#tab_funnel_ventas',
+            [
+                "class" => "funnel"
+            ]
+        );
+        
 
         $list = [
+            a_enid(text_icon(_money_icon, "Puntos de ventas clientes"),
+                [
+                    
+                    "href" => "https://www.google.com/maps/d/viewer?mid=1d8Y5RvysKd3rjpCBWk-w5JPvNrCDn5Hc&usp=sharing",
+                    "class" => "text-uppercase black",
+                    "target" => "_blank"
+                ]
+            ),
+            a_enid(text_icon(_money_icon, "Próximas entregas"),
+                [
+                    
+                    "href" => path_enid("entregas"),
+                    "class" => "text-uppercase black",
+                    "target" => "_blank"
+                ]
+            ),            
             tab(
                 text_icon(_mas_opciones_icon, "Comisiones"),
                 '#tab_comisionistas'
@@ -443,6 +492,9 @@ if (!function_exists('invierte_date_time')) {
             $link_reparto
             ,
             $link_accesos_pagina
+            ,
+            $link_funnel
+            
 
         ];
 

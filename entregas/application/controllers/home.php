@@ -25,12 +25,24 @@ class Home extends CI_Controller
         $id_perfil = $data['id_perfil'];
         $id_empresa = $data['id_empresa'];
         $proximas_entregas = $this->proximas_reparto($id_perfil, $id_usuario, $id_empresa);
-        $data['proximas_entregas'] = $this->app->imgs_productos(0, 1, 1, 1, $proximas_entregas);
-        $this->app->pagina($data, calendario_entregas($data), 1);
+        
+        
+        $recibos = $this->app->imgs_productos(0, 1, 1, 1, $proximas_entregas);
+        $data['proximas_entregas'] = $recibos;
+        $data['descuentos_recibos'] = $this->recompensas($recibos);
+        
+        $this->app->pagina($data, sin_cierre_reparto($data,$data['proximas_entregas'], 1), 1);
 
 
     }
+    function recompensas($recibos)
+    {
+        
+        $ids = array_unique(array_column($recibos,'id_orden_compra'));        
+        return $this->app->api("recompensa/ids_recibo_descuento/format/json/", ["ids" => $ids]);    
+        
 
+    }
     function proximas_reparto($id_perfil, $id_usuario, $id_empresa)
     {
 

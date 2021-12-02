@@ -77,7 +77,8 @@ class Cobranza extends REST_Controller
 
             if (prm_def($param, "es_usuario_nuevo") < 1) {
 
-                $productos_deseados_carro_compra = $this->productos_envio_pago_usuario($producto_carro_compra, 1);
+                $productos_deseados_carro_compra = 
+                $this->productos_envio_pago_usuario($producto_carro_compra, 1);
 
             } else {
 
@@ -108,15 +109,32 @@ class Cobranza extends REST_Controller
         return $orden_compra;
     }
 
-    private function notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente)
+    private function notifica_compra_nuevo_cliente(
+        $productos_deseados_carro_compra, $es_cliente, $envia_cliente)
     {
 
         if ($es_cliente) {
 
-            $ids = array_column(
-                $productos_deseados_carro_compra, "id_usuario_deseo_compra");
-            $this->notifica_productos_envio_pago_nuevo_usuario($ids);
+            /**/
+            if ($envia_cliente > 0) {
+            
+                $ids = array_column($productos_deseados_carro_compra, "id");
+                $this->notifica_productos_envio_pago_vendedor($ids);
 
+            }else{
+                
+                $ids = array_column(
+                    $productos_deseados_carro_compra, "id_usuario_deseo_compra");
+                $this->notifica_productos_envio_pago_nuevo_usuario($ids);
+            }
+            
+
+        }else{
+
+            /*Se notifica que el vendedor envió orden de compra en el carro de compras*/
+            $ids = array_column(
+                $productos_deseados_carro_compra, "id");
+            $this->notifica_productos_envio_pago_vendedor($ids);
         }
 
     }
@@ -126,7 +144,11 @@ class Cobranza extends REST_Controller
         $param = $this->post();
         $a = 0;
         $es_cliente = $param["es_cliente"];
-        $productos_deseados_carro_compra = $this->productos_deseados_tipo_cliente($es_cliente, $param);
+        $envia_cliente = prm_def($param, "envia_cliente");
+        
+        $productos_deseados_carro_compra = 
+        $this->productos_deseados_tipo_cliente($es_cliente, $param);
+
         $id_orden_compra = 0;
         $response = [];
 
@@ -153,12 +175,20 @@ class Cobranza extends REST_Controller
 
             /*notifica recompensa(compra de más de un artículo con descuento)*/
             $this->orden_compra_recompensa($id_orden_compra, $param);
-            $this->gamifica_ventas_vendedor($param["usuario_referencia"]);
-
+            $this->gamifica_ventas_vendedor($param["usuario_referencia"]);            
+            /*Notificamos al carro de compra que pasó a envio a pago*/      
+            
+            
         }
-        $this->notifica_compra_nuevo_cliente($productos_deseados_carro_compra, $es_cliente);
+        
+        $this->notifica_compra_nuevo_cliente(
+                $productos_deseados_carro_compra, $es_cliente, $envia_cliente);
+        
+        
         $this->response($response);
     }
+
+
     private function orden_compra_recompensa($id_orden_compra, $param)
     {
         
@@ -182,7 +212,20 @@ class Cobranza extends REST_Controller
         return $this->app->api("usuario/gamifica_ventas", $q, "json", "PUT");
 
     }
+    
+    private function notifica_productos_envio_pago_vendedor($ids)
+    {
 
+        $response = false;
+        if (es_data($ids)) {
+
+            $response = $this->app->api(
+                "usuario_deseo/envio_pago",
+                ["ids" => $ids], "json", "PUT");
+        }
+
+        return $response;
+    }
     private function notifica_productos_envio_pago_nuevo_usuario($ids)
     {
 

@@ -27,7 +27,7 @@ class Home extends CI_Controller
             $this->crea_orden_compra($param);
 
         } else {
-
+            
             $this->add_domicilio_entrega($param);
 
         }
@@ -91,10 +91,12 @@ class Home extends CI_Controller
         $data = $this->app->session(7);
         $es_carro_compras = $param["es_carro_compras"];
 
+
         if ($es_carro_compras) {
 
-            /*Debemos cambiar el status del carrito de compras*/
-            $this->notifica_productos_carro_compra($param);
+            /*Debemos cambiar el status del carrito de compras
+            (envio a pago estatus 2 registro de los datos del cliente)*/            
+            $this->notifica_productos_carro_compra($param, $data);
 
         }
 
@@ -115,7 +117,34 @@ class Home extends CI_Controller
 
     }
 
-    private function notifica_productos_carro_compra($params)
+    private function notifica_productos_carro_compra($params, $data)
+    {
+
+        $in_session = $data["in_session"];
+        $producto_carro_compra = $params["producto_carro_compra"];
+        $response = false;
+        if (es_data($producto_carro_compra)) {
+
+            if ($in_session) {
+            
+
+                $response = $this->app->api(
+                "usuario_deseo/envio_registro", ["ids" => $producto_carro_compra], "json", "PUT");
+    
+            }else{
+            
+                /*primer registro(prospecto)*/
+                $response = $this->app->api(
+                "usuario_deseo_compra/envio_registro", ["ids" => $producto_carro_compra], "json", "PUT");
+                            
+            }
+
+            
+        }
+        return $response;
+
+    }
+    private function notifica_productos_carro_compra_usuario_deseo($params)
     {
 
         $producto_carro_compra = $params["producto_carro_compra"];
@@ -171,7 +200,7 @@ class Home extends CI_Controller
             "id_usuario" => $data['id_usuario'],
         ];
 
-        $response = $this->carga_ficha_direccion_envio($param, 1);
+        $response = $this->carga_ficha_direccion_envio($param, 1);        
         $this->app->pagina($data, $response, 1);
 
     }

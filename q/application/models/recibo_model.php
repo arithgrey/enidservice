@@ -844,6 +844,9 @@ class Recibo_model extends CI_Model
         $id_usuario_venta = $param["id_usuario_venta"];
         $precio = $param["precio"];
         $comision = $param["comision"];
+
+        $comision_venta = comision_porcentaje($precio, $comision);
+
         $nombre_servicio = $param["nombre_servicio"];
 
         $descuento_premium = ($es_premium > 0) ? $param["descuento_especial"]: 0;
@@ -921,7 +924,7 @@ class Recibo_model extends CI_Model
                 "'" . $resumen_compra . "'",
                 $talla,
                 $tipo_entrega,
-                $comision,
+                $comision_venta,
                 $costo,
                 $descuento_premium
             ];
@@ -978,6 +981,7 @@ class Recibo_model extends CI_Model
     function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa)
     {
 
+        
         $casos = [
             3 => " 1 = 1 ",
             4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
@@ -989,6 +993,8 @@ class Recibo_model extends CI_Model
         $ids = get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
         $query_get = "SELECT 
+                        p.precio, 
+                        p.costo, 
 						p.id_servicio, 
 						p.id_usuario,
 						p.id_proyecto_persona_forma_pago id_recibo,

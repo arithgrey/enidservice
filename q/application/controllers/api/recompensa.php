@@ -20,14 +20,27 @@ class Recompensa extends REST_Controller
 
         $param = $this->get();
         $response = false;
+        $data_complete = [];
         if (fx($param, "id_servicio")) {
 
             $response = $this->recompensa_model->visible($param["id_servicio"]);
             $response = $this->app->add_imgs_servicio($response);
-            $response = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            
+            $a = 0;
+            
+            foreach($recompensa as $row ){
+                
+                $data_complete[$a] = $row;
+                $id_servicio  = $row["id_servicio"];  
+                $id_servicio_conjunto  = $row["id_servicio_conjunto"];  
+                $data_complete[$a]["servicio"] = $this->app->servicio($id_servicio);
+                $data_complete[$a]["servicio_conjunto"] = $this->app->servicio($id_servicio_conjunto);
+                $a ++;
+            }
 
         }
-        $this->response($response);
+        $this->response($data_complete);
     }
 
     function servicio_GET()
@@ -35,14 +48,29 @@ class Recompensa extends REST_Controller
 
         $param = $this->get();
         $response = false;
+        $data_complete = [];
         if (fx($param, "id_servicio")) {
 
             $response = $this->recompensa_model->servicio($param["id_servicio"]);
             $response = $this->app->add_imgs_servicio($response);
-            $response = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            
+            $a = 0;
+            
+            foreach($recompensa as $row ){
+                
+                $data_complete[$a] = $row;
+                $id_servicio  = $row["id_servicio"];  
+                $id_servicio_conjunto  = $row["id_servicio_conjunto"];  
+                $data_complete[$a]["servicio"] = $this->app->servicio($id_servicio);
+                $data_complete[$a]["servicio_conjunto"] = $this->app->servicio($id_servicio_conjunto);
+                $a ++;
+            }
+            
+            
 
         }
-        $this->response($response);
+        $this->response($data_complete);
     }
     function id_GET()
     {
@@ -54,7 +82,13 @@ class Recompensa extends REST_Controller
             $response = $this->recompensa_model->id_recompensa($param["id"]);
             $response = $this->app->add_imgs_servicio($response);
             $response = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+
+            $id_servicio  = pr($response,'id_servicio');                    
+            $id_servicio_conjunto  = pr($response,'id_servicio_conjunto');                    
+            $response[0]["servicio"] = $this->app->servicio($id_servicio);
+            $response[0]["servicio_conjunto"] = $this->app->servicio($id_servicio_conjunto);
             $response = editar_recompensas($response);
+
 
         }
         $this->response($response);
@@ -190,6 +224,48 @@ class Recompensa extends REST_Controller
 
         
     }
+    function ids_recibo_descuento_GET()
+    {
+
+        $param = $this->get();    
+        $ids = $param["ids"];
+        $recibos_recompensas = $this->recompensa_model->in(get_keys($ids));
+        
+        $response = [];
+        foreach($ids as $row){
 
 
+            $response[] = 
+            [
+                "id_orden_compra" => $row,
+                "descuento" => $this->total_descuento_orden_compra($recibos_recompensas , $row),
+            ];
+        }
+
+        $this->response($response);
+    }
+
+
+    function total_descuento_orden_compra($recibos_recompensas , $id_orden_compra_actual)
+    {
+        
+        $descuento_total = 0; 
+        $recompensas = [];
+        foreach($recibos_recompensas as $row){
+
+            $id_orden_compra = $row["id_orden_compra"];
+            $descuento = $row["descuento"];
+            $id_recompensa = $row["id_recompensa"];
+            if ($id_orden_compra ==  $id_orden_compra_actual) {
+                if (!in_array($id_recompensa, $recompensas)) {
+                
+                    $descuento_total = $descuento_total + $descuento;    
+                    $recompensas[] = $id_recompensa;
+
+                }
+                
+            }
+        }
+        return $descuento_total;
+    }
 }

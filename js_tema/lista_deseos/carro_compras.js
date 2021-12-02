@@ -27,6 +27,7 @@ let segunda_compra = function (e) {
 }
 let response_segunda_compra = function (data) {
 
+    debugger;
     if (data.hasOwnProperty('id_orden_compra') && parseInt(data.id_orden_compra) > 0) {
 
         let id = data.id_orden_compra;

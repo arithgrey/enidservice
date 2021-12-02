@@ -24,6 +24,7 @@ class Inicio extends CI_Controller
         $data = $this->app->cssJs($data, "reporte_enid");
 
         $this->app->pagina($data, render_reporte($data), 1);
+        $this->load->view("maps");
 
     }
 

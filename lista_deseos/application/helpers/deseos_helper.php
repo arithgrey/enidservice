@@ -53,6 +53,7 @@ if (!function_exists('invierte_date_time')) {
     function productos_deseados($data, $productos, $externo = 0)
     {
 
+
         return format_productos_deseados($data, $productos, $externo);
 
     }
@@ -219,6 +220,7 @@ if (!function_exists('invierte_date_time')) {
 
     function seccion_procesar_pago($data, $productos_deseados)
     {
+
         $subtotal = 0;
         $total_articulo = 0;
         $inputs = [];
@@ -271,16 +273,30 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = formato_subtotal($response ,$data, $subtotal);
+
             
 
         }
 
-        $inputs_recompensa= valida_envio_descuento($data);
-        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal);
+        $inputs_recompensa = valida_envio_descuento($data);
+        
+        $response[] = form_procesar_carro_compras(
+            $data, $inputs, $inputs_recompensa,  $subtotal);
+
+
+        if (es_administrador_o_vendedor($data)) {
+        
+            $comicion_venta = comisiones_por_productos_deseados($productos_deseados);
+            $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comicion_venta) ,'strong'));
+            $response[] =  d($textos , 'display-6 black mt-5 text-right text-uppercase p-2');
+
+        }
+        
 
         return append($response);
 
     }
+    
     function valida_envio_descuento($data)
     {
 
@@ -337,6 +353,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] =  d(money($subtotal), "display-5 black");
         }
+
         return $response;
 
     }
@@ -351,13 +368,14 @@ if (!function_exists('invierte_date_time')) {
     function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
     {
 
-    
+        
+
         $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
         if (!$es_recien_creado) {
 
             $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
             $response[] = append($inputs);
-            $response[] = append($inputs_recompensa);
+            $response[] = append($inputs_recompensa);            
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
@@ -370,6 +388,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = '<form class="form_segunda_compra" action="" method="POST">';
             $response[] = append($inputs);
             $response[] = append($inputs_recompensa);
+            
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = hiddens(["class" => "tipo_entrega", "name" => "tipo_entrega", "value" => 2]);

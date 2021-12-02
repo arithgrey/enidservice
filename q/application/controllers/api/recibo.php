@@ -61,7 +61,9 @@ class recibo extends REST_Controller
             $idusuarios_empresa = array_column($usuarios_empresa, 'idusuario');
             $idusuarios_empresa = array_unique($idusuarios_empresa);
 
-            $response = $this->recibo_model->pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa);
+            $response = 
+            $this->recibo_model->pendientes_sin_cierre(
+                $id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
             if (prm_def($param, 'domicilios') > 0) {
@@ -73,17 +75,53 @@ class recibo extends REST_Controller
 
                     $ordenes = $this->append_usuarios_reparto($recibos['recibos']);
                     $ordenes = $this->append_usuario_cliente($ordenes);
-
                     $recibos['recibos'] = $ordenes;
+
+
                 }
 
-                $response = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
+                $recibos = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
+                $response = $this->recompensas($recibos); 
             }
 
         }
         $this->response($response);
 
     }
+    function recompensas($recibos)
+    {
+        
+        $ids = array_unique(array_column($recibos,'id_orden_compra'));        
+        $recompensa = $this->app->api("recompensa/ids_recibo_descuento/format/json/", ["ids" => $ids]);
+        $response = []; 
+        $data_complete = [];
+        $a = 0;
+        
+        foreach($recibos as $row ){            
+            
+            $id_orden_compra = $row["id_orden_compra"];
+            $descuento = 0;
+            foreach($recompensa as $row2){
+
+                $id = $row2["id_orden_compra"];
+                if ($id_orden_compra ==  $id ) {
+                    $descuento = $row2["descuento"];
+                    break;
+                }
+            }
+
+            $data_complete[$a] = $row;
+            $data_complete[$a]["descuento_recompensa"] = $descuento;
+            
+            
+            $a ++;
+        }
+        return $data_complete;
+
+
+    }
+
+
 
     function usuario_relacion_GET()
     {

@@ -1315,6 +1315,12 @@ class Servicio extends REST_Controller
         $response = $this->serviciosmodel->q_up("precio", $param["precio"], $param["id_servicio"]);
         $this->response($response);
     }
+    function costo_compra_PUT()
+    {
+        $param = $this->put();
+        $response = $this->serviciosmodel->q_up("costo", $param["costo"], $param["id_servicio"]);
+        $this->response($response);
+    }
 
     function add_gamification_servicio_PUT()
     {

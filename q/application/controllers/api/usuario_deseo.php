@@ -9,17 +9,27 @@ class usuario_deseo extends REST_Controller
     {
         parent::__construct();
         $this->load->model("usuario_deseo_model");
+        $this->load->helper("usuario_deseo");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("idusuario");
 
     }
-
+    /*Ya se registro ahora le cobramos 4*/
     function envio_pago_PUT()
     {
 
         $param = $this->put();
         $ids = get_keys($param["ids"]);
         $response = $this->usuario_deseo_model->envio_pago($ids);
+        $this->response($response);
+    }
+    /*Se notifica el cliente está por registrar sus datos de contacto status 3*/
+    function envio_registro_PUT()
+    {
+
+        $param = $this->put();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_model->envio_registro($ids);
         $this->response($response);
     }
 
@@ -32,7 +42,27 @@ class usuario_deseo extends REST_Controller
         $response = $this->usuario_deseo_model->por_pago($ids, $envia_cliente);
         $this->response($response);
     }
+    function agregados_GET()
+    {
 
+        $param = $this->get();        
+        $deseo_compra = $this->usuario_deseo_model->get([],["status" => 0],1000, 'id');
+        $deseo_compra_servicio = $this->app->add_imgs_servicio($deseo_compra);
+        $response = $this->app->add_imgs_usuario($deseo_compra_servicio,'id_usuario');
+
+
+        $this->response(agregados($response));
+    }
+    function en_registro_GET()
+    {
+
+        $param = $this->get();        
+        $deseo_compra = $this->usuario_deseo_model->get([],["status" => 3],1000, 'id');
+        $deseo_compra_servicio = $this->app->add_imgs_servicio($deseo_compra);
+        $response = $this->app->add_imgs_usuario($deseo_compra_servicio,'id_usuario');
+
+        $this->response(en_registro($response));
+    }    
     function cantidad_PUT()
     {
 
@@ -112,7 +142,22 @@ class usuario_deseo extends REST_Controller
         $response = false;
         if (fx($param, "id")) {
 
+            $id = $param["id"];
             $response = $this->usuario_deseo_model->q_up("status", 2, $param["id"]);
+            $deseo_compra = $this->usuario_deseo_model->q_get([], $id);
+
+            $id_recompensa = pr($deseo_compra, "id_recompensa");
+            $id_usuario = pr($deseo_compra, "id_usuario");
+            
+            if ($id_recompensa > 0 ) {
+
+                /*Se actualiza simple quitando los descuentos aplicados*/                    
+                $response = 
+                $this->usuario_deseo_model->baja_recompensa($id, $id_usuario , $id_recompensa);
+
+            }
+
+
 
         }
         $this->response($response);
@@ -224,6 +269,7 @@ class usuario_deseo extends REST_Controller
 
                 $listado = $this->usuario_deseo_model->get_usuario_deseo($id_usuario);
                 $ids = array_column($listado, "id_recompensa");
+                $ids_usuario_deseo = array_column($listado, "id");
                 $recompensa = [];
 
                 if(es_data($ids)){
@@ -235,7 +281,8 @@ class usuario_deseo extends REST_Controller
                 
                 $response = [
                     "listado" => $listado,
-                    "recompensas" => $recompensa
+                    "recompensas" => $recompensa,
+                    "ids_usuario_deseo" => $ids_usuario_deseo
                 ];
 
 
