@@ -5,8 +5,9 @@ if (!function_exists('invierte_date_time')) {
     function editar_recompensas($recompensa)
     {
      
-        $response[] = "";
+        
         if (es_data($recompensa)) {
+            
             
             foreach ($recompensa as $row) {
 
@@ -27,20 +28,25 @@ if (!function_exists('invierte_date_time')) {
                     $url_img_servicio_conjunto, $id_servicio_conjunto);
                 
 
-                $text_precio_servicio = money($precio_servicio);
+                $text_precio_servicio = _text_('Precio',money($precio_servicio));
+                $input_costo = input_costo($id_servicio, $row);
+                $textos_costos = flex($text_precio_servicio, $input_costo, _text_('flex-column'),'mb-5 strong f11');
+
                 $clase_extra = _text_(_between, "mt-5");
                 $imagen_precio = flex(
-                    $imagen_servicio, $text_precio_servicio, _between , 8, 4);
+                    $imagen_servicio, $textos_costos, _between , 5, 7);
 
+                /**/
+                $text_precio_servicio_conjunto = _text_('Precio',money($precio_conjunto));
+                $input_costo_conjunto = input_costo_conjunto($id_servicio_conjunto, $row);
 
-                $texto_precio_conjunto = money($precio_conjunto);
+                $texto_precio_conjunto = flex($text_precio_servicio_conjunto, $input_costo_conjunto, _text_('flex-column'),'mb-5 strong f11');
 
                 $imagen_precio_conjnto = flex(
-                    $imagen_servicio_conjunto, $texto_precio_conjunto,$clase_extra , 8, 4);
+                    $imagen_servicio_conjunto, $texto_precio_conjunto,$clase_extra , 5, 7);
 
 
-
-                
+    
                 $promocion = [
                     d($imagen_precio),                    
                     d($imagen_precio_conjnto),
@@ -65,7 +71,61 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    
+    function input_costo($id_servicio, $row)
+    {
+        
+        $servicio = $row["servicio"];        
+        $costo  =  pr($servicio, "costo");    
+
+        $icono = icon(_text_(_editar_icon,'editar_costo_servicio'));
+        $r[] = d(_text_("Costo", money($costo), $icono ),'texto_editar_costo_servicio');
+        $r[] = form_open("", ["class" => "form_costo d-none"]);
+        $r[] = input_frm('', 'Costo',
+            [
+                "id" => "costo",
+                "name" => "costo",
+                "placeholder" => "costo",
+                "class" => "input_costo costo",
+                "required" => "",
+                "type" => "float",
+                "value" => $costo,                
+            ]
+
+        );
+        $r[] = hiddens(["name" => "id_servicio", "value" => $id_servicio]);
+        $r[] = form_close();
+        return d($r);
+
+
+    }
+
+    function input_costo_conjunto($id_servicio, $row)
+    {
+        
+        $servicio = $row["servicio_conjunto"];        
+        $costo  =  pr($servicio, "costo");    
+
+        $icono = icon(_text_(_editar_icon,'editar_costo_servicio_conjunto'));
+        $r[] = d(_text_("Costo", money($costo), $icono ),'texto_editar_costo_servicio_conjunto');
+        $r[] = form_open("", ["class" => "form_costo_conjunto d-none"]);
+        $r[] = input_frm('', 'Costo',
+            [
+                "id" => "costo",
+                "name" => "costo",
+                "placeholder" => "costo",
+                "class" => "input_costo_conjunto costo_conjunto",
+                "required" => "",
+                "type" => "float",
+                "value" => $costo,                
+            ]
+
+        );
+        $r[] = hiddens(["name" => "id_servicio", "value" => $id_servicio]);
+        $r[] = form_close();
+        return d($r);
+
+
+    }
 
     function totales($row)
     {
@@ -74,35 +134,160 @@ if (!function_exists('invierte_date_time')) {
         $descuento = $row["descuento"];
         $id_recompensa = $row["id_recompensa"];
 
-        $total = ($precio_conjunto + $precio_servicio) - $descuento;
-        $total_sin_descuento = ($precio_conjunto + $precio_servicio);
-        $total_sin_descuento = ($descuento > 0) ? del(money($total_sin_descuento)) : '';
-        $por_cobrar = money($total);
-        $clase_extra = _text_(_between, "mt-2");
+        /*producto 1*/
+        $servicio = $row["servicio"];
+        $precio  =  pr($servicio, "precio");
+        $costo  =  pr($servicio, "costo");
+        $porcentaje_comision = pr($servicio, "comision");
+        $comision = comision_porcentaje($precio , $porcentaje_comision);
+
+
+        $margen = ($precio - $costo);
+
         
-        $totales = flex("Total", $total_sin_descuento, $clase_extra, "strong col-sm-8", 4);
+        /*producto 2*/
+        $producto_conjunto = $row["servicio_conjunto"];
+        $precio_producto_conjunto  =  pr($producto_conjunto, "precio");
+        $costo_producto_conjunto  =  pr($producto_conjunto, "costo");
+        $porcentaje_comision_conjunto = pr($producto_conjunto, "comision");
+        $comision_conjunto = comision_porcentaje($precio_producto_conjunto ,$porcentaje_comision_conjunto);
+        $margen_producto_conjunto = ($precio_producto_conjunto - $costo_producto_conjunto);
+
+
+        $servicio_conjunto = $row["servicio_conjunto"];
+
+        $utilidad_venta_conjunta = $margen + $margen_producto_conjunto;
+        $utilidad_aplicando_descuento = ($margen + $margen_producto_conjunto) - $descuento;
+        $utilidad_aplicando_descuento_comision = 
+        $utilidad_aplicando_descuento - ($utilidad_aplicando_descuento * .10);
+
+
+        
+
+        $total = ($precio_conjunto + $precio_servicio) - $descuento;
+        $pago_por_venta = comision_porcentaje($total , 10);
+        $total_sin_descuento = ($precio_conjunto + $precio_servicio);
+        $total_sin_descuento_aplicado = ($descuento > 0) ? del(money($total_sin_descuento)) : '';
+        $por_cobrar = money($total);
+        $clase_extra = _text_(_between, "border-bottom mt-3");
+        
+        $ganancias_reales = $utilidad_aplicando_descuento - $pago_por_venta;
+        $ganancias_reales_menos_entrega =  $ganancias_reales - 100;
+
+        $totales = flex(
+            "Total", $total_sin_descuento_aplicado, $clase_extra, "strong col-sm-8", 4);
         $total_en_promo = flex(
-            "Total aplicando promoción", $por_cobrar,$clase_extra, "strong col-sm-8",  4);
-        $descuento_aplicado = 
-        flex("Descuento aplicando", money($descuento),$clase_extra, "strong col-sm-8",  4);
+            "Total aplicando promoción", $por_cobrar, $clase_extra, "strong display-6 col-sm-8",  "col-sm-4 black display-6");
+
+        
+
+        $texto_margen = flex(
+            "Utilidad en el primer producto", money($margen), $clase_extra, "strong col-sm-8 mt-4",  "col-sm-4");
+            
+
+        $texto_margen_producto_conjunto = flex(
+            "Utilidad en el segundo producto", money($margen_producto_conjunto), $clase_extra, "strong col-sm-8",  "col-sm-4");
+
+        /**
+        $texto_comision_venta = flex(
+            "Comision por venta", money($comision), $clase_extra, "strong col-sm-8 mt-4",  "col-sm-4");
+            $texto_comision_venta_conjunto = flex(
+            "Comision por venta segundo producto", 
+            money($comision_conjunto), $clase_extra, "strong col-sm-8",  "col-sm-4");
+            **/
+
+        $texto_pago_por_venta = flex(
+            "Pago por venta", money($pago_por_venta), $clase_extra, "strong col-sm-8 strong f12",  "col-sm-4 f12");
+            
+
+
+
+
+        
+
+
+        $texto_utilidad_venta_conjunta = flex(
+            "Utilidad Neta", money($utilidad_venta_conjunta), $clase_extra, "strong col-sm-8 f12",  "col-sm-4 f12");
+
+        $texto_utilidad_venta_conjunta_aplica_descuento = flex(
+            "Aplicando descuento", 
+            d(money($utilidad_aplicando_descuento),'utilidad_descuento display-7 blue_enid strong mt-5'), 
+            $clase_extra, "strong col-sm-8",  "col-sm-4");
+
+
+        $texto_utilidad_venta_conjunta_aplica_descuento_comision = flex(
+            "Aplicando descuento y pago de comisión", 
+            d(money($ganancias_reales),
+                'utilidad_descuento_comision display-6 blue_enid strong'), 
+            $clase_extra, "strong col-sm-8",  "col-sm-4");
+
+
+
+        $texto_utilidad_venta_conjunta_aplica_descuento_comision_entrega = flex(
+            "Utilidad pagando entrega", 
+            d(money($ganancias_reales_menos_entrega),
+                'utilidad_descuento_comision_entrega display-6 blue_enid strong'), 
+            $clase_extra, "strong col-sm-8",  "col-sm-4");
+
+
+    
+
+        $descuento_aplicado = flex(
+            "Descuento aplicando", money($descuento),$clase_extra, "strong col-sm-8",  4);
 
         $input = form_descuento($descuento, $id_recompensa);
+        
 
         $elementos = [
-            d($totales),            
-            d($total_en_promo),
+            d($totales),                        
             d($descuento_aplicado),
-            d($input)
+            d(d("Utilidad", 'black display-6 col-sm-12 mt-5')),
+            d($texto_margen),            
+            d($texto_margen_producto_conjunto),
+            d($texto_utilidad_venta_conjunta),
+            d(d("Comisiones", 'black display-6 col-sm-12 mt-5')),            
+            d($texto_pago_por_venta),
+            d(d("Utilidad al vender en promoción", 'black display-6 col-sm-12 mt-5')),
+            
+            d($texto_utilidad_venta_conjunta_aplica_descuento),
+            d($texto_utilidad_venta_conjunta_aplica_descuento_comision),
+            d($texto_utilidad_venta_conjunta_aplica_descuento_comision_entrega),
+            d($total_en_promo),            
+            d($input),
+            d(precio_final_al_aplicar_descuento()),          
+            hiddens(["class" => "total_sin_descuento", "value"=> $total_sin_descuento]),
+            hiddens(["class" => "total_utilidad", "value"=> $utilidad_venta_conjunta]),
+            hiddens(["class" => "pago_por_venta", "value"=> $pago_por_venta]),
+            hiddens(["class" => "total_utilidad_entrega", "value"=> $ganancias_reales_menos_entrega])
+
+            
+            
         ];
 
         return d($elementos, 'd-flex flex-column');
 
     }
+
+    function precio_final_al_aplicar_descuento(){
+
+        $texto_descuento_aplicado = d("", "texto_descuento_aplicado");
+        $aplicado = flex(
+            "Precio final al aplicar descuento", 
+            $texto_descuento_aplicado ,
+            _text_("display-6 black", _between),
+            "",
+            "precio_final_con_descuento_input"
+        );
+        return d($aplicado,12);
+
+
+    }
+        
     function form_descuento($descuento, $id_recompensa)
     {
 
-        $r[] = form_open("", ["class" => "form_descuento mt-5 col-lg-12"]);
-        $r[] = input_frm('', 'Descuento',
+        $r[] = form_open("", ["class" => "form_descuento"]);
+        $r[] = input_frm('', 'Quiero aplicando este descuento',
             [
                 "id" => "descuento",
                 "name" => "descuento",
@@ -117,7 +302,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(["name" => "id", "value" => $id_recompensa]);
 
         $r[] = form_close();
-        return append($r);
+        return d($r,'border border-secondary seccion_aplicar_descuento top_50 col-lg-12');
     }
 
     function servicio_dominante($url_img_servicio, $id_servicio)

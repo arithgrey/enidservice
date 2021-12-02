@@ -287,9 +287,14 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $servicio = $data['info_servicio']['servicio'];
 
+        $response[] = utilidad_en_servicio($data, $servicio,1, 'mb-2 text-right');
+
         if ($es_comisionista) {
 
-            $comision = pr($servicio, 'comision');
+            $porcentaje_comision = pr($servicio, 'comision');
+            $precio = pr($servicio, 'precio');
+            $comision = comision_porcentaje($precio, $porcentaje_comision);
+
             $text_comisionn = strong(money($comision), 'white f14');
             $text = _text_('gana', $text_comisionn, 'al verderlo!');
             $class = 'aviso_comision mb-2 white text-uppercase border shadow text-right p-2 mb-5';
@@ -572,19 +577,30 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($texto, ["class" => "mt-5 h4 text-uppercase black font-weight-bold"]);
             foreach ($recompensa as $row) {
 
+
                 $id_servicio = $row["id_servicio"];
                 $id_servicio_recompesa = $id_servicio;
                 $id_servicio_conjunto = $row["id_servicio_conjunto"];
                 $url_img_servicio = $row["url_img_servicio"];
                 $url_img_servicio_conjunto = $row["url_img_servicio_conjunto"];
                 $id_recompensa = $row["id_recompensa"];
+                $precio_servicio = $row["precio"];
+                $precio_conjunto = $row["precio_conjunto"];
 
                 $texto_total = total_recompensa($row);
                 $imagen_servicio = imagen_recompensa($url_img_servicio, $id_servicio);
                 $imagen_servicio_conjunto =
                     imagen_recompensa_conjunto($url_img_servicio_conjunto, $id_servicio_conjunto);
 
-                $agregar_a_carrito = anexar_carro_compra($id_recompensa, $data["in_session"]);
+                $agregar_a_carrito = anexar_carro_compra(
+                    $id_servicio,
+                    $id_recompensa, 
+                    $data["in_session"] , 
+                    $data,
+                    $precio_servicio, 
+                    $precio_conjunto,
+                    $row
+                );
 
                 $clase_imagen = 'col-xs-4';
 
@@ -592,8 +608,7 @@ if (!function_exists('invierte_date_time')) {
                     d($imagen_servicio, $clase_imagen),
                     d("+"),
                     d($imagen_servicio_conjunto, $clase_imagen),
-                    d($texto_total, _text_($clase_imagen)),
-
+                    d($texto_total, _text_($clase_imagen))
                 ];
 
                 $seccion_fotos = d($promocion, _text_('d-flex', _between));
@@ -627,7 +642,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return d($response, 'col-xs-12 col-sm-12 col-md-12 col-lg-6');
+        return d($response, 'col-xs-12 col-sm-12 col-md-12 col-lg-7');
 
 
     }
@@ -653,17 +668,54 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
-    function anexar_carro_compra($id_recompensa, $antecedentes)
-    {
-        return d("Agregar al carrito",
+    function anexar_carro_compra(
+        $id_servicio, $id_recompensa, 
+        $antecedentes, $data, $precio_servicio, 
+        $precio_servicio_conjunto, $row){
+
+
+        $editar_oferta = ''; 
+        $texto_comisiones = ''; 
+        $texto_utilidad = ''; 
+        $texto_editar_ganancias = '';
+        $descuento = $row["descuento"];
+        if (es_administrador($data)) {
+            
+            $path = path_enid("recompensas", $id_servicio);
+            $editar_oferta = a_enid(
+                    icon(_editar_icon),
+                    [                        
+                        "href" => $path,                        
+                    ]);
+
+        }
+
+        
+        $texto_comisiones = 
+        ganancia_vendedor($data, $precio_servicio, $precio_servicio_conjunto, $descuento);
+
+        
+        if (es_administrador($data)) {
+
+            $texto_utilidad = utilidad_venta_conjunta($data, $row, 1);            
+            
+        }
+        
+
+        $texto_editar_ganancias = flex( $texto_comisiones, $editar_oferta, 'flex-column');
+
+        $texto_editar_ganancias = es_administrador_o_vendedor($data) ? $texto_editar_ganancias : '';
+
+        $agregar_a_carrito =  d("Agregar al carrito",
             [
                 "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa white border text-center",
                 "id" => $id_recompensa, 
                 "antecedente_compra" => $antecedentes
             ]
-
-
         );
+
+        $elementos = [$agregar_a_carrito, $texto_utilidad, $texto_editar_ganancias ];
+        return flex($elementos, 'flex-column');
     }
 
     function total_recompensa($row)

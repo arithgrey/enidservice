@@ -18,7 +18,7 @@ class Home extends CI_Controller
         $param = $this->input->get();
         $id_producto = $this->input->get("id");
         $data = $this->app->session(3);
-        $data["recompensa"] = $this->recompensas($id_producto);
+        $data["recompensa"] = $this->recompensas($id_producto);        
         $data["id_servicio"] = $id_producto;
         $data = $this->app->cssJs($data, "recompensa");
         $this->app->log_acceso($data, 21);

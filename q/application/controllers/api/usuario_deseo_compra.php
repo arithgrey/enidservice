@@ -9,6 +9,7 @@ class usuario_deseo_compra extends REST_Controller
     {
         parent::__construct();
         $this->load->model("usuario_deseo_compra_model");
+        $this->load->helper("usuario_deseo_compra");
         $this->load->library(lib_def());
 
     }
@@ -38,6 +39,23 @@ class usuario_deseo_compra extends REST_Controller
         $this->response($response);
 
 
+    }
+    function agregados_GET()
+    {
+
+        $param = $this->get();        
+        $deseo_compra = $this->usuario_deseo_compra_model->get([],["status" => 0],1000, 'id_usuario_deseo_compra');
+        $response = $this->app->add_imgs_servicio($deseo_compra);        
+        $this->response(agregados($response));
+    }
+    function en_registro_GET()
+    {
+
+        $param = $this->get();        
+        $deseo_compra = $this->usuario_deseo_compra_model->get(
+            [],["status" => 3],1000, 'id_usuario_deseo_compra');
+        $response = $this->app->add_imgs_servicio($deseo_compra);        
+        $this->response(en_registro($response));
     }
 
     function total_GET()
@@ -100,7 +118,26 @@ class usuario_deseo_compra extends REST_Controller
 
         if (fx($param, "id,status")) {
 
-            $response = $this->usuario_deseo_compra_model->q_up("status", 2, $param["id"]);
+
+            $id = $param["id"];            
+            $status = $param["status"];        
+            $response =  $this->usuario_deseo_compra_model->q_up("status", $status, $id);
+            if ($status == 2) {
+            
+                $deseo_compra = $this->usuario_deseo_compra_model->q_get([], $id);
+                $ip = pr($deseo_compra, "ip");
+                $id_recompensa = pr($deseo_compra, "id_recompensa");
+                            
+                if ($id_recompensa > 0 ) {
+
+                    /*Se actualiza simple quitando los descuentos aplicados*/                    
+                    $response = 
+                    $this->usuario_deseo_compra_model->baja_recompensa($id, $ip , $id_recompensa);
+                }
+
+            }   
+
+            
 
         }
 
@@ -116,6 +153,15 @@ class usuario_deseo_compra extends REST_Controller
         $this->response($response);
     }
 
+    function envio_registro_PUT(){
+        
+        $param = $this->put();
+        $ids = get_keys($param["ids"]);
+        $response = $this->usuario_deseo_compra_model->envio_registro($ids);
+        $this->response($response);
+
+
+    }
     function envio_pago_GET()
     {
 

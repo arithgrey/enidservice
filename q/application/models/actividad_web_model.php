@@ -44,11 +44,27 @@ class actividad_web_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+    function usuario_compra()
+    {
+        
+        $query_get = "SELECT  
+                        SUM(CASE WHEN status = 0  THEN 1 ELSE 0 END) en_carro,   
+                        SUM(CASE WHEN status = 3  THEN 1 ELSE 0 END) en_registro,  
+                        SUM(CASE WHEN status = 4  THEN 1 ELSE 0 END) orden_enviada   
+                        FROM usuario_deseo";
+                        
+        return $this->db->query($query_get)->result_array();
+
+
+    }
 
     function get_correos_enviados($tabla)
     {
 
-        $query_get = "SELECT SUM(CASE WHEN total  > 0  THEN total ELSE 0 END) correos_enviados FROM $tabla";
+        $query_get = "SELECT 
+        SUM(CASE WHEN total  > 0  THEN total ELSE 0 END) 
+        correos_enviados 
+        FROM $tabla";
         return $this->db->query($query_get)->result_array()[0]["correos_enviados"];
     }
 
@@ -724,6 +740,52 @@ class actividad_web_model extends CI_Model
     {
         $query_get = "SELECT proximas FROM $tabla_recibos_proximos WHERE id_repartidor = 0";
         return $this->db->query($query_get)->result_array();
+    }
+    function metricas_usuario_deseo()
+    {
+
+        $query_get = "SELECT  
+                    SUM(CASE WHEN status = 0  THEN 1 ELSE 0 END) en_carro,   
+                    SUM(CASE WHEN status = 3  THEN 1 ELSE 0 END) en_registro,  
+                    SUM(CASE WHEN status = 4  THEN 1 ELSE 0 END) orden_enviada   
+                    FROM usuario_deseo";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+    function metricas_usuario_deseo_compra()
+    {
+
+        $query_get = "
+SELECT  
+SUM(CASE WHEN status = 0  THEN 1 ELSE 0 END) en_carro,   
+SUM(CASE WHEN status = 3  THEN 1 ELSE 0 END) en_registro,  
+SUM(CASE WHEN status = 4  THEN 1 ELSE 0 END) orden_enviada   
+FROM usuario_deseo_compra;";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+    function operaciones_abiertas()
+    {
+
+        $query_get = "SELECT 
+                        DISTINCT(po.id_orden_compra) productos_enviados
+                        FROM  
+                        proyecto_persona_forma_pago p
+                        INNER JOIN  
+                        producto_orden_compra po 
+                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
+                        WHERE  
+                        p.saldo_cubierto < 1                        
+                        AND  p.se_cancela = 0
+                        AND  p.status NOT IN(10,19)                         
+                        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)";
+
+
+        return $this->db->query($query_get)->result_array();
+
+
     }
 
 

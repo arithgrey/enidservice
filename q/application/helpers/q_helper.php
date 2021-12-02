@@ -4,6 +4,99 @@
 
 if (!function_exists('invierte_date_time')) {
 
+    function funnel($data){
+
+        $usuario_deseo = $data["usuario_deseo"];
+        $usuario_deseo_compra = $data["usuario_deseo_compra"];    
+        $ordenes_compra = $data["ordenes_compra"];
+
+        /*Personas registradas en el sistema*/        
+        $en_carrito_usuario = pr($usuario_deseo , "en_carro", 0);
+        $en_registro_usuario = pr($usuario_deseo , "en_registro", 0);
+        $orden_enviada_usuario = pr($usuario_deseo , "orden_enviada", 0);
+
+        
+        /*Personas registradas externas*/        
+        $en_carrito_usuario_externo = pr($usuario_deseo_compra , "en_carro", 0);
+        $en_registro_usuario_externo = pr($usuario_deseo_compra , "en_registro", 0);
+        $orden_enviada_usuario_externo = pr($usuario_deseo_compra , "orden_enviada", 0);
+
+        $response[] = seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo);
+        $response[] = seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo);
+        $response[] = envio_a_pago($ordenes_compra);
+
+        return append($response);
+        
+
+    }
+    function seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo)
+    {
+        
+        
+        $total = $en_carrito_usuario + $en_carrito_usuario_externo;
+        $text = _titulo(flex("En carro de compras", $total,_between),3);    
+        $response[] = d($text);
+
+        $personas_registradas_carrito= _text_(_between,'personas_registradas_carrito ');
+
+
+
+        $flex = flex(
+            "Personas registradas", $en_carrito_usuario, $personas_registradas_carrito,
+            'underline cursor_pointer');        
+        $response[] = d($flex);
+
+        $flex = flex("Prospectos externos", $en_carrito_usuario_externo, 
+            _text_(_between,'externos_en_carrito'),
+            'underline cursor_pointer'
+        );
+
+        $response[] = d($flex);
+        return d(d($response, "border p-4"), 4);
+
+    }
+    function seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo)
+    {
+        
+        
+        $total = $en_registro_usuario + $en_registro_usuario_externo;
+        $flex = flex(
+            "En registro de información de envío", 
+            $total,
+            _text_(_between));
+        $text = _titulo($flex,3);    
+        $response[] = d($text);
+        $flex = flex("Personas registradas", $en_registro_usuario, 
+            _text_(_between,'personas_registradas_contacto'),
+        'underline cursor_pointer');        
+        $response[] = d($flex);
+        $flex = flex("Prospectos externos", $en_registro_usuario_externo, 
+            _text_(_between,'personas_externas_contacto'),
+            'underline cursor_pointer'
+        );
+        $response[] = d($flex);
+        return d(d($response, "border p-4"),4);
+
+    }
+    function envio_a_pago($ordenes_compra)
+    {
+        
+    
+        $text = _titulo(flex("Ordenes de compra", d($ordenes_compra,'underline'),_between),3);    
+        $path = path_enid("entregas");
+
+        $link = a_enid($text,
+            [
+                "href" => $path,
+                "target" => "_black"
+            ]
+        );
+        $response[] = d($link);    
+        return d(d($response, "border p-4"),4);
+
+    }
+
+
     function actividad_mail_marketing($data)
     {
 

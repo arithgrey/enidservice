@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_recompensa = $row["id_recompensa"];
 
 
-                $texto_totales = totales($row);
+                $texto_totales = totales($row, $data);
                 $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
                 $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
                 $editar_comprar = editar_comprar($data, $id_recompensa);
@@ -56,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
         }
         $response[] = modal_nueva_recompensa();
         $response[] = hiddens(["class"=>"servicio_dominante_recompensa", "value" => $data["id_servicio"]]);
-        return d($response, 'col-xs-12 col-sm-12 col-md-6 col-md-offset-3');
+        return d($response, 'col-xs-12 col-sm-12 col-md-8 col-md-offset-2');
 
     }
 
@@ -112,23 +112,26 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function totales($row)
+    function totales($row , $data)
     {
+
         $precio_servicio = $row["precio"];
         $precio_conjunto = $row["precio_conjunto"];
-        $descuento = $row["descuento"];
-
+        $descuento = $row["descuento"];        
         $total = ($precio_conjunto + $precio_servicio) - $descuento;
         $total_sin_descuento = ($precio_conjunto + $precio_servicio);
         $total_sin_descuento = ($descuento > 0) ? del(money($total_sin_descuento)) : '';
-
-
+        
         $por_cobrar = money($total);
+        $texto_comisiones = ganancia_vendedor($data, $precio_servicio, $precio_conjunto , $descuento);        
+        $utilidad = utilidad_venta_conjunta($data, $row,1);
 
         $elementos = [
             d("Total", 'strong'),
             d($total_sin_descuento),
             d($por_cobrar, 'red_enid'),
+            d($texto_comisiones),
+            d($utilidad),            
         ];
 
         return d($elementos, 'd-flex flex-column');

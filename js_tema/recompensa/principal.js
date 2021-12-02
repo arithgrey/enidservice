@@ -63,8 +63,7 @@ let anexar_servicio_recompensa = function(e){
     let $producto_en_recompensa = parseInt(e.target.id);
     if ($producto_en_recompensa > 0) {
 
-        let url = "../q/index.php/api/recompensa/index/format/json/";
-        
+        let url = "../q/index.php/api/recompensa/index/format/json/";        
         let data_send = {"servicio": $servicio_dominante_recompensa.val(), "servicio_conjunto": $producto_en_recompensa};
 
         request_enid("POST", data_send, url, function(){
@@ -85,7 +84,6 @@ let editar_recompensa = function(e){
         let url = "../q/index.php/api/recompensa/id/format/json/";                
         request_enid("GET", $data_send, url, response_recompensa);
 
-
     }
 
 }
@@ -101,19 +99,88 @@ let response_recompensa = function(data){
         
         escucha_submmit_selector(e, $form_descuento,1);
     });
+
+    $(".descuento").keyup(calcula_total_final);
+    $(".editar_costo_servicio").click(function(){
+        $(".texto_editar_costo_servicio").addClass("d-none");
+        $(".form_costo").removeClass("d-none");
+        
+    });
+
+    let $form_costo = $(".form_costo");
+    $form_costo.submit(costo_servicio);
+    $(".input_costo").keyup(function (e) {        
+
+        escucha_submmit_selector(e, $form_costo,1);
+
+    });
+
+    /**/
+    $(".editar_costo_servicio_conjunto").click(function(){
+        $(".texto_editar_costo_servicio_conjunto").addClass("d-none");
+        $(".form_costo_conjunto").removeClass("d-none");
+        
+    });
+
+    let $form_costo_conjunto = $(".form_costo_conjunto");
+    $form_costo_conjunto.submit(costo_servicio_conjunto);
+    $(".input_costo_conjunto").keyup(function (e) {        
+
+        escucha_submmit_selector(e, $form_costo_conjunto,1);
+        
+    });
     
     
 }
 let recompensa_descuento = function(e){
 
-    let url = "../q/index.php/api/recompensa/descuento/format/json/";
-    let id = get_parameter_enid($(this), "id");
+    let $descuento = $(".descuento").val();
 
-    let data_send = $(".form_descuento").serialize();
-    request_enid("PUT", data_send, url, response_recompensa_descuento);
-    bloquea_form(".form_descuento");
+    if ($descuento > 0) {
+
+        let url = "../q/index.php/api/recompensa/descuento/format/json/";
+        let id = get_parameter_enid($(this), "id");
+
+        let data_send = $(".form_descuento").serialize();
+        request_enid("PUT", data_send, url, response_recompensa_descuento);
+        bloquea_form(".form_descuento");
+
+    }
+    
     e.preventDefault();
 }
+let costo_servicio = function(e){
+
+    let $costo = $(".costo").val();    
+    if (es_float($costo) && $costo > 0) {
+
+        let url = "../q/index.php/api/servicio/costo_compra/format/json/";
+        let data_send = $(".form_costo").serialize();
+        request_enid("PUT", data_send, url, function (data) {
+            redirect("");
+        });
+    } 
+
+    e.preventDefault();
+
+}
+
+let costo_servicio_conjunto = function(e){
+
+    let $costo = $(".costo_conjunto").val();    
+    if (es_float($costo) && $costo > 0) {
+
+        let url = "../q/index.php/api/servicio/costo_compra/format/json/";
+        let data_send = $(".form_costo_conjunto").serialize();
+        request_enid("PUT", data_send, url, function (data) {
+            redirect("");
+        });
+    } 
+
+    e.preventDefault();
+
+}
+
 let response_recompensa_descuento = function(data){
 
 
@@ -144,5 +211,34 @@ let carro_compra_recompensa  = function(){
 let response_deseo_compra_recompensa = function(data){
     $("#modal-error-message").modal("hide");            
     redirect("../lista_deseos");
+
+}
+let calcula_total_final = function() {
+    
+    let $descuento_por_aplicar = $(this).val();
+    let $total_sin_descuento = $(".total_sin_descuento").val();
+    let $precio_final_con_descuento = $(".precio_final_con_descuento_input");
+    let $nuevo_descuento  =  ($total_sin_descuento - $descuento_por_aplicar );  
+    $precio_final_con_descuento.text(_text_($nuevo_descuento,"MXN"));
+
+    /*Se calcula utilidad global*/
+    let $total_utilidad = $(".total_utilidad").val();
+    let $total_utilidad_descuento = ($total_utilidad - $descuento_por_aplicar);
+    $(".utilidad_descuento").text(_text($total_utilidad_descuento,".00MXN"));
+    
+
+    /*Se calcula utilidad menos comision*/      
+    let  $pago_por_venta = $(".pago_por_venta").val();
+    let $total_utilidad_descuento_comision  = ($total_utilidad_descuento - $pago_por_venta);    
+    $(".utilidad_descuento_comision").text(_text($total_utilidad_descuento_comision,".00MXN"));
+
+
+    /*Se calcula utilidad menos entrega*/          
+    let  $pago_por_entrega = 100;
+    let $total_utilidad_descuento_comision_entrega  = ($total_utilidad_descuento - $pago_por_venta - $pago_por_entrega);    
+    $(".utilidad_descuento_comision_entrega").text(_text($total_utilidad_descuento_comision_entrega,".00MXN"));
+
+
+
 
 }

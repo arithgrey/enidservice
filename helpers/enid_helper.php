@@ -3282,7 +3282,7 @@ function opciones_populares()
         [
             "class" => "white  f11 border-right frecuentes border-right-enid"
             ,
-            "href" => path_enid("search", "/?q2=0&q=&order=2"
+            "href" => path_enid("search", "/?q2=0&q=&order=1"
             )
         ]
     );
@@ -4016,4 +4016,164 @@ function list_orden($list_orden, $default)
 function titulo_bloque($str)
 {
     return _titulo($str, 5);
+}
+function comisiones_por_productos_deseados($servicios){
+
+    $total = 0;
+    foreach($servicios as $row ){
+
+        $precio = $row["precio"];
+        $comision = $row["comision"];
+        $total = $total + comision_porcentaje($precio, $comision);
+
+    }
+    return $total;
+}
+function comision_porcentaje($precio, $porcentaje_comision){
+
+    return ($precio * $porcentaje_comision) / 100;
+}
+function ganancia_vendedor($data, $precio_servicio, $precio_conjunto, $descuento)
+{
+    $texto_comisiones = '';
+     if (es_administrador_o_vendedor($data)) {
+            
+            $total = ($precio_servicio + $precio_conjunto) - $descuento;
+            
+            $total_en_comisiones = comision_porcentaje($total , 10);
+            $texto_ganancia= span(money($total_en_comisiones),'f11 strong white');
+            $texto =  _text_('Ganarás',$texto_ganancia,'al venderlo');
+            $texto_comisiones = d( $texto , ' fp8 white mt-5 blue_enid3 p-1');
+    }
+
+    return $texto_comisiones;
+
+}
+
+function utilidad_venta_conjunta($data, $row, $boton = 0)
+{
+    $response = '';
+     if (es_administrador($data)) {
+        
+        $servicio = $row["servicio"]; 
+        $servicio_conjunto = $row["servicio_conjunto"];     
+        $descuento = $row["descuento"];
+
+        $precio = pr($servicio , "precio");
+        $costo = pr($servicio , "costo");
+
+        $costo_conjunto = pr($servicio_conjunto , "costo");
+        $precio_conjunto = pr($servicio_conjunto , "precio");
+
+        $porcentaje_comision = pr($servicio, 'comision');
+        $porcentaje_comision_conjunto = pr($servicio_conjunto, 'comision');
+
+        $total = ($precio + $precio_conjunto) - $descuento;
+
+        $utilidad = ($precio - $costo);
+        $utilidad_2 = ($precio_conjunto - $costo_conjunto);
+
+        $pago_comisiones = comision_porcentaje($total, 10);
+        $response = ($utilidad + $utilidad_2) - $descuento - $pago_comisiones - 100;
+
+        if ($boton > 0) {
+         
+         $response = d( _text_('Utilidad', money($response)) , 
+            'border border-secondary mt-2 strong p-1');
+
+        }
+             
+    }
+
+    return $response;
+
+}
+
+function utilidad_en_servicio($data, $servicio, $boton = 0, $extra = '')
+{
+
+    $response = []; 
+
+    if (es_administrador($data)) {
+        
+
+        $precio = pr($servicio , "precio");
+        $id_servicio = pr($servicio , "id_servicio");
+        $costo_servicio = pr($servicio , "costo");
+        
+        $porcentaje_comision = pr($servicio, 'comision');
+        $comision = comision_porcentaje($precio, $porcentaje_comision);
+        $utilidad = ($precio - $costo_servicio);        
+        $total = ($utilidad - $comision - 100);
+
+
+        if ($boton > 0) {
+
+            $seccion = d( _text_('Utilidad', money($total)) , 
+            _text_('f14 border border-secondary mt-2 strong p-1', $extra));
+
+            $costo = _text_('Costo', money($costo_servicio));
+            $class = _text_('border border-secondary mt-2 strong p-1', $extra);
+
+            $icono_editar = text_icon(_text_("costos_precios_servicio",_editar_icon), $costo,
+                [                
+                    "id" => $id_servicio
+                ]);
+            
+            
+            $seccion_costo = d($icono_editar, $class);
+            $response[] = flex($seccion, $seccion_costo, 'flex-column');
+            $response[] = gb_modal_costos($precio, $costo_servicio , $id_servicio);
+
+        }
+
+    }
+    return append($response);
+
+}
+function gb_modal_costos($precio, $costo , $id_servicio)
+{
+
+        $form[] = d(_titulo('¿Precios y costos?'), 'mb-5');
+        $form[] = form_open("",
+            [
+                "class" => "form_precio",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = input_frm('', '¿Precio?',
+            [
+                'class' => 'precio_servicio',
+                'id' => 'precio',
+                'name' => 'precio',
+                'value' => $precio,
+                'required' => true
+            ]
+        );
+
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
+        $form[] = form_close();
+
+
+
+        $form[] = form_open("",
+            [
+                "class" => "form_costo",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = input_frm('mt-5', '¿Costo?',
+            [
+                'class' => 'costo_servicio',
+                'id' => 'costo',
+                'name' => 'costo',
+                'value' => $costo,
+                'required' => true
+            ]
+        );
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
+        $form[] = form_close();
+        return gb_modal(append($form), 'gb_costos_precios');
 }

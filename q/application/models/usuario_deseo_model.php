@@ -119,7 +119,13 @@ class Usuario_deseo_model extends CI_Model
     function envio_pago($ids)
     {
 
-        $query_update = "UPDATE usuario_deseo SET status = 3 WHERE id IN(" . $ids . ") LIMIT 100";
+        $query_update = "UPDATE usuario_deseo SET status = 4 WHERE id IN(" . $ids . ") LIMIT 10";
+        return $this->db->query($query_update);
+    }
+    function envio_registro($ids)
+    {
+
+        $query_update = "UPDATE usuario_deseo SET status = 3 WHERE id IN(" . $ids . ") LIMIT 10";
         return $this->db->query($query_update);
     }
 
@@ -142,6 +148,15 @@ class Usuario_deseo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+    function baja_recompensa($id, $id_usuario , $id_recompensa)
+    {
 
-
+        $query_update = "UPDATE usuario_deseo_compra SET id_recompensa = 0 
+                        WHERE (id = $id) 
+                        OR 
+                        (id_usuario = $id_usuario && id_recompensa =  $id_recompensa ) 
+                        LIMIT 100";
+        return $this->db->query($query_update);
+    }
+    
 }

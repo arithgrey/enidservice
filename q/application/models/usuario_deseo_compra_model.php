@@ -47,7 +47,7 @@ class Usuario_deseo_compra_model extends CI_Model
 
     function q_get($params = [], $id)
     {
-        return $this->get($params, ["id" => $id]);
+        return $this->get($params, ["id_usuario_deseo_compra" => $id]);
     }
 
     function total_ip($ip)
@@ -73,6 +73,13 @@ class Usuario_deseo_compra_model extends CI_Model
     function envio_pago($ids)
     {
 
+        $query_update = "UPDATE usuario_deseo_compra SET status = 4 
+                        WHERE id_usuario_deseo_compra IN(" . $ids . ") LIMIT 100";
+        return $this->db->query($query_update);
+    }
+    function envio_registro($ids)
+    {
+
         $query_update = "UPDATE usuario_deseo_compra SET status = 3 
                         WHERE id_usuario_deseo_compra IN(" . $ids . ") LIMIT 100";
         return $this->db->query($query_update);
@@ -91,6 +98,14 @@ class Usuario_deseo_compra_model extends CI_Model
                 WHERE  id_usuario_deseo_compra IN(" . $ids . ") ";
         return $this->db->query($query_get)->result_array();
 
+    }
+    function baja_recompensa($id, $ip , $id_recompensa)
+    {
+
+        $query_update = "UPDATE usuario_deseo_compra SET id_recompensa = 0 
+                        WHERE (id_usuario_deseo_compra = $id) 
+                        OR (ip = '$ip' && id_recompensa =  $id_recompensa ) LIMIT 100";
+        return $this->db->query($query_update);
     }
 
 

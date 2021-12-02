@@ -11,6 +11,24 @@ class Enid extends REST_Controller
         $this->load->library(lib_def());
     }
 
+    function funnel_GET()
+    {
+        
+        $usuario_deseo = $this->actividad_web_model->metricas_usuario_deseo();
+        $usuario_deseo_compra = $this->actividad_web_model->metricas_usuario_deseo_compra();
+        $ordenes_compra= $this->actividad_web_model->operaciones_abiertas();
+        
+        $response = 
+        [
+            "usuario_deseo" => $usuario_deseo ,
+            "usuario_deseo_compra" => $usuario_deseo_compra ,
+            "ordenes_compra" => count($ordenes_compra)
+
+        ];
+
+        $this->response(funnel($response));
+
+    }
     function bugs_GET()
     {
 

@@ -8,6 +8,9 @@ let $form_entregas = $('.form_entregas');
 let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
 let $form_top_ventas = $('.form_top_ventas');
 let $form_sin_ventas = $('.form_sin_ventas');
+let $funnel_ventas = $('.funnel');
+
+
 
 $(document).ready(() => {
 
@@ -48,6 +51,7 @@ $(document).ready(() => {
     $form_top_ventas.submit(top_ventas);
     $form_sin_ventas.submit(sin_ventas);
 
+    $funnel_ventas.click(funnel);
 
 });
 let carga_nuevos_miembros = function () {
@@ -485,3 +489,57 @@ let render_top_ventas = function (data) {
     render_enid(".place_keywords", data);
 
 }
+let funnel = function (e) {
+    
+    let data_send = $.param({});
+    let url = "../q/index.php/api/enid/funnel/format/json/";
+    request_enid("GET", data_send, url, response_funnel, ".place_usabilidad", 0, ".place_usabilidad");
+
+};
+let response_funnel = function (data) {
+    
+    render_enid(".funnel_ventas", data);
+    $(".personas_registradas_carrito").click(personas_registradas_carrito);
+    $(".externos_en_carrito").click(externos_en_carrito);
+    
+    $(".personas_registradas_contacto").click(personas_registradas_contacto);
+    $(".personas_externas_contacto").click(personas_externas_contacto);
+    
+    
+
+
+};
+let personas_registradas_contacto = function (e) {
+    
+    let data_send = $.param({});
+    let url = "../q/index.php/api/usuario_deseo/en_registro/format/json/";
+    request_enid("GET", data_send, url, response_personas_registradas_carrito);
+
+};
+let personas_externas_contacto = function (e) {
+    
+    let data_send = $.param({});
+    let url = "../q/index.php/api/usuario_deseo_compra/en_registro/format/json/";
+    request_enid("GET", data_send, url, response_personas_registradas_carrito);
+
+};
+let personas_registradas_carrito = function (e) {
+    
+    let data_send = $.param({});
+    let url = "../q/index.php/api/usuario_deseo/agregados/format/json/";
+    request_enid("GET", data_send, url, response_personas_registradas_carrito);
+
+};
+let externos_en_carrito = function(e){
+
+    let data_send = $.param({});
+    let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
+    request_enid("GET", data_send, url, response_personas_registradas_carrito);
+    
+}
+let response_personas_registradas_carrito = function (data) {
+
+    
+    render_enid(".funnel_ventas", data);
+    
+};

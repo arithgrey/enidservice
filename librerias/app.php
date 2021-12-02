@@ -734,10 +734,9 @@ class app extends CI_Controller
                 ,
             "recompensa" =>
                 [
-                    "css" =>
-                        [
-                            
-
+                    "css" => 
+                        [                            
+                            "recompensa.css",
                         ],
                     "js" =>
                         [
@@ -1165,6 +1164,7 @@ class app extends CI_Controller
                         [
 
                             "repo_enid/principal.js",
+                            "repo_enid/map.js",
                         ],
                     "clasificaciones_departamentos" => "",
                 ]
