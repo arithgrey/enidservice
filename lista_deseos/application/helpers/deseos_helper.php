@@ -261,34 +261,32 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
         $total_en_descuento = descuento_recompensa($data);
+        
         if ($es_premium && $total_en_descuento < 1) {
 
-            $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
-            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
             $total_menos_descuento = ($subtotal - $total_descuento);
+            $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
+            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");        
             $response[] = d(money($total_menos_descuento), "display-4 black");
 
 
         } else {
 
-
             $response = formato_subtotal($response ,$data, $subtotal);
-
-            
 
         }
 
         $inputs_recompensa = valida_envio_descuento($data);
         
-        $response[] = form_procesar_carro_compras(
-            $data, $inputs, $inputs_recompensa,  $subtotal);
+        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal);
 
 
         if (es_administrador_o_vendedor($data)) {
         
-            $comicion_venta = comisiones_por_productos_deseados($productos_deseados);
-            $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comicion_venta) ,'strong'));
+            $comision_venta = comisiones_por_productos_deseados($productos_deseados);
+            $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comision_venta), 'strong texto_comision_venta'));
             $response[] =  d($textos , 'display-6 black mt-5 text-right text-uppercase p-2');
+            $response[] =  hiddens(["class" => "comision_venta", "value" => $comision_venta ]);
 
         }
         
@@ -368,14 +366,51 @@ if (!function_exists('invierte_date_time')) {
     function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
     {
 
-        
 
         $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
         if (!$es_recien_creado) {
 
+            $es_administrador_o_vendedor = es_administrador_o_vendedor($data);
+
             $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
             $response[] = append($inputs);
             $response[] = append($inputs_recompensa);            
+
+    
+            $seleccionar_todo = input(
+                [
+                    "type" => "checkbox",
+                    "class" => "cobro_monto_mayor",
+                    "id" => "cobro_monto_mayor"
+                ]
+            );
+            
+       
+            $extra = ($es_administrador_o_vendedor) ? "": "d-none"; 
+        
+            $seccion_cobro_externo[] = flex(
+                    $seleccionar_todo, 
+                    "¿Cobrasté algún monto mayor?",
+                    "mt-5 text-uppercase black strong  border-bottom cobro_texto",
+                    "mr-3"
+                );
+     
+            $seccion_cobro_externo[] = hiddens(["class" => "cobro_visible" , "value" => 0]);
+            $seccion_cobro_externo[] = input_frm(
+                    "", 
+                    "", 
+
+                    [
+                        "name" => "cobro_secundario",
+                        "id" => "cobro_secundario",
+                        "type" => "float",
+                        "class" => _text_("cobro_secundario d-none"),
+                        "value" => 0
+                    ]
+                );
+    
+            $response[] = d($seccion_cobro_externo, $extra);
+            
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');

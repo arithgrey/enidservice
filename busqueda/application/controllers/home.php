@@ -12,18 +12,34 @@ class Home extends CI_Controller
     function index()
     {
         $data = $this->app->session(9);
-        $data = $this->app->cssJs($data, "busqueda");
-
+        $data = $this->app->cssJs($data, "busqueda");        
         $session = $this->app->session();
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
         $ventas_semana = $this->ventas_semana();
 
+
+
         $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
         $data["ventas_semana"] = $ventas_semana;
+        $comisiones_usuario = $this->comisiones_por_cobrar($data["id_usuario"]);        
+        $recompensas = $this->app->recompensas_recibos($comisiones_usuario);        
+        $data["comisiones_por_cobrar"] = $comisiones_usuario;
+        $data["recompensas"] = $recompensas;
+
         $this->app->pagina($data, render($data), 1);
 
 
     }
+    
+    private function comisiones_por_cobrar($id_usuario)
+    {
+
+        $q = 
+        [
+            "id" =>  $id_usuario
+        ];
+        return $this->app->api("recibo/comisiones_por_cobrar/format/json/", $q);
+    }    
 
     private function ventas_semana()
     {

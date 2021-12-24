@@ -1,7 +1,4 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-require_once('../librerias/google-translate/vendor/autoload.php');
-
-use Statickidz\GoogleTranslate;
 
 class Home extends CI_Controller
 {
@@ -16,7 +13,7 @@ class Home extends CI_Controller
 
     function index()
     {
-        $param = $this->input->get();
+        $param = $this->input->get();        
         $id_producto = $this->input->get("producto");
         evita_basura($id_producto);
         $method = $_SERVER['REQUEST_METHOD'];

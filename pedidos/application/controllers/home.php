@@ -41,6 +41,7 @@ class Home extends CI_Controller
     private function valida_seguimiento($param, $data)
     {
 
+        
         $this->app->acceso();
         $costos_operacion = prm_def($param, "costos_operacion");
         $es_costo_operacion = ($costos_operacion > 0);
@@ -477,7 +478,8 @@ class Home extends CI_Controller
 
 
     private function busqueda_pedidos($param, $data)
-    {
+    {   
+
         $es_administrador = in_array($data['id_perfil'], [3]);
         $comisionistas = [];
 

@@ -1740,6 +1740,18 @@ class app extends CI_Controller
 
         return $this->api("tipo_comisionista/index/format/json/");
     }
+    function recompensas_recibos($recibos)
+    {
+        
+        $response =  [];
+        if (es_data($recibos)) {        
+        
+            $ids = array_unique(array_column($recibos,'id_orden_compra'));        
+            $response=  $this->api("recompensa/ids_recibo_descuento/format/json/", ["ids" => $ids]);            
+        }
+        return $response;
+
+    }
 
 
 }

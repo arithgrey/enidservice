@@ -21,8 +21,6 @@ class Home extends CI_Controller
 
     }
 
-
-
     private function imagenes_clientes($id_empresa)
     {
 

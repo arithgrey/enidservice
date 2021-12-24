@@ -790,10 +790,12 @@ if (!function_exists('invierte_date_time')) {
         $es_premium = es_premium($data, $usuario);
         $texto_precio_base = ($precio_unidad > 0) ? _text($precio_unidad, "MXN") : "A CONVENIR";
 
+        $texto_premium = "";
         if ($es_premium) {
 
             $texto = d(del($texto_precio_base), "f11 text-secondary");
             $texto_precio = money($precio_menos_descuento);
+            /*
             $texto_premium = flex(
                 $texto_precio,
                 "Puedes venderlo a este precio por ser premium",
@@ -801,7 +803,7 @@ if (!function_exists('invierte_date_time')) {
                 "f16",
                 "text-muted "
             );
-
+            */
             $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
 
         } else {
@@ -813,6 +815,7 @@ if (!function_exists('invierte_date_time')) {
             if ($in_session && $descuento_especial > 0) {
 
                 $texto_precio = money($precio_menos_descuento);
+                /*
                 $texto_premium = flex(
                     del($texto_precio),
                     "Puedes venderlo a este precio aumentando tus ventas semanales",
@@ -820,6 +823,7 @@ if (!function_exists('invierte_date_time')) {
                     "fp9",
                     "text-muted fp8"
                 );
+                */
 
                 $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
 
@@ -1002,7 +1006,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-        $response[] = formas_acionales_compra($data);
+        //$response[] = formas_acionales_compra($data);
         return append($response);
 
 
@@ -1019,6 +1023,7 @@ if (!function_exists('invierte_date_time')) {
         $len_ml = ((strlen($link_ml)) > 0);
 
         $response = [];
+
         if ($len_amazon || $len_ml) {
 
             $response[] = d("Más opciones de compra", "text-secondary mt-3 text-right cursor_pointer col-md-12 texto_externo_compra");

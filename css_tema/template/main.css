@@ -1,3 +1,8 @@
+.border_black{
+    border-bottom: solid 3px !important;
+    border-bottom-color: black !important;    
+    
+}
 .bottom_carro_compra_recompensa{
     background: #031120!important;
 }
@@ -1366,6 +1371,10 @@ select {
 .bg_custom_green {
     background: #0b1e42 !important
 }
+.bg_custom_green_ {
+    background: #3a8dbf !important
+}
+
 
 html {
     height: 100%;

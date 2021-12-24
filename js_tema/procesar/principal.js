@@ -47,6 +47,7 @@ let $producto_carro_compra = $(".producto_carro_compra");
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
 
+
 $(document).ready(() => {
 
     $('footer').addClass('d-none');
@@ -80,10 +81,12 @@ $(document).ready(() => {
         escucha_submmit_selector(e, $form_miembro);
     });
 
+
 });
 
 let registro = (e) => {
 
+    
     let respuestas = [];
     respuestas.push(es_formato_nombre($input_nombre_registro_envio));
     respuestas.push(es_formato_password($input_password_registro_envio));
@@ -106,6 +109,7 @@ let registro = (e) => {
 
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
+        let $cobro_secundario = $(".cobro_secundario").val();        
 
         let $data_send = {
             "password": $secret,
@@ -122,6 +126,7 @@ let registro = (e) => {
             "es_carro_compras": $es_carro_compras.val(),
             "producto_carro_compra": $producto_carro_compra,
             "recompensas": $recompensas,
+            "cobro_secundario": $cobro_secundario
 
         };
 
