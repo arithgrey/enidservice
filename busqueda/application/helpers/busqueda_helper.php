@@ -43,10 +43,121 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function comisiones($data)
+    {
+        
+        $comisiones_por_cobrar =  $data["comisiones_por_cobrar"];
+        $response = 0;
+        $adicionales = 0; 
+        if (es_data($comisiones_por_cobrar)) {
+
+            $recompensas = $data["recompensas"];                    
+            $total_descuento = array_sum(array_column($recompensas, "descuento"));        
+            $utilidad = 0;
+            $id_orden_actual = 0; 
+            foreach($comisiones_por_cobrar as $row){                        
+                
+                $id_orden_compra = $row["id_orden_compra"];
+                $precio = ($row["precio"] * $row["num_ciclos_contratados"]);
+
+                if ($id_orden_actual != $id_orden_compra) {
+                    
+                    $total_por_orden_compra = cobro_por_orden_compra($comisiones_por_cobrar, $id_orden_compra);
+                    $monto_cobro_extra = cobro_secundario_ordenes_compra($comisiones_por_cobrar, $id_orden_compra);
+                    
+                    if ($monto_cobro_extra > $total_por_orden_compra) {
+                        
+                        $diferencia = ($monto_cobro_extra - $total_por_orden_compra);
+                        $adicionales = $adicionales + $diferencia;
+                    }
+                    
+                    $id_orden_actual = $id_orden_compra;
+                }
+
+                $utilidad = $utilidad + $precio;
+
+            }
+            
+            $utilidad_descuento = $utilidad - $total_descuento;
+            $response = (comision_porcentaje($utilidad_descuento,10) + $adicionales);
+        }
+        return $response;
+    }
+    function cobro_por_orden_compra($comisiones_por_cobrar, $id_orden_compra)
+    {
+   
+        $monto = 0;
+        foreach($comisiones_por_cobrar as $row){
+            
+            $cobro_secundario = $row["cobro_secundario"];
+            if ($id_orden_compra == $row["id_orden_compra"] ) {
+
+                $precio = ($row["precio"] * $row["num_ciclos_contratados"]);
+                $monto = $monto + $precio;
+            }
+            
+        }
+
+        return $monto;
+    }
+    function cobro_secundario_ordenes_compra($comisiones_por_cobrar, $id_orden_compra)
+    {
+   
+        $monto = 0;
+        foreach($comisiones_por_cobrar as $row){
+            
+            $cobro_secundario = $row["cobro_secundario"];
+            if ($id_orden_compra == $row["id_orden_compra"] && $cobro_secundario > 0  ) {
+
+                $monto = $cobro_secundario;
+                break;
+            }
+            
+        }
+
+        return $monto;
+    }
+
     function seccion_estadisticas($data)
     {
 
-        $r[] = d(_titulo("estadísticas", 4), "mt-5");
+        $comision_venta = comisiones($data);
+        $classe_center = 'd-flex p-3 bg_custom_green_ 
+        white flex-column  text-uppercase border_black';
+
+
+        $texto = flex("Saldo por cobrar", money($comision_venta), $classe_center, '' ,'display-4');
+        
+
+        $r[] = d($texto, 'mt-5');
+        $link = a_enid("Ver pedidos",
+                [
+                    "href" => path_enid("pedidos"),
+                    "class" => "black underline"
+                ]);
+
+        $r[] = d($link, "text-right");
+
+        if (es_administrador($data)) {
+                    
+            $link_entregas = a_enid("Próximas entregas",
+                    [
+                        "href" => path_enid("entregas"),
+                        "class" => "black underline"
+                    ]);
+            $r[] = d($link_entregas, "text-right");
+
+            $link_entregas = a_enid("Métricas",
+                    [
+                        "href" => path_enid("reporte_enid"),
+                        "class" => "black underline"
+                    ]);
+            $r[] = d($link_entregas, "text-right");
+        }
+
+
+
+        $r[] = d(_titulo("estadísticas", 4));
         $r[] = d(p("Actividades en los últimos 30 días", "text-secondary"));
 
         $meta_semanal_comisionista = $data['meta_semanal_comisionista'];

@@ -2038,6 +2038,7 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
         "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
         "url_home" => "../reporte_enid",
+        "reporte_enid" => "reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
         "forma_pago_search" => "forma_pago/?recibo=",
         "nfaq" => "faq/?nueva=1",
@@ -3123,7 +3124,9 @@ function formated_link($str, $primario = 1)
 
 function money($num)
 {
-    return add_text(money_format('%i', $num), " MXN");
+    
+    return _text_(sprintf('%01.2f', $num), "MXN");    
+
 }
 
 function format_load($extra = '')

@@ -13,7 +13,7 @@
 }
 
 .pago_en_proceso {
-    background: #04325b;
+    background: #f6f8f9;
 }
 
 .se_pago {
@@ -21,9 +21,7 @@
     background: #007eee;
 }
 
-.pago_en_proceso h4 {
-    color: white !important;
-}
+
 
 .se_pago h4 {
     color: white !important;

@@ -123,6 +123,14 @@ if (!function_exists('invierte_date_time')) {
 
             $inputs = [];
 
+            $inputs[] = hiddens(
+                    [
+                        "name" => "cobro_secundario",
+                        "value" => $param["cobro_secundario"],
+                        "class" => "cobro_secundario"
+                    ]
+                );
+            
             for ($a = 0; $a < count($producto_carro_compra); $a++) {
 
                 $inputs[] = hiddens(

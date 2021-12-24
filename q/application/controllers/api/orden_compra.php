@@ -20,9 +20,12 @@ class orden_compra extends REST_Controller
         $response = false;
         $param = $this->post();
 
-        if (fx($param, "id")) {
+        if (fx($param, "id,cobro_secundario")) {
 
-            $params = ["status" => 1];
+            $params = [
+                "status" => 1, 
+                "cobro_secundario" => $param["cobro_secundario"]
+            ];
             $response = $this->orden_compra_model->insert($params, 1);
 
             if ($response > 0) {

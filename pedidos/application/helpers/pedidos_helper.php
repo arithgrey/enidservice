@@ -598,10 +598,9 @@ if (!function_exists('invierte_date_time')) {
 
         } else {
 
-
-            $fecha =
-                ($es_servicio) ? $fecha_servicio : ($tipo_entrega == 2) ?
-                    $fecha_contra_entrega : $fecha_vencimiento;
+            $fecha_contra_entrega_vencimiento = 
+            ($tipo_entrega == 2) ? $fecha_contra_entrega : $fecha_vencimiento;
+            $fecha = ($es_servicio) ? $fecha_servicio : $fecha_contra_entrega_vencimiento;
             $text = seccion_orden_por_entregar(
                 $productos_orden_compra, $data, $tipo_entrega, $es_servicio, $fecha);
 
@@ -981,7 +980,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($recibo_vendedor, 'row mt-3');
 
-        $text = es_orden_pagada_entregada($data) ? 'Entregará' : 'Entregó';
+        $text = es_orden_pagada_entregada($data) ? 'Vendió' : 'Agendó';
         $repartidor = $data['repartidor'];
         $id_usuario_reparto = pr($repartidor, 'id_usuario');
         $url_img_usuario = pr($repartidor, 'url_img_usuario');
@@ -1527,6 +1526,7 @@ if (!function_exists('invierte_date_time')) {
     function get_form_busqueda_pedidos($data, $param)
     {
 
+        
         $es_busqueda_reparto = prm_def($param, 'reparto');
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
         $tipos_entregas = $data["tipos_entregas"];
@@ -1592,10 +1592,16 @@ if (!function_exists('invierte_date_time')) {
             _text_('text-left', $visibilidad),
             _text_('text-left', $visibilidad)
         );
-        if ($es_busqueda) {
+
+        if ($es_busqueda && es_data($param)) {
+
 
             $r[] = frm_fecha_busqueda(
-                $param["fecha_inicio"], $param["fecha_termino"], $ancho_fechas, $ancho_fechas);
+                $param["fecha_inicio"],
+                $param["fecha_termino"], 
+                $ancho_fechas, 
+                $ancho_fechas
+            );
             $r[] = hiddens(
                 [
                     "name" => "consulta",
@@ -4091,41 +4097,6 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-
-//    function text_cambio_fecha_hora($recibo, $tipo)
-//    {
-//
-//        $tipo_entrega = (int)pr($recibo, 'tipo_entrega');
-//        $text = 'CAMBIAR A DOMICILIO DE ENTREGA';
-//        if ($tipo === $tipo_entrega) {
-//            $text = _text_('CAMBIAR DOMICILIO DE ENTREGA', icon(_check_icon));
-//        }
-//        return $text;
-//    }
-
-//    function link_cambio_punto_encuentro($data, $response, $recibo)
-//    {
-//
-//
-//        if (es_data($recibo) && !es_orden_cancelada($data)) {
-//
-//            $id_orden_compra = $data["orden"];
-//            $form[] = frm_pe_avanzado($id_orden_compra);
-//            $form[] = d(
-//                a_enid(
-//                    text_cambio_fecha_hora($recibo, 1),
-//                    [
-//                        "class" => "lugar_horario_entrega",
-//                        "id" => $id_orden_compra,
-//                        "onclick" => "confirma_lugar_horario_entrega()",
-//                    ]
-//                )
-//            );
-//            $response[] = append($form);
-//        }
-//        return $response;
-//
-//    }
 
 
 }

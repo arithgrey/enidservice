@@ -90,9 +90,8 @@ class recibo extends REST_Controller
     }
     function recompensas($recibos)
     {
-        
-        $ids = array_unique(array_column($recibos,'id_orden_compra'));        
-        $recompensa = $this->app->api("recompensa/ids_recibo_descuento/format/json/", ["ids" => $ids]);
+                
+        $recompensa = $this->app->recompensas_recibos($recibos);
         $response = []; 
         $data_complete = [];
         $a = 0;
@@ -569,8 +568,18 @@ class recibo extends REST_Controller
         }
         $this->response($response);
     }
+    function comisiones_por_cobrar_GET()
+    {
 
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id")) {
 
+            $response = $this->recibo_model->comisiones_por_cobrar($param["id"]);        
+
+        }
+        $this->response($response);
+    }
     function cantidad_PUT()
     {
 
@@ -772,22 +781,28 @@ class recibo extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "id_usuario,id_ciclo_facturacion,talla,orden_compra")) {
+        if (fx($param, "id_usuario,id_ciclo_facturacion,talla,orden_compra,cobro_secundario")) {
 
             $id = $this->recibo_model->crea_orden_de_compra($param);
             $id_orden_compra = $param["orden_compra"];
-            $response = $this->recibo($id, $id_orden_compra);
+            $cobro_secundario = $param["cobro_secundario"];
+            $response = $this->recibo($id, $id_orden_compra, $cobro_secundario);
 
         }
+        
         $this->response($response);
     }
 
-    private function recibo($id_producto, $id_orden_compra)
+    private function recibo($id_producto, $id_orden_compra, $cobro_secundario)
     {
 
         if ($id_orden_compra < 1) {
 
-            $q = ["id" => $id_producto];
+            $q = [
+                    "id" => $id_producto,
+                    "cobro_secundario"  => $cobro_secundario
+                ];
+
             $id_orden_compra_generada = $this->app->api("orden_compra/index", $q, "json", "POST");
 
         } else {
@@ -1406,8 +1421,11 @@ class recibo extends REST_Controller
             "p.id_usuario_entrega",
             "p.id_usuario",
             "p.intento_reventa",
+            "p.costo",
             'p.intento_recuperacion',
-            "po.id_orden_compra"
+            "po.id_orden_compra",
+            "oc.cobro_secundario"
+
         ];
 
         $params_busqueda_recibo = [
@@ -1432,7 +1450,8 @@ class recibo extends REST_Controller
             "id_usuario_entrega",
             "id_usuario",
             "intento_reventa",
-            'intento_recuperacion'
+            "intento_recuperacion",
+            "costo"
         ];
 
         $parametros = [$params, $params_busqueda_recibo];
@@ -1487,9 +1506,9 @@ class recibo extends REST_Controller
                     $response = $this->add_repartidores($response, $param);
                     $response = $this->add_clientes($response, $param);
                     $session = $this->app->session();
-
-                    $response = render_resumen_pedidos($response,
-                        $this->get_estatus_enid_service($param), $param, $session);
+                    $status_enid = $this->get_estatus_enid_service($param);
+                    $recompensas = $this->app->recompensas_recibos($response);
+                    $response = render_resumen_pedidos($response, $recompensas, $status_enid, $param, $session);
                     break;
 
                 case 2: /*No me elimines regresa el json puro*/ break;

@@ -185,8 +185,10 @@ class Recibo_model extends CI_Model
         $status_venta = $param["status_venta"];
         $id_usuario_venta = $param['id_usuario'];
         $es_administrador = $param['es_administrador'];
-        $query_get = "SELECT " . $f . " FROM proyecto_persona_forma_pago p INNER JOIN producto_orden_compra po 
-        ON po.id_proyecto_persona_forma_pago = p.id_proyecto_persona_forma_pago ";
+        $query_get = "SELECT " . $f . " FROM 
+        proyecto_persona_forma_pago p INNER JOIN producto_orden_compra po 
+        ON po.id_proyecto_persona_forma_pago = p.id_proyecto_persona_forma_pago 
+            INNER JOIN orden_compra oc ON po.id_orden_compra = oc.id_orden_compra ";
 
 
         $ext_usuario = $this->get_usuario($param);
@@ -205,7 +207,7 @@ class Recibo_model extends CI_Model
 
         $ext_fecha = $this->get_fecha($param);
         $ext_servicio = $this->get_servicio($param);
-        $order = " ORDER BY  p.se_cancela ASC, p.id_usuario_referencia DESC , p.flag_pago_comision ASC";
+        $order = " ORDER BY  po.id_orden_compra, p.se_cancela ASC, p.flag_pago_comision ASC";
         $query_get .= _text_($ext_usuario, $usuario_referencia, $extra_extatus_venta,
             $extra_usuario_venta, $ext_fecha, $ext_servicio, $order);
         return $this->db->query($query_get)->result_array();
@@ -1680,6 +1682,32 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_update);
     }
+    function comisiones_por_cobrar($id_usuario)
+    {
+        $query_get = "SELECT 
+            p.comision_venta, 
+            p.id_proyecto_persona_forma_pago,
+            p.precio,
+            p.costo,
+            p.num_ciclos_contratados,
+            p.monto_a_pagar,
+            o.id_orden_compra,
+            oc.cobro_secundario
+            FROM 
+            proyecto_persona_forma_pago  p 
+            INNER JOIN producto_orden_compra o ON 
+            p.id_proyecto_persona_forma_pago = o.id_proyecto_persona_forma_pago
+            INNER JOIN orden_compra oc ON 
+            oc.id_orden_compra =  o.id_orden_compra 
+            WHERE 
+            p.id_usuario_referencia = $id_usuario
+            AND se_cancela < 1 
+            AND cancela_cliente < 1  
+            AND saldo_cubierto > 0 
+            AND flag_pago_comision < 1 
+            GROUP BY p.id_proyecto_persona_forma_pago";
 
+        return $this->db->query($query_get)->result_array();
+    }
 
 }   

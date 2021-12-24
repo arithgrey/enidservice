@@ -414,6 +414,13 @@ if (!function_exists('invierte_date_time')) {
         
 
         $list = [
+            a_enid(text_icon(_money_icon, "Noticas"),
+                [
+                    
+                    "href" => path_enid("busqueda"),
+                    "class" => "text-uppercase black",                    
+                ]
+            ),
             a_enid(text_icon(_money_icon, "Puntos de ventas clientes"),
                 [
                     

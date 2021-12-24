@@ -6,14 +6,27 @@ let $carro_compras_total = $(".carro_compras_total");
 let $subtotal_carrito = $(".subtotal_carrito");
 let $seccion_enviar_orden = $(".seccion_enviar_orden");
 let $form_segunda_compra = $(".form_segunda_compra");
+let $cobro_monto_mayor = $(".cobro_monto_mayor");
+let $cobro_secundario = $(".cobro_secundario");
+let $cobro_texto = $(".cobro_texto");
+let $cobro_visible = $(".cobro_visible");
+let $texto_comision_venta = $(".texto_comision_venta");
 
 $(document).ready(function () {
+
 
     $('.cantidad_articulos_deseados').change(modifica_cantidad_articulos_deseados);
     $texto_deseleccionar.click(deseleccionar);
     $texto_seleccionar.click(seleccionar);
     $seleccion_producto_carro_compra.click(check_producto_carro_compra);
+    $cobro_monto_mayor.click(cobro_monto_mayor);
     $form_segunda_compra.submit(segunda_compra);
+    $cobro_secundario.keyup(cobro_secundario);
+
+
+    
+
+
 });
 
 let segunda_compra = function (e) {
@@ -92,6 +105,7 @@ let seleccionar = () => {
     let $seleccion_producto_carro_compra = $(".seleccion_producto_carro_compra");
     $seleccion_producto_carro_compra.each(function () {
 
+
         $(this).prop('checked', true);
 
         let $id = $(this).val();
@@ -103,7 +117,7 @@ let seleccionar = () => {
         let $input = $("<input type=\"hidden\" " +
             "class=\"" + $class + "\" " +
             "value=\"" + $id + "\"" + " name=\"" + $name + "\" />");
-
+        
         $(".form_pre_pedido").append($input);
 
 
@@ -127,6 +141,7 @@ let check_producto_carro_compra = function () {
             "value=\"" + $id + "\"" + " name=\"" + $name + "\" />");
 
         $(".form_pre_pedido").append($input);
+
         let $nuevo_subtotal = $subtotal_carro_compras + $total;
         $carro_compras_total.val($nuevo_subtotal);
         $subtotal_carrito.text(_text_($nuevo_subtotal, 'MXN'));
@@ -150,6 +165,51 @@ let check_producto_carro_compra = function () {
 
 
 }
+let cobro_monto_mayor = function(){
+
+
+
+    if (parseFloat($cobro_visible.val()) >  0) {
+
+        $cobro_secundario.addClass("d-none");
+        $cobro_texto.addClass("border-bottom");
+        $cobro_visible.val(0);
+
+    }else{
+
+        $cobro_secundario.removeClass("d-none");
+        $cobro_texto.removeClass("border-bottom");    
+        $cobro_visible.val(1);
+    }
+    
+
+}
+
+let cobro_secundario = function(e){
+
+    let $form_pre_pedido =  $(".form_pre_pedido");
+    escucha_submmit_selector(e, $form_pre_pedido, 1);
+
+    let $cobro = parseFloat($(this).val());
+    let $comision = parseFloat($(".comision_venta").val());
+    let $monto_por_cobrar = parseFloat($carro_compras_total.val());
+    
+    if ($monto_por_cobrar < $cobro ) {
+
+        let $diferencia = ($cobro - $monto_por_cobrar);
+
+        if ($diferencia >= 0 ) {
+            
+            let $nueva_comision = $comision + $diferencia;    
+            $texto_comision_venta.text(_text($nueva_comision,'MXN'));
+
+        }
+    
+    }else{
+
+        $texto_comision_venta.text(_text($comision,'MXN'));
+
+    }
+}
 
 let response_carga_productos = (data) => redirect("");
-
