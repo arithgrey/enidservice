@@ -18,7 +18,7 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $this->app->acceso();
-        $data = $this->app->cssJs($data, "conexiones");
+        $data = $this->app->cssJs($data, "conexiones", 1);
         $id_seguidor = $data["id_usuario"];
         $nombre = $data["nombre"];
         $data["conexiones_ranking"] = $this->conexiones_ranking($id_seguidor, $nombre);

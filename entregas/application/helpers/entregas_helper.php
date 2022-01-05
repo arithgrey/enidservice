@@ -7,6 +7,11 @@ if (!function_exists('invierte_date_time')) {
     function sin_cierre_reparto($data, $recibos, $es_reparto = 0)
     {
 
+        if (!es_data($recibos)) {
+
+            return sin_entregas_agendadas();
+
+        }
         $f = 0;
         $ventas_posteriores = [];
         $ventas_hoy = [];
@@ -75,6 +80,8 @@ if (!function_exists('invierte_date_time')) {
         return d($response,4,1);
 
     }
+
+ 
     function ayuda_notificacion($data, $usuario_entrega, $total, $dia_entrega, $es_contra_entrega,
                                 $id_usuario_entrega, $ubicacion, $total_articulos,
                                 $es_contra_entrega_domicilio_sin_direccion)
@@ -586,34 +593,38 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
 
-            $r[] = d(
-                'Ups! parece que algo anda mal, no hay ventas, tenemos que regresar a conseguir clientes!',
-                _text_('h3 text-uppercase black font-weight-bold', _6auto));
-
-            $r[] = d(
-                format_link('Ver artículos disponibles',
-                    [
-                        'href' => path_enid('home')
-                    ]
-                ), _text_(_4auto, 'mt-5'));
-            $r[] = d(
-
-                img(
-                    [
-                        "src" => "https://media.giphy.com/media/3orif8pKLiSeJP0paw/giphy.gif",
-                        "class" => "mt-5 mx-auto"
-                    ]
-                )
-                ,_6auto
-            );
-
+            return sin_entregas_agendadas();
 
         }
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
     }
 
+    function sin_entregas_agendadas()
+    {   
 
+        $texto = 'Ups! parece que algo anda mal, no hay ventas, tenemos que regresar a conseguir clientes!';
+        $r[] = d($texto, _text_('h3 text-uppercase black font-weight-bold', _6auto));
+        
+        $link = format_link('Ver artículos disponibles',
+                    [
+                        'href' => path_enid('home')
+                    ]
+                );
+
+        $imagen  = img(
+                    [
+                        "src" => "https://media.giphy.com/media/3orif8pKLiSeJP0paw/giphy.gif",
+                        "class" => "mt-5 mx-auto"
+                    ]
+                );
+
+        $r[] = d($link, _text_(_4auto, 'mt-5'));
+        $r[] = d($imagen , _6auto);
+
+        return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
+
+    }
     function reporte_reparto(&$ids_usuarios_entregas, &$repartidores, &$data)
     {
 

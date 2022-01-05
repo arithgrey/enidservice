@@ -22,7 +22,7 @@ class Inicio extends CI_Controller
         $activa = prm_def($param, "q");
         $data["ticket"] = prm_def($param, "ticket");
         $data["activa"] = ($activa === "") ? 1 : $activa;
-        $data = $this->app->cssJs($data, "desarrollo");
+        $data = $this->app->cssJs($data, "desarrollo", 1);
         $this->app->pagina($data, render_ticket_empresa($data), 1);
 
     }

@@ -1,0 +1,11 @@
+{
+	"name": "enidservice/enid",
+	"autoload":{
+		"psr-4":{
+			"Enid\\": "src/"
+		},
+		"files": [
+			"src/helpers.php"
+		]
+	}
+}

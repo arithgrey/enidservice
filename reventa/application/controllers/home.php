@@ -16,7 +16,7 @@ class Home extends CI_Controller
     {
         $data = $this->app->session();
         $this->app->acceso();
-        $data = $this->app->cssJs($data, "reventa");
+        $data = $this->app->cssJs($data, "reventa", 1);
         $clientes = $this->clientes($data["id_usuario"]);
         $usuarios_num_compras = [];
         $intentos  = [];

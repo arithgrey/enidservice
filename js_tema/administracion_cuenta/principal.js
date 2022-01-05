@@ -235,7 +235,6 @@ let response_password = data => {
 
         let $inicio = "Contraseña actualizada, inicia sessión para verificar el cambio.";
         seccess_enid(".msj_password", $inicio);
-        debugger;
         setInterval('termina_session()', 3000);
 
     } else {

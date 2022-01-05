@@ -27,8 +27,8 @@ class Inicio extends CI_Controller
             "perfiles_enid_service" => $this->get_perfiles_enid_service()
         ];
 
-
-        $this->app->pagina($this->app->cssJs($data, "usuarios_enid_service"), 'empresas_enid');
+        $data = $this->app->cssJs($data, "usuarios_enid_service" , 1);
+        $this->app->pagina($data, 'empresas_enid');
     }
 
     private function get_perfiles_enid_service()

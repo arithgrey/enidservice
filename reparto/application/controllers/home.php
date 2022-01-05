@@ -26,7 +26,8 @@ class Home extends CI_Controller
     function seguimiento_pedido($param, $data)
     {
 
-        $data = $this->app->cssJs($data, 'reparto');
+
+        $data = $this->app->cssJs($data, 'reparto' , 1);
         $data += [
             "tipos_entregas" => $this->get_tipos_entregas([]),
             "repartidores" => $this->repartidores(),

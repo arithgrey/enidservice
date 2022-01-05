@@ -15,6 +15,52 @@ class Recompensa extends REST_Controller
 
     }
 
+    function disponible_GET()
+    {
+
+        $param = $this->get();
+        
+        $paginacion  = $param["paginacion"];
+        $numero_recompensas = $this->recompensa_model->total_disponibles();
+
+        $response = false;
+        $data_complete = [];
+    
+                       
+            $response = $this->recompensa_model->disponibles($paginacion);
+            $response = $this->app->add_imgs_servicio($response);
+            $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            
+            $a = 0;
+            
+            foreach($recompensa as $row ){
+                
+                $data_complete[$a] = $row;
+                $id_servicio  = $row["id_servicio"];  
+                $id_servicio_conjunto  = $row["id_servicio_conjunto"];  
+                $data_complete[$a]["servicio"] = $this->app->servicio($id_servicio);
+                $data_complete[$a]["servicio_conjunto"] = $this->app->servicio($id_servicio_conjunto);
+                $a ++;
+            }
+            
+            
+
+        
+        $this->response($data_complete);
+
+        
+
+    }   
+    
+    function total_disponible_GET()
+    {
+
+        $total =  $this->recompensa_model->total_disponibles();
+        $this->response(pr($total, "total"));
+
+    }
+
+
     function visible_GET()
     {
 
@@ -268,4 +314,5 @@ class Recompensa extends REST_Controller
         }
         return $descuento_total;
     }
+
 }

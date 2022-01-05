@@ -42,7 +42,50 @@ if (!function_exists('invierte_date_time')) {
         }
         return append($response);
     }
+    function faqs($categorias_publicas_venta = [], $categorias_temas_de_ayuda = [], $agregar_categoria = 0)
+    {
 
+    $r[] = a_enid(
+        img(
+            [
+                "src" => '../img_tema/enid_service_logo.jpg',
+                'width' => '100%',
+            ]
+        ),
+        path_enid('contact')
+    );
+
+
+    if (es_data($categorias_publicas_venta) ||
+        es_data($categorias_temas_de_ayuda)) {
+
+        $r[] = get_format_listado_categorias(
+            $categorias_publicas_venta, $categorias_temas_de_ayuda);
+    }
+
+    if ($agregar_categoria > 0) {
+        $r[] = format_link("Agregar",
+            [
+                "href" => path_enid("nfaq"),
+                'class' => 'mt-5 w-50'
+            ]
+        );
+    }
+
+    $ayuda[] = _titulo("¿TIENES ALGUNA DUDA?");
+    $ayuda[] = a_enid("ENVIA TU MENSAJE",
+        [
+            "href" => "../contact/#envio_msj",
+            'class' => 'black underline mt-3',
+        ]
+    );
+
+    $r[] = d($ayuda, 'mt-5');
+
+
+    return append($r);
+
+}
     function categorias($faqs)
     {
 

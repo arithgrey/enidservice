@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $class = "justify-content-between align-items-center w-100 d-flex mb-3";
-        $redes_sociales = d([$link_facebook, $link_instagram,$link_amazon], $class);
+        $redes_sociales = d([$link_facebook, $link_instagram], $class);
         $response[] = d($redes_sociales,10,1);
         $response[] = d(foto_link($data),10,1);
         $response[] = d(add_imgs_cliente_empresa($data),10,1);

@@ -21,6 +21,15 @@ if (!function_exists('invierte_date_time')) {
     function seccion_noticias_notificaciones()
     {
 
+        
+        $texto = "Aumenta tus ganancias ofreciendo descuentos";
+        $link_descuento = a_enid($texto,
+                    [
+                        "href" => path_enid("promociones"),
+                        "class" => "black underline"
+                    ]);
+        $response[] = d($link_descuento, "text-right");
+
         $response[] = place('seccion_sugerencias');
         $response[] = d(d("", "seccion_noticias"), 13);
 
@@ -43,85 +52,10 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function comisiones($data)
-    {
-        
-        $comisiones_por_cobrar =  $data["comisiones_por_cobrar"];
-        $response = 0;
-        $adicionales = 0; 
-        if (es_data($comisiones_por_cobrar)) {
-
-            $recompensas = $data["recompensas"];                    
-            $total_descuento = array_sum(array_column($recompensas, "descuento"));        
-            $utilidad = 0;
-            $id_orden_actual = 0; 
-            foreach($comisiones_por_cobrar as $row){                        
-                
-                $id_orden_compra = $row["id_orden_compra"];
-                $precio = ($row["precio"] * $row["num_ciclos_contratados"]);
-
-                if ($id_orden_actual != $id_orden_compra) {
-                    
-                    $total_por_orden_compra = cobro_por_orden_compra($comisiones_por_cobrar, $id_orden_compra);
-                    $monto_cobro_extra = cobro_secundario_ordenes_compra($comisiones_por_cobrar, $id_orden_compra);
-                    
-                    if ($monto_cobro_extra > $total_por_orden_compra) {
-                        
-                        $diferencia = ($monto_cobro_extra - $total_por_orden_compra);
-                        $adicionales = $adicionales + $diferencia;
-                    }
-                    
-                    $id_orden_actual = $id_orden_compra;
-                }
-
-                $utilidad = $utilidad + $precio;
-
-            }
-            
-            $utilidad_descuento = $utilidad - $total_descuento;
-            $response = (comision_porcentaje($utilidad_descuento,10) + $adicionales);
-        }
-        return $response;
-    }
-    function cobro_por_orden_compra($comisiones_por_cobrar, $id_orden_compra)
-    {
-   
-        $monto = 0;
-        foreach($comisiones_por_cobrar as $row){
-            
-            $cobro_secundario = $row["cobro_secundario"];
-            if ($id_orden_compra == $row["id_orden_compra"] ) {
-
-                $precio = ($row["precio"] * $row["num_ciclos_contratados"]);
-                $monto = $monto + $precio;
-            }
-            
-        }
-
-        return $monto;
-    }
-    function cobro_secundario_ordenes_compra($comisiones_por_cobrar, $id_orden_compra)
-    {
-   
-        $monto = 0;
-        foreach($comisiones_por_cobrar as $row){
-            
-            $cobro_secundario = $row["cobro_secundario"];
-            if ($id_orden_compra == $row["id_orden_compra"] && $cobro_secundario > 0  ) {
-
-                $monto = $cobro_secundario;
-                break;
-            }
-            
-        }
-
-        return $monto;
-    }
-
     function seccion_estadisticas($data)
     {
 
-        $comision_venta = comisiones($data);
+        $comision_venta = $data["saldo_por_cobrar"];
         $classe_center = 'd-flex p-3 bg_custom_green_ 
         white flex-column  text-uppercase border_black';
 
@@ -130,6 +64,15 @@ if (!function_exists('invierte_date_time')) {
         
 
         $r[] = d($texto, 'mt-5');
+        
+        $link_fondos = a_enid("Solicitar saldo",
+                [
+                    "href" => path_enid("solicitud_saldo"),
+                    "class" => "black underline"
+                ]);
+
+        $r[] = d($link_fondos, "text-right");
+
         $link = a_enid("Ver pedidos",
                 [
                     "href" => path_enid("pedidos"),

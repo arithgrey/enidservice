@@ -161,8 +161,7 @@ let respuesta_registro = (data) => {
             recorre(".usuario_existente");
 
         } else {
-
-            debugger;
+            
             let $path = _text("../area_cliente/?action=compras&ticket=", data.id_orden_compra);
             redirect($path);
         }

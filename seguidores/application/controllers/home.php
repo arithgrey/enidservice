@@ -18,7 +18,7 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $this->app->acceso();
-        $data = $this->app->cssJs($data, "seguidores");
+        $data = $this->app->cssJs($data, "seguidores", 1);
         $id_seguidor = $data["id_usuario"];
         $data["seguidores"] = $this->seguidores($id_seguidor);
         $data["seguimiento"] = $this->seguimiento($id_seguidor);

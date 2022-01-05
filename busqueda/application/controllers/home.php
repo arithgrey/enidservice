@@ -2,29 +2,28 @@
 
 class Home extends CI_Controller
 {
+    private $comision;         
     function __construct()
     {
         parent::__construct();
         $this->load->helper('busqueda');
         $this->load->library(lib_def());
+        $this->comision = new Enid\Comision\Comision();
     }
 
     function index()
     {
         $data = $this->app->session(9);
-        $data = $this->app->cssJs($data, "busqueda");        
+        $data = $this->app->cssJs($data, "busqueda",1);        
         $session = $this->app->session();
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
         $ventas_semana = $this->ventas_semana();
 
-
-
         $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
         $data["ventas_semana"] = $ventas_semana;
-        $comisiones_usuario = $this->comisiones_por_cobrar($data["id_usuario"]);        
-        $recompensas = $this->app->recompensas_recibos($comisiones_usuario);        
-        $data["comisiones_por_cobrar"] = $comisiones_usuario;
-        $data["recompensas"] = $recompensas;
+        $comisiones_por_cobrar = $this->comisiones_por_cobrar($data["id_usuario"]);         
+        $recompensas = $this->app->recompensas_recibos($comisiones_por_cobrar);                        
+        $data["saldo_por_cobrar"] = $this->comision->saldo_disponible($comisiones_por_cobrar, $recompensas);
 
         $this->app->pagina($data, render($data), 1);
 

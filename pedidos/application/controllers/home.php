@@ -48,6 +48,7 @@ class Home extends CI_Controller
 
         if ($es_costo_operacion && ctype_digit($costos_operacion)) {
 
+
             $this->carga_vista_costos_operacion($param, $data);
 
         } else {
@@ -61,6 +62,7 @@ class Home extends CI_Controller
 
     private function vista_seguimiento($param, $data)
     {
+
 
 
         $data = $this->app->cssJs($data, "pedidos_seguimiento");
@@ -123,27 +125,6 @@ class Home extends CI_Controller
 
         }
     }
-//
-//    private function get_recibo($id_recibo, $add_img = 0)
-//    {
-//
-//        $q["id"] = $id_recibo;
-//        $response = $this->app->api("recibo/id/format/json/", $q);
-//
-//        if (es_data($response) && $add_img > 0) {
-//
-//            $a = 0;
-//            foreach ($response as $row) {
-//                $response[$a]["url_img_servicio"] =
-//                    $this->app->imgs_productos(
-//                        $response[$a]["id_servicio"], 1, 1, 1);
-//                $a++;
-//            }
-//        }
-//
-//        return $response;
-//    }
-
 
     private function domicilios($param, $data)
     {
@@ -458,7 +439,7 @@ class Home extends CI_Controller
         $es_busqueda = ($id_orden_compra < 1);
 
         $css = ($es_busqueda) ? "pedidos_busqueda" : "pedidos";
-        $data = $this->app->cssJs($data, $css);
+        $data = $this->app->cssJs($data, $css , 1);
 
         $data +=
             [
