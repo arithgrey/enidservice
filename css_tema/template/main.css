@@ -49,6 +49,12 @@
     line-height: 1.2;
 }
 
+.display-7{
+    font-size: 1.7rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
 .navbar .searchbox .dropdown-menu {
     width: 270px
 }
@@ -1350,6 +1356,10 @@ select {
 
 .bg_black {
     background: #000 !important;
+}
+.bg_gray {
+
+    background: gray !important;
 }
 
 .bg_custom_black {

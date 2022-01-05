@@ -118,7 +118,7 @@ let inicio_session = () => {
 
 let response_inicio_session = data => {
 
-    debugger;
+
     if (data.login !== false) {
 
         redirect(data.login);

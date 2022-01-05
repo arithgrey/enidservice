@@ -20,7 +20,7 @@ class Home extends CI_Controller
         $inventario = $this->inventario();
         $inventario = $this->app->add_imgs_servicio($inventario);
         $data = $this->app->session();
-        $data = $this->app->cssJs($data, "stock");
+        $data = $this->app->cssJs($data, "stock" , 1);
         $this->app->pagina($data, render($inventario), 1);
 
     }

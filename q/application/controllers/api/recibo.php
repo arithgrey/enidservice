@@ -2359,10 +2359,19 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "usuario")) {
 
-            $usuario = $param['usuario'];
-            $response = $this->recibo_model->pago_recibos_comisiones($usuario);
+            $id_usuario = $param['usuario'];
+            $response = $this->recibo_model->pago_recibos_comisiones($id_usuario);
+            $this->notifica_pago_solicitud($id_usuario);
+
         }
         return $this->response($response);
+    }
+    private function notifica_pago_solicitud($id_usuario)
+    {
+        
+        $q = ['id_usuario' => $id_usuario];
+        return $this->app->api("solicitud_retiro/usuario", $q, "json" , "PUT");
+
     }
 
     function pago_recibos_comisiones_ids_PUT()
@@ -2370,7 +2379,19 @@ class recibo extends REST_Controller
 
         $param = $this->put();
         $ids = $param['ids'];
+        $usuarios = explode(",", $ids);
+
         $response = $this->recibo_model->pago_recibos_comisiones_ids($ids);
+    
+        $a = 0;
+        foreach($usuarios  as $row){
+
+            $this->notifica_pago_solicitud($row[$a]);
+
+            $a ++;
+        }
+        
+
         return $this->response($response);
     }
 

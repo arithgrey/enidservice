@@ -31,7 +31,7 @@ class Inicio extends CI_Controller
         $data["ciclo_facturacion"] = $this->create_ciclo_facturacion();
         $data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 
-        $data = $this->app->cssJs($data, "planes_servicios");
+        $data = $this->app->cssJs($data, "planes_servicios", 1);
 
         $data["list_orden"] = get_orden();
         $data["id_perfil"] = $this->app->getperfiles();

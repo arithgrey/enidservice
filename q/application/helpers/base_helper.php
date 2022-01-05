@@ -68,12 +68,8 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($num_images < 1) {
 
-            $response = d(titulo_bloque(
-                _text(
-                    "tu ", $tipo_promocion, " ",
-                    "será visible hasta que incluyas algunas imágenes"
-                )
-            ),'mt-5 mt-md-2 mb-5 py-5 py-md-1');
+            $texto = _text_("tu", $tipo_promocion, "será visible hasta que incluyas algunas imágenes");
+            $response = d(_titulo($texto ), 'mt-5 mt-md-2 mb-5 py-5 py-md-1');
         }
         return $response;
     }

@@ -12,33 +12,77 @@ class cuenta_pago extends REST_Controller
 		$this->load->library(lib_def());
 	}
 
-	function regitra_tarjeta($param)
+	function index_POST()
 	{
+		$param = $this->post();
+		$response = false;
+		
+		if (fx($param, "id_usuario,id_cuenta_pago,propietario_tarjeta,numero_tarjeta,banco")) {
 
-		$numero_tarjeta = $param["numero_tarjeta"];
-		$banco = $param["banco"];
-		$respose["registro_cuenta"] = 0;
-		$respose["banco_es_numerico"] = 0;
-		$respose["clabe_es_corta"] = 1;
+			$id_usuario = $param["id_usuario"];
+			$propietario_tarjeta = $param["propietario_tarjeta"];
+			$numero_tarjeta = $param["numero_tarjeta"];
+			$banco = $param["banco"];
 
-		if (is_numeric($banco)) {
-			$respose["banco_es_numerico"] = 1;
-			if (strlen(trim($numero_tarjeta)) == 16) {
-				$respose["clabe_es_corta"] = 0;
-				$params = [
-					"id_usuario" => $param["id_usuario"],
+			$cuenta_usuario = $this->cuenta_usuario($id_usuario);			
+			if (es_data($cuenta_usuario)) {
+					
+				$params =  [ 
+					"propietario_tarjeta" => $propietario_tarjeta,
 					"numero_tarjeta" => $numero_tarjeta,
-					"id_banco" => $banco,
-					"tipo" => 1,
-					"tipo_tarjeta" => $param["tipo_tarjeta"]
+					"id_banco" => $banco
 				];
-				$respose["registro_cuenta"] = $this->cuenta_pago_model->insert($params);
+
+				$response = $this->cuenta_pago_model->update($params , 
+					[
+						"id_cuenta_pago" =>  $param["id_cuenta_pago"] 
+					] 
+				);
+
+			}else{
+
+				$params = [
+					"propietario_tarjeta" => $propietario_tarjeta,
+					"id_usuario" => $id_usuario,
+					"numero_tarjeta" => $numero_tarjeta,
+					"id_banco" => $banco,					
+				];
+				
+				$response = $this->cuenta_pago_model->insert($params , 1 );
+				
 			}
+			
+		
 		}
-		return $respose;
+		$this->response($response);
 
 
 	}
 
+	function id_GET()
+	{
 
+		$param = $this->get();
+        $response = false;
+        if (fx($param, "id_usuario")) {
+
+            $response = $this->cuenta_usuario($param["id_usuario"]);
+
+        }
+        $this->response($response);
+
+	}
+
+	private function cuenta_usuario($id_usuario){
+	
+
+        return $this->cuenta_pago_model->get(
+            	[], 
+            	[
+            		"id_usuario" => $id_usuario,
+            		"status" => 1,
+            	], 
+            1);		
+        
+	}
 }

@@ -1,5 +1,4 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-require_once('../librerias/google-translate/vendor/autoload.php');
 
 
 class Home extends CI_Controller

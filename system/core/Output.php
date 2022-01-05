@@ -98,7 +98,7 @@ class CI_Output
 		if (defined('ENVIRONMENT') AND file_exists(APPPATH . 'config/' . ENVIRONMENT . '/mimes.php')) {
 			include APPPATH . 'config/' . ENVIRONMENT . '/mimes.php';
 		} else {
-			include APPPATH . 'config/mimes.php';
+			include FCPATH . '/config/mimes.php';
 		}
 
 

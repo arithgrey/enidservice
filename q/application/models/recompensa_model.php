@@ -75,7 +75,7 @@ class Recompensa_model extends CI_Model
         return $this->db->query($sql)->result_array();
 
     }
-    function servicio($id_orden_compra)
+    function servicio($id_servicio)
     {
 
         $sql = "SELECT 
@@ -84,7 +84,28 @@ class Recompensa_model extends CI_Model
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
-                WHERE r.id_servicio =  $id_orden_compra ";
+                WHERE r.id_servicio =  $id_servicio ";
+
+        return $this->db->query($sql)->result_array();
+
+    }
+    function disponibles($limit_paginacion)
+    {
+
+        $sql = _text_("SELECT 
+                r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
+                INNER JOIN servicio s 
+                ON r.id_servicio = s.id_servicio    
+                INNER JOIN servicio sc 
+                ON r.id_servicio_conjunto = sc.id_servicio", $limit_paginacion);
+
+        return $this->db->query($sql)->result_array();
+
+    }
+    function total_disponibles()
+    {
+
+        $sql = "SELECT COUNT(0)total FROM recompensa";
 
         return $this->db->query($sql)->result_array();
 

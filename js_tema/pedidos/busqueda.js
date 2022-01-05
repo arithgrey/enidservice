@@ -118,8 +118,8 @@ let registro_pago = function (e) {
     request_enid("PUT", data_send, url, response_pagos);
     e.preventDefault();
 }
-let response_pagos = function () {
-
+let response_pagos = function (data) {
+    
     $modal_pago_comision.modal("hide");
     redirect('');
 }

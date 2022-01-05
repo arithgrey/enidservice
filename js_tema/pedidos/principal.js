@@ -723,7 +723,7 @@ let evalua_registro_motivo_lista_negra = function () {
 };
 let agregar_lista_negra = (e) => {
 
-    debugger;
+    
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 

@@ -1017,7 +1017,8 @@ class CI_Loader
 		if (defined('ENVIRONMENT') AND file_exists(APPPATH . 'config/' . ENVIRONMENT . '/autoload.php')) {
 			include(APPPATH . 'config/' . ENVIRONMENT . '/autoload.php');
 		} else {
-			include(APPPATH . 'config/autoload.php');
+			
+			include(FCPATH . '/config/autoload.php');
 		}
 
 		if (!isset($autoload)) {

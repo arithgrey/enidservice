@@ -74,7 +74,8 @@ if (!function_exists('invierte_date_time')) {
                 $p_comision = $data["porcentaje_comision"];
                 $comision = porcentaje(floatval($precio), $p_comision);
                 $comision_num = porcentaje(floatval($precio), $p_comision, 2, 2);
-                $utilidad = floatval($precio) - (($es_servicio < 1) ? floatval($costo_envio["costo_envio_vendedor"]) : 0);
+                $costo_envio_vendedor = es_data($costo_envio) ? $costo_envio["costo_envio_vendedor"] : 0;
+                $utilidad = floatval($precio) - (($es_servicio < 1) ? floatval($costo_envio_vendedor) : 0);
                 $utilidad = $utilidad - $comision_num;
 
             }
@@ -567,7 +568,7 @@ if (!function_exists('invierte_date_time')) {
     function eleccion_seleccion($titulo, $a, $b, $c, $ext = '')
     {
 
-        $response[] = titulo_bloque($titulo);
+        $response[] = _titulo($titulo);
         $contenido = [$a, $b, $c];
         $response[] = d($contenido, _text_('d-flex mt-5 justify-content-between ', $ext));
         return d($response, 'col-md-6 mt-5');
@@ -657,7 +658,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $z[] = $images;
-        $z[] = titulo_bloque(
+        $z[] = _titulo(
             text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE "));
 
         if (strlen($val_youtube) > 0) {
@@ -732,7 +733,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $titulo = titulo_bloque("Link venta en amazon");
+        $titulo = _titulo("Link venta en amazon");
         $titulo = btw($titulo, $icono, "display_flex_enid");
 
         $r[] = form_open("", ["class" => "form_amazon"]);
@@ -788,7 +789,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $titulo = titulo_bloque("Link venta en Mercado libre");
+        $titulo = _titulo("Link venta en Mercado libre");
         $titulo = btw($titulo, $icono, "display_flex_enid");
 
         $r[] = form_open("", ["class" => "form_ml"]);
@@ -1174,7 +1175,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = d(
-            titulo_bloque(
+            _titulo(
                 _text(
                     icon('fa fa-pencil text_cantidad'),
                     numero_articulos($existencia)
@@ -1205,7 +1206,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $usado = ["No", "Si"];
-        $r[] = titulo_bloque("¿es nuevo?");
+        $r[] = _titulo("¿es nuevo?");
         $r[] = d(text_icon('fa fa-pencil text_nuevo', $usado[$es_nuevo]));
 
         $form[] = select_producto_usado($es_nuevo);
@@ -1694,7 +1695,7 @@ if (!function_exists('invierte_date_time')) {
             $select[] = place("response_tiempo_entrega");
             $select = append($select);
 
-            $response = append([titulo_bloque($titulo), $select]);
+            $response = append([_titulo($titulo), $select]);
 
         }
 
@@ -1716,7 +1717,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $titulo = titulo_bloque("link dropshiping");
+            $titulo = _titulo("link dropshiping");
             $titulo = btw($titulo, $icono, "display_flex_enid");
 
             $x[] = input(
@@ -1807,7 +1808,7 @@ if (!function_exists('invierte_date_time')) {
             $nuevo_nombre_servicio
         );
 
-        $response[] = d(titulo_bloque($titulo), $ext);
+        $response[] = d(_titulo($titulo), $ext);
         $response[] = form_open("", ['class' => 'form_servicio_nombre_info']);
         $response[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
 
@@ -2247,11 +2248,11 @@ if (!function_exists('invierte_date_time')) {
         $res = [];
         if ($es_servicio < 1) {
 
+            $es_data_costo = es_data($costo_envio);
+            $costo_envio_configuracion = ($es_data_costo) ? $costo_envio["text_envio"]["ventas_configuracion"] : 0;
+            $consto_envio_cliente = ($es_data_costo)? $costo_envio["text_envio"]["cliente"] : 0;
 
-            $costo_envio_configuracion = $costo_envio["text_envio"]["ventas_configuracion"];
-            $consto_envio_cliente = $costo_envio["text_envio"]["cliente"];
-
-            $r[] = titulo_bloque("costo de envío");
+            $r[] = _titulo("costo de envío");
             $r[] = d(text_icon('fa fa fa-pencil text_info_envio', $costo_envio_configuracion));
             $r[] = d($consto_envio_cliente, "text_info_envio");
 
@@ -2271,7 +2272,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $formulario = _d(
-                titulo_bloque("¿EL PRECIO INCLUYE ENVÍO?"),
+                _titulo("¿EL PRECIO INCLUYE ENVÍO?"),
                 flex($form)
             );
             $response[] = d($formulario, "input_envio config_precio_envio");

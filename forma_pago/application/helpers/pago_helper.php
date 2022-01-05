@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $str = _d(
-            heading("FORMAS DE PAGO ENID SERVICE", 3)
+            _titulo("FORMAS DE PAGO ENID SERVICE", 3)
             , _text(
                 "1.- Podrás comprar con tu tarjeta bancaria  ",
                 strong("(tarjeta de crédito o débito).")

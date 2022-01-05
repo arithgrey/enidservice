@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
 
         $folio = prm_def($pago, "q2", "");
 
-        $monto = $pago["q"];
+        $monto = prm_def($pago, "q", 0 );
         $concepto = "Saldo a cuenta Enid Service";
 
         $r[] = d(form_saldos($beneficiario, $folio, $monto, $concepto, $numero_cuenta), 13);
