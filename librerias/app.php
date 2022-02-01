@@ -1,27 +1,22 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-require  FCPATH.'enid/vendor/autoload.php';
+<?php 
+
+use Enid\Paths\Paths  as Paths;
+use Enid\Api\Api as Api;
 
 class app extends CI_Controller
 {   
     private $paths;
-    private $restclient;
-    
+    private $api;    
     function __construct()
     {
         parent::__construct();
-        $this->load->library("session");        
-        $this->restclient = new Enid\Restclient();    
-        $this->paths = new Enid\Paths\Paths();
+        $this->load->library("session");                
+        $this->paths = new Paths();
+        $this->api = new Api();
         
     }
 
-    function imgs_productos(
-        $id_servicio,
-        $completo = 0,
-        $limit = 1,
-        $path = 0,
-        $data = []
-    )
+    function imgs_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
     {
 
         if (es_data($data)) {
@@ -39,13 +34,7 @@ class app extends CI_Controller
 
     }
 
-    function imgs_usuarios(
-        $id_usuario,
-        $completo = 0,
-        $limit = 1,
-        $path = 0,
-        $data = []
-    )
+    function imgs_usuarios($id_usuario, $completo = 0, $limit = 1,$path = 0, $data = [])
     {
 
         if (es_data($data)) {
@@ -121,7 +110,7 @@ class app extends CI_Controller
     {
 
         $q = ['id' => $id_orden_compra];
-        $productos_ordenes_compra = $this->api("producto_orden_compra/orden_compra/format/json/", $q);
+        $productos_ordenes_compra = $this->api->api("producto_orden_compra/orden_compra/", $q);
         return $this->add_imgs_servicio($productos_ordenes_compra);
 
     }
@@ -129,7 +118,7 @@ class app extends CI_Controller
     {
 
         $q = ['id' => $id_orden_compra];
-        $recompensa  =  $this->api("recompensa_orden_compra/id/format/json/", $q);        
+        $recompensa  =  $this->api->api("recompensa_orden_compra/id/", $q);        
         $total_descuento = 0;
         
         if ($descuento > 0 ) {
@@ -143,9 +132,7 @@ class app extends CI_Controller
         }
         return $recompensa;
         
-        
-
-
+    
     }
 
     private function get_img($id_servicio, $completo = 0, $limit = 1, $path = 0)
@@ -154,8 +141,9 @@ class app extends CI_Controller
         $q["id_servicio"] = $id_servicio;
         $q["c"] = $completo;
         $q["l"] = $limit;
-        $api = "imagen_servicio/servicio/format/json/";
-        $response = $this->api($api, $q);
+
+        $response = $this->api->api("imagen_servicio/servicio", $q);
+
         if ($path > 0) {
             $response = get_img_serv($response);
         }
@@ -169,8 +157,8 @@ class app extends CI_Controller
         $q["id_usuario"] = $id_usuario;
         $q["c"] = $completo;
         $q["l"] = $limit;
-        $api = "imagen_usuario/usuario/format/json/";
-        $response = $this->api($api, $q);
+        $api = "imagen_usuario/usuario/";
+        $response = $this->api->api($api, $q);
         if ($path > 0) {
             $response = get_img_usr($response);
         }
@@ -180,163 +168,26 @@ class app extends CI_Controller
 
     function api($api, $q = [], $format = 'json', $type = 'GET', $debug = 0, $externo = 0, $b = "")
     {
-
-
-        foreach ($q as $clave => $row) {
-
-            if (is_null($q[$clave])) {
-                $q[$clave] = "";
-            }
-        }
-
-        if (count($q) < 1) {
-            $q["x"] = 1;
-        }
-
-
-        if ($externo == 0) {
-            $url = "q/index.php/api/";
-        } else {
-            $url = $b . "/index.php/api/";
-        }
-
-        $url_request = get_url_request($url);
-        $this->restclient->set_option('base_url', $url_request);
-        $this->restclient->set_option('format', $format);
-        $result = "";
-        switch ($type) {
-            case 'GET':
-                $result = $this->restclient->get($api, $q);
-                break;
-            case 'PUT':
-                $result = $this->restclient->put($api, $q);
-                break;
-            case 'POST':
-                $result = $this->restclient->post($api, $q);
-                break;
-            case 'DELETE':
-                $result = $this->restclient->delete($api, $q);
-                break;
-            default:
-                break;
-        }
-
-
-        if ($debug == 1 && es_local() > 0) {
-
-            print_r($result->response);
-            debug($result->response, 1);
-        }
-        if ($format == "json") {
-
-            return $this->json_decode_nice($result->response, true);
-
-        }
-
-        return $result->response;
+        return $this->api->api($api, $q , $format, $type, $debug , $externo, $b );
+        
     }
-
-    public static function Utf8_ansi($valor = '')
-    {
-
-        $utf8_ansi2 = array(
-            "\u00c0" => "À",
-            "\u00c1" => "Á",
-            "\u00c2" => "Â",
-            "\u00c3" => "Ã",
-            "\u00c4" => "Ä",
-            "\u00c5" => "Å",
-            "\u00c6" => "Æ",
-            "\u00c7" => "Ç",
-            "\u00c8" => "È",
-            "\u00c9" => "É",
-            "\u00ca" => "Ê",
-            "\u00cb" => "Ë",
-            "\u00cc" => "Ì",
-            "\u00cd" => "Í",
-            "\u00ce" => "Î",
-            "\u00cf" => "Ï",
-            "\u00d1" => "Ñ",
-            "\u00d2" => "Ò",
-            "\u00d3" => "Ó",
-            "\u00d4" => "Ô",
-            "\u00d5" => "Õ",
-            "\u00d6" => "Ö",
-            "\u00d8" => "Ø",
-            "\u00d9" => "Ù",
-            "\u00da" => "Ú",
-            "\u00db" => "Û",
-            "\u00dc" => "Ü",
-            "\u00dd" => "Ý",
-            "\u00df" => "ß",
-            "\u00e0" => "à",
-            "\u00e1" => "á",
-            "\u00e2" => "â",
-            "\u00e3" => "ã",
-            "\u00e4" => "ä",
-            "\u00e5" => "å",
-            "\u00e6" => "æ",
-            "\u00e7" => "ç",
-            "\u00e8" => "è",
-            "\u00e9" => "é",
-            "\u00ea" => "ê",
-            "\u00eb" => "ë",
-            "\u00ec" => "ì",
-            "\u00ed" => "í",
-            "\u00ee" => "î",
-            "\u00ef" => "ï",
-            "\u00f0" => "ð",
-            "\u00f1" => "ñ",
-            "\u00f2" => "ò",
-            "\u00f3" => "ó",
-            "\u00f4" => "ô",
-            "\u00f5" => "õ",
-            "\u00f6" => "ö",
-            "\u00f8" => "ø",
-            "\u00f9" => "ù",
-            "\u00fa" => "ú",
-            "\u00fb" => "û",
-            "\u00fc" => "ü",
-            "\u00fd" => "ý",
-            "\u00ff" => "ÿ");
-
-        return strtr($valor, $utf8_ansi2);
-
-    }
-
-
-    function json_decode_nice($json, $assoc = false)
-    {
-
-        $json = $this->Utf8_ansi($json);
-        $json = preg_replace("#(/\*([^*]|[\r\n]|(\*+([^*/]|[\r\n])))*\*+/)|([\s\t]//.*)|(^//.*)#", '', $json);
-        $json = str_replace(array("\n", "\r"), "", $json);
-
-        $json = preg_replace('/(,)\s*}$/', '}', $json);
-        $json = preg_replace('/,\s*([\]}])/m', '$1', $json);
-
-        return json_decode($json, $assoc);
-
-    }
-
 
     function calcula_costo_envio($q)
     {
 
-        return $this->api("cobranza/calcula_costo_envio/format/json/", $q);
+        return $this->api->api("cobranza/calcula_costo_envio", $q);
     }
 
     function send_email($q, $test = 0)
     {
 
-        $api = "sender/index";
-        $q["test"] = $test;
-
-        return $this->api($api, $q, 'json', "POST", 0, 1, "msj");
+        return $this->api->api("sender/index", 
+        [
+            "test" => $test
+        ], 'json', "POST", 0, 1, "msj");
     }
 
-    function usuario($id_usuario, $completo = 0)
-
+    function usuario($id_usuario, $completo = 0 , $fotos = 0 )
     {
 
         $q = [
@@ -344,30 +195,38 @@ class app extends CI_Controller
             "c" => $completo,
         ];
 
-        return $this->api("usuario/q/format/json/", $q);
+        $response = [];
+        $usuario = $this->api->api("usuario/q/", $q);
+        if($fotos > 0 ){
+            $usuario = $this->add_imgs_usuario($usuario);          
+        }
+        return $usuario;
+        
     }
 
     function servicio($id_servicio, $completo = 0)
     {
-
-        $q = [
-            "id_servicio" => $id_servicio,
-            "c" => $completo,
-        ];
-
-        return $this->api("servicio/base/format/json/", $q);
+        return $this->api->api("servicio/base", 
+            [
+                "id_servicio" => $id_servicio,
+                "c" => $completo,
+            ]
+        );
     }
 
     function empresa($id_empresa)
     {
-        $q = ["id_empresa" => $id_empresa];
-        return $this->api("empresa/id/format/json/", $q);
+        
+        return $this->api->api("empresa/id/", 
+            [
+                "id_empresa" => $id_empresa
+            ]);
     }
 
     function paginacion($q)
     {
 
-        return $this->api("paginacion/create/format/json/", $q);
+        return $this->api->api("paginacion/create/", $q);
     }
 
     function acceso()
@@ -382,9 +241,7 @@ class app extends CI_Controller
     {
 
         $is_logged_in = $this->session->userdata('logged_in');
-
         return (!isset($is_logged_in) || $is_logged_in != true) ? 0 : 1;
-
 
     }
 
@@ -403,15 +260,14 @@ class app extends CI_Controller
     }
 
     function pagina($data, $center_page, $pagina_base = 0)
-    {
-
+    {        
+              
+        $this->load->view("header_template", $data);
         
-        $base = '../../../';
-        $this->load->view(_text($base, "view_tema/header_template"), $data);
         if ($pagina_base > 0) {
 
             $data["page"] = $center_page;
-            $this->load->view(_text($base, "view_tema/base"), $data);
+            $this->load->view("base", $data);
 
         } else {
 
@@ -419,7 +275,8 @@ class app extends CI_Controller
             $this->load->view($center_page, $data);
         }
 
-        $this->load->view(_text($base, "view_tema/footer_template"), $data);
+        $this->load->view("footer_template", $data);
+        
 
     }
 
@@ -427,21 +284,18 @@ class app extends CI_Controller
     {
         return $this->session->userdata('perfiles')[0]["idperfil"];
     }
-
-    function session($pagina = 0, $titulo = "", $meta_keywords = "", $desc = "", $url_img_post = "")
+    
+    function session()
     {
-
-
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
-        $data["clasificaciones_departamentos"] = $this->get_departamentos();
+        $data["clasificaciones_departamentos"] = $this->api->api("clasificacion/primer_nivel");
         $data["footer_visible"] = true;
         if ($this->is_logged_in() > 0) {
 
             $session = $this->get_session();
-
             $nombre = $session["nombre"];
-            $data['titulo'] = $titulo;
+            $data['titulo'] = "";
             $data["menu"] = create_contenido_menu($session);
             $data["nombre"] = $nombre;
             $data["email"] = $session["email"];
@@ -449,90 +303,86 @@ class app extends CI_Controller
             $data["id_perfil"] = pr($session['perfiles'], "idperfil", "");
             $data["in_session"] = 1;
             $data["no_publics"] = 1;
-            $data["meta_keywords"] = $meta_keywords;
+            $data["meta_keywords"] = "";
             $data["url_img_post"] = "";
             $data["id_usuario"] = $session["idusuario"];
             $data["id_empresa"] = $session["idempresa"];
             $data["info_empresa"] = $session["info_empresa"];
-            $data["desc_web"] = $desc;
+            $data["desc_web"] = "";
             $data["data_status_enid"] = $session["data_status_enid"];
             $data["recien_creado"] = $session["recien_creado"];
             $data["path_img_usuario"] = $session["path_img_usuario"];
             $data["tipo_comisionista"] = $session["tipo_comisionista"];
 
         } else {
-
-            $data['titulo'] = $titulo;
+            
             $data["in_session"] = 0;
             $data["id_usuario"] = "";
             $data["nombre"] = "";
             $data["email"] = "";
             $data["telefono"] = "";
             $data["id_perfil"] = 0;
-            $data["meta_keywords"] = $meta_keywords;
-            $data["desc_web"] = $desc;
-            $data["url_img_post"] = (strlen($url_img_post) > 3) ? $url_img_post : create_url_preview("");
             $data["menu"] = "";
             $data["data_status_enid"] = "";
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
             $data["path_img_usuario"] = "";
 
         }
-
-        $this->log_acceso($data, $pagina);
+        
         $data['restricciones'] = $this->config->item('restricciones');
         return $data;
-    }
-
-    function get_departamentos($format_html = 1)
-    {
-
-        if ($format_html == 1) {
-            $api = "clasificacion/primer_nivel/format/json/";
-
-            return $this->api($api, [], "json");
-        } else {
-            $api = "clasificacion/primer_nivel/format/json/";
-
-            return $this->api($api, [], "json");
-        }
-
     }
 
     function get_session($key = [])
     {
 
-        return (is_string($key)) ? $this->session->userdata($key) : $this->session->all_userdata();
+        return 
+        (is_string($key)) ? $this->session->userdata($key) : $this->session->all_userdata();
 
     }
 
     function cSSJs($data, $key = '' , $valida_session = 0)
-    {
+    {   
+        $response = $this->paths->getcSSJs();
         if ($valida_session > 0 ) {
             $this->acceso();    
         }
-        
-        $response = $this->paths->getcSSJs();
-
+            
         if (array_key_exists($key, $response)) {
 
+            $pagina = 0;
             foreach ($response[$key] as $clave => $valor) {
 
                 $data[$clave] = $valor;
-
-            }
+                if($clave == "pagina"){
+                    $pagina = $valor;
+                }
+            }      
+                        
+            $data["meta_keywords"] = $this->remplazo("meta_keywords" , $data);
+            $data["desc_web"] = $this->remplazo("desc_web" , $data);
+            $data["titulo"] = $this->remplazo("titulo" , $data);
+            $data["url_img_post"] = $this->remplazo("url_img_post" , $data);
+            
+            $this->log_acceso($data, $pagina );
 
         } else {
 
             echo "NO EXISTE -> " . $key;
-
         }
-
 
         return $data;
 
     }
+    function remplazo($key , $data)
+    {   
+        $response = '';
+        if(array_key_exists($key, $data)){
+            $response =  $data[$key];
+        } 
+        return $response;        
 
+    }
     function add_imgs_servicio($ordenes, $key = "id_servicio", $index='url_img_servicio')
     {
 
@@ -599,14 +449,12 @@ class app extends CI_Controller
         return $response;
     }
 
-
     function session_enid()
     {
 
         return $this->session;
 
     }
-
 
     function set_flashdata($newdata = array(), $newval = '')
     {
@@ -631,13 +479,13 @@ class app extends CI_Controller
     private function get_recibo_saldo_pendiente($id_recibo)
     {
 
-        return $this->api("recibo/saldo_pendiente_recibo/format/json/", ["id_recibo" => $id_recibo]);
+        return $this->api->api("recibo/saldo_pendiente_recibo/", ["id_recibo" => $id_recibo]);
     }
 
     function direccion($id)
     {
 
-        return $this->api("direccion/data_direccion/format/json/", ["id_direccion" => $id]);
+        return $this->api->api("direccion/data_direccion/", ["id_direccion" => $id]);
     }
 
     function get_direccion_pedido($id_recibo)
@@ -647,8 +495,8 @@ class app extends CI_Controller
             [
                 "id_recibo" => $id_recibo
             ];
-        return $this->api(
-            "proyecto_persona_forma_pago_direccion/recibo/format/json/", $request);
+        return $this->api->api(
+            "proyecto_persona_forma_pago_direccion/recibo/", $request);
 
     }
 
@@ -679,7 +527,7 @@ class app extends CI_Controller
 
     function asigna_reparto($id_orden_compra)
     {
-        return $this->api("recibo/reparto", ["orden_compra" => $id_orden_compra], "json", "PUT");
+        return $this->api->api("recibo/reparto", ["orden_compra" => $id_orden_compra], "json", "PUT");
     }
 
     function get_domicilio_entrega($producto_orden_compra)
@@ -736,22 +584,21 @@ class app extends CI_Controller
 
     private function get_ubicacion_recibo($id_recibo)
     {
-        return $this->api("ubicacion/index/format/json/",
-            ["id_recibo" => $id_recibo]);
+        return $this->api->api("ubicacion/index",["id_recibo" => $id_recibo]);
     }
 
     function totales_seguidores($id_usuario)
     {
 
-        return $this->api("usuario_conexion/totales_seguidores/format/json/", ["id_usuario" => $id_usuario]);
+        return $this->api->api("usuario_conexion/totales_seguidores/", ["id_usuario" => $id_usuario]);
 
     }
 
     function recibos_usuario($id_usuario, $es_pago = 0)
     {
 
-        return $this->api(
-            "recibo/usuario_relacion/format/json/",
+        return $this->api->api(
+            "recibo/usuario_relacion/",
             [
                 "id_usuario" => $id_usuario,
                 "es_pago" => $es_pago
@@ -770,8 +617,10 @@ class app extends CI_Controller
             ];
 
             $api = "acceso/index";
-            return $this->api($api, $q, "json", "POST");
+            return $this->api->api($api, $q, "json", "POST");
 
+        }else{
+            //echo "No tienes ID de página";
         }
 
     }
@@ -779,7 +628,7 @@ class app extends CI_Controller
     function tipo_comisionistas()
     {
 
-        return $this->api("tipo_comisionista/index/format/json/");
+        return $this->api->api("tipo_comisionista/index");
 
     }
     function recompensas_recibos($recibos)
@@ -789,7 +638,7 @@ class app extends CI_Controller
         if (es_data($recibos)) {        
         
             $ids = array_unique(array_column($recibos,'id_orden_compra'));        
-            $response=  $this->api("recompensa/ids_recibo_descuento/format/json/", ["ids" => $ids]);            
+            $response=  $this->api->api("recompensa/ids_recibo_descuento", ["ids" => $ids]);            
         }
         return $response;
 

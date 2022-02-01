@@ -2,7 +2,7 @@
 $autoload['packages'] = array(APPPATH . 'third_party');
 $autoload['libraries'] = [
     'user_agent',    
-    '../../librerias/format'
+    '../../enid/src/Api/format'
 ];
 $autoload['helper'] = [
     'html',

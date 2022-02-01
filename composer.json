@@ -1,0 +1,12 @@
+{
+	"name": "enidservice/enid",
+	"autoload":{
+		"psr-4":{
+			"Enid\\": "enid/src/"
+		}
+		
+	},
+	"require": {
+		"shimabox/url-status": "^1.0"
+	}
+}

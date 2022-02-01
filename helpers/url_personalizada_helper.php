@@ -1,14 +1,127 @@
 <?php
 
-function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
+function accesos_test()
 {
+    return [
+        
+        "top_competencias" => "competencias/?tipo_top=1",
+        "top_competencias" => "competencias/?tipo_top=2",
+        "top_competencias" => "competencias/?tipo_top=3",
+        "top_competencia_entregas" => "competencias_entregas",
+        "top_competencias_entregas" => "competencias_entregas/?tipo_top=1",
+        "top_competencias_entregas" => "competencias_entregas/?tipo_top=2",
+        "top_competencias_entregas" => "competencias_entregas/?tipo_top=3",
+        "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=1',
+        "forma_pago_search" => "forma_pago/?recibo=1",
+        "nfaq" => "faq/?nueva=1",
+        "editar_faq" => "faq/?faq=1",
+        "editar_producto" => "planes_servicios/?action=editar&servicio=1",
+        "pregunta_search" => "pregunta/?tag=1",        
+        "search_q3" => "search/?q3=1",
+        "pedido_seguimiento" => "pedidos/?seguimiento=1",
+        "producto" => "producto/?producto=1",
+        "pedidos_recibo" => "pedidos/?recibo=1",
+        "area_cliente_compras" => "area_cliente/?action=compras&ticket=1",  
+        "recomendacion" => "recomendacion/?q=1",          
+        "usuario_contacto" => "usuario_contacto/?id_usuario=1",
+        "vinculo" => "vinculo/?tag=1",
+        "valoracion_servicio" => "valoracion/?servicio=1",        
+        "busqueda_usuario" => 'usuarios_enid_service/?q=1',
+        
+    ];
+}
 
-    $path = "";
-    $base_url = [
+function accesos_enid()
+{
+     $base_url = [        
         "amazon" =>"https://www.amazon.com.mx/s?me=A2ZBGOMVSPRBHV&marketplaceID=A1AM78C64UM0Y8",
         "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
         "whatsapp" => "https://wa.me/c/5215552967027",
+        "top_competencias" => "competencias/?tipo_top=",
+        "top_competencia_entregas" => "competencias_entregas",
+        "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
+        "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
+        "forma_pago_search" => "forma_pago/?recibo=",
+        "nfaq" => "faq/?nueva=1",
+        "editar_faq" => "faq/?faq=",
+        "editar_producto" => "planes_servicios/?action=editar&servicio=",
+        "pregunta_search" => "pregunta/?tag=",        
+        "search_q3" => "search/?q3=",
+        "pedido_seguimiento" => "pedidos/?seguimiento=",
+        "producto" => "producto/?producto=",
+        "pedidos_recibo" => "pedidos/?recibo=",   
+        "area_cliente_compras" => "area_cliente/?action=compras&ticket=",       
+        "recomendacion" => "recomendacion/?q=",    
+        "usuario_contacto" => "usuario_contacto/?id_usuario=",
+        "vinculo" => "vinculo/?tag=",
+        "valoracion_servicio" => "valoracion/?servicio=",        
+        "busqueda_usuario" => 'usuarios_enid_service/?q=',
+        "url_home" => "../reporte_enid",                        
+        "img_faq" => "img_tema/productos/",        
+        "_login" => "../login",
+        "img_logo" => "img_tema/enid_service_logo.jpg",
+        "img_logo_amazon" => "img_tema/amazon_compra.png",
+        "img_logo_ml" => "img_tema/logo_compra_ml.png",
+        "nuba_seller_club" =>  "/img_tema/portafolio/nuba_seller.png",
+        "pagina_enid_service_facebook" =>  "/img_tema/portafolio/facebook_enid_service.jpg",
+        "paypal_enid" => "https://www.paypal.me/eniservice/",
+        "home" => "",        
+        "imagen_usuario" => "imgs/index.php/enid/imagen_usuario/",
+        "youtube_embebed" => "https://www.youtube.com/embed/",        
+        "_area_cliente" => "../area_cliente",        
+        "instagram" => "https://www.instagram.com/enid_service/",
+        "twitter" => "https://twitter.com/enidservice",
+        "facebook" => "https://www.facebook.com/enidservicemx/",
+        "pinterest" => "https://es.pinterest.com/enid_service",
+        "linkeding" => "https://www.linkedin.com/in/enid-service-433651138",
+        "tumblr" => "https://enidservice.tumblr.com/",        
+        "logout" => "login/index.php/home/logout",                
+        "config_path" => "config/config.php",
+        "config_mines" => "config/mimes.php",
+        "config_db" => "db/database.php",
+        "config_constants" => "config/constants.php",        
+        "go_home" => "../",        
+        "enid" => "https://enidservices.com",
+        "nuba_seller" =>"https://www.facebook.com/groups/810697523192704",
+        "enid_service_facebook" =>"https://www.facebook.com/enidservicemx",        
+        "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
+        "logo_enid" => 
+        _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
+        "logo_oxxo" => 
+        _text("http://enidservices.com/", _web, "/img_tema/portafolio/oxxo-logo.png"),
+        "rastreo_pedido" => 
+        _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
+        "dispositivo" => "img_tema/dispositivo.png"
+    ];
+
+    return $base_url + accesos_internos();
+}
+function accesos_internos()
+{
+
+    return [
+        "desarrollo" => "desarrollo",
+        "inventario" => "stock",
+        "compras" => "compras",
+        "tiempo_venta" => "tiempo_venta",                
+        "nuevo_usuario" => "login/?action=nuevo",
+        "lista_deseos" => "lista_deseos",
+        "lista_deseos_preferencias" => "lista_deseos/?q=preferencias",        
+        "administracion_cuenta" => "administracion_cuenta",
+        "area_cliente_pregunta" => "area_cliente/?action=preguntas",
+        "area_cliente" => "area_cliente",
+        "pedidos" => "pedidos",
+        "busqueda" => "busqueda",
+        "pedidos_reparto" => "pedidos/?reparto=1",                
+        "search" => "search",        
+        "vender" => "planes_servicios",
+        "entregas" => "entregas",
+        "seguidores" => "seguidores",
+        "vender_nuevo" => "planes_servicios/?action=nuevo",        
+        "faqs" => "faq",
+        "login" => "login",
+        "promociones" => "promociones",
         "sobre_vender" => "sobre_ventas",
         "recompensas" => "recompensa/?&id=",
         "clientes" => "clientes",
@@ -16,91 +129,17 @@ function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
         "solicitud_saldo" => "pendiente",
         "conexiones" => "conexiones",
         "top_competencia_entrega" => "competencias_entregas",
-        "top_competencias" => "competencias/?tipo_top=",
-        "top_competencia_entregas" => "competencias_entregas",
-        "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
-        "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
-        "url_home" => "../reporte_enid",
         "reporte_enid" => "reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
-        "forma_pago_search" => "forma_pago/?recibo=",
-        "nfaq" => "faq/?nueva=1",
-        "editar_faq" => "faq/?faq=",
-        "img_faq" => "img_tema/productos/",
-        "faqs" => "faq",
-        "login" => "login",
-        "promociones" => "promociones",
-        "_login" => "../login",
-        "vender" => "planes_servicios",
-        "entregas" => "entregas",
-        "seguidores" => "seguidores",
-        "vender_nuevo" => "planes_servicios/?action=nuevo",
-        "editar_producto" => "planes_servicios/?action=editar&servicio=",
-        "sobre_enid" => "sobre_enidservice",
-        "img_logo" => "img_tema/enid_service_logo.jpg",
-        "img_logo_amazon" => "img_tema/amazon_compra.png",
-        "img_logo_ml" => "img_tema/logo_compra_ml.png",
-        "nuba_seller_club" =>  "/img_tema/portafolio/nuba_seller.png",
-        "pagina_enid_service_facebook" =>  "/img_tema/portafolio/facebook_enid_service.jpg",
-        "pregunta" => "pregunta",
-        "pregunta_search" => "pregunta/?tag=",
-        "search" => "search",
-        "search_q3" => "search/?q3=",
-        "paypal_enid" => "https://www.paypal.me/eniservice/",
-        "home" => "",
-        "pedidos" => "pedidos",
-        "busqueda" => "busqueda",
-        "pedidos_reparto" => "pedidos/?reparto=1",
-        "pedido_seguimiento" => "pedidos/?seguimiento=",
-        "producto" => "producto/?producto=",
-        "pedidos_recibo" => "pedidos/?recibo=",
-        "imagen_usuario" => "imgs/index.php/enid/imagen_usuario/",
-        "youtube_embebed" => "https://www.youtube.com/embed/",
-        "area_cliente_compras" => "area_cliente/?action=compras&ticket=",
-        "area_cliente" => "area_cliente",
-        "_area_cliente" => "../area_cliente",
-        "area_cliente_pregunta" => "area_cliente/?action=preguntas",
-        "instagram" => "https://www.instagram.com/enid_service/",
-        "twitter" => "https://twitter.com/enidservice",
-        "facebook" => "https://www.facebook.com/enidservicemx/",
-        "pinterest" => "https://es.pinterest.com/enid_service",
-        "linkeding" => "https://www.linkedin.com/in/enid-service-433651138",
-        "tumblr" => "https://enidservice.tumblr.com/",
-        "administracion_cuenta" => "administracion_cuenta",
-        "logout" => "login/index.php/startsession/logout",
-        "nuevo_usuario" => "login/?action=nuevo",
-        "lista_deseos" => "lista_deseos",
-        "lista_deseos_preferencias" => "lista_deseos/?q=preferencias",
-        "terminos-y-condiciones" => "terminos-y-condiciones",
-        "contacto" => "contact/#envio_msj",
-        "contact" => "contact/?ubicacion=1#direccion",
-        "recomendacion" => "recomendacion/?q=",
-        "compras" => "compras",
-        "tiempo_venta" => "tiempo_venta",
-        "ventas_encuentro" => "ventas_encuentro",
-        "config_path" => "config/config.php",
-        "config_mines" => "config/mimes.php",
-        "config_db" => "db/database.php",
-        "config_constants" => "config/constants.php",
-        "desarrollo" => "desarrollo",
-        "inventario" => "stock",
-        "usuario_contacto" => "usuario_contacto/?id_usuario=",
-        "vinculo" => "vinculo/?tag=",
-        "go_home" => "../",
-        "valoracion_servicio" => "valoracion/?servicio=",
-        "cross_selling" => "cross_selling/?id_usuario=",
-        "enid" => "https://enidservices.com",
-        "nuba_seller" =>"https://www.facebook.com/groups/810697523192704",
-        "enid_service_facebook" =>"https://www.facebook.com/enidservicemx",
-        "busqueda_usuario" => 'usuarios_enid_service/?q=',
-        "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
-        "logo_enid" => _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),
-        "logo_oxxo" => _text("http://enidservices.com/", _web, "/img_tema/portafolio/oxxo-logo.png"),
-        "rastreo_pedido" => _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
-        "dispositivo" => "img_tema/dispositivo.png"
     ];
+    
+        
+}
+function path_enid($pos, $extra = 0, $link_directo = 0, $controlador = 0)
+{
 
-
+    $path = "";
+    $base_url = accesos_enid();
     if (array_key_exists($pos, $base_url)) {
 
         $path = ($link_directo > 0) ?
@@ -175,7 +214,7 @@ function get_url_tienda($id_usuario)
 function url_recuperacion_password()
 {
 
-    return "../msj/index.php/api/mailrest/recupera_password/format/json/";
+    return "../msj/index.php/api/mailrest/recupera_password/";
 }
 function get_url_request($extra)
 {

@@ -109,7 +109,7 @@ let inicio_session = () => {
     if ($min_mail && $min_pw) {
 
         sload(selector_acceso_sistema);
-        let url = get_option('url');
+        let url = '../login/index.php/api/sess/start/format/json/';
         bloquea_form(form_inicio);
         request_enid('POST', data_send, url, response_inicio_session);
 
@@ -119,6 +119,7 @@ let inicio_session = () => {
 let response_inicio_session = data => {
 
 
+    debugger;
     if (data.login !== false) {
 
         redirect(data.login);
