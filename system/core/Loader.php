@@ -714,8 +714,9 @@ class CI_Loader
 			$_ci_file = ($_ci_ext == '') ? $_ci_view . '.php' : $_ci_view;
 
 			foreach ($this->_ci_view_paths as $view_file => $cascade) {
-				if (file_exists($view_file . $_ci_file)) {
-					$_ci_path = $view_file . $_ci_file;
+				
+				if (file_exists(VIEWPATH. $_ci_file)) {
+					$_ci_path = VIEWPATH. $_ci_file;
 					$file_exists = TRUE;
 					break;
 				}

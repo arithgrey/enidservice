@@ -4,41 +4,51 @@ namespace Enid\Paths;
 
 class Paths 
 {
-
+    
     public static function getcSSJs()
     {
-            
+        /*Debe extraerse desde base de datos en el futuro */
+        $puntuacion = [
+            "css" => [
+                "puntuacion.css",
+
+            ],
+            "js" => [
+                "principal.js"
+            ]
+        ];
+
+        $sobre_ventas = [
+            "css" => [
+                "sobre_vender.css"
+            ],
+            "js" => [
+                "sobre_ventas/principal.js"
+            ],
+            "meta_keywords" => "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
+            "desc_web" => "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
+            "url_img_post" => create_url_preview("comisionistas.png"),
+            "pagina" => 5,
+
+        ];
+
      $response = [
-            "puntuacion" => [
-                "css" => [
-                    "puntuacion.css",
-
-                ],
-                "js" => [
-                    "principal.js"
-                ]
-            ],
-            "sobre_ventas" => [
-                "css" => [
-                    "sobre_vender.css"
-                ],
-                "js" => [
-                    "sobre_ventas/principal.js"
-                ]
-
-            ],
+            "puntuacion" => $puntuacion,
+            "sobre_ventas" => $sobre_ventas,
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css"
                 ],
                 "js" => [
                     "usuario_contacto/principal.js"
-                ]
+                ],
+                "pagina" => 11,
             ],
             "competencias" => [
                 "css" => [
                     "competencias.css"
-                ]
+                ],
+                "pagina" => 12,
             ],
             "stock" => [
                 'js' => [
@@ -92,23 +102,20 @@ class Paths
                     "meta_keywords" => "",
                     "desc_web" => "",
                     "url_img_post" => "",
-
-
+                    "pagina" => 25,
                 ]
             ,
             "saldo_pendiente" =>
                 [
-
                     "css" =>
                         [
                             "solicitud_saldo.css",                        
                         ],
                     "js" =>
                         [
-                        
                             "pendientes/cuenta.js"
-                        ],
-                    
+                        ],    
+                    "pagina" => 9,            
                 ]
             ,
             "compras" =>
@@ -226,9 +233,7 @@ class Paths
                     "meta_keywords" => "",
                     "desc_web" => "Formas de pago Enid Service",
                     "url_img_post" => create_url_preview("formas_pago_enid.png"),
-                    "clasificaciones_departamentos" => "",
-
-
+                    "titulo" => 'Formas de pago Enid Service'                 
                 ],
             "lista_deseos_preferencias" =>
                 [
@@ -242,6 +247,10 @@ class Paths
                             "lista_deseos/preferencias.js",
 
                         ],
+                    "titulo" => 'Lista de deseos enid service',
+                    "url_img_post" => create_url_preview(""),     
+                    "meta_keywords" => "",            
+
 
                 ]
                 ,
@@ -257,9 +266,11 @@ class Paths
                             "recompensa/principal.js",
 
                         ],
+                        "pagina" => 21
 
                 ]
                 ,
+
             "lista_deseos_productos_deseados" => [
                 "css" =>
                     [
@@ -271,6 +282,12 @@ class Paths
                         "lista_deseos/carro_compras.js",
 
                     ],
+                "titulo" => 'Lista de deseos enid service',
+                "url_img_post" => create_url_preview(""),     
+                "meta_keywords" => "",        
+                "desc_web"=>"", 
+                "pagina" =>  6
+
 
             ],
             "login" =>
@@ -287,13 +304,12 @@ class Paths
 
                         ]
                     ,
-                    "url_img_post" => "promo.png"
-                    ,
-                    "desc_web" => "COMPRA Y VENDE EN ENID SERVICE"
-                    ,
-                    "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE "
-                    ,
+                    "url_img_post" => "promo.png",
+                    "desc_web" => "COMPRA Y VENDE EN ENID SERVICE",
+                    "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE ",
                     "clasificaciones_departamentos" => "",
+                    "titulo" => "",
+                    "pagina" => 4
 
                 ],
             "pago_oxxo" =>
@@ -310,8 +326,7 @@ class Paths
                         ]
                     ,
                     "clasificaciones_departamentos" => "",
-
-
+                    "pagina" => 26
                 ]
             ,
             "pedidos_busqueda" =>
@@ -352,8 +367,6 @@ class Paths
                             "js/pickers-init.js",
                             "alerts/jquery-confirm.js",
                             "pedidos/principal.js",
-
-
                         ]
                     ,
 
@@ -442,6 +455,7 @@ class Paths
                             "pedidos/seguimiento.js",
                         ]
                     ,
+                    "pagina" => 10,
 
 
                 ],
@@ -555,6 +569,12 @@ class Paths
                             'procesar/sha1.js',
                         ]
                     ,
+                    "pagina" => 7,
+                    "meta_keywords" => "",
+                    'desc_web' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
+                    'titulo' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
+                    'url_img_post' => ''
+                 
                 ]
             ,
             "procesar_crear" =>
@@ -589,6 +609,7 @@ class Paths
 
                         ],
                     "clasificaciones_departamentos" => "",
+                    "pagina" => 7,     
                 ]
             ,
             "producto" =>
@@ -603,6 +624,7 @@ class Paths
                             'producto/principal.js',
 
                         ],
+                    "pagina" => 3,                    
                 ]
             ,
             "producto_recibo_registrado" =>
@@ -662,6 +684,7 @@ class Paths
 
                             "recomendaciones/principal.js",
                         ],
+                        "pagina" => 24,
                 ]
 
             ,
@@ -680,6 +703,7 @@ class Paths
                             "repo_enid/map.js",
                         ],
                     "clasificaciones_departamentos" => "",
+                    "pagina" => 8,
                 ]
 
             ,
@@ -697,7 +721,10 @@ class Paths
                             "search/principal.js",
                         ],
                     "url_img_post" => create_url_preview("dispensador-rojo.jpg"),
-
+                    "meta_keywords" => "",
+                    'desc_web' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
+                    'titulo' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
+                    'pagina' => 2
                 ]
 
             ,
@@ -793,6 +820,7 @@ class Paths
                         "valoracion_servicio.css",
 
                     ],
+                    "pagina" => 23
                 ]
             ,
             "movimientos" =>
@@ -844,31 +872,6 @@ class Paths
 
                 ]
             ,
-            "ventas_encuentro" =>
-                [
-                    "js" =>
-                        [
-
-                            "ventas_encuentro/principal.js",
-
-
-                        ],
-                    "css" =>
-                        [
-                            "timeline.css",
-                        ],
-
-                ],
-            "cross_selling" =>
-                [
-                    "js" =>
-                        [
-                            "cross_selling/principal.js"
-                        ],
-                    "css" =>
-                        [],
-
-                ],
             "top_clientes" =>
                 [
                     "js" =>
@@ -950,6 +953,7 @@ class Paths
                         [
                             "search_sin_encontrar.css",
                         ],
+                    "pagina" => 9,
 
                 ],
 

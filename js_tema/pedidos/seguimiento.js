@@ -6,6 +6,8 @@ let $saldo_cubierto = $('.saldo_cubierto');
 let $form_notificacion_entrega_cliente = $('.form_notificacion_entrega_cliente');
 let $form_confirmacion_entrega = $('.form_confirmacion_entrega');
 let $form_otros = $('.form_otros');
+let $form_puntos = $('.form_puntos');
+let $sin_deseo_puntos = $('.sin_deseo_puntos');
 let $selector_interes = $('.selector_interes');
 let $form_articulo_interes = $('.form_articulo_interes_entrega');
 let $form_ingreso_cancelacion  =  $('.form_ingreso_cancelacion');
@@ -28,6 +30,7 @@ $(document).ready(function () {
     $notifica_entrega_cancelada.click(notificar_cancelacion);
     $confirma_cancelacion.click(lista_motivos_cancelacion);
     $form_ingreso_cancelacion.submit(ingreso_cancelacion);
+    $sin_deseo_puntos.click(no_desea_puntos);
 
 });
 let valida_notificacion_pago = () => {
@@ -110,8 +113,8 @@ let confirma_entrega_cliente = function () {
 let response_confirma_entrega_cliente = function (data) {
 
     if (data === true) {
-        $form_confirmacion_entrega.addClass('d-none');
-        $form_otros.removeClass('d-none');
+        $form_confirmacion_entrega.addClass('d-none');        
+        $form_puntos.removeClass('d-none');
 
     }
 }
@@ -197,5 +200,12 @@ let ingreso_cancelacion =  function (e){
     let url = "../q/index.php/api/tipificacion/index/format/json/";
     request_enid("POST", data_send, url, despues_de_cancer);
     e.preventDefault();
+
+}
+let no_desea_puntos =  function (){
+    
+    $form_otros.removeClass("d-none");
+    $form_puntos.addClass("d-none");
+    
 
 }
