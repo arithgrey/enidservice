@@ -429,7 +429,7 @@ if (!function_exists('invierte_date_time')) {
                     "target" => "_blank"
                 ]
             ),
-            a_enid(text_icon(_money_icon, "Calendario de entregas"),
+            a_enid(text_icon(_money_icon, "Próximas entregas"),
                 [
                     
                     "href" => path_enid("entregas"),
