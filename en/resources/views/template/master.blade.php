@@ -1,6 +1,5 @@
 <!doctype html>
 @include('template.meta')
-@yield('jscss')
 <body class="bg-white">
     <div id="app">        
         @include('template.navbar')

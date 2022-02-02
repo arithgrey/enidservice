@@ -1,17 +1,41 @@
 @extends('template.master')
 @section('jscss')sss
-     {!! Html::script('js/valoracion/crear.js') !!}
+     
 @endsection('jscss')
 
 @section('content')
+
+
 <div class="row">
     <div class="col-md-6 offset-md-3">
         <div class="container">            
             <div class="row">                
                 <div class="col bg-white p-2">
                     <div class="row">
-                        
-                       {!!format_error($errors)!!}
+
+
+<br><br><br>
+<i class="fa fa-copy"></i>
+
+<i class="fa fa-save"></i>
+
+<i class="fa fa-trash"></i>
+
+<i class="fa fa-home"></i>
+<!-- Regular -->
+<i class="far fa-user"></i>
+
+<!-- Solid -->
+<i class="fas fa-user"></i>
+
+<!-- Brand -->
+<i class="fab fa-dev"></i>
+
+<i class="fas fa-camera"></i>
+<i class="far fa-camera"></i>
+<i class="fal fa-camera"></i>
+<i class="fad fa-camera"></i>
+
 
                                                     
                         <div class="col-md-10 offset-1">
