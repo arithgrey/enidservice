@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Valoracion extends Model
 {
+    use HasFactory;
+
     protected $fillable = [ 
         'user_id', 
         'comentario', 
@@ -20,7 +22,7 @@ class Valoracion extends Model
 
     public function getExcerptAttribute()
     {
-        return substr($this->titulo, 0, 100);
+        return substr($this->titulo, 0, 10);
     }
 
     public function getFechaRegistroAttribute()
@@ -28,5 +30,4 @@ class Valoracion extends Model
         return $this->created_at->format('d/m/Y');
     }
     
-
 }

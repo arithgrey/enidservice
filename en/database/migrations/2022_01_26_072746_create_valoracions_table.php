@@ -27,6 +27,7 @@ class CreateValoracionsTable extends Migration
             $table->string('titulo');
             $table->string('email');
             $table->string('nombre');
+            $table->string('imagen');
             $table->integer('id_servicio');            
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
