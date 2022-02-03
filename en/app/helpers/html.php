@@ -755,13 +755,13 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
 
 }
 
-function _titulo($text, $extra = '')
+function _titulo($text, $extra = 'text-2xl')
 {
     
     return h($text, 1,  $extra);
 
 }
-function _subtitulo($text,  $extra = '')
+function _subtitulo($text,  $extra = 'text-xl')
 {
     
     return h($text, 2,  $extra);
