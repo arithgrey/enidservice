@@ -1,20 +1,20 @@
 <!doctype html>
 @include('layouts.meta')
-<body>
-    <main>   
+<body class="font-roboto">
+    <main>
         <header class="shadow-lg">
             <div class="bg-blue-500 py-1">
-            @include('layouts.navbar')           
+            @include('layouts.navbar')
             </div>
-            
+
         </header>
-         
+
         <div class="container mx-auto px-4">
             @yield('content')
-        </div>        
+        </div>
     </main>
     <footer class="py-4">
-        
+
     </footer>
 </body>
 </html>

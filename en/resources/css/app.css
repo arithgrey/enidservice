@@ -1,3 +1,11 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.format_submit{
+
+    @apply bg-black text-slate-50 font-medium border-solid border-2 border-sky-400 cursor-pointer pr-4  pl-4 pt-1  pb-1 tracking-wide transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:transform-none hover:bg-blue-900
+}
+.format_input{
+    @apply w-full appearance-none bg-transparent border-none text-gray-900 py-1 px-1 leading-3 focus:outline-none placeholder-slate-300
+}

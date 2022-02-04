@@ -16,10 +16,10 @@
         <div class="text-sm text-gray-500">
             {{$valoracion->excerpt}}
         </div>
-    </td>           
+    </td>
     <td class="px-6 py-4 whitespace-nowrap text-right text-sm">
         <a href="{{route('valoracion-detalle', $valoracion->slug)}}">
-            <x-valoracion-recomendaria :valoracion="$valoracion"/>            
+            <x-valoracion-recomendaria :valoracion="$valoracion"/>
         </a>
     </td>
 </tr>
