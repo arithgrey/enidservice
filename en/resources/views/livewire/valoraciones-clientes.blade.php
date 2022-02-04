@@ -1,6 +1,6 @@
 
 
-                    <div>                                                    
+                    <div>
                         <div>
                             {!! _titulo('ESCRIBE UNA RESEÑA') !!}
                         <div>
@@ -13,6 +13,8 @@
                             <div>
                                 {!! _subtitulo('¿Qué valoración darías a este artículo?') !!}
                             </div>
+
+
                             <div>
                                 {!! posibles_valoraciones(
                                     [
@@ -23,7 +25,7 @@
                                         "Bueno",
                                         "Excelente"
                                     ]
-                                )  
+                                )
                                 !!}
                             </div>
                             @error('calificacion')
@@ -48,38 +50,27 @@
                             </div>
                         </div>
 
-                                                
+
                         {!! hiddens(["name" => "user_id", "value" => 1]) !!}
                         {!! hiddens(["name" => "recomendaria", "value" => 1]) !!}
                         {!! hiddens(["name" => "id_servicio", "value" => 1]) !!}
                         {!! hiddens(["name" => "calificacion", "value" => 0]) !!}
 
+                        <x-form.input
+                            label='Tu opinión en una frase*'
+                            name='titulo'
+                            placeholder="Me encantó!"
+                            required='Agrega una breve descripción'
+                            value="{{old('titulo')}}"
+                            error='titulo'/>
+
+
+
+
+
 
                         {!!
-                            input_frm(
-                                "mt-5",
-                                "Tu opinión en una frase*",
-                                [
-                                    "type" => "text",
-                                    "name" => "titulo",
-                                    "class" => "opinion_frase",
-                                    "id" => "opinion_frase",
-                                    "placeholder" => "Por ejemplo: Me encantó!",
-                                    "required" => "Agrega una breve descripción",
-                                    "value" => old('titulo')
-                                ],
-                                "nuevo"
-                            )
-                        !!}
-
-                        @error('titulo')
-                            {{ $message }}
-                        @enderror
-
-                
-
-                        {!!
-                                input_frm("mt-5", 
+                                input_frm("mt-5",
                                         "Tu reseña (comentarios)*",
                                         [
                                             "type" => "text",
@@ -95,55 +86,39 @@
 
 
                         !!}
-                        
+
                         @error('comentario')
                             {{ $message }}
                         @enderror
 
+                        <x-form.input
+                            label='Tu nombre'
+                            type="text"
+                            name="nombre"
+                            placeholder="Por ejemplo: Jonathan"
+                            class="nombre"
+                            id="nombre"
+                            required='true'
+                            value="{{old('nombre')}}"
+                            error='nombre'
+                            />
 
-                        {!!
-
-                            input_frm("mt-5", "Tu Nombre", [
-                                "type" => "text",
-                                "name" => "nombre",
-                                "placeholder" => "Por ejemplo: Jonathan",
-                                "value" => "",
-                                "class" => "nombre",
-                                "id" => "nombre",
-                                "required" => true,
-                                "value" => old('nombre')
-                            ]);
-
-                        !!}
+                        <x-form.input
+                            label="Tu correo electrónico*"
+                            type="email"
+                            name="email"
+                            class="email"
+                            id="email"
+                            placeholder="Por ejemplo: jmedrano@enidservices.com"
+                            value="{{old('email')}}"
+                            required
+                            error='email'/>
 
 
-                        @error('nombre')
-                            {{ $message }}
-                        @enderror
-                        
 
-
-                        {!! 
-                        
-                        input_frm(
-                            "mt-5", "Tu correo electrónico*",
-                                [
-                                    "type" => "email",
-                                    "name" => "email",
-                                    "class" => "email",
-                                    "id" => 'email',
-                                    "placeholder" => "Por ejemplo: jmedrano@enidservices.com",
-                                    "value" => old('email')
-                                ]
-                            );
-
-                        !!}
-                    
-                        
-                        {!! submit_format('Enviar reseña', ['class' => 'mt-5']) !!}
-
+                        <x-form.boton titulo='Envianos tu reseña!'/>
                         @csrf
                         {!! Form::close() !!}
                         </div>
-                    </div>                                       
+                    </div>
 
