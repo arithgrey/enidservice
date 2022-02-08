@@ -1261,7 +1261,8 @@ let registra_nuevo_servicio = () => {
     request_enid("POST", data_send, url, response_registro);
 };
 let response_registro = (data) => {
-
+    
+    
     if (data.registro != 0 && data.registro.servicio > 0) {
         set_option("servicio", data.registro.servicio);
         carga_informacion_servicio(1);
@@ -1274,6 +1275,7 @@ let response_registro = (data) => {
     } else {
         redirect("../planes_servicios/?action=nuevo&mensaje=Verificar el precio que ingresaste");
     }
+    
 
 };
 let elimina_foto_producto = function (e) {

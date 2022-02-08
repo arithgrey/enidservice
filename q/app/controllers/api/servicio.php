@@ -468,9 +468,8 @@ class Servicio extends REST_Controller
     }
 
     function index_POST()
-
-
     {
+
 
         $response = false;
         if ($this->input->is_ajax_request()) {
@@ -520,11 +519,15 @@ class Servicio extends REST_Controller
         $next = ($param["flag_servicio"] == 0 && $param["precio"] == 0) ? 0 : 1;
         $data_complete["mensaje"] = ($next == 1) ? "" : "TU PRODUCTO DEBE TENER ALGÚN PRECIO";
         if ($next) {
+            
             $id_empresa = $this->app->get_session('idempresa');
             $empresa = $this->app->empresa($id_empresa);
             $tags = $this->create_tags($param);
-            $text_tags = implode($tags, ",");
+            
+            $text_tags = (es_data($tags)) ? implode( ',', $tags) : "";
+            
             $param["metakeyword"] = $text_tags;
+            
             $id_usuario = $this->id_usuario;
             $param["id_usuario"] = $id_usuario;
             $terminos_usuario = $this->get_terminos_privacidad_productos($id_usuario);
@@ -534,6 +537,7 @@ class Servicio extends REST_Controller
             $param["comision"] = comision_por_precio($param["precio"]);
 
             $data_complete["servicio"] = $this->create_servicio($param, $empresa);
+            
 
         }
 
