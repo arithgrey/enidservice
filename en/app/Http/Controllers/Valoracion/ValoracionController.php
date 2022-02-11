@@ -13,10 +13,9 @@ class ValoracionController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   
+
     public function index()
     {
-        
     }
 
     /**
@@ -26,7 +25,6 @@ class ValoracionController extends Controller
      */
     public function create()
     {
-        
     }
 
     /**
@@ -37,11 +35,11 @@ class ValoracionController extends Controller
      */
     public function store(ValoracionRequest $request)
     {
-                
-        $post = Valoracion::create($request->all());
+
+        $valoracion = Valoracion::create($request->all());
+
 
         return back()->with('status', 200);
-
     }
 
     /**
@@ -52,7 +50,6 @@ class ValoracionController extends Controller
      */
     public function show(Valoracion $valoracion)
     {
-        
     }
 
     /**
@@ -88,5 +85,4 @@ class ValoracionController extends Controller
     {
         //
     }
-        
 }

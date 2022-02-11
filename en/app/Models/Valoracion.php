@@ -3,22 +3,31 @@
 namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Valoracion extends Model
 {
     use HasFactory;
+    use Sluggable;
 
-    protected $fillable = [ 
-        'user_id', 
-        'comentario', 
-        'calificacion', 
-        'recomendaria', 
-        'titulo', 
-        'email', 
-        'nombre', 
-        'id_servicio' 
+    protected $fillable = [
+        'comentario',
+        'calificacion',
+        'recomendaria',
+        'titulo',
+        'email',
+        'nombre',
+        'id_servicio'
+
     ];
-
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'titulo'
+            ]
+        ];
+    }
 
     public function getExcerptAttribute()
     {
@@ -29,5 +38,5 @@ class Valoracion extends Model
     {
         return $this->created_at->format('d/m/Y');
     }
-    
+
 }
