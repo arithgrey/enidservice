@@ -24,7 +24,6 @@ class ValoracionRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required',
             'comentario' => 'required|min:10|max:255',
             'calificacion' => 'required|integer|between:1,5',
             'recomendaria' => 'required|integer|between:0,1',

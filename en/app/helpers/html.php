@@ -655,7 +655,7 @@ function append($array, $col = 0, $num_col = 0)
 {
     $response = "";
     if (is_array($array)) {
-    
+
         $callback = function ($a, $b) {
             if (!is_null($b)) {
 
@@ -755,15 +755,15 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
 
 }
 
-function _titulo($text, $extra = 'text-2xl')
+function _titulo($text, $extra = 'text-2xl font-medium')
 {
-    
+
     return h($text, 1,  $extra);
 
 }
 function _subtitulo($text,  $extra = 'text-xl')
 {
-    
+
     return h($text, 2,  $extra);
 
 }
@@ -924,9 +924,9 @@ function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext
                 $config_input["id"])
         )
     );
-    
+
     $r[] = d($text, "input_enid_format w-100");
-    
+
 
     if (is_numeric($col)) {
 
@@ -1003,7 +1003,7 @@ function submit_format($str, $attributes = [], $primario = 1, $texto_strong = 1)
     $att = $attributes;
 
 
-    $att["class"] = 
+    $att["class"] =
     (array_key_exists("class",$attributes)) ? add_text($clase, $attributes["class"]) : $clase;
     $att["type"] = "submit";
     $att["value"] = $str;
@@ -1110,33 +1110,7 @@ function create_button_easy_select($arr, $attributes, $comparador = 1)
     return $easy_select;
 
 }
-function posibles_valoraciones($calificacion)
-    {
-        $response = [];
-        for ($x = 1; $x <= 5; $x++) {
 
-            $id_input = "radio" . $x;
-            $response[] = input(
-                [
-                    "id" => $id_input,
-                    "value" => $x,
-                    "class" => 'input-start f2',
-                    "type" => "radio"
-                ]
-            );
-
-            $response[] = label("★",
-                [
-                    "class" => 'estrella ' . " f2 estrella_" . $x,
-                    "for" => "$id_input",
-                    "id" => $x,
-                    "title" => $x . " - " . $calificacion[$x]
-                ]
-            );
-
-        }
-        return append($response);
-}
 function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
 {
 
@@ -1175,22 +1149,22 @@ function add_text($a, $b, $f = 0)
 }
 function format_error($errors)
 {
-    
+
     $response = [];
-    
+
     if ($errors->any()) {
-            
+
         foreach($errors->all() as $error){
 
             $response[] = d($error,12);
         }
     }
-   
+
     return append($response);
 }
 function format_error_campo($mensaje, $extra = '')
 {
-    
-    return d($mensaje, _text_('formato_campo_error', $extra));    
-    
+
+    return d($mensaje, _text_('formato_campo_error', $extra));
+
 }

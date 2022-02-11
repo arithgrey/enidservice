@@ -134,6 +134,7 @@ return [
             'rule-name' => 'custom-message',
         ],
         'comentario' =>[
+            'required' => 'Vamos! cuéntamos tu experiencia!',
             'min' => 'Ups! parace que ese comentario es muy corto!',
             'max' => 'Hey! parace que te explicaste de más! ¿Crees que pueda ser un poco más corto tu comentario? '
         ],
@@ -143,11 +144,14 @@ return [
         ],
         'nombre' =>[
             'min' => 'Vamos! ese nombre es muy corto!',
-            'max' => 'Vamos! ese nombre es muy largo!'   
+            'max' => 'Vamos! ese nombre es muy largo!'
         ],
         'calificacion' =>[
-            'required' => 'Hey! vamos da una calificación!',            
+            'required' => 'Hey! vamos da una calificación!',
             'between' => 'Hey! vamos da una calificación!'
+        ],
+        'recomendaria' =>[
+            'required' => 'Ups! parece que debes seleccionar una de la opciones!',
         ],
     ],
 

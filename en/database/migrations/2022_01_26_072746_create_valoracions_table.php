@@ -15,21 +15,18 @@ class CreateValoracionsTable extends Migration
     {
 
         Schema::create('valoracions', function (Blueprint $table) {
-            
+
             $table->bigIncrements('id');
-            
-            $table->unsignedBigInteger('user_id');            
             $table->string('slug')->unique();
             $table->text('comentario');
             $table->integer('calificacion');
             $table->integer('status')->nullable(false)->default(0);
             $table->integer('recomendaria');
-            $table->string('titulo');
-            $table->string('email');
-            $table->string('nombre');
-            $table->string('imagen');
-            $table->integer('id_servicio');            
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('titulo', 150);
+            $table->string('email', 50);
+            $table->string('nombre', 50);
+            $table->string('imagen')->nullable();
+            $table->integer('id_servicio');
             $table->timestamps();
         });
     }

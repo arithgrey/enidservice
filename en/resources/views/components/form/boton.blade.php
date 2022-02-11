@@ -1,3 +1,3 @@
-<button {{ $attributes->class(['format_submit'])->merge(['type' => 'submit']) }}/>
+<button {{ $attributes->class(['format_submit w-full'])->merge(['type' => 'submit']) }}/>
     {{ $titulo ?? 'Enviar' }}
 </button>
