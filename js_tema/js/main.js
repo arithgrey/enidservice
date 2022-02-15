@@ -49,7 +49,7 @@ $("footer").ready(() => {
 
     }
 
-    $(".validar_nombre").keypress(valida_formato_nombre);
+
     verifica_formato_default_inputs();
 
     if (document.body.querySelector('form')) {
@@ -934,11 +934,6 @@ let anima_busqueda = function (e) {
         set_option("disparador_buscados", 0);
     }
 };
-let valida_formato_nombre = function (e) {
-    if (!/^[A-Za-záéíóúñ ]*$/.test(String.fromCharCode(e.keyCode))) {
-        e.preventDefault();
-    }
-};
 
 let valida_formato_search = function (e) {
 
@@ -1006,6 +1001,8 @@ let paste_email = function () {
 };
 let paste_nombre = function () {
 
+
+    /*
     event.preventDefault();
     if (event.clipboardData) {
         let str = event.clipboardData.getData("text/plain");
@@ -1016,6 +1013,7 @@ let paste_nombre = function () {
         }
         event.target.value = text;
     }
+    */
 };
 let paste_search = function () {
 

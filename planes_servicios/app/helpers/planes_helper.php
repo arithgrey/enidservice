@@ -391,7 +391,7 @@ if (!function_exists('invierte_date_time')) {
                 "onkeyup" => "transforma_mayusculas(this)",
                 "required" => true,
                 "placeholder" => "Nombre de tu artículo o servicio",
-                "no_validar" => 1
+                
             ]
         );
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Valoracion;
 
+use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Valoracion;
 use App\Http\Requests\ValoracionRequest;
@@ -16,6 +17,10 @@ class ValoracionController extends Controller
 
     public function index()
     {
+        return Inertia::render("Valoraciones/Listado", [
+
+            'valoraciones' => Valoracion::latest()->get()
+        ]);
     }
 
     /**
