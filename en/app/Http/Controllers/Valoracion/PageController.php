@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Valoracion;
 
-use App\Models\Valoracion;
+use Inertia\Inertia;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+
 
 class PageController extends Controller
 {
 
-    public function encuesta($id_servicio)
+    public function encuesta()
     {
-
-        return view('valoraciones.encuesta', ['id_servicio' => $id_servicio]);
+        return Inertia::render('Valoraciones/Encuesta');
     }
+    /*
     public function listado()
     {
 
@@ -24,4 +24,5 @@ class PageController extends Controller
 
         return view('valoraciones.detalle', ['valoracion' => $valoracion]);
     }
+    */
 }
