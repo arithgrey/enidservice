@@ -6,7 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Valoracion\PageController;
 
 
-Route::get('/valoraciones', [PageController::class, 'encuesta']);
+Route::get('/valoraciones/{id}', [PageController::class, 'encuesta'])
+    ->where('id', '[0-9]+');
 
 Route::resource('valoracion', 'Valoracion\ValoracionController');
 

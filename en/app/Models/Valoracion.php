@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -17,7 +18,8 @@ class Valoracion extends Model
         'titulo',
         'email',
         'nombre',
-        'id_servicio'
+        'id_servicio',
+        'status'
 
     ];
     public function sluggable(): array
@@ -38,5 +40,4 @@ class Valoracion extends Model
     {
         return $this->created_at->format('d/m/Y');
     }
-
 }

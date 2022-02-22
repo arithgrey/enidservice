@@ -9,20 +9,12 @@ use App\Http\Controllers\Controller;
 class PageController extends Controller
 {
 
-    public function encuesta()
-    {
-        return Inertia::render('Valoraciones/Encuesta');
-    }
-    /*
-    public function listado()
+    public function encuesta($id)
     {
 
-        return view('valoraciones.listado');
+        return Inertia::render('Valoraciones/Encuesta',
+        [
+            'id' => $id
+        ]);
     }
-    public function valoracion(Valoracion $valoracion)
-    {
-
-        return view('valoraciones.detalle', ['valoracion' => $valoracion]);
-    }
-    */
 }

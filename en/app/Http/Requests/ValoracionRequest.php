@@ -30,7 +30,8 @@ class ValoracionRequest extends FormRequest
             'titulo' => 'required|min:2|max:70',
             'email' => 'required|email',
             'nombre' => 'required|min:3|max:55',
-            'id_servicio' => 'required|integer'
+            'id_servicio' => 'required|integer',
+            'status' => 'integer|between:1,5',
         ];
     }
 }
