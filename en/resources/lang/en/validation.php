@@ -140,11 +140,13 @@ return [
         ],
         'titulo' =>[
             'min' => 'Vamos! ese titulo es muy corto',
-            'max' => 'Hey! ¿Crees que pueda ser un poco más corto el titulo? '
+            'max' => 'Hey! ¿Crees que pueda ser un poco más corto el titulo? ',
+            'required' => 'Vamos! Cual es tu opinion?',
         ],
         'nombre' =>[
             'min' => 'Vamos! ese nombre es muy corto!',
-            'max' => 'Vamos! ese nombre es muy largo!'
+            'max' => 'Vamos! ese nombre es muy largo!',
+            'required' => 'Hey! ese nombre es muy corto!',
         ],
         'calificacion' =>[
             'required' => 'Hey! vamos da una calificación!',
@@ -153,10 +155,14 @@ return [
         'recomendaria' =>[
             'required' => 'Ups! parece que debes seleccionar una de la opciones!',
         ],
+        'email' =>[
+            'required' => 'Vamos! ese email es necesario!',
+            'email' => 'Parece que ese no es un correo electrónico'
+        ],
     ],
 
     /*
-    |--------------------------------------------------------------------------
+    |----------------------------------s----------------------------------------
     | Custom Validation Attributes
     |--------------------------------------------------------------------------
     |

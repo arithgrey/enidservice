@@ -1,15 +1,13 @@
 <template>
-  <app-layout>
-    <Head title="Enid service" />
-    <en-navbar />
+  <app-layout title="Listado">
     <div class="grid mt-5">
       <div class="mx-auto">
         <div>
-          <h1>ESCRIBE UNA RESEÑA</h1>
+          <h1 class="format_titulo">ESCRIBE UNA RESEÑA</h1>
         </div>
         <div>Sobre tu servicio</div>
         <div>
-          <form>
+          <form @submit.prevent="registrar(form)">
             <div class="flex flex-col">
               <div class="mt-3">
                 <h2 class="font-semibold text-xl">
@@ -17,44 +15,57 @@
                 </h2>
               </div>
               <div class="mr-auto">
-                <p class="clasificacion">
+                <p class="clasificacion ltr">
                   <input
                     id="radio1"
+                    class="hidden"
                     type="radio"
                     name="calificacion"
+                    v-model="form.calificacion"
                     value="5"
                   />
-                  <label class="text-5xl" for="radio1">★</label>
+                  <label class="text-5xl text-slate-300" for="radio1">★</label>
                   <input
                     id="radio2"
+                    class="hidden"
                     type="radio"
                     name="calificacion"
+                    v-model="form.calificacion"
                     value="4"
                   />
-                  <label class="text-5xl" for="radio2">★</label>
+                  <label class="text-5xl text-slate-300" for="radio2">★</label>
                   <input
                     id="radio3"
+                    class="hidden"
                     type="radio"
                     name="calificacion"
+                    v-model="form.calificacion"
                     value="3"
                   />
-                  <label class="text-5xl" for="radio3">★</label>
+                  <label class="text-5xl text-slate-300" for="radio3">★</label>
                   <input
                     id="radio4"
+                    class="hidden"
                     type="radio"
                     name="calificacion"
+                    v-model="form.calificacion"
                     value="2"
                   />
-                  <label class="text-5xl" for="radio4">★</label>
+                  <label class="text-5xl text-slate-300" for="radio4">★</label>
                   <input
                     id="radio5"
+                    class="hidden"
                     type="radio"
                     name="calificacion"
+                    v-model="form.calificacion"
                     value="1"
                   />
-                  <label class="text-5xl" for="radio5">★</label>
+                  <label class="text-5xl text-slate-300" for="radio5">★</label>
                 </p>
               </div>
+              <p v-if="errors.calificacion" class="format_error">
+                {{ errors.calificacion }}
+              </p>
             </div>
             <div class="mt-3">
               <label class="font-semibold">
@@ -63,29 +74,121 @@
             </div>
             <div class="flex flex-row justify-between mt-4">
               <div>
-                <a class="format_selector"> SI </a>
+                <a
+                  v-bind:class="selectorRecomendaria"
+                  class="format_selector"
+                  v-on:click="valorar"
+                >
+                  SI
+                </a>
               </div>
               <div>
-                <a class="format_selector"> NO </a>
+                <a
+                  v-bind:class="selectorSinRecomendacion"
+                  class="format_selector format_selector_sin_valoracion"
+                  v-on:click="sinvalorar"
+                >
+                  NO
+                </a>
               </div>
             </div>
+            <div v-if="errors.recomendaria" class="format_error mt-3">
+              {{ errors.recomendaria }}
+            </div>
 
             <div class="mt-3 mb-3">
-              <en-input v-bind:input="inputOpinion" />
+              <en-input v-bind:input="inputOpinion">
+                <template #label> Tu opinión en una frase* </template>
+                <template #input>
+                  <input
+                    type="text"
+                    class="w-full format_input"
+                    name="titulo"
+                    v-model="form.titulo"
+                    placeholder="Me encantó!"
+                  />
+                </template>
+                <template #errores>
+                  <div v-if="errors.titulo" class="format_error">
+                    {{ errors.titulo }}
+                  </div>
+                </template>
+              </en-input>
             </div>
             <div class="mt-3">
-              <en-text-area v-bind:input="inputComentario" />
+              <en-text-area v-bind:input="inputComentario">
+                <template #label> Tu reseña (comentarios)* </template>
+                <template #area>
+                  <textarea
+                    class="format_text_area w-full comentario"
+                    name="comentario"
+                    v-model="form.comentario"
+                    id="comentario"
+                    placeholder="¿Cual fué tu experiencia?"
+                  ></textarea>
+                </template>
+                <template #errores>
+                  <div v-if="errors.comentario" class="format_error">
+                    {{ errors.comentario }}
+                  </div>
+                </template>
+              </en-text-area>
             </div>
 
             <div class="mt-3 mb-3">
-              <en-input v-bind:input="inputNombre" />
+              <en-input v-bind:input="inputNombre">
+                <template #label> Tu nombre* </template>
+                <template #input>
+                  <input
+                    type="text"
+                    name="nombre"
+                    v-model="form.nombre"
+                    class="w-full format_input"
+                    placeholder="ejemplo: Jonathan"
+                    id="nombre"
+                  />
+                </template>
+                <template #errores>
+                  <div v-if="errors.nombre" class="format_error">
+                    {{ errors.nombre }}
+                  </div>
+                </template>
+              </en-input>
             </div>
 
             <div class="mt-3 mb-3">
-              <en-input v-bind:input="inputEmail" />
+              <en-input v-bind:input="inputEmail">
+                <template #label> Tu email* </template>
+                <template #input>
+                  <input
+                    type="email"
+                    name="email"
+                    v-model="form.email"
+                    class="email format_input mt-2 w-full"
+                    placeholder="ejemplo:jmedrano@enidservices.com"
+                  />
+                </template>
+                <template #errores>
+                  <div v-if="errors.email" class="format_error">
+                    {{ errors.email }}
+                  </div>
+                </template>
+              </en-input>
             </div>
+            <input
+              type="hidden"
+              name="recomendaria"
+              v-model="form.recomendaria"
+              class="recomendaria hiden"
+            />
+            <input
+              type="hidden"
+              name="id_servicio"
+              v-model="form.id"
+              class="id_servicio hiden"
+            />
             <div class="mt-3 mb-3">
-                <en-boton v-bind:atributos="btn"/>
+              <en-boton v-bind:atributos="btn"> Enviar Reseña </en-boton>
             </div>
           </form>
         </div>
@@ -94,15 +197,17 @@
   </app-layout>
 </template>
 
+
+
 <script>
-import { defineComponent } from "vue";
+import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import EnNavbar from "../Components/EnNavbar";
 import EnInput from "../Components/Form/EnInput";
 import EnTextArea from "../Components/Form/EnTextArea";
 import EnBoton from "../Components/Form/EnBoton";
 
-export default defineComponent({
+export default {
   components: {
     Head,
     Link,
@@ -110,43 +215,78 @@ export default defineComponent({
     EnInput,
     EnTextArea,
     EnBoton,
+    AppLayout,
   },
 
-  props: {},
+  props: {
+    errors: Object,
+    id: Array,
+  },
   data() {
     return {
-      inputOpinion: {
-        texto_label: "Tu opinión en una frase*",
-        type: "text",
-        name: "titulo",
-        placeholder: "Me encantó!",
+      btn: {},
+      selectorRecomendaria: {
+        format_selector_seleccionado: false,
       },
-      inputComentario: {
-        texto_label: "Tu reseña (comentarios)*",
-        name: "comentario",
-        class: "comentario",
-        id: "comentario",
-        placeholder: "¿Cual fué tu experiencia?",
-        old: "",
+      selectorSinRecomendacion: {
+        format_selector_seleccionado: false,
       },
-      inputNombre: {
-        texto_label: "Tu nombre",
-        type: "text",
-        name: "nombre",
-        placeholder: "ejemplo: Jonathan",
-        id: "nombre",
+      form: {
+        comentario: null,
+        calificacion: null,
+        recomendaria: null,
+        titulo: null,
+        email: null,
+        nombre: null,
+        id_servicio: this.id,
       },
-      inputEmail: {
-        texto_label: "Tu email*",
-        type: "email",
-        name: "email",
-        class: "email mt-2",
-        placeholder: "ejemplo: jmedrano@enidservices.com",
-      },
-      btn:{
-          titulo:"Enviar Reseña"
-      }
     };
   },
-});
+  methods: {
+    openModal: function () {
+      $("#modal").modal("show");
+    },
+    registrar: function (form) {
+      let url = this.route("valoracion.store");
+      this.$inertia.post(url, form);
+
+    },
+    valorar: function (event) {
+      this.form.recomendaria = 1;
+      this.selectorRecomendaria.format_selector_seleccionado = true;
+      this.selectorSinRecomendacion.format_selector_seleccionado = false;
+    },
+    sinvalorar: function (event) {
+      this.form.recomendaria = 0;
+      this.selectorRecomendaria.format_selector_seleccionado = false;
+      this.selectorSinRecomendacion.format_selector_seleccionado = true;
+    },
+    reset: function () {
+      this.form = {
+        comentario: null,
+        calificacion: null,
+        recomendaria: null,
+        titulo: null,
+        email: null,
+        nombre: null,
+        id_servicio: this.id,
+      };
+    },
+  },
+};
 </script>
+<style scoped>
+.clasificacion {
+  direction: rtl;
+}
+
+.clasificacion label:hover,
+.clasificacion label:hover ~ label {
+  color: #040e31;
+  cursor: pointer;
+}
+
+.clasificacion input[type="radio"]:checked ~ label {
+  color: #040e31;
+}
+</style>

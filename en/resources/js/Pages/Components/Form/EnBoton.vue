@@ -1,6 +1,6 @@
 <template>
   <button class="format_submit w-full" type="submit" v-bind:class="atributos.class">
-    {{ atributos.titulo ?? "Enviar" }}
+    <slot/>
   </button>
 </template>
 

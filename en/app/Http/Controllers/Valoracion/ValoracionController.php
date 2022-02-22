@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Models\Valoracion;
 use App\Http\Requests\ValoracionRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ValoracionController extends Controller
 {
@@ -15,23 +17,15 @@ class ValoracionController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function index()
+    public function index(Request $request)
     {
         return Inertia::render("Valoraciones/Listado", [
 
-            'valoraciones' => Valoracion::latest()->get()
+            'valoraciones' => Valoracion::latest()
+            ->where('titulo','LIKE',"%$request->q%")
+            ->get()
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-    }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -44,7 +38,7 @@ class ValoracionController extends Controller
         $valoracion = Valoracion::create($request->all());
 
 
-        return back()->with('status', 200);
+        return redirect()->route('valoracion.index')->with('status','Recibimos tu reseña!');
     }
 
     /**
@@ -55,6 +49,10 @@ class ValoracionController extends Controller
      */
     public function show(Valoracion $valoracion)
     {
+        return Inertia::render("Valoraciones/Detalle", [
+
+            'valoracion' => $valoracion
+        ]);
     }
 
     /**
@@ -65,7 +63,10 @@ class ValoracionController extends Controller
      */
     public function edit(Valoracion $valoracion)
     {
-        //
+        return Inertia::render("Valoraciones/Editar", [
+
+            'valoracion' => $valoracion
+        ]);
     }
 
     /**
@@ -75,9 +76,14 @@ class ValoracionController extends Controller
      * @param  \App\Models\Valoracion  $valoracion
      * @return \Illuminate\Http\Response
      */
-    public function update(ValoracionRequest $request, Valoracion $valoracion)
+    public function update(Request $request, Valoracion $valoracion)
     {
-        //
+
+        $request->validate([
+            'status' => "integer|between:1,5"
+        ]);
+        $valoracion->update($request->all());
+        return back()->with('status', 'Actualizado!');
     }
 
     /**
@@ -88,6 +94,7 @@ class ValoracionController extends Controller
      */
     public function destroy(Valoracion $valoracion)
     {
-        //
+        $valoracion->delete();
+        return redirect()->route('valoracion.index')->with('status','Valoración eliminada');
     }
 }
