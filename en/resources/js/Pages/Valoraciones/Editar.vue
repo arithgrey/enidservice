@@ -43,7 +43,7 @@
                     name="status"
                   >
                     <option value="1">Mostrar en reseñas</option>
-                    <option value="2">Ocultar esta reseña al público</option>
+                    <option value="0">Ocultar esta reseña al público</option>
                   </select>
                 </div>
                 <div class="">

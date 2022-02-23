@@ -49,10 +49,7 @@ class ValoracionController extends Controller
      */
     public function show(Valoracion $valoracion)
     {
-        return Inertia::render("Valoraciones/Detalle", [
-
-            'valoracion' => $valoracion
-        ]);
+        return Inertia::render("Valoraciones/Detalle", compact('valoracion'));
     }
 
     /**

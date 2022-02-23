@@ -30,7 +30,7 @@ class ValoracionControllerTest extends TestCase
                 'email' => $email,
                 'nombre' => $faker->name,
                 'id_servicio' => rand(10, 1000),
-                'id_tipo_valoracion' => rand(1, 3),
+                'id_tipo_valoracion' => rand(1, 2),
 
             ]
         );
