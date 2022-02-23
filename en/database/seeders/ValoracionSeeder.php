@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Valoracion;
 
 class ValoracionSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class ValoracionSeeder extends Seeder
      */
     public function run()
     {
-        Valoracion::factory(10)->create();  
+        Valoracion::factory()->count(50)->create();
     }
 }

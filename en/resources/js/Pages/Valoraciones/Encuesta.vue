@@ -187,6 +187,19 @@
               v-model="form.id"
               class="id_servicio hiden"
             />
+
+            <select v-model="form.id_tipo_valoracion" name="id_tipo_valoracion">
+              <option disabled value="">Seleccione un elemento</option>
+              <option
+                v-for="tipo_valoracion in tipos_valoraciones"
+                v-bind:value="tipo_valoracion.id"
+              >
+                {{ tipo_valoracion.nombre }}
+              </option>
+            </select>
+            <div v-if="errors.id_tipo_valoracion" class="format_error">
+              {{ errors.id_tipo_valoracion }}
+            </div>
             <div class="mt-3 mb-3">
               <en-boton v-bind:atributos="btn"> Enviar Reseña </en-boton>
             </div>
@@ -221,6 +234,7 @@ export default {
   props: {
     errors: Object,
     id: Array,
+    tipos_valoraciones: Object,
   },
   data() {
     return {
@@ -239,6 +253,7 @@ export default {
         email: null,
         nombre: null,
         id_servicio: this.id,
+        id_tipo_valoracion: null,
       },
     };
   },
@@ -249,7 +264,6 @@ export default {
     registrar: function (form) {
       let url = this.route("valoracion.store");
       this.$inertia.post(url, form);
-
     },
     valorar: function (event) {
       this.form.recomendaria = 1;

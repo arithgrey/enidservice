@@ -25640,7 +25640,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     errors: Object,
-    id: Array
+    id: Array,
+    tipos_valoraciones: Object
   },
   data: function data() {
     return {
@@ -25658,7 +25659,8 @@ __webpack_require__.r(__webpack_exports__);
         titulo: null,
         email: null,
         nombre: null,
-        id_servicio: this.id
+        id_servicio: this.id,
+        id_tipo_valoracion: null
       }
     };
   },
@@ -30484,7 +30486,7 @@ var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 );
 
 var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
-  value: "2"
+  value: "0"
 }, "Ocultar esta reseña al público", -1
 /* HOISTED */
 );
@@ -30740,11 +30742,26 @@ var _hoisted_29 = {
   key: 0,
   "class": "format_error"
 };
-var _hoisted_30 = {
+
+var _hoisted_30 = /*#__PURE__*/_withScopeId(function () {
+  return /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+    disabled: "",
+    value: ""
+  }, "Seleccione un elemento", -1
+  /* HOISTED */
+  );
+});
+
+var _hoisted_31 = ["value"];
+var _hoisted_32 = {
+  key: 1,
+  "class": "format_error"
+};
+var _hoisted_33 = {
   "class": "mt-3 mb-3"
 };
 
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Enviar Reseña ");
+var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Enviar Reseña ");
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_en_input = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("en-input");
@@ -30760,7 +30777,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
       return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-        onSubmit: _cache[13] || (_cache[13] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+        onSubmit: _cache[14] || (_cache[14] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
           return $options.registrar($data.form);
         }, ["prevent"]))
       }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [_hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
@@ -30971,11 +30988,28 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         "class": "id_servicio hiden"
       }, null, 512
       /* NEED_PATCH */
-      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.id]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_en_boton, {
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.form.id]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "onUpdate:modelValue": _cache[13] || (_cache[13] = function ($event) {
+          return $data.form.id_tipo_valoracion = $event;
+        }),
+        name: "id_tipo_valoracion"
+      }, [_hoisted_30, ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($props.tipos_valoraciones, function (tipo_valoracion) {
+        return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
+          value: tipo_valoracion.id
+        }, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(tipo_valoracion.nombre), 9
+        /* TEXT, PROPS */
+        , _hoisted_31);
+      }), 256
+      /* UNKEYED_FRAGMENT */
+      ))], 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.form.id_tipo_valoracion]]), $props.errors.id_tipo_valoracion ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.errors.id_tipo_valoracion), 1
+      /* TEXT */
+      )) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_en_boton, {
         atributos: $data.btn
       }, {
         "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-          return [_hoisted_31];
+          return [_hoisted_34];
         }),
         _: 1
         /* STABLE */

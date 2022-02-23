@@ -159,6 +159,11 @@ return [
             'required' => 'Vamos! ese email es necesario!',
             'email' => 'Parece que ese no es un correo electrónico'
         ],
+        'id_tipo_valoracion' =>[
+            'required' => 'Elige una opción!',
+
+        ],
+
     ],
 
     /*

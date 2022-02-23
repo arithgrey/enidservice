@@ -24,9 +24,9 @@ class ValoracionFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'nombre' => $this->faker->name,
             'id_servicio' => rand(100, 1000),
-            'status' => rand(1,5),
+            'status' => rand(0,1),
             'imagen' => $this->faker->imageUrl(1280, 720),
-            'id_tipo_valoracion' => rand(1,3),
+            'id_tipo_valoracion' => rand(1,2),
 
         ];
     }
