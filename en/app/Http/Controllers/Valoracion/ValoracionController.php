@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Valoracion;
 use App\Http\Requests\ValoracionRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class ValoracionController extends Controller
 {
@@ -22,8 +21,8 @@ class ValoracionController extends Controller
         return Inertia::render("Valoraciones/Listado", [
 
             'valoraciones' => Valoracion::latest()
-            ->where('titulo','LIKE',"%$request->q%")
-            ->get()
+                ->where('titulo', 'LIKE', "%$request->q%")
+                ->get()
         ]);
     }
     /**
@@ -38,7 +37,8 @@ class ValoracionController extends Controller
         $valoracion = Valoracion::create($request->all());
 
 
-        return redirect()->route('valoracion.index')->with('status','Recibimos tu reseña!');
+
+        return redirect()->route('valoracion.index')->with('status', 'Recibimos tu reseña!');
     }
 
     /**
@@ -95,6 +95,6 @@ class ValoracionController extends Controller
     public function destroy(Valoracion $valoracion)
     {
         $valoracion->delete();
-        return redirect()->route('valoracion.index')->with('status','Valoración eliminada');
+        return redirect()->route('valoracion.index')->with('status', 'Valoración eliminada');
     }
 }

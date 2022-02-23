@@ -1,6 +1,7 @@
 <?php
 namespace Database\Seeders;
 
+use App\Models\TipoValoracion;
 use Illuminate\Database\Seeder;
 
 use App\Models\User;
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
     {
 
         User::factory()->count(10)->create();
+        TipoValoracion::factory()->count(3)->create();
         Valoracion::factory()->count(50)->create();
 
         User::create([

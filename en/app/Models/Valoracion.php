@@ -19,7 +19,8 @@ class Valoracion extends Model
         'email',
         'nombre',
         'id_servicio',
-        'status'
+        'status',
+        'id_tipo_valoracion'
 
     ];
     public function sluggable(): array
@@ -40,4 +41,12 @@ class Valoracion extends Model
     {
         return $this->created_at->format('d/m/Y');
     }
+
+    public function tipo_valoracion()
+    {
+
+        return $this->belongsTo(TipoValoracion::class);
+
+    }
+
 }
