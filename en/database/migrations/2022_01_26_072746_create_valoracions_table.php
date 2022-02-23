@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TipoValoracion;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,7 +14,7 @@ class CreateValoracionsTable extends Migration
      */
     public function up()
     {
-
+        Schema::dropIfExists('valoracions');
         Schema::create('valoracions', function (Blueprint $table) {
 
             $table->bigIncrements('id');
@@ -27,6 +28,8 @@ class CreateValoracionsTable extends Migration
             $table->string('nombre', 50);
             $table->string('imagen')->nullable();
             $table->integer('id_servicio');
+
+            $table->foreignIdFor(TipoValoracion::class,'id_tipo_valoracion');
             $table->timestamps();
         });
     }
