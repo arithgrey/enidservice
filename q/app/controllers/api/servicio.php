@@ -534,7 +534,7 @@ class Servicio extends REST_Controller
             $terminos = $terminos_usuario[0];
             $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0) ? 1 : 0;
             $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0) ? 1 : 0;
-            $param["comision"] = comision_por_precio($param["precio"]);
+            
 
             $data_complete["servicio"] = $this->create_servicio($param, $empresa);
             
@@ -649,7 +649,7 @@ class Servicio extends REST_Controller
             "entregas_en_casa" => $entregas_en_casa,
             "telefono_visible" => $telefonos_visibles,
             "flag_envio_gratis" => pr($empresa, 'envios_gratis'),
-            "comision" => $param["comision"]
+            "comision" => 10
         ];
 
 
