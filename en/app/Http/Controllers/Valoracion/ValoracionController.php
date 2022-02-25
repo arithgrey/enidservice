@@ -18,11 +18,13 @@ class ValoracionController extends Controller
 
     public function index(Request $request)
     {
+        $valoraciones = Valoracion::latest()
+            ->where('titulo', 'LIKE', "%$request->q%")
+            ->paginate(10);
+
         return Inertia::render("Valoraciones/Listado", [
 
-            'valoraciones' => Valoracion::latest()
-                ->where('titulo', 'LIKE', "%$request->q%")
-                ->get()
+            'valoraciones' => $valoraciones
         ]);
     }
     /**

@@ -201,7 +201,7 @@
               {{ errors.id_tipo_valoracion }}
             </div>
             <div class="mt-3 mb-3">
-              <en-boton v-bind:atributos="btn"> Enviar Reseña </en-boton>
+              <en-boton> Enviar Reseña </en-boton>
             </div>
           </form>
         </div>
@@ -213,18 +213,18 @@
 
 
 <script>
+import { defineComponent } from 'vue'
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { Head, Link } from "@inertiajs/inertia-vue3";
-import EnNavbar from "../Components/EnNavbar";
 import EnInput from "../Components/Form/EnInput";
 import EnTextArea from "../Components/Form/EnTextArea";
 import EnBoton from "../Components/Form/EnBoton";
 
-export default {
+
+export default defineComponent({
   components: {
     Head,
     Link,
-    EnNavbar,
     EnInput,
     EnTextArea,
     EnBoton,
@@ -238,6 +238,7 @@ export default {
   },
   data() {
     return {
+
       btn: {},
       selectorRecomendaria: {
         format_selector_seleccionado: false,
@@ -245,21 +246,21 @@ export default {
       selectorSinRecomendacion: {
         format_selector_seleccionado: false,
       },
-      form: {
-        comentario: null,
-        calificacion: null,
-        recomendaria: null,
-        titulo: null,
-        email: null,
-        nombre: null,
+      form: this.$inertia.form({
+        comentario: this.comentario,
+        calificacion: this.calificacion,
+        recomendaria: this.recomendaria,
+        titulo: this.titulo,
+        email: this.email,
+        nombre: this.nombre,
         id_servicio: this.id,
-        id_tipo_valoracion: null,
-      },
+        id_tipo_valoracion: this.id_tipo_valoracion,
+      }),
     };
   },
   methods: {
     openModal: function () {
-      $("#modal").modal("show");
+
     },
     registrar: function (form) {
       let url = this.route("valoracion.store");
@@ -274,20 +275,9 @@ export default {
       this.form.recomendaria = 0;
       this.selectorRecomendaria.format_selector_seleccionado = false;
       this.selectorSinRecomendacion.format_selector_seleccionado = true;
-    },
-    reset: function () {
-      this.form = {
-        comentario: null,
-        calificacion: null,
-        recomendaria: null,
-        titulo: null,
-        email: null,
-        nombre: null,
-        id_servicio: this.id,
-      };
-    },
+    }
   },
-};
+});
 </script>
 <style scoped>
 .clasificacion {

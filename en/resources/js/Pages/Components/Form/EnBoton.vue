@@ -1,13 +1,20 @@
 <template>
-  <button class="format_submit w-full" type="submit" v-bind:class="atributos.class">
-    <slot/>
+  <button class="format_submit w-full">
+    <slot />
   </button>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 export default defineComponent({
+  name: "EnBoton",
   components: {},
-  props: ["atributos"],
+  data() {
+    return {
+
+    };
+  },
+  props: { },
+  methods: {},
 });
 </script>
