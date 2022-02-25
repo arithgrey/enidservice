@@ -11,33 +11,28 @@
               class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-10"
             >
               <div class="bg-white p-2">
-
-                <en-input v-bind:input="inputBusqueda">
-                    <template #label>
-                        Busqueda
-                    </template>
-                    <template #input>
-                        <input class="format_input" v-model="q" placeholder="¿Qué quieres buscar?">
-                    </template>
+                <en-input>
+                  <template #label> Busqueda </template>
+                  <template #input>
+                    <input
+                      class="format_input"
+                      v-model="q"
+                      placeholder="¿Qué quieres buscar?"
+                    />
+                  </template>
                 </en-input>
               </div>
-              <div
-                class="
-                  shadow
-                  overflow-hidden
-                  border-b border-gray-200
-                  sm:rounded-lg
-                "
-              >
+              <div>
                 <table class="w-full">
-                  <tbody class="">
-                    <tr v-for="valoracion in valoraciones">
+                  <tbody>
+                    <tr
+                      v-for="valoracion in valoraciones.data"
+                      class="border-b border-gray-200"
+                    >
                       <td class="px-6 py-4 whitespace-nowrap">
                         <div class="flex items-center">
                           <div class="ml-4">
-                            <valoracion-puntuacion
-                              v-bind:valoracion="valoracion"
-                            />
+                            <valoracion-puntuacion :valoracion="valoracion" />
                           </div>
                         </div>
                       </td>
@@ -54,9 +49,7 @@
                         class="px-6 py-4 whitespace-nowrap text-right text-sm"
                       >
                         <Link :href="route('valoracion.show', valoracion.id)">
-                          <valoracion-recomendaria
-                            v-bind:valoracion="valoracion"
-                          />
+                          <valoracion-recomendaria :valoracion="valoracion" />
                         </Link>
                       </td>
                       <td
@@ -77,64 +70,50 @@
           class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8"
         ></div>
       </div>
+      <en-paginacion
+        ref="enpaginacion"
+        class="mt-6"
+        :links="valoraciones.links"
+      />
     </div>
   </app-layout>
 </template>
 
 <script>
 import AppLayout from "@/Layouts/AppLayout.vue";
+import { defineComponent } from "vue";
 import ValoracionPuntuacion from "./ValoracionPuntuacion";
 import ValoracionRecomendaria from "./ValoracionRecomendaria";
 import { Head, Link } from "@inertiajs/inertia-vue3";
 import EnInput from "../Components/Form/EnInput";
+import EnPaginacion from "../Components/EnPaginacion";
 
-export default {
+export default defineComponent({
   components: {
     AppLayout,
     ValoracionPuntuacion,
     ValoracionRecomendaria,
     Link,
     EnInput,
+    EnPaginacion,
   },
   props: {
-    valoraciones: Array,
+    valoraciones: Object,
   },
   data() {
     return {
-      q: '',
-      inputBusqueda: {
-        texto_label: "Busqueda",
-        type: "text",
-        name: "q",
-        placeholder: "",
-        class_input: "w-3/4",
-        v_model: "q",
-      },
+      q: "",
     };
   },
   watch: {
     q: function (value) {
-      this.$inertia.replace(this.route("valoracion.index", { q: value }));
+      this.$inertia.replace(
+        this.route("valoracion.index", { q: value})
+      );
     },
   },
-};
+  methods: {
+
+  },
+});
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

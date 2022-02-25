@@ -3,14 +3,14 @@
     <div class="max-w-md mx-auto mt-6">
       <div class="flex flex-col">
         <div class="ml-auto">
-          <a href="#" @click.prevent="destroy" class="ml-auto">
-            <en-eliminar v-bind:atributos="eliminar" />
+          <a href="#" @click.prevent="confirma_eliminar" class="ml-auto">
+            <en-eliminar :atributos="eliminar" />
           </a>
         </div>
-        <div class="divide-y divide-gray-300/50">
+        <div class="divide-y divide-gray-300/50 mt-4">
           <div class="flex items-end justify-between">
-            <valoracion-recomendaria v-bind:valoracion="valoracion" />
-            <valoracion-puntuacion v-bind:valoracion="valoracion" />
+            <valoracion-recomendaria :valoracion="valoracion" />
+            <valoracion-puntuacion :valoracion="valoracion" />
           </div>
           <div class="py-8 text-base leading-7 space-y-6 text-gray-600">
             <p>{{ valoracion.titulo }}</p>
@@ -47,7 +47,7 @@
                   </select>
                 </div>
                 <div class="">
-                  <en-boton v-bind:atributos="btn"> Actualizar </en-boton>
+                  <en-boton :atributos="btn"> Actualizar </en-boton>
                 </div>
               </div>
             </form>
@@ -56,12 +56,14 @@
         </div>
       </div>
     </div>
+
+    <EnModal ref="enModal" :confirmModal="true" @confirma="destroy">
+      <template #contenido>
+        <div>Deseas eliminar la reseña?</div>
+      </template>
+    </EnModal>
   </app-layout>
 </template>
-
-
-
-
 
 
 <script>
@@ -72,6 +74,7 @@ import ValoracionPuntuacion from "./ValoracionPuntuacion";
 import ValoracionRecomendaria from "./ValoracionRecomendaria";
 import EnBoton from "../Components/Form/EnBoton";
 import EnEliminar from "../Components/Form/EnEliminar";
+import EnModal from "../Components/Form/EnModal";
 
 export default defineComponent({
   components: {
@@ -82,6 +85,7 @@ export default defineComponent({
     EnBoton,
     EnEliminar,
     AppLayout,
+    EnModal,
   },
 
   props: {
@@ -90,9 +94,9 @@ export default defineComponent({
   data() {
     return {
       btn: {},
-      form: {
+      form: this.$inertia.form({
         status: this.valoracion.status,
-      },
+      }),
     };
   },
 
@@ -102,11 +106,12 @@ export default defineComponent({
       let data = this.form;
       let response = this.$inertia.put(url, data);
     },
+    confirma_eliminar() {
+      this.$refs.enModal.toggleModal();
+    },
     destroy() {
-      if (confirm("Deseas eliminar?")) {
-        let url = this.route("valoracion.destroy", this.valoracion.id);
-        let response = this.$inertia.delete(url);
-      }
+      let url = this.route("valoracion.destroy", this.valoracion.id);
+      this.$inertia.delete(url);
     },
   },
 });
