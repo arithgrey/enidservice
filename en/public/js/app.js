@@ -31156,7 +31156,7 @@ var _hoisted_6 = {
   "class": "bg-white p-2"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Busqueda ssssssssssss");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Busqueda");
 
 var _hoisted_8 = {
   "class": "w-full"
