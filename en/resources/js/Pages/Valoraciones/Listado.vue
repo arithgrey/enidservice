@@ -12,7 +12,7 @@
             >
               <div class="bg-white p-2">
                 <en-input>
-                  <template #label> Busqueda </template>
+                  <template #label> Busqueda ssssssssssss</template>
                   <template #input>
                     <input
                       class="format_input"
@@ -80,21 +80,16 @@
 </template>
 
 <script>
-import AppLayout from "@/Layouts/AppLayout.vue";
+
 import { defineComponent } from "vue";
 import ValoracionPuntuacion from "./ValoracionPuntuacion";
 import ValoracionRecomendaria from "./ValoracionRecomendaria";
-import { Head, Link } from "@inertiajs/inertia-vue3";
-import EnInput from "../Components/Form/EnInput";
 import EnPaginacion from "../Components/EnPaginacion";
 
 export default defineComponent({
   components: {
-    AppLayout,
     ValoracionPuntuacion,
     ValoracionRecomendaria,
-    Link,
-    EnInput,
     EnPaginacion,
   },
   props: {

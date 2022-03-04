@@ -25568,28 +25568,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
-/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
-/* harmony import */ var _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Form/EnBoton */ "./resources/js/Pages/Components/Form/EnBoton.vue");
-/* harmony import */ var _Components_Form_EnEditar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/Form/EnEditar */ "./resources/js/Pages/Components/Form/EnEditar.vue");
-
-
-
+/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
+/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
+/* harmony import */ var _Components_Form_EnEditar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/Form/EnEditar */ "./resources/js/Pages/Components/Form/EnEditar.vue");
 
 
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link,
-    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_4__["default"],
-    EnBoton: _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__["default"],
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-    EnEditar: _Components_Form_EnEditar__WEBPACK_IMPORTED_MODULE_6__["default"]
+    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EnEditar: _Components_Form_EnEditar__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     valoracion: Object
@@ -25616,32 +25606,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
-/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
-/* harmony import */ var _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Form/EnBoton */ "./resources/js/Pages/Components/Form/EnBoton.vue");
-/* harmony import */ var _Components_Form_EnEliminar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/Form/EnEliminar */ "./resources/js/Pages/Components/Form/EnEliminar.vue");
-/* harmony import */ var _Components_Form_EnModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../Components/Form/EnModal */ "./resources/js/Pages/Components/Form/EnModal.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
+/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
+/* harmony import */ var _Components_Form_EnEliminar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/Form/EnEliminar */ "./resources/js/Pages/Components/Form/EnEliminar.vue");
 
 
 
 
-
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link,
-    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_4__["default"],
-    EnBoton: _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__["default"],
-    EnEliminar: _Components_Form_EnEliminar__WEBPACK_IMPORTED_MODULE_6__["default"],
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    EnModal: _Components_Form_EnModal__WEBPACK_IMPORTED_MODULE_7__["default"]
+    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EnEliminar: _Components_Form_EnEliminar__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     valoracion: Object
@@ -25684,26 +25661,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/Form/EnInput */ "./resources/js/Pages/Components/Form/EnInput.vue");
-/* harmony import */ var _Components_Form_EnTextArea__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/Form/EnTextArea */ "./resources/js/Pages/Components/Form/EnTextArea.vue");
-/* harmony import */ var _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Form/EnBoton */ "./resources/js/Pages/Components/Form/EnBoton.vue");
-
-
-
-
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
-  components: {
-    Head: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Head,
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.Link,
-    EnInput: _Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_3__["default"],
-    EnTextArea: _Components_Form_EnTextArea__WEBPACK_IMPORTED_MODULE_4__["default"],
-    EnBoton: _Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__["default"],
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
+  components: {},
   props: {
     errors: Object,
     id: Array,
@@ -25762,28 +25722,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
-/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
-/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
-/* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
-/* harmony import */ var _Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/Form/EnInput */ "./resources/js/Pages/Components/Form/EnInput.vue");
-/* harmony import */ var _Components_EnPaginacion__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/EnPaginacion */ "./resources/js/Pages/Components/EnPaginacion.vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
+/* harmony import */ var _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ValoracionPuntuacion */ "./resources/js/Pages/Valoraciones/ValoracionPuntuacion.vue");
+/* harmony import */ var _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ValoracionRecomendaria */ "./resources/js/Pages/Valoraciones/ValoracionRecomendaria.vue");
+/* harmony import */ var _Components_EnPaginacion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/EnPaginacion */ "./resources/js/Pages/Components/EnPaginacion.vue");
 
 
 
 
-
-
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_1__.defineComponent)({
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,vue__WEBPACK_IMPORTED_MODULE_0__.defineComponent)({
   components: {
-    AppLayout: _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_3__["default"],
-    Link: _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.Link,
-    EnInput: _Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_5__["default"],
-    EnPaginacion: _Components_EnPaginacion__WEBPACK_IMPORTED_MODULE_6__["default"]
+    ValoracionPuntuacion: _ValoracionPuntuacion__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ValoracionRecomendaria: _ValoracionRecomendaria__WEBPACK_IMPORTED_MODULE_2__["default"],
+    EnPaginacion: _Components_EnPaginacion__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
   props: {
     valoraciones: Object
@@ -31205,7 +31156,7 @@ var _hoisted_6 = {
   "class": "bg-white p-2"
 };
 
-var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Busqueda ");
+var _hoisted_7 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Busqueda ssssssssssss");
 
 var _hoisted_8 = {
   "class": "w-full"
@@ -31465,6 +31416,8 @@ var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNod
 
 var _hoisted_5 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Register ");
 
+var _hoisted_6 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" oooooooooooooooo ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_Head = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("Head");
 
@@ -31512,7 +31465,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
   }, 8
   /* PROPS */
-  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)], 64
+  , ["href"])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_6], 64
   /* STABLE_FRAGMENT */
   ))])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])], 64
   /* STABLE_FRAGMENT */
@@ -31532,6 +31485,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 /* harmony import */ var _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia-vue3 */ "./node_modules/@inertiajs/inertia-vue3/dist/index.js");
 /* harmony import */ var _inertiajs_progress__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @inertiajs/progress */ "./node_modules/@inertiajs/progress/dist/index.js");
+/* harmony import */ var _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @/Layouts/AppLayout.vue */ "./resources/js/Layouts/AppLayout.vue");
+/* harmony import */ var _Pages_Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @/Pages/Components/Form/EnInput */ "./resources/js/Pages/Components/Form/EnInput.vue");
+/* harmony import */ var _Pages_Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @/Pages/Components/Form/EnBoton */ "./resources/js/Pages/Components/Form/EnBoton.vue");
+/* harmony import */ var _Pages_Components_Form_EnTextArea__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @/Pages/Components/Form/EnTextArea */ "./resources/js/Pages/Components/Form/EnTextArea.vue");
+/* harmony import */ var _Pages_Components_Form_EnModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @/Pages/Components/Form/EnModal */ "./resources/js/Pages/Components/Form/EnModal.vue");
 var _window$document$getE;
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -31539,7 +31497,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
-var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Laravel';
+
+
+
+
+
+var appName = ((_window$document$getE = window.document.getElementsByTagName('title')[0]) === null || _window$document$getE === void 0 ? void 0 : _window$document$getE.innerText) || 'Enid Service';
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.createInertiaApp)({
   title: function title(_title) {
     return "".concat(_title, " - ").concat(appName);
@@ -31556,7 +31519,7 @@ var appName = ((_window$document$getE = window.document.getElementsByTagName('ti
       render: function render() {
         return (0,vue__WEBPACK_IMPORTED_MODULE_0__.h)(app, props);
       }
-    }).use(plugin).mixin({
+    }).use(plugin).component("Link", _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Link).component("Head", _inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_1__.Head).component("EnInput", _Pages_Components_Form_EnInput__WEBPACK_IMPORTED_MODULE_4__["default"]).component("EnBoton", _Pages_Components_Form_EnBoton__WEBPACK_IMPORTED_MODULE_5__["default"]).component("EnModal", _Pages_Components_Form_EnModal__WEBPACK_IMPORTED_MODULE_7__["default"]).component("EnTextArea", _Pages_Components_Form_EnTextArea__WEBPACK_IMPORTED_MODULE_6__["default"]).component("AppLayout", _Layouts_AppLayout_vue__WEBPACK_IMPORTED_MODULE_3__["default"]).mixin({
       methods: {
         route: route
       }
