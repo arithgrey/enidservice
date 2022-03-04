@@ -23,7 +23,6 @@ if (file_exists(__DIR__.'/../storage/framework/maintenance.php')) {
 | loading any of our classes later on. It feels great to relax.
 |
 */
-
 require __DIR__.'/../vendor/autoload.php';
 
 /*

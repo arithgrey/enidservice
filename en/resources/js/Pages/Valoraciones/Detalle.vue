@@ -49,21 +49,14 @@
 
 <script>
 import { defineComponent } from "vue";
-import AppLayout from "@/Layouts/AppLayout.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
 import ValoracionPuntuacion from "./ValoracionPuntuacion";
 import ValoracionRecomendaria from "./ValoracionRecomendaria";
-import EnBoton from "../Components/Form/EnBoton";
 import EnEditar from "../Components/Form/EnEditar";
 
 export default defineComponent({
   components: {
-    Head,
-    Link,
     ValoracionPuntuacion,
     ValoracionRecomendaria,
-    EnBoton,
-    AppLayout,
     EnEditar,
   },
 

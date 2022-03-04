@@ -213,24 +213,9 @@
 
 
 <script>
-import { defineComponent } from 'vue'
-import AppLayout from "@/Layouts/AppLayout.vue";
-import { Head, Link } from "@inertiajs/inertia-vue3";
-import EnInput from "../Components/Form/EnInput";
-import EnTextArea from "../Components/Form/EnTextArea";
-import EnBoton from "../Components/Form/EnBoton";
-
-
+import { defineComponent } from "vue";
 export default defineComponent({
-  components: {
-    Head,
-    Link,
-    EnInput,
-    EnTextArea,
-    EnBoton,
-    AppLayout,
-  },
-
+  components: {},
   props: {
     errors: Object,
     id: Array,
@@ -238,7 +223,6 @@ export default defineComponent({
   },
   data() {
     return {
-
       btn: {},
       selectorRecomendaria: {
         format_selector_seleccionado: false,
@@ -259,9 +243,7 @@ export default defineComponent({
     };
   },
   methods: {
-    openModal: function () {
-
-    },
+    openModal: function () {},
     registrar: function (form) {
       let url = this.route("valoracion.store");
       this.$inertia.post(url, form);
@@ -275,7 +257,7 @@ export default defineComponent({
       this.form.recomendaria = 0;
       this.selectorRecomendaria.format_selector_seleccionado = false;
       this.selectorSinRecomendacion.format_selector_seleccionado = true;
-    }
+    },
   },
 });
 </script>
