@@ -12,7 +12,7 @@
             >
               <div class="bg-white p-2">
                 <en-input>
-                  <template #label> Busqueda ssssssssssss</template>
+                  <template #label> Busqueda</template>
                   <template #input>
                     <input
                       class="format_input"
