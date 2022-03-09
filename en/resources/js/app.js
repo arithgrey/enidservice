@@ -9,6 +9,7 @@ import EnInput from "@/Pages/Components/Form/EnInput";
 import EnBoton from "@/Pages/Components/Form/EnBoton";
 import EnTextArea from "@/Pages/Components/Form/EnTextArea";
 import EnModal from "@/Pages/Components/Form/EnModal";
+import EnPaginacion from "@/Pages/Components/EnPaginacion";
 
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Enid Service';
 
@@ -25,6 +26,7 @@ createInertiaApp({
             .component("EnModal", EnModal)
             .component("EnTextArea", EnTextArea)
             .component("AppLayout", AppLayout)
+            .component("EnPaginacion", EnPaginacion)
             .mixin({ methods: { route } })
             .mount(el);
     },

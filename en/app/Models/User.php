@@ -58,4 +58,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function solicitudes_retiro(){
+
+        return $this->hasMany(SolicitudRetiro::class);
+    }
+
+    public function cuentas_banco(){
+
+        return $this->hasMany(CuentaBanco::class);
+    }
+
 }

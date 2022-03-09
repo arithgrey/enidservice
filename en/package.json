@@ -20,8 +20,8 @@
         "autoprefixer": "^10.4.2",
         "axios": "^0.25.0",
         "bootstrap": "^4.0.0",
-        "browser-sync": "^2.27.7",
-        "browser-sync-webpack-plugin": "^2.3.0",
+        "browser-sync": "^0.9.1",
+        "browser-sync-webpack-plugin": "^0.1.0",
         "cross-env": "^7.0.3",
         "jquery": "^3.2",
         "jquery-ui": "^1.13.1",
@@ -40,6 +40,7 @@
         "webpack-laravel-mix-manifest": "^3.1.1"
     },
     "dependencies": {
-        "bootstrap-icons": "^1.8.0"
+        "bootstrap-icons": "^1.8.0",
+        "v-money": "^0.8.1"
     }
 }
