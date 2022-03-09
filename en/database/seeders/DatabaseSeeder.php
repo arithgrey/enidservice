@@ -18,5 +18,6 @@ class DatabaseSeeder extends Seeder
         $this->call(TipoValoracionSeeder::class);
         $this->call(ValoracionSeeder::class);
         $this->call(UserSeeder::class);
+        $this->call(SolicitudRetiroSeeder::class);
     }
 }

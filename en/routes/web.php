@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Valoracion\PageController;
 
 
+
+
 Route::get('/valoraciones/{id}', [PageController::class, 'encuesta'])
     ->where('id', '[0-9]+');
 
@@ -23,3 +25,14 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->name('dashboard');
+
+
+Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController')
+    ->middleware('auth');
+
+
+Route::resource('banco', 'Banco\BancoController')
+    ->middleware('auth');
+
+
+Route::resource('cuenta-banco', 'CuentaBanco\CuentaBancoController')->middleware('auth');
