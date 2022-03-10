@@ -22,5 +22,9 @@ class CuentaBanco extends Model
     {
         return $this->belongsTo(User::class);
     }
+    function solicitudes_retiro()
+    {
+        return $this->hasMany(SolicitudRetiro::class);
+    }
 
 }

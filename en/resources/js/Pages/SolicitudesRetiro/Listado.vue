@@ -3,23 +3,34 @@
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
       <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-10">
         <div class="bg-white p-2">
-          <en-input>
-            <template #label> Busqueda</template>
-            <template #input>
-              <input
-                class="format_input"
-                v-model="q"
-                placeholder="¿A quíen quieres buscar?"
-              />
-            </template>
-          </en-input>
+          <div class="flex">
+            <div class="flex-none">
+              <select v-model="status">
+                <option value="0">Por liquidar</option>
+                <option value="1">Pagados</option>
+              </select>
+            </div>
+
+            <div class="ml-2 flex-1 w-64">
+              <en-input>
+                <template #label> Busqueda</template>
+                <template #input>
+                  <input
+                    class="format_input"
+                    v-model="q"
+                    placeholder="¿A quíen quieres buscar?"
+                  />
+                </template>
+              </en-input>
+            </div>
+          </div>
         </div>
         <div class="p-2">
           <ol
             class="border-l-2 border-blue-600"
             v-for="solicitud in solicitudes_retiro.data"
           >
-            <li >
+            <li>
               <div class="flex flex-start items-center">
                 <div
                   class="
@@ -41,14 +52,23 @@
                 />
 
                 <h4 class="text-gray-800 font-semibold mt-5">
-                  {{ solicitud.user.name }}
+                  {{ solicitud.name }}
                 </h4>
 
-                <span class="font-semibold py-1.5 px-2.5 mt-4 bg-blue-600 text-white rounded ml-auto">
-                    {{ solicitud.monto }} MXN
+                <span
+                  class="
+                    font-semibold
+                    py-1.5
+                    px-2.5
+                    mt-4
+                    bg-blue-600
+                    text-white
+                    rounded
+                    ml-auto
+                  "
+                >
+                  {{ solicitud.monto }} MXN
                 </span>
-
-
               </div>
               <div class="ml-6 mb-6 pb-6">
                 <a
@@ -64,7 +84,6 @@
                   "
                   >{{ solicitud.creado }}</a
                 >
-
               </div>
             </li>
           </ol>
@@ -95,13 +114,22 @@ export default defineComponent({
   data() {
     return {
       q: "",
+      status: 0,
     };
   },
   watch: {
     q: function (value) {
-      this.$inertia.replace(this.route("solicitud-retiro.index", { q: value }));
+      this.busqueda();
+    },
+    status: function (value) {
+      this.busqueda();
     },
   },
-  methods: {},
+  methods: {
+    busqueda: function busqueda() {
+      let params = { q: this.q, status: this.status };
+      this.$inertia.replace(this.route("solicitud-retiro.index", params));
+    },
+  },
 });
 </script>

@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SolicitudRetiroRequest;
 use App\Models\SolicitudRetiro;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -15,24 +16,23 @@ class SolicitudRetiroController extends Controller
 
     public function index(Request $request)
     {
+        $status = $request->get('status', 0);
 
-        $solicitudRetiro = SolicitudRetiro::with('user')
-            ->where('status', 0)
+        $solicitudes_retiro = SolicitudRetiro::with('user')
+            ->status($status)
             ->paginate(10);
+
 
         return Inertia::render("SolicitudesRetiro/Listado", [
 
-            'solicitudes_retiro' => $solicitudRetiro
+            'solicitudes_retiro' => $solicitudes_retiro
         ]);
     }
-    public function create()
-    {
 
-    }
     public function store(SolicitudRetiroRequest $request)
     {
 
-        $request->user()->solicitudes_retiro()->create($request->all());
+        SolicitudRetiro::create($request->all());
 
         return redirect()
             ->route('solicitud-retiro.index')
@@ -43,7 +43,8 @@ class SolicitudRetiroController extends Controller
     {
 
         $request->validate([
-            'status' => 'required'
+            'status' => 'required',
+
         ]);
 
         $this->authorize('pass', $solicitudRetiro);
@@ -65,16 +66,5 @@ class SolicitudRetiroController extends Controller
             ->route('solicitud-retiro.index')
             ->with('status', 'Solicitud eliminada!');
     }
-    public function show(SolicitudRetiro $solicitudRetiro)
-    {
 
-        $this->authorize('pass', $solicitudRetiro);
-
-        return Inertia::render(
-            "SolicitudesRetiro/Listado",
-            [
-                'solicitudes_retiro' => $solicitudRetiro
-            ]
-        );
-    }
 }

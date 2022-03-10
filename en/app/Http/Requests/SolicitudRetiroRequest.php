@@ -24,7 +24,9 @@ class SolicitudRetiroRequest extends FormRequest
     public function rules()
     {
         return [
-            'monto' => 'required'
+            'monto' => 'required',
+            'user_id' => 'required',
+            'id_cuenta_banco' => 'required'
         ];
     }
 }
