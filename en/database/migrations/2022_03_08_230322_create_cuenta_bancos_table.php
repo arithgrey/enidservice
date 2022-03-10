@@ -22,11 +22,11 @@ class CreateCuentaBancosTable extends Migration
             $table->integer('status')->nullable(false)->default(1);
             $table->string('propietario', 100);
 
-            $table->foreignIdFor(User::class, 'user_id');
+            $table->foreignIdFor(User::class, 'user_id')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
+
             $table->foreignIdFor(Banco::class, 'id_banco');
-
-
-
 
             $table->timestamps();
         });

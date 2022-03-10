@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers\SolicitudRetiro;
 
+use App\Models\CuentaBanco;
 use App\Models\SolicitudRetiro;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,6 +23,19 @@ class SolicitudRetiroControllerTests extends TestCase
             ->get("solicitud-retiro")
             ->assertStatus(200);
     }
+    public function test_index_con_filtros()
+    {
+        $user = User::factory()->create(); //Usuario 1
+        SolicitudRetiro::factory()->create();
+
+
+        $this->actingAs($user)
+            ->get("solicitud-retiro",['status' => 1])
+            ->assertStatus(200);
+
+
+    }
+
     public function test_index_con_datos()
     {
         $user = User::factory()->create(); //Usuario 1
@@ -54,11 +68,14 @@ class SolicitudRetiroControllerTests extends TestCase
     }
     public function test_registrar()
     {
-        $data = [
-            'monto' => $this->faker->randomFloat(2, 100, 1000),
-        ];
 
-        $user = User::factory()->create();
+        $cuenta_banco =  CuentaBanco::factory()->create();
+        $user = $cuenta_banco->user;
+        $data = [
+            'user_id' => $user->id,
+            'monto' => $this->faker->randomFloat(2, 100, 1000),
+            'id_cuenta_banco' => $cuenta_banco->id
+        ];
 
         $this->actingAs($user)
             ->post('solicitud-retiro', $data)
@@ -69,13 +86,13 @@ class SolicitudRetiroControllerTests extends TestCase
     public function test_actualizar()
     {
 
-        $user = User::factory()->create();
+        $cuenta_banco =  CuentaBanco::factory()->create();
+        $user = $cuenta_banco->user;
         $solicitud_retiro = SolicitudRetiro::factory()->create(
             [
-                'user_id' => $user
+                'user_id' => $user->id,
             ]
         );
-
 
         $data = [
             'monto' => $this->faker->randomFloat(2, 100, 1000),
@@ -118,7 +135,6 @@ class SolicitudRetiroControllerTests extends TestCase
                 'user_id' => $user
             ]
         );
-
 
         $this->actingAs($user)
             ->delete("solicitud-retiro/$solicitud_retiro->id")
