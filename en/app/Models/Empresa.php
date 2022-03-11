@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CicloFacturacion extends Model
+
+class Empresa extends Model
 {
     use HasFactory;
 
-    public function servicios(){
+    public function users(){
 
-        return $this->hasMany(Servicio::class);
+        return $this->hasMany(User::class);
     }
-
 
 }

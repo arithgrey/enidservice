@@ -11,6 +11,14 @@ class Servicio extends Model
 
     function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'id_usuario');
+    }
+    function clasificacion()
+    {
+        return $this->belongsTo(Clasificacion::class, 'id_clasificacion');
+    }
+    function ciclo_facturacion()
+    {
+        return $this->belongsTo(CicloFacturacion::class, 'id_ciclo_facturacion');
     }
 }

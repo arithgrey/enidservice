@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class CicloFacturacionSeeder extends Seeder
+class ClasificacionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +13,6 @@ class CicloFacturacionSeeder extends Seeder
      */
     public function run()
     {
-
+        //
     }
 }
