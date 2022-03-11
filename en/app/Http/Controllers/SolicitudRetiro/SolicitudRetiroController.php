@@ -66,5 +66,13 @@ class SolicitudRetiroController extends Controller
             ->route('solicitud-retiro.index')
             ->with('status', 'Solicitud eliminada!');
     }
+    public function show()
+    {
+
+    }
+    public function create()
+    {
+
+    }
 
 }

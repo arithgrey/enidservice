@@ -68,9 +68,14 @@ class User extends Authenticatable
 
         return $this->hasMany(CuentaBanco::class);
     }
-    public function servicios_banco(){
+
+    public function servicios(){
 
         return $this->hasMany(Servicio::class);
     }
 
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class,  'id_empresa');
+    }
 }

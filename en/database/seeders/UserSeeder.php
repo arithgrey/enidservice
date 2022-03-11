@@ -15,11 +15,14 @@ class UserSeeder extends Seeder
     {
 
         User::factory()->count(10)->create();
+
         User::create([
             'name' => 'Jonathan',
             'email' => 'arithgrey@gmail.com',
             'password' => bcrypt('123456789'),
+            'id_empresa' => 1,
         ]);
+
 
     }
 }

@@ -14,6 +14,6 @@ class SolicitudRetiroSeeder extends Seeder
      */
     public function run()
     {
-        SolicitudRetiro::factory()->count(100)->create();
+        SolicitudRetiro::factory()->count(10)->create();
     }
 }
