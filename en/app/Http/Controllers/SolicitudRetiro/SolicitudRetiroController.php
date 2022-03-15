@@ -5,8 +5,8 @@ namespace App\Http\Controllers\SolicitudRetiro;
 use Inertia\Inertia;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SolicitudRetiroRequest;
+use App\Models\Banco;
 use App\Models\SolicitudRetiro;
-use App\Models\User;
 use Illuminate\Http\Request;
 
 
@@ -16,16 +16,24 @@ class SolicitudRetiroController extends Controller
 
     public function index(Request $request)
     {
-        $status = $request->get('status', 0);
 
-        $solicitudes_retiro = SolicitudRetiro::with('user')
-            ->status($status)
-            ->paginate(10);
+        $status = $request->get('status');
+        $q = $request->get('q');
+
+        $solicitudes_retiro =
+            SolicitudRetiro::join('users', 'solicitud_retiros.user_id', 'users.id')
+            ->select('solicitud_retiros.*')
+            ->with('user', 'cuenta_banco')
+            ->where('users.name', 'LIKE', "%$q%")
+            ->jstatus($status)
+            ->paginate(5);
 
 
         return Inertia::render("SolicitudesRetiro/Listado", [
 
-            'solicitudes_retiro' => $solicitudes_retiro
+            'solicitudes_retiro' => $solicitudes_retiro,
+            'bancos' => Banco::all(),
+
         ]);
     }
 
@@ -66,13 +74,4 @@ class SolicitudRetiroController extends Controller
             ->route('solicitud-retiro.index')
             ->with('status', 'Solicitud eliminada!');
     }
-    public function show()
-    {
-
-    }
-    public function create()
-    {
-
-    }
-
 }

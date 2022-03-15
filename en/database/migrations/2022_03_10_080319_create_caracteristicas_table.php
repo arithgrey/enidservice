@@ -15,6 +15,8 @@ class CreateCaracteristicasTable extends Migration
     {
         Schema::create('caracteristicas', function (Blueprint $table) {
             $table->id();
+            $table->string('caracteristica', 50)->nullable(false);
+            $table->integer('status')->nullable(false)->default(1);
             $table->timestamps();
         });
     }

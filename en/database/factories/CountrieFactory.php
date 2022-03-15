@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\EstadoRepublica;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DelegacionFactory extends Factory
+class CountrieFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -16,9 +15,9 @@ class DelegacionFactory extends Factory
     {
 
         return [
-            'delegacion' =>  $this->faker->name(),
-            'id_estado' => EstadoRepublica::factory()
-
+            'countryName' => $this->faker->country(),
+            'moneda' => $this->faker->languageCode(),
+            'prefijo' => $this->faker->countryCode(),
         ];
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\MotivoListaNegra;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +17,8 @@ class CreateMotivoListaNegrasTable extends Migration
     {
         Schema::create('motivo_lista_negras', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(MotivoListaNegra::class);
             $table->timestamps();
         });
     }

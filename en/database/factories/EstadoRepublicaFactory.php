@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Countrie;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class EstadoRepublicaFactory extends Factory
@@ -14,7 +15,8 @@ class EstadoRepublicaFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'estado' => $this->faker->name(),
+            'id_pais' => Countrie::factory()
         ];
     }
 }

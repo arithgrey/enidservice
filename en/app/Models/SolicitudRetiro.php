@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-Use App\Models\User;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -21,16 +21,16 @@ class SolicitudRetiro extends Model
 
     function cuenta_banco()
     {
-        return $this->belongsTo(CuentaBanco::class ,  'id_cuenta_banco');
+        return $this->belongsTo(CuentaBanco::class,  'id_cuenta_banco');
     }
 
     public function getCreadoAttribute()
     {
         return $this->created_at->diffForHumans();
     }
-    public function scopeStatus($query, $status)
+    public function scopeJstatus($query, $status)
     {
-        if($status)
-            return $query->where('status', $status);
+
+        return $query->where('solicitud_retiros.status', $status);
     }
 }
