@@ -59,23 +59,36 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
-    public function solicitudes_retiro(){
+    public function solicitudes_retiro()
+    {
 
         return $this->hasMany(SolicitudRetiro::class);
     }
 
-    public function cuentas_banco(){
+    public function cuentas_banco()
+    {
 
         return $this->hasMany(CuentaBanco::class);
     }
 
-    public function servicios(){
+    public function servicios()
+    {
 
         return $this->hasMany(Servicio::class);
     }
+    public function proveedores()
+    {
 
+        return $this->hasMany(ProveedorServicio::class);
+    }
+    function preferencias()
+    {
+
+        return $this->hasMany(Preferencia::class);
+    }
     public function empresa()
     {
         return $this->belongsTo(Empresa::class,  'id_empresa');
     }
+
 }

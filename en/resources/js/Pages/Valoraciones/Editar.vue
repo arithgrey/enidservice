@@ -95,9 +95,9 @@ export default defineComponent({
 
   methods: {
     submit() {
+
       let url = this.route("valoracion.update", this.valoracion.id);
-      let data = this.form;
-      let response = this.$inertia.put(url, data);
+      this.$inertia.put(url, this.form);
     },
     confirma_eliminar() {
       this.$refs.enModal.toggleModal();

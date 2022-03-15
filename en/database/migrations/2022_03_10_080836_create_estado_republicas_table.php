@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Countrie;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +16,8 @@ class CreateEstadoRepublicasTable extends Migration
     {
         Schema::create('estado_republicas', function (Blueprint $table) {
             $table->id();
+            $table->string('estado');
+            $table->foreignIdFor(Countrie::class, 'id_pais');
             $table->timestamps();
         });
     }

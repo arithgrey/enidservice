@@ -1,10 +1,12 @@
 <?php
 
+use App\Models\Delegacion;
+use App\Models\EstadoRepublica;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMaterialsTable extends Migration
+class CreateColoniasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +15,12 @@ class CreateMaterialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('colonias', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 45);
-            $table->string('status')->nullable(false)->default(1);
+
+            $table->string('colonia', 50);
+            $table->foreignIdFor(Delegacion::class, 'id_delegacion');
+            $table->float('cp')->nullable(false);
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateMaterialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('colonias');
     }
 }

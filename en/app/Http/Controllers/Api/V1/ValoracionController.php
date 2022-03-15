@@ -60,7 +60,7 @@ class ValoracionController extends Controller
      */
     public function destroy(Valoracion $valoracion)
     {
-        $valoracion->delete();        
+        $valoracion->delete();
         return response()->json(['message' => 'Success'], 204);
 
     }

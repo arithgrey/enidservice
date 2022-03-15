@@ -2,10 +2,9 @@
 
 namespace Database\Factories;
 
-use App\Models\EstadoRepublica;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class DelegacionFactory extends Factory
+class CodigoPostalFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,11 +13,8 @@ class DelegacionFactory extends Factory
      */
     public function definition()
     {
-
         return [
-            'delegacion' =>  $this->faker->name(),
-            'id_estado' => EstadoRepublica::factory()
-
+            //
         ];
     }
 }

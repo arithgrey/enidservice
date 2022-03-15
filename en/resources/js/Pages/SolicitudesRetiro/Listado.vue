@@ -30,7 +30,7 @@
             class="border-l-2 border-blue-600"
             v-for="solicitud in solicitudes_retiro.data"
           >
-            <li>
+           <li>
               <div class="flex flex-start items-center">
                 <div
                   class="
@@ -51,17 +51,54 @@
                   :src="solicitud.user.profile_photo_url"
                 />
 
-                <h4 class="text-gray-800 font-semibold mt-5">
-                  {{ solicitud.name }}
+                <h4
+                  class="text-gray-800 font-semibold mt-5 cursor-pointer"
+                  @click="showSolicitudRetiro(solicitud)"
+                >
+                  {{ solicitud.user.name }}
                 </h4>
 
                 <span
+                  v-if="solicitud.status > 0"
                   class="
                     font-semibold
                     py-1.5
                     px-2.5
                     mt-4
-                    bg-blue-600
+                    bg-black
+                    text-white
+                    rounded
+                    flex
+                    ml-auto
+                  "
+                >
+                  <span class="mr-2"> {{ solicitud.monto }} MXN </span>
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      stroke-width="2"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  </span>
+                </span>
+
+                <span
+                  v-else
+                  class="
+                    font-semibold
+                    py-1.5
+                    px-2.5
+                    mt-4
+                    bg-teal-600
                     text-white
                     rounded
                     ml-auto
@@ -100,17 +137,25 @@
         :links="solicitudes_retiro.links"
       />
     </div>
+
+    <ShowModal ref="showModal" />
+
   </app-layout>
 </template>
 
 <script>
 import { defineComponent } from "vue";
+import ShowModal from "./ShowModal";
 
 export default defineComponent({
-  components: {},
+  components: {
+      ShowModal
+  },
   props: {
     solicitudes_retiro: Object,
+    bancos: Object,
   },
+
   data() {
     return {
       q: "",
@@ -126,6 +171,10 @@ export default defineComponent({
     },
   },
   methods: {
+    showSolicitudRetiro: function (solicitud) {
+
+      this.$refs.showModal.muestraModal(solicitud, this.bancos);
+    },
     busqueda: function busqueda() {
       let params = { q: this.q, status: this.status };
       this.$inertia.replace(this.route("solicitud-retiro.index", params));

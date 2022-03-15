@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Delegacion extends Model
 {
     use HasFactory;
+
+    public function colonias()
+    {
+
+        return $this->hasMany(Colonia::class);
+    }
+    public function estado()
+    {
+
+        return $this->belongsTo(EstadoRepublica::class, 'id_estado');
+    }
 }

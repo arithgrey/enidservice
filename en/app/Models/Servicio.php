@@ -21,4 +21,13 @@ class Servicio extends Model
     {
         return $this->belongsTo(CicloFacturacion::class, 'id_ciclo_facturacion');
     }
+    function preferencias(){
+
+        return $this->hasMany(Preferencia::class);
+    }
+    function proveedores(){
+
+        return $this->hasMany(ProveedorServicio::class);
+    }
+
 }

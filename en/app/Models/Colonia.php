@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class EstadoRepublica extends Model
+class Colonia extends Model
 {
     use HasFactory;
 
-    public function delegaciones()
+    function delegacion()
     {
-
-        return $this->hasMany(Delegacion::class);
+        return $this->belongsTo(Delegacion::class, 'id_delegacion');
     }
+
 }

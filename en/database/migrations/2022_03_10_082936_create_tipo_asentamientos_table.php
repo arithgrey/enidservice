@@ -15,6 +15,7 @@ class CreateTipoAsentamientosTable extends Migration
     {
         Schema::create('tipo_asentamientos', function (Blueprint $table) {
             $table->id();
+            $table->string('asentamiento', 45);
             $table->timestamps();
         });
     }
