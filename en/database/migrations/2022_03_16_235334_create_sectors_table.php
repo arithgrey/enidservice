@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\Sector;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEmpresasTable extends Migration
+class CreateSectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,12 +13,10 @@ class CreateEmpresasTable extends Migration
      */
     public function up()
     {
-
-        Schema::create('empresas', function (Blueprint $table) {
+        Schema::create('sectors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 100);
+            $table->string('nombre');
             $table->integer('status')->nullable(false)->default(1);
-            $table->foreignIdFor(Sector::class, 'id_sector');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateEmpresasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('empresas');
+        Schema::dropIfExists('sectors');
     }
 }

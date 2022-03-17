@@ -2,22 +2,23 @@
 
 namespace Database\Factories;
 
-use App\Models\Sector;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class EmpresaFactory extends Factory
+class SectorFactory extends Factory
 {
     /**
      * Define the model's default state.
      *
      * @return array
      */
+    use RefreshDatabase;
+
     public function definition()
     {
         return [
             'nombre' => $this->faker->company(),
-            'id_sector' => Sector::factory()
+            'status' => rand(0,1),
         ];
-
     }
 }

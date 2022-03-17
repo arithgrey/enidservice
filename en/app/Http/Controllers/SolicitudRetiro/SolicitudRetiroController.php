@@ -31,9 +31,7 @@ class SolicitudRetiroController extends Controller
 
         return Inertia::render("SolicitudesRetiro/Listado", [
 
-            'solicitudes_retiro' => $solicitudes_retiro,
-            'bancos' => Banco::all(),
-
+            'solicitudes_retiro' => $solicitudes_retiro
         ]);
     }
 
