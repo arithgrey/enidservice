@@ -153,7 +153,7 @@ export default defineComponent({
   },
   props: {
     solicitudes_retiro: Object,
-    bancos: Object,
+
   },
 
   data() {
@@ -173,7 +173,7 @@ export default defineComponent({
   methods: {
     showSolicitudRetiro: function (solicitud) {
 
-      this.$refs.showModal.muestraModal(solicitud, this.bancos);
+      this.$refs.showModal.muestraModal(solicitud);
     },
     busqueda: function busqueda() {
       let params = { q: this.q, status: this.status };

@@ -56,16 +56,17 @@
                 Solicitud enviada hace {{ solicitud.creado }}
               </p>
 
+              <img :src="banco.imagen" class="max-w-16 max-h-16 mt-2" />
+
+              <p class="mt-2">
+                  <span class="text-black font-bold">
+                    Banco
+                  </span>
+                    {{ banco.nombre }}</p>
               <p>
                 {{ solicitud.cuenta_banco.tarjeta }}
               </p>
 
-              <div v-for="banco in bancos">
-                <div v-if="banco.id == solicitud.cuenta_banco.id_banco">
-                  <p>Banco {{ banco.nombre }}</p>
-                  <img :src="banco.imagen" class="max-w-16 max-h-16 mt-2" />
-                </div>
-              </div>
               <p>
                 {{ solicitud.cuenta_banco.banco }}
               </p>
@@ -112,14 +113,19 @@ export default defineComponent({
   data() {
     return {
       solicitud: Object,
-      bancos: Object,
+      banco: Object,
     };
   },
   methods: {
-    muestraModal: function (solicitud, bancos) {
+    muestraModal: function (solicitud) {
+
+      let id_banco = solicitud.cuenta_banco.id_banco;
       this.solicitud = solicitud;
-      this.bancos = bancos;
       this.$refs.enModal.toggleModal();
+
+      return axios.get("api/v1/banco/" + id_banco).then((response) => {
+        this.banco = response.data.data;
+      });
     },
   },
 });

@@ -14,17 +14,14 @@ class CreateSolicitudRetirosTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('solicitud_retiros');
+
         Schema::create('solicitud_retiros', function (Blueprint $table) {
             $table->id();
 
             $table->float('monto');
             $table->integer('status')->nullable(false)->default(0);
-
-
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-
             $table->foreignIdFor(CuentaBanco::class, 'id_cuenta_banco');
 
             $table->timestamps();

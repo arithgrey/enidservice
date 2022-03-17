@@ -13,7 +13,7 @@ class CreateTipoValoracionsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('tipo_valoracions');
+
         Schema::create('tipo_valoracions', function (Blueprint $table) {
             $table->id();
             $table->string('nombre', 50);

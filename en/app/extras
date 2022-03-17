@@ -1,0 +1,24 @@
+php artisan migrate --path=database/migrations/2022_02_02_063759_create_sessions_table.php
+php artisan migrate --path=database/migrations/2014_10_12_000000_create_users_table.php
+php artisan migrate --path=database/migrations/2022_01_26_072746_create_valoracions_table.php
+php artisan migrate --path=database/migrations/2022_02_23_024435_create_tipo_valoracions_table.php
+php artisan db:seed --class=TipoValoracionSeeder
+
+
+php artisan migrate --path=database/migrations/2022_03_04_191751_create_solicitud_retiros_table.php
+php artisan migrate --path=database/migrations/2022_03_08_081320_create_bancos_table.php
+php artisan migrate --path=database/migrations/2022_03_08_230322_create_cuenta_bancos_table.php
+
+
+RENAME TABLE empresa TO empresas;
+alter table empresas change nombreempresa nombre varchar(50);
+
+alter table empresas add created_at timestamp DEFAULT NULL;
+alter table empresas add updated_at timestamp DEFAULT NULL;
+
+alter table empresas drop text_uso_privacidad;
+
+RENAME TABLE sector TO sectors;
+
+alter table sectors add created_at timestamp DEFAULT NULL;
+alter table sectors add updated_at timestamp DEFAULT NULL;

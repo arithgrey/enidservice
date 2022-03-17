@@ -14,7 +14,7 @@ class CreateValoracionsTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('valoracions');
+
         Schema::create('valoracions', function (Blueprint $table) {
 
             $table->bigIncrements('id');

@@ -47,6 +47,21 @@
             >
               Valoraciones
             </jet-nav-link>
+
+            <jet-nav-link
+              :href="route('solicitud-retiro.index')"
+              :active="route().current('solicitud-retiro.*')"
+              class="
+                block
+                mt-4
+                lg:inline-block lg:mt-0
+                text-white
+                hover:text-white
+                mr-4
+              "
+            >
+              Solicitudes Retiro
+            </jet-nav-link>
           </div>
           <div>
             <div>

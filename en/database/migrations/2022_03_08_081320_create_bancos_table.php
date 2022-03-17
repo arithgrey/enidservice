@@ -13,7 +13,7 @@ class CreateBancosTable extends Migration
      */
     public function up()
     {
-        Schema::dropIfExists('bancos');
+
         Schema::create('bancos', function (Blueprint $table) {
 
             $table->id();
