@@ -9,11 +9,7 @@ use App\Models\Valoracion;
 class ValoracionTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+
     public function test_slug()
     {
 

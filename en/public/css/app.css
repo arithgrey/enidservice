@@ -1246,6 +1246,12 @@ select {
 .w-2\/4 {
   width: 50%;
 }
+.w-2\/5 {
+  width: 40%;
+}
+.w-1\/2 {
+  width: 50%;
+}
 .min-w-0 {
   min-width: 0px;
 }
@@ -1287,6 +1293,12 @@ select {
 }
 .flex-grow {
   flex-grow: 1;
+}
+.basis-1\/2 {
+  flex-basis: 50%;
+}
+.basis-7\/12 {
+  flex-basis: 58.333333%;
 }
 .origin-top-left {
   transform-origin: top left;

@@ -59,10 +59,9 @@
               <img :src="banco.imagen" class="max-w-16 max-h-16 mt-2" />
 
               <p class="mt-2">
-                  <span class="text-black font-bold">
-                    Banco
-                  </span>
-                    {{ banco.nombre }}</p>
+                <span class="text-black font-bold"> Banco </span>
+                {{ banco.nombre }}
+              </p>
               <p>
                 {{ solicitud.cuenta_banco.tarjeta }}
               </p>
@@ -99,6 +98,16 @@
           </div>
         </a>
       </div>
+
+      <form @submit.prevent="switchStatus(form)">
+        <div class="flex w-1/2 ml-auto">
+          <select v-model="form.status">
+            <option value="0">Por liquidar</option>
+            <option value="1">Pagado</option>
+          </select>
+          <en-boton> Actualizar </en-boton>
+        </div>
+      </form>
     </template>
   </EnModal>
 </template>
@@ -114,18 +123,30 @@ export default defineComponent({
     return {
       solicitud: Object,
       banco: Object,
+      form: this.$inertia.form({
+        status: "",
+        id: "",
+      }),
     };
   },
   methods: {
     muestraModal: function (solicitud) {
-
       let id_banco = solicitud.cuenta_banco.id_banco;
+      this.status_solicitud = solicitud.status;
       this.solicitud = solicitud;
       this.$refs.enModal.toggleModal();
+
+      this.form.status = solicitud.status;
+      this.form.id = solicitud.id;
 
       return axios.get("api/v1/banco/" + id_banco).then((response) => {
         this.banco = response.data.data;
       });
+    },
+    switchStatus: function () {
+      let url = this.route("solicitud-retiro.update", this.form.id);
+      this.$inertia.put(url, this.form);
+      this.$refs.enModal.toggleModal();
     },
   },
 });
