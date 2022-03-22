@@ -16,10 +16,10 @@ class solicitud_retiro extends REST_Controller
 		$param = $this->post();
 		$response = false;
 
-		if (fx($param, "id_cuenta_pago,id_usuario,ultima_orden_compra,monto")) {
+		if (fx($param, "id_cuenta_banco,id_usuario,ultima_orden_compra,monto")) {
 
 	
-			$id_cuenta_pago = $param["id_cuenta_pago"];
+			$id_cuenta_banco = $param["id_cuenta_banco"];
 			$id_usuario = $param["id_usuario"];
 			$ultima_orden_compra = $param["ultima_orden_compra"];
 			$monto = $param["monto"];
@@ -29,7 +29,7 @@ class solicitud_retiro extends REST_Controller
 			if (es_data($cuenta_usuario)) {
 					
 				$params =  [ 
-					"id_cuenta_pago" => $id_cuenta_pago,
+					"id_cuenta_banco" => $id_cuenta_banco,
 					"user_id" => $id_usuario,					
 					"monto" => $monto,
 					"ultima_orden_compra" => $ultima_orden_compra            		
@@ -46,7 +46,7 @@ class solicitud_retiro extends REST_Controller
 			}else{
 
 				$params =  [ 
-					"id_cuenta_pago" => $id_cuenta_pago,
+					"id_cuenta_banco" => $id_cuenta_banco,
 					"user_id" => $id_usuario,					
 					"monto" => $monto,
 					"ultima_orden_compra" => $ultima_orden_compra            		

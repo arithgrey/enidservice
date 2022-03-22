@@ -44,7 +44,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($cuenta_pago)) {
             
             $propietario_tarjeta = pr($cuenta_pago, "propietario_tarjeta");
-            $id_cuenta_pago = pr($cuenta_pago, "id_cuenta_pago");
+            $id_cuenta_banco = pr($cuenta_pago, "id_cuenta_banco");
             $numero_tarjeta = pr($cuenta_pago, "numero_tarjeta");
             $id_banco = pr($cuenta_pago, "id_banco");
 
@@ -120,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
         $cuenta_pago = $data["cuenta_pago"];
 
         $propietario_tarjeta = pr($cuenta_pago, "propietario_tarjeta");
-        $id_cuenta_pago = pr($cuenta_pago, "id_cuenta_pago");
+        $id_cuenta_banco = pr($cuenta_pago, "id_cuenta_banco");
         $numero_tarjeta = pr($cuenta_pago, "numero_tarjeta");
         $id_banco = pr($cuenta_pago, "id");
 
@@ -155,11 +155,11 @@ if (!function_exists('invierte_date_time')) {
             ]); 
 
 
-        $input_id_cuenta_pago = hiddens(
+        $input_id_cuenta_banco = hiddens(
             [
-            "name" => "id_cuenta_pago",
-            "class" => "id_cuenta_pago",
-            "value" => $id_cuenta_pago
+            "name" => "id_cuenta_banco",
+            "class" => "id_cuenta_banco",
+            "value" => $id_cuenta_banco
             ]
         );
         $input_id_usuario = hiddens(
@@ -172,7 +172,7 @@ if (!function_exists('invierte_date_time')) {
 
         $inputs = [
             d(_titulo("Cuenta destino")),
-            $input_id_cuenta_pago,
+            $input_id_cuenta_banco,
             $input_id_usuario,
             d($input_nombre, "mt-5"), 
             d($input_numero, "mt-5"),
