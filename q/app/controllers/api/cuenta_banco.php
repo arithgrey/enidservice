@@ -17,7 +17,7 @@ class cuenta_banco extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		
-		if (fx($param, "id_usuario,id_cuenta_pago,propietario_tarjeta,numero_tarjeta,banco")) {
+		if (fx($param, "id_usuario,id_cuenta_banco,propietario_tarjeta,numero_tarjeta,banco")) {
 
 			$id_usuario = $param["id_usuario"];
 			$propietario_tarjeta = $param["propietario_tarjeta"];
@@ -35,7 +35,7 @@ class cuenta_banco extends REST_Controller
 
 				$response = $this->cuenta_banco_model->update($params , 
 					[
-						"id" =>  $param["id_cuenta_pago"] 
+						"id" =>  $param["id_cuenta_banco"] 
 					] 
 				);
 

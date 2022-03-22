@@ -38,7 +38,7 @@ let cuenta_pago = function (e) {
 let solicitud_deposito = function (e) {
 
 
-    let $id_cuenta_pago = $form_cuenta.find(".id_cuenta_pago").val();
+    let $id_cuenta_banco = $form_cuenta.find(".id_cuenta_banco").val();
     let $id_usuario = $form_cuenta.find(".id_usuario").val();
     let $ultima_orden = $ultima_orden_compra.val();
     let $monto_solicitado = $monto.val();
@@ -46,7 +46,7 @@ let solicitud_deposito = function (e) {
     if (parseInt($monto_solicitado) > 1 ) {
         
         let $data_send = $.param({
-        "id_cuenta_pago" : $id_cuenta_pago, 
+        "id_cuenta_banco" : $id_cuenta_banco, 
         "id_usuario" : $id_usuario,  
         "ultima_orden_compra" : $ultima_orden, 
         "monto" : $monto_solicitado, 
