@@ -5,11 +5,13 @@ namespace Tests\Unit\Models;
 use App\Models\ProveedorServicio;
 use App\Models\Servicio;
 use App\Models\User;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use PHPUnit\Framework\TestCase;
 
 class proveedorServicioTest extends TestCase
 {
 
+    use RefreshDatabase;
     function test_pertenece_a_un_servicio()
     {
 

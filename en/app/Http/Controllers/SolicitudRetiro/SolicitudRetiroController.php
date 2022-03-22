@@ -49,17 +49,12 @@ class SolicitudRetiroController extends Controller
     {
 
         $request->validate([
-            'status' => 'required',
+            'status' => 'integer|between:1,5',
 
         ]);
-
-        $this->authorize('pass', $solicitudRetiro);
-
         $solicitudRetiro->update($request->all());
 
-        return redirect()
-            ->route('solicitud-retiro.index')
-            ->with('status', 'Solicitud actualizada!');
+        return back()->with('status', 'Actualizado!');
     }
     public function destroy(SolicitudRetiro $solicitudRetiro)
     {

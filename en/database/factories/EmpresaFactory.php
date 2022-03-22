@@ -18,6 +18,5 @@ class EmpresaFactory extends Factory
             'nombre' => $this->faker->company(),
             'id_sector' => Sector::factory()
         ];
-
     }
 }

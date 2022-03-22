@@ -30,7 +30,7 @@
             class="border-l-2 border-blue-600"
             v-for="solicitud in solicitudes_retiro.data"
           >
-           <li>
+            <li>
               <div class="flex flex-start items-center">
                 <div
                   class="
@@ -139,7 +139,6 @@
     </div>
 
     <ShowModal ref="showModal" />
-
   </app-layout>
 </template>
 
@@ -149,18 +148,19 @@ import ShowModal from "./ShowModal";
 
 export default defineComponent({
   components: {
-      ShowModal
+    ShowModal,
   },
   props: {
     solicitudes_retiro: Object,
-
   },
-
   data() {
     return {
       q: "",
       status: 0,
     };
+  },
+  mounted() {
+    this.busqueda();
   },
   watch: {
     q: function (value) {
@@ -172,7 +172,6 @@ export default defineComponent({
   },
   methods: {
     showSolicitudRetiro: function (solicitud) {
-
       this.$refs.showModal.muestraModal(solicitud);
     },
     busqueda: function busqueda() {

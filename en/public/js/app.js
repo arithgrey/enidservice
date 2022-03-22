@@ -25583,6 +25583,9 @@ __webpack_require__.r(__webpack_exports__);
       status: 0
     };
   },
+  mounted: function mounted() {
+    this.busqueda();
+  },
   watch: {
     q: function q(value) {
       this.busqueda();
@@ -25627,7 +25630,11 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       solicitud: Object,
-      banco: Object
+      banco: Object,
+      form: this.$inertia.form({
+        status: "",
+        id: ""
+      })
     };
   },
   methods: {
@@ -25635,11 +25642,19 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var id_banco = solicitud.cuenta_banco.id_banco;
+      this.status_solicitud = solicitud.status;
       this.solicitud = solicitud;
       this.$refs.enModal.toggleModal();
+      this.form.status = solicitud.status;
+      this.form.id = solicitud.id;
       return axios.get("api/v1/banco/" + id_banco).then(function (response) {
         _this.banco = response.data.data;
       });
+    },
+    switchStatus: function switchStatus() {
+      var url = this.route("solicitud-retiro.update", this.form.id);
+      this.$inertia.put(url, this.form);
+      this.$refs.enModal.toggleModal();
     }
   }
 }));
@@ -30748,7 +30763,29 @@ var _hoisted_13 = {
 var _hoisted_14 = {
   "class": "rounded-lg text-sky-500 font-bold bg-sky-100 py-1 px-3 text-sm w-fit h-fit"
 };
+var _hoisted_15 = {
+  "class": "flex w-1/2 ml-auto"
+};
+
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "0"
+}, "Por liquidar", -1
+/* HOISTED */
+);
+
+var _hoisted_17 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+  value: "1"
+}, "Pagado", -1
+/* HOISTED */
+);
+
+var _hoisted_18 = [_hoisted_16, _hoisted_17];
+
+var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Actualizar ");
+
 function render(_ctx, _cache, $props, $setup, $data, $options) {
+  var _component_en_boton = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("en-boton");
+
   var _component_EnModal = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("EnModal");
 
   return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createBlock)(_component_EnModal, {
@@ -30779,7 +30816,26 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       /* TEXT */
       )]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", _hoisted_14, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(_ctx.solicitud.monto) + " MXN ", 1
       /* TEXT */
-      )])])])])];
+      )])])])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
+        onSubmit: _cache[1] || (_cache[1] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function ($event) {
+          return _ctx.switchStatus(_ctx.form);
+        }, ["prevent"]))
+      }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_15, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
+          return _ctx.form.status = $event;
+        })
+      }, _hoisted_18, 512
+      /* NEED_PATCH */
+      ), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, _ctx.form.status]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_en_boton, null, {
+        "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
+          return [_hoisted_19];
+        }),
+        _: 1
+        /* STABLE */
+
+      })])], 32
+      /* HYDRATE_EVENTS */
+      )];
     }),
     _: 1
     /* STABLE */

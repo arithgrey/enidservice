@@ -27,8 +27,7 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 
-Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController')
-    ->middleware('auth');
+Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController');
 
 
 Route::resource('banco', 'Banco\BancoController')
