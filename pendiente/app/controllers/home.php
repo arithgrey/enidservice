@@ -28,7 +28,7 @@ class Home extends CI_Controller
         $this->comision->saldo_disponible($comisiones_por_cobrar, $recompensas);  
 
         $data["bancos"] = $this->bancos();
-        $data["cuenta_pago"] = $this->cuenta_pago($id_usuario);
+        $data["cuenta_pago"] = $this->cuenta_pago($id_usuario);        
         $data["solicitud_retiro"] = $this->solicitud_retiro($id_usuario);
     
         $this->app->pagina($data, render($data), 1);
@@ -53,7 +53,7 @@ class Home extends CI_Controller
     private function cuenta_pago($id_usuario)
     {
         
-        return $this->app->api("cuenta_pago/id/",["id_usuario" => $id_usuario]);
+        return $this->app->api("cuenta_banco/id/",["id_usuario" => $id_usuario]);
 
     }   
     private function solicitud_retiro($id_usuario)

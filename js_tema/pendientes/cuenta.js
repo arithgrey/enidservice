@@ -25,7 +25,7 @@ let cuenta_pago = function (e) {
 
 
     let $data_send = $(this).serialize();
-    let url = "../q/index.php/api/cuenta_pago/index/format/json/";
+    let url = "../q/index.php/api/cuenta_banco/index/format/json/";
     $modal_cuenta.hide();
     advierte('Procesando', 1);
     bloquea_form("form_cuenta");

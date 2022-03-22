@@ -122,11 +122,11 @@ if (!function_exists('invierte_date_time')) {
         $propietario_tarjeta = pr($cuenta_pago, "propietario_tarjeta");
         $id_cuenta_pago = pr($cuenta_pago, "id_cuenta_pago");
         $numero_tarjeta = pr($cuenta_pago, "numero_tarjeta");
-        $id_banco = pr($cuenta_pago, "id_banco");
+        $id_banco = pr($cuenta_pago, "id");
 
 
         $select_banco = create_select(
-            $bancos, "banco", "banco", "banco", "nombre", "id_banco",  $id_banco);
+            $bancos, "banco", "banco", "banco", "nombre", "id",  $id_banco);
         
         $envio = btn("Enviar",
                 [

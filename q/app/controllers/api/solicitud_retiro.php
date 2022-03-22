@@ -3,7 +3,6 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class solicitud_retiro extends REST_Controller
 {
-	private $id_usuario;
 
 	function __construct()
 	{
@@ -31,7 +30,7 @@ class solicitud_retiro extends REST_Controller
 					
 				$params =  [ 
 					"id_cuenta_pago" => $id_cuenta_pago,
-					"id_usuario" => $id_usuario,					
+					"user_id" => $id_usuario,					
 					"monto" => $monto,
 					"ultima_orden_compra" => $ultima_orden_compra            		
 
@@ -40,7 +39,7 @@ class solicitud_retiro extends REST_Controller
 				$response = $this->solicitud_retiro_model->update($params , 
 					[
 						"status" => 0, 
-            			"id_usuario" => $id_usuario            		
+            			"user_id" => $id_usuario            		
 					] 
 				);
 
@@ -48,7 +47,7 @@ class solicitud_retiro extends REST_Controller
 
 				$params =  [ 
 					"id_cuenta_pago" => $id_cuenta_pago,
-					"id_usuario" => $id_usuario,					
+					"user_id" => $id_usuario,					
 					"monto" => $monto,
 					"ultima_orden_compra" => $ultima_orden_compra            		
 				];
@@ -78,7 +77,7 @@ class solicitud_retiro extends REST_Controller
 					"status" => 1 
 				], 
 				[
-					"id_usuario" => $id_usuario ,
+					"user_id" => $id_usuario ,
 					"status" => 0 
 				], 
 				10
@@ -109,7 +108,7 @@ class solicitud_retiro extends REST_Controller
             	[], 
             	[
             		"status" => 0, 
-            		"id_usuario" => $id_usuario            		
+            		"user_id" => $id_usuario            		
             	], 
             1);		
         

@@ -7,7 +7,7 @@ class Solicitud_retiro_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->tabla = "solicitud_retiro";
+		$this->tabla = "solicitud_retiros";
 
 	}
 
