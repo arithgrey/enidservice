@@ -63,7 +63,7 @@
                 {{ banco.nombre }}
               </p>
               <p>
-                {{ solicitud.cuenta_banco.tarjeta }}
+                {{ solicitud.cuenta_banco.numero_tarjeta }}
               </p>
 
               <p>
@@ -131,6 +131,7 @@ export default defineComponent({
   },
   methods: {
     muestraModal: function (solicitud) {
+
       let id_banco = solicitud.cuenta_banco.id_banco;
       this.status_solicitud = solicitud.status;
       this.solicitud = solicitud;
@@ -142,6 +143,7 @@ export default defineComponent({
       return axios.get("api/v1/banco/" + id_banco).then((response) => {
         this.banco = response.data.data;
       });
+
     },
     switchStatus: function () {
       let url = this.route("solicitud-retiro.update", this.form.id);

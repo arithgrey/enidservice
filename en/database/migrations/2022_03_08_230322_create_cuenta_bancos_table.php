@@ -18,7 +18,7 @@ class CreateCuentaBancosTable extends Migration
         Schema::create('cuenta_bancos', function (Blueprint $table) {
             $table->id();
 
-            $table->text('tarjeta')->nullable(false);
+            $table->text('numero_tarjeta')->nullable(false);
             $table->integer('status')->nullable(false)->default(1);
             $table->string('propietario', 100);
 

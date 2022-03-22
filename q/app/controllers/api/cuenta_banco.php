@@ -1,14 +1,14 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
-class cuenta_pago extends REST_Controller
+class cuenta_banco extends REST_Controller
 {
 	private $id_usuario;
 
 	function __construct()
 	{
 		parent::__construct();
-		$this->load->model("cuenta_pago_model");
+		$this->load->model("cuenta_banco_model");
 		$this->load->library(lib_def());
 	}
 
@@ -33,9 +33,9 @@ class cuenta_pago extends REST_Controller
 					"id_banco" => $banco
 				];
 
-				$response = $this->cuenta_pago_model->update($params , 
+				$response = $this->cuenta_banco_model->update($params , 
 					[
-						"id_cuenta_pago" =>  $param["id_cuenta_pago"] 
+						"id" =>  $param["id_cuenta_pago"] 
 					] 
 				);
 
@@ -48,7 +48,7 @@ class cuenta_pago extends REST_Controller
 					"id_banco" => $banco,					
 				];
 				
-				$response = $this->cuenta_pago_model->insert($params , 1 );
+				$response = $this->cuenta_banco_model->insert($params , 1 );
 				
 			}
 			
@@ -76,10 +76,10 @@ class cuenta_pago extends REST_Controller
 	private function cuenta_usuario($id_usuario){
 	
 
-        return $this->cuenta_pago_model->get(
+        return $this->cuenta_banco_model->get(
             	[], 
             	[
-            		"id_usuario" => $id_usuario,
+            		"user_id" => $id_usuario,
             		"status" => 1,
             	], 
             1);		

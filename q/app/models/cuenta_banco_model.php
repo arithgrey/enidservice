@@ -1,13 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cuenta_pago_model extends CI_Model
+class Cuenta_banco_model extends CI_Model
 {	
 	private $tabla;
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
-		$this->tabla = "cuenta_pago";
+		$this->tabla = "cuenta_bancos";
 
 	}
 
@@ -45,12 +45,12 @@ class Cuenta_pago_model extends CI_Model
 	{
 
 		$query_get = "SELECT 
-                        c.id_cuenta_pago     
+                        c.id_banco     
                         ,c.numero_tarjeta            
                         ,c.clabe                 
                         ,b.nombre                     
                       FROM  
-                        cuenta_pago  c 
+                        cuenta_bancos  c 
                       INNER JOIN banco b 
                         ON c.id_banco =  b.id_banco
                       WHERE 

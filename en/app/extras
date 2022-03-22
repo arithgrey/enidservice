@@ -386,3 +386,16 @@ alter table valoracion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
 alter table valoracions add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
 alter table venta_like add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
 alter table visitas_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+
+
+RENAME TABLE solicitud_retiro TO solicitud_retiros;
+RENAME TABLE cuenta_pago TO cuenta_bancos;
+RENAME TABLE banco TO bancos;
+
+alter table solicitud_pagos change id_usuario user_id int;
+alter table cuenta_bancos change id_usuario user_id int;
+alter table solicitud_retiros change id_cuenta_pago id_cuenta_banco int;
+alter table cuenta_bancos rename column id_cuenta_pago to id;
+alter table bancos rename column id_banco to id;
+
+
