@@ -133,19 +133,21 @@ class usuario extends REST_Controller
 
         if (fx($param, "id_empresa,grupo")) {
             $id_empresa = $param['id_empresa'];
-            $data = $param['data'];
+            $puede_repartir = $param['puede_repartir'];
             $grupo = $param['grupo'];
             $in = 0;
                         
             switch ($grupo) {
                 case 1:
 
-                    $in = get_keys($data['puede_repartir']);
+                    $in = get_keys($puede_repartir);
 
                     break;
                 default:
                     break;
             }
+            
+            
             $response = $this->usuario_model->empresa_perfil($id_empresa, $in);
         }
         $this->response($response);

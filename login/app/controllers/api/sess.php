@@ -45,7 +45,6 @@ class Sess extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
 
@@ -94,7 +93,6 @@ class Sess extends REST_Controller
 
                 $this->app->set_userdata($response);
             }
-
         }
         return $response;
     }
@@ -107,41 +105,41 @@ class Sess extends REST_Controller
 
     private function get_empresa($id_empresa)
     {
-        $q["id_empresa"] = $id_empresa;        
-        return $this->app->api("empresa/id", $q);
+
+        return $this->app->api("empresa/id", ["id_empresa" => $id_empresa]);
     }
 
     private function get_perfil_user($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;        
+        $q["id_usuario"] = $id_usuario;
         return $this->app->api("usuario_perfil/usuario", $q);
     }
 
     private function get_perfil_data($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;        
+        $q["id_usuario"] = $id_usuario;
         return $this->app->api("perfiles/data_usuario", $q);
     }
 
     private function get_empresa_permiso($id_empresa)
     {
 
-        $q["id_empresa"] = $id_empresa;    
+        $q["id_empresa"] = $id_empresa;
         return $this->app->api("empresa_permiso/empresa", $q);
     }
 
     private function get_empresa_recursos($id_empresa)
     {
-        $q["id_empresa"] = $id_empresa;        
+        $q["id_empresa"] = $id_empresa;
         return $this->app->api("empresa_recurso/recursos", $q);
     }
 
     private function get_recursos_perfiles($q)
     {
 
-        $q["id_perfil"] = $q[0]["idperfil"];        
+        $q["id_perfil"] = $q[0]["idperfil"];
         return $this->app->api("recurso/navegacion", $q);
     }
 

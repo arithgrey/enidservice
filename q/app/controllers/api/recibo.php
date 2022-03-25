@@ -54,8 +54,8 @@ class recibo extends REST_Controller
             $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
-            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
-
+            
+            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);            
             $idusuarios_empresa = array_column($usuarios_empresa, 'id');
             $idusuarios_empresa = array_unique($idusuarios_empresa);
 
@@ -2387,8 +2387,9 @@ class recibo extends REST_Controller
         $q = [
             'id_empresa' => $id_empresa,
             'grupo' => $grupo,
-            'data' => $data['restricciones']
+            'puede_repartir' => $data['restricciones']["puede_repartir"]
         ];
+        
 
         return $this->app->api("usuario/empresa_perfil", $q);
     }
