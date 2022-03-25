@@ -62,7 +62,7 @@ class Response_model extends CI_Model
                         response r 
                         INNER JOIN  
                         usuario u 
-                        ON r.id_usuario = u.idusuario
+                        ON r.id_usuario = u.id
                       WHERE 
                         r.id_pregunta =  '" . $id_pregunta . "'
                       ORDER BY 

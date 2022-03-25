@@ -51,8 +51,8 @@ class Puntuacion extends REST_Controller
     private function promedio($id_usuario)
     {
 
-        $response = $this->puntuacion_model->avg($id_usuario);
-        $promedio = pr($response, 'promedio');
+        $response = $this->puntuacion_model->avg($id_usuario);    
+        $promedio = (!is_null($response)) ? pr($response, 'promedio') : 0;
         return (is_null($promedio)) ? 0 : $promedio;
 
     }

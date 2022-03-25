@@ -700,7 +700,7 @@ class Stock extends REST_Controller
         $q["fecha_inicio"] = $param["fecha_inicio"];
         $q["fecha_termino"] = $param["fecha_inicio"];
         $q["perfil"] = $this->app->getperfiles();
-        $q["id_usuario"] = $this->app->get_session("idusuario");
+        $q["id_usuario"] = $this->app->get_session("id_usuario");
 
 
         return $this->app->api("recibo/pedidos", $q);

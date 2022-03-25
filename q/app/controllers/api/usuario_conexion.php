@@ -9,7 +9,7 @@ class Usuario_conexion extends REST_Controller
         $this->load->model("usuario_conexion_model");
         $this->load->helper("busqueda");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function index_POST()

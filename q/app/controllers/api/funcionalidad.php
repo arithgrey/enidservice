@@ -11,7 +11,7 @@ class funcionalidad extends REST_Controller
 		$this->load->model("funcionalidad_model");
 		$this->load->helper("funcionalidad");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->app->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("id_usuario");
 	}
 
 	function add_usuario_PUT()

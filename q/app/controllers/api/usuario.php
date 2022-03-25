@@ -13,7 +13,7 @@ class usuario extends REST_Controller
         $this->load->model('usuario_model');
         $this->load->library('table');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
         $this->id_empresa = $this->app->get_session('idempresa');
     }
 
@@ -36,7 +36,7 @@ class usuario extends REST_Controller
 
             $id_usuario = $param["id_usuario"];
             unset($param["id_usuario"]);
-            $response = $this->usuario_model->update($param, ["idusuario" => $id_usuario]);
+            $response = $this->usuario_model->update($param, ["id" => $id_usuario]);
 
         }
         $this->response($response);
@@ -136,11 +136,11 @@ class usuario extends REST_Controller
             $data = $param['data'];
             $grupo = $param['grupo'];
             $in = 0;
-
+                        
             switch ($grupo) {
                 case 1:
 
-                    $in = get_keys($data['restricciones']['puede_repartir']);
+                    $in = get_keys($data['puede_repartir']);
 
                     break;
                 default:
@@ -149,6 +149,7 @@ class usuario extends REST_Controller
             $response = $this->usuario_model->empresa_perfil($id_empresa, $in);
         }
         $this->response($response);
+        
     }
 
     function perfiles_GET()
@@ -185,7 +186,7 @@ class usuario extends REST_Controller
             $contenido[] = d(_titulo($str), 'text-left mb-3');
             $contenido[] = create_select_selected(
                 $usuarios,
-                'idusuario',
+                'id',
                 'nombre',
                 $id_usuario,
                 'usuario',
@@ -213,7 +214,7 @@ class usuario extends REST_Controller
                 "tel_contacto_alterno" => $param["telefono_negocio"],
                 "lada_negocio" => $param["lada_negocio"]
             ];
-            $params_where = ["idusuario" => $this->id_usuario];
+            $params_where = ["id" => $this->id_usuario];
             $response = $this->usuario_model->update($params, $params_where);
         }
 
@@ -256,7 +257,7 @@ class usuario extends REST_Controller
             $usuario = $this->get_usuario_por_servicio($param);
 
             $params = [
-                "idusuario id_usuario",
+                "id id_usuario",
                 "nombre",
                 "apellido_paterno",
                 "apellido_materno",
@@ -281,7 +282,7 @@ class usuario extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario")) {
             $params = [
-                "idusuario id_usuario",
+                "id id_usuario",
                 "nombre",
                 "apellido_paterno",
                 "apellido_materno",
@@ -356,7 +357,7 @@ class usuario extends REST_Controller
             $nuevo = $param['nuevo'];
             $confirm = $param['confirma'];
             if ($nuevo == $confirm) {
-                $id_usuario = $this->app->get_session("idusuario");
+                $id_usuario = $this->app->get_session("id_usuario");
                 $existe = $this->usuario_model->valida_pass($anterior, $id_usuario);
                 if ($existe != 1) {
 
@@ -507,7 +508,7 @@ class usuario extends REST_Controller
         $response = [];
         if (fx($param, "email,secret")) {
 
-            $params = ["idusuario", "nombre", "email", "fecha_registro", "idempresa"];
+            $params = ["id", "nombre", "email", "fecha_registro", "idempresa"];
             $secret = $param["secret"];
             $params_where = [
                 "email" => $param["email"],
@@ -696,7 +697,7 @@ class usuario extends REST_Controller
             } else {
 
                 $in = ["email" => $param["email"]];
-                $id_usuario = $this->usuario_model->get(["idusuario"], $in)[0]["idusuario"];
+                $id_usuario = $this->usuario_model->get(["id"], $in)[0]["id"];
 
             }
 
@@ -840,9 +841,11 @@ class usuario extends REST_Controller
 
         $param = $this->get();
         $total = $this->get_num_registros_periodo($param);
+        
         $per_page = 10;
         $param["resultados_por_pagina"] = $per_page;
-        $data["miembros"] = $this->usuario_model->get_usuarios_periodo($param);
+        $miembros = $this->usuario_model->get_usuarios_periodo($param);
+        
         $conf["page"] = prm_def($param, "page");
         $conf["totales_elementos"] = $total;
         $conf["per_page"] = $per_page;
@@ -850,7 +853,12 @@ class usuario extends REST_Controller
         $conf["q2"] = "";
         $data["paginacion"] = $this->app->paginacion($conf);
         $data["modo_edicion"] = 0;
+        
+        $data["miembros"] = $this->app->add_imgs_usuario($miembros, "id_usuario");
+        $data["es_proveedor"] = 0;
         $this->response(format_miembros($data));
+        
+        
 
     }
 
@@ -987,7 +995,9 @@ class usuario extends REST_Controller
             $tel_contacto = $param['tel_contacto'];
             $tel_contacto_alterno = $param['tel_contacto_alterno'];
 
-            $usuarios = $this->usuario_model->busqueda($idusuario, $email, $tel_contacto, $tel_contacto_alterno);
+            $usuarios = $this->usuario_model->busqueda(
+                $idusuario, $email, $tel_contacto, $tel_contacto_alterno);
+
             if (es_data($usuarios)) {
 
                 $response = $this->usuarios_en_lista_negra($usuarios);
@@ -1242,7 +1252,7 @@ class usuario extends REST_Controller
         $lista = [];
         foreach ($usuarios as $row) {
 
-            $lista[] = $row['idusuario'];
+            $lista[] = $row['id'];
         }
 
         $q['usuarios'] = get_keys($lista);

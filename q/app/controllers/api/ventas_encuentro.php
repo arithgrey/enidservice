@@ -12,7 +12,7 @@ class Ventas_encuentro extends REST_Controller
         $this->load->helper("ventas_encuentro");
         $this->load->model("ventas_encuentro_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function periodo_GET()

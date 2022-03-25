@@ -55,10 +55,10 @@ class Usuario_perfil_model extends CI_Model
                         u.nombre , 
                         u.apellido_paterno, 
                         u.apellido_materno , 
-                        u.idusuario,
+                        u.id,
                         u.fecha_registro 
                         FROM usuario_perfil up INNER JOIN
-                         usuario u on u.idusuario = up.idusuario
+                         usuario u on u.id = up.idusuario
                           WHERE up.idperfil IN (3,6)
                           and u.status =1 ';
         return $this->db->query($query_get)->result_array();
@@ -71,13 +71,13 @@ class Usuario_perfil_model extends CI_Model
                         u.nombre , 
                         u.apellido_paterno, 
                         u.apellido_materno , 
-                        u.idusuario,
+                        u.id,
                         DATE(u.fecha_registro) fecha_registro 
                         FROM usuario_perfil up 
                         INNER JOIN
                         usuario u 
                         ON 
-                        u.idusuario = up.idusuario
+                        u.id = up.idusuario
                         WHERE up.idperfil IN (3,6) 
                         AND 
                         u.status = 1 

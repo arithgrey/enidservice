@@ -16,7 +16,7 @@ class Servicio extends REST_Controller
         $this->load->library(lib_def());
         $loggin = $this->app->is_logged_in();
         $param = $this->get();
-        $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("idusuario");
+        $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("id_usuario");
     }
 
 
@@ -1997,7 +1997,7 @@ class Servicio extends REST_Controller
 
             if ($in_session) {
 
-                $param["id_usuario"] = $this->app->get_session("idusuario");
+                $param["id_usuario"] = $this->app->get_session("id_usuario");
                 $nuevo = $this->get_servicios_lista_deseos($param);
 
             } else {

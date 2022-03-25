@@ -8,7 +8,7 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         parent::__construct();
         $this->load->model("proyecto_persona_forma_pago_direccion_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function index_DELETE()

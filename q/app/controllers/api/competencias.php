@@ -27,9 +27,15 @@ class Competencias extends REST_Controller
         $param = $this->get();
         $tipo = prm_def($param, 'tipo_top');
         $ventas_dia = $this->ventas_dia_semana($tipo);
-        $response = $this->repartidor($ventas_dia);
 
+        
+        
+        $response = $this->repartidor($ventas_dia);
         $this->response($response);
+        /*
+        
+        $this->response($response);
+        */
     }
 
     private function formato_fecha_pedidos($tipo)
@@ -73,7 +79,7 @@ class Competencias extends REST_Controller
 
         $hoy = now_enid();
         $fecha_inicio = $this->formato_fecha_pedidos($tipo);
-
+        
         $q = [
             "cliente" => "",
             "v" => 0,
@@ -125,11 +131,11 @@ class Competencias extends REST_Controller
 
     private function repartidor($ventas)
     {
-
-        $repartidores = array_column($ventas, 'id_usuario_entrega');
-        $ventas_comisionistas = array_count_values($repartidores);
+        
+        $repartidores = array_column($ventas, 'id_usuario_entrega');        
+        $ventas_comisionistas = array_count_values($repartidores);        
         $response = [];
-
+        
         foreach ($ventas_comisionistas as $id_reparto => $valor) {
             if ($id_reparto > 0) {
 
@@ -138,13 +144,18 @@ class Competencias extends REST_Controller
                     'id_vendedor' => $id_reparto,
                     'ventas' => $valor,
                     'nombre_vendedor' => format_nombre($repartidor),
+                    'id_usuario_entrega' => $id_reparto
+                    
                 ];
+                
 
             }
 
         }
 
+        
         sksort($response, 'ventas');
+        
         return $this->app->add_imgs_usuario($response, 'id_usuario_entrega');
 
     }

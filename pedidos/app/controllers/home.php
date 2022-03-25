@@ -13,7 +13,7 @@ class Home extends CI_Controller
         $this->load->library("table");
         
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function index()
@@ -439,19 +439,20 @@ class Home extends CI_Controller
         if ($es_administrador) {
             $comisionistas = $this->usuarios_comisionistas();
         }
+        
         $data['comisionistas'] = $comisionistas;
-        $ordenes = $this->comisiones_por_pago($data);
-        $data['comisiones_por_pago'] = $this->app->add_imgs_servicio($ordenes['ordenes']);
-        $data['clientes_por_pago'] = $ordenes['clientes'];
+        $ordenes = $this->comisiones_por_pago($data);   
+
+        $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];        
+        $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes']: [];
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
 
     }
 
     private function comisiones_por_pago($data)
     {
-
-        $q = ['id_empresa' => $data['id_empresa']];
-        return $this->app->api("recibo/comisiones_por_pago/", $q);
+        
+        return $this->app->api("recibo/comisiones_por_pago", ['id_empresa' => $data['id_empresa']]);
     }
 
     private function usuarios_comisionistas()
@@ -679,7 +680,7 @@ class Home extends CI_Controller
         if (es_data($usuario_compra)) {
 
             $q = [
-                'idusuario' => pr($usuario_compra, 'idusuario'),
+                'id' => pr($usuario_compra, 'id'),
                 'email' => pr($usuario_compra, 'email'),
                 'tel_contacto' => pr($usuario_compra, 'tel_contacto'),
                 'tel_contacto_alterno' => pr($usuario_compra, 'tel_contacto_alterno')

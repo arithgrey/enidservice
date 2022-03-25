@@ -68,9 +68,9 @@ class Respuesta_model extends CI_Model
                    INNER JOIN
                     usuario u                    
                    ON 
-                    r.id_usuario =  u.idusuario                  
+                    r.id_usuario =  u.id                  
                    INNER JOIN usuario_perfil up 
-                    ON u.idusuario = up.idusuario                    
+                    ON u.id = up.idusuario                    
                    WHERE 
                     r.id_tarea = '" . $param["tarea"] . "' 
                    ORDER BY 
@@ -79,21 +79,6 @@ class Respuesta_model extends CI_Model
 		$result = $this->db->query($query_get);
 		return $result->result_array();
 	}
-	/*
-	function registra_respuesta($param){
-
-	$id_tarea     =   $param["tarea"];
-	$id_usuario   =   $param["id_usuario"];
-	$respuesta    =   $param["mensaje"];
-	$params       =   [
-		"respuesta"     =>  $respuesta,
-		"id_tarea"      =>  $id_tarea,
-		"id_usuario"    =>  $id_usuario
-	];
-
-	return $this->insert("respuesta" , $params);
-
-	}
-	*/
+	
 
 }

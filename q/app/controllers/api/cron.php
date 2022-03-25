@@ -56,7 +56,7 @@ class Cron extends REST_Controller
             $email = $row["email"];
             $prm["nombre"] = $nombre;
             $prm["email"] = $email;
-            $id = $row["idusuario"];
+            $id = $row["id"];
 
             $url_cancelar_envio = "msj/index.php/api/emp/salir/format/html/?type=3&id=" . $id;
             $prm["url_cancelar_envio"] = get_url_request($url_cancelar_envio);

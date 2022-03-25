@@ -11,7 +11,7 @@ class usuario_deseo extends REST_Controller
         $this->load->model("usuario_deseo_model");
         $this->load->helper("usuario_deseo");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
 
     }
     /*Ya se registro ahora le cobramos 4*/

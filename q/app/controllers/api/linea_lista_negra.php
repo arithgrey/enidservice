@@ -27,7 +27,7 @@ class Linea_lista_negra extends REST_Controller
 
         $param =  $this->put();
         $response  = false;
-        $id_usuario =  $this->app->get_session("idusuario");
+        $id_usuario =  $this->app->get_session("id_usuario");
 
         if (fx($param, "id,lista_negra",1) && $id_usuario > 0 ){
 

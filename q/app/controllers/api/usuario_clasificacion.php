@@ -10,7 +10,7 @@ class usuario_clasificacion extends REST_Controller
 		parent::__construct();
 		$this->load->model("usuario_clasificacion_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->app->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("id_usuario");
 	}
 
 	function agregan_clasificaciones_periodo_GET()

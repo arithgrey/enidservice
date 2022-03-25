@@ -12,7 +12,7 @@ class Respon extends REST_Controller
 		$this->load->helper("respuesta");
 		$this->load->model("response_model");
 		$this->load->library(lib_def());
-		$this->id_usuario = $this->app->get_session("idusuario");
+		$this->id_usuario = $this->app->get_session("id_usuario");
 	}
 
 	function pregunta_GET()

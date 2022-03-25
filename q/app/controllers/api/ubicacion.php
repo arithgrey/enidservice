@@ -8,7 +8,7 @@ class ubicacion extends REST_Controller
         parent::__construct();
         $this->load->model("ubicacion_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function frecuentes_POST()

@@ -44,7 +44,7 @@ class Home extends CI_Controller
 
                 $send["id_servicio"] = $servicio;
                 $data["id_servicio"] = $servicio;
-                $send["id_usuario"] = ($send["in_session"] == 1) ? $this->app->get_session("idusuario") : 0;
+                $send["id_usuario"] = ($send["in_session"] == 1) ? $this->app->get_session("id_usuario") : 0;
 
                 $response = get_format_pregunta($this->carga_formulario_valoracion($send), $send["id_servicio"]);
 

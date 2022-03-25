@@ -54,13 +54,14 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($metricas as $row) {
 
+                
                 $id_vendedor = $row['id_vendedor'];
                 if (in_array($id_vendedor, $ids_comisionistas)) {
 
 
                     $ventas = $row['ventas'];
                     $nombre_vendedor = substr($row['nombre_vendedor'], 0, 17);
-                    $path_imagen = $row['path_imagen'];
+                    $path_imagen = $row['url_img_usuario'];
 
                     $seccion_ventas = d($ventas, 'strong');
                     $seccion_nombre_vendedor = p($nombre_vendedor, 'text-underline text-uppercase fp7');

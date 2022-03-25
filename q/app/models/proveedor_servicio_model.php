@@ -68,7 +68,7 @@ class Proveedor_servicio_model extends CI_Model
     {
 
         $query_get = "SELECT 
-                      u.idusuario,
+                      u.id,
                       u.nombre,                   
                       u.apellido_paterno ,                 
                       u.apellido_materno,                                    
@@ -77,7 +77,7 @@ class Proveedor_servicio_model extends CI_Model
                       ps.*
                       
             FROM proveedor_servicio ps 
-                INNER JOIN usuario u ON ps.id_usuario = u.idusuario WHERE id = $id";
+                INNER JOIN usuario u ON ps.id_usuario = u.id WHERE id = $id";
 
         return $this->db->query($query_get)->result_array();
 
@@ -89,7 +89,7 @@ class Proveedor_servicio_model extends CI_Model
                         SET 
                             nombre = '".$nombre."',
                              tel_contacto = $tel
-                        WHERE idusuario = $id_usuario 
+                        WHERE id = $id_usuario 
                         LIMIT 1";
 
         return $this->db->query($query_update);

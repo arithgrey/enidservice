@@ -45,7 +45,7 @@ class Home extends CI_Controller
         $dias = $fecha->format("w");
         $hoy = now_enid();
         $fecha_inicio = add_date($hoy, -$dias);
-        $id_usuario = $this->app->get_session("idusuario");
+        $id_usuario = $this->app->get_session("id_usuario");
 
         if ($id_usuario > 0) {
 

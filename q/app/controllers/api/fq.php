@@ -59,7 +59,7 @@ class Fq extends REST_Controller
 		$response = false;
 		if (fx($param, "editar_respuesta,id_faq,respuesta,categoria,titulo,status")) {
 
-			$param["id_usuario"] = $this->app->get_session("idusuario");
+			$param["id_usuario"] = $this->app->get_session("id_usuario");
 			$editar_respuesta = $param["editar_respuesta"];
 			$id_faq = $param["id_faq"];
 			$respuesta = $param["respuesta"];

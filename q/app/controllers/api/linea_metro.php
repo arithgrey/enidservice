@@ -14,7 +14,7 @@ class Linea_metro extends REST_Controller
     function disponibilidad_GET()
     {
 
-        $id_usuario = $this->app->get_session("idusuario");
+        $id_usuario = $this->app->get_session("id_usuario");
         $response = false;
         if ($id_usuario > 0) {
             $q = [

@@ -52,8 +52,8 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($data["metricas"])) {
 
             $metricas = $data['metricas'];
-            $response = [];
-            $ids_comisionistas = array_column($data['comisionistas'], "idusuario");
+            $response = [];            
+            $ids_comisionistas = array_column($data['comisionistas'], "id");
 
             foreach ($metricas as $row) {
 

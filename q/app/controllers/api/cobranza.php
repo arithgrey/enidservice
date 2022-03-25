@@ -11,7 +11,7 @@ class Cobranza extends REST_Controller
         parent::__construct();
         $this->load->helper("cobranza");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function calcula_costo_envio_GET()
