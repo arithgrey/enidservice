@@ -766,6 +766,7 @@ class usuario_model extends CI_Model
         AND up.idperfil in ($in)";
 
         return $this->db->query($query_get)->result_array();
+        
 
     }
 
