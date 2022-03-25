@@ -131,7 +131,7 @@ class usuario_perfil extends REST_Controller
         if (es_data($usuarios)) {
 
             $q = [
-                'ids' => array_column($usuarios, "idusuario"),
+                'ids' => array_column($usuarios, "id"),
                 'requiere_auto' => $filtros['requiere_auto'],
                 'moto' => $filtros['moto'],
                 'bicicleta' => $filtros['bicicleta'],

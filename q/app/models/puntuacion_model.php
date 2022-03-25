@@ -68,7 +68,7 @@ class Puntuacion_model extends CI_Model
                         FROM 
                         puntuacion p 
                         INNER JOIN  
-                        usuario u ON p.id_usuario = u.idusuario 
+                        usuario u ON p.id_usuario = u.id 
                         WHERE 
                             id_servicio > 0 
                         AND  

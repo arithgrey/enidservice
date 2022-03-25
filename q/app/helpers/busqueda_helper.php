@@ -9,7 +9,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($usuarios as $row) {
 
-            $id_vendedor = $row['idusuario'];
+            $id_vendedor = $row['id'];
             if ($id_vendedor !== $id_seguidor) {
                 $nombre_vendedor = format_nombre($row);
                 $path_imagen = $row['url_img_usuario'];

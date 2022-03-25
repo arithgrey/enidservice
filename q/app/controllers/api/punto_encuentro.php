@@ -49,7 +49,7 @@ class Punto_encuentro extends REST_Controller
         $param +=  [
             "configurador" => 1,
             "q" => 1,
-            "id_usuario" => $this->app->get_session("idusuario")
+            "id_usuario" => $this->app->get_session("id_usuario")
         ];
 
         $this->response( $this->app->api("punto_encuentro/linea_metro", $param));

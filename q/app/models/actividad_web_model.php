@@ -563,7 +563,7 @@ class actividad_web_model extends CI_Model
     function comisionistas_usuarios($tabla_comisionistas)
     {
         return "SELECT 
-                u.idusuario,
+                u.id,
                 u.nombre,
                 u.email,
                 u.apellido_paterno,
@@ -572,21 +572,21 @@ class actividad_web_model extends CI_Model
                 u.fecha_ultima_venta
                 FROM usuario u 
                 INNER JOIN $tabla_comisionistas up 
-                ON up.idusuario =  u.idusuario
+                ON up.idusuario =  u.id
                 WHERE u.status = 1";
     }
 
     function repartidores_usuarios($tabla_reparto)
     {
         return "SELECT 
-                u.idusuario,
+                u.id,
                 u.nombre,
                 u.email,
                 u.apellido_paterno,
                 u.apellido_materno 
                 FROM usuario u 
                 INNER JOIN $tabla_reparto up 
-                ON up.idusuario =  u.idusuario
+                ON up.idusuario =  u.id
                 WHERE u.status = 1";
     }
 
@@ -686,9 +686,9 @@ class actividad_web_model extends CI_Model
 
         $query_get = "SELECT * FROM  $tabla_comisionistas  u 
                       LEFT OUTER JOIN $tabla_recibos 
-                      r ON u.idusuario =  r.id_usuario_referencia
+                      r ON u.id =  r.id_usuario_referencia
                       LEFT OUTER JOIN $tabla_recibos_proximos p 
-                      ON p.id_usuario_agenda = u.idusuario
+                      ON p.id_usuario_agenda = u.id
                       ORDER BY ha_vendido DESC ";
         return $this->db->query($query_get)->result_array();
     }
@@ -699,9 +699,9 @@ class actividad_web_model extends CI_Model
         $query_get = "SELECT * FROM " . $tabla_reparto . " u 
                       LEFT OUTER JOIN $tabla_recibos 
                       r 
-                      ON u.idusuario =  r.id_usuario_entrega
+                      ON u.id =  r.id_usuario_entrega
                       LEFT OUTER JOIN $tabla_recibos_proximos p
-                      ON u.idusuario =  p.id_repartidor";
+                      ON u.id =  p.id_repartidor";
         return $this->db->query($query_get)->result_array();
     }
 

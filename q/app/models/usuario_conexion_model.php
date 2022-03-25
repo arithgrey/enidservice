@@ -58,22 +58,22 @@ class Usuario_conexion_model extends CI_Model
                     u.nombre , 
                     u.apellido_paterno, 
                     u.apellido_materno , 
-                    u.idusuario,
+                    u.id,
                     u.idtipo_comisionista,
                     DATE(u.fecha_registro) fecha_registro 
                     FROM usuario_perfil up 
                     INNER JOIN
                     usuario u 
                     ON 
-                    u.idusuario = up.idusuario
+                    u.id = up.idusuario
                     WHERE 
-                    u.idusuario != $id_seguidor 
+                    u.id != $id_seguidor 
                     AND
                     up.idperfil IN (3,6)                     
                     AND 
                     u.status > 0                     
                     AND  
-                    u.idusuario NOT IN (SELECT id_usuario FROM usuario_conexion WHERE id_seguidor = $id_seguidor )
+                    u.id NOT IN (SELECT id_usuario FROM usuario_conexion WHERE id_seguidor = $id_seguidor )
                     ORDER BY u.fecha_registro DESC
                     LIMIT 6";
 
@@ -107,7 +107,7 @@ class Usuario_conexion_model extends CI_Model
        u.apellido_paterno,
        u.apellido_materno       
     FROM usuario_conexion uc      
-    INNER JOIN usuario u ON u.idusuario = uc.id_seguidor 
+    INNER JOIN usuario u ON u.id = uc.id_seguidor 
     WHERE uc.id_usuario =  $id_usuario 
     AND uc.status > 0";
 
@@ -124,7 +124,7 @@ class Usuario_conexion_model extends CI_Model
        u.apellido_paterno,
        u.apellido_materno
     FROM usuario_conexion uc
-    INNER JOIN usuario u ON u.idusuario = uc.id_usuario
+    INNER JOIN usuario u ON u.id = uc.id_usuario
     WHERE uc.id_seguidor =  $id_usuario
     AND uc.status > 0    ";
 
@@ -137,7 +137,7 @@ class Usuario_conexion_model extends CI_Model
 
         $query_get = "SELECT t.* FROM (
 SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* FROM usuario_conexion uc 
-INNER JOIN usuario u ON u.idusuario = uc.id_usuario 
+INNER JOIN usuario u ON u.id = uc.id_usuario 
 INNER JOIN proyecto_persona_forma_pago p ON uc.id_usuario = p.id_usuario_referencia
 WHERE uc.id_seguidor = $id_seguidor
 AND uc.status > 0 AND p.status NOT IN ( 10, 19 ) AND p.se_cancela < 1 AND p.cancela_cliente < 1 
@@ -148,7 +148,7 @@ SELECT s.* FROM (
 SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 
 FROM usuario u 
 INNER JOIN proyecto_persona_forma_pago p 
-ON u.idusuario = p.id_usuario_referencia
+ON u.id = p.id_usuario_referencia
 WHERE p.id_usuario_referencia = $id_seguidor 
  AND p.status NOT IN ( 10, 19 ) AND p.se_cancela < 1 AND p.cancela_cliente < 1 
 AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.saldo_cubierto > 0 
@@ -179,7 +179,7 @@ ORDER BY p.fecha_registro DESC  LIMIT 20) s";
     FROM usuario_conexion uc 
     INNER JOIN proyecto_persona_forma_pago p
 ON uc.id_usuario = p.id_usuario_referencia 
-    INNER JOIN usuario u ON u.idusuario = uc.id_usuario 
+    INNER JOIN usuario u ON u.id = uc.id_usuario 
 WHERE uc.id_seguidor =  $id_seguidor 
   AND uc.status > 0
 AND p.status NOT IN ( 10, 19 ) 
@@ -200,7 +200,7 @@ GROUP BY uc.id_usuario";
        u.apellido_paterno,
        u.apellido_materno 
 FROM  proyecto_persona_forma_pago p  
-INNER JOIN usuario u ON u.idusuario = p.id_usuario 
+INNER JOIN usuario u ON u.id = p.id_usuario 
  WHERE  
  p.id_usuario_referencia = $id_seguidor
 AND p.status NOT IN ( 10, 19 ) 

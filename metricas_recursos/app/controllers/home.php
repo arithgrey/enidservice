@@ -30,7 +30,7 @@ class Home extends CI_Controller
             $usuarios_comisionistas = $this->usuarios_comisionistas();
             $fecha_inicio = $params["fecha_inicio"];
             $fecha_termino = $params["fecha_termino"];
-            $ids = array_column($usuarios_comisionistas, "idusuario");
+            $ids = array_column($usuarios_comisionistas, "id");
             $ventas = $this->ventas_periodo($fecha_inicio, $fecha_termino, $ids);
             $data["usuarios_comisionistas"] =  $usuarios_comisionistas;
             $data["ventas"] =  $ventas;

@@ -1607,7 +1607,7 @@ if (!function_exists('invierte_date_time')) {
 
         $select_comisionistas = create_select(
             $data['comisionistas'], 'id_usuario_referencia', 'comisionista form-control',
-            'comisionista', 'nombre_usuario', 'idusuario', 0, 1, 0, '-');
+            'comisionista', 'nombre_usuario', 'id', 0, 1, 0, '-');
 
         $r[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas);
         $es_busqueda = keys_en_arreglo($param,

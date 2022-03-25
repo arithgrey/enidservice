@@ -32,7 +32,7 @@ class recordatorio extends REST_Controller
 				"id_orden_compra" => $param["orden_compra"],
 				"id_tipo" => $param["tipo"],
 				"descripcion" => $param["descripcion"],
-				"id_usuario" => $this->app->get_session("idusuario")
+				"id_usuario" => $this->app->get_session("id_usuario")
 
 			];
 			$response = $this->recordatorio_model->insert($params);

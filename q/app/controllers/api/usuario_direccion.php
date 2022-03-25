@@ -11,7 +11,7 @@ class usuario_direccion extends REST_Controller
         $this->load->helper("usuario_direccion");
         $this->load->model("usuario_direccion_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function index_PUT()

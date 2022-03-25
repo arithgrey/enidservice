@@ -20,8 +20,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function render($data)
-    {
-
+    {   
+        
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
         if (es_data($usuario_busqueda)) {
@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
                 $link
             );
 
-
+            
             $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
 
             if ($es_propietario) {
@@ -201,14 +201,14 @@ if (!function_exists('invierte_date_time')) {
 
     function seccion_estadisticas_compras($data)
     {
-
+        
         $response = [];
         $usuario_busqueda = $data["usuario_busqueda"];
         if (es_cliente($usuario_busqueda)) {
 
             $recibos_pago = $data["recibos_pago"];
             $recibos_sin_pago = $data["recibos_sin_pago"];
-
+            
             $total_recibos_pago = totales($recibos_pago);
             $total_recibos_sin_pago = totales($recibos_sin_pago);
             $total = $total_recibos_pago + $total_recibos_sin_pago;
@@ -250,7 +250,7 @@ if (!function_exists('invierte_date_time')) {
 
     function total_cancelaciones($recibos)
     {
-
+        
         $total = 0;
         foreach ($recibos as $row) {
 
@@ -291,6 +291,7 @@ if (!function_exists('invierte_date_time')) {
 
     function posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario)
     {
+        
         $response = [];
         for ($x = 1; $x <= 5; $x++) {
 
@@ -308,8 +309,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "class" => ' black' . " f2 estrella_" . $x,
                     "for" => "$id_input",
-                    "id" => $x,
-                    "title" => $x . " - " . $calificacion[$x]
+                    "id" => $x,                    
                 ]
             );
 

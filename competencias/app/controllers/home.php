@@ -27,6 +27,8 @@ class Home extends CI_Controller
 
         $comisionistas = $this->usuarios_comisionistas();
         $data['comisionistas'] = $comisionistas;
+        
+        
         $this->app->pagina($data, render($data), 1);
 
     }

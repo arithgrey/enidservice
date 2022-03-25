@@ -26,13 +26,10 @@ class Home extends CI_Controller
         if ($q !== 0) {
 
             $this->busqueda($data);
-
         } else {
 
             $this->encuesta($param, $data);
-
         }
-
     }
 
     private function encuesta($param, $data)
@@ -64,19 +61,18 @@ class Home extends CI_Controller
 
         if (es_cliente($usuario_busqueda)) {
 
-            $data["recibos_pago"] = $this->app->recibos_usuario($id_usuario, 1 );
-            $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0 );
+            
+            $data["recibos_pago"] = $this->app->recibos_usuario($id_usuario, 1);
+            $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0);
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
-
         }
 
         $this->app->pagina($data, render($data), 1);
-
     }
 
     private function articulo_busqueda($id_usuario)
     {
-        return $this->app->api("tag_arquetipo/index",["usuario" => $id_usuario]);
+        return $this->app->api("tag_arquetipo/index", ["usuario" => $id_usuario]);
     }
 
 
@@ -108,16 +104,13 @@ class Home extends CI_Controller
             $q['recibo'] = '';
 
             return $this->app->api("recibo/pedidos", $q);
-
         }
-
     }
 
     private function busqueda($data)
     {
 
         $this->app->pagina($data, render_busqueda($data), 1);
-
     }
 
     private function tipo_tipificciones($in_session, $data)
@@ -128,12 +121,12 @@ class Home extends CI_Controller
         $tipo = ($id_perfil > 1) ? $id_perfil : $in_session;
         $tipo_busqueda = ($in_session) ? $tipo : 0;
 
-        return $this->app->api("tipo_puntuacion/tipo/",
+        return $this->app->api(
+            "tipo_puntuacion/tipo/",
             [
                 "tipo" => $tipo_busqueda
             ]
         );
-
     }
 
     private function get_perfil_data($id_usuario)
@@ -146,9 +139,6 @@ class Home extends CI_Controller
     private function usuario_calificacion($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        $api = "puntuacion/general";
-        return $this->app->api($api, $q);
+        return $this->app->api("puntuacion/general", ["id_usuario" => $id_usuario]);
     }
-
 }

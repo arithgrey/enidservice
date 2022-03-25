@@ -228,7 +228,7 @@ class Recibo_model extends CI_Model
         if (strlen(trim($param["cliente"])) > 0) {
             $cliente = $param["cliente"];
             $sql = " INNER JOIN usuario u ON 
-                                    p.id_usuario =  u.idusuario 
+                                    p.id_usuario =  u.id 
                                     WHERE 
                                         ( u.nombre LIKE '%{$cliente}%' 
                                     OR
@@ -1306,7 +1306,7 @@ class Recibo_model extends CI_Model
                         t.nombre nombre_tipo_entrega
                         FROM proyecto_persona_forma_pago p 
                         INNER JOIN usuario u 
-                        ON p.id_usuario_entrega = u.idusuario  
+                        ON p.id_usuario_entrega = u.id  
                         INNER JOIN tipo_entrega t 
                         ON 
                         t.id =  p.tipo_entrega
@@ -1456,7 +1456,7 @@ class Recibo_model extends CI_Model
                         FROM 
                         proyecto_persona_forma_pago p 
                         INNER JOIN usuario u  
-                        ON p.id_usuario_referencia =  u.idusuario
+                        ON p.id_usuario_referencia =  u.id
                         INNER JOIN
                             producto_orden_compra po 
                         ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
@@ -1653,7 +1653,7 @@ class Recibo_model extends CI_Model
                             FROM  
                             proyecto_persona_forma_pago p 
                             INNER JOIN  usuario u  
-                            ON u.idusuario =  p.id_usuario 
+                            ON u.id =  p.id_usuario 
                             WHERE  
                             p.status != 19  
                             AND 

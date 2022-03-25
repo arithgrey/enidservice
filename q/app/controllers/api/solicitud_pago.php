@@ -26,7 +26,7 @@ class Solicitud_pago extends REST_Controller
 			if ($id_solicitud > 0) {
 
 				$param["id_solicitud"] = $id_solicitud;
-				$param["id_usuario"] = $this->app->get_session("idusuario");
+				$param["id_usuario"] = $this->app->get_session("id_usuario");
 				$response = $this->registra_solicitud_usuario($param);
 			}
 		}

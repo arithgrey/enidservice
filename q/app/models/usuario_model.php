@@ -12,14 +12,14 @@ class usuario_model extends CI_Model
     {
 
         $id_usuario = $param["id_usuario"];
-        $query_update = "UPDATE usuario SET ultima_publicacion = CURRENT_TIMESTAMP() WHERE idusuario =  $id_usuario";
+        $query_update = "UPDATE usuario SET ultima_publicacion = CURRENT_TIMESTAMP() WHERE id =  $id_usuario";
         return $this->db->query($query_update);
     }
 
     function calificacion_cancelacion_compra($param)
     {
         $id = $param["id"];
-        return $this->update(["num_cancelaciones" => "num_cancelaciones + 1"], ["idusuario" => $id]);
+        return $this->update(["num_cancelaciones" => "num_cancelaciones + 1"], ["id" => $id]);
     }
 
     function evalua_usuario_existente($param)
@@ -53,17 +53,17 @@ class usuario_model extends CI_Model
 
     function q_up($q, $q2, $id_usuario)
     {
-        return $this->update([$q => $q2], ["idusuario" => $id_usuario]);
+        return $this->update([$q => $q2], ["id" => $id_usuario]);
     }
 
     function q_get($params = [], $id)
     {
-        return $this->get($params, ["idusuario" => $id]);
+        return $this->get($params, ["id" => $id]);
     }
 
     function get_usuario_ventas()
     {
-        return $this->get(["idusuario"], ["email" => 'ventas@enidservices.com']);
+        return $this->get(["id"], ["email" => 'ventas@enidservices.com']);
     }
 
 
@@ -71,7 +71,7 @@ class usuario_model extends CI_Model
     {
 
         $query_get = "SELECT 
-                      u.idusuario,
+                      u.id,
                       u.nombre,                   
                       u.apellido_paterno ,                 
                       u.apellido_materno,                                    
@@ -95,9 +95,9 @@ class usuario_model extends CI_Model
                       up.idperfil
                       FROM usuario u
                       INNER JOIN usuario_perfil up 
-                        ON up.idusuario =  u.idusuario
+                        ON up.id =  u.id
                       WHERE 
-                      u.idusuario = '" . $param["id_usuario"] . "' 
+                      u.id = '" . $param["id_usuario"] . "' 
                       LIMIT 1";
 
         $result = $this->db->query($query_get);
@@ -110,7 +110,7 @@ class usuario_model extends CI_Model
 
         $query_update = "UPDATE usuario 
                         SET num_cancelaciones = num_cancelaciones + 1 
-                        WHERE idusuario = $id_usuario 
+                        WHERE id = $id_usuario 
                         LIMIT 1";
 
         return $this->db->query($query_update);
@@ -163,7 +163,7 @@ class usuario_model extends CI_Model
                         COUNT(0)num 
                     FROM usuario 
                     WHERE 
-                        idusuario =$id_usuario
+                        id =$id_usuario
                     AND 
                         tel_contacto 
                     IS NOT NULl LIMIT 1";
@@ -220,7 +220,7 @@ class usuario_model extends CI_Model
         $this->create_tmp_usuarios_perfil(0, $_num, $id_perfil, $id_empresa, $id_usuario);
         $query_get =
             "SELECT
-                    u.idusuario
+                    u.id
                     ,nombre
                     ,email 
                     ,apellido_paterno 
@@ -230,7 +230,7 @@ class usuario_model extends CI_Model
                     INNER JOIN 
                     tmp_clienes_$_num up 
                     ON 
-                    u.idusuario = up.idusuario
+                    u.id = up.id
                     AND u.status = 1";
 
         $result = $this->db->query($query_get);
@@ -249,16 +249,16 @@ class usuario_model extends CI_Model
 
             $query_create = "CREATE TABLE tmp_clienes_$_num AS 
                           SELECT 
-                            up.idusuario 
+                            up.id 
                             FROM 
                             usuario_perfil  up 
                             INNER JOIN usuario u 
                             ON 
-                            u.idusuario = up.idusuario
+                            u.id = up.id
                             WHERE 
                             u.idempresa = '" . $id_empresa . "' AND
                             up.idperfil=" . $perfil .
-                " OR up.idusuario ='" . $id_usuario . "'";
+                " OR up.id ='" . $id_usuario . "'";
             $this->db->query($query_create);
         }
     }
@@ -266,7 +266,7 @@ class usuario_model extends CI_Model
     function valida_pass($antes, $id_usuario)
     {
         $q = [
-            "idusuario" => $id_usuario,
+            "id" => $id_usuario,
             "password" => $antes
         ];
         return $this->get(["COUNT(0)num"], $q)[0]["num"];
@@ -287,12 +287,13 @@ class usuario_model extends CI_Model
         $fecha_termino = $param["fecha_termino"];
         $limit = $this->get_limit_usuarios($param);
         $query_get = "SELECT 
-                    idusuario id_usuario
+                    id id_usuario
                     ,nombre
                     ,email
                     ,apellido_paterno
                     ,apellido_materno
-                    , fecha_registro 
+                    ,fecha_registro 
+                    ,puntuacion                    
                     FROM usuario 
                     WHERE DATE(fecha_registro) 
                     BETWEEN 
@@ -319,7 +320,7 @@ class usuario_model extends CI_Model
         $limit = $this->get_limit_usuarios($param);
         $query_get =
             "SELECT 
-                    idusuario id_usuario
+                    id id_usuario
                     ,nombre
                     ,email
                     ,apellido_paterno
@@ -362,7 +363,7 @@ class usuario_model extends CI_Model
 
         return "   inner join usuario_perfil pu
                     on 
-                    pu.idusuario = u.idusuario
+                    pu.idusuario = u.id
                     AND 
                     pu.idperfil != 20                    
                     AND u.status = $status
@@ -427,7 +428,7 @@ class usuario_model extends CI_Model
 
         $query_get = "SELECT COUNT(0)num FROM 
                     usuario WHERE 
-                    idusuario ='" . $param["id_usuario"] . "' 
+                    id ='" . $param["id_usuario"] . "' 
                     and tel_contacto is null";
         $result = $this->db->query($query_get);
         return $result->result_array()[0]["num"];
@@ -482,7 +483,7 @@ class usuario_model extends CI_Model
             $query_create = "CREATE TABLE 
                             tmp_usuarios_enid_service_$_num AS 
                             SELECT      
-                              u.idusuario id_usuario,
+                              u.id id_usuario,
                               u.nombre,                   
                               u.apellido_paterno ,                 
                               u.apellido_materno,                                    
@@ -515,13 +516,13 @@ class usuario_model extends CI_Model
             OR u.apellido_paterno like '%" . $q . "%'
             OR u.apellido_materno like '%" . $q . "%'
             OR u.tel_contacto  like '%" . $q . "%'
-            OR u.idusuario  like '%" . $q . "%'
+            OR u.id  like '%" . $q . "%'
              " : " ";
 
         $limit = $this->get_limit_usuarios($param);
         return "inner join usuario_perfil pu
                     on 
-                    pu.idusuario = u.idusuario
+                    pu.idusuario = u.id
                     AND pu.idperfil != 20                    
                     AND u.status = $status
                      " . $extra . $extra_perfil .
@@ -560,9 +561,9 @@ class usuario_model extends CI_Model
 
         }
 
-        $this->update($params, ["idusuario" => $id_usuario]);
+        $this->update($params, ["id" => $id_usuario]);
 
-        $query_update = "UPDATE usuario SET ultima_modificacion = CURRENT_TIMESTAMP() WHERE idusuario = $id_usuario LIMIT 1 ";
+        $query_update = "UPDATE usuario SET ultima_modificacion = CURRENT_TIMESTAMP() WHERE id = $id_usuario LIMIT 1 ";
         return $this->db->query($query_update);
 
     }
@@ -624,14 +625,14 @@ class usuario_model extends CI_Model
         return $data_complete;
     }
 
-    function busqueda($idusuario, $email, $tel_contacto, $tel_contacto_alterno)
+    function busqueda($id, $email, $tel_contacto, $tel_contacto_alterno)
     {
         $where = "WHERE email = '" . $email . "'";
-        $extra_email = ($idusuario > 0) ? " OR idusuario = " . $idusuario : " ";
+        $extra_email = ($id > 0) ? " OR id = " . $id : " ";
         $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
         $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
 
-        $query_create = "SELECT idusuario FROM usuario " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
+        $query_create = "SELECT id FROM usuario " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
         return $this->db->query($query_create)->result_array();
     }
 
@@ -642,7 +643,7 @@ class usuario_model extends CI_Model
                   SET 
                   fecha_ultima_venta = CURRENT_TIMESTAMP () ,
                     ha_vendido =  ha_vendido + 1 
-                    WHERE idusuario = $id_usuario LIMIT 1";
+                    WHERE id = $id_usuario LIMIT 1";
         return $this->db->query($query);
 
     }
@@ -651,7 +652,7 @@ class usuario_model extends CI_Model
     {
 
         $query_get = 'SELECT 
-                idusuario id_usuario,
+                id id_usuario,
                 nombre,
                 apellido_paterno,
                 apellido_materno,
@@ -664,7 +665,7 @@ class usuario_model extends CI_Model
                 FROM 
                 usuario
                  WHERE 
-                 idusuario in (' . $in . ')';
+                 id in (' . $in . ')';
 
         return $this->db->query($query_get)->result_array();
     }
@@ -679,12 +680,12 @@ class usuario_model extends CI_Model
         if ($moto > 0) {
 
             $query_get = "SELECT 
-                idusuario id_usuario            
+                id id_usuario            
                 FROM usuario 
                 WHERE       
                 1 = 1
                 " . $extra_moto . "
-                AND  idusuario IN ( $ids ) 
+                AND  id IN ( $ids ) 
                 ORDER BY puntuacion DESC";
 
             $usuarios_moto = $this->db->query($query_get)->result_array();
@@ -695,12 +696,12 @@ class usuario_model extends CI_Model
         if ($bicicleta > 0) {
 
             $query_get = "SELECT 
-                idusuario id_usuario              
+                id id_usuario              
                 FROM usuario 
                 WHERE
                 1 = 1        
                 " . $extra_bicicleta . "
-                AND  idusuario IN ( $ids )";
+                AND  id IN ( $ids )";
 
             $usuarios_bicicleta = $this->db->query($query_get)->result_array();
             $response = $this->simplifica_usuarios($response, $usuarios_bicicleta);
@@ -708,12 +709,12 @@ class usuario_model extends CI_Model
 
         if ($pie > 0) {
             $query_get = "SELECT 
-                idusuario id_usuario           
+                id id_usuario           
                 FROM usuario 
                 WHERE    
                 1 = 1   
                 " . $extra_pie . "
-                AND  idusuario IN ( $ids )";
+                AND  id IN ( $ids )";
 
             $usuarios_pie = $this->db->query($query_get)->result_array();
             $response = $this->simplifica_usuarios($response, $usuarios_pie);
@@ -742,12 +743,12 @@ class usuario_model extends CI_Model
     {
 
         $query_get = "SELECT 
-                idusuario id_usuario         
+                id id_usuario         
                 FROM usuario 
                 WHERE
                  tiene_auto > 0 
                  AND 
-                idusuario in ($ids) 
+                id in ($ids) 
                 ORDER BY puntuacion DESC";
 
         $usuarios_auto = $this->db->query($query_get)->result_array();
@@ -758,11 +759,11 @@ class usuario_model extends CI_Model
     function empresa_perfil($id_empresa, $in)
     {
 
-        $query_get = "SELECT u.idusuario FROM usuario u 
-                        INNER JOIN usuario_perfil up  
-                        ON u.idusuario = up.idusuario  
-                        WHERE idempresa = $id_empresa 
-                        AND up.idperfil in ($in)";
+        $query_get = "SELECT u.id FROM usuario u 
+        INNER JOIN usuario_perfil up  
+        ON u.id = up.idusuario  
+        WHERE idempresa = $id_empresa 
+        AND up.idperfil in ($in)";
 
         return $this->db->query($query_get)->result_array();
 

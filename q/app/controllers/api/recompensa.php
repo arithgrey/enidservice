@@ -11,7 +11,7 @@ class Recompensa extends REST_Controller
         $this->load->model("recompensa_model");
         $this->load->helper("recompensas");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
 
     }
 

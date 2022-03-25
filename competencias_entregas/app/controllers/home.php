@@ -4,7 +4,6 @@
 
 class Home extends CI_Controller
 {
-    private $id_usuario;
 
     function __construct()
     {
@@ -25,6 +24,7 @@ class Home extends CI_Controller
         $data['metricas'] = $this->liberaciones_dia($tipo_top);
         $data['tipo_top'] = $tipo_top;
         $data['comisionistas'] = $this->usuarios_comisionistas();
+        
         $this->app->pagina($data, render($data), 1);
 
     }

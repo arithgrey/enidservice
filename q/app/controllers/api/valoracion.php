@@ -11,7 +11,7 @@ class Valoracion extends REST_Controller
         $this->load->model("valoracion_model");
         $this->load->helper("valoracion");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function num_GET()

@@ -12,7 +12,7 @@ class Archivo extends REST_Controller
         $this->load->library('upload');
         $this->load->library('image_lib');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function extension($str)

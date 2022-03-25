@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
             $ids_usuarios_ventas = [];
             foreach ($usuarios_comisionistas as $row) {
 
-                $id_usuario = $row["idusuario"];
+                $id_usuario = $row["id"];
                 $linea = [];
                 $linea[] = d(
                     a_enid(

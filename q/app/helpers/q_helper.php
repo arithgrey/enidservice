@@ -611,8 +611,8 @@ if (!function_exists('invierte_date_time')) {
     function format_miembros($data)
     {
 
+        
         $response[] = $data["paginacion"];
-
         $usuarios = $data["miembros"];
         foreach ($usuarios as $row) {
 
@@ -620,7 +620,7 @@ if (!function_exists('invierte_date_time')) {
             $persona = format_nombre($row);
             $puntuacion = $row['puntuacion'];
             $calificacion = crea_estrellas($puntuacion);
-            $es_provedor = $data["es_proveedor"];
+            $es_provedor = prm_def($data, "es_proveedor");
             $url_img_usuario = $row["url_img_usuario"];
             $fecha_registro = $row["fecha_registro"];
 
@@ -2182,7 +2182,8 @@ if (!function_exists('invierte_date_time')) {
         $a = 1;
         foreach ($estadisticas as $row) {
 
-            $idusuario = $row['idusuario'];
+            
+            $idusuario = $row['id'];
             $ids_usuarios[] = $idusuario;
             $id_usuario_referencia = $row['id_usuario_referencia'];
             if ($id_usuario_referencia > 0) {
@@ -2299,7 +2300,7 @@ if (!function_exists('invierte_date_time')) {
         $a = 1;
         foreach ($estadisticas as $row) {
 
-            $idusuario = $row['idusuario'];
+            $idusuario = $row['id'];
             $ids_usuarios[] = $idusuario;
             $id_usuario_entrega = $row['id_usuario_entrega'];
             $id_repartidor = $row['id_repartidor'];

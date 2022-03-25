@@ -11,7 +11,7 @@ class Lista_negra_encuentro extends REST_Controller
 
         $this->load->model("lista_negra_encuentro_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function index_GET()
@@ -31,7 +31,7 @@ class Lista_negra_encuentro extends REST_Controller
 
         $param =  $this->put();
         $response  = false;
-        $id_usuario =  $this->app->get_session("idusuario");
+        $id_usuario =  $this->app->get_session("id_usuario");
 
         if (fx($param, "id,lista_negra",1) && $id_usuario > 0 ){
 

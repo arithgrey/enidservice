@@ -129,7 +129,7 @@ class pregunta extends REST_Controller
         $response["in_session"] = 0;
         if ($this->app->is_logged_in()) {
             $response = false;
-            $param["usuario"] = $this->app->get_session("idusuario");
+            $param["usuario"] = $this->app->get_session("id_usuario");
             if (fx($param, 'pregunta,usuario,servicio')) {
 
                 $id_servicio = $param["servicio"];
@@ -184,7 +184,7 @@ class pregunta extends REST_Controller
     {
 
         $param = $this->get();
-        $param["id_usuario"] = $this->app->get_session("idusuario");
+        $param["id_usuario"] = $this->app->get_session("id_usuario");
         $data_complete["modalidad"] = $param["modalidad"];
         if ($param["modalidad"] > 0) {
 
@@ -229,13 +229,13 @@ class pregunta extends REST_Controller
     {
 
         $param = $this->get();
-        $param["id_usuario"] = $this->app->get_session("idusuario");
+        $param["id_usuario"] = $this->app->get_session("id_usuario");
 
         $response = "";
         if ($param["modalidad"] == 1) {
 
             if (prm_def($param, "id_usuario") > 0) {
-                $param["id_usuario"] = $this->app->get_session("idusuario");
+                $param["id_usuario"] = $this->app->get_session("id_usuario");
             }
 
             $response = [

@@ -10,7 +10,7 @@ class codigo_postal extends REST_Controller
         parent::__construct();
         $this->load->model("codigo_postal_model");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function direccion_usuario_POST()

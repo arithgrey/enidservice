@@ -89,7 +89,7 @@ class tareasmodel extends CI_Model
 
         $query_get = "SELECT 
                   t.*,
-                    u.idusuario  , 
+                    u.id  , 
                     u.nombre ,                   
                     u.apellido_paterno,
                     u.apellido_materno ,
@@ -98,7 +98,7 @@ class tareasmodel extends CI_Model
                     tarea t
                   LEFT OUTER JOIN 
                     usuario u 
-                  ON t.usuario_registro = u.idusuario 
+                  ON t.usuario_registro = u.id 
                   LEFT OUTER JOIN 
                     respuesta r 
                     ON 

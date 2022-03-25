@@ -10,7 +10,7 @@ class Tarea extends REST_Controller
         parent::__construct();
         $this->load->model("tareasmodel");
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("idusuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
     function estado_PUT()
@@ -43,7 +43,7 @@ class Tarea extends REST_Controller
         $param = $this->post();
         $response = false;
         if (fx($param, "tarea,id_ticket")) {
-            $param["id_usuario"] = $this->app->get_session("idusuario");
+            $param["id_usuario"] = $this->app->get_session("id_usuario");
 
             if ($param["id_usuario"] > 0) {
                 $params = [
