@@ -399,3 +399,15 @@ alter table cuenta_bancos rename column id_cuenta_pago to id;
 alter table bancos rename column id_banco to id;
 
 
+______________________
+
+ALTER TABLE usuario add name varchar(255);
+ALTER TABLE usuario add email_verified_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP();
+alter table usuario change password password varchar(255) NOT NULL;
+ALTER TABLE usuario add remember_token varchar(100);
+ALTER TABLE usuario add current_team_id bigint unsigned;
+ALTER TABLE usuario add profile_photo_path varchar(2048);
+
+RENAME TABLE users TO users_;
+
+RENAME TABLE usuario TO users;

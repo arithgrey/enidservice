@@ -132,8 +132,8 @@ class Home extends CI_Controller
     private function get_perfil_data($id_usuario)
     {
 
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("perfiles/data_usuario", $q);
+        
+        return $this->app->api("perfiles/data_usuario", ["id_usuario" => $id_usuario]);
     }
 
     private function usuario_calificacion($id_usuario)

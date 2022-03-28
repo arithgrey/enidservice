@@ -97,7 +97,7 @@ class tareasmodel extends CI_Model
                   FROM 
                     tarea t
                   LEFT OUTER JOIN 
-                    usuario u 
+                    users u 
                   ON t.usuario_registro = u.id 
                   LEFT OUTER JOIN 
                     respuesta r 

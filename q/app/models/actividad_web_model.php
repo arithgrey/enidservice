@@ -570,7 +570,7 @@ class actividad_web_model extends CI_Model
                 u.apellido_materno,
                 u.ha_vendido,
                 u.fecha_ultima_venta
-                FROM usuario u 
+                FROM users u 
                 INNER JOIN $tabla_comisionistas up 
                 ON up.idusuario =  u.id
                 WHERE u.status = 1";
@@ -584,7 +584,7 @@ class actividad_web_model extends CI_Model
                 u.email,
                 u.apellido_paterno,
                 u.apellido_materno 
-                FROM usuario u 
+                FROM users u 
                 INNER JOIN $tabla_reparto up 
                 ON up.idusuario =  u.id
                 WHERE u.status = 1";

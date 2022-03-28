@@ -66,7 +66,7 @@ class Respuesta_model extends CI_Model
                    FROM 
                     respuesta  r
                    INNER JOIN
-                    usuario u                    
+                    users u                    
                    ON 
                     r.id_usuario =  u.id                  
                    INNER JOIN usuario_perfil up 

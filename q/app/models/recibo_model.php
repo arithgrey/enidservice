@@ -227,7 +227,7 @@ class Recibo_model extends CI_Model
         $sql = " WHERE 1=1 ";
         if (strlen(trim($param["cliente"])) > 0) {
             $cliente = $param["cliente"];
-            $sql = " INNER JOIN usuario u ON 
+            $sql = " INNER JOIN users u ON 
                                     p.id_usuario =  u.id 
                                     WHERE 
                                         ( u.nombre LIKE '%{$cliente}%' 
@@ -575,11 +575,6 @@ class Recibo_model extends CI_Model
     function valida_recibo_por_pagar_usuario($param)
     {
 
-//        $propietarios = "(
-//        id_usuario =  '" . $param["id_usuario"] . "' OR
-//        id_usuario_referencia =  '" . $param["id_usuario"] . "' OR
-//        id_usuario_venta =  '" . $param["id_usuario"] . "'
-//        )  ";
 
         $query_get = "SELECT 
                     *
@@ -986,7 +981,7 @@ class Recibo_model extends CI_Model
         
         $casos = [
             3 => " 1 = 1 ",
-            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             20 => 'id_usuario = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
@@ -1038,7 +1033,7 @@ class Recibo_model extends CI_Model
 
         $casos = [
             3 => " 1 = 1 ",
-            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
@@ -1199,7 +1194,7 @@ class Recibo_model extends CI_Model
                         id_usuario 
                         NOT IN (SELECT id_usuario FROM tag_arquetipo GROUP BY id_usuario)
                         AND 
-                        id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)
+                        id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)
                         ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
@@ -1305,7 +1300,7 @@ class Recibo_model extends CI_Model
                         u.apellido_paterno apellido_repartidor   ,
                         t.nombre nombre_tipo_entrega
                         FROM proyecto_persona_forma_pago p 
-                        INNER JOIN usuario u 
+                        INNER JOIN users u 
                         ON p.id_usuario_entrega = u.id  
                         INNER JOIN tipo_entrega t 
                         ON 
@@ -1351,7 +1346,7 @@ class Recibo_model extends CI_Model
 
         $casos = [
             3 => '1 = 1',
-            4 => "id_usuario IN (SELECT id_usuario FROM usuario WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
@@ -1382,7 +1377,7 @@ class Recibo_model extends CI_Model
         $query_get = "SELECT  id_proyecto_persona_forma_pago 
                         FROM proyecto_persona_forma_pago 
                         WHERE  id_usuario  
-                        IN( SELECT idusuario FROM usuario WHERE tel_contacto  = '" . $telefono . "' )";
+                        IN( SELECT idusuario FROM users WHERE tel_contacto  = '" . $telefono . "' )";
 
         return $this->db->query($query_get)->result_array();
 
@@ -1455,7 +1450,7 @@ class Recibo_model extends CI_Model
                         po.id_orden_compra
                         FROM 
                         proyecto_persona_forma_pago p 
-                        INNER JOIN usuario u  
+                        INNER JOIN users u  
                         ON p.id_usuario_referencia =  u.id
                         INNER JOIN
                             producto_orden_compra po 
@@ -1652,7 +1647,7 @@ class Recibo_model extends CI_Model
                             u.apellido_materno                                                     
                             FROM  
                             proyecto_persona_forma_pago p 
-                            INNER JOIN  usuario u  
+                            INNER JOIN users u  
                             ON u.id =  p.id_usuario 
                             WHERE  
                             p.status != 19  
