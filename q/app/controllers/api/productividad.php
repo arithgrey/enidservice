@@ -348,12 +348,12 @@ class productividad extends REST_Controller
     function re_intentos_compras($data, $id_usuario, $response)
     {
 
-        $q = ["id_vendedor" => $id_usuario];
+        
 
         $pendientes = [];
         if (es_administrador_o_vendedor($data)) {
 
-            $pendientes = $this->app->api("recibo/reventa", $q);
+            $pendientes = $this->app->api("recibo/reventa", ["id_vendedor" => $id_usuario]);
 
         }
         $response['reintentos_compras'] = $pendientes;

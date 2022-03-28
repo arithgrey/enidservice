@@ -77,7 +77,7 @@ class Proveedor_servicio_model extends CI_Model
                       ps.*
                       
             FROM proveedor_servicio ps 
-                INNER JOIN usuario u ON ps.id_usuario = u.id WHERE id = $id";
+                INNER JOIN users u ON ps.id_usuario = u.id WHERE id = $id";
 
         return $this->db->query($query_get)->result_array();
 
@@ -85,7 +85,7 @@ class Proveedor_servicio_model extends CI_Model
     function set_proveedor($id_usuario,$nombre,$tel)
     {
 
-        $query_update = "UPDATE usuario 
+        $query_update = "UPDATE users 
                         SET 
                             nombre = '".$nombre."',
                              tel_contacto = $tel

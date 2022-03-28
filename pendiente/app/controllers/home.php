@@ -37,12 +37,9 @@ class Home extends CI_Controller
     private function comisiones_por_cobrar($id_usuario)
     {
 
-        $q = 
-        [
-            "id" =>  $id_usuario
-        ];
+        
 
-        return $this->app->api("recibo/comisiones_por_cobrar/", $q);
+        return $this->app->api("recibo/comisiones_por_cobrar/", ["id" =>  $id_usuario]);
     }   
     private function bancos()
     {

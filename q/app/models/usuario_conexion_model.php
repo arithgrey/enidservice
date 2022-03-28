@@ -84,7 +84,7 @@ class Usuario_conexion_model extends CI_Model
     function total_seguidores($id_seguidor)
     {
 
-        $query_get = "select count(0)total from usuario_conexion where id_usuario =  $id_seguidor";
+        $query_get = "select count(0)total FROM usuario_conexion where id_usuario =  $id_seguidor";
         return $this->db->query($query_get)->result_array();
 
     }
@@ -92,7 +92,7 @@ class Usuario_conexion_model extends CI_Model
     function total_siguiendo($id_seguidor)
     {
 
-        $query_get = "select count(0)total from usuario_conexion where id_seguidor =  $id_seguidor";
+        $query_get = "select count(0)total FROM usuario_conexion where id_seguidor =  $id_seguidor";
         return $this->db->query($query_get)->result_array();
 
     }
@@ -107,7 +107,7 @@ class Usuario_conexion_model extends CI_Model
        u.apellido_paterno,
        u.apellido_materno       
     FROM usuario_conexion uc      
-    INNER JOIN usuario u ON u.id = uc.id_seguidor 
+    INNER JOIN users u ON u.id = uc.id_seguidor 
     WHERE uc.id_usuario =  $id_usuario 
     AND uc.status > 0";
 
@@ -124,7 +124,7 @@ class Usuario_conexion_model extends CI_Model
        u.apellido_paterno,
        u.apellido_materno
     FROM usuario_conexion uc
-    INNER JOIN usuario u ON u.id = uc.id_usuario
+    INNER JOIN users u ON u.id = uc.id_usuario
     WHERE uc.id_seguidor =  $id_usuario
     AND uc.status > 0    ";
 
@@ -137,7 +137,7 @@ class Usuario_conexion_model extends CI_Model
 
         $query_get = "SELECT t.* FROM (
 SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* FROM usuario_conexion uc 
-INNER JOIN usuario u ON u.id = uc.id_usuario 
+INNER JOIN users u ON u.id = uc.id_usuario 
 INNER JOIN proyecto_persona_forma_pago p ON uc.id_usuario = p.id_usuario_referencia
 WHERE uc.id_seguidor = $id_seguidor
 AND uc.status > 0 AND p.status NOT IN ( 10, 19 ) AND p.se_cancela < 1 AND p.cancela_cliente < 1 
@@ -146,7 +146,7 @@ GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 
 UNION 
 SELECT s.* FROM (
 SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 
-FROM usuario u 
+FROM users u 
 INNER JOIN proyecto_persona_forma_pago p 
 ON u.id = p.id_usuario_referencia
 WHERE p.id_usuario_referencia = $id_seguidor 
@@ -179,7 +179,7 @@ ORDER BY p.fecha_registro DESC  LIMIT 20) s";
     FROM usuario_conexion uc 
     INNER JOIN proyecto_persona_forma_pago p
 ON uc.id_usuario = p.id_usuario_referencia 
-    INNER JOIN usuario u ON u.id = uc.id_usuario 
+    INNER JOIN users u ON u.id = uc.id_usuario 
 WHERE uc.id_seguidor =  $id_seguidor 
   AND uc.status > 0
 AND p.status NOT IN ( 10, 19 ) 
@@ -200,7 +200,7 @@ GROUP BY uc.id_usuario";
        u.apellido_paterno,
        u.apellido_materno 
 FROM  proyecto_persona_forma_pago p  
-INNER JOIN usuario u ON u.id = p.id_usuario 
+INNER JOIN users u ON u.id = p.id_usuario 
  WHERE  
  p.id_usuario_referencia = $id_seguidor
 AND p.status NOT IN ( 10, 19 ) 

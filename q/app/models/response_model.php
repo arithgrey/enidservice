@@ -37,16 +37,6 @@ class Response_model extends CI_Model
 		return $this->db->get("response")->result_array();
 	}
 
-	/*
-	function registra_respuesta($param){
-
-	  $id_usuario   =   $param["id_usuario"];    
-	  $id_pregunta  =   $param["pregunta"];    
-	  $respuesta    =   $param["respuesta"];
-	  $params       =   ["respuesta" => $respuesta,"id_pregunta" => $id_pregunta, "id_usuario" => $id_usuario];
-	  return $this->insert($params);
-	}
-	*/
 	function get_respuestas_pregunta($id_pregunta)
 	{
 
@@ -61,7 +51,7 @@ class Response_model extends CI_Model
                       FROM 
                         response r 
                         INNER JOIN  
-                        usuario u 
+                        users u 
                         ON r.id_usuario = u.id
                       WHERE 
                         r.id_pregunta =  '" . $id_pregunta . "'
