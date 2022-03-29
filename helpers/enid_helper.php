@@ -920,10 +920,10 @@ function format_nombre($usuario)
 {
 
     $response = "";
-    $es_usuario = (is_array($usuario) && array_key_exists('nombre', $usuario));
+    $es_usuario = (is_array($usuario) && array_key_exists('name', $usuario));
     if ($es_usuario) {
 
-        $nombre = $usuario['nombre'];
+        $nombre = $usuario['name'];
         $nombre = (is_null($nombre)) ? '' : $nombre;
         $apellido_paterno = $usuario['apellido_paterno'];
         $apellido_paterno = (is_null($apellido_paterno)) ? '' : $apellido_paterno;
@@ -934,7 +934,7 @@ function format_nombre($usuario)
     } else {
 
         if (es_data($usuario)) {
-            $nombre = pr($usuario, 'nombre');
+            $nombre = pr($usuario, 'name');
             $nombre = is_null($nombre) ? '' : $nombre;
             $apellido_paterno = pr($usuario, 'apellido_paterno');
             $apellido_paterno = is_null($apellido_paterno) ? '' : $apellido_paterno;

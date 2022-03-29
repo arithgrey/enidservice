@@ -69,7 +69,7 @@ class Proveedor_servicio_model extends CI_Model
 
         $query_get = "SELECT 
                       u.id,
-                      u.nombre,                   
+                      u.name,                   
                       u.apellido_paterno ,                 
                       u.apellido_materno,                                    
                       u.tel_contacto,

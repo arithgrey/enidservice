@@ -1278,7 +1278,7 @@ class recibo extends REST_Controller
             $resumen_pedido = $r["resumen_pedido"];
 
             $id_usuario = $u["id_usuario"];
-            $nombre = $u["nombre"];
+            $nombre = $u["name"];
             $a_paterno = ($u["apellido_paterno"] !== null) ? $u["apellido_paterno"] : "";
             $a_materno = ($u["apellido_materno"] !== null) ? $u["apellido_materno"] : "";
 

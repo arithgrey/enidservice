@@ -73,7 +73,7 @@ class usuario_model extends CI_Model
 
         $query_get = "SELECT 
                       u.id,
-                      u.nombre,                   
+                      u.name,                   
                       u.apellido_paterno ,                 
                       u.apellido_materno,                                    
                       u.email,
@@ -222,11 +222,11 @@ class usuario_model extends CI_Model
         $query_get =
             "SELECT
                     u.id
-                    ,nombre
+                    ,name
                     ,email 
                     ,apellido_paterno 
                     ,apellido_materno ,
-                    CONCAT(nombre,' ', apellido_paterno ) nombre_completo
+                    CONCAT(name,' ', apellido_paterno ) nombre_completo
                     FROM  users u
                     INNER JOIN 
                     tmp_clienes_$_num up 
@@ -289,7 +289,7 @@ class usuario_model extends CI_Model
         $limit = $this->get_limit_usuarios($param);
         $query_get = "SELECT 
                     id id_usuario
-                    ,nombre
+                    ,name
                     ,email
                     ,apellido_paterno
                     ,apellido_materno
@@ -322,7 +322,7 @@ class usuario_model extends CI_Model
         $query_get =
             "SELECT 
                     id id_usuario
-                    ,nombre
+                    ,name
                     ,email
                     ,apellido_paterno
                     ,apellido_materno
@@ -354,7 +354,7 @@ class usuario_model extends CI_Model
         $extra_perfil = ($es_perfil) ? _text_($departamento, $param["id_departamento"]) : "";
 
         $extra = (strlen($q) > 1) ? " WHERE 
-        u.nombre like '%" . $q . "%'
+        u.name like '%" . $q . "%'
         OR u.email like '%" . $q . "%'
         OR u.apellido_paterno like '%" . $q . "%'
         OR u.apellido_materno like '%" . $q . "%'
@@ -485,7 +485,7 @@ class usuario_model extends CI_Model
                             tmp_usuarios_enid_service_$_num AS 
                             SELECT      
                               u.id id_usuario,
-                              u.nombre,                   
+                              u.name,                   
                               u.apellido_paterno ,                 
                               u.apellido_materno,                                    
                               u.email,                              
@@ -512,7 +512,7 @@ class usuario_model extends CI_Model
 
         $extra = (strlen($q) > 1) ?
             " WHERE 
-            u.nombre like '%" . $q . "%'
+            u.name like '%" . $q . "%'
             OR u.email like '%" . $q . "%'
             OR u.apellido_paterno like '%" . $q . "%'
             OR u.apellido_materno like '%" . $q . "%'

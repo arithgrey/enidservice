@@ -178,16 +178,7 @@ class Home extends CI_Controller
         return $this->app->api("usuario_direccion/all/",
             ["id_usuario" => $id_usuario]);
     }
-
-    private function get_puntos_encuentro_usuario($id_usuario)
-    {
-
-        return $this->app->api(
-            "usuario_punto_encuentro/usuario/",
-            ["id_usuario" => $id_usuario]
-        );
-    }
-
+    
     private function load_view_seguimiento($data, $param)
     {                
         $id_orden_compra = $data["id_orden_compra"];

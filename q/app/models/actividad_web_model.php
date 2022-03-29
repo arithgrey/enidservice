@@ -564,7 +564,7 @@ class actividad_web_model extends CI_Model
     {
         return "SELECT 
                 u.id,
-                u.nombre,
+                u.name,
                 u.email,
                 u.apellido_paterno,
                 u.apellido_materno,
@@ -580,7 +580,7 @@ class actividad_web_model extends CI_Model
     {
         return "SELECT 
                 u.id,
-                u.nombre,
+                u.name,
                 u.email,
                 u.apellido_paterno,
                 u.apellido_materno 

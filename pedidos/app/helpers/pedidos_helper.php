@@ -1081,7 +1081,7 @@ if (!function_exists('invierte_date_time')) {
             $usuario = $usuario[0];
 
             $vendedor = _text_('cliente',
-                $usuario['nombre'],
+                $usuario['name'],
                 $usuario['apellido_paterno'],
                 $usuario['apellido_materno']
             );
@@ -3988,7 +3988,7 @@ if (!function_exists('invierte_date_time')) {
             $form[] = input_frm('col-sm-12 mt-5 p-0', 'Nombre',
                 [
                     "name" => "nombre",
-                    "value" => $usuario["nombre"],
+                    "value" => $usuario["name"],
                     "type" => "text",
                     "required" => "true",
                     "class" => 'nombre_cliente',

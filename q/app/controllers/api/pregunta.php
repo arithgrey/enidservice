@@ -73,7 +73,7 @@ class pregunta extends REST_Controller
                 if (es_data($usuario) > 0) {
 
                     $cliente = $usuario[0];
-                    $nombre = strtoupper($cliente["nombre"]." ".$cliente["apellido_paterno"]);
+                    $nombre = strtoupper($cliente["name"]." ".$cliente["apellido_paterno"]);
                     $sender = get_format_respuesta_cliente($cliente["email"], $nombre,
                             $pregunta["id_servicio"]);
                     $response = $this->app->send_email($sender, 1);
@@ -99,7 +99,7 @@ class pregunta extends REST_Controller
                 if (es_data($usuario) > 0) {
 
                     $cliente = $usuario[0];
-                    $nombre = strtoupper($cliente["nombre"]." ".$cliente["apellido_paterno"]);
+                    $nombre = strtoupper($cliente["name"]." ".$cliente["apellido_paterno"]);
                     $sender = frm_respuesta_vendedor($cliente["email"], $nombre,
                             $pregunta["id_servicio"]);
                     $response = $this->app->send_email($sender, 1);
