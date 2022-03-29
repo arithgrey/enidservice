@@ -55,7 +55,7 @@ class Usuario_conexion_model extends CI_Model
     {
 
         $query_get = "SELECT 
-                    u.nombre , 
+                    u.name , 
                     u.apellido_paterno, 
                     u.apellido_materno , 
                     u.id,
@@ -63,7 +63,7 @@ class Usuario_conexion_model extends CI_Model
                     DATE(u.fecha_registro) fecha_registro 
                     FROM usuario_perfil up 
                     INNER JOIN
-                    usuario u 
+                    users u 
                     ON 
                     u.id = up.idusuario
                     WHERE 
@@ -103,7 +103,7 @@ class Usuario_conexion_model extends CI_Model
 
         $query_get = "SELECT 
        uc.*,        
-       u.nombre, 
+       u.name, 
        u.apellido_paterno,
        u.apellido_materno       
     FROM usuario_conexion uc      
@@ -120,7 +120,7 @@ class Usuario_conexion_model extends CI_Model
 
         $query_get = "SELECT
        uc.*,
-       u.nombre,
+       u.name,
        u.apellido_paterno,
        u.apellido_materno
     FROM usuario_conexion uc
@@ -136,7 +136,7 @@ class Usuario_conexion_model extends CI_Model
     {
 
         $query_get = "SELECT t.* FROM (
-SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* FROM usuario_conexion uc 
+SELECT u.name, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* FROM usuario_conexion uc 
 INNER JOIN users u ON u.id = uc.id_usuario 
 INNER JOIN proyecto_persona_forma_pago p ON uc.id_usuario = p.id_usuario_referencia
 WHERE uc.id_seguidor = $id_seguidor
@@ -145,7 +145,7 @@ AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.sal
 GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 200) t
 UNION 
 SELECT s.* FROM (
-SELECT u.nombre, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 
+SELECT u.name, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 
 FROM users u 
 INNER JOIN proyecto_persona_forma_pago p 
 ON u.id = p.id_usuario_referencia
@@ -173,7 +173,7 @@ ORDER BY p.fecha_registro DESC  LIMIT 20) s";
         $query_get = "SELECT 
        uc.*, 
        SUM(p.num_ciclos_contratados)ventas,
-       u.nombre, 
+       u.name, 
        u.apellido_paterno,
        u.apellido_materno       
     FROM usuario_conexion uc 
@@ -196,7 +196,7 @@ GROUP BY uc.id_usuario";
 
         $query_get = "SELECT  
        SUM(p.num_ciclos_contratados)ventas,
-       u.nombre, 
+       u.name, 
        u.apellido_paterno,
        u.apellido_materno 
 FROM  proyecto_persona_forma_pago p  

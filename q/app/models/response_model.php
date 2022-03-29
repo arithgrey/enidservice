@@ -46,7 +46,7 @@ class Response_model extends CI_Model
                       ,r.fecha_registro
                       ,r.id_usuario    
                       ,r. id_pregunta
-                      ,u.nombre 
+                      ,u.name 
                       ,u.apellido_paterno
                       FROM 
                         response r 

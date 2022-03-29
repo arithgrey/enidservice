@@ -230,7 +230,7 @@ class Recibo_model extends CI_Model
             $sql = " INNER JOIN users u ON 
                                     p.id_usuario =  u.id 
                                     WHERE 
-                                        ( u.nombre LIKE '%{$cliente}%' 
+                                        ( u.name LIKE '%{$cliente}%' 
                                     OR
                                         u.apellido_paterno LIKE '%{$cliente}%'
                                     OR
@@ -1296,7 +1296,7 @@ class Recibo_model extends CI_Model
                         p.id_usuario_entrega , 
                         p.monto_a_pagar ,
                         p.costo_envio_cliente, 
-                        u.nombre nombre_repartidor , 
+                        u.name nombre_repartidor , 
                         u.apellido_paterno apellido_repartidor   ,
                         t.nombre nombre_tipo_entrega
                         FROM proyecto_persona_forma_pago p 
@@ -1444,7 +1444,7 @@ class Recibo_model extends CI_Model
                         p.id_usuario_referencia, 
                         p.comision_venta, 
                         p.id_usuario_referencia ,
-                        u.nombre,
+                        u.name,
                         u.apellido_paterno,
                         u.apellido_materno,
                         po.id_orden_compra
@@ -1642,7 +1642,7 @@ class Recibo_model extends CI_Model
                             p.id_usuario,                             
                             u.tel_contacto, 
                             u.email,
-                            u.nombre,
+                            u.name,
                             u.apellido_paterno,
                             u.apellido_materno                                                     
                             FROM  

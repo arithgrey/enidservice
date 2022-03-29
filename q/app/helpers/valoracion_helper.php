@@ -82,7 +82,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($usuario)) {
 
             $u = $usuario[0];
-            $nombre = $u["nombre"];
+            $nombre = $u["name"];
             $email = $u["email"];
             $asunto = "HOLA {$nombre} UN NUEVO CLIENTE ESTÁ INTERESADO EN UNO DE TUS ARTÍCULOS";
             $text = "Que tal {$nombre}  un nuevo cliente dejó una reseña sobre uno de tus artículos 

@@ -220,7 +220,7 @@
         $response[] = _titulo("tu cuenta");
         $response[] = d(format_user($usuario, 1), 'mt-5');
         $response[] = d(get_campo($usuario, "email"));
-        $response[] = d(get_campo($usuario, "nombre"));
+        $response[] = d(get_campo($usuario, "name"));
         $response[] = d(get_campo($usuario, "apellido_paterno"));
         $response[] = d(get_campo($usuario, "apellido_materno"));
         $response[] = d(get_campo($usuario, "tel_contacto"));

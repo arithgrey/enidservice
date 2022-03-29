@@ -43,7 +43,7 @@ class cuenta_banco extends REST_Controller
 
 				$params = [
 					"propietario_tarjeta" => $propietario_tarjeta,
-					"id_usuario" => $id_usuario,
+					"user_id" => $id_usuario,
 					"numero_tarjeta" => $numero_tarjeta,
 					"id_banco" => $banco,					
 				];

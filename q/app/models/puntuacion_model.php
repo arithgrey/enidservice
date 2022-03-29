@@ -61,7 +61,7 @@ class Puntuacion_model extends CI_Model
         $query_get = "SELECT 
                         AVG(p.cantidad)promedio , 
                         p.id_usuario , 
-                        u.nombre, 
+                        u.name, 
                         u.apellido_paterno , 
                         u.apellido_materno ,  
                         u.puntuacion   

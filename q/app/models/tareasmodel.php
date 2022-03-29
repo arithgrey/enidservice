@@ -90,7 +90,7 @@ class tareasmodel extends CI_Model
         $query_get = "SELECT 
                   t.*,
                     u.id  , 
-                    u.nombre ,                   
+                    u.name ,                   
                     u.apellido_paterno,
                     u.apellido_materno ,
                     COUNT(r.id_respuesta) num_comentarios                  

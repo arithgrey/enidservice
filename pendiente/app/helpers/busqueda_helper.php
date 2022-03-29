@@ -118,9 +118,9 @@ if (!function_exists('invierte_date_time')) {
         
         $bancos = $data["bancos"];        
         $cuenta_pago = $data["cuenta_pago"];
-
+        
         $propietario_tarjeta = pr($cuenta_pago, "propietario_tarjeta");
-        $id_cuenta_banco = pr($cuenta_pago, "id_cuenta_banco");
+        $id_cuenta_banco = pr($cuenta_pago, "id");
         $numero_tarjeta = pr($cuenta_pago, "numero_tarjeta");
         $id_banco = pr($cuenta_pago, "id");
 

@@ -26,7 +26,7 @@ class Sess extends REST_Controller
 
                     $usuario = $usuario[0];
                     $id_usuario = $usuario["id"];
-                    $nombre = $usuario["nombre"];
+                    $nombre = $usuario["name"];
                     $email = $usuario["email"];
                     $id_empresa = $usuario["idempresa"];
 

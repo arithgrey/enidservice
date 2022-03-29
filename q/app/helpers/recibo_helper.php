@@ -332,7 +332,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = a_enid("Déjanos tus comentarios aquí!", $url);
             $sender = get_request_email(
                 $usuario["email"],
-                "Hola {$usuario["nombre"]} ¡Tu paquete ya se entregó! "
+                "Hola {$usuario["name"]} ¡Tu paquete ya se entregó! "
                 , append($r)
             );
 

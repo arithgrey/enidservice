@@ -167,7 +167,7 @@ if (!function_exists('invierte_date_time')) {
 
             $usuario = $usuario[0];
             $nombre_usuario =
-                $usuario["nombre"] . " " .
+                $usuario["name"] . " " .
                 $usuario["apellido_paterno"] .
                 $usuario["apellido_materno"] . " -  " .
                 $usuario["email"];

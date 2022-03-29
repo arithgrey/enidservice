@@ -59,7 +59,7 @@ class Respuesta_model extends CI_Model
 
 		$query_get = "SELECT 
                      r.*, 
-                     u.nombre , 
+                     u.name , 
                      u.apellido_paterno ,
                      u.apellido_materno ,
                      up.idperfil

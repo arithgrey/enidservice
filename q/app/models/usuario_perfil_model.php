@@ -52,7 +52,7 @@ class Usuario_perfil_model extends CI_Model
     function comisionistas()
     {
         $query_get = 'SELECT 
-                        u.nombre , 
+                        u.name , 
                         u.apellido_paterno, 
                         u.apellido_materno , 
                         u.id,
@@ -68,7 +68,7 @@ class Usuario_perfil_model extends CI_Model
     function comisionistas_periodo($fecha_inicio, $fecha_termino)
     {
         $query_get = _text_("SELECT 
-                        u.nombre , 
+                        u.name , 
                         u.apellido_paterno, 
                         u.apellido_materno , 
                         u.id,

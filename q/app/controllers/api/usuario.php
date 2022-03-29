@@ -189,7 +189,7 @@ class usuario extends REST_Controller
             $contenido[] = create_select_selected(
                 $usuarios,
                 'id',
-                'nombre',
+                'name',
                 $id_usuario,
                 'usuario',
                 'reparto form-control'
@@ -260,7 +260,7 @@ class usuario extends REST_Controller
 
             $params = [
                 "id id_usuario",
-                "nombre",
+                "name",
                 "apellido_paterno",
                 "apellido_materno",
                 "email",
@@ -285,7 +285,7 @@ class usuario extends REST_Controller
         if (fx($param, "id_usuario")) {
             $params = [
                 "id id_usuario",
-                "nombre",
+                "name",
                 "apellido_paterno",
                 "apellido_materno",
                 "email",
@@ -399,7 +399,7 @@ class usuario extends REST_Controller
         if (fx($param, "nombre") && $id_usuario > 0) {
 
             $response = $this->usuario_model->q_up(
-                "nombre",
+                "name",
                 $param["nombre"],
                 $id_usuario
             );
@@ -510,7 +510,7 @@ class usuario extends REST_Controller
         $response = [];
         if (fx($param, "email,secret")) {
 
-            $params = ["id", "nombre", "email", "fecha_registro", "idempresa"];
+            $params = ["id", "name", "email", "fecha_registro", "idempresa"];
             $secret = $param["secret"];
             $params_where = [
                 "email" => $param["email"],
@@ -607,7 +607,7 @@ class usuario extends REST_Controller
                 "idempresa" => 1,
                 "id_departamento" => 11,
                 "password" => $password,
-                "nombre" => $nombre,
+                "name" => $nombre,
                 "id_usuario_referencia" => 180,
                 "tel_contacto" => $telefono
             ];
@@ -647,7 +647,7 @@ class usuario extends REST_Controller
                     "idempresa" => 1,
                     "id_departamento" => 9,
                     "password" => $param["password"],
-                    "nombre" => $param["nombre"],
+                    "name" => $param["nombre"],
                     "id_usuario_referencia" => 180,
                     'tiene_auto' => prm_def($param, 'tiene_auto'),
                     'tiene_moto' => prm_def($param, 'tiene_moto'),
@@ -745,7 +745,7 @@ class usuario extends REST_Controller
             "idempresa" => 1,
             "id_departamento" => 9,
             "password" => $param["password"],
-            "nombre" => $param["nombre"],
+            "name" => $param["nombre"],
             "id_usuario_referencia" => 180,
             "tel_contacto" => $param["whatsapp"]
         ];
@@ -952,7 +952,7 @@ class usuario extends REST_Controller
             "idempresa" => '1',
             "id_departamento" => 9,
             "password" => $param["password"],
-            "nombre" => $param["nombre"],
+            "name" => $param["nombre"],
             "tel_contacto" => $param["telefono"],
             "id_usuario_referencia" => prm_def($param, "usuario_referencia", 1)
         ];

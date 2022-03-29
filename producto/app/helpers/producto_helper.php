@@ -518,7 +518,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_data($usuario)) {
 
-            $nombre = $usuario[0]["nombre"];
+            $nombre = $usuario[0]["name"];
 
             $response[] = a_enid(
                 add_text("POR ", u($nombre)),
