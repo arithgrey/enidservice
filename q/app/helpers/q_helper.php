@@ -1752,6 +1752,7 @@ if (!function_exists('invierte_date_time')) {
         $total = d($totales_recibo, "text-left black");
         $id_usuario_entrega = $row['id_usuario_entrega'];
 
+        
         $usuario_entrega = ($es_cliente) ? [] : $row['usuario_entrega'];
         $ubicacion = $row['ubicacion'];
         $es_contra_entrega_domicilio_sin_direccion = $row["es_contra_entrega_domicilio_sin_direccion"];

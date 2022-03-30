@@ -54,10 +54,13 @@ class recibo extends REST_Controller
             $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
-            
-            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);            
+
+            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
+
             $idusuarios_empresa = array_column($usuarios_empresa, 'id');
             $idusuarios_empresa = array_unique($idusuarios_empresa);
+
+
 
             $response =
                 $this->recibo_model->pendientes_sin_cierre(
@@ -66,8 +69,14 @@ class recibo extends REST_Controller
                     $id_empresa,
                     $idusuarios_empresa
                 );
+
+
+
             $recibos = $this->horarios_contra_entrega_pedidos($response);
-            $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
+
+            $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);            
+
+
             if (prm_def($param, 'domicilios') > 0) {
 
                 $recibos['recibos'] = $response;
@@ -306,8 +315,10 @@ class recibo extends REST_Controller
         $ids_usuarios = array_unique(array_column($recibos, 'id_usuario_referencia'));
         $data_complete = [];
         $a = 0;
-
+        
+        
         $usuarios = $this->usuarios_q($ids_usuarios);
+        
         foreach ($recibos as $row) {
 
             $data_complete[$a] = $row;
@@ -334,8 +345,7 @@ class recibo extends REST_Controller
     function usuarios_q($ids_usuarios)
     {
 
-        $q["ids"] = $ids_usuarios;
-        return $this->app->api("usuario/ids/", $q);
+        return $this->app->api("usuario/ids", ["ids" => $ids_usuarios]);
     }
 
     function domicilios_contra_entrega_pedidos(
@@ -971,7 +981,7 @@ class recibo extends REST_Controller
                         'id_usuario' => $id_usuario_entrega,
                         'usuario_entrega' => $usuario
                     ];
-                $response[$a]['usuario_entrega'] = $busqueda_usuario['usuario_entrega'];
+                $response[$a]['usuario_entrega'] = $usuario;
                 $usuarios[] = $busqueda_usuario;
             } else {
                 $usuario = search_bi_array($usuarios, 'id_usuario', $id_usuario_entrega, 'usuario_entrega');
@@ -1479,17 +1489,17 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         $es_usuario = ($this->id_usuario > 0 || fx($param, 'id_usuario'));
-        
+
         if ($this->id_usuario > 0) {
             $param['id_usuario'] = $this->id_usuario;
         }
 
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
-            
-            
+
+
             $param['es_administrador'] = prm_def($param, 'es_administrador');
             $response = $this->busqueda_pedidos($param);
-            
+
             switch ($param["v"]) {
 
                 case 1:
@@ -2371,11 +2381,10 @@ class recibo extends REST_Controller
 
             $id_empresa = $param['id_empresa'];
             $data = $this->app->session();
-            $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1, $data);            
-            $ids_usuarios = array_column($usuarios, 'id');        
-            $response = $this->recibo_model->comisiones_por_pago($id_empresa, $ids_usuarios);        
+            $usuarios = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
+            $ids_usuarios = array_column($usuarios, 'id');
+            $response = $this->recibo_model->comisiones_por_pago($id_empresa, $ids_usuarios);
             $response = $this->agrega_usuario_compra($response);
-            
         }
 
         $this->response($response);
@@ -2389,7 +2398,7 @@ class recibo extends REST_Controller
             'grupo' => $grupo,
             'puede_repartir' => $data['restricciones']["puede_repartir"]
         ];
-        
+
 
         return $this->app->api("usuario/empresa_perfil", $q);
     }

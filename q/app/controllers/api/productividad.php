@@ -34,7 +34,7 @@ class productividad extends REST_Controller
         $response["info_notificaciones"]["numero_telefonico"] = 1;
         
         $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa);
-        
+                
         $response += [
             "id_usuario" => $id_usuario,
             "preguntas" => [],
@@ -44,9 +44,13 @@ class productividad extends REST_Controller
             "clientes_sin_tags_arquetipos" => [],
             "tareas" => $this->get_tareas($data, $id_usuario)
         ];
+        
+        
 
         $response = $this->re_intentos_compras($data, $id_usuario, $response);
+        
         $response = $this->recuperacion($data, $id_usuario, $response);
+        
         switch ($id_perfil) {
 
             case (3):
@@ -145,11 +149,13 @@ class productividad extends REST_Controller
         return $this->app->api("objetivos/perfil", $q);
     }
 
+    /*
     private function valida_producto_anunciado($q)
     {
 
         return $this->app->api("servicio/num_anuncios", $q);
     }
+    */
 
     private function verifica_direccion_registrada_usuario($q)
     {
@@ -244,8 +250,7 @@ class productividad extends REST_Controller
                 "id_empresa" => $id_empresa,
                 "domicilios" => 1
             ]
-        );
-        
+        );        
         $usuarios = $this->usuarios_en_lista_negra($usuarios);                        
         return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
 

@@ -26,16 +26,10 @@ class Competencias extends REST_Controller
 
         $param = $this->get();
         $tipo = prm_def($param, 'tipo_top');
-        $ventas_dia = $this->ventas_dia_semana($tipo);
-
-        
-        
+        $ventas_dia = $this->ventas_dia_semana($tipo);    
         $response = $this->repartidor($ventas_dia);
         $this->response($response);
-        /*
-        
-        $this->response($response);
-        */
+
     }
 
     private function formato_fecha_pedidos($tipo)
@@ -143,8 +137,7 @@ class Competencias extends REST_Controller
                 $response[] = [
                     'id_vendedor' => $id_reparto,
                     'ventas' => $valor,
-                    'nombre_vendedor' => format_nombre($repartidor),
-                    'id_usuario_entrega' => $id_reparto
+                    'nombre_vendedor' => format_nombre($repartidor),                    
                     
                 ];
                 
