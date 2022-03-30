@@ -412,7 +412,7 @@ class usuario_model extends CI_Model
     function get_usuarios_sin_publicar_articulos($param)
     {
         $query_get = "SELECT
-                    nombre , 
+                    name , 
                     email 
                     FROM users 
                     WHERE status = 1 
@@ -535,7 +535,7 @@ class usuario_model extends CI_Model
 
         $id_usuario = $param["id_usuario"];
         $params = [
-            "nombre" => $param["nombre"],
+            "name" => $param["nombre"],
             "email" => $param["email"],
             "apellido_paterno" => $param["apellido_paterno"],
             "apellido_materno" => $param["apellido_materno"],
@@ -574,7 +574,7 @@ class usuario_model extends CI_Model
 
 
         $params = [
-            "nombre" => $param["nombre"],
+            "name" => $param["nombre"],
             "email" => $param["email"],
             "idempresa" => '1',
             "apellido_paterno" => $param["apellido_paterno"],
@@ -611,7 +611,7 @@ class usuario_model extends CI_Model
                 "idempresa" => '1',
                 "id_departamento" => 8,
                 "password" => $param["password"],
-                "nombre" => $param["nombre"],
+                "name" => $param["nombre"],
                 "tel_contacto" => $param["telefono"]
             ];
 
@@ -654,7 +654,7 @@ class usuario_model extends CI_Model
 
         $query_get = 'SELECT 
                 id id_usuario,
-                nombre,
+                name,
                 apellido_paterno,
                 apellido_materno,
                 email,
