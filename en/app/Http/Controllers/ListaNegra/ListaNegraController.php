@@ -22,6 +22,9 @@ class ListaNegraController extends Controller
         ->select('lista_negras.*')
         ->with('user','motivo')
         ->where('users.name', 'LIKE', "%$q%")
+        ->orwhere('users.facebook', 'LIKE', "%$q%")
+        ->orwhere('users.tel_contacto', 'LIKE', "%$q%")
+        ->orwhere('users.email', 'LIKE', "%$q%")
         ->paginate(15);
 
         return Inertia::render("ListaNegra/Listado", [
