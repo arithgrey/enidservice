@@ -1272,7 +1272,7 @@ class usuario extends REST_Controller
             $email = $param["email"];
             $tel_contacto = $param["tel_contacto"];
             $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto);
-
+            
         }
         $this->response($response);
     }

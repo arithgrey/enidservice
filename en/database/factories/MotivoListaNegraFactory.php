@@ -6,15 +6,12 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MotivoListaNegraFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
+
     public function definition()
     {
         return [
-            //
+            'motivo' => $this->faker->sentence(),
+            'tipo' => rand(0, 1),
         ];
     }
 }

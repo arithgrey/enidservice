@@ -8,7 +8,7 @@ class lista_negra_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'lista_negra';
+        $this->tabla = 'lista_negras';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -66,7 +66,7 @@ class lista_negra_model extends CI_Model
     {
 
         $where = 'WHERE id_usuario IN ('. $ids .')';
-        $query_create = "SELECT id_usuario FROM lista_negra " . $where;
+        $query_create = "SELECT id_usuario FROM lista_negras " . $where;
         return $this->db->query($query_create)->result_array();
     }
 

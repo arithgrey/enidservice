@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\MotivoListaNegra;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ListaNegraFactory extends Factory
@@ -14,7 +16,8 @@ class ListaNegraFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_usuario' => User::factory(),
+            'id_motivo' => MotivoListaNegra::factory()
         ];
     }
 }

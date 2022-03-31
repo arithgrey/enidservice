@@ -81,6 +81,11 @@ class User extends Authenticatable
 
         return $this->hasMany(ProveedorServicio::class);
     }
+    public function listas_negras()
+    {
+
+        return $this->hasMany(ListaNegra::class);
+    }
     function preferencias()
     {
 
@@ -90,5 +95,4 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Empresa::class,  'id_empresa');
     }
-
 }

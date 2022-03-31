@@ -25,5 +25,11 @@ class UserTest extends TestCase
         $this->assertInstanceOf(Empresa::class, $user->empresa);
 
     }
+    public function test_tiene_muchas_listas_negras()
+    {
+        $user = new User;
+
+        $this->assertInstanceOf(Collection::class, $user->listas_negras);
+    }
 
 }

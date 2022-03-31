@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class lista_negra extends REST_Controller
@@ -33,15 +33,16 @@ class lista_negra extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,id_motivo")) {
 
+
             $id_usuario = $param['id_usuario'];
             $id_motivo = $param['id_motivo'];
             if ($id_motivo > 0) {
+
 
                 $params = [
                     "id_usuario" => $id_usuario,
                     "id_motivo" => $id_motivo
                 ];
-
             } else {
 
                 $q = [
@@ -54,15 +55,19 @@ class lista_negra extends REST_Controller
                     "id_motivo" => $id_motivo
                 ];
             }
-            $response = $this->lista_negra_model->insert($params, 1);
-            if ($response > 0) {
-                $this->usuario_lista_negra($id_usuario);
-                $response = $this->envia_lista_negra($param);
-            }
 
+
+            $response = $this->lista_negra_model->insert($params, 1);
+
+
+            if ($response > 0) {
+
+                $response = $this->usuario_lista_negra($id_usuario);
+                $response = $this->envia_lista_negra($param);
+                $this->response($response);
+            }
         }
         $this->response($response);
-
     }
 
     function index_GET()
@@ -73,10 +78,10 @@ class lista_negra extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $in = ["id_usuario" => $param['id_usuario']];
-            $response = $this->response($this->lista_negra_model->get([], $in, 100));
+            $usuario_lista_negra = $this->lista_negra_model->get([], $in, 100);
+            $response = $this->response($usuario_lista_negra);
         }
         $this->response($response);
-
     }
 
     function q_GET()
@@ -87,11 +92,9 @@ class lista_negra extends REST_Controller
         if (fx($param, "usuarios")) {
 
             $response = $this->lista_negra_model->q($param['usuarios']);
-
         }
 
         $this->response($response);
-
     }
 
     function registro_motivo_lista_negra($q)
@@ -125,6 +128,4 @@ class lista_negra extends REST_Controller
         ];
         return $this->app->api("recibo/status", $q, "json", "PUT");
     }
-
-
 }
