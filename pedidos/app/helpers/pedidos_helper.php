@@ -3987,7 +3987,7 @@ if (!function_exists('invierte_date_time')) {
 
             $form[] = input_frm('col-sm-12 mt-5 p-0', 'Nombre',
                 [
-                    "name" => "nombre",
+                    "name" => "name",
                     "value" => $usuario["name"],
                     "type" => "text",
                     "required" => "true",
