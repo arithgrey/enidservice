@@ -31,7 +31,7 @@ class usuario extends REST_Controller
     {
         $param = $this->put();
         $response = false;
-        if (fx($param, "nombre,apellido_paterno,apellido_materno,email,tel_contacto,id_usuario,sexo")) {
+        if (fx($param, "name,apellido_paterno,apellido_materno,email,tel_contacto,id_usuario,sexo")) {
 
 
             $id_usuario = $param["id_usuario"];
