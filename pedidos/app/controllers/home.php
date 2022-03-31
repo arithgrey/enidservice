@@ -548,14 +548,15 @@ class Home extends CI_Controller
         $es_venta_comisionada = ($id_usuario != $id_usuario_referencia && $this->id_usuario != $id_usuario_referencia);
         $usuario_comision = ($es_venta_comisionada) ? $this->get_usuario($id_usuario_referencia) : [];
         $es_lista_negra = $this->es_lista_negra($id_usuario);
+        
 
         $id_usuario_entrega = pr($productos_orden_compra, 'id_usuario_entrega');
-
         $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : $data['id_usuario'];
         $repartidor = $this->get_usuario($id_repartidor);
         $repartidor = $this->app->add_imgs_usuario($repartidor, $key = "id_usuario");
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
+        
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
@@ -653,55 +654,26 @@ class Home extends CI_Controller
     private function es_lista_negra($id_usuario)
     {
 
-        return $this->app->api("lista_negra/index/", ['id_usuario' => $id_usuario]);
-    }
-
-    private function cuentas_sin_recoleccion($q)
-    {
-
-        $q['v'] = 1;
-        return $this->app->api("recibo/reparto_recoleccion/", $q);
-
+        return $this->app->api("lista_negra/index", ['id_usuario' => $id_usuario]);
     }
 
     private function busqueda_lista_negra($usuario_compra)
     {
 
+        
         $response = [];
         if (es_data($usuario_compra)) {
 
             $q = [
-                'id' => pr($usuario_compra, 'id'),
+                'idusuario' => pr($usuario_compra, 'id_usuario'),
                 'email' => pr($usuario_compra, 'email'),
                 'tel_contacto' => pr($usuario_compra, 'tel_contacto'),
                 'tel_contacto_alterno' => pr($usuario_compra, 'tel_contacto_alterno')
             ];
-            $response = $this->app->api("usuario/lista_negra/", $q);
+            
+            $response = $this->app->api("usuario/lista_negra", $q);
         }
         return $response;
 
     }
-    /*
-    private function cupon($id_recibo, $servicio, $num_compras)
-    {
-
-        $response = [];
-        $cupon_primer_compra = pr($servicio, 'cupon_primer_compra');
-        if ($num_compras == 1 && $cupon_primer_compra > 0) {
-
-            $q = [
-                'id_recibo' => $id_recibo,
-                'valor' => $cupon_primer_compra,
-                'v' => 2,
-            ];
-
-            $response = $this->app->api("cupon/index/", $q, 'json', 'POST');
-
-        }
-
-        return $response;
-
-    }
-    */
-
 }

@@ -415,3 +415,7 @@ ________________________________
 
 update users set name = nombre;
 alter table users drop column nombre;
+______________________
+
+RENAME TABLE lista_negra TO lista_negras;
+RENAME TABLE motivo_lista_negra TO motivo_lista_negras;

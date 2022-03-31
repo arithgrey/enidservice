@@ -7,7 +7,6 @@ use App\Http\Controllers\Valoracion\PageController;
 
 
 
-
 Route::get('/valoraciones/{id}', [PageController::class, 'encuesta'])
     ->where('id', '[0-9]+');
 
@@ -29,9 +28,10 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController');
 
+Route::resource('lista-negra', 'ListaNegra\ListaNegraController');
+
 
 Route::resource('banco', 'Banco\BancoController')
     ->middleware('auth');
-
 
 Route::resource('cuenta-banco', 'CuentaBanco\CuentaBancoController')->middleware('auth');

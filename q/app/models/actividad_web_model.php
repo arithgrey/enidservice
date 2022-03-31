@@ -780,7 +780,7 @@ FROM usuario_deseo_compra;";
                         p.saldo_cubierto < 1                        
                         AND  p.se_cancela = 0
                         AND  p.status NOT IN(10,19)                         
-                        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)";
+                        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negras)";
 
 
         return $this->db->query($query_get)->result_array();

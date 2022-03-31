@@ -17,8 +17,8 @@ class CreateMotivoListaNegrasTable extends Migration
     {
         Schema::create('motivo_lista_negras', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class);
-            $table->foreignIdFor(MotivoListaNegra::class);
+            $table->string('motivo', 450);
+            $table->integer('tipo')->nullable(false)->default(0);
             $table->timestamps();
         });
     }

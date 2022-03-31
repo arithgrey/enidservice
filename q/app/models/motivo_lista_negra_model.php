@@ -8,7 +8,7 @@ class motivo_lista_negra_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'motivo_lista_negra';
+        $this->tabla = 'motivo_lista_negras';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')

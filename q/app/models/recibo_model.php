@@ -130,7 +130,7 @@ class Recibo_model extends CI_Model
                         AND saldo_cubierto > 0                         
                         AND  p.status 
                         NOT IN (10,19)  
-                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)";
+                        AND id_usuario NOT IN (SELECT id_usuario FROM lista_negras)";
         }
 
         $query_get = _text_(
@@ -153,7 +153,7 @@ class Recibo_model extends CI_Model
                         AND  p.status 
                         NOT IN (10,19)  
                         AND id_usuario NOT IN 
-                        (SELECT id_usuario FROM lista_negra)                        
+                        (SELECT id_usuario FROM lista_negras)                        
                         AND 
                         DATE(p.fecha_entrega) 
                         BETWEEN '" . $fecha_inicio . "' AND 
@@ -981,7 +981,7 @@ class Recibo_model extends CI_Model
         
         $casos = [
             3 => " 1 = 1 ",
-            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             20 => 'id_usuario = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
@@ -1023,7 +1023,7 @@ class Recibo_model extends CI_Model
 						OR
 						DATE(p.fecha_entrega) <=  DATE(CURRENT_DATE())						
 						)   
-						AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+						AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negras)
 						AND p.id_servicio IN (select id_servicio from servicio where id_usuario in ($ids))";
         return $this->db->query($query_get)->result_array();
     }
@@ -1064,7 +1064,7 @@ class Recibo_model extends CI_Model
                             DATE(fecha_entrega) >=  DATE(CURRENT_DATE())						
 						) 
 						" . $extra_dia . "
-						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)
+						AND id_usuario NOT IN (SELECT id_usuario FROM lista_negras)
 						ORDER BY fecha_contra_entrega ASC  
 						";
         return $this->db->query($query_get)->result_array();
@@ -1194,7 +1194,7 @@ class Recibo_model extends CI_Model
                         id_usuario 
                         NOT IN (SELECT id_usuario FROM tag_arquetipo GROUP BY id_usuario)
                         AND 
-                        id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)
+                        id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)
                         ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
@@ -1346,7 +1346,7 @@ class Recibo_model extends CI_Model
 
         $casos = [
             3 => '1 = 1',
-            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
@@ -1377,7 +1377,7 @@ class Recibo_model extends CI_Model
         $query_get = "SELECT  id_proyecto_persona_forma_pago 
                         FROM proyecto_persona_forma_pago 
                         WHERE  id_usuario  
-                        IN( SELECT idusuario FROM users WHERE tel_contacto  = '" . $telefono . "' )";
+                        IN( SELECT id FROM users WHERE tel_contacto  = '" . $telefono . "' )";
 
         return $this->db->query($query_get)->result_array();
 
@@ -1463,7 +1463,7 @@ class Recibo_model extends CI_Model
                         AND  p.status 
                         NOT IN (10,19)  
                         AND id_usuario 
-                        NOT IN (SELECT id_usuario FROM lista_negra)
+                        NOT IN (SELECT id_usuario FROM lista_negras)
                         ORDER BY p.id_usuario_referencia";
 
         return $this->db->query($query_get)->result_array();
