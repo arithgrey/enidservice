@@ -1,6 +1,10 @@
 <template>
   <app-layout title="Listado">
+
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+    <div class="ml-auto">
+      <en-boton @click="crearListaNegra()"> Agregar </en-boton>
+    </div>
       <div class="bg-white p-2">
         <en-input>
           <template #label> Busqueda</template>
@@ -15,7 +19,8 @@
       </div>
       <table class="w-full">
         <tbody>
-          <tr @click="showUser(lista)"
+          <tr
+            @click="showUser(lista)"
             class="border-b-2 border-blue-600 cursor-pointer"
             v-for="lista in lista_negra.data"
           >
@@ -32,16 +37,20 @@
       />
     </div>
     <ShowModal ref="showModal" />
+    <CrearModal ref="crearModal" />
+
   </app-layout>
 </template>
 
 <script>
 import { defineComponent } from "vue";
 import ShowModal from "./ShowModal";
+import CrearModal from "./CrearModal";
 
 export default defineComponent({
   components: {
     ShowModal,
+    CrearModal,
   },
   props: {
     lista_negra: Object,
@@ -58,9 +67,13 @@ export default defineComponent({
   },
   methods: {
     showUser: function (lista) {
-
       this.$refs.showModal.muestraModal(lista);
     },
+    crearListaNegra: function () {
+
+      this.$refs.crearModal.muestraModal();
+    },
+
     busqueda: function busqueda() {
       let params = { q: this.q };
       this.$inertia.replace(this.route("lista-negra.index", params));

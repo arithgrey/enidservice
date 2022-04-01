@@ -591,7 +591,7 @@ class Cobranza extends REST_Controller
         $usuario_referencia = $this->usuario_referencia($param);
         $param = $this->referencia_usuario($param, $usuario_referencia);
         $usuario = $this->crea_usuario($param);
-
+        
         if ($usuario["usuario_registrado"] > 0 && $usuario["id_usuario"] > 0) {
 
             $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
