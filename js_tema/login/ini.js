@@ -39,7 +39,7 @@ let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
 let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
 let $link_como_vender = $form_registro.find('.link_como_vender');
 
-$(document).on('ready', () => {
+$(document).ready(function () {
 
     $('footer').ready(valida_seccion_inicial);
     $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);

@@ -24,7 +24,6 @@ class usuario extends REST_Controller
         $in = get_keys($param['ids']);
         $response = $this->usuario_model->get_in($in);
         $this->response($response);
-
     }
 
     function index_PUT()
@@ -37,10 +36,8 @@ class usuario extends REST_Controller
             $id_usuario = $param["id_usuario"];
             unset($param["id_usuario"]);
             $response = $this->usuario_model->update($param, ["id" => $id_usuario]);
-
         }
         $this->response($response);
-
     }
 
     function puntuacion_PUT()
@@ -54,10 +51,8 @@ class usuario extends REST_Controller
                 $param["puntuacion"],
                 $param["id_usuario"]
             );
-
         }
         $this->response($response);
-
     }
 
     function status_PUT()
@@ -71,10 +66,8 @@ class usuario extends REST_Controller
             $status = $param["status"];
 
             $response = $this->usuario_model->q_up("status", $status, $id_usuario);
-
         }
         $this->response($response);
-
     }
 
 
@@ -111,7 +104,6 @@ class usuario extends REST_Controller
     {
 
         $this->response($this->usuario_model->get_usuario_ventas());
-
     }
 
     function empresa_GET()
@@ -136,7 +128,7 @@ class usuario extends REST_Controller
             $puede_repartir = $param['puede_repartir'];
             $grupo = $param['grupo'];
             $in = 0;
-                        
+
             switch ($grupo) {
                 case 1:
 
@@ -146,12 +138,11 @@ class usuario extends REST_Controller
                 default:
                     break;
             }
-            
-            
+
+
             $response = $this->usuario_model->empresa_perfil($id_empresa, $in);
         }
         $this->response($response);
-        
     }
 
     function perfiles_GET()
@@ -209,8 +200,10 @@ class usuario extends REST_Controller
         $id_usuario = $this->id_usuario;
         $response = false;
 
-        if ($id_usuario > 0 && array_key_exists("telefono_negocio", $param) &&
-            array_key_exists('lada_negocio', $param)) {
+        if (
+            $id_usuario > 0 && array_key_exists("telefono_negocio", $param) &&
+            array_key_exists('lada_negocio', $param)
+        ) {
 
             $params = [
                 "tel_contacto_alterno" => $param["telefono_negocio"],
@@ -221,7 +214,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function telefono_PUT()
@@ -244,7 +236,6 @@ class usuario extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $response = $this->usuario_model->cancelacion_compra($param["id_usuario"]);
-
         }
         $this->response($response);
     }
@@ -272,7 +263,6 @@ class usuario extends REST_Controller
             ];
 
             $response = $this->usuario_model->q_get($params, pr($usuario, "id_usuario"));
-
         }
         $this->response($response);
     }
@@ -308,7 +298,7 @@ class usuario extends REST_Controller
         }
         $this->response($response);
     }
-   
+
     private function set_password_forget($param)
     {
 
@@ -321,7 +311,6 @@ class usuario extends REST_Controller
             $response["new_pass"] = $new_pass;
         }
         return $response;
-
     }
 
     function pass_PUT()
@@ -345,7 +334,6 @@ class usuario extends REST_Controller
 
                     break;
             }
-
         }
         $this->response($response);
     }
@@ -364,7 +352,6 @@ class usuario extends REST_Controller
                 if ($existe != 1) {
 
                     $response = "La contraseña ingresada no corresponde a su contraseña actual";
-
                 } else {
 
                     $response = $this->usuario_model->q_up("password", $nuevo, $id_usuario);
@@ -403,7 +390,6 @@ class usuario extends REST_Controller
                 $param["nombre"],
                 $id_usuario
             );
-
         }
         $this->response($response);
     }
@@ -426,7 +412,6 @@ class usuario extends REST_Controller
         if (fx($param, "id_usuario")) {
 
             $response = $this->usuario_model->q_get(["tipo_entregas", "entregas_en_casa"], $param["id_usuario"]);
-
         }
         $this->response($response);
     }
@@ -439,7 +424,6 @@ class usuario extends REST_Controller
         if (fx($param, "entregas_en_casa,id_usuario")) {
 
             $response = $this->usuario_model->q_up("entregas_en_casa", $param["entregas_en_casa"], $param["id_usuario"]);
-
         }
 
         $this->response($response);
@@ -501,7 +485,6 @@ class usuario extends REST_Controller
             $response = $this->usuario_model->registros($param);
         }
         $this->response($response);
-
     }
 
     function es_POST()
@@ -586,7 +569,6 @@ class usuario extends REST_Controller
             $response = $this->usuario_model->verifica_registro_telefono($param);
         }
         $this->response($response);
-
     }
 
     function proveedor_POST()
@@ -628,7 +610,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function vendedor_POST()
@@ -695,12 +676,10 @@ class usuario extends REST_Controller
             if ($response["usuario_existe"] == 0) {
 
                 $response["usuario"] = $this->agrega_usuario_whatsApp($param);
-
             } else {
 
                 $in = ["email" => $param["email"]];
                 $id_usuario = $this->usuario_model->get(["id"], $in)[0]["id"];
-
             }
 
             $id_usuario = ($response["usuario_existe"] == 0) ? $response["usuario"]["id_usuario"] : $id_usuario;
@@ -722,10 +701,8 @@ class usuario extends REST_Controller
                 get_mensaje_bienvenida($param)
             );
             $response = $this->app->send_email($q);
-
         }
         return $response;
-
     }
 
     private function inicia_proceso_compra($param, $id_usuario, $id_servicio)
@@ -760,11 +737,9 @@ class usuario extends REST_Controller
                 $response["email"] = $email;
                 $response["usuario_registrado"] = 1;
                 /*Ahora notifico al usuario */
-
             }
         }
         return $response;
-
     }
 
     function miembros_activos_GET()
@@ -812,11 +787,8 @@ class usuario extends REST_Controller
                 default:
                     break;
             }
-
-
         }
         $this->response($response);
-
     }
 
     function proveedores_servicio_GET()
@@ -833,21 +805,19 @@ class usuario extends REST_Controller
             ];
             $response = $this->usuario_model->proveedores_servicio($q);
             $response  = format_proveedores($response);
-
         }
         $this->response($response);
-
     }
     function usuarios_GET()
     {
 
         $param = $this->get();
         $total = $this->get_num_registros_periodo($param);
-        
+
         $per_page = 10;
         $param["resultados_por_pagina"] = $per_page;
         $miembros = $this->usuario_model->get_usuarios_periodo($param);
-        
+
         $conf["page"] = prm_def($param, "page");
         $conf["totales_elementos"] = $total;
         $conf["per_page"] = $per_page;
@@ -855,13 +825,10 @@ class usuario extends REST_Controller
         $conf["q2"] = "";
         $data["paginacion"] = $this->app->paginacion($conf);
         $data["modo_edicion"] = 0;
-        
+
         $data["miembros"] = $this->app->add_imgs_usuario($miembros, "id_usuario");
         $data["es_proveedor"] = 0;
         $this->response(format_miembros($data));
-        
-        
-
     }
 
     function miembro_POST()
@@ -883,8 +850,6 @@ class usuario extends REST_Controller
                     $this->agrega_permisos_usuario($q);
                     $response["modificacion_usuario"] = $modificacion_usuario;
                 }
-
-
             } else {
 
 
@@ -898,8 +863,6 @@ class usuario extends REST_Controller
                         $this->agrega_permisos_usuario($q);
                     }
                     $response["registro_usuario"] = $usuario;
-
-
                 } else {
 
                     $response["usuario_existente"] = "Este usuario ya se encuentra registrado, verifique los datos";
@@ -907,7 +870,6 @@ class usuario extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
     function afiliado_POST()
@@ -936,29 +898,39 @@ class usuario extends REST_Controller
             $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
             if ($response["usuario_existe"] == 0) {
+                
+                if(prm_def($param, 'es_prospecto') > 0 && strlen($param["telefono"]) < 7 ){
+                    /*En el caso de registro a través de Facebook (Prospectos, listas de seguimiento y lista negra)*/
+                    $param["telefono"] = rand(10000000, 90000000);
+                    
+                }
 
                 $response = $this->registro_prospecto($param);
+                $this->response($response);
+                
             }
         }
         $this->response($response);
-
     }
 
     private function registro_prospecto($param)
     {
+        
         $email = $param["email"];
         $params = [
+            "facebook" =>  prm_def($param, 'facebook', ''),
+            "es_prospecto" =>  prm_def($param, 'es_prospecto'),
             "email" => $email,
             "idempresa" => '1',
             "id_departamento" => 9,
             "password" => $param["password"],
             "name" => $param["nombre"],
-            "tel_contacto" => $param["telefono"],
-            "id_usuario_referencia" => prm_def($param, "usuario_referencia", 1)
+            "tel_contacto" => $param['telefono'],
+            "id_usuario_referencia" => prm_def($param, "usuario_referencia", 1),
         ];
-
+        
         $response["id_usuario"] = $this->usuario_model->insert($params, 1);
-
+        
         if ($response["id_usuario"] > 0) {
 
             $q["id_usuario"] = $response["id_usuario"];
@@ -971,6 +943,7 @@ class usuario extends REST_Controller
             }
         }
         return $response;
+    
     }
 
     function cancelar_envio_recordatorio_PUT()
@@ -998,7 +971,11 @@ class usuario extends REST_Controller
             $tel_contacto_alterno = $param['tel_contacto_alterno'];
 
             $usuarios = $this->usuario_model->busqueda(
-                $idusuario, $email, $tel_contacto, $tel_contacto_alterno);
+                $idusuario,
+                $email,
+                $tel_contacto,
+                $tel_contacto_alterno
+            );
 
             if (es_data($usuarios)) {
 
@@ -1057,7 +1034,8 @@ class usuario extends REST_Controller
             "AGREGAN IMAGENES A SU PERFIL",
             "PREGUNTAN SOBRE PRODUCTOS"
         ];
-        $inf = [$param["registros"],
+        $inf = [
+            $param["registros"],
             $param["registros_numeros_telefonicos"],
             $param["usuarios_direcciones"],
             $param["usuarios_clasifican"],
@@ -1084,7 +1062,6 @@ class usuario extends REST_Controller
     {
 
         return $this->usuario_model->num_registros_periodo($q);
-
     }
 
     public function create_table_promotion($param)
@@ -1102,7 +1079,9 @@ class usuario extends REST_Controller
             $num = $this->search_element_array($param["publicaciones"], "fecha_registro", $fecha, "num");
 
 
-            $link = tab($num, "#reporte",
+            $link = tab(
+                $num,
+                "#reporte",
                 [
                     'class' => 'servicios',
                     'fecha_inicio' => $fecha,
@@ -1116,9 +1095,14 @@ class usuario extends REST_Controller
 
 
             $num_registros = $this->search_element_array(
-                $param["usuarios_nuevos"], "fecha", $fecha, "num");
+                $param["usuarios_nuevos"],
+                "fecha",
+                $fecha,
+                "num"
+            );
             $link_registros = tab(
-                $num_registros, "#reporte",
+                $num_registros,
+                "#reporte",
                 [
 
                     'class' => 'usuarios',
@@ -1135,14 +1119,12 @@ class usuario extends REST_Controller
                 array_push($registros, $num_registros);
             }
             $a++;
-
         }
         array_unshift($publicaciones, "PRODUCTOS PUBLICADOS");
         array_unshift($registros, "USUARIOS NUEVOS");
         $this->table->add_row($publicaciones);
         $this->table->add_row($registros);
         return $this->table->generate();
-
     }
 
     function search_element_array($array, $key, $comparador, $key_val)
@@ -1168,14 +1150,12 @@ class usuario extends REST_Controller
         $cuerpo = get_mensaje_modificacion_pwd($nombre);
         $q = get_request_email($email, $asunto, $cuerpo);
         return $this->app->send_email($q, 1);
-
     }
 
     private function notifica_registro_exitoso($q)
     {
 
         return $this->app->api("emp/solicitud_afiliado/", $q);
-
     }
 
     private function agrega_lista_deseos($id_usuario, $id_servicio)
@@ -1193,28 +1173,24 @@ class usuario extends REST_Controller
     {
 
         return $this->app->api("servicio/usuario_por_servicio", $q);
-
     }
 
     private function get_nun_activos_con_direcciones($q)
     {
 
         return $this->app->api("usuarios_direccion/activos_con_direcciones", $q);
-
     }
 
     private function get_agregan_clasificaciones_periodo($q)
     {
 
         return $this->app->api("usuario_clasificacion/agregan_clasificaciones_periodo", $q);
-
     }
 
     private function agregan_lista_deseos_periodo($q)
     {
 
         return $this->app->api("usuario_deseo/agregan_lista_deseos_periodo", $q);
-
     }
 
     private function get_publican_periodo($q)
@@ -1232,14 +1208,12 @@ class usuario extends REST_Controller
     {
 
         return $this->app->api("usuario_perfil/permisos_usuario", $q, "json", "POST");
-
     }
 
     private function get_preguntas($q)
     {
 
         return $this->app->api("pregunta/periodo", $q);
-
     }
 
     private function get_num_servicios_periodo($q)
@@ -1272,7 +1246,6 @@ class usuario extends REST_Controller
             $email = $param["email"];
             $tel_contacto = $param["tel_contacto"];
             $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto);
-            
         }
         $this->response($response);
     }
@@ -1286,10 +1259,8 @@ class usuario extends REST_Controller
 
             $id_usuario = $param["id_usuario"];
             $response = $this->usuario_model->gamificacion_ventas($id_usuario);
-
         }
         $this->response($response);
-
     }
 
     function auto_PUT()
@@ -1306,7 +1277,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function moto_PUT()
@@ -1323,7 +1293,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function bicicleta_PUT()
@@ -1340,7 +1309,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function pie_PUT()
@@ -1357,7 +1325,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
     function orden_producto_PUT()
     {
@@ -1372,7 +1339,6 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function entrega_GET()
@@ -1393,22 +1359,17 @@ class usuario extends REST_Controller
             if ($requiere_auto > 0) {
 
                 $response = $this->usuario_model->entregas_auto($ids);
-
             } else {
 
-                $response = $this->usuario_model->entregas($ids
-                    , $moto
-                    , $bicicleta
-                    , $pie
+                $response = $this->usuario_model->entregas(
+                    $ids,
+                    $moto,
+                    $bicicleta,
+                    $pie
                 );
-
             }
-
         }
 
         $this->response($response);
     }
-
-
-
 }

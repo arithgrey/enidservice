@@ -419,3 +419,7 @@ ______________________
 
 RENAME TABLE lista_negra TO lista_negras;
 RENAME TABLE motivo_lista_negra TO motivo_lista_negras;
+______________________
+
+
+alter table users add es_prospecto int not null default 0;

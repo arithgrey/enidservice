@@ -12,7 +12,6 @@ if (!function_exists('invierte_date_time')) {
         $z[] = frm_contacto_servicio($in_session, $data["servicio"]);
 
         return d($z, 8, 1);
-
     }
 
     function render_procesar($data)
@@ -33,7 +32,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("info_articulo", ["id" => 'info_articulo']);
 
         $z[] = str_title($in_session, $is_mobile);
-        $z[] = form_open("",
+        $z[] = form_open(
+            "",
             [
                 "class" => "form_nuevo",
                 "id" => "form-miembro-enid-service",
@@ -63,8 +63,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2 mt-5 mb-5");
 
         return append($r);
-
-
     }
 
     function str_title($in_session, $is_mobile, $es_servicio = 0)
@@ -83,8 +81,6 @@ if (!function_exists('invierte_date_time')) {
     function formulario_primer_registro($in_session, $param, $es_cliente)
     {
 
-
-
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
@@ -94,7 +90,8 @@ if (!function_exists('invierte_date_time')) {
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
             $r[] = d(_titulo($titulo), 'mb-5');
             $z[] = input_frm(
-                "col-lg-6 mt-5", "NOMBRE",
+                "col-lg-6 mt-5",
+                "NOMBRE",
                 [
                     "name" => "nombre",
                     "id" => "nombre",
@@ -107,7 +104,10 @@ if (!function_exists('invierte_date_time')) {
                 _text_nombre
             );
 
-            $z[] = input_frm("col-lg-6 mt-5", "TELÉFONO",
+
+            $z[] = input_frm(
+                "col-lg-6 mt-5",
+                "TELÉFONO",
                 [
                     "id" => "telefono",
                     "class" => "telefono",
@@ -118,19 +118,58 @@ if (!function_exists('invierte_date_time')) {
                     "required" => "true",
                     "placeholder" => "Aquí va tu teléfono",
 
-                ], _text_telefono
+                ],
+                _text_telefono
             );
+            
+            
+            $input = input([                
+                "type" => "checkbox",
+                "class" => "checkbox_enid check_prospecto",                
+            ]);
+
+            $extra = ($in_session) ? 'col-lg-6 mt-5 ' : 'd-none col-lg-6 mt-5';
+           
+            $z[] = d(flex(                
+                "¿Registrar con Facebook",
+                $input, 
+                "mt-5 text-uppercase black strong",
+                "mr-3"
+            ), $extra);
+
+            $z[] = input_frm(
+                "col-lg-6 mt-5 d-none seccion_input_facebook",
+                "FACEBOOK",
+                [
+                    "id" => "facebook",
+                    "class" => "facebook",
+                    "type" => "url",                    
+                    "name" => "facebook",                    
+                    "placeholder" => "Aquí va tu teléfono",
+
+                ]
+            );
+
 
             $inputs = [];
 
             $inputs[] = hiddens(
-                    [
-                        "name" => "cobro_secundario",
-                        "value" => $param["cobro_secundario"],
-                        "class" => "cobro_secundario"
-                    ]
-                );
-            
+                [
+                    "name" => "cobro_secundario",
+                    "value" => $param["cobro_secundario"],
+                    "class" => "cobro_secundario"
+                ]
+            );
+
+            $inputs[] = hiddens(
+                [
+                    "name" => "es_prospecto",
+                    "value" => 0,
+                    "class" => "es_prospecto"
+                ]
+            );
+
+
             for ($a = 0; $a < count($producto_carro_compra); $a++) {
 
                 $inputs[] = hiddens(
@@ -140,7 +179,6 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "producto_carro_compra"
                     ]
                 );
-
             }
 
             $z[] = append($inputs);
@@ -159,7 +197,6 @@ if (!function_exists('invierte_date_time')) {
                         "class" => "recompensas"
                     ]
                 );
-
             }
 
             $z[] = append($inputs);
@@ -189,7 +226,8 @@ if (!function_exists('invierte_date_time')) {
             $z[] = input_frm(
                 _text_("col-lg-6 mt-5", $es_cliente_class),
                 "CORREO",
-                $config_email, _text_correo
+                $config_email,
+                _text_correo
             );
 
             $config_password =
@@ -203,8 +241,12 @@ if (!function_exists('invierte_date_time')) {
             if (!$es_cliente) {
                 $config_password['value'] = sha1(mt_rand());
             }
-            $z[] = input_frm(_text_("col-lg-6 mt-5", $es_cliente_class), "PASSWORD",
-                $config_password, _text_pass);
+            $z[] = input_frm(
+                _text_("col-lg-6 mt-5", $es_cliente_class),
+                "PASSWORD",
+                $config_password,
+                _text_pass
+            );
 
 
             $r[] = d($z, 13);
@@ -212,7 +254,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid'], 0), "col-lg-3 mt-5 p-0 mb-5");
             $r[] = text_acceder_cuenta($param, $es_cliente);
             $r[] = form_close();
-
         }
 
         $response[] = d($r, "primer_compra");
@@ -224,8 +265,10 @@ if (!function_exists('invierte_date_time')) {
     function registrado()
     {
         return d(
-            add_text("tu usuario ya existe",
-                format_link("inicia sessión",
+            add_text(
+                "tu usuario ya existe",
+                format_link(
+                    "inicia sessión",
                     [
                         'class' => "mt-5 ml-3  text-uppercase",
                         "href" => path_enid("login"),
@@ -235,8 +278,8 @@ if (!function_exists('invierte_date_time')) {
                 )
             ),
 
-            'text-uppercase usuario_existente d-none strong text-center col-lg-12 h4');
-
+            'text-uppercase usuario_existente d-none strong text-center col-lg-12 h4'
+        );
     }
 
 
@@ -300,12 +343,14 @@ if (!function_exists('invierte_date_time')) {
 
         if ($in_session < 1) {
 
-            $x[] = form_open("",
+            $x[] = form_open(
+                "",
                 [
                     "class" => "form_nuevo row"
                 ]
             );
-            $x[] = input_frm("col-lg-6 mt-5",
+            $x[] = input_frm(
+                "col-lg-6 mt-5",
                 "Nombre",
                 [
                     "id" => "nombre",
@@ -319,7 +364,9 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            $x[] = input_frm("col-lg-6 mt-5", "Email",
+            $x[] = input_frm(
+                "col-lg-6 mt-5",
+                "Email",
                 [
                     "name" => "email",
                     "placeholder" => "Ej. jonathan@enidservices.com",
@@ -327,10 +374,13 @@ if (!function_exists('invierte_date_time')) {
                     "type" => "email",
                     "required" => "true",
                     "id" => "correo",
-                ], _text_correo
+                ],
+                _text_correo
             );
 
-            $x[] = input_frm("col-lg-6 mt-5", "Password",
+            $x[] = input_frm(
+                "col-lg-6 mt-5",
+                "Password",
                 [
                     "name" => "password",
                     "placeholder" => "***",
@@ -342,7 +392,9 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $x[] = input_frm("col-lg-6 mt-5", "Teléfono",
+            $x[] = input_frm(
+                "col-lg-6 mt-5",
+                "Teléfono",
                 [
                     "name" => "telefono",
                     "placeholder" => "555296...",
@@ -356,7 +408,9 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
-            $x[] = input_frm("col-lg-6 mt-5", "Fecha de interés",
+            $x[] = input_frm(
+                "col-lg-6 mt-5",
+                "Fecha de interés",
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_servicio',
@@ -371,8 +425,10 @@ if (!function_exists('invierte_date_time')) {
 
 
             $x[] = d("", 6);
-            $x[] = d("¿Deseas agregar algún comentario?",
-                "col-lg-12 strong underline top_50 agregar_commentario cursor_pointer");
+            $x[] = d(
+                "¿Deseas agregar algún comentario?",
+                "col-lg-12 strong underline top_50 agregar_commentario cursor_pointer"
+            );
 
 
             $r[] = append($x);
@@ -391,10 +447,10 @@ if (!function_exists('invierte_date_time')) {
             $r[] = place("place_config_usuario");
             $r[] = append($hiddens);
             $r[] = form_close();
-
         } else {
 
-            $r[] = form_open("",
+            $r[] = form_open(
+                "",
                 [
                     "class" => "form_cotizacion_enid_service"
                 ]
@@ -402,10 +458,14 @@ if (!function_exists('invierte_date_time')) {
             $r[] = append($hiddens);
             $r[] = contaiter(h("PRESUPUESTO", 3, "strong"), 1);
             $texto_descriptivo_cotizacion = h(
-                add_text("SOBRE: ", $servicio["nombre_servicio"]), 4);
+                add_text("SOBRE: ", $servicio["nombre_servicio"]),
+                4
+            );
             $r[] = contaiter($texto_descriptivo_cotizacion, "mb-3");
 
-            $r[] = contaiter(input_frm("col-lg-12 p-0", "Fecha de interés",
+            $r[] = contaiter(input_frm(
+                "col-lg-12 p-0",
+                "Fecha de interés",
                 [
                     "data-date-format" => "yyyy-mm-dd",
                     "name" => 'fecha_servicio',
@@ -415,33 +475,35 @@ if (!function_exists('invierte_date_time')) {
                     "min" => date("Y-m-d"),
                     "max" => add_date(date("Y-m-d"), 35),
                     "id" => "fecha_interes",
-                ]), "mt-5");
+                ]
+            ), "mt-5");
 
-            $r[] = contaiter(d("¿Deseas agregar algún comentario?",
-                "strong text_agregar_comentario cursor_pointer"), 'mt-5');
+            $r[] = contaiter(d(
+                "¿Deseas agregar algún comentario?",
+                "strong text_agregar_comentario cursor_pointer"
+            ), 'mt-5');
             $r[] = contaiter(textarea(
                 [
                     "name" => "descripcion",
                     "class" => "d-none descripcion_comentario",
-                ]), 1);
+                ]
+            ), 1);
             $r[] = contaiter(
                 btn(
                     "ENVIAR",
                     [
                         "class" => "top_30 ",
                         "name" => "comentarios",
-                    ], 0
+                    ],
+                    0
                 )
             );
 
             $r[] = form_close();
-
         }
         $r[] = format_load();
 
         return append($r);
-
-
     }
 
     function frm_miembro_enid_service_hidden(
@@ -452,8 +514,8 @@ if (!function_exists('invierte_date_time')) {
         $talla,
         $es_cliente,
         $es_carro_compras,
-        $producto_carro_compra)
-    {
+        $producto_carro_compra
+    ) {
 
 
         $inputs = [];
@@ -467,13 +529,11 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "producto_carro_compra"
                 ]
             );
-
         }
 
         return append(
             [
-                append($inputs)
-                ,
+                append($inputs),
                 hiddens(
                     [
                         "name" => "es_carro_compras",
@@ -534,7 +594,6 @@ if (!function_exists('invierte_date_time')) {
 
             ]
         );
-
     }
 
 
@@ -568,8 +627,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return $text;
-
-
     }
 
 
@@ -582,10 +639,17 @@ if (!function_exists('invierte_date_time')) {
         $precio = pr($servicio, "precio");
         $text = ($inf_ext["is_servicio"] == 1) ? "DURACIÓN" : "PIEZAS";
 
-        $r[] = ajustar(_titulo("ARTÍCULO"), d($nombre_servicio, "text-right"), 4,
-            "top_50");
-        $r[] = h($text . duracion($id_ciclo_facturacion, $duracion,
-                $inf_ext["is_servicio"]), 5, "top_10 text-right strong");
+        $r[] = ajustar(
+            _titulo("ARTÍCULO"),
+            d($nombre_servicio, "text-right"),
+            4,
+            "top_50"
+        );
+        $r[] = h($text . duracion(
+            $id_ciclo_facturacion,
+            $duracion,
+            $inf_ext["is_servicio"]
+        ), 5, "top_10 text-right strong");
 
 
         return [
@@ -593,7 +657,6 @@ if (!function_exists('invierte_date_time')) {
             "monto_total" => $precio,
             "resumen_servicio_info" => $nombre_servicio,
         ];
-
     }
     function text_acceder_cuenta($param, $es_cliente)
     {
@@ -616,6 +679,5 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($text, 12);
         }
         return append($response);
-
     }
 }

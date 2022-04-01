@@ -1,6 +1,6 @@
 "use strict";
-window.history.pushState({page: 1}, "", "");
-window.history.pushState({page: 2}, "", "");
+window.history.pushState({ page: 1 }, "", "");
+window.history.pushState({ page: 2 }, "", "");
 window.onpopstate = function (event) {
     if (event) {
 
@@ -14,6 +14,7 @@ let form_cotizacion = ".form_cotizacion_enid_service";
 
 let input_nombre = '.nombre';
 let input_email = '.email';
+let input_facebook = '.facebook';
 let input_id_servicio = '.id_servicio';
 let descripcion_servicio = '.resumen_producto';
 let id_ciclo_facturacion = '.id_ciclo_facturacion';
@@ -37,7 +38,15 @@ let fecha_servicio = ".fecha_servicio";
 let $input_nombre_registro_envio = $form_miembro.find(input_nombre);
 let $input_email_registro_envio = $form_miembro.find(input_email);
 let $input_password_registro_envio = $form_miembro.find(input_password);
+let $input_facebook_registro_envio = $form_miembro.find(input_facebook);
 let $input_telefono_registro_envio = $form_miembro.find('.telefono');
+let $input_es_prospecto_registro_envio = $form_miembro.find('.es_prospecto');
+let $seccion_input_facebook = $form_miembro.find('.seccion_input_facebook');
+
+
+
+
+let $check_prospecto = $form_miembro.find('.check_prospecto');
 
 let $input_fecha_servicio = $(fecha_servicio);
 let $input_es_cliente = $('.es_cliente');
@@ -52,7 +61,7 @@ $(document).ready(() => {
 
     $('footer').addClass('d-none');
     oculta_acceder();
-    set_option({"vista": 1});
+    set_option({ "vista": 1 });
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
     $form_miembro.submit(registro);
     $form_cotizacion.submit(registro_cotizacion);
@@ -81,17 +90,44 @@ $(document).ready(() => {
         escucha_submmit_selector(e, $form_miembro);
     });
 
+    $check_prospecto.click(modifica_estado_prospecto);
 
 });
 
+let modifica_estado_prospecto = (e) => {
+
+    let $val = $input_es_prospecto_registro_envio.val();
+    if ($val > 0) {
+
+        $input_telefono_registro_envio.prop('required',true);        
+        $input_facebook_registro_envio.prop('required',false);        
+        $input_es_prospecto_registro_envio.val(0);        
+        $seccion_input_facebook.addClass('d-none');
+        
+
+    } else {
+        
+        $input_facebook_registro_envio.prop('required',true);        
+        $input_telefono_registro_envio.prop('required',false);
+        $input_es_prospecto_registro_envio.val(1);
+        $seccion_input_facebook.removeClass('d-none');
+    }
+
+}
 let registro = (e) => {
 
-    
+
     let respuestas = [];
     respuestas.push(es_formato_nombre($input_nombre_registro_envio));
     respuestas.push(es_formato_password($input_password_registro_envio));
     respuestas.push(es_formato_email($input_email_registro_envio));
-    respuestas.push(es_formato_telefono($input_telefono_registro_envio));
+
+    if (parseInt($input_es_prospecto_registro_envio.val()) < 1) {
+
+        respuestas.push(es_formato_telefono($input_telefono_registro_envio));
+
+    }
+
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
@@ -109,12 +145,14 @@ let registro = (e) => {
 
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
-        let $cobro_secundario = $(".cobro_secundario").val();        
+        let $cobro_secundario = $(".cobro_secundario").val();
+
 
         let $data_send = {
             "password": $secret,
             "email": $input_email_registro_envio.val(),
             "nombre": $input_nombre_registro_envio.val(),
+            "facebook": $input_facebook_registro_envio.val(),
             "telefono": $input_telefono_registro_envio.val(),
             "id_servicio": $id_servicio.val(),
             "ciclo_facturacion": $id_ciclo_facturacion.val(),
@@ -126,7 +164,8 @@ let registro = (e) => {
             "es_carro_compras": $es_carro_compras.val(),
             "producto_carro_compra": $producto_carro_compra,
             "recompensas": $recompensas,
-            "cobro_secundario": $cobro_secundario
+            "cobro_secundario": $cobro_secundario,
+            "es_prospecto": $input_es_prospecto_registro_envio.val()
 
         };
 
@@ -148,7 +187,7 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-
+    debugger;
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
 
@@ -161,7 +200,7 @@ let respuesta_registro = (data) => {
             recorre(".usuario_existente");
 
         } else {
-            
+
             let $path = _text("../area_cliente/?action=compras&ticket=", data.id_orden_compra);
             redirect($path);
         }
