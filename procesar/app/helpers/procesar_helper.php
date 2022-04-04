@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
             $es_carro_compras,
             $producto_carro_compra
         );
-        $z[] = formulario_primer_registro($in_session, $ext, $es_cliente);
+        $z[] = formulario_primer_registro($in_session, $ext, $es_cliente, $data);
         $z[] = hiddens(
             [
                 "value" => $data["email"],
@@ -78,7 +78,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function formulario_primer_registro($in_session, $param, $es_cliente)
+    function formulario_primer_registro($in_session, $param, $es_cliente, $data)
     {
 
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
@@ -121,37 +121,60 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 _text_telefono
             );
-            
-            
-            $input = input([                
+
+
+            $input = input([
                 "type" => "checkbox",
-                "class" => "checkbox_enid check_prospecto",                
+                "class" => "checkbox_enid check_prospecto",
             ]);
 
-            $extra = ($in_session) ? 'col-lg-6 mt-5 ' : 'd-none col-lg-6 mt-5';
-           
-            $z[] = d(flex(                
+            $extra = ($in_session) ? 'col-lg-3 mt-5 ' : 'd-none col-lg-3 mt-5';
+
+            $z[] = d(flex(
                 "¿Registrar con Facebook",
-                $input, 
+                $input,
                 "mt-5 text-uppercase black strong",
                 "mr-3"
             ), $extra);
 
             $z[] = input_frm(
-                "col-lg-6 mt-5 d-none seccion_input_facebook",
+                "col-lg-9 mt-5 d-none seccion_input_facebook",
                 "FACEBOOK",
                 [
                     "id" => "facebook",
                     "class" => "facebook",
-                    "type" => "url",                    
-                    "name" => "facebook",                    
-                    "placeholder" => "Aquí va tu teléfono",
+                    "type" => "url",
+                    "name" => "facebook",
+                    "placeholder" => "Aquí va el link del perfil del cliente",
 
                 ]
             );
 
+            
+            $z[] = input_frm(
+                "col-lg-12 mt-5 d-none adicionales_adimistrador",
+                "URL conversación",
+                [
+                    "id" => "url_facebook_conversacion",
+                    "class" => "url_facebook_conversacion",
+                    "type" => "url",
+                    "name" => "url_facebook_conversacion",
+                    "placeholder" => "Aquí va el link de la conversación acordada",
+
+                ]
+            );
+
+            $z[] = d("Comentarios",'mt-5 col-lg-12 black text-uppercase  adicionales_adimistrador d-none');
+            $z[] = d(textarea(
+                [
+                    "name" => "comentario_compra",
+                    "class" => "comentario_compra",
+
+                ]
+            ), 'd-none mt-5 col-lg-12 adicionales_adimistrador');
 
             $inputs = [];
+
 
             $inputs[] = hiddens(
                 [
@@ -160,6 +183,15 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "cobro_secundario"
                 ]
             );
+
+            $inputs[] = hiddens(
+                [
+                    "name" => "adicionales",
+                    "value" => es_administrador($data),
+                    "class" => "adicionales"
+                ]
+            );
+
 
             $inputs[] = hiddens(
                 [

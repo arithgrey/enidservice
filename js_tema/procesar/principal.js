@@ -42,6 +42,12 @@ let $input_facebook_registro_envio = $form_miembro.find(input_facebook);
 let $input_telefono_registro_envio = $form_miembro.find('.telefono');
 let $input_es_prospecto_registro_envio = $form_miembro.find('.es_prospecto');
 let $seccion_input_facebook = $form_miembro.find('.seccion_input_facebook');
+let $url_facebook_conversacion = $form_miembro.find('.url_facebook_conversacion');
+let $comentario_compra = $form_miembro.find('.comentario_compra');
+
+let $input_adicionales = $form_miembro.find('.adicionales');
+let $adicionales_adimistrador = $form_miembro.find('.adicionales_adimistrador');
+
 
 
 
@@ -97,18 +103,26 @@ $(document).ready(() => {
 let modifica_estado_prospecto = (e) => {
 
     let $val = $input_es_prospecto_registro_envio.val();
+    let $adicionales = parseInt($input_adicionales.val());
+    if ($adicionales > 0) {
+        $adicionales_adimistrador.removeClass('d-none');
+    }
+
     if ($val > 0) {
 
-        $input_telefono_registro_envio.prop('required',true);        
-        $input_facebook_registro_envio.prop('required',false);        
-        $input_es_prospecto_registro_envio.val(0);        
-        $seccion_input_facebook.addClass('d-none');
-        
 
+
+        $input_telefono_registro_envio.prop('required', true);
+        $input_facebook_registro_envio.prop('required', false);
+        $input_es_prospecto_registro_envio.val(0);
+        $seccion_input_facebook.addClass('d-none');
+
+        $adicionales_adimistrador.addClass('d-none');
     } else {
-        
-        $input_facebook_registro_envio.prop('required',true);        
-        $input_telefono_registro_envio.prop('required',false);
+
+
+        $input_facebook_registro_envio.prop('required', true);
+        $input_telefono_registro_envio.prop('required', false);
         $input_es_prospecto_registro_envio.val(1);
         $seccion_input_facebook.removeClass('d-none');
     }
@@ -165,7 +179,9 @@ let registro = (e) => {
             "producto_carro_compra": $producto_carro_compra,
             "recompensas": $recompensas,
             "cobro_secundario": $cobro_secundario,
-            "es_prospecto": $input_es_prospecto_registro_envio.val()
+            "es_prospecto": $input_es_prospecto_registro_envio.val(),
+            "url_facebook_conversacion": $url_facebook_conversacion.val(),
+            "comentario_compra": $comentario_compra.val(),
 
         };
 
