@@ -287,6 +287,7 @@ class usuario extends REST_Controller
                 "sexo",
                 "id_departamento",
                 "facebook",
+                "url_lead",
                 "orden_producto",
                 "idtipo_comisionista",
                 "ha_vendido"
@@ -919,6 +920,7 @@ class usuario extends REST_Controller
         $email = $param["email"];
         $params = [
             "facebook" =>  prm_def($param, 'facebook', ''),
+            "url_lead" => prm_def($param, 'url_facebook_conversacion', ''),
             "es_prospecto" =>  prm_def($param, 'es_prospecto'),
             "email" => $email,
             "idempresa" => '1',

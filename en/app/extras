@@ -423,3 +423,4 @@ ______________________
 
 
 alter table users add es_prospecto int not null default 0;
+alter table users add url_lead text;
