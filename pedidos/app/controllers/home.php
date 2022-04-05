@@ -205,7 +205,7 @@ class Home extends CI_Controller
         $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
         $usuario_compra = $this->get_usuario($id_usuario_compra);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
-
+        
         $data["es_lista_negra"] = $es_lista_negra;
         $data["usuario_lista_negra"] = $usuario_lista_negra;
         $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
@@ -556,6 +556,7 @@ class Home extends CI_Controller
         $repartidor = $this->app->add_imgs_usuario($repartidor, $key = "id_usuario");
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
+                        
         
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
         $data += [
@@ -659,7 +660,6 @@ class Home extends CI_Controller
 
     private function busqueda_lista_negra($usuario_compra)
     {
-
         
         $response = [];
         if (es_data($usuario_compra)) {
@@ -668,7 +668,9 @@ class Home extends CI_Controller
                 'idusuario' => pr($usuario_compra, 'id_usuario'),
                 'email' => pr($usuario_compra, 'email'),
                 'tel_contacto' => pr($usuario_compra, 'tel_contacto'),
-                'tel_contacto_alterno' => pr($usuario_compra, 'tel_contacto_alterno')
+                'tel_contacto_alterno' => pr($usuario_compra, 'tel_contacto_alterno'),
+                'url_lead' => pr($usuario_compra, 'url_lead'),
+                'facebook' => pr($usuario_compra, 'facebook')
             ];
             
             $response = $this->app->api("usuario/lista_negra", $q);

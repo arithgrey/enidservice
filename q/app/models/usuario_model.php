@@ -1,7 +1,7 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class usuario_model extends CI_Model
-{   
+{
     private $table;
     function __construct()
     {
@@ -20,7 +20,7 @@ class usuario_model extends CI_Model
 
     function calificacion_cancelacion_compra($param)
     {
-        
+
         return $this->update(["num_cancelaciones" => "num_cancelaciones + 1"], ["id" => $param["id"]]);
     }
 
@@ -115,7 +115,6 @@ class usuario_model extends CI_Model
                         LIMIT 1";
 
         return $this->db->query($query_update);
-
     }
 
     function registros($param)
@@ -145,8 +144,6 @@ class usuario_model extends CI_Model
         $response["registros_numeros_telefonicos"] =
             $total[0]["registros_numeros_telefonicos"];
         return $response;
-
-
     }
 
     function insert($params, $return_id = 0)
@@ -238,7 +235,6 @@ class usuario_model extends CI_Model
         $data_complete = $result->result_array();
         $this->create_tmp_usuarios_perfil(1, $_num, $id_perfil, $id_empresa, $id_usuario);
         return $data_complete;
-
     }
 
     function create_tmp_usuarios_perfil($flag, $_num, $perfil, $id_empresa, $id_usuario)
@@ -278,7 +274,6 @@ class usuario_model extends CI_Model
 
         $q = ["DATE(fecha_registro)" => "BETWEEN '" . $param["fecha_inicio"] . "' AND  '" . $param["fecha_termino"] . "'"];
         return $this->get(["COUNT(0)num"], $q)[0]["num"];
-
     }
 
     function get_usuarios_periodo($param)
@@ -370,8 +365,6 @@ class usuario_model extends CI_Model
                     AND u.status = $status
                     " . $extra . $extra_perfil . " 
                     ORDER BY u.fecha_registro DESC";
-
-
     }
 
     function get_productos_deseados_sugerencias($param)
@@ -401,7 +394,6 @@ class usuario_model extends CI_Model
 
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function num_q($param)
@@ -421,7 +413,6 @@ class usuario_model extends CI_Model
                     < DATE_ADD(CURRENT_DATE() , INTERVAL - 30 DAY )
                     AND id_departamento =9 ";
         return $this->db->query($query_get)->result_array();
-
     }
 
     function verifica_registro_telefono($param)
@@ -559,14 +550,12 @@ class usuario_model extends CI_Model
             $params['tiene_moto'] = $param['moto'];
             $params['tiene_bicicleta'] = $param['bicicleta'];
             $params['reparte_a_pie'] = $param['reparte_a_pie'];
-
         }
 
         $this->update($params, ["id" => $id_usuario]);
 
         $query_update = "UPDATE users SET ultima_modificacion = CURRENT_TIMESTAMP() WHERE id = $id_usuario LIMIT 1 ";
         return $this->db->query($query_update);
-
     }
 
     function crea_usuario_enid_service($param)
@@ -595,7 +584,6 @@ class usuario_model extends CI_Model
         $id_usuario = $this->insert($params, 1);
         $param["id_usuario"] = $id_usuario;
         return $param;
-
     }
 
     function registrar_afiliado($param)
@@ -626,15 +614,18 @@ class usuario_model extends CI_Model
         return $data_complete;
     }
 
-    function busqueda($id, $email, $tel_contacto, $tel_contacto_alterno)
+    function busqueda($id, $email, $tel_contacto, $tel_contacto_alterno, $url_lead = '', $facebook = '')
     {
         $where = "WHERE email = '" . $email . "'";
         $extra_email = ($id > 0) ? " OR id = " . $id : " ";
         $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
         $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
+        $extra_url_lead = (strlen($url_lead) > 3) ? " OR url_lead = '" . $url_lead."'" : " ";
+        $extra_url_facebook = (strlen($facebook) > 3) ? " OR facebook = '" . $facebook."'" : "' ";
 
-        $query_create = "SELECT id FROM users " . $where . $extra_tel . $extra_tel_alterno . $extra_email;
-        return $this->db->query($query_create)->result_array();
+
+        $query_get = "SELECT id FROM users " . $where . $extra_tel . $extra_tel_alterno . $extra_email . $extra_url_lead . $extra_url_facebook;        
+        return $this->db->query($query_get)->result_array();
     }
 
     function gamificacion_ventas($id_usuario)
@@ -646,7 +637,6 @@ class usuario_model extends CI_Model
                     ha_vendido =  ha_vendido + 1 
                     WHERE id = $id_usuario LIMIT 1";
         return $this->db->query($query);
-
     }
 
     function get_in($in)
@@ -691,7 +681,6 @@ class usuario_model extends CI_Model
 
             $usuarios_moto = $this->db->query($query_get)->result_array();
             $response = $this->simplifica_usuarios($response, $usuarios_moto);
-
         }
 
         if ($bicicleta > 0) {
@@ -722,7 +711,6 @@ class usuario_model extends CI_Model
         }
 
         return $response;
-
     }
 
     function simplifica_usuarios($data_base, $usuarios)
@@ -735,7 +723,6 @@ class usuario_model extends CI_Model
 
                 $data_base[] = $row['id_usuario'];
             }
-
         }
         return $data_base;
     }
@@ -754,7 +741,6 @@ class usuario_model extends CI_Model
 
         $usuarios_auto = $this->db->query($query_get)->result_array();
         return $this->simplifica_usuarios([], $usuarios_auto);
-
     }
 
     function empresa_perfil($id_empresa, $in)
@@ -767,8 +753,5 @@ class usuario_model extends CI_Model
         AND up.idperfil in ($in)";
 
         return $this->db->query($query_get)->result_array();
-        
-
     }
-
 }

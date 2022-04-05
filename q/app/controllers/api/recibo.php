@@ -142,7 +142,17 @@ class recibo extends REST_Controller
                 $usuario = $this->app->usuario($id_usuario);
                 $email = pr($usuario, "email");
                 $tel_contacto = pr($usuario, "tel_contacto");
-                $q = ["id_usuario" => $id_usuario, "email" => $email, "tel_contacto" => $tel_contacto];
+                $facebook = pr($usuario, "facebook");
+                $url_lead = pr($usuario, "url_lead");
+
+                $q = [
+                    "id_usuario" => $id_usuario, 
+                    "email" => $email, 
+                    "tel_contacto" => $tel_contacto,
+                    "facebook" => $facebook,
+                    "url_lead" => $url_lead
+                ];
+                
                 $usuarios = $this->usuarios_similares($q);
 
                 $ids_usuarios = array_column($usuarios, 'id');
