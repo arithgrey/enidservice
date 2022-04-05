@@ -964,20 +964,26 @@ class usuario extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "idusuario,email,tel_contacto,tel_contacto_alterno")) {
+        if (fx($param, "idusuario,email,tel_contacto,tel_contacto_alterno,url_lead,facebook")) {
 
             $response = [];
             $idusuario = $param['idusuario'];
             $email = $param['email'];
             $tel_contacto = $param['tel_contacto'];
             $tel_contacto_alterno = $param['tel_contacto_alterno'];
-
+            $url_lead = $param['url_lead'];
+            $facebook = $param['facebook'];
+            
             $usuarios = $this->usuario_model->busqueda(
                 $idusuario,
                 $email,
                 $tel_contacto,
-                $tel_contacto_alterno
+                $tel_contacto_alterno,
+                $url_lead,
+                $facebook
             );
+            
+            
 
             if (es_data($usuarios)) {
 
@@ -1242,12 +1248,15 @@ class usuario extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_usuario,email,tel_contacto")) {
+        if (fx($param, "id_usuario,email,tel_contacto,facebook,url_lead")) {
 
             $id_usuario = $param["id_usuario"];
             $email = $param["email"];
             $tel_contacto = $param["tel_contacto"];
-            $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto);
+            $facebook = $param["tel_contacto"];
+            $url_lead = $param["url_lead"];
+            
+            $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto, $facebook,$url_lead);
         }
         $this->response($response);
     }

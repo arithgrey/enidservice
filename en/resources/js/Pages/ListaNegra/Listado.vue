@@ -12,7 +12,7 @@
             <input
               class="format_input"
               v-model="q"
-              placeholder="¿Nombre o número?"
+              placeholder="¿Nombre, número, Facebook?"
             />
           </template>
         </en-input>

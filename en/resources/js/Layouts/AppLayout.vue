@@ -62,6 +62,21 @@
             >
               Solicitudes Retiro
             </jet-nav-link>
+            <jet-nav-link
+              :href="route('lista-negra.index')"
+              :active="route().current('lista-negra.*')"
+              class="
+                block
+                mt-4
+                lg:inline-block lg:mt-0
+                text-white
+                hover:text-white
+                mr-4
+              "
+            >
+              Lista negra
+            </jet-nav-link>
+
           </div>
           <div>
             <div>
