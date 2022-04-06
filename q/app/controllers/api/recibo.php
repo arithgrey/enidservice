@@ -154,7 +154,7 @@ class recibo extends REST_Controller
                 ];
                 
                 $usuarios = $this->usuarios_similares($q);
-
+                $this->response(12);
                 $ids_usuarios = array_column($usuarios, 'id');
 
 
@@ -1506,10 +1506,12 @@ class recibo extends REST_Controller
 
         if (fx($param, "fecha_inicio,fecha_termino,tipo_entrega,recibo,v,perfil") && $es_usuario) {
 
-
+            
             $param['es_administrador'] = prm_def($param, 'es_administrador');
+            
             $response = $this->busqueda_pedidos($param);
-
+            
+            
             switch ($param["v"]) {
 
                 case 1:
@@ -2108,20 +2110,32 @@ class recibo extends REST_Controller
 
             $id_usuario = $param["id_usuario"];
             $usuario = $this->app->usuario($id_usuario);
+            
+            
             $response = 0;
             if (es_data($usuario)) {
 
                 $email = pr($usuario, "email");
                 $tel_contacto = pr($usuario, "tel_contacto");
-                $q = ["id_usuario" => $id_usuario, "email" => $email, "tel_contacto" => $tel_contacto];
-                $usuarios = $this->usuarios_similares($q);
+                $facebook = pr($usuario, "facebook");
+                $url_lead = pr($usuario, 'url_lead');
+
+                $q = [
+                    "id_usuario" => $id_usuario, 
+                    "email" => $email, 
+                    "tel_contacto" => $tel_contacto,                    
+                    "facebook" => $facebook,
+                    "url_lead" => $url_lead,
+                ];
+                
+                $usuarios = $this->usuarios_similares($q);                
                 $response = 0;
                 if (es_data($usuarios)) {
 
                     $lista = [];
                     foreach ($usuarios as $row) {
 
-                        $lista[] = $row['idusuario'];
+                        $lista[] = $row['id'];
                     }
                     $ids = implode(",", $lista);
                     $total = $this->recibo_model->get_total_compras_usuario($ids);
