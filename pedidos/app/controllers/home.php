@@ -449,7 +449,7 @@ class Home extends CI_Controller
     private function usuarios_comisionistas()
     {
 
-        return $this->app->api("usuario_perfil/comisionistas/");
+        return $this->app->api("usuario_perfil/comisionistas");
     }
 
     private function get_tipos_entregas($q)
@@ -538,6 +538,9 @@ class Home extends CI_Controller
         $id_servicio = pr($productos_orden_compra, "id_servicio");
         $servicio = $this->app->servicio($id_servicio);
         $compras_en_tiempo = $this->get_num_compras($id_usuario);
+        
+        
+
         $ids_compras = prm_def($compras_en_tiempo, 'ids');
         $resumen_compras = prm_def($compras_en_tiempo, 'total');
         $num_compras = prm_def($resumen_compras, 'compras');
@@ -601,7 +604,7 @@ class Home extends CI_Controller
     private function get_num_compras($id_usuario)
     {
 
-        return $this->app->api("recibo/num_compras_usuario/",
+        return $this->app->api("recibo/num_compras_usuario",
             [
                 "id_usuario" => $id_usuario
             ]

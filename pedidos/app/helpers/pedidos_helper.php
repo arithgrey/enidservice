@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_pendidos($data)
     {
-
+        
         $id_orden_compra = $data["orden"];
         $status_ventas = $data["status_ventas"];
         $productos_orden_compra = $data["productos_orden_compra"];
@@ -1603,6 +1603,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        
         $select_comisionistas = create_select(
             $data['comisionistas'],
             'id_usuario_referencia',
@@ -1677,6 +1678,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
+        
         $titulo = _titulo("ORDENES DE COMPRA");
         $busqueda = _titulo("busqueda", 3);
 
@@ -3583,24 +3585,19 @@ if (!function_exists('invierte_date_time')) {
         $ext = "COMPRAS A LO LARGO DEL TIEMPO ";
         $base = _text_(_between, 'mt-5');
         $total = 'bg_custom_blue p-2 white';
-        $text_compras = flex($ext, $num, _between, 'fp9', $total);
+        $text_compras = flex($ext, $num, _between, 'black', $total);
         $starts = ($num > 0) ? label("★★★★★", 'estrella') : "";
 
-        $ext = " ORDENES DE COMPRA QUE HA REALIZADO ESTE USUARIO ";
+        $ext = "ANTECEDENTES DEL CLIENTE ";
         $link = path_enid('busqueda_pedidos_usuarios', $ids_compras);
-        $solicitudes_pasadas_usuario = a_enid(
-            $solicitudes_pasadas_usuario,
-            [
-                'href' => $link, 'class' => 'white'
-            ]
-        );
-        $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'fp9', $total);
+        
+        $text = flex($ext, $solicitudes_pasadas_usuario, $base, 'strong', $total);
 
         $response[] = d(_titulo('calificación', 2));
 
         $response[] = $text_compras;
         $response[] = $starts;
-        $response[] = $text;
+        $response[] = a_enid($text, ['href' => $link, 'class' => 'w-100' ]);
         return bloque(append($response));
     }
 

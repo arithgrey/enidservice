@@ -137,9 +137,11 @@ class Recibo_model extends CI_Model
             "SELECT ", $f, " FROM proyecto_persona_forma_pago p 
             INNER JOIN producto_orden_compra po ON 
             p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago   
+            INNER JOIN orden_compra oc ON po.id_orden_compra = oc.id_orden_compra
             WHERE id_usuario IN(", $ids, ")",
             $extra
         );
+        
         return $this->db->query($query_get)->result_array();
 
     }

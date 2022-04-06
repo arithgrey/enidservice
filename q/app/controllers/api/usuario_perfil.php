@@ -163,7 +163,7 @@ class usuario_perfil extends REST_Controller
         $response = [];
         foreach ($data as $row) {
 
-            $nombre = $row['nombre'];
+            $nombre = $row['name'];
             $apellido_paterno = $row['apellido_paterno'];
             $apellido_materno = $row['apellido_materno'];
             $row['nombre_usuario'] =
