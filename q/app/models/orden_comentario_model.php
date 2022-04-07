@@ -1,4 +1,8 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php
+
+use PhpParser\Node\Stmt\Return_;
+
+ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Orden_comentario_model extends CI_Model
 {
@@ -46,5 +50,15 @@ class Orden_comentario_model extends CI_Model
 	{
 		return $this->get($params, ["id_orden_comentario" => $id]);
 	}
+
+	function in($ids)
+	{
+		$query_get = "SELECT * FROM orden_comentario 
+			WHERE id_orden_compra IN($ids) ORDER BY fecha_registro DESC";
+		return $this->db->query($query_get)->result_array();
+		
+
+	}
+
 
 }

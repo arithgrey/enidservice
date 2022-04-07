@@ -1253,10 +1253,10 @@ class usuario extends REST_Controller
             $id_usuario = $param["id_usuario"];
             $email = $param["email"];
             $tel_contacto = $param["tel_contacto"];
-            $facebook = $param["tel_contacto"];
+            $facebook = $param["facebook"];
             $url_lead = $param["url_lead"];
 
-            $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto, $facebook,$url_lead);
+            $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto, $facebook, $url_lead);
             
         }
         $this->response($response);

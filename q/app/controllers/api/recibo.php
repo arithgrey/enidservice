@@ -41,7 +41,20 @@ class recibo extends REST_Controller
         $response = [];
         $this->response($response);
     }
+    public function ordenes_de_compra_usuarios_similares_GET()
+    {
+     
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "ids,id_orden_compra")) {
 
+            
+            $response = $this->recibo_model->ordenes_de_compra_usuarios_similares(
+                $param['ids'], $param["id_orden_compra"]);
+                
+        }
+        $this->response($response);
+    }
     function pendientes_sin_cierre_GET()
     {
 
@@ -2128,7 +2141,8 @@ class recibo extends REST_Controller
                     "url_lead" => $url_lead,
                 ];
                 
-                $usuarios = $this->usuarios_similares($q);                
+                $usuarios = $this->usuarios_similares($q);      
+                
                 $response = 0;
                 if (es_data($usuarios)) {
 

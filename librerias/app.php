@@ -101,7 +101,7 @@ class app extends CI_Controller
     {
 
         $q = ['id' => $id_orden_compra];
-        $productos_ordenes_compra = $this->api->api("producto_orden_compra/orden_compra/", $q);
+        $productos_ordenes_compra = $this->api->api("producto_orden_compra/orden_compra", $q);
         return $this->add_imgs_servicio($productos_ordenes_compra);
     }
     function recompensa_orden_compra($id_orden_compra, $descuento = 1)
