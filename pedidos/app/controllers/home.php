@@ -11,7 +11,7 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("pedidos");
         $this->load->library("table");
-        
+
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
@@ -29,19 +29,17 @@ class Home extends CI_Controller
 
 
             $this->vista_seguimiento($param, $data);
-
         } else {
 
 
             $this->valida_seguimiento($param, $data);
-
         }
     }
 
     private function valida_seguimiento($param, $data)
     {
 
-        
+
         $this->app->acceso();
         $costos_operacion = prm_def($param, "costos_operacion");
         $es_costo_operacion = ($costos_operacion > 0);
@@ -50,14 +48,11 @@ class Home extends CI_Controller
 
 
             $this->carga_vista_costos_operacion($param, $data);
-
         } else {
 
 
             $this->seguimiento_pedido($param, $data);
-
         }
-
     }
 
     private function vista_seguimiento($param, $data)
@@ -80,17 +75,14 @@ class Home extends CI_Controller
         $es_domicilio = prm_def($param, "domicilio");
 
         if ($es_domicilio) {
-            
+
 
             $this->view_domicilios($data, $param);
-
         } else {
 
 
             $this->load_view_seguimiento($data, $param);
         }
-
-
     }
 
     private function view_domicilios($data, $param)
@@ -120,7 +112,6 @@ class Home extends CI_Controller
             if ($tiene_acceso) {
                 $this->domicilios($param, $data);
             }
-
         }
     }
 
@@ -151,36 +142,39 @@ class Home extends CI_Controller
                 "asignacion_horario_entrega" => $asignacion_horario_entrega
 
             ];
-        
+
             $contenido = render_domicilio($data);
             $this->app->pagina(
                 $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
-                $contenido, 1
+                $contenido,
+                1
             );
-
         } else {
 
             redirect(path_enid('area_cliente_compras', $id_orden_compra, 0, 1));
         }
-
     }
 
     private function get_ubicaciones_usuario($id_usuario)
     {
 
-        return $this->app->api("ubicacion/usuario/",
-            ["id_usuario" => $id_usuario]);
+        return $this->app->api(
+            "ubicacion/usuario/",
+            ["id_usuario" => $id_usuario]
+        );
     }
 
     private function get_direcciones_usuario($id_usuario)
     {
 
-        return $this->app->api("usuario_direccion/all/",
-            ["id_usuario" => $id_usuario]);
+        return $this->app->api(
+            "usuario_direccion/all/",
+            ["id_usuario" => $id_usuario]
+        );
     }
-    
+
     private function load_view_seguimiento($data, $param)
-    {                
+    {
         $id_orden_compra = $data["id_orden_compra"];
         $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
         $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
@@ -205,7 +199,7 @@ class Home extends CI_Controller
         $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
         $usuario_compra = $this->get_usuario($id_usuario_compra);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
-        
+
         $data["es_lista_negra"] = $es_lista_negra;
         $data["usuario_lista_negra"] = $usuario_lista_negra;
         $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
@@ -215,7 +209,7 @@ class Home extends CI_Controller
         $es_orden_pagada = es_orden_pagada($data);
         $es_vendedor = $data["es_vendedor"];
         $data["evaluacion"] = $this->evalua_compra($productos_orden_compra, $es_orden_pagada, $es_vendedor);
-        
+
         $data['usuario_cliente'] = $usuario_compra;
         $productos_orden_compra = $data["productos_orden_compra"];
         $data["productos_orden_compra"] =
@@ -223,8 +217,6 @@ class Home extends CI_Controller
         $data = texto_pre_pedido($productos_orden_compra, $data);
         $params = $this->input->get();
         $this->app->pagina($data, render_seguimiento($data, $params), 1);
-
-
     }
 
     private function evalua_compra($productos_orden_compra, $es_orden_pagada, $es_vendedor)
@@ -282,15 +274,14 @@ class Home extends CI_Controller
             $id_proyecto_persona_forma_pago = $row["id_proyecto_persona_forma_pago"];
 
             $response[] =
-                $this->app->api("tipificacion_recibo/recibo/",
+                $this->app->api(
+                    "tipificacion_recibo/recibo/",
                     [
                         "recibo" => $id_proyecto_persona_forma_pago
                     ]
                 );
         }
         return $response;
-
-
     }
 
     private function verifica_evaluacion($id_usuario, $id_servicio)
@@ -302,7 +293,6 @@ class Home extends CI_Controller
         ];
 
         return $this->app->api("valoracion/num/", $q);
-
     }
 
     function carga_vista_costos_operacion($param, $data)
@@ -316,8 +306,13 @@ class Home extends CI_Controller
 
             $id_usuario_venta = $row['id_usuario_venta'];
             $id_usuario_referencia = $row['id_usuario_referencia'];
-            propietario($data, $this->id_usuario, $id_usuario_venta, $id_usuario_referencia,
-                path_enid('_area_cliente'));
+            propietario(
+                $data,
+                $this->id_usuario,
+                $id_usuario_venta,
+                $id_usuario_referencia,
+                path_enid('_area_cliente')
+            );
 
             $data = $this->app->cssJs($data, "pedidos_costos_operacion");
             $costos_operacion = $this->get_costo_operacion($param["costos_operacion"]);
@@ -332,8 +327,10 @@ class Home extends CI_Controller
 
                 $total = $total + $row["monto"];
                 $id = $row["id"];
-                $icon = icon("fa fa-times ",
-                    ["onclick" => "confirma_eliminar_concepto('{$id}')"]);
+                $icon = icon(
+                    "fa fa-times ",
+                    ["onclick" => "confirma_eliminar_concepto('{$id}')"]
+                );
                 $this->table->add_row(array(
                     money($row["monto"]),
                     $row["tipo"],
@@ -366,33 +363,34 @@ class Home extends CI_Controller
                 $param["costos_operacion"],
                 $path,
                 $costos_operacion,
-                $recibo, 1, $usuario_comision, $usuario_compra);
-
+                $recibo,
+                1,
+                $usuario_comision,
+                $usuario_compra
+            );
         }
 
         $this->app->pagina($data, $response, 1);
-
     }
 
     private function get_costo_operacion($id_recibo)
     {
 
-        return $this->app->api("costo_operacion/recibo/",
-            ["recibo" => $id_recibo]);
-
+        return $this->app->api(
+            "costo_operacion/recibo/",
+            ["recibo" => $id_recibo]
+        );
     }
 
     private function get_ppfp($id_recibo)
     {
 
         return $this->app->api("recibo/id/", ["id" => $id_recibo]);
-
     }
 
     private function get_tipo_costo_operacion()
     {
         return $this->app->api("tipo_costo/index/", ["x" => 1]);
-
     }
 
     function seguimiento_pedido($param, $data)
@@ -402,7 +400,7 @@ class Home extends CI_Controller
         $es_busqueda = ($id_orden_compra < 1);
 
         $css = ($es_busqueda) ? "pedidos_busqueda" : "pedidos";
-        $data = $this->app->cssJs($data, $css , 1);
+        $data = $this->app->cssJs($data, $css, 1);
 
         $data +=
             [
@@ -417,12 +415,11 @@ class Home extends CI_Controller
         } else {
             $this->busqueda_pedidos($param, $data);
         }
-
     }
 
 
     private function busqueda_pedidos($param, $data)
-    {   
+    {
 
         $es_administrador = in_array($data['id_perfil'], [3]);
         $comisionistas = [];
@@ -430,19 +427,18 @@ class Home extends CI_Controller
         if ($es_administrador) {
             $comisionistas = $this->usuarios_comisionistas();
         }
-        
+
         $data['comisionistas'] = $comisionistas;
-        $ordenes = $this->comisiones_por_pago($data);   
+        $ordenes = $this->comisiones_por_pago($data);
 
-        $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];        
-        $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes']: [];
+        $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];
+        $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes'] : [];
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
-
     }
 
     private function comisiones_por_pago($data)
     {
-        
+
         return $this->app->api("recibo/comisiones_por_pago", ['id_empresa' => $data['id_empresa']]);
     }
 
@@ -467,10 +463,7 @@ class Home extends CI_Controller
         if ($es_recibo) {
 
             $this->carga_detalle_pedido($param, $data);
-
         }
-
-
     }
 
     private function carga_detalle_pedido($param, $data)
@@ -491,26 +484,19 @@ class Home extends CI_Controller
 
                 $form = get_form_fecha_entrega($data);
                 $this->app->pagina($data, $form, 1);
-
-
             } elseif (prm_def($param, "recordatorio") > 0) {
 
 
                 $this->seccion_recordatorio($data);
-
-
             } else {
 
 
                 $this->pedido($data);
             }
-
-
         } else {
 
             $this->app->pagina($data, get_error_message(), 1);
         }
-
     }
 
     private function seccion_recordatorio($data)
@@ -527,19 +513,19 @@ class Home extends CI_Controller
 
     private function pedido($data)
     {
-        
+
         $id_orden_compra = $data["orden"];
         $id_perfil = $data["id_perfil"];
         $productos_orden_compra = $data["productos_orden_compra"];
         $es_administrador = es_administrador($data);
         $id_usuario = pr($productos_orden_compra, "id_usuario");
-        $tipo_tag_arqquetipo = ($es_administrador) ? $this->get_tipo_tag_arqquetipo() : [];
-        $tag_arquetipo = ($es_administrador) ? $this->tag_arquetipo($id_usuario) : [];
         $id_servicio = pr($productos_orden_compra, "id_servicio");
         $servicio = $this->app->servicio($id_servicio);
         $compras_en_tiempo = $this->get_num_compras($id_usuario);
         
-        
+        $ordenes_de_compra_usuarios_similares =  $this->ordenes_de_compra_usuarios_similares($compras_en_tiempo, $id_orden_compra);
+        $historia_compra_tiempo = $this->historia_comentarios($ordenes_de_compra_usuarios_similares);
+
 
         $ids_compras = prm_def($compras_en_tiempo, 'ids');
         $resumen_compras = prm_def($compras_en_tiempo, 'total');
@@ -551,7 +537,7 @@ class Home extends CI_Controller
         $es_venta_comisionada = ($id_usuario != $id_usuario_referencia && $this->id_usuario != $id_usuario_referencia);
         $usuario_comision = ($es_venta_comisionada) ? $this->get_usuario($id_usuario_referencia) : [];
         $es_lista_negra = $this->es_lista_negra($id_usuario);
-        
+
 
         $id_usuario_entrega = pr($productos_orden_compra, 'id_usuario_entrega');
         $id_repartidor = ($es_administrador && $id_usuario_entrega > 0) ? $id_usuario_entrega : $data['id_usuario'];
@@ -559,9 +545,11 @@ class Home extends CI_Controller
         $repartidor = $this->app->add_imgs_usuario($repartidor, $key = "id_usuario");
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
-                        
-        
+
+
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
+
+
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,
@@ -574,8 +562,6 @@ class Home extends CI_Controller
             "num_compras" => $num_compras,
             "servicio" => $servicio,
             "cupon" => $cupon,
-            "tipo_tag_arquetipo" => $tipo_tag_arqquetipo,
-            "tag_arquetipo" => $tag_arquetipo,
             "negocios" => $this->tipos_negocio(),
             "usuario_tipo_negocio" => $this->usuario_tipo_negocio($id_usuario),
             "es_vendedor" => ($this->id_usuario == $id_usuario_referencia && $id_perfil == 6),
@@ -588,11 +574,47 @@ class Home extends CI_Controller
             "id_usuario_referencia" => $id_usuario_referencia,
             "solicitudes_pasadas_usuario" => $solicitudes,
             "ids_compras" => $ids_compras,
-            "recompensa" => $recompensa
+            "recompensa" => $recompensa,
+            "ordenes_de_compra_usuarios_similares" => $ordenes_de_compra_usuarios_similares,
+            "historia_compra_tiempo" => $historia_compra_tiempo,
         ];
 
 
         $this->app->pagina($data, render_pendidos($data), 1);
+    }
+
+    private function ordenes_de_compra_usuarios_similares($usuarios_en_tiempo, $id_orden_compra)
+    {
+
+        $ids_usuarios = prm_def($usuarios_en_tiempo, 'ids');    
+        $array_ids = explode(',', $ids_usuarios);
+            
+        $response  = [];
+        if (es_data($array_ids)) {
+            
+            return $this->app->api(
+                "recibo/ordenes_de_compra_usuarios_similares",
+                [
+                    "ids" => $ids_usuarios,
+                    'id_orden_compra' => $id_orden_compra
+                ]
+            );
+        }
+        return $response;
+    }
+    private function historia_comentarios($ordenes_de_compra_usuarios_similares)
+    {
+
+        $response  = [];
+        if (es_data($ordenes_de_compra_usuarios_similares)) {
+
+            $ids = array_unique(array_column($ordenes_de_compra_usuarios_similares, 'id_orden_compra'));                        
+            if (es_data($ids)) {
+                
+                $response =  $this->get_ordes_comentarios(implode( ",",$ids));
+            }
+            return $response;
+        }
     }
 
     private function get_tipo_recordatorio()
@@ -604,14 +626,14 @@ class Home extends CI_Controller
     private function get_num_compras($id_usuario)
     {
 
-        return $this->app->api("recibo/num_compras_usuario",
+        return $this->app->api(
+            "recibo/num_compras_usuario",
             [
                 "id_usuario" => $id_usuario
             ]
         );
-
     }
-    
+
     private function get_usuario($id_usuario)
     {
         return $this->app->usuario($id_usuario);
@@ -620,16 +642,27 @@ class Home extends CI_Controller
     private function get_orden_comentarios($orden_compra)
     {
 
-        return $this->app->api("orden_comentario/index/",
-            ["orden_compra" => $orden_compra]);
+        return $this->app->api(
+            "orden_comentario/index/",
+            ["orden_compra" => $orden_compra]
+        );
+    }
+    private function get_ordes_comentarios($ids)
+    {
 
+        return $this->app->api(
+            "orden_comentario/ids",
+            ["ids" => $ids]
+        );
     }
 
     private function get_recordatorios($id_recibo)
     {
 
         return $this->app->api(
-            "recordatorio/index/", ["orden_compra" => $id_recibo]);
+            "recordatorio/index/",
+            ["orden_compra" => $id_recibo]
+        );
     }
 
     private function get_tipo_tag_arqquetipo()
@@ -663,7 +696,7 @@ class Home extends CI_Controller
 
     private function busqueda_lista_negra($usuario_compra)
     {
-        
+
         $response = [];
         if (es_data($usuario_compra)) {
 
@@ -675,10 +708,9 @@ class Home extends CI_Controller
                 'url_lead' => pr($usuario_compra, 'url_lead'),
                 'facebook' => pr($usuario_compra, 'facebook')
             ];
-            
+
             $response = $this->app->api("usuario/lista_negra", $q);
         }
         return $response;
-
     }
 }

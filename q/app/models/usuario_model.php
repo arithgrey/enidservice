@@ -614,17 +614,18 @@ class usuario_model extends CI_Model
         return $data_complete;
     }
 
-    function busqueda($id, $email, $tel_contacto, $tel_contacto_alterno, $url_lead = '', $facebook = '')
+    function busqueda($id, $email, $tel_contacto, $tel_contacto_alterno,  $facebook = '', $url_lead = '')
     {
         $where = "WHERE email = '" . $email . "'";
         $extra_email = ($id > 0) ? " OR id = " . $id : " ";
         $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
         $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
         $extra_url_lead = (strlen($url_lead) > 3) ? " OR url_lead = '" . $url_lead."'" : " ";
-        $extra_url_facebook = (strlen($facebook) > 3) ? " OR facebook = '" . $facebook."'" : " ";
+        $extra_url_facebook = (strlen($facebook) > 3) ? " OR facebook like '%".$facebook."%'" : " ";
 
 
         $query_get = "SELECT id FROM users " . $where . $extra_tel . $extra_tel_alterno . $extra_email . $extra_url_lead . $extra_url_facebook;            
+        
         return $this->db->query($query_get)->result_array();
     }
 

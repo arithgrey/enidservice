@@ -249,7 +249,6 @@ class Recibo_model extends CI_Model
     function get_total_compras_usuario($ids)
     {
 
-        $a = 0;
         $query_get = "SELECT COUNT(0)num FROM 
                         proyecto_persona_forma_pago 
                         WHERE 
@@ -257,6 +256,7 @@ class Recibo_model extends CI_Model
                         AND 
                         id_usuario IN (" . $ids . ")";
         $compras = $this->db->query($query_get)->result_array()[0]["num"];
+        
         $query_get = "SELECT COUNT(0)num FROM 
                         proyecto_persona_forma_pago 
                         WHERE                      
@@ -1707,4 +1707,13 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+    function ordenes_de_compra_usuarios_similares($ids, $id_orden_compra)
+    {
+        $query_get = "select ppfp.*, poc.id_orden_compra from proyecto_persona_forma_pago ppfp inner join 
+        producto_orden_compra poc on ppfp.id_proyecto_persona_forma_pago =  poc.id_proyecto_persona_forma_pago 
+        where ppfp.id_usuario in ($ids) AND poc.id_orden_compra != $id_orden_compra";
+        
+        return $this->db->query($query_get)->result_array();
+
+    }
 }   
