@@ -10,6 +10,7 @@ php artisan migrate --path=database/migrations/2022_03_08_081320_create_bancos_t
 php artisan migrate --path=database/migrations/2022_03_08_230322_create_cuenta_bancos_table.php
 
 
+
 RENAME TABLE empresa TO empresas;
 alter table empresas change nombreempresa nombre varchar(50);
 
@@ -424,3 +425,6 @@ ______________________
 
 alter table users add es_prospecto int not null default 0;
 alter table users add url_lead text;
+
+php artisan migrate --path=database/migrations/2022_04_12_061636_create_orden_comentarios_table.php
+php artisan migrate --path=database/migrations/2022_03_10_081443_create_orden_compras_table.php

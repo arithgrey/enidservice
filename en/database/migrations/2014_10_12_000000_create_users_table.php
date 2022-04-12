@@ -38,6 +38,7 @@ return new class extends Migration
             $table->integer('puntuacion')->nullable(false)->default(0);
             $table->integer('orden_producto')->nullable(false)->default(0);
             $table->integer('idtipo_comisionista')->nullable(false)->default(1);
+            $table->string('facebook');
 
             $table->timestamps();
         });

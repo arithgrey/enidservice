@@ -30,6 +30,7 @@ Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController')
 
 Route::resource('lista-negra', 'ListaNegra\ListaNegraController');
 
+Route::resource('orden-comentario', 'OrdenComentario\OrdernComentarioController');
 
 Route::resource('banco', 'Banco\BancoController')
     ->middleware('auth');
