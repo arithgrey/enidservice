@@ -33,8 +33,6 @@ class ServicioFactory extends Factory
             'url_video_facebook' => $this->faker->url(),
             'link_amazon' => $this->faker->url(),
             'link_ml' =>  $this->faker->url(),
-
-
         ];
     }
 }

@@ -1,11 +1,13 @@
 <template>
   <app-layout title="Listado">
-
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+      <!--
     <div class="ml-auto">
       <en-boton @click="crearListaNegra()"> Agregar </en-boton>
     </div>
-      <div class="bg-white p-2">
+    -->
+
+      <div class="w-1/3 mx-auto">
         <en-input>
           <template #label> Busqueda</template>
           <template #input>
@@ -17,28 +19,50 @@
           </template>
         </en-input>
       </div>
-      <table class="w-full">
+
+      <table class="w-2/3 mx-auto
+       mt-5">
         <tbody>
           <tr
-            @click="showUser(lista)"
             class="border-b-2 border-blue-600 cursor-pointer"
             v-for="lista in lista_negra.data"
           >
-            <td>{{ lista.user.name.toUpperCase() }}</td>
+            <td>
+              {{ lista.user.name.toUpperCase() }}
+            </td>
             <td>{{ lista.user.tel_contacto }}</td>
+            <td v-if="lista.user.facebook">
+              <a class="font-bold" :href="lista.user.facebook" target="_blank">
+                Facebook
+              </a>
+            </td>
+            <td v-if="lista.user.url_lead">
+              <a class="font-bold" :href="lista.user.url_lead" target="_blank">
+                Conversación de facebook
+              </a>
+            </td>
+            <td>
+              <p
+                @click="showUser(lista)"
+                class="
+                  bg-neutral-900
+                  p-1
+                  font-bold
+                  text-white text-center
+                  border-slate-50
+                  mb-1
+                "
+              >
+                Es lista negra
+              </p>
+            </td>
           </tr>
         </tbody>
       </table>
-
-      <en-paginacion
-        ref="enpaginacion"
-        class="mt-6"
-        :links="lista_negra.links"
-      />
     </div>
+    <OrdenComentario ref="ordenComentario"/>
     <ShowModal ref="showModal" />
     <CrearModal ref="crearModal" />
-
   </app-layout>
 </template>
 
@@ -46,11 +70,13 @@
 import { defineComponent } from "vue";
 import ShowModal from "./ShowModal";
 import CrearModal from "./CrearModal";
+import OrdenComentario from "../OrdenComentario/Listado";
 
 export default defineComponent({
   components: {
     ShowModal,
     CrearModal,
+    OrdenComentario,
   },
   props: {
     lista_negra: Object,
@@ -63,17 +89,20 @@ export default defineComponent({
   watch: {
     q: function (value) {
       this.busqueda();
+      this.busquedaOrdenComentario();
     },
   },
   methods: {
+    busquedaOrdenComentario: function() {
+
+        this.$refs.ordenComentario.busqueda(this.q);
+    },
     showUser: function (lista) {
       this.$refs.showModal.muestraModal(lista);
     },
     crearListaNegra: function () {
-
       this.$refs.crearModal.muestraModal();
     },
-
     busqueda: function busqueda() {
       let params = { q: this.q };
       this.$inertia.replace(this.route("lista-negra.index", params));

@@ -28,6 +28,14 @@
                   >
                 </span>
               </p>
+              <p class="mt-1">
+                <span class="text-black">
+                  <a v-if="url_lead" :href="url_lead" target="_blank"
+                    >Conversación de Facebook</a
+                  >
+                </span>
+              </p>
+
 
               <div class="mt-4">
                 <div class="font-bold">Motivo</div>
@@ -69,6 +77,7 @@ export default defineComponent({
     muestraModal: function (lista_negra) {
       this.lista_negra = lista_negra;
       this.facebook = lista_negra.user.facebook;
+      this.url_lead = lista_negra.user.url_lead;
       this.$refs.enModal.toggleModal();
     },
   },

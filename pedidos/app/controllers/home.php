@@ -262,7 +262,7 @@ class Home extends CI_Controller
     private function get_estatus_enid_service($q = [])
     {
 
-        return $this->app->api("status_enid_service/index/", $q);
+        return $this->app->api("status_enid_service/index", $q);
     }
 
     private function get_tipificaciones($productos_orden_compra)
@@ -275,7 +275,7 @@ class Home extends CI_Controller
 
             $response[] =
                 $this->app->api(
-                    "tipificacion_recibo/recibo/",
+                    "tipificacion_recibo/recibo",
                     [
                         "recibo" => $id_proyecto_persona_forma_pago
                     ]
@@ -292,7 +292,7 @@ class Home extends CI_Controller
             "id_servicio" => $id_servicio,
         ];
 
-        return $this->app->api("valoracion/num/", $q);
+        return $this->app->api("valoracion/num", $q);
     }
 
     function carga_vista_costos_operacion($param, $data)
@@ -390,7 +390,7 @@ class Home extends CI_Controller
 
     private function get_tipo_costo_operacion()
     {
-        return $this->app->api("tipo_costo/index/", ["x" => 1]);
+        return $this->app->api("tipo_costo/index", ["x" => 1]);
     }
 
     function seguimiento_pedido($param, $data)
@@ -548,8 +548,7 @@ class Home extends CI_Controller
 
 
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
-
-
+        
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,
@@ -620,7 +619,7 @@ class Home extends CI_Controller
     private function get_tipo_recordatorio()
     {
 
-        return $this->app->api("tipo_recordatorio/index/");
+        return $this->app->api("tipo_recordatorio/index");
     }
 
     private function get_num_compras($id_usuario)
@@ -643,8 +642,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-            "orden_comentario/index/",
-            ["orden_compra" => $orden_compra]
+            "orden_comentario/index",["orden_compra" => $orden_compra]
         );
     }
     private function get_ordes_comentarios($ids)
@@ -660,32 +658,32 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-            "recordatorio/index/",
+            "recordatorio/index",
             ["orden_compra" => $id_recibo]
         );
     }
 
     private function get_tipo_tag_arqquetipo()
     {
-        return $this->app->api("tipo_tag_arquetipo/index/");
+        return $this->app->api("tipo_tag_arquetipo/index");
     }
 
     private function tag_arquetipo($id_usuario)
     {
         $q = ['usuario' => $id_usuario];
-        return $this->app->api("tag_arquetipo/index/", $q);
+        return $this->app->api("tag_arquetipo/index", $q);
     }
 
     private function tipos_negocio()
     {
 
-        return $this->app->api("tipo_negocio/index/");
+        return $this->app->api("tipo_negocio/index");
     }
 
     private function usuario_tipo_negocio($id_usuario)
     {
 
-        return $this->app->api("usuario_tipo_negocio/usuario/", ['id_usuario' => $id_usuario]);
+        return $this->app->api("usuario_tipo_negocio/usuario", ['id_usuario' => $id_usuario]);
     }
 
     private function es_lista_negra($id_usuario)

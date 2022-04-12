@@ -7,7 +7,7 @@ class Orden_compra_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'orden_compra';
+        $this->tabla = 'orden_compras';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')

@@ -2,9 +2,10 @@
 
 namespace Database\Factories;
 
+use App\Models\OrdenCompra;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class OrdenCompraFactory extends Factory
+class OrdenComentarioFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -14,8 +15,8 @@ class OrdenCompraFactory extends Factory
     public function definition()
     {
         return [
-
-            'cobro_secundario' => $this->faker->randomFloat(1, 100, 2300),
+            'comentario' => $this->faker->sentence(),
+            'id_orden_compra' => OrdenCompra::factory()
         ];
     }
 }

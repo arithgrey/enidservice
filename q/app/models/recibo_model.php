@@ -137,7 +137,7 @@ class Recibo_model extends CI_Model
             "SELECT ", $f, " FROM proyecto_persona_forma_pago p 
             INNER JOIN producto_orden_compra po ON 
             p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago   
-            INNER JOIN orden_compra oc ON po.id_orden_compra = oc.id_orden_compra
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra
             WHERE id_usuario IN(", $ids, ")",
             $extra
         );
@@ -190,7 +190,7 @@ class Recibo_model extends CI_Model
         $query_get = "SELECT " . $f . " FROM 
         proyecto_persona_forma_pago p INNER JOIN producto_orden_compra po 
         ON po.id_proyecto_persona_forma_pago = p.id_proyecto_persona_forma_pago 
-            INNER JOIN orden_compra oc ON po.id_orden_compra = oc.id_orden_compra ";
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra ";
 
 
         $ext_usuario = $this->get_usuario($param);
@@ -1694,7 +1694,7 @@ class Recibo_model extends CI_Model
             proyecto_persona_forma_pago  p 
             INNER JOIN producto_orden_compra o ON 
             p.id_proyecto_persona_forma_pago = o.id_proyecto_persona_forma_pago
-            INNER JOIN orden_compra oc ON 
+            INNER JOIN orden_compras oc ON 
             oc.id_orden_compra =  o.id_orden_compra 
             WHERE 
             p.id_usuario_referencia = $id_usuario
