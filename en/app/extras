@@ -428,3 +428,6 @@ alter table users add url_lead text;
 
 php artisan migrate --path=database/migrations/2022_04_12_061636_create_orden_comentarios_table.php
 php artisan migrate --path=database/migrations/2022_03_10_081443_create_orden_compras_table.php
+______________________
+
+RENAME TABLE proyecto_persona_forma_pago TO proyecto_persona_forma_pagos;

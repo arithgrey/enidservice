@@ -15,7 +15,7 @@ class ListaNegraController extends Controller
 
         $q = $request->get('q');
 
-        $lista_negra = ListaNegra::join('users', 'lista_negras.id_usuario', 'users.id')
+        $lista_negra = ListaNegra::Join('users', 'lista_negras.id_usuario', 'users.id')
             ->select('lista_negras.*')
             ->with('user', 'motivo')
             ->orwhere('users.facebook', 'LIKE', "%$q%")

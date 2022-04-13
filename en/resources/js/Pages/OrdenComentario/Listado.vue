@@ -1,6 +1,6 @@
 <template>
   <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-    <div v-if="orden_comentarios.data" class="w-2/3 mx-auto mt-5">
+    <div v-if="orden_comentarios.data" class="w-2/3 mx-auto">
       <p class="font-bold">
         Conversasiónes donde se ha mencionado a este contacto
       </p>
@@ -24,7 +24,6 @@
         </tr>
       </tbody>
     </table>
-
   </div>
 </template>
 

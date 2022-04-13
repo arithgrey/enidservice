@@ -20,6 +20,11 @@
         </en-input>
       </div>
 
+    <div v-if="lista_negra.data" class="w-2/3 mx-auto mt-5">
+      <p class="font-bold">
+        Busqueda en lista negra
+      </p>
+    </div>
       <table class="w-2/3 mx-auto
        mt-5">
         <tbody>
@@ -61,6 +66,7 @@
       </table>
     </div>
     <OrdenComentario ref="ordenComentario"/>
+    <Ppfp ref="ppfp"/>
     <ShowModal ref="showModal" />
     <CrearModal ref="crearModal" />
   </app-layout>
@@ -71,12 +77,14 @@ import { defineComponent } from "vue";
 import ShowModal from "./ShowModal";
 import CrearModal from "./CrearModal";
 import OrdenComentario from "../OrdenComentario/Listado";
+import Ppfp from "../Ppfp/Listado";
 
 export default defineComponent({
   components: {
     ShowModal,
     CrearModal,
     OrdenComentario,
+    Ppfp,
   },
   props: {
     lista_negra: Object,
@@ -90,11 +98,14 @@ export default defineComponent({
     q: function (value) {
       this.busqueda();
       this.busquedaOrdenComentario();
+      this.busquedaPpfp();
     },
   },
   methods: {
+    busquedaPpfp: function() {
+        this.$refs.ppfp.busqueda(this.q);
+    },
     busquedaOrdenComentario: function() {
-
         this.$refs.ordenComentario.busqueda(this.q);
     },
     showUser: function (lista) {

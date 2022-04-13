@@ -95,4 +95,9 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Empresa::class,  'id_empresa');
     }
+    public function ppfp()
+    {
+
+        return $this->hasMany(ProyectoPersonaFormaPago::class,'id_usuario');
+    }
 }
