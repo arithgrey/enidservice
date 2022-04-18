@@ -848,7 +848,7 @@ class serviciosmodel extends CI_Model
         $query_update = "SELECT s.id_servicio, s.fecha_registro , DATEDIFF(s.fecha_registro, CURRENT_DATE()) dias
                             FROM 
                             servicio s 
-                            LEFT JOIN proyecto_persona_forma_pago p  
+                            LEFT JOIN proyecto_persona_forma_pagos p  
                             ON s.id_servicio =  p.id_servicio
                             WHERE 
                             s.fecha_registro < DATE_ADD(current_date() , INTERVAL  - 7 DAY) AND s.status = 1

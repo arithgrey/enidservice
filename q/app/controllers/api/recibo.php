@@ -167,7 +167,7 @@ class recibo extends REST_Controller
                 ];
                 
                 $usuarios = $this->usuarios_similares($q);
-                $this->response(12);
+                
                 $ids_usuarios = array_column($usuarios, 'id');
 
 
@@ -1490,17 +1490,20 @@ class recibo extends REST_Controller
     private function busqueda_pedidos($param)
     {
         $ids = prm_def($param, 'ids');
-        if ($param["recibo"] > 0) {
+        if ($param["recibo"] > 0 || strlen($param["cliente"]) > 1 ) {
             /*Busqueda por número recibo*/
-            $params = $this->parametros_busqueda(1);
-            $response = $this->recibo_model->q_get($params, $param["recibo"]);
+            
+            $params = $this->parametros_busqueda(0);
+            $response = $this->recibo_model->get_q($params, $param, 1);
+            
         } elseif ($ids != 0) {
-
+            
             $params = $this->parametros_busqueda(0);
             $response = $this->recibo_model->ids_usuarios($params, $ids);
         } else {
-
+            
             $params = $this->parametros_busqueda(0);
+            
             $response = $this->recibo_model->get_q($params, $param);
         }
         return $response;
@@ -1523,6 +1526,7 @@ class recibo extends REST_Controller
             $param['es_administrador'] = prm_def($param, 'es_administrador');
             
             $response = $this->busqueda_pedidos($param);
+            
             
             
             switch ($param["v"]) {

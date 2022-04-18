@@ -44,7 +44,7 @@ class Servicio_relacion_model extends CI_Model
     {
 
         $query_get = "SELECT * FROM servicio_relacion WHERE id_servicio_dominante IN 
-                        (SELECT id_servicio FROM proyecto_persona_forma_pago 
+                        (SELECT id_servicio FROM proyecto_persona_forma_pagos
                         WHERE id_usuario = $id_usuario 
                         AND se_cancela < 1 
                         AND cancela_email < 1 

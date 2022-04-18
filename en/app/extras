@@ -431,3 +431,5 @@ php artisan migrate --path=database/migrations/2022_03_10_081443_create_orden_co
 ______________________
 
 RENAME TABLE proyecto_persona_forma_pago TO proyecto_persona_forma_pagos;
+______________________
+RENAME TABLE producto_orden_compra TO producto_orden_compras;
