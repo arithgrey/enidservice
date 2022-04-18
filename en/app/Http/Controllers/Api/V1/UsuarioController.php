@@ -22,12 +22,20 @@ class UsuarioController extends Controller
             "proyecto_persona_forma_pagos",
             "users.id",
             "proyecto_persona_forma_pagos.id_usuario"
-        )->select(
-            'proyecto_persona_forma_pagos.*',
-            'users.name',
-            'users.facebook',
-            'users.tel_contacto',
+        )->join(
+            "producto_orden_compras",
+            "proyecto_persona_forma_pagos.id_proyecto_persona_forma_pago",
+            "producto_orden_compras.id_proyecto_persona_forma_pago"
         )
+
+            ->select(
+                'proyecto_persona_forma_pagos.*',
+                'users.name',
+                'users.facebook',
+                'users.tel_contacto',
+                'producto_orden_compras.id_orden_compra'
+
+            )
             ->where('tel_contacto', $q)
             ->orwhere('facebook', $q)
             ->paginate(20);

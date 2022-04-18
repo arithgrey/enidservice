@@ -34,7 +34,7 @@ class ventas_encuentro_model extends CI_Model
                         pe.id_linea_metro,
                         l.nombre nombre_linea
                         FROM  
-                        proyecto_persona_forma_pago  r 
+                        proyecto_persona_forma_pagos  r 
                         INNER JOIN 
                         proyecto_persona_forma_pago_punto_encuentro p  
                         ON  

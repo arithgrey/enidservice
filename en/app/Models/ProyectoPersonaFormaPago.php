@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProyectoPersonaFormaPago extends Model
 {
     use HasFactory;
-    protected $appends = ['es_cancelacion'];
+    protected $appends = ['es_cancelacion','path_orden'];
     function user()
     {
         return $this->belongsTo(User::class, 'id_usuario');
@@ -25,4 +25,10 @@ class ProyectoPersonaFormaPago extends Model
         }
         return $response;
     }
+    public function getPathOrdenAttribute()
+    {
+        return "https://enidservices.com/web/pedidos/?recibo=$this->id_orden_compra";
+    }
+
+
 }

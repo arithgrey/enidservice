@@ -289,7 +289,7 @@ class actividad_web_model extends CI_Model
                       SUM(CASE WHEN status = 7 THEN 1 ELSE 0 END)envios, 
                       SUM(CASE WHEN status = 10 AND " . $where_cancelacion . " THEN 1 ELSE 0 END)cancelaciones
                       FROM 
-                      proyecto_persona_forma_pago 
+                      proyecto_persona_forma_pagos 
                       WHERE
                       1=1 
                       AND 
@@ -598,7 +598,7 @@ class actividad_web_model extends CI_Model
                 SUM(CASE WHEN se_cancela > 0 OR  cancela_cliente > 0  THEN 1 ELSE  0 END )canceladas ,
                 id_usuario_referencia
                 FROM 
-                proyecto_persona_forma_pago                
+                proyecto_persona_forma_pagos                
                 WHERE 
                 DATE(fecha_registro)
                 BETWEEN 
@@ -615,7 +615,7 @@ class actividad_web_model extends CI_Model
                 COUNT(0)proximas,
                 id_usuario_referencia id_usuario_agenda
                 FROM 
-                proyecto_persona_forma_pago                
+                proyecto_persona_forma_pagos                
                 WHERE 
                 status != 19 
                 AND
@@ -644,7 +644,7 @@ class actividad_web_model extends CI_Model
                 SUM(CASE WHEN status = 19  THEN 1 ELSE  0 END )lista_negra ,
                 id_usuario_entrega
                 FROM 
-                proyecto_persona_forma_pago                
+                proyecto_persona_forma_pagos                
                 WHERE 
                 DATE(fecha_registro)
                 BETWEEN 
@@ -661,7 +661,7 @@ class actividad_web_model extends CI_Model
                 COUNT(0)proximas,
                 id_usuario_entrega id_repartidor
                 FROM 
-                proyecto_persona_forma_pago                
+                proyecto_persona_forma_pagos                
                 WHERE 
                 status != 19 
                 AND
@@ -772,9 +772,9 @@ FROM usuario_deseo_compra;";
         $query_get = "SELECT 
                         DISTINCT(po.id_orden_compra) productos_enviados
                         FROM  
-                        proyecto_persona_forma_pago p
+                        proyecto_persona_forma_pagos p
                         INNER JOIN  
-                        producto_orden_compra po 
+                        producto_orden_compras po 
                         ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
                         WHERE  
                         p.saldo_cubierto < 1                        
