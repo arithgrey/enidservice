@@ -734,7 +734,7 @@ function create_contenido_menu($data)
 {
 
     $navegacion = prm_def($data, "data_navegacion", []);
-    $id_empresa = prm_def($data, "idempresa");
+    $id_empresa = prm_def($data, "id_empresa");
     $menu = [];
 
     foreach ($navegacion as $row) {

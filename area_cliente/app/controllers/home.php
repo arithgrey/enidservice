@@ -86,7 +86,7 @@ class Home extends CI_Controller
         $es_administrador_vendedor = es_administrador_o_vendedor($data);
         $tipo_entrega = $recibo['tipo_entrega'];
         $contra_entrega_domicilio = $recibo['contra_entrega_domicilio'];
-        $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
+        $id_recibo = $recibo["id"];
 
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {

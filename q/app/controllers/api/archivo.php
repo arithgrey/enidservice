@@ -113,7 +113,7 @@ class Archivo extends REST_Controller
     {
 
         $param += [
-            "id_empresa" => $this->app->get_session("idempresa"),
+            "id_empresa" => $this->app->get_session("id_empresa"),
             "id_usuario" => $this->id_usuario,
         ];
 

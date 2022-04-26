@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
 
         $texto_previo = _text_(
             'Orden de compra #',
-            pr($recibo, 'id_proyecto_persona_forma_pago'),
+            pr($recibo, 'id'),
             'cliente',
             $nombre_cliente,
             'tel',
@@ -651,7 +651,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_usuario_entrega = pr($recibo, 'id_usuario_entrega');
-        $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+        $id_recibo = pr($recibo, 'id');
         $path = path_enid('usuario_contacto', _text($id_usuario_entrega, _text('&servicio=', $id_recibo)));
 
         $path_img_usuario_entrega = pr($recibo, "url_img_usuario");
@@ -1208,7 +1208,7 @@ if (!function_exists('invierte_date_time')) {
             $monto_a_pagar = $r["monto_a_pagar"] * $articulos;
             $seccion[] = d(a_enid(
                 img($path),
-                path_enid("pedidos_recibo", $r["id_proyecto_persona_forma_pago"])
+                path_enid("pedidos_recibo", $r["id"])
             ));
 
             $seccion[] = _titulo(flex("TOTAL ", money($monto_a_pagar), _flex_right, 'mr-md-4'));
@@ -1363,7 +1363,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $checkout = ticket_pago($deuda, [], 2);
-        $id_recibo = pr($recibo, 'id_proyecto_persona_forma_pago');
+        $id_recibo = pr($recibo, 'id');
         $tipo_entrega = pr($recibo, 'tipo_entrega');
         $id_usuario_compra = pr($recibo, 'id_usuario');
         $saldo_pendiente = $checkout['saldo_pendiente_pago_contra_entrega'];
@@ -2809,7 +2809,7 @@ if (!function_exists('invierte_date_time')) {
                     0,
                     path_enid(
                         "area_cliente_compras",
-                        $recibo["id_proyecto_persona_forma_pago"]
+                        $recibo["id"]
                     )
                 ),
                 1
@@ -3203,7 +3203,7 @@ if (!function_exists('invierte_date_time')) {
 
             $linea_producto_orden_compra = [];
             $total = $row["num_ciclos_contratados"];
-            $id_proyecto_persona_forma_pago = $row["id_proyecto_persona_forma_pago"];
+            $id_proyecto_persona_forma_pago = $row["id"];
             $imagen =
                 img(
                     [
@@ -3796,7 +3796,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $id_usuario = pr($recibo, "id_usuario");
-        $id_recibo = pr($recibo, "id_proyecto_persona_forma_pago");
+        $id_recibo = pr($recibo, "id");
         $response = [];
 
         $es_intento = (pr($recibo, 'saldo_cubierto') < 1);
@@ -3841,7 +3841,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($recibo)) {
 
             $recibo = $recibo[0];
-            $id_recibo = $recibo["id_proyecto_persona_forma_pago"];
+            $id_recibo = $recibo["id"];
             $status = $recibo["status"];
             $saldo_cubierto_envio = $recibo["saldo_cubierto_envio"];
             $monto_a_pagar = $recibo["monto_a_pagar"];

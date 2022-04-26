@@ -1,110 +1,91 @@
-s<template>
+<template>
   <EnModal ref="enModal">
     <template #contenido>
-      <div class="flex flex-col items-center justify-center bg-white">
+      <form @submit.prevent="registrar(form)">
+        <div class="bg-slate-900 text-white mb-5 p-2">
+          Registra datos de personas que puedan implicar un riesgo al momento de
+          su entrega
+        </div>
+        <select v-model="form.tipo" class="min-w-full mt-3 mb-3">
+          <option value="0">Cuidado al contactar</option>
+          <option value="1">
+            Lista negra (No le vendemos a menos de que pague antes)
+          </option>
+        </select>
 
-          <form @submit.prevent="registrar(form)">
-            <div class="flex flex-col">
-              <div class="mt-3">
-                <h2 class="font-semibold text-xl">
-                  Agregar a lista negra
-                </h2>
-              </div>
-            </div>
-
-
-
-            <div class="mt-3 mb-3">
-              <en-input v-bind:input="inputNombre">
-                <template #label> Tu nombre* </template>
-                <template #input>
-                  <input
-                    type="text"
-                    name="nombre"
-                    v-model="form.nombre"
-                    class="w-full format_input"
-                    placeholder="ejemplo: Jonathan"
-                    id="nombre"
-                  />
-                </template>
-                <template #errores>
-                  <div v-if="errors.nombre" class="format_error">
-                    {{ errors.nombre }}
-                  </div>
-                </template>
-              </en-input>
-            </div>
-
-            <div class="mt-3 mb-3">
-              <en-input v-bind:input="inputTelefono">
-                <template #label> Teléfono </template>
-                <template #input>
-                  <input
-                    type="telefono"
-                    name="telefono"
-                    v-model="form.telefono"
-                    class="telefono format_input mt-2 w-full"
-                    placeholder="ejemplo: 5552961028"
-                  />
-                </template>
-                <template #errores>
-                  <div v-if="errors.telefono" class="format_error">
-                    {{ errors.telefono }}
-                  </div>
-                </template>
-              </en-input>
-            </div>
+        <en-input
+          >Nombre
+          <template #label> Nombre</template>
+          <template #input>
             <input
-              type="hidden"
-              name="recomendaria"
-              v-model="form.recomendaria"
-              class="recomendaria hiden"
+              class="format_input"
+              v-model="form.name"
+              placeholder="¿Nombre?"
             />
+            <p v-if="errors.name" class="format_error">
+              {{ errors.name[0] }}
+            </p>
+          </template>
+        </en-input>
+
+        <div
+          v-if="identificador > 0"
+          class="mt-4 mb-3 p-2 border-4 border-sky-500"
+        >
+          Registra el
+          <span class="font-bold"> número telefónico </span>
+          o
+          <span class="font-bold"> Facebook </span>
+          para identificarlo
+        </div>
+        <en-input>
+          <template #label> Teléfono</template>
+          <template #input>
             <input
-              type="hidden"
-              name="id_servicio"
-              v-model="form.id"
-              class="id_servicio hiden"
+              class="format_input"
+              v-model="form.tel_contacto"
+              placeholder="¿Teléfono?"
+              type="tel"
             />
+            <p v-if="errors.tel_contacto" class="format_error">
+              {{ errors.tel_contacto[0] }}
+            </p>
+          </template>
+        </en-input>
 
-            <select v-model="form.id_tipo_valoracion" name="id_tipo_valoracion">
-              <option disabled value="">Seleccione un elemento</option>
-              <option
-                v-for="tipo_valoracion in tipos_valoraciones"
-                v-bind:value="tipo_valoracion.id"
-              >
-                {{ tipo_valoracion.nombre }}
-              </option>
-            </select>
-            <div v-if="errors.id_tipo_valoracion" class="format_error">
-              {{ errors.id_tipo_valoracion }}
-            </div>
+        <en-input
+          >Facebook
+          <template #label> Facebook</template>
+          <template #input>
+            <input
+              class="format_input"
+              v-model="form.facebook"
+              placeholder="¿Facebook?"
+              type="url"
+            />
+          </template>
+        </en-input>
 
-            <div class="mt-3">
-              <en-text-area v-bind:input="inputComentario">
-                <template #label> Tu reseña (comentarios)* </template>
-                <template #area>
-                  <textarea
-                    class="format_text_area w-full comentario"
-                    name="comentario"
-                    v-model="form.comentario"
-                    id="comentario"
-                    placeholder="¿Cual fué tu experiencia?"
-                  ></textarea>
-                </template>
-                <template #errores>
-                  <div v-if="errors.comentario" class="format_error">
-                    {{ errors.comentario }}
-                  </div>
-                </template>
-              </en-text-area>
-            </div>
-
-            <div class="mt-3 mb-3">
-              <en-boton> Registrar </en-boton>
-            </div>
-          </form>
-
+        <en-text-area>
+          <template #label> Comentarios* </template>
+          <template #area>
+            <textarea
+              class="format_text_area w-full comentario"
+              name="comentario"
+              v-model="form.comentario"
+              id="comentario"
+              placeholder="¿Cual fué tu experiencia?"
+            ></textarea>
+          </template>
+        </en-text-area>
+        <div class="mt-3 mb-3">
+          <en-boton> Enviar reporte </en-boton>
+        </div>
+      </form>
+      <div v-if="registrado > 0">
+        <div class="bg-blue-800 p-1 shadow-md text-white">
+          <h3 class="font-semibold text-lg mb-1">Registrado</h3>
+        </div>
       </div>
     </template>
   </EnModal>
@@ -116,32 +97,41 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "crear-modal",
   components: {},
-  props: {
-      errors: Object,
-  },
+  props: {},
   data() {
     return {
-        form: this.$inertia.form({
-        comentario: this.comentario,
-        calificacion: this.calificacion,
-        recomendaria: this.recomendaria,
-        titulo: this.titulo,
-        email: this.email,
-        nombre: this.nombre,
-        id_servicio: this.id,
-        id_tipo_valoracion: this.id_tipo_valoracion,
+      errors: [],
+      registrado: 0,
+      identificador: 0,
+      form: this.$inertia.form({
+        tipo: 0,
+        name: "",
+        tel_contacto: "",
+        facebook: "",
+        comentario: "Persona Irrespetuosa",
       }),
-      errors:Object,
-
     };
   },
   methods: {
-    muestraModal: function () {
-
-        this.$refs.enModal.toggleModal();
+    formModal: function () {
+      this.$refs.enModal.toggleModal();
     },
     registrar: function (form) {
-
+      if (form.tel_contacto.length > 5 || form.facebook.length > 10) {
+        axios
+          .post(route("lead.store"), form)
+          .then((data) => {
+            debugger;
+            this.registrado = 1;
+          })
+          .catch((error) => {
+            debugger;
+            this.errors = error.response.data.errors;
+          });
+        this.identificador = 0;
+      } else {
+        this.identificador = 1;
+      }
     },
   },
 });

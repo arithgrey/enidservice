@@ -17,4 +17,11 @@ class CicloFacturacionTest extends TestCase
         $ciclo_facturacion = new CicloFacturacion();
         $this->assertInstanceOf(Collection::class, $ciclo_facturacion->servicios);
     }
+    public function test_tiene_muchos_ppfps()
+    {
+
+        $ciclo_facturacion = new CicloFacturacion();
+        $this->assertInstanceOf(Collection::class, $ciclo_facturacion->ppfps);
+    }
+
 }

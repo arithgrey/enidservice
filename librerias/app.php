@@ -295,7 +295,7 @@ class app extends CI_Controller
             $data["meta_keywords"] = "";
             $data["url_img_post"] = "";
             $data["id_usuario"] = $session["id_usuario"];
-            $data["id_empresa"] = $session["idempresa"];
+            $data["id_empresa"] = $session["id_empresa"];
             $data["info_empresa"] = $session["info_empresa"];
             $data["desc_web"] = "";
             $data["data_status_enid"] = $session["data_status_enid"];
@@ -451,8 +451,8 @@ class app extends CI_Controller
         $productos_orden_compra = $this->productos_ordenes_compra($id_orden_compra);
 
         foreach ($productos_orden_compra as $row) {
-
-            $saldos[] = $this->get_recibo_saldo_pendiente($row["id_proyecto_persona_forma_pago"]);
+            
+            $saldos[] = $this->get_recibo_saldo_pendiente($row["id"]);
         }
         return $saldos;
     }
@@ -516,10 +516,11 @@ class app extends CI_Controller
 
         $response = [];
         foreach ($producto_orden_compra as $row) {
+            
 
             $tipo_entrega = $row["tipo_entrega"];
             $ubicacion = $row["ubicacion"];
-            $id_recibo = $row["id_proyecto_persona_forma_pago"];
+            $id_recibo = $row["id"];
 
             switch ($tipo_entrega) {
 

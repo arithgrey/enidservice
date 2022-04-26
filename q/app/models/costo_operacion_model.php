@@ -78,7 +78,7 @@ class Costo_operacion_model extends CI_Model
     function get_recibos_sin_costos($id_usuario, $id_empresa)
     {
         $query_get = "SELECT 
-                        id_proyecto_persona_forma_pago id_recibo, 
+                        id id_recibo, 
                         saldo_cubierto 
                         FROM 
                         proyecto_persona_forma_pagos  p  
@@ -93,11 +93,11 @@ class Costo_operacion_model extends CI_Model
                         AND se_cancela < 1 
                         AND cancela_cliente < 1
                         AND
-                        id_proyecto_persona_forma_pago 
+                        id 
                         NOT IN (SELECT id_recibo FROM costo_operacion WHERE id_tipo_costo = 12)                        
                         AND 
-                        id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)                    
-                        ORDER BY  id_proyecto_persona_forma_pago DESC LIMIT 5 ";
+                        id_usuario IN (SELECT id_usuario FROM users WHERE id_empresa = $id_empresa)                    
+                        ORDER BY  id DESC LIMIT 5 ";
 
         return $this->db->query($query_get)->result_array();
     }

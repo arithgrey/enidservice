@@ -32,4 +32,12 @@ class UserTest extends TestCase
         $this->assertInstanceOf(Collection::class, $user->listas_negras);
     }
 
+    public function test_tiene_muchos_ppfps()
+    {
+        $user = new User;
+
+        $this->assertInstanceOf(Collection::class, $user->ppfps);
+    }
+
+
 }

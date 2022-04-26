@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\FormaPago;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProyectoPersonaFormaPagoDireccionFactory extends Factory
@@ -14,7 +15,7 @@ class ProyectoPersonaFormaPagoDireccionFactory extends Factory
     public function definition()
     {
         return [
-            //
+
         ];
     }
 }

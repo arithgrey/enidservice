@@ -253,7 +253,7 @@ class usuario_model extends CI_Model
                             ON 
                             u.id = up.id
                             WHERE 
-                            u.idempresa = '" . $id_empresa . "' AND
+                            u.id_empresa = '" . $id_empresa . "' AND
                             up.idperfil=" . $perfil .
                 " OR up.id ='" . $id_usuario . "'";
             $this->db->query($query_create);
@@ -565,7 +565,7 @@ class usuario_model extends CI_Model
         $params = [
             "name" => $param["nombre"],
             "email" => $param["email"],
-            "idempresa" => '1',
+            "id_empresa" => '1',
             "apellido_paterno" => $param["apellido_paterno"],
             "apellido_materno" => $param["apellido_materno"],
             "inicio_labor" => $param["inicio_labor"],
@@ -596,7 +596,7 @@ class usuario_model extends CI_Model
 
             $params = [
                 "email" => $param["email"],
-                "idempresa" => '1',
+                "id_empresa" => '1',
                 "id_departamento" => 8,
                 "password" => $param["password"],
                 "name" => $param["nombre"],
@@ -750,7 +750,7 @@ class usuario_model extends CI_Model
         $query_get = "SELECT u.id FROM users u 
         INNER JOIN usuario_perfil up  
         ON u.id = up.idusuario  
-        WHERE idempresa = $id_empresa 
+        WHERE id_empresa = $id_empresa 
         AND up.idperfil in ($in)";
 
         return $this->db->query($query_get)->result_array();

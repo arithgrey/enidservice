@@ -433,3 +433,17 @@ ______________________
 RENAME TABLE proyecto_persona_forma_pago TO proyecto_persona_forma_pagos;
 ______________________
 RENAME TABLE producto_orden_compra TO producto_orden_compras;
+
+________________________________
+
+alter table users rename column idempresa to id_empresa;
+
+
+________________________________
+RENAME TABLE forma_pago TO forma_pagos;
+RENAME TABLE ciclo_facturacion TO ciclo_facturacions;
+alter table orden_compras change status status int not null default 1;
+alter table users change facebook facebook text default NULL;
+alter table proyecto_persona_forma_pagos rename column id_proyecto_persona_forma_pago to id;
+alter table orden_compras rename column id_orden_compra to id;
+alter table empresas rename column idempresa to id;

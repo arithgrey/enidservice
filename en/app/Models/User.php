@@ -27,6 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'facebook',
+        'tel_contacto'
     ];
 
     /**
@@ -63,6 +65,7 @@ class User extends Authenticatable
     {
 
         return $this->hasMany(SolicitudRetiro::class);
+
     }
 
     public function cuentas_banco()
@@ -78,7 +81,6 @@ class User extends Authenticatable
     }
     public function proveedores()
     {
-
         return $this->hasMany(ProveedorServicio::class);
     }
     public function listas_negras()
@@ -91,13 +93,13 @@ class User extends Authenticatable
 
         return $this->hasMany(Preferencia::class);
     }
+    public function ppfps()
+    {
+        return $this->hasMany(ProyectoPersonaFormaPago::class);
+    }
+
     public function empresa()
     {
         return $this->belongsTo(Empresa::class,  'id_empresa');
-    }
-    public function ppfp()
-    {
-
-        return $this->hasMany(ProyectoPersonaFormaPago::class,'id_usuario');
     }
 }

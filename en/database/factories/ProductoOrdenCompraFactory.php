@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\OrdenCompra;
+use App\Models\ProyectoPersonaFormaPago;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ProductoOrdenCompraFactory extends Factory
@@ -14,7 +16,8 @@ class ProductoOrdenCompraFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_proyecto_persona_forma_pago' => ProyectoPersonaFormaPago::factory(),
+            'id_orden_compra' => OrdenCompra::factory(),
         ];
     }
 }

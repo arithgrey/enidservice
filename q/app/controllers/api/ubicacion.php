@@ -88,7 +88,7 @@ class ubicacion extends REST_Controller
             $reparto = false;
             foreach ($productos_ordenes_compra as $row) {
 
-                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $id_recibo = $row["id"];
                 $params =
                     [
                         'ubicacion' => $param['ubicacion'],
