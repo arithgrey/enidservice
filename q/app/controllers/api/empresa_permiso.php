@@ -19,7 +19,7 @@ class Empresa_permiso extends REST_Controller
 		$response = false;
 		if (fx($param, "id_empresa")) {
 
-			$params_where = ["idempresa" => $param["id_empresa"] ];
+			$params_where = ["id_empresa" => $param["id_empresa"] ];
 			$response = $this->empresa_permiso_model->get(["idpermiso"], $params_where, 15, 1);
 		}
 		$this->response($response);

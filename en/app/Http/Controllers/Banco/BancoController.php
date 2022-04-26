@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\BancoRequest;
 use App\Models\Banco;
 use Illuminate\Http\Request;
-use Inertia\Inertia;
+
 
 class BancoController extends Controller
 {

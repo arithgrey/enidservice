@@ -12,11 +12,7 @@ use Tests\TestCase;
 
 class CuentaBancoTest extends TestCase
 {
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
+
     use RefreshDatabase;
 
     public function test_pertenece_a_un_usuario()

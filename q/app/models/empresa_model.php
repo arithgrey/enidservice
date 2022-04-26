@@ -26,12 +26,12 @@ class Empresa_model extends CI_Model
 
 	function q_up($q, $q2, $id_empresa)
 	{
-		return $this->update([$q => $q2], ["idempresa" => $id_empresa]);
+		return $this->update([$q => $q2], ["id" => $id_empresa]);
 	}
 
 	function q_get($params = [], $id)
 	{
-		return $this->get($params, ["idempresa" => $id]);
+		return $this->get($params, ["id" => $id]);
 	}
 
 	function insert($params, $return_id = 0)

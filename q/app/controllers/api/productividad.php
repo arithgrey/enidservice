@@ -9,6 +9,7 @@ class productividad extends REST_Controller
         $this->load->helper("q");
         $this->load->model("productividad_usuario_model");
         $this->load->library(lib_def());
+        
     }
 
     function notificaciones_GET()
@@ -243,6 +244,7 @@ class productividad extends REST_Controller
 
     private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
     {
+        
         $usuarios = $this->app->api("recibo/pendientes_sin_cierre",
             [
                 "id_usuario" => $id_usuario,
@@ -251,6 +253,7 @@ class productividad extends REST_Controller
                 "domicilios" => 1
             ]
         );        
+        
         $usuarios = $this->usuarios_en_lista_negra($usuarios);                        
         return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
 

@@ -520,7 +520,7 @@ class Servicio extends REST_Controller
         $data_complete["mensaje"] = ($next == 1) ? "" : "TU PRODUCTO DEBE TENER ALGÚN PRECIO";
         if ($next) {
             
-            $id_empresa = $this->app->get_session('idempresa');
+            $id_empresa = $this->app->get_session('id_empresa');
             $empresa = $this->app->empresa($id_empresa);
             $tags = $this->create_tags($param);
             

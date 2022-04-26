@@ -635,7 +635,7 @@ class recibo extends REST_Controller
                     'status' => 19,
                     'se_cancela' => 1,
                 ],
-                ["id_proyecto_persona_forma_pago" => $id_recibo]
+                ["id" => $id_recibo]
             );
 
 
@@ -653,7 +653,7 @@ class recibo extends REST_Controller
             $response = $this->recibo_model->ordenes_por_telefono($telefono);
             $ordenes = [];
             foreach ($response as $row) {
-                $ordenes[] = $row['id_proyecto_persona_forma_pago'];
+                $ordenes[] = $row['id'];
             }
 
             if (es_data($ordenes)) {
@@ -886,7 +886,8 @@ class recibo extends REST_Controller
             $response["total"] = 0;
             $modalidad = $param["modalidad"];
             $param["id_usuario"] = $id_usuario = $this->id_usuario;
-            $ordenes = $this->recibo_model->get_compras_usuario($param, $modalidad);
+            
+            $ordenes = $this->recibo_model->get_compras_usuario($param, $modalidad);            
             $ordenes = $this->add_imgs_servicio($ordenes);
 
             if (es_data($ordenes)) {
@@ -1075,6 +1076,8 @@ class recibo extends REST_Controller
         if ($id_orden_compra > 0) {
 
             $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            
+
             $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
             $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
 
@@ -1401,7 +1404,7 @@ class recibo extends REST_Controller
     {
 
         $params = [
-            "p.id_proyecto_persona_forma_pago recibo ",
+            "p.id recibo ",
             "p.saldo_cubierto",
             "p.fecha_registro",
             "p.monto_a_pagar",
@@ -1430,7 +1433,7 @@ class recibo extends REST_Controller
         ];
 
         $params_busqueda_recibo = [
-            "id_proyecto_persona_forma_pago recibo",
+            "id recibo",
             "saldo_cubierto",
             "fecha_registro",
             "monto_a_pagar",
@@ -1456,7 +1459,7 @@ class recibo extends REST_Controller
         ];
 
         $params_recibos_sin_cobros = [
-            "p.id_proyecto_persona_forma_pago recibo ",
+            "p.id recibo ",
             "p.saldo_cubierto",
             "p.fecha_registro",
             "p.monto_a_pagar",
@@ -1754,7 +1757,7 @@ class recibo extends REST_Controller
         if (fx($param, "id_recibo")) {
             $id_recibo = $param['id_recibo'];
             $set = ['ubicacion' => 1, 'contra_entrega_domicilio' => 1];
-            $response = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
+            $response = $this->recibo_model->update($set, ["id" => $id_recibo]);
         }
         $this->response($response);
     }
@@ -1894,7 +1897,7 @@ class recibo extends REST_Controller
                 'cancela_cliente' => 0
             ];
 
-            $in = ["id_proyecto_persona_forma_pago" => $param["recibo"]];
+            $in = ["id" => $param["recibo"]];
             $response = $this->recibo_model->update($params, $in);
             if ($response == true) {
 
@@ -2020,7 +2023,7 @@ class recibo extends REST_Controller
                 'tipo_entrega' => $tipo_entrega
 
             ];
-            $response = $this->recibo_model->update($set, ["id_proyecto_persona_forma_pago" => $id_recibo]);
+            $response = $this->recibo_model->update($set, ["id" => $id_recibo]);
         }
         $this->response($response);
     }
@@ -2309,7 +2312,7 @@ class recibo extends REST_Controller
 
             $id_usuario = $data['id_usuario'];
             $id_perfil = $this->app->getperfiles();
-            $id_empresa = $data['idempresa'];
+            $id_empresa = $data['id_empresa'];
 
             $franja_horaria = $param['franja_horaria'];
             $ordenes = $this->recibo_model->franja_horaria($franja_horaria, $id_usuario, $id_perfil, $id_empresa);

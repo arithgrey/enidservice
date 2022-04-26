@@ -775,7 +775,7 @@ FROM usuario_deseo_compra;";
                         proyecto_persona_forma_pagos p
                         INNER JOIN  
                         producto_orden_compras po 
-                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
+                        ON p.id = po.id_proyecto_persona_forma_pago
                         WHERE  
                         p.saldo_cubierto < 1                        
                         AND  p.se_cancela = 0

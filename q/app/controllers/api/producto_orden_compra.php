@@ -72,7 +72,7 @@ class Producto_orden_compra extends REST_Controller
         if (fx($param, "id")) {
 
             $id = $param["id"];
-            $ids = $this->producto_orden_compra_model->get([], ["id_orden_compra" => $id], 50);
+            $ids = $this->producto_orden_compra_model->get([], ["id" => $id], 50);
             $response = $this->productos($ids);
 
 

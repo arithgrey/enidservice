@@ -39,7 +39,7 @@
 
 
         $orden_producto = pr($usuario, "orden_producto");
-        $id_empresa = pr($usuario, "idempresa");
+        $id_empresa = pr($usuario, "id_empresa");
         $lista_orden = list_orden(get_orden(), $orden_producto);
         $texto = _titulo("Filtro principal", 5);
         $lista = flex($texto, $lista_orden, _between, "mr-3");

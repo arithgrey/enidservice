@@ -1296,7 +1296,7 @@ if (!function_exists('invierte_date_time')) {
                     "resumen" => $recibo["resumen_pedido"],
                     "costo_envio_cliente" => $recibo["costo_envio_cliente"],
                     "flag_envio_gratis" => $recibo["flag_envio_gratis"],
-                    "id_recibo" => $recibo["id_proyecto_persona_forma_pago"],
+                    "id_recibo" => $recibo["id"],
                     "id_usuario" => $recibo["id_usuario"],
                     "id_usuario_venta" => $recibo["id_usuario_venta"],
                     "id_servicio" => $recibo['id_servicio']
@@ -1808,7 +1808,7 @@ if (!function_exists('invierte_date_time')) {
         }
         foreach ($recibos as $row) {
 
-            $id_recibo = $row['id_proyecto_persona_forma_pago'];
+            $id_recibo = $row['id'];
             $pedido = d(_text_('#', $id_recibo));
             $num_ciclos_contratados = $row['num_ciclos_contratados'];
             $img = img(

@@ -24,7 +24,7 @@ class UsuarioController extends Controller
             "proyecto_persona_forma_pagos.id_usuario"
         )->join(
             "producto_orden_compras",
-            "proyecto_persona_forma_pagos.id_proyecto_persona_forma_pago",
+            "proyecto_persona_forma_pagos.id",
             "producto_orden_compras.id_proyecto_persona_forma_pago"
         )
 

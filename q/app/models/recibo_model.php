@@ -80,7 +80,7 @@ class Recibo_model extends CI_Model
                             se_cancela      =  1,
                             saldo_cubierto  =  0                  
                           WHERE 
-                            id_proyecto_persona_forma_pago =  {$id} 
+                            id =  {$id} 
                           LIMIT 1";
         return $this->db->query($query_update);
     }
@@ -95,7 +95,7 @@ class Recibo_model extends CI_Model
                             status          =  {$status} ,
                             {$tipo_fecha}   =   CURRENT_TIMESTAMP()                            
                           WHERE 
-                            id_proyecto_persona_forma_pago =  {$id} 
+                            id =  {$id} 
                           LIMIT 1";
         return $this->db->query($query_update);
     }
@@ -115,7 +115,7 @@ class Recibo_model extends CI_Model
                             {$tipo_fecha}   =   CURRENT_TIMESTAMP()   ,
                             entregado       =   1  " . $cancelacion . "                       
                           WHERE 
-                            id_proyecto_persona_forma_pago =  {$id} 
+                            id =  {$id} 
                           LIMIT 1";
         return $this->db->query($query_update);
     }
@@ -136,7 +136,7 @@ class Recibo_model extends CI_Model
         $query_get = _text_(
             "SELECT ", $f, " FROM proyecto_persona_forma_pagos  p 
             INNER JOIN producto_orden_compras po ON 
-            p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago   
+            p.id = po.id_proyecto_persona_forma_pago   
             INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra
             WHERE id_usuario IN(", $ids, ")",
             $extra
@@ -174,7 +174,7 @@ class Recibo_model extends CI_Model
     {
         $query_get = _text_(
             "SELECT * FROM proyecto_persona_forma_pagos  p",
-            " WHERE id_proyecto_persona_forma_pago IN(", $ids, ")");
+            " WHERE id IN(", $ids, ")");
         return $this->db->query($query_get)->result_array();
 
     }
@@ -189,7 +189,7 @@ class Recibo_model extends CI_Model
         $es_administrador = $param['es_administrador'];
         $query_get = "SELECT " . $f . " FROM 
         proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
-        ON po.id_proyecto_persona_forma_pago = p.id_proyecto_persona_forma_pago 
+        ON po.id_proyecto_persona_forma_pago = p.id 
             INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra ";
 
 
@@ -326,7 +326,7 @@ class Recibo_model extends CI_Model
 
         $id_usuario = $param["id_usuario"];
         $query_get = "SELECT 
-                    (ppf.monto_a_pagar * ppf.num_ciclos_contratados )+ costo_envio_cliente as  saldo_pendiente,
+                    (ppf.monto_a_pagar * ppf.num_ciclos_contratados ) + costo_envio_cliente as  saldo_pendiente,
                     ppf.saldo_cubierto, 
                     ppfd.id_direccion
                     FROM 
@@ -335,7 +335,7 @@ class Recibo_model extends CI_Model
                     LEFT OUTER JOIN 
                     proyecto_persona_forma_pago_direccion  ppfd 
                     ON 
-                    ppf.id_proyecto_persona_forma_pago =  ppfd.id_proyecto_persona_forma_pago
+                    ppf.id =  ppfd.id_proyecto_persona_forma_pago
                     WHERE 
                     ppf.id_usuario = $id_usuario
                     AND 
@@ -419,7 +419,7 @@ class Recibo_model extends CI_Model
                       ON 
                       p.id_servicio =  s.id_servicio
                       WHERE 
-                      p.id_proyecto_persona_forma_pago='" . $param["id_recibo"] . "' LIMIT 1";
+                      p.id='" . $param["id_recibo"] . "' LIMIT 1";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -509,7 +509,7 @@ class Recibo_model extends CI_Model
           fecha_cancelacion = CURRENT_DATE(), 
           cancela_cliente   = 1,
           se_cancela        = 1
-          WHERE  id_proyecto_persona_forma_pago =  '" . $id_recibo . "' LIMIT 1";
+          WHERE  id =  '" . $id_recibo . "' LIMIT 1";
 
         return $this->db->query($query_update);
 
@@ -571,7 +571,7 @@ class Recibo_model extends CI_Model
         $query_get = "SELECT * FROM 
                         proyecto_persona_forma_pagos  
                       WHERE 
-                        id_proyecto_persona_forma_pago = '" . $param["id_recibo"] . "'
+                        id = '" . $param["id_recibo"] . "'
                       AND 
                         id_usuario_venta =  '" . $param["id_usuario"] . "'
                       AND 
@@ -590,7 +590,7 @@ class Recibo_model extends CI_Model
                     *
                   FROM proyecto_persona_forma_pagos  
                   WHERE 
-                    id_proyecto_persona_forma_pago = '" . $param["id_recibo"] . "'
+                    id = '" . $param["id_recibo"] . "'
              
                   LIMIT 1";
 
@@ -602,7 +602,7 @@ class Recibo_model extends CI_Model
 
         $query_get = "SELECT * FROM proyecto_persona_forma_pagos  
                 WHERE 
-                  id_proyecto_persona_forma_pago = '" . $param["id_recibo"] . "'
+                  id = '" . $param["id_recibo"] . "'
                 AND 
                   id_usuario =  '" . $param["id_usuario"] . "'
                 AND
@@ -620,7 +620,7 @@ class Recibo_model extends CI_Model
 
         $where = $this->get_where_estado_venta($param, $status);
         $query_get = "SELECT
-                        p.id_proyecto_persona_forma_pago ,
+                        p.id ,
                         p.resumen_pedido,
                         p.id_servicio,
                         p.monto_a_pagar,
@@ -634,10 +634,10 @@ class Recibo_model extends CI_Model
                         FROM
                         proyecto_persona_forma_pagos  p 
                         INNER JOIN producto_orden_compras o 
-                        ON p.id_proyecto_persona_forma_pago = o.id_proyecto_persona_forma_pago
+                        ON p.id = o.id_proyecto_persona_forma_pago
                                           " . $where . " ORDER BY p.fecha_registro DESC";
 
-
+        
         return $this->db->query($query_get)->result_array();
     }
 
@@ -680,19 +680,19 @@ class Recibo_model extends CI_Model
 
         $this->db->set('ubicacion', $ubicacion);
 
-        $this->db->where("id_proyecto_persona_forma_pago", $id_recibo);
+        $this->db->where("id", $id_recibo);
         return $this->db->update('proyecto_persona_forma_pagos');
 
     }
 
     function q_get($params = [], $id)
     {
-        return $this->get($params, ["id_proyecto_persona_forma_pago" => $id]);
+        return $this->get($params, ["id" => $id]);
     }
 
     function q_up($q, $q2, $id_recibo)
     {
-        return $this->update([$q => $q2], ["id_proyecto_persona_forma_pago" => $id_recibo]);
+        return $this->update([$q => $q2], ["id" => $id_recibo]);
     }
 
     function q_usuario($id_usuario, $limit = 1)
@@ -991,7 +991,7 @@ class Recibo_model extends CI_Model
         
         $casos = [
             3 => " 1 = 1 ",
-            4 => "id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             20 => 'id_usuario = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
@@ -1004,7 +1004,7 @@ class Recibo_model extends CI_Model
                         p.costo, 
 						p.id_servicio, 
 						p.id_usuario,
-						p.id_proyecto_persona_forma_pago id_recibo,
+						p.id id_recibo,
 						(p.monto_a_pagar * p.num_ciclos_contratados) total,
                         p.num_ciclos_contratados,
 						p.fecha_contra_entrega,
@@ -1019,7 +1019,7 @@ class Recibo_model extends CI_Model
 						     proyecto_persona_forma_pagos  p
                         INNER JOIN  
 						         producto_orden_compras po 
-                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
+                        ON p.id = po.id_proyecto_persona_forma_pago
 						WHERE  
 						p.saldo_cubierto < 1  
 						AND " . $extra_usuario . " 						  
@@ -1043,7 +1043,7 @@ class Recibo_model extends CI_Model
 
         $casos = [
             3 => " 1 = 1 ",
-            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id_usuario FROM users WHERE id_empresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
@@ -1052,7 +1052,7 @@ class Recibo_model extends CI_Model
 
         $query_get = "SELECT 
 						id_servicio, 
-						id_proyecto_persona_forma_pago id_recibo,
+						id id_recibo,
 						(monto_a_pagar * num_ciclos_contratados) total,
 						fecha_contra_entrega,
 						id_usuario_referencia,
@@ -1171,7 +1171,7 @@ class Recibo_model extends CI_Model
                             '{$fecha_termino}' ";
         }
         $query_get = "SELECT 
-                            p.id_proyecto_persona_forma_pago  recibo,
+                            p.id  recibo,
                             p.saldo_cubierto,
                             p.costo,
                             p.num_ciclos_contratados
@@ -1190,7 +1190,7 @@ class Recibo_model extends CI_Model
     function sin_tags_arquetipo($id_empresa)
     {
         $query_get = "SELECT 
-                        id_proyecto_persona_forma_pago id_recibo, 
+                        id id_recibo, 
                         saldo_cubierto 
                         FROM 
                         proyecto_persona_forma_pagos   p  
@@ -1204,8 +1204,8 @@ class Recibo_model extends CI_Model
                         id_usuario 
                         NOT IN (SELECT id_usuario FROM tag_arquetipo GROUP BY id_usuario)
                         AND 
-                        id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)
-                        ORDER BY id_proyecto_persona_forma_pago DESC LIMIT 5";
+                        id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)
+                        ORDER BY p.id DESC LIMIT 5";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -1214,14 +1214,14 @@ class Recibo_model extends CI_Model
     {
         $a = 0;
         $query_get = "SELECT  
-                        p.id_proyecto_persona_forma_pago id_recibo, 
+                        p.id id_recibo, 
                         p.id_servicio, 
                         p.id_usuario,
                         po.id_orden_compra
                         FROM proyecto_persona_forma_pagos  p
                         INNER JOIN producto_orden_compras po 
                         ON 
-                            p.id_proyecto_persona_forma_pago  = po.id_proyecto_persona_forma_pago   
+                            p.id  = po.id_proyecto_persona_forma_pago   
                         WHERE p.saldo_cubierto > 0 
                         AND p.intento_reventa < 1 AND p.fecha_contra_entrega <  DATE_ADD(CURRENT_DATE(), INTERVAL -15 DAY) 
                         AND p.se_cancela < 1 AND p.cancela_cliente < 1
@@ -1230,7 +1230,7 @@ class Recibo_model extends CI_Model
                             id_usuario_referencia = '" . $id_vendedor . "' OR id_usuario_venta = '" . $id_vendedor . "'
                         ) 
                         AND id_usuario NOT IN (SELECT id_usuario FROM lista_negra)                        
-                         ORDER BY p.id_proyecto_persona_forma_pago DESC LIMIT 50";
+                         ORDER BY p.id DESC LIMIT 50";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -1238,14 +1238,15 @@ class Recibo_model extends CI_Model
     function recuperacion($id_vendedor)
     {
         $query_get = "SELECT  
-                        id_proyecto_persona_forma_pago id_recibo, id_servicio 
+                        id id_recibo, 
+                        id_servicio 
                         FROM 
                         proyecto_persona_forma_pagos  p 
                         WHERE
                         es_test < 1 
                         AND p.saldo_cubierto < 1                        
                         AND p.intento_recuperacion < 1
-                        AND p.id_proyecto_persona_forma_pago > 384                    
+                        AND p.id > 384                    
                         AND DATE(p.fecha_contra_entrega) < DATE(DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY))
                         AND 
                         (
@@ -1264,7 +1265,7 @@ class Recibo_model extends CI_Model
     {
         $query_get = "UPDATE proyecto_persona_forma_pagos  
                         SET intento_reventa = (intento_reventa + 1) 
-                        WHERE id_proyecto_persona_forma_pago = '" . $id_recibo . "' LIMIT 1 ";
+                        WHERE id = '" . $id_recibo . "' LIMIT 1 ";
 
         return $this->db->query($query_get);
     }
@@ -1273,7 +1274,7 @@ class Recibo_model extends CI_Model
     {
         $query_get = "UPDATE proyecto_persona_forma_pagos  
                         SET intento_recuperacion = (intento_recuperacion + 1) 
-                        WHERE id_proyecto_persona_forma_pago = '" . $id_recibo . "' LIMIT 1 ";
+                        WHERE id = '" . $id_recibo . "' LIMIT 1 ";
 
         return $this->db->query($query_get);
     }
@@ -1296,7 +1297,7 @@ class Recibo_model extends CI_Model
         $order_fecha = ($tipo_orden > 0) ? " ORDER BY p." . $ops_tipo_orden[$tipo_orden] . " DESC" : " ";
 
         $query_get = "SELECT 
-                        p.id_proyecto_persona_forma_pago recibo ,
+                        p.id recibo ,
                         p.id_servicio ,
                         p.fecha_contra_entrega, 
                         p.saldo_cubierto, 
@@ -1328,13 +1329,13 @@ class Recibo_model extends CI_Model
 
         $query_get = "SELECT id_usuario_entrega FROM proyecto_persona_forma_pagos  
                         WHERE  
-                        id_proyecto_persona_forma_pago != '" . $id_recibo . "' 
+                        id != '" . $id_recibo . "' 
                         AND  
                         fecha_contra_entrega = (
                         SELECT fecha_contra_entrega 
                         FROM proyecto_persona_forma_pagos  
                         WHERE 
-                        id_proyecto_persona_forma_pago = '" . $id_recibo . "') 
+                        id = '" . $id_recibo . "') 
                         ORDER BY id_usuario_entrega DESC";
 
         return $this->db->query($query_get)->result_array();
@@ -1345,7 +1346,7 @@ class Recibo_model extends CI_Model
 
         $keys = get_keys($recibos);
         $query_update = "UPDATE proyecto_persona_forma_pagos  
-            SET efectivo_en_casa = 1 WHERE id_proyecto_persona_forma_pago IN({$keys})";
+            SET efectivo_en_casa = 1 WHERE id IN({$keys})";
 
         return $this->db->query($query_update);
 
@@ -1356,14 +1357,14 @@ class Recibo_model extends CI_Model
 
         $casos = [
             3 => '1 = 1',
-            4 => "id_usuario IN (SELECT id FROM users WHERE idempresa = $id_empresa)",
+            4 => "id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)",
             6 => 'id_usuario_referencia = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
         $extra_usuario = $casos[$id_perfil];
 
         $query_get = 'SELECT 
-                        id_proyecto_persona_forma_pago, 
+                        id, 
                         id_servicio,
                         num_ciclos_contratados ,
                         fecha_contra_entrega
@@ -1384,7 +1385,7 @@ class Recibo_model extends CI_Model
     {
 
 
-        $query_get = "SELECT  id_proyecto_persona_forma_pago 
+        $query_get = "SELECT  id 
                         FROM proyecto_persona_forma_pagos  
                         WHERE  id_usuario  
                         IN( SELECT id FROM users WHERE tel_contacto  = '" . $telefono . "' )";
@@ -1403,7 +1404,7 @@ class Recibo_model extends CI_Model
                             status          =  19 ,                           
                             se_cancela      =  1                                           
                           WHERE 
-                            id_proyecto_persona_forma_pago IN ($ids) 
+                            id IN ($ids) 
                           LIMIT 100";
         return $this->db->query($query_update);
     }
@@ -1412,9 +1413,9 @@ class Recibo_model extends CI_Model
     {
 
         $query_set = 'UPDATE proyecto_persona_forma_pagos  SET flag_pago_comision = 1 
-                    WHERE id_proyecto_persona_forma_pago IN 
+                    WHERE id IN 
                     (SELECT * FROM (
-                    SELECT id_proyecto_persona_forma_pago FROM proyecto_persona_forma_pagos  
+                    SELECT id FROM proyecto_persona_forma_pagos  
                     WHERE id_usuario_referencia = ' . $usuario . ' AND se_cancela < 1 AND cancela_cliente < 1 
                     AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)';
         return $this->db->query($query_set);
@@ -1426,9 +1427,9 @@ class Recibo_model extends CI_Model
 
         $query_set = _text_('UPDATE 
                     proyecto_persona_forma_pagos  SET flag_pago_comision = 1 
-                    WHERE id_proyecto_persona_forma_pago IN 
+                    WHERE id IN 
                     (SELECT * FROM (
-                    SELECT id_proyecto_persona_forma_pago FROM proyecto_persona_forma_pagos  
+                    SELECT id FROM proyecto_persona_forma_pagos  
                     WHERE id_usuario_referencia IN(', $ids, ') 
                     AND se_cancela < 1 AND cancela_cliente < 1 
                     AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)');
@@ -1449,7 +1450,7 @@ class Recibo_model extends CI_Model
                         )";
         $query_get = "SELECT 
                         p.id_usuario,
-                        p.id_proyecto_persona_forma_pago,
+                        p.id,
                         p.id_servicio,
                         p.id_usuario_referencia, 
                         p.comision_venta, 
@@ -1464,7 +1465,7 @@ class Recibo_model extends CI_Model
                         ON p.id_usuario_referencia =  u.id
                         INNER JOIN
                             producto_orden_compras po 
-                        ON p.id_proyecto_persona_forma_pago = po.id_proyecto_persona_forma_pago
+                        ON p.id = po.id_proyecto_persona_forma_pago
                         WHERE  
                         flag_pago_comision < 1  
                         AND se_cancela < 1  
@@ -1683,7 +1684,7 @@ class Recibo_model extends CI_Model
 
         $tipo_like = ($tipo > 0) ? "total_like = total_like + 1" : "total_like = total_like - 1";
         $query_update = _text_("UPDATE proyecto_persona_forma_pagos  SET",
-            $tipo_like, "WHERE id_proyecto_persona_forma_pago =", $id);
+            $tipo_like, "WHERE id =", $id);
 
         return $this->db->query($query_update);
     }
@@ -1691,7 +1692,7 @@ class Recibo_model extends CI_Model
     {
         $query_get = "SELECT 
             p.comision_venta, 
-            p.id_proyecto_persona_forma_pago,
+            p.id,
             p.precio,
             p.costo,
             p.num_ciclos_contratados,
@@ -1701,7 +1702,7 @@ class Recibo_model extends CI_Model
             FROM 
             proyecto_persona_forma_pagos   p 
             INNER JOIN producto_orden_compras o ON 
-            p.id_proyecto_persona_forma_pago = o.id_proyecto_persona_forma_pago
+            p.id = o.id_proyecto_persona_forma_pago
             INNER JOIN orden_compras oc ON 
             oc.id_orden_compra =  o.id_orden_compra 
             WHERE 
@@ -1710,7 +1711,7 @@ class Recibo_model extends CI_Model
             AND cancela_cliente < 1  
             AND saldo_cubierto > 0 
             AND flag_pago_comision < 1 
-            GROUP BY p.id_proyecto_persona_forma_pago";
+            GROUP BY p.id";
 
         return $this->db->query($query_get)->result_array();
     }
@@ -1718,7 +1719,7 @@ class Recibo_model extends CI_Model
     function ordenes_de_compra_usuarios_similares($ids, $id_orden_compra)
     {
         $query_get = "select ppfp.*, poc.id_orden_compra from proyecto_persona_forma_pagos  ppfp inner join 
-        producto_orden_compras poc on ppfp.id_proyecto_persona_forma_pago =  poc.id_proyecto_persona_forma_pago 
+        producto_orden_compras poc on ppfp.id =  poc.id_proyecto_persona_forma_pago 
         where ppfp.id_usuario in ($ids) AND poc.id_orden_compra != $id_orden_compra";
         
         return $this->db->query($query_get)->result_array();

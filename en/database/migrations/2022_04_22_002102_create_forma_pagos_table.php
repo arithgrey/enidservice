@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrdenComprasTable extends Migration
+class CreateFormaPagosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateOrdenComprasTable extends Migration
      */
     public function up()
     {
-        Schema::create('orden_compras', function (Blueprint $table) {
+        Schema::create('forma_pagos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('id_orden_compra', true);
-            $table->integer('status')->nullable(false)->default(1);
-            $table->float('cobro_secundario')->nullable(false)->default(0);
+            $table->text('forma_pago')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateOrdenComprasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orden_compras');
+        Schema::dropIfExists('forma_pagos');
     }
 }

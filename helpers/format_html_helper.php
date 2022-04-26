@@ -1828,10 +1828,19 @@ function opciones_populares()
     $response[] = a_enid(
         "PROMOCIONES",
         [
-            "class" => "white  f11  frecuentes",
+            "class" => "white  f11  border-right frecuentes border-right-enid",
             "href" => path_enid("promociones")
         ]
     );
+    
+    $response[] = a_enid(
+        "CLIENTES",
+        [
+            "class" => "white  f11  frecuentes",
+            "href" => path_enid("clientes") 
+        ]
+    );
+
     return flex($response);
 }
 

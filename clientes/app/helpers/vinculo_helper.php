@@ -47,11 +47,11 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);
-            $response[] = img($link);
+            $response[] = img($link,['class', 'col-sm-6']);
 
         }
 
-        return append($response);
+        return d(d($response,13),12);
     }
 
     function foto_link($data)

@@ -14,7 +14,7 @@ class usuario extends REST_Controller
         $this->load->library('table');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
-        $this->id_empresa = $this->app->get_session('idempresa');
+        $this->id_empresa = $this->app->get_session('id_empresa');
     }
 
     function ids_GET()
@@ -112,7 +112,7 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $response = $this->usuario_model->q_get(["idempresa"], $param["id_usuario"])[0]["idempresa"];
+            $response = $this->usuario_model->q_get(["id_empresa"], $param["id_usuario"])[0]["id_empresa"];
         }
         $this->response($response);
     }
@@ -494,7 +494,7 @@ class usuario extends REST_Controller
         $response = [];
         if (fx($param, "email,secret")) {
 
-            $params = ["id", "name", "email", "fecha_registro", "idempresa"];
+            $params = ["id", "name", "email", "fecha_registro", "id_empresa"];
             $secret = $param["secret"];
             $params_where = [
                 "email" => $param["email"],
@@ -587,7 +587,7 @@ class usuario extends REST_Controller
 
             $params = [
                 "email" => $email,
-                "idempresa" => 1,
+                "id_empresa" => 1,
                 "id_departamento" => 11,
                 "password" => $password,
                 "name" => $nombre,
@@ -626,7 +626,7 @@ class usuario extends REST_Controller
                 $email = $param["email"];
                 $params = [
                     "email" => $email,
-                    "idempresa" => 1,
+                    "id_empresa" => 1,
                     "id_departamento" => 9,
                     "password" => $param["password"],
                     "name" => $param["nombre"],
@@ -720,7 +720,7 @@ class usuario extends REST_Controller
         $email = $param["email"];
         $params = [
             "email" => $email,
-            "idempresa" => 1,
+            "id_empresa" => 1,
             "id_departamento" => 9,
             "password" => $param["password"],
             "name" => $param["nombre"],
@@ -923,7 +923,7 @@ class usuario extends REST_Controller
             "url_lead" => prm_def($param, 'url_facebook_conversacion', ''),
             "es_prospecto" =>  prm_def($param, 'es_prospecto'),
             "email" => $email,
-            "idempresa" => '1',
+            "id_empresa" => '1',
             "id_departamento" => 9,
             "password" => $param["password"],
             "name" => $param["nombre"],

@@ -175,7 +175,7 @@ class Usuario_conexion extends REST_Controller
     private function ids_ventas_like($recibos)
     {
 
-        $ids = array_column($recibos, "id_proyecto_persona_forma_pago");
+        $ids = array_column($recibos, "id");
         return $this->usuario_conexion_model->conteo_recibo(get_keys($ids));
 
 

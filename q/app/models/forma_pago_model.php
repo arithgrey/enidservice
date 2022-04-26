@@ -1,11 +1,13 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Forma_pago_model extends CI_Model
-{
+{	
+	private $table;
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->table = "forma_pagos";
 	}
 
 	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -20,7 +22,7 @@ class Forma_pago_model extends CI_Model
 			$this->db->order_by($order, $type_order);
 		}
 		$this->db->cache_on();
-		return $this->db->get("forma_pago")->result_array();
+		return $this->db->get($this->table)->result_array();
 	}
 
 }

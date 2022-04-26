@@ -15,7 +15,7 @@ class Proyecto_persona_forma_pago_direccion_model extends CI_Model
                       FROM 
                       proyecto_persona_forma_pago_direccion 
                       WHERE 
-                      id_proyecto_persona_forma_pago = $id_recibo";
+                      id = $id_recibo";
 
         return $this->db->query($query_delete);
     }

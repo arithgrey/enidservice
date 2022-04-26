@@ -271,7 +271,7 @@ class Home extends CI_Controller
         $response = [];
         foreach ($productos_orden_compra as $row) {
 
-            $id_proyecto_persona_forma_pago = $row["id_proyecto_persona_forma_pago"];
+            $id_proyecto_persona_forma_pago = $row["id"];
 
             $response[] =
                 $this->app->api(

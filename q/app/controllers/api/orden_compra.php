@@ -43,7 +43,7 @@ class orden_compra extends REST_Controller
 
         $q = [
             "id_producto" => $id_producto,
-            "id_orden_compra" => $id_orden_compra
+            "id" => $id_orden_compra
         ];
         return $this->app->api("producto_orden_compra/index", $q, "json", "POST");
     }

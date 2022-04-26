@@ -203,7 +203,7 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-    debugger;
+    //debugger;
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
 

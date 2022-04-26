@@ -1,11 +1,24 @@
 <template>
   <app-layout title="Listado">
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-      <!--
-    <div class="ml-auto">
-      <en-boton @click="crearListaNegra()"> Agregar </en-boton>
-    </div>
-    -->
+      <div>
+        <div class="ml-auto" @click="crearListaNegra()">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+          </svg>
+        </div>
+      </div>
 
       <div class="w-1/3 mx-auto">
         <en-input>
@@ -20,13 +33,10 @@
         </en-input>
       </div>
 
-    <div v-if="lista_negra.data" class="w-2/3 mx-auto mt-5">
-      <p class="font-bold">
-        Busqueda en lista negra
-      </p>
-    </div>
-      <table class="w-2/3 mx-auto
-       mt-5">
+      <div v-if="lista_negra.data" class="w-2/3 mx-auto mt-5">
+        <p class="font-bold">Busqueda en lista negra</p>
+      </div>
+      <table class="w-2/3 mx-auto mt-5">
         <tbody>
           <tr
             class="border-b-2 border-blue-600 cursor-pointer"
@@ -65,8 +75,8 @@
         </tbody>
       </table>
     </div>
-    <OrdenComentario ref="ordenComentario"/>
-    <Ppfp ref="ppfp"/>
+    <OrdenComentario ref="ordenComentario" />
+    <Ppfp ref="ppfp" />
     <ShowModal ref="showModal" />
     <CrearModal ref="crearModal" />
   </app-layout>
@@ -92,6 +102,7 @@ export default defineComponent({
   data() {
     return {
       q: "",
+      regitro_lead: 0,
     };
   },
   watch: {
@@ -102,17 +113,18 @@ export default defineComponent({
     },
   },
   methods: {
-    busquedaPpfp: function() {
-        this.$refs.ppfp.busqueda(this.q);
+    crearListaNegra: function () {
+      this.$refs.crearModal.formModal();
     },
-    busquedaOrdenComentario: function() {
-        this.$refs.ordenComentario.busqueda(this.q);
+
+    busquedaPpfp: function () {
+      this.$refs.ppfp.busqueda(this.q);
+    },
+    busquedaOrdenComentario: function () {
+      this.$refs.ordenComentario.busqueda(this.q);
     },
     showUser: function (lista) {
       this.$refs.showModal.muestraModal(lista);
-    },
-    crearListaNegra: function () {
-      this.$refs.crearModal.muestraModal();
     },
     busqueda: function busqueda() {
       let params = { q: this.q };

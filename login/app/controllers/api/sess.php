@@ -28,7 +28,7 @@ class Sess extends REST_Controller
                     $id_usuario = $usuario["id"];
                     $nombre = $usuario["name"];
                     $email = $usuario["email"];
-                    $id_empresa = $usuario["idempresa"];
+                    $id_empresa = $usuario["id_empresa"];
 
                     $recien_creado = ($es_barer);
                     $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado);
@@ -79,7 +79,7 @@ class Sess extends REST_Controller
                     "email" => $email,
                     "perfiles" => $perfiles,
                     "perfildata" => $perfildata,
-                    "idempresa" => pr($empresa, "idempresa"),
+                    "id_empresa" => pr($empresa, "id"),
                     "empresa_permiso" => $empresa_permiso,
                     "empresa_recurso" => $empresa_recurso,
                     "data_navegacion" => $navegacion,

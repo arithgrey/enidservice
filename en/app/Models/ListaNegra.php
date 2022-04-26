@@ -10,6 +10,10 @@ class ListaNegra extends Model
 {
 
     use HasFactory;
+    protected $fillable = [
+        'id_usuario',
+        'id_motivo'
+    ];
 
     public function motivo()
     {
@@ -19,5 +23,4 @@ class ListaNegra extends Model
     {
         return $this->belongsTo(User::class, 'id_usuario');
     }
-
 }

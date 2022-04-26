@@ -9,11 +9,16 @@ class ProductoOrdenCompra extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'id_proyecto_persona_forma_pago',
+        'id_orden_compra',
+    ];
+
     function orden_compra()
     {
         return $this->belongsTo(OrdenCompra::class, 'id_orden_compra');
     }
-    function proyecto_persona_forma_pago()
+    function ppfp()
     {
         return $this->belongsTo(ProyectoPersonaFormaPago::class, 'id_proyecto_persona_forma_pago');
     }
