@@ -47,7 +47,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);
-            $response[] = d(img($link),  'col-sm-6');
+            $response[] = d(img($link),  'col-sm-4');
 
         }
 
