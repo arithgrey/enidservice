@@ -10,6 +10,7 @@ use App\Models\ProductoOrdenCompra;
 use App\Models\ProyectoPersonaFormaPago;
 
 use App\Models\User;
+use Inertia\Inertia;
 
 class LeadController extends Controller
 {
@@ -22,10 +23,15 @@ class LeadController extends Controller
 
         $ppfp = $this->ppfp_cancelado($user, $request);
         $orden_compra = $this->orden_compra_cancelada();
-        $this->producto_orden_compra_cancelado($ppfp, $orden_compra);
-        $this->lista_negra($user, $request);
 
-        return response()->json(['message' => true], 200);
+        if ($ppfp->id > 0 && $orden_compra->id > 0) {
+
+            $this->producto_orden_compra_cancelado($ppfp, $orden_compra);
+            $this->lista_negra($user, $request);
+
+            return response()->json(['message' => 'Success'], 200);
+
+        }
     }
 
     private function lista_negra($user, LeadRequest $request)
