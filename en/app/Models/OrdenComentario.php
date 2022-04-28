@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class OrdenComentario extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'comentario',
+        'id_orden_compra'
+    ];
     protected $appends = ['path_orden'];
     function orden_compra()
     {
@@ -17,6 +21,4 @@ class OrdenComentario extends Model
     {
         return "https://enidservices.com/web/pedidos/?recibo=$this->id_orden_compra";
     }
-
-
 }
