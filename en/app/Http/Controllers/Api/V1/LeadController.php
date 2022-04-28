@@ -38,14 +38,12 @@ class LeadController extends Controller
 
     private function comentario_orden_compra(OrdenCompra $orden_compra, LeadRequest $request)
     {
-        if ($request->tipo) {
 
-            OrdenComentario::creat([
-                "comentario" => $request->comentario,
-                "id_orden_compra" => $orden_compra->id
+        OrdenComentario::create([
+            "comentario" => $request->comentario,
+            "id_orden_compra" => $orden_compra->id
 
-            ]);
-        }
+        ]);
     }
 
     private function lista_negra($user, LeadRequest $request)
