@@ -11,8 +11,10 @@ $(document).ready(() => {
     let tipo_entrega = parseInt($tipo_entrega.val());
     let num_domicilios = parseInt($num_domicilios.val());
     if (tipo_entrega === 2 && num_domicilios < 1) {
+        
         $contenedor_domicilios.addClass('d-none');
         submit_enid(".form_registro_direccion");
+        
     }
 
     $(".agregar_direccion_pedido").click(() => {
@@ -144,6 +146,7 @@ let reponse_actualizacion_domicilio = function () {
 };
 let valida_asignacion_domicilio = function () {
 
+    
     if (parseInt($asignacion_horario_entrega.val()) > 0) {
 
         submit_enid(".form_registro_direccion");
@@ -152,4 +155,5 @@ let valida_asignacion_domicilio = function () {
 
         $contenedor_domicilios.removeClass('d-none');
     }
+
 };

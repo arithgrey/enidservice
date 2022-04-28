@@ -19,13 +19,13 @@ class facturacion_model extends CI_Model
 		if ($order != '') {
 			$this->db->order_by($order, $type_order);
 		}
-		return $this->db->get('ciclo_facturacion')->result_array();
+		return $this->db->get('ciclo_facturacions')->result_array();
 	}
 
 	function not_ciclo_facturacion($param)
 	{
 
-		$query_get = "SELECT * FROM ciclo_facturacion WHERE id_ciclo_facturacion!=5";
+		$query_get = "SELECT * FROM ciclo_facturacions WHERE id_ciclo_facturacion!=5";
 		return $this->db->query($query_get)->result_array();
 	}
 

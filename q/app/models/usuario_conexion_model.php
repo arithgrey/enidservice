@@ -142,7 +142,7 @@ INNER JOIN proyecto_persona_forma_pagos p ON uc.id_usuario = p.id_usuario_refere
 WHERE uc.id_seguidor = $id_seguidor
 AND uc.status > 0 AND p.status NOT IN ( 10, 19 ) AND p.se_cancela < 1 AND p.cancela_cliente < 1 
 AND p.cancela_email < 1 AND p.cancela_cliente < 1 AND p.se_cancela < 1 AND p.saldo_cubierto > 0 
-GROUP BY p.id_proyecto_persona_forma_pago ORDER BY p.fecha_registro DESC  LIMIT 200) t
+GROUP BY p.id ORDER BY p.fecha_registro DESC  LIMIT 200) t
 UNION 
 SELECT s.* FROM (
 SELECT u.name, u.apellido_paterno, u.apellido_materno, u.idtipo_comisionista, p.* 

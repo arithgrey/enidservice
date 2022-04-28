@@ -714,7 +714,7 @@ class serviciosmodel extends CI_Model
                         FROM  
                             servicio s  
                         INNER JOIN              
-                            ciclo_facturacion cf                
+                            ciclo_facturacions cf                
                         ON  
                             s.id_ciclo_facturacion = cf.id_ciclo_facturacion
                         WHERE 

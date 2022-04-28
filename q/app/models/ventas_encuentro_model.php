@@ -38,7 +38,7 @@ class ventas_encuentro_model extends CI_Model
                         INNER JOIN 
                         proyecto_persona_forma_pago_punto_encuentro p  
                         ON  
-                        r.id_proyecto_persona_forma_pago =  p.id_proyecto_persona_forma_pago 
+                        r.id =  p.id_proyecto_persona_forma_pago 
                         INNER JOIN 
                         punto_encuentro  pe  ON  p.id_punto_encuentro =  pe.id 
                         INNER JOIN 

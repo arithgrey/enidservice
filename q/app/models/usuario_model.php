@@ -228,7 +228,7 @@ class usuario_model extends CI_Model
                     INNER JOIN 
                     tmp_clienes_$_num up 
                     ON 
-                    u.id = up.id
+                    u.id = up.idusuario
                     AND u.status = 1";
 
         $result = $this->db->query($query_get);
@@ -246,16 +246,16 @@ class usuario_model extends CI_Model
 
             $query_create = "CREATE TABLE tmp_clienes_$_num AS 
                           SELECT 
-                            up.id 
+                            up.idusuario 
                             FROM 
                             usuario_perfil  up 
                             INNER JOIN users u 
                             ON 
-                            u.id = up.id
+                            u.id = up.idusuario
                             WHERE 
                             u.id_empresa = '" . $id_empresa . "' AND
                             up.idperfil=" . $perfil .
-                " OR up.id ='" . $id_usuario . "'";
+                " OR up.idusuario ='" . $id_usuario . "'";
             $this->db->query($query_create);
         }
     }

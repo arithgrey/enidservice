@@ -96,8 +96,8 @@ if (!function_exists('invierte_date_time')) {
 
             $id_usuario_venta = $row["id_usuario_referencia"];
             $idtipo_comisionista = $row["idtipo_comisionista"];
-            $id_usuario_conexion = $row["id_proyecto_persona_forma_pago"];
-            $id_recibo = $row["id_proyecto_persona_forma_pago"];
+            $id_usuario_conexion = $row["id_usuario"];
+            $id_recibo = $row["id"];
             $path_imagen_usuario = $row["url_img_usuario"];
             $url_img_servicio = $row["url_img_servicio"];
             $vendedor = format_nombre($row);

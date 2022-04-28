@@ -451,7 +451,7 @@ class app extends CI_Controller
         $productos_orden_compra = $this->productos_ordenes_compra($id_orden_compra);
 
         foreach ($productos_orden_compra as $row) {
-            
+
             $saldos[] = $this->get_recibo_saldo_pendiente($row["id"]);
         }
         return $saldos;
@@ -506,9 +506,13 @@ class app extends CI_Controller
         return $response;
     }
 
-    function asigna_reparto($id_orden_compra)
-    {
-        return $this->api->api("recibo/reparto", ["orden_compra" => $id_orden_compra], "json", "PUT");
+    function asigna_reparto($id_orden_compra, $es_ubicacion = 0)
+    {   
+        
+        return $this->api->api("recibo/reparto", [
+            "orden_compra" => $id_orden_compra, 
+            "es_ubicacion" => $es_ubicacion
+        ],  "json", "PUT");
     }
 
     function get_domicilio_entrega($producto_orden_compra)
@@ -516,7 +520,6 @@ class app extends CI_Controller
 
         $response = [];
         foreach ($producto_orden_compra as $row) {
-            
 
             $tipo_entrega = $row["tipo_entrega"];
             $ubicacion = $row["ubicacion"];
@@ -526,8 +529,11 @@ class app extends CI_Controller
 
                 case 2: //Mensajería
                     if ($ubicacion > 0) {
+                        //echo "ubicacion";
                         $response = $this->get_ubicacion_recibo($id_recibo);
+                        //xmp($id_recibo);
                     } else {
+                        //echo "sssssssssss";
                         $response = $this->get_domicilio_recibo($id_recibo);
                     }
                     break;
@@ -561,6 +567,7 @@ class app extends CI_Controller
 
     private function get_ubicacion_recibo($id_recibo)
     {
+
         return $this->api->api("ubicacion/index", ["id_recibo" => $id_recibo]);
     }
 
