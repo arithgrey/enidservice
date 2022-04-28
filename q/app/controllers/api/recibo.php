@@ -1679,7 +1679,7 @@ class recibo extends REST_Controller
 
             foreach ($productos_orden_compra as $row) {
 
-                $id_producto_recibo = $row["id_proyecto_persona_forma_pago"];
+                $id_producto_recibo = $row["id"];
 
                 $costo_envio_cliente = 0;
                 if ($ubicacion < 1) {
@@ -1868,7 +1868,7 @@ class recibo extends REST_Controller
             foreach ($productos_ordenes_compra as $row) {
 
 
-                $id = $row["id_proyecto_persona_forma_pago"];
+                $id = $row["id"];
                 $response = $this->recibo_model->cancela_orden(0, $param["status"], $id, 'fecha_cancelacion');
                 if ($response == true) {
                     $param["recibo"] = $id;
@@ -1921,7 +1921,7 @@ class recibo extends REST_Controller
         $saldo_cubierto = $param["saldo_cubierto"];
         foreach ($productos_orden_compra as $row) {
 
-            $id_recibo = $row["id_proyecto_persona_forma_pago"];
+            $id_recibo = $row["id"];
             $param["id_recibo"] = $id_recibo;
             $pago_pendiente = $this->get_saldo_pendiente_recibo($param);
             $elementos = count($productos_orden_compra);
