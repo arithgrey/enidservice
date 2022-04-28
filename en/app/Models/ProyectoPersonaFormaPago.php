@@ -18,7 +18,9 @@ class ProyectoPersonaFormaPago extends Model
         'num_ciclos_contratados',
         'id_servicio',
         'se_cancela',
-        'nota'
+        'nota',
+        'resumen_pedido',
+        'monto_a_pagar'
     ];
 
     protected $appends = [

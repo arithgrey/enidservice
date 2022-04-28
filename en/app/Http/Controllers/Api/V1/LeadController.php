@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LeadRequest;
 use App\Models\ListaNegra;
+use App\Models\OrdenComentario;
 use App\Models\OrdenCompra;
 use App\Models\ProductoOrdenCompra;
 use App\Models\ProyectoPersonaFormaPago;
@@ -24,13 +25,26 @@ class LeadController extends Controller
         $ppfp = $this->ppfp_cancelado($user, $request);
         $orden_compra = $this->orden_compra_cancelada();
 
+
         if ($ppfp->id > 0 && $orden_compra->id > 0) {
 
             $this->producto_orden_compra_cancelado($ppfp, $orden_compra);
             $this->lista_negra($user, $request);
+            $this->comentario_orden_compra($orden_compra, $request);
 
             return response()->json(['message' => 'Success'], 200);
+        }
+    }
 
+    private function comentario_orden_compra(OrdenCompra $orden_compra, LeadRequest $request)
+    {
+        if ($request->tipo) {
+
+            OrdenComentario::creat([
+                "comentario" => $request->comentario,
+                "id_orden_compra" => $orden_compra->id
+
+            ]);
         }
     }
 
@@ -73,7 +87,9 @@ class LeadController extends Controller
             'id_servicio' => 1110,
             'se_cancela' => 1,
             'saldo_cubierto' => 0,
+            'monto_a_pagar' => 1,
             'nota' => $request->comentario,
+            'resumen_pedido' => 'Pedido - nota previa - cuidado',
         ]);
     }
 }
