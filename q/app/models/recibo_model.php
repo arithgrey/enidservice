@@ -137,7 +137,7 @@ class Recibo_model extends CI_Model
             "SELECT ", $f, " FROM proyecto_persona_forma_pagos  p 
             INNER JOIN producto_orden_compras po ON 
             p.id = po.id_proyecto_persona_forma_pago   
-            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id
             WHERE id_usuario IN(", $ids, ")",
             $extra
         );
@@ -190,7 +190,7 @@ class Recibo_model extends CI_Model
         $query_get = "SELECT " . $f . " FROM 
         proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
         ON po.id_proyecto_persona_forma_pago = p.id 
-            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id_orden_compra ";
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id ";
 
 
         $ext_usuario = $this->get_usuario($param);
@@ -637,7 +637,7 @@ class Recibo_model extends CI_Model
                         ON p.id = o.id_proyecto_persona_forma_pago
                                           " . $where . " ORDER BY p.fecha_registro DESC";
 
-        
+                
         return $this->db->query($query_get)->result_array();
     }
 
@@ -819,7 +819,7 @@ class Recibo_model extends CI_Model
                       FROM  
                       servicio s
                       INNER JOIN 
-                      ciclo_facturacion c 
+                      ciclo_facturacions c 
                       ON
                       s.id_ciclo_facturacion =  c.id_ciclo_facturacion
                       WHERE s.id_servicio =$id_servicio  LIMIT 1";
@@ -1704,7 +1704,7 @@ class Recibo_model extends CI_Model
             INNER JOIN producto_orden_compras o ON 
             p.id = o.id_proyecto_persona_forma_pago
             INNER JOIN orden_compras oc ON 
-            oc.id_orden_compra =  o.id_orden_compra 
+            oc.id =  o.id_orden_compra 
             WHERE 
             p.id_usuario_referencia = $id_usuario
             AND se_cancela < 1 
@@ -1718,7 +1718,7 @@ class Recibo_model extends CI_Model
 
     function ordenes_de_compra_usuarios_similares($ids, $id_orden_compra)
     {
-        $query_get = "select ppfp.*, poc.id_orden_compra from proyecto_persona_forma_pagos  ppfp inner join 
+        $query_get = "select ppfp.* ppfp.id id_recibo, poc.id_orden_compra from proyecto_persona_forma_pagos ppfp inner join 
         producto_orden_compras poc on ppfp.id =  poc.id_proyecto_persona_forma_pago 
         where ppfp.id_usuario in ($ids) AND poc.id_orden_compra != $id_orden_compra";
         

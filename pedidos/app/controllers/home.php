@@ -26,9 +26,10 @@ class Home extends CI_Controller
         $es_seguimiento = ($seguimiento > 0);
 
         if ($es_seguimiento && ctype_digit($seguimiento)) {
-
-
+            
+                    
             $this->vista_seguimiento($param, $data);
+
         } else {
 
 
@@ -46,7 +47,7 @@ class Home extends CI_Controller
 
         if ($es_costo_operacion && ctype_digit($costos_operacion)) {
 
-
+            
             $this->carga_vista_costos_operacion($param, $data);
         } else {
 
@@ -57,7 +58,7 @@ class Home extends CI_Controller
 
     private function vista_seguimiento($param, $data)
     {
-
+        
         $data = $this->app->cssJs($data, "pedidos_seguimiento");
         $id_orden_compra = $this->input->get("seguimiento");
         $data["id_orden_compra"] = $id_orden_compra;
@@ -76,7 +77,7 @@ class Home extends CI_Controller
 
         if ($es_domicilio) {
 
-
+            
             $this->view_domicilios($data, $param);
         } else {
 
@@ -110,6 +111,7 @@ class Home extends CI_Controller
             $tiene_acceso = ($es_usuario_compra || $es_propietario);
 
             if ($tiene_acceso) {
+                
                 $this->domicilios($param, $data);
             }
         }
@@ -124,14 +126,12 @@ class Home extends CI_Controller
         $tiene_domicilio = es_data($domicilios_orden_compra);
         $lista = prm_def($param, 'frecuentes');
         $asignacion_horario_entrega = prm_def($param, 'asignacion_horario_entrega');
-
-
+    
         if (!$tiene_domicilio || $asignacion || $lista || $asignacion_horario_entrega) {
 
             $id_usuario = $data["id_usuario"];
             $domicilios = $this->get_direcciones_usuario($id_usuario);
             $ubicaciones = $this->get_ubicaciones_usuario($id_usuario);
-
 
             $data += [
                 "domicilios_orden_compra" => $domicilios_orden_compra,
@@ -143,14 +143,16 @@ class Home extends CI_Controller
 
             ];
 
+            
             $contenido = render_domicilio($data);
             $this->app->pagina(
                 $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
                 $contenido,
                 1
             );
+            
         } else {
-
+            
             redirect(path_enid('area_cliente_compras', $id_orden_compra, 0, 1));
         }
     }
@@ -396,6 +398,7 @@ class Home extends CI_Controller
     function seguimiento_pedido($param, $data)
     {
 
+
         $id_orden_compra = prm_def($param, "recibo");
         $es_busqueda = ($id_orden_compra < 1);
 
@@ -473,7 +476,7 @@ class Home extends CI_Controller
         $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
 
         if (es_data($productos_orden_compra)) {
-
+            
             $data += [
                 "orden" => $id_orden_compra,
                 "productos_orden_compra" => $productos_orden_compra,
@@ -511,6 +514,7 @@ class Home extends CI_Controller
         $this->app->pagina($data, $form, 1);
     }
 
+    /*Aquí es donde se forma la ficha del pedido*/
     private function pedido($data)
     {
 
@@ -548,7 +552,7 @@ class Home extends CI_Controller
 
 
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
-        
+
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,

@@ -37,13 +37,13 @@ class Home extends CI_Controller
             "extra" => $param,
             "order" => $orden,
             "resultados_por_pagina" => 50,
-            "agrega_clasificaciones" => $is_mobile,
+            "agrega_clasificaciones" => (!$is_mobile),
             "in_session" => 0,
             "page" => $pagina
 
         ];
 
-        $data["servicios"] = $this->busqueda_producto_por_palabra_clave($data_send);
+        $data["servicios"] = $this->app->api("servicio/q", $data_send);        
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
         if ($son_servicio > 0) {
             $this->servicios($data, $data_send);
@@ -231,11 +231,7 @@ class Home extends CI_Controller
         return prm_def($data, "id_clasificacion");
     }
 
-    private function busqueda_producto_por_palabra_clave($q)
-    {
-
-        return $this->app->api("servicio/q", $q);
-    }
+    
 
     private function get_clasificaciones($clasificaciones)
     {

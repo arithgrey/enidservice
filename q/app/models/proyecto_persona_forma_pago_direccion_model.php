@@ -2,10 +2,12 @@
 
 class Proyecto_persona_forma_pago_direccion_model extends CI_Model
 {
+    private $table;
     function __construct()
     {
         parent::__construct();
         $this->load->database();
+        $this->table = "proyecto_persona_forma_pago_direccion";
     }
 
     function delete_por_id_recibo($id_recibo)
@@ -15,7 +17,7 @@ class Proyecto_persona_forma_pago_direccion_model extends CI_Model
                       FROM 
                       proyecto_persona_forma_pago_direccion 
                       WHERE 
-                      id = $id_recibo";
+                      id_proyecto_persona_forma_pago = $id_recibo";
 
         return $this->db->query($query_delete);
     }
@@ -36,7 +38,7 @@ class Proyecto_persona_forma_pago_direccion_model extends CI_Model
 
     function insert($params, $return_id = 0)
     {
-        $insert = $this->db->insert("proyecto_persona_forma_pago_direccion", $params);
+        $insert = $this->db->insert($this->table, $params);
 
         return ($return_id == 1) ? $this->db->insert_id() : $insert;
     }
@@ -64,7 +66,7 @@ class Proyecto_persona_forma_pago_direccion_model extends CI_Model
             $this->db->order_by($order, $type_order);
         }
 
-        return $this->db->get("proyecto_persona_forma_pago_direccion")->result_array();
+        return $this->db->get($this->table)->result_array();
     }
 
     function count($id)

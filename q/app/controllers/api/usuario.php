@@ -167,7 +167,7 @@ class usuario extends REST_Controller
 
     function format_perfil($usuarios, $param)
     {
-
+        //xmp($param);
         $id_usuario = prm_def($param, 'usuario');
         $v = prm_def($param, 'v');
         $id_recibo = prm_def($param, 'id_recibo');

@@ -100,7 +100,7 @@ class ubicacion extends REST_Controller
 
             }
 
-            $reparto = $this->app->asigna_reparto($id_orden_compra);
+            $reparto = $this->app->asigna_reparto($id_orden_compra , 1);
             $this->cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_entrega);
             $es_cliente = es_cliente($this->app->session());
 

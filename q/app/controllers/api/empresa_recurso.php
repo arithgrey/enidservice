@@ -17,7 +17,7 @@ class empresa_recurso extends REST_Controller
 		$response = false;
 		if (fx($param, "id_empresa")) {
 
-			$params_where = ["id_empresa" => $param["id_empresa"] ];
+			$params_where = ["idempresa" => $param["id_empresa"] ];
 			$response = $this->empresa_recurso_model->get(["idrecurso"], $params_where, 25);
 		}
 		$this->response($response);

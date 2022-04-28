@@ -83,6 +83,7 @@ class Proyecto_persona_forma_pago_punto_encuentro extends REST_Controller
     {
 
         $in = ["id_proyecto_persona_forma_pago" => $id_recibo];
+        return $in;
         return $this->proyecto_persona_forma_pago_punto_encuentro_model->get(["id_punto_encuentro"], $in);
     }
 

@@ -17,26 +17,25 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->post();
-        $tiene_num_ciclos = array_key_exists("num_ciclos", $param);
+        $tiene_num_ciclos = es_data($param) && array_key_exists("num_ciclos", $param);
         $num_ciclos = ($tiene_num_ciclos) ? ctype_digit($param["num_ciclos"]) : 0;
         $id_servicio = prm_def($param, 'id_servicio');
         $es_carro_compras = prm_def($param, "es_carro_compras");
 
         if ($num_ciclos > 0 && $id_servicio > 0 || $es_carro_compras) {
-
-            $this->crea_orden_compra($param);
-
-        } else {
             
-            $this->add_domicilio_entrega($param);
+            $this->crea_orden_compra($param);
+            
+        } else {
 
+            $this->add_domicilio_entrega($param);
         }
     }
 
     private function resumen_servicio($id_servicio)
     {
 
-        return $this->app->api("servicio/resumen/", ["id_servicio" => $id_servicio ]);
+        return $this->app->api("servicio/resumen/", ["id_servicio" => $id_servicio]);
     }
 
     private function costo_envio_orden_compra($es_carro_compras, $data)
@@ -49,7 +48,6 @@ class Home extends CI_Controller
             }
         }
         return $response;
-
     }
 
     private function vendedor_orden_compra($es_carro_compras, $data)
@@ -63,7 +61,6 @@ class Home extends CI_Controller
             }
         }
         return $response;
-
     }
 
     private function complementos_carro_orden_compra($data, $es_carro_compras)
@@ -76,7 +73,6 @@ class Home extends CI_Controller
             $data["info_solicitud_extra"]["is_servicio"] = 0;
             $data["info_solicitud_extra"]["id_servicio"] = 0;
             $data["info_solicitud_extra"]["ciclo_facturacion"] = 0;
-
         }
 
         return $data;
@@ -85,7 +81,7 @@ class Home extends CI_Controller
     private function crea_orden_compra($param)
     {
 
-        
+
         $data = $this->app->session();
         $es_carro_compras = $param["es_carro_compras"];
 
@@ -93,9 +89,8 @@ class Home extends CI_Controller
         if ($es_carro_compras) {
 
             /*Debemos cambiar el status del carrito de compras
-            (envio a pago estatus 2 registro de los datos del cliente)*/            
+            (envio a pago estatus 2 registro de los datos del cliente)*/
             $this->notifica_productos_carro_compra($param, $data);
-
         }
 
         $id_usuario = prm_def($param, "q2");
@@ -112,7 +107,6 @@ class Home extends CI_Controller
 
 
         $this->app->pagina($data, render_procesar($data), 1);
-
     }
 
     private function notifica_productos_carro_compra($params, $data)
@@ -124,23 +118,26 @@ class Home extends CI_Controller
         if (es_data($producto_carro_compra)) {
 
             if ($in_session) {
-            
+
 
                 $response = $this->app->api(
-                "usuario_deseo/envio_registro", ["ids" => $producto_carro_compra], "json", "PUT");
-    
-            }else{
-            
+                    "usuario_deseo/envio_registro",
+                    ["ids" => $producto_carro_compra],
+                    "json",
+                    "PUT"
+                );
+            } else {
+
                 /*primer registro(prospecto)*/
                 $response = $this->app->api(
-                "usuario_deseo_compra/envio_registro", ["ids" => $producto_carro_compra], "json", "PUT");
-                            
+                    "usuario_deseo_compra/envio_registro",
+                    ["ids" => $producto_carro_compra],
+                    "json",
+                    "PUT"
+                );
             }
-
-            
         }
         return $response;
-
     }
     private function notifica_productos_carro_compra_usuario_deseo($params)
     {
@@ -151,11 +148,13 @@ class Home extends CI_Controller
 
 
             $response = $this->app->api(
-                "usuario_deseo/envio_pago", ["ids" => $producto_carro_compra], "json", "PUT");
-
+                "usuario_deseo/envio_pago",
+                ["ids" => $producto_carro_compra],
+                "json",
+                "PUT"
+            );
         }
         return $response;
-
     }
 
     private function notifica_productos_carro_compra_deseo($params)
@@ -166,8 +165,11 @@ class Home extends CI_Controller
         if (es_data($producto_carro_compra)) {
 
             $response = $this->app->api(
-                "usuario_deseo_compra/envio_pago", ["ids" => $producto_carro_compra], "json", "PUT");
-
+                "usuario_deseo_compra/envio_pago",
+                ["ids" => $producto_carro_compra],
+                "json",
+                "PUT"
+            );
         }
         return $response;
     }
@@ -181,8 +183,10 @@ class Home extends CI_Controller
     private function crea_data_costo_envio($data)
     {
 
-        $param["flag_envio_gratis"] = (array_key_exists("servicio",
-                $data) && count($data["servicio"]) > 0) ? $data["servicio"][0]["flag_envio_gratis"] : 0;
+        $param["flag_envio_gratis"] = (array_key_exists(
+            "servicio",
+            $data
+        ) && count($data["servicio"]) > 0) ? $data["servicio"][0]["flag_envio_gratis"] : 0;
 
         return $param;
     }
@@ -190,17 +194,22 @@ class Home extends CI_Controller
     private function add_domicilio_entrega($param)
     {
 
-        $data = $this->app->session();
-        $data = $this->app->cssJs($data, "procesar_domicilio");
-        $param += [
+        
+        if (es_data($param)) {
+        
+            $data = $this->app->session();
+            $data = $this->app->cssJs($data, "procesar_domicilio");
+            
+            $param += [
 
-            "id_orden_compra" => $param["orden_compra"],
-            "id_usuario" => $data['id_usuario'],
-        ];
+                "id_orden_compra" => $param["orden_compra"],
+                "id_usuario" => $data['id_usuario'],
+            ];
 
-        $response = $this->carga_ficha_direccion_envio($param, 1);        
-        $this->app->pagina($data, $response, 1);
-
+            $response = $this->carga_ficha_direccion_envio($param, 1);
+         
+            $this->app->pagina($data, $response, 1);
+        }
     }
 
     private function carga_ficha_direccion_envio($q, $v = 0)
@@ -209,7 +218,7 @@ class Home extends CI_Controller
         $q["text_direccion"] = "Dirección de Envio";
         $q["externo"] = 1;
 
-        $response = $this->app->api("usuario_direccion/direccion_envio_pedido/", $q);
+        $response = $this->app->api("usuario_direccion/direccion_envio_pedido", $q);
 
         if ($v > 0) {
 

@@ -89,7 +89,7 @@ let registro_ubicacion = (e) => {
 };
 
 let response_ubicacion = function (data) {
-
+    debugger;
     if (array_key_exists('orden_compra', data)) {
         redirect(data.siguiente);
     }

@@ -1421,8 +1421,9 @@ class Servicio extends REST_Controller
         $servicios = false;
 
         if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
-            $es_empresa = array_key_exists("es_empresa", $param);
-            $servicios = $this->serviciosmodel->busqueda($param);
+            
+            $es_empresa = prm_def($param, "es_empresa");
+            $servicios = $this->serviciosmodel->busqueda($param);                    
             $total_busqueda = prm_def($servicios, 'total_busqueda');
             $servicios += [
                 "url_request" => get_url_request(""),
