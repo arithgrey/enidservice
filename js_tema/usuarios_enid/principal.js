@@ -26,7 +26,7 @@ let $id_departamento_busqueda = $(".id_departamento_busqueda");
 let $form_orden_productos = $(".form_orden_productos");
 
 $(document).ready(function () {
-
+    
     valida_busqueda();
     set_option("estado_usuario", 1);
     set_option("depto", 0);

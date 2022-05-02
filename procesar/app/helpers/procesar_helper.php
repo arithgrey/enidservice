@@ -90,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
             $r[] = d(_titulo($titulo), 'mb-5');
             $z[] = input_frm(
-                "col-lg-6 mt-5",
+                "col-lg-4 mt-5",
                 "NOMBRE",
                 [
                     "name" => "nombre",
@@ -106,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $z[] = input_frm(
-                "col-lg-6 mt-5",
+                "col-lg-4 mt-5",
                 "TELÉFONO",
                 [
                     "id" => "telefono",
@@ -121,6 +121,22 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 _text_telefono
             );
+
+
+            $z[] = d(input_frm(
+                'mt-5',
+                'Fecha de entrega',
+                [
+                    "data-date-format" => "yyyy-mm-dd",
+                    "name" => 'fecha_contra_entrega',
+                    "class" => "fecha_contra_entrega",
+                    'id' => 'fecha_contra_entrega',
+                    "type" => 'date',
+                    "value" => date("Y-m-d"),
+                    "min" => add_date(date("Y-m-d"), -15),
+                    "max" => add_date(date("Y-m-d"), 30),
+                ]
+            ), "col-lg-4");
 
 
             $input = input([
@@ -150,7 +166,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            
+
             $z[] = input_frm(
                 "col-lg-12 mt-5 d-none adicionales_adimistrador",
                 "URL conversación",
@@ -164,7 +180,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $z[] = d("Comentarios",'mt-5 col-lg-12 black text-uppercase  adicionales_adimistrador d-none');
+            $z[] = d("Comentarios", 'mt-5 col-lg-12 black text-uppercase  adicionales_adimistrador d-none');
             $z[] = d(textarea(
                 [
                     "name" => "comentario_compra",

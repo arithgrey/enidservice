@@ -100,10 +100,9 @@ class ubicacion extends REST_Controller
 
             }
 
-            $reparto = $this->app->asigna_reparto($id_orden_compra , 1);
-            $this->cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_entrega);
+            $reparto = $this->app->asigna_reparto($id_orden_compra , 1);            
             $es_cliente = es_cliente($this->app->session());
-
+            
             $area_cliente = path_enid('area_cliente_compras', _text($id_orden_compra, "&primercompra=1"));
             $seguimiento = path_enid('pedidos_recibo', $id_orden_compra);
             $siguiente = ($es_cliente) ? $area_cliente : $seguimiento;

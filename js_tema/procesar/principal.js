@@ -34,6 +34,7 @@ let $talla = $(talla);
 
 let input_password = "#password_registro";
 let fecha_servicio = ".fecha_servicio";
+let fecha_contra_entrega = ".fecha_contra_entrega";
 
 let $input_nombre_registro_envio = $form_miembro.find(input_nombre);
 let $input_email_registro_envio = $form_miembro.find(input_email);
@@ -47,14 +48,11 @@ let $comentario_compra = $form_miembro.find('.comentario_compra');
 
 let $input_adicionales = $form_miembro.find('.adicionales');
 let $adicionales_adimistrador = $form_miembro.find('.adicionales_adimistrador');
-
-
-
-
-
 let $check_prospecto = $form_miembro.find('.check_prospecto');
 
 let $input_fecha_servicio = $(fecha_servicio);
+let $input_fecha_contra_entrega = $(fecha_contra_entrega);
+
 let $input_es_cliente = $('.es_cliente');
 let $es_carro_compras = $(".es_carro_compras");
 let $producto_carro_compra = $(".producto_carro_compra");
@@ -110,8 +108,6 @@ let modifica_estado_prospecto = (e) => {
 
     if ($val > 0) {
 
-
-
         $input_telefono_registro_envio.prop('required', true);
         $input_facebook_registro_envio.prop('required', false);
         $input_es_prospecto_registro_envio.val(0);
@@ -160,8 +156,7 @@ let registro = (e) => {
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
         let $cobro_secundario = $(".cobro_secundario").val();
-
-
+        
         let $data_send = {
             "password": $secret,
             "email": $input_email_registro_envio.val(),
@@ -173,6 +168,7 @@ let registro = (e) => {
             "usuario_referencia": $usuario_referencia.val(),
             "talla": $talla.val(),
             "tipo_entrega": 2,
+            "fecha_contra_entrega": $input_fecha_contra_entrega.val(),
             "fecha_servicio": $input_fecha_servicio.val(),
             "es_cliente": $input_es_cliente.val(),
             "es_carro_compras": $es_carro_compras.val(),
@@ -204,7 +200,7 @@ let registro_cotizacion = (e) => {
 
 let respuesta_registro = (data) => {
     
-    
+    debugger;
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
 
