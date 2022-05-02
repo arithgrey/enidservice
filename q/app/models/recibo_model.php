@@ -20,7 +20,6 @@ class Recibo_model extends CI_Model
                         group by id_servicio , tipo_entrega";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function get_solicitudes_periodo_servicio($id_servicio, $interval)
@@ -42,7 +41,6 @@ class Recibo_model extends CI_Model
              GROUP BY date(fecha_contra_entrega)";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function get_solicitudes_entregadas_periodo_servicio($id_servicio, $interval)
@@ -65,7 +63,6 @@ class Recibo_model extends CI_Model
                     GROUP BY date(fecha_entrega)";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function cancela_orden($saldo_cubierto, $status, $id, $tipo_fecha)
@@ -134,16 +131,19 @@ class Recibo_model extends CI_Model
         }
 
         $query_get = _text_(
-            "SELECT ", $f, " FROM proyecto_persona_forma_pagos  p 
+            "SELECT ",
+            $f,
+            " FROM proyecto_persona_forma_pagos  p 
             INNER JOIN producto_orden_compras po ON 
             p.id = po.id_proyecto_persona_forma_pago   
             INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id
-            WHERE id_usuario IN(", $ids, ")",
+            WHERE id_usuario IN(",
+            $ids,
+            ")",
             $extra
         );
-        
-        return $this->db->query($query_get)->result_array();
 
+        return $this->db->query($query_get)->result_array();
     }
 
     function ids_usuarios_periodo($params, $ids, $fecha_inicio, $fecha_termino)
@@ -163,23 +163,29 @@ class Recibo_model extends CI_Model
 
 
         $query_get = _text_(
-            "SELECT ", $f, " FROM proyecto_persona_forma_pagos  p WHERE id_usuario_referencia 
-            IN(", $ids, ")", $extra
+            "SELECT ",
+            $f,
+            " FROM proyecto_persona_forma_pagos  p WHERE id_usuario_referencia 
+            IN(",
+            $ids,
+            ")",
+            $extra
         );
         return $this->db->query($query_get)->result_array();
-
     }
 
     function ids($ids)
     {
         $query_get = _text_(
             "SELECT * FROM proyecto_persona_forma_pagos  p",
-            " WHERE id IN(", $ids, ")");
+            " WHERE id IN(",
+            $ids,
+            ")"
+        );
         return $this->db->query($query_get)->result_array();
-
     }
 
-    function get_q($params, $param, $limita_fecha = 0 )
+    function get_q($params, $param, $limita_fecha = 0)
     {
 
 
@@ -207,21 +213,26 @@ class Recibo_model extends CI_Model
             "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
-        $ext_fecha = ($limita_fecha < 1 ) ?  $this->get_fecha($param): ' ';
+        $ext_fecha = ($limita_fecha < 1) ?  $this->get_fecha($param) : ' ';
         $ext_servicio = $this->get_servicio($param);
         $order = " ORDER BY  po.id_orden_compra, p.se_cancela ASC, p.flag_pago_comision ASC";
-        $query_get .= _text_($ext_usuario, $usuario_referencia, $extra_extatus_venta,
-            $extra_usuario_venta, $ext_fecha, $ext_servicio, $order);
+        $query_get .= _text_(
+            $ext_usuario,
+            $usuario_referencia,
+            $extra_extatus_venta,
+            $extra_usuario_venta,
+            $ext_fecha,
+            $ext_servicio,
+            $order
+        );
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     private function get_servicio($param)
     {
 
         return (array_key_exists("servicio", $param) && $param["servicio"] > 0) ? " AND  id_servicio = '" . $param["servicio"] . "' " : "";
-
     }
 
     private function get_usuario($param)
@@ -264,7 +275,7 @@ class Recibo_model extends CI_Model
                         AND 
                         id_usuario IN (" . $ids . ")";
         $compras = $this->db->query($query_get)->result_array()[0]["num"];
-        
+
         $query_get = "SELECT COUNT(0)num FROM 
                         proyecto_persona_forma_pagos  
                         WHERE                      
@@ -274,7 +285,6 @@ class Recibo_model extends CI_Model
             "compras" => $compras,
             "solicitudes" => $solicitudes
         ];
-
     }
 
     private function get_fecha($param)
@@ -298,7 +308,6 @@ class Recibo_model extends CI_Model
                 if ((array_key_exists("servicio", $param) && $param["servicio"] > 0) && $fecha_inicio === $fecha_termino) {
 
                     $extra = "";
-
                 } else {
 
                     $extra = " AND DATE(p." . $ops_tipo_orden[$tipo_orden] . ") BETWEEN '" . $fecha_inicio . "' AND DATE_ADD('" . $fecha_termino . "' ,  INTERVAL 1 DAY)  ";
@@ -390,7 +399,6 @@ class Recibo_model extends CI_Model
                     AND 
                         saldo_cubierto>0";
         return $this->db->query($query_get)->result_array();
-
     }
 
     function carga_actividad_pendiente($param)
@@ -496,7 +504,6 @@ class Recibo_model extends CI_Model
 
                 break;
         }
-
     }
 
     function cancela_orden_compra($id_recibo)
@@ -512,7 +519,6 @@ class Recibo_model extends CI_Model
           WHERE  id =  '" . $id_recibo . "' LIMIT 1";
 
         return $this->db->query($query_update);
-
     }
 
     function num_compras_efectivas_usuario($param)
@@ -540,7 +546,6 @@ class Recibo_model extends CI_Model
         }
         $params_where = [$campo_usuario => $id_usuario, "status" => 9];
         return $this->get(["count(0)num"], $params_where)[0]["num"];
-
     }
 
     function compras_ventas_efectivas_usuario($param)
@@ -552,12 +557,10 @@ class Recibo_model extends CI_Model
         if ($param["modalidad"] > 0) {
 
             $campo_usuario = "id_usuario_venta";
-
         }
 
         $params_where = [$campo_usuario => $id_usuario, "status" => 9];
         return $this->get([], $params_where);
-
     }
 
     function get_monto_pendiente_proyecto_persona_forma_pago($param)
@@ -612,7 +615,6 @@ class Recibo_model extends CI_Model
                 LIMIT 1";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function get_compras_usuario($param, $status = 0)
@@ -637,7 +639,7 @@ class Recibo_model extends CI_Model
                         ON p.id = o.id_proyecto_persona_forma_pago
                                           " . $where . " ORDER BY p.fecha_registro DESC";
 
-                
+
         return $this->db->query($query_get)->result_array();
     }
 
@@ -656,7 +658,6 @@ class Recibo_model extends CI_Model
         }
         $this->db->limit($limit);
         return $this->db->update("proyecto_persona_forma_pagos", $data);
-
     }
 
     function set_fecha_contra_entrega($id_recibo, $fecha, $contra_entrega_domicilio = 0, $tipo_entrega = 0, $ubicacion = 0, $costo_envio_cliente = 0)
@@ -682,7 +683,6 @@ class Recibo_model extends CI_Model
 
         $this->db->where("id", $id_recibo);
         return $this->db->update('proyecto_persona_forma_pagos');
-
     }
 
     function q_get($params = [], $id)
@@ -723,7 +723,6 @@ class Recibo_model extends CI_Model
             "DATE(fecha_registro)" => $param["fecha"]
         ];
         return $this->get([" COUNT(0)num "], $in)[0]["num"];
-
     }
 
     function get_where_estado_venta($param)
@@ -799,13 +798,10 @@ class Recibo_model extends CI_Model
             if ($flag_envio_gratis == 1) {
                 $response .= " - Envío gratis";
             }
-
         } else {
             $response = _text_($num_ciclos, $texto_servicio);
-
         }
         return $response;
-
     }
 
 
@@ -856,7 +852,7 @@ class Recibo_model extends CI_Model
 
         $nombre_servicio = $param["nombre_servicio"];
 
-        $descuento_premium = ($es_premium > 0) ? $param["descuento_especial"]: 0;
+        $descuento_premium = ($es_premium > 0) ? $param["descuento_especial"] : 0;
         $flag_servicio = $param["flag_servicio"];
 
         $resumen_compra = $this->crea_resumen_compra($nombre_servicio, $num_ciclos, $flag_envio_gratis, $tipo_entrega);
@@ -873,7 +869,6 @@ class Recibo_model extends CI_Model
             $costo_envio = $param["costo_envio"];
             $costo_envio_cliente = $costo_envio["costo_envio_cliente"];
             $costo_envio_vendedor = $costo_envio["costo_envio_vendedor"];
-
         } else {
 
 
@@ -937,25 +932,15 @@ class Recibo_model extends CI_Model
             ];
 
 
-        switch ($tipo_entrega) {
+        array_push($array_keys, "fecha_contra_entrega");
+        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
 
-            case 1:
+        array_push($array_keys, "fecha_servicio");
+        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
 
-                array_push($array_keys, "fecha_contra_entrega");
-                array_push($array_values, "'" . $data_usuario["fecha_entrega"] . "'");
-                break;
+        array_push($array_keys, "fecha_entrega");
+        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
 
-            case (2 && $flag_servicio > 0):
-
-                array_push($array_keys, "fecha_servicio");
-                array_push($array_values, "'" . $data_usuario["fecha_servicio"] . "'");
-
-                break;
-
-            default:
-
-
-        }
 
         $query_insert = "INSERT INTO 
                         proyecto_persona_forma_pagos(" . get_keys($array_keys) . ") 
@@ -964,8 +949,6 @@ class Recibo_model extends CI_Model
 
         $this->db->query($query_insert);
         return $this->db->insert_id();
-
-
     }
 
     function get_ventas_dia($param)
@@ -982,13 +965,12 @@ class Recibo_model extends CI_Model
 
         $result = $this->db->query($query_get);
         return $result->result_array()[0]["num_ventas"];
-
     }
 
     function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa)
     {
 
-        
+
         $casos = [
             3 => " 1 = 1 ",
             4 => "id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)",
@@ -1090,13 +1072,11 @@ class Recibo_model extends CI_Model
         if (array_key_exists("id_usuario", $param) && $param["id_usuario"] > 0) {
 
             $extra = " AND id_usuario_venta = '" . $param["id_usuario"] . "' ";
-
         }
         if (array_key_exists("q", $param) && strlen($param["q"]) > 2) {
 
             $extra_innner = " LEFT OUTER JOIN  servicio s ON p.id_servicio = s.id_servicio 
             WHERE nombre_servicio LIKE  '%" . $param['q'] . " %'   ";
-
         }
 
         if ($param["fecha_inicio"] != $param["fecha_termino"]) {
@@ -1104,7 +1084,6 @@ class Recibo_model extends CI_Model
             $fecha_inicio = $param['fecha_inicio'];
             $fecha_termino = $param['fecha_termino'];
             $extra_tiempo = " AND DATE( p.fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'  ";
-
         }
 
         if ($total > 0) {
@@ -1125,8 +1104,6 @@ class Recibo_model extends CI_Model
                 ORDER BY  
                 COUNT(0) desc
                 ";
-
-
         } else {
 
             $query_get = "
@@ -1148,12 +1125,9 @@ class Recibo_model extends CI_Model
                 ORDER BY  
                 COUNT(0) desc
                 ";
-
-
         }
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function get_recibo_ventas_pagas_servicio($id_servicio, $fecha_inicio, $fecha_termino)
@@ -1184,7 +1158,6 @@ class Recibo_model extends CI_Model
 
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function sin_tags_arquetipo($id_empresa)
@@ -1349,7 +1322,6 @@ class Recibo_model extends CI_Model
             SET efectivo_en_casa = 1 WHERE id IN({$keys})";
 
         return $this->db->query($query_update);
-
     }
 
     function franja_horaria($franja_horaria, $id_usuario, $id_perfil, $id_empresa)
@@ -1391,7 +1363,6 @@ class Recibo_model extends CI_Model
                         IN( SELECT id FROM users WHERE tel_contacto  = '" . $telefono . "' )";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function boletina_ordenes($array_ids)
@@ -1419,7 +1390,6 @@ class Recibo_model extends CI_Model
                     WHERE id_usuario_referencia = ' . $usuario . ' AND se_cancela < 1 AND cancela_cliente < 1 
                     AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)';
         return $this->db->query($query_set);
-
     }
 
     function pago_recibos_comisiones_ids($ids)
@@ -1434,7 +1404,6 @@ class Recibo_model extends CI_Model
                     AND se_cancela < 1 AND cancela_cliente < 1 
                     AND saldo_cubierto > 0 AND flag_pago_comision < 1 ) as t)');
         return $this->db->query($query_set);
-
     }
 
 
@@ -1502,7 +1471,6 @@ class Recibo_model extends CI_Model
                         ORDER BY COUNT(0) DESC LIMIT 10";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function top_cancelaciones($fecha_inicio, $fecha_termino)
@@ -1527,7 +1495,6 @@ class Recibo_model extends CI_Model
                         ORDER BY COUNT(0) DESC LIMIT 10";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function top_fecha($fecha_inicio, $fecha_termino)
@@ -1550,7 +1517,6 @@ class Recibo_model extends CI_Model
                         GROUP BY DATE(fecha_entrega)";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
     function top_horas($fecha_inicio, $fecha_termino)
@@ -1575,7 +1541,6 @@ class Recibo_model extends CI_Model
                         ORDER BY SUM(num_ciclos_contratados) DESC";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
 
@@ -1601,7 +1566,6 @@ class Recibo_model extends CI_Model
                         GROUP BY DATE(fecha_cancelacion)";
 
         return $this->db->query($query_get)->result_array();
-
     }
 
 
@@ -1622,7 +1586,6 @@ class Recibo_model extends CI_Model
                         cancela_cliente < 1 ";
 
         return $this->db->query($query_get)->result_array()[0]['total'];
-
     }
 
     function clientes_frecuentes()
@@ -1638,8 +1601,6 @@ class Recibo_model extends CI_Model
         $response = $this->db->query($query_get)->result_array();
         $this->crea_tabla_clientes_frecuentes($_num, 1);
         return $response;
-
-
     }
 
     function crea_tabla_clientes_frecuentes($_num, $flag)
@@ -1676,15 +1637,18 @@ class Recibo_model extends CI_Model
             $response = $this->db->query($query_create);
         }
         return $response;
-
     }
 
     function set_total_like($id, $tipo)
     {
 
         $tipo_like = ($tipo > 0) ? "total_like = total_like + 1" : "total_like = total_like - 1";
-        $query_update = _text_("UPDATE proyecto_persona_forma_pagos  SET",
-            $tipo_like, "WHERE id =", $id);
+        $query_update = _text_(
+            "UPDATE proyecto_persona_forma_pagos  SET",
+            $tipo_like,
+            "WHERE id =",
+            $id
+        );
 
         return $this->db->query($query_update);
     }
@@ -1721,8 +1685,7 @@ class Recibo_model extends CI_Model
         $query_get = "select ppfp.* ppfp.id id_recibo, poc.id_orden_compra from proyecto_persona_forma_pagos ppfp inner join 
         producto_orden_compras poc on ppfp.id =  poc.id_proyecto_persona_forma_pago 
         where ppfp.id_usuario in ($ids) AND poc.id_orden_compra != $id_orden_compra";
-        
-        return $this->db->query($query_get)->result_array();
 
+        return $this->db->query($query_get)->result_array();
     }
-}   
+}
