@@ -1063,13 +1063,13 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function format_calendario()
+    function format_calendario($id_recibo)
     {
-
+        $path = "https://enidservices.com/web/pedidos/?recibo=$id_recibo";
         return d(format_link(
             "Agendar recordatorio",
             [
-                "href" => "https://calendar.google.com/calendar/",
+                "href" => "https://calendar.google.com/calendar/r/eventedit?text=Orden de compra - $path &details=$path",
                 "class" => "mb-2",
                 "target" => '_blanck'
             ],
@@ -1242,7 +1242,7 @@ if (!function_exists('invierte_date_time')) {
         $tipos_entregas = $data['tipos_entregas'];
         $menu = menu();
         $r[] = d($menu, 'd-none d-md-block');
-        $r[]  = format_calendario();
+        $r[]  = format_calendario($id_recibo);
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
 
         if (!is_mobile()) {
