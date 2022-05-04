@@ -724,6 +724,8 @@ class recibo extends REST_Controller
             $id_orden_compra = $param['orden_compra'];
             $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             $es_ubicacion = $param["es_ubicacion"];
+            $contra_entrega_domicilio = prm_def($param,"contra_entrega_domicilio");
+            
             
             foreach ($productos_orden_compra as $row) {
 
@@ -734,7 +736,8 @@ class recibo extends REST_Controller
                     "saldo_cubierto" => 0,
                     "se_cancela" => 0,
                     "cancela_cliente" => 0,
-                    "ubicacion" => $es_ubicacion                
+                    "ubicacion" => $es_ubicacion ,
+                    "contra_entrega_domicilio" => $contra_entrega_domicilio
                 ];
                 
                 $in = ["id" => $id_recibo];

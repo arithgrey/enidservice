@@ -95,7 +95,7 @@ class codigo_postal extends REST_Controller
 
             foreach ($productos_orden_compra as $row) {
 
-                $id_recibo = $row["id_proyecto_persona_forma_pago"];
+                $id_recibo = $row["id"];
                 $param["id_direccion"] = $this->crea_direccion($param);
                 $id_direccion = $param["id_direccion"];
 

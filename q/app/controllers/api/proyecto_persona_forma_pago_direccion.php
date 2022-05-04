@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class proyecto_persona_forma_pago_direccion extends REST_Controller
@@ -30,11 +30,10 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         if (fx($param, 'id_recibo')) {
 
             $id_recibo = $param["id_recibo"];
-            if (array_key_exists('total', $param)) {
+            if (is_array($param) && array_key_exists('total', $param)) {
 
                 $response =
                     $this->proyecto_persona_forma_pago_direccion_model->count($id_recibo);
-
             } else {
 
                 $response =
@@ -45,8 +44,6 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
                         ]
                     );
             }
-
-
         }
         $this->response($response);
     }
@@ -59,7 +56,6 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         if (fx($param, 'ids_recibos,v')) {
 
             $response = $this->proyecto_persona_forma_pago_direccion_model->in($param['ids_recibos']);
-
         }
         $this->response($response);
     }
@@ -81,7 +77,6 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
                 $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo($param["id_recibo"]);
                 $this->delete_direccion_punto_encuentro($param["id_recibo"]);
                 $this->set_tipo_entrega($param["id_recibo"]);
-
             }
 
             $response = $this->proyecto_persona_forma_pago_direccion_model->insert($params);
@@ -93,8 +88,12 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
     {
         $q["id_recibo"] = $id_recibo;
 
-        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/index", $q,
-            "json", "DELETE");
+        return $this->app->api(
+            "proyecto_persona_forma_pago_punto_encuentro/index",
+            $q,
+            "json",
+            "DELETE"
+        );
     }
 
     private function set_tipo_entrega($id_recibo)
@@ -107,7 +106,6 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         ];
 
         return $this->app->api("recibo/tipo_entrega", $q, "json", "PUT");
-
     }
 
     function quitar_PUT()
@@ -120,11 +118,9 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
             if ($param['tipo'] == 2) {
 
                 $response = $this->quitar_domicilio_entrega($param);
-
             } else {
                 $response = $this->quitar_punto_entrega($param);
             }
-
         }
         $this->response($response);
     }
@@ -135,7 +131,9 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         $id_direccion = $param["id_direccion"];
         $response =
             $this->proyecto_persona_forma_pago_direccion_model->delete_por_id_recibo_direccion(
-                $id_recibo, $id_direccion);
+                $id_recibo,
+                $id_direccion
+            );
 
         $this->quita_direccion_usuario($id_direccion);
 
@@ -151,7 +149,6 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         ];
 
         return $this->app->api("usuario_direccion/quitar", $q, "json", "PUT");
-
     }
 
     private function quitar_punto_entrega($param)
@@ -175,8 +172,5 @@ class proyecto_persona_forma_pago_direccion extends REST_Controller
         ];
 
         return $this->app->api("usuario_punto_encuentro/quitar", $q, "json", "PUT");
-
     }
-
-
 }

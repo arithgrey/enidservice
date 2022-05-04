@@ -19,7 +19,9 @@ class Home extends CI_Controller
         if (prm_def($param, "transfer") < 1) {
             
             $id_orden_compra = prm_def($param, "ticket");
+            
             $this->estado_compra($id_orden_compra, $data);
+            
             $resumen = $this->resumen_valoraciones($data["id_usuario"]);
 
             
@@ -34,6 +36,8 @@ class Home extends CI_Controller
             
             $data = $this->app->cssJs($data, "area_cliente", 1);
             $this->app->pagina($data, render_user($data), 1);
+            
+            
 
         }
     }
@@ -53,10 +57,12 @@ class Home extends CI_Controller
 
 
     private function estado_compra($id_orden_compra, $data)
-    {
+    {   
 
+        
         if ($id_orden_compra > 0) {
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);            
+            
             if (es_data($productos_ordenes_compra)) {
                 $a = 0;
                 foreach ($productos_ordenes_compra as $row) {
@@ -71,30 +77,24 @@ class Home extends CI_Controller
                     $a++;
                 }
             }
+            
         }
     }
 
-
-    /*
-    private function recibo($id)
-    {
-
-        return $this->app->api("recibo/id/", ["id" => $id]);
-    }
-    */
     private function gestiona_tipo_entrega($recibo, $data, $id_orden_compra)
-    {
-
+    {   
+        
         $es_administrador_vendedor = es_administrador_o_vendedor($data);
         
         $tipo_entrega = $recibo['tipo_entrega'];
         $contra_entrega_domicilio = $recibo['contra_entrega_domicilio'];
         $id_recibo = $recibo["id"];
+        
         /*Cuando es por mensajería*/
         if ($tipo_entrega == 2) {
             /*Verifico que tenga saldo pendiente*/
-            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo, $contra_entrega_domicilio);
-                        
+            $direcciones_registradas = $this->recibo_pago_direccion($id_recibo, $contra_entrega_domicilio);          
+            
             if ($direcciones_registradas < 1) {
 
                 
@@ -111,7 +111,7 @@ class Home extends CI_Controller
 
             } else {
                 
-
+                
                 if ($recibo['saldo_cubierto'] > 0) {
 
                     $link_registro_domicilio =
@@ -121,14 +121,17 @@ class Home extends CI_Controller
                         );
                     redirect($link_registro_domicilio);
                 }
-            }
+                
+            }        
+            
         }
     }
 
     private function recibo_pago_direccion($id_recibo, $contra_entrega_domicilio)
     {
-
+        
         if ($contra_entrega_domicilio > 0) {
+            
             
             $response = $this->app->api(
                 "proyecto_persona_forma_pago_punto_encuentro/punto_encuentro_recibo",
@@ -139,11 +142,12 @@ class Home extends CI_Controller
 
         } else {
 
+            
             $response = $this->app->api(
-                "proyecto_persona_forma_pago_direccion/recibo/",
+                "proyecto_persona_forma_pago_direccion/recibo",
                 [
                     "id_recibo" => $id_recibo,
-                    "total" => 1,
+                    "total" => 2,
                 ]
             );
         }
