@@ -80,9 +80,7 @@ class ubicacion extends REST_Controller
 
         if (fx($param, 'id_orden_compra,ubicacion,fecha_entrega,horario_entrega')) {
 
-            $id_orden_compra = $param['id_orden_compra'];
-            $fecha_entrega = $param['fecha_entrega'];
-            $horario_entrega = $param['horario_entrega'];
+            $id_orden_compra = $param['id_orden_compra'];            
 
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             $reparto = false;

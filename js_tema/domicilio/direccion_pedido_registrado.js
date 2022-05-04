@@ -84,7 +84,7 @@ let registro_ubicacion = (e) => {
     let data_send = $form_ubicacion.serialize();
     bloquea_form(formulario_registro_ubicacion);
     request_enid("POST", data_send, url, response_ubicacion);
-
+    
     e.preventDefault();
 };
 

@@ -511,7 +511,9 @@ class app extends CI_Controller
         
         return $this->api->api("recibo/reparto", [
             "orden_compra" => $id_orden_compra, 
-            "es_ubicacion" => $es_ubicacion
+            "es_ubicacion" => $es_ubicacion,
+            "contra_entrega_domicilio" => 1,
+
         ],  "json", "PUT");
     }
 

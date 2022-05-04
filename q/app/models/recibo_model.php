@@ -931,15 +931,18 @@ class Recibo_model extends CI_Model
                 $descuento_premium
             ];
 
+        if(array_key_exists( "fecha_contra_entrega", $array_keys)){
 
-        array_push($array_keys, "fecha_contra_entrega");
-        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
+            array_push($array_keys, "fecha_contra_entrega");
+            array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
 
-        array_push($array_keys, "fecha_servicio");
-        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
+            array_push($array_keys, "fecha_servicio");
+            array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
 
-        array_push($array_keys, "fecha_entrega");
-        array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
+            array_push($array_keys, "fecha_entrega");
+            array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
+        }    
+        
 
 
         $query_insert = "INSERT INTO 
