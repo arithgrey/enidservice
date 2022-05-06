@@ -2,15 +2,12 @@
 function ul($list, $attributes = [])
 {
 
-    return _list('ul', $list, (
-    is_string($attributes)) ? ["class" => $attributes] : $attributes);
-
+    return _list('ul', $list, (is_string($attributes)) ? ["class" => $attributes] : $attributes);
 }
 
 function li($info, $attributes = [], $row_12 = 0)
 {
-    return add_element($info, "li", (
-    is_string($attributes)) ? ["class" => $attributes] : $attributes, $row_12);
+    return add_element($info, "li", (is_string($attributes)) ? ["class" => $attributes] : $attributes, $row_12);
 }
 
 function span($str, $attributes = [], $row = 0)
@@ -22,7 +19,6 @@ function span($str, $attributes = [], $row = 0)
 function p($str, $attributes = [], $row = 0)
 {
     return get_base_html("p", $str, $attributes, $row);
-
 }
 function d($text, $attributes = [], $row = 0, $frow = 0)
 {
@@ -36,7 +32,6 @@ function d_p($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return d(p($info), $attributes, $row, $frow);
-
 }
 
 function format_time($info, $attributes = [], $row = 0, $frow = 0)
@@ -48,40 +43,37 @@ function u($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return get_base_html("u", $info, $attributes, $row, $frow);
-
 }
 
 function del($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return get_base_html("del", $info, $attributes, $row, $frow);
-
 }
 
 function section($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return get_base_html("section", $info, $attributes, $row, $frow);
-
 }
 
 function article($info, $attributes = [], $row = 0, $frow = 0)
 {
 
     return get_base_html("article", $info, $attributes, $row, $frow);
-
 }
 
 function input($attributes = [], $e = 0, $bootstrap = 1)
 {
 
-    $attributes["class"] = (array_key_exists("class",
-        $attributes)) ? (_text_($attributes["class"], " ")) : "  ";
+    $attributes["class"] = (array_key_exists(
+        "class",
+        $attributes
+    )) ? (_text_($attributes["class"], " ")) : "  ";
 
     if ($bootstrap) {
 
-        $attributes["class"] = (array_key_exists("class", $attributes)) ? (
-            $attributes["class"] . " form-control ") : " form-control ";
+        $attributes["class"] = (array_key_exists("class", $attributes)) ? ($attributes["class"] . " form-control ") : " form-control ";
     }
 
     if (prm_def($attributes, "type") !== 0) {
@@ -93,8 +85,10 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
             case "tel":
 
                 $attributes["onpaste"] = "paste_telefono();";
-                $attributes["class"] = (array_key_exists("class",
-                    $attributes)) ? ($attributes["class"] . " telefono ") : " telefono ";
+                $attributes["class"] = (array_key_exists(
+                    "class",
+                    $attributes
+                )) ? ($attributes["class"] . " telefono ") : " telefono ";
                 $attributes["minlength"] = 8;
                 $attributes["maxlength"] = 12;
                 $attributes["required"] = true;
@@ -124,8 +118,10 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                     '[a-zA-Z0-9.!#$%&\'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)';
                 $attributes['title'] = "Verifica el formato de tu correo!";
                 $attributes["onpaste"] = "paste_email();";
-                $attributes["class"] = (array_key_exists("class",
-                    $attributes)) ? ($attributes["class"] . " correo ") : " correo ";
+                $attributes["class"] = (array_key_exists(
+                    "class",
+                    $attributes
+                )) ? ($attributes["class"] . " correo ") : " correo ";
 
                 break;
 
@@ -151,18 +147,17 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
             case "checkbox":
 
-                $attributes["class"] = (array_key_exists("class",
-                    $attributes)) ?
-                    (
-                    _text_($attributes["class"], "checkbox_enid border cursor_pointer rounded")
+                $attributes["class"] = (array_key_exists(
+                    "class",
+                    $attributes
+                )) ?
+                    (_text_($attributes["class"], "checkbox_enid border cursor_pointer rounded")
                     ) : " checkbox_enid border cursor_pointer rounded";
                 break;
 
 
             default:
-
         }
-
     }
 
     $attributes["autocomplete"] = "off";
@@ -174,15 +169,12 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
 
 
     return ($e < 1) ? "<input  $attr>" : addNRow("<input " . $attr . " >");
-
-
 }
 
 function hiddens($attributes = '', $e = 0)
 {
 
     return "<input type='hidden'  " . add_attributes($attributes) . " >";
-
 }
 
 function add_attributes($attributes = '')
@@ -196,14 +188,12 @@ function add_attributes($attributes = '')
         };
 
         $response = array_reduce(array_keys($attributes), $callback, '');
-
     } else {
 
         $response = ($attributes != '') ? ' ' . $attributes : '';
     }
 
     return $response;
-
 }
 
 function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor = 0)
@@ -230,7 +220,6 @@ function btn($info, $attributes = [], $row = 0, $type = 1, $submit = 1, $anchor 
     if ($row == 0) {
 
         return "<button " . $attr . ">" . $info . "</button>";
-
     } else {
 
         $b = ($anchor !== 0) ? "<a href='" . $anchor . "'> <button " . $attr . ">" . $info . "</button></a>" : "<button " . $attr . ">" . $info . "</button>";
@@ -245,7 +234,6 @@ function add_element($info, $type, $attributes = '', $row = 0)
 
     $base = "<" . $type . " " . add_attributes($attributes) . " >" . $info . "</" . $type . ">";
     return ($row < 1) ? $base : addNRow($base);
-
 }
 
 
@@ -301,14 +289,12 @@ function get_base_html($tipo, $info, $attributes = [], $row = 0, $frow = 0)
         }
 
         return $response;
-
     } else {
 
         if (is_array($attributes)) {
 
             $base = "<{$tipo}" . add_attributes($attributes) . ">" . $info . "</{$tipo}>";
             return ($row > 0) ? addNRow($base) : $base;
-
         } else {
 
             $base = "<{$tipo} class='{$attributes}'>" . $info . "</{$tipo}>";
@@ -344,7 +330,6 @@ function end_row()
 {
 
     return str_repeat("</div>", 2);
-
 }
 
 function n_row_12($attributes = '')
@@ -393,14 +378,12 @@ function tab($text, $accion, $attributes = [])
     if (array_key_exists("class", $attributes)) {
 
         $attributes["class"] = _text_($attributes["class"], "text-uppercase black ");
-
     } else {
 
         $attributes["class"] = " text-uppercase black";
     }
 
     return a_enid($text, $attributes);
-
 }
 function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
 {
@@ -411,7 +394,6 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
     if (array_key_exists("class", $attributes)) {
 
         $attributes["class"] = _text_($attributes["class"], "tab-pane");
-
     } else {
 
         $attributes["class"] = " tab-pane ";
@@ -425,7 +407,6 @@ function tab_seccion($contenido, $id_selector, $activo = 0, $attributes = [])
     $attributes['role'] = "tabpanel";
     $attributes['id'] = $id_selector;
     return d($contenido, $attributes);
-
 }
 function tab_content($array = [], $col = 0)
 {
@@ -443,15 +424,12 @@ function td($val = '', $attributes = [])
     if (is_array($attributes)) {
 
         return "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
-
     } else {
 
         return (is_string($attributes) && strlen($attributes) > 0) ?
             "<td " . add_attributes(["class" => $attributes]) . " NOWRAP >" . $val . "</td>" :
             "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
-
     }
-
 }
 
 function tr($val = '', $attributes = [])
@@ -459,7 +437,6 @@ function tr($val = '', $attributes = [])
 
     $str = is_array($val) ? append($val) : $val;
     return "<tr " . add_attributes($attributes) . " >" . $str . "</tr>";
-
 }
 
 function tb($val = '', $attributes = '')
@@ -467,7 +444,6 @@ function tb($val = '', $attributes = '')
 
     $str = is_array($val) ? append($val) : $val;
     return "<table " . add_attributes($attributes) . " >" . $str . "</table>";
-
 }
 function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
 {
@@ -475,30 +451,26 @@ function h($data = '', $h = 1, $attributes = '', $row_12 = 0)
     if (is_numeric($attributes) && $attributes > 0) {
 
         $response = addNRow("<h$h>" . $data . "</h$h>");
-
     } else {
 
         if (is_string($attributes)) {
 
             $label = "<h$h " . add_attributes(["class" => $attributes]) . ">" . $data . "</h$h>";
             $response = ($row_12 > 0) ? addNRow($label) : $label;
-
         } else {
 
             $label = "<h$h " . add_attributes($attributes) . ">" . $data . "</h$h>";
             $response = ($row_12 > 0) ? addNRow($label) : $label;
-
         }
     }
 
     return "<header>" . $response . "</header>";
-
 }
 function template_table_enid($extra_class = '')
 {
     $class = _text_('table text-center', $extra_class);
     return [
-        'table_open' => '<table   class="'.$class.'" >',
+        'table_open' => '<table   class="' . $class . '" >',
         'thead_open' => '<thead class="black_enid_background2 white">',
         'thead_close' => '</thead>',
         'heading_row_start' => '<tr class="text-center">',
@@ -517,7 +489,6 @@ function template_table_enid($extra_class = '')
         'cell_alt_end' => '</td>',
         'table_close' => '</table>',
     ];
-
 }
 function create_tag($param, $class, $val_id, $text)
 {
@@ -528,7 +499,8 @@ function create_tag($param, $class, $val_id, $text)
         $info = $row[$text];
         $id = $row[$val_id];
         $tags .= add_element(
-            $info, "button",
+            $info,
+            "button",
             [
                 'class' => $class,
                 'id' => $id,
@@ -537,7 +509,6 @@ function create_tag($param, $class, $val_id, $text)
     }
 
     return add_element($tags, "d", ['class' => 'tags']);
-
 }
 
 function create_solo_tag($param, $class, $val_id, $text)
@@ -553,7 +524,6 @@ function create_solo_tag($param, $class, $val_id, $text)
     );
 
     return add_element($tags, "d", ['class' => 'tags']);
-
 }
 
 function create_select(
@@ -569,8 +539,7 @@ function create_select(
     $text_def = "",
     $menos = [],
     $mayusculas = 0
-)
-{
+) {
 
     $select[] = "<select name='" . $name . "'  class='text-uppercase " . $class . "'  id='" . $id . "'> ";
 
@@ -590,7 +559,6 @@ function create_select(
     $select[] = "</select>";
 
     return ($row < 1) ? append($select) : addNRow(append($select));
-
 }
 function label($label_text = '', $attributes = [], $row = 0)
 {
@@ -600,7 +568,6 @@ function label($label_text = '', $attributes = [], $row = 0)
         "<label" . add_attributes($attributes) . ">" . $label_text . "</label>";
 
     return ($row == 0) ? $base : addNRow($base);
-
 }
 
 function addNRow($e, $attributes = [])
@@ -610,7 +577,6 @@ function addNRow($e, $attributes = [])
         n_row_12(["class" => $attributes]) . $e . end_row()
         :
         n_row_12($attributes) . $e . end_row();
-
 }
 
 function place($class, $attributes = [], $row = 0)
@@ -619,7 +585,6 @@ function place($class, $attributes = [], $row = 0)
     if (is_numeric($attributes) && $attributes > 0) {
 
         return d("", ["class" => $class]);
-
     } else {
 
         $attributes["class"] = $class;
@@ -629,7 +594,6 @@ function place($class, $attributes = [], $row = 0)
 
         return d("", $attributes, $row);
     }
-
 }
 
 
@@ -677,7 +641,6 @@ function select_vertical($data, $val, $text_option, $attributes = '')
     }
     $select .= "</select>";
     return $select;
-
 }
 
 function small($text, $attributes = [])
@@ -688,13 +651,10 @@ function small($text, $attributes = [])
         $att["class"] = $attributes;
 
         return "<small " . add_attributes($att) . " > " . $text . "</small>";
-
     } else {
 
         return "<small " . add_attributes($attributes) . " > " . $text . "</small>";
-
     }
-
 }
 
 function strong($text, $attributes = '', $row = 0)
@@ -706,15 +666,11 @@ function strong($text, $attributes = '', $row = 0)
         $base = "<strong" . add_attributes($att) . ">" . $text . "</strong>";
 
         return ($row == 0) ? $base : addNRow($base);
-
-
     } else {
 
         $base = "<strong" . add_attributes($attributes) . ">" . $text . "</strong>";
         return ($row == 0) ? $base : addNRow($base);
-
     }
-
 }
 
 function hr($attributes = [], $row = 1)
@@ -727,16 +683,13 @@ function hr($attributes = [], $row = 1)
         $e = ($row == 0) ? $base : addNRow($base);
 
         return $e;
-
     } else {
 
         $base = "<hr" . add_attributes($attributes) . ">";
         $e = ($row == 0) ? $base : addNRow($base);
 
         return $e;
-
     }
-
 }
 
 function border($attributes = [])
@@ -755,17 +708,17 @@ function textarea($attributes = [], $row_12 = 0, $def = '')
 
     if (array_key_exists("class", $attributes)) {
         $attributes["class"] = _text_(
-            $attributes["class"], " form-control rounded-0");
+            $attributes["class"],
+            " form-control rounded-0"
+        );
     } else {
 
         $attributes["class"] = " form-control rounded-0";
-
     }
     $base = "<textarea " . add_attributes($attributes) . " >" . $def . "</textarea>";
     $e = ($row_12 == 0) ? $base : addNRow($base);
 
     return $e;
-
 }
 
 
@@ -792,14 +745,12 @@ function append($array, $col = 0, $num_col = 0)
             if ($f > 0) {
                 print_r($array);
             }
-
         }
 
         $callback = function ($a, $b) {
             if (!is_null($b)) {
 
                 return " " . $a . $b;
-
             }
         };
 
@@ -809,7 +760,6 @@ function append($array, $col = 0, $num_col = 0)
 
             $response = ($num_col > 0) ? d($response, $num_col) : d($response);
         }
-
     } else {
 
         echo "No es array -> " . print_r($array);
@@ -829,7 +779,8 @@ function get_menu_session($in_session, $proceso_compra = 1)
             [
                 "href" => path_enid('sobre_vender'),
                 "class" => ' white text-uppercase strong text_agilizar ',
-            ], 0
+            ],
+            0
         );
 
         $path = path_enid('login');
@@ -848,13 +799,14 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 $vender,
                 $session,
                 "d-none d-md-block d-md-flex justify-content-end mt-md-3 mb-md-3",
-                "mr-3 ", '', ''
+                "mr-3 ",
+                '',
+                ''
             );
         }
     }
 
     return $response;
-
 }
 
 function btw($a, $b, $class = '', $row = 0, $frow = 0)
@@ -893,16 +845,15 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
         if ($frow > 0) {
             $response = d(d(append([$a, $b]), $class), 13);
         }
-
-
     } else {
 
-        $response = ($row > 0) ? d(d(append([$a, $b]), $class), 1) : d(append([$a, $b]),
-            $class);
+        $response = ($row > 0) ? d(d(append([$a, $b]), $class), 1) : d(
+            append([$a, $b]),
+            $class
+        );
     }
 
     return $response;
-
 }
 
 function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-sm-4 mt-5 p-0 p-md-1 ', $base_termino = 'col-sm-4 mt-5 p-0 p-md-1', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
@@ -911,7 +862,9 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-s
     $inicio = ($def_inicio != 0) ? $def_inicio : add_date(date("Y-m-d"), -1);
     $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
-    $r[] = input_frm($base_inicio, "Fecha inicio",
+    $r[] = input_frm(
+        $base_inicio,
+        "Fecha inicio",
         [
             "name" => 'fecha_inicio',
             "class" => "input_busqueda_inicio",
@@ -921,7 +874,9 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-s
         ]
     );
 
-    $r[] = input_frm($base_termino, "Fecha término",
+    $r[] = input_frm(
+        $base_termino,
+        "Fecha término",
         [
             "name" => 'fecha_termino',
             "class" => "input_busqueda_termino",
@@ -935,8 +890,6 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-s
     $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), $base_boton);
 
     return append($r);
-
-
 }
 
 
@@ -968,7 +921,6 @@ function input_hour_date()
             "data-link-field" => "dtp_input1",
         ]
     );
-
 }
 
 
@@ -980,7 +932,6 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
     $izquierdo = (flex(icon(_text_($clase, $class_icono), $att), $text, "", "mr-3"));
     $derecho = (flex($text, icon(_text_($class_icono, $clase), $att), "", "", "ml-3"));
     return ($left > 0 && !$es_derecho) ? $izquierdo : $derecho;
-
 }
 
 function _titulo($text, $tipo = 0, $extra = '')
@@ -1012,10 +963,8 @@ function _titulo($text, $tipo = 0, $extra = '')
             $response[] = h($text, 5, _text_(_t5, $extra));
 
             break;
-
     }
     return append($response);
-
 }
 
 function social($proceso_compra, $desc_web, $black = 1)
@@ -1044,7 +993,8 @@ function social($proceso_compra, $desc_web, $black = 1)
             ]
         );
 
-        $r[] = a_enid("",
+        $r[] = a_enid(
+            "",
             [
                 "href" => $url_facebook,
                 "target" => "_black",
@@ -1053,7 +1003,8 @@ function social($proceso_compra, $desc_web, $black = 1)
             ]
         );
 
-        $r[] = a_enid("",
+        $r[] = a_enid(
+            "",
             [
                 "href" => "https://www.instagram.com/enid_service/",
                 "class" => _text_("fa fa-instagram ", $color),
@@ -1062,7 +1013,8 @@ function social($proceso_compra, $desc_web, $black = 1)
             ]
         );
 
-        $r[] = a_enid("",
+        $r[] = a_enid(
+            "",
             [
                 "target" => "_black",
                 "class" => _text_("fa fa-twitter ", $color),
@@ -1073,11 +1025,9 @@ function social($proceso_compra, $desc_web, $black = 1)
         );
 
         $r[] = get_url_pinterest($url_share, 1);
-
     }
 
     return d($r, "d-flex align-items-center");
-
 }
 
 function hrz($a, $b, $col = 0, $class = '')
@@ -1118,11 +1068,9 @@ function hrz($a, $b, $col = 0, $class = '')
         default:
             $response = d(d($a) . d($b), $class);
             break;
-
     }
 
     return $response;
-
 }
 
 function dd($a, $b, $col = 0)
@@ -1165,7 +1113,6 @@ function dd($a, $b, $col = 0)
     }
 
     return $response;
-
 }
 
 function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
@@ -1174,73 +1121,91 @@ function dd_p($a, $b, $col = 0, $extra_left = '', $extra_right = '')
 
         case 1:
 
-            $response = d($a, " col-lg-1 " . $extra_left) . d($b,
-                    " col-lg-11 " . $extra_right);
+            $response = d($a, " col-lg-1 " . $extra_left) . d(
+                $b,
+                " col-lg-11 " . $extra_right
+            );
             break;
 
         case 2:
 
-            $response = d($a, " col-lg-2 " . $extra_left) . d($b,
-                    " col-lg-10 " . $extra_right);
+            $response = d($a, " col-lg-2 " . $extra_left) . d(
+                $b,
+                " col-lg-10 " . $extra_right
+            );
             break;
         case 3:
 
-            $response = d($a, " col-lg-3 " . $extra_left) . d($b,
-                    " col-lg-9 " . $extra_right);
+            $response = d($a, " col-lg-3 " . $extra_left) . d(
+                $b,
+                " col-lg-9 " . $extra_right
+            );
             break;
 
         case 4:
 
-            $response = d($a, " col-lg-4 " . $extra_left) . d($b,
-                    " col-lg-8 " . $extra_right);
+            $response = d($a, " col-lg-4 " . $extra_left) . d(
+                $b,
+                " col-lg-8 " . $extra_right
+            );
             break;
 
         case 5:
 
-            $response = d($a, " col-lg-5 " . $extra_left) . d($b,
-                    " col-lg-7 " . $extra_right);
+            $response = d($a, " col-lg-5 " . $extra_left) . d(
+                $b,
+                " col-lg-7 " . $extra_right
+            );
             break;
 
         case 6:
 
-            $response = d($a, " col-lg-6 " . $extra_left) . d($b,
-                    " col-lg-6 " . $extra_right);
+            $response = d($a, " col-lg-6 " . $extra_left) . d(
+                $b,
+                " col-lg-6 " . $extra_right
+            );
             break;
 
         case 7:
 
-            $response = d($a, " col-lg-7 " . $extra_left) . d($b,
-                    " col-lg-5 " . $extra_right);
+            $response = d($a, " col-lg-7 " . $extra_left) . d(
+                $b,
+                " col-lg-5 " . $extra_right
+            );
             break;
 
         case 8:
 
-            $response = d($a, " col-lg-8 " . $extra_left) . d($b,
-                    " col-lg-4 " . $extra_right);
+            $response = d($a, " col-lg-8 " . $extra_left) . d(
+                $b,
+                " col-lg-4 " . $extra_right
+            );
             break;
 
         case 9:
 
-            $response = d($a, " col-lg-9 " . $extra_left) . d($b,
-                    " col-lg-3 " . $extra_right);
+            $response = d($a, " col-lg-9 " . $extra_left) . d(
+                $b,
+                " col-lg-3 " . $extra_right
+            );
 
             break;
 
         case 10:
 
-            $response = d($a, " col-lg-10 " . $extra_left) . d($b,
-                    " col-lg-2 " . $extra_right);
+            $response = d($a, " col-lg-10 " . $extra_left) . d(
+                $b,
+                " col-lg-2 " . $extra_right
+            );
 
             break;
 
         default:
 
             $response = d($a) . d($b);
-
     }
 
     return $response;
-
 }
 
 
@@ -1291,17 +1256,16 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
             break;
         default:
             $response = d(d($a) . d($b), $class);
-
     }
 
     return $response;
-
 }
 
 function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1)
 {
     $span = span('Loading', 'sr-only');
-    $load = str_repeat(d($span,
+    $load = str_repeat(d(
+        $span,
         [
             'class' => "spinner-grow",
             'role' => "status"
@@ -1314,18 +1278,19 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     $mensaje_cotenidio = ($modal_inicial !== 1) ? $modal_inicial : $mensaje_cotenidio;
     $seccion = d($mensaje_cotenidio, "modal-body mt-5 mb-5");
     $cerrar = d(
-        icon(_text_(_eliminar_icon, 'cerrar_modal fa-2x'),
+        icon(
+            _text_(_eliminar_icon, 'cerrar_modal fa-2x'),
             [
                 "data-dismiss" => "modal",
             ]
-        ), 'ml-auto'
+        ),
+        'ml-auto'
     );
 
     $cerrar = d($cerrar, "modal-header border-0");
     $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content rounded-0");
     $contenido = d(
-        $seccion_contenido
-        ,
+        $seccion_contenido,
         [
             "class" => "modal-dialog",
             "role" => "document",
@@ -1344,20 +1309,21 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     );
 
     return d($modal, 13);
-
 }
 
 function menu_session_mobil($in_session)
 {
 
     $cerrar_opciones = d(
-        a_enid("×",
+        a_enid(
+            "×",
             [
                 "href" => "javascript:void(0)",
                 "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black",
                 "onclick" => "closeNav()",
             ]
-        ), 'ml-auto mr-5 mt-5 '
+        ),
+        'ml-auto mr-5 mt-5 '
     );
 
     $form_busqueda = form_busqueda_productos();
@@ -1368,8 +1334,7 @@ function menu_session_mobil($in_session)
 
     $menu_lateral = d(
 
-        $columna
-        ,
+        $columna,
         [
             "id" => "mySidenav",
             "class" => "sidenav"
@@ -1377,7 +1342,6 @@ function menu_session_mobil($in_session)
     );
 
     return addNRow($menu_lateral);
-
 }
 
 function form_busqueda_productos()
@@ -1392,7 +1356,8 @@ function form_busqueda_productos()
                 'style' => 'height: 41px!important;',
             ]
         ),
-        btn("buscar",
+        btn(
+            "buscar",
             [
                 'class' => 'boton-busqueda'
             ]
@@ -1403,7 +1368,6 @@ function form_busqueda_productos()
     );
     $form[] = form_close();
     return d($form, 'my-auto col-sm-12');
-
 }
 
 function opciones_acceso($in_session)
@@ -1420,15 +1384,16 @@ function opciones_acceso($in_session)
                         "class" => "white"
                     ]
                 )**/
-                a_enid("WhatsApp",
+                a_enid(
+                    "WhatsApp",
                     [
-                        "href" => path_enid('whatsapp',0,1),
+                        "href" => path_enid('whatsapp', 0, 1),
                         "class" => "white whatsapp_trigger",
                         "target" => "_black"
                     ]
-                )
-                ,
-                a_enid("acceder",
+                ),
+                a_enid(
+                    "acceder",
                     [
                         "href" => path_enid('login'),
                         "class" => "white"
@@ -1440,10 +1405,8 @@ function opciones_acceso($in_session)
 
             )
         );
-
     }
     return $response;
-
 }
 
 
@@ -1464,20 +1427,16 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
                 d("", "num_tareas_dia_pendientes_usr"),
                 "",
                 "align-self-center"
-            )
-            ,
+            ),
             [
                 "class" => "dropdown-toggle",
                 "data-toggle" => "dropdown",
             ]
-        )
-        ,
+        ),
         d(
-            $seccion
-            ,
+            $seccion,
             "row dropdown-menu menu_dropdown_enid"
-        )
-        ,
+        ),
         "dropdown dropleft menu_notificaciones_progreso_dia mr-2 borde_amarillo"
     );
 
@@ -1492,27 +1451,31 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
 
     $menu_usuario = [
 
-        a_enid("noticias",
+        a_enid(
+            "noticias",
             [
                 "href" => path_enid('busqueda'),
                 "class" => 'black text-uppercase mt-2',
             ]
         ),
-        a_enid("Perfil",
+        a_enid(
+            "Perfil",
             [
                 "href" => path_enid('usuario_contacto', $id_usuario),
                 "class" => 'black text-uppercase mt-2',
             ]
         ),
         $menu,
-        a_enid("Configuración",
+        a_enid(
+            "Configuración",
             [
                 "href" => path_enid("administracion_cuenta"),
                 "class" => 'black text-uppercase mt-2',
             ]
         ),
 
-        a_enid("salir",
+        a_enid(
+            "salir",
             [
                 "href" => path_enid("logout"),
                 "class" => 'black text-uppercase mt-2',
@@ -1530,7 +1493,6 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     $menu = d($extra_menu, 'dropdown dropleft');
 
     return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 mt-3 mt-md-0");
-
 }
 
 function frm_search(
@@ -1541,8 +1503,7 @@ function frm_search(
     $menu = 0
 
 
-)
-{
+) {
 
     $r[] = '<form action="../search" class="search_principal_form d-none d-md-block d-md-flex mr-5">';
     $r[] = d($clasificaciones_departamentos, "d-none");
@@ -1556,7 +1517,8 @@ function frm_search(
         ]
     );
 
-    $r[] = btn(icon("fa fa-search "),
+    $r[] = btn(
+        icon("fa fa-search "),
         [
             'style' => 'background: #007bff!important;'
         ]
@@ -1578,15 +1540,12 @@ function frm_search(
     if (!$in_session) {
 
         $response[] = d($r, 'd-md-flex justify-content-end mt-3');
-
     } else {
 
         $response[] = dd($r, tmp_menu($path_img_usuario, $id_usuario, $menu));
-
     }
 
     return append($response);
-
 }
 
 function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = 'd-flex ')
@@ -1597,7 +1556,6 @@ function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = '
 
         $att .= (strlen($d1) > 0) ? $d1 : '';
         $response = d($d, $att);
-
     } else {
 
 
@@ -1611,7 +1569,6 @@ function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = '
     }
 
     return $response;
-
 }
 
 function flex_md($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att = 'd-md-flex ')
@@ -1622,7 +1579,6 @@ function flex_md($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att 
 
         $att .= (strlen($d1) > 0) ? $d1 : '';
         $response = d(append($d), $att);
-
     } else {
 
 
@@ -1636,7 +1592,6 @@ function flex_md($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', $att 
     }
 
     return $response;
-
 }
 
 function crea_estrellas($calificacion, $sm = 0)
@@ -1655,7 +1610,8 @@ function crea_estrellas($calificacion, $sm = 0)
     for ($a; $a <= 5; $a++) {
 
         $restantes .=
-            label("★",
+            label(
+                "★",
                 [
                     "class" => 'estrella azul_estrella_simple  cursor_pointer ',
                     "id" => $a,
@@ -1685,28 +1641,25 @@ function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext
     $text = _text(
         input($config_input, 0, 0),
         label(
-            $text_label
-            ,
+            $text_label,
             $config_label
-        )
-        ,
+        ),
         d(
             $str,
-            add_text("mt-3 color_red d-none place_input_form_",
-                $config_input["id"])
+            add_text(
+                "mt-3 color_red d-none place_input_form_",
+                $config_input["id"]
+            )
         )
     );
     $r[] = d($text, "input_enid_format w-100");
     if (is_numeric($col)) {
 
         return ($col > 0) ? d($r, $col) : append($r);
-
     } else {
 
         return d($r, $col);
     }
-
-
 }
 
 function contaiter($str, $attributes = [], $fluid = 1)
@@ -1718,18 +1671,18 @@ function contaiter($str, $attributes = [], $fluid = 1)
     if (intval($attributes) && $attributes > 0) {
 
         $response = d(d(d($str, 12), 13), "container-fluid");
-
     } else {
 
 
         if (is_string($attributes)) {
 
             $att["class"] = add_text($attributes, $f, 1);
-
         } else {
 
-            $att["class"] = (array_key_exists("class",
-                $attributes)) ? add_text($attributes["class"], $f, 1) : $f;
+            $att["class"] = (array_key_exists(
+                "class",
+                $attributes
+            )) ? add_text($attributes["class"], $f, 1) : $f;
         }
 
         $response = d(d($str, 13), $att);
@@ -1752,8 +1705,10 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
     $att = $attributes;
 
 
-    $att["class"] = (array_key_exists("class",
-        $attributes)) ? add_text($clase, $attributes["class"]) : $clase;
+    $att["class"] = (array_key_exists(
+        "class",
+        $attributes
+    )) ? add_text($clase, $attributes["class"]) : $clase;
 
     return a_enid($str, $att);
 }
@@ -1777,7 +1732,6 @@ function _text()
         $response .= $argumentos[$i];
     }
     return $response;
-
 }
 
 function _text_()
@@ -1789,7 +1743,6 @@ function _text_()
         $response .= ' ' . $argumentos[$i];
     }
     return $response;
-
 }
 
 function _d()
@@ -1802,7 +1755,6 @@ function _d()
     }
 
     return $response;
-
 }
 
 function opciones_populares()
@@ -1818,9 +1770,10 @@ function opciones_populares()
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white  f11 border-right frecuentes border-right-enid"
-            ,
-            "href" => path_enid("search", "/?q2=0&q=&order=1"
+            "class" => "white  f11 border-right frecuentes border-right-enid",
+            "href" => path_enid(
+                "search",
+                "/?q2=0&q=&order=1"
             )
         ]
     );
@@ -1832,12 +1785,12 @@ function opciones_populares()
             "href" => path_enid("promociones")
         ]
     );
-    
+
     $response[] = a_enid(
         "CLIENTES",
         [
             "class" => "white  f11  frecuentes",
-            "href" => path_enid("clientes") 
+            "href" => path_enid("clientes")
         ]
     );
 
@@ -1862,21 +1815,18 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
         } else {
             $response[] = get_logo($in_session);
         }
-
     } else {
 
         if (!$is_mobile) {
 
             $response[] = flex(
                 ajustar(get_logo(), $frecuentes, 2),
-                frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session, $id_usuario, $menu)
-                ,
+                frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session, $id_usuario, $menu),
                 "",
                 "col-md-7 align-self-center mt-4 pupulares d-none d-md-block",
                 "col-lg-5 align-items-center justify-content-between d-flex mt-4 "
 
             );
-
         } else {
 
             $response[] = ajustar(
@@ -1884,7 +1834,6 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
                 tmp_menu($path_img_usuario, $id_usuario, $menu)
             );
         }
-
     }
 
     $navegacion = d(
@@ -1896,7 +1845,6 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
     );
 
     return d($navegacion, 13);
-
 }
 
 function open_form($attr = [])
@@ -1924,7 +1872,6 @@ function d_c($items = [], $attr)
     for ($x = 0; $x < count($items); $x++) {
 
         $response[] = d($items[$x], $attr);
-
     }
     return append($response);
 }
@@ -1958,7 +1905,6 @@ function dropdown($presentacion, $a_menu = [], $ext = '', $direccion = 'L')
 
     $r[] = d($a_menu, "dropdown-menu");
     return d($r, _text('position-absolute ', $ext, ' ', $text_direccion));
-
 }
 
 function list_orden($list_orden, $default)
@@ -1978,51 +1924,57 @@ function list_orden($list_orden, $default)
 
     return append($r);
 }
-function gb_modal_costos($precio, $costo , $id_servicio)
+function gb_modal_costos($precio, $costo, $id_servicio)
 {
 
-        $form[] = d(_titulo('¿Precios y costos?'), 'mb-5');
-        $form[] = form_open("",
-            [
-                "class" => "form_precio",
-                "method" => "post"
-            ]
-        );
+    $form[] = d(_titulo('¿Precios y costos?'), 'mb-5');
+    $form[] = form_open(
+        "",
+        [
+            "class" => "form_precio",
+            "method" => "post"
+        ]
+    );
 
-        $form[] = input_frm('', '¿Precio?',
-            [
-                'class' => 'precio_servicio',
-                'id' => 'precio',
-                'name' => 'precio',
-                'value' => $precio,
-                'required' => true
-            ]
-        );
+    $form[] = input_frm(
+        '',
+        '¿Precio?',
+        [
+            'class' => 'precio_servicio',
+            'id' => 'precio',
+            'name' => 'precio',
+            'value' => $precio,
+            'required' => true
+        ]
+    );
 
-        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
-        $form[] = form_close();
+    $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
+    $form[] = form_close();
 
 
 
-        $form[] = form_open("",
-            [
-                "class" => "form_costo",
-                "method" => "post"
-            ]
-        );
+    $form[] = form_open(
+        "",
+        [
+            "class" => "form_costo",
+            "method" => "post"
+        ]
+    );
 
-        $form[] = input_frm('mt-5', '¿Costo?',
-            [
-                'class' => 'costo_servicio',
-                'id' => 'costo',
-                'name' => 'costo',
-                'value' => $costo,
-                'required' => true
-            ]
-        );
-        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
-        $form[] = form_close();
-        return gb_modal(append($form), 'gb_costos_precios');
+    $form[] = input_frm(
+        'mt-5',
+        '¿Costo?',
+        [
+            'class' => 'costo_servicio',
+            'id' => 'costo',
+            'name' => 'costo',
+            'value' => $costo,
+            'required' => true
+        ]
+    );
+    $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
+    $form[] = form_close();
+    return gb_modal(append($form), 'gb_costos_precios');
 }
 function select_enid($data, $text_option, $val, $attributes = '')
 {
@@ -2043,7 +1995,6 @@ function icon($class, $attributes = '', $row_12 = 0, $extra_text = '')
     $base2 = span($extra_text, $attributes);
 
     return ($row_12 == 0) ? $base . $base2 : addNRow($base) . $base2;
-
 }
 
 function get_url_pinterest($url, $icon = 0)
@@ -2051,23 +2002,27 @@ function get_url_pinterest($url, $icon = 0)
 
     $path = _text("https://www.pinterest.com/pin/create/button/?url=", $url);
     if ($icon > 0) {
-        return a_enid(icon('fa fa-pinterest-p'),
+        return a_enid(
+            icon('fa fa-pinterest-p'),
             [
                 'target' => "_black",
                 'href' => $path,
                 'class' => 'black',
-            ]);
+            ]
+        );
     }
 
     return $path;
-
 }
 
 function get_url_twitter($url, $mensaje, $icon = 0)
 {
 
     $path = _text(
-        "https://twitter.com/intent/tweet?text=", $mensaje, $url);
+        "https://twitter.com/intent/tweet?text=",
+        $mensaje,
+        $url
+    );
     if ($icon > 0) {
         return a_enid(
             icon('fa fa-twitter'),
@@ -2086,7 +2041,10 @@ function get_url_facebook($url, $icon = 0)
 {
 
     $url_facebook = _text(
-        "https://www.facebook.com/sharer/sharer.php?u=", $url, ";src=sdkpreparse");
+        "https://www.facebook.com/sharer/sharer.php?u=",
+        $url,
+        ";src=sdkpreparse"
+    );
     if ($icon > 0) {
         return a_enid(
             icon('fa fa-facebook-square'),
@@ -2098,7 +2056,6 @@ function get_url_facebook($url, $icon = 0)
     }
 
     return $url_facebook;
-
 }
 function get_logo($session = 0)
 {
@@ -2130,22 +2087,35 @@ function get_logo($session = 0)
                 break;
         }
 
-        return d($en_mobile, $class);
+        $response[] =  d($en_mobile, $class);
 
+        if ($session < 1) {
+            $response[] = d(a_enid(
+                'Clientes',
+                [
+                    'href' => path_enid('clientes'),
+                    'class' => "text-right white",
+                ]
+            ), 'col-sm-12');
+            
+        }
+        
+        return append($response);
     } else {
 
         $img_enid = img_enid(["style" => "width: 50px!important;"]);
         return a_enid($img_enid, ["href" => path_enid('home')]);
-
     }
-
 }
 
 function img_servicio($id, $external = 0)
 {
     $url = ($external > 0) ?
         _text(
-            "http://enidservices.com/", _web, "/imgs/index.php/enid/imagen_servicio/", $id
+            "http://enidservices.com/",
+            _web,
+            "/imgs/index.php/enid/imagen_servicio/",
+            $id
         ) :
         get_url_request(_text("imgs/index.php/enid/imagen_servicio/", $id));
 
@@ -2154,8 +2124,6 @@ function img_servicio($id, $external = 0)
         'id' => "imagen_" . $id,
         'class' => 'imagen-producto',
     ];
-
-
 }
 
 function select_cantidad_compra($es_servicio, $existencia, $valor_seleccionado = 1, $clase_extra = '', $identificador = 0)
@@ -2173,11 +2141,9 @@ function select_cantidad_compra($es_servicio, $existencia, $valor_seleccionado =
 
         if ($a == $valor_seleccionado) {
             $select[] = "<option selected value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
-
         } else {
             $select[] = "<option value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
         }
-
     }
     $select[] = "</select>";
     return append($select);
@@ -2196,7 +2162,6 @@ function get_img_usuario($path_img_usuario, $extra_class = '')
     ];
 
     return img($img_conf);
-
 }
 
 function create_button_easy_select($arr, $attributes, $comparador = 1)
@@ -2210,23 +2175,22 @@ function create_button_easy_select($arr, $attributes, $comparador = 1)
             $text = $row[$attributes["text_button"]];
             $class =
                 ($row[$attributes["campo_comparacion"]] == $attributes["valor_esperado"]) ?
-                    $attributes["class_selected"] : $attributes["class_disponible"];
+                $attributes["class_selected"] : $attributes["class_disponible"];
 
 
             $extra = ($row[$attributes["campo_comparacion"]] ==
                 $attributes["valor_esperado"]) ? 1 : 0;
 
-            $easy_select .= add_element($text, "a",
+            $easy_select .= add_element(
+                $text,
+                "a",
                 [
                     'class' => $class,
                     'id' => $row[$attributes["valor_id"]],
                     "existencia" => $extra,
                 ]
             );
-
         }
-
-
     } else {
 
         $extra = $attributes["extra"];
@@ -2237,9 +2201,7 @@ function create_button_easy_select($arr, $attributes, $comparador = 1)
             $easy_select .=
                 _text("<a ", $attr, " id=", $id, "  >", $row["talla"], "</a>");
         }
-
     }
 
     return $easy_select;
-
 }
