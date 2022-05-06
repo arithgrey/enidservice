@@ -2130,7 +2130,13 @@ function get_logo($session = 0)
                 break;
         }
 
-        return d($en_mobile, $class);
+        $response[] =  d($en_mobile, $class);
+        $response[] = d(a_enid('Clientes',
+        [
+            'href' => path_enid('clientes'),
+            'class' => "text-right white",
+        ]),'col-sm-12');
+        return append($response);
 
     } else {
 
