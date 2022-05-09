@@ -20,6 +20,7 @@ class ListaNegraController extends Controller
             ->with('user', 'motivo')
             ->orwhere('users.facebook', 'LIKE', "%$q%")
             ->orwhere('users.tel_contacto', 'LIKE', "%$q%")
+            ->orderByDesc('lista_negras.id_lista_negra')
             ->paginate(10);
 
 

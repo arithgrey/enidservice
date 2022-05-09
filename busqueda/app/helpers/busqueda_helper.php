@@ -15,26 +15,26 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         return d($response, 10, 1);
-
     }
 
     function seccion_noticias_notificaciones()
     {
 
-        
+
         $texto = "Aumenta tus ganancias ofreciendo descuentos";
-        $link_descuento = a_enid($texto,
-                    [
-                        "href" => path_enid("promociones"),
-                        "class" => "black underline"
-                    ]);
+        $link_descuento = a_enid(
+            $texto,
+            [
+                "href" => path_enid("promociones"),
+                "class" => "black underline"
+            ]
+        );
         $response[] = d($link_descuento, "text-right");
 
         $response[] = place('seccion_sugerencias');
         $response[] = d(d("", "seccion_noticias"), 13);
 
         return append($response);
-
     }
 
     function seccion_izquierda($data)
@@ -49,7 +49,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(enid_service_web(), $clase);
 
         return append($response);
-
     }
 
     function seccion_estadisticas($data)
@@ -60,41 +59,53 @@ if (!function_exists('invierte_date_time')) {
         white flex-column  text-uppercase border_black';
 
 
-        $texto = flex("Saldo por cobrar", money($comision_venta), $classe_center, '' ,'display-4');
-        
+        $texto = flex("Saldo por cobrar", money($comision_venta), $classe_center, '', 'display-4');
+
+        $r[] = d(_titulo("¿Tienes duda sobre si un cliente es fake?", 5));
+        $r[] = d(a_enid('Verificalo aquí', ['href' => "http://app.enidservices.com/lista-negra",'target' => '_blanck']));
 
         $r[] = d($texto, 'mt-5');
-        
-        $link_fondos = a_enid("Solicitar saldo",
-                [
-                    "href" => path_enid("solicitud_saldo"),
-                    "class" => "black underline"
-                ]);
 
+        $link_fondos = a_enid(
+            "Solicitar saldo",
+            [
+                "href" => path_enid("solicitud_saldo"),
+                "class" => "black underline"
+            ]
+        );
+        
         $r[] = d($link_fondos, "text-right");
 
-        $link = a_enid("Ver pedidos",
-                [
-                    "href" => path_enid("pedidos"),
-                    "class" => "black underline"
-                ]);
+        $link = a_enid(
+            "Ver pedidos",
+            [
+                "href" => path_enid("pedidos"),
+                "class" => "black underline"
+            ]
+        );
 
+
+        
         $r[] = d($link, "text-right");
 
         if (es_administrador($data)) {
-                    
-            $link_entregas = a_enid("Próximas entregas",
-                    [
-                        "href" => path_enid("entregas"),
-                        "class" => "black underline"
-                    ]);
+
+            $link_entregas = a_enid(
+                "Próximas entregas",
+                [
+                    "href" => path_enid("entregas"),
+                    "class" => "black underline"
+                ]
+            );
             $r[] = d($link_entregas, "text-right");
 
-            $link_entregas = a_enid("Métricas",
-                    [
-                        "href" => path_enid("reporte_enid"),
-                        "class" => "black underline"
-                    ]);
+            $link_entregas = a_enid(
+                "Métricas",
+                [
+                    "href" => path_enid("reporte_enid"),
+                    "class" => "black underline"
+                ]
+            );
             $r[] = d($link_entregas, "text-right");
         }
 
@@ -118,7 +129,8 @@ if (!function_exists('invierte_date_time')) {
         $restantes = flex($icono_restantes, $restantes, 'strong black');
 
 
-        $link_ventas = a_texto('Mis ventas',
+        $link_ventas = a_texto(
+            'Mis ventas',
             [
                 'class' => 'text-center ',
                 'href' => path_enid('pedidos')
@@ -127,9 +139,15 @@ if (!function_exists('invierte_date_time')) {
         $text_ventas = text_icon(_bomb_icon, $link_ventas);
         $texto_top = 'Identifica tus ordenes de compras enviadas';
         $texto_ventas = flex(
-            $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+            $text_ventas,
+            $texto_top,
+            'flex-column',
+            "",
+            "fp8 mt-3 text-secondary"
+        );
 
-        $link_top_ventas = a_texto('Top ventas',
+        $link_top_ventas = a_texto(
+            'Top ventas',
             [
                 'class' => 'text-center black',
                 'href' => path_enid('top_competencias', 2)
@@ -139,7 +157,12 @@ if (!function_exists('invierte_date_time')) {
         $icono_top = text_icon(_estrellas_icon, $link_top_ventas);
         $texto_top = 'Mira qué posición ocupas en la tabla';
         $texto_top_ventas = flex(
-            $icono_top, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+            $icono_top,
+            $texto_top,
+            'flex-column',
+            "",
+            "fp8 mt-3 text-secondary"
+        );
 
         $r[] = d(
             d_c(
@@ -150,9 +173,11 @@ if (!function_exists('invierte_date_time')) {
                     $texto_ventas,
                     $texto_top_ventas
                 ],
-                'f11 col-lg-12 mx-auto mt-5'), 'row black');
+                'f11 col-lg-12 mx-auto mt-5'
+            ),
+            'row black'
+        );
         return append($r);
-
     }
 
     function posiciones()
@@ -162,7 +187,6 @@ if (!function_exists('invierte_date_time')) {
         $path = path_enid("conexiones");
         $response[] = d(a_enid($texto, ["class" => "black", "href" => $path]), 'f12 black');
         return append($response);
-
     }
 
     function conexiones()
@@ -173,14 +197,13 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(a_enid($texto, ["class" => "black", "href" => $path]), 'f12 black');
         $response[] = d("Seguidores y cuentas que sigues", 'text-secondary');
         return append($response);
-
     }
 
     function nuba_seller_club()
     {
 
         $imagen = img(path_enid("nuba_seller_club"));
-        $path = path_enid("nuba_seller",0,1);
+        $path = path_enid("nuba_seller", 0, 1);
         $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
         $response[] = a_enid('Nuba seller club', ["href" => $path, "target" => "_black", "class" => "black"]);
 
@@ -190,12 +213,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $imagen = img(path_enid("pagina_enid_service_facebook"));
-        $path = path_enid("enid_service_facebook",0,1);
+        $path = path_enid("enid_service_facebook", 0, 1);
         $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
         $response[] = a_enid('Enid service', ["href" => $path, "target" => "_black", "class" => "black"]);
 
         return append($response);
     }
-
 }
-
