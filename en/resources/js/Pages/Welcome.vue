@@ -22,8 +22,6 @@
         >
           Register
         </Link>
-        oooooooooooooooo
-
       </template>
     </div>
 

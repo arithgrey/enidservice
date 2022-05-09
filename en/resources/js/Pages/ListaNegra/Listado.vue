@@ -1,5 +1,5 @@
 <template>
-  <app-layout title="Listado">
+  <Head title="Enid service" />
     <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
       <div>
         <div class="ml-auto" @click="crearListaNegra()">
@@ -32,6 +32,10 @@
           </template>
         </en-input>
       </div>
+      <div class="w-1/2 mx-auto text-center mt-2">
+        Ingresa el número telefónico o Link de Facebook de la persona que crees que está es nuestra lista negra
+      </div>
+
 
       <div v-if="lista_negra.data" class="w-2/3 mx-auto mt-5">
         <p class="font-bold">Busqueda en lista negra</p>
@@ -79,7 +83,7 @@
     <Ppfp ref="ppfp" />
     <ShowModal ref="showModal" />
     <CrearModal ref="crearModal" />
-  </app-layout>
+
 </template>
 
 <script>
