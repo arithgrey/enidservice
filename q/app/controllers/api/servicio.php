@@ -1994,7 +1994,7 @@ class Servicio extends REST_Controller
 
         if ($existentes < 8) {
 
-            $param["limit"] = (8 - $existentes);
+            $param["limit"] = (16 - $existentes);
 
             if ($in_session) {
 
