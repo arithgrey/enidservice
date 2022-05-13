@@ -8,7 +8,9 @@ let formulario_registro_ubicacion = '.formulario_registro_ubicacion';
 let $formulario_registro_ubicacion = $('.formulario_registro_ubicacion');
 let $form_ubicacion = $('.form_ubicacion');
 let $fecha_entrega_ubicacion = $form_ubicacion.find('.fecha_entrega');
+let $ubicacion_delegacion = $form_ubicacion.find('.ubicacion_delegacion');
 
+let $adicionales_seccion = $(".adicionales_seccion");
 $(document).ready(() => {
 
         $('footer').addClass('d-none');
@@ -21,14 +23,47 @@ $(document).ready(() => {
 
             $('.form_direccion_envio .fecha_entrega').change(horarios_disponibles);
         }
+        $adicionales_seccion.click(seccion_adicionales);
         $fecha_entrega_ubicacion.change(horarios_disponibles_ubicacion);
         $ingreso_texto_completo.click(ingreso_completo);
         $ingreso_ubicacion.click(ingreso_ubicacion);
+        $ubicacion_delegacion.change(busqueda_colonia_ubicacion);
         $form_ubicacion.submit(registro_ubicacion);
+
         valida_indicacion_ubicacion();
 
     }
 );
+let seccion_adicionales = () => {
+
+    $adicionales_seccion.addClass('d-none').removeClass('d-flex');
+    $(".campos_adicionales").removeClass("d-none");
+
+}
+
+let busqueda_colonia_ubicacion = () => {
+
+    let id_delegacion = $ubicacion_delegacion.val();
+    if(parseInt(id_delegacion ) > 0 ){
+        
+        let $nombre = $(".ubicacion_delegacion option:selected").text();    
+        $(".text_delegacion").val($nombre);
+        let url = "../q/index.php/api/colonia/delegacion/format/json/";
+        let data_send = {"delegacion": $nombre , 'auto' : 1 };
+        request_enid("GET", data_send, url, response_colonias);
+    }
+    
+};
+let response_colonias = (data) => {
+
+    $(".place_colonia").removeClass("d-none");
+    render_enid(".place_colonia", data);
+    $(".sin_colonia").click(function(){
+        selecciona_select(".colonia_ubicacion", 0);        
+        $(".place_colonia").addClass("d-none");        
+    });
+    
+};
 
 let horarios_disponibles = () => {
 

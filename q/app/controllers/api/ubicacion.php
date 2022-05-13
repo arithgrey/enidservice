@@ -91,7 +91,10 @@ class ubicacion extends REST_Controller
                     [
                         'ubicacion' => $param['ubicacion'],
                         'id_recibo' => $id_recibo,
-                        'id_usuario' => $row['id_usuario']
+                        'id_usuario' => $row['id_usuario'],
+                        'cp' => prm_def($param, 'cp'),
+                        'id_alcaldia' => prm_def($param, 'delegacion'),
+                        'delegacion' =>  prm_def($param, 'text_delegacion'),
                     ];
 
                 $this->ubicacion_model->insert($params, 1);
@@ -129,7 +132,8 @@ class ubicacion extends REST_Controller
             $in = [
                 'id_recibo' => $id_recibo,
             ];
-            $response = $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
+            //$response = $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
+            $response = $this->ubicacion_model->recibo_codigo_postal($id_recibo);
 
         }
         $this->response($response);

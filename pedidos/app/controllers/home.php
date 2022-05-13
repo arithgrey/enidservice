@@ -71,7 +71,7 @@ class Home extends CI_Controller
             "id_usuario_referencia" => $id_usuario_referencia
         ];
 
-
+        
         $data["es_vendedor"] = ($id_usuario_referencia == $data["id_usuario"]);
         $es_domicilio = prm_def($param, "domicilio");
 
@@ -161,7 +161,7 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-            "ubicacion/usuario/",
+            "ubicacion/usuario",
             ["id_usuario" => $id_usuario]
         );
     }
@@ -176,7 +176,8 @@ class Home extends CI_Controller
     }
 
     private function load_view_seguimiento($data, $param)
-    {
+    {   
+        
         $id_orden_compra = $data["id_orden_compra"];
         $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
         $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
@@ -218,6 +219,7 @@ class Home extends CI_Controller
             $this->app->add_imgs_usuario($productos_orden_compra, "id_usuario_entrega");
         $data = texto_pre_pedido($productos_orden_compra, $data);
         $params = $this->input->get();
+        
         $this->app->pagina($data, render_seguimiento($data, $params), 1);
     }
 
@@ -553,6 +555,7 @@ class Home extends CI_Controller
 
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
 
+        
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,
