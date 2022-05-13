@@ -951,6 +951,7 @@ if (!function_exists('invierte_date_time')) {
         $productos_orden_compra = $data["productos_orden_compra"];
         $id_perfil = $data["id_perfil"];
 
+        
 
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
@@ -3964,6 +3965,8 @@ if (!function_exists('invierte_date_time')) {
             } else {
 
                 $response[] = valida_texto_maps($row["ubicacion"]);
+                $response[] = format_adicional_asentamiento_ubicaciones($row);
+                
             }
 
             break;
@@ -3973,7 +3976,7 @@ if (!function_exists('invierte_date_time')) {
 
     function create_domicilio_entrega($domicilios, $productos_orden_compra, $data)
     {
-
+           
         $contra_entrega_domicilio = pr($productos_orden_compra, 'contra_entrega_domicilio');
         $fecha_contra_entrega = format_fecha(pr($productos_orden_compra, 'fecha_contra_entrega'), 1);
         $es_ubicacion = pr($productos_orden_compra, 'ubicacion');

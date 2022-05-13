@@ -116,20 +116,22 @@ class usuario_direccion extends REST_Controller
 
             $data["data_saldo_pendiente"] = $this->app->saldos_pendientes_orden_compra($id_orden_compra);
             $data["direcciones_orden_compra"] = $this->app->domicilios_orden_compra($id_orden_compra);
+            $alcaldias = $this->app->api("delegacion/cobertura");
+            
+
             $data["param"] = $param;
             $data['registro_direccion'] = 1;
 
             $form[] = format_direccion_envio($data);
-            $form[] = form_ubicacion_escrita($param);
+            $form[] = form_ubicacion_escrita($param, $alcaldias);
             $response = append($form);
-
 
         }
 
         $this->response($response);
 
-    }
-
+    }   
+    
     private function agrega_fecha_disponible_servicio($param, $data)
     {
 

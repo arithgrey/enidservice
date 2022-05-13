@@ -583,7 +583,7 @@ class app extends CI_Controller
     {
 
         return $this->api->api(
-            "recibo/usuario_relacion/",
+            "recibo/usuario_relacion",
             [
                 "id_usuario" => $id_usuario,
                 "es_pago" => $es_pago

@@ -29,7 +29,6 @@ function sub_categorias_destacadas($param)
     }
 
     return $response;
-
 }
 
 
@@ -49,7 +48,6 @@ function es_local()
 {
 
     return ($_SERVER['HTTP_HOST'] !== "localhost") ? 0 : 1;
-
 }
 
 function get_array_json($val)
@@ -67,7 +65,6 @@ function get_json_array($arr)
 {
 
     return (count($arr) > 0) ? json_encode($arr) : json_encode([]);
-
 }
 
 function push_element_json($arr, $element)
@@ -100,7 +97,6 @@ function unset_element_array($array, $element)
     }
 
     return $response;
-
 }
 
 function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
@@ -117,14 +113,12 @@ function prm_def($data, $key, $val_def = 0, $valida_basura = 0)
     }
 
     return $val;
-
 }
 
 function get_campo($param, $key, $label = "", $add_label = 0)
 {
 
     return ($add_label > 0) ? ($label . "  " . $param[0][$key]) : ((count($param) > 0) ? $param[0][$key] : "");
-
 }
 
 function usuario($q2)
@@ -141,7 +135,6 @@ function now_enid()
 {
 
     return date('Y-m-d');
-
 }
 
 function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
@@ -150,9 +143,7 @@ function porcentaje($cantidad, $porciento, $decimales = 2, $numeric_format = 0)
     if (is_numeric($cantidad) == is_numeric($porciento)) {
 
         $response = ($numeric_format == 1) ?
-            (number_format($cantidad * $porciento / 100, $decimales)) :
-            ($cantidad * $porciento / 100);
-
+            (number_format($cantidad * $porciento / 100, $decimales)) : ($cantidad * $porciento / 100);
     }
 
     return $response;
@@ -168,7 +159,6 @@ function porcentaje_total($cantidad, $total)
     }
 
     return $response;
-
 }
 
 function unique_multidim_array($array, $key)
@@ -215,7 +205,7 @@ function randomString($length = 10, $uc = true, $n = true, $sc = false)
 
         $source = str_split($source, 1);
         for ($i = 1; $i <= $length; $i++) {
-            mt_srand((double)microtime() * 1000000);
+            mt_srand((float)microtime() * 1000000);
             $num = mt_rand(1, count($source));
             $rstr .= $source[$num - 1];
         }
@@ -227,7 +217,7 @@ function randomString($length = 10, $uc = true, $n = true, $sc = false)
 
 function site_url($uri = '')
 {
-    $CI =& get_instance();
+    $CI = &get_instance();
 
     return $CI->config->site_url($uri);
 }
@@ -241,7 +231,6 @@ function valida_extension($string, $num_ext, $str)
 {
 
     return (strlen($string) > $num_ext) ? $string : $str;
-
 }
 
 function debug($msg, $array = 0)
@@ -259,8 +248,10 @@ function debug($msg, $array = 0)
                 'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . $msg . "\n";
         } else {
             $message .=
-                'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r($msg,
-                    true) . "\n";
+                'DEBUG' . ' -' . ' TYPE ' . gettype($msg) . ' ' . date($_date_fmt) . ' --> ' . print_r(
+                    $msg,
+                    true
+                ) . "\n";
         }
 
         flock($fp, LOCK_EX);
@@ -272,7 +263,6 @@ function debug($msg, $array = 0)
     }
 
     return $response;
-
 }
 
 
@@ -286,32 +276,29 @@ function fx($param, $k = '', $num = 0)
         for ($a = 0; $a < count($keys); $a++) {
             if ($keys[$a] != null) {
 
-                if (!array_key_exists(trim($keys[$a]),
-                        $param) || strlen(trim($param[$keys[$a]])) < $num) {
+                if (!array_key_exists(
+                    trim($keys[$a]),
+                    $param
+                ) || strlen(trim($param[$keys[$a]])) < $num) {
                     $z = 0;
                     debug("NO se recibió el parametro->" . $keys[$a]);
                     break;
                 }
-
             } else {
 
                 debug("este parámetro está llegando nulo" . $keys[$a]);
                 break;
             }
-
         }
-
     } else {
 
         if (!is_array($keys)) {
 
             print_r("No es array ->  ", $keys);
-
         }
         if (!is_array($param)) {
             print_r("No es array ->  ", $param);
         }
-
     }
 
     return $z;
@@ -330,7 +317,8 @@ function sksort(&$array, $subkey = "id", $sort_ascending = false)
         $found = false;
         foreach ($temp_array as $tmp_key => $tmp_val) {
             if (!$found and strtolower($val[$subkey]) > strtolower($tmp_val[$subkey])) {
-                $temp_array = array_merge((array)array_slice($temp_array, 0, $offset),
+                $temp_array = array_merge(
+                    (array)array_slice($temp_array, 0, $offset),
                     array($key => $val),
                     array_slice($temp_array, $offset)
                 );
@@ -425,7 +413,6 @@ function array_horarios($simple = 1)
             "19:30",
             "20:00",
         ];
-
     } else {
 
         return [
@@ -463,8 +450,6 @@ function array_horarios($simple = 1)
             "23:30",
         ];
     }
-
-
 }
 
 function horarios()
@@ -475,7 +460,6 @@ function horarios()
     foreach ($horarios as $row) {
 
         $select .= "<option value='" . $row . "'>" . $row . "</option>";
-
     }
 
     $select .= "</select>";
@@ -538,7 +522,6 @@ function lista_horarios($dia_busqueda = 0)
             if ($minuto_actual < 10) {
 
                 $horarios[] = "18:00";
-
             } else {
 
                 $horarios = $base;
@@ -555,7 +538,6 @@ function lista_horarios($dia_busqueda = 0)
                 if ($hora > $hora_actual) {
 
                     $horarios[] = $base[$a];
-
                 }
             }
 
@@ -566,7 +548,6 @@ function lista_horarios($dia_busqueda = 0)
     foreach ($horarios as $row) {
 
         $select .= "<option value='" . $row . "'>" . $row . "</option>";
-
     }
 
     $select .= "</select>";
@@ -575,8 +556,6 @@ function lista_horarios($dia_busqueda = 0)
             "select" => $select,
             "nuevo_dia" => $nuevo_dia,
         ];
-
-
 }
 
 
@@ -608,7 +587,6 @@ function es_email_valido($email)
     }
 
     return ($b < 6 && $f > 0) ? 1 : 0;
-
 }
 
 
@@ -617,18 +595,28 @@ function format_phone($number)
 {
     $txt = preg_replace('/[\s\-|\.|\(|\)]/', '', $number);
     $format = '[$1?$1 :][$2?($2):x][$3: ]$4[$5: ]$6[$7? $7:]';
-    if (preg_match('/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/', $txt,
-        $matches)) {
+    if (preg_match(
+        '/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/',
+        $txt,
+        $matches
+    )) {
         $result = $format;
         foreach ($matches as $k => $v) {
-            $str = preg_match('/\[\$' . $k . '\?(.*?)\:(.*?)\]|\[\$' . $k . '\:(.*?)\]|(\$' . $k . '){1}/',
+            $str = preg_match(
+                '/\[\$' . $k . '\?(.*?)\:(.*?)\]|\[\$' . $k . '\:(.*?)\]|(\$' . $k . '){1}/',
                 $format,
-                $filterMatch);
+                $filterMatch
+            );
             if ($filterMatch) {
-                $result = str_replace($filterMatch[0],
-                    (!isset($filterMatch[3]) ? (strlen($v) ? str_replace('$' . $k, $v,
-                        $filterMatch[1]) : $filterMatch[2]) : (strlen($v) ? $v : (isset($filterMatch[4]) ? '' : (isset($filterMatch[3]) ? $filterMatch[3] : '')))),
-                    $result);
+                $result = str_replace(
+                    $filterMatch[0],
+                    (!isset($filterMatch[3]) ? (strlen($v) ? str_replace(
+                        '$' . $k,
+                        $v,
+                        $filterMatch[1]
+                    ) : $filterMatch[2]) : (strlen($v) ? $v : (isset($filterMatch[4]) ? '' : (isset($filterMatch[3]) ? $filterMatch[3] : '')))),
+                    $result
+                );
             }
         }
 
@@ -643,7 +631,6 @@ function horario_enid()
 {
 
     return new DateTime('now', new DateTimeZone(config_item('time_reference')));
-
 }
 
 function add_text($a, $b, $f = 0)
@@ -652,27 +639,22 @@ function add_text($a, $b, $f = 0)
     if (is_string($f)) {
 
         return $a . $b . $f;
-
     } else {
 
         return ($f < 1) ? $a . $b : $a . " " . $b;
     }
-
-
 }
 
 function es_data($e)
 {
 
     return (is_array($e) && count($e) > 0) ? true : false;
-
 }
 
 function igual($a, $b, $str, $def = "")
 {
 
     return ($a == $b) ? $str : $def;
-
 }
 
 function val_class($a, $b, $class, $def = "")
@@ -712,22 +694,28 @@ function key_exists_bi($data, $k, $sk, $def = "")
 {
 
     return (is_array($data) &&
-        array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists($sk,
-            $data[$k])) ? $data[$k][$sk] : $def;
+        array_key_exists($k, $data) && is_array($data[$k]) && array_key_exists(
+            $sk,
+            $data[$k]
+        )) ? $data[$k][$sk] : $def;
 }
 
 function pr($data, $index, $def = false)
 {
 
-    return (is_array($data) && count($data) > 0 && array_key_exists(0, $data) && array_key_exists($index,
-            $data[0])) ? $data[0][$index] : $def;
+    return (is_array($data) && count($data) > 0 && array_key_exists(0, $data) && array_key_exists(
+        $index,
+        $data[0]
+    )) ? $data[0][$index] : $def;
 }
 
 function es_null($data, $index, $def = "")
 {
 
-    return (is_array($data) && array_key_exists($index,
-            $data) && $data[$index] != null) ? $data[$index] : $def;
+    return (is_array($data) && array_key_exists(
+        $index,
+        $data
+    ) && $data[$index] != null) ? $data[$index] : $def;
 }
 
 function create_contenido_menu($data)
@@ -749,7 +737,6 @@ function create_contenido_menu($data)
                     "class" => 'black text-uppercase mt-2 ',
                 ]
             );
-
     }
 
     return append($menu);
@@ -761,18 +748,24 @@ function dispositivo()
     $tablet_browser = 0;
     $mobile_browser = 0;
 
-    if (preg_match('/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i',
-        strtolower($_SERVER['HTTP_USER_AGENT']))) {
+    if (preg_match(
+        '/(tablet|ipad|playbook)|(android(?!.*(mobi|opera mini)))/i',
+        strtolower($_SERVER['HTTP_USER_AGENT'])
+    )) {
         $tablet_browser++;
     }
 
-    if (preg_match('/(up.browser|up.link|mmp|symbian|smartphone|midp|wap|phone|android|iemobile)/i',
-        strtolower($_SERVER['HTTP_USER_AGENT']))) {
+    if (preg_match(
+        '/(up.browser|up.link|mmp|symbian|smartphone|midp|wap|phone|android|iemobile)/i',
+        strtolower($_SERVER['HTTP_USER_AGENT'])
+    )) {
         $mobile_browser++;
     }
 
-    if ((strpos(strtolower($_SERVER['HTTP_ACCEPT']),
-                'application/vnd.wap.xhtml+xml') > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
+    if ((strpos(
+        strtolower($_SERVER['HTTP_ACCEPT']),
+        'application/vnd.wap.xhtml+xml'
+    ) > 0) or ((isset($_SERVER['HTTP_X_WAP_PROFILE']) or isset($_SERVER['HTTP_PROFILE'])))) {
         $mobile_browser++;
     }
 
@@ -821,24 +814,23 @@ function format_fecha($date, $horas = 0)
 {
 
     $ext = ($horas > 0) ? 'H:i' : '';
-    return format_time(date_format(date_create($date),
-        _text_('d M Y ', $ext)));
-
+    return format_time(date_format(
+        date_create($date),
+        _text_('d M Y ', $ext)
+    ));
 }
 
 function format_hora($date)
 {
 
     return format_time(date_format(date_create($date), 'H:i'));
-
 }
 
 
 function money($num)
 {
-    
-    return _text_(sprintf('%01.2f', $num), "MXN");    
 
+    return _text_(sprintf('%01.2f', $num), "MXN");
 }
 
 function format_load($extra = '')
@@ -880,19 +872,21 @@ function keys_en_arreglo($param, $keys = [])
     }
 
     return $response;
-
 }
 
 function terminar($ext = '', $id = '')
 {
 
     $cerrar = d(
-        format_link("",
+        format_link(
+            "",
             [
                 'class' => _text("fa fa-times ", $ext),
                 'id' => $id
             ]
-        ), 'col-xs-2 col-sm-1 ml-auto');
+        ),
+        'col-xs-2 col-sm-1 ml-auto'
+    );
     return d($cerrar, 13);
 }
 
@@ -943,10 +937,8 @@ function format_nombre($usuario)
                 $apellido_paterno
             );
         }
-
     }
     return $response;
-
 }
 
 
@@ -985,7 +977,6 @@ function format_link_nombre_perfil($row)
     $formato_nombre = format_nombre($row);
 
     return a_enid($formato_nombre, ['href' => $link, 'class' => 'black underline']);
-
 }
 
 
@@ -1017,18 +1008,22 @@ function valida_texto_maps($domicilio, $estilos = 1)
             if ($estilos < 1) {
 
                 $text .= format_link('abrir en google maps', $conf);
-
             } else {
                 $text .= a_enid('abrir en google maps', $conf);
-
             }
-
-
         } else {
             $text .= _text_($row);
         }
     }
     return $text;
+}
+function format_adicional_asentamiento_ubicaciones($row)
+{
+
+    return d(_text_(
+        prm_def($row, 'delegacion',''),        
+        prm_def($row, 'asentamiento', ''),
+    ), 'strong  blue_enid mt-3 mb-5 col-lg-12 text-right');
 }
 
 function imagenes_orden_compra($productos_orden_compra)
@@ -1045,17 +1040,14 @@ function imagenes_orden_compra($productos_orden_compra)
             ]
         );
         $imagenes_orden_compra = _text_($imagenes_orden_compra, $seccion_imagen);
-
     }
     return $imagenes_orden_compra;
-
 }
 
 function max_compra($es_servicio, $existencia)
 {
 
     return ($es_servicio == 1) ? 100 : $existencia;
-
 }
 
 function eleccion($titulo, $a, $b, $ext = '')
@@ -1081,6 +1073,4 @@ function get_orden()
         "SÓLO  SERVICIO",
         "SÓLO PRODUCTOS"
     ];
-
 }
-

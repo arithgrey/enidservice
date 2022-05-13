@@ -45,5 +45,27 @@ class Ubicacion_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+    function recibo_codigo_postal($id_recibo)
+    {
+        $query_get = "SELECT  
+        u.* , 
+        c.cp         ,       
+        c.asentamiento      ,
+        c.municipio         ,
+        c.ciudad            ,
+        c.estado            
+        FROM 
+        ubicacion u  
+        LEFT OUTER  JOIN 
+        codigo_postal c 
+        ON 
+        u.cp = c.id_codigo_postal  
+        WHERE u.id_recibo = $id_recibo 
+        ORDER BY u.id_ubicacion DESC LIMIT 1";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
 }
