@@ -28,6 +28,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::resource('solicitud-retiro', 'SolicitudRetiro\SolicitudRetiroController');
 
+Route::resource('indicadores-ubicaciones', 'IndicadoresUbicaciones\IndicadoresUbicacionesController');
+
+
 Route::resource('lista-negra', 'ListaNegra\ListaNegraController');
 
 Route::resource('orden-comentario', 'OrdenComentario\OrdernComentarioController');

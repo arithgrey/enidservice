@@ -50,7 +50,7 @@ class Delegacion_model extends CI_Model
     public function cobertura()
 	{	
 		/*CDMX Y ESTADO DE MÉXICO*/
-		$query = "SELECT * FROM delegacion WHERE id_estado IN(9, 15)";
+		$query = "SELECT * FROM delegacions WHERE id_estado IN(9, 15)";
 	    return $this->db->query($query)->result_array();
 
 	}

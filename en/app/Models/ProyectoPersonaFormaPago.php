@@ -47,7 +47,10 @@ class ProyectoPersonaFormaPago extends Model
 
         return $this->hasMany(ProductoOrdenCompra::class);
     }
+    function ubicaciones(){
 
+        return $this->hasMany(Ubicacion::class);
+    }
     public function getEsCancelacionAttribute()
     {
         $response = false;

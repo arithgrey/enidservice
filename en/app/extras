@@ -447,3 +447,9 @@ alter table users change facebook facebook text default NULL;
 alter table proyecto_persona_forma_pagos rename column id_proyecto_persona_forma_pago to id;
 alter table orden_compras rename column id_orden_compra to id;
 alter table empresas rename column idempresa to id;
+
+
+
+______________________
+
+RENAME TABLE ubicacion TO ubicacions;

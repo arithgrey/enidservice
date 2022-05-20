@@ -27,7 +27,7 @@ class ubicacion extends REST_Controller
                 $this->elimina_direccion_previa_envio($id_recibo);
                 $status = $this->elimina_direccion_punto_encuentro($id_recibo);
 
-                $this->app->api("recibo/ubicacion/", ["id_recibo" => $id_recibo], "JSON", "PUT");
+                $this->app->api("recibo/ubicacion", ["id_recibo" => $id_recibo], "JSON", "PUT");
 
                 $ubicacion = pr($ubicacion, 'ubicacion');
                 $id_usuario = pr($recibo, 'id_usuario');
