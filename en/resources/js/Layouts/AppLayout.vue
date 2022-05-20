@@ -77,6 +77,23 @@
               Lista negra
             </jet-nav-link>
 
+
+            <jet-nav-link
+              :href="route('indicadores-ubicaciones.index')"
+              :active="route().current('lista-negra.*')"
+              class="
+                block
+                mt-4
+                lg:inline-block lg:mt-0
+                text-white
+                hover:text-white
+                mr-4
+              "
+            >
+              Metricas Ubicaciones
+            </jet-nav-link>
+
+
           </div>
           <div>
             <div>

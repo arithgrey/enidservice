@@ -65,7 +65,6 @@ class User extends Authenticatable
     {
 
         return $this->hasMany(SolicitudRetiro::class);
-
     }
 
     public function cuentas_banco()
@@ -97,7 +96,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProyectoPersonaFormaPago::class);
     }
-
+    public function ubicaciones()
+    {
+        return $this->hasMany(Ubicacion::class);
+    }
     public function empresa()
     {
         return $this->belongsTo(Empresa::class,  'id_empresa');

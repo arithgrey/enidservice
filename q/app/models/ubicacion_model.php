@@ -7,7 +7,7 @@ class Ubicacion_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'ubicacion';
+        $this->tabla = 'ubicacions';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -39,7 +39,7 @@ class Ubicacion_model extends CI_Model
     function in_recibo($ids)
     {
 
-        $query_get = "SELECT * FROM ubicacion
+        $query_get = "SELECT * FROM ubicacions
                       WHERE 
                       id_recibo IN(" . $ids . ") ORDER BY id_ubicacion DESC";
 
@@ -55,7 +55,7 @@ class Ubicacion_model extends CI_Model
         c.ciudad            ,
         c.estado            
         FROM 
-        ubicacion u  
+        ubicacions u  
         LEFT OUTER  JOIN 
         codigo_postal c 
         ON 
