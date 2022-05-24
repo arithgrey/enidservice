@@ -38,13 +38,6 @@
   </div>
 </template>
 
-<style>
-/*
-body * {
-  border: solid 1px blue !important;
-}
-*/
-</style>
 <script>
 import { defineComponent } from "vue";
 

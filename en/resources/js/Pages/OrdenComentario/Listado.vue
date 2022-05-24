@@ -1,29 +1,26 @@
 <template>
-  <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-    <div v-if="orden_comentarios.data" class="w-2/3 mx-auto">
+  <div class="py-10">
+    <div v-if="orden_comentarios.data" class="mx-auto">
       <p class="font-bold">
         Conversasiónes donde se ha mencionado a este contacto
       </p>
     </div>
-    <table class="w-2/3 mx-auto mt-5">
-      <tbody>
-        <tr
-          class="border-b-2 border-blue-600 cursor-pointer"
-          v-for="orden_comentario in orden_comentarios.data"
+
+    <div
+      class="border-b-2 border-blue-600 cursor-pointer grid grid-cols-2"
+      v-for="orden_comentario in orden_comentarios.data"
+    >
+      <div>
+        <a
+          class="text-sky-700"
+          :href="orden_comentario.path_orden"
+          target="_blank"
         >
-          <td>
-            <a
-              class="text-sky-700"
-              :href="orden_comentario.path_orden"
-              target="_blank"
-            >
-              Orden compra
-            </a>
-          </td>
-          <td>{{ orden_comentario.comentario }}</td>
-        </tr>
-      </tbody>
-    </table>
+          Orden compra
+        </a>
+      </div>
+      <div>{{ orden_comentario.comentario }}</div>
+    </div>
   </div>
 </template>
 
