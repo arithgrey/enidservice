@@ -1238,14 +1238,17 @@ select {
 .w-3 {
   width: 0.75rem;
 }
-.w-2\/3 {
-  width: 66.666667%;
+.w-11\/12 {
+  width: 91.666667%;
 }
 .w-1\/3 {
   width: 33.333333%;
 }
 .w-1\/2 {
   width: 50%;
+}
+.w-2\/3 {
+  width: 66.666667%;
 }
 .w-64 {
   width: 16rem;
@@ -1257,15 +1260,6 @@ select {
 }
 .w-2\/4 {
   width: 50%;
-}
-.w-11\/12 {
-  width: 91.666667%;
-}
-.w-screen {
-  width: 100vw;
-}
-.w-96 {
-  width: 24rem;
 }
 .min-w-0 {
   min-width: 0px;
@@ -1290,9 +1284,6 @@ select {
 }
 .max-w-3xl {
   max-width: 48rem;
-}
-.max-w-full {
-  max-width: 100%;
 }
 .flex-1 {
   flex: 1 1 0%;
@@ -1360,11 +1351,14 @@ select {
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+.grid-cols-5 {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
 }
 .flex-row {
   flex-direction: row;
@@ -1374,12 +1368,6 @@ select {
 }
 .flex-wrap {
   flex-wrap: wrap;
-}
-.flex-nowrap {
-  flex-wrap: nowrap;
-}
-.content-center {
-  align-content: center;
 }
 .items-start {
   align-items: flex-start;
@@ -1410,6 +1398,9 @@ select {
 }
 .gap-1 {
   gap: 0.25rem;
+}
+.gap-5 {
+  gap: 1.25rem;
 }
 .gap-y-2 {
   row-gap: 0.5rem;
@@ -1920,12 +1911,6 @@ select {
 }
 .leading-none {
   line-height: 1;
-}
-.leading-snug {
-  line-height: 1.375;
-}
-.leading-relaxed {
-  line-height: 1.625;
 }
 .tracking-widest {
   letter-spacing: 0.1em;
@@ -2629,22 +2614,6 @@ select {
     width: 100%;
   }
 
-  .sm\:w-screen {
-    width: 100vw;
-  }
-
-  .sm\:w-11\/12 {
-    width: 91.666667%;
-  }
-
-  .sm\:w-96 {
-    width: 24rem;
-  }
-
-  .sm\:w-1\/2 {
-    width: 50%;
-  }
-
   .sm\:max-w-md {
     max-width: 28rem;
   }
@@ -2791,14 +2760,6 @@ select {
     display: grid;
   }
 
-  .md\:w-auto {
-    width: auto;
-  }
-
-  .md\:w-full {
-    width: 100%;
-  }
-
   .md\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -2852,6 +2813,10 @@ select {
 
   .lg\:w-auto {
     width: auto;
+  }
+
+  .lg\:w-1\/3 {
+    width: 33.333333%;
   }
 
   .lg\:flex-grow {

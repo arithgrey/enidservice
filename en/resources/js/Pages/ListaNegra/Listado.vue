@@ -1,18 +1,19 @@
 <template>
   <Head title="Enid service" />
-  <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
+  <div class="w-11/12 mx-auto">
     <div class="mt-2 mb-4">
       <a
-        class="bg-neutral-900
+        class="
+          bg-neutral-900
           p-1
           font-bold
           text-white text-center
           border-slate-50
           mb-1
-          cursor-pointer"
+          cursor-pointer
+        "
         target="_black"
         :href="path_enid"
-
       >
         Enid Service
       </a>
@@ -36,71 +37,95 @@
       </div>
     </div>
 
-    <div class="w-1/3 mx-auto">
-      <en-input>
-        <template #label> Busqueda</template>
-        <template #input>
-          <input
-            class="format_input"
-            v-model="q"
-            placeholder="¿Nombre, número, Facebook?"
-          />
-        </template>
-      </en-input>
-    </div>
-    <div class="w-1/2 mx-auto text-center mt-2">
-      Ingresa el número telefónico o Link de Facebook de la persona que crees
-      que está es nuestra lista negra
+    <div class="grid grid-cols-1">
+      <div class="sm:w-full lg:w-1/3 mt-5 mb-5 mx-auto">
+        <en-input>
+          <template #label> Busqueda</template>
+          <template #input>
+            <input
+              class="format_input"
+              v-model="q"
+              placeholder="¿Nombre, número, Facebook?"
+            />
+          </template>
+        </en-input>
+      </div>
     </div>
 
-    <div v-if="lista_negra.data" class="w-2/3 mx-auto mt-5">
-      <p class="font-bold">Busqueda en lista negra</p>
-    </div>
-    <table class="w-2/3 mx-auto mt-5">
-      <tbody>
-        <tr
-          class="border-b-2 border-blue-600 cursor-pointer"
-          v-for="lista in lista_negra.data"
+    <div
+      class="
+        grid grid-cols-5
+        mt-5
+        gap-5
+        border-b-2
+        text-center
+        border-blue-600
+        cursor-pointer
+      "
+      v-for="lista in lista_negra.data"
+    >
+      <div class="text-xs">
+        {{ lista.user.name.toUpperCase() }}
+      </div>
+      <div>
+        <p v-if="lista.user.tel_contacto">
+          {{ lista.user.tel_contacto }}
+        </p>
+        <p v-else>-</p>
+      </div>
+      <div class="text-center">
+        <a
+          v-if="lista.user.facebook"
+          class="font-bold"
+          :href="lista.user.facebook"
+          target="_blank"
         >
-          <td>
-            {{ lista.user.name.toUpperCase() }}
-          </td>
-          <td>{{ lista.user.tel_contacto }}</td>
-          <td v-if="lista.user.facebook">
-            <a class="font-bold" :href="lista.user.facebook" target="_blank">
-              Facebook
-            </a>
-          </td>
-          <td v-if="lista.user.url_lead">
-            <a class="font-bold" :href="lista.user.url_lead" target="_blank">
-              Conversación de facebook
-            </a>
-          </td>
-          <td>
-            <p
-              @click="showUser(lista)"
-              class="
-                bg-neutral-900
-                p-1
-                font-bold
-                text-white text-center
-                border-slate-50
-                mb-1
-              "
-            >
-              Es lista negra
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          Facebook
+        </a>
+        <p v-else>-</p>
+      </div>
+      <div>
+        <a
+          v-if="lista.user.url_lead"
+          class="font-bold"
+          :href="lista.user.url_lead"
+          target="_blank"
+        >
+          Conversación de facebook
+        </a>
+        <p v-else>-</p>
+      </div>
+      <div>
+        <p
+          @click="showUser(lista)"
+          class="
+            bg-neutral-900
+            p-1
+            font-bold
+            text-white text-center
+            border-slate-50
+            mb-1
+          "
+        >
+          Es lista negra
+        </p>
+      </div>
+    </div>
+    <OrdenComentario ref="ordenComentario" />
+    <Ppfp ref="ppfp" />
+    <ShowModal ref="showModal" />
+    <CrearModal ref="crearModal" />
   </div>
-  <OrdenComentario ref="ordenComentario" />
-  <Ppfp ref="ppfp" />
-  <ShowModal ref="showModal" />
-  <CrearModal ref="crearModal" />
+
 </template>
 
+<!--
+<style>
+body * {
+  border: solid 1px blue !important;
+}
+</style>
+--->
 <script>
 import { defineComponent } from "vue";
 import ShowModal from "./ShowModal";
@@ -122,7 +147,7 @@ export default defineComponent({
     return {
       q: "",
       regitro_lead: 0,
-      path_enid:'https://enidservices.com/'
+      path_enid: "https://enidservices.com/",
     };
   },
   watch: {
