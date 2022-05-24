@@ -1,52 +1,54 @@
 <template>
-  <Head title="Enid service" />
-  <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-    <h1>Pedidos por alcaldia</h1>
-    <form @submit.prevent="busqueda">
-      <div class="flex justify-center">
-        <div class="flex mr-2">
-          <div class="mr-2">Fecha inicio</div>
-          <input type="date" v-model="date" />
+  <div class="w-11/12 mx-auto">
+    <div class="grid grid-cols-1">
+      <form @submit.prevent="busqueda">
+        <div class="flex justify-center mt-5">
+          <div class="flex justify-items-center items-center mr-4">
+            <div class="mr-2 font-semibold">Inicio</div>
+            <input type="date" v-model="date" />
+          </div>
+          <div class="flex justify-items-center items-center mr-4">
+            <div class="mr-2 font-semibold">Término</div>
+            <input type="date" v-model="enddate" />
+          </div>
+          <div class="self-center">
+            <en-boton> Buscar </en-boton>
+          </div>
         </div>
-        <div class="flex mr-3">
-          <div class="mr-2">Fecha término</div>
-          <input type="date" v-model="enddate" />
+      </form>
+    </div>
+
+    <div class="grid grid-cols-1 mt-5">
+      <div class="grid grid-cols-2 mb-5">
+        <div class="font-bold">Alcaldia</div>
+        <div class="font-bold text-center">#pedidos</div>
+      </div>
+      <div
+        class="border border-blue-600 grid grid-cols-2"
+        v-for="lista in indicadores"
+      >
+        <div class="border-r">
+          {{ lista.delegacion }}
         </div>
-        <div>
-          <en-boton> Buscar </en-boton>
+        <div class="text-center">
+          {{ lista.total }}
         </div>
       </div>
-    </form>
-  </div>
-  <div class="max-w-7xl mx-auto py-10 sm:px-6 lg:px-8">
-    <table class="w-2/3 mx-auto mt-5">
-      <thead>
-        <th class="text-left">Alcaldia</th>
-        <th>Número de pedidos</th>
-      </thead>
-      <tbody class="mt-5">
-        <tr
-          class="border-b-2 border-blue-600 cursor-pointer"
-          v-for="lista in indicadores"
-
-        >
-          <td>
-            {{ lista.delegacion }}
-          </td>
-          <td class="text-center">
-            {{ lista.total }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    </div>
   </div>
 </template>
 
+<style>
+/*
+body * {
+  border: solid 1px blue !important;
+}
+*/
+</style>
 <script>
 import { defineComponent } from "vue";
 
 export default defineComponent({
-
   components: {},
   props: {
     indicadores: Object,
@@ -58,21 +60,15 @@ export default defineComponent({
       enddate: new Date(),
     };
   },
-  watch: {
-
-  },
+  watch: {},
   methods: {
     busqueda() {
       let params = { fecha_inicio: this.date, fecha_termino: this.enddate };
       this.$inertia.replace(
         this.route("indicadores-ubicaciones.index", params)
       );
-
-
-
     },
   },
-
 });
 </script>
 
