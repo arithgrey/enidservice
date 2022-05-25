@@ -183,7 +183,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $link_productos =  format_link("Ver más promociones", [
-            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8))),
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
             "class" => "border"
         ]);
 
