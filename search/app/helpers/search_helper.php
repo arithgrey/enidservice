@@ -70,10 +70,11 @@ if (!function_exists('invierte_date_time')) {
                 ])
             )
             , "input-icons col-lg-6 row");
-        $z[] = form_close();
+        $z[] = form_close();        
         $ext = (is_mobile() < 1) ? "" : "top_200";
         $r[] = d($z, "mt-5 " . $ext);
-
+                
+        
         return d($r, " mt-5 col-lg-10 col-lg-offset-1", 1);
 
 

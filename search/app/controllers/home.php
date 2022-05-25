@@ -24,12 +24,12 @@ class Home extends CI_Controller
     private function load_data($param)
     {
 
-        
+
         $data = $this->app->session();
         $orden = $this->orden($param, $data);
         $pagina = prm_def($param, "page");
         $is_mobile = $data["is_mobile"];
-        
+
         $data_send = [
             "q" => prm_def($param, "q", ""),
             "vendedor" => prm_def($param, "q3"),
@@ -43,14 +43,13 @@ class Home extends CI_Controller
 
         ];
 
-        $data["servicios"] = $this->app->api("servicio/q", $data_send);        
+        $data["servicios"] = $this->app->api("servicio/q", $data_send);
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
         if ($son_servicio > 0) {
             $this->servicios($data, $data_send);
         } else {
-            $this->sin_resultados($param, $data);
+            $this->sin_resultados($param);
         }
-
     }
 
     function orden($param, $data)
@@ -61,30 +60,41 @@ class Home extends CI_Controller
 
         if ($orden < 1) {
 
-            if($es_session){
+            if ($es_session) {
 
                 $id_usuario = $data["id_usuario"];
                 $usuario = $this->app->usuario($id_usuario);
                 $orden = pr($usuario, "orden_producto");
-
-            }else{
+            } else {
 
                 $empresa = $this->app->empresa(1);
                 $orden = pr($empresa, "orden_producto");
-
             }
-
         }
         return $orden;
-
     }
 
-    private function sin_resultados($param, $data)
+    private function sin_resultados($param)
     {
 
         $data["css"] = ["search_sin_encontrar.css"];
+        $data["in_session"] = 0;
+        $data["id_usuario"] = "";
+        $data["nombre"] = "";
+        $data["email"] = "";
+        $data["telefono"] = "";
+        $data["id_perfil"] = 0;
+        $data["menu"] = "";
+        $data["data_status_enid"] = "";        
+        $data["path_img_usuario"] = "";
+        $data["meta_keywords"] = "";
+        $data["url_img_post"] = "";
+        $data["desc_web"] = "";
+        $data["titulo"] = "";
+        $data["clasificaciones_departamentos"] = "";
+        $data["proceso_compra"] = "";
+        $data["footer_visible"] = "";
         $this->app->pagina($data, sin_resultados($param), 1);
-
     }
 
     private function servicios($data, $data_send)
@@ -127,7 +137,6 @@ class Home extends CI_Controller
                 $v = $this->get_vista_servicio($n);
                 return (!is_null($v)) ? $v : "";
             }
-
         };
 
         $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
@@ -202,7 +211,6 @@ class Home extends CI_Controller
             "cuarto_nivel" => $this->filter_nivel($cuarto_nivel, $data),
             "quinto_nivel" => $this->filter_nivel($quinto_nivel, $data)
         ];
-
     }
 
     private function filter_nivel($nivel, $data)
@@ -222,7 +230,6 @@ class Home extends CI_Controller
         }
 
         return $response;
-
     }
 
     private function get_bloque($data)
@@ -231,19 +238,19 @@ class Home extends CI_Controller
         return prm_def($data, "id_clasificacion");
     }
 
-    
+
 
     private function get_clasificaciones($clasificaciones)
     {
         $response = [];
         if (es_data($clasificaciones)) {
 
-            $response = $this->app->api("clasificacion/in",
+            $response = $this->app->api(
+                "clasificacion/in",
                 [
                     "clasificaciones" => implode(",", $clasificaciones)
                 ]
             );
-
         }
         return $response;
     }
@@ -265,7 +272,5 @@ class Home extends CI_Controller
 
             return $this->app->api("keyword/index", $q, "json", "POST");
         }
-
     }
-
 }

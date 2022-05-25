@@ -175,7 +175,7 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d($boton_editar, 12);
         $data_response[] = d($recompensa, 12);
         $data_response[] = d($interes_re_venta, 12);
-        $data_response[] = d(botones_ver_mas(), 12);
+        $data_response[] = d(botones_ver_mas(), 'col-sm-12 mt-5');
 
         return append($data_response);
     }
