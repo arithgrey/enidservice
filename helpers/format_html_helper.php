@@ -1858,7 +1858,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
             $response[] = get_menu_session($in_session, $proceso_compra);
             $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
             $response[] = frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session);
-            $response[] = d(p('Realiza tu pedido y paga hasta tu entrega!', 'white f12'), 'd-md-flex justify-content-end mt-3');
+            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega!', 'white f12'), 'd-md-flex justify-content-end mt-3');
         } else {
             $response[] = get_logo($in_session);
         }
