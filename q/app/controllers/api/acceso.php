@@ -11,8 +11,6 @@ class Acceso extends REST_Controller
         $this->load->model("acceso_model");
         $this->load->library("table");
         $this->load->library(lib_def());
-
-
     }
 
     function index_POST()
@@ -24,10 +22,8 @@ class Acceso extends REST_Controller
 
 
             $response = $this->acceso_model->insert($param, 1);
-
         }
         $this->response($response);
-
     }
 
     function busqueda_fecha_GET()
@@ -53,15 +49,26 @@ class Acceso extends REST_Controller
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
 
+            $total_accesos = 0;
+            $total_es_mobile = 0;
+            $total_es_computadora = 0;
+            $total_en_session = 0;
+            $total_sin_session = 0;
+
             foreach ($accesos as $row) {
 
                 $numero_accesos = $row["accesos"];
-                $pagina = d($row["pagina"],'text-uppercase');
+                $pagina = d($row["pagina"], 'text-uppercase');
                 $es_mobile = $row["es_mobile"];
                 $es_computadora = $row["es_computadora"];
                 $en_session = $row["en_session"];
                 $sin_session = $row["sin_session"];
 
+                $total_accesos = $total_accesos + $numero_accesos;
+                $total_es_mobile =  $total_es_mobile +  $es_mobile;
+                $total_es_computadora =  $total_es_computadora +  $es_computadora;
+                $total_en_session = $total_en_session + $en_session;
+                $total_sin_session = $total_sin_session + $sin_session;
 
                 $row = [
                     $pagina,
@@ -69,18 +76,24 @@ class Acceso extends REST_Controller
                     $es_mobile,
                     $es_computadora,
                     $en_session,
-                    $sin_session,
+                    $sin_session,                    
                 ];
 
                 $this->table->add_row($row);
             }
 
+            $totales  = [
+                strong("TOTALES"),
+                $total_accesos,
+                $total_es_mobile,
+                $total_es_computadora,
+                $total_en_session,
+                $total_sin_session
+            ];
+            
+            $this->table->add_row($totales);
             $response = $this->table->generate();
-
-
         }
         $this->response($response);
     }
-
-
 }
