@@ -1,5 +1,10 @@
 <template>
   <div class="w-11/12 mx-auto">
+  <div class="grid grid-cols-1 my-5">
+      <h1 class="inline-block text-2xl sm:text-3xl font-extrabold text-slate-900">
+          Pedidos por alcaldías
+      </h1>
+  </div>
     <div class="grid grid-cols-1">
       <form @submit.prevent="busqueda">
         <div class="flex justify-center mt-5">

@@ -31,6 +31,9 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = d($link_descuento, "text-right");
 
+
+
+
         $response[] = place('seccion_sugerencias');
         $response[] = d(d("", "seccion_noticias"), 13);
 
@@ -61,10 +64,22 @@ if (!function_exists('invierte_date_time')) {
 
         $texto = flex("Saldo por cobrar", money($comision_venta), $classe_center, '', 'display-4');
 
-        $r[] = d(_titulo("¿Tienes duda sobre si un cliente es fake?", 5));
-        $r[] = d(a_enid('Verificalo aquí', ['href' => "http://app.enidservices.com/lista-negra",'target' => '_blanck']));
+        $r[] = d(_titulo("¿Tienes duda sobre si un cliente es fake o te ha faltado al respeto?", 5));
+        $r[] = d(a_enid('Verificalo o mandalo a lista negra aquí', ['href' => "http://app.enidservices.com/lista-negra", 'target' => '_blanck']));
 
+        $r[] = hr();
+        $link_descuento = a_enid(
+            "Mira qué zonas tienen más ventas",
+            [
+                "href" => 'http://app.enidservices.com/indicadores-ubicaciones',
+                "class" => "black underline"
+            ]
+        );
+
+        $r[] = d($link_descuento);
         $r[] = d($texto, 'mt-5');
+
+
 
         $link_fondos = a_enid(
             "Solicitar saldo",
@@ -73,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "black underline"
             ]
         );
-        
+
         $r[] = d($link_fondos, "text-right");
 
         $link = a_enid(
@@ -85,7 +100,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        
+
         $r[] = d($link, "text-right");
 
         if (es_administrador($data)) {
