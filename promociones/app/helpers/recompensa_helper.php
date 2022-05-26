@@ -11,7 +11,6 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] =  d($html_paginador);
         if (es_data($recompensa)) {
-
             
             foreach ($recompensa as $row) {
 
@@ -54,11 +53,38 @@ if (!function_exists('invierte_date_time')) {
             $response[] = resumen_recompensa();
             
         }
-        $response[] = modal_nueva_recompensa();        
+        $response[] = modal_nueva_recompensa();      
+        $response[] = botones_ver_mas();  
         return d($response, 'col-xs-12 col-sm-12 col-md-8 col-md-offset-2');
 
     }
+    function botones_ver_mas()
+    {
 
+        $link_productos =  format_link("Ver más promociones", [
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
+            "class" => "border"
+        ]);
+
+        $link_facebook =  format_link("Facebook", [
+            "href" => path_enid("facebook",0,1),
+            "class" => "border mt-4",
+            'target' => 'blank_'
+        ],0);
+
+        $link_instagram =  format_link("Instagram", [
+            "href" => path_enid("fotos_clientes_instagram",0,1),
+            "class" => "border mt-4",
+            'target' => 'blank_'
+        ],0);
+        
+
+        $response[] = d($link_productos, 4, 1);
+        $response[] = d($link_facebook, 4, 1);
+        $response[] = d($link_instagram, 4, 1);
+
+        return d($response,'col-sm-12 mt-5');
+    }
     function modal_nueva_recompensa(){
 
         $contenido[] = place("place_nueva_recompensa");          
