@@ -183,7 +183,7 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(botones_ver_mas(), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         
-        $pagina_producto[] =  d(d(d($data_response,10,1),13),9);
+        $pagina_producto[] =  d($data_response,9);
         if(!is_mobile()){
             $pagina_producto[] =  d($x,'col-sm-3 border-left border-dark');
         }
