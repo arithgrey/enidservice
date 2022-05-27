@@ -16,11 +16,14 @@ if (!function_exists('invierte_date_time')) {
         $z[] = referencias_fotograficas($data);
         $z[] = d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between");
 
-        $b = d($z);
+        
         if (es_data($comentarios)) {
-            $response[] = _titulo("VALORACIONES Y RESEÑAS", 2, "strong col-lh-12 p-0 mb-5");
+            $response[] = d(d("VALORACIONES Y RESEÑAS", "h3 text-uppercase black font-weight-bold"),12);
         }
-        $response[] = dd($promedio_valoraciones, $b);
+
+
+        $response[] = d($promedio_valoraciones,12);
+        $response[] = d($z,12);
         $response[] = modal_referencia($data);
 
         return append($response);
@@ -185,7 +188,7 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $response[] = d(d("Comentarios con imágenes", 'strong col-sm-12'), 13);
+        $response[] = d(d("Comentarios con imágenes", '  h3 text-uppercase black font-weight-bold col-sm-12'), 13);
         $response[] = d(a_enid("Ve fotos recientes",
             [
                 "href" => path_enid("clientes"),
