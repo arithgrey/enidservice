@@ -181,13 +181,14 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d(botones_ver_mas(), 'col-sm-12 mt-5');
+        $data_response[] = d(hr(), 'col-sm-12 mt-5');
         
         $pagina_producto[] =  d(d($data_response,13),9);
         if(!is_mobile()){
             $pagina_producto[] =  d($x,'col-sm-3 border-left border-dark');
         }
         
-        return append($pagina_producto);
+        return d($pagina_producto,10,1);
     }
     function botones_ver_mas()
     {
