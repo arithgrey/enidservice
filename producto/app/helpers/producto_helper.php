@@ -119,8 +119,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
-            d($imagenes["imagenes_contenido"], $clases_imagenes),
-            "col-lg-12 mb-5"
+            d($imagenes["imagenes_contenido"], $clases_imagenes)
+            
         );
 
         $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
@@ -170,16 +170,19 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($x, "col-xs-12 col-sm-12");
         }        
         $producto = append($r);
-        $interes_re_venta =
-            interes_re_venta($s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio);
+        $interes_re_venta = interes_re_venta(
+            $s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio);
         $recompensa = recompensa($data);
         $data_response[] = d($producto, 12);
-        $data_response[] = d($boton_editar, 12);
+        $data_response[] = d(hr(), 'col-sm-12 mt-5');
+        $data_response[] = d($boton_editar, 12);        
         $data_response[] = d($recompensa, 12);
+        $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d($interes_re_venta, 12);
+        $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d(botones_ver_mas(), 'col-sm-12 mt-5');
-
-        $pagina_producto[] =  d($data_response,9);
+        
+        $pagina_producto[] =  d(d($data_response,13),9);
         if(!is_mobile()){
             $pagina_producto[] =  d($x,'col-sm-3 border-left border-dark');
         }
@@ -262,12 +265,12 @@ if (!function_exists('invierte_date_time')) {
             "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"
         );
 
-        $response[] = d($descripcion, "col-lg-12 mt-5  ");
-        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session), 12);
-        $response[] = d("", "place_valoraciones mt-5 col-sm-12");
+        $response[] = d($descripcion);
+        $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
+        $response[] = d("", "place_valoraciones mt-5 row");
         $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, "  h3 text-uppercase black font-weight-bold");
-        $response[] = d($interes, "col-lg-12 mt-5 text_sugerencias d-none ");
-        $response[] = d(d("", "place_tambien_podria_interezar bottom_100"), 12);
+        $response[] = d($interes, "mt-5 text_sugerencias d-none ");
+        $response[] = d(d("", "place_tambien_podria_interezar bottom_100"));
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
         $response[] = hiddens(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
         $response[] = hiddens(
@@ -502,17 +505,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
         $z[] = d(tb_colores($color, $es_servicio), 12);
         $yt = pr($servicio, "url_vide_youtube");
-
-        $z[] = d(
-            format_link(
-                "Nuestros clientes",
-                [
-                    "href" => path_enid("clientes"),
-                    "target" => "_black"
-                ]
-            ),
-            'col-md-12 mt-5'
-        );
+        
         $r = [];
 
 
@@ -656,16 +649,17 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio_recompesa = 0;
 
         $es_recompensa = es_data($recompensa);
-
+        $texto_agregar_recompensa  = '';
         if (es_administrador($data)) {
-            $response[] = agregar_oferta($data);
+            $texto_agregar_recompensa = agregar_oferta($data);
         }
 
 
         if ($es_recompensa) {
-
+            
             $texto = "Compra en conjunto y obten recompensas ";
-            $response[] = d($texto, ["class" => "mt-5 h4 text-uppercase black font-weight-bold"]);
+            $conjunto_texto = d($texto, "mt-5 h4 text-uppercase black font-weight-bold");
+            $response[] = flex($conjunto_texto, $texto_agregar_recompensa, _between);
             foreach ($recompensa as $row) {
 
 
@@ -736,7 +730,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return d($response, 'col-xs-12 col-sm-12 col-md-12 col-lg-7');
+        return append($response);
     }
 
     function agregar_oferta($data)
@@ -744,19 +738,17 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["info_servicio"]["servicio"];
         $id_servicio = pr($servicio, "id_servicio");
-
-
         $path = path_enid("recompensas", $id_servicio);
-        $link = format_link(
+
+        return  format_link(
             "+ Agregar oferta",
             [
-                "href" => $path,
-                "class" => "col-md-3"
+                "href" => $path
             ]
         );
 
 
-        return d($link, 13);
+        
     }
     function anexar_carro_compra(
         $id_servicio,
