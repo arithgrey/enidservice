@@ -1,3 +1,6 @@
+.zindex-2{
+    z-index: 1000;
+}
 .border_black{
     border-bottom: solid 3px !important;
     border-bottom-color: black !important;    
