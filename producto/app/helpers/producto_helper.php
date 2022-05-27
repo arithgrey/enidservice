@@ -167,13 +167,13 @@ if (!function_exists('invierte_date_time')) {
         endif;
 
         if(is_mobile()){
-            $r[] = d($x, "col-xs-12 col-sm-12");
+            $r[] = append($x);
         }        
-        $producto = append($r);
+        
         $interes_re_venta = interes_re_venta(
             $s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio);
         $recompensa = recompensa($data);
-        $data_response[] = d($producto, 12);
+        $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d($boton_editar, 12);        
         $data_response[] = d($recompensa, 12);
@@ -184,9 +184,11 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         
         $pagina_producto[] =  d($data_response,9);
+        
         if(!is_mobile()){
             $pagina_producto[] =  d($x,'col-sm-3 border-left border-dark');
         }
+        
         
         return append($pagina_producto);
     }
@@ -336,7 +338,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = $tallas;
 
         $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-3 bg-white';
-        return d(d($r,$extra),'bg-white');
+        return d($r,$extra);
     }
 
     function frm_compra($data, $es_servicio, $existencia, $id_servicio, $q2, $tiempo_entrega, $proceso_compra)
