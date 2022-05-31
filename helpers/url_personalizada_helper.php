@@ -124,6 +124,7 @@ function accesos_internos()
         "promociones" => "promociones",
         "sobre_vender" => "sobre_ventas",
         "recompensas" => "recompensa/?&id=",
+        "propuestas" => "propuestas/?q=",
         "clientes" => "clientes",
         "top_competencia" => "competencias",
         "solicitud_saldo" => "pendiente",
