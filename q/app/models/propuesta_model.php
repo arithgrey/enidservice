@@ -25,6 +25,15 @@ class Propuesta_model extends CI_Model
         }
         return $this->db->get($this->tabla)->result_array();
     }
+    
+    function delete($params_where = [], $limit = 1)
+    {
+        $this->db->limit($limit);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        return $this->db->delete($this->tabla, $params_where);
+    }
 
 
     function insert($params, $return_id = 0)

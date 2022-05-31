@@ -29,6 +29,22 @@ class propuesta extends REST_Controller
         $this->response($response);
 
     }
+
+    function index_DELETE()
+    {
+
+        $response = [];
+        $param = $this->delete();
+        if (fx($param, "id")) {
+
+
+            $params = ['id' => $param["id"]];
+            $response = $this->propuesta_model->delete($params);
+            
+        }
+        $this->response($response);
+
+    }
     function servicio_GET()
     {
 

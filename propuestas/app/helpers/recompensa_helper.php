@@ -37,8 +37,15 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($propuestas as $row) {
 
+                
+                $eliminar = icon(_text_(_eliminar_icon, 'eliminar_propuesta'), 
+                [
+                    
+                    "onclick" => "confirma_eliminar('".$row["id"]."')",
+                ]);
+                $cantidad_eliminar =  flex( _titulo($a), $eliminar, _between);
                 $contenido = flex(
-                    _titulo($a),
+                    $cantidad_eliminar,
                     $row["propuesta"],
                     'flex-column border p-5 mt-5',
                     'mb-5'
