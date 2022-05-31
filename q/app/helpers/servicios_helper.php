@@ -1346,6 +1346,7 @@ if (!function_exists('invierte_date_time')) {
         $stock = '';
         $fecha_stock = '';
         $proveedores = '';
+        $propuestas = ''; 
         if (es_administrador($data)) {
 
             $base_stock = [
@@ -1360,6 +1361,11 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $fecha_stock = format_link("Fecha disponibilidad", $base_disponibilidad, 0);
+            
+            $propuestas = format_link("Respuestas", 
+            [
+                'href' => path_enid('propuestas', $id_servicio),                
+            ],0);
 
 
         }
@@ -1425,6 +1431,7 @@ if (!function_exists('invierte_date_time')) {
             $link_proveedores,
             $stock,
             $fecha_stock,
+            $propuestas,
             li(
                 a_enid(
                     text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN")

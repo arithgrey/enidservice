@@ -440,8 +440,12 @@ alter table users rename column idempresa to id_empresa;
 
 
 ________________________________
+RENAME TABLE servicios TO servicio;
 RENAME TABLE forma_pago TO forma_pagos;
 RENAME TABLE ciclo_facturacion TO ciclo_facturacions;
+RENAME TABLE ciclo_facturacion TO ciclo_facturacions;
+ci_sessions
+
 alter table orden_compras change status status int not null default 1;
 alter table users change facebook facebook text default NULL;
 alter table proyecto_persona_forma_pagos rename column id_proyecto_persona_forma_pago to id;
@@ -453,3 +457,17 @@ alter table empresas rename column idempresa to id;
 ______________________
 
 RENAME TABLE ubicacion TO ubicacions;
+
+CREATE TABLE IF NOT EXISTS `propuesta_servicio` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `propuesta` TEXT NOT NULL,
+  `status` INT NOT NULL DEFAULT 1,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+RENAME TABLE propuesta_servicio TO propuesta_servicios;
+RENAME TABLE propuesta_servicios TO propuestas;
+
+alter table propuestas add id_servicio int not null default 0;
