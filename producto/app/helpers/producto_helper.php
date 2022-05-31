@@ -183,9 +183,8 @@ if (!function_exists('invierte_date_time')) {
         $recompensa = recompensa($data);
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-
-        $data_response[] = d($respuestas, 12);
-        $data_response[] = d($boton_editar, 12);
+        
+        $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
         $data_response[] = d($recompensa, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d($interes_re_venta, 12);
@@ -641,8 +640,8 @@ if (!function_exists('invierte_date_time')) {
             $response = format_link(
                 "Ver respuesta sugerida",
                 [
-                    "href" => path_enid("propuestas", $id_servicio),
-                    "class" => 'col-lg-3 pull-right'
+                    "href" => path_enid("propuestas", $id_servicio),                    
+                    
                 ]
             );
         }
