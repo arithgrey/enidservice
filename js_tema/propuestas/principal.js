@@ -35,3 +35,17 @@ let propuesta_servicio = function (data) {
     redirect("");
 }
 
+let confirma_eliminar = ($id) => {
+
+    let text = "¿Seguro quieres eliminar está respuesta?";
+    show_confirm(text, '', "SI", function () {
+
+        let url = "../q/index.php/api/propuesta/index/format/json/";
+        let data_send = $.param({                    
+            "id" : $id
+        });
+        request_enid("DELETE", data_send, url, propuesta_servicio);
+    });
+
+};
+

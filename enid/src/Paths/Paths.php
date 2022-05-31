@@ -191,10 +191,14 @@ class Paths
             ],
             "propuestas" => [
                 "css" =>
-                ["summernote.css"],
+                [
+                    "summernote.css",
+                    "confirm-alert.css"
+                ],
                 "js" => [
                     'propuestas/principal.js',
-                    "js/summernote.js"
+                    "js/summernote.js",
+                    "alerts/jquery-confirm.js",
                 ],
 
             ],
