@@ -385,6 +385,7 @@ if (!function_exists('invierte_date_time')) {
             place("place_tambien_podria_interezar"),
             "col-sm-12"
         );
+        $r[] = botones_ver_mas();
         $r[] = hiddens(
             [
                 "value" => $data["notificacion_pago"],
@@ -411,7 +412,33 @@ if (!function_exists('invierte_date_time')) {
         $response[] = modal_ingreso_cancelacion($data, $params);
         return append($response);
     }
+    function botones_ver_mas()
+    {
 
+        $link_productos =  format_link("Ver más promociones", [
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
+            "class" => "border"
+        ]);
+
+        $link_facebook =  format_link("Facebook", [
+            "href" => path_enid("facebook",0,1),
+            "class" => "border mt-4",
+            'target' => 'blank_'
+        ],0);
+
+        $link_instagram =  format_link("Instagram", [
+            "href" => path_enid("fotos_clientes_instagram",0,1),
+            "class" => "border mt-4",
+            'target' => 'blank_'
+        ],0);
+        
+
+        $response[] = d($link_productos, 4, 1);
+        $response[] = d($link_facebook, 4, 1);
+        $response[] = d($link_instagram, 4, 1);
+
+        return d($response,'col-sm-12 mt-5');
+    }
     function modal_opciones_cancelacion($data, $params)
     {
         $response = '';
