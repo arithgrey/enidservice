@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = _titulo($titulo);
+            $nombre_producto = _titulo($titulo,2);
             $x[] = venta_producto(
                 $data,
                 $nombre_producto,
@@ -346,7 +346,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = $tallas;
 
-        $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-3 bg-white';
+        $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-2 bg-white';
         return d($r, $extra);
     }
 
@@ -409,7 +409,7 @@ if (!function_exists('invierte_date_time')) {
             $precio = pr($servicio, 'precio');
             $comision = comision_porcentaje($precio, $porcentaje_comision);
 
-            $text_comisionn = strong(money($comision), 'white f14');
+            $text_comisionn = strong(money($comision), 'white f12');
             $text = _text_('gana', $text_comisionn, 'al verderlo!');
             $class = 'aviso_comision mb-2 white text-uppercase border shadow text-right p-2 mb-5';
             $response[] = d($text, $class);
