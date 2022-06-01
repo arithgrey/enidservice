@@ -10,10 +10,21 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = agregar($data);
+        $response[] = imagen_servicio($data);
         $response[] = listado($data);
         $response[] = modal_form_propuesta($data);
 
         return d($response, 10, 1);
+    }
+    function imagen_servicio($data)
+    {
+        return d(img(
+            [
+                "src" => $data["url_img_servicio"],
+                "class" => "img_servicio mah_150",
+
+            ]
+        ), 'col-md-12 mt-5');
     }
     function agregar($data)
     {
@@ -25,7 +36,7 @@ if (!function_exists('invierte_date_time')) {
         ];
         $agregar = btn("+ respuesta propuesta", $base_boton_propuesta);
         $servicio =  format_link('Servicio', ['href' => path_enid('producto', $id_servicio)]);
-        return flex($agregar, $servicio, _between);
+        return d(flex($agregar, $servicio, _between),'col-md-12 mt-5');
     }
     function listado($data)
     {
@@ -37,13 +48,15 @@ if (!function_exists('invierte_date_time')) {
 
             foreach ($propuestas as $row) {
 
-                
-                $eliminar = icon(_text_(_eliminar_icon, 'eliminar_propuesta'), 
-                [
-                    
-                    "onclick" => "confirma_eliminar('".$row["id"]."')",
-                ]);
-                $cantidad_eliminar =  flex( _titulo($a), $eliminar, _between);
+
+                $eliminar = icon(
+                    _text_(_eliminar_icon, 'eliminar_propuesta'),
+                    [
+
+                        "onclick" => "confirma_eliminar('" . $row["id"] . "')",
+                    ]
+                );
+                $cantidad_eliminar =  flex(_titulo($a), $eliminar, _between);
                 $contenido = flex(
                     $cantidad_eliminar,
                     $row["propuesta"],
