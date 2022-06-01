@@ -137,7 +137,7 @@ if (!function_exists('invierte_date_time')) {
             $promedio = number_format($valoracion["promedio"], 1, '.', '');
             $parte_promedio = flex(
 
-                _titulo($promedio, 0, 'mb-4 mt-4')
+                _titulo($promedio, 0, 'mt-4')
                 ,
                 crea_estrellas($promedio)
                 ,

@@ -367,7 +367,7 @@ function utilidad_en_servicio($data, $servicio, $boton = 0, $extra = '')
         if ($boton > 0) {
 
             $seccion = d( _text_('Utilidad', money($total)) , 
-            _text_('f14 border border-secondary mt-2 strong p-1', $extra));
+            _text_('f11 border border-secondary mt-2 strong p-1', $extra));
 
             $costo = _text_('Costo', money($costo_servicio));
             $class = _text_('border border-secondary mt-2 strong p-1', $extra);
