@@ -677,14 +677,23 @@ if (!function_exists('invierte_date_time')) {
 
         $es_recompensa = es_data($recompensa);
         $texto_agregar_recompensa  = '';
-        if (es_administrador($data)) {
+        if (es_administrador($data) && !$es_recompensa) {   
+            
             $texto_agregar_recompensa = agregar_oferta($data);
+            $texto = "Compra en conjunto y obten recompensas";
+            $conjunto_texto = d($texto, "mt-5 h4 text-uppercase black font-weight-bold");
+            $response[] = flex($conjunto_texto, $texto_agregar_recompensa, _between);
+
         }
 
 
         if ($es_recompensa) {
+            
+            if(es_administrador($data)){
+                $texto_agregar_recompensa = agregar_oferta($data);
+            }
 
-            $texto = "Compra en conjunto y obten recompensas ";
+            $texto = "Compra en conjunto y obten recompensas";
             $conjunto_texto = d($texto, "mt-5 h4 text-uppercase black font-weight-bold");
             $response[] = flex($conjunto_texto, $texto_agregar_recompensa, _between);
             foreach ($recompensa as $row) {
