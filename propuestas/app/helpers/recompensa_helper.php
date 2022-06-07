@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = agregar($data);
-        $response[] = imagen_servicio($data);
+        //$response[] = imagen_servicio($data);
         $response[] = listado($data);
         $response[] = modal_form_propuesta($data);
 
@@ -35,7 +35,15 @@ if (!function_exists('invierte_date_time')) {
             'id' => $id_servicio,
         ];
         $agregar = btn("+ respuesta propuesta", $base_boton_propuesta);
-        $servicio =  format_link('Servicio', ['href' => path_enid('producto', $id_servicio)]);
+        $imagen = d(img(
+            [
+                "src" => $data["url_img_servicio"],
+                "class" => "img_servicio mah_150",
+
+            ]
+        ));
+
+        $servicio =  a_enid($imagen, ['href' => path_enid('producto', $id_servicio)]);
         return d(flex($agregar, $servicio, _between),'col-md-12 mt-5');
     }
     function listado($data)
