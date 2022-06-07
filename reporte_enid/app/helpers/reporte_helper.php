@@ -428,7 +428,16 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "text-uppercase black",
                     "target" => "_blank"
                 ]
+            ),            
+            a_enid(text_icon(_money_icon, "Ventas por alcaldías"),
+            [
+                
+                "href" => path_enid('indicadores_ubicaciones',0,1),
+                "class" => "text-uppercase black",
+                "target" => "_blank"
+            ]
             ),
+            
             a_enid(text_icon(_money_icon, "Próximas entregas"),
                 [
                     
