@@ -49,7 +49,8 @@ if (!function_exists('invierte_date_time')) {
 
 
             }
-
+            $response[] =  d($html_paginador,  'mt-5');
+        
             $response[] = resumen_recompensa();
             
         }

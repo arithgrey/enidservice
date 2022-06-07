@@ -29,11 +29,9 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "black underline"
             ]
         );
-        $response[] = d($link_descuento, "text-right");
-
-
-
-
+        $class = (is_mobile()) ? 'row mt-3' : "text-right"; 
+        $response[] = d($link_descuento, $class);
+        $response[] = extras_fake();
         $response[] = place('seccion_sugerencias');
         $response[] = d(d("", "seccion_noticias"), 13);
 
@@ -54,6 +52,30 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
+    function extras_fake(){
+        $r = [];
+        if(is_mobile()){
+            $r[] = d(hr(), 'col-xs-12 p-0');
+
+            $r[] = d(_titulo("¿Tienes duda sobre si un cliente es fake o te ha faltado al respeto?", 5));
+            $r[] = d(a_enid('Verificalo o mandalo a lista negra aquí', ['href' => "http://app.enidservices.com/lista-negra", 'target' => '_blanck']));
+    
+            $r[] = d(hr(), 'col-xs-12 p-0');
+
+            $link_descuento = a_enid(
+                "Mira qué zonas tienen más ventas",
+                [
+                    "href" => path_enid("indicadores_ubicaciones", 0 ,1),
+                    "class" => "black underline"
+                ]
+            );
+    
+            $r[] = d($link_descuento, 'mb-3');
+            
+        }
+        
+        return  d($r,13);
+    }
     function seccion_estadisticas($data)
     {
 

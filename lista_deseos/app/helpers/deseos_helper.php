@@ -621,7 +621,7 @@ if (!function_exists('invierte_date_time')) {
             'cursor_pointer texto_seleccionar mt-3 text-primary d-none'
         );
 
-        $data_response[] = d(_titulo("Carrito"), 13);
+        $data_response[] = d(_titulo("Carrito"), 'row mt-3');
         $data_response[] = d($texto, 13);
         $data_response[] = d($texto_seleccion, 13);
         $data_response[] = hr();
