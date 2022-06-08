@@ -38,6 +38,7 @@ function accesos_enid()
         "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
         "whatsapp" => "https://wa.me/c/5215552967027",
+        "whatsapp_ayuda" =>" https://api.whatsapp.com/send?phone=+5552967027&text=Hola!%20Me%20puedes%20ayudar,%20vi%20esto%20desde%20la%20p%C3%A1gina%20web",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
         "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
@@ -133,6 +134,7 @@ function accesos_internos()
         "top_competencia_entrega" => "competencias_entregas",
         "reporte_enid" => "reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
+        "envio" => "envio",
     ];
     
         
