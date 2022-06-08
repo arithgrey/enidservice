@@ -1,5 +1,7 @@
 <?php
 
+use App\View\Components\titulo;
+
 function sub_categorias_destacadas($param)
 {
 
@@ -1021,7 +1023,7 @@ function format_adicional_asentamiento_ubicaciones($row)
 {
 
     return d(_text_(
-        prm_def($row, 'delegacion',''),        
+        prm_def($row, 'delegacion', ''),
         prm_def($row, 'asentamiento', ''),
     ), 'strong  blue_enid mt-3 mb-5 col-lg-12 text-right');
 }
@@ -1073,4 +1075,123 @@ function get_orden()
         "SÓLO  SERVICIO",
         "SÓLO PRODUCTOS"
     ];
+}
+function footer_opciones()
+{
+
+    $productos_footer[] = _titulo('Productos', 2);
+
+    $productos_footer[] = a_enid(
+        'Descuentos',
+        [
+            'href' => path_enid('promociones'),
+            'class' => 'black fp9'
+        ]
+    );
+
+    $productos_footer[] = a_enid(
+        'Novedades',
+        [
+            "href" => path_enid("search", "/?q2=0&q=&order=1"),
+            'class' => 'black fp9'
+        ]
+    );
+
+    $productos_footer[] = a_enid(
+        'Populares',
+        [
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
+            'class' => 'black fp9'
+        ]
+    );
+
+    /*Asistencia*/
+    $asistencia[] =  _titulo('Asistencia', 2);
+
+    $asistencia[] =  a_enid(
+        '¿Necesitas ayuda?',
+        [
+            'href' => path_enid('whatsapp_ayuda', 0, 1),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
+
+    $asistencia[] =  a_enid(
+        'Pago',
+        [
+            'href' => path_enid('forma_pago'),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
+    $asistencia[] =  a_enid(
+        'Envío',
+        [
+            'href' => path_enid('envio'),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
+
+
+    $asistencia[] =  a_enid(
+        'Clientes',
+        [
+            'href' => path_enid('clientes'),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
+
+    /**Oportunidades*/
+    $oportunidades[] = _titulo('Oportunidades', 2);
+    $oportunidades[] = a_enid(
+        'Programa de afiliados',
+        [
+            'href' => path_enid('sobre_vender'),
+            'class' => 'black fp9'
+        ]
+    );
+
+
+    $sociales[] = _titulo('SÍGUENOS', 2);
+    $sociales[] = a_enid(
+        icon(_text_(_facebook_icon,'fa-2x')),
+        [
+            'href' => path_enid('facebook', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5'
+        ]
+    );
+    $sociales[] = a_enid(
+        icon(_text_(_instagram_icon,'fa-2x')),
+        [
+            'href' => path_enid('instagram', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5 mt-3'
+        ]
+    );
+
+    $sociales[] = a_enid(
+        icon(_text_(_pinterest_icon,'fa-2x')),
+        [
+            'href' => path_enid('pinterest', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5 mt-3'
+        ]
+    );
+    
+
+    $seccion_productos =  d($productos_footer, 3);
+    $asistencia_seccion = d($asistencia, 3);
+    $oportunidades_seccion = d($oportunidades, 3);
+    $sociales_seccion = d($sociales, 3);
+
+    return d([
+        $seccion_productos,
+        $asistencia_seccion,
+        $oportunidades_seccion,
+        $sociales_seccion
+    ], 8, 1);
 }
