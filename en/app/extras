@@ -471,3 +471,7 @@ RENAME TABLE propuesta_servicio TO propuesta_servicios;
 RENAME TABLE propuesta_servicios TO propuestas;
 
 alter table propuestas add id_servicio int not null default 0;
+
+____________-
+
+insert into pagina(pagina) values("Respuestas sugeridas");

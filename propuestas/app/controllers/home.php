@@ -21,7 +21,8 @@ class Home extends CI_Controller
         $data["propuestas"] = $this->propuestas($id_servicio);        
         $data = $this->app->cssJs($data, "propuestas"); 
         $data["url_img_servicio"]= $this->app->imgs_productos($id_servicio, 1, 1, 1);
-
+        
+        $this->app->log_acceso($data, 23);
         $this->app->pagina($data, propuestas($data), 1);
 
     }
