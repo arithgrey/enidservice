@@ -135,6 +135,7 @@ function accesos_internos()
         "reporte_enid" => "reporte_enid",
         "forma_pago" => "forma_pago/?info=1",
         "envio" => "envio",
+        "interes" => "interes",
     ];
     
         

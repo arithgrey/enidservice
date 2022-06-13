@@ -1154,7 +1154,6 @@ function footer_opciones()
         ]
     );
 
-
     $sociales[] = _titulo('SÍGUENOS', 2);
     $sociales[] = a_enid(
         icon(_text_(_facebook_icon,'fa-2x')),
