@@ -51,6 +51,7 @@ function accesos_enid()
         "search_q3" => "search/?q3=",
         "pedido_seguimiento" => "pedidos/?seguimiento=",
         "producto" => "producto/?producto=",
+        "producto_metricas" => "producto_metricas/?producto=",
         "pedidos_recibo" => "pedidos/?recibo=",   
         "area_cliente_compras" => "area_cliente/?action=compras&ticket=",       
         "recomendacion" => "recomendacion/?q=",    
@@ -136,6 +137,7 @@ function accesos_internos()
         "forma_pago" => "forma_pago/?info=1",
         "envio" => "envio",
         "interes" => "interes",
+        
     ];
     
         
