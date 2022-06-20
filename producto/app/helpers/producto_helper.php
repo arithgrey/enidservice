@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = _titulo($titulo,2);
+            $nombre_producto = _titulo($titulo, 2);
             $x[] = venta_producto(
                 $data,
                 $nombre_producto,
@@ -183,7 +183,7 @@ if (!function_exists('invierte_date_time')) {
         $recompensa = recompensa($data);
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-        
+
         $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
         $data_response[] = d($recompensa, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
@@ -634,18 +634,27 @@ if (!function_exists('invierte_date_time')) {
     function respuestas_sugeridas($data, $id_servicio)
     {
 
-        $response = "";
+        $response = [];
         if (es_administrador_o_vendedor($data)) {
 
-            $response = format_link(
+            $respuestas = format_link(
                 "Ver respuesta sugerida",
                 [
-                    "href" => path_enid("propuestas", $id_servicio),                    
-                    
+                    "href" => path_enid("propuestas", $id_servicio),
+
                 ]
             );
+            $metricas = format_link(
+                "Métricas",
+                [
+                    "href" => path_enid("producto_metricas", $id_servicio),
+
+                ]
+            );
+
+            $response[] = flex($respuestas, $metricas, _between, 'mr-5');
         }
-        return $response;
+        return append($response);
     }
 
     function editar($usuario_servicio, $id_usuario, $in_session, $id_servicio, $id_perfil)
@@ -677,19 +686,18 @@ if (!function_exists('invierte_date_time')) {
 
         $es_recompensa = es_data($recompensa);
         $texto_agregar_recompensa  = '';
-        if (es_administrador($data) && !$es_recompensa) {   
-            
+        if (es_administrador($data) && !$es_recompensa) {
+
             $texto_agregar_recompensa = agregar_oferta($data);
             $texto = "Compra en conjunto y obten recompensas";
             $conjunto_texto = d($texto, "mt-5 h4 text-uppercase black font-weight-bold");
             $response[] = flex($conjunto_texto, $texto_agregar_recompensa, _between);
-
         }
 
 
         if ($es_recompensa) {
-            
-            if(es_administrador($data)){
+
+            if (es_administrador($data)) {
                 $texto_agregar_recompensa = agregar_oferta($data);
             }
 
