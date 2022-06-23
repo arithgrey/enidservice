@@ -591,9 +591,20 @@ class Paths
                 [
                     'producto/principal.js',
 
-                ],
-                "pagina" => 3,
+                ]                
             ],
+            "producto_metricas" =>
+            [
+                "css" =>
+                [
+                    "css_tienda.css",
+                ],
+                "js" =>
+                [
+                    "producto/metricas.js"
+                ]
+            ],
+
             "producto_recibo_registrado" =>
             [
                 "css" =>

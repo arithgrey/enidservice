@@ -14,18 +14,26 @@ class Acceso_model extends CI_Model
         return ($return_id == 1) ? $this->db->insert_id() : $insert;
     }
 
-    function busqueda_fecha($fecha_inicio, $fecha_termino)
+    function busqueda_fecha($fecha_inicio, $fecha_termino, $id_servicio = 0 )
     {
 
-        $query_get = "select count(0)accesos, 
+        $extra  = '';
+        if($id_servicio >  0 ){
+
+            $extra = _text_("AND a.id_servicio = ", $id_servicio );
+        }
+
+        $query_get = _text_("select count(0)accesos, 
                         p.pagina, 
                         sum(case when a.is_mobile > 0 then 1 else 0 end) es_mobile,
                         sum(case when a.is_mobile > 0 then 0 else 1 end) es_computadora,
                         sum(case when a.in_session > 0 then 1 else 0 end) en_session,
                         sum(case when a.in_session > 0 then 0 else 1 end) sin_session
-                        from acceso a inner join pagina p on a.pagina_id = p.id
-                        AND DATE( a.fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' 
-                        group by p.pagina";
+                        from acceso 
+                        a inner join pagina p on a.pagina_id = p.id
+                        WHERE 
+                        DATE( a.fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ",$extra,"
+                        group by p.pagina");
 
         return $this->db->query($query_get)->result_array();
 
