@@ -21,6 +21,7 @@ class Acceso extends REST_Controller
         if (fx($param, "in_session,is_mobile,pagina_id")) {
 
 
+            $param["id_servicio"] =  prm_def($param, "id_servicio");
             $response = $this->acceso_model->insert($param, 1);
         }
         $this->response($response);
@@ -35,7 +36,9 @@ class Acceso extends REST_Controller
 
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
-            $accesos = $this->acceso_model->busqueda_fecha($fecha_inicio, $fecha_termino);
+            $id_servicio = prm_def($param, "id_servicio");
+
+            $accesos = $this->acceso_model->busqueda_fecha($fecha_inicio, $fecha_termino, $id_servicio);
 
             $heading = [
                 "Pagina",
@@ -76,7 +79,7 @@ class Acceso extends REST_Controller
                     $es_mobile,
                     $es_computadora,
                     $en_session,
-                    $sin_session,                    
+                    $sin_session,
                 ];
 
                 $this->table->add_row($row);
@@ -90,7 +93,7 @@ class Acceso extends REST_Controller
                 $total_en_session,
                 $total_sin_session
             ];
-            
+
             $this->table->add_row($totales);
             $response = $this->table->generate();
         }

@@ -591,14 +591,15 @@ class app extends CI_Controller
         );
     }
 
-    function log_acceso($data, $pagina)
+    function log_acceso($data, $pagina, $id_servicio = 0 )
     {
 
         if ($pagina > 0) {
             $q = [
                 "in_session" => $data["in_session"],
                 "is_mobile" => $data["is_mobile"],
-                "pagina_id" => $pagina
+                "pagina_id" => $pagina,
+                "id_servicio" => $id_servicio
             ];
 
             $api = "acceso/index";

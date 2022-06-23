@@ -10,7 +10,7 @@ let $form_costo = $(".form_costo");
 
 $(document).ready(function () {
 
-    costos_precios_servicio
+    //costos_precios_servicio
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),

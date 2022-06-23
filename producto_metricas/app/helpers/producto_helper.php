@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use App\View\Components\titulo;
+
+ if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
 
@@ -34,17 +38,19 @@ if (!function_exists('invierte_date_time')) {
         $metricas[] = metricas_producto(
             $data,
             $nombre_producto,
-            $precio
+            $precio, 
+            $id_servicio
         );
 
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
         $pagina_producto[] =  d($data_response, 6);
         $pagina_producto[] =  d($metricas, 'col-sm-6 border-left border-dark');
+        
 
         return append($pagina_producto);
     }
 
-    function metricas_producto($data, $nombre_producto, $precio)
+    function metricas_producto($data, $nombre_producto, $precio, $id_servicio)
     {
 
         $response[] = $nombre_producto;
@@ -52,6 +58,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = ganancia_comisionista($data);
         $response[] = _titulo("Métricas");
         $response[] = seccion_vistas($data);
+        $response[] = format_accesos($id_servicio);
 
 
         return d($response);
@@ -63,9 +70,9 @@ if (!function_exists('invierte_date_time')) {
         $deseado = $servicio["deseado"];
         $valoracion = $servicio["valoracion"];
 
-        $texto = _text_(icon('fa fa fa-eye'), "Vistas del producto", $vistas);
-        $texto_comprado = _text_(icon('fa fa-gift'), "Personas que lo han comprado", $deseado);
-        $texto_valoracion = _text_(icon('fa fa-star'), "Valoraciones", $valoracion);
+        $texto = _text_(icon('fa fa fa-eye'), "Vistas del producto",  _titulo($vistas,2));
+        $texto_comprado = _text_(icon('fa fa-gift'), "Lo han comprado", _titulo($deseado), 'veces');
+        $texto_valoracion = _text_(icon('fa fa-star'), "Valoraciones", _titulo($valoracion,2));
 
         $response[] =  d($texto_comprado, 'border-bottom border-secondary mt-3 p-1 mb-2');
         $response[] =  d($texto, 'border-bottom border-secondary mt-3 p-1 mb-2');
@@ -209,4 +216,35 @@ if (!function_exists('invierte_date_time')) {
         ];
         return $response;
     }
+
+    function format_accesos($id_servicio)
+    {
+        $form = base_busqueda_form('ACCESOS POR PÁGINA', $id_servicio, 
+            'form_busqueda_accesos_pagina', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_pagina",
+            ]
+        );
+
+
+    }
+    function base_busqueda_form(
+        $titulo_seccion, $id_servicio , $clase_form, $place, $fecha_inicio = 0, $fecha_termino = 0){
+
+
+        $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
+        $r[] = form_open("", ["class" => $clase_form]);
+        $r[] = frm_fecha_busqueda($fecha_inicio, $fecha_termino);
+        $r[] = hiddens(["name"=> "id_servicio", "value" => $id_servicio]);
+        $r[] = form_close();
+        $r[] = place(_text_($place, "mt-5"));
+
+        return append($r);
+    }
+
+    
+
 }
