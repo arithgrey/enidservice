@@ -179,12 +179,16 @@ if (!function_exists('invierte_date_time')) {
                 $icono_eliminar = icon(_text_(_close_icon, "eliminar_foto_referencia"),
                     [
                         "id_servicio" => $id_servicio,
-                        "id_imagen" => $id_imagen
+                        "id_imagen" => $id_imagen,                        
                     ]
                 );
                 $icono_eliminar = ($data["es_administrador"]) ? $icono_eliminar : "";
                 $formato_imagen = flex($icono_eliminar,$imagen);
-                $r[] = d($formato_imagen, "col-sm-2");
+                $r[] = d($formato_imagen, 
+                [
+                    "class" => "col-sm-2",
+                    "onclick" => "log_operaciones_externas(24, $id_servicio)"
+                ]);
             }
         }
 
@@ -193,8 +197,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 "href" => path_enid("clientes"),
                 "class" => 'col-sm-12 text-secondary',
-                "target" => "black"
-
+                "target" => "_black",                
             ]
         ), 13);
 

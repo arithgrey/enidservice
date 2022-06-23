@@ -235,7 +235,7 @@ if (!function_exists('invierte_date_time')) {
         $titulo_seccion, $id_servicio , $clase_form, $place, $fecha_inicio = 0, $fecha_termino = 0){
 
 
-        $r[] = h($titulo_seccion, 3, "mb-5 h3 text-uppercase strong");
+        $r[] = h($titulo_seccion, 3, "mb-5 h5 text-uppercase strong");
         $r[] = form_open("", ["class" => $clase_form]);
         $r[] = frm_fecha_busqueda($fecha_inicio, $fecha_termino);
         $r[] = hiddens(["name"=> "id_servicio", "value" => $id_servicio]);

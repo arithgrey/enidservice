@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-        $data_response[] = d(botones_ver_mas(), 'col-sm-12 mt-5');
+        $data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         $pagina_producto[] =  d($data_response, 9);
@@ -201,24 +201,27 @@ if (!function_exists('invierte_date_time')) {
 
         return append($pagina_producto);
     }
-    function botones_ver_mas()
+    function botones_ver_mas($id_servicio)
     {
 
         $link_productos =  format_link("Ver más promociones", [
             "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8), '&page=', rand(0, 5))),
-            "class" => "border"
+            "class" => "border",
+            "onclick" => "log_operaciones_externas(28, $id_servicio)"
         ]);
 
         $link_facebook =  format_link("Facebook", [
             "href" => path_enid("facebook", 0, 1),
             "class" => "border mt-4",
-            'target' => 'blank_'
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(29, $id_servicio)"
         ], 0);
 
         $link_instagram =  format_link("Instagram", [
             "href" => path_enid("fotos_clientes_instagram", 0, 1),
             "class" => "border mt-4",
-            'target' => 'blank_'
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(30, $id_servicio)"
         ], 0);
 
 
@@ -838,7 +841,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa white border text-center",
                 "id" => $id_recompensa,
-                "antecedente_compra" => $antecedentes
+                "antecedente_compra" => $antecedentes,
+                "onclick" => "log_operaciones_externas(26, $id_servicio)"
             ]
         );
 
@@ -878,7 +882,7 @@ if (!function_exists('invierte_date_time')) {
                 'src' => $url_img_servicio,
                 'class' => 'w-100',
                 'href' => $link_servicio,
-                'onClick' => 'log_operaciones_externas(22)'
+                'onClick' => "log_operaciones_externas(22, $id_servicio)"
             ]
         );
     }
@@ -891,7 +895,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 'src' => $url_img_servicio_conjunto,
                 'class' => 'w-100',
-                'onClick' => 'log_operaciones_externas(22)'
+                'onClick' => "log_operaciones_externas(22, $id_servicio_conjunto)"
             ]
         );
         return a_enid(
@@ -1095,7 +1099,9 @@ if (!function_exists('invierte_date_time')) {
                 d("Agrégalo al Carrito", 'border'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
-                    "class" => "agregar_a_lista_deseos l_deseos"
+                    "class" => "agregar_a_lista_deseos l_deseos",
+                    "onclick" => "log_operaciones_externas(27, $id_servicio)"
+
                 ]
             ), 'se_agregara');
 
@@ -1111,17 +1117,18 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 [
                     'class' => 'agregar_deseos_sin_antecedente',
-                    'id' => $id_servicio
+                    'id' => $id_servicio,
+                    "onclick" => "log_operaciones_externas(27, $id_servicio)"
                 ]
 
             );
         }
 
         //$response[] = formas_acionales_compra($data);
-        $response[] = confianza();
+        $response[] = confianza($id_servicio);
         return append($response);
     }
-    function confianza()
+    function confianza($id_servicio)
     {
         $textos = _text_(icon('fa fa-lock'), "Compra seguro, paga hasta tu entrega!");
         $link_clientes = a_enid(
@@ -1129,7 +1136,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 'href' => path_enid('clientes'),
                 'class' => 'black',
-                'target' => '_black'
+                'target' => '_black',
+                "onclick" => "log_operaciones_externas(24, $id_servicio)"
 
             ]
         );
@@ -1142,7 +1150,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 'href' => path_enid('forma_pago'),
                 'class' => 'black',
-                'target' => '_black'
+                'target' => '_black',
+                "onclick" => "log_operaciones_externas(25, $id_servicio)"
 
             ]
         );
