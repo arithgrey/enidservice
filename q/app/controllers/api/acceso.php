@@ -99,4 +99,84 @@ class Acceso extends REST_Controller
         }
         $this->response($response);
     }
+    function busqueda_fecha_producto_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            
+
+            $accesos = $this->acceso_model->busqueda_fecha_productos($fecha_inicio, $fecha_termino);
+            $accesos_imagenes = $this->app->add_imgs_servicio($accesos);
+            
+            $heading = [
+                "",
+                "Producto",
+                "Accesos",
+                "Accesos en teléfono",
+                "Accesos en computadora",
+                "Accesos con sessión",
+                "Accesos sin sessión"
+
+            ];
+            $this->table->set_template(template_table_enid());
+            $this->table->set_heading($heading);
+
+            $total_accesos = 0;
+            $total_es_mobile = 0;
+            $total_es_computadora = 0;
+            $total_en_session = 0;
+            $total_sin_session = 0;
+
+            foreach ($accesos_imagenes as $row) {
+
+                $numero_accesos = $row["accesos"];
+                $pagina = d($row["nombre_servicio"], 'text-uppercase');
+                $es_mobile = $row["es_mobile"];
+                $es_computadora = $row["es_computadora"];
+                $en_session = $row["en_session"];
+                $sin_session = $row["sin_session"];
+                $id_servicio = $row["id_servicio"];
+
+                $total_accesos = $total_accesos + $numero_accesos;
+                $total_es_mobile =  $total_es_mobile +  $es_mobile;
+                $total_es_computadora =  $total_es_computadora +  $es_computadora;
+                $total_en_session = $total_en_session + $en_session;
+                $total_sin_session = $total_sin_session + $sin_session;
+                $link = path_enid("producto", $id_servicio);
+                $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link , "target" => "_blank"]), "w_50");
+                
+
+                $row = [
+                    $imagen,
+                    $pagina,
+                    $numero_accesos,
+                    $es_mobile,
+                    $es_computadora,
+                    $en_session,
+                    $sin_session,
+                ];
+
+                $this->table->add_row($row);
+            }
+
+            $totales  = [
+                "",
+                strong("TOTALES"),
+                $total_accesos,
+                $total_es_mobile,
+                $total_es_computadora,
+                $total_en_session,
+                $total_sin_session
+            ];
+
+            $this->table->add_row($totales);
+            $response = $this->table->generate();
+        }
+        $this->response($response);
+    }
 }

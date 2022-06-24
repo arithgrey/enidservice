@@ -12,6 +12,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_actividad();
         $response[] = format_productos_solicitados();
         $response[] = format_accesos();
+        $response[] = format_accesos_productos();
         $response[] = funnel_ventas();        
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
@@ -75,6 +76,21 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+    function format_accesos_productos()
+    {
+        $form = base_busqueda_form('ACCESOS POR ARTÍCULOS',
+            'form_busqueda_accesos_pagina_productos', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_pagina_productos",
+            ]
+        );
+
+
+    }
+
 
     function funnel_ventas()
     {
@@ -332,6 +348,15 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $link_accesos_pagina_productos = tab(
+            text_icon("fa-check-circle", "Accesos por productos"),
+            '#tab_accesos_pagina_productos',
+            [
+                "class" => "btn_acceso_paginas_productos"
+            ]
+        );
+
+
         $link_indicadores = tab(
             text_icon('fa fa-globe', "indicadores"),
             '#tab_default_1',
@@ -508,6 +533,8 @@ if (!function_exists('invierte_date_time')) {
             $link_reparto
             ,
             $link_accesos_pagina
+            ,
+            $link_accesos_pagina_productos
             ,
             $link_funnel
             
