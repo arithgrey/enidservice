@@ -29,6 +29,7 @@ $(document).ready(() => {
     $(".btn_repo_afiliacion").click(carga_productos_mas_solicitados);
     $(".btn_acceso_paginas").click(carga_accesos_pagina);
     $(".form_busqueda_accesos_pagina").submit(carga_accesos_pagina);
+    $(".form_busqueda_accesos_pagina_productos").submit(carga_accesos_pagina_productos);
 
 
     $(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
@@ -217,6 +218,27 @@ let carga_accesos_pagina = function (e){
     }
     e.preventDefault();
 }
+
+let carga_accesos_pagina_productos = function (e){
+
+
+    if (get_parameter(".form_busqueda_accesos_pagina_productos #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_pagina_productos #datetimepicker5").length > 5) {
+
+        let url = "../q/index.php/api/acceso/busqueda_fecha_producto/format/json/";
+        let data_send = $(".form_busqueda_accesos_pagina_productos").serialize();
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_busqueda_productos_solicitados #datetimepicker4", ".form_busqueda_productos_solicitados #datetimepicker5"]);
+
+    }
+    e.preventDefault();
+}
+
+
+
+
 let resumen_usuarios = function () {
 
     let url = "../q/index.php/api/usuario/usuarios/format/json/";

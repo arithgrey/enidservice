@@ -40,5 +40,28 @@ class Acceso_model extends CI_Model
 
     }
 
+    function busqueda_fecha_productos($fecha_inicio, $fecha_termino )
+    {
+        
+        $query_get = _text_("select 
+                        s.nombre_servicio, 
+                        s.id_servicio,
+                        count(0)accesos,                         
+                        sum(case when a.is_mobile > 0 then 1 else 0 end) es_mobile,
+                        sum(case when a.is_mobile > 0 then 0 else 1 end) es_computadora,
+                        sum(case when a.in_session > 0 then 1 else 0 end) en_session,
+                        sum(case when a.in_session > 0 then 0 else 1 end) sin_session
+                        from acceso a   inner join servicio s on a.id_servicio = s.id_servicio                      
+                        WHERE 
+                        DATE( a.fecha_registro ) 
+                        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' group by s.id_servicio");
+
+        return $this->db->query($query_get)->result_array();
+
+
+    }
+
+    
+
 
 }
