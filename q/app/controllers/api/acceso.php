@@ -111,6 +111,13 @@ class Acceso extends REST_Controller
             
 
             $accesos = $this->acceso_model->busqueda_fecha_productos($fecha_inicio, $fecha_termino);
+            $ids = array_column($accesos, "id_servicio");
+            $accesos_acciones = $this->acceso_model->busqueda_fecha_ids($fecha_inicio, $fecha_termino, implode( ",", $ids) );
+
+            $textos_paginas = array_unique(array_column($accesos_acciones, "pagina"));
+            $ids_paginas = array_unique(array_column($accesos_acciones, "id_pagina"));
+            
+            
             $accesos_imagenes = $this->app->add_imgs_servicio($accesos);
             
             $heading = [
@@ -121,10 +128,13 @@ class Acceso extends REST_Controller
                 "Accesos en computadora",
                 "Accesos con sessión",
                 "Accesos sin sessión"
-
             ];
+
+            
+            
+
             $this->table->set_template(template_table_enid());
-            $this->table->set_heading($heading);
+            $this->table->set_heading(array_merge($heading, $textos_paginas));
 
             $total_accesos = 0;
             $total_es_mobile = 0;
@@ -151,6 +161,8 @@ class Acceso extends REST_Controller
                 $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link , "target" => "_blank"]), "w_50");
                 
 
+                $busqueda = $this->busqueda_por_accion($ids_paginas, $accesos_acciones, $id_servicio);
+
                 $row = [
                     $imagen,
                     $pagina,
@@ -160,8 +172,9 @@ class Acceso extends REST_Controller
                     $en_session,
                     $sin_session,
                 ];
+                $linea = array_merge($row , $busqueda);
 
-                $this->table->add_row($row);
+                $this->table->add_row($linea);
             }
 
             $totales  = [
@@ -178,5 +191,26 @@ class Acceso extends REST_Controller
             $response = $this->table->generate();
         }
         $this->response($response);
+    }
+    function busqueda_por_accion($ids_paginas, $accesos_acciones,  $id_servicio){
+
+        $response  = [];
+        foreach($ids_paginas as $id){
+
+            /*Busco por nombre de acción de pagina*/
+            $total = 0; 
+            foreach($accesos_acciones as $row){ 
+
+                $id_pagina = $row["id_pagina"];
+                $id_servicio_accesos = $row["id_servicio"];
+                if($id_servicio_accesos ==  $id_servicio && $id_pagina ==  $id){ 
+                    $total = $row["accesos_accion"];
+                }
+            }   
+            
+            $response[] = $total;
+
+        }
+        return $response;
     }
 }
