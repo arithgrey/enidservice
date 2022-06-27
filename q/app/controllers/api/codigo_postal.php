@@ -31,7 +31,7 @@ class codigo_postal extends REST_Controller
         $this->response($response);
 
     }
-
+    
     function direccion_envio_pedido_POST()
     {
 
@@ -120,6 +120,18 @@ class codigo_postal extends REST_Controller
         }
         $this->response($response);
     }
+
+    function costo_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "q")) {
+            $response = $this->codigo_postal_model->get_costo($param["q"]);
+        }
+        $this->response($response);
+    }
+
 
     function colonia_delegacion_GET()
     {

@@ -371,6 +371,16 @@ class Paths
                     "alerts/jquery-confirm.js",
                 ]
             ],
+            "costo_entrega" =>
+            [
+                "css" => [
+                    "search_sin_encontrar.css"
+
+                ],
+                "js" => [
+                    'costo_entrega/principal.js',                    
+                ]
+            ],
             'entregas' =>
             [
                 "css" => [

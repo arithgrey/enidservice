@@ -137,6 +137,7 @@ function accesos_internos()
         "forma_pago" => "forma_pago/?info=1",
         "envio" => "envio",
         "interes" => "interes",
+        "costo_entrega" => "costo_entrega",
         
     ];
     

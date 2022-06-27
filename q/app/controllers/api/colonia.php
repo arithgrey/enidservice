@@ -7,6 +7,7 @@ class Colonia extends REST_Controller
     {
         parent::__construct();
         $this->load->model("colonia_model");
+        $this->load->library('table');
         $this->load->library(lib_def());
     }
 
@@ -42,6 +43,46 @@ class Colonia extends REST_Controller
                 $texto = _text_("Dá click", $sin_colonia, "si no cuentas con este dato");
                 $selector[] = d($texto, 'mt-3');
 
+                $response  = append($selector);
+            }
+        }
+        $this->response($response);
+    }
+    function delegacion_cotizador_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "delegacion")) {
+
+            $response = $this->colonia_model->delegacion($param["delegacion"]);
+
+            if (es_data($response) && prm_def($param, 'auto')) {
+
+
+                $heading = [
+                    "Costo de entrega",
+                    "CP",
+                    "Colonia",
+                    
+                ];
+                $this->table->set_template(template_table_enid());
+                $this->table->set_heading($heading);
+
+
+                foreach($response  as $row){
+
+                    $row = [
+                        money($row["costo_entrega"]),
+                        $row["colonia"], 
+                        $row["cp"]
+                    ];
+    
+                    $this->table->add_row($row);
+                
+                    
+                }
+                            
+                $selector[] = $this->table->generate();            
                 $response  = append($selector);
             }
         }

@@ -50,7 +50,7 @@ class Colonia_model extends CI_Model
     public function delegacion($delegacion)
 	{	
 		/*Se hizo de esta forma ya que la base de datos está mal CDMX Y ESTADO DE MÉXICO*/
-		$query = "SELECT cp,  asentamiento as colonia , estado, municipio, id_codigo_postal
+		$query = "SELECT cp,  asentamiento as colonia , estado, municipio, id_codigo_postal, costo_entrega
 		 FROM codigo_postal WHERE municipio = '".$delegacion."' AND 
 		id_estado_republica IN(9, 15) order by asentamiento ASC";
 
