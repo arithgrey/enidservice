@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class Codigo_postal_model extends CI_Model
 {
@@ -6,7 +6,6 @@ class Codigo_postal_model extends CI_Model
 	{
 		parent::__construct();
 		$this->load->database();
-
 	}
 
 	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -68,7 +67,6 @@ class Codigo_postal_model extends CI_Model
 			}
 		}
 		return 0;
-
 	}
 
 	function get_colonia_delegacion($param)
@@ -84,8 +82,11 @@ class Codigo_postal_model extends CI_Model
 			$cps = $this->db->query($query_get)->result_array();
 		}
 		return $cps;
-
 	}
+	public function get_costo($q)
+	{
 
-
+		$query_get = _text_("SELECT * FROM codigo_postal WHERE cp like " , $q , " LIMIT 20");		
+		return $this->db->query($query_get)->result_array();
+	}
 }

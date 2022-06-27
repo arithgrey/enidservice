@@ -475,3 +475,8 @@ alter table propuestas add id_servicio int not null default 0;
 ____________-
 
 insert into pagina(pagina) values("Respuestas sugeridas");
+_________________________
+
+alter table  codigo_postal add costo_entrega float not null default 0;
+update codigo_postal set costo_entrega  = 200 where id_estado_republica not in(9,15);
+alter table delegacions add costo_entrega int not null default 0;
