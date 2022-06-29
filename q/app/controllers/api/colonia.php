@@ -55,28 +55,50 @@ class Colonia extends REST_Controller
         if (fx($param, "delegacion")) {
 
             $response = $this->colonia_model->delegacion($param["delegacion"]);
-
+            
             if (es_data($response) && prm_def($param, 'auto')) {
 
+                $es_administrador = prm_def($param,"edicion");
 
                 $heading = [
-                    "Costo de entrega",
-                    "CP",
-                    "Colonia",
-                    
+                    "Costo de entrega",                    
+                    "Colonia",                    
                 ];
+                
+                if($es_administrador > 0 ){
+                    $heading = array_merge($heading, [""]);
+                }
+
                 $this->table->set_template(template_table_enid());
                 $this->table->set_heading($heading);
 
 
                 foreach($response  as $row){
 
+                    $id_codigo_postal = $row["id_codigo_postal"];
+                    $costo = $row["costo_entrega"];
+                    $colonia = $row["colonia"];
+                    
                     $row = [
-                        money($row["costo_entrega"]),
-                        $row["colonia"], 
-                        $row["cp"]
+                        money($costo),
+                        $colonia 
                     ];
-    
+                    
+                    if($es_administrador > 0 ){
+                        
+                        $icono = icon(
+                            _text_(_editar_icon, "costo_entrega_colonia") ,
+                            [
+                                "id" => $id_codigo_postal,
+                                "costo" => $costo,
+                                "colonia" => $colonia
+                            ]
+                        );
+                        $row = array_merge($row, [$icono]);
+
+                    }
+
+                    
                     $this->table->add_row($row);
                 
                     
@@ -88,4 +110,5 @@ class Colonia extends REST_Controller
         }
         $this->response($response);
     }
+    
 }

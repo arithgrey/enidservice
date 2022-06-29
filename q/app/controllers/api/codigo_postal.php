@@ -25,13 +25,41 @@ class codigo_postal extends REST_Controller
             if ($id_direccion > 0 && $this->id_usuario > 0) {
 
                 $response = $this->registra_direccion_usuario($this->id_usuario, $id_direccion);
-
             }
         }
         $this->response($response);
+    }
 
+    function costo_entrega_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "costo_entrega,id_codigo_postal")) {
+
+            $response = $this->codigo_postal_model->q_up(
+                "costo_entrega",
+                $param["costo_entrega"],
+                $param["id_codigo_postal"]
+            );
+        }
+        $this->response($response);
+    }
+    function costo_entrega_alcaldia_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "costo_entrega,nombre")) {
+
+            $response = $this->codigo_postal_model->set_costo_delegacion(
+                $param["nombre"], $param["costo_entrega"]);
+        }
+        $this->response($response);
     }
     
+
+
     function direccion_envio_pedido_POST()
     {
 
@@ -103,9 +131,7 @@ class codigo_postal extends REST_Controller
                 $registro = $this->agrega_direccion_a_compra($id_recibo, $id_direccion);
                 $identificacion = $this->identifica_direccion_entrega($id_recibo, 0, 2);
                 $response = $id_direccion;
-
             }
-
         }
         return $response;
     }
@@ -163,8 +189,8 @@ class codigo_postal extends REST_Controller
                     "asentamiento",
                     "asentamiento",
                     "asentamiento",
-                    "asentamiento");
-
+                    "asentamiento"
+                );
             } else {
 
 
@@ -174,7 +200,8 @@ class codigo_postal extends REST_Controller
                     "asentamiento",
                     "asentamiento",
                     "asentamiento",
-                    "asentamiento");
+                    "asentamiento"
+                );
             }
 
 
@@ -186,8 +213,8 @@ class codigo_postal extends REST_Controller
                     "municipio",
                     "municipio",
                     "municipio",
-                    "municipio");
-
+                    "municipio"
+                );
             } else {
 
                 $select_delegacion = create_select(
@@ -196,8 +223,8 @@ class codigo_postal extends REST_Controller
                     "municipio",
                     "municipio",
                     "municipio",
-                    "municipio");
-
+                    "municipio"
+                );
             }
 
             $data_complete["delegaciones"] = $select_delegacion;
@@ -211,7 +238,8 @@ class codigo_postal extends REST_Controller
                     "estado",
                     "estado",
                     "estado",
-                    "id_estado_republica");
+                    "id_estado_republica"
+                );
             } else {
 
                 $select_estado = create_select(
@@ -220,7 +248,8 @@ class codigo_postal extends REST_Controller
                     "estado",
                     "estado",
                     "estado",
-                    "id_estado_republica");
+                    "id_estado_republica"
+                );
             }
             $data_complete["estados"] = $select_estado;
 
@@ -234,7 +263,8 @@ class codigo_postal extends REST_Controller
                     "pais",
                     "pais",
                     "pais",
-                    "id_pais");
+                    "id_pais"
+                );
             } else {
                 $select_pais = create_select(
                     $pais,
@@ -242,11 +272,10 @@ class codigo_postal extends REST_Controller
                     "pais",
                     "pais",
                     "pais",
-                    "id_pais");
+                    "id_pais"
+                );
             }
             $data_complete["pais"] = $select_pais;
-
-
         }
         $this->response($data_complete);
     }
@@ -261,7 +290,6 @@ class codigo_postal extends REST_Controller
     {
 
         return ($this->app->is_logged_in() == 1) ? $this->id_usuario : $param["id_usuario"];
-
     }
 
     private function set_direcciones_usuario($id_usuario, $id_direccion, $direccion_principal)
@@ -294,8 +322,6 @@ class codigo_postal extends REST_Controller
             ];
             return $this->app->api("recibo/fecha_entrega/", $q, "json", "PUT");
         }
-
-
     }
 
     private function registra_direccion_usuario($id_usuario, $id_direccion)
