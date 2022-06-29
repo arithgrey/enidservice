@@ -1527,7 +1527,7 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
         $imagen_usuario,
         $opciones_menu,
     ];
-    $menu = d($extra_menu, 'dropdown dropleft');
+    $menu = d($extra_menu, 'dropdown dropleft drop-left-enid');
 
     return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 mt-3 mt-md-0");
 

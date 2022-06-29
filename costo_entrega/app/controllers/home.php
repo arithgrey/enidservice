@@ -18,8 +18,9 @@ class Home extends CI_Controller
 
         $data = $this->app->session();
         $param  = $this->input->get();
+        $es_administrador = es_administrador($data);
         
-        $data["in_session"] = 0;
+        $data["in_session"] = 1;
         $data["id_usuario"] = "";
         $data["nombre"] = "";
         $data["email"] = "";
@@ -37,6 +38,7 @@ class Home extends CI_Controller
         $data["footer_visible"] = "";
         $data["costo_entrega"] = $this->codigo_postal($param);
         $data["alcaldias"] = $this->app->api("delegacion/cobertura");
+        $data["es_administrador"] = $es_administrador;
         
         $data = $this->app->cssJs($data, "costo_entrega");
         $this->app->pagina($data, costos($param, $data), 1);
