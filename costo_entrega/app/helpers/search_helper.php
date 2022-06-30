@@ -13,17 +13,34 @@ if (!function_exists('invierte_date_time')) {
         $buscador_alcaldia[] = buscador_alcaldia($data);
 
         $response[] = d(_titulo('Calcula el costo de entrega de tu pedido'), 'col-sm-12 mb-5 mt-5');
-        $response[] = d(d("Tienes de dos"), 'col-sm-12 mb-5 mt-5 f13 underline strong blue_enid');
+        $response[] = d("Entregas gratis en Alcaldia Iztacalco, algunas colonias de Iztapalapa e igual algunos codigos postales de Nezahualcóyotl
+        ", 'col-sm-12 mb-5 mt-5 strong bg_black white f12 p-2');
         $response[] = d($buscador_alcaldia, 'col-md-6 border-right p-0');
         $response[] = d($buscador_cp, 'col-md-6  p-0');
         $response[] = form_costo_entrega();
         $response[] = form_costo_entrega_alcaldia($data["alcaldias"]);
+        $response[] = hr();
+        $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
+
+        
+        $ext = (is_mobile() ? "mt-5" : "top_400");
+        $response[] = d(hr(), _text_($ext , 'd-none sugerencias_titulo col-sm-12 '));
+        $response[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 ');
+        $response[] = d(
+            place("place_tambien_podria_interezar"),
+            "col-sm-12"
+        );
+
+        $response[] = d(hr(), 'mt-5 col-sm-12 ');
+        $response[] = d(botones_ver_mas(), 'mt-5');
+
         return d($response, 10, 1);
     }
 
     function buscador()
     {
-        $z[] = d(h("Ingresa tu código postal para saber el costo de tu entrega ", 4, "strong letter-spacing-15 mt-5 "));
+        $z[] = d("Ó también puedes");
+        $z[] = d(h("Ingresar tu código postal para saber el costo de tu entrega ", 4, "strong"));
         $z[] = "<form action='../costo_entrega' class='mt-5'>";
         $z[] = d(
             add_text(
@@ -58,10 +75,10 @@ if (!function_exists('invierte_date_time')) {
         );
         $texto_alcaldia = "Selecciona tu alcaldía para saber el costo de tu entrega ";
 
-        
-        $z[] =   d(h($texto_alcaldia, 4, "strong letter-spacing-15 mt-5 "));;
+
+        $z[] =   d(h($texto_alcaldia, 4, "strong  mt-5 "));;
         $z[] =  d($select_alcaldias, "mt-5 mb-5");
-        if($data["es_administrador"]){
+        if ($data["es_administrador"]) {
             $z[] = d("También puedes cambiar el costo de entrega por alcaldía", "costo_alcaldia cursor_pointer underline");
         }
         $z[] = hiddens(["class" => "es_administrador", "value" => $es_amministrador]);
@@ -96,7 +113,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $form[] = d(_titulo('¿Cual es el costo de entrega?'), 'text-center text-md-left');
-        
+
         $form[] = d("", "texto_colonia f12 strong mt-5");
         $form[] = d("", "texto_costo   mt-3");
 
@@ -129,14 +146,16 @@ if (!function_exists('invierte_date_time')) {
     function form_costo_entrega_alcaldia($alcaldias)
     {
 
-        $form[] = d(_titulo('¿Cual es el costo de entrega para esta alcaldía?'), 'text-center text-md-left');        
-        $form[] = d("", "texto_alcaldia f12 strong mt-5");        
+        $form[] = d(_titulo('¿Cual es el costo de entrega para esta alcaldía?'), 'text-center text-md-left');
+        $form[] = d("", "texto_alcaldia f12 strong mt-5");
 
-        $formulario[] = form_open("", 
-        [
-            "class" => "form_costo_entrega_alcaldia", 
-            "id" => "form_costo_entrega_alcaldia"
-        ]);
+        $formulario[] = form_open(
+            "",
+            [
+                "class" => "form_costo_entrega_alcaldia",
+                "id" => "form_costo_entrega_alcaldia"
+            ]
+        );
 
         $select_alcaldias  = create_select(
             $alcaldias,
@@ -151,7 +170,7 @@ if (!function_exists('invierte_date_time')) {
             'Selecciona una alcaldía'
         );
         $texto_alcaldia = "Selecciona la alcaldía";
-        $formulario[] =   d($texto_alcaldia , "strong");
+        $formulario[] =   d($texto_alcaldia, "strong");
         $formulario[] =  d($select_alcaldias, "mt-2 mb-5");
 
         $formulario[] = d(
@@ -168,7 +187,7 @@ if (!function_exists('invierte_date_time')) {
             'mt-5'
         );
 
-        
+
 
         $formulario[] = hiddens(["name" => "id_alcaldia", "class" => "id_alcaldia", "value" => 0]);
         $formulario[] = btn('Registrar', ['class' => 'mt-5']);
@@ -177,5 +196,35 @@ if (!function_exists('invierte_date_time')) {
         $form[] = d($formulario);
         $modal = append($form);
         return gb_modal($modal, "modal_costo_entrega_alcaldia");
+    }
+    function botones_ver_mas()
+    {
+
+        $link_productos =  format_link("Ver más promociones", [
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8), '&page=', rand(0, 5))),
+            "class" => "border",
+            "onclick" => "log_operaciones_externas(32)"
+        ]);
+
+        $link_facebook =  format_link("Facebook", [
+            "href" => path_enid("facebook", 0, 1),
+            "class" => "border mt-4",
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(33)"
+        ], 0);
+
+        $link_instagram =  format_link("Instagram", [
+            "href" => path_enid("fotos_clientes_instagram", 0, 1),
+            "class" => "border mt-4",
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(34)"
+        ], 0);
+
+
+        $response[] = d($link_productos, 4,1);
+        $response[] = d($link_facebook, 4,1);
+        $response[] = d($link_instagram, 4,1);
+
+        return append($response);
     }
 }
