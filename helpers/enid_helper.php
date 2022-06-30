@@ -1147,7 +1147,7 @@ function footer_opciones()
     $asistencia[] =  a_enid(
         '¿Costo de entrega?',
         [
-            'href' => path_enid('costo_entrega', 0, 1),
+            'href' => path_enid('costo_entrega'),
             'class' => 'black fp9',
             'target' => '_black'
         ]
