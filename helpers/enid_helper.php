@@ -1116,6 +1116,7 @@ function footer_opciones()
             'target' => '_black'
         ]
     );
+    
 
     $asistencia[] =  a_enid(
         'Pago',
@@ -1134,7 +1135,7 @@ function footer_opciones()
         ]
     );
 
-
+  
     $asistencia[] =  a_enid(
         'Clientes',
         [
@@ -1143,7 +1144,14 @@ function footer_opciones()
             'target' => '_black'
         ]
     );
-
+    $asistencia[] =  a_enid(
+        '¿Costo de entrega?',
+        [
+            'href' => path_enid('costo_entrega', 0, 1),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
     /**Oportunidades*/
     $oportunidades[] = _titulo('Oportunidades', 2);
     $oportunidades[] = a_enid(
