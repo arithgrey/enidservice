@@ -15,7 +15,7 @@ $(document).ready(() => {
     $ubicacion_delegacion.change(busqueda_colonia_ubicacion);
     $costo_alcaldia.click(registra_costo_por_alcaldia);
     $form_costo_entrega_alcaldia.submit(registro_costos_alcaldia);
-
+    carga_productos_sugeridos();
 });
 let busqueda_colonia_ubicacion = () => {
 
@@ -97,3 +97,18 @@ let response_actualizacion = (e) => {
     busqueda_colonia_ubicacion();
 }
 
+let carga_productos_sugeridos = () => {
+
+    let url = "../q/index.php/api/servicio/sugerencia/format/json/";
+    let q = get_parameter(".qservicio");
+    let data_send = {"id_servicio": 541};
+    request_enid("GET", data_send, url, response_carga_productos);
+};
+let response_carga_productos = data => {
+
+    if (data["sugerencias"] == undefined) {
+        $('.sugerencias_titulo').removeClass('d-none');
+        $(".text_interes").removeClass("hidden");
+        render_enid(".place_tambien_podria_interezar", data);
+    }
+};
