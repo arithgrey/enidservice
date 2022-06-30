@@ -28,11 +28,11 @@ if (!function_exists('invierte_date_time')) {
                 )
             ),
             _text(
-                d(_text("2.-", strong("Agendar tu pedido en un horario de 8AM a 5PM")), 'mt-5')                
+                d(_text("2.-", strong("Agendar tu pedido en un horario de 8AM a 5PM")), 'mt-5')
             ),
-            
+
             _text(
-                
+
                 d("El tiempo promedio de entrega una vez que realices tu pedido es de 1 hora con 30 minutos, este tiempo puede aumentar o bajar de acuerdo a 
                 la distancia entre tu ubicación y nuetro centro de distribución, en cuanto uno de nuestros 
                 repartidores 
@@ -48,18 +48,27 @@ if (!function_exists('invierte_date_time')) {
                         "target" => "_black"
                     ]
                 )
+            ),
+
+            d(
+                format_link(
+                    "Costos de entrega",
+                    [
+                        "href" => path_enid("clientes"),
+                        "target" => "_black",
+                        "class" =>  "mt-3"
+                    ]
+                )
             )
+
+
 
         );
 
         $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
-        
+
 
 
         return d($r, 6, 1);
     }
-
-    
-
-    
 }

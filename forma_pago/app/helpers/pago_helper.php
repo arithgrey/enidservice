@@ -44,7 +44,6 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 )
             )
-
         );
 
         $r[] = d($str, " d-flex flex-column justify-content-between mh_300");

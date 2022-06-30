@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use BaconQrCode\Renderer\Path\Path;
+
+ if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
     function render($data)
@@ -99,6 +103,17 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($link_descuento);
+        
+        $link_costo_entrega = a_enid(
+            "Calcula el costo de entrega para tus clientes",
+            [
+                "href" => path_enid("costo_entrega"),
+                "class" => "black underline"
+            ]
+        );
+
+        $r[] = d($link_costo_entrega);
+
         $r[] = d($texto, 'mt-5');
 
 
