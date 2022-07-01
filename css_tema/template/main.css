@@ -1,3 +1,6 @@
+.super_index{
+    z-index: 9!important;
+}
 .zindex-2{
     z-index: 10;
     margin-top: -30px!important;
@@ -1395,9 +1398,8 @@ html {
     box-sizing: border-box;
 
 }
-
 .hps:hover {
-    border: 1px solid #15abc4 !important;
+    border: 1px solid #000 !important;
 }
 
 h3 {
@@ -1870,8 +1872,8 @@ input:focus:invalid {
 .h_310 {
     height: 310px !important;
 }
-.h_330 {
-    height: 330px !important;
+.h_345 {
+    height: 345px !important;
 }
 
 ul li a {
