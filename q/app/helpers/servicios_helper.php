@@ -1220,29 +1220,41 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
-    function create_vista($s, $agregar_servicio = 0 , $es_recompensa = 0)
-    {
-        $precio = $s["precio"];
-        $id_servicio = $s["id_servicio"];
-        $in_session = $s["in_session"];
-        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
-        $path_servicio = get_url_servicio($id_servicio);
+    function formato_producto($es_recompensa, $servicio){
+        
+        $precio = $servicio["precio"];
+        $id_servicio = $servicio["id_servicio"];
+        
+        
         $texto_precio = d(money($precio),'f12 p-1 bg_black white mt-2');
-        $texto_nombre = d(substr($s["nombre_servicio"], 0, 52) , "fp8 text-uppercase black mt-2");
+        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52) , "fp8 text-uppercase black mt-2");
         $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column" );
+
 
         $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" : 
                 "d-block mh_250 mh_230 mh_sm_310 mx-auto mt-3";
 
         $img = img(
             [
-                'src' => $s["url_img_servicio"],
-                'alt' => $s["metakeyword"],
+                'src' => $servicio["url_img_servicio"],
+                'alt' => $servicio["metakeyword"],
                 'class' => $clases_imagen,
                 'id' => $id_servicio
             ]
         );
-        $img = flex($img, $texto_precio_nombre, "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5");
+        return flex(
+            $img, $texto_precio_nombre, 
+            "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5");
+
+    }
+    function create_vista($s, $agregar_servicio = 0 , $es_recompensa = 0)
+    {
+        
+        $id_servicio = $s["id_servicio"];
+        $in_session = $s["in_session"];
+        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
+        $path_servicio = get_url_servicio($id_servicio);       
+        $img = formato_producto($es_recompensa, $s);
 
         if ($in_session > 0 && $es_recompensa < 1) {
 
@@ -2325,24 +2337,19 @@ if (!function_exists('invierte_date_time')) {
         $imagenes = [];
         foreach ($array_servicios as $row) {
 
-            $img = img(
-                [
-                    'src' => $row["url_img_servicio"],
-                    'alt' => $row["metakeyword"],
-                    'class' => 'mx-auto d-block p-1 mah_100_p mh_250'
-                ]
-            );
 
+            $img = formato_producto(0, $row);        
             $imagenes[] = a_enid(
                 $img,
                 [
                     "href" => path_enid("producto", $row["id_servicio"]),
-                    "class" => "col-lg-3 hps top_50 p-1 d-flex align-content-center flex-wrap h_310",
+                    "class" => "col-lg-3 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
                 ]
             );
-
+            
         }
 
+        
         return append($imagenes);
     }
 

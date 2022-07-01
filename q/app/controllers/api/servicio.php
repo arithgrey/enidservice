@@ -1948,6 +1948,7 @@ class Servicio extends REST_Controller
 
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
+            
 
             if (es_data($servicios)) {
 
