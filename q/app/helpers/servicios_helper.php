@@ -1243,7 +1243,7 @@ if (!function_exists('invierte_date_time')) {
                 'id' => $id_servicio
             ]
         );
-        $img = flex($img, $texto_precio_nombre, "flex-column");
+        $img = flex($img, $texto_precio_nombre, "flex-column mx-auto");
 
         if ($in_session > 0 && $es_recompensa < 1) {
 
