@@ -1228,7 +1228,7 @@ if (!function_exists('invierte_date_time')) {
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $path_servicio = get_url_servicio($id_servicio);
         $texto_precio = d(money($precio),'f12 p-1 bg_black white mt-2');
-        $texto_nombre = d(substr($s["nombre_servicio"], 0, 48) , "fp8 text-uppercase black mt-2");
+        $texto_nombre = d(substr($s["nombre_servicio"], 0, 52) , "fp8 text-uppercase black mt-2");
         $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column" );
 
         $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" : 
@@ -1302,7 +1302,7 @@ if (!function_exists('invierte_date_time')) {
                     $img,
                     [
                         "href" => $path_servicio,
-                        "class" => "col-lg-3 hps h_330 p-1 mh-auto top_50 bottom_50 border border-primary"
+                        "class" => "col-lg-3 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
                     ]
             );
                 

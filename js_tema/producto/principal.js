@@ -10,7 +10,7 @@ let $form_costo = $(".form_costo");
 
 $(document).ready(function () {
 
-    //costos_precios_servicio
+    
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
@@ -289,6 +289,8 @@ let costos_precios_servicio = function(e){
 
     let $id = $(this).attr('id');
     $("#gb_costos_precios").modal("show");
+    $(".modal-backdrop").addClass("super_index");
+
 
 }
 let costo_servicio = function(e){
