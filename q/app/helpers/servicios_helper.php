@@ -1227,12 +1227,12 @@ if (!function_exists('invierte_date_time')) {
         $in_session = $s["in_session"];
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $path_servicio = get_url_servicio($id_servicio);
-        $texto_precio = d(money($precio),'f12 p-1 bg-light black');
-        $texto_nombre = d(substr($s["nombre_servicio"], 0, 48) , "fp8 text-uppercase black");
+        $texto_precio = d(money($precio),'f13 p-1 bg_black white mt-2');
+        $texto_nombre = d(substr($s["nombre_servicio"], 0, 48) , "fp8 text-uppercase black mt-2");
         $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column" );
 
-        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto" : 
-                "d-block mh_250 mh_230 mh_sm_310 mx-auto";
+        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" : 
+                "d-block mh_250 mh_230 mh_sm_310 mx-auto mt-3";
 
         $img = img(
             [
@@ -1302,7 +1302,7 @@ if (!function_exists('invierte_date_time')) {
                     $img,
                     [
                         "href" => $path_servicio,
-                        "class" => "col-lg-3 hps h_310 p-1 mh-auto top_50"
+                        "class" => "col-lg-3 hps h_330 p-1 mh-auto top_50 border"
                     ]
             );
                 
