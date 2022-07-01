@@ -893,7 +893,7 @@ class Servicio extends REST_Controller
             $param["vendedor"] = 0;
 
             $servicios = $this->get_servicios_empresa($param);
-
+            
             if (es_data($servicios) && array_key_exists('num_servicios', $servicios)) {
 
                 $response = $this->get_view_empresa($servicios, $param);
@@ -981,6 +981,7 @@ class Servicio extends REST_Controller
         }
 
 
+        
         $lista_productos = $this->agrega_vista_servicios($servicios["servicios"], 0, [], 1);
         $config_paginacion = $this->app->paginacion($config);
         return get_base_empresa($config_paginacion, $busqueda, $num_servicios, $lista_productos);

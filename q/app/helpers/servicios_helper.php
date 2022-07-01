@@ -1222,13 +1222,16 @@ if (!function_exists('invierte_date_time')) {
 
     function create_vista($s, $agregar_servicio = 0 , $es_recompensa = 0)
     {
+        $precio = $s["precio"];
         $id_servicio = $s["id_servicio"];
         $in_session = $s["in_session"];
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $path_servicio = get_url_servicio($id_servicio);
+        $texto_precio = d(money($precio),'f12 p-1 bg-light black');
+        $texto_nombre = d(substr($s["nombre_servicio"], 0, 52) , "fp8 text-uppercase black");
+        $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column");
 
-
-        $classes = ($es_recompensa > 0) ? "producto_en_recompensa 
+        $clases = ($es_recompensa > 0) ? "producto_en_recompensa 
                 mx-auto my-auto d-block p-1 mh-auto mt-5" : 
                 "mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310 mh-auto mt-5 ";
 
@@ -1236,10 +1239,11 @@ if (!function_exists('invierte_date_time')) {
             [
                 'src' => $s["url_img_servicio"],
                 'alt' => $s["metakeyword"],
-                'class' => $classes,
+                'class' => $clases,
                 'id' => $id_servicio
             ]
         );
+        $img = flex($img, $texto_precio_nombre, "flex-column");
 
         if ($in_session > 0 && $es_recompensa < 1) {
 
@@ -1288,8 +1292,9 @@ if (!function_exists('invierte_date_time')) {
 
             if ($es_recompensa > 0 ) {
             
-                $class = 
-                "col-lg-3 hps mt-5 mx-auto my-auto d-flex align-content-center flex-wrap"; 
+                $class = "col-lg-3 hps mt-5 
+                mx-auto my-auto d-flex align-content-center flex-wrap"; 
+
                 $response = d($img,  $class );    
 
             }else{

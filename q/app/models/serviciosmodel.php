@@ -767,7 +767,7 @@ class serviciosmodel extends CI_Model
             $query_create = _text_("CREATE TABLE tmp_producto_$_num IGNORE AS 
                 SELECT  id_servicio, nombre_servicio, id_usuario, descripcion, marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
-                tercer_nivel , cuarto_nivel , quinto_nivel, es_publico FROM servicio ", $where);
+                tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, precio FROM servicio ", $where);
             $response = $this->db->query($query_create);
 
         }
