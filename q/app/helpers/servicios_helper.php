@@ -1227,13 +1227,13 @@ if (!function_exists('invierte_date_time')) {
         $in_session = $s["in_session"];
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $path_servicio = get_url_servicio($id_servicio);
-        $texto_precio = d(money($precio),'f12 p-1 bg-light black');
-        $texto_nombre = d(substr($s["nombre_servicio"], 0, 52) , "fp8 text-uppercase black");
+        $texto_precio = d(money($precio),'f12 p-1 bg-light black ');
+        $texto_nombre = d(substr($s["nombre_servicio"], 0, 40) , "fp7 text-uppercase black");
         $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column");
 
         $clases = ($es_recompensa > 0) ? "producto_en_recompensa 
-                mx-auto my-auto d-block p-1 mh-auto mt-5" : 
-                "mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310 mh-auto mt-5 ";
+                mx-auto my-auto d-block p-1 mh-auto mt-5 mb-5" : 
+                "mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310 mh-auto mt-5 mb-5 ";
 
         $img = img(
             [
@@ -1282,7 +1282,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = d($response,
-                "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
+                "d-flex flex-column justify-content-center col-lg-3 mt-5 mb-5 px-3"
             );
 
         } else {
@@ -1292,13 +1292,13 @@ if (!function_exists('invierte_date_time')) {
 
             if ($es_recompensa > 0 ) {
             
-                $class = "col-lg-3 hps mt-5 
+                $class = "col-lg-3 hps mt-5 mb-5 
                 mx-auto my-auto d-flex align-content-center flex-wrap"; 
 
                 $response = d($img,  $class );    
 
             }else{
-                $class = "col-lg-3 hps mt-5 mx-auto my-auto d-flex align-content-center flex-wrap h_310"; 
+                $class = "col-lg-3 hps mt-5 mb-5 mx-auto my-auto d-flex align-content-center flex-wrap h_310"; 
                 $response = a_enid(
                     $img,
                     [
