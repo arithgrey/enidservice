@@ -1227,23 +1227,22 @@ if (!function_exists('invierte_date_time')) {
         $in_session = $s["in_session"];
         $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $path_servicio = get_url_servicio($id_servicio);
-        $texto_precio = d(money($precio),'f12 p-1 bg-light black ');
-        $texto_nombre = d(substr($s["nombre_servicio"], 0, 40) , "fp7 text-uppercase black");
-        $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column");
+        $texto_precio = d(money($precio),'f12 p-1 bg-light black');
+        $texto_nombre = d(substr($s["nombre_servicio"], 0, 48) , "fp8 text-uppercase black");
+        $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column" );
 
-        $clases = ($es_recompensa > 0) ? "producto_en_recompensa 
-                mx-auto my-auto d-block p-1 mh-auto mt-5 mb-5" : 
-                "mx-auto my-auto d-block p-1 mh_270 mh_250 mh_sm_310 mh-auto mt-5 mb-5 ";
+        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto" : 
+                "d-block mh_250 mh_230 mh_sm_310 mx-auto";
 
         $img = img(
             [
                 'src' => $s["url_img_servicio"],
                 'alt' => $s["metakeyword"],
-                'class' => $clases,
+                'class' => $clases_imagen,
                 'id' => $id_servicio
             ]
         );
-        $img = flex($img, $texto_precio_nombre, "flex-column");
+        $img = flex($img, $texto_precio_nombre, "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5");
 
         if ($in_session > 0 && $es_recompensa < 1) {
 
@@ -1282,7 +1281,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = d($response,
-                "d-flex flex-column justify-content-center col-lg-3 mt-5 mb-5 px-3"
+                "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
             );
 
         } else {
@@ -1292,18 +1291,18 @@ if (!function_exists('invierte_date_time')) {
 
             if ($es_recompensa > 0 ) {
             
-                $class = "col-lg-3 hps mt-5 mb-5 
-                mx-auto my-auto d-flex align-content-center flex-wrap"; 
+                $class = "col-lg-3 hps mt-5 
+                mx-auto my-auto d-flex align-content-center flex-wrap p-1"; 
 
                 $response = d($img,  $class );    
 
             }else{
-                $class = "col-lg-3 hps mt-5 mb-5 mx-auto my-auto d-flex align-content-center flex-wrap h_310"; 
+                
                 $response = a_enid(
                     $img,
                     [
                         "href" => $path_servicio,
-                        "class" => $class,
+                        "class" => "col-lg-3 hps h_310 p-1 mh-auto top_50"
                     ]
             );
                 

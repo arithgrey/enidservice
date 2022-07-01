@@ -1520,6 +1520,11 @@ h5 {
 
     min-height: 350px;
 }
+.mh_230 {
+
+    min-height: 230px;
+}
+
 
 .mh_250 {
 
@@ -1544,6 +1549,11 @@ h5 {
 .mh_270 {
 
     max-height: 270px !important;
+}
+
+.mh_250 {
+
+    max-height: 250px !important;
 }
 
 .mh_500 {
