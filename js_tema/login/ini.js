@@ -97,6 +97,9 @@ $(document).ready(function () {
 
     $icono_mostrar_password.click(mostrar_password);
     $icono_ocultar_password.click(ocultar_password);
+    
+    verifica_formato_default_inputs(1);
+
 });
 
 
