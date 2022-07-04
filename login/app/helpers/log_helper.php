@@ -143,7 +143,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "email",
                 "placeholder" => "CORREO",
                 "class" => "email registro_email ",
-                "type" => "email",
+                "type" => "email",                
                 "required" => true,
                 "onkeypress" => "minusculas(this);",
                 "id" => "registro_email",
@@ -345,7 +345,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 "type" => "email",
                 "name" => 'mail',
-                "id" => "mail_acceso",
+                "id" => "mail_acceso",                
                 "onkeypress" => "minusculas(this);",
                 "placeholder" => "Aquí va tu email",
             ], _text_correo

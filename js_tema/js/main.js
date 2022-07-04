@@ -47,10 +47,7 @@ $("footer").ready(() => {
         $(".input_enid_format :input").focus(next_label_input_focus);
         $(".input_enid_format :input").change(next_label_input_focus);
 
-    }
-
-
-    verifica_formato_default_inputs();
+    }    
 
     if (document.body.querySelector('form')) {
         $('form').submit(function () {
@@ -61,6 +58,8 @@ $("footer").ready(() => {
     $(".whatsapp_trigger").click(function (){
         log_operaciones_externas(17);
     });
+
+    verifica_formato_default_inputs();
 
 
 });
