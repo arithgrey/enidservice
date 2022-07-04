@@ -98,7 +98,11 @@ $(document).ready(function () {
     $icono_mostrar_password.click(mostrar_password);
     $icono_ocultar_password.click(ocultar_password);
     
+    $(".input_enid_format :input").focus(next_label_input_focus);
+    $(".input_enid_format :input").change(next_label_input_focus);
+
     verifica_formato_default_inputs(1);
+
 
 });
 
