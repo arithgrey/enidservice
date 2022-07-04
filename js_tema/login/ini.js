@@ -38,7 +38,8 @@ let $tiene_moto = $form_registro.find('.tiene_moto');
 let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
 let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
 let $link_como_vender = $form_registro.find('.link_como_vender');
-
+let $label_mail_acceso = $(".label_mail_acceso");
+let $label_pw = $(".label_pw");
 $(document).ready(function () {
 
     $('footer').ready(valida_seccion_inicial);
@@ -103,6 +104,9 @@ $(document).ready(function () {
 
     verifica_formato_default_inputs(1);
 
+    $label_mail_acceso.addClass("focused_input");
+    $label_pw.addClass("focused_input");
+    
 
 });
 

@@ -47,7 +47,10 @@ $("footer").ready(() => {
         $(".input_enid_format :input").focus(next_label_input_focus);
         $(".input_enid_format :input").change(next_label_input_focus);
 
-    }    
+    }
+
+
+    verifica_formato_default_inputs();
 
     if (document.body.querySelector('form')) {
         $('form').submit(function () {
@@ -58,8 +61,6 @@ $("footer").ready(() => {
     $(".whatsapp_trigger").click(function (){
         log_operaciones_externas(17);
     });
-
-    verifica_formato_default_inputs();
 
 
 });
@@ -1055,7 +1056,7 @@ let next_error = function ($selector, despliega = 1) {
 
 };
 let verifica_formato_default_inputs = function (validacion = 1) {
-    
+
     if (document.body.querySelector(".input_enid_format")) {
         let input_enid_format = $('.input_enid_format :input');
         for (let i = 0; i < input_enid_format.length; i++) {
@@ -1063,10 +1064,8 @@ let verifica_formato_default_inputs = function (validacion = 1) {
             if ($selector_input.tagName == "INPUT") {
 
                 if (validacion > 0) {
-                    
+
                     if ($selector_input.value.length > 0) {
-                        console.log("Entro !!!");
-                        console.log($selector_input.value);
                         let $selector_current_label = $selector_input.nextSibling;
                         $selector_current_label.classList.add('focused_input');
                     }
