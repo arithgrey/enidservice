@@ -336,4 +336,5 @@
             </div>
         </div>
     </div>
+    <?=botones_ver_mas()?>
 </div>
