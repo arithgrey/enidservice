@@ -179,6 +179,32 @@
     </div>
 
     <div class="row mt-5">
+        <div class="col-md-12 col-sm-12 col-12">
+            <hr>
+            <div class="row d-flex justify-content-between align-items-center">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>
+                                4.- ¿No sabes como iniciar? obtén respuestas sugeridas a preguntas de tus clientes 
+                            </h4>
+                        </div>
+                        <div class="col-md-12">
+                            <img src="../img_tema/clientes/paso-extra.png">
+                        </div>
+                        <div class="col-md-12">
+                            <img src="../img_tema/clientes/pago-extra-1.png">
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row mt-5">
         <div class="col-sm-12">
             <hr>
             <div class="row d-flex justify-content-between align-items-center">
@@ -187,7 +213,7 @@
                 </div>
                 <div class="col-md-8 mt-5">
                     <h4>
-                        4.- Agenda tus pedidos
+                        5.- Agenda tus pedidos
                     </h4>
                     <p class="fp9 black">
                         Para que podamos hacer llegar sus pedidos a tus clientes,
@@ -222,7 +248,7 @@
             <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-md-8">
                     <h4 class="mb-5">
-                        5.- Indica tiempos de entrega a tus clientes
+                        6.- Indica tiempos de entrega a tus clientes
                     </h4>
                     <h5 class="fp9">
                         Ofrecemos la oportunidad de que los clientes
@@ -266,7 +292,7 @@
                 </div>
                 <div class="col-md-8 mt-5">
                     <h4 class="mb-5">
-                        6.- Recibe tus comisiones
+                        7.- Recibe tus comisiones
                     </h4>
                     <h5 class="fp9">
                         - Es necesario indiques algunos datos en nuestro sitio,
@@ -285,7 +311,7 @@
             <div class="row d-flex justify-content-between align-items-center">
                 <div class="col-md-8">
                     <h4 class="mb-5">
-                        7.- Asegurate de ofrecer más artículos a tus clientes
+                        8.- Asegurate de ofrecer más artículos a tus clientes
                     </h4>
                     <h5 class="fp9">
                         Sabemos que nuestros nuevos clientes se siente felices de comprar
