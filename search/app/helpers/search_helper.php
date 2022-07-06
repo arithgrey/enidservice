@@ -47,6 +47,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($fil, "col-lg-12 mt-md-5");
         $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
         $r[] = append($cat);
+        
         return append($r);
 
 
@@ -55,12 +56,13 @@ if (!function_exists('invierte_date_time')) {
     function sin_resultados($param)
     {
 
-        $r[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
-        $r[] = d(h('"' . prm_def($param, "q", "") . '".', 4, "strong letter-spacing-15 fz_30"));
-        $r[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
+        $textos[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
+        $textos[] = d(h('"' . prm_def($param, "q", "") . '".', 4, "strong letter-spacing-15 fz_30"));
+        $textos[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
 
-        $z[] = "<form action='../search' class='mt-5'>";
-        $z[] = d(
+        $response[] = d($textos, 'col-sm-12 mt-5');
+        $formulario[] = "<form action='../search' >";
+        $formulario[] = d(
             add_text(
                 icon('fa fa-search icon'),
                 input([
@@ -69,17 +71,60 @@ if (!function_exists('invierte_date_time')) {
                     "name" => "q"
                 ])
             )
-            , "input-icons col-lg-6 row");
-        $z[] = form_close();        
-        $ext = (is_mobile() < 1) ? "" : "top_200";
-        $r[] = d($z, "mt-5 " . $ext);
-                
+            , "input-icons");
+        $formulario[] = form_close(); 
+
         
-        return d($r, " mt-5 col-lg-10 col-lg-offset-1", 1);
+        $response[] = d($formulario, "col-lg-6" );
+        
+
+        $otros_articulos_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);        
+        $response[] = d($otros_articulos_titulo, 'top_100 d-none sugerencias_titulo col-sm-12 ');
+
+        $response[] = d(
+            place("place_tambien_podria_interezar"),
+            "col-lg-12"
+            
+        );
+        
+        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
+        $response[] = d(botones_ver_mas(), 'mt-5 col-sm-12 d-none otros');
+        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
+        
+        return d(d($response,13),10,1);
 
 
     }
+    function botones_ver_mas()
+    {
 
+        $link_productos =  format_link("Ver más promociones", [
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8), '&page=', rand(0, 5))),
+            "class" => "border",
+            "onclick" => "log_operaciones_externas(32)"
+        ]);
+
+        $link_facebook =  format_link("Facebook", [
+            "href" => path_enid("facebook", 0, 1),
+            "class" => "border mt-4",
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(33)"
+        ], 0);
+
+        $link_instagram =  format_link("Instagram", [
+            "href" => path_enid("fotos_clientes_instagram", 0, 1),
+            "class" => "border mt-4",
+            'target' => 'blank_',
+            "onclick" => "log_operaciones_externas(34)"
+        ], 0);
+
+
+        $response[] = d($link_productos, 4,1);
+        $response[] = d($link_facebook, 4,1);
+        $response[] = d($link_instagram, 4,1);
+
+        return d($response,13);
+    }
     function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
     {
 

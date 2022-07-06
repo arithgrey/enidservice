@@ -77,7 +77,7 @@ class Home extends CI_Controller
     private function sin_resultados($param)
     {
 
-        $data["css"] = ["search_sin_encontrar.css"];
+        
         $data["in_session"] = 0;
         $data["id_usuario"] = "";
         $data["nombre"] = "";
@@ -94,6 +94,9 @@ class Home extends CI_Controller
         $data["clasificaciones_departamentos"] = "";
         $data["proceso_compra"] = "";
         $data["footer_visible"] = "";
+        
+        $data = $this->app->cssJs($data, "sin_encontrar");
+
         $this->app->pagina($data, sin_resultados($param), 1);
     }
 
@@ -146,6 +149,7 @@ class Home extends CI_Controller
         $data["filtros"] = get_orden();
         $data["order"] = $data_send["order"];
         $this->create_keyword($data_send);
+        
         $this->app->pagina($data, render_search($data), 1);
     }
 
