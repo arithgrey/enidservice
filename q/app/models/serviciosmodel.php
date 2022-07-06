@@ -450,6 +450,7 @@ class serviciosmodel extends CI_Model
                     descripcion LIKE '%" . $q . "%'
                     OR 
                     precio = '" . $q . "'                     
+                    
                 )
                 " : "";
 
@@ -492,40 +493,42 @@ class serviciosmodel extends CI_Model
         switch ($param["order"]) {
                 /*Novedades primero*/
             case 1:
-                return " ORDER BY   fecha_registro DESC, deseado DESC ,  vista DESC";
+                return " ORDER BY fecha_registro DESC , deseado DESC , vista DESC";
                 break;
 
             case 2:
-                return " ORDER BY  deseado DESC , vista  DESC";
+                return " ORDER BY deseado DESC , vista  DESC";
                 break;
-
+                
+                /*Calificado*/
             case 3:
                 return " ORDER BY valoracion DESC , deseado DESC , vista DESC";
                 break;
 
             case 4:
-                return " ORDER BY vista DESC, deseado DESC , valoracion DESC";
+                return " ORDER BY deseado DESC , vista DESC, valoracion DESC";
                 break;
 
             case 5:
-                return " ORDER BY precio DESC, deseado DESC";
+                return " ORDER BY precio DESC, deseado DESC , vista DESC";
                 break;
 
             case 6:
-                return " ORDER BY precio ASC, deseado DESC";
+                return " ORDER BY precio ASC, deseado DESC , vista DESC";
                 break;
 
             case 7:
-                return " ORDER BY nombre_servicio ASC , deseado DESC";
+                return " ORDER BY nombre_servicio ASC, deseado DESC , vista DESC";
                 break;
 
             case 8:
-                return " ORDER BY nombre_servicio  DESC , deseado ASC";
+                return " ORDER BY nombre_servicio DESC, deseado DESC , vista DESC";
                 break;
 
             case 9:
                 return
-                    " AND flag_servicio = 1 ORDER BY  deseado DESC , vista  DESC , valoracion DESC";
+                    " AND flag_servicio = 1 
+                    ORDER BY deseado DESC , vista  DESC , valoracion DESC";
                 break;
 
             case 10:
@@ -533,7 +536,7 @@ class serviciosmodel extends CI_Model
                 break;
 
             case 11:
-                return " ORDER BY  deseado DESC, vista  DESC ";
+                return " ORDER BY  deseado DESC, vista DESC ";
                 break;
 
             default:
@@ -705,18 +708,9 @@ class serviciosmodel extends CI_Model
 
         $data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
         $busqueda = $this->get_resultados_posibles($param);
-        $data_complete["total_busqueda"] = $busqueda['num_servicios'];
-        $where = $busqueda['where'];
-        $_num = mt_rand();
-        $this->create_productos_disponibles(0, $_num, $where);
-        $query_get = "SELECT * FROM tmp_producto_$_num";
-        $result = $this->db->query($query_get);
-        $servicios = $result->result_array();
-        $data_complete["servicio"] = $servicios;
-        if ($param["agrega_clasificaciones"] > 0) {
-            $data_complete["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
-        }
-        $this->create_productos_disponibles(1, $_num, $where);
+        $data_complete["total_busqueda"] = $busqueda['num_servicios'];        
+        $data_complete["servicio"] = $this->create_productos_disponibles($busqueda['where']);
+                
         return $data_complete;
     }
 
