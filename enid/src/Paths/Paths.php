@@ -908,7 +908,18 @@ class Paths
                 "pagina" => 9,
 
             ],
+            "sin_encontrar" => [
 
+                "js" =>
+                [
+                    "sin_encontrar/principal.js",
+                ],
+                "css" =>
+                [
+                    "search_sin_encontrar.css"
+                ]
+
+            ],
             "conexiones" =>
             [
                 "js" =>

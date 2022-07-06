@@ -1,6 +1,7 @@
 "use strict";
 $(document).ready(() => {
     $(".order").change(filtro);
+
 });
 
 let filtro = () => {
