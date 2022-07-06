@@ -101,21 +101,21 @@ if (!function_exists('invierte_date_time')) {
         $link_productos =  format_link("Ver más promociones", [
             "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8), '&page=', rand(0, 5))),
             "class" => "border",
-            "onclick" => "log_operaciones_externas(32)"
+            "onclick" => "log_operaciones_externas(39)"
         ]);
 
         $link_facebook =  format_link("Facebook", [
             "href" => path_enid("facebook", 0, 1),
             "class" => "border mt-4",
             'target' => 'blank_',
-            "onclick" => "log_operaciones_externas(33)"
+            "onclick" => "log_operaciones_externas(40)"
         ], 0);
 
         $link_instagram =  format_link("Instagram", [
             "href" => path_enid("fotos_clientes_instagram", 0, 1),
             "class" => "border mt-4",
             'target' => 'blank_',
-            "onclick" => "log_operaciones_externas(34)"
+            "onclick" => "log_operaciones_externas(41)"
         ], 0);
 
 
