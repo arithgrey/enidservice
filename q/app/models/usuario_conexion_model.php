@@ -70,6 +70,8 @@ class Usuario_conexion_model extends CI_Model
                     u.id != $id_seguidor 
                     AND
                     up.idperfil IN (3,6)                     
+                    AND
+                    u.ha_vendido > 0
                     AND 
                     u.status > 0                     
                     AND  
