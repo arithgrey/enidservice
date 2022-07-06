@@ -1,24 +1,25 @@
-<?php use function Sodium\add;
+<?php
+
+use function Sodium\add;
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    
+
     function render_search($data)
     {
 
         $paginacion = $data["paginacion"];
         $is_mobile = $data["is_mobile"];
-        $categorias_destacadas = $data["categorias_destacadas"];    
-        
-        $response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas),13);
-        $response[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);        
-        $response[] = d($data["lista_productos"], 13);
-        $response[] = d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)),13);
-                
-        return d($response,12);
+        $categorias_destacadas = $data["categorias_destacadas"];
 
+        $response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 13);
+        $lista_productos[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
+        $lista_productos[] = d($data["lista_productos"], 13);
+        $response[] = d(d($lista_productos, 10, 1), 13);
+        $response[] = d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 13);
 
+        return d($response, 12);
     }
 
     function sin_resultados($param)
@@ -38,30 +39,29 @@ if (!function_exists('invierte_date_time')) {
                     "placeholder" => "buscar",
                     "name" => "q"
                 ])
-            )
-            , "input-icons");
-        $formulario[] = form_close(); 
+            ),
+            "input-icons"
+        );
+        $formulario[] = form_close();
 
-        
-        $response[] = d($formulario, "col-lg-6" );
-        
 
-        $otros_articulos_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);        
+        $response[] = d($formulario, "col-lg-6");
+
+
+        $otros_articulos_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
         $response[] = d($otros_articulos_titulo, 'top_100 d-none sugerencias_titulo col-sm-12 ');
 
         $response[] = d(
             place("place_tambien_podria_interezar"),
             "col-lg-12"
-            
+
         );
-        
+
         $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
         $response[] = d(botones_ver_mas(), 'mt-5 col-sm-12 d-none otros');
         $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
-        
-        return d(d($response,13),10,1);
 
-
+        return d(d($response, 13), 10, 1);
     }
     function botones_ver_mas()
     {
@@ -87,11 +87,11 @@ if (!function_exists('invierte_date_time')) {
         ], 0);
 
 
-        $response[] = d($link_productos, 4,1);
-        $response[] = d($link_facebook, 4,1);
-        $response[] = d($link_instagram, 4,1);
+        $response[] = d($link_productos, 4, 1);
+        $response[] = d($link_facebook, 4, 1);
+        $response[] = d($link_instagram, 4, 1);
 
-        return d($response,13);
+        return d($response, 13);
     }
     function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
     {
@@ -100,9 +100,7 @@ if (!function_exists('invierte_date_time')) {
         $filtro = filtro($filtros, $order);
         $extra = ($is_mobile) ? 'w-100' : '';
         return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 p-0') :
-            flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0',$extra);
-
-
+            flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0', $extra);
     }
 
 
@@ -111,14 +109,14 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = '<select class="form-control order border border-dark filtro_orden_categorias " name="order" id="order">';
         $a = 0;
-        foreach ($filtros as $row):
+        foreach ($filtros as $row) :
             $str = strtoupper($row);
-            if ($a == $order):
+            if ($a == $order) :
 
                 $r[] = '<option value="' . $a . '" selected>';
                 $r[] = $str;
                 $r[] = '</option>';
-            else:
+            else :
                 $r[] = '<option value="' . $a . '">';
                 $r[] = $str;
                 $r[] = '</option>';
@@ -129,7 +127,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = '</select>';
 
         return append($r);
-
     }
 
     function get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas)
@@ -140,22 +137,21 @@ if (!function_exists('invierte_date_time')) {
         if ($is_mobile < 1) {
 
 
-            foreach (crea_menu_principal_web($categorias_destacadas) as $row):
+            foreach (crea_menu_principal_web($categorias_destacadas) as $row) :
 
                 $nombre = explode(' ', $row["nombre_clasificacion"])[0];
-                $r[] = d(a_enid(
-                            $nombre,
-                            [
-                                "href" => "?q=&q2=" . $row['primer_nivel'],
-                                "class" => "categorias_mas_vistas "
-                            ],0
-                        ),2);
+                $response[] = d(a_enid(
+                    $nombre,
+                    [
+                        "href" => "?q=&q2=" . $row['primer_nivel'],
+                        "class" => "categorias_mas_vistas "
+                    ],
+                    0
+                ), 2);
             endforeach;
-
+            $r[]=  d($response, 'contenedor_anuncios_home d-flex w-100 text-center mb-5 p-3');
         }
-        return d($r, 'contenedor_anuncios_home d-flex w-100 text-center mb-5 p-3');
-
-
+        return append($r);
     }
 
     function get_formar_menu_sugerencias($is_mobile, $b_busqueda, $busqueda)
@@ -192,7 +188,6 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = $bloque_quinto_nivel["html"];
             }
             $response = d($r, "contenedor_sub_categorias");
-
         }
         return d(d($response, 'contenedor_menu_productos_sugeridos p-3 bg_white'), "d-none d-md-block  mt-md-5 w-100");
     }
@@ -203,7 +198,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($param as $row) {
 
-            $response [] = a_enid(
+            $response[] = a_enid(
                 $row["nombre_clasificacion"],
                 [
                     "href" => _text("?q=&q2=", $row["primer_nivel"]),
@@ -211,7 +206,6 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
-
         }
 
         $t[] = d(
@@ -220,7 +214,9 @@ if (!function_exists('invierte_date_time')) {
                     "src" => "https://media.giphy.com/media/2hAjRJoLzYLqoRHvq2/giphy.gif",
                     "class" => "card-img"
                 ]
-            ), 'col-md-6 col-sm-12 ' . $extra);
+            ),
+            'col-md-6 col-sm-12 ' . $extra
+        );
 
         $s[] = h("Más categorías", 1, 'text-uppercase white strong');
         $s[] = p(d($response, 'mt-4 bg_blue p-3'));
@@ -229,7 +225,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = append($sec);
 
         return d(d($r, ' mt-5 d-md-flex  align-items-center categorias_extras ' . $extra), 13);
-
     }
 
     function crea_menu_principal_web($param)
@@ -258,7 +253,6 @@ if (!function_exists('invierte_date_time')) {
                 break;
             }
             $z++;
-
         }
         return $response;
     }
@@ -277,7 +271,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $categorias[] = $nombre_clasificacion;
                 $a++;
-
             } else {
 
                 if (!in_array($nombre_clasificacion, $categorias)) {
@@ -289,13 +282,12 @@ if (!function_exists('invierte_date_time')) {
                         [
                             "href" => $url,
                             "class" => 'categoria_text black'
-                        ], 1
+                        ],
+                        1
                     );
                     $categorias[] = $nombre_clasificacion;
                 }
-
             }
-
         }
 
         return [
