@@ -60,6 +60,7 @@ class Usuario_conexion_model extends CI_Model
                     u.apellido_materno , 
                     u.id,
                     u.idtipo_comisionista,
+                    u.ha_vendido,
                     DATE(u.fecha_registro) fecha_registro 
                     FROM usuario_perfil up 
                     INNER JOIN
