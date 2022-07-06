@@ -76,7 +76,7 @@ class Usuario_conexion_model extends CI_Model
                     u.status > 0                     
                     AND  
                     u.id NOT IN (SELECT id_usuario FROM usuario_conexion WHERE id_seguidor = $id_seguidor )
-                    ORDER BY u.fecha_registro DESC
+                    ORDER BY u.ha_vendido DESC, u.fecha_registro DESC
                     LIMIT 6";
 
         return $this->db->query($query_get)->result_array();
