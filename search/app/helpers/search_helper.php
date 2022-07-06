@@ -9,46 +9,14 @@ if (!function_exists('invierte_date_time')) {
 
         $paginacion = $data["paginacion"];
         $is_mobile = $data["is_mobile"];
-        $categorias_destacadas = $data["categorias_destacadas"];
-        $busqueda = $data["busqueda"];
-
-
-        $x[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
-        $x[] = d($data["lista_productos"], 13);
-
-        $r[] = get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas);
-
-        $z[] = h("filtra tu búsqueda", 3, 'white text-uppercase mt-md-0 p-2 ');
-
-        if ($is_mobile < 1) {
-            $z[] = img(
-                [
-                    "src" => "../img_tema/productos/runner.jpeg",
-                    'class' => 'd-none d-md-block'
-                ]
-            );
-        }
-
-
-        $z[] = get_formar_menu_sugerencias($is_mobile, $data["bloque_busqueda"], $busqueda);
-
-        $fil[] = d(d($z, 'seccion_categorias_desglose p-3 d-none d-lg-block'), 'col-sm-2');
-
-
-        $seccion = _text(
-
-            append($x)
-            ,
-            d($paginacion, "row mt-md-5")
-        );
-
-
-        $fil[] = d($seccion, 'col-lg-8 col-md-offset-1');
-        $r[] = d($fil, "col-lg-12 mt-md-5");
-        $cat[] = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
-        $r[] = append($cat);
+        $categorias_destacadas = $data["categorias_destacadas"];    
         
-        return append($r);
+        $response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas),13);
+        $response[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);        
+        $response[] = d($data["lista_productos"], 13);
+        $response[] = d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)),13);
+                
+        return d($response,12);
 
 
     }
@@ -175,23 +143,17 @@ if (!function_exists('invierte_date_time')) {
             foreach (crea_menu_principal_web($categorias_destacadas) as $row):
 
                 $nombre = explode(' ', $row["nombre_clasificacion"])[0];
-                $r[] =
-                    d(
-                        a_enid(
+                $r[] = d(a_enid(
                             $nombre,
                             [
                                 "href" => "?q=&q2=" . $row['primer_nivel'],
                                 "class" => "categorias_mas_vistas "
-                            ]
-                        ),
-                        2
-                    );
+                            ],0
+                        ),2);
             endforeach;
 
         }
-        return d(
-            d($r, "col-lg-8 col-lg-offset-2 d-flex flex-row align-items-end text-center white "),
-            'contenedor_anuncios_home col-lg-12 mb-5 p-3 d-none d-md-block');
+        return d($r, 'contenedor_anuncios_home d-flex w-100 text-center mb-5 p-3');
 
 
     }

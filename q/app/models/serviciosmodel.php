@@ -55,7 +55,6 @@ class serviciosmodel extends CI_Model
 
         $query_update = "UPDATE servicio SET stock =  stock - $stock WHERE id_servicio = $id_servicio LIMIT 1";
         return $this->db->query($query_update);
-
     }
 
     function anexo_stock($stock, $id_servicio)
@@ -63,7 +62,6 @@ class serviciosmodel extends CI_Model
 
         $query_update = "UPDATE servicio SET stock =  stock + $stock WHERE id_servicio = $id_servicio LIMIT 1";
         return $this->db->query($query_update);
-
     }
 
     function update($data = [], $params_where = [], $limit = 1)
@@ -119,7 +117,6 @@ class serviciosmodel extends CI_Model
                             '" . $param["fecha_termino"] . "' ";
             $this->db->query($query_create);
         }
-
     }
 
     private function drop_tmp($_num)
@@ -138,7 +135,6 @@ class serviciosmodel extends CI_Model
         $response = $result->result_array();
         $this->create_tmp_productos_solicitados(1, $_num, $param);
         return $response;
-
     }
 
     function set_vista($param)
@@ -152,7 +148,6 @@ class serviciosmodel extends CI_Model
         ultima_vista        =  CURRENT_TIMESTAMP()
         WHERE id_servicio   =  $id_servicio LIMIT 1";
         return $this->db->query($query_update);
-
     }
 
     function create_tmp_productos_solicitados($flag, $_num, $param)
@@ -180,7 +175,6 @@ class serviciosmodel extends CI_Model
                       GROUP BY keyword";
 
             $this->db->query($query_get);
-
         }
     }
 
@@ -200,7 +194,6 @@ class serviciosmodel extends CI_Model
                     existencia>0
                     LIMIT 1";
         return $this->db->query($query_get)->result_array()[0]["id_servicio"];
-
     }
 
     function get_alcance_productos_usuario($param)
@@ -239,7 +232,6 @@ class serviciosmodel extends CI_Model
         $data_complete = $result->result_array();
         $this->create_views_productos_usuario(1, $_num, $param);
         return $data_complete;
-
     }
 
     private function create_views_productos_usuario($flag, $_num, $param)
@@ -290,8 +282,6 @@ class serviciosmodel extends CI_Model
         DESC
         ";
         return $this->db->query($query_get)->result_array();
-
-
     }
 
     function set_q_servicio($param)
@@ -354,10 +344,8 @@ class serviciosmodel extends CI_Model
             array_push($info_a, $color);
             $nuevo = array_unique($info_a);
             $color = implode(",", $nuevo);
-
         }
         return $this->q_up("color", $color, $param["id_servicio"]);
-
     }
 
     function get_colores_por_servicio($param)
@@ -395,17 +383,12 @@ class serviciosmodel extends CI_Model
     function busqueda($param)
     {
 
+
         $busqueda = $this->get_resultados_posibles($param);
         $response["total_busqueda"] = $busqueda['num_servicios'];
-        $where = $busqueda['where'];
-        $_num = mt_rand();
-        $response["temporal"] = $this->create_productos_disponibles(0, $_num, $where);
-        $response["servicios"] = $this->db->get("tmp_producto_$_num")->result_array();
+        $where = $busqueda['where'];        
+        $response["servicios"] = $this->create_productos_disponibles($where);
 
-        if ($param["agrega_clasificaciones"] > 0) {
-            $response["clasificaciones_niveles"] = $this->get_clasificaciones_disponibles($_num);
-        }
-        $response["temporal_remove"] = $this->create_productos_disponibles(1, $_num, $where);
         return $response;
     }
 
@@ -419,7 +402,6 @@ class serviciosmodel extends CI_Model
             $nivel = $niveles[$a];
             $query_get = "SELECT DISTINCT($nivel)id_clasificacion FROM tmp_producto_$_num";
             $response[$nivel] = $this->db->query($query_get)->result_array();
-
         }
         return $response;
     }
@@ -483,7 +465,6 @@ class serviciosmodel extends CI_Model
                     " . $sql_match . "
                     " . $orden . "
                     " . $limit;
-
     }
 
     function get_extra_clasificacion($param)
@@ -509,7 +490,7 @@ class serviciosmodel extends CI_Model
 
 
         switch ($param["order"]) {
-            /*Novedades primero*/
+                /*Novedades primero*/
             case 1:
                 return " ORDER BY   fecha_registro DESC, deseado DESC ,  vista DESC";
                 break;
@@ -608,25 +589,25 @@ class serviciosmodel extends CI_Model
                         $this->agrega_servicios_list($n_servicio);
                     }
                 }
-
             }
         }
 
 
         return $this->lista_servicios;
-
     }
 
 
     function get_producto_clasificacion_nivel($nivel, $id_clasificacion)
     {
 
-        $lista_niveles = ["",
+        $lista_niveles = [
+            "",
             "primer_nivel",
             "segundo_nivel",
             "tercer_nivel",
             "cuarto_nivel",
-            "quinto_nivel"];
+            "quinto_nivel"
+        ];
 
         $nivel_text = $lista_niveles[$nivel];
         $distinto = $this->get_option("sql_distintos");
@@ -661,8 +642,6 @@ class serviciosmodel extends CI_Model
                         LIMIT 1";
 
         return $this->db->query($query_get)->result_array();
-
-
     }
 
     function periodo($param)
@@ -677,7 +656,8 @@ class serviciosmodel extends CI_Model
     function get_clasificaciones_por_id_servicio($id_servicio)
     {
 
-        $params = ["id_servicio",
+        $params = [
+            "id_servicio",
             "primer_nivel",
             "segundo_nivel",
             "tercer_nivel",
@@ -685,7 +665,6 @@ class serviciosmodel extends CI_Model
             "quinto_nivel"
         ];
         return $this->get($params, ["id_servicio" => $id_servicio]);
-
     }
 
     function get_clasificaciones_destacadas()
@@ -702,7 +681,6 @@ class serviciosmodel extends CI_Model
                     primer_nivel
                     ORDER BY count(0) DESC  LIMIT 5";
         return $this->db->query($query_get)->result_array();
-
     }
 
     function get_resumen($param)
@@ -740,7 +718,6 @@ class serviciosmodel extends CI_Model
         }
         $this->create_productos_disponibles(1, $_num, $where);
         return $data_complete;
-
     }
 
 
@@ -755,23 +732,19 @@ class serviciosmodel extends CI_Model
             'num_servicios' => $num_servicios,
             'where' => $where
         ];
-
     }
 
 
-    function create_productos_disponibles($flag, $_num, $where)
+    function create_productos_disponibles($where)
     {
 
-        $response = $this->db->query("DROP TABLE IF exists tmp_producto_$_num");
-        if ($flag < 1) {
-            $query_create = _text_("CREATE TABLE tmp_producto_$_num IGNORE AS 
-                SELECT  id_servicio, nombre_servicio, id_usuario, descripcion, marca, dimension,metakeyword_usuario,
+        $query_create = _text_(" 
+                SELECT  id_servicio, nombre_servicio, id_usuario, descripcion, 
+                marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
-                tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, precio FROM servicio ", $where);
-            $response = $this->db->query($query_create);
-
-        }
-        return $response;
+                tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, 
+                precio FROM servicio ", $where);
+        return $this->db->query($query_create)->result_array();
     }
 
     function agrega_metakeyword_sistema($param)
@@ -805,7 +778,6 @@ class serviciosmodel extends CI_Model
         existencia >0
         LIMIT 1";
         return $this->db->query($query_get)->result_array()[0]["num"];
-
     }
 
     function get_num_lectura_valoraciones($param)
@@ -826,7 +798,6 @@ class serviciosmodel extends CI_Model
                 leido_vendedor =0";
 
         return $this->db->query($query_get)->result_array()[0]["num"];
-
     }
 
     function set_preferencia_entrega($tipo, $id_servicio)
@@ -855,7 +826,5 @@ class serviciosmodel extends CI_Model
                             and 
                             p.id_servicio IS NULL";
         return $this->db->query($query_update)->result_array();
-
     }
-
 }
