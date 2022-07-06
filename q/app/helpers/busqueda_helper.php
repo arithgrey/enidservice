@@ -6,6 +6,7 @@ if (!function_exists('invierte_date_time')) {
     function conexiones($usuarios, $id_seguidor)
     {
 
+        
         $response = [];
         foreach ($usuarios as $row) {
 
@@ -30,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
                 );
                 $imagen_link = a_enid($imagen, path_enid('usuario_contacto', $id_vendedor));
                 $seccion[] = d($imagen_link, 'mt-4');
-
+                $seccion[] = d(_text_("Ventas" ,  $row["ha_vendido"]),'text-center fp9 black underline');
                 $seccion[] = d($seccion_nombre_vendedor, 'text-center text-uppercase mt-4');
                 $seguir = d("seguir", ['class' => 'strong black', "id" => $id_vendedor]);
 
