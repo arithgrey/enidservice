@@ -24,6 +24,7 @@ class Home extends CI_Controller
         $recompensas = $this->app->recompensas_recibos($comisiones_por_cobrar);                        
         $data["saldo_por_cobrar"] = 
         $this->comision->saldo_disponible($comisiones_por_cobrar, $recompensas);
+        $data["ventas_mes_ubicaciones"] = $this->ventas_mes_ubicaciones();
         $this->app->pagina($data, render($data), 1);
 
 
@@ -37,6 +38,13 @@ class Home extends CI_Controller
                 "id" =>  $id_usuario
             ]);
     }    
+
+    private function ventas_mes_ubicaciones()
+    {
+    
+        return $this->app->api("ubicacion/ventas_mes");
+    }    
+
 
     private function ventas_semana()
     {

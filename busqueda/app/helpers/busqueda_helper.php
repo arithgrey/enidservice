@@ -2,14 +2,16 @@
 
 use BaconQrCode\Renderer\Path\Path;
 
- if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
     function render($data)
     {
 
-        $response[] = d(seccion_izquierda($data), 'col-md-4 d-none d-md-block');
-        $response[] = d(seccion_noticias_notificaciones(), 'col-md-8 d-md-block');
+        $response[] = d(seccion_izquierda($data), 'col-md-3 d-none d-md-block');
+        $response[] = d(seccion_noticias_notificaciones(), 'col-md-6 d-md-block border-right');
+        $response[] = d(seccion_derecha($data), 'col-md-3 d-none d-md-block');
+
         $id_usuario = $data["id_usuario"];
         $response[] = hiddens(
             [
@@ -18,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $id_usuario
             ]
         );
-        return d($response, 10, 1);
+        return d($response, 12);
     }
 
     function seccion_noticias_notificaciones()
@@ -33,7 +35,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "black underline"
             ]
         );
-        $class = (is_mobile()) ? 'row mt-3' : "text-right"; 
+        $class = (is_mobile()) ? 'row mt-3' : "text-right";
         $response[] = d($link_descuento, $class);
         $response[] = extras_fake();
         $response[] = place('seccion_sugerencias');
@@ -45,7 +47,7 @@ if (!function_exists('invierte_date_time')) {
     function seccion_izquierda($data)
     {
 
-        $clase = 'col-md-8 mt-5 col-md-offset-2';
+        $clase = 'col-md-12 mt-5';
         $r[] = seccion_estadisticas($data);
         $response[] = d(d($r), $clase);
         $response[] = d(posiciones(), $clase);
@@ -55,30 +57,69 @@ if (!function_exists('invierte_date_time')) {
 
         return append($response);
     }
+    function seccion_derecha($data)
+    {
 
-    function extras_fake(){
+        $response[] =  penetracion_alcaldias($data);
+        $response[] =  extras_clientes();
+        return append($response);
+    }
+
+    function penetracion_alcaldias($data)
+    {
+
+        $ventas_mes_ubicaciones = $data["ventas_mes_ubicaciones"];
+        $response[] = d(_titulo("Alcandías que son tendencia en ventas este més", 4), 'mt-5 col-sm-12');
+        foreach ($ventas_mes_ubicaciones  as $row) {
+
+            $total =  $row["total"];
+            $delegacion =  $row["delegacion"];
+
+            $textos = flex($delegacion, $total, _text_(_between, 'border-bottom'), "black", "strong f12");
+            $response[] = d($textos, 'col-sm-12 mt-2');
+        }
+
+        return append($response);
+    }
+    function extras_clientes()
+    {
+
+
+        $link  = a_enid(
+            "Conoce nuestros últimos clientes",
+            [
+                "href" => path_enid("clientes"),
+                "class" => "black fp9 underline",
+                "target" => "black"
+            ]
+        );
+        $response[] = d($link, 'mt-5 col-sm-12');
+
+        return append($response);
+    }
+    function extras_fake()
+    {
         $r = [];
-        if(is_mobile()){
+        if (is_mobile()) {
             $r[] = d(hr(), 'col-xs-12 p-0');
 
             $r[] = d(_titulo("¿Tienes duda sobre si un cliente es fake o te ha faltado al respeto?", 5));
             $r[] = d(a_enid('Verificalo o mandalo a lista negra aquí', ['href' => "http://app.enidservices.com/lista-negra", 'target' => '_blanck']));
-    
+
             $r[] = d(hr(), 'col-xs-12 p-0');
 
             $link_descuento = a_enid(
                 "Mira qué zonas tienen más ventas",
                 [
-                    "href" => path_enid("indicadores_ubicaciones", 0 ,1),
+                    "href" => path_enid("indicadores_ubicaciones", 0, 1),
                     "class" => "black underline"
                 ]
             );
-    
+
             $r[] = d($link_descuento, 'mb-3');
-            
         }
-        
-        return  d($r,13);
+
+        return  d($r, 13);
     }
     function seccion_estadisticas($data)
     {
@@ -103,7 +144,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($link_descuento);
-        
+
         $link_costo_entrega = a_enid(
             "Calcula el costo de entrega para tus clientes",
             [
