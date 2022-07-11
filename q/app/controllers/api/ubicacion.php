@@ -49,7 +49,6 @@ class ubicacion extends REST_Controller
                     'asignacion' => $asignacion,
                     'siguiente' => $siguiente
                 ];
-
             }
         }
 
@@ -67,8 +66,12 @@ class ubicacion extends REST_Controller
     {
         $q["id_recibo"] = $id_recibo;
 
-        return $this->app->api("proyecto_persona_forma_pago_punto_encuentro/index", $q,
-            "json", "DELETE");
+        return $this->app->api(
+            "proyecto_persona_forma_pago_punto_encuentro/index",
+            $q,
+            "json",
+            "DELETE"
+        );
     }
 
 
@@ -80,7 +83,7 @@ class ubicacion extends REST_Controller
 
         if (fx($param, 'id_orden_compra,ubicacion,fecha_entrega,horario_entrega')) {
 
-            $id_orden_compra = $param['id_orden_compra'];            
+            $id_orden_compra = $param['id_orden_compra'];
 
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             $reparto = false;
@@ -98,12 +101,11 @@ class ubicacion extends REST_Controller
                     ];
 
                 $this->ubicacion_model->insert($params, 1);
-
             }
 
-            $reparto = $this->app->asigna_reparto($id_orden_compra , 1);            
+            $reparto = $this->app->asigna_reparto($id_orden_compra, 1);
             $es_cliente = es_cliente($this->app->session());
-            
+
             $area_cliente = path_enid('area_cliente_compras', _text($id_orden_compra, "&primercompra=1"));
             $seguimiento = path_enid('pedidos_recibo', $id_orden_compra);
             $siguiente = ($es_cliente) ? $area_cliente : $seguimiento;
@@ -134,7 +136,6 @@ class ubicacion extends REST_Controller
             ];
             //$response = $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
             $response = $this->ubicacion_model->recibo_codigo_postal($id_recibo);
-
         }
         $this->response($response);
     }
@@ -153,8 +154,6 @@ class ubicacion extends REST_Controller
             $response = $this->ubicacion_model->get([], $in, 10, 'id_ubicacion');
         }
         $this->response($response);
-
-
     }
 
     private function cambio_fecha_entrega($id_orden_compra, $fecha_entrega, $horario_engrega)
@@ -176,7 +175,6 @@ class ubicacion extends REST_Controller
             'id_recibo' => $id_recibo,
         ];
         return $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
-
     }
 
     function ids_recibo_GET()
@@ -187,10 +185,13 @@ class ubicacion extends REST_Controller
         if (fx($param, "ids")) {
 
             $response = $this->ubicacion_model->in_recibo($param['ids']);
-
         }
         $this->response($response);
     }
+    function ventas_mes_GET()
+    {
 
-
+        
+        $this->response($this->ubicacion_model->ventas_mes());
+    }
 }

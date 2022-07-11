@@ -66,6 +66,22 @@ class Ubicacion_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+    function ventas_mes()
+    {
+
+
+        $where_fecha = " AND DATE(u.fecha_registro )
+                         BETWEEN DATE_ADD(CURRENT_DATE() , INTERVAL -30 DAY ) 
+                         AND DATE(CURRENT_DATE())";
+
+        $query_get = _text_("SELECT count(0)total, id_alcaldia, d.delegacion FROM ubicacions u inner join delegacions d 
+        on u.id_alcaldia = d.id_delegacion  where id_alcaldia > 0 ",  $where_fecha, "
+        group by id_alcaldia order by count(0) desc");
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+
 
 
 }
