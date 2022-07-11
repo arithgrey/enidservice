@@ -69,7 +69,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $ventas_mes_ubicaciones = $data["ventas_mes_ubicaciones"];
-        $response[] = d(_titulo("Alcandías que son tendencia en ventas este més", 4), 'mt-5 col-sm-12');
+        $response[] = d(_titulo("Alcandías que son tendencia en ventas este mes", 4), 'mt-5 col-sm-12');
         foreach ($ventas_mes_ubicaciones  as $row) {
 
             $total =  $row["total"];
