@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
     function conexiones($usuarios, $id_seguidor)
     {
 
-        
+
         $response = [];
         foreach ($usuarios as $row) {
 
@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
                 );
                 $imagen_link = a_enid($imagen, path_enid('usuario_contacto', $id_vendedor));
                 $seccion[] = d($imagen_link, 'mt-4');
-                $seccion[] = d(_text_("Ventas" ,  $row["ha_vendido"]),'text-center fp9 black underline');
+                $seccion[] = d(_text_("Ventas",  $row["ha_vendido"]), 'text-center fp9 black underline');
                 $seccion[] = d($seccion_nombre_vendedor, 'text-center text-uppercase mt-4');
                 $seguir = d("seguir", ['class' => 'strong black', "id" => $id_vendedor]);
 
@@ -43,9 +43,7 @@ if (!function_exists('invierte_date_time')) {
                 $seccion[] = d($seguir, $atributos);
 
                 $response[] = d($seccion, 'col-md-2 col-xs-6 border d-flex flex-column justify-content-between h-100 p-3');
-
             }
-
         }
 
         if (es_data($usuarios)) {
@@ -72,11 +70,9 @@ if (!function_exists('invierte_date_time')) {
         $texto_ventas = flex($ventas, "Ventas", "font-weight-bold blue_linkeding", "mr-2 ml-2");
 
         $line = d("|", "text-secondary");
-        $elementos = [$texto_seguidores, $line, $texto_seguiendo,$line, $texto_ventas];
+        $elementos = [$texto_seguidores, $line, $texto_seguiendo, $line, $texto_ventas];
         $resumen = d($elementos, _text_("d-flex", _between));
         return ($id_seguidor == $id_usuario) ? a_enid($resumen, path_enid("conexiones")) : $resumen;
-
-
     }
 
     function render_actividad($actividades, $ventas_like, $id_seguidor, $obj_session)
@@ -84,7 +80,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(_titulo("noticias", 4), "mt-5 d-block d-md-none  text-center");
         $response[] = actividad($actividades, $ventas_like, $id_seguidor, $obj_session);
         return d($response);
-
     }
 
     function actividad($actividades, $ventas_like, $id_seguidor, $obj_session)
@@ -96,6 +91,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($actividades as $row) {
 
             $id_usuario_venta = $row["id_usuario_referencia"];
+            $id_servicio = $row["id_servicio"];
             $idtipo_comisionista = $row["idtipo_comisionista"];
             $id_usuario_conexion = $row["id_usuario"];
             $id_recibo = $row["id"];
@@ -112,21 +108,26 @@ if (!function_exists('invierte_date_time')) {
             $texto_dias = ($dias < 1) ? "hoy" : $texto;
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
             $comision_venta = money($row["comision_venta"] * $num_ciclos_contratados);
+            $imagen = img(
+                [
+                    "src" => $path_imagen_usuario,
+                    "onerror" => "this.src='../img_tema/user/user.png'",
+                    'class' => 'px-auto mt-4',
+                    "style" => "width: 40px!important;height: 35px!important;",
+                ]
+            ); 
+            
+
 
             $imagen_usuario = d(
-                img(
-                    [
-                        "src" => $path_imagen_usuario,
-                        "onerror" => "this.src='../img_tema/user/user.png'",
-                        'class' => 'px-auto mt-4',
-                        "style" => "width: 40px!important;height: 35px!important;",
-                    ]
-                ), ""
+                $imagen,
+                ""
             );
 
             $tipo_comisionista = format_tipo_comisionista($obj_session, $idtipo_comisionista);
-            $nombre_categoria = flex($vendedor, $tipo_comisionista, "flex-column", "strong","fp9");
-            $nombre_vendedor = a_enid($nombre_categoria,
+            $nombre_categoria = flex($vendedor, $tipo_comisionista, "flex-column", "strong", "fp9");
+            $nombre_vendedor = a_enid(
+                $nombre_categoria,
                 [
                     "href" => path_enid("usuario_contacto", $id_usuario_venta),
                     "target" => "_black",
@@ -163,7 +164,8 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $elemento[] = d($imagen, "d-block mt-4");
+            $imagen_link = a_enid($imagen, ["href" => path_enid("producto", $id_servicio)]);
+            $elemento[] = d($imagen_link, "d-block mt-4");
             $total_like = $row["total_like"];
             $es_like = valida_venta_like($ventas_like, $id_recibo, $id_seguidor);
             $extra = ($es_like > 0) ? 'text-info strong' : 'text-secondary';
@@ -177,7 +179,6 @@ if (!function_exists('invierte_date_time')) {
 
             $elemento[] = flex(d("", $attr), $total_like, "align-items-center ", "mr-2");
             $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white");
-
         }
         return d($response, "mt-5 bg-light ");
     }
@@ -197,5 +198,4 @@ if (!function_exists('invierte_date_time')) {
         }
         return $lke;
     }
-
 }
