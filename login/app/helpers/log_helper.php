@@ -27,8 +27,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = frm_login();
         if ($action === "registro") {
 
-            $clases = "inf_usuario_registrado strong mt-5 bg-light p-2 text-right";
-            $r[] = d("Tu usuario fué registrado, accede ahora!", $clases);
+            $clases = "inf_usuario_registrado  mt-5 bg-light p-2 text-right f12 strong border border-secondary";
+            $r[] = d("Te registrasté, ingresa ahora!", $clases);
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5");
         $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong mt-1']);
@@ -109,7 +109,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = img_default();
-        $r[] = _titulo('ÚNETE');
+        $r[] = _titulo('Registro');
         $r[] = frm_registro();
         $r[] = ya_registro();
 
@@ -177,7 +177,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $perfil[] = [
-            'nombre_perfil' => 'Quiero vender',
+            'nombre_perfil' => 'Quiero ser afiliado - vender artículos de enid service para ganar comisiones',
             'id_perfil' => 6
         ];
         $perfil[] = [

@@ -615,21 +615,22 @@ class usuario extends REST_Controller
 
     function vendedor_POST()
     {
-
-        if ($this->input->is_ajax_request()) {
-            $param = $this->post();
+        $param = $this->post();
+        if ($this->input->is_ajax_request() && fx($param, "nombre,email")) {
 
             $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
-            if ($response["usuario_existe"] == 0) {
+            if (intval($response["usuario_existe"]) < 1) {
 
+                $nombre = $param["nombre"];
                 $email = $param["email"];
+
                 $params = [
                     "email" => $email,
                     "id_empresa" => 1,
                     "id_departamento" => 9,
                     "password" => $param["password"],
-                    "name" => $param["nombre"],
+                    "name" => $nombre,
                     "id_usuario_referencia" => 180,
                     'tiene_auto' => prm_def($param, 'tiene_auto'),
                     'tiene_moto' => prm_def($param, 'tiene_moto'),
@@ -639,28 +640,33 @@ class usuario extends REST_Controller
                 ];
 
                 $response["id_usuario"] = $this->usuario_model->insert($params, 1);
+                $id_usuario = $response["id_usuario"];
 
-                if ($response["id_usuario"] > 0) {
+                if (intval($id_usuario) > 0) {
 
-                    $q["id_usuario"] = $response["id_usuario"];
+                    $q["id_usuario"] = $id_usuario;
                     $q["puesto"] = $param['perfil'];
                     $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+
                     if ($response["usuario_permisos"] > 0) {
                         $response["email"] = $email;
                         $response["usuario_registrado"] = 1;
                     }
 
+
                     $simple = (prm_def($param, "simple") > 0) ? 1 : 0;
                     if ($simple == 0) {
 
-                        $this->inicia_proceso_compra($param, $response["id_usuario"], $param["servicio"]);
+                        $this->inicia_proceso_compra($param, $id_usuario, prm_def($param, "servicio"));
                     }
-                    $this->notifica_registro_usuario($params);
+
+
+                    $this->notifica_registro_usuario($nombre, $email);
                 }
             }
             $this->response($response);
         }
-        $this->response("Error");
+        $this->response(null, 200);
     }
 
     function whatsapp_POST()
@@ -690,19 +696,16 @@ class usuario extends REST_Controller
         $this->response(false);
     }
 
-    function notifica_registro_usuario($param)
+    function notifica_registro_usuario($nombre, $email)
     {
 
-        $response = false;
-        if (fx($param, "nombre,email")) {
+        $q = get_request_email(
+            $email,
+            "TU USUARIO SE REGISTRÓ!",
+            get_mensaje_bienvenida($nombre, $email)
+        );
+        $response = $this->app->send_email($q);
 
-            $q = get_request_email(
-                $param["email"],
-                "TU USUARIO SE REGISTRÓ!",
-                get_mensaje_bienvenida($param)
-            );
-            $response = $this->app->send_email($q);
-        }
         return $response;
     }
 
@@ -899,16 +902,14 @@ class usuario extends REST_Controller
             $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
             if ($response["usuario_existe"] == 0) {
-                
-                if(prm_def($param, 'es_prospecto') > 0 && strlen($param["telefono"]) < 7 ){
+
+                if (prm_def($param, 'es_prospecto') > 0 && strlen($param["telefono"]) < 7) {
                     /*En el caso de registro a través de Facebook (Prospectos, listas de seguimiento y lista negra)*/
                     $param["telefono"] = rand(10000000, 90000000);
-                    
                 }
 
                 $response = $this->registro_prospecto($param);
                 $this->response($response);
-                
             }
         }
         $this->response($response);
@@ -916,7 +917,7 @@ class usuario extends REST_Controller
 
     private function registro_prospecto($param)
     {
-        
+
         $email = $param["email"];
         $params = [
             "facebook" =>  prm_def($param, 'facebook', ''),
@@ -930,9 +931,9 @@ class usuario extends REST_Controller
             "tel_contacto" => $param['telefono'],
             "id_usuario_referencia" => prm_def($param, "usuario_referencia", 1),
         ];
-        
+
         $response["id_usuario"] = $this->usuario_model->insert($params, 1);
-        
+
         if ($response["id_usuario"] > 0) {
 
             $q["id_usuario"] = $response["id_usuario"];
@@ -945,7 +946,6 @@ class usuario extends REST_Controller
             }
         }
         return $response;
-    
     }
 
     function cancelar_envio_recordatorio_PUT()
@@ -973,7 +973,7 @@ class usuario extends REST_Controller
             $tel_contacto_alterno = $param['tel_contacto_alterno'];
             $url_lead = $param['url_lead'];
             $facebook = $param['facebook'];
-            
+
             $usuarios = $this->usuario_model->busqueda(
                 $idusuario,
                 $email,
@@ -982,8 +982,8 @@ class usuario extends REST_Controller
                 $url_lead,
                 $facebook
             );
-            
-            
+
+
 
             if (es_data($usuarios)) {
 
@@ -1215,7 +1215,12 @@ class usuario extends REST_Controller
     private function agrega_permisos_usuario($q)
     {
 
-        return $this->app->api("usuario_perfil/permisos_usuario", $q, "json", "POST");
+        $response = 0;
+        if (prm_def($q, "id_usuario") > 0 && prm_def($q, "puesto") > 0) {
+
+            $response =  $this->app->api("usuario_perfil/permisos_usuario", $q, "json", "POST");
+        }
+        return $response;
     }
 
     private function get_preguntas($q)
@@ -1257,7 +1262,6 @@ class usuario extends REST_Controller
             $url_lead = $param["url_lead"];
 
             $response = $this->usuario_model->busqueda($id_usuario, $email, $tel_contacto, $tel_contacto, $facebook, $url_lead);
-            
         }
         $this->response($response);
     }

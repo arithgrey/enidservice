@@ -947,11 +947,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_mensaje_bienvenida($param)
+    function get_mensaje_bienvenida($nombre, $email)
     {
 
 
-        $r[] = h("Buen día " . $param["nombre"] . " " . $param["email"]);
+        $r[] = h("Buen día " . $nombre . " " . $email);
         $r[] = d(
             img(
                 [
