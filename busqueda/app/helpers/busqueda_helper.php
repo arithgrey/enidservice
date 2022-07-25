@@ -135,11 +135,31 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(a_enid('Verificalo o mandalo a lista negra aquí', ['href' => "http://app.enidservices.com/lista-negra", 'target' => '_blanck']));
 
         $r[] = hr();
+
+        $link_whatsApp_facebook = a_enid(
+            "¿Por donde iniciar?",
+            [
+                "href" => _text(path_enid("sobre_vender"), "#iniciar"),
+                "class" => "black underline mb-3"
+            ]
+        );
+
+        $r[] = d($link_whatsApp_facebook);
+
+        $link_whatsApp_facebook = a_enid(
+            "Agiliza tus ventas con WhatsApp y Facebook",
+            [
+                "href" => path_enid("vender_en_facebook"),
+                "class" => "black underline mb-3"
+            ]
+        );
+
+        $r[] = d($link_whatsApp_facebook);
         $link_descuento = a_enid(
             "Mira qué zonas tienen más ventas",
             [
                 "href" => 'http://app.enidservices.com/indicadores-ubicaciones',
-                "class" => "black underline"
+                "class" => "black underline mb-3"
             ]
         );
 
@@ -149,15 +169,12 @@ if (!function_exists('invierte_date_time')) {
             "Calcula el costo de entrega para tus clientes",
             [
                 "href" => path_enid("costo_entrega"),
-                "class" => "black underline"
+                "class" => "black underline mb-3"
             ]
         );
 
         $r[] = d($link_costo_entrega);
-
         $r[] = d($texto, 'mt-5');
-
-
 
         $link_fondos = a_enid(
             "Solicitar saldo",

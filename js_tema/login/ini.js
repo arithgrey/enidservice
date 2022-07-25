@@ -241,7 +241,8 @@ let agrega_usuario = (e) => {
     e.preventDefault();
 };
 let response_usuario_registro = data => {
-        
+    
+    debugger;
     if (parseInt(data.usuario_registrado) > 0) {
         
         redirect('?action=registro');
