@@ -59,34 +59,34 @@ $(document).ready(function () {
     $nombre_persona.keyup(function (e) {
         transforma_mayusculas(this);
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_registro, 1);
+        //escucha_submmit_selector(e, $form_registro, 1);
     });
 
     $registro_email.keyup(function (e) {
 
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_registro, 1);
+        //escucha_submmit_selector(e, $form_registro, 1);
     });
 
     $registro_pw.keyup(function (e) {
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_registro, 1);
+        //escucha_submmit_selector(e, $form_registro, 1);
     });
 
     $email_recuperacion.keyup(() => {
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_registro, 1);
+        //escucha_submmit_selector(e, $form_registro, 1);
     });
 
     $input_correo_inicio.keyup(function (e) {
 
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_inicio, 1);
+        //escucha_submmit_selector(e, $form_inicio, 1);
     });
 
     $input_password_inicio.keyup(function (e) {
         $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_inicio, 1);
+        //escucha_submmit_selector(e, $form_inicio, 1);
     });
 
     $perfil.change(seleccion_entrega);
@@ -241,22 +241,25 @@ let agrega_usuario = (e) => {
     e.preventDefault();
 };
 let response_usuario_registro = data => {
-
-    if (data.usuario_registrado === 1) {
-
+        
+    if (parseInt(data.usuario_registrado) > 0) {
+        
         redirect('?action=registro');
 
     } else {
 
-        if (data.usuario_existe > 0) {
+        if (parseInt(data.usuario_existe) > 0) {
 
             let str_usuario = 'Este usuario ya se encuentra registrado';
-            let str = `<span class="alerta_enid d-block text-center p-3">${str_usuario}</span>`;
+            let str_format_link = "mt-5 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold";
+            let str_opciones = _text_(" verífica los datos ó <a class='",str_format_link,"' href='../login'>Accede</a>");
+            let str = `<span class="alerta_enid d-block text-center p-3">${str_usuario} ${str_opciones}</span>`;
             let place = '.place_registro_miembro';
             render_enid(place, str);
             $(place).addClass('mt-5');
             $('.acceso_a_cuenta').click(muestra_seccion_acceso);
             desbloqueda_form(form_registro);
+            recorre(".btn_acceder_cuenta_enid");
 
         }
     }

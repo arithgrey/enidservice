@@ -834,7 +834,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
         $path = path_enid('login');
         $session = a_enid(
-            "Acceder",
+            "Ingresa",
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white borde_amarillo iniciar_session_boton strong",
@@ -845,7 +845,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
         if ($proceso_compra < 1) {
 
             $response = flex(
-                $vender,
+                "",
                 $session,
                 "d-none d-md-block d-md-flex justify-content-end mt-md-3 mb-md-3",
                 "mr-3 ", '', ''
@@ -1836,8 +1836,17 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white  f11  frecuentes",
+            "class" => "white  f11  border-right frecuentes border-right-enid",
             "href" => path_enid("clientes") 
+        ]
+    );
+
+
+    $response[] = a_enid(
+        "AFILIADOS",
+        [
+            "class" => "white  f11  frecuentes",
+            "href" => path_enid("sobre_vender") 
         ]
     );
 
@@ -1858,7 +1867,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
             $response[] = get_menu_session($in_session, $proceso_compra);
             $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
             $response[] = frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session);
-            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega!', 'white f12'), 'd-md-flex justify-content-end mt-3');
+            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX', 'white f12'), 'd-md-flex justify-content-end mt-3');
         } else {
             $response[] = get_logo($in_session);
         }
