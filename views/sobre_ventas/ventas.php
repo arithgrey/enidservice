@@ -1,3 +1,4 @@
+
 <div class="">
     <div class="container">
         <div class="row">
@@ -75,8 +76,7 @@
 </div>
 
 
-
-<div class="container">
+<div class="container" id="iniciar">
     <div class="row">
         <h3 class="text-uppercase">
             Como iniciar
