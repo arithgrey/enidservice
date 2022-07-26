@@ -407,6 +407,8 @@ if (!function_exists('invierte_date_time')) {
         );
         $text = text_icon("fa-check-circle", "Top comisionistas");
         $text_entrega = text_icon("fa-check-circle", "Top reparto");
+        
+        $text_estadisticas_comisionistas = text_icon("fa-check-circle", "Nuevos comisionistas");
 
         $link_sin_ventas = tab(
             text_icon("fa-check-circle", "artículos sin ventas"),
@@ -428,6 +430,15 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'text-uppercase black'
             ]
         );
+
+        $link_comisionistas = a_enid(
+            $text_estadisticas_comisionistas,
+            [
+                "href" => path_enid("metricas_registros"),
+                "class" => 'text-uppercase black'
+            ]
+        );
+
 
         $link_funnel = tab(
             text_icon("fa fa-shopping-cart", "Funnel ventas"),
@@ -531,6 +542,8 @@ if (!function_exists('invierte_date_time')) {
             $link_vendedores
             ,
             $link_reparto
+            ,
+            $link_comisionistas
             ,
             $link_accesos_pagina
             ,

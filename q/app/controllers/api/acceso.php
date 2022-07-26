@@ -26,7 +26,23 @@ class Acceso extends REST_Controller
         }
         $this->response($response);
     }
+    function q_fecha_conteo_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "pagina_id,fecha_inicio,fecha_termino")) {
+            
+            $pagina_id = $param["pagina_id"];
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+                        
+            $response =  $this->acceso_model->conteo_fecha($pagina_id, $fecha_inicio, $fecha_termino);
 
+        }
+        $this->response($response);
+
+
+    }
     function busqueda_fecha_GET()
     {
 

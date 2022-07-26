@@ -23,8 +23,9 @@ class Home extends CI_Controller
         $data["fecha_inicio"] = '';
         $data["fecha_termino"] = '';
         $data["usuarios"] = [];
+        $data["accesos"]  = [];
 
-        if ($params) {
+        if (es_data($params)) {
 
             $fecha_inicio = $params["fecha_inicio"];
             $fecha_termino = $params["fecha_termino"];
@@ -33,8 +34,8 @@ class Home extends CI_Controller
             $data["fecha_termino"] = $fecha_termino;
 
             $data["usuarios"] = $this->usuarios_comisionistas($fecha_inicio, $fecha_termino);
-
-
+            $data["accesos"] = $this->accesos_landing_page(5, $fecha_inicio, $fecha_termino);
+            
         }
 
         $this->app->pagina($data, render($data), 1);
@@ -45,12 +46,24 @@ class Home extends CI_Controller
     private function usuarios_comisionistas($fecha_inicio, $fecha_termino)
     {
 
-        return $this->app->api("usuario_perfil/comisionistas_periodo/",
+        return $this->app->api("usuario_perfil/comisionistas_periodo",
             [
                 "fecha_inicio" => $fecha_inicio,
                 "fecha_termino" => $fecha_termino
             ]
         );
     }
+    private function accesos_landing_page($pagina_id, $fecha_inicio, $fecha_termino)
+    {
+
+        return $this->app->api("acceso/q_fecha_conteo",
+            [                
+                "pagina_id" =>  $pagina_id,
+                "fecha_inicio" => $fecha_inicio,
+                "fecha_termino" => $fecha_termino
+            ]
+        );
+    }
+
 
 }
