@@ -74,4 +74,21 @@ class Acceso_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+
+    function conteo_fecha($pagina_id, $fecha_inicio, $fecha_termino)
+    {
+        
+        $query_get = _text_("SELECT DATE(fecha_registro) fecha_registro, count(0)accesos from acceso
+                        WHERE 
+                        DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'
+                        AND 
+                        pagina_id = $pagina_id
+                        GROUP BY DATE(fecha_registro) ORDER BY fecha_registro DESC");
+
+
+        return $this->db->query($query_get)->result_array();
+    }
+
+    
+
 }

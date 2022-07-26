@@ -139,6 +139,7 @@ function accesos_internos()
         "interes" => "interes",
         "vender_en_facebook" => "vender_en_facebook",
         "costo_entrega" => "costo_entrega",
+        "metricas_registros" => "metricas_registros",
         
     ];
     
