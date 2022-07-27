@@ -3,7 +3,7 @@
 }
 if (!function_exists('invierte_date_time')) {
 
-    function conexiones($usuarios, $id_seguidor)
+    function conexiones($usuarios, $id_seguidor, $titulo = "descubre otras cuentas",  $clase_descarte = 'descarte', $clase_conexion = 'conexion')
     {
 
 
@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $seccion = [];
 
-                $class = _text_(_eliminar_icon, 'mr-3 descarte');
+                $class = _text_(_eliminar_icon, 'mr-3 ', $clase_descarte);
                 $atributos = ["id" => $id_vendedor];
 
                 $seccion[] = d(icon($class, $atributos), 'text-right');
@@ -36,8 +36,8 @@ if (!function_exists('invierte_date_time')) {
                 $seguir = d("seguir", ['class' => 'strong black', "id" => $id_vendedor]);
 
                 $atributos = [
-                    "class" => 'text-center border border-info rounded_enid
-                     col-sm-8 col-sm-offset-2 cursor_pointer conexion',
+                    "class" => _text_('text-center border border-info rounded_enid
+                    col-sm-8 col-sm-offset-2 cursor_pointer ', $clase_conexion),
                     "id" => $id_vendedor
                 ];
                 $seccion[] = d($seguir, $atributos);
@@ -48,7 +48,7 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_data($usuarios)) {
 
-            $contenido[] = d(_titulo("descubre otras cuentas", 4), 'titulo_otras_cuentas row');
+            $contenido[] = d(_titulo($titulo, 4), 'titulo_otras_cuentas row');
         }
 
         $contenido[] = d($response, 13);
@@ -88,6 +88,9 @@ if (!function_exists('invierte_date_time')) {
 
         sksort($actividades, "fecha_registro");
         $response = [];
+        $rand = rand(5,10);
+        $a  = 0;
+                
         foreach ($actividades as $row) {
 
             $id_usuario_venta = $row["id_usuario_referencia"];
@@ -178,7 +181,17 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $elemento[] = flex(d("", $attr), $total_like, "align-items-center ", "mr-2");
-            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white");
+            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-12");
+
+            if($a == $rand){
+                $place = d("",'seccion_nuevos_ingresos');
+                $response[] = d($place, "mt-3 mb-3 border-bottom bg-white col-sm-12");
+            }                   
+
+            $a ++;
+
+
+
         }
         return d($response, "mt-5 bg-light ");
     }

@@ -61,13 +61,23 @@ if (!function_exists('invierte_date_time')) {
             $totales = flex(
                 _text_("Usuarios", $total_usuarios),
                 _text_("Accesos", $total_accesos),
-                "mb-5 mt-5 f13 black underline",
+                "mt-5 f13 black underline",
                 "mr-3"
             );
+
             $response[] = d(
-                $totales,
-                'text-right'
+                $totales
             );
+
+            $link_actividad = a_enid("Mira los nuevos ingresos y sus actividades",
+            [
+                "href" => path_enid("busqueda"),
+                "class" => "mb-5"
+            ]);
+            $response[] = d(
+                $link_actividad
+            );
+
             $response[] = append($lineas_registros);
         }
 

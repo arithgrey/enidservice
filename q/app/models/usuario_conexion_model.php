@@ -83,6 +83,37 @@ class Usuario_conexion_model extends CI_Model
         return $this->db->query($query_get)->result_array();
 
     }
+    function nuevos_ingresos($id_seguidor)
+    {
+
+        $query_get = "SELECT 
+                    u.name , 
+                    u.apellido_paterno, 
+                    u.apellido_materno , 
+                    u.id,
+                    u.idtipo_comisionista,
+                    u.ha_vendido,
+                    DATE(u.fecha_registro) fecha_registro 
+                    FROM usuario_perfil up 
+                    INNER JOIN
+                    users u 
+                    ON 
+                    u.id = up.idusuario
+                    WHERE 
+                    u.id != $id_seguidor 
+                    AND
+                    up.idperfil IN (3,6)                                         
+                    AND 
+                    u.status > 0                     
+                    AND  
+                    u.id NOT IN (SELECT id_usuario FROM usuario_conexion WHERE id_seguidor = $id_seguidor )
+                    ORDER BY u.ha_vendido DESC, u.fecha_registro DESC
+                    LIMIT 6";
+
+        return $this->db->query($query_get)->result_array();
+
+    }
+    
 
     function total_seguidores($id_seguidor)
     {

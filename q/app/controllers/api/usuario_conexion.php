@@ -61,6 +61,23 @@ class Usuario_conexion extends REST_Controller
 
         $this->response($response);
     }
+    function nuevos_ingresos_GET()
+    {
+
+        $response = false;
+        $param = $this->get();
+        if (fx($param, 'id_usuario')) {
+
+            $id_seguidor = $param["id_usuario"];
+            $response = $this->usuario_conexion_model->nuevos_ingresos($id_seguidor);
+            $response = $this->app->add_imgs_usuario($response);
+            $response = conexiones($response, $id_seguidor, "Nuevos usuarios",'descarte_nuevo_ingreso',  'conexion_nuevo_ingreso');
+        }
+
+        $this->response($response);
+    }
+    
+
 
     function totales_seguidores_GET()
     {
