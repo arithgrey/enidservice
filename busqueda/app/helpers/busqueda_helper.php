@@ -39,6 +39,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($link_descuento, $class);
         $response[] = extras_fake();
         $response[] = place('seccion_sugerencias');
+        //$response[] = place('seccion_nuevos_ingresos');
         $response[] = d(d("", "seccion_noticias"), 13);
 
         return append($response);
