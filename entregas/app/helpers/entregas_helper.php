@@ -621,10 +621,19 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($link, _text_(_4auto, 'mt-5'));
         $r[] = d($imagen , _6auto);
+        $r[] = d(format_link(
+            "Actividades recién notificadas",
+            [
+                "href" => path_enid("busqueda")   ,
+                "class" =>  "mt-5"             
+            ],0
+        ),4,1);
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
 
     }
+    /**/
+    
     function reporte_reparto(&$ids_usuarios_entregas, &$repartidores, &$data)
     {
 
@@ -832,7 +841,6 @@ if (!function_exists('invierte_date_time')) {
             }
         }
         return $text;
-    }
-
-
+    }   
+    
 }

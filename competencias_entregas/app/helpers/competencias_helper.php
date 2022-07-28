@@ -40,6 +40,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         ),_text_(_4auto,'mt-5'));
         $response[] = d(flex($links),4,1);
+        $response[] = d(mas_actividades(),4,1);
         return append($response);
 
     }
@@ -112,12 +113,24 @@ if (!function_exists('invierte_date_time')) {
             $tablero[] = flex($links);
 
             $tablero[] = d(d($response, 13), 'container-fluid');
+            $tablero[] = d(d(mas_actividades(), 13), 'container-fluid');
+            
             return d($tablero, 10, 1);
         } else {
 
             return sin_ventas();
         }
 
+    }
+    function mas_actividades(){
+
+        return format_link(
+            "Actividades recién notificadas",
+            [
+                "href" => path_enid("busqueda")   ,
+                "class" =>  "mt-5"             
+            ],0
+        );
     }
 
 
