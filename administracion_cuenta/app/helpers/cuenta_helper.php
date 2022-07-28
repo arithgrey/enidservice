@@ -19,7 +19,7 @@
             1
 
         );
-
+        
         $seccion[] = _titulo("actualizar datos de acceso");
         $seccion[] = frm_pw();
         $actualizar = d($seccion, 'col-md-8 col-md-offset-2 p-0');
@@ -30,7 +30,7 @@
         $r[] = tab_seccion(orden_productos($usuario), 'tab_orden_productos');
         $r[] = tab_seccion(calma(), 'tab_direccion');
         $r[] = tab_seccion(formas_entrega($usuario), 'tab_entregas');
-
+        
         return d(tab_content($r), _10_12);
 
     }
@@ -315,7 +315,7 @@
 
         } else {
 
-            $r[] = get_campo($usuario, "nombre", "Tu Nombre");
+            $r[] = get_campo($usuario, "name", "Tu Nombre");
             $r[] = get_campo($usuario, "apellido_paterno", "Tu prime apellido");
             $r[] = get_campo($usuario, "apellido_materno", "Tu prime apellido");
 
@@ -434,7 +434,7 @@
                 "class" => "nombre_usuario",
                 "required" => true,
                 "type" => "text",
-                "value" => pr($usuario, 'nombre'),
+                "value" => pr($usuario, 'name'),
                 "maxlength" => 30
             ],
             _text_nombre

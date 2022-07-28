@@ -41,11 +41,21 @@ if (!function_exists('invierte_date_time')) {
         ),_text_(_4auto,'mt-5'));
 
         $response[] = d(flex($links),4,1);
+        $response[] = d(mas_actividades(),4,1);
 
         return append($response);
 
-    }
+    }  
+    function mas_actividades(){
 
+        return format_link(
+            "Actividades recién notificadas",
+            [
+                "href" => path_enid("busqueda")   ,
+                "class" =>  "mt-5"             
+            ],0
+        );
+    }
 
     function render($data)
     {
@@ -120,6 +130,9 @@ if (!function_exists('invierte_date_time')) {
             $tablero[] = flex($links, ' justify-content-center f12');
             $fotos_top = d($response, 'row justify-content-center ');
             $tablero[] = d($fotos_top, 'container-fluid');
+            $tablero[] = d(mas_actividades(),4,1);
+            
+
             return d($tablero, 10, 1);
         } else {
 

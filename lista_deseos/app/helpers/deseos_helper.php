@@ -5,13 +5,20 @@ if (!function_exists('invierte_date_time')) {
     function render_deseos($data)
     {
 
+        $r[] = d(menu(), 2);
+        $r[] = d(list_clasificaciones($data), 10);
 
-        $r[] = hrz(menu(), list_clasificaciones($data), 2);
-        $r[] = hr();
-        $r[] = slider_preferencias();
-        $r[] = hr();
+        $link = format_link(
+            "Explorar artículos",
+            ["href" => path_enid("home")]
+        );
+
+
+        $r[] = d($link, "mt-5 mb-5 col-md-4 col-md-offset-4");
+        $r[] = d(slider_preferencias(), 12);
+
+
         return append($r);
-
     }
 
     function slider_preferencias()
@@ -33,20 +40,16 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "src" => "../img_tema/preferencias/up-arrow.png"
                 ]
-            ), "slide-nav-up")
-            ,
+            ), "slide-nav-up"),
             d(img(
                 [
                     "src" => "../img_tema/preferencias/up-arrow.png"
                 ]
-            ), "slide-nav-down")
-            ,
+            ), "slide-nav-down"),
             "slider-nav"
         );
 
-        $response = d(append($r), ["id" => "slider"]);
-        return d($response, 8, 1);
-
+        return  d(append($r), ["id" => "slider"]);
     }
 
 
@@ -55,7 +58,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return format_productos_deseados($data, $productos, $externo);
-
     }
 
     function format_temporadas()
@@ -69,16 +71,15 @@ if (!function_exists('invierte_date_time')) {
                         "src" => "../img_tema/preferencias/preferencias-1.jpg",
                         "class" => "from-left"
                     ]
-                ), "slide-image animate"
+                ),
+                "slide-image animate"
             ),
 
             d(
-                temporada()
-                ,
+                temporada(),
                 "slide-content"
             )
         );
-
     }
 
     function format_images_preferencias()
@@ -93,17 +94,14 @@ if (!function_exists('invierte_date_time')) {
                         "src" => "../img_tema/preferencias/preferencias-2.jpg",
                         "class" => "from-left"
                     ]
-                )
-                ,
+                ),
                 "slide-image animate"
             ),
             d(
-                format_slide_accesorios()
-                ,
+                format_slide_accesorios(),
                 "slide-content"
             )
         );
-
     }
 
     function format_images()
@@ -124,15 +122,13 @@ if (!function_exists('invierte_date_time')) {
 
         $str = _text(
             d(
-                h("Encuentra entre múltiples opciones", 3, "from-bottom")
-                ,
+                h("Encuentra entre múltiples opciones", 3, "from-bottom"),
                 "animate"
-            )
-            ,
-            p("Para Dama y Caballero")
-            ,
+            ),
+            p("Para Dama y Caballero"),
             h(
-                "Mira las opciones", 3,
+                "Mira las opciones",
+                3,
                 [
                     "class" => "shop-now",
                     "href" => "../search"
@@ -144,7 +140,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($str, "slide-content");
 
         return append($r);
-
     }
 
 
@@ -158,25 +153,25 @@ if (!function_exists('invierte_date_time')) {
         if ($is_mobile == 1) {
             $r[] = $tmp;
         }
-        $r[] = '<div class="col-lg-8">';
+        $r[] = '<div class="row">';
 
         $t = 0;
         $z = 0;
-        foreach ($preferencias as $row):
+        foreach ($preferencias as $row) :
 
-            if ($z == 0):
+            if ($z == 0) :
 
                 $r[] = '<div class="col-lg-4">';
 
             endif;
             $r[] = format_clasificaciones($row);
             $z++;
-            if ($z == 9):
+            if ($z == 9) :
                 $r[] = '</div>';
                 $z = 0;
             endif;
             $t++;
-            if ($r == 26):
+            if ($r == 26) :
                 $r[] = '</div>';
             endif;
         endforeach;
@@ -187,7 +182,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = $tmp;
         }
         return append($r);
-
     }
 
     function sin_productos()
@@ -195,7 +189,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = busqueda_error();
         $r[] = h("UPS! AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-        $r[] = a_enid(btn("Explorar ahora!",
+        $r[] = a_enid(btn(
+            "Explorar ahora!",
             [
 
                 "class" => "mt-5"
@@ -203,7 +198,6 @@ if (!function_exists('invierte_date_time')) {
             ]
         ), path_enid("home"));
         return d($r, 'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
-
     }
 
     function format_productos_deseados($data, $productos_deseados, $externo)
@@ -215,7 +209,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(seccion_procesar_pago($data, $productos_deseados), 4);
 
         return d($response, 10, 1);
-
     }
 
     function seccion_procesar_pago($data, $productos_deseados)
@@ -226,13 +219,12 @@ if (!function_exists('invierte_date_time')) {
         $inputs = [];
         $es_premium = 0;
 
-        
+
 
         if (array_key_exists("usuario", $data)) {
 
             $usuario = $data["usuario"];
             $es_premium = es_premium($data, $usuario);
-
         }
 
         $total_descuento = 0;
@@ -261,106 +253,97 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
         $total_en_descuento = descuento_recompensa($data);
-        
+
         if ($es_premium && $total_en_descuento < 1) {
 
             $total_menos_descuento = ($subtotal - $total_descuento);
             $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
-            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");        
+            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
             $response[] = d(money($total_menos_descuento), "display-4 black");
-
-
         } else {
 
-            $response = formato_subtotal($response ,$data, $subtotal);
-
+            $response = formato_subtotal($response, $data, $subtotal);
         }
 
         $inputs_recompensa = valida_envio_descuento($data);
-        
+
         $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal);
 
 
         if (es_administrador_o_vendedor($data)) {
-        
+
             $comision_venta = comisiones_por_productos_deseados($productos_deseados);
             $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comision_venta), 'strong texto_comision_venta'));
-            $response[] =  d($textos , 'display-6 black mt-5 text-right text-uppercase p-2');
-            $response[] =  hiddens(["class" => "comision_venta", "value" => $comision_venta ]);
-
+            $response[] =  d($textos, 'display-6 black mt-5 text-right text-uppercase p-2');
+            $response[] =  hiddens(["class" => "comision_venta", "value" => $comision_venta]);
         }
-        
+
 
         return append($response);
-
     }
-    
+
     function valida_envio_descuento($data)
     {
 
         $recompensas = $data["recompensas"];
         $config =
-        [
-            "name" => "recompensas[]",
-            "value" => 0,
-            "type" => "checkbox",
-            "class" => _text("recompensa_", 0)
-        ];
+            [
+                "name" => "recompensas[]",
+                "value" => 0,
+                "type" => "checkbox",
+                "class" => _text("recompensa_", 0)
+            ];
         $inputs[] = hiddens($config);
 
         if (es_data($recompensas)) {
-            
-            $descuentos = array_column($recompensas, "descuento");    
-            $total_descuento = array_sum($descuentos);
-            
-            if ($total_descuento > 0) {
-            
 
-                foreach($recompensas as $row){
+            $descuentos = array_column($recompensas, "descuento");
+            $total_descuento = array_sum($descuentos);
+
+            if ($total_descuento > 0) {
+
+
+                foreach ($recompensas as $row) {
 
                     $id_recompensa = $row["id_recompensa"];
                     $config =
-                    [
-                        "name" => "recompensas[]",
-                        "value" => $id_recompensa,
-                        "type" => "checkbox",
-                        "class" => _text("recompensa_", $id_recompensa)
-                    ];
+                        [
+                            "name" => "recompensas[]",
+                            "value" => $id_recompensa,
+                            "type" => "checkbox",
+                            "class" => _text("recompensa_", $id_recompensa)
+                        ];
 
                     $inputs[] = hiddens($config);
-                }            
-
+                }
             }
         }
 
         return $inputs;
-        
-     
     }
-    function formato_subtotal($response, $data, $subtotal){
-        
+    function formato_subtotal($response, $data, $subtotal)
+    {
+
         $total_en_descuento = descuento_recompensa($data);
-        
+
         if ($total_en_descuento > 0) {
 
             $nuevo_total = $subtotal - $total_en_descuento;
             $response[] =  d(del(money($subtotal), "display-6 red_enid"));
             $response[] =  d(money($nuevo_total), "display-6 black");
-
-        }else{
+        } else {
 
             $response[] =  d(money($subtotal), "display-5 black");
         }
 
         return $response;
-
     }
-    function descuento_recompensa($data){
+    function descuento_recompensa($data)
+    {
 
         $recompensas = $data["recompensas"];
         $descuentos = array_column($recompensas, "descuento");
         return array_sum($descuentos);
-
     }
 
     function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
@@ -374,9 +357,9 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
             $response[] = append($inputs);
-            $response[] = append($inputs_recompensa);            
+            $response[] = append($inputs_recompensa);
 
-    
+
             $seleccionar_todo = input(
                 [
                     "type" => "checkbox",
@@ -384,33 +367,33 @@ if (!function_exists('invierte_date_time')) {
                     "id" => "cobro_monto_mayor"
                 ]
             );
-            
-       
-            $extra = ($es_administrador_o_vendedor) ? "": "d-none"; 
-        
-            $seccion_cobro_externo[] = flex(
-                    $seleccionar_todo, 
-                    "¿Cobrasté algún monto mayor?",
-                    "mt-5 text-uppercase black strong  border-bottom cobro_texto",
-                    "mr-3"
-                );
-     
-            $seccion_cobro_externo[] = hiddens(["class" => "cobro_visible" , "value" => 0]);
-            $seccion_cobro_externo[] = input_frm(
-                    "", 
-                    "", 
 
-                    [
-                        "name" => "cobro_secundario",
-                        "id" => "cobro_secundario",
-                        "type" => "float",
-                        "class" => _text_("cobro_secundario d-none"),
-                        "value" => 0
-                    ]
-                );
-    
+
+            $extra = ($es_administrador_o_vendedor) ? "" : "d-none";
+
+            $seccion_cobro_externo[] = flex(
+                $seleccionar_todo,
+                "¿Cobrasté algún monto mayor?",
+                "mt-5 text-uppercase black strong  border-bottom cobro_texto",
+                "mr-3"
+            );
+
+            $seccion_cobro_externo[] = hiddens(["class" => "cobro_visible", "value" => 0]);
+            $seccion_cobro_externo[] = input_frm(
+                "",
+                "",
+
+                [
+                    "name" => "cobro_secundario",
+                    "id" => "cobro_secundario",
+                    "type" => "float",
+                    "class" => _text_("cobro_secundario d-none"),
+                    "value" => 0
+                ]
+            );
+
             $response[] = d($seccion_cobro_externo, $extra);
-            
+
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
@@ -423,7 +406,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = '<form class="form_segunda_compra" action="" method="POST">';
             $response[] = append($inputs);
             $response[] = append($inputs_recompensa);
-            
+
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = hiddens(["class" => "tipo_entrega", "name" => "tipo_entrega", "value" => 2]);
@@ -438,10 +421,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline');
             $response[] = form_close();
             return append($response);
-
         }
-
-
     }
 
     function format_slide_accesorios()
@@ -451,7 +431,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(h("Lo que usas en viajes", 2, "from-bottom"), "animate");
         $r[] = h("Explorar tienda", 3, ["class" => "shop-now", "href" => path_enid("search")]);
         return append($r);
-
     }
 
     function temporada()
@@ -462,7 +441,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(h("ROPA PARA CADA OCACIÓN", 2, "from-bottom"), "animate");
         $r[] = h("EXPLORAR TIENDA", 2, "from-bottom");
         return append($r);
-
     }
 
     function format_preferencias()
@@ -474,15 +452,13 @@ if (!function_exists('invierte_date_time')) {
         );
 
         return d($text, 4);
-
     }
 
 
     function format_clasificaciones($row)
     {
 
-        $extra = (
-            array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ?
+        $extra = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ?
             "selected_clasificacion" : "";
         $preferencia_ = _text("preferencia_", $row['id_clasificacion']);
 
@@ -501,8 +477,6 @@ if (!function_exists('invierte_date_time')) {
         $extraIcon = (array_key_exists("id_usuario", $row) && !is_null($row["id_usuario"])) ? icon("fa fa-check-circle-o ") : "";
         $clasificacion = d(append([$extraIcon, $row["nombre_clasificacion"]]), $config);
         return d($clasificacion, 1);
-
-
     }
 
 
@@ -519,13 +493,13 @@ if (!function_exists('invierte_date_time')) {
 
         $deseos
             = a_enid(
-            "TU LISTA DE ARTÍCULOS DESEADOS",
-            [
-                "id" => "mis_compras",
-                "href" => "../lista_deseos",
-                "class" => 'btn_cobranza mis_compras'
-            ]
-        );
+                "TU LISTA DE ARTÍCULOS DESEADOS",
+                [
+                    "id" => "mis_compras",
+                    "href" => "../lista_deseos",
+                    "class" => 'btn_cobranza mis_compras'
+                ]
+            );
 
         return ul([$preferencias, $deseos]);
     }
@@ -535,10 +509,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = [];
-        
+
         foreach ($productos_deseados as $row) {
-                    
-            
+
+
             $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
@@ -569,7 +543,8 @@ if (!function_exists('invierte_date_time')) {
             $x = [];
 
             $nombre_servicio = $row["nombre_servicio"];
-            $link = a_enid($nombre_servicio,
+            $link = a_enid(
+                $nombre_servicio,
                 [
                     "href" => $url_servicio,
                     "target" => "_blank",
@@ -584,7 +559,12 @@ if (!function_exists('invierte_date_time')) {
 
             $selector =
                 select_cantidad_compra(
-                    0, 10, $articulos, 'cantidad_articulos_deseados', $id);
+                    0,
+                    10,
+                    $articulos,
+                    'cantidad_articulos_deseados',
+                    $id
+                );
             $x[] = d($selector, 'col-lg-6 p-0');
 
             $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
@@ -607,9 +587,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($z, 'col-lg-3 text-center');
             $response[] = d($r, 'col-md-12 mb-5');
             $response[] = d('', 'col-md-12 mt-5 mb-5 border-bottom');
-
-
-    }
+        }
 
         $texto = p(
             "Deseleccionar todos los artículos",
@@ -641,7 +619,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = hiddens(["class" => "id_carro_compras", "name" => "id_carro_compras", "value" => $id]);
 
         return append($r);
-
     }
 
 
@@ -655,6 +632,5 @@ if (!function_exists('invierte_date_time')) {
 
             ]
         );
-
     }
 }

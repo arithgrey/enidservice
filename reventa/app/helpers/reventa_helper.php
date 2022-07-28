@@ -94,6 +94,14 @@ if (!function_exists('invierte_date_time')) {
             )
             ,_6auto
         );
+        $response[] = d(format_link(
+            "Actividades recién notificadas",
+            [
+                "href" => path_enid("busqueda")   ,
+                "class" =>  "mt-5"             
+            ],0
+        ),4,1);
+
         return append($response);
 
     }
