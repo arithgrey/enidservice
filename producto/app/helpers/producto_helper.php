@@ -285,7 +285,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("", "place_valoraciones mt-5 row");
         $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, "  h3 text-uppercase black font-weight-bold");
         $response[] = d($interes, "mt-5 text_sugerencias d-none ");
-        $response[] = d(d("", "place_tambien_podria_interezar bottom_100"));
+        $response[] = d(d("", "place_tambien_podria_interezar bottom_100 row"));
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
         $response[] = hiddens(["name" => "servicio", "class" => "servicio", "value" => $id_servicio]);
         $response[] = hiddens(

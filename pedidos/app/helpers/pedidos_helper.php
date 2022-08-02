@@ -437,7 +437,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($link_facebook, 4, 1);
         $response[] = d($link_instagram, 4, 1);
 
-        return d($response,'col-sm-12 mt-5');
+        return d($response,'col-sm-12 row mt-5');
     }
     function modal_opciones_cancelacion($data, $params)
     {
@@ -516,7 +516,7 @@ if (!function_exists('invierte_date_time')) {
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
 
-        return d($r, 'col-sm-8');
+        return d($r, 'col-sm-8 mt-5');
     }
 
     function texto_no_puede_repartir($data, $texto, $saldo_cubierto, $id_orden_compra, $id_servicio)
