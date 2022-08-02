@@ -81,13 +81,10 @@ class Home extends CI_Controller
     private function crea_orden_compra($param)
     {
 
-
         $data = $this->app->session();
         $es_carro_compras = $param["es_carro_compras"];
 
-
-        if ($es_carro_compras) {
-
+        if ($es_carro_compras) {            
             /*Debemos cambiar el status del carrito de compras
             (envio a pago estatus 2 registro de los datos del cliente)*/
             $this->notifica_productos_carro_compra($param, $data);
@@ -112,11 +109,12 @@ class Home extends CI_Controller
     private function notifica_productos_carro_compra($params, $data)
     {
 
+        
         $in_session = $data["in_session"];
         $producto_carro_compra = $params["producto_carro_compra"];
         $response = false;
         if (es_data($producto_carro_compra)) {
-
+            
             if ($in_session) {
 
 
@@ -126,6 +124,7 @@ class Home extends CI_Controller
                     "json",
                     "PUT"
                 );
+                                
             } else {
 
                 /*primer registro(prospecto)*/

@@ -1314,20 +1314,20 @@ if (!function_exists('invierte_date_time')) {
 
         $texto = texto_status_orden($data, $id_status, $vendedor);
 
-        $detalles = text_icon(_money_icon, "DETALLES DE TU COMPRA ");
-        $text_icono = ($vendedor == 1) ? "DETALLES DE LA COMPRA " : $detalles;
+        $detalles = text_icon(_money_icon, "Detalles de tu compra");
+        $text_icono = ($vendedor == 1) ? "Detalle de la compra" : $detalles;
 
         $texto_completo = flex($text_icono, $texto, "d-flex flex-column");
 
         $text = tab(
             $texto_completo, "#tab_renovar_servicio",
             [
-                "class" => 'resumen_pagos_pendientes mt-4 mb-4 strong black',
+                "class" => 'resumen_pagos_pendientes mt-4 mb-4 fp8',
                 "id" => $id_orden_compra,
             ]
         );
 
-        return d($text, 'col-md-3');
+        return d($text, 'col-md-4');
     }
 
 
@@ -1382,7 +1382,7 @@ if (!function_exists('invierte_date_time')) {
 
         return ($modalidad < 1 && $ordenes < 1) ?
             "" :
-            _titulo(mayorque($modalidad, 0, "TUS VENTAS", "TUS COMPRAS"));
+            _titulo(mayorque($modalidad, 0, "Ventas", "Compras"));
 
     }
 

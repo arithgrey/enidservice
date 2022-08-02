@@ -1314,7 +1314,7 @@ if (!function_exists('invierte_date_time')) {
                     $img,
                     [
                         "href" => $path_servicio,
-                        "class" => "col-lg-3 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
+                        "class" => "col-md-3 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
                     ]
             );
                 
@@ -2343,7 +2343,7 @@ if (!function_exists('invierte_date_time')) {
                 $img,
                 [
                     "href" => path_enid("producto", $row["id_servicio"]),
-                    "class" => "col-lg-3 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
+                    "class" => "col-md-3 hps h_345 col-xs-6 p-1 mh-auto top_50 bottom_50 border border-primary"
                 ]
             );
             

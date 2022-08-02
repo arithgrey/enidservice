@@ -41,7 +41,7 @@ class Home extends CI_Controller
 
     private function restricciones($data)
     {
-
+        
         $restricciones = $data['restricciones'][$this->modulo];
         $id_perfil = $data['id_perfil'];
         $acceso = (in_array($id_perfil, $restricciones));
@@ -50,6 +50,7 @@ class Home extends CI_Controller
 
             redirect(path_enid("url_home"));
         }
+        
     }
 
     private function prevenir_acceso($param, $data)
