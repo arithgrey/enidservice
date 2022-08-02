@@ -186,7 +186,7 @@ if (!function_exists('invierte_date_time')) {
                 $formato_imagen = flex($icono_eliminar,$imagen);
                 $r[] = d($formato_imagen, 
                 [
-                    "class" => "col-sm-2",
+                    "class" => "col-sm-2 col-xs-6",
                     "onclick" => "log_operaciones_externas(24, $id_servicio)"
                 ]);
             }
