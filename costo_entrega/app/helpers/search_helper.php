@@ -27,7 +27,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(hr(), _text_($ext , 'd-none sugerencias_titulo col-sm-12 '));
         $response[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 ');
         $response[] = d(
-            place("place_tambien_podria_interezar"),
+            place("place_tambien_podria_interezar row"),
             "col-sm-12"
         );
 
