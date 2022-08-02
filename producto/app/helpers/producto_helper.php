@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $hoy = $fecha->format('H:i:s');
         $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
 
-        $text = "Realiza tu pedido antes de las 6 PM y tenlo hoy mismo!";
+        $text = "Haz tu pedido antes de las 6PM y tenlo hoy!";
         $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
         $str = ($hoy < 18) ? $text : $mas_un_dia;
 
@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
-        $response[] = d(_titulo($str, 5), 'mt-5 mb-5 text-center');
+        $response[] = d(d($str, 'f11 black'), 'mt-5 mb-5 text-center');
 
         return append($response);
     }
@@ -131,12 +131,12 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre_producto = _titulo($titulo, 2);
             $x[] = venta_producto(
+                $s, 
                 $data,
                 $nombre_producto,
                 $es_servicio,
                 $existencia,
-                $id_servicio,
-                $in_session,
+                $id_servicio,                
                 $q2,
                 $precio,
                 $id_ciclo_facturacion,
@@ -301,12 +301,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function venta_producto(
+        $servicio,
         $data,
         $nombre_producto,
         $es_servicio,
         $existencia,
-        $id_servicio,
-        $in_session,
+        $id_servicio,        
         $q2,
         $precio,
         $id_ciclo_facturacion,
@@ -333,6 +333,14 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($link_valoraciones);
+        
+        $numero_compras = pr($servicio, "deseado");
+        if($numero_compras > 1){
+            
+            $r[] = d(_text_($numero_compras, "vendidos"),'text-secondary');
+            
+        }
+        
         $r[] = ($es_mobile > 0) ? "" : $nombre_producto;
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
