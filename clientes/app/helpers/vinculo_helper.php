@@ -55,7 +55,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);
-            $response[] = d(img($link),  'col-sm-4');
+            $response[] = d(img($link),  'col-sm-4 col-xs-6');
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');
