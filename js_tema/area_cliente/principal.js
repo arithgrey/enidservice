@@ -293,8 +293,7 @@ let r_compras_usuario = function (data) {
     if (parseInt(data.total) < 1 ) {
         
         if (parseInt(modalidad) < 1) {
-
-
+                    
             let text = 'UPS! AÚN NO HAZ HECHO ALGÚN PEDIDO';
             let titulo= tag('h2',text,'text-center mb-5');
             let accion= tag('a','explorar','visitar_sitio d-block mt-5 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold text-center');

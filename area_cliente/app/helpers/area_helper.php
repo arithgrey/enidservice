@@ -4,20 +4,49 @@ if (!function_exists('invierte_date_time')) {
     function render_user($data)
     {
         $action = $data["action"];
+        $menu[] = a_enid(
+            "Promociones",
+            [
+                "href" => path_enid("promociones"),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            "Novedades",
+            [
+                "href" => path_enid("search", "/?q2=0&q=&order=1"),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            'Intereses y preferencias',
+            [
+                'href' => path_enid('lista_deseos_preferencias'),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            'Lista de deseos',
+            [
+                'href' => path_enid('lista_deseos'),
+                "class" =>  "black underline"
+            ]
+        );
 
+
+        
         $r[] = hiddens_tickects($action, $data["ticket"]);
-
-
         $r[] = tab_seccion(
-            d('',
-                "place_servicios_contratados col-md-10 col-md-offset-1 p-0"
+            d(
+                '',
+                "place_servicios_contratados p-0"
             ),
             "tab_mis_pagos",
             active_tab('compras', $action)
         );
 
         $r[] = tab_seccion(
-            d('', "place_ventas_usuario col-md-10 col-md-offset-1"),
+            d('', "place_ventas_usuario"),
             'tab_mis_ventas',
             active_tab('ventas', $action)
         );
@@ -27,13 +56,16 @@ if (!function_exists('invierte_date_time')) {
             'tab_pagos'
         );
         $r[] = tab_seccion(
-            d('',
+            d(
+                '',
                 "place_resumen_servicio d-sm-flex  align-items-center mt-5 col-lg-8 col-lg-offset-2 mt-md-0 p-0"
             ),
             'tab_renovar_servicio'
         );
 
-        $r[] = tab("", "#tab_renovar_servicio",
+        $r[] = tab(
+            "",
+            "#tab_renovar_servicio",
             [
                 "class" => "resumen_pagos_pendientes",
             ]
@@ -42,9 +74,12 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = paseo();
-        $response[] = d(tab_content($r), 12);
-        return append($response);
 
+
+        $secciones[] = d(append($menu), 3);
+        $secciones[] = d(tab_content($r), 9);
+        $response[] =  d($secciones, 12);
+        return append($response);
     }
 
     function paseo()
@@ -85,7 +120,6 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(d($x, 6, 1), "text-center");
         }
         return append($r);
-
     }
 
     function crea_alcance($alcance)
@@ -117,7 +151,6 @@ if (!function_exists('invierte_date_time')) {
             $response[] = tb(append($r));
         }
         return append($response);
-
     }
 
     function active_tab($nombre_seccion, $estatus)
@@ -126,7 +159,6 @@ if (!function_exists('invierte_date_time')) {
         $a = igual($nombre_seccion, $estatus, 1, 0);
         $b = igual($nombre_seccion, "compras", 1, 0);
         return (strlen($estatus) > 0) ? $a : $b;
-
     }
 
     function menu()
@@ -148,8 +180,7 @@ if (!function_exists('invierte_date_time')) {
 
         return d(
             $list,
-                 "col-sm-12 col-md-2 d-flex flex-column menu_area_cliente p-md-0 mt-5"
+            "col-sm-12 col-md-2 d-flex flex-column menu_area_cliente p-md-0 mt-5"
         );
-
     }
 }
