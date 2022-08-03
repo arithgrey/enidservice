@@ -595,11 +595,13 @@ class Paths
                 "css" =>
                 [
                     "css_tienda.css",
+                    "confirm-alert.css",                    
 
                 ],
                 "js" =>
                 [
                     'producto/principal.js',
+                    "alerts/jquery-confirm.js",
 
                 ]                
             ],

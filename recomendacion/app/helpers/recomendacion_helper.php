@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
         $resumen_recomendacion = $data["resumen_recomendacion"];
         $usuario = $data["usuario"];
         $paginacion = $data["paginacion"];
-        $vendedor = get_campo($usuario, "nombre");
+        $vendedor = pr($usuario, "name");
         $link = a_enid(
             $vendedor,
             [

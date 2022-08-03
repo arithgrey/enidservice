@@ -124,6 +124,7 @@ let response_carga_valoraciones = data => {
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").before("<div class='black'>Opiniones de clientes</div>");
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-block");
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").css("margin-top", "-8px");
+    $(".baja_valoracion").click(confirmacion_baja_valoracion);
 
 
 };
@@ -251,6 +252,30 @@ let agregar_referencia_fotografica = function () {
     $("#modal_referencia_fotografica").modal('show');
 
 }
+let confirmacion_baja_valoracion = function () {
+
+
+    let $id_valoracion = $(this).attr('id');
+    if(parseInt($id_valoracion) > 0){
+
+        show_confirm("¿Seguro que quieres ocultar esta valoración?", "", "CONTINUAR", function () {
+                
+            let url = "../q/index.php/api/valoracion/id/format/json/";
+            let data_send = {"id": $id_valoracion, "status" : 2};
+    
+            request_enid("PUT", data_send, url, function(){
+                carga_valoraciones();
+            });
+            
+    
+        });
+
+        
+    }
+    
+
+}
+
 let catalogo_referencias = function (data) {
 
     render_enid("#galeria_referencias", data);

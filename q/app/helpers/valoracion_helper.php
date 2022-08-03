@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = place("table_orden_1");
         $z[] = criterios($comentarios);
 
-        $z[] = comentarios($comentarios, $data["respuesta_valorada"]);
+        $z[] = comentarios($comentarios, $data);
         $z[] = referencias_fotograficas($data);
         $z[] = d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between");
 
@@ -60,7 +60,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = place("place_registro_valoracion");
         $z[] = h(add_text(
             "ESCRIBE UNA PREGUNTA ",
-            pr($vendedor, "nombre"),
+            pr($vendedor, "name"),
             pr($vendedor, "apellido_paterno")
         ), 3);
 
@@ -221,8 +221,11 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function comentarios($comentarios, $es_valorado)
+    function comentarios($comentarios, $data)
     {
+
+        $es_valorado = $data["respuesta_valorada"];
+        $es_administrador = $data["es_administrador"];
 
         $response = [];
         foreach ($comentarios as $row) {
@@ -230,6 +233,14 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id_valoracion"];
             $num_util = $row["num_util"];
             $fecha_registro = $row["fecha_registro"];
+            
+            if($es_administrador){
+                
+                $texto_ocultar = _text_(icon(_eliminar_icon), "Ocultar reseña");
+                $r[]  = d($texto_ocultar , ["class" =>  "black underline mb-5 baja_valoracion cursor_pointer" , "id" => $id]);
+    
+            }
+            
             $r[] = flex(
                 crea_estrellas($row["valoracion"], 1),
                 format_fecha($fecha_registro),

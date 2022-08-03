@@ -17,7 +17,10 @@ class valoracion_model extends CI_Model
 		$this->db->limit($limit);
 		return $this->db->update("valoracion", $data);
 	}
-
+	function q_up($q, $q2, $id)
+    {
+        return $this->update([$q => $q2], ["id_valoracion" => $id]);
+    }
 	function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
 	{
 
@@ -48,7 +51,11 @@ class valoracion_model extends CI_Model
 
 	function get_valoraciones($param)
 	{
-		return $this->get([], ["id_servicio" => $param["id_servicio"]], 6, 'id_valoracion');
+		return $this->get([], 
+		[
+			"id_servicio" => $param["id_servicio"],
+			"status" => 1
+		], 6, 'id_valoracion');
 	}
 
 	function get_valoraciones_usuario($param)
