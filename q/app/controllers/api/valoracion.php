@@ -14,6 +14,18 @@ class Valoracion extends REST_Controller
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
+    function id_PUT()
+    {
+
+        $param = $this->put();
+        $response = false; 
+        if (fx($param, "status")) {
+            
+            $response = $this->valoracion_model->q_up("status", $param["status"], $param["id"]);
+
+        }
+        $this->response($response);
+    }
     function num_GET()
     {
         $param = $this->get();
@@ -24,7 +36,6 @@ class Valoracion extends REST_Controller
             $params = ["COUNT(0)num"];
             $params_where = ["id_servicio" => $param["id_servicio"], "id_usuario" => $param["id_usuario"]];
             $response = $this->valoracion_model->get($params, $params_where)[0]["num"];
-
         }
         $this->response($response);
     }
@@ -57,10 +68,8 @@ class Valoracion extends REST_Controller
             $vendedor = $this->app->usuario($servicio[0]["id_usuario"]);
             $propietario = ($servicio[0]["id_usuario"] != $id_servicio) ? 0 : 1;
             $response = get_form_pregunta_consumidor($id_servicio, $propietario, $vendedor, $servicio);
-
         }
         $this->response($response);
-
     }
 
     function gamificacion_pregunta_PUT()
@@ -99,7 +108,6 @@ class Valoracion extends REST_Controller
             $r[] = hr();
             $r[] = $data_comentarios;
             $data_comentarios = d(append($r), 6, 1);
-
         }
         $this->response($data_comentarios);
     }
@@ -126,7 +134,6 @@ class Valoracion extends REST_Controller
         }
         $data["servicios"] = $data_complete;
         $this->load->view("servicio/lista", $data);
-
     }
 
     function usuario_GET()
@@ -168,7 +175,6 @@ class Valoracion extends REST_Controller
         ];
 
         $this->response(render_articulo($data));
-
     }
 
     function index_POST()
@@ -208,7 +214,6 @@ class Valoracion extends REST_Controller
 
         $sender = get_notificacion_valoracion($this->get_usuario_servicio($id_servicio), $id_servicio);
         $this->app->send_email($sender, 1);
-
     }
 
     private function referencias($param)
@@ -219,7 +224,6 @@ class Valoracion extends REST_Controller
             $id_servicio = $param["id_servicio"];
             return $this->app->api("referencia/servicio/", ["id_servicio" => $id_servicio]);
         }
-
     }
 
     private function get_usuario_servicio($id_servicio)
@@ -245,6 +249,4 @@ class Valoracion extends REST_Controller
 
         return $this->app->api("producto/producto_por_id", $q);
     }
-
-
 }

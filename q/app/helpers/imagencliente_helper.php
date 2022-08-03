@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
                 $link = _text("../img_tema/clientes/", $row["nombre_imagen"]);
                 $response[] = d(img($link),
                     [
-                        "class" => "col-sm-6 imagen_referencia_muestra",
+                        "class" => "col-xs-6  imagen_referencia_muestra cursor_pointer",
                         "id_servicio" => $id_servicio,
                         "id" => $id_imagen
                     ]
