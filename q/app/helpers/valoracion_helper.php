@@ -228,13 +228,16 @@ if (!function_exists('invierte_date_time')) {
         $es_administrador = $data["es_administrador"];
 
         $response = [];
+        
         foreach ($comentarios as $row) {
             $r = [];
             $id = $row["id_valoracion"];
             $num_util = $row["num_util"];
             $fecha_registro = $row["fecha_registro"];
+            $id_usuario = $row["id_usuario"];
             
             if($es_administrador){
+                
                 
                 $texto_ocultar = _text_(icon(_eliminar_icon), "Ocultar reseña");
                 $r[]  = d($texto_ocultar , ["class" =>  "black underline mb-5 baja_valoracion cursor_pointer" , "id" => $id]);
@@ -253,7 +256,10 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d(text_icon("fa fa-check-circle", "Recomiendo este producto"), 'recomendaria_valoracion strong color_recomendaria');
             }
 
-            $r[] = d_p($row["nombre"], 'strong black mt-1');
+            $link = path_enid("usuario_contacto", $id_usuario);
+            $nombre = $row["nombre"];            
+            $nombre = ($es_administrador ) ? a_enid($nombre , ["href" => $link]) : $nombre;
+            $r[] = d_p($nombre, 'strong black mt-1');
             $texto_valoracion = ($es_valorado === $id) ? "Gracias! Se ha enviado correctamente tus comentarios de esta reseña " : "";
             $es_util = a_enid("SI" . span("[" . $num_util . "]", 'num_respuesta'),
                 [
