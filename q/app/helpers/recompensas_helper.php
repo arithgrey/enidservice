@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use App\View\Components\titulo;
+
+ if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
 
@@ -371,12 +375,12 @@ if (!function_exists('invierte_date_time')) {
     }
     /*Sugerencias aleatorias para la sección principal*/
     function sugerencias($recompensa){
-        
-        
+                
         $response = [];
         
         if (es_data($recompensa)) {
             
+            $response[] = d(_titulo("COMPRA EN CONJUNTO Y OBTEN DESCUENTOS", 4), "row mt-5");
             foreach ($recompensa as $row) {
 
                 $id_servicio = $row["id_servicio"];
