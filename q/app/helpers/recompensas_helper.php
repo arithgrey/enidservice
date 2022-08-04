@@ -415,6 +415,9 @@ if (!function_exists('invierte_date_time')) {
 
 
             }
+            
+            $link_promos = format_link("Más promociones",["href" => path_enid("promociones")]);
+            $response[] = d($link_promos, "row mt-5");
                             
         }
         

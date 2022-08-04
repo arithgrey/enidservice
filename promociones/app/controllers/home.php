@@ -28,7 +28,7 @@ class Home extends CI_Controller
     private function configuracion_paginador($param, $numero_recompensas){
         
         $page = prm_def($param, "page",1); /*Pagina actual*/        
-        $per_page = prm_def($param, "rpg", 8); //la cantidad de registros que desea mostrar        
+        $per_page = prm_def($param, "rpg", 20); //la cantidad de registros que desea mostrar        
         $offset = ($page - 1) * $per_page;
             
         $conf["page"] = $page;

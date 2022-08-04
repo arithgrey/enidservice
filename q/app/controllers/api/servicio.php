@@ -1942,8 +1942,16 @@ class Servicio extends REST_Controller
         $response = false;
 
         if (fx($param, "id_servicio")) {
-
-            $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"]);
+            
+            $sugerido = prm_def($param ,  "sugerido");
+            $id_servicio  = $param["id_servicio"];
+            if($sugerido > 0){
+                
+                /*Sugerencia entre existentes*/
+                $total = $this->serviciosmodel->total()[0]["total"];
+                $id_servicio = rand(1, $total);
+            }
+            $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
             $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
 
             $servicios = $this->completa_servicios_sugeridos($response, $param);

@@ -5,16 +5,38 @@ let $modal_recompensa = $("#modal_recompensa");
 let $agregar_promocion = $(".agregar_promocion");
 let $servicio_dominante_recompensa =  $(".servicio_dominante_recompensa");
 let $bottom_carro_compra_recompensa = $(".bottom_carro_compra_recompensa");
+
 set_option("page", 1);
 $(document).ready(() => {
 
     $edicion_recompensa.click(editar_recompensa);
     $agregar_promocion.click(nueva_promocion);
     $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
-
+    $("footer").ready(carga_productos_sugeridos);
 
     
 });
+
+
+let carga_productos_sugeridos = () => {
+
+    let url = "../q/index.php/api/servicio/sugerencia/format/json/";
+    let data_send = {
+        "id_servicio": 0,
+        "sugerido": 2
+    };
+    request_enid("GET", data_send, url, response_carga_productos);
+};
+
+
+let response_carga_productos = data => {
+
+
+    if (data["sugerencias"] == undefined) {
+        $(".text_sugerencias").removeClass("d-none");
+        render_enid(".place_tambien_podria_interezar", data);
+    }
+};
 
 let nueva_promocion = function () {
     

@@ -685,6 +685,12 @@ class serviciosmodel extends CI_Model
                     ORDER BY count(0) DESC  LIMIT 5";
         return $this->db->query($query_get)->result_array();
     }
+    function total()
+    {
+
+        $query_get = "SELECT count(0)total FROM servicio";
+        return $this->db->query($query_get)->result_array();
+    }
 
     function get_resumen($param)
     {

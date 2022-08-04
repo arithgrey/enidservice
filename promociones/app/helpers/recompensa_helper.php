@@ -9,7 +9,8 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $html_paginador = $data["html_paginador"];
 
-        $response[] =  d($html_paginador);
+        $response[] = d(_titulo("COMPRA EN CONJUNTO Y OBTEN DESCUENTOS", 2),'mb-5');
+        
         if (es_data($recompensa)) {
             
             foreach ($recompensa as $row) {
@@ -50,13 +51,19 @@ if (!function_exists('invierte_date_time')) {
 
             }
             $response[] =  d($html_paginador,  'mt-5');
-        
+            $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, "  h3 text-uppercase black font-weight-bold");
+            $response[] = d($interes, "mt-5 text_sugerencias d-none ");
+            $response[] = d("", "place_tambien_podria_interezar");
+
             $response[] = resumen_recompensa();
             
+            
         }
+        
         $response[] = modal_nueva_recompensa();      
+        
         $response[] = botones_ver_mas();  
-        return d($response, 'col-xs-12 col-sm-12 col-md-8 col-md-offset-2');
+        return d($response, 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1');
 
     }
     function botones_ver_mas()
@@ -214,9 +221,7 @@ if (!function_exists('invierte_date_time')) {
     function configuracion_paginador($param, $numero_recompensas)
     {
         $page = prm_def($param, "page",1); /*Pagina actual*/        
-        $per_page = prm_def($param, "rpg", 8); //la cantidad de registros que desea mostrar
-        $adjacents = 4; //brecha entre páginas después de varios adyacentes
-        $offset = ($page - 1) * $per_page;
+        $per_page = prm_def($param, "rpg", 8); //la cantidad de registros que desea mostrar        
             
         $conf["page"] = $page;
         $conf["totales_elementos"] = $numero_recompensas;
