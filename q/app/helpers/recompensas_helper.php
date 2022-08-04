@@ -347,6 +347,28 @@ if (!function_exists('invierte_date_time')) {
 
     }
 
+    function total_recompensa($row)
+    {
+
+        $precio_servicio = $row["precio"];
+        $precio_conjunto = $row["precio_conjunto"];
+        $descuento = $row["descuento"];
+
+        $total = ($precio_conjunto + $precio_servicio) - $descuento;
+        $total_sin_descuento = ($precio_conjunto + $precio_servicio);
+
+        $total_sin_descuento = ($descuento > 0) ? del(money($total_sin_descuento), 'fp9') : '';
+
+
+        $por_cobrar = money($total);
+        $elementos = [
+            d("Total", 'strong'),
+            d($total_sin_descuento),
+            d($por_cobrar, 'red_enid strong'),
+        ];
+
+        return d($elementos, "d-flex flex-column");
+    }
     /*Sugerencias aleatorias para la sección principal*/
     function sugerencias($recompensa){
         
@@ -364,7 +386,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_recompensa = $row["id_recompensa"];
 
 
-                $texto_totales = totales($row, $recompensa);
+                $texto_totales = total_recompensa($row);
                 $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
                 $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
                 $editar_compra = editar_comprar($id_recompensa);
@@ -375,7 +397,6 @@ if (!function_exists('invierte_date_time')) {
                     d("+"),
                     d($imagen_servicio_conjunto, $clase_imagen),
                     d($texto_totales, $clase_imagen)
-
                 ];
 
                 $seccion_fotos = d($promocion, _text_('d-flex', _between));
