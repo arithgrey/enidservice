@@ -19,9 +19,11 @@ if (!function_exists('invierte_date_time')) {
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);        
         
-        $response[] = d(d("","promociones_sugeridas col-sm-10 col-sm-offset-1"),13);
-        $response[] = d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 13);
-        
+        $seccion_compras_conjunto = d("","promociones_sugeridas");
+        $seccion_categorias = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
+        $adicionales = flex_md($seccion_compras_conjunto, $seccion_categorias, _between,"col-xs-12 col-md-8", "col-xs-12 col-md-4");
+        $secciones_adicionales = d($adicionales,13);     
+        $response[] = d($secciones_adicionales,10,1);    
 
         return d($response, 12);
     }
@@ -222,9 +224,9 @@ if (!function_exists('invierte_date_time')) {
             'col-md-6 col-sm-12 ' . $extra
         );
 
-        $s[] = h("Más categorías", 1, 'text-uppercase white strong');
+        $s[] = d("Más categorías", 'text-uppercase white strong f14 mt-5');
         $s[] = p(d($response, 'mt-4 bg_blue p-3'));
-        $sec[] = d($s, 'col-md-6 col-sm-12 mt-3 mt-md-0');
+        $sec[] = d($s, 'col-md-6 col-xs-12 mt-3 mt-md-0');
         $r[] = append($t);
         $r[] = append($sec);
 
