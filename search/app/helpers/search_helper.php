@@ -18,6 +18,8 @@ if (!function_exists('invierte_date_time')) {
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);        
+        
+        $response[] = d(d("","promociones_sugeridas col-sm-10 col-sm-offset-1"),13);
         $response[] = d(crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas)), 13);
         
 

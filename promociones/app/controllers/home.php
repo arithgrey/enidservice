@@ -16,7 +16,7 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $numero_recompensas = $this->total_recompensas();
 
-        $configuracion_paginacion = $this->configuracion_paginador($param, $numero_recompensas);
+        $configuracion_paginacion = $this->configuracion_paginador($param, $numero_recompensas);        
         $data["html_paginador"] = $configuracion_paginacion["html_paginador"];
         $data["recompensa"] = $this->recompensas($configuracion_paginacion["paginacion"]);        
         
@@ -28,8 +28,7 @@ class Home extends CI_Controller
     private function configuracion_paginador($param, $numero_recompensas){
         
         $page = prm_def($param, "page",1); /*Pagina actual*/        
-        $per_page = prm_def($param, "rpg", 8); //la cantidad de registros que desea mostrar
-        $adjacents = 4; //brecha entre páginas después de varios adyacentes
+        $per_page = prm_def($param, "rpg", 8); //la cantidad de registros que desea mostrar        
         $offset = ($page - 1) * $per_page;
             
         $conf["page"] = $page;
@@ -37,7 +36,7 @@ class Home extends CI_Controller
         $conf["per_page"] = $per_page;
         $conf["q"] = "";
         $conf["q2"] = "";
-
+        
         return [
             "html_paginador"    => $this->app->paginacion($conf) , 
             "paginacion" => " LIMIT $offset , $per_page "
@@ -47,7 +46,7 @@ class Home extends CI_Controller
 
     private function recompensas($configuracion_paginacion)
     {        
-        return $this->app->api("recompensa/disponible/", 
+        return $this->app->api("recompensa/disponible", 
             [
                 "paginacion" => $configuracion_paginacion 
             ]);
