@@ -346,6 +346,74 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
-    
+
+    /*Sugerencias aleatorias para la sección principal*/
+    function sugerencias($recompensa){
+        
+        
+        $response = [];
+        
+        if (es_data($recompensa)) {
+            
+            foreach ($recompensa as $row) {
+
+                $id_servicio = $row["id_servicio"];
+                $id_servicio_conjunto = $row["id_servicio_conjunto"];
+                $url_img_servicio = $row["url_img_servicio"];
+                $url_img_servicio_conjunto = $row["url_img_servicio_conjunto"];                                
+                $id_recompensa = $row["id_recompensa"];
+
+
+                $texto_totales = totales($row, $recompensa);
+                $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
+                $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
+                $editar_compra = editar_comprar($id_recompensa);
+
+                $clase_imagen = 'col-xs-4';
+                $promocion = [
+                    d($imagen_servicio, $clase_imagen),
+                    d("+"),
+                    d($imagen_servicio_conjunto, $clase_imagen),
+                    d($texto_totales, $clase_imagen)
+
+                ];
+
+                $seccion_fotos = d($promocion, _text_('d-flex', _between));
+                $clase_flex = _text_(_between, "row");
+                $clase_izquierda = "col-xs-9";
+                $clase_derecha = "col-xs-3 p-0";
+                $seccion_fotos_compra = flex(
+                    $seccion_fotos, $editar_compra, $clase_flex, $clase_izquierda, $clase_derecha);
+
+                $extra = is_mobile() ? "border-bottom" : "";
+                $response[] = d($seccion_fotos_compra, _text_("row mt-5", $extra));
+
+
+            }
+                            
+        }
+        
+        return d($response);
+
+
+    }
+    function editar_comprar($id_recompensa)
+    {
+
+        
+        $agregar_a_carrito =  d("Agregar al carrito",
+            [
+
+                "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa white border text-center",
+                "id" => $id_recompensa, 
+                "antecedente_compra" => 0
+            ]
+        );
+
+
+        return flex("", $agregar_a_carrito, _text_("flex-column"));
+
+
+    }
 
 }

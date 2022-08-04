@@ -18,15 +18,18 @@ class Recompensa extends REST_Controller
     function disponible_GET()
     {
 
-        $param = $this->get();
-        
-        $paginacion  = $param["paginacion"];
-        $numero_recompensas = $this->recompensa_model->total_disponibles();
-
-        $response = false;
-        $data_complete = [];
+        $param = $this->get();            
+        $recompensas = $this->disponibles($param["paginacion"]);        
+        $this->response($recompensas);
     
-                       
+
+    }   
+    public function disponibles($paginacion)
+    {    
+
+        $response = [];
+        $data_complete = [];
+                           
             $response = $this->recompensa_model->disponibles($paginacion);
             $response = $this->app->add_imgs_servicio($response);
             $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
@@ -46,11 +49,9 @@ class Recompensa extends REST_Controller
             
 
         
-        $this->response($data_complete);
+        return $data_complete;
 
-        
-
-    }   
+    }
     
     function total_disponible_GET()
     {
@@ -314,5 +315,31 @@ class Recompensa extends REST_Controller
         }
         return $descuento_total;
     }
+    function sugeridos_GET()
+    {
+
+        /*Entrega promociones aleatorias*/
+
+        $numero_recompensas = $this->recompensa_model->total_disponibles()[0]["total"];
+        $paginacion = intval($numero_recompensas) / 8;
+        $random_paginador = rand(1,$paginacion);
+        $paginador = $this->offset_paginador($random_paginador);
+        $recompensas = sugerencias($this->disponibles($paginador));      
+          
+        $this->response($recompensas);
+
+    }
+
+    function offset_paginador($page = 2){
+        
+        
+        $per_page = 8; //la cantidad de registros que desea mostrar        
+        $offset = ($page - 1) * $per_page;         
+        
+        return " LIMIT $offset , $per_page ";
+        
+
+    }
+
 
 }
