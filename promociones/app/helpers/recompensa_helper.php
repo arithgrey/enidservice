@@ -39,8 +39,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $seccion_fotos = d($promocion, _text_('d-flex', _between));
-                $clase_flex = _text_(_between, "row");
-                $clase_izquierda = "col-xs-9";
+                $clase_flex = _text_(_between, "row border-bottom border-secondary");
+                $clase_izquierda = "col-xs-9 mb-5";
                 $clase_derecha = "col-xs-3 p-0";
                 $seccion_fotos_compra = flex(
                     $seccion_fotos, $editar_comprar, $clase_flex, $clase_izquierda, $clase_derecha);
