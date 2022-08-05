@@ -171,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
     function servicio_dominante($url_img_servicio, $id_servicio)
     {
         $link_servicio = path_enid("producto", $id_servicio);
-        $extra =  is_mobile() ? 'mh_250 mh_230 mh_sm_310 mx-auto' : 'w-100';
+        $extra =  is_mobile() ? 'w-100' : 'mh_250 mh_230 mh_sm_310 mx-auto';
         $imagen = img(
             [
                 'src' => $url_img_servicio,
@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $link_servicio_conjunto = path_enid("producto", $id_servicio_conjunto);
-        $extra =  is_mobile() ? 'mh_250 mh_230 mh_sm_310 mx-auto' : 'w-100';
+        $extra =  is_mobile() ? 'w-100' : 'mh_250 mh_230 mh_sm_310 mx-auto';
         $imagen_servicio_conjunto = img(
             [
                 'src' => $url_img_servicio_conjunto,
