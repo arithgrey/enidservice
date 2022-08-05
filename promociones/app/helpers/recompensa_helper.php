@@ -28,7 +28,7 @@ if (!function_exists('invierte_date_time')) {
                 $editar_comprar = editar_comprar($data, $id_recompensa);
 
 
-                $clase_imagen = 'col-xs-3 mh_250 mh_230 mh_sm_310 mx-auto ';
+                $clase_imagen = 'col-xs-3';
                 $promocion = [
                     d($imagen_servicio, $clase_imagen),
                     d("+","f12 strong"),
@@ -171,11 +171,11 @@ if (!function_exists('invierte_date_time')) {
     function servicio_dominante($url_img_servicio, $id_servicio)
     {
         $link_servicio = path_enid("producto", $id_servicio);
-
+        $extra =  is_mobile() ? 'mh_250 mh_230 mh_sm_310 mx-auto' : 'w-100';
         $imagen = img(
             [
                 'src' => $url_img_servicio,
-                'class' => 'w-100',
+                'class' => $extra,
                 'href' => $link_servicio,
                 'onClick'=>'log_operaciones_externas(22)'
             ]
@@ -195,10 +195,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $link_servicio_conjunto = path_enid("producto", $id_servicio_conjunto);
+        $extra =  is_mobile() ? 'mh_250 mh_230 mh_sm_310 mx-auto' : 'w-100';
         $imagen_servicio_conjunto = img(
             [
                 'src' => $url_img_servicio_conjunto,
-                'class' => 'w-100',
+                'class' => $extra,
                 'onClick'=>'log_operaciones_externas(22)'
             ]
         );
