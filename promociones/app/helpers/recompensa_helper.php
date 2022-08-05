@@ -28,12 +28,12 @@ if (!function_exists('invierte_date_time')) {
                 $editar_comprar = editar_comprar($data, $id_recompensa);
 
 
-                $clase_imagen = 'col-xs-4';
+                $clase_imagen = 'col-xs-3 mh_250 mh_230 mh_sm_310 mx-auto ';
                 $promocion = [
                     d($imagen_servicio, $clase_imagen),
-                    d("+"),
+                    d("+","f12 strong"),
                     d($imagen_servicio_conjunto, $clase_imagen),
-                    d($texto_totales, $clase_imagen)
+                    d($texto_totales, "col-xs-4")
 
                 ];
 
