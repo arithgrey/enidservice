@@ -21,9 +21,9 @@ class Home extends CI_Controller
         $num_ciclos = ($tiene_num_ciclos) ? ctype_digit($param["num_ciclos"]) : 0;
         $id_servicio = prm_def($param, 'id_servicio');
         $es_carro_compras = prm_def($param, "es_carro_compras");
-
+        
         if ($num_ciclos > 0 && $id_servicio > 0 || $es_carro_compras) {
-            
+        
             $this->crea_orden_compra($param);
             
         } else {

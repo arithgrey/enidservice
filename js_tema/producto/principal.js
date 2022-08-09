@@ -181,7 +181,6 @@ let agregar_a_lista_deseos = () => {
 
         $se_agrego.removeClass('d-none');
         $se_agregara.addClass('d-none');
-
         let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
         let data_send = {"id_servicio": get_option("servicio"), "articulos": $numero_articulos};
         request_enid("PUT", data_send, url, respuesta_add_valoracion);

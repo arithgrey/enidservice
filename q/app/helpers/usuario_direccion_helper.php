@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
 
         
         $id_orden_compra = $param['id_orden_compra'];
-        $form[] = d(_titulo('¿Tienes una de dos?'), 'selector_ubicaciones_domicilio  text-center text-md-left');
+        $form[] = d(_titulo('Tienes una de dos'), 'selector_ubicaciones_domicilio  text-center text-md-left');
         $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
         $domicilio = format_link('Registrar domicilio', ['class' => 'ingreso_texto_completo'], 0);
 
