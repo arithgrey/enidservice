@@ -12,7 +12,7 @@ let $ubicacion_delegacion = $form_ubicacion.find('.ubicacion_delegacion');
 
 let $adicionales_seccion = $(".adicionales_seccion");
 $(document).ready(() => {
-
+        
         $('footer').addClass('d-none');
         $(".codigo_postal").keyup(auto_completa_direccion);
         $(".numero_exterior").keyup(() => quita_espacios(".numero_exterior"));

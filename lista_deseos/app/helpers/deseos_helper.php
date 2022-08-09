@@ -351,7 +351,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
-        if (!$es_recien_creado) {
+        
+        if (!$es_recien_creado && !es_cliente($data)) {
 
             $es_administrador_o_vendedor = es_administrador_o_vendedor($data);
 
