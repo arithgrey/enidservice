@@ -24,6 +24,7 @@ if (!function_exists('invierte_date_time')) {
         $adicionales = flex_md($seccion_compras_conjunto, $seccion_categorias, _between,"col-xs-12 col-md-8", "col-xs-12 col-md-4");
         $secciones_adicionales = d($adicionales,13);     
         $response[] = d($secciones_adicionales,10,1);    
+        
 
         return d($response, 12);
     }
@@ -301,4 +302,6 @@ if (!function_exists('invierte_date_time')) {
             "num_categorias" => count($info),
         ];
     }
+    
 }
+

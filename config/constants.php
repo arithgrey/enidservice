@@ -110,6 +110,9 @@ define('_dolar_icon','fa fa-usd');
 define('_facebook_icon','fa fa-facebook-square');
 define('_instagram_icon',"fa fa-instagram");
 define('_pinterest_icon',"fa fa-pinterest");
+define('_deseo_icon',"fa fa-heart-o");
+define('_agregado_icon',"fa fa-heart");
+
 
 
 

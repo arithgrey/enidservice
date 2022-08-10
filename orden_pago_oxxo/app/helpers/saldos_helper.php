@@ -120,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
 
             img(
                 [
-                    "src" => _text("http://enidservices.com/",_web,"/img_tema/bancos/4.png"),
+                    "src" => _text("http://enidservices.com/",_web,"/img_tema/bancos/1.png"),
                     "style" => "width:110px!important;",
                     'class' => 'ml-2'
                 ]
@@ -153,7 +153,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r [] = d("Notifica tu pago  al área de ventas ventas@enidservices.com", 'mt-3');
+        $r [] = d("Notifica tu pago  al área de ventas ventas@enidservices.com o al 5552967027", 'mt-3');
 
 
         return d(append($r));

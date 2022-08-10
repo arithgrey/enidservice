@@ -107,6 +107,14 @@ class Usuario_deseo_compra_model extends CI_Model
                         OR (ip = '$ip' && id_recompensa =  $id_recompensa ) LIMIT 100";
         return $this->db->query($query_update);
     }
-
+    
+    function delete($params_where = [], $limit = 1)
+    {
+        $this->db->limit($limit);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        return $this->db->delete($this->tabla, $params_where);
+    }
 
 }
