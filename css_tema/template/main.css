@@ -1898,7 +1898,8 @@ ul li a {
 @media (max-width: 575.98px) {
 
     .mh_sm_310 {
-        max-height: 310px !important;
+        max-height: 250px !important;
+        min-height: 250px !important;
     }
 
     #flipkart-navbar {
