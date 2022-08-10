@@ -1221,10 +1221,10 @@ if (!function_exists('invierte_date_time')) {
         
         $extra_por_agregar = _text("por_agregar_", $id_servicio);
         $extra_agregados = _text("d-none agregado_", $id_servicio);
-        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", $extra_por_agregar, $extra_agregados);
+        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", _text_("mr-2", $extra_por_agregar), $extra_agregados);
 
         
-        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, _between, "");
+        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, "justify-content-between w-100", "");
         $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
 
 
@@ -1303,7 +1303,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = d($img,  $class);
             } else {
 
-                $response = d($img, "col-md-3 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary");
+                $response = d($img, "col-md-3 col-lg-2 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary");
             }
         }
 
