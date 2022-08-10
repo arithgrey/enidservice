@@ -1452,9 +1452,9 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
 
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
     $seccion = append($contenido);
-    $icono_compras = icon(_text_(_compras_icon, 'mr-2'));
+    $icono_compras = icon(_text_(_compras_icon, 'mr-2 white'));
     $place_compras = d('', 'place_numero_deseo');
-    $deseos = flex($icono_compras, $place_compras, 'borde_amarillo');
+    $deseos = flex($icono_compras, $place_compras, 'borde_amarillo white');
     $deseo_pedido = a_enid($deseos, ['href' => path_enid('lista_deseos'), 'class' => 'white']);
     $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
     $notificaciones[] = btw(

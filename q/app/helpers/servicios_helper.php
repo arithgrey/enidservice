@@ -7,7 +7,6 @@ if (!function_exists('invierte_date_time')) {
         $comision = ($precio < 700) ? 50 : 100;
         $comision = ($comision < 100 && $precio < 400) ? 35 : $comision;
         return $comision;
-
     }
 
     function format_simple($data)
@@ -41,11 +40,9 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 path_enid('producto', $id_servicio)
             );
-
         }
 
         return append($_response);
-
     }
 
     function render_configurador($data)
@@ -77,7 +74,6 @@ if (!function_exists('invierte_date_time')) {
                 $costo_envio_vendedor = es_data($costo_envio) ? $costo_envio["costo_envio_vendedor"] : 0;
                 $utilidad = floatval($precio) - (($es_servicio < 1) ? floatval($costo_envio_vendedor) : 0);
                 $utilidad = $utilidad - $comision_num;
-
             }
 
             $tipo_promocion = ["PRODUCTO", "SERVICIO"][$es_servicio];
@@ -117,10 +113,8 @@ if (!function_exists('invierte_date_time')) {
             $res[] = hiddens(['class' => 'fecha_disponible', 'value' => format_fecha($fecha_disponible)]);
             $res[] = hiddens(['class' => 'muestra_fecha_disponible', 'value' => $muestra_fecha_disponible]);
             $response = append($res);
-
         }
         return $response;
-
     }
 
     function indicadores_faltantes($servicio)
@@ -140,8 +134,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = es_texto($metakeyword_usuario, 'Palabras clave');
 
         return d(d($response, 3), 13);
-
-
     }
 
     function tiene_atributos($servicio)
@@ -159,8 +151,6 @@ if (!function_exists('invierte_date_time')) {
         $valicacion[] = es_texto($metakeyword_usuario, '', 1);
 
         return (in_array(false, $valicacion)) ? d('', 'border-bottom border-danger') : '';
-
-
     }
 
     function es_texto($texto, $atributo, $booleano = 0)
@@ -169,38 +159,35 @@ if (!function_exists('invierte_date_time')) {
         if ($booleano) {
 
             $response = (strlen($texto) > 2);
-
         } else {
 
             $response = (strlen($texto) > 2) ? '' :
                 flex(icon(_text_(_eliminar_icon, 'fa-2x color_red')), $atributo, 'd-flex align-items-center');
         }
         return $response;
-
-
     }
 
 
-    function configurador($s,
-                          $data,
-                          $num,
-                          $num_imagenes,
-                          $id_servicio,
-                          $id_perfil,
-                          $tipo_promocion,
-                          $val_youtube,
-                          $valor_youtube,
-                          $ext_1,
-                          $n_descripcion,
-                          $es_servicio,
-                          $tel_visible,
-                          $precio,
-                          $costo_envio,
-                          $utilidad,
-                          $servicio,
-                          $nnservicio
-    )
-    {
+    function configurador(
+        $s,
+        $data,
+        $num,
+        $num_imagenes,
+        $id_servicio,
+        $id_perfil,
+        $tipo_promocion,
+        $val_youtube,
+        $valor_youtube,
+        $ext_1,
+        $n_descripcion,
+        $es_servicio,
+        $tel_visible,
+        $precio,
+        $costo_envio,
+        $utilidad,
+        $servicio,
+        $nnservicio
+    ) {
 
 
         $descripcion_informacion = "INFORMACIÓN SOBRE TU " . $nnservicio;
@@ -208,7 +195,8 @@ if (!function_exists('invierte_date_time')) {
             text_icon(
                 'fa fa-pencil text_desc_servicio',
                 $descripcion_informacion
-            ), 5
+            ),
+            5
         );
         $n_titulo = d($descripcion_informacion);
         $in_descripcion = d($n_descripcion, "text_desc_servicio", 1);
@@ -243,7 +231,8 @@ if (!function_exists('invierte_date_time')) {
             $s["status"],
             $s["es_publico"],
             $id_servicio,
-            $es_servicio, $id_perfil,
+            $es_servicio,
+            $id_perfil,
             $s["stock"],
             $s["entregas_en_casa"],
             $tel_visible,
@@ -278,21 +267,20 @@ if (!function_exists('invierte_date_time')) {
 
 
         return tab_content($r);
-
-
     }
 
 
     function conf_productos_relacionados(
         $data,
         $id_servicio,
-        $extra_5)
-
-    {
+        $extra_5
+    ) {
 
         $response[] = d(_titulo('Artículos relacionados ', 2), 13);
         $response[] = formato_servicios_relacionados($data["servicios_relacionados"], $id_servicio);
-        $response[] = input_frm("row", "Producto relacionado",
+        $response[] = input_frm(
+            "row",
+            "Producto relacionado",
             [
                 "type" => "text",
                 "name" => "busqueda_producto_relacionado",
@@ -307,8 +295,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = place('lista_productos_relacionados');
 
         return tab_seccion($response, "tab_productos_relacionados", $extra_5);
-
-
     }
 
     function conf_productos_proveedores($id_servicio, $extra_7)
@@ -346,13 +332,12 @@ if (!function_exists('invierte_date_time')) {
         $response[] = form_busqueda();
 
         return tab_seccion($response, "tab_proveedores", $extra_7);
-
-
     }
 
     function form_busqueda()
     {
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_busqueda_proveedor busqueda_proveedores",
                 "id" => "form_busqueda_proveedor",
@@ -409,10 +394,7 @@ if (!function_exists('invierte_date_time')) {
 
                     $icono = icon(_text_("mt-5 mb-5 quitar_servicio_relacionado", _eliminar_icon), ["id" => $id]);
                     $lista[] = flex($icono, $img, 'flex-column');
-
-
                 }
-
             }
             $seccion = d(d($lista, 'd-flex col-md-12'), 'row mb-5');
             $response[] = d($seccion, 'row mb-5');
@@ -422,7 +404,6 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(['class' => 'ids_relacionados', "value" => implode(',', [])]);
         }
         return append($response);
-
     }
 
     function conf_avanzado(
@@ -430,26 +411,23 @@ if (!function_exists('invierte_date_time')) {
         $id_perfil,
         $id_servicio,
         $keyword_usuario,
-        $extra_3)
-    {
+        $extra_3
+    ) {
 
 
-        $f[] = d(_titulo("Etiquetas recien utilizadas", 3, "mt-5 col-lg-12"),13);
-        $f[] = d(restablecer($servicio, $id_perfil),13);
-        $f[] = d(create_meta_tags($keyword_usuario, $id_servicio),13);
-        $f[] = d(form_tags($id_servicio, $keyword_usuario),13);
-        $f[] = d(place("contenedor_sugerencias_tags col-lg-12"),13);
+        $f[] = d(_titulo("Etiquetas recien utilizadas", 3, "mt-5 col-lg-12"), 13);
+        $f[] = d(restablecer($servicio, $id_perfil), 13);
+        $f[] = d(create_meta_tags($keyword_usuario, $id_servicio), 13);
+        $f[] = d(form_tags($id_servicio, $keyword_usuario), 13);
+        $f[] = d(place("contenedor_sugerencias_tags col-lg-12"), 13);
 
         return tab_seccion($f, "tab_terminos_de_busqueda", $extra_3);
-
-
     }
 
     function configuracion_proveedor($extra_6)
     {
 
         return tab_seccion("sss", "tab_configurdor_proveedor", $extra_6);
-
     }
 
     function conf_detalle(
@@ -476,8 +454,7 @@ if (!function_exists('invierte_date_time')) {
         $utilidad,
         $ext_4
 
-    )
-    {
+    ) {
 
         $descuento_especial = $servicio["descuento_especial"];
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
@@ -506,7 +483,6 @@ if (!function_exists('invierte_date_time')) {
         $t[] = utilidad($utilidad);
 
         return tab_seccion($t, "tab_info_precios", $ext_4);
-
     }
 
     function tipo_distribucion($servicio)
@@ -562,7 +538,6 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($tipo_entrega, $extra);
         }
         return append($response);
-
     }
 
     function eleccion_seleccion($titulo, $a, $b, $c, $ext = '')
@@ -611,7 +586,6 @@ if (!function_exists('invierte_date_time')) {
             $response[] = eleccion($titulo, $confirmar, $omitir);
         }
         return append($response);
-
     }
 
     function conf_producto(
@@ -622,8 +596,7 @@ if (!function_exists('invierte_date_time')) {
         $es_servicio,
         $info_colores,
         $ext_2
-    )
-    {
+    ) {
 
         $d[] = $n_titulo_producto;
         $d[] = place("place_tallas_disponibles");
@@ -635,8 +608,6 @@ if (!function_exists('invierte_date_time')) {
         $d[] = link_ml($servicio);
 
         return tab_seccion($d, "tab_info_producto", $ext_2);
-
-
     }
 
     function conf_entrada(
@@ -647,8 +618,8 @@ if (!function_exists('invierte_date_time')) {
         $images,
         $val_youtube,
         $valor_youtube,
-        $ext_1)
-    {
+        $ext_1
+    ) {
 
 
         $z[] = descartar_promocion($num_imagenes, $id_servicio, $id_perfil);
@@ -659,18 +630,21 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = $images;
         $z[] = _titulo(
-            text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE "));
+            text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE ")
+        );
 
         if (strlen($val_youtube) > 0) {
 
-            $z[] = d(text_icon('fa fa fa-pencil text_video_servicio',
+            $z[] = d(text_icon(
+                'fa fa fa-pencil text_video_servicio',
                 a_enid(
                     'ver ahora',
                     [
                         'href' => $valor_youtube,
                         'target' => '_black',
                         'class' => 'black underline'
-                    ], 0
+                    ],
+                    0
                 )
             ), "text-uppercase");
         }
@@ -679,8 +653,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return tab_seccion($z, "tab_imagenes", $ext_1);
-
-
     }
 
     function restablecer($servicio, $id_perfil)
@@ -689,14 +661,15 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if (es_data($servicio) && $id_perfil == 3) {
 
-            $response = btn("RESTABLECER PUBLICACIÓN",
+            $response = btn(
+                "RESTABLECER PUBLICACIÓN",
                 [
                     "class" => "restablecer col-lg-4 pull-right",
                     "id" => pr($servicio, "id_servicio")
                 ]
             );
         }
-        return d($response,12);
+        return d($response, 12);
     }
 
     function format_colores($es_servicio, $inf_colores)
@@ -708,10 +681,8 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($inf_colores);
             $r[] = btw(
 
-                d("", ["id" => "seccion_colores_info"])
-                ,
-                d("", "place_colores_disponibles")
-                ,
+                d("", ["id" => "seccion_colores_info"]),
+                d("", "place_colores_disponibles"),
                 "input_servicio_color"
             );
         }
@@ -759,7 +730,8 @@ if (!function_exists('invierte_date_time')) {
 
         if (strlen($link_amazon) > 10) {
 
-            $r[] = a_enid("Link",
+            $r[] = a_enid(
+                "Link",
                 [
                     "href" => $link_amazon,
                     "class" => "underline",
@@ -772,7 +744,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($x, "input_link_amazon");
         $response[] = append([$titulo, append($r)]);
         return d($response, 6);
-
     }
 
     function link_ml($servicio)
@@ -815,7 +786,8 @@ if (!function_exists('invierte_date_time')) {
 
         if (strlen($link_ml) > 10) {
 
-            $r[] = a_enid("Link",
+            $r[] = a_enid(
+                "Link",
                 [
                     "href" => $link_ml,
                     "class" => "underline",
@@ -828,7 +800,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d($x, "input_link_ml");
         $response[] = append([$titulo, append($r)]);
         return d($response, 6);
-
     }
 
     function format_atributos($servicio)
@@ -848,7 +819,9 @@ if (!function_exists('invierte_date_time')) {
             "mr-1"
         );
 
-        $r[] = input_frm("d-none input_marca", "Marca",
+        $r[] = input_frm(
+            "d-none input_marca",
+            "Marca",
             [
                 "name" => 'q2',
                 "class" => "marca",
@@ -878,7 +851,9 @@ if (!function_exists('invierte_date_time')) {
             "mr-1"
         );
 
-        $r[] = input_frm("d-none input_modelo", "Modelo",
+        $r[] = input_frm(
+            "d-none input_modelo",
+            "Modelo",
             [
                 "name" => 'q2',
                 "class" => "modelo",
@@ -899,7 +874,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_close();
 
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "col-sm-4 form_dimension mt-5"
             ]
@@ -911,7 +887,9 @@ if (!function_exists('invierte_date_time')) {
             "mr-1"
         );
 
-        $r[] = input_frm("d-none input_dimensiones", "Dimensiones",
+        $r[] = input_frm(
+            "d-none input_dimensiones",
+            "Dimensiones",
             [
                 "name" => "q2",
                 "class" => "dimensiones",
@@ -932,7 +910,8 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_close();
 
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "col-sm-4 form_peso mt-5"
             ]
@@ -943,7 +922,9 @@ if (!function_exists('invierte_date_time')) {
             "texto_peso cursor_pointer",
             "mr-1"
         );
-        $r[] = input_frm("d-none input_peso", "Peso en (KG)",
+        $r[] = input_frm(
+            "d-none input_peso",
+            "Peso en (KG)",
             [
                 "name" => "q2",
                 "class" => "peso",
@@ -964,7 +945,8 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close();
 
         $r[] = seccion_materiales($servicio);
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "col-sm-4 form_capacidad mt-5"
             ]
@@ -977,7 +959,8 @@ if (!function_exists('invierte_date_time')) {
             "mr-1"
         );
 
-        $r[] = input_frm("d-none input_capacidad",
+        $r[] = input_frm(
+            "d-none input_capacidad",
             "Capacidad en (KG)",
             [
                 "name" => "q2",
@@ -1060,7 +1043,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = form_close();
 
         return d($response, 'col-sm-4 mt-5');
-
     }
 
     function venta_mayoreo($es_servicio, $venta_mayoreo)
@@ -1069,37 +1051,39 @@ if (!function_exists('invierte_date_time')) {
         $r = [];
         if ($es_servicio < 1) {
 
-            $mayoreo = a_enid("SI",
+            $mayoreo = a_enid(
+                "SI",
                 [
                     "id" => 1,
                     "class" =>
-                        _text_(
-                            'button_enid_eleccion venta_mayoreo ',
-                            val_class(1, $venta_mayoreo, "button_enid_eleccion_active")
-                        )
+                    _text_(
+                        'button_enid_eleccion venta_mayoreo ',
+                        val_class(1, $venta_mayoreo, "button_enid_eleccion_active")
+                    )
                 ]
             );
 
-            $menudeo = a_enid("NO",
+            $menudeo = a_enid(
+                "NO",
                 [
                     "id" => '0',
                     "class" =>
-                        _text_(
-                            'button_enid_eleccion venta_mayoreo ',
-                            val_class(0, $venta_mayoreo, "button_enid_eleccion_active")
-                        )
+                    _text_(
+                        'button_enid_eleccion venta_mayoreo ',
+                        val_class(0, $venta_mayoreo, "button_enid_eleccion_active")
+                    )
 
                 ]
             );
 
             $r[] = eleccion(
-                "¿también vendes este producto por mayoreo?", $mayoreo, $menudeo,
+                "¿también vendes este producto por mayoreo?",
+                $mayoreo,
+                $menudeo,
                 "ventas_mayoreo"
             );
-
         }
         return append($r);
-
     }
 
     function utilidad($utilidad)
@@ -1117,27 +1101,26 @@ if (!function_exists('invierte_date_time')) {
         if ($es_servicio > 0 && es_data($ciclos)) {
 
             $r[] = btw(
-                h('CICLO DE FACTURACIÓN', 5)
-                ,
-                icon('fa fa-pencil text_ciclo_facturacion')
-                ,
-                "display_flex_enid"
-                ,
+                h('CICLO DE FACTURACIÓN', 5),
+                icon('fa fa-pencil text_ciclo_facturacion'),
+                "display_flex_enid",
                 12
             );
             $r[] = d(
-                nombre_ciclo_facturacion($ciclos, $id_ciclo_facturacion)
-                , "top_30");
+                nombre_ciclo_facturacion($ciclos, $id_ciclo_facturacion),
+                "top_30"
+            );
             $r[] = btw(
-                create_select_selected($ciclos,
+                create_select_selected(
+                    $ciclos,
                     "id_ciclo_facturacion",
                     "ciclo",
                     $id_ciclo_facturacion,
                     "ciclo_facturacion",
                     "ciclo_facturacion form-control"
-                )
-                ,
-                btn("GUARDAR",
+                ),
+                btn(
+                    "GUARDAR",
                     [
                         'class' => 'btn_guardar_ciclo_facturacion'
                     ]
@@ -1150,8 +1133,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return (count($x) > 0) ? d(d(d(append($x), 12), "top_50"), 6) : "";
-
-
     }
 
     function uso_disponibilidad($existencia, $es_nuevo, $es_servicio)
@@ -1163,11 +1144,9 @@ if (!function_exists('invierte_date_time')) {
         if ($es_servicio < 1) {
 
             $r[] = d(articulos_disponibles($existencia), 'col-md-6 mt-5');
-
         }
 
         return append($r);
-
     }
 
     function articulos_disponibles($existencia)
@@ -1184,7 +1163,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $form[] = input_frm('col-lg-9 row', '¿artículos disponibles?',
+        $form[] = input_frm(
+            'col-lg-9 row',
+            '¿artículos disponibles?',
             [
                 "type" => "number",
                 "name" => "existencia",
@@ -1210,55 +1191,73 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(text_icon('fa fa-pencil text_nuevo', $usado[$es_nuevo]));
 
         $form[] = select_producto_usado($es_nuevo);
-        $form[] = btn("GUARDAR",
+        $form[] = btn(
+            "GUARDAR",
             [
                 "class" => "btn_guardar_producto_nuevo es_nuevo"
             ]
         );
         $r[] = d(flex($form), 'input_nuevo mt-3');
         return d($r, 'col-md-6 mt-5');
-
     }
 
-    function formato_producto($es_recompensa, $servicio){
-        
+    function formato_producto($es_recompensa, $servicio)
+    {        
         $precio = $servicio["precio"];
         $id_servicio = $servicio["id_servicio"];
+        $path_servicio = get_url_servicio($id_servicio);        
+
+        $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2');
+        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
         
+        $tipo_deseo = "agregar_deseos_sin_antecedente" ;
+        $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
+
+        $clases = _text_($tipo_deseo ,  _deseo_icon);
+        $clases_agregado = _text_($tipo_deseo_agregado ,  _agregado_icon);
+
+        $icono_por_agregar = icon($clases,["id" =>  $id_servicio]);
+        $icono_agregado = icon($clases_agregado,["id" =>  $id_servicio]);
         
-        $texto_precio = d(money($precio),'f12 p-1 bg_black white mt-2');
-        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52) , "fp8 text-uppercase black mt-2");
-        $texto_precio_nombre = flex($texto_precio ,  $texto_nombre, "flex-column" );
+        $extra_por_agregar = _text("por_agregar_", $id_servicio);
+        $extra_agregados = _text("d-none agregado_", $id_servicio);
+        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", $extra_por_agregar, $extra_agregados);
+
+        
+        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, _between, "");
+        $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
 
 
-        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" : 
-                "d-block mh_250 mh_230 mh_sm_310 mx-auto mt-3";
+        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" :
+            "d-block mh_250 mh_230 mh_sm_310 mx-auto mt-3";
 
-        $img = img(
+        $img = a_enid( img(
             [
                 'src' => $servicio["url_img_servicio"],
                 'alt' => $servicio["metakeyword"],
                 'class' => $clases_imagen,
                 'id' => $id_servicio
             ]
-        );
-        return flex(
-            $img, $texto_precio_nombre, 
-            "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5");
+        ), $path_servicio);
+    
 
+        return flex(
+            $img,
+            $texto_precio_nombre,
+            "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5"
+        );
     }
-    function create_vista($s, $agregar_servicio = 0 , $es_recompensa = 0)
+    function create_vista($s, $agregar_servicio = 0, $es_recompensa = 0)
     {
-        
+
         $id_servicio = $s["id_servicio"];
         $in_session = $s["in_session"];
-        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
-        $path_servicio = get_url_servicio($id_servicio);       
+        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;        
         $img = formato_producto($es_recompensa, $s);
 
         if ($in_session > 0 && $es_recompensa < 1) {
 
-            $response[] = d(a_enid($img, $path_servicio));
+            $response[] = $img;
 
             if ($agregar_servicio > 0) {
 
@@ -1271,8 +1270,6 @@ if (!function_exists('invierte_date_time')) {
                         $id_perfil
                     )
                 );
-
-
             } else {
 
                 $icono_editar = editar_servicio(
@@ -1284,46 +1281,33 @@ if (!function_exists('invierte_date_time')) {
 
                 $indicador = tiene_atributos($s);
 
-
                 $response[] = d($icono_editar);
                 $response[] = d($indicador);
-
-
             }
 
 
-            $response = d($response,
+            $response = d(
+                $response,
                 "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
             );
-
         } else {
 
 
-            
 
-            if ($es_recompensa > 0 ) {
-            
+
+            if ($es_recompensa > 0) {
+
                 $class = "col-lg-3 hps mt-5 
-                mx-auto my-auto d-flex align-content-center flex-wrap p-1"; 
+                mx-auto my-auto d-flex align-content-center flex-wrap p-1";
 
-                $response = d($img,  $class );    
+                $response = d($img,  $class);
+            } else {
 
-            }else{
-                
-                $response = a_enid(
-                    $img,
-                    [
-                        "href" => $path_servicio,
-                        "class" => "col-md-3 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary"
-                    ]
-            );
-                
+                $response = d($img, "col-md-3 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary");
             }
-            
         }
 
         return $response;
-
     }
 
 
@@ -1352,7 +1336,6 @@ if (!function_exists('invierte_date_time')) {
         $bloque[] = d(append($t), 1);
         $bloque[] = d($paginacion, 1);
         return append($bloque);
-
     }
 
 
@@ -1362,7 +1345,7 @@ if (!function_exists('invierte_date_time')) {
         $stock = '';
         $fecha_stock = '';
         $proveedores = '';
-        $propuestas = ''; 
+        $propuestas = '';
         if (es_administrador($data)) {
 
             $base_stock = [
@@ -1377,13 +1360,14 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $fecha_stock = format_link("Fecha disponibilidad", $base_disponibilidad, 0);
-            
-            $propuestas = format_link("Respuestas", 
-            [
-                'href' => path_enid('propuestas', $id_servicio),                
-            ],0);
 
-
+            $propuestas = format_link(
+                "Respuestas",
+                [
+                    'href' => path_enid('propuestas', $id_servicio),
+                ],
+                0
+            );
         }
 
 
@@ -1435,8 +1419,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => valida_active($num, 3),
                     "style" => valida_existencia_imagenes($num_imagenes)
                 ]
-            )
-            ,
+            ),
             li(
                 $link_relacionados,
                 [
@@ -1450,8 +1433,7 @@ if (!function_exists('invierte_date_time')) {
             $propuestas,
             li(
                 a_enid(
-                    text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN")
-                    ,
+                    text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN"),
                     [
                         "href" => $url_productos_publico,
                         "target" => "_blank",
@@ -1468,7 +1450,6 @@ if (!function_exists('invierte_date_time')) {
 
         $ext = (is_mobile() && $num_imagenes < 1) ? 'd-none' : '';
         return ul($list, _text_("nav nav-tabs", $ext));
-
     }
 
     function get_config_categorias($data, $param)
@@ -1485,7 +1466,8 @@ if (!function_exists('invierte_date_time')) {
             $data["info_categorias"],
             "nombre_clasificacion",
             "id_clasificacion",
-            $config);
+            $config
+        );
     }
 
     function get_add_categorias($data, $param)
@@ -1493,12 +1475,12 @@ if (!function_exists('invierte_date_time')) {
 
         $data["padre"] = $param["padre"];
         $select = btn(
-            text_icon('fa fa-angle-double-right', "agregar")
-            ,
+            text_icon('fa fa-angle-double-right', "agregar"),
             [
                 "class" => "nueva_categoria_producto d-flex mt-5 ",
                 "id" => $data["padre"]
-            ]);
+            ]
+        );
         return $select;
     }
 
@@ -1513,7 +1495,8 @@ if (!function_exists('invierte_date_time')) {
                 "id" => $id_servicio,
                 "status" => $status,
                 "class" => 'button_enid_eleccion activar_publicacion'
-            ], 0
+            ],
+            0
         ), 'col-md-12 text-right mt-5');
     }
 
@@ -1530,7 +1513,6 @@ if (!function_exists('invierte_date_time')) {
             if ($key != false) {
 
                 $new_data[$a]["intentos_compras"] = $data_intentos_entregas[$key];
-
             }
 
             $a++;
@@ -1557,7 +1539,6 @@ if (!function_exists('invierte_date_time')) {
                     "mensajeria" => $row["intentos_compras"]["mensajeria"],
                     "visita_negocio" => $row["intentos_compras"]["visita_negocio"],
                 ];
-
             } else {
 
                 $response[$z] += [
@@ -1566,7 +1547,6 @@ if (!function_exists('invierte_date_time')) {
                     "mensajeria" => 0,
                     "visita_negocio" => 0,
                 ];
-
             }
 
             $z++;
@@ -1582,8 +1562,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $menu[] = a_enid(
-            text_icon('fa fa-star', $text)
-            ,
+            text_icon('fa fa-star', $text),
             [
                 "class" => _text("imagen_principal dropdown-item text-uppercase " . $ext),
                 "id" => $id_imagen
@@ -1593,8 +1572,7 @@ if (!function_exists('invierte_date_time')) {
 
         $menu[] =
             a_enid(
-                text_icon('fa fa-times ', "quitar")
-                ,
+                text_icon('fa fa-times ', "quitar"),
                 [
                     "class" => "foto_producto dropdown-item text-uppercase",
                     "id" => $id_imagen
@@ -1602,15 +1580,12 @@ if (!function_exists('invierte_date_time')) {
             );
 
         return dropdown(icon("fa fa fa-pencil boton_editar_imagenes"), $menu, 'mt-5 mt-md-1');
-
-
     }
 
     function nombre_ciclo_facturacion($ciclos, $id_ciclo)
     {
 
         return search_bi_array($ciclos, "id_ciclo_facturacion", $id_ciclo, "ciclo");
-
     }
 
     function create_colores_disponibles($text_colores)
@@ -1621,11 +1596,12 @@ if (!function_exists('invierte_date_time')) {
         for ($a = 0; $a < count($arr_colores); $a++) {
 
             $codigo_color = $arr_colores[$a];
-            $contenido = icon('fa fa-times elimina_color',
-                    [
-                        "id" => $codigo_color
-                    ]
-                ) . " " . $codigo_color;
+            $contenido = icon(
+                'fa fa-times elimina_color',
+                [
+                    "id" => $codigo_color
+                ]
+            ) . " " . $codigo_color;
             $r[] = d($contenido, ["style" => "background:" . $codigo_color . ";color:white;padding:3px;"]);
         }
         return d(append($r), ["id" => 'contenedor_colores_disponibles']);
@@ -1656,7 +1632,6 @@ if (!function_exists('invierte_date_time')) {
     " : "
     <option value='" . $z . "'>" . $usado[$z] . "</option>
     ";
-
         }
         $r[] = "</select>";
         $response = append($r);
@@ -1678,7 +1653,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return $response;
-
     }
 
     function agregar_servicio($in_session, $id_servicio, $id_usuario, $id_usuario_registro_servicio, $id_perfil)
@@ -1690,7 +1664,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return $response;
-
     }
 
 
@@ -1711,7 +1684,6 @@ if (!function_exists('invierte_date_time')) {
                 $select[] = ($a == $actual) ? "
 <option value='" . $a . "' selected>" . $a . "</option>" : "
 <option value='" . $a . "'>" . $a . "</option>";
-
             }
 
             $select[] = "</select>";
@@ -1719,11 +1691,9 @@ if (!function_exists('invierte_date_time')) {
             $select = append($select);
 
             $response = append([_titulo($titulo), $select]);
-
         }
 
         return $response;
-
     }
 
     function get_link_dropshipping($id_perfil, $id_servicio, $link_dropshipping)
@@ -1765,7 +1735,8 @@ if (!function_exists('invierte_date_time')) {
 
             if (strlen($link_dropshipping) > 10) {
 
-                $r[] = a_enid("Link",
+                $r[] = a_enid(
+                    "Link",
                     [
                         "href" => $link_dropshipping,
                         "class" => "underline",
@@ -1776,10 +1747,8 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($x, "input_link_dropshipping");
             $response = append([$titulo, append($r)]);
-
         }
         return $response;
-
     }
 
     function sumatoria_array($array, $key)
@@ -1796,7 +1765,6 @@ if (!function_exists('invierte_date_time')) {
         $lugar = d(place("place_img_producto mt-5"), 'mt-5');
         $r[] = flex($titulo, $lugar, 'd-flex flex-column align-items-center');
         return d($r, "contenedor_agregar_imagenes d-none mt-5");
-
     }
 
     function get_base_youtube($url)
@@ -1818,7 +1786,6 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return path_enid("youtube_embebed", $text, 1, 0);
-
     }
 
     function seccion_titulo($nuevo_nombre_servicio, $servicio, $num_imagenes)
@@ -1835,7 +1802,9 @@ if (!function_exists('invierte_date_time')) {
         $response[] = form_open("", ['class' => 'form_servicio_nombre_info']);
         $response[] = hiddens(["name" => "q", "value" => "nombre_servicio"], 1);
 
-        $input = input_frm("", '¿NOMBRE DEL ARTICULO O SERVICIO?',
+        $input = input_frm(
+            "",
+            '¿NOMBRE DEL ARTICULO O SERVICIO?',
             [
 
                 "type" => "text",
@@ -1849,13 +1818,16 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $button = btn("modificar");
-        $response[] = flex($input, $button,
+        $response[] = flex(
+            $input,
+            $button,
             'mt-5 mb-5 align-items-center',
-            'col-sm-8 p-0', 'col-sm-4 p-0');
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
 
         $response[] = form_close();
         return append($response);
-
     }
 
     function form_youtube($valor_youtube)
@@ -1871,7 +1843,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $input = input_frm("", "LINK DE YOUTUBE",
+        $input = input_frm(
+            "",
+            "LINK DE YOUTUBE",
             [
                 "type" => "url",
                 "name" => "q2",
@@ -1883,12 +1857,16 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $button = btn("GUARDAR", ["class" => "guardar_video_btn"]);
-        $r[] = flex($input, $button,
-            'mt-5 align-items-end', 'col-sm-8 p-0', 'col-sm-4 p-0');
+        $r[] = flex(
+            $input,
+            $button,
+            'mt-5 align-items-end',
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
         $r[] = form_close();
 
         return d($r);
-
     }
 
     function form_descripcion($nueva_descripcion)
@@ -1896,7 +1874,9 @@ if (!function_exists('invierte_date_time')) {
 
         $r = [];
         array_push($r, form_open("", ["class" => "top_30 form_servicio_desc input_desc_servicio_facturacion"]));
-        array_push($r, input([
+        array_push(
+            $r,
+            input([
                 "type" => "hidden",
                 "name" => "q",
                 "value" => "descripcion"
@@ -1923,10 +1903,8 @@ if (!function_exists('invierte_date_time')) {
                     "name" => "stock",
                     "class" => "stock form-control"
                 ],
-                "artículos en stock"
-                ,
-                0
-                ,
+                "artículos en stock",
+                0,
                 1000
 
             );
@@ -1952,8 +1930,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return append($response);
-
-
     }
 
     function compras_casa($es_servicio, $entregas_en_casa)
@@ -1986,8 +1962,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return eleccion($titulo_ca, $confirmar, $omitir);
-
-
     }
 
 
@@ -2032,7 +2006,8 @@ if (!function_exists('invierte_date_time')) {
             [
                 'id' => 1,
                 'class' => _text_(
-                    'button_enid_eleccion telefono_visible ', $activo_visita_telefono
+                    'button_enid_eleccion telefono_visible ',
+                    $activo_visita_telefono
                 )
             ]
 
@@ -2053,7 +2028,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return eleccion($ver_telefono, $telefono_publico, $telefono_privado);
-
     }
 
     function contra_entrega($es_servicio, $es_entrega, $id_servicio)
@@ -2074,7 +2048,8 @@ if (!function_exists('invierte_date_time')) {
 
             );
 
-            $no = a_enid("NO, SOLO ENVÍOS",
+            $no = a_enid(
+                "NO, SOLO ENVÍOS",
                 [
                     'id' => 0,
                     'class' => 'button_enid_eleccion ' . $v2,
@@ -2084,8 +2059,6 @@ if (!function_exists('invierte_date_time')) {
 
 
             return eleccion("¿haces entregas personalizadas?", $si, $no);
-
-
         }
 
         return append($response);
@@ -2151,13 +2124,16 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "form_costo input_costo contenedor_costo mt-5"
             ]
         );
 
-        $r[] = input_frm('', 'MXN',
+        $r[] = input_frm(
+            '',
+            'MXN',
             [
                 "type" => "float",
                 "name" => "precio",
@@ -2174,8 +2150,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return d($r, 'col-md-6 mt-5');
-
-
     }
 
     function form_comision($comision, $perfil, $id_servicio)
@@ -2183,7 +2157,8 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
 
-        $text[] = text_icon(_text_(_editar_icon, 'editar_comision'),
+        $text[] = text_icon(
+            _text_(_editar_icon, 'editar_comision'),
             _text_(
                 d('COMISIÓN QUE PAGAS POR VENTA', _strong),
                 _titulo(money($comision), 2)
@@ -2191,14 +2166,17 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($text, 'text_comision');
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "form_comision_venta d-none"
             ]
         );
 
         $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
-        $input = input_frm('', 'COMISIÓN QUE PAGAS POR VENTA',
+        $input = input_frm(
+            '',
+            'COMISIÓN QUE PAGAS POR VENTA',
             [
                 "type" => "float",
                 "name" => "comision",
@@ -2218,15 +2196,14 @@ if (!function_exists('invierte_date_time')) {
         $response[] = append($r);
 
         return d($response, 'col-md-6 mt-5');
-
-
     }
 
     function form_descuento_especial($descuento_especial, $perfil, $id_servicio)
     {
 
         $response = [];
-        $text[] = text_icon(_text_(_editar_icon, 'editar_descuento_espcial'),
+        $text[] = text_icon(
+            _text_(_editar_icon, 'editar_descuento_espcial'),
             _text_(
                 d('Descuento especial para comisionistas premium', _strong),
                 _titulo(money($descuento_especial), 2)
@@ -2234,14 +2211,17 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = d($text, 'text_descuento_especial');
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "form_descuento_especial d-none"
             ]
         );
 
         $r[] = hiddens(['name' => 'id', 'value' => $id_servicio]);
-        $input = input_frm('', 'Descuento que ',
+        $input = input_frm(
+            '',
+            'Descuento que ',
             [
                 "type" => "float",
                 "name" => "descuento_especial",
@@ -2260,8 +2240,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = append($r);
 
         return d($response, 'col-md-12 mt-5');
-
-
     }
 
 
@@ -2273,7 +2251,7 @@ if (!function_exists('invierte_date_time')) {
 
             $es_data_costo = es_data($costo_envio);
             $costo_envio_configuracion = ($es_data_costo) ? $costo_envio["text_envio"]["ventas_configuracion"] : 0;
-            $consto_envio_cliente = ($es_data_costo)? $costo_envio["text_envio"]["cliente"] : 0;
+            $consto_envio_cliente = ($es_data_costo) ? $costo_envio["text_envio"]["cliente"] : 0;
 
             $r[] = _titulo("costo de envío");
             $r[] = d(text_icon('fa fa fa-pencil text_info_envio', $costo_envio_configuracion));
@@ -2303,31 +2281,30 @@ if (!function_exists('invierte_date_time')) {
             $res[] = d($response, 'col-md-6 mt-5');
         }
         return append($res);
-
-
     }
 
     function get_tabla_colores()
     {
 
         $colores_esp = ["Turquesa", "Emerland", "Peterriver", "Amatista", "Wetasphalt", "Mar verde", "Nefritis", "Belizehole", "Glicinas", "Medianoche azul", "Girasol", "Zanahoria", "Alizarina", "Nubes", "Hormigón", "Naranja", "Calabaza", "Granada", "Plata", "Amianto", "Blanco", "Blue", "Cafe", "Morado", "Morado 2", "Azul", "Azul", "Verde", "Verde", "Verde 2", "Amarillo", "Amarillo 2", "Amarillo 3", "Amarillo 4", "Amarillo 5 ", "Gris", "Gris 2", "Gris 3", "Gris 4", "Gris 5", "Gris 6"];
-        $codigo_colores = ["#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400",
-            "#c0392b", "#bdc3c7", "#7f8c8d", "#fbfcfc", "#1b4f72", "#641e16", "#512e5f", "#4a235a", "#154360", "#1b4f72", " #0e6251", " #0b5345", " #186a3b", " #7d6608", " #7e5109", "#784212", "#6e2c00", "#626567", "#7b7d7d", "#626567", "#4d5656", " #424949", " #1b2631", "#17202a"];
+        $codigo_colores = [
+            "#1abc9c", "#2ecc71", "#3498db", "#9b59b6", "#34495e", "#16a085", "#27ae60", "#2980b9", "#8e44ad", "#2c3e50", "#f1c40f", "#e67e22", "#e74c3c", "#ecf0f1", "#95a5a6", "#f39c12", "#d35400",
+            "#c0392b", "#bdc3c7", "#7f8c8d", "#fbfcfc", "#1b4f72", "#641e16", "#512e5f", "#4a235a", "#154360", "#1b4f72", " #0e6251", " #0b5345", " #186a3b", " #7d6608", " #7e5109", "#784212", "#6e2c00", "#626567", "#7b7d7d", "#626567", "#4d5656", " #424949", " #1b2631", "#17202a"
+        ];
 
         $response = [];
         for ($a = 0; $a < count($colores_esp); $a++) {
 
-            $response[] = d("",
+            $response[] = d(
+                "",
                 [
                     "class" => "colores",
                     "style" => "background:{$codigo_colores[$a]}",
                     "id" => $codigo_colores[$a]
                 ]
             );
-
         }
         return d($response, "colores_disponibles");
-
     }
 
     function get_view_sugerencias($servicios)
@@ -2338,7 +2315,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($array_servicios as $row) {
 
 
-            $img = formato_producto(0, $row);        
+            $img = formato_producto(0, $row);
             $imagenes[] = a_enid(
                 $img,
                 [
@@ -2346,10 +2323,9 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "col-md-3 hps h_345 col-xs-6 p-1 mh-auto top_50 bottom_50 border border-primary"
                 ]
             );
-            
         }
 
-        
+
         return append($imagenes);
     }
 
@@ -2360,7 +2336,10 @@ if (!function_exists('invierte_date_time')) {
 
         $class = _text_('blue_enid3 white mb-5 mt-5 text-uppercase border-bottom', _between);
         $titulos = flex(
-            'días publicados sin ventas', 'artículo', $class);
+            'días publicados sin ventas',
+            'artículo',
+            $class
+        );
         $response[] = d($titulos, 4, 1);
         foreach ($servicios as $row) {
 
@@ -2383,10 +2362,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
             $response[] = d($link, 4, 1);
-
-
         }
         return $response;
-
     }
 }

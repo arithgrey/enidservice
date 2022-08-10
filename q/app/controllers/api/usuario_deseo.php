@@ -12,7 +12,6 @@ class usuario_deseo extends REST_Controller
         $this->load->helper("usuario_deseo");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
-
     }
     /*Ya se registro ahora le cobramos 4*/
     function envio_pago_PUT()
@@ -45,10 +44,10 @@ class usuario_deseo extends REST_Controller
     function agregados_GET()
     {
 
-        $param = $this->get();        
-        $deseo_compra = $this->usuario_deseo_model->get([],["status" => 0],1000, 'id');
+        $param = $this->get();
+        $deseo_compra = $this->usuario_deseo_model->get([], ["status" => 0], 1000, 'id');
         $deseo_compra_servicio = $this->app->add_imgs_servicio($deseo_compra);
-        $response = $this->app->add_imgs_usuario($deseo_compra_servicio,'id_usuario');
+        $response = $this->app->add_imgs_usuario($deseo_compra_servicio, 'id_usuario');
 
 
         $this->response(agregados($response));
@@ -56,13 +55,13 @@ class usuario_deseo extends REST_Controller
     function en_registro_GET()
     {
 
-        $param = $this->get();        
-        $deseo_compra = $this->usuario_deseo_model->get([],["status" => 3],1000, 'id');
+        $param = $this->get();
+        $deseo_compra = $this->usuario_deseo_model->get([], ["status" => 3], 1000, 'id');
         $deseo_compra_servicio = $this->app->add_imgs_servicio($deseo_compra);
-        $response = $this->app->add_imgs_usuario($deseo_compra_servicio,'id_usuario');
+        $response = $this->app->add_imgs_usuario($deseo_compra_servicio, 'id_usuario');
 
         $this->response(en_registro($response));
-    }    
+    }
     function cantidad_PUT()
     {
 
@@ -75,13 +74,10 @@ class usuario_deseo extends REST_Controller
             if ($in_session > 0) {
 
                 $response = $this->usuario_deseo_model->q_up("articulos", $param["cantidad"], $param["id"]);
-
             } else {
 
                 $response = $this->cantidad_usuario_deseo($param);
             }
-
-
         }
         $this->response($response);
     }
@@ -90,7 +86,6 @@ class usuario_deseo extends REST_Controller
     {
 
         return $this->app->api("usuario_deseo_compra/cantidad", $param, "json", "PUT");
-
     }
 
     function deseos_GET()
@@ -107,7 +102,6 @@ class usuario_deseo extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     private function get_num_deseo_servicio_usuario($param)
@@ -148,20 +142,34 @@ class usuario_deseo extends REST_Controller
 
             $id_recompensa = pr($deseo_compra, "id_recompensa");
             $id_usuario = pr($deseo_compra, "id_usuario");
-            
-            if ($id_recompensa > 0 ) {
 
-                /*Se actualiza simple quitando los descuentos aplicados*/                    
-                $response = 
-                $this->usuario_deseo_model->baja_recompensa($id, $id_usuario , $id_recompensa);
+            if ($id_recompensa > 0) {
 
+                /*Se actualiza simple quitando los descuentos aplicados*/
+                $response =
+                    $this->usuario_deseo_model->baja_recompensa($id, $id_usuario, $id_recompensa);
             }
-
-
-
         }
         $this->response($response);
     }
+    function servicio_DELETE()
+    {
+        $param = $this->delete();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+
+            $response = $this->usuario_deseo_model->delete(
+                [
+                    "id_servicio" => $param["id_servicio"],
+                    "id_usuario" => $this->id_usuario
+                ],
+                1
+            );
+        }
+        $this->response($response);
+    }
+
 
 
     function add_lista_deseos_PUT()
@@ -223,7 +231,6 @@ class usuario_deseo extends REST_Controller
             ];
 
             $response = $this->usuario_deseo_model->insert($params);
-
         }
         return $response;
     }
@@ -253,7 +260,7 @@ class usuario_deseo extends REST_Controller
 
     function deseo_compra($param)
     {
-        $q = ["tipo" => 2 , "id_servicio" =>  $param["id_servicio"]];
+        $q = ["tipo" => 2, "id_servicio" =>  $param["id_servicio"]];
         return $this->app->api("intento_tipo_entrega/index", $q, "json", "POST");
     }
 
@@ -272,37 +279,30 @@ class usuario_deseo extends REST_Controller
                 $ids_usuario_deseo = array_column($listado, "id");
                 $recompensa = [];
 
-                if(es_data($ids)){
+                if (es_data($ids)) {
 
                     $ids_recompensa = array_unique($ids);
                     $recompensa = $this->recompensa_ids($ids_recompensa);
-
                 }
-                
+
                 $response = [
                     "listado" => $listado,
                     "recompensas" => $recompensa,
                     "ids_usuario_deseo" => $ids_usuario_deseo
                 ];
-
-
             } else {
 
                 $response = $this->usuario_deseo_model->get([], ["id_usuario" => $id_usuario], 30, 'num_deseo');
-
             }
-
         }
         $this->response($response);
     }
     private function recompensa_ids($ids)
-    {   
+    {
 
 
         $q  = ["ids" =>  $ids];
         return $this->app->api("recompensa/ids", $q);
-
-        
     }
 
     private function agrega_interes_usuario($q)
@@ -315,7 +315,5 @@ class usuario_deseo extends REST_Controller
     {
 
         return $this->app->api("servicio/gamificacion_deseo", $q, "json", "PUT");
-
-
     }
 }

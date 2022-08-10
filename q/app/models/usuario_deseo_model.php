@@ -29,7 +29,10 @@ class Usuario_deseo_model extends CI_Model
         $this->db->limit($limit);
         return $this->db->update("usuario_deseo", $data);
     }
-
+    function q_get($params = [], $id)
+    {
+        return $this->get($params, ["id" => $id]);
+    }
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
     {
 
@@ -128,7 +131,14 @@ class Usuario_deseo_model extends CI_Model
         $query_update = "UPDATE usuario_deseo SET status = 3 WHERE id IN(" . $ids . ") LIMIT 10";
         return $this->db->query($query_update);
     }
-
+    function delete($params_where = [], $limit = 1)
+	{
+		$this->db->limit($limit);
+		foreach ($params_where as $key => $value) {
+			$this->db->where($key, $value);
+		}
+		return $this->db->delete("usuario_deseo", $params_where);
+	}
     function por_pago($ids, $envia_cliente = 0)
     {
 
