@@ -1221,10 +1221,10 @@ if (!function_exists('invierte_date_time')) {
         
         $extra_por_agregar = _text("por_agregar_", $id_servicio);
         $extra_agregados = _text("d-none agregado_", $id_servicio);
-        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", _text_("mr-2", $extra_por_agregar), $extra_agregados);
+        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column" , _text_("mr-2", $extra_por_agregar), $extra_agregados);
 
         
-        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, "justify-content-between w-100", "");
+        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, "justify-content-between w-100 mt-1", "");
         $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
 
 
