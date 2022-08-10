@@ -1229,7 +1229,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa d-block mx-auto mt-3" :
-            "d-block mh_250 mh_230 mh_sm_310 mx-auto mt-3";
+            "d-block mh_250 mh_sm_310 mx-auto mt-3";
 
         $img = a_enid( img(
             [
