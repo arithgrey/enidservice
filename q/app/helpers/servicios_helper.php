@@ -1210,13 +1210,13 @@ if (!function_exists('invierte_date_time')) {
         $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2');
         $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
         
-        $tipo_deseo = "agregar_deseos_sin_antecedente" ;
+        $tipo_deseo = "agregar_deseos_sin_antecedente";
         $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
 
-        $clases = _text_($tipo_deseo ,  _deseo_icon);
-        $clases_agregado = _text_($tipo_deseo_agregado ,  _agregado_icon);
+        $clases = _text_($tipo_deseo ,  _deseo_icon, "fa-2x");
+        $clases_agregado = _text_($tipo_deseo_agregado ,  _agregado_icon, "fa-2x");
 
-        $icono_por_agregar = icon($clases,["id" =>  $id_servicio]);
+        $icono_por_agregar = icon($clases,["id" =>  $id_servicio, "title" => "Lo deseo"]);
         $icono_agregado = icon($clases_agregado,["id" =>  $id_servicio]);
         
         $extra_por_agregar = _text("por_agregar_", $id_servicio);

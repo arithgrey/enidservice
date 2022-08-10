@@ -1,3 +1,6 @@
+.agregar_deseos_sin_antecedente:hover, .quitar_deseo_sin_antecedente:hover{
+    padding: 1px;
+}
 .aviso_comision{
     background: #040d99;
 }
