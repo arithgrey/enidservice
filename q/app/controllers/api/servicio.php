@@ -1959,8 +1959,7 @@ class Servicio extends REST_Controller
             
 
             if (es_data($servicios)) {
-
-
+                
                 $response = get_view_sugerencias(
                     $this->add_imgs_sugerencias($servicios)
                 );
