@@ -205,8 +205,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $lista_deseo = lista_deseo($productos_deseados, $externo);
-        $response[] = d($lista_deseo, 8);
-        $response[] = d(seccion_procesar_pago($data, $productos_deseados), 4);
+        $response[] = d($lista_deseo, "col-xs-12 col-md-8 border-right");
+        $response[] = d(seccion_procesar_pago($data, $productos_deseados),"col-xs-12 col-md-4 border-right");
 
         return d($response, 10, 1);
     }
