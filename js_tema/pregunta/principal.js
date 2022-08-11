@@ -56,6 +56,8 @@ let response_carga_productos_sugeridos = (data) => {
     if (data.sugerencias == undefined && data.sugerencias != 0) {
 
         render_enid(".place_tambien_podria_interezar", data);
+        $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
+        $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     }
 };
 

@@ -18,5 +18,7 @@ let response_carga_productos = data => {
         $('.otros').removeClass('d-none');
         $(".text_interes").removeClass("hidden");
         render_enid(".place_tambien_podria_interezar", data);
+        $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
+        $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     }
 };
