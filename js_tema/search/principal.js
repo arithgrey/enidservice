@@ -7,8 +7,8 @@ $(document).ready(() => {
     $(".order").change(filtro);
     $("footer").ready(carga_promociones_sugerencias);
 
-    $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente);
-    $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente);
+    $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente_gbl);
+    $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente_gbl);
     
 });
 
@@ -58,60 +58,3 @@ let response_deseo_compra_recompensa = function (data) {
     redirect("../lista_deseos");
 
 }
-
-let agregar_deseos_sin_antecedente = function () {
-
-    let $id_servicio = $(this).attr('id');
-    $(_text(".por_agregar_", $id_servicio)).addClass("d-none");
-    $(_text(".agregado_", $id_servicio)).removeClass("d-none");
-
-
-    if (parseInt($id_servicio) > 0) {
-        advierte('Agregado a tu lista de deseos!', 1);
-        let data_send = { "id_servicio": $id_servicio, "articulos": 1 };
-
-        if (parseInt(get_option("in_session")) > 0) {
-
-            let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
-            request_enid("PUT", data_send, url, adicionales);
-
-        } else {
-
-            let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-            request_enid("POST", data_send, url, adicionales);
-        }
-
-    }
-}
-let quitar_deseo_sin_antecedente = function () {
-
-    let $id_servicio = $(this).attr('id');
-    $(_text(".por_agregar_", $id_servicio)).removeClass("d-none");
-    $(_text(".agregado_", $id_servicio)).addClass("d-none");
-    
-    
-
-    if (parseInt($id_servicio) > 0) {
-        advierte('Lo sacamos de tu lista de deseos!', 1);
-        let data_send = { "id_servicio": $id_servicio, "servicio" : $id_servicio};
-        if (parseInt(get_option("in_session")) > 0) {
-
-            /*En session*/
-            let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";            
-            request_enid("DELETE", data_send, url, adicionales);
-
-
-        } else {
-
-            let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-            request_enid("DELETE", data_send, url, adicionales);
-
-        }
-    }
-}
-let adicionales = function () {
-    metricas_perfil();
-    cerrar_modal();
-
-}
-
