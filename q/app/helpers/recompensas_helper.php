@@ -374,7 +374,7 @@ if (!function_exists('invierte_date_time')) {
         return d($elementos, "d-flex flex-column");
     }
     /*Sugerencias aleatorias para la sección principal*/
-    function sugerencias($recompensa){
+    function sugerencias($recompensa, $antecedente_compra){
                 
         $response = [];
         
@@ -393,7 +393,7 @@ if (!function_exists('invierte_date_time')) {
                 $texto_totales = total_recompensa($row);
                 $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
                 $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
-                $editar_compra = editar_comprar($id_recompensa);
+                $editar_compra = editar_comprar($id_recompensa, $antecedente_compra);
 
                 $clase_imagen = 'col-xs-4';
                 $promocion = [
@@ -425,7 +425,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
-    function editar_comprar($id_recompensa)
+    function editar_comprar($id_recompensa, $antecedente_compra = 0)
     {
 
         
@@ -434,7 +434,7 @@ if (!function_exists('invierte_date_time')) {
 
                 "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa white border text-center",
                 "id" => $id_recompensa, 
-                "antecedente_compra" => 0
+                "antecedente_compra" => $antecedente_compra
             ]
         );
 

@@ -23,7 +23,7 @@ let filtro = () => {
 let carga_promociones_sugerencias = () => {
 
     let url = "../q/index.php/api/recompensa/sugeridos/format/json/";
-    let data_send = {};
+    let data_send = {"antecedente_compra": parseInt(get_option("in_session"))};
     request_enid("GET", data_send, url, function (data) {
         render_enid(".promociones_sugeridas", data);
 
