@@ -10,7 +10,6 @@ if (!function_exists('invierte_date_time')) {
         if (!es_data($recibos)) {
 
             return sin_entregas_agendadas();
-
         }
         $f = 0;
         $ventas_posteriores = [];
@@ -20,6 +19,14 @@ if (!function_exists('invierte_date_time')) {
         $lineas = 0;
         $totales = 0;
 
+        if (es_administrador_o_vendedor($data)) {
+            $data_complete[] = d(format_link(
+                "notificar todos los pedidos como entregados",
+                [
+                    "class" => "notificacion_entregados",
+                ]
+            ), 4, 1);
+        }
 
         if (es_data($recibos)) {
 
@@ -32,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($recibos as $row) {
 
                 $id_orden_compra = $row['id_orden_compra'];
-                $total = total_orden_compra($ids_orden_compra, $id_orden_compra);                
+                $total = total_orden_compra($ids_orden_compra, $id_orden_compra);
                 $fecha_entrega = date_create($row['fecha_contra_entrega'])->format('Y-m-d');
                 $fecha = horario_enid();
                 $hoy = $fecha->format('Y-m-d');
@@ -47,12 +54,15 @@ if (!function_exists('invierte_date_time')) {
                     if ($id_anterior !== $id_orden_compra) {
 
                         $linea = linea_compra_productos_reparto(
-                            $recibos, $id_orden_compra, $es_cliente, $data, $es_reparto, $total);
+                            $recibos,
+                            $id_orden_compra,
+                            $es_cliente,
+                            $data,
+                            $es_reparto,
+                            $total
+                        );
                         $id_anterior = $id_orden_compra;
-
                     }
-
-
                 } else {
 
                     $linea = linea_compra_reparto($row, $es_cliente, $data, $id_orden_compra, $es_reparto);
@@ -62,30 +72,34 @@ if (!function_exists('invierte_date_time')) {
                 if ($es_hoy || $es_menor) {
 
                     $ventas_hoy[] = $linea;
-
                 } else {
 
                     $ventas_posteriores[] = $linea;
-
                 }
 
                 $f++;
-
             }
 
             $response = ayuda_tipo_entrega($recibos, $data, $ventas_hoy, $ventas_posteriores);
-
         }
 
-        return d($response,4,1);
 
+        $data_complete[] =  d($response, 4, 1);
+        return append($data_complete);
     }
 
- 
-    function ayuda_notificacion($data, $usuario_entrega, $total, $dia_entrega, $es_contra_entrega,
-                                $id_usuario_entrega, $ubicacion, $total_articulos,
-                                $es_contra_entrega_domicilio_sin_direccion)
-    {
+
+    function ayuda_notificacion(
+        $data,
+        $usuario_entrega,
+        $total,
+        $dia_entrega,
+        $es_contra_entrega,
+        $id_usuario_entrega,
+        $ubicacion,
+        $total_articulos,
+        $es_contra_entrega_domicilio_sin_direccion
+    ) {
 
         $text_total = [];
         $icon = '';
@@ -96,7 +110,6 @@ if (!function_exists('invierte_date_time')) {
             $nombre_repatidor = format_nombre($usuario_entrega);
             $texto_icono = flex($icono, $nombre_repatidor, "justify-content-end", "mr-1");
             $icon = ($es_cliente) ? '' : $texto_icono;
-
         }
 
         $text_total[] = d($total, "ml-auto h4 strong");
@@ -117,48 +130,48 @@ if (!function_exists('invierte_date_time')) {
 
 
         return $text_total;
-
     }
     function ayuda_tipo_entrega($recibos, $data, $ventas_hoy, $ventas_posteriores)
     {
-        
+
         $response = [];
         if (es_data($recibos)) {
-            
-            $descuentos_recibos = $data["descuentos_recibos"];        
-            $ids_orden_compra = array_column($recibos,"id_orden_compra");        
+
+            $descuentos_recibos = $data["descuentos_recibos"];
+            $ids_orden_compra = array_column($recibos, "id_orden_compra");
             $ordenes_compra = count(array_unique($ids_orden_compra));
-            $arreglo_totales = array_column($recibos,"total");
-            $suma_por_cobrar = array_sum($arreglo_totales);            
+            $arreglo_totales = array_column($recibos, "total");
+            $suma_por_cobrar = array_sum($arreglo_totales);
             $suma_descuentos = array_sum(array_column($descuentos_recibos, 'descuento'));
 
-            $total_ordenes_compra = count(array_unique(array_column($recibos,"id_orden_compra")));
-            
+            $total_ordenes_compra = count(array_unique(array_column($recibos, "id_orden_compra")));
+
             $total_gastos_entregas = $total_ordenes_compra * 100;
-            $total_por_cobrar = ($suma_por_cobrar- $suma_descuentos);
-            $total_pago_comisiones = comision_porcentaje($total_por_cobrar , 10);
-            
+            $total_por_cobrar = ($suma_por_cobrar - $suma_descuentos);
+            $total_pago_comisiones = comision_porcentaje($total_por_cobrar, 10);
+
             $utilidad_costos_pedidos = utilidad_costos_pedidos($recibos);
             $utilidad_costos_pedidos_descuentos = $utilidad_costos_pedidos - $suma_descuentos;
 
-            $ganancias = $utilidad_costos_pedidos_descuentos - 
-            $total_pago_comisiones - $total_gastos_entregas;
-            
+            $ganancias = $utilidad_costos_pedidos_descuentos -
+                $total_pago_comisiones - $total_gastos_entregas;
+
 
             $titulo =  _text_('Próximas entregas', $ordenes_compra);
-            $response[] = d(_titulo($titulo,2,'bg_black white text-center p-2'));
+            $response[] = d(_titulo($titulo, 2, 'bg_black white text-center p-2'));
             if (es_administrador($data)) {
                 $response[] = d(
-                    _text_("Total por cobrar", money($total_por_cobrar)),'display-6 black');
-                $response[] = del(_text_("Total", money($suma_por_cobrar)),'f11');
-                $response[] = d(_text_("Descuentos", money($suma_descuentos)),'f11 ');
-                $response[] = d(_text_("Utilidad Glogal", money($utilidad_costos_pedidos)),'f11 ');
-                $response[] = d(_text_("Pago de comisiones", money($total_pago_comisiones)),'f11 ');
-                $response[] = d(_text_("Pago de entregas", money($total_gastos_entregas)),'f11 ');
-                $response[] = d(_text_("Utilidad", money($ganancias)),'f11 ');
-                $ganancias_gas =  $ganancias - 200; 
-                $response[] = d(_text_("Utilidad menos Gas", money($ganancias_gas)),'f13 black ');
-
+                    _text_("Total por cobrar", money($total_por_cobrar)),
+                    'display-6 black'
+                );
+                $response[] = del(_text_("Total", money($suma_por_cobrar)), 'f11');
+                $response[] = d(_text_("Descuentos", money($suma_descuentos)), 'f11 ');
+                $response[] = d(_text_("Utilidad Glogal", money($utilidad_costos_pedidos)), 'f11 ');
+                $response[] = d(_text_("Pago de comisiones", money($total_pago_comisiones)), 'f11 ');
+                $response[] = d(_text_("Pago de entregas", money($total_gastos_entregas)), 'f11 ');
+                $response[] = d(_text_("Utilidad", money($ganancias)), 'f11 ');
+                $ganancias_gas =  $ganancias - 200;
+                $response[] = d(_text_("Utilidad menos Gas", money($ganancias_gas)), 'f13 black ');
             }
             $response[] = append($ventas_hoy);
             $response[] = append($ventas_posteriores);
@@ -168,44 +181,39 @@ if (!function_exists('invierte_date_time')) {
             $menos_opciones = _text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none');
             $response[] = d(icon($menos_opciones), 'text-center');
         }
-        
+
         return append($response);
-
-
     }
     function utilidad_costos_pedidos($recibos)
     {
-        
+
         $utilidad = 0;
-        foreach($recibos as $row){
+        foreach ($recibos as $row) {
 
             $precio = $row["precio"];
             $costo = $row["costo"];
-            $num_ciclos_contratados = $row["num_ciclos_contratados"]; 
-            
+            $num_ciclos_contratados = $row["num_ciclos_contratados"];
+
             $precios_finales = ($precio * $num_ciclos_contratados);
             $costos_finales = ($costo * $num_ciclos_contratados);
             $utilidad_actual = ($precios_finales - $costos_finales);
-            
+
 
             $utilidad = $utilidad + $utilidad_actual;
-
         }
 
         return $utilidad;
-
-        
     }
-    function utilidad_precio_servicio($precio, $costo, $articulos = 1){
+    function utilidad_precio_servicio($precio, $costo, $articulos = 1)
+    {
 
 
         $precio_articulos  = $precio * $articulos;
-        $costo_articulos = $costo * $articulos;        
-        $utilidad = ($precio_articulos - $costo_articulos);        
+        $costo_articulos = $costo * $articulos;
+        $utilidad = ($precio_articulos - $costo_articulos);
         return $utilidad;
-
     }
-    
+
     function linea_compra_productos_reparto($recibos, $id, $es_cliente, $data, $es_reparto, $total)
     {
 
@@ -214,7 +222,7 @@ if (!function_exists('invierte_date_time')) {
         $id_orden = 0;
         $total_orden_compra = 0;
         $total_articulos = 0;
-            
+
         foreach ($recibos as $row) {
 
             $id_orden_compra = $row['id_orden_compra'];
@@ -222,24 +230,25 @@ if (!function_exists('invierte_date_time')) {
                 $total_articulos = ($total_articulos + $row["num_ciclos_contratados"]);
                 $id_orden = $id_orden_compra;
                 $total_orden_compra = ($total_orden_compra + $row["total"]);
-                
+
                 if ($a < 1) {
 
                     $recibo = $row;
-
                 } else {
                     $a = 0;
-
                 }
             }
         }
 
         return linea_compra_reparto(
-            $recibo, $es_cliente, 
-            $data, $id_orden, 
-            $es_reparto, $total_orden_compra, 
-            $total_articulos);
-
+            $recibo,
+            $es_cliente,
+            $data,
+            $id_orden,
+            $es_reparto,
+            $total_orden_compra,
+            $total_articulos
+        );
     }
     function formato_hora_contra_entrega($es_contra_entrega, $row, $ubicacion)
     {
@@ -255,7 +264,6 @@ if (!function_exists('invierte_date_time')) {
             }
         }
         return $format_hora;
-
     }
 
     function formato_texto_entrega($text_entrega, $row, $dias, $es_mayor)
@@ -271,11 +279,17 @@ if (!function_exists('invierte_date_time')) {
         }
         return $text_entrega;
     }
-    function linea_compra_reparto($row, $es_cliente, $data, $id_orden_compra, 
-        $es_reparto, $total_orden_compra = 0, $total_articulos = 0 )
-    {
+    function linea_compra_reparto(
+        $row,
+        $es_cliente,
+        $data,
+        $id_orden_compra,
+        $es_reparto,
+        $total_orden_compra = 0,
+        $total_articulos = 0
+    ) {
 
-        
+
         $fecha_contra_entrega = $row['fecha_contra_entrega'];
         $fecha_entrega = date_create($fecha_contra_entrega)->format('Y-m-d');
         $fecha = horario_enid();
@@ -303,8 +317,8 @@ if (!function_exists('invierte_date_time')) {
         $es_hoy = ($hoy === $fecha_entrega) ? 'bg-dark white' : '';
         $dia_entrega = d(_text_($notificacion_hoy, $hora_entrega), _text_('badge mt-4 mb-4', $es_hoy));
         $imagenes = d(img($row["url_img_servicio"]), "w_50");
-                
-        $descuento_recompensa= $row["descuento_recompensa"];
+
+        $descuento_recompensa = $row["descuento_recompensa"];
         $total_orden_compra = $total_orden_compra - $descuento_recompensa;
         $totales_recibo = ($total_orden_compra > 0) ? money($total_orden_compra) : money($row["total"]);
         $total = d($totales_recibo, "text-left black");
@@ -331,7 +345,7 @@ if (!function_exists('invierte_date_time')) {
         $orden = _text('ORDEN #', $id_orden_compra);
         $es_vendedor = es_vendedor($data);
         $agenda = flex("Agenda", $row['nombre_vendedor'], "flex-column");
-        $nombre_vendedor = (!$es_vendedor && !$es_cliente) ? $agenda :'';
+        $nombre_vendedor = (!$es_vendedor && !$es_cliente) ? $agenda : '';
         $identificador = flex($orden, $nombre_vendedor, 'flex-column', "strong h5 mt-5");
         $seccion_imagenes = flex($imagenes, $identificador, 'flex-column black', '', 'fp8');
         $text = flex($seccion_imagenes, $total_seccion, _between);
@@ -353,7 +367,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $total = $valor;
             }
-
         }
         return $total;
     }
@@ -388,7 +401,6 @@ if (!function_exists('invierte_date_time')) {
             'formato_hora' => $response,
             'es_contra_entrega_domicilio_sin_direccion' => $es_contra_entrega_domicilio_sin_direccion
         ];
-
     }
 
     function franja_entregas($recibos, $data)
@@ -490,7 +502,8 @@ if (!function_exists('invierte_date_time')) {
                 $desglose_pedido = path_enid("pedidos_recibo", $id_orden_compra);
                 $tracker = path_enid("pedido_seguimiento", $id_orden_compra);
                 $url = ($es_reparto > 0) ? $tracker : $desglose_pedido;
-                $link = a_enid($text,
+                $link = a_enid(
+                    $text,
                     [
                         'href' => $url,
                         'class' => 'col-md-4 col-md-offset-4'
@@ -516,7 +529,6 @@ if (!function_exists('invierte_date_time')) {
                     );
 
                     $ventas_hoy[] = d($pedido, $filtros);
-
                 } else {
 
                     $proximas_entregas[] = d(
@@ -524,7 +536,6 @@ if (!function_exists('invierte_date_time')) {
                         'ubicacion_asignada se_entregara_despues d-none',
                         $indicador
                     );
-
                 }
 
                 $f++;
@@ -533,7 +544,8 @@ if (!function_exists('invierte_date_time')) {
 
             if (es_data($recibos)) {
 
-                $extregas = a_enid('Ordenes liberadas',
+                $extregas = a_enid(
+                    'Ordenes liberadas',
                     [
                         'href' => path_enid('pedidos_reparto'),
                         'class' => 'strong black underline'
@@ -549,7 +561,8 @@ if (!function_exists('invierte_date_time')) {
 
 
                 $link_proximas_entregas =
-                    a_enid('Ver entregas que serán mañana',
+                    a_enid(
+                        'Ver entregas que serán mañana',
                         [
                             'class' => 'black underline diplay-6'
                         ]
@@ -558,7 +571,8 @@ if (!function_exists('invierte_date_time')) {
                     $link_proximas_entregas,
                     'mostrar_proximas_entregas'
                 );
-                $link_entregas = a_enid('Ver entregas por liberar hoy',
+                $link_entregas = a_enid(
+                    'Ver entregas por liberar hoy',
                     [
                         'class' => ' black underline'
                     ]
@@ -568,18 +582,29 @@ if (!function_exists('invierte_date_time')) {
                     'entregas_por_liberar_hoy d-none diplay-6'
                 );
 
-                $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_menos_opciones text-secondary')),
-                    ['class' => 'mx-auto '], 13);
-                $filtros_reparto[] = d(icon(_text_(_repato_icon, 'fa-2x filtro_mas_opciones black d-none')),
-                    ['class' => 'mx-auto '], 13);
+                $filtros_reparto[] = d(
+                    icon(_text_(_repato_icon, 'fa-2x filtro_menos_opciones text-secondary')),
+                    ['class' => 'mx-auto '],
+                    13
+                );
+                $filtros_reparto[] = d(
+                    icon(_text_(_repato_icon, 'fa-2x filtro_mas_opciones black d-none')),
+                    ['class' => 'mx-auto '],
+                    13
+                );
 
                 $filtros_ubicacion[] =
                     d(
                         icon(_text_(_maps_icon, 'fa-2x filtro_sin_ubicacion text-secondary')),
-                        ['class' => 'mx-auto '], 13);
+                        ['class' => 'mx-auto '],
+                        13
+                    );
 
-                $filtros_ubicacion[] = d(icon(_text_(_maps_icon, 'fa-2x filtro_ubicacion d-none')),
-                    ['class' => 'mx-auto '], 13);
+                $filtros_ubicacion[] = d(
+                    icon(_text_(_maps_icon, 'fa-2x filtro_ubicacion d-none')),
+                    ['class' => 'mx-auto '],
+                    13
+                );
 
 
                 $ubicacion = append($filtros_reparto);
@@ -587,53 +612,51 @@ if (!function_exists('invierte_date_time')) {
                 $r[] = d(d(flex($ubicacion, $reparto, _between), 'col-md-4 col-md-offset-4'), 13);
                 $r[] = append($ventas_hoy);
                 $r[] = append($proximas_entregas);
-
             }
-
         } else {
 
 
             return sin_entregas_agendadas();
-
         }
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
     }
 
     function sin_entregas_agendadas()
-    {   
+    {
 
         $texto = 'Ups! parece que algo anda mal, no hay ventas, tenemos que regresar a conseguir clientes!';
         $r[] = d($texto, _text_('h3 text-uppercase black font-weight-bold', _6auto));
-        
-        $link = format_link('Ver artículos disponibles',
-                    [
-                        'href' => path_enid('home')
-                    ]
-                );
+
+        $link = format_link(
+            'Ver artículos disponibles',
+            [
+                'href' => path_enid('home')
+            ]
+        );
 
         $imagen  = img(
-                    [
-                        "src" => "https://media.giphy.com/media/3orif8pKLiSeJP0paw/giphy.gif",
-                        "class" => "mt-5 mx-auto"
-                    ]
-                );
+            [
+                "src" => "https://media.giphy.com/media/3orif8pKLiSeJP0paw/giphy.gif",
+                "class" => "mt-5 mx-auto"
+            ]
+        );
 
         $r[] = d($link, _text_(_4auto, 'mt-5'));
-        $r[] = d($imagen , _6auto);
+        $r[] = d($imagen, _6auto);
         $r[] = d(format_link(
             "Actividades recién notificadas",
             [
-                "href" => path_enid("busqueda")   ,
-                "class" =>  "mt-5"             
-            ],0
-        ),4,1);
+                "href" => path_enid("busqueda"),
+                "class" =>  "mt-5"
+            ],
+            0
+        ), 4, 1);
 
         return d($r, 'mt-5 col-md-12 text-center border-secondary p-0');
-
     }
     /**/
-    
+
     function reporte_reparto(&$ids_usuarios_entregas, &$repartidores, &$data)
     {
 
@@ -647,18 +670,21 @@ if (!function_exists('invierte_date_time')) {
                 $nombre_usuario_entrega = search_bi_array($repartidores, 'id', $clave, 'nombre_usuario_entrega');
                 $contenido = flex($nombre_usuario_entrega, $valor, _text_(_between, 'border-bottom'), 'text-uppercase');
                 $response[] = d(d($contenido, 4, 1), ['class' => 'row repartidor cursor_pointer black_cursor_pointer', 'id' => $clave]);
-
             }
         }
 
         return d($response, 'mb-5');
-
     }
 
-    function nota_pedido($total, $dia_entrega, $es_contra_entrega,
-                         $es_contra_entrega_domicilio_sin_direccion,
-                         $ubicacion, $text_entrega, $row)
-    {
+    function nota_pedido(
+        $total,
+        $dia_entrega,
+        $es_contra_entrega,
+        $es_contra_entrega_domicilio_sin_direccion,
+        $ubicacion,
+        $text_entrega,
+        $row
+    ) {
         $response = [];
         $response[] = d($total);
         $response[] = $dia_entrega;
@@ -728,7 +754,6 @@ if (!function_exists('invierte_date_time')) {
                 'telefono_cliente' => $telefono_cliente,
                 'nombre_usuario_entrega' => $nombre_usuario_entrega
             ];
-
     }
 
     function descripcion_entregas_puntos_encuentro($id_punto_encuentro, $row)
@@ -738,7 +763,8 @@ if (!function_exists('invierte_date_time')) {
             $punto_encuentro = $row['data_punto_encuentro'];
             if (es_data($punto_encuentro)) {
                 $nombre = $punto_encuentro["nombre"];
-                $response = d(_text_('Estación del metro', $nombre),
+                $response = d(
+                    _text_('Estación del metro', $nombre),
                     'mb-5 text-uppercase strong black text-center'
                 );
             }
@@ -748,10 +774,15 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
 
-    function descripcion_entregas_domicilio($row, $id_domicilio, $data_domicilio,
-                                            $es_contra_entrega, $ubicacion, $text_entrega,
-                                            $es_contra_entrega_domicilio_sin_direccion)
-    {
+    function descripcion_entregas_domicilio(
+        $row,
+        $id_domicilio,
+        $data_domicilio,
+        $es_contra_entrega,
+        $ubicacion,
+        $text_entrega,
+        $es_contra_entrega_domicilio_sin_direccion
+    ) {
         $abrir_en_google = 0;
         $response = '';
         $maps_link = '';
@@ -761,14 +792,12 @@ if (!function_exists('invierte_date_time')) {
             if ($es_contra_entrega_domicilio_sin_direccion && $ubicacion < 1) {
                 $response = d('(Pedir ubicación)', 'text-danger mb-5');
                 $solicitar_ubicacion++;
-
             } else if ($ubicacion > 0) {
 
                 $text_ubicacion = prm_def($row['data_ubicacion'], 'ubicacion');
                 $response = d($text_ubicacion, 'mb-5 black text-center');
                 $maps_link = texto_maps($text_ubicacion, 0);
                 $abrir_en_google++;
-
             } else if ($id_domicilio > 0) {
 
                 $text_domicilio = text_domicilio($data_domicilio);
@@ -782,8 +811,6 @@ if (!function_exists('invierte_date_time')) {
                 'maps_link' => $maps_link,
                 'solicitar_ubicacion' => $solicitar_ubicacion
             ];
-
-
     }
 
 
@@ -837,10 +864,8 @@ if (!function_exists('invierte_date_time')) {
                 ];
 
                 $text = format_link('abrir en google maps', $conf);
-
             }
         }
         return $text;
-    }   
-    
+    }
 }

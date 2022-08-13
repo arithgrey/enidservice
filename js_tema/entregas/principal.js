@@ -10,6 +10,8 @@ let $se_entregara_despues = $('.se_entregara_despues');
 let $entregas_por_liberar = $('.entregas_por_liberar');
 let $entregas_por_liberar_hoy = $('.entregas_por_liberar_hoy');
 let $repartidor = $('.repartidor');
+let $notificacion_entregados = $('.notificacion_entregados');
+
 $(document).ready(function () {
 
     $mostrar_todo.click(muestra_franja_horaria);
@@ -20,12 +22,26 @@ $(document).ready(function () {
     $mostrar_proximas_entregas.click(mostrar_proximas_entregas);
     $entregas_por_liberar_hoy.click(mostrar_entregas_por_liberar_hoy);
     $repartidor.click(filtro_reparto);
+    $notificacion_entregados.click(notificacion_entregados);
 
 });
+let notificacion_entregados = () => {
+    show_confirm("¿Seguro que quieres notificar todos los pedidos como entregados?", "", "CONTINUAR", function () {
+
+        let url = "../q/index.php/api/recibo/cierres_pendientes/format/json/";
+        let data_send = {};
+        advierte('Notificando ...', 1);
+        request_enid("PUT", data_send, url, function (data) {
+            redirect("");
+        });
+
+    });
+
+}
 let busqueda_ordenes_franja_horaria = (franja) => {
 
     modal('Busqueda', 1);
-    let data_send = {"franja_horaria": franja, 'v': 1};
+    let data_send = { "franja_horaria": franja, 'v': 1 };
     let url = "../q/index.php/api/recibo/franja_horaria/format/json/";
     request_enid("GET", data_send, url, response_entregas_franja_horaria);
 
@@ -106,7 +122,7 @@ let filtro_reparto = function () {
     if (parseInt($id) > 0) {
 
         $(".ubicacion_asignada").addClass("d-none");
-        let $indicador_visible =  _text('.linea_',$id);
+        let $indicador_visible = _text('.linea_', $id);
         $($indicador_visible).removeClass('d-none');
 
 

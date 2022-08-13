@@ -45,10 +45,9 @@ let nueva_promocion = function () {
     $modal_recompensa.modal('show');    
    
     set_option("s", 1);
-    let global = (get_parameter_enid($(this), "id" || get_option("global")) > 0) ? 1 : 0;
+    let global = (get_parameter_enid($(this), "id" || get_option("global")) > 0) ? 1 : 0;    
     set_option("global", global);    
     
-
     let url = "../q/index.php/api/servicio/empresa/format/json/";    
     let data_send = {
         "q": "",
