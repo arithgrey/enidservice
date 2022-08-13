@@ -1691,4 +1691,21 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+    function recibos_por_entregar_a_entregados($ids){
+
+        $query_update = "UPDATE 
+                            proyecto_persona_forma_pagos  
+                          SET 
+                            saldo_cubierto  =  monto_a_pagar , 
+                            status          =  15 ,                            
+                            fecha_entrega = CURRENT_TIMESTAMP(),
+                            entregado =  1,
+                            se_cancela = 0 , 
+                            cancela_cliente = 0
+                            WHERE id IN ($ids) LIMIT 1000";
+                                
+        return $this->db->query($query_update);        
+
+    }
+
 }

@@ -1232,13 +1232,28 @@ if (!function_exists('invierte_date_time')) {
             "d-block mh_250 mh_sm_310 mx-auto mt-3";
 
         $img = a_enid( img(
-            [
-                'src' => $servicio["url_img_servicio"],
-                'alt' => $servicio["metakeyword"],
-                'class' => $clases_imagen,
-                'id' => $id_servicio
-            ]
-        ), $path_servicio);
+                [
+                    'src' => $servicio["url_img_servicio"],
+                    'alt' => $servicio["metakeyword"],
+                    'class' => $clases_imagen,
+                    'id' => $id_servicio
+                ]
+            ), $path_servicio);
+
+        if($es_recompensa > 0){
+
+            $img = img(
+                [
+                    'src' => $servicio["url_img_servicio"],
+                    'alt' => $servicio["metakeyword"],
+                    'class' => $clases_imagen,
+                    'id' => $id_servicio
+                ]
+            );
+
+
+        }    
+        
     
 
         return flex(
@@ -1298,7 +1313,8 @@ if (!function_exists('invierte_date_time')) {
             if ($es_recompensa > 0) {
 
                 $class = "col-lg-3 hps mt-5 
-                mx-auto my-auto d-flex align-content-center flex-wrap p-1";
+                mx-auto my-auto d-flex 
+                align-content-center flex-wrap p-1";
 
                 $response = d($img,  $class);
             } else {

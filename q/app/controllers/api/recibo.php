@@ -62,30 +62,12 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario,id_perfil,id_empresa")) {
-
-
-            $data = $this->app->session();
+                    
             $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
 
-            $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
-
-            $idusuarios_empresa = array_column($usuarios_empresa, 'id');
-            $idusuarios_empresa = array_unique($idusuarios_empresa);
-
-
-
-            $response =
-                $this->recibo_model->pendientes_sin_cierre(
-                    $id_usuario,
-                    $id_perfil,
-                    $id_empresa,
-                    $idusuarios_empresa
-                );
-
-
-
+            $response =  $this->proximos_cerres($id_empresa, $id_usuario, $id_perfil);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
 
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
@@ -724,9 +706,9 @@ class recibo extends REST_Controller
             $id_orden_compra = $param['orden_compra'];
             $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             $es_ubicacion = $param["es_ubicacion"];
-            $contra_entrega_domicilio = prm_def($param,"contra_entrega_domicilio");
-            
-            
+            $contra_entrega_domicilio = prm_def($param, "contra_entrega_domicilio");
+
+
             foreach ($productos_orden_compra as $row) {
 
                 $id_recibo = $row["id"];
@@ -736,10 +718,10 @@ class recibo extends REST_Controller
                     "saldo_cubierto" => 0,
                     "se_cancela" => 0,
                     "cancela_cliente" => 0,
-                    "ubicacion" => $es_ubicacion ,
+                    "ubicacion" => $es_ubicacion,
                     "contra_entrega_domicilio" => $contra_entrega_domicilio
                 ];
-                
+
                 $in = ["id" => $id_recibo];
                 $repartidores = $this->repartidores($id_servicio);
                 $repartidores_en_entrega = $this->recibo_model->espacios($id_recibo);
@@ -2413,7 +2395,7 @@ class recibo extends REST_Controller
         $usuarios = explode(",", $ids);
 
         $response = $this->recibo_model->pago_recibos_comisiones_ids($ids);
-        
+
         $a = 0;
         foreach ($usuarios  as $row) {
 
@@ -2529,6 +2511,40 @@ class recibo extends REST_Controller
                 $top = $this->app->imgs_productos(0, 1, 1, 1, $top);
                 $response = top($top, $top_horas, $top_cancelaciones, $fechas, $fechas_cancelaciones, $ventas_hoy, $ventas_menos_7);
             }
+        }
+        $this->response($response);
+    }
+    function proximos_cerres($id_empresa, $id_usuario, $id_perfil)
+    {
+        $data = $this->app->session();
+        $usuarios_empresa = $this->usuarios_empresa_perfil($id_empresa, 1, $data);
+        $idusuarios_empresa = array_column($usuarios_empresa, 'id');
+        $idusuarios_empresa = array_unique($idusuarios_empresa);
+
+        return
+            $this->recibo_model->pendientes_sin_cierre(
+                $id_usuario,
+                $id_perfil,
+                $id_empresa,
+                $idusuarios_empresa
+            );
+    }
+    function cierres_pendientes_PUT()
+    {
+
+        $data = $this->app->session();    
+        $response = [];
+        if (intval($data["in_session"])) {
+
+            $id_empresa = $data['id_empresa'];
+            $id_usuario = $data["id_usuario"];
+            $id_perfil = $data['id_perfil'];
+
+            $recibos = $this->proximos_cerres($id_empresa, $id_usuario, $id_perfil);
+            $ids = array_column($recibos, 'id_recibo');
+            $ids = implode( ",", $ids);
+            $response =  $this->recibo_model->recibos_por_entregar_a_entregados($ids);
+
         }
         $this->response($response);
     }
