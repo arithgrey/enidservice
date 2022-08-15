@@ -95,6 +95,7 @@ if (!function_exists('invierte_date_time')) {
     }
     function modal_nueva_recompensa(){
 
+        
         $contenido[] = place("place_nueva_recompensa");          
         return gb_modal($contenido, 'modal_recompensa');
     }
