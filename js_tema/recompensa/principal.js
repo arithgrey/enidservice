@@ -40,7 +40,7 @@ let response_carga_productos = data => {
     }
 };
 
-let nueva_promocion = function () {
+let nueva_promocion = function (q = "") {
     
     $modal_recompensa.modal('show');    
    
@@ -50,7 +50,7 @@ let nueva_promocion = function () {
     
     let url = "../q/index.php/api/servicio/empresa/format/json/";    
     let data_send = {
-        "q": "",
+        "q": q,
         "id_clasificacion": get_option("id_clasificacion"),
         "page": get_option("page"),
         "order": 2,
@@ -261,7 +261,14 @@ let calcula_total_final = function() {
     let $total_utilidad_descuento_comision_entrega  = ($total_utilidad_descuento - $pago_por_venta - $pago_por_entrega);    
     $(".utilidad_descuento_comision_entrega").text(_text($total_utilidad_descuento_comision_entrega,".00MXN"));
 
-
-
-
 }
+
+let onkeyup_colfield_check = (e) => {
+    
+    let enterKey = 13;
+    if (e.which == enterKey) {
+        
+        set_option("page", 1);
+        nueva_promocion(e.target.value);
+    }
+};
