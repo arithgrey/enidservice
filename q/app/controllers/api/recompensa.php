@@ -21,13 +21,13 @@ class Recompensa extends REST_Controller
         $recompensas = $this->disponibles($param["paginacion"]);
         $this->response($recompensas);
     }
-    public function disponibles($paginacion)
+    public function disponibles($paginacion, $populares = 0 )
     {
 
         $response = [];
         $data_complete = [];
 
-        $response = $this->recompensa_model->disponibles($paginacion);
+        $response = $this->recompensa_model->disponibles($paginacion, $populares);
         $response = $this->app->add_imgs_servicio($response);
         $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
 
@@ -189,13 +189,11 @@ class Recompensa extends REST_Controller
 
             if (es_data($recompensa)) {
 
-
                 $id_servicio = pr($recompensa, "id_servicio");
                 $id_servicio_conjunto = pr($recompensa, "id_servicio_conjunto");
 
 
                 if ($antecedente_compra < 1) {
-
 
                     $id_usuario_recompensa = $this->usuario_deseo_compra($id_recompensa, $id_servicio);
                     $id_usuario_recompensa_complemento = $this->usuario_deseo_compra($id_recompensa, $id_servicio_conjunto);
@@ -208,9 +206,16 @@ class Recompensa extends REST_Controller
 
                     $response = ($id_usuario_recompensa > 0 && $id_usuario_recompensa_complemento > 0);
                 }
+                /*Gamifica compra*/
+                $this->gamifica_recompesa($id_recompensa);
             }
         }
         $this->response($response);
+    }
+    private function gamifica_recompesa($id_recompensa){
+
+        return $this->recompensa_model->gamifica_recompensa($id_recompensa);
+
     }
     function ids_GET()
     {
@@ -302,14 +307,25 @@ class Recompensa extends REST_Controller
 
         $this->response($recompensas);
     }
+    function populares_GET()
+    {        
+        /*Entrega TOP DE 8 populares*/
+        $param = $this->get();        
+        $antecedente_compra = prm_def($param, "antecedente_compra");        
+        $popular = prm_def($param, "popular");        
+
+        $paginador = $this->offset_paginador(1);
+        $recompensas = sugerencias($this->disponibles($paginador , 1), $antecedente_compra, $popular);
+
+        $this->response($recompensas);
+    }
 
     function offset_paginador($page = 2)
     {
 
-
         $per_page = 8; //la cantidad de registros que desea mostrar        
         $offset = ($page - 1) * $per_page;
-
+        
         return " LIMIT $offset , $per_page ";
     }
 }

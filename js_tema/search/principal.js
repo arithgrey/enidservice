@@ -6,6 +6,7 @@ let $quitar_deseo_sin_antecedente = $('.quitar_deseo_sin_antecedente');
 $(document).ready(() => {
     $(".order").change(filtro);
     $("footer").ready(carga_promociones_sugerencias);
+    $("footer").ready(carga_promociones_top);
 
     $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente_gbl);
     $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente_gbl);
@@ -26,6 +27,18 @@ let carga_promociones_sugerencias = () => {
     let data_send = {"antecedente_compra": parseInt(get_option("in_session"))};
     request_enid("GET", data_send, url, function (data) {
         render_enid(".promociones_sugeridas", data);
+
+        $(".bottom_carro_compra_recompensa").click(carro_compra_recompensa);
+
+
+    });
+};
+let carga_promociones_top = () => {
+
+    let url = "../q/index.php/api/recompensa/populares/format/json/";
+    let data_send = {"antecedente_compra": parseInt(get_option("in_session")), "popular" : 1 };
+    request_enid("GET", data_send, url, function (data) {
+        render_enid(".promociones_sugeridas_top", data);
 
         $(".bottom_carro_compra_recompensa").click(carro_compra_recompensa);
 

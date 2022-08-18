@@ -374,13 +374,16 @@ if (!function_exists('invierte_date_time')) {
         return d($elementos, "d-flex flex-column");
     }
     /*Sugerencias aleatorias para la sección principal*/
-    function sugerencias($recompensa, $antecedente_compra){
+    function sugerencias($recompensa, $antecedente_compra, $popular = 0){
                 
         $response = [];
         
         if (es_data($recompensa)) {
-            
-            $response[] = d(_titulo("COMPRA EN CONJUNTO Y OBTEN DESCUENTOS", 4), "row mt-5");
+        
+            $str = ($popular) ? "Promociones más compradas": "Compra en conjunto y logra descuentos";
+            $extra = ($popular) ? "text-right":"";
+            $response[] = d($str, _text_("col-xs-12 strong mb-5", $extra));
+
             foreach ($recompensa as $row) {
 
                 $id_servicio = $row["id_servicio"];
@@ -388,7 +391,6 @@ if (!function_exists('invierte_date_time')) {
                 $url_img_servicio = $row["url_img_servicio"];
                 $url_img_servicio_conjunto = $row["url_img_servicio_conjunto"];                                
                 $id_recompensa = $row["id_recompensa"];
-
 
                 $texto_totales = total_recompensa($row);
                 $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
@@ -415,10 +417,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             }
-            
-            $link_promos = format_link("Más promociones",["href" => path_enid("promociones")]);
-            $response[] = d($link_promos, "row mt-5");
-                            
+                
         }
         
         return d($response);
