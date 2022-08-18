@@ -406,14 +406,14 @@ if (!function_exists('invierte_date_time')) {
                 ];
 
                 $seccion_fotos = d($promocion, _text_('d-flex', _between));
-                $clase_flex = _text_(_between, "row");
+                $clase_flex = _text_(_between, "row mb-2");
                 $clase_izquierda = "col-xs-9";
                 $clase_derecha = "col-xs-3 p-0";
                 $seccion_fotos_compra = flex(
                     $seccion_fotos, $editar_compra, $clase_flex, $clase_izquierda, $clase_derecha);
 
                 $extra = is_mobile() ? "border-bottom" : "";
-                $response[] = d($seccion_fotos_compra, _text_("row mt-5", $extra));
+                $response[] = d($seccion_fotos_compra, _text_("row mt-5 border-bottom", $extra));
 
 
             }
