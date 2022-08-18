@@ -23,10 +23,18 @@ if (!function_exists('invierte_date_time')) {
         $seccion_compras_conjunto_top = d("","promociones_sugeridas_top col-md-5 col-xs-12 p-0");
         $seccion_categorias = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
         
-        $adicionales[] = $seccion_compras_conjunto;
+        $adicionales[] = $seccion_compras_conjunto_top;        
         $adicionales[] = d("", 2);
-        $adicionales[] = $seccion_compras_conjunto_top;
+        $adicionales[] = $seccion_compras_conjunto;
+        
         $response[] = d(d(d($adicionales,13),10,1), "row mt-5");    
+        $link_promociones = format_link("Más promociones", [
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
+            "class" => "border"
+        ]);
+        $response[] = d(d(d($link_promociones,13),10,1), "row mt-5");    
+        
+
         $response[] = d($seccion_categorias,10,1);    
         
 
