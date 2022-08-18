@@ -89,15 +89,17 @@ class Recompensa_model extends CI_Model
         return $this->db->query($sql)->result_array();
 
     }
-    function disponibles($limit_paginacion)
+    function disponibles($limit_paginacion, $populares = 0)
     {
 
+        $extra = ($populares > 0) ?  'ORDER BY r.gamificado DESC' : '' ; 
+        
         $sql = _text_("SELECT 
                 r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
-                ON r.id_servicio_conjunto = sc.id_servicio", $limit_paginacion);
+                ON r.id_servicio_conjunto = sc.id_servicio", $extra  ,$limit_paginacion);
 
         return $this->db->query($sql)->result_array();
 
@@ -140,6 +142,14 @@ class Recompensa_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+
+
+    function gamifica_recompensa($id){
+
+        $query_update = "UPDATE recompensa SET gamificado = gamificado + 1 WHERE id_recompensa = $id LIMIT 1";
+        return $this->db->query($query_update)->result_array();
+    }
+
 
 
 
