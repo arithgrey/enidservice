@@ -1512,7 +1512,7 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     ];
     $menu = d($extra_menu, 'dropdown dropleft drop-left-enid');
 
-    return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 align-items-center");
+    return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-5 align-items-center");
 
 }
 
@@ -1548,7 +1548,7 @@ function frm_search(
     $r[] = form_close();
 
     if (!$in_session) {
-
+        
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
@@ -1568,7 +1568,7 @@ function frm_search(
         $response[] = dd($r, tmp_menu($path_img_usuario, $id_usuario, $menu));
 
     }
-
+    
     return append($response);
 
 }
@@ -1852,7 +1852,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
             $busqueda = frm_search($proceso_compra,$path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes , $busqueda , _text_(_between));
             $response[] = d(p('Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX', 'white'), 'd-md-flex justify-content-end mr-5');
-            $response[] = d([get_logo(), $frecuentes_busqueda ], 'd-none d-md-block d-md-flex p-3');            
+            $response[] = d([get_logo(), $frecuentes_busqueda ], 'd-none d-md-block d-md-flex p-2');            
             
         } else {
             $response[] = get_logo($in_session);
