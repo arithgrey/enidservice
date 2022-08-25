@@ -1420,7 +1420,7 @@ function opciones_acceso($in_session)
                 a_enid("acceder",
                     [
                         "href" => path_enid('login'),
-                        "class" => "white borde_amarillo"
+                        "class" => "white borde_amarillo d-xs-block d-md-none"
                     ]
                 ),
                 _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
