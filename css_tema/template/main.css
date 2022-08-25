@@ -721,7 +721,7 @@ div.pagination li.active span:hover {
 #flipkart-navbar {
 
     background: #000000 !important;
-    min-height: 90px;
+    /*min-height: 90px;*/
 }
 
 .row1 {

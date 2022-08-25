@@ -824,20 +824,14 @@ function get_menu_session($in_session, $proceso_compra = 1)
     $response = "";
     if ($in_session < 1) {
 
-        $vender = a_enid(
-            "vender",
-            [
-                "href" => path_enid('sobre_vender'),
-                "class" => ' white text-uppercase strong text_agilizar ',
-            ], 0
-        );
-
-        $path = path_enid('login');
+    
         $session = a_enid(
             "Ingresa",
             [
                 "href" => path_enid('login'),
-                "class" => "text-uppercase text_iniciar_session text-decoration-none mr-4 white borde_amarillo iniciar_session_boton strong",
+                "class" => "text-uppercase text_iniciar_session 
+                text-decoration-none mr-4 
+                white borde_amarillo iniciar_session_boton strong ml-3",
             ]
         );
 
@@ -847,8 +841,8 @@ function get_menu_session($in_session, $proceso_compra = 1)
             $response = flex(
                 "",
                 $session,
-                "d-none d-md-block d-md-flex justify-content-end mt-md-3 mb-md-3",
-                "mr-3 ", '', ''
+                "d-none d-md-block d-md-flex
+                justify-content-end mt-md-3 mb-md-3"
             );
         }
     }
@@ -1372,7 +1366,7 @@ function menu_session_mobil($in_session)
         ,
         [
             "id" => "mySidenav",
-            "class" => "sidenav"
+            "class" => "sidenav mb-5"
         ]
     );
 
@@ -1414,12 +1408,7 @@ function opciones_acceso($in_session)
 
         $response = d(
             flex(
-                /**a_enid("Vender",
-                    [
-                        "href" => path_enid('sobre_vender'),
-                        "class" => "white"
-                    ]
-                )**/
+               
                 a_enid("WhatsApp",
                     [
                         "href" => path_enid('whatsapp',0,1),
@@ -1495,21 +1484,21 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
         a_enid("Perfil",
             [
                 "href" => path_enid('usuario_contacto', $id_usuario),
-                "class" => 'black text-uppercase mt-2',
+                "class" => 'black fp9 border-bottom border-dark',
             ]
         ),
         $menu,
         a_enid("Configuración",
             [
                 "href" => path_enid("administracion_cuenta"),
-                "class" => 'black text-uppercase mt-2',
+                "class" => 'black fp9 border-bottom border-dark',
             ]
         ),
 
-        a_enid("salir",
+        a_enid("Salir",
             [
                 "href" => path_enid("logout"),
-                "class" => 'black text-uppercase mt-2',
+                "class" => 'black fp9 border-bottom border-dark',
             ]
         )
     ];
@@ -1523,11 +1512,12 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     ];
     $menu = d($extra_menu, 'dropdown dropleft drop-left-enid');
 
-    return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 mt-3 mt-md-0");
+    return flex(d($notificaciones, 'd-flex align-items-center'), $menu, "mr-md-5 align-items-center");
 
 }
 
 function frm_search(
+    $proceso_compra,
     $path_img_usuario,
     $clasificaciones_departamentos,
     $in_session = 0,
@@ -1564,14 +1554,14 @@ function frm_search(
             icon("fa fa-shopping-bag  white"),
             _between
         );
-        $r[] = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
+        $r[] = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes']);
     }
-
+    $r[] = get_menu_session($in_session, $proceso_compra);
 
     $response = [];
     if (!$in_session) {
 
-        $response[] = d($r, 'd-md-flex justify-content-end mt-3');
+        $response[] = d($r, 'd-md-flex justify-content-end align-items-center');
 
     } else {
 
@@ -1805,14 +1795,14 @@ function opciones_populares()
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white f11 border-right frecuentes border-right-enid",
+            "class" => "white fp9 border-right frecuentes border-right-enid",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white  f11 border-right frecuentes border-right-enid"
+            "class" => "white  fp9 border-right frecuentes border-right-enid"
             ,
             "href" => path_enid("search", "/?q2=0&q=&order=1"
             )
@@ -1822,7 +1812,7 @@ function opciones_populares()
     $response[] = a_enid(
         "PROMOCIONES",
         [
-            "class" => "white  f11  border-right frecuentes border-right-enid",
+            "class" => "white  fp9  border-right frecuentes border-right-enid",
             "href" => path_enid("promociones")
         ]
     );
@@ -1830,7 +1820,7 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white  f11  border-right frecuentes border-right-enid",
+            "class" => "white  fp9  border-right frecuentes border-right-enid",
             "href" => path_enid("clientes") 
         ]
     );
@@ -1839,7 +1829,7 @@ function opciones_populares()
     $response[] = a_enid(
         "AFILIADOS",
         [
-            "class" => "white  f11  frecuentes",
+            "class" => "white  fp9  frecuentes",
             "href" => path_enid("sobre_vender") 
         ]
     );
@@ -1858,10 +1848,11 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
 
         if (!$is_mobile) {
 
-            $response[] = get_menu_session($in_session, $proceso_compra);
-            $response[] = d([get_logo(), $frecuentes], 'd-none d-md-block d-md-flex align-items-center col-md-5 mb-md-3');
-            $response[] = frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session);
-            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX', 'white f12'), 'd-md-flex justify-content-end mt-3');
+            
+            $busqueda = frm_search($proceso_compra,$path_img_usuario, $clasificaciones_departamentos, $in_session);
+            $frecuentes_busqueda = flex($frecuentes , $busqueda , _text_(_between));
+            $response[] = d([get_logo(), $frecuentes_busqueda ], 'd-none d-md-block d-md-flex p-3');            
+            //$response[] = d(p('Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX', 'white'), 'd-md-flex justify-content-end mt-2 strong mr-5');
         } else {
             $response[] = get_logo($in_session);
         }
@@ -1872,11 +1863,11 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
 
             $response[] = flex(
                 ajustar(get_logo(), $frecuentes, 2),
-                frm_search($path_img_usuario, $clasificaciones_departamentos, $in_session, $id_usuario, $menu)
+                frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session, $id_usuario, $menu)
                 ,
-                "",
-                "col-md-7 align-self-center mt-4 pupulares d-none d-md-block",
-                "col-lg-5 align-items-center justify-content-between d-flex mt-4 "
+                "p-3",
+                "col-md-7 align-self-center pupulares d-none d-md-block",
+                "col-lg-5 align-items-center justify-content-between d-flex"
 
             );
 
@@ -1894,7 +1885,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
         $response,
         [
             'id' => "flipkart-navbar",
-            'class' => "mb-sm-4 mb-md-5 col-md-12"
+            'class' => "col-md-12"
         ]
     );
 
@@ -2114,7 +2105,7 @@ function get_logo($session = 0)
             icon("fa fa-shopping-bag  white"),
             _between
         );
-        $carro = a_enid($notificacion_deseo_compra, ['class' => 'mr-5 mt-2 icono_compras_pendientes']);
+        $carro = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes']);
 
         $carro_logo = flex($texto, $carro, _between);
         $carro_logo = ($session > 0) ? $texto : $carro_logo;

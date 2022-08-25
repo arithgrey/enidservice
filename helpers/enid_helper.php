@@ -736,7 +736,7 @@ function create_contenido_menu($data)
                 icon($row["iconorecurso"]) . $row["nombre"],
                 [
                     "href" => ($row["idrecurso"] == 18) ? $path : $path_web,
-                    "class" => 'black text-uppercase mt-2 ',
+                    "class" => 'black border-bottom border-dark fp9',
                 ]
             );
     }
