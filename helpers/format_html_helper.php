@@ -1898,7 +1898,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
         ]
     );
 
-    return d($navegacion, 13);
+    return d($navegacion, "row fixed-top");
 
 }
 
