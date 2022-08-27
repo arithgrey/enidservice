@@ -1202,28 +1202,28 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function formato_producto($es_recompensa, $servicio)
-    {        
+    {
         $precio = $servicio["precio"];
         $id_servicio = $servicio["id_servicio"];
-        $path_servicio = get_url_servicio($id_servicio);        
+        $path_servicio = get_url_servicio($id_servicio);
 
         $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2');
         $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
-        
+
         $tipo_deseo = "agregar_deseos_sin_antecedente";
         $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
 
-        $clases = _text_($tipo_deseo ,  _deseo_icon, "fa-2x");
-        $clases_agregado = _text_($tipo_deseo_agregado ,  _agregado_icon, "fa-2x");
+        $clases = _text_($tipo_deseo,  _deseo_icon, "fa-2x");
+        $clases_agregado = _text_($tipo_deseo_agregado,  _agregado_icon, "fa-2x");
 
-        $icono_por_agregar = icon($clases,["id" =>  $id_servicio, "title" => "Lo deseo"]);
-        $icono_agregado = icon($clases_agregado,["id" =>  $id_servicio]);
-        
+        $icono_por_agregar = icon($clases, ["id" =>  $id_servicio, "title" => "Lo deseo"]);
+        $icono_agregado = icon($clases_agregado, ["id" =>  $id_servicio]);
+
         $extra_por_agregar = _text("por_agregar_", $id_servicio);
         $extra_agregados = _text("d-none agregado_", $id_servicio);
-        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column" , _text_("mr-2", $extra_por_agregar), $extra_agregados);
+        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", _text_("mr-2", $extra_por_agregar), $extra_agregados);
 
-        
+
         $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, "justify-content-between w-100 mt-1", "");
         $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
 
@@ -1231,16 +1231,16 @@ if (!function_exists('invierte_date_time')) {
         $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa servicio d-block mx-auto mt-3" :
             "d-block mh_250 mh_sm_310 mx-auto mt-3 servicio";
 
-        $img = a_enid( img(
-                [
-                    'src' => $servicio["url_img_servicio"],
-                    'alt' => $servicio["metakeyword"],
-                    'class' => $clases_imagen,
-                    'id' => $id_servicio
-                ]
-            ), $path_servicio);
+        $img = a_enid(img(
+            [
+                'src' => $servicio["url_img_servicio"],
+                'alt' => $servicio["metakeyword"],
+                'class' => $clases_imagen,
+                'id' => $id_servicio
+            ]
+        ), $path_servicio);
 
-        if($es_recompensa > 0){
+        if ($es_recompensa > 0) {
 
             $img = img(
                 [
@@ -1250,11 +1250,9 @@ if (!function_exists('invierte_date_time')) {
                     'id' => $id_servicio
                 ]
             );
+        }
 
 
-        }    
-        
-    
 
         return flex(
             $img,
@@ -1267,7 +1265,7 @@ if (!function_exists('invierte_date_time')) {
 
         $id_servicio = $s["id_servicio"];
         $in_session = $s["in_session"];
-        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;        
+        $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
         $img = formato_producto($es_recompensa, $s);
 
         if ($in_session > 0 && $es_recompensa < 1) {
@@ -1327,31 +1325,46 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function get_base_empresa($paginacion, $busqueda, $num_servicios, $productos)
+    function get_base_empresa($paginacion, $busqueda, $num_servicios, $productos, $oculta_paginado = 0)
     {
 
-        $paginacion = d($paginacion, 1);
-        $r = [];
-        $callback = function ($n) {
-            return d($n);
-        };
+        if ($oculta_paginado > 0) {
 
-        $r += array_map($callback, $productos);
-        $str = _text(
-            icon("fa fa-search"),
-            "Tu búsqueda de",
-            $busqueda,
-            "(",
-            $num_servicios,
-            "Productos)"
-        );
-        $t[] = d($str, 1);
-        $t[] = d($paginacion, 1);
-        $t[] = append($r);
+            $r = [];
+            $callback = function ($n) {
+                return d($n);
+            };
 
-        $bloque[] = d(append($t), 1);
-        $bloque[] = d($paginacion, 1);
-        return append($bloque);
+            $r += array_map($callback, $productos);            
+            $t[] = append($r);
+            $bloque[] = d(append($t), 1);
+            return append($bloque);
+
+        } else {
+
+            $paginacion = d($paginacion, 1);
+            $r = [];
+            $callback = function ($n) {
+                return d($n);
+            };
+
+            $r += array_map($callback, $productos);
+            $str = _text(
+                icon("fa fa-search"),
+                "Tu búsqueda de",
+                $busqueda,
+                "(",
+                $num_servicios,
+                "Productos)"
+            );
+            $t[] = d($str, 1);
+            $t[] = d($paginacion, 1);
+            $t[] = append($r);
+
+            $bloque[] = d(append($t), 1);
+            $bloque[] = d($paginacion, 1);
+            return append($bloque);
+        }
     }
 
 
@@ -2343,12 +2356,10 @@ if (!function_exists('invierte_date_time')) {
             $img = formato_producto(0, $row);
             $imagenes[] = d(
                 $img,
-                [            
+                [
                     "class" => "col-md-3 hps h_345 col-xs-6 p-1 mh-auto top_50 bottom_50 border border-primary"
                 ]
             );
-
-
         }
 
 
