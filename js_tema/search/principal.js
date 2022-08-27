@@ -7,6 +7,7 @@ $(document).ready(() => {
     $(".order").change(filtro);
     $("footer").ready(carga_promociones_sugerencias);
     $("footer").ready(carga_promociones_top);
+    $("footer").ready(carga_ultimos_agregados);
 
     $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente_gbl);
     $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente_gbl);
@@ -45,6 +46,35 @@ let carga_promociones_top = () => {
 
     });
 };
+let carga_ultimos_agregados = () => {
+ 
+    let url = "../q/index.php/api/servicio/empresa/format/json/";    
+    let data_send = {
+        "q": "",
+        "id_clasificacion": 1,
+        "page": 1,
+        "order": 1,
+        "global": 0,
+        "resultados": 6,
+        "oculta_paginado" : 1,
+    };
+
+    request_enid("GET", data_send, url, response_servicios_recien_agregados);
+
+}
+let response_servicios_recien_agregados = data => {
+    
+    render_enid(".place_recien_agregados", data);
+    $(".servicio").click(function(){
+        let numero_servicio = get_parameter_enid($(this), "id");
+        redirect(path_enid("servicio", numero_servicio));    
+    });
+    
+    $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
+    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+
+    
+}
 
 let carro_compra_recompensa = function () {
 

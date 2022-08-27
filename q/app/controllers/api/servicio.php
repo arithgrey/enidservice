@@ -30,7 +30,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->q_get(["flag_envio_gratis"], $param["id"]);
         }
         $this->response($response);
-
     }
 
     function clasificaciones_destacadas_GET()
@@ -48,7 +47,6 @@ class Servicio extends REST_Controller
         if (fx($param, "id_servicio")) {
 
             $response = $this->serviciosmodel->q_get(["stock"], $param["id_servicio"])[0]["stock"];
-
         }
         $this->response($response);
     }
@@ -64,7 +62,6 @@ class Servicio extends REST_Controller
             if ($muestra_fecha_disponible < 1) {
 
                 $response = $this->serviciosmodel->q_up('muestra_fecha_disponible', 0, $id_servicio);
-
             } else {
 
                 $response = false;
@@ -79,7 +76,6 @@ class Servicio extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
     function stock_PUT()
@@ -93,20 +89,16 @@ class Servicio extends REST_Controller
             if (prm_def($param, "compra") > 0) {
 
                 $response = $this->descuento_inventario($stock, $id_servicio, $param);
-
             } else {
 
                 if (prm_def($param, "anexo") > 0) {
 
                     $response = $this->anexo_stock($stock, $id_servicio);
-
                 } else {
 
                     $response = $this->serviciosmodel->q_up("stock", $stock, $id_servicio);
                 }
-
             }
-
         }
         $this->response($response);
     }
@@ -124,7 +116,6 @@ class Servicio extends REST_Controller
 
             $id_servicio = $param["id"];
             $response = $this->serviciosmodel->q_up("comision", $param["comision"], $id_servicio);
-
         }
         $this->response($response);
     }
@@ -137,7 +128,6 @@ class Servicio extends REST_Controller
 
             $id_servicio = $param["id"];
             $response = $this->serviciosmodel->q_up("descuento_especial", $param["descuento_especial"], $id_servicio);
-
         }
         $this->response($response);
     }
@@ -151,7 +141,6 @@ class Servicio extends REST_Controller
         if (fx($param, "servicio,opcion")) {
 
             $response = $this->serviciosmodel->q_up("contra_entrega", $param["opcion"], $param["servicio"]);
-
         }
         $this->response($response);
     }
@@ -209,11 +198,8 @@ class Servicio extends REST_Controller
         if (fx($param, "tag,id_servicio")) {
             $palabras_claves = $this->delete_tag_servicio($param);
             $response = $this->serviciosmodel->q_up("metakeyword_usuario", $palabras_claves["metakeyword_usuario"], $param["id_servicio"]);
-
-
         }
         $this->response($response);
-
     }
 
     function delete_tag_servicio($param)
@@ -249,10 +235,10 @@ class Servicio extends REST_Controller
 
         $response =
             (es_data($data["info_categorias"])) ?
-                get_config_categorias($data, $param)
+            get_config_categorias($data, $param)
 
-                :
-                get_add_categorias($data, $param);
+            :
+            get_add_categorias($data, $param);
 
         $this->response($response);
     }
@@ -292,7 +278,6 @@ class Servicio extends REST_Controller
                 if ($z == 0) {
 
                     $res[$a] = $coincidencia;
-
                 } else {
 
                     $n = $this->get_clasificacion_padre_nivel($nueva_coincidencia);
@@ -315,14 +300,12 @@ class Servicio extends REST_Controller
     {
 
         return $this->app->api("clasificacion/coincidencia_servicio/", $q);
-
     }
 
     private function get_clasificacion_padre_nivel($q)
     {
 
         return $this->app->api("clasificacion/clasificacion_padre_nivel/", $q);
-
     }
 
     function status_PUT()
@@ -339,7 +322,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function moto_PUT()
@@ -356,7 +338,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function bicicleta_PUT()
@@ -373,7 +354,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function pie_PUT()
@@ -390,7 +370,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function solo_metro_PUT()
@@ -407,7 +386,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function requiere_auto_PUT()
@@ -424,7 +402,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
     function espublico_PUT()
@@ -441,7 +418,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($response);
-
     }
 
 
@@ -462,7 +438,6 @@ class Servicio extends REST_Controller
                     "talla"
                 ];
             $response = $this->serviciosmodel->q_get($params, $param["id_servicio"]);
-
         }
         $this->response($response);
     }
@@ -487,7 +462,6 @@ class Servicio extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
 
@@ -500,7 +474,6 @@ class Servicio extends REST_Controller
         if (gettype($cantidad) === "float") {
 
             $response = true;
-
         } else {
 
             $response = preg_match("/^\\d+\\.\\d+$/", $cantidad) === 1;
@@ -519,26 +492,24 @@ class Servicio extends REST_Controller
         $next = ($param["flag_servicio"] == 0 && $param["precio"] == 0) ? 0 : 1;
         $data_complete["mensaje"] = ($next == 1) ? "" : "TU PRODUCTO DEBE TENER ALGÚN PRECIO";
         if ($next) {
-            
+
             $id_empresa = $this->app->get_session('id_empresa');
             $empresa = $this->app->empresa($id_empresa);
             $tags = $this->create_tags($param);
-            
-            $text_tags = (es_data($tags)) ? implode( ',', $tags) : "";
-            
+
+            $text_tags = (es_data($tags)) ? implode(',', $tags) : "";
+
             $param["metakeyword"] = $text_tags;
-            
+
             $id_usuario = $this->id_usuario;
             $param["id_usuario"] = $id_usuario;
             $terminos_usuario = $this->get_terminos_privacidad_productos($id_usuario);
             $terminos = $terminos_usuario[0];
             $param["entregas_en_casa"] = ($terminos["entregas_en_casa"] > 0) ? 1 : 0;
             $param["telefonos_visibles"] = ($terminos["telefonos_visibles"] > 0) ? 1 : 0;
-            
+
 
             $data_complete["servicio"] = $this->create_servicio($param, $empresa);
-            
-
         }
 
         return $data_complete;
@@ -581,7 +552,6 @@ class Servicio extends REST_Controller
             array_push($lista_nombres, $valor_precio);
         }
         return $lista_nombres;
-
     }
 
     private function get_tag_categorias($id_clasificacion)
@@ -730,12 +700,9 @@ class Servicio extends REST_Controller
             $data["servicio"]["materiales"] = $this->materiales();
 
             $this->response(render_configurador($data));
-
         } else {
             $this->response($response);
         }
-
-
     }
 
     function set_option($key, $value)
@@ -791,7 +758,6 @@ class Servicio extends REST_Controller
     {
 
         return $this->app->api("ciclo_facturacion/not_ciclo_facturacion/", $q);
-
     }
 
     private function carga_imagenes_servicio($id_servicio)
@@ -842,18 +808,18 @@ class Servicio extends REST_Controller
             for ($num_imgs = $num_imgs; $num_imgs < 6; $num_imgs++) {
 
                 $icon = icon("fa fa-camera agregar_img_servicio");
-                $interior = d($icon,
+                $interior = d(
+                    $icon,
                     [
                         "class" => "agregar_img_servicio",
                         "style" =>
-                            "border-style: solid;position:absolute;z-index:2000;
+                        "border-style: solid;position:absolute;z-index:2000;
                             margin-left: 10px;padding: 3px;margin-top: 3px;"
                     ]
                 );
 
                 $img_preview = d([$interior, $img], 'col mx-auto nav tabs mt-2');
                 $images_complete[$num_imgs] = $img_preview;
-
             }
         }
 
@@ -874,7 +840,6 @@ class Servicio extends REST_Controller
         $dropdown = dropdown_button($id_imagen, $row["principal"]);
         $extra = ($row["principal"] < 1) ? '' : 'selector_principal';
         return d([$dropdown, $img], _text('col mx-auto row mt-2', $extra));
-
     }
 
     function empresa_GET()
@@ -883,33 +848,32 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         $param["q"] = prm_def($param, 'q', '');
+        $resultados = prm_def($param, 'resultados');
+        
+
+        $resultado_por_pagina = (intval($resultados) > 0) ? $resultados : 12;
         if (fx($param, 'q,page,order')) {
 
             $param["id_usuario"] = $this->id_usuario;
             $param["id_clasificacion"] = prm_def($param, "q2");
             $param["extra"] = $param;
-            $param["resultados_por_pagina"] = 12;
+            $param["resultados_por_pagina"] = $resultado_por_pagina;
             $param["agrega_clasificaciones"] = 0;
             $param["vendedor"] = 0;
 
             $servicios = $this->get_servicios_empresa($param);
-            
+
             if (es_data($servicios) && array_key_exists('num_servicios', $servicios)) {
 
                 $response = $this->get_view_empresa($servicios, $param);
-
             } else {
 
                 $response = $servicios;
             }
-
-
         }
         $this->response($response);
-
-
     }
-    
+
     function relacionados_GET()
     {
 
@@ -935,24 +899,17 @@ class Servicio extends REST_Controller
                     $ids_relacionados = explode(",", $param["ids_relacionados"]);
 
                     array_push($ids_relacionados, $id_servicio);
-
                 }
                 $ids_relacionados[] = $id_servicio;
 
 
                 $response = $this->get_view_relacionados($servicios, $param, $ids_relacionados);
-
             } else {
 
                 $response = $servicios;
-
             }
-
-
         }
         $this->response($response);
-
-
     }
 
     private function get_servicios_empresa($q)
@@ -979,14 +936,12 @@ class Servicio extends REST_Controller
 
             $this->set_option("id_perfil", $this->app->getperfiles());
         }
+        $oculta_paginado = prm_def($param, 'oculta_paginado');
 
 
-        
         $lista_productos = $this->agrega_vista_servicios($servicios["servicios"], 0, [], 1);
         $config_paginacion = $this->app->paginacion($config);
-        return get_base_empresa($config_paginacion, $busqueda, $num_servicios, $lista_productos);
-
-
+        return get_base_empresa($config_paginacion, $busqueda, $num_servicios, $lista_productos, $oculta_paginado );
     }
 
 
@@ -1012,8 +967,6 @@ class Servicio extends REST_Controller
         $lista_productos = $this->agrega_vista_servicios($servicios["servicios"], 1, $id_servicios_menos);
 
         return get_base_empresa($this->app->paginacion($config), $busqueda, $num_servicios, $lista_productos);
-
-
     }
 
     private function agrega_vista_servicios($data, $agregar = 0, $ids_menos = [], $es_recompensa = 0)
@@ -1036,8 +989,6 @@ class Servicio extends REST_Controller
                 $row["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
                 $response[] = create_vista($row, $agregar, $es_recompensa);
             }
-
-
         }
         return $response;
     }
@@ -1059,7 +1010,6 @@ class Servicio extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
     function add_tallas($talla_servicio)
@@ -1078,7 +1028,6 @@ class Servicio extends REST_Controller
             }
         }
         return $response;
-
     }
 
     private function get_talla_id($id_talla)
@@ -1091,14 +1040,16 @@ class Servicio extends REST_Controller
     private function create_button_easy_select_tienda($servicio_tallas)
     {
 
-        $config = ['text_button' => 'talla',
+        $config = [
+            'text_button' => 'talla',
             'campo_id' => 'id_talla',
             'extra' => ['class' => 'easy_selec facil_selec talla ']
         ];
 
         $easy_butons = create_button_easy_select($servicio_tallas, $config, 2);
 
-        $config = ['class' => 'dropdown-toggle strong',
+        $config = [
+            'class' => 'dropdown-toggle strong',
             'id' => "dropdownMenuButton",
             'data-toggle' => "dropdown"
         ];
@@ -1133,7 +1084,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->q_up("link_dropshipping", $param["link_dropshipping"], $param["servicio"]);
         }
         $this->response($response);
-
     }
 
     function amazon_PUT()
@@ -1146,7 +1096,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->q_up("link_amazon", $param["link_amazon"], $param["servicio"]);
         }
         $this->response($response);
-
     }
 
     function ml_PUT()
@@ -1159,7 +1108,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->q_up("link_ml", $param["link_ml"], $param["servicio"]);
         }
         $this->response($response);
-
     }
 
     function gamificacion_deseo_PUT()
@@ -1177,7 +1125,6 @@ class Servicio extends REST_Controller
         $param = $this->put();
         $response = $this->serviciosmodel->gamificacion_usuario_servicios($param);
         $this->response($response);
-
     }
 
     function ciclo_facturacion_PUT()
@@ -1240,10 +1187,8 @@ class Servicio extends REST_Controller
                 $param["q2"] = get_base_youtube($param["q2"]);
             }
             $response = $this->serviciosmodel->set_q_servicio($param);
-
         }
         $this->response($response);
-
     }
 
     function telefono_visible_PUT()
@@ -1336,18 +1281,18 @@ class Servicio extends REST_Controller
             $response = [];
             switch ($param["type"]) {
 
-                /*USUARIO CANCELA COMPRA*/
+                    /*USUARIO CANCELA COMPRA*/
                 case 2:
                     $response = $this->gamificaCancelacion($param);
                     break;
 
-                /*YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS*/
+                    /*YA NO QUIERE RECORDATORIOS SOBRE QUE DEBE PUBLICAR PRODUCTOS*/
                 case 3:
 
                     $response = $this->gamificaRecordatorio($param);
                     break;
 
-                /*EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE*/
+                    /*EL USUARIO NO CONTESTA A LAS PREGUNTAS DENTRO DEL PERIMÉTRO QUE EXIGE EL CLIENTE*/
                 case 4:
                     $response = $this->gamificaSinRespuesta($param);
 
@@ -1360,7 +1305,6 @@ class Servicio extends REST_Controller
             $this->response($response);
         }
         $this->response($response);
-
     }
 
     private function gamificaCancelacion($param)
@@ -1375,7 +1319,6 @@ class Servicio extends REST_Controller
         /*ahora se baja califición interes compra - Servicio*/
         $response["gamificacion_servicio"] = $this->add_gamificacion_usuario_servicio($param, -1);
         return $response;
-
     }
 
     private function add_gamificacion_usuario_servicio($param, $valoracion)
@@ -1391,7 +1334,6 @@ class Servicio extends REST_Controller
         /*ahora se baja califición interes compra - Servicio*/
         $response["gamificacion_servicio"] = $this->add_gamificacion_usuario_servicio($param, -3);
         return $response;
-
     }
 
     private function gamificaSinRespuesta($param)
@@ -1422,9 +1364,9 @@ class Servicio extends REST_Controller
         $servicios = false;
 
         if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
-            
+
             $es_empresa = prm_def($param, "es_empresa");
-            $servicios = $this->serviciosmodel->busqueda($param);                    
+            $servicios = $this->serviciosmodel->busqueda($param);
             $total_busqueda = prm_def($servicios, 'total_busqueda');
             $servicios += [
                 "url_request" => get_url_request(""),
@@ -1436,8 +1378,6 @@ class Servicio extends REST_Controller
         }
 
         $this->response($servicios);
-
-
     }
 
     private function add_gamificacion_search($q)
@@ -1482,7 +1422,6 @@ class Servicio extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
     function existencia_GET()
@@ -1493,7 +1432,6 @@ class Servicio extends REST_Controller
         if (fx($param, "id_servicio")) {
 
             $response = $this->serviciosmodel->q_get(["existencia"], $param["id_servicio"])[0]["existencia"];
-
         }
         $this->response($response);
     }
@@ -1521,7 +1459,6 @@ class Servicio extends REST_Controller
         if (fx($param, $campos)) {
 
             $response = $this->serviciosmodel->get_producto_por_clasificacion($param);
-
         }
         $this->response($response);
     }
@@ -1543,7 +1480,6 @@ class Servicio extends REST_Controller
             $a++;
         }
         return $nueva_data;
-
     }
 
     function qmetakeyword_GET()
@@ -1565,7 +1501,6 @@ class Servicio extends REST_Controller
             $param["agrega_clasificaciones"] = 0;
             $servicios = $this->serviciosmodel->busqueda_producto($param);
             $response = prm_def($servicios, "servicio", []);
-
         }
         $this->response($response);
     }
@@ -1611,13 +1546,10 @@ class Servicio extends REST_Controller
             if ($param["c"] < 0) {
 
                 $response = $this->serviciosmodel->get($params, ["id_servicio" => $id_servicio]);
-
             } else {
 
                 $response = $this->serviciosmodel->get([], ["id_servicio" => $id_servicio]);
-
             }
-
         }
         $this->response($response);
     }
@@ -1647,7 +1579,6 @@ class Servicio extends REST_Controller
             }
         }
         $this->response($response);
-
     }
 
     function es_servicio_usuario_GET()
@@ -1713,7 +1644,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->num_periodo($param);
         }
         $this->response($response);
-
     }
 
     function num_anuncios_GET()
@@ -1745,7 +1675,6 @@ class Servicio extends REST_Controller
         $servicio = $this->get();
         $servicio["url_img_servicio"] = $this->app->imgs_productos($servicio["id_servicio"], 1, 1, 1);
         $this->response(create_vista($servicio));
-
     }
 
 
@@ -1766,11 +1695,9 @@ class Servicio extends REST_Controller
             foreach ($articulos as $row) {
 
                 $this->table->add_row($row["keyword"], $row["num_keywords"]);
-
             }
             $this->table->set_template(template_table_enid());
             $response = $this->table->generate();
-
         }
         $this->response($response);
     }
@@ -1824,7 +1751,6 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->set_preferencia_entrega($tipo, $param["id_servicio"]);
         }
         $this->response($response);
-
     }
 
     function tipos_entregas_GET()
@@ -1863,10 +1789,12 @@ class Servicio extends REST_Controller
                             "id" => $id_error,
                             "style" => "width:50px!important;height:50px!important;",
                             'onerror' => "reloload_img( '" . $id_error . "','" . $url_img . "');"
-                        ]);
+                        ]
+                    );
 
 
-                    $imagen_producto = a_enid($img,
+                    $imagen_producto = a_enid(
+                        $img,
                         [
                             "href" => "../producto/?producto=" . $id_servicio,
                             "target" => "_black"
@@ -1882,7 +1810,6 @@ class Servicio extends REST_Controller
                         ];
 
                     $this->table->add_row($array);
-
                 }
 
 
@@ -1891,10 +1818,7 @@ class Servicio extends REST_Controller
                 $tb_headers = $this->get_headers_tipo_entrega($servicios);
                 $total = _text_($tb_headers, hr(), $tb_general);
                 $response = $total;
-
-
             }
-
         }
         $this->response($response);
     }
@@ -1942,11 +1866,11 @@ class Servicio extends REST_Controller
         $response = false;
 
         if (fx($param, "id_servicio")) {
-            
-            $sugerido = prm_def($param ,  "sugerido");
+
+            $sugerido = prm_def($param,  "sugerido");
             $id_servicio  = $param["id_servicio"];
-            if($sugerido > 0){
-                
+            if ($sugerido > 0) {
+
                 /*Sugerencia entre existentes*/
                 $total = $this->serviciosmodel->total()[0]["total"];
                 $id_servicio = rand(1, $total);
@@ -1956,14 +1880,13 @@ class Servicio extends REST_Controller
 
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
-            
+
 
             if (es_data($servicios)) {
-                
+
                 $response = get_view_sugerencias(
                     $this->add_imgs_sugerencias($servicios)
                 );
-
             } else {
                 $data_response["sugerencias"] = 0;
                 $this->response($data_response);
@@ -1985,7 +1908,6 @@ class Servicio extends REST_Controller
             $response[] = $servicio;
         }
         return $response;
-
     }
 
     private function get_servicios_por_clasificaciones($q)
@@ -2009,7 +1931,6 @@ class Servicio extends REST_Controller
 
                 $param["id_usuario"] = $this->app->get_session("id_usuario");
                 $nuevo = $this->get_servicios_lista_deseos($param);
-
             } else {
 
                 $nuevo = $this->busqueda_producto_por_palabra_clave($param);
@@ -2022,13 +1943,11 @@ class Servicio extends REST_Controller
                     if ($row['es_publico'] > 0) {
                         $sugerencia[] = $row;
                     }
-
                 }
             }
 
             $unicos = array_unique(array_column($sugerencia, 'id_servicio'));
             $sugerencia = array_intersect_key($sugerencia, $unicos);
-
         }
         return $sugerencia;
     }
@@ -2046,7 +1965,6 @@ class Servicio extends REST_Controller
                     $servicios[] = $row;
                 }
             }
-
         }
 
         return $servicios;
@@ -2056,7 +1974,6 @@ class Servicio extends REST_Controller
     {
 
         return $this->app->api("usuario/lista_deseos_sugerencias", $q);
-
     }
 
     private function busqueda_producto_por_palabra_clave($q)
@@ -2073,13 +1990,11 @@ class Servicio extends REST_Controller
     private function servicio_materiales($id_servicio)
     {
         return $this->app->api("servicio_material/id", ['id_servicio' => $id_servicio]);
-
     }
 
     private function materiales()
     {
         return $this->app->api("material/index");
-
     }
 
     function colores_GET()
@@ -2087,7 +2002,6 @@ class Servicio extends REST_Controller
 
 
         $this->response(get_tabla_colores());
-
     }
 
     function get_info_ciclo_facturacion_servicio($q)
@@ -2110,10 +2024,8 @@ class Servicio extends REST_Controller
         if (fx($param, "id")) {
 
             $response = $this->serviciosmodel->restablecer($param["id"]);
-
         }
         $this->response($response);
-
     }
 
     function descuento_inventario($stock, $id_servicio, $param)
@@ -2123,7 +2035,6 @@ class Servicio extends REST_Controller
         $response = $this->gestion_stock($id_servicio, $stock);
         $this->anexa_costos_operativos($response, $param);
         $this->response($response);
-
     }
 
 
@@ -2164,10 +2075,6 @@ class Servicio extends REST_Controller
 
             $formato = format_atencion($servicios);
             $this->response($formato);
-
         }
-
     }
-
-
 }
