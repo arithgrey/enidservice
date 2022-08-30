@@ -36,7 +36,7 @@ if (!function_exists('invierte_date_time')) {
             "class" => "border"
         ]);
         $response[] = d(d(d($link_promociones,13),10,1), "row mt-5");    
-        $response[] = d(d(d(d("","place_recien_agregados"),13),10,1), "row mt-5");
+        $response[] = d(d(d("","place_recien_agregados")," col-sm-10 col-sm-offset-1 p-0"),13);
         $response[] = d($seccion_categorias,10,1);    
         
         
