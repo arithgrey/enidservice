@@ -1228,7 +1228,7 @@ if (!function_exists('invierte_date_time')) {
         $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
 
 
-        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa servicio d-block mx-auto mt-3 mh_250 mh_sm_310 " :
+        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa servicio d-block mx-auto mt-3 mh_250 mh_sm_310 cursor_pointer " :
             "d-block mh_250 mh_sm_310 mx-auto mt-3 servicio";
 
         $img = a_enid(img(

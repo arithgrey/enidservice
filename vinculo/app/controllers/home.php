@@ -15,7 +15,7 @@ class Home extends CI_Controller
 
         $params = $this->input->get();
         $data = $this->app->session();
-        $data = $this->app->cssJs($data, "vinculo");
+        $data = $this->app->cssJs($data, "vinculo");        
         $faq = $this->faq($params["tag"]);
         $this->app->pagina($data, render($faq), 1);
 

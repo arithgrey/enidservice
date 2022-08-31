@@ -891,7 +891,7 @@ class Paths
             ],
             "vinculo" =>
             [
-                "js" =>
+                "js" => ["vinculo/principal.js"],
                 [],
                 "css" =>
                 [],
