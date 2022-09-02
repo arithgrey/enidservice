@@ -89,6 +89,19 @@ class Acceso_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+    function dominio($fecha_inicio, $fecha_termino)
+    {
+        
+        $query_get = _text_("SELECT DATE(fecha_registro) fecha_registro, http_referer from acceso
+                        WHERE 
+                        DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'
+                        AND  LENGTH(http_referer) > 5
+                        ORDER BY fecha_registro DESC");
+
+
+        return $this->db->query($query_get)->result_array();
+    }
+
     
 
 }

@@ -43,6 +43,48 @@ class Acceso extends REST_Controller
 
 
     }
+    function dominio_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+            
+            
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];                        
+            $accesos =  $this->acceso_model->dominio( $fecha_inicio, $fecha_termino);
+
+
+            $heading = [
+                "Fecha",                
+                "Link de referencia"
+            ];
+
+                    
+            $this->table->set_template(template_table_enid());
+            $this->table->set_heading($heading);
+
+            foreach ($accesos as $row) {
+
+                $fecha_registro = $row["fecha_registro"];                
+                $http_referer = $row["http_referer"];
+                
+                $row = [
+                    $fecha_registro,
+                    $http_referer                    
+                ];
+
+                $this->table->add_row($row);
+            }
+            
+            $response = $this->table->generate();
+
+
+        }
+        $this->response($response);
+
+
+    }
     function busqueda_fecha_GET()
     {
 
