@@ -13,6 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_productos_solicitados();
         $response[] = format_accesos();
         $response[] = format_accesos_productos();
+        $response[] = format_accesos_dominio();
         $response[] = funnel_ventas();        
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
@@ -90,6 +91,21 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+    function format_accesos_dominio()
+    {
+        $form = base_busqueda_form('ACCESOS POR DOMINIO',
+            'form_busqueda_accesos_dominio', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_pagina_dominio",
+            ]
+        );
+
+
+    }
+
 
 
     function funnel_ventas()
@@ -356,6 +372,15 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $link_accesos_pagina_web_dominio = tab(
+            text_icon("fa-check-circle", "Accesos por dominio"),
+            '#tab_accesos_pagina_dominio',
+            [
+                "class" => "btn_acceso_pagina_dominio"
+            ]
+        );
+
+
 
         $link_indicadores = tab(
             text_icon('fa fa-globe', "indicadores"),
@@ -548,6 +573,8 @@ if (!function_exists('invierte_date_time')) {
             $link_accesos_pagina
             ,
             $link_accesos_pagina_productos
+            ,
+            $link_accesos_pagina_web_dominio
             ,
             $link_funnel
             
