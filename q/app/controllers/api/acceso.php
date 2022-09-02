@@ -18,7 +18,7 @@ class Acceso extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "in_session,is_mobile,pagina_id")) {
+        if (fx($param, "in_session,is_mobile,pagina_id,http_referer")) {
 
 
             $param["id_servicio"] =  prm_def($param, "id_servicio");

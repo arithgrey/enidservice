@@ -276,6 +276,9 @@ class app extends CI_Controller
 
     function session()
     {
+
+        
+        
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->api->api("clasificacion/primer_nivel");
@@ -302,6 +305,8 @@ class app extends CI_Controller
             $data["recien_creado"] = $session["recien_creado"];
             $data["path_img_usuario"] = $session["path_img_usuario"];
             $data["tipo_comisionista"] = $session["tipo_comisionista"];
+            $data["HTTP_REFERER"] =  prm_def($_SERVER, "HTTP_REFERER", "");
+
         } else {
 
             $data["in_session"] = 0;
@@ -314,6 +319,7 @@ class app extends CI_Controller
             $data["data_status_enid"] = "";
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
             $data["path_img_usuario"] = "";
+            $data["HTTP_REFERER"] =  prm_def($_SERVER, "HTTP_REFERER", "");
         }
 
         $data['restricciones'] = $this->config->item('restricciones');
@@ -595,9 +601,11 @@ class app extends CI_Controller
     {
 
         if ($pagina > 0) {
+            
             $q = [
                 "in_session" => $data["in_session"],
                 "is_mobile" => $data["is_mobile"],
+                "http_referer" => $data["HTTP_REFERER"],
                 "pagina_id" => $pagina,
                 "id_servicio" => $id_servicio
             ];
