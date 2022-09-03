@@ -69,12 +69,17 @@ class Acceso extends REST_Controller
                 $fecha_registro = $row["fecha_registro"];                
                 $http_referer = $row["http_referer"];
                 
-                $row = [
-                    $fecha_registro,
-                    $http_referer                    
-                ];
-
-                $this->table->add_row($row);
+                
+                if(substr($http_referer, 0,29) != "https://www.enidservices.com/"){
+                    $row = [
+                        $fecha_registro,
+                        $http_referer,                    
+                        substr($http_referer,0,29)
+                    ];
+    
+                    $this->table->add_row($row);
+                }
+                
             }
             
             $response = $this->table->generate();
