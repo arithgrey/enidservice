@@ -71,7 +71,7 @@ class Acceso extends REST_Controller
                 
                 
                 if(substr($http_referer, 0,29) != "https://www.enidservices.com/" 
-                    || substr($http_referer, 0,24 != "https://enidservices.com") ){
+                    && substr($http_referer, 0,24 != "https://enidservices.com") ){
                         
                     $row = [
                         $fecha_registro,
@@ -81,7 +81,7 @@ class Acceso extends REST_Controller
                     $this->table->add_row($row);
                 }
                 
-            }
+            
             
             $response = $this->table->generate();
 
