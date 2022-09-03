@@ -68,11 +68,11 @@ class Acceso extends REST_Controller
 
                 $fecha_registro = $row["fecha_registro"];                
                 $http_referer = $row["http_referer"];
-                            
-                if(substr($http_referer, 0,28) === "https://www.enidservices.com"){
-                   
-                }else{
-                    
+                
+                
+                if(substr($http_referer, 0,29) != "https://www.enidservices.com/" 
+                    || substr($http_referer, 0,24 != "https://enidservices.com") ){
+                        
                     $row = [
                         $fecha_registro,
                         $http_referer,                                            
@@ -80,7 +80,6 @@ class Acceso extends REST_Controller
     
                     $this->table->add_row($row);
                 }
-                
                 
             }
             
