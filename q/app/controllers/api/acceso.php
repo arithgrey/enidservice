@@ -67,7 +67,7 @@ class Acceso extends REST_Controller
                 $http_referer = $row["http_referer"];
 
 
-                if (substr($http_referer, 0, 29) != "https://www.enidservices.com/" 
+                if (substr($http_referer, 0, 28) != "https://www.enidservices.com" 
                     && 
                     substr($http_referer, 0, 24) != "https://enidservices.com"
                     && 
