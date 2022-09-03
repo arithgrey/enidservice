@@ -31,65 +31,60 @@ class Acceso extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "pagina_id,fecha_inicio,fecha_termino")) {
-            
+
             $pagina_id = $param["pagina_id"];
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
-                        
-            $response =  $this->acceso_model->conteo_fecha($pagina_id, $fecha_inicio, $fecha_termino);
 
+            $response =  $this->acceso_model->conteo_fecha($pagina_id, $fecha_inicio, $fecha_termino);
         }
         $this->response($response);
-
-
     }
     function dominio_GET()
     {
         $param = $this->get();
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino")) {
-            
-            
+
+
             $fecha_inicio = $param["fecha_inicio"];
-            $fecha_termino = $param["fecha_termino"];                        
-            $accesos =  $this->acceso_model->dominio( $fecha_inicio, $fecha_termino);
+            $fecha_termino = $param["fecha_termino"];
+            $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
 
 
             $heading = [
-                "Fecha",                
+                "Fecha",
                 "Link de referencia"
             ];
 
-                    
+
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
 
             foreach ($accesos as $row) {
 
-                $fecha_registro = $row["fecha_registro"];                
+                $fecha_registro = $row["fecha_registro"];
                 $http_referer = $row["http_referer"];
-                
-                
-                if(substr($http_referer, 0,29) != "https://www.enidservices.com/" 
-                    && substr($http_referer, 0,24 != "https://enidservices.com") ){
-                        
+
+
+                if (
+                    substr($http_referer, 0, 29) != "https://www.enidservices.com/"
+                    && substr($http_referer, 0, 24 != "https://enidservices.com")
+                ) {
+
                     $row = [
                         $fecha_registro,
-                        $http_referer,                                            
+                        $http_referer
+
                     ];
-    
+
                     $this->table->add_row($row);
                 }
-                
-            
-            
+            }
+
             $response = $this->table->generate();
-
-
         }
         $this->response($response);
-
-
     }
     function busqueda_fecha_GET()
     {
@@ -172,18 +167,18 @@ class Acceso extends REST_Controller
 
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
-            
+
 
             $accesos = $this->acceso_model->busqueda_fecha_productos($fecha_inicio, $fecha_termino);
             $ids = array_column($accesos, "id_servicio");
-            $accesos_acciones = $this->acceso_model->busqueda_fecha_ids($fecha_inicio, $fecha_termino, implode( ",", $ids) );
+            $accesos_acciones = $this->acceso_model->busqueda_fecha_ids($fecha_inicio, $fecha_termino, implode(",", $ids));
 
             $textos_paginas = array_unique(array_column($accesos_acciones, "pagina"));
             $ids_paginas = array_unique(array_column($accesos_acciones, "id_pagina"));
-            
-            
+
+
             $accesos_imagenes = $this->app->add_imgs_servicio($accesos);
-            
+
             $heading = [
                 "",
                 "Producto",
@@ -194,8 +189,8 @@ class Acceso extends REST_Controller
                 "Accesos sin sessión"
             ];
 
-            
-            
+
+
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading(array_merge($heading, $textos_paginas));
@@ -222,8 +217,8 @@ class Acceso extends REST_Controller
                 $total_en_session = $total_en_session + $en_session;
                 $total_sin_session = $total_sin_session + $sin_session;
                 $link = path_enid("producto", $id_servicio);
-                $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link , "target" => "_blank"]), "w_50");
-                
+                $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link, "target" => "_blank"]), "w_50");
+
 
                 $busqueda = $this->busqueda_por_accion($ids_paginas, $accesos_acciones, $id_servicio);
 
@@ -236,7 +231,7 @@ class Acceso extends REST_Controller
                     $en_session,
                     $sin_session,
                 ];
-                $linea = array_merge($row , $busqueda);
+                $linea = array_merge($row, $busqueda);
 
                 $this->table->add_row($linea);
             }
@@ -256,24 +251,24 @@ class Acceso extends REST_Controller
         }
         $this->response($response);
     }
-    function busqueda_por_accion($ids_paginas, $accesos_acciones,  $id_servicio){
+    function busqueda_por_accion($ids_paginas, $accesos_acciones,  $id_servicio)
+    {
 
         $response  = [];
-        foreach($ids_paginas as $id){
+        foreach ($ids_paginas as $id) {
 
             /*Busco por nombre de acción de pagina*/
-            $total = 0; 
-            foreach($accesos_acciones as $row){ 
+            $total = 0;
+            foreach ($accesos_acciones as $row) {
 
                 $id_pagina = $row["id_pagina"];
                 $id_servicio_accesos = $row["id_servicio"];
-                if($id_servicio_accesos ==  $id_servicio && $id_pagina ==  $id){ 
+                if ($id_servicio_accesos ==  $id_servicio && $id_pagina ==  $id) {
                     $total = $row["accesos_accion"];
                 }
-            }   
-            
-            $response[] = $total;
+            }
 
+            $response[] = $total;
         }
         return $response;
     }
