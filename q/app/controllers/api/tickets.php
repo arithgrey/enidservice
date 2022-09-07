@@ -31,10 +31,8 @@ class Tickets extends REST_Controller
                 ],
                 10
             );
-
         }
         $this->response($response);
-
     }
 
     function num_GET()
@@ -62,7 +60,6 @@ class Tickets extends REST_Controller
             ];
 
             $this->response(format_tareas($data));
-
         }
 
         $this->response($response);
@@ -73,14 +70,12 @@ class Tickets extends REST_Controller
 
 
         return $this->app->api("tarea/ticket", $q);
-
     }
 
     private function get_tareas_ticket_num($q)
     {
 
         return $this->app->api("tarea/tareas_ticket_num", $q);
-
     }
 
     function index_POST()
@@ -111,14 +106,15 @@ class Tickets extends REST_Controller
             $response = $param["ticket"];
         }
         $this->response($response);
-
     }
 
     private function get_es_cliente($id_usuario)
     {
 
-        return $this->app->api("usuario_perfil/es_cliente",
-            ["id_usuario" => $id_usuario]);
+        return $this->app->api(
+            "usuario_perfil/es_cliente",
+            ["id_usuario" => $id_usuario]
+        );
     }
 
     private function notificacion_ticket_soporte($param)
@@ -141,7 +137,6 @@ class Tickets extends REST_Controller
         $q["asunto"] = $param["asunto"];
 
         return $this->enviar($q);
-
     }
 
     /*Se cancela la órden de compra*/
@@ -150,7 +145,6 @@ class Tickets extends REST_Controller
     {
 
         return $this->app->api("cron/ticket_soporte", $q, "html", "GET");
-
     }
 
     private function enviar($q)
@@ -169,7 +163,6 @@ class Tickets extends REST_Controller
     {
 
         return $this->app->api("departamento/index", $q);
-
     }
 
     function cancelar_form_GET()
@@ -192,14 +185,11 @@ class Tickets extends REST_Controller
                 $recibos[] = ($modalidad == 1) ?
                     $this->get_recibo_por_enviar($param) :
                     $this->get_recibo_por_pagar($id_recibo, $this->id_usuario);
-
             }
 
             $response = form_cancelar_compra($id_orden_compra, $recibos, $modalidad);
-
         }
         $this->response($response);
-
     }
 
     private function get_recibo_por_enviar($q)
@@ -217,7 +207,6 @@ class Tickets extends REST_Controller
         ];
 
         return $this->app->api("recibo/recibo_por_pagar_usuario", $q);
-
     }
 
     function cancelar_PUT()
@@ -246,11 +235,8 @@ class Tickets extends REST_Controller
                     $param["cancela_cliente"] = ($recibo["id_usuario"] == $param["id_usuario"]);
                     $param["id_servicio"] = $row["id_servicio"];
                     $data_complete["registro"] = $this->cancelar_orden_compra($param);
-
                 }
             }
-
-
         } else {
 
             $data["recibo"] = $this->get_recibo_por_enviar($param);
@@ -264,14 +250,47 @@ class Tickets extends REST_Controller
                     $this->cancelar_orden_compra($param);
                 $prm["id_recibo"] = $param["id_recibo"];
                 $prm["usuario_notificado"] =
-                $data_complete["info_cliente"] = $this->app->usuario($data["recibo"]["id_usuario"]);
+                    $data_complete["info_cliente"] = $this->app->usuario($data["recibo"]["id_usuario"]);
                 $data_complete["info_email"] = $this->notifica_venta_cancelada_a_cliente($prm);
-
             }
         }
         $this->response($data_complete);
     }
+    function garantia_PUT()
+    {
 
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "orden_compra,email")) {
+
+            $id_orden_compra = $param['orden_compra'];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            $email = $param["email"];
+            foreach ($productos_orden_compra as $row) {
+
+                $id_usuario = $row["id_usuario"];
+                $id_recibo = $row["id"];
+                $response = $this->garantia_notificada($id_usuario, $email, $id_recibo);
+            }
+        }
+        $this->response($response);
+    }
+
+
+    private function garantia_notificada($id_usuario, $email, $id_recibo)
+    {
+        return $this->app->api(
+            "usuario/garantia",
+            [
+                "id_recibo" => $id_recibo,
+                "id_usuario" => $id_usuario,
+                "email" => $email
+            ],
+            "json",
+            "PUT"
+        );
+    }
     private function cancelar_orden_compra($param)
     {
         $id_recibo = $param["id_recibo"];
@@ -283,7 +302,6 @@ class Tickets extends REST_Controller
             "id_servicio" => $id_servicio,
             "gamificacion" => $gamificacion,
         ];
-
     }
 
     private function cancela_orden_compra($id_recibo)
@@ -318,7 +336,6 @@ class Tickets extends REST_Controller
     {
 
         return $this->app->api("cobranza/cancelacion_venta", $q);
-
     }
 
     function movimientos_usuario_GET()
@@ -328,7 +345,6 @@ class Tickets extends REST_Controller
         $param["id_usuario"] = $this->id_usuario;
         $response["solicitud_saldo"] = $this->tickets_model->get_solicitudes_saldo($param);
         $this->response(solicitudes_saldo($response));
-
     }
 
     function ticket_desarrollo_GET()
@@ -354,8 +370,10 @@ class Tickets extends REST_Controller
                     /*Cargamos data tickets desde la versión direccion*/
                     $tickets = $this->tickets_model->get_tickets_desarrollo($param);
                     if (count($tickets) == 0) {
-                        $tickets = $this->tickets_model->get_tickets_desarrollo($param,
-                            1);
+                        $tickets = $this->tickets_model->get_tickets_desarrollo(
+                            $param,
+                            1
+                        );
                     }
                     $data["info_tickets"] = $tickets;
                     $data["status_solicitado"] = $param["status"];
@@ -378,11 +396,8 @@ class Tickets extends REST_Controller
 
                     break;
             }
-
-
         }
         $this->response($response);
-
     }
 
     function formulario_respuesta_GET()
@@ -395,7 +410,6 @@ class Tickets extends REST_Controller
             $response = get_form_respuesta($param["tarea"]);
         }
         $this->response($response);
-
     }
 
     function estado_PUT()
@@ -409,12 +423,10 @@ class Tickets extends REST_Controller
             if ($status == 2) {
 
                 $response = $this->tickets_model->liberacion($id);
-
             } else {
 
                 $response = $this->tickets_model->q_up("status", $status, $id);
             }
-
         }
         $this->response($response);
     }
@@ -450,8 +462,11 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "nota_monetaria,id_ticket")) {
-            $response = $this->tickets_model->q_up("nota_monetaria",
-                $param["nota_monetaria"], $param["id_ticket"]);
+            $response = $this->tickets_model->q_up(
+                "nota_monetaria",
+                $param["nota_monetaria"],
+                $param["id_ticket"]
+            );
         }
         $this->response($response);
     }
@@ -462,8 +477,11 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "efecto_monetario,id_ticket")) {
-            $response = $this->tickets_model->q_up("efecto_monetario",
-                $param["efecto_monetario"], $param["id_ticket"]);
+            $response = $this->tickets_model->q_up(
+                "efecto_monetario",
+                $param["efecto_monetario"],
+                $param["id_ticket"]
+            );
         }
         $this->response($response);
     }
@@ -474,8 +492,11 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "efectivo_resultante,id_ticket")) {
-            $response = $this->tickets_model->q_up("efectivo_resultante",
-                $param["efectivo_resultante"], $param["id_ticket"]);
+            $response = $this->tickets_model->q_up(
+                "efectivo_resultante",
+                $param["efectivo_resultante"],
+                $param["id_ticket"]
+            );
         }
         $this->response($response);
     }
@@ -486,8 +507,11 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "clientes_ab,id_ticket")) {
-            $response = $this->tickets_model->q_up("clientes_ab",
-                $param["clientes_ab"], $param["id_ticket"]);
+            $response = $this->tickets_model->q_up(
+                "clientes_ab",
+                $param["clientes_ab"],
+                $param["id_ticket"]
+            );
         }
         $this->response($response);
     }
@@ -498,8 +522,11 @@ class Tickets extends REST_Controller
         $param = $this->put();
         $response = false;
         if (fx($param, "id_ticket,asunto")) {
-            $response = $this->tickets_model->q_up("asunto", $param["asunto"],
-                $param["id_ticket"]);
+            $response = $this->tickets_model->q_up(
+                "asunto",
+                $param["asunto"],
+                $param["id_ticket"]
+            );
         }
         $this->response($response);
     }
@@ -509,6 +536,4 @@ class Tickets extends REST_Controller
 
         $this->response($this->tickets_model->liberar());
     }
-
-
 }

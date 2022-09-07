@@ -54,6 +54,29 @@ class usuario extends REST_Controller
         }
         $this->response($response);
     }
+    function garantia_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_usuario,email")) {
+
+            $id_usuario = $param["id_usuario"];
+            
+            $this->usuario_model->q_up(
+                "email",
+                $param["email"],
+                $id_usuario
+            );
+            $response = $this->usuario_model->q_up(
+                "notifica_email_garantia",
+                1,
+                $id_usuario
+            );
+
+        }
+        $this->response($response);
+    }
+
 
     function status_PUT()
     {
@@ -1388,4 +1411,5 @@ class usuario extends REST_Controller
 
         $this->response($response);
     }
+    
 }
