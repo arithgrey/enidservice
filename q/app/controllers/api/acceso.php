@@ -104,7 +104,9 @@ class Acceso extends REST_Controller
 
             $heading = [
                 "Horario",
-                "Accesos"
+                "Accesos",
+                "Mobile",
+                "Desktop"
             ];
 
 
@@ -115,11 +117,15 @@ class Acceso extends REST_Controller
 
                 $hora = $row["horario"];
                 $total = $row["total"];                
+                $mobile = $row["mobile"];
+                $desktop = $row["desktop"];
+
                 $fecha_hora = _text($hora,':00 hrs');
                 $row = [
                     $fecha_hora,
-                    $total
-
+                    $total,
+                    $mobile,
+                    $desktop
                 ];
 
                 $this->table->add_row($row);

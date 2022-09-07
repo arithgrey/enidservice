@@ -104,9 +104,16 @@ class Acceso_model extends CI_Model
     function franja_horaria($fecha_inicio, $fecha_termino)
     {
         
-        $query_get = _text_("SELECT HOUR(fecha_registro)horario, count(0)total from acceso
+        $query_get = _text_("SELECT 
+                            HOUR(fecha_registro)horario, 
+                            count(0)total ,
+                            SUM( CASE WHEN is_mobile > 0 THEN 1 ELSE 0 END )mobile,
+                            SUM( CASE WHEN is_mobile < 1 THEN 1 ELSE 0 END )desktop
+                            from acceso
                         WHERE 
                         DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
+                        AND 
+                        in_session < 1 
                         GROUP BY 
                         HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
 
