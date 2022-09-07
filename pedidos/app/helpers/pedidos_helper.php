@@ -851,8 +851,8 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            
-            $boton_garantia = d(format_garantia($data["id_orden_compra"]),"col-xs-12 mt-3 mb-3");
+            $id_orden_compra = prm_def($data, "orden");
+            $boton_garantia = d(format_garantia($id_orden_compra),"col-xs-12 mt-3 mb-3");
 
 
         }
