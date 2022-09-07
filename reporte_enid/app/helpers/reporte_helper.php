@@ -14,6 +14,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_accesos();
         $response[] = format_accesos_productos();
         $response[] = format_accesos_dominio();
+        $response[] = format_accesos_franja_horaria();
+        
         $response[] = funnel_ventas();        
         $response[] = format_arquetipos($data);
         $response[] = format_comisionistas($data);
@@ -105,6 +107,21 @@ if (!function_exists('invierte_date_time')) {
 
 
     }
+    function format_accesos_franja_horaria()
+    {
+        $form = base_busqueda_form('ACCESOS POR FRANJA HORARIA',
+            'form_busqueda_accesos_franja_horaria', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_franja_horaria",
+            ]
+        );
+
+
+    }
+
 
 
 
@@ -380,6 +397,15 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $link_accesos_franja_horaria = tab(
+            text_icon("fa-check-circle", "Accesos por franja horaria"),
+            '#tab_accesos_franja_horaria',
+            [
+                "class" => "btn_acceso_franja_horaria"
+            ]
+        );
+
+
 
 
         $link_indicadores = tab(
@@ -575,6 +601,8 @@ if (!function_exists('invierte_date_time')) {
             $link_accesos_pagina_productos
             ,
             $link_accesos_pagina_web_dominio
+            ,
+            $link_accesos_franja_horaria
             ,
             $link_funnel
             

@@ -67,12 +67,13 @@ class Acceso extends REST_Controller
                 $http_referer = $row["http_referer"];
 
 
-                if (substr($http_referer, 0, 28) != "https://www.enidservices.com" 
-                    && 
+                if (
+                    substr($http_referer, 0, 28) != "https://www.enidservices.com"
+                    &&
                     substr($http_referer, 0, 24) != "https://enidservices.com"
-                    && 
+                    &&
                     substr($http_referer, 0, 23) != "http://enidservices.com"
-                                        
+
                 ) {
 
                     $row = [
@@ -89,6 +90,46 @@ class Acceso extends REST_Controller
         }
         $this->response($response);
     }
+    function franja_horaria_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $accesos =  $this->acceso_model->franja_horaria($fecha_inicio, $fecha_termino);
+
+
+            $heading = [
+                "Horario",
+                "Accesos"
+            ];
+
+
+            $this->table->set_template(template_table_enid());
+            $this->table->set_heading($heading);
+
+            foreach ($accesos as $row) {
+
+                $hora = $row["horario"];
+                $total = $row["total"];                
+                $fecha_hora = _text($hora,':00 hrs');
+                $row = [
+                    $fecha_hora,
+                    $total
+
+                ];
+
+                $this->table->add_row($row);
+            }
+
+            $response = $this->table->generate();
+        }
+        $this->response($response);
+    }
+
     function busqueda_fecha_GET()
     {
 
@@ -191,9 +232,6 @@ class Acceso extends REST_Controller
                 "Accesos con sessión",
                 "Accesos sin sessión"
             ];
-
-
-
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading(array_merge($heading, $textos_paginas));
