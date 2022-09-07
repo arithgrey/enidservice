@@ -92,7 +92,7 @@ class Acceso_model extends CI_Model
     function dominio($fecha_inicio, $fecha_termino)
     {
         
-        $query_get = _text_("SELECT DATE(fecha_registro) fecha_registro, http_referer from acceso
+        $query_get = _text_("SELECT fecha_registro fecha_registro, http_referer from acceso
                         WHERE 
                         DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'
                         AND  LENGTH(http_referer) > 5
@@ -101,6 +101,19 @@ class Acceso_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+    function franja_horaria($fecha_inicio, $fecha_termino)
+    {
+        
+        $query_get = _text_("SELECT HOUR(fecha_registro)horario, count(0)total from acceso
+                        WHERE 
+                        DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
+                        GROUP BY 
+                        HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
+
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 
     
 
