@@ -101,6 +101,25 @@ class Paths
                 "url_img_post" => "",
                 "pagina" => 25,
             ],
+            "garantias" => 
+            [
+                "js" =>
+                [
+                    'garantia/principal.js',
+                    "alerts/jquery-confirm.js",
+
+                ],
+
+                "css" =>
+                [                    
+                    "confirm-alert.css",
+                ],
+                "meta_keywords" => "",
+                "desc_web" => "",
+                "url_img_post" => "",                
+
+            ],
+
             "saldo_pendiente" =>
             [
                 "css" =>

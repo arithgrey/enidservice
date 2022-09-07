@@ -1676,8 +1676,7 @@ if (!function_exists('invierte_date_time')) {
     function rastreo_compra($data, $id_orden_compra, $seccion_compra)
     {
 
-        $response[] = d($seccion_compra, 'd-md-none row');
-        $response[] = _titulo("¿Necesitas hacer algo más?", 5);
+        $response[] = d($seccion_compra, 'd-md-none row');        
         $seccion[] = d(
             format_link(
                 "Rastrea tu orden",
@@ -1722,7 +1721,7 @@ if (!function_exists('invierte_date_time')) {
             ], 0, 0
         ), _12p);
 
-        $response[] = d_row(append($seccion));
+        $response[] = d($seccion, "row adicionales_venta");
         return append($response);
 
     }

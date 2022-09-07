@@ -175,7 +175,6 @@ if (!function_exists('invierte_date_time')) {
             ], _text_pass
         );
 
-
         $perfil[] = [
             'nombre_perfil' => 'Quiero ser afiliado - vender artículos de enid service para ganar comisiones',
             'id_perfil' => 6

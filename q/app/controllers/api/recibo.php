@@ -1269,7 +1269,10 @@ class recibo extends REST_Controller
         $seccion_compra = getPayButtons($data, $url_request, $id_usuario_venta, $data_checkout);
         $pedido[] = rastreo_compra($data, $id_orden_compra, $seccion_compra);
         $seccion_compra = d($seccion_compra, 'd-none d-md-block');
-        $response[] = dd($seccion_compra, $pedido, 5);
+        
+        $response[] = d($seccion_compra,"col-sm-5 seccion_pago");
+        $response[] = d($pedido,"col-sm-7 seccion_resumen_compra");
+        
 
 
         return append($response);
