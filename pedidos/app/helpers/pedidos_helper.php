@@ -167,6 +167,8 @@ if (!function_exists('invierte_date_time')) {
         $x[] = link_cambio_fecha($recibo, $id_orden_compra);
         $x = link_cambio_domicilio($data, $x);
         $x = link_recordatorio($data, $x);
+        $x = link_garantia($data, $x);
+
         $x[] = link_nota();
         $x = lista_negra($x, $recibo, $es_vendedor);
 
@@ -416,28 +418,28 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $link_productos =  format_link("Ver más promociones", [
-            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
+            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8), '&page=', rand(0, 5))),
             "class" => "border"
         ]);
 
         $link_facebook =  format_link("Facebook", [
-            "href" => path_enid("facebook",0,1),
+            "href" => path_enid("facebook", 0, 1),
             "class" => "border mt-4",
             'target' => 'blank_'
-        ],0);
+        ], 0);
 
         $link_instagram =  format_link("Instagram", [
-            "href" => path_enid("fotos_clientes_instagram",0,1),
+            "href" => path_enid("fotos_clientes_instagram", 0, 1),
             "class" => "border mt-4",
             'target' => 'blank_'
-        ],0);
-        
+        ], 0);
+
 
         $response[] = d($link_productos, 4, 1);
         $response[] = d($link_facebook, 4, 1);
         $response[] = d($link_instagram, 4, 1);
 
-        return d($response,'col-sm-12 row mt-5');
+        return d($response, 'col-sm-12 row mt-5');
     }
     function modal_opciones_cancelacion($data, $params)
     {
@@ -838,7 +840,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $boton_cancelar = '';
-
+        $boton_garantia = '';
         if ($data['in_session'] && !$es_orden_cancelada) {
 
             $boton_cancelar = btn(
@@ -848,6 +850,11 @@ if (!function_exists('invierte_date_time')) {
                     'style' => 'background:red!important;'
                 ]
             );
+
+            
+            $boton_garantia = d(format_garantia($data["id_orden_compra"]),"col-xs-12 mt-3 mb-3");
+
+
         }
 
 
@@ -858,7 +865,7 @@ if (!function_exists('invierte_date_time')) {
         $descuento_aplicado = $deuda["descuento_aplicado"];
         $descuento_subtotal = ($deuda["subtotal"] - $descuento_aplicado);
         $text_pago = _text_($text_entrega, $descuento_subtotal);
-        $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar);
+        $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar, $boton_garantia);
 
         $es_orden_entregada = es_orden_entregada($data);
         return (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
@@ -978,7 +985,7 @@ if (!function_exists('invierte_date_time')) {
         $productos_orden_compra = $data["productos_orden_compra"];
         $id_perfil = $data["id_perfil"];
 
-        
+
 
         $nombre_vendedor = nombre_comisionista($es_venta_comisionada, $usuario_comision, $data);
         $numero_orden = _titulo(_text_("# ORDEN ", $orden), 3);
@@ -1102,8 +1109,24 @@ if (!function_exists('invierte_date_time')) {
                 "target" => '_blanck'
             ],
             0
-        ),13);
+        ), 13);
     }
+    function format_garantia($id_recibo)
+    {
+        $id_orden_compra = $id_recibo;
+        $path = path_enid("garantia", $id_orden_compra);
+
+        return d(format_link(
+            "Garantia",
+            [
+                "href" => $path,
+                "class" => "mb-2",
+                "target" => '_blanck'
+            ],
+            0
+        ), 13);
+    }
+
     function format_estados_venta($data, $status_ventas, $recibo, $es_vendedor)
     {
 
@@ -1270,7 +1293,9 @@ if (!function_exists('invierte_date_time')) {
         $tipos_entregas = $data['tipos_entregas'];
         $menu = menu();
         $r[] = d($menu, 'd-none d-md-block');
+
         $r[]  = format_calendario($id_recibo);
+        $r[] = format_garantia($id_recibo);
         $r[] = create_seccion_tipo_entrega($recibo, $tipos_entregas);
 
         if (!is_mobile()) {
@@ -3652,7 +3677,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = $text_compras;
         $response[] = $starts;
         $response[] = a_enid($text, ['href' => $link, 'class' => 'w-100']);
-        
+
         return bloque(append($response));
     }
 
@@ -3912,6 +3937,26 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
     }
+    function link_garantia($data, $response)
+    {
+
+        $id_orden_compra = $data["orden"];
+        $es_lista_negra = es_lista_negra($data);
+        if (!$es_lista_negra) {
+
+            $path = path_enid("garantia", $id_orden_compra);
+            $link = a_enid(
+                "Garantía",
+                [
+                    'class' => 'black',
+                    'href' => $path
+                ]
+            );
+            $response[] = d($link);
+        }
+        return $response;
+    }
+
 
     function text_punto_encuentro($domicilio, $productos_ordenes_compra)
     {
@@ -3993,7 +4038,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $response[] = valida_texto_maps($row["ubicacion"]);
                 $response[] = format_adicional_asentamiento_ubicaciones($row);
-                
             }
 
             break;
@@ -4003,7 +4047,7 @@ if (!function_exists('invierte_date_time')) {
 
     function create_domicilio_entrega($domicilios, $productos_orden_compra, $data)
     {
-           
+
         $contra_entrega_domicilio = pr($productos_orden_compra, 'contra_entrega_domicilio');
         $fecha_contra_entrega = format_fecha(pr($productos_orden_compra, 'fecha_contra_entrega'), 1);
         $es_ubicacion = pr($productos_orden_compra, 'ubicacion');

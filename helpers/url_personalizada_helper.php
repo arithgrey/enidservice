@@ -43,6 +43,7 @@ function accesos_enid()
         "top_competencia_entregas" => "competencias_entregas",
         "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
         "busqueda_pedidos_usuarios" => 'pedidos/?usuarios=1&ids=',
+        "garantia" => "garantia/?&ticket=",
         "forma_pago_search" => "forma_pago/?recibo=",
         "nfaq" => "faq/?nueva=1",
         "editar_faq" => "faq/?faq=",
