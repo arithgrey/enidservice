@@ -1379,16 +1379,10 @@ function opciones_acceso($in_session)
                         "target" => "_black"
                     ]
                 ),
-                a_enid(
-                    "acceder",
-                    [
-                        "href" => path_enid('login'),
-                        "class" => "white borde_amarillo d-xs-block d-md-none"
-                    ]
-                ),
+                "Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX",
                 _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
                 "mx-auto strong",
-                "mx-auto strong"
+                "mx-auto white"
 
             )
         );
@@ -1399,6 +1393,7 @@ function opciones_acceso($in_session)
 
 function tmp_menu($path_img_usuario, $id_usuario, $menu)
 {
+    
 
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
     $seccion = append($contenido);
@@ -1406,8 +1401,9 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     $place_compras = d('', 'place_numero_deseo');
     $deseos = flex($icono_compras, $place_compras, 'borde_amarillo white');
     $deseo_pedido = a_enid($deseos, ['href' => path_enid('lista_deseos'), 'class' => 'white']);
+    $notificaciones[] = d(icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]), "borde_amarillo mr-2");
     $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
-    $notificaciones[] = btw(
+    $notificaciones[] = flex(
         a_enid(
             flex(
                 icon("fa fa-bell white mr-2"),
@@ -2061,10 +2057,22 @@ function get_logo($session = 0)
         );
 
         $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
-        $carro = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes mr-5 mt-2']);
-        $icono_busqueda_carro = flex($icono_busqueda, $carro, _between);
+        $carro = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes mr-3 ml-2 borde_amarillo']);
+        $icono_busqueda_carro = flex($icono_busqueda, $carro, _between, "borde_amarillo");
 
-        $carro_logo = flex($texto, $icono_busqueda_carro, _between);
+        $acceder = a_enid(
+            "acceder",
+            [
+                "href" => path_enid('login'),
+                "class" => "white borde_amarillo d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
+            ]
+        );
+
+        $acceder  = ($session < 1 ) ? $acceder : "";        
+        $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between);
+
+
+        $carro_logo = flex($texto, $icono_busqueda_carro_session, _between);
         $carro_logo = ($session > 0) ? $texto : $carro_logo;
         $en_mobile = d(
             $carro_logo,
