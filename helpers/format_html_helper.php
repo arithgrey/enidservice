@@ -1382,7 +1382,7 @@ function opciones_acceso($in_session)
                 "Agenda tu pedido y paga hasta tu entrega! si vives en CDMX",
                 _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
                 "mx-auto strong col-xs-4",
-                "mx-auto white fp8"
+                "mx-auto white fp8 col-xs-8"
 
             )
         );
