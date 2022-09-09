@@ -2049,7 +2049,8 @@ function get_logo($session = 0)
 
     if (is_mobile()) {
 
-        $texto = d("<strong>☰ Enid</strong> Service", ["class" => "titulo_enid_service"]);
+        $path = path_enid("search_q3");
+        $texto = d("<a href='".$path."' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
