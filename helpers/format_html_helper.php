@@ -776,7 +776,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            "Ingresa",
+            "Acceder",
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
@@ -1379,10 +1379,10 @@ function opciones_acceso($in_session)
                         "target" => "_black"
                     ]
                 ),
-                "Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX",
+                "Agenda tu pedido y paga hasta tu entrega! si vives en CDMX",
                 _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
-                "mx-auto strong",
-                "mx-auto white"
+                "mx-auto strong col-xs-4",
+                "mx-auto white fp8"
 
             )
         );
@@ -1797,7 +1797,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
 
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
-            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega! recibe tus artículos el mismo día si vives en CDMX', 'white'), 'd-md-flex justify-content-end mr-5');
+            $response[] = d(p('Agenda tu pedido y paga hasta tu entrega! si vives en CDMX', 'white'), 'd-md-flex justify-content-end mr-5');
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
         } else {
             $response[] = get_logo($in_session);
