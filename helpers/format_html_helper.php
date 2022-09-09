@@ -1401,7 +1401,11 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     $place_compras = d('', 'place_numero_deseo');
     $deseos = flex($icono_compras, $place_compras, 'borde_amarillo white');
     $deseo_pedido = a_enid($deseos, ['href' => path_enid('lista_deseos'), 'class' => 'white']);
-    $notificaciones[] = d(icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]), "borde_amarillo mr-2");
+    
+    if(is_mobile()){
+        $notificaciones[] = d(icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]), "borde_amarillo mr-2");
+    }
+    
     $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
     $notificaciones[] = flex(
         a_enid(
