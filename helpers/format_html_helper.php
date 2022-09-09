@@ -1811,7 +1811,7 @@ function opciones_adicionales_navegacion()
         "class" => "black"
     ]), "text-capitalize  col text-center");
 
-    return d(d($opciones, _text_("row d-flex fp7 p-2", _between)), 'col-xs-12 bg-light');
+    return d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
 }
 function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
 {
