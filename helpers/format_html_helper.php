@@ -1393,7 +1393,7 @@ function opciones_acceso($in_session)
 
 function tmp_menu($path_img_usuario, $id_usuario, $menu)
 {
-    
+
 
     $contenido[] = d_row(d(place("place_notificaciones_usuario m-3"), 12));
     $seccion = append($contenido);
@@ -1401,11 +1401,11 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
     $place_compras = d('', 'place_numero_deseo');
     $deseos = flex($icono_compras, $place_compras, 'borde_amarillo white');
     $deseo_pedido = a_enid($deseos, ['href' => path_enid('lista_deseos'), 'class' => 'white']);
-    
-    if(is_mobile()){
+
+    if (is_mobile()) {
         $notificaciones[] = d(icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]), "borde_amarillo mr-2");
     }
-    
+
     $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
     $notificaciones[] = flex(
         a_enid(
@@ -1787,6 +1787,32 @@ function opciones_populares()
     return flex($response);
 }
 
+function opciones_adicionales_navegacion()
+{
+
+
+    $opciones[] = d(
+        a_enid("POPULARES", [
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
+            "class" => "black"
+        ]),
+        "text-capitalize  col text-center"
+    );
+    $opciones[] = d(a_enid("NOVEDADES", [
+        "href" => path_enid("search","/?q2=0&q=&order=1"),
+        "class" => "black"
+    ]), "text-capitalize  col text-center");
+    $opciones[] = d(a_enid("PROMOCIONES", [
+        "href" => path_enid("promociones"),
+        "class" => "black"
+    ]), "text-capitalize  col text-center");
+    $opciones[] = d(a_enid("CLIENTES", [
+        "href" => path_enid("clientes"),
+        "class" => "black"
+    ]), "text-capitalize  col text-center");
+
+    return d(d($opciones, _text_("row d-flex fp7 p-2", _between)), 'col-xs-12 bg-light');
+}
 function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
 {
 
@@ -1805,6 +1831,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
         } else {
             $response[] = get_logo($in_session);
+            $response[] = opciones_adicionales_navegacion();
         }
     } else {
 
@@ -1824,6 +1851,8 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
                 get_logo($in_session),
                 tmp_menu($path_img_usuario, $id_usuario, $menu)
             );
+            $response[] = opciones_adicionales_navegacion();
+
         }
     }
 
@@ -2054,7 +2083,7 @@ function get_logo($session = 0)
     if (is_mobile()) {
 
         $path = path_enid("search_q3");
-        $texto = d("<a href='".$path."' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
             icon("fa fa-shopping-bag  white"),
@@ -2073,7 +2102,7 @@ function get_logo($session = 0)
             ]
         );
 
-        $acceder  = ($session < 1 ) ? $acceder : "";        
+        $acceder  = ($session < 1) ? $acceder : "";
         $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between);
 
 
