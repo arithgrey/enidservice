@@ -119,6 +119,25 @@ class Paths
                 "url_img_post" => "",                
 
             ],
+            "simulador" => 
+            [
+                "js" =>
+                [
+                    'simulador/principal.js',
+                    "alerts/jquery-confirm.js",
+
+                ],
+
+                "css" =>
+                [                    
+                    "confirm-alert.css",
+                ],
+                "meta_keywords" => "",
+                "desc_web" => "Calcula cuantos artículos debes vender para llegar a tus metas",
+                "url_img_post" => "",                
+
+            ],
+
 
             "saldo_pendiente" =>
             [
