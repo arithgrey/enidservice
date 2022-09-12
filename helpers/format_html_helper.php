@@ -1779,10 +1779,19 @@ function opciones_populares()
     $response[] = a_enid(
         "AFILIADOS",
         [
-            "class" => "white  fp9  frecuentes",
+            "class" => "white  fp9  border-right frecuentes border-right-enid",
             "href" => path_enid("sobre_vender")
         ]
     );
+
+    $response[] = a_enid(
+        "Simulador de ganacias",
+        [
+            "class" => "white  fp9  frecuentes text-uppercase",
+            "href" => path_enid("simulador")
+        ]
+    );
+
 
     return flex($response);
 }
