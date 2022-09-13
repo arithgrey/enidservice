@@ -17,6 +17,7 @@ class Home extends CI_Controller
         $param = $this->input->get();     
         $data = $this->app->session(); 
         $data = $this->app->cssJs($data, "simulador");    
+        $this->app->log_acceso($data, 42);
         $this->app->pagina($data, render($data, $param), 1);
 
     }
