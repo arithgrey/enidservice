@@ -6,9 +6,10 @@ use App\View\Components\titulo;
 if (!function_exists('invierte_date_time')) {
 
 
-    function render($data)
+    function render($data, $param)
     {
 
+        
         
         $form[] = form_open("",["class" => "utilidad_form mt-5 row"]);
 
@@ -19,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "precio",
                 "name" => "precio",
                 "id" => "precio",
-                "value" => 0
+                "value" => prm_def($param, "precio")
             ]
         );
 
@@ -30,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "costo",
                 "name" => "costo",
                 "id" => "costo",
-                "value" => 0
+                "value" => prm_def($param, "costo")
             ]
         );
 
@@ -42,7 +43,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "venta",
                 "name" => "venta",
                 "id" => "venta",
-                "value" => 0
+                "value" => prm_def($param, "venta")
             ]
         );
 
@@ -53,7 +54,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "entrega",
                 "name" => "entrega",
                 "id" => "entrega",
-                "value" => 0
+                "value" => prm_def($param, "entrega")
             ]
         );
         $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Otro gasto que no estemos considerando? (no es obligatorio)",
@@ -63,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "otro",
                 "name" => "otro",
                 "id" => "otro",
-                "value" => 0
+                "value" => prm_def($param, "otro")
             ]
         );
 
@@ -74,7 +75,7 @@ if (!function_exists('invierte_date_time')) {
             "class" => "cantidad_venta",
             "name" => "cantidad_venta",
             "id" => "cantidad_venta",
-            "value" => 1
+            "value" => prm_def($param, "promedio_venta")
         ]
     );
 
