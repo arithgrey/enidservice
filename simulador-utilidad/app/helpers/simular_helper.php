@@ -10,9 +10,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         
-        $form[] = form_open("",["class" => "utilidad_form mt-5"]);
+        $form[] = form_open("",["class" => "utilidad_form mt-5 row"]);
 
-        $form[] = input_frm('mt-5 col-sm-6 mt-3', "¿Precio en que vendes tu artículo?",
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Precio en que vendes tu artículo?",
             [
                 "type" => "number",
                 "required" => true,
@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5 col-sm-6 mt-3', "¿Cuanto te cuesta cada uno?",
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Cuanto te cuesta cada uno?",
             [
                 "type" => "number",
                 "required" => true,
@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5 col-sm-6 mt-3', "¿Cuanto inviertes en 
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Cuanto inviertes en 
         promoción para la venta de cada uno?",
             [
                 "type" => "number",
@@ -46,7 +46,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5 col-sm-6 mt-3', "¿Cuanto gastas en la entrega del artículo a tu cliente?",
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Cuanto gastas en la entrega del artículo a tu cliente?",
             [
                 "type" => "number",
                 "required" => true,
@@ -56,7 +56,7 @@ if (!function_exists('invierte_date_time')) {
                 "value" => 0
             ]
         );
-        $form[] = input_frm('mt-5 col-sm-6 mt-3', "¿Otro gasto que no estemos considerando? (no es obligatorio)",
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12 mt-3', "¿Otro gasto que no estemos considerando? (no es obligatorio)",
             [
                 "type" => "number",
                 "required" => true,
@@ -67,7 +67,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5 col-sm-6', "¿Cuantos de estos artículos vendes por día?",
+        $form[] = input_frm('mt-5 col-md-6 col-xs-12', "¿Cuantos de estos artículos vendes por día?",
         [
             "type" => "number",
             "required" => true,
@@ -87,8 +87,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(_titulo("Simula las ganancias que tendrás de acuerdo a las ventas de tus artículos",3),12);
         $response[] = d(d("¿Estás iniciando tu negocio quieres saber cuanto debes vender para lograr tus objetivos? checa esta herramienta"),12);
         $response[] = d(hr());
-        $response[] = d($form,'mb-5 row');
-        $response[] = d(place("simulacion_gastos_utilidad col-sm-12"), "mt-5 row");
+        $response[] = append($form);
+        $response[] = d(place("simulacion_gastos_utilidad col-xs-12"), "mt-5 row");
         
 
         return d($response, 8,1);
