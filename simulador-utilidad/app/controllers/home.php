@@ -14,10 +14,10 @@ class Home extends CI_Controller
 
     function index()
     {
-
+        $param = $this->input->get();     
         $data = $this->app->session(); 
         $data = $this->app->cssJs($data, "simulador");    
-        $this->app->pagina($data, render($data), 1);
+        $this->app->pagina($data, render($data, $param), 1);
 
     }
 

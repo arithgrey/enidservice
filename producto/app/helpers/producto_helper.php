@@ -655,6 +655,7 @@ if (!function_exists('invierte_date_time')) {
 
                 ]
             );
+
             $metricas = format_link(
                 "Métricas",
                 [
@@ -662,8 +663,32 @@ if (!function_exists('invierte_date_time')) {
 
                 ]
             );
+            
+            $simulador = '';
 
-            $response[] = flex($respuestas, $metricas, _between, 'mr-5');
+            if(es_administrador($data)){
+
+                $servicio = $data["info_servicio"]["servicio"];
+                $precio = pr($servicio, "precio");
+                $costo = pr($servicio, "costo");                        
+                $venta = porcentaje($precio, pr($servicio, "comision"));
+                $entrega = 150;
+                $otro_gas = 100;
+                $promedio_venta = 6;
+                
+                $path = "venta=$venta&precio=$precio&costo=$costo&entrega=$entrega&otro=$otro_gas&promedio_venta=$promedio_venta";
+                
+                $simulador = format_link(
+                    "Simulador de ventas",
+                    [
+                        "href" => _text(path_enid("simulador"),"/?", $path),    
+                    ]
+                );
+
+                $flex = _text_(_between, 'd-flex mr-5');
+                
+            }
+            $response[] = d(_d($respuestas, $metricas, $simulador ),$flex);
         }
         return append($response);
     }
