@@ -13,8 +13,8 @@ if (!function_exists('invierte_date_time')) {
         $hoy = $fecha->format('H:i:s');
         $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
 
-        $text = "Haz tu pedido antes de las 6PM y tenlo hoy!";
-        $mas_un_dia = "Realiza tu pedido y tenlo mañana mismo!";
+        $text = _text_("Haz tu pedido y tenlo hoy mismo!", strong("Entrega gratis en CDMX"));
+        $mas_un_dia = _text_("Realiza tu pedido y tenlo mañana mismo!", strong("Entrega gratis en CDMX"));
         $str = ($hoy < 18) ? $text : $mas_un_dia;
 
         $text_proxima_fecha = d(_text_(
@@ -1158,10 +1158,10 @@ if (!function_exists('invierte_date_time')) {
         }
 
         //$response[] = formas_acionales_compra($data);
-        $response[] = confianza($id_servicio);
+        $response[] = confianza($id_servicio, $data);
         return append($response);
     }
-    function confianza($id_servicio)
+    function confianza($id_servicio, $data)
     {
         $textos = _text_(icon('fa fa-lock'), "Compra seguro, paga hasta tu entrega!");
         $link_clientes = a_enid(
@@ -1191,19 +1191,25 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');
 
-        $textos = _text_(icon('fa fa-map-marker'), "CALCUlA TU COSTO DE ENTREGA");
-        $link_formas_pago = a_enid(
-            $textos,
-            [
-                'href' => path_enid('costo_entrega'),
-                'class' => 'black mt-3',
-                'target' => '_black',
-                "onclick" => "log_operaciones_externas(31, $id_servicio)"
+        if(es_administrador_o_vendedor($data)){
+            $textos = _text_(icon('fa fa-map-marker'), "CALCUlA TU COSTO DE ENTREGA");
+            $link_formas_pago = a_enid(
+                $textos,
+                [
+                    'href' => path_enid('costo_entrega'),
+                    'class' => 'black mt-3',
+                    'target' => '_black',
+                    "onclick" => "log_operaciones_externas(31, $id_servicio)"
+    
+                ]
+            );
+    
+            $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');
 
-            ]
-        );
+        }else{
 
-        $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');
+        }
+        
 
         return d($response, 'mt-5');
     }
