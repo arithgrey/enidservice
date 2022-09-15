@@ -73,7 +73,17 @@ let busqueda_funnel_ventas = function () {
 let response_funnel_ventas = data => {
 
     render_enid(".funnel_ventas_hoy", data);
-    $(".seccion_funel_desglose").removeClass("");
+
+    $(".dashboard_funnel").click(function(){
+        recorre("#flipkart-navbar");
+    });
+
+    $(".personas_registradas_carrito").click(personas_registradas_carrito);
+    $(".externos_en_carrito").click(externos_en_carrito);
+
+    $(".personas_registradas_contacto").click(personas_registradas_contacto);
+    $(".personas_externas_contacto").click(personas_externas_contacto);
+
 
 };
 
