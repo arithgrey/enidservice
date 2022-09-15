@@ -64,24 +64,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] =  penetracion_alcaldias($data);
         $response[] =  extras_clientes();
         return append($response);
-    }
-
-    function penetracion_alcaldias($data)
-    {
-
-        $ventas_mes_ubicaciones = $data["ventas_mes_ubicaciones"];
-        $response[] = d(_titulo("Alcandías que son tendencia en ventas este mes", 4), 'mt-5 col-sm-12');
-        foreach ($ventas_mes_ubicaciones  as $row) {
-
-            $total =  $row["total"];
-            $delegacion =  $row["delegacion"];
-
-            $textos = flex($delegacion, $total, _text_(_between, 'border-bottom'), "black", "strong f12");
-            $response[] = d($textos, 'col-sm-12 mt-2');
-        }
-
-        return append($response);
-    }
+    }    
     function extras_clientes()
     {
 
