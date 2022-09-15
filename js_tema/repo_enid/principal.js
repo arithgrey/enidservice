@@ -32,7 +32,7 @@ $(document).ready(() => {
     $(".form_busqueda_accesos_pagina_productos").submit(carga_accesos_pagina_productos);
     $(".form_busqueda_accesos_dominio").submit(carga_accesos_pagina_dominio);
     $(".form_busqueda_accesos_franja_horaria").submit(carga_accesos_franja_horaria);
-    
+
 
 
     $(".form_busqueda_productos_solicitados").submit(carga_productos_mas_solicitados);
@@ -56,22 +56,37 @@ $(document).ready(() => {
     $form_sin_ventas.submit(sin_ventas);
 
     $funnel_ventas.click(funnel);
-    
+
     productos_buscados_dia();
+    dominios_que_apuntan_a_enid();
 
 });
 
+
+
+let dominios_que_apuntan_a_enid = function () {
+
+    let url = "../q/index.php/api/acceso/dominio_dia/format/json/";
+    let data_send = $(".form_busqueda_accesos_dominio").serialize();
+    request_enid("GET", data_send, url,response_dominios_que_apuntan_a_enid);
+
+};
+let response_dominios_que_apuntan_a_enid = data => {
+
+    render_enid(".dominios_que_apuntan_a_enid", data);
+
+};
 let productos_buscados_dia = function () {
 
     let url = "../q/index.php/api/servicio/metricas_productos_solicitados_dia/format/json/";
     let data_send = $(".form_busqueda_productos_solicitados").serialize();
-    
+
     request_enid("GET", data_send, url, response_busqueda_productos);
-    
+
 };
 let response_busqueda_productos = data => {
 
-    render_enid(".busquedas_productos", data);    
+    render_enid(".busquedas_productos", data);
 
 };
 
@@ -105,7 +120,7 @@ let indicadores = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $(".form_busqueda_global_enid").serialize() + "&" + $.param({"vista": "1"});
+        let data_send = $(".form_busqueda_global_enid").serialize() + "&" + $.param({ "vista": "1" });
         let url = "../q/index.php/api/enid/metricas_cotizaciones/format/json/";
 
         bloquea_form(".form_busqueda_global_enid");
@@ -168,7 +183,7 @@ let response_metricas_desarrollo = function (data) {
 let carga_comparativas = function () {
 
     let url = "../q/index.php/api/desarrollo/comparativas/format/json/";
-    let data_send = {tiempo: 1};
+    let data_send = { tiempo: 1 };
     request_enid("GET", data_send, url, response_carga_comparativa, ".place_metricas_comparativa", 0, ".place_metricas_comparativa");
     e.preventDefault();
 };
@@ -222,7 +237,7 @@ let carga_productos_mas_solicitados = function (e) {
     }
     e.preventDefault();
 };
-let carga_accesos_pagina = function (e){
+let carga_accesos_pagina = function (e) {
 
 
     if (get_parameter(".form_busqueda_accesos_pagina #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_pagina #datetimepicker5").length > 5) {
@@ -239,7 +254,7 @@ let carga_accesos_pagina = function (e){
     e.preventDefault();
 }
 
-let carga_accesos_pagina_productos = function (e){
+let carga_accesos_pagina_productos = function (e) {
 
 
     if (get_parameter(".form_busqueda_accesos_pagina_productos #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_pagina_productos #datetimepicker5").length > 5) {
@@ -256,7 +271,7 @@ let carga_accesos_pagina_productos = function (e){
     e.preventDefault();
 }
 
-let carga_accesos_pagina_dominio = function (e){
+let carga_accesos_pagina_dominio = function (e) {
 
 
     if (get_parameter(".form_busqueda_accesos_dominio #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_dominio #datetimepicker5").length > 5) {
@@ -273,7 +288,7 @@ let carga_accesos_pagina_dominio = function (e){
     e.preventDefault();
 }
 
-let carga_accesos_franja_horaria = function(e){
+let carga_accesos_franja_horaria = function (e) {
 
 
     if (get_parameter(".form_busqueda_accesos_franja_horaria #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_franja_horaria #datetimepicker5").length > 5) {
@@ -388,7 +403,7 @@ let resume_lista_deseos = function () {
 };
 let carga_repo_usabilidad = function (e) {
 
-    let data_send = $(".f_actividad_productos_usuarios").serialize() + "&" + $.param({"v": 1});
+    let data_send = $(".f_actividad_productos_usuarios").serialize() + "&" + $.param({ "v": 1 });
     let url = "../q/index.php/api/usuario/actividad/format/json/";
 
     if (get_parameter(".f_actividad_productos_usuarios #datetimepicker4").length > 5 && get_parameter(".f_actividad_productos_usuarios #datetimepicker5").length > 5) {
@@ -412,7 +427,7 @@ let info_usabilidad = (data) => {
 };
 let carga_repo_tipos_entregas = function (e) {
 
-    let data_send = $(".form_tipos_entregas").serialize() + "&" + $.param({"v": 1});
+    let data_send = $(".form_tipos_entregas").serialize() + "&" + $.param({ "v": 1 });
     let url = "../q/index.php/api/servicio/tipos_entregas/format/json/";
 
     if (get_parameter(".form_tipos_entregas #datetimepicker4").length > 5 && get_parameter(".form_tipos_entregas #datetimepicker5").length > 5) {
@@ -454,7 +469,7 @@ let tipificaciones = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_tipificaciones.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_tipificaciones.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/tipificacion_recibo/q/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -471,7 +486,7 @@ let evaluaciones = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_evaluaciones.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_evaluaciones.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/puntuacion/recibos/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -492,7 +507,7 @@ let ventas_comisionistas = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_ventas_comisionistas.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_ventas_comisionistas.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/enid/ventas_comisionadas/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -509,7 +524,7 @@ let ventas_entregadas = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_entregas.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_entregas.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/enid/ventas_entregas/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -526,7 +541,7 @@ let motovos_cancelaciones_busqueda = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_motivos_cancelaciones.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_motivos_cancelaciones.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/tipificacion_recibo/cancelacion/format/json/";
         request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -542,7 +557,7 @@ let top_ventas = function (e) {
 
     if (f_inicio.length > 5 && f_termino.length > 5) {
 
-        let data_send = $form_top_ventas.serialize() + "&" + $.param({'v': 1});
+        let data_send = $form_top_ventas.serialize() + "&" + $.param({ 'v': 1 });
         let url = "../q/index.php/api/recibo/top/format/json/";
         request_enid("GET", data_send, url, render_top_ventas);
 
@@ -552,7 +567,7 @@ let top_ventas = function (e) {
 }
 let sin_ventas = function (e) {
 
-    let data_send = {'v': 1};
+    let data_send = { 'v': 1 };
     let url = "../q/index.php/api/servicio/sin_ventas/format/json/";
     request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
 
@@ -565,56 +580,56 @@ let render_top_ventas = function (data) {
 
 }
 let funnel = function (e) {
-    
+
     let data_send = $.param({});
     let url = "../q/index.php/api/enid/funnel/format/json/";
     request_enid("GET", data_send, url, response_funnel, ".place_usabilidad", 0, ".place_usabilidad");
 
 };
 let response_funnel = function (data) {
-    
+
     render_enid(".funnel_ventas", data);
     $(".personas_registradas_carrito").click(personas_registradas_carrito);
     $(".externos_en_carrito").click(externos_en_carrito);
-    
+
     $(".personas_registradas_contacto").click(personas_registradas_contacto);
     $(".personas_externas_contacto").click(personas_externas_contacto);
-    
-    
+
+
 
 
 };
 let personas_registradas_contacto = function (e) {
-    
+
     let data_send = $.param({});
     let url = "../q/index.php/api/usuario_deseo/en_registro/format/json/";
     request_enid("GET", data_send, url, response_personas_registradas_carrito);
 
 };
 let personas_externas_contacto = function (e) {
-    
+
     let data_send = $.param({});
     let url = "../q/index.php/api/usuario_deseo_compra/en_registro/format/json/";
     request_enid("GET", data_send, url, response_personas_registradas_carrito);
 
 };
 let personas_registradas_carrito = function (e) {
-    
+
     let data_send = $.param({});
     let url = "../q/index.php/api/usuario_deseo/agregados/format/json/";
     request_enid("GET", data_send, url, response_personas_registradas_carrito);
 
 };
-let externos_en_carrito = function(e){
+let externos_en_carrito = function (e) {
 
     let data_send = $.param({});
     let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
     request_enid("GET", data_send, url, response_personas_registradas_carrito);
-    
+
 }
 let response_personas_registradas_carrito = function (data) {
 
-    
+
     render_enid(".funnel_ventas", data);
-    
+
 };
