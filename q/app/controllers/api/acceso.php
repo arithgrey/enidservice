@@ -50,11 +50,15 @@ class Acceso extends REST_Controller
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
+            $accesos = $this->app->add_imgs_servicio($accesos);
 
+            
 
             $heading = [
                 "Fecha",
-                "Link de referencia"
+                "Link de referencia",
+                "Página",
+                "Servicio"
             ];
 
 
@@ -65,7 +69,32 @@ class Acceso extends REST_Controller
 
                 $fecha_registro = $row["fecha_registro"];
                 $http_referer = $row["http_referer"];
+                $pagina = $row["pagina"];
+                $id_servicio = $row["id_servicio"];
 
+                $imagen = "-";
+                if($id_servicio > 0){
+                    
+                    $imagen =
+                    img(
+                        [
+                            "src" => $row["url_img_servicio"],
+                            "class" => "img_servicio mah_150",
+    
+                        ]
+                    );
+    
+                    $imagen = a_enid(
+                        $imagen,
+                        [
+                            "href" => path_enid("producto", $id_servicio),
+                            "target" => "_black",
+                        ]
+                    );
+
+                    
+                }
+                
 
                 if (
                     substr($http_referer, 0, 28) != "https://www.enidservices.com"
@@ -78,8 +107,9 @@ class Acceso extends REST_Controller
 
                     $row = [
                         $fecha_registro,
-                        $http_referer
-
+                        $http_referer,
+                        $pagina,
+                        $imagen
                     ];
 
                     $this->table->add_row($row);
