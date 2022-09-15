@@ -1701,6 +1701,25 @@ class Servicio extends REST_Controller
         }
         $this->response($response);
     }
+    function metricas_productos_solicitados_dia_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+            $articulos = $this->serviciosmodel->get_productos_solicitados($param);
+         
+            $response[]  = d("Busquedas del día","underline f11 black ");
+            foreach ($articulos as $row) {
+
+                $response[] = d($row["keyword"],'border p-1');
+            }
+            
+        }
+        $this->response($response);
+    }
+
 
     function num_lectura_valoraciones_GET()
     {
