@@ -37,10 +37,11 @@ if (!function_exists('invierte_date_time')) {
     }
     function actualizaciones_del_dia($data){
 
+        $response[] = d(place("funnel_ventas_hoy"),13);        
         $response[] = place("busquedas_productos");
         $response[] = place("dominios_que_apuntan_a_enid");
         $response[] = d(penetracion_alcaldias($data),13);
-        $response[] = d(place("funnel_ventas_hoy"),13);
+        
 
         
         return append($response);
@@ -141,7 +142,7 @@ if (!function_exists('invierte_date_time')) {
 
         return d($form,
             [
-                "class" => "tab-pane",
+                "class" => "tab-pane seccion_funnel_ventas",
                 "id" => "tab_funnel_ventas",
             ]
         );
