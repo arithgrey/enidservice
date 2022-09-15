@@ -28,13 +28,18 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = format_categorias($data);
-        $res[] = d(menu(), "col-lg-2 p-0 contenedor_menu");
-        $res[] = tab_content($response, 10);
+        $res[] = d(menu(), "col-lg-2 contenedor_menu");
+        $res[] = d(tab_content($response), "col-lg-7 border-right");
+        $res[] = d(actualizaciones_del_dia(), "col-lg-3");
 
         return d(append($res), "container-fluid");
 
     }
+    function actualizaciones_del_dia(){
 
+        $response[] = place("busquedas_productos");
+        return append($response);
+    }
     function format_categorias(array $data)
     {
         $r[] = h("CATEGORÍAS DESTACADAS", 3, "mb-5 h3 text-uppercase strong text-center");
