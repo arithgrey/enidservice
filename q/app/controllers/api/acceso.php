@@ -120,6 +120,133 @@ class Acceso extends REST_Controller
         }
         $this->response($response);
     }
+    function dominio_dia_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
+            $accesos = $this->app->add_imgs_servicio($accesos);
+
+            
+            $response[] = $this->dominios($accesos);
+            $response[] = $this->paginas($accesos);
+            $response[] = $this->productos($accesos);
+            
+        }
+        $this->response(append($response));
+    }
+
+    function dominios($accesos){
+        
+        $dominios = array_unique(array_column($accesos,"http_referer"));         
+        $response[] = d("Sitios que nos mandan tráfico", "f11 black underline mt-5 mb-2");
+        foreach ($dominios as $row) {
+                            
+            if (
+                substr($row, 0, 28) != "https://www.enidservices.com"
+                &&
+                substr($row, 0, 24) != "https://enidservices.com"
+                &&
+                substr($row, 0, 23) != "http://enidservices.com"
+
+            ) {
+
+                $row = [$row];
+
+                $this->table->add_row($row);
+            }
+        }
+
+        $response[] = $this->table->generate();
+        return append($response);
+
+
+    }
+    function paginas($accesos){
+        
+        $pagina = array_unique( array_column($accesos,"pagina"));         
+        $response[] = d("Paginas a las que nos envían tráfico", "f11 black underline mt-5 mb-2");
+        foreach ($pagina as $row) {
+                
+            if (
+                substr($row, 0, 28) != "https://www.enidservices.com"
+                &&
+                substr($row, 0, 24) != "https://enidservices.com"
+                &&
+                substr($row, 0, 23) != "http://enidservices.com"
+
+            ) {
+
+                $row = [$row];
+
+                $this->table->add_row($row);
+            }
+        }
+
+        $response[] = $this->table->generate();
+        return append($response);
+
+    }
+    function productos($accesos){
+        
+        
+        $response[] = d("Productos a los que nos envían tráfico", "f11 black underline mt-5 mb-2");
+        $productos_listados = [];
+        foreach ($accesos as $row) {
+                
+            $http_referer = $row["http_referer"];
+
+            if (
+                substr($http_referer, 0, 28) != "https://www.enidservices.com"
+                &&
+                substr($http_referer, 0, 24) != "https://enidservices.com"
+                &&
+                substr($http_referer, 0, 23) != "http://enidservices.com"
+
+            ) {
+
+
+                $id_servicio = $row["id_servicio"];
+                $imagen = "";
+                if($id_servicio > 0 && !in_array($id_servicio, $productos_listados)){
+                    
+                    $productos_listados[] = $id_servicio;
+
+                    $imagen =
+                    img(
+                        [
+                            "src" => $row["url_img_servicio"],
+                            "class" => "img_servicio mah_150",
+    
+                        ]
+                    );
+    
+                    $imagen = a_enid(
+                        $imagen,
+                        [
+                            "href" => path_enid("producto", $id_servicio),
+                            "target" => "_black",
+                        ]
+                    );
+
+                    
+                }
+
+                $row = [$imagen];
+
+                $this->table->add_row($row);
+            }
+        }
+
+        $response[] = $this->table->generate();
+        return append($response);
+
+    }
     function franja_horaria_GET()
     {
         $param = $this->get();

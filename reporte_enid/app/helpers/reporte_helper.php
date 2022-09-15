@@ -38,6 +38,8 @@ if (!function_exists('invierte_date_time')) {
     function actualizaciones_del_dia(){
 
         $response[] = place("busquedas_productos");
+        $response[] = place("dominios_que_apuntan_a_enid");
+        
         return append($response);
     }
     function format_categorias(array $data)
