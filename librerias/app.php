@@ -633,4 +633,10 @@ class app extends CI_Controller
         }
         return $response;
     }
+    function ventas_mes_ubicaciones()
+    {
+    
+        return $this->api("ubicacion/ventas_mes");
+    }    
+
 }

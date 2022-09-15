@@ -13,7 +13,7 @@ class Enid extends REST_Controller
 
     function funnel_GET()
     {
-        
+        $param = $this->get();
         $usuario_deseo = $this->actividad_web_model->metricas_usuario_deseo();
         $usuario_deseo_compra = $this->actividad_web_model->metricas_usuario_deseo_compra();
         $ordenes_compra= $this->actividad_web_model->operaciones_abiertas();
@@ -26,7 +26,7 @@ class Enid extends REST_Controller
 
         ];
 
-        $this->response(funnel($response));
+        $this->response(funnel($response, $param));
 
     }
     function bugs_GET()

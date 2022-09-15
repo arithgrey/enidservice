@@ -21,6 +21,7 @@ class Home extends CI_Controller
 
         $data["categorias_destacadas"] = $this->carga_categorias_destacadas();
         $data["tipo_tag_arquetipo"] = $this->tipo_tag_arquetipo();
+        $data["ventas_mes_ubicaciones"] = $this->app->ventas_mes_ubicaciones();
         $data = $this->app->cssJs($data, "reporte_enid");
 
         $this->app->pagina($data, render_reporte($data), 1);

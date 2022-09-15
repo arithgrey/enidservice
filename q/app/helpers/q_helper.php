@@ -4,8 +4,9 @@
 
 if (!function_exists('invierte_date_time')) {
 
-    function funnel($data){
+    function funnel($data, $param){
 
+        
         $usuario_deseo = $data["usuario_deseo"];
         $usuario_deseo_compra = $data["usuario_deseo_compra"];    
         $ordenes_compra = $data["ordenes_compra"];
@@ -21,18 +22,18 @@ if (!function_exists('invierte_date_time')) {
         $en_registro_usuario_externo = pr($usuario_deseo_compra , "en_registro", 0);
         $orden_enviada_usuario_externo = pr($usuario_deseo_compra , "orden_enviada", 0);
 
-        $response[] = seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo);
-        $response[] = seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo);
-        $response[] = envio_a_pago($ordenes_compra);
+        $response[] = seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo, $param);
+        $response[] = seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo, $param);
+        $response[] = envio_a_pago($ordenes_compra, $param);
 
         return append($response);
         
 
     }
-    function seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo)
+    function seccion_en_carrito($en_carrito_usuario, $en_carrito_usuario_externo, $param)
     {
         
-        
+        $dashboard = prm_def($param, "dashboard");
         $total = $en_carrito_usuario + $en_carrito_usuario_externo;
         $text = _titulo(flex("En carro de compras", $total,_between),3);    
         $response[] = d($text);
@@ -50,15 +51,15 @@ if (!function_exists('invierte_date_time')) {
             _text_(_between,'externos_en_carrito'),
             'underline cursor_pointer'
         );
-
+        $class = ($dashboard ) ? "col-xs-12 mt-3" : "col-xs-12 col-md-4 seccion_funel_desglose";
         $response[] = d($flex);
-        return d(d($response, "border p-4"), 4);
+        return d(d($response, "border p-4"), $class);
 
     }
-    function seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo)
+    function seccion_en_registro($en_registro_usuario, $en_registro_usuario_externo,$param)
     {
         
-        
+        $dashboard = prm_def($param, "dashboard");
         $total = $en_registro_usuario + $en_registro_usuario_externo;
         $flex = flex(
             "En registro de información de envío", 
@@ -74,14 +75,14 @@ if (!function_exists('invierte_date_time')) {
             _text_(_between,'personas_externas_contacto'),
             'underline cursor_pointer'
         );
+        $class = ($dashboard ) ? "col-xs-12 mt-3" : "col-xs-12 col-md-4 seccion_funel_desglose";
         $response[] = d($flex);
-        return d(d($response, "border p-4"),4);
-
+        return d(d($response, "border p-4"), $class);
     }
-    function envio_a_pago($ordenes_compra)
+    function envio_a_pago($ordenes_compra, $param)
     {
         
-    
+        $dashboard = prm_def($param, "dashboard");
         $text = _titulo(flex("Ordenes de compra", d($ordenes_compra,'underline'),_between),3);    
         $path = path_enid("entregas");
 
@@ -92,7 +93,11 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $response[] = d($link);    
-        return d(d($response, "border p-4"),4);
+
+
+        $class = ($dashboard ) ? "col-xs-12 mt-3" : "col-xs-12 col-md-4 seccion_funel_desglose";
+        $response[] = d($response);
+        return d(d($response, "border p-4"), $class);
 
     }
 

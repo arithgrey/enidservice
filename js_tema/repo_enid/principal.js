@@ -59,16 +59,29 @@ $(document).ready(() => {
 
     productos_buscados_dia();
     dominios_que_apuntan_a_enid();
+    busqueda_funnel_ventas();
 
 });
 
+let busqueda_funnel_ventas = function () {
 
+    let data_send = $.param({"dashboard":1});
+    let url = "../q/index.php/api/enid/funnel/format/json/";
+    request_enid("GET", data_send, url, response_funnel_ventas);
+
+};
+let response_funnel_ventas = data => {
+
+    render_enid(".funnel_ventas_hoy", data);
+    $(".seccion_funel_desglose").removeClass("");
+
+};
 
 let dominios_que_apuntan_a_enid = function () {
 
     let url = "../q/index.php/api/acceso/dominio_dia/format/json/";
     let data_send = $(".form_busqueda_accesos_dominio").serialize();
-    request_enid("GET", data_send, url,response_dominios_que_apuntan_a_enid);
+    request_enid("GET", data_send, url, response_dominios_que_apuntan_a_enid);
 
 };
 let response_dominios_que_apuntan_a_enid = data => {

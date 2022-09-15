@@ -29,16 +29,19 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 contenedor_menu");
-        $res[] = d(tab_content($response), "col-lg-7 border-right");
-        $res[] = d(actualizaciones_del_dia(), "col-lg-3");
+        $res[] = d(tab_content($response), "col-lg-7");
+        $res[] = d(actualizaciones_del_dia($data), "col-lg-3 border-left");
 
         return d(append($res), "container-fluid");
 
     }
-    function actualizaciones_del_dia(){
+    function actualizaciones_del_dia($data){
 
         $response[] = place("busquedas_productos");
         $response[] = place("dominios_que_apuntan_a_enid");
+        $response[] = d(penetracion_alcaldias($data),13);
+        $response[] = d(place("funnel_ventas_hoy"),13);
+
         
         return append($response);
     }
