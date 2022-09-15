@@ -1713,7 +1713,7 @@ class Servicio extends REST_Controller
             $response[]  = d("Busquedas del día","underline f11 black ");
             foreach ($articulos as $row) {
 
-                $response[] = d($row["keyword"],'border p-1');
+                $response[] = d($row["keyword"],'border p-1 border-dark col-sm-3');
             }
             
         }
