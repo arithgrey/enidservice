@@ -56,8 +56,25 @@ $(document).ready(() => {
     $form_sin_ventas.submit(sin_ventas);
 
     $funnel_ventas.click(funnel);
+    
+    productos_buscados_dia();
 
 });
+
+let productos_buscados_dia = function () {
+
+    let url = "../q/index.php/api/servicio/metricas_productos_solicitados_dia/format/json/";
+    let data_send = $(".form_busqueda_productos_solicitados").serialize();
+    
+    request_enid("GET", data_send, url, response_busqueda_productos);
+    
+};
+let response_busqueda_productos = data => {
+
+    render_enid(".busquedas_productos", data);    
+
+};
+
 let carga_nuevos_miembros = function () {
 
     let url = "../q/index.php/api/enid/nuevos_miembros/format/json/";
