@@ -15,6 +15,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_accesos_productos();
         $response[] = format_accesos_dominio();
         $response[] = format_accesos_franja_horaria();
+        $response[] = format_accesos_time_line();
         
         $response[] = funnel_ventas();        
         $response[] = format_arquetipos($data);
@@ -129,12 +130,22 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "tab_accesos_franja_horaria",
             ]
         );
+    }
+
+    function format_accesos_time_line()
+    {
+        $form = base_busqueda_form('ACCESOS TIMELINE',
+            'form_busqueda_accesos_time_line', 'place_keywords');
+
+        return d($form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_accesos_time_line",
+            ]
+        );
 
 
     }
-
-
-
 
     function funnel_ventas()
     {
@@ -416,8 +427,13 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-
-
+        $link_accesos_franja_horaria = tab(
+            text_icon("fa-check-circle", "Accesos Time line"),
+            '#tab_accesos_time_line',
+            [
+                "class" => "btn_acceso_time_line"
+            ]
+        );
 
         $link_indicadores = tab(
             text_icon('fa fa-globe', "indicadores"),

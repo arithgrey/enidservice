@@ -599,7 +599,7 @@ class app extends CI_Controller
 
     function log_acceso($data, $pagina, $id_servicio = 0 )
     {
-
+        
         if ($pagina > 0) {
             
             $q = [
@@ -607,7 +607,8 @@ class app extends CI_Controller
                 "is_mobile" => $data["is_mobile"],
                 "http_referer" => $data["HTTP_REFERER"],
                 "pagina_id" => $pagina,
-                "id_servicio" => $id_servicio
+                "id_servicio" => $id_servicio,
+                "ip" => $this->input->ip_address(),
             ];
 
             $api = "acceso/index";

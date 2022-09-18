@@ -10,6 +10,7 @@ class Acceso extends REST_Controller
         parent::__construct();
         $this->load->model("acceso_model");
         $this->load->library("table");
+        $this->load->helper("accesos");
         $this->load->library(lib_def());
     }
 
@@ -23,6 +24,7 @@ class Acceso extends REST_Controller
 
             $param["id_servicio"] =  prm_def($param, "id_servicio");
             $response = $this->acceso_model->insert($param, 1);
+
         }
         $this->response($response);
     }
@@ -476,4 +478,25 @@ class Acceso extends REST_Controller
         }
         return $response;
     }
+    function timeline_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+
+
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            
+            $accesos = $this->acceso_model->accesos_time_line($fecha_inicio, $fecha_termino);
+            $accesos_imagenes = $this->app->add_imgs_servicio($accesos);
+            $response = render_time_line($accesos_imagenes);
+            
+            
+        }
+        $this->response($response);
+
+    }
+
 }
