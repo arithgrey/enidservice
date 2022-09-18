@@ -32,6 +32,7 @@ $(document).ready(() => {
     $(".form_busqueda_accesos_pagina_productos").submit(carga_accesos_pagina_productos);
     $(".form_busqueda_accesos_dominio").submit(carga_accesos_pagina_dominio);
     $(".form_busqueda_accesos_franja_horaria").submit(carga_accesos_franja_horaria);
+    $(".form_busqueda_accesos_time_line").submit(carga_accesos_time_line);
 
 
 
@@ -328,7 +329,23 @@ let carga_accesos_franja_horaria = function (e) {
     e.preventDefault();
 
 }
+let carga_accesos_time_line = function (e) {
 
+
+    if (get_parameter(".form_busqueda_accesos_time_line #datetimepicker4").length > 5 && get_parameter(".form_busqueda_accesos_time_line #datetimepicker5").length > 5) {
+
+        let url = "../q/index.php/api/acceso/timeline/format/json/";
+        let data_send = $(".form_busqueda_accesos_time_line").serialize();
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+
+    } else {
+
+        focus_input([".form_busqueda_accesos_time_line #datetimepicker4", ".form_busqueda_accesos_time_line #datetimepicker5"]);
+
+    }
+    e.preventDefault();
+
+}
 
 let resumen_usuarios = function () {
 

@@ -124,7 +124,28 @@ class Acceso_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+    function accesos_time_line($fecha_inicio, $fecha_termino)
+    {
+        
+        $query_get = "SELECT 
+        a.id_servicio, 
+        a.fecha_registro fecha_registro, 
+        a.http_referer, 
+        a.ip,
+        a.is_mobile,
+        a.in_session,
+        p.pagina from
+        acceso a 
+        INNER JOIN pagina p
+        ON p.id = a.pagina_id
+        WHERE 
+        LENGTH(a.ip) > 0 
+        AND
+        DATE(a.fecha_registro ) 
+        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'   
+        ORDER BY a.ip, a.fecha_registro DESC";    
 
-    
+        return $this->db->query($query_get)->result_array();
+    }    
 
 }
