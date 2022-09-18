@@ -192,14 +192,7 @@ if (!function_exists('invierte_date_time')) {
         $texto_margen_producto_conjunto = flex(
             "Utilidad en el segundo producto", money($margen_producto_conjunto), $clase_extra, "strong col-sm-8",  "col-sm-4");
 
-        /**
-        $texto_comision_venta = flex(
-            "Comision por venta", money($comision), $clase_extra, "strong col-sm-8 mt-4",  "col-sm-4");
-            $texto_comision_venta_conjunto = flex(
-            "Comision por venta segundo producto", 
-            money($comision_conjunto), $clase_extra, "strong col-sm-8",  "col-sm-4");
-            **/
-
+    
         $texto_pago_por_venta = flex(
             "Pago por venta", money($pago_por_venta), $clase_extra, "strong col-sm-8 strong f12",  "col-sm-4 f12");
             
@@ -259,19 +252,28 @@ if (!function_exists('invierte_date_time')) {
             d($total_en_promo),            
             d($input),
             d(precio_final_al_aplicar_descuento()),          
+            d(descartar_promocion($id_recompensa)),
             hiddens(["class" => "total_sin_descuento", "value"=> $total_sin_descuento]),
             hiddens(["class" => "total_utilidad", "value"=> $utilidad_venta_conjunta]),
             hiddens(["class" => "pago_por_venta", "value"=> $pago_por_venta]),
             hiddens(["class" => "total_utilidad_entrega", "value"=> $ganancias_reales_menos_entrega])
-
-            
-            
         ];
 
         return d($elementos, 'd-flex flex-column');
 
     }
-
+    function descartar_promocion($id_recompensa){
+        
+        return btn(
+            'Cancelar promoción!',
+            [
+                'class' => 'notifica_cancelacion_recompensa mt-4',
+                'style' => 'background:red!important;',
+                "id" => $id_recompensa,
+            ]
+        );
+        
+    }
     function precio_final_al_aplicar_descuento(){
 
         $texto_descuento_aplicado = d("", "texto_descuento_aplicado");

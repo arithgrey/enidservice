@@ -294,11 +294,13 @@ class Paths
                 "css" =>
                 [
                     "recompensa.css",
+                    "confirm-alert.css",
                 ],
                 "js" =>
                 [
 
                     "recompensa/principal.js",
+                    "alerts/jquery-confirm.js",
 
                 ],
                 "pagina" => 21

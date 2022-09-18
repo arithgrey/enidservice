@@ -1369,4 +1369,43 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close();
         return append($r);
     }
+    function sin_resultados($param)
+    {
+
+        $textos[] = d(h("LO SENTIMOS ESTE ARTÍCULO YA NO SE ENCUENTRA DISPONIBLE", 4, "strong letter-spacing-15 fz_30"));
+        $textos[] = d(d("¡No te desanimes! Revisa en nuestro catálogo si tenemos alguno similar", "mt-5 fp9 mb-5"));
+
+        $response[] = d($textos, 'col-sm-12 mt-5');
+        $formulario[] = "<form action='../search' >";
+        $formulario[] = d(
+            add_text(
+                icon('fa fa-search icon'),
+                input([
+                    "class" => "input-field mh_50 border border-dark  solid_bottom_hover_3  ",
+                    "placeholder" => "buscar",
+                    "name" => "q"
+                ])
+            ),
+            "input-icons"
+        );
+        $formulario[] = form_close();
+
+
+        $response[] = d($formulario, "col-lg-6");
+
+
+        $otros_articulos_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
+        $response[] = d($otros_articulos_titulo, 'top_100 d-none sugerencias_titulo col-sm-12 ');
+
+        $response[] = d(
+            place("place_tambien_podria_interezar"),
+            "col-lg-12"
+
+        );
+
+        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');        
+        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
+
+        return d(d($response, 13), 10, 1);
+    }
 }

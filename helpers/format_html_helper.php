@@ -1307,14 +1307,14 @@ function menu_session_mobil($in_session)
 
     $cerrar_opciones = d(
         a_enid(
-            "×",
+            d("×", "borde_amarillo"),
             [
                 "href" => "javascript:void(0)",
-                "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black",
+                "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black f13 ",
                 "onclick" => "closeNav()",
             ]
         ),
-        'ml-auto mr-5 mt-5 '
+        'ml-auto mr-5 top_70'
     );
 
     $form_busqueda = form_busqueda_productos();
@@ -1368,23 +1368,26 @@ function opciones_acceso($in_session)
     if ($in_session < 1) {
 
 
+        $whatsApp = a_enid(
+            "WhatsApp",
+            [
+                "href" => path_enid('whatsapp', 0, 1),
+                "class" => "white whatsapp_trigger",
+                "target" => "_black"
+            ]
+            );
+
         $response = d(
             flex(
-
-                a_enid(
-                    "WhatsApp",
-                    [
-                        "href" => path_enid('whatsapp', 0, 1),
-                        "class" => "white whatsapp_trigger",
-                        "target" => "_black"
-                    ]
-                ),
+                
                 "Agenda tu pedido y paga hasta tu entrega! si vives en CDMX entrega gratis!",
+                $whatsApp,
                 _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
-                "mx-auto strong col-xs-4",
-                "mx-auto white fp8 col-xs-8"
+                "mx-auto white fp7 col-xs-9",
+                " col-xs-3 strong borde_amarillo mr-2"
 
-            )
+            ),
+            "d-block d-md-none"
         );
     }
     return $response;
@@ -1744,14 +1747,14 @@ function opciones_populares()
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white fp9 border-right frecuentes border-right-enid",
+            "class" => "white fp8 border-right frecuentes border-right-enid",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white  fp9 border-right frecuentes border-right-enid",
+            "class" => "white  fp8 border-right frecuentes border-right-enid",
             "href" => path_enid(
                 "search",
                 "/?q2=0&q=&order=1"
@@ -1762,7 +1765,7 @@ function opciones_populares()
     $response[] = a_enid(
         "PROMOCIONES",
         [
-            "class" => "white  fp9  border-right frecuentes border-right-enid",
+            "class" => "white  fp8  border-right frecuentes border-right-enid",
             "href" => path_enid("promociones")
         ]
     );
@@ -1770,7 +1773,7 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white  fp9  border-right frecuentes border-right-enid",
+            "class" => "white  fp8  border-right frecuentes border-right-enid",
             "href" => path_enid("clientes")
         ]
     );
@@ -1779,7 +1782,7 @@ function opciones_populares()
     $response[] = a_enid(
         "AFILIADOS",
         [
-            "class" => "white  fp9  border-right frecuentes border-right-enid",
+            "class" => "white  fp8  border-right frecuentes border-right-enid",
             "href" => path_enid("sobre_vender")
         ]
     );
@@ -1787,7 +1790,7 @@ function opciones_populares()
     $response[] = a_enid(
         "Simulador de ganacias",
         [
-            "class" => "white  fp9  frecuentes text-uppercase",
+            "class" => "white  fp8  frecuentes text-uppercase",
             "href" => path_enid("simulador")
         ]
     );
@@ -1815,10 +1818,7 @@ function opciones_adicionales_navegacion()
         "href" => path_enid("promociones"),
         "class" => "black"
     ]), "text-capitalize  col text-center");
-    $opciones[] = d(a_enid("CLIENTES", [
-        "href" => path_enid("clientes"),
-        "class" => "black"
-    ]), "text-capitalize  col text-center");
+    
 
     return d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
 }
