@@ -73,6 +73,7 @@ class Recompensa_model extends CI_Model
                 WHERE 
                 r.id_servicio =  $id_orden_compra 
                 AND s.status =  1
+                AND r.status =  1
                 LIMIT 3";
 
         return $this->db->query($sql)->result_array();
@@ -94,6 +95,7 @@ class Recompensa_model extends CI_Model
                 WHERE 
                 r.id_servicio =  $id_servicio 
                 AND s.status = 1 
+                AND r.status =  1
                 ";
 
         return $this->db->query($sql)->result_array();
@@ -128,13 +130,15 @@ class Recompensa_model extends CI_Model
     {
 
         $sql = "SELECT 
-                r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
+                r.id_recompensa, r.descuento, 
+                r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
                 WHERE 
                 r.id_recompensa =  $id_recompensa 
+                AND r.status =  1
                 AND s.status = 1 ";
 
         return $this->db->query($sql)->result_array();
@@ -143,7 +147,7 @@ class Recompensa_model extends CI_Model
     function get_in($in)
     {
 
-        $query_get = 'SELECT * FROM recompensa WHERE id_recompensa in (' . $in . ')';
+        $query_get = 'SELECT * FROM recompensa WHERE status =  1 AND  id_recompensa in (' . $in . ')';
         return $this->db->query($query_get)->result_array();
     }
     function in($ids){
@@ -151,7 +155,7 @@ class Recompensa_model extends CI_Model
         $query_get = "SELECT r.*, ro.id_orden_compra, ro.id_recompensa
         FROM recompensa_orden_compra ro 
         INNER JOIN recompensa r ON ro.id_recompensa = r.id_recompensa
-        WHERE id_orden_compra IN(".$ids.") ORDER BY ro.id_orden_compra";
+        WHERE r.status = 1 id_orden_compra IN(".$ids.") ORDER BY ro.id_orden_compra";
 
 
         return $this->db->query($query_get)->result_array();

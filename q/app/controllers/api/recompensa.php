@@ -176,6 +176,19 @@ class Recompensa extends REST_Controller
         }
         $this->response($response);
     }
+    function baja_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $id = $param["id"];            
+            $response = $this->recompensa_model->q_up("status", 0, $id);
+        }
+        $this->response($response);
+    }
+
     function deseo_compra_POST()
     {
 

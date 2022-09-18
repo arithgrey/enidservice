@@ -145,7 +145,7 @@ class Acceso_model extends CI_Model
         AND
         DATE(a.fecha_registro ) 
         BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'   
-        ORDER BY a.ip, a.fecha_registro DESC";    
+        ORDER BY a.fecha_registro, a.ip DESC";    
 
         return $this->db->query($query_get)->result_array();
     }    

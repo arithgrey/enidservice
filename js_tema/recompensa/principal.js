@@ -153,8 +153,31 @@ let response_recompensa = function(data){
         
     });
     
+    $(".notifica_cancelacion_recompensa").click(baja_recompensa);
     
 }
+let baja_recompensa = function(e){
+
+    let $id = e.target.id;
+    debugger;
+
+    if (parseInt($id) > 0) {
+
+        show_confirm("¿DESEAS DAR DE BAJA LA PROMOCIÓN?", "", "CONTINUAR", function () {
+            
+            let url = "../q/index.php/api/recompensa/baja/format/json/";    
+            let data_send = $.param({"id": $id});
+            request_enid("PUT", data_send, url, function(){
+                redirect("");
+            });
+            
+        });
+    }
+    
+    e.preventDefault();
+}
+
+
 let recompensa_descuento = function(e){
 
     let $descuento = $(".descuento").val();

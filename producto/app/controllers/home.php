@@ -69,51 +69,60 @@ class Home extends CI_Controller
         $data["q2"] = prm_def($param, "q2");
         $servicio = $this->app->servicio($this->id_servicio);
 
-        $data["tallas"] = $this->get_tallas($this->id_servicio);
-        $path = path_enid("go_home");
-        $id_usuario = pr($servicio, "id_usuario");
+        
+        if(pr($servicio, "status") > 0){
 
-        $usuario = (es_data($servicio)) ? $this->app->usuario($id_usuario) : redirect($path);
-        $redirect = (!es_data($usuario)) ? redirect($path) : "";
-        $data["usuario"] = $usuario;
-        $data["id_publicador"] = key_exists_bi($servicio, 0, "id_usuario", 0);
+            $data["tallas"] = $this->get_tallas($this->id_servicio);
+            $path = path_enid("go_home");
+            $id_usuario = pr($servicio, "id_usuario");
     
-        $data["info_servicio"]["servicio"] = $servicio;
-        $data["costo_envio"] = "";
-        $data["tiempo_entrega"] = "";
-        $data["ciclos"] = "";
-
-        if (pr($servicio, "flag_servicio") == 0) {
-
-            $data["costo_envio"] = 0;
-            $tiempo_promedio_entrega = pr($servicio, "tiempo_promedio_entrega");
-            $data["tiempo_entrega"] = valida_tiempo_entrega($servicio, $tiempo_promedio_entrega);
-        }
-
+            $usuario = (es_data($servicio)) ? $this->app->usuario($id_usuario) : redirect($path);
+            $redirect = (!es_data($usuario)) ? redirect($path) : "";
+            $data["usuario"] = $usuario;
+            $data["id_publicador"] = key_exists_bi($servicio, 0, "id_usuario", 0);
         
-        $data["imgs"] = $this->app->imgs_productos($this->id_servicio, 1, 10);    
-        $data["meta_keywords"] = costruye_meta_keyword($servicio);
-        
-        $this->crea_historico_vista_servicio($this->id_servicio);
-        $data["url_actual"] = get_url_request("");        
+            $data["info_servicio"]["servicio"] = $servicio;
+            $data["costo_envio"] = "";
+            $data["tiempo_entrega"] = "";
+            $data["ciclos"] = "";
+    
+            if (pr($servicio, "flag_servicio") == 0) {
+    
+                $data["costo_envio"] = 0;
+                $tiempo_promedio_entrega = pr($servicio, "tiempo_promedio_entrega");
+                $data["tiempo_entrega"] = valida_tiempo_entrega($servicio, $tiempo_promedio_entrega);
+            }
+    
+            
+            $data["imgs"] = $this->app->imgs_productos($this->id_servicio, 1, 10);    
+            $data["meta_keywords"] = costruye_meta_keyword($servicio);
+            
+            $this->crea_historico_vista_servicio($this->id_servicio);
+            $data["url_actual"] = get_url_request("");        
+    
+            if (es_data($data["imgs"])) {
+                $nombre_imagen = pr($data["imgs"], "nombre_imagen");
+                $data["url_img_post"] = url_post($nombre_imagen);
+            }
+    
+            $data["desc_web"] = descripcion($servicio);
+            $data["titulo"] = "";
+            $data["id_servicio"] = $this->id_servicio;
+            $data["existencia"] = $this->get_existencia($this->id_servicio);
+            $data["servicio_materiales"] = $this->servicio_materiales($this->id_servicio);
+            $data["recompensa"] = $this->recompensa($this->id_servicio);
+    
+            $data = $this->app->cssJs($data, "producto");        
+            $this->app->log_acceso($data, 3, $this->id_servicio  );
+            $this->app->pagina($data, render_producto($data), 1);
+            $this->load->view("producto/localidades");
+            
+        }else{
+            $data = $this->app->cssJs($data, "sin_encontrar");
+            $this->app->pagina($data, sin_resultados($data), 1);            
 
-        if (es_data($data["imgs"])) {
-            $nombre_imagen = pr($data["imgs"], "nombre_imagen");
-            $data["url_img_post"] = url_post($nombre_imagen);
         }
-
-        $data["desc_web"] = descripcion($servicio);
-        $data["titulo"] = "";
-        $data["id_servicio"] = $this->id_servicio;
-        $data["existencia"] = $this->get_existencia($this->id_servicio);
-        $data["servicio_materiales"] = $this->servicio_materiales($this->id_servicio);
-        $data["recompensa"] = $this->recompensa($this->id_servicio);
-
-        $data = $this->app->cssJs($data, "producto");        
-        $this->app->log_acceso($data, 3, $this->id_servicio  );
-        $this->app->pagina($data, render_producto($data), 1);
-        $this->load->view("producto/localidades");
-
+    
     }
 
     private function servicio_materiales($id_servicio)
