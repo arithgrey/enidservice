@@ -428,7 +428,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $link_accesos_franja_horaria = tab(
-            text_icon("fa-check-circle", "Accesos Time line"),
+            text_icon("fa-check-circle", "Accesos Timeline"),
             '#tab_accesos_time_line',
             [
                 "class" => "btn_acceso_time_line"
