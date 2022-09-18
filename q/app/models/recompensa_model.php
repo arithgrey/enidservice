@@ -64,12 +64,15 @@ class Recompensa_model extends CI_Model
     {
 
         $sql = "SELECT 
-                r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
+                r.id_recompensa, r.descuento, r.id_servicio, 
+                r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
-                WHERE r.id_servicio =  $id_orden_compra 
+                WHERE 
+                r.id_servicio =  $id_orden_compra 
+                AND s.status =  1
                 LIMIT 3";
 
         return $this->db->query($sql)->result_array();
@@ -79,12 +82,19 @@ class Recompensa_model extends CI_Model
     {
 
         $sql = "SELECT 
-                r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
+                r.id_recompensa, 
+                r.descuento, r.id_servicio, r.id_servicio_conjunto, 
+                s.precio, sc.precio precio_conjunto ,
+                s.status 
+                FROM recompensa r 
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
-                WHERE r.id_servicio =  $id_servicio ";
+                WHERE 
+                r.id_servicio =  $id_servicio 
+                AND s.status = 1 
+                ";
 
         return $this->db->query($sql)->result_array();
 
@@ -95,11 +105,13 @@ class Recompensa_model extends CI_Model
         $extra = ($populares > 0) ?  'ORDER BY r.gamificado DESC' : '' ; 
         
         $sql = _text_("SELECT 
-                r.id_recompensa, r.descuento, r.id_servicio, r.id_servicio_conjunto, s.precio, sc.precio precio_conjunto FROM recompensa r 
+                r.id_recompensa, r.descuento, r.id_servicio, 
+                r.id_servicio_conjunto, s.precio, 
+                sc.precio precio_conjunto FROM recompensa r 
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
-                ON r.id_servicio_conjunto = sc.id_servicio", $extra  ,$limit_paginacion);
+                ON r.id_servicio_conjunto = sc.id_servicio", $extra ,  $limit_paginacion);
 
         return $this->db->query($sql)->result_array();
 
@@ -121,7 +133,9 @@ class Recompensa_model extends CI_Model
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
-                WHERE r.id_recompensa =  $id_recompensa ";
+                WHERE 
+                r.id_recompensa =  $id_recompensa 
+                AND s.status = 1 ";
 
         return $this->db->query($sql)->result_array();
 
@@ -149,8 +163,5 @@ class Recompensa_model extends CI_Model
         $query_update = "UPDATE recompensa SET gamificado = gamificado + 1 WHERE id_recompensa = $id LIMIT 1";
         return $this->db->query($query_update)->result_array();
     }
-
-
-
 
 }

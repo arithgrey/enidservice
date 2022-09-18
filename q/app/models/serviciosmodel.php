@@ -24,7 +24,7 @@ class serviciosmodel extends CI_Model
 
     function q_get($params = [], $id)
     {
-        return $this->get($params, ["id_servicio" => $id]);
+        return $this->get($params, ["id_servicio" => $id, "status" => 1 ]);
     }
 
     function set_gamificacion_deseo($param, $positivo = 1, $valor = 1)
@@ -109,7 +109,9 @@ class serviciosmodel extends CI_Model
                               fecha_registro
                             FROM  
                               servicio 
-                            WHERE 
+                            WHERE      
+                            status = 1
+                            AND
                               DATE(fecha_registro) 
                             BETWEEN 
                             '" . $param["fecha_inicio"] . "' 
@@ -189,7 +191,7 @@ class serviciosmodel extends CI_Model
                     AND 
                     vista = '" . $param["tipo"] . "'
                     AND 
-                    status =1 
+                    status = 1 
                     AND
                     existencia>0
                     LIMIT 1";
@@ -372,7 +374,7 @@ class serviciosmodel extends CI_Model
                       WHERE 
                       id_usuario = '" . $param["id_usuario"] . "'
                       AND 
-                        existencia>0
+                        existencia > 0
                       AND 
                         status =1
                       AND flag_imagen>0";
@@ -650,7 +652,7 @@ class serviciosmodel extends CI_Model
     function periodo($param)
     {
 
-        $query_get = "SELECT * FROM servicio WHERE DATE(fecha_registro) 
+        $query_get = "SELECT * FROM servicio WHERE status = 1 AND  DATE(fecha_registro) 
         BETWEEN '" . $param["fecha_inicio"] . "' AND '" . $param["fecha_termino"] . "'";
 
         return $this->db->query($query_get)->result_array();
@@ -688,7 +690,7 @@ class serviciosmodel extends CI_Model
     function total()
     {
 
-        $query_get = "SELECT count(0)total FROM servicio";
+        $query_get = "SELECT count(0)total FROM servicio where status = 1 ";
         return $this->db->query($query_get)->result_array();
     }
 
@@ -794,8 +796,9 @@ class serviciosmodel extends CI_Model
                 s.id_servicio =  v.id_servicio
             WHERE 
                 s.id_usuario = $id_usuario
+                AND s.status = 1 
             AND
-                leido_vendedor =0";
+                leido_vendedor = 0";
 
         return $this->db->query($query_get)->result_array()[0]["num"];
     }
@@ -816,13 +819,16 @@ class serviciosmodel extends CI_Model
     function sin_ventas()
     {
 
-        $query_update = "SELECT s.id_servicio, s.fecha_registro , DATEDIFF(s.fecha_registro, CURRENT_DATE()) dias
+        $query_update = "SELECT s.id_servicio, s.fecha_registro , 
+                            DATEDIFF(s.fecha_registro, CURRENT_DATE()) dias
                             FROM 
                             servicio s 
                             LEFT JOIN proyecto_persona_forma_pagos p  
                             ON s.id_servicio =  p.id_servicio
                             WHERE 
-                            s.fecha_registro < DATE_ADD(current_date() , INTERVAL  - 7 DAY) AND s.status = 1
+                            s.fecha_registro < DATE_ADD(current_date() , INTERVAL  - 7 DAY) 
+                            AND 
+                            s.status = 1
                             and 
                             p.id_servicio IS NULL";
         return $this->db->query($query_update)->result_array();

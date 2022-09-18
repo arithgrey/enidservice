@@ -140,6 +140,8 @@ class Acceso_model extends CI_Model
         ON p.id = a.pagina_id
         WHERE 
         LENGTH(a.ip) > 0 
+        AND 
+        a.in_session < 1 
         AND
         DATE(a.fecha_registro ) 
         BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'   
