@@ -286,6 +286,11 @@ let response_accesos_metricas = function (data) {
     $(".vista_a_producto").text($(".detalle_accesos_input").val());
     $(".procesar_compra_input").text($(".procesar_compra_input").val());
     $(".promociones_input").text($(".promociones_input").val());
+
+    /*6 lista de deseos*/
+    
+    $(".lista_deseos_place").text($(".lista_deseos_input").val());
+
     /*17 click_whatsapp_input*/
     $(".click_whatsapp_place").text($(".click_whatsapp_input").val());
     /**22 **/ 
