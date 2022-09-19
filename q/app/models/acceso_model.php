@@ -24,6 +24,7 @@ class Acceso_model extends CI_Model
         }
 
         $query_get = _text_("select count(0)accesos, 
+                        p.id,
                         p.pagina, 
                         sum(case when a.is_mobile > 0 then 1 else 0 end) es_mobile,
                         sum(case when a.is_mobile > 0 then 0 else 1 end) es_computadora,
@@ -33,7 +34,7 @@ class Acceso_model extends CI_Model
                         a inner join pagina p on a.pagina_id = p.id
                         WHERE 
                         DATE( a.fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ", $extra, "
-                        group by p.pagina");
+                        group by p.id");
 
         return $this->db->query($query_get)->result_array();
     }

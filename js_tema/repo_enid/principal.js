@@ -61,6 +61,7 @@ $(document).ready(() => {
     productos_buscados_dia();
     dominios_que_apuntan_a_enid();
     busqueda_funnel_ventas();
+    carga_accesos_pagina();
 
 });
 
@@ -268,7 +269,7 @@ let carga_accesos_pagina = function (e) {
 
         let url = "../q/index.php/api/acceso/busqueda_fecha/format/json/";
         let data_send = $(".form_busqueda_accesos_pagina").serialize();
-        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+        request_enid("GET", data_send, url, response_accesos_metricas);
 
     } else {
 
@@ -276,6 +277,16 @@ let carga_accesos_pagina = function (e) {
 
     }
     e.preventDefault();
+}
+
+let response_accesos_metricas = function (data) {
+
+    render_enid(".place_keywords", data);    
+
+    $(".vista_a_producto").text($(".detalle_accesos_input").val());
+    $(".procesar_compra_input").text($(".procesar_compra_input").val());
+    $(".promociones_input").text($(".promociones_input").val());
+    
 }
 
 let carga_accesos_pagina_productos = function (e) {

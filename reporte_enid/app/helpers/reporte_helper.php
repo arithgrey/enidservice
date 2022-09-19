@@ -38,13 +38,15 @@ if (!function_exists('invierte_date_time')) {
     }
     function actualizaciones_del_dia($data){
 
+        $totales_accesos[] = d(flex("Vistas a productos", place("vista_a_producto"), _between, "","strong f11"));                
+        $totales_accesos[] = d(flex("Ingreso a promociones", place("promociones_input"), _between, "","strong f11"));    
+        $totales_accesos[] = d(flex("Ingreso a procesar compra", place("procesar_compra_input"), _between, "","strong f11"));            
+
+        $response[] = d($totales_accesos,"col-sm-12 border p-4");
         $response[] = d(place("funnel_ventas_hoy"),13);        
         $response[] = place("busquedas_productos");
         $response[] = place("dominios_que_apuntan_a_enid");
-        $response[] = d(penetracion_alcaldias($data),13);
-        
-
-        
+        $response[] = d(penetracion_alcaldias($data),13);        
         return append($response);
     }
     function format_categorias(array $data)

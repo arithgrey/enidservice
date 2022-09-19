@@ -325,9 +325,11 @@ class Acceso extends REST_Controller
             $total_es_computadora = 0;
             $total_en_session = 0;
             $total_sin_session = 0;
-
+            $totales_input  = [];
+            
             foreach ($accesos as $row) {
 
+                $id_pagina =$row["id"];
                 $numero_accesos = $row["accesos"];
                 $pagina = d($row["pagina"], 'text-uppercase');
                 $es_mobile = $row["es_mobile"];
@@ -351,6 +353,20 @@ class Acceso extends REST_Controller
                 ];
 
                 $this->table->add_row($row);
+
+                if($id_pagina == 3){
+
+                    $totales_input[] = hiddens(["class" => "detalle_accesos_input" , "value" => $numero_accesos ]);
+                }
+                if($id_pagina == 7){
+
+                    $totales_input[] = hiddens(["class" => "procesar_compra_input" , "value" => $numero_accesos ]);
+                }
+                if($id_pagina == 21){
+
+                    $totales_input[] = hiddens(["class" => "promociones_input" , "value" => $numero_accesos ]);
+                }
+                
             }
 
             $totales  = [
@@ -363,8 +379,9 @@ class Acceso extends REST_Controller
             ];
 
             $this->table->add_row($totales);
-            $response = $this->table->generate();
+            $response[] = $this->table->generate();
         }
+        $response[] = append($totales_input);
         $this->response($response);
     }
     function busqueda_fecha_producto_GET()
