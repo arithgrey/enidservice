@@ -286,6 +286,19 @@ let response_accesos_metricas = function (data) {
     $(".vista_a_producto").text($(".detalle_accesos_input").val());
     $(".procesar_compra_input").text($(".procesar_compra_input").val());
     $(".promociones_input").text($(".promociones_input").val());
+    /*17 click_whatsapp_input*/
+    $(".click_whatsapp_place").text($(".click_whatsapp_input").val());
+    /**22 **/ 
+    $(".click_producto_recompensa_place").text($(".click_producto_recompensa_input").val());
+    /*24 */
+    $(".click_en_ver_fotos_clientes_place").text($(".click_en_ver_fotos_clientes_input").val());    
+    /*25*/
+    $(".click_en_formas_pago_place").text($(".click_en_formas_pago_input").val());
+    /*26  Agregar carrito promoción*/
+    $(".click_en_agregar_carrito_promocion_place").text($(".click_en_agregar_carrito_promocion_input").val());
+    /*27*/
+    $(".click_en_agregar_carrito_place").text($(".click_en_agregar_carrito_input").val());
+    
     
 }
 

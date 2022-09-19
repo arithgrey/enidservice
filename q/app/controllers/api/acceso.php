@@ -24,7 +24,6 @@ class Acceso extends REST_Controller
 
             $param["id_servicio"] =  prm_def($param, "id_servicio");
             $response = $this->acceso_model->insert($param, 1);
-
         }
         $this->response($response);
     }
@@ -54,7 +53,7 @@ class Acceso extends REST_Controller
             $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
             $accesos = $this->app->add_imgs_servicio($accesos);
 
-            
+
 
             $heading = [
                 "Fecha",
@@ -75,17 +74,17 @@ class Acceso extends REST_Controller
                 $id_servicio = $row["id_servicio"];
 
                 $imagen = "-";
-                if($id_servicio > 0){
-                    
+                if ($id_servicio > 0) {
+
                     $imagen =
-                    img(
-                        [
-                            "src" => $row["url_img_servicio"],
-                            "class" => "img_servicio mah_150",
-    
-                        ]
-                    );
-    
+                        img(
+                            [
+                                "src" => $row["url_img_servicio"],
+                                "class" => "img_servicio mah_150",
+
+                            ]
+                        );
+
                     $imagen = a_enid(
                         $imagen,
                         [
@@ -93,10 +92,8 @@ class Acceso extends REST_Controller
                             "target" => "_black",
                         ]
                     );
-
-                    
                 }
-                
+
 
                 if (
                     substr($http_referer, 0, 28) != "https://www.enidservices.com"
@@ -134,21 +131,21 @@ class Acceso extends REST_Controller
             $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
             $accesos = $this->app->add_imgs_servicio($accesos);
 
-            
+
             $response[] = $this->dominios($accesos);
             $response[] = $this->paginas($accesos);
             $response[] = $this->productos($accesos);
-            
         }
         $this->response(append($response));
     }
 
-    function dominios($accesos){
-        
-        $dominios = array_unique(array_column($accesos,"http_referer"));         
+    function dominios($accesos)
+    {
+
+        $dominios = array_unique(array_column($accesos, "http_referer"));
         $response[] = d("Sitios que nos mandan tráfico", "f11 black underline mt-5 mb-2");
         foreach ($dominios as $row) {
-                            
+
             if (
                 substr($row, 0, 28) != "https://www.enidservices.com"
                 &&
@@ -166,15 +163,14 @@ class Acceso extends REST_Controller
 
         $response[] = $this->table->generate();
         return append($response);
-
-
     }
-    function paginas($accesos){
-        
-        $pagina = array_unique( array_column($accesos,"pagina"));         
+    function paginas($accesos)
+    {
+
+        $pagina = array_unique(array_column($accesos, "pagina"));
         $response[] = d("Paginas a las que nos envían tráfico", "f11 black underline mt-5 mb-2");
         foreach ($pagina as $row) {
-                
+
             if (
                 substr($row, 0, 28) != "https://www.enidservices.com"
                 &&
@@ -192,15 +188,15 @@ class Acceso extends REST_Controller
 
         $response[] = $this->table->generate();
         return append($response);
-
     }
-    function productos($accesos){
-        
-        
+    function productos($accesos)
+    {
+
+
         $response[] = d("Productos a los que nos envían tráfico", "f11 black underline mt-5 mb-2");
         $productos_listados = [];
         foreach ($accesos as $row) {
-                
+
             $http_referer = $row["http_referer"];
 
             if (
@@ -215,19 +211,19 @@ class Acceso extends REST_Controller
 
                 $id_servicio = $row["id_servicio"];
                 $imagen = "";
-                if($id_servicio > 0 && !in_array($id_servicio, $productos_listados)){
-                    
+                if ($id_servicio > 0 && !in_array($id_servicio, $productos_listados)) {
+
                     $productos_listados[] = $id_servicio;
 
                     $imagen =
-                    img(
-                        [
-                            "src" => $row["url_img_servicio"],
-                            "class" => "img_servicio mah_150",
-    
-                        ]
-                    );
-    
+                        img(
+                            [
+                                "src" => $row["url_img_servicio"],
+                                "class" => "img_servicio mah_150",
+
+                            ]
+                        );
+
                     $imagen = a_enid(
                         $imagen,
                         [
@@ -235,8 +231,6 @@ class Acceso extends REST_Controller
                             "target" => "_black",
                         ]
                     );
-
-                    
                 }
 
                 $row = [$imagen];
@@ -247,7 +241,6 @@ class Acceso extends REST_Controller
 
         $response[] = $this->table->generate();
         return append($response);
-
     }
     function franja_horaria_GET()
     {
@@ -275,11 +268,11 @@ class Acceso extends REST_Controller
             foreach ($accesos as $row) {
 
                 $hora = $row["horario"];
-                $total = $row["total"];                
+                $total = $row["total"];
                 $mobile = $row["mobile"];
                 $desktop = $row["desktop"];
 
-                $fecha_hora = _text($hora,':00 hrs');
+                $fecha_hora = _text($hora, ':00 hrs');
                 $row = [
                     $fecha_hora,
                     $total,
@@ -326,10 +319,10 @@ class Acceso extends REST_Controller
             $total_en_session = 0;
             $total_sin_session = 0;
             $totales_input  = [];
-            
+
             foreach ($accesos as $row) {
 
-                $id_pagina =$row["id"];
+                $id_pagina = $row["id"];
                 $numero_accesos = $row["accesos"];
                 $pagina = d($row["pagina"], 'text-uppercase');
                 $es_mobile = $row["es_mobile"];
@@ -354,19 +347,41 @@ class Acceso extends REST_Controller
 
                 $this->table->add_row($row);
 
-                if($id_pagina == 3){
+                switch ($id_pagina) {
+                    case 3:
+                        $totales_input[] = hiddens(["class" => "detalle_accesos_input", "value" => $numero_accesos]);
+                        break;
+                    case 7:
+                        $totales_input[] = hiddens(["class" => "procesar_compra_input", "value" => $numero_accesos]);
+                        break;
+                    case 17:
+                        $totales_input[] = hiddens(["class" => "click_whatsapp_input", "value" => $numero_accesos]);
+                        break;
+                    case 21:
+                        $totales_input[] = hiddens(["class" => "promociones_input", "value" => $numero_accesos]);
+                        break;
 
-                    $totales_input[] = hiddens(["class" => "detalle_accesos_input" , "value" => $numero_accesos ]);
-                }
-                if($id_pagina == 7){
+                    case 22:
+                            $totales_input[] = hiddens(["class" => "click_producto_recompensa_input", "value" => $numero_accesos]);
+                        break;
 
-                    $totales_input[] = hiddens(["class" => "procesar_compra_input" , "value" => $numero_accesos ]);
-                }
-                if($id_pagina == 21){
+                    case 24:
+                            $totales_input[] = hiddens(["class" => "click_en_ver_fotos_clientes_input", "value" => $numero_accesos]);
+                        break;
+                    case 25:
+                            $totales_input[] = hiddens(["class" => "click_en_formas_pago_input", "value" => $numero_accesos]);
+                        break;
+                    case 26:
+                            $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_promocion_input", "value" => $numero_accesos]);
+                        break;
+                    case 27:
+                            $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_input", "value" => $numero_accesos]);
+                        break;
+                        
+                    default:
 
-                    $totales_input[] = hiddens(["class" => "promociones_input" , "value" => $numero_accesos ]);
+                        break;
                 }
-                
             }
 
             $totales  = [
@@ -505,15 +520,11 @@ class Acceso extends REST_Controller
 
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
-            
+
             $accesos = $this->acceso_model->accesos_time_line($fecha_inicio, $fecha_termino);
             $accesos_imagenes = $this->app->add_imgs_servicio($accesos);
             $response = render_time_line($accesos_imagenes);
-            
-            
         }
         $this->response($response);
-
     }
-
 }
