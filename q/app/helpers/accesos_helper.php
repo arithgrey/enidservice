@@ -10,19 +10,22 @@ if (!function_exists('invierte_date_time')) {
         $ips = array_count_values(array_column($accesos,  "ip"));
         $response = [];
         $es_telefono = "";
-
+        
         foreach ($ips as $clave => $valor) {
 
             $item = [];
-
+            
             foreach ($accesos as $acceso) {
+                
 
                 if ($clave === $acceso["ip"]) {
+                    
                     $es_telefono =  ($acceso["is_mobile"]) ? "Teléfono": "Desktop";
                     $pagina =  $acceso["pagina"];
                     $http_referer = $acceso["http_referer"];
                     $fecha_registro = $acceso["fecha_registro"];
                     $id_servicio = $acceso["id_servicio"];
+                    $ip = $acceso["ip"];
 
                     $contenido = [];
                     $contenido[] = d($pagina, "strong fp9 row");
@@ -38,6 +41,7 @@ if (!function_exists('invierte_date_time')) {
                         $contenido[] = d($imagen, "fp7 row");                        
                     }
                     $contenido[] = d($fecha_registro, "fp7 row");
+                    $contenido[] = d($ip, "fp7 row");
                     $item[] = d($contenido, "col-md-3");
                     
                 }
@@ -53,6 +57,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($resumen, 'row mt-5 mb-1');
             $response[] = d($item, 'nuevo_usuario_time_line border border-secondary row p-2');
         }
-        return d($response, 12);
+
+        
+        $data_complete[] =  d($response, 12);
+        return append($data_complete);
     }
 }
