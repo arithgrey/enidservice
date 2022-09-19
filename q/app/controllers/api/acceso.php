@@ -351,6 +351,10 @@ class Acceso extends REST_Controller
                     case 3:
                         $totales_input[] = hiddens(["class" => "detalle_accesos_input", "value" => $numero_accesos]);
                         break;
+                    case 6:
+                        $totales_input[] = hiddens(["class" => "lista_deseos_input", "value" => $numero_accesos]);
+                        break;
+
                     case 7:
                         $totales_input[] = hiddens(["class" => "procesar_compra_input", "value" => $numero_accesos]);
                         break;
@@ -362,22 +366,22 @@ class Acceso extends REST_Controller
                         break;
 
                     case 22:
-                            $totales_input[] = hiddens(["class" => "click_producto_recompensa_input", "value" => $numero_accesos]);
+                        $totales_input[] = hiddens(["class" => "click_producto_recompensa_input", "value" => $numero_accesos]);
                         break;
 
                     case 24:
-                            $totales_input[] = hiddens(["class" => "click_en_ver_fotos_clientes_input", "value" => $numero_accesos]);
+                        $totales_input[] = hiddens(["class" => "click_en_ver_fotos_clientes_input", "value" => $numero_accesos]);
                         break;
                     case 25:
-                            $totales_input[] = hiddens(["class" => "click_en_formas_pago_input", "value" => $numero_accesos]);
+                        $totales_input[] = hiddens(["class" => "click_en_formas_pago_input", "value" => $numero_accesos]);
                         break;
                     case 26:
-                            $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_promocion_input", "value" => $numero_accesos]);
+                        $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_promocion_input", "value" => $numero_accesos]);
                         break;
                     case 27:
-                            $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_input", "value" => $numero_accesos]);
+                        $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_input", "value" => $numero_accesos]);
                         break;
-                        
+
                     default:
 
                         break;
