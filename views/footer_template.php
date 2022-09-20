@@ -26,6 +26,7 @@ mancuernas ajustables
 <h2 class="d-none">
 CDMX
 </h2>
+
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
         <?php if (file_exists($link)): ?>

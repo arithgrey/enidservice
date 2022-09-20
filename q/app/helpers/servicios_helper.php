@@ -1213,10 +1213,11 @@ if (!function_exists('invierte_date_time')) {
         $tipo_deseo = "agregar_deseos_sin_antecedente";
         $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
 
+
         $clases = _text_($tipo_deseo,  _deseo_icon, "fa-2x");
         $clases_agregado = _text_($tipo_deseo_agregado,  _agregado_icon, "fa-2x");
 
-        $icono_por_agregar = icon($clases, ["id" =>  $id_servicio, "title" => "Lo deseo"]);
+        $icono_por_agregar = icon($clases, ["id" =>  $id_servicio, "title" => "Lo deseo", "onclick" => "log_operaciones_externas(27, $id_servicio)"]);
         $icono_agregado = icon($clases_agregado, ["id" =>  $id_servicio]);
 
         $extra_por_agregar = _text("por_agregar_", $id_servicio);
