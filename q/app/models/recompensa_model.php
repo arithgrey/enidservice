@@ -137,9 +137,8 @@ class Recompensa_model extends CI_Model
                 INNER JOIN servicio sc 
                 ON r.id_servicio_conjunto = sc.id_servicio    
                 WHERE 
-                r.id_recompensa =  $id_recompensa 
-                AND r.status =  1
-                AND s.status = 1 ";
+                r.id_recompensa =  $id_recompensa                 
+                ";
 
         return $this->db->query($sql)->result_array();
 
