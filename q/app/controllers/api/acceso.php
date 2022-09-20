@@ -143,7 +143,7 @@ class Acceso extends REST_Controller
     {
 
         $dominios = array_unique(array_column($accesos, "http_referer"));
-        $response[] = d("Sitios que nos mandan tráfico", "f11 black underline mt-5 mb-2");
+        $response[] = d("Sitios que nos mandan tráfico", "f12 black underline mt-5 mb-2 strong");
         foreach ($dominios as $row) {
 
             if (
@@ -155,7 +155,7 @@ class Acceso extends REST_Controller
 
             ) {
 
-                $row = [$row];
+                $row = [d($row, 'mt-2 border-bottom')];
 
                 $this->table->add_row($row);
             }
