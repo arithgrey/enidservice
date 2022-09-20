@@ -9,8 +9,7 @@ if (!function_exists('invierte_date_time')) {
     function propuestas($data)
     {
 
-        $response[] = agregar($data);
-        //$response[] = imagen_servicio($data);
+        $response[] = agregar($data);        
         $response[] = listado($data);
         $response[] = modal_form_propuesta($data);
 
@@ -50,6 +49,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $propuestas  =  $data["propuestas"];
+        $path_producto = $data["path_producto"];
         $response = [];
         $a = 1;
         if (es_data($propuestas)) {
@@ -74,7 +74,21 @@ if (!function_exists('invierte_date_time')) {
                 $response[] = d($contenido, 'col-sm-12');
                 $a++;
             }
+
+            
         }
+        $contenido = d(d(                
+            _text_(
+                d("Sigue este enlace para ver nuestro catálogo "),
+                br(),
+                d($path_producto)
+            ),
+            'border p-5 mt-5',
+            'mb-5'
+        ),12);
+        $response[] = d($contenido, 'col-sm-12');
+
+
         return append($response);
     }
     function modal_form_propuesta($data)
