@@ -66,12 +66,14 @@ $("footer").ready(() => {
 });
 let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
 
+    let $http_referer_enid = $(".http_referer_enid").val();    
     let url = "../q/index.php/api/acceso/index/format/json/";
     let data_send = {
         "in_session": get_option("in_session"),
         "is_mobile": get_option("is_mobile"),
         "pagina_id": pagina_id,
-        "id_servicio": id_servicio
+        "id_servicio": id_servicio,
+        "http_referer": $http_referer_enid
     };
 
     request_enid("POST", data_send, url, response_log);
@@ -1299,7 +1301,8 @@ let agregar_deseos_sin_antecedente_gbl = function () {
     if (parseInt($id_servicio) > 0) {
         advierte('Agregado a tu lista de deseos!', 1);
         let data_send = { "id_servicio": $id_servicio, "articulos": 1 };
-
+        
+        //log_operaciones_externas(27, $id_servicio);
         if (parseInt(get_option("in_session")) > 0) {
 
             let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";

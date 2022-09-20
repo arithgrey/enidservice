@@ -17,7 +17,7 @@ class productividad extends REST_Controller
 
         $param = $this->get();
         $id_usuario = $this->app->get_session('id_usuario');
-        $data = $this->app->session();        
+        $data = $this->app->session();                
         $id_empresa = $data['id_empresa'];
 
         $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
