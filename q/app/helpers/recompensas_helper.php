@@ -11,8 +11,7 @@ if (!function_exists('invierte_date_time')) {
      
         
         if (es_data($recompensa)) {
-            
-            
+                        
             foreach ($recompensa as $row) {
 
                 $id_servicio = $row["id_servicio"];

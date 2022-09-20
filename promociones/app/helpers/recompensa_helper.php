@@ -15,6 +15,7 @@ if (!function_exists('invierte_date_time')) {
             
             foreach ($recompensa as $row) {
 
+                $status = $row["servicio"][0]["status"];
                 $id_servicio = $row["id_servicio"];
                 $id_servicio_conjunto = $row["id_servicio_conjunto"];
                 $url_img_servicio = $row["url_img_servicio"];
@@ -27,8 +28,8 @@ if (!function_exists('invierte_date_time')) {
                 $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
                 $editar_comprar = editar_comprar($data, $id_recompensa);
 
-
-                $clase_imagen = 'col-xs-3';
+                $extra = ($status < 1) ? 'border border-danger' : '';
+                $clase_imagen = _text_('col-xs-3', $extra);
                 $promocion = [
                     d($imagen_servicio, $clase_imagen),
                     d("+","f12 strong"),
