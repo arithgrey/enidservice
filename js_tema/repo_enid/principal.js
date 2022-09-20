@@ -62,6 +62,7 @@ $(document).ready(() => {
     dominios_que_apuntan_a_enid();
     busqueda_funnel_ventas();
     carga_accesos_pagina();
+    indicadores();
 
 });
 
@@ -149,7 +150,7 @@ let indicadores = function (e) {
         let url = "../q/index.php/api/enid/metricas_cotizaciones/format/json/";
 
         bloquea_form(".form_busqueda_global_enid");
-        request_enid("GET", data_send, url, response_indicadores, ".place_usabilidad", 0, ".place_usabilidad");
+        request_enid("GET", data_send, url, response_indicadores);
 
     } else {
 
@@ -167,7 +168,10 @@ let response_indicadores = function (data) {
     $(".valoraciones").click(resumen_valoracion);
     $(".servicios").click(resumen_servicios);
     $(".productos_valorados_distintos").click(resumen_servicios_valorados);
-    $(".lista_deseos").click(resume_lista_deseos);
+    $(".lista_deseos").click(resume_lista_deseos);    
+    $(".numero_compras_efectivas_place").text( $(".numero_compras_efectivas_input").val());
+    $(".numero_transacciones_place").text( $(".numero_transacciones_input").val());
+    
 };
 let registra_metas = function (e) {
 
