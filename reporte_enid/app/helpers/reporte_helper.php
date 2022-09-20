@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
         $totales_accesos[] = d(flex("Compras", place("numero_compras_efectivas_place"), _text_(_between, "strong f11")));      
         $totales_accesos[] = d(flex("Transacciones", place("numero_transacciones_place"), _text_(_between, "strong f11")));      
         $totales_accesos[] = d(flex("Cancelaciones", place("numero_cancelaciones_place"), _text_(_between, "f11 red_enid")));      
-
+        $totales_accesos[] = d(flex("Personas que llegan externas", place("personas_trafico_place"), _between, "","strong f11"));       
         
 
         $totales_accesos[] = d(flex("Vistas a productos", place("vista_a_producto"), _between, "","strong f11"));                

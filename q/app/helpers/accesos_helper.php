@@ -58,7 +58,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($item, 'nuevo_usuario_time_line border border-secondary row p-2');
         }
 
-        
+        $texto = _text_("Personas distintas desde tráfico entrante", count($ips));
+        $data_complete[]  = hiddens(["class" => "personas_trafico", "value" => count($ips)]);
+        $data_complete[]  = d(d($texto,"row strong f12"),12);
         $data_complete[] =  d($response, 12);
         return append($data_complete);
     }
