@@ -14,12 +14,14 @@ let $funnel_ventas = $('.funnel');
 
 $(document).ready(() => {
 
-    set_option("page", 0);
+    set_option("page", 0);    
     $("#nuevos_miembros").click(carga_nuevos_miembros);
     $(".mail_marketing").click(carga_metricas_mail_marketing);
     $(".form_busqueda_mail_enid").submit(carga_metricas_mail_marketing);
 
     $(".form_busqueda_global_enid").submit(indicadores);
+    $(".form_busqueda_global_enid").submit();
+    
     $("#form_metas").submit(registra_metas);
     $(".form_busqueda_desarrollo").submit(metricas_desarrollo);
     $(".form_busqueda_desarrollo_solicitudes").submit(solicitudes_cliente);
@@ -62,7 +64,7 @@ $(document).ready(() => {
     dominios_que_apuntan_a_enid();
     busqueda_funnel_ventas();
     carga_accesos_pagina();
-    indicadores();
+    
 
 });
 
@@ -171,6 +173,7 @@ let response_indicadores = function (data) {
     $(".lista_deseos").click(resume_lista_deseos);    
     $(".numero_compras_efectivas_place").text( $(".numero_compras_efectivas_input").val());
     $(".numero_transacciones_place").text( $(".numero_transacciones_input").val());
+    $(".numero_cancelaciones_place").text( $(".numero_cancelaciones_input").val());
     
 };
 let registra_metas = function (e) {

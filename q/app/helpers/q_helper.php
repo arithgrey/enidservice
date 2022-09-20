@@ -326,6 +326,7 @@ if (!function_exists('invierte_date_time')) {
                 $table .= td($num_transacciones);
                 $table .= hiddens(["class" => "numero_transacciones_input", "value" => $num_transacciones]);
                 $table .= hiddens(["class" => "numero_compras_efectivas_input", "value" => $compras_efectivas]);
+                $table .= hiddens(["class" => "numero_cancelaciones_input", "value" => $cancelaciones]);
 
 
                 $link_compras_efectivas = tab(
