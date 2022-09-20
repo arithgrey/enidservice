@@ -166,5 +166,11 @@ class Recompensa_model extends CI_Model
         $query_update = "UPDATE recompensa SET gamificado = gamificado + 1 WHERE id_recompensa = $id LIMIT 1";
         return $this->db->query($query_update)->result_array();
     }
+    function baja_por_id_servicio($id){
+
+        $query_update = "update recompensa set status = 0 where id_servicio  = $id  or id_servicio_conjunto =  $id";
+        return $this->db->query($query_update)->result_array();
+    }
+    
 
 }
