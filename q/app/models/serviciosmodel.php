@@ -24,7 +24,7 @@ class serviciosmodel extends CI_Model
 
     function q_get($params = [], $id)
     {
-        return $this->get($params, ["id_servicio" => $id, "status" => 1 ]);
+        return $this->get($params, ["id_servicio" => $id]);
     }
 
     function set_gamificacion_deseo($param, $positivo = 1, $valor = 1)
