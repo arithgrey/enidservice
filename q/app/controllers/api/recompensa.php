@@ -176,6 +176,20 @@ class Recompensa extends REST_Controller
         }
         $this->response($response);
     }
+    function baja_por_id_servicio_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+            $id = $param["id_servicio"];
+            
+            $response = $this->recompensa_model->baja_por_id_servicio($id);
+        }
+        $this->response($response);
+    }
+
     function baja_PUT()
     {
 

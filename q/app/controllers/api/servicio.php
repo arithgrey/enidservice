@@ -319,9 +319,19 @@ class Servicio extends REST_Controller
             $status = ($param["status"] == 1) ? 0 : 1;
             $id_servicio = $param["id_servicio"];
             $response = $this->serviciosmodel->q_up("status", $status, $id_servicio);
+            if($status < 1 ){
+                $this->baja_promocion($id_servicio);
+            }
+
         }
 
         $this->response($response);
+    }
+
+    private function baja_promocion($id_servicio)
+    {
+
+        return $this->app->api("recompensa/baja_por_id_servicio", ["id_servicio" => $id_servicio], "json", "PUT");
     }
 
     function moto_PUT()
