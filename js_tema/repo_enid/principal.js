@@ -35,6 +35,7 @@ $(document).ready(() => {
     $(".form_busqueda_accesos_dominio").submit(carga_accesos_pagina_dominio);
     $(".form_busqueda_accesos_franja_horaria").submit(carga_accesos_franja_horaria);
     $(".form_busqueda_accesos_time_line").submit(carga_accesos_time_line);
+    $(".form_busqueda_accesos_time_line").submit();
 
 
 
@@ -372,7 +373,7 @@ let carga_accesos_time_line = function (e) {
 
         let url = "../q/index.php/api/acceso/timeline/format/json/";
         let data_send = $(".form_busqueda_accesos_time_line").serialize();
-        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+        request_enid("GET", data_send, url, response_acceso_time_line);
 
     } else {
 
@@ -380,6 +381,12 @@ let carga_accesos_time_line = function (e) {
 
     }
     e.preventDefault();
+
+}
+let response_acceso_time_line = function(data){
+    
+    render_enid(".place_keywords", data);
+    $(".personas_trafico_place").text($(".personas_trafico").val());
 
 }
 
