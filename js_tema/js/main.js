@@ -67,13 +67,15 @@ $("footer").ready(() => {
 let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
 
     let $http_referer_enid = $(".http_referer_enid").val();    
+    let $ip = $(".ip_referer_enid").val();    
     let url = "../q/index.php/api/acceso/index/format/json/";
     let data_send = {
         "in_session": get_option("in_session"),
         "is_mobile": get_option("is_mobile"),
         "pagina_id": pagina_id,
         "id_servicio": id_servicio,
-        "http_referer": $http_referer_enid
+        "http_referer": $http_referer_enid,
+        "ip" : $ip,
     };
 
     request_enid("POST", data_send, url, response_log);
