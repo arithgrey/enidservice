@@ -1189,28 +1189,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');
-
-        if(es_administrador_o_vendedor($data)){
-            $textos = _text_(icon('fa fa-map-marker'), "CALCUlA TU COSTO DE ENTREGA");
-            $link_formas_pago = a_enid(
-                $textos,
-                [
-                    'href' => path_enid('costo_entrega'),
-                    'class' => 'black mt-3',
-                    'target' => '_black',
-                    "onclick" => "log_operaciones_externas(31, $id_servicio)"
-    
-                ]
-            );
-    
-            $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');
-
-        }else{
-
-        }
+        $response[] = d($link_formas_pago, 'text-uppercase fp9 underline');       
         
-
         return d($response, 'mt-5');
     }
     function formas_acionales_compra($data)
