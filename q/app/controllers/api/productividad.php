@@ -9,6 +9,7 @@ class productividad extends REST_Controller
         $this->load->helper("q");
         $this->load->model("productividad_usuario_model");
         $this->load->library(lib_def());
+        
     }
 
     function notificaciones_GET()
@@ -16,7 +17,7 @@ class productividad extends REST_Controller
 
         $param = $this->get();
         $id_usuario = $this->app->get_session('id_usuario');
-        $data = $this->app->session();
+        $data = $this->app->session();                
         $id_empresa = $data['id_empresa'];
 
         $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
@@ -32,9 +33,9 @@ class productividad extends REST_Controller
         $prm["modalidad"] = 1;
         $prm["id_usuario"] = $id_usuario;
         $response["info_notificaciones"]["numero_telefonico"] = 1;
-
+        
         $compras_sin_cierrre = $this->pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa);
-
+                
         $response += [
             "id_usuario" => $id_usuario,
             "preguntas" => [],
@@ -44,13 +45,13 @@ class productividad extends REST_Controller
             "clientes_sin_tags_arquetipos" => [],
             "tareas" => $this->get_tareas($data, $id_usuario)
         ];
-
-
+        
+        
 
         $response = $this->re_intentos_compras($data, $id_usuario, $response);
-
+        
         $response = $this->recuperacion($data, $id_usuario, $response);
-
+        
         switch ($id_perfil) {
 
             case (3):
@@ -94,6 +95,7 @@ class productividad extends REST_Controller
         }
         $response += ["lista_deseo" => $this->get_lista_deseo($id_usuario)];
         $this->response($response);
+
     }
 
     private function caso_administrador($response, $id_usuario)
@@ -105,6 +107,7 @@ class productividad extends REST_Controller
         ];
 
         return tareas_administrador($response);
+
     }
 
     private function get_lista_deseo($id_usuario)
@@ -115,6 +118,7 @@ class productividad extends REST_Controller
         ];
 
         return $this->app->api("usuario_deseo/deseos", $q);
+
     }
 
     private function get_respuestas($id_usuario)
@@ -137,6 +141,7 @@ class productividad extends REST_Controller
         ];
 
         return $this->app->api("pregunta/vendedor", $q);
+
     }
 
     private function get_objetivos_perfil($q)
@@ -185,6 +190,8 @@ class productividad extends REST_Controller
             $response = $this->app->api("recibo/deuda_cliente", $q);
         }
         return $response;
+
+
     }
 
     private function get_num_lectura_valoraciones($q, $id_perfil)
@@ -204,6 +211,7 @@ class productividad extends REST_Controller
 
         $q["info"] = 1;
         return $this->app->api("prospecto/dia", $q);
+
     }
 
     private function accesos_enid_service()
@@ -231,47 +239,46 @@ class productividad extends REST_Controller
 
         $q["id_usuario"] = $id_usuario;
         return $this->app->api("recordatorio/usuario", $q);
+
     }
 
     private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
     {
-
-        $usuarios = $this->app->api(
-            "recibo/pendientes_sin_cierre",
+        $usuarios = $this->app->api("recibo/pendientes_sin_cierre",
             [
                 "id_usuario" => $id_usuario,
                 "id_perfil" => $id_perfil,
                 "id_empresa" => $id_empresa,
                 "domicilios" => 1
             ]
-        );
-
-        $usuarios = $this->usuarios_en_lista_negra($usuarios);
+        );        
+        
+        
+        $usuarios = $this->usuarios_en_lista_negra($usuarios);                        
         return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
+        
+
     }
 
-    private function usuarios_en_lista_negra($usuarios)
+    private function usuarios_en_lista_negra(array $usuarios)
     {
-
         $lista = [];
         $lista_completa = [];
-        if (es_data($usuarios)) {
+        
+        foreach ($usuarios as $row) {
 
-            foreach ($usuarios as $row) {
+            $lista[] = $row['id_usuario'];
+        }
 
-                $lista[] = $row['id_usuario'];
-            }
+        $q['usuarios'] = get_keys($lista);
+        $usuarios_lista_negra = $this->app->api("lista_negra/q", $q);
+        
+        foreach ($usuarios as $row) {
 
-            $q['usuarios'] = get_keys($lista);
-            $usuarios_lista_negra = $this->app->api("lista_negra/q", $q);
+            $es_lista_negra = search_bi_array($usuarios_lista_negra, 'id_usuario', $row['id_usuario']);
+            if (!$es_lista_negra) {
 
-            foreach ($usuarios as $row) {
-
-                $es_lista_negra = search_bi_array($usuarios_lista_negra, 'id_usuario', $row['id_usuario']);
-                if (!$es_lista_negra) {
-
-                    $lista_completa[] = $row;
-                }
+                $lista_completa[] = $row;
             }
         }
         return $lista_completa;
@@ -308,6 +315,7 @@ class productividad extends REST_Controller
         }
 
         return $response;
+
     }
 
     function get_tareas($data, $id_usuario)
@@ -320,6 +328,7 @@ class productividad extends REST_Controller
             $response = $this->app->api("tickets/pendientes", $in);
         }
         return $response;
+
     }
 
     function ventas_semana($id_usuario)
@@ -342,20 +351,24 @@ class productividad extends REST_Controller
 
         $response = $this->app->api("recibo/pedidos", $q);
         return (es_data($response)) ? count($response) : 0;
+
     }
 
     function re_intentos_compras($data, $id_usuario, $response)
     {
 
-
+        
 
         $pendientes = [];
         if (es_administrador_o_vendedor($data)) {
 
             $pendientes = $this->app->api("recibo/reventa", ["id_vendedor" => $id_usuario]);
+
         }
         $response['reintentos_compras'] = $pendientes;
         return $response;
+
+
     }
 
     function recuperacion($data, $id_usuario, $response)
@@ -367,9 +380,11 @@ class productividad extends REST_Controller
         if (es_administrador_o_vendedor($data)) {
 
             $pendientes = $this->app->api("recibo/recuperacion", $q);
+
         }
         $response['recuperacion'] = $pendientes;
         return $response;
+
     }
 
     function proximas_reparto($id_perfil, $id_usuario, $id_empresa)
@@ -385,5 +400,8 @@ class productividad extends REST_Controller
             ]
         );
         return $this->app->imgs_productos(0, 1, 1, 1, $response);
+
     }
+
+
 }
