@@ -69,7 +69,6 @@ class recibo extends REST_Controller
 
             $response =  $this->proximos_cerres($id_empresa, $id_usuario, $id_perfil);
             $recibos = $this->horarios_contra_entrega_pedidos($response);
-
             $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);
 
 
@@ -87,7 +86,7 @@ class recibo extends REST_Controller
                 $recibos = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
                 
                 $response = $this->recompensas($recibos);
-                $this->response($response);
+                
             }
         }
         $this->response($response);
@@ -95,9 +94,7 @@ class recibo extends REST_Controller
     function recompensas($recibos)
     {
 
-        $recompensa = $this->app->recompensas_recibos($recibos);
-        return $recompensa;
-        
+        $recompensa = $this->app->recompensas_recibos($recibos);        
         $response = [];
         $data_complete = [];
         $a = 0;
