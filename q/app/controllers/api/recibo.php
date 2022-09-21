@@ -76,17 +76,18 @@ class recibo extends REST_Controller
             if (prm_def($param, 'domicilios') > 0) {
 
                 $recibos['recibos'] = $response;
-                $es_cliente =
-                    es_cliente($param);
+                $es_cliente = es_cliente($param);
                 if (!$es_cliente) {
 
                     $ordenes = $this->append_usuarios_reparto($recibos['recibos']);
                     $ordenes = $this->append_usuario_cliente($ordenes);
                     $recibos['recibos'] = $ordenes;
                 }
-
+                
                 $recibos = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
+                
                 $response = $this->recompensas($recibos);
+                $this->response($response);
             }
         }
         $this->response($response);
@@ -95,6 +96,8 @@ class recibo extends REST_Controller
     {
 
         $recompensa = $this->app->recompensas_recibos($recibos);
+        return $recompensa;
+        
         $response = [];
         $data_complete = [];
         $a = 0;

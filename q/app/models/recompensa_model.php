@@ -154,8 +154,7 @@ class Recompensa_model extends CI_Model
         $query_get = "SELECT r.*, ro.id_orden_compra, ro.id_recompensa
         FROM recompensa_orden_compra ro 
         INNER JOIN recompensa r ON ro.id_recompensa = r.id_recompensa
-        WHERE r.status = 1 id_orden_compra IN(".$ids.") ORDER BY ro.id_orden_compra";
-
+        WHERE r.status = 1 AND id_orden_compra IN(".$ids.") ORDER BY ro.id_orden_compra";
 
         return $this->db->query($query_get)->result_array();
     }
