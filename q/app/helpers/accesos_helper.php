@@ -10,7 +10,8 @@ if (!function_exists('invierte_date_time')) {
         $ips = array_count_values(array_column($accesos,  "ip"));
         $response = [];
         $es_telefono = "";
-        
+        $interacciones_positivas = 0;
+        $interacciones_negativas = 0;
         foreach ($ips as $clave => $valor) {
 
             $item = [];
@@ -53,6 +54,13 @@ if (!function_exists('invierte_date_time')) {
             $interpretacion[]  = d(d($es_telefono));
             $interpretacion[] = d(_text_( span($valor, 'strong'), "Interacciones"));
             
+            if($valor > 5){
+                
+                $interacciones_positivas ++;
+
+            }else{
+                $interacciones_negativas ++;
+            }
             $resumen = flex($interpretacion, _text_(_between, "f11 black"));
             $response[] = d($resumen, 'row mt-5 mb-1');
             $response[] = d($item, 'nuevo_usuario_time_line border border-secondary row p-2');
@@ -60,6 +68,8 @@ if (!function_exists('invierte_date_time')) {
 
         $texto = _text_("Personas distintas desde tráfico entrante", count($ips));
         $data_complete[]  = hiddens(["class" => "personas_trafico", "value" => count($ips)]);
+        $data_complete[]  = hiddens(["class" => "personas_interacciones_positivas", "value" => $interacciones_positivas]);
+        $data_complete[]  = hiddens(["class" => "personas_interacciones_negativas", "value" => $interacciones_negativas]);
         $data_complete[]  = d(d($texto,"row strong f12"),12);
         $data_complete[] =  d($response, 12);
         return append($data_complete);

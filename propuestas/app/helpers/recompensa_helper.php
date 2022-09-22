@@ -81,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
             _text_(
                 d("Sigue este enlace para ver nuestro catálogo "),
                 br(),
-                d($path_producto)
+                d($path_producto)                
             ),
             'border p-5 mt-5',
             'mb-5'

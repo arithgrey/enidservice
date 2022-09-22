@@ -387,6 +387,8 @@ let response_acceso_time_line = function(data){
     
     render_enid(".place_keywords", data);
     $(".personas_trafico_place").text($(".personas_trafico").val());
+    $(".personas_interacciones_positivas_place").text($(".personas_interacciones_positivas").val());
+    $(".personas_interacciones_negativas_place").text($(".personas_interacciones_negativas").val());
 
 }
 
