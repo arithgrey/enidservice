@@ -1371,8 +1371,8 @@ function opciones_acceso($in_session)
         $whatsApp = a_enid(
             "WhatsApp",
             [
-                "href" => path_enid('whatsapp', 0, 1),
-                "class" => "white whatsapp_trigger",
+                "href" => path_enid('whatsapp_ayuda', 0, 1),
+                "class" => "white whatsapp_trigger borde_amarillo",
                 "target" => "_black"
             ]
             );
@@ -1380,17 +1380,17 @@ function opciones_acceso($in_session)
         $response = d(
             flex(
                 
-                "Agenda tu pedido y paga hasta tu entrega! si vives en CDMX entrega gratis!",
+                "Agenda tu pedido y paga hasta tu entrega! en CDMX entrega gratis!",
                 $whatsApp,
-                _text_(_between, 'contenedor-lateral-menu text-uppercase acceder_vender fixed-bottom'),
-                "mx-auto white fp7 col-xs-9",
-                " col-xs-3 strong borde_amarillo mr-2"
+                _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom'),
+                "mx-auto white fp7 col-xs-7 text-uppercase",
+                "col-xs-5 strong mr-2"
 
             ),
             "d-block d-md-none"
         );
     }
-    return $response;
+    return d(d($response,13),12);
 }
 
 
@@ -1808,16 +1808,17 @@ function opciones_adicionales_navegacion()
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
             "class" => "black"
         ]),
-        "text-capitalize  col text-center"
+        "text-capitalize col-xs-4 text-center"
     );
     $opciones[] = d(a_enid("NOVEDADES", [
         "href" => path_enid("search","/?q2=0&q=&order=1"),
         "class" => "black"
-    ]), "text-capitalize  col text-center");
+    ]), "text-capitalize col-xs-4 text-center");
+    
     $opciones[] = d(a_enid("PROMOCIONES", [
         "href" => path_enid("promociones"),
         "class" => "black"
-    ]), "text-capitalize  col text-center");
+    ]), "text-capitalize  col-xs-4 text-center");
     
 
     return d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
