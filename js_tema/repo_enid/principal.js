@@ -387,14 +387,17 @@ let response_acceso_time_line = function(data){
     
     render_enid(".place_keywords", data);
     $(".personas_trafico_place").text($(".personas_trafico").val());
+    
     $(".personas_interacciones_positivas_place").text($(".personas_interacciones_positivas").val());
+    $(".personas_interacciones_negativas_place").text($(".personas_interacciones_negativas").val());
+    
     
     $(".personas_interacciones_positivas_telefono_place").text($(".personas_interacciones_positivas_telefono").val());
-    $(".personas_interacciones_positivas_desktop_place").text($(".personas_interacciones_positivas_desktop").val());
+    $(".personas_interacciones_positivas_dektop_place").text($(".personas_interacciones_positivas_desktop").val());
     
 
     $(".personas_interacciones_negativas_telefono_place").text($(".personas_interacciones_negativas_telefono").val());
-    $(".personas_interacciones_negativas_desktop_place").text($(".personas_interacciones_negativas_desktop").val());
+    $(".personas_interacciones_negativas_dektop_place").text($(".personas_interacciones_negativas_desktop").val());
     
 
     
