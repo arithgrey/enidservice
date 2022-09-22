@@ -168,7 +168,7 @@ class Acceso extends REST_Controller
     {
 
         $pagina = array_unique(array_column($accesos, "pagina"));
-        $response[] = d(d("Paginas a las que nos envían tráfico", "f12 black underline mt-5 mb-2 strong"),13);
+        $response[] = d(d("Páginas a las que nos envían tráfico", "f12 black underline mt-5 mb-2 strong"),13);
         foreach ($pagina as $row) {
 
             if (
@@ -193,7 +193,7 @@ class Acceso extends REST_Controller
     {
 
 
-        $response[] = d("Productos a los que nos envían tráfico", "f11 black underline mt-5 mb-2");
+        $response[] = d(d("Productos a los que nos envían tráfico",  "f12 black underline mt-5 mb-2 strong"),13);
         $productos_listados = [];
         foreach ($accesos as $row) {
 
@@ -233,14 +233,15 @@ class Acceso extends REST_Controller
                     );
                 }
 
-                $row = [$imagen];
+                
+                $row =  [d($imagen, 'mt-2 border-bottom row')];
 
                 $this->table->add_row($row);
             }
         }
 
         $response[] = $this->table->generate();
-        return append($response);
+        return d($response,12);
     }
     function franja_horaria_GET()
     {
