@@ -1369,7 +1369,7 @@ function opciones_acceso($in_session)
 
 
         $whatsApp = a_enid(
-            "WhatsApp",
+            "Contáctanos en WhatsApp",
             [
                 "href" => path_enid('whatsapp_ayuda', 0, 1),
                 "class" => "white whatsapp_trigger borde_amarillo",
@@ -1379,12 +1379,12 @@ function opciones_acceso($in_session)
 
         $response = d(
             flex(
-                
-                "Agenda tu pedido y paga hasta tu entrega! en CDMX entrega gratis!",
                 $whatsApp,
+                "En CDMX entrega gratis!",                
                 _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom'),
-                "mx-auto white fp7 col-xs-7 text-uppercase",
-                "col-xs-5 strong mr-2"
+                
+                "col-xs-8 strong",
+                "mx-auto white fp7 col-xs-4 text-uppercase",
 
             ),
             "d-block d-md-none"
@@ -1802,7 +1802,7 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-
+    $response[] = d(d("Agenda tu pedido y paga hasta tu entrega!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);
     $opciones[] = d(
         a_enid("POPULARES", [
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
@@ -1821,7 +1821,8 @@ function opciones_adicionales_navegacion()
     ]), "text-capitalize  col-xs-4 text-center");
     
 
-    return d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
+    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
+    return append($response);
 }
 function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
 {
