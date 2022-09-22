@@ -1820,6 +1820,18 @@ function opciones_adicionales_navegacion()
         "class" => "black"
     ]), "text-capitalize  col-xs-4 text-center");
     
+    $opciones[] = d(a_enid("CLIENTES", [
+        "href" => path_enid("clientes"),
+        "class" => "black"
+    ]), "text-capitalize  col-xs-4 text-center");
+    
+    $opciones[] = d(a_enid("FORMAS DE PAGO", [
+        "href" => path_enid("forma_pago"),
+        "class" => "black"
+    ]), "text-capitalize  col-xs-6 text-center");
+
+    
+
 
     $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
     return append($response);
