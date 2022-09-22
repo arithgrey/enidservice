@@ -168,7 +168,7 @@ class Acceso extends REST_Controller
     {
 
         $pagina = array_unique(array_column($accesos, "pagina"));
-        $response[] = d("Paginas a las que nos envían tráfico", "f11 black underline mt-5 mb-2");
+        $response[] = d(d("Paginas a las que nos envían tráfico", "f12 black underline mt-5 mb-2 strong"),13);
         foreach ($pagina as $row) {
 
             if (
@@ -180,14 +180,14 @@ class Acceso extends REST_Controller
 
             ) {
 
-                $row = [$row];
+                $row =  [d($row, 'mt-2 border-bottom row')];
 
                 $this->table->add_row($row);
             }
         }
 
         $response[] = $this->table->generate();
-        return append($response);
+        return d($response,12);
     }
     function productos($accesos)
     {
