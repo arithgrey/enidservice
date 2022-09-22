@@ -1720,7 +1720,7 @@ class Servicio extends REST_Controller
 
             $articulos = $this->serviciosmodel->get_productos_solicitados($param);
          
-            $response[]  = d("Busquedas del día","underline f11 black ");
+            $response[]  = d("Busquedas del día","f12 black underline mt-5 mb-2 strong");
             foreach ($articulos as $row) {
 
                 $response[] = d($row["keyword"],'border p-1 border-dark col-sm-3');
