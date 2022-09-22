@@ -495,11 +495,11 @@ class serviciosmodel extends CI_Model
         switch ($param["order"]) {
                 /*Novedades primero*/
             case 1:
-                return " ORDER BY fecha_registro DESC , deseado DESC , vista DESC";
+                return " ORDER BY precio DESC, fecha_registro DESC , deseado DESC , vista DESC";
                 break;
 
             case 2:
-                return " ORDER BY deseado DESC , vista  DESC";
+                return " ORDER BY precio DESC, deseado DESC , vista  DESC";
                 break;
                 
                 /*Calificado*/
@@ -508,7 +508,7 @@ class serviciosmodel extends CI_Model
                 break;
 
             case 4:
-                return " ORDER BY deseado DESC , vista DESC, valoracion DESC";
+                return " ORDER BY precio DESC, deseado DESC , vista DESC, valoracion DESC";
                 break;
 
             case 5:
