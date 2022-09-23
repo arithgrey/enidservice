@@ -61,6 +61,15 @@ $("footer").ready(() => {
     $(".whatsapp_trigger").click(function (){
         log_operaciones_externas(17);
     });
+    $(".click_facebook_clientes").click(function () {
+        log_operaciones_externas(18);
+    });
+    $(".click_amazon_clientes").click(function () {
+        log_operaciones_externas(19);
+    });
+    $(".click_instagram_clientes").click(function () {
+        log_operaciones_externas(20);
+    });
 
 
 });
