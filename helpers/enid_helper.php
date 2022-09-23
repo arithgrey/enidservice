@@ -1185,7 +1185,7 @@ function footer_opciones()
         [
             'href' => path_enid('facebook', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5'
+            'class' => 'ml-5 click_facebook_clientes'
         ]
     );
     $sociales[] = a_enid(
@@ -1193,7 +1193,7 @@ function footer_opciones()
         [
             'href' => path_enid('instagram', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3'
+            'class' => 'ml-5 mt-3 click_instagram_clientes'
         ]
     );
 
