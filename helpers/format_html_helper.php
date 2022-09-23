@@ -1814,7 +1814,7 @@ function opciones_populares()
     $response[] = a_enid(
         "AFILIADOS",
         [
-            "class" => "white  fp8 frecuentes border-right-enid",
+            "class" => "white  fp8 frecuentes",
             "href" => path_enid("sobre_vender")
         ]
     );
@@ -1825,7 +1825,7 @@ function opciones_populares()
         [
             'href' => path_enid('facebook', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 white  mt-1'
+            'class' => 'ml-5 white  mt-1 click_facebook_clientes'
         ]
     );
     $response[] = a_enid(
@@ -1833,7 +1833,7 @@ function opciones_populares()
         [
             'href' => path_enid('instagram', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 white mt-1'
+            'class' => 'ml-5 white mt-1 click_instagram_clientes'
         ]
     );
 
