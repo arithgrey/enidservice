@@ -39,7 +39,7 @@ function accesos_enid()
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
         "whatsapp" => "https://wa.me/c/5215552967027",
         "whatsapp_ayuda" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20Me%20puedes%20ayudar,%20vi%20esto%20desde%20su%20p%C3%A1gina%20web",
-        "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+52156358180&text=Hola!%20quiero%20agendar%20mi%20primer%20pedido%20aplicando%20mi%20descuento",
+        "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+56358180&text=Hola!%20quiero%20agendar%20mi%20primer%20pedido%20aplicando%20mi%20descuento",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
         "top_competencias_entregas" => "competencias_entregas/?tipo_top=",
