@@ -1367,11 +1367,43 @@ function opciones_acceso($in_session)
     $response = "";
     if ($in_session < 1) {
 
+        $redes[] = a_enid(
+            icon(_text_(_facebook_icon,'fa-2x white')),
+            [
+                'href' => path_enid('facebook', 0, 1),
+                'target' => 'black', 
+                'class' => 'click_facebook_clientes'
+            ]
+        );
+        $redes[] = a_enid(
+            icon(_text_(_instagram_icon,'fa-2x white')),
+            [
+                'href' => path_enid('instagram', 0, 1),
+                'target' => 'black',
+                'class' => 'ml-3 click_instagram_clientes'
+            ]
+        );
+    
+        $redes[] = a_enid(
+            icon(_text_(_pinterest_icon,'fa-2x white')),
+            [
+                'href' => path_enid('pinterest', 0, 1),
+                'target' => 'black',
+                'class' => 'ml-3 '
+            ]
+        );
+    
+    
+        $texto = _text_(
+            d(_text_(span("5% de descuento",'f12 strong white'),
+            "en tu primer pedido enviandonos", span(" WhatsApp aquí!", 'strong white f13'))),
+             
+        );
 
         $whatsApp = a_enid(
-            "Contáctanos en WhatsApp",
+            $texto,
             [
-                "href" => path_enid('whatsapp_ayuda', 0, 1),
+                "href" => path_enid('whatsapp_descuento', 0, 1),
                 "class" => "white whatsapp_trigger borde_amarillo",
                 "target" => "_black"
             ]
@@ -1380,11 +1412,11 @@ function opciones_acceso($in_session)
         $response = d(
             flex(
                 $whatsApp,
-                "En CDMX entrega gratis!",                
-                _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom'),
+                d($redes,'d-flex'),                
+                _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom mt-1'),
                 
-                "col-xs-8 strong",
-                "mx-auto white fp7 col-xs-4 text-uppercase",
+                "col-xs-9 fp9",
+                "mx-auto white fp7 col-xs-3 text-uppercase",
 
             ),
             "d-block d-md-none"
@@ -1782,16 +1814,35 @@ function opciones_populares()
     $response[] = a_enid(
         "AFILIADOS",
         [
-            "class" => "white  fp8  border-right frecuentes border-right-enid",
+            "class" => "white  fp8 frecuentes border-right-enid",
             "href" => path_enid("sobre_vender")
         ]
     );
 
+
     $response[] = a_enid(
-        "Simulador de ganacias",
+        icon(_text_(_facebook_icon,'white')),
         [
-            "class" => "white  fp8  frecuentes text-uppercase",
-            "href" => path_enid("simulador")
+            'href' => path_enid('facebook', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5 white  mt-1'
+        ]
+    );
+    $response[] = a_enid(
+        icon(_text_(_instagram_icon,'white')),
+        [
+            'href' => path_enid('instagram', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5 white mt-1'
+        ]
+    );
+
+    $response[] = a_enid(
+        icon(_text_(_pinterest_icon,'white')),
+        [
+            'href' => path_enid('pinterest', 0, 1),
+            'target' => 'black',
+            'class' => 'ml-5 white mt-1'
         ]
     );
 
@@ -1802,13 +1853,13 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $response[] = d(d("Agenda tu pedido y paga hasta tu entrega!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);
+    $response[] = d(d("Agenda tu pedido y paga hasta tu entrega!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);    
     $opciones[] = d(
         a_enid("POPULARES", [
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
             "class" => "black"
         ]),
-        "text-capitalize col-xs-4 text-center"
+        "text-capitalize col-xs-4 "
     );
     $opciones[] = d(a_enid("NOVEDADES", [
         "href" => path_enid("search","/?q2=0&q=&order=1"),
@@ -1819,21 +1870,22 @@ function opciones_adicionales_navegacion()
         "href" => path_enid("promociones"),
         "class" => "black"
     ]), "text-capitalize  col-xs-4 text-center");
-    
-    $opciones[] = d(a_enid("CLIENTES", [
+
+
+   
+    $opciones[] = d(a_enid("ÚLTIMOS CLIENTES", [
         "href" => path_enid("clientes"),
         "class" => "black"
-    ]), "text-capitalize  col-xs-4 text-center");
-    
+    ]), "text-capitalize  col-xs-6");
+
     $opciones[] = d(a_enid("FORMAS DE PAGO", [
         "href" => path_enid("forma_pago"),
         "class" => "black"
-    ]), "text-capitalize  col-xs-6 text-center");
-
+    ]), "text-capitalize  col-xs-6");
     
 
 
-    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light');
+    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom ');
     return append($response);
 }
 function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
