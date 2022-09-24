@@ -1396,7 +1396,7 @@ function opciones_acceso($in_session)
     
         $texto = _text_(
             d(_text_(span("5% de descuento",'f12 strong white'),
-            "en tu primer pedido enviandonos", span(" WhatsApp aquí!", 'strong white f13'))),
+            "en tu primer compra al enviar", span(" WhatsApp aquí!", 'strong white f12'))),
              
         );
 
@@ -1899,14 +1899,14 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
 
         if (!$is_mobile) {
 
-
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
-            $response[] = d(p(_text_('Agenda tu pedido y paga hasta tu entrega! si vives en CDMX' ), 'white'), 'd-md-flex justify-content-end mr-5');            
+            $response[] = d(p(_text_('Agenda tu pedido y paga hasta tu entrega! en CDMX' ), 'white'), 'd-md-flex justify-content-end mr-5');                        
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
         } else {
             $response[] = get_logo($in_session);
             $response[] = opciones_adicionales_navegacion();
+            
         }
     } else {
 
@@ -1931,13 +1931,14 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
         }
     }
 
-    $navegacion = d(
+    $navegacion[] = d(
         $response,
         [
             'id' => "flipkart-navbar",
             'class' => "col-md-12"
         ]
     );
+    
 
     return d($navegacion, "row fixed-top");
 }

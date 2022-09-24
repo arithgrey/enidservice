@@ -1155,6 +1155,23 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
+            $texto = _text_(
+                d(_text_(span("5% de descuento",'strong white'),
+                "en tu primer compra al enviar", span(" mensaje aquí!", 'strong white'))),
+                 
+            );
+    
+            $mensaje_messenger = a_enid(
+                $texto,
+                [
+                    "href" => path_enid('facebook_descuento', 0, 1),
+                    "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1 f11 mt-3",
+                    "target" => "_black"
+                ]
+                );
+
+                $response[] = $mensaje_messenger;
+
         }
 
         //$response[] = formas_acionales_compra($data);
