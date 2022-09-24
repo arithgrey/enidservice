@@ -61,19 +61,19 @@ if (!function_exists('invierte_date_time')) {
         $totales_accesos[] = d(flex("Ingreso a procesar compra", place("procesar_compra_input"), _between, "","strong f11"));            
                 
         /*17 click_whatsapp_input*/
-        $totales_accesos[] = d(flex("Click en WhatsApp", place("click_whatsapp_place"), _between, "","strong f11"));            
+        $totales_accesos[] = d(flex("Click en WhatsApp", place("click_whatsapp_place"), _text_(_between,"f12 black"), "","strong"));            
         /*22 Click en producto recompensa*/
-        $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _between, "","strong f11"));            
+        $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _text_(_between,"f12 black"), "","strong f11"));            
         /*24  click_producto_recompensa_input*/
         $totales_accesos[] = d(flex("Ver fotos de clientes", place("click_en_ver_fotos_clientes_place"), _between, "","strong f11"));            
 
         /*25 click_en_formas_pago_input*/
         $totales_accesos[] = d(flex("Ver formas de pago", place("click_en_formas_pago_place"), _between, "","strong f11"));            
         /*26 Click en agregar carrito promoción desde el producto*/
-        $totales_accesos[] = d(flex("Agregar carrito promoción", place("click_en_agregar_carrito_promocion_place"), _between, "","strong f11"));            
+        $totales_accesos[] = d(flex("Agregar carrito promoción", place("click_en_agregar_carrito_promocion_place"), _text_(_between,"f12 black"), "","strong f11"));            
 
         /*27 Click en agregar carrito desde el producto*/
-        $totales_accesos[] = d(flex("Agregar carrito producto", place("click_en_agregar_carrito_place"), _between, "","strong f11"));            
+        $totales_accesos[] = d(flex("Agregar carrito producto", place("click_en_agregar_carrito_place"), _text_(_between,"f12 black"), "","strong f11"));            
 
         
         
