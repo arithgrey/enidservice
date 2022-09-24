@@ -135,7 +135,9 @@ class Acceso_model extends CI_Model
         a.ip,
         a.is_mobile,
         a.in_session,
-        p.pagina from
+        a.pagina_id,
+        p.pagina
+         from
         acceso a 
         INNER JOIN pagina p
         ON p.id = a.pagina_id

@@ -62,6 +62,8 @@ if (!function_exists('invierte_date_time')) {
                 
         /*17 click_whatsapp_input*/
         $totales_accesos[] = d(flex("Click en WhatsApp", place("click_whatsapp_place"), _text_(_between,"f12 black"), "","strong"));            
+        /*43 click en trigger de facebook*/
+        $totales_accesos[] = d(flex("Click en trigger de facebook", place("click_facebook_trigger_place"), _text_(_between,"f12 black"), "","strong"));            
         /*22 Click en producto recompensa*/
         $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _text_(_between,"f12 black"), "","strong f11"));            
         /*24  click_producto_recompensa_input*/
