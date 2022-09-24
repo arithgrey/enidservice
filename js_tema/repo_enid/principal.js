@@ -301,6 +301,9 @@ let response_accesos_metricas = function (data) {
 
     /*17 click_whatsapp_input*/
     $(".click_whatsapp_place").text($(".click_whatsapp_input").val());
+    /*43 click_whatsapp_input*/
+    $(".click_facebook_trigger_place").text($(".click_facebook_trigger_input").val());
+
     /**22 **/ 
     $(".click_producto_recompensa_place").text($(".click_producto_recompensa_input").val());
     /*24 */

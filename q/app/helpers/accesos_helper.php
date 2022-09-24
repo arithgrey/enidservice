@@ -37,9 +37,13 @@ if (!function_exists('invierte_date_time')) {
                     $fecha_registro = $acceso["fecha_registro"];
                     $id_servicio = $acceso["id_servicio"];
                     $ip = $acceso["ip"];
+                    $id_pagina = $acceso["pagina_id"];
 
+                    $paginas_acciones_de_compra = [1,6,7,17,18,19,24,25,26,27,42,43];
+                    $extra = (in_array($id_pagina , $paginas_acciones_de_compra))? "blue_enid":"";
                     $contenido = [];
-                    $contenido[] = d($pagina, "strong fp9 row");
+                    
+                    $contenido[] = d($pagina, _text_("strong fp9 row", $extra ));
 
                     if (strlen($http_referer) > 5) {
                         $link = a_enid("Link entrante", ["href" => $http_referer]);

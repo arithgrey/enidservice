@@ -382,7 +382,9 @@ class Acceso extends REST_Controller
                     case 27:
                         $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_input", "value" => $numero_accesos]);
                         break;
-
+                    case 43:
+                            $totales_input[] = hiddens(["class" => "click_facebook_trigger_input", "value" => $numero_accesos]);
+                            break;
                     default:
 
                         break;
