@@ -115,9 +115,11 @@ class Acceso_model extends CI_Model
                             SUM( CASE WHEN is_mobile < 1 THEN 1 ELSE 0 END )desktop
                             from acceso
                         WHERE 
-                        DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
+                        DATE(fecha_registro ) 
+                        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
                         AND 
                         in_session < 1 
+                        and pagina_id in(1,6,7,17,18,19,24,25,26,27,42,43)
                         GROUP BY 
                         HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
 

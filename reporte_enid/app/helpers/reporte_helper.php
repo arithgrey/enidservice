@@ -467,7 +467,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $link_accesos_franja_horaria = tab(
+        $link_accesos_time_line = tab(
             text_icon("fa-check-circle", "Accesos Timeline"),
             '#tab_accesos_time_line',
             [
@@ -670,6 +670,8 @@ if (!function_exists('invierte_date_time')) {
             $link_accesos_pagina_web_dominio
             ,
             $link_accesos_franja_horaria
+            ,
+            $link_accesos_time_line
             ,
             $link_funnel
             
