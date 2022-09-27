@@ -257,30 +257,48 @@ class Acceso extends REST_Controller
 
             $heading = [
                 "Horario",
-                "Accesos",
+                "Usuarios externos",
+                "Interacciones",
                 "Mobile",
-                "Desktop"
+                "Desktop",
+                "artículos distintos consultados"
             ];
 
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
 
-            foreach ($accesos as $row) {
+            foreach ($accesos["franja"] as $row) {
 
                 $hora = $row["horario"];
                 $total = $row["total"];
                 $mobile = $row["mobile"];
-                $desktop = $row["desktop"];
-
+                $desktop = $row["desktop"];                
                 $fecha_hora = _text($hora, ':00 hrs');
+
+                
+                $ips  = [];
+                $productos  = [];
+                foreach($accesos["adicionales"] as $row2){
+                    
+                    if($hora === $row2["horario"]){
+                        $ips[] = $row2["ip"];                        
+                        $productos[] = $row2["id_servicio"];                        
+                    }                    
+                    
+                }
+                
+                $usuarios_externos = count(array_unique($ips));
+                $servicios_distintos = count(array_unique($productos));
+
                 $row = [
                     $fecha_hora,
+                    $usuarios_externos,
                     $total,
                     $mobile,
-                    $desktop
+                    $desktop,
+                    $servicios_distintos
                 ];
-
                 $this->table->add_row($row);
             }
 
