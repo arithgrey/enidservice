@@ -109,7 +109,7 @@ class Acceso_model extends CI_Model
     {
         
         $query_get = _text_("SELECT 
-                            HOUR(DATE_ADD(fecha_registro, INTERVAL -6 HOUR))horario, 
+                            HOUR(DATE_ADD(fecha_registro, INTERVAL -5 HOUR))horario, 
                             count(0)total ,
                             SUM( CASE WHEN is_mobile > 0 THEN 1 ELSE 0 END )mobile,
                             SUM( CASE WHEN is_mobile < 1 THEN 1 ELSE 0 END )desktop
