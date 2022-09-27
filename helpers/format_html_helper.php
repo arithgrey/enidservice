@@ -1404,7 +1404,7 @@ function opciones_acceso($in_session)
             $texto,
             [
                 "href" => path_enid('whatsapp_descuento', 0, 1),
-                "class" => "white whatsapp_trigger borde_amarillo",
+                "class" => "white whatsapp_trigger borde_amarillo mb-2 mt-2",
                 "target" => "_black"
             ]
             );
@@ -1416,13 +1416,13 @@ function opciones_acceso($in_session)
                 _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom mt-1'),
                 
                 "col-xs-9 fp9",
-                "mx-auto white fp7 col-xs-3 text-uppercase",
+                "mx-auto white fp7 col-xs-3 p-0 text-uppercase",
 
             ),
             "d-block d-md-none"
         );
     }
-    return d(d($response,13),12);
+    return append($response);
 }
 
 
