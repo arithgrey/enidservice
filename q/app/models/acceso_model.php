@@ -137,8 +137,7 @@ class Acceso_model extends CI_Model
                         AND 
                         in_session < 1 
                         and pagina_id in(1,6,7,17,18,19,22,24,25,26,27,42,43)
-                        GROUP BY 
-                        HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
+                         ORDER BY HOUR(fecha_registro) DESC");
 
 
         $response["adicionales"]=  $this->db->query($query_get)->result_array();
