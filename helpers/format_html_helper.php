@@ -1395,8 +1395,8 @@ function opciones_acceso($in_session)
     
     
         $texto = _text_(
-            d(_text_(span("5% de descuento",'f12 strong white'),
-            "en tu primer compra al enviar", span(" WhatsApp aquí!", 'strong white f12'))),
+            d(_text_(span("10% de descuento",'strong white'),
+            "en tu primer pedido envía", span("WhatsApp aquí!", 'strong white '),"valido hasta mañana")),
              
         );
 
