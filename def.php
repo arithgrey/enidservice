@@ -1,6 +1,8 @@
 <?php
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
+date_default_timezone_set("America/Mexico_City");
+
 define('ENVIRONMENT', isset($_SERVER['CI_ENV']) ? $_SERVER['CI_ENV'] : 'development');
 switch (ENVIRONMENT) {
 	case 'development':		
