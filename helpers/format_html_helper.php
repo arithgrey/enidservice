@@ -1364,7 +1364,7 @@ function form_busqueda_productos()
 
 function opciones_acceso($in_session)
 {
-    $response = "";
+    $response = [];
     if ($in_session < 1) {
 
         $redes[] = a_enid(
@@ -1409,7 +1409,7 @@ function opciones_acceso($in_session)
             ]
             );
 
-        $response = d(
+        $response[] = d(
             flex(
                 $whatsApp,
                 d($redes,'d-flex'),                

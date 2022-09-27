@@ -4,8 +4,8 @@
 if (!function_exists('invierte_date_time')) {
 
     function page_sigin($action)
-    {
-
+    {   
+        
         $r[] = nuevo_usuario();
         $r[] = recuperacion();
         $r[] = frm_acceso($action);
@@ -16,9 +16,9 @@ if (!function_exists('invierte_date_time')) {
             ],
             1
         );
-
+            
         return d($r, 4, 1);
-
+        
     }
 
     function frm_acceso($action)

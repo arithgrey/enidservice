@@ -15,8 +15,7 @@ class Home extends CI_Controller
         $param = $this->input->get();
         $this->validate_user_sesssion();
         $data = $this->app->session();        
-        $data = $this->app->cssJs($data, "login");        
-        $data['footer_visible'] = false;
+        $data = $this->app->cssJs($data, "login");                
         $this->app->pagina($data, page_sigin(prm_def($param, "action")), 1);
 
     }

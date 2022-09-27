@@ -341,8 +341,7 @@ class Paths
                 ],
                 "url_img_post" => "promo.png",
                 "desc_web" => "COMPRA Y VENDE EN ENID SERVICE",
-                "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE ",
-                "clasificaciones_departamentos" => "",
+                "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE ",                
                 "titulo" => "",
                 "pagina" => 4
 
