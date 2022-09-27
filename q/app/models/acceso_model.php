@@ -109,17 +109,17 @@ class Acceso_model extends CI_Model
     {
         
         $query_get = _text_("SELECT 
-                            HOUR(fecha_registro)horario, 
+                            HOUR(DATE_ADD(fecha_registro, INTERVAL -6 HOUR))horario, 
                             count(0)total ,
                             SUM( CASE WHEN is_mobile > 0 THEN 1 ELSE 0 END )mobile,
                             SUM( CASE WHEN is_mobile < 1 THEN 1 ELSE 0 END )desktop
                             from acceso
                         WHERE 
-                        DATE(fecha_registro ) 
+                        DATE(DATE_ADD(fecha_registro, INTERVAL -6 HOUR) ) 
                         BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
                         AND 
                         in_session < 1 
-                        and pagina_id in(1,6,7,17,18,19,24,25,26,27,42,43)
+                        and pagina_id in(1,6,7,17,18,19,22,24,25,26,27,42,43)
                         GROUP BY 
                         HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
 
