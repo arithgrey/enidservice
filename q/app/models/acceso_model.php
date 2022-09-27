@@ -111,6 +111,7 @@ class Acceso_model extends CI_Model
         $query_get = _text_("SELECT 
                             HOUR(DATE_ADD(fecha_registro, INTERVAL -5 HOUR))horario, 
                             count(0)total ,
+                            id_servicio,
                             SUM( CASE WHEN is_mobile > 0 THEN 1 ELSE 0 END )mobile,
                             SUM( CASE WHEN is_mobile < 1 THEN 1 ELSE 0 END )desktop
                             from acceso
@@ -124,7 +125,25 @@ class Acceso_model extends CI_Model
                         HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
 
 
-        return $this->db->query($query_get)->result_array();
+        $response["franja"]=  $this->db->query($query_get)->result_array();
+
+        $query_get = _text_("SELECT 
+                            HOUR(DATE_ADD(fecha_registro, INTERVAL -5 HOUR))horario, 
+                            a.*
+                            from acceso a 
+                        WHERE 
+                        DATE(DATE_ADD(fecha_registro, INTERVAL -6 HOUR) ) 
+                        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
+                        AND 
+                        in_session < 1 
+                        and pagina_id in(1,6,7,17,18,19,22,24,25,26,27,42,43)
+                        GROUP BY 
+                        HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
+
+
+        $response["adicionales"]=  $this->db->query($query_get)->result_array();
+        return $response;
+
     }
 
     function accesos_time_line($fecha_inicio, $fecha_termino)
