@@ -262,7 +262,8 @@ class Acceso extends REST_Controller
                 "Interacciones",
                 "Mobile",
                 "Desktop",
-                "artículos distintos consultados"
+                "artículos distintos consultados", 
+                "Acciones Lead Magnet"
             ];
 
 
@@ -271,6 +272,7 @@ class Acceso extends REST_Controller
 
             foreach ($accesos["franja"] as $row) {
 
+                
                 $hora = $row["horario"];
                 $total = $row["total"];
                 $mobile = $row["mobile"];
@@ -280,11 +282,18 @@ class Acceso extends REST_Controller
                 
                 $ips  = [];
                 $productos  = [];
+                $acciones_lead_magnet = [];
                 foreach($accesos["adicionales"] as $row2){
                     
                     if($hora === $row2["horario"]){
                         $ips[] = $row2["ip"];                        
-                        $productos[] = $row2["id_servicio"];                        
+                        $productos[] = $row2["id_servicio"];         
+                        $pagina_id = $row2["pagina_id"];
+
+                        /*Acciones Lead Magnet*/
+                        if($pagina_id == 43 || $pagina_id == 17 ){
+                            $acciones_lead_magnet[]  = 1;
+                        }               
                     }                    
                     
                 }
@@ -294,6 +303,7 @@ class Acceso extends REST_Controller
 
                 $personas_meta = (100 - $usuarios_externos);
                 $personas_meta = d($personas_meta, "red_enid");
+                $numero_acciones_lead_magnet = d(count($acciones_lead_magnet),"blue_enid");
 
                 $row = [
                     $fecha_hora,
@@ -302,7 +312,9 @@ class Acceso extends REST_Controller
                     $total,
                     $mobile,
                     $desktop,
-                    $servicios_distintos
+                    $servicios_distintos,
+                    $numero_acciones_lead_magnet
+
                 ];
                 $this->table->add_row($row);
             }
