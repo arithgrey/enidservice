@@ -42,6 +42,12 @@
     cursor: pointer;
 }
 
+.borde_rojo {
+    border: solid 2px #f5089a;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
+
 .borde_amarillo:hover {
     background: #005bac;
 }
