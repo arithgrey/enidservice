@@ -1878,13 +1878,13 @@ function opciones_adicionales_navegacion()
     $opciones[] = d(a_enid("ÚLTIMOS CLIENTES", [
         "href" => path_enid("clientes"),
         "class" => "black"
-    ]), "text-capitalize  col-xs-6");
+    ]), "text-capitalize  col-xs-5");
 
     $opciones[] = d(a_enid("Como marcar tu abdomen", [
         "href" => path_enid("enid_service_facebook_videos",0,1),
         "class" => "black",
         'target' => 'black',
-    ]), "text-uppercase click_facebook_clientes  col-xs-6");
+    ]), "text-uppercase click_facebook_clientes  col-xs-7");
     
 
 
