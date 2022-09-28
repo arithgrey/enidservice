@@ -1395,8 +1395,8 @@ function opciones_acceso($in_session)
     
     
         $texto = _text_(
-            d(_text_(span("10% de descuento",'strong white'),
-            "en tu primer pedido al enviar", span("WhatsApp aquí", 'strong white '),"valido 2 días")),
+            d(_text_(span("8% de descuento,",'strong white'),
+            "envía WhatsApp ", span("aquí", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline '),"para hacerlo valido, caduca en 2 días")),
              
         );
 
@@ -1415,7 +1415,7 @@ function opciones_acceso($in_session)
                 d($redes,'d-flex'),                
                 _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom mt-1'),
                 
-                "col-xs-9 fp9",
+                "col-xs-9 fp9 ",
                 "mx-auto white fp7 col-xs-3 p-0 text-uppercase",
 
             ),
