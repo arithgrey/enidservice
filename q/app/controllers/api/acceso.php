@@ -258,6 +258,7 @@ class Acceso extends REST_Controller
             $heading = [
                 "Horario",
                 "Usuarios externos",
+                "Personas para llegar a la meta",
                 "Interacciones",
                 "Mobile",
                 "Desktop",
@@ -291,9 +292,13 @@ class Acceso extends REST_Controller
                 $usuarios_externos = count(array_unique($ips));
                 $servicios_distintos = count(array_unique($productos));
 
+                $personas_meta = (100 - $usuarios_externos);
+                $personas_meta = d($personas_meta, "red_enid");
+
                 $row = [
                     $fecha_hora,
                     $usuarios_externos,
+                    $personas_meta,
                     $total,
                     $mobile,
                     $desktop,
