@@ -120,7 +120,7 @@ class Acceso_model extends CI_Model
                         BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
                         AND 
                         in_session < 1 
-                        and pagina_id in(1,6,7,17,18,19,22,24,25,26,27,42,43)
+                        and pagina_id in(1,3,6,7,17,18,19,22,24,25,26,27,42,43)
                         GROUP BY 
                         HOUR(fecha_registro) ORDER BY HOUR(fecha_registro) DESC");
 
@@ -136,7 +136,7 @@ class Acceso_model extends CI_Model
                         BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'                        
                         AND 
                         in_session < 1 
-                        and pagina_id in(1,6,7,17,18,19,22,24,25,26,27,42,43)
+                        and pagina_id in(1,3,6,7,17,18,19,22,24,25,26,27,42,43)
                          ORDER BY HOUR(fecha_registro) DESC");
 
 
