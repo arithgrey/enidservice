@@ -1157,7 +1157,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $texto = _text_(
                 d(_text_(span("5% de descuento",'strong white'),
-                "en tu primer compra al enviar", span(" mensaje aquí!", 'strong white'))),
+                "en tu primer compra al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline'))),
                  
             );
     
@@ -1165,7 +1165,7 @@ if (!function_exists('invierte_date_time')) {
                 $texto,
                 [
                     "href" => path_enid('facebook_descuento', 0, 1),
-                    "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1 f11 mt-3",
+                    "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3",
                     "target" => "_black"
                 ]
                 );
