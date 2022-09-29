@@ -1393,10 +1393,14 @@ function opciones_acceso($in_session)
             ]
         );
     
-    
-        $texto = _text_(
-            d(_text_(span("5% de descuento,",'strong white'),
-            "envía WhatsApp ", span("aquí", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline '),"y tenlo vigente los siguientes 3 días")),
+        $texto_lead = d("Únete a la lista y consigue un 10% de descuento",'white');
+        $registro = d("REGÍSTRATE", 'bg_white black borde_rojo font-weight-bold underline ');
+        $texto = flex(
+            $texto_lead,
+            $registro,
+            _between,
+            "col-xs-7 p-0",
+            "col-xs-5 p-0"
              
         );
 
