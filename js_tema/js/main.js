@@ -22,12 +22,17 @@ $("footer").ready(() => {
 
     $("#form_contacto").submit(envia_comentario);
     $(".enid").click(metricas_perfil);
+
     $(".whatsapp_trigger").click(function (){
         log_operaciones_externas(17);
     });
     $(".click_facebook_clientes").click(function () {
         log_operaciones_externas(18);
     });
+    $(".click_facebook_videos_abdomen").click(function () {
+        log_operaciones_externas(44);
+    });
+
     $(".click_amazon_clientes").click(function () {
         log_operaciones_externas(20);
     });
@@ -37,7 +42,10 @@ $("footer").ready(() => {
     $(".facebook_trigger").click(function () {
         log_operaciones_externas(43);
     });
-    
+    $(".click_pinterest_clientes").click(function () {
+        log_operaciones_externas(45);
+    });
+
 
     metricas_perfil();
     set_titulo_web(get_parameter(".titulo_web"));

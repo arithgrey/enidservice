@@ -81,6 +81,17 @@ if (!function_exists('invierte_date_time')) {
         $totales_accesos[] = d(flex("Iteracciones negativas en desktop", place("personas_interacciones_negativas_dektop_place"),  _text_(_between,"red_enid"), "","strong f11"));       
         $totales_accesos[] = d(flex("Cancelaciones", place("numero_cancelaciones_place"), _text_(_between, "f11 red_enid")));      
 
+        /*18 click en trigger de facebook*/
+        $totales_accesos[] = d(flex("Ir a Facebook", place("click_pagina_facebook_place"), _text_(_between,"f12 black"), "","strong"));            
+        /*19 */
+        $totales_accesos[] = d(flex("Ir a Instagram", place("click_pagina_instagram_place"), _text_(_between,"f12 black"), "","strong"));            
+        /*45 */
+        $totales_accesos[] = d(flex("Ir a Pinterest", place("click_pagina_pinterest_place"), _text_(_between,"f12 black"), "","strong"));                  
+        /*18 Click en abdomen*/
+        $totales_accesos[] = d(flex("Como marcar abdomen", place("click_abdomen_place"), _text_(_between,"f12 black"), "","strong"));            
+
+
+
         $response[] = d($totales_accesos,"col-sm-12 border p-4");
         $response[] = d(place("funnel_ventas_hoy"),13);        
         $response[] = place("busquedas_productos");

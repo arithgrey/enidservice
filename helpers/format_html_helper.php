@@ -1389,7 +1389,7 @@ function opciones_acceso($in_session)
             [
                 'href' => path_enid('pinterest', 0, 1),
                 'target' => 'black',
-                'class' => 'ml-3 '
+                'class' => 'ml-3 click_pinterest_clientes '
             ]
         );
     
@@ -1814,7 +1814,7 @@ function opciones_populares()
     $response[] = a_enid(
         "Como marcar tu abdomen",
         [
-            "class" => "white  fp8 frecuentes text-uppercase click_facebook_clientes",
+            "class" => "white  fp8 frecuentes text-uppercase click_facebook_videos_abdomen",
             "href" => path_enid("enid_service_facebook_videos",0,1),
             "target" =>"_black"
             
@@ -1844,7 +1844,7 @@ function opciones_populares()
         [
             'href' => path_enid('pinterest', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 white mt-1'
+            'class' => 'ml-5 white mt-1 click_pinterest_clientes'
         ]
     );
 
@@ -1884,7 +1884,7 @@ function opciones_adicionales_navegacion()
         "href" => path_enid("enid_service_facebook_videos",0,1),
         "class" => "black",
         'target' => 'black',
-    ]), "text-uppercase click_facebook_clientes  col-xs-7");
+    ]), "text-uppercase click_facebook_videos_abdomen  col-xs-7");
     
 
 

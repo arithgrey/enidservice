@@ -315,6 +315,17 @@ let response_accesos_metricas = function (data) {
     /*27*/
     $(".click_en_agregar_carrito_place").text($(".click_en_agregar_carrito_input").val());
     
+    /*45 ir a pinteres*/
+    $(".click_pagina_pinterest_place").text($(".click_pinteres_input").val());
+    /*44 abdomen*/
+    $(".click_abdomen_place").text($(".click_abdomen_input").val());
+
+
+    /*Ir a Facebook*/
+    $(".click_pagina_facebook_place").text($(".click_facebook_input").val());
+    /*Ir a instagram*/
+    $(".click_pagina_instagram_place").text($(".click_instagram_input").val());
+
     
 }
 
