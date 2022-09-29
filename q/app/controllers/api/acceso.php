@@ -143,7 +143,7 @@ class Acceso extends REST_Controller
     {
 
         $dominios = array_unique(array_column($accesos, "http_referer"));
-        $response[] = d(d("Sitios que nos mandan tráfico", "f12 black underline mt-5 mb-2 strong"),13);
+        $response[] = d(d("Sitios que nos mandan tráfico", "f12 black underline mt-5 mb-2 strong"), 13);
         foreach ($dominios as $row) {
 
             if (
@@ -162,13 +162,13 @@ class Acceso extends REST_Controller
         }
 
         $response[] = $this->table->generate();
-        return d($response,12);
+        return d($response, 12);
     }
     function paginas($accesos)
     {
 
         $pagina = array_unique(array_column($accesos, "pagina"));
-        $response[] = d(d("Páginas a las que nos envían tráfico", "f12 black underline mt-5 mb-2 strong"),13);
+        $response[] = d(d("Páginas a las que nos envían tráfico", "f12 black underline mt-5 mb-2 strong"), 13);
         foreach ($pagina as $row) {
 
             if (
@@ -187,13 +187,13 @@ class Acceso extends REST_Controller
         }
 
         $response[] = $this->table->generate();
-        return d($response,12);
+        return d($response, 12);
     }
     function productos($accesos)
     {
 
 
-        $response[] = d(d("Productos a los que nos envían tráfico",  "f12 black underline mt-5 mb-2 strong"),13);
+        $response[] = d(d("Productos a los que nos envían tráfico",  "f12 black underline mt-5 mb-2 strong"), 13);
         $productos_listados = [];
         foreach ($accesos as $row) {
 
@@ -233,7 +233,7 @@ class Acceso extends REST_Controller
                     );
                 }
 
-                
+
                 $row =  [d($imagen, 'mt-2 border-bottom row')];
 
                 $this->table->add_row($row);
@@ -241,7 +241,7 @@ class Acceso extends REST_Controller
         }
 
         $response[] = $this->table->generate();
-        return d($response,12);
+        return d($response, 12);
     }
     function franja_horaria_GET()
     {
@@ -262,7 +262,7 @@ class Acceso extends REST_Controller
                 "Interacciones",
                 "Mobile",
                 "Desktop",
-                "artículos distintos consultados", 
+                "artículos distintos consultados",
                 "Acciones Lead Magnet"
             ];
 
@@ -272,38 +272,37 @@ class Acceso extends REST_Controller
 
             foreach ($accesos["franja"] as $row) {
 
-                
+
                 $hora = $row["horario"];
                 $total = $row["total"];
                 $mobile = $row["mobile"];
-                $desktop = $row["desktop"];                
+                $desktop = $row["desktop"];
                 $fecha_hora = _text($hora, ':00 hrs');
 
-                
+
                 $ips  = [];
                 $productos  = [];
                 $acciones_lead_magnet = [];
-                foreach($accesos["adicionales"] as $row2){
-                    
-                    if($hora === $row2["horario"]){
-                        $ips[] = $row2["ip"];                        
-                        $productos[] = $row2["id_servicio"];         
+                foreach ($accesos["adicionales"] as $row2) {
+
+                    if ($hora === $row2["horario"]) {
+                        $ips[] = $row2["ip"];
+                        $productos[] = $row2["id_servicio"];
                         $pagina_id = $row2["pagina_id"];
 
                         /*Acciones Lead Magnet*/
-                        if($pagina_id == 43 || $pagina_id == 17 ){
+                        if ($pagina_id == 43 || $pagina_id == 17) {
                             $acciones_lead_magnet[]  = 1;
-                        }               
-                    }                    
-                    
+                        }
+                    }
                 }
-                
+
                 $usuarios_externos = count(array_unique($ips));
                 $servicios_distintos = count(array_unique($productos));
 
                 $personas_meta = (100 - $usuarios_externos);
                 $personas_meta = d($personas_meta, "red_enid");
-                $numero_acciones_lead_magnet = d(count($acciones_lead_magnet),"blue_enid");
+                $numero_acciones_lead_magnet = d(count($acciones_lead_magnet), "blue_enid");
 
                 $row = [
                     $fecha_hora,
@@ -397,6 +396,14 @@ class Acceso extends REST_Controller
                     case 17:
                         $totales_input[] = hiddens(["class" => "click_whatsapp_input", "value" => $numero_accesos]);
                         break;
+
+                    case 18:
+                        $totales_input[] = hiddens(["class" => "click_facebook_input", "value" => $numero_accesos]);
+                        break;
+
+                    case 19:
+                        $totales_input[] = hiddens(["class" => "click_instagram_input", "value" => $numero_accesos]);
+                        break;
                     case 21:
                         $totales_input[] = hiddens(["class" => "promociones_input", "value" => $numero_accesos]);
                         break;
@@ -418,8 +425,16 @@ class Acceso extends REST_Controller
                         $totales_input[] = hiddens(["class" => "click_en_agregar_carrito_input", "value" => $numero_accesos]);
                         break;
                     case 43:
-                            $totales_input[] = hiddens(["class" => "click_facebook_trigger_input", "value" => $numero_accesos]);
-                            break;
+                        $totales_input[] = hiddens(["class" => "click_facebook_trigger_input", "value" => $numero_accesos]);
+                        break;
+                    case 44:
+                        $totales_input[] = hiddens(["class" => "click_abdomen_input", "value" => $numero_accesos]);
+                        break;
+                    case 45:
+                        $totales_input[] = hiddens(["class" => "click_pinteres_input", "value" => $numero_accesos]);
+                        break;
+
+
                     default:
 
                         break;

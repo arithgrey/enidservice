@@ -1202,7 +1202,7 @@ function footer_opciones()
         [
             'href' => path_enid('pinterest', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3'
+            'class' => 'ml-5 mt-3 click_pinterest_clientes'
         ]
     );
     
