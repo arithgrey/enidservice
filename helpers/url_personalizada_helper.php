@@ -39,7 +39,7 @@ function accesos_enid()
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
         "whatsapp" => "https://wa.me/c/5215552967027",
         "whatsapp_ayuda" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20Me%20puedes%20ayudar,%20vi%20esto%20desde%20su%20p%C3%A1gina%20web",
-        "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20quiero%20agendar%20mi%20primer%20pedido%20aplicando%20mi%20descuento",
+        "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20mi%20código%20de%20descuento%20es%20el%20XD341!6swA%20envío%20whatsApp%20para%20quedar%20en%20la%20lista!",
         "facebook_descuento" =>"http://m.me/enidservicemx",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",

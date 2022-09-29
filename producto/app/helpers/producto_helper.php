@@ -1157,7 +1157,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $texto = _text_(
                 d(_text_(span("5% de descuento",'strong white'),
-                "en tu primer compra al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline'))),
+                "al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline'))),
                  
             );
     
