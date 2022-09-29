@@ -1393,14 +1393,15 @@ function opciones_acceso($in_session)
             ]
         );
     
+       
         $texto_lead = d("Únete a la lista y consigue un 10% de descuento",'white');
-        $registro = d("Registrate", 'bg_white black p-1 borde_rojo font-weight-bold underline ');
+        $registro = d("REGÍSTRATE", 'bg_white black borde_rojo font-weight-bold underline ');
         $texto = flex(
             $texto_lead,
             $registro,
             _between,
             "col-xs-7 p-0",
-            "col-xs-5 "
+            "col-xs-5 p-0"
              
         );
 
