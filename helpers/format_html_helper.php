@@ -1395,8 +1395,8 @@ function opciones_acceso($in_session)
     
     
         $texto = _text_(
-            d(_text_(span("8% de descuento,",'strong white'),
-            "envía WhatsApp ", span("aquí", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline '),"para hacerlo valido, caduca en 2 días")),
+            d(_text_(span("5% de descuento,",'strong white'),
+            "envía WhatsApp ", span("aquí", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline '),"y tenlo vigente los siguientes 3 días")),
              
         );
 
