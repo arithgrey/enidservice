@@ -850,7 +850,7 @@ function btw($a, $b, $class = '', $row = 0, $frow = 0)
 function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-sm-4 mt-5 p-0 p-md-1 ', $base_termino = 'col-sm-4 mt-5 p-0 p-md-1', $base_boton = 'col-lg-4 mt-5 p-0 p-0 align-self-end')
 {
 
-    $inicio = ($def_inicio != 0) ? $def_inicio : add_date(date("Y-m-d"), -1);
+    $inicio = ($def_inicio != 0) ? $def_inicio : date("Y-m-d");
     $fin = ($def_fin != 0) ? $def_fin : date("Y-m-d");
 
     $r[] = input_frm(
