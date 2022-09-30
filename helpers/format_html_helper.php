@@ -1393,12 +1393,18 @@ function opciones_acceso($in_session)
             ]
         );
     
-       
-        $texto_lead = d("Únete a la lista y consigue un 10% de descuento",'white');
-        $registro = d("REGÍSTRATE", 'bg_white black borde_rojo font-weight-bold underline ');
+           
+        $texto_lead = d("Envía mensaje y consigue un 10% de descuento",'white');
+        //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
+        $link = d("Descuento",
+        [
+            "href" => path_enid('whatsapp_descuento', 0, 1),
+            "class" => "text-center bg-white borde_accion p-2 border_enid col black text-uppercase strong underline border border-info"
+        ]);
+        //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
         $texto = flex(
             $texto_lead,
-            $registro,
+            $link,
             _between,
             "col-xs-7 p-0",
             "col-xs-5 p-0"
@@ -1715,6 +1721,7 @@ function contaiter($str, $attributes = [], $fluid = 1)
 
 function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 {
+
 
 
     $clase = ($primario > 0) ?
