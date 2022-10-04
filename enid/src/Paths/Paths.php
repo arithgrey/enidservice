@@ -25,8 +25,8 @@ class Paths
             "js" => [
                 "sobre_ventas/principal.js"
             ],
-            "meta_keywords" => "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
-            "desc_web" => "Busco personas que quieran ganar dinero a sus tiempos sin alguna inversión vendiendo artículos",
+            "meta_keywords" => "CONSIGUE 10% DE GANANCIA POR CADA PEDIDO QUE REFERENCIES",
+            "desc_web" => "Inicia tu negocio, vendiendo artículos deportivos",
             "url_img_post" => create_url_preview("comisionistas.png"),
             "pagina" => 5,
 

@@ -1913,10 +1913,17 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
     if (!$in_session) {
 
         if (!$is_mobile) {
+            
 
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
-            $response[] = d(p(_text_('Agenda tu pedido y paga hasta tu entrega! en CDMX' ), 'white'), 'd-md-flex justify-content-end mr-5');                        
+            $response[] = d(a_enid('¡Paga hasta que recibas tus artículos
+             en tu domicilio si vives en CDMX!',
+             [
+                "href" => path_enid("forma_pago") ,
+                "class" =>  'black bg_yellow pr-4 pl-4'
+                ]
+            ), 'd-md-flex justify-content-end mr-5');                        
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
         } else {
             $response[] = get_logo($in_session);
