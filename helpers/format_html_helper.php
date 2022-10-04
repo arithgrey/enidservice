@@ -1408,7 +1408,7 @@ function opciones_acceso($in_session)
 
     
            
-        $texto_lead = d("Envía mensaje y consigue un 10% de descuento",'white');
+        $texto_lead = d("Aquí de te dejamos 10% de descuento para que inicies tu rutina ya!",'white');
         //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
         $link = d("Descuento",
         [
