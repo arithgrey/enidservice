@@ -781,7 +781,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
                 text-decoration-none mr-4 
-                white borde_amarillo iniciar_session_boton strong ml-3",
+                white borde_amarillo iniciar_session_boton ml-3",
             ]
         );
 
@@ -878,7 +878,7 @@ function frm_fecha_busqueda($def_inicio = 0, $def_fin = 0, $base_inicio = 'col-s
 
     );
 
-    $r[] = d(btn(text_icon("fa fa-chevron-right", "Búsqueda")), $base_boton);
+    $r[] = d(btn(text_icon("fa fa-chevron-right", "Buscar")), $base_boton);
 
     return append($r);
 }
@@ -1367,6 +1367,7 @@ function opciones_acceso($in_session)
     $response = [];
     if ($in_session < 1) {
 
+        
         $redes[] = a_enid(
             icon(_text_(_facebook_icon,'fa-2x white')),
             [
@@ -1383,6 +1384,16 @@ function opciones_acceso($in_session)
                 'class' => 'ml-3 click_instagram_clientes'
             ]
         );
+
+        $redes[] = a_enid(
+            icon(_text_(_whatsapp_icon,'fa-2x white')),
+            [
+                'href' => path_enid('whatsapp_ayuda', 0, 1),
+                'target' => 'black',
+                'class' => 'ml-3 whatsapp_trigger '
+            ]
+        );
+
     
         $redes[] = a_enid(
             icon(_text_(_pinterest_icon,'fa-2x white')),
@@ -1392,6 +1403,9 @@ function opciones_acceso($in_session)
                 'class' => 'ml-3 click_pinterest_clientes '
             ]
         );
+
+
+
     
            
         $texto_lead = d("Envía mensaje y consigue un 10% de descuento",'white');
@@ -1538,7 +1552,7 @@ function frm_search(
         [
             "class" => "input_busqueda_producto col-lg-11",
             "type" => "text",
-            "placeholder" => "Búsqueda",
+            "placeholder" => "Búscar",
             "name" => "q",
             "onpaste" => "paste_search();",
         ]
@@ -1547,7 +1561,7 @@ function frm_search(
     $r[] = btn(
         icon("fa fa-search "),
         [
-            'style' => 'background: #007bff!important;'
+            'style' => 'background: white!important;'
         ]
     );
     $r[] = form_close();
