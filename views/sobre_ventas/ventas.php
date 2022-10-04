@@ -32,11 +32,7 @@
                         </div>
                         <div class="mt-1">
                             <?= icon('fa fa-check-square mr-5') ?>Puedes traer clientes de cualquier red social
-                        </div>
-                        <?php if ($in_session < 1) : ?>
-                        <?php else : ?>
-                            <?= format_link('Explorar artículos!', ['href' => path_enid('home'), 'class' => 'mt-5']) ?>
-                        <?php endif; ?>
+                        </div>                        
                     </div>
                     
                 </div>
