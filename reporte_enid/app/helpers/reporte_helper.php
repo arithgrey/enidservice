@@ -59,6 +59,8 @@ if (!function_exists('invierte_date_time')) {
         $totales_accesos[] = d(flex("Click en trigger de facebook", place("click_facebook_trigger_place"), _text_(_between,"f12 black"), "","strong"));            
         /*22 Click en producto recompensa*/
         $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _text_(_between,"f12 black"), "","strong f11"));            
+        /*46 Click en producto recompensa*/
+        $totales_accesos[] = d(flex("Click en catalogo afiliados", place("click_catalogo_afiliados_place"), _text_(_between,"f12 black"), "","strong f11"));            
         /*24  click_producto_recompensa_input*/
         $totales_accesos[] = d(flex("Ver fotos de clientes", place("click_en_ver_fotos_clientes_place"), _between, "","strong f11"));            
         $totales_accesos[] = d(flex("Ingreso a promociones", place("promociones_input"), _between, "","strong f11"));    

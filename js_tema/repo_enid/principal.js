@@ -326,6 +326,9 @@ let response_accesos_metricas = function (data) {
     /*Ir a instagram*/
     $(".click_pagina_instagram_place").text($(".click_instagram_input").val());
 
+    /*46 solicitar catalogo*/
+    $(".click_catalogo_afiliados_place").text($(".click_catalogo_afiliados_input").val());
+
     
 }
 
