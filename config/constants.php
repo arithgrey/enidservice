@@ -108,6 +108,7 @@ define('_agregar_icon','fa-plus-circle');
 define('_spinner','fa-spinner');
 define('_dolar_icon','fa fa-usd');
 define('_facebook_icon','fa fa-facebook-square');
+define('_whatsapp_icon','fa fa-whatsapp');
 define('_instagram_icon',"fa fa-instagram");
 define('_pinterest_icon',"fa fa-pinterest");
 define('_deseo_icon',"fa fa-heart-o");

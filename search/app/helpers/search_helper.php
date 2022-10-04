@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
     function filtro($filtros, $order)
     {
 
-        $r[] = '<select class="form-control order border border-dark filtro_orden_categorias " name="order" id="order">';
+        $r[] = '<select class="form-control order filtro_orden_categorias " name="order" id="order">';
         $a = 0;
         foreach ($filtros as $row) :
             $str = strtoupper($row);
