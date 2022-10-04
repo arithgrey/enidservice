@@ -433,6 +433,9 @@ class Acceso extends REST_Controller
                     case 45:
                         $totales_input[] = hiddens(["class" => "click_pinteres_input", "value" => $numero_accesos]);
                         break;
+                        case 46:
+                            $totales_input[] = hiddens(["class" => "click_catalogo_afiliados_input", "value" => $numero_accesos]);
+                            break;
 
 
                     default:
