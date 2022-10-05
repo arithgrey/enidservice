@@ -50,17 +50,17 @@ if (!function_exists('invierte_date_time')) {
         
         
         /*6 lista de deseos*/
-        $totales_accesos[] = d(flex("Lista de deseos", place("lista_deseos_place"), _text_(_between,"f12 black"), "","strong f11"));           
-        $totales_accesos[] = d(flex("Ingreso a procesar compra", place("procesar_compra_input"), _text_(_between,"f12 black"), "","strong f11"));            
+        $totales_accesos[] = d(flex("Lista de deseos", place("lista_deseos_place"), _text_(_between,"f12 black underline"), "","strong f11"));           
+        $totales_accesos[] = d(flex("Ingreso a procesar compra", place("procesar_compra_input"), _text_(_between,"f12 black underline"), "","strong f11"));            
                 
         /*17 click_whatsapp_input*/
-        $totales_accesos[] = d(flex("Click en WhatsApp", place("click_whatsapp_place"), _text_(_between,"f12 black"), "","strong"));            
+        $totales_accesos[] = d(flex("Click en WhatsApp", place("click_whatsapp_place"), _text_(_between,"f12 black underline"), "","strong"));            
         /*43 click en trigger de facebook*/
-        $totales_accesos[] = d(flex("Click en trigger de facebook", place("click_facebook_trigger_place"), _text_(_between,"f12 black"), "","strong"));            
+        $totales_accesos[] = d(flex("Click en trigger de facebook", place("click_facebook_trigger_place"), _text_(_between,"f12 black underline"), "","strong"));            
         /*22 Click en producto recompensa*/
-        $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _text_(_between,"f12 black"), "","strong f11"));            
+        $totales_accesos[] = d(flex("Click en producto recompensa", place("click_producto_recompensa_place"), _text_(_between,"f12 black underline"), "","strong f11"));            
         /*46 Click en producto recompensa*/
-        $totales_accesos[] = d(flex("Click en catalogo afiliados", place("click_catalogo_afiliados_place"), _text_(_between,"f12 black"), "","strong f11"));            
+        $totales_accesos[] = d(flex("Click en catalogo afiliados", place("click_catalogo_afiliados_place"), _text_(_between,"f12 black underline"), "","strong f11"));            
         /*24  click_producto_recompensa_input*/
         $totales_accesos[] = d(flex("Ver fotos de clientes", place("click_en_ver_fotos_clientes_place"), _between, "","strong f11"));            
         $totales_accesos[] = d(flex("Ingreso a promociones", place("promociones_input"), _between, "","strong f11"));    
@@ -84,13 +84,13 @@ if (!function_exists('invierte_date_time')) {
         $totales_accesos[] = d(flex("Cancelaciones", place("numero_cancelaciones_place"), _text_(_between, "f11 red_enid")));      
 
         /*18 click en trigger de facebook*/
-        $totales_accesos[] = d(flex("Ir a Facebook", place("click_pagina_facebook_place"), _text_(_between,"f12 black"), "","strong"));            
+        $totales_accesos[] = d(flex("Ir a Facebook", place("click_pagina_facebook_place"), _text_(_between,"f12 black underline"), "","strong"));            
         /*19 */
-        $totales_accesos[] = d(flex("Ir a Instagram", place("click_pagina_instagram_place"), _text_(_between,"f12 black"), "","strong"));            
+        $totales_accesos[] = d(flex("Ir a Instagram", place("click_pagina_instagram_place"), _text_(_between,"f12 black underline"), "","strong"));            
         /*45 */
-        $totales_accesos[] = d(flex("Ir a Pinterest", place("click_pagina_pinterest_place"), _text_(_between,"f12 black"), "","strong"));                  
+        $totales_accesos[] = d(flex("Ir a Pinterest", place("click_pagina_pinterest_place"), _text_(_between,"f12 black underline"), "","strong"));                  
         /*18 Click en abdomen*/
-        $totales_accesos[] = d(flex("Como marcar abdomen", place("click_abdomen_place"), _text_(_between,"f12 black"), "","strong"));            
+        $totales_accesos[] = d(flex("Como marcar abdomen", place("click_abdomen_place"), _text_(_between,"f12 black underline"), "","strong"));            
 
 
 
