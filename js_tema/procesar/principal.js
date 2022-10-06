@@ -46,6 +46,12 @@ let $seccion_input_facebook = $form_miembro.find('.seccion_input_facebook');
 let $url_facebook_conversacion = $form_miembro.find('.url_facebook_conversacion');
 let $comentario_compra = $form_miembro.find('.comentario_compra');
 
+let $check_indico_ubicacion = $form_miembro.find(".check_indico_ubicacion");
+let $input_lead_ubicacion = $form_miembro.find('.lead_ubicacion');
+
+let $check_indico_catalogo = $form_miembro.find(".check_vio_catalogo_web");
+let $input_lead_catalogo = $form_miembro.find('.lead_catalogo');
+
 let $input_adicionales = $form_miembro.find('.adicionales');
 let $adicionales_adimistrador = $form_miembro.find('.adicionales_adimistrador');
 let $check_prospecto = $form_miembro.find('.check_prospecto');
@@ -59,6 +65,7 @@ let $producto_carro_compra = $(".producto_carro_compra");
 
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
+
 
 
 $(document).ready(() => {
@@ -95,6 +102,8 @@ $(document).ready(() => {
     });
 
     $check_prospecto.click(modifica_estado_prospecto);
+    $check_indico_ubicacion.click(modifica_lead_ubicacion);
+    $check_indico_catalogo.click(modifica_lead_catalogo);
 
 });
 
@@ -124,6 +133,35 @@ let modifica_estado_prospecto = (e) => {
     }
 
 }
+
+let modifica_lead_ubicacion = (e) => {
+
+    let $val = $input_lead_ubicacion.val();
+    if ($val > 0) {
+
+        $input_lead_ubicacion.val(0);
+
+    } else {
+
+        $input_lead_ubicacion.val(1);
+    }
+
+}
+
+let modifica_lead_catalogo = (e) => {
+
+    let $val = $input_lead_catalogo.val();
+    if ($val > 0) {
+
+        $input_lead_catalogo.val(0);
+
+    } else {
+
+        $input_lead_catalogo.val(1);
+    }
+
+}
+
 let registro = (e) => {
 
 
@@ -156,7 +194,7 @@ let registro = (e) => {
         let text_password = $.trim($input_password_registro_envio.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
         let $cobro_secundario = $(".cobro_secundario").val();
-        
+
         let $data_send = {
             "password": $secret,
             "email": $input_email_registro_envio.val(),
@@ -178,6 +216,8 @@ let registro = (e) => {
             "es_prospecto": $input_es_prospecto_registro_envio.val(),
             "url_facebook_conversacion": $url_facebook_conversacion.val(),
             "comentario_compra": $comentario_compra.val(),
+            "lead_ubicacion": $input_lead_ubicacion.val(),
+            "lead_catalogo": $input_lead_catalogo.val()
 
         };
 
@@ -199,7 +239,7 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-    
+
     debugger;
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {

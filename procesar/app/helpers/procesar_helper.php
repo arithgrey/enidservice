@@ -180,6 +180,36 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
+
+
+            $input = input([
+                "type" => "checkbox",
+                "class" => "checkbox_enid check_indico_ubicacion",
+            ]);
+
+            $extra = 'col-lg-12 mt-1 adicionales_adimistrador d-none';
+
+            $z[] = d(flex(
+                $input,
+                "Indicó Ubicación",            
+                "mt-3 text-uppercase black strong",
+                "mr-3"
+            ), $extra);
+
+
+            $input = input([
+                "type" => "checkbox",
+                "class" => "checkbox_enid check_vio_catalogo_web",
+            ]);
+    
+            $z[] = d(flex(
+                $input,
+                "Vió catálogo web",            
+                "mt-3 text-uppercase black strong",
+                "mr-3"
+            ), $extra);
+
+
             $z[] = d("Comentarios", 'mt-5 col-lg-12 black text-uppercase  adicionales_adimistrador d-none');
             $z[] = d(textarea(
                 [
@@ -218,6 +248,24 @@ if (!function_exists('invierte_date_time')) {
             );
 
 
+            $inputs[] = hiddens(
+                [
+                    "name" => "lead_ubicacion",
+                    "value" => 0,
+                    "class" => "lead_ubicacion"
+                ]
+            );
+
+            $inputs[] = hiddens(
+                [
+                    "name" => "lead_catalogo",
+                    "value" => 0,
+                    "class" => "lead_catalogo"
+                ]
+            );
+
+
+
             for ($a = 0; $a < count($producto_carro_compra); $a++) {
 
                 $inputs[] = hiddens(
@@ -230,9 +278,6 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $z[] = append($inputs);
-
-
-
 
             $inputs = [];
 
