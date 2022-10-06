@@ -838,6 +838,11 @@ class Recibo_model extends CI_Model
         $usuario_referencia = prm_def($data_usuario, "usuario_referencia");
         $es_premium = prm_def($data_usuario, "es_premium");
 
+
+        $lead_ubicacion = prm_def($data_usuario, "lead_ubicacion");
+        $lead_catalogo = prm_def($data_usuario, "lead_catalogo");
+
+
         $id_usuario_referencia = ($usuario_referencia == 0) ? $id_usuario : $usuario_referencia;
         $num_ciclos = $param["articulos"];
 
@@ -849,7 +854,6 @@ class Recibo_model extends CI_Model
         $comision = $param["comision"];
 
         $comision_venta = comision_porcentaje($precio, $comision);
-
         $nombre_servicio = $param["nombre_servicio"];
 
         $descuento_premium = ($es_premium > 0) ? $param["descuento_especial"] : 0;
@@ -903,7 +907,9 @@ class Recibo_model extends CI_Model
             "tipo_entrega",
             "comision_venta",
             "costo",
-            "descuento_premium"
+            "descuento_premium",
+            "lead_ubicacion",
+            "lead_catalogo"
         ];
 
         $array_values =
@@ -928,7 +934,9 @@ class Recibo_model extends CI_Model
                 $tipo_entrega,
                 $comision_venta,
                 $costo,
-                $descuento_premium
+                $descuento_premium,
+                $lead_ubicacion,
+                $lead_catalogo
             ];
 
         if(array_key_exists( "fecha_contra_entrega", $array_keys)){
