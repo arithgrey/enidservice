@@ -228,7 +228,87 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+    function leads_catalogo($params, $param)
+    {
 
+        $f = get_keys($params);
+        
+        $id_usuario_venta = $param['id_usuario'];
+        $es_administrador = $param['es_administrador'];
+        $query_get = "SELECT " . $f . " FROM 
+        proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
+        ON po.id_proyecto_persona_forma_pago = p.id 
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id WHERE 1 = 1";
+        
+        
+        
+        $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
+        $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
+        $extra_usuario_venta = ($id_usuario_venta == 1 or intval($es_administrador) === 1) ? " " :
+            "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
+
+
+        $ext_fecha = " AND DATE(p.fecha_registro) < CURRENT_DATE() 
+        AND entregado = 0   
+        AND lead_ubicacion > 0 
+        AND lead_catalogo < 1 
+        AND lead_promo_regalo < 1 
+        AND p.monto_a_pagar  > p.saldo_cubierto
+        AND se_cancela != 1";
+
+
+
+        $order = " ORDER BY  po.id_orden_compra ASC";
+        $query_get .= _text_(            
+            $usuario_referencia,            
+            $extra_usuario_venta,
+            $ext_fecha,            
+            $order
+        );
+
+        
+        return $this->db->query($query_get)->result_array();
+    }
+    function leads_promociones($params, $param)
+    {
+
+        $f = get_keys($params);
+        
+        $id_usuario_venta = $param['id_usuario'];
+        $es_administrador = $param['es_administrador'];
+        $query_get = "SELECT " . $f . " FROM 
+        proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
+        ON po.id_proyecto_persona_forma_pago = p.id 
+            INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id WHERE 1 = 1";
+        
+        
+        
+        $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
+        $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
+        $extra_usuario_venta = ($id_usuario_venta == 1 or intval($es_administrador) === 1) ? " " :
+            "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
+
+
+        $ext_fecha = " AND DATEDIFF(CURRENT_DATE(), p.fecha_registro ) > 2
+        AND entregado = 0   
+        AND lead_ubicacion > 0 
+        AND lead_catalogo > 0 
+        AND lead_promo_regalo < 1 
+        AND p.monto_a_pagar  > p.saldo_cubierto
+        AND se_cancela != 1";
+
+        $order = " ORDER BY  po.id_orden_compra ASC";
+        $query_get .= _text_(            
+            $usuario_referencia,            
+            $extra_usuario_venta,
+            $ext_fecha,            
+            $order
+        );
+
+        
+        return $this->db->query($query_get)->result_array();
+    }
+    
     private function get_servicio($param)
     {
 
