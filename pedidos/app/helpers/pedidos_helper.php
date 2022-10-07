@@ -1729,25 +1729,63 @@ if (!function_exists('invierte_date_time')) {
         $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
         $link = format_link($text_entregas, ['href' => path_enid('entregas')]);
         $busqueda_calendario = flex($busqueda, $link, _between);
-        $response[] = d($titulo, ' col-sm-10 col-sm-offset-1 mt-5');
-        $response[] = d($busqueda_calendario, ' col-sm-10 col-sm-offset-1 mt-5');
-        $response[] = d($z, 10, 1);
+        $response[] = d($titulo, 'mt-5');
+        $response[] = d($busqueda_calendario, 'mt-5');
+        $response[] = d($z);
 
         $secciones_tabs[] = tab_seccion(append($response), 'buscador_seccion', 1);
         $modal = gb_modal(pago_usuario_comisiones(), 'modal_pago_comision');
         $modal_comisiones = gb_modal(pago_comisiones(), 'modal_pago_comisiones');
-        $contenido_por_pago = comisiones_por_pago($data, $modal);
-        $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
-        $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
-        $menu_pedidos = tab('Pedidos', '#buscador_seccion', ['class' => 'strong']);
-        $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => 'ml-5 strong']);
-        $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
-        $menu = flex(d($menu_pedidos, $class_pedidos), $menu_pendientes, 'justify-content-end');
 
-        $data_complete[] = $modal_comisiones;
-        $data_complete[] = d($menu, 10, 1);
-        $data_complete[] = d(tab_content($secciones_tabs), 12);
-        return append($data_complete);
+        $modal_catalogo = gb_modal(instruccion_envio_catalogo(), 'modal_envio_catalogo');
+        $modal_catalogo = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
+
+
+        $lead_por_envio_catalogo = leads_por_envio_catalogo($data,$modal);        
+        $secciones_tabs[] = tab_seccion($lead_por_envio_catalogo, 'catalogos_pendientes');
+
+
+        $lead_opcion_promo = leads_con_opcion_a_promo($data,$modal);        
+        $secciones_tabs[] = tab_seccion($lead_opcion_promo, 'promo_pendiente');
+
+
+        $contenido_por_pago = comisiones_por_pago($data, $modal);        
+        $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
+
+
+        $contenido_recursos = recursos_ventas($data, $modal);        
+        $secciones_tabs[] = tab_seccion($contenido_recursos, 'recursos');
+
+
+
+        $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
+        $menu_pedidos = tab('Buscador', '#buscador_seccion', ['class' => ' mt-2']);
+        $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => ' mt-2']);
+        
+        $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
+
+        $menu_envio_catalogo = tab('Leads envío catalogo', '#catalogos_pendientes', ['class' => ' mt-2 busqueda_catalogos_pendientes']);
+        $menu_envio_promo = tab('Opción a promoción', '#promo_pendiente', ['class' => ' mt-2 busqueda_promociones_disponibles']);
+        $menu_envio_catalogo_movimiento = tab('Recursos para hacer más ventas', '#recursos', ['class' => ' mt-2 busqueda_promociones_disponibles']);
+
+
+        $menu_pedidos = d($menu_pedidos, $class_pedidos);
+            
+        $menu = d([
+            $menu_pedidos, 
+            $menu_pendientes, 
+            $menu_envio_catalogo, 
+            $menu_envio_promo, 
+            $menu_envio_catalogo_movimiento
+        ]);
+
+        
+        $seccion_menus = d($menu, "col-md-3 fp9");
+        $seccion_contenidos = d(tab_content($secciones_tabs),"col-md-8 border-left border-secondary");
+        $data_complete[] = d([$seccion_menus, $seccion_contenidos],13);
+        $data_complete[] = d($modal_comisiones,13);
+        $data_complete[] = d($modal_catalogo,13);
+        return d($data_complete,12);
     }
 
     function total_comision($ids_usuario, $ordenes)
@@ -1804,6 +1842,29 @@ if (!function_exists('invierte_date_time')) {
         return $nombre_completo;
     }
 
+    function leads_por_envio_catalogo($data, $modal){
+     
+        $_response[] = _titulo('Lead por envío de catálogo web', 4);            
+        $_response[] = place("place_leads_catalogo");
+        return d($_response);
+    }
+
+    function leads_con_opcion_a_promo($data, $modal){
+     
+
+        $_response[] = _titulo('Lead por envío promoción', 4);            
+        $_response[] = place("place_leads_promocion");
+        return d($_response);
+    }
+    function recursos_ventas($data, $modal){
+     
+        $_response[] = _titulo('Recursos para lograr más ventas', 4);                    
+        return d($_response);
+    }
+
+
+    
+
     function comisiones_por_pago($data, $modal)
     {
 
@@ -1852,7 +1913,7 @@ if (!function_exists('invierte_date_time')) {
                 $contenido[] = d($total_comisiones, $config_pago);
                 $response[] = d(
                     $contenido,
-                    _text_('border row', _text('sintesis nombre_vendedor_sintesis_', $id_usuario))
+                    _text_('border ', _text('sintesis nombre_vendedor_sintesis_', $id_usuario))
                 );
             }
 
@@ -1861,7 +1922,7 @@ if (!function_exists('invierte_date_time')) {
             $totales_[] = d(money($totales_en_pagos), 'col-lg-3');
 
             $response[] = d($totales_, 'row text-right h3 strong');
-            $response[] = d('', 'mt-5 mb-5 row');
+            $response[] = d('', 'mt-5 mb-5 ');
 
             foreach ($ordenes as $row) {
 
@@ -1894,7 +1955,7 @@ if (!function_exists('invierte_date_time')) {
                     a_enid(
                         append($contenido),
                         [
-                            'class' => 'd-flex align-items-center row text-center border black',
+                            'class' => 'd-flex align-items-center  text-center border black',
                             'href' => $path,
                             'target' => '_blank',
                         ]
@@ -1907,24 +1968,22 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(_titulo(_text_('Cuenta por pagar', $total)), 'text-right mt-5');
         }
 
-        $_response[] = d(_titulo('Cuentas por pagar', 2), 13);
+        $_response[] = d(_titulo('Cuentas por pagar', 4));
         if (es_data($ids_cuentas_pagos)) {
-            $_response[] = d(
+            $_response[] = 
                 format_link(
                     'Marcar todos como pagados',
                     [
-                        "class" => "marcar_pagos col-sm-3"
+                        "class" => "marcar_pagos col-sm-5"
                     ]
-                ),
-                13
-            );
+                );
         }
 
 
         $_response[] = append($response);
         $_response[] = $modal;
         $_response[] = hiddens(["class" => "ids_pagos", "value" => implode(",", $ids_cuentas_pagos)]);
-        return d($_response, 10, 1);
+        return d($_response);
     }
 
 
@@ -2036,6 +2095,62 @@ if (!function_exists('invierte_date_time')) {
         return append($form);
     }
 
+    function instruccion_envio_catalogo()
+    {
+
+        
+        $form[] = d(_titulo('Envía estas instrucciones'), 13);        
+                
+        $text  = flex(
+            'Sigue este enlace para ver nuestro catálogo',
+            'https://enidservices.com/',
+            "d-flex flex-column border p-4 bg-light mt-4 w-100"
+        );
+        
+        $form[] = d($text,13);
+
+        $texto_cliente_potencial = _text_("a este" , get_base_html("a", " cliente potencial", 
+        [
+            "class" => "underline ml-2 link_cliente_potencial", 
+            "href" => "",
+            "target" => "_black"
+        ]));
+        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black" );        
+
+        $confirmacion = d(btn('Marcar como enviado!', ['class' => 'marcar_envio_catalogo']), 'row mt-5');
+        $form[] = $confirmacion;
+        
+        return d($form,10,1);
+    }
+    
+    function instruccion_envio_promocion()
+    {
+
+        
+        $form[] = d(_titulo('Envía está ultima oferta'), 13);        
+                
+        $text  = flex(
+            'Por cierto hoy en la compra de tu kit estamos regalando este juego de mancuernas',
+            'https://enidservices.com/web/producto/?producto=1020',
+            "d-flex flex-column border p-4 bg-light mt-4 w-100"
+        );
+        
+        $form[] = d($text,13);
+
+        $texto_cliente_potencial = _text_("a este" , get_base_html("a", " cliente potencial", 
+        [
+            "class" => "underline ml-2 link_cliente_potencial_promocion", 
+            "href" => "",
+            "target" => "_black"
+        ]));
+        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black" );        
+
+        $confirmacion = d(btn('Marcar como enviado!', ['class' => 'marcar_envio_promocion']), 'row mt-5');
+        $form[] = $confirmacion;
+        
+        return d($form,10,1);
+    }
+    
     function frm_busqueda()
     {
 

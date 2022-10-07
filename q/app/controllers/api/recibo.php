@@ -62,7 +62,7 @@ class recibo extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario,id_perfil,id_empresa")) {
-                    
+
             $id_empresa = $param['id_empresa'];
             $id_usuario = $param["id_usuario"];
             $id_perfil = $param['id_perfil'];
@@ -82,11 +82,10 @@ class recibo extends REST_Controller
                     $ordenes = $this->append_usuario_cliente($ordenes);
                     $recibos['recibos'] = $ordenes;
                 }
-                
+
                 $recibos = $this->domicilios_puntos_encuentro_ubicaciones($recibos);
-                
+
                 $response = $this->recompensas($recibos);
-                
             }
         }
         $this->response($response);
@@ -94,7 +93,7 @@ class recibo extends REST_Controller
     function recompensas($recibos)
     {
 
-        $recompensa = $this->app->recompensas_recibos($recibos);        
+        $recompensa = $this->app->recompensas_recibos($recibos);
         $response = [];
         $data_complete = [];
         $a = 0;
@@ -733,6 +732,42 @@ class recibo extends REST_Controller
         $this->response($response);
     }
 
+    function envio_lead_catalogo_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "orden_compra")) {
+
+            $id_orden_compra = $param['orden_compra'];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+
+            foreach ($productos_orden_compra as $row) {
+
+                $id_recibo = $row["id"];
+                $response = $this->recibo_model->q_up("lead_catalogo", 1, $id_recibo);
+            }
+        }
+        $this->response($response);
+    }
+    function envio_lead_promocion_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "orden_compra")) {
+
+            $id_orden_compra = $param['orden_compra'];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+
+            foreach ($productos_orden_compra as $row) {
+
+                $id_recibo = $row["id"];
+                $response = $this->recibo_model->q_up("lead_promo_regalo", 1, $id_recibo);
+            }
+        }
+        $this->response($response);
+    }
 
     function servicio_ppfp_GET()
     {
@@ -1103,6 +1138,32 @@ class recibo extends REST_Controller
 
         $this->response($response);
     }
+    function lead_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_orden_compra")) {
+
+            $id_orden_compra = $param["id_orden_compra"];
+            if ($id_orden_compra > 0) {
+
+                $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+                $id_usuario = pr($productos_orden_compra, "id_usuario");
+                $usuario = $this->app->usuario($id_usuario);
+                $response = [
+                    "id_orden_compra" => $id_orden_compra,
+                    "productos_orden_compra" => $productos_orden_compra,
+                    "id_usuario" => $id_usuario,
+                    "usuario" => $usuario,
+                ];
+            }
+        }
+
+
+        $this->response($response);
+    }
+
 
     private function get_ubicacion_recibo($id_recibo)
     {
@@ -1269,10 +1330,10 @@ class recibo extends REST_Controller
         $seccion_compra = getPayButtons($data, $url_request, $id_usuario_venta, $data_checkout);
         $pedido[] = rastreo_compra($data, $id_orden_compra, $seccion_compra);
         $seccion_compra = d($seccion_compra, 'd-none d-md-block');
-        
-        $response[] = d($seccion_compra,"col-sm-5 seccion_pago");
-        $response[] = d($pedido,"col-sm-7 seccion_resumen_compra");
-        
+
+        $response[] = d($seccion_compra, "col-sm-5 seccion_pago");
+        $response[] = d($pedido, "col-sm-7 seccion_resumen_compra");
+
 
 
         return append($response);
@@ -1418,6 +1479,9 @@ class recibo extends REST_Controller
             "p.intento_reventa",
             "p.costo",
             'p.intento_recuperacion',
+            'p.lead_catalogo',
+            'p.lead_ubicacion',
+            'p.lead_promo_regalo',
             "po.id_orden_compra",
             "oc.cobro_secundario"
 
@@ -1549,6 +1613,69 @@ class recibo extends REST_Controller
 
         $this->response($response);
     }
+
+    function leads_catalogo_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if ($this->id_usuario > 0) {
+            $param['id_usuario'] = $this->id_usuario;
+        }
+
+        $params = $this->parametros_busqueda(0);
+        $response = $this->recibo_model->leads_catalogo($params, $param);
+
+        if(es_data($response)){
+
+            $response = $this->add_imgs_servicio($response);
+            $response = $this->add_comisionistas($response, $param);
+            $response = $this->add_repartidores($response, $param);
+            $response = $this->add_clientes($response, $param);
+            $session = $this->app->session();            
+            $recompensas = $this->app->recompensas_recibos($response);
+            $response = render_resumen_lead($response, $recompensas, $param, $session);
+            
+        }else{
+            $response = sin_leads();
+        }
+
+        $this->response($response);
+    }
+
+    function leads_promociones_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if ($this->id_usuario > 0) {
+            $param['id_usuario'] = $this->id_usuario;
+        }
+
+        $params = $this->parametros_busqueda(0);
+        $response = $this->recibo_model->leads_promociones($params, $param);
+        
+        
+        if(es_data($response)){
+
+            $response = $this->add_imgs_servicio($response);
+            $response = $this->add_comisionistas($response, $param);
+            $response = $this->add_repartidores($response, $param);
+            $response = $this->add_clientes($response, $param);
+            $session = $this->app->session();
+            $status_enid = $this->get_estatus_enid_service($param);
+            $recompensas = $this->app->recompensas_recibos($response);
+            $response = render_resumen_lead($response, $recompensas, $param, $session, 1);
+            
+        }else{
+            $response = sin_leads_promociones();
+        }
+
+        $this->response($response);
+    }
+
 
     function ventas_periodo_ids_GET()
     {
@@ -2535,7 +2662,7 @@ class recibo extends REST_Controller
     function cierres_pendientes_PUT()
     {
 
-        $data = $this->app->session();    
+        $data = $this->app->session();
         $response = [];
         if (intval($data["in_session"])) {
 
@@ -2545,9 +2672,8 @@ class recibo extends REST_Controller
 
             $recibos = $this->proximos_cerres($id_empresa, $id_usuario, $id_perfil);
             $ids = array_column($recibos, 'id_recibo');
-            $ids = implode( ",", $ids);
+            $ids = implode(",", $ids);
             $response =  $this->recibo_model->recibos_por_entregar_a_entregados($ids);
-
         }
         $this->response($response);
     }

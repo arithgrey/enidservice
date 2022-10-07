@@ -7,6 +7,11 @@ let $es_busqueda_reparto = $form_busqueda.find('.es_busqueda_reparto');
 let $form_pago_comisiones = $('.form_pago_comisiones');
 let $modal_pago_comision = $('#modal_pago_comision');
 let $modal_pago_comisiones = $('#modal_pago_comisiones');
+let $modal_envio_catalogo = $('#modal_envio_catalogo');
+let $modal_envio_promocion = $('#modal_envio_promocion');
+
+
+
 let $usuario_pago = $('.usuario_pago');
 let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
@@ -15,9 +20,13 @@ let $tipo_orden = $form_busqueda.find('.tipo_orden');
 let $nombre_usuario_venta = $('.nombre_usuario_venta');
 let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
 
+let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
+let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
+
 let $sintesis = $('.sintesis');
 let $marcar_pagos = $('.marcar_pagos');
 let $ids_pagos = $('.ids_pagos');
+
 $(document).ready(() => {
 
     $('footer').ready(function () {
@@ -30,14 +39,114 @@ $(document).ready(() => {
     $nombre_usuario_venta.click(filtro_ordenes_vendedor);
     $marcar_pagos.click(marcar_pagos);
     $marcar_cuentas_pagas.click(marcar_cuentas_pagas);
+    $busqueda_catalogos_pendientes.click(busqueda_leads_catalogo);
+    $busqueda_promociones_disponibles.click(busqueda_lead_promociones_disponibles);
 });
+
+let busqueda_lead_promociones_disponibles = function(){
+    
+    
+    let fecha_inicio = get_parameter("#datetimepicker4");
+    let fecha_termino = get_parameter("#datetimepicker5");
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_busqueda.serialize();
+        let url = "../q/index.php/api/recibo/leads_promociones/format/json/";
+        request_enid("GET", data_send, url, response_lead_promociones);
+
+    }
+}
+
+let response_lead_promociones = function (data) {
+
+    render_enid(".place_leads_promocion", data);
+    $(".notificacion_envio_promocion").click(notificacion_envio_promocion);
+
+};
+
+let notificacion_envio_promocion = function () {
+
+    let $id_orden_compra = get_parameter_enid($(this), "id");
+    $modal_envio_promocion.modal("show");
+
+    /*Búsqueda lead*/
+    busqueda_lead_recibo($id_orden_compra);
+
+    $(".marcar_envio_promocion").click(function () {
+
+        let data_send = $.param({ "orden_compra": $id_orden_compra });
+        let url = "../q/index.php/api/recibo/envio_lead_promocion/format/json/";
+        $modal_envio_promocion.modal("hide");
+        request_enid("PUT", data_send, url, busqueda_lead_promociones_disponibles);
+
+    });
+};
+
+let busqueda_leads_catalogo = function () {
+
+    let fecha_inicio = get_parameter("#datetimepicker4");
+    let fecha_termino = get_parameter("#datetimepicker5");
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_busqueda.serialize();
+        let url = "../q/index.php/api/recibo/leads_catalogo/format/json/";
+        request_enid("GET", data_send, url, response_lead_catalogo);
+
+    }
+
+};
+let response_lead_catalogo = function (data) {
+
+    render_enid(".place_leads_catalogo", data);
+    $(".notificacion_envio_catalogo").click(notificacion_envio_catalogo_web);
+
+};
+
+let notificacion_envio_catalogo_web = function () {
+
+    let $id_orden_compra = get_parameter_enid($(this), "id");
+    $modal_envio_catalogo.modal("show");
+
+    /*Búsqueda lead*/
+    busqueda_lead_recibo($id_orden_compra);
+
+    $(".marcar_envio_catalogo").click(function () {
+
+        let data_send = $.param({ "orden_compra": $id_orden_compra });
+        let url = "../q/index.php/api/recibo/envio_lead_catalogo/format/json/";
+        $modal_envio_catalogo.modal("hide");
+        request_enid("PUT", data_send, url, busqueda_leads_catalogo);
+
+    });
+};
+
+let busqueda_lead_recibo = function ($id_orden_compra, $es_promocion = 0) {
+
+    let data_send = $.param({ "id_orden_compra": $id_orden_compra });
+    let url = "../q/index.php/api/recibo/lead/format/json/";
+    request_enid("GET", data_send, url, function (data) {
+
+        let $path = data.usuario[0].url_lead;
+        if($es_promocion){
+
+            $(".link_cliente_potencial_promocion").attr("href", $path);
+
+        }else{
+
+            $(".link_cliente_potencial").attr("href", $path);
+        }
+        
+        
+
+    });
+
+}
 
 let busqueda_pedidos = function (e) {
 
     let fecha_inicio = get_parameter("#datetimepicker4");
     let fecha_termino = get_parameter("#datetimepicker5");
     if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
-
 
         let data_send = $form_busqueda.serialize();
         let url = "../q/index.php/api/recibo/pedidos/format/json/";
@@ -50,9 +159,7 @@ let response_pedidos = function (data) {
 
     render_enid(".place_pedidos", data);
 
-    $('.usuario_venta').click(busqueda_usuario_selector);
-
-
+    $('.usuario_venta').click(busqueda_usuario_selector);    
     $('th').click(ordena_tabla);
     $(".desglose_orden").click(function () {
         let recibo = get_parameter_enid($(this), "id");
@@ -119,7 +226,7 @@ let registro_pago = function (e) {
     e.preventDefault();
 }
 let response_pagos = function (data) {
-    
+
     $modal_pago_comision.modal("hide");
     redirect('');
 }
@@ -165,7 +272,7 @@ let marcar_pagos = function () {
 let marcar_cuentas_pagas = function () {
 
 
-    let data_send = $.param({'ids' : $ids_pagos.val()});
+    let data_send = $.param({ 'ids': $ids_pagos.val() });
     let url = '../q/index.php/api/recibo/pago_recibos_comisiones_ids/format/json/';
     request_enid("PUT", data_send, url, response_pagos);
     e.preventDefault();
