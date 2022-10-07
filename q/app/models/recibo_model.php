@@ -248,7 +248,7 @@ class Recibo_model extends CI_Model
             "  AND ( p.id_usuario_venta = '" . $id_usuario_venta . "' OR p.id_usuario_referencia = '" . $id_usuario_venta . "') ";
 
 
-        $ext_fecha = " AND DATE(p.fecha_registro) < CURRENT_DATE() 
+        $ext_fecha = " AND DATEDIFF(CURRENT_DATE(), p.fecha_registro ) > 0
         AND entregado = 0   
         AND lead_ubicacion > 0 
         AND lead_catalogo < 1 
