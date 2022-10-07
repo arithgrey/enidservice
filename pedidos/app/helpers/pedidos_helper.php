@@ -1738,7 +1738,7 @@ if (!function_exists('invierte_date_time')) {
         $modal_comisiones = gb_modal(pago_comisiones(), 'modal_pago_comisiones');
 
         $modal_catalogo = gb_modal(instruccion_envio_catalogo(), 'modal_envio_catalogo');
-        $modal_catalogo = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
+        $modal_promocion = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
 
 
         $lead_por_envio_catalogo = leads_por_envio_catalogo($data,$modal);        
@@ -1785,6 +1785,8 @@ if (!function_exists('invierte_date_time')) {
         $data_complete[] = d([$seccion_menus, $seccion_contenidos],13);
         $data_complete[] = d($modal_comisiones,13);
         $data_complete[] = d($modal_catalogo,13);
+        $data_complete[] = d($modal_promocion,13);
+        
         return d($data_complete,12);
     }
 
