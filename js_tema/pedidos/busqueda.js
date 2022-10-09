@@ -1,5 +1,7 @@
 "use strict";
 let $form_busqueda = $(".form_busqueda_pedidos");
+let $form_franja_horaria = $(".form_franja_horaria");
+
 let $ids = $(".ids");
 let $usurios = $(".usuarios");
 let $reparto = $(".reparto");
@@ -19,6 +21,8 @@ let $input_busqueda = $form_busqueda.find('.input_busqueda');
 let $tipo_orden = $form_busqueda.find('.tipo_orden');
 let $nombre_usuario_venta = $('.nombre_usuario_venta');
 let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
+
+let $busqueda_metricas = $(".busqueda_metricas");
 
 let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
 let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
@@ -41,6 +45,8 @@ $(document).ready(() => {
     $marcar_cuentas_pagas.click(marcar_cuentas_pagas);
     $busqueda_catalogos_pendientes.click(busqueda_leads_catalogo);
     $busqueda_promociones_disponibles.click(busqueda_lead_promociones_disponibles);
+    //$busqueda_metricas.click(busqueda_metricas_franja_horaria);
+    $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
 });
 
 let busqueda_lead_promociones_disponibles = function(){
@@ -55,8 +61,29 @@ let busqueda_lead_promociones_disponibles = function(){
         request_enid("GET", data_send, url, response_lead_promociones);
 
     }
+    
+}
+let busqueda_metricas_franja_horaria =  function(e){
+    
+    let fecha_inicio = get_parameter(".form_franja_horaria #datetimepicker4");
+    let fecha_termino = get_parameter(".form_franja_horaria #datetimepicker5");
+
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_franja_horaria.serialize();
+        let url = "../q/index.php/api/lead/franja_horaria/format/json/";
+        request_enid("GET", data_send, url, response_lead_franja_horaria);
+    
+    }
+
+    e.preventDefault();
 }
 
+let response_lead_franja_horaria = function (data) {
+
+    render_enid(".place_lead_franja_horaria", data);
+
+};
 let response_lead_promociones = function (data) {
 
     render_enid(".place_leads_promocion", data);

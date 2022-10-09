@@ -852,9 +852,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $id_orden_compra = prm_def($data, "orden");
-            $boton_garantia = d(format_garantia($id_orden_compra),"col-xs-12 mt-3 mb-3");
-
-
+            $boton_garantia = d(format_garantia($id_orden_compra), "col-xs-12 mt-3 mb-3");
         }
 
 
@@ -1723,13 +1721,13 @@ if (!function_exists('invierte_date_time')) {
         $z[] = frm_busqueda();
 
 
-        $titulo = _titulo("ORDENES DE COMPRA");
+
         $busqueda = _titulo("busqueda", 3);
 
         $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
         $link = format_link($text_entregas, ['href' => path_enid('entregas')]);
         $busqueda_calendario = flex($busqueda, $link, _between);
-        $response[] = d($titulo, 'mt-5');
+
         $response[] = d($busqueda_calendario, 'mt-5');
         $response[] = d($z);
 
@@ -1741,53 +1739,107 @@ if (!function_exists('invierte_date_time')) {
         $modal_promocion = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
 
 
-        $lead_por_envio_catalogo = leads_por_envio_catalogo($data,$modal);        
+        $lead_por_envio_catalogo = leads_por_envio_catalogo($data, $modal);
         $secciones_tabs[] = tab_seccion($lead_por_envio_catalogo, 'catalogos_pendientes');
 
 
-        $lead_opcion_promo = leads_con_opcion_a_promo($data,$modal);        
+        $lead_opcion_promo = leads_con_opcion_a_promo($data, $modal);
         $secciones_tabs[] = tab_seccion($lead_opcion_promo, 'promo_pendiente');
 
 
-        $contenido_por_pago = comisiones_por_pago($data, $modal);        
+        $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
 
 
-        $contenido_recursos = recursos_ventas($data, $modal);        
+        $contenido_recursos = recursos_ventas($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_recursos, 'recursos');
 
+        $contenido_metricas = metricas($data, $modal);
+        $secciones_tabs[] = tab_seccion($contenido_metricas, 'metricas');
 
 
-        $class_pedidos = es_vendedor($data) ? 'd-none' : ' ';
-        $menu_pedidos = tab('Buscador', '#buscador_seccion', ['class' => ' mt-2']);
-        $menu_pendientes = tab('Pagos pendientes', '#pagos_pendientes', ['class' => ' mt-2']);
-        
+
+
+
+
+        $menu_pedidos = tab(
+            text_icon(_busqueda_icon, 'Tus Pedidos'),
+            '#buscador_seccion',
+            [
+                'class' => ' mt-2 underline'
+            ]
+        );
+        $menu_pendientes = tab(
+            text_icon('fa fa-credit-card-alt', 'Cuentas por pagar'),
+            '#pagos_pendientes',
+            ['class' => ' mt-3 underline']
+        );
+
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
 
-        $menu_envio_catalogo = tab('Leads envío catalogo', '#catalogos_pendientes', ['class' => ' mt-2 busqueda_catalogos_pendientes']);
-        $menu_envio_promo = tab('Opción a promoción', '#promo_pendiente', ['class' => ' mt-2 busqueda_promociones_disponibles']);
-        $menu_envio_catalogo_movimiento = tab('Recursos para hacer más ventas', '#recursos', ['class' => ' mt-2 busqueda_promociones_disponibles']);
+
+        $menu_envio_catalogo = tab(
+            text_icon("fa fa-share", 'Envía el catálogo a tus clientes potenciales'),
+            '#catalogos_pendientes',
+            [
+                'class' => ' mt-2 busqueda_catalogos_pendientes underline mt-3'
+            ]
+        );
+
+        $menu_envio_promo = tab(
+            text_icon("fa fa-star", 'Opción a promoción'),
+            '#promo_pendiente',
+            [
+                'class' => ' mt-2 busqueda_promociones_disponibles underline mt-3'
+            ]
+        );
+
+        $menu_envio_catalogo_movimiento = tab(
+            text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
+            '#recursos',
+            [
+                'class' => ' mt-4 busqueda_promociones_disponibles underline'
+            ]
+        );
 
 
-        $menu_pedidos = d($menu_pedidos, $class_pedidos);
-            
+        $menu_metricas = tab(
+            text_icon("fa fa-line-chart", 'Métricas'),
+            '#metricas',
+            [
+                'class' => ' mt-2 busqueda_metricas underline mt-3'
+            ]
+        );
+
+        $meu_al_dia = format_link(
+            "Últimas noticias",
+            [
+                "href" => path_enid("busqueda"),
+                "class" => "mt-5"
+            ]
+        );
+
+
         $menu = d([
-            $menu_pedidos, 
-            $menu_pendientes, 
-            $menu_envio_catalogo, 
-            $menu_envio_promo, 
-            $menu_envio_catalogo_movimiento
+
+            $menu_pedidos,
+            $menu_metricas,
+            $menu_envio_catalogo,
+            $menu_envio_promo,
+            $menu_envio_catalogo_movimiento,
+            $menu_pendientes,
+            $meu_al_dia
         ]);
 
-        
+
         $seccion_menus = d($menu, "col-md-3 fp9");
-        $seccion_contenidos = d(tab_content($secciones_tabs),"col-md-8 border-left border-secondary");
-        $data_complete[] = d([$seccion_menus, $seccion_contenidos],13);
-        $data_complete[] = d($modal_comisiones,13);
-        $data_complete[] = d($modal_catalogo,13);
-        $data_complete[] = d($modal_promocion,13);
-        
-        return d($data_complete,12);
+        $seccion_contenidos = d(tab_content($secciones_tabs), "col-md-8 border-left border-secondary");
+        $data_complete[] = d([$seccion_menus, $seccion_contenidos], 13);
+        $data_complete[] = d($modal_comisiones, 13);
+        $data_complete[] = d($modal_catalogo, 13);
+        $data_complete[] = d($modal_promocion, 13);
+
+        return d($data_complete, 12);
     }
 
     function total_comision($ids_usuario, $ordenes)
@@ -1844,28 +1896,41 @@ if (!function_exists('invierte_date_time')) {
         return $nombre_completo;
     }
 
-    function leads_por_envio_catalogo($data, $modal){
-     
-        $_response[] = _titulo('Lead por envío de catálogo web', 4);            
+    function leads_por_envio_catalogo($data, $modal)
+    {
+
+        $_response[] = _titulo('Lead por envío de catálogo web', 4);
         $_response[] = place("place_leads_catalogo");
         return d($_response);
     }
 
-    function leads_con_opcion_a_promo($data, $modal){
-     
+    function leads_con_opcion_a_promo($data, $modal)
+    {
 
-        $_response[] = _titulo('Lead por envío promoción', 4);            
+        $_response[] = _titulo('Lead por envío promoción', 4);
         $_response[] = place("place_leads_promocion");
         return d($_response);
     }
-    function recursos_ventas($data, $modal){
-     
-        $_response[] = _titulo('Recursos para lograr más ventas', 4);                    
+    function recursos_ventas($data, $modal)
+    {
+
+        $_response[] = _titulo('Recursos para lograr más ventas', 4);
         return d($_response);
     }
 
+    function metricas($data, $modal)
+    {
 
-    
+        $response[] = _titulo('Registro de leads por franja horaria', 4);    
+        $response[] = form_open("", [ "class" => "form_franja_horaria"]);
+        $response[] = frm_fecha_busqueda();
+        $response[] =  form_close();
+        $response[] = place("place_lead_franja_horaria");
+        return d($response);
+    }
+
+
+
 
     function comisiones_por_pago($data, $modal)
     {
@@ -1972,7 +2037,7 @@ if (!function_exists('invierte_date_time')) {
 
         $_response[] = d(_titulo('Cuentas por pagar', 4));
         if (es_data($ids_cuentas_pagos)) {
-            $_response[] = 
+            $_response[] =
                 format_link(
                     'Marcar todos como pagados',
                     [
@@ -2100,59 +2165,65 @@ if (!function_exists('invierte_date_time')) {
     function instruccion_envio_catalogo()
     {
 
-        
-        $form[] = d(_titulo('Envía estas instrucciones'), 13);        
-                
+
+        $form[] = d(_titulo('Envía estas instrucciones'), 13);
+
         $text  = flex(
             'Sigue este enlace para ver nuestro catálogo',
             'https://enidservices.com/',
             "d-flex flex-column border p-4 bg-light mt-4 w-100"
         );
-        
-        $form[] = d($text,13);
 
-        $texto_cliente_potencial = _text_("a este" , get_base_html("a", " cliente potencial", 
-        [
-            "class" => "underline ml-2 link_cliente_potencial", 
-            "href" => "",
-            "target" => "_black"
-        ]));
-        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black" );        
+        $form[] = d($text, 13);
+
+        $texto_cliente_potencial = _text_("a este", get_base_html(
+            "a",
+            " cliente potencial",
+            [
+                "class" => "underline ml-2 link_cliente_potencial",
+                "href" => "",
+                "target" => "_black"
+            ]
+        ));
+        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black");
 
         $confirmacion = d(btn('Marcar como enviado!', ['class' => 'marcar_envio_catalogo']), 'row mt-5');
         $form[] = $confirmacion;
-        
-        return d($form,10,1);
+
+        return d($form, 10, 1);
     }
-    
+
     function instruccion_envio_promocion()
     {
 
-        
-        $form[] = d(_titulo('Envía está ultima oferta'), 13);        
-                
+
+        $form[] = d(_titulo('Envía está ultima oferta'), 13);
+
         $text  = flex(
             'Por cierto hoy en la compra de tu kit estamos regalando este juego de mancuernas',
             'https://enidservices.com/web/producto/?producto=1020',
             "d-flex flex-column border p-4 bg-light mt-4 w-100"
         );
-        
-        $form[] = d($text,13);
 
-        $texto_cliente_potencial = _text_("a este" , get_base_html("a", " cliente potencial", 
-        [
-            "class" => "underline ml-2 link_cliente_potencial_promocion", 
-            "href" => "",
-            "target" => "_black"
-        ]));
-        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black" );        
+        $form[] = d($text, 13);
+
+        $texto_cliente_potencial = _text_("a este", get_base_html(
+            "a",
+            " cliente potencial",
+            [
+                "class" => "underline ml-2 link_cliente_potencial_promocion",
+                "href" => "",
+                "target" => "_black"
+            ]
+        ));
+        $form[] = d($texto_cliente_potencial, "row mt-4 f12 black");
 
         $confirmacion = d(btn('Marcar como enviado!', ['class' => 'marcar_envio_promocion']), 'row mt-5');
         $form[] = $confirmacion;
-        
-        return d($form,10,1);
+
+        return d($form, 10, 1);
     }
-    
+
     function frm_busqueda()
     {
 
