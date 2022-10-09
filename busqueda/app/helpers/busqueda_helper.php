@@ -38,8 +38,7 @@ if (!function_exists('invierte_date_time')) {
         $class = (is_mobile()) ? 'row mt-3' : "text-right";
         $response[] = d($link_descuento, $class);
         $response[] = extras_fake();
-        $response[] = place('seccion_sugerencias');
-        //$response[] = place('seccion_nuevos_ingresos');
+        $response[] = place('seccion_sugerencias');        
         $response[] = d(d("", "seccion_noticias"), 13);
 
         return append($response);
@@ -49,6 +48,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $clase = 'col-md-12 mt-5';
+
+        $r[] = format_link("Tus pedidos", 
+        [
+            "href" => path_enid("pedidos"),
+            "class" => "mb-5"
+        ]);
         $r[] = seccion_estadisticas($data);
         $response[] = d(d($r), $clase);
         $response[] = d(posiciones(), $clase);
@@ -120,15 +125,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = hr();
 
-        $link_whatsApp_facebook = a_enid(
-            "¿Por donde iniciar?",
-            [
-                "href" => _text(path_enid("sobre_vender"), "#iniciar"),
-                "class" => "black underline mb-3"
-            ]
-        );
-
-        $r[] = d($link_whatsApp_facebook);
+       
 
         $link_whatsApp_facebook = a_enid(
             "Agiliza tus ventas con WhatsApp y Facebook",
@@ -149,15 +146,6 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d($link_descuento);
 
-        $link_costo_entrega = a_enid(
-            "Calcula el costo de entrega para tus clientes",
-            [
-                "href" => path_enid("costo_entrega"),
-                "class" => "black underline mb-3"
-            ]
-        );
-
-        $r[] = d($link_costo_entrega);
         $r[] = d($texto, 'mt-5');
 
         $link_fondos = a_enid(
