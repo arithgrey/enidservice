@@ -1761,11 +1761,11 @@ if (!function_exists('invierte_date_time')) {
         $modal_promocion = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
 
 
-        $lead_por_envio_catalogo = leads_por_envio_catalogo($data, $modal);
+        $lead_por_envio_catalogo = leads_por_envio_catalogo();
         $secciones_tabs[] = tab_seccion($lead_por_envio_catalogo, 'catalogos_pendientes');
 
 
-        $lead_opcion_promo = leads_con_opcion_a_promo($data, $modal);
+        $lead_opcion_promo = leads_con_opcion_a_promo();
         $secciones_tabs[] = tab_seccion($lead_opcion_promo, 'promo_pendiente');
 
 
@@ -1773,15 +1773,14 @@ if (!function_exists('invierte_date_time')) {
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
 
 
-        $contenido_recursos = recursos_ventas($data, $modal);
+        $contenido_recursos = recursos_ventas();
         $secciones_tabs[] = tab_seccion($contenido_recursos, 'recursos');
 
-        $contenido_metricas = metricas($data, $modal);
+        $contenido_metricas = metricas();
         $secciones_tabs[] = tab_seccion($contenido_metricas, 'metricas');
 
-
-
-
+        $contenido_metricas = entregas_en_camino();
+        $secciones_tabs[] = tab_seccion($contenido_metricas, 'ventas_en_proceso');
 
 
         $menu_pedidos = tab(
@@ -1807,6 +1806,15 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 busqueda_catalogos_pendientes underline mt-3'
             ]
         );
+
+        $menu_ventas_proceso = tab(
+            text_icon("fa fa-money", 'Ventas en proceso'),
+            '#ventas_en_proceso',
+            [
+                'class' => ' mt-2 ventas_en_proceso underline mt-3'
+            ]
+        );
+
 
         $menu_envio_promo = tab(
             text_icon("fa fa-star", 'Opción a promoción'),
@@ -1846,6 +1854,7 @@ if (!function_exists('invierte_date_time')) {
 
             $menu_pedidos,
             $menu_metricas,
+            $menu_ventas_proceso,
             $menu_envio_catalogo,
             $menu_envio_promo,
             $menu_envio_catalogo_movimiento,
@@ -1863,7 +1872,13 @@ if (!function_exists('invierte_date_time')) {
 
         return d($data_complete, 12);
     }
+    function entregas_en_camino(){
 
+        $_response[] = _titulo('Tus pedidos en proceso', 4);
+        $_response[] = place("place_ventas_en_proceso");
+        return d($_response);
+
+    }
     function total_comision($ids_usuario, $ordenes)
     {
         $totales = [];
@@ -1918,7 +1933,7 @@ if (!function_exists('invierte_date_time')) {
         return $nombre_completo;
     }
 
-    function leads_por_envio_catalogo($data, $modal)
+    function leads_por_envio_catalogo()
     {
 
         $_response[] = _titulo('Lead por envío de catálogo web', 4);
@@ -1926,21 +1941,21 @@ if (!function_exists('invierte_date_time')) {
         return d($_response);
     }
 
-    function leads_con_opcion_a_promo($data, $modal)
+    function leads_con_opcion_a_promo()
     {
 
         $_response[] = _titulo('Lead por envío promoción', 4);
         $_response[] = place("place_leads_promocion");
         return d($_response);
     }
-    function recursos_ventas($data, $modal)
+    function recursos_ventas()
     {
 
         $_response[] = _titulo('Recursos para lograr más ventas', 4);
         return d($_response);
     }
 
-    function metricas($data, $modal)
+    function metricas()
     {
 
         $response[] = _titulo('Registro de leads por franja horaria', 4);    

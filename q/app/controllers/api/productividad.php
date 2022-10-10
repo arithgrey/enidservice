@@ -150,14 +150,6 @@ class productividad extends REST_Controller
         return $this->app->api("objetivos/perfil", $q);
     }
 
-    /*
-    private function valida_producto_anunciado($q)
-    {
-
-        return $this->app->api("servicio/num_anuncios", $q);
-    }
-    */
-
     private function verifica_direccion_registrada_usuario($q)
     {
 
