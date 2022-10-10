@@ -199,19 +199,19 @@ class Recibo_model extends CI_Model
         where 
         id_usuario_referencia = $id_usuario
         AND DATE(fecha_registro) 
-        BETWEEN '".$fecha_inicio."'
-        AND   '".$fecha_termino."'
+        BETWEEN '" . $fecha_inicio . "'
+        AND   '" . $fecha_termino . "'
 
         OR
         DATE(fecha_entrega) 
-        BETWEEN '".$fecha_inicio."'
-        AND   '".$fecha_termino."'
+        BETWEEN '" . $fecha_inicio . "'
+        AND   '" . $fecha_termino . "'
         
         OR
         DATE(fecha_entrega) 
-        BETWEEN '".$fecha_inicio."'
+        BETWEEN '" . $fecha_inicio . "'
         AND
-        DATE(DATE_ADD('".$fecha_inicio."', INTERVAL 1 DAY) )
+        DATE(DATE_ADD('" . $fecha_inicio . "', INTERVAL 1 DAY) )
 
         GROUP BY HOUR(fecha_registro)
         ORDER BY HOUR(fecha_registro) DESC";
@@ -267,16 +267,16 @@ class Recibo_model extends CI_Model
     {
 
         $f = get_keys($params);
-        
+
         $id_usuario_venta = $param['id_usuario'];
         $es_administrador = $param['es_administrador'];
         $query_get = "SELECT " . $f . " FROM 
         proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
         ON po.id_proyecto_persona_forma_pago = p.id 
             INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id WHERE 1 = 1";
-        
-        
-        
+
+
+
         $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
         $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
         $extra_usuario_venta = ($id_usuario_venta == 1 or intval($es_administrador) === 1) ? " " :
@@ -294,30 +294,30 @@ class Recibo_model extends CI_Model
 
 
         $order = " ORDER BY  po.id_orden_compra ASC";
-        $query_get .= _text_(            
-            $usuario_referencia,            
+        $query_get .= _text_(
+            $usuario_referencia,
             $extra_usuario_venta,
-            $ext_fecha,            
+            $ext_fecha,
             $order
         );
 
-        
+
         return $this->db->query($query_get)->result_array();
     }
     function leads_promociones($params, $param)
     {
 
         $f = get_keys($params);
-        
+
         $id_usuario_venta = $param['id_usuario'];
         $es_administrador = $param['es_administrador'];
         $query_get = "SELECT " . $f . " FROM 
         proyecto_persona_forma_pagos  p INNER JOIN producto_orden_compras po 
         ON po.id_proyecto_persona_forma_pago = p.id 
             INNER JOIN orden_compras oc ON po.id_orden_compra = oc.id WHERE 1 = 1";
-        
-        
-        
+
+
+
         $id_usuario_referencia = prm_def($param, 'id_usuario_referencia');
         $usuario_referencia = ($id_usuario_referencia > 0) ? ' AND p.id_usuario_referencia = "' . $id_usuario_referencia . '"' : '';
         $extra_usuario_venta = ($id_usuario_venta == 1 or intval($es_administrador) === 1) ? " " :
@@ -333,17 +333,17 @@ class Recibo_model extends CI_Model
         AND se_cancela != 1";
 
         $order = " ORDER BY  po.id_orden_compra ASC";
-        $query_get .= _text_(            
-            $usuario_referencia,            
+        $query_get .= _text_(
+            $usuario_referencia,
             $extra_usuario_venta,
-            $ext_fecha,            
+            $ext_fecha,
             $order
         );
 
-        
+
         return $this->db->query($query_get)->result_array();
     }
-    
+
     private function get_servicio($param)
     {
 
@@ -1054,7 +1054,7 @@ class Recibo_model extends CI_Model
                 $lead_catalogo
             ];
 
-        if(array_key_exists( "fecha_contra_entrega", $array_keys)){
+        if (array_key_exists("fecha_contra_entrega", $array_keys)) {
 
             array_push($array_keys, "fecha_contra_entrega");
             array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
@@ -1064,8 +1064,8 @@ class Recibo_model extends CI_Model
 
             array_push($array_keys, "fecha_entrega");
             array_push($array_values, "'" . $data_usuario["fecha_contra_entrega"] . "'");
-        }    
-        
+        }
+
 
 
         $query_insert = "INSERT INTO 
@@ -1133,6 +1133,7 @@ class Recibo_model extends CI_Model
 						AND " . $extra_usuario . " 						  
 						AND  p.se_cancela = 0
 						AND  p.status NOT IN(10,19)  
+                        AND p.status = 7
 						AND 						
 						(
 						DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())
@@ -1814,7 +1815,8 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
-    function recibos_por_entregar_a_entregados($ids){
+    function recibos_por_entregar_a_entregados($ids)
+    {
 
         $query_update = "UPDATE 
                             proyecto_persona_forma_pagos  
@@ -1826,9 +1828,19 @@ class Recibo_model extends CI_Model
                             se_cancela = 0 , 
                             cancela_cliente = 0
                             WHERE id IN ($ids) LIMIT 1000";
-                                
-        return $this->db->query($query_update);        
 
+        return $this->db->query($query_update);
     }
+    function notificacion_envio_reparto($id_proyecto_persona_forma_pago)
+    {
+        $query_update = "UPDATE 
+        proyecto_persona_forma_pagos  
+        SET         
+        status =  7         
+        WHERE id =  $id_proyecto_persona_forma_pago 
+        LIMIT 1";
 
+        
+        return $this->db->query($query_update);
+    }
 }

@@ -89,6 +89,7 @@ if (!function_exists('invierte_date_time')) {
         $re[] = d($menu, 'col-sm-12 mr-5 pr-5 d-md-none');
 
         $id_status = pr($productos_orden_compra, 'status');
+        
 
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
@@ -148,10 +149,15 @@ if (!function_exists('invierte_date_time')) {
             $tipos_entregas,
             $es_venta_cancelada
         );
-
+        $response[]  = enviar_a_reparto_modal();
         $response[] = hiddens(['class' => 'id_usuario_referencia', 'value' => $data['id_usuario_referencia']]);
         $response[] = hiddens(['class' => 'es_lista_negra', 'value' => es_lista_negra($data)]);
-
+        $response[] = hiddens(['class' => 'id_status', 'value' => $id_status]);
+        $response[] = hiddens(['class' => 'es_venta_cancelada', 'value' => $es_venta_cancelada]);
+        $response[] = hiddens(['class' => 'saldo_cubierto', 'value' => $saldo_cubierto]);
+        
+        
+        
         return d($response, _10auto);
     }
 
@@ -182,6 +188,22 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d_c($x, ['class' => 'mt-4 elemento_menu border-bottom']);
         return gb_modal($contenido, 'modal_opciones_compra');
     }
+    function enviar_a_reparto_modal()
+    {
+        
+        $contenido[] = d(_titulo('¿Quieres enviar a repartir el pedido hoy?'), 'mb-5  text-center');
+
+        $enviar = format_link("Sí, enviar",
+        [
+            "class" => "botton_enviar_reparto",            
+
+        ]);
+        $despues = format_link("Después",["class" =>  "botton_enviar_despues red_enid"],0);
+        $contenido[] =  flex($enviar, $despues,_between);
+        
+        return gb_modal($contenido, 'modal_envio_reparto');
+    }
+
 
     function link_cambio_domicilio($data, $response)
     {

@@ -53,7 +53,7 @@ class lead extends REST_Controller
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
-        
+
             foreach ($leads as $row) {
 
                 $hora = $row["hora"];
@@ -70,16 +70,16 @@ class lead extends REST_Controller
                 $total_promocion = $total_promocion +  $lead_promo_regalo;
                 $total_cancelaciones =  $total_cancelaciones +  $es_cancelada;
                 $total_venta_efectiva = $total_venta_efectiva  +  $venta_efectiva;
-                
-                $extra = ($venta_efectiva > 0 ) ? 'blue_enid strong'  : '';
+
+                $extra = ($venta_efectiva > 0) ? 'blue_enid strong'  : '';
                 $linea = [
-                    _text_($hora,'hrs'),
-                     $total,
-                     $lead_catalogo,
-                     $lead_promo_regalo,
-                     $es_cancelada,
-                     d($venta_efectiva,$extra)
-                    ];
+                    _text_($hora, 'hrs'),
+                    $total,
+                    $lead_catalogo,
+                    $lead_promo_regalo,
+                    $es_cancelada,
+                    d($venta_efectiva, $extra)
+                ];
 
                 $this->table->add_row($linea);
             }
@@ -87,7 +87,7 @@ class lead extends REST_Controller
 
         $footer = [
             "Totales",
-            $total_leads, 
+            $total_leads,
             $total_catalogo,
             $total_promocion,
             $total_cancelaciones,
@@ -97,5 +97,25 @@ class lead extends REST_Controller
         $this->table->add_row($footer);
 
         return $this->table->generate();
+    }
+    function envio_reparto_PUT()
+    {
+        $param = $this->put();
+
+        $response = false;
+        if (fx($param, "orden_compra")) {
+
+            $id_orden_compra = $param["orden_compra"];
+            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            
+            foreach ($productos_orden_compra as $row) {
+                
+                $response = $this->recibo_model->notificacion_envio_reparto($row["id"]);
+               
+            }
+        }
+
+
+        $this->response($response);
     }
 }
