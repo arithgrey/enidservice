@@ -97,7 +97,7 @@ let notificacion_envio_promocion = function () {
     $modal_envio_promocion.modal("show");
 
     /*Búsqueda lead*/
-    busqueda_lead_recibo($id_orden_compra);
+    busqueda_lead_recibo($id_orden_compra, 1);
 
     $(".marcar_envio_promocion").click(function () {
 
@@ -154,6 +154,7 @@ let busqueda_lead_recibo = function ($id_orden_compra, $es_promocion = 0) {
     request_enid("GET", data_send, url, function (data) {
 
         let $path = data.usuario[0].url_lead;
+
         if($es_promocion){
 
             $(".link_cliente_potencial_promocion").attr("href", $path);
