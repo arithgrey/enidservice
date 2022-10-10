@@ -10,6 +10,7 @@ let $saldo_actual_cubierto = $('.saldo_actual_cubierto');
 let $saldo_cubierto_pos_venta = $('.saldo_cubierto_pos_venta');
 let $status_venta = $('.status_venta');
 let $modal_estado_venta = $('#modal_estado_venta');
+let $modal_envio_reparto = $("#modal_envio_reparto");
 let $editar_estado_compra = $('.editar_estado_compra');
 let $selector_estados_ventas = $('.selector_estados_ventas');
 let $status_venta_registro = $('.status_venta_registro');
@@ -21,7 +22,10 @@ let $registro_articulo_interes = $('.registro_articulo_interes');
 let $id_usuario_referencia = $('.id_usuario_referencia');
 let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
 let $edicion_cantidad = $('.edicion_cantidad');
-let $es_lista_negra = $('.es_lista_negra');
+let $id_status = $(".id_status");
+let $botton_enviar_reparto = $(".botton_enviar_reparto");
+let $botton_enviar_despues = $(".botton_enviar_despues");
+
 let $seccion_cantidad = $('.seccion_cantidad');
 let $seccion_edicion_cantidad = $('.seccion_edicion_cantidad');
 let $botton_actualizar = $('.botton_actualizar');
@@ -29,6 +33,7 @@ let $botton_actualizar = $('.botton_actualizar');
 
 $(document).ready(() => {
 
+    
     $editar_estado_compra.click(function () {
 
         selecciona_select('.status_venta_select', parseInt($status_venta_registro.val()));
@@ -68,10 +73,42 @@ $(document).ready(() => {
     $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
     $repartidor.click(cambio_reparto);
     $edicion_cantidad.click(habilita_edicion);
-    $botton_actualizar.click(actualizar_cantidad);
-    // valida_registro_articulo_interes();
+    $botton_actualizar.click(actualizar_cantidad);    
+    valida_envio_reparto();
 
 });
+let valida_envio_reparto = () => {
+
+    let status = parseInt($id_status.val());    
+    let saldo_cubierto =  parseInt($saldo_actual_cubierto.val());
+    
+    if(status == 16 && saldo_cubierto < 1){
+        
+        $modal_envio_reparto.modal("show");
+        $botton_enviar_despues.click(function(){
+            $modal_envio_reparto.modal("hide");
+        });
+        
+        $botton_enviar_reparto.click(confirma_envio_reparto);
+
+    }
+
+};
+let confirma_envio_reparto =  () =>{
+
+    advierte('Procesando ...', 1);
+
+    let data_send = $.param({
+        "orden_compra": get_parameter(".recibo"),                
+    });
+    let url = "../q/index.php/api/lead/envio_reparto/format/json/";    
+    request_enid("PUT", data_send, url, response_notificacion_envio_reparto);
+
+}
+let response_notificacion_envio_reparto = data => {
+    
+    redirect('');
+};
 let editar_horario_entrega = function (e) {
 
     let data_send = $(".form_fecha_entrega").serialize();

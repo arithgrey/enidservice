@@ -188,6 +188,7 @@ class Home extends CI_Controller
         $id_usuario_compra = pr($productos_orden_compra, "id_usuario");
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
 
+        
         $data += [
             "notificacion_pago" => ($notificacion > 0) ? 0 : $notificacion_pago,
             "orden" => $id_orden_compra,
@@ -552,9 +553,8 @@ class Home extends CI_Controller
         $usuario_compra = $this->get_usuario($id_usuario);
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
 
-
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
-
+    
         
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
