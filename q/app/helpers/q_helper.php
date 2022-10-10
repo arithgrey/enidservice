@@ -1858,7 +1858,7 @@ if (!function_exists('invierte_date_time')) {
             $menos_opciones = _text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none');
             $response[] = d(icon($menos_opciones), 'text-center');
         }
-        return append($response);
+        return d($response, "seccion_ventas_pendientes");
     }
 
     function formato_texto_entrega($text_entrega, $row, $dias, $es_mayor)

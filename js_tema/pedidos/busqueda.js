@@ -24,6 +24,7 @@ let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
 
 let $busqueda_metricas = $(".busqueda_metricas");
 
+let $busqueda_ventas_en_proceso =  $(".ventas_en_proceso");
 let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
 let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
 
@@ -45,9 +46,24 @@ $(document).ready(() => {
     $marcar_cuentas_pagas.click(marcar_cuentas_pagas);
     $busqueda_catalogos_pendientes.click(busqueda_leads_catalogo);
     $busqueda_promociones_disponibles.click(busqueda_lead_promociones_disponibles);
-    //$busqueda_metricas.click(busqueda_metricas_franja_horaria);
+    $busqueda_ventas_en_proceso.click(busqueda_ventas_proceso);
+    
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
 });
+
+let busqueda_ventas_proceso = function(){
+
+    let data_send = $form_franja_horaria.serialize();
+    let url = "../q/index.php/api/lead/ventas_proceso/format/json/";
+    request_enid("GET", data_send, url, response_busqueda_ventas_proceso);
+
+}
+
+let response_busqueda_ventas_proceso = function (data) {
+
+    render_enid(".place_ventas_en_proceso", data);
+
+};
 
 let busqueda_lead_promociones_disponibles = function(){
     
