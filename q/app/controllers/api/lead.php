@@ -35,25 +35,66 @@ class lead extends REST_Controller
     private function table_franja_horaria($leads)
     {
 
+        $total_leads = 0;
+        $total_catalogo = 0;
+        $total_promocion = 0;
+        $total_cancelaciones = 0;
+        $total_venta_efectiva = 0;
         $heading = [
             "Franja horaria",
-            "Leads regristrados",
+            "Leads registrados",
+            "Reciben el catalogo",
+            "Reciben promoción",
+            "Cancelaciones",
+            "Ventas efectivas"
         ];
 
         if (es_data($leads)) {
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
-
+        
             foreach ($leads as $row) {
 
                 $hora = $row["hora"];
                 $total = $row["total"];
+                $lead_catalogo =  $row["lead_catalogo"];
+                $lead_promo_regalo =  $row["lead_promo_regalo"];
+                $es_cancelada = $row["es_cancelada"];
+                $venta_efectiva =  $row["venta_efectiva"];
 
-                $linea = [$hora, $total];
+
+
+                $total_leads =  $total_leads + $total;
+                $total_catalogo = $total_catalogo +  $lead_catalogo;
+                $total_promocion = $total_promocion +  $lead_promo_regalo;
+                $total_cancelaciones =  $total_cancelaciones +  $es_cancelada;
+                $total_venta_efectiva = $total_venta_efectiva  +  $venta_efectiva;
+                
+                $extra = ($venta_efectiva > 0 ) ? 'blue_enid strong'  : '';
+                $linea = [
+                    _text_($hora,'hrs'),
+                     $total,
+                     $lead_catalogo,
+                     $lead_promo_regalo,
+                     $es_cancelada,
+                     d($venta_efectiva,$extra)
+                    ];
+
                 $this->table->add_row($linea);
             }
         }
+
+        $footer = [
+            "Totales",
+            $total_leads, 
+            $total_catalogo,
+            $total_promocion,
+            $total_cancelaciones,
+            $total_venta_efectiva
+        ];
+
+        $this->table->add_row($footer);
 
         return $this->table->generate();
     }

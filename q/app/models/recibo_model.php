@@ -188,13 +188,26 @@ class Recibo_model extends CI_Model
     function lead_franja_horaria($id_usuario, $fecha_inicio, $fecha_termino)
     {
         $query_get =  "select 
-        count(0)total, HOUR(fecha_registro)hora 
-        from proyecto_persona_forma_pagos where 
+        count(0)total, 
+        HOUR(fecha_registro)hora,
+        sum(case when lead_catalogo > 0 then 1 else 0 end) lead_catalogo,
+        sum(case when lead_promo_regalo > 0 then 1 else 0 end) lead_promo_regalo,
+        sum(case when ( cancela_cliente > 0 || se_cancela > 0 ||  status = 10 || status =  19)  then 1 else 0 end) es_cancelada,
+        sum(case when   status = 15  then 1 else 0 end) venta_efectiva
+
+        from proyecto_persona_forma_pagos 
+        where 
         id_usuario_referencia = $id_usuario
         AND DATE(fecha_registro) 
         BETWEEN '".$fecha_inicio."'
         AND   '".$fecha_termino."'
-        GROUP BY HOUR(fecha_registro)";
+
+        OR
+        DATE(fecha_entrega) 
+        BETWEEN '".$fecha_inicio."'
+        AND   '".$fecha_termino."'
+        GROUP BY HOUR(fecha_registro)
+        ORDER BY HOUR(fecha_registro) DESC";
 
         return $this->db->query($query_get)->result_array();
     }
