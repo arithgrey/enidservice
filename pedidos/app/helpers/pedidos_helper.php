@@ -1845,13 +1845,23 @@ if (!function_exists('invierte_date_time')) {
             "Últimas noticias",
             [
                 "href" => path_enid("busqueda"),
-                "class" => "mt-5"
+                "class" => "mb-5"
             ]
         );
 
+        $menu_dash_board = format_link(
+            "Dasboards",
+            [
+                "href" => path_enid("reporte_enid"),
+                "class" => "mb-2"
+            ]
+        );
+
+        $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
         $menu = d([
-
+            $menu_dash_board, 
+            $meu_al_dia,            
             $menu_pedidos,
             $menu_metricas,
             $menu_ventas_proceso,
@@ -1859,7 +1869,7 @@ if (!function_exists('invierte_date_time')) {
             $menu_envio_promo,
             $menu_envio_catalogo_movimiento,
             $menu_pendientes,
-            $meu_al_dia
+           
         ]);
 
 
