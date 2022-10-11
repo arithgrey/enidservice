@@ -324,5 +324,40 @@ if (!function_exists('invierte_date_time')) {
         }
         return d($response, "seccion_ventas_pendientes");
     }
+    function linea_compra_productos($recibos, $id, $es_cliente, $data, $es_reparto, $total)
+    {
+
+        $recibo = [];
+        $a = 0;
+        $id_orden = 0;
+        $total_orden_compra = 0;
+        $total_articulos = 0;
+        foreach ($recibos as $row) {
+
+            $id_orden_compra = $row['id_orden_compra'];
+            if ($id_orden_compra == $id) {
+                $total_articulos = ($total_articulos + $row["num_ciclos_contratados"]);
+                $id_orden = $id_orden_compra;
+                $total_orden_compra = ($total_orden_compra + $row["total"]);
+
+                if ($a < 1) {
+
+                    $recibo = $row;
+                } else {
+                    $a = 0;
+                }
+            }
+        }
+
+        return linea_compra(
+            $recibo,
+            $es_cliente,
+            $data,
+            $id_orden,
+            $es_reparto,
+            $total_orden_compra,
+            $total_articulos
+        );
+    }
 
 }
