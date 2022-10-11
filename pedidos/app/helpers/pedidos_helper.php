@@ -1779,8 +1779,16 @@ if (!function_exists('invierte_date_time')) {
         $contenido_metricas = metricas();
         $secciones_tabs[] = tab_seccion($contenido_metricas, 'metricas');
 
-        $contenido_metricas = entregas_en_camino();
-        $secciones_tabs[] = tab_seccion($contenido_metricas, 'ventas_en_proceso');
+        $contenido_ventas_camino = entregas_en_camino();
+        $secciones_tabs[] = tab_seccion($contenido_ventas_camino, 'ventas_en_proceso');
+
+
+        $contenido_ventas_camino_cliente = entregas_en_camino_cliente();
+        $secciones_tabs[] = tab_seccion($contenido_ventas_camino_cliente, 'ventas_en_proceso_cliente');
+
+
+
+        
 
 
         $menu_pedidos = tab(
@@ -1815,6 +1823,13 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $menu_ventas_proceso_clientes = tab(
+            text_icon("fa fa-money", 'Ventas en proceso de clientes'),
+            '#ventas_en_proceso_cliente',
+            [
+                'class' => ' mt-2 ventas_en_proceso_clientes underline mt-3'
+            ]
+        );
 
         $menu_envio_promo = tab(
             text_icon("fa fa-star", 'Opción a promoción'),
@@ -1864,7 +1879,8 @@ if (!function_exists('invierte_date_time')) {
             $meu_al_dia,            
             $menu_pedidos,
             $menu_metricas,
-            $menu_ventas_proceso,
+            $menu_ventas_proceso_clientes,
+            $menu_ventas_proceso,            
             $menu_envio_catalogo,
             $menu_envio_promo,
             $menu_envio_catalogo_movimiento,
@@ -1889,6 +1905,16 @@ if (!function_exists('invierte_date_time')) {
         return d($_response);
 
     }
+
+    function entregas_en_camino_cliente(){
+
+        $_response[] = _titulo('Pedidos de clientes en proceso', 4);
+        $_response[] = place("place_ventas_en_proceso_clientes");
+        return d($_response);
+
+    }
+    
+
     function total_comision($ids_usuario, $ordenes)
     {
         $totales = [];
