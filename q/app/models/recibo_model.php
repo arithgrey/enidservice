@@ -218,6 +218,30 @@ class Recibo_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }
+    function lead_franja_horaria_menos_uno($id_usuario)
+    {
+        $query_get =  "select 
+        count(0)total, 
+        HOUR(fecha_registro)hora,
+        sum(case when lead_catalogo > 0 then 1 else 0 end) lead_catalogo,
+        sum(case when lead_promo_regalo > 0 then 1 else 0 end) lead_promo_regalo,
+        sum(case when ( cancela_cliente > 0 || se_cancela > 0 ||  status = 10 || status =  19)  then 1 else 0 end) es_cancelada,
+        sum(case when  ( status = 15 || saldo_cubierto > 1)  then 1 else 0 end) venta_efectiva
+
+        from proyecto_persona_forma_pagos 
+        where 
+        id_usuario_referencia = $id_usuario
+        AND 
+        DATE(fecha_registro)  = DATE(DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY) )
+        OR
+        DATE(fecha_entrega)  = DATE(DATE_ADD(CURRENT_DATE(), INTERVAL -1 DAY) )
+
+        GROUP BY HOUR(fecha_registro)
+        ORDER BY HOUR(fecha_registro) DESC";
+
+        return $this->db->query($query_get)->result_array();
+    }
+
 
 
     function get_q($params, $param, $limita_fecha = 0)

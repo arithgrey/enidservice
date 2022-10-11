@@ -22,81 +22,128 @@ class lead extends REST_Controller
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino")) {
 
-            $leads = $this->recibo_model->lead_franja_horaria(
+            $leads_franja_horaria = $this->recibo_model->lead_franja_horaria(
                 $this->id_usuario,
                 $param["fecha_inicio"],
                 $param["fecha_termino"]
             );
 
-            $response = $this->table_franja_horaria($leads);
+
+            $leads_franja_horaria_menos_uno = $this->recibo_model->lead_franja_horaria_menos_uno($this->id_usuario);
+
+            
+            $response = $this->table_franja_horaria($leads_franja_horaria, $leads_franja_horaria_menos_uno);
+
         }
         $this->response($response);
     }
-    private function table_franja_horaria($leads)
+    private function table_franja_horaria($leads_franja_horaria,  $leads_franja_horaria_menos_uno)
     {
+
 
         $total_leads = 0;
         $total_catalogo = 0;
         $total_promocion = 0;
         $total_cancelaciones = 0;
         $total_venta_efectiva = 0;
+        $total_venta_efectiva_ayer = 0;
+        $total_leads_ayer = 0;
+
         $heading = [
             "Franja horaria",
-            "Leads registrados",
+            "Leads registrados ayer",
+            "Leads registrados hoy",
             "Reciben el catalogo",
             "Reciben promoción",
             "Cancelaciones",
-            "Ventas efectivas"
+            "Ventas ayer",
+            "Ventas hoy"
+            
         ];
 
-        if (es_data($leads)) {
+        
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
 
-            foreach ($leads as $row) {
+            for($a = 23; $a > -1 ; $a --){
+            
 
-                $hora = $row["hora"];
-                $total = $row["total"];
-                $lead_catalogo =  $row["lead_catalogo"];
-                $lead_promo_regalo =  $row["lead_promo_regalo"];
-                $es_cancelada = $row["es_cancelada"];
-                $venta_efectiva =  $row["venta_efectiva"];
+                $total = $this->busqueda_franja($a , "total" ,$leads_franja_horaria);
+                $total_ayer = $this->busqueda_franja($a , "total" ,$leads_franja_horaria_menos_uno);
+
+                $lead_catalogo = $this->busqueda_franja($a , "lead_catalogo" ,$leads_franja_horaria);
+                $lead_promo_regalo = $this->busqueda_franja($a , "lead_promo_regalo" ,$leads_franja_horaria);
+                $es_cancelada = $this->busqueda_franja($a , "es_cancelada" ,$leads_franja_horaria);
+                $venta_efectiva = $this->busqueda_franja($a , "venta_efectiva" ,$leads_franja_horaria);
+                
+                $venta_efectiva_ayer = $this->busqueda_franja($a , "venta_efectiva" ,$leads_franja_horaria_menos_uno);
+
+                $total_leads =  $total_leads + $total;  
+                $total_leads_ayer = $total_leads_ayer + $total_ayer;
 
 
-
-                $total_leads =  $total_leads + $total;
                 $total_catalogo = $total_catalogo +  $lead_catalogo;
                 $total_promocion = $total_promocion +  $lead_promo_regalo;
                 $total_cancelaciones =  $total_cancelaciones +  $es_cancelada;
                 $total_venta_efectiva = $total_venta_efectiva  +  $venta_efectiva;
+                $total_venta_efectiva_ayer = $total_venta_efectiva_ayer  +  $venta_efectiva_ayer;
 
-                $extra = ($venta_efectiva > 0) ? 'blue_enid strong'  : '';
+
+
+                $extra = ($venta_efectiva > 0) ? 'blue_enid strong f12 border border-secondary'  : 'f12 red_enid border border-secondary';
+                $extra_ayer = ($venta_efectiva_ayer > 0) ? 'blue_enid strong f12 border border-secondary'  : 'f12 red_enid border border-secondary';
+                
+                $clase_menos = ($total_ayer < $total) ? 'blue_enid' : 'red_enid';
+                
                 $linea = [
-                    _text_($hora, 'hrs'),
-                    $total,
+                    _text_($a, 'hrs'),
+                    d($total_ayer, 'border-secondary border'),
+                    d($total, _text_($clase_menos, 'border-secondary border strong' )),
                     $lead_catalogo,
                     $lead_promo_regalo,
                     $es_cancelada,
-                    d($venta_efectiva, $extra)
+                    d($venta_efectiva_ayer, $extra_ayer),
+                    d($venta_efectiva, $extra),
+                    
                 ];
 
+                
                 $this->table->add_row($linea);
+
             }
-        }
+        
+        $extra = ($total_leads_ayer > $total_leads) ? 'red_enid strong' : 'blue_enid strong';
+        $extra_venta = ($total_venta_efectiva_ayer > $total_venta_efectiva) ? 'red_enid strong' : 'blue_enid strong';
 
         $footer = [
             "Totales",
-            $total_leads,
+            $total_leads_ayer,
+            d($total_leads, $extra),            
             $total_catalogo,
             $total_promocion,
             $total_cancelaciones,
-            $total_venta_efectiva
+            $total_venta_efectiva_ayer,
+            d($total_venta_efectiva, $extra_venta)
         ];
 
         $this->table->add_row($footer);
 
         return $this->table->generate();
+    }
+    function busqueda_franja($hora , $busqueda ,$leads_franja_horaria){
+
+
+        $valor_busqueda =  0;
+        foreach ($leads_franja_horaria as $row) {
+
+            $hora_lead = $row["hora"];
+            if($hora_lead == $hora ){
+                $valor_busqueda = $row[$busqueda];
+                break;
+            }            
+        }
+        return $valor_busqueda;
     }
     function envio_reparto_PUT()
     {
