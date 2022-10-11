@@ -49,11 +49,22 @@ if (!function_exists('invierte_date_time')) {
 
         $clase = 'col-md-12 mt-5';
 
+        if(es_administrador($data)){
+            
+            $r[] = format_link("Dasboards", 
+            [
+                "href" => path_enid("reporte_enid"),
+                "class" => "mb-2"
+            ]);
+
+        }
+
         $r[] = format_link("Tus pedidos", 
         [
             "href" => path_enid("pedidos"),
             "class" => "mb-5"
         ]);
+
         $r[] = seccion_estadisticas($data);
         $response[] = d(d($r), $clase);
         $response[] = d(posiciones(), $clase);
