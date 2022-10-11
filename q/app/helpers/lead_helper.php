@@ -63,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $f++;
             }
-            $response = ayuda_tipo_entrega($recibos, $data, $ventas_hoy, $ventas_posteriores);
+            $response = ayuda_tipo_entrega($recibos, $ventas_hoy, $ventas_posteriores);
         }
 
         return $response;
@@ -304,25 +304,21 @@ if (!function_exists('invierte_date_time')) {
 
         return $text_total;
     }
-    function ayuda_tipo_entrega($recibos, $data, $ventas_hoy, $ventas_posteriores)
+    function ayuda_tipo_entrega($recibos, $ventas_hoy, $ventas_posteriores)
     {
 
         $response = [];
         if (es_data($recibos)) {
 
-            $titulo = es_repartidor($data) ? 'Próximas entregas' : 'Tus ventas en proceso';
-            $titulo = es_cliente($data) ? 'Tus pedidos en curso' : $titulo;
-
-            $response[] = d(_titulo($titulo));
             $response[] = append($ventas_hoy);
-            $response[] = append($ventas_posteriores);
-            $opciones = _text_(_mas_opciones_bajo_icon, 'fa-2x mt-3 mas_ventas_notificacion');
-            $response[] = d(icon($opciones), 'text-center ');
-
-            $menos_opciones = _text_(_mas_opciones_icon, 'fa-2x mt-3 menos_ventas_notificacion d-none');
-            $response[] = d(icon($menos_opciones), 'text-center');
+            if(es_data($ventas_posteriores)){
+                $response[] = d(_titulo("Para mañana"));
+                $response[] = append($ventas_posteriores);
+            }
+            
+                      
         }
-        return d($response, "seccion_ventas_pendientes");
+        return d($response);
     }
     function linea_compra_productos($recibos, $id, $es_cliente, $data, $es_reparto, $total)
     {

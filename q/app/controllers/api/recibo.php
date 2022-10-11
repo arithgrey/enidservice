@@ -90,6 +90,24 @@ class recibo extends REST_Controller
         }
         $this->response($response);
     }
+    function pendientes_sin_cierre_clientes_GET()
+    {
+
+              
+        $response = $this->recibo_model->pendientes_sin_cierre_clientes();
+        $recibos = $this->horarios_contra_entrega_pedidos($response);
+        $response = $this->usuarios_ventas_notificaciones($recibos['recibos']);    
+        $recibos['recibos'] = $response;        
+        $ordenes = $this->append_usuarios_reparto($recibos['recibos']);        
+        $ordenes = $this->append_usuario_cliente($ordenes);        
+        $recibos['recibos'] = $ordenes;    
+        $recibos = $this->domicilios_puntos_encuentro_ubicaciones($recibos);    
+        $response = $this->recompensas($recibos);
+        
+        
+        $this->response($response);
+    }
+
     function recompensas($recibos)
     {
 
@@ -1627,17 +1645,16 @@ class recibo extends REST_Controller
         $params = $this->parametros_busqueda(0);
         $response = $this->recibo_model->leads_catalogo($params, $param);
 
-        if(es_data($response)){
+        if (es_data($response)) {
 
             $response = $this->add_imgs_servicio($response);
             $response = $this->add_comisionistas($response, $param);
             $response = $this->add_repartidores($response, $param);
             $response = $this->add_clientes($response, $param);
-            $session = $this->app->session();            
+            $session = $this->app->session();
             $recompensas = $this->app->recompensas_recibos($response);
             $response = render_resumen_lead($response, $recompensas, $param, $session);
-            
-        }else{
+        } else {
             $response = sin_leads();
         }
 
@@ -1656,9 +1673,9 @@ class recibo extends REST_Controller
 
         $params = $this->parametros_busqueda(0);
         $response = $this->recibo_model->leads_promociones($params, $param);
-        
-        
-        if(es_data($response)){
+
+
+        if (es_data($response)) {
 
             $response = $this->add_imgs_servicio($response);
             $response = $this->add_comisionistas($response, $param);
@@ -1668,8 +1685,7 @@ class recibo extends REST_Controller
             $status_enid = $this->get_estatus_enid_service($param);
             $recompensas = $this->app->recompensas_recibos($response);
             $response = render_resumen_lead($response, $recompensas, $param, $session, 1);
-            
-        }else{
+        } else {
             $response = sin_leads_promociones();
         }
 

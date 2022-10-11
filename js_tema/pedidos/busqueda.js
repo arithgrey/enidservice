@@ -25,6 +25,8 @@ let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
 let $busqueda_metricas = $(".busqueda_metricas");
 
 let $busqueda_ventas_en_proceso =  $(".ventas_en_proceso");
+let $busqueda_ventas_en_proceso_clientes =  $(".ventas_en_proceso_clientes");
+
 let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
 let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
 
@@ -47,6 +49,7 @@ $(document).ready(() => {
     $busqueda_catalogos_pendientes.click(busqueda_leads_catalogo);
     $busqueda_promociones_disponibles.click(busqueda_lead_promociones_disponibles);
     $busqueda_ventas_en_proceso.click(busqueda_ventas_proceso);
+    $busqueda_ventas_en_proceso_clientes.click(busqueda_ventas_proceso_clientes);
     
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
 });
@@ -64,6 +67,23 @@ let response_busqueda_ventas_proceso = function (data) {
     render_enid(".place_ventas_en_proceso", data);
 
 };
+
+
+let busqueda_ventas_proceso_clientes = function(){
+
+    
+    let data_send = {};
+    let url = "../q/index.php/api/lead/ventas_proceso_clientes/format/json/";
+    request_enid("GET", data_send, url, response_busqueda_ventas_proceso_clientes);
+
+}
+
+let response_busqueda_ventas_proceso_clientes = function (data) {
+
+    render_enid(".place_ventas_en_proceso_clientes", data);
+
+};
+
 
 let busqueda_lead_promociones_disponibles = function(){
     

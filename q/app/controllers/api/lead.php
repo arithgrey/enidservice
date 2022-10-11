@@ -179,6 +179,22 @@ class lead extends REST_Controller
         $response  = pedidos_en_proceso($data, $response);
         $this->response($response);
     }
+    function ventas_proceso_clientes_GET(){
+        
+        $data = $this->app->session();                
+        $response  = $this->pendientes_ventas_clientes();        
+        $response  = pedidos_en_proceso($data, $response ,0,0);
+        $this->response($response);
+    }
+    private function pendientes_ventas_clientes()
+    {
+        $usuarios = $this->app->api("recibo/pendientes_sin_cierre_clientes");                
+        $usuarios = $this->usuarios_en_lista_negra($usuarios);                        
+        return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
+        
+
+    }
+
     private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
     {
         $usuarios = $this->app->api("recibo/pendientes_sin_cierre",

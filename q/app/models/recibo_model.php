@@ -1171,6 +1171,51 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
+    function pendientes_sin_cierre_clientes()
+    {
+
+
+        $query_get = "SELECT 
+        p.precio, 
+        p.costo, 
+        p.id_servicio, 
+        p.id_usuario,
+        p.id id_recibo,
+        (p.monto_a_pagar * p.num_ciclos_contratados) total,
+        p.num_ciclos_contratados,
+        p.fecha_contra_entrega,
+        p.tipo_entrega,
+        p.contra_entrega_domicilio,
+        p.id_usuario_entrega,
+        p.ubicacion,
+        p.id_usuario_referencia,
+        p.id_usuario_venta,
+        po.id_orden_compra
+        FROM  
+        proyecto_persona_forma_pagos  p
+        INNER JOIN  
+        producto_orden_compras po 
+        ON p.id = po.id_proyecto_persona_forma_pago
+        WHERE  
+        p.saldo_cubierto < 1  
+        AND 
+        p.id_usuario = p.id_usuario_referencia
+        AND  p.se_cancela = 0
+        AND  p.status NOT IN(10,19)  
+        AND p.status  IN(6,7) 
+        AND 						
+        (
+        DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())
+        OR
+        DATE(p.fecha_vencimiento) <=  DATE(CURRENT_DATE())
+        OR
+        DATE(p.fecha_entrega) <=  DATE(CURRENT_DATE())						
+        )   
+        AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negras)";
+        return $this->db->query($query_get)->result_array();
+    }
+
+
     function proximas($id_empresa, $id_usuario, $id_perfil, $dia = 0)
     {
 
