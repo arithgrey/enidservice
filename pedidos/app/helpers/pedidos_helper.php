@@ -1831,6 +1831,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';
         $menu_envio_promo = tab(
             text_icon("fa fa-star", 'Opción a promoción'),
             '#promo_pendiente',

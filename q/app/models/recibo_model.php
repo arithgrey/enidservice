@@ -1202,15 +1202,7 @@ class Recibo_model extends CI_Model
         p.id_usuario = p.id_usuario_referencia
         AND  p.se_cancela = 0
         AND  p.status NOT IN(10,19)  
-        AND p.status  IN(6,7) 
-        AND 						
-        (
-        DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())
-        OR
-        DATE(p.fecha_vencimiento) <=  DATE(CURRENT_DATE())
-        OR
-        DATE(p.fecha_entrega) <=  DATE(CURRENT_DATE())						
-        )   
+        AND p.status  IN(6,7,16)
         AND p.id_usuario NOT IN (SELECT id_usuario FROM lista_negras)";
         return $this->db->query($query_get)->result_array();
     }
