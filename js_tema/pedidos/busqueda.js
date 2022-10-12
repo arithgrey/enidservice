@@ -1,6 +1,7 @@
 "use strict";
 let $form_busqueda = $(".form_busqueda_pedidos");
 let $form_franja_horaria = $(".form_franja_horaria");
+let $form_alcaldias = $(".form_alcaldias");
 
 let $ids = $(".ids");
 let $usurios = $(".usuarios");
@@ -52,6 +53,7 @@ $(document).ready(() => {
     $busqueda_ventas_en_proceso_clientes.click(busqueda_ventas_proceso_clientes);
     
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
+    $form_alcaldias.submit(busqueda_metricas_alcaldias);
 });
 
 let busqueda_ventas_proceso = function(){
@@ -115,11 +117,34 @@ let busqueda_metricas_franja_horaria =  function(e){
     e.preventDefault();
 }
 
+let busqueda_metricas_alcaldias =  function(e){
+    
+    
+    let fecha_inicio = get_parameter(".form_alcaldias #datetimepicker4");
+    let fecha_termino = get_parameter(".form_alcaldias #datetimepicker5");
+
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_alcaldias.serialize();
+        let url = "../q/index.php/api/ubicacion/penetracion_tiempo/format/json/";
+        request_enid("GET", data_send, url, response_metricas_alcaldias);
+    
+    }
+
+    e.preventDefault();
+}
+
 let response_lead_franja_horaria = function (data) {
 
     render_enid(".place_lead_franja_horaria", data);
 
 };
+let response_metricas_alcaldias = function (data) {
+
+    render_enid(".place_alcaldias", data);
+
+};
+
 let response_lead_promociones = function (data) {
 
     render_enid(".place_leads_promocion", data);

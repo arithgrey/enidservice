@@ -1779,6 +1779,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido_metricas = metricas();
         $secciones_tabs[] = tab_seccion($contenido_metricas, 'metricas');
 
+
+        $contenido_metricas_alcaldias = metricas_alcaldias();
+        $secciones_tabs[] = tab_seccion($contenido_metricas_alcaldias, 'metricas_alcaldias');
+
+
         $contenido_ventas_camino = entregas_en_camino();
         $secciones_tabs[] = tab_seccion($contenido_ventas_camino, 'ventas_en_proceso');
 
@@ -1840,6 +1845,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        
+
         $menu_envio_catalogo_movimiento = tab(
             text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
             '#recursos',
@@ -1857,6 +1864,14 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $menu_metricas_alcaldia = tab(
+            text_icon("fa fa-line-chart", 'Penetración por alcaldías'),
+            '#metricas_alcaldias',
+            [
+                'class' => ' mt-2 busqueda_metricas_alcaldias underline mt-3'
+            ]
+        );
+       
         $meu_al_dia = format_link(
             "Últimas noticias",
             [
@@ -1880,6 +1895,7 @@ if (!function_exists('invierte_date_time')) {
             $meu_al_dia,            
             $menu_pedidos,
             $menu_metricas,
+            $menu_metricas_alcaldia,
             $menu_ventas_proceso_clientes,
             $menu_ventas_proceso,            
             $menu_envio_catalogo,
@@ -2003,6 +2019,18 @@ if (!function_exists('invierte_date_time')) {
         return d($response);
     }
 
+
+    function metricas_alcaldias()
+    {
+
+        $response[] = _titulo('Penetración por alcaldias', 4);    
+        $response[] = form_open("", [ "class" => "form_alcaldias"]);
+        $response[] = frm_fecha_busqueda();
+        $response[] = form_close();
+        $response[] = place("place_alcaldias");
+        return d($response);
+    }
+    
 
 
 
