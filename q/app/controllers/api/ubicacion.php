@@ -7,6 +7,7 @@ class ubicacion extends REST_Controller
     {
         parent::__construct();
         $this->load->model("ubicacion_model");
+        $this->load->library('table');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
@@ -191,7 +192,38 @@ class ubicacion extends REST_Controller
     function ventas_mes_GET()
     {
 
-        
+
         $this->response($this->ubicacion_model->ventas_mes());
+    }
+
+    function penetracion_tiempo_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        if (fx($param, 'fecha_inicio,fecha_termino')) {
+
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $response = $this->ubicacion_model->penetracion_tiempo($fecha_inicio, $fecha_termino);
+
+            $heading = [
+                "Alcaldía",
+                "Leads"
+            ];
+
+            $this->table->set_template(template_table_enid());
+            $this->table->set_heading($heading);
+
+            foreach ($response  as $row) {
+
+                $linea = [
+                    $row["delegacion"],
+                    $row["total"]
+                ];
+                $this->table->add_row($linea);
+            }
+            $response = $this->table->generate();
+        }
+        $this->response($response);
     }
 }
