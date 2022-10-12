@@ -27,6 +27,7 @@ let $busqueda_metricas = $(".busqueda_metricas");
 
 let $busqueda_ventas_en_proceso =  $(".ventas_en_proceso");
 let $busqueda_ventas_en_proceso_clientes =  $(".ventas_en_proceso_clientes");
+let $busqueda_ventas_efectivas =  $(".ventas_efectivas");
 
 let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
 let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
@@ -34,6 +35,9 @@ let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
 let $sintesis = $('.sintesis');
 let $marcar_pagos = $('.marcar_pagos');
 let $ids_pagos = $('.ids_pagos');
+
+
+let $fecha_venta_efectiva = $(".fecha_venta_efectiva");
 
 $(document).ready(() => {
 
@@ -51,7 +55,8 @@ $(document).ready(() => {
     $busqueda_promociones_disponibles.click(busqueda_lead_promociones_disponibles);
     $busqueda_ventas_en_proceso.click(busqueda_ventas_proceso);
     $busqueda_ventas_en_proceso_clientes.click(busqueda_ventas_proceso_clientes);
-    
+    $busqueda_ventas_efectivas.click(busqueda_ventas_efectivas);
+
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
     $form_alcaldias.submit(busqueda_metricas_alcaldias);
 });
@@ -70,7 +75,38 @@ let response_busqueda_ventas_proceso = function (data) {
 
 };
 
+let busqueda_ventas_efectivas = function(){
 
+    
+    let fecha_inicio = $fecha_venta_efectiva.val();
+    let fecha_termino = $fecha_venta_efectiva.val();
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $.param({
+            "fecha_inicio": fecha_inicio, 
+            "fecha_termino": fecha_termino,
+            "tipo_orden":5,
+            "tipo_entrega":0,
+            "recibo":"",
+            "v":1,
+            "cliente":"",
+            "status_venta":15,
+            "perfil":0
+        });
+        let url = "../q/index.php/api/recibo/pedidos/format/json/";
+        request_enid("GET", data_send, url, response_busqueda_ventas_efectivas);
+
+    }
+    
+
+
+}
+
+let response_busqueda_ventas_efectivas = function (data) {
+
+    render_enid(".place_ventas_efectivas", data);
+
+};
 let busqueda_ventas_proceso_clientes = function(){
 
     

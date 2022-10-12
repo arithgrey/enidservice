@@ -839,7 +839,12 @@ if (!function_exists('invierte_date_time')) {
         $saldos = flex($text_saldo, money($saldo_por_cobrar), $clase_saldos);
 
         $conversion = conversion($ordenes_en_proceso, $ordenes_canceladas, $ordenes_pagadas, $transacciones);
-        $tb_fechas = fechas_ventas_recibos($total_montos_compra, $ops_tipo_orden, $tipo_orden);
+
+        $tb_fechas = "";
+        if(es_administrador($data)){
+            $tb_fechas = fechas_ventas_recibos($total_montos_compra, $ops_tipo_orden, $tipo_orden);
+        }
+        
 
 
         $ordenes_por_estados = [
@@ -1448,7 +1453,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function fechas_ventas_recibos($recibos, $ops_tipo_orden, $tipo_orden)
+    function fechas_ventas_recibos( $recibos, $ops_tipo_orden, $tipo_orden)
     {
 
         $fechas = array_column($recibos, "fecha");
@@ -1491,11 +1496,14 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($listado, $base);
         }
 
-        $listado = [
-            d("Utilidad Total", 'display-6 black'),
-            d(money($utilidad_final)),
-        ];
-        $response[] = d($listado, $base);
+        
+            $listado = [
+                d("Utilidad Total", 'display-6 black'),
+                d(money($utilidad_final)),
+            ];
+            $response[] = d($listado, $base);
+        
+        
 
 
         $listado_entregas = [
