@@ -1791,8 +1791,10 @@ if (!function_exists('invierte_date_time')) {
         $contenido_ventas_camino_cliente = entregas_en_camino_cliente();
         $secciones_tabs[] = tab_seccion($contenido_ventas_camino_cliente, 'ventas_en_proceso_cliente');
 
+        $contenido_ventas_efectivas = entregas_efectivas();
+        $secciones_tabs[] = tab_seccion($contenido_ventas_efectivas, 'ventas_efectivas');
 
-
+        
         
 
 
@@ -1835,6 +1837,16 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 ventas_en_proceso_clientes underline mt-3'
             ]
         );
+
+
+        $menu_ventas_entregadas = tab(
+            text_icon("fa fa-usd", 'Ventas entregadas!'),
+            '#ventas_efectivas',
+            [
+                'class' => ' mt-2 ventas_efectivas underline mt-3'
+            ]
+        );
+
 
         $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';
         $menu_envio_promo = tab(
@@ -1897,7 +1909,8 @@ if (!function_exists('invierte_date_time')) {
             $menu_metricas,
             $menu_metricas_alcaldia,
             $menu_ventas_proceso_clientes,
-            $menu_ventas_proceso,            
+            $menu_ventas_proceso,   
+            $menu_ventas_entregadas,         
             $menu_envio_catalogo,
             $menu_envio_promo,
             $menu_envio_catalogo_movimiento,
@@ -1927,6 +1940,14 @@ if (!function_exists('invierte_date_time')) {
 
         $_response[] = _titulo('Pedidos de clientes en proceso', 4);
         $_response[] = place("place_ventas_en_proceso_clientes");
+        return d($_response);
+
+    }
+    function entregas_efectivas(){
+
+        $_response[] = _titulo('Ventas Efectias', 4);
+        $_response[] =  hiddens(["class" => "fecha_venta_efectiva" , "value" => date("Y-m-d")]);
+        $_response[] = place("place_ventas_efectivas");
         return d($_response);
 
     }
