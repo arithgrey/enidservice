@@ -742,7 +742,7 @@ class Paths
 
                     "search/principal.js",
                 ],
-                "url_img_post" => create_url_preview("dispensador-rojo.jpg"),
+                "url_img_post" => create_url_preview("pesas.jpg"),
                 "meta_keywords" => "",
                 'desc_web' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
                 'titulo' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
