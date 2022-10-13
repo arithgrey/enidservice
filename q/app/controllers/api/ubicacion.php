@@ -204,21 +204,31 @@ class ubicacion extends REST_Controller
 
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
-            $response = $this->ubicacion_model->penetracion_tiempo($fecha_inicio, $fecha_termino);
+            $ventas_efectivas_fecha_ubicacion = $this->ventas_efectivas_fecha($fecha_inicio, $fecha_termino);
+            $response = "";
 
+            $penetracion  = $this->ubicacion_model->penetracion_tiempo($fecha_inicio, $fecha_termino);
+            
             $heading = [
                 "Alcaldía",
-                "Leads"
+                "Leads",
+                "Ventas Efectivas"
             ];
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
 
-            foreach ($response  as $row) {
+            foreach ($penetracion as $row) {
+
+
+
+                $id_alcaldia = $row["id_alcaldia"];
+                $ventas_efectivas = $this->busqueda_total_ventas_efectivas_alcaldia($id_alcaldia, $ventas_efectivas_fecha_ubicacion);
 
                 $linea = [
                     $row["delegacion"],
-                    $row["total"]
+                    $row["total"],
+                    $ventas_efectivas
                 ];
                 $this->table->add_row($linea);
             }
@@ -226,4 +236,55 @@ class ubicacion extends REST_Controller
         }
         $this->response($response);
     }
+    private function busqueda_total_ventas_efectivas_alcaldia($id_alcaldia, $data_alcaldias){
+
+        $total = 0;
+        foreach($data_alcaldias as $key => $value){
+
+            if($id_alcaldia ==  $key){
+
+                $total =  $value;
+                break;
+            }
+        }
+        return $total;
+    }
+    private function ventas_efectivas_fecha($fecha_inicio, $fecha_termino)
+    {
+        
+        $response = [];
+        
+        $q = [
+            "cliente" => "",
+            "v" => 0,
+            "recibo" => "",
+            "tipo_entrega" => 0,
+            "status_venta" => 0,
+            "tipo_orden" => 2,
+            "fecha_inicio" => $fecha_inicio,
+            "fecha_termino" => $fecha_termino,
+            "perfil" => 3,
+            "id_usuario" => 1,
+            "usuarios" => 0,
+            "ids" => 0,
+            "es_busqueda_reparto" => 1,
+            "id_usuario_referencia" => 0,
+            "consulta" => 1
+        ];
+
+        $recibos = $this->app->api("recibo/pedidos", $q);
+
+        if(es_data($recibos)){
+            
+            $ids  = array_column($recibos, "recibo");            
+            $ids_recibos  = implode(  ",", $ids);
+            $ubicaciones = $this->ubicacion_model->in_recibo($ids_recibos);
+            $ids_alcaldias = array_column($ubicaciones, "id_alcaldia");
+            $response = array_count_values($ids_alcaldias);
+    
+        }
+        return $response;
+        
+    }
+
 }
