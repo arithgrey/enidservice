@@ -24,7 +24,8 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:title" content="<?= $desc_web; ?>"/>
 <meta property="og:url" content="<?= $enlace; ?>"/>
 <meta property="og:site_name" content="Enid Service"/>
-<meta property="og:image" content="<?= str_replace("http","https", $url_img_post) ?>"/>
+<!--<meta property="og:image" content="<?= str_replace("http","https", $url_img_post) ?>"/>-->
+<meta property="og:image" content="https://enidservices.com/web/img_tema/portafolio/pesas.jpg"/>
 <meta property="og:description" content="<?= $desc_web; ?>"/>
 <meta property="fb:app_id" content="708127766008103"/>
 <meta property="business:contact_data:email" content="ventas@enidservices.com"/>
