@@ -1831,12 +1831,12 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white  fp8  border-right frecuentes border-right-enid",
+            "class" => "white fp8 frecuentes ",
             "href" => path_enid("clientes")
         ]
     );
 
-
+    /*
     $response[] = a_enid(
         "Como marcar tu abdomen",
         [
@@ -1846,6 +1846,7 @@ function opciones_populares()
             
         ]
     );
+    */
 
 
     $response[] = a_enid(
@@ -1906,12 +1907,13 @@ function opciones_adicionales_navegacion()
         "class" => "black"
     ]), "text-capitalize  col-xs-5");
 
+    /*
     $opciones[] = d(a_enid("Como marcar tu abdomen", [
         "href" => path_enid("enid_service_facebook_videos",0,1),
         "class" => "black",
         'target' => 'black',
     ]), "text-uppercase click_facebook_videos_abdomen  col-xs-7");
-    
+    */
 
 
     $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom ');
