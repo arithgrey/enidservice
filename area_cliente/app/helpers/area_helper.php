@@ -1,0 +1,186 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+
+if (!function_exists('invierte_date_time')) {
+    function render_user($data)
+    {
+        $action = $data["action"];
+        $menu[] = a_enid(
+            "Promociones",
+            [
+                "href" => path_enid("promociones"),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            "Novedades",
+            [
+                "href" => path_enid("search", "/?q2=0&q=&order=1"),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            'Intereses y preferencias',
+            [
+                'href' => path_enid('lista_deseos_preferencias'),
+                "class" =>  "black underline"
+            ]
+        );
+        $menu[] = a_enid(
+            'Lista de deseos',
+            [
+                'href' => path_enid('lista_deseos'),
+                "class" =>  "black underline"
+            ]
+        );
+
+
+        
+        $r[] = hiddens_tickects($action, $data["ticket"]);
+        $r[] = tab_seccion(
+            d(
+                '',
+                "place_servicios_contratados p-0"
+            ),
+            "tab_mis_pagos",
+            active_tab('compras', $action)
+        );
+
+        $r[] = tab_seccion(
+            d('', "place_ventas_usuario"),
+            'tab_mis_ventas',
+            active_tab('ventas', $action)
+        );
+
+        $r[] = tab_seccion(
+            place("place_pagar_ahora"),
+            'tab_pagos'
+        );
+        $r[] = tab_seccion(
+            d(
+                '',
+                "place_resumen_servicio d-sm-flex  align-items-center mt-5 col-lg-8 col-lg-offset-2 mt-md-0 p-0"
+            ),
+            'tab_renovar_servicio'
+        );
+
+        $r[] = tab(
+            "",
+            "#tab_renovar_servicio",
+            [
+                "class" => "resumen_pagos_pendientes",
+            ]
+        );
+
+
+
+        $response[] = paseo();
+
+
+        $secciones[] = d(append($menu), 3);
+        $secciones[] = d(tab_content($r), 9);
+        $response[] =  d($secciones, 12);
+        return append($response);
+    }
+
+    function paseo()
+    {
+
+        $r[] = _titulo('UPS! aún no tenemos pedidos ...');
+        $r[] = format_link('Explorémos un poco!', ['href' => path_enid('search_q3')]);
+        return d(d($r), 'mt-5 mb-5 d-none visita_tienda');
+    }
+
+    function hiddens_tickects($action, $ticket)
+    {
+        return append(
+            [
+                hiddens(["class" => "action", "value" => $action]),
+                hiddens(["class" => "ticket", "value" => $ticket])
+            ]
+        );
+    }
+
+    function valoraciones($valoraciones, $id_usuario, $alcance)
+    {
+
+        $r = [];
+        if (es_data($valoraciones)) {
+
+            $x[] = h("MIS VALORACIONES Y RESEÑAS RECIBIDAS", 3);
+            $x[] = d($valoraciones, "top_30");
+            $x[] = a_enid(
+                "VER COMENTARIOS",
+                [
+                    "href" => path_enid("recomendacion", $id_usuario),
+                    "class" => "a_enid_blue top_30 text-center"
+                ]
+            );
+
+            $x[] = d($alcance, " text-center top_30");
+            $r[] = d(d($x, 6, 1), "text-center");
+        }
+        return append($r);
+    }
+
+    function crea_alcance($alcance)
+    {
+
+        $response = [];
+        if (es_data($alcance)) {
+
+            $alcance = $alcance[0];
+            $maximo = $alcance["maximo"];
+            $minimo = $alcance["minimo"];
+            $promedio = $alcance["promedio"];
+
+            $a = [];
+            $a[] = td($maximo, ["class" => 'num_alcance', "id" => $maximo]);
+            $a[] = td($promedio, 'num_alcance');
+            $a[] = td($minimo, ["class" => 'num_alcance', "id" => $maximo]);
+
+            $r[] = tr(append($a));
+
+            $b = [];
+            $b[] = td("Tope", 'num_alcance');
+            $b[] = td("Promedio", 'num_alcance');
+            $b[] = td("Mínimo", 'num_alcance');
+
+            $r[] = tr(append($b));
+
+            $response[] = h("ALCANCE DE TUS PRODUCTOS", 3, []);
+            $response[] = tb(append($r));
+        }
+        return append($response);
+    }
+
+    function active_tab($nombre_seccion, $estatus)
+    {
+
+        $a = igual($nombre_seccion, $estatus, 1, 0);
+        $b = igual($nombre_seccion, "compras", 1, 0);
+        return (strlen($estatus) > 0) ? $a : $b;
+    }
+
+    function menu()
+    {
+
+        $link_compras = tab(
+            text_icon('fa fa-credit-card-alt', " COMPRAS"),
+            "#tab_mis_pagos",
+            [
+                "class" => 'btn_cobranza mis_compras'
+            ]
+
+        );
+
+        $list = [
+            $link_compras,
+
+        ];
+
+        return d(
+            $list,
+            "col-sm-12 col-md-2 d-flex flex-column menu_area_cliente p-md-0 mt-5"
+        );
+    }
+}

@@ -1,0 +1,67 @@
+.criterio_busqueda:hover {
+
+    background: #083ef9;
+
+}
+.promedio_num {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.contenedor_promodios {
+    margin-top: 20px;
+}
+
+.info_comentarios {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.porcentaje_recomiendan {
+    font-size: 3em;
+}
+
+
+.comentario_valoracion {
+    font-size: .9em;
+}
+
+.recomendaria_valoracion {
+    color: green;
+}
+
+.cargar_mas_valoraciones {
+    background: black;
+    padding: 10px;
+    color: white;
+    font-weight: bold;
+}
+
+.cargar_mas_valoraciones:hover {
+    cursor: pointer;
+}
+.contenedor_utilidad {
+    text-align: right;
+}
+
+.num_respuesta {
+    color: grey !important;
+}
+
+.respuesta_ok, .respuesta_no {
+    color: blue !important;
+}
+
+.text_recibimos_valoracion {
+    border: solid 1px;
+    padding: 2px;
+    border-color: grey;
+}
+
+.ordenar_valoraciones_button:hover {
+    cursor: pointer;
+}
+
+.registro_cuenta {
+    font-size: 1.4em;
+}

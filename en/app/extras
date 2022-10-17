@@ -1,0 +1,482 @@
+php artisan migrate --path=database/migrations/2022_02_02_063759_create_sessions_table.php
+php artisan migrate --path=database/migrations/2014_10_12_000000_create_users_table.php
+php artisan migrate --path=database/migrations/2022_01_26_072746_create_valoracions_table.php
+php artisan migrate --path=database/migrations/2022_02_23_024435_create_tipo_valoracions_table.php
+php artisan db:seed --class=TipoValoracionSeeder
+
+
+php artisan migrate --path=database/migrations/2022_03_04_191751_create_solicitud_retiros_table.php
+php artisan migrate --path=database/migrations/2022_03_08_081320_create_bancos_table.php
+php artisan migrate --path=database/migrations/2022_03_08_230322_create_cuenta_bancos_table.php
+
+
+
+RENAME TABLE empresa TO empresas;
+alter table empresas change nombreempresa nombre varchar(50);
+
+alter table empresas add created_at timestamp DEFAULT CURRENT_TIMESTAMP;
+alter table empresas add updated_at timestamp DEFAULT CURRENT_TIMESTAMP;
+
+alter table empresas drop text_uso_privacidad;
+
+RENAME TABLE sector TO sectors;
+
+alter table sectors add created_at timestamp DEFAULT CURRENT_TIMESTAMP;
+alter table sectors add updated_at timestamp DEFAULT CURRENT_TIMESTAMP;
+
+
+alter table countries add created_at timestamp DEFAULT CURRENT_TIMESTAMP;
+alter table countries add updated_at timestamp DEFAULT CURRENT_TIMESTAMP;
+
+alter table empresas change countryName nombre varchar(50);
+
+
+2400
+alter table acceso add created_at timestamp DEFAULT CURRENT_TIMESTAMP;
+alter table anticipo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table banco add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table bancos add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table calificacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table caracteristica add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table categoria add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table categoria_e add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ci_sessions add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ciclo_facturacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table clasificacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table codigo_postal add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table codigos_postales add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table colonia add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comando add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comentario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comentario_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contact add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contact_respaldo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contacto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table costo_operacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cotizaciones_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cotizador add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table countries add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cuenta_bancos add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cuenta_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cupon add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table delegacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table departamento add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table direccion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table direccion_v1 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table email_leido add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table email_prospecto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresa_permiso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresa_recurso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresas add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table encuesta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table estado add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table estado_republica add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table faq add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table forma_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table fuente add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table funcionalidad add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table grupo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table grupo_servicio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_cliente_empresa add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_empresa add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_faq add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_servicio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_usuario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table incidencia add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table intento_tipo_entrega add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table keyword add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table labor add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table labor_usuario_perfil add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table like add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table linea_metro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra_encuentro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra_linea_metro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table llamada add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table log add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table material add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table mensaje add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table meta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table metakeyword add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table migrations add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table motivo_lista_negra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table notificacion_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table objetivo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table orden_comentario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table orden_compra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web_2017 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web_bot add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil_permiso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil_recurso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table permiso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table persona add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table personas_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table plan add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table plan_perfil add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table preferencia add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pregunta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pregunta_frecuente add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table privacidad add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table privacidad_usuario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table producto_orden_compra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table promocion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table propuesta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table prospecto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proveedor_servicio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago_direccion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago_punto_encuentro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table puesto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table punto_encuentro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table puntuacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recibo_comentario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recompensa add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recompensa_orden_compra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recordatorio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recurso add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table red_social add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table referencia add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registros_email_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registros_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table response add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table respuesta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table sectors add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table seguimiento add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_caracteristica add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_material add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_relacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicios_1246137006 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table sitio_presentacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_pago add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_pago_usuario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_retiro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_retiros add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table status_enid_service add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table stock add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_1628277397 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_207031481 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_99346796 add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tag_arquetipo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table talla add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tarea add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tareas_resueltas add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ticket add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipificacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipificacion_recibo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_asentamiento add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_categoria add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_comisionista add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_costo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_entrega add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_incidencia add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_llamada add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_negocio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_persona add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_propuesta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_prospecto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_proyecto add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_punto_encuentro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_puntuacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_recordatorio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_tag_arquetipo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_talla add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_valoracions add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ubicacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table users add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_clasificacion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_conexion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_deseo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_deseo_compra add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_direccion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_log add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_perfil add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_persona_correo add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_punto_encuentro add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_roll add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_servicio_propuesta add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_tipo_negocio add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table valoracion add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table valoracions add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table venta_like add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table visitas_tmp add created_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table acceso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table anticipo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table banco add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table bancos add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table calificacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table caracteristica add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table categoria add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table categoria_e add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ci_sessions add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ciclo_facturacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table clasificacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table codigo_postal add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table codigos_postales add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table colonia add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comando add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comentario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table comentario_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contact add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contact_respaldo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table contacto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table costo_operacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cotizaciones_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cotizador add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table countries add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cuenta_bancos add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cuenta_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table cupon add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table delegacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table departamento add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table direccion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table direccion_v1 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table email_leido add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table email_prospecto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresa_permiso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresa_recurso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table empresas add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table encuesta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table estado add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table estado_republica add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table faq add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table forma_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table fuente add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table funcionalidad add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table grupo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table grupo_servicio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_cliente_empresa add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_empresa add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_faq add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_servicio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table imagen_usuario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table incidencia add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table intento_tipo_entrega add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table keyword add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table labor add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table labor_usuario_perfil add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table like add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table linea_metro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra_encuentro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table lista_negra_linea_metro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table llamada add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table log add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table material add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table mensaje add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table meta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table metakeyword add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table migrations add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table motivo_lista_negra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table notificacion_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table objetivo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table orden_comentario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table orden_compra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web_2017 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pagina_web_bot add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil_permiso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table perfil_recurso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table permiso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table persona add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table personas_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table plan add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table plan_perfil add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table preferencia add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pregunta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table pregunta_frecuente add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table privacidad add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table privacidad_usuario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table producto_orden_compra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table promocion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table propuesta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table prospecto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proveedor_servicio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago_direccion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_persona_forma_pago_punto_encuentro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table proyecto_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table puesto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table punto_encuentro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table puntuacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recibo_comentario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recompensa add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recompensa_orden_compra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recordatorio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table recurso add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table red_social add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table referencia add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registros_email_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table registros_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table response add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table respuesta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table sectors add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table seguimiento add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_caracteristica add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_material add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicio_relacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table servicios_1246137006 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table sessions add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table sitio_presentacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_pago add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_pago_usuario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_retiro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table solicitud_retiros add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table status_enid_service add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table stock add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_1628277397 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_207031481 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tabla_recibos_proximos_99346796 add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tag_arquetipo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table talla add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tarea add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tareas_resueltas add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ticket add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipificacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipificacion_recibo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_asentamiento add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_categoria add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_comisionista add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_costo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_entrega add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_incidencia add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_llamada add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_negocio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_persona add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_propuesta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_prospecto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_proyecto add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_punto_encuentro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_puntuacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_recordatorio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_tag_arquetipo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_talla add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table tipo_valoracions add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table ubicacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table users add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_clasificacion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_conexion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_deseo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_deseo_compra add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_direccion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_log add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_perfil add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_persona_correo add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_punto_encuentro add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_roll add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_servicio_propuesta add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table usuario_tipo_negocio add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table valoracion add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table valoracions add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table venta_like add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+alter table visitas_tmp add updated_at timestamp DEFAULT  CURRENT_TIMESTAMP;
+
+
+RENAME TABLE solicitud_retiro TO solicitud_retiros;
+RENAME TABLE cuenta_pago TO cuenta_bancos;
+RENAME TABLE banco TO bancos;
+
+alter table solicitud_pagos change id_usuario user_id int;
+alter table cuenta_bancos change id_usuario user_id int;
+alter table solicitud_retiros change id_cuenta_pago id_cuenta_banco int;
+alter table cuenta_bancos rename column id_cuenta_pago to id;
+alter table bancos rename column id_banco to id;
+
+
+______________________
+
+ALTER TABLE users add name varchar(255);
+ALTER TABLE users change email_verified_at email_verified_at timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP();
+alter table users change password password varchar(255) NOT NULL;
+ALTER TABLE users add remember_token varchar(100);
+ALTER TABLE users add current_team_id bigint unsigned;
+ALTER TABLE users add profile_photo_path varchar(2048);
+
+RENAME TABLE users TO users_;
+
+RENAME TABLE users TO users;
+________________________________
+
+update users set name = nombre;
+alter table users drop column nombre;
+______________________
+
+RENAME TABLE lista_negra TO lista_negras;
+RENAME TABLE motivo_lista_negra TO motivo_lista_negras;
+______________________
+
+
+alter table users add es_prospecto int not null default 0;
+alter table users add url_lead text;
+
+php artisan migrate --path=database/migrations/2022_04_12_061636_create_orden_comentarios_table.php
+php artisan migrate --path=database/migrations/2022_03_10_081443_create_orden_compras_table.php
+______________________
+
+RENAME TABLE proyecto_persona_forma_pago TO proyecto_persona_forma_pagos;
+______________________
+RENAME TABLE producto_orden_compra TO producto_orden_compras;
+
+________________________________
+
+alter table users rename column idempresa to id_empresa;
+
+
+________________________________
+RENAME TABLE servicios TO servicio;
+RENAME TABLE forma_pago TO forma_pagos;
+RENAME TABLE ciclo_facturacion TO ciclo_facturacions;
+RENAME TABLE ciclo_facturacion TO ciclo_facturacions;
+ci_sessions
+
+alter table orden_compras change status status int not null default 1;
+alter table users change facebook facebook text default NULL;
+alter table proyecto_persona_forma_pagos rename column id_proyecto_persona_forma_pago to id;
+alter table orden_compras rename column id_orden_compra to id;
+alter table empresas rename column idempresa to id;
+
+
+
+______________________
+
+RENAME TABLE ubicacion TO ubicacions;
+
+CREATE TABLE IF NOT EXISTS `propuesta_servicio` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `propuesta` TEXT NOT NULL,
+  `status` INT NOT NULL DEFAULT 1,
+  `fecha_registro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+RENAME TABLE propuesta_servicio TO propuesta_servicios;
+RENAME TABLE propuesta_servicios TO propuestas;
+
+alter table propuestas add id_servicio int not null default 0;
+
+____________-
+
+insert into pagina(pagina) values("Respuestas sugeridas");
+_________________________
+
+alter table  codigo_postal add costo_entrega float not null default 0;
+update codigo_postal set costo_entrega  = 200 where id_estado_republica not in(9,15);
+alter table delegacions add costo_entrega int not null default 0;

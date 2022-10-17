@@ -1,0 +1,19 @@
+
+.asignado_actualmente {
+    background: #fbfbfb;
+    color: #000208;
+}
+.asignado_actualmente .text-muted {
+    color: #eaf2f6;!important;
+}
+.list-group-item{
+    margin-top: 30px;
+    height: 215px;
+}
+.contenedor_listado{
+    min-height: 160px;
+}
+.imagen_servicio{
+    max-height: 230px;
+
+}

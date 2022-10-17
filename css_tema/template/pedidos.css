@@ -1,0 +1,204 @@
+.selector{
+    background: darkslategrey;
+    color: whitesmoke;
+}
+.sin_seleccion {
+
+    border: 1px solid rgb(13, 62, 86);
+}
+
+.bg_reporte {
+    background: #020720;
+    color: white;
+}
+
+.pago_en_proceso {
+    background: #f6f8f9;
+}
+
+.se_pago {
+
+    background: #007eee;
+}
+
+
+
+.se_pago h4 {
+    color: white !important;
+}
+
+.cancelado {
+
+    background: #ff7266;
+    color: white;
+}
+.lista_negra{
+    background: #ce0b1d;
+    color: white;
+}
+
+.menu_recibo {
+    z-index: 1000;
+}
+.modal{
+    z-index: 1100;
+}
+
+.entregado {
+
+    background: #033178;
+    color: white;
+}
+
+.funny_error_message {
+    background: #10094e;
+    color: white;
+}
+
+.busqueda_mensaje {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+.busqueda_mensaje:hover {
+    color: black !important;
+}
+
+.busqueda_mensaje_text {
+    text-align: center;
+}
+
+.menu_pedidos div a {
+    color: #000000 !important;
+}
+
+.status_compra {
+
+    background: #071929;
+}
+
+.resumen_pago {
+    background: #f9fafe;
+    border-bottom: 10px solid #00385D;
+    border-radius: 6px;
+
+}
+
+.text_precio_producto {
+    font-size: 1.5em;
+}
+
+.mxn {
+    font-size: 1.6em;
+    color: #000060;
+    font-weight: bold;
+}
+
+.seccion_tipificacion {
+    background: white;
+}
+
+.global_tipificaciones {
+    background: #030d17;
+    padding: 5px;
+}
+
+.form_edicion_tipo_entrega {
+    display: none;
+}
+
+.fecha_registro {
+    font-size: 1.3em;
+}
+
+.media {
+    background: yellow;
+    padding: 5px;
+    margin-top: 2px;
+}
+
+.baja {
+    background: #d10000;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+.alta {
+    background: #032c8d;
+    color: white;
+    margin-top: 2px;
+    padding: 10px;
+}
+
+.nula {
+    background: red;
+    color: white;
+    margin-top: 2px;
+    padding: 5px;
+}
+
+.seccion_recordatorio {
+    margin-top: 20px;
+}
+
+.compras_en_tiempo {
+    border-style: solid;
+
+}
+
+#contenedor_form_usuario {
+    display: none;
+}
+
+.fm {
+    font-size: 1.3em;
+    color: #001066;
+}
+
+.contenedor_entregado {
+
+    background: #0046c0;
+    color: white;
+}
+
+.text-utilidad {
+    color: #0a1b42;
+}
+
+.select_gastos {
+
+    height: 42px;
+}
+
+.form_busqueda_pedidos {
+
+    font-weight: bold;
+    color: #000000;
+}
+
+.pedido_img {
+    width: 50px;
+    height: 50px;
+}
+
+/*Extra small devices (portrait phones, less than 576px)*/
+@media (max-width: 575.98px) {
+
+    .descripcion_compra {
+
+        border: none !important;
+    }
+
+    .estado_compra {
+        font-size: 1.5em;
+    }
+
+    .pedido_img {
+        width: 230px !important;
+        height: auto;
+    }
+
+}
+

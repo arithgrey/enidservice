@@ -1,0 +1,11 @@
+.contenedor_menu a {
+    margin-top: 10px;
+    font-size:.9em;
+}
+.mayor{
+    background: deeppink;
+    border-bottom: 2px solid;
+}
+.form_sin_ventas label, .form_sin_ventas input{
+    display: none;
+}

@@ -1,0 +1,23 @@
+
+.go-usuario {
+    color: #007881;
+
+
+}
+
+.text_resumen {
+
+    font-size: 1.4em;
+    background: black;
+    color: white;
+    padding: 1px;
+}
+
+.pagination > li > a, .pagination > li > span {
+    color: white !important;
+}
+
+.contenedor_promedios {
+    text-decoration: underline;
+    background: #fefefe;
+}

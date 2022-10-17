@@ -1,0 +1,22 @@
+input[type="radio"] {
+    display: none;
+}
+
+.estrella:hover {
+    cursor: pointer;
+}
+
+.estrella:hover, .estrella:hover ~ .estrella {
+    -webkit-text-fill-color: white;
+    -webkit-text-stroke-color: #004afc;
+    -webkit-text-stroke-width: .5px;
+}
+
+
+.recomendaria {
+    background: white;
+    color: black;
+    border: solid 1px;
+    padding: 10px;
+}
+

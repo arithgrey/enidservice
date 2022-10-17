@@ -1,0 +1,26 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+.format_submit{
+
+    @apply bg-black text-slate-50 font-medium border-solid border-2 border-sky-400 cursor-pointer pr-4  pl-4 pt-1  pb-1 tracking-wide transition transform hover:-translate-y-1 motion-reduce:transition-none motion-reduce:transform-none hover:bg-blue-900
+}
+.format_selector{
+    @apply border border-sky-600 p-2 cursor-pointer hover:bg-black hover:text-slate-50 hover:border-solid hover:border-2 hover:border-sky-400
+}
+.format_selector_seleccionado{
+    @apply border border-sky-600 p-2 cursor-pointer bg-black text-slate-50 border-solid border-2
+}
+.format_input{
+    @apply w-full appearance-none bg-transparent border-none text-gray-900 py-1 px-1 leading-3 focus:outline-none placeholder-slate-300
+}
+.format_text_area{
+    @apply block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
+}
+.format_error{
+    @apply text-sky-500 hover:text-sky-600 text-base leading-7 font-semibold;
+}
+.format_titulo{
+    @apply inline-block text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight;
+}
