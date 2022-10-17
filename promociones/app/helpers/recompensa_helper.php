@@ -9,8 +9,24 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $html_paginador = $data["html_paginador"];
 
-        $response[] = d(_titulo("COMPRA EN CONJUNTO Y OBTEN DESCUENTOS", 2),'mb-5');
-        
+        $texto = _text_(
+            d(_text_(span("5% de descuento",'strong white'),
+            "al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline f12'))),
+             
+        );
+
+        $mensaje_messenger = a_enid(
+            $texto,
+            [
+                "href" => path_enid('facebook_descuento', 0, 1),
+                "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3 row",
+                "target" => "_black"
+            ]
+            );
+
+        $response[] = $mensaje_messenger;
+
+
         if (es_data($recompensa)) {
             
             foreach ($recompensa as $row) {
