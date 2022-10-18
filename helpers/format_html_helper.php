@@ -1408,9 +1408,10 @@ function opciones_acceso($in_session)
 
     
            
-        $texto_lead = d("Aquí de te dejamos 10% de descuento para que inicies tu rutina ya!",'white');
+        //$texto_lead = d("Aquí de te dejamos 10% de descuento para que inicies tu rutina ya!",'white');
+        $texto_lead = d("5% descuento para nuevos clientes!",'white');
         //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
-        $link = d("Descuento",
+        $link = d("cupón",
         [
             "href" => path_enid('whatsapp_descuento', 0, 1),
             "class" => "text-center bg-white borde_accion p-2 border_enid col black text-uppercase strong underline border border-info"
@@ -1820,6 +1821,7 @@ function opciones_populares()
         ]
     );
 
+    /*
     $response[] = a_enid(
         "PROMOCIONES",
         [
@@ -1827,6 +1829,7 @@ function opciones_populares()
             "href" => path_enid("promociones")
         ]
     );
+    */
 
     $response[] = a_enid(
         "CLIENTES",
@@ -1882,7 +1885,7 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $response[] = d(d("Agenda tu pedido y paga hasta tu entrega!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);    
+    $response[] = d(d("Pago contra entrega en tu domicilio!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);    
     $opciones[] = d(
         a_enid("POPULARES", [
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
@@ -1895,17 +1898,18 @@ function opciones_adicionales_navegacion()
         "class" => "black"
     ]), "text-capitalize col-xs-4 text-center");
     
+    /*
     $opciones[] = d(a_enid("PROMOCIONES", [
         "href" => path_enid("promociones"),
         "class" => "black"
     ]), "text-capitalize  col-xs-4 text-center");
-
+    */
 
    
-    $opciones[] = d(a_enid("ÚLTIMOS CLIENTES", [
+    $opciones[] = d(a_enid("CLIENTES", [
         "href" => path_enid("clientes"),
         "class" => "black"
-    ]), "text-capitalize  col-xs-5");
+    ]), "text-capitalize  col-xs-4");
 
     /*
     $opciones[] = d(a_enid("Como marcar tu abdomen", [
@@ -1933,8 +1937,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
 
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
-            $response[] = d(a_enid('¡Paga hasta que recibas tus artículos
-             en tu domicilio si vives en CDMX!',
+            $response[] = d(a_enid('¡Pago contra entrega en tu domicilio si vives en cdmx!',
              [
                 "href" => path_enid("forma_pago") ,
                 "class" =>  'black bg_yellow pr-4 pl-4'
