@@ -1178,6 +1178,14 @@ function footer_opciones()
             'class' => 'black fp9'
         ]
     );
+    $oportunidades[] = a_enid(
+        '¿Necesitas una págin web?',
+        [
+            'href' => path_enid('sobre_pagina_web'),
+            'class' => 'black fp9'
+        ]
+    );
+
 
     $sociales[] = _titulo('SÍGUENOS', 2);
     $sociales[] = a_enid(
