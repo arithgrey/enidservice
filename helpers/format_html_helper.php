@@ -1803,17 +1803,26 @@ function _d()
 function opciones_populares()
 {
 
+    $response[] = d(
+        "PRUEBA EN CASA",
+        [
+            "class" => "white  cursor_pointer  
+            frecuentes borde_amarillo p-1 prueba_en_casa",            
+            "onclick" => "log_operaciones_externas(48)",
+        ]
+    );
+
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white fp8 border-right frecuentes border-right-enid",
+            "class" => "white mt-2 border-right frecuentes ",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white  fp8 border-right frecuentes border-right-enid",
+            "class" => "white mt-2   border-right frecuentes ",
             "href" => path_enid(
                 "search",
                 "/?q2=0&q=&order=1"
@@ -1825,7 +1834,7 @@ function opciones_populares()
     $response[] = a_enid(
         "PROMOCIONES",
         [
-            "class" => "white  fp8  border-right frecuentes border-right-enid",
+            "class" => "white    border-right frecuentes ",
             "href" => path_enid("promociones")
         ]
     );
@@ -1834,7 +1843,7 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white fp8 frecuentes ",
+            "class" => "white  mt-2 frecuentes ",
             "href" => path_enid("clientes")
         ]
     );
@@ -1887,17 +1896,26 @@ function opciones_adicionales_navegacion()
 
     $response[] = d(d("Pago contra entrega en tu domicilio!",'col-xs-12 white fp7 ml-3 text-uppercase'),["class"=> 'row bg_black white mb-2' ]);    
     $opciones[] = d(
+        "PRUEBA EN CASA",
+        [
+            "class" => "black  cursor_pointer  
+            frecuentes strong p-1 prueba_en_casa col-xs-4",            
+            "onclick" => "log_operaciones_externas(48)",
+        ]
+    );
+    $opciones[] = d(
         a_enid("POPULARES", [
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
-            "class" => "black"
+            "class" => "strong black"
         ]),
         "text-capitalize col-xs-4 "
     );
+    /*
     $opciones[] = d(a_enid("NOVEDADES", [
         "href" => path_enid("search","/?q2=0&q=&order=1"),
-        "class" => "black"
+        "class" => "strong black"
     ]), "text-capitalize col-xs-4 text-center");
-    
+    */
     /*
     $opciones[] = d(a_enid("PROMOCIONES", [
         "href" => path_enid("promociones"),
@@ -1908,7 +1926,7 @@ function opciones_adicionales_navegacion()
    
     $opciones[] = d(a_enid("CLIENTES", [
         "href" => path_enid("clientes"),
-        "class" => "black"
+        "class" => "strong black"
     ]), "text-capitalize  col-xs-4");
 
     /*
