@@ -1802,13 +1802,13 @@ if (!function_exists('invierte_date_time')) {
             text_icon(_busqueda_icon, 'Tus Pedidos'),
             '#buscador_seccion',
             [
-                'class' => ' mt-2 underline'
+                'class' => ' mt-2 s'
             ]
         );
         $menu_pendientes = tab(
             text_icon('fa fa-credit-card-alt', 'Cuentas por pagar'),
             '#pagos_pendientes',
-            ['class' => ' mt-3 underline']
+            ['class' => ' mt-3 s']
         );
 
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
@@ -1818,7 +1818,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-share", 'Envía el catálogo a tus clientes potenciales'),
             '#catalogos_pendientes',
             [
-                'class' => ' mt-2 busqueda_catalogos_pendientes underline mt-3'
+                'class' => ' mt-2 underline busqueda_catalogos_pendientes mt-3'
             ]
         );
 
@@ -1826,7 +1826,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-money", 'Ventas en proceso'),
             '#ventas_en_proceso',
             [
-                'class' => ' mt-2 ventas_en_proceso underline mt-3'
+                'class' => ' mt-2 ventas_en_proceso mt-3'
             ]
         );
 
@@ -1834,7 +1834,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-money", 'Ventas en proceso de clientes'),
             '#ventas_en_proceso_cliente',
             [
-                'class' => ' mt-2 ventas_en_proceso_clientes underline mt-3'
+                'class' => ' mt-2 ventas_en_proceso_clientes  mt-3'
             ]
         );
 
@@ -1843,7 +1843,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-usd", 'Ventas entregadas!'),
             '#ventas_efectivas',
             [
-                'class' => ' mt-2 ventas_efectivas underline mt-3'
+                'class' => ' mt-2 ventas_efectivas mt-3'
             ]
         );
 
@@ -1863,7 +1863,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
             '#recursos',
             [
-                'class' => ' mt-4 busqueda_promociones_disponibles underline'
+                'class' => ' mt-4 busqueda_promociones_disponibles'
             ]
         );
 
@@ -1872,7 +1872,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-line-chart", 'Métricas'),
             '#metricas',
             [
-                'class' => ' mt-2 busqueda_metricas underline mt-3'
+                'class' => ' mt-2 busqueda_metricas mt-3'
             ]
         );
 
@@ -1880,7 +1880,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-line-chart", 'Penetración por alcaldías'),
             '#metricas_alcaldias',
             [
-                'class' => ' mt-2 busqueda_metricas_alcaldias underline mt-3'
+                'class' => ' mt-2 busqueda_metricas_alcaldias mt-3'
             ]
         );
        

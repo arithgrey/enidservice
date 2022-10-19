@@ -15,6 +15,7 @@
 <?= menu_session_mobil($in_session) ?>
 
 <div class="container-fluid" id="page-content">
+<?=modal_prueba_en_casa()?>
   
     
 
