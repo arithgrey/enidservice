@@ -665,6 +665,8 @@ if (!function_exists('invierte_date_time')) {
             );
             
             $simulador = '';
+            $flex = _text_(_between, 'd-flex mr-5');
+            
 
             if(es_administrador($data)){
 
@@ -685,7 +687,6 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
-                $flex = _text_(_between, 'd-flex mr-5');
                 
             }
             $response[] = d(_d($respuestas, $metricas, $simulador ),$flex);
