@@ -1807,7 +1807,7 @@ function opciones_populares()
         "PRUEBA EN CASA",
         [
             "class" => "white  cursor_pointer  
-            frecuentes borde_amarillo p-1 prueba_en_casa",            
+            frecuentes borde_amarillo p-1 prueba_en_casa ml-5",            
             "onclick" => "log_operaciones_externas(48)",
         ]
     );
@@ -2263,7 +2263,11 @@ function get_logo($session = 0)
     } else {
 
         $img_enid = img_enid(["style" => "width: 50px!important;"]);
-        return a_enid($img_enid, ["href" => path_enid('home')]);
+        return a_enid($img_enid, 
+        [
+            "href" => path_enid('home'),
+            "class" => "ml-3 mb-2"
+        ]);
     }
 }
 
