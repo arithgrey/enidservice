@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(d(d($adicionales,13),10,1), "row mt-5");    
         $link_promociones = format_link("Más promociones", [
-            "href" => path_enid("search", _text("/?q2=0&q=&order=", rand(0, 8),'&page=',rand(0, 5))),
+            "href" => path_enid("promociones"),
             "class" => "border"
         ]);
         $response[] = d(d(d($link_promociones,13),10,1), "row mt-5");    
