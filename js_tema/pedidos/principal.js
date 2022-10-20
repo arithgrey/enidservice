@@ -22,6 +22,7 @@ let $registro_articulo_interes = $('.registro_articulo_interes');
 let $id_usuario_referencia = $('.id_usuario_referencia');
 let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
 let $edicion_cantidad = $('.edicion_cantidad');
+let $eliminar_producto_orden_compra = $(".eliminar_producto_orden_compra");
 let $id_status = $(".id_status");
 let $botton_enviar_reparto = $(".botton_enviar_reparto");
 let $botton_enviar_despues = $(".botton_enviar_despues");
@@ -33,7 +34,7 @@ let $botton_actualizar = $('.botton_actualizar');
 
 $(document).ready(() => {
 
-    
+
     $editar_estado_compra.click(function () {
 
         selecciona_select('.status_venta_select', parseInt($status_venta_registro.val()));
@@ -73,40 +74,41 @@ $(document).ready(() => {
     $editar_usuario_tipo_negocio.click(editar_usuario_tipo_negocio);
     $repartidor.click(cambio_reparto);
     $edicion_cantidad.click(habilita_edicion);
-    $botton_actualizar.click(actualizar_cantidad);    
+    $eliminar_producto_orden_compra.click(quitar_producto_orden_compra);
+    $botton_actualizar.click(actualizar_cantidad);
     valida_envio_reparto();
 
 });
 let valida_envio_reparto = () => {
 
-    let status = parseInt($id_status.val());    
-    let saldo_cubierto =  parseInt($saldo_actual_cubierto.val());
-    
-    if(status == 16 && saldo_cubierto < 1){
-        
+    let status = parseInt($id_status.val());
+    let saldo_cubierto = parseInt($saldo_actual_cubierto.val());
+
+    if (status == 16 && saldo_cubierto < 1) {
+
         $modal_envio_reparto.modal("show");
-        $botton_enviar_despues.click(function(){
+        $botton_enviar_despues.click(function () {
             $modal_envio_reparto.modal("hide");
         });
-        
+
         $botton_enviar_reparto.click(confirma_envio_reparto);
 
     }
 
 };
-let confirma_envio_reparto =  () =>{
+let confirma_envio_reparto = () => {
 
     advierte('Procesando ...', 1);
 
     let data_send = $.param({
-        "orden_compra": get_parameter(".recibo"),                
+        "orden_compra": get_parameter(".recibo"),
     });
-    let url = "../q/index.php/api/lead/envio_reparto/format/json/";    
+    let url = "../q/index.php/api/lead/envio_reparto/format/json/";
     request_enid("PUT", data_send, url, response_notificacion_envio_reparto);
 
 }
 let response_notificacion_envio_reparto = data => {
-    
+
     redirect('');
 };
 let editar_horario_entrega = function (e) {
@@ -200,6 +202,44 @@ let cambio_estado = function () {
     $(".status_venta_registro option[value='" + status_venta_registro + "']").attr("disabled", "disabled");
 
 };
+
+let quitar_producto_orden_compra = function () {
+
+    let $id = $(this).attr("id");
+    let text = "¿Seguro quieres quitar este articulo de tu orden?";
+    $.confirm({
+        title: text,
+        content: '',
+        type: 'green',
+        buttons: {
+            ok: {
+                text: "QUITAR DE LA ORDEN",
+                btnClass: 'btn-primary',
+                keys: ['enter'],
+                action: function () {
+
+                    quitar_producto($id);
+
+                }
+            },
+            cancel: function () { }
+        }
+    });
+}
+
+let quitar_producto = function (id_proyecto_persona_forma_pago) {
+
+    
+    let data_send = $.param({"id_producto": id_proyecto_persona_forma_pago,"id_orden_compra":get_parameter(".recibo")});    
+    let url = "../q/index.php/api/producto_orden_compra/index/format/json/";
+    
+    request_enid("DELETE", data_send, url, function(){
+        redirect("");
+    })
+}
+
+
+
 let modifica_estado = function () {
 
     $('.place_tipificaciones').addClass('mt-5 mb-5');
@@ -375,7 +415,7 @@ let pre_cancelacion = () => {
 
     }
 
-    let data_send = {"v": 1, tipo: tipo, "text": "MOTIVO DE CANCELACIÓN"};
+    let data_send = { "v": 1, tipo: tipo, "text": "MOTIVO DE CANCELACIÓN" };
     let url = "../q/index.php/api/tipificacion/index/format/json/";
     request_enid("GET", data_send, url, response_pre_cancelacion)
 
@@ -602,7 +642,7 @@ let confirma_envio_lista_negra = (id_usuario) => {
     let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";
-        let data_send = {'v': 1, 'id_usuario': id_usuario, 'tipo': 0};
+        let data_send = { 'v': 1, 'id_usuario': id_usuario, 'tipo': 0 };
         request_enid("GET", data_send, url, response_motivos_lista_negra);
     });
 
@@ -613,7 +653,7 @@ let confirma_desbloqueo_lista_negra = (id_usuario) => {
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/lista_negra/desbloqueo/format/json/";
         let $recibo = $('.recibo').val();
-        let data_send = {'v': 1, 'id_usuario': id_usuario, 'recibo': $recibo};
+        let data_send = { 'v': 1, 'id_usuario': id_usuario, 'recibo': $recibo };
         request_enid("PUT", data_send, url, response_desbloqueo);
     });
 
@@ -625,7 +665,7 @@ let response_desbloqueo = (data) => {
 let confirma_intento_recuperacion = (id_usuario, recibo, dias) => {
 
 
-    let data_send = {"v": 1, tipo: 11, 'id_usuario': id_usuario, 'recibo': recibo, 'dias': dias};
+    let data_send = { "v": 1, tipo: 11, 'id_usuario': id_usuario, 'recibo': recibo, 'dias': dias };
     let url = "../q/index.php/api/tipificacion/recuperacion/format/json/";
     request_enid("GET", data_send, url, response_form_intento_recuperacion)
 
@@ -673,7 +713,7 @@ let confirma_intento_reventa = (id_usuario, id_orden_compra) => {
 
     oculta_opciones_recibo();
     let url = "../q/index.php/api/tipo_tag_arquetipo/reventa/format/json/";
-    let data_send = {'v': 1, 'id_usuario': id_usuario, 'id_orden_compra': id_orden_compra};
+    let data_send = { 'v': 1, 'id_usuario': id_usuario, 'id_orden_compra': id_orden_compra };
     request_enid("GET", data_send, url, response_reventa);
 
 };
@@ -715,7 +755,7 @@ let registro_reventa = function () {
 
 
     $('.cargando_modal').removeClass('d-none');
-    let data_send = $('.form_reventa').serialize() + '&' + $.param({'intento_reventa': 1});
+    let data_send = $('.form_reventa').serialize() + '&' + $.param({ 'intento_reventa': 1 });
     bloquea_form('.form_tag_arquetipo');
     let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
     bloquea_form('.form_reventa');
@@ -760,7 +800,7 @@ let evalua_registro_motivo_lista_negra = function () {
 };
 let agregar_lista_negra = (e) => {
 
-    
+
     let $motivo = parseInt(get_valor_selected('.motivo'));
     if ($motivo >= 0) {
 
@@ -820,7 +860,7 @@ let enviar_repatidor = function (id_recibo, es_punto_encuentro = 1) {
     advierte('Se está solicitando tu entrega al repartidor', 1)
     $('.text-order-name-error').addClass('h4 text-uppercase');
     let url = "../q/index.php/api/recibo/reparto/format/json/";
-    let data_send = {'id': id_recibo, 'es_punto_encuentro': es_punto_encuentro};
+    let data_send = { 'id': id_recibo, 'es_punto_encuentro': es_punto_encuentro };
     request_enid("PUT", data_send, url, response_reparto);
 };
 let response_reparto = function () {
@@ -865,7 +905,7 @@ let modifica_status_recordatorio = (id_recordatorio, status) => {
     if (id_recordatorio > 0) {
 
         let url = "../q/index.php/api/recordatorio/status/format/json/";
-        let data_send = {id_recordatorio: id_recordatorio, status: status};
+        let data_send = { id_recordatorio: id_recordatorio, status: status };
         request_enid("PUT", data_send, url);
     }
 };
@@ -919,7 +959,7 @@ let agenda_compra = function () {
     let id = get_parameter_enid($(this), "id");
     if (id > 0) {
 
-        let data_send = {id: id};
+        let data_send = { id: id };
         let url = "../q/index.php/api/recibo/agenda/format/json/";
         request_enid("POST", data_send, url, r_agenda);
     }
@@ -968,7 +1008,7 @@ let baja_tag = function () {
     let tag_arquetipo = get_option('tag_arquetipo');
     if (parseInt(tag_arquetipo) > 0) {
 
-        let data_send = $.param({'id': tag_arquetipo});
+        let data_send = $.param({ 'id': tag_arquetipo });
         let url = "../q/index.php/api/tag_arquetipo/index/format/json/";
         request_enid("DELETE", data_send, url, response_tag_arquetipo);
     }
@@ -998,7 +1038,7 @@ let cambio_reparto = function (e) {
     modal('Buscando ...', 1);
     let $id_recibo = get_parameter_enid($(this), 'id');
     let $id_usuario = get_parameter_enid($(this), 'usuario');
-    let data_send = $.param({'id_recibo': $id_recibo, 'usuario': $id_usuario, 'v': 1, 'id_perfil': 21});
+    let data_send = $.param({ 'id_recibo': $id_recibo, 'usuario': $id_usuario, 'v': 1, 'id_perfil': 21 });
     let url = "../q/index.php/api/usuario/perfiles/format/json/";
     request_enid("GET", data_send, url, response_cambio_reparto);
 
@@ -1036,7 +1076,7 @@ let valida_registro_articulo_interes = () => {
 
         let $recibo = $('.recibo').val();
         let $id_usuario_compra = $('.id_usuario_compra').val();
-        let data_send = $.param({'v': 1, 'recibo': $recibo, 'id_usuario': $id_usuario_compra});
+        let data_send = $.param({ 'v': 1, 'recibo': $recibo, 'id_usuario': $id_usuario_compra });
         let url = "../q/index.php/api/tag_arquetipo/articulos_interes/format/json/";
         request_enid("GET", data_send, url, response_form_interes);
 
@@ -1069,7 +1109,7 @@ let registro_articulo_interes = function (e) {
 let registro_aun_sin_articulo_interes = function () {
 
     let $recibo = $('.recibo').val();
-    let data_send = $.param({'v': 1, 'id': $recibo});
+    let data_send = $.param({ 'v': 1, 'id': $recibo });
     let url = "../q/index.php/api/recibo/registro_articulo_interes/format/json/";
     request_enid("PUT", data_send, url, response_tag_arquetipo);
 };
@@ -1090,7 +1130,7 @@ let actualizar_cantidad = function () {
 
     let $id_producto_orden_compra = $(".id_producto_orden_compra").val();
     let $cantidad = $(_text('.cantidad_', $id_producto_orden_compra)).val();
-    let data_send = $.param({'id': $id_producto_orden_compra, 'cantidad': $cantidad});
+    let data_send = $.param({ 'id': $id_producto_orden_compra, 'cantidad': $cantidad });
     let url = "../q/index.php/api/recibo/cantidad/format/json/";
     $seccion_edicion_cantidad.addClass('d-none');
     request_enid("PUT", data_send, url, response_tag_arquetipo);

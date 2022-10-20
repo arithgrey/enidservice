@@ -29,6 +29,25 @@ class Producto_orden_compra extends REST_Controller
         }
         $this->response($response);
     }
+    function index_DELETE()
+    {
+        $response = false;
+        $param = $this->delete();
+
+        if (fx($param, "id_producto,id_orden_compra")) {
+
+
+            $params = [
+                "id_orden_compra" => $param["id_orden_compra"],
+                "id_proyecto_persona_forma_pago" => $param["id_producto"]
+            ];
+
+            $response = $this->producto_orden_compra_model->delete($params);
+
+        }
+        $this->response($response);
+    }
+    
 
     function index_GET()
     {
@@ -93,6 +112,7 @@ class Producto_orden_compra extends REST_Controller
         return $response;
 
     }
+
 
 
 }
