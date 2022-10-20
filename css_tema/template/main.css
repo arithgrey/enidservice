@@ -1,6 +1,14 @@
-.bg_yellow{
-    background: yellow!important;
+.colo_precio_enid {
+
+    color: #070aac !important;
+
+
 }
+
+.bg_yellow {
+    background: yellow !important;
+}
+
 .lp-1 {
     letter-spacing: 0.1em;
 }
@@ -30,8 +38,8 @@
     color: #000 !important;
     font-size: 18px !important;
     text-align: left !important;
-    border: 2px solid black!important;
-    
+    border: 2px solid black !important;
+
 }
 
 .filtro_orden_categorias:focus {
@@ -1310,6 +1318,10 @@ h2 {
 
 .f2 {
     font-size: 2em;
+}
+
+.f25 {
+    font-size: 2.5em;
 }
 
 .f21 {

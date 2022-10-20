@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $hoy = $fecha->format('H:i:s');
         $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
 
-        $text = _text_("Haz tu pedido y tenlo hoy mismo!", strong("Entrega gratis en CDMX"));
+        $text = _text_(span("Haz tu pedido y tenlo hoy mismo!",'black'), strong("Entrega gratis en CDMX"));
         $mas_un_dia = _text_("Realiza tu pedido y tenlo mañana mismo!", strong("Entrega gratis en CDMX"));
         $str = ($hoy < 18) ? $text : $mas_un_dia;
 
@@ -441,8 +441,9 @@ if (!function_exists('invierte_date_time')) {
             select_cantidad_compra($es_servicio, $existencia),
             _between
         );
+        
+        $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio),'mt-5');
         $r[] = $tiempo_entrega;
-        $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
         $response[] = d($r, "contenedor_form");
         return append($response);
     }
@@ -947,7 +948,7 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["info_servicio"]["servicio"];
         $descuento_especial = pr($servicio, "descuento_especial");
-        $precio_menos_descuento = ($precio_unidad - $descuento_especial);
+        
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);
         $texto_precio_base = ($precio_unidad > 0) ? _text($precio_unidad, "MXN") : "A CONVENIR";
@@ -956,35 +957,17 @@ if (!function_exists('invierte_date_time')) {
         if ($es_premium) {
 
             $texto = d(del($texto_precio_base), "f11 text-secondary");
-            $texto_precio = money($precio_menos_descuento);
-            /*
-            $texto_premium = flex(
-                $texto_precio,
-                "Puedes venderlo a este precio por ser premium",
-                " black w-100 flex-column mt-1",
-                "f16",
-                "text-muted "
-            );
-            */
+            
             $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
         } else {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "f16 black");
+            $texto = d($texto_precio_base, "f25 colo_precio_enid");
 
             if ($in_session && $descuento_especial > 0) {
 
-                $texto_precio = money($precio_menos_descuento);
-                /*
-                $texto_premium = flex(
-                    del($texto_precio),
-                    "Puedes venderlo a este precio aumentando tus ventas semanales",
-                    "black w-100 flex-column mt-1",
-                    "fp9",
-                    "text-muted fp8"
-                );
-                */
+                
 
                 $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
             } else {
@@ -1130,10 +1113,10 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Agrégalo al Carrito", 'border'),
+                d("Agregar al carrito", 'border pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
-                    "class" => "agregar_a_lista_deseos l_deseos",
+                    "class" => "agregar_a_lista_deseos l_deseos ",
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
 
                 ]
@@ -1146,8 +1129,8 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    "Lo deseo",
-                    'agregar_a_lista border l_deseos'
+                    "Agregar al carrito",
+                    'agregar_a_lista border l_deseos pt-3 pb-3'
                 ),
                 [
                     'class' => 'agregar_deseos_sin_antecedente',
@@ -1156,12 +1139,15 @@ if (!function_exists('invierte_date_time')) {
                 ]
 
             );
+            /*
             $texto = _text_(
                 d(_text_(span("5% de descuento",'strong white'),
                 "al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline'))),
                  
             );
+            */
     
+            /*
             $mensaje_messenger = a_enid(
                 $texto,
                 [
@@ -1170,13 +1156,14 @@ if (!function_exists('invierte_date_time')) {
                     "target" => "_black"
                 ]
                 );
+                */
 
-                $response[] = $mensaje_messenger;
+                //$response[] = $mensaje_messenger;
 
         }
 
         //$response[] = formas_acionales_compra($data);
-        $response[] = confianza($id_servicio, $data);
+        //$response[] = confianza($id_servicio, $data);
         return append($response);
     }
     function confianza($id_servicio, $data)
