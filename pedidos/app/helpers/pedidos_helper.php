@@ -2798,11 +2798,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $r[] = d(h(
-            "UPS! NO ENCONTRAMOS EL NÚMERO DE ORDEN",
-            1,
-            "funny_error_message"
-        ), "text-center");
+        $r[] = d(
+            "UPS! AL PARECER ESTA ORDEN YA NO ESTÁ DISPONIBLE",                        
+            "mx-auto black text-center p-2 mb-4 display-6"
+        );
         $r[] = d(
             img(
                 [
@@ -2810,18 +2809,16 @@ if (!function_exists('invierte_date_time')) {
                 ]
             )
         );
-        $r[] = d(
-            a_enid(
+        $r[] = 
+            format_link(
                 "ENCUENTRA TU ORDEN AQUÍ",
                 [
                     "href" => path_enid("pedidos"),
-                    "class" => "busqueda_mensaje",
+                    "class" => "borde_amarillo mt-4 blue_enid2"
                 ]
-            ),
-            "busqueda_mensaje_text"
-        );
+            );
 
-        return d(append($r));
+        return d($r, 4,1);
     }
 
     function frm_direccion($id_orden_compra)
@@ -3601,6 +3598,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $selector_cantidad = selector_cantidad(0, 100, $clase_cantidad);
+            $icon_eliminar = icon(_eliminar_icon);
             $icon = flex($total, $editar_cantidad, '', 'mr-3 f11 texto_cantidad');
             $actualizar = format_link("actualizar", ["class" => "botton_actualizar"]);
 
@@ -3616,6 +3614,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $elementos = [
+                
                 d($icon, _text_('seccion_cantidad', $clase_icono_cantidades)),
                 d($selector_cantidad, _text_($clase_cantidades, 'd-none')),
                 d($actualizar, _text_($clase_cantidades, 'mt-3 d-none'))
@@ -3628,10 +3627,12 @@ if (!function_exists('invierte_date_time')) {
 
             $icono_edicion = d($elementos, $clase_iconos);
 
+            $eliminar_producto  = d($icon_eliminar, ["class" => "mb-5 eliminar_producto_orden_compra" , "id" => $id_proyecto_persona_forma_pago]);
+            $iconos_config = flex($eliminar_producto, $icono_edicion, 'flex-column');
             $linea = [
                 $imagen,
                 $texto_precio,
-                $icono_edicion
+                $iconos_config
             ];
 
             $clases = _text_(_between_md, 'mt-5 border-bottom d-flex');

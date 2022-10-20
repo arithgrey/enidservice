@@ -525,9 +525,8 @@ if (!function_exists('invierte_date_time')) {
             $z[] = validador_atributo($capacidad, 'Capacidad', "KG");
         }
 
-        $z[] = valida_materiales($servicio_materiales);
-        $z[] = d(social($proceso_compra, 1), "iconos_social mb-5");
-        $z[] = d(tb_colores($color, $es_servicio), 12);
+        $z[] = valida_materiales($servicio_materiales);        
+        $z[] = d(d(tb_colores($color, $es_servicio),'row mt-3'), 12);
         $yt = pr($servicio, "url_vide_youtube");
 
         $r = [];

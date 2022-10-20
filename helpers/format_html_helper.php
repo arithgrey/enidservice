@@ -969,20 +969,7 @@ function social($proceso_compra, $desc_web, $black = 1)
 
     if ($proceso_compra < 1) {
 
-        $r[] = a_enid(
-            img(
-                [
-                    "src" => "../img_tema/productos/messenger.png",
-                    "class" => "w_15 border-0",
-                    'style' => 'filter: hue-rotate(8deg) brightness(70%);'
-
-                ]
-            ),
-            [
-                "href" => "https://www.m.me/enidservicemx",
-                "target" => "_black",
-            ]
-        );
+     
 
         $r[] = a_enid(
             "",
@@ -1004,17 +991,7 @@ function social($proceso_compra, $desc_web, $black = 1)
             ]
         );
 
-        $r[] = a_enid(
-            "",
-            [
-                "target" => "_black",
-                "class" => _text_("fa fa-twitter ", $color),
-                "title" => "Tweet",
-                "data-size" => "large",
-                "href" => $url_twitter,
-            ]
-        );
-
+        
         $r[] = get_url_pinterest($url_share, 1);
     }
 

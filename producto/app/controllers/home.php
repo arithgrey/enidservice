@@ -118,8 +118,10 @@ class Home extends CI_Controller
             $this->load->view("producto/localidades");
             
         }else{
+            
             $data = $this->app->cssJs($data, "sin_encontrar");
             $this->app->pagina($data, sin_resultados($data), 1);            
+            
 
         }
     

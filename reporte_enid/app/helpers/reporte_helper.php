@@ -209,7 +209,7 @@ if (!function_exists('invierte_date_time')) {
         return d(
             $form,
             [
-                "class" => "tab-pane",
+                "class" => "tab-pane active",
                 "id" => "tab_accesos_time_line",
             ]
         );
@@ -445,7 +445,7 @@ if (!function_exists('invierte_date_time')) {
         return d(
             $form,
             [
-                "class" => "tab-pane active",
+                "class" => "tab-pane",
                 "id" => 'tab_default_1',
             ]
         );

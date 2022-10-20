@@ -31,6 +31,15 @@ class Producto_orden_compra_model extends CI_Model
         return ($return_id == 1) ? $this->db->insert_id() : $insert;
     }
 
+    function delete($params_where = [], $limit = 1)
+    {
+        $this->db->limit($limit);
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        return $this->db->delete($this->tabla, $params_where);
+    }
+
     function q_get($params = [], $id)
     {
         return $this->get($params, ["id" => $id]);
