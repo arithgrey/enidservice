@@ -397,10 +397,10 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
-            $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline');
             $response[] = form_close();
-            return append($response);
+            return d($response,'mb-5');
         } else {
 
 
@@ -421,7 +421,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline');
             $response[] = form_close();
-            return append($response);
+            return d($response,'mb-5');
         }
     }
 
