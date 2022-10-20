@@ -1740,8 +1740,8 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
 
     $clase = ($primario > 0) ?
-        "text-center borde_accion p-2 bg_black white  text-uppercase col " :
-        "text-center bg-white borde_accion p-2 border_enid col black text-uppercase ";
+        "text-center borde_accion p-2 pb-3 pt-3 bg_black white  text-uppercase col " :
+        "text-center bg-white borde_accion pb-3 pt-3 p-2 border_enid col black text-uppercase ";
 
     $clase .= ($texto_strong) ? ' font-weight-bold ' : '';
 
