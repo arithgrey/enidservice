@@ -1952,9 +1952,9 @@ class Servicio extends REST_Controller
         $existentes = (es_data($servicios)) ? count($servicios) : 0;
         $sugerencia = ($existentes > 0) ? $servicios : [];
 
-        if ($existentes < 8) {
+        if ($existentes < 16) {
 
-            $param["limit"] = (16 - $existentes);
+            $param["limit"] = (24 - $existentes);
 
             if ($in_session) {
 

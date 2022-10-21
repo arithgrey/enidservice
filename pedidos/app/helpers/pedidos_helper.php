@@ -1873,7 +1873,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa fa-money", 'Ventas en proceso de clientes'),
             '#ventas_en_proceso_cliente',
             [
-                'class' => ' mt-2 ventas_en_proceso_clientes  mt-3'
+                'class' => ' mt-2 ventas_en_proceso_clientes underline black f11 mt-3'
             ]
         );
 

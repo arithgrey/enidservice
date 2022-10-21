@@ -644,7 +644,7 @@ class serviciosmodel extends CI_Model
                         status = 1
                             AND 
                         flag_imagen = 1
-                        LIMIT 1";
+                        LIMIT 2";
 
         return $this->db->query($query_get)->result_array();
     }

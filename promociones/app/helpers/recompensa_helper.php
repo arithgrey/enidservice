@@ -19,8 +19,8 @@ if (!function_exists('invierte_date_time')) {
             $texto,
             [
                 "href" => path_enid('facebook_descuento', 0, 1),
-                "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3 row",
-                "target" => "_black"
+                "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3 row"
+                
             ]
             );
 
@@ -93,14 +93,13 @@ if (!function_exists('invierte_date_time')) {
 
         $link_facebook =  format_link("Facebook", [
             "href" => path_enid("facebook",0,1),
-            "class" => "border mt-4",
-            'target' => 'blank_'
+            "class" => "border mt-4"
+            
         ],0);
 
         $link_instagram =  format_link("Instagram", [
             "href" => path_enid("fotos_clientes_instagram",0,1),
-            "class" => "border mt-4",
-            'target' => 'blank_'
+            "class" => "border mt-4"
         ],0);
         
 
@@ -201,8 +200,7 @@ if (!function_exists('invierte_date_time')) {
         return a_enid($imagen,
             [
 
-                'href' => $link_servicio,
-                "target" => "_blank"
+                'href' => $link_servicio                
             ]
         );
 
@@ -223,8 +221,8 @@ if (!function_exists('invierte_date_time')) {
         );
         return a_enid($imagen_servicio_conjunto,
             [
-                "href" => $link_servicio_conjunto,
-                "target" => "_blank"
+                "href" => $link_servicio_conjunto
+                
             ]
         );
 
