@@ -654,7 +654,7 @@ if (!function_exists('invierte_date_time')) {
 
         $list = [
             format_link(
-                text_icon(_money_icon, "Noticas"),
+                text_icon(_money_icon, "Noticias"),
                 [
 
                     "href" => path_enid("busqueda"),
