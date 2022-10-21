@@ -213,14 +213,13 @@ if (!function_exists('invierte_date_time')) {
         $link_facebook =  format_link("Facebook", [
             "href" => path_enid("facebook", 0, 1),
             "class" => "border mt-4",
-            'target' => 'blank_',
+            
             "onclick" => "log_operaciones_externas(29, $id_servicio)"
         ], 0);
 
         $link_instagram =  format_link("Instagram", [
             "href" => path_enid("fotos_clientes_instagram", 0, 1),
-            "class" => "border mt-4",
-            'target' => 'blank_',
+            "class" => "border mt-4",            
             "onclick" => "log_operaciones_externas(30, $id_servicio)"
         ], 0);
 
@@ -935,8 +934,7 @@ if (!function_exists('invierte_date_time')) {
         return a_enid(
             $imagen_servicio_conjunto,
             [
-                "href" => $link_servicio_conjunto,
-                "target" => "_blank"
+                "href" => $link_servicio_conjunto                
             ]
         );
     }

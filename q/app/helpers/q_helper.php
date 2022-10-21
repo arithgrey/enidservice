@@ -34,7 +34,8 @@ if (!function_exists('invierte_date_time')) {
 
         $dashboard = prm_def($param, "dashboard");
         $total = $en_carrito_usuario + $en_carrito_usuario_externo;
-        $text = _titulo(flex("En carro de compras", $total, _between), 3);
+        $text = _titulo(
+            flex("En carro de compras", $total, _text_(_between,'white border blue_enid2 p-1')), 4);
         $response[] = d($text);
 
         $personas_registradas_carrito = _text_(_between, 'personas_registradas_carrito ');
@@ -48,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = d($flex);
 
-        $texto_metricas_externas = d("Personas externas", ["data-toggle" => "tab", "href" => "#tab_funnel_ventas", "class" => "dashboard_funnel"]);
+        $texto_metricas_externas = d("Personas externas", ["data-toggle" => "tab", "href" => "#tab_funnel_ventas", "class" => "dashboard_funnel f12 black"]);
 
         $flex = flex(
             $texto_metricas_externas,
@@ -68,9 +69,9 @@ if (!function_exists('invierte_date_time')) {
         $flex = flex(
             "En registro de información de envío",
             $total,
-            _text_(_between)
+            _text_(_between,'white border blue_enid2 p-1')
         );
-        $text = _titulo($flex, 3);
+        $text = _titulo($flex, 4);
         $response[] = d($text);
 
 
@@ -84,7 +85,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $response[] = d($flex);
 
-        $texto_metricas_externas = d("Personas externas", ["data-toggle" => "tab", "href" => "#tab_funnel_ventas", "class" => "dashboard_funnel"]);
+        $texto_metricas_externas = d("Personas externas", ["data-toggle" => "tab", "href" => "#tab_funnel_ventas", "class" => "dashboard_funnel f12 black"]);
         $flex = flex(
             $texto_metricas_externas,
             $en_registro_usuario_externo,

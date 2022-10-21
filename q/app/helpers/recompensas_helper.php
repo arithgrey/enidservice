@@ -324,8 +324,8 @@ if (!function_exists('invierte_date_time')) {
         return a_enid($imagen,
             [
 
-                'href' => $link_servicio,
-                "target" => "_blank"
+                'href' => $link_servicio
+                
             ]
         );
 
@@ -344,8 +344,8 @@ if (!function_exists('invierte_date_time')) {
         );
         return a_enid($imagen_servicio_conjunto,
             [
-                "href" => $link_servicio_conjunto,
-                "target" => "_blank"
+                "href" => $link_servicio_conjunto
+                
             ]
         );
 
