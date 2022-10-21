@@ -156,9 +156,48 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens(['class' => 'es_venta_cancelada', 'value' => $es_venta_cancelada]);
         $response[] = hiddens(['class' => 'saldo_cubierto', 'value' => $saldo_cubierto]);
         
+        if(es_administrador($data)){
+            
+            $adicionales[] = format_link(
+                text_icon(_money_icon, "Dasboards"),
+                [
+    
+                    "href" => path_enid("reporte_enid"),
+                    "class" => "text-uppercase black mt-2",
+                ]
+                );
+        }
+
+          
+
+        $adicionales[] = format_link(
+            text_icon(_money_icon, "Noticias"),
+            [
+
+                "href" => path_enid("busqueda"),
+                "class" => "text-uppercase black mt-2",
+            ]
+            );
+
+
+          
+
+
+        $adicionales[] = format_link(
+            text_icon(_money_icon, "pedidos"),
+            [
+                "id" => "btn_servicios",
+                "href" => path_enid("pedidos"),
+                "class" => "text-uppercase black  mt-2 dispositivos",
+            ],
+            0
+        );
+
+        $compra[] = d($adicionales, 3);
+        $compra[] = d($response, 9);
+
         
-        
-        return d($response, _10auto);
+        return d($compra,'col-sm-11');
     }
 
     function opciones_compra($data, $recibo, $id_recibo, $es_vendedor, $tipos_entregas, $es_venta_cancelada)
