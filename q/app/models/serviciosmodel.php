@@ -549,7 +549,7 @@ class serviciosmodel extends CI_Model
 
     function agrega_elemento_distinto($distinto)
     {
-        $nuevo = " AND id_servicio != $distinto";
+        $nuevo = " AND status = 1 AND id_servicio != $distinto";
         $sql = $this->get_option("sql_distintos");
         $nuevo_sql = $sql . $nuevo;
         $this->set_option("sql_distintos", $nuevo_sql);
