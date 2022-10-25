@@ -82,10 +82,15 @@ if (!function_exists('invierte_date_time')) {
             
         }
 
-        $tres_meses =  ($precio + porcentaje($precio, 8)) / 3;
-        $seis_meses =  ($precio + porcentaje($precio, 8)) / 6;
-        $nueve_meses =  ($precio + porcentaje($precio, 10)) / 9;
-        $doce_meses =  ($precio + porcentaje($precio, 10)) / 12;
+        $tres_meses =  ($precio + porcentaje($precio, 8));
+        $seis_meses =  ($precio + porcentaje($precio, 8));        
+        $doce_meses =  ($precio + porcentaje($precio, 10));
+
+
+        $tres_meses_aplicado =  $tres_meses / 3;
+        $seis_meses_aplicado =  $seis_meses / 6;        
+        $doce_meses_aplicado =  $doce_meses / 12;
+
 
         if($precio > 600){
 
@@ -93,11 +98,10 @@ if (!function_exists('invierte_date_time')) {
                 _text_(
                     d(_text_("El precio es de", _text("$",$precio))),
                     br(),
-                    d("O con tarjeta de crédito"),
-                    d(_text_("A 3 meses", _text("$", sprintf('%01.2f',$tres_meses)))),
-                    d(_text_("A 6 meses", _text("$", sprintf('%01.2f',$seis_meses)))),
-                    d(_text_("A 9 meses", _text("$", sprintf('%01.2f',$nueve_meses)))),
-                    d(_text_("A 12 meses", _text("$", sprintf('%01.2f',$doce_meses))))
+                    d("- Ó con tarjeta de crédito "),
+                    d(_text_("En",_text("$",sprintf('%01.2f',$tres_meses)),"a 3 meses de", _text("$", sprintf('%01.2f',$tres_meses_aplicado)))),
+                    d(_text_("En",_text("$",sprintf('%01.2f',$seis_meses)),"a  6 meses de", _text("$", sprintf('%01.2f',$seis_meses_aplicado)))),                    
+                    d(_text_("En",_text("$",sprintf('%01.2f',$doce_meses))," 12 meses de", _text("$", sprintf('%01.2f',$doce_meses_aplicado))))
                 ),
                 'border p-5 mt-5',
                 'mb-5'
