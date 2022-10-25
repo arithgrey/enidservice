@@ -19,7 +19,8 @@ class Home extends CI_Controller
         $id_servicio = prm_def($param,'q');
         $data = $this->app->session();
         $data["id_servicio"] = $id_servicio; 
-        $data["propuestas"] = $this->propuestas($id_servicio);        
+        $data["propuestas"] = $this->propuestas($id_servicio);      
+        $data["servicio"] = $this->app->servicio($id_servicio);
         $data = $this->app->cssJs($data, "propuestas"); 
         $data["url_img_servicio"]= $this->app->imgs_productos($id_servicio, 1, 1, 1);
         $data["path_producto"] = _text("https://enidservices.com/web/producto/?producto=",$id_servicio);

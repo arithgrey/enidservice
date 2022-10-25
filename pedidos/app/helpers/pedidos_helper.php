@@ -1657,7 +1657,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_form_busqueda_pedidos($data, $param)
     {
-
+        
 
         $es_busqueda_reparto = prm_def($param, 'reparto');
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
@@ -2326,7 +2326,7 @@ if (!function_exists('invierte_date_time')) {
 
     function instruccion_envio_catalogo()
     {
-
+        
 
         $form[] = d(_titulo('Envía estas instrucciones'), 13);
 
