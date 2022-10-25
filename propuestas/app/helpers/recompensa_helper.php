@@ -46,7 +46,11 @@ if (!function_exists('invierte_date_time')) {
         return d(flex($agregar, $servicio, _between),'col-md-12 mt-5');
     }
     function listado($data)
-    {
+    {   
+        
+        $servicio = $data["servicio"];
+        $precio  = pr($servicio,"precio");
+        
 
         $propuestas  =  $data["propuestas"];
         $path_producto = $data["path_producto"];
@@ -77,6 +81,35 @@ if (!function_exists('invierte_date_time')) {
 
             
         }
+
+        $tres_meses =  ($precio + porcentaje($precio, 8)) / 3;
+        $seis_meses =  ($precio + porcentaje($precio, 8)) / 6;
+        $nueve_meses =  ($precio + porcentaje($precio, 10)) / 9;
+        $doce_meses =  ($precio + porcentaje($precio, 10)) / 12;
+
+        if($precio > 600){
+
+            $porcentajes = d(d(                
+                _text_(
+                    d(_text_("El precio es de", _text("$",$precio))),
+                    br(),
+                    d("O con tarjeta de crédito"),
+                    d(_text_("A 3 meses", _text("$", sprintf('%01.2f',$tres_meses)))),
+                    d(_text_("A 6 meses", _text("$", sprintf('%01.2f',$seis_meses)))),
+                    d(_text_("A 9 meses", _text("$", sprintf('%01.2f',$nueve_meses)))),
+                    d(_text_("A 12 meses", _text("$", sprintf('%01.2f',$doce_meses))))
+                ),
+                'border p-5 mt-5',
+                'mb-5'
+            ),12);
+            $response[] = d($porcentajes, 'col-sm-12');
+
+        }
+        
+
+
+
+
         $contenido = d(d(                
             _text_(
                 d("Sigue este enlace para ver nuestro catálogo "),
