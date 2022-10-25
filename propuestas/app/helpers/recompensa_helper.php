@@ -93,6 +93,10 @@ if (!function_exists('invierte_date_time')) {
 
 
         if($precio > 600){
+            
+            $final_3 = _text_(_text("$",sprintf('%01.0f',$tres_meses)));
+            $final_6 = _text_(_text("$",sprintf('%01.0f',$seis_meses)));
+            $final_12 = _text_(_text("$",sprintf('%01.0f',$doce_meses)));
 
             $porcentajes = d(d(                
                 _text_(
@@ -100,9 +104,9 @@ if (!function_exists('invierte_date_time')) {
                     br(),
                     d("- Ó con tarjeta de crédito "),
                     br(),
-                    d(_text_(_text("$",sprintf('%01.0f',$tres_meses)),"a 3 meses de", _text("$", sprintf('%01.2f',$tres_meses_aplicado)))),
-                    d(_text_(_text("$",sprintf('%01.0f',$seis_meses)),"a  6 meses de", _text("$", sprintf('%01.2f',$seis_meses_aplicado)))),                    
-                    d(_text_(_text("$",sprintf('%01.0f',$doce_meses))," 12 meses de", _text("$", sprintf('%01.2f',$doce_meses_aplicado))))
+                    d(_text_("3 meses de", _text("$", sprintf('%01.0f',$tres_meses_aplicado) ), "en total ",$final_3)),
+                    d(_text_("6 meses de", _text("$", sprintf('%01.0f',$seis_meses_aplicado) ), "en total ",$final_6)),
+                    d(_text_("12 meses de", _text("$", sprintf('%01.0f',$doce_meses_aplicado) ), "en total ",$final_12)),
                 ),
                 'border p-5 mt-5',
                 'mb-5'
