@@ -99,9 +99,10 @@ if (!function_exists('invierte_date_time')) {
                     d(_text_("El precio es de", _text("$",$precio))),
                     br(),
                     d("- Ó con tarjeta de crédito "),
-                    d(_text_("En",_text("$",sprintf('%01.2f',$tres_meses)),"a 3 meses de", _text("$", sprintf('%01.2f',$tres_meses_aplicado)))),
-                    d(_text_("En",_text("$",sprintf('%01.2f',$seis_meses)),"a  6 meses de", _text("$", sprintf('%01.2f',$seis_meses_aplicado)))),                    
-                    d(_text_("En",_text("$",sprintf('%01.2f',$doce_meses))," 12 meses de", _text("$", sprintf('%01.2f',$doce_meses_aplicado))))
+                    br(),
+                    d(_text_(_text("$",sprintf('%01.0f',$tres_meses)),"a 3 meses de", _text("$", sprintf('%01.2f',$tres_meses_aplicado)))),
+                    d(_text_(_text("$",sprintf('%01.0f',$seis_meses)),"a  6 meses de", _text("$", sprintf('%01.2f',$seis_meses_aplicado)))),                    
+                    d(_text_(_text("$",sprintf('%01.0f',$doce_meses))," 12 meses de", _text("$", sprintf('%01.2f',$doce_meses_aplicado))))
                 ),
                 'border p-5 mt-5',
                 'mb-5'
