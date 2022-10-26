@@ -97,13 +97,6 @@
 .info_metodos_pago {
     display: none;
 }
-
-.telefono_info_contacto {
-    border: 2px solid rgb(13, 62, 86) !important;
-}
-
-
-
 .contenedor_tallas_disponibles {
     padding: 20px;
 }

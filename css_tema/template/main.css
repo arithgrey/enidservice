@@ -1883,8 +1883,7 @@ input:focus:invalid {
 }
 
 .borde_accion {
-    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);
-    border: solid 2px #69ffc0 !important;
+    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);    
 }
 
 /*Configurador de productos*/

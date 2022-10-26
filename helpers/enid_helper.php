@@ -1173,20 +1173,49 @@ function footer_opciones()
     );
     /**Oportunidades*/
     $oportunidades[] = _titulo('Oportunidades', 2,'border_b_green');
+
+    $anuncio[] = d('¿Vendes artículos?',"black strong");
+    $anuncio[] = d('Anúnciate aquí!');
+    
+    $oportunidades[] = a_enid(
+        d($anuncio),
+        [            
+            'class' => 'black fp9 borde_black mt-2 p-3 anuncio_negocio_enid_service',
+            "onclick" => "log_operaciones_externas(49)",
+        ]
+    );
+
+    $auto[]= d('¿Vendes tu auto?','strong black');
+    $auto[]= d('Nosotro te ayudamos!');
+    $oportunidades[] = a_enid(
+        append($auto)
+        ,
+        [
+            
+            'class' => 'black fp9 mt-3 borde_green p-3 vende_tu_auto',
+            "onclick" => "log_operaciones_externas(50)",
+        ]
+    );
+   
+
+    $oportunidades[] = a_enid(
+        d('¿Necesitas una página web?','strong black'),
+        [
+            'href' => path_enid('sobre_pagina_web'),
+            'class' => 'black fp9 borde_end mt-3'
+        ]
+    );
+    
     $oportunidades[] = a_enid(
         'Programa de afiliados',
         [
             'href' => path_enid('sobre_vender'),
-            'class' => 'black fp9'
+            'class' => 'black fp9 mt-3'
         ]
     );
-    $oportunidades[] = a_enid(
-        '¿Necesitas una págin web?',
-        [
-            'href' => path_enid('sobre_pagina_web'),
-            'class' => 'black fp9 borde_end'
-        ]
-    );
+
+    
+
 
 
     $sociales[] = _titulo('SÍGUENOS', 2,'border_b_green');
@@ -1310,3 +1339,157 @@ function modal_prueba_en_casa()
 
     return gb_modal($contenido, 'modal_prueba_en_casa');
 }
+function modal_anuncio_negocio()
+{
+    $contenido[] = d(_titulo('Anuncia tus artículos en Enid Service', 4),'borde_end_b ');
+    $contenido[] = d('Así funciona:','mt-2 f12 black');
+
+    $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+  </svg>
+  
+  ');
+    $paso[]  = d('1', 'strong f2');
+    $paso[]  = d('Nos envías tu catálogo', 'f11 black');
+
+    $response[] = d($paso, 'col-xs-3 text-center mt-5');
+
+    /**/
+    $paso_2[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+  </svg>
+  
+  ');
+    $paso_2[]  = d('2', 'strong f2');
+    $paso_2[]  = d('Aprobamos tu solicitud', 'f11 black');
+
+    $response[] = d($paso_2, 'col-xs-3 text-center mt-5');
+
+    /*----------- */
+
+    $paso_3[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  
+   
+   ');
+    $paso_3[]  = d('3', 'strong f2');
+    $paso_3[]  = d('Encontramos al cliente ideal', 'f11 black');
+
+    $response[] = d($paso_3, 'col-xs-3 text-center mt-5');
+
+    /**/
+
+    $paso_4[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  
+   ');
+    $paso_4[]  = d('4', 'strong f2');
+    $paso_4[]  = d('Vendemos tus artículos por un 10% del total de la venta', 'f11 black');
+
+    $response[] = d($paso_4, 'col-xs-3 text-center mt-5');
+
+    $contenido[] =  d($response, 13);
+
+
+    $link = format_link(
+        "Envía tu catálogo",
+        [
+            "href" => path_enid('facebook_descuento', 0, 1),
+            "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3",
+            "onclick" => "log_operaciones_externas(47)",
+            "target" => "_black"
+        ]
+    );
+
+    if(is_mobile()){
+
+        $link =  format_link("Dime cual es tu catálogo",[
+            'href' => path_enid("whatsapp_productos",0,1)]);
+    }
+
+    $contenido[] =  d(d($link,6,1), "row mt-5");
+
+    return gb_modal($contenido, 'modal_anuncio_negocio');
+}
+
+
+function modal_venta_auto()
+{
+    $contenido[] = d(_titulo('Vendemos tu auto en menos de 30 días', 4),'borde_end_b ');
+    $contenido[] = d('Así funciona:','mt-2 f12 black');
+
+
+    $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+  </svg>
+  
+  ');
+    $paso[]  = d('1', 'strong f2');
+    $paso[]  = d('Nos Indicas las especificaciones de tu auto', 'f11 black');
+
+    $response[] = d($paso, 'col-xs-3 text-center mt-5');
+
+    /**/
+    $paso_2[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+  </svg>
+  
+  ');
+    $paso_2[]  = d('2', 'strong f2');
+    $paso_2[]  = d('Aprobamos tu solicitud', 'f11 black');
+
+    $response[] = d($paso_2, 'col-xs-3 text-center mt-5');
+
+    /*----------- */
+
+    $paso_3[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 15.75l-2.489-2.489m0 0a3.375 3.375 0 10-4.773-4.773 3.375 3.375 0 004.774 4.774zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  
+   
+   ');
+    $paso_3[]  = d('3', 'strong f2');
+    $paso_3[]  = d('Encontramos al cliente ideal', 'f11 black');
+
+    $response[] = d($paso_3, 'col-xs-3 text-center mt-5');
+
+
+
+
+    /**/
+
+    $paso_4[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  
+   ');
+    $paso_4[]  = d('4', 'strong f2');
+    $paso_4[]  = d('Vendemos tu auto! con todas las medidas de seguridad', 'f11 black');
+
+    $response[] = d($paso_4, 'col-xs-3 text-center mt-5');
+
+    $contenido[] =  d($response, 13);
+
+    
+    $link = format_link(
+        "Dime cual es tu auto",
+        [
+            "href" => path_enid('facebook_descuento', 0, 1),
+            "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3",
+            "onclick" => "log_operaciones_externas(47)",
+            "target" => "_black"
+        ]
+    );
+    if(is_mobile()){
+
+        $link =  format_link("Dime cual es tu auto",['href' => path_enid("whatsapp_autos")]);
+
+    }
+
+    $contenido[] =  d(d($link,6,1), "row mt-5");
+
+    return gb_modal($contenido, 'modal_venta_auto');
+}
+
