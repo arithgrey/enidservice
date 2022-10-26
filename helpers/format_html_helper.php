@@ -1786,7 +1786,7 @@ function opciones_populares()
         "PRUEBA EN CASA",
         [
             "class" => "white underline  cursor_pointer  
-            frecuentes borde_amarillo p-1 ml-5",            
+            frecuentes borde_amarillo prueba_en_casa p-1 ml-5",            
             "onclick" => "log_operaciones_externas(48)",
         ]
     );
@@ -1881,6 +1881,7 @@ function opciones_adicionales_navegacion()
             frecuentes strong p-1 prueba_en_casa borde_end col-xs-4",            
             "onclick" => "log_operaciones_externas(48)",
         ]
+        
     );
     $opciones[] = d(
         a_enid("POPULARES", [

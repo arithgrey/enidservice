@@ -15,6 +15,7 @@ const MIN_PW_LENGTH = 5;
 $("footer").ready(() => {
 
     $(".prueba_en_casa").click(function(){
+        
         $("#modal_prueba_en_casa").modal("show");        
     });
 
