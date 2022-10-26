@@ -19,6 +19,18 @@ $("footer").ready(() => {
         $("#modal_prueba_en_casa").modal("show");        
     });
 
+    $(".anuncio_negocio_enid_service").click(function(){
+        
+        $("#modal_anuncio_negocio").modal("show");        
+    });
+
+    $(".vende_tu_auto").click(function(){
+        
+        $("#modal_venta_auto").modal("show");        
+    });
+
+    
+
     set_option({
         "in_session": get_parameter(".in_session"),
         "is_mobile": get_parameter(".is_mobile"),

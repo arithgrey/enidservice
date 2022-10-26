@@ -42,6 +42,8 @@ function accesos_enid()
         "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20mi%20código%20de%20descuento%20es%20el%20XD341!6swA%20envío%20whatsApp%20para%20quedar%20en%20la%20lista!",
         "whatsapp_catalogo" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20el%20catálogo%20quiero%20ser%20afiliado",
         "whatsapp_catalogo_pagina_web" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20información%20sobre%20las%20páginas%20web!",        
+        "whatsapp_productos" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20enviar%20mí%20catálogo%20de%20productos",        
+        "whatsapp_autos" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20la%20venta%20de%20mi%20auto",        
         "facebook_descuento" =>"http://m.me/enidservicemx",
         "top_competencias" => "competencias/?tipo_top=",
         "top_competencia_entregas" => "competencias_entregas",
