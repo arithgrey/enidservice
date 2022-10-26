@@ -297,8 +297,8 @@ if (!function_exists('invierte_date_time')) {
             if (!$in_session) {
 
 
-                $clase = 'mt-5 text-uppercase black text- col-sm-12 h4';
-                $z[] = d('Crea una cuenta para realizar tu compra', $clase);
+                $clase = 'mt-5 text-uppercase black text- col-sm-12 strong h5';
+                $z[] = d('Registra tu cuenta para agendar tu pedido', $clase);
             }
 
 
@@ -344,7 +344,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid'], 0), "col-lg-3 mt-5 p-0 mb-5");
+            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");
             $r[] = text_acceder_cuenta($param, $es_cliente);
             $r[] = form_close();
         }

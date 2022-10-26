@@ -1650,7 +1650,9 @@ function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext
         $config_label["for"] = $config_input["id"];
         $config_label["id"] = "label_" . $config_input["id"];
         $config_label["class"] = _text_(
-            _text("cursor_pointer label_", $config_input["id"]),
+            _text("borde_end focused_input black strong cursor_pointer label_", $config_input["id"]),
+            
+            
             $ext_label
         );
     }
@@ -1783,8 +1785,8 @@ function opciones_populares()
     $response[] = d(
         "PRUEBA EN CASA",
         [
-            "class" => "white  cursor_pointer  
-            frecuentes borde_amarillo p-1 prueba_en_casa ml-5",            
+            "class" => "white underline  cursor_pointer  
+            frecuentes borde_amarillo p-1 ml-5",            
             "onclick" => "log_operaciones_externas(48)",
         ]
     );
@@ -1792,14 +1794,14 @@ function opciones_populares()
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white mt-2 border-right frecuentes ",
+            "class" => "white mt-2 underline border-right frecuentes ",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white mt-2   border-right frecuentes ",
+            "class" => "white mt-2  underline border-right frecuentes ",
             "href" => path_enid(
                 "search",
                 "/?q2=0&q=&order=1"
@@ -1820,7 +1822,7 @@ function opciones_populares()
     $response[] = a_enid(
         "CLIENTES",
         [
-            "class" => "white  mt-2 frecuentes ",
+            "class" => "white underline mt-2 frecuentes ",
             "href" => path_enid("clientes")
         ]
     );
@@ -1876,7 +1878,7 @@ function opciones_adicionales_navegacion()
         "PRUEBA EN CASA",
         [
             "class" => "black  cursor_pointer  
-            frecuentes strong p-1 prueba_en_casa col-xs-4",            
+            frecuentes strong p-1 prueba_en_casa borde_end col-xs-4",            
             "onclick" => "log_operaciones_externas(48)",
         ]
     );
@@ -1935,7 +1937,7 @@ function navegacion($path_img_usuario, $in_session, $clasificaciones_departament
             $response[] = d(a_enid('¡Pago contra entrega en tu domicilio si vives en cdmx!',
              [
                 "href" => path_enid("forma_pago") ,
-                "class" =>  'black bg_yellow pr-4 pl-4'
+                "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]
             ), 'd-md-flex justify-content-end mr-5');                        
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
@@ -2295,7 +2297,7 @@ function get_img_usuario($path_img_usuario, $extra_class = '')
 
     $img_conf = [
         "id" => "imagen_usuario",
-        "class" => _text_("imagen_usuario", $extra_class),
+        "class" => _text_("imagen_usuario borde_white", $extra_class),
         "src" => $path_img_usuario,
         "onerror" => "this.src='../img_tema/user/user.png'",
         "style" => "width: 40px!important;height: 35px!important;",

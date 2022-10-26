@@ -9,7 +9,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(seccion_izquierda($data), 'col-md-3 d-none d-md-block');
-        $response[] = d(seccion_noticias_notificaciones(), 'col-md-6 d-md-block border-right');
+        $response[] = d(seccion_noticias_notificaciones(), 'col-md-6 d-md-block border-right border-secondary');
         $response[] = d(seccion_derecha($data), 'col-md-3 d-none d-md-block');
 
         $id_usuario = $data["id_usuario"];

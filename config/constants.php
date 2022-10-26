@@ -68,7 +68,7 @@ define('_mbt5_md', 'mt-5 mb-5 mt-md-0 mb-md-0');
 define('_self_center', 'align-self-center');
 
 /*botones*/
-define('_registro', 'pb-3 pt-3 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold');
+define('_registro', 'pb-3 pt-3 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action borde_green font-weight-bold');
 
 /*textos*/
 define('_strong', 'text-uppercase black font-weight-bold');

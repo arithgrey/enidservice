@@ -304,7 +304,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = d(btn("Registrar", ['class' => 'submit_enid']), 'col-md-12 mt-5');
+        $r[] = d(btn("Registrar", ['class' => 'submit_enid borde_green']), 'col-md-12 mt-5');
         $r[] = form_close();
         $r[] = place("place_config_usuario");
         return append($r);

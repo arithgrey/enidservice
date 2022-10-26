@@ -59,22 +59,6 @@
     background: #15abc4 !important;
 }
 
-.borde_amarillo {
-    border: solid 2px #deff05;
-    padding: 1px 10px 0px 10px;
-    cursor: pointer;
-}
-
-.borde_rojo {
-    border: solid 2px #f5089a;
-    padding: 1px 10px 0px 10px;
-    cursor: pointer;
-}
-
-.borde_amarillo:hover {
-    background: #005bac;
-}
-
 .display-5 {
     font-size: 2.5rem;
     font-weight: 300;
@@ -616,7 +600,7 @@ li {
 
 .input_enid_format input {
     border: none !important;
-    border-bottom: solid 1px grey !important;
+    border-bottom: solid 2px black !important;
     height: 40px !important;
 }
 
@@ -1900,6 +1884,7 @@ input:focus:invalid {
 
 .borde_accion {
     box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);
+    border: solid 2px #69ffc0 !important;
 }
 
 /*Configurador de productos*/
@@ -1952,4 +1937,42 @@ ul li a {
         min-height: 65px;
     }
 
+}
+
+.borde_end_b {
+    border-bottom: solid 2px #0836a4;    
+    cursor: pointer;
+}
+.borde_end {
+    border: solid 2px #0836a4 !important;
+    padding: 1px 10px 0px 10px !important;
+    cursor: pointer !important;
+}
+.borde_black {
+    border: solid 2px black !important;        
+}
+.borde_white {
+    border: solid 2px white !important;        
+}
+.borde_red {
+    border: solid 2px red !important;        
+}
+.borde_green{
+    
+    border: solid 2px #69ffc0 !important;
+}
+.borde_amarillo {
+    border: solid 2px #deff05;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.borde_rojo {
+    border: solid 2px #f5089a;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
+
+.borde_amarillo:hover {
+    background: #005bac;
 }

@@ -1029,7 +1029,7 @@ function penetracion_alcaldias($data)
         $total =  $row["total"];
         $delegacion =  $row["delegacion"];
 
-        $textos = flex($delegacion, $total, _text_(_between, 'border-bottom'), "black", "strong f12");
+        $textos = flex($delegacion, $total, _text_(_between, 'border-bottom border-secondary'), "black", "strong f12");
         $response[] = d($textos, 'col-sm-12 mt-2');
     }
 
@@ -1244,8 +1244,8 @@ function getRealIPAddress()
 }
 function modal_prueba_en_casa()
 {
-    $contenido[] = d(_titulo('prueba en casa', 4));
-    $contenido[] = d('Así funciona:');
+    $contenido[] = d(_titulo('prueba en casa', 4),'borde_end_b ');
+    $contenido[] = d('Así funciona:','mt-2 f12 black');
 
 
     $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
