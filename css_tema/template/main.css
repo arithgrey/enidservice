@@ -1961,6 +1961,10 @@ ul li a {
     
     border: solid 2px #69ffc0 !important;
 }
+.border_b_green{
+    
+    border-bottom: solid 2px #46e1b6 !important;
+}
 .borde_amarillo {
     border: solid 2px #deff05;
     padding: 1px 10px 0px 10px;

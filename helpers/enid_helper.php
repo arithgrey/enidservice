@@ -1096,7 +1096,7 @@ function get_orden()
 function footer_opciones()
 {
 
-    $productos_footer[] = _titulo('Productos', 2);
+    $productos_footer[] = _titulo('Productos', 2,'border_b_green');
 
     $productos_footer[] = a_enid(
         'Descuentos',
@@ -1125,7 +1125,7 @@ function footer_opciones()
 
 
     /*Asistencia*/
-    $asistencia[] =  _titulo('Asistencia', 2);
+    $asistencia[] =  _titulo('Asistencia', 2,'border_b_green');
 
     $asistencia[] =  a_enid(
         '¿Necesitas ayuda?',
@@ -1172,7 +1172,7 @@ function footer_opciones()
         ]
     );
     /**Oportunidades*/
-    $oportunidades[] = _titulo('Oportunidades', 2);
+    $oportunidades[] = _titulo('Oportunidades', 2,'border_b_green');
     $oportunidades[] = a_enid(
         'Programa de afiliados',
         [
@@ -1184,12 +1184,12 @@ function footer_opciones()
         '¿Necesitas una págin web?',
         [
             'href' => path_enid('sobre_pagina_web'),
-            'class' => 'black fp9'
+            'class' => 'black fp9 borde_end'
         ]
     );
 
 
-    $sociales[] = _titulo('SÍGUENOS', 2);
+    $sociales[] = _titulo('SÍGUENOS', 2,'border_b_green');
     $sociales[] = a_enid(
         icon(_text_(_facebook_icon, 'fa-2x')),
         [
