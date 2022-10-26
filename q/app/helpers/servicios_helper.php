@@ -1207,7 +1207,7 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $servicio["id_servicio"];
         $path_servicio = get_url_servicio($id_servicio);
 
-        $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2');
+        $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2 borde_green');
         $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
 
         $tipo_deseo = "agregar_deseos_sin_antecedente";
@@ -1215,7 +1215,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $clases = _text_($tipo_deseo,  _deseo_icon, "fa-2x");
-        $clases_agregado = _text_($tipo_deseo_agregado,  _agregado_icon, "fa-2x");
+        $clases_agregado = _text_($tipo_deseo_agregado,  _agregado_icon, "fa-2x borde_green");
 
         $icono_por_agregar = icon($clases, ["id" =>  $id_servicio, "title" => "Lo deseo", "onclick" => "log_operaciones_externas(27, $id_servicio)"]);
         $icono_agregado = icon($clases_agregado, ["id" =>  $id_servicio]);

@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
                 ];
                 $seccion[] = d($seguir, $atributos);
 
-                $response[] = d($seccion, 'col-md-2 col-xs-6 border d-flex flex-column justify-content-between h-100 p-3');
+                $response[] = d($seccion, 'col-md-2 col-xs-6 borde_end d-flex flex-column justify-content-between h-100 p-3');
             }
         }
 

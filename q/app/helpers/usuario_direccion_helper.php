@@ -140,7 +140,7 @@ if (!function_exists('invierte_date_time')) {
         $config = [
             "type" => "checkbox",
             "name" => "adicionales",
-            "class" => "adicionales"
+            "class" => "adicionales black"
         ];
         $formulario[] = hiddens(['name' => 'text_delegacion', 'class' => 'text_delegacion']);
         $formulario[] = label(_text_(input($config), d('Adicionales (opcional)', 'ml-3 cursor_pointer')), 'd-flex mt-5 adicionales_seccion');

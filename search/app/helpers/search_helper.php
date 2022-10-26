@@ -17,29 +17,29 @@ if (!function_exists('invierte_date_time')) {
         $lista_productos[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
-        $response[] = d(d($lista_productos, 10, 1), 13);        
-        
-        $seccion_compras_conjunto = d("","promociones_sugeridas col-md-5 col-xs-12 p-0");
-        $seccion_compras_conjunto_top = d("","promociones_sugeridas_top col-md-5 col-xs-12 p-0");
-        
+        $response[] = d(d($lista_productos, 10, 1), 13);
+
+        $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
+        $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
+
         $seccion_categorias = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
-        
-        $adicionales[] = $seccion_compras_conjunto_top;        
+
+        $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);
         $adicionales[] = $seccion_compras_conjunto;
-        
-        
 
-        $response[] = d(d(d($adicionales,13),10,1), "row mt-5");    
+
+
+        $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5");
         $link_promociones = format_link("Más promociones", [
             "href" => path_enid("promociones"),
             "class" => "border"
         ]);
-        $response[] = d(d(d($link_promociones,13),10,1), "row mt-5");    
-        $response[] = d(d(d("","place_recien_agregados")," col-sm-10 col-sm-offset-1 p-0"),13);
-        $response[] = d($seccion_categorias,10,1);    
-        
-        
+        $response[] = d(d(d($link_promociones, 13), 10, 1), "row mt-5");
+        $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
+        $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"),13);
+
+
 
         return d($response, 12);
     }
@@ -171,7 +171,7 @@ if (!function_exists('invierte_date_time')) {
                     0
                 ), 2);
             endforeach;
-            $r[]=  d($response, 'contenedor_anuncios_home d-flex w-100 text-center mb-5 p-3');
+            $r[] =  d($response, 'contenedor_anuncios_home d-flex w-100 text-center mb-5 p-3');
         }
         return append($r);
     }
@@ -217,20 +217,20 @@ if (!function_exists('invierte_date_time')) {
     function crea_sub_menu_categorias_destacadas($param)
     {
         $extra = (is_mobile()) ? ' p-0 ' : '';
-        $response = [];
+        $categorias = [];
         foreach ($param as $row) {
 
-            $response[] = a_enid(
+            $categorias[] = a_enid(
                 $row["nombre_clasificacion"],
                 [
                     "href" => _text("?q=&q2=", $row["primer_nivel"]),
-                    "class" => 'text-uppercase white fp9 mt-1 mt-md-0 decoration_underline'
+                    "class" => 'text-uppercase black mt-2 mt-1 decoration_underline'
                 ]
 
             );
         }
 
-        $t[] = d(
+        $imagen = d(
             img(
                 [
                     "src" => "https://media.giphy.com/media/2hAjRJoLzYLqoRHvq2/giphy.gif",
@@ -240,15 +240,32 @@ if (!function_exists('invierte_date_time')) {
             'col-md-6 col-sm-12 ' . $extra
         );
 
-        $s[] = d("Más categorías", 'text-uppercase white strong f14 mt-5');
-        $s[] = p(d($response, 'mt-4 bg_blue p-3'));
-        $sec[] = d($s, 'col-md-6 col-xs-12 mt-3 mt-md-0');
-        $r[] = append($t);
-        $r[] = append($sec);
-
-        return d(d($r, ' mt-5 d-md-flex  align-items-center categorias_extras ' . $extra), 13);
+        $textos_categorias[] = d("Más categorías", 'text-uppercase black display-6 mt-5');
+        $textos_categorias[] = d($categorias, 'mt-4  p-3');
+        $seccion_izquierda = d($textos_categorias);
+        
+        $bloque_categorias = flex($imagen, $seccion_izquierda,_between);
+        
+        $izq = $bloque_categorias;
+        $der = adicionales();
+        return flex_md($izq, $der,_between,
+        ' borde_end col-xs-12 col-md-6',
+        "col-xs-12 col-md-6");
     }
+    function adicionales()
+    {
 
+        $response[] = format_link(
+            "Prueba en casa",
+            [
+                "class" => "white  cursor_pointer  
+                frecuentes borde_amarillo p-1 prueba_en_casa ",            
+                "onclick" => "log_operaciones_externas(48)",
+            ]
+        );
+
+        return d($response, 10, 1);
+    }
     function crea_menu_principal_web($param)
     {
 
@@ -317,6 +334,4 @@ if (!function_exists('invierte_date_time')) {
             "num_categorias" => count($info),
         ];
     }
-    
 }
-

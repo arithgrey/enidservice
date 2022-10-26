@@ -3928,7 +3928,7 @@ if (!function_exists('invierte_date_time')) {
                 }
             }
             $class = "row bg_black white p-4 mb-5 text-uppercase 
-            rounded-0 text-center format_action font-weight-bold";
+            rounded-0 text-center format_action font-weight-bold borde_green";
             $response = d($text_status, $class);
 
         endif;

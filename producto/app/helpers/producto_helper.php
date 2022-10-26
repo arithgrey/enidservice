@@ -282,7 +282,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($descripcion);
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
         $response[] = d("", "place_valoraciones mt-5 row");
-        $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, "  h3 text-uppercase black font-weight-bold");
+        $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, " h3 text-uppercase black font-weight-bold");
         $response[] = d($interes, "mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100 row"));
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);
@@ -504,7 +504,7 @@ if (!function_exists('invierte_date_time')) {
         $capacidad = pr($servicio, "capacidad");
         $servicio_materiales = $data["servicio_materiales"];
 
-        $z[] = d(_titulo($nombre), "mb-4");
+        $z[] = d(_titulo($nombre,0,"borde_end p-2"), "mb-4");
 
         if (strlen($descripcion) > 5) {
 
@@ -789,7 +789,7 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $extra = is_mobile() ? "border-bottom" : "";
-                $response[] = d($seccion_fotos_compra, _text_("row mt-5", $extra));
+                $response[] = d($seccion_fotos_compra, _text_("row mt-5 borde_black", $extra));
             }
 
             $ofertas = count($recompensa);
@@ -872,7 +872,7 @@ if (!function_exists('invierte_date_time')) {
         $agregar_a_carrito =  d(
             "Agregar al carrito",
             [
-                "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase font-weight-bold white border text-center",
+                "class" => "borde_green cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase font-weight-bold white text-center",
                 "id" => $id_recompensa,
                 "antecedente_compra" => $antecedentes,
                 "onclick" => "log_operaciones_externas(26, $id_servicio)"
@@ -1110,7 +1110,7 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Agregar al carrito", 'border pt-3 pb-3'),
+                d("Agregar al carrito", 'border borde_green pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos ",
@@ -1130,7 +1130,7 @@ if (!function_exists('invierte_date_time')) {
                     'agregar_a_lista border l_deseos pt-3 pb-3'
                 ),
                 [
-                    'class' => 'agregar_deseos_sin_antecedente',
+                    'class' => 'agregar_deseos_sin_antecedente borde_green',
                     'id' => $id_servicio,
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
                 ]

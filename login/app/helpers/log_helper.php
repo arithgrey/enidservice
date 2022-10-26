@@ -191,7 +191,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = create_select(
             $perfil,
             'perfil',
-            'perfil form-control mt-5',
+            'perfil form-control mt-5 borde_black black',
             'perfil',
             'nombre_perfil',
             'id_perfil'

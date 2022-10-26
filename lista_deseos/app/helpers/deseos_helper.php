@@ -205,7 +205,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $lista_deseo = lista_deseo($productos_deseados, $externo);
-        $response[] = d($lista_deseo, "col-xs-12 col-md-8 border-right");
+        $response[] = d($lista_deseo, "col-xs-12 col-md-8 border-right border-secondary");
         $response[] = d(seccion_procesar_pago($data, $productos_deseados),"col-xs-12 col-md-4 border-right");
 
         return d($response, 10, 1);
@@ -397,7 +397,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
-            $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3"]), 'seccion_enviar_orden');
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline mb-5');
             $response[] = form_close();
             return d($response,'mb-5');
@@ -418,7 +418,7 @@ if (!function_exists('invierte_date_time')) {
             ]);
             $response[] = hiddens(["class" => "id_usuario", "name" => "id_usuario", "value" => $data["id_usuario"]]);
 
-            $response[] = d(btn("Enviar orden", ["class" => "mt-5"]), 'seccion_enviar_orden');
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 mb-5 underline');
             $response[] = form_close();
             return d($response,'mb-5');
