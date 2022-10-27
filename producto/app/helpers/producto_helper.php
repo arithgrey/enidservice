@@ -430,7 +430,8 @@ if (!function_exists('invierte_date_time')) {
     function get_frm($data, $id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
     {
 
-
+        
+        $precio = pr($data["info_servicio"]["servicio"],"precio");
         $response = [];
         $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
@@ -442,11 +443,44 @@ if (!function_exists('invierte_date_time')) {
         );
         
         $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio),'mt-5');
-        $r[] = $tiempo_entrega;
+        $r[] = $tiempo_entrega;    
         $response[] = d($r, "contenedor_form");
         return append($response);
     }
+    function compra_meses($precio){
+        
+        $response = "";
+        
+        $tres_meses =  ($precio + porcentaje($precio, 8));
+        $seis_meses =  ($precio + porcentaje($precio, 8));        
+        $doce_meses =  ($precio + porcentaje($precio, 10));
 
+        $tres_meses_aplicado =  $tres_meses / 3;
+        $seis_meses_aplicado =  $seis_meses / 6;        
+        $doce_meses_aplicado =  $doce_meses / 12;
+        
+        if($precio > 600){
+            
+            $final_3 = _text_(_text("$",sprintf('%01.0f',$tres_meses)));
+            $final_6 = _text_(_text("$",sprintf('%01.0f',$seis_meses)));
+            $final_12 = _text_(_text("$",sprintf('%01.0f',$doce_meses)));
+
+            $response = d(
+                _text_(
+                    d("- Ó con tarjeta de crédito",'borde_green p-1 text-uppercase black strong'),                    
+                    d(_text_(span("3 meses de"), span(_text("$", sprintf('%01.0f',$tres_meses_aplicado) ),'underline black')),"black mt-1"),
+                    d(_text_(span("6 meses de"), span(_text("$", sprintf('%01.0f',$seis_meses_aplicado) ),'underline black')), "black"),
+                    d(_text_(span("12 meses de"), span(_text("$", sprintf('%01.0f',$doce_meses_aplicado)),'underline black')),"black"),
+                ),
+                
+            );
+            
+
+        }
+        
+        return $response;
+
+    }
     function frm_servicio($id_servicio)
     {
 
@@ -961,12 +995,17 @@ if (!function_exists('invierte_date_time')) {
 
             $in_session = $data["in_session"];
             $texto = d($texto_precio_base, "f25 colo_precio_enid");
+            
+            $seis_meses =  ($precio_unidad + porcentaje($precio_unidad, 8));        
+            $seis_meses_aplicado =  $seis_meses / 6;     
+            $meses= compra_meses($precio_unidad);
+
+            $texto = flex($texto, $meses, "flex-column");
 
             if ($in_session && $descuento_especial > 0) {
-
-                
-
+    
                 $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
+
             } else {
 
                 $response = d($texto, "flex-column mb-3 mt-3");
