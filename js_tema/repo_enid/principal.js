@@ -329,6 +329,20 @@ let response_accesos_metricas = function (data) {
     /*46 solicitar catalogo*/
     $(".click_catalogo_afiliados_place").text($(".click_catalogo_afiliados_input").val());
 
+    /*47 cotiza pagina web*/
+    $(".click_cotiza_pagina_web").text($(".click_cotizar_pagina_web_input").val());
+    
+    /*48 cotiza pagina web*/
+    $(".click_prueba_en_casa").text($(".click_prueba_casa_input").val());
+    
+    /*49 anunciar en enid service*/
+
+    $(".click_anunciar_enid_place").text($(".click_anunciar_enid_input").val());
+    /*50 vender auto*/
+
+    $(".click_vender_auto_place").text($(".click_vender_auto_input").val());
+
+
     
 }
 

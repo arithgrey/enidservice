@@ -433,9 +433,29 @@ class Acceso extends REST_Controller
                     case 45:
                         $totales_input[] = hiddens(["class" => "click_pinteres_input", "value" => $numero_accesos]);
                         break;
-                        case 46:
-                            $totales_input[] = hiddens(["class" => "click_catalogo_afiliados_input", "value" => $numero_accesos]);
-                            break;
+                    case 46:
+                        $totales_input[] = hiddens(["class" => "click_catalogo_afiliados_input", "value" => $numero_accesos]);
+                        break;
+                        
+                    case 47:
+                        $totales_input[] = hiddens(["class" => "click_cotizar_pagina_web_input", "value" => $numero_accesos]);
+                        break;
+
+
+                    case 48:
+                        $totales_input[] = hiddens(["class" => "click_prueba_casa_input", "value" => $numero_accesos]);
+                        break;
+
+
+                    case 49:
+                        $totales_input[] = hiddens(["class" => "click_anunciar_enid_input", "value" => $numero_accesos]);
+                        break;
+                        
+
+                    case 50:
+                        $totales_input[] = hiddens(["class" => "click_vender_auto_input", "value" => $numero_accesos]);
+                        break;
+
 
 
                     default:
