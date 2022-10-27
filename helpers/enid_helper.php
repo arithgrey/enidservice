@@ -1181,7 +1181,7 @@ function footer_opciones()
         d($anuncio),
         [            
             'class' => 'black fp9 borde_black mt-2 p-3 anuncio_negocio_enid_service',
-            "onclick" => "log_operaciones_externas(50)",
+            "onclick" => "log_operaciones_externas(49)",
         ]
     );
 
@@ -1202,7 +1202,8 @@ function footer_opciones()
         d('¿Necesitas una página web?','strong black'),
         [
             'href' => path_enid('sobre_pagina_web'),
-            'class' => 'black fp9 borde_end mt-3'
+            'class' => 'black fp9 borde_end mt-3',
+            "onclick" => "log_operaciones_externas(47)",
         ]
     );
     
