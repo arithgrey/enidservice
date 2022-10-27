@@ -1181,7 +1181,7 @@ function footer_opciones()
         d($anuncio),
         [            
             'class' => 'black fp9 borde_black mt-2 p-3 anuncio_negocio_enid_service',
-            "onclick" => "log_operaciones_externas(49)",
+            "onclick" => "log_operaciones_externas(50)",
         ]
     );
 

@@ -97,14 +97,11 @@ CDMX
 
 <?= d('', 'top_100 bottom_100') ?>
 <?= hiddens(['class' => 'is_mobile', 'value' => is_mobile()]) ?>
-<?php if ($footer_visible): ?>
-    <?php if (!is_mobile()): ?>
-        <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>
-            
+<?php if ($footer_visible): ?>    
+        <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>            
             <?=footer_opciones()?>
             <?= d("© 2019 ENID SERVICE.", 'col-lg-12 p-0 mt-5 strong fp9'); ?>
-        </footer>
-    <?php endif; ?>
+        </footer>    
 <?php endif; ?>
 </body>
 <!-- Meta Pixel Code -->
