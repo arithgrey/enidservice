@@ -82,9 +82,9 @@ if (!function_exists('invierte_date_time')) {
             
         }
 
-        $tres_meses =  ($precio + porcentaje($precio, 8));
-        $seis_meses =  ($precio + porcentaje($precio, 8));        
-        $doce_meses =  ($precio + porcentaje($precio, 10));
+        $tres_meses =  ($precio + porcentaje($precio, 9));
+        $seis_meses =  ($precio + porcentaje($precio, 13));        
+        $doce_meses =  ($precio + porcentaje($precio, 18));
 
 
         $tres_meses_aplicado =  $tres_meses / 3;
