@@ -44,10 +44,6 @@ $(document).ready(() => {
     $('footer').ready(function () {
         valida_busqueda_inicial();
     });
-    busqueda_ventas_proceso();
-    busqueda_ventas_proceso_clientes();
-    busqueda_metricas_alcaldias();
-    busqueda_metricas_franja_horaria();
     
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
@@ -64,6 +60,12 @@ $(document).ready(() => {
 
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
     $form_alcaldias.submit(busqueda_metricas_alcaldias);
+    /**/
+
+    $busqueda_ventas_en_proceso.click();
+    $busqueda_ventas_en_proceso_clientes.click();
+    $form_alcaldias.submit();
+
 });
 
 let busqueda_ventas_proceso = function(){
