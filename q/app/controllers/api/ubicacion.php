@@ -205,7 +205,7 @@ class ubicacion extends REST_Controller
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $ventas_efectivas_fecha_ubicacion = $this->ventas_efectivas_fecha($fecha_inicio, $fecha_termino);
-            $response = "";
+            $response = [];
 
             $penetracion  = $this->ubicacion_model->penetracion_tiempo($fecha_inicio, $fecha_termino);
             
@@ -217,24 +217,31 @@ class ubicacion extends REST_Controller
 
             $this->table->set_template(template_table_enid());
             $this->table->set_heading($heading);
+            $total = 0;
+            $total_ventas = 0;
 
             foreach ($penetracion as $row) {
 
-
-
                 $id_alcaldia = $row["id_alcaldia"];
                 $ventas_efectivas = $this->busqueda_total_ventas_efectivas_alcaldia($id_alcaldia, $ventas_efectivas_fecha_ubicacion);
+                $cantidad = $row["total"];
 
                 $linea = [
                     $row["delegacion"],
-                    $row["total"],
+                    $cantidad,
                     $ventas_efectivas
                 ];
                 $this->table->add_row($linea);
+                $total = $total + $cantidad;
+                $total_ventas  = $total_ventas + $ventas_efectivas;
             }
-            $response = $this->table->generate();
+            $this->table->add_row([d("Total",'strong'), d($total,"strong" ), d($total_ventas,"strong")]);
+            
+            $response[] = $this->table->generate();
+            $response[] = hiddens(["class" =>"penetracion_leads","value" => $total]);
+            $response[] = hiddens(["class" =>"penetracion_leads_ventas","value" => $total_ventas]);
         }
-        $this->response($response);
+        $this->response(append($response));
     }
     private function busqueda_total_ventas_efectivas_alcaldia($id_alcaldia, $data_alcaldias){
 

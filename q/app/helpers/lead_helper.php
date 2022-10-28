@@ -13,6 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         $lineas = 0;
 
+        $totales = 0;
         if (es_data($recibos)) {
 
             $ids_orden_compra = array_count_values(array_column($recibos, "id_orden_compra"));
@@ -65,8 +66,12 @@ if (!function_exists('invierte_date_time')) {
             }
             $response = ayuda_tipo_entrega($recibos, $ventas_hoy, $ventas_posteriores);
         }
-
-        return $response;
+        $data_complete[] = $response;
+        $data_complete[] = hiddens([
+            "class" => "total_ventas_pendientes", 
+            "value" => count($ids_orden_compra)
+        ]);
+        return append($data_complete);
             
     }   
     function total_orden_compra($ids_orden_compra, $id)
