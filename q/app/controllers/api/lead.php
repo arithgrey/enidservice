@@ -172,9 +172,7 @@ class lead extends REST_Controller
         $data = $this->app->session();                
         $id_empresa = $data['id_empresa'];
         $id_perfil = $param["id_perfil"] = $this->app->getperfiles();
-        
-
-
+    
         $response  = $this->pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa);
         $response  = pedidos_en_proceso($data, $response);
         $this->response($response);

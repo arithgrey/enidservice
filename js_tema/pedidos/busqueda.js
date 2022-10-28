@@ -44,6 +44,11 @@ $(document).ready(() => {
     $('footer').ready(function () {
         valida_busqueda_inicial();
     });
+    busqueda_ventas_proceso();
+    busqueda_ventas_proceso_clientes();
+    busqueda_metricas_alcaldias();
+    busqueda_metricas_franja_horaria();
+    
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
@@ -72,6 +77,7 @@ let busqueda_ventas_proceso = function(){
 let response_busqueda_ventas_proceso = function (data) {
 
     render_enid(".place_ventas_en_proceso", data);
+    $(".place_ventas_proceso").text($(".place_ventas_en_proceso .total_ventas_pendientes").val());
 
 };
 
@@ -119,6 +125,7 @@ let busqueda_ventas_proceso_clientes = function(){
 let response_busqueda_ventas_proceso_clientes = function (data) {
 
     render_enid(".place_ventas_en_proceso_clientes", data);
+    $(".place_ventas_proceso_cliente").text($(".place_ventas_en_proceso_clientes .total_ventas_pendientes").val());
 
 };
 
@@ -178,7 +185,8 @@ let response_lead_franja_horaria = function (data) {
 let response_metricas_alcaldias = function (data) {
 
     render_enid(".place_alcaldias", data);
-
+    $(".place_penetracion_leads").text(_text_("Leads",$(".penetracion_leads").val()));
+    $(".place_penetracion_leads_ventas").text(_text_("Ventas",$(".penetracion_leads_ventas").val()));
 };
 
 let response_lead_promociones = function (data) {

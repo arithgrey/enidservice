@@ -1862,7 +1862,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $menu_ventas_proceso = tab(
-            text_icon("fa fa-money", 'Ventas en proceso'),
+            text_icon("fa fa-money", 
+            flex('Ventas en proceso', place("place_ventas_proceso"), _between, "mr-5", "borde_end")),
             '#ventas_en_proceso',
             [
                 'class' => ' mt-2 ventas_en_proceso mt-3'
@@ -1870,7 +1871,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $menu_ventas_proceso_clientes = tab(
-            text_icon("fa fa-money", 'Ventas en proceso de clientes'),
+            text_icon("fa fa-money", flex('Ventas en proceso de clientes',place("place_ventas_proceso_cliente"), _between, "mr-5", "borde_green p-2")),
             '#ventas_en_proceso_cliente',
             [
                 'class' => ' mt-2 ventas_en_proceso_clientes underline black f11 mt-3'
@@ -1915,8 +1916,21 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $place_leads  = place("place_penetracion_leads");
+        $place_leads_ventas  = place("place_penetracion_leads_ventas");
+        $place_leads_ventas_penetracion = flex(
+            $place_leads, $place_leads_ventas, _between,
+        'borde_black mr-3',
+        'borde_green '
+    );
+
         $menu_metricas_alcaldia = tab(
-            text_icon("fa fa-line-chart", 'Penetración por alcaldías'),
+            text_icon("fa fa-line-chart", 
+            flex('Penetración ', 
+            $place_leads_ventas_penetracion
+            , 
+            _between
+            , "mr-5")),
             '#metricas_alcaldias',
             [
                 'class' => ' mt-2 busqueda_metricas_alcaldias mt-3'
