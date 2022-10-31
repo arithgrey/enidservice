@@ -878,8 +878,7 @@ let muestra_seccion_porcentaje_ganancia_afiliados = () => {
 };
 
 let configuracion_inicial = function () {
-
-
+    
     let modalidad = parseInt(get_parameter_enid($(this), "id"));
     set_option("modalidad", modalidad);
     if (modalidad > 0) {

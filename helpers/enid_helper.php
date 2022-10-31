@@ -1485,7 +1485,8 @@ function modal_venta_auto()
     );
     if(is_mobile()){
 
-        $link =  format_link("Dime cual es tu auto",['href' => path_enid("whatsapp_autos")]);
+        $link =  format_link("Dime cual es tu auto",['href' => 
+        path_enid("whatsapp_autos",0,1)]);
 
     }
 
