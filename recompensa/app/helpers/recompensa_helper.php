@@ -21,7 +21,6 @@ if (!function_exists('invierte_date_time')) {
                 $url_img_servicio_conjunto = $row["url_img_servicio_conjunto"];                
                 $id_recompensa = $row["id_recompensa"];
 
-
                 $texto_totales = totales($row, $data);
                 $imagen_servicio = servicio_dominante($url_img_servicio, $id_servicio);
                 $imagen_servicio_conjunto = servicio_propuesta($url_img_servicio_conjunto, $id_servicio_conjunto);
@@ -164,8 +163,7 @@ if (!function_exists('invierte_date_time')) {
         return a_enid($imagen,
             [
 
-                'href' => $link_servicio,
-                "target" => "_blank"
+                'href' => $link_servicio                
             ]
         );
 
@@ -185,8 +183,8 @@ if (!function_exists('invierte_date_time')) {
         );
         return a_enid($imagen_servicio_conjunto,
             [
-                "href" => $link_servicio_conjunto,
-                "target" => "_blank"
+                "href" => $link_servicio_conjunto
+                
             ]
         );
 
