@@ -18,6 +18,7 @@
 <?=modal_prueba_en_casa()?>
 <?=modal_anuncio_negocio()?>
 <?=modal_venta_auto()?>
+<?=modal_mayoristas()?>
 
   
     

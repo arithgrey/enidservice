@@ -44,6 +44,7 @@ function accesos_enid()
         "whatsapp_catalogo_pagina_web" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20información%20sobre%20las%20páginas%20web!",        
         "whatsapp_productos" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20enviar%20mí%20catálogo%20de%20productos",        
         "whatsapp_autos" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20la%20venta%20de%20mi%20auto",        
+        "whatsapp_mayorista" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20Me%20interesa%20aplicar%20para%20la%20Distribución%20de%20equipo%20deportivo",        
         "whatsapp_servicio" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20información%20sobre%20",        
         "facebook_descuento" =>"http://m.me/enidservicemx",
         "top_competencias" => "competencias/?tipo_top=",
