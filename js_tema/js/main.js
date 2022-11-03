@@ -29,6 +29,13 @@ $("footer").ready(() => {
         $("#modal_venta_auto").modal("show");        
     });
 
+    $(".mayoristas_enid").click(function(){
+        
+        $("#modal_mayoristas").modal("show");        
+    });
+
+    
+
     
 
     set_option({

@@ -1173,6 +1173,19 @@ function footer_opciones()
     );
     /**Oportunidades*/
     $oportunidades[] = _titulo('Oportunidades', 2,'border_b_green');
+    
+    
+    $anuncio_mayorista[] = d('Mayoristas',"black strong");
+    
+    
+    $oportunidades[] = a_enid(
+        d($anuncio_mayorista),
+        [            
+            'class' => 'black fp9 borde_green mt-2 p-3 mayoristas_enid',
+            "onclick" => "log_operaciones_externas(49)",
+        ]
+    );
+
 
     $anuncio[] = d('¿Vendes artículos?',"black strong");
     $anuncio[] = d('Anúnciate aquí!');
@@ -1211,7 +1224,7 @@ function footer_opciones()
         'Programa de afiliados',
         [
             'href' => path_enid('sobre_vender'),
-            'class' => 'black fp9 mt-3'
+            'class' => 'black fp9 mt-3 borde_black p-2 strong'
         ]
     );
 
@@ -1253,9 +1266,9 @@ function footer_opciones()
     $sociales_seccion = d($sociales, 3);
 
     return d([
-        $seccion_productos,
-        $asistencia_seccion,
         $oportunidades_seccion,
+        $seccion_productos,
+        $asistencia_seccion,        
         $sociales_seccion
     ], 8, 1);
 }
@@ -1404,16 +1417,116 @@ function modal_anuncio_negocio()
         ]
     );
 
+
     if(is_mobile()){
 
-        $link =  format_link("Dime cual es tu catálogo",[
-            'href' => path_enid("whatsapp_productos",0,1)]);
+        $link =  format_link("Dime cual es tu catálogo",
+        [
+            'href' => path_enid("whatsapp_productos",0,1),
+            "onclick" => "log_operaciones_externas(47)",
+        ]);
     }
 
     $contenido[] =  d(d($link,6,1), "row mt-5");
 
+    $contenido[] = d("Mándanos un WhatsApp:  +52 55 5296-7027",
+    'mt-3 mb-3 text-center red_enid strong');
+
     return gb_modal($contenido, 'modal_anuncio_negocio');
 }
+function modal_mayoristas()
+{
+    $contenido[] = d(_titulo('¡Es momento de
+    reinventarse y mejorar
+    para no quedarse en el
+    camino!', 4),'borde_end_b ');
+    $contenido[] = d('¡Te ayudamos en tu proyecto!','mt-2 f12 black');
+
+    $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" 
+    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="black w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+  </svg>
+  
+  ');
+    $paso[]  = d('1', 'strong f2');
+    $paso[]  = d(_text_('Accede a un producto que',span('se vende sin importar el día del año','strong')), 'f11 black');
+
+    $response[] = d($paso, 'col-xs-6 text-center mt-5');
+
+    /**/
+    $paso_2[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
+    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+    class="black w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" 
+    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+  </svg>  ');
+    $paso_2[]  = d('2', 'strong f2');
+    $paso_2[]  = d(
+        _text_('¡Obtén ',span('margenes','strong'),'muy', span('atractivos','strong'),'de ganancia sobre tu inversión! ')
+        , 'f11 black');
+
+    $response[] = d($paso_2, 'col-xs-6 text-center mt-5');
+
+    /*----------- */
+
+    $paso_3[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
+    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+    class="black w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+  </svg>
+  
+  
+   
+   ');
+    $paso_3[]  = d('3', 'strong f2');
+    $paso_3[]  = d(_text_('Accede a uno de los sectores de',span('mayor demanda','strong'), 'a partir del la pandemia de la COVID-19'), 'f11 black');
+
+    $response[] = d($paso_3, 'col-xs-6 text-center mt-5');
+
+    /**/
+
+    $paso_4[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
+    fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+    class="black w-6 h-6">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+  </svg>
+  
+   ');
+    $paso_4[]  = d('4', 'strong f2');
+    $paso_4[]  = d(_text_('Ten la posibilidad de que te conectemos a',span('nuestra red de clientes','strong')), 'f11 black');
+
+    $response[] = d($paso_4, 'col-xs-6 text-center mt-5');
+
+    
+    $contenido[] =  d($response, 13);
+
+
+    $link = format_link(
+        "Escríbenos! (55) 5296-7027",
+        [
+            "href" => path_enid('whatsapp_mayorista', 0, 1),
+            "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3",
+            "onclick" => "log_operaciones_externas(51)",
+            "target" => "_black"
+        ]
+    );
+
+    if(is_mobile()){
+
+        $link =  format_link("Escríbenos!",
+        [
+            'href' => path_enid("whatsapp_mayorista",0,1),
+            "onclick" => "log_operaciones_externas(51)"
+        ]);
+    }
+
+    $contenido[] =  d(d($link,6,1), "row mt-5");
+    $contenido[] = d("Mándanos un WhatsApp:  +52 55 5296-7027",
+    'mt-3 mb-3 f12 borde_end_b text-center red_enid strong');
+    $contenido[] =  img(create_url_preview("back_experiencia.jpg"));
+    return gb_modal($contenido, 'modal_mayoristas');
+}
+
 
 
 function modal_venta_auto()
@@ -1485,12 +1598,18 @@ function modal_venta_auto()
     );
     if(is_mobile()){
 
-        $link =  format_link("Dime cual es tu auto",['href' => 
-        path_enid("whatsapp_autos",0,1)]);
+        $link =  format_link("Dime cual es tu auto",
+        [
+            'href' => path_enid("whatsapp_autos",0,1),
+            "onclick" => "log_operaciones_externas(47)"
+        ]);
 
     }
 
     $contenido[] =  d(d($link,6,1), "row mt-5");
+    $contenido[] = d("Mándanos un WhatsApp:  +52 55 5296-7027",
+    'mt-3 mb-3 text-center red_enid strong');
+
 
     return gb_modal($contenido, 'modal_venta_auto');
 }
