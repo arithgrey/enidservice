@@ -468,9 +468,9 @@ if (!function_exists('invierte_date_time')) {
             $response = d(
                 _text_(
                     d("- Ó con tarjeta de crédito", 'borde_green p-1 text-uppercase black strong'),
-                    d(_text_(span("3 meses de"), span(_text("$", sprintf('%01.0f', $tres_meses_aplicado)), 'underline black')), "black mt-1"),
-                    d(_text_(span("6 meses de"), span(_text("$", sprintf('%01.0f', $seis_meses_aplicado)), 'underline black')), "black"),
-                    d(_text_(span("12 meses de"), span(_text("$", sprintf('%01.0f', $doce_meses_aplicado)), 'underline black')), "black"),
+                    d(_text_(span("3",'strong black'),"meses de", span(_text("$", sprintf('%01.0f', $tres_meses_aplicado)), 'borde_end strong black '), "total",$final_3), "black mt-3"),
+                    d(_text_(span("6",'strong black'),"meses de", span(_text("$", sprintf('%01.0f', $seis_meses_aplicado)), 'borde_end strong black '), "total" , $final_6), "black mt-1"),
+                    d(_text_(span("12",'strong black'),"meses de", span(_text("$", sprintf('%01.0f', $doce_meses_aplicado)), 'borde_end strong black '), "total", $final_12), "black mt-1"),
                 ),
 
             );
