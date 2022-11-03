@@ -262,7 +262,11 @@ th:hover {
 .color_linkeding {
     color: #006FA6 !important;
 }
-
+.color_green{
+    
+    color: #00f400 !important;
+    font-weight: bold;  
+}
 .color_venta {
     color: #071b28 !important;
 }
