@@ -68,6 +68,7 @@ function accesos_enid()
         "vinculo" => "vinculo/?tag=",
         "valoracion_servicio" => "valoracion/?servicio=",        
         "simulador" => "simulador-utilidad",        
+        "promesa_ventas" => "promesa_ventas",        
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "url_home" => "../reporte_enid",                        
         "img_faq" => "img_tema/productos/",        

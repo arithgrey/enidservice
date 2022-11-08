@@ -25,6 +25,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_motivos_cancelaciones();
         $response[] = format_evaluaciones();
         $response[] = format_top_ventas();
+        $response[] = format_top_promesas_ventas();
         $response[] = format_sin_ventas();
 
 
@@ -386,6 +387,29 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
+    function format_top_promesas_ventas()
+    {
+
+        $hoy = date_format(horario_enid(), 'Y-m-d');
+        $ayer = add_date(date("Y-m-d"), -30);
+
+        $form = base_busqueda_form(
+            'Ventas - Promesas - Logros',
+            'form_promesa_ventas',
+            'place_keywords',
+            $ayer,
+            $hoy
+        );
+
+        return d(
+            $form,
+            [
+                "class" => "tab-pane",
+                "id" => "tab_ventas_promesa",
+            ]
+        );
+    }
+
 
     function format_motivos_cancelaciones()
     {
@@ -615,6 +639,11 @@ if (!function_exists('invierte_date_time')) {
             text_icon("fa-check-circle", "Top artículos vendidos"),
             "#tab_top_ventas"
         );
+
+        $link_progreso_ventas = tab(
+            text_icon("fa-check-circle", "Progreso ventas promesa"),
+            "#tab_ventas_promesa"
+        );
         $text = text_icon("fa-check-circle", "Top comisionistas");
         $text_entrega = text_icon("fa-check-circle", "Top reparto");
 
@@ -679,7 +708,7 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 0
             ),
-
+            $link_progreso_ventas,
             $link_top_ventas,
             $link_accesos_time_line,
             $link_accesos_franja_horaria,

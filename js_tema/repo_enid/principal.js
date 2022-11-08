@@ -8,6 +8,8 @@ let $form_entregas = $('.form_entregas');
 let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
 let $form_top_ventas = $('.form_top_ventas');
 let $form_sin_ventas = $('.form_sin_ventas');
+let $form_promesa_ventas = $('.form_promesa_ventas');
+
 let $funnel_ventas = $('.funnel');
 
 
@@ -56,8 +58,9 @@ $(document).ready(() => {
     $form_ventas_comisionistas.submit(ventas_comisionistas);
     $form_entregas.submit(ventas_entregadas);
     $form_motivos_cancelaciones.submit(motovos_cancelaciones_busqueda);
-    $form_top_ventas.submit(top_ventas);
+    $form_top_ventas.submit(top_ventas);    
     $form_sin_ventas.submit(sin_ventas);
+    $form_promesa_ventas.submit(promesa_ventas);
 
     $funnel_ventas.click(funnel);
 
@@ -692,6 +695,23 @@ let top_ventas = function (e) {
     }
 
     e.preventDefault();
+}
+let promesa_ventas = function(e){
+    
+    let f_inicio = get_parameter(".form_promesa_ventas #datetimepicker4");
+    let f_termino = get_parameter(".form_promesa_ventas #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $(".form_promesa_ventas").serialize();
+        let url = "../q/index.php/api/servicio_meta/fecha/format/json/";
+        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+    } else {
+
+        focus_input([".form_promesa_ventas #datetimepicker5", ".form_promesa_ventas #datetimepicker4"]);
+    }
+    e.preventDefault();
+
 }
 let sin_ventas = function (e) {
 

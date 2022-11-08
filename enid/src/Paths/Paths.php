@@ -31,8 +31,18 @@ class Paths
             "pagina" => 5,
 
         ];
+        $promesa_venta = [
+            "css" => [
+                
+            ],
+            "js" => [
+                "promesa_ventas/principal.js"
+            ]
+        ];
+
 
         $response = [
+            "promesa_ventas" => $promesa_venta,
             "puntuacion" => $puntuacion,
             "sobre_ventas" => $sobre_ventas,
             "usuario_contacto" => [
