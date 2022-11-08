@@ -708,6 +708,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $simulador = '';
+            $promesa_ventas = '';
             $flex = _text_(_between, 'd-flex mr-5');
 
 
@@ -716,12 +717,14 @@ if (!function_exists('invierte_date_time')) {
                 $servicio = $data["info_servicio"]["servicio"];
                 $precio = pr($servicio, "precio");
                 $costo = pr($servicio, "costo");
+                $id_servicio = pr($servicio, "id_servicio");
                 $venta = porcentaje($precio, pr($servicio, "comision"));
                 $entrega = 150;
                 $otro_gas = 100;
                 $promedio_venta = 6;
 
                 $path = "venta=$venta&precio=$precio&costo=$costo&entrega=$entrega&otro=$otro_gas&promedio_venta=$promedio_venta";
+                $path_promesa = "servicio=$id_servicio";
 
                 $simulador = format_link(
                     "Simulador de ventas",
@@ -729,8 +732,16 @@ if (!function_exists('invierte_date_time')) {
                         "href" => _text(path_enid("simulador"), "/?", $path),
                     ]
                 );
+
+                $promesa_ventas = format_link(
+                    "Promesa de ventas",
+                    [
+                        "href" => _text(path_enid("promesa_ventas"), "/?", $path_promesa),
+                    ]
+                );
+
             }
-            $response[] = d(_d($respuestas, $metricas, $simulador), $flex);
+            $response[] = d(_d($respuestas, $metricas, $simulador, $promesa_ventas), $flex);
         }
         return append($response);
     }

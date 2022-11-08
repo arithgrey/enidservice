@@ -776,7 +776,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            "Acceder",
+            "Ingresar",
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
