@@ -67,6 +67,21 @@ class Servicio_meta_model extends CI_Model
         
 
     }
+    function leads($id_servicio,$fecha_registro, $fecha_promesa)
+    {
+
+        $query_get = _text_("SELECT COUNT(0)total, date(fecha_entrega) fecha_entrega 
+        FROM proyecto_persona_forma_pagos WHERE 
+        id_servicio = $id_servicio         
+        AND DATE( fecha_entrega )  BETWEEN '" . $fecha_registro . "' AND  '" . $fecha_promesa . "'  
+        GROUP BY DATE(fecha_entrega) ORDER BY fecha_entrega ASC
+        ");
+
+        return $this->db->query($query_get)->result_array();
+        
+
+    }
+
     
 
 
