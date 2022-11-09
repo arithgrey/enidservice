@@ -41,13 +41,14 @@ class Servicio_meta extends REST_Controller
     {
         $param = $this->get();
         $response = false;
+        $data_complete = [];
         if (fx($param, "fecha_inicio,fecha_termino")) {
 
 
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $metas =  $this->servicio_meta_model->fecha($fecha_inicio, $fecha_termino);
-            $data_complete = [];
+            
             $a = 0;
 
             foreach ($metas as $row) {
@@ -58,16 +59,17 @@ class Servicio_meta extends REST_Controller
                 $fecha_promesa = $row["fecha_promesa"];
 
                 $totales = $this->servicio_meta_model->pagado_entregado($id_servicio,$fecha_registro, $fecha_promesa);
+                $totales_leads = $this->servicio_meta_model->leads($id_servicio,$fecha_registro, $fecha_promesa);
+
                 $data_complete[$a]["totales_fechas_ventas"] = $totales;
+                $data_complete[$a]["totales_fechas_ventas_leads"] = $totales_leads;
                 
 
                 $a ++;
             }
-            $data_complete = $this->app->imgs_productos(0, 1, 1, 1, $data_complete);
-            
-            $this->response(formato_fecha_promesa($data_complete));
-           
+            $data_complete = $this->app->imgs_productos(0, 1, 1, 1, $data_complete);           
             
         }
+        $this->response(formato_fecha_promesa($data_complete));
     }
 }

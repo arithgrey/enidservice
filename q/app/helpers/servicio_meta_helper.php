@@ -16,14 +16,24 @@ if (!function_exists('invierte_date_time')) {
             
             $meta = $row["meta"];
             $totales_fechas_ventas =  $row["totales_fechas_ventas"];
+            $totales_fechas_ventas_leads  = $row["totales_fechas_ventas_leads"];
 
             $imagenes = d(img($row["url_img_servicio"]), "w_50");
+            $imagenes = a_enid(
+                $imagenes,
+                [
+                    "href" => path_enid("producto", $row["id_servicio"]),
+                    "target" => "_black",
+                ]
+            );
+
 
             $vetas_fechas_totales  = metricas_compras_caida(
                 $fecha_registro, 
                 $fecha_promesa,
                 $totales_fechas_ventas,
-                $meta);
+                $meta,
+                $totales_fechas_ventas_leads);
 
             $logros = $vetas_fechas_totales["ventas"];
             $dias = $vetas_fechas_totales["dias"];
@@ -58,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
 
         return append($response);
     }
-    function metricas_compras_caida($fecha_registro, $fecha_promesa, $totales_fechas_ventas, $meta){
+    function metricas_compras_caida($fecha_registro, $fecha_promesa, $totales_fechas_ventas, $meta, $totales_fechas_ventas_leads){
 
         $begin = new DateTime($fecha_registro);
         $end = new DateTime($fecha_promesa);
@@ -75,10 +85,13 @@ if (!function_exists('invierte_date_time')) {
             
             $fecha_entrega = $dt->format("Y-m-d");
             $ventas = busqueda_en_ventas($fecha_entrega ,$totales_fechas_ventas);
+            $leads = busqueda_en_ventas($fecha_entrega ,$totales_fechas_ventas_leads);            
+
             $logros = $logros + $ventas;
             $extra  = ($ventas < $promedio_dia ) ? 'border-danger border': 'borde_end';
             $fecha_venta =  d([ 
                 d($ventas ,'strong black f14'), 
+                d(_text_('Leads',$leads) ,'black fp9'), 
                 d($fecha_entrega)
             ], _text_('text-center p-2 flex-row mt-3', $extra));
             $response[] = d($fecha_venta, 'col-sm-2');
