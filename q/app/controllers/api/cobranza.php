@@ -277,6 +277,7 @@ class Cobranza extends REST_Controller
         $data_servicio["talla"] = prm_def($param, "talla");
         $data_servicio["orden_compra"] = $orden_compra;
         $data_servicio["cobro_secundario"] = prm_def($param, "cobro_secundario");
+        $data_servicio["numero_boleto"] = prm_def($data_servicio, "numero_boleto");
 
         $id_orden_compra = $this->genera_orden_compra($data_servicio);
         $data_servicio["id_orden_compra"] = $id_orden_compra;

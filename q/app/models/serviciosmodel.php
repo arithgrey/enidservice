@@ -745,7 +745,7 @@ class serviciosmodel extends CI_Model
                 marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
                 tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, 
-                precio FROM servicio ", $where);
+                precio, es_sorteo FROM servicio ", $where);
         return $this->db->query($query_create)->result_array();
     }
 

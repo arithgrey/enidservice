@@ -1083,6 +1083,16 @@ class Servicio extends REST_Controller
         }
         $this->response($response);
     }
+    function sorteo_PUT(){
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+            $response = $this->serviciosmodel->q_up("es_sorteo", 1, $param["id_servicio"]);
+        }
+        $this->response($response);
+    }
 
     function dropshiping_PUT()
     {

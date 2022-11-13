@@ -107,6 +107,7 @@ class Usuario_deseo_model extends CI_Model
                 u.id_recompensa, 
 				u.num_deseo,
 				u.articulos,
+                u.numero_boleto,
 				s.*  
 				FROM  usuario_deseo u 
 				INNER JOIN servicio s  
@@ -147,6 +148,7 @@ class Usuario_deseo_model extends CI_Model
 				u.id, 
 				u.num_deseo,
 				u.articulos,
+                u.numero_boleto,
 				s.* ,
                 s.id_usuario id_usuario_venta
 				FROM  usuario_deseo u 

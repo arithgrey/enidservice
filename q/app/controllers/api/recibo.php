@@ -2611,6 +2611,19 @@ class recibo extends REST_Controller
         $recibo = $this->recibo_model->q_get(["id_servicio"], $id_recibo);
         return pr($recibo, "id_servicio", 0);
     }
+    function servicio_pago_GET()
+    {
+
+        $param = $this->get();
+        $response  = false;
+        if (fx($param, "id_servicio")) {
+
+            $id_servicio = $param["id_servicio"];
+            $response =  $this->recibo_model->servicio_pago($id_servicio);
+
+        }
+        $this->response($response);
+    }
 
     function top_GET()
     {

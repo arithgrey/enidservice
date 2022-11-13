@@ -709,6 +709,7 @@ if (!function_exists('invierte_date_time')) {
 
             $simulador = '';
             $promesa_ventas = '';
+            $seccion_sorteo = '';
             $flex = _text_(_between, 'd-flex mr-5');
 
 
@@ -740,8 +741,16 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
 
+                $seccion_sorteo = format_link(
+                    "¿Es sorteo?",
+                    [
+                        "href" => path_enid("sorteo",$id_servicio),
+                    ]
+                );
+
+
             }
-            $response[] = d(_d($respuestas, $metricas, $simulador, $promesa_ventas), $flex);
+            $response[] = d(_d($respuestas, $metricas, $simulador, $promesa_ventas,$seccion_sorteo), $flex);
         }
         return append($response);
     }
@@ -1046,7 +1055,6 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
     }
-
 
     function img_lateral($param, $nombre_servicio, $is_mobile)
     {

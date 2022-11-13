@@ -980,7 +980,7 @@ class Recibo_model extends CI_Model
 
         $lead_ubicacion = prm_def($data_usuario, "lead_ubicacion");
         $lead_catalogo = prm_def($data_usuario, "lead_catalogo");
-
+        $numero_boleto = prm_def($param, "numero_boleto");
 
         $id_usuario_referencia = ($usuario_referencia == 0) ? $id_usuario : $usuario_referencia;
         $num_ciclos = $param["articulos"];
@@ -1048,7 +1048,8 @@ class Recibo_model extends CI_Model
             "costo",
             "descuento_premium",
             "lead_ubicacion",
-            "lead_catalogo"
+            "lead_catalogo",
+            "numero_boleto"
         ];
 
         $array_values =
@@ -1075,7 +1076,8 @@ class Recibo_model extends CI_Model
                 $costo,
                 $descuento_premium,
                 $lead_ubicacion,
-                $lead_catalogo
+                $lead_catalogo,
+                $numero_boleto
             ];
 
         if (array_key_exists("fecha_contra_entrega", $array_keys)) {
@@ -1864,6 +1866,18 @@ class Recibo_model extends CI_Model
             AND saldo_cubierto > 0 
             AND flag_pago_comision < 1 
             GROUP BY p.id";
+
+        return $this->db->query($query_get)->result_array();
+    }
+    function servicio_pago($id_servicio)
+    {
+        $query_get = "SELECT  *  FROM 
+            proyecto_persona_forma_pagos   
+            WHERE             
+            se_cancela < 1 
+            AND cancela_cliente < 1  
+            AND saldo_cubierto > 0 
+            AND id_servicio = $id_servicio";
 
         return $this->db->query($query_get)->result_array();
     }

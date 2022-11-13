@@ -40,11 +40,31 @@ class Paths
             ]
         ];
 
+        $sorteo = [
+            "css" => [
+                
+            ],
+            "js" => [
+                "sorteo/principal.js"
+            ]
+        ];
+        $sorteo_venta = [
+            "css" => [
+                
+            ],
+            "js" => [
+                "sorteo/venta.js"
+            ]
+        ];
 
-        $response = [
+
+
+        $response = [            
             "promesa_ventas" => $promesa_venta,
             "puntuacion" => $puntuacion,
             "sobre_ventas" => $sobre_ventas,
+            "sorteo" => $sorteo,
+            "sorteo_venta" => $sorteo_venta,
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css"

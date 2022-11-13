@@ -89,7 +89,7 @@ if (!function_exists('invierte_date_time')) {
         $re[] = d($menu, 'col-sm-12 mr-5 pr-5 d-md-none');
 
         $id_status = pr($productos_orden_compra, 'status');
-        
+
 
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
@@ -155,20 +155,20 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens(['class' => 'id_status', 'value' => $id_status]);
         $response[] = hiddens(['class' => 'es_venta_cancelada', 'value' => $es_venta_cancelada]);
         $response[] = hiddens(['class' => 'saldo_cubierto', 'value' => $saldo_cubierto]);
-        
-        if(es_administrador($data)){
-            
+
+        if (es_administrador($data)) {
+
             $adicionales[] = format_link(
                 text_icon(_money_icon, "Dasboards"),
                 [
-    
+
                     "href" => path_enid("reporte_enid"),
                     "class" => "text-uppercase black mt-2",
                 ]
-                );
+            );
         }
 
-          
+
 
         $adicionales[] = format_link(
             text_icon(_money_icon, "Noticias"),
@@ -177,10 +177,10 @@ if (!function_exists('invierte_date_time')) {
                 "href" => path_enid("busqueda"),
                 "class" => "text-uppercase black mt-2",
             ]
-            );
+        );
 
 
-          
+
 
 
         $adicionales[] = format_link(
@@ -196,8 +196,8 @@ if (!function_exists('invierte_date_time')) {
         $compra[] = d($adicionales, 3);
         $compra[] = d($response, 9);
 
-        
-        return d($compra,'col-sm-11');
+
+        return d($compra, 'col-sm-11');
     }
 
     function opciones_compra($data, $recibo, $id_recibo, $es_vendedor, $tipos_entregas, $es_venta_cancelada)
@@ -229,17 +229,19 @@ if (!function_exists('invierte_date_time')) {
     }
     function enviar_a_reparto_modal()
     {
-        
+
         $contenido[] = d(_titulo('¿Quieres enviar a repartir el pedido hoy?'), 'mb-5  text-center');
 
-        $enviar = format_link("Sí, enviar",
-        [
-            "class" => "botton_enviar_reparto",            
+        $enviar = format_link(
+            "Sí, enviar",
+            [
+                "class" => "botton_enviar_reparto",
 
-        ]);
-        $despues = format_link("Después",["class" =>  "botton_enviar_despues red_enid"],0);
-        $contenido[] =  flex($enviar, $despues,_between);
-        
+            ]
+        );
+        $despues = format_link("Después", ["class" =>  "botton_enviar_despues red_enid"], 0);
+        $contenido[] =  flex($enviar, $despues, _between);
+
         return gb_modal($contenido, 'modal_envio_reparto');
     }
 
@@ -1599,12 +1601,10 @@ if (!function_exists('invierte_date_time')) {
             if (!in_array($status_recibo, [16])) {
 
                 $response[] = d($link, 'row mb-3');
-            } else {
-
-                $path_tracker = path_enid('pedido_seguimiento', $id_orden_compra);
-                $link = format_link($clasificacion, ['href' => $path_tracker]);
-                $response[] = d($link, 'row mb-3');
             }
+            $path_tracker = path_enid('pedido_seguimiento', $id_orden_compra);
+            $link = format_link("Rastrear pedido", ['href' => $path_tracker]);
+            $response[] = d($link, 'row mb-3');
         }
         return append($response);
     }
@@ -1657,7 +1657,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_form_busqueda_pedidos($data, $param)
     {
-        
+
 
         $es_busqueda_reparto = prm_def($param, 'reparto');
         $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
@@ -1833,8 +1833,8 @@ if (!function_exists('invierte_date_time')) {
         $contenido_ventas_efectivas = entregas_efectivas();
         $secciones_tabs[] = tab_seccion($contenido_ventas_efectivas, 'ventas_efectivas');
 
-        
-        
+
+
 
 
         $menu_pedidos = tab(
@@ -1862,8 +1862,10 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $menu_ventas_proceso = tab(
-            text_icon("fa fa-money", 
-            flex('Ventas en proceso', place("place_ventas_proceso"), _between, "mr-5", "borde_end")),
+            text_icon(
+                "fa fa-money",
+                flex('Ventas en proceso', place("place_ventas_proceso"), _between, "mr-5", "borde_end")
+            ),
             '#ventas_en_proceso',
             [
                 'class' => ' mt-2 ventas_en_proceso mt-3'
@@ -1871,7 +1873,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $menu_ventas_proceso_clientes = tab(
-            text_icon("fa fa-money", flex('Ventas en proceso de clientes',place("place_ventas_proceso_cliente"), _between, "mr-5", "borde_green p-2")),
+            text_icon("fa fa-money", flex('Ventas en proceso de clientes', place("place_ventas_proceso_cliente"), _between, "mr-5", "borde_green p-2")),
             '#ventas_en_proceso_cliente',
             [
                 'class' => ' mt-2 ventas_en_proceso_clientes underline black f11 mt-3'
@@ -1897,7 +1899,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        
+
 
         $menu_envio_catalogo_movimiento = tab(
             text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
@@ -1919,24 +1921,29 @@ if (!function_exists('invierte_date_time')) {
         $place_leads  = place("place_penetracion_leads");
         $place_leads_ventas  = place("place_penetracion_leads_ventas");
         $place_leads_ventas_penetracion = flex(
-            $place_leads, $place_leads_ventas, _between,
-        'borde_black mr-3',
-        'borde_green '
-    );
+            $place_leads,
+            $place_leads_ventas,
+            _between,
+            'borde_black mr-3',
+            'borde_green '
+        );
 
         $menu_metricas_alcaldia = tab(
-            text_icon("fa fa-line-chart", 
-            flex('Penetración ', 
-            $place_leads_ventas_penetracion
-            , 
-            _between
-            , "mr-5")),
+            text_icon(
+                "fa fa-line-chart",
+                flex(
+                    'Penetración ',
+                    $place_leads_ventas_penetracion,
+                    _between,
+                    "mr-5"
+                )
+            ),
             '#metricas_alcaldias',
             [
                 'class' => ' mt-2 busqueda_metricas_alcaldias mt-3'
             ]
         );
-       
+
         $meu_al_dia = format_link(
             "Últimas noticias",
             [
@@ -1956,19 +1963,19 @@ if (!function_exists('invierte_date_time')) {
         $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
         $menu = d([
-            $menu_dash_board, 
-            $meu_al_dia,            
+            $menu_dash_board,
+            $meu_al_dia,
             $menu_pedidos,
             $menu_metricas,
             $menu_metricas_alcaldia,
             $menu_ventas_proceso_clientes,
-            $menu_ventas_proceso,   
-            $menu_ventas_entregadas,         
+            $menu_ventas_proceso,
+            $menu_ventas_entregadas,
             $menu_envio_catalogo,
             $menu_envio_promo,
             $menu_envio_catalogo_movimiento,
             $menu_pendientes,
-           
+
         ]);
 
 
@@ -1981,30 +1988,30 @@ if (!function_exists('invierte_date_time')) {
 
         return d($data_complete, 12);
     }
-    function entregas_en_camino(){
+    function entregas_en_camino()
+    {
 
         $_response[] = _titulo('Tus pedidos en proceso', 4);
         $_response[] = place("place_ventas_en_proceso");
         return d($_response);
-
     }
 
-    function entregas_en_camino_cliente(){
+    function entregas_en_camino_cliente()
+    {
 
         $_response[] = _titulo('Pedidos de clientes en proceso', 4);
         $_response[] = place("place_ventas_en_proceso_clientes");
         return d($_response);
-
     }
-    function entregas_efectivas(){
+    function entregas_efectivas()
+    {
 
         $_response[] = _titulo('Ventas Efectias', 4);
-        $_response[] =  hiddens(["class" => "fecha_venta_efectiva" , "value" => date("Y-m-d")]);
+        $_response[] =  hiddens(["class" => "fecha_venta_efectiva", "value" => date("Y-m-d")]);
         $_response[] = place("place_ventas_efectivas");
         return d($_response);
-
     }
-    
+
 
     function total_comision($ids_usuario, $ordenes)
     {
@@ -2085,8 +2092,8 @@ if (!function_exists('invierte_date_time')) {
     function metricas()
     {
 
-        $response[] = _titulo('Registro de leads por franja horaria', 4);    
-        $response[] = form_open("", [ "class" => "form_franja_horaria"]);
+        $response[] = _titulo('Registro de leads por franja horaria', 4);
+        $response[] = form_open("", ["class" => "form_franja_horaria"]);
         $response[] = frm_fecha_busqueda();
         $response[] =  form_close();
         $response[] = place("place_lead_franja_horaria");
@@ -2097,14 +2104,14 @@ if (!function_exists('invierte_date_time')) {
     function metricas_alcaldias()
     {
 
-        $response[] = _titulo('Penetración por alcaldias', 4);    
-        $response[] = form_open("", [ "class" => "form_alcaldias"]);
+        $response[] = _titulo('Penetración por alcaldias', 4);
+        $response[] = form_open("", ["class" => "form_alcaldias"]);
         $response[] = frm_fecha_busqueda();
         $response[] = form_close();
         $response[] = place("place_alcaldias");
         return d($response);
     }
-    
+
 
 
 
@@ -2340,7 +2347,7 @@ if (!function_exists('invierte_date_time')) {
 
     function instruccion_envio_catalogo()
     {
-        
+
 
         $form[] = d(_titulo('Envía estas instrucciones'), 13);
 
@@ -2852,7 +2859,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = d(
-            "UPS! AL PARECER ESTA ORDEN YA NO ESTÁ DISPONIBLE",                        
+            "UPS! AL PARECER ESTA ORDEN YA NO ESTÁ DISPONIBLE",
             "mx-auto black text-center p-2 mb-4 display-6"
         );
         $r[] = d(
@@ -2862,7 +2869,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             )
         );
-        $r[] = 
+        $r[] =
             format_link(
                 "ENCUENTRA TU ORDEN AQUÍ",
                 [
@@ -2871,7 +2878,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-        return d($r, 4,1);
+        return d($r, 4, 1);
     }
 
     function frm_direccion($id_orden_compra)
@@ -3608,14 +3615,47 @@ if (!function_exists('invierte_date_time')) {
         }
         return append($response);
     }
+    function descripcion_boleto($numero_boleto)
+    {
 
+        $curpo_boleto  = "";
+        if ($numero_boleto > 0) {
+
+
+            $icono = '<svg xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24"                 
+                stroke-width="1.5"                
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                </svg>';
+
+
+
+            $extra = "blue_bg white borde_green numero_boleto";
+
+            $curpo_boleto = flex(
+                $numero_boleto,
+                $icono,
+                _text_(_between, 'p-2 ', $extra),
+                _text_("p-2 h-100", '')
+            );
+        }
+        return d($curpo_boleto,'w-25 mx-auto');
+    }
     function crea_seccion_productos($productos_orden_compra)
     {
 
         $response = [];
         foreach ($productos_orden_compra as $row) {
 
+
             $linea_producto_orden_compra = [];
+            $numero_boleto = $row["numero_boleto"];
+            $seccion_boleto = descripcion_boleto($numero_boleto);
+
             $total = $row["num_ciclos_contratados"];
             $id_proyecto_persona_forma_pago = $row["id"];
             $imagen =
@@ -3636,6 +3676,7 @@ if (!function_exists('invierte_date_time')) {
 
             $precios = d(money($row["precio"]), 'strong h4 mx-auto');
             $texto_precio = flex("Costo por unidad", $precios, 'flex-column');
+            $texto_precio = flex($texto_precio, $seccion_boleto, 'flex-column','','w-50 mx-auto');
 
             $editar_cantidad = icon(
                 _text_(_editar_icon, "edicion_cantidad"),
@@ -3667,7 +3708,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
             $elementos = [
-                
+
                 d($icon, _text_('seccion_cantidad', $clase_icono_cantidades)),
                 d($selector_cantidad, _text_($clase_cantidades, 'd-none')),
                 d($actualizar, _text_($clase_cantidades, 'mt-3 d-none'))
@@ -3680,7 +3721,7 @@ if (!function_exists('invierte_date_time')) {
 
             $icono_edicion = d($elementos, $clase_iconos);
 
-            $eliminar_producto  = d($icon_eliminar, ["class" => "mb-5 eliminar_producto_orden_compra" , "id" => $id_proyecto_persona_forma_pago]);
+            $eliminar_producto  = d($icon_eliminar, ["class" => "mb-5 eliminar_producto_orden_compra", "id" => $id_proyecto_persona_forma_pago]);
             $iconos_config = flex($eliminar_producto, $icono_edicion, 'flex-column');
             $linea = [
                 $imagen,
