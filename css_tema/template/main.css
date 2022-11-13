@@ -303,7 +303,13 @@ th:hover {
 .blue_enid {
     color: #0656F9 !important;
 }
+.green_enid_bg{
+    color: #17D094!important;
+}
+.blue_bg{
 
+    background: #0606bd;   
+}
 .blue_enid2 {
     background: #00163E;
 }

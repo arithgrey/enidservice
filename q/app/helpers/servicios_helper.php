@@ -1205,7 +1205,8 @@ if (!function_exists('invierte_date_time')) {
     {
         $precio = $servicio["precio"];
         $id_servicio = $servicio["id_servicio"];
-        $path_servicio = get_url_servicio($id_servicio);
+        $es_sorteo = $servicio["es_sorteo"];
+        $path_servicio =  ($es_sorteo < 1 ) ? get_url_servicio($id_servicio): path_enid("sorteo",$id_servicio) ;
 
         $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2 borde_green');
         $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");

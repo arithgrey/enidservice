@@ -25,12 +25,13 @@ class usuario_deseo_compra extends REST_Controller
             $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] :  $this->input->ip_address();
             $articulos = $param["articulos"];
             $id_recompensa = prm_def($param, "id_recompensa");
-
+            $numero_boleto = prm_def($param, "numero_boleto");
             $paras = [
                 "id_servicio" => $param["id_servicio"],
                 "ip" => $ip,
                 "articulos" => $articulos, 
-                "id_recompensa" => $id_recompensa
+                "id_recompensa" => $id_recompensa,
+                "numero_boleto" => $numero_boleto
             ];
 
             $response = $this->usuario_deseo_compra_model->insert($paras, 1);

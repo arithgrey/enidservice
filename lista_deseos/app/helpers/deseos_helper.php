@@ -206,7 +206,7 @@ if (!function_exists('invierte_date_time')) {
 
         $lista_deseo = lista_deseo($productos_deseados, $externo);
         $response[] = d($lista_deseo, "col-xs-12 col-md-8 border-right border-secondary");
-        $response[] = d(seccion_procesar_pago($data, $productos_deseados),"col-xs-12 col-md-4 border-right");
+        $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4 border-right");
 
         return d($response, 10, 1);
     }
@@ -351,7 +351,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $es_recien_creado = ($data["in_session"] && $data["recien_creado"]);
-        
+
         if (!$es_recien_creado && !es_cliente($data)) {
 
             $es_administrador_o_vendedor = es_administrador_o_vendedor($data);
@@ -400,7 +400,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline mb-5');
             $response[] = form_close();
-            return d($response,'mb-5');
+            return d($response, 'mb-5');
         } else {
 
 
@@ -421,7 +421,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(btn("Enviar orden", ["class" => "mt-5 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 mb-5 underline');
             $response[] = form_close();
-            return d($response,'mb-5');
+            return d($response, 'mb-5');
         }
     }
 
@@ -519,6 +519,7 @@ if (!function_exists('invierte_date_time')) {
             $precio = $row["precio"];
             $articulos = $row["articulos"];
             $id_recompensa = $row["id_recompensa"];
+            $numero_boleto = $row["numero_boleto"];
 
 
             $r = [];
@@ -554,19 +555,29 @@ if (!function_exists('invierte_date_time')) {
             );
             $x[] = h($link, 4);
 
-            $x[] = str_repeat(icon("fa fa-star"), 5);
-            $texto_deseo = _text_($row["deseado"], " veces comprado");
-            $x[] = d($texto_deseo, "label-rating");
+            
 
-            $selector =
-                select_cantidad_compra(
-                    0,
-                    10,
-                    $articulos,
-                    'cantidad_articulos_deseados',
-                    $id
-                );
-            $x[] = d($selector, 'col-lg-6 p-0');
+            if ($numero_boleto < 1) {
+                $x[] = str_repeat(icon("fa fa-star"), 5);
+                $texto_deseo = _text_($row["deseado"], " veces comprado");
+                $x[] = d($texto_deseo, "label-rating");
+
+
+                $selector =
+                    select_cantidad_compra(
+                        0,
+                        10,
+                        $articulos,
+                        'cantidad_articulos_deseados',
+                        $id
+                    );
+                $x[] = d($selector, 'col-lg-6 p-0');
+
+            }else{
+
+                $x[] = cuerpo_boleto($numero_boleto);
+                
+            }
 
             $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
             $eliminar = d(
@@ -581,6 +592,7 @@ if (!function_exists('invierte_date_time')) {
             $z = [];
             $z[] = h(money($text_precio), 4, 'strong');
             $z[] = d($eliminar, "text-primary text-center");
+
             $es_servicio = $row["flag_servicio"];
             $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
             $z[] = formulario_orden_compra_deseo_cliente($id, $id_producto, 1, $articulos, $es_servicio, $id_ciclo_facturacion);
@@ -607,7 +619,31 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d($response, 'row');
         return append($data_response);
     }
+    function cuerpo_boleto($numero_boleto){
 
+        $icono = '<svg xmlns="http://www.w3.org/2000/svg" 
+                fill="none" 
+                viewBox="0 0 24 24"                 
+                stroke-width="1.5"                
+                stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" 
+                stroke-linejoin="round" 
+                d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+                </svg>';
+
+
+            
+            $extra = "blue_bg white borde_green numero_boleto";
+
+            $curpo_boleto = flex(
+                $numero_boleto,
+                $icono,
+                _text_(_between, 'p-2', $extra),
+                _text_("p-2 h-100", '')                
+            );
+
+            return  flex("Boleto número",$curpo_boleto, _between,'black borde_end','col-xs-4');
+    }
     function formulario_orden_compra_deseo_cliente($id, $id_servicio, $q2, $num_ciclos, $es_servicio, $id_ciclo_facturacion)
     {
 

@@ -227,8 +227,14 @@ class usuario_deseo extends REST_Controller
                 "id_usuario" => $param["id_usuario"],
                 "id_servicio" => $param["id_servicio"],
                 "articulos" => $param["articulos"]
-
             ];
+
+            $numero_boleto = prm_def($param,"numero_boleto");
+            
+            if($numero_boleto > 0){
+
+                $params["numero_boleto"] = $numero_boleto;
+            }
 
             $response = $this->usuario_deseo_model->insert($params);
         }
@@ -257,6 +263,31 @@ class usuario_deseo extends REST_Controller
         $this->deseo_compra($param);
         $this->response(true);
     }
+    function lista_deseos_boleto_DELETE()
+    {
+
+        $param = $this->delete();
+        $param["id_usuario"] = $this->id_usuario;
+        
+        $response = false;
+        
+        if (fx($param, "id_usuario,id_servicio,numero_boleto")) {
+            $response = 0;
+
+            $params = [
+                "id_usuario" => $param["id_usuario"],
+                "id_servicio" => $param["id_servicio"],
+                "numero_boleto" => $param["numero_boleto"]
+                
+            ];
+            
+            $response = $this->usuario_deseo_model->delete($params);
+
+        }
+        return $response;
+
+    }
+
 
     function deseo_compra($param)
     {

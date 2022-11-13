@@ -44,6 +44,7 @@ class Home extends CI_Controller
         ];
 
         $data["servicios"] = $this->app->api("servicio/q", $data_send);
+        
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
         if ($son_servicio > 0) {
             $this->servicios($data, $data_send);
