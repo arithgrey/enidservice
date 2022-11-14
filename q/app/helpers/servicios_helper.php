@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
         $nnservicio
     ) {
 
-
+        $link_maps = pr($servicio, "link_maps");
         $descripcion_informacion = "INFORMACIÓN SOBRE TU " . $nnservicio;
         $descripcion_informacion = h(
             text_icon(
@@ -203,6 +203,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
+            $link_maps,
             valida_text_imagenes($tipo_promocion, $num_imagenes),
             $num_imagenes,
             $id_servicio,
@@ -611,6 +612,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_entrada(
+        $link_maps,
         $notificacion_imagenes,
         $num_imagenes,
         $id_servicio,
@@ -650,6 +652,24 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = form_youtube($valor_youtube);
+
+        if (strlen($link_maps) > 0) {
+
+            $z[] = d(text_icon(
+                'fa fa fa-pencil text_video_servicio',
+                a_enid(
+                    'ver link Google Maps',
+                    [
+                        'href' => $link_maps,
+                        'target' => '_black',
+                        'class' => 'black underline'
+                    ],
+                    0
+                )
+            ), "text-uppercase");
+        }
+
+        $z[] = form_maps($link_maps);
 
 
         return tab_seccion($z, "tab_imagenes", $ext_1);
@@ -1879,6 +1899,44 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $button = btn("GUARDAR", ["class" => "guardar_video_btn"]);
+        $r[] = flex(
+            $input,
+            $button,
+            'mt-5 align-items-end',
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
+        $r[] = form_close();
+
+        return d($r);
+    }
+    function form_maps($link_maps)
+    {
+
+
+        $r[] = form_open("", ["class" => "form_link_maps"]);
+        $r[] = input(
+            [
+                "type" => "hidden",
+                "name" => "q",
+                "value" => "link_maps"
+            ]
+        );
+
+        $input = input_frm(
+            "",
+            "LINK DE GOOGLE MAPS",
+            [
+                "type" => "text",
+                "name" => "q2",
+                "class" => 'link_maps',
+                "id" => 'link_maps',
+                "value" => $link_maps,
+                "required" => true
+            ]
+        );
+
+        $button = btn("GUARDAR", ["class" => "link_maps_btn"]);
         $r[] = flex(
             $input,
             $button,

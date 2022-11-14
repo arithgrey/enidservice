@@ -204,6 +204,7 @@ let respuesta_informacion_servicio = (data) => {
 
     $(".form_servicio_desc").submit(actualiza_dato_servicio_desc);
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
+    $(".form_link_maps").submit(actualiza_link_maps);
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
     $(".foto_producto").click(elimina_foto_producto);
     $(".imagen_principal").click(place_load_imgimagen_principal);
@@ -707,6 +708,20 @@ let actualiza_dato_servicio_youtube = e => {
             carga_informacion_servicio(1);
         });
     }
+    e.preventDefault();
+};
+
+let actualiza_link_maps = e => {
+    
+        /* Validamos que la url realmente sea de youtube */
+        let url = "../q/index.php/api/servicio/q/format/json/";
+        let data_send = $(".form_link_maps").serialize() + "&" + $.param({
+            "id_servicio": get_option("servicio")
+        });
+        request_enid("PUT", data_send, url, function (data) {
+            carga_informacion_servicio(1);
+        });
+    
     e.preventDefault();
 };
 
