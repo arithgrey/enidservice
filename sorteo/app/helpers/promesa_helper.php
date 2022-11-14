@@ -262,6 +262,7 @@ if (!function_exists('invierte_date_time')) {
         
         $z[] = d(_titulo($nombre, 0, "borde_end p-1"), "mb-4 row mt-3");
         $z[] = d(money($precio),'f25 colo_precio_enid row');
+        $z[] = ubicacion_entrega($servicio);
 
         if (strlen($descripcion) > 5) {
 
@@ -353,6 +354,19 @@ if (!function_exists('invierte_date_time')) {
             
         }
         return $response;
+    }
+    function ubicacion_entrega($servicio){
+
+        $response  = [];
+        $link_maps =  pr($servicio,  "link_maps");
+        if(strlen($link_maps) > 5){
+
+            $response[] =  d("Ubicación donde será entregado el sorteo",'borde_green p-1');
+            $response[] = pr($servicio, "link_maps"); 
+
+        }
+        return d($response,13);
+
     }
 
 
