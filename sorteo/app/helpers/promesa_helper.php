@@ -5,7 +5,8 @@ use App\View\Components\titulo;
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function construye_galeria_imagenes($data){
+    function construye_galeria_imagenes($data)
+    {
 
         $imgs = $data["imgs"];
         $nombre = pr($data["servicio"], "nombre_servicio");
@@ -25,11 +26,11 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $seccion_imagenes[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
-        return d($seccion_imagenes,13);
-        
+        return d($seccion_imagenes, 13);
     }
     function render_plano($data, $id_servicio)
     {
+
 
         $numero_boletos = pr($data["boletos"], "boletos");
         $boletos = [];
@@ -46,14 +47,17 @@ if (!function_exists('invierte_date_time')) {
                 d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
                 </svg>';
 
+            $boleto_compra = busqueda_boleto_pago($b, $data["boletos_comprados"]);
 
-            $disponible = busqueda_boleto_pago($b, $data["boletos_comprados"]);
+            $disponible = $boleto_compra["disponibilidad"];
+            $usuario_compra = $boleto_compra["usuario_compra"];
+
             $extra = ($disponible < 1) ?
                 "border border-secondary cursor_pointer agregar_deseos_sin_antecedente  numero_boleto"
                 :
-                "cursor_pointer blue_bg white borde_green numero_boleto";
+                "cursor_pointer blue_bg white borde_green numero_boleto usuario_compra_ticket";
 
-            $tick_numero = _text("ticket_n_",$b);
+            $tick_numero = _text("ticket_n_", $b);
             $curpo_boleto = flex(
                 $b,
                 $icono,
@@ -63,16 +67,16 @@ if (!function_exists('invierte_date_time')) {
                 "d-flex",
                 [
                     "id" => $id_servicio,
-                    "numero_boleto" => $b
+                    "numero_boleto" => $b,
+                    "usuario_compra" => $usuario_compra
                 ]
             );
 
-            $boletos[] = d($curpo_boleto,'col-xs-3 col-sm-2 mt-3');
-            
+            $boletos[] = d($curpo_boleto, 'col-xs-3 col-sm-2 mt-3');
         }
-        
 
-        $seccion_tickets[] =  d(d(d("Pulsa en los tickets para agregar al carrito tus boletos deseados",'col-sm-12 display-8 borde_end p-2 black strong'), 12),'row mb-5');
+
+        $seccion_tickets[] =  d(d(d("Pulsa en los tickets para agregar al carrito tus boletos deseados", 'col-sm-12 display-8 borde_end p-2 black strong'), 12), 'row mb-5');
         $seccion_tickets[] =  d(d(flex("", "Disponibles", "align-items-center", "mr-4 borde_yellow border border-secondary p-4", "f12  black "), 12), 13);
         $seccion_tickets[] =  d(d(flex("", "Comprados", "align-items-center mt-3 ", "mr-4  blue_bg white borde_green p-4", "f12  black "), 12), 13);
         $seccion_tickets[] =  d($boletos, 13);
@@ -84,32 +88,41 @@ if (!function_exists('invierte_date_time')) {
         $seccion_ficha_servicio[] =  $ficha_servicio;
 
         $response[] =  d(append($seccion_ficha_servicio), 4);
-        $response[] =  d($seccion_tickets,6);
-        $response[] =  d(enviar_compra(),2);
-        return d(d($response,13),10,1);
+        $response[] =  d($seccion_tickets, 6);
+        $response[] =  d(enviar_compra(), 2);
+        $response[] = d(modal_usuario_venta(),12);
+        return d(d($response, 13), 10, 1);
     }
-    function enviar_compra(){
-        
-        $response[] = d("",["class"=> "tickets_apartados"]);
-        $response[] =  d(d("Comprar tickets",
-        [
-            "class" => "border text-center pb-3 pt-3 p-2 col text-uppercase d-block"
-        ]),'simular_compra');
-        $response[] = d(format_link("Comprar tickets",["href" => path_enid("lista_deseos")]), 'd-none enviar_orden');
+    function enviar_compra()
+    {
+
+        $response[] = d("", ["class" => "tickets_apartados"]);
+        $response[] =  d(d(
+            "Comprar tickets",
+            [
+                "class" => "border text-center pb-3 pt-3 p-2 col text-uppercase d-block"
+            ]
+        ), 'simular_compra');
+        $response[] = d(format_link("Comprar tickets", ["href" => path_enid("lista_deseos")]), 'd-none enviar_orden');
         return append($response);
     }
-    function busqueda_boleto_pago($numero_boleto, $boletos_pagos){
+    function busqueda_boleto_pago($numero_boleto, $boletos_pagos)
+    {
 
         $response  = 0;
-        foreach($boletos_pagos as $row){
+        $id_usuario = 0;
+        foreach ($boletos_pagos as $row) {
 
             $numero_boleto_pago = $row["numero_boleto"];
-            if($numero_boleto == $numero_boleto_pago){
-                $response ++;
+
+            if ($numero_boleto == $numero_boleto_pago) {
+                $id_usuario = $row["id_usuario"];
+                $response++;
                 break;
             }
         }
-        return $response;
+
+        return ["disponibilidad"  => $response, "usuario_compra" => $id_usuario];
     }
     function render($data, $param)
     {
@@ -166,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
 
         return d($response, 8, 1);
     }
-    
+
     function img_lateral($param, $nombre_servicio, $is_mobile)
     {
 
@@ -251,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
         $servicio = $data["servicio"];
         $imgs = $data["imgs"][0];
         $descripcion = pr($servicio, "descripcion");
-        $nombre = pr($servicio, "nombre_servicio");        
+        $nombre = pr($servicio, "nombre_servicio");
         $es_servicio = pr($servicio, "flag_servicio");
         $es_nuevo = pr($servicio, "flag_nuevo");
         $marca = pr($servicio, "marca");
@@ -259,9 +272,9 @@ if (!function_exists('invierte_date_time')) {
         $peso = pr($servicio, "peso");
         $capacidad = pr($servicio, "capacidad");
         $precio = pr($servicio, "precio");
-        
+
         $z[] = d(_titulo($nombre, 0, "borde_end p-1"), "mb-4 row mt-3");
-        $z[] = d(money($precio),'f25 colo_precio_enid row');
+        $z[] = d(money($precio), 'f25 colo_precio_enid row');
         $z[] = ubicacion_entrega($servicio);
 
         if (strlen($descripcion) > 5) {
@@ -282,15 +295,15 @@ if (!function_exists('invierte_date_time')) {
 
         $yt = pr($servicio, "url_vide_youtube");
         $i = pre_youtube($imgs, $yt);
-        
-        
+
+
         $contenido_descripcion = append($z);
         $imagen = $i["img"];
-        
-        $response[] = d($contenido_descripcion,12);
-        $response[] = d($imagen,12);
 
-        return d($response,13);
+        $response[] = d($contenido_descripcion, 12);
+        $response[] = d($imagen, 12);
+
+        return d($response, 13);
     }
     function get_tipo_articulo($es_nuevo, $es_servicio)
     {
@@ -350,25 +363,29 @@ if (!function_exists('invierte_date_time')) {
             );
             $texto_editar = d($editar, 13);
             $response = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
-
-            
         }
         return $response;
     }
-    function ubicacion_entrega($servicio){
+    function ubicacion_entrega($servicio)
+    {
 
         $response  = [];
         $link_maps =  pr($servicio,  "link_maps");
-        if(strlen($link_maps) > 5){
+        if (strlen($link_maps) > 5) {
 
-            $response[] =  d("Ubicación donde será entregado el sorteo",'borde_green p-1');
-            $response[] = pr($servicio, "link_maps"); 
-
+            $response[] =  d("Ubicación donde será entregado el sorteo", 'borde_green p-1');
+            $response[] = pr($servicio, "link_maps");
         }
-        return d($response,13);
-
+        return d($response, 13);
     }
+    function modal_usuario_venta()
+    {
 
-
-
+        $form[] = d(_titulo('Boleto comprado por:'), 'text-center text-md-left row');    
+        $form[] = d(flex("Nombre", place("nombre_comprador"), _text_('borde_end_b p-2 f12 mt-5',_between), "strong"),13);
+        $form[] = d(flex("Teléfono", place("telefono_comprador"), _text_('borde_end_b p-2 f12 mt-5',_between), "strong"),13);
+        $form[] = d(flex("Número", place('place_numero_boleto bg_black white p-3 strong f13 borde_amarillo'),'flex-column mx-auto mt-3 text-center','f15 strong text-center'),13);        
+        $modal = d($form,12);
+        return gb_modal($modal, "modal_usuario_compra");
+    }
 }
