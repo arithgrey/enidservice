@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $seccion_imagenes[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
-        return $seccion_imagenes;
+        return d($seccion_imagenes,13);
         
     }
     function render_plano($data, $id_servicio)
@@ -78,7 +78,11 @@ if (!function_exists('invierte_date_time')) {
         $seccion_tickets[] =  d($boletos, 13);
 
         $seccion_imagenes = construye_galeria_imagenes($data);
-        $response[] =  d($seccion_imagenes,4);
+        $ficha_servicio = ficha_servicio($data);
+        $seccion_ficha_servicio[] =  $seccion_imagenes;
+        $seccion_ficha_servicio[] =  $ficha_servicio;
+
+        $response[] =  d(append($seccion_ficha_servicio), 4);
         $response[] =  d($seccion_tickets,6);
         $response[] =  d(enviar_compra(),2);
         return d(d($response,13),10,1);
@@ -240,4 +244,92 @@ if (!function_exists('invierte_date_time')) {
         ];
         return $response;
     }
+    function ficha_servicio($data)
+    {
+
+        $servicio = $data["servicio"];
+        $imgs = $data["imgs"][0];
+        $descripcion = pr($servicio, "descripcion");
+        $nombre = pr($servicio, "nombre_servicio");        
+        $es_servicio = pr($servicio, "flag_servicio");
+        $es_nuevo = pr($servicio, "flag_nuevo");
+        $marca = pr($servicio, "marca");
+        $dimension = pr($servicio, "dimension");
+        $peso = pr($servicio, "peso");
+        $capacidad = pr($servicio, "capacidad");
+        
+        $z[] = d(_titulo($nombre, 0, "borde_end p-1"), "mb-4 row mt-3");
+
+        if (strlen($descripcion) > 5) {
+
+            $z[] = d($descripcion, 'mt-4 mb-4');
+        }
+
+        $z[] = get_tipo_articulo($es_nuevo, $es_servicio);
+        $z[] = validador_atributo($marca, 'Marca');
+        $z[] = validador_atributo($dimension, 'Dimensiones');
+        if ($peso > 0) {
+            $z[] = validador_atributo($peso, 'Peso', 'KG');
+        }
+
+        if ($capacidad > 0) {
+            $z[] = validador_atributo($capacidad, 'Capacidad', "KG");
+        }
+
+        $yt = pr($servicio, "url_vide_youtube");
+        $i = pre_youtube($imgs, $yt);
+        
+        
+        $contenido_descripcion = append($z);
+        $imagen = $i["img"];
+        
+        $response[] = d($contenido_descripcion,12);
+        $response[] = d($imagen,12);
+
+        return d($response,13);
+    }
+    function get_tipo_articulo($es_nuevo, $es_servicio)
+    {
+
+        return ($es_servicio == 0 && $es_nuevo == 0) ? d('ARTÍCULO USADO') : "";
+    }
+    function validador_atributo($atributo, $texto, $extra = '')
+    {
+
+        $response = '';
+        if (strlen($atributo) > 0) {
+
+            $response = d(_text_(strong($texto), $atributo, $extra));
+        }
+        return $response;
+    }
+    function pre_youtube($imgs, $youtube)
+    {
+        $f = 1;
+        $response = img(
+            [
+                'src' => $imgs["principal"]
+            ]
+        );
+
+        if (strlen($youtube) > 5) {
+
+            $response = iframe(
+                [
+                    "height" => (is_mobile() == 0) ? "500px" : "400px",
+                    "src" => $youtube,
+                    "frameborder" => '0',
+                    "allow" => 'autoplay',
+                    "class" => "w-100"
+                ]
+            );
+            $f = 0;
+        }
+        return [
+            "img" => $response,
+            "es_imagen" => $f
+        ];
+    }
+
+
 }
