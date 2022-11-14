@@ -79,6 +79,7 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion_imagenes = construye_galeria_imagenes($data);
         $ficha_servicio = ficha_servicio($data);
+        $seccion_ficha_servicio[] = editar($data, $id_servicio);
         $seccion_ficha_servicio[] =  $seccion_imagenes;
         $seccion_ficha_servicio[] =  $ficha_servicio;
 
@@ -257,12 +258,14 @@ if (!function_exists('invierte_date_time')) {
         $dimension = pr($servicio, "dimension");
         $peso = pr($servicio, "peso");
         $capacidad = pr($servicio, "capacidad");
+        $precio = pr($servicio, "precio");
         
         $z[] = d(_titulo($nombre, 0, "borde_end p-1"), "mb-4 row mt-3");
+        $z[] = d(money($precio),'f25 colo_precio_enid row');
 
         if (strlen($descripcion) > 5) {
 
-            $z[] = d($descripcion, 'mt-4 mb-4');
+            $z[] = d($descripcion, 'mt-4 mb-4 row');
         }
 
         $z[] = get_tipo_articulo($es_nuevo, $es_servicio);
@@ -308,7 +311,8 @@ if (!function_exists('invierte_date_time')) {
         $f = 1;
         $response = img(
             [
-                'src' => $imgs["principal"]
+                'src' => $imgs["principal"],
+                "class" => "row"
             ]
         );
 
@@ -320,7 +324,7 @@ if (!function_exists('invierte_date_time')) {
                     "src" => $youtube,
                     "frameborder" => '0',
                     "allow" => 'autoplay',
-                    "class" => "w-100"
+                    "class" => "w-100 row"
                 ]
             );
             $f = 0;
@@ -330,6 +334,27 @@ if (!function_exists('invierte_date_time')) {
             "es_imagen" => $f
         ];
     }
+    function editar($data, $id_servicio)
+    {
+
+        $response = "";
+        if (es_administrador($data)) {
+
+            $editar = a_enid(
+                text_icon('fa fa-pencil', "EDITAR"),
+                [
+                    "href" => path_enid("editar_producto", $id_servicio),
+                    "class" => "black strong  p-3 col-lg-2"
+                ]
+            );
+            $texto_editar = d($editar, 13);
+            $response = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
+
+            
+        }
+        return $response;
+    }
+
 
 
 }
