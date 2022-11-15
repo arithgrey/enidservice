@@ -11,6 +11,8 @@ let $saldo_cubierto_pos_venta = $('.saldo_cubierto_pos_venta');
 let $status_venta = $('.status_venta');
 let $modal_estado_venta = $('#modal_estado_venta');
 let $modal_envio_reparto = $("#modal_envio_reparto");
+let $modal_envio_pago_ticket = $("#modal_envio_pago_ticket");
+
 let $editar_estado_compra = $('.editar_estado_compra');
 let $selector_estados_ventas = $('.selector_estados_ventas');
 let $status_venta_registro = $('.status_venta_registro');
@@ -24,8 +26,11 @@ let $telefono_contacto_recibo = $('.telefono_contacto_recibo');
 let $edicion_cantidad = $('.edicion_cantidad');
 let $eliminar_producto_orden_compra = $(".eliminar_producto_orden_compra");
 let $id_status = $(".id_status");
+let $es_sorteo = $(".es_sorteo");
+
 let $botton_enviar_reparto = $(".botton_enviar_reparto");
 let $botton_enviar_despues = $(".botton_enviar_despues");
+let $botton_ticket_pendiente = $(".botton_ticket_pendiente");
 
 let $seccion_cantidad = $('.seccion_cantidad');
 let $seccion_edicion_cantidad = $('.seccion_edicion_cantidad');
@@ -86,12 +91,24 @@ let valida_envio_reparto = () => {
 
     if (status == 16 && saldo_cubierto < 1) {
 
-        $modal_envio_reparto.modal("show");
-        $botton_enviar_despues.click(function () {
-            $modal_envio_reparto.modal("hide");
-        });
+        if($es_sorteo.val()){
+            
+            $modal_envio_pago_ticket.modal("show");
+            $botton_ticket_pendiente.click(function () {
+                $modal_envio_pago_ticket.modal("hide");
+            });
+    
 
-        $botton_enviar_reparto.click(confirma_envio_reparto);
+        }else{
+
+            $modal_envio_reparto.modal("show");
+            $botton_enviar_despues.click(function () {
+                $modal_envio_reparto.modal("hide");
+            });
+    
+            $botton_enviar_reparto.click(confirma_envio_reparto);
+        }
+        
 
     }
 
