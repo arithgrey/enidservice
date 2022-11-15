@@ -1321,7 +1321,8 @@ let path_enid = (indice, $extra = '') => {
         "entregas": 'entregas',
         "reventa": 'reventa',
         "galeria": '',
-        "servicio": "producto/?producto=" 
+        "servicio": "producto/?producto=" ,
+        "sorteo": "sorteo/?q=" 
     };
 
     return _text('../', $base_url[indice], $extra);

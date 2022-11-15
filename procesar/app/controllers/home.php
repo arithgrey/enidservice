@@ -16,7 +16,7 @@ class Home extends CI_Controller
     function index()
     {
 
-        $param = $this->input->post();
+        $param = $this->input->post();        
         $tiene_num_ciclos = es_data($param) && array_key_exists("num_ciclos", $param);
         $num_ciclos = ($tiene_num_ciclos) ? ctype_digit($param["num_ciclos"]) : 0;
         $id_servicio = prm_def($param, 'id_servicio');
@@ -192,8 +192,7 @@ class Home extends CI_Controller
 
     private function add_domicilio_entrega($param)
     {
-
-        
+    
         if (es_data($param)) {
         
             $data = $this->app->session();

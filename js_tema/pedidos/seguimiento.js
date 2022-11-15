@@ -17,9 +17,11 @@ let $modal_ingresar_cancelacion =  $('#modal_ingresar_cancelacion');
 let $confirma_cancelacion = $('.confirma_cancelacion');
 let $seccione_opciones_cancelado = $('.seccione_opciones_cancelado');
 let $seccion_opciones = $('.seccion_opciones');
+let $es_sorteo = $('.es_sorteo');
 
 $(document).ready(function () {
 
+    
     valida_notificacion_pago();
     carga_productos_sugeridos();
     $notifica_entrega.click(notifica_entrega_cliente);
@@ -31,8 +33,19 @@ $(document).ready(function () {
     $confirma_cancelacion.click(lista_motivos_cancelacion);
     $form_ingreso_cancelacion.submit(ingreso_cancelacion);
     $sin_deseo_puntos.click(no_desea_puntos);
+    valida_compra_sorteo();
+
+
 
 });
+let valida_compra_sorteo = () => {
+
+    let $sorteo = parseInt($es_sorteo.val());   
+    if( $sorteo > 0){ 
+        $(".titulo_pago_pedido").text("¿Ya se pagó el ticket?");
+        $('#modal_notificacion_entrega').modal("show");                
+    }
+};
 let valida_notificacion_pago = () => {
 
     let proceso = get_parameter(".notificacion_pago");
@@ -118,8 +131,16 @@ let confirma_entrega_cliente = function () {
 let response_confirma_entrega_cliente = function (data) {
 
     if (data === true) {
-        $form_confirmacion_entrega.addClass('d-none');        
-        $form_puntos.removeClass('d-none');
+        
+        if(parseInt($(".numero_boleto").val()) > 0){
+            
+            let $id_servicio = $(".id_servicio").val();
+            redirect(path_enid("sorteo", $id_servicio));
+            
+        }else{
+            $form_confirmacion_entrega.addClass('d-none');        
+            $form_puntos.removeClass('d-none');
+        }
 
     }
 }

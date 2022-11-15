@@ -90,6 +90,8 @@ if (!function_exists('invierte_date_time')) {
 
         $id_status = pr($productos_orden_compra, 'status');
 
+        $es_sorteo = (pr($productos_orden_compra, 'numero_boleto') > 0 );
+
 
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
         $re[] = notificacion_lista_negra($data);
@@ -150,9 +152,11 @@ if (!function_exists('invierte_date_time')) {
             $es_venta_cancelada
         );
         $response[]  = enviar_a_reparto_modal();
+        $response[] = enviar_pago_ticket_modal($id_orden_compra);
         $response[] = hiddens(['class' => 'id_usuario_referencia', 'value' => $data['id_usuario_referencia']]);
         $response[] = hiddens(['class' => 'es_lista_negra', 'value' => es_lista_negra($data)]);
         $response[] = hiddens(['class' => 'id_status', 'value' => $id_status]);
+        $response[] = hiddens(['class' => 'es_sorteo', 'value' => $es_sorteo]);
         $response[] = hiddens(['class' => 'es_venta_cancelada', 'value' => $es_venta_cancelada]);
         $response[] = hiddens(['class' => 'saldo_cubierto', 'value' => $saldo_cubierto]);
 
@@ -243,6 +247,25 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] =  flex($enviar, $despues, _between);
 
         return gb_modal($contenido, 'modal_envio_reparto');
+    }
+
+    function enviar_pago_ticket_modal($id_orden_compra)
+    {
+
+        $contenido[] = d(_titulo('¿Ya se pagó el boleto?'), 'mb-5  text-center');
+
+        $enviar = format_link(
+            "Sí, notificar como pagado",
+            [
+                "class" => "botton_enviar_reparto",
+                "href" => path_enid("pedido_seguimiento", _text($id_orden_compra,'&sorteo=999'))
+
+            ]
+        );
+        $despues = format_link("Está pendiente", ["class" =>  "botton_ticket_pendiente red_enid"], 0);
+        $contenido[] =  flex($enviar, $despues, _between);
+
+        return gb_modal($contenido, 'modal_envio_pago_ticket');
     }
 
 
@@ -459,6 +482,12 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = hiddens(
             [
+                "value" => prm_def($params,"sorteo"),
+                "class" => "es_sorteo",
+            ]
+        );
+        $r[] = hiddens(
+            [
                 "value" => $data["orden"],
                 "class" => "orden"
             ]
@@ -470,6 +499,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $r[] = gb_modal(notifica_entrega_modal($productos_orden_compra, $data), 'modal_notificacion_entrega');
+        
 
 
         $response[] = d($r, 8, 1);
@@ -577,6 +607,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $es_vendedor = $data["es_vendedor"];
+        
         $r[] = _titulo("¿Dónde se encuentra mi pedido?");
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
@@ -1362,6 +1393,7 @@ if (!function_exists('invierte_date_time')) {
         if (!is_mobile()) {
 
             $r[] = enviar_a_reparto($data, $es_venta_cancelada, $status_ventas);
+            
             $r[] = repatidor($data, $id_recibo);
         }
 
@@ -1468,8 +1500,9 @@ if (!function_exists('invierte_date_time')) {
     function notifica_entrega_modal($recibo, $data)
     {
 
+        
         $id_orden_compra = $data["id_orden_compra"];
-        $form_entrega[] = _titulo('¿Ya entregaste este pedido?');
+        $form_entrega[] = _titulo('¿Ya entregaste este pedido?',0,'titulo_pago_pedido');
 
         $productos_orden_compra = $data["productos_orden_compra"];
         $recompensa = $data["recompensa"];
@@ -1488,10 +1521,19 @@ if (!function_exists('invierte_date_time')) {
         $form_entrega[] = hiddens(['name' => 'status', 'value' => 15]);
         $form_entrega[] = hiddens(['name' => 'es_proceso_compra', 'value' => '']);
         $form_entrega[] = hiddens(['name' => 'tipo_entrea', 'value' => $tipo_entrega]);
+
+        $numero_boleto = pr($recibo,"numero_boleto");
+        $id_servicio = pr($recibo,"id_servicio");
+
+        $form_entrega[] = hiddens(['class' => 'numero_boleto', 'value' => $numero_boleto]);
+        $form_entrega[] = hiddens(['class' => 'id_servicio', 'value' => $id_servicio]);
+
+
         $form_entrega[] = form_close();
 
         $confirmacion = format_link('Si', ['class' => 'selector_entrega']);
         $negacion = format_link('Aún no', ['class' => 'selector_negacion', 'data-dismiss' => 'modal'], 0);
+
         $form_entrega[] = flex($confirmacion, $negacion, _text_(_between, _mbt5));
         $form[] = d($form_entrega, 'form_confirmacion_entrega');
         $form[] = form_envio_puntos($id_usuario_compra, $id_recibo, $deuda);
@@ -3622,28 +3664,21 @@ if (!function_exists('invierte_date_time')) {
         if ($numero_boleto > 0) {
 
 
-            $icono = '<svg xmlns="http://www.w3.org/2000/svg" 
-                fill="none" 
-                viewBox="0 0 24 24"                 
-                stroke-width="1.5"                
-                stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" 
-                stroke-linejoin="round" 
-                d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
-                </svg>';
-
-
+            $icono = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 6v.75m0 3v.75m0 3v.75m0 3V18m-9-5.25h5.25M7.5 15h3M3.375 5.25c-.621 0-1.125.504-1.125 1.125v3.026a2.999 2.999 0 010 5.198v3.026c0 .621.504 1.125 1.125 1.125h17.25c.621 0 1.125-.504 1.125-1.125v-3.026a2.999 2.999 0 010-5.198V6.375c0-.621-.504-1.125-1.125-1.125H3.375z" />
+          </svg>
+          ';
 
             $extra = "blue_bg white borde_green numero_boleto";
 
-            $curpo_boleto = flex(
+            $curpo_boleto = d(flex(
                 $numero_boleto,
                 $icono,
-                _text_(_between, 'p-2 ', $extra),
-                _text_("p-2 h-100", '')
-            );
+                _text_(_between, 'p-2 ', $extra)
+                
+            ),13);
         }
-        return d($curpo_boleto,'w-25 mx-auto');
+        return d($curpo_boleto,'mx-auto');
     }
     function crea_seccion_productos($productos_orden_compra)
     {
