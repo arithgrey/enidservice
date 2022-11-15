@@ -385,7 +385,6 @@ class serviciosmodel extends CI_Model
     function busqueda($param)
     {
 
-
         $busqueda = $this->get_resultados_posibles($param);
         $response["total_busqueda"] = $busqueda['num_servicios'];
         $where = $busqueda['where'];        
@@ -439,6 +438,7 @@ class serviciosmodel extends CI_Model
         $extra_empresa = ($id_usuario > 0 && $vendedor < 1) ? " AND id_usuario = " . $id_usuario : "";
         $extra_empresa = (prm_def($param, "global") > 0) ? " " : $extra_empresa;
         $extra_vendedor = ($vendedor > 0) ? " AND id_usuario =  '" . $vendedor . "'" : "";
+        $extra_rifa = (prm_def($param,'es_sorteo') > 0 ) ? 'AND es_sorteo = 1 ':'';
 
         $orden = $this->get_orden($param);
 
@@ -465,6 +465,7 @@ class serviciosmodel extends CI_Model
                     " . $extra_existencia . "                           
                     " . $no_empresa . "   
                     " . $extra_clasificacion . "
+                    " . $extra_rifa . "
                     " . $sql_match . "
                     " . $orden . "
                     " . $limit;

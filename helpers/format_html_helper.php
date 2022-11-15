@@ -1808,6 +1808,7 @@ function opciones_populares()
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
+
     $response[] = a_enid(
         "NOVEDADES",
         [
@@ -1818,7 +1819,13 @@ function opciones_populares()
             )
         ]
     );
-
+    $response[] = a_enid(
+        "SORTEOS",
+        [
+            "class" => "white mt-2 underline border-right frecuentes ",
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4&sorteo=99")
+        ]
+    );
     /*
     $response[] = a_enid(
         "PROMOCIONES",
@@ -1836,19 +1843,6 @@ function opciones_populares()
             "href" => path_enid("clientes")
         ]
     );
-
-    /*
-    $response[] = a_enid(
-        "Como marcar tu abdomen",
-        [
-            "class" => "white  fp8 frecuentes text-uppercase click_facebook_videos_abdomen",
-            "href" => path_enid("enid_service_facebook_videos",0,1),
-            "target" =>"_black"
-            
-        ]
-    );
-    */
-
 
     $response[] = a_enid(
         icon(_text_(_facebook_icon, 'white')),
@@ -1888,7 +1882,7 @@ function opciones_adicionales_navegacion()
         "PRUEBA EN CASA",
         [
             "class" => "black  cursor_pointer  
-            frecuentes strong p-1 prueba_en_casa borde_end col-xs-4",
+            frecuentes strong p-1 prueba_en_casa borde_end col-xs-3",
             "onclick" => "log_operaciones_externas(48)",
         ]
 
@@ -1898,35 +1892,21 @@ function opciones_adicionales_navegacion()
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
             "class" => "strong black"
         ]),
-        "text-capitalize col-xs-4 "
+        "text-capitalize col-xs-3 "
     );
-    /*
-    $opciones[] = d(a_enid("NOVEDADES", [
-        "href" => path_enid("search","/?q2=0&q=&order=1"),
-        "class" => "strong black"
-    ]), "text-capitalize col-xs-4 text-center");
-    */
-    /*
-    $opciones[] = d(a_enid("PROMOCIONES", [
-        "href" => path_enid("promociones"),
-        "class" => "black"
-    ]), "text-capitalize  col-xs-4 text-center");
-    */
-
+    
+    $opciones[] = d(a_enid(
+        "SORTEOS",
+        [
+            "class" => "strong black",
+            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4&sorteo=99")
+        ]
+    ), "text-capitalize  col-xs-3");
 
     $opciones[] = d(a_enid("CLIENTES", [
         "href" => path_enid("clientes"),
         "class" => "strong black"
-    ]), "text-capitalize  col-xs-4");
-
-    /*
-    $opciones[] = d(a_enid("Como marcar tu abdomen", [
-        "href" => path_enid("enid_service_facebook_videos",0,1),
-        "class" => "black",
-        'target' => 'black',
-    ]), "text-uppercase click_facebook_videos_abdomen  col-xs-7");
-    */
-
+    ]), "text-capitalize  col-xs-3");
 
     $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom ');
     return append($response);

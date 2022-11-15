@@ -39,7 +39,8 @@ class Home extends CI_Controller
             "resultados_por_pagina" => 50,
             "agrega_clasificaciones" => (!$is_mobile),
             "in_session" => 0,
-            "page" => $pagina
+            "page" => $pagina,
+            "es_sorteo" => prm_def($param, "sorteo")
 
         ];
 
