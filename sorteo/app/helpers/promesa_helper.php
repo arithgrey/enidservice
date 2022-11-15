@@ -34,6 +34,8 @@ if (!function_exists('invierte_date_time')) {
 
         $numero_boletos = pr($data["boletos"], "boletos");
         $boletos = [];
+        $boletos_pagos = 0;
+        $boletos_por_pago = 0;
         for ($b = 1; $b <= $numero_boletos; $b++) {
 
             $icono = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -44,6 +46,12 @@ if (!function_exists('invierte_date_time')) {
             $boleto_compra = busqueda_boleto_pago($b, $data["boletos_comprados"]);
 
             $disponible = $boleto_compra["disponibilidad"];
+            if($disponible < 1){
+                $boletos_por_pago ++;
+            }else{
+                $boletos_pagos ++;
+                
+            }
             $usuario_compra = $boleto_compra["usuario_compra"];
 
             $extra = ($disponible < 1) ?
@@ -73,6 +81,9 @@ if (!function_exists('invierte_date_time')) {
         $seccion_tickets[] =  d(d(d("Pulsa en los tickets para agregar al carrito tus boletos deseados", 'col-sm-12 display-8 borde_end p-2 black strong'), 12), 'row mb-5');
         $seccion_tickets[] =  d(d(flex("", "Disponibles", "align-items-center", "mr-4 borde_yellow border border-secondary p-4", "f12  black "), 12), 13);
         $seccion_tickets[] =  d(d(flex("", "Comprados", "align-items-center mt-3 ", "mr-4  blue_bg white borde_green p-4", "f12  black "), 12), 13);
+        $seccion_tickets[] =  d(d(flex( $boletos_pagos, "Vendidos hasta el momento", "align-items-center mt-3 borde_green p-1", "mr-4 strong f12", "  black "), 12), 13);
+        $seccion_tickets[] =  d(d(flex( $boletos_por_pago, "Disponibles", "align-items-center mt-3 borde_green p-1", "mr-4 strong f12", "  black "), 12), 13);
+
         $seccion_tickets[] =  d($boletos, 13);
 
         $seccion_imagenes = construye_galeria_imagenes($data);
