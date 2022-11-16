@@ -291,7 +291,7 @@ if (!function_exists('invierte_date_time')) {
         $hoy = $fecha->format('Y-m-d');
         $dias_restantes = date_difference($hoy,$fecha_termino);
         
-        $textos_fechas_dias = _text_("Faltan", $dias_restantes,'para el evento');
+        $textos_fechas_dias = _text_("Faltan", $dias_restantes,'días para el evento');
         if($hoy > $fecha_termino){
             $textos_fechas_dias = _text_("El evento fué hace", $dias_restantes,'días');
         }
