@@ -40,7 +40,21 @@ if (!function_exists('invierte_date_time')) {
             $restantes = $meta - $logros;
             
             $promedio_venta = $meta / $dias;
-            $totales_textos  = d(_text_($logros, "de", $meta, "faltan", $restantes,'ventas, la cantidadde ventas promedio por día para lograr el objetivo son',$promedio_venta),'black  strong borde_end_b');
+
+
+            $fecha = horario_enid();
+            $hoy = $fecha->format('Y-m-d');
+            $dias_restantes = date_difference($hoy, $fecha_promesa);
+             
+                
+
+            $totales_textos  = d(_text_($logros, "de", $meta, "faltan", $restantes,'ventas, 
+            la cantidadde ventas promedio por 
+            día para lograr el objetivo son',$promedio_venta),'black  strong borde_end_b');
+
+            
+
+
             $texto_meta =  d(
                 _text_(   
                     "Meta del"                 ,
@@ -50,19 +64,34 @@ if (!function_exists('invierte_date_time')) {
                 ),'black fp9'
             );
 
+            $texto_dias_restantes = d(_text_("Días que restan para llegar al objetivo",  $dias_restantes),'strong f13');
+
+            $texto_finalizo = d(
+                _text_(
+                    'Esté objetivo perminó el', 
+                    format_fecha($fecha_promesa)),
+                    'bg_black white p-2 mb-2 borde_amarillo'
+                );
+
+            $texto_objetivo_en_curso = d(
+                    _text_(
+                        'Objetivo en curso, finaliza el', 
+                        format_fecha($fecha_promesa)),
+                        'borde_amarillo p-2 mb-2 blue_enid3 white'
+                    );
+
+            $extra_fechas = ($hoy > $fecha_promesa) ? $texto_finalizo:$texto_objetivo_en_curso;
 
             $imagen_totales = d([
+                d($extra_fechas),
                 d($imagenes ,'strong black f14'), 
                 d($totales_textos,'mt-2'),
                 d($texto_meta,'mt-2'),
+                d($texto_dias_restantes, 'mt-2'),
                 d($vetas_fechas_totales["html"])
             ],' flex-row');
             $response[] = d(d($imagen_totales,'border border-secondary p-5 row mt-4'),12);
 
-            
-            
-            
-            
         }
 
 
