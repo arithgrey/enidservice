@@ -264,7 +264,8 @@ if (!function_exists('invierte_date_time')) {
         return $response;
     }
     function ficha_servicio($data)
-    {
+    {   
+        $sorteo = $data["boletos"];
 
         $servicio = $data["servicio"];
         $imgs = $data["imgs"][0];
@@ -280,6 +281,26 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = d(_titulo($nombre, 0, "borde_end p-1"), "mb-4 row mt-3");
         $z[] = d(money($precio), 'f25 colo_precio_enid row');
+
+        $fecha_termino = pr($sorteo, "fecha_termino");
+        $textos_fechas = _text_("Fecha del evento", format_fecha($fecha_termino));
+        $z[] = d($textos_fechas, 'f12 black row');
+
+
+        $fecha = horario_enid();
+        $hoy = $fecha->format('Y-m-d');
+        $dias_restantes = date_difference($hoy,$fecha_termino);
+        
+        $textos_fechas_dias = _text_("Faltan", $dias_restantes,'para el evento');
+        if($hoy > $fecha_termino){
+            $textos_fechas_dias = _text_("El evento fué hace", $dias_restantes,'días');
+        }
+        
+        $z[] = d($textos_fechas_dias, 'f12 black borde_end_b row');
+
+
+
+
         $z[] = ubicacion_entrega($servicio);
 
         if (strlen($descripcion) > 5) {
