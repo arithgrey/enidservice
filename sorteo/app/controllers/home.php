@@ -24,7 +24,8 @@ class Home extends CI_Controller
             
             /*Mapeo del plano*/
             
-            $data = $this->app->cssJs($data, "sorteo_venta");        
+            $data = $this->app->cssJs($data, "sorteo_venta");   
+            $this->app->log_acceso($data, 3, $id_servicio);     
             $data["boletos_comprados"] = $this->boletos_pagos($id_servicio);
             
             $data["servicio"] = $this->app->servicio($id_servicio);
