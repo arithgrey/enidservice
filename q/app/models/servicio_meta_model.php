@@ -44,8 +44,8 @@ class Servicio_meta_model extends CI_Model
 
         
         $query_get = _text_("SELECT * FROM 
-        servicio_meta WHERE DATE( fecha_registro ) 
-        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ");
+        servicio_meta WHERE DATE(fecha_registro) 
+        BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "' ORDER BY DATE(fecha_registro) DESC");
 
         return $this->db->query($query_get)->result_array();
     }
