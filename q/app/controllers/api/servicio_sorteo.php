@@ -58,12 +58,33 @@ class Servicio_sorteo extends REST_Controller
         }
         $this->response($response);
     }   
+    function usuario_boleto_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if (fx($param, "boleto,sorteo")) {
+
+            $id_servicio = $param["sorteo"];
+            $boleto = $param["boleto"];
+            
+            $recibo  = $this->servicio_sorteo_model->usuario_boleto($id_servicio, $boleto);
+            
+            $id_usuario = pr($recibo,"id_usuario");
+            $response = $this->app->usuario($id_usuario);            
+            
+
+            
+        }
+        $this->response($response);
+    }   
 
     private function servicio_sorteo($id_servicio)
     {
 
         return $this->app->api("servicio/sorteo", ["id_servicio"=> $id_servicio], "json", "PUT");
-    }
+    }   
 
 
     

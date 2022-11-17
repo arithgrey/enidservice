@@ -80,5 +80,18 @@ class Servicio_sorteo_model extends CI_Model
         return $this->db->query($query_get)->result_array();        
 
     }
+    function usuario_boleto($id_servicio, $boleto)
+    {
+
+        $query_get = "SELECT * FROM proyecto_persona_forma_pagos 
+        WHERE 
+        id_servicio = $id_servicio
+        AND  
+        numero_boleto =  $boleto";
+        
+        return $this->db->query($query_get)->result_array();        
+
+    }
+
 
 }

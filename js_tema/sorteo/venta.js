@@ -3,6 +3,8 @@ $(document).ready(() => {
 
     $('.agregar_deseos_sin_antecedente').click(agregar_deseo_sorteo);
     $('.usuario_compra_ticket').click(ver_usuario_compra_ticket);
+    valida_ticket_boleto();
+
 });
 
 let agregar_deseo_sorteo = function () {
@@ -87,12 +89,32 @@ let ver_usuario_compra_ticket = function () {
     }
 
 };
+
 let response_usuario_compra_ticket =  function(data){
 
+    
     data = data[0];
     let nombre = data.name;
     let tel_contacto = data.tel_contacto;
     $(".nombre_comprador").text(nombre);
     $(".telefono_comprador").text(tel_contacto);
+
+}
+let valida_ticket_boleto = function(){
+
+    let $boleto_comprado = $(".boleto_comprado").val();
+    let $sorteo = $(".numero_sorteo").val();
+    
+
+    if(parseInt($boleto_comprado) > 0 && parseInt($sorteo) > 0 ){
+
+        let url = "../q/index.php/api/servicio_sorteo/usuario_boleto/format/json/";
+        let data_send = {"boleto": $boleto_comprado, "sorteo": $sorteo};
+        request_enid("GET", data_send, url, response_usuario_compra_ticket);     
+        $("#modal_usuario_compra").modal('show');
+        $(".place_numero_boleto").text($boleto_comprado);
+
+        
+    }
 
 }

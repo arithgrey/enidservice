@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
     function render_plano($data, $id_servicio)
     {
 
-
+        
         $numero_boletos = pr($data["boletos"], "boletos");
         $boletos = [];
         $boletos_pagos = 0;
@@ -96,6 +96,11 @@ if (!function_exists('invierte_date_time')) {
         $response[] =  d($seccion_tickets, 6);
         $response[] =  d(enviar_compra(), 2);
         $response[] = d(modal_usuario_venta(),12);
+        
+        $response[] = hiddens(["class"=> "boleto_comprado" , "value" => $data["boleto"]]);
+        $response[] = hiddens(["class"=> "numero_sorteo" , "value" => $data["numero_sorteo"]]);
+        
+
         return d(d($response, 13), 10, 1);
     }
     function enviar_compra()
