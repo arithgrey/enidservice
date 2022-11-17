@@ -132,10 +132,11 @@ let response_confirma_entrega_cliente = function (data) {
 
     if (data === true) {
         
-        if(parseInt($(".numero_boleto").val()) > 0){
+        let $numero_boleto = $(".numero_boleto").val()
+        if(parseInt($numero_boleto) > 0){
             
             let $id_servicio = $(".id_servicio").val();
-            redirect(path_enid("sorteo", $id_servicio));
+            redirect(_text(path_enid("sorteo", $id_servicio),"&boleto=",$numero_boleto));
             
         }else{
             $form_confirmacion_entrega.addClass('d-none');        

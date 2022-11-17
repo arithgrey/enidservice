@@ -1126,7 +1126,6 @@ let verifica_formato_default_inputs = function (validacion = 1) {
                         $selector_current_label.classList.add('focused_input');
                     }
                 }
-
             }
         }
     }

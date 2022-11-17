@@ -28,6 +28,9 @@ class Home extends CI_Controller
             $this->app->log_acceso($data, 3, $id_servicio);     
             $data["boletos_comprados"] = $this->boletos_pagos($id_servicio);
             
+            $data["boleto"] = prm_def($param,"boleto");
+            $data["numero_sorteo"] = prm_def($param,"q");
+            
             $data["servicio"] = $this->app->servicio($id_servicio);
             $data["imgs"] = $this->app->imgs_productos($id_servicio, 1, 10);              
             $this->app->pagina($data, render_plano($data, $id_servicio), 1);
