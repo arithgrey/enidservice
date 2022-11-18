@@ -720,8 +720,8 @@ if (!function_exists('invierte_date_time')) {
                 $costo = pr($servicio, "costo");
                 $id_servicio = pr($servicio, "id_servicio");
                 $venta = porcentaje($precio, pr($servicio, "comision"));
-                $entrega = 150;
-                $otro_gas = 100;
+                $entrega = 220;
+                $otro_gas = 0;
                 $promedio_venta = 6;
 
                 $path = "venta=$venta&precio=$precio&costo=$costo&entrega=$entrega&otro=$otro_gas&promedio_venta=$promedio_venta";
