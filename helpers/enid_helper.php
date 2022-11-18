@@ -1187,6 +1187,21 @@ function footer_opciones()
     );
 
 
+    
+    
+    
+    
+    $oportunidades[] = a_enid(
+        d("Calculador de ganancias"," strong"),
+        [            
+            'class' => 'black fp9 borde_amarillo mt-2 p-3 ',
+            "href" => path_enid('simulador')
+            
+        ]
+    );
+
+
+
     $anuncio[] = d('¿Vendes artículos?',"black strong");
     $anuncio[] = d('Anúnciate aquí!');
     

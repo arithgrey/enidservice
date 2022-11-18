@@ -288,7 +288,7 @@ if (!function_exists('invierte_date_time')) {
         $z[] = d(money($precio), 'f25 colo_precio_enid row');
 
         $fecha_termino = pr($sorteo, "fecha_termino");
-        $textos_fechas = _text_("Fecha del evento", format_fecha($fecha_termino));
+        $textos_fechas = flex("Fecha del evento", format_fecha($fecha_termino),'','mr-3');
         $z[] = d($textos_fechas, 'f12 black row');
 
 
