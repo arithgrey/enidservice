@@ -187,6 +187,7 @@ let respuesta_informacion_servicio = (data) => {
     carga_sugerencias_meta_key_words();
     $(".agregar_img_servicio").click(carga_form_img);
     $(".text_costo").click(muestra_input_costo);
+    $(".text_precio_alto").click(muestra_input_precio_alto);
     $(".text_ciclo_facturacion").click(muestra_select_ciclo_facturacion);
     $(".text_nombre_servicio").click(muestra_seccion_nombre_servicio);
     $(".text_desc_servicio").click(muestra_seccion_desc_servicio);
@@ -197,6 +198,9 @@ let respuesta_informacion_servicio = (data) => {
     $(".text_info_envio").click(muestra_input_incluye_envio);
     $(".text_pagina_venta").click(muestra_seccion_url_pagina_web);
     $(".form_costo").submit(registra_costo_servicio);
+    
+    $(".form_precio_alto_descuento").submit(registra_precio_alto);
+
     $(".form_ciclo_facturacion").submit(registrar_ciclo_facturacion);
     $(".form_servicio_nombre_info").submit(actualiza_dato_servicio);
     $(".form_servicio_url_venta").submit(actualiza_dato_url_venta);
@@ -431,6 +435,12 @@ let muestra_input_costo = () => {
 
 };
 
+let muestra_input_precio_alto = () => {
+
+    let visible = $(".text_precio_alto").is(":visible");
+    muestra_input_visible(visible, ".input_precio_alto", ".text_precio_alto");
+
+};
 
 let muestra_input_producto_nuevo = () => {
 
@@ -531,7 +541,26 @@ let registra_costo_servicio = e => {
 
     e.preventDefault();
 };
+let registra_precio_alto = e => {
 
+    let $precio_alto = $('.precio_alto');
+    let $total_precio_unidad = $precio_alto.val();
+
+    if (es_float($total_precio_unidad) && $total_precio_unidad > 0) {
+
+        let url = "../q/index.php/api/servicio/precio_alto/format/json/";
+        let data_send = $(".form_precio_alto_descuento").serialize() + "&" + $.param({
+            "id_servicio": get_option("servicio")
+        });
+        request_enid("PUT", data_send, url, function (data) {
+            carga_informacion_servicio(4)
+        });
+    } else {
+        next_error($precio_alto);
+    }
+
+    e.preventDefault();
+}
 let actualiza_dato_servicio = e => {
 
     let url = "../q/index.php/api/servicio/q/format/json/";

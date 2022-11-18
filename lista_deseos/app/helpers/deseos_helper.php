@@ -517,6 +517,7 @@ if (!function_exists('invierte_date_time')) {
             $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
+            $precio_alto = $row["precio_alto"];
             $articulos = $row["articulos"];
             $id_recompensa = $row["id_recompensa"];
             $numero_boleto = $row["numero_boleto"];
@@ -527,6 +528,7 @@ if (!function_exists('invierte_date_time')) {
             $config = ["href" => $url_servicio, "target" => "_black"];
             $imagen = a_enid(img($row["url_img_servicio"]), $config);
             $text_precio = $precio * $articulos;
+            $text_precio_alto = $precio_alto * $articulos;
 
             $seleccionar_envio = input(
                 [
@@ -591,6 +593,11 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($x, 6);
             $z = [];
             $z[] = h(money($text_precio), 4, 'strong');
+            
+            if($precio_alto > $precio){
+                $z[] = h(del(money($text_precio_alto)), 5, ' red_enid');
+            }
+            
             $z[] = d($eliminar, "text-primary text-center");
 
             $es_servicio = $row["flag_servicio"];

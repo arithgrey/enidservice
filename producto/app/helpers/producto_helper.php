@@ -1007,10 +1007,12 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["info_servicio"]["servicio"];
         $descuento_especial = pr($servicio, "descuento_especial");
+        $precio_alto = pr($servicio, "precio_alto");
 
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);
         $texto_precio_base = ($precio_unidad > 0) ? _text($precio_unidad, "MXN") : "A CONVENIR";
+        
 
         $texto_premium = "";
         if ($es_premium) {
@@ -1023,6 +1025,16 @@ if (!function_exists('invierte_date_time')) {
 
             $in_session = $data["in_session"];
             $texto = d($texto_precio_base, "f25 colo_precio_enid");
+
+            $texto_precio_alto = '';
+            if($precio_alto > $precio_unidad){
+
+                $texto_precio_alto = d(_text($precio_alto, "MXN"), "red_enid mb-2");
+            }
+            
+
+            $texto = flex($texto,  del($texto_precio_alto),'flex-column');
+
 
             $seis_meses =  ($precio_unidad + porcentaje($precio_unidad, 8));
             $seis_meses_aplicado =  $seis_meses / 6;
