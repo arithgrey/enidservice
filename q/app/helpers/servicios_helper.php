@@ -461,6 +461,7 @@ if (!function_exists('invierte_date_time')) {
         $activo_visita_telefono = val_class(1, $telefono_visible, "button_enid_eleccion_active");
         $baja_visita_telefono = val_class(0, $telefono_visible, "button_enid_eleccion_active");
         $t[] = estado_publicacion($status, $id_servicio);
+        $t[] = form_precio_unidad_alto($servicio["precio_alto"]);
         $t[] = form_costo_unidad($precio, $comision, $descuento_especial);
         $t[] = form_comision($comision, $id_perfil, $id_servicio);
         $t[] = form_descuento_especial($descuento_especial, $id_perfil, $id_servicio);
@@ -1224,11 +1225,20 @@ if (!function_exists('invierte_date_time')) {
     function formato_producto($es_recompensa, $servicio)
     {
         $precio = $servicio["precio"];
+        $precio_alto = $servicio["precio_alto"];
+
         $id_servicio = $servicio["id_servicio"];
         $es_sorteo = $servicio["es_sorteo"];
+
         $path_servicio =  ($es_sorteo < 1 ) ? get_url_servicio($id_servicio): path_enid("sorteo",$id_servicio) ;
 
-        $texto_precio = d(money($precio), 'f12 p-1 bg_black white mt-2 borde_green');
+        $texto_precio_real = d(money($precio), 'f12 p-1 bg_black white mt-2 borde_green');
+        $texto_descuento = "";
+        if($precio_alto > $precio){
+            $texto_descuento = d(del(money($precio_alto)), 'mt-1 red_enid');        
+        }
+        
+        $texto_precio =  flex($texto_precio_real, $texto_descuento,'flex-column');
         $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
 
         $tipo_deseo = "agregar_deseos_sin_antecedente";
@@ -2231,7 +2241,52 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r, 'col-md-6 mt-5');
     }
+    function form_precio_unidad_alto($precio){
+        
+        $precio_unidad = text_icon(
+            'fa fa-pencil',
+            _text_("Precio alto:", money($precio))
+        );
 
+        $textos_precios = d($precio_unidad, "strong text-uppercase");
+        $textos_comisiones = flex($textos_precios, "", "flex-column", "", "ml-5");
+
+        $textos_comisiones_premium = flex($textos_comisiones, "", "flex-column", "", "ml-5");
+
+        $r[] = a_enid(
+            $textos_comisiones_premium,
+            [
+                "class" => "text_precio_alto informacion_precio_unidad"
+            ]
+        );
+
+        $r[] = form_open(
+            "",
+            [
+                "class" => "form_precio_alto_descuento mt-5 input_precio_alto d-none"
+            ]
+        );
+
+        $r[] = input_frm(
+            '',
+            'MXN',
+            [
+                "type" => "float",
+                "name" => "precio_alto",
+                "step" => "any",
+                "class" => "precio_alto",
+                "id" => "precio_alto",
+                "value" => $precio
+            ],
+            _text_cantidad
+        );
+
+        $r[] = btn("GUARDAR", ["class" => "mt-5"]);
+        $r[] = form_close(place("place_registro_precio_alto"));
+
+        return d($r, 'col-md-6 mt-5');
+
+    }
     function form_comision($comision, $perfil, $id_servicio)
     {
 

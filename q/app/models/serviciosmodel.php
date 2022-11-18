@@ -630,6 +630,7 @@ class serviciosmodel extends CI_Model
                         quinto_nivel, 
                         color,
                         precio,
+                        precio_alto,
                         id_ciclo_facturacion,
                         es_publico
                         FROM 
@@ -746,7 +747,7 @@ class serviciosmodel extends CI_Model
                 marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
                 tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, 
-                precio, es_sorteo FROM servicio ", $where);
+                precio,precio_alto, es_sorteo FROM servicio ", $where);
         return $this->db->query($query_create)->result_array();
     }
 
