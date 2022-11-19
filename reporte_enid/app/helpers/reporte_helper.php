@@ -33,9 +33,65 @@ if (!function_exists('invierte_date_time')) {
         $res[] = d(menu(), "col-lg-2 contenedor_menu");
         $res[] = d(tab_content($response), "col-lg-7");
         $res[] = d(actualizaciones_del_dia($data), "col-lg-3 border-left");
+        $res[] = modal_edicion_promesa_venta();
 
         return d(append($res), "container-fluid");
     }
+    function modal_edicion_promesa_venta()
+    {
+
+        $form[] = d(_titulo('¿Termina en otra fecha?'), 'text-center text-md-left');
+        $formulario[] = form_open("", ["class" => "form_edicion_promesa", "id" => "form_edicion_promesa"]);
+
+        $inicio = date("Y-m-d");
+        $fin = date("Y-m-d");
+
+        $formulario[] = input_frm(
+            'col-xs-6 mt-5',
+            "Fecha inicio",
+            [
+                "name" => 'fecha_inicio',
+                "class" => "input_busqueda_inicio mb-5",
+                "id" => 'datetimepicker4',
+                "value" => $inicio,
+                "type" => "date",
+            ]
+        );
+    
+        $formulario[] = input_frm(
+            'col-xs-6 mt-5',
+            "Fecha término",
+            [
+                "name" => 'fecha_termino',
+                "class" => "input_busqueda_termino mb-5",
+                "id" => 'datetimepicker5',
+                "value" => $fin,
+                "type" => "date",
+            ]
+    
+        );
+
+        $formulario[] = hiddens(["class" => "id_sorteo", "name" => "id"]);
+        $formulario[] = input_frm('mt-5 col-md-12 col-xs-12 mb-5', "¿ventas totales esperadas?",
+            [
+                "type" => "number",
+                "required" => true,
+                "class" => "meta",
+                "name" => "meta",
+                "id" => "meta",
+                "value" => 0
+            ]
+        );
+
+        
+        $formulario[] = btn('Registrar', ['class' => 'mt-5']);
+        $formulario[] = form_close();
+
+        $form[] = d($formulario);
+        $modal = append($form);
+        return gb_modal($modal, "modal_edicion_promesa_venta");
+    }
+
     function actualizaciones_del_dia($data)
     {
 

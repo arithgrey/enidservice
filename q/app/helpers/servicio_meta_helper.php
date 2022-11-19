@@ -9,6 +9,9 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
 
+        $fecha_registro = '';
+        $fecha_promesa = '';
+        
         foreach ($data as $row) {
 
             $fecha_registro = $row["fecha_registro"];
@@ -52,9 +55,6 @@ if (!function_exists('invierte_date_time')) {
             la cantidadde ventas promedio por 
             día para lograr el objetivo son',$promedio_venta),'black  strong borde_end_b');
 
-            
-
-
             $texto_meta =  d(
                 _text_(   
                     "Meta del"                 ,
@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
 
             $texto_finalizo = d(
                 _text_(
-                    'Esté objetivo perminó el', 
+                    'Esté objetivo terminó el', 
                     format_fecha($fecha_promesa)),
                     'bg_black white p-2 mb-2 borde_amarillo'
                 );
@@ -81,6 +81,14 @@ if (!function_exists('invierte_date_time')) {
                     );
 
             $extra_fechas = ($hoy > $fecha_promesa) ? $texto_finalizo:$texto_objetivo_en_curso;
+            $edicion = d(text_icon(_editar_icon, "Modificar"),
+            [
+                "class"=> "edicion_promesa_venta black",
+                "id" => $row["id"],
+                "fecha_inicio" => date_create($fecha_registro)->format('Y-m-d'),
+                "fecha_promesa" => date_create($fecha_promesa)->format('Y-m-d'),
+                "meta" => $meta
+            ]);
 
             $imagen_totales = d([
                 d($extra_fechas),
@@ -88,15 +96,16 @@ if (!function_exists('invierte_date_time')) {
                 d($totales_textos,'mt-2'),
                 d($texto_meta,'mt-2'),
                 d($texto_dias_restantes, 'mt-2'),
-                d($vetas_fechas_totales["html"])
+                d($vetas_fechas_totales["html"]),
+                d($edicion,'mt-4')
             ],' flex-row');
             $response[] = d(d($imagen_totales,'border border-secondary p-5 row mt-4'),12);
 
         }
 
-
+        
         return append($response);
-    }
+    }    
     function metricas_compras_caida($fecha_registro, $fecha_promesa, $totales_fechas_ventas, $meta, $totales_fechas_ventas_leads){
 
         $begin = new DateTime($fecha_registro);
