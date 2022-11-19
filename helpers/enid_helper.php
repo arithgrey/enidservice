@@ -1186,11 +1186,6 @@ function footer_opciones()
         ]
     );
 
-
-    
-    
-    
-    
     $oportunidades[] = a_enid(
         d("Calculador de ganancias"," strong"),
         [            

@@ -705,7 +705,8 @@ let promesa_ventas = function(e){
 
         let data_send = $(".form_promesa_ventas").serialize();
         let url = "../q/index.php/api/servicio_meta/fecha/format/json/";
-        request_enid("GET", data_send, url, 1, ".place_keywords", 0, ".place_keywords");
+        request_enid("GET", data_send, url, render_promesas);
+
     } else {
 
         focus_input([".form_promesa_ventas #datetimepicker5", ".form_promesa_ventas #datetimepicker4"]);
@@ -713,6 +714,7 @@ let promesa_ventas = function(e){
     e.preventDefault();
 
 }
+
 let sin_ventas = function (e) {
 
     let data_send = { 'v': 1 };
@@ -727,6 +729,49 @@ let render_top_ventas = function (data) {
     render_enid(".place_keywords", data);
 
 }
+let render_promesas = function (data) {
+
+    render_enid(".place_keywords", data);
+    $(".edicion_promesa_venta").click(promesa_edicion);
+    
+}
+
+let promesa_edicion = function () {
+
+
+    $('#modal_edicion_promesa_venta').modal("show");
+
+    let $id = $(this).attr('id');
+    let $meta = $(this).attr('meta');
+    let $fecha_inicio = $(this).attr('fecha_inicio');
+    let $fecha_promesa = $(this).attr('fecha_promesa');   
+
+    
+    if($id && $fecha_inicio.length > 4 && $fecha_promesa.length > 4){
+        
+        $(".form_edicion_promesa .input_busqueda_inicio").val($fecha_inicio);
+        $(".form_edicion_promesa .input_busqueda_termino").val($fecha_promesa);
+        $(".form_edicion_promesa .id_sorteo").val($id);
+        $(".form_edicion_promesa .meta").val($meta);
+
+        $(".form_edicion_promesa").submit(valores_promesa_venta)
+
+    }
+
+};
+
+let valores_promesa_venta = function (e) {
+
+    let data_send = $(".form_edicion_promesa").serialize();
+    let url = "../q/index.php/api/servicio_meta/id/format/json/";
+    request_enid("PUT", data_send, url, function(){
+        $form_promesa_ventas.submit();
+        $('#modal_edicion_promesa_venta').modal("hide");
+
+    });
+    e.preventDefault();
+
+};
 let funnel = function (e) {
 
     let data_send = $.param({});

@@ -48,7 +48,7 @@ class Servicio_meta extends REST_Controller
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $metas =  $this->servicio_meta_model->fecha($fecha_inicio, $fecha_termino);
-            
+
             $a = 0;
 
             foreach ($metas as $row) {
@@ -58,18 +58,46 @@ class Servicio_meta extends REST_Controller
                 $fecha_registro = $row["fecha_registro"];
                 $fecha_promesa = $row["fecha_promesa"];
 
-                $totales = $this->servicio_meta_model->pagado_entregado($id_servicio,$fecha_registro, $fecha_promesa);
-                $totales_leads = $this->servicio_meta_model->leads($id_servicio,$fecha_registro, $fecha_promesa);
+                $totales = $this->servicio_meta_model->pagado_entregado($id_servicio, $fecha_registro, $fecha_promesa);
+                $totales_leads = $this->servicio_meta_model->leads($id_servicio, $fecha_registro, $fecha_promesa);
 
                 $data_complete[$a]["totales_fechas_ventas"] = $totales;
                 $data_complete[$a]["totales_fechas_ventas_leads"] = $totales_leads;
-                
 
-                $a ++;
+
+                $a++;
             }
-            $data_complete = $this->app->imgs_productos(0, 1, 1, 1, $data_complete);           
-            
+            $data_complete = $this->app->imgs_productos(0, 1, 1, 1, $data_complete);
         }
         $this->response(formato_fecha_promesa($data_complete));
+    }
+    function id_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id,fecha_inicio,fecha_termino,meta")) {
+
+
+            $id = $param["id"];
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $meta = $param["meta"];
+
+
+            $response =  $this->servicio_meta_model->update(
+                [
+                    "fecha_registro" => $fecha_inicio,
+                    "fecha_promesa" => $fecha_termino,
+                    "meta" => $meta
+                ],
+                [
+                    "id" => $id
+                ]
+            );
+        }
+
+        $this->response($response);
     }
 }
