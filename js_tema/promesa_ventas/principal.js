@@ -19,6 +19,6 @@ let promesa_venta = function(e){
 }
 let response_promesa_venta = function(data){
 
-    redirect(path_enid(""));
+    redirect(path_enid("url_home"));
     
 }

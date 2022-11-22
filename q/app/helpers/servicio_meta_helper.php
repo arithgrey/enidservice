@@ -41,7 +41,8 @@ if (!function_exists('invierte_date_time')) {
             $logros = $vetas_fechas_totales["ventas"];
             $dias = $vetas_fechas_totales["dias"];
             $restantes = $meta - $logros;
-            
+                
+            $dias = ($dias > 1) ? ($dias -1 ): $dias;
             $promedio_venta = $meta / $dias;
 
 
@@ -52,8 +53,8 @@ if (!function_exists('invierte_date_time')) {
                 
 
             $totales_textos  = d(_text_($logros, "de", $meta, "faltan", $restantes,'ventas, 
-            la cantidadde ventas promedio por 
-            día para lograr el objetivo son',$promedio_venta),'black  strong borde_end_b');
+            la cantidad de ventas promedio por 
+            día para lograr el objetivo son',$promedio_venta),'black f12  borde_end_b');
 
             $texto_meta =  d(
                 _text_(   
@@ -92,11 +93,11 @@ if (!function_exists('invierte_date_time')) {
 
             $imagen_totales = d([
                 d($extra_fechas),
-                d($imagenes ,'strong black f14'), 
-                d($totales_textos,'mt-2'),
-                d($texto_meta,'mt-2'),
-                d($texto_dias_restantes, 'mt-2'),
+                d($imagenes ,'strong black f14'),                 
+                d($texto_meta,'mt-2'),                
                 d($vetas_fechas_totales["html"]),
+                d($texto_dias_restantes, 'mt-2'),
+                d($totales_textos,'mt-2'),                
                 d($edicion,'mt-4')
             ],' flex-row');
             $response[] = d(d($imagen_totales,'border border-secondary p-5 row mt-4'),12);
