@@ -632,7 +632,8 @@ class serviciosmodel extends CI_Model
                         precio,
                         precio_alto,
                         id_ciclo_facturacion,
-                        es_publico
+                        es_publico,
+                        es_sorteo
                         FROM 
                         servicio
                         WHERE 
