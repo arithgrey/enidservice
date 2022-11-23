@@ -382,7 +382,9 @@ class usuario_model extends CI_Model
                         s.cuarto_nivel , 
                         s.quinto_nivel,
                         s.es_publico, 
-                        s.precio             
+                        s.precio,
+                        s.precio_alto,
+                        s.es_sorteo             
                     FROM usuario_deseo us
                     INNER JOIN servicio s  
                     ON us.id_servicio =  s.id_servicio
