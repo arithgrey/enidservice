@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
 
             $nombre_servicio = pr($servicio, "nombre_servicio");
             $descripcion = pr($servicio, "descripcion");
-            $response = _text_($nombre_servicio, $descripcion);
+            $response = strip_tags(_text_($nombre_servicio, $descripcion));
         }
         return $response;
     }
@@ -523,7 +523,7 @@ if (!function_exists('invierte_date_time')) {
             $array[] = " precio ";
             if (strlen(trim($meta_usuario)) > 0) {
 
-                $array[] = $meta_usuario;
+                $array[] = strip_tags($meta_usuario);
             }
 
             return strip_tags(implode(",", $array));
