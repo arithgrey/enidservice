@@ -131,7 +131,7 @@ if (!function_exists('invierte_date_time')) {
             0
         );
         return _text_(
-            "También puedes ver la transmisión de la rifa en",
+            "Puedes ver la transmisión de la rifa en",
             $link_facebook,
             "o en ",$link_youtube
         );
