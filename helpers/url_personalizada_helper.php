@@ -102,6 +102,7 @@ function accesos_enid()
         "nuba_seller" =>"https://www.facebook.com/groups/810697523192704",
         "enid_service_facebook" =>"https://www.facebook.com/enidservicemx",        
         "enid_service_facebook_videos" =>"https://www.facebook.com/enidservicemx/videos",        
+        "youtube_vivo" => "https://www.youtube.com/@enidservice/streams",
         "enid_login" => _text("http://enidservices.com/", _web, "/login/"),
         "logo_enid" => 
         _text("http://enidservices.com/", _web, "/img_tema/enid_service_logo.jpg"),

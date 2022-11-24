@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
         $categorias_destacadas = $data["categorias_destacadas"];
 
         $response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 13);
-        $lista_productos[] = d(get_format_filtros_paginacion($data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
+        $lista_productos[] = d(get_format_filtros_paginacion($data, $data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);
@@ -37,7 +37,7 @@ if (!function_exists('invierte_date_time')) {
         ]);
         $response[] = d(d(d($link_promociones, 13), 10, 1), "row mt-5");
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
-        $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"),13);
+        $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"), 13);
 
 
 
@@ -115,17 +115,55 @@ if (!function_exists('invierte_date_time')) {
 
         return d($response, 13);
     }
-    function get_format_filtros_paginacion($filtros, $order, $paginacion, $is_mobile)
+    function get_format_filtros_paginacion($data, $filtros, $order, $paginacion, $is_mobile)
     {
+
+        $es_sorteo =  prm_def($data, "es_sorteo");
 
         $paginacion = d($paginacion, 'd-none d-md-block');
         $filtro = filtro($filtros, $order);
         $extra = ($is_mobile) ? 'w-100' : '';
-        return ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 p-0') :
+        $response[] = ($is_mobile > 0) ? d($filtro, 'col-lg-12 mt-4 mb-4 p-0') :
             flex($filtro, $paginacion, 'd-md-flex justify-content-between col-sm-12 p-0', $extra);
+
+        $response[] = d(textos_transmision_sorteo($es_sorteo), 'col-sm-12');
+        return append($response);
     }
+    function textos_transmision_sorteo($es_sorteo)
+    {
+
+        $path = path_enid("enid_service_facebook", 0, 1);
+        $link_facebook = a_enid(
+            "Facebook",
+            [
+                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "href" => $path
+            ],
+            0
+        );
 
 
+        $path = path_enid("youtube_vivo", 0, 1);
+        $link_youtube = a_enid(
+            "Youtube",
+            [
+                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "href" => $path
+            ],
+            0
+        );
+
+        $response = "";
+        if ($es_sorteo > 1) {
+            $response = d([
+                d("Aquí puedes ver la transmisión de nuestras rifas"),
+                d($link_facebook),
+                d("o en "),
+                d($link_youtube)
+            ], 'row f15 mt-4 black d-flex');
+        }
+        return $response;
+    }
     function filtro($filtros, $order)
     {
 
@@ -243,14 +281,18 @@ if (!function_exists('invierte_date_time')) {
         $textos_categorias[] = d("Más categorías", 'text-uppercase black display-6 mt-5');
         $textos_categorias[] = d($categorias, 'mt-4  p-3');
         $seccion_izquierda = d($textos_categorias);
-        
-        $bloque_categorias = flex($imagen, $seccion_izquierda,_between);
-        
+
+        $bloque_categorias = flex($imagen, $seccion_izquierda, _between);
+
         $izq = $bloque_categorias;
         $der = adicionales();
-        return flex_md($izq, $der,_between,
-        ' borde_end col-xs-12 col-md-6',
-        "col-xs-12 col-md-6");
+        return flex_md(
+            $izq,
+            $der,
+            _between,
+            ' borde_end col-xs-12 col-md-6',
+            "col-xs-12 col-md-6"
+        );
     }
     function adicionales()
     {
@@ -259,7 +301,7 @@ if (!function_exists('invierte_date_time')) {
             "Prueba en casa",
             [
                 "class" => "white  cursor_pointer  
-                frecuentes borde_amarillo p-1 prueba_en_casa ",            
+                frecuentes borde_amarillo p-1 prueba_en_casa ",
                 "onclick" => "log_operaciones_externas(48)",
             ]
         );
