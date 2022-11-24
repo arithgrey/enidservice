@@ -43,6 +43,7 @@ class Home extends CI_Controller
             "es_sorteo" => prm_def($param, "sorteo")
 
         ];
+        $data["es_sorteo"] = prm_def($param, "sorteo");
 
         $data["servicios"] = $this->app->api("servicio/q", $data_send);
         
