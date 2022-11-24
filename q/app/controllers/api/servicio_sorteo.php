@@ -85,6 +85,33 @@ class Servicio_sorteo extends REST_Controller
 
         return $this->app->api("servicio/sorteo", ["id_servicio"=> $id_servicio], "json", "PUT");
     }   
+    function id_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id,fecha_inicio,fecha_termino,boletos")) {
+
+            $id = $param["id"];
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            $boletos = $param["boletos"];
+            
+            $response =  $this->servicio_sorteo_model->update(
+                [
+                    "fecha_registro" => $fecha_inicio,
+                    "fecha_termino" => $fecha_termino,
+                    "boletos" => $boletos
+                ],
+                [
+                    "id" => $id
+                ]
+            );
+        }
+
+        $this->response($response);
+    }
 
 
     
