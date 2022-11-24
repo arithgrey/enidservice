@@ -79,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
 
         
         $seccion_tickets[] =  d(d(d(
-            textos_transmision(), 'col-sm-12 display-8  p-2 black f11'), 12), 'row mb-5');
+            textos_transmision(), 'col-sm-12 display-8  p-2 black '), 12), 'row mb-5');
 
         $seccion_tickets[] =  d(d(d("Pulsa en los tickets para agregar al carrito tus boletos deseados", 'col-sm-12 display-8 borde_end p-2 black strong'), 12), 'row mb-5');
         $seccion_tickets[] =  d(d(flex("", "Disponibles", "align-items-center", "mr-4 borde_yellow border border-secondary p-4", "f12  black "), 12), 13);
@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
         $link_facebook = a_enid(
             "Facebook",
             [
-                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "class" => "text-center borde_accion p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer",
                 "href" => $path
             ],
             0
@@ -125,15 +125,15 @@ if (!function_exists('invierte_date_time')) {
         $link_youtube = a_enid(
             "Youtube",
             [
-                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "class" => "text-center borde_accion p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer",
                 "href" => $path
             ],
             0
         );
         return _text_(
-            "Puedes ver la transmisión de la rifa en",
+            "Las rifas son trasmitidas en",
             $link_facebook,
-            "o en ",$link_youtube
+            "y en ",$link_youtube
         );
 
 

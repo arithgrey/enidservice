@@ -136,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
         $link_facebook = a_enid(
             "Facebook",
             [
-                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "class" => "text-center borde_accion p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer",
                 "href" => $path
             ],
             0
@@ -147,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
         $link_youtube = a_enid(
             "Youtube",
             [
-                "class" => "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green cursor_pointer",
+                "class" => "text-center borde_accion p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer",
                 "href" => $path
             ],
             0
@@ -156,11 +156,11 @@ if (!function_exists('invierte_date_time')) {
         $response = "";
         if ($es_sorteo > 1) {
             $response = d([
-                d("Aquí puedes ver la transmisión de nuestras rifas"),
+                d("Las rifas son transmitidas en"),
                 d($link_facebook),
-                d("o en "),
+                d(" y en "),
                 d($link_youtube)
-            ], 'row f15 mt-4 black d-flex');
+            ], 'row mt-4 black d-flex');
         }
         return $response;
     }
