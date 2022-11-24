@@ -92,6 +92,15 @@ class Servicio_sorteo_model extends CI_Model
         return $this->db->query($query_get)->result_array();        
 
     }
+    function update($data = [], $params_where = [], $limit = 1)
+    {
 
+        foreach ($params_where as $key => $value) {
+            $this->db->where($key, $value);
+        }
+        $this->db->limit($limit);
+        return $this->db->update($this->tabla, $data);
+        
+    }
 
 }

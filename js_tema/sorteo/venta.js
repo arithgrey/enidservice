@@ -4,9 +4,26 @@ $(document).ready(() => {
     $('.agregar_deseos_sin_antecedente').click(agregar_deseo_sorteo);
     $('.usuario_compra_ticket').click(ver_usuario_compra_ticket);
     valida_ticket_boleto();
+    $(".editar_sorteo").click(muestra_form_cantidades);
+    $('.form_edicion_sorteo').submit(valores_sorteo);
 
 });
 
+let valores_sorteo = function (e) {
+
+    let data_send = $(".form_edicion_sorteo").serialize();
+    let url = "../q/index.php/api/servicio_sorteo/id/format/json/";
+    request_enid("PUT", data_send, url, function(data){        
+        $("#modal_edicion_sorteo").modal("hide");  
+        redirect("");
+
+    });
+    e.preventDefault();
+
+};
+let muestra_form_cantidades = function(){
+    $("#modal_edicion_sorteo").modal("show");
+}
 let agregar_deseo_sorteo = function () {
 
     let $id_servicio = $(this).attr('id');

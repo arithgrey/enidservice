@@ -89,6 +89,7 @@ if (!function_exists('invierte_date_time')) {
         $seccion_imagenes = construye_galeria_imagenes($data);
         $ficha_servicio = ficha_servicio($data);
         $seccion_ficha_servicio[] = editar($data, $id_servicio);
+        $seccion_ficha_servicio[] = editar_cantidades_sorteo($data, $id_servicio);
         $seccion_ficha_servicio[] =  $seccion_imagenes;
         $seccion_ficha_servicio[] =  $ficha_servicio;
 
@@ -99,10 +100,71 @@ if (!function_exists('invierte_date_time')) {
         
         $response[] = hiddens(["class"=> "boleto_comprado" , "value" => $data["boleto"]]);
         $response[] = hiddens(["class"=> "numero_sorteo" , "value" => $data["numero_sorteo"]]);
+        $response[] = modal_cantidad_fechas($data);
         
 
         return d(d($response, 13), 10, 1);
     }
+    function modal_cantidad_fechas($data)
+    {
+
+        $sorteo = $data["boletos"];
+        $id_sorteo = pr($sorteo, "id");
+        $fecha_registro = pr($sorteo, "fecha_registro");
+        $fecha_termino = pr($sorteo, "fecha_termino");
+        $boletos = pr($sorteo, "boletos");
+
+
+        $form[] = d(_titulo('¿Inicio y termino del sorteo?'), 'text-center text-md-left');
+        $formulario[] = form_open("", ["class" => "form_edicion_sorteo", "id" => "form_edicion_sorteo"]);
+        
+
+        $formulario[] = input_frm(
+            'col-xs-6 mt-5',
+            "Fecha inicio",
+            [
+                "name" => 'fecha_inicio',
+                "class" => "input_busqueda_inicio mb-5",
+                "id" => 'datetimepicker4',
+                "value" => date_format(date_create($fecha_registro), 'Y-m-d'),
+                "type" => "date",
+            ]
+        );
+    
+        $formulario[] = input_frm(
+            'col-xs-6 mt-5',
+            "Fecha término",
+            [
+                "name" => 'fecha_termino',
+                "class" => "input_busqueda_termino mb-5",
+                "id" => 'datetimepicker5',
+                "value" => date_format(date_create($fecha_termino), 'Y-m-d'),
+                "type" => "date",
+            ]
+    
+        );
+
+        $formulario[] = hiddens(["class" => "id_sorteo", "name" => "id", "value"=> $id_sorteo]);
+        $formulario[] = input_frm('mt-5 col-md-12 col-xs-12 mb-5', "¿Boletos disponibles?",
+            [
+                "type" => "number",
+                "required" => true,
+                "class" => "boletos",
+                "name" => "boletos",
+                "id" => "boletos",
+                "value" => $boletos
+            ]
+        );
+
+        
+        $formulario[] = btn('Registrar', ['class' => 'mt-5']);
+        $formulario[] = form_close();
+
+        $form[] = d($formulario);
+        $modal = append($form);
+        return gb_modal($modal, "modal_edicion_sorteo");
+    }
+
     function enviar_compra()
     {
 
@@ -386,10 +448,10 @@ if (!function_exists('invierte_date_time')) {
         if (es_administrador($data)) {
 
             $editar = a_enid(
-                text_icon('fa fa-pencil', "EDITAR"),
+                text_icon('fa fa-pencil', "Editar información del producto"),
                 [
                     "href" => path_enid("editar_producto", $id_servicio),
-                    "class" => "black strong  p-3 col-lg-2"
+                    "class" => "black strong p-3 "
                 ]
             );
             $texto_editar = d($editar, 13);
@@ -397,6 +459,25 @@ if (!function_exists('invierte_date_time')) {
         }
         return $response;
     }
+    function editar_cantidades_sorteo($data, $id_servicio)
+    {
+
+        $response = "";
+        if (es_administrador($data)) {
+
+            $editar = d(
+                text_icon('fa fa-pencil', "Cantidades y fechas"),
+                [                    
+                    "class" => "black strong editar_sorteo p-3",
+                    "id" => $id_servicio
+                ]
+            );
+            $texto_editar = d($editar, 13);
+            $response = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
+        }
+        return $response;
+    }
+
     function ubicacion_entrega($servicio)
     {
 
