@@ -89,29 +89,27 @@ let valida_envio_reparto = () => {
     let status = parseInt($id_status.val());
     let saldo_cubierto = parseInt($saldo_actual_cubierto.val());
 
-    if (status == 16 && saldo_cubierto < 1) {
+    if (saldo_cubierto < 1) {
 
-        if($es_sorteo.val()){
-            
+        if ($es_sorteo.val()) {
+
             $modal_envio_pago_ticket.modal("show");
             $botton_ticket_pendiente.click(function () {
                 $modal_envio_pago_ticket.modal("hide");
             });
-    
 
-        }else{
+        } else {
+            if (status == 16) {
 
-            $modal_envio_reparto.modal("show");
-            $botton_enviar_despues.click(function () {
-                $modal_envio_reparto.modal("hide");
-            });
-    
-            $botton_enviar_reparto.click(confirma_envio_reparto);
+                $modal_envio_reparto.modal("show");
+                $botton_enviar_despues.click(function () {
+                    $modal_envio_reparto.modal("hide");
+                });
+
+                $botton_enviar_reparto.click(confirma_envio_reparto);
+            }
         }
-        
-
     }
-
 };
 let confirma_envio_reparto = () => {
 
@@ -246,11 +244,11 @@ let quitar_producto_orden_compra = function () {
 
 let quitar_producto = function (id_proyecto_persona_forma_pago) {
 
-    
-    let data_send = $.param({"id_producto": id_proyecto_persona_forma_pago,"id_orden_compra":get_parameter(".recibo")});    
+
+    let data_send = $.param({ "id_producto": id_proyecto_persona_forma_pago, "id_orden_compra": get_parameter(".recibo") });
     let url = "../q/index.php/api/producto_orden_compra/index/format/json/";
-    
-    request_enid("DELETE", data_send, url, function(){
+
+    request_enid("DELETE", data_send, url, function () {
         redirect("");
     })
 }
