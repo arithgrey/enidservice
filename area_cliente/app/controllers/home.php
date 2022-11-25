@@ -109,7 +109,11 @@ class Home extends CI_Controller
                     
                 if($recibo["numero_boleto"] > 0 ){
                     
-                    $link_resumen_compra_sorteo =_text("../",path_enid("pedidos_recibo", $id_orden_compra));
+                    $link_resumen_compra_sorteo =_text(
+                        "../", 
+                        path_enid("pedido_seguimiento", $id_orden_compra),
+                        "&sorteo=9998"
+                    );
                     redirect($link_resumen_compra_sorteo);
 
                 }
