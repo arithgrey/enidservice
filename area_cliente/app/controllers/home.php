@@ -106,7 +106,16 @@ class Home extends CI_Controller
                         _text("&domicilio=1", $extra)
                     );
 
-                redirect($link_registro_domicilio);
+                    
+                if($recibo["numero_boleto"] > 0 ){
+                    
+                    $link_resumen_compra_sorteo =_text("../",path_enid("pedidos_recibo", $id_orden_compra));
+                    redirect($link_resumen_compra_sorteo);
+
+                }
+                else{
+                    redirect($link_registro_domicilio);
+                }
 
 
             } else {
