@@ -71,6 +71,7 @@ class Home extends CI_Controller
 
                 $response[$a] =  $row;
                 $response[$a]["usuario"]  = $this->app->usuario($row["id_usuario"]);
+                $a ++;
             }
         }
         return $response;
