@@ -1871,13 +1871,17 @@ class Recibo_model extends CI_Model
     }
     function servicio_pago($id_servicio)
     {
-        $query_get = "SELECT  *  FROM 
-            proyecto_persona_forma_pagos   
-            WHERE             
-            se_cancela < 1 
-            AND cancela_cliente < 1  
-            AND saldo_cubierto > 0 
-            AND id_servicio = $id_servicio";
+        $query_get = "SELECT  p.*, po.id_orden_compra FROM 
+        proyecto_persona_forma_pagos p 
+        INNER JOIN producto_orden_compras po 
+        ON 
+        p.id = po.id_proyecto_persona_forma_pago   
+        WHERE             
+        se_cancela < 1 
+        AND cancela_cliente < 1  
+        AND saldo_cubierto > 0 
+        AND id_servicio = $id_servicio
+            ";
 
         return $this->db->query($query_get)->result_array();
     }

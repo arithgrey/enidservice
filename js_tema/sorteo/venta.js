@@ -90,6 +90,8 @@ let adicionales = function () {
 let ver_usuario_compra_ticket = function () {
 
 
+    
+    let $id_orden_compra =  $(this).attr('id_orden_compra');
     let $usuario_compra = $(this).attr('usuario_compra');
     let $numero_boleto = $(this).attr('numero_boleto');   
 
@@ -99,6 +101,8 @@ let ver_usuario_compra_ticket = function () {
         $(".nombre_comprador").text("");
         $(".telefono_comprador").text("");
         $(".place_numero_boleto").text($numero_boleto);
+        $(".edicion_datos_sorteo").attr('href', path_enid("recibo", $id_orden_compra));
+
         let url = "../q/index.php/api/usuario/q/format/json/";
         let data_send = {"id_usuario": $usuario_compra};
         request_enid("GET", data_send, url, response_usuario_compra_ticket);     
@@ -115,6 +119,7 @@ let response_usuario_compra_ticket =  function(data){
     let tel_contacto = data.tel_contacto;
     $(".nombre_comprador").text(nombre);
     $(".telefono_comprador").text(tel_contacto);
+    
 
 }
 let valida_ticket_boleto = function(){

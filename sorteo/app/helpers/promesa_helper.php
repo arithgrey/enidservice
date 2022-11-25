@@ -33,6 +33,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $numero_boletos = pr($data["boletos"], "boletos");
+        
         $boletos = [];
         $boletos_pagos = 0;
         $boletos_por_pago = 0;
@@ -44,6 +45,7 @@ if (!function_exists('invierte_date_time')) {
           ';
 
             $boleto_compra = busqueda_boleto_pago($b, $data["boletos_comprados"]);
+            
 
             $disponible = $boleto_compra["disponibilidad"];
             if ($disponible < 1) {
@@ -52,6 +54,8 @@ if (!function_exists('invierte_date_time')) {
                 $boletos_pagos++;
             }
             $usuario_compra = $boleto_compra["usuario_compra"];
+            $id_orden_compra = $boleto_compra["id_orden_compra"];
+            
 
             $extra = ($disponible < 1) ?
                 "border border-secondary cursor_pointer agregar_deseos_sin_antecedente  numero_boleto"
@@ -69,7 +73,8 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "id" => $id_servicio,
                     "numero_boleto" => $b,
-                    "usuario_compra" => $usuario_compra
+                    "usuario_compra" => $usuario_compra,
+                    "id_orden_compra" => $id_orden_compra
                 ]
             ), 13);
 
@@ -99,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] =  d(append($seccion_ficha_servicio), 4);
         $response[] =  d($seccion_tickets, 6);
         $response[] =  d(enviar_compra(), 2);
-        $response[] = d(modal_usuario_venta(), 12);
+        $response[] = d(modal_usuario_venta($data), 12);
 
         $response[] = hiddens(["class" => "boleto_comprado", "value" => $data["boleto"]]);
         $response[] = hiddens(["class" => "numero_sorteo", "value" => $data["numero_sorteo"]]);
@@ -218,19 +223,27 @@ if (!function_exists('invierte_date_time')) {
 
         $response  = 0;
         $id_usuario = 0;
+        $id_orden_compra = 0; 
         foreach ($boletos_pagos as $row) {
 
             $numero_boleto_pago = $row["numero_boleto"];
 
             if ($numero_boleto == $numero_boleto_pago) {
                 $id_usuario = $row["id_usuario"];
+                $id_orden_compra = $row["id_orden_compra"];
                 $response++;
                 break;
             }
         }
 
-        return ["disponibilidad"  => $response, "usuario_compra" => $id_usuario];
+        return [
+            "disponibilidad"  => $response,
+             "usuario_compra" => $id_usuario, 
+             "id_orden_compra" => $id_orden_compra
+            ];
     }
+   
+
     function render($data, $param)
     {
 
@@ -525,10 +538,23 @@ if (!function_exists('invierte_date_time')) {
         }
         return d($response, 13);
     }
-    function modal_usuario_venta()
+    function modal_usuario_venta($data)
     {
         
         $form[] = d(_titulo('Boleto comprado por:'), 'text-center text-md-left row');
+        
+        if(es_administrador($data)){
+    
+            $editar = a_enid(
+                text_icon('fa fa-pencil', ""),
+                [
+                    "class" => "black strong edicion_datos_sorteo ml-auto",
+                    
+                ]
+            );
+
+            $form[] = d($editar, 13);    
+        }
         $form[] = d(flex("Nombre", place("nombre_comprador"), _text_('borde_end_b p-2 f12 mt-5', _between), "strong"), 13);
         $form[] = d(flex("Teléfono", place("telefono_comprador"), _text_('borde_end_b p-2 f12 mt-5', _between), "strong"), 13);
         $form[] = d(flex("Número", place('place_numero_boleto bg_black white p-3 strong f13 borde_amarillo'), 'flex-column mx-auto mt-3 text-center', 'f15 strong text-center'), 13);
