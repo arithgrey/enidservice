@@ -65,10 +65,10 @@ if (!function_exists('invierte_date_time')) {
             $curpo_boleto = d(flex(
                 $b,
                 $icono,
-                _text_(_between, 'p-2', $extra),
+                _text_('p-2', $extra),
                 _text_("p-2 h-100", $tick_numero),
                 "",
-                "d-flex",
+                "d-flex  w-100",
                 [
                     "id" => $id_servicio,
                     "numero_boleto" => $b,
