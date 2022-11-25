@@ -28,6 +28,7 @@ class Home extends CI_Controller
             $this->app->log_acceso($data, 3, $id_servicio);     
             $data["boletos_comprados"] = $this->boletos_pagos($id_servicio);
             
+            
             $data["boleto"] = prm_def($param,"boleto");
             $data["numero_sorteo"] = prm_def($param,"q");
             
@@ -57,12 +58,22 @@ class Home extends CI_Controller
     }
     private function boletos_pagos($id_servicio)
     {
-        
-        return $this->app->api("recibo/servicio_pago", 
+
+        $response = [];
+        $recibos =  $this->app->api("recibo/servicio_pago", 
             [                
                 "id_servicio" => $id_servicio
             ]
         );
+        if(es_data($recibos)){
+            $a = 0;
+            foreach($recibos as $row){
+
+                $response[$a] =  $row;
+                $response[$a]["usuario"]  = $this->app->usuario($row["id_usuario"]);
+            }
+        }
+        return $response;
     }
     
 

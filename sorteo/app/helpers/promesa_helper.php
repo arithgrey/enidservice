@@ -31,7 +31,7 @@ if (!function_exists('invierte_date_time')) {
     function render_plano($data, $id_servicio)
     {
 
-
+        
         $numero_boletos = pr($data["boletos"], "boletos");
         
         $boletos = [];
@@ -52,6 +52,7 @@ if (!function_exists('invierte_date_time')) {
             }
             $usuario_compra = $boleto_compra["usuario_compra"];
             $id_orden_compra = $boleto_compra["id_orden_compra"];
+            $nombre_usuario_compra  = $boleto_compra["nombre_usuario_compra"];
 
             $extra_tickt = ($disponible < 1) ? "":"white";
             $icono = icon(_text_('fa fa-ticket fa-2x', $extra_tickt));
@@ -59,14 +60,17 @@ if (!function_exists('invierte_date_time')) {
             $extra = ($disponible < 1) ?
                 "border border-secondary cursor_pointer agregar_deseos_sin_antecedente  numero_boleto"
                 :
-                "cursor_pointer blue_bg white borde_green numero_boleto usuario_compra_ticket";
-
+                "cursor_pointer blue_bg white borde_green numero_boleto usuario_compra_ticket";   
             $tick_numero = _text("ticket_n_", $b);
-            $curpo_boleto = d(flex(
+
+
+
+            $icono_nombre = flex($icono, $nombre_usuario_compra,'flex-column','','fp8');
+            $ticket_boleto = flex(
                 $b,
-                $icono,
-                _text_('p-2', $extra),
-                _text_("p-2 h-100", $tick_numero),
+                $icono_nombre,
+                _text_('p-2 text-center', $extra),
+                _text_("p-2 ", $tick_numero),
                 "",
                 "d-flex  w-100",
                 [
@@ -75,9 +79,10 @@ if (!function_exists('invierte_date_time')) {
                     "usuario_compra" => $usuario_compra,
                     "id_orden_compra" => $id_orden_compra
                 ]
-            ), 13);
+            );
+            $curpo_boleto = d($ticket_boleto, 13);
 
-            $boletos[] = d($curpo_boleto, 'col-xs-3 col-sm-2 mt-3');
+            $boletos[] = d($curpo_boleto, 'col-xs-3 col-sm-3 mt-3');
         }
 
 
@@ -223,6 +228,7 @@ if (!function_exists('invierte_date_time')) {
         $response  = 0;
         $id_usuario = 0;
         $id_orden_compra = 0; 
+        $nombre_usuario_compra = "";
         foreach ($boletos_pagos as $row) {
 
             $numero_boleto_pago = $row["numero_boleto"];
@@ -230,6 +236,8 @@ if (!function_exists('invierte_date_time')) {
             if ($numero_boleto == $numero_boleto_pago) {
                 $id_usuario = $row["id_usuario"];
                 $id_orden_compra = $row["id_orden_compra"];
+                $nombre_usuario_compra = format_nombre($row["usuario"]);
+
                 $response++;
                 break;
             }
@@ -238,7 +246,8 @@ if (!function_exists('invierte_date_time')) {
         return [
             "disponibilidad"  => $response,
              "usuario_compra" => $id_usuario, 
-             "id_orden_compra" => $id_orden_compra
+             "id_orden_compra" => $id_orden_compra,
+             "nombre_usuario_compra" => $nombre_usuario_compra
             ];
     }
    
