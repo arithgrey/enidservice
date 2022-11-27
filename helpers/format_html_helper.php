@@ -1823,7 +1823,7 @@ function opciones_populares()
         "SORTEOS",
         [
             "class" => "white mt-2 underline border-right frecuentes ",
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4&sorteo=99")
+            "href" => path_enid("rifas")
         ]
     );
     /*

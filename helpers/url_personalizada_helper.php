@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [        
+        
         "amazon" =>"https://www.amazon.com.mx/s?me=A2ZBGOMVSPRBHV&marketplaceID=A1AM78C64UM0Y8",
         "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
@@ -58,6 +59,7 @@ function accesos_enid()
         "editar_producto" => "planes_servicios/?action=editar&servicio=",
         "pregunta_search" => "pregunta/?tag=",        
         "search_q3" => "search/?q3=",
+        "rifas"=> "rifas",
         "pedido_seguimiento" => "pedidos/?seguimiento=",
         "producto" => "producto/?producto=",        
         "producto_metricas" => "producto_metricas/?producto=",
