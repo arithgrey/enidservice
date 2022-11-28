@@ -7,6 +7,7 @@
 		
 	},
 	"require": {
-		"shimabox/url-status": "^1.0"
+		"shimabox/url-status": "^1.0",
+		"google/apiclient": "^2.0"
 	}
 }

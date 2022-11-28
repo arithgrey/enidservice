@@ -1209,7 +1209,7 @@ function footer_opciones()
     );
 
     $auto[]= d('¿Vendes tu auto?','strong black');
-    $auto[]= d('Nosotro te ayudamos!');
+    $auto[]= d('Nosotros te ayudamos!');
     $oportunidades[] = a_enid(
         append($auto)
         ,
