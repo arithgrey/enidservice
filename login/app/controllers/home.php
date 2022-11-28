@@ -20,15 +20,13 @@ class Home extends CI_Controller
         $client->addScope("profile");
         $authUrl = '';
         if (isset($_GET['code'])) {
-            $token = $client->fetchAccessTokenWithAuthCode($this->input->get('code'));
-            xmp($token);
+            $token = $client->fetchAccessTokenWithAuthCode($this->input->get('code'));            
             $client->setAccessToken($token['access_token']);
             $google_oauth = new Google_Service_Oauth2($client);
-            $google_account_info = $google_oauth->userinfo->get();
-            xmp($google_account_info);
+            $google_account_info = $google_oauth->userinfo->get();            
             $email =  $google_account_info->email;
             $name =  $google_account_info->name;
-            
+            $picture = $google_account_info->picture;
             
         } else {
             $authUrl =  $client->createAuthUrl();
