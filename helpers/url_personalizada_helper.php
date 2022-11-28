@@ -60,6 +60,7 @@ function accesos_enid()
         "pregunta_search" => "pregunta/?tag=",        
         "search_q3" => "search/?q3=",
         "rifas"=> "rifas",
+        "resultados_rifas" => "resultados",
         "pedido_seguimiento" => "pedidos/?seguimiento=",
         "producto" => "producto/?producto=",        
         "producto_metricas" => "producto_metricas/?producto=",

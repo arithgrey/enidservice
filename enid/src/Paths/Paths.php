@@ -42,18 +42,20 @@ class Paths
 
         $sorteo = [
             "css" => [
-                
+                "confirm-alert.css",  
             ],
             "js" => [
-                "sorteo/principal.js"
+                "sorteo/principal.js",
+                "alerts/jquery-confirm.js",
             ]
         ];
         $sorteo_venta = [
             "css" => [
-                
+                "confirm-alert.css",  
             ],
             "js" => [
-                "sorteo/venta.js"
+                "sorteo/venta.js",
+                "alerts/jquery-confirm.js",
             ]
         ];
 

@@ -112,6 +112,40 @@ class Servicio_sorteo extends REST_Controller
 
         $this->response($response);
     }
+    function ganador_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id,numero_ganador,id_servicio")) {
+
+            $id = $param["id"];
+            $numero_ganador = $param["numero_ganador"];
+            
+            $response =  $this->servicio_sorteo_model->update(
+                [
+                    "numero_ganador" => $numero_ganador,
+                    "status" => 0
+                ],
+                [
+                    "id" => $id
+                ]
+            );
+            
+            $this->cerrar_sorteo($param["id_servicio"]);
+        }
+
+        $this->response($response);
+    }
+    private function cerrar_sorteo($id_servicio)
+    {
+
+        return $this->app->api("servicio/cerrar_sorteo", ["id_servicio" => $id_servicio], "json", "PUT");
+    }
+
+
+
 
 
     

@@ -19,6 +19,25 @@ if (!function_exists('invierte_date_time')) {
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);
 
+        if (prm_def($data, "es_sorteo") > 1) {
+            
+            $textos_rifas_pasadas = _text_(
+                crea_estrellas(3),
+                "Resultados 
+                    de nustros sorteos
+                    pasados",
+                crea_estrellas(3)
+            );
+            $response[] = d(a_enid($textos_rifas_pasadas,
+            [
+                "class" => 'col-sm-10 col-sm-offset-1 text-center display-7 
+                borde_accion resultados_sorteo p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer',
+                "href" => path_enid("resultados_rifas"),
+
+            ]
+            ), 13);
+        }
+
         $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
 
@@ -155,6 +174,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = "";
         if ($es_sorteo > 1) {
+
             $response = d([
                 d("Las rifas son transmitidas en"),
                 d($link_facebook),
