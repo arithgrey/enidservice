@@ -3,12 +3,12 @@
 }
 if (!function_exists('invierte_date_time')) {
 
-    function page_sigin($action)
+    function page_sigin($action, $data)
     {   
         
         $r[] = nuevo_usuario();
         $r[] = recuperacion();
-        $r[] = frm_acceso($action);
+        $r[] = frm_acceso($action, $data);
         $r[] = hiddens(
             [
                 "class" => "action",
@@ -21,10 +21,10 @@ if (!function_exists('invierte_date_time')) {
         
     }
 
-    function frm_acceso($action)
+    function frm_acceso($action, $data)
     {
         $r[] = img_default();
-        $r[] = frm_login();
+        $r[] = frm_login($data);
         if ($action === "registro") {
 
             $clases = "inf_usuario_registrado  mt-5 bg-light p-2 text-right f12 strong border border-secondary";
@@ -312,7 +312,7 @@ if (!function_exists('invierte_date_time')) {
         return d($response);
     }
 
-    function frm_login()
+    function frm_login($data)
     {
 
         $attr = add_attributes(
@@ -374,6 +374,9 @@ if (!function_exists('invierte_date_time')) {
         $form[] = btn("INICIAR", ["class" => "mt-5"]);
         $form[] = form_close();
 
+        $form[] = format_link( text_icon('fa fa-google',"Iniciar con Google"),
+        ["href" => $data["auth_url"],'class' => "mt-3"],0);
+        
         return append($form);
 
     }

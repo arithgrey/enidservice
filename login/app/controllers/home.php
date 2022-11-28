@@ -12,21 +12,40 @@ class Home extends CI_Controller
     function index()
     {
 
+        $client = new Google_Client();
+        $client->setClientId($this->config->item('googleClientId'));
+        $client->setClientSecret($this->config->item('googleClientSecret'));
+        $client->setRedirectUri($this->config->item('googleRedirectUri'));
+        $client->addScope("email");
+        $client->addScope("profile");
+        $authUrl = '';
+        if (isset($_GET['code'])) {
+            $token = $client->fetchAccessTokenWithAuthCode($_GET['code']);
+            $client->setAccessToken($token['access_token']);
+
+            $google_oauth = new Google_Service_Oauth2($client);
+            $google_account_info = $google_oauth->userinfo->get();
+            $email =  $google_account_info->email;
+            $name =  $google_account_info->name;
+            echo $email;
+            
+        } else {
+            $authUrl =  $client->createAuthUrl();
+        }
+
         $param = $this->input->get();
         $this->validate_user_sesssion();
-        $data = $this->app->session();        
-        $data = $this->app->cssJs($data, "login");                
-        $this->app->pagina($data, page_sigin(prm_def($param, "action")), 1);
-
+        $data = $this->app->session();
+        $data = $this->app->cssJs($data, "login");
+        $data["auth_url"] = $authUrl;
+        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
     }
 
     function validate_user_sesssion()
     {
 
-
         if (intval($this->app->is_logged_in()) > 0) {
             redirect(path_enid("url_home"));
-
         }
     }
 
@@ -34,6 +53,5 @@ class Home extends CI_Controller
     {
 
         $this->app->out();
-
     }
 }

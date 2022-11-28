@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
 
     function formulario_primer_registro($in_session, $param, $es_cliente, $data)
     {
-
+        
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
