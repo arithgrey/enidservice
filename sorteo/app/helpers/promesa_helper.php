@@ -30,20 +30,17 @@ if (!function_exists('invierte_date_time')) {
     }
     function render_plano($data, $id_servicio)
     {
-
         
         $numero_boletos = pr($data["boletos"], "boletos");
         
         $boletos = [];
         $boletos_pagos = 0;
         $boletos_por_pago = 0;
+        $numero_ganador = pr($data["boletos"], "numero_ganador");
+
         for ($b = 1; $b <= $numero_boletos; $b++) {
-
-            
-
-            $boleto_compra = busqueda_boleto_pago($b, $data["boletos_comprados"]);
-            
-
+    
+            $boleto_compra = busqueda_boleto_pago($b, $data["boletos_comprados"]);        
             $disponible = $boleto_compra["disponibilidad"];
             if ($disponible < 1) {
                 $boletos_por_pago++;
@@ -52,18 +49,22 @@ if (!function_exists('invierte_date_time')) {
             }
             $usuario_compra = $boleto_compra["usuario_compra"];
             $id_orden_compra = $boleto_compra["id_orden_compra"];
-            $nombre_usuario_compra  = $boleto_compra["nombre_usuario_compra"];
+            $nombre_usuario_compra  = ($numero_ganador > 0  ) ? "" : $boleto_compra["nombre_usuario_compra"];
 
             $extra_tickt = ($disponible < 1) ? "":"white";
             $icono = icon(_text_('fa fa-ticket fa-2x', $extra_tickt));
 
+
+            $extra_ganador = ($numero_ganador >  0) ? '':'agregar_deseos_sin_antecedente';
             $extra = ($disponible < 1) ?
-                "border border-secondary cursor_pointer agregar_deseos_sin_antecedente  numero_boleto"
+                _text_("border border-secondary cursor_pointer numero_boleto",$extra_ganador)
                 :
                 "cursor_pointer blue_bg white borde_green numero_boleto usuario_compra_ticket";   
+
+
+
+
             $tick_numero = _text("ticket_n_", $b);
-
-
 
             $icono_nombre = flex($icono, $nombre_usuario_compra,'flex-column','','fp8');
             $ticket_boleto = flex(
@@ -88,9 +89,10 @@ if (!function_exists('invierte_date_time')) {
 
         
         $seccion_tickets[] =  d(d(d(
-            textos_transmision(), 'col-sm-12 display-8  p-2 black '), 12), 'row mb-5');
+            textos_transmision($data), 'col-sm-12 display-8  p-2 black '), 12), 'row mb-5');
 
         $seccion_tickets[] =  d(d(d("Pulsa en los tickets para agregar al carrito tus boletos deseados", 'col-sm-12 display-8 borde_end p-2 black strong'), 12), 'row mb-5');
+        
         $seccion_tickets[] =  d(d(flex("", "Disponibles", "align-items-center", "mr-4 borde_yellow border border-secondary p-4", "f12  black "), 12), 13);
         $seccion_tickets[] =  d(d(flex("", "Comprados", "align-items-center mt-3 ", "mr-4  blue_bg white borde_green p-4", "f12  black "), 12), 13);
         $seccion_tickets[] =  d(d(flex($boletos_pagos, "Vendidos hasta el momento", "align-items-center mt-3 borde_green p-1", "mr-4 strong f12", "  black "), 12), 13);
@@ -113,11 +115,25 @@ if (!function_exists('invierte_date_time')) {
         $response[] = hiddens(["class" => "boleto_comprado", "value" => $data["boleto"]]);
         $response[] = hiddens(["class" => "numero_sorteo", "value" => $data["numero_sorteo"]]);
         $response[] = modal_cantidad_fechas($data);
-
+        $response[] = modal_finalizacion_concurso($data);
+        
 
         return d(d($response, 13), 10, 1);
     }
-    function textos_transmision(){
+    function textos_transmision($data){
+
+        $numero_ganador = pr($data["boletos"], "numero_ganador");
+        $response = [];
+        
+        if($numero_ganador > 0){
+            
+            $boleto_compra = busqueda_boleto_pago($numero_ganador, $data["boletos_comprados"]);                                
+            $nombre_usuario_compra = $boleto_compra["nombre_usuario_compra"];
+            $str = _text_("El sorteó finalizo!", "número ganador", $numero_ganador, $nombre_usuario_compra);
+            
+            $response[] = d($str,'p-4 mb-5 bg_black borde_amarillo white f15');
+        
+        }
 
         $path = path_enid("enid_service_facebook", 0, 1);
         $link_facebook = a_enid(
@@ -139,11 +155,13 @@ if (!function_exists('invierte_date_time')) {
             ],
             0
         );
-        return _text_(
+        $response[] = _text_(
             "Las rifas son trasmitidas en",
             $link_facebook,
             "y en ",$link_youtube
         );
+
+        return append($response);
 
 
     }
@@ -208,6 +226,38 @@ if (!function_exists('invierte_date_time')) {
         $modal = append($form);
         return gb_modal($modal, "modal_edicion_sorteo");
     }
+    function modal_finalizacion_concurso($data)
+    {
+
+        $id_servicio = pr($data["boletos"], "id_servicio");
+        $sorteo = $data["boletos"];
+        $id_sorteo = pr($sorteo, "id");        
+
+        $select = create_select(
+            $data["boletos_comprados"], 
+            "numero_ganador",
+            "numero_ganador",
+            "numero_ganador",
+            "numero_boleto",
+            "numero_boleto");
+
+        $form[] = d(_titulo('Qué boleto fué el ganador?'), 'col-xs-12');
+        $formulario[] = form_open("", ["class" => "form_sorteo_finalizacion"]);
+
+        $formulario[] = d($select,12);
+        
+        $formulario[] = hiddens(["class" => "id_sorteo", "name" => "id", "value" => $id_sorteo]);
+        $formulario[] = hiddens(["class" => "id_servicio", "name" => "id_servicio", "value" => $id_servicio]);
+        
+
+        $formulario[] = d(btn('Finalizar sorteo!', ['class' => 'mt-5']),'col-xs-12');
+        $formulario[] = form_close();
+
+        $form[] = d($formulario);
+        $modal = append($form);
+        return gb_modal($modal, "modal_finalizacion_sorteo");
+    }
+
 
     function enviar_compra()
     {
@@ -528,8 +578,20 @@ if (!function_exists('invierte_date_time')) {
                     "id" => $id_servicio
                 ]
             );
+
             $texto_editar = d($editar, 13);
-            $response = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
+            $contenido[] = d($texto_editar, ' mr-5 col-lg-12 text-right border-bottom');
+
+            $numero_ganador = pr($data["boletos"], "numero_ganador");
+            if($numero_ganador < 1){
+                $contenido[] = d(d(d(format_link("Dar por terminado el concurso!",
+                [
+                    "class" => "termino_sorteo"
+                ]), 'col-sm-12 display-8 borde_end p-2 black strong'), 12), 'row mb-5');
+            }
+            
+            $response = append($contenido);
+
         }
         return $response;
     }

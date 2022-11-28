@@ -327,6 +327,22 @@ class Servicio extends REST_Controller
 
         $this->response($response);
     }
+    function cerrar_sorteo_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+
+        if (fx($param, "id_servicio")) {
+
+            $id_servicio = $param["id_servicio"];
+            $response = $this->serviciosmodel->q_up("status", 3, $id_servicio);            
+
+        }
+
+        $this->response($response);
+    }
+
 
     private function baja_promocion($id_servicio)
     {

@@ -6,8 +6,38 @@ $(document).ready(() => {
     valida_ticket_boleto();
     $(".editar_sorteo").click(muestra_form_cantidades);
     $('.form_edicion_sorteo').submit(valores_sorteo);
+    $(".termino_sorteo").click(finaliza_concurso);
+    $(".form_sorteo_finalizacion").submit(finaliza_sorteo);
 
 });
+let finaliza_sorteo = function(e){
+    
+    let $numero_ganador = get_valor_selected(".numero_ganador");
+    let $text = _text_("Seguro el número ganador fué el", $numero_ganador);
+    show_confirm(
+        $text,
+        "",
+        "Si! esté número fué el ganador!", finaliza);
+    
+    e.preventDefault();
+}
+
+let finaliza = function (e) {
+
+    let data_send = $(".form_sorteo_finalizacion").serialize();
+    let url = "../q/index.php/api/servicio_sorteo/ganador/format/json/";
+    request_enid("PUT", data_send, url, function(data){        
+        redirect("");
+
+    });
+    e.preventDefault();
+
+};
+
+
+let finaliza_concurso = function(e){
+    $("#modal_finalizacion_sorteo").modal("show");  
+}
 
 let valores_sorteo = function (e) {
 

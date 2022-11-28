@@ -457,9 +457,12 @@ class serviciosmodel extends CI_Model
                 " : "";
 
         $no_empresa = (prm_def($param, 'es_empresa') < 1) ? 'AND  es_publico >  0' : ' ';
+        
+        $extra_status = (prm_def($param,'es_sorteo') > 0 && prm_def($param,'resultados') > 0 ) ? " AND status = 3 " :" AND status = 1 ";
+
         return " WHERE                     
                     flag_imagen > 0
-                    AND status = 1
+                    " . $extra_status . "
                     " . $extra_empresa . "
                     " . $extra_vendedor . "
                     " . $extra_existencia . "                           

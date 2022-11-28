@@ -1988,5 +1988,12 @@ ul li a {
 }
 
 .borde_amarillo:hover {
-    background: #005bac;
+    background:#070855;
+}
+
+.bg_blue_sorteo{
+    background:#050659;
+}
+.resultados_sorteo label{
+    color: white!important;
 }

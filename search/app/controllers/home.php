@@ -40,7 +40,8 @@ class Home extends CI_Controller
             "agrega_clasificaciones" => (!$is_mobile),
             "in_session" => 0,
             "page" => $pagina,
-            "es_sorteo" => prm_def($param, "sorteo")
+            "es_sorteo" => prm_def($param, "sorteo"),
+            "resultados" => prm_def($param, "resultados")
 
         ];
         $data["es_sorteo"] = prm_def($param, "sorteo");
