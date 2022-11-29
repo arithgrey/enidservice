@@ -538,6 +538,19 @@ class usuario extends REST_Controller
         }
         $this->response($response);
     }
+    function email_POST()
+    {
+        $param = $this->post();
+        $response = [];
+        if (fx($param, "email")) {
+
+            $params = ["id", "name", "email", "fecha_registro", "id_empresa"];            
+            $params_where = ["email" => $param["email"], "status" => 1];
+            $response = $this->usuario_model->get($params, $params_where);            
+
+        }
+        $this->response($response);
+    }
 
     function num_registros_preriodo_GET()
     {

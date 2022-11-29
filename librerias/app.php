@@ -639,5 +639,51 @@ class app extends CI_Controller
     
         return $this->api("ubicacion/ventas_mes");
     }    
+    function estatus_enid_service($q = [])
+    {
+
+        return $this->api("status_enid_service/textos", $q);
+    }
+
+    function get_empresa($id_empresa)
+    {
+
+        return $this->api("empresa/id", ["id_empresa" => $id_empresa]);
+    }
+
+    function get_perfil_user($id_usuario)
+    {
+
+        $q["id_usuario"] = $id_usuario;
+        return $this->api("usuario_perfil/usuario", $q);
+    }
+
+    function get_perfil_data($id_usuario)
+    {
+
+        $q["id_usuario"] = $id_usuario;
+        return $this->api("perfiles/data_usuario", $q);
+    }
+
+    function get_empresa_permiso($id_empresa)
+    {
+
+        $q["id_empresa"] = $id_empresa;
+        return $this->api("empresa_permiso/empresa", $q);
+    }
+
+    function get_empresa_recursos($id_empresa)
+    {
+        $q["id_empresa"] = $id_empresa;
+        return $this->api("empresa_recurso/recursos", $q);
+    }
+
+    function get_recursos_perfiles($q)
+    {
+
+        $q["id_perfil"] = $q[0]["idperfil"];
+        return $this->api("recurso/navegacion", $q);
+    }
+
 
 }

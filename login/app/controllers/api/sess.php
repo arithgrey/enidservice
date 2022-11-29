@@ -57,17 +57,17 @@ class Sess extends REST_Controller
     private function crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado = 0)
     {
 
-        $empresa = $this->get_empresa($id_empresa);
-        $perfiles = $this->get_perfil_user($id_usuario);
-        $perfildata = $this->get_perfil_data($id_usuario);
-        $empresa_permiso = $this->get_empresa_permiso($id_empresa);
-        $empresa_recurso = $this->get_empresa_recursos($id_empresa);
-        $status_enid = $this->estatus_enid_service();
+        $empresa = $this->app->get_empresa($id_empresa);
+        $perfiles = $this->app->get_perfil_user($id_usuario);
+        $perfildata = $this->app->get_perfil_data($id_usuario);
+        $empresa_permiso = $this->app->get_empresa_permiso($id_empresa);
+        $empresa_recurso = $this->app->get_empresa_recursos($id_empresa);
+        $status_enid = $this->app->estatus_enid_service();
         $response = 0;
 
         if (es_data($perfiles)) {
 
-            $navegacion = $this->get_recursos_perfiles($perfiles);
+            $navegacion = $this->app->get_recursos_perfiles($perfiles);
             $usuario[] = ["id" => $id_usuario];
             $path_img_usuario = $this->app->add_imgs_usuario($usuario);
 
@@ -97,52 +97,7 @@ class Sess extends REST_Controller
         return $response;
     }
 
-    private function estatus_enid_service($q = [])
-    {
-
-        return $this->app->api("status_enid_service/textos", $q);
-    }
-
-    private function get_empresa($id_empresa)
-    {
-
-        return $this->app->api("empresa/id", ["id_empresa" => $id_empresa]);
-    }
-
-    private function get_perfil_user($id_usuario)
-    {
-
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("usuario_perfil/usuario", $q);
-    }
-
-    private function get_perfil_data($id_usuario)
-    {
-
-        $q["id_usuario"] = $id_usuario;
-        return $this->app->api("perfiles/data_usuario", $q);
-    }
-
-    private function get_empresa_permiso($id_empresa)
-    {
-
-        $q["id_empresa"] = $id_empresa;
-        return $this->app->api("empresa_permiso/empresa", $q);
-    }
-
-    private function get_empresa_recursos($id_empresa)
-    {
-        $q["id_empresa"] = $id_empresa;
-        return $this->app->api("empresa_recurso/recursos", $q);
-    }
-
-    private function get_recursos_perfiles($q)
-    {
-
-        $q["id_perfil"] = $q[0]["idperfil"];
-        return $this->app->api("recurso/navegacion", $q);
-    }
-
+    
     function servicio_POST()
     {
 
