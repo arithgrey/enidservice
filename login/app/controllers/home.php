@@ -73,7 +73,7 @@ class Home extends CI_Controller
     {
 
         $response = [];
-        $usuario = $this->usuario_email($email);
+        $usuario = $this->app->usuario_email($email);
         $response["usuario"] = $usuario;
         $response["login"] = false;
         if (es_data($usuario)) {
@@ -133,11 +133,7 @@ class Home extends CI_Controller
         return $response;
     }
 
-    private function usuario_email($email)
-    {
-
-        return $this->app->api("usuario/email", ["email" => $email], "json", "POST");
-    }
+    
     function validate_user_sesssion()
     {
 
