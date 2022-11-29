@@ -684,6 +684,11 @@ class app extends CI_Controller
         $q["id_perfil"] = $q[0]["idperfil"];
         return $this->api("recurso/navegacion", $q);
     }
+    function usuario_email($email)
+    {
+
+        return $this->api("usuario/email", ["email" => $email], "json", "POST");
+    }
 
 
 }
