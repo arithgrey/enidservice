@@ -20,20 +20,20 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "login");
         $data["auth_url"] = $this->verifica_google_session($param);
-        //$data["link_registro_google"] = $this->link_registro_google();
-        $data["link_registro_google"] = "";
+        $data["link_registro_google"] = $this->link_registro_google();
+        
         $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
     }
     private function link_registro_google()
     {
 
-        $client = new Google_Client();
-        $client->setClientId($this->config->item('googleClientId'));
-        $client->setClientSecret($this->config->item('googleClientSecret'));
-        $client->setRedirectUri($this->config->item('googleRedirectUriRegister'));
-        $client->addScope("email");
-        $client->addScope("profile");
-        return $client->createAuthUrl();
+        $cliente_registro = new Google_Client();
+        $cliente_registro->setClientId($this->config->item('googleClientId'));
+        $cliente_registro->setClientSecret($this->config->item('googleClientSecret'));
+        $cliente_registro->setRedirectUri($this->config->item('googleRedirectUriRegister'));
+        $cliente_registro->addScope("email");
+        $cliente_registro->addScope("profile");
+        return $cliente_registro->createAuthUrl();
     }
     private function verifica_google_session($param)
     {
@@ -47,7 +47,7 @@ class Home extends CI_Controller
 
         $authUrl = '';
 
-        if ($_GET["code"]) {
+        if (isset($_GET["code"])) {
             $token = $client->fetchAccessTokenWithAuthCode($param['code']);
             $client->setAccessToken($token['access_token']);
             $google_oauth = new Google_Service_Oauth2($client);
