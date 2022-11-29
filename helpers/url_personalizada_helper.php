@@ -73,7 +73,7 @@ function accesos_enid()
         "simulador" => "simulador-utilidad",        
         "promesa_ventas" => "promesa_ventas",        
         "sorteo" => "sorteo/?q=",
-        "login_registrado" => "login/?action=registro",        
+        "login_registrado" => "../login/?action=registro",        
         "busqueda_usuario" => 'usuarios_enid_service/?q=',
         "url_home" => "../reporte_enid",                        
         "img_faq" => "img_tema/productos/",        
