@@ -6,7 +6,7 @@ if (!function_exists('invierte_date_time')) {
     function page_sigin($action, $data)
     {   
         
-        $r[] = nuevo_usuario();
+        $r[] = nuevo_usuario($data);
         $r[] = recuperacion();
         $r[] = frm_acceso($action, $data);
         $r[] = hiddens(
@@ -105,19 +105,19 @@ if (!function_exists('invierte_date_time')) {
         );
     }
 
-    function nuevo_usuario()
+    function nuevo_usuario($data)
     {
 
         $r[] = img_default();
         $r[] = _titulo('Registro');
-        $r[] = frm_registro();
+        $r[] = frm_registro($data);
         $r[] = ya_registro();
 
         return d($r, "seccion_registro_nuevo_usuario_enid_service");
 
     }
 
-    function frm_registro()
+    function frm_registro($data)
     {
 
         $config = [
@@ -212,6 +212,12 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = form_close(place("place_registro_miembro"));
+        
+        $r[] = format_link( text_icon('fa fa-google',"Registrate Google"),
+        [
+            "href" => $data["link_registro_google"],
+            'class' => "mt-3"
+        ],0);
 
         return append($r);
 

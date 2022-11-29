@@ -1,15 +1,13 @@
 <?php
 
-use function Livewire\str;
 
- if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
     function __construct()
     {
-        parent::__construct();
-        $this->load->helper("log");
+        parent::__construct();        
         $this->load->library(lib_def());
     }
 
@@ -19,22 +17,9 @@ class Home extends CI_Controller
         $param = $this->input->get();
         $authUrl = $this->verifica_google_session();
         $this->validate_user_sesssion();
-        $data = $this->app->session();
-        $data = $this->app->cssJs($data, "login");
-        $data["auth_url"] = $authUrl;
-        $data["link_registro_google"] = $this->link_registro_google();
-        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
+        $data = $this->app->session();        
     }
-    private function link_registro_google(){
-                
-        $client = new Google_Client();
-        $client->setClientId($this->config->item('googleClientId'));
-        $client->setClientSecret($this->config->item('googleClientSecret'));
-        $client->setRedirectUri($this->config->item('googleRedirectUriRegister'));
-        $client->addScope("email");
-        $client->addScope("profile");
-        return $client->createAuthUrl();
-    }
+    
     private function verifica_google_session(){
         
         $param = $this->input->get();
@@ -56,17 +41,15 @@ class Home extends CI_Controller
 
             $email =  $google_account_info->email;
             $picture =  $google_account_info->picture;
-            /*
-                $name =  $google_account_info->name;            
-            */
+            $name =  $google_account_info->name;            
+            
+            xmp($google_account_info);
             
             if($google_account_info->verifiedEmail){
-                $this->google_session($email, $picture);
+                //$this->google_session($email, $picture);
             }
                     
-        } else {
-            $authUrl =  $client->createAuthUrl();
-        }
+        } 
         return $authUrl;
     }
     private function google_session($email, $picture)
