@@ -374,7 +374,7 @@ if (!function_exists('invierte_date_time')) {
         $form[] = btn("INICIAR", ["class" => "mt-5"]);
         $form[] = form_close();
 
-        $form[] = format_link( text_icon('fa fa-google',"Iniciar con Google"),
+        $form[] = format_link( text_icon('fa fa-google',"Accede con Google"),
         ["href" => $data["auth_url"],'class' => "mt-3"],0);
         
         return append($form);
