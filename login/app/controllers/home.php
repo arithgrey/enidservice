@@ -1,6 +1,6 @@
 <?php
 
- if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
@@ -15,16 +15,18 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        
+
         $this->validate_user_sesssion();
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "login");
-        $data["auth_url"] = $this->verifica_google_session();
-        $data["link_registro_google"] = $this->link_registro_google();
+        $data["auth_url"] = $this->verifica_google_session($param);
+        //$data["link_registro_google"] = $this->link_registro_google();
+        $data["link_registro_google"] = "";
         $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
     }
-    private function link_registro_google(){
-                
+    private function link_registro_google()
+    {
+
         $client = new Google_Client();
         $client->setClientId($this->config->item('googleClientId'));
         $client->setClientSecret($this->config->item('googleClientSecret'));
@@ -33,38 +35,29 @@ class Home extends CI_Controller
         $client->addScope("profile");
         return $client->createAuthUrl();
     }
-    private function verifica_google_session(){
-        
-        $param = $this->input->get();
+    private function verifica_google_session($param)
+    {
+
         $client = new Google_Client();
         $client->setClientId($this->config->item('googleClientId'));
         $client->setClientSecret($this->config->item('googleClientSecret'));
         $client->setRedirectUri($this->config->item('googleRedirectUri'));
         $client->addScope("email");
         $client->addScope("profile");
-    
-        $authUrl = '';
-        if (strlen(prm_def($param, 'code')) > 3) {
-            
-            if(prm_def($param,"authuser") > 0){
-                
-                $token = $client->fetchAccessTokenWithAuthCode($param['code']);
-                $client->setAccessToken($token['access_token']);
-                $google_oauth = new Google_Service_Oauth2($client);
-                $google_account_info = $google_oauth->userinfo->get();
 
-                $email =  $google_account_info->email;
-                $picture =  $google_account_info->picture;
-                /*
-                    $name =  $google_account_info->name;            
-                */            
-                if($google_account_info->verifiedEmail > 0){
-                    $this->google_session($email, $picture);
-                }
-            }
+        $authUrl = '';
+
+        if ($_GET["code"]) {
+            $token = $client->fetchAccessTokenWithAuthCode($param['code']);
+            $client->setAccessToken($token['access_token']);
+            $google_oauth = new Google_Service_Oauth2($client);
+            $google_account_info = $google_oauth->userinfo->get();
+
+            $email =  $google_account_info->email;
+            $picture =  $google_account_info->picture;
+            $this->google_session($email, $picture);
+
             
-            
-                    
         } else {
             $authUrl =  $client->createAuthUrl();
         }
@@ -85,14 +78,16 @@ class Home extends CI_Controller
             $email = $usuario["email"];
             $id_empresa = $usuario["id_empresa"];
 
-            $session = $this->enid_session($picture,$id_usuario, $nombre, $email, $id_empresa);
+            $session = $this->enid_session($picture, $id_usuario, $nombre, $email, $id_empresa);
             $response["session"] = $session;
-            $response["session_creada"] = $this->app->get_session();        
+            $response["session_creada"] = $this->app->get_session();
             redirect(path_enid("url_home"));
-        }
 
+        }else{
+            redirect(path_enid("login_sin_registro"));
+        }
     }
-    private function enid_session($picture ,$id_usuario, $nombre, $email, $id_empresa)
+    private function enid_session($picture, $id_usuario, $nombre, $email, $id_empresa)
     {
 
         $empresa = $this->app->get_empresa($id_empresa);
@@ -134,7 +129,7 @@ class Home extends CI_Controller
         return $response;
     }
 
-    
+
     function validate_user_sesssion()
     {
 
