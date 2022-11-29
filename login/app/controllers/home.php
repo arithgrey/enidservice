@@ -1,7 +1,5 @@
 <?php
 
-use function Livewire\str;
-
  if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller
@@ -46,22 +44,25 @@ class Home extends CI_Controller
         $client->addScope("profile");
     
         $authUrl = '';
-        if (strlen(prm_def($param, 'code')) > 3 ) {
+        if (strlen(prm_def($param, 'code')) > 3) {
             
-            $token = $client->fetchAccessTokenWithAuthCode($param['code']);
+            if(prm_def($param,"authuser") > 0){
+                
+                $token = $client->fetchAccessTokenWithAuthCode($param['code']);
+                $client->setAccessToken($token['access_token']);
+                $google_oauth = new Google_Service_Oauth2($client);
+                $google_account_info = $google_oauth->userinfo->get();
 
-            $client->setAccessToken($token['access_token']);
-            $google_oauth = new Google_Service_Oauth2($client);
-            $google_account_info = $google_oauth->userinfo->get();
-
-            $email =  $google_account_info->email;
-            $picture =  $google_account_info->picture;
-            /*
-                $name =  $google_account_info->name;            
-            */            
-            if($google_account_info->verifiedEmail > 0){
-                $this->google_session($email, $picture);
+                $email =  $google_account_info->email;
+                $picture =  $google_account_info->picture;
+                /*
+                    $name =  $google_account_info->name;            
+                */            
+                if($google_account_info->verifiedEmail > 0){
+                    $this->google_session($email, $picture);
+                }
             }
+            
             
                     
         } else {
