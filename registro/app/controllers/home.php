@@ -26,7 +26,7 @@ class Home extends CI_Controller
         $client = new Google_Client();
         $client->setClientId($this->config->item('googleClientId'));
         $client->setClientSecret($this->config->item('googleClientSecret'));
-        $client->setRedirectUri($this->config->item('googleRedirectUri'));
+        $client->setRedirectUri($this->config->item('googleRedirectUriRegister'));
         $client->addScope("email");
         $client->addScope("profile");
     
