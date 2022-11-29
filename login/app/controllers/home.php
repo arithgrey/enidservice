@@ -58,13 +58,11 @@ class Home extends CI_Controller
             $picture =  $google_account_info->picture;
             /*
                 $name =  $google_account_info->name;            
-            */
-            xmp($google_account_info);
-            /*
+            */            
             if($google_account_info->verifiedEmail > 0){
                 $this->google_session($email, $picture);
             }
-            */
+            
                     
         } else {
             $authUrl =  $client->createAuthUrl();
