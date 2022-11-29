@@ -108,6 +108,7 @@ if (!function_exists('invierte_date_time')) {
     function nuevo_usuario($data)
     {
 
+        $r[] = d(d("Primero registremos tu usuario!","f15 bg_black borde_amarillo white"),'d-none texto_registro');
         $r[] = img_default();
         $r[] = _titulo('Registro');
         $r[] = frm_registro($data);
