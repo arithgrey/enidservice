@@ -38,9 +38,7 @@ class Home extends CI_Controller
             if($google_account_info->verifiedEmail){       
 
                 $this->registro_cliente_google($name, $email); 
-                $this->google_session($email, $picture);               
-                
-
+                $this->google_session($email, $picture);                               
             }
                   
         } 

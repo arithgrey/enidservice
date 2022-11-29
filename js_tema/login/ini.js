@@ -282,6 +282,10 @@ let valida_seccion_inicial = () => {
         case 'nuevo':
             mostrar_seccion_nuevo_usuario();
             break;
+        case 'sin_usuario':
+            $(".texto_registro").removeClass("d-none");
+            mostrar_seccion_nuevo_usuario();
+            break;
         case 'recuperar':
             muestra_contenedor_recuperacion();
             break;
