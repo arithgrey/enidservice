@@ -277,6 +277,7 @@ let muestra_contenedor_recuperacion = () => {
     recorre('#flipkart-navbar');
 };
 let valida_seccion_inicial = () => {
+    $(".base_enid_web").removeClass("top_100");
     switch (get_parameter('.action')) {
         case 'nuevo':
             mostrar_seccion_nuevo_usuario();

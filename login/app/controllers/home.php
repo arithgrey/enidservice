@@ -17,11 +17,11 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
-        $authUrl = $this->verifica_google_session();
+        
         $this->validate_user_sesssion();
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "login");
-        $data["auth_url"] = $authUrl;
+        $data["auth_url"] = $this->verifica_google_session();
         $data["link_registro_google"] = $this->link_registro_google();
         $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
     }
@@ -59,10 +59,12 @@ class Home extends CI_Controller
             /*
                 $name =  $google_account_info->name;            
             */
-            
-            if($google_account_info->verifiedEmail){
+            xmp($google_account_info);
+            /*
+            if($google_account_info->verifiedEmail > 0){
                 $this->google_session($email, $picture);
             }
+            */
                     
         } else {
             $authUrl =  $client->createAuthUrl();
