@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use function Livewire\str;
+
+ if (!defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller
 {
@@ -12,15 +16,28 @@ class Home extends CI_Controller
     function index()
     {
 
+        $param = $this->input->get();
+        $authUrl = $this->verifica_google_session();
+        $this->validate_user_sesssion();
+        $data = $this->app->session();
+        $data = $this->app->cssJs($data, "login");
+        $data["auth_url"] = $authUrl;
+        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
+    }
+    private function verifica_google_session(){
+        
+        $param = $this->input->get();
         $client = new Google_Client();
         $client->setClientId($this->config->item('googleClientId'));
         $client->setClientSecret($this->config->item('googleClientSecret'));
         $client->setRedirectUri($this->config->item('googleRedirectUri'));
         $client->addScope("email");
         $client->addScope("profile");
+    
         $authUrl = '';
-        if (isset($_GET['code'])) {
-            $token = $client->fetchAccessTokenWithAuthCode($this->input->get('code'));
+        if (strlen(prm_def($param, 'code')) > 3 ) {
+            
+            $token = $client->fetchAccessTokenWithAuthCode($param['code']);
 
             $client->setAccessToken($token['access_token']);
             $google_oauth = new Google_Service_Oauth2($client);
@@ -32,18 +49,15 @@ class Home extends CI_Controller
             /*
                 $name =  $google_account_info->name;            
             */
-            $this->google_session($email, $picture);
+            //$this->google_session($email, $picture);
+            xmp($token);
+
+            xmp($google_account_info);
 
         } else {
             $authUrl =  $client->createAuthUrl();
         }
-
-        $param = $this->input->get();
-        $this->validate_user_sesssion();
-        $data = $this->app->session();
-        $data = $this->app->cssJs($data, "login");
-        $data["auth_url"] = $authUrl;
-        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
+        return $authUrl;
     }
     private function google_session($email, $picture)
     {
