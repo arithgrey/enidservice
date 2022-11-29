@@ -175,34 +175,21 @@ if (!function_exists('invierte_date_time')) {
             ], _text_pass
         );
 
-        $perfil[] = [
-            'nombre_perfil' => 'Quiero ser afiliado - vender artículos de enid service para ganar comisiones',
-            'id_perfil' => 6
-        ];
+        
         $perfil[] = [
             'nombre_perfil' => 'Quiero comprar',
             'id_perfil' => 20
         ];
-        $perfil[] = [
-            'nombre_perfil' => 'Quiero hacer entregas',
-            'id_perfil' => 21
-        ];
-
+        
         $r[] = create_select(
             $perfil,
             'perfil',
-            'perfil form-control mt-5 borde_black black',
+            'perfil form-control mt-5 borde_black black d-none',
             'perfil',
             'nombre_perfil',
             'id_perfil'
         );
 
-        $r[] = a_texto('¿Cómo funciona?',
-            [
-                "href" => path_enid('sobre_vender'),
-                "class" =>  "mt-3"
-            ]
-        );
         $r[] = place("place_password_afiliado");
         $r[] = tipo_distribucion();
         $r[] = btn('Registrar',

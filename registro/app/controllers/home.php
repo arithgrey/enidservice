@@ -37,7 +37,7 @@ class Home extends CI_Controller
             
             if($google_account_info->verifiedEmail){       
 
-                $this->vendedor($name, $email); 
+                $this->registro_cliente_google($name, $email); 
                 $this->google_session($email, $picture);               
                 
 
@@ -109,13 +109,14 @@ class Home extends CI_Controller
         }
         return $response;
     }
-    private function vendedor($nombre, $email){
+    private function registro_cliente_google($nombre, $email){
         
         return $this->app->api("usuario/vendedor", 
         [
             "email" => $email,
             "nombre" => $nombre,
-            "password" => sha1($email)
+            "password" => sha1($email),
+            "perfil" => 20
         ], 
         "json", "POST");
 

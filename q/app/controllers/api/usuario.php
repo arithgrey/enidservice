@@ -652,7 +652,7 @@ class usuario extends REST_Controller
     function vendedor_POST()
     {
         $param = $this->post();
-        if (fx($param, "nombre,email,password")) {
+        if (fx($param, "nombre,email,password,perfil")) {
 
             $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
@@ -660,12 +660,14 @@ class usuario extends REST_Controller
 
                 $nombre = $param["nombre"];
                 $email = $param["email"];
+                $password = $param["password"];
+                $perfil = $param['perfil'];
 
                 $params = [
                     "email" => $email,
                     "id_empresa" => 1,
                     "id_departamento" => 9,
-                    "password" => $param["password"],
+                    "password" => $password,
                     "name" => $nombre,
                     "id_usuario_referencia" => 180,
                     'tiene_auto' => prm_def($param, 'tiene_auto'),
@@ -681,7 +683,7 @@ class usuario extends REST_Controller
                 if (intval($id_usuario) > 0) {
 
                     $q["id_usuario"] = $id_usuario;
-                    $q["puesto"] = $param['perfil'];
+                    $q["puesto"] = $perfil;
                     $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
 
                     if ($response["usuario_permisos"] > 0) {
@@ -689,15 +691,13 @@ class usuario extends REST_Controller
                         $response["usuario_registrado"] = 1;
                     }
 
-
                     $simple = (prm_def($param, "simple") > 0) ? 1 : 0;
                     if ($simple == 0) {
 
                         $this->inicia_proceso_compra($param, $id_usuario, prm_def($param, "servicio"));
                     }
 
-
-                    $this->notifica_registro_usuario($nombre, $email);
+                    //$this->notifica_registro_usuario($nombre, $email);
                 }
             }
             $this->response($response);
