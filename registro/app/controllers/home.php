@@ -16,8 +16,8 @@ class Home extends CI_Controller
 
         $param = $this->input->get();
         $authUrl = $this->verifica_google_session();
-        $this->validate_user_sesssion();
-        $data = $this->app->session();        
+        //$this->validate_user_sesssion();
+        //$data = $this->app->session();        
     }
     
     private function verifica_google_session(){
@@ -30,7 +30,7 @@ class Home extends CI_Controller
         $client->addScope("email");
         $client->addScope("profile");
     
-        $authUrl = '';
+        
         if (strlen(prm_def($param, 'code')) > 3 ) {
             
             $token = $client->fetchAccessTokenWithAuthCode($param['code']);
@@ -43,35 +43,25 @@ class Home extends CI_Controller
             $picture =  $google_account_info->picture;
             $name =  $google_account_info->name;            
             
-            xmp($google_account_info);
-            
             if($google_account_info->verifiedEmail){
                 //$this->google_session($email, $picture);
+                $vendedor = $this->vendedor($name, $email);
+                xmp($vendedor);
+
             }
                     
         } 
-        return $authUrl;
+        
     }
-    private function google_session($email, $picture)
-    {
-
-        $response = [];
-        $usuario = $this->usuario_email($email);
-        $response["usuario"] = $usuario;
-        $response["login"] = false;
-        if (es_data($usuario)) {
-
-            $usuario = $usuario[0];
-            $id_usuario = $usuario["id"];
-            $nombre = $usuario["name"];
-            $email = $usuario["email"];
-            $id_empresa = $usuario["id_empresa"];
-
-            $session = $this->enid_session($picture,$id_usuario, $nombre, $email, $id_empresa);
-            $response["session"] = $session;
-            $response["session_creada"] = $this->app->get_session();        
-            redirect(path_enid("url_home"));
-        }
+    private function vendedor($nombre, $email){
+        
+        return $this->app->api("usuario/vendedor", 
+        [
+            "email" => $email,
+            "nombre" => $nombre,
+            "password" => sha1($email)
+        ], 
+        "json", "POST");
 
     }
     private function enid_session($picture ,$id_usuario, $nombre, $email, $id_empresa)
