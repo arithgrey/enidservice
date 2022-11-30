@@ -607,7 +607,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $es_vendedor = $data["es_vendedor"];
-        
+        $r[] = hiddens([
+            "class" => "es_vendedor_sorteo", 
+            "value" => es_administrador_o_vendedor($data) 
+        ]);
+         
         $r[] = _titulo("¿Dónde se encuentra mi pedido?");
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
@@ -762,12 +766,11 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
                 'Finalizar compra',
                 [
-                    'href' => $path,
-                    'class' => 'mt-5'
+                    'href' => $path                    
                 ]
             );
         }
-        return append($response);
+        return d(d($response,'col-xs-12 mt-5'),13);
     }
 
     function format_imagen_repartidor($recibo)

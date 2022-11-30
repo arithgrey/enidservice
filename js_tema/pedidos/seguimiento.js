@@ -20,7 +20,6 @@ let $seccion_opciones = $('.seccion_opciones');
 let $es_sorteo = $('.es_sorteo');
 
 $(document).ready(function () {
-
     
     valida_notificacion_pago();
     carga_productos_sugeridos();
@@ -34,17 +33,20 @@ $(document).ready(function () {
     $form_ingreso_cancelacion.submit(ingreso_cancelacion);
     $sin_deseo_puntos.click(no_desea_puntos);
     valida_compra_sorteo();
-
-
+    
 
 });
 let valida_compra_sorteo = () => {
 
-    let $sorteo = parseInt($es_sorteo.val());   
-    if( $sorteo > 0){ 
-        $(".titulo_pago_pedido").text("¿Ya se pagó el ticket?");
-        $('#modal_notificacion_entrega').modal("show");                
+    let $es_vendedor_sorteo = $(".es_vendedor_sorteo").val();
+    if(parseInt($es_vendedor_sorteo) > 0){
+        let $sorteo = parseInt($es_sorteo.val());   
+        if( $sorteo > 0){ 
+            $(".titulo_pago_pedido").text("¿Ya se pagó el ticket?");
+            $('#modal_notificacion_entrega').modal("show");                
+        }
     }
+    
 };
 let valida_notificacion_pago = () => {
 
