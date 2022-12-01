@@ -35,12 +35,17 @@ class Home extends CI_Controller
             $name =  $google_account_info->name;      
             $picture =  $google_account_info->picture;      
             
+            /*
             if($google_account_info->verifiedEmail){       
 
-                $this->registro_cliente_google($name, $email); 
+                $this->registro_con_google($name, $email); 
                 $this->google_session($email, $picture);                               
             }
-                  
+            */
+            xmp($google_oauth);
+
+            xmp($param);
+            xmp($google_account_info);
         } 
         
     }
@@ -111,7 +116,7 @@ class Home extends CI_Controller
         }
         return $response;
     }
-    private function registro_cliente_google($nombre, $email){
+    private function registro_con_google($nombre, $email){
         
         return $this->app->api("usuario/vendedor", 
         [

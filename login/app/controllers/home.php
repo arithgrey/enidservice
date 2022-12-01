@@ -36,14 +36,12 @@ class Home extends CI_Controller
         
 
         $q = prm_def($param, "q");        
-        switch ($q) {
-            /*Afiliado*/
+        switch ($q) {            
             case 23874:		
-
+                /*Afiliado*/
                 $cliente_registro->setState('q=6');
                 break;
-        
-            
+                
             case 18369:
                 /*Repartidor*/
                 $cliente_registro->setState('q=21');
@@ -76,9 +74,8 @@ class Home extends CI_Controller
 
             $email =  $google_account_info->email;
             $picture =  $google_account_info->picture;
-            xmp($google_oauth);
-            xmp($google_account_info);
-            //$this->google_session($email, $picture);
+            
+            $this->google_session($email, $picture);
 
             
         } else {
