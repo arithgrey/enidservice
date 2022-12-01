@@ -748,49 +748,4 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    /*
-    function val_btn_pago($param, $id_recibo)
-    {
-
-
-        $r = [];
-        if (prm_def($param, "externo") > 0) {
-
-
-            $r[] = a_enid(
-                "LIQUIDAR AHORA!",
-                [
-                    'class' => 'resumen_pagos_pendientes top_20',
-                    'id' => $id_recibo,
-                    'href' => path_enid("forma_pago_search", $id_recibo)
-                ]
-            );
-
-            $r[] = a_enid("ACCEDE A TU CUENTA PARA VER EL ESTADO DE TU PEDIDO"
-                ,
-                [
-                    'class' => 'resumen_pagos_pendientes black top_20',
-                    'id' => $id_recibo,
-                    'href' => '../area_cliente/?action=compras'
-                ]
-            );
-
-
-        } else {
-
-            $r[] = a_enid("Liquida ahora!",
-                [
-                    'class' => 'resumen_pagos_pendientes ',
-                    'id' => $id_recibo,
-                    'href' => '#tab_renovar_servicio',
-                    'data-toggle' => 'tab'
-                ]
-            );
-
-        }
-
-        return append($r);
-
-    }
-    */
 }
