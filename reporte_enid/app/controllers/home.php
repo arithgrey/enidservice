@@ -31,7 +31,7 @@ class Home extends CI_Controller
 
     private function module_redirect($num_perfil)
     {
-        $area_cliente = "location:../area_cliente";
+        $area_cliente = "location:../";
         $noticias = "location:../busqueda";
 
         $modulo = ($num_perfil == 20) ? $area_cliente : $noticias;
