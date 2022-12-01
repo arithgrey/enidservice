@@ -122,7 +122,7 @@ if (!function_exists('invierte_date_time')) {
                 _text_telefono
             );
 
-
+            $extra_sorteo  = ($param["es_sorteo"] > 0 ) ? 'd-none': '';
             $z[] = d(input_frm(
                 'mt-5',
                 'Fecha de entrega',
@@ -136,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
                     "min" => add_date(date("Y-m-d"), -15),
                     "max" => add_date(date("Y-m-d"), 30),
                 ]
-            ), "col-lg-4");
+            ), _text_("col-lg-4", $extra_sorteo));
 
 
             $input = input([
@@ -151,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
                 $input,
                 "mt-5 text-uppercase black strong",
                 "mr-3"
-            ), $extra);
+            ), _text_($extra, $extra_sorteo));
 
             $z[] = input_frm(
                 "col-lg-9 mt-5 d-none seccion_input_facebook",
