@@ -22,8 +22,8 @@ class Home extends CI_Controller
         $client->addScope("email");
         $client->addScope("profile");
     
-        
-        if (strlen(prm_def($param, 'code')) > 3 ) {
+        $state = prm_def($param,"state");
+        if (strlen(prm_def($param, 'code')) > 3 && $state > 0) {
             
             $token = $client->fetchAccessTokenWithAuthCode($param['code']);
 
@@ -35,17 +35,13 @@ class Home extends CI_Controller
             $name =  $google_account_info->name;      
             $picture =  $google_account_info->picture;      
             
-            /*
+            
             if($google_account_info->verifiedEmail){       
 
-                $this->registro_con_google($name, $email); 
+                $this->registro_con_google($name, $email,$state); 
                 $this->google_session($email, $picture);                               
             }
-            */
-            xmp($google_oauth);
-
-            xmp($param);
-            xmp($google_account_info);
+            
         } 
         
     }
@@ -116,14 +112,14 @@ class Home extends CI_Controller
         }
         return $response;
     }
-    private function registro_con_google($nombre, $email){
+    private function registro_con_google($nombre, $email, $state){
         
         return $this->app->api("usuario/vendedor", 
         [
             "email" => $email,
             "nombre" => $nombre,
             "password" => sha1($email),
-            "perfil" => 20
+            "perfil" => $state
         ], 
         "json", "POST");
 
