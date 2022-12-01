@@ -229,6 +229,7 @@ if (!function_exists('invierte_date_time')) {
 
         $total_descuento = 0;
 
+        $es_sorteo = 0;
         foreach ($productos_deseados as $row) {
 
             $descuento_especial = $row["descuento_especial"];
@@ -240,7 +241,10 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id"];
             $total_descuento_articulo = ($descuento_especial * $articulos);
             $total_descuento = ($total_descuento + $total_descuento_articulo);
-
+            
+            if($row["numero_boleto"] > 0){
+                $es_sorteo ++;
+            }
             $config =
                 [
                     "name" => "producto_carro_compra[]",
@@ -267,7 +271,7 @@ if (!function_exists('invierte_date_time')) {
 
         $inputs_recompensa = valida_envio_descuento($data);
 
-        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal);
+        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal, $es_sorteo);
 
 
         if (es_administrador_o_vendedor($data)) {
@@ -346,7 +350,7 @@ if (!function_exists('invierte_date_time')) {
         return array_sum($descuentos);
     }
 
-    function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
+    function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal, $es_sorteo)
     {
 
 
@@ -397,6 +401,7 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
+            $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
             $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline mb-5');
             $response[] = form_close();
@@ -417,6 +422,8 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $data["id_usuario"]
             ]);
             $response[] = hiddens(["class" => "id_usuario", "name" => "id_usuario", "value" => $data["id_usuario"]]);
+            $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
+            
 
             $response[] = d(btn("Enviar orden", ["class" => "mt-5 borde_green"]), 'seccion_enviar_orden');
             $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 mb-5 underline');

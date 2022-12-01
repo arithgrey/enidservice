@@ -5,7 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function botones_ver_mas()
     {
 
-        $link_registro =  format_link("Regitra tu cuenta", [
+        $link_registro =  format_link("Registra tu cuenta", [
             "href" => path_enid("registro_afiliado",0,1),
             "class" => "border mt-5"            
         ]);
