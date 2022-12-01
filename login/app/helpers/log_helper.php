@@ -1,12 +1,16 @@
-<?php if (!defined('BASEPATH')) {
+<?php
+
+use function PHPUnit\Framework\returnSelf;
+
+ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
 
-    function page_sigin($action, $data)
+    function page_sigin($action, $data, $param)
     {   
         
-        $r[] = nuevo_usuario($data);
+        $r[] = nuevo_usuario($data, $param);
         $r[] = recuperacion();
         $r[] = frm_acceso($action, $data);
         $r[] = hiddens(
@@ -105,20 +109,20 @@ if (!function_exists('invierte_date_time')) {
         );
     }
 
-    function nuevo_usuario($data)
+    function nuevo_usuario($data,$param)
     {
 
         $r[] = d(d("Primero registremos tu usuario!","f15 bg_black borde_amarillo white"),'d-none texto_registro');
         $r[] = img_default();
         $r[] = _titulo('Registro');
-        $r[] = frm_registro($data);
+        $r[] = frm_registro($data, $param);
         $r[] = ya_registro();
 
         return d($r, "seccion_registro_nuevo_usuario_enid_service");
 
     }
 
-    function frm_registro($data)
+    function frm_registro($data, $param)
     {
 
         $config = [
@@ -176,12 +180,11 @@ if (!function_exists('invierte_date_time')) {
             ], _text_pass
         );
 
+
         
-        $perfil[] = [
-            'nombre_perfil' => 'Quiero comprar',
-            'id_perfil' => 20
-        ];
-        
+        $perfil[] = gestion_perfil($param);
+
+    
         $r[] = create_select(
             $perfil,
             'perfil',
@@ -210,7 +213,40 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
 
     }
+    function gestion_perfil($param){
 
+        $q = prm_def($param, "q");
+        $perfil = [
+            'nombre_perfil' => 'Quiero comprar',
+            'id_perfil' => 20
+        ];
+        switch ($q) {
+            /*Afiliado*/
+            case 23874:		
+
+                $perfil = [
+                    'nombre_perfil' => 'Quiero ser afiliado - vender artículos de enid service para ganar comisiones',
+                    'id_perfil' => 6
+                ];
+                break;
+        
+            
+            case 18369:
+                $perfil = [
+                    'nombre_perfil' => 'Quiero hacer entregas',
+                    'id_perfil' => 21
+                ];
+
+                break;
+        
+            default:
+               
+            break;
+        }
+
+        return $perfil;
+
+    }
     function tipo_distribucion()
     {
 
