@@ -39,16 +39,16 @@ class Home extends CI_Controller
         switch ($q) {            
             case 23874:		
                 /*Afiliado*/
-                $cliente_registro->setState('q=6');
+                $cliente_registro->setState('6');
                 break;
                 
             case 18369:
                 /*Repartidor*/
-                $cliente_registro->setState('q=21');
+                $cliente_registro->setState('21');
                 break;
         
             default:
-                $cliente_registro->setState('q=20');
+                $cliente_registro->setState('20');
             break;
         }
         
