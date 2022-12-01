@@ -53,12 +53,7 @@ class Home extends CI_Controller
                 $cliente_registro->setState('q=20');
             break;
         }
-
         
-
-
-        $cliente_registro->setRedirectUri('http://localhost/web/login/');
-
         return $cliente_registro->createAuthUrl();
     }
     private function verifica_google_session($param)
