@@ -1172,6 +1172,8 @@ function footer_opciones()
         ]
     );
     /**Oportunidades*/
+
+  
     $oportunidades[] = _titulo('Oportunidades', 2,'border_b_green');
     
     
@@ -1185,6 +1187,14 @@ function footer_opciones()
             "onclick" => "log_operaciones_externas(49)",
         ]
     );
+    $oportunidades[] = a_enid(
+        'Programa de afiliados',
+        [
+            'href' => path_enid('sobre_vender'),
+            'class' => 'black fp9 mt-3 borde_black p-2 strong'
+        ]
+    );
+
 
     $oportunidades[] = a_enid(
         d("Calculador de ganancias"," strong"),
@@ -1230,14 +1240,7 @@ function footer_opciones()
         ]
     );
     
-    $oportunidades[] = a_enid(
-        'Programa de afiliados',
-        [
-            'href' => path_enid('sobre_vender'),
-            'class' => 'black fp9 mt-3 borde_black p-2 strong'
-        ]
-    );
-
+   
     
 
 

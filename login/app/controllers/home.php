@@ -20,11 +20,11 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "login");
         $data["auth_url"] = $this->verifica_google_session($param);
-        $data["link_registro_google"] = $this->link_registro_google();
+        $data["link_registro_google"] = $this->link_registro_google($param);
         
-        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data), 1);
+        $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data,$param), 1);
     }
-    private function link_registro_google()
+    private function link_registro_google($param)
     {
 
         $cliente_registro = new Google_Client();
@@ -33,6 +33,32 @@ class Home extends CI_Controller
         $cliente_registro->setRedirectUri($this->config->item('googleRedirectUriRegister'));
         $cliente_registro->addScope("email");
         $cliente_registro->addScope("profile");
+        
+
+        $q = prm_def($param, "q");        
+        switch ($q) {
+            /*Afiliado*/
+            case 23874:		
+
+                $cliente_registro->setState('q=6');
+                break;
+        
+            
+            case 18369:
+                /*Repartidor*/
+                $cliente_registro->setState('q=21');
+                break;
+        
+            default:
+                $cliente_registro->setState('q=20');
+            break;
+        }
+
+        
+
+
+        $cliente_registro->setRedirectUri('http://localhost/web/login/');
+
         return $cliente_registro->createAuthUrl();
     }
     private function verifica_google_session($param)
@@ -55,7 +81,9 @@ class Home extends CI_Controller
 
             $email =  $google_account_info->email;
             $picture =  $google_account_info->picture;
-            $this->google_session($email, $picture);
+            xmp($google_oauth);
+            xmp($google_account_info);
+            //$this->google_session($email, $picture);
 
             
         } else {
