@@ -19,18 +19,11 @@ class Home extends CI_Controller
         if (prm_def($param, "transfer") < 1) {
 
             $id_orden_compra = prm_def($param, "ticket");
-
             $this->estado_compra($id_orden_compra, $data);
-
-            $resumen = $this->resumen_valoraciones($data["id_usuario"]);
-
-
-
-            $data += [
-                "action" => prm_def($param, "action", ""),
-                "valoraciones" => prm_def($resumen, "info_valoraciones", []),
-                "alcance" => crea_alcance($this->get_alcance($data["id_usuario"])),
+            
+            $data += [                
                 "ticket" => $id_orden_compra,
+                "cobro_compra" => $this->carga_pago_pendiente_por_recibo($id_orden_compra)
             ];
 
 
@@ -38,7 +31,14 @@ class Home extends CI_Controller
             $this->app->pagina($data, render_user($data), 1);
         }
     }
+    function carga_pago_pendiente_por_recibo($id_orden_compra)
+    {
 
+        $q["id_orden_compra"] = $id_orden_compra;
+        $q["cobranza"] = 1;
+        
+        return $this->app->api("recibo/resumen_desglose_pago/", $q);
+    }
     private function productos($producto_orden_compra)
     {
 
@@ -193,12 +193,5 @@ class Home extends CI_Controller
         );
     }
 
-    private function get_alcance($id_usuario)
-    {
-
-        return $this->app->api(
-            "servicio/alcance_usuario",
-            ["id_usuario" => $id_usuario]
-        );
-    }
+  
 }
