@@ -69,3 +69,9 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 <input type="hidden" class="http_referer_enid" value="<?= $enlace; ?>"/>
 <input type="hidden" class="ip_referer_enid" value="<?= getRealIPAddress(); ?>"/>
+
+<?php if (isset($js_extra_web) && !is_null($js_extra_web) && is_array($js_extra_web)): ?>
+    <?php foreach ($js_extra_web as $script): ?>
+        <script type='text/javascript' src='<?php echo $script; ?>'></script>        
+    <?php endforeach; ?>
+<?php endif; ?>

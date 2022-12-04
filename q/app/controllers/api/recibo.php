@@ -1142,6 +1142,7 @@ class recibo extends REST_Controller
 
 
                 $response = $this->ticket_pendiente_pago($param, $dc);
+
             } else {
 
 
@@ -1156,6 +1157,26 @@ class recibo extends REST_Controller
 
         $this->response($response);
     }
+    function deuda_orden_compra_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        $id_orden_compra = $param["id_orden_compra"];
+        if ($id_orden_compra > 0) {
+
+            $productos_orden_compra = 
+                $this->app->productos_ordenes_compra($id_orden_compra);
+
+
+            $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
+            $response = total_pago_pendiente($productos_orden_compra, $recompensa);
+            
+        }
+
+        $this->response($response);
+    }
+
     function lead_GET()
     {
 
@@ -1343,14 +1364,14 @@ class recibo extends REST_Controller
         $id_usuario_venta = pr($productos_orden_compra, "id_usuario_venta");
 
         $checkout = format_concepto($productos_orden_compra, $deuda, $tipos_entrega);
-        $pedido[] = $checkout['checkout_resumen'];
+        $pedido[] = d($checkout['checkout_resumen'],12);
         $data_checkout = $checkout['checkout'];
-        $seccion_compra = getPayButtons($data, $url_request, $id_usuario_venta, $data_checkout);
-        $pedido[] = rastreo_compra($data, $id_orden_compra, $seccion_compra);
-        $seccion_compra = d($seccion_compra, 'd-none d-md-block');
+        //$seccion_compra = getPayButtons($data, $url_request, $id_usuario_venta, $data_checkout);
+        $pedido[] = rastreo_compra($data, $id_orden_compra);
+        //$seccion_compra = d($seccion_compra, 'd-none d-md-block');
 
-        $response[] = d($seccion_compra, "col-sm-5 seccion_pago");
-        $response[] = d($pedido, "col-sm-7 seccion_resumen_compra");
+        
+        $response[] = d($pedido, "seccion_resumen_compra w-100");
 
 
 
@@ -2066,13 +2087,14 @@ class recibo extends REST_Controller
             if ($saldo_cubierto > 0 && $saldo_cubierto >= $pago_pendiente || $alternativos) {
 
                 $status = $param["status"];
-
+                $anotacion = prm_def($param, "anotacion");
 
                 $response = $this->recibo_model->notifica_entrega(
                     $pago_pendiente,
                     $status,
                     $id_recibo,
-                    'fecha_entrega'
+                    'fecha_entrega',
+                    $anotacion                    
                 );
 
                 $this->solicita_encuenta($id_recibo);
@@ -2089,8 +2111,8 @@ class recibo extends REST_Controller
 
     private function gamifica_ventas_vendedor($id_usuario)
     {
-        $q = ["id_usuario" => $id_usuario];
-        return $this->app->api("usuario/gamifica_ventas", $q, "json", "PUT");
+        
+        return $this->app->api("usuario/gamifica_ventas", ["id_usuario" => $id_usuario], "json", "PUT");
     }
     private function solicita_encuenta($id_recibo)
     {

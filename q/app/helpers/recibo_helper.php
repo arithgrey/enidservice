@@ -1743,7 +1743,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         return [
-            'checkout_resumen' => d_row(d($r, 'bg-light p-5 w-100')),
+            'checkout_resumen' => d($r, 'bg-light p-5 w-100'),
             'checkout' => $ticket_pago
         ];
     }
@@ -1840,46 +1840,8 @@ if (!function_exists('invierte_date_time')) {
         $text_descuento = ($tipo_entrega == 2) ? $texto_cambio_contra_entrega : $text_descuento;
 
 
-        $response[] = _titulo('FORMAS DE PAGO', 0, 'mb-5 mt-5');
-        $botones_pago[] =
-            a_enid(
-                img(
-                    [
-                        "src" => '../img_tema/bancos/paypal_button.png',
-                        "class" => "w-25",
-
-                    ]
-                ),
-                [
-                    "class" => 'text-center sombra_boton border_big m-auto mt-5',
-                    "recibo" => $id_orden_compra,
-                    "onclick" => "notifica_tipo_compra(2 ,  '" . $id_orden_compra . "');",
-                    "href" => paypal($saldo_pendiente),
-
-                ]
-            );
-
-
-        $botones_pago[] =
-
-            format_link(
-                "Tiendas (OXXO)",
-                [
-
-                    "class" => " mt-4 mb-5",
-                    "onclick" => "notifica_tipo_compra(4 , '" . $id_orden_compra . "');",
-                    "href" =>
-                    pago_oxxo(
-                        $url_request,
-                        $saldo_pendiente,
-                        $id_orden_compra,
-                        $id_usuario_venta
-                    ),
-                ]
-            );
-
-        $response[] = append($botones_pago);
-
+        
+        
         $response[] = _titulo(
             $text_descuento,
             1
@@ -1985,25 +1947,22 @@ if (!function_exists('invierte_date_time')) {
         return d($r, 6, 1);
     }
 
-    function rastreo_compra($data, $id_orden_compra, $seccion_compra)
+    function rastreo_compra($data, $id_orden_compra)
     {
 
-        $response[] = d($seccion_compra, 'd-md-none row');
-        $seccion[] = d(
+        
+        $seccion[] =
             format_link(
                 "Rastrea tu orden",
                 [
 
-                    "href" => path_enid('pedido_seguimiento', _text($id_orden_compra)),
-                    'class' => 'text-right mt-5',
+                    "href" => path_enid('pedido_seguimiento', _text($id_orden_compra)),                    
                 ],
                 1,
                 0
-            ),
-            _12p
-        );
+            );
 
-        $seccion[] = d(format_link(
+        $seccion[] = format_link(
             "Cambia la dirección de entrega",
             [
 
@@ -2018,7 +1977,7 @@ if (!function_exists('invierte_date_time')) {
             ],
             0,
             0
-        ), _12p);
+        );
 
 
         $domicilios = $data["domicilios"];
@@ -2028,11 +1987,11 @@ if (!function_exists('invierte_date_time')) {
             $texto = "Ups! parece que 
             aún no nos indicas donde 
             debemos llevar tu pedido";
-            $seccion[] = d($texto, _text_(_12p, 'red_enid strong text-center mt-3'));
+            $seccion[] = d($texto,  'red_enid strong text-center mt-3');
         }
 
 
-        $seccion[] = d(format_link(
+        $seccion[] = format_link(
             'Cancelar compra',
             [
                 "class" => "cancelar_compra mt-3 text-right text-uppercase",
@@ -2040,10 +1999,10 @@ if (!function_exists('invierte_date_time')) {
             ],
             0,
             0
-        ), _12p);
+        );
 
-        $response[] = d($seccion, "row adicionales_venta");
-        return append($response);
+        
+        return d($seccion, 'col-sm-12 seccion_adicionales_compra');
     }
 
     function repartidor_disponible(array $repartidores_en_entrega, array $repartidores)

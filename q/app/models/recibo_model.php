@@ -97,7 +97,7 @@ class Recibo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
-    function notifica_entrega($saldo_cubierto, $status, $id, $tipo_fecha)
+    function notifica_entrega($saldo_cubierto, $status, $id, $tipo_fecha, $anotacion = 0)
     {
 
         $sin_cancelar = [1, 7, 9, 11, 12, 14, 15];
@@ -110,7 +110,8 @@ class Recibo_model extends CI_Model
                             saldo_cubierto  =  {$saldo_cubierto} , 
                             status          =  {$status} ,
                             {$tipo_fecha}   =   CURRENT_TIMESTAMP()   ,
-                            entregado       =   1  " . $cancelacion . "                       
+                            entregado       =   1  " . $cancelacion . ",
+                            anotacion = $anotacion                   
                           WHERE 
                             id =  {$id} 
                           LIMIT 1";

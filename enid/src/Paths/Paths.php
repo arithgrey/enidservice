@@ -111,22 +111,21 @@ class Paths
                 ],
 
 
-            ],
+            ],  
             "area_cliente" =>
             [
                 "js" =>
                 [
-                    'area_cliente/principal.js',
-                    "alerts/jquery-confirm.js",
+                    
+                    "area_cliente/checkout.js"
 
                 ],
-
+                "js_extra_web" => [
+                    "https://js.stripe.com/v3/"
+                ],
                 "css" =>
                 [
-                    "css_tienda_cliente.css",
-                    "valoracion.css",
-                    "area_cliente.css",
-                    "confirm-alert.css",
+                    "checkout.css"
                 ],
                 "meta_keywords" => "",
                 "desc_web" => "",

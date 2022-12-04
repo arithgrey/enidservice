@@ -67,11 +67,7 @@ CDMX
 
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>
-        <?php if (file_exists($script)): ?>
-            <script type='text/javascript' src='<?php echo $script; ?>'></script>
-        <?php else: ?>
-            NO SE CARGO <?= print_r($script) ?><br>
-        <?php endif; ?>
+        <script type='text/javascript' src='<?php echo $script; ?>'></script>        
     <?php endforeach; ?>
 <?php endif; ?>
 
