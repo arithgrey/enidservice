@@ -6,8 +6,7 @@ class Home extends CI_Controller
 {
     function __construct()
     {
-        parent::__construct();
-        $this->load->helper("area");
+        parent::__construct();        
         $this->load->library(lib_def());
         $this->app->acceso();
     }
@@ -16,45 +15,42 @@ class Home extends CI_Controller
     {
         $data = $this->app->session();
         $param = $this->input->get();
-        if (prm_def($param, "transfer") < 1) {
+        $id_orden_compra = prm_def($param, "ticket");
+        $deuda = $this->deuda_orden_compra($id_orden_compra);
 
-            $id_orden_compra = prm_def($param, "ticket");
-            $this->estado_compra($id_orden_compra, $data);
-            
-            $data += [                
-                "ticket" => $id_orden_compra,
-                "cobro_compra" => $this->carga_pago_pendiente_por_recibo($id_orden_compra)
-            ];
+        
+        $this->estado_compra($id_orden_compra, $data, $param, $deuda);
 
+        $data += [
+            "ticket" => $id_orden_compra,
+            "cobro_compra" => $this->carga_pago_pendiente_por_recibo($id_orden_compra),
+            "orden_compra" => $id_orden_compra,
+            "deuda" => $deuda
+        ];
 
-            $data = $this->app->cssJs($data, "area_cliente", 1);
-            $this->app->pagina($data, render_user($data), 1);
-        }
+        $data = $this->app->cssJs($data, "area_cliente", 1);
+        $this->app->pagina($data, 'pay/pay');
     }
+    private function deuda_orden_compra($id_orden_compra)
+    {
+
+        $q["id_orden_compra"] = $id_orden_compra;
+        return $this->app->api("recibo/deuda_orden_compra/", $q);                
+        
+    }    
     function carga_pago_pendiente_por_recibo($id_orden_compra)
     {
 
         $q["id_orden_compra"] = $id_orden_compra;
         $q["cobranza"] = 1;
-        
+
         return $this->app->api("recibo/resumen_desglose_pago/", $q);
     }
-    private function productos($producto_orden_compra)
+    private function estado_compra($id_orden_compra, $data, $param, $deuda)
     {
 
-        $response = [];
-        if (es_data($producto_orden_compra)) {
-
-            $ids = array_column($producto_orden_compra, "id_proyecto_persona_forma_pago");
-            $response = $this->app->api("recibo/ids", ["ids" => $ids]);
-        }
-        return $response;
-    }
-
-
-    private function estado_compra($id_orden_compra, $data)
-    {
-
+        $this->anotaciones_pago($param, $id_orden_compra, $deuda);
+        
 
         if ($id_orden_compra > 0) {
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
@@ -75,11 +71,28 @@ class Home extends CI_Controller
             }
         }
     }
+    private function anotaciones_pago($param, $id_orden_compra, $deuda){
 
+        if(prm_def($param,"redirect_status") === "succeeded"){
+            $saldo_pendiente_pago_contra_entrega = $deuda["saldo_pendiente_pago_contra_entrega"];
+            $q = [
+                "orden_compra" => $id_orden_compra,
+                "status" => 11,
+                "saldo_cubierto" => $saldo_pendiente_pago_contra_entrega,
+                "es_proceso_compra" => "",
+                "tipo_entrega" => 2,
+                "anotacion" => 1
+                
+            ];
+            $this->app->api("recibo/status", $q, "json", "PUT");
+
+
+            $path =  path_enid("pedido_seguimiento", $id_orden_compra,0,1);
+            redirect($path);
+        }
+    }
     private function gestiona_tipo_entrega($recibo, $data, $id_orden_compra)
     {
-
-
 
         $tipo_entrega = $recibo['tipo_entrega'];
         $contra_entrega_domicilio = $recibo['contra_entrega_domicilio'];
@@ -107,7 +120,6 @@ class Home extends CI_Controller
         if ($recibo["numero_boleto"] > 0) {
 
             $this->link_compra_rapida_sorteo($id_orden_compra, $data, $recibo);
-
         } else {
             $this->link_compra_regular($id_orden_compra, $data);
         }
@@ -127,12 +139,11 @@ class Home extends CI_Controller
 
 
         redirect($link_registro_domicilio);
-        
     }
     private function link_compra_rapida_sorteo($id_orden_compra, $data, $recibo)
     {
         $link_resumen_compra_sorteo = '';
-        if(es_administrador_o_vendedor($data)){
+        if (es_administrador_o_vendedor($data)) {
             $link_resumen_compra_sorteo = _text(
                 "../",
                 path_enid("pedido_seguimiento", $id_orden_compra),
@@ -140,9 +151,6 @@ class Home extends CI_Controller
             );
             redirect($link_resumen_compra_sorteo);
         }
-        
-        
-        
     }
     private function link_compra_efectiva($recibo, $id_orden_compra)
     {
@@ -185,13 +193,5 @@ class Home extends CI_Controller
         return $response;
     }
 
-    private function resumen_valoraciones($id_usuario)
-    {
-        return $this->app->api(
-            "valoracion/usuario",
-            ["id_usuario" => $id_usuario]
-        );
-    }
-
-  
+    
 }
