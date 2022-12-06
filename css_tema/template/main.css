@@ -1,5 +1,5 @@
 .input_busqueda_producto{
-    height: 41px!important;
+    height: 45px!important;
 }
 .colo_precio_enid {
 
@@ -35,11 +35,11 @@
 
 .filtro_orden_categorias {
 
-    background: transparent !important;
+    background: white !important;
     color: #000 !important;
     font-size: 18px !important;
     text-align: left !important;
-    border: 2px solid black !important;
+    border: 3px solid black !important;
     height: 50px!important;
 
 }
@@ -1943,7 +1943,7 @@ ul li a {
     cursor: pointer;
 }
 .borde_end {
-    border: solid 2.5px #0836a4 !important;
+    border: solid 3px #0836a4 !important;
     padding: 1px 10px 0px 10px !important;
     cursor: pointer !important;
 }
@@ -1998,4 +1998,10 @@ ul li a {
     background: #030a57;
     color: white;
     border: solid 3px #ff0075!important;
+}
+.border-left-ct{
+    border-left: 2px solid black!important;
+    border-left-width: 2px !important;
+    border-left-style: solid !important;
+
 }

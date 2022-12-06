@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
         $pagina_producto[] =  d($data_response, 9);
 
         if (!is_mobile()) {
-            $pagina_producto[] =  d($x, 'col-sm-3 border-left border-dark');
+            $pagina_producto[] =  d($x, 'col-sm-3 border-left-ct');
         }
 
 

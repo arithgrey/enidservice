@@ -71,7 +71,7 @@ let inicio_session = () => {
     let $min_mail = get_parameter('#mail_acceso').length > MIN_CORREO_LENGTH;
     let $min_pw = get_parameter(pw).length > MIN_PW_LENGTH;
     if ($min_mail && $min_pw) {
-
+        modal('Accediendo ...', 1);
         let url = '../login/index.php/api/sess/start/format/json/';
         bloquea_form(form_inicio);
         request_enid('POST', data_send, url, response_inicio_session);
@@ -80,7 +80,8 @@ let inicio_session = () => {
 };
 
 let response_inicio_session = data => {
-
+    
+    $("#modal-error-message").modal("hide");
     if (data.login === false) {
 
         desbloqueda_form(form_inicio);
@@ -242,7 +243,7 @@ let valida_seccion_inicial = () => {
             break;
         default:
     }
-    $("footer").addClass("d-none");
+    
 };
 
 let facilita_acceso = () => {

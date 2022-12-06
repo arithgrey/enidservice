@@ -210,7 +210,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = format_link( text_icon('fa fa-google white',"Registrate Google"),
         [
             "href" => $data["link_registro_google"],
-            'class' => "mt-5 registro_google"
+            'class' => "mt-3 registro_google"
         ],2);
 
         return append($r);
