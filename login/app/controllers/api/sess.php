@@ -15,7 +15,7 @@ class Sess extends REST_Controller
         $param = $this->post();
         $response = false;
         $es_ajax = $this->input->is_ajax_request();
-        $es_barer = (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer'));
+        $es_barer = (prm_def($param, "t") == $this->config->item('barer'));
         if ($es_ajax || $es_barer) {
             $response = [];
             if (fx($param, "email,secret")) {
@@ -31,16 +31,22 @@ class Sess extends REST_Controller
                     $id_empresa = $usuario["id_empresa"];
 
                     $recien_creado = ($es_barer);
-                    $session = $this->crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado);
+                    $session = $this->app->crea_session(
+                            $id_usuario, 
+                            $nombre, 
+                            $email, 
+                            $id_empresa, 
+                            $recien_creado);
                     $response["session"] = $session;
-                    $response["session_creada"] = $this->app->get_session();
+                    $response["session_creada"] = $session;
 
+                
                     if ($es_barer) {
 
                         $this->response($session);
                     }
-
-                    $response["login"] = (is_array($session)) ? path_enid("login") : false;
+                    
+                    $response["login"] = (es_data($session)) ? path_enid("login") : false;
                 }
             }
         }
@@ -54,50 +60,6 @@ class Sess extends REST_Controller
         return $this->app->api("usuario/es", $q, "json", "POST");
     }
 
-    private function crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado = 0)
-    {
-
-        $empresa = $this->app->get_empresa($id_empresa);
-        $perfiles = $this->app->get_perfil_user($id_usuario);
-        $perfildata = $this->app->get_perfil_data($id_usuario);
-        $empresa_permiso = $this->app->get_empresa_permiso($id_empresa);
-        $empresa_recurso = $this->app->get_empresa_recursos($id_empresa);
-        $status_enid = $this->app->estatus_enid_service();
-        $response = 0;
-
-        if (es_data($perfiles)) {
-
-            $navegacion = $this->app->get_recursos_perfiles($perfiles);
-            $usuario[] = ["id" => $id_usuario];
-            $path_img_usuario = $this->app->add_imgs_usuario($usuario);
-
-            if (es_data($navegacion)) {
-
-                $response = [
-                    "id_usuario" => $id_usuario,
-                    "nombre" => $nombre,
-                    "email" => $email,
-                    "perfiles" => $perfiles,
-                    "perfildata" => $perfildata,
-                    "id_empresa" => pr($empresa, "id"),
-                    "empresa_permiso" => $empresa_permiso,
-                    "empresa_recurso" => $empresa_recurso,
-                    "data_navegacion" => $navegacion,
-                    "info_empresa" => $empresa,
-                    "data_status_enid" => $status_enid,
-                    "logged_in" => 1,
-                    "recien_creado" => $recien_creado,
-                    "path_img_usuario" => pr($path_img_usuario, "url_img_usuario"),
-                    "tipo_comisionista" => $this->app->tipo_comisionistas()
-                ];
-
-                $this->app->set_userdata($response);
-            }
-        }
-        return $response;
-    }
-
-    
     function servicio_POST()
     {
 

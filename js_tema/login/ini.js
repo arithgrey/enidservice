@@ -11,7 +11,7 @@ let form_registro = '.form-miembro-enid-service';
 let nombre_persona = '.nombre_persona';
 let email = '#mail';
 let pw = '#pw';
-let selector_acceso_sistema = '.place_acceso_sistema';
+
 let place_recuperacion = '.place_recuperacion_pw';
 let $olvide_pass = $('.olvide_pass');
 let wr = '.wrapper_login';
@@ -57,69 +57,21 @@ $(document).ready(function () {
     despliega(['.base_compras', '.base_paginas_extra', '.info_metodos_pago'], 0);
 
     $nombre_persona.keyup(function (e) {
-        transforma_mayusculas(this);
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_registro, 1);
+        transforma_mayusculas(this);        
     });
-
-    $registro_email.keyup(function (e) {
-
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_registro, 1);
-    });
-
-    $registro_pw.keyup(function (e) {
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_registro, 1);
-    });
-
-    $email_recuperacion.keyup(() => {
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_registro, 1);
-    });
-
-    $input_correo_inicio.keyup(function (e) {
-
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_inicio, 1);
-    });
-
-    $input_password_inicio.keyup(function (e) {
-        $(this).next().next().addClass('d-none');
-        //escucha_submmit_selector(e, $form_inicio, 1);
-    });
-
-    $perfil.change(seleccion_entrega);
-
-    $auto.click(evaluacion_auto);
-    $moto.click(evaluacion_moto);
-    $bicicleta.click(evaluacion_bicicleta);
-    $pie.click(evaluacion_pie);
-
+    
     $icono_mostrar_password.click(mostrar_password);
     $icono_ocultar_password.click(ocultar_password);
-    
-    $(".input_enid_format :input").focus(next_label_input_focus);
-    $(".input_enid_format :input").change(next_label_input_focus);
-
-    verifica_formato_default_inputs(1);
-
-    $label_mail_acceso.addClass("focused_input");
-    $label_pw.addClass("focused_input");
-    
 
 });
 
-
 let inicio_session = () => {
-
 
     let data_send = {secret: get_option('tmp_password'), 'email': get_option('email')};
     let $min_mail = get_parameter('#mail_acceso').length > MIN_CORREO_LENGTH;
     let $min_pw = get_parameter(pw).length > MIN_PW_LENGTH;
     if ($min_mail && $min_pw) {
 
-        sload(selector_acceso_sistema);
         let url = '../login/index.php/api/sess/start/format/json/';
         bloquea_form(form_inicio);
         request_enid('POST', data_send, url, response_inicio_session);
@@ -129,16 +81,16 @@ let inicio_session = () => {
 
 let response_inicio_session = data => {
 
-    if (data.login !== false) {
-
-        redirect(data.login);
-
-    } else {
+    if (data.login === false) {
 
         desbloqueda_form(form_inicio);
-        advierte('VERIFICA TUS DATOS DE ACCESO');
-        $(selector_acceso_sistema).addClass('d-none');
+        advierte('Ups! esos datos son incorrectos!');
+        $('.place_acceso_sistema').addClass('d-none');
 
+    } else {
+        
+        redirect(path_enid("url_home"));
+        
     }
 };
 
@@ -189,7 +141,6 @@ let response_recupera_password = data => {
 
 let carga_mail = () => $email_recuperacion.val(get_parameter(email));
 
-
 let mostrar_seccion_nuevo_usuario = () => {
 
     despliega([contenedor_recuperacion_password, wr], 0);
@@ -199,17 +150,24 @@ let mostrar_seccion_nuevo_usuario = () => {
 };
 let agrega_usuario = (e) => {
 
-    let url = '../q/index.php/api/usuario/vendedor/format/json/';
+    let url = '../q/index.php/api/usuario/registro/format/json/';
     let perfil = get_valor_selected('.perfil');
     let respuestas = [];
     respuestas.push(es_formato_password($registro_pw));
     respuestas.push(es_formato_email($registro_email));
     respuestas.push(es_formato_nombre($nombre_persona));
     respuestas.push(es_formato_telefono($texto_telefono));
+    bloquea_form(".form-miembro-enid-service");
 
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
+        
+        modal('Registrando tu cuenta ...', 1);
+        
+        $(".form-miembro-enid-service").addClass("d-none");
+        $(".formulario_registro").addClass("d-none");
+        
 
         let tmp_password = '' + CryptoJS.SHA1($registro_pw.val());
         let nombre = $nombre_persona.val();
@@ -219,7 +177,6 @@ let agrega_usuario = (e) => {
             'tmp_password': tmp_password,
             'email': email,
             'nombre': nombre,
-
         });
 
         let data_send = {
@@ -234,34 +191,25 @@ let agrega_usuario = (e) => {
             'reparte_a_pie': $reparte_a_pie.val(),
             'tel_contacto': $texto_telefono.val()
         };
-
+        
         request_enid('POST', data_send, url, response_usuario_registro);
-
     }
     e.preventDefault();
 };
-let response_usuario_registro = data => {
+let response_usuario_registro = data => {    
     
-    debugger;
-    if (parseInt(data.usuario_registrado) > 0) {
+    if ( array_key_exists("id_usuario", data) ) {
         
-        redirect('?action=registro');
+        redirect(path_enid("url_home"));
 
     } else {
 
+        $("#modal-error-message").modal("hide");
+        $(".formulario_registro").removeClass("d-none");
+
         if (parseInt(data.usuario_existe) > 0) {
-
-            let str_usuario = 'Este usuario ya se encuentra registrado';
-            let str_format_link = "mt-5 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action font-weight-bold";
-            let str_opciones = _text_(" verífica los datos ó <a class='",str_format_link,"' href='../login'>Accede</a>");
-            let str = `<span class="alerta_enid d-block text-center p-3">${str_usuario} ${str_opciones}</span>`;
-            let place = '.place_registro_miembro';
-            render_enid(place, str);
-            $(place).addClass('mt-5');
-            $('.acceso_a_cuenta').click(muestra_seccion_acceso);
-            desbloqueda_form(form_registro);
-            recorre(".btn_acceder_cuenta_enid");
-
+                        
+            redirect("?action=registro");
         }
     }
 };
@@ -294,6 +242,7 @@ let valida_seccion_inicial = () => {
             break;
         default:
     }
+    $("footer").addClass("d-none");
 };
 
 let facilita_acceso = () => {
@@ -309,97 +258,7 @@ let facilita_acceso = () => {
     despliega(secciones, 0);
 };
 
-let seleccion_entrega = () => {
-
-
-    let $id_perfil = parseInt(get_valor_selected('.perfil'));
-
-
-    if ($id_perfil !== 6) {
-
-        $link_como_vender.addClass('d-none');
-    } else {
-        $link_como_vender.removeClass('d-none');
-    }
-
-    if ($id_perfil !== 21) {
-        $seccion_entrega.addClass('d-none');
-    } else {
-        $seccion_entrega.removeClass('d-none');
-    }
-};
-
-let evaluacion_auto = function (e) {
-
-    let $id = parseInt(e.target.id);
-    if ($id > 0) {
-
-        $auto.removeClass('button_enid_eleccion_active');
-        $(this).attr('id', 0);
-        $tiene_auto.val(0);
-
-    } else {
-
-        $auto.addClass('button_enid_eleccion_active');
-        $(this).attr('id', 1);
-        $tiene_auto.val(1);
-    }
-
-};
-
-let evaluacion_moto = function (e) {
-
-    let $id = parseInt(e.target.id);
-    if ($id > 0) {
-
-        $moto.removeClass('button_enid_eleccion_active');
-        $(this).attr('id', 0);
-        $tiene_moto.val(0);
-
-    } else {
-
-        $moto.addClass('button_enid_eleccion_active');
-        $(this).attr('id', 1);
-        $tiene_moto.val(1);
-    }
-
-};
-
-let evaluacion_bicicleta = function (e) {
-
-    let $id = parseInt(e.target.id);
-    if ($id > 0) {
-
-        $bicicleta.removeClass('button_enid_eleccion_active');
-        $(this).attr('id', 0);
-        $tiene_bicicleta.val(0);
-
-    } else {
-
-        $bicicleta.addClass('button_enid_eleccion_active');
-        $(this).attr('id', 1);
-        $tiene_bicicleta.val(1);
-    }
-};
-
-let evaluacion_pie = function (e) {
-
-    let $id = parseInt(e.target.id);
-    if ($id > 0) {
-
-        $pie.removeClass('button_enid_eleccion_active');
-        $(this).attr('id', 0);
-        $reparte_a_pie.val(0);
-
-    } else {
-
-        $pie.addClass('button_enid_eleccion_active');
-        $(this).attr('id', 1);
-        $reparte_a_pie.val(1);
-    }
-};
 let mostrar_password = function (){
-
 
     $input_password_inicio.attr('type', 'text');
     $(this).addClass("d-none");

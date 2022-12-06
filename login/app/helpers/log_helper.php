@@ -102,7 +102,7 @@ if (!function_exists('invierte_date_time')) {
         return d(
             a_enid("¿YA ESTÁS REGISTRADO? ACCEDE!",
                 [
-                    'class' => 'top_50 black bottom_100 strong f16 btn_acceder_cuenta_enid',
+                    'class' => 'fp9 top_50 black bottom_100 btn_acceder_cuenta_enid underline',
                 ]
             ),
             "text-center"
@@ -114,8 +114,11 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = d(d("Primero registremos tu usuario!","f15 bg_black borde_amarillo white"),'d-none texto_registro');
         $r[] = img_default();
-        $r[] = _titulo('Registro');
-        $r[] = frm_registro($data, $param);
+
+        $formulario[] = _titulo('Registro');
+        $formulario[] = frm_registro($data, $param);
+        $r[] = d($formulario,'formulario_registro');
+
         $r[] = ya_registro();
 
         return d($r, "seccion_registro_nuevo_usuario_enid_service");
@@ -131,7 +134,7 @@ if (!function_exists('invierte_date_time')) {
         ];
         $r[] = form_open("", $config);
         $r[] = input_frm(
-            "mt-5", "TU NOMBRE",
+            "mt-5", "NOMBRE",
             [
                 "name" => "nombre",
                 "placeholder" => "TU NOMBRE",
@@ -204,11 +207,11 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_close(place("place_registro_miembro"));
         
-        $r[] = format_link( text_icon('fa fa-google',"Registrate Google"),
+        $r[] = format_link( text_icon('fa fa-google white',"Registrate Google"),
         [
             "href" => $data["link_registro_google"],
-            'class' => "mt-3"
-        ],0);
+            'class' => "mt-5 registro_google"
+        ],2);
 
         return append($r);
 
@@ -404,8 +407,8 @@ if (!function_exists('invierte_date_time')) {
         $form[] = btn("INICIAR", ["class" => "mt-5"]);
         $form[] = form_close();
 
-        $form[] = format_link( text_icon('fa fa-google',"Accede con Google"),
-        ["href" => $data["auth_url"],'class' => "mt-3"],0);
+        $form[] = format_link( text_icon('fa fa-google white',"Accede con Google"),
+        ["href" => $data["auth_url"],'class' => "mt-3"],2);
         
         return append($form);
 

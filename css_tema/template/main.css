@@ -267,6 +267,9 @@ th:hover {
     color: #00f400 !important;
     font-weight: bold;  
 }
+.color_verde_agua{
+    color: #009dcc !important;
+}
 .color_venta {
     color: #071b28 !important;
 }
@@ -278,8 +281,6 @@ th:hover {
 .color_red {
     color: red !important;
 }
-
-
 .blue_linkeding_background {
     background: #006FA6 !important;
 }
@@ -500,8 +501,7 @@ li {
     }
 
     .btn_whatsApp {
-        display: none;
-         !important;
+        display: none!important;
     }
 }
 
@@ -611,18 +611,12 @@ li {
 
 .input_enid_format input {
     border: none !important;
-    border-bottom: solid 2px black !important;
+    border-bottom: solid 3px black !important;
     height: 40px !important;
 }
 
 .border_red {
     border: solid 1px red;
-}
-
-.input_enid_format input:hover {
-
-    border: none !important;
-    border-bottom: solid 1px grey !important;
 }
 
 .input_enid_format:hover {
@@ -1849,7 +1843,7 @@ input {
 }
 
 input:focus:invalid {
-    border-bottom: 2px solid #ff1919 !important;
+    border-bottom: 3px solid #ff0075!important;
 }
 
 /*input:valid {*/
@@ -1877,13 +1871,8 @@ input:focus:invalid {
     border: 2px solid black;
 }
 
-.format_action {
-    box-shadow: 3px 3px 0 0 rgba(0, 0, 0, 0.16);
-    border: solid 2px #ffffff;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: 1.15;
-    letter-spacing: 2px;
+.format_action {        
+    letter-spacing: 3px;
 }
 
 .link_text:hover {
@@ -1954,12 +1943,12 @@ ul li a {
     cursor: pointer;
 }
 .borde_end {
-    border: solid 2px #0836a4 !important;
+    border: solid 2.5px #0836a4 !important;
     padding: 1px 10px 0px 10px !important;
     cursor: pointer !important;
 }
 .borde_black {
-    border: solid 2px black !important;        
+    border: solid 3px black !important;        
 }
 .borde_white {
     border: solid 2px white !important;        
@@ -1969,7 +1958,7 @@ ul li a {
 }
 .borde_green{
     
-    border: solid 2px #69ffc0 !important;
+    border: solid 3px #69ffc0 !important;
 }
 .border_b_green{
     
@@ -1996,4 +1985,17 @@ ul li a {
 }
 .resultados_sorteo label{
     color: white!important;
+}
+.solid_3{
+    border: solid 3px black!important;
+}
+.format_google{
+    background: #030a57;
+    color: white;
+    border: solid 3px #ff0075!important;
+}
+.format_google:hover{
+    background: #030a57;
+    color: white;
+    border: solid 3px #ff0075!important;
 }
