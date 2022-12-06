@@ -158,12 +158,12 @@ let agrega_usuario = (e) => {
     respuestas.push(es_formato_email($registro_email));
     respuestas.push(es_formato_nombre($nombre_persona));
     respuestas.push(es_formato_telefono($texto_telefono));
-    bloquea_form(".form-miembro-enid-service");
+    
 
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
-        
+        bloquea_form(".form-miembro-enid-service");    
         modal('Registrando tu cuenta ...', 1);
         
         $(".form-miembro-enid-service").addClass("d-none");
