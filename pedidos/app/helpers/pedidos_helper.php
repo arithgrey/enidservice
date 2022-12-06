@@ -90,7 +90,7 @@ if (!function_exists('invierte_date_time')) {
 
         $id_status = pr($productos_orden_compra, 'status');
 
-        $es_sorteo = (pr($productos_orden_compra, 'numero_boleto') > 0 );
+        $es_sorteo = (pr($productos_orden_compra, 'numero_boleto') > 0);
 
 
         $saldo_cubierto = pr($productos_orden_compra, "saldo_cubierto");
@@ -258,7 +258,7 @@ if (!function_exists('invierte_date_time')) {
             "Sí, notificar como pagado",
             [
                 "class" => "botton_enviar_reparto",
-                "href" => path_enid("pedido_seguimiento", _text($id_orden_compra,'&sorteo=999'))
+                "href" => path_enid("pedido_seguimiento", _text($id_orden_compra, '&sorteo=999'))
 
             ]
         );
@@ -482,7 +482,7 @@ if (!function_exists('invierte_date_time')) {
         );
         $r[] = hiddens(
             [
-                "value" => prm_def($params,"sorteo"),
+                "value" => prm_def($params, "sorteo"),
                 "class" => "es_sorteo",
             ]
         );
@@ -499,7 +499,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
         $r[] = gb_modal(notifica_entrega_modal($productos_orden_compra, $data), 'modal_notificacion_entrega');
-        
+
 
 
         $response[] = d($r, 8, 1);
@@ -608,10 +608,10 @@ if (!function_exists('invierte_date_time')) {
 
         $es_vendedor = $data["es_vendedor"];
         $r[] = hiddens([
-            "class" => "es_vendedor_sorteo", 
-            "value" => es_administrador_o_vendedor($data) 
+            "class" => "es_vendedor_sorteo",
+            "value" => es_administrador_o_vendedor($data)
         ]);
-         
+
         $r[] = _titulo("¿Dónde se encuentra mi pedido?");
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
@@ -766,11 +766,11 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
                 'Finalizar compra',
                 [
-                    'href' => $path                    
+                    'href' => $path
                 ]
             );
         }
-        return d(d($response,'col-xs-12 mt-5'),13);
+        return d(d($response, 'col-xs-12 mt-5'), 13);
     }
 
     function format_imagen_repartidor($recibo)
@@ -1396,7 +1396,7 @@ if (!function_exists('invierte_date_time')) {
         if (!is_mobile()) {
 
             $r[] = enviar_a_reparto($data, $es_venta_cancelada, $status_ventas);
-            
+
             $r[] = repatidor($data, $id_recibo);
         }
 
@@ -1503,9 +1503,9 @@ if (!function_exists('invierte_date_time')) {
     function notifica_entrega_modal($recibo, $data)
     {
 
-        
+
         $id_orden_compra = $data["id_orden_compra"];
-        $form_entrega[] = _titulo('¿Ya entregaste este pedido?',0,'titulo_pago_pedido');
+        $form_entrega[] = _titulo('¿Ya entregaste este pedido?', 0, 'titulo_pago_pedido');
 
         $productos_orden_compra = $data["productos_orden_compra"];
         $recompensa = $data["recompensa"];
@@ -1525,8 +1525,8 @@ if (!function_exists('invierte_date_time')) {
         $form_entrega[] = hiddens(['name' => 'es_proceso_compra', 'value' => '']);
         $form_entrega[] = hiddens(['name' => 'tipo_entrea', 'value' => $tipo_entrega]);
 
-        $numero_boleto = pr($recibo,"numero_boleto");
-        $id_servicio = pr($recibo,"id_servicio");
+        $numero_boleto = pr($recibo, "numero_boleto");
+        $id_servicio = pr($recibo, "id_servicio");
 
         $form_entrega[] = hiddens(['class' => 'numero_boleto', 'value' => $numero_boleto]);
         $form_entrega[] = hiddens(['class' => 'id_servicio', 'value' => $id_servicio]);
@@ -1898,14 +1898,6 @@ if (!function_exists('invierte_date_time')) {
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
 
 
-        $menu_envio_catalogo = tab(
-            text_icon("fa fa-share", 'Envía el catálogo a tus clientes potenciales'),
-            '#catalogos_pendientes',
-            [
-                'class' => ' mt-2 underline busqueda_catalogos_pendientes mt-3'
-            ]
-        );
-
         $menu_ventas_proceso = tab(
             text_icon(
                 "fa fa-money",
@@ -1926,68 +1918,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $menu_ventas_entregadas = tab(
-            text_icon("fa fa-usd", 'Ventas entregadas!'),
-            '#ventas_efectivas',
-            [
-                'class' => ' mt-2 ventas_efectivas mt-3'
-            ]
-        );
+        
 
-
-        $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';
-        $menu_envio_promo = tab(
-            text_icon("fa fa-star", 'Opción a promoción'),
-            '#promo_pendiente',
-            [
-                'class' => ' mt-2 busqueda_promociones_disponibles underline mt-3'
-            ]
-        );
-
-
-
-        $menu_envio_catalogo_movimiento = tab(
-            text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
-            '#recursos',
-            [
-                'class' => ' mt-4 busqueda_promociones_disponibles'
-            ]
-        );
-
-
-        $menu_metricas = tab(
-            text_icon("fa fa-line-chart", 'Métricas'),
-            '#metricas',
-            [
-                'class' => ' mt-2 busqueda_metricas mt-3'
-            ]
-        );
-
-        $place_leads  = place("place_penetracion_leads");
-        $place_leads_ventas  = place("place_penetracion_leads_ventas");
-        $place_leads_ventas_penetracion = flex(
-            $place_leads,
-            $place_leads_ventas,
-            _between,
-            'borde_black mr-3',
-            'borde_green '
-        );
-
-        $menu_metricas_alcaldia = tab(
-            text_icon(
-                "fa fa-line-chart",
-                flex(
-                    'Penetración ',
-                    $place_leads_ventas_penetracion,
-                    _between,
-                    "mr-5"
-                )
-            ),
-            '#metricas_alcaldias',
-            [
-                'class' => ' mt-2 busqueda_metricas_alcaldias mt-3'
-            ]
-        );
+        $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';    
 
         $meu_al_dia = format_link(
             "Últimas noticias",
@@ -2011,14 +1944,14 @@ if (!function_exists('invierte_date_time')) {
             $menu_dash_board,
             $meu_al_dia,
             $menu_pedidos,
-            $menu_metricas,
-            $menu_metricas_alcaldia,
+            acceso_menu_metricas($data),
+            acceso_menu_penetracion($data),
             $menu_ventas_proceso_clientes,
             $menu_ventas_proceso,
-            $menu_ventas_entregadas,
-            $menu_envio_catalogo,
-            $menu_envio_promo,
-            $menu_envio_catalogo_movimiento,
+            acceso_menu_ventas_entregadas($data),
+            acceso_menu_envio_catalogo($data),
+            acceso_menu_promocion($data),
+            acceso_menu_metricas_catalogo_movimiento($data),
             $menu_pendientes,
 
         ]);
@@ -2032,6 +1965,93 @@ if (!function_exists('invierte_date_time')) {
         $data_complete[] = d($modal_promocion, 13);
 
         return d($data_complete, 12);
+    }
+    function acceso_menu_ventas_entregadas($data){
+        if (!es_administrador_o_vendedor($data)) {return "";}
+        return tab(
+            text_icon("fa fa-usd", 'Ventas entregadas!'),
+            '#ventas_efectivas',
+            [
+                'class' => ' mt-2 ventas_efectivas mt-3'
+            ]
+        );
+
+    }
+    function acceso_menu_envio_catalogo($data){
+        
+        if (!es_administrador_o_vendedor($data)) {return "";}
+        return tab(
+            text_icon("fa fa-share", 'Envía el catálogo a tus clientes potenciales'),
+            '#catalogos_pendientes',
+            [
+                'class' => ' mt-2 underline busqueda_catalogos_pendientes mt-3'
+            ]
+        );
+
+    }
+    function acceso_menu_promocion($data){
+        if (!es_administrador_o_vendedor($data)) {return "";}
+        return tab(
+            text_icon("fa fa-star", 'Opción a promoción'),
+            '#promo_pendiente',
+            [
+                'class' => ' mt-2 busqueda_promociones_disponibles underline mt-3'
+            ]
+        );
+    }
+    function acceso_menu_metricas_catalogo_movimiento($data){
+        if (!es_administrador_o_vendedor($data)) {return "";}
+        return tab(
+            text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
+            '#recursos',
+            [
+                'class' => ' mt-4 busqueda_promociones_disponibles'
+            ]
+        );
+
+    }
+    function acceso_menu_metricas($data){
+        
+        if (!es_administrador_o_vendedor($data)) {return "";}
+        return tab(
+            text_icon("fa fa-line-chart", 'Métricas'),
+            '#metricas',
+            [
+                'class' => ' mt-2 busqueda_metricas mt-3'
+            ]
+        );
+
+
+    }
+    function acceso_menu_penetracion($data)
+    {
+        if (!es_administrador_o_vendedor($data)) {return "";}
+
+        $place_leads  = place("place_penetracion_leads");
+        $place_leads_ventas  = place("place_penetracion_leads_ventas");
+        $place_leads_ventas_penetracion = flex(
+            $place_leads,
+            $place_leads_ventas,
+            _between,
+            'borde_black mr-3',
+            'borde_green '
+        );
+
+        return tab(
+            text_icon(
+                "fa fa-line-chart",
+                flex(
+                    'Penetración ',
+                    $place_leads_ventas_penetracion,
+                    _between,
+                    "mr-5"
+                )
+            ),
+            '#metricas_alcaldias',
+            [
+                'class' => ' mt-2 busqueda_metricas_alcaldias mt-3'
+            ]
+        );
     }
     function entregas_en_camino()
     {
@@ -3675,10 +3695,10 @@ if (!function_exists('invierte_date_time')) {
                 $numero_boleto,
                 $icono,
                 _text_(_between, 'p-2 ', $extra)
-                
-            ),13);
+
+            ), 13);
         }
-        return d($curpo_boleto,'mx-auto');
+        return d($curpo_boleto, 'mx-auto');
     }
     function crea_seccion_productos($productos_orden_compra)
     {
@@ -3711,7 +3731,7 @@ if (!function_exists('invierte_date_time')) {
 
             $precios = d(money($row["precio"]), 'strong h4 mx-auto');
             $texto_precio = flex("Costo por unidad", $precios, 'flex-column');
-            $texto_precio = flex($texto_precio, $seccion_boleto, 'flex-column','','w-50 mx-auto');
+            $texto_precio = flex($texto_precio, $seccion_boleto, 'flex-column', '', 'w-50 mx-auto');
 
             $editar_cantidad = icon(
                 _text_(_editar_icon, "edicion_cantidad"),
