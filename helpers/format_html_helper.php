@@ -1660,7 +1660,9 @@ function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext
         $config_label["for"] = $config_input["id"];
         $config_label["id"] = "label_" . $config_input["id"];
         $config_label["class"] = _text_(
-            _text("borde_end focused_input black strong cursor_pointer label_", $config_input["id"]),
+            _text(
+                "borde_end shadow strong focused_input black 
+                cursor_pointer label_", $config_input["id"]),
 
 
             $ext_label
@@ -1727,11 +1729,27 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 {
 
 
+    $clase = "";
+    switch ($primario) {
+        case 2:
+            /*Format Google*/
+            $clase = "pb-3 pt-3 p-2 strong col 
+            text-uppercase registro_google format_action format_google shadow d-block";
+            break;
+        case 1:
+            $clase = "p-2 pb-3 pt-3 bg_black white 
+            borde_green text-uppercase col shadow";
+            break;
+        case 0:
+            $clase = "bg-white format_action pb-3 pt-3 p-2
+             border_enid borde_black col black text-uppercase";
+            break;
+        default:
+            break;
+    }
 
-    $clase = ($primario > 0) ?
-        "text-center borde_accion p-2 pb-3 pt-3 bg_black white borde_green text-uppercase col " :
-        "text-center bg-white borde_accion pb-3 pt-3 p-2 border_enid borde_black col black text-uppercase ";
-
+    
+    
     $clase .= ($texto_strong) ? ' font-weight-bold ' : '';
 
     $att = $attributes;

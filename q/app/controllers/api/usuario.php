@@ -61,7 +61,7 @@ class usuario extends REST_Controller
         if (fx($param, "id_usuario,email")) {
 
             $id_usuario = $param["id_usuario"];
-            
+
             $this->usuario_model->q_up(
                 "email",
                 $param["email"],
@@ -72,7 +72,6 @@ class usuario extends REST_Controller
                 1,
                 $id_usuario
             );
-
         }
         $this->response($response);
     }
@@ -544,10 +543,9 @@ class usuario extends REST_Controller
         $response = [];
         if (fx($param, "email")) {
 
-            $params = ["id", "name", "email", "fecha_registro", "id_empresa"];            
+            $params = ["id", "name", "email", "fecha_registro", "id_empresa"];
             $params_where = ["email" => $param["email"], "status" => 1];
-            $response = $this->usuario_model->get($params, $params_where);            
-
+            $response = $this->usuario_model->get($params, $params_where);
         }
         $this->response($response);
     }
@@ -649,6 +647,33 @@ class usuario extends REST_Controller
         $this->response($response);
     }
 
+    function registro_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "nombre,email,password,perfil")) {
+
+            $usuario = $this->app->api("usuario/vendedor", $param, "json", "POST");
+            $usuario_registrado = prm_def($usuario, "usuario_registrado");
+
+            if (es_data($usuario) && $usuario_registrado) {
+
+                $id_usuario = $usuario["id_usuario"];
+
+                $response = $this->app->crea_session(
+                    $id_usuario,
+                    $param["nombre"],
+                    $param["email"],
+                    1
+                );
+            } else {
+
+                $this->response($usuario);
+            }
+        }
+        $this->response($response);
+    }
     function vendedor_POST()
     {
         $param = $this->post();
@@ -690,14 +715,6 @@ class usuario extends REST_Controller
                         $response["email"] = $email;
                         $response["usuario_registrado"] = 1;
                     }
-
-                    $simple = (prm_def($param, "simple") > 0) ? 1 : 0;
-                    if ($simple == 0) {
-
-                        $this->inicia_proceso_compra($param, $id_usuario, prm_def($param, "servicio"));
-                    }
-
-                    //$this->notifica_registro_usuario($nombre, $email);
                 }
             }
             $this->response($response);
@@ -732,21 +749,10 @@ class usuario extends REST_Controller
         $this->response(false);
     }
 
-    function notifica_registro_usuario($nombre, $email)
-    {
-
-        $q = get_request_email(
-            $email,
-            "TU USUARIO SE REGISTRÓ!",
-            get_mensaje_bienvenida($nombre, $email)
-        );
-        $response = $this->app->send_email($q);
-
-        return $response;
-    }
 
     private function inicia_proceso_compra($param, $id_usuario, $id_servicio)
     {
+
 
         $this->agrega_lista_deseos($id_usuario, $id_servicio);
         $session = $this->create_session($param);
@@ -1424,5 +1430,4 @@ class usuario extends REST_Controller
 
         $this->response($response);
     }
-    
 }

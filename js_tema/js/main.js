@@ -43,7 +43,10 @@ $("footer").ready(() => {
         "is_mobile": get_parameter(".is_mobile"),
         "disparador_buscados": 0,
     });
-
+    
+    if(parseInt(get_parameter(".in_session")) > 0){
+        $("footer").addClass("d-none"); 
+    }
     $("#form_contacto").submit(envia_comentario);
     $(".enid").click(metricas_perfil);
 

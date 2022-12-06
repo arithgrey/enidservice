@@ -1204,7 +1204,7 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     "Agregar al carrito",
-                    'agregar_a_lista border l_deseos pt-3 pb-3'
+                    'agregar_a_lista text-center l_deseos pt-3 pb-3'
                 ),
                 [
                     'class' => 'agregar_deseos_sin_antecedente borde_green',
