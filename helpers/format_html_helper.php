@@ -1475,16 +1475,12 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
             "data-toggle" => "dropdown",
         ]
     );
+    
+    
+  
 
 
-    $menu_usuario = [
-        a_enid(
-            "Perfil",
-            [
-                "href" => path_enid('usuario_contacto', $id_usuario),
-                "class" => 'black fp9 border-bottom border-dark',
-            ]
-        ),
+    $menu_usuario = [      
         $menu,
         a_enid(
             "Configuración",
@@ -1929,7 +1925,10 @@ function opciones_adicionales_navegacion()
     $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom ');
     return append($response);
 }
-function navegacion($path_img_usuario, $in_session, $clasificaciones_departamentos, $proceso_compra, $id_usuario, $menu)
+function navegacion(
+    $path_img_usuario, $in_session, 
+    $clasificaciones_departamentos, 
+    $proceso_compra, $id_usuario, $menu)
 {
 
     $is_mobile = is_mobile();
