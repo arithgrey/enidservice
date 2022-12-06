@@ -81,23 +81,7 @@ class Home extends CI_Controller
     private function sin_resultados($param)
     {
 
-        
-        $data["in_session"] = 0;
-        $data["id_usuario"] = "";
-        $data["nombre"] = "";
-        $data["email"] = "";
-        $data["telefono"] = "";
-        $data["id_perfil"] = 0;
-        $data["menu"] = "";
-        $data["data_status_enid"] = "";        
-        $data["path_img_usuario"] = "";
-        $data["meta_keywords"] = "";
-        $data["url_img_post"] = "";
-        $data["desc_web"] = "";
-        $data["titulo"] = "";
-        $data["clasificaciones_departamentos"] = "";
-        $data["proceso_compra"] = "";
-        $data["footer_visible"] = "";
+        $data = $this->app->session();
         
         $data = $this->app->cssJs($data, "sin_encontrar");
 
