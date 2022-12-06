@@ -1256,7 +1256,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     );
 
     $cerrar = d($cerrar, "modal-header border-0");
-    $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content rounded-0");
+    $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content borde_end rounded-0");
     $contenido = d(
         $seccion_contenido,
         [
@@ -1291,13 +1291,13 @@ function menu_session_mobil($in_session)
                 "onclick" => "closeNav()",
             ]
         ),
-        'ml-auto mr-5 top_70'
+        'ml-auto mr-5 top_100'
     );
 
     $form_busqueda = form_busqueda_productos();
     $opciones_acceso = opciones_acceso($in_session);
 
-    $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-100'";
+    $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
     $columna = d([$cerrar_opciones, $form_busqueda, $opciones_acceso], $clases_columnas);
 
     $menu_lateral = d(
