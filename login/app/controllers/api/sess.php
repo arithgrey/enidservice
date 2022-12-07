@@ -15,8 +15,8 @@ class Sess extends REST_Controller
         $param = $this->post();
         $response = false;
         $es_ajax = $this->input->is_ajax_request();
-        $es_barer = (prm_def($param, "t") == $this->config->item('barer'));
-
+        $es_barer = (array_key_exists("t", $param) && $param["t"] == $this->config->item('barer'));
+        
         if ($es_ajax || $es_barer) {
             $response = [];
             if (fx($param, "email,secret")) {
