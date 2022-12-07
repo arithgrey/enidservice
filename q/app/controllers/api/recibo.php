@@ -1521,6 +1521,7 @@ class recibo extends REST_Controller
             'p.lead_catalogo',
             'p.lead_ubicacion',
             'p.lead_promo_regalo',
+            'p.numero_boleto',
             "po.id_orden_compra",
             "oc.cobro_secundario"
 
@@ -1549,7 +1550,8 @@ class recibo extends REST_Controller
             "id_usuario",
             "intento_reventa",
             "intento_recuperacion",
-            "costo"
+            "costo",
+            "numero_boleto"
         ];
 
         $params_recibos_sin_cobros = [
@@ -1575,6 +1577,7 @@ class recibo extends REST_Controller
             "p.id_usuario",
             "p.intento_reventa",
             "p.costo",
+            "p.numero_boleto",
             'p.intento_recuperacion',
             "po.id_orden_compra",
 
