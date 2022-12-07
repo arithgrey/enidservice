@@ -128,6 +128,7 @@ let response_busqueda_ventas_proceso_clientes = function (data) {
 
     render_enid(".place_ventas_en_proceso_clientes", data);
     $(".place_ventas_proceso_cliente").text($(".place_ventas_en_proceso_clientes .total_ventas_pendientes").val());
+    ver_notificaciones_ordenes_compra();
 
 };
 
