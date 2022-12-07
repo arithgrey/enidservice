@@ -1176,10 +1176,7 @@ function footer_opciones()
   
     $oportunidades[] = _titulo('Oportunidades', 2,'border_b_green');
     
-    
     $anuncio_mayorista[] = d('Mayoristas',"black strong");
-    
-    
     $oportunidades[] = a_enid(
         d($anuncio_mayorista),
         [            
