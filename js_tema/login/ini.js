@@ -151,7 +151,7 @@ let mostrar_seccion_nuevo_usuario = () => {
 };
 let agrega_usuario = (e) => {
 
-    let url = '../q/index.php/api/usuario/registro/format/json/';
+    let url = '../q/index.php/api/usuario/vendedor/format/json/';
     let perfil = get_valor_selected('.perfil');
     let respuestas = [];
     respuestas.push(es_formato_password($registro_pw));

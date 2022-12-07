@@ -16,6 +16,7 @@ class Sess extends REST_Controller
         $response = false;
         $es_ajax = $this->input->is_ajax_request();
         $es_barer = (prm_def($param, "t") == $this->config->item('barer'));
+
         if ($es_ajax || $es_barer) {
             $response = [];
             if (fx($param, "email,secret")) {
@@ -37,8 +38,9 @@ class Sess extends REST_Controller
                             $email, 
                             $id_empresa, 
                             $recien_creado);
+
                     $response["session"] = $session;
-                    $response["session_creada"] = $session;
+                    $response["session_creada"] = $this->app->get_session();
 
                 
                     if ($es_barer) {

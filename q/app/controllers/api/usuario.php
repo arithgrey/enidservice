@@ -645,35 +645,7 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-    }
-
-    function registro_POST()
-    {
-
-        $param = $this->post();
-        $response = false;
-        if (fx($param, "nombre,email,password,perfil")) {
-
-            $usuario = $this->app->api("usuario/vendedor", $param, "json", "POST");
-            $usuario_registrado = prm_def($usuario, "usuario_registrado");
-
-            if (es_data($usuario) && $usuario_registrado) {
-
-                $id_usuario = $usuario["id_usuario"];
-
-                $response = $this->app->crea_session(
-                    $id_usuario,
-                    $param["nombre"],
-                    $param["email"],
-                    1
-                );
-            } else {
-
-                $this->response($usuario);
-            }
-        }
-        $this->response($response);
-    }
+    }    
     function vendedor_POST()
     {
         $param = $this->post();
@@ -715,6 +687,14 @@ class usuario extends REST_Controller
                         $response["email"] = $email;
                         $response["usuario_registrado"] = 1;
                     }
+
+                    $simple = (prm_def($param, "simple") > 0) ? 1 : 0;
+                    if ($simple == 0) {
+
+                        $this->inicia_proceso_compra($param, $id_usuario, prm_def($param, "servicio"));
+                    }
+
+                    //$this->notifica_registro_usuario($nombre, $email);
                 }
             }
             $this->response($response);
@@ -752,7 +732,6 @@ class usuario extends REST_Controller
 
     private function inicia_proceso_compra($param, $id_usuario, $id_servicio)
     {
-
 
         $this->agrega_lista_deseos($id_usuario, $id_servicio);
         $session = $this->create_session($param);
