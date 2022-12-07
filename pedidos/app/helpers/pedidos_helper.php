@@ -1699,15 +1699,8 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
     }
-
-    function get_form_busqueda_pedidos($data, $param)
+    function fechas_busqueda()
     {
-
-
-        $es_busqueda_reparto = prm_def($param, 'reparto');
-        $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
-        $tipos_entregas = $data["tipos_entregas"];
-        $status_ventas = $data["status_ventas"];
         $fechas[] =
             [
                 "fecha" => "FECHA REGISTRO",
@@ -1733,24 +1726,32 @@ if (!function_exists('invierte_date_time')) {
                 "fecha" => "FECHA PAGO",
                 "val" => 4,
             ];
+        return $fechas;
+    }
+    function form_busqueda_ordenes_compra($param, $data)
+    {
 
-        $r[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
-        $r[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
-        $r[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
-        $r[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => $es_busqueda_reparto]);
-        $r[] = hiddens([
+        $es_busqueda_reparto = prm_def($param, 'reparto');
+        $ancho_fechas = 'col-sm-6 mt-5 p-0 p-md-1 ';
+        $tipos_entregas = $data["tipos_entregas"];
+        $status_ventas = $data["status_ventas"];
+
+        $response[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
+        $response[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => prm_def($param, 'usuarios')]);
+        $response[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => prm_def($param, 'ids')]);
+        $response[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => $es_busqueda_reparto]);
+        $response[] = hiddens([
             'class' => 'es_administrador', 'name' => 'es_administrador',
             'value' => es_administrador($data)
         ]);
 
-        $r[] = hiddens(
+        $response[] = hiddens(
             [
                 "name" => "perfil",
                 "class" => "perfil_consulta",
                 "value" => $data["id_perfil"],
             ]
         );
-
 
         $select_comisionistas = create_select(
             $data['comisionistas'],
@@ -1765,7 +1766,7 @@ if (!function_exists('invierte_date_time')) {
             '-'
         );
 
-        $r[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas);
+        $response[] = form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, fechas_busqueda());
         $es_busqueda = keys_en_arreglo(
             $param,
             [
@@ -1777,7 +1778,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $visibilidad = (!es_data($data['comisionistas'])) ? 'd-none' : '';
-        $r[] = flex_md(
+        $response[] = flex_md(
             'Filtrar por vendedor',
             $select_comisionistas,
             _text_('col-sm-12 mt-md-m5 mt-3 p-0', _between_md, $visibilidad),
@@ -1787,28 +1788,27 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_busqueda && es_data($param)) {
 
-
-            $r[] = frm_fecha_busqueda(
+            $response[] = frm_fecha_busqueda(
                 $param["fecha_inicio"],
                 $param["fecha_termino"],
                 $ancho_fechas,
                 $ancho_fechas
             );
-            $r[] = hiddens(
+            $response[] = hiddens(
                 [
                     "name" => "consulta",
                     "class" => "consulta",
                     "value" => 1,
                 ]
             );
-            $r[] = hiddens(
+            $response[] = hiddens(
                 [
                     "name" => "servicio",
                     "class" => "servicio",
                     "value" => $param["servicio"],
                 ]
             );
-            $r[] = hiddens(
+            $response[] = hiddens(
                 [
                     "name" => "type",
                     "class" => "type",
@@ -1817,24 +1817,19 @@ if (!function_exists('invierte_date_time')) {
             );
         } else {
 
-            $r[] = frm_fecha_busqueda(0, 0, $ancho_fechas, $ancho_fechas);
+            $response[] = frm_fecha_busqueda(0, 0, $ancho_fechas, $ancho_fechas);
         }
 
+        $response[] = form_close();
+        return d($response,12);
+    }
+    function get_form_busqueda_pedidos($data, $param)
+    {
 
-        $r[] = form_close();
-        $z[] = append($r);
+        $z[] = d(form_busqueda_ordenes_compra($param, $data),13);
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
-
-
-        $busqueda = _titulo("busqueda", 3);
-
-        $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
-        $link = format_link($text_entregas, ['href' => path_enid('entregas')]);
-        $busqueda_calendario = flex($busqueda, $link, _between);
-
-        $response[] = d($busqueda_calendario, 'mt-5');
         $response[] = d($z);
 
         $secciones_tabs[] = tab_seccion(append($response), 'buscador_seccion', 1);
@@ -1844,18 +1839,14 @@ if (!function_exists('invierte_date_time')) {
         $modal_catalogo = gb_modal(instruccion_envio_catalogo(), 'modal_envio_catalogo');
         $modal_promocion = gb_modal(instruccion_envio_promocion(), 'modal_envio_promocion');
 
-
         $lead_por_envio_catalogo = leads_por_envio_catalogo();
         $secciones_tabs[] = tab_seccion($lead_por_envio_catalogo, 'catalogos_pendientes');
-
 
         $lead_opcion_promo = leads_con_opcion_a_promo();
         $secciones_tabs[] = tab_seccion($lead_opcion_promo, 'promo_pendiente');
 
-
         $contenido_por_pago = comisiones_por_pago($data, $modal);
         $secciones_tabs[] = tab_seccion($contenido_por_pago, 'pagos_pendientes');
-
 
         $contenido_recursos = recursos_ventas();
         $secciones_tabs[] = tab_seccion($contenido_recursos, 'recursos');
@@ -1863,14 +1854,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido_metricas = metricas();
         $secciones_tabs[] = tab_seccion($contenido_metricas, 'metricas');
 
-
         $contenido_metricas_alcaldias = metricas_alcaldias();
         $secciones_tabs[] = tab_seccion($contenido_metricas_alcaldias, 'metricas_alcaldias');
 
-
         $contenido_ventas_camino = entregas_en_camino();
         $secciones_tabs[] = tab_seccion($contenido_ventas_camino, 'ventas_en_proceso');
-
 
         $contenido_ventas_camino_cliente = entregas_en_camino_cliente();
         $secciones_tabs[] = tab_seccion($contenido_ventas_camino_cliente, 'ventas_en_proceso_cliente');
@@ -1878,15 +1866,11 @@ if (!function_exists('invierte_date_time')) {
         $contenido_ventas_efectivas = entregas_efectivas();
         $secciones_tabs[] = tab_seccion($contenido_ventas_efectivas, 'ventas_efectivas');
 
-
-
-
-
         $menu_pedidos = tab(
-            text_icon(_busqueda_icon, 'Tus Pedidos'),
+            text_icon(_busqueda_icon, 'Ordenes de compra'),
             '#buscador_seccion',
             [
-                'class' => ' mt-2 s'
+                'class' => ' mt-3'
             ]
         );
         $menu_pendientes = tab(
@@ -1897,18 +1881,6 @@ if (!function_exists('invierte_date_time')) {
 
         $menu_pendientes = es_administrador($data) ? $menu_pendientes : '';
 
-
-        $menu_ventas_proceso = tab(
-            text_icon(
-                "fa fa-money",
-                flex('Ventas en proceso', place("place_ventas_proceso"), _between, "mr-5", "borde_end")
-            ),
-            '#ventas_en_proceso',
-            [
-                'class' => ' mt-2 ventas_en_proceso mt-3'
-            ]
-        );
-
         $menu_ventas_proceso_clientes = tab(
             text_icon("fa fa-money", flex('Ventas en proceso de clientes', place("place_ventas_proceso_cliente"), _between, "mr-5", "borde_green p-2")),
             '#ventas_en_proceso_cliente',
@@ -1917,18 +1889,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
+        $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';
 
-        
-
-        $menu_ventas_proceso_clientes  = (es_administrador($data)) ? $menu_ventas_proceso_clientes : '';    
-
-        $meu_al_dia = format_link(
-            "Últimas noticias",
-            [
-                "href" => path_enid("busqueda"),
-                "class" => "mb-5"
-            ]
-        );
 
         $menu_dash_board = format_link(
             "Dasboards",
@@ -1941,13 +1903,15 @@ if (!function_exists('invierte_date_time')) {
         $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
         $menu = d([
+            acceso_populares($data),
             $menu_dash_board,
-            $meu_al_dia,
+            acceso_proximas_entregas($data),
+            acceso_noticias_vendedores($data),
             $menu_pedidos,
             acceso_menu_metricas($data),
             acceso_menu_penetracion($data),
             $menu_ventas_proceso_clientes,
-            $menu_ventas_proceso,
+            acceso_ventas_en_proceso($data),
             acceso_menu_ventas_entregadas($data),
             acceso_menu_envio_catalogo($data),
             acceso_menu_promocion($data),
@@ -1955,7 +1919,6 @@ if (!function_exists('invierte_date_time')) {
             $menu_pendientes,
 
         ]);
-
 
         $seccion_menus = d($menu, "col-md-3 fp9");
         $seccion_contenidos = d(tab_content($secciones_tabs), "col-md-8 border-left border-secondary");
@@ -1966,8 +1929,65 @@ if (!function_exists('invierte_date_time')) {
 
         return d($data_complete, 12);
     }
-    function acceso_menu_ventas_entregadas($data){
-        if (!es_administrador_o_vendedor($data)) {return "";}
+    function acceso_populares($data)
+    {
+
+        if (!es_cliente($data)) {
+            return "";
+        }
+        return format_link(
+            "Novedades",
+            [
+                "href" => path_enid("search", "/?q2=0&q=&order=1"),
+            ]
+        );
+    }
+
+    function acceso_noticias_vendedores($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return format_link(
+            "Últimas noticias",
+            [
+                "href" => path_enid("busqueda"),
+                "class" => "mb-5"
+            ]
+        );
+    }
+    function acceso_proximas_entregas($data)
+    {
+
+        if (!es_administrador_o_vendedor($data) || es_repartidor($data)) {
+            return "";
+        }
+        $text_entregas = flex(icon(_calendario_icon), 'Próximas entregas', '', 'mr-1');
+        return format_link($text_entregas, ['href' => path_enid('entregas')]);
+    }
+    function acceso_ventas_en_proceso($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon(
+                "fa fa-money",
+                flex('Ventas en proceso', place("place_ventas_proceso"), _between, "mr-5", "borde_end")
+            ),
+            '#ventas_en_proceso',
+            [
+                'class' => ' mt-2 ventas_en_proceso mt-3'
+            ]
+        );
+    }
+    function acceso_menu_ventas_entregadas($data)
+    {
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
         return tab(
             text_icon("fa fa-usd", 'Ventas entregadas!'),
             '#ventas_efectivas',
@@ -1975,11 +1995,13 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 ventas_efectivas mt-3'
             ]
         );
-
     }
-    function acceso_menu_envio_catalogo($data){
-        
-        if (!es_administrador_o_vendedor($data)) {return "";}
+    function acceso_menu_envio_catalogo($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
         return tab(
             text_icon("fa fa-share", 'Envía el catálogo a tus clientes potenciales'),
             '#catalogos_pendientes',
@@ -1987,10 +2009,12 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 underline busqueda_catalogos_pendientes mt-3'
             ]
         );
-
     }
-    function acceso_menu_promocion($data){
-        if (!es_administrador_o_vendedor($data)) {return "";}
+    function acceso_menu_promocion($data)
+    {
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
         return tab(
             text_icon("fa fa-star", 'Opción a promoción'),
             '#promo_pendiente',
@@ -1999,8 +2023,11 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
-    function acceso_menu_metricas_catalogo_movimiento($data){
-        if (!es_administrador_o_vendedor($data)) {return "";}
+    function acceso_menu_metricas_catalogo_movimiento($data)
+    {
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
         return tab(
             text_icon("fa fa-space-shuttle", 'Recursos para lograr más ventas'),
             '#recursos',
@@ -2008,11 +2035,13 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-4 busqueda_promociones_disponibles'
             ]
         );
-
     }
-    function acceso_menu_metricas($data){
-        
-        if (!es_administrador_o_vendedor($data)) {return "";}
+    function acceso_menu_metricas($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
         return tab(
             text_icon("fa fa-line-chart", 'Métricas'),
             '#metricas',
@@ -2020,12 +2049,12 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 busqueda_metricas mt-3'
             ]
         );
-
-
     }
     function acceso_menu_penetracion($data)
     {
-        if (!es_administrador_o_vendedor($data)) {return "";}
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
 
         $place_leads  = place("place_penetracion_leads");
         $place_leads_ventas  = place("place_penetracion_leads_ventas");
@@ -2483,7 +2512,10 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-
+    function visibilidad_input_form($data)
+    {
+        return es_cliente($data) ? 'd-none' : '';
+    }
     function form_busqueda_pedidos($data, $tipos_entregas, $status_ventas, $fechas)
     {
 
@@ -2492,9 +2524,10 @@ if (!function_exists('invierte_date_time')) {
         $restricciones_administrador_busqueda = $data['restricciones']['restricciones_administrador_busqueda'];
         $restricciones = ($id_perfil == 6) ? $restriciones_comisionista_busqueda : [];
         $restricciones = (!in_array($id_perfil, [20, 6])) ? $restricciones_administrador_busqueda : $restricciones;
+        $visibilidad = visibilidad_input_form($data);
 
         $r[] = input_frm(
-            _text_(_6p, 'mt-5'),
+            _text_(_6p, 'mt-5', $visibilidad),
             'Cliente',
             [
                 "name" => "cliente",
@@ -2523,7 +2556,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = flex(
+        $r[] = d(flex(
             "Tipo de entrega",
             create_select(
                 $tipos_entregas,
@@ -2538,9 +2571,9 @@ if (!function_exists('invierte_date_time')) {
                 "-"
             ),
             "flex-column col-md-4 p-0 mt-3"
-        );
+        ), $visibilidad);
 
-        $r[] = flex(
+        $r[] = d(flex(
             'Status',
             create_select(
                 $status_ventas,
@@ -2556,15 +2589,15 @@ if (!function_exists('invierte_date_time')) {
                 $restricciones
             ),
             "flex-column col-md-4 p-0 mt-3"
-        );
+        ),$visibilidad);
 
 
         $busqueda_orden = create_select_selected($fechas, 'val', 'fecha', 5, 'tipo_orden', 'tipo_orden form-control');
-        $r[] = flex(
+        $r[] = d(flex(
             "Ordenar",
             $busqueda_orden,
             "flex-column col-md-4 p-0 mt-3"
-        );
+        ),$visibilidad);
 
 
         return append($r);
