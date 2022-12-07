@@ -1,5 +1,7 @@
 <?php
 
+use BaconQrCode\Renderer\Path\Path;
+
 use function Sodium\add;
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
@@ -58,11 +60,28 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
         $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"), 13);
 
-
+        $response[] = d(d(oferta_delivery(), "col-sm-10 col-sm-offset-1 p-0"), 13);
 
         return d($response, 12);
     }
+    function oferta_delivery(){
 
+        $anuncio[] = d('¿Necesitas enviar un paqueten dentro de cdmx?',"black strong f12");
+        $anuncio[] = d('Nosotros lo llevamos por ti!');
+        $anuncio[] = d(format_link("Cotiza ahora!",
+        [
+            "href" => path_enid("whatsapp_viajes",0,1), 
+            "class"=> "mt-3"
+        ], 2));
+        
+        return d(
+            d($anuncio),
+            [            
+                'class' => 'black borde_black mt-2 p-3',                
+            ]
+        );
+
+    }
     function sin_resultados($param)
     {
 
