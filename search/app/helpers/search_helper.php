@@ -77,7 +77,7 @@ if (!function_exists('invierte_date_time')) {
         return d(
             d($anuncio),
             [            
-                'class' => 'black borde_black mt-2 p-3',                
+                'class' => 'black borde_black mt-5 p-3',                
             ]
         );
 
