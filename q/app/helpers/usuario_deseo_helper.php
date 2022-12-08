@@ -5,9 +5,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(
-            d("Personas con registro con productos en el carrito de compras",12)
+            d("Personas con registro con productos en el carrito de compras",'borde_end col-sm-12')
             ,
-            "f12 row"
+            "row mt-3 mb-3 black"
         );
         foreach($data as $row){
 

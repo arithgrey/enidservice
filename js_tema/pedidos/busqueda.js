@@ -25,9 +25,9 @@ let $marcar_cuentas_pagas = $('.marcar_cuentas_pagas');
 
 let $busqueda_metricas = $(".busqueda_metricas");
 
-let $busqueda_ventas_en_proceso =  $(".ventas_en_proceso");
-let $busqueda_ventas_en_proceso_clientes =  $(".ventas_en_proceso_clientes");
-let $busqueda_ventas_efectivas =  $(".ventas_efectivas");
+let $busqueda_ventas_en_proceso = $(".ventas_en_proceso");
+let $busqueda_ventas_en_proceso_clientes = $(".ventas_en_proceso_clientes");
+let $busqueda_ventas_efectivas = $(".ventas_efectivas");
 
 let $busqueda_catalogos_pendientes = $(".busqueda_catalogos_pendientes");
 let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
@@ -35,6 +35,8 @@ let $busqueda_promociones_disponibles = $(".busqueda_promociones_disponibles");
 let $sintesis = $('.sintesis');
 let $marcar_pagos = $('.marcar_pagos');
 let $ids_pagos = $('.ids_pagos');
+
+let $ventas_en_carros = $(".en_carros_de_compras");
 
 
 let $fecha_venta_efectiva = $(".fecha_venta_efectiva");
@@ -44,7 +46,7 @@ $(document).ready(() => {
     $('footer').ready(function () {
         valida_busqueda_inicial();
     });
-    
+
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
@@ -57,7 +59,7 @@ $(document).ready(() => {
     $busqueda_ventas_en_proceso.click(busqueda_ventas_proceso);
     $busqueda_ventas_en_proceso_clientes.click(busqueda_ventas_proceso_clientes);
     $busqueda_ventas_efectivas.click(busqueda_ventas_efectivas);
-
+    $ventas_en_carros.click(busqueda_ventas_en_carros);
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
     $form_alcaldias.submit(busqueda_metricas_alcaldias);
     /**/
@@ -68,7 +70,47 @@ $(document).ready(() => {
 
 });
 
-let busqueda_ventas_proceso = function(){
+
+let busqueda_ventas_en_carros = function () {
+
+    let data_send = $.param({});
+    let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
+    request_enid("GET", data_send, url, response_personas_registradas_carrito);
+
+    let path = "../q/index.php/api/usuario_deseo/agregados/format/json/";
+    request_enid("GET", data_send, path, response_personas_carrito);
+
+}
+
+let response_personas_registradas_carrito = function (data) {
+
+    render_enid(".place_en_carros_de_compras", data);
+    $(".cancela_deseo_compra_carro").click(cancela_productos_deseados_carro_compras);
+};
+
+let cancela_productos_deseados_carro_compras = function(e) {
+
+    let $id = e.target.id;
+    if (parseInt($id) > 0) {
+        let url = "../q/index.php/api/usuario_deseo_compra/id/format/json/";
+        let data_send = { "id": $id, "status": 2 };
+        request_enid("PUT", data_send, url, function(){
+            let data_send = $.param({});
+            let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
+            request_enid("GET", data_send, url, response_personas_registradas_carrito);
+        
+        });
+    }
+
+};
+
+let response_personas_carrito = function (data) {
+
+    render_enid(".place_en_carros", data);
+
+};
+
+let busqueda_ventas_proceso = function () {
 
     let data_send = $form_franja_horaria.serialize();
     let url = "../q/index.php/api/lead/ventas_proceso/format/json/";
@@ -83,29 +125,29 @@ let response_busqueda_ventas_proceso = function (data) {
     ver_notificaciones_ordenes_compra();
 };
 
-let busqueda_ventas_efectivas = function(){
+let busqueda_ventas_efectivas = function () {
 
-    
+
     let fecha_inicio = $fecha_venta_efectiva.val();
     let fecha_termino = $fecha_venta_efectiva.val();
     if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
 
         let data_send = $.param({
-            "fecha_inicio": fecha_inicio, 
+            "fecha_inicio": fecha_inicio,
             "fecha_termino": fecha_termino,
-            "tipo_orden":5,
-            "tipo_entrega":0,
-            "recibo":"",
-            "v":1,
-            "cliente":"",
-            "status_venta":15,
-            "perfil":0
+            "tipo_orden": 5,
+            "tipo_entrega": 0,
+            "recibo": "",
+            "v": 1,
+            "cliente": "",
+            "status_venta": 15,
+            "perfil": 0
         });
         let url = "../q/index.php/api/recibo/pedidos/format/json/";
         request_enid("GET", data_send, url, response_busqueda_ventas_efectivas);
 
     }
-    
+
 
 
 }
@@ -115,9 +157,9 @@ let response_busqueda_ventas_efectivas = function (data) {
     render_enid(".place_ventas_efectivas", data);
 
 };
-let busqueda_ventas_proceso_clientes = function(){
+let busqueda_ventas_proceso_clientes = function () {
 
-    
+
     let data_send = {};
     let url = "../q/index.php/api/lead/ventas_proceso_clientes/format/json/";
     request_enid("GET", data_send, url, response_busqueda_ventas_proceso_clientes);
@@ -129,13 +171,13 @@ let response_busqueda_ventas_proceso_clientes = function (data) {
     render_enid(".place_ventas_en_proceso_clientes", data);
     $(".place_ventas_proceso_cliente").text($(".place_ventas_en_proceso_clientes .total_ventas_pendientes").val());
     ver_notificaciones_ordenes_compra();
-    
+
 };
 
 
-let busqueda_lead_promociones_disponibles = function(){
-    
-    
+let busqueda_lead_promociones_disponibles = function () {
+
+
     let fecha_inicio = get_parameter("#datetimepicker4");
     let fecha_termino = get_parameter("#datetimepicker5");
     if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
@@ -145,10 +187,10 @@ let busqueda_lead_promociones_disponibles = function(){
         request_enid("GET", data_send, url, response_lead_promociones);
 
     }
-    
+
 }
-let busqueda_metricas_franja_horaria =  function(e){
-    
+let busqueda_metricas_franja_horaria = function (e) {
+
     let fecha_inicio = get_parameter(".form_franja_horaria #datetimepicker4");
     let fecha_termino = get_parameter(".form_franja_horaria #datetimepicker5");
 
@@ -157,15 +199,15 @@ let busqueda_metricas_franja_horaria =  function(e){
         let data_send = $form_franja_horaria.serialize();
         let url = "../q/index.php/api/lead/franja_horaria/format/json/";
         request_enid("GET", data_send, url, response_lead_franja_horaria);
-    
+
     }
 
     e.preventDefault();
 }
 
-let busqueda_metricas_alcaldias =  function(e){
-    
-    
+let busqueda_metricas_alcaldias = function (e) {
+
+
     let fecha_inicio = get_parameter(".form_alcaldias #datetimepicker4");
     let fecha_termino = get_parameter(".form_alcaldias #datetimepicker5");
 
@@ -174,7 +216,7 @@ let busqueda_metricas_alcaldias =  function(e){
         let data_send = $form_alcaldias.serialize();
         let url = "../q/index.php/api/ubicacion/penetracion_tiempo/format/json/";
         request_enid("GET", data_send, url, response_metricas_alcaldias);
-    
+
     }
 
     e.preventDefault();
@@ -188,8 +230,8 @@ let response_lead_franja_horaria = function (data) {
 let response_metricas_alcaldias = function (data) {
 
     render_enid(".place_alcaldias", data);
-    $(".place_penetracion_leads").text(_text_("Leads",$(".penetracion_leads").val()));
-    $(".place_penetracion_leads_ventas").text(_text_("Ventas",$(".penetracion_leads_ventas").val()));
+    $(".place_penetracion_leads").text(_text_("Leads", $(".penetracion_leads").val()));
+    $(".place_penetracion_leads_ventas").text(_text_("Ventas", $(".penetracion_leads_ventas").val()));
 };
 
 let response_lead_promociones = function (data) {
@@ -263,16 +305,16 @@ let busqueda_lead_recibo = function ($id_orden_compra, $es_promocion = 0) {
 
         let $path = data.usuario[0].url_lead;
 
-        if($es_promocion){
+        if ($es_promocion) {
 
             $(".link_cliente_potencial_promocion").attr("href", $path);
 
-        }else{
+        } else {
 
             $(".link_cliente_potencial").attr("href", $path);
         }
-        
-        
+
+
 
     });
 
@@ -295,7 +337,7 @@ let response_pedidos = function (data) {
 
     render_enid(".place_pedidos", data);
 
-    $('.usuario_venta').click(busqueda_usuario_selector);    
+    $('.usuario_venta').click(busqueda_usuario_selector);
     $('th').click(ordena_tabla);
     $(".desglose_orden").click(function () {
         let recibo = get_parameter_enid($(this), "id");

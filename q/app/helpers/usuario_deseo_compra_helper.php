@@ -5,12 +5,13 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(
-            d("Personas SIN registro con productos en el carrito de compras",12)
+            d("Personas SIN registro con productos en el carrito de compras",'borde_end col-sm-12')
             ,
-            "f12 row"
+            "row mt-3 mb-3"
         );
         foreach($data as $row){
             
+            $id =  $row["id_usuario_deseo_compra"];
             $id_servicio = $row["id_servicio"];
             $articulos = $row["articulos"];            
             $id_recompensa = $row["id_recompensa"];
@@ -35,10 +36,8 @@ if (!function_exists('invierte_date_time')) {
                     "href" => $link_servicio,
                     "target" => "_blank"
                 ]
-            );    
+            );                
             
-            $numero_articulos=  _text_('Artículos', $articulos );
-
             $fecha_registro = flex(
                         $fecha_registro, 
                         _text_('Días trasncurridos', $dias), 
@@ -46,9 +45,13 @@ if (!function_exists('invierte_date_time')) {
                         '',
                         'strong f11');
 
+                        $eliminar= icon(
+                            _text_(_eliminar_icon,'cancela_deseo_compra_carro'),
+                            ["id" => $id]
+                        );
             $elementos = [          
-                d($fecha_registro,4),
-                d($numero_articulos,4),
+                d($eliminar,1),
+                d($fecha_registro,7),                
                 d($link_imagen_servicio,4)
             ];
 
