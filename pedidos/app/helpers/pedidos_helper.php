@@ -1866,6 +1866,10 @@ if (!function_exists('invierte_date_time')) {
         $contenido_ventas_efectivas = entregas_efectivas();
         $secciones_tabs[] = tab_seccion($contenido_ventas_efectivas, 'ventas_efectivas');
 
+        $contenido_carros_compras = carros_compras();
+        $secciones_tabs[] = tab_seccion($contenido_carros_compras, 'carros_compras');
+
+
         $menu_pedidos = tab(
             text_icon(_busqueda_icon, 'Ordenes de compra'),
             '#buscador_seccion',
@@ -1912,6 +1916,7 @@ if (!function_exists('invierte_date_time')) {
             acceso_menu_penetracion($data),
             $menu_ventas_proceso_clientes,
             acceso_ventas_en_proceso($data),
+            acceso_carros_de_compras($data),
             acceso_menu_ventas_entregadas($data),
             acceso_menu_envio_catalogo($data),
             acceso_menu_promocion($data),
@@ -1979,7 +1984,25 @@ if (!function_exists('invierte_date_time')) {
             ),
             '#ventas_en_proceso',
             [
-                'class' => ' mt-2 ventas_en_proceso mt-3'
+                'class' => ' mt-2 ventas_en_carros mt-3'
+            ]
+        );
+        
+    }
+    function acceso_carros_de_compras($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon(
+                "fa fa-money",
+                flex('Carros de compras', place("place_carros_de_compras"), _between, "mr-5", "borde_end")
+            ),
+            '#carros_compras',
+            [
+                'class' => ' mt-2 en_carros_de_compras mt-3'
             ]
         );
     }
@@ -2105,7 +2128,17 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = place("place_ventas_efectivas");
         return d($_response);
     }
+    function carros_compras()
+    {
 
+        $response[] = _titulo('En carros de compras', 4); 
+
+        $contenido[] = d(place("place_en_carros_de_compras"),6);
+        $contenido[] = d(place("place_en_carros"),6);
+        $response[] = append($contenido);
+
+        return d($response);
+    }
 
     function total_comision($ids_usuario, $ordenes)
     {

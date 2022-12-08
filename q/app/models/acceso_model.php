@@ -172,5 +172,4 @@ class Acceso_model extends CI_Model
 
         return $this->db->query($query_get)->result_array();
     }    
-
 }
