@@ -57,7 +57,6 @@ class usuario_deseo_compra extends REST_Controller
         }
         $this->response($response);
 
-
     }
 
     function agregados_GET()
