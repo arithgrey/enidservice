@@ -49,7 +49,7 @@ class usuario_deseo_compra extends REST_Controller
 
         if (fx($param, "id_servicio")) {
 
-            $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] :  $this->input->ip_address();                    
+            $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] : $this->input->ip_address();                    
             $where = ["id_servicio" => $param["id_servicio"],"ip" => $ip];
 
             $response = $this->usuario_deseo_compra_model->delete($where);

@@ -276,9 +276,7 @@ class app extends CI_Controller
 
     function session()
     {
-
-        
-        
+                
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
         $data["clasificaciones_departamentos"] = $this->api->api("clasificacion/primer_nivel");
