@@ -153,6 +153,26 @@ class usuario_deseo_compra extends REST_Controller
 
         $this->response($response);
     }
+    function ip_PUT()
+    {
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "ip,status")) {
+
+            $ip = $param["ip"];            
+            $status = $param["status"];        
+            
+            $response =  $this->usuario_deseo_compra_model->update(
+                ["status" => $status] , 
+                ["ip" => $ip],
+                10
+            );
+            
+        }
+
+        $this->response($response);
+    }
 
     function envio_pago_PUT()
     {

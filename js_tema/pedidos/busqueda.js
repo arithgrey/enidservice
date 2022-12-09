@@ -37,6 +37,8 @@ let $marcar_pagos = $('.marcar_pagos');
 let $ids_pagos = $('.ids_pagos');
 
 let $ventas_en_carros = $(".en_carros_de_compras");
+let $ventas_en_carros_vendedores = $(".en_carros_de_compras_vendedores");
+
 
 
 let $fecha_venta_efectiva = $(".fecha_venta_efectiva");
@@ -60,9 +62,11 @@ $(document).ready(() => {
     $busqueda_ventas_en_proceso_clientes.click(busqueda_ventas_proceso_clientes);
     $busqueda_ventas_efectivas.click(busqueda_ventas_efectivas);
     $ventas_en_carros.click(busqueda_ventas_en_carros);
+    $ventas_en_carros_vendedores.click(busqueda_ventas_en_carros_vendedores);
+
     $form_franja_horaria.submit(busqueda_metricas_franja_horaria);
     $form_alcaldias.submit(busqueda_metricas_alcaldias);
-    /**/
+
 
     $busqueda_ventas_en_proceso.click();
     $busqueda_ventas_en_proceso_clientes.click();
@@ -77,23 +81,36 @@ let busqueda_ventas_en_carros = function () {
     let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
     request_enid("GET", data_send, url, response_personas_registradas_carrito);
 
+}
+
+
+let busqueda_ventas_en_carros_vendedores = function () {
+
+    let data_send = $.param({});
+
     let path = "../q/index.php/api/usuario_deseo/agregados/format/json/";
-    request_enid("GET", data_send, path, response_personas_carrito);
+    request_enid("GET", data_send, path, response_personas_carrito_vendedores);
 
 }
+
 
 let response_personas_registradas_carrito = function (data) {
 
     render_enid(".place_en_carros_de_compras", data);
-    $(".cancela_deseo_compra_carro").click(cancela_productos_deseados_carro_compras);
+    $(".cancela_deseo_compra_carro_ip").click(cancela_productos_deseados_carro_compras);
+};
+let response_personas_carrito_vendedores = function (data) {
+
+    render_enid(".place_en_carros_de_compras_vendedores", data);
+    
 };
 
 let cancela_productos_deseados_carro_compras = function(e) {
 
     let $id = e.target.id;
     if (parseInt($id) > 0) {
-        let url = "../q/index.php/api/usuario_deseo_compra/id/format/json/";
-        let data_send = { "id": $id, "status": 2 };
+        let url = "../q/index.php/api/usuario_deseo_compra/ip/format/json/";
+        let data_send = { "ip": $id, "status": 2 };
         request_enid("PUT", data_send, url, function(){
             let data_send = $.param({});
             let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
