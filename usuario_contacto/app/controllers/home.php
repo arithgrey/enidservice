@@ -25,7 +25,7 @@ class Home extends CI_Controller
 
         if ($q !== 0) {
 
-            $this->busqueda($data);
+            $this->busqueda($data,$param);
         } else {
 
             $this->encuesta($param, $data);
@@ -66,10 +66,10 @@ class Home extends CI_Controller
             $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0);
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
-
+        
         $this->app->pagina($data, render($data), 1);
     }
-
+    
     private function articulo_busqueda($id_usuario)
     {
         return $this->app->api("tag_arquetipo/index", ["usuario" => $id_usuario]);
@@ -107,10 +107,10 @@ class Home extends CI_Controller
         }
     }
 
-    private function busqueda($data)
+    private function busqueda($data, $param)
     {
 
-        $this->app->pagina($data, render_busqueda($data), 1);
+        $this->app->pagina($data, render_busqueda($data, $param), 1);
     }
 
     private function tipo_tipificciones($in_session, $data)

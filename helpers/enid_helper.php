@@ -978,7 +978,9 @@ function format_link_nombre_perfil($row)
     $link = path_enid('usuario_contacto', $id);
     $formato_nombre = format_nombre($row);
 
-    return a_enid($formato_nombre, ['href' => $link, 'class' => 'black underline']);
+    return format_link(
+        $formato_nombre, 
+        ['href' => $link],2);
 }
 
 

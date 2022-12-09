@@ -75,25 +75,100 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
             $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
             $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
-            $contenedor[] = d($response, 'col-md-6 col-md-offset-3  bg-light p-5 contenedor_perfil');
-            $contenedor[] = d(formulario_calificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
-            $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-6 col-md-offset-3  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
+            $contenedor[] = d($response, 'col-md-10 col-md-offset-1  bg-light p-5 contenedor_perfil');
+            $contenedor[] = d(formulario_calificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
+            $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
 
 
         } elseif ($data['encuesta'] > 0) {
-            $contenedor[] = d(notificacion_encuesta(), 'col-md-6 col-md-offset-3 bg-light p-5 mb-5');
+            $contenedor[] = d(notificacion_encuesta(), 'col-md-10 col-md-offset-1 bg-light p-5 mb-5');
         } else {
 
             $texto[] = h(_text_(strong('Ups!'), 'no encontramos a este ', strong('usuario')), 1, 'text-center  text-uppercase');
             $texto[] = format_link('Sigue comprando', ['class' => 'mt-5 col-md-8 col-md-offset-2', 'href' => path_enid('home')]);
             $contenedor[] = d($texto, 'col-md-4 col-md-offset-4 mt-5 bg-light p-5');
         }
-
+        
+        $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
+        $contenedor[] = d(place("place_pedidos"), 'col-md-10 col-md-offset-1 mt-5 mb-5');
         return append($contenedor);
 
     }
+    function form_busqueda_ordenes_compra_hidden($data, $id_usuario)
+    {
 
+        
+        $response[] = form_open("", ["class" => "form_busqueda_pedidos_hidden mt-5", "method" => "post"]);
+        $response[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => 1]);
+        $response[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => $id_usuario]);
+        $response[] = hiddens(['class' => 'es_busqueda_reparto', 'name' => 'es_busqueda_reparto', 'value' => 0]);
+        $response[] = hiddens([
+            'class' => 'es_administrador', 'name' => 'es_administrador',
+            'value' => es_administrador($data)
+        ]);
 
+        $response[] = hiddens(
+            [
+                "name" => "perfil",
+                "class" => "perfil_consulta",
+                "value" => $data["id_perfil"],
+            ]
+        );
+
+        
+        $response[] = hiddens(
+            [
+                "name" => "id_usuario_referencia",
+                'value' => 0,
+            ]
+        );
+
+        
+        $response[] = hiddens(
+            [
+                "name" => "cliente",
+                'value' => "",
+            ]
+        );
+
+        $response[] = hiddens(
+            [
+                "name" => "v",
+                'value' => 1,
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "tipo_entrega",
+                'value' => 0,
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "status_venta",
+                'value' => 0,
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "recibo",
+                'value' => "",
+            ]
+        );
+        $response[] = hiddens(
+            [
+                "name" => "tipo_orden",
+                'value' => 5,
+            ]
+        );
+        
+
+        
+        $response[] = d(frm_fecha_busqueda(),'d-none');
+    
+        $response[] = form_close();
+        return d($response,12);
+    }
     function seccion_facebook($data)
     {
         $response = [];

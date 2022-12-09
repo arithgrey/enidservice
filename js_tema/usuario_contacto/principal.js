@@ -1,3 +1,4 @@
+let $form_busqueda = $(".form_busqueda_pedidos_hidden");
 let $contenedor_perfil = $('.contenedor_perfil');
 let $contenedor_encuesta_estrellas = $('.contenedor_encuesta_estrellas');
 let $contenedor_encuesta_tipificcion = $('.contenedor_encuesta_tipificcion');
@@ -46,7 +47,27 @@ $(document).ready(function () {
     });
 
     $form_articulo_interes.submit(registro_articulo_interes);
+    $form_busqueda.submit(busqueda_pedidos);
+    $form_busqueda.submit();
 });
+let busqueda_pedidos = function (e) {
+
+    let fecha_inicio = get_parameter("#datetimepicker4");
+    let fecha_termino = get_parameter("#datetimepicker5");
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_busqueda.serialize();
+        let url = "../q/index.php/api/recibo/pedidos/format/json/";
+        request_enid("GET", data_send, url, response_pedidos, ".place_pedidos");
+
+    }
+    e.preventDefault();
+};
+let response_pedidos = function (data) {
+
+    render_enid(".place_pedidos", data);
+};
+
 let registro_articulo_interes = function (e) {
 
     let data_send = $(this).serialize();
