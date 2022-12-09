@@ -1868,6 +1868,10 @@ if (!function_exists('invierte_date_time')) {
 
         $contenido_carros_compras = carros_compras();
         $secciones_tabs[] = tab_seccion($contenido_carros_compras, 'carros_compras');
+        
+        $contenido_carros_compras_vendedores = carros_compras_vendedores();
+        $secciones_tabs[] = tab_seccion($contenido_carros_compras_vendedores, 'carros_compras_vendedores');
+
 
 
         $menu_pedidos = tab(
@@ -1917,6 +1921,7 @@ if (!function_exists('invierte_date_time')) {
             $menu_ventas_proceso_clientes,
             acceso_ventas_en_proceso($data),
             acceso_carros_de_compras($data),
+            acceso_carros_de_compras_vendedores($data),
             acceso_menu_ventas_entregadas($data),
             acceso_menu_envio_catalogo($data),
             acceso_menu_promocion($data),
@@ -1989,6 +1994,25 @@ if (!function_exists('invierte_date_time')) {
         );
         
     }
+    
+    function acceso_carros_de_compras_vendedores($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon(
+                "fa fa-money",
+                flex('Carros de compras vendedores', place("place_carros_de_compras_vendedores"), _between, "mr-5", "borde_end")
+            ),
+            '#carros_compras_vendedores',
+            [
+                'class' => ' mt-2 en_carros_de_compras_vendedores mt-3'
+            ]
+        );
+    }
+
     function acceso_carros_de_compras($data)
     {
 
@@ -2131,15 +2155,18 @@ if (!function_exists('invierte_date_time')) {
     function carros_compras()
     {
 
-        $response[] = _titulo('En carros de compras', 4); 
-
-        $contenido[] = d(place("place_en_carros_de_compras"),6);
-        $contenido[] = d(place("place_en_carros"),6);
-        $response[] = append($contenido);
-
+        $response[] = _titulo('En carros de compras usuarios sin registro', 4); 
+        $response[] = d(place("place_en_carros_de_compras"),12);
+        
         return d($response);
     }
+    function carros_compras_vendedores(){
+        
+        $response[] = _titulo('En carros de compras Vendedores', 4); 
+        $response[] = d(place("place_en_carros_de_compras_vendedores"),12);        
+        return d($response);
 
+    }
     function total_comision($ids_usuario, $ordenes)
     {
         $totales = [];

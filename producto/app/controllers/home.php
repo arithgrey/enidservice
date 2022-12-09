@@ -13,7 +13,6 @@ class Home extends CI_Controller
 
     function index()
     {
-        
         $param = $this->input->get();                
         evita_basura($this->id_servicio);
         $method = $_SERVER['REQUEST_METHOD'];
@@ -26,8 +25,7 @@ class Home extends CI_Controller
             $id_recibo = $this->input->get("recibo");
             $this->recibo($id_recibo, $method);
 
-        }
-       
+        }       
 
     }
 
