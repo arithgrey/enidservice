@@ -3,8 +3,8 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class usuario_deseo extends REST_Controller
 {
-    private $id_usuario;
-
+    
+    public $id_usuario;
     function __construct()
     {
         parent::__construct();
@@ -12,6 +12,7 @@ class usuario_deseo extends REST_Controller
         $this->load->helper("usuario_deseo");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
+        
     }
     /*Ya se registro ahora le cobramos 4*/
     function envio_pago_PUT()
@@ -288,7 +289,6 @@ class usuario_deseo extends REST_Controller
 
     }
 
-
     function deseo_compra($param)
     {
         $q = ["tipo" => 2, "id_servicio" =>  $param["id_servicio"]];
@@ -331,9 +331,7 @@ class usuario_deseo extends REST_Controller
     private function recompensa_ids($ids)
     {
 
-
-        $q  = ["ids" =>  $ids];
-        return $this->app->api("recompensa/ids", $q);
+        return $this->app->api("recompensa/ids", ["ids" =>  $ids]);
     }
 
     private function agrega_interes_usuario($q)

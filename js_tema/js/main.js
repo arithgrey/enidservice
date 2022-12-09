@@ -14,30 +14,23 @@ const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
 $("footer").ready(() => {
 
-    $(".prueba_en_casa").click(function(){
-        
+    $(".prueba_en_casa").click(function(){        
         $("#modal_prueba_en_casa").modal("show");        
     });
 
-    $(".anuncio_negocio_enid_service").click(function(){
-        
+    $(".anuncio_negocio_enid_service").click(function(){        
         $("#modal_anuncio_negocio").modal("show");        
     });
 
-    $(".vende_tu_auto").click(function(){
-        
+    $(".vende_tu_auto").click(function(){        
         $("#modal_venta_auto").modal("show");        
     });
 
-    $(".mayoristas_enid").click(function(){
-        
+    $(".mayoristas_enid").click(function(){        
         $("#modal_mayoristas").modal("show");        
     });
 
     
-
-    
-
     set_option({
         "in_session": get_parameter(".in_session"),
         "is_mobile": get_parameter(".is_mobile"),
@@ -108,8 +101,10 @@ $("footer").ready(() => {
             verifica_formato_default_inputs(0);
         });
     }
-
     
+    $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);    
+    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+
 
 
 });
@@ -1369,7 +1364,8 @@ let agregar_deseos_sin_antecedente_gbl = function () {
     }
 }
 let quitar_deseo_sin_antecedente_gbl = function () {
-
+    
+    
     let $id_servicio = $(this).attr('id');
     $(_text(".por_agregar_", $id_servicio)).removeClass("d-none");
     $(_text(".agregado_", $id_servicio)).addClass("d-none");    
@@ -1379,7 +1375,7 @@ let quitar_deseo_sin_antecedente_gbl = function () {
         let data_send = { "id_servicio": $id_servicio, "servicio" : $id_servicio};
         if (parseInt(get_option("in_session")) > 0) {
 
-            /*En session*/
+            /*En session*/            
             let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";            
             request_enid("DELETE", data_send, url, adicionales_gbl);
 
@@ -1395,6 +1391,5 @@ let quitar_deseo_sin_antecedente_gbl = function () {
 let adicionales_gbl = function () {
     metricas_perfil();
     cerrar_modal();
-
 }
 

@@ -5,7 +5,7 @@ let $sorteo_form = $(".sorteo_form");
 $(document).ready(() => {
     
     $sorteo_form.submit(registro_sorteo);
-    $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
+    //$('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
 });
 
 let registro_sorteo = function(e){

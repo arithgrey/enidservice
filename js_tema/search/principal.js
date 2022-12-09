@@ -1,7 +1,9 @@
 "use strict";
 /*Sin session*/
+/*
 let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
 let $quitar_deseo_sin_antecedente = $('.quitar_deseo_sin_antecedente');
+*/
 
 $(document).ready(() => {
     $(".order").change(filtro);
@@ -9,8 +11,10 @@ $(document).ready(() => {
     $("footer").ready(carga_promociones_top);
     $("footer").ready(carga_ultimos_agregados);
 
+    /*
     $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente_gbl);
     $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente_gbl);
+    */
     
 });
 
@@ -69,10 +73,10 @@ let response_servicios_recien_agregados = data => {
         let numero_servicio = get_parameter_enid($(this), "id");
         redirect(path_enid("servicio", numero_servicio));    
     });
-    
+    /*
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
-
+    */
     
 }
 
