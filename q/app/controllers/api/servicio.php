@@ -1497,7 +1497,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         $campos =
-            "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel";
+            "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel,link_afiliado_amazon";
         if (fx($param, $campos)) {
 
             $response = $this->serviciosmodel->get_producto_por_clasificacion($param);

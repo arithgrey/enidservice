@@ -384,7 +384,8 @@ class usuario_model extends CI_Model
                         s.es_publico, 
                         s.precio,
                         s.precio_alto,
-                        s.es_sorteo             
+                        s.es_sorteo     
+                        s.link_afiliado_amazon
                     FROM usuario_deseo us
                     INNER JOIN servicio s  
                     ON us.id_servicio =  s.id_servicio
