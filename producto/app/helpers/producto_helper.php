@@ -345,7 +345,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ($es_mobile > 0) ? "" : $nombre_producto;
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
-
+        
         $r[] = frm_compra(
             $data,
             $es_servicio,
@@ -355,6 +355,7 @@ if (!function_exists('invierte_date_time')) {
             $tiempo_entrega,
             $proceso_compra
         );
+        
 
         $r[] = $tallas;
 
@@ -364,6 +365,13 @@ if (!function_exists('invierte_date_time')) {
 
     function frm_compra($data, $es_servicio, $existencia, $id_servicio, $q2, $tiempo_entrega, $proceso_compra)
     {
+
+        if(es_link_afiliado_amazon($data)){
+            return format_link("Comprame en Amazon",
+            [
+                "href" => es_link_afiliado_amazon($data,1)
+            ],2);
+        }
 
         $response = "";
         if ($es_servicio < 1) {
@@ -434,6 +442,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
+        
         $r[] = ganancia_comisionista($data);
         $r[] = flex(
             _titulo("PIEZAS", $tipo),
@@ -446,8 +455,20 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($r, "contenedor_form");
         return append($response);
     }
-    function compra_meses($precio)
+    function es_link_afiliado_amazon($data, $regresa_link = 0){
+        $servicio =$data["info_servicio"]["servicio"];
+        $link_afiliado_amazon = pr($servicio, "link_afiliado_amazon");        
+        
+        $response = (strlen($link_afiliado_amazon) > 5);
+        if($regresa_link > 0){
+            $response = $link_afiliado_amazon;
+        }
+        return $response;
+    }
+    function compra_meses($data, $precio)
     {
+    
+        if(es_link_afiliado_amazon($data)){ return "";}
 
         $response = "";
 
@@ -1038,7 +1059,7 @@ if (!function_exists('invierte_date_time')) {
 
             $seis_meses =  ($precio_unidad + porcentaje($precio_unidad, 8));
             $seis_meses_aplicado =  $seis_meses / 6;
-            $meses = compra_meses($precio_unidad);
+            $meses = compra_meses($data, $precio_unidad);
 
             $texto = flex($texto, $meses, "flex-column");
 
