@@ -1727,6 +1727,12 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
     $clase = "";
     switch ($primario) {
+        case 3:
+            /*Format Google simple*/
+            $clase = "strong col 
+            text-uppercase format_action format_google shadow d-block";
+            break;
+
         case 2:
             /*Format Google*/
             $clase = "pb-3 pt-3 p-2 strong col 

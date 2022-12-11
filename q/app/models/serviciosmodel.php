@@ -637,7 +637,8 @@ class serviciosmodel extends CI_Model
                         id_ciclo_facturacion,
                         es_publico,
                         es_sorteo,
-                        precio_alto
+                        precio_alto,
+                        link_afiliado_amazon
                         FROM 
                         servicio
                         WHERE 
@@ -674,7 +675,8 @@ class serviciosmodel extends CI_Model
             "segundo_nivel",
             "tercer_nivel",
             "cuarto_nivel",
-            "quinto_nivel"
+            "quinto_nivel",
+            "link_afiliado_amazon"
         ];
         return $this->get($params, ["id_servicio" => $id_servicio]);
     }
@@ -752,7 +754,7 @@ class serviciosmodel extends CI_Model
                 marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
                 tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, 
-                precio,precio_alto, es_sorteo FROM servicio ", $where);
+                precio,precio_alto, es_sorteo, link_afiliado_amazon FROM servicio ", $where);
         return $this->db->query($query_create)->result_array();
     }
 

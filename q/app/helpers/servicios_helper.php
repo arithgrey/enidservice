@@ -189,6 +189,7 @@ if (!function_exists('invierte_date_time')) {
         $nnservicio
     ) {
 
+        $link_afiliado_amazon = pr($servicio, "link_afiliado_amazon");
         $link_maps = pr($servicio, "link_maps");
         $descripcion_informacion = "INFORMACIÓN SOBRE TU " . $nnservicio;
         $descripcion_informacion = h(
@@ -203,6 +204,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
+            $link_afiliado_amazon,
             $link_maps,
             valida_text_imagenes($tipo_promocion, $num_imagenes),
             $num_imagenes,
@@ -613,6 +615,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_entrada(
+        $link_afiliado_amazon,
         $link_maps,
         $notificacion_imagenes,
         $num_imagenes,
@@ -671,6 +674,24 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = form_maps($link_maps);
+
+        if (strlen($link_afiliado_amazon) > 0) {
+
+            $z[] = d(text_icon(
+                'fa fa fa-pencil',
+                a_enid(
+                    'ver link Amazon afiiados',
+                    [
+                        'href' => $link_afiliado_amazon,
+                        'target' => '_black',
+                        'class' => 'black underline'
+                    ],
+                    0
+                )
+            ), "text-uppercase");
+        }
+
+        $z[] = form_afiliado_amazon($link_afiliado_amazon);
 
 
         return tab_seccion($z, "tab_imagenes", $ext_1);
@@ -1239,7 +1260,7 @@ if (!function_exists('invierte_date_time')) {
         }
         
         $texto_precio =  flex($texto_precio_real, $texto_descuento,'flex-column');
-        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp8 text-uppercase black mt-2");
+        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp7 text-uppercase black mt-2");
 
         $tipo_deseo = "agregar_deseos_sin_antecedente";
         $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
@@ -1285,12 +1306,25 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-
-        return flex(
-            $img,
-            $texto_precio_nombre,
-            "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5"
-        );
+        $link_afiliado_amazon = $servicio["link_afiliado_amazon"];
+        $link_amazon_afiliado =  "";        
+        if(strlen($link_afiliado_amazon) > 5){
+            
+            $link_amazon_afiliado = format_link("Comprame en Amazon!",
+            [
+             "href" => $link_afiliado_amazon,
+             "class"    => "fp7"
+            ], 3);
+        }
+        
+        return d(
+                    [
+                        d($img),
+                        d($texto_precio_nombre),
+                        d($link_amazon_afiliado)
+                    ],
+                "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5"
+                );
     }
     function create_vista($s, $agregar_servicio = 0, $es_recompensa = 0)
     {
@@ -1958,6 +1992,45 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r);
     }
+    function form_afiliado_amazon($link_afiliado_amazon)
+    {
+
+
+        $r[] = form_open("", ["class" => "form_link_afiliado_amazon"]);
+        $r[] = input(
+            [
+                "type" => "hidden",
+                "name" => "q",
+                "value" => "link_afiliado_amazon"
+            ]
+        );
+
+        $input = input_frm(
+            "",
+            "LINK COMPRA EN AMAZON",
+            [
+                "type" => "text",
+                "name" => "q2",
+                "class" => 'link_afiliado_amazon',
+                "id" => 'link_afiliado_amazon',
+                "value" => $link_afiliado_amazon,
+                "required" => true
+            ]
+        );
+
+        $button = btn("GUARDAR", ["class" => "link_afiliado_maps"]);
+        $r[] = flex(
+            $input,
+            $button,
+            'mt-5 align-items-end',
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
+        $r[] = form_close();
+
+        return d($r);
+    }
+
 
     function form_descripcion($nueva_descripcion)
     {
