@@ -1936,7 +1936,7 @@ if (!function_exists('invierte_date_time')) {
         $data_complete[] = d($modal_comisiones, 13);
         $data_complete[] = d($modal_catalogo, 13);
         $data_complete[] = d($modal_promocion, 13);
-
+        $data_complete[] = hiddens(["class" => "buscar_ordenes_compra", "value" => es_cliente($data)]);
         return d($data_complete, 12);
     }
     function acceso_populares($data)

@@ -2002,7 +2002,7 @@ if (!function_exists('invierte_date_time')) {
             );
 
         $seccion[] = format_link(
-            "Cambia la dirección de entrega",
+            "CAMBIAR LA DIRECCIÓN DE ENTREGA",
             [
 
                 "href" => path_enid(

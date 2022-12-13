@@ -1315,6 +1315,7 @@ let path_enid = (indice, $extra = '') => {
     let $base_url = {
         "url_home": "reporte_enid",
         "recibo": "pedidos/?recibo=",
+        "pedido_seguimiento": "pedidos/?seguimiento=",
         "entregas": 'entregas',
         "reventa": 'reventa',
         "galeria": '',
