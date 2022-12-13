@@ -2,6 +2,7 @@
 let $form_busqueda = $(".form_busqueda_pedidos");
 let $form_franja_horaria = $(".form_franja_horaria");
 let $form_alcaldias = $(".form_alcaldias");
+let $buscar_ordenes_compra = $(".buscar_ordenes_compra");
 
 let $ids = $(".ids");
 let $usurios = $(".usuarios");
@@ -366,7 +367,8 @@ let response_pedidos = function (data) {
 };
 let valida_busqueda_inicial = function () {
 
-    if (parseInt($ids.val()) > 0 && $usurios.val().length > 0) {
+    
+    if (parseInt($ids.val()) > 0 && $usurios.val().length > 0 || parseInt($buscar_ordenes_compra.val()) > 0) {
 
         $form_busqueda.submit();
 

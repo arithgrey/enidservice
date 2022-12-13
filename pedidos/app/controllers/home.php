@@ -26,10 +26,9 @@ class Home extends CI_Controller
         $es_seguimiento = ($seguimiento > 0);
 
         if ($es_seguimiento && ctype_digit($seguimiento)) {
-            
-                    
-            $this->vista_seguimiento($param, $data);
 
+
+            $this->vista_seguimiento($param, $data);
         } else {
 
 
@@ -47,7 +46,7 @@ class Home extends CI_Controller
 
         if ($es_costo_operacion && ctype_digit($costos_operacion)) {
 
-            
+
             $this->carga_vista_costos_operacion($param, $data);
         } else {
 
@@ -58,7 +57,7 @@ class Home extends CI_Controller
 
     private function vista_seguimiento($param, $data)
     {
-        
+
         $data = $this->app->cssJs($data, "pedidos_seguimiento");
         $id_orden_compra = $this->input->get("seguimiento");
         $data["id_orden_compra"] = $id_orden_compra;
@@ -71,13 +70,13 @@ class Home extends CI_Controller
             "id_usuario_referencia" => $id_usuario_referencia
         ];
 
-        
+
         $data["es_vendedor"] = ($id_usuario_referencia == $data["id_usuario"]);
         $es_domicilio = prm_def($param, "domicilio");
 
         if ($es_domicilio) {
 
-            
+
             $this->view_domicilios($data, $param);
         } else {
 
@@ -111,7 +110,7 @@ class Home extends CI_Controller
             $tiene_acceso = ($es_usuario_compra || $es_propietario);
 
             if ($tiene_acceso) {
-                
+
                 $this->domicilios($param, $data);
             }
         }
@@ -126,7 +125,7 @@ class Home extends CI_Controller
         $tiene_domicilio = es_data($domicilios_orden_compra);
         $lista = prm_def($param, 'frecuentes');
         $asignacion_horario_entrega = prm_def($param, 'asignacion_horario_entrega');
-    
+
         if (!$tiene_domicilio || $asignacion || $lista || $asignacion_horario_entrega) {
 
             $id_usuario = $data["id_usuario"];
@@ -143,16 +142,15 @@ class Home extends CI_Controller
 
             ];
 
-            
+
             $contenido = render_domicilio($data);
             $this->app->pagina(
                 $this->app->cssJs($data, "pedidos_domicilios_pedidos"),
                 $contenido,
                 1
             );
-            
         } else {
-            
+
             redirect(path_enid('area_cliente_compras', $id_orden_compra, 0, 1));
         }
     }
@@ -176,8 +174,8 @@ class Home extends CI_Controller
     }
 
     private function load_view_seguimiento($data, $param)
-    {   
-        
+    {
+
         $id_orden_compra = $data["id_orden_compra"];
         $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
         $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
@@ -188,7 +186,7 @@ class Home extends CI_Controller
         $id_usuario_compra = pr($productos_orden_compra, "id_usuario");
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
 
-        
+
         $data += [
             "notificacion_pago" => ($notificacion > 0) ? 0 : $notificacion_pago,
             "orden" => $id_orden_compra,
@@ -220,7 +218,7 @@ class Home extends CI_Controller
             $this->app->add_imgs_usuario($productos_orden_compra, "id_usuario_entrega");
         $data = texto_pre_pedido($productos_orden_compra, $data);
         $params = $this->input->get();
-        
+
         $this->app->pagina($data, render_seguimiento($data, $params), 1);
     }
 
@@ -476,10 +474,12 @@ class Home extends CI_Controller
     {
 
         $id_orden_compra = $param["recibo"];
+        $this->envio_reparto_ubicacion($id_orden_compra, es_cliente($data));
+
         $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
 
         if (es_data($productos_orden_compra)) {
-            
+
             $data += [
                 "orden" => $id_orden_compra,
                 "productos_orden_compra" => $productos_orden_compra,
@@ -529,7 +529,7 @@ class Home extends CI_Controller
         $id_servicio = pr($productos_orden_compra, "id_servicio");
         $servicio = $this->app->servicio($id_servicio);
         $compras_en_tiempo = $this->get_num_compras($id_usuario);
-        
+
         $ordenes_de_compra_usuarios_similares =  $this->ordenes_de_compra_usuarios_similares($compras_en_tiempo, $id_orden_compra);
         $historia_compra_tiempo = $this->historia_comentarios($ordenes_de_compra_usuarios_similares);
 
@@ -554,8 +554,8 @@ class Home extends CI_Controller
         $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
 
         $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
-    
-        
+
+
         $data += [
             "domicilios" => $this->app->domicilios_orden_compra($productos_orden_compra),
             "usuario" => $usuario_compra,
@@ -589,15 +589,35 @@ class Home extends CI_Controller
         $this->app->pagina($data, render_pendidos($data), 1);
     }
 
+
+    private function envio_reparto_ubicacion($id_orden_compra, $es_cliente)
+    {
+
+        if ($es_cliente) {
+            $this->app->api(
+                "lead/envio_reparto",
+                [
+
+                    'orden_compra' => $id_orden_compra
+                ],
+                "json",
+                "PUT"
+            );
+
+            redirect(path_enid("pedido_seguimiento", $id_orden_compra,0,1));
+        }
+    }
+
+
     private function ordenes_de_compra_usuarios_similares($usuarios_en_tiempo, $id_orden_compra)
     {
 
-        $ids_usuarios = prm_def($usuarios_en_tiempo, 'ids');    
+        $ids_usuarios = prm_def($usuarios_en_tiempo, 'ids');
         $array_ids = explode(',', $ids_usuarios);
-            
+
         $response  = [];
         if (es_data($array_ids)) {
-            
+
             return $this->app->api(
                 "recibo/ordenes_de_compra_usuarios_similares",
                 [
@@ -614,10 +634,10 @@ class Home extends CI_Controller
         $response  = [];
         if (es_data($ordenes_de_compra_usuarios_similares)) {
 
-            $ids = array_unique(array_column($ordenes_de_compra_usuarios_similares, 'id_orden_compra'));                        
+            $ids = array_unique(array_column($ordenes_de_compra_usuarios_similares, 'id_orden_compra'));
             if (es_data($ids)) {
-                
-                $response =  $this->get_ordes_comentarios(implode( ",",$ids));
+
+                $response =  $this->get_ordes_comentarios(implode(",", $ids));
             }
             return $response;
         }
@@ -649,7 +669,8 @@ class Home extends CI_Controller
     {
 
         return $this->app->api(
-            "orden_comentario/index",["orden_compra" => $orden_compra]
+            "orden_comentario/index",
+            ["orden_compra" => $orden_compra]
         );
     }
     private function get_ordes_comentarios($ids)

@@ -100,10 +100,9 @@ let proceso_asignar_direccion = (id_direccion, id_recibo) => {
 };
 let response_proceso_asignacion = function (data) {
 
-    if (data === true) {
-
-        let id_recibo = $recibo.val();
-        redirect("../area_cliente/?action=compras&ticket=" + id_recibo);
+    if (data === true) {        
+        let $orden_compra = $(".orden_compra").val();
+        redirect(path_enid("pedido_seguimiento", $orden_compra));
     }
 
 };
