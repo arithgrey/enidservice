@@ -2,15 +2,15 @@
 let $num_ciclos = $('#num_ciclos');
 let $se_agrego = $('.se_agrego');
 let $se_agregara = $('.se_agregara');
-let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
+//let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
 let $bottom_carro_compra_recompensa = $(".bottom_carro_compra_recompensa");
 let $costos_precios_servicio = $(".costos_precios_servicio");
 let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
-
+let $en_lista_deseos =  $(".en_lista_deseos");
 $(document).ready(function () {
 
-    
+
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
@@ -35,11 +35,14 @@ $(document).ready(function () {
     $(".texto_externo_compra").click(operaciones_compra_externas);
 
     $num_ciclos.change(articulos_seleccionados);
-    $agregar_deseos_sin_antecedente.click(agregar_deseos);
+    //$agregar_deseos_sin_antecedente.click(agregar_deseos);
     $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
     $costos_precios_servicio.click(costos_precios_servicio);
     $form_costo.submit(costo_servicio);
     $form_precio.submit(precio_servicio);
+    $en_lista_deseos.click(function(){        
+        $(".en_lista_deseos_producto").val(1);
+    });
 });
 
 let carro_compra_recompensa  = function(){

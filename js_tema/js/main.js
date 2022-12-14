@@ -1321,7 +1321,8 @@ let path_enid = (indice, $extra = '') => {
         "galeria": '',
         "servicio": "producto/?producto=" ,
         "sorteo": "sorteo/?q=",
-        "pay_request":"area_cliente/?ticket="
+        "pay_request":"area_cliente/?ticket=",
+        "lista_deseos": "lista_deseos"
     };
 
     return _text('../', $base_url[indice], $extra);
@@ -1349,8 +1350,7 @@ let agregar_deseos_sin_antecedente_gbl = function () {
     if (parseInt($id_servicio) > 0) {
         advierte('Agregado a tu lista de deseos!', 1);
         let data_send = { "id_servicio": $id_servicio, "articulos": 1 };
-        
-        //log_operaciones_externas(27, $id_servicio);
+                
         if (parseInt(get_option("in_session")) > 0) {
 
             let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
@@ -1392,5 +1392,9 @@ let quitar_deseo_sin_antecedente_gbl = function () {
 let adicionales_gbl = function () {
     metricas_perfil();
     cerrar_modal();
+    let $en_lista_deseos_producto = $(".en_lista_deseos_producto").val();
+    if(parseInt($en_lista_deseos_producto) > 0 ){
+        redirect(path_enid("lista_deseos"));
+    }   
 }
 
