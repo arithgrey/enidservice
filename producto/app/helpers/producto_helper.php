@@ -367,7 +367,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         if(es_link_afiliado_amazon($data)){
-            return format_link("Comprame en Amazon",
+            return format_link("Lo deseo!",
             [
                 "href" => es_link_afiliado_amazon($data,1)
             ],2);
@@ -1225,40 +1225,18 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     "Agregar al carrito",
-                    'agregar_a_lista text-center l_deseos pt-3 pb-3'
+                    'text-center  pt-3 pb-3'
                 ),
                 [
-                    'class' => 'agregar_deseos_sin_antecedente borde_green',
+                    'class' => 'agregar_deseos_sin_antecedente en_lista_deseos white',
                     'id' => $id_servicio,
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
-                ]
+                ],2
 
-            );
-            /*
-            $texto = _text_(
-                d(_text_(span("5% de descuento",'strong white'),
-                "al enviar mensaje", span("aquí!", 'bg_white black p-1 mt-1 borde_rojo font-weight-bold underline'))),
-                 
-            );
-            */
-
-            /*
-            $mensaje_messenger = a_enid(
-                $texto,
-                [
-                    "href" => path_enid('facebook_descuento', 0, 1),
-                    "class" => "white facebook_trigger p-2 borde_amarillo bg_black p-1  mt-3",
-                    "target" => "_black"
-                ]
-                );
-                */
-
-            //$response[] = $mensaje_messenger;
+            );            
 
         }
-
-        //$response[] = formas_acionales_compra($data);
-        //$response[] = confianza($id_servicio, $data);
+        
         return append($response);
     }
     function confianza($id_servicio, $data)

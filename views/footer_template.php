@@ -93,6 +93,7 @@ CDMX
 
 <?= d('', 'top_100 bottom_100') ?>
 <?= hiddens(['class' => 'is_mobile', 'value' => is_mobile()]) ?>
+<?= hiddens(['class' => 'en_lista_deseos_producto', 'value' => 0]) ?>
 <?php if ($footer_visible): ?>    
         <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>            
             <?=footer_opciones()?>
