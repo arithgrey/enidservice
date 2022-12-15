@@ -89,8 +89,22 @@ if (!function_exists('invierte_date_time')) {
             $recompensas = $param["recompensas"];
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
             $r[] = d(_titulo($titulo), 'mb-5');
+
+            if (!$in_session) {
+
+
+                $clase = 'mt-3 black mb-5 f14 ';
+                $r[] = d('Te llamaremos 
+                            en cuanto estemos de 
+                            camino, 
+                            posiblemente 
+                            hoy mismo te entreguemos!', $clase);
+            }
+
+
+
             $z[] = input_frm(
-                "col-lg-4 mt-5",
+                "col-lg-6 mt-5",
                 "NOMBRE",
                 [
                     "name" => "nombre",
@@ -106,7 +120,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $z[] = input_frm(
-                "col-lg-4 mt-5",
+                "col-lg-6 mt-5",
                 "TELÉFONO",
                 [
                     "id" => "telefono",
@@ -122,7 +136,7 @@ if (!function_exists('invierte_date_time')) {
                 _text_telefono
             );
 
-            $extra_sorteo  = ($param["es_sorteo"] > 0 ) ? 'd-none': '';
+            $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none': '';
             $z[] = d(input_frm(
                 'mt-5',
                 'Fecha de entrega',
@@ -294,13 +308,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = append($inputs);
 
-            if (!$in_session) {
-
-
-                $clase = 'mt-5 text-uppercase black text- col-sm-12 strong h5';
-                $z[] = d('Registra tu cuenta para agendar tu pedido', $clase);
-            }
-
+            
 
             $config_email = [
                 "name" => "email",
@@ -317,7 +325,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $z[] = input_frm(
-                _text_("col-lg-6 mt-5", $es_cliente_class),
+                _text_("col-lg-6 mt-5 top_100", $es_cliente_class),
                 "CORREO",
                 $config_email,
                 _text_correo
@@ -327,15 +335,15 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "id" => "password_registro",
                     "class" => "input-sm password",
-                    "type" => "password",
+                    "type" => "hidden",
                     "required" => "true",
                     "placeholder" => "***",
                 ];
-            if (!$es_cliente) {
-                $config_password['value'] = sha1(mt_rand());
-            }
+            
+            $config_password['value'] = sha1(mt_rand());
+            
             $z[] = input_frm(
-                _text_("col-lg-6 mt-5", $es_cliente_class),
+                _text_("col-lg-6 mt-5 d-none", $es_cliente_class),
                 "PASSWORD",
                 $config_password,
                 _text_pass

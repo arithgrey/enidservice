@@ -223,7 +223,7 @@ let focus_inputs_form = () => {
 
 let response_registro_usuario = (data) => {
 
-    $("#modal-error-message").modal("hide");
+    //$("#modal-error-message").modal("hide");
     if (data.hasOwnProperty('usuario_existe') && parseInt(data.usuario_existe) > 0) {
 
         $('.continuar, .informacion_del_cliente').addClass('d-none');

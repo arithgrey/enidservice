@@ -70,8 +70,7 @@ if (!function_exists('invierte_date_time')) {
     function texto_envio_gratis()
     {
         return d(
-            d('envíos gratis en Ciudad de México, estado de México 100 pesos adicionales,
-             tiempo promedio de entrega 1 hora con 30 minutos '),
+            d('envíos gratis en Ciudad de México, tiempo promedio de entrega 1 hora con 30 minutos '),
             'mt-5 mb-5 alert alert-light text-uppercase border black text-center'
         );
     }
@@ -114,7 +113,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $formulario[] = d(_titulo('¿Cual es la Ubicación?'), 'mb-3');
-        $formulario[] = texto_envio_gratis();
+        
         $formulario[] = d(flex_md(
             $input,
             $text_horarios,
@@ -122,6 +121,12 @@ if (!function_exists('invierte_date_time')) {
             'col-sm-12 col-md-6 p-0 mt-5 mb-5',
             _strong
         ), 'row d-none');
+        
+        $formulario[] = d(
+            "Puedes pegar el link de tu ubicación en Google maps 
+            o escribir tu dirección,  
+            te llamaremos ya que estemos de camino a tu entrega!", 'mb-3 mb-3 black');
+
         $formulario[] = d(
             input_frm(
                 '',
@@ -143,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
             "class" => "adicionales black"
         ];
         $formulario[] = hiddens(['name' => 'text_delegacion', 'class' => 'text_delegacion']);
-        $formulario[] = label(_text_(input($config), d('Adicionales (opcional)', 'ml-3 cursor_pointer')), 'd-flex mt-5 adicionales_seccion');
+        $formulario[] = label(_text_(input($config), d('Adicionales (opcional)', 'ml-3 cursor_pointer')), 'd-flex mt-5 adicionales_seccion black');
         
         
         $select_alcaldias  = create_select(

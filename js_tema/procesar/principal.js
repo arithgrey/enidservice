@@ -240,11 +240,11 @@ let registro_cotizacion = (e) => {
 
 let respuesta_registro = (data) => {
 
-    debugger;
+    
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
 
-        $("#modal-error-message").modal("hide");
+        //$("#modal-error-message").modal("hide");
         desbloqueda_form(form_miembro);
         if (parseInt(data.usuario_existe) > 0) {
 

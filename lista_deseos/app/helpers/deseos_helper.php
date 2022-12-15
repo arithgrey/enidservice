@@ -379,7 +379,7 @@ if (!function_exists('invierte_date_time')) {
             $seccion_cobro_externo[] = flex(
                 $seleccionar_todo,
                 "¿Cobrasté algún monto mayor?",
-                "mt-5 text-uppercase black strong  border-bottom cobro_texto",
+                "mt-5 text-uppercase black strong border-bottom cobro_texto",
                 "mr-3"
             );
 
@@ -402,8 +402,17 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
-            $response[] = d(btn("Enviar orden", ["class" => "mt-5 pt-3 pb-3 borde_green"]), 'seccion_enviar_orden');
-            $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 underline mb-5');
+            
+            $response[] = d(
+                btn(
+                    "Agenda tu pedido!", 
+                    [
+                        "class" => "pb-3 p-2 strong col 
+                        text-uppercase registro_google format_action format_google shadow d-block"
+                    ]), 
+                    'seccion_enviar_orden mt-5'
+                );
+            $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
             $response[] = form_close();
             return d($response, 'mb-5');
         } else {
@@ -425,8 +434,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
             
 
-            $response[] = d(btn("Enviar orden", ["class" => "mt-5 borde_green"]), 'seccion_enviar_orden');
-            $response[] = d("Realiza tu pedido y entrega hoy mismo!!", 'text-right mt-5 mb-5 underline');
+            $response[] = d(btn("Enviar orden", ["class" => "mt-5 pb-3 p-2 strong col 
+            text-uppercase registro_google format_action format_google shadow d-block"]), 'seccion_enviar_orden');            
+            $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
             $response[] = form_close();
             return d($response, 'mb-5');
         }
@@ -626,7 +636,7 @@ if (!function_exists('invierte_date_time')) {
             'cursor_pointer texto_seleccionar mt-3 text-primary d-none'
         );
 
-        $data_response[] = d(_titulo("Carrito"), 'row mt-3');
+        $data_response[] = d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"), 'row mt-3');
         $data_response[] = d($texto, 13);
         $data_response[] = d($texto_seleccion, 13);
         $data_response[] = hr();
