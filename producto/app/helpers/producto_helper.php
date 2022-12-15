@@ -367,7 +367,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         if(es_link_afiliado_amazon($data)){
-            return format_link("Lo deseo!",
+            return format_link("Agregar al carrito de compras",
             [
                 "href" => es_link_afiliado_amazon($data,1)
             ],2);
@@ -1208,13 +1208,12 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Agregar al carrito", 'border borde_green pt-3 pb-3'),
+                d("Agregar al carrito", 'pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
-                    "class" => "agregar_a_lista_deseos l_deseos ",
+                    "class" => "agregar_a_lista_deseos l_deseos white text-center",
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
-
-                ]
+                ],2
             ), 'se_agregara');
 
 
