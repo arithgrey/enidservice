@@ -64,17 +64,23 @@ if (!function_exists('invierte_date_time')) {
         $response  = [];
         foreach($carros_compras as $row){
 
-            $ip_usuario = $row["ip"];
-           
+            $ip_usuario = $row["ip"];           
             if($ip_usuario_busqueda == $ip_usuario){
                 $url_img_servicio = $row["url_img_servicio"];        
-                $response[] = d(img(
+                $path_servicio = path_enid("producto", $row["id_servicio"]);
+
+                $response[] = a_enid(img(
                     [
                         "src" => $url_img_servicio,                    
                         'class' => 'mx-auto d-block mah_50',
                         "onerror" => "this.src='../img_tema/portafolio/producto.png'",
                     ]
-                ),'col');
+                ),
+                [
+                    "class" => 'col-xs-2', 
+                    "href" => $path_servicio,
+                    "target" =>"_blank"
+                ]);
 
             }        
         }
