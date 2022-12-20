@@ -204,11 +204,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $lista_deseo = lista_deseo($productos_deseados, $externo);
-        $response[] = d($lista_deseo, "col-xs-12 col-md-8 border-right border-secondary");
-        $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4 border-right");
+        
+        $response[] = d(lista_deseo($productos_deseados, $externo), "col-xs-12 col-md-8 border-right border-secondary");
+        $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4");
 
-        return d($response, 10, 1);
+        return d(d($response, 10, 1),"row mt-3");
     }
 
     function seccion_procesar_pago($data, $productos_deseados)
@@ -283,7 +283,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return append($response);
+        return d($response,'position-fixed');
     }
 
     function valida_envio_descuento($data)
@@ -636,12 +636,12 @@ if (!function_exists('invierte_date_time')) {
             'cursor_pointer texto_seleccionar mt-3 text-primary d-none'
         );
 
-        $data_response[] = d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"), 'row mt-3');
+        $data_response[] = d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"), 'row mt-5');
         $data_response[] = d($texto, 13);
         $data_response[] = d($texto_seleccion, 13);
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
-        return append($data_response);
+        return d($data_response,"mt-5");
     }
     function cuerpo_boleto($numero_boleto){
 
