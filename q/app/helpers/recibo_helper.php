@@ -2029,18 +2029,6 @@ if (!function_exists('invierte_date_time')) {
             $seccion[] = d($texto,  'red_enid strong text-center mt-3');
         }
 
-        /*
-        $seccion[] = format_link(
-            'Cancelar compra',
-            [
-                "class" => "cancelar_compra mt-3 text-right text-uppercase",
-                "id" => $id_orden_compra, "modalidad" => '0',
-            ],
-            0,
-            0
-        );
-        */
-
         return d($seccion, 'col-sm-12 seccion_adicionales_compra');
     }
 
