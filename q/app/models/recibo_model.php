@@ -1122,8 +1122,7 @@ class Recibo_model extends CI_Model
 
     function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa)
     {
-
-
+        
         $casos = [
             3 => " 1 = 1 ",
             4 => "id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)",
@@ -1131,6 +1130,9 @@ class Recibo_model extends CI_Model
             20 => 'id_usuario = "' . $id_usuario . '"',
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
+
+        $estado_compra = ($id_perfil != 20) ? " AND p.status = 7 ": "";
+        
 
         $ids = get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
@@ -1160,7 +1162,7 @@ class Recibo_model extends CI_Model
 						AND " . $extra_usuario . " 						  
 						AND  p.se_cancela = 0
 						AND  p.status NOT IN(10,19)  
-                        AND p.status = 7
+                        ".$estado_compra."
 						AND 						
 						(
 						DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())

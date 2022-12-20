@@ -38,8 +38,6 @@ class productividad extends REST_Controller
                 
         $response += [
             "id_usuario" => $id_usuario,
-            "preguntas" => [],
-            "respuestas" => [],
             "compras_sin_cierre" => $compras_sin_cierrre,
             "recibos_sin_costos_operacion" => [],
             "clientes_sin_tags_arquetipos" => [],
@@ -120,30 +118,6 @@ class productividad extends REST_Controller
         return $this->app->api("usuario_deseo/deseos", $q);
 
     }
-
-    private function get_respuestas($id_usuario)
-    {
-        $q = [
-            "id_usuario" => $id_usuario,
-            "se_lee" => 0,
-            "se_ve_cliente" => 0,
-        ];
-
-        return $this->app->api("pregunta/cliente", $q);
-    }
-
-    private function get_preguntas($id_vendedor)
-    {
-
-        $q = [
-            "id_vendedor" => $id_vendedor,
-            "se_responde" => 0,
-        ];
-
-        return $this->app->api("pregunta/vendedor", $q);
-
-    }
-
     private function get_objetivos_perfil($q)
     {
 
@@ -198,34 +172,7 @@ class productividad extends REST_Controller
         return $response;
     }
 
-    private function email_enviados_enid_service()
-    {
-
-        $q["info"] = 1;
-        return $this->app->api("prospecto/dia", $q);
-
-    }
-
-    private function accesos_enid_service()
-    {
-
-        $q["info"] = 1;
-        return $this->app->api("pagina_web/dia", $q);
-    }
-
-    private function tareas_enid_service()
-    {
-
-        $q["info"] = 1;
-        return $this->app->api("tarea/tareas_enid_service", $q);
-    }
-
-    private function verifica_registro_telefono($q)
-    {
-
-        return $this->app->api("usuario/verifica_registro_telefono", $q);
-    }
-
+  
     function get_recordatorios($id_usuario)
     {
 
@@ -235,7 +182,8 @@ class productividad extends REST_Controller
     }
 
     private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
-    {
+    {   
+        
         $usuarios = $this->app->api("recibo/pendientes_sin_cierre",
             [
                 "id_usuario" => $id_usuario,
@@ -280,36 +228,7 @@ class productividad extends REST_Controller
     {
         return $this->app->api("recibo/dia", ["fecha" => 1]);
     }
-
-    private function get_scostos($id_usuario, $data)
-    {
-
-        $response = [];
-        if (es_administrador($data)) {
-            $q = [
-                "id_usuario" => $id_usuario,
-                'id_empresa' => $data['id_empresa']
-            ];
-
-            $response = $this->app->api("costo_operacion/scostos", $q);
-        }
-        return $response;
-    }
-
-    private function get_stag($data)
-    {
-
-        $response = [];
-        if (es_administrador($data)) {
-
-            $q = ['id_empresa' => $data['id_empresa']];
-            $response = $this->app->api("recibo/stags_arquetipos", $q);
-        }
-
-        return $response;
-
-    }
-
+   
     function get_tareas($data, $id_usuario)
     {
 

@@ -1457,68 +1457,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function add_pedidos_sin_direccion($param)
-    {
 
-        $sin_direcciones = $param["sin_direcciones"];
-        $lista = "";
-        $f = 0;
-        if ($sin_direcciones > 0) {
-
-            $lista = b_notificacion(
-                path_enid('area_cliente'),
-                "Registra tu dirección de envio"
-            );
-            $f++;
-        }
-
-        return [
-
-            "html" => $lista,
-            "flag" => $f,
-
-        ];
-    }
-
-
-    function add_saldo_pendiente($param)
-    {
-
-        $adeudos_cliente = $param["total_deuda"];
-        $lista = "";
-        $f = 0;
-        if ($adeudos_cliente > 0) {
-
-            $pendiente = round($adeudos_cliente, 2);
-
-            $text = ajustar(
-                d('Saldo por liquidar', 'black '),
-                d(
-                    money($pendiente),
-                    [
-                        "class" => "strong f15 black",
-                        "deuda_cliente" => $pendiente,
-                    ]
-                )
-            );
-
-            $lista = b_notificacion(
-                "../area_cliente/?action=compras",
-                $text
-            );
-
-            $f++;
-        }
-
-        $response = [
-
-            "html" => $lista,
-            "flag" => $f,
-
-        ];
-
-        return $response;
-    }
+    
 
     function b_notificacion($url = '', $text = '')
     {
@@ -1938,37 +1878,14 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $f = 0;
-        $inf_notificacion = $info["info_notificaciones"];
-
+       
         $compras_sin_cierre = sin_cierre($data, $info["compras_sin_cierre"]);
         $f = $f + $compras_sin_cierre["flag"];
-
-
-        $deuda = add_saldo_pendiente($inf_notificacion["adeudos_cliente"]);
-        $f = $f + $deuda["flag"];
-
-        $preguntas = add_preguntas_sin_lectura($info["preguntas"]);
-        $f = $f + $preguntas["flag"];
-
-
-        $respuestas = add_respuestas_sin_lectura($info["respuestas"]);
-
-        $f = $f + $respuestas["flag"];
-
-
-        $direccion = add_pedidos_sin_direccion($inf_notificacion["adeudos_cliente"]);
-        $f = $f + $direccion["flag"];
-
 
         $response["num_tareas_pendientes_text"] = $f;
         $response["num_tareas_pendientes"] = crea_tareas_pendientes_info($f);
         $menu_ventas_semana = menu_ventas_semana($info);
         $list = [
-
-            $deuda["html"],
-            $direccion["html"],
-            $preguntas["html"],
-            $respuestas["html"],
             d($compras_sin_cierre["html"], "mt-5"),
             $menu_ventas_semana
         ];
@@ -1995,98 +1912,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return append($response);
-    }
-
-    function add_preguntas_sin_lectura($preguntas, $es_vendedor = 0)
-    {
-        $r = [];
-        $f = 0;
-        if (es_data($preguntas)) {
-
-
-            foreach ($preguntas as $row) {
-
-                $id_pregunta = $row["id_pregunta"];
-                $pregunta = $row["pregunta"];
-                $id_servicio = $row["id_servicio"];
-                $pregunta = d(((strlen($pregunta) > 50) ? substr(
-                        $pregunta,
-                        0,
-                        60
-                    ) : $pregunta),
-                    "black"
-                );
-
-                $t = [];
-                $t[] = ajustar(
-                    d(img_servicio($id_servicio), "w_50"),
-                    $pregunta,
-                    0
-                );
-
-                $r[] = a_enid(
-                    append($t),
-                    "../pregunta/?action=recepcion&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . "#pregunta" . $id_pregunta
-                ) .
-                    hr();
-                $f++;
-            }
-
-
-            if (es_data($r)) {
-                array_unshift($r, "LO QUE COMPRADORES TE PREGUNTAN");
-            }
-        }
-        return [
-            "html" => append($r),
-            "flag" => $f,
-        ];
-    }
-
-    function add_respuestas_sin_lectura($respuestas)
-    {
-
-        $r = [];
-        $f = 0;
-        if (es_data($respuestas)) {
-            foreach ($respuestas as $row) {
-                $id_pregunta = $row["id_pregunta"];
-                $pregunta = $row["pregunta"];
-                $id_servicio = $row["id_servicio"];
-                $pregunta = d(((strlen($pregunta) > 50) ? substr(
-                    $pregunta,
-                    0,
-                    60
-                ) : $pregunta), "black");
-
-
-                $t = [];
-                $t[] = ajustar(
-                    d(img_servicio($id_servicio), "w_50"),
-                    $pregunta,
-                    0
-                );
-
-
-                $r[] = a_enid(
-                    append($t),
-                    "../pregunta/?action=hechas&id=" . $id_pregunta . "&id_servicio=" . $id_servicio . "#pregunta" . $id_pregunta
-                ) . hr();
-                $f++;
-            }
-
-            if (es_data($r)) {
-
-                array_unshift($r, "TU BUZÓN");
-            }
-        }
-
-
-        return [
-            "html" => append($r),
-            "flag" => $f,
-
-        ];
     }
 
     function tareas_administrador($info)
@@ -2128,22 +1953,10 @@ if (!function_exists('invierte_date_time')) {
         $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
 
-        $preguntas = add_preguntas_sin_lectura($info["preguntas"]);
-        $lista[] = $preguntas["html"];
-        $f = $f + $preguntas["flag"];
-
-        $respuestas = add_respuestas_sin_lectura($info["respuestas"]);
-        $lista[] = $respuestas["html"];
-        $f = $f + $respuestas["flag"];
-
-        $deuda = add_saldo_pendiente($inf["adeudos_cliente"]);
-        $f = $f + $deuda["flag"];
-        $lista[] = $deuda["html"];
-
-        $deuda = add_pedidos_sin_direccion($inf["adeudos_cliente"]);
-        $f = $f + $deuda["flag"];
-        $lista[] = $deuda["html"];
-
+        
+        
+        
+        
         $deuda = add_valoraciones_sin_leer(
             $inf["valoraciones_sin_leer"],
             $info["id_usuario"]

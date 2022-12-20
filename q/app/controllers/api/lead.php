@@ -190,7 +190,6 @@ class lead extends REST_Controller
         $usuarios = $this->usuarios_en_lista_negra($usuarios);                        
         return $this->app->imgs_productos(0, 1, 1, 1, $usuarios);
         
-
     }
 
     private function pendientes_ventas_usuario($id_usuario, $id_perfil, $id_empresa)
