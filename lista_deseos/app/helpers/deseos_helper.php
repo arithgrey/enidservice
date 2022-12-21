@@ -285,7 +285,7 @@ if (!function_exists('invierte_date_time')) {
 
         $extra = is_mobile() ? 'fixed-bottom' : 'position-fixed';
         
-        return d(d($response, 10, 1), $extra);
+        return d($response, $extra);
     }
 
     function valida_envio_descuento($data)
@@ -406,20 +406,22 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
 
             $boton_agendar_pedido = btn(
-                "Agenda tu pedido!",
+                "Continuar",
                 [
                     "class" => "pb-3 p-2 strong col 
                     text-uppercase registro_google format_action format_google shadow d-block"
                 ]
             );
-            $response[] = d($boton_agendar_pedido,'seccion_enviar_orden mt-5 bg-white');
+
+            $extra_envio = (is_mobile()) ? '':'mt-5 ';
+            $response[] = d($boton_agendar_pedido, _text_('seccion_enviar_orden bg-white',$extra_envio));
             
             if(!is_mobile()){
                 $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
             }
             
             $response[] = form_close();
-            return d($response, "bg_white");
+            return d($response);
         } else {
 
 
@@ -631,7 +633,7 @@ if (!function_exists('invierte_date_time')) {
         
       
 
-        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row mt-5');                
+        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row mt-2');                
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
         return d($data_response, "mt-5 col-xs-12");
