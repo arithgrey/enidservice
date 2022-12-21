@@ -265,6 +265,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
             $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
             $response[] = d(money($total_menos_descuento), _text_($extra, "display-4"));
+            
         } else {
 
             $response = formato_subtotal($response, $data, $subtotal);
@@ -277,9 +278,13 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_administrador_o_vendedor($data)) {
 
+            
             $comision_venta = comisiones_por_productos_deseados($productos_deseados);
-            $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comision_venta), 'strong texto_comision_venta'));
-            $response[] =  d($textos, 'display-6 black mt-5 text-right text-uppercase p-2');
+
+            $extra_color_money = (is_mobile()) ? 'white font-weight-bold':'strong';
+            $textos = _text_("Cuando se entrege el pedido ganarás", d(money($comision_venta), _text_($extra_color_money, 'texto_comision_venta')));
+            $extra_color = (is_mobile()) ? 'f11 mt-1 text-right white mr-5':'display-6 mt-5 text-right text-uppercase p-2 black strong borde_green';
+            $response[] =  d($textos, $extra_color);
             $response[] =  hiddens(["class" => "comision_venta", "value" => $comision_venta]);
         }
 
@@ -378,11 +383,12 @@ if (!function_exists('invierte_date_time')) {
 
 
             $extra = ($es_administrador_o_vendedor) ? "" : "d-none";
+            $extra_mb = (is_mobile()) ? "white" : "black strong";
 
             $seccion_cobro_externo[] = flex(
                 $seleccionar_todo,
                 "¿Cobrasté algún monto mayor?",
-                "mt-5 text-uppercase black strong border-bottom cobro_texto",
+                _text_("mt-5 text-uppercase border-bottom cobro_texto", $extra_mb),
                 "mr-3"
             );
 
