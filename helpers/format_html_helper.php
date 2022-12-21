@@ -1385,17 +1385,16 @@ function opciones_acceso($in_session)
 
 
 
-        //$texto_lead = d("Aquí de te dejamos 10% de descuento para que inicies tu rutina ya!",'white');
+        
         $texto_lead = d("5% descuento para nuevos clientes!", 'white');
-        //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
+        
         $link = d(
             "cupón",
             [
                 "href" => path_enid('whatsapp_descuento', 0, 1),
                 "class" => "text-center bg-white borde_accion p-2 border_enid col black text-uppercase strong underline border border-info"
             ]
-        );
-        //$registro = d("DESCUENTO", 'bg_white black borde_rojo font-weight-bold underline ');
+        );        
         $texto = flex(
             $texto_lead,
             $link,

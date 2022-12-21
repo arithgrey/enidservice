@@ -204,11 +204,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        
+
         $response[] = d(lista_deseo($productos_deseados, $externo), "col-xs-12 col-md-8 border-right border-secondary");
         $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4");
 
-        return d(d($response, 10, 1),"row mt-3");
+        return d(d(d($response,13), 10, 1), "row mt-3");
     }
 
     function seccion_procesar_pago($data, $productos_deseados)
@@ -241,9 +241,9 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id"];
             $total_descuento_articulo = ($descuento_especial * $articulos);
             $total_descuento = ($total_descuento + $total_descuento_articulo);
-            
-            if($row["numero_boleto"] > 0){
-                $es_sorteo ++;
+
+            if ($row["numero_boleto"] > 0) {
+                $es_sorteo++;
             }
             $config =
                 [
@@ -283,7 +283,9 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return d($response,'position-fixed');
+        $extra = is_mobile() ? 'fixed-bottom' : 'position-fixed';
+        
+        return d(d($response, 10, 1), $extra);
     }
 
     function valida_envio_descuento($data)
@@ -402,19 +404,22 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
             $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
+
+            $boton_agendar_pedido = btn(
+                "Agenda tu pedido!",
+                [
+                    "class" => "pb-3 p-2 strong col 
+                    text-uppercase registro_google format_action format_google shadow d-block"
+                ]
+            );
+            $response[] = d($boton_agendar_pedido,'seccion_enviar_orden mt-5 bg-white');
             
-            $response[] = d(
-                btn(
-                    "Agenda tu pedido!", 
-                    [
-                        "class" => "pb-3 p-2 strong col 
-                        text-uppercase registro_google format_action format_google shadow d-block"
-                    ]), 
-                    'seccion_enviar_orden mt-5'
-                );
-            $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
+            if(!is_mobile()){
+                $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
+            }
+            
             $response[] = form_close();
-            return d($response, 'mb-5');
+            return d($response, "bg_white");
         } else {
 
 
@@ -432,10 +437,10 @@ if (!function_exists('invierte_date_time')) {
             ]);
             $response[] = hiddens(["class" => "id_usuario", "name" => "id_usuario", "value" => $data["id_usuario"]]);
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
-            
+
 
             $response[] = d(btn("Enviar orden", ["class" => "mt-5 pb-3 p-2 strong col 
-            text-uppercase registro_google format_action format_google shadow d-block"]), 'seccion_enviar_orden');            
+            text-uppercase registro_google format_action format_google shadow d-block"]), 'seccion_enviar_orden');
             $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
             $response[] = form_close();
             return d($response, 'mb-5');
@@ -574,7 +579,7 @@ if (!function_exists('invierte_date_time')) {
             );
             $x[] = h($link, 4);
 
-            
+
 
             if ($numero_boleto < 1) {
                 $x[] = str_repeat(icon("fa fa-star"), 5);
@@ -591,11 +596,9 @@ if (!function_exists('invierte_date_time')) {
                         $id
                     );
                 $x[] = d($selector, 'col-lg-6 p-0');
-
-            }else{
+            } else {
 
                 $x[] = cuerpo_boleto($numero_boleto);
-                
             }
 
             $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
@@ -610,11 +613,11 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d($x, 6);
             $z = [];
             $z[] = h(money($text_precio), 4, 'strong');
-            
-            if($precio_alto > $precio){
+
+            if ($precio_alto > $precio) {
                 $z[] = h(del(money($text_precio_alto)), 5, ' red_enid');
             }
-            
+
             $z[] = d($eliminar, "text-primary text-center");
 
             $es_servicio = $row["flag_servicio"];
@@ -641,24 +644,25 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d($texto_seleccion, 13);
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
-        return d($data_response,"mt-5");
+        return d($data_response, "mt-5");
     }
-    function cuerpo_boleto($numero_boleto){
+    function cuerpo_boleto($numero_boleto)
+    {
 
         $icono = icon(_text_('fa fa-ticket fa-2x white'));
 
 
-            
-            $extra = "blue_bg white borde_green numero_boleto";
 
-            $curpo_boleto = d(flex(
-                $numero_boleto,
-                $icono,
-                _text_(_between, 'p-1', $extra),
-                "align-self-center"                
-            ),13);
+        $extra = "blue_bg white borde_green numero_boleto";
 
-            return  flex("Boleto número",$curpo_boleto, _between,'black borde_end','col-xs-4');
+        $curpo_boleto = d(flex(
+            $numero_boleto,
+            $icono,
+            _text_(_between, 'p-1', $extra),
+            "align-self-center"
+        ), 13);
+
+        return  flex("Boleto número", $curpo_boleto, _between, 'black borde_end', 'col-xs-4');
     }
     function formulario_orden_compra_deseo_cliente($id, $id_servicio, $q2, $num_ciclos, $es_servicio, $id_ciclo_facturacion)
     {

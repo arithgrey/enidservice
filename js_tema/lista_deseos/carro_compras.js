@@ -22,10 +22,8 @@ $(document).ready(function () {
     $cobro_monto_mayor.click(cobro_monto_mayor);
     $form_segunda_compra.submit(segunda_compra);
     $cobro_secundario.keyup(cobro_secundario);
-
-
+    $('#sticky-footer').addClass("d-none");
     
-
 
 });
 
