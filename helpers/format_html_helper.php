@@ -1423,7 +1423,7 @@ function opciones_acceso($in_session)
                 "mx-auto white fp7 col-xs-3 p-0 text-uppercase",
 
             ),
-            "d-block d-md-none"
+            "d-block d-md-none cupon_seccion_footer"
         );
     }
     return append($response);
@@ -1927,7 +1927,7 @@ function opciones_adicionales_navegacion()
         "class" => "strong black"
     ]), "text-capitalize  col-xs-3");
 
-    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom ');
+    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
     return append($response);
 }
 function navegacion(

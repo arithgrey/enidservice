@@ -1,13 +1,4 @@
 "use strict";
-window.history.pushState({ page: 1 }, "", "");
-window.history.pushState({ page: 2 }, "", "");
-window.onpopstate = function (event) {
-    if (event) {
-
-        let fn = (parseInt(get_option("vista")) == 1) ? window.history.back() : valida_retorno();
-    }
-};
-
 
 let form_miembro = '#form-miembro-enid-service';
 let form_cotizacion = ".form_cotizacion_enid_service";
@@ -71,6 +62,9 @@ let $primer_compra = $(primer_compra);
 $(document).ready(() => {
 
     $('footer').addClass('d-none');
+    $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
+    $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
+    
     oculta_acceder();
     set_option({ "vista": 1 });
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
@@ -314,18 +308,3 @@ let continuar_compra = function () {
     set_option("vista", 2)
 };
 let response_set_link = (data) => redirect("../login");
-let valida_retorno = () => {
-    let vista = parseInt(get_option("vista"));
-    switch (vista) {
-
-        case 2:
-            showonehideone(".compra_resumen", primer_compra);
-            set_option("vista", 1);
-            break;
-
-        default:
-
-            break;
-
-    }
-};

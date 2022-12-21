@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
             if (!$in_session) {
 
 
-                $clase = 'mt-3 black mb-5 f14 ';
+                $clase = 'mt-3 black mb-5 f11 ';
                 $r[] = d('Te llamaremos 
                             en cuanto estemos de 
                             camino, 

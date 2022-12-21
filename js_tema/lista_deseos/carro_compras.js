@@ -14,7 +14,8 @@ let $texto_comision_venta = $(".texto_comision_venta");
 
 $(document).ready(function () {
 
-
+    $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
+    $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     $('.cantidad_articulos_deseados').change(modifica_cantidad_articulos_deseados);
     $texto_deseleccionar.click(deseleccionar);
     $texto_seleccionar.click(seleccionar);
