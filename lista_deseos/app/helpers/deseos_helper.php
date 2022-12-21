@@ -540,8 +540,7 @@ if (!function_exists('invierte_date_time')) {
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
             $precio_alto = $row["precio_alto"];
-            $articulos = $row["articulos"];
-            $id_recompensa = $row["id_recompensa"];
+            $articulos = $row["articulos"];            
             $numero_boleto = $row["numero_boleto"];
 
 
@@ -629,22 +628,13 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d('', 'col-md-12 mt-5 mb-5 border-bottom');
         }
 
-        $texto = p(
-            "Deseleccionar todos los artículos",
-            'cursor_pointer texto_deseleccionar mt-3 text-primary'
-        );
+        
+      
 
-        $texto_seleccion = p(
-            "Seleccionar todos los artículos",
-            'cursor_pointer texto_seleccionar mt-3 text-primary d-none'
-        );
-
-        $data_response[] = d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"), 'row mt-5');
-        $data_response[] = d($texto, 13);
-        $data_response[] = d($texto_seleccion, 13);
+        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row mt-5');                
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
-        return d($data_response, "mt-5");
+        return d($data_response, "mt-5 col-xs-12");
     }
     function cuerpo_boleto($numero_boleto)
     {
