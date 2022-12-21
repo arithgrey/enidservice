@@ -255,7 +255,8 @@ if (!function_exists('invierte_date_time')) {
             $inputs[] = hiddens($config);
         }
 
-        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5);
+        $extra = is_mobile() ? 'white':'black';
+        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5,_text_('fp9', $extra));
         $total_en_descuento = descuento_recompensa($data);
 
         if ($es_premium && $total_en_descuento < 1) {
@@ -263,7 +264,7 @@ if (!function_exists('invierte_date_time')) {
             $total_menos_descuento = ($subtotal - $total_descuento);
             $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
             $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
-            $response[] = d(money($total_menos_descuento), "display-4 black");
+            $response[] = d(money($total_menos_descuento), _text_($extra, "display-4"));
         } else {
 
             $response = formato_subtotal($response, $data, $subtotal);
@@ -283,7 +284,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $extra = is_mobile() ? 'fixed-bottom' : 'position-fixed';
+        $extra = is_mobile() ? 'fixed-bottom bg_black borde_black' : 'position-fixed';
         
         return d($response, $extra);
     }
@@ -331,15 +332,15 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $total_en_descuento = descuento_recompensa($data);
-
+        $extra = is_mobile() ? 'white':'black';
         if ($total_en_descuento > 0) {
 
             $nuevo_total = $subtotal - $total_en_descuento;
             $response[] =  d(del(money($subtotal), "display-6 red_enid"));
-            $response[] =  d(money($nuevo_total), "display-6 black");
+            $response[] =  d(money($nuevo_total), _text_("display-6", $extra));
         } else {
-
-            $response[] =  d(money($subtotal), "display-5 black");
+            
+            $response[] =  d(money($subtotal), _text_("display-5 strong ml-3", $extra));
         }
 
         return $response;
