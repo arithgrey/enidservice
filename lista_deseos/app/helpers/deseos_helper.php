@@ -640,10 +640,10 @@ if (!function_exists('invierte_date_time')) {
         
       
 
-        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row mt-2');                
+        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row');                
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
-        return d($data_response, "mt-5 col-xs-12");
+        return d($data_response, "col-xs-12");
     }
     function cuerpo_boleto($numero_boleto)
     {
