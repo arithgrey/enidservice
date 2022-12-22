@@ -20,7 +20,7 @@ if (!function_exists('invierte_date_time')) {
                 "value" => $id_usuario
             ]
         );
-        return d($response, 12);
+        return d($response, "col-xs-12 mt-5");
     }
 
     function seccion_noticias_notificaciones()

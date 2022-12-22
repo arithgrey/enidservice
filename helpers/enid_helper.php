@@ -1057,7 +1057,7 @@ function imagenes_orden_compra($productos_orden_compra)
         $seccion_imagen = img(
             [
                 "src" => $row,
-                "class" => "img_servicio_def p-2",
+                "class" => "d-block mh_250 mh_sm_310 mx-auto mt-3 servicio",
             ]
         );
         $imagenes_orden_compra = _text_($imagenes_orden_compra, $seccion_imagen);

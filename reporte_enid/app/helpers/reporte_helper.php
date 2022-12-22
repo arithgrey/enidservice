@@ -35,7 +35,7 @@ if (!function_exists('invierte_date_time')) {
         $res[] = d(actualizaciones_del_dia($data), "col-lg-3 border-left");
         $res[] = modal_edicion_promesa_venta();
 
-        return d(append($res), "container-fluid");
+        return d(append($res), "container-fluid mt-5");
     }
     function modal_edicion_promesa_venta()
     {

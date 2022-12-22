@@ -1260,7 +1260,7 @@ if (!function_exists('invierte_date_time')) {
         }
         
         $texto_precio =  flex($texto_precio_real, $texto_descuento,'flex-column');
-        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp7 text-uppercase black mt-2");
+        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp6 text-uppercase black mt-2");
 
         $tipo_deseo = "agregar_deseos_sin_antecedente";
         $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";

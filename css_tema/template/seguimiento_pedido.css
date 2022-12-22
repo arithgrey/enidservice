@@ -11,11 +11,11 @@
     left: 10%;
     width: 4px;
     height: 100%;
-    background-color: #04174B;
+    background-color: black;
 }
 
 .timeline__item {
-    margin-bottom: 100px;
+    margin-bottom: 70px;
     position: relative;
 }
 
@@ -59,7 +59,7 @@
 }
 
 .timeline__item__date_active {
-    background-color: #02084E;
+    background-color: #0a83f1;
     font-weight: 300;
     width: 140px;
     position: absolute;
@@ -69,7 +69,7 @@
     margin-left: -33px;
     transition: all .3s ease-out;
     text-align: center;
-    color: white;
+    color: white !important;
     border-radius: 6px;
     font-size: 14px;
     z-index: 1;
@@ -94,7 +94,7 @@
 }
 
 .timeline__item__content {
-    width: 80%;
+    width: 65%;
     background: #fff;
     border-radius: 6px;
     float: right;
@@ -150,11 +150,6 @@
     }
 }
 
-.timeline__item__content__description {
-    margin: 0;
-    padding: 0;
-
-}
 .timeline__item__content__techs {
     margin-top: 15px;
     text-align: right;
