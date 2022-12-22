@@ -1140,7 +1140,7 @@ if (!function_exists('invierte_date_time')) {
                 img(
                     [
                         'src' => $url,
-                        "class" => " w-100 tab-pane fade zoom mh_sm_310" . $ext . " " . $extra_class_contenido,
+                        "class" => " w-100 tab-pane fade zoom mh_sm_410" . $ext . " " . $extra_class_contenido,
                         "id" => "imagen_tab_" . $z,
 
                     ]
