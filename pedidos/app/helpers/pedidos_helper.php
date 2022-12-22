@@ -457,15 +457,17 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
 
         $resumen_orden_compra = resumen_orden($data);
-        if (is_mobile()) {
+        
             $z[] = $resumen_orden_compra;
-        }
+        
         $z[] = seguimiento($data);
+        /*
         if (!is_mobile()) {
             $z[] = $resumen_orden_compra;
         }
+        */
 
-        $r[] = append($z);
+        $r[] = d($z,'row border_bottom_big mb-5 mt-5');
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
         $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 ');
@@ -502,7 +504,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $response[] = d($r, 8, 1);
+        $response[] = d($r,10,1);
         $response[] = modal_opciones_cancelacion($data, $params);
         $response[] = modal_ingreso_cancelacion($data, $params);
         return append($response);
@@ -612,7 +614,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => es_administrador_o_vendedor($data)
         ]);
 
-        $r[] = _titulo("¿Dónde se encuentra mi pedido?");
+        $r[] = d(span("¿Dónde se encuentra tu pedido?","borde_green p-2 display-6 white bg_black"),'mt-5');
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
 
@@ -752,7 +754,7 @@ if (!function_exists('invierte_date_time')) {
         $texto = texto_orden_administrador($data, $es_orden_entregada, $texto);
         $a[] = d($texto, 'texto_pedido bg_white p-3');
 
-        return d(d($a, 'p-3 azul_contraste_deporte'), 'col-sm-4');
+        return d($a, 'col-sm-4 borde_black mb-5');
     }
 
     function nota_compra($saldo_cubierto, $id_recibo)
@@ -1930,14 +1932,14 @@ if (!function_exists('invierte_date_time')) {
 
         ]);
 
-        $seccion_menus = d($menu, "col-md-3 fp9");
+        $seccion_menus = d($menu, "col-md-3 mt-3 fp9");
         $seccion_contenidos = d(tab_content($secciones_tabs), "col-md-8 border-left border-secondary");
         $data_complete[] = d([$seccion_menus, $seccion_contenidos], 13);
         $data_complete[] = d($modal_comisiones, 13);
         $data_complete[] = d($modal_catalogo, 13);
         $data_complete[] = d($modal_promocion, 13);
         $data_complete[] = hiddens(["class" => "buscar_ordenes_compra", "value" => es_cliente($data)]);
-        return d($data_complete, 12);
+        return d($data_complete, 'col-xs-12 mt-5');
     }
     function acceso_populares($data)
     {
@@ -3475,7 +3477,7 @@ if (!function_exists('invierte_date_time')) {
                     $seccion_2 = seccion_base($status);
                     break;
             }
-            $seccion = d(icon("fa fa-check-circle-o"), $class);
+            $seccion = d(icon("fa fa-check-circle-o white fa-2x"), $class);
             $linea[] = d(_text_($seccion, $seccion_2), "timeline__item");
         }
 
@@ -3504,7 +3506,7 @@ if (!function_exists('invierte_date_time')) {
             p(
                 $text,
 
-                "timeline__item__content__description strong"
+                "timeline__item__content__description borde_black black p-2"
 
             ),
             "timeline__item__content"
@@ -3515,10 +3517,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         return d(
-            p(
+            span(
                 'ENTREGADO',
 
-                "timeline__item__content__description strong black"
+                "timeline__item__content__description borde_black p-2 black"
 
             ),
             "timeline__item__content"
@@ -3532,7 +3534,7 @@ if (!function_exists('invierte_date_time')) {
             p(
                 'ORDEN REALIZADA    ',
 
-                "timeline__item__content__description strong black"
+                "timeline__item__content__description borde_black p-2 black"
 
             ),
             "timeline__item__content"
@@ -3548,10 +3550,10 @@ if (!function_exists('invierte_date_time')) {
             p(
                 $text,
 
-                "timeline__item__content__description strong"
+                "timeline__item__content__description black"
 
             ),
-            "timeline__item__content"
+            "timeline__item__content black fp9"
         );
     }
 
@@ -3571,7 +3573,7 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO");
+        $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO",["class" => "black"]);
         if (tiene_domilio($domicilio, 1) < 1) {
             $entrega = format_link($tipos_entrega[$tipo_entrega - 1], ['href' => $url]);
         }
@@ -3579,15 +3581,15 @@ if (!function_exists('invierte_date_time')) {
 
         $url = ($es_vendedor > 0) ? "" : $url;
         return d(
-            p(
+            span(
                 a_enid(
                     $entrega,
                     [
                         "href" => $url,
-                        "class" => "black strong",
+                        "class" => "black "
                     ]
                 ),
-                "timeline__item__content__description black mt-4"
+                "timeline__item__content__description mt-4 black fp9"
             ),
             "timeline__item__content"
         );

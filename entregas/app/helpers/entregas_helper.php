@@ -25,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     "class" => "notificacion_entregados",
                 ]
-            ), 4, 1);
+            ),"col-sm-4 col-sm-offset-4 mt-3");
         }
 
         if (es_data($recibos)) {
@@ -85,7 +85,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $data_complete[] =  d($response, 4, 1);
-        return append($data_complete);
+        return d($data_complete,'mt-5');
     }
 
 
