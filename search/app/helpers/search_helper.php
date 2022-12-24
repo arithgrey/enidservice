@@ -225,7 +225,13 @@ if (!function_exists('invierte_date_time')) {
         endforeach;
         $r[] = '</select>';
 
-        return append($r);
+        $response =  append($r);
+        if(is_mobile()){
+            $response = d(
+                flex("Ordernar por", $response, _between, 'display-7 black ml-2')
+                ," mt-5");
+        }   
+        return $response;
     }
 
     function get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas)
