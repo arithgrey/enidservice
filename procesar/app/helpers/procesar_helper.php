@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
             if (!$in_session) {
 
 
-                $clase = 'mt-3 black mb-5 f11 ';
+                $clase = 'mt-3 black mb-5 f11 borde_black p-2';
                 $r[] = d('Te llamaremos 
                             en cuanto estemos de 
                             camino, 
@@ -352,8 +352,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");
-            $r[] = text_acceder_cuenta($param, $es_cliente);
+            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");            
             $r[] = form_close();
         }
 
@@ -775,7 +774,7 @@ if (!function_exists('invierte_date_time')) {
                 ];
 
 
-            $text[] = h("¿Tienes una cuenta? ", 5, $ext);
+            
 
             $response[] = d($text, 12);
         }

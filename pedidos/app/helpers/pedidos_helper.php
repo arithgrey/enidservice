@@ -461,18 +461,13 @@ if (!function_exists('invierte_date_time')) {
             $z[] = $resumen_orden_compra;
         
         $z[] = seguimiento($data);
-        /*
-        if (!is_mobile()) {
-            $z[] = $resumen_orden_compra;
-        }
-        */
-
+       
         $r[] = d($z,'row border_bottom_big mb-5 mt-5');
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
-        $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 ');
+        $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 row');
         $r[] = d(
-            place("place_tambien_podria_interezar"),
+            place("place_tambien_podria_interezar row"),
             "col-sm-12"
         );
         $r[] = botones_ver_mas();
