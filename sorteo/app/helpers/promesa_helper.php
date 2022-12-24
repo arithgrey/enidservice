@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
             $nombre_usuario_compra  = ($numero_ganador > 0  ) ? "" : $boleto_compra["nombre_usuario_compra"];
 
             $extra_tickt = ($disponible < 1) ? "":"white";
-            $icono = icon(_text_('fa fa-ticket fa-2x', $extra_tickt));
+            $icono = icon(_text_('fa fa-ticket fa-3x', $extra_tickt));
 
 
             $extra_ganador = ($numero_ganador >  0) ? '':'agregar_deseos_sin_antecedente';

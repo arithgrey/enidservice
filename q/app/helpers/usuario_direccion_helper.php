@@ -125,7 +125,7 @@ if (!function_exists('invierte_date_time')) {
         $formulario[] = d(
             "Puedes pegar el link de tu ubicación en Google maps 
             o escribir tu dirección,  
-            te llamaremos ya que estemos de camino a tu entrega!", 'mb-3 mb-3 black');
+            te llamaremos ya que estemos de camino a tu entrega!", 'mb-5 mt-5 black borde_black p-2');
 
         $formulario[] = d(
             input_frm(
