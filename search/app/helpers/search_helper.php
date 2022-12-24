@@ -228,7 +228,7 @@ if (!function_exists('invierte_date_time')) {
         $response =  append($r);
         if(is_mobile()){
             $response = d(
-                flex("Ordernar por", $response, _between, 'display-7 black ml-2')
+                flex("Ordenar por", $response, _between, 'display-7 black ml-2 color_orden')
                 ," mt-5");
         }   
         return $response;
