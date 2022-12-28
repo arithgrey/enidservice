@@ -1896,7 +1896,7 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $text = _text_('Ofrecemos entrega a domicilio en CDMX y puedes pagar a la entrega', icon('fa fa-phone white'),span('(55)5296-7027','f11'));
+    $text = _text_('Ofrecemos entrega a domicilio en CDMX y puedes pagar a la entrega, también enviamos a toda la republica', icon('fa fa-phone white'),span('(55)5296-7027','f11'));
     $response[] = d(d($text , 'col-xs-12 white fp7 ml-3 text-uppercase'), ["class" => 'row bg_black white mb-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
@@ -1949,7 +1949,7 @@ function navegacion(
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
-                _text_('Ofrecemos entrega a domicilio en CDMX y puedes pagar a la entrega', icon('fa fa-phone'),span('(55)5296-7027','f11')),
+                _text_('Ofrecemos entrega a domicilio en CDMX y puedes pagar a la entrega, también enviamos a toda la republica', icon('fa fa-phone'),span('(55)5296-7027','f11')),
                 [                    
                     "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]
