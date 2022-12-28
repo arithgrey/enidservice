@@ -371,8 +371,8 @@ class Paths
 
                 ],
                 "url_img_post" => "promo.png",
-                "desc_web" => "COMPRA Y VENDE EN ENID SERVICE",
-                "meta_keywords" => "COMPRA Y VENDE ARTÍCULOS Y SERVICIOS  EN ENID SERVICE ",                
+                "desc_web" => "kits de pesas,seguros para mancueras y equipo deportivo pago contra entrega a domicilio en Ciudad de México",
+                "meta_keywords" => "Pesas, pago contra entrega, cdmx, envios,barra, barra z, barra romana, bancos de posiciones",                
                 "titulo" => "",
                 "pagina" => 4
 
