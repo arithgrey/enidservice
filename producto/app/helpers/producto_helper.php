@@ -256,7 +256,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        if (strlen($str_servicio) > 0) {
+        if (str_len($str_servicio, 0)) {
             $response[] = h($str_servicio, 3, 'card-title pricing-card-title');
         }
 
@@ -1276,8 +1276,8 @@ if (!function_exists('invierte_date_time')) {
         $link_amazon = pr($servicio, "link_amazon");
         $link_ml = pr($servicio, "link_ml");
 
-        $len_amazon = ((strlen($link_amazon)) > 0);
-        $len_ml = ((strlen($link_ml)) > 0);
+        $len_amazon = str_len($link_amazon, 0);
+        $len_ml = str_len($link_ml, 0);
 
         $response = [];
 

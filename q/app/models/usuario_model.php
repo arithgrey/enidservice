@@ -505,7 +505,7 @@ class usuario_model extends CI_Model
         $extra_perfil = ($es_departamento) ? _text_($departamento, $param["id_departamento"]) : "";
 
 
-        $extra = (strlen($q) > 1) ?
+        $extra = (str_len($q, 1)) ?
             " WHERE 
             u.name like '%" . $q . "%'
             OR u.email like '%" . $q . "%'
@@ -579,7 +579,7 @@ class usuario_model extends CI_Model
             "id_departamento" => $param["departamento"],
             "password" => sha1("qwerty123.1")
         ];
-        if (strlen($param["tel_contacto"]) > 3) {
+        if (str_len($param["tel_contacto"], 3)) {
 
             $params["tel_contacto"] = $param["tel_contacto"];
         }
@@ -622,10 +622,10 @@ class usuario_model extends CI_Model
     {
         $where = "WHERE email = '" . $email . "'";
         $extra_email = ($id > 0) ? " OR id = " . $id : " ";
-        $extra_tel = (strlen($tel_contacto) > 3) ? " OR tel_contacto = " . $tel_contacto : " ";
-        $extra_tel_alterno = (strlen($tel_contacto_alterno) > 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
-        $extra_url_lead = (strlen($url_lead) > 3) ? " OR url_lead = '" . $url_lead."'" : " ";
-        $extra_url_facebook = (strlen($facebook) > 3) ? " OR facebook like '%".$facebook."%'" : " ";
+        $extra_tel = str_len($tel_contacto, 3) ? " OR tel_contacto = " . $tel_contacto : " ";
+        $extra_tel_alterno = str_len($tel_contacto_alterno, 3) ? " OR tel_contacto_alterno = " . $tel_contacto_alterno : " ";
+        $extra_url_lead = str_len($url_lead, 3) ? " OR url_lead = '" . $url_lead."'" : " ";
+        $extra_url_facebook = str_len($facebook, 3) ? " OR facebook like '%".$facebook."%'" : " ";
 
 
         $query_get = "SELECT id FROM users " . $where . $extra_tel . $extra_tel_alterno . $extra_email . $extra_url_lead . $extra_url_facebook;            

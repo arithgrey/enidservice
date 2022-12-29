@@ -1230,21 +1230,7 @@ function footer_opciones()
             "onclick" => "log_operaciones_externas(50)",
         ]
     );
-   
-
-    $oportunidades[] = a_enid(
-        d('¿Necesitas una página web?','strong black'),
-        [
-            'href' => path_enid('sobre_pagina_web'),
-            'class' => 'black fp9 borde_end mt-3',
-            "onclick" => "log_operaciones_externas(47)",
-        ]
-    );
-    
-   
-    
-
-
+       
 
     $sociales[] = _titulo('SÍGUENOS', 2,'border_b_green');
     $sociales[] = a_enid(

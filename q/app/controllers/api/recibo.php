@@ -1590,7 +1590,7 @@ class recibo extends REST_Controller
     private function busqueda_pedidos($param)
     {
         $ids = prm_def($param, 'ids');
-        if ($param["recibo"] > 0 || strlen($param["cliente"]) > 1) {
+        if ($param["recibo"] > 0 || str_len($param["cliente"], 1)) {
             /*Busqueda por número recibo*/
 
             $params = $this->parametros_busqueda(0);

@@ -63,7 +63,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_active_tab($nombre_seccion, $estatus)
     {
 
-        return (strlen($estatus) > 0) ?
+        return str_len($estatus, 0) ?
             (($nombre_seccion == $estatus) ? " active " : "") :
             (($nombre_seccion == "compras") ? " active " : "");
 

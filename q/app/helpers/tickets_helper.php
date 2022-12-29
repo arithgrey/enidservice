@@ -812,7 +812,7 @@ if (!function_exists('invierte_date_time')) {
         $base = " t.status != 4 AND id_usuario = $id_usuario ";
         $busqueda = $param['keyword'];
         $keyword = _text_('AND t.asunto LIKE ', '"%', $busqueda, '%"');
-        $filtro = (strlen($busqueda) > 0) ? _text_($base, $keyword) : $base;
+        $filtro = str_len($busqueda, 0) ? _text_($base, $keyword) : $base;
         return $filtro;
 
     }

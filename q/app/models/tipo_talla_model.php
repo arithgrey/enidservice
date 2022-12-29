@@ -40,7 +40,7 @@ class Tipo_talla_model extends CI_Model
 	function get_like_clasificacion($param)
 	{
 
-		$extra = (array_key_exists("clasificacion", $param) && strlen($param["clasificacion"]) > 0) ?
+		$extra = (array_key_exists("clasificacion", $param) && str_len($param["clasificacion"], 0)) ?
 			" WHERE tipo LIKE '%" . $param["clasificacion"] . "%' LIMIT 10" : " LIMIT 30";
 
 		$query_get = "SELECT * FROM tipo_talla" . $extra;

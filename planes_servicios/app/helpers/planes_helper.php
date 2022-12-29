@@ -470,7 +470,7 @@ if (!function_exists('invierte_date_time')) {
             foreach ($top as $row) {
 
                 $nombre = $row["nombre_servicio"];
-                $articulo = (strlen($nombre) > 18) ? substr($nombre, 0, 18) . "..." : $nombre;
+                $articulo = (str_len($nombre, 18)) ? substr($nombre, 0, 18) . "..." : $nombre;
 
                 $link =
                     a_enid($articulo,

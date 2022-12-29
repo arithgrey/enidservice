@@ -379,7 +379,7 @@ class Recibo_model extends CI_Model
     {
 
         $sql = " WHERE 1=1 ";
-        if (strlen(trim($param["cliente"])) > 0) {
+        if (str_len($param["cliente"], 0)) {
             $cliente = $param["cliente"];
             $sql = " INNER JOIN users u ON 
                                     p.id_usuario =  u.id 
@@ -1266,7 +1266,7 @@ class Recibo_model extends CI_Model
 
             $extra = " AND id_usuario_venta = '" . $param["id_usuario"] . "' ";
         }
-        if (array_key_exists("q", $param) && strlen($param["q"]) > 2) {
+        if (array_key_exists("q", $param) && str_len($param["q"],2)) {
 
             $extra_innner = " LEFT OUTER JOIN  servicio s ON p.id_servicio = s.id_servicio 
             WHERE nombre_servicio LIKE  '%" . $param['q'] . " %'   ";
@@ -1328,7 +1328,7 @@ class Recibo_model extends CI_Model
 
         $extra_fecha = "";
 
-        if (strlen($fecha_inicio) > 3 && strlen($fecha_termino) > 3) {
+        if (str_len($fecha_inicio, 3) && str_len($fecha_termino, 3)) {
 
             $extra_fecha = "  
                             AND  
