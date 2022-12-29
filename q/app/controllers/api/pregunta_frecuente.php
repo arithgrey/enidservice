@@ -76,12 +76,12 @@ class pregunta_frecuente extends REST_Controller
                 $tag = $pregunta[0]["tags"];
 
 
-                if (strlen($tag) > 0 && !is_null($tag)) {
+                if (str_len($tag, 0) && !is_null($tag)) {
                     $array = explode(",", $tag);
                 }
 
                 $tag_ingreso = $param["tags"];
-                if (strlen(trim($tag_ingreso)) > 0) {
+                if (str_len(trim($tag_ingreso), 0)) {
 
                     $array[] = $tag_ingreso;
                 }
@@ -112,7 +112,7 @@ class pregunta_frecuente extends REST_Controller
                 $tag = $pregunta[0]["tags"];
 
 
-                if (strlen($tag) > 0 && !is_null($tag)) {
+                if (str_len($tag, 0) && !is_null($tag)) {
                     $array = explode(",", $tag);
                 }
 

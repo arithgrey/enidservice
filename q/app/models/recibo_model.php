@@ -1023,7 +1023,7 @@ class Recibo_model extends CI_Model
             }
         }
         $id_ciclo_facturacion = $param["id_ciclo_facturacion"];
-        $talla = (strlen($param["talla"]) < 1) ? 1 : $param["talla"];
+        $talla = str_len($param["talla"], 1) ? $param["talla"] : 1;
 
 
         $array_keys = [
@@ -1122,7 +1122,7 @@ class Recibo_model extends CI_Model
 
     function pendientes_sin_cierre($id_usuario, $id_perfil, $id_empresa, $idusuarios_empresa)
     {
-        
+
         $casos = [
             3 => " 1 = 1 ",
             4 => "id_usuario IN (SELECT id FROM users WHERE id_empresa = $id_empresa)",
@@ -1131,8 +1131,8 @@ class Recibo_model extends CI_Model
             21 => 'id_usuario_entrega = "' . $id_usuario . '"',
         ];
 
-        $estado_compra = ($id_perfil != 20) ? " AND p.status = 7 ": "";
-        
+        $estado_compra = ($id_perfil != 20) ? " AND p.status = 7 " : "";
+
 
         $ids = get_keys($idusuarios_empresa);
         $extra_usuario = $casos[$id_perfil];
@@ -1162,7 +1162,7 @@ class Recibo_model extends CI_Model
 						AND " . $extra_usuario . " 						  
 						AND  p.se_cancela = 0
 						AND  p.status NOT IN(10,19)  
-                        ".$estado_compra."
+                        " . $estado_compra . "
 						AND 						
 						(
 						DATE(p.fecha_contra_entrega) <=  DATE(CURRENT_DATE())
@@ -1266,7 +1266,7 @@ class Recibo_model extends CI_Model
 
             $extra = " AND id_usuario_venta = '" . $param["id_usuario"] . "' ";
         }
-        if (array_key_exists("q", $param) && str_len($param["q"],2)) {
+        if (array_key_exists("q", $param) && str_len($param["q"], 2)) {
 
             $extra_innner = " LEFT OUTER JOIN  servicio s ON p.id_servicio = s.id_servicio 
             WHERE nombre_servicio LIKE  '%" . $param['q'] . " %'   ";
@@ -1922,7 +1922,7 @@ class Recibo_model extends CI_Model
         WHERE id =  $id_proyecto_persona_forma_pago 
         LIMIT 1";
 
-        
+
         return $this->db->query($query_update);
     }
 }

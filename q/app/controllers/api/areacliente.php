@@ -18,7 +18,7 @@ class Areacliente extends REST_Controller
 
             $response = true;
             $cuerpo = $this->carga_pago_pendiente_por_recibo($param["id_recibo"]);
-            if (strlen($cuerpo) > 30) {
+            if (str_len($cuerpo, 30)) {
 
                 $q = get_request_email($param["email"], "Notificacion de compra o renovación pendiente", $cuerpo);
                 $this->app->send_email($q, 1);
