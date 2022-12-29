@@ -176,7 +176,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_cliente($usuario_busqueda)) {
 
             $link_facebook = pr($usuario_busqueda, "facebook");
-            if (strlen($link_facebook) > 11) {
+            if (str_len($link_facebook, 11)) {
 
                 $icon = icon(_facebook_icon);
                 $config = ["href" => $link_facebook, "target" => "_blac"];

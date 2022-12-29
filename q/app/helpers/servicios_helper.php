@@ -158,10 +158,10 @@ if (!function_exists('invierte_date_time')) {
 
         if ($booleano) {
 
-            $response = (strlen($texto) > 2);
+            $response = str_len($texto, 2);
         } else {
 
-            $response = (strlen($texto) > 2) ? '' :
+            $response = str_len($texto, 2) ? '' :
                 flex(icon(_text_(_eliminar_icon, 'fa-2x color_red')), $atributo, 'd-flex align-items-center');
         }
         return $response;
@@ -639,7 +639,7 @@ if (!function_exists('invierte_date_time')) {
             text_icon('fa fa-youtube-play', " VIDEO DE YOUTUBE ")
         );
 
-        if (strlen($val_youtube) > 0) {
+        if (str_len($val_youtube,  0)) {
 
             $z[] = d(text_icon(
                 'fa fa fa-pencil text_video_servicio',
@@ -657,7 +657,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = form_youtube($valor_youtube);
 
-        if (strlen($link_maps) > 0) {
+        if (str_len($link_maps, 0)) {
 
             $z[] = d(text_icon(
                 'fa fa fa-pencil text_video_servicio',
@@ -675,7 +675,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = form_maps($link_maps);
 
-        if (strlen($link_afiliado_amazon) > 0) {
+        if (str_len($link_afiliado_amazon, 0)) {
 
             $z[] = d(text_icon(
                 'fa fa fa-pencil',
@@ -770,7 +770,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = btn("GUARDAR", ["class" => "input_link_amazon d-none"]);
         $x[] = form_close();
 
-        if (strlen($link_amazon) > 10) {
+        if (str_len($link_amazon, 10)) {
 
             $r[] = a_enid(
                 "Link",
@@ -826,7 +826,7 @@ if (!function_exists('invierte_date_time')) {
         $x[] = btn("GUARDAR", ["class" => "input_link_ml d-none"]);
         $x[] = form_close();
 
-        if (strlen($link_ml) > 10) {
+        if (str_len($link_ml, 10)) {
 
             $r[] = a_enid(
                 "Link",
@@ -1308,7 +1308,7 @@ if (!function_exists('invierte_date_time')) {
 
         $link_afiliado_amazon = $servicio["link_afiliado_amazon"];
         $link_amazon_afiliado =  "";        
-        if(strlen($link_afiliado_amazon) > 5){
+        if(str_len($link_afiliado_amazon, 5)){
             
             $link_amazon_afiliado = format_link("Comprame en Amazon!",
             [
@@ -1819,7 +1819,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = btn("GUARDAR");
             $x[] = place("response_link_dropshipping");
 
-            if (strlen($link_dropshipping) > 10) {
+            if (str_len($link_dropshipping, 10)) {
 
                 $r[] = a_enid(
                     "Link",

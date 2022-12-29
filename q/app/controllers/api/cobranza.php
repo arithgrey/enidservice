@@ -604,9 +604,7 @@ class Cobranza extends REST_Controller
     {
 
         $comentario_compra = prm_def($param, "comentario_compra");
-        if (strlen($comentario_compra) > 5) {
-
-
+        if (str_len($comentario_compra, 5)) {
 
             return $this->app->api(
                 "orden_comentario/index",

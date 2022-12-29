@@ -94,7 +94,7 @@ if (!function_exists('invierte_date_time')) {
             ];
 
         $readonly = valida_readonly($nombre);
-        if (strlen($readonly) > 0) {
+        if (str_len($readonly, 0)) {
             $config['readonly '] = true;
         }
         $r[] = input_frm("mt-5", "Tu Nombre", $config);
@@ -107,7 +107,7 @@ if (!function_exists('invierte_date_time')) {
             "placeholder" => "Por ejemplo: jmedrano@enidservices.com",
             "value" => $email
         ];
-        if (strlen($readonly) > 0) {
+        if (str_len($readonly, 0)) {
             $config_email['readonly '] = true;
         }
 

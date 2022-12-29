@@ -476,7 +476,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = ubicacion_entrega($servicio);
 
-        if (strlen($descripcion) > 5) {
+        if (str_len($descripcion, 5)) {
 
             $z[] = d($descripcion, 'mt-4 mb-4 row');
         }
@@ -513,7 +513,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = '';
-        if (strlen($atributo) > 0) {
+        if (str_len($atributo, 0)) {
 
             $response = d(_text_(strong($texto), $atributo, $extra));
         }
@@ -529,7 +529,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        if (strlen($youtube) > 5) {
+        if (str_len($youtube, 5)) {
 
             $response = iframe(
                 [
@@ -601,7 +601,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response  = [];
         $link_maps =  pr($servicio,  "link_maps");
-        if (strlen($link_maps) > 5) {
+        if (str_len($link_maps, 5)) {
 
             $response[] =  d("Ubicación donde será entregado el sorteo", 'borde_green p-1');
             $response[] = pr($servicio, "link_maps");

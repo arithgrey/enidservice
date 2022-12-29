@@ -9,7 +9,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($data as $row) {
 
             $metakeyword = $row["metakeyword"];
-            if (strlen($metakeyword) > 0) {
+            if (str_len($metakeyword, 0)) {
                 $tags = json_decode(
                     $metakeyword, true
                 );

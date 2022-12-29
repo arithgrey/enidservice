@@ -45,7 +45,7 @@ if (!function_exists('invierte_date_time')) {
                     
                     $contenido[] = d($pagina, _text_("strong fp9 row", $extra ));
 
-                    if (strlen($http_referer) > 5) {
+                    if (str_len($http_referer, 5)) {
                         $link = a_enid("Link entrante", ["href" => $http_referer]);
                         $contenido[] = d($link, "fp7 row");
                     }

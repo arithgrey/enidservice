@@ -228,7 +228,7 @@ function pago_oxxo($url_request, $saldo, $id_recibo, $id_usuario)
 {
 
 
-    $url_request = (strlen($url_request) < 1) ? '../' : $url_request;
+    $url_request = (str_len($url_request, 1)) ? $url_request: '../';
     return ($saldo > 0 && $id_recibo > 0 && $id_usuario > 0) ?
         (
         _text($url_request, "orden_pago_oxxo/?q=", $saldo, "&q2=", $id_recibo, "&q3=", $id_usuario)
