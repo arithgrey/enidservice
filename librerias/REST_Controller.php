@@ -495,7 +495,8 @@ abstract class REST_Controller extends CI_Controller
 		// the reduction, causing the browser to hang waiting for more data.
 		// We'll just skip content-length in those cases.
 		if (!$this->_zlib_oc && !$this->config->item('compress_output')) {
-			header('Content-Length: ' . strlen($output));
+			$lenght = str_len($output,0) ? strlen($output) : 0;
+			header('Content-Length: ' . $lenght);
 		}
 
 		if ($continue) {

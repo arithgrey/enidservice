@@ -2010,7 +2010,7 @@ function row_d($contenido)
     return d(d($contenido, 13), 12);
 }
 
-function d_c($items = [], $attr)
+function d_c($items = [], $attr = '')
 {
 
     $response = [];
@@ -2217,7 +2217,11 @@ function get_logo($session = 0)
         );
 
         $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
-        $carro = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes mr-3 ml-2 borde_amarillo']);
+        $carro = a_enid($notificacion_deseo_compra, 
+        [
+            'class' => 'icono_compras_pendientes mr-3 ml-2 borde_amarillo',
+            "href" => path_enid("lista_deseos")
+        ]);
         $icono_busqueda_carro = flex($icono_busqueda, $carro, _between, "borde_amarillo");
 
         $acceder = a_enid(
