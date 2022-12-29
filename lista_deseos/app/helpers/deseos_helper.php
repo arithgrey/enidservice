@@ -256,7 +256,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $extra = is_mobile() ? 'white':'black';
-        $response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5,_text_('fp9', $extra));
+        //$response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5,_text_('fp9', $extra));
+        
         $total_en_descuento = descuento_recompensa($data);
 
         if ($es_premium && $total_en_descuento < 1) {
@@ -268,7 +269,7 @@ if (!function_exists('invierte_date_time')) {
             
         } else {
 
-            $response = formato_subtotal($response, $data, $subtotal);
+            $response = formato_subtotal($data, $subtotal);
         }
 
         $inputs_recompensa = valida_envio_descuento($data);
@@ -333,9 +334,9 @@ if (!function_exists('invierte_date_time')) {
 
         return $inputs;
     }
-    function formato_subtotal($response, $data, $subtotal)
+    function formato_subtotal($data, $subtotal)
     {
-
+        $response = [];
         $total_en_descuento = descuento_recompensa($data);
         $extra = is_mobile() ? 'white':'black';
         if ($total_en_descuento > 0) {
@@ -345,7 +346,9 @@ if (!function_exists('invierte_date_time')) {
             $response[] =  d(money($nuevo_total), _text_("display-6", $extra));
         } else {
             
-            $response[] =  d(money($subtotal), _text_("display-5 strong ml-3", $extra));
+            $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));
+            $extra  = is_mobile() ? 'white': ''; 
+            $response[] =  flex($text,'Pagables al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
         }
 
         return $response;
@@ -424,7 +427,12 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d($boton_agendar_pedido, _text_('seccion_enviar_orden bg-white',$extra_envio));
             
             if(!is_mobile()){
-                $response[] = d("Llevamos tus artículos a tu domicilio y pagas a tu entrega!", 'text-right mt-5 f13 mb-5 strong black');
+                //$response[] = d("No te preocupes! pagas al recibir tu pedido y te entregamos hoy!", 'text-right mt-5 display-7 mb-5 strong black');
+                $contenido[] = d("Entregas gratis en CDMX",'mt-5 display-5 black strong');
+                $contenido[] = d("Recibe hoy",'black display-7 mt-2 black');
+                $contenido[] = d("Pagas al recibir tu pedido!",'black display-7 mt-2');
+                $response[]= append($contenido);
+
             }
             
             $response[] = form_close();
