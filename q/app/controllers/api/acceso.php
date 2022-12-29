@@ -124,13 +124,11 @@ class Acceso extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino")) {
-
-
+            $response = [];
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $accesos =  $this->acceso_model->dominio($fecha_inicio, $fecha_termino);
             $accesos = $this->app->add_imgs_servicio($accesos);
-
 
             $response[] = $this->dominios($accesos);
             $response[] = $this->paginas($accesos);
@@ -142,6 +140,7 @@ class Acceso extends REST_Controller
     function dominios($accesos)
     {
 
+        $accesos = es_data($accesos) ? $accesos : [];
         $dominios = array_unique(array_column($accesos, "http_referer"));
         $response[] = d(d("Sitios que nos mandan tráfico", "f12 black underline mt-5 mb-2 strong"), 13);
         foreach ($dominios as $row) {
@@ -329,7 +328,7 @@ class Acceso extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "fecha_inicio,fecha_termino")) {
-
+            $response = [];
             $fecha_inicio = $param["fecha_inicio"];
             $fecha_termino = $param["fecha_termino"];
             $id_servicio = prm_def($param, "id_servicio");

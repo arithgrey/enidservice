@@ -450,7 +450,7 @@ class CI_Session
 			$newdata = array($newdata => '');
 		}
 
-		if (count($newdata) > 0) {
+		if (is_array($newdata) && count($newdata) > 0) {
 			foreach ($newdata as $key => $val) {
 				unset($this->userdata[$key]);
 			}

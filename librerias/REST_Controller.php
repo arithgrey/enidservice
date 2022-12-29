@@ -911,7 +911,9 @@ abstract class REST_Controller extends CI_Controller
 		}
 
 		// Grab proper GET variables
-		parse_str(parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY), $get);
+		$str = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY);
+		$str = str_len($str,0) ? $str :"";
+		parse_str($str, $get);
 
 		// Merge both the URI segments and GET params
 		$this->_get_args = array_merge($this->_get_args, $get);
