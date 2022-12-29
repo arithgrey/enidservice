@@ -65,7 +65,7 @@ class Punto_encuentro extends REST_Controller
         if (fx($param, "id,v")) {
 
 
-            if (strlen($param["q"]) > 2) {
+            if (str_len($param["q"], 2)) {
 
                 $response = $this->punto_encuentro_model->get_like($param["id"], $param["q"]);
 

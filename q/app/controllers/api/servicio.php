@@ -1424,7 +1424,7 @@ class Servicio extends REST_Controller
 
     private function add_gamificacion_search($q)
     {
-        if (prm_def($q, 'q', FALSE) != FALSE && strlen($q['q']) > 1) {
+        if (prm_def($q, 'q', FALSE) != FALSE && str_len($q['q'], 1)) {
 
             $this->app->api("metakeyword/gamificacion_search/", $q, "json", "POST");
         }

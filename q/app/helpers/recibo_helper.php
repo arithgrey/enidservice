@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
 
         $rr[] = _titulo($nombre_vendedor, 5);
 
-        if (strlen($usuario_venta) > 4) {
+        if (str_len($usuario_venta, 4)) {
 
             $response[] = _titulo("información de contacto", 5);
             $telefono = pr($usuario_venta, "tel_contacto");

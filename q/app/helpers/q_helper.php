@@ -1105,7 +1105,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($info as $row) {
 
             $fecha = $row[$columna];
-            if (strlen($fecha) > 1) {
+            if (str_len($fecha, 1)) {
                 $tmp_arreglo[$z] = $fecha;
                 $z++;
             }

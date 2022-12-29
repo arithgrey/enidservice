@@ -168,7 +168,7 @@ if (!function_exists('invierte_date_time')) {
             $x[] = span(strtoupper($nombre), "underline");
             $r[] = d(append($x), "top_15");
 
-            if (strlen($telefono) > 4) :
+            if (str_len($telefono, 4)) :
 
                 $r[] = strong("TELÉFONO DE CONTACTO:");
                 $r[] = span($telefono, "underline");

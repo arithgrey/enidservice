@@ -348,7 +348,7 @@ class usuario_model extends CI_Model
         $departamento = "AND u.id_departamento = ";
         $extra_perfil = ($es_perfil) ? _text_($departamento, $param["id_departamento"]) : "";
 
-        $extra = (strlen($q) > 1) ? " WHERE 
+        $extra = str_len($q, 1) ? " WHERE 
         u.name like '%" . $q . "%'
         OR u.email like '%" . $q . "%'
         OR u.apellido_paterno like '%" . $q . "%'
@@ -545,7 +545,7 @@ class usuario_model extends CI_Model
 
         $tel_contacto = $param["tel_contacto"];
 
-        if (strlen($tel_contacto) > 3) {
+        if (str_len($tel_contacto, 3)) {
             $params["tel_contacto"] = $tel_contacto;
         }
         if (array_key_exists('auto', $param)) {

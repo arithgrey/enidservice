@@ -22,7 +22,7 @@ class usuario_deseo_compra extends REST_Controller
 
         if (fx($param, "id_servicio,articulos")) {
 
-            $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] :  $this->input->ip_address();
+            $ip =  str_len(prm_def($param, "ip"), 2) ? $param["ip"] :  $this->input->ip_address();
             $articulos = $param["articulos"];
             $id_recompensa = prm_def($param, "id_recompensa");
             $numero_boleto = prm_def($param, "numero_boleto");
@@ -49,7 +49,7 @@ class usuario_deseo_compra extends REST_Controller
 
         if (fx($param, "id_servicio")) {
 
-            $ip =  strlen(prm_def($param, "ip")) > 2 ? $param["ip"] : $this->input->ip_address();                    
+            $ip =  str_len(prm_def($param, "ip"), 2) ? $param["ip"] : $this->input->ip_address();                    
             $where = ["id_servicio" => $param["id_servicio"],"ip" => $ip];
 
             $response = $this->usuario_deseo_compra_model->delete($where);

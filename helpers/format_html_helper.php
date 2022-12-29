@@ -426,7 +426,7 @@ function td($val = '', $attributes = [])
         return "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
     } else {
 
-        return (is_string($attributes) && strlen($attributes) > 0) ?
+        return (is_string($attributes) && str_len($attributes, 0)) ?
             "<td " . add_attributes(["class" => $attributes]) . " NOWRAP >" . $val . "</td>" :
             "<td " . add_attributes($attributes) . " NOWRAP >" . $val . "</td>";
     }
