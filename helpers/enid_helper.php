@@ -1,7 +1,9 @@
 <?php
 
 use App\View\Components\titulo;
-
+function str_len($str, $length){
+    return (($str) && strlen($str) > $length);
+}
 function sub_categorias_destacadas($param)
 {
 
@@ -232,7 +234,7 @@ function get_drop($tmp_table)
 function valida_extension($string, $num_ext, $str)
 {
 
-    return (strlen($string) > $num_ext) ? $string : $str;
+    return (str_len($string, $num_ext)) ? $string : $str;
 }
 
 function debug($msg, $array = 0)

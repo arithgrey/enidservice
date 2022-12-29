@@ -531,7 +531,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $r[] = icon("fa fa-angle-right");
                 $nombre_servicio = $row["nombre_servicio"];
-                $articulo = (trim(strlen($nombre_servicio)) > 22) ? substr($nombre_servicio, 0, 22) . "..." : strlen($nombre_servicio);
+                $articulo = (str_len($nombre_servicio,  22)) ? substr($nombre_servicio, 0, 22) . "..." : strlen($nombre_servicio);
                 $r[] = $articulo;
                 $r[] = d(
                     d($row["vistas"], "a_enid_black_sm_sm"),

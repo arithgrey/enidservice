@@ -4153,7 +4153,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(phoneFormat($telefonono), 'mt-3');
 
             $facebook = $row["facebook"];
-            if (strlen($facebook) > 10) {
+            if (str_len($facebook , 10)) {
 
                 $link = a_enid(
                     "Facebook",
@@ -4163,7 +4163,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $url_lead = $row["url_lead"];
-            if (strlen($url_lead) > 10) {
+            if (str_len($url_lead, 10)) {
 
                 $link = a_enid(
                     "Conversación en Facebook",

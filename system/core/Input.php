@@ -345,6 +345,7 @@ class CI_Input
 
 		// First check if filter_var is available
 		if (is_callable('filter_var')) {
+			/*
 			switch ($which) {
 				case 'ipv4':
 					$flag = FILTER_FLAG_IPV4;
@@ -354,6 +355,18 @@ class CI_Input
 					break;
 				default:
 					$flag = '';
+					break;
+			}
+			*/
+			switch ($which) {
+				case 'ipv4':
+					$flag = FILTER_FLAG_IPV4;
+					break;
+				case 'ipv6':
+					$flag = FILTER_FLAG_IPV6;
+					break;
+				default:
+					$flag = FILTER_DEFAULT;
 					break;
 			}
 
