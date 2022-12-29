@@ -2,32 +2,12 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function valida_tiempo_entrega($servicio, $tiempo)
+    function valida_tiempo_entrega()
     {
-
-        $muestra_fecha_disponible = pr($servicio, 'muestra_fecha_disponible');
-        $fecha_disponible = pr($servicio, 'fecha_disponible');
-        $fecha_disponible_stock = new DateTime($fecha_disponible);
-
-        $fecha = horario_enid();
-        $hoy = $fecha->format('H:i:s');
-        $es_proxima_fecha = ($fecha_disponible_stock > $fecha);
-
-        $text = _text_(span("Haz tu pedido y tenlo hoy mismo!", 'black'), strong("Entrega gratis en CDMX"));
-        $mas_un_dia = _text_("Realiza tu pedido y tenlo mañana mismo!", strong("Entrega gratis en CDMX"));
-        $str = ($hoy < 18) ? $text : $mas_un_dia;
-
-        $text_proxima_fecha = d(_text_(
-            "Ups! lo tendremos disponible el",
-            format_fecha($fecha_disponible),
-            'Pero ... no te preocupes puedes agendar ya mismo tu entrega'
-        ), 'bg-warning strong p-1');
-
-
-        $str = ($muestra_fecha_disponible > 0 && $es_proxima_fecha) ? $text_proxima_fecha : $str;
-        $response[] = d(d($str, 'f11 black'), 'mt-5 mb-5 text-center');
-
-        return append($response);
+        $contenido[] = d("Entregas gratis en CDMX",'mt-5 display-5 black strong');
+        $contenido[] = d("Recibe hoy",'black display-7 mt-2 black');
+        $contenido[] = d("Pagas al recibir tu pedido!",'black display-7 mt-2');
+        return append($contenido);
     }
 
 
@@ -120,13 +100,13 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
-            d($imagenes["imagenes_contenido"], $clases_imagenes)
+            d($imagenes["imagenes_contenido"], $clases_imagenes),'row'
 
         );
 
         $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
-        $titulo = substr(strtoupper($nombre), 0, 200);
-
+        $titulo = substr(strtoupper($nombre), 0, 270);
+        
         if ($es_servicio < 1) :
 
             $nombre_producto = _titulo($titulo, 2);
@@ -181,6 +161,12 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio
         );
         $recompensa = recompensa($data);
+
+        if(is_mobile()){
+            $nombre_producto = _titulo($titulo, 2);
+            $data_response[] = d($nombre_producto,'col-sm-12 mt-5 mb-5');
+        }
+        
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
@@ -199,7 +185,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        return append($pagina_producto);
+        return d($pagina_producto,'row mt-5');
     }
     function botones_ver_mas($id_servicio)
     {
@@ -467,7 +453,7 @@ if (!function_exists('invierte_date_time')) {
     }
     function compra_meses($data, $precio)
     {
-    
+        return "";
         if(es_link_afiliado_amazon($data)){ return "";}
 
         $response = "";
