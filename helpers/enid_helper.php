@@ -1037,15 +1037,18 @@ function penetracion_alcaldias($data)
 
     $ventas_mes_ubicaciones = $data["ventas_mes_ubicaciones"];
     $response[] = d(_titulo("Alcandías que son tendencia en ventas este mes", 4), 'mt-5 col-sm-12');
-    foreach ($ventas_mes_ubicaciones  as $row) {
+    
+    if(es_data($ventas_mes_ubicaciones)){
+        foreach ($ventas_mes_ubicaciones  as $row) {
 
-        $total =  $row["total"];
-        $delegacion =  $row["delegacion"];
-
-        $textos = flex($delegacion, $total, _text_(_between, 'border-bottom border-secondary'), "black", "strong f12");
-        $response[] = d($textos, 'col-sm-12 mt-2');
+            $total =  $row["total"];
+            $delegacion =  $row["delegacion"];
+    
+            $textos = flex($delegacion, $total, _text_(_between, 'border-bottom border-secondary'), "black", "strong f12");
+            $response[] = d($textos, 'col-sm-12 mt-2');
+        }
     }
-
+    
     return append($response);
 }
 

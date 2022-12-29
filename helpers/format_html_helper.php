@@ -180,17 +180,20 @@ function hiddens($attributes = '', $e = 0)
 function add_attributes($attributes = '')
 {
 
-
-    if (is_array($attributes)) {
+    $response = "";
+    if (es_data($attributes)) {
 
         $callback = function ($carry, $key) use ($attributes) {
-            return $carry . ' ' . $key . '="' . htmlspecialchars($attributes[$key]) . '"';
-        };
 
-        $response = array_reduce(array_keys($attributes), $callback, '');
+            $atributos = (is_null($attributes[$key])) ? '': $attributes[$key];
+            $attr = htmlspecialchars($atributos);
+            return $carry . ' ' . $key . '="' . $attr . '"';
+        };
+        $keys = array_keys($attributes);
+        $response = array_reduce($keys, $callback, '');
     } else {
 
-        $response = ($attributes != '') ? ' ' . $attributes : '';
+        $response = (!is_null($attributes) && str_len($attributes,0) ) ? ' ' . $attributes : '';
     }
 
     return $response;
@@ -1548,7 +1551,11 @@ function frm_search(
             icon("fa fa-shopping-bag  white"),
             _between
         );
-        $r[] = a_enid($notificacion_deseo_compra, ['class' => 'icono_compras_pendientes']);
+        $r[] = a_enid($notificacion_deseo_compra, 
+        [
+            'class' => 'icono_compras_pendientes',
+            'href' => path_enid("lista_deseos")
+        ]);
     }
     $r[] = get_menu_session($in_session, $proceso_compra);
 
