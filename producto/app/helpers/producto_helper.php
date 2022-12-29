@@ -163,7 +163,9 @@ if (!function_exists('invierte_date_time')) {
         $recompensa = recompensa($data);
 
         if(is_mobile()){
-            $nombre_producto = _titulo($titulo, 2);
+            $nombre = pr($s, "nombre_servicio");
+            $nombre = substr($nombre, 0, 300);
+            $nombre_producto = _titulo($nombre, 2);
             $data_response[] = d($nombre_producto,'col-sm-12 mt-5 mb-5');
         }
         
