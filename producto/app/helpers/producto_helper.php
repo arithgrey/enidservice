@@ -1210,7 +1210,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    "Agregar al carrito",
+                    "Agenda tu entrega!",
                     'text-center pt-3 pb-3'
                 ),
                 [

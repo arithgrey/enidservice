@@ -319,13 +319,13 @@ if (!function_exists('invierte_date_time')) {
                 "required" => "true",
                 "onkeypress" => "minusculas(this);",
             ];
-            if (!$es_cliente) {
+            //if (!$es_cliente) {
 
                 $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
-            }
+            //}
 
             $z[] = input_frm(
-                _text_("col-lg-6 mt-5 top_100", $es_cliente_class),
+                _text_("col-lg-6 mt-5 top_100", "d-none"),
                 "CORREO",
                 $config_email,
                 _text_correo
