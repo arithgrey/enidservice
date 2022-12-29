@@ -728,7 +728,7 @@ if (!function_exists('invierte_date_time')) {
 
         $vendedor = prm_def($row, 'nombre_vendedor', '');
         $text_vendedor = d(_text_(strong('Agenda'), $vendedor), 'text-uppercase black');
-        $nombre_vendedor = (strlen($vendedor) > 0) ? $text_vendedor : '';
+        $nombre_vendedor = (str_len($vendedor, 0)) ? $text_vendedor : '';
 
         $usuario_entrega = $row['usuario_entrega'];
         $usuario_entrega = format_nombre($usuario_entrega);
@@ -739,7 +739,7 @@ if (!function_exists('invierte_date_time')) {
 
         $cliente = d(_text_(strong('cliente'), $nombre_cliente, $telefono_cliente), 'text-uppercase black');
         $repartidor = d(_text_(strong('Entregará'), $usuario_entrega), 'text-uppercase black');
-        $nombre_repartidor = (strlen($usuario_entrega) > 0) ? $repartidor : '';
+        $nombre_repartidor = (str_len($usuario_entrega, 0)) ? $repartidor : '';
 
 
         return

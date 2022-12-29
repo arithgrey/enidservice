@@ -459,7 +459,7 @@ if (!function_exists('invierte_date_time')) {
         $servicio =$data["info_servicio"]["servicio"];
         $link_afiliado_amazon = pr($servicio, "link_afiliado_amazon");        
         
-        $response = (strlen($link_afiliado_amazon) > 5);
+        $response = str_len($link_afiliado_amazon, 5);
         if($regresa_link > 0){
             $response = $link_afiliado_amazon;
         }
@@ -542,7 +542,7 @@ if (!function_exists('invierte_date_time')) {
             $array[] = $servicio["nombre_servicio"];
             $array[] = $servicio["descripcion"];
             $array[] = " precio ";
-            if (strlen(trim($meta_usuario)) > 0) {
+            if (str_len($meta_usuario,  0)) {
 
                 $array[] = strip_tags($meta_usuario);
             }
@@ -571,7 +571,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = d(_titulo($nombre, 0, "borde_end p-2"), "mb-4");
 
-        if (strlen($descripcion) > 5) {
+        if (str_len($descripcion, 5)) {
 
             $z[] = d($descripcion, 'mt-4 mb-4');
         }
@@ -637,7 +637,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response = '';
-        if (strlen($atributo) > 0) {
+        if (str_len($atributo, 0)) {
 
             $response = d(_text_(strong($texto), $atributo, $extra));
         }
@@ -1180,8 +1180,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        if (strlen($youtube) > 5) {
-
+        if (str_len($youtube, 5)) {
 
             $response = iframe(
                 [

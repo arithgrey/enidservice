@@ -52,7 +52,7 @@ class Home extends CI_Controller
         $q = prm_def($param, "q");
 
         $response  = [];
-        if (strlen($q) > 2) {
+        if (str_len($q,2)) {
             
             $response =  $this->app->api(
                 "codigo_postal/costo",
