@@ -96,9 +96,7 @@ if (!function_exists('invierte_date_time')) {
                 $clase = 'mt-3 black mb-5 f11 borde_black p-2';
                 $r[] = d('Te llamaremos 
                             en cuanto estemos de 
-                            camino, 
-                            posiblemente 
-                            hoy mismo te entreguemos!', $clase);
+                            camino a entregar tu pedido!', $clase);
             }
 
 

@@ -1821,7 +1821,7 @@ function opciones_populares()
     $response[] = d(
         "PRUEBA EN CASA",
         [
-            "class" => "white underline  cursor_pointer  
+            "class" => "white cursor_pointer  
             frecuentes borde_amarillo prueba_en_casa p-1 ml-5",
             "onclick" => "log_operaciones_externas(48)",
         ]
@@ -1903,8 +1903,10 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $text = _text_('Ofrecemos pago contra entrega en CDMX, también hacemos envíos y tenemos venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11'));
-    $response[] = d(d($text , 'col-xs-12 white fp7 ml-3 text-uppercase'), ["class" => 'row bg_black white mb-2']);
+    $text = _text_('Ofrecemos', 
+    span('pago contra entrega','white font-weight-bold'),
+    'en CDMX, hacemos envíos y tenemos venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11 font-weight-bold'));
+    $response[] = d(d($text , 'col-xs-12 white fp8 ml-3 text-uppercase'), ["class" => 'row bg_black white mb-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
@@ -1956,7 +1958,12 @@ function navegacion(
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
-                _text_('Ofrecemos pago contra entrega en CDMX, también hacemos envíos y tenemos venta por mayoreo', icon('fa fa-phone'),span('(55)5296-7027','f11')),
+                _text_(
+                    'Ofrecemos', span('pago contra entrega','strong'),
+                    'en CDMX, hacemos',
+                    span('envíos a toda la república','strong'),
+                    ' y tenemos venta por',
+                    span('mayoreo','strong'), icon('fa fa-phone'),span('(55)5296-7027','f12 strong')),
                 [                    
                     "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]

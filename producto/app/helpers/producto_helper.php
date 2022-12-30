@@ -4,9 +4,9 @@ if (!function_exists('invierte_date_time')) {
 
     function valida_tiempo_entrega()
     {
-        $contenido[] = d("Entregas gratis en CDMX",'mt-5 display-5 black strong');
-        $contenido[] = d("Recibe hoy",'black display-7 mt-2 black');
-        $contenido[] = d("Pagas al recibir tu pedido!",'black display-7 mt-2');
+        $contenido[] = d(_text_(icon('fa fa-truck'),"Entrega gratis en CDMX"),'mt-5 display-5 black strong');
+        $contenido[] = d(_text_(icon(_delivery_icon),"Recibe hoy mismo!"),'black  display-7 mt-2 black');
+        $contenido[] = d(_text_(icon("fa fa-check"), "Pagas al recibir tu pedido!"),'black  display-7 mt-2');
         return append($contenido);
     }
 
@@ -1210,7 +1210,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    "Agenda tu entrega!",
+                    _text_(icon('fa fa-space-shuttle white fa-2x'),"Agenda aquí tu entrega!"),
                     'text-center pt-3 pb-3'
                 ),
                 [
