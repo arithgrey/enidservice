@@ -348,7 +348,7 @@ if (!function_exists('invierte_date_time')) {
             
             $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));
             $extra  = is_mobile() ? 'white': ''; 
-            $response[] =  flex($text,'Pagables al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
+            $response[] =  flex($text,'Con opción de pago al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
         }
 
         return $response;
@@ -416,7 +416,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
 
             $boton_agendar_pedido = btn(
-                "Continuar",
+                _text_(icon('fa fa-space-shuttle white'),"Continuar"),
                 [
                     "class" => "pb-3 p-2 strong col 
                     text-uppercase registro_google format_action format_google shadow d-block"
@@ -428,9 +428,9 @@ if (!function_exists('invierte_date_time')) {
             
             if(!is_mobile()){
                 //$response[] = d("No te preocupes! pagas al recibir tu pedido y te entregamos hoy!", 'text-right mt-5 display-7 mb-5 strong black');
-                $contenido[] = d("Entregas gratis en CDMX",'mt-5 display-5 black strong');
-                $contenido[] = d("Recibe hoy",'black display-7 mt-2 black');
-                $contenido[] = d("Pagas al recibir tu pedido!",'black display-7 mt-2');
+                $contenido[] = d(_text_(icon('fa fa-truck'),"Entrega gratis en CDMX"),'mt-5 display-5 black strong');
+                $contenido[] = d(_text_(icon(_delivery_icon),"Recibe hoy mismo!"),'black  display-7 mt-2 black');
+                $contenido[] = d(_text_(icon("fa fa-check"), "Pagas al recibir tu pedido!"),'black  display-7 mt-2');
                 $response[]= append($contenido);
 
             }
