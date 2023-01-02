@@ -1,1 +1,1 @@
-<?php header("location:search?q2=0&q=");
+<?php header("location:search/?q2=0&q=kitsmasvendidos&order=2");

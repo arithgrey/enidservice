@@ -779,7 +779,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            "Ingresar",
+            _text_(icon("fa fa-user white"),"Ingresar / crear cuenta"),
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
