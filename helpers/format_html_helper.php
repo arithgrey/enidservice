@@ -1903,9 +1903,11 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $text = _text_('Ofrecemos', 
+    $text = _text_(
+        span('Para que pases ya! al siguiente nivel','white font-weight-bold'),
+        'Ofrecemos', 
     span('pago contra entrega','white font-weight-bold'),
-    'en CDMX, hacemos envíos y tenemos venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11 font-weight-bold'));
+    'en CDMX, envíos y  venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11 font-weight-bold'));
     $response[] = d(d($text , 'col-xs-12 white fp8 ml-3 text-uppercase'), ["class" => 'row bg_black white mb-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
@@ -1959,7 +1961,8 @@ function navegacion(
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
                 _text_(
-                    'Ofrecemos', span('pago contra entrega','strong'),
+                    span('Para que pases ya! alguiente nivel','strong'),
+                    'ofrecemos', span('pago contra entrega','strong'),
                     'en CDMX, hacemos',
                     span('envíos a toda la república','strong'),
                     ' y tenemos venta por',
