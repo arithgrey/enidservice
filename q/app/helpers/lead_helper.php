@@ -12,8 +12,9 @@ if (!function_exists('invierte_date_time')) {
         $es_cliente = es_cliente($data);
         $response = "";
         $lineas = 0;
-
         $totales = 0;
+        $ids_orden_compra = [];
+        
         if (es_data($recibos)) {
 
             $ids_orden_compra = array_count_values(array_column($recibos, "id_orden_compra"));
