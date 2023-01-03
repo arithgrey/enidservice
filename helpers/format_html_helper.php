@@ -784,7 +784,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
                 text-decoration-none mr-4 
-                white borde_amarillo iniciar_session_boton ml-3",
+                white borde_amarillo iniciar_session_boton ml-3 p-2 font-weight-bold",
             ]
         );
 
@@ -1528,7 +1528,7 @@ function frm_search(
     $r[] = d($clasificaciones_departamentos, "d-none");
     $r[] = input(
         [
-            "class" => "input_busqueda_producto col-lg-11",
+            "class" => "input_busqueda_producto col-lg-12",
             "type" => "text",
             "placeholder" => "Búscar",
             "name" => "q",
@@ -1537,27 +1537,29 @@ function frm_search(
     );
 
     $r[] = btn(
-        icon("fa fa-search "),
+        icon("fa fa-search"),
         [
             'style' => 'background: white!important;'
         ]
     );
     $r[] = form_close();
 
+    $r[] = get_menu_session($in_session, $proceso_compra);
+    
     if (!$in_session) {
 
         $notificacion_deseo_compra = flex(
             d('', 'place_resumen_deseo_compra white strong'),
-            icon("fa fa-shopping-bag  white"),
+            icon("fa fa-shopping-bag fa-2x white"),
             _between
         );
         $r[] = a_enid($notificacion_deseo_compra, 
         [
-            'class' => 'icono_compras_pendientes',
+            'class' => 'icono_compras_pendientes mr-5',
             'href' => path_enid("lista_deseos")
         ]);
     }
-    $r[] = get_menu_session($in_session, $proceso_compra);
+    
 
     $response = [];
     if (!$in_session) {
@@ -1870,6 +1872,7 @@ function opciones_populares()
         ]
     );
 
+    /*
     $response[] = a_enid(
         icon(_text_(_facebook_icon, 'white')),
         [
@@ -1895,6 +1898,7 @@ function opciones_populares()
             'class' => 'ml-5 white mt-1 click_pinterest_clientes'
         ]
     );
+    */
 
 
     return flex($response);
