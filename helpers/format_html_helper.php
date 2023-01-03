@@ -1832,7 +1832,7 @@ function opciones_populares()
     $response[] = a_enid(
         "POPULARES",
         [
-            "class" => "white mt-2 underline border-right frecuentes ",
+            "class" => "white mt-2  frecuentes strong",
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
         ]
     );
@@ -1840,7 +1840,7 @@ function opciones_populares()
     $response[] = a_enid(
         "NOVEDADES",
         [
-            "class" => "white mt-2  underline border-right frecuentes ",
+            "class" => "white mt-2   frecuentes strong",
             "href" => path_enid(
                 "search",
                 "/?q2=0&q=&order=1"
@@ -1850,7 +1850,7 @@ function opciones_populares()
     $response[] = a_enid(
         "SORTEOS",
         [
-            "class" => "white mt-2 underline border-right frecuentes ",
+            "class" => "white mt-2  frecuentes strong",
             "href" => path_enid("rifas")
         ]
     );
@@ -1865,9 +1865,9 @@ function opciones_populares()
     */
 
     $response[] = a_enid(
-        "CLIENTES",
+        "REFERENCIAS",
         [
-            "class" => "white underline mt-2 frecuentes ",
+            "class" => "white mt-2 strong frecuentes ",
             "href" => path_enid("clientes")
         ]
     );
@@ -1908,11 +1908,11 @@ function opciones_adicionales_navegacion()
 {
 
     $text = _text_(
-        span('Para que pases ya! al siguiente nivel','white font-weight-bold'),
+        span('Para que pases ya! al siguiente nivel','strong'),
         'Ofrecemos', 
-    span('pago contra entrega','white font-weight-bold'),
-    'en CDMX, envíos y  venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11 font-weight-bold'));
-    $response[] = d(d($text , 'col-xs-12 white fp8 ml-2 text-uppercase'), ["class" => 'row bg_black white mb-2 mt-2']);
+    span('pago contra entrega',' strong'),
+    'en CDMX, envíos y venta por',span("mayoreo",'strong'), icon('fa fa-phone '),span('(55)5296-7027','f11 strong'));
+    $response[] = d(d($text , 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
@@ -1938,7 +1938,7 @@ function opciones_adicionales_navegacion()
         ]
     ), "text-capitalize  col-xs-3");
 
-    $opciones[] = d(a_enid("CLIENTES", [
+    $opciones[] = d(a_enid("REFERENCIAS", [
         "href" => path_enid("clientes"),
         "class" => "strong black"
     ]), "text-capitalize  col-xs-3");
