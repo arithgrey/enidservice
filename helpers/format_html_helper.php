@@ -1974,8 +1974,8 @@ function navegacion(
                 [                    
                     "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]
-            ), 'd-md-flex justify-content-end mr-5');
-            $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-2');
+            ),'text-right');
+            $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-4');
         } else {
             $response[] = get_logo($in_session);
             $response[] = opciones_adicionales_navegacion();
