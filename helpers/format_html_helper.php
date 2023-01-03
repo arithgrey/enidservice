@@ -1961,7 +1961,7 @@ function navegacion(
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
                 _text_(
-                    span('Para que pases ya! alguiente nivel','strong'),
+                    span('Para que pases ya! al siguiente nivel','strong'),
                     'ofrecemos', span('pago contra entrega','strong'),
                     'en CDMX, hacemos',
                     span('envíos a toda la república','strong'),
