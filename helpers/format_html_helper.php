@@ -1912,7 +1912,7 @@ function opciones_adicionales_navegacion()
         'Ofrecemos', 
     span('pago contra entrega','white font-weight-bold'),
     'en CDMX, envíos y  venta por mayoreo', icon('fa fa-phone white'),span('(55)5296-7027','f11 font-weight-bold'));
-    $response[] = d(d($text , 'col-xs-12 white fp8 ml-3 text-uppercase'), ["class" => 'row bg_black white mb-2']);
+    $response[] = d(d($text , 'col-xs-12 white fp8 ml-2 text-uppercase'), ["class" => 'row bg_black white mb-2 mt-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
