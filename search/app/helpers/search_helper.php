@@ -15,7 +15,7 @@ if (!function_exists('invierte_date_time')) {
         $is_mobile = $data["is_mobile"];
         $categorias_destacadas = $data["categorias_destacadas"];
 
-        $response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 13);
+        //$response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 13);
         $lista_productos[] = d(get_format_filtros_paginacion($data, $data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
