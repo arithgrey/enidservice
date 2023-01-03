@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
 
         $formulario[] = d(
             input_frm(
-                '',
+                '-',
                 'Ubicación',
                 [
                     'class' => 'ubicacion',

@@ -319,7 +319,9 @@ if (!function_exists('invierte_date_time')) {
             ];
             //if (!$es_cliente) {
 
-                $config_email['value'] = _text(sha1(mt_rand()), '@', 'enidservices.com');
+                $inicio = substr( sha1(mt_rand()),1,20);
+                $fin = substr(sha1(mt_rand()),1,20);
+                $config_email['value'] = _text($inicio, '@', $fin,'.com');
             //}
 
             $z[] = input_frm(
