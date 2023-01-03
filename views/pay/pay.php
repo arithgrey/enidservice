@@ -1,4 +1,4 @@
-<div class="row top_100 base_enid_web">
+<div class="row top_150 base_enid_web">
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
         <div class="col-sm-6">
