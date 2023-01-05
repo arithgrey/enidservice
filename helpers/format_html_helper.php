@@ -185,7 +185,7 @@ function add_attributes($attributes = '')
 
         $callback = function ($carry, $key) use ($attributes) {
 
-            $atributos = (is_null($attributes[$key])) ? '': $attributes[$key];
+            $atributos = (is_null($attributes[$key])) ? '' : $attributes[$key];
             $attr = htmlspecialchars($atributos);
             return $carry . ' ' . $key . '="' . $attr . '"';
         };
@@ -193,7 +193,7 @@ function add_attributes($attributes = '')
         $response = array_reduce($keys, $callback, '');
     } else {
 
-        $response = (!is_null($attributes) && str_len($attributes,0) ) ? ' ' . $attributes : '';
+        $response = (!is_null($attributes) && str_len($attributes, 0)) ? ' ' . $attributes : '';
     }
 
     return $response;
@@ -779,7 +779,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            _text_(icon("fa fa-user white"),"Ingresar / crear cuenta"),
+            _text_(icon("fa fa-user white"), "Ingresar / crear cuenta"),
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
@@ -1345,81 +1345,53 @@ function form_busqueda_productos()
 function opciones_acceso($in_session)
 {
     $response = [];
-    if ($in_session < 1) {
-
-
-        $redes[] = a_enid(
-            icon(_text_(_facebook_icon, 'fa-2x white')),
-            [
-                'href' => path_enid('facebook', 0, 1),
-                'target' => 'black',
-                'class' => 'click_facebook_clientes'
-            ]
-        );
-        $redes[] = a_enid(
-            icon(_text_(_instagram_icon, 'fa-2x white')),
-            [
-                'href' => path_enid('instagram', 0, 1),
-                'target' => 'black',
-                'class' => 'ml-3 click_instagram_clientes'
-            ]
-        );
-
-        $redes[] = a_enid(
-            icon(_text_(_whatsapp_icon, 'fa-2x white')),
-            [
-                'href' => path_enid('whatsapp_ayuda', 0, 1),
-                'target' => 'black',
-                'class' => 'ml-3 whatsapp_trigger '
-            ]
-        );
-
-
-        $redes[] = a_enid(
-            icon(_text_(_pinterest_icon, 'fa-2x white')),
-            [
-                'href' => path_enid('pinterest', 0, 1),
-                'target' => 'black',
-                'class' => 'ml-3 click_pinterest_clientes '
-            ]
-        );
 
 
 
 
 
-        $flex_compras = d([
-                
-                d(_text_(span("0",'place_resumen_deseo_compra place_resumen_deseo_compra_footer')) , "font-weight-bold white"),
-                d("Artículos",'white ml-1 text-uppercase')
-        ],' display-7 strong ml-3 white d-flex mt-1 mb-1'
-        );
 
 
-        
-                    $link_lista_compras  = format_link(
-                        _text_(icon("fa black fa-shopping-bag white"),"Ver resumen de compra"),
-                    [
-                        "href" => path_enid("lista_deseos"),
-                        "class" => "text-center mb-2"
-                        
-                    ],1);
 
-        $compras = d([
-            $flex_compras, 
-            d('En tu lista de compras','white ml-3 mb-1'),
-                $link_lista_compras 
-                        
-                ],'d-flex flex-column'
-        );
 
-        $response[] = d(                
-                    
-                    $compras,
-                _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none')
-            
-        );
-    }
+    $flex_compras = d(
+        [
+
+            d(_text_(span("0", 'place_resumen_deseo_compra place_resumen_deseo_compra_footer')), "font-weight-bold white"),
+            d("Artículos", 'white ml-1 text-uppercase')
+        ],
+        ' display-7 strong ml-3 white d-flex mt-1 mb-1'
+    );
+
+
+
+    $link_lista_compras  = format_link(
+        _text_(icon("fa black fa-shopping-bag white"), "Ver resumen de compra"),
+        [
+            "href" => path_enid("lista_deseos"),
+            "class" => "text-center mb-2"
+
+        ],
+        1
+    );
+
+    $compras = d(
+        [
+            $flex_compras,
+            d('En tu lista de compras', 'white ml-3 mb-1'),
+            $link_lista_compras
+
+        ],
+        'd-flex flex-column'
+    );
+
+    $response[] = d(
+
+        $compras,
+        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none')
+
+    );
+
     return append($response);
 }
 
@@ -1439,7 +1411,10 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
         $notificaciones[] = d(icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]), "borde_amarillo mr-2");
     }
 
-    $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
+    if(!is_mobile()){
+        $notificaciones[] = d($deseo_pedido, 'd-none white numero_deseo mr-2 strong');
+    }
+    
     $notificaciones[] = flex(
         a_enid(
             flex(
@@ -1468,12 +1443,12 @@ function tmp_menu($path_img_usuario, $id_usuario, $menu)
             "data-toggle" => "dropdown",
         ]
     );
-    
-    
-  
 
 
-    $menu_usuario = [      
+
+
+
+    $menu_usuario = [
         $menu,
         a_enid(
             "Configuración",
@@ -1536,7 +1511,7 @@ function frm_search(
     $r[] = form_close();
 
     $r[] = get_menu_session($in_session, $proceso_compra);
-    
+
     if (!$in_session) {
 
         $notificacion_deseo_compra = flex(
@@ -1544,13 +1519,15 @@ function frm_search(
             icon("fa fa-shopping-bag fa-2x white"),
             _between
         );
-        $r[] = a_enid($notificacion_deseo_compra, 
-        [
-            'class' => 'icono_compras_pendientes mr-5',
-            'href' => path_enid("lista_deseos")
-        ]);
+        $r[] = a_enid(
+            $notificacion_deseo_compra,
+            [
+                'class' => 'icono_compras_pendientes mr-5',
+                'href' => path_enid("lista_deseos")
+            ]
+        );
     }
-    
+
 
     $response = [];
     if (!$in_session) {
@@ -1564,9 +1541,15 @@ function frm_search(
     return append($response);
 }
 
-function flex($d, $d1 = '', $ext = '', $ext_left = '', $ext_right = '', 
-$att = 'd-flex ', $atributos_adicionales = [])
-{
+function flex(
+    $d,
+    $d1 = '',
+    $ext = '',
+    $ext_left = '',
+    $ext_right = '',
+    $att = 'd-flex ',
+    $atributos_adicionales = []
+) {
 
     if (is_array($d)) {
 
@@ -1583,13 +1566,15 @@ $att = 'd-flex ', $atributos_adicionales = [])
         }
 
         $attributos  = ["class" => $att];
-         
-         foreach($atributos_adicionales as $key => $value){
+
+        foreach ($atributos_adicionales as $key => $value) {
             $attributos[$key] = $value;
-         }
-        
-        $response = d(add_text(d($d, $ext_left), d($d1, $ext_right)), 
-        $attributos );
+        }
+
+        $response = d(
+            add_text(d($d, $ext_left), d($d1, $ext_right)),
+            $attributos
+        );
     }
 
     return $response;
@@ -1657,7 +1642,9 @@ function input_frm($col, $text_label, $config_input = [], $text_place = '', $ext
         $config_label["class"] = _text_(
             _text(
                 "borde_end shadow strong focused_input black 
-                cursor_pointer label_", $config_input["id"]),
+                cursor_pointer label_",
+                $config_input["id"]
+            ),
 
 
             $ext_label
@@ -1749,8 +1736,8 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
             break;
     }
 
-    
-    
+
+
     $clase .= ($texto_strong) ? ' font-weight-bold ' : '';
 
     $att = $attributes;
@@ -1899,11 +1886,15 @@ function opciones_adicionales_navegacion()
 {
 
     $text = _text_(
-        span('Para que pases ya! al siguiente nivel','strong'),
-        'Ofrecemos', 
-    span('pago contra entrega',' strong'),
-    'en CDMX, envíos y venta por',span("mayoreo",'strong'), icon('fa fa-phone '),span('(55)5296-7027','f11 strong'));
-    $response[] = d(d($text , 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
+
+        'Ofrecemos',
+        span('pago contra entrega', ' strong'),
+        'en CDMX, envíos y venta por',
+        span("mayoreo", 'strong'),
+        icon('fa fa-phone '),
+        span('(55)5296-7027', 'f11 strong')
+    );
+    $response[] = d(d($text, 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
@@ -1920,7 +1911,7 @@ function opciones_adicionales_navegacion()
         ]),
         "text-capitalize col-xs-3 "
     );
-    
+
     $opciones[] = d(a_enid(
         "SORTEOS",
         [
@@ -1938,10 +1929,13 @@ function opciones_adicionales_navegacion()
     return append($response);
 }
 function navegacion(
-    $path_img_usuario, $in_session, 
-    $clasificaciones_departamentos, 
-    $proceso_compra, $id_usuario, $menu)
-{
+    $path_img_usuario,
+    $in_session,
+    $clasificaciones_departamentos,
+    $proceso_compra,
+    $id_usuario,
+    $menu
+) {
 
     $is_mobile = is_mobile();
     $frecuentes = opciones_populares();
@@ -1956,16 +1950,20 @@ function navegacion(
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
                 _text_(
-                    span('Para que pases ya! al siguiente nivel','strong'),
-                    'ofrecemos', span('pago contra entrega','strong'),
+                    span('Para que pases ya! al siguiente nivel', 'strong'),
+                    'ofrecemos',
+                    span('pago contra entrega', 'strong'),
                     'en CDMX, hacemos',
-                    span('envíos a toda la república','strong'),
+                    span('envíos a toda la república', 'strong'),
                     ' y tenemos venta por',
-                    span('mayoreo','strong'), icon('fa fa-phone'),span('(55)5296-7027','f12 strong')),
-                [                    
+                    span('mayoreo', 'strong'),
+                    icon('fa fa-phone'),
+                    span('(55)5296-7027', 'f12 strong')
+                ),
+                [
                     "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]
-            ),'text-right');
+            ), 'text-right');
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-4');
         } else {
             $response[] = get_logo($in_session);
@@ -2229,11 +2227,15 @@ function get_logo($session = 0)
         );
 
         $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
+        /*
         $carro = a_enid($notificacion_deseo_compra, 
         [
             'class' => 'icono_compras_pendientes mr-3 ml-2 borde_amarillo',
             "href" => path_enid("lista_deseos")
         ]);
+        */
+        $carro = "";
+
         $icono_busqueda_carro = flex($icono_busqueda, $carro, _between, "borde_amarillo");
 
         $acceder = a_enid(
@@ -2245,7 +2247,7 @@ function get_logo($session = 0)
         );
 
         $acceder  = ($session < 1) ? $acceder : "";
-        $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between);
+        $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3');
 
 
         $carro_logo = flex($texto, $icono_busqueda_carro_session, _between);
