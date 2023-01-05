@@ -1388,45 +1388,36 @@ function opciones_acceso($in_session)
 
 
 
-        
-        $texto_lead = d("5% descuento para nuevos clientes!", 'white');
-        
-        $link = d(
-            "cupón",
-            [
-                "href" => path_enid('whatsapp_descuento', 0, 1),
-                "class" => "text-center bg-white borde_accion p-2 border_enid col black text-uppercase strong underline border border-info"
-            ]
-        );        
-        $texto = flex(
-            $texto_lead,
-            $link,
-            _between,
-            "col-xs-7 p-0",
-            "col-xs-5 p-0"
-
+        $flex_compras = d([
+                
+                d(_text_(span("0",'place_resumen_deseo_compra place_resumen_deseo_compra_footer')) , "font-weight-bold white"),
+                d("Artículos",'white ml-1 text-uppercase')
+        ],' display-7 strong ml-3 white d-flex mt-1 mb-1'
         );
 
-        $whatsApp = a_enid(
-            $texto,
-            [
-                "href" => path_enid('whatsapp_descuento', 0, 1),
-                "class" => "white whatsapp_trigger borde_amarillo mb-2 mt-2",
-                "target" => "_black"
-            ]
+
+        
+                    $link_lista_compras  = format_link(
+                        _text_(icon("fa black fa-shopping-bag white"),"Ver resumen de compra"),
+                    [
+                        "href" => path_enid("lista_deseos"),
+                        "class" => "text-center mb-2"
+                        
+                    ],1);
+
+        $compras = d([
+            $flex_compras, 
+            d('En tu lista de compras','white ml-3 mb-1'),
+                $link_lista_compras 
+                        
+                ],'d-flex flex-column'
         );
 
-        $response[] = d(
-            flex(
-                $whatsApp,
-                d($redes, 'd-flex'),
-                _text_(_between, 'contenedor-lateral-menu acceder_vender fixed-bottom mt-1'),
-
-                "col-xs-9 fp9 ",
-                "mx-auto white fp7 col-xs-3 p-0 text-uppercase",
-
-            ),
-            "d-block d-md-none cupon_seccion_footer"
+        $response[] = d(                
+                    
+                    $compras,
+                _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none')
+            
         );
     }
     return append($response);
