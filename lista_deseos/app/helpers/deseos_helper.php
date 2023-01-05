@@ -378,7 +378,7 @@ if (!function_exists('invierte_date_time')) {
 
             $seleccionar_todo = input(
                 [
-                    "type" => "checkbox",
+                    "type" => "hidden",
                     "class" => "cobro_monto_mayor",
                     "id" => "cobro_monto_mayor"
                 ]
@@ -386,17 +386,11 @@ if (!function_exists('invierte_date_time')) {
 
 
             $extra = ($es_administrador_o_vendedor) ? "" : "d-none";
-            $extra_mb = (is_mobile()) ? "white" : "black strong";
-
-            $seccion_cobro_externo[] = flex(
-                $seleccionar_todo,
-                "¿Cobrasté algún monto mayor?",
-                _text_("mt-5 text-uppercase border-bottom cobro_texto", $extra_mb),
-                "mr-3"
-            );
+   
+            
 
             $seccion_cobro_externo[] = hiddens(["class" => "cobro_visible", "value" => 0]);
-            $seccion_cobro_externo[] = input_frm(
+            $seccion_cobro_externo[] = d(input_frm(
                 "",
                 "",
 
@@ -407,7 +401,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => _text_("cobro_secundario d-none"),
                     "value" => 0
                 ]
-            );
+                ),'d-none');
 
             $response[] = d($seccion_cobro_externo, $extra);
 
@@ -621,7 +615,7 @@ if (!function_exists('invierte_date_time')) {
             $eliminar = d(
                 "Eliminar",
                 [
-                    "class" => "cursor_pointer hover_black",
+                    "class" => "cursor_pointer hover_black mb-5",
                     "onclick" => $tipo
                 ]
             );
