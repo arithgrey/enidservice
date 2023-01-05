@@ -349,6 +349,7 @@ let response_deseo_compra = function (data) {
         $('.icono_compras_pendientes').attr('href', '../lista_deseos');
 
         $('.place_resumen_deseo_compra').addClass('mr-2 ');
+        $('.place_resumen_deseo_compra_footer').removeClass('mr-2 ');
 
     }
 
