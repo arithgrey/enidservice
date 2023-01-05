@@ -360,11 +360,13 @@ let response_metricas_perfil = data => {
     render_enid(".place_notificaciones_usuario", data.lista_pendientes);
     let total_deseo = parseInt(data.lista_deseo);
     if (total_deseo > 0) {
-        render_enid(".place_numero_deseo", total_deseo);
+        
+        render_enid(".place_resumen_deseo_compra", total_deseo);        
+        render_enid(".place_numero_deseo", total_deseo);                    
         $('.numero_deseo').removeClass('d-none');
 
     }
-
+    
     let num_pendientes = data.num_tareas_pendientes_text;
     set_option("num_pendientes", num_pendientes);
     $(document).on('visibilitychange', function () {

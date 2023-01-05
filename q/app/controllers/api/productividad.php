@@ -200,10 +200,15 @@ class productividad extends REST_Controller
 
     }
 
-    private function usuarios_en_lista_negra(array $usuarios)
+    private function usuarios_en_lista_negra($usuarios)
     {
-        $lista = [];
         $lista_completa = [];
+
+        if(!es_data($usuarios)){
+            return  $lista_completa;
+        }
+        $lista = [];
+        
         
         foreach ($usuarios as $row) {
 
