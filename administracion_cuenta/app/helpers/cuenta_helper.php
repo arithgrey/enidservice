@@ -462,7 +462,7 @@
             ]
         );
         $link_direccion_envio = tab(
-            text_icon("fa  fa-fighter-jet", "DIRECCIÓN DE ENVÍO"),
+            text_icon("fa fa-fighter-jet", "DIRECCIÓN DE ENVÍO"),
             '#tab_direccion',
             [
                 "id" => 'btn_direccion',

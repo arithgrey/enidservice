@@ -1848,12 +1848,25 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
+    /*
     $text = _text_(        
         span('Pago contra entrega, envío gratis y entregas el mismo día! en CDMX', ' strong'),
         icon('fa fa-phone '),
         span('(55)5296-7027', 'f11 strong')
     );
-    $response[] = d(d($text, 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
+    */
+    $text = _text_(                                        
+        span('Pago contra entrega','strong'), 
+        icon('fa fa-handshake-o fa-2x','strong'),
+        span('envío gratis','strong'),
+        icon('fa fa-gift fa-2x','strong'),
+        span('y entregas el mismo día!','strong'),
+        icon('fa fa-fighter-jet fa-2x','strong'),
+        span('en CDMX', 'strong'),                                        
+        icon('fa fa-phone fa-2x'),
+        span('(55)5296-7027', 'strong')
+    );
+    $response[] = d(d($text, 'col-xs-12 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
@@ -1909,9 +1922,17 @@ function navegacion(
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
                 _text_(                                        
-                    span('Pago contra entrega, envío gratis y entregas el mismo día! en CDMX', 'strong'),                    
-                    ', hacemos envios express a todo México',                    
-                    icon('fa fa-phone'),
+                    span('Pago contra entrega','strong'), 
+                    icon('fa fa-handshake-o fa-2x','strong'),
+                    span('envío gratis','strong'),
+                    icon('fa fa-gift fa-2x','strong'),
+                    span('y entregas el mismo día!','strong'),
+                    icon('fa fa-fighter-jet fa-2x','strong'),
+                    span('en CDMX', 'strong'),                                        
+                    span('envios express','strong'),
+                    icon('fa fa-truck fa-2x'),
+                    span('a todo México','strong'),                    
+                    icon('fa fa-phone fa-2x'),
                     span('(55)5296-7027', 'strong')
                 ),
                 [
