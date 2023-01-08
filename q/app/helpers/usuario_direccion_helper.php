@@ -43,7 +43,7 @@ if (!function_exists('invierte_date_time')) {
         $telefono_receptor = pr($direcciones_orden_compra, "telefono_receptor");
 
 
-        $r[] = _titulo("dirección de envío");        
+        $r[] = flex(icon('fa fa-home fa-2x'),_titulo("dirección de envío"), "","mr-2");        
         $r[] = get_format_direccion_envio_pedido(
             $data,
             $session,
@@ -79,8 +79,8 @@ if (!function_exists('invierte_date_time')) {
         
         $id_orden_compra = $param['id_orden_compra'];
         $form[] = d( flex(icon(_text_('fa-2x',_delivery_icon)),_titulo('Tienes una de dos')) , 'selector_ubicaciones_domicilio  text-center text-md-left');
-        $ubicacion = format_link('Ingresar ubicación', ['class' => 'ingreso_ubicacion']);
-        $domicilio = format_link('Registrar domicilio', ['class' => 'ingreso_texto_completo'], 0);
+        $ubicacion = format_link(flex(icon("fa fa-map-marker white mr-2"),'Ingresar ubicación') , ['class' => 'ingreso_ubicacion']);
+        $domicilio = format_link(flex(icon('fa fa-home'),'Registrar domicilio') , ['class' => 'ingreso_texto_completo'], 0);
 
         $form[] = d(
             flex_md($ubicacion, $domicilio, _text_(_between_md, 'mt-5 mb-5'), 'mb-5 mb-md-0'),
@@ -129,7 +129,7 @@ if (!function_exists('invierte_date_time')) {
         $formulario[] = d(
             input_frm(
                 '-',
-                'Ubicación',
+                flex(icon('fa fa-map-marker'),'Ubicación','','mr-2'),
                 [
                     'class' => 'ubicacion',
                     'name' => 'ubicacion',
