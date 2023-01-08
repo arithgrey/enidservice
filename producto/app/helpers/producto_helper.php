@@ -92,11 +92,11 @@ if (!function_exists('invierte_date_time')) {
 
         $imagenes = img_lateral($imgs, $nombre, $is_mobile);
 
-        $clases = " align-self-center mx-auto col-lg-2 d-none d-lg-block d-xl-block 
+        $clases = " align-self-center mx-auto col-md-2 d-none d-lg-block d-xl-block 
             d-md-block d-xl-none aviso_comision pt-3 pb-3";
         $clases_imagenes =
             " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 
-            col-lg-6 col-lg-offset-3 align-self-center";
+            col-md-6 col-md-offset-3 align-self-center";
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
@@ -180,14 +180,14 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
-        $pagina_producto[] =  d($data_response, 9);
+        $pagina_producto[] =  d($data_response, 8);
 
         if (!is_mobile()) {
-            $pagina_producto[] =  d($x, 'col-sm-3 border-left-ct');
+            $pagina_producto[] =  d($x, 'col-sm-4 border-left-ct mt-md-5 mt-lg-1');
         }
 
 
-        return d($pagina_producto,'row mt-5');
+        return d(d($pagina_producto,13),'col-sm-12 mt-md-5 ');
     }
     function botones_ver_mas($id_servicio)
     {
@@ -198,24 +198,9 @@ if (!function_exists('invierte_date_time')) {
             "onclick" => "log_operaciones_externas(28, $id_servicio)"
         ]);
 
-        $link_facebook =  format_link("Facebook", [
-            "href" => path_enid("facebook", 0, 1),
-            "class" => "border mt-4",
-
-            "onclick" => "log_operaciones_externas(29, $id_servicio)"
-        ], 0);
-
-        $link_instagram =  format_link("Instagram", [
-            "href" => path_enid("fotos_clientes_instagram", 0, 1),
-            "class" => "border mt-4",
-            "onclick" => "log_operaciones_externas(30, $id_servicio)"
-        ], 0);
-
+        
 
         $response[] = d($link_productos, 4, 1);
-        $response[] = d($link_facebook, 4, 1);
-        $response[] = d($link_instagram, 4, 1);
-
         return append($response);
     }
 
@@ -322,15 +307,15 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = d($link_valoraciones);
+        $r[] = d($link_valoraciones,12);
 
         $numero_compras = pr($servicio, "deseado");
         if ($numero_compras > 1) {
 
-            $r[] = d(_text_($numero_compras, "vendidos"), 'text-secondary');
+            $r[] = d(_text_($numero_compras, "vendidos"), 'text-secondary col-sm-12');
         }
 
-        $r[] = ($es_mobile > 0) ? "" : $nombre_producto;
+        $r[] = ($es_mobile > 0) ? "" : d($nombre_producto,12);
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
         
@@ -347,7 +332,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = $tallas;
 
-        $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-2 bg-white';
+        $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-2 bg-white row';
         return d($r, $extra);
     }
 
@@ -355,10 +340,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         if(es_link_afiliado_amazon($data)){
-            return format_link("Agregar al carrito de compras",
+            return d(format_link("Agregar al carrito de compras",
             [
                 "href" => es_link_afiliado_amazon($data,1)
-            ],2);
+            ],2),12);
         }
 
         $response = "";
@@ -432,15 +417,17 @@ if (!function_exists('invierte_date_time')) {
         $tipo = (is_mobile()) ? 2 : 4;
         
         $r[] = ganancia_comisionista($data);
-        $r[] = flex(
+        $r[] = flex_md(
             _titulo("PIEZAS", $tipo),
             select_cantidad_compra($es_servicio, $existencia),
-            _between
+            _between,
+            '',
+            'mr-2'
         );
 
         $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio), 'mt-5');
         $r[] = $tiempo_entrega;
-        $response[] = d($r, "contenedor_form");
+        $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
     }
     function es_link_afiliado_amazon($data, $regresa_link = 0){
@@ -1059,7 +1046,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = d($texto, "flex-column mb-3 mt-3");
             }
         }
-        return $response;
+        return d($response,12);
     }
 
     function text_servicio($es_servicio, $precio_unidad, $id_ciclo_facturacion, $data)
@@ -1210,7 +1197,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_(icon('fa fa-space-shuttle white fa-2x'),"Agenda aquí tu entrega!"),
+                    _text_(icon('fa fa-space-shuttle white'),"Agenda aquí tu entrega!"),
                     'text-center pt-3 pb-3'
                 ),
                 [

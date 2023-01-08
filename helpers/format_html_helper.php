@@ -1388,7 +1388,7 @@ function opciones_acceso($in_session)
     $response[] = d(
 
         $compras,
-        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none')
+        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none productos_en_carro_compra')
 
     );
 
@@ -1831,16 +1831,7 @@ function opciones_populares()
             "class" => "white mt-2  frecuentes strong",
             "href" => path_enid("rifas")
         ]
-    );
-    /*
-    $response[] = a_enid(
-        "PROMOCIONES",
-        [
-            "class" => "white    border-right frecuentes ",
-            "href" => path_enid("promociones")
-        ]
-    );
-    */
+    );    
 
     $response[] = a_enid(
         "REFERENCIAS",
@@ -1850,34 +1841,6 @@ function opciones_populares()
         ]
     );
 
-    /*
-    $response[] = a_enid(
-        icon(_text_(_facebook_icon, 'white')),
-        [
-            'href' => path_enid('facebook', 0, 1),
-            'target' => 'black',
-            'class' => 'ml-5 white  mt-1 click_facebook_clientes'
-        ]
-    );
-    $response[] = a_enid(
-        icon(_text_(_instagram_icon, 'white')),
-        [
-            'href' => path_enid('instagram', 0, 1),
-            'target' => 'black',
-            'class' => 'ml-5 white mt-1 click_instagram_clientes'
-        ]
-    );
-
-    $response[] = a_enid(
-        icon(_text_(_pinterest_icon, 'white')),
-        [
-            'href' => path_enid('pinterest', 0, 1),
-            'target' => 'black',
-            'class' => 'ml-5 white mt-1 click_pinterest_clientes'
-        ]
-    );
-    */
-
 
     return flex($response);
 }
@@ -1885,12 +1848,8 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    $text = _text_(
-
-        'Ofrecemos',
-        span('pago contra entrega', ' strong'),
-        'en CDMX, envíos y venta por',
-        span("mayoreo", 'strong'),
+    $text = _text_(        
+        span('Pago contra entrega, envío gratis y entregas el mismo día! en CDMX', ' strong'),
         icon('fa fa-phone '),
         span('(55)5296-7027', 'f11 strong')
     );
@@ -1949,21 +1908,16 @@ function navegacion(
             $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
-                _text_(
-                    span('Para que pases ya! al siguiente nivel', 'strong'),
-                    'ofrecemos',
-                    span('pago contra entrega', 'strong'),
-                    'en CDMX, hacemos',
-                    span('envíos a toda la república', 'strong'),
-                    ' y tenemos venta por',
-                    span('mayoreo', 'strong'),
+                _text_(                                        
+                    span('Pago contra entrega, envío gratis y entregas el mismo día! en CDMX', 'strong'),                    
+                    ', hacemos envios express a todo México',                    
                     icon('fa fa-phone'),
-                    span('(55)5296-7027', 'f12 strong')
+                    span('(55)5296-7027', 'strong')
                 ),
                 [
                     "class" =>  'black bg_yellow borde_white pr-4 pl-4'
                 ]
-            ), 'text-right');
+            ), 'text-right col-sx-12 text-right col-sx-12 d-none d-sm-block');
             $response[] = d([get_logo(), $frecuentes_busqueda], 'd-none d-md-block d-md-flex p-4');
         } else {
             $response[] = get_logo($in_session);

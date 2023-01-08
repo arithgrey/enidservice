@@ -60,7 +60,8 @@ let $primer_compra = $(primer_compra);
 
 
 $(document).ready(() => {
-
+    
+    $(".productos_en_carro_compra").addClass("d-none").removeClass("d-block");
     $('footer').addClass('d-none');
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");

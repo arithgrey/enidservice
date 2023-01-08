@@ -10,7 +10,7 @@ let $form_costo = $(".form_costo");
 let $en_lista_deseos =  $(".en_lista_deseos");
 $(document).ready(function () {
 
-
+    $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
@@ -43,6 +43,7 @@ $(document).ready(function () {
     $en_lista_deseos.click(function(){        
         $(".en_lista_deseos_producto").val(1);
     });
+    $('#sticky-footer').addClass("d-none");
 });
 
 let carro_compra_recompensa  = function(){

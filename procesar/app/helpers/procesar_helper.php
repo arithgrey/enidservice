@@ -60,7 +60,7 @@ if (!function_exists('invierte_date_time')) {
 
         $contenedor = d($z, "contenedo_compra_info");
         $contendor_compra = d($contenedor, "contenedor_compra");
-        $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2 mt-5 mb-5");
+        $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2 mb-5 mt-lg-5");
 
         return append($r);
     }
@@ -88,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
             $producto_carro_compra = $param["producto_carro_compra"];
             $recompensas = $param["recompensas"];
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
-            $r[] = d(_titulo($titulo), 'mb-5');
+            $r[] = d(flex(icon(_text_(_delivery_icon,'fa-2x')),_titulo($titulo)), 'mb-5');
 
             if (!$in_session) {
 

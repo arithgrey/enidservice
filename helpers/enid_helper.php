@@ -805,7 +805,7 @@ function dispositivo()
     }
 
     if ($tablet_browser > 0) {
-        return 0;
+        return 2;
     } elseif ($mobile_browser > 0) {
         return 1;
     } else {
@@ -1209,15 +1209,7 @@ function footer_opciones()
     );
 
 
-    $oportunidades[] = a_enid(
-        d("Calculador de ganancias", " strong"),
-        [
-            'class' => 'black fp9 borde_amarillo mt-2 p-3 ',
-            "href" => path_enid('simulador')
-
-        ]
-    );
-
+    
 
 
     $anuncio[] = d('¿Vendes artículos?', "black strong");
@@ -1281,7 +1273,7 @@ function footer_opciones()
         $seccion_productos,
         $asistencia_seccion,
         $sociales_seccion
-    ], 8, 1);
+    ],12);
 }
 function getRealIPAddress()
 {

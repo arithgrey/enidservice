@@ -186,18 +186,20 @@ if (!function_exists('invierte_date_time')) {
 
     function sin_productos()
     {
-
-        $r[] = busqueda_error();
         $r[] = h("UPS! AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 3);
-        $r[] = a_enid(btn(
-            "Explorar ahora!",
+        
+        $r[] = busqueda_error();
+        $r[] = format_link(
+            "Explorar productos!",
             [
 
-                "class" => "mt-5"
+                "class" => "mt-5 mb-5",
+                "href" => path_enid("home")
 
             ]
-        ), path_enid("home"));
-        return d($r, 'col-sm-4 col-sm-offset-4 mt-5  mt-md-3 text-center');
+            ,2);
+        
+        return d($r, 'col-sm-4 col-sm-offset-4  text-center');
     }
 
     function format_productos_deseados($data, $productos_deseados, $externo)
@@ -641,8 +643,11 @@ if (!function_exists('invierte_date_time')) {
 
         
       
+        $titulo = _titulo("Estos son los artículos que haz agregado a tu lista de compras!");
 
-        $data_response[] = d(d(_titulo("Estos son los artículos que haz agregado a tu lista de compras!"),12), 'row');                
+        $data_response[] = d(d(
+            flex( icon("fa fa-shopping-bag fa-2x mr-1"),$titulo)
+            ,12), 'row');                
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
         return d($data_response, "col-xs-12");

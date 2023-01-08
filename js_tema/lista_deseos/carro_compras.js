@@ -24,6 +24,7 @@ $(document).ready(function () {
     $form_segunda_compra.submit(segunda_compra);
     $cobro_secundario.keyup(cobro_secundario);
     $('#sticky-footer').addClass("d-none");
+    $(".productos_en_carro_compra").addClass("d-none").removeClass("d-block");
     
 
 });

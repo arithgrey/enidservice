@@ -81,8 +81,9 @@ class Home extends CI_Controller
     {
         $q = ['ip' => $this->input->ip_address()];
         $lista_deseo = $this->app->api("usuario_deseo_compra/index", $q);
-        $listado = $lista_deseo["listado"];
-        $recompensas = $lista_deseo["recompensas"];
+        
+        $listado = prm_def($lista_deseo,"listado",[]);
+        $recompensas = prm_def($lista_deseo, "recompensas",[]);
         $data["recompensas"] = $recompensas;
         $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
         
