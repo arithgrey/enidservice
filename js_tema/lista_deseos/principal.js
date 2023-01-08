@@ -8,14 +8,12 @@ let id_proyecto = 0;
 let id_usuario = 0;
 let id_ticket = 0;
 let flag_mostrar_solo_pendientes = 0;
-let id_proyecto_persona_forma_pago = "";
 let menu_actual = "clientes";
 let id_servicio = 0;
-let id_proyecto_persona_forma_pago = 0;
 let id_persona = 0;
 
 $(document).ready(() => {
-
+    
     set_option("action", $(".action").val());
     set_option("estado_compra", 6);
     set_option("interno", 1);
@@ -62,7 +60,7 @@ $(document).ready(() => {
 
     $(".num_alcance").click(alcance_producto);
 
-
+    
 
 });
 

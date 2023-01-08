@@ -35,17 +35,17 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d("Te registrasté, ingresa ahora!", $clases);
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5");
-        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'strong black registrar_cuenta f16 strong mt-1']);
+        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'black registrar_cuenta strong mt-1']);
         $x[] = a_enid(
-            "¿OLVIDASTE TU CONTRASEÑA?",
+            "¿Olvidasté tu contraseña?",
             [
                 "id" => "olvide-pass",
-                "class" => "recupara-pass  olvide_pass top_30 underline",
+                "class" => "recupara-pass  olvide_pass mt-3 underline",
             ]
         );
         $r[] = append($x);
 
-        return d($r, " wrapper_login mt-5");
+        return d($r, " wrapper_login");
 
     }
 

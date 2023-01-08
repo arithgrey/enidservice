@@ -919,7 +919,7 @@ class usuario extends REST_Controller
         $response = false;
 
         if (fx($param, "email,password,nombre,telefono")) {
-
+            $response = [];
             $response["usuario_existe"] = $this->usuario_model->evalua_usuario_existente($param);
             $response["usuario_registrado"] = 0;
             if ($response["usuario_existe"] == 0) {

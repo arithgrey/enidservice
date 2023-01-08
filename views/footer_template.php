@@ -96,8 +96,9 @@ CDMX
 <?= hiddens(['class' => 'en_lista_deseos_producto', 'value' => 0]) ?>
 <?php if ($footer_visible): ?>    
         <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>            
-            <?=footer_opciones()?>
-            <?= d("© 2022 ENID SERVICE.", 'col-lg-12 p-0 mt-5 strong fp9'); ?>
+            <?=d(footer_opciones(),13)?>
+            
+            <?= d(d("© 2022 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'),13); ?>
         </footer>    
 <?php endif; ?>
 </body>
