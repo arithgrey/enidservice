@@ -1388,7 +1388,7 @@ function opciones_acceso($in_session)
     $response[] = d(
 
         $compras,
-        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-none productos_en_carro_compra')
+        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-none d-sm-none productos_en_carro_compra')
 
     );
 
