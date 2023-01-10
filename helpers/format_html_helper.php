@@ -1388,7 +1388,7 @@ function opciones_acceso($in_session)
     $response[] = d(
 
         $compras,
-        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-block d-sm-none productos_en_carro_compra')
+        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-none productos_en_carro_compra')
 
     );
 
@@ -1848,25 +1848,19 @@ function opciones_populares()
 function opciones_adicionales_navegacion()
 {
 
-    /*
-    $text = _text_(        
-        span('Pago contra entrega, envío gratis y entregas el mismo día! en CDMX', ' strong'),
-        icon('fa fa-phone '),
-        span('(55)5296-7027', 'f11 strong')
-    );
-    */
+
     $text = _text_(                                        
         span('Pago contra entrega','strong'), 
         icon('fa fa-handshake-o fa-2x','strong'),
         span('envío gratis','strong'),
         icon('fa fa-gift fa-2x','strong'),
-        span('y entregas el mismo día!','strong'),
+        span('entregas el mismo día!','strong'),
         icon('fa fa-fighter-jet fa-2x','strong'),
         span('en CDMX', 'strong'),                                        
         icon('fa fa-phone fa-2x'),
         span('(55)5296-7027', 'strong')
     );
-    $response[] = d(d($text, 'col-xs-12 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
+    $response[] = d(d($text, 'col-xs-12  ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
     $opciones[] = d(
         "PRUEBA EN CASA",
         [
@@ -1926,7 +1920,7 @@ function navegacion(
                     icon('fa fa-handshake-o fa-2x','strong'),
                     span('envío gratis','strong'),
                     icon('fa fa-gift fa-2x','strong'),
-                    span('y entregas el mismo día!','strong'),
+                    span('entregas el mismo día!','strong'),
                     icon('fa fa-fighter-jet fa-2x','strong'),
                     span('en CDMX', 'strong'),                                        
                     span('envios express','strong'),

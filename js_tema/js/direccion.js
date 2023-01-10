@@ -12,7 +12,7 @@ let auto_completa_direccion = function () {
 
 function response_auto_complete_direccion(data) {
 
-    $(".productos_en_carro_compra").addClass("d-none").removeClass("d-block");
+    
     if (data.resultados > 0) {
         render_enid(".place_colonias_info", data.colonias);
         $(".parte_colonia_delegacion").show();

@@ -9,7 +9,7 @@ let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
 let $en_lista_deseos =  $(".en_lista_deseos");
 $(document).ready(function () {
-
+    $(".productos_en_carro_compra").removeClass("d-none");    
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     oculta_acceder();
     set_option([
