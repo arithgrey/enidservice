@@ -42,8 +42,7 @@ let $label_mail_acceso = $(".label_mail_acceso");
 let $label_pw = $(".label_pw");
 $(document).ready(function () {
     $('#sticky-footer').addClass("d-none");
-    $(".base_enid_web").removeClass("top_150").addClass("mt-3");
-    $(".productos_en_carro_compra").addClass("d-none").removeClass("d-block");    
+    $(".base_enid_web").removeClass("top_150").addClass("mt-3");    
     $('footer').ready(valida_seccion_inicial);
     $(soy_nuevo).click(mostrar_seccion_nuevo_usuario);
     $('.btn_soy_nuevo_simple').click(mostrar_seccion_nuevo_usuario);

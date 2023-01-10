@@ -12,7 +12,7 @@ let $ubicacion_delegacion = $form_ubicacion.find('.ubicacion_delegacion');
 
 let $adicionales_seccion = $(".adicionales_seccion");
 $(document).ready(() => {
-    $(".productos_en_carro_compra").addClass("d-none").removeClass("d-block");
+    
     $(".cerrar_modal").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     

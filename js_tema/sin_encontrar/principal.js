@@ -1,6 +1,6 @@
 "use strict";
 $(document).ready(() => {
-    
+    $(".productos_en_carro_compra").removeClass("d-none");        
     carga_productos_sugeridos();
 });
 
