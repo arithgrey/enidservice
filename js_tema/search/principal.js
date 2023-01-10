@@ -1,20 +1,13 @@
 "use strict";
-/*Sin session*/
-/*
-let $agregar_deseos_sin_antecedente = $('.agregar_deseos_sin_antecedente');
-let $quitar_deseo_sin_antecedente = $('.quitar_deseo_sin_antecedente');
-*/
 
 $(document).ready(() => {
+    $(".productos_en_carro_compra").removeClass("d-none");   
     $(".order").change(filtro);
     $("footer").ready(carga_promociones_sugerencias);
     $("footer").ready(carga_promociones_top);
     $("footer").ready(carga_ultimos_agregados);
 
-    /*
-    $agregar_deseos_sin_antecedente.click(agregar_deseos_sin_antecedente_gbl);
-    $quitar_deseo_sin_antecedente.click(quitar_deseo_sin_antecedente_gbl);
-    */
+    
     
 });
 
