@@ -18,14 +18,14 @@ if (!function_exists('invierte_date_time')) {
             "mt-1 black  mb-5"));
 
         $response[] = d($textos, 'col-sm-12 mt-5');
-        $formulario[] = "<form action='../pedidos/?seguimiento=' >";
+        $formulario[] = "<form action='../pedidos/' >";
         $formulario[] = d(
             add_text(
                 "",
                 input([
                     "class" => "input-field mh_50 border border-dark  solid_bottom_hover_3  ",
                     "placeholder" => "Escribe tu número de guía",
-                    "name" => "q"
+                    "name" => "seguimiento"
                 ])
             )
         );
