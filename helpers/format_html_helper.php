@@ -1797,50 +1797,41 @@ function _d()
 
 function opciones_populares()
 {
-
+    /*
     $response[] = d(
-        "PRUEBA EN CASA",
+        "Prueba en casa",
         [
             "class" => "white cursor_pointer  
             frecuentes borde_amarillo prueba_en_casa p-1 ml-5",
             "onclick" => "log_operaciones_externas(48)",
         ]
     );
+    */
 
+    
     $response[] = a_enid(
-        "POPULARES",
+        _text_(icon('white fa black fa fa-truck'),"Rastrea tu paquete"),
         [
-            "class" => "white mt-2  frecuentes strong",
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4")
+            "class" => "white frecuentes strong borde_amarillo p-1 ml-5",
+            "href" => path_enid("rastrea-paquete")
         ]
     );
 
     $response[] = a_enid(
-        "NOVEDADES",
+        "Pago contra entrega",
         [
-            "class" => "white mt-2   frecuentes strong",
-            "href" => path_enid(
-                "search",
-                "/?q2=0&q=&order=1"
-            )
+            "class" => "white mt-2 strong frecuentes ",
+            "href" => path_enid("forma_pago")
         ]
     );
+
     $response[] = a_enid(
-        "SORTEOS",
+        "Sorteos",
         [
             "class" => "white mt-2  frecuentes strong",
             "href" => path_enid("rifas")
         ]
     );    
-
-    $response[] = a_enid(
-        "REFERENCIAS",
-        [
-            "class" => "white mt-2 strong frecuentes ",
-            "href" => path_enid("clientes")
-        ]
-    );
-
 
     return flex($response);
 }
@@ -1850,48 +1841,33 @@ function opciones_adicionales_navegacion()
 
 
     $text = _text_(                                        
-        span('Pago contra entrega','strong'), 
-        icon('fa fa-handshake-o fa-2x','strong'),
-        span('envío gratis','strong'),
-        icon('fa fa-gift fa-2x','strong'),
-        span('entregas el mismo día!','strong'),
-        icon('fa fa-fighter-jet fa-2x','strong'),
-        span('en CDMX', 'strong'),                                        
+        span('Pago contra entrega',''), 
+        icon('fa fa-handshake-o fa-2x',''),
+        span('envío gratis',''),
+        icon('fa fa-gift fa-2x',''),
+        span('entregas el mismo día!',''),
+        icon('fa fa-fighter-jet fa-2x',''),
+        span('en CDMX', ''),                                        
         icon('fa fa-phone fa-2x'),
-        span('(55)5296-7027', 'strong')
+        span('(55)5296-7027', '')
     );
-    $response[] = d(d($text, 'col-xs-12  ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
+    $response[] = d(d($text, 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
+   
     $opciones[] = d(
-        "PRUEBA EN CASA",
-        [
-            "class" => "black  cursor_pointer  
-            frecuentes strong p-1 prueba_en_casa borde_end col-xs-3",
-            "onclick" => "log_operaciones_externas(48)",
-        ]
-
-    );
-    $opciones[] = d(
-        a_enid("POPULARES", [
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
+        a_enid(_text_(icon('black fa black fa fa-truck'),"Rastrea tu paquete"), [
+            "href" => path_enid("rastrea-paquete"),
             "class" => "strong black"
         ]),
-        "text-capitalize col-xs-3 "
+        "col-xs-6 "
     );
+   
 
-    $opciones[] = d(a_enid(
-        "SORTEOS",
-        [
-            "class" => "strong black",
-            "href" => path_enid("search", "/?q2=0&q=&order=2&order=4&sorteo=99")
-        ]
-    ), "text-capitalize  col-xs-3");
-
-    $opciones[] = d(a_enid("REFERENCIAS", [
-        "href" => path_enid("clientes"),
+    $opciones[] = d(a_enid("Pago contra entrega", [
+        "href" => path_enid("forma_pago"),
         "class" => "strong black"
-    ]), "text-capitalize  col-xs-3");
+    ]), " col-xs-6");
 
-    $response[] = d(d($opciones, _text_("row d-flex fp8 p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
+    $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
     return append($response);
 }
 function navegacion(
