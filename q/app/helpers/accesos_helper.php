@@ -52,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
                     if ($id_servicio > 0) {
                         $link = path_enid("producto", $id_servicio);
-                        $imagen  = d(a_enid(img($acceso["url_img_servicio"]), ["href" => $link, "target" => "_blank"]), "w_50");
+                        $imagen  = d(a_enid(img($acceso["url_img_servicio"]), ["href" => $link]), "w_50");
                         $contenido[] = d($imagen, "fp7 row");                        
                     }
                     $contenido[] = d($fecha_registro, "fp7 row");

@@ -858,8 +858,7 @@ if (!function_exists('invierte_date_time')) {
             if (strpos($row, 'https') !== FALSE) {
 
                 $conf = [
-                    'href' => $row,
-                    'target' => '_blank',
+                    'href' => $row,                    
                     'class' => 'text-uppercase black mt-3 border border-info text-center'
                 ];
 

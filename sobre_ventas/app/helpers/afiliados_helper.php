@@ -13,8 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $link_whatsApp =  format_link("Solicita el catálogo por whatsApp", [
             "href" => path_enid("whatsapp_catalogo",0,1),
             "class" => "mt-3",
-            "onclick" => "log_operaciones_externas(46)",
-            "target" => "_blank"
+            "onclick" => "log_operaciones_externas(46)"
         ],2);
 
        

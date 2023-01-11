@@ -78,8 +78,7 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 [
                     "class" => 'col-xs-2', 
-                    "href" => $path_servicio,
-                    "target" =>"_blank"
+                    "href" => $path_servicio                    
                 ]);
 
             }        
@@ -119,8 +118,7 @@ if (!function_exists('invierte_date_time')) {
             $link_imagen_servicio = a_enid(
                 $imagen_servicio,
                 [
-                    "href" => $link_servicio,
-                    "target" => "_blank"
+                    "href" => $link_servicio                    
                 ]
             );    
             

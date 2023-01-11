@@ -46,8 +46,8 @@ if (!function_exists('invierte_date_time')) {
                 format_link(
                     _text_(icon('fa fa-star white'),"Mira algunos de nuestros clientes"),
                     [
-                        "href" => path_enid("clientes"),
-                        "target" => "_black"
+                        "href" => path_enid("clientes")
+                        
                     ],2
                 )
             )

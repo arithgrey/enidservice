@@ -20,8 +20,7 @@
         
         $link = a_enid($url, 
             [
-                'href' =>$url , 
-                'target' => '_blank',
+                'href' =>$url,                 
                 'class' => 'black'
             ]
         );

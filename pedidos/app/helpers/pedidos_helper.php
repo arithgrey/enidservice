@@ -2357,8 +2357,7 @@ if (!function_exists('invierte_date_time')) {
                         append($contenido),
                         [
                             'class' => 'd-flex align-items-center  text-center border black',
-                            'href' => $path,
-                            'target' => '_blank',
+                            'href' => $path,                            
                         ]
                     ),
                     _text_('linea_venta', $tag_usuario)
@@ -3652,7 +3651,7 @@ if (!function_exists('invierte_date_time')) {
                 $texto_id_orden_compra = _text_('Orden de compra ', $id_orden_compra);
 
                 $path = path_enid('pedidos_recibo', $id_orden_compra);
-                $texto_id_orden_compra = a_enid($texto_id_orden_compra, ['href' => $path, 'target' => '_blank']);
+                $texto_id_orden_compra = a_enid($texto_id_orden_compra, ['href' => $path]);
 
                 $saldo_cubierto = _text_('Saldo Cubierto', money($row["saldo_cubierto"]));
                 $texto_cancelado = ($se_cancela) ? 'Cancelado' : '';
@@ -3696,7 +3695,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $linea = flex($seccion_registro, strip_tags($row['comentario']), 'mt-3 mb-3', _4p, 'col-sm-8 text-right');;
                 if ($link > 0) {
-                    $linea = a_enid($linea, ["href" => $path, 'target' => "_blank"]);
+                    $linea = a_enid($linea, ["href" => $path]);
                 }
 
 

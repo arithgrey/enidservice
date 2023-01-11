@@ -584,8 +584,7 @@ if (!function_exists('invierte_date_time')) {
             $link = a_enid(
                 $nombre_servicio,
                 [
-                    "href" => $url_servicio,
-                    "target" => "_blank",
+                    "href" => $url_servicio,                    
                     "class" => "black"
                 ]
             );

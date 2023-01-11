@@ -1009,14 +1009,12 @@ function valida_texto_maps($domicilio, $estilos = 1)
         if (strpos($row, 'https') !== FALSE) {
 
             $config = [
-                'href' => $row,
-                'target' => '_blank',
+                'href' => $row,                
                 'style' => 'color:blue;',
                 'class' => 'text-uppercase text-right mt-3'
             ];
             $configurador = [
-                'href' => $row,
-                'target' => '_blank',
+                'href' => $row,                
                 'class' => 'text-uppercase black mt-3 border border-info text-center'
             ];
             $conf = ($estilos < 0) ? $config : $configurador;
