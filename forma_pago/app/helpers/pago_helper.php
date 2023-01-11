@@ -12,11 +12,18 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $str = _d(
-            d(_titulo("FORMAS DE PAGO ENID SERVICE"), 'mb-2 mt-4'),
+            d(_titulo(
+                _text_(
+                    "Paga al recibir tus artículos y recíbelos el mismo día!",
+                    icon('fa fa-handshake-o'),
+                    "si vives en CDMX",
+                    icon('fa-gift')
+                )
+            ), 'mb-2 mt-4'),
             _text(
-                _titulo("Nos caracterizamos por 
+                d("Nos caracterizamos por 
                 cobrar al momento de que recibas tus 
-                artículos en tu domicilio y ofrecemos estas formas de pago", 5)
+                artículos en tu domicilio si eres ciudadano de CDMX, solo agenda tu pedido en nuestra página y a tu entrega ofrecemos estas formas de pago", 'black')
             ),
             _text(hr()),
             _text(
@@ -28,21 +35,32 @@ if (!function_exists('invierte_date_time')) {
             _text(
                 d(_text("2.-", strong("Transferencia electrónica")), 'mt-5'),
                 d('Validamos el pago a través de nuestra banca electrónica 
-                al momento de la transferencia')
+                al momento de la transferencia','black')
             ),
             _text(
                 d(_text("3.-", strong("tarjeta de crédito o débito")), 'mt-5'),
-                d("Podrás comprar con tu tarjeta bancaria con una comisión adicional del 3.5% del monto de tu pedido")
+                d("Podrás comprar con tu tarjeta bancaria con una comisión adicional del 8.5% del monto de tu pedido")
             ),
             hr(),
             d(
                 format_link(
-                    "Nuestros clientes",
+                    _text_(icon('fa fa-star white'),"Mira algunos de nuestros clientes"),
                     [
                         "href" => path_enid("clientes"),
                         "target" => "_black"
-                    ]
+                    ],2
                 )
+            )
+            ,
+            d(_titulo(
+                _text_(                    
+                    'También contamos con envíos express',
+                    icon('fa black fa fa-truck '),
+                    'a todo México'
+                )
+            ), 'mb-2 mt-5')
+            ,_text(
+                d("Solo agenda tu pedido en nuestra página y muy seguramente el costo de entrega vá de nuestra parte! y lo mejor de todo con la confianza de que miles de clientes nos respaldan.", 'black')
             )
         );
 

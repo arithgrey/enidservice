@@ -34,7 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [        
-        
+        "rastrea-paquete" => "rastrea-paquete",
         "amazon" =>"https://www.amazon.com.mx/s?me=A2ZBGOMVSPRBHV&marketplaceID=A1AM78C64UM0Y8",
         "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
