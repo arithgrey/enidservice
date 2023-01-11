@@ -8,8 +8,7 @@ if (!function_exists('invierte_date_time')) {
         $link_whatsApp =  format_link("Explicamé tu proyecto", [
             "href" => path_enid("whatsapp_catalogo_pagina_web", 0, 1),
             "class" => "border mt-5",
-            "onclick" => "log_operaciones_externas(47)",
-            "target" => "_blank"
+            "onclick" => "log_operaciones_externas(47)"            
         ]);
 
 

@@ -406,8 +406,7 @@ if (!function_exists('invierte_date_time')) {
                 a_enid(
                     $row["labores_resueltas"],
                     [
-                        "href" => '../desarrollo/',
-                        "target" => '_blank',
+                        "href" => '../desarrollo/',                        
                         "class" => 'strong',
                         "style" => 'color:blue !important;',
                     ]
@@ -1008,7 +1007,6 @@ if (!function_exists('invierte_date_time')) {
             "ACCEDE A TU CUENTA AHORA!",
             [
                 "href" => _text("https://enidservices.com/", _web, "/login/"),
-                "target" => "_blank",
                 "style" => "background: #001936;padding: 10px;color: white;margin-top: 23px;text-decoration: none;",
             ]
         );

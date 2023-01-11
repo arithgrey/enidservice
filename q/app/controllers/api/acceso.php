@@ -534,7 +534,7 @@ class Acceso extends REST_Controller
                 $total_en_session = $total_en_session + $en_session;
                 $total_sin_session = $total_sin_session + $sin_session;
                 $link = path_enid("producto", $id_servicio);
-                $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link, "target" => "_blank"]), "w_50");
+                $imagen  = d(a_enid(img($row["url_img_servicio"]), ["href" => $link]), "w_50");
 
 
                 $busqueda = $this->busqueda_por_accion($ids_paginas, $accesos_acciones, $id_servicio);

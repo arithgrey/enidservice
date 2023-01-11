@@ -1521,8 +1521,7 @@ if (!function_exists('invierte_date_time')) {
                 a_enid(
                     text_icon("fa fa-shopping-bag", "VER PUBLICACIÓN"),
                     [
-                        "href" => $url_productos_publico,
-                        "target" => "_blank",
+                        "href" => $url_productos_publico,                        
                         "style" => 'background: #002565;color: white!important;'
                     ]
                 ),
@@ -2574,8 +2573,7 @@ if (!function_exists('invierte_date_time')) {
             $link = a_enid(
                 $item,
                 [
-                    'href' => $path,
-                    "target" => "_blank"
+                    'href' => $path                    
                 ]
             );
             $response[] = d($link, 4, 1);

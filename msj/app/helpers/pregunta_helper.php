@@ -16,8 +16,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = a_enid("Enid Service",
             [
                 "class" => "btn btn-primary btn-lg",
-                "href" => "http://enidservices.com/",
-                "target" => "_blank",
+                "href" => "http://enidservices.com/",            
                 "style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
             ]);
         $r[] = hr("my-4");
@@ -25,8 +24,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = a_enid("Responde a tu cliente aquí!",
             [
                 "class" => "btn btn-primary btn-lg",
-                "href" => path_enid('login'),
-                "target" => "_blank",
+                "href" => path_enid('login'),                
                 "style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
             ]
         );
@@ -100,7 +98,6 @@ if (!function_exists('invierte_date_time')) {
             [
                 "class" => "btn btn-primary btn-lg",
                 "href" => "http://enidservices.com/",
-                "target" => "_blank",
                 "style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
             ]);
 
@@ -110,8 +107,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = a_enid("Accede a tu cuenta aquí!",
             [
                 "class" => "btn btn-primary btn-lg",
-                "href" => _text("http://enidservices.com/", _web, "/login/"),
-                "target" => "_blank",
+                "href" => _text("http://enidservices.com/", _web, "/login/"),                
                 "style" => "background: #015ec8;padding: 5px;color: white;margin-top: 23px;"
             ]);
 

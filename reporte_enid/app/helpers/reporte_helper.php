@@ -778,8 +778,8 @@ if (!function_exists('invierte_date_time')) {
                 [
 
                     "href" => path_enid('indicadores_ubicaciones', 0, 1),
-                    "class" => "text-uppercase black",
-                    "target" => "_blank"
+                    "class" => "text-uppercase black"
+                    
                 ]
             ),
 
@@ -788,8 +788,7 @@ if (!function_exists('invierte_date_time')) {
                 [
 
                     "href" => path_enid("entregas"),
-                    "class" => "text-uppercase black",
-                    "target" => "_blank"
+                    "class" => "text-uppercase black"
                 ]
             ),
             tab(
@@ -809,8 +808,7 @@ if (!function_exists('invierte_date_time')) {
                 [
 
                     "href" => "https://www.google.com/maps/d/viewer?mid=1d8Y5RvysKd3rjpCBWk-w5JPvNrCDn5Hc&usp=sharing",
-                    "class" => "text-uppercase black",
-                    "target" => "_blank"
+                    "class" => "text-uppercase black"
                 ]
             ),
             a_enid(

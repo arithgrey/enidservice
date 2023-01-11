@@ -169,8 +169,7 @@ if (!function_exists('invierte_date_time')) {
             $link_imagen_servicio = a_enid(
                 $imagen_servicio,
                 [
-                    "href" => $link_servicio,
-                    "target" => "_blank"
+                    "href" => $link_servicio
                 ]
             );
 
