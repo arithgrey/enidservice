@@ -14,7 +14,7 @@ class Home extends CI_Controller
     {   
         $param = $this->input->get();
         $data = $this->app->session();
-        $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");            
+        $data = $this->app->cssJs($data, "rastrea_paquete");            
         $this->app->pagina($data, busqueda_pedido($param), 1);
 
     }

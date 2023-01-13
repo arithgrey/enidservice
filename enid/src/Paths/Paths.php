@@ -300,7 +300,8 @@ class Paths
                 "meta_keywords" => "",
                 "desc_web" => "Formas de pago Enid Service",
                 "url_img_post" => create_url_preview("formas_pago_enid.png"),
-                "titulo" => 'Formas de pago Enid Service'
+                "titulo" => 'Formas de pago Enid Service',
+                "pagina" => 53
             ],
             "lista_deseos_preferencias" =>
             [
@@ -357,6 +358,20 @@ class Paths
 
 
             ],
+            "rastrea_paquete" => [
+                "css" =>
+                [
+                  
+
+                ],
+                "js" =>
+                [
+                  
+
+                ],
+                "pagina" =>  52
+            ]
+            ,
             "login" =>
             [
                 "css" =>

@@ -1797,17 +1797,7 @@ function _d()
 
 function opciones_populares()
 {
-    /*
-    $response[] = d(
-        "Prueba en casa",
-        [
-            "class" => "white cursor_pointer  
-            frecuentes borde_amarillo prueba_en_casa p-1 ml-5",
-            "onclick" => "log_operaciones_externas(48)",
-        ]
-    );
-    */
-
+    
     
     $response[] = a_enid(
         _text_(icon('white fa black fa fa-truck'),"Rastrea tu paquete"),
@@ -1818,12 +1808,20 @@ function opciones_populares()
     );
 
     $response[] = a_enid(
-        "Pago contra entrega",
+        _text_(icon('white fa fa-check-circle-o'),"Pago contra entrega"),
         [
             "class" => "white mt-2 strong frecuentes ",
             "href" => path_enid("forma_pago")
         ]
     );
+
+    $response[] = a_enid(
+        _text_(icon('white fa fa-handshake-o'),"Referencias"),
+        [
+            "class" => "white mt-2  frecuentes strong",
+            "href" => path_enid("clientes")
+        ]
+    );  
 
     $response[] = a_enid(
         "Sorteos",
@@ -1842,14 +1840,17 @@ function opciones_adicionales_navegacion()
 
     $text = _text_(                                        
         span('Pago contra entrega',''), 
-        icon('fa fa-handshake-o fa-2x',''),
-        span('envío gratis',''),
-        icon('fa fa-gift fa-2x',''),
-        span('entregas el mismo día!',''),
-        icon('fa fa-fighter-jet fa-2x',''),
-        span('en CDMX', ''),                                        
-        icon('fa fa-phone fa-2x'),
-        span('(55)5296-7027', '')
+                    icon('fa fa-handshake-o fa-2x',''),
+                    span('envío gratis',''),
+                    icon('fa fa-gift fa-2x',''),
+                    span('Pide hoy',''), 
+                    icon('fa fa-clock-o fa-2x',''),
+                    span('recibe hoy en CDMX',''),
+                    icon('fa fa-fighter-jet fa-2x',''),                                           
+                    span('y envios express',''),
+                    icon('fa fa-truck fa-2x'),
+                    icon('fa fa-phone fa-2x'),
+                    span('(55)5296-7027', '')
     );
     $response[] = d(d($text, 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
    
@@ -1862,7 +1863,8 @@ function opciones_adicionales_navegacion()
     );
    
 
-    $opciones[] = d(a_enid("Pago contra entrega", [
+    $opciones[] = d(a_enid(
+        _text_(icon('fa fa-check-circle-o'),"Pago contra entrega"), [
         "href" => path_enid("forma_pago"),
         "class" => "strong black"
     ]), " col-xs-6");
@@ -1892,14 +1894,15 @@ function navegacion(
             $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between));
             $response[] = d(a_enid(
                 _text_(                                        
-                    span('Pago contra entrega','strong'), 
+                    span('Paga al recibir tus artículos','strong'), 
                     icon('fa fa-handshake-o fa-2x','strong'),
                     span('envío gratis','strong'),
                     icon('fa fa-gift fa-2x','strong'),
-                    span('entregas el mismo día!','strong'),
-                    icon('fa fa-fighter-jet fa-2x','strong'),
-                    span('en CDMX', 'strong'),                                        
-                    span('envios express','strong'),
+                    span('Pide hoy','strong'), 
+                    icon('fa fa-clock-o fa-2x','strong'),
+                    span('recibe hoy al ubicarte en CDMX','strong'),
+                    icon('fa fa-fighter-jet fa-2x','strong'),                                           
+                    span('y envios express','strong'),
                     icon('fa fa-truck fa-2x'),
                     span('a todo México','strong'),                    
                     icon('fa fa-phone fa-2x'),
