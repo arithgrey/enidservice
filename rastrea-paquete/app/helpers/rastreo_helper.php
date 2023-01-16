@@ -3,8 +3,21 @@ if (!function_exists('invierte_date_time')) {
 
 
     function busqueda_pedido($param){
+
+
+                
+        $q = prm_def($param, "q");
+        $a = 0;
+        if(str_len($q,2)){
+            $info[] = d(h("Ups, no hay ningún resultado para ".'"' . prm_def($param, "q", "") . '" ', 4, "strong  borde_rojo p-2"));
+            $textos[] =  append($info);
+            $a ++;
+        }
+        
         $textos[] = d(h(_text_(icon('fa fa-truck'),"Rastrea tu pedido"), 4, "strong fz_30 text-uppercase"));        
-        $textos[] = d(d(
+        $extra = ($a > 0)? 'borde_rojo':'';
+        $textos[] = d(
+            d(
             _text_("Escribe tu", _text(icon("fa fa-hashtag"),
             "número de guía, también puedes consultar el estado de tu pedido al",
         ),
@@ -15,7 +28,7 @@ if (!function_exists('invierte_date_time')) {
         "el tiempo",icon("fa fa-clock-o")," promedio de entrega es de 1 hora con 30 minutos 
         en la zona centro de CDMX aún que este tiempo puede variar",icon("fa fa-space-shuttle")
     ), 
-            "mt-1 black  mb-5"));
+            _text_("mt-1 black  mb-5", $extra) ));
 
         $response[] = d($textos, 'col-sm-12 mt-5');
         $formulario[] = "<form action='../pedidos/' >";
@@ -29,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
                 ])
             )
         );
-        
+
         $formulario[] = btn("Rastrea tu pedido",["class" => "mt-4"]);
         $formulario[] = form_close();
 

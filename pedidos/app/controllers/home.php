@@ -25,8 +25,7 @@ class Home extends CI_Controller
         $seguimiento = prm_def($param, "seguimiento");
         $es_seguimiento = ($seguimiento > 0);
 
-        if ($es_seguimiento && ctype_digit($seguimiento)) {
-
+        if ($es_seguimiento) {
 
             $this->vista_seguimiento($param, $data);
         } else {
@@ -177,51 +176,65 @@ class Home extends CI_Controller
     {
 
         $id_orden_compra = $data["id_orden_compra"];
-        $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
-        $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
-        $productos_orden_compra = $data["productos_orden_compra"];
-        $es_administrador = es_administrador($data);
-        $notificacion = pr($productos_orden_compra, "notificacion_pago");
-        $id_servicio = pr($productos_orden_compra, "id_servicio");
-        $id_usuario_compra = pr($productos_orden_compra, "id_usuario");
-        $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
+        
+        if (ctype_digit($id_orden_compra) && es_data($data["productos_orden_compra"])) {
 
+            $data['url_img_post'] = path_enid('rastreo_pedido', 0, 1);
+            $notificacion_pago = (prm_def($param, "notificar") > 0) ? 1 : 0;
+            $productos_orden_compra = $data["productos_orden_compra"];
+            $es_administrador = es_administrador($data);
+            $notificacion = pr($productos_orden_compra, "notificacion_pago");
+            $id_servicio = pr($productos_orden_compra, "id_servicio");
+            $id_usuario_compra = pr($productos_orden_compra, "id_usuario");
+            $recompensa = $this->app->recompensa_orden_compra($id_orden_compra);
 
-        $data += [
-            "notificacion_pago" => ($notificacion > 0) ? 0 : $notificacion_pago,
-            "orden" => $id_orden_compra,
-            "status_ventas" => $this->get_estatus_enid_service(),
-            "evaluacion" => 1,
-            "tipificaciones" => $this->get_tipificaciones($productos_orden_compra),
-            "id_servicio" => $id_servicio,
-            "es_administrador" => $es_administrador,
-            "recompensa" => $recompensa
-        ];
+            $data += [
+                "notificacion_pago" => ($notificacion > 0) ? 0 : $notificacion_pago,
+                "orden" => $id_orden_compra,
+                "status_ventas" => $this->get_estatus_enid_service(),
+                "evaluacion" => 1,
+                "tipificaciones" => $this->get_tipificaciones($productos_orden_compra),
+                "id_servicio" => $id_servicio,
+                "es_administrador" => $es_administrador,
+                "recompensa" => $recompensa
+            ];
 
-        $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
-        $usuario_compra = $this->get_usuario($id_usuario_compra);
-        $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
+            $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
+            $usuario_compra = $this->get_usuario($id_usuario_compra);
+            $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
 
-        $data["es_lista_negra"] = $es_lista_negra;
-        $data["usuario_lista_negra"] = $usuario_lista_negra;
-        $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
-        $data = $this->agrega_usuario_entrega_tracker($data, $es_administrador);
+            $data["es_lista_negra"] = $es_lista_negra;
+            $data["usuario_lista_negra"] = $usuario_lista_negra;
+            $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
+            $data = $this->agrega_usuario_entrega_tracker($data, $es_administrador);
 
-        /*Se debe pasar al método */
-        $es_orden_pagada = es_orden_pagada($data);
-        $es_vendedor = $data["es_vendedor"];
-        $data["evaluacion"] = $this->evalua_compra($productos_orden_compra, $es_orden_pagada, $es_vendedor);
+            /*Se debe pasar al método */
+            $es_orden_pagada = es_orden_pagada($data);
+            $es_vendedor = $data["es_vendedor"];
+            $data["evaluacion"] = $this->evalua_compra($productos_orden_compra, $es_orden_pagada, $es_vendedor);
 
-        $data['usuario_cliente'] = $usuario_compra;
-        $productos_orden_compra = $data["productos_orden_compra"];
-        $data["productos_orden_compra"] =
-            $this->app->add_imgs_usuario($productos_orden_compra, "id_usuario_entrega");
-        $data = texto_pre_pedido($productos_orden_compra, $data);
-        $params = $this->input->get();
+            $data['usuario_cliente'] = $usuario_compra;
+            $productos_orden_compra = $data["productos_orden_compra"];
+            
+            $data["productos_orden_compra"] = $this->app->add_imgs_usuario($productos_orden_compra, "id_usuario_entrega");
+            
+            $data = texto_pre_pedido($productos_orden_compra, $data);
+            $params = $this->input->get();
 
-        $this->app->pagina($data, render_seguimiento($data, $params), 1);
+            $this->app->pagina($data, render_seguimiento($data, $params), 1);
+        }else{
+
+            $this->rastreo_pedido_error($param);
+            
+        }
+        
     }
-
+    private function rastreo_pedido_error($param){
+        
+        $q= _text('?q=',prm_def($param,"seguimiento"));
+        $path = path_enid("rastrea-paquete",$q);
+        redirect(_text("../",$path));                       
+    }
     private function evalua_compra($productos_orden_compra, $es_orden_pagada, $es_vendedor)
     {
 
@@ -604,7 +617,7 @@ class Home extends CI_Controller
                 "PUT"
             );
 
-            redirect(path_enid("pedido_seguimiento", $id_orden_compra,0,1));
+            redirect(path_enid("pedido_seguimiento", $id_orden_compra, 0, 1));
         }
     }
 

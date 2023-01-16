@@ -3569,7 +3569,9 @@ if (!function_exists('invierte_date_time')) {
 
         $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO",["class" => "black"]);
         if (tiene_domilio($domicilio, 1) < 1) {
-            $entrega = format_link($tipos_entrega[$tipo_entrega - 1], ['href' => $url]);
+            
+            $id_tipo_entrega = $tipo_entrega - 1;            
+            $entrega = format_link($tipos_entrega[$id_tipo_entrega], ['href' => $url]);
         }
 
 
