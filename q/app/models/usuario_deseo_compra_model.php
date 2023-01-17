@@ -52,13 +52,20 @@ class Usuario_deseo_compra_model extends CI_Model
 
     function total_ip($ip)
     {
+        /*0 para agregado a la lista, 3 para los que ya habían pasado al formulario de compra*/
+        $query_get = "SELECT COUNT(0)num                        
+                        FROM usuario_deseo_compra
+                        WHERE 
+                        ip = '" . $ip . "' 
+                        AND 
+                        status IN(0,3)";
+        return $this->db->query($query_get)->result_array()[0]["num"];
 
-        return $this->get(["COUNT(0)num"], ['ip' => $ip, 'status' => 0])[0]["num"];
     }
 
     function compra($ip)
     {
-
+        /*0 para agregado a la lista, 3 para los que ya habían pasado al formulario de compra*/
         $query_get = "SELECT d.*, 
                         d.id_usuario_deseo_compra id,
                         s.* 
@@ -66,7 +73,8 @@ class Usuario_deseo_compra_model extends CI_Model
                         INNER JOIN servicio s on d.id_servicio =  s.id_servicio 
                         WHERE 
                         d.ip = '" . $ip . "' 
-                        AND d.status = 0";
+                        AND 
+                        d.status IN(0,3)";
         return $this->db->query($query_get)->result_array();
     }
 

@@ -95,11 +95,7 @@ class usuario_deseo extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario,status")) {
 
-            $in = [
-                "id_usuario" => $param["id_usuario"],
-                "status" => $param["status"]
-            ];
-            $response = $this->usuario_deseo_model->get(["COUNT(0)num"], $in)[0]["num"];
+            $response = $this->usuario_deseo_model->total_deseo($param["id_usuario"]);
         }
 
         $this->response($response);
