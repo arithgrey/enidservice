@@ -114,7 +114,7 @@ class Usuario_deseo_model extends CI_Model
 				ON u.id_servicio =  s.id_servicio 
 				WHERE  u.id_usuario =  $id_usuario
 				AND 
-				u.status =  0
+				u.status IN(0,3)
 				ORDER BY u.fecha_registro desc   
 				LIMIT 50";
         return $this->db->query($query_get)->result_array();
@@ -170,5 +170,17 @@ class Usuario_deseo_model extends CI_Model
                         LIMIT 100";
         return $this->db->query($query_update);
     }
-    
+    function total_deseo($id_usuario){
+        
+            /*0 para agregado a la lista, 3 para los que ya habían pasado al formulario de compra*/
+            $query_get = "SELECT COUNT(0)num                        
+            FROM usuario_deseo
+            WHERE 
+            id_usuario = $id_usuario
+            AND 
+            status IN(0,3)";
+            return $this->db->query($query_get)->result_array()[0]["num"];
+
+    }
+
 }
