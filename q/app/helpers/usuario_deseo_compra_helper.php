@@ -68,8 +68,10 @@ if (!function_exists('invierte_date_time')) {
             if($ip_usuario_busqueda == $ip_usuario){
                 $url_img_servicio = $row["url_img_servicio"];        
                 $path_servicio = path_enid("producto", $row["id_servicio"]);
-
-                $response[] = a_enid(img(
+                $status  = $row["status"];
+                $texto_status = (intval($status) == 3) ? 'En checkout' : '';
+                
+                $link_imagen = a_enid(img(
                     [
                         "src" => $url_img_servicio,                    
                         'class' => 'mx-auto d-block mah_50',
@@ -80,6 +82,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => 'col-xs-2', 
                     "href" => $path_servicio                    
                 ]);
+
+                $response[] = flex($link_imagen,$texto_status,'flex-column');
 
             }        
         }
