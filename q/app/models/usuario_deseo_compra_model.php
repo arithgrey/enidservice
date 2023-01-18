@@ -45,7 +45,7 @@ class Usuario_deseo_compra_model extends CI_Model
         return $this->db->get($this->tabla)->result_array();
     }
 
-    function q_get($params = [], $id)
+    function q_get($id, $params = [])
     {
         return $this->get($params, ["id_usuario_deseo_compra" => $id]);
     }
@@ -60,7 +60,6 @@ class Usuario_deseo_compra_model extends CI_Model
                         AND 
                         status IN(0,3)";
         return $this->db->query($query_get)->result_array()[0]["num"];
-
     }
 
     function compra($ip)
@@ -105,9 +104,8 @@ class Usuario_deseo_compra_model extends CI_Model
                 ON u.id_servicio =  s.id_servicio 
                 WHERE  id_usuario_deseo_compra IN(" . $ids . ") ";
         return $this->db->query($query_get)->result_array();
-
     }
-    function baja_recompensa($id, $ip , $id_recompensa)
+    function baja_recompensa($id, $ip, $id_recompensa)
     {
 
         $query_update = "UPDATE usuario_deseo_compra SET id_recompensa = 0 
@@ -115,7 +113,7 @@ class Usuario_deseo_compra_model extends CI_Model
                         OR (ip = '$ip' && id_recompensa =  $id_recompensa ) LIMIT 100";
         return $this->db->query($query_update);
     }
-    
+
     function delete($params_where = [], $limit = 1)
     {
         $this->db->limit($limit);
@@ -124,5 +122,14 @@ class Usuario_deseo_compra_model extends CI_Model
         }
         return $this->db->delete($this->tabla, $params_where);
     }
-
+    function agregados()
+    {
+        /*0 para agregado a la lista, 3 para los que ya habían pasado al formulario de compra*/
+        $query_get = "SELECT *
+        FROM usuario_deseo_compra
+        WHERE 
+        status IN(0,3)
+        order by id_usuario_deseo_compra DESC LIMIT 1000";
+        return $this->db->query($query_get)->result_array();
+    }
 }

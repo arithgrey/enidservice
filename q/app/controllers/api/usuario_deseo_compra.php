@@ -62,7 +62,7 @@ class usuario_deseo_compra extends REST_Controller
     function agregados_GET()
     {
 
-        $deseo_compra = $this->usuario_deseo_compra_model->get([],["status" => 0],1000, 'id_usuario_deseo_compra');
+        $deseo_compra = $this->usuario_deseo_compra_model->agregados();
         $response = $this->app->add_imgs_servicio($deseo_compra);        
         $this->response(agregados($response));
     }   
@@ -137,7 +137,7 @@ class usuario_deseo_compra extends REST_Controller
             $response =  $this->usuario_deseo_compra_model->q_up("status", $status, $id);
             if ($status == 2) {
             
-                $deseo_compra = $this->usuario_deseo_compra_model->q_get([], $id);
+                $deseo_compra = $this->usuario_deseo_compra_model->q_get($id);
                 $ip = pr($deseo_compra, "ip");
                 $id_recompensa = pr($deseo_compra, "id_recompensa");
                             
@@ -165,7 +165,7 @@ class usuario_deseo_compra extends REST_Controller
             $response =  $this->usuario_deseo_compra_model->update(
                 ["status" => $status] , 
                 ["ip" => $ip],
-                10
+                100
             );
             
         }
