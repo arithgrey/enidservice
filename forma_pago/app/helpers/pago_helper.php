@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = img_pago();
 
 
-        return d($r, 6, 1);
+        return d($r,"col-md-6 col-md-offset-3 col-xs-12 mt-5");
     }
 
     function format_tipos_entrega()

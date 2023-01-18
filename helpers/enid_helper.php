@@ -1112,6 +1112,7 @@ function footer_opciones()
 
     $productos_footer[] = _titulo('Productos', 2, 'border_b_green');
 
+    /*
     $productos_footer[] = a_enid(
         'Descuentos',
         [
@@ -1119,6 +1120,7 @@ function footer_opciones()
             'class' => 'black fp9'
         ]
     );
+    */
 
     $productos_footer[] = a_enid(
         'Novedades',
@@ -1177,6 +1179,7 @@ function footer_opciones()
             'target' => '_black'
         ]
     );
+    /*
     $asistencia[] =  a_enid(
         '¿Costo de entrega?',
         [
@@ -1185,6 +1188,7 @@ function footer_opciones()
             'target' => '_black'
         ]
     );
+    */
     /**Oportunidades*/
 
 
@@ -1206,10 +1210,7 @@ function footer_opciones()
         ]
     );
 
-
-    
-
-
+    /*
     $anuncio[] = d('¿Vendes artículos?', "black strong");
     $anuncio[] = d('Anúnciate aquí!');
 
@@ -1220,19 +1221,7 @@ function footer_opciones()
             "onclick" => "log_operaciones_externas(49)",
         ]
     );
-
-    $auto[] = d('¿Vendes tu auto?', 'strong black');
-    $auto[] = d('Nosotros te ayudamos!');
-    $oportunidades[] = a_enid(
-        append($auto),
-        [
-
-            'class' => 'black fp9 mt-3 borde_green p-3 vende_tu_auto',
-            "onclick" => "log_operaciones_externas(50)",
-        ]
-    );
-
-
+    */
     $sociales[] = _titulo('SÍGUENOS', 2, 'border_b_green');
     $sociales[] = a_enid(
         icon(_text_(_facebook_icon, 'fa-2x')),
