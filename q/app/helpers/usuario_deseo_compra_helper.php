@@ -68,22 +68,29 @@ if (!function_exists('invierte_date_time')) {
             if($ip_usuario_busqueda == $ip_usuario){
                 $url_img_servicio = $row["url_img_servicio"];        
                 $path_servicio = path_enid("producto", $row["id_servicio"]);
-                $status  = $row["status"];
-                $texto_status = (intval($status) == 3) ? 'En checkout' : '';
                 
-                $link_imagen = a_enid(img(
+                $status = intval($row["status"]);
+                $texto_status = ($status === 3) ? 'En checkout' : '';
+                $class = ($status === 3) ? 'fp8 black borde_end' : '';
+                
+                $imagen = img(
                     [
                         "src" => $url_img_servicio,                    
                         'class' => 'mx-auto d-block mah_50',
                         "onerror" => "this.src='../img_tema/portafolio/producto.png'",
                     ]
-                ),
+                );
+
+                $imagen_tipo = flex($imagen,$texto_status,'flex-column','',$class);
+
+                $response[]= a_enid(
+                    $imagen_tipo,
                 [
                     "class" => 'col-xs-2', 
                     "href" => $path_servicio                    
                 ]);
 
-                $response[] = flex($link_imagen,$texto_status,'flex-column');
+                
 
             }        
         }
