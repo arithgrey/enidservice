@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
             1
         );
             
-        return d($r, 4, 1);
+        return d($r, 'col-md-4 col-md-offset-4 ');
         
     }
 

@@ -18,8 +18,7 @@
             $path_img_usuario, 
             $in_session, 
             $clasificaciones_departamentos,
-            $proceso_compra, 
-            $id_usuario, 
+            $proceso_compra,             
             $menu)?>
 <?= menu_session_mobil($in_session) ?>
 

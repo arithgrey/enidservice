@@ -22,11 +22,7 @@ if (!function_exists('invierte_date_time')) {
             "número de guía, también puedes consultar el estado de tu pedido al",
         ),
         icon('fa fa-phone'), 
-        span("(55)5296-7027,",'strong'),
-        "si tu pedido es modalidad", span("pago contra entrega,",'strong'),"mantente al tanto de la llamada del repartidor",
-        icon("fa fa-motorcycle"), 
-        "el tiempo",icon("fa fa-clock-o")," promedio de entrega es de 1 hora con 30 minutos 
-        en la zona centro de CDMX aún que este tiempo puede variar",icon("fa fa-space-shuttle")
+        span("(55)5296-7027,",'strong')
     ), 
             _text_("mt-1 black  mb-5", $extra) ));
 
