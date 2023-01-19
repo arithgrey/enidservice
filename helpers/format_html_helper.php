@@ -1345,13 +1345,13 @@ function form_busqueda_productos()
 function opciones_acceso($in_session)
 {
     $response = [];
+    
     $flex_compras = d(
         [
-
             d(_text_(span("0", 'place_resumen_deseo_compra place_resumen_deseo_compra_footer')), "font-weight-bold white"),
             d("Artículos", 'white ml-1 text-uppercase')
         ],
-        ' display-7 strong ml-3 white d-flex mt-1 mb-1'
+        'display-7 strong ml-3 white d-flex mt-1 mb-1'
     );
 
 
@@ -1366,9 +1366,25 @@ function opciones_acceso($in_session)
         1
     );
 
+    
+    $whatsApp = a_enid(
+        icon('fa fa-whatsapp white fa-3x'),
+        [
+            'href' => path_enid('whatsapp_ayuda', 0, 1)
+        ]
+
+    );
+    
+    $compra_whatsApp = flex(
+        $flex_compras, 
+        $whatsApp,
+        _between,
+        '',
+        'mr-5'
+    );
     $compras = d(
         [
-            $flex_compras,
+            $compra_whatsApp,
             d('En tu lista de compras', 'white ml-3 mb-1'),
             $link_lista_compras
 

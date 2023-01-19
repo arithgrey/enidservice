@@ -14,6 +14,7 @@
 </script>
 
 <body class="h-100 d-flex flex-column">
+
 <?=navegacion(
             $path_img_usuario, 
             $in_session, 
