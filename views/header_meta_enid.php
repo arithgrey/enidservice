@@ -54,6 +54,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="photo" content="<?= $url_img_post ?>">
 <meta name="p:domain_verify" content="db70882d0b8730259e2a264f997224b3"/>
 <meta name="facebook-domain-verification" content="wsvdn89zybnrs300qx1bnnt8gn8lcj" />
+<meta name="google-site-verification" content="CJS0NBMHui2iIcJZiEaBVjFnOfnjSwje0lluY6WmFIA" />
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
 <script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>
