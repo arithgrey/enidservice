@@ -4,6 +4,8 @@ header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
 <title><?= $titulo ?></title>
+<head>
+<meta name="google-site-verification" content="CRCERpjQ1KolmfT9LEgiEC1GbnkyxdZvdd8MVqs1lY4" />
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <?= meta('keywords', $meta_keywords . " "); ?>
@@ -54,7 +56,6 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta itemprop="photo" content="<?= $url_img_post ?>">
 <meta name="p:domain_verify" content="db70882d0b8730259e2a264f997224b3"/>
 <meta name="facebook-domain-verification" content="wsvdn89zybnrs300qx1bnnt8gn8lcj" />
-<meta name="google-site-verification" content="CJS0NBMHui2iIcJZiEaBVjFnOfnjSwje0lluY6WmFIA" />
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
 <script type="text/javascript" src="../js_tema/jquery.min.js?<?= version_enid ?>">
 </script>
@@ -68,6 +69,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
+</head>
 <input type="hidden" class="http_referer_enid" value="<?= $enlace; ?>"/>
 <input type="hidden" class="ip_referer_enid" value="<?= getRealIPAddress(); ?>"/>
 
