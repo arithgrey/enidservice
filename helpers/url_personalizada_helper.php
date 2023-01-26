@@ -33,7 +33,10 @@ function accesos_test()
 
 function accesos_enid()
 {
-     $base_url = [        
+     $base_url = [    
+        "como-es-el-proceso-de-devolucion-de-un-pedido" => "como-es-el-proceso-de-devolucion-de-un-pedido",
+        "que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad" => "que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad",
+        "cambios-y-devoluciones" => "cambios-y-devoluciones",
         "rastrea-paquete" => "rastrea-paquete",
         "amazon" =>"https://www.amazon.com.mx/s?me=A2ZBGOMVSPRBHV&marketplaceID=A1AM78C64UM0Y8",
         "fotos_clientes_facebook" => "https://www.facebook.com/enidservicemx/",

@@ -1822,22 +1822,25 @@ function opciones_populares()
             "href" => path_enid("forma_pago")
         ]
     );
-
+    
     $response[] = a_enid(
-        _text_(icon('white fa fa-handshake-o'),"Clientes"),
+        _text("Referencias"),
         [
             "class" => "white mt-2  ml-sm-5 strong d-none d-lg-block",
             "href" => path_enid("clientes")
         ],0
-    );  
-
+    );
+    
+    
     $response[] = a_enid(
-        "Sorteos",
+        "Cambios y Devoluciones",
         [
             "class" => "white mt-2 ml-sm-5 strong d-none d-lg-block",
-            "href" => path_enid("rifas")
+            "href" => path_enid("cambios-y-devoluciones")
         ],0
-    );    
+    );
+    
+        
 
     return flex($response);
 }

@@ -1,3 +1,7 @@
+.hover_bg_black:hover{
+    background: black;
+    color: white!important;
+}
 .input_busqueda_producto{
     height: 45px!important;
 }
