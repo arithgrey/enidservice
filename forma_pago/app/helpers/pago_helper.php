@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
             _text(
                 d("Nos caracterizamos por 
                 cobrar al momento de que recibas tus 
-                artículos en tu domicilio si eres ciudadano de CDMX, solo agenda tu pedido en nuestra página y a tu entrega ofrecemos estas formas de pago", 'black')
+                artículos en tu domicilio si eres ciudadano de CDMX, solo agenda tu pedido en nuestra página y a tu entrega ofrecemos estas formas de pago", 'black mt-3')
             ),
             _text(hr()),
             _text(
@@ -41,7 +41,7 @@ if (!function_exists('invierte_date_time')) {
                 d(_text("3.-", strong("tarjeta de crédito o débito")), 'mt-5'),
                 d("Podrás comprar con tu tarjeta bancaria con una comisión adicional del 8.5% del monto de tu pedido")
             ),
-            hr(),
+            
             d(
                 format_link(
                     _text_(icon('fa fa-star white'),"Mira algunos de nuestros clientes"),
@@ -49,9 +49,32 @@ if (!function_exists('invierte_date_time')) {
                         "href" => path_enid("clientes")
                         
                     ],2
+                ),'top_100'
+            ),
+            hr("top_100 borde_black"),
+                d(_titulo(
+                    _text_(
+                        "Pago contra entrega en el estado de México",
+                        icon('fa fa-check')                    
+                    )
+                    ),'mt-5'
                 )
-            )
             ,
+            _text(                
+                d(
+                    _text_("La mecánica de pago contra entrega al 100% la tenemos disponible solo en CDMX, (no te desmotives) 
+                si vives en el estado de México, puedes acceder a este beneficio, el costo de envió es de 100 pesos los cuales deben ser liquidados para 
+                que podamos llevarte tus artículos el mismo día o el día siguiente según sea la distancia y hora en que agendes tu pedido, 
+                puedes seguir la entrega de tu pedido en nuestro localizador con tu número de guia signado",
+                format_link( _text_(icon('fa fa-fighter-jet fa-2x white'), "Localiza tu pedido"),
+                
+                [
+                    "href" => path_enid("rastrea-paquete"),
+                    "class" => "top_100 white"
+                ],2)),'mt-3')
+            ),
+            
+            hr("top_100 borde_black"),
             d(_titulo(
                 _text_(                    
                     'También contamos con envíos express',
@@ -60,7 +83,7 @@ if (!function_exists('invierte_date_time')) {
                 )
             ), 'mb-2 mt-5')
             ,_text(
-                d("Solo agenda tu pedido en nuestra página y muy seguramente el costo de entrega vá de nuestra parte! y lo mejor de todo con la confianza de que miles de clientes nos respaldan.", 'black')
+                d("Solo agenda tu pedido en nuestra página y muy seguramente el costo de entrega vá de nuestra parte! y lo mejor de todo con la confianza de que miles de clientes nos respaldan.", 'black mt-3')
             )
         );
 
