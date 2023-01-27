@@ -1,14 +1,13 @@
 "use strict";
 
 $(document).ready(() => {
+    
     $(".productos_en_carro_compra").removeClass("d-none");   
     $(".order").change(filtro);
     $("footer").ready(carga_promociones_sugerencias);
     $("footer").ready(carga_promociones_top);
     $("footer").ready(carga_ultimos_agregados);
-
-    
-    
+        
 });
 
 let filtro = () => {
