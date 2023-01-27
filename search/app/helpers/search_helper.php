@@ -80,15 +80,26 @@ if (!function_exists('invierte_date_time')) {
                 );
 
                 $response[] = d("Llevamos tus arreglos florales a tu pareja y paga 
-                                cuando las tenga en sus manos!",'black col-sm-12 p-0');
+                                cuando las tenga en sus manos!", 'black col-sm-12 p-0');
 
+                break;
+
+            case "kitsmasvendidos":
+
+                $response[] = d(
+                    "Pasa ya! al siguiente nivel",
+                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                );
+
+                $response[] = d("Te llevamos tus pesas y pagas cuando las tenga en sus manos!", 'black col-sm-12 p-0');
                 break;
 
             default:
+
                 $response = "";
                 break;
         }
-        return d(d(d($response,13),' col-sm-10 col-sm-offset-1'),13);
+        return d(d(d($response, 13), ' col-sm-10 col-sm-offset-1'), 13);
     }
     function oferta_delivery()
     {
