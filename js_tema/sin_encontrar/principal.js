@@ -1,6 +1,7 @@
 "use strict";
 $(document).ready(() => {
     $(".productos_en_carro_compra").removeClass("d-none");        
+    $(".categorias_envio_pce").addClass("d-md-block");
     carga_productos_sugeridos();
 });
 

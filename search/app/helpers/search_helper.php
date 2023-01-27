@@ -15,14 +15,14 @@ if (!function_exists('invierte_date_time')) {
         $is_mobile = $data["is_mobile"];
         $categorias_destacadas = $data["categorias_destacadas"];
 
-        //$response[] = d(get_format_menu_categorias_destacadas($is_mobile, $categorias_destacadas), 13);
-        $lista_productos[] = d(get_format_filtros_paginacion($data, $data["filtros"], $data["order"], $paginacion, $is_mobile), 13);
+        $response[] = baner_compra_tipo_producto($data);
+        $lista_productos[] = d(get_format_filtros_paginacion($data, $data["filtros"], $data["order"], $paginacion, $is_mobile), "row mt-5");
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);
 
         if (prm_def($data, "es_sorteo") > 1) {
-            
+
             $textos_rifas_pasadas = _text_(
                 crea_estrellas(3),
                 "Resultados 
@@ -30,13 +30,14 @@ if (!function_exists('invierte_date_time')) {
                     pasados",
                 crea_estrellas(3)
             );
-            $response[] = d(a_enid($textos_rifas_pasadas,
-            [
-                "class" => 'col-sm-10 col-sm-offset-1 text-center display-7 
+            $response[] = d(a_enid(
+                $textos_rifas_pasadas,
+                [
+                    "class" => 'col-sm-10 col-sm-offset-1 text-center display-7 
                 borde_accion resultados_sorteo p-2 pb-2 pt-2 bg_black white borde_green cursor_pointer',
-                "href" => path_enid("resultados_rifas"),
+                    "href" => path_enid("resultados_rifas"),
 
-            ]
+                ]
             ), 13);
         }
 
@@ -51,7 +52,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5");
+        $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5 ssss");
         $link_promociones = format_link("Más promociones", [
             "href" => path_enid("promociones"),
             "class" => "border"
@@ -64,23 +65,51 @@ if (!function_exists('invierte_date_time')) {
 
         return d($response, 12);
     }
-    function oferta_delivery(){
+    function baner_compra_tipo_producto($data)
+    {
 
-        $anuncio[] = d('¿Necesitas enviar un paqueten dentro de cdmx?',"black strong f12");
+        $q = prm_def($data, "q");
+        $response = [];
+        switch ($q) {
+
+            case "para-los-que-evian-flores":
+
+                $response[] = d(
+                    "Envía felicidad y paga cuando reciba tu detalle!",
+                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                );
+
+                $response[] = d("Llevamos tus arreglos florales a tu pareja y paga 
+                                cuando las tenga en sus manos!",'black col-sm-12 p-0');
+
+                break;
+
+            default:
+                $response = "";
+                break;
+        }
+        return d(d(d($response,13),' col-sm-10 col-sm-offset-1'),13);
+    }
+    function oferta_delivery()
+    {
+
+        $anuncio[] = d('¿Necesitas enviar un paqueten dentro de cdmx?', "black strong f12");
         $anuncio[] = d('Nosotros lo llevamos por ti!');
-        $anuncio[] = d(format_link("Cotiza ahora!",
-        [
-            "href" => path_enid("whatsapp_viajes",0,1), 
-            "class"=> "mt-3"
-        ], 2));
-        
+        $anuncio[] = d(format_link(
+            "Cotiza ahora!",
+            [
+                "href" => path_enid("whatsapp_viajes", 0, 1),
+                "class" => "mt-3"
+            ],
+            2
+        ));
+
         return d(
             d($anuncio),
-            [            
-                'class' => 'black borde_black mt-5 p-3',                
+            [
+                'class' => 'black borde_black mt-5 p-3',
             ]
         );
-
     }
     function sin_resultados($param)
     {
@@ -226,11 +255,12 @@ if (!function_exists('invierte_date_time')) {
         $r[] = '</select>';
 
         $response =  append($r);
-        if(is_mobile()){
+        if (is_mobile()) {
             $response = d(
-                flex("Ordenar por", $response, _between, 'display-7 black ml-2 color_orden')
-                ," mt-5");
-        }   
+                flex("Ordenar por", $response, _between, 'display-7 black ml-2 color_orden'),
+                " mt-5"
+            );
+        }
         return $response;
     }
 
