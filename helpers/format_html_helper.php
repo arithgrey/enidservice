@@ -1961,49 +1961,6 @@ function navegacion(
     }
 
 
-
-    /*
-
-    $fit = a_enid(
-        _text_(
-            span('Para el fitness', 'font-weight-bold'),
-            icon('fa fa-bicycle')
-
-        ),
-        [
-            "href" =>path_enid("kist-mas-vendidos"), 
-            "class" =>"black"
-            ]
-            ,
-        0
-    );
-
-    $romanticos = a_enid(
-        _text_(
-            span('Par el que envía flores', 'font-weight-bold'),
-            icon('fa fa-heart black')
-
-        ),
-        [
-            "class" => "ml-5 black",
-            "href" => path_enid("para-los-que-evian-flores")
-        ],
-        0
-    );
-
-    $response[] = d(
-        _text_(
-            $fit,
-            $romanticos
-        ),
-        [
-            "class" => 'black pr-4 pl-4 bg-white d-none categorias_envio_pce'
-        ],
-        'd-none d-md-block col-sx-12 col-sx-12 '
-    );
-    */
-
-
     $navegacion[] = d(
         $response,
         [
