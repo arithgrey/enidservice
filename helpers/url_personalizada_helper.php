@@ -35,7 +35,7 @@ function accesos_enid()
 {
      $base_url = [
         "kist-mas-vendidos" => "search/?q2=0&q=kitsmasvendidos&order=2",
-        "para-los-que-evian-flores" => "search/?q2=0&q=para-los-que-evian-flores&order=2",        
+        "flores" => "search/?q=flores",
         "como-es-el-proceso-de-devolucion-de-un-pedido" => "como-es-el-proceso-de-devolucion-de-un-pedido",
         "que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad" => "que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad",
         "cambios-y-devoluciones" => "cambios-y-devoluciones",

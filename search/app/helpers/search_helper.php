@@ -72,7 +72,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         switch ($q) {
 
-            case "para-los-que-evian-flores":
+            case "flores":
 
                 $response[] = d(
                     "Envía felicidad y paga cuando reciba tu detalle!",
