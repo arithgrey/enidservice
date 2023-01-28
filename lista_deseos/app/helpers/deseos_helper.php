@@ -424,9 +424,9 @@ if (!function_exists('invierte_date_time')) {
             
             if(!is_mobile()){
                 //$response[] = d("No te preocupes! pagas al recibir tu pedido y te entregamos hoy!", 'text-right mt-5 display-7 mb-5 strong black');
-                $contenido[] = d(_text_(icon('fa fa-truck'),"Entrega gratis en CDMX"),'mt-5 display-5 black strong');
-                $contenido[] = d(_text_(icon(_delivery_icon),"Recibe hoy mismo!"),'black  display-7 mt-2 black');
-                $contenido[] = d(_text_(icon("fa fa-check"), "Pagas al recibir tu pedido!"),'black  display-7 mt-2');
+                $contenido[] = d(_text_(icon('fa fa-truck'),"Envío gratis en CDMX"),'mt-5 display-7 black strong text-uppercase');
+                $contenido[] = d(_text_(icon(_delivery_icon),"Recibe hoy!"),'black  display-7 mt-2 black');
+                $contenido[] = d(_text_(icon("fa fa-check"), "Compra segura, pagas al recibir tu pedido!"),'black  display-7 mt-2');
                 $response[]= append($contenido);
 
             }
