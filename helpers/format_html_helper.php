@@ -1854,7 +1854,7 @@ function opciones_adicionales_navegacion()
     $text = _text_(
         span('Pago contra entrega', ''),
         icon('fa fa-handshake-o fa-2x', ''),
-        span('envío gratis', ''),
+        span('envío GRATIS', ''),
         icon('fa fa-gift fa-2x', ''),
         span('Pide hoy', ''),
         icon('fa fa-clock-o fa-2x', ''),
@@ -1863,7 +1863,7 @@ function opciones_adicionales_navegacion()
         span('envios express', ''),
         icon('fa fa-truck fa-2x'),
         icon('fa fa-phone fa-2x'),
-        span('(55)5296-7027', '')
+        span('(56)1847-8574', '')
     );
     $response[] = d(d($text, 'col-xs-12 fp8 ml-2 text-uppercase black'), ["class" => 'row bg_yellow  mb-3 mt-2']);
 
@@ -1907,13 +1907,13 @@ function navegacion(
             _text_(
                 span('Pago contra entrega', 'strong'),
                 icon('fa fa-handshake-o fa-2x', 'strong'),
-                span('envío gratis', 'strong'),
+                span('envío GRATIS', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
                 span('recibe hoy', 'strong'),
                 icon('fa fa-fighter-jet fa-2x', 'strong'),
-                span('(55)5296-7027', 'strong')
+                span('(56) 1847-8574', 'strong')
             ),
             [
                 "class" => 'black bg_yellow borde_white pr-4 pl-4'

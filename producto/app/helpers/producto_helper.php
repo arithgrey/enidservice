@@ -503,7 +503,7 @@ if (!function_exists('invierte_date_time')) {
             $link = _text(path_enid("whatsapp_servicio", 0, 1), $link_servicio);
 
             $r[] = format_link(
-                text_icon("fa fa fa-long-arrow-right white", "Más información (55)5296-7027", [], 0),
+                text_icon("fa fa fa-long-arrow-right white", "Más información  (56) 1847-8574", [], 0),
                 [
                     "href" => $link
                 ]
@@ -511,7 +511,7 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
             $r[] = btn(
-                text_icon("fa fa fa-long-arrow-right white", "Más información (55)5296-7027", [], 0),
+                text_icon("fa fa fa-long-arrow-right white", "Más información  (56) 1847-8574", [], 0),
                 [
                     "href" => ""
                 ]

@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
             "número de guía, también puedes consultar el estado de tu pedido al",
         ),
         icon('fa fa-phone'), 
-        span("(55)5296-7027,",'strong')
+        span("(56) 1847-8574,",'strong')
     ), 
             _text_("mt-1 black  mb-5", $extra) ));
 
