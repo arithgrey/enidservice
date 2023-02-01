@@ -31,6 +31,22 @@ class Paths
             "pagina" => 5,
 
         ];
+        
+        $cambios_devoluciones = [
+            "css" => [
+
+            ],
+            "js" => [
+
+            ],
+            "meta_keywords" => "Cambios y devoluciones Enid Service",
+            "desc_web" => "Cambios y devoluciones Enid Service",            
+            "pagina" => 54,
+
+        ];
+        
+
+
         $promesa_venta = [
             "css" => [
                 
@@ -62,6 +78,7 @@ class Paths
 
 
         $response = [            
+            "cambios_devoluciones" => $cambios_devoluciones,
             "promesa_ventas" => $promesa_venta,
             "puntuacion" => $puntuacion,
             "sobre_ventas" => $sobre_ventas,
@@ -560,11 +577,7 @@ class Paths
                     "alerts/jquery-confirm.js",
                     "planes_servicios/compras.js",
                     'js/summernote.js',
-
-
                 ],
-
-
             ],
             "pregunta" =>
             [
@@ -593,16 +606,12 @@ class Paths
                     "pregunta_listado.css",
                     "summernote.css",
 
-
                 ],
                 "js" =>
                 [
                     "js/summernote.js",
                     "pregunta/listado.js",
-
-
                 ],
-
 
             ],
             "pregunta_recibida" =>
