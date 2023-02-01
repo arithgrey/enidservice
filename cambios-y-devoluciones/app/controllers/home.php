@@ -14,59 +14,8 @@ class Home extends CI_Controller
 
     function index()
     {
-
-        $param = $this->input->get();
-        $i = prm_def($param, "info");
-
-        switch ($i) {
-
-
-            case $i >  0 :
-
-                $this->crea_info();
-
-                break;
-
-            default:
-
-                $fn = (ctype_digit($this->input->get("recibo"))) ?
-                    $this->crea_orden() :
-                    redirect(path_enid("go_home"));
-
-                break;
-
-
-        }
-
-    }
-
-    private function crea_info()
-    {
-        
-        $data = $this->app->cssJs($this->data, "forma_pago");
+        $data = $this->app->cssJs($this->data, "cambios_devoluciones");
         $this->app->pagina($data , get_format_pago(), 1);
-
-    }
-
-    private function crea_orden()
-    {
-                
-        $id_recibo = $this->input->get("recibo");
-        $this->data["recibo"] = $id_recibo;
-
-        $this->app->pagina(
-            $data,
-            format_orden($this->get_recibo_forma_pago($id_recibo)),
-            1
-        );
-
-    }
-
-    private function get_recibo_forma_pago($id_recibo)
-    {
-
-        return $this->app->api("recibo/resumen_desglose_pago", ['id_orden_compra' => $id_recibo], "html");
-
     }
 
 }
