@@ -342,9 +342,12 @@ let metricas_perfil = () => {
 };
 let response_deseo_compra = function (data) {
 
+    
+    
+    render_enid('.place_resumen_deseo_compra', _text_(0,"Productos"));
     if (parseInt(data) > 0) {
 
-        render_enid('.place_resumen_deseo_compra', data);
+        render_enid('.place_resumen_deseo_compra', _text_(data,"Productos"));
         $('.icono_compras_pendientes').addClass('borde_amarillo');
         $('.icono_compras_pendientes').attr('href', '../lista_deseos');
 
