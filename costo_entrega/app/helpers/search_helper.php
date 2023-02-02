@@ -32,7 +32,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $response[] = d(hr(), 'mt-5 col-sm-12 ');
-        $response[] = d(botones_ver_mas(), 'mt-5');
+        //$response[] = d(botones_ver_mas(), 'mt-5');
 
         return d($response, 10, 1);
     }

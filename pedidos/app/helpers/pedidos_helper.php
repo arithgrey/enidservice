@@ -470,7 +470,7 @@ if (!function_exists('invierte_date_time')) {
             place("place_tambien_podria_interezar row"),
             "col-sm-12"
         );
-        $r[] = botones_ver_mas();
+        //$r[] = botones_ver_mas();
         $r[] = hiddens(
             [
                 "value" => $data["notificacion_pago"],

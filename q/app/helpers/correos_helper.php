@@ -80,6 +80,7 @@ if (!function_exists('invierte_date_time')) {
             ), 6,
             1);
         $r[] = hr();
+        /*
         $ver_promos = add_element("Ver más promociones", "button", ["class" => "btn a_enid_black"]);
         $r[] = d(
             a_enid(
@@ -89,6 +90,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ), 6, 1
         );
+        */
         $r[] = d(a_enid("Anuncia tus artículos",
             ["href" => $url . "login", "class" => "anunciar_productos"]), 6, 1);
 
