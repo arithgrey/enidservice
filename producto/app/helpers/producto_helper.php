@@ -192,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-        $data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
+        //$data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         $pagina_producto[] =  d($data_response, 8);

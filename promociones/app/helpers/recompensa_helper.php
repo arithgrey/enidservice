@@ -79,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
         
         $response[] = modal_nueva_recompensa();      
         
-        $response[] = botones_ver_mas();  
+        //$response[] = botones_ver_mas();  
         return d($response, 'col-xs-12 col-sm-12 col-md-10 col-md-offset-1');
 
     }

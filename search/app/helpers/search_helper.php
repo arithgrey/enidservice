@@ -57,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
             "href" => path_enid("promociones"),
             "class" => "border"
         ]);
-        $response[] = d(d(d($link_promociones, 13), 10, 1), "row mt-5");
+        //$response[] = d(d(d($link_promociones, 13), 10, 1), "row mt-5");
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
         $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"), 13);
 
@@ -158,7 +158,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
-        $response[] = d(botones_ver_mas(), 'mt-5 col-sm-12 d-none otros');
+        //$response[] = d(botones_ver_mas(), 'mt-5 col-sm-12 d-none otros');
         $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
 
         return d(d($response, 13), 10, 1);
