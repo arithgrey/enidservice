@@ -101,9 +101,11 @@ class Home extends CI_Controller
                 $nombre_imagen = pr($data["imgs"], "nombre_imagen");
                 $data["url_img_post"] = url_post($nombre_imagen);
             }
-    
+            
+            $titulo_nombre_servicio = html_escape(pr($servicio,"nombre_servicio"));                                                                                                                                                    
+
             $data["desc_web"] = descripcion($servicio);
-            $data["titulo"] = "";
+            $data["titulo"] = $titulo_nombre_servicio;
             $data["id_servicio"] = $this->id_servicio;
             $data["existencia"] = $this->get_existencia($this->id_servicio);
             $data["servicio_materiales"] = $this->servicio_materiales($this->id_servicio);
