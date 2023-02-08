@@ -24,6 +24,7 @@ if (!function_exists('invierte_date_time')) {
         
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
+        
         if (es_data($usuario_busqueda)) {
 
             $usuario_calificacion = $data['usuario_calificacion'];
@@ -63,12 +64,15 @@ if (!function_exists('invierte_date_time')) {
                 );
             }
 
+            
             $contenido[] = flex($imagen, $seccion_calificacion, _between);
             $contenido[] = seccion_facebook($data);
             $texto_puesto = roll($data);
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
             $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
+            
             $contenido[] = p($nombre_usuario, 'update-note');
+            $contenido[] = d(_text_("#cliente", span($id_usuario,'borde_black')),'display-6 black');
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
             $response[] = seguidores($data);

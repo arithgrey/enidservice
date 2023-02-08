@@ -86,7 +86,8 @@ class Paths
             "sorteo_venta" => $sorteo_venta,
             "usuario_contacto" => [
                 "css" => [
-                    "usuario_contacto.css"
+                    "usuario_contacto.css",
+                    "pedidos.css"
                 ],
                 "js" => [
                     "usuario_contacto/principal.js"

@@ -576,7 +576,7 @@ class Cobranza extends REST_Controller
         $usuario_referencia = $this->usuario_referencia($param);
         $param = $this->referencia_usuario($param, $usuario_referencia);
         $usuario = $this->crea_usuario($param);
-
+        
         if (es_data($usuario) && prm_def($usuario,"usuario_registrado") > 0 &&  prm_def($usuario, "id_usuario")  > 0) {
 
             $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
@@ -675,8 +675,20 @@ class Cobranza extends REST_Controller
 
     function crea_usuario($q)
     {
+        $id_numero_cliente = prm_def($q, "numero_cliente");
+        
+        if(intval($id_numero_cliente) > 0 ){
 
-        return $this->app->api("usuario/prospecto", $q, "json", "POST");
+            $usuario = $this->app->usuario($id_numero_cliente);
+            $usuario["id_usuario"] = $id_numero_cliente;
+            $usuario["usuario_registrado"] = 1;
+
+            return $usuario;
+        }else{
+
+            return $this->app->api("usuario/prospecto", $q, "json", "POST");
+        }
+        
     }
 
     function crea_orden($q)
