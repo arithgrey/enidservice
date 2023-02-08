@@ -1201,7 +1201,7 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Comprar (Pagas a tu entrega)", 'pt-3 pb-3'),
+                d("Agendar pedido (Pagas a tu entrega)", 'pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos white text-center",
@@ -1217,7 +1217,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_(icon('fa fa-space-shuttle white'), "Comprar (Pagas a tu entrega)"),
+                    _text_(icon('fa fa-space-shuttle white'), "Agendar pedido (Pagas a tu entrega)"),
                     'text-center pt-3 pb-3'
                 ),
                 [

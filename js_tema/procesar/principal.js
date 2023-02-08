@@ -44,8 +44,15 @@ let $check_indico_catalogo = $form_miembro.find(".check_vio_catalogo_web");
 let $input_lead_catalogo = $form_miembro.find('.lead_catalogo');
 
 let $input_adicionales = $form_miembro.find('.adicionales');
+let $input_adicionales_cliente_frecuente = $form_miembro.find('.adicionales_cliente_frecuente');
+
+
 let $adicionales_adimistrador = $form_miembro.find('.adicionales_adimistrador');
+let $adicionales_adimistrador_numero_cliente = $form_miembro.find('.adicionales_adimistrador_numero_cliente');
+let $input_numero_cliente = $form_miembro.find('.input_numero_cliente');
+
 let $check_prospecto = $form_miembro.find('.check_prospecto');
+let $check_numero_cliente = $form_miembro.find('.check_numero_cliente');
 
 let $input_fecha_servicio = $(fecha_servicio);
 let $input_fecha_contra_entrega = $(fecha_contra_entrega);
@@ -96,10 +103,61 @@ $(document).ready(() => {
     });
 
     $check_prospecto.click(modifica_estado_prospecto);
+    $check_numero_cliente.click(modifica_estado_cliente_por_numero);
+
     $check_indico_ubicacion.click(modifica_lead_ubicacion);
     $check_indico_catalogo.click(modifica_lead_catalogo);
 
+    $input_numero_cliente.change(busqueda_cliente);
+
 });
+
+let busqueda_cliente =  function(){
+    
+    let $usuario_cliente_frecuente= $input_numero_cliente.val();
+    if (parseInt($usuario_cliente_frecuente) > 0) {        
+
+        let url = "../q/index.php/api/usuario/q/format/json/";
+        let data_send = {"id_usuario": $usuario_cliente_frecuente};
+        request_enid("GET", data_send, url, response_cliente_frecuente);     
+
+    }
+}
+
+let response_cliente_frecuente =  function(data){
+
+    $input_nombre_registro_envio.val("");
+    $input_telefono_registro_envio.val(""); 
+
+    data = data[0];    
+    $input_nombre_registro_envio.val(data.name);
+    $input_telefono_registro_envio.val(data.tel_contacto);
+
+}
+let modifica_estado_cliente_por_numero = (e) => {
+
+    
+    let $val = $input_es_prospecto_registro_envio.val();    
+    let $adicionales = parseInt($input_adicionales_cliente_frecuente.val());
+    if ($adicionales > 0) {
+        $adicionales_adimistrador_numero_cliente.removeClass('d-none');
+    }
+    
+    if ($val > 0) {
+        
+        $input_es_prospecto_registro_envio.val(0);
+        $adicionales_adimistrador_numero_cliente.addClass('d-none');        
+        $(".label_registro_facebook").removeClass('d-none');
+
+    } else {
+        
+        $input_es_prospecto_registro_envio.val(1);
+        $adicionales_adimistrador_numero_cliente.removeClass('d-none');
+        $(".label_registro_facebook").addClass('d-none');
+               
+    }    
+
+}
 
 let modifica_estado_prospecto = (e) => {
 
@@ -211,7 +269,8 @@ let registro = (e) => {
             "url_facebook_conversacion": $url_facebook_conversacion.val(),
             "comentario_compra": $comentario_compra.val(),
             "lead_ubicacion": $input_lead_ubicacion.val(),
-            "lead_catalogo": $input_lead_catalogo.val()
+            "lead_catalogo": $input_lead_catalogo.val(),
+            "numero_cliente":  $input_numero_cliente.val()
 
         };
 

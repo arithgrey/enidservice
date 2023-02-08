@@ -60,7 +60,6 @@ class Home extends CI_Controller
         $data["otros_productos_interes"] = [];
 
         if (es_cliente($usuario_busqueda)) {
-
             
             $data["recibos_pago"] = $this->app->recibos_usuario($id_usuario, 1);
             $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0);
@@ -114,7 +113,7 @@ class Home extends CI_Controller
     }
 
     private function tipo_tipificciones($in_session, $data)
-    {
+    {        
         $perfil_busqueda = $data['perfil_busqueda'];
         $id_perfil = pr($perfil_busqueda, "idperfil");
 

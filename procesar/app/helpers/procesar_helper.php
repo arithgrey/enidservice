@@ -151,19 +151,51 @@ if (!function_exists('invierte_date_time')) {
             ), _text_("col-lg-4", $extra_sorteo));
 
 
+            
+
+
+            $extra = ($in_session) ? 'col-lg-12 mt-5 ' : 'd-none col-lg-3 mt-5';
+
+
+            $input_numero_cliente = input([
+                "type" => "checkbox",
+                "class" => "checkbox_enid check_numero_cliente",
+            ]);
+
+
+            $z[] = d(flex(
+                "¿Registro con número de cliente?",
+                $input_numero_cliente,
+                "mt-5 text-uppercase black strong",
+                "mr-3"
+            ), _text_($extra, $extra_sorteo));
+
+
+            $z[] = input_frm(
+                "col-lg-9 mt-5 d-none adicionales_adimistrador_numero_cliente",
+                "#cliente",
+                [
+                    "id" => "input_numero_cliente",
+                    "class" => "input_numero_cliente",
+                    "type" => "float",
+                    "name" => "numero_cliente",
+                    "value" => 0,
+                    "placeholder" => "¿Cual es el número de cliente?",
+
+                ]
+            );
+
             $input = input([
                 "type" => "checkbox",
                 "class" => "checkbox_enid check_prospecto",
             ]);
 
-            $extra = ($in_session) ? 'col-lg-3 mt-5 ' : 'd-none col-lg-3 mt-5';
-
             $z[] = d(flex(
-                "¿Registrar con Facebook",
+                "¿Registro con Facebook?",
                 $input,
                 "mt-5 text-uppercase black strong",
                 "mr-3"
-            ), _text_($extra, $extra_sorteo));
+            ), _text_($extra, $extra_sorteo,'label_registro_facebook'));
 
             $z[] = input_frm(
                 "col-lg-9 mt-5 d-none seccion_input_facebook",
@@ -249,6 +281,15 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "adicionales"
                 ]
             );
+
+            $inputs[] = hiddens(
+                [
+                    "name" => "adicionales_cliente_frecuente",
+                    "value" => es_administrador($data),
+                    "class" => "adicionales_cliente_frecuente"
+                ]
+            );
+
 
 
             $inputs[] = hiddens(
