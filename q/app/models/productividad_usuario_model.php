@@ -12,6 +12,8 @@ class productividad_usuario_model extends CI_Model
 
 		$query_get = _text_("SELECT count(0)total from acceso
 		WHERE 
+		id_servicio  > 0 
+		AND 
 		DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
 		return $this->db->query($query_get)->result_array()[0]["total"];
