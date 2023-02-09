@@ -8,174 +8,59 @@ class productividad_usuario_model extends CI_Model
 		$this->load->database();
 	}
 
+	function accesos_inicio_termino($fecha_inicio, $fecha_termino){
 
-	/*
+		$query_get = _text_("SELECT count(0)total from acceso
+		WHERE 
+		DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
+		return $this->db->query($query_get)->result_array()[0]["total"];
 
+	}
+	function usuarios_deseo_compra_it($fecha_inicio, $fecha_termino){
 
+		$query_get = _text_("SELECT count(0) total FROM usuario_deseo_compra
+		WHERE 
+		DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
-
-	function ventas_enid_service_vendedor($param){
-
-
-
-		$id_usuario=  $param["id_usuario"];
-		$query_get ="SELECT
-						count(0)num_ventas
-					FROM
-						persona
-					WHERE
-						tipo =2
-					AND
-						fecha_cambio_tipo =  current_date()
-
-					AND id_usuario = $id_usuario";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_ventas"];
+		return $this->db->query($query_get)->result_array()[0]["total"];
 
 	}
 
+	function usuarios_deseo_compra_vendedor_it($fecha_inicio, $fecha_termino){
 
+		$query_get = _text_("SELECT count(0) total FROM usuario_deseo
+		WHERE 
+		DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
-
-
-	function email_enviados_usuario_enid_service($param){
-
-		$query_get = "SELECT
-							count(0)num_envios
-						FROM
-						prospecto
-						WHERE
-							date(fecha_actualizacion) = date(current_date())
-						AND
-						id_usuario = '".$param["id_usuario"]."' ";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_envios"];
+		return $this->db->query($query_get)->result_array()[0]["total"];
 
 	}
+	function recibos_it($fecha_inicio, $fecha_termino){
 
-	function llamadas_enid_service(){
+		$query_get = _text_("SELECT count(0) total FROM proyecto_persona_forma_pagos
+		WHERE 
+		DATE(fecha_registro ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
-		$query_get = "SELECT
-					count(0)num_llamadas
-					FROM
-					base_telefonica
-					WHERE
-					date(fecha_modificacion) =  date(current_date())";
+		return $this->db->query($query_get)->result_array()[0]["total"];
+	}
+	function ventas_it($fecha_inicio, $fecha_termino){
 
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_llamadas"];
+		$query_get = _text_("SELECT count(0) total FROM proyecto_persona_forma_pagos
+		WHERE 
+			 se_cancela < 1 
+            AND cancela_cliente < 1  
+            AND saldo_cubierto > 0 
+			AND
+		DATE(fecha_entrega ) BETWEEN '" . $fecha_inicio . "' AND  '" . $fecha_termino . "'");
 
+		return $this->db->query($query_get)->result_array()[0]["total"];
 	}
 
-	function llamadas_enid_service_usuario($param){
-
-		$id_usuario =  $param["id_usuario"];
-
-		$query_get = "SELECT
-					count(0)num_llamadas
-					FROM
-						base_telefonica
-					WHERE
-						date(fecha_modificacion) =  date(current_date())
-					AND
-						id_usuario = '".$id_usuario."' ";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_llamadas"];
-
-	}
-
-	function contactos_enid_service(){
-
-		$query_get ="SELECT
-						count(0)num_ventas
-					FROM persona
-					WHERE
-					tipo = 1
-						AND
-					date(fecha_registro) =  current_date()";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_ventas"];
-
-	}
-
-	function contactos_enid_usuario($param){
+			
+            
 
 
-		$id_usuario = $param["id_usuario"];
-
-		$query_get ="SELECT
-						count(0)num
-					FROM
-						persona
-					WHERE
-						tipo = 1
-						AND
-					date(fecha_registro) =  current_date()
-					AND id_usuario ='". $id_usuario."' ";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num"];
-	}
-
-	function contactos_enid_promociones($param){
-
-
-		$id_usuario = $param["id_usuario"];
-
-		$query_get ="SELECT
-						count(0)num
-					FROM
-						persona
-					WHERE
-						tipo = 12
-						AND
-					date(fecha_registro) =  current_date()
-					AND id_usuario ='". $id_usuario."' ";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num"];
-
-	}
-
-
-
-	function blogs_enid_service(){
-
-		$query_get ="SELECT
-						COUNT(0)num_blogs
-					FROM
-						faq
-					WHERE
-					date(fecha_registro)
-					=
-					date(current_date())";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_blogs"];
-	}
-
-
-
-	function correos_electronicos(){
-
-		$query_get ="SELECT
-					count(0)num_correos_pendientes
-					FROM
-					prospecto WHERE
-					date(fecha_registro) =  date(current_date())";
-
-		$result =  $this->db->query($query_get);
-		return $result->result_array()[0]["num_correos_pendientes"];
-	}
-
-
-
-
-	*/
+	
 
 }

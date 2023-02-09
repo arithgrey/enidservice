@@ -4,6 +4,24 @@
 
 if (!function_exists('invierte_date_time')) {
 
+    function funnel_checkout_accesos_ventas($data)
+    {
+
+        $accesos = $data["accesos"];
+        $deseo_compra = $data["deseo_compra"];
+        $deseo_compra_vendedor = $data["deseo_compra_vendedor"];
+        $recibos = $data["recibos"];
+        $compras_efecivas = $data["compras_efecivas"];
+
+        $total_deseo = $deseo_compra + $deseo_compra_vendedor;
+
+        $response[] = d(d(_text_( $accesos, "Accesos"), "black mx-auto border-bottom mt-5 display-2 " ),13);
+        $response[] = d(d(_text_($total_deseo, "Checkout"), "black mx-auto border-bottom mt-5 display-3" ),13);
+        $response[] = d(d(_text_( $recibos, "Recibos"), "black mx-auto border-bottom mt-5 display-4" ),13);
+        $response[] = d(d(_text_( $compras_efecivas, "Compras"), "black mx-auto border-bottom mt-5 display-5" ),13);
+
+        return d($response,8,1);
+    }
     function funnel($data, $param)
     {
 
@@ -35,7 +53,9 @@ if (!function_exists('invierte_date_time')) {
         $dashboard = prm_def($param, "dashboard");
         $total = $en_carrito_usuario + $en_carrito_usuario_externo;
         $text = _titulo(
-            flex("En carro de compras", $total, _text_(_between,'white border blue_enid2 p-1')), 4);
+            flex("En carro de compras", $total, _text_(_between, 'white border blue_enid2 p-1')),
+            4
+        );
         $response[] = d($text);
 
         $personas_registradas_carrito = _text_(_between, 'personas_registradas_carrito ');
@@ -69,7 +89,7 @@ if (!function_exists('invierte_date_time')) {
         $flex = flex(
             "En registro de información de envío",
             $total,
-            _text_(_between,'white border blue_enid2 p-1')
+            _text_(_between, 'white border blue_enid2 p-1')
         );
         $text = _titulo($flex, 4);
         $response[] = d($text);
@@ -406,7 +426,7 @@ if (!function_exists('invierte_date_time')) {
                 a_enid(
                     $row["labores_resueltas"],
                     [
-                        "href" => '../desarrollo/',                        
+                        "href" => '../desarrollo/',
                         "class" => 'strong',
                         "style" => 'color:blue !important;',
                     ]
@@ -1456,7 +1476,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-    
+
 
     function b_notificacion($url = '', $text = '')
     {
@@ -1876,7 +1896,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $f = 0;
-       
+
         $compras_sin_cierre = sin_cierre($data, $info["compras_sin_cierre"]);
         $f = $f + $compras_sin_cierre["flag"];
 
@@ -1951,10 +1971,10 @@ if (!function_exists('invierte_date_time')) {
         $lista[] = $recordatorios["html"];
         $f = $f + $recordatorios["flag"];
 
-        
-        
-        
-        
+
+
+
+
         $deuda = add_valoraciones_sin_leer(
             $inf["valoraciones_sin_leer"],
             $info["id_usuario"]
