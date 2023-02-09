@@ -12,6 +12,27 @@ class productividad extends REST_Controller
         
     }
 
+    function checkout_accesos_ventas_GET(){
+
+        $param = $this->get();
+        $response = [];
+        
+        if (fx($param, "fecha_inicio,fecha_termino")) {
+            
+            $fecha_inicio = $param["fecha_inicio"];
+            $fecha_termino = $param["fecha_termino"];
+            
+            $data["accesos"] = $this->productividad_usuario_model->accesos_inicio_termino($fecha_inicio, $fecha_termino);
+            $data["deseo_compra"] = $this->productividad_usuario_model->usuarios_deseo_compra_it($fecha_inicio, $fecha_termino);
+            $data["deseo_compra_vendedor"] = $this->productividad_usuario_model->usuarios_deseo_compra_vendedor_it($fecha_inicio, $fecha_termino);
+            $data["recibos"] = $this->productividad_usuario_model->recibos_it($fecha_inicio, $fecha_termino);
+            $data["compras_efecivas"] = $this->productividad_usuario_model->ventas_it($fecha_inicio, $fecha_termino);
+            $response = funnel_checkout_accesos_ventas($data);
+
+        }
+        $this->response($response);
+
+    }
     function notificaciones_GET()
     {
 

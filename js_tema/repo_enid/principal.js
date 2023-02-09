@@ -9,6 +9,7 @@ let $form_motivos_cancelaciones = $('.form_motivos_cancelaciones');
 let $form_top_ventas = $('.form_top_ventas');
 let $form_sin_ventas = $('.form_sin_ventas');
 let $form_promesa_ventas = $('.form_promesa_ventas');
+let $form_checkout_accesos = $(".form_checkout_accesos");
 
 let $funnel_ventas = $('.funnel');
 
@@ -61,6 +62,9 @@ $(document).ready(() => {
     $form_top_ventas.submit(top_ventas);    
     $form_sin_ventas.submit(sin_ventas);
     $form_promesa_ventas.submit(promesa_ventas);
+    
+    $form_checkout_accesos.submit(checkout_acceso_venta);
+
 
     $funnel_ventas.click(funnel);
 
@@ -714,6 +718,26 @@ let promesa_ventas = function(e){
     e.preventDefault();
 
 }
+
+let checkout_acceso_venta = function(e){
+    
+    let f_inicio = get_parameter(".form_checkout_accesos #datetimepicker4");
+    let f_termino = get_parameter(".form_checkout_accesos #datetimepicker5");
+
+    if (f_inicio.length > 5 && f_termino.length > 5) {
+
+        let data_send = $(".form_checkout_accesos").serialize();
+        let url = "../q/index.php/api/productividad/checkout_accesos_ventas/format/json/";
+        request_enid("GET", data_send, url, render_promesas);
+
+    } else {
+
+        focus_input([".form_checkout_accesos #datetimepicker5", ".form_checkout_accesos #datetimepicker4"]);
+    }
+    e.preventDefault();
+
+}
+
 
 let sin_ventas = function (e) {
 
