@@ -1357,7 +1357,7 @@ function opciones_acceso($in_session)
 
 
     $link_lista_compras  = format_link(
-        _text_(icon("fa black fa-shopping-bag white"), "Ver resumen de compra"),
+        _text_(icon("fa black fa-shopping-bag white"), "Agendar entrega"),
         [
             "href" => path_enid("lista_deseos"),
             "class" => "text-center mb-2"
@@ -2313,7 +2313,7 @@ function select_cantidad_compra($es_servicio, $existencia, $valor_seleccionado =
 
     $config = [
         "name" => "num_ciclos",
-        "class" => _text_("telefono_info_contacto shadow black borde_black select_cantidad form-control ", $clase_extra),
+        "class" => _text_("telefono_info_contacto shadow black bg_white borde_black select_cantidad  ", $clase_extra),
         "id" => "num_ciclos",
         "identificador" => $identificador
     ];
@@ -2322,9 +2322,9 @@ function select_cantidad_compra($es_servicio, $existencia, $valor_seleccionado =
     for ($a = 1; $a < max_compra($es_servicio, $existencia); $a++) {
 
         if ($a == $valor_seleccionado) {
-            $select[] = "<option selected value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
+            $select[] = "<option selected value=" . $a . ">" . _text_($a) . "</option>";
         } else {
-            $select[] = "<option value=" . $a . ">" . _text_("Cantidad", $a) . "</option>";
+            $select[] = "<option value=" . $a . ">" . _text_($a) . "</option>";
         }
     }
     $select[] = "</select>";

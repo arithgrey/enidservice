@@ -59,10 +59,5 @@ class productividad_usuario_model extends CI_Model
 		return $this->db->query($query_get)->result_array()[0]["total"];
 	}
 
-			
-            
-
-
-	
 
 }
