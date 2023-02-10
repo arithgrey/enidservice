@@ -4,19 +4,20 @@ if (!function_exists('invierte_date_time')) {
 
     function valida_tiempo_entrega()
     {
-        $contenido[] = d(_text_(icon('fa fa-truck'), "Envío gratis recibe el mismo día"), 'mt-5 display-6 black strong text-uppercase');
-        $contenido[] = d(_text_(icon("fa fa-check"), "Pago seguro, compra al recibir tu pedido en CDMX!"), 'black  display-7 mt-2');
+        $contenido[] = d(_text_(icon('fa fa-truck'), span("Envío gratis recibe el mismo día",'underline ml-2')), 'top_40  black text-uppercase');
+        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2')), 'black text-uppercase mt-2');
         $contenido[] = d(a_enid(
-            "- Más formas de pago",
+            _text_(icon("fa fa-check"), span("Formas de pago",'underline ml-2')),
             [
-                "class" => "underline black",
+                "class" => " black text-uppercase",
                 "href" => path_enid("forma_pago")
             ]
         ), 'mt-2 black ');
         $contenido[] = d(a_enid(
-            "- Política de devoluciones",
+            _text_(icon('fa fa-long-arrow-left'),
+                span("Política de devoluciones","underline ml-2")),
             [
-                "class" => "underline black",
+                "class" => "black text-uppercase",
                 "href" => path_enid("cambios-y-devoluciones")
             ]
         ), 'mt-2 black ');
@@ -124,7 +125,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = _titulo($titulo, 2);
+            $nombre_producto = d(h($titulo,1,["class" => "strong f18"]));
             $x[] = venta_producto(
                 $s,
                 $data,
@@ -185,20 +186,20 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
-        $data_response[] = d(hr(), 'col-sm-12 mt-5');
+        $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
 
         $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
         $data_response[] = d($recompensa, 12);
-        $data_response[] = d(hr(), 'col-sm-12 mt-5');
+        $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         //$data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
-        $pagina_producto[] =  d($data_response, 8);
+        $pagina_producto[] =  d($data_response, 9);
 
         if (!is_mobile()) {
-            $pagina_producto[] =  d($x, 'col-sm-4 border-left-ct mt-md-5 mt-lg-1');
+            $pagina_producto[] =  d($x, 'col-sm-3 border-left-ct mt-md-5 mt-lg-1');
         }
 
 
@@ -327,7 +328,7 @@ if (!function_exists('invierte_date_time')) {
         $numero_compras = pr($servicio, "deseado");
         if ($numero_compras > 1) {
 
-            $r[] = d(_text_($numero_compras, "vendidos"), 'text-secondary col-sm-12');
+            $r[] = d(_text_( span($numero_compras,'underline'), crea_estrellas(5)), 'black col-sm-12 text-right mb-3');
         }
 
         $r[] = ($es_mobile > 0) ? "" : d($nombre_producto, 12);
@@ -429,21 +430,21 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
-        $precio = pr($data["info_servicio"]["servicio"], "precio");
+        //$precio = pr($data["info_servicio"]["servicio"], "precio");
         $response = [];
         $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
 
         $r[] = ganancia_comisionista($data);
-        $r[] = flex_md(
+        $r[] = flex(
             _titulo("Cantidad", $tipo),
             select_cantidad_compra($es_servicio, $existencia),
-            _between,
-            '',
-            'mr-2'
+            _text_(_between,'mb-5'),
+            'col-xs-4 p-0',
+            'col-xs-8 p-0'
         );
 
-        $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio), 'mt-5');
+        $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio), 'top_40');
         $r[] = $tiempo_entrega;
         $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
@@ -647,7 +648,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($usuario)) {
 
             $nombre = $usuario[0]["name"];
-
+            /*
             $response[] = a_enid(
                 add_text("POR ", u($nombre)),
 
@@ -656,7 +657,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "black strong text-uppercase",
                     "target" => "_black"
                 ]
-            );
+            );*/
         }
 
         return append($response);
@@ -1026,7 +1027,7 @@ if (!function_exists('invierte_date_time')) {
 
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);
-        $texto_precio_base = ($precio_unidad > 0) ? _text($precio_unidad, "MXN") : "A CONVENIR";
+        $texto_precio_base = ($precio_unidad > 0) ? _text("$",$precio_unidad) : "A CONVENIR";
 
 
         $texto_premium = "";
@@ -1039,16 +1040,16 @@ if (!function_exists('invierte_date_time')) {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "f25 colo_precio_enid");
+            $texto = d($texto_precio_base, "mt-3 f23 black");
 
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text($precio_alto, "MXN"), "red_enid mb-2");
+                $texto_precio_alto = d(_text("Precio regular $",$precio_alto), "text-secondary mb-5 f11");
             }
 
 
-            $texto = flex($texto,  del($texto_precio_alto), 'flex-column');
+            $texto = flex($texto,  $texto_precio_alto, 'flex-column');
 
 
             $seis_meses =  ($precio_unidad + porcentaje($precio_unidad, 8));
@@ -1201,7 +1202,7 @@ if (!function_exists('invierte_date_time')) {
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Agendar pedido (Pagas a tu entrega)", 'pt-3 pb-3'),
+                d("Añadir al carrito", 'pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos white text-center",
@@ -1217,16 +1218,14 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_(icon('fa fa-space-shuttle white'), "Agendar pedido (Pagas a tu entrega)"),
-                    'text-center pt-3 pb-3'
+                    _text_( span("Añadir al carrito",'ml-2'), icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
+                    'pt-3 pb-3'
                 ),
                 [
                     'class' => 'agregar_deseos_sin_antecedente en_lista_deseos white',
                     'id' => $id_servicio,
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
-                ],
-                2
-
+                ]
             );
         }
 

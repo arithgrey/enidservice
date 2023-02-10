@@ -350,7 +350,7 @@ if (!function_exists('invierte_date_time')) {
             
             $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));
             $extra  = is_mobile() ? 'white': ''; 
-            $response[] =  flex($text,'Con opción de pago al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
+            $response[] =  flex($text,'Pagarás al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
         }
 
         return $response;
@@ -424,7 +424,7 @@ if (!function_exists('invierte_date_time')) {
             
             if(!is_mobile()){
                 //$response[] = d("No te preocupes! pagas al recibir tu pedido y te entregamos hoy!", 'text-right mt-5 display-7 mb-5 strong black');
-                $contenido[] = d(_text_(icon('fa fa-truck'),"Envío gratis en CDMX"),'mt-5 display-7 black strong text-uppercase');
+                $contenido[] = d(_text_(icon('fa fa-truck'),"Envío gratis"),'mt-5 display-7 black strong text-uppercase');
                 $contenido[] = d(_text_(icon(_delivery_icon),"Recibe hoy!"),'black  display-7 mt-2 black');
                 $contenido[] = d(_text_(icon("fa fa-check"), "Compra segura, pagas al recibir tu pedido!"),'black  display-7 mt-2');
                 $response[]= append($contenido);
@@ -564,6 +564,7 @@ if (!function_exists('invierte_date_time')) {
             $text_precio = $precio * $articulos;
             $text_precio_alto = $precio_alto * $articulos;
 
+            /*
             $seleccionar_envio = input(
                 [
                     "type" => "checkbox",
@@ -574,9 +575,10 @@ if (!function_exists('invierte_date_time')) {
 
                 ]
             );
+            */
 
             $seccion_imagen_seleccion_envio =
-                flex($seleccionar_envio, $imagen, _between_start, 'mr-5');
+                flex("", $imagen, _between_start);
             $r[] = d($seccion_imagen_seleccion_envio, "col-sm-3");
             $x = [];
 
@@ -614,9 +616,9 @@ if (!function_exists('invierte_date_time')) {
 
             $tipo = ($externo < 1) ? "cancela_productos('{$id}');" : "cancela_productos_deseados('{$id}');";
             $eliminar = d(
-                "Eliminar",
+                icon(_eliminar_icon),
                 [
-                    "class" => "cursor_pointer hover_black mb-5",
+                    "class" => "cursor_pointer hover_black mb-5 fa-2x",
                     "onclick" => $tipo
                 ]
             );
@@ -637,7 +639,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 'col-lg-3 text-center');
             $response[] = d($r, 'col-md-12 mb-5');
-            $response[] = d('', 'col-md-12 mt-5 mb-5 border-bottom');
+            $response[] = d('', 'col-md-12 mt-5 mb-5 border_black');
         }
 
         
