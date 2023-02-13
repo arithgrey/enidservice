@@ -93,6 +93,30 @@ if (!function_exists('invierte_date_time')) {
 
                 $response[] = d("Te llevamos tus pesas y pagas cuando las tenga en sus manos!", 'black col-sm-12 p-0');
                 break;
+            
+            case "tenisg5":
+
+                    $response[] = d(
+                        "Reinventa tu outfit o inicia tu negocio",
+                        'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                    );
+    
+                    $response[] = d("Réplicas de tenis al por mayor
+                    llevamos tus tenis de máxima calidad a tu domicilio y pagas cuando estén en tus manos!", 'black col-sm-12 p-0');
+
+                    $response[] = d('<iframe width="560" 
+                                        height="315" 
+                                        src="https://www.youtube.com/embed/3F9pTL09wF0" 
+                                        title="YouTube video player" 
+                                        frameborder="0" 
+                                        allow="accelerometer; 
+                                        autoplay; clipboard-write; 
+                                        encrypted-media; gyroscope; 
+                                        picture-in-picture; web-share" allowfullscreen></iframe>','mt-4');
+                    
+
+                    break;
+
 
             default:
 
