@@ -1807,6 +1807,10 @@ function opciones_populares()
     $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
     $response[] = $texto;
 
+    
+    
+    
+
     $response[] = a_enid(
         _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
         [
@@ -1851,6 +1855,7 @@ function opciones_adicionales_navegacion()
 {
 
 
+    
     $text = _text_(
         span('Pago contra entrega', ''),
         icon('fa fa-handshake-o fa-2x', ''),
@@ -1903,8 +1908,43 @@ function navegacion(
 
         $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
         $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');
-        $response[] = d(a_enid(
+
+
+        $list[] = li(a_enid(
+            _text_(span("Kits deportivos",'f11 black ml-5 strong'))
+            ,[
+            "class"=>"dropdown-item border_black",
+            "href"=> path_enid("kist-mas-vendidos")
+        ]));
+        $list[] = li(a_enid(
+            
+             span("Tenis",'f11 black ml-5'),
+        [
+            "class"=>"dropdown-item border_black mt-3 strong",
+            "href"=> path_enid("tenis")
+        ]));
+    
+        
+        $a = a_enid(
+            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorias"),
+            [
+                "class"=>"p-2 dropdown-toggle strong black ",
+                "href"=>"#",
+                "role"=>"button",
+                "data-bs-toggle"=>"dropdown",
+                "aria-expanded"=>"false"
+            ]
+        );
+        $ul = ul($list,["class"=>"dropdown-menu borde-0"]);
+    
+        $categorias = d([
+            $a,
+            $ul
+        ],"dropdown pull-left d-none d-md-block ");
+
+        $response[] = d(d(
             _text_(
+                $categorias,
                 span('Pago contra entrega', 'strong'),
                 icon('fa fa-handshake-o fa-2x', 'strong'),
                 span('envío GRATIS', 'strong'),
