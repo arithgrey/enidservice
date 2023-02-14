@@ -61,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
         $response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"), 13);
 
-        $response[] = d(d(oferta_delivery(), "col-sm-10 col-sm-offset-1 p-0"), 13);
+        //$response[] = d(d(oferta_delivery(), "col-sm-10 col-sm-offset-1 p-0"), 13);
 
         return d($response, 12);
     }
