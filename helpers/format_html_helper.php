@@ -1926,7 +1926,7 @@ function navegacion(
     
         
         $a = a_enid(
-            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorias"),
+            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
             [
                 "class"=>"p-2 dropdown-toggle strong black ",
                 "href"=>"#",
