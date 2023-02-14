@@ -97,14 +97,17 @@ if (!function_exists('invierte_date_time')) {
             case "tenisg5":
 
                     $response[] = d(
-                        "Reinventa tu outfit o inicia tu negocio",
+                        "Gana al comprar más de un par!",
                         'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
                     );
     
-                    $response[] = d("Réplicas de tenis al por mayor
-                    llevamos tus tenis de máxima calidad a tu domicilio y pagas cuando estén en tus manos!", 'black col-sm-12 p-0');
+                    $response[] = d("Réplicas de tenis al por mayor además los llevamos a tu domicilio y pagas cuando estén en tus manos!", 'black col-sm-12 p-0 mt-3 mb-3');
+                    
+                    $response[] = d(d(_text_("1 par",span("$999",'underline ml-3')), 'black mt-2 row'),12);                                        
+                    $response[] = d(d(  _text_(  "2 pares por",span('$1699', "underline ml-2")), 'black row'),12);                                        
+                    $response[] = d(d( _text_( "3 pares por", span('$2200','underline ml-2')), 'black row'),12);                                        
 
-                    $response[] = d('<iframe width="560" 
+                    $response[] =  d(d('<iframe width="560" 
                                         height="315" 
                                         src="https://www.youtube.com/embed/3F9pTL09wF0" 
                                         title="YouTube video player" 
@@ -112,7 +115,8 @@ if (!function_exists('invierte_date_time')) {
                                         allow="accelerometer; 
                                         autoplay; clipboard-write; 
                                         encrypted-media; gyroscope; 
-                                        picture-in-picture; web-share" allowfullscreen></iframe>','mt-4');
+                                        picture-in-picture; web-share" allowfullscreen></iframe>','mt-4 row'),12);
+                    
                     
 
                     break;
