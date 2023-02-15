@@ -1857,9 +1857,9 @@ function opciones_adicionales_navegacion()
 
     
     $text = _text_(
-        span('Pago contra entrega', ''),
+        span('PAGO CONTRA ENTREGA', ''),
         icon('fa fa-handshake-o fa-2x', ''),
-        span('envío GRATIS', ''),
+        span('ENVÍO GRATIS', ''),
         icon('fa fa-gift fa-2x', ''),
         span('Pide hoy', ''),
         icon('fa fa-clock-o fa-2x', ''),
@@ -1945,9 +1945,9 @@ function navegacion(
         $response[] = d(d(
             _text_(
                 $categorias,
-                span('Pago contra entrega', 'strong'),
+                span('Pago contra entrega', 'strong text-uppercase'),
                 icon('fa fa-handshake-o fa-2x', 'strong'),
-                span('envío GRATIS', 'strong'),
+                span('ENVÍO GRATIS', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
