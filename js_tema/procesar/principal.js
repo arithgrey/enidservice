@@ -63,12 +63,14 @@ let $producto_carro_compra = $(".producto_carro_compra");
 
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
-
+let $form_busqueda_cliente = $(".form_busqueda_cliente");
 
 
 $(document).ready(() => {
         
     $('footer').addClass('d-none');
+    $form_busqueda_cliente.submit(busqueda_numero_cliente);
+
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     
@@ -109,6 +111,11 @@ $(document).ready(() => {
     $check_indico_catalogo.click(modifica_lead_catalogo);
 
     $input_numero_cliente.change(busqueda_cliente);
+    
+    $(".busqueda_cliente_frecuente").click(function(){        
+        $("#modal_busqueda_cliente_frecuente").modal("show");        
+    });
+
 
 });
 
@@ -280,7 +287,37 @@ let registro = (e) => {
     }
     e.preventDefault();
 };
+let busqueda_numero_cliente = (e) => {
+    
+    
+    let url = "../q/index.php/api/usuario/tel_contacto_email/format/json/";
+    
+    let $data_send = $form_busqueda_cliente.serialize();
+    
+    request_enid("GET", $data_send, url, lista_clientes_encontrados);
+    e.preventDefault();
 
+}
+let lista_clientes_encontrados = (data) => {
+
+    render_enid(".place_usuarios_coincidentes", data);
+    $(".cliente_encontrado").click(click_usuario_coincidencia);
+};
+let click_usuario_coincidencia = function(e){
+    
+    let $id = e.target.id;
+    
+    if(parseInt($id)  > 0){
+        
+        $("#modal_busqueda_cliente_frecuente").modal("hide");        
+        $(".input_numero_cliente").val($id);
+        $(".check_numero_cliente").click();
+        $input_numero_cliente.change();
+
+    }
+
+
+}
 let registro_cotizacion = (e) => {
 
     let data_send = $form_cotizacion.serialize();

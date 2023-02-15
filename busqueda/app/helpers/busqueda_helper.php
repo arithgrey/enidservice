@@ -297,8 +297,8 @@ if (!function_exists('invierte_date_time')) {
 
         $imagen = img(path_enid("nuba_seller_club"));
         $path = path_enid("nuba_seller", 0, 1);
-        $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
-        $response[] = a_enid('Nuba seller club', ["href" => $path, "target" => "_black", "class" => "black"]);
+        $response[] = d(a_enid($imagen, ["href" => $path]));
+        $response[] = a_enid('Nuba seller club', ["href" => $path, "class" => "black"]);
 
         return append($response);
     }
@@ -307,8 +307,8 @@ if (!function_exists('invierte_date_time')) {
 
         $imagen = img(path_enid("pagina_enid_service_facebook"));
         $path = path_enid("enid_service_facebook", 0, 1);
-        $response[] = d(a_enid($imagen, ["href" => $path, "target" => "_black"]));
-        $response[] = a_enid('Enid service', ["href" => $path, "target" => "_black", "class" => "black"]);
+        $response[] = d(a_enid($imagen, ["href" => $path]));
+        $response[] = a_enid('Enid service', ["href" => $path, "class" => "black"]);
 
         return append($response);
     }

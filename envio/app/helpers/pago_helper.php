@@ -44,8 +44,8 @@ if (!function_exists('invierte_date_time')) {
                 format_link(
                     "Nuestros clientes",
                     [
-                        "href" => path_enid("clientes"),
-                        "target" => "_black"
+                        "href" => path_enid("clientes")
+                        
                     ]
                 )
             ),
@@ -54,8 +54,7 @@ if (!function_exists('invierte_date_time')) {
                 format_link(
                     "Costos de entrega",
                     [
-                        "href" => path_enid("clientes"),
-                        "target" => "_black",
+                        "href" => path_enid("clientes"),                        
                         "class" =>  "mt-3"
                     ]
                 )

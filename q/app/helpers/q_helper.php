@@ -764,6 +764,51 @@ if (!function_exists('invierte_date_time')) {
 
         return append($response);
     }
+    function format_listado($usuarios)
+    {
+
+        $response = [];
+
+        $titulos[] = d("#Coincidencias encontradas", " strong");
+        
+        $response[] = d($titulos, 'row border-bottom mt-5');
+
+        foreach ($usuarios as $row) {
+
+
+            $contenido = [];
+            $id_usuario = $row["id_usuario"];
+            
+            $persona = [];
+            $persona[] = d(format_nombre($row));
+            $persona[] = d($row["tel_contacto"]);
+            $persona[] = d($row["tel_contacto_alterno"]);
+            $persona[] = d( substr(_text_($row["email"],'...'),0,15));
+            
+            $imagen = d(
+                img(
+                    [
+                        "id" => $id_usuario,
+                        "src" => path_enid('imagen_usuario', $id_usuario),
+                        "onerror" => "this.src='../img_tema/user/user.png'",
+                        'class' => 'mx-auto d-block rounded-circle mah_50'
+                    ]
+                )
+            );
+
+            
+            $contenido[] = d($id_usuario,1);
+            $contenido[] = d($imagen,3);
+            $contenido[] = d(d($persona,'d-flex flex-column'),5);
+            
+            
+            $class =_text_('cliente_encontrado border-bottom mb-5 mt-3 fp8 row', _between);
+            $response[] = d($contenido, ["class" => $class, 'id' => $id_usuario] );
+        }
+
+        return d($response);
+    }
+
 
     function seccion_calificacion($data, $contenido, $calificacion_usuario, $id_usuario)
     {
