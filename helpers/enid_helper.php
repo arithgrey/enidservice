@@ -841,7 +841,7 @@ function format_hora($date)
 function money($num)
 {
 
-    return _text_(sprintf('%01.2f', $num), "MXN");
+    return _text("$",sprintf('%01.2f', $num));
 }
 
 function format_load($extra = '')
