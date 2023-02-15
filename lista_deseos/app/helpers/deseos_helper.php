@@ -210,7 +210,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(lista_deseo($productos_deseados, $externo), "col-xs-12 col-md-8 border-right border-secondary");
         $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4");
 
-        return d(d(d($response,13), 10, 1), "row mt-3");
+        return d(d(d($response,13), 10, 1), "col-lg-12");
     }
 
     function seccion_procesar_pago($data, $productos_deseados)

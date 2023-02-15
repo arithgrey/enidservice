@@ -58,7 +58,7 @@ class usuario_model extends CI_Model
         return $this->update([$q => $q2], ["id" => $id_usuario]);
     }
 
-    function q_get($params = [], $id)
+    function q_get($id, $params = [])
     {
         return $this->get($params, ["id" => $id]);
     }
@@ -105,7 +105,32 @@ class usuario_model extends CI_Model
         return $result->result_array();
     }
 
+    function tel_contacto_email($q){
+        $query_get = _text_("SELECT 
+        id id_usuario,
+        name,                   
+        apellido_paterno ,                 
+        apellido_materno,                                    
+        email,
+        fecha_registro,                  
+        status,                                
+        email_alterno,
+        tel_contacto,
+        tel_contacto_alterno
+        FROM users
+        
+        WHERE 
+        tel_contacto like '%" . $q . "%'
+        OR 
+        tel_contacto_alterno  like '%" . $q . "%'
+        OR 
+        email like '%" . $q . "%' 
+        LIMIT 20"
+    );
 
+        $result = $this->db->query($query_get);
+        return $result->result_array();
+    }
     function cancelacion_compra($id_usuario)
     {
 

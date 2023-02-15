@@ -80,7 +80,7 @@ if (!function_exists('invierte_date_time')) {
 
     function formulario_primer_registro($in_session, $param, $es_cliente, $data)
     {
-        
+
         $es_cliente_class = ($es_cliente) ? '' : 'd-none';
         $r = [];
         if ($in_session < 1 || !$es_cliente) {
@@ -88,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
             $producto_carro_compra = $param["producto_carro_compra"];
             $recompensas = $param["recompensas"];
             $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
-            $r[] = d(flex(icon(_text_(_delivery_icon,'fa-2x')),_titulo($titulo)), 'mb-5');
+            $r[] = d(flex(icon(_text_(_delivery_icon, 'fa-2x')), _titulo($titulo)), 'mb-5');
 
             if (!$in_session) {
 
@@ -134,7 +134,7 @@ if (!function_exists('invierte_date_time')) {
                 _text_telefono
             );
 
-            $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none': '';
+            $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none' : '';
             $z[] = d(input_frm(
                 'mt-5',
                 'Fecha de entrega',
@@ -151,7 +151,7 @@ if (!function_exists('invierte_date_time')) {
             ), _text_("col-lg-4", $extra_sorteo));
 
 
-            
+
 
 
             $extra = ($in_session) ? 'col-lg-12 mt-5 ' : 'd-none col-lg-3 mt-5';
@@ -171,8 +171,17 @@ if (!function_exists('invierte_date_time')) {
             ), _text_($extra, $extra_sorteo));
 
 
+
+            $es_cliente_ext = ($es_cliente) ? 'd-none' : '';
+
+            $z[] = d(_text_(
+                span("¿No sabes el número de cliente?", 'black ml-3 border_black'),
+                span('encuentralo aquí', 'strong busqueda_cliente_frecuente cursor_pointer')
+            ), _text_('mt-3 col-lg-12', $es_cliente_ext));
+
+
             $z[] = input_frm(
-                "col-lg-9 mt-5 d-none adicionales_adimistrador_numero_cliente",
+                "col-lg-12 mt-5 d-none adicionales_adimistrador_numero_cliente",
                 "#cliente",
                 [
                     "id" => "input_numero_cliente",
@@ -195,7 +204,7 @@ if (!function_exists('invierte_date_time')) {
                 $input,
                 "mt-5 text-uppercase black strong",
                 "mr-3"
-            ), _text_($extra, $extra_sorteo,'label_registro_facebook'));
+            ), _text_($extra, $extra_sorteo, 'label_registro_facebook'));
 
             $z[] = input_frm(
                 "col-lg-9 mt-5 d-none seccion_input_facebook",
@@ -235,7 +244,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = d(flex(
                 $input,
-                "Indicó Ubicación",            
+                "Indicó Ubicación",
                 "mt-3 text-uppercase black strong",
                 "mr-3"
             ), $extra);
@@ -245,10 +254,10 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "checkbox",
                 "class" => "checkbox_enid check_vio_catalogo_web",
             ]);
-    
+
             $z[] = d(flex(
                 $input,
-                "Vió catálogo web",            
+                "Vió catálogo web",
                 "mt-3 text-uppercase black strong",
                 "mr-3"
             ), $extra);
@@ -347,7 +356,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = append($inputs);
 
-            
+
 
             $config_email = [
                 "name" => "email",
@@ -360,9 +369,9 @@ if (!function_exists('invierte_date_time')) {
             ];
             //if (!$es_cliente) {
 
-                $inicio = substr( sha1(mt_rand()),1,20);
-                $fin = substr(sha1(mt_rand()),1,20);
-                $config_email['value'] = _text($inicio, '@', $fin,'.com');
+            $inicio = substr(sha1(mt_rand()), 1, 20);
+            $fin = substr(sha1(mt_rand()), 1, 20);
+            $config_email['value'] = _text($inicio, '@', $fin, '.com');
             //}
 
             $z[] = input_frm(
@@ -380,9 +389,9 @@ if (!function_exists('invierte_date_time')) {
                     "required" => "true",
                     "placeholder" => "***",
                 ];
-            
+
             $config_password['value'] = sha1(mt_rand());
-            
+
             $z[] = input_frm(
                 _text_("col-lg-6 mt-5 d-none", $es_cliente_class),
                 "PASSWORD",
@@ -393,13 +402,28 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");            
+            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");
             $r[] = form_close();
         }
 
         $response[] = d($r, "primer_compra");
         $response[] = registrado();
+        $response[] = modal_busqueda_cliente_frecuente();
         return append($response);
+    }
+    function modal_busqueda_cliente_frecuente()
+    {
+        $contenido[] = d(_titulo('¿Número telefónico o email del cliente?', 4), 'borde_end_b ');
+
+        $input_busqueda = input(['class' => "input_busqueda_cliente", "name" => "q"]);
+        
+        $form[] = form_open("", ["class" => "form_busqueda_cliente"]);
+        $form[] = flex('Búsqueda:', $input_busqueda, _text_(_between,'mt-5' ));
+        $form[] = form_close();
+        $form[] = place("place_usuarios_coincidentes");
+        $contenido[] = d($form, 'mt-2 f12 black');
+
+        return gb_modal($contenido, 'modal_busqueda_cliente_frecuente');
     }
 
 
@@ -815,7 +839,7 @@ if (!function_exists('invierte_date_time')) {
                 ];
 
 
-            
+
 
             $response[] = d($text, 12);
         }

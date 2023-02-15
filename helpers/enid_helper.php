@@ -1345,6 +1345,7 @@ function modal_prueba_en_casa()
 
     return gb_modal($contenido, 'modal_prueba_en_casa');
 }
+
 function modal_anuncio_negocio()
 {
     $contenido[] = d(_titulo('Anuncia tus artículos en Enid Service', 4), 'borde_end_b ');

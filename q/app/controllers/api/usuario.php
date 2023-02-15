@@ -134,7 +134,7 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $response = $this->usuario_model->q_get(["id_empresa"], $param["id_usuario"])[0]["id_empresa"];
+            $response = $this->usuario_model->q_get($param["id_usuario"],["id_empresa"])[0]["id_empresa"];
         }
         $this->response($response);
     }
@@ -284,10 +284,26 @@ class usuario extends REST_Controller
                 "tel_lada"
             ];
 
-            $response = $this->usuario_model->q_get($params, pr($usuario, "id_usuario"));
+            $response = $this->usuario_model->q_get(pr($usuario, "id_usuario"), $params);
         }
         $this->response($response);
     }
+
+    function tel_contacto_email_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "q")) {
+            
+
+            $usuarios = $this->usuario_model->tel_contacto_email($param["q"]);
+            $response = format_listado($usuarios);    
+
+        }
+        $this->response($response);
+    }
+
 
     function q_GET()
     {
@@ -317,7 +333,7 @@ class usuario extends REST_Controller
             ];
             $completo = prm_def($param, 'c');
             $params = ($completo > 0) ? [] : $params;
-            $response = $this->usuario_model->q_get($params, $param["id_usuario"]);
+            $response = $this->usuario_model->q_get($param["id_usuario"], $params);
         }
         $this->response($response);
     }
@@ -434,7 +450,7 @@ class usuario extends REST_Controller
         $response = false;
         if (fx($param, "id_usuario")) {
 
-            $response = $this->usuario_model->q_get(["tipo_entregas", "entregas_en_casa"], $param["id_usuario"]);
+            $response = $this->usuario_model->q_get($param["id_usuario"], ["tipo_entregas", "entregas_en_casa"]);
         }
         $this->response($response);
     }
@@ -458,7 +474,7 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $response = $this->usuario_model->q_get(["informes_telefono"], $param["id_usuario"]);
+            $response = $this->usuario_model->q_get($param["id_usuario"], ["informes_telefono"]);
         }
         $this->response($response);
     }
