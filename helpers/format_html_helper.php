@@ -1945,7 +1945,7 @@ function navegacion(
         $response[] = d(d(
             _text_(
                 $categorias,
-                span('Pago contra entrega', 'strong text-uppercase'),
+                span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
                 icon('fa fa-handshake-o fa-2x', 'strong'),
                 span('ENVÍO GRATIS', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
