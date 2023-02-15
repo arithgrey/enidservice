@@ -14,6 +14,15 @@ const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
 $("footer").ready(() => {
 
+    $(".accion_forma_pago").click(function(){        
+        $("#modal_formas_pago").modal("show");        
+    });
+
+    $(".accion_modal_politica_devoluciones").click(function(){        
+        $("#modal_politica_devoluciones").modal("show");        
+    });
+    
+
     $(".prueba_en_casa").click(function(){        
         $("#modal_prueba_en_casa").modal("show");        
     });

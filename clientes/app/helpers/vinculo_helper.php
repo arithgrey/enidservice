@@ -7,41 +7,9 @@ if (!function_exists('invierte_date_time')) {
     function render($data)
     {
 
-        $link_facebook = format_link(
-            "Facebook",
-            [
-                "href" => path_enid("fotos_clientes_facebook", 0, 1),
-                "target" => "_black",
-                "class" => "click_facebook_clientes"
-            ],
-            0
-        );
+      
 
-        $link_instagram = format_link(
-            "Instagram",
-            [
-                "href" => path_enid("fotos_clientes_instagram", 0, 1),
-                "target" => "_black",
-                "class" => "click_instagram_clientes"
-            ],
-            0
-        );
-
-
-        $link_whatsApp = format_link(
-            "Whatsapp",
-            [
-                "href" => path_enid('whatsapp', 0, 1),
-                "class" => "whatsapp_trigger",
-                "target" => "_black"
-            ],
-            0
-        );
-
-
-        $class = "justify-content-between align-items-center w-100 d-flex mb-3";
-        $redes_sociales = d([$link_facebook, $link_instagram, $link_whatsApp], $class);
-        $response[] = d($redes_sociales, " col-sm-10 col-sm-offset-1 mt-5");
+                
         $response[] = d(foto_link($data), 10, 1);
         $response[] = d(add_imgs_cliente_empresa($data), 10, 1);
         return d($response, " bg_black shadow  text-center");

@@ -5,22 +5,24 @@ if (!function_exists('invierte_date_time')) {
     function valida_tiempo_entrega()
     {
         $contenido[] = d(_text_(icon('fa fa-truck'), span("Envío gratis recibe el mismo día",'underline ml-2')), 'top_40  black text-uppercase');
-        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2')), 'black text-uppercase mt-2');
-        $contenido[] = d(a_enid(
+        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');
+        
+        
+        
+        $contenido[] = d(d(
             _text_(icon("fa fa-check"), span("Formas de pago",'underline ml-2')),
             [
-                "class" => " black text-uppercase",
-                "href" => path_enid("forma_pago")
+                "class" => " black text-uppercase",                
             ]
-        ), 'mt-2 black ');
-        $contenido[] = d(a_enid(
+        ), 'mt-4 black accion_forma_pago cursor_pointer');
+
+        $contenido[] = d(d(
             _text_(icon('fa fa-long-arrow-left'),
                 span("Política de devoluciones","underline ml-2")),
             [
-                "class" => "black text-uppercase",
-                "href" => path_enid("cambios-y-devoluciones")
+                "class" => "black text-uppercase"                
             ]
-        ), 'mt-2 black ');
+        ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
 
         return append($contenido);
     }

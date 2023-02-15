@@ -1,3 +1,4 @@
+
 <?= gb_modal() ?>
 <h2 class="d-none">
     mancuernas walmart
