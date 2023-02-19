@@ -87,27 +87,27 @@ if (!function_exists('invierte_date_time')) {
 
             $producto_carro_compra = $param["producto_carro_compra"];
             $recompensas = $param["recompensas"];
-            $titulo = ($es_cliente) ? "¿Quién recibe?" : 'Datos del cliente';
-            $r[] = d(flex(icon(_text_(_delivery_icon, 'fa-2x')), _titulo($titulo)), 'mb-5');
+            $titulo = ($es_cliente) ? "INFORMACIÓN DE ENTREGA" : 'Datos del cliente';
+            $r[] = d(flex( _titulo($titulo)), 'mb-5');
 
             if (!$in_session) {
 
 
-                $clase = 'mt-3 black mb-5 f11 borde_black p-2';
-                $r[] = d('Te llamaremos 
-                            en cuanto estemos de 
-                            camino a entregar tu pedido!', $clase);
+                $clase = 'mt-3 black mb-5 f12  p-2';
+                $r[] = d(
+                    _text_(
+                        icon('fa fa-truck'),'Solo para ayudarnos entregar tu pedido'
+                    ), $clase);
             }
 
 
 
             $z[] = input_frm(
                 "col-lg-6 mt-5",
-                "NOMBRE",
+                "Nombre*",
                 [
                     "name" => "nombre",
-                    "id" => "nombre",
-                    "placeholder" => "Aquí va tu nombre",
+                    "id" => "nombre",                    
                     "class" => "nombre",
                     "type" => "text",
                     "required" => "true",
@@ -119,7 +119,7 @@ if (!function_exists('invierte_date_time')) {
 
             $z[] = input_frm(
                 "col-lg-6 mt-5",
-                "TELÉFONO",
+                "Teléfono celular*",
                 [
                     "id" => "telefono",
                     "class" => "telefono",
@@ -127,8 +127,7 @@ if (!function_exists('invierte_date_time')) {
                     "maxlength" => 10,
                     "minlength" => 8,
                     "name" => "telefono",
-                    "required" => "true",
-                    "placeholder" => "Aquí va tu teléfono",
+                    "required" => "true"                    
 
                 ],
                 _text_telefono
