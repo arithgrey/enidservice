@@ -269,10 +269,10 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $response[] = d(lista_deseo($productos_deseados, $externo), "col-xs-12 col-md-8 border-right border-secondary");
-        $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4");
+        $response[] = d(lista_deseo($productos_deseados, $externo), "col-xs-12 col-md-8 border-right border-secondary mt-5");
+        $response[] = d(seccion_procesar_pago($data, $productos_deseados), "col-xs-12 col-md-4 mt-5");
 
-        return d(d(d($response,13), 10, 1), "col-lg-12");
+        return d(d(d($response,13), 'col-xs-12 col-md-10 col-md-offset-1'), "col-lg-12");
     }
 
     function seccion_procesar_pago($data, $productos_deseados)
@@ -355,7 +355,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $extra = is_mobile() ? 'fixed-bottom bg_black borde_black' : 'position-fixed';
-        
+    
         return d($response, $extra);
     }
 
@@ -626,22 +626,10 @@ if (!function_exists('invierte_date_time')) {
             $text_precio = $precio * $articulos;
             $text_precio_alto = $precio_alto * $articulos;
 
-            /*
-            $seleccionar_envio = input(
-                [
-                    "type" => "checkbox",
-                    "class" => "mx-auto my-auto seleccion_producto_carro_compra",
-                    "checked" => "checked",
-                    "value" => $id,
-                    "total" => $text_precio
-
-                ]
-            );
-            */
 
             $seccion_imagen_seleccion_envio =
                 flex("", $imagen, _between_start);
-            $r[] = d($seccion_imagen_seleccion_envio, "col-sm-3");
+            $r[] = d($seccion_imagen_seleccion_envio, "col-xs-5 col-sm-3 p-0");
             $x = [];
 
             $nombre_servicio = $row["nombre_servicio"];
@@ -652,25 +640,30 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "black"
                 ]
             );
-            $x[] = h($link, 4);
-
-
+            $x[] = h($link, 4,["class" => "mb-5"]);
+                
 
             if ($numero_boleto < 1) {
+                $selector = select_cantidad_compra(
+                    0,
+                    11,
+                    $articulos,
+                    'cantidad_articulos_deseados',
+                    $id
+                );
+
                 $x[] = str_repeat(icon("fa fa-star"), 5);
-                $texto_deseo = _text_($row["deseado"], " veces comprado");
-                $x[] = d($texto_deseo, "label-rating");
+                $texto_deseo = _text_(span($row["deseado"],'strong'), "clientes han recomendado este artículo!");
+                $x[] = d($texto_deseo, "label-rating mb-5 mt-2 black");
 
+                
+                
+                $x[] = d($selector, 'col-lg-4 p-0 d-none d-md-block');
+                
 
-                $selector =
-                    select_cantidad_compra(
-                        0,
-                        10,
-                        $articulos,
-                        'cantidad_articulos_deseados',
-                        $id
-                    );
-                $x[] = d($selector, 'col-lg-6 p-0');
+                $texto_selector = flex("Cantidad:", $selector,"align-items-end" ,'strong mr-3');
+                $x[] = d(flex(money($text_precio),$texto_selector, _text_(_between),'align-self-end strong'),'d-block d-md-none');
+
             } else {
 
                 $x[] = cuerpo_boleto($numero_boleto);
@@ -680,40 +673,43 @@ if (!function_exists('invierte_date_time')) {
             $eliminar = d(
                 icon(_eliminar_icon),
                 [
-                    "class" => "cursor_pointer hover_black mb-5 fa-2x",
+                    "class" => "cursor_pointer hover_black mb-5 ",
                     "onclick" => $tipo
                 ]
             );
 
-            $r[] = d($x, 6);
-            $z = [];
+            $r[] = d($x,'col-xs-7');
+            $z = [];            
             $z[] = h(money($text_precio), 4, 'strong');
 
             if ($precio_alto > $precio) {
                 $z[] = h(del(money($text_precio_alto)), 5, ' red_enid');
             }
 
-            $z[] = d($eliminar, "text-primary text-center");
+            
 
             $es_servicio = $row["flag_servicio"];
             $id_ciclo_facturacion = $row["id_ciclo_facturacion"];
             $z[] = formulario_orden_compra_deseo_cliente($id, $id_producto, 1, $articulos, $es_servicio, $id_ciclo_facturacion);
 
-            $r[] = d($z, 'col-lg-3 text-center');
-            $response[] = d($r, 'col-md-12 mb-5');
+            $r[] = d($z, 'col-sm-2 col-xs-12 text-right d-none d-md-block ');
+
+            $response[] = d($eliminar, "text-primary text-right col-xs-12");
+            $response[] = d($r, 'col-md-12 mb-5 p-0');
             $response[] = d('', 'col-md-12 mt-5 mb-5 border_black');
         }
 
         
       
-        $titulo = _titulo("Estos son los artículos que haz agregado a tu lista de compras!");
+        $titulo = _titulo("TU CARRITO");
 
-        $data_response[] = d(d(
-            flex( icon("fa fa-shopping-bag fa-2x mr-1"),$titulo)
-            ,12), 'row');                
+        $data_response[] = d(d(flex( icon("fa fa-shopping-bag fa-2x mr-1"),$titulo)), 'row mb-3');                
+        $data_response[] = d(
+            d('Los artículos en tu carrito no están reservados. 
+            Termina el proceso de compra ahora para hacerte con ellos.'),13);
         $data_response[] = hr();
         $data_response[] = d($response, 'row');
-        return d($data_response, "col-xs-12");
+        return d(d($data_response, "col-xs-12"),13);
     }
     function cuerpo_boleto($numero_boleto)
     {
