@@ -97,15 +97,17 @@ if (!function_exists('invierte_date_time')) {
             case "tenisg5":
 
                     $response_[] = d(
-                        "Gana al comprar más de un par!",
+                        "Inicia tu negocio de venta de tenis calida G5",
                         'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
                     );
     
-                    $response_[] = d("Réplicas de tenis al por mayor los llevamos a tu domicilio y pagas cuando estén en tus manos!", 'black col-sm-12 p-0 mt-3 mb-3');
+                    $response_[] = d(_text_("Cualquier par de tenis en",span("$599",'strong f12')," a partir de la compra de 3 "), 'black col-sm-12 p-0 mt-3 mb-3');
                     
-                    $response_[] = d(d(_text_("1 par",span("$999",'underline ml-2 f12 strong')), 'black mt-2 row'),12);                                        
+                    $response_[] = d(d(_text_("Ó"), 'black row'),12);                                        
+
+                    $response_[] = d(d(_text_("1 par por",span("$999",'underline ml-2 f12 strong')), 'black mt-2 row'),12);                                        
                     $response_[] = d(d(  _text_(  "2 pares por",span('$1699', "underline ml-2 f12 strong")), 'black row'),12);                                        
-                    $response_[] = d(d( _text_( "3 pares por", span('$2200','underline ml-2 f12 strong')), 'black row'),12);                                        
+                    
 
                     $response_[] =  d(d('<iframe width="560" 
                                         height="315" 
