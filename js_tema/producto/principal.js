@@ -9,6 +9,7 @@ let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
 let $en_lista_deseos =  $(".en_lista_deseos");
 $(document).ready(function () {
+    $("footer").ready(evalua_promocion_modal);
     $(".productos_en_carro_compra").removeClass("d-none");    
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     oculta_acceder();

@@ -7,7 +7,7 @@ $(document).ready(() => {
     $("footer").ready(carga_promociones_sugerencias);
     $("footer").ready(carga_promociones_top);
     $("footer").ready(carga_ultimos_agregados);
-        
+    $("footer").ready(evalua_promocion_modal);
 });
 
 let filtro = () => {

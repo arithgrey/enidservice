@@ -307,12 +307,23 @@ class Paths
                 ],
 
             ],
+            "cambios_devoluciones" => [
+                "js" =>
+                [
+                  
+                    "cambios/principal.js",
+                ],
+            ],
             "forma_pago" =>
             [
-
+                "js" =>
+                [
+                  
+                    "forma_pago/principal.js",
+                ],
                 "css" =>
                 [
-                    "formas_pago.css",
+                    "formas_pago.css",                    
 
                 ],
                 "meta_keywords" => "",

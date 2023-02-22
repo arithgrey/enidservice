@@ -123,7 +123,12 @@ function accesos_enid()
         _text("http://enidservices.com/", _web, "/img_tema/portafolio/oxxo-logo.png"),
         "rastreo_pedido" => 
         _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
-        "dispositivo" => "img_tema/dispositivo.png"
+        "dispositivo" => "img_tema/dispositivo.png",
+        "10_descuento" => _text("/img_tema/descuento.jpg")        
+        
+
+        
+
     ];
 
     return $base_url + accesos_internos();

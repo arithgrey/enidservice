@@ -1259,7 +1259,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     );
 
     $cerrar = d($cerrar, "modal-header border-0");
-    $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content borde_end rounded-0");
+    $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content borde_end rounded-0 seccion_modal");
     $contenido = d(
         $seccion_contenido,
         [
