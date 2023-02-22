@@ -1,7 +1,7 @@
 "use strict";
 let $anexar_foto_link = $(".anexar_foto_link");
 $(document).ready(() => {
-
+    $("footer").ready(evalua_promocion_modal);
     $("footer").removeClass("blue_enid3");
     $anexar_foto_link.click(expon_formulario_fotos);  
 });

@@ -41,14 +41,10 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 <?= menu_session_mobil($in_session) ?>
 
 <div class="container-fluid" id="page-content">
+<?=modal_intento_conversion()?>
 <?=modal_prueba_en_casa()?>
 <?=modal_format_pago()?>
 <?=modal_politica_devoluciones()?>
 <?=modal_anuncio_negocio()?>
 <?=modal_venta_auto()?>
 <?=modal_mayoristas()?>
-
-  
-    
-
-

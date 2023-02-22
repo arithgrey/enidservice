@@ -12,8 +12,11 @@ const MAX_TELEFONO_LEGTH = 12;
 const MIN_TELEFONO_MOBILE_LENGTH = 9;
 const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
-$("footer").ready(() => {
 
+$("footer").ready(() => {
+       
+    
+    
     $(".accion_forma_pago").click(function(){        
         $("#modal_formas_pago").modal("show");        
     });
@@ -115,8 +118,27 @@ $("footer").ready(() => {
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
 
 
-
 });
+
+function evalua_promocion_modal(){
+       
+    let $ip = $(".ip_referer_enid").val();    
+    let url = "../q/index.php/api/intento_conversion/id_cupon/format/json/";
+    let data_send = {"ip" : $ip};
+
+    request_enid("GET", data_send, url, trigger_promocion);
+}
+let trigger_promocion = function(data){
+    
+    if(data.promocion_10_porciento){
+        
+        $("#modal_intento_conversion").modal("show");        
+        $(".seccion_modal").addClass("bg_black").removeClass("borde_end");
+        $(".cerrar_modal").removeClass("black").addClass("white borde_amarillo");
+
+    }
+}
+    
 let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
 
     let $http_referer_enid = $(".http_referer_enid").val();    

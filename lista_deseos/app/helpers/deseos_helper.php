@@ -250,6 +250,7 @@ if (!function_exists('invierte_date_time')) {
     
 
         $r[] = append($response);
+        $r[] = hiddens(["class" => "en_carro", "value" => 0]);
         $r[] = d(busqueda_error());
         $r[] = format_link(
             "Mira nuestros productos!",
@@ -708,6 +709,7 @@ if (!function_exists('invierte_date_time')) {
             d('Los artículos en tu carrito no están reservados. 
             Termina el proceso de compra ahora para hacerte con ellos.'),13);
         $data_response[] = hr();
+        $data_response[] = hiddens(["class" => "en_carro", "value"=> 99]);
         $data_response[] = d($response, 'row');
         return d(d($data_response, "col-xs-12"),13);
     }

@@ -12,6 +12,7 @@ let $cobro_texto = $(".cobro_texto");
 let $cobro_visible = $(".cobro_visible");
 let $texto_comision_venta = $(".texto_comision_venta");
 
+
 $(document).ready(function () {
 
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
@@ -24,10 +25,26 @@ $(document).ready(function () {
     $form_segunda_compra.submit(segunda_compra);
     $cobro_secundario.keyup(cobro_secundario);
     $('#sticky-footer').addClass("d-none");
-    
-    
+    $("footer").ready(log_intento_conversion);
+
 
 });
+let log_intento_conversion = function () {
+
+    let $en_carro = $(".en_carro").val();
+    if(parseInt($en_carro) > 0){
+
+        let $ip = $(".ip_referer_enid").val();    
+        let url = "../q/index.php/api/intento_conversion/index/format/json/";
+        let data_send = {
+            "in_session": get_option("in_session"),                    
+            "ip" : $ip,
+        };
+    
+        request_enid("POST", data_send, url, response_log);
+    }
+    
+}
 
 let segunda_compra = function (e) {
 
