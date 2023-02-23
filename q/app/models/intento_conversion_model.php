@@ -62,7 +62,10 @@ class Intento_conversion_model extends CI_Model
     function intento_conversion($ip)
 	{
 		$query_get = "SELECT * FROM intento_conversion 
-                    WHERE ip = '".$ip."' AND se_muestra_cupon < 4 LIMIT 1";
+                    WHERE ip = '".$ip."' AND 
+                    se_muestra_cupon < 4 
+                    AND aplica_descuento < 1
+                    LIMIT 1";
 		return $this->db->query($query_get)->result_array();
 		
 	}

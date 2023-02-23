@@ -1436,7 +1436,9 @@ function modal_intento_conversion(){
     $texto_agenda = d(d('AGENDA TU PEDIDO HOY Y RECIBE UN 10% DE DESCUENTO', 'display-5 white font-weight-bold'));    
     $imagen = img(["src"  => path_enid("10_descuento")]);
     $response[] = flex($texto_agenda, $imagen,_text_(' bg_black p-5',_between));
-    $response[] = d(d(format_link("Activa promoción",["href" => path_enid('lista_deseos')])),12);
+
+
+    $response[] = d(d(format_link("Lo quiero!",["class" => "activa_cupon"])),12);
     $response[] = d(img(["src" => create_url_preview("back_experiencia.jpg")]));    
     $contenido[] =  d($response, 13);
 
