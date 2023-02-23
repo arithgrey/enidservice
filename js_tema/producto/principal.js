@@ -9,6 +9,7 @@ let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
 let $en_lista_deseos =  $(".en_lista_deseos");
 $(document).ready(function () {
+
     $("footer").ready(evalua_promocion_modal);
     $(".productos_en_carro_compra").removeClass("d-none");    
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
@@ -36,7 +37,7 @@ $(document).ready(function () {
     $(".texto_externo_compra").click(operaciones_compra_externas);
 
     $num_ciclos.change(articulos_seleccionados);
-    //$agregar_deseos_sin_antecedente.click(agregar_deseos);
+    
     $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
     $costos_precios_servicio.click(costos_precios_servicio);
     $form_costo.submit(costo_servicio);

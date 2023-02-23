@@ -1224,9 +1224,8 @@ if (!function_exists('invierte_date_time')) {
                     'pt-3 pb-3'
                 ),
                 [
-                    'class' => 'agregar_deseos_sin_antecedente en_lista_deseos white',
-                    'id' => $id_servicio,
-                    "onclick" => "log_operaciones_externas(27, $id_servicio)"
+                    'class' => 'en_lista_deseos white',                    
+                    "onclick" => "agregar_deseos_sin_antecedente_gbl_btn($id_servicio)"
                 ]
             );
         }

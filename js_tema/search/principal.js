@@ -65,10 +65,8 @@ let response_servicios_recien_agregados = data => {
         let numero_servicio = get_parameter_enid($(this), "id");
         redirect(path_enid("servicio", numero_servicio));    
     });
-    /*
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
-    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
-    */
+    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);      
     
 }
 
