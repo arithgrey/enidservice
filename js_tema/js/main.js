@@ -114,8 +114,9 @@ $("footer").ready(() => {
         });
     }
     
-    $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);    
-    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+   
+
+    //$('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     $(".activa_cupon").click(activar_cupon);
 
 });
@@ -1386,6 +1387,25 @@ let ver_menos_notificaciones_ordenes_compra = function () {
     $('.venta_futura').addClass('d-none');
     $('.mas_ventas_notificacion').removeClass('d-none');
     $('.menos_ventas_notificacion').addClass('d-none');
+}
+
+let agregar_deseos_sin_antecedente_gbl_btn = function (id_servicio) {
+    
+    let cantidad = get_valor_selected(".select_cantidad");                 
+    if(parseInt(id_servicio) > 0 && parseInt(cantidad) > 0 ){
+
+        let data_send = { "id_servicio": id_servicio, "articulos": cantidad };        
+        if (parseInt(get_option("in_session")) > 0) {
+
+                let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
+                request_enid("PUT", data_send, url, adicionales_gbl);
+
+        } else {
+
+                let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
+                request_enid("POST", data_send, url, adicionales_gbl);
+        }
+    }
 }
 
 let agregar_deseos_sin_antecedente_gbl = function () {
