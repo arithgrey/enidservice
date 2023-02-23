@@ -411,9 +411,31 @@ if (!function_exists('invierte_date_time')) {
             $response[] =  d(money($nuevo_total), _text_("display-6", $extra));
         } else {
             
+
             $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));
             $extra  = is_mobile() ? 'white': ''; 
-            $response[] =  flex($text,'Pagarás al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3'));
+            $total_descuento_intento_conversion = porcentaje($subtotal , 10);
+            
+
+
+            $precio_descuento_conversion = $subtotal - $total_descuento_intento_conversion;
+            $precio_descuento_conversion = d(money($precio_descuento_conversion), _text_("display-5 strong ml-3", $extra));
+            $precios_intento_conversion = flex(
+                del(money($subtotal)) , 
+                $precio_descuento_conversion,
+                'flex-column',
+                _text_($extra, 'ml-3'));
+
+            $response[] =  d(flex(
+                $precios_intento_conversion,
+                'Pagarás al recibir tu pedido',
+                'flex-column mb-2 mt-2',
+                '',
+                _text_($extra, 'ml-3')),
+                'total_con_descuento_conversion d-none');
+
+            $response[] =  d(flex($text,'Pagarás al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3')),'total_sin_descuento');
+            
         }
 
         return $response;
@@ -622,7 +644,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r = [];
             $url_servicio = get_url_servicio($id_producto);
-            $config = ["href" => $url_servicio, "target" => "_black"];
+            $config = ["href" => $url_servicio];
             $imagen = a_enid(img($row["url_img_servicio"]), $config);
             $text_precio = $precio * $articulos;
             $text_precio_alto = $precio_alto * $articulos;

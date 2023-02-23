@@ -41,9 +41,19 @@ let log_intento_conversion = function () {
             "ip" : $ip,
         };
     
-        request_enid("POST", data_send, url, response_log);
+        request_enid("POST", data_send, url, response_log_conversion);
     }
     
+}
+let response_log_conversion = function (data) {
+    
+    
+    if(parseInt(data) > 0){
+
+        $(".total_con_descuento_conversion").removeClass("d-none");
+        $(".total_sin_descuento").addClass("d-none");
+
+    }    
 }
 
 let segunda_compra = function (e) {

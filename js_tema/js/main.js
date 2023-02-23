@@ -116,7 +116,7 @@ $("footer").ready(() => {
     
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);    
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
-
+    $(".activa_cupon").click(activar_cupon);
 
 });
 
@@ -128,6 +128,17 @@ function evalua_promocion_modal(){
 
     request_enid("GET", data_send, url, trigger_promocion);
 }
+let activar_cupon = function(){
+    
+    let url = "../q/index.php/api/intento_conversion/cupon/format/json/";
+    let $ip = $(".ip_referer_enid").val();  
+    let data_send = {"ip" : $ip};
+    request_enid("PUT", data_send, url, trigger_cupon);
+
+}
+let trigger_cupon = function(data){
+    redirect(path_enid("lista_deseos"));
+}
 let trigger_promocion = function(data){
     
     if(data.promocion_10_porciento){
@@ -135,7 +146,7 @@ let trigger_promocion = function(data){
         $("#modal_intento_conversion").modal("show");        
         $(".seccion_modal").addClass("bg_black").removeClass("borde_end");
         $(".cerrar_modal").removeClass("black").addClass("white borde_amarillo");
-
+        
     }
 }
     
