@@ -121,14 +121,7 @@ $("footer").ready(() => {
 
 });
 
-function evalua_promocion_modal(){
-       
-    let $ip = $(".ip_referer_enid").val();    
-    let url = "../q/index.php/api/intento_conversion/id_cupon/format/json/";
-    let data_send = {"ip" : $ip};
 
-    request_enid("GET", data_send, url, trigger_promocion);
-}
 let activar_cupon = function(){
     
     let url = "../q/index.php/api/intento_conversion/cupon/format/json/";
@@ -1428,6 +1421,7 @@ let agregar_deseos_sin_antecedente_gbl = function () {
 
             let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
             request_enid("POST", data_send, url, adicionales_gbl);
+            busqueda_carro_agregado();
         }
 
     }
@@ -1459,10 +1453,39 @@ let quitar_deseo_sin_antecedente_gbl = function () {
 }
 let adicionales_gbl = function () {
     metricas_perfil();
-    cerrar_modal();
+    //cerrar_modal();
     let $en_lista_deseos_producto = $(".en_lista_deseos_producto").val();
     if(parseInt($en_lista_deseos_producto) > 0 ){
+        
         redirect(path_enid("lista_deseos"));
+
     }   
 }
 
+function evalua_promocion_modal(){
+       
+    let $ip = $(".ip_referer_enid").val();    
+    let url = "../q/index.php/api/intento_conversion/id_cupon/format/json/";
+    let data_send = {"ip" : $ip};
+
+    request_enid("GET", data_send, url, trigger_promocion);
+}
+let busqueda_carro_agregado = function () {
+ 
+    let $ip = $(".ip_referer_enid").val();    
+    let url = "../q/index.php/api/lista_deseo/explora_deseo/format/json/";
+    let data_send = {"ip" : $ip};
+
+    request_enid("GET", data_send, url, deseo_modal);
+
+}
+
+let deseo_modal = function (data) {
+    
+    cerrar_modal();    
+    $("#modal_agregado_carro_compra").modal("show");
+    render_enid(".place_desglose_carro_compra", data);   
+    $(".sigue_comprando_trigger").click(function(){
+        $("#modal_agregado_carro_compra").modal("hide");
+    });
+}

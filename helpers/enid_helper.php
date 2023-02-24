@@ -1445,6 +1445,17 @@ function modal_intento_conversion(){
     return gb_modal($contenido, 'modal_intento_conversion');
 
 }
+function modal_desglose_carro_compra(){
+
+    
+    $response[] = d(d('¡AÑADIDO AL CARRITO CORRECTAMENTE!', 'display-5 black font-weight-bold'),12);
+    $response[] = d(place("place_desglose_carro_compra"),12);
+    $contenido[] =  d($response, 13);
+
+    return gb_modal($contenido, 'modal_agregado_carro_compra',0,1);
+
+}
+
 function modal_prueba_en_casa()
 {
     $contenido[] = d(_titulo('prueba en casa', 4), 'borde_end_b ');

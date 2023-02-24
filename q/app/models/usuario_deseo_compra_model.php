@@ -62,18 +62,19 @@ class Usuario_deseo_compra_model extends CI_Model
         return $this->db->query($query_get)->result_array()[0]["num"];
     }
 
-    function compra($ip)
+    function compra($ip, $limit = 0)
     {
         /*0 para agregado a la lista, 3 para los que ya habían pasado al formulario de compra*/
-        $query_get = "SELECT d.*, 
-                        d.id_usuario_deseo_compra id,
-                        s.* 
-                        FROM usuario_deseo_compra d 
-                        INNER JOIN servicio s on d.id_servicio =  s.id_servicio 
-                        WHERE 
-                        d.ip = '" . $ip . "' 
-                        AND 
-                        d.status IN(0,3)";
+        $extra = ($limit > 0 ) ? 'LIMIT 1' : '';
+        $query_get = _text_("SELECT d.*, 
+        d.id_usuario_deseo_compra id,
+        s.* 
+        FROM usuario_deseo_compra d 
+        INNER JOIN servicio s on d.id_servicio =  s.id_servicio 
+        WHERE 
+        d.ip = '" . $ip . "' 
+        AND 
+        d.status IN(0,3)",'ORDER BY d.fecha_registro DESC', $extra);
         return $this->db->query($query_get)->result_array();
     }
 
