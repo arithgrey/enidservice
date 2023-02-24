@@ -56,8 +56,8 @@ class Home extends CI_Controller
     private function load_lista_deseos($data)
     {
 
-
-        $lista = $this->get_lista_deseos($data["id_usuario"]);        
+        
+        $lista = $this->get_lista_deseos($data["id_usuario"]);                
         $lista_deseo = $lista["listado"];
         $data["recompensas"]= $lista["recompensas"];
         $data["ids_usuario_deseo"]= $lista["ids_usuario_deseo"];

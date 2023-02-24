@@ -1232,7 +1232,7 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
     return $response;
 }
 
-function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1)
+function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1, $modal_lg = 0)
 {
     $span = span('Loading', 'sr-only');
     $load = str_repeat(d(
@@ -1260,10 +1260,12 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
 
     $cerrar = d($cerrar, "modal-header border-0");
     $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content borde_end rounded-0 seccion_modal");
+
+    $extra = ($modal_lg > 0) ? 'modal-lg':'';
     $contenido = d(
         $seccion_contenido,
         [
-            "class" => "modal-dialog",
+            "class" => _text_("modal-dialog", $extra),
             "role" => "document",
         ]
     );

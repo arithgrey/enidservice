@@ -117,6 +117,41 @@ class usuario_deseo_compra extends REST_Controller
         }
         $this->response($response);
 
+        
+    }
+    function ip_carro_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+
+        if (fx($param, "ip")) {
+
+            $ip = $param["ip"];
+            $lista_deseos = $this->usuario_deseo_compra_model->compra($ip,1);                    
+            $listado = $this->app->add_imgs_servicio($lista_deseos);
+
+            $ids = array_column($listado, "id_recompensa");
+            $recompensa = [];
+            if(es_data($ids)){
+
+                $ids_recompensa = array_unique($ids);
+                $recompensa = $this->recompensa_ids($ids_recompensa);
+
+            }
+
+
+            $response = [
+                "listado" => $listado,
+                "recompensas" => $recompensa
+            ];
+            
+            
+
+        }
+        $this->response($response);
+
+        
     }
     private function recompensa_ids($ids)
     {   
