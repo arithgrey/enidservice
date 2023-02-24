@@ -99,24 +99,26 @@ class Usuario_deseo_model extends CI_Model
         return $this->db->query($query_update);
     }
 
-    function get_usuario_deseo($id_usuario)
+    function get_usuario_deseo($id_usuario, $carro = 0 )
     {
 
-        $query_get = "SELECT 
-				u.id, 
-                u.id_recompensa, 
-				u.num_deseo,
-				u.articulos,
-                u.numero_boleto,
-				s.*  
-				FROM  usuario_deseo u 
-				INNER JOIN servicio s  
-				ON u.id_servicio =  s.id_servicio 
-				WHERE  u.id_usuario =  $id_usuario
-				AND 
-				u.status IN(0,3)
-				ORDER BY u.fecha_registro desc   
-				LIMIT 50";
+        $extra = ($carro > 0) ? 'LIMIT 1': 'LIMIT 50';
+        $query_get = _text_("SELECT 
+        u.id, 
+        u.id_recompensa, 
+        u.num_deseo,
+        u.articulos,
+        u.numero_boleto,
+        s.*  
+        FROM  usuario_deseo u 
+        INNER JOIN servicio s  
+        ON u.id_servicio =  s.id_servicio 
+        WHERE  u.id_usuario =  $id_usuario
+        AND 
+        u.status IN(0,3)
+        ORDER BY u.fecha_registro desc   
+        ",$extra);
+        
         return $this->db->query($query_get)->result_array();
     }
 

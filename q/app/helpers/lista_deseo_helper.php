@@ -21,9 +21,7 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
 
         foreach ($productos_deseados as $row) {
-
-
-            $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
+            
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
             $precio_alto = $row["precio_alto"];

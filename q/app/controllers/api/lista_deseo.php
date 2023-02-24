@@ -26,5 +26,50 @@ class Lista_deseo extends REST_Controller
         $this->response($response);
 
     }
+    function explora_deseo_s_GET()
+    {
+        $param = $this->get();
+        $response = false;
+        $id_usuario = $this->app->get_session("id_usuario");
+        if ($id_usuario > 0) {
+            
+            $lista = $this->get_lista_deseos($id_usuario);                
+            $lista_deseo = $lista["listado"];            
+            $data["productos_deseados"] = $this->add_imagenes($lista_deseo);
+
+            if (es_data($data["productos_deseados"])) {
+                
+                $response = productos($data,  $data["productos_deseados"],1);
+
+            }
+        }
+        $this->response($response);
+    }
+    private function add_imagenes($servicios)
+    {
+        $response = [];
+        $a = 0;
+        foreach ($servicios as $row) {
+
+            $servicio = $row;
+            $id_servicio = $servicios[$a]["id_servicio"];
+            $servicio["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
+            $a++;
+            $response[] = $servicio;
+        }
+        return $response;
+
+    }
+    private function get_lista_deseos($id_usuario)
+    {
+    
+        return $this->app->api("usuario_deseo/carro", 
+            [
+                "id_usuario" => $id_usuario,
+                "c" => 1,
+            ]
+        );
+    }
+
 
 }

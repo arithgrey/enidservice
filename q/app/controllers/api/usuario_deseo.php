@@ -324,6 +324,39 @@ class usuario_deseo extends REST_Controller
         }
         $this->response($response);
     }
+
+    function carro_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_usuario")) {
+
+            $id_usuario = $param["id_usuario"];
+            if (array_key_exists("c", $param) && $param["c"] > 0) {
+
+                $listado = $this->usuario_deseo_model->get_usuario_deseo($id_usuario,1);
+                $ids = array_column($listado, "id_recompensa");                
+                $recompensa = [];
+
+                if (es_data($ids)) {
+
+                    $ids_recompensa = array_unique($ids);
+                    $recompensa = $this->recompensa_ids($ids_recompensa);
+                }
+
+                $response = [
+                    "listado" => $listado,
+                    "recompensas" => $recompensa
+                ];
+            } else {
+
+                $response = $this->usuario_deseo_model->get([], ["id_usuario" => $id_usuario], 30, 'num_deseo');
+            }
+        }
+        $this->response($response);
+    }
+
     private function recompensa_ids($ids)
     {
 

@@ -1332,7 +1332,6 @@ function _text() {
     return $response;
 }
 
-
 function d(text, className = '', id = '') {
 
     let div = document.createElement("div");
@@ -1416,6 +1415,7 @@ let agregar_deseos_sin_antecedente_gbl = function () {
 
             let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
             request_enid("PUT", data_send, url, adicionales_gbl);
+            busqueda_carro_agregado_s();
 
         } else {
 
@@ -1452,8 +1452,7 @@ let quitar_deseo_sin_antecedente_gbl = function () {
     }
 }
 let adicionales_gbl = function () {
-    metricas_perfil();
-    //cerrar_modal();
+    metricas_perfil();    
     let $en_lista_deseos_producto = $(".en_lista_deseos_producto").val();
     if(parseInt($en_lista_deseos_producto) > 0 ){
         
@@ -1469,6 +1468,15 @@ function evalua_promocion_modal(){
     let data_send = {"ip" : $ip};
 
     request_enid("GET", data_send, url, trigger_promocion);
+}
+let busqueda_carro_agregado_s = function () {
+ 
+    let data_send = {"id_usuario": get_parameter(".id_usuario")};     
+    let url = "../q/index.php/api/lista_deseo/explora_deseo_s/format/json/";
+    
+
+    request_enid("GET", data_send, url, deseo_modal);
+
 }
 let busqueda_carro_agregado = function () {
  
