@@ -1359,7 +1359,7 @@ function opciones_acceso($in_session)
 
 
     $link_lista_compras  = format_link(
-        _text_(icon("fa black fa-shopping-bag white"), "Agendar entrega"),
+        _text_(icon("fa black fa-shopping-bag white"), "Ver carrito"),
         [
             "href" => path_enid("lista_deseos"),
             "class" => "text-center mb-2"
