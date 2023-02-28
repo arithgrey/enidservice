@@ -368,6 +368,16 @@ class Paths
 
             ],
 
+            "automatizacion" => [
+
+                "js" =>
+                [
+                    "lista_deseos/automatizacion.js",
+
+                ]
+
+
+            ],
             "lista_deseos_productos_deseados" => [
                 "css" =>
                 [
@@ -387,6 +397,7 @@ class Paths
 
 
             ],
+
             "rastrea_paquete" => [
                 "css" =>
                 [
