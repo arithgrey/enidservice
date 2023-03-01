@@ -446,7 +446,7 @@ if (!function_exists('invierte_date_time')) {
             'col-xs-8 p-0'
         );
 
-        $r[] = d(agregar_lista_deseos($data, $en_session, $id_servicio), 'top_40');
+        $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
         $r[] = $tiempo_entrega;
         $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
@@ -1220,7 +1220,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_( span("Añadir al carrito",'ml-2'), icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
+                    _text_( span("Añadir al carrito"), icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
                     'pt-3 pb-3'
                 ),
                 [
@@ -1230,7 +1230,13 @@ if (!function_exists('invierte_date_time')) {
             );
         }
 
-        return append($response);
+        $agregar_lista_deseos = append($response);
+        $lista_deseos = icon('fa black agregar_deseos_sin_antecedente fa fa-heart-o fa-2x p-4 border border-secondary ',
+        [
+            "id" =>$id_servicio
+        ]);
+
+        return flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'top_40'),'p-0 col-xs-10','p-0 col-xs-2');
     }
     function confianza($id_servicio, $data)
     {

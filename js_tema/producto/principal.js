@@ -20,7 +20,7 @@ $(document).ready(function () {
         "desde_valoracion", get_parameter(".desde_valoracion"),
         "orden", "desc",
     ]);
-    $("footer").ready(carga_productos_sugeridos);
+    //$("footer").ready(carga_productos_sugeridos);
     $("footer").ready(carga_valoraciones);
     $(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
     $(".talla").click(agregar_talla);
@@ -46,6 +46,9 @@ $(document).ready(function () {
         $(".en_lista_deseos_producto").val(1);
     });
     $('#sticky-footer').addClass("d-none");
+    $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
+    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+
 });
 
 let carro_compra_recompensa  = function(){
@@ -82,6 +85,7 @@ let operaciones_compra_externas = () => {
 
 }
 
+/*
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
@@ -104,6 +108,7 @@ let response_carga_productos = data => {
 
     }
 };
+*/
 
 let carga_valoraciones = () => {
 
