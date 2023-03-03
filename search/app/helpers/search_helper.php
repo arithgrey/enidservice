@@ -72,6 +72,17 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         switch ($q) {
 
+            case "panel3d":
+
+                $response[] = d(
+                    "Innovación, modernidad y estilo para tu hogar o negocio",
+                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                );
+
+                $response[] = d("Llevamos ese estilo que te llevará al siguiente nivel!", 'black col-sm-12 p-0');
+
+            break;
+
             case "flores":
 
                 $response[] = d(
