@@ -1918,6 +1918,23 @@ function navegacion(
             "class"=>"dropdown-item border_black",
             "href"=> path_enid("kist-mas-vendidos")
         ]));
+        
+        $flex = flex( 
+            _text_(span("Paneles 3d",'f11 black ml-5 strong')),        
+            "Modernidad y estilo para tu espacio",
+            "flex-column",
+            "",
+            "ml-5 fp8"
+            
+        );
+
+        $list[] = li(a_enid(            
+            $flex
+            ,[
+            "class"=>"dropdown-item border_black",
+            "href"=> path_enid("paneles3d")
+        ]));
+
         $list[] = li(a_enid(
             
              span("Tenis",'f11 black ml-5'),
