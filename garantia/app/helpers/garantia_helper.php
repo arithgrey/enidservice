@@ -19,7 +19,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("Dejanos tu correo para enviarte tu codigo de Garantía","h3 black col-md-6 col-md-offset-3");
         $response[] = form_open("", ["class" => "form_garantia col-md-6 col-md-offset-3", "id" => "form_garantia"]);
         $response[] = hiddens(["name" => "orden_compra", "value" => $ticket]);
-        $response[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
+        $response[] = input_frm("mt-5", "email",
             [
                 "name" => "email",
                 "placeholder" => "CORREO",

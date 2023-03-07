@@ -400,7 +400,7 @@
     {
 
         $r[] = form_open("");
-        $r[] = input_frm('', 'Correo electrónico',
+        $r[] = input_frm('', 'email',
             [
                 "id" => "correo_electronico",
                 "name" => "correo_electronico",
