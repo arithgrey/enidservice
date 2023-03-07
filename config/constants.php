@@ -63,12 +63,12 @@ define('_flex_right', 'justify-content-end');
 
 define('_mbt5', 'mt-5 mb-5');
 define('_mbt5_md', 'mt-5 mb-5 mt-md-0 mb-md-0');
-
+define('_format_input','input-field mh_50 border border-dark  solid_bottom_hover_3 form-control');
 /**/
 define('_self_center', 'align-self-center');
 
 /*botones*/
-define('_registro', 'pb-3 pt-3 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action borde_green font-weight-bold');
+define('_registro', 'pb-3 pt-3 bg_black p-2 white w-100 text-uppercase cursor_pointer rounded-0 text-center format_action borde_grey font-weight-bold');
 
 /*textos*/
 define('_strong', 'text-uppercase black font-weight-bold');

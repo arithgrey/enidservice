@@ -93,10 +93,10 @@ if (!function_exists('invierte_date_time')) {
             if (!$in_session) {
 
 
-                $clase = 'mt-3 black mb-5 f12  p-2';
+                $clase = 'mt-3 black mb-5 p-2';
                 $r[] = d(
                     _text_(
-                        icon('fa fa-truck'),'Solo para ayudarnos a entregar tu pedido'
+                        icon('fa fa-truck'),'Solo usaremos estos datos para ayudarnos a entregar tu pedido'
                     ), $clase);
             }
 
