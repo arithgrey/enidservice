@@ -1,3 +1,7 @@
+.fa-heart-o{
+    font-weight: bold!important;
+}
+
 .hover_bg_black:hover{
     background: black;
     color: white!important;
@@ -1991,6 +1995,11 @@ ul li a {
 .borde_green{
     
     border: solid 3px #69ffc0 !important;
+}
+.borde_grey{
+    
+    border: solid 3px #ebecec !important;
+    
 }
 .border_b_green{
     
