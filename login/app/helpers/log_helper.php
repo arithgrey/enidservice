@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
             "¿Olvidasté tu contraseña?",
             [
                 "id" => "olvide-pass",
-                "class" => "recupara-pass  olvide_pass mt-3 underline",
+                "class" => "recupara-pass black olvide_pass mt-3 underline",
             ]
         );
         $r[] = append($x);
@@ -70,7 +70,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = img_default();
-        $r[] = h('RECUPERA TUS DATOS DE ACCESO', 3);
+        $r[] = h('RECUPERA TUS DATOS DE ACCESO', 3,'strong');
         $r[] = _text("<form class='form-pass' id='form-pass' action='", url_recuperacion_password(), "'>");
         $r[] = input(
             [
@@ -146,7 +146,7 @@ if (!function_exists('invierte_date_time')) {
             _text_nombre
         );
         $r[] = place("place_nombre_info");
-        $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
+        $r[] = input_frm("mt-5", "email",
             [
                 "name" => "email",
                 "placeholder" => "CORREO",
@@ -372,27 +372,32 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm(
-            " mt-4 mb-2", "CORREO ELECTRÓNICO",
+
+        
+        $form[] = h('INICIAR SESIÓN', 2,'text-uppercase strong');
+        $form[] = d("Vamos a comprobar si ya tienes una cuenta",'black mb-3');
+
+        //$form[] = h('Correo electrónico', 5,'text-uppercase mt-4');
+        $form[] = input(            
             [
                 "type" => "email",
-                "name" => 'mail',
+                "name" => 'mail',                
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
-                "placeholder" => "Aquí va tu email",
+                "placeholder" => "Correo electrónico",
+                "class" =>" input-field mh_50 border border-dark  solid_bottom_hover_3     form-control "
                 
             ], _text_correo
         );
+        
 
-
-        $input_password = input_frm(
-            "mt-5", "PASSWORD",
+        $input_password = input(            
             [
                 "type" => "password",
-                "placeholder" => "Tu contraseña",
+                "placeholder" => "Contraseña",
                 "name" => 'pw',
-                "id" => "pw",
-                "placeholder" => "****",
+                "id" => "pw",  
+                "class" => " input-field mh_50 border border-dark  solid_bottom_hover_3 form-control "
             ],
             _text_password
         );
@@ -401,14 +406,23 @@ if (!function_exists('invierte_date_time')) {
             icon("fa fa-eye mostrar_password"),
             icon("fa fa-eye-slash ocultar_password d-none")
         );
-        $form[] = flex($input_password, $iconos, _between, "w-100", "mt-5");
+        $form[] = flex($input_password, $iconos,
+         _text_(_between,'mt-4'), 
+         "w-100",
+        "border border-dark p-4"
+    );
 
 
-        $form[] = btn("INICIAR", ["class" => "mt-5"]);
+        $form[] = btn("CONTINUAR", ["class" => "mt-5"]);
         $form[] = form_close();
+     
 
-        $form[] = format_link( text_icon('fa fa-google white',"Accede con Google"),
-        ["href" => $data["auth_url"],'class' => "mt-3"],2);
+
+        $form_google[] = format_link( 
+            text_icon('fa fa-google ',"Accede con Google"),
+            ["href" => $data["auth_url"]],0);
+
+        $form[] =  d($form_google,'borde_black mt-5');
         
         return append($form);
 

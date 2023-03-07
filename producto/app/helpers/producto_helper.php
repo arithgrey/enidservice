@@ -1220,7 +1220,8 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_( span("Añadir al carrito"), icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
+                    _text_( span("Añadir al carrito"), 
+                    icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
                     'pt-3 pb-3'
                 ),
                 [
@@ -1231,7 +1232,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $agregar_lista_deseos = append($response);
-        $lista_deseos = icon('fa black agregar_deseos_sin_antecedente fa fa-heart-o fa-2x p-4 border border-secondary ',
+        $lista_deseos = icon('fa black agregar_deseos_sin_antecedente 
+        fa fa-heart-o fa-2x p-4 borde_black ',
         [
             "id" =>$id_servicio
         ]);
