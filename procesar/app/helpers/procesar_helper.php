@@ -1,4 +1,8 @@
-<?php if (!defined('BASEPATH')) {
+<?php
+
+use function PHPSTORM_META\map;
+
+ if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
@@ -100,8 +104,8 @@ if (!function_exists('invierte_date_time')) {
                     ), $clase);
             }
 
-
-
+            /*
+            
             $z[] = input_frm(
                 "col-lg-6 mt-5",
                 "Nombre*",
@@ -115,23 +119,60 @@ if (!function_exists('invierte_date_time')) {
                 ],
                 _text_nombre
             );
-
-
-            $z[] = input_frm(
-                "col-lg-6 mt-5",
-                "Teléfono celular*",
+            */
+            
+            
+            $input = input(                
+                
                 [
-                    "id" => "telefono",
-                    "class" => "telefono",
-                    "type" => "tel",
-                    "maxlength" => 10,
-                    "minlength" => 8,
-                    "name" => "telefono",
-                    "required" => "true"                    
+                    "name" => "nombre",
+                    "id" => "nombre",                    
+                    "class" => _text_("nombre", _format_input),
+                    "type" => "text",
+                    "required" => "true",
+                    "placeholder" => "Nombre",
+                    'onkeyup' => "this.value = this.value.toUpperCase();"
+                ]);
 
-                ],
-                _text_telefono
-            );
+            $z[] =  d(
+                flex(
+                $input
+                ,
+                _text_nombre
+                ,   
+                _text_("flex-column"),
+                "",
+                "mt-3 color_red d-none place_input_form_nombre"
+                
+            ),"col-lg-6 mt-5 ");
+
+            /**/
+
+
+            $input_telefono = input([
+                "id" => "telefono",
+                "class" => _text_("telefono", _format_input),
+                "type" => "tel",
+                "maxlength" => 10,
+                "minlength" => 8,
+                "name" => "telefono",
+                "required" => "true",
+                "placeholder"=>"Teléfono"                    
+
+            ]);
+
+            $z[] = d(
+                flex(
+                    $input_telefono
+                    ,
+                    _text_telefono
+                    ,
+                    _text_("flex-column")
+                    ,
+                    ""
+                    ,
+                    "mt-3 color_red d-none place_input_form_telefono"
+            ),"col-lg-6 mt-5");
 
             $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none' : '';
             $z[] = d(input_frm(
