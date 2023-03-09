@@ -69,6 +69,7 @@ let $form_busqueda_cliente = $(".form_busqueda_cliente");
 $(document).ready(() => {
         
     $('footer').addClass('d-none');
+    $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
     $form_busqueda_cliente.submit(busqueda_numero_cliente);
 
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
