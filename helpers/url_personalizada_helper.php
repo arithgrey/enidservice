@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "barras_enid" => "search/?q2=0&q=barrasusorudo&order=2",
         "paneles3d" => "search/?q2=0&q=panel3d&order=2",
         "kist-mas-vendidos" => "search/?q2=0&q=kitsmasvendidos&order=2",
         "flores" => "search/?q=flores",

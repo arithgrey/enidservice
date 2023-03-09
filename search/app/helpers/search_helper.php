@@ -136,6 +136,34 @@ if (!function_exists('invierte_date_time')) {
                     
 
                     break;
+            
+                    case "barrasusorudo":
+
+                        $response_[] = d(
+                            "Pasa al siguiente nivel ya!",
+                            'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                        );
+        
+                        $response_[] = d("Inicia tu negocio, pon tu gym en casa o simplemente da el siguiente paso
+                        ",'black col-sm-12 p-0 mt-3 mb-3');
+                        
+                        $response_[] =  d(d('<iframe width="560" 
+                                            height="315" 
+                                            src="https://www.youtube.com/embed/Y6P8GAdAJPY" 
+                                            title="YouTube video player" 
+                                            frameborder="0" 
+                                            allow="accelerometer; 
+                                            autoplay; clipboard-write; 
+                                            encrypted-media; gyroscope; 
+                                            picture-in-picture; web-share" allowfullscreen></iframe>','mt-4 row'),12);
+                        
+                        $extra = is_mobile() ? 12 :'';
+                        $response[] = d($response_,$extra);
+                        
+                        
+    
+                        break;
+
 
 
             default:

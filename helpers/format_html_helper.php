@@ -1912,6 +1912,7 @@ function navegacion(
         $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');
 
 
+        
         $list[] = li(a_enid(
             _text_(span("Kits deportivos",'f11 black ml-5 strong'))
             ,[
@@ -1919,6 +1920,24 @@ function navegacion(
             "href"=> path_enid("kist-mas-vendidos")
         ]));
         
+    
+        $flex = flex( 
+            _text_(span("Barras de acero",'f11 black ml-5 strong')),        
+            "Para un uso rudo",
+            "flex-column",
+            "",
+            "ml-5 fp8"
+            
+        );
+
+        $list[] = li(a_enid(            
+            $flex
+            ,[
+            "class"=>"dropdown-item border_black",
+            "href"=> path_enid("barras_enid")
+        ]));
+
+
         $flex = flex( 
             _text_(span("Paneles 3d",'f11 black ml-5 strong')),        
             "Modernidad y estilo para tu espacio",
