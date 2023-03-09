@@ -15,7 +15,7 @@ document
 
 // Fetches a payment intent and captures the client secret
 async function initialize() {
-
+  $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
   let id_orden_compra = document.querySelector(".orden_compra").value; 
   const items = [{orden_compra: id_orden_compra}];
   

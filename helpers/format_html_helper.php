@@ -1894,6 +1894,58 @@ function opciones_adicionales_navegacion()
     $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
     return append($response);
 }
+function categorias_destacatas_ab(){
+    $list[] = li(a_enid(
+        _text_(span("Kits deportivos",'f11 black ml-5 strong'))
+        ,[
+        "class"=>"dropdown-item border_black",
+        "href"=> path_enid("kist-mas-vendidos")
+    ]));
+    
+
+    $flex = flex( 
+        _text_(span("Barras de acero",'f11 black ml-5 strong')),        
+        "Para un uso rudo",
+        "flex-column",
+        "",
+        "ml-5 fp8"
+        
+    );
+
+    $list[] = li(a_enid(            
+        $flex
+        ,[
+        "class"=>"dropdown-item border_black",
+        "href"=> path_enid("barras_enid")
+    ]));
+
+
+    $flex = flex( 
+        _text_(span("Paneles 3d",'f11 black ml-5 strong')),        
+        "Modernidad y estilo para tu espacio",
+        "flex-column",
+        "",
+        "ml-5 fp8"
+        
+    );
+
+    $list[] = li(a_enid(            
+        $flex
+        ,[
+        "class"=>"dropdown-item border_black",
+        "href"=> path_enid("paneles3d")
+    ]));
+
+    $list[] = li(a_enid(
+        
+         span("Tenis",'f11 black ml-5'),
+    [
+        "class"=>"dropdown-item border_black mt-3 strong",
+        "href"=> path_enid("tenis")
+    ]));
+    
+    return $list;
+}
 function navegacion(
     $path_img_usuario,
     $in_session,
@@ -1913,55 +1965,7 @@ function navegacion(
 
 
         
-        $list[] = li(a_enid(
-            _text_(span("Kits deportivos",'f11 black ml-5 strong'))
-            ,[
-            "class"=>"dropdown-item border_black",
-            "href"=> path_enid("kist-mas-vendidos")
-        ]));
-        
-    
-        $flex = flex( 
-            _text_(span("Barras de acero",'f11 black ml-5 strong')),        
-            "Para un uso rudo",
-            "flex-column",
-            "",
-            "ml-5 fp8"
-            
-        );
-
-        $list[] = li(a_enid(            
-            $flex
-            ,[
-            "class"=>"dropdown-item border_black",
-            "href"=> path_enid("barras_enid")
-        ]));
-
-
-        $flex = flex( 
-            _text_(span("Paneles 3d",'f11 black ml-5 strong')),        
-            "Modernidad y estilo para tu espacio",
-            "flex-column",
-            "",
-            "ml-5 fp8"
-            
-        );
-
-        $list[] = li(a_enid(            
-            $flex
-            ,[
-            "class"=>"dropdown-item border_black",
-            "href"=> path_enid("paneles3d")
-        ]));
-
-        $list[] = li(a_enid(
-            
-             span("Tenis",'f11 black ml-5'),
-        [
-            "class"=>"dropdown-item border_black mt-3 strong",
-            "href"=> path_enid("tenis")
-        ]));
-    
+       
         
         $a = a_enid(
             _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
@@ -1973,7 +1977,7 @@ function navegacion(
                 "aria-expanded"=>"false"
             ]
         );
-        $ul = ul($list,["class"=>"dropdown-menu borde-0"]);
+        $ul = ul(categorias_destacatas_ab(),["class"=>"dropdown-menu borde-0"]);
     
         $categorias = d([
             $a,
@@ -2019,6 +2023,36 @@ function navegacion(
     } else {
 
         if (!$is_mobile) {
+
+
+        
+        $a = a_enid(
+            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
+            [
+                "class"=>"p-2 dropdown-toggle strong black ",
+                "href"=>"#",
+                "role"=>"button",
+                "data-bs-toggle"=>"dropdown",
+                "aria-expanded"=>"false"
+            ]
+        );
+        $ul = ul(categorias_destacatas_ab(),["class"=>"dropdown-menu borde-0"]);
+    
+        $categorias = d([
+            $a,
+            $ul
+        ],"dropdown pull-left d-none d-md-block ");
+
+        $response[] = d(d(
+            _text_(
+                $categorias,
+                span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
+                icon('fa fa-handshake-o fa-2x', 'strong')
+            ),
+            [
+                "class" => 'black bg_yellow borde_white pr-4 pl-4  barra_categorias_ab'
+            ]
+        ), 'text-md-right col-sx-12 col-sx-12');
 
             $response[] = flex(
                 ajustar(get_logo(), $frecuentes, 2),
