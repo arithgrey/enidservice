@@ -95,8 +95,71 @@ $(document).ready(function () {
         escucha_submmit_selector(e, $form);
     });
 
+    $(".accion_format_mas_vendidos").click(function(){        
+        $("#modal_mas_vendidos").modal("show");        
+    });
+    
+    $(".form_mas_vendido").submit(mas_vendido);
+    $(".editar_mas_vendido").click(editar_mas_vendido);
+    $(".form_mas_vendidos_edicion").submit(edicion_mas_vendido);
 
 });
+
+let editar_mas_vendido = (e) => {
+
+    $('.form_mas_vendidos_edicion :input').val(''); 
+    $("#modal_mas_vendidos_edicion").modal("show");        
+    let $id = e.target.id;
+
+    if(parseInt($id) > 0 ){
+        
+        let data_send = $.param({id:$id});
+        let url = "../q/index.php/api/mas_vendido/id/format/json/";
+        $(".id_mas_vendido").val($id);
+        request_enid("GET", data_send, url, response_mas_vendidos_edicion);
+
+    } 
+      
+};
+
+let edicion_mas_vendido = (e) => {
+
+    let data_send = $(".form_mas_vendidos_edicion").serialize();
+    let url = "../q/index.php/api/mas_vendido/index/format/json/";
+    request_enid("PUT", data_send, url, response_edicion_mas_vendidos);
+    e.preventDefault();
+};
+
+let response_edicion_mas_vendidos = function(data){
+
+    redirect("");    
+}
+let mas_vendido = (e) => {
+
+    let data_send = $(".form_mas_vendido").serialize();
+    let url = "../q/index.php/api/mas_vendido/index/format/json/";
+    
+    request_enid("POST", data_send, url, response_mas_vendidos);
+    e.preventDefault();
+};
+let response_mas_vendidos = function(data){
+
+    redirect("");    
+}
+let response_mas_vendidos_edicion = function(data){
+
+    
+
+    if(isArray(data)){
+        let $mas_vendido = data[0];
+        
+        $(".menu_categoria_edicion").val($mas_vendido.menu);
+        $(".sub_menu_edicion").val($mas_vendido.sub_menu);
+        $(".titulo_categoria_edicion").val($mas_vendido.path);        
+    }
+    
+}
+
 let get_place_usuarios = () => {
 
 

@@ -1,5 +1,168 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
+<?php
+
+use App\View\Components\titulo;
+
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
+    function get_format_format_mas_vendidos($mas_vendidos)
+    {
+
+        $list[] = d(_titulo("Categorias públicas"), "col-sm-12 mb-5");
+        $list[] =  d(
+            format_link(
+                "+ Nueva categoria",
+                ["class" => "w-25 accion_format_mas_vendidos"]
+            ),
+            12
+        );
+
+        foreach ($mas_vendidos as $row) {
+
+            $menu = $row["menu"];
+            $id = $row["id"];
+            $sub_menu = $row["sub_menu"];
+
+            $flex = flex(
+                _text_(span($menu, 'f11 black ml-5 strong')),
+                $sub_menu,
+                "flex-column",
+                "",
+                "ml-5 fp8"
+
+            );
+            $class = _text_(_editar_icon, "editar_mas_vendido");
+
+            $flex_icon = flex(
+                icon($class,["id" => $id])
+                , $flex);
+            $texto = d(
+                $flex_icon,
+                [
+                    "class" => " border_black"
+                ]
+            );
+            $list[] = li($texto, 'col-sm-12 mt-5');
+        }
+        $list[] = modal_mas_vendidos();
+        $list[] = modal_mas_vendidos_edicion();
+        return append($list);
+    }
+    function modal_mas_vendidos()
+    {
+
+        $response[] = d("+ Nueva categoría", "display-5  font-weight-bold col-xs-12 black");
+        $response[] = d(input_frm(
+            "",
+            "Menu*",
+            [
+                "class" => "menu_categoria",
+                "id" => "menu",
+                "name" => "menu",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-6 mt-5");
+
+        $response[] = d(input_frm(
+            "",
+            "Subtitulo",
+            [
+                "class" => "sub_menu",
+                "id" => "sub_menu",
+                "name" => "sub_menu",
+                "type" => "text"
+            ]
+        ), "col-sm-6 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Metakeyword",
+            [
+                "class" => "titulo_categoria",
+                "id" => "path",
+                "name" => "path",
+                "type" => "url",
+                "required"                 => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+
+        $response[] = d(btn("agregar"), 'col-sm-6 mt-5');
+
+        $form[] = form_open(
+            "",
+            [
+                "class" => "form_mas_vendido",
+                "method" => "post"
+            ]
+        );
+        $form[] = d($response, 13);
+        $form[] = form_close();
+
+        $contenido[] =  d($form, 13);
+
+        return gb_modal($contenido, 'modal_mas_vendidos');
+    }
+    function modal_mas_vendidos_edicion()
+    {
+
+        $response[] = d("+ Nevos datos", "display-5  font-weight-bold col-xs-12 black");
+        $response[] = d(input_frm(
+            "",
+            "Menu*",
+            [
+                "class" => "menu_categoria_edicion",
+                "id" => "menu",
+                "name" => "menu",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-6 mt-5");
+
+        $response[] = d(input_frm(
+            "",
+            "Subtitulo",
+            [
+                "class" => "sub_menu_edicion",
+                "id" => "sub_menu",
+                "name" => "sub_menu",
+                "type" => "text"
+            ]
+        ), "col-sm-6 mt-5");
+    
+        $response[] = hiddens(["name" => "id_mas_vendido", "class" => "id_mas_vendido"]);
+        $response[] = d(input_frm(
+            "",
+            "metakeyword",
+            [
+                "class" => "titulo_categoria_edicion",
+                "id" => "path",
+                "name" => "path",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+
+        $response[] = d(btn("agregar"), 'col-sm-6 mt-5');
+
+        $form[] = form_open(
+            "",
+            [
+                "class" => "form_mas_vendidos_edicion",
+                "method" => "post"
+            ]
+        );
+        $form[] = d($response, 13);
+        $form[] = form_close();
+
+        $contenido[] =  d($form, 13);
+
+        return gb_modal($contenido, 'modal_mas_vendidos_edicion');
+    }
 
     function get_format_afiliados()
     {
@@ -15,7 +178,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ul(li($link_miembros), "nav nav-tabs");
         $r[] = place("usuarios_enid_service_afiliados");
         return append($r);
-
     }
 
 
@@ -89,7 +251,8 @@ if (!function_exists('invierte_date_time')) {
             ];
         $r[] = _titulo("Agregar usuario");
 
-        $r[] = form_open("",
+        $r[] = form_open(
+            "",
             [
                 "class" => "form-miembro-enid-service row",
                 "id" => 'form-miembro-enid-service'
@@ -105,7 +268,9 @@ if (!function_exists('invierte_date_time')) {
                 "estado_usuario",
                 "opcion",
                 "val"
-            ), $class_select, _strong
+            ),
+            $class_select,
+            _strong
         );
 
         $menos = [3, 4, 5, 7, 8, 11, 9, 10, 12, 13, 14, 15, 16, 17, 18, 19];
@@ -116,8 +281,11 @@ if (!function_exists('invierte_date_time')) {
             "form-control perfil",
             "perfil",
             "nombreperfil",
-            "idperfil"
-            , 0, 0, 0, "",
+            "idperfil",
+            0,
+            0,
+            0,
+            "",
             $menos
         );
 
@@ -136,36 +304,45 @@ if (!function_exists('invierte_date_time')) {
 
         $class_select_horarios = 'flex-column col-md-3 mt-5';
         $r[] = flex(
-            "Inicio de labores"
-            ,
-            create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val")
-            , $class_select_horarios, _strong
+            "Inicio de labores",
+            create_select($opt, "inicio_labor", "form-control inicio_labor", "inicio_labor", "opcion", "val"),
+            $class_select_horarios,
+            _strong
         );
 
         $select_labores = create_select($opt, "fin_labor", "form-control fin_labor", "fin_labor", "opcion", "val");
         $r[] = flex(
             "Fin de labores",
             $select_labores,
-            $class_select_horarios, _strong
+            $class_select_horarios,
+            _strong
         );
 
         $r[] = flex(
             "Turno",
             create_select(
-                $opt, "turno",
-                "form-control input-sm turno", "turno", "opcion", "val")
-            ,
-            $class_select_horarios, _strong
+                $opt,
+                "turno",
+                "form-control input-sm turno",
+                "turno",
+                "opcion",
+                "val"
+            ),
+            $class_select_horarios,
+            _strong
         );
 
         $r[] = flex(
             "Sexo",
-            create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val")
-            , $class_select_horarios, _strong
+            create_select($opt_sexo, "sexo", "form-control input-sm sexo", "sexo", "opcion", "val"),
+            $class_select_horarios,
+            _strong
         );
 
         $top = 'col-md-4 mt-5';
-        $r[] = input_frm('col-md-4 mt-5', 'Nombre',
+        $r[] = input_frm(
+            'col-md-4 mt-5',
+            'Nombre',
             [
                 "name" => "nombre",
                 "placeholder" => "Nombre",
@@ -177,7 +354,9 @@ if (!function_exists('invierte_date_time')) {
             _text_nombre
         );
 
-        $r[] = input_frm('col-md-4 mt-5', 'Apellido paterno',
+        $r[] = input_frm(
+            'col-md-4 mt-5',
+            'Apellido paterno',
             [
                 "name" => "apellido_paterno",
                 "placeholder" => "placeholder",
@@ -190,7 +369,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-        $r[] = input_frm($top,
+        $r[] = input_frm(
+            $top,
             "Apellido materno",
             [
                 "name" => "apellido_materno",
@@ -199,10 +379,13 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "apellido_materno",
                 "type" => "text",
                 "required" => true
-            ], _text_apellido
+            ],
+            _text_apellido
         );
 
-        $r[] = input_frm('col-md-6 mt-5', 'Email',
+        $r[] = input_frm(
+            'col-md-6 mt-5',
+            'Email',
             [
                 "name" => "email",
                 "placeholder" => "email",
@@ -211,19 +394,21 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "email",
                 "required" => true,
                 "readonly" => true
-            ], _text_correo
+            ],
+            _text_correo
         );
 
 
-        $r[] = input_frm('col-md-6 mt-5', "Teléfono",
+        $r[] = input_frm(
+            'col-md-6 mt-5',
+            "Teléfono",
 
             [
                 "type" => "tel",
                 "name" => "tel_contacto",
                 "class" => "tel_contacto",
                 "id" => "tel_contacto"
-            ]
-            ,
+            ],
             _text_telefono
         );
 
@@ -308,8 +493,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close();
         $r[] = place("place_config_usuario");
         return append($r);
-
-
     }
 
     function get_format_view_orden($empresa)
@@ -321,7 +504,8 @@ if (!function_exists('invierte_date_time')) {
         $texto = _titulo("Filtro principal", 5);
         $lista = flex($texto, $lista_orden, _between, "mr-3");
         $boton_cambio = btn("Modificar");
-        $response[] = form_open("",
+        $response[] = form_open(
+            "",
             [
                 "class" => "form_orden_productos",
                 "method" => "post"
@@ -351,14 +535,18 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = _titulo('Recursos');
         $response[] = form_open('', ['class' => 'frm_recurso']);
-        $response[] = input_frm('mt-5', 'Nombre',
+        $response[] = input_frm(
+            'mt-5',
+            'Nombre',
             [
                 'id' => 'nombre_recurso',
                 'class' => 'nombre_recurso',
                 'name' => 'nombre'
             ]
         );
-        $response[] = input_frm('mt-5', 'Link de acceso',
+        $response[] = input_frm(
+            'mt-5',
+            'Link de acceso',
             [
                 'id' => 'link_recurso',
                 'class' => 'link_recurso',
@@ -369,8 +557,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = btn('modificar', ['class' => 'mt-5']);
         $response[] = form_close();
         return d($response, 6, 1);
-
-
     }
 
     function get_format_info_usuario($departamentos)
@@ -382,7 +568,8 @@ if (!function_exists('invierte_date_time')) {
             "id_departamento_busqueda",
             "id_departamento",
             "nombre",
-            "id_departamento");
+            "id_departamento"
+        );
 
         $link_miembros = tab(
             text_icon("fa fa-trophy", "Miembros activos"),
@@ -418,10 +605,12 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ),
             li(
-                $link_bajas, 'col-md-4'
+                $link_bajas,
+                'col-md-4'
             ),
             li(
-                $agregar, 'col-md-3'
+                $agregar,
+                'col-md-3'
             )
         ];
 
@@ -430,7 +619,10 @@ if (!function_exists('invierte_date_time')) {
         $response[] = ul($l, "nav nav-tabs mb-5 mt-5");
         $response[] = d(_titulo('Busqueda', 3), _mbt5);
 
-        $input = input_frm('', '¿a quién buscamos? Nombre, email, teléfono', [
+        $input = input_frm(
+            '',
+            '¿a quién buscamos? Nombre, email, teléfono',
+            [
                 'name' => 'q',
                 'id' => 'q',
                 'class' => 'q nombre_usuario'
@@ -443,7 +635,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = tab_seccion($contenido, 'tab_usuarios_activos', 1);
 
         return d($response, 12);
-
     }
 
 
@@ -462,7 +653,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(d($x, 6, 1), 13);
         $r[] = place("place_tallas");
         return append($r);
-
     }
 
 
@@ -471,8 +661,8 @@ if (!function_exists('invierte_date_time')) {
 
         return dd(
             frm_categorias(),
-            _titulo("CATEGORÍAS EN PRODUCTOS Y SERVICIOS")
-            , 5
+            _titulo("CATEGORÍAS EN PRODUCTOS Y SERVICIOS"),
+            5
         );
     }
 
@@ -518,7 +708,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = td(place('quinto_nivel'));
 
         return tb(append($r));
-
     }
 
 
@@ -528,7 +717,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = h("Agregar Recurso", 3);
         $r[] = frm_recurso();
         return append($r);
-
     }
 
 
@@ -536,7 +724,9 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $r[] = form_open("", ["class" => "form_recurso", "id" => 'form_recurso']);
-        $r[] = input_frm(6, "Nombre",
+        $r[] = input_frm(
+            6,
+            "Nombre",
             [
                 "type" => "text",
                 "name" => "nombre",
@@ -554,8 +744,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => "urlpaginaweb",
                 "class" => "form-control",
                 "required" => "true"
-            ])
-            ,
+            ]),
             6
         );
         $r[] = btn("Registrar");
@@ -563,7 +752,6 @@ if (!function_exists('invierte_date_time')) {
         $r[] = form_close();
 
         return append($r);
-
     }
 
 
@@ -572,10 +760,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $link_equipo = tab(
-            text_icon("fa fa-space-shuttle", 'EQUIPO  ENID  SERVICE')
-            ,
-            "#tab1"
-            ,
+            text_icon("fa fa-space-shuttle", 'EQUIPO  ENID  SERVICE'),
+            "#tab1",
             [
                 "id" => 'tab_equipo_enid_service',
                 "class" => 'tab_equipo_enid_service',
@@ -633,16 +819,25 @@ if (!function_exists('invierte_date_time')) {
                 "class" => 'orden_web',
             ]
         );
+
+        $link_mas_vendidos = tab(
+            text_icon("fa fa-circle", "Más vendidos"),
+            "#tab_mas_vendidos",
+            [
+                "id" => 'mas_vendidos',
+                "class" => 'mas_vendidos',
+            ]
+        );
+
         $list = [
             $link_equipo,
             $link_afiliados,
             $link_perfiles_permisos,
             $link_categorias,
             $link_tallas,
-            $link_orden
+            $link_orden,
+            $link_mas_vendidos
         ];
         return ul($list, ["class" => "nav tabs"]);
-
     }
-
 }

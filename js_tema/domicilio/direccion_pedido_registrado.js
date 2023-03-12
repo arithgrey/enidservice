@@ -13,6 +13,7 @@ let $ubicacion_delegacion = $form_ubicacion.find('.ubicacion_delegacion');
 let $adicionales_seccion = $(".adicionales_seccion");
 $(document).ready(() => {
     
+    $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
     $(".cerrar_modal").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     

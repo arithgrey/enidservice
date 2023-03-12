@@ -37,7 +37,9 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
             $in_session, 
             $clasificaciones_departamentos,
             $proceso_compra,             
-            $menu)?>
+            $menu,
+            $mas_vendidos
+            )?>
 <?= menu_session_mobil($in_session) ?>
 
 <div class="container-fluid" id="page-content">
