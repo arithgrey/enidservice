@@ -1,4 +1,4 @@
-<div class="contenedor_principal_enid">
+<div class="row top_150 base_enid_web">
     <?= d(get_menu($in_session), 2) ?>
     <div class='col-lg-10'>
         <div class="tab-content">
@@ -49,6 +49,7 @@
             <?= d(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
             <?= d(get_format_view_usuario($departamentos,$perfiles_enid_service), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
             <?= d(get_format_view_orden($info_empresa), ["class" => "tab-pane", "id" => 'tab_orden']) ?>
+            <?= d(get_format_format_mas_vendidos($mas_vendidos), ["class" => "tab-pane", "id" => 'tab_mas_vendidos']) ?>
         </div>
     </div>
 </div>

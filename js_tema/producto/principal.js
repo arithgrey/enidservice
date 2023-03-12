@@ -20,7 +20,7 @@ $(document).ready(function () {
         "desde_valoracion", get_parameter(".desde_valoracion"),
         "orden", "desc",
     ]);
-    //$("footer").ready(carga_productos_sugeridos);
+    $("footer").ready(carga_productos_sugeridos);
     $("footer").ready(carga_valoraciones);
     $(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
     $(".talla").click(agregar_talla);
@@ -85,7 +85,7 @@ let operaciones_compra_externas = () => {
 
 }
 
-/*
+
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
@@ -102,13 +102,10 @@ let response_carga_productos = data => {
     if (data["sugerencias"] == undefined) {
         $(".text_sugerencias").removeClass("d-none");
         render_enid(".place_tambien_podria_interezar", data);
+        $(".place_tambien_podria_interezar .agregar_deseos_sin_antecedente").addClass("d-none").removeClass("d-block");
         
-        $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
-        $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
-
     }
-};
-*/
+};  
 
 let carga_valoraciones = () => {
 

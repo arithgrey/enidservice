@@ -278,8 +278,9 @@ class app extends CI_Controller
     {
                 
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
-        $data["proceso_compra"] = 0;
-        $data["clasificaciones_departamentos"] = $this->api->api("clasificacion/primer_nivel");
+        $data["proceso_compra"] = 0;        
+        $data["mas_vendidos"] = $this->api->api("mas_vendido/publicos");
+        $data["clasificaciones_departamentos"] =  [];
         $data["footer_visible"] = true;
         if ($this->is_logged_in() > 0) {
 
@@ -321,6 +322,7 @@ class app extends CI_Controller
         }
 
         $data['restricciones'] = $this->config->item('restricciones');
+        
         return $data;
     }
 
