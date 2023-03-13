@@ -15,12 +15,15 @@ class mas_vendido extends REST_Controller
 		$param = $this->post();
 		$response = false;
 		
-		if (fx($param, "menu,sub_menu,path")) {
+		if (fx($param, "menu,sub_menu,path,titulo,sub_titulo,link_video")) {
             
 			$params = [
 				"menu" => $param["menu"],
 				"sub_menu" => $param["sub_menu"],
-				"path" => $param["path"]
+				"path" => $param["path"],
+                "titulo" => $param["titulo"],
+                "sub_titulo" => $param["sub_titulo"],
+                "link_video" => $param["link_video"]
 			];
 
             

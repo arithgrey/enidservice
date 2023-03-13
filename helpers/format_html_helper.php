@@ -1811,23 +1811,23 @@ function opciones_populares()
 
     
     
-    
+    $response[] = a_enid(
+        _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
+        [
+            "class" => "white strong ml-sm-5 borde_amarillo p-1",
+            "href" => path_enid("forma_pago")
+        ]
+    );
 
     $response[] = a_enid(
         _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
         [
-            "class" => "white ml-sm-5 strong borde_amarillo p-1",
+            "class" => "white ml-sm-5 strong mt-2",
             "href" => path_enid("rastrea-paquete")
         ]
     );
 
-    $response[] = a_enid(
-        _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
-        [
-            "class" => "white mt-2 strong ml-sm-5 ",
-            "href" => path_enid("forma_pago")
-        ]
-    );
+    
 
     $response[] = a_enid(
         _text("Referencias"),
@@ -1916,7 +1916,7 @@ function categorias_destacatas_ab($mas_vendidos){
             $flex
             ,[
             "class"=>"dropdown-item border_black",
-            "href"=> path_enid($path)
+            "href"=> path_enid("ab",$path)
         ]));
 
     }
@@ -1931,8 +1931,7 @@ function navegacion(
     $proceso_compra,
     $menu,
     $mas_vendidos
-) {
-    //xmp($mas_vendidos);
+) {    
     $is_mobile = is_mobile();
     $frecuentes = opciones_populares();
     $response = [];
@@ -1940,12 +1939,7 @@ function navegacion(
     if (!$in_session) {
 
         $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
-        $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');
-
-
-        
-       
-        
+        $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');     
         $a = a_enid(
             _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
             [
@@ -1963,24 +1957,36 @@ function navegacion(
             $ul
         ],"dropdown pull-left d-none d-md-block ");
 
+        $extra = (is_mobile()) ? "" : span('(55) 5296 - 7027', 'strong');
         $response[] = d(d(
             _text_(
-                $categorias,
-                span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
-                icon('fa fa-handshake-o fa-2x', 'strong'),
-                span('ENVÍO GRATIS', 'strong'),
+                $categorias,                                
+                span('Envío gratis', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
                 span('recibe hoy', 'strong'),
                 icon('fa fa-fighter-jet fa-2x', 'strong'),
-                span('(56) 1847-8574', 'strong')
+                $extra
+
             ),
             [
                 "class" => 'black bg_yellow borde_white pr-4 pl-4'
             ]
         ), 'text-md-right col-sx-12 col-sx-12');
         $response[] = d([get_logo(), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
+
+       
+        $opciones[] = d(a_enid(
+            _text_(icon('fa fa-check-circle-o'), "Pago contra entrega"),
+            [
+                "href" => path_enid("forma_pago"),
+                "class" => "strong black"
+            ]
+        ), " col-xs-6");
+
+
+
 
         $opciones[] = d(
             a_enid(_text_(icon('black fa black fa fa-truck'), "Rastrea tu paquete"), [
@@ -1990,14 +1996,7 @@ function navegacion(
             "col-xs-6 "
         );
 
-        $opciones[] = d(a_enid(
-            _text_(icon('fa fa-check-circle-o'), "Pago contra entrega"),
-            [
-                "href" => path_enid("forma_pago"),
-                "class" => "strong black"
-            ]
-        ), " col-xs-6");
-
+        
         $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
     } else {
 
@@ -2302,7 +2301,7 @@ function get_logo($session = 0)
     );
 
     $acceder  = ($session < 1) ? $acceder : "";
-    $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3');
+    $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3','d-none');
 
 
     $carro_logo = flex($texto, $icono_busqueda_carro_session, _between);

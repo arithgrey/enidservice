@@ -99,7 +99,7 @@ CDMX
         <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>            
             <?=d(footer_opciones(),13)?>
             
-            <?= d(d("© 2022 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'),13); ?>
+            <?= d(d("© 2023 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'),13); ?>
         </footer>    
 <?php endif; ?>
 </body>

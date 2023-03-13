@@ -132,9 +132,9 @@ class Home extends CI_Controller
 
         $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
         $data["q"] = $q;
-        $data["categorias_destacadas"] = $this->categorias_destacadas();
+        //$data["categorias_destacadas"] = $this->categorias_destacadas();
         $data = $this->app->cssJs($data, "search");
-        $data["filtros"] = get_orden();
+        //$data["filtros"] = get_orden();
         $data["order"] = $data_send["order"];
         $this->create_keyword($data_send);
         

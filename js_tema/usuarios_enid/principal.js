@@ -155,7 +155,12 @@ let response_mas_vendidos_edicion = function(data){
         
         $(".menu_categoria_edicion").val($mas_vendido.menu);
         $(".sub_menu_edicion").val($mas_vendido.sub_menu);
-        $(".titulo_categoria_edicion").val($mas_vendido.path);        
+        $(".metakeyword_edicion").val($mas_vendido.path);   
+
+        $(".titulo_categoria_edicion").val($mas_vendido.titulo);
+        $(".sub_titulo_categoria").val($mas_vendido.sub_titulo);
+        $(".link_video_edicion").val($mas_vendido.link_video);   
+
     }
     
 }

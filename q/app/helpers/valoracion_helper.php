@@ -133,8 +133,10 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($numero_valoraciones)) {
 
             $valoracion = $numero_valoraciones[0];
+            
             $num = $valoracion["num_valoraciones"];
-            $promedio = number_format($valoracion["promedio"], 1, '.', '');
+
+            $promedio = number_format(prm_def($valoracion, "promedio"), 1, '.', '');
             $parte_promedio = flex(
 
                 _titulo($promedio, 0, 'mt-4')

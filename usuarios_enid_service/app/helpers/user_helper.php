@@ -82,8 +82,47 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "titulo_categoria",
                 "id" => "path",
                 "name" => "path",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Titulo*",
+            [
+                "class" => "titulo_categoria",
+                "id" => "titulo",
+                "name" => "titulo",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Sub titulo*",
+            [
+                "class" => "sub_titulo_categoria",
+                "id" => "sub_titulo",
+                "name" => "sub_titulo",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Link video de youtube",
+            [
+                "class" => "link_video",
+                "id" => "link_video",
+                "name" => "link_video",
                 "type" => "url",
-                "required"                 => true
+                "required" => true
             ]
         ), "col-sm-12 mt-5");
 
@@ -137,10 +176,48 @@ if (!function_exists('invierte_date_time')) {
             "",
             "metakeyword",
             [
-                "class" => "titulo_categoria_edicion",
+                "class" => "metakeyword_edicion",
                 "id" => "path",
                 "name" => "path",
                 "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+        $response[] = d(input_frm(
+            "",
+            "Titulo*",
+            [
+                "class" => "titulo_categoria_edicion",
+                "id" => "titulo",
+                "name" => "titulo",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Sub titulo*",
+            [
+                "class" => "sub_titulo_categoria",
+                "id" => "sub_titulo",
+                "name" => "sub_titulo",
+                "type" => "text",
+                "required" => true
+            ]
+        ), "col-sm-12 mt-5");
+
+
+        $response[] = d(input_frm(
+            "",
+            "Link video de youtube",
+            [
+                "class" => "link_video",
+                "id" => "link_video",
+                "name" => "link_video",
+                "type" => "url",
                 "required" => true
             ]
         ), "col-sm-12 mt-5");
