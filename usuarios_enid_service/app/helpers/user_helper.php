@@ -214,11 +214,10 @@ if (!function_exists('invierte_date_time')) {
             "",
             "Link video de youtube",
             [
-                "class" => "link_video",
+                "class" => "link_video_edicion",
                 "id" => "link_video",
                 "name" => "link_video",
-                "type" => "url",
-                "required" => true
+                "type" => "url"                
             ]
         ), "col-sm-12 mt-5");
 
