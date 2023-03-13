@@ -147,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
     function modal_mas_vendidos_edicion()
     {
 
-        $response[] = d("+ Nevos datos", "display-5  font-weight-bold col-xs-12 black");
+        $response[] = d(d("+ Nuevos datos",'border_black p-2 w-100'), "display-5 font-weight-bold col-xs-12 black mb-5");
         $response[] = d(input_frm(
             "",
             "Menu*",
@@ -236,6 +236,10 @@ if (!function_exists('invierte_date_time')) {
         $form[] = form_close();
 
         $contenido[] =  d($form, 13);
+        $contenido[] =  d( p(_text_(
+            "Tambíen puedes eliminar esta categoría",
+            span("aquí",["class" => 'red_enid elimina_mas_vendido'])
+    ),'ml-auto black'), "row mt-5");
 
         return gb_modal($contenido, 'modal_mas_vendidos_edicion');
     }

@@ -1941,7 +1941,7 @@ function navegacion(
         $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
         $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');     
         $a = a_enid(
-            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
+            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Lo más buscado"),
             [
                 "class"=>"p-2 dropdown-toggle strong black ",
                 "href"=>"#",
@@ -2005,7 +2005,7 @@ function navegacion(
 
         
         $a = a_enid(
-            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Categorías"),
+            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Lo más buscado"),
             [
                 "class"=>"p-2 dropdown-toggle strong black ",
                 "href"=>"#",
