@@ -56,6 +56,21 @@ class mas_vendido extends REST_Controller
 		$this->response($response);
 	}
 
+    function index_DELETE()
+	{
+		$param = $this->delete();
+		$response = false;
+		
+		if (fx($param, "id")) {
+            
+            $id = $param["id"];
+			        
+			$response = $this->mas_vendido_model->delete(["id" => $id]);
+
+		}
+		$this->response($response);
+	}
+
   
     function publicos_GET()
     {

@@ -102,9 +102,14 @@ $(document).ready(function () {
     $(".form_mas_vendido").submit(mas_vendido);
     $(".editar_mas_vendido").click(editar_mas_vendido);
     $(".form_mas_vendidos_edicion").submit(edicion_mas_vendido);
+    
+    $(".elimina_mas_vendido").click(confirma_baja_mas_vendido);
 
 });
-
+let confirma_baja_mas_vendido = (e) => {
+    
+    show_confirm('¿DESEAS DAR DE BAJA ESTA CATEGORÍA?', 'Dejará de ser visible en la página', 0, baja_mas_vendido);
+}
 let editar_mas_vendido = (e) => {
 
     $('.form_mas_vendidos_edicion :input').val(''); 
@@ -420,6 +425,18 @@ let baja = function () {
         request_enid("DELETE", data_send, url, response_registro_recurso);
     }
 };
+let baja_mas_vendido = function () {
+
+    let $id = $(".id_mas_vendido").val();    
+    if (parseInt($id) > 0) {
+        
+        $('.form_mas_vendidos_edicion :input').val(''); 
+        let data_send = $.param({'id': $id});
+        let url = "../q/index.php/api/mas_vendido/index/format/json/";
+        request_enid("DELETE", data_send, url, response_edicion_mas_vendidos);
+    }
+};
+
 let agregar_usuario = function () {
 
     let respuestas = [];
