@@ -150,7 +150,7 @@ if (!function_exists('invierte_date_time')) {
         /*18 Click en abdomen*/
         $totales_accesos[] = d(flex("Como marcar abdomen", place("click_abdomen_place"), _text_(_between, "f12 black underline"), "", "strong"));
 
-        $totales_accesos[] = d(flex("Cotizar página web", place("click_cotiza_pagina_web"), _text_(_between, "f12 black borde_end_b underline"), "", "strong f11"));
+        
 
         $totales_accesos[] = d(flex("Prueba en casa", place("click_prueba_en_casa"), _text_(_between, "f12 black borde_end_b underline"), "", "strong f11"));
         

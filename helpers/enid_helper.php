@@ -1112,16 +1112,6 @@ function footer_opciones()
 
     $productos_footer[] = _titulo('Productos', 2, 'border_b_green');
 
-    /*
-    $productos_footer[] = a_enid(
-        'Descuentos',
-        [
-            'href' => path_enid('promociones'),
-            'class' => 'black fp9'
-        ]
-    );
-    */
-
     $productos_footer[] = a_enid(
         'Novedades',
         [
@@ -1144,7 +1134,7 @@ function footer_opciones()
     $asistencia[] =  _titulo('Asistencia', 2, 'border_b_green');
 
     $asistencia[] =  a_enid(
-        '¿Necesitas ayuda?',
+        flex('¿Necesitas ayuda?','(55) 5296 - 7027','flex-column mb-3 borde_black p-2','strong','strong'),
         [
             'href' => path_enid('whatsapp_ayuda', 0, 1),
             'class' => 'black fp9',
@@ -1179,6 +1169,15 @@ function footer_opciones()
             'target' => '_black'
         ]
     );
+    $asistencia[] =  a_enid(
+        'Acceder',
+        [
+            'href' => path_enid('login'),
+            'class' => 'black fp9',
+            'target' => '_black'
+        ]
+    );
+
     /*
     $asistencia[] =  a_enid(
         '¿Costo de entrega?',
@@ -1258,9 +1257,10 @@ function footer_opciones()
     $sociales_seccion = d($sociales, 3);
 
     return d([
-        $oportunidades_seccion,
-        $seccion_productos,
         $asistencia_seccion,
+        $oportunidades_seccion,        
+        $seccion_productos,
+        
         $sociales_seccion
     ],12);
 }
