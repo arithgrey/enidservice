@@ -1434,6 +1434,13 @@ if (!function_exists('invierte_date_time')) {
         $propuestas = '';
         if (es_administrador($data)) {
 
+            $base_valoraciones_fake = [
+                'class' => 'valoraciones_fake cursor_pointer',
+                'id' => $id_servicio,
+            ];
+            $valoraciones_fake = btn("Reseñas Fake", $base_valoraciones_fake);
+
+
             $base_stock = [
                 'class' => 'stock_disponible cursor_pointer',
                 'id' => $id_servicio,
@@ -1514,6 +1521,7 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ),
             $link_proveedores,
+            $valoraciones_fake,
             $stock,
             $fecha_stock,
             $propuestas,

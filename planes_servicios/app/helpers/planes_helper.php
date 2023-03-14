@@ -2,6 +2,37 @@
 if (!function_exists('invierte_date_time')) {
 
 
+    function form_valoraciones_fake()
+    {
+
+        $form[] = d(_titulo('¿Cuantas valoraciones deseas generar?'), 'mb-5');
+        $form[] = d(hr());
+        $form[] = form_open("",
+            [
+                "class" => "form_valoraciones_fake",
+                "method" => "post"
+            ]);
+
+        $form[] = d(input_frm('mt-5', '¿Cantidad?',
+            [
+                'class' => 'total',
+                'id' => 'total',
+                'name' => 'total',
+                'value' => 1,
+                'required' => true,
+                'type' => 'number',
+            ],
+            '¿Hay algo mal con esta canidad no?'
+        ), 'input_unidades_producto_stock');
+
+        
+        $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
+        $form[] = btn('Generar', ['class' => 'mt-5']);
+        $form[] = form_close();
+
+        return gb_modal(append($form), 'valoraciones_fake_modal');
+    }
+
     function form_stock()
     {
 
@@ -314,6 +345,8 @@ if (!function_exists('invierte_date_time')) {
 
         $t[] = menu($id_perfil, $action);
         $t[] = form_stock();
+        $t[] = form_valoraciones_fake();
+
         $t[] = proveedores();
         $t[] = costo_proveedor();
         $t[] = form_fecha_stock($data);

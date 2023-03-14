@@ -1425,4 +1425,31 @@ class usuario extends REST_Controller
 
         $this->response($response);
     }
+    function faker_POST(){
+
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "total")) {
+            
+            $faker = Faker\Factory::create();
+            $total = $param["total"];
+            $response = [];
+            for($a = 0 ; $a < $total ; $a ++){
+
+                $usuario = [
+                    "email"=> _text("fakerenid",$faker->email),
+                    "password"=> sha1($faker->password(8)),
+                    "name"=> $faker->name(Faker\Provider\es_MX\Person::class), // Se genera un nombre comun de cdmx                    
+                ];
+                
+                $id = $this->usuario_model->insert($usuario, 1);
+                if($id > 0){
+                    $usuario["id"] = $id;
+                    $response[] = $usuario;
+                }
+            }
+            
+        }
+        $this->response($response);
+    }
 }
