@@ -9,6 +9,7 @@
 	"require": {
 		"shimabox/url-status": "^1.0",
 		"google/apiclient": "^2.0",
-		"stripe/stripe-php": "^10.0"
+		"stripe/stripe-php": "^10.0",
+		"fzaninotto/faker": "^1.5"
 	}
 }

@@ -244,11 +244,12 @@ let respuesta_informacion_servicio = (data) => {
     $(".restablecer").click(restablecer);
     $('.stock_disponible').click(editar_stock_disponible);
     $('.stock_disponibilidad').click(editar_fecha_stock_disponible);
+    $(".valoraciones_fake").click(generar_valoraciones_fake);
     $('.link_proveedor').click(proveedores);
     $(".boton_asociados").click(link_asociados);
     $(".boton_busqueda").click(boton_busqueda);
 
-
+    
     $(".form_marca").submit(actualiza_marca);
     $(".marca").blur(actualiza_marca);
 

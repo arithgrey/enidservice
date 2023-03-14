@@ -1,5 +1,6 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
+use Faker\Factory;
 
 class Valoracion extends REST_Controller
 {
@@ -208,7 +209,49 @@ class Valoracion extends REST_Controller
         }
         $this->response($response);
     }
+    function faker_POST(){
 
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "total,id_servicio")) {
+            
+            $response = [];
+
+            $usuarios = $this->app->api("usuario/faker", ["total" => $param["total"]], "json", "POST");
+            $experiencias_faker = $this->app->api("experiencia/index");            
+            $total_experiencias = count($experiencias_faker);        
+            $id_servicio = $param["id_servicio"];
+            
+            foreach($usuarios as $row){
+                
+                $id = $row["id"];
+                $name = $row["name"];
+                $email = $row["email"];
+
+                $rand_experiencia = rand(1,($total_experiencias - 1));
+                $params = [
+                    "valoracion" => rand(4,5),
+                    "titulo" => $experiencias_faker[$rand_experiencia]["titulo"],
+                    "comentario" => $experiencias_faker[$rand_experiencia]["experiencia"],
+                    "recomendaria" => 1,
+                    "email" => $email,
+                    "nombre" => $name,
+                    "id_usuario" => $id,
+                    "id_servicio" => $id_servicio
+                ];
+                
+                $id_valoracion = $this->valoracion_model->insert($params, 1);
+
+                if($id_valoracion > 0){
+                    $params["id"] = $id_valoracion;
+                    $response[] = $params;
+                }                            
+            }            
+                
+        }
+        $this->response($response);
+
+    }
     private function notifica_vendedor($id_servicio)
     {
 

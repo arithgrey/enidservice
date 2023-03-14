@@ -12,10 +12,37 @@ let editar_stock_disponible = function () {
             $selector_carga_modal.modal("show");
             precio_pasado($id);
             $form_stock_servicio.submit(agregar_stock_servicio);
+            
         }
     }
 
 };
+let generar_valoraciones_fake = function () {
+
+    
+    let $id = get_parameter_enid($(this), "id");
+    desbloqueda_form('.form_valoraciones_fake');
+    if (parseInt($id) > 0) {
+
+        $(".form_valoraciones_fake .id_servicio").val($id);
+        $("#valoraciones_fake_modal").modal("show");
+        $(".form_valoraciones_fake").submit(valoraciones_fake);
+        
+    }
+
+};
+
+let valoraciones_fake = function(e){
+
+    let data_send = $(".form_valoraciones_fake").serialize();
+    let url = "../q/index.php/api/valoracion/faker/format/json/";
+    $("#valoraciones_fake_modal").modal("hide");
+    request_enid("POST", data_send, url, function(){
+        carga_informacion_servicio(4);
+    });
+    e.preventDefault();
+            
+}
 let editar_fecha_stock_disponible = function () {
 
 
@@ -34,7 +61,6 @@ let editar_fecha_stock_disponible = function () {
         $ultima_fecha_disponible.html(str)
 
     }
-
 
     if (parseInt($id) > 0) {
         $ocultar_fecha_stock.click(function () {
