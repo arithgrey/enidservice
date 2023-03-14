@@ -218,7 +218,8 @@ class Valoracion extends REST_Controller
             $response = [];
 
             $usuarios = $this->app->api("usuario/faker", ["total" => $param["total"]], "json", "POST");
-            $experiencias_faker = $this->app->api("experiencia/index");            
+            $experiencias_faker = $this->app->api("experiencia/index");  
+            
             $total_experiencias = count($experiencias_faker);        
             $id_servicio = $param["id_servicio"];
             

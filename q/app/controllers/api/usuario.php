@@ -1429,17 +1429,22 @@ class usuario extends REST_Controller
 
         $param = $this->post();
         $response = false;
+        
         if (fx($param, "total")) {
             
             $faker = Faker\Factory::create();
+            $nombres_fake = $this->app->api("nombre_fake/index");  
             $total = $param["total"];
             $response = [];
+            $total_nombres_fake = count($nombres_fake);
             for($a = 0 ; $a < $total ; $a ++){
-
+                
+                $rand_nombre = rand(1,($total_nombres_fake - 1));
                 $usuario = [
                     "email"=> _text("fakerenid",$faker->email),
-                    "password"=> sha1($faker->password(8)),
-                    "name"=> $faker->name(Faker\Provider\es_MX\Person::class), // Se genera un nombre comun de cdmx                    
+                    "password"=> sha1($faker->password(8)),                    
+                    "name" => $nombres_fake[$rand_nombre]["nombre"]
+                    
                 ];
                 
                 $id = $this->usuario_model->insert($usuario, 1);
