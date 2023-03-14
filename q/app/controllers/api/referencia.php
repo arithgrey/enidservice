@@ -44,8 +44,38 @@ class Referencia extends REST_Controller
             if (!es_data($imagenes)) {
                 $response = $this->referencia_model->insert($params);
             }
+        }
+        $this->response($response);
+    }
+    function auto_POST()
+    {
 
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "id_servicio")) {
 
+            $response = true;
+            $id_servicio = $param["id_servicio"];
+
+            $imagenes = $this->app->api(
+                "imagen_cliente_empresa/servicio",
+                [
+                    "id_servicio" => $id_servicio
+                ]
+            );
+
+            $total = count($imagenes) - 1;
+
+            for ($a = 0; $a < 6; $a++) {
+                $rand_id_imagen = rand(1, $total);
+
+                $params = [
+                    "id_servicio" => $id_servicio,
+                    "id_imagen" => $imagenes[$rand_id_imagen]["id_imagen"]
+
+                ];
+                $response = $this->referencia_model->insert($params);
+            }
         }
         $this->response($response);
     }
@@ -64,10 +94,7 @@ class Referencia extends REST_Controller
                 "id_imagen" => $id_imagen,
             ];
             $response = $this->referencia_model->delete($params);
-
         }
         $this->response($response);
     }
-
-
 }

@@ -59,6 +59,19 @@ class Imagen_cliente_empresa extends REST_Controller
         }
         $this->response($response);
     }
+    function servicio_GET()
+    {
+
+        $param = $this->get();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+            $id_servicio = $param["id_servicio"];            
+            $response = $this->imagen_cliente_empresa_model->clientes_servicio(1, $id_servicio);
+        
+        }
+        $this->response($response);
+    }
 
 
     private function referencias($param)
