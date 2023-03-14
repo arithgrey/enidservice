@@ -313,9 +313,9 @@ if (!function_exists('invierte_date_time')) {
             [
                 "href" => "../valoracion?servicio=" . $id_servicio,
 
-            ]
+            ],0
         );
-
+        /*
         $response[] = format_link(
             "MÁS SOBRE EL VENDEDOR"
             ,
@@ -325,6 +325,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         );
+        
         if (es_data($comentarios) && count($comentarios) > 5) {
 
             $response[] = format_link(
@@ -333,6 +334,7 @@ if (!function_exists('invierte_date_time')) {
                 ["class" => "cargar_mas_valoraciones"]
             );
         }
+        */
 
         return append($response);
     }
