@@ -284,16 +284,33 @@ let confirmacion_baja_valoracion = function () {
         
     }
     
-
 }
 
 let catalogo_referencias = function (data) {
 
     render_enid("#galeria_referencias", data);
     $(".imagen_referencia_muestra").click(anexar_galeria);
+    $(".selecciona_imagenes_aleatorias").click(anexar_galeria_aleatoria);
 
 
 }
+let anexar_galeria_aleatoria = function(e){
+
+    
+    let $id_servicio = e.target.id;    
+    if(parseInt($id_servicio) > 0){
+        
+        let $data_send = {"id_servicio": $id_servicio};
+        let url = "../q/index.php/api/referencia/auto/format/json/";
+        $("#modal_referencia_fotografica").modal('hide');
+    
+        request_enid("POST", $data_send, url, function (data) {
+            carga_valoraciones();
+        });
+    }
+    
+}
+
 let anexar_galeria = function (e) {
 
     let $id_imagen = $(this).attr('id');
