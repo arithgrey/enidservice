@@ -842,4 +842,18 @@ class serviciosmodel extends CI_Model
                             p.id_servicio IS NULL";
         return $this->db->query($query_update)->result_array();
     }
+    function disponibles_en_aleatorio($id_servicio){
+        
+        $query_get = "SELECT id_servicio                         
+        FROM servicio 
+        WHERE es_publico > 0 
+            AND existencia > 0
+            AND status = 1
+            AND flag_imagen = 1
+            AND id_servicio != $id_servicio
+        ORDER BY RAND()
+        LIMIT 2";
+
+        return $this->db->query($query_get)->result_array();
+    }
 }

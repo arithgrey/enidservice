@@ -5,7 +5,7 @@ let $modal_recompensa = $("#modal_recompensa");
 let $agregar_promocion = $(".agregar_promocion");
 let $servicio_dominante_recompensa =  $(".servicio_dominante_recompensa");
 let $bottom_carro_compra_recompensa = $(".bottom_carro_compra_recompensa");
-
+let $sugerir_recompensas  = $(".sugerir_recompensas");
 set_option("page", 1);
 $(document).ready(() => {
 
@@ -14,9 +14,27 @@ $(document).ready(() => {
     $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
     $("footer").ready(carga_productos_sugeridos);
 
-    
+    $sugerir_recompensas.click(recompensas_sugeridas);
 });
 
+
+let recompensas_sugeridas  = function(){
+    
+
+    let $id = $(this).attr('id');
+    
+    if (parseInt($id) > 0) {
+
+        let url = "../q/index.php/api/recompensa/sugerencia/index/format/json/";
+        let data_send = {"id_servicio": $id};
+        request_enid("POST", data_send, url, function(data){
+            debugger;
+            redirect("");
+        });
+        
+        
+    }
+}
 
 let carga_productos_sugeridos = () => {
 
