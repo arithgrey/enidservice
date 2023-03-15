@@ -9,11 +9,12 @@ class Recompensa extends REST_Controller
     {
         parent::__construct();
         $this->load->model("recompensa_model");
+        $this->load->model("serviciosmodel");
         $this->load->helper("recompensas");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
-
+    
     function disponible_GET()
     {
 
@@ -162,6 +163,47 @@ class Recompensa extends REST_Controller
         }
         $this->response($response);
     }
+    function sugerencia_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+        if (fx($param, "id_servicio")) {
+
+            $id_servicio = $param["id_servicio"];            
+            $servicios_sugerencias = $this->serviciosmodel->disponibles_en_aleatorio($id_servicio);
+
+            if(es_data($servicios_sugerencias)){
+
+                foreach($servicios_sugerencias as $row){
+                    
+                    $id_servicio_conjunto = $row["id_servicio"];
+                    
+                    $existentes = $this->recompensa_model->get(
+                        [],
+                        [
+                            "id_servicio" => $id_servicio,
+                            "id_servicio_conjunto" => $id_servicio_conjunto
+                        ]
+                    );
+                    if (!es_data($existentes)) {
+        
+        
+                        $response = $this->recompensa_model->insert(
+                            [
+                                "id_servicio" =>  $id_servicio,
+                                "id_servicio_conjunto" => $id_servicio_conjunto
+                            ]
+                        );
+                    }
+
+                }
+            }
+            
+        }
+        $this->response($response);
+    }
+    
 
     function descuento_PUT()
     {

@@ -14,7 +14,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = comentarios($comentarios, $data);
         $z[] = referencias_fotograficas($data);
-        $z[] = d(redactar($comentarios, $data), "mt-1 d-flex justify-content-between");
+        $z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
 
         
         if (es_data($comentarios)) {
@@ -300,12 +300,10 @@ if (!function_exists('invierte_date_time')) {
         return article(append($response));
     }
 
-    function redactar($comentarios, $data)
+    function redactar($data)
     {
 
-        $id_servicio = $data["servicio"];
-        $id_usuario = $data["id_usuario"];
-
+        $id_servicio = $data["servicio"];        
         $response = [];
         $response[] = format_link(
             text_icon("fa fa-chevron-right ir", "ESCRIBE UNA RESEÑA")
@@ -314,27 +312,7 @@ if (!function_exists('invierte_date_time')) {
                 "href" => "../valoracion?servicio=" . $id_servicio,
 
             ],0
-        );
-        /*
-        $response[] = format_link(
-            "MÁS SOBRE EL VENDEDOR"
-            ,
-            [
-                "href" => "../recomendacion/?q=" . $id_usuario,
-            ], 0
-
-
-        );
-        
-        if (es_data($comentarios) && count($comentarios) > 5) {
-
-            $response[] = format_link(
-                text_icon("fa fa-chevron-right ir", "CARGAR MÁS")
-                ,
-                ["class" => "cargar_mas_valoraciones"]
-            );
-        }
-        */
+        );       
 
         return append($response);
     }

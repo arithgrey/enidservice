@@ -7,12 +7,12 @@ if (!function_exists('invierte_date_time')) {
 
         $recompensa = $data["recompensa"];
         $response[] = nueva_promocion($data);
-
+        
         if (es_data($recompensa)) {
 
             $texto = "Promociones similares";
             $response[] = d($texto, ["class" => "mt-5 h4 text-uppercase black font-weight-bold"]);
-
+            
             foreach ($recompensa as $row) {
 
                 $id_servicio = $row["id_servicio"];
@@ -53,13 +53,13 @@ if (!function_exists('invierte_date_time')) {
             $response[] = resumen_recompensa();
             
         }
-        $response[] = modal_nueva_recompensa();
+        $response[] = modal_nueva_recompensa($data["id_servicio"]);
         $response[] = hiddens(["class"=>"servicio_dominante_recompensa", "value" => $data["id_servicio"]]);
         return d($response, 'col-xs-12 col-sm-12 col-md-8 col-md-offset-2');
 
     }
 
-    function modal_nueva_recompensa(){
+    function modal_nueva_recompensa($id_servicio){
         
         $contenido[] = input_frm(12, 'Filtrar',
         [
@@ -69,8 +69,12 @@ if (!function_exists('invierte_date_time')) {
             "class" => "q_recompensa",
             "onkeyup" => "onkeyup_colfield_check(event);"
         ]
-    );
+        );
+
         $contenido[] = place("place_nueva_recompensa");          
+
+        $text = span("aquí",["class" => 'black strong sugerir_recompensas','id' => $id_servicio]);
+        $contenido[] = d(_text_("Sugerir opciones dando click",$text ),'mt-5 col-xs-12');
         return gb_modal($contenido, 'modal_recompensa');
     }
     function nueva_promocion($data){
