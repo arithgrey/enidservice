@@ -7,11 +7,12 @@ let $bottom_carro_compra_recompensa = $(".bottom_carro_compra_recompensa");
 let $costos_precios_servicio = $(".costos_precios_servicio");
 let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
-let $en_lista_deseos =  $(".en_lista_deseos");
+let $en_lista_deseos = $(".en_lista_deseos");
+
 $(document).ready(function () {
 
     $("footer").ready(evalua_promocion_modal);
-    $(".productos_en_carro_compra").removeClass("d-none");    
+    $(".productos_en_carro_compra").removeClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     oculta_acceder();
     set_option([
@@ -20,7 +21,7 @@ $(document).ready(function () {
         "desde_valoracion", get_parameter(".desde_valoracion"),
         "orden", "desc",
     ]);
-    
+
     $("footer").ready(carga_valoraciones);
     $(".agregar_a_lista_deseos").click(agregar_a_lista_deseos);
     $(".talla").click(agregar_talla);
@@ -37,43 +38,66 @@ $(document).ready(function () {
     $(".texto_externo_compra").click(operaciones_compra_externas);
 
     $num_ciclos.change(articulos_seleccionados);
-    
+
     $bottom_carro_compra_recompensa.click(carro_compra_recompensa);
     $costos_precios_servicio.click(costos_precios_servicio);
     $form_costo.submit(costo_servicio);
     $form_precio.submit(precio_servicio);
-    $en_lista_deseos.click(function(){        
+    $en_lista_deseos.click(function () {
         $(".en_lista_deseos_producto").val(1);
     });
     $('#sticky-footer').addClass("d-none");
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
-    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+    $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);
     $("footer").ready(carga_productos_sugeridos);
+    
+    $(".img-zoom").click(function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        $(this).zoomTo({debug:true, nativeanimation:true});
+        $(this).addClass("borde_black");
+
+    });
+    
+    $(window).click(function(evt) {
+        evt.stopPropagation();
+        $("body").zoomTo({targetsize:1.0, nativeanimation:true});
+        $(".img-zoom").removeClass("borde_black");
+    });
+    
+    // for iPhone
+    $("#container").click(function(evt) {
+        evt.stopPropagation();
+        $("body").zoomTo({targetsize:1.0, nativeanimation:true});
+    });
+    
+    $("body").zoomTo({targetsize:1.0, nativeanimation:true});
+
 });
 
-let carro_compra_recompensa  = function(){
+let carro_compra_recompensa = function () {
 
     let $id = $(this).attr('id');
     let $antecedente_compra = $(this).attr('antecedente_compra');
 
     if (parseInt($id) > 0) {
 
-        $("#modal-error-message").modal("show");            
-            
+        $("#modal-error-message").modal("show");
+
         let $selector_carga_modal = $('.cargando_modal');
         $selector_carga_modal.removeClass('d-none');
-        $(".text-order-name-error").text("Procesando ...");    
+        $(".text-order-name-error").text("Procesando ...");
         $(this).addClass("d-none");
         let url = "../q/index.php/api/recompensa/deseo_compra/index/format/json/";
-        let data_send = {"id": $id, "antecedente_compra" : $antecedente_compra};
+        let data_send = { "id": $id, "antecedente_compra": $antecedente_compra };
         request_enid("POST", data_send, url, response_deseo_compra_recompensa);
-        
-        
+
+
     }
 }
 
-let response_deseo_compra_recompensa = function(data){
-    $("#modal-error-message").modal("hide");            
+let response_deseo_compra_recompensa = function (data) {
+    $("#modal-error-message").modal("hide");
     redirect("../lista_deseos");
 
 }
@@ -103,9 +127,9 @@ let response_carga_productos = data => {
         $(".text_sugerencias").removeClass("d-none");
         render_enid(".place_tambien_podria_interezar", data);
         $(".place_tambien_podria_interezar .agregar_deseos_sin_antecedente").addClass("d-none").removeClass("d-block");
-        
+
     }
-};  
+};
 
 let carga_valoraciones = () => {
 
@@ -137,13 +161,20 @@ let response_carga_valoraciones = data => {
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-block");
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").css("margin-top", "-8px");
     $(".baja_valoracion").click(confirmacion_baja_valoracion);
+    $(".img-zoom").click(function(evt) {
+        evt.stopPropagation();
+        evt.preventDefault();
+        $(this).zoomTo({debug:true, nativeanimation:true});
+        $(this).addClass("borde_black");
+
+    });
 
 
 };
 let agrega_valoracion_respuesta = (valoracion, num) => {
 
     let url = "../q/index.php/api/valoracion/utilidad/format/json/";
-    let data_send = {"valoracion": valoracion, "utilidad": num};
+    let data_send = { "valoracion": valoracion, "utilidad": num };
     set_option("respuesta_valorada", valoracion);
     request_enid("PUT", data_send, url, carga_valoraciones);
 };
@@ -194,7 +225,7 @@ let agregar_a_lista_deseos = () => {
         $se_agrego.removeClass('d-none');
         $se_agregara.addClass('d-none');
         let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
-        let data_send = {"id_servicio": get_option("servicio"), "articulos": $numero_articulos};
+        let data_send = { "id_servicio": get_option("servicio"), "articulos": $numero_articulos };
         request_enid("PUT", data_send, url, respuesta_add_valoracion);
 
     }
@@ -247,7 +278,7 @@ let agregar_deseos = function () {
     if (parseInt($id_servicio) > 0) {
         let $articulos = $num_ciclos.val();
         let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-        let data_send = {"id_servicio": $id_servicio, "articulos": $articulos};
+        let data_send = { "id_servicio": $id_servicio, "articulos": $articulos };
         request_enid("POST", data_send, url, respuesta_add_valoracion);
     }
 }
@@ -256,7 +287,7 @@ let agregar_referencia_fotografica = function () {
 
 
     let $id_servicio = $(this).attr('id');
-    let $data_send = {"id_servicio": $id_servicio};
+    let $data_send = { "id_servicio": $id_servicio };
     let url = "../q/index.php/api/imagen_cliente_empresa/referencia_servicio/format/json/";
     request_enid("GET", $data_send, url, catalogo_referencias);
 
@@ -267,23 +298,23 @@ let confirmacion_baja_valoracion = function () {
 
 
     let $id_valoracion = $(this).attr('id');
-    if(parseInt($id_valoracion) > 0){
+    if (parseInt($id_valoracion) > 0) {
 
         show_confirm("¿Seguro que quieres ocultar esta valoración?", "", "CONTINUAR", function () {
-                
+
             let url = "../q/index.php/api/valoracion/id/format/json/";
-            let data_send = {"id": $id_valoracion, "status" : 2};
-    
-            request_enid("PUT", data_send, url, function(){
+            let data_send = { "id": $id_valoracion, "status": 2 };
+
+            request_enid("PUT", data_send, url, function () {
                 carga_valoraciones();
             });
-            
-    
+
+
         });
 
-        
+
     }
-    
+
 }
 
 let catalogo_referencias = function (data) {
@@ -294,21 +325,21 @@ let catalogo_referencias = function (data) {
 
 
 }
-let anexar_galeria_aleatoria = function(e){
+let anexar_galeria_aleatoria = function (e) {
 
-    
-    let $id_servicio = e.target.id;    
-    if(parseInt($id_servicio) > 0){
-        
-        let $data_send = {"id_servicio": $id_servicio};
+
+    let $id_servicio = e.target.id;
+    if (parseInt($id_servicio) > 0) {
+
+        let $data_send = { "id_servicio": $id_servicio };
         let url = "../q/index.php/api/referencia/auto/format/json/";
         $("#modal_referencia_fotografica").modal('hide');
-    
+
         request_enid("POST", $data_send, url, function (data) {
             carga_valoraciones();
         });
     }
-    
+
 }
 
 let anexar_galeria = function (e) {
@@ -316,7 +347,7 @@ let anexar_galeria = function (e) {
     let $id_imagen = $(this).attr('id');
     let $id_servicio = $(this).attr('id_servicio');
 
-    let $data_send = {"id_servicio": $id_servicio, "id_imagen": $id_imagen};
+    let $data_send = { "id_servicio": $id_servicio, "id_imagen": $id_imagen };
     let url = "../q/index.php/api/referencia/index/format/json/";
     $("#modal_referencia_fotografica").modal('hide');
 
@@ -326,11 +357,11 @@ let anexar_galeria = function (e) {
 
 }
 let elimina_imagen_referencia = function (e) {
-    
+
     let $id_imagen = $(this).attr('id_imagen');
     let $id_servicio = $(this).attr('id_servicio');
 
-    let $data_send = {"id_servicio": $id_servicio, "id_imagen": $id_imagen};
+    let $data_send = { "id_servicio": $id_servicio, "id_imagen": $id_imagen };
     let url = "../q/index.php/api/referencia/index/format/json/";
 
     request_enid("DELETE", $data_send, url, function (data) {
@@ -338,7 +369,7 @@ let elimina_imagen_referencia = function (e) {
     });
 
 }
-let costos_precios_servicio = function(e){
+let costos_precios_servicio = function (e) {
 
     let $id = $(this).attr('id');
     $("#gb_costos_precios").modal("show");
@@ -346,32 +377,32 @@ let costos_precios_servicio = function(e){
 
 
 }
-let costo_servicio = function(e){
+let costo_servicio = function (e) {
 
-    let $costo = $(".costo_servicio").val();    
+    let $costo = $(".costo_servicio").val();
     if (es_float($costo) && $costo > 0) {
 
         let url = "../q/index.php/api/servicio/costo_compra/format/json/";
-        let data_send = $form_costo.serialize();        
+        let data_send = $form_costo.serialize();
         request_enid("PUT", data_send, url, function (data) {
             redirect("");
         });
-    } 
+    }
 
     e.preventDefault();
 
 }
-let precio_servicio = function(e){
+let precio_servicio = function (e) {
 
-    let $precio = $(".precio_servicio").val();    
+    let $precio = $(".precio_servicio").val();
     if (es_float($precio) && $precio > 0) {
 
         let url = "../q/index.php/api/servicio/costo/format/json/";
-        let data_send = $form_precio.serialize();        
+        let data_send = $form_precio.serialize();
         request_enid("PUT", data_send, url, function (data) {
             redirect("");
         });
-    } 
+    }
 
     e.preventDefault();
 

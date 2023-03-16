@@ -51,6 +51,21 @@ CDMX
     <?php endforeach; ?>
 <?php endif; ?>
 
+
+<?php if (isset($js_node) && !is_null($js_node) && is_array($js_node)): ?>
+    <?php $s = "../node_modules/";
+    foreach ($js_node as $script): ?>
+        <?php $file = $s . $script;
+        if (file_exists($file)): ?>
+            <script type='text/javascript'
+                    src='<?php echo $file; ?>?<?= version_enid ?>'></script>
+        <?php else: ?>
+            NO SE CARGO ->  <?= print_r($script) ?>
+            <?= br() ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+
 <?php if (isset($js) && !is_null($js) && is_array($js)): ?>
     <?php $s = "../js_tema/";
     foreach ($js as $script): ?>

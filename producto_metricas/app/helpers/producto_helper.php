@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
                 a_enid(img(
                     [
                         'src' => $url,
-                        "class" => " w-100 tab-pane fade zoom" . $ext . " " . $extra_class_contenido,
+                        "class" => " w-100 tab-pane fade zoom img-zoom" . $ext . " " . $extra_class_contenido,
                         "id" => "imagen_tab_" . $z,
 
                     ]
