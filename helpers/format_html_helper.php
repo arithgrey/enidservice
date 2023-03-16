@@ -1284,9 +1284,9 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     return d($modal, 13);
 }
 
-function menu_session_mobil($in_session)
+function menu_session_mobil($in_session,$mas_vendidos)
 {
-
+    
     $cerrar_opciones = d(
         a_enid(
             d("×", "borde_red  pl-3 pr-3 pb-2"),
@@ -1299,7 +1299,7 @@ function menu_session_mobil($in_session)
         'ml-auto mr-5 top_150'
     );
 
-    $form_busqueda = form_busqueda_productos();
+    $form_busqueda = form_busqueda_productos($mas_vendidos);
     $opciones_acceso = opciones_acceso($in_session);
 
     $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
@@ -1317,7 +1317,7 @@ function menu_session_mobil($in_session)
     return addNRow($menu_lateral);
 }
 
-function form_busqueda_productos()
+function form_busqueda_productos($mas_vendidos)
 {
     $form[] = open_form(['action' => "../search"]);
     $form[] = d("¿Qué estás buscando?", 'strong mb-2 f14 text-uppercase');
@@ -1341,7 +1341,17 @@ function form_busqueda_productos()
         "col-sm-2 p-0"
     );
     $form[] = form_close();
-    return d($form, 'my-auto col-sm-12');
+
+    $categorias[] = d(a_enid(
+        _text_("Lo más buscado"),
+        [
+            "class"=>"mb-1 strong black mt-5 row",                                    
+        ]
+    ),12);
+    $categorias[] = d(categorias_destacatas_ab_mb($mas_vendidos),12);
+
+    $form[] = d(d($categorias,13),12);
+    return d($form, 'my-auto col-sm-12 mr-3');
 }
 
 function opciones_acceso($in_session)
@@ -1921,9 +1931,30 @@ function categorias_destacatas_ab($mas_vendidos){
 
     }
 
-    return $list;
-    
+    return $list;    
 }
+function categorias_destacatas_ab_mb($mas_vendidos){
+    
+    $list = [];
+    foreach($mas_vendidos as $row)
+    {
+        
+        $menu = $row["menu"];        
+        $path  = $row["path"];
+        $text = _text_($menu);
+        
+        $list[] = a_enid(            
+            $text
+            ,[
+            "class"=>"col-xs-4 mt-2 text-uppercase border border-secondary black fp7",
+            "href"=> path_enid("ab",$path)
+        ],0);
+
+    }
+
+    return d($list,13);    
+}
+
 function navegacion(
     $path_img_usuario,
     $in_session,
