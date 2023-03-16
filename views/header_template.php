@@ -44,6 +44,7 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 <?= menu_session_mobil($in_session, $mas_vendidos) ?>
 
 <div class="container-fluid" id="page-content">
+<?= menu_session_mobil($in_session, $mas_vendidos) ?>
 <?=modal_intento_conversion()?>
 <?=modal_desglose_carro_compra()?>
 <?=modal_prueba_en_casa()?>
