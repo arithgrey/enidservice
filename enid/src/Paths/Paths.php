@@ -718,12 +718,11 @@ class Paths
                 "js" =>
                 [
                     'producto/principal.js',
-                    "alerts/jquery-confirm.js", 
-                    "producto/zoom.js"                
+                    "alerts/jquery-confirm.js"                    
                 ],
                 "js_node" =>
                 [
-                    "zoomooz/jquery.zoomooz.min.js"
+                    //"zoomooz/jquery.zoomooz.min.js"
                 ]
 
                 

@@ -117,7 +117,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
-            d($imagenes["imagenes_contenido"], $clases_imagenes),
+            d($imagenes["imagenes_contenido"], ["class" => $clases_imagenes , "id" =>"container"]),
             'row'
 
         );
