@@ -1946,7 +1946,7 @@ function categorias_destacatas_ab_mb($mas_vendidos){
         $list[] = a_enid(            
             $text
             ,[
-            "class"=>"col-xs-4 mt-2 text-uppercase border border-secondary black fp7",
+            "class"=>"col-xs-4 mt-2 text-uppercase borde_black black text-center fp9",
             "href"=> path_enid("ab",$path)
         ],0);
 
