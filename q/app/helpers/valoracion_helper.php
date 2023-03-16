@@ -176,7 +176,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $path_referencia = _text("../img_tema/clientes/", $row["nombre_imagen"]);
 
-                $imagen = a_enid(img($path_referencia), ["href" => path_enid("clientes")]);
+                $imagen = d(img($path_referencia), ["class" => "img-zoom"]);
                 $id_imagen = $row["idimagen"];
                 $icono_eliminar = icon(_text_(_close_icon, "eliminar_foto_referencia"),
                     [

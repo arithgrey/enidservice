@@ -113,7 +113,7 @@ if (!function_exists('invierte_date_time')) {
             d-md-block d-xl-none aviso_comision pt-3 pb-3";
         $clases_imagenes =
             " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 
-            col-md-6 col-md-offset-3 align-self-center";
+            col-md-6 col-md-offset-3 align-self-center image-container";
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
@@ -1137,7 +1137,7 @@ if (!function_exists('invierte_date_time')) {
                 img(
                     [
                         'src' => $url,
-                        "class" => " w-100 tab-pane fade zoom mh_sm_460" . $ext . " " . $extra_class_contenido,
+                        "class" => " w-100 tab-pane fade zoom img-zoom mh_sm_460" . $ext . " " . $extra_class_contenido,
                         "id" => "imagen_tab_" . $z,
 
                     ]

@@ -114,8 +114,6 @@ $("footer").ready(() => {
         });
     }
     
-   
-
     //$('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     $(".activa_cupon").click(activar_cupon);
 
