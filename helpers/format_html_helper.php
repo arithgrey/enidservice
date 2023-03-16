@@ -1292,7 +1292,7 @@ function menu_session_mobil($in_session,$mas_vendidos)
             d("×", "borde_red  pl-3 pr-3 pb-2"),
             [
                 "href" => "javascript:void(0)",
-                "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black f13 ",
+                "class" => "closebtn closebtn_lateral p-3 font-weight-bold h1 black f11 ",
                 "onclick" => "closeNav()",
             ]
         ),
@@ -1300,10 +1300,10 @@ function menu_session_mobil($in_session,$mas_vendidos)
     );
 
     $form_busqueda = form_busqueda_productos($mas_vendidos);
-    $opciones_acceso = opciones_acceso($in_session);
+    //$opciones_acceso = opciones_acceso($in_session);
 
     $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
-    $columna = d([$cerrar_opciones, $form_busqueda, $opciones_acceso], $clases_columnas);
+$columna = d([$cerrar_opciones, $form_busqueda /*$opciones_acceso*/], $clases_columnas);
 
     $menu_lateral = d(
 
