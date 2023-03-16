@@ -40,7 +40,7 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
             $menu,
             $mas_vendidos
             )?>
-<?= menu_session_mobil($in_session, $mas_vendidos) ?>
+
 
 <div class="container-fluid" id="page-content">
 <?=modal_intento_conversion()?>
@@ -51,3 +51,4 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 <?=modal_anuncio_negocio()?>
 <?=modal_venta_auto()?>
 <?=modal_mayoristas()?>
+<?= menu_session_mobil($in_session, $mas_vendidos) ?>

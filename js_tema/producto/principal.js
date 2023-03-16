@@ -52,8 +52,8 @@ $(document).ready(function () {
     $("footer").ready(carga_productos_sugeridos);
     
     $(".img-zoom").click(function(evt) {
-        evt.stopPropagation();
-        evt.preventDefault();
+        //evt.stopPropagation();
+        //evt.preventDefault();
         $(this).zoomTo({debug:true, nativeanimation:true});
         $(this).addClass("borde_black");
 

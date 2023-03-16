@@ -52,19 +52,6 @@ CDMX
 <?php endif; ?>
 
 
-<?php if (isset($js_node) && !is_null($js_node) && is_array($js_node)): ?>
-    <?php $s = "../node_modules/";
-    foreach ($js_node as $script): ?>
-        <?php $file = $s . $script;
-        if (file_exists($file)): ?>
-            <script type='text/javascript'
-                    src='<?php echo $file; ?>?<?= version_enid ?>'></script>
-        <?php else: ?>
-            NO SE CARGO ->  <?= print_r($script) ?>
-            <?= br() ?>
-        <?php endif; ?>
-    <?php endforeach; ?>
-<?php endif; ?>
 
 <?php if (isset($js) && !is_null($js) && is_array($js)): ?>
     <?php $s = "../js_tema/";
@@ -84,6 +71,20 @@ CDMX
 <?php if (isset($js_extra) && !is_null($js_extra) && is_array($js_extra)): ?>
     <?php foreach ($js_extra as $script): ?>
         <script type='text/javascript' src='<?php echo $script; ?>'></script>        
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if (isset($js_node) && !is_null($js_node) && is_array($js_node)): ?>
+    <?php $s = "../node_modules/";
+    foreach ($js_node as $script): ?>
+        <?php $file = $s . $script;
+        if (file_exists($file)): ?>
+            <script type='text/javascript'
+                    src='<?php echo $file; ?>?<?= version_enid ?>'></script>
+        <?php else: ?>
+            NO SE CARGO ->  <?= print_r($script) ?>
+            <?= br() ?>
+        <?php endif; ?>
     <?php endforeach; ?>
 <?php endif; ?>
 
