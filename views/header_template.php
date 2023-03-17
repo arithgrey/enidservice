@@ -54,3 +54,4 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 <?=modal_anuncio_negocio()?>
 <?=modal_venta_auto()?>
 <?=modal_mayoristas()?>
+<?=modal_detalle_imagen()?>

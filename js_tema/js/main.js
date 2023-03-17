@@ -116,8 +116,17 @@ $("footer").ready(() => {
     
     //$('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     $(".activa_cupon").click(activar_cupon);
-
+    $(".img-zoom").click(zoom_imagen);
+    
 });
+
+let zoom_imagen = function(){
+    
+    let $src = $(this).attr('src');
+    $(".img-detalle").attr('src',$src);
+    $("#modal_detalle_imagen").modal("show");        
+    
+}
 
 
 let activar_cupon = function(){

@@ -1,3 +1,7 @@
+.img-zoom:hover{
+
+    cursor: pointer;
+}
 .fa-heart-o{
     font-weight: bold!important;
 }

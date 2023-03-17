@@ -1232,7 +1232,7 @@ function ajustar($a, $b, $col = 0, $extra_class = '', $horizontal = 1, $sin_row 
     return $response;
 }
 
-function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1, $modal_lg = 0)
+function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_carga = 1, $modal_lg = 0, $static = 1)
 {
     $span = span('Loading', 'sr-only');
     $load = str_repeat(d(
@@ -1269,17 +1269,21 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
             "role" => "document",
         ]
     );
-    $modal = d(
-        $contenido,
-        [
-            "class" => "modal",
-            "tabindex" => "-1",
-            "role" => "dialog",
-            "id" => $id_modal,
-            "data-backdrop" => "static",
-            "data-keyboard" => "false"
-        ]
-    );
+
+
+
+    $config = [
+        "class" => "modal",
+        "tabindex" => "-1",
+        "role" => "dialog",
+        "id" => $id_modal,        
+        "data-keyboard" => "false"
+    ];
+
+    if($static > 0){
+        $config["data-backdrop"] = "static";
+    }
+    $modal = d($contenido, $config);
 
     return d($modal, 13);
 }
@@ -2324,7 +2328,7 @@ function get_logo($session = 0)
     ), $carro, _between);
 
     $acceder = a_enid(
-        "Ingresar ",
+        icon('fa black fa fa-user white'),
         [
             "href" => path_enid('login'),
             "class" => "white borde_amarillo d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
@@ -2332,7 +2336,7 @@ function get_logo($session = 0)
     );
 
     $acceder  = ($session < 1) ? $acceder : "";
-    $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3','d-none');
+    $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3');
 
 
     $carro_logo = flex($texto, $icono_busqueda_carro_session, _between);
