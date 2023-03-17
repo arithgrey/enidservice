@@ -78,10 +78,8 @@ class Imagen_servicio_model extends CI_Model
 							INNER JOIN imagen i 
 							ON  
 							iss.id_imagen =  i.idimagen
-							WHERE
-							iss.principal = 1 AND
-							iss.id_servicio in (' . $ids . ')
-							
+							WHERE							
+							iss.id_servicio in (' . $ids . ')														
 							ORDER BY iss.principal DESC';
 
 		return  $this->db->query($query_get)->result_array();
