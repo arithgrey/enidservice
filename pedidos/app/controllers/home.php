@@ -198,13 +198,18 @@ class Home extends CI_Controller
                 "es_administrador" => $es_administrador,
                 "recompensa" => $recompensa
             ];
-
-            $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
             $usuario_compra = $this->get_usuario($id_usuario_compra);
+            /*
+            $es_lista_negra = $this->es_lista_negra($id_usuario_compra);
+            
             $usuario_lista_negra = $this->busqueda_lista_negra($usuario_compra);
-
+            */
+            /*
             $data["es_lista_negra"] = $es_lista_negra;
             $data["usuario_lista_negra"] = $usuario_lista_negra;
+            */
+            $data["es_lista_negra"] = 0;
+            $data["usuario_lista_negra"] = [];
             $data = $this->agrega_usuario_referencia_tracker($data, $es_administrador);
             $data = $this->agrega_usuario_entrega_tracker($data, $es_administrador);
 

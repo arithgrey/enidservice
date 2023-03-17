@@ -20,8 +20,7 @@ class Home extends CI_Controller
         $data = $this->app->session();
         $data = $this->app->cssJs($data, "login");
         $data["auth_url"] = $this->verifica_google_session($param);
-        $data["link_registro_google"] = $this->link_registro_google($param);
-        
+        $data["link_registro_google"] = $this->link_registro_google($param);        
         $this->app->pagina($data, page_sigin(prm_def($param, "action"), $data,$param), 1);
     }
     private function link_registro_google($param)
@@ -99,8 +98,7 @@ class Home extends CI_Controller
             $id_empresa = $usuario["id_empresa"];
 
             $session = $this->enid_session($picture, $id_usuario, $nombre, $email, $id_empresa);
-            $response["session"] = $session;
-            //$response["session_creada"] = $this->app->get_session();
+            $response["session"] = $session;            
             redirect(path_enid("url_home"));
 
         }else{
