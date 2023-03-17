@@ -692,12 +692,13 @@ class app extends CI_Controller
     function crea_session($id_usuario, $nombre, $email, $id_empresa, $recien_creado = 0)
     {
 
-        $empresa = $this->get_empresa($id_empresa);
         $perfiles = $this->get_perfil_user($id_usuario);
         $perfildata = $this->get_perfil_data($id_usuario);
         $empresa_permiso = $this->get_empresa_permiso($id_empresa);
         $empresa_recurso = $this->get_empresa_recursos($id_empresa);
         $status_enid = $this->estatus_enid_service();
+        $empresa = $this->get_empresa($id_empresa);
+
         $response = 0;
 
         if (es_data($perfiles)) {
