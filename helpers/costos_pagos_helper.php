@@ -1,5 +1,138 @@
 <?php
+ function create_vista($s, $agregar_servicio = 0, $es_recompensa = 0)
+ {
 
+     $id_servicio = $s["id_servicio"];
+     $in_session = $s["in_session"];
+     $id_perfil = (prm_def($s, "id_perfil") > 0) ? $s["id_perfil"] : 0;
+     $img = formato_producto($es_recompensa, $s);
+
+     if ($in_session > 0 && $es_recompensa < 1) {
+
+         $response[] = $img;
+
+         if ($agregar_servicio > 0) {
+
+             $response[] = d(
+                 agregar_servicio(
+                     $in_session,
+                     $id_servicio,
+                     $s["id_usuario"],
+                     $s["id_usuario_actual"],
+                     $id_perfil
+                 )
+             );
+         } else {
+
+             $icono_editar = editar_servicio(
+                 $s,
+                 $in_session,
+                 $id_servicio,
+                 $id_perfil
+             );
+
+             $indicador = tiene_atributos($s);
+
+             $response[] = d($icono_editar);
+             $response[] = d($indicador);
+         }
+
+
+         $response = d(
+             $response,
+             "d-flex flex-column justify-content-center col-lg-3 mt-5 px-3"
+         );
+     } else {
+
+         $class = "col-md-3 col-lg-2 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary";
+         $response = d($img,  $class);
+     }
+
+     return $response;
+ }
+ function formato_producto($es_recompensa, $servicio)
+    {
+        $precio = $servicio["precio"];
+        $precio_alto = $servicio["precio_alto"];
+
+        $id_servicio = $servicio["id_servicio"];
+        $es_sorteo = $servicio["es_sorteo"];
+
+        $path_servicio =  ($es_sorteo < 1 ) ? get_url_servicio($id_servicio): path_enid("sorteo",$id_servicio) ;
+
+        $texto_precio_real = d(money($precio), 'f12 p-1 bg_black white mt-2 borde_green');
+        $texto_descuento = "";
+        if($precio_alto > $precio){
+            $texto_descuento = d(del(money($precio_alto)), 'mt-1 red_enid');        
+        }
+        
+        $texto_precio =  flex($texto_precio_real, $texto_descuento,'flex-column');
+        $texto_nombre = d(substr($servicio["nombre_servicio"], 0, 52), "fp6 text-uppercase black mt-2");
+
+        $tipo_deseo = "agregar_deseos_sin_antecedente";
+        $tipo_deseo_agregado  =  "quitar_deseo_sin_antecedente";
+
+
+        $clases = _text_($tipo_deseo,  _deseo_icon, "fa-2x");
+        $clases_agregado = _text_($tipo_deseo_agregado,  _agregado_icon, "fa-2x borde_green");
+
+        $icono_por_agregar = icon($clases, ["id" =>  $id_servicio, "title" => "Lo deseo", "onclick" => "log_operaciones_externas(27, $id_servicio)"]);
+        $icono_agregado = icon($clases_agregado, ["id" =>  $id_servicio]);
+
+        $extra_por_agregar = _text("por_agregar_", $id_servicio);
+        $extra_agregados = _text("d-none agregado_", $id_servicio);
+        $iconos = flex($icono_por_agregar, $icono_agregado, "flex-column", _text_("mr-2", $extra_por_agregar), $extra_agregados);
+
+
+        $texto_nombre_carrito_compras = flex($iconos, $texto_nombre, "justify-content-between w-100 mt-1", "");
+        $texto_precio_nombre = flex($texto_precio,  $texto_nombre_carrito_compras, "flex-column");
+
+
+        $clases_imagen = ($es_recompensa > 0) ? "producto_en_recompensa servicio d-block mx-auto mt-3 mh_250 mh_sm_310 cursor_pointer " :
+            "d-block mh_250 mh_sm_310 mx-auto mt-3 servicio";
+
+        $img = a_enid(img(
+            [
+                'src' => $servicio["url_img_servicio"],
+                'alt' => $servicio["metakeyword"],
+                'class' => $clases_imagen,
+                'id' => $id_servicio
+            ]
+        ), $path_servicio);
+
+        if ($es_recompensa > 0) {
+
+            $img = img(
+                [
+                    'src' => $servicio["url_img_servicio"],
+                    'alt' => $servicio["metakeyword"],
+                    'class' => $clases_imagen,
+                    'id' => $id_servicio
+                ]
+            );
+        }
+
+
+        $link_afiliado_amazon = $servicio["link_afiliado_amazon"];
+        $link_amazon_afiliado =  "";        
+        if(str_len($link_afiliado_amazon, 5)){
+            
+            $link_amazon_afiliado = format_link("Comprame en Amazon!",
+            [
+             "href" => $link_afiliado_amazon,
+             "class"    => "fp7"
+            ], 3);
+        }
+        
+        return d(
+                    [
+                        d($img),
+                        d($texto_precio_nombre),
+                        d($link_amazon_afiliado)
+                    ],
+                "flex-column mx-auto my-auto d-block p-1 mh-auto mt-5"
+                );
+}
 function ticket_pago(&$deuda, $tipos_entrega, $format = 1)
 {
 

@@ -35,6 +35,14 @@ class Imagen_servicio extends REST_Controller
 		}
 		$this->response($response);
 	}
+    function ids_GET()
+	{
+        $param = $this->get();        
+        $in = get_keys($param['ids']);        
+        $response = $this->imagen_servicio_model->ids($in);
+        $this->response($response);            
+	}
+    
 
 	function index_POST()
 	{

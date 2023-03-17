@@ -29,14 +29,7 @@ let $input_password_inicio = $form_inicio.find('#pw');
 let $seccion_entrega = $form_registro.find('.seccion_entrega');
 let $icono_mostrar_password = $form_inicio.find('.mostrar_password');
 let $icono_ocultar_password = $form_inicio.find('.ocultar_password');
-let $auto = $form_registro.find('.auto');
-let $moto = $form_registro.find('.moto');
-let $bicicleta = $form_registro.find('.bicicleta');
-let $pie = $form_registro.find('.pie');
-let $tiene_auto = $form_registro.find('.tiene_auto');
-let $tiene_moto = $form_registro.find('.tiene_moto');
-let $tiene_bicicleta = $form_registro.find('.tiene_bicicleta');
-let $reparte_a_pie = $form_registro.find('.reparte_a_pie');
+
 let $link_como_vender = $form_registro.find('.link_como_vender');
 let $label_mail_acceso = $(".label_mail_acceso");
 let $label_pw = $(".label_pw");
@@ -72,7 +65,7 @@ let inicio_session = () => {
     let $min_mail = get_parameter('#mail_acceso').length > MIN_CORREO_LENGTH;
     let $min_pw = get_parameter(pw).length > MIN_PW_LENGTH;
     if ($min_mail && $min_pw) {
-        modal('Accediendo ...', 1);
+        modal('Vamos comprobar si ya tienes una cuenta ...', 1);
         let url = '../login/index.php/api/sess/start/format/json/';
         bloquea_form(form_inicio);
         request_enid('POST', data_send, url, response_inicio_session);
@@ -160,7 +153,6 @@ let agrega_usuario = (e) => {
     respuestas.push(es_formato_nombre($nombre_persona));
     respuestas.push(es_formato_telefono($texto_telefono));
     
-
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
@@ -170,7 +162,6 @@ let agrega_usuario = (e) => {
         $(".form-miembro-enid-service").addClass("d-none");
         $(".formulario_registro").addClass("d-none");
         
-
         let tmp_password = '' + CryptoJS.SHA1($registro_pw.val());
         let nombre = $nombre_persona.val();
         let email = $registro_email.val();
@@ -187,11 +178,11 @@ let agrega_usuario = (e) => {
             'password': tmp_password,
             'simple': 1,
             'perfil': perfil,
-            'tiene_auto': $tiene_auto.val(),
-            'tiene_moto': $tiene_moto.val(),
-            'tiene_bicicleta': $tiene_bicicleta.val(),
-            'reparte_a_pie': $reparte_a_pie.val(),
-            'tel_contacto': $texto_telefono.val()
+            'tiene_auto': 0,
+            'tiene_moto': 0,
+            'tiene_bicicleta': 0,
+            'reparte_a_pie': 0,
+            'tel_contacto': 0
         };
         
         request_enid('POST', data_send, url, response_usuario_registro);
