@@ -139,7 +139,7 @@ class Cobranza extends REST_Controller
     {
         $param = $this->post();
         $a = 0;
-        $es_cliente = $param["es_cliente"];
+        $es_cliente = prm_def($param, "es_cliente");
         $envia_cliente = prm_def($param, "envia_cliente");
 
         $productos_deseados_carro_compra =
@@ -535,7 +535,7 @@ class Cobranza extends REST_Controller
     function usuario_referencia($param)
     {
         $usuario_referencia = 0;
-        if (array_key_exists('es_cliente', $param) && $param['es_cliente'] < 1) {
+        if (intval(prm_def($param,"es_cliente")) < 1) {
 
             $usuario_referencia = $this->id_usuario;
         }
@@ -546,7 +546,7 @@ class Cobranza extends REST_Controller
     function usuario_referencia_es_premium($param)
     {
         $es_premium = 0;
-        if (array_key_exists('es_cliente', $param) && $param['es_cliente'] < 1) {
+        if (intval(prm_def($param, "es_cliente")) < 1) {
 
             $usuario = $this->app->usuario($this->id_usuario);
             $data = $this->app->session();
@@ -577,7 +577,7 @@ class Cobranza extends REST_Controller
         $param = $this->referencia_usuario($param, $usuario_referencia);
         $usuario = $this->crea_usuario($param);
         
-        if (es_data($usuario) && prm_def($usuario,"usuario_registrado") > 0 &&  prm_def($usuario, "id_usuario")  > 0) {
+        if (es_data($usuario) && prm_def($usuario,"usuario_registrado") > 0 && prm_def($usuario, "id_usuario") > 0) {
 
             $usuario_referencia = ($usuario_referencia > 0) ? $usuario_referencia : $usuario["id_usuario"];
             $id_usuario = $usuario["id_usuario"];
@@ -691,7 +691,7 @@ class Cobranza extends REST_Controller
         
     }
 
-    function crea_orden($q)
+    private function crea_orden($q)
     {
 
         return $this->app->api("cobranza/solicitud_proceso_pago", $q, "json", "POST");

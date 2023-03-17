@@ -12,8 +12,7 @@ let $en_lista_deseos = $(".en_lista_deseos");
 $(document).ready(function () {
 
     $("footer").ready(evalua_promocion_modal);
-    $(".productos_en_carro_compra").removeClass("d-none");
-    $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
+    $(".productos_en_carro_compra").removeClass("d-none");    
     oculta_acceder();
     set_option([
         "servicio", get_parameter(".servicio"),
