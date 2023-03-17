@@ -51,30 +51,7 @@ $(document).ready(function () {
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);
     $("footer").ready(carga_productos_sugeridos);
     
-    $(".img-zoom").click(function(evt) {
-        //evt.stopPropagation();
-        //evt.preventDefault();
-        $(this).zoomTo({debug:true, nativeanimation:true});
-        $(this).addClass("borde_black");
-
-    });
-    
-    $(window).click(function(evt) {
-        evt.stopPropagation();
-        $("body").zoomTo({targetsize:1.0, nativeanimation:true});
-        $(".img-zoom").removeClass("borde_black");
-    });
-    
-    // for iPhone
-    $("#container").click(function(evt) {
-        evt.stopPropagation();
-        $("body").zoomTo({targetsize:1.0, nativeanimation:true});
-    });
-    
-    $("body").zoomTo({targetsize:1.0, nativeanimation:true});
-
 });
-
 let carro_compra_recompensa = function () {
 
     let $id = $(this).attr('id');
@@ -161,13 +138,7 @@ let response_carga_valoraciones = data => {
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").addClass("d-block");
     $("body > div:nth-child(3) > div.p-0.col-lg-3 > div:nth-child(1) > a").css("margin-top", "-8px");
     $(".baja_valoracion").click(confirmacion_baja_valoracion);
-    $(".img-zoom").click(function(evt) {
-        evt.stopPropagation();
-        evt.preventDefault();
-        $(this).zoomTo({debug:true, nativeanimation:true});
-        $(this).addClass("borde_black");
-
-    });
+    $(".img-zoom").click(zoom_imagen);
 
 
 };

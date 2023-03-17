@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);
-            $response[] = d(img($link),  'col-sm-3 col-xs-6');
+            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  'col-sm-3 col-xs-6');
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');

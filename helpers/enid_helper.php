@@ -1455,6 +1455,15 @@ function modal_desglose_carro_compra(){
     return gb_modal($contenido, 'modal_agregado_carro_compra',0,1);
 
 }
+function modal_detalle_imagen(){
+
+    
+    $response[] = d(img(["src" => "", "class" => "w-100 img-detalle"]),12);    
+    $contenido[] =  d($response, 13);
+
+    return gb_modal($contenido, 'modal_detalle_imagen',0,1,0);
+
+}
 
 function modal_prueba_en_casa()
 {
