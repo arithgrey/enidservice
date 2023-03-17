@@ -6,7 +6,7 @@
 
 
 
-<?php if ($pixel_facebook > 1): ?>
+<?php if ($pixel_facebook > 0): ?>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)

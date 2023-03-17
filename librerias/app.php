@@ -320,7 +320,7 @@ class app extends CI_Controller
             $data['key_desarrollo'] = $this->config->item('key_desarrollo');
             $data["path_img_usuario"] = "";
             $data["HTTP_REFERER"] =  prm_def($_SERVER, "HTTP_REFERER", "");
-            $data["pixel_facebook"] = 0;
+            $data["pixel_facebook"] = 1;
         }
 
         $data['restricciones'] = $this->config->item('restricciones');
