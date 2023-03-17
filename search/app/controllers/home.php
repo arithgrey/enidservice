@@ -8,7 +8,7 @@ class Home extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->helper("search");
+        $this->load->helper("search");        
         $this->load->library(lib_def());        
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
@@ -16,17 +16,10 @@ class Home extends CI_Controller
     function index()
     {
 
-        $param = $this->input->get();
-        $param += ["num_hist" => 9990890];
-        $this->load_data($param);
-    }
-
-    private function load_data($param)
-    {
-
-
+        $param = $this->input->get();        
         $data = $this->app->session();
         $orden = $this->orden($param, $data);
+        
         $pagina = prm_def($param, "page");
         $is_mobile = $data["is_mobile"];
 
@@ -44,9 +37,11 @@ class Home extends CI_Controller
             "resultados" => prm_def($param, "resultados")
 
         ];
-        $data["es_sorteo"] = prm_def($param, "sorteo");
 
+        $data["es_sorteo"] = prm_def($param, "sorteo");
         $data["servicios"] = $this->app->api("servicio/q", $data_send);
+        
+        
         
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
         if ($son_servicio > 0) {
@@ -54,6 +49,7 @@ class Home extends CI_Controller
         } else {
             $this->sin_resultados($param);
         }
+        
     }
 
     function orden($param, $data)
@@ -103,12 +99,6 @@ class Home extends CI_Controller
         ];
 
 
-        if (is_mobile() < 1) {
-
-            $data["bloque_busqueda"] = $this->crea_menu_lateral($data);
-        }
-
-
         $data["paginacion"] =
             $this->paginacion(
                 $total,
@@ -119,28 +109,41 @@ class Home extends CI_Controller
                 $data_send["order"],
                 $data_send['page']
             );
-
-        $this->set_option("in_session", 0);
-
-        $callback = function ($n) {
-
-            if (!is_null($n)) {
-                $v = $this->get_vista_servicio($n);
-                return (!is_null($v)) ? $v : "";
-            }
-        };
-
-        $data["lista_productos"] = array_map($callback, $servicios["servicios"]);
-        $data["q"] = $q;
-        //$data["categorias_destacadas"] = $this->categorias_destacadas();
-        $data = $this->app->cssJs($data, "search");
-        //$data["filtros"] = get_orden();
+                            
+        $data["lista_productos"] = $this->formato_servicio($servicios["servicios"]);        
+        $data["q"] = $q;        
+        $data = $this->app->cssJs($data, "search");        
         $data["order"] = $data_send["order"];
-        $this->create_keyword($data_send);
+        $this->create_keyword($data_send);        
+        $this->app->pagina($data, render_search($data), 1);    
         
-        $this->app->pagina($data, render_search($data), 1);
     }
+    private function formato_servicio($servicios){
+        $imagenes = $this->imagenes_por_servicios($servicios);
+        
+        $lista_servicios = [];
+        
+        foreach($servicios as $servicio){
+            
+            $id_servicio = $servicio["id_servicio"];
+            
+            $servicio["url_img_servicio"] = search_bi_array($imagenes,"id_servicio", $id_servicio,"nombre_imagen");
+            $servicio["in_session"]= 0;            
+            $servicio["id_usuario_actual"] = 0;
+            $lista_servicios[] = create_vista($servicio);
+        }
+        return $lista_servicios;
+        
 
+    }
+    function imagenes_por_servicios($servicios){
+        
+        
+        $ids = array_column($servicios ,"id_servicio");
+        
+        return $this->app->api("imagen_servicio/ids/", ["ids" => $ids]);
+
+    }
     private function set_option($key, $value)
     {
         $this->options[$key] = $value;

@@ -12,6 +12,7 @@ class Servicio extends REST_Controller
         $this->load->helper("servicios");
         $this->load->helper("base");
         $this->load->model("serviciosmodel");
+        $this->load->model("imagen_servicio_model");
         $this->load->library('table');
         $this->load->library(lib_def());
         $loggin = $this->app->is_logged_in();
@@ -1718,8 +1719,7 @@ class Servicio extends REST_Controller
         $servicio["url_img_servicio"] = $this->app->imgs_productos($servicio["id_servicio"], 1, 1, 1);
         $this->response(create_vista($servicio));
     }
-
-
+    
     function metricas_productos_solicitados_GET()
     {
 
