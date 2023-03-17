@@ -2328,7 +2328,7 @@ function get_logo($session = 0)
     ), $carro, _between);
 
     $acceder = a_enid(
-        icon('fa black fa fa-user white'),
+        icon('fa black fa fa-user white p-2'),
         [
             "href" => path_enid('login'),
             "class" => "white borde_amarillo d-xs-block d-md-none mr-3 text-uppercase fp9 strong"

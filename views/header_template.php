@@ -3,6 +3,10 @@
 <head>
     <?= $this->load->view("header_meta_enid")?>
 </head>
+
+
+
+<?php if ($pixel_facebook > 1): ?>
 <!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s)
@@ -29,6 +33,7 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 
   gtag('config', 'G-DWKGKK30KK');
 </script>
+<?php endif; ?>
 
 <body class="h-100 d-flex flex-column">
 

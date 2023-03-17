@@ -429,7 +429,8 @@ class Paths
                 "desc_web" => "kits de pesas,seguros para mancueras y equipo deportivo pago contra entrega a domicilio en Ciudad de México",
                 "meta_keywords" => "Pesas, pago contra entrega, cdmx, envios,barra, barra z, barra romana, bancos de posiciones",                
                 "titulo" => "",
-                "pagina" => 4
+                "pagina" => 4,
+                "pixel_facebook" => 0 
 
             ],
             "pago_oxxo" =>
@@ -671,7 +672,9 @@ class Paths
                 "meta_keywords" => "",
                 'desc_web' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
                 'titulo' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
-                'url_img_post' => ''
+                'url_img_post' => '',
+                
+
 
             ],
             "procesar_crear" =>
