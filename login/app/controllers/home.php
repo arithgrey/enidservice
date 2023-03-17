@@ -100,7 +100,7 @@ class Home extends CI_Controller
 
             $session = $this->enid_session($picture, $id_usuario, $nombre, $email, $id_empresa);
             $response["session"] = $session;
-            $response["session_creada"] = $this->app->get_session();
+            //$response["session_creada"] = $this->app->get_session();
             redirect(path_enid("url_home"));
 
         }else{

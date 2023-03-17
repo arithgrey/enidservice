@@ -17,7 +17,6 @@ class Sess extends REST_Controller
 
         $es_barer = (prm_def($param,"t") === $this->config->item('barer'));
 
-        
         $response = [];
         if (fx($param, "email,secret")) {
             $usuario = $this->get_es_usuario($param);
@@ -41,8 +40,7 @@ class Sess extends REST_Controller
                 );
 
                 $response["session"] = $session;
-                $response["session_creada"] = $this->app->get_session();
-
+                //$response["session_creada"] = $this->app->get_session();
 
                 if ($es_barer) {
 
