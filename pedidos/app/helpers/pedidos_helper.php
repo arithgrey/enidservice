@@ -462,7 +462,7 @@ if (!function_exists('invierte_date_time')) {
         
         $z[] = seguimiento($data);
        
-        $r[] = d($z,'row border_bottom_big mb-5 mt-5');
+        $r[] = d($z,'row border_bottom_big mb-5 mt-5 border_bottom_big_compra');
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
         $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 row');
@@ -495,6 +495,13 @@ if (!function_exists('invierte_date_time')) {
                 "class" => "qservicio"
             ]
         );
+        $r[] = hiddens(
+            [
+                "value" => prm_def($params, "delivery"),
+                "class" => "delivery"
+            ]
+        );
+
         $r[] = gb_modal(notifica_entrega_modal($productos_orden_compra, $data), 'modal_notificacion_entrega');
 
 
@@ -618,7 +625,8 @@ if (!function_exists('invierte_date_time')) {
 
     function texto_no_puede_repartir($data, $texto, $saldo_cubierto, $id_orden_compra, $id_servicio)
     {
-        if (!puede_repartir($data)) {
+        $delivery = intval(prm_def($_GET, "delivery"));
+        if (!puede_repartir($data) && $delivery < 1) {
 
             $texto[] = nota_compra($saldo_cubierto, $id_orden_compra);
             $texto[] = format_link(
@@ -757,6 +765,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $pago = ($saldo_cubierto > 0);
+        
         if (!$pago) {
 
             $path = path_enid("area_cliente_compras", $id_recibo);
@@ -796,9 +805,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text_domicilio = pago_en_cita($data);
         $productos_orden_compra = $data["productos_orden_compra"];
-        $imagen_texto_entrega = format_imagen_repartidor($productos_orden_compra);
-
-
+        
         if (pr($productos_orden_compra, 'ubicacion') < 1) {
             if (es_data($domicilios)) {
 
@@ -838,7 +845,7 @@ if (!function_exists('invierte_date_time')) {
             $text_ubicacion = pr($domicilios, 'ubicacion');
             $text_ubicacion = valida_texto_maps($text_ubicacion);
             $str = ($adicionales > 0) ? pago_en_cita($data) : '';
-            $text_domicilio = _text_($text_ubicacion, $imagen_texto_entrega, $str);
+            $text_domicilio = _text_($text_ubicacion, $str);
         }
 
 
@@ -853,7 +860,6 @@ if (!function_exists('invierte_date_time')) {
         $domicilios = $data['domicilios'];
         $tipo_entrega = pr($productos_orden_compra, "tipo_entrega");
         $text = "";
-        $imagen_texto_entrega = format_imagen_repartidor($productos_orden_compra);
 
         switch ($tipo_entrega) {
 
@@ -889,7 +895,7 @@ if (!function_exists('invierte_date_time')) {
                         $text_entrega[] = _titulo('cliente', 5, 'underline');
                         $text_entrega[] = d($nombre_cliente);
                         $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
-                        $text_entrega[] = $imagen_texto_entrega;
+                        //$text_entrega[] = $imagen_texto_entrega;
                         $text_entrega[] = pago_en_cita($data, 1);
                     }
 
@@ -916,13 +922,14 @@ if (!function_exists('invierte_date_time')) {
 
 
     function pago_en_cita($data)
-    {
+    {   
+        $delivery = intval(prm_def($_GET, "delivery"));
 
         $productos_orden_compra = $data["productos_orden_compra"];
         $recompensa = $data["recompensa"];
         $es_orden_cancelada = es_orden_cancelada($data);
         $in_session = $data['in_session'];
-        $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21)
+        $text_entrega = ($in_session && prm_def($data, 'id_perfil') == 21 || $delivery)
             ? 'A TU ENTREGA COBRARÁS AL CLIENTE ' : 'A TU ENTREGA PAGARÁS';
 
 
@@ -935,7 +942,7 @@ if (!function_exists('invierte_date_time')) {
 
         $boton_cancelar = '';
         $boton_garantia = '';
-        if ($data['in_session'] && !$es_orden_cancelada) {
+        if ($data['in_session'] && !$es_orden_cancelada || $delivery) {
 
             $boton_cancelar = btn(
                 'informar cancelación!',
@@ -949,20 +956,19 @@ if (!function_exists('invierte_date_time')) {
             $boton_garantia = d(format_garantia($id_orden_compra), "col-xs-12 mt-3 mb-3");
         }
 
-
         $puede_repartir = puede_repartir($data);
         $boton_cancelar = (!es_cliente($data)) ? $boton_cancelar : '';
-        $pago_efectivo = ($puede_repartir) ? $boton_pagado : '';
+        $pago_efectivo = ($puede_repartir || $delivery) ? $boton_pagado : '';
         $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
         $descuento_aplicado = $deuda["descuento_aplicado"];
         $descuento_subtotal = ($deuda["subtotal"] - $descuento_aplicado);
-        $text_pago = _text_($text_entrega, $descuento_subtotal);
+        
+        $text_pago = _text_($text_entrega, money($descuento_subtotal));
         $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar, $boton_garantia);
 
         $es_orden_entregada = es_orden_entregada($data);
         return (!$es_orden_entregada) ? d($pago_pendiente, 'mt-5 text-right') : '';
     }
-
 
     function render_domicilio($data)
     {
@@ -1644,7 +1650,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $response[] = d($link, 'row mb-3');
             }
-            $path_tracker = path_enid('pedido_seguimiento', $id_orden_compra);
+            $path_tracker = path_enid('pedido_seguimiento', _text($id_orden_compra,'&delivery=1'));
             $link = format_link("Rastrear pedido", ['href' => $path_tracker]);
             $response[] = d($link, 'row mb-3');
         }

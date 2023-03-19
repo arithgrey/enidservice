@@ -22,7 +22,9 @@ let $es_sorteo = $('.es_sorteo');
 $(document).ready(function () {
     
     valida_notificacion_pago();
+    
     carga_productos_sugeridos();
+
     $notifica_entrega.click(notifica_entrega_cliente);
     $selector_entrega.click(confirma_entrega_cliente);
     $selector_interes.click(mas_articulos);
@@ -103,10 +105,20 @@ let procesa_notificacion = data => {
 };
 let carga_productos_sugeridos = () => {
 
-    let url = "../q/index.php/api/servicio/sugerencia/format/json/";
-    let q = get_parameter(".qservicio");
-    let data_send = {"id_servicio": q};
-    request_enid("GET", data_send, url, response_carga_productos);
+    let $delivery = $(".delivery").val();
+
+    if(parseInt($delivery) < 1){
+
+        let url = "../q/index.php/api/servicio/sugerencia/format/json/";
+        let q = get_parameter(".qservicio");
+        let data_send = {"id_servicio": q};
+        request_enid("GET", data_send, url, response_carga_productos);
+
+    }else{
+        $("footer").addClass("d-none");
+        $(".border_bottom_big_compra").removeClass("border_bottom_big");
+    }
+    
 };
 let response_carga_productos = data => {
 
@@ -131,19 +143,24 @@ let confirma_entrega_cliente = function () {
     request_enid("PUT", data_send, url, response_confirma_entrega_cliente);
 }
 let response_confirma_entrega_cliente = function (data) {
-
-    if (data === true) {
-        
-        let $numero_boleto = $(".numero_boleto").val()
-        if(parseInt($numero_boleto) > 0){
-            
-            let $id_servicio = $(".id_servicio").val();
-            redirect(_text(path_enid("sorteo", $id_servicio),"&boleto=",$numero_boleto));
-            
+    
+    if (data === true) {    
+        let $delivery = $(".delivery").val()
+        if(parseInt($delivery) > 0){
+            $('#modal_notificacion_entrega').modal("show");
+            redirect("");        
         }else{
-            $form_confirmacion_entrega.addClass('d-none');        
-            $form_puntos.removeClass('d-none');
-        }
+            let $numero_boleto = $(".numero_boleto").val()
+            if(parseInt($numero_boleto) > 0){
+                
+                let $id_servicio = $(".id_servicio").val();
+                redirect(_text(path_enid("sorteo", $id_servicio),"&boleto=",$numero_boleto));
+                
+            }else{
+                $form_confirmacion_entrega.addClass('d-none');        
+                $form_puntos.removeClass('d-none');
+            }
+        }            
 
     }
 }
