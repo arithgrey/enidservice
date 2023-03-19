@@ -226,6 +226,7 @@ class Home extends CI_Controller
             $data = texto_pre_pedido($productos_orden_compra, $data);
             $params = $this->input->get();
 
+            
             $this->app->pagina($data, render_seguimiento($data, $params), 1);
         }else{
 

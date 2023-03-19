@@ -290,7 +290,6 @@ function es_orden_lista_negra($recibo)
 function es_contra_entrega_domicilio($productos_orden_compra, $format_fecha = 0, $si_no = 0)
 {
 
-
     $response = "";
     foreach ($productos_orden_compra as $row) {
 
@@ -300,7 +299,7 @@ function es_contra_entrega_domicilio($productos_orden_compra, $format_fecha = 0,
         if ($response && $format_fecha > 0) {
 
             $fecha_contra_entrega = $row['fecha_contra_entrega'];
-            $response = format_fecha($fecha_contra_entrega, 1);
+            $response = format_fecha($fecha_contra_entrega, 0);
 
         } else {
 
