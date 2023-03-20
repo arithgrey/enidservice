@@ -42,7 +42,6 @@ $("footer").ready(() => {
         $("#modal_mayoristas").modal("show");        
     });
 
-    
     set_option({
         "in_session": get_parameter(".in_session"),
         "is_mobile": get_parameter(".is_mobile"),

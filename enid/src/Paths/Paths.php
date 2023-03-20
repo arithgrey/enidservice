@@ -667,6 +667,10 @@ class Paths
                     "js/direccion.js",
                     'procesar/principal.js',
                     'procesar/sha1.js',
+                    
+                ],
+                "js_extra_web" => [
+                    
                 ],
                 "pagina" => 7,
                 "meta_keywords" => "",

@@ -104,23 +104,6 @@ if (!function_exists('invierte_date_time')) {
                     ), $clase);
             }
 
-            /*
-            
-            $z[] = input_frm(
-                "col-lg-6 mt-5",
-                "Nombre*",
-                [
-                    "name" => "nombre",
-                    "id" => "nombre",                    
-                    "class" => "nombre",
-                    "type" => "text",
-                    "required" => "true",
-                    'onkeyup' => "this.value = this.value.toUpperCase();"
-                ],
-                _text_nombre
-            );
-            */
-            
             
             $input = input(                
                 
@@ -147,8 +130,6 @@ if (!function_exists('invierte_date_time')) {
             ),"col-lg-6 mt-5 ");
 
             /**/
-
-
             $input_telefono = input([
                 "id" => "telefono",
                 "class" => _text_("telefono", _format_input),
@@ -156,9 +137,8 @@ if (!function_exists('invierte_date_time')) {
                 "maxlength" => 10,
                 "minlength" => 8,
                 "name" => "telefono",
-                "required" => "true",
-                "placeholder"=>"Teléfono"                    
-
+                "required" => "true",                                
+                "placeholder" => "Número celular"
             ]);
 
             $z[] = d(

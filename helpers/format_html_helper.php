@@ -90,7 +90,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                     $attributes
                 )) ? ($attributes["class"] . " telefono ") : " telefono ";
                 $attributes["minlength"] = 8;
-                $attributes["maxlength"] = 12;
+                $attributes["maxlength"] = 10;
                 $attributes["required"] = true;
 
                 break;
