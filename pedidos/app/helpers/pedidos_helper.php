@@ -1875,6 +1875,9 @@ if (!function_exists('invierte_date_time')) {
         $contenido_carros_compras_vendedores = carros_compras_vendedores();
         $secciones_tabs[] = tab_seccion($contenido_carros_compras_vendedores, 'carros_compras_vendedores');
 
+        $alcaldias_prospectos = alcaldias_prospectos();
+        $secciones_tabs[] = tab_seccion($alcaldias_prospectos, 'alcaldias_prospectos');
+
 
 
         $menu_pedidos = tab(
@@ -1930,6 +1933,7 @@ if (!function_exists('invierte_date_time')) {
             acceso_menu_promocion($data),
             acceso_menu_metricas_catalogo_movimiento($data),
             $menu_pendientes,
+            alcaldias_prospectos_menu($data)
 
         ]);
 
@@ -2073,6 +2077,20 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
+    function alcaldias_prospectos_menu($data){
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon("fa fa-space-shuttle", 'Alcaldías por prospectos'),
+            '#alcaldias_prospectos',
+            [
+                'class' => ' mt-4 busqueda_alcaldias_prospectos'
+            ]
+        );
+
+    }
     function acceso_menu_metricas_catalogo_movimiento($data)
     {
         if (!es_administrador_o_vendedor($data)) {
@@ -2170,6 +2188,17 @@ if (!function_exists('invierte_date_time')) {
         return d($response);
 
     }
+    function alcaldias_prospectos(){
+        
+        $response[] = _titulo('Alcaldías por prospectos', 4); 
+        $response[] = form_open("", ["class" => "form_alcaldias_prospectos"]);
+        $response[] =  frm_fecha_busqueda();
+        $response[] =  form_close();
+        $response[] = place("place_alcaldias_prospectos");
+
+        return d($response);
+
+    }    
     function total_comision($ids_usuario, $ordenes)
     {
         $totales = [];

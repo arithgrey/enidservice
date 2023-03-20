@@ -456,6 +456,7 @@ class Home extends CI_Controller
 
         $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];
         $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes'] : [];
+        
         $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
     }
 
