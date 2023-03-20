@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class alcaldia_prospecto_model extends CI_Model
+class base_model extends CI_Model
 {
     private $tabla;
 
@@ -8,7 +8,7 @@ class alcaldia_prospecto_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'alcaldia_prospecto';
+        $this->tabla = 'base';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -60,23 +60,6 @@ class alcaldia_prospecto_model extends CI_Model
             $this->db->where($key, $value);
         }
         return $this->db->delete($this->tabla, $params_where);
-    }
-    function penetracion_tiempo($fecha_inicio , $fecha_termino)
-    {
-
-        $where_fecha = "
-        WHERE DATE(fecha_registro) 
-        BETWEEN '" . $fecha_inicio . "'  AND '" . $fecha_termino . "'";
-
-        $query_get = _text_("select count(0)total, alcaldia ,id_alcaldia  from alcaldia_prospecto",
-        $where_fecha,"
-        group by id_alcaldia, alcaldia  order by total desc");
-
-        return $this->db->query($query_get)->result_array();
-
-    }
-
-
-
+    }    
 
 }

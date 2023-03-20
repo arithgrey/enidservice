@@ -457,6 +457,7 @@ class Paths
 
                     "alerts/jquery-confirm.js",
                     "pedidos/busqueda.js",
+                    "alcaldia_prospecto/principal.js"
 
                 ],
             ],
@@ -480,7 +481,7 @@ class Paths
                     "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
                     "js/pickers-init.js",
                     "alerts/jquery-confirm.js",
-                    "pedidos/principal.js",
+                    "pedidos/principal.js"                    
                 ],
 
 
