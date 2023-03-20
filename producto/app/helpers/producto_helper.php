@@ -1,13 +1,65 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
+    function modal_accion_tiempo_alcaldia_pago($alcaldias){
+            
+        $str = _d(
+            d(_titulo(
+                _text_(
+                    "CONSULTA EL TIEMPO EN QUE LLEGAMOS A TU DOMICILIO",                                
+                    icon('fa-truck')
+                )
+            ), 'mb-2 mt-4'),
+            d('', 'mt-2 f12 black')        
+    
+        );
+    
+        $select_alcaldias  = create_select(
+            $alcaldias, 
+            "delegacion",
+            "ubicacion_delegacion", 
+            'delegacion',
+            "delegacion",
+            'id_delegacion',
+            0,1,'0','Selecciona tu alcaldía');
+        
+            $texto_alcaldia = d("¿Cual es tu alcaldía?",'strong');
+        
+        
+        $formulario_adicional[] = flex($texto_alcaldia , $select_alcaldias , _text_(_between,'mt-5 nota_ubicacion'));
+        $formulario_adicional[] = d("Selecciona tu alcaldía",
+            "text-right mt-3 d-none nota_ubicacion_text black strong");
+        
+        $formulario_adicional[] = format_link('Consultar', ['class' => 'mt-5 consulta_tiempo_entrega']);
+    
+        $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
+        $r[] = d($formulario_adicional);
+        
+        $response[] = d($r,"formulario_tiempo_entrega");
+
+        $str = _d(
+            d(
+                _text_(
+                    "Tardaremos 1 hora con 30 minutos si agendas tu pedido ya!",                                
+                    icon('fa-truck')
+                
+            ), 'mb-2 display-7 strong text-uppercase'),
+            d('', 'mt-2 f12 black')        
+    
+        );
+        $response[] = d($str,"tiempo_entrega_respuesta d-none");
+
+
+        return gb_modal($response, 'modal_accion_tiempo_alcaldia_pago');
+    
+    }
 
     function valida_tiempo_entrega()
     {
-        $contenido[] = d(_text_(icon('fa fa-truck'), span("Envío gratis recibe el mismo día",'underline ml-2')), 'top_40  black text-uppercase');
-        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');
         
-        
+        $tiempo = d(_text_("Consulta el ",span("tiempo de entrega aquí",'border_blue cursor_pointer accion_tiempo_alcaldia_pago')));
+        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Envío gratis recibe hoy",'strong'),$tiempo),' ml-2')), 'top_40  black text-uppercase');
+        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');    
         
         $contenido[] = d(d(
             _text_(icon("fa fa-check"), span("Formas de pago",'underline ml-2')),
@@ -204,7 +256,8 @@ if (!function_exists('invierte_date_time')) {
             $pagina_producto[] =  d($x, 'col-sm-3 border-left-ct mt-md-5 mt-lg-1');
         }
 
-
+        $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
+        
         return d(d($pagina_producto, 13), 'col-sm-12 mt-md-5 ');
     }
     function botones_ver_mas($id_servicio)

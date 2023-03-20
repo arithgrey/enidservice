@@ -1330,6 +1330,7 @@ function modal_politica_devoluciones(){
     return gb_modal($r, 'modal_politica_devoluciones');
 
 }
+
 function modal_format_pago(){
 
 

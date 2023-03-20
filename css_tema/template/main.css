@@ -40,6 +40,11 @@
     border-bottom-color: black !important;
 
 }
+.border_blue {
+    border-bottom: solid 3px !important;
+    border-bottom-color: #0c3789 !important;
+
+}
 
 .bottom_carro_compra_recompensa {
     background: #031120 !important;
@@ -2020,6 +2025,13 @@ ul li a {
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
+
+.borde_rojo_b {
+    border: solid 2px #f5089a;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
+
 
 .borde_amarillo:hover {
     background:#070855;

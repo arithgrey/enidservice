@@ -82,8 +82,7 @@ class Home extends CI_Controller
             $data["info_servicio"]["servicio"] = $servicio;
             $data["costo_envio"] = "";
             $data["tiempo_entrega"] = "";
-            $data["ciclos"] = "";
-    
+            $data["ciclos"] = "";            
             if (pr($servicio, "flag_servicio") == 0) {
     
                 $data["costo_envio"] = 0;                
@@ -110,6 +109,8 @@ class Home extends CI_Controller
             $data["existencia"] = $this->get_existencia($this->id_servicio);
             $data["servicio_materiales"] = $this->servicio_materiales($this->id_servicio);
             $data["recompensa"] = $this->recompensa($this->id_servicio);
+            $data["alcaldias"] = $this->app->api("delegacion/cobertura");
+            
     
             $data = $this->app->cssJs($data, "producto");        
             $this->app->log_acceso($data, 3, $this->id_servicio  );

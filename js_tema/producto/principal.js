@@ -8,6 +8,7 @@ let $costos_precios_servicio = $(".costos_precios_servicio");
 let $form_precio = $(".form_precio");
 let $form_costo = $(".form_costo");
 let $en_lista_deseos = $(".en_lista_deseos");
+let $ubicacion_delegacion = $(".ubicacion_delegacion");
 
 $(document).ready(function () {
 
@@ -49,8 +50,50 @@ $(document).ready(function () {
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);
     $("footer").ready(carga_productos_sugeridos);
-    
+    $(".accion_tiempo_alcaldia_pago").click(function(){                        
+        $("#modal_accion_tiempo_alcaldia_pago").modal("show");        
+    });
+
+    $(".consulta_tiempo_entrega").click(tiempo_entrega);
+    $ubicacion_delegacion.change(busqueda_colonia_ubicacion_select);
 });
+
+let busqueda_colonia_ubicacion_select = () => {
+
+    let id_delegacion = $ubicacion_delegacion.val();
+    if (parseInt(id_delegacion) > 0) {
+
+        $(".nota_ubicacion").removeClass("borde_rojo_b");
+        $(".nota_ubicacion_text").addClass("d-none");
+        
+    }else{
+        
+        $(".nota_ubicacion").addClass("borde_rojo_b");
+        $(".nota_ubicacion_text").removeClass("d-none");
+        
+    }
+
+};
+
+let tiempo_entrega = () => {
+
+    let id_alcaldia = $ubicacion_delegacion.val();
+    if (parseInt(id_alcaldia) > 0) {
+    
+        $(".tiempo_entrega_respuesta").removeClass("d-none");
+        $(".formulario_tiempo_entrega").addClass("d-none");
+        let $alcaldia = $(".ubicacion_delegacion option:selected").text();        
+        let url = "../q/index.php/api/alcaldia_prospecto/index/format/json/";
+        let $ip_referer_enid = $(".ip_referer_enid").val();
+
+        let data_send = { "alcaldia": $alcaldia, "id_alcaldia" : id_alcaldia, "ip" : $ip_referer_enid };
+        request_enid("POST", data_send, url, response_registro_alcaldia);
+        
+    }
+
+};
+let response_registro_alcaldia = function (data) {}
+
 let carro_compra_recompensa = function () {
 
     let $id = $(this).attr('id');
