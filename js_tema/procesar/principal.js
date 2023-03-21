@@ -46,7 +46,6 @@ let $input_lead_catalogo = $form_miembro.find('.lead_catalogo');
 let $input_adicionales = $form_miembro.find('.adicionales');
 let $input_adicionales_cliente_frecuente = $form_miembro.find('.adicionales_cliente_frecuente');
 
-
 let $adicionales_adimistrador = $form_miembro.find('.adicionales_adimistrador');
 let $adicionales_adimistrador_numero_cliente = $form_miembro.find('.adicionales_adimistrador_numero_cliente');
 let $input_numero_cliente = $form_miembro.find('.input_numero_cliente');
@@ -64,10 +63,12 @@ let $producto_carro_compra = $(".producto_carro_compra");
 let primer_compra = '.primer_compra';
 let $primer_compra = $(primer_compra);
 let $form_busqueda_cliente = $(".form_busqueda_cliente");
-
+let $navegacion_principal = $(".navegacion_principal");
 
 $(document).ready(() => {
-        
+    
+    $navegacion_principal.addClass("d-none");    
+    $(".base_enid_web").removeClass("top_150").addClass("mt-5");
     $('footer').addClass('d-none');
     $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
     $form_busqueda_cliente.submit(busqueda_numero_cliente);
@@ -116,7 +117,7 @@ $(document).ready(() => {
     $(".busqueda_cliente_frecuente").click(function(){        
         $("#modal_busqueda_cliente_frecuente").modal("show");        
     });
-
+    
 
 });
 

@@ -1,8 +1,5 @@
 <?php
-
-use function PHPSTORM_META\map;
-
- if (!defined('BASEPATH')) {
+if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 if (!function_exists('invierte_date_time')) {
@@ -64,7 +61,7 @@ if (!function_exists('invierte_date_time')) {
 
         $contenedor = d($z, "contenedo_compra_info");
         $contendor_compra = d($contenedor, "contenedor_compra");
-        $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2 mb-5 mt-lg-5");
+        $r[] = d($contendor_compra, "col-lg-8 col-lg-offset-2");
 
         return append($r);
     }
@@ -92,44 +89,48 @@ if (!function_exists('invierte_date_time')) {
             $producto_carro_compra = $param["producto_carro_compra"];
             $recompensas = $param["recompensas"];
             $titulo = ($es_cliente) ? "INFORMACIÓN DE ENTREGA" : 'Datos del cliente';
-            $r[] = d(flex( _titulo($titulo)), 'mb-5');
+            $r[] = d(flex(_titulo($titulo)), 'mb-5');
 
             if (!$in_session) {
 
 
-                $clase = 'mt-3 black mb-5 p-2';
+                $clase = 'mt-3 black p-2';
                 $r[] = d(
                     _text_(
-                        icon('fa fa-truck'),'Solo usaremos estos datos para ayudarnos a entregar tu pedido'
-                    ), $clase);
+                        icon('fa fa-truck'),
+                        'Solo usaremos estos datos para ayudarnos a entregar tu pedido'
+                    ),
+                    $clase
+                );
             }
 
-            
-            $input = input(                
-                
+
+            $input = input(
+
                 [
                     "name" => "nombre",
-                    "id" => "nombre",                    
+                    "id" => "nombre",
                     "class" => _text_("nombre", _format_input),
                     "type" => "text",
                     "required" => "true",
                     "placeholder" => "Nombre",
                     'onkeyup' => "this.value = this.value.toUpperCase();"
-                ]);
+                ]
+            );
 
             $z[] =  d(
                 flex(
-                $input
-                ,
-                _text_nombre
-                ,   
-                _text_("flex-column"),
-                "",
-                "mt-3 color_red d-none place_input_form_nombre"
-                
-            ),"col-lg-6 mt-5 ");
+                    $input,
+                    _text_nombre,
+                    _text_("flex-column"),
+                    "",
+                    "mt-3 color_red d-none place_input_form_nombre"
 
-            /**/
+                ),
+                "col-lg-6 mt-5 "
+            );
+
+
             $input_telefono = input([
                 "id" => "telefono",
                 "class" => _text_("telefono", _format_input),
@@ -137,22 +138,20 @@ if (!function_exists('invierte_date_time')) {
                 "maxlength" => 10,
                 "minlength" => 8,
                 "name" => "telefono",
-                "required" => "true",                                
+                "required" => "true",
                 "placeholder" => "Número celular"
             ]);
 
             $z[] = d(
                 flex(
-                    $input_telefono
-                    ,
-                    _text_telefono
-                    ,
-                    _text_("flex-column")
-                    ,
-                    ""
-                    ,
+                    $input_telefono,
+                    _text_telefono,
+                    _text_("flex-column"),
+                    "",
                     "mt-3 color_red d-none place_input_form_telefono"
-            ),"col-lg-6 mt-5");
+                ),
+                "col-lg-6 mt-5"
+            );
 
             $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none' : '';
             $z[] = d(input_frm(
@@ -171,11 +170,7 @@ if (!function_exists('invierte_date_time')) {
             ), _text_("col-lg-4", $extra_sorteo));
 
 
-
-
-
             $extra = ($in_session) ? 'col-lg-12 mt-5 ' : 'd-none col-lg-3 mt-5';
-
 
             $input_numero_cliente = input([
                 "type" => "checkbox",
@@ -252,8 +247,6 @@ if (!function_exists('invierte_date_time')) {
 
                 ]
             );
-
-
 
             $input = input([
                 "type" => "checkbox",
@@ -429,16 +422,84 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($r, "primer_compra");
         $response[] = registrado();
         $response[] = modal_busqueda_cliente_frecuente();
+
+
+        $seccion_compra[] = d(avance_compra(), "mb-5 mt-lg-5 col-xs-12");
+        $seccion_compra[] = d($response, 8);
+        $seccion_compra[] = d(llegada(), 4);
+        return d($seccion_compra, 13);
+    }
+    function avance_compra()
+    {
+
+        $clase_paso = "black white bg_black round mr-3 rounded-circle  pr-3 pl-3 pt-1 pb-2";
+        $clase_paso_faltante = "black white bg_gray round mr-3 rounded-circle  pr-3 pl-3 pt-1 pb-2";    
+
+        $enid_service_titulo[] = d(
+            "Enid service",            
+            "black strong black display-6 text-uppercase"
+        );
+
+        $paso[] = flex(
+            "1",
+            "CARRITO",
+            "",
+            $clase_paso,
+            "mt-2 strong fp9"
+        );
+
+        $paso[] = flex(
+            "2",
+            "ENTREGA",
+            "ml-4",
+            $clase_paso,
+            "mt-2 strong fp9"
+        );
+        
+        $paso[] = flex(
+            "3",
+            "ENVIADO",
+            "ml-4",
+            $clase_paso_faltante,
+            "mt-2 font-weight-bold color-secondary fp9"
+        );
+
+
+  
+        $response[] = d($enid_service_titulo,"row mb-4");
+        $response[] = d($paso, 'mb-3 row');
+
+        $response[] = d("", "border-bottom border-secondary mb-5 row ");
+        return d($response, 12);
+    }
+    function llegada()
+    {
+
+        $response[] = _titulo(_text_("LLEGADA?",span("?",'border p-2 bg-light')),2);
+        $contenidos[] = d("Tardaremos 1 hora con 30 si agendas tu pedido ya!", "black");
+        $contenidos[] = d("Envío gratis", "strong mt-2");
+        $response[] = d($contenidos, "borde_black p-3 mt-5");
+
+        $response[] = d(_titulo(_text_("OPCIONES DE PAGO",span("?",'border p-2 bg-light')),2),"mt-5");
+        
+        $formas_pago[] = d("Al recibir tu pedido podrás pagar con:",'strong black');
+        $formas_pago[] = d("Efectivo");
+        $formas_pago[] = d("Transferencia");
+        $formas_pago[] = d("Tarjeta de débito ó cŕedito");
+
+        $response[] = d($formas_pago, "borde_black p-3 mt-5");
+
         return append($response);
     }
+
     function modal_busqueda_cliente_frecuente()
     {
         $contenido[] = d(_titulo('¿Número telefónico o email del cliente?', 4), 'borde_end_b ');
 
         $input_busqueda = input(['class' => "input_busqueda_cliente", "name" => "q"]);
-        
+
         $form[] = form_open("", ["class" => "form_busqueda_cliente"]);
-        $form[] = flex('Búsqueda:', $input_busqueda, _text_(_between,'mt-5' ));
+        $form[] = flex('Búsqueda:', $input_busqueda, _text_(_between, 'mt-5'));
         $form[] = form_close();
         $form[] = place("place_usuarios_coincidentes");
         $contenido[] = d($form, 'mt-2 f12 black');
