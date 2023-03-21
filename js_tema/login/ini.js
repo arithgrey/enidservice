@@ -34,6 +34,7 @@ let $link_como_vender = $form_registro.find('.link_como_vender');
 let $label_mail_acceso = $(".label_mail_acceso");
 let $label_pw = $(".label_pw");
 $(document).ready(function () {
+    
     $('#sticky-footer').addClass("d-none");
     $(".base_enid_web").removeClass("top_150").addClass("mt-3");    
     $('footer').ready(valida_seccion_inicial);
