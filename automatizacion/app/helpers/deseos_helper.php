@@ -182,13 +182,8 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = '<form class="form_pre_pedido" action="../procesar/?w=1" method="POST">';
             $response[] = append($inputs);
-            $response[] = append($inputs_recompensa);
-
-
-           
+            $response[] = append($inputs_recompensa);            
             $extra = ($es_administrador_o_vendedor) ? "" : "d-none";
-   
-            
 
             $seccion_cobro_externo[] = hiddens(["class" => "cobro_visible", "value" => 0]);
             $seccion_cobro_externo[] = d(input_frm(
@@ -224,7 +219,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = form_close();
             return d($response);
         } else {
-
+            
 
             $response[] = '<form class="form_segunda_compra" action="" method="POST">';
             $response[] = append($inputs);

@@ -2035,10 +2035,7 @@ function navegacion(
         $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
     } else {
 
-        if (!$is_mobile) {
-
-
-        
+        if (!$is_mobile) {        
         $a = a_enid(
             _text_(icon(_text_(_mas_opciones_bajo_icon)),"Lo más buscado"),
             [
@@ -2095,7 +2092,7 @@ function navegacion(
     );
 
 
-    return d($navegacion, "row fixed-top");
+    return d($navegacion, "row fixed-top navegacion_principal");
 }
 
 function open_form($attr = [])
