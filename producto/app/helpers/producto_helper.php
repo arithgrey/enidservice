@@ -57,7 +57,7 @@ if (!function_exists('invierte_date_time')) {
     function valida_tiempo_entrega()
     {
         
-        $tiempo = d(_text_("Consulta el ",span("tiempo de entrega aquí",'border_blue cursor_pointer accion_tiempo_alcaldia_pago')));
+        $tiempo = d(_text_("Consulta el ",span("tiempo de entrega aquí",'border_black strong cursor_pointer accion_tiempo_alcaldia_pago')));
         $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Envío gratis recibe hoy",'strong'),$tiempo),' ml-2')), 'top_40  black text-uppercase');
         $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');    
         

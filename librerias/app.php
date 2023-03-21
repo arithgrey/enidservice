@@ -695,12 +695,6 @@ class app extends CI_Controller
     {
 
         $perfiles = $this->get_perfil_user($id_usuario);
-        $perfildata = $this->get_perfil_data($id_usuario);
-        $empresa_permiso = $this->get_empresa_permiso($id_empresa);
-        $empresa_recurso = $this->get_empresa_recursos($id_empresa);
-        $status_enid = $this->estatus_enid_service();
-        $empresa = $this->get_empresa($id_empresa);
-
         $response = 0;
 
         if (es_data($perfiles)) {
@@ -710,19 +704,20 @@ class app extends CI_Controller
             $path_img_usuario = $this->add_imgs_usuario($usuario);
 
             if (es_data($navegacion)) {
-
+                
+                $empresa = $this->get_empresa($id_empresa);
                 $response = [
                     "id_usuario" => $id_usuario,
                     "nombre" => $nombre,
                     "email" => $email,
                     "perfiles" => $perfiles,
-                    "perfildata" => $perfildata,
+                    "perfildata" => $this->get_perfil_data($id_usuario),
                     "id_empresa" => pr($empresa, "id"),
-                    "empresa_permiso" => $empresa_permiso,
-                    "empresa_recurso" => $empresa_recurso,
+                    "empresa_permiso" => $this->get_empresa_permiso($id_empresa),
+                    "empresa_recurso" => $this->get_empresa_recursos($id_empresa),
                     "data_navegacion" => $navegacion,
                     "info_empresa" => $empresa,
-                    "data_status_enid" => $status_enid,
+                    "data_status_enid" => $this->estatus_enid_service(),
                     "logged_in" => 1,
                     "recien_creado" => $recien_creado,
                     "path_img_usuario" => pr($path_img_usuario, "url_img_usuario"),

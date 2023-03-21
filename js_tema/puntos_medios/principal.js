@@ -74,7 +74,7 @@ $(document).ready(() => {
 
     $form_punto_encuentro.submit(registra_usuario);
     $form_punto_encuentro_horario.submit(notifica_punto_entrega);
-    $link_acceso.click(set_link);
+    //$link_acceso.click(set_link);
     $linea_metro.click(muestra_estaciones);
 
     set_option({"vista": 1, "punto_encuentro_previo": 0});
@@ -253,6 +253,7 @@ let response_registro_usuario = (data) => {
         }
     }
 };
+/*
 let set_link = function () {
 
     let data_send = $.param({
@@ -264,7 +265,7 @@ let set_link = function () {
     request_enid("POST", data_send, url, go_login);
 
 };
-
+*/
 let notifica_punto_entrega = e => {
 
     let url = "../q/index.php/api/cobranza/solicitud_cambio_punto_entrega/format/json/";

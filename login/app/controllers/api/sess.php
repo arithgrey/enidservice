@@ -3,6 +3,7 @@ require APPPATH . '../../librerias/REST_Controller.php';
 
 class Sess extends REST_Controller
 {
+
     function __construct()
     {
         parent::__construct();
@@ -19,7 +20,7 @@ class Sess extends REST_Controller
 
         $response = [];
         if (fx($param, "email,secret")) {
-            $usuario = $this->get_es_usuario($param);
+            $usuario = $this->app->api("usuario/es", $param, "json", "POST");
             $response["usuario"] = $usuario;
             $response["login"] = false;
             if (es_data($usuario)) {
@@ -40,8 +41,7 @@ class Sess extends REST_Controller
                 );
 
                 $response["session"] = $session;
-                //$response["session_creada"] = $this->app->get_session();
-
+                
                 if ($es_barer) {
 
                     $this->response($session);
@@ -51,20 +51,5 @@ class Sess extends REST_Controller
             }
         }
         $this->response($response);
-    }
-
-
-    private function get_es_usuario($q)
-    {
-
-        return $this->app->api("usuario/es", $q, "json", "POST");
-    }
-
-    function servicio_POST()
-    {
-
-        $param = $this->post();
-        $this->app->set_userdata($param);
-        $this->response(1);
     }
 }

@@ -29,8 +29,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_checkout_ventas();
         $response[] = format_sin_ventas();
 
-
-        $response[] = format_categorias($data);
         $res[] = d(menu(), "col-lg-2 contenedor_menu");
         $res[] = d(tab_content($response), "col-lg-7");
         $res[] = d(actualizaciones_del_dia($data), "col-lg-3 border-left");
@@ -165,22 +163,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = place("dominios_que_apuntan_a_enid");
         $response[] = d(penetracion_alcaldias($data), 13);
         return append($response);
-    }
-    function format_categorias(array $data)
-    {
-        $r[] = h("CATEGORÍAS DESTACADAS", 3, "mb-5 h3 text-uppercase strong text-center");
-        $r[] = crea_repo_categorias_destacadas(
-            sub_categorias_destacadas($data["categorias_destacadas"])
-        );
-
-        return d(
-            append($r),
-            [
-                "class" => "tab-pane",
-                "id" => "tab_productos_publicos",
-            ]
-        );
-    }
+    }   
 
     function format_productos_solicitados()
     {

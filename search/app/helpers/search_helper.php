@@ -42,7 +42,7 @@ if (!function_exists('invierte_date_time')) {
         $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
 
-        //$seccion_categorias = crea_sub_menu_categorias_destacadas(sub_categorias_destacadas($categorias_destacadas));
+        
 
         $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);

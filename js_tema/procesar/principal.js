@@ -82,7 +82,7 @@ $(document).ready(() => {
     $form_miembro.submit(registro);
     $form_cotizacion.submit(registro_cotizacion);
     $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
-    $(".link_acceso").click(set_link);
+    //$(".link_acceso").click(set_link);
     $(".continuar_pedido").click(continuar_compra);
 
     $('.agregar_commentario').click(function () {
@@ -382,6 +382,7 @@ let respuesta_proceso_usuario_activo = (data) => {
 
 };
 
+/*
 let set_link = function () {
 
     let id = get_parameter_enid($(this), "id_servicio");
@@ -401,8 +402,10 @@ let set_link = function () {
     request_enid("POST", data_send, url, response_set_link);
 
 };
+let response_set_link = (data) => redirect("../login");
+
+*/
 let continuar_compra = function () {
     showonehideone(primer_compra, ".compra_resumen");
     set_option("vista", 2)
 };
-let response_set_link = (data) => redirect("../login");
