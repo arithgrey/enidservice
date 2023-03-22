@@ -40,7 +40,7 @@ class Recompensa_orden_compra extends REST_Controller
         foreach($ids as $row){
             if ($row > 0) {
             
-                $response = $this->recompensa_orden_compra_model->insert(
+                $this->recompensa_orden_compra_model->insert(
                     [
                         "id_recompensa" =>  $row,
                         "id_orden_compra" => $id_orden_compra

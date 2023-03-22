@@ -8,7 +8,7 @@ class recibo extends REST_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model("recibo_model");
+        $this->load->model("recibo_model");        
         $this->load->helper("recibo");
         $this->load->library('table');
         $this->load->library(lib_def());
@@ -846,6 +846,7 @@ class recibo extends REST_Controller
             $id_orden_compra = $param["orden_compra"];
             $cobro_secundario = $param["cobro_secundario"];
             $response = $this->recibo($id, $id_orden_compra, $cobro_secundario);
+            
         }
 
         $this->response($response);
@@ -862,6 +863,7 @@ class recibo extends REST_Controller
             ];
 
             $id_orden_compra_generada = $this->app->api("orden_compra/index", $q, "json", "POST");
+
         } else {
 
             $q = [
@@ -869,7 +871,7 @@ class recibo extends REST_Controller
                 "id_orden_compra" => $id_orden_compra
             ];
             $id_orden_compra_generada = $id_orden_compra;
-            $response = $this->app->api("producto_orden_compra/index", $q, "json", "POST");
+            $this->app->api("producto_orden_compra/index", $q, "json", "POST");
         }
 
         return $id_orden_compra_generada;

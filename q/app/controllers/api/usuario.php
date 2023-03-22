@@ -11,6 +11,7 @@ class usuario extends REST_Controller
         parent::__construct();
         $this->load->helper("q");
         $this->load->model('usuario_model');
+        $this->load->model('usuario_perfil_model');
         $this->load->library('table');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
@@ -134,7 +135,7 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_usuario")) {
-            $response = $this->usuario_model->q_get($param["id_usuario"],["id_empresa"])[0]["id_empresa"];
+            $response = $this->usuario_model->q_get($param["id_usuario"], ["id_empresa"])[0]["id_empresa"];
         }
         $this->response($response);
     }
@@ -295,11 +296,10 @@ class usuario extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "q")) {
-            
+
 
             $usuarios = $this->usuario_model->tel_contacto_email($param["q"]);
-            $response = format_listado($usuarios);    
-
+            $response = format_listado($usuarios);
         }
         $this->response($response);
     }
@@ -648,11 +648,7 @@ class usuario extends REST_Controller
             $response["id_usuario"] = $this->usuario_model->insert($params, 1);
             if ($response["id_usuario"] > 0) {
 
-                $q = [
-                    "id_usuario" => $response["id_usuario"],
-                    "puesto" => 18
-                ];
-                $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+                $response["usuario_permisos"] = $this->agrega_permisos_usuario($response["id_usuario"], 18);
                 if ($response["usuario_permisos"] > 0) {
                     $response["email"] = $email;
                     $response["usuario_registrado"] = 1;
@@ -661,7 +657,7 @@ class usuario extends REST_Controller
         }
 
         $this->response($response);
-    }    
+    }
     function vendedor_POST()
     {
         $param = $this->post();
@@ -695,9 +691,7 @@ class usuario extends REST_Controller
 
                 if (intval($id_usuario) > 0) {
 
-                    $q["id_usuario"] = $id_usuario;
-                    $q["puesto"] = $perfil;
-                    $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+                    $response["usuario_permisos"] = $this->agrega_permisos_usuario($id_usuario, $perfil);
 
                     if ($response["usuario_permisos"] > 0) {
                         $response["email"] = $email;
@@ -771,9 +765,8 @@ class usuario extends REST_Controller
         $response["id_usuario"] = $this->usuario_model->insert($params, 1);
 
         if ($response["id_usuario"] > 0) {
-            $q["id_usuario"] = $response["id_usuario"];
-            $q["puesto"] = 20;
-            $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+
+            $response["usuario_permisos"] = $this->agrega_permisos_usuario($response["id_usuario"], 20);
             if ($response["usuario_permisos"] > 0) {
                 $response["email"] = $email;
                 $response["usuario_registrado"] = 1;
@@ -881,6 +874,8 @@ class usuario extends REST_Controller
         if (fx($param, $parametros)) {
 
             $response["usuario_existente"] = 0;
+            $id_usuario = $param["id_usuario"];
+            $id_perfil = $param['perfil'];
 
             if ($param["editar"] == 1) {
 
@@ -888,7 +883,7 @@ class usuario extends REST_Controller
                 if ($modificacion_usuario) {
                     $q["id_usuario"] = $param["id_usuario"];
                     $q["puesto"] = $param['perfil'];
-                    $this->agrega_permisos_usuario($q);
+                    $this->agrega_permisos_usuario($id_usuario, $id_perfil);
                     $response["modificacion_usuario"] = $modificacion_usuario;
                 }
             } else {
@@ -901,7 +896,7 @@ class usuario extends REST_Controller
 
                         $q["id_usuario"] = $usuario["id_usuario"];
                         $q["puesto"] = $param['perfil'];
-                        $this->agrega_permisos_usuario($q);
+                        $this->agrega_permisos_usuario($id_usuario, $id_perfil);
                     }
                     $response["registro_usuario"] = $usuario;
                 } else {
@@ -973,9 +968,7 @@ class usuario extends REST_Controller
 
         if ($response["id_usuario"] > 0) {
 
-            $q["id_usuario"] = $response["id_usuario"];
-            $q["puesto"] = 20;
-            $response["usuario_permisos"] = $this->agrega_permisos_usuario($q);
+            $response["usuario_permisos"] = $this->agrega_permisos_usuario($response["id_usuario"], 20);
 
             if ($response["usuario_permisos"] > 0) {
                 $response["email"] = $email;
@@ -1249,13 +1242,22 @@ class usuario extends REST_Controller
         return $this->app->api("imagen_usuario/img_perfil", $q);
     }
 
-    private function agrega_permisos_usuario($q)
+    private function agrega_permisos_usuario($id_usuario, $id_perfil)
     {
 
         $response = 0;
-        if (prm_def($q, "id_usuario") > 0 && prm_def($q, "puesto") > 0) {
+        if ($id_usuario > 0 && $id_perfil) {
 
-            $response =  $this->app->api("usuario_perfil/permisos_usuario", $q, "json", "POST");
+            $status = $this->usuario_perfil_model->delete(["idusuario" => $id_usuario], 15);
+            $response = [];
+            if ($status == true) {
+
+                $params = [
+                    "idusuario" => $id_usuario,
+                    "idperfil" => $id_perfil
+                ];
+                $response = $this->usuario_perfil_model->insert($params);
+            }
         }
         return $response;
     }
@@ -1425,35 +1427,35 @@ class usuario extends REST_Controller
 
         $this->response($response);
     }
-    function faker_POST(){
+    function faker_POST()
+    {
 
         $param = $this->post();
         $response = false;
-        
+
         if (fx($param, "total")) {
-            
+
             $faker = Faker\Factory::create();
-            $nombres_fake = $this->app->api("nombre_fake/index");  
+            $nombres_fake = $this->app->api("nombre_fake/index");
             $total = $param["total"];
             $response = [];
             $total_nombres_fake = count($nombres_fake);
-            for($a = 0 ; $a < $total ; $a ++){
-                
-                $rand_nombre = rand(1,($total_nombres_fake - 1));
+            for ($a = 0; $a < $total; $a++) {
+
+                $rand_nombre = rand(1, ($total_nombres_fake - 1));
                 $usuario = [
-                    "email"=> _text("fakerenid",$faker->email),
-                    "password"=> sha1($faker->password(8)),                    
+                    "email" => _text("fakerenid", $faker->email),
+                    "password" => sha1($faker->password(8)),
                     "name" => $nombres_fake[$rand_nombre]["nombre"]
-                    
+
                 ];
-                
+
                 $id = $this->usuario_model->insert($usuario, 1);
-                if($id > 0){
+                if ($id > 0) {
                     $usuario["id"] = $id;
                     $response[] = $usuario;
                 }
             }
-            
         }
         $this->response($response);
     }
