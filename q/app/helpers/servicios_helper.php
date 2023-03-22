@@ -2393,16 +2393,6 @@ if (!function_exists('invierte_date_time')) {
         $imagenes = [];
         foreach ($array_servicios as $row) {
 
-            /*
-            $img = formato_producto(0, $row);
-            $imagenes[] = a_enid(
-                $img,
-                [
-                    "href" => path_enid("producto", $row["id_servicio"]),
-                    "class" => "col-md-3 hps h_345 col-xs-6 p-1 mh-auto top_50 bottom_50 border border-primary"
-                ]
-            );
-            */
             $img = formato_producto(0, $row);
             $imagenes[] = d(
                 $img,
