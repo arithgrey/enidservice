@@ -535,8 +535,7 @@ function get_costo_envio($recibos)
             $response["costo_envio_vendedor"] = 100;
             $response["text_envio"] = texto_costo_envio_info_publico(
                 $gratis,
-                $response["costo_envio_cliente"],
-                $response["costo_envio_vendedor"],
+                $response["costo_envio_cliente"],                
                 $tipo_entrega
             );
         } else {
@@ -545,8 +544,7 @@ function get_costo_envio($recibos)
             $response["costo_envio_vendedor"] = 0;
             $response["text_envio"] = texto_costo_envio_info_publico(
                 $gratis,
-                $response["costo_envio_cliente"],
-                $response["costo_envio_vendedor"],
+                $response["costo_envio_cliente"],                
                 $tipo_entrega
             );
         }
@@ -557,8 +555,7 @@ function get_costo_envio($recibos)
 }
 
 function texto_costo_envio_info_publico(
-    $flag_envio_gratis, $costo_envio_cliente,
-    $costo_envio_vendedor, $tipo_entrega)
+    $flag_envio_gratis, $costo_envio_cliente, $tipo_entrega)
 {
 
     $text_envio = [
