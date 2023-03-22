@@ -15,8 +15,10 @@ class Format
 
     function url_imagen_servicios(array $servicios, $key = "id_servicio", $index = 'url_img_servicio')
     {
+
         
-        $imagenes = $this->imagenes_por_servicios($servicios);       
+        $imagenes = $this->imagenes_por_servicios($servicios, $key );
+        
         $lista_servicios = [];
 
         foreach ($servicios as $servicio) {
@@ -52,10 +54,10 @@ class Format
         return $lista_servicios;
     }    
 
-    function imagenes_por_servicios($servicios)
+    function imagenes_por_servicios($servicios, $key = 'id_servicio')
     {
 
-        $ids = array_column($servicios, "id_servicio");
+        $ids = array_column($servicios, $key);
         return $this->api("imagen_servicio/ids/", ["ids" => $ids]);
     }
     function api($api, $q = [], $format = 'json', $type = 'GET', $debug = 0, $externo = 0, $b = "")
