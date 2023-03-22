@@ -1,10 +1,11 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
-
+use Enid\ServicioImagen\Format as FormatoImagenServicio;
 class Recompensa extends REST_Controller
 {
     public $option;
     private $id_usuario;
+    private $formatImagenServicio;
     function __construct()
     {
         parent::__construct();
@@ -13,6 +14,7 @@ class Recompensa extends REST_Controller
         $this->load->helper("recompensas");
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
+        $this->formatImagenServicio = new FormatoImagenServicio();
     }
     
     function disponible_GET()
@@ -28,12 +30,14 @@ class Recompensa extends REST_Controller
         $response = [];
         $data_complete = [];
 
-        $response = $this->recompensa_model->disponibles($paginacion, $populares);
-        $response = $this->app->add_imgs_servicio($response);
-        $recompensa = $this->app->add_imgs_servicio($response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+        $response = $this->recompensa_model->disponibles($paginacion, $populares);        
+        $response = $this->formatImagenServicio->url_imagen_servicios($response);        
+        $recompensa = $this->formatImagenServicio->url_imagen_servicios(
+            $response, "id_servicio_conjunto", "url_img_servicio_conjunto");
 
         $a = 0;
-
+         
+        
         foreach ($recompensa as $row) {
 
             $data_complete[$a] = $row;
@@ -43,9 +47,6 @@ class Recompensa extends REST_Controller
             $data_complete[$a]["servicio_conjunto"] = $this->app->servicio($id_servicio_conjunto);
             $a++;
         }
-
-
-
 
         return $data_complete;
     }
@@ -384,8 +385,11 @@ class Recompensa extends REST_Controller
         $popular = prm_def($param, "popular");        
 
         $paginador = $this->offset_paginador(1);
-        $recompensas = sugerencias($this->disponibles($paginador , 1), $antecedente_compra, $popular);
-
+        
+        $disponibles = $this->disponibles($paginador , 1);
+        
+        $recompensas = sugerencias($disponibles, $antecedente_compra, $popular);
+        
         $this->response($recompensas);
     }
 

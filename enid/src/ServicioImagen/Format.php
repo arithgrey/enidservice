@@ -13,6 +13,24 @@ class Format
         $this->api = new Api();
     }
 
+    function url_imagen_servicios(array $servicios, $key = "id_servicio", $index = 'url_img_servicio')
+    {
+        
+        $imagenes = $this->imagenes_por_servicios($servicios);       
+        $lista_servicios = [];
+
+        foreach ($servicios as $servicio) {
+
+            $id_servicio = $servicio[$key];
+
+            $path = search_bi_array($imagenes, "id_servicio", $id_servicio, "nombre_imagen");
+            $servicio[$index] = get_url_servicio($path, 1); 
+            $lista_servicios[] = $servicio;           
+
+        }
+        return $lista_servicios;
+    }    
+
     function formato_servicio(array $servicios)
     {
 

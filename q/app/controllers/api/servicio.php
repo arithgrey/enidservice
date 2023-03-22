@@ -12,8 +12,7 @@ class Servicio extends REST_Controller
         parent::__construct();
         $this->load->helper("servicios");
         $this->load->helper("base");
-        $this->load->model("serviciosmodel");
-        $this->load->model("imagen_servicio_model");
+        $this->load->model("serviciosmodel");        
         $this->load->library('table');
         $this->load->library(lib_def());
         $loggin = $this->app->is_logged_in();
@@ -222,13 +221,7 @@ class Servicio extends REST_Controller
     {
         return array_search($tag, $arreglo_tags);
     }
-
-    private function set_metakeyword_usuario($q)
-    {
-
-        return $this->app->api("metakeyword/usuario", $q, "json", "PUT");
-    }
-
+    
     function lista_categorias_servicios_GET()
     {
 
@@ -750,50 +743,11 @@ class Servicio extends REST_Controller
         return $param;
     }
 
-    private function carga_clasificaciones($servicio)
-    {
-
-        $clasificaciones = [
-            "primer_nivel",
-            "segundo_nivel",
-            "tercer_nivel",
-            "cuarto_nivel",
-            "quinto_nivel"
-        ];
-
-        $lista = [];
-        for ($a = 0; $a < count($clasificaciones); $a++) {
-            $id_clasificacion = $servicio[0][$clasificaciones[$a]];
-            if ($id_clasificacion > 0) {
-                $data_clasificacion = $this->get_clasificacion_por_id($id_clasificacion);
-                if (count($data_clasificacion) > 0) {
-                    array_push($lista, $data_clasificacion[0]);
-                }
-            }
-        }
-        return $lista;
-    }
-
-    private function get_clasificacion_por_id($id_clasificacion)
-    {
-
-        $q["id_clasificacion"] = $id_clasificacion;
-        $response = $this->app->api("clasificacion/id/", $q);
-        $response = is_array($response) ? $response : [];
-        return $response;
-    }
-
+   
     function get_not_ciclo_facturacion($q)
     {
 
         return $this->app->api("ciclo_facturacion/not_ciclo_facturacion/", $q);
-    }
-
-    private function carga_imagenes_servicio($id_servicio)
-    {
-
-        $q["id_servicio"] = $id_servicio;
-        return $this->app->api("imagen_servicio/servicio/", $q);
     }
 
     private function get_porcentaje_comision($q)
@@ -1942,20 +1896,6 @@ class Servicio extends REST_Controller
         $this->response($response);
     }
 
-    private function add_imgs_sugerencias($servicios)
-    {
-
-        $response = [];
-        $a = 0;
-        foreach ($servicios as $row) {
-            $servicio = $row;
-            $id_servicio = $row["id_servicio"];
-            $servicio["url_img_servicio"] = $this->app->imgs_productos($id_servicio, 1, 1, 1);
-            $a++;
-            $response[] = $servicio;
-        }
-        return $response;
-    }
 
     private function get_servicios_por_clasificaciones($q)
     {
