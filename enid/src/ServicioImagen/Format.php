@@ -1,0 +1,47 @@
+<?php
+
+namespace Enid\ServicioImagen;
+
+use Enid\Api\Api as Api;
+
+class Format
+{
+
+    private $api;
+    function __construct()
+    {
+        $this->api = new Api();
+    }
+
+    function formato_servicio(array $servicios)
+    {
+
+        $imagenes = $this->imagenes_por_servicios($servicios);
+
+        $lista_servicios = [];
+
+        foreach ($servicios as $servicio) {
+
+            $id_servicio = $servicio["id_servicio"];
+
+            $path = search_bi_array($imagenes, "id_servicio", $id_servicio, "nombre_imagen");
+            $servicio["url_img_servicio"] = get_url_servicio($path, 1);
+            $servicio["in_session"] = 0;
+            $servicio["id_usuario_actual"] = 0;
+            $lista_servicios[] = create_vista($servicio);
+
+        }
+        return $lista_servicios;
+    }    
+
+    function imagenes_por_servicios($servicios)
+    {
+
+        $ids = array_column($servicios, "id_servicio");
+        return $this->api("imagen_servicio/ids/", ["ids" => $ids]);
+    }
+    function api($api, $q = [], $format = 'json', $type = 'GET', $debug = 0, $externo = 0, $b = "")
+    {
+        return $this->api->api($api, $q, $format, $type, $debug, $externo, $b);
+    }
+}

@@ -1,11 +1,12 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
-
+use Enid\ServicioImagen\Format as ServicioImagenFormato;
 class Servicio extends REST_Controller
 {
     public $options;
     private $id_usuario;
-
+    private $servicio_imagen_formato;
+    
     function __construct()
     {
         parent::__construct();
@@ -18,6 +19,7 @@ class Servicio extends REST_Controller
         $loggin = $this->app->is_logged_in();
         $param = $this->get();
         $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("id_usuario");
+        $this->servicio_imagen_formato = new ServicioImagenFormato();
     }
 
 
@@ -1504,26 +1506,7 @@ class Servicio extends REST_Controller
             $response = $this->serviciosmodel->get_producto_por_clasificacion($param);
         }
         $this->response($response);
-    }
-
-    private function agrega_costo_envio($servicios)
-    {
-
-        $nueva_data = [];
-        $a = 0;
-        foreach ($servicios as $row) {
-
-            $nueva_data[$a] = $row;
-            $es_servicio = $row["flag_servicio"];
-
-            if ($es_servicio == 0) {
-                $prm["flag_envio_gratis"] = $row["flag_envio_gratis"];
-                $nueva_data[$a]["costo_envio"] = $this->app->calcula_costo_envio($prm);
-            }
-            $a++;
-        }
-        return $nueva_data;
-    }
+    }    
 
     function qmetakeyword_GET()
     {
@@ -1935,18 +1918,22 @@ class Servicio extends REST_Controller
                 $total = $this->serviciosmodel->total()[0]["total"];
                 $id_servicio = rand(1, $total);
             }
+
             $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
             $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
+            
 
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
-
+            //$this->response($servicios);
 
             if (es_data($servicios)) {
-
+                /*
                 $response = get_view_sugerencias(
                     $this->add_imgs_sugerencias($servicios)
                 );
+                */
+                $response = $this->servicio_imagen_formato->formato_servicio($servicios);
             } else {
                 $data_response["sugerencias"] = 0;
                 $this->response($data_response);
