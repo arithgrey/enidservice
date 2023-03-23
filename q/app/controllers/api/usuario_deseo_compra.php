@@ -64,7 +64,7 @@ class usuario_deseo_compra extends REST_Controller
     {
 
         $deseo_compra = $this->usuario_deseo_compra_model->agregados();
-        $response = $this->servicio_imagen_formato->servicio_imagen_formato($deseo_compra);        
+        $response = $this->servicio_imagen_formato->url_imagen_servicios($deseo_compra);        
         $this->response(agregados($response));
     }   
     function en_registro_GET()
@@ -73,7 +73,7 @@ class usuario_deseo_compra extends REST_Controller
         $param = $this->get();        
         $deseo_compra = $this->usuario_deseo_compra_model->get(
             [],["status" => 3],1000, 'id_usuario_deseo_compra');
-        $response = $this->servicio_imagen_formato->servicio_imagen_formato($deseo_compra);        
+        $response = $this->servicio_imagen_formato->url_imagen_servicios($deseo_compra);        
         $this->response(en_registro($response));
     }
 
