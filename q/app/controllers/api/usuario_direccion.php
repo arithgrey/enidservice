@@ -114,8 +114,8 @@ class usuario_direccion extends REST_Controller
 
         if ($id > 0) {
 
-            $data["data_saldo_pendiente"] = $this->app->saldos_pendientes_orden_compra($id_orden_compra);
-            $data["direcciones_orden_compra"] = $this->app->domicilios_orden_compra($id_orden_compra);
+            $data["data_saldo_pendiente"] = [];
+            $data["direcciones_orden_compra"] = [];
             $alcaldias = $this->app->api("delegacion/cobertura");
             
 
@@ -132,21 +132,6 @@ class usuario_direccion extends REST_Controller
 
     }   
     
-    private function agrega_fecha_disponible_servicio($param, $data)
-    {
-
-
-        if (fx($param, "id_recibo")) {
-
-
-            $id_servicio = $this->servicio_por_recibo($param['id_recibo']);
-            $data['servicio'] = $this->app->servicio($id_servicio);
-
-        }
-        return $data;
-
-    }
-
     private function servicio_por_recibo($id_recibo)
     {
 

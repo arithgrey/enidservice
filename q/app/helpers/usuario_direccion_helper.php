@@ -43,7 +43,7 @@ if (!function_exists('invierte_date_time')) {
         $telefono_receptor = pr($direcciones_orden_compra, "telefono_receptor");
 
 
-        $r[] = flex(icon('fa fa-home fa-2x'),_titulo("dirección de envío"), "","mr-2");        
+        $r[] = d(flex(icon('fa fa-home fa-2x'),_titulo("dirección de envío"), "","mr-2"),'d-none');        
         $r[] = get_format_direccion_envio_pedido(
             $data,
             $session,

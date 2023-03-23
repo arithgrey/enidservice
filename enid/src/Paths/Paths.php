@@ -665,10 +665,9 @@ class Paths
                 ],
                 "js" =>
                 [
-                    "js/direccion.js",
+
                     'procesar/principal.js',
-                    'procesar/sha1.js',
-                    
+                    'procesar/sha1.js',                    
                 ],
                 "js_extra_web" => [
                     
@@ -698,6 +697,23 @@ class Paths
                 "clasificaciones_departamentos" => "",
 
             ],
+            "procesar_ubicacion" =>
+            [
+                "css" =>
+                [                
+
+                ],
+                "js" =>
+                [
+                    "domicilio/direccion_pedido_registrado.js",
+                    "js/direccion.js",
+
+
+                ],
+                "clasificaciones_departamentos" => "",
+                "pagina" => 7,
+            ],
+
             "procesar_domicilio" =>
             [
                 "css" =>

@@ -343,7 +343,7 @@ class Cobranza extends REST_Controller
         $this->notifica_deuda_cliente($pos);
         if ($param["tipo_entrega"] != 2) {
 
-            $this->posterior_pe($param, $id_orden_compra, $pos["id_usuario"]);
+            
         }
     }
 
@@ -363,88 +363,7 @@ class Cobranza extends REST_Controller
     {
         return $this->app->api("areacliente/pago_pendiente_web", $q);
     }
-
-    private function posterior_pe($param, $id_orden_compra, $id_usuario)
-    {
-
-        $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
-        $response = false;
-        foreach ($productos_orden_compra as $row) {
-
-            $q = [
-                "id_recibo" => $row["id_proyecto_persona_forma_pago"],
-                "id_usuario" => $id_usuario,
-                "punto_encuentro" => $param["punto_encuentro"]
-            ];
-            $status = $this->create_orden_punto_entrega($q);
-            $response = $this->agrega_punto_encuentro_usuario($q);
-        }
-
-
-        return $response;
-    }
-
-
-    private function create_orden_punto_entrega($q)
-    {
-
-        return $this->app->api(
-            "proyecto_persona_forma_pago_punto_encuentro/index",
-            $q,
-            "json",
-            "POST"
-        );
-    }
-
-    private function agrega_punto_encuentro_usuario($q)
-    {
-
-        return $this->app->api("usuario_punto_encuentro/index", $q, "json", "POST");
-    }
-
-    function solicitud_cambio_punto_entrega_POST()
-    {
-
-        $param = $this->post();
-        $response = [];
-        if (fx($param, "punto_encuentro,fecha_entrega,horario_entrega,orden_compra")) {
-
-            $id_orden_compra = $param["orden_compra"];
-            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
-
-            foreach ($productos_orden_compra as $row) {
-
-                $id_recibo = $row["id_proyecto_persona_forma_pago"];
-                /*Lo modifico en la orden*/
-                $param['id_recibo'] = $id_recibo;
-                $response = $this->create_orden_punto_entrega($param);
-                /*Lo agrego en el diccionario para el usuario*/
-                $param["id_usuario"] = $this->id_usuario;
-                $nuevo = $this->agrega_punto_encuentro_usuario($param);
-                $response_domicilio = $this->quita_domicilio_entrega_por_recibo($id_recibo);
-                $response = $this->valida_costo_envio($id_recibo, $param['punto_encuentro']);
-            }
-
-            $this->fecha_entrega($param['fecha_entrega'], $param['horario_entrega'], $id_orden_compra);
-
-            $data =
-                [
-                    'restricciones' => $this->config->item('restricciones'),
-                    'id_perfil' => $this->app->getperfiles()
-                ];
-
-            $path_seguimiento = path_enid('pedidos_recibo', $id_orden_compra);
-
-            $response = [
-                'punto_nuevo' => $nuevo,
-                'id_orden_compra' => $id_orden_compra,
-                'es_administrador' => es_administrador_o_vendedor($data),
-                'path_seguimiento' => $path_seguimiento
-            ];
-        }
-        $this->response($response);
-    }
-
+   
     function quita_domicilio_entrega_por_recibo($id_recibo)
     {
 
@@ -595,7 +514,7 @@ class Cobranza extends REST_Controller
                 if (es_data($session)) {
                     $productos_orden_compra["session_creada"] = 1;
                     $productos_orden_compra["id_orden_compra"] = $id_orden_compra;
-                    //$this->app->set_userdata($session);
+                    
                 }
             } else {
 
@@ -735,22 +654,5 @@ class Cobranza extends REST_Controller
         ];
         return $this->app->api("recibo/fecha_entrega/", $q, "json", "PUT");
     }
-
-    private function valida_costo_envio($id_recibo, $punto_encuentro)
-    {
-        $q = ['punto_encuentro' => $punto_encuentro];
-        $costo_entrega = 0;
-
-        $q = [
-            "recibo" => $id_recibo,
-            "costo_envio" => $costo_entrega
-        ];
-        return $this->app->api("recibo/costo_envio/", $q, "json", "PUT");
-    }
-
-    function comision_GET()
-    {
-
-        $this->response(7);
-    }
+    
 }

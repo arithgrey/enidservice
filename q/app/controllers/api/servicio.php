@@ -711,7 +711,7 @@ class Servicio extends REST_Controller
             $prm["id_servicio"] = $id_servicio;
             $data["num"] = $param["num"];
             $prm["id_servicio"] = $id_servicio;
-            $data["porcentaje_comision"] = $this->get_porcentaje_comision($prm);
+            $data["porcentaje_comision"] = 7;
             $data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
             $data["has_phone"] = $this->usuario_tiene_numero($data["id_usuario"]);
             $data["num_imagenes"] = count($imagenes);
