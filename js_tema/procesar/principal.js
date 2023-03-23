@@ -81,8 +81,7 @@ $(document).ready(() => {
     despliega([".base_compras", ".nav-sidebar", ".base_paginas_extra"]);
     $form_miembro.submit(registro);
     $form_cotizacion.submit(registro_cotizacion);
-    $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);
-    //$(".link_acceso").click(set_link);
+    $(".btn_procesar_pedido_cliente").click(procesar_pedido_usuario_activo);    
     $(".continuar_pedido").click(continuar_compra);
 
     $('.agregar_commentario').click(function () {
@@ -331,12 +330,10 @@ let registro_cotizacion = (e) => {
 };
 
 let respuesta_registro = (data) => {
-
-    
+        
     empty_elements(".place_registro_afiliado");
     if (data !== -1) {
-
-        //$("#modal-error-message").modal("hide");
+        
         desbloqueda_form(form_miembro);
         if (parseInt(data.usuario_existe) > 0) {
 
@@ -346,8 +343,9 @@ let respuesta_registro = (data) => {
 
         } else {
 
-            let $path = _text("../area_cliente/?action=compras&ticket=", data.id_orden_compra);
-            redirect($path);
+            
+            redirect(path_enid("procesar_ubicacion",data.id_orden_compra));
+            
         }
 
     } else {
@@ -381,30 +379,6 @@ let respuesta_proceso_usuario_activo = (data) => {
     redirect("../area_cliente");
 
 };
-
-/*
-let set_link = function () {
-
-    let id = get_parameter_enid($(this), "id_servicio");
-    let ciclo_facturacion = get_parameter_enid($(this), "ciclo_facturacion");
-    let is_servicio = get_parameter_enid($(this), "is_servicio");
-    let q2 = get_parameter_enid($(this), "q2");
-    let num_ciclos = get_parameter_enid($(this), "num_ciclos");
-
-    let data_send = $.param({
-        "id_servicio": id,
-        "ciclo_facturacion": ciclo_facturacion,
-        is_servicio: is_servicio,
-        "q2": q2,
-        "num_ciclos": num_ciclos
-    });
-    let url = "../login/index.php/api/sess/servicio/format/json/";
-    request_enid("POST", data_send, url, response_set_link);
-
-};
-let response_set_link = (data) => redirect("../login");
-
-*/
 let continuar_compra = function () {
     showonehideone(primer_compra, ".compra_resumen");
     set_option("vista", 2)

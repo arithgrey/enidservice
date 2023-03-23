@@ -72,7 +72,7 @@ let response_segunda_compra = function (data) {
 
         let id = data.id_orden_compra;
 
-        redirect(_text("../pedidos/?seguimiento=", id, "&domicilio=1&asignacion_horario_entrega=1"))
+        redirect(path_enid("procesar_ubicacion",id));
 
     }
 

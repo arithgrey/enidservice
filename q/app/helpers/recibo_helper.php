@@ -2005,14 +2005,8 @@ if (!function_exists('invierte_date_time')) {
             "CAMBIAR LA DIRECCIÓN DE ENTREGA",
             [
 
-                "href" => path_enid(
-                    'pedido_seguimiento',
-                    _text(
-                        $id_orden_compra,
-                        '&domicilio=1&asignacion=1'
-                    )
-                ),
-                'class' => 'mt-3',
+                "href" => path_enid('procesar_ubicacion', $id_orden_compra),
+                'class' => 'mt-3 cursor_pointer',
             ],
             0,
             0

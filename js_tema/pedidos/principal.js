@@ -638,7 +638,9 @@ let confirma_lugar_horario_entrega = () => {
 
     let text = "¿DESEAS CAMBIAR EL HORARIO Y PUNTO DE ENCUENTRO?";
     show_confirm(text, '', "SI", function () {
-        $('.form_puntos_medios_avanzado').submit();
+        
+        redirect(path_enid("procesar_ubicacion",get_parameter(".recibo")));
+
     });
 
 };
@@ -646,7 +648,7 @@ let confirma_cambio_domicilio = ($path) => {
 
     let text = "¿DESEAS CAMBIAR EL DOMICILIO DE ENTREGA?";
     show_confirm(text, '', "SI", function () {
-        redirect($path);
+        redirect(path_enid("procesar_ubicacion",get_parameter(".recibo")));
     });
 
 };

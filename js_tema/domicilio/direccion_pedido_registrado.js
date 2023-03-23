@@ -94,7 +94,7 @@ let response_horario_ubicacion = (data) => {
 
     if (!isArray(data)) {
 
-        render_enid(".form_ubicacion    .horario_entrega", data);
+        render_enid(".form_ubicacion .horario_entrega", data);
     }
 };
 

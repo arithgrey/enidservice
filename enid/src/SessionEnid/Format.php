@@ -25,8 +25,7 @@ class Format
             $nombre = $usuario["name"];
             $email = $usuario["email"];
             $id_empresa = $usuario["id_empresa"];
-
-            
+        
             $session = $this->app->crea_session(
                 $id_usuario,
                 $nombre,
