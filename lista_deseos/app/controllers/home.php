@@ -57,7 +57,7 @@ class Home extends CI_Controller
     {
 
         
-        $lista = $this->get_lista_deseos($data["id_usuario"]);                
+        $lista = $this->get_lista_deseos($data["id_usuario"]);             
         $lista_deseo = $lista["listado"];
         $data["recompensas"]= $lista["recompensas"];
         $data["ids_usuario_deseo"]= $lista["ids_usuario_deseo"];
@@ -86,6 +86,7 @@ class Home extends CI_Controller
         $recompensas = prm_def($lista_deseo, "recompensas",[]);
         $data["recompensas"] = $recompensas;
         $data = $this->app->cssJs($data, "lista_deseos_productos_deseados");
+        
         
         if (es_data($listado)) {            
             

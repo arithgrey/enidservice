@@ -47,9 +47,7 @@ if (!function_exists('invierte_date_time')) {
             $inputs[] = hiddens($config);
         }
 
-        $extra = is_mobile() ? 'white':'black';
-        //$response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5,_text_('fp9', $extra));
-        
+        $extra = is_mobile() ? 'white':'black';        
         $total_en_descuento = descuento_recompensa($data);
 
         if ($es_premium && $total_en_descuento < 1) {

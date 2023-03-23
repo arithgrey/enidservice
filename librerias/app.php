@@ -2,17 +2,20 @@
 
 use Enid\Paths\Paths  as Paths;
 use Enid\Api\Api as Api;
+use Enid\ServicioImagen\Format as ServicioImagenFormato;
 
 class app extends CI_Controller
 {
     private $paths;
     private $api;
+    private $servicioImagenFormato;
     function __construct()
     {
         parent::__construct();
         $this->load->library("session");        
         $this->paths = new Paths();
         $this->api = new Api();
+        $this->servicioImagenFormato = new ServicioImagenFormato();
     }
 
     function imgs_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
@@ -102,7 +105,7 @@ class app extends CI_Controller
 
         $q = ['id' => $id_orden_compra];
         $productos_ordenes_compra = $this->api->api("producto_orden_compra/orden_compra", $q);
-        return $this->add_imgs_servicio($productos_ordenes_compra);
+        return $this->servicioImagenFormato->url_imagen_servicios($productos_ordenes_compra);
     }
     function recompensa_orden_compra($id_orden_compra, $descuento = 1)
     {

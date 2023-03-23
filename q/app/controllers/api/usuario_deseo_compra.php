@@ -1,16 +1,17 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
-
+use Enid\ServicioImagen\Format as ServicioImagenFormato;
 class usuario_deseo_compra extends REST_Controller
 {
     private $id_usuario;
-
+    private $servicio_imagen_formato;
     function __construct()
     {
         parent::__construct();
         $this->load->model("usuario_deseo_compra_model");
         $this->load->helper("usuario_deseo_compra");
         $this->load->library(lib_def());
+        $this->servicio_imagen_formato =  new ServicioImagenFormato();
 
     }
 
@@ -63,7 +64,7 @@ class usuario_deseo_compra extends REST_Controller
     {
 
         $deseo_compra = $this->usuario_deseo_compra_model->agregados();
-        $response = $this->app->add_imgs_servicio($deseo_compra);        
+        $response = $this->servicio_imagen_formato->servicio_imagen_formato($deseo_compra);        
         $this->response(agregados($response));
     }   
     function en_registro_GET()
@@ -72,7 +73,7 @@ class usuario_deseo_compra extends REST_Controller
         $param = $this->get();        
         $deseo_compra = $this->usuario_deseo_compra_model->get(
             [],["status" => 3],1000, 'id_usuario_deseo_compra');
-        $response = $this->app->add_imgs_servicio($deseo_compra);        
+        $response = $this->servicio_imagen_formato->servicio_imagen_formato($deseo_compra);        
         $this->response(en_registro($response));
     }
 
@@ -95,7 +96,7 @@ class usuario_deseo_compra extends REST_Controller
 
             $ip = $param["ip"];
             $lista_deseos = $this->usuario_deseo_compra_model->compra($ip);                    
-            $listado = $this->app->add_imgs_servicio($lista_deseos);
+            $listado = $this->servicio_imagen_formato->url_imagen_servicios($lista_deseos);            
 
             $ids = array_column($listado, "id_recompensa");
             $recompensa = [];
@@ -129,7 +130,7 @@ class usuario_deseo_compra extends REST_Controller
 
             $ip = $param["ip"];
             $lista_deseos = $this->usuario_deseo_compra_model->compra($ip,1);                    
-            $listado = $this->app->add_imgs_servicio($lista_deseos);
+            $listado = $this->servicio_imagen_formato->url_imagen_servicios($lista_deseos);
 
             $ids = array_column($listado, "id_recompensa");
             $recompensa = [];
@@ -140,13 +141,10 @@ class usuario_deseo_compra extends REST_Controller
 
             }
 
-
             $response = [
                 "listado" => $listado,
                 "recompensas" => $recompensa
-            ];
-            
-            
+            ];                        
 
         }
         $this->response($response);
