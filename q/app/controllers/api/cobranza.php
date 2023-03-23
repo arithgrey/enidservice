@@ -5,6 +5,7 @@ class Cobranza extends REST_Controller
 {
     public $option;
     private $id_usuario;
+    protected $session_enid;
 
     function __construct()
     {
@@ -14,7 +15,7 @@ class Cobranza extends REST_Controller
         $this->load->model("usuario_deseo_model");       
         $this->load->model("usuario_deseo_compra_model");           
         $this->load->library(lib_def());
-
+        $this->session_enid = new Enid\SessionEnid\Format($this->app);
         $this->id_usuario = $this->app->get_session("id_usuario");
     }
 
@@ -585,11 +586,16 @@ class Cobranza extends REST_Controller
 
             $envia_cliente = prm_def($param, "envia_cliente");
             if ($es_orden_creada && $param['es_cliente'] > 0 && $envia_cliente < 1) {
-                $session = $this->create_session($param);
+                                
+                $session = $this->session_enid->session(
+                    $param["email"],$param["password"],
+                    1
+                );
+                
                 if (es_data($session)) {
                     $productos_orden_compra["session_creada"] = 1;
                     $productos_orden_compra["id_orden_compra"] = $id_orden_compra;
-                    $this->app->set_userdata($session);
+                    //$this->app->set_userdata($session);
                 }
             } else {
 
@@ -665,16 +671,6 @@ class Cobranza extends REST_Controller
         return $response;
     }
 
-    function create_session($q)
-    {
-
-        $q += [
-            "t" => $this->config->item('barer'),
-            "secret" => $q["password"],
-        ];
-
-        return $this->app->api("sess/start", $q, "json", "POST", 0, 1, "login");
-    }
 
 
     function valida_envio_notificacion_nuevo_usuario($param)
