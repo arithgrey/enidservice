@@ -696,15 +696,8 @@ class usuario extends REST_Controller
                     if ($response["usuario_permisos"] > 0) {
                         $response["email"] = $email;
                         $response["usuario_registrado"] = 1;
-                    }
-
-                    $simple = (prm_def($param, "simple") > 0) ? 1 : 0;
-                    if ($simple == 0) {
-
-                        $this->inicia_proceso_compra($param, $id_usuario, prm_def($param, "servicio"));
-                    }
-
-                    //$this->notifica_registro_usuario($nombre, $email);
+                    }                    
+                    
                 }
             }
             $this->response($response);

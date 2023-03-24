@@ -115,7 +115,9 @@ if (!function_exists('invierte_date_time')) {
         $r[] = d(d("Primero registremos tu usuario!","f15 bg_black borde_amarillo white"),'d-none texto_registro');
         $r[] = img_default();
 
-        $formulario[] = _titulo('Registro');
+        $formulario[] = h('Registro de cuenta', 2,'text-uppercase strong');
+        $formulario[] = d("Vamos registrar tu cuenta",'black mb-5');
+        
         $formulario[] = frm_registro($data, $param);
         $r[] = d($formulario,'formulario_registro');
 
@@ -146,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
             _text_nombre
         );
         $r[] = place("place_nombre_info");
-        $r[] = input_frm("mt-5", "email",
+        $r[] = input_frm("mt-5", "CORREO ELECTRÓNICO",
             [
                 "name" => "email",
                 "placeholder" => "CORREO",
@@ -207,11 +209,11 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = form_close(place("place_registro_miembro"));
         
-        $r[] = format_link( text_icon('fa fa-google white',"Registrate Google"),
+        $r[] = format_link( text_icon('fa fa-google black ',"Registrate Google"),
         [
             "href" => $data["link_registro_google"],
-            'class' => "mt-3 registro_google"
-        ],2);
+            'class' => "registro_google borde_black mt-5"
+        ],0);
 
         return append($r);
 
