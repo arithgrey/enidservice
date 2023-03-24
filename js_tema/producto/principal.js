@@ -290,6 +290,7 @@ let agregar_deseos = function () {
     let $id_servicio = $(this).attr('id');
 
     if (parseInt($id_servicio) > 0) {
+        
         let $articulos = $num_ciclos.val();
         let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
         let data_send = { "id_servicio": $id_servicio, "articulos": $articulos };
