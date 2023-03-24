@@ -1,78 +1,88 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
 
-    function modal_accion_tiempo_alcaldia_pago($alcaldias){
-            
+    function modal_accion_tiempo_alcaldia_pago($alcaldias)
+    {
+
         $str = _d(
             d(_titulo(
                 _text_(
-                    "CONSULTA EL TIEMPO EN QUE LLEGAMOS A TU DOMICILIO",                                
+                    "CONSULTA EL TIEMPO EN QUE LLEGAMOS A TU DOMICILIO",
                     icon('fa-truck')
                 )
             ), 'mb-2 mt-4'),
-            d('', 'mt-2 f12 black')        
-    
+            d('', 'mt-2 f12 black')
+
         );
-    
+
         $select_alcaldias  = create_select(
-            $alcaldias, 
+            $alcaldias,
             "delegacion",
-            "ubicacion_delegacion", 
+            "ubicacion_delegacion",
             'delegacion',
             "delegacion",
             'id_delegacion',
-            0,1,'0','Selecciona tu alcaldía');
-        
-            $texto_alcaldia = d("¿Cual es tu alcaldía?",'strong');
-        
-        
-        $formulario_adicional[] = flex($texto_alcaldia , $select_alcaldias , _text_(_between,'mt-5 nota_ubicacion'));
-        $formulario_adicional[] = d("Selecciona tu alcaldía",
-            "text-right mt-3 d-none nota_ubicacion_text black strong");
-        
+            0,
+            1,
+            '0',
+            'Selecciona tu alcaldía'
+        );
+
+        $texto_alcaldia = d("¿Cual es tu alcaldía?", 'strong');
+
+
+        $formulario_adicional[] = flex($texto_alcaldia, $select_alcaldias, _text_(_between, 'mt-5 nota_ubicacion'));
+        $formulario_adicional[] = d(
+            "Selecciona tu alcaldía",
+            "text-right mt-3 d-none nota_ubicacion_text black strong"
+        );
+
         $formulario_adicional[] = format_link('Consultar', ['class' => 'mt-5 consulta_tiempo_entrega']);
-    
+
         $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
         $r[] = d($formulario_adicional);
-        
-        $response[] = d($r,"formulario_tiempo_entrega");
+
+        $response[] = d($r, "formulario_tiempo_entrega");
 
         $str = _d(
             d(
                 _text_(
-                    "Tardaremos 1 hora con 30 minutos si agendas tu pedido ya!",                                
+                    "Tardaremos 1 hora con 30 minutos si agendas tu pedido ya!",
                     icon('fa-truck')
-                
-            ), 'mb-2 display-7 strong text-uppercase'),
-            d('', 'mt-2 f12 black')        
-    
+
+                ),
+                'mb-2 display-7 strong text-uppercase'
+            ),
+            d('', 'mt-2 f12 black')
+
         );
-        $response[] = d($str,"tiempo_entrega_respuesta d-none");
+        $response[] = d($str, "tiempo_entrega_respuesta d-none");
 
 
         return gb_modal($response, 'modal_accion_tiempo_alcaldia_pago');
-    
     }
 
     function valida_tiempo_entrega()
     {
-        
-        $tiempo = d(_text_("Consulta el ",span("tiempo de entrega aquí",'border_black strong cursor_pointer accion_tiempo_alcaldia_pago')));
-        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Envío gratis recibe hoy",'strong'),$tiempo),' ml-2')), 'top_40  black text-uppercase');
-        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!",'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');    
-        
+
+        $tiempo = d(_text_("Consulta el ", span("tiempo de entrega aquí", 'border_black strong cursor_pointer accion_tiempo_alcaldia_pago')));
+        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Envío gratis recibe hoy", 'strong'), $tiempo), ' ml-2')), 'top_40  black text-uppercase');
+        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!", 'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');
+
         $contenido[] = d(d(
-            _text_(icon("fa fa-check"), span("Formas de pago",'underline ml-2')),
+            _text_(icon("fa fa-check"), span("Formas de pago", 'underline ml-2')),
             [
-                "class" => " black text-uppercase",                
+                "class" => " black text-uppercase",
             ]
         ), 'mt-4 black accion_forma_pago cursor_pointer');
 
         $contenido[] = d(d(
-            _text_(icon('fa fa-long-arrow-left'),
-                span("Política de devoluciones","underline ml-2")),
+            _text_(
+                icon('fa fa-long-arrow-left'),
+                span("Política de devoluciones", "underline ml-2")
+            ),
             [
-                "class" => "black text-uppercase"                
+                "class" => "black text-uppercase"
             ]
         ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
 
@@ -169,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = btw(
             d($imagenes["preview"], $clases),
-            d($imagenes["imagenes_contenido"], ["class" => $clases_imagenes , "id" =>"container"]),
+            d($imagenes["imagenes_contenido"], ["class" => $clases_imagenes, "id" => "container"]),
             'row'
 
         );
@@ -179,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo,1,["class" => "strong f18"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f18"]));
             $x[] = venta_producto(
                 $s,
                 $data,
@@ -257,7 +267,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
-        
+
         return d(d($pagina_producto, 13), 'col-sm-12 mt-md-5 ');
     }
     function botones_ver_mas($id_servicio)
@@ -383,7 +393,7 @@ if (!function_exists('invierte_date_time')) {
         $numero_compras = pr($servicio, "deseado");
         if ($numero_compras > 1) {
 
-            $r[] = d(_text_( span($numero_compras,'underline'), crea_estrellas(5)), 'black col-sm-12 text-right mb-3');
+            $r[] = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)), 'black col-sm-12 text-right mb-3');
         }
 
         $r[] = ($es_mobile > 0) ? "" : d($nombre_producto, 12);
@@ -494,7 +504,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = flex(
             _titulo("Cantidad", $tipo),
             select_cantidad_compra($es_servicio, $existencia),
-            _text_(_between,'mb-5'),
+            _text_(_between, 'mb-5'),
             'col-xs-4 p-0',
             'col-xs-8 p-0'
         );
@@ -1082,7 +1092,7 @@ if (!function_exists('invierte_date_time')) {
 
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);
-        $texto_precio_base = ($precio_unidad > 0) ? _text("$",$precio_unidad) : "A CONVENIR";
+        $texto_precio_base = ($precio_unidad > 0) ? _text("$", $precio_unidad) : "A CONVENIR";
 
 
         $texto_premium = "";
@@ -1100,7 +1110,7 @@ if (!function_exists('invierte_date_time')) {
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text("Precio regular $",$precio_alto), "text-secondary mb-5 f11");
+                $texto_precio_alto = d(_text("Precio regular $", $precio_alto), "text-secondary mb-5 f11");
             }
 
 
@@ -1273,25 +1283,31 @@ if (!function_exists('invierte_date_time')) {
             $response[] = format_link(
 
                 d(
-                    _text_( span("Añadir al carrito"), 
-                    icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')),
+                    _text_(
+                        span("Añadir al carrito"),
+                        icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')
+                    ),
                     'pt-3 pb-3'
                 ),
                 [
-                    'class' => 'en_lista_deseos white',                    
+                    'class' => 'en_lista_deseos white',
                     "onclick" => "agregar_deseos_sin_antecedente_gbl_btn($id_servicio)"
                 ]
             );
         }
 
         $agregar_lista_deseos = append($response);
-        $lista_deseos = icon('fa black agregar_deseos_sin_antecedente 
+        $lista_deseos = icon(
+            'fa black agregar_deseos_sin_antecedente 
         fa fa-heart-o fa-2x p-4 borde_black ',
-        [
-            "id" =>$id_servicio
-        ]);
+            [
+                "id" => $id_servicio
+            ]
+        );
 
-        return flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'top_40'),'p-0 col-xs-10','p-0 col-xs-2');
+        $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'top_40'), 'p-0 col-xs-10', 'p-0 col-xs-2');
+        $seccion[] = d(cargando(),'col-xs-12');
+        return append($seccion);
     }
     function confianza($id_servicio, $data)
     {
