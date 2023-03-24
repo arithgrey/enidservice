@@ -720,11 +720,12 @@ class recibo extends REST_Controller
         $response = false;
         if (fx($param, "orden_compra,es_ubicacion")) {
 
-            $id_orden_compra = $param['orden_compra'];
-            $productos_orden_compra = $this->app->productos_ordenes_compra($id_orden_compra);
+            $id_orden_compra = $param['orden_compra'];                
+            
+            $productos_orden_compra = $this->app->api("producto_orden_compra/orden_compra", ['id' => $id_orden_compra]);
+
             $es_ubicacion = $param["es_ubicacion"];
             $contra_entrega_domicilio = prm_def($param, "contra_entrega_domicilio");
-
 
             foreach ($productos_orden_compra as $row) {
 

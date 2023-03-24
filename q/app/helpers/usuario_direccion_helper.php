@@ -75,7 +75,6 @@ if (!function_exists('invierte_date_time')) {
     }
     function form_ubicacion_escrita($param, $alcaldias)
     {
-
         
         $id_orden_compra = $param['id_orden_compra'];
         $form[] = d( flex(icon(_text_('fa-2x',_delivery_icon)),_titulo('Tienes una de dos')) , 'selector_ubicaciones_domicilio  text-center text-md-left');
@@ -169,7 +168,9 @@ if (!function_exists('invierte_date_time')) {
         $formulario[] = form_close();
 
         $form[] = d($formulario, 'd-none formulario_registro_ubicacion');
-        $modal = append($form);
+        $modal[] = d($form);
+        $modal[] = cargando();
+        
         return gb_modal($modal, "modal_ubicacion");
     }
 

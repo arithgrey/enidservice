@@ -482,12 +482,13 @@ if (!function_exists('invierte_date_time')) {
             _text_(icon('fa fa-space-shuttle white'), "Continuar"),
             [
                 "class" => "pb-3 p-2 strong col 
-                text-uppercase registro_google format_action format_google shadow d-block"
+                text-uppercase registro_google envio_compra format_action format_google shadow d-block"
             ]
         );
 
         $extra_envio = (is_mobile()) ? '' : 'mt-5 ';
         $response[] = d($boton_agendar_pedido, _text_('seccion_enviar_orden bg-white', $extra_envio));
+        $response[] = d(cargando(),12);
 
         if (!is_mobile()) {
 

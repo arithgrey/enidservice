@@ -1869,8 +1869,6 @@ function opciones_populares()
 
 function opciones_adicionales_navegacion()
 {
-
-
     
     $text = _text_(
         span('PAGO CONTRA ENTREGA', ''),
@@ -1904,6 +1902,8 @@ function opciones_adicionales_navegacion()
             "class" => "strong black"
         ]
     ), " col-xs-6");
+    
+
 
     $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
     return append($response);
@@ -2013,26 +2013,35 @@ function navegacion(
 
        
         $opciones[] = d(a_enid(
-            _text_(icon('fa fa-check-circle-o'), "Pago contra entrega"),
+            flex(icon('fa fa-check-circle-o'), "Paga al recibir",_between,'mr-2'),
             [
                 "href" => path_enid("forma_pago"),
                 "class" => "strong black"
             ]
-        ), " col-xs-6");
+        ), " col-xs-4");
 
 
 
 
         $opciones[] = d(
-            a_enid(_text_(icon('black fa black fa fa-truck'), "Rastrea tu paquete"), [
+            a_enid(flex(icon('black fa black fa fa-truck'), "Rastrea tu equipo",_between,'mr-2'), [
                 "href" => path_enid("rastrea-paquete"),
                 "class" => "strong black"
             ]),
-            "col-xs-6 "
+            "col-xs-4 "
+        );
+        
+        $opciones[] = d(
+            a_enid(flex(icon('black fa fa fa-star'), "Referencias","","","ml-2"), [
+                "href" => path_enid("clientes"),
+                "class" => "strong black"
+            ]),
+            "col-xs-4 "
         );
 
+
         
-        $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
+        $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
     } else {
 
         if (!$is_mobile) {        
@@ -2320,7 +2329,7 @@ function get_logo($session = 0)
         $icono_busqueda,
         [
             "onclick" => "openNav()",
-            "class" => "borde_amarillo"
+            "class" => ""
         ]
     ), $carro, _between);
 
@@ -2328,7 +2337,7 @@ function get_logo($session = 0)
         icon('fa black fa fa-user white p-2'),
         [
             "href" => path_enid('login'),
-            "class" => "white borde_amarillo d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
+            "class" => "white d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
         ]
     );
 

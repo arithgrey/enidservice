@@ -1807,3 +1807,17 @@ function modal_venta_auto()
 
     return gb_modal($contenido, 'modal_venta_auto');
 }
+function cargando(){
+
+    $span = span('Cargando ...', 'sr-only');
+        $load = str_repeat(d(
+            $span,
+            [
+                'class' => "spinner-grow",
+                'role' => "status"
+            ]
+        ), 5);
+        
+    return d($load, 'text-center cargando_modal d-none mt-3 cargando');        
+
+}

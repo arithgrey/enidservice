@@ -27,7 +27,11 @@ $(document).ready(function () {
     $cobro_secundario.keyup(cobro_secundario);
     $('#sticky-footer').addClass("d-none");
     $("footer").ready(log_intento_conversion);
-
+    
+    $(".envio_compra").click(function(){
+        $(".cargando").removeClass("d-none");
+        $(".seccion_enviar_orden").addClass("d-none");
+    });
 
 });
 let log_intento_conversion = function () {
@@ -60,7 +64,7 @@ let response_log_conversion = function (data) {
 let segunda_compra = function (e) {
 
     e.preventDefault();
-
+    
     let $data_send = $form_segunda_compra.serialize();
     let url = "../q/index.php/api/cobranza/siguiente_compra/format/json/";
     request_enid("POST", $data_send, url, response_segunda_compra);

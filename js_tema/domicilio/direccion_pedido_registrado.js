@@ -24,9 +24,9 @@ $(document).ready(() => {
     $(".form_direccion_envio").submit(registra_nueva_direccion);
 
     if ($('.form_direccion_envio .fecha_entrega').length) {
-
         $('.form_direccion_envio .fecha_entrega').change(horarios_disponibles);
     }
+
     $adicionales_seccion.click(seccion_adicionales);
     $fecha_entrega_ubicacion.change(horarios_disponibles_ubicacion);
     $ingreso_texto_completo.click(ingreso_completo);
@@ -118,7 +118,7 @@ let ingreso_ubicacion = () => {
 };
 
 let registro_ubicacion = (e) => {
-
+    $(".cargando_modal").removeClass("d-none");
     let url = "../q/index.php/api/ubicacion/index/format/json/";
     let data_send = $form_ubicacion.serialize();
     bloquea_form(formulario_registro_ubicacion);

@@ -234,7 +234,8 @@ let agregar_a_lista_deseos = () => {
 
     let $numero_articulos = get_valor_selected("#num_ciclos");
     if ($numero_articulos > 0) {
-
+        
+        $(".cargando").removeClass("d-none");
         $se_agrego.removeClass('d-none');
         $se_agregara.addClass('d-none');
         let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
