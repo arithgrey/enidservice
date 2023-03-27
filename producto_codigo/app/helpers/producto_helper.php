@@ -79,7 +79,7 @@ if (!function_exists('invierte_date_time')) {
         if ($data["in_session"] > 0) {
 
             $response_agendar[] = d(format_link(
-                d("Añadir al carrito", 'pt-3 pb-3'),
+                d("Quiero tomar la oferta", 'pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos white text-center",
@@ -96,8 +96,7 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span("Añadir al carrito"),
-                        icon('pull-right mr-4 fa fa-space-shuttle white ml-auto')
+                        span("Tomar la oferta!")
                     ),
                     'pt-3 pb-3'
                 ),
@@ -112,7 +111,8 @@ if (!function_exists('invierte_date_time')) {
         $mirar_opciones = format_link("ver más kits!", [], 0);
 
         $pagina[] = d(producto_deseado($data["producto"], $data["img"]), 'col-xs-12 mt-5 mb-5');
-        $pagina[] = d(flex(append($response_agendar), $mirar_opciones, _text_(_between)), 'col-xs-12 mb-5');
+        $pagina[] = d(flex(append($response_agendar), $mirar_opciones, _text_(_between,'selectores')), 'col-xs-12 mb-5');
+        $pagina[] = d(cargando(), 'text-center col-xs-12 mb-5');
         $pagina[] = d(
             "Pagas al recibir tus artículos en tu domicilio",
             'mt-3 col-xs-12  strong f12 mb-4'
