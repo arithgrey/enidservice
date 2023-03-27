@@ -743,14 +743,22 @@ class Paths
                 [
                     'producto/principal.js',
                     "alerts/jquery-confirm.js"                    
-                ],
-                "js_node" =>
-                [
-                   
-                ]
-
-                
+                ],                
             ],
+            "producto_codigo" =>
+            [
+                "css" =>
+                [
+                    "css_tienda.css",            
+
+                ],
+                "js" =>
+                [
+                    "producto_codigo/principal.js",
+                    "producto_codigo/cuenta_regersiva.js"
+                ],                
+            ],
+
             "producto_metricas" =>
             [
                 "css" =>

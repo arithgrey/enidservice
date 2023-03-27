@@ -1392,10 +1392,11 @@ let ver_menos_notificaciones_ordenes_compra = function () {
 
 let agregar_deseos_sin_antecedente_gbl_btn = function (id_servicio) {
     
+    
     $(".cargando").removeClass("d-none");
     let cantidad = get_valor_selected(".select_cantidad");                 
     if(parseInt(id_servicio) > 0 && parseInt(cantidad) > 0 ){
-
+        
         let data_send = { "id_servicio": id_servicio, "articulos": cantidad };        
         if (parseInt(get_option("in_session")) > 0) {
 
