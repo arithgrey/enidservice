@@ -774,6 +774,15 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_administrador_o_vendedor($data)) {
 
+            $enlace_promocional = format_link(
+                "Ver enlace promocional",
+                [
+                    "href" => path_enid("producto_codigo", $id_servicio),
+
+                ]
+            );
+
+
             $respuestas = format_link(
                 "Ver respuesta sugerida",
                 [
@@ -831,7 +840,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
             }
-            $response[] = d(_d($respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
+            $response[] = d(_d($enlace_promocional,$respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
         }
         return append($response);
     }

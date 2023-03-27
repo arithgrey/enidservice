@@ -76,21 +76,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $id_servicio = $data["id_servicio"];
-        if ($data["in_session"] > 0) {
-
-            $response_agendar[] = d(format_link(
-                d("Quiero tomar la oferta", 'pt-3 pb-3'),
-                [
-                    "id" => 'agregar_a_lista_deseos_add',
-                    "class" => "agregar_a_lista_deseos l_deseos white text-center",
-                    "onclick" => "log_operaciones_externas(27, $id_servicio)"
-                ],
-                2
-            ), 'se_agregara');
-
-
-            $response_agendar[] = d(format_link('Se agregó!', [], 0), 'se_agrego d-none');
-        } else {
+        
 
             $response_agendar[] = format_link(
 
@@ -101,17 +87,21 @@ if (!function_exists('invierte_date_time')) {
                     'pt-3 pb-3'
                 ),
                 [
-                    'class' => 'en_lista_deseos white',
+                    'class' => 'en_lista_deseos white cursor_pointer',
                     "onclick" => "agregar_deseos_sin_antecedente_gbl_btn($id_servicio)"
                 ]
             );
-        }
+        
 
         $pagina[] = d(select_cantidad_compra(0, 2, 1), 'd-none');
-        $mirar_opciones = format_link("ver más kits!", [], 0);
+        $mirar_opciones = format_link("ver más kits!", 
+        [
+            "href" => path_enid("kist-mas-vendidos"),
+            "class" => "cursor_pointer"
+        ], 0);
 
         $pagina[] = d(producto_deseado($data["producto"], $data["img"]), 'col-xs-12 mt-5 mb-5');
-        $pagina[] = d(flex(append($response_agendar), $mirar_opciones, _text_(_between,'selectores')), 'col-xs-12 mb-5');
+        $pagina[] = d(flex(append($response_agendar), $mirar_opciones, _text_(_between,'selectores ')), 'col-xs-12 mb-5 cursor_pointerst');
         $pagina[] = d(cargando(), 'text-center col-xs-12 mb-5');
         $pagina[] = d(
             "Pagas al recibir tus artículos en tu domicilio",
