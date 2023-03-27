@@ -15,6 +15,9 @@ let $texto_comision_venta = $(".texto_comision_venta");
 
 $(document).ready(function () {
 
+    evalua_compra_descuento_aplicado();
+    
+
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
     $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
@@ -244,3 +247,13 @@ let cobro_secundario = function(e){
 }
 
 let response_carga_productos = (data) => redirect("");
+
+let evalua_compra_descuento_aplicado = function(){
+    const descuento_provicional = localStorage.getItem('descuento_provicional');
+    if(descuento_provicional !== null){ 
+        
+        $(".precio_final").addClass("d-none");
+        $(".precio_final_descuento_especial").removeClass("d-none");        
+    }
+
+}

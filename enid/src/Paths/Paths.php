@@ -755,7 +755,7 @@ class Paths
                 "js" =>
                 [
                     "producto_codigo/principal.js",
-                    "producto_codigo/cuenta_regersiva.js"
+                    "producto_codigo/cuenta_regresiva.js"
                 ],                
             ],
 

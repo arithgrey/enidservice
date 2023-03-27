@@ -412,14 +412,27 @@ if (!function_exists('invierte_date_time')) {
         } else {
 
 
-            $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));
+            $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));            
             $extra  = is_mobile() ? 'white' : '';
-            $total_descuento_intento_conversion = porcentaje($subtotal, 10);
+            
 
 
 
-            $precio_descuento_conversion = $subtotal - $total_descuento_intento_conversion;
-            $precio_descuento_conversion = d(money($precio_descuento_conversion), _text_("display-5 strong ml-3", $extra));
+            $precio_descuento_conversion = $subtotal;
+            $precio_descuento_conversion = d( 
+            flex(
+                money($precio_descuento_conversion), 
+                money($subtotal - 150),  
+                "",
+                "precio_final",
+                "precio_final_descuento_especial d-none"
+                )  ,
+            [ 
+                "class " => _text_("precio_especial display-5 strong ml-3", $extra),
+                "id" => $precio_descuento_conversion
+                
+            ]);
+            
             $precios_intento_conversion = flex(
                 del(money($subtotal)),
                 $precio_descuento_conversion,
@@ -437,8 +450,14 @@ if (!function_exists('invierte_date_time')) {
                 ),
                 'total_con_descuento_conversion d-none'
             );
+                        
+            $response[] =  d(flex($text, 'Pagarás al recibir tu pedido', 'flex-column mb-2 mt-2', '', _text_($extra, 'ml-3')), 'precio_final');
 
-            $response[] =  d(flex($text, 'Pagarás al recibir tu pedido', 'flex-column mb-2 mt-2', '', _text_($extra, 'ml-3')), 'total_sin_descuento');
+
+
+            $text_descuento = d(money( $subtotal - 150), _text_("display-5 strong ml-3", $extra));            
+
+            $response[] =  d(flex($text_descuento, 'Pagarás al recibir tu pedido', 'flex-column mb-2 mt-2', '', _text_($extra, 'ml-3')), 'precio_final_descuento_especial d-none');
         }
 
         return $response;

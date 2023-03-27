@@ -14,7 +14,7 @@ function actualizarContador() {
 
     // Actualiza el elemento div con el tiempo restante
     const contador = document.getElementById("contador");
-    contador.innerText = `Tiempo para que expire la ofertas: ${horasRestantes} horas, ${minutosRestantes} minutos, ${segundosRestantes} segundos`;
+    contador.innerText = `Tiempo para que termine la ofertas: ${horasRestantes} horas, ${minutosRestantes} minutos, ${segundosRestantes} segundos`;
 }
 
 // Actualiza el contador cada segundo

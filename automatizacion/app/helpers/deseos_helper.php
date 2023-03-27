@@ -140,6 +140,7 @@ if (!function_exists('invierte_date_time')) {
 
             $precio_descuento_conversion = $subtotal - $total_descuento_intento_conversion;
             $precio_descuento_conversion = d(money($precio_descuento_conversion), _text_("display-5 strong ml-3", $extra));
+
             $precios_intento_conversion = flex(
                 del(money($subtotal)) , 
                 $precio_descuento_conversion,
@@ -153,6 +154,9 @@ if (!function_exists('invierte_date_time')) {
                 '',
                 _text_($extra, 'ml-3')),
                 'total_con_descuento_conversion d-none');
+
+
+                        
 
             $response[] =  d(flex($text,'Pagarás al recibir tu pedido','flex-column mb-2 mt-2','',_text_($extra, 'ml-3')),'total_sin_descuento');
             
