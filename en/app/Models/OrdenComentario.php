@@ -19,6 +19,6 @@ class OrdenComentario extends Model
     }
     public function getPathOrdenAttribute()
     {
-        return "https://enidservices.com/web/pedidos/?recibo=$this->id_orden_compra";
+        return "https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/pedidos/?recibo=$this->id_orden_compra";
     }
 }

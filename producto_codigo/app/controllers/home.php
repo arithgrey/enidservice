@@ -44,6 +44,12 @@ class Home extends CI_Controller
             $data["titulo"] = $titulo_nombre_servicio;
             $data["id_servicio"] = $this->id_servicio;            
             $data["footer_visible"] = false;
+            
+            if (es_data($data["imgs"])) {
+                $nombre_imagen = pr($data["imgs"], "nombre_imagen");
+                $data["url_img_post"] = url_post($nombre_imagen);
+            }
+
             $data = $this->app->cssJs($data, "producto_codigo");        
             $this->app->log_acceso($data, 3, $this->id_servicio  );
             $this->app->pagina($data, render_producto_codigo($data), 1);

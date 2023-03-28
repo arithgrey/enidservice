@@ -1198,7 +1198,7 @@ if (!function_exists('invierte_date_time')) {
 
     function format_calendario($id_recibo)
     {
-        $path = "https://enidservices.com/web/pedidos/?recibo=$id_recibo";
+        $path = "https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/pedidos/?recibo=$id_recibo";
         return d(format_link(
             "Agendar recordatorio",
             [
@@ -2569,7 +2569,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text  = flex(
             'Por cierto hoy en la compra de tu kit estamos regalando este juego de mancuernas',
-            'https://enidservices.com/web/producto/?producto=1020',
+            'https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/producto/?producto=1020',
             "d-flex flex-column border p-4 bg-light mt-4 w-100"
         );
 
