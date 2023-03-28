@@ -774,6 +774,14 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         if (es_administrador_o_vendedor($data)) {
 
+            $enlace_ultima_oportunidad = format_link(
+                "Última oportunidad",
+                [
+                    "href" => path_enid("producto_oportunidad", $id_servicio),
+
+                ]
+            );
+
             $enlace_promocional = format_link(
                 "Ver enlace promocional",
                 [
@@ -840,7 +848,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
             }
-            $response[] = d(_d($enlace_promocional,$respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
+            $response[] = d(_d($enlace_promocional,$enlace_ultima_oportunidad,$respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
         }
         return append($response);
     }
