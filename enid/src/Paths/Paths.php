@@ -758,6 +758,20 @@ class Paths
                     "producto_codigo/cuenta_regresiva.js"
                 ],                
             ],
+            "producto_oferta" =>
+            [
+                "css" =>
+                [
+                    
+
+                ],
+                "js" =>
+                [
+                    "producto_oferta/principal.js",
+                    "producto_oferta/cuenta_regresiva.js"
+                ],                
+            ],
+
 
             "producto_metricas" =>
             [
