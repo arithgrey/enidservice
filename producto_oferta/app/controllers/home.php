@@ -38,12 +38,16 @@ class Home extends CI_Controller
             $data["ciclos"] = "";            
             $data["id_usuario"] = $id_usuario;
             $data["pixel_facebook"] = 0;
-            $data["img"] = $this->app->imgs_productos($this->id_servicio, 1, 1);                                    
-            
+            $img = $this->app->imgs_productos($this->id_servicio, 1, 1);                                    
+            $data["img"] = $img;                                                
+            $nombre_imagen = pr($img, "nombre_imagen");
+            $data["url_img_post"] = path_imagen_web(get_url_servicio($nombre_imagen, 1));
+
             $titulo_nombre_servicio = html_escape(pr($servicio,"nombre_servicio"));                                                                                                                                                                
             $data["titulo"] = $titulo_nombre_servicio;
             $data["id_servicio"] = $this->id_servicio;            
             $data["footer_visible"] = false;
+            
             $data = $this->app->cssJs($data, "producto_oferta");        
             $this->app->log_acceso($data, 3, $this->id_servicio  );
             $this->app->pagina($data, render_producto_codigo($data), 1);

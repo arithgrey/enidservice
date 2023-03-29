@@ -45,15 +45,15 @@ class Home extends CI_Controller
             $data["id_servicio"] = $this->id_servicio;            
             $data["footer_visible"] = false;
             
-            if (es_data($data["imgs"])) {
-                $nombre_imagen = pr($data["imgs"], "nombre_imagen");
-                $data["url_img_post"] = url_post($nombre_imagen);
-            }
+            
+            $img = $this->app->imgs_productos($this->id_servicio, 1, 1);                                    
+            $nombre_imagen = pr($img, "nombre_imagen");
+            $data["url_img_post"] = path_imagen_web(get_url_servicio($nombre_imagen, 1));
 
             $data = $this->app->cssJs($data, "producto_codigo");        
             $this->app->log_acceso($data, 3, $this->id_servicio  );
             $this->app->pagina($data, render_producto_codigo($data), 1);
-            //$this->app->pagina($data, "cuenta_regresiva/conteo");
+            
 
                      
     

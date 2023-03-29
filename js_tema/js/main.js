@@ -14,32 +14,32 @@ const TELEFONO_MOBILE_LENGTH = 10;
 const MIN_PW_LENGTH = 5;
 
 $("footer").ready(() => {
-       
-    
-    
-    $(".accion_forma_pago").click(function(){        
-        $("#modal_formas_pago").modal("show");        
+
+
+
+    $(".accion_forma_pago").click(function () {
+        $("#modal_formas_pago").modal("show");
     });
 
-    $(".accion_modal_politica_devoluciones").click(function(){        
-        $("#modal_politica_devoluciones").modal("show");        
-    });
-    
-
-    $(".prueba_en_casa").click(function(){        
-        $("#modal_prueba_en_casa").modal("show");        
+    $(".accion_modal_politica_devoluciones").click(function () {
+        $("#modal_politica_devoluciones").modal("show");
     });
 
-    $(".anuncio_negocio_enid_service").click(function(){        
-        $("#modal_anuncio_negocio").modal("show");        
+
+    $(".prueba_en_casa").click(function () {
+        $("#modal_prueba_en_casa").modal("show");
     });
 
-    $(".vende_tu_auto").click(function(){        
-        $("#modal_venta_auto").modal("show");        
+    $(".anuncio_negocio_enid_service").click(function () {
+        $("#modal_anuncio_negocio").modal("show");
     });
 
-    $(".mayoristas_enid").click(function(){        
-        $("#modal_mayoristas").modal("show");        
+    $(".vende_tu_auto").click(function () {
+        $("#modal_venta_auto").modal("show");
+    });
+
+    $(".mayoristas_enid").click(function () {
+        $("#modal_mayoristas").modal("show");
     });
 
     set_option({
@@ -47,14 +47,14 @@ $("footer").ready(() => {
         "is_mobile": get_parameter(".is_mobile"),
         "disparador_buscados": 0,
     });
-    
-    if(parseInt(get_parameter(".in_session")) > 0){
-        $("footer").addClass("d-none"); 
+
+    if (parseInt(get_parameter(".in_session")) > 0) {
+        $("footer").addClass("d-none");
     }
     $("#form_contacto").submit(envia_comentario);
     $(".enid").click(metricas_perfil);
 
-    $(".whatsapp_trigger").click(function (){
+    $(".whatsapp_trigger").click(function () {
         log_operaciones_externas(17);
     });
     $(".click_facebook_clientes").click(function () {
@@ -112,48 +112,48 @@ $("footer").ready(() => {
             verifica_formato_default_inputs(0);
         });
     }
-    
+
     //$('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
     $(".activa_cupon").click(activar_cupon);
     $(".img-zoom").click(zoom_imagen);
-    
+
 });
 
-let zoom_imagen = function(){
-    
+let zoom_imagen = function () {
+
     let $src = $(this).attr('src');
-    $(".img-detalle").attr('src',$src);
-    $("#modal_detalle_imagen").modal("show");        
-    
+    $(".img-detalle").attr('src', $src);
+    $("#modal_detalle_imagen").modal("show");
+
 }
 
 
-let activar_cupon = function(){
-    
+let activar_cupon = function () {
+
     let url = "../q/index.php/api/intento_conversion/cupon/format/json/";
-    let $ip = $(".ip_referer_enid").val();  
-    let data_send = {"ip" : $ip};
+    let $ip = $(".ip_referer_enid").val();
+    let data_send = { "ip": $ip };
     request_enid("PUT", data_send, url, trigger_cupon);
 
 }
-let trigger_cupon = function(data){
+let trigger_cupon = function (data) {
     redirect(path_enid("lista_deseos"));
 }
-let trigger_promocion = function(data){
-    
-    if(data.promocion_10_porciento){
-        
-        $("#modal_intento_conversion").modal("show");        
+let trigger_promocion = function (data) {
+
+    if (data.promocion_10_porciento) {
+
+        $("#modal_intento_conversion").modal("show");
         $(".seccion_modal").addClass("bg_black").removeClass("borde_end");
         $(".cerrar_modal").removeClass("black").addClass("white borde_amarillo");
-        
+
     }
 }
-    
+
 let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
 
-    let $http_referer_enid = $(".http_referer_enid").val();    
-    let $ip = $(".ip_referer_enid").val();    
+    let $http_referer_enid = $(".http_referer_enid").val();
+    let $ip = $(".ip_referer_enid").val();
     let url = "../q/index.php/api/acceso/index/format/json/";
     let data_send = {
         "in_session": get_option("in_session"),
@@ -161,12 +161,12 @@ let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
         "pagina_id": pagina_id,
         "id_servicio": id_servicio,
         "http_referer": $http_referer_enid,
-        "ip" : $ip,
+        "ip": $ip,
     };
 
     request_enid("POST", data_send, url, response_log);
 }
-let response_log = function (data) {}
+let response_log = function (data) { }
 let set_option = (key, value = 0) => {
 
 
@@ -371,7 +371,7 @@ let metricas_perfil = () => {
     if (parseInt(get_option("in_session")) === 1) {
 
         let url = "../q/index.php/api/productividad/notificaciones/format/json/";
-        let data_send = {"id_usuario": get_parameter(".id_usuario")};
+        let data_send = { "id_usuario": get_parameter(".id_usuario") };
         request_enid("GET", data_send, url, response_metricas_perfil);
 
     } else {
@@ -384,12 +384,12 @@ let metricas_perfil = () => {
 };
 let response_deseo_compra = function (data) {
 
-    
-    
-    render_enid('.place_resumen_deseo_compra', _text_(0,"Productos"));
+
+
+    render_enid('.place_resumen_deseo_compra', _text_(0, "Productos"));
     if (parseInt(data) > 0) {
 
-        render_enid('.place_resumen_deseo_compra', _text_(data,"Productos"));
+        render_enid('.place_resumen_deseo_compra', _text_(data, "Productos"));
         $('.icono_compras_pendientes').addClass('borde_amarillo');
         $('.icono_compras_pendientes').attr('href', '../lista_deseos');
 
@@ -405,13 +405,13 @@ let response_metricas_perfil = data => {
     render_enid(".place_notificaciones_usuario", data.lista_pendientes);
     let total_deseo = parseInt(data.lista_deseo);
     if (total_deseo > 0) {
-        
-        render_enid(".place_resumen_deseo_compra", total_deseo);        
-        render_enid(".place_numero_deseo", total_deseo);                    
+
+        render_enid(".place_resumen_deseo_compra", total_deseo);
+        render_enid(".place_numero_deseo", total_deseo);
         $('.numero_deseo').removeClass('d-none');
 
     }
-    
+
     let num_pendientes = data.num_tareas_pendientes_text;
     set_option("num_pendientes", num_pendientes);
     $(document).on('visibilitychange', function () {
@@ -764,9 +764,9 @@ let recorre = contenedor => {
             if ($(contenedor).val() != undefined) {
                 let l = contenedor.length;
                 if (l > 2) {
-                    $('html, body').animate({scrollTop: $(contenedor).offset().top - 100}, 'slow');
+                    $('html, body').animate({ scrollTop: $(contenedor).offset().top - 100 }, 'slow');
                 } else {
-                    $('html, body').animate({scrollTop: $("#flipkart-navbar").offset().top - 100}, 'slow');
+                    $('html, body').animate({ scrollTop: $("#flipkart-navbar").offset().top - 100 }, 'slow');
                 }
             } else {
                 console.log("NO EXISTE -> " + contenedor);
@@ -799,7 +799,7 @@ let show_error_enid = () => {
 
     let url = "../bug/index.php/api/reportes/reporte_sistema/format/json/";
     let URLactual = window.location;
-    let data_send = {"descripcion": mensaje_error};
+    let data_send = { "descripcion": mensaje_error };
     let mensaje = "Se presentó error en " + URLactual + "  URLactual";
     console.log(mensaje);
     request_enid("POST", data_send, url, function () {
@@ -1236,18 +1236,21 @@ let escucha_submmit_selector = function (e, $form, $submit = 0) {
 };
 let es_formato_telefono = function ($input) {
 
-    let len_telefono = $input.val().length;
+    let $telefono = $input.val();
     let tiene_formato = true;
-    let es_foraneo = (len_telefono > 10 && len_telefono < 13);
-    let es_menor = (len_telefono <= MIN_TELEFONO_LENGTH);
-    let es_format_mobile = (len_telefono !== TELEFONO_MOBILE_LENGTH && !es_foraneo);
-    if (es_menor || es_format_mobile) {
+
+    var regexTelefono = /^\+[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/;
+    if (!regexTelefono.test($telefono)) {
 
         $input.next().next().removeClass('d-none');
         tiene_formato = false;
+
     } else {
+
         $input.next().next().addClass('d-none');
     }
+
+
     return tiene_formato;
 };
 let es_formato_cantidad = function ($input) {
@@ -1366,9 +1369,9 @@ let path_enid = (indice, $extra = '') => {
         "entregas": 'entregas',
         "reventa": 'reventa',
         "galeria": '',
-        "servicio": "producto/?producto=" ,
+        "servicio": "producto/?producto=",
         "sorteo": "sorteo/?q=",
-        "pay_request":"area_cliente/?ticket=",
+        "pay_request": "area_cliente/?ticket=",
         "lista_deseos": "lista_deseos",
         "procesar_ubicacion": "procesar_ubicacion/?orden_compra="
 
@@ -1391,22 +1394,22 @@ let ver_menos_notificaciones_ordenes_compra = function () {
 }
 
 let agregar_deseos_sin_antecedente_gbl_btn = function (id_servicio) {
-    
-    
+
+
     $(".cargando").removeClass("d-none");
-    let cantidad = get_valor_selected(".select_cantidad");                 
-    if(parseInt(id_servicio) > 0 && parseInt(cantidad) > 0 ){
-        
-        let data_send = { "id_servicio": id_servicio, "articulos": cantidad };        
+    let cantidad = get_valor_selected(".select_cantidad");
+    if (parseInt(id_servicio) > 0 && parseInt(cantidad) > 0) {
+
+        let data_send = { "id_servicio": id_servicio, "articulos": cantidad };
         if (parseInt(get_option("in_session")) > 0) {
 
-                let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
-                request_enid("PUT", data_send, url, adicionales_gbl);
+            let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
+            request_enid("PUT", data_send, url, adicionales_gbl);
 
         } else {
 
-                let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
-                request_enid("POST", data_send, url, adicionales_gbl);
+            let url = "../q/index.php/api/usuario_deseo_compra/index/format/json/";
+            request_enid("POST", data_send, url, adicionales_gbl);
         }
     }
 }
@@ -1421,7 +1424,7 @@ let agregar_deseos_sin_antecedente_gbl = function () {
     if (parseInt($id_servicio) > 0) {
         advierte('Agregado a tu lista de deseos!', 1);
         let data_send = { "id_servicio": $id_servicio, "articulos": 1 };
-                
+
         if (parseInt(get_option("in_session")) > 0) {
 
             let url = "../q/index.php/api/usuario_deseo/lista_deseos/format/json/";
@@ -1438,19 +1441,19 @@ let agregar_deseos_sin_antecedente_gbl = function () {
     }
 }
 let quitar_deseo_sin_antecedente_gbl = function () {
-    
-    
+
+
     let $id_servicio = $(this).attr('id');
     $(_text(".por_agregar_", $id_servicio)).removeClass("d-none");
-    $(_text(".agregado_", $id_servicio)).addClass("d-none");    
+    $(_text(".agregado_", $id_servicio)).addClass("d-none");
 
     if (parseInt($id_servicio) > 0) {
         advierte('Lo sacamos de tu lista de deseos!', 1);
-        let data_send = { "id_servicio": $id_servicio, "servicio" : $id_servicio};
+        let data_send = { "id_servicio": $id_servicio, "servicio": $id_servicio };
         if (parseInt(get_option("in_session")) > 0) {
 
-            /*En session*/            
-            let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";            
+            /*En session*/
+            let url = "../q/index.php/api/usuario_deseo/servicio/format/json/";
             request_enid("DELETE", data_send, url, adicionales_gbl);
 
 
@@ -1463,48 +1466,48 @@ let quitar_deseo_sin_antecedente_gbl = function () {
     }
 }
 let adicionales_gbl = function () {
-    metricas_perfil();    
+    metricas_perfil();
     let $en_lista_deseos_producto = $(".en_lista_deseos_producto").val();
-    if(parseInt($en_lista_deseos_producto) > 0 ){
-        
+    if (parseInt($en_lista_deseos_producto) > 0) {
+
         redirect(path_enid("lista_deseos"));
 
-    }   
+    }
 }
 
-function evalua_promocion_modal(){
-       
-    let $ip = $(".ip_referer_enid").val();    
+function evalua_promocion_modal() {
+
+    let $ip = $(".ip_referer_enid").val();
     let url = "../q/index.php/api/intento_conversion/id_cupon/format/json/";
-    let data_send = {"ip" : $ip};
+    let data_send = { "ip": $ip };
 
     request_enid("GET", data_send, url, trigger_promocion);
 }
 let busqueda_carro_agregado_s = function () {
- 
-    let data_send = {"id_usuario": get_parameter(".id_usuario")};     
+
+    let data_send = { "id_usuario": get_parameter(".id_usuario") };
     let url = "../q/index.php/api/lista_deseo/explora_deseo_s/format/json/";
-    
+
 
     request_enid("GET", data_send, url, deseo_modal);
 
 }
 let busqueda_carro_agregado = function () {
- 
-    let $ip = $(".ip_referer_enid").val();    
+
+    let $ip = $(".ip_referer_enid").val();
     let url = "../q/index.php/api/lista_deseo/explora_deseo/format/json/";
-    let data_send = {"ip" : $ip};
+    let data_send = { "ip": $ip };
 
     request_enid("GET", data_send, url, deseo_modal);
 
 }
 
 let deseo_modal = function (data) {
-    
-    cerrar_modal();    
+
+    cerrar_modal();
     $("#modal_agregado_carro_compra").modal("show");
-    render_enid(".place_desglose_carro_compra", data);   
-    $(".sigue_comprando_trigger").click(function(){
+    render_enid(".place_desglose_carro_compra", data);
+    $(".sigue_comprando_trigger").click(function () {
         $("#modal_agregado_carro_compra").modal("hide");
     });
 }

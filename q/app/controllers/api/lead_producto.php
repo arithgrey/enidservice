@@ -64,26 +64,31 @@ class lead_producto extends REST_Controller
     }
     private function format_table($leads)
     {
+        $fecha = horario_enid();        
+        $hoy = $fecha->format('Y-m-d');
 
         $this->table->set_template(template_table_enid());
         $this->table->set_heading([
-            d('ID'),
-            d('EMAIL'),
-            d('SECRET'),
-            d('Fecha registro'),
+            d('#Días'),
+            d('Email'),
+            d('Secret'),
+            d('Registro'),
             d('Nobre'),
             d('Teléfono'),
-            d("ubicacion")
+            d("ubicación")
 
         ]);
 
         foreach ($leads as $row) {
 
+            $fecha_registro = $row["fecha_registro"];
+            $dias = date_difference($hoy, $fecha_registro);
+            
             $this->table->add_row([
-                $row["id"],
+                $dias,
                 $row["email"],
                 $row["ttr"],
-                format_fecha($row["fecha_registro"], 1),
+                format_fecha($fecha_registro, 1),
                 $row["nombre"],
                 $row["telefono"],
                 $row["ubicacion"],
