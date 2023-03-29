@@ -457,12 +457,12 @@ if (!function_exists('invierte_date_time')) {
         $id_servicio = $data["id_servicio"];
 
         $resumen_orden_compra = resumen_orden($data);
-        
-            $z[] = $resumen_orden_compra;
-        
+
+        $z[] = $resumen_orden_compra;
+
         $z[] = seguimiento($data);
-       
-        $r[] = d($z,'row border_bottom_big mb-5 mt-5 border_bottom_big_compra');
+
+        $r[] = d($z, 'row border_bottom_big mb-5 mt-5 border_bottom_big_compra');
 
         $otros_articulis_titulo = _titulo('Aquí te dejamos más cosas que te podrían interesar!', 2);
         $r[] = d($otros_articulis_titulo, 'mt-5 d-none sugerencias_titulo col-sm-12 row');
@@ -506,7 +506,7 @@ if (!function_exists('invierte_date_time')) {
 
 
 
-        $response[] = d($r,10,1);
+        $response[] = d($r, 10, 1);
         $response[] = modal_opciones_cancelacion($data, $params);
         $response[] = modal_ingreso_cancelacion($data, $params);
         return append($response);
@@ -616,7 +616,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => es_administrador_o_vendedor($data)
         ]);
 
-        $r[] = d(span("¿Dónde se encuentra tu pedido?","borde_green p-2 display-6 white bg_black"),'mt-5');
+        $r[] = d(span("¿Dónde se encuentra tu pedido?", "borde_green p-2 display-6 white bg_black"), 'mt-5');
         $tiempo = tiempo($data, $es_vendedor);
         $r[] = d($tiempo, "timeline mt-5", 1);
 
@@ -765,7 +765,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response = [];
         $pago = ($saldo_cubierto > 0);
-        
+
         if (!$pago) {
 
             $path = path_enid("area_cliente_compras", $id_recibo);
@@ -805,7 +805,7 @@ if (!function_exists('invierte_date_time')) {
 
         $text_domicilio = pago_en_cita($data);
         $productos_orden_compra = $data["productos_orden_compra"];
-        
+
         if (pr($productos_orden_compra, 'ubicacion') < 1) {
             if (es_data($domicilios)) {
 
@@ -922,7 +922,7 @@ if (!function_exists('invierte_date_time')) {
 
 
     function pago_en_cita($data)
-    {   
+    {
         $delivery = intval(prm_def($_GET, "delivery"));
 
         $productos_orden_compra = $data["productos_orden_compra"];
@@ -962,7 +962,7 @@ if (!function_exists('invierte_date_time')) {
         $deuda = total_pago_pendiente($productos_orden_compra, $recompensa);
         $descuento_aplicado = $deuda["descuento_aplicado"];
         $descuento_subtotal = ($deuda["subtotal"] - $descuento_aplicado);
-        
+
         $text_pago = _text_($text_entrega, money($descuento_subtotal));
         $pago_pendiente = _text_(_titulo($text_pago), $pago_efectivo, $boton_cancelar, $boton_garantia);
 
@@ -1650,7 +1650,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $response[] = d($link, 'row mb-3');
             }
-            $path_tracker = path_enid('pedido_seguimiento', _text($id_orden_compra,'&delivery=1'));
+            $path_tracker = path_enid('pedido_seguimiento', _text($id_orden_compra, '&delivery=1'));
             $link = format_link("Rastrear pedido", ['href' => $path_tracker]);
             $response[] = d($link, 'row mb-3');
         }
@@ -1824,12 +1824,12 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $response[] = form_close();
-        return d($response,12);
+        return d($response, 12);
     }
     function get_form_busqueda_pedidos($data, $param)
     {
 
-        $z[] = d(form_busqueda_ordenes_compra($param, $data),13);
+        $z[] = d(form_busqueda_ordenes_compra($param, $data), 13);
         $z[] = place("place_pedidos ");
         $z[] = frm_busqueda();
 
@@ -1871,13 +1871,18 @@ if (!function_exists('invierte_date_time')) {
 
         $contenido_carros_compras = carros_compras();
         $secciones_tabs[] = tab_seccion($contenido_carros_compras, 'carros_compras');
-        
+
         $contenido_carros_compras_vendedores = carros_compras_vendedores();
         $secciones_tabs[] = tab_seccion($contenido_carros_compras_vendedores, 'carros_compras_vendedores');
 
         $alcaldias_prospectos = alcaldias_prospectos();
         $secciones_tabs[] = tab_seccion($alcaldias_prospectos, 'alcaldias_prospectos');
 
+        $usuarios = usuarios();
+        $secciones_tabs[] = tab_seccion($usuarios, 'usuarios_periodo');
+
+        $usuarios_ultima_oportunidad = usuarios_ultima();
+        $secciones_tabs[] = tab_seccion($usuarios_ultima_oportunidad, 'usuarios_ultima_oportunidad');
 
 
         $menu_pedidos = tab(
@@ -1933,7 +1938,9 @@ if (!function_exists('invierte_date_time')) {
             acceso_menu_promocion($data),
             acceso_menu_metricas_catalogo_movimiento($data),
             $menu_pendientes,
-            alcaldias_prospectos_menu($data)
+            alcaldias_prospectos_menu($data),
+            usuarios_menu($data),
+            usuarios_ultima_oportunidad($data),
 
         ]);
 
@@ -1999,9 +2006,8 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-2 ventas_en_carros mt-3'
             ]
         );
-        
     }
-    
+
     function acceso_carros_de_compras_vendedores($data)
     {
 
@@ -2077,7 +2083,8 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
-    function alcaldias_prospectos_menu($data){
+    function alcaldias_prospectos_menu($data)
+    {
 
         if (!es_administrador_o_vendedor($data)) {
             return "";
@@ -2089,8 +2096,38 @@ if (!function_exists('invierte_date_time')) {
                 'class' => ' mt-4 busqueda_alcaldias_prospectos'
             ]
         );
-
     }
+    function usuarios_menu($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon("fa fa-space-shuttle", 'Usuarios por periodo'),
+            '#usuarios_periodo',
+            [
+                'class' => ' mt-4 busqueda_usuarios_periodo'
+            ]
+        );
+    }
+
+    function usuarios_ultima_oportunidad($data)
+    {
+
+        if (!es_administrador_o_vendedor($data)) {
+            return "";
+        }
+        return tab(
+            text_icon("fa fa-space-shuttle", 'Usuarios última promoción'),
+            '#usuarios_ultima_oportunidad',
+            [
+                'class' => ' mt-4 busqueda_usuarios_ultima_oportunidad'
+            ]
+        );
+    }
+
+
     function acceso_menu_metricas_catalogo_movimiento($data)
     {
         if (!es_administrador_o_vendedor($data)) {
@@ -2176,29 +2213,52 @@ if (!function_exists('invierte_date_time')) {
     function carros_compras()
     {
 
-        $response[] = _titulo('En carros de compras usuarios sin registro', 4); 
-        $response[] = d(place("place_en_carros_de_compras"),12);
-        
-        return d($response);
-    }
-    function carros_compras_vendedores(){
-        
-        $response[] = _titulo('En carros de compras Vendedores', 4); 
-        $response[] = d(place("place_en_carros_de_compras_vendedores"),12);        
-        return d($response);
+        $response[] = _titulo('En carros de compras usuarios sin registro', 4);
+        $response[] = d(place("place_en_carros_de_compras"), 12);
 
+        return d($response);
     }
-    function alcaldias_prospectos(){
-        
-        $response[] = _titulo('Alcaldías por prospectos', 4); 
+    function carros_compras_vendedores()
+    {
+
+        $response[] = _titulo('En carros de compras Vendedores', 4);
+        $response[] = d(place("place_en_carros_de_compras_vendedores"), 12);
+        return d($response);
+    }
+    function alcaldias_prospectos()
+    {
+
+        $response[] = _titulo('Alcaldías por prospectos', 4);
         $response[] = form_open("", ["class" => "form_alcaldias_prospectos"]);
         $response[] =  frm_fecha_busqueda();
         $response[] =  form_close();
         $response[] = place("place_alcaldias_prospectos");
 
         return d($response);
+    }
 
-    }    
+    function usuarios_ultima()
+    {
+
+        $response[] = _titulo('Usuarios por periodo (última oportunidad)', 4);
+        $response[] = form_open("", ["class" => "form_usuarios_ultima"]);
+        $response[] =  frm_fecha_busqueda();
+        $response[] =  form_close();
+        $response[] = place("place_usuarios");
+
+        return d($response);
+    }
+    function usuarios()
+    {
+
+        $response[] = _titulo('Usuarios por periodo', 4);
+        $response[] = form_open("", ["class" => "form_usuarios"]);
+        $response[] =  frm_fecha_busqueda();
+        $response[] =  form_close();
+        $response[] = place("place_usuarios");
+
+        return d($response);
+    }
     function total_comision($ids_usuario, $ordenes)
     {
         $totales = [];
@@ -2392,7 +2452,7 @@ if (!function_exists('invierte_date_time')) {
                         append($contenido),
                         [
                             'class' => 'd-flex align-items-center  text-center border black',
-                            'href' => $path,                            
+                            'href' => $path,
                         ]
                     ),
                     _text_('linea_venta', $tag_usuario)
@@ -2680,7 +2740,7 @@ if (!function_exists('invierte_date_time')) {
                 $restricciones
             ),
             "flex-column col-md-4 p-0 mt-3"
-        ),$visibilidad);
+        ), $visibilidad);
 
 
         $busqueda_orden = create_select_selected($fechas, 'val', 'fecha', 5, 'tipo_orden', 'tipo_orden form-control');
@@ -2688,7 +2748,7 @@ if (!function_exists('invierte_date_time')) {
             "Ordenar",
             $busqueda_orden,
             "flex-column col-md-4 p-0 mt-3"
-        ),$visibilidad);
+        ), $visibilidad);
 
 
         return append($r);
@@ -3602,10 +3662,10 @@ if (!function_exists('invierte_date_time')) {
         ];
 
 
-        $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO",["class" => "black"]);
+        $entrega = text_icon(_check_icon, "DOMICILIO DE ENTREGA CONFIRMADO", ["class" => "black"]);
         if (tiene_domilio($domicilio, 1) < 1) {
-            
-            $id_tipo_entrega = $tipo_entrega - 1;            
+
+            $id_tipo_entrega = $tipo_entrega - 1;
             $entrega = format_link($tipos_entrega[$id_tipo_entrega], ['href' => $url]);
         }
 
@@ -4189,7 +4249,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d(phoneFormat($telefonono), 'mt-3');
 
             $facebook = $row["facebook"];
-            if (str_len($facebook , 10)) {
+            if (str_len($facebook, 10)) {
 
                 $link = a_enid(
                     "Facebook",

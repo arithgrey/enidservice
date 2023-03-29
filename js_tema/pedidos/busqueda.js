@@ -14,8 +14,6 @@ let $modal_pago_comisiones = $('#modal_pago_comisiones');
 let $modal_envio_catalogo = $('#modal_envio_catalogo');
 let $modal_envio_promocion = $('#modal_envio_promocion');
 
-
-
 let $usuario_pago = $('.usuario_pago');
 let $fecha_inicio = $form_pago_comisiones.find('.fecha_inicio');
 let $fecha_termino = $form_pago_comisiones.find('.fecha_termino');
@@ -40,6 +38,13 @@ let $ids_pagos = $('.ids_pagos');
 let $ventas_en_carros = $(".en_carros_de_compras");
 let $ventas_en_carros_vendedores = $(".en_carros_de_compras_vendedores");
 
+let $form_usuarios = $(".form_usuarios");
+let $busqueda_usuarios_periodo = $(".busqueda_usuarios_periodo");
+
+
+let $form_usuarios_ultima = $(".form_usuarios_ultima");
+let $busqueda_usuarios_ultima_oportunidad = $(".busqueda_usuarios_ultima_oportunidad");
+
 
 
 let $fecha_venta_efectiva = $(".fecha_venta_efectiva");
@@ -49,7 +54,7 @@ $(document).ready(() => {
     $('footer').ready(function () {
         valida_busqueda_inicial();
     });
-
+    set_option("page", 0);
     $form_busqueda.submit(busqueda_pedidos);
     $form_pago_comisiones.submit(registro_pago);
     $('.usuario_venta_pago').click(busqueda_pago_pendiente);
@@ -72,6 +77,17 @@ $(document).ready(() => {
     $busqueda_ventas_en_proceso.click();
     $busqueda_ventas_en_proceso_clientes.click();
     $form_alcaldias.submit();
+    $form_usuarios.submit(busqueda_usarios_tiempo);
+    $busqueda_usuarios_periodo.click(function(){
+        $form_usuarios.submit();
+    });
+
+
+    $form_usuarios_ultima.submit(busqueda_usarios_tiempo_ultima_oportunidad);
+    $busqueda_usuarios_ultima_oportunidad.click(function(){
+        $form_usuarios_ultima.submit();
+    });
+
 
 });
 
@@ -103,20 +119,20 @@ let response_personas_registradas_carrito = function (data) {
 let response_personas_carrito_vendedores = function (data) {
 
     render_enid(".place_en_carros_de_compras_vendedores", data);
-    
+
 };
 
-let cancela_productos_deseados_carro_compras = function(e) {
+let cancela_productos_deseados_carro_compras = function (e) {
 
     let $id = e.target.id;
     if (parseInt($id) > 0) {
         let url = "../q/index.php/api/usuario_deseo_compra/ip/format/json/";
         let data_send = { "ip": $id, "status": 2 };
-        request_enid("PUT", data_send, url, function(){
+        request_enid("PUT", data_send, url, function () {
             let data_send = $.param({});
             let url = "../q/index.php/api/usuario_deseo_compra/agregados/format/json/";
             request_enid("GET", data_send, url, response_personas_registradas_carrito);
-        
+
         });
     }
 
@@ -239,6 +255,61 @@ let busqueda_metricas_alcaldias = function (e) {
 
     e.preventDefault();
 }
+let busqueda_usarios_tiempo = function (e) {
+    
+    recorre(".navegacion_principal");   
+
+    let fecha_inicio = get_parameter(".form_usuarios #datetimepicker4");
+    let fecha_termino = get_parameter(".form_usuarios #datetimepicker5");
+
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_usuarios.serialize() + "&" + $.param({ "page": get_option("page") });
+        let url = "../q/index.php/api/usuario/usuarios/format/json/";
+        request_enid("GET", data_send, url, response_usuarios_tiempo);
+
+    }
+
+    e.preventDefault();
+}
+
+let busqueda_usarios_tiempo_ultima_oportunidad = function (e) {
+    
+    recorre(".navegacion_principal");   
+
+    let fecha_inicio = get_parameter(".form_usuarios_ultima #datetimepicker4");
+    let fecha_termino = get_parameter(".form_usuarios_ultima #datetimepicker5");
+
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
+
+        let data_send = $form_usuarios_ultima.serialize();
+        let url = "../q/index.php/api/lead_producto/periodo/format/json/";
+        request_enid("GET", data_send, url, response_usuarios_tiempo);
+
+    }
+
+    e.preventDefault();
+}
+
+
+
+let response_usuarios_tiempo = function (data) {
+
+    render_enid(".place_usuarios", data);
+    $(".pagination > li > a, .pagination > li > span").css("color", "white");
+    $(".pagination > li > a, .pagination > li > span").click(function (e) {
+        let page_html = $(this);
+        let num_paginacion = $(page_html).attr("data-ci-pagination-page");
+        if (validar_si_numero(num_paginacion) == true) {
+            set_option("page", num_paginacion);
+        } else {
+            num_paginacion = $(this).text();
+            set_option("page", num_paginacion);
+        }
+        resumen_usuarios();
+        e.preventDefault();
+    });
+};
 
 let response_lead_franja_horaria = function (data) {
 
@@ -367,7 +438,7 @@ let response_pedidos = function (data) {
 };
 let valida_busqueda_inicial = function () {
 
-    
+
     if (parseInt($ids.val()) > 0 && $usurios.val().length > 0 || parseInt($buscar_ordenes_compra.val()) > 0) {
 
         $form_busqueda.submit();
