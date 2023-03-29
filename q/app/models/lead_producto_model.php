@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 
 class lead_producto_model extends CI_Model
 {
@@ -60,6 +60,17 @@ class lead_producto_model extends CI_Model
             $this->db->where($key, $value);
         }
         return $this->db->delete($this->tabla, $params_where);
-    }    
+    }
+    function periodo($fecha_inicio, $fecha_termino)
+    {
 
+        $query_get = "SELECT l.* , l.password ttr FROM lead_producto l
+                    WHERE 
+                    DATE(fecha_registro) 
+                    BETWEEN '" . $fecha_inicio . "' 
+                    AND  
+                    '" . $fecha_termino . "' ORDER BY id DESC";
+
+        return $this->db->query($query_get)->result_array();
+    }
 }
