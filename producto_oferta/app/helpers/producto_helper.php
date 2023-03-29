@@ -253,7 +253,8 @@ if (!function_exists('invierte_date_time')) {
                 "name" => 'telefono',
                 "id" => "telefono",
                 "placeholder" => "Teléfono",
-                "class" => "telefono_registro input-field mh_50 border border-dark  solid_bottom_hover_3 form-control"
+                "class" => "telefono_registro 
+                input-field mh_50 border border-dark  solid_bottom_hover_3 form-control"
 
             ],
             _text_correo
@@ -267,11 +268,11 @@ if (!function_exists('invierte_date_time')) {
         $form[] = btn("Solicitar entrega", ["class" => "mt-5 accion_continuar_registro_ubicacion"]);
         $form[] = form_close();
 
-        $form[] = d(format_link("Listo enviarémos tu kit a la brevedad!",
+        $form[] = d(d(format_link("Listo enviarémos tu kit a la brevedad!",
         [
             "href" => path_enid("kist-mas-vendidos"),
             
-        ]),"envio d-none");
+        ]),"envio row d-none"),12);
         return gb_modal(append($form), 'lead_modal');
     }
 }

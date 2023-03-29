@@ -13,7 +13,6 @@ let $accion_continuar_registro_ubicacion = $(".accion_continuar_registro_ubicaci
 let $direccion_registro = $form_ubicacion.find('.direccion_registro');
 let $telefono_registro = $form_ubicacion.find('.telefono_registro');
 
-
 $(document).ready(function () {
 
     $(".quiero_oferta").click(quiero_oferta);
@@ -41,10 +40,9 @@ $(document).ready(function () {
 
     $registro_email.keypress(function (e) {
         if (e.which == 13) {
-            let len = $(this).val();
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(len)) {
-
+            let email = $(this).val();                        
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;  
+            if (!emailRegex.test(email)) {
                 $(".place_input_form_correo").removeClass("d-none");
 
             } else {
@@ -56,45 +54,44 @@ $(document).ready(function () {
         }
     });
 
-
-
     $registro_pw.keypress(function (e) {
         if (e.which == 13) {
             let len = $(this).val();
 
             if (len.length > 7) {
-
                 $(".place_input_form_password").addClass("d-none");
+
             } else {
+
                 $(".place_input_form_password").removeClass("d-none");
             }
         }
     });
 
-
-
     $direccion_registro.keypress(function (e) {
         if (e.which == 13) {
-            let len = $(this).val();
 
-            if (len.length > 3) {
-
-                $(".place_input_form_ubicacion").addClass("d-none");
-            } else {
+            let direccion = $(this).val();
+            if (!/^[a-zA-Z0-9\s,'-]*$/.test(direccion)) {
                 $(".place_input_form_ubicacion").removeClass("d-none");
+            } else {
+                $(".place_input_form_ubicacion").addClass("d-none");
             }
+
         }
     });
-    
+
     $telefono_registro.keypress(function (e) {
         if (e.which == 13) {
-            let len = $(this).val();
-
-            if (len.length > 3) {
+            let telefono = $(this).val();
+            var regexTelefono = /^\+[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/;
+            if (!regexTelefono.test(telefono)) {
 
                 $(".place_input_form_telefono").addClass("d-none");
             } else {
+
                 $(".place_input_form_telefono").removeClass("d-none");
+                $form_ubicacion.submit();
             }
         }
     });
@@ -102,7 +99,7 @@ $(document).ready(function () {
 
     $accion_continuar_registro.click(registro_validacion);
     $accion_continuar_registro_ubicacion.click(registro_validacion_ubicacion);
-    
+
 
 });
 
@@ -140,7 +137,7 @@ let registro_validacion_ubicacion = (e) => {
 
     $direccion_registro.trigger(jQuery.Event("keypress", { which: 13 }));
     $telefono_registro.trigger(jQuery.Event("keypress", { which: 13 }));
-    
+
 
 }
 let registro_lead = (e) => {
@@ -191,7 +188,7 @@ let response_registro_lead_ubicacion = function (data) {
     $(".paso_3").addClass("bg_black").removeClass("bg_gray");
     $(".input_telefono").addClass("d-none");
     $(".input_direccion").addClass("d-none");
-    $accion_continuar_registro_ubicacion.addClass("d-none");   
+    $accion_continuar_registro_ubicacion.addClass("d-none");
     $(".envio").removeClass("d-none");
-    
+
 }
