@@ -283,19 +283,10 @@ if (!function_exists('invierte_date_time')) {
         $subtotal = 0;
         $total_articulo = 0;
         $inputs = [];
-        $es_premium = 0;
-
-
-
-        if (array_key_exists("usuario", $data)) {
-
-            $usuario = $data["usuario"];
-            $es_premium = es_premium($data, $usuario);
-        }
 
         $total_descuento = 0;
-
-        $es_sorteo = 0;
+        $total_precio_alto = 0;
+        
         foreach ($productos_deseados as $row) {
 
             $descuento_especial = $row["descuento_especial"];
@@ -307,10 +298,10 @@ if (!function_exists('invierte_date_time')) {
             $id = $row["id"];
             $total_descuento_articulo = ($descuento_especial * $articulos);
             $total_descuento = ($total_descuento + $total_descuento_articulo);
-
-            if ($row["numero_boleto"] > 0) {
-                $es_sorteo++;
-            }
+            
+        
+            $precio_alto = ($row["precio_alto"] > $precios ) ?  $row["precio_alto"] : ($precios + porcentaje($precios,16));
+            $total_precio_alto = $total_precio_alto + $precio_alto;
             $config =
                 [
                     "name" => "producto_carro_compra[]",
@@ -321,25 +312,14 @@ if (!function_exists('invierte_date_time')) {
             $inputs[] = hiddens($config);
         }
 
-        $extra = is_mobile() ? 'white' : 'black';
-        //$response[] = _titulo(_text_("Subtotal ", _text('(', $total_articulo, 'productos)')), 5,_text_('fp9', $extra));
+        $extra = is_mobile() ? 'white' : 'black';        
+        
 
-        $total_en_descuento = descuento_recompensa($data);
-
-        if ($es_premium && $total_en_descuento < 1) {
-
-            $total_menos_descuento = ($subtotal - $total_descuento);
-            $response[] = d(_text_(del(money($subtotal)), "Total"), "mt-4 text-muted");
-            $response[] = d(_text_("-", money($total_descuento), "Descuento premium"), "text-muted");
-            $response[] = d(money($total_menos_descuento), _text_($extra, "display-4"));
-        } else {
-
-            $response = formato_subtotal($data, $subtotal);
-        }
-
+        $response = formato_subtotal($data, $total_precio_alto ,$subtotal);
+    
         $inputs_recompensa = valida_envio_descuento($data);
 
-        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal, $es_sorteo);
+        $response[] = form_procesar_carro_compras($data, $inputs, $inputs_recompensa,  $subtotal);
 
 
         if (es_administrador_o_vendedor($data)) {
@@ -399,10 +379,11 @@ if (!function_exists('invierte_date_time')) {
 
         return $inputs;
     }
-    function formato_subtotal($data, $subtotal)
+    function formato_subtotal($data, $total_precio_alto  ,$subtotal)
     {
         $response = [];
         $total_en_descuento = descuento_recompensa($data);
+        
         $extra = is_mobile() ? 'white' : 'black';
         if ($total_en_descuento > 0) {
 
@@ -410,53 +391,14 @@ if (!function_exists('invierte_date_time')) {
             $response[] =  d(del(money($subtotal), "display-6 red_enid"));
             $response[] =  d(money($nuevo_total), _text_("display-6", $extra));
         } else {
-
-
+            
+            $extra = is_mobile() ? 'white' : 're_enid';
+            $response[] =  d(del(money($total_precio_alto), _text_($extra,"display-7")),'ml-3');
             $text = d(money($subtotal), _text_("display-5 strong ml-3", $extra));            
             $extra  = is_mobile() ? 'white' : '';
-            
-
-
-
-            $precio_descuento_conversion = $subtotal;
-            $precio_descuento_conversion = d( 
-            flex(
-                money($precio_descuento_conversion), 
-                money($subtotal - 150),  
-                "",
-                "precio_final",
-                "precio_final_descuento_especial d-none"
-                )  ,
-            [ 
-                "class " => _text_("precio_especial display-5 strong ml-3", $extra),
-                "id" => $precio_descuento_conversion
-                
-            ]);
-            
-            $precios_intento_conversion = flex(
-                del(money($subtotal)),
-                $precio_descuento_conversion,
-                'flex-column',
-                _text_($extra, 'ml-3')
-            );
-
-            $response[] =  d(
-                flex(
-                    $precios_intento_conversion,
-                    'Pagarás al recibir tu pedido',
-                    'flex-column mb-2 mt-2',
-                    '',
-                    _text_($extra, 'ml-3')
-                ),
-                'total_con_descuento_conversion d-none'
-            );
-                        
+           
             $response[] =  d(flex($text, 'Pagarás al recibir tu pedido', 'flex-column mb-2 mt-2', '', _text_($extra, 'ml-3')), 'precio_final');
-
-
-
             $text_descuento = d(money( $subtotal - 150), _text_("display-5 strong ml-3", $extra));            
-
             $response[] =  d(flex($text_descuento, 'Pagarás al recibir tu pedido', 'flex-column mb-2 mt-2', '', _text_($extra, 'ml-3')), 'precio_final_descuento_especial d-none');
         }
 
@@ -469,7 +411,7 @@ if (!function_exists('invierte_date_time')) {
         $descuentos = array_column($recompensas, "descuento");
         return array_sum($descuentos);
     }
-    function form_envio_pago_cliente($data, $inputs, $inputs_recompensa, $subtotal, $es_sorteo)
+    function form_envio_pago_cliente($data, $inputs, $inputs_recompensa, $subtotal)
     {
 
         $es_administrador_o_vendedor = es_administrador_o_vendedor($data);
@@ -495,7 +437,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = hiddens(["class" => "carro_compras_total", "value" => $subtotal]);
         $response[] = hiddens(["class" => "carro_compras", "name" => "es_carro_compras", "value" => 1]);
-        $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
+        $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => 0]);
 
         $boton_agendar_pedido = btn(
             _text_(icon('fa fa-space-shuttle white'), "Continuar"),
@@ -519,7 +461,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = form_close();
         return d($response);
     }
-    function form_envio_pago_segunda_compra($inputs, $inputs_recompensa, $subtotal, $data, $es_sorteo)
+    function form_envio_pago_segunda_compra($inputs, $inputs_recompensa, $subtotal, $data)
     {
         $response[] = '<form class="form_segunda_compra" action="" method="POST">';
         $response[] = append($inputs);
@@ -534,7 +476,7 @@ if (!function_exists('invierte_date_time')) {
             "value" => $data["id_usuario"]
         ]);
         $response[] = hiddens(["class" => "id_usuario", "name" => "id_usuario", "value" => $data["id_usuario"]]);
-        $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => $es_sorteo]);
+        $response[] = hiddens(["class" => "es_sorteo", "name" => "es_sorteo", "value" => 0]);
 
 
         $response[] = d(btn("Enviar orden", ["class" => "mt-5 pb-3 p-2 strong col 
@@ -543,7 +485,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = form_close();
         return d($response, 'mb-5');
     }
-    function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal, $es_sorteo)
+    function form_procesar_carro_compras($data, $inputs, $inputs_recompensa, $subtotal)
     {
 
 
@@ -555,8 +497,7 @@ if (!function_exists('invierte_date_time')) {
                 $data,
                 $inputs,
                 $inputs_recompensa,
-                $subtotal,
-                $es_sorteo
+                $subtotal
             );
         } else {
 
@@ -564,8 +505,8 @@ if (!function_exists('invierte_date_time')) {
                 $inputs,
                 $inputs_recompensa,
                 $subtotal,
-                $data,
-                $es_sorteo
+                $data
+                
             );
         }
     }
@@ -662,7 +603,8 @@ if (!function_exists('invierte_date_time')) {
             $id = ($externo > 0) ? $row["id_usuario_deseo_compra"] : $row["id"];
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
-            $precio_alto = $row["precio_alto"];
+            $precio_alto = ($row["precio_alto"] > $precio ) ?  $row["precio_alto"] : ($precio + porcentaje($precio,16));
+        
             $articulos = $row["articulos"];
             $numero_boleto = $row["numero_boleto"];
 

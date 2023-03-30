@@ -250,10 +250,12 @@ let response_carga_productos = (data) => redirect("");
 
 let evalua_compra_descuento_aplicado = function(){
     const descuento_provicional = localStorage.getItem('descuento_provicional');
+    
+    //localStorage.removeItem("descuento_provicional");
     if(descuento_provicional !== null){ 
-        
+            
         $(".precio_final").addClass("d-none");
         $(".precio_final_descuento_especial").removeClass("d-none");        
-    }
 
+    }
 }

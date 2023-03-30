@@ -53,7 +53,8 @@
  function formato_producto($es_recompensa, $servicio)
     {
         $precio = $servicio["precio"];
-        $precio_alto = $servicio["precio_alto"];
+        
+        $precio_alto = ($servicio["precio_alto"] > $precio ) ?  $servicio["precio_alto"] : ($servicio["precio"] + porcentaje($servicio["precio"],16));
 
         $id_servicio = $servicio["id_servicio"];
         $es_sorteo = $servicio["es_sorteo"];

@@ -404,7 +404,8 @@ let response_metricas_perfil = data => {
     let total_deseo = parseInt(data.lista_deseo);
     if (total_deseo > 0) {
 
-        render_enid(".place_resumen_deseo_compra", total_deseo);
+        
+        render_enid('.place_resumen_deseo_compra', _text_(total_deseo, "Productos"));        
         render_enid(".place_numero_deseo", total_deseo);
         $('.numero_deseo').removeClass('d-none');
 
