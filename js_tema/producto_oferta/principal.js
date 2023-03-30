@@ -58,7 +58,7 @@ $(document).ready(function () {
         if (e.which == 13) {
             let len = $(this).val();
 
-            if (len.length > 7) {
+            if (len.length > 3) {
                 $(".place_input_form_password").addClass("d-none");
 
             } else {
@@ -91,7 +91,7 @@ $(document).ready(function () {
             } else {
 
                 $(".place_input_form_telefono").removeClass("d-none");
-                $form_ubicacion.submit();
+                
             }
         }
     });
