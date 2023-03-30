@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
 
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
-            $precio_alto = $row["precio_alto"];
+            $precio_alto = ($row["precio_alto"] > $precio ) ?  $row["precio_alto"] : ($precio + porcentaje($precio,16));
             $articulos = 1;
 
             $r = [];

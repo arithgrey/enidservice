@@ -1105,7 +1105,8 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["info_servicio"]["servicio"];
         $descuento_especial = pr($servicio, "descuento_especial");
-        $precio_alto = pr($servicio, "precio_alto");
+        $precio_alto = pr($servicio, "precio_alto");    
+        $precio_alto = ($precio_alto > $precio_unidad ) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad,16));
 
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);

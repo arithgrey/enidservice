@@ -1548,6 +1548,9 @@ if (!function_exists('invierte_date_time')) {
     function create_colores_disponibles($text_colores)
     {
 
+        if(!str_len($text_colores,0)){
+            return "";
+        }
         $arr_colores = explode(",", $text_colores);
         $r = [];
         for ($a = 0; $a < count($arr_colores); $a++) {

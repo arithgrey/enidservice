@@ -24,7 +24,10 @@ if (!function_exists('invierte_date_time')) {
 
     function create_meta_tags($string, $id_servicio)
     {
+        if(!str_len($string,0)){
 
+            return "";
+        }
         $tags = explode(",", $string);
         $response = [];
         foreach ($tags as $row) {

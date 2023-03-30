@@ -1388,7 +1388,7 @@ function opciones_acceso($in_session)
 
     $flex_compras = d(
         [
-            d(_text_(span("0", 'place_resumen_deseo_compra place_resumen_deseo_compra_footer')), "font-weight-bold white"),
+            d(_text_(span("0 artículos", 'place_resumen_deseo_compra place_resumen_deseo_compra_footer')), "font-weight-bold white"),
             d("", 'white ml-1 text-uppercase')
         ],
         'display-7 strong ml-3 white d-flex mt-1 mb-1'
