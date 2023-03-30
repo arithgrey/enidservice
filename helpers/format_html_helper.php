@@ -62,7 +62,28 @@ function article($info, $attributes = [], $row = 0, $frow = 0)
 
     return get_base_html("article", $info, $attributes, $row, $frow);
 }
+function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_contenedor= ""){
 
+    $indicaciones = d(
+        $texto_indicacion,
+        add_text(
+            "mt-3 color_red d-none place_input_form_",
+            $attributes["id"]
+        )
+    );
+
+    $base = "input-field mh_50 border border-dark solid_bottom_hover_3 form-control";
+    $attributes["class"] = (array_key_exists("class",$attributes)) ? (_text_($attributes["class"], $base)) : $base;
+
+    $input_indicaciones  = flex(input($attributes), $indicaciones, 'flex-column');
+    
+    $contenedor = _text("contenedor_input_registro_",$attributes["id"]);
+    
+    $clase_contenedor_input = (str_len($extra_clase_contenedor,0)) ? 
+    _text_($contenedor, $extra_clase_contenedor) : $contenedor;
+
+    return d($input_indicaciones, $clase_contenedor_input);
+}
 function input($attributes = [], $e = 0, $bootstrap = 1)
 {
 
@@ -79,7 +100,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
     if (prm_def($attributes, "type") !== 0) {
 
         $type = $attributes["type"];
-
+        
         switch ($type) {
 
             case "tel":
@@ -137,7 +158,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                         $attributes["class"] = (array_key_exists("class", $attributes)) ?
                             (_text_($attributes["class"], "validar_nombre ")) : " validar_nombre ";
                     }
-                    $attributes["minlength"] = 3;
+                    $attributes["minlength"] = 4;
                 }
                 if (prm_def($attributes, 'uppercase', false)) {
                     $attributes['onkeyup'] = "this.value = this.value.toUpperCase();";
@@ -166,7 +187,6 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
     }
 
     $attr = add_attributes($attributes);
-
 
     return ($e < 1) ? "<input  $attr>" : addNRow("<input " . $attr . " >");
 }
@@ -544,6 +564,10 @@ function create_select(
     $mayusculas = 0
 ) {
 
+    if(!es_data($data)){
+
+        return "";
+    }
     $select[] = "<select name='" . $name . "'  class='text-uppercase " . $class . "'  id='" . $id . "'> ";
 
     if ($def == 1) {

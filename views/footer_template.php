@@ -1,33 +1,5 @@
 
 <?= gb_modal() ?>
-<h2 class="d-none">
-    mancuernas walmart
-</h2>
-<h2 class="d-none">
-    mancuernas baratas
-</h2>
-<h2 class="d-none">
-    set mancuernas
-</h2> 
-<h2 class="d-none">
-mancuernas aurrera
-</h2>
-<h2 class="d-none">
-    mancuernas soriana
-</h2> 
-<h2 class="d-none">
-mancuernas gym
-</h2> 
-<h2 class="d-none">
-mancuernas ajustables
-</h2>
-<h2 class="d-none">
-    mancuernas chedraui
-</h2>
-<h2 class="d-none">
-CDMX
-</h2>
-
 <?php if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0): ?>
     <?php foreach ($css as $c): $link = "../css_tema/template/" . $c; ?>
         <?php if (file_exists($link)): ?>

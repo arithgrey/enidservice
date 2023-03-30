@@ -39,7 +39,7 @@ if (!function_exists('invierte_date_time')) {
 
     function buscador()
     {
-        $z[] = d("Ó también puedes");
+        $z[] = d("También puedes");
         $z[] = d(h("Ingresar tu código postal para saber el costo de tu entrega ", 4, "strong"));
         $z[] = "<form action='../costo_entrega' class='mt-5'>";
         $z[] = d(

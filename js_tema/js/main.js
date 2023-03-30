@@ -15,8 +15,6 @@ const MIN_PW_LENGTH = 5;
 
 $("footer").ready(() => {
 
-
-
     $(".accion_forma_pago").click(function () {
         $("#modal_formas_pago").modal("show");
     });
@@ -1041,22 +1039,6 @@ let valida_formato_search = function (e) {
         }
     }
 };
-/**
-let valida_formato_correo = function (e) {
-
-    let c = String.fromCharCode(e.keyCode);
-    let format = /^([A-z0-9@._])*$/.test(c);
-    let fn = (!format) ? e.preventDefault() : '';
-    let $text = $(this).val();
-    let formatStart = ($text.length < 1 && /^([@._])*$/.test(c)) ? e.preventDefault() : '';
-    if (/^([@])*$/.test(c)) {
-        let times = ($text.match(/@/g) || []).length;
-        const formatTimes = (times > 0) ? e.preventDefault() : '';
-    }
-    es_formato_email($(this));
-
-};
- **/
 let evita_caracteres = function (e) {
 
     if (!/^([0-9])*$/.test(String.fromCharCode(e.keyCode))) {
@@ -1238,8 +1220,7 @@ let es_formato_telefono = function ($input) {
 
     let $telefono = $input.val();
     let tiene_formato = true;
-
-    var regexTelefono = /^\+[0-9]{1,3}[0-9]{4,14}(?:x.+)?$/;
+    var regexTelefono = /^[0-9]{10}$/;
     if (!regexTelefono.test($telefono)) {
 
         $input.next().next().removeClass('d-none');
@@ -1269,7 +1250,7 @@ let es_formato_password = function ($input) {
 
     let len_pw = $input.val().length;
     let tiene_formato = true;
-    if (len_pw <= MIN_PW_LENGTH) {
+    if (len_pw <= 3) {
         $input.next().next().removeClass('d-none');
         tiene_formato = false;
     } else {
@@ -1278,22 +1259,23 @@ let es_formato_password = function ($input) {
     return tiene_formato;
 
 };
-let es_formato_email = selector => {
+let es_formato_email = function ($selector) {
 
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    let $email = $selector.val();
+    let $es_valido = true;
 
-    let valor = selector.val();
-    let es_valido = /^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,3})$/.test(valor);
-    let $selector_mensaje = selector.next('label').next('div');
-    if (!es_valido) {
+    let $selector_mensaje = $selector.next('label').next('div');
+
+    if (!emailRegex.test($email)) {
 
         $selector_mensaje.removeClass('d-none');
-
+        $es_valido = false;
     } else {
-
 
         $selector_mensaje.addClass('d-none');
     }
-    return es_valido;
+    return $es_valido;
 };
 let es_formato_nombre = $input => {
 
@@ -1510,4 +1492,21 @@ let deseo_modal = function (data) {
     $(".sigue_comprando_trigger").click(function () {
         $("#modal_agregado_carro_compra").modal("hide");
     });
+}
+
+
+let oculta_contenedor_input_enid = function (id) {
+
+    $(_text(".contenedor_input_registro_", id)).addClass("d-none");
+    $(_text(".place_input_form_", id)).addClass("d-none");
+}
+
+
+let error_enid_input = function (id) {
+
+    $(_text(".place_input_form_", id)).removeClass("d-none");
+}
+let oculta_error_enid_input = function (id) {
+
+    $(_text(".place_input_form_", id)).addClass("d-none");
 }
