@@ -105,53 +105,36 @@ if (!function_exists('invierte_date_time')) {
             }
 
 
-            $input = input(
-
+            $input = input_enid(
                 [
                     "name" => "nombre",
                     "id" => "nombre",
                     "class" => _text_("nombre", _format_input),
                     "type" => "text",
                     "required" => "true",
-                    "placeholder" => "Nombre",
+                    "placeholder" => "¿Cual es tu nombre?",
                     'onkeyup' => "this.value = this.value.toUpperCase();"
-                ]
+                ],
+                _text_nombre
             );
 
-            $z[] =  d(
-                flex(
-                    $input,
-                    _text_nombre,
-                    _text_("flex-column"),
-                    "",
-                    "mt-3 color_red d-none place_input_form_nombre"
+            $z[] =  d($input, "col-lg-6 mt-5 ");
 
-                ),
-                "col-lg-6 mt-5 "
+
+            $input_telefono = input_enid(
+                [
+                    "id" => "telefono",
+                    "class" => _text_("telefono", _format_input),
+                    "type" => "tel",
+                    "maxlength" => 10,
+                    "minlength" => 8,
+                    "name" => "telefono",
+                    "required" => "true",
+                    "placeholder" => "Número telefónico (10) digitos"
+                ],_text_telefono
             );
 
-
-            $input_telefono = input([
-                "id" => "telefono",
-                "class" => _text_("telefono", _format_input),
-                "type" => "tel",
-                "maxlength" => 10,
-                "minlength" => 8,
-                "name" => "telefono",
-                "required" => "true",
-                "placeholder" => "Número celular"
-            ]);
-
-            $z[] = d(
-                flex(
-                    $input_telefono,
-                    _text_telefono,
-                    _text_("flex-column"),
-                    "",
-                    "mt-3 color_red d-none place_input_form_telefono"
-                ),
-                "col-lg-6 mt-5"
-            );
+            $z[] = d($input_telefono, "col-lg-6 mt-5");
 
             $extra_sorteo  = ($param["es_sorteo"] > 0 || $in_session < 1) ? 'd-none' : '';
             $z[] = d(input_frm(
@@ -380,13 +363,12 @@ if (!function_exists('invierte_date_time')) {
                 "required" => "true",
                 "onkeypress" => "minusculas(this);",
             ];
-            //if (!$es_cliente) {
+            
 
             $inicio = substr(sha1(mt_rand()), 1, 20);
             $fin = substr(sha1(mt_rand()), 1, 20);
             $config_email['value'] = _text($inicio, '@', $fin, '.com');
-            //}
-
+            
             $z[] = input_frm(
                 _text_("col-lg-6 mt-5 top_100", "d-none"),
                 "CORREO",
@@ -415,7 +397,7 @@ if (!function_exists('invierte_date_time')) {
 
             $r[] = d($z, 13);
             $r[] = d("", 9);
-            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5");
+            $r[] = d(btn("CONTINUAR", ['class' => 'submit_enid borde_green'], 0), "col-lg-3 mt-5 p-0 mb-5 accion_continuar_envio_pedido");
             $r[] = form_close();
         }
 
@@ -433,10 +415,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $clase_paso = "black white bg_black round mr-3 rounded-circle  pr-3 pl-3 pt-1 pb-2";
-        $clase_paso_faltante = "black white bg_gray round mr-3 rounded-circle  pr-3 pl-3 pt-1 pb-2";    
+        $clase_paso_faltante = "black white bg_gray round mr-3 rounded-circle  pr-3 pl-3 pt-1 pb-2";
 
         $enid_service_titulo[] = d(
-            "Enid service",            
+            "Enid service",
             "black strong black display-6 text-uppercase"
         );
 
@@ -455,7 +437,7 @@ if (!function_exists('invierte_date_time')) {
             $clase_paso,
             "mt-2 strong fp9"
         );
-        
+
         $paso[] = flex(
             "3",
             "ENVIADO",
@@ -465,8 +447,8 @@ if (!function_exists('invierte_date_time')) {
         );
 
 
-  
-        $response[] = d($enid_service_titulo,"row mb-4");
+
+        $response[] = d($enid_service_titulo, "row mb-4");
         $response[] = d($paso, 'mb-3 row');
 
         $response[] = d("", "border-bottom border-secondary mb-5 row ");
@@ -475,14 +457,14 @@ if (!function_exists('invierte_date_time')) {
     function llegada()
     {
 
-        $response[] = _titulo(_text_("LLEGADA?",span("?",'border p-2 bg-light')),2);
+        $response[] = _titulo(_text_("LLEGADA?", span("?", 'border p-2 bg-light')), 2);
         $contenidos[] = d("Tardaremos 1 hora con 30 si agendas tu pedido ya!", "black");
         $contenidos[] = d("Envío gratis", "strong mt-2");
         $response[] = d($contenidos, "borde_black p-3 mt-5");
 
-        $response[] = d(_titulo(_text_("OPCIONES DE PAGO",span("?",'border p-2 bg-light')),2),"mt-5");
-        
-        $formas_pago[] = d("Al recibir tu pedido podrás pagar con:",'strong black');
+        $response[] = d(_titulo(_text_("OPCIONES DE PAGO", span("?", 'border p-2 bg-light')), 2), "mt-5");
+
+        $formas_pago[] = d("Al recibir tu pedido podrás pagar con:", 'strong black');
         $formas_pago[] = d("Efectivo");
         $formas_pago[] = d("Transferencia");
         $formas_pago[] = d("Tarjeta de débito ó cŕedito");
@@ -904,26 +886,5 @@ if (!function_exists('invierte_date_time')) {
             "resumen_servicio_info" => $nombre_servicio,
         ];
     }
-    function text_acceder_cuenta($param, $es_cliente)
-    {
-
-        $response = [];
-        if ($es_cliente) {
-
-            $ext =
-                [
-                    "id_servicio" => $param["is_servicio"],
-                    "ciclo_facturacion" => $param["ciclo_facturacion"],
-                    "q2" => $param["q2"],
-                    "class" => "text-right link_acceso cursor_pointer
-                      strong link_acceso cursor_pointer text_total text-uppercase letter-spacing-5 mb-5 ",
-                ];
-
-
-
-
-            $response[] = d($text, 12);
-        }
-        return append($response);
-    }
+    
 }

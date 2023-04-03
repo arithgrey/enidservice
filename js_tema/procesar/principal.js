@@ -65,6 +65,7 @@ let $primer_compra = $(primer_compra);
 let $form_busqueda_cliente = $(".form_busqueda_cliente");
 let $navegacion_principal = $(".navegacion_principal");
 
+let $accion_continuar_envio_pedido = $(".accion_continuar_envio_pedido");
 $(document).ready(() => {
     
     $navegacion_principal.addClass("d-none");    
@@ -88,19 +89,12 @@ $(document).ready(() => {
         $('.text_comentarios').removeClass('d-none');
     });
 
-    $input_nombre_registro_envio.keyup(function (e) {
-        $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_miembro);
-    });
+
     $input_email_registro_envio.keyup(function (e) {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_miembro);
     });
     $input_password_registro_envio.keyup(function (e) {
-        $(this).next().next().addClass('d-none');
-        escucha_submmit_selector(e, $form_miembro);
-    });
-    $input_telefono_registro_envio.keyup(function (e) {
         $(this).next().next().addClass('d-none');
         escucha_submmit_selector(e, $form_miembro);
     });
@@ -115,6 +109,41 @@ $(document).ready(() => {
     
     $(".busqueda_cliente_frecuente").click(function(){        
         $("#modal_busqueda_cliente_frecuente").modal("show");        
+    });
+    
+    $input_nombre_registro_envio.keypress(function (e) {
+        transforma_mayusculas(this);        
+        if (e.which == 13) {
+            let nombre = $(this).val();
+            error_enid_input($(this).attr("id"));
+
+            if (nombre.length > 3) {
+                oculta_error_enid_input($(this).attr("id"));                
+                escucha_submmit_selector(e, $form_miembro);
+            }
+        }
+    });
+    
+    $input_telefono_registro_envio.keypress(function (e) {
+        if (e.which == 13) {            
+            let $telefono = $(this).val();
+            var regexTelefono = /^[0-9]{10}$/;
+            if (!regexTelefono.test($telefono)) {
+
+                error_enid_input($(this).attr("id"));
+
+            } else {
+                oculta_error_enid_input($(this).attr("id"));                
+                escucha_submmit_selector(e, $form_miembro);
+            }
+        }
+    });
+
+    $accion_continuar_envio_pedido.click(function(){
+        
+        $input_nombre_registro_envio.trigger(jQuery.Event("keypress", { which: 13 }));
+        $input_telefono_registro_envio.trigger(jQuery.Event("keypress", { which: 13 }));
+    
     });
     
 
@@ -224,11 +253,9 @@ let modifica_lead_catalogo = (e) => {
 
 let registro = (e) => {
 
-
+    
     let respuestas = [];
-    respuestas.push(es_formato_nombre($input_nombre_registro_envio));
-    respuestas.push(es_formato_password($input_password_registro_envio));
-    respuestas.push(es_formato_email($input_email_registro_envio));
+    respuestas.push(es_formato_nombre($input_nombre_registro_envio));        
 
     if (parseInt($input_es_prospecto_registro_envio.val()) < 1) {
 
@@ -240,6 +267,8 @@ let registro = (e) => {
 
     if ($tiene_formato) {
 
+        bloquea_form(form_miembro);
+        $accion_continuar_envio_pedido.addClass("d-none");
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         let $producto_carro_compra = $("input[name='producto_carro_compra[]']").map(function () {
@@ -282,7 +311,7 @@ let registro = (e) => {
 
         };
 
-        bloquea_form(form_miembro);
+        
         request_enid("POST", $data_send, url, respuesta_registro, 0);
 
     }

@@ -24,7 +24,7 @@ if (!function_exists('invierte_date_time')) {
 
     function frm_acceso($action, $data)
     {
-        $r[] = img_default();
+        $r[] = a_enid(img_default(),path_enid("kist-mas-vendidos"));
         $r[] = frm_login($data);
         if ($action === "registro") {
 
@@ -394,7 +394,7 @@ if (!function_exists('invierte_date_time')) {
                 "name" => 'mail',
                 "id" => "mail_acceso",
                 "onkeypress" => "minusculas(this);",
-                "placeholder" => "Correo electrónico",
+                "placeholder" => "¿Cual es tu email?",
                 "class" => " input-field mh_50 border border-dark  solid_bottom_hover_3     form-control "
 
             ],
@@ -427,14 +427,17 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = d("ups! parece que esos datos son incorrectos, intenta de nuevo",
         'red_enid borde_black d-none notificacion_datos_incorrectos mt-2 f11 p-2 strong');
-        $form[] = btn("CONTINUAR", ["class" => "mt-5"]);
+        $form[] = btn("CONTINUAR", ["class" => "mt-5 accion_iniciar_session"]);
         $form[] = form_close();
 
 
         $form[] = d(_text_("También puedes ", icon("fa fa-long-arrow-down")), 'text-center mt-4 black tambien_puedes_iniciar');
         $form_google[] = format_link(
             text_icon('fa fa-google ', "Iniciar con Google"),
-            ["href" => $data["auth_url"]],
+            [
+                "href" => $data["auth_url"]
+                
+            ],
             0
         );
 

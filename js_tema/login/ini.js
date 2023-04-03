@@ -33,13 +33,12 @@ let $link_como_vender = $form_registro.find('.link_como_vender');
 let $label_mail_acceso = $(".label_mail_acceso");
 let $label_pw = $(".label_pw");
 let $btn_acceder_cuenta_enid = $(".btn_acceder_cuenta_enid");
-
+let $accion_iniciar_session = $(".accion_iniciar_session");
 $(document).ready(function () {
 
     $('#sticky-footer').addClass("d-none");
     $(".base_enid_web").removeClass("top_150").addClass("mt-3");
-    
-    
+        
     $registrar_cuenta_botton.click(mostrar_seccion_nuevo_usuario);
     $form_inicio.submit(valida_form_session);
     $form_pass.submit(recupera_password);
@@ -161,6 +160,12 @@ $(document).ready(function () {
 
     $icono_mostrar_password.click(mostrar_password);
     $icono_ocultar_password.click(ocultar_password);
+    
+    $accion_iniciar_session.click(function(){
+
+        $mail_acceso.trigger(jQuery.Event("keypress", { which: 13 }));
+        $input_password_inicio.trigger(jQuery.Event("keypress", { which: 13 }));
+    });
 
 });
 
