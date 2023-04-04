@@ -31,6 +31,7 @@ $(document).ready(function () {
             } else {
 
                 error_enid_input($(this).attr("id"));
+                escucha_submmit_selector(e, $form_registro);
             }
         }
     });
@@ -47,13 +48,12 @@ $(document).ready(function () {
                 error_enid_input($(this).attr("id"));
                 
             } else {
-                
-                oculta_error_enid_input($(this).attr("id"));
-                
+
+                escucha_submmit_selector(e, $form_registro);
+                oculta_error_enid_input($(this).attr("id"));                
             }
         }
     });
-
 
 });
 
@@ -101,7 +101,7 @@ let registro_lead = (e) => {
 
     if ($tiene_formato) {
         
-        
+        $("#lead_modal").modal("hide");
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
         let $producto_carro_compra = $("input[name='producto_carro_compra[]']").map(function () {
