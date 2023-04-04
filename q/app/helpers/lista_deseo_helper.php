@@ -25,10 +25,7 @@ if (!function_exists('invierte_date_time')) {
             $id_producto = $row["id_servicio"];
             $precio = $row["precio"];
             $precio_alto = ($row["precio_alto"] > $precio ) ?  $row["precio_alto"] : ($precio + porcentaje($precio,16));
-            $articulos = $row["articulos"];            
-            
-
-
+            $articulos = $row["articulos"];                    
             $r = [];
             $url_servicio = get_url_servicio($id_producto);
             $config = ["href" => $url_servicio];

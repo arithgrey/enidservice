@@ -104,6 +104,7 @@ class Usuario_deseo_compra_model extends CI_Model
                 INNER JOIN servicio s
                 ON u.id_servicio =  s.id_servicio 
                 WHERE  id_usuario_deseo_compra IN(" . $ids . ") ";
+                
         return $this->db->query($query_get)->result_array();
     }
     function baja_recompensa($id, $ip, $id_recompensa)
