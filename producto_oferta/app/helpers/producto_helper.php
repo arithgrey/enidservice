@@ -253,7 +253,7 @@ if (!function_exists('invierte_date_time')) {
                 "type" => "tel",
                 "name" => 'telefono',
                 "id" => "telefono",
-                "placeholder" => "Teléfono",
+                "placeholder" => "Teléfono (10 digitos)",
                 "class" => "telefono_registro 
                 input-field mh_50 border border-dark  solid_bottom_hover_3 form-control"
 

@@ -311,7 +311,7 @@ let registro = (e) => {
 
         };
 
-        
+        debugger;
         request_enid("POST", $data_send, url, respuesta_registro, 0);
 
     }
