@@ -252,7 +252,6 @@ if (!function_exists('invierte_date_time')) {
                 "id" => "fecha_servicio",
             ]);
 
-
         $config =
                 [
                     "name" => "producto_carro_compra[]",                    
@@ -326,9 +325,7 @@ if (!function_exists('invierte_date_time')) {
             _text_telefono
         ), 'input_telefono d-none');
         
-        $form[] = btn("CONTINUAR", ["class" => "mt-5 accion_continuar_registro"]);
-
-        
+        $form[] = btn("CONTINUAR", ["class" => "mt-5 accion_continuar_registro"]);        
         $form[] = form_close();
         
 

@@ -102,6 +102,7 @@ let valida_indicacion_ubicacion = () => {
 
     $informacion_resumen_envio.addClass('d-none');
     $modal_ubicacion.modal("show");
+    $(".navegacion_principal").addClass("d-none");
 };
 
 let ingreso_completo = () => {
