@@ -145,6 +145,10 @@ function ticket_pago(&$deuda, $tipos_entrega, $format = 1)
     $abono_format_text = $deuda["abono_format_text"];
     $abono_format = $deuda["abono_format"];
     $saldo_pendiente = $deuda["saldo_pendiente"];
+    $es_landing_secundario = $deuda["es_landing_secundario"];
+    $saldo_pendiente = ($es_landing_secundario > 0) ? ($saldo_pendiente - 150 ) :  $saldo_pendiente;
+
+
     $saldo_pendiente_pago_contra_entrega = $deuda["saldo_pendiente_pago_contra_entrega"];
     $costo_envio_cliente = $deuda["costo_envio_cliente"];
     $response = [];
@@ -347,6 +351,7 @@ function total_pago_pendiente($productos_orden_compra, $recompensa = 0)
     $id_usuario_venta = 0;
     $descuento_aplicado = 0;
     $es_premium = 0;
+    $es_descuento_landing_secundario = 0;
     foreach ($productos_orden_compra as $row) {
 
         $pagado = $row["saldo_cubierto"];
@@ -364,6 +369,10 @@ function total_pago_pendiente($productos_orden_compra, $recompensa = 0)
         }
 
         $descuento_aplicado = ($descuento_aplicado + $descuento_premium);
+        
+        if($row["descuento_landing_secundario"] > 0 ){
+            $es_descuento_landing_secundario = 1;
+        }
 
     }
 
@@ -383,6 +392,7 @@ function total_pago_pendiente($productos_orden_compra, $recompensa = 0)
 
     $saldo_pendiente = ($subtotal - $monto_pagado - $recompensa ) + $costo_envio_cliente;
 
+    
     return [
         "subtotal" => $subtotal,
         "monto_pagado" => $monto_pagado,
@@ -400,8 +410,8 @@ function total_pago_pendiente($productos_orden_compra, $recompensa = 0)
         "id_usuario_venta" => $id_usuario_venta,
         "descuento_aplicado" => $descuento_aplicado,
         "descuento_recompensa" => $recompensa,
-        "es_premium" => $es_premium 
-
+        "es_premium" => $es_premium,
+        "es_landing_secundario" => $es_descuento_landing_secundario
 
     ];
 }

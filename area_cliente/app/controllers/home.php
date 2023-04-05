@@ -25,7 +25,7 @@ class Home extends CI_Controller
             "orden_compra" => $id_orden_compra,
             "deuda" => $deuda
         ];
-
+        
         $data = $this->app->cssJs($data, "area_cliente", 1);
         $this->app->pagina($data, 'pay/pay');
     }
@@ -33,7 +33,7 @@ class Home extends CI_Controller
     {
 
         $q["id_orden_compra"] = $id_orden_compra;
-        return $this->app->api("recibo/deuda_orden_compra/", $q);                
+        return $this->app->api("recibo/deuda_orden_compra", $q);                
         
     }    
     function carga_pago_pendiente_por_recibo($id_orden_compra)

@@ -15,7 +15,7 @@ $(document).ready(function () {
     $accion_continuar_registro.click(intento_registro_accion);
 
     $en_lista_deseos.click(function () {
-        
+
         $(".en_lista_deseos_producto").val(1);
         $(".selectores").addClass("d-none").removeClass("d-flex");
     });
@@ -37,20 +37,20 @@ $(document).ready(function () {
     });
 
     $telefono_registro.keypress(function (e) {
-        
+
         if (e.which == 13) {
-            
-            let telefono = $(this).val();                        
+
+            let telefono = $(this).val();
             var regexTelefono = /^[0-9]{10}$/;
-            
+
             if (!regexTelefono.test(telefono)) {
-                
+
                 error_enid_input($(this).attr("id"));
-                
+
             } else {
 
                 escucha_submmit_selector(e, $form_registro);
-                oculta_error_enid_input($(this).attr("id"));                
+                oculta_error_enid_input($(this).attr("id"));
             }
         }
     });
@@ -61,13 +61,13 @@ $(document).ready(function () {
 let agregar_deseos_sin_antecedente_promocional = function (id_servicio) {
 
 
-    $(".cargando").removeClass("d-none");    
+    $(".cargando").removeClass("d-none");
     if (parseInt(id_servicio) > 0) {
 
-        let data_send = { "id_servicio": id_servicio, "articulos": 1 };     
+        let data_send = { "id_servicio": id_servicio, "articulos": 1 };
         let url = "../q/index.php/api/usuario_deseo_compra/envio_pago/format/json/";
         request_enid("POST", data_send, url, muestra_form_promocional);
-        
+
     }
 }
 
@@ -78,12 +78,12 @@ let muestra_form_promocional = function (data) {
     $(".navegacion_principal").addClass("d-none");
     $(".cerrar_modal").addClass("d-none");
     $("#lead_modal").modal("show");
-    let $id_servicio = $(".id_servicio_registro").val();    
+    let $id_servicio = $(".id_servicio_registro").val();
     $(_text(".producto_", $id_servicio)).val(data);
 
 }
-let intento_registro_accion =  function(){
-    
+let intento_registro_accion = function () {
+
     $registro_nombre.trigger(jQuery.Event("keypress", { which: 13 }));
     $telefono_registro.trigger(jQuery.Event("keypress", { which: 13 }));
 
@@ -92,15 +92,15 @@ let intento_registro_accion =  function(){
 
 let registro_lead = (e) => {
 
-    
+
     let respuestas = [];
-    respuestas.push(es_formato_nombre($registro_nombre));           
+    respuestas.push(es_formato_nombre($registro_nombre));
     respuestas.push(es_formato_telefono($telefono_registro));
 
     let $tiene_formato = (!respuestas.includes(false));
 
     if ($tiene_formato) {
-        
+
         $("#lead_modal").modal("hide");
         advierte('Procesando tu pedido', 1);
         let url = "../q/index.php/api/cobranza/primer_orden/format/json/";
@@ -118,7 +118,7 @@ let registro_lead = (e) => {
 
         let text_password = $.trim($pw_registro.val());
         let $secret = "" + CryptoJS.SHA1(text_password);
-        
+
         let $data_send = {
             "password": $secret,
             "email": $email_registro.val(),
@@ -142,18 +142,19 @@ let registro_lead = (e) => {
             "comentario_compra": "",
             "lead_ubicacion": 0,
             "lead_catalogo": 0,
-            "numero_cliente":  0
+            "numero_cliente": 0,
+            "landing_secundario": 150,
 
         };
 
-    
+
         request_enid("POST", $data_send, url, respuesta_registro_lead);
 
     }
     e.preventDefault();
 };
 let respuesta_registro_lead = (data) => {
-                    
-    redirect(path_enid("procesar_ubicacion",data.id_orden_compra));    
+
+    redirect(path_enid("procesar_ubicacion", data.id_orden_compra));
 
 };
