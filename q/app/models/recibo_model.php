@@ -1024,7 +1024,7 @@ class Recibo_model extends CI_Model
         }
         $id_ciclo_facturacion = $param["id_ciclo_facturacion"];
         $talla = str_len($param["talla"], 1) ? $param["talla"] : 1;
-
+        $descuento_landing_secundario = prm_def($data_usuario, "landing_secundario");
 
         $array_keys = [
             "id_forma_pago",
@@ -1050,7 +1050,8 @@ class Recibo_model extends CI_Model
             "descuento_premium",
             "lead_ubicacion",
             "lead_catalogo",
-            "numero_boleto"
+            "numero_boleto",
+            "descuento_landing_secundario"
         ];
 
         $array_values =
@@ -1078,7 +1079,8 @@ class Recibo_model extends CI_Model
                 $descuento_premium,
                 $lead_ubicacion,
                 $lead_catalogo,
-                $numero_boleto
+                $numero_boleto,
+                $descuento_landing_secundario
             ];
 
         if (array_key_exists("fecha_contra_entrega", $array_keys)) {
