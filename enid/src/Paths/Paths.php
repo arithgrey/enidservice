@@ -742,6 +742,7 @@ class Paths
                 "js" =>
                 [
                     'producto/principal.js',
+                    "producto/cuenta_regresiva.js",
                     "alerts/jquery-confirm.js"                    
                 ],                
             ],

@@ -1,11 +1,11 @@
 function actualizarContador() {
     // Calcula el tiempo restante en segundos
     const ahora = new Date().getTime();
-    const fechaLimite = localStorage.getItem('fechaLimite');
+    const fechaLimite = localStorage.getItem('fechaLimiteProducto');
     if (fechaLimite === null) {
       // Si no hay fecha límite guardada en el almacenamiento local, crea una nueva fecha límite
-      const fechaLimite = ahora + 24 * 60 * 60 * 1000;
-      localStorage.setItem('fechaLimite', fechaLimite);
+      const fechaLimite = ahora + 12 * 60 * 60 * 1000;
+      localStorage.setItem('fechaLimiteProducto', fechaLimite);
     }
     const tiempoRestante = fechaLimite - ahora;
     const segundosRestantes = Math.floor((tiempoRestante / 1000) % 60);
@@ -13,13 +13,13 @@ function actualizarContador() {
     const horasRestantes = Math.floor(tiempoRestante / 1000 / 60 / 60);
   
     // Actualiza el elemento div con el tiempo restante
-    const contador = document.getElementById("contador");
-    contador.innerText = `En ${horasRestantes} horas, ${minutosRestantes} minutos y ${segundosRestantes} segundos termina la oferta`;
+    const contador = document.getElementById("contador_oferta");
+    contador.innerText = `En ${horasRestantes} horas, ${minutosRestantes} minutos y ${segundosRestantes} segundos`;
   
     // Verifica si el tiempo restante es menor a 0 y genera una nueva fecha límite 24 horas después de la fecha actual
     if (tiempoRestante < 0) {
-      const fechaLimite = new Date().getTime() + 24 * 60 * 60 * 1000;
-      localStorage.setItem('fechaLimite', fechaLimite);
+      const fechaLimite = new Date().getTime() + 12 * 60 * 60 * 1000;
+      localStorage.setItem('fechaLimiteProducto', fechaLimite);
     }
   }
   
