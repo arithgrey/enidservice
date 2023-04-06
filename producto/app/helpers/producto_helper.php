@@ -1128,7 +1128,15 @@ if (!function_exists('invierte_date_time')) {
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text("Precio regular $", $precio_alto), "text-secondary mb-5 f11");
+                $texto_precio_alto = d(_text("Precio regular $", span($precio_alto,'underline')), "black f11 strong");
+                $tiempo_restante = span("",
+                [
+                    "id"=>"contador_oferta",
+                    "class" => "red_enid strong"
+                ]);
+                                
+                $tiempo_restante_oferta = _text_($tiempo_restante,span('temina la oferta','strong'));                
+                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','','border_red_b mt-3');
             }
 
 

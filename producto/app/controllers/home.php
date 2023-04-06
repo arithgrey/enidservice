@@ -115,7 +115,7 @@ class Home extends CI_Controller
             $data = $this->app->cssJs($data, "producto");        
             $this->app->log_acceso($data, 3, $this->id_servicio  );
             $this->app->pagina($data, render_producto($data), 1);
-            $this->load->view("producto/localidades");
+            
             
         }else{
             
