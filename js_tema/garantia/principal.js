@@ -11,7 +11,7 @@ $(document).ready(() => {
 let carga_productos_sugeridos = () => {
 
     let url = "../q/index.php/api/servicio/sugerencia/format/json/";
-    let data_send = {"id_servicio": 541};
+    let data_send = {"id_servicio": 1537};
     request_enid("GET", data_send, url, response_carga_productos_sugeridos, ".place_tambien_podria_interezar");
 };
 
