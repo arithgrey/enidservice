@@ -9,10 +9,11 @@ let $formulario_registro_ubicacion = $('.formulario_registro_ubicacion');
 let $form_ubicacion = $('.form_ubicacion');
 let $fecha_entrega_ubicacion = $form_ubicacion.find('.fecha_entrega');
 let $ubicacion_delegacion = $form_ubicacion.find('.ubicacion_delegacion');
-
+let $ubicacion = $form_ubicacion.find(".ubicacion");
+let $accion_registro_ubicacion = $form_ubicacion.find(".accion_registro_ubicacion");
 let $adicionales_seccion = $(".adicionales_seccion");
 $(document).ready(() => {
-    
+        
     $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
     $(".cerrar_modal").addClass("d-none");
     $(".seccion_menu_comunes").removeClass("d-block").addClass("d-none");
@@ -35,6 +36,27 @@ $(document).ready(() => {
     $form_ubicacion.submit(registro_ubicacion);
 
     valida_indicacion_ubicacion();
+
+    $ubicacion.keypress(function (e) {        
+        
+        if (e.which == 13) {
+            let ubicacion = $(this).val();
+            error_enid_input($(this).attr("id"));
+
+            if (ubicacion.length > 3) {
+                                     
+                oculta_error_enid_input($(this).attr("id"));                
+                escucha_submmit_selector(e, $form_ubicacion);
+            }
+        }
+    });
+
+
+    $accion_registro_ubicacion.click(function(){
+
+        $ubicacion.trigger(jQuery.Event("keypress", { which: 13 }));
+
+    });
 
 }
 );

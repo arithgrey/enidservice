@@ -310,8 +310,7 @@ let registro = (e) => {
             "numero_cliente":  $input_numero_cliente.val()
 
         };
-
-        debugger;
+        
         request_enid("POST", $data_send, url, respuesta_registro, 0);
 
     }
