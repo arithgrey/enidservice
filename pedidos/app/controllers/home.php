@@ -452,7 +452,12 @@ class Home extends CI_Controller
         }
 
         $data['comisionistas'] = $comisionistas;
-        $ordenes = $this->comisiones_por_pago($data);
+
+        $ordenes = [];
+        if(es_administrador($data)){
+            $ordenes = $this->comisiones_por_pago($data);
+        }
+
 
         $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];
         $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes'] : [];

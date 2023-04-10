@@ -62,7 +62,8 @@ function article($info, $attributes = [], $row = 0, $frow = 0)
 
     return get_base_html("article", $info, $attributes, $row, $frow);
 }
-function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_contenedor= ""){
+function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_contenedor = "")
+{
 
     $indicaciones = d(
         $texto_indicacion,
@@ -73,14 +74,14 @@ function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_cont
     );
 
     $base = "input-field mh_50 border border-dark solid_bottom_hover_3 form-control";
-    $attributes["class"] = (array_key_exists("class",$attributes)) ? (_text_($attributes["class"], $base)) : $base;
+    $attributes["class"] = (array_key_exists("class", $attributes)) ? (_text_($attributes["class"], $base)) : $base;
 
     $input_indicaciones  = flex(input($attributes), $indicaciones, 'flex-column');
-    
-    $contenedor = _text("contenedor_input_registro_",$attributes["id"]);
-    
-    $clase_contenedor_input = (str_len($extra_clase_contenedor,0)) ? 
-    _text_($contenedor, $extra_clase_contenedor) : $contenedor;
+
+    $contenedor = _text("contenedor_input_registro_", $attributes["id"]);
+
+    $clase_contenedor_input = (str_len($extra_clase_contenedor, 0)) ?
+        _text_($contenedor, $extra_clase_contenedor) : $contenedor;
 
     return d($input_indicaciones, $clase_contenedor_input);
 }
@@ -100,7 +101,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
     if (prm_def($attributes, "type") !== 0) {
 
         $type = $attributes["type"];
-        
+
         switch ($type) {
 
             case "tel":
@@ -564,7 +565,7 @@ function create_select(
     $mayusculas = 0
 ) {
 
-    if(!es_data($data)){
+    if (!es_data($data)) {
 
         return "";
     }
@@ -803,7 +804,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-        icon("fa fa-user white"),
+            icon("fa fa-user white"),
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
@@ -1285,7 +1286,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     $cerrar = d($cerrar, "modal-header border-0");
     $seccion_contenido = d(_text_($cerrar, $seccion), "modal-content borde_end rounded-0 seccion_modal");
 
-    $extra = ($modal_lg > 0) ? 'modal-lg':'';
+    $extra = ($modal_lg > 0) ? 'modal-lg' : '';
     $contenido = d(
         $seccion_contenido,
         [
@@ -1300,11 +1301,11 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
         "class" => "modal",
         "tabindex" => "-1",
         "role" => "dialog",
-        "id" => $id_modal,        
+        "id" => $id_modal,
         "data-keyboard" => "false"
     ];
 
-    if($static > 0){
+    if ($static > 0) {
         $config["data-backdrop"] = "static";
     }
     $modal = d($contenido, $config);
@@ -1312,9 +1313,9 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     return d($modal, 13);
 }
 
-function menu_session_mobil($in_session,$mas_vendidos)
+function menu_session_mobil($in_session, $mas_vendidos)
 {
-    
+
     $cerrar_opciones = d(
         a_enid(
             d("×", "borde_red  pl-3 pr-3 pb-2"),
@@ -1331,7 +1332,7 @@ function menu_session_mobil($in_session,$mas_vendidos)
     //$opciones_acceso = opciones_acceso($in_session);
 
     $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
-$columna = d([$cerrar_opciones, $form_busqueda /*$opciones_acceso*/], $clases_columnas);
+    $columna = d([$cerrar_opciones, $form_busqueda /*$opciones_acceso*/], $clases_columnas);
 
     $menu_lateral = d(
 
@@ -1373,12 +1374,12 @@ function form_busqueda_productos($mas_vendidos)
     $categorias[] = d(a_enid(
         _text_("Lo más buscado"),
         [
-            "class"=>"mb-1 strong black mt-5 row",                                    
+            "class" => "mb-1 strong black mt-5 row",
         ]
-    ),12);
-    $categorias[] = d(categorias_destacatas_ab_mb($mas_vendidos),12);
+    ), 12);
+    $categorias[] = d(categorias_destacatas_ab_mb($mas_vendidos), 12);
 
-    $form[] = d(d($categorias,13),12);
+    $form[] = d(d($categorias, 13), 12);
     return d($form, 'my-auto col-sm-12 mr-3');
 }
 
@@ -1848,8 +1849,8 @@ function opciones_populares()
     $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
     $response[] = $texto;
 
-    
-    
+
+
     $response[] = a_enid(
         _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
         [
@@ -1866,7 +1867,7 @@ function opciones_populares()
         ]
     );
 
-    
+
 
     $response[] = a_enid(
         _text("Referencias"),
@@ -1894,7 +1895,7 @@ function opciones_populares()
 
 function opciones_adicionales_navegacion()
 {
-    
+
     $text = _text_(
         span('PAGO CONTRA ENTREGA', ''),
         icon('fa fa-handshake-o fa-2x', ''),
@@ -1927,61 +1928,62 @@ function opciones_adicionales_navegacion()
             "class" => "strong black"
         ]
     ), " col-xs-6");
-    
+
 
 
     $response[] = d(d($opciones, _text_("row d-flex  p-2", _between)), 'col-xs-12 bg-light border-bottom seccion_menu_comunes');
     return append($response);
 }
-function categorias_destacatas_ab($mas_vendidos){
-    
+function categorias_destacatas_ab($mas_vendidos)
+{
+
     $list = [];
-    foreach($mas_vendidos as $row)
-    {
-        
+    foreach ($mas_vendidos as $row) {
+
         $menu = $row["menu"];
         $sub_menu = $row["sub_menu"];
         $path  = $row["path"];
-        $flex = flex( 
-            _text_(span($menu,'f11 black ml-5 strong')),        
+        $flex = flex(
+            _text_(span($menu, 'f11 black ml-5 strong')),
             $sub_menu,
             "flex-column",
             "",
             "ml-5 fp8"
-            
-        );
-        
-        $list[] = li(a_enid(            
-            $flex
-            ,[
-            "class"=>"dropdown-item border_black",
-            "href"=> path_enid("ab",$path)
-        ]));
 
+        );
+
+        $list[] = li(a_enid(
+            $flex,
+            [
+                "class" => "dropdown-item border_black",
+                "href" => path_enid("ab", $path)
+            ]
+        ));
     }
 
-    return $list;    
+    return $list;
 }
-function categorias_destacatas_ab_mb($mas_vendidos){
-    
+function categorias_destacatas_ab_mb($mas_vendidos)
+{
+
     $list = [];
-    foreach($mas_vendidos as $row)
-    {
-        
-        $menu = $row["menu"];        
+    foreach ($mas_vendidos as $row) {
+
+        $menu = $row["menu"];
         $path  = $row["path"];
         $text = _text_($menu);
-        
-        $list[] = a_enid(            
-            $text
-            ,[
-            "class"=>"col-xs-4 mt-2 text-uppercase borde_black black text-center fp9",
-            "href"=> path_enid("ab",$path)
-        ],0);
 
+        $list[] = a_enid(
+            $text,
+            [
+                "class" => "col-xs-4 mt-2 text-uppercase borde_black black text-center fp9",
+                "href" => path_enid("ab", $path)
+            ],
+            0
+        );
     }
 
-    return d($list,13);    
+    return d($list, 13);
 }
 
 function navegacion(
@@ -1991,7 +1993,7 @@ function navegacion(
     $proceso_compra,
     $menu,
     $mas_vendidos
-) {    
+) {
     $is_mobile = is_mobile();
     $frecuentes = opciones_populares();
     $response = [];
@@ -1999,28 +2001,28 @@ function navegacion(
     if (!$in_session) {
 
         $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
-        $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');     
+        $frecuentes_busqueda = flex($frecuentes, $busqueda, _text_(_between), 'd-none d-md-block', 'd-none d-md-block');
         $a = a_enid(
-            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Lo más buscado"),
+            _text_(icon(_text_(_mas_opciones_bajo_icon)), "Lo más buscado"),
             [
-                "class"=>"p-2 dropdown-toggle strong black ",
-                "href"=>"#",
-                "role"=>"button",
-                "data-bs-toggle"=>"dropdown",
-                "aria-expanded"=>"false"
+                "class" => "p-2 dropdown-toggle strong black ",
+                "href" => "#",
+                "role" => "button",
+                "data-bs-toggle" => "dropdown",
+                "aria-expanded" => "false"
             ]
         );
-        $ul = ul(categorias_destacatas_ab($mas_vendidos),["class"=>"dropdown-menu borde-0"]);
-    
+        $ul = ul(categorias_destacatas_ab($mas_vendidos), ["class" => "dropdown-menu borde-0"]);
+
         $categorias = d([
             $a,
             $ul
-        ],"dropdown pull-left d-none d-md-block ");
+        ], "dropdown pull-left d-none d-md-block ");
 
-        
+
         $response[] = d(d(
             _text_(
-                $categorias,                                
+                $categorias,
                 span('Envío gratis', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide hoy', 'strong'),
@@ -2036,9 +2038,9 @@ function navegacion(
         ), 'text-md-right col-sx-12 col-sx-12');
         $response[] = d([get_logo(), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
 
-       
+
         $opciones[] = d(a_enid(
-            flex(icon('fa fa-check-circle-o'), "Paga al recibir",_between,'mr-2'),
+            flex(icon('fa fa-check-circle-o'), "Paga al recibir", _between, 'mr-2'),
             [
                 "href" => path_enid("forma_pago"),
                 "class" => "strong black"
@@ -2049,15 +2051,15 @@ function navegacion(
 
 
         $opciones[] = d(
-            a_enid(flex(icon('black fa black fa fa-truck'), "Rastrea tu equipo",_between,'mr-2'), [
+            a_enid(flex(icon('black fa black fa fa-truck'), "Rastrea tu equipo", _between, 'mr-2'), [
                 "href" => path_enid("rastrea-paquete"),
                 "class" => "strong black"
             ]),
             "col-xs-4 "
         );
-        
+
         $opciones[] = d(
-            a_enid(flex(icon('black fa fa fa-star'), "Referencias","","","ml-2"), [
+            a_enid(flex(icon('black fa fa fa-star'), "Referencias", "", "", "ml-2"), [
                 "href" => path_enid("clientes"),
                 "class" => "strong black"
             ]),
@@ -2065,38 +2067,38 @@ function navegacion(
         );
 
 
-        
+
         $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
     } else {
 
-        if (!$is_mobile) {        
-        $a = a_enid(
-            _text_(icon(_text_(_mas_opciones_bajo_icon)),"Lo más buscado"),
-            [
-                "class"=>"p-2 dropdown-toggle strong black ",
-                "href"=>"#",
-                "role"=>"button",
-                "data-bs-toggle"=>"dropdown",
-                "aria-expanded"=>"false"
-            ]
-        );
-        $ul = ul(categorias_destacatas_ab($mas_vendidos),["class"=>"dropdown-menu borde-0"]);
-    
-        $categorias = d([
-            $a,
-            $ul
-        ],"dropdown pull-left d-none d-md-block ");
+        if (!$is_mobile) {
+            $a = a_enid(
+                _text_(icon(_text_(_mas_opciones_bajo_icon)), "Lo más buscado"),
+                [
+                    "class" => "p-2 dropdown-toggle strong black ",
+                    "href" => "#",
+                    "role" => "button",
+                    "data-bs-toggle" => "dropdown",
+                    "aria-expanded" => "false"
+                ]
+            );
+            $ul = ul(categorias_destacatas_ab($mas_vendidos), ["class" => "dropdown-menu borde-0"]);
 
-        $response[] = d(d(
-            _text_(
-                $categorias,
-                span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
-                icon('fa fa-handshake-o fa-2x', 'strong')
-            ),
-            [
-                "class" => 'black bg_yellow borde_white pr-4 pl-4  barra_categorias_ab'
-            ]
-        ), 'text-md-right col-sx-12 col-sx-12');
+            $categorias = d([
+                $a,
+                $ul
+            ], "dropdown pull-left d-none d-md-block ");
+
+            $response[] = d(d(
+                _text_(
+                    $categorias,
+                    span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
+                    icon('fa fa-handshake-o fa-2x', 'strong')
+                ),
+                [
+                    "class" => 'black bg_yellow borde_white pr-4 pl-4  barra_categorias_ab'
+                ]
+            ), 'text-md-right col-sx-12 col-sx-12');
 
             $response[] = flex(
                 ajustar(get_logo(), $frecuentes, 2),
@@ -2436,7 +2438,7 @@ function get_img_usuario($path_img_usuario, $extra_class = '')
         "style" => "width: 40px!important;height: 35px!important;",
     ];
 
-    return a_enid(img($img_conf),['href'=>path_enid('personal')]);
+    return a_enid(img($img_conf), ['href' => path_enid('personal')]);
 }
 
 function create_button_easy_select($arr, $attributes, $comparador = 1)

@@ -794,7 +794,7 @@ if (!function_exists('invierte_date_time')) {
             ];
 
             $seccion_derecha = d($derecho, 'd-flex flex-column');
-            $contenido[] = flex($seccion_izquieda, $seccion_derecha, '', 'col-lg-4', 'col-lg-8 text-right');
+            $contenido[] = flex($seccion_izquieda, $seccion_derecha, '', 'col-lg-4 my-auto', 'col-lg-8 text-right');
 
 
 
@@ -802,7 +802,7 @@ if (!function_exists('invierte_date_time')) {
 
             $config = [
                 'id' => $id_orden_compra,
-                'class' => _text_('border border-secondary p-2 col-sm-12 mt-3 ', $extra),
+                'class' => _text_('borde_black p-2 col-sm-12 mt-3 ', $extra),
                 'href' =>  gestion_visibilidad_pedido($data, $id_orden_compra, $es_orden_entregada, $row["numero_boleto"])
             ];
 

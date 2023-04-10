@@ -98,6 +98,9 @@ class Paths
                 "css" => [
               
                 ],
+                "js" => [
+                    "cuenta_personal/principal.js"
+                ]
               
             ],            
             "competencias" => [

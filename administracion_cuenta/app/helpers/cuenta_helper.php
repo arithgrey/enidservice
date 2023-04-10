@@ -19,8 +19,8 @@ function format_cuenta($usuario)
 
     );
 
-    $seccion[] = _titulo("actualizar datos de acceso");
-    $seccion[] = frm_pw();
+    $seccion[] = d(_titulo("actualizar datos de acceso",2),8,1);
+    $seccion[] = d(frm_pw(),8,1);
     $actualizar = d($seccion, 'col-md-8 col-md-offset-2 p-0');
 
 
@@ -147,42 +147,43 @@ function frm_pw()
         ]
     );
 
-    $r[] = input_frm(
-        '',
-        "Contraseña actual",
+    $r[] = input_enid(
+        
+        
         [
             "name" => "password",
             "id" => "password",
             "class" => "pw",
             "type" => "password",
-            "required" => "true"
+            "required" => "true",
+            "placeholder" => 'Ingresa tu contraseña actual'
         ],
         _text_password
     );
 
-    $r[] = input_frm(
-        'mt-5',
-        "Nueva",
+    $r[] = input_enid(
+        
         [
             "name" => "pw_nueva",
             "id" => "pw_nueva",
             "type" => "password",
             "class" => 'pw_nueva',
-            "required" => true
+            "required" => true,
+            "placeholder" => "Registra una nueva contraseña"
         ],
         _text_password
 
     );
 
-    $r[] = input_frm(
-        'mt-5',
-        "Confirmar nueva",
+    $r[] = input_enid(
+        
         [
             "name" => "pw_nueva_confirm",
             "id" => "pw_nueva_confirm",
             "type" => "password",
             "class" => "pw_confirmacion",
-            "required" => "true"
+            "required" => true,
+            "placeholder" => "Escribe de nuevo la contraseña"
         ],
         _text_password
     );
