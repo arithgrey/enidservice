@@ -16,8 +16,7 @@ if (!function_exists('invierte_date_time')) {
         $ventas_hoy = [];
         $es_cliente = es_cliente($data);
         $response = "";
-        $lineas = 0;
-        $totales = 0;
+        
 
         if (es_administrador_o_vendedor($data)) {
             $data_complete[] = d(format_link(
@@ -93,8 +92,7 @@ if (!function_exists('invierte_date_time')) {
         $data,
         $usuario_entrega,
         $total,
-        $dia_entrega,
-        $es_contra_entrega,
+        $dia_entrega,        
         $id_usuario_entrega,
         $ubicacion,
         $total_articulos,
@@ -332,8 +330,7 @@ if (!function_exists('invierte_date_time')) {
             $data,
             $usuario_entrega,
             $total,
-            $dia_entrega,
-            $es_contra_entrega,
+            $dia_entrega,            
             $id_usuario_entrega,
             $ubicacion,
             $total_articulos,

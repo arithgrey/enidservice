@@ -1879,16 +1879,14 @@ class Servicio extends REST_Controller
 
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
-            //$this->response($servicios);
+            
 
             if (es_data($servicios)) {
-                /*
-                $response = get_view_sugerencias(
-                    $this->add_imgs_sugerencias($servicios)
-                );
-                */
+               
                 $response = $this->servicio_imagen_formato->formato_servicio($servicios);
+
             } else {
+                
                 $data_response["sugerencias"] = 0;
                 $this->response($data_response);
             }

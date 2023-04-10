@@ -1921,8 +1921,7 @@ if (!function_exists('invierte_date_time')) {
 
         $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
-        $menu = d([
-            acceso_populares($data),
+        $menu = d([            
             $menu_dash_board,
             acceso_proximas_entregas($data),
             acceso_noticias_vendedores($data),
@@ -1945,12 +1944,18 @@ if (!function_exists('invierte_date_time')) {
         ]);
 
         $seccion_menus = d($menu, "col-md-3 mt-3 fp9");
-        $seccion_contenidos = d(tab_content($secciones_tabs), "col-md-8 border-left border-secondary");
+        $seccion_contenidos = d(tab_content($secciones_tabs), "col-md-9 border-left border-secondary");
         $data_complete[] = d([$seccion_menus, $seccion_contenidos], 13);
         $data_complete[] = d($modal_comisiones, 13);
         $data_complete[] = d($modal_catalogo, 13);
         $data_complete[] = d($modal_promocion, 13);
         $data_complete[] = hiddens(["class" => "buscar_ordenes_compra", "value" => es_cliente($data)]);
+
+        $data_complete[] = d(d('','border_black'),"col-xs-12 mt-5 mb-5");
+        $data_complete[] = d(span("Los clientes también vieron",'strong f12'),12);
+        $data_complete[] = d(place("place_tambien_podria_interezar"),12);
+
+
         return d($data_complete, 'col-xs-12 mt-5');
     }
     function acceso_populares($data)

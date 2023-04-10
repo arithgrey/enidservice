@@ -13,8 +13,7 @@ class Home extends CI_Controller
 
     function index()
     {
-        $data = $this->app->session();
-        
+        $data = $this->app->session();        
         $data = $this->app->cssJs($data, "cuenta_personal", 1);
         $this->app->pagina($data, 'cuenta_personal/cuenta');
     }
