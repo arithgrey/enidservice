@@ -831,7 +831,7 @@ let agregar_lista_negra = (e) => {
         $('.cargando_modal').removeClass('d-none');
         $('.motivo').prop('disabled', 'disabled');
         request_enid("POST", data_send, url, function (data) {
-            //debugger;
+            
             redirect('');
         });
     }

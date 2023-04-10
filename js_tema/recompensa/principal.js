@@ -28,7 +28,7 @@ let recompensas_sugeridas  = function(){
         let url = "../q/index.php/api/recompensa/sugerencia/index/format/json/";
         let data_send = {"id_servicio": $id};
         request_enid("POST", data_send, url, function(data){
-            debugger;
+            
             redirect("");
         });
         
@@ -176,9 +176,7 @@ let response_recompensa = function(data){
 }
 let baja_recompensa = function(e){
 
-    let $id = e.target.id;
-    debugger;
-
+    let $id = e.target.id;    
     if (parseInt($id) > 0) {
 
         show_confirm("¿DESEAS DAR DE BAJA LA PROMOCIÓN?", "", "CONTINUAR", function () {

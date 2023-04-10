@@ -123,8 +123,9 @@ if (!function_exists('invierte_date_time')) {
         $formulario[] = d(
             "Puedes pegar el link de tu ubicación en Google maps 
             o escribir tu dirección,  
-            te llamaremos ya que estemos de camino a tu entrega!", 'mb-5 mt-5 black borde_black p-2');
+            te llamaremos ya que estemos de camino a tu entrega!", 'mb-5 mt-5 black border_black p-2');
 
+            /*
         $formulario[] = d(
             input_frm(
                 '-',
@@ -138,6 +139,20 @@ if (!function_exists('invierte_date_time')) {
             ),
             'mt-5'
         );
+        */
+        $formulario[] = input_enid(
+            [
+            'class' => 'ubicacion',
+            'name' => 'ubicacion',
+            'id' => 'ubicacion',
+            'required' => true,
+            'placeholder' => "¿Donde entregarémos tu pedido?",
+            ],
+            'Puedes pegar el link de tu ubicación en Google maps 
+            o escribir tu dirección'
+        );
+
+
         $formulario[] = hiddens(['name' => 'id_orden_compra', 'class' => 'id_orden_compra', 'value' => $id_orden_compra]);
 
         $config = [
@@ -164,7 +179,7 @@ if (!function_exists('invierte_date_time')) {
 
         $formulario[] = d($formulario_adicional,'d-none campos_adicionales');
         
-        $formulario[] = btn('Registrar', ['class' => 'mt-5']);
+        $formulario[] = btn('Registrar', ['class' => 'mt-5 accion_registro_ubicacion']);
         $formulario[] = form_close();
 
         $form[] = d($formulario, 'd-none formulario_registro_ubicacion');
