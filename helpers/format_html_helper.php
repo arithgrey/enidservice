@@ -1501,7 +1501,7 @@ function tmp_menu($path_img_usuario, $menu)
             "Configuración",
             [
                 "href" => path_enid("administracion_cuenta"),
-                "class" => 'black fp9 border-bottom border-dark',
+                "class" => 'black fp8 mt-4 text-uppercase border-bottom border-dark',
             ]
         ),
 
@@ -1509,7 +1509,7 @@ function tmp_menu($path_img_usuario, $menu)
             "Salir",
             [
                 "href" => path_enid("logout"),
-                "class" => 'black fp9 border-bottom border-dark',
+                "class" => 'black fp8 mt-4 text-uppercase border-bottom border-dark',
             ]
         )
     ];
@@ -2017,7 +2017,7 @@ function navegacion(
             $ul
         ],"dropdown pull-left d-none d-md-block ");
 
-        $extra = (is_mobile()) ? "" : span('(55) 5296 - 7027', 'strong');
+        
         $response[] = d(d(
             _text_(
                 $categorias,                                
@@ -2027,7 +2027,7 @@ function navegacion(
                 icon('fa fa-clock-o fa-2x', 'strong'),
                 span('recibe hoy', 'strong'),
                 icon('fa fa-fighter-jet fa-2x', 'strong'),
-                $extra
+                span('(55) 5296 - 7027', 'strong')
 
             ),
             [
@@ -2436,7 +2436,7 @@ function get_img_usuario($path_img_usuario, $extra_class = '')
         "style" => "width: 40px!important;height: 35px!important;",
     ];
 
-    return img($img_conf);
+    return a_enid(img($img_conf),['href'=>path_enid('personal')]);
 }
 
 function create_button_easy_select($arr, $attributes, $comparador = 1)

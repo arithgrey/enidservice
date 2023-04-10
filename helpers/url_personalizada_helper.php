@@ -149,6 +149,7 @@ function accesos_internos()
         "tiempo_venta" => "tiempo_venta",                
         "nuevo_usuario" => "login/?action=nuevo",
         "lista_deseos" => "lista_deseos",
+        "personal" => "personal",
         "lista_deseos_preferencias" => "lista_deseos/?q=preferencias",        
         "administracion_cuenta" => "administracion_cuenta",
         "area_cliente_pregunta" => "area_cliente/?action=preguntas",

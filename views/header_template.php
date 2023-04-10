@@ -4,8 +4,6 @@
     <?= $this->load->view("header_meta_enid")?>
 </head>
 
-
-
 <?php if ($pixel_facebook > 0): ?>
 <!-- Meta Pixel Code -->
 <script>

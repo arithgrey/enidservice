@@ -94,6 +94,12 @@ class Paths
                 ],
                 "pagina" => 11,
             ],
+            "cuenta_personal" => [
+                "css" => [
+              
+                ],
+              
+            ],            
             "competencias" => [
                 "css" => [
                     "competencias.css"

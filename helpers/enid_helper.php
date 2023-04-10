@@ -742,10 +742,10 @@ function create_contenido_menu($data)
         $path_web = base_url($row["urlpaginaweb"]);
         $menu[] =
             a_enid(
-                icon($row["iconorecurso"]) . $row["nombre"],
+                $row["nombre"],
                 [
                     "href" => ($row["idrecurso"] == 18) ? $path : $path_web,
-                    "class" => 'black border-bottom border-dark fp9',
+                    "class" => 'black border-bottom border-dark fp8 text-uppercase mt-4 ml-1',
                 ]
             );
     }
