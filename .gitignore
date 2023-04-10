@@ -118,3 +118,5 @@ nb-configuration.xml
 *.sql
 img_tema
 .gitignore
+**/composer.lock
+
