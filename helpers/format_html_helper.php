@@ -803,12 +803,12 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            _text_(icon("fa fa-user white"), "Ingresar / crear cuenta"),
+        icon("fa fa-user white"),
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
-                text-decoration-none mr-4 
-                white borde_amarillo iniciar_session_boton ml-3 p-2 font-weight-bold",
+                text-decoration-none mr-2
+                white iniciar_session_boton ml-3 p-2 font-weight-bold",
             ]
         );
 
@@ -1561,9 +1561,10 @@ function frm_search(
     if (!$in_session) {
 
         $notificacion_deseo_compra = flex(
+            icon("fa fa-shopping-bag white"),
             d('', 'place_resumen_deseo_compra white strong'),
-            icon("fa fa-shopping-bag fa-2x white"),
-            _between
+            _between,
+            "mr-2"
         );
         $r[] = a_enid(
             $notificacion_deseo_compra,
@@ -2380,69 +2381,6 @@ function get_logo($session = 0)
     $class = "col-md-12 d-block d-md-none";
     $response[] =  d($en_mobile, $class);
     return append($response);
-
-
-
-    /*
-  
-    if (is_mobile()) {
-
-        $path = path_enid("search_q3");
-        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
-     
-
-        $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);       
-        $carro = "";
-
-        $icono_busqueda_carro = flex($icono_busqueda, $carro, _between, "borde_amarillo");
-
-        $acceder = a_enid(
-            "Ingresar ",
-            [
-                "href" => path_enid('login'),
-                "class" => "white borde_amarillo d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
-            ]
-        );
-
-        $acceder  = ($session < 1) ? $acceder : "";
-        $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3');
-
-
-        $carro_logo = flex($texto, $icono_busqueda_carro_session, _between);
-        $carro_logo = ($session > 0) ? $texto : $carro_logo;
-        $en_mobile = d(
-            $carro_logo,
-            "smallnav menu white f12 mt-4 "
-        );
-        $class = "col-lg-12";
-        switch ($session) {
-
-            case 1:
-                $class = "col-lg-3";
-                break;
-            case 2:
-                $class = "col-lg-1";
-                break;
-        }
-
-        $response[] =  d($en_mobile, $class);
-        return append($response);
-    } else {
-
-        //$img_enid = img_enid(["style" => "width: 50px!important;"]);
-
-        $path = path_enid("search_q3");
-        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
-
-        return a_enid(
-            $texto,
-            [
-                "href" => path_enid('home'),
-                "class" => "ml-3 mb-2 d-none d-md-block"
-            ],0
-        );
-    }
-    */
 }
 
 function img_servicio($id, $external = 0)

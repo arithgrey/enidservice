@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo, 1, ["class" => "strong f18"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f15"]));
             $x[] = venta_producto(
                 $s,
                 $data,
@@ -260,10 +260,10 @@ if (!function_exists('invierte_date_time')) {
         //$data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
-        $pagina_producto[] =  d($data_response, 9);
+        $pagina_producto[] =  d($data_response, 8);
 
         if (!is_mobile()) {
-            $pagina_producto[] =  d($x, 'col-sm-3 border-left-ct mt-md-5 mt-lg-1');
+            $pagina_producto[] =  d($x, 'col-sm-4 border-left-ct mt-md-5 mt-lg-1');
         }
 
         $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
@@ -373,22 +373,7 @@ if (!function_exists('invierte_date_time')) {
         $tiempo_entrega
     ) {
 
-        $place_valoraciones = d(
-            "",
-            [
-                'class' => 'valoracion_persona_principal valoracion_persona'
-            ]
-        );
-
-        $link_valoraciones = a_enid(
-            $place_valoraciones,
-            [
-                'class' => 'lee_valoraciones ',
-                'href' => path_enid('search_q3', $id_publicador)
-            ]
-        );
-
-        $r[] = d($link_valoraciones, 12);
+       
 
         $numero_compras = pr($servicio, "deseado");
         if ($numero_compras > 1) {
@@ -1331,7 +1316,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'top_40'), 'p-0 col-xs-10', 'p-0 col-xs-2');
+        $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'mt-3'), 'p-0 col-xs-10', 'p-0 col-xs-2');
         $seccion[] = d(cargando(),'col-xs-12');
         return append($seccion);
     }
