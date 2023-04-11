@@ -480,9 +480,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_frm($data, $id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
     {
-
-
-        //$precio = pr($data["info_servicio"]["servicio"], "precio");
+        
         $response = [];
         $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
@@ -490,7 +488,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ganancia_comisionista($data);
         $r[] = flex(
             _titulo("Cantidad", $tipo),
-            select_cantidad_compra($es_servicio, rand(1,8)),
+            select_cantidad_compra($es_servicio, 4),
             _text_(_between, 'mb-5'),
             'col-xs-4 p-0',
             'col-xs-8 p-0'
