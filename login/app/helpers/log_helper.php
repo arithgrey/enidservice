@@ -19,6 +19,14 @@ if (!function_exists('invierte_date_time')) {
             1
         );
 
+        $r[] = hiddens(
+            [
+                "class" => "q_enid",
+                "value" => prm_def($param,"q"),
+            ],
+            1
+        );
+
         return d($r, 'col-md-4 col-md-offset-4 ');
     }
 

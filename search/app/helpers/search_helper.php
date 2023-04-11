@@ -11,10 +11,9 @@ if (!function_exists('invierte_date_time')) {
     function render_search($data)
     {
 
-        $paginacion = $data["paginacion"];        
-        //$categorias_destacadas = $data["categorias_destacadas"];
+        $paginacion = $data["paginacion"];
 
-        $response[] = baner_compra_tipo_producto($data);        
+        $response[] = baner_compra_tipo_producto($data);
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);
@@ -42,8 +41,6 @@ if (!function_exists('invierte_date_time')) {
         $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
 
-        
-
         $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);
         $adicionales[] = $seccion_compras_conjunto;
@@ -51,66 +48,57 @@ if (!function_exists('invierte_date_time')) {
 
 
         $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5 ssss");
-        $link_promociones = format_link("Más promociones", [
-            "href" => path_enid("promociones"),
-            "class" => "border"
-        ]);
-        //$response[] = d(d(d($link_promociones, 13), 10, 1), "row mt-5");
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
-        //$response[] = d(d($seccion_categorias, "col-sm-10 col-sm-offset-1 p-0"), 13);
-
-        //$response[] = d(d(oferta_delivery(), "col-sm-10 col-sm-offset-1 p-0"), 13);
-
+        
         return d($response, 12);
-    }
+    }    
     function baner_compra_tipo_producto($data)
     {
 
-        $q = prm_def($data, "q","");
-        
+        $q = prm_def($data, "q", "");
+
         $mas_vendidos = $data["mas_vendidos"];
-        
+
         $response = [];
-        foreach($mas_vendidos as $row){
-                $path = $row["path"];
-                
-                if($path === $q){
-                    $response_ = [];
-                    $titulo = $row["titulo"];
-                    $sub_titulo = $row["sub_titulo"];
-                    $link_video = $row["link_video"];
+        foreach ($mas_vendidos as $row) {
+            $path = $row["path"];
 
-                    if(str_len($titulo, 3)){
-                        $response_[] = d(
-                            $titulo,
-                            'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                        );
-                    }
-    
-                    if(str_len($sub_titulo, 3)){
+            if ($path === $q) {
+                $response_ = [];
+                $titulo = $row["titulo"];
+                $sub_titulo = $row["sub_titulo"];
+                $link_video = $row["link_video"];
 
-                        $response_[] = d($sub_titulo,'black col-sm-12 p-0 mt-3 mb-3');
-                    }
+                if (str_len($titulo, 3)) {
+                    $response_[] = d(
+                        $titulo,
+                        'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                    );
+                }
 
-                    if(str_len($link_video, 3)){
-                        $response_[] =  d(d(
-                            _text_('<iframe width="560" 
+                if (str_len($sub_titulo, 3)) {
+
+                    $response_[] = d($sub_titulo, 'black col-sm-12 p-0 mt-3 mb-3');
+                }
+
+                if (str_len($link_video, 3)) {
+                    $response_[] =  d(d(
+                        _text_('<iframe width="560" 
                             height="315" 
-                            src="',$link_video,'" 
+                            src="', $link_video, '" 
                             title="YouTube video player" 
                             frameborder="0" 
                             allow="accelerometer; 
                             autoplay; clipboard-write; 
                             encrypted-media; gyroscope; 
-                            picture-in-picture; web-share" allowfullscreen></iframe>')
-                            ,'mt-4 row'),12);
-    
-                    }
-                    
-                    $extra = is_mobile() ? 12 :'';
-                    $response[] = d($response_ , $extra);
-                    
+                            picture-in-picture; web-share" allowfullscreen></iframe>'),
+                        'mt-4 row'
+                    ), 12);
                 }
+
+                $extra = is_mobile() ? 12 : '';
+                $response[] = d($response_, $extra);
+            }
         }
         /*
         

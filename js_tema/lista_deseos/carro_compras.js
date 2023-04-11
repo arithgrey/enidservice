@@ -29,6 +29,7 @@ $(document).ready(function () {
     $form_segunda_compra.submit(segunda_compra);
     $cobro_secundario.keyup(cobro_secundario);
     $('#sticky-footer').addClass("d-none");
+    $(".anuncio_registro_descuento").addClass('d-none');
     $("footer").ready(log_intento_conversion);
     
     $(".envio_compra").click(function(){
