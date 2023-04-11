@@ -1,15 +1,18 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
-
+use Enid\ReciboReparto\Reparto;
 class ubicacion extends REST_Controller
 {
+    private $reparto;
     function __construct()
     {
         parent::__construct();
         $this->load->model("ubicacion_model");
+        $this->load->model("recibo_model");
         $this->load->library('table');
         $this->load->library(lib_def());
-        $this->id_usuario = $this->app->get_session("id_usuario");
+        $this->id_usuario = $this->app->get_session("id_usuario");       
+        $this->reparto = new Reparto($this->recibo_model);
     }
 
     function frecuentes_POST()
@@ -85,7 +88,6 @@ class ubicacion extends REST_Controller
         if (fx($param, 'id_orden_compra,ubicacion,fecha_entrega,horario_entrega')) {
 
             $id_orden_compra = $param['id_orden_compra'];
-
             $productos_ordenes_compra = $this->app->productos_ordenes_compra($id_orden_compra);
             $reparto = false;
             foreach ($productos_ordenes_compra as $row) {
@@ -102,9 +104,9 @@ class ubicacion extends REST_Controller
                     ];
 
                 $this->ubicacion_model->insert($params, 1);
-            }
-
-            $reparto = $this->app->asigna_reparto($id_orden_compra, 1);
+            }    
+            
+            $reparto = $this->reparto->envio_a_reparto($productos_ordenes_compra, 1);
             $es_cliente = es_cliente($this->app->session());
 
             $area_cliente = path_enid('area_cliente_compras', _text($id_orden_compra, "&primercompra=1"));
@@ -131,11 +133,7 @@ class ubicacion extends REST_Controller
 
         if (fx($param, 'id_recibo')) {
 
-            $id_recibo = $param['id_recibo'];
-            $in = [
-                'id_recibo' => $id_recibo,
-            ];
-            //$response = $this->ubicacion_model->get([], $in, 1, 'id_ubicacion');
+            $id_recibo = $param['id_recibo'];            
             $response = $this->ubicacion_model->recibo_codigo_postal($id_recibo);
         }
         $this->response($response);

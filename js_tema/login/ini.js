@@ -42,7 +42,7 @@ $(document).ready(function () {
     $('#sticky-footer').addClass("d-none");
     $(".base_enid_web").removeClass("top_150").addClass("mt-3");
     $(".anuncio_registro_descuento").addClass('d-none');
-        
+
     $registrar_cuenta_botton.click(mostrar_seccion_nuevo_usuario);
     $form_inicio.submit(valida_form_session);
     $form_pass.submit(recupera_password);
@@ -51,7 +51,7 @@ $(document).ready(function () {
     $olvide_pass.click(muestra_contenedor_recuperacion);
     $btn_acceder_cuenta_enid.click(muestra_seccion_acceso);
     $botton_registro_usuario_nuevo.click(intento_registro_accion);
-    
+
     valida_registro_usuario();
 
     $registro_nombre.keypress(function (e) {
@@ -75,7 +75,7 @@ $(document).ready(function () {
     $registro_email.keypress(function (e) {
         if (e.which == 13) {
             let email = $(this).val();
-            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;            
+            const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
             if (!emailRegex.test(email)) {
 
                 error_enid_input($(this).attr("id"));
@@ -91,7 +91,7 @@ $(document).ready(function () {
 
     $registro_telefono.keypress(function (e) {
 
-        if (e.which == 13) {            
+        if (e.which == 13) {
             let $telefono = $(this).val();
             var regexTelefono = /^[0-9]{10}$/;
             if (!regexTelefono.test($telefono)) {
@@ -130,13 +130,13 @@ $(document).ready(function () {
             error_enid_input($(this).attr("id"));
             if (!emailRegex.test(email)) {
 
-                
+
                 error_enid_input($(this).attr("id"));
 
 
             } else {
 
-               
+
                 oculta_error_enid_input($(this).attr("id"));
             }
         }
@@ -149,7 +149,7 @@ $(document).ready(function () {
                 error_enid_input($(this).attr("id"));
 
             } else {
-                
+
                 oculta_error_enid_input($(this).attr("id"));
 
             }
@@ -161,12 +161,17 @@ $(document).ready(function () {
         $(".boton_iniciar_google_seccion").addClass("d-none");
         $(".tambien_puedes_iniciar").addClass("d-none");
     });
+    $input_password_inicio.keypress(function (e) {
+        $(".boton_iniciar_google_seccion").addClass("d-none");
+        $(".tambien_puedes_iniciar").addClass("d-none");
+    });
+
 
 
     $icono_mostrar_password.click(mostrar_password);
     $icono_ocultar_password.click(ocultar_password);
-    
-    $accion_iniciar_session.click(function(){
+
+    $accion_iniciar_session.click(function () {
 
         $mail_acceso.trigger(jQuery.Event("keypress", { which: 13 }));
         $input_password_inicio.trigger(jQuery.Event("keypress", { which: 13 }));
@@ -327,7 +332,7 @@ let response_usuario_registro = data => {
         }
     }
 };
-let intento_registro_accion =  function(){
+let intento_registro_accion = function () {
 
     $registro_nombre.trigger(jQuery.Event("keypress", { which: 13 }));
     $registro_email.trigger(jQuery.Event("keypress", { which: 13 }));
@@ -335,11 +340,11 @@ let intento_registro_accion =  function(){
     $registro_pw.trigger(jQuery.Event("keypress", { which: 13 }));
 
 }
-let valida_registro_usuario = function(){
-    
+let valida_registro_usuario = function () {
+
     let $q = $q_enid.val();
-    if($q > 0){
-        $registrar_cuenta_botton.click();       
+    if ($q > 0) {
+        $registrar_cuenta_botton.click();
     }
 
 }
