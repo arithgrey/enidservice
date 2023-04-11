@@ -47,6 +47,7 @@ $(document).ready(function () {
         $(".en_lista_deseos_producto").val(1);
     });
     $('#sticky-footer').addClass("d-none");
+    $(".anuncio_registro_descuento").addClass('d-none');
     $('.agregar_deseos_sin_antecedente').click(agregar_deseos_sin_antecedente_gbl);
     $('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);
     $("footer").ready(carga_productos_sugeridos);

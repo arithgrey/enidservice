@@ -34,10 +34,14 @@ let $label_mail_acceso = $(".label_mail_acceso");
 let $label_pw = $(".label_pw");
 let $btn_acceder_cuenta_enid = $(".btn_acceder_cuenta_enid");
 let $accion_iniciar_session = $(".accion_iniciar_session");
+let $q_enid = $(".q_enid");
+
 $(document).ready(function () {
+
 
     $('#sticky-footer').addClass("d-none");
     $(".base_enid_web").removeClass("top_150").addClass("mt-3");
+    $(".anuncio_registro_descuento").addClass('d-none');
         
     $registrar_cuenta_botton.click(mostrar_seccion_nuevo_usuario);
     $form_inicio.submit(valida_form_session);
@@ -47,6 +51,8 @@ $(document).ready(function () {
     $olvide_pass.click(muestra_contenedor_recuperacion);
     $btn_acceder_cuenta_enid.click(muestra_seccion_acceso);
     $botton_registro_usuario_nuevo.click(intento_registro_accion);
+    
+    valida_registro_usuario();
 
     $registro_nombre.keypress(function (e) {
 
@@ -117,7 +123,6 @@ $(document).ready(function () {
         }
     });
 
-    /**/
     $input_correo_inicio.keypress(function (e) {
         if (e.which == 13) {
             let email = $(this).val();
@@ -328,5 +333,13 @@ let intento_registro_accion =  function(){
     $registro_email.trigger(jQuery.Event("keypress", { which: 13 }));
     $registro_telefono.trigger(jQuery.Event("keypress", { which: 13 }));
     $registro_pw.trigger(jQuery.Event("keypress", { which: 13 }));
+
+}
+let valida_registro_usuario = function(){
+    
+    let $q = $q_enid.val();
+    if($q > 0){
+        $registrar_cuenta_botton.click();       
+    }
 
 }
