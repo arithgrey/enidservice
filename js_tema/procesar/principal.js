@@ -72,6 +72,8 @@ $(document).ready(() => {
     $(".base_enid_web").removeClass("top_150").addClass("mt-5");
     $('footer').addClass('d-none');
     $(".barra_categorias_ab").removeClass("d-block").addClass("d-none");
+    $(".anuncio_registro_descuento").addClass('d-none');
+    
     $form_busqueda_cliente.submit(busqueda_numero_cliente);
 
     $(".cupon_seccion_footer").removeClass("d-block").addClass("d-none");

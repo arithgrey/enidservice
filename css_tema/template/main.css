@@ -42,7 +42,8 @@
 }
 .border_red_b {
     border-bottom: solid 3px !important;
-    border-bottom-color: red !important;
+    border-bottom-color:#F00 !important;
+    
 
 }
 
@@ -321,7 +322,8 @@ th:hover {
 }
 
 .red_enid {
-    color: #C8180B !important;
+    color: #F00 !important;
+    
 }
 
 .blue_enid {

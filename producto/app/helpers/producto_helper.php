@@ -66,7 +66,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $tiempo = d(_text_("Consulta el ", span("tiempo de entrega aquí", 'border_black strong cursor_pointer accion_tiempo_alcaldia_pago')));
-        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Envío gratis recibe hoy", 'strong'), $tiempo), ' ml-2')), 'top_40  black text-uppercase');
+        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis y recibe hoy", 'strong'), $tiempo), ' ml-2')), 'mt-4  black text-uppercase');
         $contenido[] = d(_text_(icon("fa fa-lock"), span("Pago seguro, compra al recibir tu pedido!", 'underline ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');
 
         $contenido[] = d(d(
@@ -189,7 +189,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo, 1, ["class" => "strong f15"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f12"]));
             $x[] = venta_producto(
                 $s,
                 $data,
@@ -378,7 +378,9 @@ if (!function_exists('invierte_date_time')) {
         $numero_compras = pr($servicio, "deseado");
         if ($numero_compras > 1) {
 
-            $r[] = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)), 'black col-sm-12 text-right mb-3');
+            $texto = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)));
+            $r[] = flex($texto, "Calificaciones",'flex-column mb-3 black col-sm-12 text-right','','strong');
+
         }
 
         $r[] = ($es_mobile > 0) ? "" : d($nombre_producto, 12);
@@ -488,7 +490,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = ganancia_comisionista($data);
         $r[] = flex(
             _titulo("Cantidad", $tipo),
-            select_cantidad_compra($es_servicio, $existencia),
+            select_cantidad_compra($es_servicio, rand(1,8)),
             _text_(_between, 'mb-5'),
             'col-xs-4 p-0',
             'col-xs-8 p-0'
@@ -1120,8 +1122,8 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "red_enid strong"
                 ]);
                                 
-                $tiempo_restante_oferta = _text_($tiempo_restante,span('temina la oferta','strong'));                
-                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','','border_red_b mt-3');
+                $tiempo_restante_oferta = _text_($tiempo_restante,span('termina la oferta, quedan 3 disponibles','strong'));                
+                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','',' p-1 border_black mt-3');
             }
 
 
