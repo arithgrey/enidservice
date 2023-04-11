@@ -73,8 +73,7 @@ if (!function_exists('invierte_date_time')) {
             "text-center display-5 black mt-2 text-uppercase strong"
         ), 12);
 
-        $pagina[] = d(d("", ["id" => "contador", "class" => "bg_black white text-center borde_amarillo p-3 display-6 strongs"]), 'col-xs-12 mt-3     ');
-
+        $pagina[] = d(d("", ["id" => "contador", "class" => "bg_black white text-center borde_amarillo p-3 display-6"]), 'col-xs-12 mt-3');
 
         $id_servicio = $data["id_servicio"];
 

@@ -4,7 +4,7 @@ function actualizarContador() {
     const fechaLimite = localStorage.getItem('fechaLimite');
     if (fechaLimite === null) {
         // Si no hay fecha límite guardada en el almacenamiento local, crea una nueva fecha límite
-        const fechaLimite = ahora + 24 * 60 * 60 * 1000;
+        const fechaLimite = ahora + 8 * 60 * 60 * 1000;
         localStorage.setItem('fechaLimite', fechaLimite);
     }
     const tiempoRestante = fechaLimite - ahora;
