@@ -41,28 +41,31 @@ class Home extends CI_Controller
         $usuario = $this->app->usuario($id_usuario);
         $usuario_busqueda = $this->app->add_imgs_usuario($usuario, "id_usuario");
         $data['usuario_busqueda'] = $usuario_busqueda;
-        $data['perfil_busqueda'] = $this->get_perfil_data($id_usuario);
+        $perfil_busqueda = $this->get_perfil_data($id_usuario);
+        $data['perfil_busqueda'] = $perfil_busqueda;
         $data['usuario_calificacion'] = $this->usuario_calificacion($id_usuario);
         $data["tipificaciones"] = $this->tipo_tipificciones($data['in_session'], $data);
         $data['encuesta'] = prm_def($prm, 'encuesta');
         $data['id_servicio'] = prm_def($prm, 'servicio');
 
-        $session = $this->app->session();
+        $session = $this->app->session();         
         $ventas_semana = $this->ventas_semana($id_usuario);
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
+        
+        if(!es_cliente($perfil_busqueda) ){
+            $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
+            $data["ventas_semana"] = $ventas_semana;
+            $data["total_seguidores"] = $this->app->totales_seguidores($id_usuario);
 
-        $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
-        $data["ventas_semana"] = $ventas_semana;
-        $data["total_seguidores"] = $this->app->totales_seguidores($id_usuario);
-
+        }
+        
         $data["recibos_pago"] = [];
         $data["recibos_sin_pago"] = [];
         $data["otros_productos_interes"] = [];
 
         if (es_cliente($usuario_busqueda)) {
             
-            $data["recibos_pago"] = $this->app->recibos_usuario($id_usuario, 1);
-            $data["recibos_sin_pago"] = $this->app->recibos_usuario($id_usuario, 0);
+            
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
         

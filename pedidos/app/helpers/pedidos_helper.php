@@ -163,6 +163,15 @@ if (!function_exists('invierte_date_time')) {
         if (es_administrador($data)) {
 
             $adicionales[] = format_link(
+                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                [
+
+                    "href" => path_enid("leads"),
+                    "class" => "text-uppercase white",
+                ],2
+            );
+
+            $adicionales[] = format_link(
                 text_icon(_money_icon, "Dasboards"),
                 [
 
@@ -1921,7 +1930,19 @@ if (!function_exists('invierte_date_time')) {
 
         $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
+        $menu_clientes_frecuentes = format_link(
+            text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+            [
+
+                "href" => path_enid("leads"),
+                "class" => "text-uppercase white",
+            ],2
+        );
+
+        $menu_clientes_frecuentes = es_administrador($data) ? $menu_clientes_frecuentes : '';
+
         $menu = d([            
+            $menu_clientes_frecuentes,
             $menu_dash_board,
             acceso_proximas_entregas($data),
             acceso_noticias_vendedores($data),

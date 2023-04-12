@@ -34,7 +34,7 @@ if (!function_exists('invierte_date_time')) {
             $id_usuario = pr($usuario_busqueda, 'id_usuario');
             $url_img_usuario = pr($usuario_busqueda, 'url_img_usuario');
             $nombre = format_nombre($usuario_busqueda);
-            $descripcion[] = h($nombre, 1, ['class' => 'display-2 text-uppercase strong']);
+            $descripcion[] = h($nombre, 1, ['class' => 'display-4 text-uppercase strong']);
             $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
             $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
 
@@ -72,11 +72,16 @@ if (!function_exists('invierte_date_time')) {
             $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
             
             $contenido[] = p($nombre_usuario, 'update-note');
-            $contenido[] = d(_text_("#cliente", span($id_usuario,'borde_black')),'display-6 black');
+            $contenido[] = d(_text_(span("Cliente",'black strong'), _text("#",$id_usuario)),'display-6 black ');
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
             $response[] = seguidores($data);
+            
+            
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
+            
+            
+            
             $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
             $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-10 col-md-offset-1  bg-light p-5 contenedor_perfil');
@@ -99,7 +104,7 @@ if (!function_exists('invierte_date_time')) {
         
         $_response[] = d(place("place_pedidos"),5);
         
-        return d($_response,13);
+        return d(d($_response,12),13);
 
     }
     function tareas_control(){
@@ -228,6 +233,9 @@ if (!function_exists('invierte_date_time')) {
 
     function seccion_estadisticas($data)
     {
+        if(es_cliente($data["perfil_busqueda"])){
+            return "";
+        }
         $usuario_busqueda = $data["usuario_busqueda"];
         $r = [];
         if (!es_cliente($usuario_busqueda)) {
@@ -294,23 +302,9 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         $usuario_busqueda = $data["usuario_busqueda"];
         if (es_cliente($usuario_busqueda)) {
-
-            $recibos_pago = $data["recibos_pago"];
-            $recibos_sin_pago = $data["recibos_sin_pago"];
             
-            $total_recibos_pago = totales($recibos_pago);
-            $total_recibos_sin_pago = totales($recibos_sin_pago);
-            $total = $total_recibos_pago + $total_recibos_sin_pago;
-            $total_cancelaciones = total_cancelaciones($recibos_sin_pago);
-            $total_proceso = $total_recibos_sin_pago - $total_cancelaciones;
-
-            $response[] = flex("Artículos solicitados", $total, _between, "", "f11 rounded-circle");
-            $response[] = flex("Comprados", $total_recibos_pago, _between, "", "f11");
-            $response[] = flex("En proceso de compra", $total_proceso, _between, "", "f11");
-            $response[] = flex("Cancelaciones", $total_cancelaciones, _between, "", "f11");
-            $response[] = d(deseos($data), _text_(_4p, 'mt-2'));
+            
             $response[] = add_deseos($data);
-
 
         }
 
@@ -322,18 +316,23 @@ if (!function_exists('invierte_date_time')) {
         $usuario_busqueda = $data["usuario_busqueda"];
         $response = [];
         if (es_cliente($usuario_busqueda)) {
-
             $otros_productos_interes = $data["otros_productos_interes"];
+
+            if(es_data($otros_productos_interes)){
+                $response[] = d(_titulo("Cosas que le interesan al cliente",2),'col-xs-12 mb-3');
+            }
+            
+            
             foreach ($otros_productos_interes as $row) {
 
                 $icon = icon(_eliminar_icon);
                 $tag = flex($icon, $row["tag"], "", "mr-3");
 
-                $response[] = d($tag, "border-bottom border-info mt-1");
+                $response[] = d(d($tag, "border-bottom border-info mt-1"), 'col-xs-12');
 
             }
         }
-        return append($response);
+        return d($response,13);
 
     }
 
@@ -406,7 +405,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(_titulo(round($calificacion, 2)), 'text-center');
         $response[] = d(_text_('Valoraciones', strong($encuestas)), 'text-center');
-        $response[] = d($estrellas);
+        $response[] = d($estrellas,'text-center');
 
 
         if (!$es_propietario) {
@@ -422,6 +421,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
+        $response[] = deseos($data);
 
 
         $id_usuario_califica = ($data['in_session']) ? $data['id_usuario'] : 0;
@@ -471,7 +471,7 @@ if (!function_exists('invierte_date_time')) {
             $response[] = d(
                 format_link('deseos',
                     [
-                        'class' => 'deseos_cliente',
+                        'class' => 'deseos_cliente mt-3',
                         'id' => $id_usuario
                     ], 0
                 )

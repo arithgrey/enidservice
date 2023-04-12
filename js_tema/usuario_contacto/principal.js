@@ -54,11 +54,10 @@ let busqueda_pedidos = function (e) {
 
     let fecha_inicio = get_parameter("#datetimepicker4");
     let fecha_termino = get_parameter("#datetimepicker5");
-    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
-
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {        
         let data_send = $form_busqueda.serialize();
         let url = "../q/index.php/api/recibo/pedidos/format/json/";
-        request_enid("GET", data_send, url, response_pedidos, ".place_pedidos");
+        request_enid("GET", data_send, url, response_pedidos);
 
     }
     e.preventDefault();

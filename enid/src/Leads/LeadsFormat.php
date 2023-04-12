@@ -32,9 +32,9 @@ class LeadsFormat
 
             $id_usuario_venta = $row["id_usuario_referencia"];
             $resumen_pedido = $row["resumen_pedido"];
-            $id_usuario_conexion = $row["id_usuario"];
+            $id_usuario = $row["id_usuario"];
             $url_img_servicio = $row["url_img_servicio"];
-            $id_orden_compra = $row["id_orden_compra"];
+            
             $vendedor = format_nombre($row);
             $fecha_entrega = date_create($row["fecha_entrega"])->format('Y-m-d');
 
@@ -85,7 +85,7 @@ class LeadsFormat
             $resumen_pedido = a_enid(
                 $resumen_pedido,
                 [
-                    "href" => path_enid("pedidos_recibo", $id_orden_compra),
+                    "href" => path_enid("usuario_contacto", $id_usuario),
                     "class" => "black "
                 ]
             );
@@ -103,7 +103,7 @@ class LeadsFormat
                 ]
             );
 
-            $imagen_link = a_enid($imagen_servicio, ["href" => path_enid("pedidos_recibo", $row["id_orden_compra"])]);
+            $imagen_link = a_enid($imagen_servicio, ["href" => path_enid("usuario_contacto", $id_usuario)]);
             $elemento[] = d($imagen_link, "d-block mt-4");
             $total_like = $row["total_like"];
 
@@ -112,7 +112,7 @@ class LeadsFormat
 
             $attr = [
                 "class" => _text_(_like_icon, 'mt-4 mb-4 like_actividad', $extra),
-                "id" => $id_usuario_conexion,
+                "id" => $id_usuario,
                 "cantidad" => $total_like
             ];
 

@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "leads" => "leads",
         "procesar_ubicacion" => "procesar_ubicacion/?orden_compra=",
         "ab" => "search/?q2=0&order=2&q=",
         "barras_enid" => "search/?q2=0&q=barrasusorudo&order=2",
@@ -131,11 +132,7 @@ function accesos_enid()
         "rastreo_pedido" => 
         _text("http://enidservices.com/", _web, "/img_tema/seguimiento.png"),
         "dispositivo" => "img_tema/dispositivo.png",
-        "10_descuento" => _text("/img_tema/descuento.jpg")        
-        
-
-        
-
+        "10_descuento" => _text("/img_tema/descuento.jpg")                
     ];
 
     return $base_url + accesos_internos();
