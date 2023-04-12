@@ -103,6 +103,13 @@ class Paths
                 ]
               
             ],            
+            "leads" => [
+                "css" => [
+                    
+                ],
+                "pagina" => 12,
+            ]
+            ,
             "competencias" => [
                 "css" => [
                     "competencias.css"

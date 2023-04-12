@@ -7,7 +7,21 @@ class Recibo_model extends CI_Model
         parent::__construct();
         $this->load->database();
     }
+    function recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento()
+    {
 
+        $query_get = "SELECT p.*, po.id_orden_compra FROM proyecto_persona_forma_pagos p 
+        INNER JOIN producto_orden_compras po ON 
+        p.id = po.id_proyecto_persona_forma_pago   
+        WHERE p.se_cancela < 1
+        AND p.saldo_cubierto > 0
+        AND p.status IN (9,15)
+        AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
+        AND p.ficha_seguimiento < 1        
+        LIMIT 300";
+
+        return $this->db->query($query_get)->result_array();
+    }
     function get_compras_por_enviar()
     {
 
