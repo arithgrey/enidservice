@@ -111,9 +111,20 @@ $("footer").ready(() => {
         });
     }
 
-    //$('.quitar_deseo_sin_antecedente').click(quitar_deseo_sin_antecedente_gbl);            
+
     $(".activa_cupon").click(activar_cupon);
     $(".img-zoom").click(zoom_imagen);
+
+
+    $('.selector-del-elemento-a-copiar').click(function () {
+        var texto = $('.selector-del-div-a-copiar').text();
+        var elementoTemporal = $('<input>');
+        $('body').append(elementoTemporal);
+        elementoTemporal.val(texto).select();
+        document.execCommand('copy');
+        elementoTemporal.remove();
+    });
+
 
 });
 
@@ -404,8 +415,8 @@ let response_metricas_perfil = data => {
     let total_deseo = parseInt(data.lista_deseo);
     if (total_deseo > 0) {
 
-        
-        render_enid('.place_resumen_deseo_compra', _text_(total_deseo, "Productos"));        
+
+        render_enid('.place_resumen_deseo_compra', _text_(total_deseo, "Productos"));
         render_enid(".place_numero_deseo", total_deseo);
         $('.numero_deseo').removeClass('d-none');
 

@@ -602,39 +602,37 @@ function es_email_valido($email)
 
 
 
-function format_phone($number)
+function format_phone($telefono, $copy = 1 )
 {
-    $txt = preg_replace('/[\s\-|\.|\(|\)]/', '', $number);
-    $format = '[$1?$1 :][$2?($2):x][$3: ]$4[$5: ]$6[$7? $7:]';
-    if (preg_match(
-        '/^(.*)(\d{3})([^\d]*)(\d{3})([^\d]*)(\d{4})([^\d]{0,1}.*)$/',
-        $txt,
-        $matches
-    )) {
-        $result = $format;
-        foreach ($matches as $k => $v) {
-            $str = preg_match(
-                '/\[\$' . $k . '\?(.*?)\:(.*?)\]|\[\$' . $k . '\:(.*?)\]|(\$' . $k . '){1}/',
-                $format,
-                $filterMatch
-            );
-            if ($filterMatch) {
-                $result = str_replace(
-                    $filterMatch[0],
-                    (!isset($filterMatch[3]) ? (strlen($v) ? str_replace(
-                        '$' . $k,
-                        $v,
-                        $filterMatch[1]
-                    ) : $filterMatch[2]) : (strlen($v) ? $v : (isset($filterMatch[4]) ? '' : (isset($filterMatch[3]) ? $filterMatch[3] : '')))),
-                    $result
-                );
-            }
-        }
+    // Eliminar cualquier carácter que no sea un número
+    $telefono = preg_replace('/[^0-9]/', '', $telefono);
 
-        return $result;
+    // Obtener la longitud del número de teléfono
+    $longitud = strlen($telefono);
+
+    if ($longitud == 8) {
+        // Formatear número de 8 dígitos (Ejemplo: 12345678)
+        $telefono_formateado = substr($telefono, 0, 4) . "-" . substr($telefono, 4);
+    } else if ($longitud == 10) {
+        // Formatear número de 10 dígitos (Ejemplo: 5552967027)
+        $codigo_area = substr($telefono, 0, 2);
+        $resto = substr($telefono, 2);
+        $telefono_formateado = "($codigo_area) " . substr($resto, 0, 4) . "-" . substr($resto, 4);
+    } else if ($longitud == 12) {
+        // Formatear número de 12 dígitos (Ejemplo: 011525552967027)
+        $codigo_pais = substr($telefono, 0, 3);
+        $codigo_area = substr($telefono, 3, 2);
+        $resto = substr($telefono, 5);
+        $telefono_formateado = "+$codigo_pais ($codigo_area) " . substr($resto, 0, 4) . "-" . substr($resto, 4);
+    } else {
+        // Si la longitud no es válida, devolver el número original sin formato
+        $telefono_formateado = $telefono;
     }
-
-    return $number;
+    
+    if($copy < 1){
+        return $telefono_formateado;
+    }
+    return flex( $telefono_formateado,"","mt-2",'selector-del-div-a-copiar','ml-3 fa fa-clone selector-del-elemento-a-copiar');
 }
 
 
@@ -841,7 +839,7 @@ function format_hora($date)
 function money($num)
 {
 
-    return _text("$",sprintf('%01.2f', $num));
+    return _text("$", sprintf('%01.2f', $num));
 }
 
 function format_load($extra = '')
@@ -953,17 +951,6 @@ function format_nombre($usuario)
 }
 
 
-function phoneFormat($number)
-{
-    if (ctype_digit($number) && strlen($number) == 10) {
-        $number = '(' . substr($number, 0, 2) . ') ' . substr($number, 2, 2) . '-' . substr($number, 4, 2) . '-' . substr($number, 6, 2) . '-' . substr($number, 8, 2);
-    } else {
-        if (ctype_digit($number) && strlen($number) == 7) {
-            $number = substr($number, 0, 3) . '-' . substr($number, 3, 4);
-        }
-    }
-    return $number;
-}
 
 function format_link_nombre($data, $nombre, $email = '')
 {
@@ -1009,12 +996,12 @@ function valida_texto_maps($domicilio, $estilos = 1)
         if (strpos($row, 'https') !== FALSE) {
 
             $config = [
-                'href' => $row,                
+                'href' => $row,
                 'style' => 'color:blue;',
                 'class' => 'text-uppercase text-right mt-3'
             ];
             $configurador = [
-                'href' => $row,                
+                'href' => $row,
                 'class' => 'text-uppercase black mt-3 border border-info text-center'
             ];
             $conf = ($estilos < 0) ? $config : $configurador;
@@ -1035,18 +1022,18 @@ function penetracion_alcaldias($data)
 
     $ventas_mes_ubicaciones = $data["ventas_mes_ubicaciones"];
     $response[] = d(_titulo("Alcandías que son tendencia en ventas este mes", 4), 'mt-5 col-sm-12');
-    
-    if(es_data($ventas_mes_ubicaciones)){
+
+    if (es_data($ventas_mes_ubicaciones)) {
         foreach ($ventas_mes_ubicaciones  as $row) {
 
             $total =  $row["total"];
             $delegacion =  $row["delegacion"];
-    
+
             $textos = flex($delegacion, $total, _text_(_between, 'border-bottom border-secondary'), "black", "strong f12");
             $response[] = d($textos, 'col-sm-12 mt-2');
         }
     }
-    
+
     return append($response);
 }
 
@@ -1134,7 +1121,7 @@ function footer_opciones()
     $asistencia[] =  _titulo('Asistencia', 2, 'border_b_green');
 
     $asistencia[] =  a_enid(
-        flex('¿Necesitas ayuda?','(55) 5296 - 7027','flex-column mb-3 borde_black p-2','strong','strong'),
+        flex('¿Necesitas ayuda?', '(55) 5296 - 7027', 'flex-column mb-3 borde_black p-2', 'strong', 'strong'),
         [
             'href' => path_enid('whatsapp_ayuda', 0, 1),
             'class' => 'black fp9',
@@ -1258,11 +1245,11 @@ function footer_opciones()
 
     return d([
         $asistencia_seccion,
-        $oportunidades_seccion,        
+        $oportunidades_seccion,
         $seccion_productos,
-        
+
         $sociales_seccion
-    ],12);
+    ], 12);
 }
 function getRealIPAddress()
 {
@@ -1277,9 +1264,10 @@ function getRealIPAddress()
     }
     return $ip;
 }
-function modal_politica_devoluciones(){
+function modal_politica_devoluciones()
+{
     $str = _d(
-        d(_titulo("Preguntas frecuentes"), 'mb-2'),            
+        d(_titulo("Preguntas frecuentes"), 'mb-2'),
         _text(
             a_enid(
                 "¿CUÁNTO TARDARÁ EN LLEGAR MI PEDIDO?",
@@ -1288,50 +1276,46 @@ function modal_politica_devoluciones(){
                     "class" => 'mt-5 black strong underline hover_bg_black'
                 ]
             )
-                ),
-                _text(
-                    a_enid(
-                        "¿QUÉ PASA SI MI PRODUCTO TIENE UN DEFECTO O NO CUMPLE CON LOS ESTÁNDARES DE CALIDAD?",
-                        [
-                            "href" => path_enid("que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad"),
-                            "class" => 'mt-5 black strong underline hover_bg_black'
-                        ]
-                    )
-                )
+        ),
+        _text(
+            a_enid(
+                "¿QUÉ PASA SI MI PRODUCTO TIENE UN DEFECTO O NO CUMPLE CON LOS ESTÁNDARES DE CALIDAD?",
+                [
+                    "href" => path_enid("que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad"),
+                    "class" => 'mt-5 black strong underline hover_bg_black'
+                ]
+            )
+        ),
+        _text(
+            a_enid(
+                "¿CÓMO ES EL PROCESO DE DEVOLUCIÓN DE UN PEDIDO?",
+                [
+                    "href" => path_enid('como-es-el-proceso-de-devolucion-de-un-pedido'),
+                    "class" => 'mt-5 black strong underline hover_bg_black'
+                ]
+            )
+        ),
+        _text(
+            a_enid(
+                "¿CÓMO PUEDO DAR SEGUIMIENTO A LA ENTREGA DE MI PEDIDO?",
+                [
+                    "href" => path_enid("rastrea-paquete"),
+                    "class" => 'mt-5 black strong underline hover_bg_black'
+                ]
+            )
+        )
 
-                ,
-                _text(
-                    a_enid(
-                        "¿CÓMO ES EL PROCESO DE DEVOLUCIÓN DE UN PEDIDO?",
-                        [
-                            "href" => path_enid('como-es-el-proceso-de-devolucion-de-un-pedido'),
-                            "class" => 'mt-5 black strong underline hover_bg_black'
-                        ]
-                    )
-                )
-
-                ,
-                _text(
-                    a_enid(
-                        "¿CÓMO PUEDO DAR SEGUIMIENTO A LA ENTREGA DE MI PEDIDO?",
-                        [
-                            "href" => path_enid("rastrea-paquete"),
-                            "class" => 'mt-5 black strong underline hover_bg_black'
-                        ]
-                    )
-                )
-
-            );
+    );
 
     $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
 
 
 
     return gb_modal($r, 'modal_politica_devoluciones');
-
 }
 
-function modal_format_pago(){
+function modal_format_pago()
+{
 
 
     $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
@@ -1393,22 +1377,21 @@ function modal_format_pago(){
 
 
 
-    
+
     $str = _d(
         d(_titulo(
             _text_(
-                "Paga al recibir tus artículos y recíbelos el mismo día!",                                
+                "Paga al recibir tus artículos y recíbelos el mismo día!",
                 icon('fa-gift')
             )
         ), 'mb-2 mt-4'),
         d('Así funciona:', 'mt-2 f12 black borde_end_b'),
-        d(append($contenido))
-        ,
+        d(append($contenido)),
         hr('borde_end_b'),
         _text(
             d("Ofrecemos estas formas de pago al recibir tu pedido", 'text-uppercase black mt-5 f12 black strong')
         ),
-        
+
         _text(
             d(
                 _text("1.-", strong("Efectivo ")),
@@ -1417,53 +1400,52 @@ function modal_format_pago(){
         ),
         _text(
             d(_text("2.-", strong("Transferencia electrónica")), 'mt-5')
-            
+
         ),
         _text(
             d(_text("3.-", strong("tarjeta de crédito o débito")), 'mt-5'),
             d("Podrás comprar con tu tarjeta bancaria con una comisión adicional del 8.5% del monto de tu pedido")
-        )        
+        )
     );
 
     $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
-    
+
 
 
     return gb_modal($r, 'modal_formas_pago');
-
 }
-function modal_intento_conversion(){
+function modal_intento_conversion()
+{
 
-    $texto_agenda = d(d('AGENDA TU PEDIDO HOY Y RECIBE UN 10% DE DESCUENTO', 'display-5 white font-weight-bold'));    
+    $texto_agenda = d(d('AGENDA TU PEDIDO HOY Y RECIBE UN 10% DE DESCUENTO', 'display-5 white font-weight-bold'));
     $imagen = img(["src"  => path_enid("10_descuento")]);
-    $response[] = flex($texto_agenda, $imagen,_text_(' bg_black p-5',_between));
+    $response[] = flex($texto_agenda, $imagen, _text_(' bg_black p-5', _between));
 
 
-    $response[] = d(d(format_link("Lo quiero!",["class" => "activa_cupon"])),12);
-    $response[] = d(img(["src" => create_url_preview("back_experiencia.jpg")]));    
+    $response[] = d(d(format_link("Lo quiero!", ["class" => "activa_cupon"])), 12);
+    $response[] = d(img(["src" => create_url_preview("back_experiencia.jpg")]));
     $contenido[] =  d($response, 13);
 
     return gb_modal($contenido, 'modal_intento_conversion');
-
 }
-function modal_desglose_carro_compra(){
+function modal_desglose_carro_compra()
+{
 
-    
-    $response[] = d(d('¡AÑADIDO AL CARRITO CORRECTAMENTE!', 'display-5 black font-weight-bold'),12);
-    $response[] = d(place("place_desglose_carro_compra"),12);
+
+    $response[] = d(d('¡AÑADIDO AL CARRITO CORRECTAMENTE!', 'display-5 black font-weight-bold'), 12);
+    $response[] = d(place("place_desglose_carro_compra"), 12);
     $contenido[] =  d($response, 13);
 
-    return gb_modal($contenido, 'modal_agregado_carro_compra',0,1);
-
+    return gb_modal($contenido, 'modal_agregado_carro_compra', 0, 1);
 }
-function modal_detalle_imagen(){
+function modal_detalle_imagen()
+{
 
-    
-    $response[] = d(img(["src" => "", "class" => "w-100 img-detalle"]),12);    
+
+    $response[] = d(img(["src" => "", "class" => "w-100 img-detalle"]), 12);
     $contenido[] =  d($response, 13);
 
-    return gb_modal($contenido, 'modal_detalle_imagen',0,1,0);
-
+    return gb_modal($contenido, 'modal_detalle_imagen', 0, 1, 0);
 }
 
 function modal_prueba_en_casa()
@@ -1807,17 +1789,17 @@ function modal_venta_auto()
 
     return gb_modal($contenido, 'modal_venta_auto');
 }
-function cargando(){
+function cargando()
+{
 
     $span = span('Cargando ...', 'sr-only');
-        $load = str_repeat(d(
-            $span,
-            [
-                'class' => "spinner-grow",
-                'role' => "status"
-            ]
-        ), 5);
-        
-    return d($load, 'text-center cargando_modal d-none mt-3 cargando');        
+    $load = str_repeat(d(
+        $span,
+        [
+            'class' => "spinner-grow",
+            'role' => "status"
+        ]
+    ), 5);
 
+    return d($load, 'text-center cargando_modal d-none mt-3 cargando');
 }

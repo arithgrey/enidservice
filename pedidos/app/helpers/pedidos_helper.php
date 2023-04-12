@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
         $usuario_cliente = prm_def($data, 'usuario_cliente');
         if (es_data($usuario_cliente)) {
             $nombre_cliente = format_nombre($usuario_cliente);
-            $numero_telefonico = phoneFormat(pr($usuario_cliente, 'tel_contacto'));
+            $numero_telefonico = format_phone(pr($usuario_cliente, 'tel_contacto'));
         }
 
         $texto_previo = _text_(
@@ -694,7 +694,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $text_entrega[] = _titulo('cliente', 3, 'underline mt-4');
                 $text_entrega[] = d($nombre_cliente);
-                $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+                $text_entrega[] = d(format_phone(pr($usuario_cliente, 'tel_contacto')));
             }
 
             $response = append($text_entrega);
@@ -903,7 +903,7 @@ if (!function_exists('invierte_date_time')) {
                         $nombre_cliente = format_nombre($usuario_cliente);
                         $text_entrega[] = _titulo('cliente', 5, 'underline');
                         $text_entrega[] = d($nombre_cliente);
-                        $text_entrega[] = d(phoneFormat(pr($usuario_cliente, 'tel_contacto')));
+                        $text_entrega[] = d(format_phone(pr($usuario_cliente, 'tel_contacto')));
                         //$text_entrega[] = $imagen_texto_entrega;
                         $text_entrega[] = pago_en_cita($data, 1);
                     }
@@ -4272,7 +4272,7 @@ if (!function_exists('invierte_date_time')) {
 
             $telefonono = $row["tel_contacto"];
             $r[] = d(format_link_nombre_perfil($row));
-            $r[] = d(phoneFormat($telefonono), 'mt-3');
+            $r[] = d(format_phone($telefonono), 'mt-3');
 
             $facebook = $row["facebook"];
             if (str_len($facebook, 10)) {
