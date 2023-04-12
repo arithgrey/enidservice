@@ -763,15 +763,13 @@ if (!function_exists('invierte_date_time')) {
 
         $list = [
             format_link(
-                text_icon(_money_icon, "Noticias"),
+                text_icon(_text_(_money_icon,'white'), "Noticias"),
                 [
 
                     "href" => path_enid("busqueda"),
                     "class" => "text-uppercase black",
                 ]
-            ),
-
-
+                ),
             format_link(
                 text_icon(_money_icon, "pedidos"),
                 [
@@ -780,6 +778,14 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "text-uppercase black   dispositivos",
                 ],
                 0
+            ),        
+            format_link(
+                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                [
+
+                    "href" => path_enid("leads"),
+                    "class" => "text-uppercase white",
+                ],2
             ),
             $link_progreso_ventas,
             $link_checkout_accesos,

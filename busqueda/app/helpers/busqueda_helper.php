@@ -51,6 +51,15 @@ if (!function_exists('invierte_date_time')) {
 
         if(es_administrador($data)){
             
+            $r[]= format_link(
+                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                [
+
+                    "href" => path_enid("leads"),
+                    "class" => "text-uppercase white",
+                ],2
+            );
+
             $r[] = format_link("Dasboards", 
             [
                 "href" => path_enid("reporte_enid"),
