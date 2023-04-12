@@ -55,7 +55,7 @@ if (!function_exists('invierte_date_time')) {
 
             if ($es_propietario) {
 
-                $icono_link = icon(_text_(_editar_icon, 'black border p-5 border-info'));
+                $icono_link = icon(_text_(_editar_icon, 'black border '));
                 $contenido[] = a_enid(
                     $icono_link,
                     [
@@ -65,7 +65,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             
-            $contenido[] = flex($imagen, $seccion_calificacion, _between);
+            $contenido[] = flex($imagen, $seccion_calificacion, _between,'col-xs-4', 'col-xs-8');
             $contenido[] = seccion_facebook($data);
             $texto_puesto = roll($data);
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
@@ -94,9 +94,19 @@ if (!function_exists('invierte_date_time')) {
         }
         
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
-        $contenedor[] = d(place("place_pedidos"), 'col-md-10 col-md-offset-1 mt-5 mb-5');
-        return append($contenedor);
+        $_response[] = d(tareas_control(),3);
+        $_response[] = d($contenedor,4);
+        
+        $_response[] = d(place("place_pedidos"),5);
+        
+        return d($_response,13);
 
+    }
+    function tareas_control(){
+
+        $response[] = d(format_link("Actividad",["class" =>"white"] ,2),6);
+        $response[] = d(hr('border_black'),12);
+        return d($response);
     }
     function form_busqueda_ordenes_compra_hidden($data, $id_usuario)
     {
@@ -271,7 +281,7 @@ if (!function_exists('invierte_date_time')) {
                         $texto_ventas,
                         $texto_top_ventas
                     ],
-                    'f11 col-lg-2 mx-auto text-center mt-5'), 'row black');
+                    'f11 col-lg-4 mx-auto text-center mt-5'), 'row black');
 
         }
         return append($r);
