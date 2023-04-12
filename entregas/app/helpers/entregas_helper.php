@@ -732,7 +732,7 @@ if (!function_exists('invierte_date_time')) {
         $nombre_usuario_entrega = $usuario_entrega;
         $usuario_cliente = $row['usuario_cliente'];
         $nombre_cliente = format_nombre($usuario_cliente);
-        $telefono_cliente = phoneFormat(pr($usuario_cliente, 'tel_contacto'));
+        $telefono_cliente = format_phone(pr($usuario_cliente, 'tel_contacto'));
 
         $cliente = d(_text_(strong('cliente'), $nombre_cliente, $telefono_cliente), 'text-uppercase black');
         $repartidor = d(_text_(strong('Entregará'), $usuario_entrega), 'text-uppercase black');

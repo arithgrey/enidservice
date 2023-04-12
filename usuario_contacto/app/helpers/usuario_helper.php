@@ -22,6 +22,7 @@ if (!function_exists('invierte_date_time')) {
     function render($data)
     {   
         
+        
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
         
@@ -37,6 +38,7 @@ if (!function_exists('invierte_date_time')) {
             $descripcion[] = h($nombre, 1, ['class' => 'display-4 text-uppercase strong']);
             $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
             $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
+            $tel_contacto = pr($usuario_busqueda, 'tel_contacto');
 
             $imagen = a_enid(
                 img(
@@ -73,6 +75,8 @@ if (!function_exists('invierte_date_time')) {
             
             $contenido[] = p($nombre_usuario, 'update-note');
             $contenido[] = d(_text_(span("Cliente",'black strong'), _text("#",$id_usuario)),'display-6 black ');
+            $contenido[] = d(format_phone($tel_contacto));
+
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
             $response[] = seguidores($data);
