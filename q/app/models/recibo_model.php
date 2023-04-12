@@ -18,7 +18,8 @@ class Recibo_model extends CI_Model
         AND p.status IN (9,15)
         AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
         AND p.ficha_seguimiento < 1        
-        LIMIT 300";
+        ORDER BY p.fecha_entrega DESC
+        LIMIT 30";
 
         return $this->db->query($query_get)->result_array();
     }
