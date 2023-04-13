@@ -11,6 +11,7 @@ class Home extends CI_Controller
         parent::__construct();
         $this->load->helper("usuario");
         $this->load->library(lib_def());
+        $this->app->acceso();
     }
 
 

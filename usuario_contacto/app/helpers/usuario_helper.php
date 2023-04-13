@@ -521,6 +521,10 @@ if (!function_exists('invierte_date_time')) {
     function modal_descubrimiento_accion_seguimiento($data)
     {
 
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $tel_contacto = pr($usuario_busqueda, 'tel_contacto');
+        
+
         $acciones_seguimiento = $data["acciones_seguimiento"];
         $titulo_icono = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("Vamos a realizar un:"), '', 'mr-2');
         $lista_acciones_seguimiento[] = d(d(d($titulo_icono, 'underline'), 'col-xs-12'), 13);
@@ -536,6 +540,7 @@ if (!function_exists('invierte_date_time')) {
             $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 mt-4 text-center");
             $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");
             $tarjeta[] = d($row["ayuda_accion"], ["class" => 'mt-3 col-xs-12', 'id' => "texto-a-copiar"]);
+            $tarjeta[] = d(format_phone($tel_contacto),'col-xs-12 mt-3 text-center underline');
             $tarjeta[] = d(format_link("Ya lo envie!", ["class" => "ya_envie text-center mt-5", "id" => $row["id"]]), 'col-sm-6 col-sm-offset-3');
 
             $lista_acciones_seguimiento[] = d($tarjeta, 13);
