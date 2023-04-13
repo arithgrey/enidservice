@@ -5,7 +5,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(_titulo('Busqueda', 2), _mbt5);
-        $response[] = input_frm('', '¿A quién buscamos? Nombre, email, teléfono', [
+        $response[] = input_frm(
+            '',
+            '¿A quién buscamos? Nombre, email, teléfono',
+            [
                 'name' => 'q',
                 'id' => 'q',
                 'class' => 'q nombre_usuario'
@@ -16,16 +19,15 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d(place("seccion_usuarios"), 8, 1);
 
         return append($contenido);
-
     }
 
     function render($data)
-    {   
-        
-        
+    {
+
+
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
-        
+
         if (es_data($usuario_busqueda)) {
 
             $usuario_calificacion = $data['usuario_calificacion'];
@@ -47,12 +49,11 @@ if (!function_exists('invierte_date_time')) {
                         "onerror" => "this.src='../img_tema/user/user.png'",
                         "class" => "rounded-circle img_servicio_def"
                     ]
-                )
-                ,
+                ),
                 $link
             );
 
-            
+
             $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
 
             if ($es_propietario) {
@@ -66,33 +67,31 @@ if (!function_exists('invierte_date_time')) {
                 );
             }
 
-            
-            $contenido[] = flex($imagen, $seccion_calificacion, _between,'col-xs-4', 'col-xs-8');
+
+            $contenido[] = flex($imagen, $seccion_calificacion, _between, 'col-xs-4', 'col-xs-8');
             $contenido[] = seccion_facebook($data);
             $texto_puesto = roll($data);
             $texto_titulo = h($texto_puesto, 2, 'title display-5');
             $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
-            
+
             $contenido[] = p($nombre_usuario, 'update-note');
-            $contenido[] = d(_text_(span("Cliente",'black strong'), _text("#",$id_usuario)),'display-6 black ');
+            $contenido[] = d(_text_(span("Cliente", 'black strong'), _text("#", $id_usuario)), 'display-6 black ');
             $contenido[] = d(format_phone($tel_contacto));
 
             $response[] = d($descripcion, 'demo-title col-md-12');
             $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
             $response[] = seguidores($data);
-            
-            
+
+
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
-            
-            
-            
+
+
+
             $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
             $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-10 col-md-offset-1  bg-light p-5 contenedor_perfil');
             $contenedor[] = d(formulario_calificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
             $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
-
-
         } elseif ($data['encuesta'] > 0) {
             $contenedor[] = d(notificacion_encuesta(), 'col-md-10 col-md-offset-1 bg-light p-5 mb-5');
         } else {
@@ -101,26 +100,28 @@ if (!function_exists('invierte_date_time')) {
             $texto[] = format_link('Sigue comprando', ['class' => 'mt-5 col-md-8 col-md-offset-2', 'href' => path_enid('home')]);
             $contenedor[] = d($texto, 'col-md-4 col-md-offset-4 mt-5 bg-light p-5');
         }
-        
+
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
-        $_response[] = d(tareas_control(),3);
-        $_response[] = d($contenedor,4);
-        
-        $_response[] = d(place("place_pedidos"),5);
-        
-        return d(d($_response,12),13);
+        $_response[] = d(tareas_control(), 3);
+        $_response[] = d($contenedor, 4);
 
+        $_response[] = d(place("place_pedidos"), 5);
+        $_response[] = modal_acciones_seguimiento($data);
+        $_response[] = modal_descubrimiento_accion_seguimiento($data);
+        return d(d($_response, 12), 13);
     }
-    function tareas_control(){
+    function tareas_control()
+    {
 
-        $response[] = d(format_link("Actividad",["class" =>"white"] ,2),6);
-        $response[] = d(hr('border_black'),12);
+        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 12);
+        $response[] = d(hr('border_black'), 12);
+        $response[] = d(place("tarjetas_acciones_seguimiento"),12);
         return d($response);
     }
     function form_busqueda_ordenes_compra_hidden($data, $id_usuario)
     {
 
-        
+
         $response[] = form_open("", ["class" => "form_busqueda_pedidos_hidden mt-5", "method" => "post"]);
         $response[] = hiddens(['class' => 'usuarios', 'name' => 'usuarios', 'value' => 1]);
         $response[] = hiddens(['class' => 'ids', 'name' => 'ids', 'value' => $id_usuario]);
@@ -138,7 +139,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        
+
         $response[] = hiddens(
             [
                 "name" => "id_usuario_referencia",
@@ -146,7 +147,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        
+
         $response[] = hiddens(
             [
                 "name" => "cliente",
@@ -184,13 +185,13 @@ if (!function_exists('invierte_date_time')) {
                 'value' => 5,
             ]
         );
-        
 
-        
-        $response[] = d(frm_fecha_busqueda(),'d-none');
-    
+
+
+        $response[] = d(frm_fecha_busqueda(), 'd-none');
+
         $response[] = form_close();
-        return d($response,12);
+        return d($response, 12);
     }
     function seccion_facebook($data)
     {
@@ -205,10 +206,8 @@ if (!function_exists('invierte_date_time')) {
                 $config = ["href" => $link_facebook, "target" => "_blac"];
                 $response[] = a_enid($icon, $config);
             }
-
         }
         return append($response);
-
     }
 
     function seguidores($data)
@@ -237,7 +236,7 @@ if (!function_exists('invierte_date_time')) {
 
     function seccion_estadisticas($data)
     {
-        if(es_cliente($data["perfil_busqueda"])){
+        if (es_cliente($data["perfil_busqueda"])) {
             return "";
         }
         $usuario_busqueda = $data["usuario_busqueda"];
@@ -261,7 +260,8 @@ if (!function_exists('invierte_date_time')) {
             $icono_restantes = text_icon(_spinner, "restantes");
             $restantes = flex($icono_restantes, $restantes, 'flex-column strong black');
 
-            $link_ventas = a_texto('Mis ventas',
+            $link_ventas = a_texto(
+                'Mis ventas',
                 [
                     'class' => 'text-center ',
                     'href' => path_enid('pedidos')
@@ -270,9 +270,15 @@ if (!function_exists('invierte_date_time')) {
             $text_ventas = text_icon(_bomb_icon, $link_ventas);
             $texto_top = 'Identifica tus ordenes de compras enviadas';
             $texto_ventas = flex(
-                $text_ventas, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+                $text_ventas,
+                $texto_top,
+                'flex-column',
+                "",
+                "fp8 mt-3 text-secondary"
+            );
 
-            $link_top_ventas = a_texto('Top ventas',
+            $link_top_ventas = a_texto(
+                'Top ventas',
                 [
                     'class' => 'text-center black',
                     'href' => path_enid('top_competencia')
@@ -282,7 +288,12 @@ if (!function_exists('invierte_date_time')) {
             $icono_top = text_icon(_estrellas_icon, $link_top_ventas);
             $texto_top = 'Mira qué posición ocupas en la tabla';
             $texto_top_ventas = flex(
-                $icono_top, $texto_top, 'flex-column', "", "fp8 mt-3 text-secondary");
+                $icono_top,
+                $texto_top,
+                'flex-column',
+                "",
+                "fp8 mt-3 text-secondary"
+            );
 
             $r[] = d(
                 d_c(
@@ -293,23 +304,23 @@ if (!function_exists('invierte_date_time')) {
                         $texto_ventas,
                         $texto_top_ventas
                     ],
-                    'f11 col-lg-4 mx-auto text-center mt-5'), 'row black');
-
+                    'f11 col-lg-4 mx-auto text-center mt-5'
+                ),
+                'row black'
+            );
         }
         return append($r);
-
     }
 
     function seccion_estadisticas_compras($data)
     {
-        
+
         $response = [];
         $usuario_busqueda = $data["usuario_busqueda"];
         if (es_cliente($usuario_busqueda)) {
-            
-            
-            $response[] = add_deseos($data);
 
+
+            $response[] = add_deseos($data);
         }
 
         return append($response);
@@ -322,27 +333,25 @@ if (!function_exists('invierte_date_time')) {
         if (es_cliente($usuario_busqueda)) {
             $otros_productos_interes = $data["otros_productos_interes"];
 
-            if(es_data($otros_productos_interes)){
-                $response[] = d(_titulo("Cosas que le interesan al cliente",2),'col-xs-12 mb-3');
+            if (es_data($otros_productos_interes)) {
+                $response[] = d(_titulo("Cosas que le interesan al cliente", 2), 'col-xs-12 mb-3');
             }
-            
-            
+
+
             foreach ($otros_productos_interes as $row) {
 
                 $icon = icon(_eliminar_icon);
                 $tag = flex($icon, $row["tag"], "", "mr-3");
 
                 $response[] = d(d($tag, "border-bottom border-info mt-1"), 'col-xs-12');
-
             }
         }
-        return d($response,13);
-
+        return d($response, 13);
     }
 
     function total_cancelaciones($recibos)
     {
-        
+
         $total = 0;
         foreach ($recibos as $row) {
 
@@ -351,7 +360,6 @@ if (!function_exists('invierte_date_time')) {
 
                 $total = $total + $num_ciclos_contratados;
             }
-
         }
         return $total;
     }
@@ -373,7 +381,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(_titulo('Gracias por ayudar a mejorar nuestro servicio!', 2), 'text-center  text-uppercase');
-        $response[] = d(format_link('Sigue explorando',
+        $response[] = d(format_link(
+            'Sigue explorando',
             [
                 "href" => path_enid("home")
             ]
@@ -383,7 +392,7 @@ if (!function_exists('invierte_date_time')) {
 
     function posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario)
     {
-        
+
         $response = [];
         for ($x = 1; $x <= 5; $x++) {
 
@@ -397,33 +406,32 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $estrellas[] = label("★",
+            $estrellas[] = label(
+                "★",
                 [
                     "class" => ' black' . " f2 estrella_" . $x,
                     "for" => "$id_input",
-                    "id" => $x,                    
+                    "id" => $x,
                 ]
             );
-
         }
 
         $response[] = d(_titulo(round($calificacion, 2)), 'text-center');
         $response[] = d(_text_('Valoraciones', strong($encuestas)), 'text-center');
-        $response[] = d($estrellas,'text-center');
+        $response[] = d($estrellas, 'text-center');
 
 
         if (!$es_propietario) {
 
             $response[] = d(
-                format_link('Califícame',
+                format_link(
+                    'Califícame',
                     [
                         'class' => 'calificame',
                         'id' => $id_usuario
                     ]
                 )
             );
-
-
         }
         $response[] = deseos($data);
 
@@ -442,7 +450,9 @@ if (!function_exists('invierte_date_time')) {
 
         $form_otros[] = _titulo('¿El cliente tiene interés sobre otros artículos?');
         $form_otros[] = form_open('', ['class' => 'form_articulo_interes_entrega mt-5']);
-        $form_otros[] = input_frm('', '¿Qué artículo?',
+        $form_otros[] = input_frm(
+            '',
+            '¿Qué artículo?',
             [
                 'class' => 'nuevo_articulo_interes',
                 'id' => 'nuevo_articulo_interes',
@@ -460,7 +470,82 @@ if (!function_exists('invierte_date_time')) {
 
 
         return gb_modal(d($form_otros, 'form_otros'), "modal_otros");
+    }
 
+    function modal_acciones_seguimiento($data)
+    {
+
+        $acciones_seguimiento = $data["acciones_seguimiento"];
+        $lista_acciones_seguimiento[] = _titulo("¿Que tipo de seguimiento realizaremos?");
+        foreach ($acciones_seguimiento as $row) {
+
+            $acccion = $row["accion"];
+            $card_body  = d(p($acccion, ''), ["class" => "card-body"]);
+            $tarjeta = d(d(
+                $card_body,
+                [
+                    "class" => "card mt-5 accion_seguimiento_usuario",
+                    "onmouseover" => "this.style.backgroundColor='#f2f2f2'",
+                    "onmouseout" => "this.style.backgroundColor='white'",
+                    "id" => $row["id"],
+                ]
+            ));
+
+            $lista_acciones_seguimiento[] = $tarjeta;
+        }
+
+        return gb_modal(d($lista_acciones_seguimiento, 'form_otros'), "modal_accion_seguimiento");
+    }
+
+    function modal_descubrimiento_accion_seguimiento($data)
+    {
+
+        $acciones_seguimiento = $data["acciones_seguimiento"];
+        $titulo_icono = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("Vamos a realizar un:"), '', 'mr-2');
+        $lista_acciones_seguimiento[] = d(d(d($titulo_icono, 'underline'), 'col-xs-12'), 13);
+
+        foreach ($acciones_seguimiento as $row) {
+
+
+            $tarjeta = [];
+            $tarjeta[] = d($row["accion"], 'mt-5 strong f11 col-xs-12  text-center');
+
+            $tarjeta[] = d(span("Este texto te podría ayudar!", 'border_black p-2'), "col-xs-12 mt-4 mb-4 text-center");
+
+            $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 mt-4 text-center");
+            $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");
+            $tarjeta[] = d($row["ayuda_accion"], ["class" => 'mt-3 col-xs-12', 'id' => "texto-a-copiar"]);
+            $tarjeta[] = d(format_link("Ya lo envie!", ["class" => "ya_envie text-center mt-5", "id" => $row["id"]]), 'col-sm-6 col-sm-offset-3');
+
+            $lista_acciones_seguimiento[] = d($tarjeta, 13);
+        }
+
+
+        $form[] = form_open(
+            "",
+            [
+                "class" => "form_comentarios_accion_seguimiento col-xs-12 d-none",
+                "id" => "form_comentarios_accion_seguimiento",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
+        $form[] = textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]);
+        $form[] = d("Ups parece que falta esto","mt-3 color_red d-none place_area_comentario");
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $id_usuario = pr($usuario_busqueda, 'id_usuario');
+        
+        $form[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
+        $form[] = hiddens(["name" => "id_accion_seguimiento", "value" => 0, 'class' => "input_id_accion_seguimiento"]);
+        $form[] = d(btn("Eviar comentarios!", ["class" => "enviar_comentarios text-center mt-5", "id" => $row["id"]]), 'col-sm-8 col-sm-offset-2');
+        $form[] = form_close();
+        $form[] = d(cargando(),'text-center mx-auto');
+
+        $lista_acciones_seguimiento_comentarios = d($form, 13);
+        $lista_opciones = d($lista_acciones_seguimiento, 'lista_acciones_seguimiento_opciones');
+        $response = [$lista_acciones_seguimiento_comentarios, $lista_opciones];
+        return gb_modal($response, "modal_accion_seguimiento_descubrimiento");
     }
 
     function deseos($data)
@@ -473,11 +558,13 @@ if (!function_exists('invierte_date_time')) {
 
             $id_usuario = pr($usuario_busqueda, "id_usuario");
             $response[] = d(
-                format_link('deseos',
+                format_link(
+                    'deseos',
                     [
                         'class' => 'deseos_cliente mt-3',
                         'id' => $id_usuario
-                    ], 0
+                    ],
+                    0
                 )
             );
         }
@@ -517,7 +604,6 @@ if (!function_exists('invierte_date_time')) {
         $encuesta[] = d($r, _text_('col-md-8 col-md-offset-2 '));
         $response[] = append($encuesta);
         return d($response, 'col-lg-12 text-center');
-
     }
 
     function formulario_calificacion_tipificacion($data)
@@ -546,26 +632,31 @@ if (!function_exists('invierte_date_time')) {
                     [
                         'class' => 'tipificacion',
                         'id' => $row['id']
-                    ], 0
-                ), 'col-md-4 mt-4'
+                    ],
+                    0
+                ),
+                'col-md-4 mt-4'
             );
-
         }
 
 
         $response[] = d($r, 13);
         $response[] = d($label_tipificacion, 13);
-        $input = d(input_frm(12, 'Dejar un comentario',
+        $input = d(input_frm(
+            12,
+            'Dejar un comentario',
             [
                 'class' => 'input_comentario',
                 'id' => 'input_comentario'
-            ]), 'mt-5 row');
+            ]
+        ), 'mt-5 row');
 
         $response[] = $input;
 
 
         $response[] = hiddens(["class" => "input_id_servicio", "value" => prm_def($data, "id_servicio")]);
-        $enviar_puntuacion = btn('Enviár',
+        $enviar_puntuacion = btn(
+            'Enviár',
             [
                 'class' => 'enviar_formulario_boton col-md-3 ml-auto'
             ]
@@ -573,7 +664,6 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($enviar_puntuacion, 'row mt-5');
 
         return d($response, 'col-lg-10 col-md-offset-1 text-center');
-
     }
 
     function posibles_calificaciones($calificacion)
@@ -591,7 +681,8 @@ if (!function_exists('invierte_date_time')) {
                 ]
             );
 
-            $response[] = label("★",
+            $response[] = label(
+                "★",
                 [
                     "class" => 'estrella ' . " f2 estrella_" . $x,
                     "for" => "$id_input",
@@ -600,7 +691,6 @@ if (!function_exists('invierte_date_time')) {
                     "texto_calificacion" => $calificacion[$x]
                 ]
             );
-
         }
         return append($response);
     }

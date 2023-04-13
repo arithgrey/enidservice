@@ -125,7 +125,7 @@ $("footer").ready(() => {
         elementoTemporal.remove();
     });
 
-
+    
 });
 
 let zoom_imagen = function () {

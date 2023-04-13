@@ -16,6 +16,16 @@ let $input_id_servicio = $('.input_id_servicio');
 let $input_id_usuario_califica = $('.input_id_usuario_califica');
 let $input_deseos_cliente = $(".deseos_cliente");
 let $nombre_usuario = $();
+let $boton_accion_seguimiento = $(".boton_accion_seguimiento");
+let $accion_seguimiento_usuario = $(".accion_seguimiento_usuario");
+let $modal_accion_seguimiento_descubrimiento = $("#modal_accion_seguimiento_descubrimiento");
+let $ya_envie = $(".ya_envie");
+let $form_comentarios_accion_seguimiento = $('.form_comentarios_accion_seguimiento');
+let $lista_acciones_seguimiento_opciones = $(".lista_acciones_seguimiento_opciones");
+let $input_id_accion_seguimiento = $('.input_id_accion_seguimiento');
+let $place_area_comentario = $(".place_area_comentario");
+let $cargando_modal = $(".cargando_modal");
+
 if (parseInt($('.nombre_usuario').length) > 0) {
     $nombre_usuario = $('.nombre_usuario');
 }
@@ -46,15 +56,35 @@ $(document).ready(function () {
         $('#modal_otros').modal("show");
     });
 
+    $boton_accion_seguimiento.click(function () {
+
+        $('#modal_accion_seguimiento').modal("show");
+    });
+
     $form_articulo_interes.submit(registro_articulo_interes);
     $form_busqueda.submit(busqueda_pedidos);
     $form_busqueda.submit();
+    $accion_seguimiento_usuario.click(descubre_accion_seguimiento);
+
+    $('#texto-a-copiar').click(function () {
+
+        var texto = $(this).text();
+        var input = $('<input>').val(texto);
+        $('body').append(input);
+        input.select();
+        document.execCommand('copy');
+        input.remove();
+    });
+
+    $ya_envie.click(notificacion_envio_accion_seguimiento);
+    $form_comentarios_accion_seguimiento.submit(comentario_accion_seguimiento);
+    acciones_seguimiento();
 });
 let busqueda_pedidos = function (e) {
 
     let fecha_inicio = get_parameter("#datetimepicker4");
     let fecha_termino = get_parameter("#datetimepicker5");
-    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {        
+    if (fecha_inicio.length > 8 && fecha_termino.length > 8) {
         let data_send = $form_busqueda.serialize();
         let url = "../q/index.php/api/recibo/pedidos/format/json/";
         request_enid("GET", data_send, url, response_pedidos);
@@ -168,3 +198,63 @@ let carga_usuario = (data) => {
     $(".pagination > li > a, .pagination > li > span").css("color", "white");
 
 };
+
+let descubre_accion_seguimiento = function (e) {
+
+    let $id = $(this).attr("id");
+    if (parseInt($id) > 0) {
+        $('#modal_accion_seguimiento').modal("hide");
+        $modal_accion_seguimiento_descubrimiento.modal("show");
+    }
+};
+let notificacion_envio_accion_seguimiento = function () {
+
+    let $id = $(this).attr("id");
+    $input_id_accion_seguimiento.val($id);
+    $form_comentarios_accion_seguimiento.removeClass("d-none");
+    $lista_acciones_seguimiento_opciones.addClass("d-none");
+}
+let comentario_accion_seguimiento = function (e) {
+
+    var contenido = $(".comentario_seguimiento").val();
+
+    if (contenido.length > 0) {
+
+        $place_area_comentario.addClass("d-none");
+        $cargando_modal.removeClass("d-none");
+        let data_send = $form_comentarios_accion_seguimiento.serialize();
+        let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";
+        bloquea_form($form_comentarios_accion_seguimiento);
+        request_enid("POST", data_send, url, response_comentario_accion_seguimiento);
+
+
+    } else {
+
+        $place_area_comentario.removeClass("d-none");
+
+    }
+
+    e.preventDefault();
+
+}
+let response_comentario_accion_seguimiento = function () {
+
+    $cargando_modal.addClass("d-none");
+    desbloqueda_form($form_comentarios_accion_seguimiento);
+    reset_form("form_comentarios_accion_seguimiento");
+    $modal_accion_seguimiento_descubrimiento.modal("hide");
+}
+
+let acciones_seguimiento = function () {
+
+
+    let data_send = $.param({ "id": $input_id_usuario.val() });
+    let url = "../q/index.php/api/users_accion_seguimiento/usuario/format/json/";
+    request_enid("GET", data_send, url, acciones_seguimiento_response);
+
+
+}
+let acciones_seguimiento_response = function (data) {
+
+    render_enid(".tarjetas_acciones_seguimiento", data);
+}
