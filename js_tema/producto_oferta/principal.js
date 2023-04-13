@@ -84,13 +84,14 @@ $(document).ready(function () {
     $telefono_registro.keypress(function (e) {
         if (e.which == 13) {
             let telefono = $(this).val();
-            var regexTelefono = /^[0-9]{10}$/;
+            var regexTelefono = /^([0-9]{8}|[0-9]{10}|[0-9]{12})$/;
             if (!regexTelefono.test(telefono)) {
 
-                $(".place_input_form_telefono").addClass("d-none");
+                $(".place_input_form_telefono").removeClass("d-none");
             } else {
 
-                $(".place_input_form_telefono").removeClass("d-none");
+                
+                $(".place_input_form_telefono").addClass("d-none");
                 
             }
         }

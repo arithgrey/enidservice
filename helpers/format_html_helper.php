@@ -112,7 +112,7 @@ function input($attributes = [], $e = 0, $bootstrap = 1)
                     $attributes
                 )) ? ($attributes["class"] . " telefono ") : " telefono ";
                 $attributes["minlength"] = 8;
-                $attributes["maxlength"] = 10;
+                $attributes["maxlength"] = 12;
                 $attributes["required"] = true;
 
                 break;
