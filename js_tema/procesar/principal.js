@@ -129,7 +129,7 @@ $(document).ready(() => {
     $input_telefono_registro_envio.keypress(function (e) {
         if (e.which == 13) {            
             let $telefono = $(this).val();
-            var regexTelefono = /^[0-9]{10}$/;
+            var regexTelefono = /^([0-9]{8}|[0-9]{10}|[0-9]{12})$/;
             if (!regexTelefono.test($telefono)) {
 
                 error_enid_input($(this).attr("id"));

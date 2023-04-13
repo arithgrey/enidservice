@@ -1232,7 +1232,7 @@ let es_formato_telefono = function ($input) {
 
     let $telefono = $input.val();
     let tiene_formato = true;
-    var regexTelefono = /^[0-9]{10}$/;
+    var regexTelefono = /^([0-9]{8}|[0-9]{10}|[0-9]{12})$/;
     if (!regexTelefono.test($telefono)) {
 
         $input.next().next().removeClass('d-none');
