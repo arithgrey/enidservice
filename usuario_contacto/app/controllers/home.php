@@ -68,7 +68,7 @@ class Home extends CI_Controller
             
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
-        
+        $data["acciones_seguimiento"] = $this->app->api("accion_seguimiento/index");
         $this->app->pagina($data, render($data), 1);
     }
     
@@ -143,4 +143,6 @@ class Home extends CI_Controller
 
         return $this->app->api("puntuacion/general", ["id_usuario" => $id_usuario]);
     }
+    
+
 }

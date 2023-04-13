@@ -1438,7 +1438,7 @@ select {
 
 .bg_gray {
 
-    background: gray !important;
+    background: rgb(225, 227, 228) !important;
 }
 
 .bg_custom_black {
