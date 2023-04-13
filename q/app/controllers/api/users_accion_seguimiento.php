@@ -10,6 +10,7 @@ class users_accion_seguimiento extends REST_Controller
     {
         parent::__construct();
         $this->load->model("users_accion_seguimiento_model");
+        
         $this->load->library(lib_def());
         $this->acciones_seguimiento_clientes = new Clientes();
     }
@@ -45,6 +46,22 @@ class users_accion_seguimiento extends REST_Controller
         $this->response($response);
 
 	}
+    function notificacion_accion_seguimiento_PUT(){
+
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $id_usuario = $param["id_usuario"];
+            $recibos = $this->app->recibos_usuario($id_usuario, 1);
+
+            
+            
+        }
+        $this->response($response);
+
+
+    }
     
 
     /*    

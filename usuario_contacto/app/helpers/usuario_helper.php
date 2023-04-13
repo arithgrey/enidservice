@@ -22,9 +22,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function render($data)
-    {
-
-
+    {        
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
 
@@ -102,7 +100,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
-        $_response[] = d(tareas_control(), 3);
+        $_response[] = d(tareas_control($data), 3);
         $_response[] = d($contenedor, 4);
 
         $_response[] = d(place("place_pedidos"), 5);
@@ -110,11 +108,34 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = modal_descubrimiento_accion_seguimiento($data);
         return d(d($_response, 12), 13);
     }
-    function tareas_control()
+    function tareas_control($data)
     {
 
-        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 12);
+        if (es_administrador($data)) {
+
+            $response[] = d(format_link(
+                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                [
+
+                    "href" => path_enid("leads"),
+                    "class" => "text-uppercase white",
+                ],1
+            ),12);
+
+            $response[] = d(format_link(
+                text_icon(_money_icon, "Dasboards"),
+                [
+
+                    "href" => path_enid("reporte_enid"),
+                    "class" => "text-uppercase black mt-2",
+                ]
+            ),12);
+        }
+
+        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
         $response[] = d(hr('border_black'), 12);
+        $response[] = d("Historial de conversaciones con el cliente", 12);
+
         $response[] = d(place("tarjetas_acciones_seguimiento"),12);
         return d($response);
     }

@@ -244,18 +244,26 @@ let response_comentario_accion_seguimiento = function () {
     reset_form("form_comentarios_accion_seguimiento");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
     acciones_seguimiento();
+
 }
 
 let acciones_seguimiento = function () {
-
 
     let data_send = $.param({ "id": $input_id_usuario.val() });
     let url = "../q/index.php/api/users_accion_seguimiento/usuario/format/json/";
     request_enid("GET", data_send, url, acciones_seguimiento_response);
 
-
 }
 let acciones_seguimiento_response = function (data) {
 
     render_enid(".tarjetas_acciones_seguimiento", data);
+    let $id_usuario = $input_id_usuario.val();
+    let url = "../q/index.php/api/recibo/ficha_relacion/format/json/";
+    let data_send = {"id_usuario":$id_usuario};
+
+    request_enid("PUT", data_send, url, function(data){
+
+    });
+
+
 }
