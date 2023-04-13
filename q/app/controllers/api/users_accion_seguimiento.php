@@ -46,6 +46,21 @@ class users_accion_seguimiento extends REST_Controller
         $this->response($response);
 
 	}
+    function comentario_PUT()
+	{
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id,comentario")) {
+            
+            $comentario = $param["comentario"];
+            $id = $param["id"];
+            $response = $this->users_accion_seguimiento_model->q_up("comentario", $comentario, $id);
+            
+        }
+        $this->response($response);
+
+	}
+
     function notificacion_accion_seguimiento_PUT(){
 
         $param = $this->put();

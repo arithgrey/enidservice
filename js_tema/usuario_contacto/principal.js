@@ -21,6 +21,7 @@ let $accion_seguimiento_usuario = $(".accion_seguimiento_usuario");
 let $modal_accion_seguimiento_descubrimiento = $("#modal_accion_seguimiento_descubrimiento");
 let $ya_envie = $(".ya_envie");
 let $form_comentarios_accion_seguimiento = $('.form_comentarios_accion_seguimiento');
+let $form_comentarios_accion_seguimiento_notificado = $(".form_comentarios_accion_seguimiento_notificado");
 let $lista_acciones_seguimiento_opciones = $(".lista_acciones_seguimiento_opciones");
 let $input_id_accion_seguimiento = $('.input_id_accion_seguimiento');
 let $place_area_comentario = $(".place_area_comentario");
@@ -77,7 +78,7 @@ $(document).ready(function () {
     });
 
     $ya_envie.click(notificacion_envio_accion_seguimiento);
-    $form_comentarios_accion_seguimiento.submit(comentario_accion_seguimiento);
+    $form_comentarios_accion_seguimiento_notificado.submit(comentario_accion_seguimiento_notificado);
     acciones_seguimiento();
 });
 let busqueda_pedidos = function (e) {
@@ -211,21 +212,28 @@ let notificacion_envio_accion_seguimiento = function () {
 
     let $id = $(this).attr("id");
     $input_id_accion_seguimiento.val($id);
-    $form_comentarios_accion_seguimiento.removeClass("d-none");
-    $lista_acciones_seguimiento_opciones.addClass("d-none");
-}
-let comentario_accion_seguimiento = function (e) {
 
-    var contenido = $(".comentario_seguimiento").val();
+    $form_comentarios_accion_seguimiento_notificado.find(".cargando_modal").removeClass("d-none");    
+    let data_send = $form_comentarios_accion_seguimiento.serialize();
+    let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";    
+    request_enid("POST", data_send, url, response_comentario_accion_seguimiento);
+
+    
+}
+
+let comentario_accion_seguimiento_notificado = function (e) {
+
+    var contenido = $form_comentarios_accion_seguimiento_notificado.find(".comentario_seguimiento").val();
 
     if (contenido.length > 0) {
 
         $place_area_comentario.addClass("d-none");
-        $cargando_modal.removeClass("d-none");
-        let data_send = $form_comentarios_accion_seguimiento.serialize();
-        let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";
-        bloquea_form($form_comentarios_accion_seguimiento);
-        request_enid("POST", data_send, url, response_comentario_accion_seguimiento);
+        $form_comentarios_accion_seguimiento_notificado.find(".cargando_modal").removeClass("d-none");
+        
+        let data_send = $form_comentarios_accion_seguimiento_notificado.serialize();
+        let url = "../q/index.php/api/users_accion_seguimiento/comentario/format/json/";
+        bloquea_form($form_comentarios_accion_seguimiento_notificado);
+        request_enid("PUT", data_send, url, response_comentario_accion_seguimiento_notificado);
 
 
     } else {
@@ -237,14 +245,20 @@ let comentario_accion_seguimiento = function (e) {
     e.preventDefault();
 
 }
-let response_comentario_accion_seguimiento = function () {
-
-    $cargando_modal.addClass("d-none");
-    desbloqueda_form($form_comentarios_accion_seguimiento);
-    reset_form("form_comentarios_accion_seguimiento");
+let response_comentario_accion_seguimiento_notificado = function(data){
+        
+    desbloqueda_form($form_comentarios_accion_seguimiento_notificado);
+    reset_form("form_comentarios_accion_seguimiento_notificado");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
-    acciones_seguimiento();
 
+}
+let response_comentario_accion_seguimiento = function (data) {
+
+    $form_comentarios_accion_seguimiento_notificado.find(".id_accion_en_seguimiento").val(data);
+    acciones_seguimiento();    
+    $cargando_modal.addClass("d-none");    
+    $lista_acciones_seguimiento_opciones.addClass("d-none");        
+    $form_comentarios_accion_seguimiento_notificado.removeClass("d-none");
 }
 
 let acciones_seguimiento = function () {
@@ -261,9 +275,6 @@ let acciones_seguimiento_response = function (data) {
     let url = "../q/index.php/api/recibo/ficha_relacion/format/json/";
     let data_send = {"id_usuario":$id_usuario};
 
-    request_enid("PUT", data_send, url, function(data){
-
-    });
-
+    request_enid("PUT", data_send, url, function(data){});
 
 }

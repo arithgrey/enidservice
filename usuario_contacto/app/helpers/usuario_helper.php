@@ -541,7 +541,9 @@ if (!function_exists('invierte_date_time')) {
             $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");
             $tarjeta[] = d($row["ayuda_accion"], ["class" => 'mt-3 col-xs-12', 'id' => "texto-a-copiar"]);
             $tarjeta[] = d(format_phone($tel_contacto),'col-xs-12 mt-3 text-center underline');
-            $tarjeta[] = d(format_link("Ya lo envie!", ["class" => "ya_envie text-center mt-5", "id" => $row["id"]]), 'col-sm-6 col-sm-offset-3');
+            $tarjeta[] = d(format_link("Ya lo envié!", ["class" => "ya_envie text-center mt-5", "id" => $row["id"]]), 'col-sm-6 col-sm-offset-3');
+            $tarjeta[] = d(cargando(),'text-center mx-auto col-sm-6 col-sm-offset-3');
+
 
             $lista_acciones_seguimiento[] = d($tarjeta, 13);
         }
@@ -556,17 +558,39 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
-        $form[] = textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]);
+        //$form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
+        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]),'d-none');
         $form[] = d("Ups parece que falta esto","mt-3 color_red d-none place_area_comentario");
         $usuario_busqueda = $data['usuario_busqueda'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
         
         $form[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
         $form[] = hiddens(["name" => "id_accion_seguimiento", "value" => 0, 'class' => "input_id_accion_seguimiento"]);
+        $form[] = d(btn("Eviar comentarios!", ["class" => "enviar_comentarios text-center mt-5", "id" => $row["id"]]), 'col-sm-8 col-sm-offset-2 d-none');
+        $form[] = form_close();
+        $form[] = d(cargando(),'text-center mx-auto');
+
+        
+        $form[] = form_open(
+            "",
+            [
+                "class" => "form_comentarios_accion_seguimiento_notificado col-xs-12 d-none",
+                "id" => "form_comentarios_accion_seguimiento_notificado",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
+        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]));
+        $form[] = d("Ups parece que falta esto","mt-3 color_red d-none place_area_comentario");
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $id_usuario = pr($usuario_busqueda, 'id_usuario');
+        
+        $form[] = hiddens(["name" => "id", "value" => "",  "class"=> "id_accion_en_seguimiento"]);        
         $form[] = d(btn("Eviar comentarios!", ["class" => "enviar_comentarios text-center mt-5", "id" => $row["id"]]), 'col-sm-8 col-sm-offset-2');
         $form[] = form_close();
         $form[] = d(cargando(),'text-center mx-auto');
+
 
         $lista_acciones_seguimiento_comentarios = d($form, 13);
         $lista_opciones = d($lista_acciones_seguimiento, 'lista_acciones_seguimiento_opciones');
