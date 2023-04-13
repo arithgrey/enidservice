@@ -243,6 +243,7 @@ let response_comentario_accion_seguimiento = function () {
     desbloqueda_form($form_comentarios_accion_seguimiento);
     reset_form("form_comentarios_accion_seguimiento");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
+    acciones_seguimiento();
 }
 
 let acciones_seguimiento = function () {
