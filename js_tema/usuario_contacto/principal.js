@@ -202,8 +202,13 @@ let carga_usuario = (data) => {
 
 let descubre_accion_seguimiento = function (e) {
 
+    $(".tarjeta_opcion_seguimiento").addClass("d-none");
+    $(".tarjeta_opcion_seguimiento .selector-del-div-a-copiar").addClass("mx-auto");
+    
     let $id = $(this).attr("id");
     if (parseInt($id) > 0) {
+        
+        $(_text(".tarjeta_accion_seguimiento_",$id)).removeClass("d-none");
         $('#modal_accion_seguimiento').modal("hide");
         $modal_accion_seguimiento_descubrimiento.modal("show");
     }
@@ -250,6 +255,7 @@ let response_comentario_accion_seguimiento_notificado = function(data){
     desbloqueda_form($form_comentarios_accion_seguimiento_notificado);
     reset_form("form_comentarios_accion_seguimiento_notificado");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
+    acciones_seguimiento();    
 
 }
 let response_comentario_accion_seguimiento = function (data) {

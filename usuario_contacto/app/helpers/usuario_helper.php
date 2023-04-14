@@ -22,7 +22,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function render($data)
-    {        
+    {
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
 
@@ -114,13 +114,14 @@ if (!function_exists('invierte_date_time')) {
         if (es_administrador($data)) {
 
             $response[] = d(format_link(
-                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                text_icon(_text_(_money_icon, 'white'), "Clientes Frecuentes"),
                 [
 
                     "href" => path_enid("leads"),
                     "class" => "text-uppercase white",
-                ],1
-            ),12);
+                ],
+                1
+            ), 12);
 
             $response[] = d(format_link(
                 text_icon(_money_icon, "Dasboards"),
@@ -129,14 +130,14 @@ if (!function_exists('invierte_date_time')) {
                     "href" => path_enid("reporte_enid"),
                     "class" => "text-uppercase black mt-2",
                 ]
-            ),12);
+            ), 12);
         }
 
         $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
         $response[] = d(hr('border_black'), 12);
         $response[] = d("Historial de conversaciones con el cliente", 12);
 
-        $response[] = d(place("tarjetas_acciones_seguimiento"),12);
+        $response[] = d(place("tarjetas_acciones_seguimiento"), 12);
         return d($response);
     }
     function form_busqueda_ordenes_compra_hidden($data, $id_usuario)
@@ -523,7 +524,7 @@ if (!function_exists('invierte_date_time')) {
 
         $usuario_busqueda = $data['usuario_busqueda'];
         $tel_contacto = pr($usuario_busqueda, 'tel_contacto');
-        
+
 
         $acciones_seguimiento = $data["acciones_seguimiento"];
         $titulo_icono = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("Vamos a realizar un:"), '', 'mr-2');
@@ -531,21 +532,26 @@ if (!function_exists('invierte_date_time')) {
 
         foreach ($acciones_seguimiento as $row) {
 
-
             $tarjeta = [];
-            $tarjeta[] = d($row["accion"], 'mt-5 strong f11 col-xs-12  text-center');
+            $tarjeta[] = d($row["accion"], 'mt-4 strong f11 col-xs-12  text-center');
 
-            $tarjeta[] = d(span("Este texto te podría ayudar!", 'border_black p-2'), "col-xs-12 mt-4 mb-4 text-center");
 
-            $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 mt-4 text-center");
-            $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");
-            $tarjeta[] = d($row["ayuda_accion"], ["class" => 'mt-3 col-xs-12', 'id' => "texto-a-copiar"]);
-            $tarjeta[] = d(format_phone($tel_contacto),'col-xs-12 mt-3 text-center underline');
+            if ($row["mostrar_ayuda"] > 0 && str_len($row["ayuda_accion"], 1)) {
+                
+                $tarjeta[] = d(span("Este texto te podría ayudar!", 'border_black p-2'), "col-xs-12 mt-4 mb-4 text-center");
+                $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 mt-4 text-center");
+                $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");
+                $tarjeta[] = d($row["ayuda_accion"], ["class" => 'mt-3 col-xs-12', 'id' => "texto-a-copiar"]);
+            }
+
+
+            $tarjeta[] = d(format_phone($tel_contacto), 'col-xs-12 mt-3 text-center underline');
             $tarjeta[] = d(format_link("Ya lo envié!", ["class" => "ya_envie text-center mt-5", "id" => $row["id"]]), 'col-sm-6 col-sm-offset-3');
-            $tarjeta[] = d(cargando(),'text-center mx-auto col-sm-6 col-sm-offset-3');
+            $tarjeta[] = d(cargando(), 'text-center mx-auto col-sm-6 col-sm-offset-3');
 
 
-            $lista_acciones_seguimiento[] = d($tarjeta, 13);
+            $tarjeta_accion_seguimiento = _text("tarjeta_accion_seguimiento_", $row["id"]);
+            $lista_acciones_seguimiento[] = d($tarjeta, _text_('row d-none tarjeta_opcion_seguimiento', $tarjeta_accion_seguimiento));
         }
 
 
@@ -559,18 +565,18 @@ if (!function_exists('invierte_date_time')) {
         );
 
         //$form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
-        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]),'d-none');
-        $form[] = d("Ups parece que falta esto","mt-3 color_red d-none place_area_comentario");
+        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]), 'd-none');
+        $form[] = d("Ups parece que falta esto", "mt-3 color_red d-none place_area_comentario");
         $usuario_busqueda = $data['usuario_busqueda'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
-        
+
         $form[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
         $form[] = hiddens(["name" => "id_accion_seguimiento", "value" => 0, 'class' => "input_id_accion_seguimiento"]);
         $form[] = d(btn("Eviar comentarios!", ["class" => "enviar_comentarios text-center mt-5", "id" => $row["id"]]), 'col-sm-8 col-sm-offset-2 d-none');
         $form[] = form_close();
-        $form[] = d(cargando(),'text-center mx-auto');
+        $form[] = d(cargando(), 'text-center mx-auto');
 
-        
+
         $form[] = form_open(
             "",
             [
@@ -582,14 +588,14 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
         $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]));
-        $form[] = d("Ups parece que falta esto","mt-3 color_red d-none place_area_comentario");
+        $form[] = d("Ups parece que falta esto", "mt-3 color_red d-none place_area_comentario");
         $usuario_busqueda = $data['usuario_busqueda'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
-        
-        $form[] = hiddens(["name" => "id", "value" => "",  "class"=> "id_accion_en_seguimiento"]);        
+
+        $form[] = hiddens(["name" => "id", "value" => "",  "class" => "id_accion_en_seguimiento"]);
         $form[] = d(btn("Eviar comentarios!", ["class" => "enviar_comentarios text-center mt-5", "id" => $row["id"]]), 'col-sm-8 col-sm-offset-2');
         $form[] = form_close();
-        $form[] = d(cargando(),'text-center mx-auto');
+        $form[] = d(cargando(), 'text-center mx-auto');
 
 
         $lista_acciones_seguimiento_comentarios = d($form, 13);
