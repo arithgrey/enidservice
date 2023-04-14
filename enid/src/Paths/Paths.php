@@ -90,7 +90,8 @@ class Paths
                     "pedidos.css"
                 ],
                 "js" => [
-                    "usuario_contacto/principal.js"
+                    "usuario_contacto/principal.js",
+                    "respuestas_frecuentes/principal.js"
                 ],
                 "pagina" => 11,
             ],
@@ -99,7 +100,8 @@ class Paths
               
                 ],
                 "js" => [
-                    "cuenta_personal/principal.js"
+                    "cuenta_personal/principal.js",
+                    
                 ]
               
             ],            
@@ -108,7 +110,8 @@ class Paths
                     
                 ],
                 "js" => [
-                    "leads/principal.js"
+                    "leads/principal.js",
+                    "respuestas_frecuentes/principal.js"
                 ],
                 "pagina" => 12,
             ]
