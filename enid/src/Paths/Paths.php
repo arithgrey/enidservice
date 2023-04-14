@@ -107,6 +107,9 @@ class Paths
                 "css" => [
                     
                 ],
+                "js" => [
+                    "leads/principal.js"
+                ],
                 "pagina" => 12,
             ]
             ,
