@@ -25,22 +25,32 @@ class Clientes
             $status = $row["status"];
             $accion = $row["accion"];
             $ayuda_accion = $row["ayuda_accion"];
-
-            $texto_accion = flex(icon(_check_icon),$accion,'','mr-2');
             $tarjeta = [];
-            $tarjeta[] = d($texto_accion, 'mt-5 strong f11 col-xs-12');
-            $tarjeta[] = d(span($ayuda_accion), "col-xs-12 mt-4 mb-4 ");
-            
-            
-            
-            $texto_accion = flex(icon(_mas_opciones_bajo_icon),"Comentario del cliente",'','mr-2');
-            $tarjeta[] = d($texto_accion, 'mt-5 strong f11 col-xs-12');
-            
-            $tarjeta[] = d(d($comentario,'bg_gray p-2'), ["class" => 'mt-4 col-xs-12']);        
-            $tarjeta[] = d(span(format_fecha($fecha_registro,1),'fp9'), "col-xs-12 mt-4 mb-4 text-right");
 
-            $fichas[] = d($tarjeta,'mt-5 borde_black p-3');
+            if($row["mostrar_ayuda"] > 0 ){
+
+                $texto_accion = flex(icon(_check_icon), $accion, '', 'mr-2');
+                $tarjeta[] = d($texto_accion, 'mt-5 strong f11 col-xs-12');
+                $tarjeta[] = d(span($ayuda_accion), "col-xs-12 mt-4 mb-4 ");
+
+            }
+            
+            
+            
+
+
+
+            if (str_len($comentario, 2)) {
+
+                $texto_accion = flex(icon(_mas_opciones_bajo_icon), "Comentario del cliente", '', 'mr-2');
+                $tarjeta[] = d($texto_accion, 'mt-5 strong f11 col-xs-12');
+                $tarjeta[] = d(d($comentario, 'bg_gray p-2'), ["class" => 'mt-4 col-xs-12']);
+            }
+
+            $tarjeta[] = d(span(format_fecha($fecha_registro, 1), 'fp9'), "col-xs-12 mt-4 mb-4 text-right");
+
+            $fichas[] = d($tarjeta, 'mt-5 borde_black p-3 col-xs-12');
         }
-        return d($fichas,13);
+        return d($fichas, 13);
     }
 }

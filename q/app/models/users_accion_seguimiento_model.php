@@ -65,7 +65,7 @@ class users_accion_seguimiento_model extends CI_Model
     {
 
         $query_get = "select uas.*, ac.accion, 
-        ac.ayuda_accion from users_accion_seguimiento uas 
+        ac.ayuda_accion, ac.mostrar_ayuda from users_accion_seguimiento uas 
         inner join accion_seguimiento ac on  
         ac.id = uas.id_accion_seguimiento
         where uas.id_usuario = $id_usuario 
