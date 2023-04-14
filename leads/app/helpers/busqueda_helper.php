@@ -7,9 +7,16 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $response[] = d(navegacion_lead($data), 4);
-        $response[] = d($data["leads"], 8);
+        $response[] = d(listado_leads($data), 8);
         return d($response, 10, 1);
     }
+    function listado_leads($data){
+        
+        $response[] = d($data["formulario_busqueda_ordenes_compra"],12);
+        $response[] = d($data["leads"],12);
+        return d($response,13);
+    }
+    
     function navegacion_lead($data)
     {
         $response = [];

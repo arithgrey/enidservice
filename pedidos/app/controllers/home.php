@@ -1,19 +1,20 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
+use Enid\BusquedaRecibo\Form as FormBusquedaOrdenesCompra;
 class Home extends CI_Controller
 {
     private $id_usuario;
-
+    private $form_busqueda_ordenes_compra;
     function __construct()
     {
         parent::__construct();
         $this->load->helper("pedidos");
         $this->load->library("table");
-
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
+        $this->form_busqueda_ordenes_compra = new FormBusquedaOrdenesCompra();
+
     }
 
     function index()
@@ -460,9 +461,9 @@ class Home extends CI_Controller
 
 
         $data['comisiones_por_pago'] = es_data($ordenes) ?  $this->app->add_imgs_servicio($ordenes['ordenes']) : [];
-        $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes'] : [];
-        
-        $this->app->pagina($data, get_form_busqueda_pedidos($data, $param), 1);
+        $data['clientes_por_pago'] = es_data($ordenes) ? $ordenes['clientes'] : [];        
+        $data["formulario_busqueda_ordenes_compra"] = $this->form_busqueda_ordenes_compra->busqueda($param, $data);
+        $this->app->pagina($data, get_form_busqueda_pedidos($data), 1);
     }
 
     private function comisiones_por_pago($data)
