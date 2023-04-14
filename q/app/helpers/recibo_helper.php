@@ -636,6 +636,7 @@ if (!function_exists('invierte_date_time')) {
     function render_resumen_pedidos($recibos, $recompensas, $lista_estados, $param, $data)
     {
 
+        $historial = prm_def($param ,"historial");
         $perfil = $param['perfil'];
         $restricciones = $data['restricciones']['orden_entregada'];
         $tipo_orden = $param["tipo_orden"];
@@ -803,7 +804,7 @@ if (!function_exists('invierte_date_time')) {
             $config = [
                 'id' => $id_orden_compra,
                 'class' => _text_('borde_black p-2 col-sm-12 mt-3 ', $extra),
-                'href' =>  gestion_visibilidad_pedido($data, $id_orden_compra, $es_orden_entregada, $row["numero_boleto"])
+                'href' =>  gestion_visibilidad_pedido($data, $id_orden_compra, $es_orden_entregada, $row["numero_boleto"], $row["usuario_cliente"], $historial)
             ];
 
 
@@ -866,8 +867,14 @@ if (!function_exists('invierte_date_time')) {
 
         return compras_pedidos($ordenes_por_estados, $tb_fechas, $conversion, $saldos, $seccion_administrador_montos);
     }
-    function gestion_visibilidad_pedido($data, $id_orden_compra, $es_orden_entregada, $numero_boleto)
+    function gestion_visibilidad_pedido($data, $id_orden_compra, $es_orden_entregada, $numero_boleto, $cliente, $historial)
     {
+        
+        if($historial){
+
+            $path = path_enid('usuario_contacto', pr($cliente, "id_usuario"));    
+            return $path;    
+        }
 
         $path = path_enid('pedidos_recibo', $id_orden_compra);
         if (es_cliente($data)) {
