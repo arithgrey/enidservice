@@ -13,7 +13,7 @@ class accion_seguimiento extends REST_Controller
     function index_GET()
     {
                 
-        $this->response($this->accion_seguimiento_model->get([], [], 100,'fecha_registro'));
+        $this->response($this->accion_seguimiento_model->get([], [], 100,'fecha_registro', 'ASC'));
     }
     /*
     function index_PUT()

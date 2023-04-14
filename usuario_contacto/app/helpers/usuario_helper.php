@@ -83,8 +83,6 @@ if (!function_exists('invierte_date_time')) {
 
             $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
 
-
-
             $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
             $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
             $contenedor[] = d($response, 'col-md-10 col-md-offset-1  bg-light p-5 contenedor_perfil');
@@ -101,13 +99,17 @@ if (!function_exists('invierte_date_time')) {
 
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
         $_response[] = d(tareas_control($data), 3);
-        $_response[] = d($contenedor, 4);
+
+        $contenedor_central[] =  d(d($data["formulario_busqueda_frecuente"],'col-xs-12 mb-3'), 13);
+        $contenedor_central[] =  d($contenedor, 13);
+        $_response[] = d($contenedor_central, 4);
 
         $_response[] = d(place("place_pedidos"), 5);
         $_response[] = modal_acciones_seguimiento($data);
         $_response[] = modal_descubrimiento_accion_seguimiento($data);
         return d(d($_response, 12), 13);
     }
+    
     function tareas_control($data)
     {
 
@@ -506,7 +508,7 @@ if (!function_exists('invierte_date_time')) {
             $tarjeta = d(d(
                 $card_body,
                 [
-                    "class" => "card mt-5 accion_seguimiento_usuario",
+                    "class" => "card mt-3 accion_seguimiento_usuario",
                     "onmouseover" => "this.style.backgroundColor='#f2f2f2'",
                     "onmouseout" => "this.style.backgroundColor='white'",
                     "id" => $row["id"],
@@ -537,7 +539,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             if ($row["mostrar_ayuda"] > 0 && str_len($row["ayuda_accion"], 1)) {
-                
+
                 $tarjeta[] = d(span("Este texto te podría ayudar!", 'border_black p-2'), "col-xs-12 mt-4 mb-4 text-center");
                 $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 mt-4 text-center");
                 $tarjeta[] = d(icon(_mas_opciones_bajo_icon), "col-xs-12 text-center");

@@ -1,17 +1,18 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
+use Enid\RespuestasFrecuentes\Form as FormRespuestaFrecuente;
 class Home extends CI_Controller
 {
     private $id_usuario;
-
+    private $formRespuestaFrecuente;
     function __construct()
     {
         parent::__construct();
         $this->load->helper("usuario");
         $this->load->library(lib_def());
         $this->app->acceso();
+        $this->formRespuestaFrecuente =  new FormRespuestaFrecuente();
     }
 
 
@@ -69,6 +70,7 @@ class Home extends CI_Controller
             
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
+        $data["formulario_busqueda_frecuente"] = $this->formRespuestaFrecuente->busqueda();
         $data["acciones_seguimiento"] = $this->app->api("accion_seguimiento/index");
         $this->app->pagina($data, render($data), 1);
     }
