@@ -1,0 +1,61 @@
+.seccion_modal {
+  background-image: url("../../img_tema/invitacion_modal.jpeg?v=4");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+}
+
+body {
+  background-image: url("../../img_tema/invitacion.jpeg?v=8.1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+
+}
+
+.clipped-image {
+  -webkit-mask-image: url('../img_tema/1_helado.jpg');
+  mask-image: url('../img_tema/1_helado.jpg');
+}
+
+.text-stroke {
+  -webkit-text-stroke: 1px black;
+  text-stroke: 1px black;
+  color: white;
+}
+
+.font-z-7 {
+  font-size: 3em;
+}
+
+.btn-3d {
+
+  position: relative;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-3d:hover {
+  top: 2px;
+
+}
+
+.btn-3d:active {
+  top: 3px;
+  box-shadow: none;
+}
+
+.bautizo {
+  font-weight: 900 !important;
+  font-size: 2.4em;
+  color: white;
+}
+
+.te_esperamos_nombre {
+  background: #f318f0;
+  color: white;
+  font-size: 1.3em;
+  padding: 5px;
+}
+.nombre_asistente{
+  background: #e90ddc;
+}

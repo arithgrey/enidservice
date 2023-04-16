@@ -1313,7 +1313,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
     return d($modal, 13);
 }
 
-function menu_session_mobil($in_session, $mas_vendidos)
+function menu_session_mobil($mas_vendidos)
 {
 
     $cerrar_opciones = d(
@@ -1761,6 +1761,11 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
     $clase = "";
     switch ($primario) {
+        case 4:
+            /*Format Invitación*/
+            $clase = "pb-3 pt-3 p-2 strong col 
+            text-uppercase  format_invitacion shadow d-block";
+            break;
         case 3:
             /*Format Google simple*/
             $clase = "strong col 
