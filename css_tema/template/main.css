@@ -1157,6 +1157,10 @@ table {
     margin-top: 50px;
     display: block;
 }
+.top_40 {
+    margin-top: 40px;
+    display: block;
+}
 
 .top_70 {
     margin-top: 70px;
@@ -1165,6 +1169,10 @@ table {
 
 .top_80 {
     margin-top: 80px;
+    display: block;
+}
+.top_90 {
+    margin-top: 90px;
     display: block;
 }
 
@@ -2053,6 +2061,12 @@ ul li a {
 }
 .solid_3{
     border: solid 3px black!important;
+}
+.format_invitacion{
+    background: #6cd2b9;
+    color: white;
+    
+    
 }
 .format_google{
     background: #030a57;

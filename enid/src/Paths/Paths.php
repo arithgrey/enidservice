@@ -77,13 +77,24 @@ class Paths
 
 
 
-        $response = [            
+        $response = [    
+            
             "cambios_devoluciones" => $cambios_devoluciones,
             "promesa_ventas" => $promesa_venta,
             "puntuacion" => $puntuacion,
             "sobre_ventas" => $sobre_ventas,
             "sorteo" => $sorteo,
             "sorteo_venta" => $sorteo_venta,
+            "invitacion" => [                
+                "css" => [
+                    "invitacion.css"
+                ],                
+                "js" => [
+                    "invitacion/principal.js",
+                    
+                ],
+                "url_img_post" => create_url_preview("invitacion_enlace.jpeg"),
+            ],
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css",

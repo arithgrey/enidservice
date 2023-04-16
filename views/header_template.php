@@ -34,7 +34,7 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
 <?php endif; ?>
 
 <body class="h-100 d-flex flex-column">
-
+<?php if ($navegacion_principal ): ?>
 <?=navegacion(
             $path_img_usuario, 
             $in_session, 
@@ -43,11 +43,11 @@ src="https://www.facebook.com/tr?id=603499584596714&ev=PageView&noscript=1"
             $menu,
             $mas_vendidos
             )?>
-
+<?php endif; ?>
 
 
 <div class="container-fluid" id="page-content">
-<?= menu_session_mobil($in_session, $mas_vendidos) ?>
+
 <?=opciones_acceso($in_session)?>
 <?=modal_intento_conversion()?>
 <?=modal_desglose_carro_compra()?>
