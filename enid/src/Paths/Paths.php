@@ -85,6 +85,16 @@ class Paths
             "sobre_ventas" => $sobre_ventas,
             "sorteo" => $sorteo,
             "sorteo_venta" => $sorteo_venta,
+            "invitacion_lista" => [
+                "css" => [
+                    "invitacion.css"
+                ],                
+                "js" => [
+                    "invitacion/lista.js",
+                    
+                ],
+                "url_img_post" => create_url_preview("invitacion_enlace.jpeg"),
+            ],
             "invitacion" => [                
                 "css" => [
                     "invitacion.css"
