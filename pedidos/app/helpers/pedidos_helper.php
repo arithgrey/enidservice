@@ -8,21 +8,17 @@ if (!function_exists('invierte_date_time')) {
 
         $path = pr($recibo, "url_img_servicio");
         $nombre_cliente = '';
-        $numero_telefonico = '';
 
         $usuario_cliente = prm_def($data, 'usuario_cliente');
         if (es_data($usuario_cliente)) {
             $nombre_cliente = format_nombre($usuario_cliente);
-            $numero_telefonico = format_phone(pr($usuario_cliente, 'tel_contacto'));
         }
 
         $texto_previo = _text_(
             'Orden de compra #',
             pr($recibo, 'id'),
             'cliente',
-            $nombre_cliente,
-            'tel',
-            $numero_telefonico
+            $nombre_cliente
         );
 
         $data['url_img_post'] = path_imagen_web($path);
@@ -163,12 +159,13 @@ if (!function_exists('invierte_date_time')) {
         if (es_administrador($data)) {
 
             $adicionales[] = format_link(
-                text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+                text_icon(_text_(_money_icon, 'white'), "Clientes Frecuentes"),
                 [
 
                     "href" => path_enid("leads"),
                     "class" => "text-uppercase white",
-                ],2
+                ],
+                2
             );
 
             $adicionales[] = format_link(
@@ -1711,11 +1708,11 @@ if (!function_exists('invierte_date_time')) {
 
         return $response;
     }
-    
+
     function get_form_busqueda_pedidos($data)
     {
 
-        $z[] = d($data["formulario_busqueda_ordenes_compra"], 13);        
+        $z[] = d($data["formulario_busqueda_ordenes_compra"], 13);
         $z[] = frm_busqueda();
 
         $response[] = d($z);
@@ -1807,17 +1804,18 @@ if (!function_exists('invierte_date_time')) {
         $menu_dash_board = es_administrador($data) ? $menu_dash_board : '';
 
         $menu_clientes_frecuentes = format_link(
-            text_icon(_text_(_money_icon,'white'), "Clientes Frecuentes"),
+            text_icon(_text_(_money_icon, 'white'), "Clientes Frecuentes"),
             [
 
                 "href" => path_enid("leads"),
                 "class" => "text-uppercase white",
-            ],2
+            ],
+            2
         );
 
         $menu_clientes_frecuentes = es_administrador($data) ? $menu_clientes_frecuentes : '';
 
-        $menu = d([            
+        $menu = d([
             $menu_clientes_frecuentes,
             $menu_dash_board,
             acceso_proximas_entregas($data),
@@ -1848,9 +1846,9 @@ if (!function_exists('invierte_date_time')) {
         $data_complete[] = d($modal_promocion, 13);
         $data_complete[] = hiddens(["class" => "buscar_ordenes_compra", "value" => es_cliente($data)]);
 
-        $data_complete[] = d(d('','border_black'),"col-xs-12 mt-5 mb-5");
-        $data_complete[] = d(span("Los clientes también vieron",'strong f12'),12);
-        $data_complete[] = d(place("place_tambien_podria_interezar"),12);
+        $data_complete[] = d(d('', 'border_black'), "col-xs-12 mt-5 mb-5");
+        $data_complete[] = d(span("Los clientes también vieron", 'strong f12'), 12);
+        $data_complete[] = d(place("place_tambien_podria_interezar"), 12);
 
 
         return d($data_complete, 'col-xs-12 mt-5');
@@ -2565,7 +2563,7 @@ if (!function_exists('invierte_date_time')) {
         return append($r);
     }
 
-    
+
 
 
     function puntos_encuentro(
