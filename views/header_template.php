@@ -79,7 +79,7 @@
 
 
   <div class="container-fluid" id="page-content">
-
+    <?= menu_session_mobil($mas_vendidos) ?>
     <?= opciones_acceso($in_session) ?>
     <?= modal_intento_conversion() ?>
     <?= modal_desglose_carro_compra() ?>
