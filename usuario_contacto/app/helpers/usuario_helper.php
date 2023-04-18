@@ -28,91 +28,116 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_data($usuario_busqueda)) {
 
-            $usuario_calificacion = $data['usuario_calificacion'];
-            $calificacion = $usuario_calificacion['promedio'];
-            $encuestas = $usuario_calificacion['encuestas'];
-            $nombre_usuario = pr($usuario_busqueda, 'nombre_usuario');
             $id_usuario = pr($usuario_busqueda, 'id_usuario');
-            $url_img_usuario = pr($usuario_busqueda, 'url_img_usuario');
             $nombre = format_nombre($usuario_busqueda);
             $descripcion[] = h($nombre, 1, ['class' => 'display-4 text-uppercase strong']);
-            $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
-            $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
-            $tel_contacto = pr($usuario_busqueda, 'tel_contacto');
 
-            $imagen = a_enid(
-                img(
-                    [
-                        "src" => $url_img_usuario,
-                        "onerror" => "this.src='../img_tema/user/user.png'",
-                        "class" => "rounded-circle img_servicio_def"
-                    ]
-                ),
-                $link
-            );
+            $imagen_perfil = formato_imagen_perfil($data, $id_usuario);
+            $usuario_perfil = usuario_perfil($data, $imagen_perfil);
 
-
-            $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
-
-            if ($es_propietario) {
-
-                $icono_link = icon(_text_(_editar_icon, 'black border '));
-                $contenido[] = a_enid(
-                    $icono_link,
-                    [
-                        'href' => path_enid('administracion_cuenta')
-                    ]
-                );
-            }
-
-
-            $contenido[] = flex($imagen, $seccion_calificacion, _between, 'col-xs-4', 'col-xs-8');
-            $contenido[] = seccion_facebook($data);
-            $texto_puesto = roll($data);
-            $texto_titulo = h($texto_puesto, 2, 'title display-5');
-            $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
-
-            $contenido[] = p($nombre_usuario, 'update-note');
-            $contenido[] = d(_text_(span("Cliente", 'black strong'), _text("#", $id_usuario)), 'display-6 black ');
-            $contenido[] = d(format_phone($tel_contacto));
-
-            $response[] = d($descripcion, 'demo-title col-md-12');
-            $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
-            $response[] = seguidores($data);
-
-
-            $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
-
-            $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
-            $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
-            $contenedor[] = d($response, 'col-md-10 col-md-offset-1  bg-light p-5 contenedor_perfil');
-            $contenedor[] = d(formulario_calificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 contenedor_encuesta_estrellas d-none');
-            $contenedor[] = d(formulario_calificacion_tipificacion($data), 'col-md-10 col-md-offset-1  bg-light p-5 mt-5 d-none contenedor_encuesta_tipificcion');
+            $contenedor[] = d($usuario_perfil, 'row p-5 contenedor_perfil');
+            $contenedor[] = d(formulario_calificacion($data), 'row p-5 mt-5 contenedor_encuesta_estrellas d-none');
+            $contenedor[] = d(formulario_calificacion_tipificacion($data), 'row  p-5 mt-5 d-none contenedor_encuesta_tipificcion');
         } elseif ($data['encuesta'] > 0) {
-            $contenedor[] = d(notificacion_encuesta(), 'col-md-10 col-md-offset-1 bg-light p-5 mb-5');
+            $contenedor[] = d(notificacion_encuesta(), 'row p-5 mb-5');
         } else {
 
             $texto[] = h(_text_(strong('Ups!'), 'no encontramos a este ', strong('usuario')), 1, 'text-center  text-uppercase');
             $texto[] = format_link('Sigue comprando', ['class' => 'mt-5 col-md-8 col-md-offset-2', 'href' => path_enid('home')]);
-            $contenedor[] = d($texto, 'col-md-4 col-md-offset-4 mt-5 bg-light p-5');
+            $contenedor[] = d($texto, 'row mt-5 p-5');
         }
 
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
-        $_response[] = d(tareas_control($data), 3);
 
-        $contenedor_central[] =  d(d($data["formulario_busqueda_frecuente"],'col-xs-12 mb-3'), 13);
-        $contenedor_central[] =  d($contenedor, 13);
-        $_response[] = d($contenedor_central, 4);
 
-        $_response[] = d(place("place_pedidos"), 5);
+
+        $_response[] = d(tareas_control($data, $contenedor), 3);
+
+        $_response[] = d(actividad_central($data), 5);
+        $_response[] = d(place("place_pedidos"), 4);
         $_response[] = modal_acciones_seguimiento($data);
         $_response[] = modal_descubrimiento_accion_seguimiento($data);
         return d(d($_response, 12), 13);
     }
-    
-    function tareas_control($data)
+    function actividad_central($data)
     {
 
+        $response[] = d($data["formulario_busqueda_frecuente"], 'col-xs-12 mb-3');
+        $response[] = d(hr('border_black'), 12);
+        $response[] = d(d("Historial de seguimiento", 'f13 black strong'), 'col-xs-12 mt-5');
+        $response[] = d(d(place("tarjetas_acciones_seguimiento"), 12), 12);
+        return append($response);
+    }
+
+    function formato_imagen_perfil($data, $id_usuario)
+    {
+
+        $es_propietario = ($data['in_session'] && $data['id_usuario'] === $id_usuario);
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $usuario_calificacion = $data['usuario_calificacion'];
+        $calificacion = $usuario_calificacion['promedio'];
+        $encuestas = $usuario_calificacion['encuestas'];
+        $nombre_usuario = pr($usuario_busqueda, 'nombre_usuario');
+        $tel_contacto = pr($usuario_busqueda, 'tel_contacto');
+        $seccion_calificacion = posibilidades($calificacion, $encuestas, $id_usuario, $data, $es_propietario);
+
+        $url_img_usuario = pr($usuario_busqueda, 'url_img_usuario');
+        $link = es_administrador($data) ? path_enid('busqueda_usuario', $id_usuario) : '';
+        $imagen = a_enid(
+            img(
+                [
+                    "src" => $url_img_usuario,
+                    "onerror" => "this.src='../img_tema/user/user.png'",
+                    "class" => "rounded-circle img_servicio_def"
+                ]
+            ),
+            $link
+        );
+
+        $contenido[] = flex($imagen, $seccion_calificacion, _between, 'col-xs-4', 'col-xs-8');
+        $contenido[] = seccion_facebook($data);
+        $texto_puesto = roll($data);
+        $texto_titulo = h($texto_puesto, 2, 'title display-5');
+        $contenido[] = d(d(_text_($texto_titulo), 'caption'), 'circle');
+
+        $contenido[] = p($nombre_usuario, 'update-note');
+        $contenido[] = d(_text_(span("Cliente", 'black strong'), _text("#", $id_usuario)), 'display-6 black ');
+        $contenido[] = d(format_phone($tel_contacto));
+        if ($es_propietario) {
+
+            $icono_link = icon(_text_(_editar_icon, 'black border '));
+            $contenido[] = a_enid(
+                $icono_link,
+                [
+                    'href' => path_enid('administracion_cuenta')
+                ]
+            );
+        }
+
+        return $contenido;
+    }
+    function usuario_perfil($data, $contenido)
+    {
+
+
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $nombre = format_nombre($usuario_busqueda);
+        $descripcion[] = h($nombre, 1, ['class' => 'display-4 text-uppercase strong']);
+        $response[] = d($descripcion, 'demo-title col-md-12');
+        $response[] = get_base_html("header", append($contenido), ['class' => ' col-md-12', 'id' => 'header1']);
+        $response[] = seguidores($data);
+
+
+        $response[] = d(seccion_estadisticas($data), "col-md-12 mt-5");
+
+        $response[] = d(seccion_estadisticas_compras($data), "col-md-12 mt-5");
+        $response[] = d(seccion_deseos_compra($data), "col-md-12 mt-5");
+        return $response;
+    }
+    function tareas_control($data, $contenedor_perfil_usuario_busqueda)
+    {
+
+        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
         if (es_administrador($data)) {
 
             $response[] = d(format_link(
@@ -123,7 +148,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "text-uppercase white",
                 ],
                 1
-            ), 12);
+            ), 'col-xs-12 mt-3');
 
             $response[] = d(format_link(
                 text_icon(_money_icon, "Dasboards"),
@@ -132,16 +157,16 @@ if (!function_exists('invierte_date_time')) {
                     "href" => path_enid("reporte_enid"),
                     "class" => "text-uppercase black mt-2",
                 ]
-            ), 12);
+            ), 'col-xs-12 mt-3');
         }
 
-        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
-        $response[] = d(hr('border_black'), 12);
-        $response[] = d("Historial de conversaciones con el cliente", 12);
 
-        $response[] = d(place("tarjetas_acciones_seguimiento"), 12);
-        return d($response);
+        $response[] = d(d($contenedor_perfil_usuario_busqueda, 'bg-light'), ' col-xs-12 mt-5');
+
+        return d($response, 13);
     }
+
+
     function form_busqueda_ordenes_compra_hidden($data, $id_usuario)
     {
 

@@ -1329,7 +1329,7 @@ function menu_session_mobil($mas_vendidos)
     );
 
     $form_busqueda = form_busqueda_productos($mas_vendidos);
-    //$opciones_acceso = opciones_acceso($in_session);
+    
 
     $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
     $columna = d([$cerrar_opciones, $form_busqueda /*$opciones_acceso*/], $clases_columnas);
