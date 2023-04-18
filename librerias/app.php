@@ -8,14 +8,13 @@ class app extends CI_Controller
 {
     private $paths;
     private $api;
-    
+
     function __construct()
     {
         parent::__construct();
-        $this->load->library("session");        
+        $this->load->library("session");
         $this->paths = new Paths();
         $this->api = new Api();
-        
     }
 
     function imgs_productos($id_servicio, $completo = 0, $limit = 1, $path = 0, $data = [])
@@ -279,9 +278,9 @@ class app extends CI_Controller
 
     function session()
     {
-                
+
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
-        $data["proceso_compra"] = 0;        
+        $data["proceso_compra"] = 0;
         $data["mas_vendidos"] = $this->api->api("mas_vendido/publicos");
         $data["clasificaciones_departamentos"] =  [];
         $data["footer_visible"] = true;
@@ -310,7 +309,6 @@ class app extends CI_Controller
             $data["HTTP_REFERER"] =  prm_def($_SERVER, "HTTP_REFERER", "");
             $data["pixel_facebook"] = 0;
             $data["navegacion_principal"] = 1;
-
         } else {
 
             $data["in_session"] = 0;
@@ -329,7 +327,7 @@ class app extends CI_Controller
         }
 
         $data['restricciones'] = $this->config->item('restricciones');
-        
+
         return $data;
     }
 
@@ -520,10 +518,10 @@ class app extends CI_Controller
     }
 
     function asigna_reparto($id_orden_compra, $es_ubicacion = 0)
-    {   
-        
+    {
+
         return $this->api->api("recibo/reparto", [
-            "orden_compra" => $id_orden_compra, 
+            "orden_compra" => $id_orden_compra,
             "es_ubicacion" => $es_ubicacion,
             "contra_entrega_domicilio" => 1,
 
@@ -604,11 +602,11 @@ class app extends CI_Controller
         );
     }
 
-    function log_acceso($data, $pagina, $id_servicio = 0 )
+    function log_acceso($data, $pagina, $id_servicio = 0)
     {
-        
+
         if ($pagina > 0) {
-            
+
             $q = [
                 "in_session" => $data["in_session"],
                 "is_mobile" => $data["is_mobile"],
@@ -643,9 +641,9 @@ class app extends CI_Controller
     }
     function ventas_mes_ubicaciones()
     {
-    
+
         return $this->api("ubicacion/ventas_mes");
-    }    
+    }
     function estatus_enid_service($q = [])
     {
 
@@ -709,7 +707,7 @@ class app extends CI_Controller
             $path_img_usuario = $this->add_imgs_usuario($usuario);
 
             if (es_data($navegacion)) {
-                
+
                 $empresa = $this->get_empresa($id_empresa);
                 $response = [
                     "id_usuario" => $id_usuario,
@@ -734,6 +732,4 @@ class app extends CI_Controller
         }
         return $response;
     }
-
-
 }
