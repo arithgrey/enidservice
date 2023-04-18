@@ -1,7 +1,9 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
+
 use Enid\RespuestasFrecuentes\Form as FormRespuestaFrecuente;
+
 class Home extends CI_Controller
 {
     private $id_usuario;
@@ -27,7 +29,7 @@ class Home extends CI_Controller
 
         if ($q !== 0) {
 
-            $this->busqueda($data,$param);
+            $this->busqueda($data, $param);
         } else {
 
             $this->encuesta($param, $data);
@@ -38,8 +40,10 @@ class Home extends CI_Controller
     {
 
         $id_usuario = prm_def($param, 'id_usuario');
-
+        
+        $data["es_lista_negra"] = $this->app->api("lista_negra/index", ['id_usuario' => $id_usuario]);
         $prm = $this->input->get();
+
         $usuario = $this->app->usuario($id_usuario);
         $usuario_busqueda = $this->app->add_imgs_usuario($usuario, "id_usuario");
         $data['usuario_busqueda'] = $usuario_busqueda;
@@ -50,31 +54,31 @@ class Home extends CI_Controller
         $data['encuesta'] = prm_def($prm, 'encuesta');
         $data['id_servicio'] = prm_def($prm, 'servicio');
 
-        $session = $this->app->session();         
+        $session = $this->app->session();
         $ventas_semana = $this->ventas_semana($id_usuario);
         $meta_semanal_comisionista = pr($session['info_empresa'], 'meta_semanal_comisionista');
-        
-        if(!es_cliente($perfil_busqueda) ){
+
+        if (!es_cliente($perfil_busqueda)) {
             $data["meta_semanal_comisionista"] = $meta_semanal_comisionista;
             $data["ventas_semana"] = $ventas_semana;
             $data["total_seguidores"] = $this->app->totales_seguidores($id_usuario);
-
         }
-        
+
         $data["recibos_pago"] = [];
         $data["recibos_sin_pago"] = [];
         $data["otros_productos_interes"] = [];
 
         if (es_cliente($usuario_busqueda)) {
-            
-            
+
+
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
+     
         $data["formulario_busqueda_frecuente"] = $this->formRespuestaFrecuente->busqueda();
         $data["acciones_seguimiento"] = $this->app->api("accion_seguimiento/index");
         $this->app->pagina($data, render($data), 1);
     }
-    
+
     private function articulo_busqueda($id_usuario)
     {
         return $this->app->api("tag_arquetipo/index", ["usuario" => $id_usuario]);
@@ -119,7 +123,7 @@ class Home extends CI_Controller
     }
 
     private function tipo_tipificciones($in_session, $data)
-    {        
+    {
         $perfil_busqueda = $data['perfil_busqueda'];
         $id_perfil = pr($perfil_busqueda, "idperfil");
 
@@ -137,7 +141,7 @@ class Home extends CI_Controller
     private function get_perfil_data($id_usuario)
     {
 
-        
+
         return $this->app->api("perfiles/data_usuario", ["id_usuario" => $id_usuario]);
     }
 
@@ -146,6 +150,4 @@ class Home extends CI_Controller
 
         return $this->app->api("puntuacion/general", ["id_usuario" => $id_usuario]);
     }
-    
-
 }
