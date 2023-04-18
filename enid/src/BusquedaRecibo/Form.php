@@ -116,9 +116,9 @@ class Form
             [
                 "name" => "cliente",
                 "id" => "cliente",
-                "placeholder" => "Encuentra a tu cliente, puedes ingresar su Nombre, correo, telefono ...",
+                "placeholder" => "Encuentra tu cliente, puedes ingresar su Nombre, correo, telefono ...",
                 "class" => "input_busqueda",
-                "onpaste" => "paste_busqueda();"
+                "onpaste" => "paste_telefono();"
             ]
         );
 

@@ -57,6 +57,7 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = d(place("place_pedidos"), 4);
         $_response[] = modal_acciones_seguimiento($data);
         $_response[] = modal_descubrimiento_accion_seguimiento($data);
+        $_response[] = modal_recordatorio_seguimiento($data);
         return d(d($_response, 12), 13);
     }
     function actividad_central($data)
@@ -151,11 +152,20 @@ if (!function_exists('invierte_date_time')) {
             ), 'col-xs-12 mt-3');
 
             $response[] = d(format_link(
-                text_icon(_money_icon, "Dasboards"),
+                text_icon(_text_(_money_icon, 'white'), "Dasboards"),
                 [
 
                     "href" => path_enid("reporte_enid"),
-                    "class" => "text-uppercase black mt-2",
+                    "class" => "text-uppercase black",
+                ]
+            ), 'col-xs-12 mt-3');
+
+            $response[] = d(format_link(
+                text_icon(_text_(_money_icon, 'white'), "Pedidos"),
+                [
+
+                    "href" => path_enid("pedidos"),
+                    "class" => "text-uppercase black",
                 ]
             ), 'col-xs-12 mt-3');
         }
@@ -591,7 +601,7 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        //$form[] = flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué comentó el cliente?"), 'mb-5', 'mr-2');
+
         $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]), 'd-none');
         $form[] = d("Ups parece que falta esto", "mt-3 color_red d-none place_area_comentario");
         $usuario_busqueda = $data['usuario_busqueda'];
@@ -630,6 +640,49 @@ if (!function_exists('invierte_date_time')) {
         $response = [$lista_acciones_seguimiento_comentarios, $lista_opciones];
         return gb_modal($response, "modal_accion_seguimiento_descubrimiento");
     }
+    function modal_recordatorio_seguimiento($data)
+    {
+
+        $form[] = form_open(
+            "",
+            [
+                "class" => "form_recordatorio_seguimiento col-xs-12",
+                "id" => "form_recordatorio_seguimiento",
+                "method" => "post"
+            ]
+        );
+
+        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Cuando se tiene que hacer?",2), 'mb-5', 'mr-2'),'estructura_fechas');
+
+        $form[] = d(input_enid(                    
+            [
+                "data-date-format" => "yyyy-mm-dd",
+                "name" => 'fecha_evento',
+                "class" => "fecha_evento",
+                'id' => 'fecha_evento',
+                "type" => 'date',
+                "value" => date("Y-m-d"),
+                "min" => date("Y-m-d"),
+                "max" => add_date(date("Y-m-d"), 90),
+            ]
+        ),'estructura_fechas');
+        $form[] = d(format_link("Enviar", ["class" => "envio_fecha_evento text-center mt-5"]), 'col-sm-8 col-sm-offset-2 estructura_fechas');
+
+        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué hay que hacer?",2), 'mb-5', 'mr-2'),'d-none estructura_hecho');
+        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]),'d-none estructura_hecho');
+        $form[] = d("Ups parece que falta esto", "mt-3 color_red d-none place_area_comentario");
+        $usuario_busqueda = $data['usuario_busqueda'];
+        $id_usuario = pr($usuario_busqueda, 'id_usuario');
+
+        $form[] = hiddens(["name" => "id_accion_seguimiento", "value" => 3,  "class" => "id_accion_en_seguimiento"]);
+        $form[] = hiddens(["name" => "id_usuario", "value" => $id_usuario]);
+        $form[] = d(btn("Enviar comentarios!", ["class" => "enviar_comentarios text-center mt-5"]), 'col-sm-8 col-sm-offset-2 d-none estructura_hecho');
+        $form[] = form_close();
+        $form[] = d(cargando(), 'text-center mx-auto');
+
+        return gb_modal($form, "modal_recordatorio_accion");
+    }
+
 
     function deseos($data)
     {

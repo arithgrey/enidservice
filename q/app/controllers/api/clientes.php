@@ -17,7 +17,7 @@ class clientes extends REST_Controller
 
     function recibos_sin_ficha_seguimiento_GET()
     {
-        $param = $this->get();
+        
         $response = $this->leads_format->recibos_sin_ficha_seguimiento();
         $this->response($response);
     }

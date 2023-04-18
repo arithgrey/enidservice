@@ -26,14 +26,20 @@ let $lista_acciones_seguimiento_opciones = $(".lista_acciones_seguimiento_opcion
 let $input_id_accion_seguimiento = $('.input_id_accion_seguimiento');
 let $place_area_comentario = $(".place_area_comentario");
 let $cargando_modal = $(".cargando_modal");
-
+let $modal_recordatorio_accion =  $("#modal_recordatorio_accion");
+let $estructura_fechas = $(".estructura_fechas");
+let $estructura_hecho = $(".estructura_hecho");
+let $envio_fecha_evento = $(".envio_fecha_evento");
+let $form_recordatorio_seguimiento = $(".form_recordatorio_seguimiento");
 if (parseInt($('.nombre_usuario').length) > 0) {
     $nombre_usuario = $('.nombre_usuario');
 }
 
 
 $(document).ready(function () {
-
+    
+    $envio_fecha_evento.click(envio_fecha_evento_accion);
+    $form_recordatorio_seguimiento.submit(registro_evento_agenda);
     $calificame.click(formulario_calificacion);
     $estrella.click(formulario_tipificacion);
     $estrella.hover(valida_color_calificacion);
@@ -204,13 +210,26 @@ let descubre_accion_seguimiento = function (e) {
 
     $(".tarjeta_opcion_seguimiento").addClass("d-none");
     $(".tarjeta_opcion_seguimiento .selector-del-div-a-copiar").addClass("mx-auto");
-    
+
     let $id = $(this).attr("id");
-    if (parseInt($id) > 0) {
+    $id = parseInt($id);
+    if ($id > 0) {
         
-        $(_text(".tarjeta_accion_seguimiento_",$id)).removeClass("d-none");
-        $('#modal_accion_seguimiento').modal("hide");
-        $modal_accion_seguimiento_descubrimiento.modal("show");
+        switch ($id) {
+
+            case 3:
+                $('#modal_accion_seguimiento').modal("hide");
+                $modal_recordatorio_accion.modal("show");
+                
+                break;
+            default:
+
+                $(_text(".tarjeta_accion_seguimiento_", $id)).removeClass("d-none");
+                $('#modal_accion_seguimiento').modal("hide");
+                $modal_accion_seguimiento_descubrimiento.modal("show");
+
+        }
+
     }
 };
 let notificacion_envio_accion_seguimiento = function () {
@@ -218,12 +237,11 @@ let notificacion_envio_accion_seguimiento = function () {
     let $id = $(this).attr("id");
     $input_id_accion_seguimiento.val($id);
 
-    $form_comentarios_accion_seguimiento_notificado.find(".cargando_modal").removeClass("d-none");    
+    $form_comentarios_accion_seguimiento_notificado.find(".cargando_modal").removeClass("d-none");
     let data_send = $form_comentarios_accion_seguimiento.serialize();
-    let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";    
+    let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";
     request_enid("POST", data_send, url, response_comentario_accion_seguimiento);
 
-    
 }
 
 let comentario_accion_seguimiento_notificado = function (e) {
@@ -234,12 +252,11 @@ let comentario_accion_seguimiento_notificado = function (e) {
 
         $place_area_comentario.addClass("d-none");
         $form_comentarios_accion_seguimiento_notificado.find(".cargando_modal").removeClass("d-none");
-        
+
         let data_send = $form_comentarios_accion_seguimiento_notificado.serialize();
         let url = "../q/index.php/api/users_accion_seguimiento/comentario/format/json/";
         bloquea_form($form_comentarios_accion_seguimiento_notificado);
         request_enid("PUT", data_send, url, response_comentario_accion_seguimiento_notificado);
-
 
     } else {
 
@@ -250,25 +267,27 @@ let comentario_accion_seguimiento_notificado = function (e) {
     e.preventDefault();
 
 }
-let response_comentario_accion_seguimiento_notificado = function(data){
-        
+let response_comentario_accion_seguimiento_notificado = function (data) {
+
     desbloqueda_form($form_comentarios_accion_seguimiento_notificado);
     reset_form("form_comentarios_accion_seguimiento_notificado");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
-    acciones_seguimiento();    
+    acciones_seguimiento();
+    
 
 }
 let response_comentario_accion_seguimiento = function (data) {
 
     $form_comentarios_accion_seguimiento_notificado.find(".id_accion_en_seguimiento").val(data);
-    acciones_seguimiento();    
-    $cargando_modal.addClass("d-none");    
-    $lista_acciones_seguimiento_opciones.addClass("d-none");        
+    acciones_seguimiento();
+    $cargando_modal.addClass("d-none");
+    $lista_acciones_seguimiento_opciones.addClass("d-none");
     $form_comentarios_accion_seguimiento_notificado.removeClass("d-none");
 }
 
 let acciones_seguimiento = function () {
-
+    $lista_acciones_seguimiento_opciones.removeClass("d-none");
+    $form_comentarios_accion_seguimiento_notificado.addClass("d-none");
     let data_send = $.param({ "id": $input_id_usuario.val() });
     let url = "../q/index.php/api/users_accion_seguimiento/usuario/format/json/";
     request_enid("GET", data_send, url, acciones_seguimiento_response);
@@ -279,8 +298,44 @@ let acciones_seguimiento_response = function (data) {
     render_enid(".tarjetas_acciones_seguimiento", data);
     let $id_usuario = $input_id_usuario.val();
     let url = "../q/index.php/api/recibo/ficha_relacion/format/json/";
-    let data_send = {"id_usuario":$id_usuario};
+    let data_send = { "id_usuario": $id_usuario };
 
-    request_enid("PUT", data_send, url, function(data){});
+    request_enid("PUT", data_send, url, function (data) { });
 
+}
+let envio_fecha_evento_accion = function(){
+    
+    $estructura_fechas.addClass("d-none");
+    $estructura_hecho.removeClass("d-none");
+
+}
+
+let registro_evento_agenda = function (e) {
+
+    let fecha_inicio = get_parameter("#fecha_evento");
+    var comentario = $form_recordatorio_seguimiento.find(".comentario_seguimiento").val();
+
+    if(comentario.length < 1 ){
+        $place_area_comentario.removeClass("d-none");
+    }
+    if (fecha_inicio.length > 8 && comentario.length > 0) {
+        
+        $place_area_comentario.addClass("d-none");
+        let data_send = $form_recordatorio_seguimiento.serialize();        
+        let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";
+        request_enid("POST", data_send, url, response_registro_evento);
+        bloquea_form($form_recordatorio_seguimiento);
+
+    }
+    e.preventDefault();
+};
+let response_registro_evento =  function(data){
+    
+    $estructura_fechas.removeClass("d-none");
+    $estructura_hecho.addClass("d-none");
+
+    desbloqueda_form($form_recordatorio_seguimiento);
+    reset_form("form_recordatorio_seguimiento");
+    $modal_recordatorio_accion.modal("hide");
+    acciones_seguimiento();
 }
