@@ -50,7 +50,7 @@ if (!function_exists('invierte_date_time')) {
         $contenedor[] = form_busqueda_ordenes_compra_hidden($data, $id_usuario);
 
 
-
+        $_response[] = es_lista_negra_format($data);
         $_response[] = d(tareas_control($data, $contenedor), 3);
 
         $_response[] = d(actividad_central($data), 5);
@@ -60,6 +60,19 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = modal_recordatorio_seguimiento($data);
         return d(d($_response, 12), 13);
     }
+    function es_lista_negra_format($data){
+
+        $es_lista_negra= $data["es_lista_negra"];
+        $response = "";
+        if(es_data($es_lista_negra)){
+            $response = d(_text_(
+                icon("white fa fa-user-secret  fa-2x"),
+                "No le vendemos más a esta persona es lista negra"), 
+            'col-xs-12 p-4 bg_red red_enid_background white text-center borde_black mb-5 f13 strong');
+        }
+        return $response;
+    }
+
     function actividad_central($data)
     {
 
