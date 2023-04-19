@@ -74,4 +74,17 @@ class users_accion_seguimiento_model extends CI_Model
         
         return $this->db->query($query_get)->result_array();
     }
+    function eventos_pendientes()
+    {
+
+        $query_get = "SELECT * FROM users_accion_seguimiento 
+        WHERE evento_pendiente > 0 
+        AND 
+        DATE(fecha_evento) <= CURRENT_DATE() LIMIT 30";
+
+        
+        return $this->db->query($query_get)->result_array();
+    }
+
 }
+

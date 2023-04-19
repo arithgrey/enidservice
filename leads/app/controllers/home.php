@@ -21,6 +21,8 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "leads");    
                 
         $data["leads"] = $this->recibos_sin_ficha_seguimiento();    
+        
+        $data["eventos_pendientes"] = $this->eventos_pendientes();    
         $data["status_ventas"] = $this->app->api("status_enid_service/index");    
         $data["tipos_entregas"]= $this->app->api("tipo_entrega/index/");
         
@@ -35,6 +37,13 @@ class Home extends CI_Controller
         return $this->app->api("clientes/recibos_sin_ficha_seguimiento");
 
     }
+    function eventos_pendientes()
+    {
+    
+        return $this->app->api("users_accion_seguimiento/eventos_pendientes");
+
+    }
+
 
         
 }

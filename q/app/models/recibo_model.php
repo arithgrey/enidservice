@@ -10,9 +10,7 @@ class Recibo_model extends CI_Model
     function recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento()
     {
 
-        $query_get = "SELECT p.*, po.id_orden_compra FROM proyecto_persona_forma_pagos p 
-        INNER JOIN producto_orden_compras po ON 
-        p.id = po.id_proyecto_persona_forma_pago   
+        $query_get = "SELECT p.* FROM proyecto_persona_forma_pagos p         
         WHERE p.se_cancela < 1        
         AND p.saldo_cubierto > 0
         AND p.status IN (9,11,12,14,15,16)
