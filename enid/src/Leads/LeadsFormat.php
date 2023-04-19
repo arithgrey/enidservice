@@ -23,7 +23,7 @@ class LeadsFormat
     }
     function forma_ficha($recibos)
     {
-
+        
         $response = [];
 
         $a  = 0;

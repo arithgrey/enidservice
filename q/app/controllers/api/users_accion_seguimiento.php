@@ -11,7 +11,6 @@ class users_accion_seguimiento extends REST_Controller
     {
         parent::__construct();
         $this->load->model("users_accion_seguimiento_model");
-
         $this->load->library(lib_def());
         $this->acciones_seguimiento_clientes = new Clientes();
     }
@@ -46,10 +45,23 @@ class users_accion_seguimiento extends REST_Controller
         if (fx($param, "id")) {
 
             $acciones_seguimiento = $this->users_accion_seguimiento_model->usuario($param["id"]);
+            
             $response = $this->acciones_seguimiento_clientes->formatoListado($acciones_seguimiento);
         }
         $this->response($response);
     }
+    function eventos_pendientes_GET()
+    {
+
+        $acciones_seguimiento = $this->users_accion_seguimiento_model->eventos_pendientes();
+        $acciones_seguimiento_imagen_usuario = $this->app->add_imgs_usuario($acciones_seguimiento,"id_usuario");
+        
+        $response = $this->acciones_seguimiento_clientes->formato_eventos(
+            $acciones_seguimiento_imagen_usuario);
+            
+        $this->response($response);
+    }
+
     function comentario_PUT()
     {
         $param = $this->put();
@@ -77,53 +89,5 @@ class users_accion_seguimiento extends REST_Controller
     }
 
 
-    /*    
-    function index_PUT()
-	{
-		$param = $this->put();
-		$response = false;
-		
-		if (fx($param, "")) {
-            
-            $id = $param["id"];
-			$params = [
-				"" => $param[""],
-				"" => $param[""]
-			];
-
-            
-			$response = $this->users_accion_seguimiento_model->update($params,  ["id" => $id]);
-
-		}
-		$this->response($response);
-	}
-
-    function index_DELETE()
-	{
-		$param = $this->delete();
-		$response = false;
-		
-		if (fx($param, "id")) {
-            
-            $id = $param["id"];
-			        
-			$response = $this->users_accion_seguimiento_model->delete(["id" => $id]);
-
-		}
-		$this->response($response);
-	}
-    function id_GET()
-    {
-        $param = $this->get();
-		$response = false;
-		
-
-        if (fx($param, "id")) {
-            
-            $id = $param["id"];
-            $response = $this->response($this->users_accion_seguimiento_model->q_get($id));
-        }
-        $this->response($response);
-    }
-    */
+    
 }
