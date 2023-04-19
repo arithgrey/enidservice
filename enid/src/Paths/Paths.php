@@ -112,7 +112,8 @@ class Paths
                 ],
                 "js" => [
                     "usuario_contacto/principal.js",
-                    "respuestas_frecuentes/principal.js"
+                    "respuestas_frecuentes/principal.js",
+                    "acciones_seguimiento/principal.js"
                 ],
                 "pagina" => 11,
             ],

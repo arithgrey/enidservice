@@ -18,13 +18,13 @@ class Clientes
 
         foreach ($acciones_seguimiento  as $row) {
 
-            
+
             $id_usuario = $row["id_usuario"];
             $fecha_registro = $row["fecha_registro"];
             $comentario = $row["comentario"];
             $fecha_evento = $row["fecha_evento"];
             $url_img_usuario =  $row["url_img_usuario"];
-        
+
 
             $fecha = horario_enid();
             $hoy = $fecha->format('Y-m-d');
@@ -32,20 +32,20 @@ class Clientes
 
             $texto = ($dias > 1) ? _text_('Hace', $dias, 'días') : 'ayer';
             $texto_dias = ($dias < 1) ? "hoy" : $texto;
-            
+
 
             $imagen = img(
                 [
                     "src" => $url_img_usuario,
                     'class' => 'px-auto mt-4',
-                    'onerror'=>"this.src='../img_tema/user/user.png'",
+                    'onerror' => "this.src='../img_tema/user/user.png'",
                     "style" => "width: 40px!important;height: 35px!important;",
                 ]
             );
 
 
-            
-            
+
+
             $imagen_usuario = a_enid(
                 d($imagen),
                 [
@@ -69,14 +69,10 @@ class Clientes
                     "class" => "black "
                 ]
             );
-            $elemento[] = flex($estrella, $comentario_evento, "border_black strong mt-3", "mr-4");            
+            $elemento[] = flex($estrella, $comentario_evento, "border_black strong mt-3", "mr-4");
             $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-12");
-
-
         }
         return d($response, "mt-5 bg-light ");
-
-        
     }
     function formatoListado($acciones_seguimiento)
     {
@@ -115,28 +111,31 @@ class Clientes
             }
 
             $tarjeta[] = d(span(format_fecha($fecha_registro, 1), 'fp9'), "col-xs-12 mt-4 mb-4 text-right");
-            
-            $tarjeta[] = $this->format_item_evento($id_accion_seguimiento, $evento_pendiente, $fecha_evento);
+
+            $tarjeta[] = $this->format_item_evento($id_accion_seguimiento, $evento_pendiente, $fecha_evento, $id);
             $fichas[] = d($tarjeta, 'mt-5 borde_black p-3 col-xs-12');
         }
         return d($fichas, 13);
     }
-    function format_item_evento($id_accion_seguimiento,$evento_pendiente, $fecha_evento){
+    function format_item_evento($id_accion_seguimiento, $evento_pendiente, $fecha_evento, $id)
+    {
 
-        
+
         $response = '';
-        if(intval($id_accion_seguimiento) === 3){
+        if (intval($id_accion_seguimiento) === 3) {
 
-                
-            $nota_hecho = ($evento_pendiente > 0) ? 'Pendiente':'Realizado!';
-            $status = d($nota_hecho,'red_enid_background white p-2');
-            $planeacion = _text_(icon('fa fa-clock-o'),'Planeado para el día');
-            $fecha = flex($planeacion, format_fecha($fecha_evento),'strong','mr-2');
-            $estado_evento = flex($status,$fecha, _between);
-            $response = d($estado_evento,"col-xs-12 mt-1");
-           
+
+            $attr = [
+                'class' => "evento_seguimiento_pendiente  p-2 strong white cursor_pointer red_enid_background",
+                "id" => $id
+            ];
+            $nota_hecho = ($evento_pendiente > 0) ? d('Pendiente', $attr) : d(_text_(icon(_text_(_check_icon,'white')),'Realizado!'),["class" => "a_enid_black2"]);
+            $status = d($nota_hecho, ' white p-2');
+            $planeacion = _text_(icon('fa fa-clock-o'), 'Planeado para el día');
+            $fecha = flex($planeacion, format_fecha($fecha_evento), 'strong', 'mr-2');
+            $estado_evento = flex($status, $fecha, _between);
+            $response = d($estado_evento, "col-xs-12 mt-1");
         }
         return $response;
-
     }
 }

@@ -31,6 +31,10 @@ let $estructura_fechas = $(".estructura_fechas");
 let $estructura_hecho = $(".estructura_hecho");
 let $envio_fecha_evento = $(".envio_fecha_evento");
 let $form_recordatorio_seguimiento = $(".form_recordatorio_seguimiento");
+let $modal_cambio_estado_evento =  $("#modal_cambio_estado_evento");
+let $confirmacion_evento = $(".confirmacion_evento");
+let $confirmacion_evento_comentario = $(".confirmacion_evento_comentario");
+
 if (parseInt($('.nombre_usuario').length) > 0) {
     $nombre_usuario = $('.nombre_usuario');
 }
@@ -86,6 +90,9 @@ $(document).ready(function () {
     $ya_envie.click(notificacion_envio_accion_seguimiento);
     $form_comentarios_accion_seguimiento_notificado.submit(comentario_accion_seguimiento_notificado);
     acciones_seguimiento();
+    $confirmacion_evento.click(notificar_evento_realizado);
+    $confirmacion_evento_comentario.click(notificar_evento_realizado_comentario);
+
 });
 let busqueda_pedidos = function (e) {
 
@@ -296,6 +303,8 @@ let acciones_seguimiento = function () {
 let acciones_seguimiento_response = function (data) {
 
     render_enid(".tarjetas_acciones_seguimiento", data);
+
+    $(".evento_seguimiento_pendiente").click(cambio_seguimiento_evento);
     let $id_usuario = $input_id_usuario.val();
     let url = "../q/index.php/api/recibo/ficha_relacion/format/json/";
     let data_send = { "id_usuario": $id_usuario };

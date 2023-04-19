@@ -58,17 +58,22 @@ if (!function_exists('invierte_date_time')) {
         $_response[] = modal_acciones_seguimiento($data);
         $_response[] = modal_descubrimiento_accion_seguimiento($data);
         $_response[] = modal_recordatorio_seguimiento($data);
+        $_response[] = modal_recordatorio_seguimiento_evento($data);
         return d(d($_response, 12), 13);
     }
-    function es_lista_negra_format($data){
+    function es_lista_negra_format($data)
+    {
 
-        $es_lista_negra= $data["es_lista_negra"];
+        $es_lista_negra = $data["es_lista_negra"];
         $response = "";
-        if(es_data($es_lista_negra)){
-            $response = d(_text_(
-                icon("white fa fa-user-secret  fa-2x"),
-                "No le vendemos más a esta persona es lista negra"), 
-            'col-xs-12 p-4 bg_red red_enid_background white text-center borde_black mb-5 f13 strong');
+        if (es_data($es_lista_negra)) {
+            $response = d(
+                _text_(
+                    icon("white fa fa-user-secret  fa-2x"),
+                    "No le vendemos más a esta persona es lista negra"
+                ),
+                'col-xs-12 p-4 bg_red red_enid_background white text-center borde_black mb-5 f13 strong'
+            );
         }
         return $response;
     }
@@ -665,9 +670,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Cuando se tiene que hacer?",2), 'mb-5', 'mr-2'),'estructura_fechas');
+        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Cuando se tiene que hacer?", 2), 'mb-5', 'mr-2'), 'estructura_fechas');
 
-        $form[] = d(input_enid(                    
+        $form[] = d(input_enid(
             [
                 "data-date-format" => "yyyy-mm-dd",
                 "name" => 'fecha_evento',
@@ -678,11 +683,11 @@ if (!function_exists('invierte_date_time')) {
                 "min" => date("Y-m-d"),
                 "max" => add_date(date("Y-m-d"), 90),
             ]
-        ),'estructura_fechas');
+        ), 'estructura_fechas');
         $form[] = d(format_link("Enviar", ["class" => "envio_fecha_evento text-center mt-5"]), 'col-sm-8 col-sm-offset-2 estructura_fechas');
 
-        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué hay que hacer?",2), 'mb-5', 'mr-2'),'d-none estructura_hecho');
-        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]),'d-none estructura_hecho');
+        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("¿Qué hay que hacer?", 2), 'mb-5', 'mr-2'), 'd-none estructura_hecho');
+        $form[] = d(textarea(['name' => "comentario", 'class' => "comentario_seguimiento"]), 'd-none estructura_hecho');
         $form[] = d("Ups parece que falta esto", "mt-3 color_red d-none place_area_comentario");
         $usuario_busqueda = $data['usuario_busqueda'];
         $id_usuario = pr($usuario_busqueda, 'id_usuario');
@@ -813,6 +818,20 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($enviar_puntuacion, 'row mt-5');
 
         return d($response, 'col-lg-10 col-md-offset-1 text-center');
+    }
+    function modal_recordatorio_seguimiento_evento($data)
+    {
+        
+        $form[] = d(flex(icon(_text_(_check_icon, 'fa-2x')), _titulo("Ya realizaste esta acción?",2), 'mb-5', 'mr-2'));       
+    
+        $confirmacion = btn("si", ["class" => "confirmacion_evento text-center mt-5"]);
+        $confirmacion_comentario = btn("si y anotar un comentario ", ["class" => "confirmacion_evento_comentario text-center mt-5"]);
+        
+        $form[] = hiddens(["class"=>"id_users_accion_seguimiento"]);
+        $form[] = flex($confirmacion_comentario, $confirmacion,_between);
+        $form[] = d(cargando(), 'text-center mx-auto envio_comentario_evento');
+
+        return gb_modal($form, "modal_cambio_estado_evento");
     }
 
     function posibles_calificaciones($calificacion)

@@ -75,6 +75,18 @@ class users_accion_seguimiento extends REST_Controller
         $this->response($response);
     }
 
+    function evento_PUT()
+    {
+        $param = $this->put();
+        $response = false;
+        if (fx($param, "id")) {
+            
+            $id = $param["id"];
+            $response = $this->users_accion_seguimiento_model->q_up("evento_pendiente", 0, $id);
+        }
+        $this->response($response);
+    }
+
     function notificacion_accion_seguimiento_PUT()
     {
 
