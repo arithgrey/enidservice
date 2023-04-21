@@ -74,7 +74,7 @@ class Home extends CI_Controller
             $data["otros_productos_interes"] = $this->articulo_busqueda($id_usuario);
         }
 
-        $data["formulario_busqueda_frecuente"] = $this->formRespuestaFrecuente->busqueda();
+        $data["formulario_busqueda_frecuente"] = $this->formRespuestaFrecuente->busqueda(1);        
         $data["acciones_seguimiento"] = $this->app->api("accion_seguimiento/index");
         $this->app->pagina($data, render($data), 1);
     }

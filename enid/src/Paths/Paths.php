@@ -136,6 +136,17 @@ class Paths
                     "respuestas_frecuentes/principal.js"
                 ],
                 "pagina" => 12,
+            ],
+            "respuestas_frecuentes" => [
+                "css" => [
+                    
+                ],
+                "js" => [                    
+                    "respuestas_frecuentes/principal.js",
+                    "respuestas_frecuentes/registro.js"
+
+                ],
+
             ]
             ,
             "competencias" => [
