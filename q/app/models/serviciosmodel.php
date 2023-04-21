@@ -22,7 +22,7 @@ class serviciosmodel extends CI_Model
         return $this->update([$q => $q2], ["id_servicio" => $id_servicio]);
     }
 
-    function q_get($params = [], $id)
+    function q_get( $id, $params = [])
     {
         return $this->get($params, ["id_servicio" => $id]);
     }
@@ -377,7 +377,7 @@ class serviciosmodel extends CI_Model
                         existencia > 0
                       AND 
                         status =1
-                      AND flag_imagen>0";
+                      AND flag_imagen > 0";
 
         return $this->db->query($query_get)->result_array()[0]["num_servicios"];
     }
@@ -387,7 +387,7 @@ class serviciosmodel extends CI_Model
 
         $busqueda = $this->get_resultados_posibles($param);
         $response["total_busqueda"] = $busqueda['num_servicios'];
-        $where = $busqueda['where'];        
+        $where = $busqueda['where'];
         $response["servicios"] = $this->create_productos_disponibles($where);
 
         return $response;
@@ -438,7 +438,7 @@ class serviciosmodel extends CI_Model
         $extra_empresa = ($id_usuario > 0 && $vendedor < 1) ? " AND id_usuario = " . $id_usuario : "";
         $extra_empresa = (prm_def($param, "global") > 0) ? " " : $extra_empresa;
         $extra_vendedor = ($vendedor > 0) ? " AND id_usuario =  '" . $vendedor . "'" : "";
-        $extra_rifa = (prm_def($param,'es_sorteo') > 0 ) ? 'AND es_sorteo = 1 ':'';
+        $extra_rifa = (prm_def($param, 'es_sorteo') > 0) ? 'AND es_sorteo = 1 ' : '';
 
         $orden = $this->get_orden($param);
 
@@ -456,12 +456,18 @@ class serviciosmodel extends CI_Model
                 )
                 " : "";
 
+
+        $id_nicho = prm_def($param, "id_nicho",1);
+        $extra_nicho = "AND id_nicho =  $id_nicho";
+
         $no_empresa = (prm_def($param, 'es_empresa') < 1) ? 'AND  es_publico >  0' : ' ';
-        
-        $extra_status = (prm_def($param,'es_sorteo') > 0 && prm_def($param,'resultados') > 0 ) ? " AND status = 3 " :" AND status = 1 ";
+
+        $extra_status = (prm_def($param, 'es_sorteo') > 0 && prm_def($param, 'resultados') > 0) ? " AND status = 3 " : " AND status = 1 ";
 
         return " WHERE                     
+
                     flag_imagen > 0
+                    " . $extra_nicho . "
                     " . $extra_status . "
                     " . $extra_empresa . "
                     " . $extra_vendedor . "
@@ -505,7 +511,7 @@ class serviciosmodel extends CI_Model
             case 2:
                 return " ORDER BY  deseado DESC , vista  DESC, precio DESC";
                 break;
-                
+
                 /*Calificado*/
             case 3:
                 return " ORDER BY valoracion DESC , deseado DESC , vista DESC";
@@ -559,12 +565,12 @@ class serviciosmodel extends CI_Model
         $this->set_option("sql_distintos", $nuevo_sql);
     }
 
-    function get_producto_por_clasificacion($param)
+    function get_producto_por_clasificacion($param, $id_nicho)
     {
 
         $this->set_option("sql_distintos", "");
         $this->agrega_elemento_distinto($param["id_servicio"]);
-        $n_servicio = $this->get_producto_clasificacion_nivel(1, $param["primer_nivel"]);
+        $n_servicio = $this->get_producto_clasificacion_nivel(1, $param["primer_nivel"], $id_nicho);
 
 
         if (es_data($n_servicio)) {
@@ -572,7 +578,7 @@ class serviciosmodel extends CI_Model
             $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
 
 
-            $n_servicio = $this->get_producto_clasificacion_nivel(2, $param["segundo_nivel"]);
+            $n_servicio = $this->get_producto_clasificacion_nivel(2, $param["segundo_nivel"], $id_nicho);
             $this->agrega_servicios_list($n_servicio);
 
 
@@ -580,21 +586,21 @@ class serviciosmodel extends CI_Model
 
                 $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                 $n_servicio =
-                    $this->get_producto_clasificacion_nivel(3, $param["tercer_nivel"]);
+                    $this->get_producto_clasificacion_nivel(3, $param["tercer_nivel"], $id_nicho);
                 $this->agrega_servicios_list($n_servicio);
 
 
                 if (es_data($n_servicio)) {
                     $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                     $n_servicio =
-                        $this->get_producto_clasificacion_nivel(4, $param["cuarto_nivel"]);
+                        $this->get_producto_clasificacion_nivel(4, $param["cuarto_nivel"], $id_nicho);
                     $this->agrega_servicios_list($n_servicio);
 
 
                     if (es_data($n_servicio)) {
                         $this->agrega_elemento_distinto($n_servicio[0]["id_servicio"]);
                         $n_servicio =
-                            $this->get_producto_clasificacion_nivel(5, $param["quinto_nivel"]);
+                            $this->get_producto_clasificacion_nivel(5, $param["quinto_nivel"], $id_nicho);
                         $this->agrega_servicios_list($n_servicio);
                     }
                 }
@@ -606,7 +612,7 @@ class serviciosmodel extends CI_Model
     }
 
 
-    function get_producto_clasificacion_nivel($nivel, $id_clasificacion)
+    function get_producto_clasificacion_nivel($nivel, $id_clasificacion, $id_nicho)
     {
 
         $lista_niveles = [
@@ -652,6 +658,8 @@ class serviciosmodel extends CI_Model
                         status = 1
                             AND 
                         flag_imagen = 1
+                        AND
+                            id_nicho = $id_nicho
                         LIMIT 2";
 
         return $this->db->query($query_get)->result_array();
@@ -666,7 +674,7 @@ class serviciosmodel extends CI_Model
         return $this->db->query($query_get)->result_array();
     }
 
-    function get_clasificaciones_por_id_servicio($id_servicio)
+    function get_clasificaciones_por_id_servicio($id_servicio, $id_nicho)
     {
 
         $params = [
@@ -678,7 +686,7 @@ class serviciosmodel extends CI_Model
             "quinto_nivel",
             "link_afiliado_amazon"
         ];
-        return $this->get($params, ["id_servicio" => $id_servicio]);
+        return $this->get($params, ["id_servicio" => $id_servicio,'id_nicho' => $id_nicho ]);
     }
 
     function get_clasificaciones_destacadas()
@@ -696,10 +704,10 @@ class serviciosmodel extends CI_Model
                     ORDER BY count(0) DESC  LIMIT 5";
         return $this->db->query($query_get)->result_array();
     }
-    function total()
+    function total($id_nicho)
     {
 
-        $query_get = "SELECT count(0)total FROM servicio where status = 1 ";
+        $query_get = "SELECT count(0)total FROM servicio where status = 1 && id_nicho = $id_nicho";
         return $this->db->query($query_get)->result_array();
     }
 
@@ -725,9 +733,9 @@ class serviciosmodel extends CI_Model
 
         $data_complete["total_busqueda"] = $this->get_resultados_posibles($param);
         $busqueda = $this->get_resultados_posibles($param);
-        $data_complete["total_busqueda"] = $busqueda['num_servicios'];        
+        $data_complete["total_busqueda"] = $busqueda['num_servicios'];
         $data_complete["servicio"] = $this->create_productos_disponibles($busqueda['where']);
-                
+
         return $data_complete;
     }
 
@@ -842,8 +850,9 @@ class serviciosmodel extends CI_Model
                             p.id_servicio IS NULL";
         return $this->db->query($query_update)->result_array();
     }
-    function disponibles_en_aleatorio($id_servicio){
-        
+    function disponibles_en_aleatorio($id_servicio)
+    {
+
         $query_get = "SELECT id_servicio                         
         FROM servicio 
         WHERE es_publico > 0 
