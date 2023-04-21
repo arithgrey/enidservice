@@ -352,7 +352,7 @@ class serviciosmodel extends CI_Model
 
     function get_colores_por_servicio($param)
     {
-        return $this->q_get(["color"], $param["id_servicio"]);
+        return $this->q_get($param["id_servicio"], ["color"]);
     }
 
     function gamificacion_usuario_servicios($param)
@@ -779,7 +779,7 @@ class serviciosmodel extends CI_Model
     function get_palabras_clave($id_servicio)
     {
 
-        return $this->q_get(["metakeyword_usuario"], $id_servicio)[0]["metakeyword_usuario"];
+        return $this->q_get($id_servicio, ["metakeyword_usuario"])[0]["metakeyword_usuario"];
     }
 
     function get_num_anuncios($param)
