@@ -2017,6 +2017,7 @@ function navegacion(
                 "aria-expanded" => "false"
             ]
         );
+        
         $ul = ul(categorias_destacatas_ab($mas_vendidos), ["class" => "dropdown-menu borde-0"]);
 
         $categorias = d([

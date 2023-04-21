@@ -1,22 +1,24 @@
 <?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
-
+use Enid\Nicho\Nicho as Tiendas;
 class Home extends CI_Controller
 {
+    private $tiendas;
     function __construct()
     {
         parent::__construct();
         $this->load->helper("reporte");
         $this->load->library(lib_def());
         $this->app->acceso();
+        $this->tiendas = new Tiendas();
     }
 
     function index()
     {
         $data = $this->app->session();
         $this->module_redirect();
-
+        $data["tiendas"] = $this->tiendas->tiendas();
         $data["categorias_destacadas"] = $this->app->api("clasificacion/categorias_destacadas");
         $data["tipo_tag_arquetipo"] = $this->app->api("tipo_tag_arquetipo/index");
         $data["ventas_mes_ubicaciones"] = $this->app->ventas_mes_ubicaciones();

@@ -279,9 +279,12 @@ class app extends CI_Controller
     function session()
     {
 
+        
+        
+        $id_nicho = $this->get_nicho();
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
-        $data["mas_vendidos"] = $this->api->api("mas_vendido/publicos");
+        $data["mas_vendidos"] = $this->api->api("mas_vendido/publicos",["id_nicho" => $id_nicho]);
         $data["clasificaciones_departamentos"] =  [];
         $data["footer_visible"] = true;
         if ($this->is_logged_in() > 0) {
