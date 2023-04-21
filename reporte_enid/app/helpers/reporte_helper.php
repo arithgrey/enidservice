@@ -29,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = format_checkout_ventas();
         $response[] = format_sin_ventas();
 
-        $res[] = d(menu(), "col-lg-2 contenedor_menu");
+        $res[] = d(menu($data), "col-lg-2 contenedor_menu");
         $res[] = d(tab_content($response), "col-lg-7");
         $res[] = d(actualizaciones_del_dia($data), "col-lg-3 border-left");
         $res[] = modal_edicion_promesa_venta();
@@ -616,7 +616,7 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function menu()
+    function menu($data)
     {
         $link_accesos_pagina = tab(
             text_icon("fa-check-circle", "Accesos por página"),
@@ -762,6 +762,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $list = [
+            $data["tiendas"],
             format_link(
                 text_icon(_text_(_money_icon,'white'), "Noticias"),
                 [

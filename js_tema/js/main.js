@@ -126,6 +126,17 @@ $("footer").ready(() => {
     });
 
     
+    if (document.body.querySelector('.selector_tienda_nicho')) {
+                
+        $('.selector_tienda_nicho').change(function(){
+            let $tienda = get_valor_selected('.selector_tienda_nicho');                
+            let $path_tienda  = _text("../../",$tienda);
+            redirect($path_tienda);
+        });
+    }
+
+
+    
 });
 
 let zoom_imagen = function () {

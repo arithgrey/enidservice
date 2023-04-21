@@ -49,9 +49,9 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5 ssss");
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
-        
+
         return d($response, 12);
-    }    
+    }
     function baner_compra_tipo_producto($data)
     {
 
@@ -100,111 +100,7 @@ if (!function_exists('invierte_date_time')) {
                 $response[] = d($response_, $extra);
             }
         }
-        /*
-        
 
-        $response = [];
-        switch ($q) {
-
-            case "panel3d":
-
-                $response[] = d(
-                    "Innovación, modernidad y estilo para tu hogar o negocio",
-                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                );
-
-                $response[] = d("Llevamos ese estilo que te llevará al siguiente nivel!", 'black col-sm-12 p-0');
-
-            break;
-
-            case "flores":
-
-                $response[] = d(
-                    "Envía felicidad y paga cuando reciba tu detalle!",
-                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                );
-
-                $response[] = d("Llevamos tus arreglos florales a tu pareja y paga 
-                                cuando las tenga en sus manos!", 'black col-sm-12 p-0');
-
-                break;
-
-            case "kitsmasvendidos":
-
-                $response[] = d(
-                    "Pasa ya! al siguiente nivel",
-                    'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                );
-
-                $response[] = d("Te llevamos tus pesas y pagas cuando las tenga en sus manos!", 'black col-sm-12 p-0');
-                break;
-            
-            case "tenisg5":
-
-                    $response_[] = d(
-                        "Inicia tu negocio de venta de tenis calida G5",
-                        'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                    );
-    
-                    $response_[] = d(_text_("Cualquier par de tenis en",span("$599",'strong f12')," a partir de la compra de 3 "), 'black col-sm-12 p-0 mt-3 mb-3');
-                    
-                    $response_[] = d(d(_text_("Ó"), 'black row'),12);                                        
-
-                    $response_[] = d(d(_text_("1 par por",span("$999",'underline ml-2 f12 strong')), 'black mt-2 row'),12);                                        
-                    $response_[] = d(d(  _text_(  "2 pares por",span('$1699', "underline ml-2 f12 strong")), 'black row'),12);                                        
-                    
-
-                    $response_[] =  d(d('<iframe width="560" 
-                                        height="315" 
-                                        src="https://www.youtube.com/embed/3F9pTL09wF0" 
-                                        title="YouTube video player" 
-                                        frameborder="0" 
-                                        allow="accelerometer; 
-                                        autoplay; clipboard-write; 
-                                        encrypted-media; gyroscope; 
-                                        picture-in-picture; web-share" allowfullscreen></iframe>','mt-4 row'),12);
-                    
-                    $extra = is_mobile() ? 12 :'';
-                    $response[] = d($response_,$extra);
-                    
-                    
-
-                    break;
-            
-                    case "barrasusorudo":
-
-                        $response_[] = d(
-                            "Pasa al siguiente nivel ya!",
-                            'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
-                        );
-        
-                        $response_[] = d("Inicia tu negocio, pon tu gym en casa o simplemente da el siguiente paso
-                        ",'black col-sm-12 p-0 mt-3 mb-3');
-                        
-                        $response_[] =  d(d('<iframe width="560" 
-                                            height="315" 
-                                            src="https://www.youtube.com/embed/Y6P8GAdAJPY" 
-                                            title="YouTube video player" 
-                                            frameborder="0" 
-                                            allow="accelerometer; 
-                                            autoplay; clipboard-write; 
-                                            encrypted-media; gyroscope; 
-                                            picture-in-picture; web-share" allowfullscreen></iframe>','mt-4 row'),12);
-                        
-                        $extra = is_mobile() ? 12 :'';
-                        $response[] = d($response_,$extra);
-                        
-                        
-    
-                        break;
-
-
-
-            default:
-
-                $response = "";
-                break;
-        }*/
         return d(d(d($response, 13), ' col-sm-10 col-sm-offset-1'), 13);
     }
     function oferta_delivery()
