@@ -7,6 +7,7 @@ class Servicio extends REST_Controller
     private $id_usuario;
     private $servicio_imagen_formato;
     
+    private $id_nicho;
     function __construct()
     {
         parent::__construct();
@@ -19,6 +20,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $this->id_usuario = (!$loggin) ? prm_def($param, "id_usuario") : $this->app->get_session("id_usuario");
         $this->servicio_imagen_formato = new ServicioImagenFormato();
+        $this->id_nicho = $this->app->get_nicho();
     }
 
 
@@ -29,7 +31,7 @@ class Servicio extends REST_Controller
         $response = false;
         if (fx($param, "id")) {
 
-            $response = $this->serviciosmodel->q_get(["flag_envio_gratis"], $param["id"]);
+            $response = $this->serviciosmodel->q_get($param["id"],["flag_envio_gratis"], );
         }
         $this->response($response);
     }
@@ -48,7 +50,7 @@ class Servicio extends REST_Controller
 
         if (fx($param, "id_servicio")) {
 
-            $response = $this->serviciosmodel->q_get(["stock"], $param["id_servicio"])[0]["stock"];
+            $response = $this->serviciosmodel->q_get($param["id_servicio"], ["stock"])[0]["stock"];
         }
         $this->response($response);
     }
@@ -153,7 +155,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id")) {
-            $response = $this->serviciosmodel->q_get(["nombre_servicio"], $param["id"]);
+            $response = $this->serviciosmodel->q_get($param["id"], ["nombre_servicio"]);
         }
         $this->response($response);
     }
@@ -187,7 +189,7 @@ class Servicio extends REST_Controller
         $response = false;
         if (fx($param, "id_servicio")) {
 
-            $response = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"]);
+            $response = $this->serviciosmodel->get_clasificaciones_por_id_servicio($param["id_servicio"],$this->id_nicho);
         }
         $this->response($response);
     }
@@ -209,7 +211,7 @@ class Servicio extends REST_Controller
 
         $tag = $param["tag"];
         $id_servicio = $param["id_servicio"];
-        $palabras_clave = $this->serviciosmodel->q_get(["metakeyword_usuario"], $id_servicio)[0]["metakeyword_usuario"];
+        $palabras_clave = $this->serviciosmodel->q_get( $id_servicio, ["metakeyword_usuario"])[0]["metakeyword_usuario"];
         $tag_arreglo = explode(",", $palabras_clave);
         $posicion = $this->busqueda_meta_key_word($tag_arreglo, $tag);
         unset($tag_arreglo[$posicion]);
@@ -459,7 +461,7 @@ class Servicio extends REST_Controller
                     "id_servicio",
                     "talla"
                 ];
-            $response = $this->serviciosmodel->q_get($params, $param["id_servicio"]);
+            $response = $this->serviciosmodel->q_get($param["id_servicio"], $params);
         }
         $this->response($response);
     }
@@ -673,7 +675,7 @@ class Servicio extends REST_Controller
             foreach ($response as $row) {
 
                 $id_servicio = $row["id_servicio"];
-                $nombre = $this->serviciosmodel->q_get(["nombre_servicio"], $id_servicio)[0]["nombre_servicio"];
+                $nombre = $this->serviciosmodel->q_get($id_servicio , ["nombre_servicio"])[0]["nombre_servicio"];
                 $data_complete[$a] = $row;
                 $data_complete[$a]["nombre_servicio"] = $nombre;
                 $a++;
@@ -983,7 +985,7 @@ class Servicio extends REST_Controller
         $response = false;
         if (fx($param, "id_servicio")) {
             $id_servicio = $param["id_servicio"];
-            $servicio = $this->serviciosmodel->q_get(["talla"], $id_servicio);
+            $servicio = $this->serviciosmodel->q_get($id_servicio, ["talla"]);
             $servicio_tallas = $this->add_tallas($servicio);
             if ($param["v"] == 1) {
 
@@ -1237,7 +1239,7 @@ class Servicio extends REST_Controller
 
         $param = $this->put();
         $id_servicio = $param["id_servicio"];
-        $servicio = $this->serviciosmodel->q_get(['talla'], $id_servicio);
+        $servicio = $this->serviciosmodel->q_get($id_servicio,['talla']);
         $talla = $param["id_talla"];
         $tallas_json = ($servicio[0]["talla"] != null) ? $servicio[0]["talla"] : get_json_array(array());
         $array_tallas = get_array_json($tallas_json);
@@ -1364,6 +1366,7 @@ class Servicio extends REST_Controller
 
         if (fx($param, 'q,id_usuario,vendedor,agrega_clasificaciones,id_clasificacion,vendedor')) {
 
+            
             $es_empresa = prm_def($param, "es_empresa");
             $servicios = $this->serviciosmodel->busqueda($param);
             $total_busqueda = prm_def($servicios, 'total_busqueda');
@@ -1411,7 +1414,7 @@ class Servicio extends REST_Controller
                 "comision"
             ];
 
-            $servicio = $this->serviciosmodel->q_get($params, $id_servicio);
+            $servicio = $this->serviciosmodel->q_get($id_servicio, $params);
             $num_servicios = count($servicio);
             $response["en_existencia"] = 0;
             $response["info_servicio"] = $servicio;
@@ -1430,7 +1433,7 @@ class Servicio extends REST_Controller
         $response = false;
         if (fx($param, "id_servicio")) {
 
-            $response = $this->serviciosmodel->q_get(["existencia"], $param["id_servicio"])[0]["existencia"];
+            $response = $this->serviciosmodel->q_get($param["id_servicio"], ["existencia"])[0]["existencia"];
         }
         $this->response($response);
     }
@@ -1443,7 +1446,7 @@ class Servicio extends REST_Controller
         if (fx($param, "id_servicio")) {
             $params = ["nombre_servicio", "telefono_visible", "id_usuario"];
             $id_servicio = $param["id_servicio"];
-            $response = $this->serviciosmodel->q_get($params, $id_servicio);
+            $response = $this->serviciosmodel->q_get( $id_servicio, $params);
         }
         $this->response($response);
     }
@@ -1457,7 +1460,7 @@ class Servicio extends REST_Controller
             "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel,link_afiliado_amazon";
         if (fx($param, $campos)) {
 
-            $response = $this->serviciosmodel->get_producto_por_clasificacion($param);
+            $response = $this->serviciosmodel->get_producto_por_clasificacion($param, $this->id_nicho);
         }
         $this->response($response);
     }    
@@ -1469,7 +1472,7 @@ class Servicio extends REST_Controller
         $response = false;
 
         if (fx($param, "limit")) {
-
+            
             $q = (array_key_exists("q", $param)) ? $param["q"] : "";
             $param["q2"] = 0;
             $param["q"] = $q;
@@ -1479,6 +1482,8 @@ class Servicio extends REST_Controller
             $param["vendedor"] = 0;
             $param["resultados_por_pagina"] = $param["limit"];
             $param["agrega_clasificaciones"] = 0;
+            $param["id_nicho"] = prm_def($param, "id_nicho",1);
+
             $servicios = $this->serviciosmodel->busqueda_producto($param);
             $response = prm_def($servicios, "servicio", []);
         }
@@ -1852,7 +1857,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         if (fx($param, "id_servicio")) {
-            $response = $this->serviciosmodel->q_get(["id_usuario"], $param["id_servicio"]);
+            $response = $this->serviciosmodel->q_get($param["id_servicio"],["id_usuario"]);
         }
         $this->response($response);
     }
@@ -1863,21 +1868,20 @@ class Servicio extends REST_Controller
         $response = false;
 
         if (fx($param, "id_servicio")) {
-
-            $sugerido = prm_def($param,  "sugerido");
+            
+            $sugerido = prm_def($param, "sugerido");
             $id_servicio  = $param["id_servicio"];
             if ($sugerido > 0) {
 
                 /*Sugerencia entre existentes*/
-                $total = $this->serviciosmodel->total()[0]["total"];
+                $total = $this->serviciosmodel->total($this->id_nicho)[0]["total"];                
                 $id_servicio = rand(1, $total);
             }
 
-            $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio);
-            $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
+            $clasificaciones = $this->serviciosmodel->get_clasificaciones_por_id_servicio($id_servicio, $this->id_nicho);
             
-
-            $servicios = $this->completa_servicios_sugeridos($response, $param);
+            $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];                    
+            $servicios = $this->completa_servicios_sugeridos($response, $param);            
             $servicios = $this->extra_sugerencias($servicios);
             
 
@@ -1907,6 +1911,7 @@ class Servicio extends REST_Controller
         $in_session = $this->app->is_logged_in();
         $existentes = (es_data($servicios)) ? count($servicios) : 0;
         $sugerencia = ($existentes > 0) ? $servicios : [];
+        $param["id_nicho"] = $this->id_nicho;
 
         if ($existentes < 16) {
 
@@ -1946,6 +1951,7 @@ class Servicio extends REST_Controller
             if ($existentes < 8) {
 
                 $param["limit"] = (8 - $existentes);
+                $param["id_nicho"] = $this->id_nicho;
                 foreach ($this->busqueda_producto_por_palabra_clave($param) as $row) {
                     $servicios[] = $row;
                 }

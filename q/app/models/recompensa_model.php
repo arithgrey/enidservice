@@ -46,7 +46,7 @@ class Recompensa_model extends CI_Model
         return $this->update([$q => $q2], ["id_recompensa" => $id]);
     }
 
-    function q_get($params = [], $id)
+    function q_get($id,$params = [])
     {
         return $this->get($params, ["id" => $id]);
     }
@@ -77,7 +77,6 @@ class Recompensa_model extends CI_Model
                 LIMIT 3";
 
         return $this->db->query($sql)->result_array();
-
     }
     function servicio($id_servicio)
     {
@@ -99,13 +98,13 @@ class Recompensa_model extends CI_Model
                 ";
 
         return $this->db->query($sql)->result_array();
-
     }
-    function disponibles($limit_paginacion, $populares = 0)
+    function disponibles($id_nicho, $limit_paginacion, $populares = 0)
     {
 
-        $extra = ($populares > 0) ?  'ORDER BY r.gamificado DESC' : '' ; 
-        
+        $extra = ($populares > 0) ?  'ORDER BY r.gamificado DESC' : '';
+        $extra_nicho = "AND s.id_nicho =  $id_nicho";
+
         $sql = _text_("SELECT 
                 r.id_recompensa, r.descuento, r.id_servicio, 
                 r.id_servicio_conjunto, s.precio, 
@@ -113,10 +112,10 @@ class Recompensa_model extends CI_Model
                 INNER JOIN servicio s 
                 ON r.id_servicio = s.id_servicio    
                 INNER JOIN servicio sc 
-                ON r.id_servicio_conjunto = sc.id_servicio WHERE r.status  > 0 ", $extra ,  $limit_paginacion);
+                ON r.id_servicio_conjunto = sc.id_servicio 
+                WHERE r.status  > 0 ", $extra_nicho, $extra,  $limit_paginacion);
 
         return $this->db->query($sql)->result_array();
-
     }
     function total_disponibles()
     {
@@ -124,7 +123,6 @@ class Recompensa_model extends CI_Model
         $sql = "SELECT COUNT(0)total FROM recompensa where status > 0";
 
         return $this->db->query($sql)->result_array();
-
     }
     function id_recompensa($id_recompensa)
     {
@@ -141,7 +139,6 @@ class Recompensa_model extends CI_Model
                 ";
 
         return $this->db->query($sql)->result_array();
-
     }
     function get_in($in)
     {
@@ -149,27 +146,28 @@ class Recompensa_model extends CI_Model
         $query_get = 'SELECT * FROM recompensa WHERE status =  1 AND  id_recompensa in (' . $in . ')';
         return $this->db->query($query_get)->result_array();
     }
-    function in($ids){
+    function in($ids)
+    {
 
         $query_get = "SELECT r.*, ro.id_orden_compra, ro.id_recompensa
         FROM recompensa_orden_compra ro 
         INNER JOIN recompensa r ON ro.id_recompensa = r.id_recompensa
-        WHERE r.status = 1 AND id_orden_compra IN(".$ids.") ORDER BY ro.id_orden_compra";
+        WHERE r.status = 1 AND id_orden_compra IN(" . $ids . ") ORDER BY ro.id_orden_compra";
 
         return $this->db->query($query_get)->result_array();
     }
 
 
-    function gamifica_recompensa($id){
+    function gamifica_recompensa($id)
+    {
 
         $query_update = "UPDATE recompensa SET gamificado = gamificado + 1 WHERE id_recompensa = $id LIMIT 1";
         return $this->db->query($query_update)->result_array();
     }
-    function baja_por_id_servicio($id){
+    function baja_por_id_servicio($id)
+    {
 
         $query_update = "update recompensa set status = 0 where id_servicio  = $id  or id_servicio_conjunto =  $id";
         return $this->db->query($query_update)->result_array();
     }
-    
-
 }

@@ -29,8 +29,9 @@ class Recompensa extends REST_Controller
 
         $response = [];
         $data_complete = [];
+        $id_nicho = $this->app->get_nicho();
 
-        $response = $this->recompensa_model->disponibles($paginacion, $populares);        
+        $response = $this->recompensa_model->disponibles($id_nicho, $paginacion, $populares);        
         $response = $this->formatImagenServicio->url_imagen_servicios($response);        
         $recompensa = $this->formatImagenServicio->url_imagen_servicios(
             $response, "id_servicio_conjunto", "url_img_servicio_conjunto");
@@ -370,7 +371,7 @@ class Recompensa extends REST_Controller
 
         $antecedente_compra = prm_def($param, "antecedente_compra");
         $numero_recompensas = $this->recompensa_model->total_disponibles()[0]["total"];
-        $paginacion = intval($numero_recompensas) / 8;
+        $paginacion = floor(intval($numero_recompensas) / 8);
         $random_paginador = rand(1, $paginacion);
         $paginador = $this->offset_paginador($random_paginador);
         $recompensas = sugerencias($this->disponibles($paginador), $antecedente_compra);

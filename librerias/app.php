@@ -732,4 +732,13 @@ class app extends CI_Controller
         }
         return $response;
     }
+
+    function get_nicho()
+    {
+        $id  = 1;
+        if (isset($_COOKIE["xn"])) {
+            $id = $_COOKIE["xn"];
+        }
+        return $id;
+    }
 }
