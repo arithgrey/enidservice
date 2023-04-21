@@ -901,6 +901,7 @@ class Servicio extends REST_Controller
     {
 
         $q["es_empresa"] = 1;
+        $q["id_nicho"] = $this->id_nicho;
         return $this->app->api("servicio/q/", $q);
     }
 
