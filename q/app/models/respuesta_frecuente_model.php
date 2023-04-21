@@ -8,7 +8,7 @@ class respuesta_frecuente_model extends CI_Model
     {
         parent::__construct();
         $this->load->database();
-        $this->tabla = 'respuessta_frecuente';
+        $this->tabla = 'respuesta_frecuente';
     }
 
     function get($params = [], $params_where = [], $limit = 1, $order = '', $type_order = 'DESC')
@@ -61,14 +61,14 @@ class respuesta_frecuente_model extends CI_Model
         }
         return $this->db->delete($this->tabla, $params_where);
     }
-    function q($q)
+    function q($q, $limit)
     {
         $query_get = "SELECT * FROM respuesta_frecuente
         WHERE 
         respuesta LIKE '%$q%'
         OR
         atajo LIKE '%$q%'
-        LIMIT 15;";
+        LIMIT $limit";
 
         return $this->db->query($query_get)->result_array();
     }
