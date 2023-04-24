@@ -28,10 +28,7 @@ if (!function_exists('invierte_date_time')) {
 
         if (es_data($usuario_busqueda)) {
 
-            $id_usuario = pr($usuario_busqueda, 'id_usuario');
-            $nombre = format_nombre($usuario_busqueda);
-            $descripcion[] = h($nombre, 1, ['class' => 'display-4 text-uppercase strong']);
-
+            $id_usuario = pr($usuario_busqueda, 'id_usuario');        
             $imagen_perfil = formato_imagen_perfil($data, $id_usuario);
             $usuario_perfil = usuario_perfil($data, $imagen_perfil);
 
@@ -83,6 +80,8 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d($data["formulario_busqueda_frecuente"], 'col-xs-12 mb-3');
         $response[] = d(hr('border_black'), 12);
+
+        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
         $response[] = d(d("Historial de seguimiento", 'f13 black strong'), 'col-xs-12 mt-5');
         $response[] = d(d(place("tarjetas_acciones_seguimiento"), 12), 12);
         return append($response);
@@ -156,7 +155,7 @@ if (!function_exists('invierte_date_time')) {
     function tareas_control($data, $contenedor_perfil_usuario_busqueda)
     {
 
-        $response[] = d(format_link("+ Seguimiento", ["class" => "white boton_accion_seguimiento"], 2), 'col-xs-12 mt-3');
+        
         if (es_administrador($data)) {
 
             $response[] = d(format_link(
