@@ -21,6 +21,14 @@ class clientes extends REST_Controller
         $response = $this->leads_format->recibos_sin_ficha_seguimiento();
         $this->response($response);
     }
-    
+
+    function recibos_sin_ficha_seguimiento_posibles_pagos_GET()
+    {
+        
+        $response = $this->leads_format->recibos_sin_ficha_seguimiento_posibles_pagos();
+        $this->response($response);
+    }
+
+
     
 }   

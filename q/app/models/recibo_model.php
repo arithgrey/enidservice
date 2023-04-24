@@ -17,7 +17,20 @@ class Recibo_model extends CI_Model
         AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
         AND p.ficha_seguimiento < 1        
         ORDER BY p.fecha_registro DESC
-        LIMIT 30";
+        LIMIT 300";
+
+        return $this->db->query($query_get)->result_array();
+    }
+    function recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento_posibles_pagos()
+    {
+
+        $query_get = "SELECT p.* FROM proyecto_persona_forma_pagos p         
+        WHERE p.se_cancela < 1                
+        AND p.status IN (9,11,12,14,15,16)
+        AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
+        AND p.ficha_seguimiento < 1        
+        ORDER BY p.fecha_registro DESC
+        LIMIT 60";
 
         return $this->db->query($query_get)->result_array();
     }
