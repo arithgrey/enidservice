@@ -21,6 +21,7 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "leads");    
                 
         $data["leads"] = $this->recibos_sin_ficha_seguimiento();    
+        $data["leads_posibles_pagos"] = $this->recibos_sin_ficha_seguimiento_posibles_pagos();    
         
         $data["eventos_pendientes"] = $this->eventos_pendientes();    
         $data["status_ventas"] = $this->app->api("status_enid_service/index");    
@@ -35,6 +36,11 @@ class Home extends CI_Controller
     {
     
         return $this->app->api("clientes/recibos_sin_ficha_seguimiento");
+
+    }
+    function recibos_sin_ficha_seguimiento_posibles_pagos(){
+
+        return $this->app->api("clientes/recibos_sin_ficha_seguimiento_posibles_pagos");
 
     }
     function eventos_pendientes()

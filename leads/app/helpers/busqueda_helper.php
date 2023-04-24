@@ -16,6 +16,10 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($data["formulario_busqueda_ordenes_compra"],12);
         $response[] = d($data["eventos_pendientes"],12);
         $response[] = d($data["leads"],12);
+        $response[] = d(hr(),12);
+        $response[] = d(_titulo("Posibles pagos"),12);
+        $response[] = d($data["leads_posibles_pagos"],12);
+
         return d($response,13);
     }
     

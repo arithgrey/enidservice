@@ -21,6 +21,14 @@ class LeadsFormat
         $recibos = $this->servicio_imagen->url_imagen_servicios($recibos);
         return $this->forma_ficha($recibos);
     }
+    function recibos_sin_ficha_seguimiento_posibles_pagos()
+    {
+
+        $recibos =  $this->recibo_model->recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento_posibles_pagos();
+        $recibos = $this->servicio_imagen->url_imagen_servicios($recibos);
+        return $this->forma_ficha($recibos);
+    }
+
     function forma_ficha($recibos)
     {
         
