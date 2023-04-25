@@ -22,7 +22,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function render($data)
-    {
+    {   
+        
         $response = [];
         $usuario_busqueda = $data['usuario_busqueda'];
 

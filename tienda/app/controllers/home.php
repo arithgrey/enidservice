@@ -23,8 +23,14 @@ class Home extends CI_Controller
 
             case 2:
 
-                header("location:../search/?q=panel");
+                header("location:../search/?q=panel&order=2");
                 break;
+
+            case 3:
+
+                header("location:../search/?q=tenisg5&order=2");
+                break;
+    
 
             default:
                 break;
