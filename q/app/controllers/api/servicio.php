@@ -710,7 +710,7 @@ class Servicio extends REST_Controller
                 $data["costo_envio"] = $this->app->calcula_costo_envio($this->crea_data_costo_envio());
             }
 
-
+            $id_nicho = pr($servicio, "id_nicho");
             $data["ciclos"] = $this->get_not_ciclo_facturacion($param);
             $data["id_usuario"] = $this->id_usuario;
             $imagenes = $this->app->imgs_productos($id_servicio, 1, 10);
@@ -728,9 +728,12 @@ class Servicio extends REST_Controller
             $data["servicio"]["servicio_materiales"] = $this->servicio_materiales($id_servicio);
             $data["servicio"]["materiales"] = $this->materiales();
             $data["tienda_nicho"]  =
-                $this->tiendas->tiendas("id", "tienda_nicho_producto", pr($servicio, "id_nicho"));
+                $this->tiendas->tiendas(
+                    "id", "tienda_nicho_producto", $id_nicho);
+            $data["mas_vendidos_nicho"] = $this->app->api("mas_vendido/publicos",["id_nicho" => $id_nicho]);
+            
 
-            $response = render_configurador($data);
+            $response = render_configurador($data); 
         }
         $this->response($response);
     }

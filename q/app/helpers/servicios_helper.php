@@ -81,7 +81,19 @@ if (!function_exists('invierte_date_time')) {
             $val_youtube = icon('fa fa-pencil text_url_youtube') . $valor_youtube;
             $nombre = pr($servicio, "nombre_servicio");
 
-            $r[] = d(d(flex("Tienda Nicho",$data["tienda_nicho"],"flex-column mb-5 mt-5", "strong mb-4"),4),"row ");
+            $r[] = d(d(flex("Tienda Nicho",$data["tienda_nicho"],"flex-column mb-2 mt-5", "strong mb-4"),4),"row ");
+
+            $mas_vendidos = $data["mas_vendidos_nicho"];
+            $select_mas_vendidos= create_select(
+                $mas_vendidos,
+                "mas_vendido",
+                "mas_vendido_select_servicio form-control",
+                "mas_vendido",
+                "menu",
+                "path",
+            );
+
+            $r[] = d(d(flex("Menú de acceso rápido", $select_mas_vendidos,"flex-column mb-5", "strong mb-4"),4),"row");
 
             $r[] = seccion_titulo($nombre, $servicio, $num_imagenes);
             
