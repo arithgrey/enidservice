@@ -81,8 +81,10 @@ if (!function_exists('invierte_date_time')) {
             $val_youtube = icon('fa fa-pencil text_url_youtube') . $valor_youtube;
             $nombre = pr($servicio, "nombre_servicio");
 
+            $r[] = d(d(flex("Tienda Nicho",$data["tienda_nicho"],"flex-column mb-5 mt-5", "strong mb-4"),4),"row ");
 
             $r[] = seccion_titulo($nombre, $servicio, $num_imagenes);
+            
             $r[] = indicadores_faltantes($servicio);
 
             $r[] = menu_config($data, $id_servicio, $num, $num_imagenes, $url_productos_publico);

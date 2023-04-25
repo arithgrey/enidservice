@@ -11,19 +11,39 @@ class Nicho
     {
         $this->api = new Api();
     }
-    function tiendas()
+    function tiendas($campo_valor = 'path', $clase_ir_a_tienda = 'selector_tienda_nicho', $selector_default = 0)
     {
         $nichos = $this->api->api("nicho/index");
         $response = "";
         if (es_data($nichos)) {
-            $response = create_select(
-                $nichos,
-                'tienda',
-                'tiendas form-control selector_tienda_nicho',
-                "tiendas",
-                'nombre',
-                'path'
-            );
+            $clase = _text_('tiendas form-control', $clase_ir_a_tienda);
+            if($selector_default < 1){
+
+                $response = create_select(
+                    $nichos,
+                    'tienda',
+                    $clase ,
+                    "tiendas",
+                    "nombre",
+                    $campo_valor,
+                    0,
+                    1,
+                    0,
+                    "Selecciona una tienda Nicho"
+                );
+
+            }else{
+                
+                $response =  create_select_selected(
+                    $nichos,
+                    $campo_valor,
+                    "nombre",
+                    $selector_default,
+                    "id_nicho",
+                    $clase 
+
+                );
+            }
             
         }
         return $response;

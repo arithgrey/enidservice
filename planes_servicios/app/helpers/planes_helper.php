@@ -7,13 +7,17 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = d(_titulo('¿Cuantas valoraciones deseas generar?'), 'mb-5');
         $form[] = d(hr());
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_valoraciones_fake",
                 "method" => "post"
-            ]);
+            ]
+        );
 
-        $form[] = d(input_frm('mt-5', '¿Cantidad?',
+        $form[] = d(input_frm(
+            'mt-5',
+            '¿Cantidad?',
             [
                 'class' => 'total',
                 'id' => 'total',
@@ -25,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
             '¿Hay algo mal con esta canidad no?'
         ), 'input_unidades_producto_stock');
 
-        
+
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
         $form[] = btn('Generar', ['class' => 'mt-5']);
         $form[] = form_close();
@@ -38,13 +42,17 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = d(_titulo('¿Cúantos artículos como este agregamos al stock?'), 'mb-5');
         $form[] = d(hr());
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_stock_servicio",
                 "method" => "post"
-            ]);
+            ]
+        );
 
-        $form[] = d(input_frm('mt-5', '¿Cantidad?',
+        $form[] = d(input_frm(
+            'mt-5',
+            '¿Cantidad?',
             [
                 'class' => 'stock',
                 'id' => 'stock',
@@ -56,7 +64,9 @@ if (!function_exists('invierte_date_time')) {
             '¿Hay algo mal con esta canidad no?'
         ), 'input_unidades_producto_stock');
 
-        $form[] = d(input_frm('mt-5', '¿Cuanto nos costó cada unidad? MXN',
+        $form[] = d(input_frm(
+            'mt-5',
+            '¿Cuanto nos costó cada unidad? MXN',
             [
                 'class' => 'costo_stock',
                 'id' => 'costo_stock',
@@ -64,7 +74,8 @@ if (!function_exists('invierte_date_time')) {
                 'value' => 0,
                 'required' => true,
                 'type' => 'number',
-            ], 'Parece que el costo anda mal ¿no?'
+            ],
+            'Parece que el costo anda mal ¿no?'
         ), 'input_costo_producto_stock');
 
         $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => 0]);
@@ -80,19 +91,24 @@ if (!function_exists('invierte_date_time')) {
         $form[] = d(_titulo('¿Cúando estará disponible este artículo?'), 'mb-5');
         $form[] = d(hr());
         $form[] = place('ultima_fecha_disponible');
-        $mostrar = format_link('Mostrar fecha al Público',
+        $mostrar = format_link(
+            'Mostrar fecha al Público',
             [
                 'class' => 'definir_feche_disponible'
             ]
         );
-        $ocultar = format_link('Ocultar este dato',
+        $ocultar = format_link(
+            'Ocultar este dato',
             [
                 'class' => 'ocultar_fecha_stock'
-            ], 0);
+            ],
+            0
+        );
         $form[] = d(flex($mostrar, $ocultar, _text_(_between, _mbt5)), 'opciones_definicion');
 
 
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_fecha_stock d-none",
                 "method" => "post"
@@ -109,7 +125,8 @@ if (!function_exists('invierte_date_time')) {
 
     function form_busqueda()
     {
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_busqueda_proveedor",
                 "id" => "form_busqueda_proveedor",
@@ -145,7 +162,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $form[] = d(_titulo('¿Quién te distribuye este artículo?'), 'mb-5');
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_proveedor",
                 "id" => "form_proveedor",
@@ -181,7 +199,8 @@ if (!function_exists('invierte_date_time')) {
                 "maxlength" => 10,
                 "minlength" => 8,
                 "value" => ""
-            ], _text_telefono
+            ],
+            _text_telefono
 
         );
 
@@ -197,7 +216,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5', "Precio en que vende este artículo",
+        $form[] = input_frm(
+            'mt-5',
+            "Precio en que vende este artículo",
             [
                 "type" => "number",
                 "required" => true,
@@ -207,7 +228,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5', "Ubicación de entrega",
+        $form[] = input_frm(
+            'mt-5',
+            "Ubicación de entrega",
             [
                 "type" => "text",
                 "required" => true,
@@ -228,15 +251,15 @@ if (!function_exists('invierte_date_time')) {
         $form[] = form_close();
         $form[] = d(d("Ó", "ml-auto"), 'col-sm-12 mt-5 text-right texto_baja_proveedor d-none');
         $form[] = d(
-            d("Puedes eliminar este proveedor de la lista",
+            d(
+                "Puedes eliminar este proveedor de la lista",
                 [
                     "class" => "ml-auto underline eliminar_provedor_servicio cursor_pointer",
                 ]
-            )
-            , 'col-sm-12 mt-3 text-right texto_baja_proveedor d-none'
+            ),
+            'col-sm-12 mt-3 text-right texto_baja_proveedor d-none'
         );
         return append($form);
-
     }
 
     function es_fabricante()
@@ -266,7 +289,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return eleccion($texto_fabricante, $es_fabricante, $es_intermediario);
-
     }
 
     function distribucion_proveedores()
@@ -292,16 +314,15 @@ if (!function_exists('invierte_date_time')) {
         ];
 
         return ul($list, "nav nav-tabs");
-
     }
 
     function proveedores()
     {
 
-//        $response[] = distribucion_proveedores();
+        //        $response[] = distribucion_proveedores();
         $seccion[] = tab_seccion(form_proveedores(), "tab_formulario_proveedores", 1);
-//        $seccion[] = tab_seccion(form_busqueda(), "tab_busqueda_proveedores",1);
-//        $response[] = tab_content($seccion);
+        //        $seccion[] = tab_seccion(form_busqueda(), "tab_busqueda_proveedores",1);
+        //        $response[] = tab_content($seccion);
         return gb_modal($seccion, 'proveedor_servicio_modal');
     }
 
@@ -309,7 +330,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $form[] = d(_titulo('¿En qué precio te vende este artículo?'), 'mb-5');
-        $form[] = form_open("",
+        $form[] = form_open(
+            "",
             [
                 "class" => "form_costo_proveedor",
                 "id" => "form_costo_proveedor",
@@ -317,7 +339,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $form[] = input_frm('mt-5', "Precio",
+        $form[] = input_frm(
+            'mt-5',
+            "Precio",
             [
                 "type" => "number",
                 "required" => true,
@@ -351,10 +375,8 @@ if (!function_exists('invierte_date_time')) {
         $t[] = costo_proveedor();
         $t[] = form_fecha_stock($data);
         $t[] = btw(
-            _titulo("artículos más vistos de la semana")
-            ,
-            top_ventas($top_servicios)
-            ,
+            _titulo("artículos más vistos de la semana"),
+            top_ventas($top_servicios),
             "contenedor_top " . ($action == 1) ? " d-none " : " "
         );
 
@@ -367,7 +389,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $z[] = tab_seccion(
-            form_ventas($data["ciclo_facturacion"], $data["error_registro"]),
+            form_ventas($data),
             'tab_form_servicio',
             tab_activa(1, $action),
             [
@@ -383,10 +405,12 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
-    function form_ventas($ciclo_facturacion, $error_registro)
+    function form_ventas($data)
     {
-
-        $r[] = form_open('',
+        $ciclo_facturacion = $data["ciclo_facturacion"];
+        $error_registro = $data["error_registro"];
+        $r[] = form_open(
+            '',
             [
                 'class' => "form_nombre_producto col-lg-6 col-lg-offset-3 p-0",
                 "id" => 'form_nombre_producto'
@@ -394,27 +418,29 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $r[] = _titulo('¿Qué anunciamos?');
+
         $r[] = flex(
-            a_enid('un producto',
+            a_enid(
+                'un producto',
                 [
                     "class" => "tipo_promocion tipo_producto easy_select_enid button_enid_eleccion_active text-uppercase",
                     "id" => 0,
                 ]
-            )
-            ,
+            ),
             a_enid(
                 "un servicio",
                 [
                     "class" => "tipo_promocion tipo_servicio text-uppercase",
                     "id" => 1
                 ]
-            )
-            ,
+            ),
             'mt-5 mt-md-4 mb-5 top_tipo_publicacion'
         );
 
 
-        $nombre = input_frm('mt-5',
+
+        $nombre = input_frm(
+            'mt-5',
             span("Nombre del artículo", 'text-uppercase'),
             [
                 "id" => "nombre_producto",
@@ -424,11 +450,12 @@ if (!function_exists('invierte_date_time')) {
                 "onkeyup" => "transforma_mayusculas(this)",
                 "required" => true,
                 "placeholder" => "Nombre de tu artículo o servicio",
-                
+
             ]
         );
 
-        $seccion_precio = input_frm('contenedor_precio mt-5 mt-md-5',
+        $seccion_precio = input_frm(
+            'contenedor_precio mt-5 mt-md-5',
             'Precio MXN',
             [
                 "id" => "costo",
@@ -438,9 +465,11 @@ if (!function_exists('invierte_date_time')) {
                 "step" => "any",
                 "type" => "float",
                 "placehorder" => "880",
-            ], _text_cantidad
+            ],
+            _text_cantidad
         );
-        $seccion_costo = input_frm('contenedor_precio mt-5 mt-md-5',
+        $seccion_costo = input_frm(
+            'contenedor_precio mt-5 mt-md-5',
             'Costo MXN',
             [
                 "id" => "costo_compra",
@@ -450,7 +479,8 @@ if (!function_exists('invierte_date_time')) {
                 "step" => "any",
                 "type" => "float",
                 "placehorder" => "880",
-            ], _text_cantidad
+            ],
+            _text_cantidad
         );
 
 
@@ -458,9 +488,9 @@ if (!function_exists('invierte_date_time')) {
             [
                 h(
                     "CICLO DE FACTURACIÓN",
-                    5, 'h5 strong'
-                )
-                ,
+                    5,
+                    'h5 strong'
+                ),
                 create_select(
                     $ciclo_facturacion,
                     "ciclo",
@@ -471,15 +501,30 @@ if (!function_exists('invierte_date_time')) {
                     1
                 )
 
-            ]
-            ,
+            ],
             "contenedor_ciclo_facturacion d-none"
         );
+        $tiendas = flex(
+            "Tienda (Nicho)",
+            $data["tiendas"],
+            "flex-column",
+            "strong mt-5"
+        );
+
+
+        $aviso_seccion_tienda_nicho = error_texto_input(
+            'Selecciona la tienda a la que pertenece este artículo',
+            "indicaciones_seleccion_tienda_nicho"
+        );
         $r[] = _d(
+
             $nombre,
             $seccion_precio,
             $seccion_costo,
-            $seccion_ciclo_facturacion
+            $seccion_ciclo_facturacion,
+            $tiendas,
+            $aviso_seccion_tienda_nicho,
+
         );
 
 
@@ -489,8 +534,6 @@ if (!function_exists('invierte_date_time')) {
         $re[] = d($r, "contenedor_agregar_servicio_form ");
         $re[] = selector_categoria();
         return append($re);
-
-
     }
 
 
@@ -506,15 +549,16 @@ if (!function_exists('invierte_date_time')) {
                 $articulo = (str_len($nombre, 18)) ? substr($nombre, 0, 18) . "..." : $nombre;
 
                 $link =
-                    a_enid($articulo,
+                    a_enid(
+                        $articulo,
                         [
                             'href' => path_enid("producto", $row['id_servicio']),
                             'class' => 'black'
-                        ], 1
+                        ],
+                        1
                     );
 
                 $response[] = ajustar($link, $row["vistas"]);
-
             }
         }
 
@@ -535,7 +579,9 @@ if (!function_exists('invierte_date_time')) {
     function get_format_busqueda($list_orden)
     {
 
-        $r[] = input_frm(4, 'Filtrar',
+        $r[] = input_frm(
+            4,
+            'Filtrar',
             [
                 "id" => "textinput",
                 "name" => "textinput",
@@ -545,10 +591,9 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $r[] = d(list_orden($list_orden,2), 4);
+        $r[] = d(list_orden($list_orden, 2), 4);
 
         return d($r, 'd-md-flex row mt-5 mb-5');
-
     }
 
 
@@ -560,7 +605,7 @@ if (!function_exists('invierte_date_time')) {
         if (es_data($top) && $is_mobile > 0) {
 
             $r = [];
-            foreach ($top as $row):
+            foreach ($top as $row) :
 
                 $r[] = icon("fa fa-angle-right");
                 $nombre_servicio = $row["nombre_servicio"];
@@ -580,13 +625,12 @@ if (!function_exists('invierte_date_time')) {
             endforeach;
 
 
-            if (es_data($top)):
+            if (es_data($top)) :
                 $titulo = _titulo("TUS ARTÍCULOS MÁS VISTOS DE LA SEMANA");
                 array_pop($r, $titulo);
             endif;
 
             $response = d($r, "card contenedor_articulos_mobil");
-
         }
         return $response;
     }
@@ -598,16 +642,18 @@ if (!function_exists('invierte_date_time')) {
         $r[] = _titulo('¿en qué categoría se encuentra tu artículo?');
         $r[] = hr();
         $cerrar = d(
-            format_link("",
+            format_link(
+                "",
                 [
                     'class' => "fa fa-times cancelar_registro fa-2x"
                 ]
-            ), 'col-xs-2 col-sm-1 ml-auto');
+            ),
+            'col-xs-2 col-sm-1 ml-auto'
+        );
         $r[] = d($cerrar, 13);
         $r[] = places();
 
         return d($r, "contenedor_categorias_servicios d-none");
-
     }
 
 
@@ -640,7 +686,6 @@ if (!function_exists('invierte_date_time')) {
 
 
         return append($r);
-
     }
 
 
@@ -656,7 +701,8 @@ if (!function_exists('invierte_date_time')) {
                 d(place("cuarto_nivel_seccion"), $class),
                 d(place("quinto_nivel_seccion"), $class),
                 d(place(_text("sexto_nivel_seccion ", $class)))
-            ], 'd-md-flex align-items-center '
+            ],
+            'd-md-flex align-items-center '
         );
     }
 
@@ -702,8 +748,7 @@ if (!function_exists('invierte_date_time')) {
 
             $list[] = li(
                 a_enid(
-                    text_icon('fa fa-share', "Vender artículo")
-                    ,
+                    text_icon('fa fa-share', "Vender artículo"),
                     [
                         "href" => path_enid('vender_nuevo'),
                         "class" => "agregar_servicio btn_agregar_servicios 
@@ -719,10 +764,10 @@ if (!function_exists('invierte_date_time')) {
                     $venta,
                     [
                         "class" =>
-                            _text(
-                                'btn_servicios ',
-                                tab_activa('lista', $action)
-                            ),
+                        _text(
+                            'btn_servicios ',
+                            tab_activa('lista', $action)
+                        ),
                         "id" => 0,
                     ]
                 );
@@ -741,8 +786,7 @@ if (!function_exists('invierte_date_time')) {
                 );
                 $list[] =
                     li(
-                        $link_articulos_venta
-                        ,
+                        $link_articulos_venta,
                         [
                             "class" => _text(
                                 'btn_servicios ',
@@ -753,11 +797,13 @@ if (!function_exists('invierte_date_time')) {
                         ]
                     );
             }
-            $response = ul($list,'col-md-12 ');
+            $response = ul($list, 'col-md-12 ');
         } else {
 
 
-            $link = tab("", "#tab_servicios",
+            $link = tab(
+                "",
+                "#tab_servicios",
                 [
 
                     'class' => "black btn_serv"
@@ -785,9 +831,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $response = ul($list);
-
         }
         return $response;
     }
-
 }
