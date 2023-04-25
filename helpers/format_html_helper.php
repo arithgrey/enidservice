@@ -62,16 +62,20 @@ function article($info, $attributes = [], $row = 0, $frow = 0)
 
     return get_base_html("article", $info, $attributes, $row, $frow);
 }
-function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_contenedor = "")
-{
-
-    $indicaciones = d(
+function error_texto_input($texto_indicacion, $id){
+    
+    return d(
         $texto_indicacion,
         add_text(
             "mt-3 color_red d-none place_input_form_",
-            $attributes["id"]
+            $id
         )
     );
+}
+function input_enid($attributes = [],  $texto_indicacion = "", $extra_clase_contenedor = "")
+{
+
+    $indicaciones = error_texto_input($texto_indicacion, $attributes["id"]);
 
     $base = "input-field mh_50 border border-dark solid_bottom_hover_3 form-control";
     $attributes["class"] = (array_key_exists("class", $attributes)) ? (_text_($attributes["class"], $base)) : $base;

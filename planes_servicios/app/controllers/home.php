@@ -1,9 +1,10 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+use Enid\Nicho\Nicho as Tiendas;
 class Home extends CI_Controller
 {
     private $modulo;
-
+    private $tiendas;
     function __construct()
     {
         parent::__construct();
@@ -11,6 +12,7 @@ class Home extends CI_Controller
         $this->load->library(lib_def());
         $this->app->acceso();
         $this->modulo = 'planes_servicios';
+        $this->tiendas = new Tiendas();
     }
 
     function index()
@@ -32,9 +34,10 @@ class Home extends CI_Controller
         $data["is_mobile"] = ($this->agent->is_mobile() === FALSE) ? 0 : 1;
 
         $data = $this->app->cssJs($data, "planes_servicios", 1);
-
         $data["list_orden"] = get_orden();
         $data["id_perfil"] = $this->app->getperfiles();
+        $data["tiendas"] = $this->tiendas->tiendas("id",'seleccion_tienda_nicho');
+
         $this->app->pagina($data, render_ventas($data), 1);
 
     }

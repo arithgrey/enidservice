@@ -1,7 +1,7 @@
 "use strict";
 
-window.history.pushState({page: 1}, "", "");
-window.history.pushState({page: 2}, "", "");
+window.history.pushState({ page: 1 }, "", "");
+window.history.pushState({ page: 2 }, "", "");
 window.onpopstate = event => {
     if (event) {
         retorno();
@@ -36,7 +36,7 @@ let $no_fabricante = $(".no_fabricante");
 let $fabricante = $(".fabricante");
 let $es_fabricante = $(".es_fabricante");
 let $edicion = $(".edicion");
-
+let $seleccion_tienda_nicho = $(".seleccion_tienda_nicho");
 $(document).ready(() => {
 
     set_option("s", 1);
@@ -169,7 +169,7 @@ let carga_informacion_servicio = (num = 1) => {
     set_option("s", 2);
     despliega([".contenedor_busqueda"], 0);
     let url = "../q/index.php/api/servicio/especificacion/format/json/";
-    let data_send = {id_servicio: get_option("servicio"), "num": num};
+    let data_send = { id_servicio: get_option("servicio"), "num": num };
 
     request_enid("GET", data_send, url, respuesta_informacion_servicio, ".place_servicios", function () {
 
@@ -198,7 +198,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".text_info_envio").click(muestra_input_incluye_envio);
     $(".text_pagina_venta").click(muestra_seccion_url_pagina_web);
     $(".form_costo").submit(registra_costo_servicio);
-    
+
     $(".form_precio_alto_descuento").submit(registra_precio_alto);
 
     $(".form_ciclo_facturacion").submit(registrar_ciclo_facturacion);
@@ -210,7 +210,7 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
     $(".form_link_maps").submit(actualiza_link_maps);
     $(".form_link_afiliado_amazon").submit(actualiza_link_afiliado_amazon);
-    
+
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
     $(".foto_producto").click(elimina_foto_producto);
     $(".imagen_principal").click(place_load_imgimagen_principal);
@@ -249,13 +249,12 @@ let respuesta_informacion_servicio = (data) => {
     $(".boton_asociados").click(link_asociados);
     $(".boton_busqueda").click(boton_busqueda);
 
-    
+
     $(".form_marca").submit(actualiza_marca);
     $(".marca").blur(actualiza_marca);
 
 
     $(".form_modelo").submit(actualiza_modelo);
-
 
     $(".form_dimension").submit(actualiza_dimensiones);
     $(".dimensiones").blur(actualiza_dimensiones);
@@ -310,11 +309,30 @@ let respuesta_informacion_servicio = (data) => {
     $(".quitar_servicio_relacionado").click(quitar_servicio_relacionado);
     $(".listado_proveedores").click(proveedores_servicio);
 
+    $(".tienda_nicho_producto").change(asignacion_tienda_nicho);
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
 
 };
+let asignacion_tienda_nicho = function (e) {
+
+    let $tienda_nicho_producto = get_valor_selected(".tienda_nicho_producto");
+    if (parseInt($tienda_nicho_producto) > 0) {
+        let url = "../q/index.php/api/servicio/tienda_nicho/format/json/";
+        let data_send = {
+            id_nicho: $tienda_nicho_producto,
+            id_servicio: get_option("servicio")
+        };
+        request_enid("PUT", data_send, url, function () {
+            carga_informacion_servicio(4);
+        }, ".place_sobre_el_negocio");
+
+    }
+
+};
+
+
 let actualiza_entregas_en_casa = function (e) {
 
     let url = "../q/index.php/api/servicio/entregas_en_casa/format/json/";
@@ -744,7 +762,7 @@ let actualiza_dato_servicio_youtube = e => {
 };
 
 let actualiza_link_afiliado_amazon = e => {
-    
+
     /* Validamos que la url realmente sea de youtube */
     let url = "../q/index.php/api/servicio/q/format/json/";
     let data_send = $(".form_link_afiliado_amazon").serialize() + "&" + $.param({
@@ -754,19 +772,19 @@ let actualiza_link_afiliado_amazon = e => {
         carga_informacion_servicio(1);
     });
 
-e.preventDefault();
+    e.preventDefault();
 };
 let actualiza_link_maps = e => {
-    
-        /* Validamos que la url realmente sea de youtube */
-        let url = "../q/index.php/api/servicio/q/format/json/";
-        let data_send = $(".form_link_maps").serialize() + "&" + $.param({
-            "id_servicio": get_option("servicio")
-        });
-        request_enid("PUT", data_send, url, function (data) {
-            carga_informacion_servicio(1);
-        });
-    
+
+    /* Validamos que la url realmente sea de youtube */
+    let url = "../q/index.php/api/servicio/q/format/json/";
+    let data_send = $(".form_link_maps").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(1);
+    });
+
     e.preventDefault();
 };
 
@@ -835,7 +853,7 @@ let carga_info_grupos = () => {
         set_option("grupo", grupo);
     }
     let url = "../q/index.php/api/servicio/grupo/format/json/";
-    let data_send = {grupo: get_option("grupo")};
+    let data_send = { grupo: get_option("grupo") };
     request_enid("GET", data_send, url, respuesta_info_grupos);
 
 };
@@ -880,7 +898,7 @@ let agregar_servicio_grupo = e => {
 
 let cargar_lista_servicios_grupo = () => {
     let url = "../q/index.php/api/servicio/servicios_grupo/format/json/";
-    let data_send = {grupo: get_option("grupo")};
+    let data_send = { grupo: get_option("grupo") };
     request_enid("GET", data_send, url, respuestas_cargar_lista_servicios, ".place_servicios_en_grupos");
 };
 
@@ -938,7 +956,7 @@ let muestra_seccion_porcentaje_ganancia_afiliados = () => {
 };
 
 let configuracion_inicial = function () {
-    
+
     let modalidad = parseInt(get_parameter_enid($(this), "id"));
     set_option("modalidad", modalidad);
     if (modalidad > 0) {
@@ -967,21 +985,31 @@ let configuracion_inicial = function () {
 
 let simula_envio = (e) => {
 
+    let $tienda_nicho = get_valor_selected(".seleccion_tienda_nicho");
+    let $selecciono_tienda_nicho = parseInt($tienda_nicho) > 0;
+    $(".place_input_form_indicaciones_seleccion_tienda_nicho").addClass("d-none");
+    if (!$selecciono_tienda_nicho) {
+        $(".place_input_form_indicaciones_seleccion_tienda_nicho").removeClass("d-none");
+    }
+
     let costo = $form_nombre_producto.find(".costo").val();
     let costo_compra = $form_nombre_producto.find(".costo_compra").val();
     let next = (parseFloat(costo) < 1) ? 0 : 1;
     next_error($costo, 0);
-    if (next) {
 
+    if (next) {
         if (es_float(costo)) {
 
-            showonehideone(".contenedor_categorias", ".contenedor_nombre");
-            despliega([".contenedor_top"], 0);
-            set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
-            set_option("costo", costo);
-            set_option("costo_compra", costo_compra);
-            $(".extra_precio").text("");
-            verifica_existencia_categoria();
+            if ($selecciono_tienda_nicho) {
+                showonehideone(".contenedor_categorias", ".contenedor_nombre");
+                despliega([".contenedor_top"], 0);
+                set_nombre_servicio_html(get_parameter(".nuevo_producto_nombre"));
+                set_option("costo", costo);
+                set_option("costo_compra", costo_compra);
+                $(".extra_precio").text("");
+                verifica_existencia_categoria();
+
+            }
 
         } else {
             next_error($costo);
@@ -998,7 +1026,7 @@ let verifica_existencia_categoria = () => {
     set_option("s", 4);
     let url = "../q/index.php/api/servicio/verifica_existencia_clasificacion/format/json/";
     let nombre = get_parameter(".nuevo_producto_nombre");
-    let data_send = {"clasificacion": nombre, "id_servicio": get_option("modalidad")};
+    let data_send = { "clasificacion": nombre, "id_servicio": get_option("modalidad") };
     request_enid("GET", data_send, url, listar_categorias);
 };
 
@@ -1315,13 +1343,14 @@ let registra_nuevo_servicio = () => {
         "tercer_nivel": get_option("tercer_nivel"),
         "cuarto_nivel": get_option("cuarto_nivel"),
         "quinto_nivel": get_option("quinto_nivel"),
-        "costo": get_option("costo_compra")
+        "costo": get_option("costo_compra"),
+        "id_nicho": get_valor_selected(".seleccion_tienda_nicho"),
     };
     request_enid("POST", data_send, url, response_registro);
 };
 let response_registro = (data) => {
-    
-    
+
+
     if (data.registro != 0 && data.registro.servicio > 0) {
         set_option("servicio", data.registro.servicio);
         carga_informacion_servicio(1);
@@ -1334,7 +1363,7 @@ let response_registro = (data) => {
     } else {
         redirect("../planes_servicios/?action=nuevo&mensaje=Verificar el precio que ingresaste");
     }
-    
+
 
 };
 let elimina_foto_producto = function (e) {
@@ -1369,7 +1398,7 @@ let respuesta_agrega_metakeyword = (data) => {
 let eliminar_tag = (text, id_servicio) => {
 
     let url = "../q/index.php/api/servicio/metakeyword_usuario/format/json/";
-    let data_send = {"tag": text, "id_servicio": id_servicio};
+    let data_send = { "tag": text, "id_servicio": id_servicio };
     request_enid("DELETE", data_send, url, respuesta_eliminar_tags);
 };
 
@@ -1559,7 +1588,7 @@ let add_cancelar_movil = () => {
 
 let carga_sugerencias_meta_key_words = () => {
     let url = "../q/index.php/api/metakeyword/metakeyword_catalogo/format/json/";
-    let data_send = {"v": 1};
+    let data_send = { "v": 1 };
     request_enid("GET", data_send, url, muestra_sugerencias_meta_key_words);
 };
 
@@ -1599,7 +1628,7 @@ let auto_complete_metakeyword = function (e) {
 let carga_tallas = () => {
 
     let url = "../q/index.php/api/clasificacion/tallas_servicio/format/json/";
-    let data_send = {"id_servicio": get_option("servicio"), "nivel": 3, "v": 1};
+    let data_send = { "id_servicio": get_option("servicio"), "nivel": 3, "v": 1 };
     request_enid("GET", data_send, url, muestra_clasificaciones_servicio);
 };
 
@@ -1649,7 +1678,7 @@ let place_load_imgimagen_principal = function () {
     if (id > 0) {
 
         let url = "../q/index.php/api/imagen_servicio/principal/format/json/";
-        let data_send = {"id_servicio": get_option("servicio"), "id_imagen": id};
+        let data_send = { "id_servicio": get_option("servicio"), "id_imagen": id };
         request_enid("PUT", data_send, url, carga_informacion_servicio(1), ".place_servicios");
     }
 };
@@ -1659,7 +1688,7 @@ let set_url_ml = () => {
     if (url_ml.length > 5) {
 
         let url = "../q/index.php/api/servicio/url_ml/format/json/";
-        let data_send = {"id_servicio": get_option("servicio"), "url": url_ml};
+        let data_send = { "id_servicio": get_option("servicio"), "url": url_ml };
 
         request_enid("PUT", data_send, url, carga_informacion_servicio(4), ".place_servicios", function () {
             recorre(".url_mercado_libre");
@@ -1673,7 +1702,7 @@ let set_url_ml = () => {
 let activa_publicacion = function () {
     let status = get_parameter_enid($(this), "status");
     let id_servicio = get_parameter_enid($(this), "id");
-    let data_send = {"status": status, "id_servicio": id_servicio};
+    let data_send = { "status": status, "id_servicio": id_servicio };
     let url = "../q/index.php/api/servicio/status/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
@@ -1683,7 +1712,7 @@ let activa_publicacion = function () {
 let activa_visibilidad = function () {
     let status = get_parameter_enid($(this), "es_publico");
     let id_servicio = get_parameter_enid($(this), "id");
-    let data_send = {"es_publico": status, "id_servicio": id_servicio};
+    let data_send = { "es_publico": status, "id_servicio": id_servicio };
     let url = "../q/index.php/api/servicio/espublico/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
@@ -1706,7 +1735,7 @@ let descarta_promocion = () => {
 
 
     let id_servicio = get_option("id_servicio");
-    let data_send = {"status": 1, "id_servicio": id_servicio};
+    let data_send = { "status": 1, "id_servicio": id_servicio };
     let url = "../q/index.php/api/servicio/status/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_servicios();
@@ -1758,7 +1787,7 @@ let set_cantidad_en_stock = () => {
 
     let stock = $('.form_stock_select').find(".stock").val();
     let id_servicio = get_parameter(".id_servicio");
-    let data_send = $.param({"stock": stock, "id_servicio": id_servicio});
+    let data_send = $.param({ "stock": stock, "id_servicio": id_servicio });
     let url = "../q/index.php/api/servicio/stock/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
@@ -1767,7 +1796,7 @@ let set_cantidad_en_stock = () => {
 };
 let contra_entrega = (opcion, servicio) => {
 
-    let data_send = {"opcion": opcion, "servicio": servicio};
+    let data_send = { "opcion": opcion, "servicio": servicio };
     let url = "../q/index.php/api/servicio/contra_entrega/format/json/";
     request_enid("PUT", data_send, url, function () {
         carga_informacion_servicio(4);
@@ -1824,7 +1853,7 @@ let restablecer_promocion = function () {
 
     let id = get_option("id_servicio");
     let url = "../q/index.php/api/servicio/restablecer/format/json/";
-    let data_send = {"id": id};
+    let data_send = { "id": id };
     request_enid("PUT", data_send, url, () => {
         carga_informacion_servicio();
     });
@@ -1981,7 +2010,7 @@ let relacionar_servicio = function (e) {
 let servicio_materiales = function (e) {
 
     let url = "../q/index.php/api/servicio_material/index/format/json/";
-    let data_send = $(this).serialize() + "&" + $.param({'id_servicio': get_option("servicio")});
+    let data_send = $(this).serialize() + "&" + $.param({ 'id_servicio': get_option("servicio") });
     request_enid("POST", data_send, url, function () {
         carga_informacion_servicio(2);
     });
@@ -2069,7 +2098,7 @@ let editar_proveedor_servicio = function (e) {
         $selector_carga_modal_proveedor.modal("show");
 
         let url = "../q/index.php/api/proveedor_servicio/id/format/json/";
-        let data_send = {"id": $id_proveedor};
+        let data_send = { "id": $id_proveedor };
 
         request_enid("GET", data_send, url, auto_llenado);
 
@@ -2124,7 +2153,7 @@ let proveedores_servicio = function () {
     if (parseFloat($id_servicio) > 0) {
 
         $(".proveedores_existentes").removeClass("d-none");
-        let $data_send = $.param({"id_servicio": get_option("servicio"), "v": 2});
+        let $data_send = $.param({ "id_servicio": get_option("servicio"), "v": 2 });
         let url = "../q/index.php/api/usuario/proveedores_servicio/format/json/";
         request_enid("GET", $data_send, url, function (data) {
 
@@ -2144,7 +2173,7 @@ let elimina_proveedor_servicio = function () {
 }
 let confirmar_baja_proveedor = function () {
 
-    let $data_send = $.param({"id": get_option("proveedor_servicio")});
+    let $data_send = $.param({ "id": get_option("proveedor_servicio") });
     let url = "../q/index.php/api/proveedor_servicio/index/format/json/";
     request_enid("DELETE", $data_send, url, function (data) {
 
