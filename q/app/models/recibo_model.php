@@ -10,27 +10,31 @@ class Recibo_model extends CI_Model
     function recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento()
     {
 
-        $query_get = "SELECT p.* FROM proyecto_persona_forma_pagos p         
-        WHERE p.se_cancela < 1        
-        AND p.saldo_cubierto > 0
-        AND p.status IN (9,11,12,14,15,16)
-        AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
-        AND p.ficha_seguimiento < 1        
-        ORDER BY p.fecha_registro DESC
-        LIMIT 300";
+        $query_get = "SELECT * FROM proyecto_persona_forma_pagos 
+        WHERE
+        se_cancela < 1  
+        AND saldo_cubierto > 0                         
+        AND status 
+        NOT IN (10,19)                  
+        AND DATEDIFF(NOW(), fecha_entrega) > 29 
+        AND ficha_seguimiento < 1        
+        ORDER BY fecha_registro DESC
+        LIMIT 30";
 
         return $this->db->query($query_get)->result_array();
     }
     function recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento_posibles_pagos()
     {
 
-        $query_get = "SELECT p.* FROM proyecto_persona_forma_pagos p         
-        WHERE p.se_cancela < 1                
-        AND p.status IN (9,11,12,14,15,16)
-        AND DATEDIFF(NOW(), p.fecha_entrega) > 29 
-        AND p.ficha_seguimiento < 1        
-        ORDER BY p.fecha_registro DESC
-        LIMIT 60";
+        $query_get = "SELECT * FROM proyecto_persona_forma_pagos 
+        WHERE
+        se_cancela < 1          
+        AND status 
+        NOT IN (10,19)                  
+        AND DATEDIFF(NOW(), fecha_entrega) > 29 
+        AND ficha_seguimiento < 1        
+        ORDER BY fecha_registro DESC
+        LIMIT 30";
 
         return $this->db->query($query_get)->result_array();
     }

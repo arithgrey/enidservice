@@ -38,6 +38,7 @@ class LeadsFormat
 
         foreach ($recibos as $row) {
 
+            $id = $row["id"];
             $id_usuario_venta = $row["id_usuario_referencia"];
             $resumen_pedido = $row["resumen_pedido"];
             $id_usuario = $row["id_usuario"];
@@ -53,6 +54,7 @@ class LeadsFormat
             $texto = ($dias > 1) ? _text_('Hace', $dias, 'días') : 'ayer';
             $texto_dias = ($dias < 1) ? "hoy" : $texto;
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
+            $path = path_enid("usuario_contacto", _text($id_usuario_venta,"&recibo=",$id));
 
             $imagen = img(
                 [
@@ -65,10 +67,14 @@ class LeadsFormat
 
             $imagen_usuario = d($imagen);
             $nombre_categoria = flex($vendedor, "", "flex-column", "strong", "fp9");
+
+
+
+            
             $nombre_vendedor = a_enid(
                 $nombre_categoria,
                 [
-                    "href" => path_enid("usuario_contacto", $id_usuario_venta),
+                    "href" => $path,
                     "target" => "_black",
                     "class" => "black"
                 ]
@@ -77,7 +83,7 @@ class LeadsFormat
             $imagen_usuario = a_enid(
                 $imagen_usuario,
                 [
-                    "href" => path_enid("usuario_contacto", $id_usuario_venta),
+                    "href" => $path,
                     "target" => "_black",
                     "class" => "black"
                 ]
@@ -93,7 +99,7 @@ class LeadsFormat
             $resumen_pedido = a_enid(
                 $resumen_pedido,
                 [
-                    "href" => path_enid("usuario_contacto", $id_usuario),
+                    "href" => $path,
                     "class" => "black "
                 ]
             );
@@ -111,7 +117,7 @@ class LeadsFormat
                 ]
             );
 
-            $imagen_link = a_enid($imagen_servicio, ["href" => path_enid("usuario_contacto", $id_usuario)]);
+            $imagen_link = a_enid($imagen_servicio, ["href" => $path]);
             $elemento[] = d($imagen_link, "d-block mt-4");
             $total_like = $row["total_like"];
 

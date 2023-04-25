@@ -24,14 +24,15 @@ let $form_comentarios_accion_seguimiento = $('.form_comentarios_accion_seguimien
 let $form_comentarios_accion_seguimiento_notificado = $(".form_comentarios_accion_seguimiento_notificado");
 let $lista_acciones_seguimiento_opciones = $(".lista_acciones_seguimiento_opciones");
 let $input_id_accion_seguimiento = $('.input_id_accion_seguimiento');
+let $input_id_recibo = $(".input_id_recibo");
 let $place_area_comentario = $(".place_area_comentario");
 let $cargando_modal = $(".cargando_modal");
-let $modal_recordatorio_accion =  $("#modal_recordatorio_accion");
+let $modal_recordatorio_accion = $("#modal_recordatorio_accion");
 let $estructura_fechas = $(".estructura_fechas");
 let $estructura_hecho = $(".estructura_hecho");
 let $envio_fecha_evento = $(".envio_fecha_evento");
 let $form_recordatorio_seguimiento = $(".form_recordatorio_seguimiento");
-let $modal_cambio_estado_evento =  $("#modal_cambio_estado_evento");
+let $modal_cambio_estado_evento = $("#modal_cambio_estado_evento");
 let $confirmacion_evento = $(".confirmacion_evento");
 let $confirmacion_evento_comentario = $(".confirmacion_evento_comentario");
 
@@ -41,7 +42,7 @@ if (parseInt($('.nombre_usuario').length) > 0) {
 
 
 $(document).ready(function () {
-    
+
     $envio_fecha_evento.click(envio_fecha_evento_accion);
     $form_recordatorio_seguimiento.submit(registro_evento_agenda);
     $calificame.click(formulario_calificacion);
@@ -221,13 +222,13 @@ let descubre_accion_seguimiento = function (e) {
     let $id = $(this).attr("id");
     $id = parseInt($id);
     if ($id > 0) {
-        
+
         switch ($id) {
 
             case 3:
                 $('#modal_accion_seguimiento').modal("hide");
                 $modal_recordatorio_accion.modal("show");
-                
+
                 break;
             default:
 
@@ -280,7 +281,7 @@ let response_comentario_accion_seguimiento_notificado = function (data) {
     reset_form("form_comentarios_accion_seguimiento_notificado");
     $modal_accion_seguimiento_descubrimiento.modal("hide");
     acciones_seguimiento();
-    
+
 
 }
 let response_comentario_accion_seguimiento = function (data) {
@@ -306,14 +307,16 @@ let acciones_seguimiento_response = function (data) {
 
     $(".evento_seguimiento_pendiente").click(cambio_seguimiento_evento);
     let $id_usuario = $input_id_usuario.val();
+    let $id_recibo = $input_id_recibo.val();
+
     let url = "../q/index.php/api/recibo/ficha_relacion/format/json/";
-    let data_send = { "id_usuario": $id_usuario };
+    let data_send = { "id_usuario": $id_usuario, "id_recibo": $id_recibo };
 
     request_enid("PUT", data_send, url, function (data) { });
 
 }
-let envio_fecha_evento_accion = function(){
-    
+let envio_fecha_evento_accion = function () {
+
     $estructura_fechas.addClass("d-none");
     $estructura_hecho.removeClass("d-none");
 
@@ -324,13 +327,13 @@ let registro_evento_agenda = function (e) {
     let fecha_inicio = get_parameter("#fecha_evento");
     var comentario = $form_recordatorio_seguimiento.find(".comentario_seguimiento").val();
 
-    if(comentario.length < 1 ){
+    if (comentario.length < 1) {
         $place_area_comentario.removeClass("d-none");
     }
     if (fecha_inicio.length > 8 && comentario.length > 0) {
-        
+
         $place_area_comentario.addClass("d-none");
-        let data_send = $form_recordatorio_seguimiento.serialize();        
+        let data_send = $form_recordatorio_seguimiento.serialize();
         let url = "../q/index.php/api/users_accion_seguimiento/index/format/json/";
         request_enid("POST", data_send, url, response_registro_evento);
         bloquea_form($form_recordatorio_seguimiento);
@@ -338,8 +341,8 @@ let registro_evento_agenda = function (e) {
     }
     e.preventDefault();
 };
-let response_registro_evento =  function(data){
-    
+let response_registro_evento = function (data) {
+
     $estructura_fechas.removeClass("d-none");
     $estructura_hecho.addClass("d-none");
 

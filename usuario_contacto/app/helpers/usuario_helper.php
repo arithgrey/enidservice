@@ -553,6 +553,7 @@ if (!function_exists('invierte_date_time')) {
 
         $acciones_seguimiento = $data["acciones_seguimiento"];
         $lista_acciones_seguimiento[] = _titulo("¿Que tipo de seguimiento realizaremos?");
+        
         foreach ($acciones_seguimiento as $row) {
 
             $acccion = $row["accion"];
@@ -569,6 +570,7 @@ if (!function_exists('invierte_date_time')) {
 
             $lista_acciones_seguimiento[] = $tarjeta;
         }
+        $lista_acciones_seguimiento[] = hiddens(["class" => "input_id_recibo", "value" => $data["id_recibo"]]);
 
         return gb_modal(d($lista_acciones_seguimiento, 'form_otros'), "modal_accion_seguimiento");
     }
