@@ -36,8 +36,9 @@ class Home extends CI_Controller
         $data = $this->app->cssJs($data, "planes_servicios", 1);
         $data["list_orden"] = get_orden();
         $data["id_perfil"] = $this->app->getperfiles();
-        $data["tiendas"] = $this->tiendas->tiendas("id",'seleccion_tienda_nicho');
-
+        $data["tiendas"] = $this->tiendas->tiendas(
+            "id",'seleccion_tienda_nicho', $this->app->get_nicho());
+        
         $this->app->pagina($data, render_ventas($data), 1);
 
     }
