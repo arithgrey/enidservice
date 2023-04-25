@@ -310,11 +310,22 @@ let respuesta_informacion_servicio = (data) => {
     $(".listado_proveedores").click(proveedores_servicio);
 
     $(".tienda_nicho_producto").change(asignacion_tienda_nicho);
+    $(".mas_vendido_select_servicio").change(asignacion_menu_mas_vendido);
     $('#summernote').summernote();
     despliega([".contenedor_busqueda_articulos", ".agregar_servicio btn_agregar_servicios", ".titulo_articulos_venta"], 0);
 
 
 };
+
+let asignacion_menu_mas_vendido = function(){
+    
+    let $mas_vendido_select_servicio = get_valor_selected(".mas_vendido_select_servicio");
+
+    if($mas_vendido_select_servicio.length > 1){
+        $(".metakeyword_usuario").val($mas_vendido_select_servicio);
+        $(".form_tag").submit();
+    }
+}
 let asignacion_tienda_nicho = function (e) {
 
     let $tienda_nicho_producto = get_valor_selected(".tienda_nicho_producto");
