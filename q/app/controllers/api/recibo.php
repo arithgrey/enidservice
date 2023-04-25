@@ -198,7 +198,9 @@ class recibo extends REST_Controller
 
         $param = $this->PUT();
         $response = false;
-        if (fx($param, "id_usuario")) {
+        if (fx($param, "id_usuario,id_recibo")) {
+            
+            $this->recibo_model->q_up("ficha_seguimiento", 1, $param['id_recibo']);
             $response = [];
             $recibos = $this->busqueda_recibos_usuario_relacion(
                 $param["id_usuario"],

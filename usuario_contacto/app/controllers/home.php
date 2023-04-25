@@ -40,6 +40,7 @@ class Home extends CI_Controller
     {
 
         $id_usuario = prm_def($param, 'id_usuario');
+        
 
         $data["es_lista_negra"] = $this->app->api("lista_negra/index", ['id_usuario' => $id_usuario]);
         $prm = $this->input->get();
@@ -76,6 +77,7 @@ class Home extends CI_Controller
 
         $data["formulario_busqueda_frecuente"] = $this->formRespuestaFrecuente->busqueda(1);        
         $data["acciones_seguimiento"] = $this->app->api("accion_seguimiento/index");
+        $data["id_recibo"] = prm_def($param, 'recibo');
         $this->app->pagina($data, render($data), 1);
     }
 
