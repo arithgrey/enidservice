@@ -54,7 +54,7 @@ class LeadsFormat
             $texto = ($dias > 1) ? _text_('Hace', $dias, 'días') : 'ayer';
             $texto_dias = ($dias < 1) ? "hoy" : $texto;
             $num_ciclos_contratados = $row["num_ciclos_contratados"];
-            $path = path_enid("usuario_contacto", _text($id_usuario_venta,"&recibo=",$id));
+            $path = path_enid("usuario_contacto", _text($id_usuario,"&recibo=",$id));
 
             $imagen = img(
                 [
