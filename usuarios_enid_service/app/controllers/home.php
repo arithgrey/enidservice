@@ -1,13 +1,15 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
-
+use Enid\Nicho\Nicho as Tiendas;
 class Home extends CI_Controller
 {
+    private $tiendas;
     function __construct()
     {
         parent::__construct();
         $this->load->helper("user");
         $this->load->library(lib_def());
         $this->app->acceso();
+        $this->tiendas = new Tiendas();
     }
 
     function index()
@@ -27,8 +29,12 @@ class Home extends CI_Controller
             "perfiles_enid_service" => $this->get_perfiles_enid_service()
         ];
 
+        $data["tiendas_nicho"] = $this->tiendas->tiendas(
+            "id",'seleccion_tienda_nicho', $this->app->get_nicho());
+
         $data = $this->app->cssJs($data, "usuarios_enid_service" , 1);
         $this->app->pagina($data, 'usuarios_enid_service/empresas');
+
     }
 
     private function get_perfiles_enid_service()

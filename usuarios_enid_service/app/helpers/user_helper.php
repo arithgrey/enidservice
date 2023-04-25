@@ -4,7 +4,7 @@ use App\View\Components\titulo;
 
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 if (!function_exists('invierte_date_time')) {
-    function get_format_format_mas_vendidos($mas_vendidos)
+    function get_format_format_mas_vendidos($mas_vendidos, $tiendas_nicho)
     {
 
         $list[] = d(_titulo("Categorias públicas"), "col-sm-12 mb-5");
@@ -43,14 +43,16 @@ if (!function_exists('invierte_date_time')) {
             );
             $list[] = li($texto, 'col-sm-12 mt-5');
         }
-        $list[] = modal_mas_vendidos();
+        $list[] = modal_mas_vendidos($tiendas_nicho);
         $list[] = modal_mas_vendidos_edicion();
         return append($list);
     }
-    function modal_mas_vendidos()
+    function modal_mas_vendidos($tiendas_nicho)
     {
 
         $response[] = d("+ Nueva categoría", "display-5  font-weight-bold col-xs-12 black");
+        $tiendas =  flex("Tienda nicho", $tiendas_nicho,'flex-column mb-5','strong mb-3 mt-5');
+        $response[] = d($tiendas,12);
         $response[] = d(input_frm(
             "",
             "Menu*",

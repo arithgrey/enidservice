@@ -49,7 +49,7 @@
             <?= d(get_format_tipo_clasificacion(), ["class" => "tab-pane", "id" => 'agregar_tallas']) ?>
             <?= d(get_format_view_usuario($departamentos,$perfiles_enid_service), ["class" => "tab-pane", "id" => 'tab_mas_info_usuario']) ?>
             <?= d(get_format_view_orden($info_empresa), ["class" => "tab-pane", "id" => 'tab_orden']) ?>
-            <?= d(get_format_format_mas_vendidos($mas_vendidos), ["class" => "tab-pane", "id" => 'tab_mas_vendidos']) ?>
+            <?= d(get_format_format_mas_vendidos($mas_vendidos, $tiendas_nicho), ["class" => "tab-pane", "id" => 'tab_mas_vendidos']) ?>
         </div>
     </div>
 </div>
