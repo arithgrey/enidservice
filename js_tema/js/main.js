@@ -135,6 +135,15 @@ $("footer").ready(() => {
         });
     }
 
+    $(document).on('keydown', function(event) {
+        // Comprobar si la tecla presionada es ESC (código 27)
+        if (event.keyCode === 27) {
+            
+            $('.modal_enid').modal('hide');
+          
+        }
+    });
+
 
     
 });
