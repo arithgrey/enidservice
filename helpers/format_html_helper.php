@@ -1302,7 +1302,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
 
 
     $config = [
-        "class" => "modal",
+        "class" => _text_("modal","modal_enid"),
         "tabindex" => "-1",
         "role" => "dialog",
         "id" => $id_modal,
