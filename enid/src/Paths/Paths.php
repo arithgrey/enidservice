@@ -108,12 +108,15 @@ class Paths
             "usuario_contacto" => [
                 "css" => [
                     "usuario_contacto.css",
-                    "pedidos.css"
+                    "pedidos.css",
+                    "confirm-alert.css",
                 ],
                 "js" => [
+                    "alerts/jquery-confirm.js",
                     "usuario_contacto/principal.js",
                     "respuestas_frecuentes/principal.js",
-                    "acciones_seguimiento/principal.js"
+                    "acciones_seguimiento/principal.js",
+                    "usuario_contacto/lista_negra.js",
                 ],
                 "pagina" => 11,
             ],

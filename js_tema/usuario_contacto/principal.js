@@ -25,6 +25,8 @@ let $form_comentarios_accion_seguimiento_notificado = $(".form_comentarios_accio
 let $lista_acciones_seguimiento_opciones = $(".lista_acciones_seguimiento_opciones");
 let $input_id_accion_seguimiento = $('.input_id_accion_seguimiento');
 let $input_id_recibo = $(".input_id_recibo");
+let $input_tel_contacto = $(".input_tel_contacto");
+
 let $place_area_comentario = $(".place_area_comentario");
 let $cargando_modal = $(".cargando_modal");
 let $modal_recordatorio_accion = $("#modal_recordatorio_accion");
@@ -35,6 +37,8 @@ let $form_recordatorio_seguimiento = $(".form_recordatorio_seguimiento");
 let $modal_cambio_estado_evento = $("#modal_cambio_estado_evento");
 let $confirmacion_evento = $(".confirmacion_evento");
 let $confirmacion_evento_comentario = $(".confirmacion_evento_comentario");
+let $envio_lista_negra = $(".envio_lista_negra");
+
 
 if (parseInt($('.nombre_usuario').length) > 0) {
     $nombre_usuario = $('.nombre_usuario');
@@ -93,6 +97,7 @@ $(document).ready(function () {
     acciones_seguimiento();
     $confirmacion_evento.click(notificar_evento_realizado);
     $confirmacion_evento_comentario.click(notificar_evento_realizado_comentario);
+    $envio_lista_negra.click(envio_lista_negra);
 
 });
 let busqueda_pedidos = function (e) {
