@@ -1765,6 +1765,13 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
 
     $clase = "";
     switch ($primario) {
+
+        case 5:
+            /*Format red black list*/
+            $clase = "pb-3 pt-3 p-2 strong col 
+            text-uppercase  borde_red shadow d-block red_lista_negra";
+            break;
+
         case 4:
             /*Format Invitación*/
             $clase = "pb-3 pt-3 p-2 strong col 
