@@ -195,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     
                     "class" => "text-uppercase black envio_lista_negra",
-                ]
+                ],5
             ), 'col-xs-12 mt-3');
 
         }
