@@ -655,7 +655,7 @@ let confirma_cambio_domicilio = ($path) => {
 
 let confirma_envio_lista_negra = (id_usuario) => {
 
-
+    
     let text_confirmacion = '¿Realmente deseas mandar a lista negra a esta persona?';
     show_confirm(text_confirmacion, '', "SI", function () {
         let url = "../q/index.php/api/motivo_lista_negra/index/format/json/";

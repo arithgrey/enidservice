@@ -111,8 +111,10 @@ if (!function_exists('invierte_date_time')) {
                 ]
             ),
             $link
-        );
+        );  
+        
 
+        $contenido[] = hiddens(["class" =>  "input_tel_contacto", "value" => $tel_contacto]);
         $contenido[] = flex($imagen, $seccion_calificacion, _between, 'col-xs-4', 'col-xs-8');
         $contenido[] = seccion_facebook($data);
         $texto_puesto = roll($data);
@@ -155,7 +157,7 @@ if (!function_exists('invierte_date_time')) {
     }
     function tareas_control($data, $contenedor_perfil_usuario_busqueda)
     {
-
+        
         
         if (es_administrador($data)) {
 
@@ -186,6 +188,16 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "text-uppercase black",
                 ]
             ), 'col-xs-12 mt-3');
+
+
+            $response[] = d(format_link(
+                text_icon(_text_(_eliminar_icon, 'white'), "Enviar a lista negra"),
+                [
+                    
+                    "class" => "text-uppercase black envio_lista_negra",
+                ]
+            ), 'col-xs-12 mt-3');
+
         }
 
 
