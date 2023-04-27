@@ -850,7 +850,7 @@ class serviciosmodel extends CI_Model
                             p.id_servicio IS NULL";
         return $this->db->query($query_update)->result_array();
     }
-    function disponibles_en_aleatorio($id_servicio)
+    function disponibles_en_aleatorio($id_servicio, $id_nicho)
     {
 
         $query_get = "SELECT id_servicio                         
@@ -860,8 +860,9 @@ class serviciosmodel extends CI_Model
             AND status = 1
             AND flag_imagen = 1
             AND id_servicio != $id_servicio
+            AND id_nicho = $id_nicho
         ORDER BY RAND()
-        LIMIT 2";
+        LIMIT 3";
 
         return $this->db->query($query_get)->result_array();
     }
