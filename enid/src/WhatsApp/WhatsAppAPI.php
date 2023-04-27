@@ -12,7 +12,8 @@ class WhatsAppAPI
         $this->url = $configWhatsApp["url"];
         $this->headers = $configWhatsApp["headers"];
     }
-    function sendMessageTest($template = 'hello_world', $to ='5552967027'){
+    function sendMessageTest($template = 'hello_world', $to = '5552967027')
+    {
 
         $data = array(
             'messaging_product' => 'whatsapp',
@@ -37,8 +38,6 @@ class WhatsAppAPI
         curl_close($ch);
 
         return $response;
-
-        
     }
 
     public function sendMessage($to, $template = 'hello_world')
