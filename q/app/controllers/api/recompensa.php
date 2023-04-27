@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
+
 use Enid\ServicioImagen\Format as FormatoImagenServicio;
+
 class Recompensa extends REST_Controller
 {
     public $option;
@@ -16,7 +18,7 @@ class Recompensa extends REST_Controller
         $this->id_usuario = $this->app->get_session("id_usuario");
         $this->formatImagenServicio = new FormatoImagenServicio();
     }
-    
+
     function disponible_GET()
     {
 
@@ -24,21 +26,24 @@ class Recompensa extends REST_Controller
         $recompensas = $this->disponibles($param["paginacion"]);
         $this->response($recompensas);
     }
-    public function disponibles($paginacion, $populares = 0 )
+    public function disponibles($paginacion, $populares = 0)
     {
 
         $response = [];
         $data_complete = [];
         $id_nicho = $this->app->get_nicho();
 
-        $response = $this->recompensa_model->disponibles($id_nicho, $paginacion, $populares);        
-        $response = $this->formatImagenServicio->url_imagen_servicios($response);        
+        $response = $this->recompensa_model->disponibles($id_nicho, $paginacion, $populares);
+        $response = $this->formatImagenServicio->url_imagen_servicios($response);
         $recompensa = $this->formatImagenServicio->url_imagen_servicios(
-            $response, "id_servicio_conjunto", "url_img_servicio_conjunto");
+            $response,
+            "id_servicio_conjunto",
+            "url_img_servicio_conjunto"
+        );
 
         $a = 0;
-         
-        
+
+
         foreach ($recompensa as $row) {
 
             $data_complete[$a] = $row;
@@ -172,15 +177,16 @@ class Recompensa extends REST_Controller
         $response = false;
         if (fx($param, "id_servicio")) {
 
-            $id_servicio = $param["id_servicio"];            
-            $servicios_sugerencias = $this->serviciosmodel->disponibles_en_aleatorio($id_servicio);
+            $id_servicio = $param["id_servicio"];
+            $id_nicho = $this->app->get_nicho();
+            $servicios_sugerencias = $this->serviciosmodel->disponibles_en_aleatorio($id_servicio, $id_nicho);
 
-            if(es_data($servicios_sugerencias)){
+            if (es_data($servicios_sugerencias)) {
 
-                foreach($servicios_sugerencias as $row){
-                    
+                foreach ($servicios_sugerencias as $row) {
+
                     $id_servicio_conjunto = $row["id_servicio"];
-                    
+
                     $existentes = $this->recompensa_model->get(
                         [],
                         [
@@ -189,8 +195,8 @@ class Recompensa extends REST_Controller
                         ]
                     );
                     if (!es_data($existentes)) {
-        
-        
+
+
                         $response = $this->recompensa_model->insert(
                             [
                                 "id_servicio" =>  $id_servicio,
@@ -198,14 +204,12 @@ class Recompensa extends REST_Controller
                             ]
                         );
                     }
-
                 }
             }
-            
         }
         $this->response($response);
     }
-    
+
 
     function descuento_PUT()
     {
@@ -228,7 +232,7 @@ class Recompensa extends REST_Controller
         if (fx($param, "id_servicio")) {
 
             $id = $param["id_servicio"];
-            
+
             $response = $this->recompensa_model->baja_por_id_servicio($id);
         }
         $this->response($response);
@@ -241,7 +245,7 @@ class Recompensa extends REST_Controller
         $response = false;
         if (fx($param, "id")) {
 
-            $id = $param["id"];            
+            $id = $param["id"];
             $response = $this->recompensa_model->q_up("status", 0, $id);
         }
         $this->response($response);
@@ -283,10 +287,10 @@ class Recompensa extends REST_Controller
         }
         $this->response($response);
     }
-    private function gamifica_recompesa($id_recompensa){
+    private function gamifica_recompesa($id_recompensa)
+    {
 
         return $this->recompensa_model->gamifica_recompensa($id_recompensa);
-
     }
     function ids_GET()
     {
@@ -379,18 +383,18 @@ class Recompensa extends REST_Controller
         $this->response($recompensas);
     }
     function populares_GET()
-    {        
+    {
         /*Entrega TOP DE 8 populares*/
-        $param = $this->get();        
-        $antecedente_compra = prm_def($param, "antecedente_compra");        
-        $popular = prm_def($param, "popular");        
+        $param = $this->get();
+        $antecedente_compra = prm_def($param, "antecedente_compra");
+        $popular = prm_def($param, "popular");
 
         $paginador = $this->offset_paginador(1);
-        
-        $disponibles = $this->disponibles($paginador , 1);
-        
+
+        $disponibles = $this->disponibles($paginador, 1);
+
         $recompensas = sugerencias($disponibles, $antecedente_compra, $popular);
-        
+
         $this->response($recompensas);
     }
 
@@ -399,7 +403,7 @@ class Recompensa extends REST_Controller
 
         $per_page = 8; //la cantidad de registros que desea mostrar        
         $offset = ($page - 1) * $per_page;
-        
+
         return " LIMIT $offset , $per_page ";
     }
 }
