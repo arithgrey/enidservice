@@ -16,7 +16,7 @@ class blaster extends REST_Controller
     }
     function recibos_sin_ficha_seguimiento_GET()
     {
-
+        /*
         $recibos =  $this->recibo_model->recibos_pagos_mayores_a_30_dias_sin_ficha_seguimiento();
         $ids_usuarios = array_unique(array_column($recibos, 'id_usuario'));
 
@@ -24,6 +24,7 @@ class blaster extends REST_Controller
 
         $numeros_telefonicos = array_unique(array_column($usuarios, "tel_contacto"));
         $telefonos = $this->filtro_telefonico($numeros_telefonicos);
+        */
 
         $this->response($this->whatsAppAPI->sendMessageTest());
     }
