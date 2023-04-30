@@ -71,7 +71,7 @@ class Home extends CI_Controller
     
             // Comprobar que el número de teléfono tiene 10 o 12 dígitos
             $longitud = strlen($telefono);
-            if ($longitud == 10 || $longitud == 12) {
+            if ($longitud == 10 || $longitud == 12 || $longitud == 13) {
                 redirect(_text("../",path_enid("lead_busqueda",$q)));
             } 
 
