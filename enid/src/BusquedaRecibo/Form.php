@@ -7,7 +7,7 @@ class Form
 
     function busqueda($param, $data, $busqueda_simple = 0 )
     {
-
+        
         $response[] = form_open("", ["class" => "form_busqueda_pedidos mt-5", "method" => "post"]);
         $response = $this->hiddens($param, $data, $response);
         $response[] = $this->form_busqueda_pedidos($data, $this->fechas_busqueda(), $busqueda_simple);
@@ -118,7 +118,8 @@ class Form
                 "id" => "cliente",
                 "placeholder" => "Encuentra tu cliente, puedes ingresar su Nombre, correo, telefono ...",
                 "class" => "input_busqueda",
-                "onpaste" => "paste_telefono();"
+                "onpaste" => "paste_telefono();",
+                "value" => prm_def($data,"q_search","")
             ]
         );
 

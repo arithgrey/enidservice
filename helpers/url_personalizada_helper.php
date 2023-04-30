@@ -36,6 +36,7 @@ function accesos_enid()
      $base_url = [
         "editar_respuestas_rapidas" => "respuestas_rapidas",
         "leads" => "leads",
+        "lead_busqueda" =>"leads/?q=",
         "procesar_ubicacion" => "procesar_ubicacion/?orden_compra=",
         "ab" => "search/?q2=0&order=2&q=",
         "barras_enid" => "search/?q2=0&q=barrasusorudo&order=2",

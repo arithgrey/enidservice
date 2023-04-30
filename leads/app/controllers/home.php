@@ -27,8 +27,12 @@ class Home extends CI_Controller
         $data["status_ventas"] = $this->app->api("status_enid_service/index");    
         $data["tipos_entregas"]= $this->app->api("tipo_entrega/index/");
         
+        $data["q_search"] = prm_def($param,"q", "");
+
         $data["formulario_busqueda_ordenes_compra"] = 
         $this->form_busqueda_ordenes_compra->busqueda($param, $data,1);
+        
+        
         $this->app->pagina($data, render($data), 1);
 
     }

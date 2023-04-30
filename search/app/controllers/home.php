@@ -21,6 +21,7 @@ class Home extends CI_Controller
     {
 
         $param = $this->input->get();
+
         $data = $this->app->session();
         $orden = $this->orden($param, $data);
 
@@ -28,6 +29,7 @@ class Home extends CI_Controller
         $is_mobile = $data["is_mobile"];
 
         $q = prm_def($param, "q", "");
+        $this->seach_cliente($data,$q);
         $data_send = [
             "q" => $q,
             "vendedor" => prm_def($param, "q3"),
@@ -50,17 +52,31 @@ class Home extends CI_Controller
 
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
 
-        
+
 
         if ($son_servicio > 0) {
             $data["busqueda_paginas"] = $this->paths->busqueda($data, $q);
             $this->servicios($data, $data_send);
         } else {
-            
+
             $this->sin_resultados($param);
         }
     }
 
+    function seach_cliente($data, $q)
+    {
+        if(es_administrador($data)){
+            
+            $telefono = preg_replace('/[^0-9]/', '', $q);
+    
+            // Comprobar que el número de teléfono tiene 10 o 12 dígitos
+            $longitud = strlen($telefono);
+            if ($longitud == 10 || $longitud == 12) {
+                redirect(_text("../",path_enid("lead_busqueda",$q)));
+            } 
+
+        }
+    }
 
     function orden($param, $data)
     {

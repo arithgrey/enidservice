@@ -8,6 +8,7 @@ if (!function_exists('invierte_date_time')) {
 
         $response[] = d(navegacion_lead($data), 4);
         $response[] = d(listado_leads($data), 8);
+        
         return d($response, 10, 1);
     }
     function listado_leads($data){

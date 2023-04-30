@@ -3,7 +3,9 @@ let $form_busqueda = $(".form_busqueda_pedidos");
 
 $(document).ready(() => {
 
+
     $form_busqueda.submit(busqueda_pedidos);
+    valida_busqueda_cliente();
 
 });
 
@@ -25,3 +27,12 @@ let response_pedidos = function (data) {
     render_enid(".place_pedidos", data);
 
 };
+let valida_busqueda_cliente = function (e) {
+
+    let $q = $(".input_busqueda").val();
+    if ($q.length > 1) {
+        $form_busqueda.submit();
+    }
+
+};
+
