@@ -1,5 +1,7 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+use Enid\Paths\Paths  as Paths;
+
 class Home extends CI_Controller
 {
     public $options;
@@ -12,22 +14,22 @@ class Home extends CI_Controller
         $this->load->library(lib_def());
         $this->servicio_imagen = new Enid\ServicioImagen\Format();
         $this->id_usuario = $this->app->get_session("id_usuario");
+        $this->paths = new Paths();
     }
 
     function index()
     {
 
-        $param = $this->input->get();            
+        $param = $this->input->get();
         $data = $this->app->session();
         $orden = $this->orden($param, $data);
 
         $pagina = prm_def($param, "page");
-        $is_mobile = $data["is_mobile"];        
-        
-        
+        $is_mobile = $data["is_mobile"];
 
+        $q = prm_def($param, "q", "");
         $data_send = [
-            "q" => prm_def($param, "q", ""),
+            "q" => $q,
             "vendedor" => prm_def($param, "q3"),
             "id_clasificacion" => prm_def($param, "q2"),
             "extra" => $param,
@@ -44,15 +46,21 @@ class Home extends CI_Controller
 
         $data["es_sorteo"] = 0;
         $data["servicios"] = $this->app->api("servicio/q", $data_send);
-    
+
 
         $son_servicio = prm_def($data["servicios"], "total_busqueda");
+
+        
+
         if ($son_servicio > 0) {
+            $data["busqueda_paginas"] = $this->paths->busqueda($data, $q);
             $this->servicios($data, $data_send);
         } else {
+            
             $this->sin_resultados($param);
         }
     }
+
 
     function orden($param, $data)
     {
@@ -82,8 +90,10 @@ class Home extends CI_Controller
         $data = $this->app->session();
 
         $data = $this->app->cssJs($data, "sin_encontrar");
+        $q = prm_def($param, "q", "");
+        $data["busqueda_paginas"] = $this->paths->busqueda($data, $q);
 
-        $this->app->pagina($data, sin_resultados($param), 1);
+        $this->app->pagina($data, sin_resultados($data, $param), 1);
     }
 
     private function servicios($data, $data_send)
@@ -154,5 +164,4 @@ class Home extends CI_Controller
             return $this->app->api("keyword/index", $q, "json", "POST");
         }
     }
-    
 }

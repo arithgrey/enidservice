@@ -4,7 +4,40 @@ namespace Enid\Paths;
 
 class Paths
 {
+    function busqueda($data, $q)
+    {
+        if (!es_administrador($data)) {
+            return "";
+        }
 
+        $response = array();
+        $accesos = accesos_enid();
+
+        if (strlen($q) >= 3) {
+            $a = 1;
+            foreach ($accesos as $indice => $valor) {
+                if (strpos($indice, $q) !== false || strpos($valor, $q) !== false && strpos($indice, "../") === true) {
+                    $posicion = _text($a, ".-");
+                    $response[] = a_enid(
+                        _text_($posicion, $valor),
+                        [
+                            "href" => path_enid($indice),
+                            "class" => "black mt-1 f12",
+                        ]
+                    );
+                    $a++;
+                }
+            }
+        }
+
+
+        if (es_data($response)) {
+
+            $formato[] = d(_titulo("Página encontradas"), "mb-3");
+        }
+        $formato[] = d($response, 'mb-5');
+        return d($formato);
+    }
     public static function getcSSJs()
     {
         /*Debe extraerse desde base de datos en el futuro */
@@ -29,28 +62,24 @@ class Paths
             "desc_web" => "Inicia tu negocio, vendiendo artículos deportivos",
             "url_img_post" => create_url_preview("comisionistas.png"),
             "pagina" => 5,
+            "nombre_pagina" => "Sobre ventas"
 
         ];
-        
+
         $cambios_devoluciones = [
-            "css" => [
-
-            ],
-            "js" => [
-
-            ],
+            "css" => [],
+            "js" => [],
             "meta_keywords" => "Cambios y devoluciones Enid Service",
-            "desc_web" => "Cambios y devoluciones Enid Service",            
+            "desc_web" => "Cambios y devoluciones Enid Service",
             "pagina" => 54,
+            "nombre_pagina" => "Cambios y devoluciones"
 
         ];
-        
+
 
 
         $promesa_venta = [
-            "css" => [
-                
-            ],
+            "css" => [],
             "js" => [
                 "promesa_ventas/principal.js"
             ]
@@ -58,7 +87,7 @@ class Paths
 
         $sorteo = [
             "css" => [
-                "confirm-alert.css",  
+                "confirm-alert.css",
             ],
             "js" => [
                 "sorteo/principal.js",
@@ -67,7 +96,7 @@ class Paths
         ];
         $sorteo_venta = [
             "css" => [
-                "confirm-alert.css",  
+                "confirm-alert.css",
             ],
             "js" => [
                 "sorteo/venta.js",
@@ -77,8 +106,8 @@ class Paths
 
 
 
-        $response = [    
-            
+        $response = [
+
             "cambios_devoluciones" => $cambios_devoluciones,
             "promesa_ventas" => $promesa_venta,
             "puntuacion" => $puntuacion,
@@ -88,20 +117,20 @@ class Paths
             "invitacion_lista" => [
                 "css" => [
                     "invitacion.css"
-                ],                
+                ],
                 "js" => [
                     "invitacion/lista.js",
-                    
+
                 ],
                 "url_img_post" => create_url_preview("invitacion_enlace.jpeg"),
             ],
-            "invitacion" => [                
+            "invitacion" => [
                 "css" => [
                     "invitacion.css"
-                ],                
+                ],
                 "js" => [
                     "invitacion/principal.js",
-                    
+
                 ],
                 "url_img_post" => create_url_preview("invitacion_enlace.jpeg"),
             ],
@@ -121,37 +150,31 @@ class Paths
                 "pagina" => 11,
             ],
             "cuenta_personal" => [
-                "css" => [
-              
-                ],
+                "css" => [],
                 "js" => [
                     "cuenta_personal/principal.js",
-                    
+
                 ]
-              
-            ],            
+
+            ],
             "leads" => [
-                "css" => [
-                    
-                ],
+                "css" => [],
                 "js" => [
                     "leads/principal.js",
                     "respuestas_frecuentes/principal.js"
                 ],
                 "pagina" => 12,
+                "nombre_pagina" => "Leads"
             ],
             "respuestas_frecuentes" => [
-                "css" => [
-                    
-                ],
-                "js" => [                    
+                "css" => [],
+                "js" => [
                     "respuestas_frecuentes/principal.js",
                     "respuestas_frecuentes/registro.js"
 
                 ],
 
-            ]
-            ,
+            ],
             "competencias" => [
                 "css" => [
                     "competencias.css"
@@ -187,12 +210,12 @@ class Paths
                 ],
 
 
-            ],  
+            ],
             "area_cliente" =>
             [
                 "js" =>
                 [
-                    
+
                     "area_cliente/checkout.js"
 
                 ],
@@ -208,7 +231,7 @@ class Paths
                 "url_img_post" => "",
                 "pagina" => 25,
             ],
-            "garantias" => 
+            "garantias" =>
             [
                 "js" =>
                 [
@@ -218,15 +241,15 @@ class Paths
                 ],
 
                 "css" =>
-                [                    
+                [
                     "confirm-alert.css",
                 ],
                 "meta_keywords" => "",
                 "desc_web" => "",
-                "url_img_post" => "",                
+                "url_img_post" => "",
 
             ],
-            "simulador" => 
+            "simulador" =>
             [
                 "js" =>
                 [
@@ -236,15 +259,15 @@ class Paths
                 ],
 
                 "css" =>
-                [                    
+                [
                     "confirm-alert.css",
                 ],
                 "meta_keywords" => "",
                 "desc_web" => "Calcula cuantos artículos debes vender para llegar a tus metas",
-                "url_img_post" => "",                
+                "url_img_post" => "",
+                "nombre_pagina" => "Simulador de ventas"
 
             ],
-
 
             "saldo_pendiente" =>
             [
@@ -368,7 +391,7 @@ class Paths
             "cambios_devoluciones" => [
                 "js" =>
                 [
-                  
+
                     "cambios/principal.js",
                 ],
             ],
@@ -376,19 +399,20 @@ class Paths
             [
                 "js" =>
                 [
-                  
+
                     "forma_pago/principal.js",
                 ],
                 "css" =>
                 [
-                    "formas_pago.css",                    
+                    "formas_pago.css",
 
                 ],
                 "meta_keywords" => "",
                 "desc_web" => "Formas de pago Enid Service",
                 "url_img_post" => create_url_preview("formas_pago_enid.png"),
                 "titulo" => 'Formas de pago Enid Service',
-                "pagina" => 53
+                "pagina" => 53,
+                "nombre_pagina" => "Formas de pago"
             ],
             "lista_deseos_preferencias" =>
             [
@@ -458,18 +482,12 @@ class Paths
 
             "rastrea_paquete" => [
                 "css" =>
-                [
-                  
-
-                ],
+                [],
                 "js" =>
-                [
-                  
-
-                ],
-                "pagina" =>  52
-            ]
-            ,
+                [],
+                "pagina" =>  52,
+                "nombre_pagina" => "Rastrear paquete"
+            ],
             "login" =>
             [
                 "css" =>
@@ -485,10 +503,10 @@ class Paths
                 ],
                 "url_img_post" => "promo.png",
                 "desc_web" => "kits de pesas,seguros para mancueras y equipo deportivo pago contra entrega a domicilio en Ciudad de México",
-                "meta_keywords" => "Pesas, pago contra entrega, cdmx, envios,barra, barra z, barra romana, bancos de posiciones",                
+                "meta_keywords" => "Pesas, pago contra entrega, cdmx, envios,barra, barra z, barra romana, bancos de posiciones",
                 "titulo" => "",
                 "pagina" => 4,
-                "pixel_facebook" => 0 
+                "pixel_facebook" => 0
 
             ],
             "pago_oxxo" =>
@@ -515,9 +533,10 @@ class Paths
 
                     "alerts/jquery-confirm.js",
                     "pedidos/busqueda.js",
-                    "alcaldia_prospecto/principal.js"
+                    "alcaldia_prospecto/principal.js",
 
                 ],
+                "nombre_pagina" => "Pedidos, Ordenes de compra"
             ],
 
             "pedidos" =>
@@ -539,7 +558,7 @@ class Paths
                     "js/bootstrap-timepicker/js/bootstrap-timepicker.js",
                     "js/pickers-init.js",
                     "alerts/jquery-confirm.js",
-                    "pedidos/principal.js"                    
+                    "pedidos/principal.js"
                 ],
 
 
@@ -563,7 +582,7 @@ class Paths
 
                 ],
                 "js" => [
-                    'costo_entrega/principal.js',                    
+                    'costo_entrega/principal.js',
                 ]
             ],
             'entregas' =>
@@ -725,17 +744,15 @@ class Paths
                 [
 
                     'procesar/principal.js',
-                    'procesar/sha1.js',                    
+                    'procesar/sha1.js',
                 ],
-                "js_extra_web" => [
-                    
-                ],
+                "js_extra_web" => [],
                 "pagina" => 7,
                 "meta_keywords" => "",
                 'desc_web' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
                 'titulo' => 'Comprar tus articulos deportivos a domicilio y paga a tu entrega en CDMX',
                 'url_img_post' => '',
-                
+
 
 
             ],
@@ -758,9 +775,7 @@ class Paths
             "procesar_ubicacion" =>
             [
                 "css" =>
-                [                
-
-                ],
+                [],
                 "js" =>
                 [
                     "domicilio/direccion_pedido_registrado.js",
@@ -794,21 +809,21 @@ class Paths
                 "css" =>
                 [
                     "css_tienda.css",
-                    "confirm-alert.css",                    
+                    "confirm-alert.css",
 
                 ],
                 "js" =>
                 [
                     'producto/principal.js',
                     "producto/cuenta_regresiva.js",
-                    "alerts/jquery-confirm.js"                    
-                ],                
+                    "alerts/jquery-confirm.js"
+                ],
             ],
             "producto_codigo" =>
             [
                 "css" =>
                 [
-                    "css_tienda.css",            
+                    "css_tienda.css",
 
                 ],
                 "js" =>
@@ -816,20 +831,17 @@ class Paths
                     "producto_codigo/principal.js",
                     "producto_codigo/cuenta_regresiva.js",
                     "login/sha1.js",
-                ],                
+                ],
             ],
             "producto_oferta" =>
             [
                 "css" =>
-                [
-                    
-
-                ],
+                [],
                 "js" =>
                 [
                     "producto_oferta/principal.js",
                     "producto_oferta/cuenta_regresiva.js"
-                ],                
+                ],
             ],
 
 
