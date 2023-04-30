@@ -12,7 +12,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $paginacion = $data["paginacion"];
-
+        $response[] = $data["busqueda_paginas"];
         $response[] = baner_compra_tipo_producto($data);
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
@@ -228,9 +228,10 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
     }
-    function sin_resultados($param)
+    function sin_resultados($data,$param)
     {
-
+        $textos[] = $data["busqueda_paginas"];
+        
         $textos[] = d(h("LO SENTIMOS, NO HAY NINGÚN RESULTADO PARA ", 4, "strong letter-spacing-15 fz_30"));
         $textos[] = d(h('"' . prm_def($param, "q", "") . '".', 4, "strong letter-spacing-15 fz_30"));
         $textos[] = d(d("¡No te desanimes! Revisa el texto o intenta buscar algo menos específico. ", "mt-5 fp9 mb-5"));
