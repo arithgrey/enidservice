@@ -478,7 +478,7 @@ if (!function_exists('invierte_date_time')) {
     {
         $contenido[] = d(_titulo('¿Número telefónico o email del cliente?', 4), 'borde_end_b ');
 
-        $input_busqueda = input(['class' => "input_busqueda_cliente", "name" => "q"]);
+        $input_busqueda = input(['class' => "input_busqueda_cliente", "name" => "q", "onpaste" => "paste_search();"]);
 
         $form[] = form_open("", ["class" => "form_busqueda_cliente"]);
         $form[] = flex('Búsqueda:', $input_busqueda, _text_(_between, 'mt-5'));
