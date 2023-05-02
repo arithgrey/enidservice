@@ -1114,6 +1114,14 @@ function footer_opciones()
             'class' => 'black fp9'
         ]
     );
+    $productos_footer[] = a_enid(
+        'Blog',
+        [
+            "href" => "../../sports",
+            'class' => 'black fp9'
+        ]
+    );
+
 
 
 
