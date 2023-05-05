@@ -5,7 +5,8 @@ if (!function_exists('invierte_date_time')) {
 
     function render($data)
     {
-
+        
+    
         $response[] = d(navegacion_lead($data), 4);
         $response[] = d(listado_leads($data), 8);
         
@@ -14,7 +15,7 @@ if (!function_exists('invierte_date_time')) {
     function listado_leads($data){
         
         
-        $response[] = d($data["formulario_busqueda_ordenes_compra"],12);
+        $response[] = d($data["formulario_busqueda_ordenes_compra"],12);        
         $response[] = d($data["eventos_pendientes"],12);
         $response[] = d($data["leads"],12);
         $response[] = d(hr(),12);
@@ -59,6 +60,7 @@ if (!function_exists('invierte_date_time')) {
             ),12);
 
         }
+        $response[] = d(d("","place_notificaciones_usuario_leads"),12);
         return $response;
     }
 }
