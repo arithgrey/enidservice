@@ -808,7 +808,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
 
 
         $session = a_enid(
-            icon("fa fa-user white"),
+            icon("fa fa-user white fa-2x"),
             [
                 "href" => path_enid('login'),
                 "class" => "text-uppercase text_iniciar_session 
@@ -1566,7 +1566,7 @@ function frm_search(
     if (!$in_session) {
 
         $notificacion_deseo_compra = flex(
-            icon("fa fa-shopping-bag white"),
+            icon("fa fa-shopping-bag white fa-2x"),
             d('', 'place_resumen_deseo_compra white strong'),
             _between,
             "mr-2"
