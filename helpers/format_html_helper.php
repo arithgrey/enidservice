@@ -2366,7 +2366,7 @@ function get_logo($session = 0)
     $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
 
 
-    $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
+    $icono_busqueda = icon(_text_(_busqueda_icon, "white fa-2x mr-2"), ["onclick" => "openNav()"]);
     $carro = "";
 
     $icono_busqueda_carro = flex(d(
@@ -2378,7 +2378,7 @@ function get_logo($session = 0)
     ), $carro, _between);
 
     $acceder = a_enid(
-        icon('fa black fa fa-user white p-2'),
+        icon('fa black fa fa-user fa-2x white p-2'),
         [
             "href" => path_enid('login'),
             "class" => "white d-xs-block d-md-none mr-3 text-uppercase fp9 strong"
