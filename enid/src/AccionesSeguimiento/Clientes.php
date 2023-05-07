@@ -70,7 +70,7 @@ class Clientes
                 ]
             );
             $elemento[] = flex($estrella, $comentario_evento, "border_black strong mt-3", "mr-4");
-            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-12");
+            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-3");
         }
         return d($response, "mt-5 bg-light ");
     }
