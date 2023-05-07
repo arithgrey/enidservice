@@ -131,7 +131,7 @@ class LeadsFormat
             ];
 
             $elemento[] = flex(d("", $attr), $total_like, "align-items-center ", "mr-2");
-            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-12");
+            $response[] = d($elemento, "mt-3 mb-3 border-bottom bg-white col-sm-4");
 
 
             $a++;
