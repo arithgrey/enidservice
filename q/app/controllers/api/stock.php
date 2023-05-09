@@ -1,4 +1,4 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
+<?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
 
 class Stock extends REST_Controller
@@ -14,7 +14,44 @@ class Stock extends REST_Controller
         $this->load->model("stock_model");
         $this->load->library(lib_def());
     }
+    function  almacen_POST()
+    {
 
+        $param = $this->post();
+        $response = false;
+
+        if (fx($param, "id_servicio,id_almacen_baja,id_almacen_asignado,cantidad")) {
+
+            $id_servicio = $param["id_servicio"];
+            $id_almacen_baja = $param["id_almacen_baja"];
+            $id_almacen_asignado = $param["id_almacen_asignado"];
+            $cantidad = $param["cantidad"];
+
+            /*baja piezas*/
+            $params = [
+                'costo_unidad' => 0,
+                'unidades' => 0,
+                'id_servicio' => $id_servicio,
+                'consumo' =>  $cantidad,
+                'id_almacen' => $id_almacen_baja
+            ];
+
+            $this->stock_model->insert($params, 1);
+
+            /*Asigación*/
+            $params = [
+                'costo_unidad' => 0,
+                'unidades' => $cantidad,
+                'id_servicio' => $id_servicio,
+                'consumo' =>  0,
+                'id_almacen' => $id_almacen_asignado
+            ];
+
+            $response = $this->stock_model->insert($params, 1);
+        }
+
+        $this->response($response);
+    }
     function descuento_PUT()
     {
 
@@ -25,7 +62,6 @@ class Stock extends REST_Controller
             $unidades = $param['unidades'];
             $id_stock = $param['id_stock'];
             $response = $this->stock_model->q_up('unidades', $unidades, $id_stock);
-
         }
 
         $this->response($response);
@@ -41,7 +77,6 @@ class Stock extends REST_Controller
             $fecha_hora = $param['hora_fecha'];
             $id_stock = $param['id_stock'];
             $response = $this->stock_model->q_up('fecha_registro', $fecha_hora, $id_stock);
-
         }
 
         $this->response($response);
@@ -61,7 +96,6 @@ class Stock extends REST_Controller
 
                 $response = $this->stock_model->get();
             }
-
         }
 
         $this->response($response);
@@ -85,10 +119,8 @@ class Stock extends REST_Controller
 
             $response = $this->stock_model->disponibilidad($param['id_servicio']);
             $response = $this->descuento_en_stock($param, $response);
-
         }
         $this->response($response);
-
     }
 
     private function gestiona_stock($param, $stock_disponible, $cantidad)
@@ -115,7 +147,6 @@ class Stock extends REST_Controller
 
                         $cantidad_descuento_stock = $total;
                         $total = 0;
-
                     } else {
 
                         $cantidad_descuento_stock = $disponible_en_este_stock;
@@ -137,7 +168,6 @@ class Stock extends REST_Controller
                     "es_posible_el_descuento" => 0
                 ];
             }
-
         } else {
 
             $unidades_por_consumir_stock[] = [
@@ -145,7 +175,6 @@ class Stock extends REST_Controller
                 "unidades_por_descontar" => $cantidad,
                 "es_posible_el_descuento" => 0
             ];
-
         }
 
 
@@ -172,7 +201,6 @@ class Stock extends REST_Controller
                     'status' => $status,
                     'id_stock' => $id_stock
                 ];
-
             } else {
 
                 $id_servicio = $param['id_servicio'];
@@ -188,7 +216,6 @@ class Stock extends REST_Controller
                     'id_stock' => $id_stock,
                     'es_consumo_negativo' => 1
                 ];
-
             }
         }
         $response[] = $gestion;
@@ -205,12 +232,10 @@ class Stock extends REST_Controller
         if ($descuento_en_stock) {
 
             return $this->gestiona_stock($param, $stock_disponible, $cantidad);
-
         } else {
 
             return $stock_disponible;
         }
-
     }
 
     function consumo_stock($consumo, $id_stock)
@@ -239,8 +264,6 @@ class Stock extends REST_Controller
 
                 $response = $this->agregar_inventario($costo, $stock, $id_servicio);
             }
-
-
         }
         $this->response($response);
     }
@@ -291,8 +314,6 @@ class Stock extends REST_Controller
                     'es_pago' => 0
                 ];
             }
-
-
         }
 
         return $this->gestiona_stock_deuda_db($param, $lista_por_pago);
@@ -319,7 +340,6 @@ class Stock extends REST_Controller
             }
         }
         return $response;
-
     }
 
     function agregar_inventario($costo, $stock, $id_servicio)
@@ -354,7 +374,6 @@ class Stock extends REST_Controller
             if (prm_def($param, "v") > 0) {
 
                 $response = $this->create_table_compras($response, $compras_por_enviar);
-
             }
         }
         $this->response($response);
@@ -395,7 +414,8 @@ class Stock extends REST_Controller
             $resumen = $this->get_format_resumen(
                 $total_pedidos_contra_entrega . " / " . $total_entregas_contra_entrega,
                 $pedidos,
-                $pedidos_contra_entrega, $id_servicio
+                $pedidos_contra_entrega,
+                $id_servicio
             );
             $sugerencia = $resumen["sugerencia"];
             $sugerencia_b = $resumen["sugerencias_b"];
@@ -430,7 +450,8 @@ class Stock extends REST_Controller
             $linea[] = d($img, $base);
             $linea[] = d($stock, $base_stock);
             $linea[] = d($pedidos_contra_entrega, 'col-md-2 border  text-uppercase text-center ');
-            $linea[] = d($resumen["text"],
+            $linea[] = d(
+                $resumen["text"],
                 [
                     'class' => _text_($base, 'comparativas cursor_pointer'),
                     'id' => $id_servicio
@@ -450,7 +471,6 @@ class Stock extends REST_Controller
         $response[] = append($compras);
         $response[] = append($comparativa);
         return append($response);
-
     }
 
     private function get_ventas_tipo($tipo, $compras_pagas, $id_servicio)
@@ -481,11 +501,9 @@ class Stock extends REST_Controller
             if ($fecha == $ventas[$a]["fecha_entrega"]) {
 
                 $venta = $ventas[$a]["solicitudes"];
-
             }
         }
         return $venta;
-
     }
 
     private function get_format_resumen($resumen, $pedidos, $pedidos_contra_entrega, $id_servicio)
@@ -524,15 +542,12 @@ class Stock extends REST_Controller
             if ($pedidos_contra_entrega == $solicitud) {
 
                 $relevante[] = $t;
-                $promedio [] = ["solicitud" => $solicitud, "ventas_efectivas" => $ventas_efectivas];
+                $promedio[] = ["solicitud" => $solicitud, "ventas_efectivas" => $ventas_efectivas];
 
                 $media[$ventas_efectivas] = (!array_key_exists($ventas_efectivas, $media)) ? 1 : ($media[$ventas_efectivas] + 1);
-
-
             } else {
 
                 $secundaria[$ventas_efectivas] = (!array_key_exists($ventas_efectivas, $secundaria)) ? 1 : ($secundaria[$ventas_efectivas] + 1);
-
             }
         }
 
@@ -552,7 +567,8 @@ class Stock extends REST_Controller
         $text_resumen = count($relevante);
 
         $response_table = $table . $tabla_porcentaje["table"];
-        $tabla_comprativas = d($response_table,
+        $tabla_comprativas = d(
+            $response_table,
             [
                 'class' => 'mt-5 tabla_comprativa d-none',
                 'id' => $id_servicio
@@ -568,7 +584,6 @@ class Stock extends REST_Controller
             "sugerencia" => $max,
             "sugerencias_b" => $min
         ];
-
     }
 
     private function get_max_min($totales)
@@ -583,7 +598,6 @@ class Stock extends REST_Controller
                 $max = $row["compras"];
             }
             array_push($min, $row["compras"]);
-
         }
         $response = ["max" => $max, "completo" => $min];
         return $response;
@@ -617,7 +631,6 @@ class Stock extends REST_Controller
         }
         $table .= "</table>";
         return ["table" => $table, "totales" => $totales];
-
     }
 
     private function asocia_servicio_solicitudes($pedidos_servicio, $tipo)
@@ -675,8 +688,6 @@ class Stock extends REST_Controller
             'anexar' => 1
         ];
         return $this->app->api("servicio/stock", $q, "json", "PUT");
-
-
     }
 
 
@@ -704,7 +715,6 @@ class Stock extends REST_Controller
 
 
         return $this->app->api("recibo/pedidos", $q);
-
     }
 
     private function get_compras_por_enviar()
@@ -712,6 +722,5 @@ class Stock extends REST_Controller
 
         $q[1] = 1;
         return $this->app->api("recibo/compras_por_enviar", $q);
-
     }
 }

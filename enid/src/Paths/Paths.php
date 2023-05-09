@@ -183,6 +183,7 @@ class Paths
             ],
             "stock" => [
                 'js' => [
+                    "ui/jquery-ui.js",
                     "js/bootstrap-datepicker/js/bootstrap-datepicker.js",
                     "js/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js",
                     "js/bootstrap-daterangepicker/moment.min.js",
