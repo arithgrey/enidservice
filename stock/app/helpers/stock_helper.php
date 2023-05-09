@@ -22,7 +22,7 @@ function inventario_almacenes($almacenes, $inventario)
         $almacen = [];
         $almacen[] = d(span($row["nombre"], 'f12 strong'), 'col-xs-12 p-2');
         $almacen[] = d(inventario($inventario, $id_almacen), 12);
-        $config = ["class" => "col-sm-6 droppable", "id" => $id_almacen];
+        $config = ["class" => "col-sm-6 droppable borde_black p-5 mt-5", "id" => $id_almacen];
         $response[] = d(d($almacen, 13), $config);
     }
 
@@ -47,7 +47,7 @@ function inventario($inventario, $id_almacen)
                 ]
             );
 
-            $producto_unidades = flex($img, $textos_disponibilidad, _text_(_between, 'text-center borde_black', $extra), 4, 8);
+            $producto_unidades = flex($img, $textos_disponibilidad, _text_(_between, 'text-center borde_black', $extra), 6, 6);
 
             $class = ($total <  1) ? '' : 'ui-widget-content draggable';
             $response[] = d(
