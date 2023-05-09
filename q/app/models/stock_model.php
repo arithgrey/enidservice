@@ -105,19 +105,13 @@ class stock_model extends CI_Model
     function inventario(){
 
         $query = "SELECT 
-                    id_servicio, 
-                    id_stock,
-                    unidades, 
-                    consumo , 
-                    (unidades - consumo )unidades_disponibles, 
-                    costo_unidad ,
-                    fecha_registro                
-                    FROM stock 
-                    WHERE 
-                    unidades > 0 
-                    AND es_consumo_negativo < 1 
-                    AND (unidades > consumo)
-                    ORDER BY fecha_registro ASC";
+        id_servicio, 
+        id_almacen,
+        SUM(unidades) AS total_unidades, 
+        SUM(consumo) AS total_consumo
+        FROM stock
+        GROUP BY id_servicio, id_almacen
+        ORDER BY SUM(unidades) DESC";
 
         return $this->db->query($query)->result_array() ;
     }
