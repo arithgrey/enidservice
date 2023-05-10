@@ -7,13 +7,40 @@ function render($data)
 {
     $almacenes = $data["almacenes"];
     $inventario = $data["inventario"];
+    $kits = $data["kits"];
 
-
-    $response[] = inventario_almacenes($almacenes, $inventario);
+    
+    $response[] = inventario_almacenes($almacenes, $inventario, $kits);
     $response[] = modal_cambio_de_almacen();
     return append($response);
 }
-function inventario_almacenes($almacenes, $inventario)
+function kits($kits, $id_almacen){
+
+    $response = [];
+
+    foreach ($kits as $row) {
+        
+            
+            $textos = d($row["nombre"], 'strong mt-2');            
+            $id_kit = $row["id"];            
+            
+
+            $class =  'ui-widget-content draggable';
+            $response[] = d(
+                $textos,
+                [
+                    "class" => _text_("col-xs-6 p-2 mt-3 borde_black", $class),
+                    "id_kit" => $id_kit,          
+                    "id_almacen" =>  $id_almacen
+                    
+                ]
+            );
+        
+    }
+    return append($response);
+
+}
+function inventario_almacenes($almacenes, $inventario, $kits)
 {
 
     $response = [];
@@ -22,7 +49,7 @@ function inventario_almacenes($almacenes, $inventario)
         $id_almacen = $row["id"];
         $almacen = [];
         $almacen[] = d(span($row["nombre"], 'f12 strong'), 'col-xs-12 p-2');
-        $almacen[] = d(inventario($inventario, $id_almacen), 12);
+        $almacen[] = d(inventario($inventario, $id_almacen, $kits), 12);
         $config = ["class" => "col-sm-6 droppable borde_black p-5 mt-5", "id" => $id_almacen];
         $response[] = d(d($almacen, 13), $config);
     }
@@ -109,10 +136,10 @@ function totales($inventario)
     return d($contenido);
 }
 
-function inventario($inventario, $id_almacen)
+function inventario($inventario, $id_almacen,$kits)
 {
     $response = [];
-
+    $response[] = d(kits($kits,$id_almacen),'col-xs-12 p-2');
     foreach ($inventario as $row) {
         if ($id_almacen === $row["id_almacen"]) {
             $url_img_servicio = $row['url_img_servicio'];

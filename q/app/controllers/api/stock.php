@@ -52,6 +52,58 @@ class Stock extends REST_Controller
 
         $this->response($response);
     }
+    function almacen_kit_POST()
+    {
+
+        $param = $this->post();
+        $response = false;
+
+        if (fx($param, "id_kit,id_almacen_baja,id_almacen_asignado")) {
+
+            $id_kit = $param["id_kit"];
+            $id_almacen_baja = $param["id_almacen_baja"];
+            $id_almacen_asignado = $param["id_almacen_asignado"];
+            $cantidad = 1;
+
+            $servicios = $this->app->api(
+                "servicio_kit/servicios_por_kit",
+                ["id_kit" => $id_kit]
+            );
+
+            foreach($servicios as $row){
+
+                $id_servicio = $row["id_servicio"];
+
+
+                $params = [
+                    'costo_unidad' => 0,
+                    'unidades' => 0,
+                    'id_servicio' => $id_servicio,
+                    'consumo' =>  $cantidad,
+                    'id_almacen' => $id_almacen_baja
+                ];
+    
+                $this->stock_model->insert($params, 1);
+    
+                
+                $params = [
+                    'costo_unidad' => 0,
+                    'unidades' => $cantidad,
+                    'id_servicio' => $id_servicio,
+                    'consumo' =>  0,
+                    'id_almacen' => $id_almacen_asignado
+                ];
+    
+                $response = $this->stock_model->insert($params, 1);
+
+
+            }
+            
+        }
+
+        $this->response($response);
+    }
+
     function descuento_PUT()
     {
 

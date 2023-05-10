@@ -22,14 +22,23 @@ $(document).ready(function () {
 
     $(".draggable").draggable({
         drag: function (event, ui) {
-
-            let id = $(this).attr("id");
-            let piezas_disponibles = $(this).attr("piezas_disponibles");
             let id_almacen = $(this).attr("id_almacen");
-
-            set_option("id_servicio", id);
-            set_option("piezas_disponibles", piezas_disponibles);
             set_option("id_almacen", id_almacen);
+            if ($(this).attr('id_kit') !== undefined) {
+
+                let $id_kit = $(this).attr('id_kit');
+                set_option("id_kit", $id_kit);
+
+            } else {
+
+                let id = $(this).attr("id");
+                let piezas_disponibles = $(this).attr("piezas_disponibles");
+
+
+                set_option("id_servicio", id);
+                set_option("piezas_disponibles", piezas_disponibles);
+                set_option("id_kit", 0);
+            }
 
         }
 
@@ -38,16 +47,28 @@ $(document).ready(function () {
         drop: function (event, ui) {
 
             let $id = $(this).attr("id");
-            let $piezas_disponibles = get_option("piezas_disponibles");
-            let $id_almacen = get_option("id_almacen");
             set_option("id_almacen_asignado", $id);
 
-            if ($id !== $id_almacen && $piezas_disponibles > 0) {
+            if (parseInt(get_option("id_kit")) > 0) {
 
-                $modal_cambio_almacen.modal("show");
-                crear_select($piezas_disponibles);
+                asignacion_kit_a_almacen();
+
+            } else {
+
+
+                let $piezas_disponibles = get_option("piezas_disponibles");
+                let $id_almacen = get_option("id_almacen");
+
+                if ($id !== $id_almacen && $piezas_disponibles > 0) {
+
+                    $modal_cambio_almacen.modal("show");
+                    crear_select($piezas_disponibles);
+
+                }
+
 
             }
+
 
 
         }
@@ -90,7 +111,6 @@ let crear_select = function (numeroOpciones) {
         var opcion = $("<option value='" + i + "'>").text(i);
         select.append(opcion);
     }
-
 
     $(".place_disponibilidad").html(select);
 }
@@ -153,3 +173,21 @@ let response_unidades = function (data) {
 
     redirect('');
 };
+let asignacion_kit_a_almacen = function () {
+
+    let $id_kit = get_option("id_kit");
+    let $id_almacen_baja = get_option("id_almacen");
+    let $id_almacen_asignado = get_option("id_almacen_asignado");
+    
+
+    
+    let data_send = $.param({
+        "id_kit": $id_kit,
+        "id_almacen_baja": $id_almacen_baja,
+        "id_almacen_asignado": $id_almacen_asignado,        
+    });
+    
+    let url = "../q/index.php/api/stock/almacen_kit/format/json/";
+ 
+    request_enid("POST", data_send, url, response_asiganacion_almacen);
+}

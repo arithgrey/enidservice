@@ -26,6 +26,7 @@ class Home extends CI_Controller
         
         $data["inventario"] = $inventario;
         $data["almacenes"] = $almacenes;
+        $data["kits"] =  $this->app->api("kit/index");
         $this->app->pagina($data, render($data), 1);
     }
 
