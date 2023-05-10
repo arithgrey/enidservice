@@ -8,6 +8,7 @@ function render($data)
     $almacenes = $data["almacenes"];
     $inventario = $data["inventario"];
 
+
     $response[] = inventario_almacenes($almacenes, $inventario);
     $response[] = modal_cambio_de_almacen();
     return append($response);
@@ -26,8 +27,88 @@ function inventario_almacenes($almacenes, $inventario)
         $response[] = d(d($almacen, 13), $config);
     }
 
-    return d(d($response, "row"), 10, 1);
+
+    $data_complete[] = d(totales($inventario), 'col-sm-3');
+    $data_complete[] =  d($response, 'col-sm-9');
+
+    return d($data_complete, 10, 1);
 }
+function busqueda_totales($inventario)
+{
+
+    $totales = [];
+
+    // Iterar sobre el arreglo de consumo
+    foreach ($inventario as $item) {
+        $id_servicio = $item['id_servicio'];
+        $total_consumo = $item['total_consumo'];
+        $total_unidades = $item['total_unidades'];
+        $url_img_servicio = $item['url_img_servicio'];
+
+        // Verificar si ya existe una entrada para el id_servicio
+        if (isset($totales[$id_servicio])) {
+            // Si existe, sumar los valores al existente
+            $totales[$id_servicio]['total_consumo'] += $total_consumo;
+            $totales[$id_servicio]['total_unidades'] += $total_unidades;
+            $totales[$id_servicio]['url_img_servicio'] = $url_img_servicio;
+            $totales[$id_servicio]['id_servicio'] = $id_servicio;
+        } else {
+            // Si no existe, crear una nueva entrada
+            $totales[$id_servicio] = array(
+                'total_consumo' => $total_consumo,
+                'total_unidades' => $total_unidades,
+                'url_img_servicio' => $url_img_servicio,
+                'id_servicio' => $id_servicio
+            );
+        }
+    }
+    return  $totales;
+}
+function totales($inventario)
+{
+
+    $totales = busqueda_totales($inventario);
+    $contenido[] = d("Inventario disponible",'row mb-3');   
+    foreach ($totales as $row) {
+
+        $url_img_servicio = $row['url_img_servicio'];
+        $total_unidades = $row["total_unidades"];
+        $total_consumo = $row["total_consumo"];
+
+        $total =  ($total_unidades - $total_consumo);
+        $extra = ($total < 1) ? 'error_enid' : '';
+        $textos_disponibilidad = flex($total, "Pzs en existencia", _between, 'f12 strong');
+        $img = img(
+            [
+                'src' => $url_img_servicio,
+                'class' => "w_75"
+            ]
+        );
+
+        $id_servicio = $row["id_servicio"];
+        $img = a_enid($img, [
+            "href" => path_enid("editar_producto", $id_servicio),
+            "target" => "_blank"
+        ]);
+
+        $producto_unidades = flex($img, $textos_disponibilidad, _text_(_between, 'text-center ', $extra), 3, 9);
+
+
+        $response[] = d(d(
+            $producto_unidades,
+            [
+                "class" => _text_("col-xs-12"),
+                "id" => $row["id_servicio"],
+                "piezas_disponibles" => $total,
+
+            ]
+        ), 'row border border-secondary p-2');
+    }
+
+    $contenido[] = d($response);
+    return d($contenido);
+}
+
 function inventario($inventario, $id_almacen)
 {
     $response = [];
@@ -47,13 +128,19 @@ function inventario($inventario, $id_almacen)
                 ]
             );
 
+            $id_servicio = $row["id_servicio"];
+            $img = a_enid($img, [
+                "href" => path_enid("editar_producto", $id_servicio),
+                "target" => "_blank"
+            ]);
+
             $producto_unidades = flex($img, $textos_disponibilidad, _text_(_between, 'text-center borde_black', $extra), 6, 6);
 
             $class = ($total <  1) ? '' : 'ui-widget-content draggable';
             $response[] = d(
                 $producto_unidades,
                 [
-                    "class" => _text_("col-xs-6 col-lg-3 p-2", $class),
+                    "class" => _text_("col-xs-6 p-2", $class),
                     "id" => $row["id_servicio"],
                     "piezas_disponibles" => $total,
                     "id_almacen" =>  $id_almacen
