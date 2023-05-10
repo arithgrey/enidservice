@@ -50,13 +50,13 @@ function inventario_almacenes($almacenes, $inventario, $kits)
         $almacen = [];
         $almacen[] = d(span($row["nombre"], 'f12 strong'), 'col-xs-12 p-2');
         $almacen[] = d(inventario($inventario, $id_almacen, $kits), 12);
-        $config = ["class" => "col-sm-6 droppable borde_black p-5 mt-5", "id" => $id_almacen];
+        $config = ["class" => "col-sm-3 droppable borde_black p-5 mt-5", "id" => $id_almacen];
         $response[] = d(d($almacen, 13), $config);
     }
 
 
-    $data_complete[] = d(totales($inventario), 'col-sm-3');
-    $data_complete[] =  d($response, 'col-sm-9');
+    $data_complete[] = d(totales($inventario), 'col-sm-2');
+    $data_complete[] =  d($response, 'col-sm-10');
 
     return d($data_complete, 10, 1);
 }
@@ -95,7 +95,7 @@ function totales($inventario)
 {
 
     $totales = busqueda_totales($inventario);
-    $contenido[] = d("Inventario disponible",'row mb-3');   
+    $contenido[] = d("Inventario disponible",'row mb-3 strong text-uppercase');   
     foreach ($totales as $row) {
 
         $url_img_servicio = $row['url_img_servicio'];
@@ -167,7 +167,7 @@ function inventario($inventario, $id_almacen,$kits)
             $response[] = d(
                 $producto_unidades,
                 [
-                    "class" => _text_("col-xs-6 p-2", $class),
+                    "class" => _text_("col-xs-12 p-2", $class),
                     "id" => $row["id_servicio"],
                     "piezas_disponibles" => $total,
                     "id_almacen" =>  $id_almacen

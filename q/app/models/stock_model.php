@@ -110,6 +110,7 @@ class stock_model extends CI_Model
         SUM(unidades) AS total_unidades, 
         SUM(consumo) AS total_consumo
         FROM stock
+        WHERE id_almacen != 4
         GROUP BY id_servicio, id_almacen
         ORDER BY SUM(unidades) DESC";
 
