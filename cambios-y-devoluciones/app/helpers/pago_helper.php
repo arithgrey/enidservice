@@ -18,7 +18,7 @@ if (!function_exists('invierte_date_time')) {
         $str = _d(
             d(_titulo("Cambios y devoluciones"), 'mb-2 mt-5'),            
             d("Si no te satisface tu compra, ofrecemos garantía de devolución durante los primeros 30 días 
-             y cambios hasta por 90 días más",
+             y cambios hasta por 12 Meses",
              'f14 text-uppercase  mt-5 mb-5 p-3 black borde_end  shadow font-weight-bold p-2  d-block'),
             
             d(_titulo("Preguntas frecuentes"), 'mb-2 mt-5'),            

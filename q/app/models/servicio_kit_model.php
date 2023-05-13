@@ -60,6 +60,6 @@ class servicio_kit_model extends CI_Model
             $this->db->where($key, $value);
         }
         return $this->db->delete($this->tabla, $params_where);
-    }    
+    }        
 
 }
