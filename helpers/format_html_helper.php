@@ -2041,20 +2041,18 @@ function navegacion(
             _text_(
                 $categorias,
                 span('Envíos, cambios y devoluciones gratis', 'strong'),
-                icon('fa fa-gift fa-2x', 'strong'),
-                span('Pide hoy', 'strong'),
-                icon('fa fa-clock-o fa-2x', 'strong'),
-                span('recibe hoy', 'strong'),
-                icon('fa fa-shield fa-2x', 'strong'),
-                span('Garantía por 12 meses', 'strong'),                                    
-                icon('fa fa-fighter-jet fa-2x', 'strong'),
-                span('(55) 5296 - 7027', 'strong')
+                icon('fa fa-gift fa-2x', 'strong'),                                
+                span('Pide y recibe hoy', 'strong'),
+                icon('fa fa-clock-o fa-2x', 'strong'),                
+                span('Garantía por 12 meses', 'strong'),                                                    
+                icon('fa fa-shield fa-2x', 'strong'),                
+                span('(55) 5296 - 7027', 'strong')                
 
             ),
             [
                 "class" => 'black bg_yellow borde_white pr-4 pl-4'
             ]
-        ), 'text-md-right col-sx-12 col-sx-12');
+        ), 'text-md-right col-sx-12 col-sx-12 ');
         $response[] = d([get_logo(), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
 
 
