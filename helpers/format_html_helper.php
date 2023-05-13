@@ -1389,6 +1389,14 @@ function form_busqueda_productos($mas_vendidos)
 
 function opciones_acceso($in_session)
 {
+    $currentURL = 'http';
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $currentURL .= 's';
+    }
+    $currentURL .= '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+    
+
     $response = [];
 
     $flex_compras = d(
@@ -1415,7 +1423,7 @@ function opciones_acceso($in_session)
     $whatsApp = a_enid(
         icon('fa fa-whatsapp white fa-3x'),
         [
-            'href' => path_enid('whatsapp_ayuda', 0, 1)
+            'href' => _text_(path_enid('whatsapp_ayuda', 0, 1),$currentURL)
         ]
 
     );
