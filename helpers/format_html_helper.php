@@ -2040,11 +2040,15 @@ function navegacion(
         $response[] = d(d(
             _text_(
                 $categorias,
-                span('Envío gratis', 'strong'),
+                span('Envíos gratis', 'strong'),
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
                 span('recibe hoy', 'strong'),
+                icon('fa fa-shield fa-2x', 'strong'),
+                span('Garantía por 12 meses', 'strong'),
+                icon('fa fa-check fa-2x', 'strong'),
+                span('Cambios y devoluciones gratis', 'strong'),
                 icon('fa fa-fighter-jet fa-2x', 'strong'),
                 span('(55) 5296 - 7027', 'strong')
 

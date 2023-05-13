@@ -61,5 +61,12 @@ class kit_model extends CI_Model
         }
         return $this->db->delete($this->tabla, $params_where);
     }    
+    function lista_servicios(){
 
+        $query_get ="select * from kit k left outer join servicio_kit sk on k.id = sk.id_kit";
+        return $this->db->query($query_get)->result_array();
+    
+
+    }
+    
 }
