@@ -602,7 +602,7 @@ function es_email_valido($email)
 
 
 
-function format_phone($telefono, $copy = 1 )
+function format_phone($telefono, $copy = 1)
 {
     // Eliminar cualquier carácter que no sea un número
     $telefono = preg_replace('/[^0-9]/', '', $telefono);
@@ -628,11 +628,11 @@ function format_phone($telefono, $copy = 1 )
         // Si la longitud no es válida, devolver el número original sin formato
         $telefono_formateado = $telefono;
     }
-    
-    if($copy < 1){
+
+    if ($copy < 1) {
         return $telefono_formateado;
     }
-    return flex( $telefono_formateado,"","mt-2",'selector-del-div-a-copiar','ml-3 fa fa-clone selector-del-elemento-a-copiar');
+    return flex($telefono_formateado, "", "mt-2", 'selector-del-div-a-copiar', 'ml-3 fa fa-clone selector-del-elemento-a-copiar');
 }
 
 
@@ -1810,4 +1810,13 @@ function cargando()
     ), 5);
 
     return d($load, 'text-center cargando_modal d-none mt-3 cargando');
+}
+function _current_url()
+{
+    $currentURL = 'http';
+    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
+        $currentURL .= 's';
+    }
+    $currentURL .= '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+    return $currentURL;
 }

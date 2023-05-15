@@ -62,8 +62,9 @@ function article($info, $attributes = [], $row = 0, $frow = 0)
 
     return get_base_html("article", $info, $attributes, $row, $frow);
 }
-function error_texto_input($texto_indicacion, $id){
-    
+function error_texto_input($texto_indicacion, $id)
+{
+
     return d(
         $texto_indicacion,
         add_text(
@@ -1302,7 +1303,7 @@ function gb_modal($modal_inicial = 1, $id_modal = "modal-error-message", $icono_
 
 
     $config = [
-        "class" => _text_("modal","modal_enid"),
+        "class" => _text_("modal", "modal_enid"),
         "tabindex" => "-1",
         "role" => "dialog",
         "id" => $id_modal,
@@ -1333,7 +1334,7 @@ function menu_session_mobil($mas_vendidos)
     );
 
     $form_busqueda = form_busqueda_productos($mas_vendidos);
-    
+
 
     $clases_columnas = "d-flex flex-column align-items-center justify-content-between h-50'";
     $columna = d([$cerrar_opciones, $form_busqueda /*$opciones_acceso*/], $clases_columnas);
@@ -1389,13 +1390,8 @@ function form_busqueda_productos($mas_vendidos)
 
 function opciones_acceso($in_session)
 {
-    $currentURL = 'http';
-    if (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on') {
-        $currentURL .= 's';
-    }
-    $currentURL .= '://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
-    
+
 
     $response = [];
 
@@ -1423,7 +1419,7 @@ function opciones_acceso($in_session)
     $whatsApp = a_enid(
         icon('fa fa-whatsapp white fa-3x'),
         [
-            'href' => _text_(path_enid('whatsapp_ayuda', 0, 1),$currentURL)
+            'href' => _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url())
         ]
 
     );
@@ -2036,7 +2032,7 @@ function navegacion(
                 "aria-expanded" => "false"
             ]
         );
-        
+
         $ul = ul(categorias_destacatas_ab($mas_vendidos), ["class" => "dropdown-menu borde-0"]);
 
         $categorias = d([
@@ -2045,16 +2041,23 @@ function navegacion(
         ], "dropdown pull-left d-none d-md-block ");
 
 
+        $link = a_enid(
+            "(55) 5296 - 7027",
+            [
+                "href" => _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url()),
+                "class" => "black"
+            ],0
+        );
         $response[] = d(d(
             _text_(
                 $categorias,
                 span('Envíos, cambios y devoluciones gratis', 'strong'),
-                icon('fa fa-gift fa-2x', 'strong'),                                
+                icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide y recibe hoy', 'strong'),
-                icon('fa fa-clock-o fa-2x', 'strong'),                
-                span('Garantía por 12 meses', 'strong'),                                                    
-                icon('fa fa-shield fa-2x', 'strong'),                
-                span('(55) 5296 - 7027', 'strong')                
+                icon('fa fa-clock-o fa-2x', 'strong'),
+                span('Garantía por 12 meses', 'strong'),
+                icon('fa fa-shield fa-2x', 'strong'),
+                span($link, 'strong')
 
             ),
             [
