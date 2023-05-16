@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "kits" => "kits",
         "editar_respuestas_rapidas" => "respuestas_rapidas",
         "leads" => "leads",
         "lead_busqueda" =>"leads/?q=",

@@ -95,7 +95,15 @@ function totales($inventario)
 {
 
     $totales = busqueda_totales($inventario);
-    $contenido[] = d("Inventario disponible",'row mb-3 strong text-uppercase');   
+    $link = path_enid("kits");
+    $contenido[] = d("Inventario disponible",'row mb-2 strong text-uppercase');   
+    $contenido[] = d(a_enid("Ver kits", 
+    [
+        "href" => $link,
+        "class"=> "text-secondary underline", 
+
+    ]),'row mb-3');   
+
     foreach ($totales as $row) {
 
         $url_img_servicio = $row['url_img_servicio'];
