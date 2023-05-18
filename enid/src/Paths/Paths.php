@@ -124,6 +124,11 @@ class Paths
                 ],
                 "url_img_post" => create_url_preview("invitacion_enlace.jpeg"),
             ],
+            "kits" => [                
+                "js" => [
+                    "kits/principal.js",
+                ]
+            ],
             "invitacion" => [
                 "css" => [
                     "invitacion.css"
