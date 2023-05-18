@@ -1,6 +1,8 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed');
 require APPPATH . '../../librerias/REST_Controller.php';
+
 use Enid\Kits\Formato as Kits_servicio;
+
 class kit extends REST_Controller
 {
     private $kits_servicio;
@@ -18,33 +20,33 @@ class kit extends REST_Controller
         $response = $this->kit_model->get([], [], 100);
         $this->response($response);
     }
-    function list_servicios_GET(){
-        
-        $kits_servicios = $this->kit_model->lista_servicios();        
+    function list_servicios_GET()
+    {
+
+        $kits_servicios = $this->kit_model->lista_servicios();
         $listado = $this->kits_servicio->listado($kits_servicios);
         $this->response($listado);
+    }
+    function index_POST()
+    {
+        $param = $this->post();
+        $response = false;
 
+        if (fx($param, "nombre")) {
+
+            $params = [
+                "nombre" => $param["nombre"],
+            ];
+
+
+            $response = $this->kit_model->insert($params, 1);
+        }
+        $this->response($response);
     }
 
+
     /*
-	function index_POST()
-	{
-		$param = $this->post();
-		$response = false;
-		
-		if (fx($param, "")) {
-            
-			$params = [
-				"" => $param[""],
-				"" => $param[""],				
-			];
-
-            
-			$response = $this->kit_model->insert($params, 1);
-
-		}
-		$this->response($response);
-	}
+	
     function index_PUT()
 	{
 		$param = $this->put();

@@ -1,5 +1,8 @@
 let $icono_agregar_kit = $(".icono_agregar_kit");
 let $modal_servicios_kit = $("#modal_servicios_kit");
+let $modal_kit = $("#modal_kit");
+let $boton_nuevo_kit = $(".boton_nuevo_kit");
+let $form_kit = $(".form_kit");
 set_option("page", 1);
 set_option("id_kit", 0);
 $(document).ready(() => {
@@ -9,7 +12,28 @@ $(document).ready(() => {
         busqueda_servicios();
 
     });
+    $boton_nuevo_kit.click(modal_kit);
+    $form_kit.submit(registro_kit);
 });
+
+let modal_kit = function(){
+    $modal_kit.modal("show");
+}
+
+let registro_kit = function (e) {
+
+    let data_send = $form_kit.serialize();
+    let url = "../q/index.php/api/kit/index/format/json/";
+    bloquea_form('.form_kit');
+
+    request_enid("POST", data_send, url, response_form_kit);
+    e.preventDefault();
+};
+
+let response_form_kit = function(data){
+    
+    redirect("");
+}
 let busqueda_servicios = function (q = "") {
 
 
