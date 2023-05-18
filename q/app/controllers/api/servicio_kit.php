@@ -21,7 +21,25 @@ class servicio_kit extends REST_Controller
         $this->response($response);
 
 	}
+    function index_POST()
+	{
+		$param = $this->post();
+		$response = false;
+		
+		if (fx($param, "id_kit,id_servicio")) {
+            
+			$params = [
+				"id_kit" => $param["id_kit"],
+				"id_servicio" => $param["id_servicio"],				
+			];
 
+            
+			$response = $this->servicio_kit_model->insert($params, 1);
+
+		}
+		$this->response($response);
+	}
+    
 
     /*
     function index_GET()

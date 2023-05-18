@@ -47,6 +47,8 @@ class Formato
 
         $items = d($response, "row borde_black p-2");
         $nombre = span($nombre, 'strong f12 text-uppercase');
-        return flex($nombre, $items, _text_(_between, 'mt-5'), 2, 10);
+        $icono = icon(_text_(_agregar_icon,'icono_agregar_kit'),["id" => $id_kit]); 
+        $add_nombre = flex($icono, $nombre,"", "mr-5");
+        return flex($add_nombre, $items, _text_(_between, 'mt-5'), 2, 10);
     }
 }

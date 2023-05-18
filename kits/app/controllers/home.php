@@ -13,8 +13,9 @@ class Home extends CI_Controller
 
     function index()
     {
-        $response = [];
+                
         $data = $this->app->session();    
+        $data = $this->app->cssJs($data, "kits");
         $data["kits"] = $this->app->api("kit/list_servicios/format/json");        
         $this->app->pagina($data, render($data),1);
 
