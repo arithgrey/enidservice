@@ -2055,7 +2055,7 @@ function navegacion(
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide y recibe hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
-                span('Garantía por 12 meses', 'strong'),
+                span('12 meses de garantía', 'strong'),
                 icon('fa fa-shield fa-2x', 'strong'),
                 span($link, 'strong')
 
