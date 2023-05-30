@@ -194,7 +194,8 @@ if (!function_exists('invierte_date_time')) {
         if ($es_servicio < 1) :
 
             $nombre_producto = d(h($titulo, 1, ["class" => "strong f2 precio_b"]));
-            $x[] = venta_producto(
+            $extra = is_mobile() ? 'row' : '';
+            $x[] = d(venta_producto(
                 $s,
                 $data,
                 $nombre_producto,
@@ -209,7 +210,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_publicador,
                 $is_mobile,
                 $tiempo_entrega
-            );
+            ),$extra);
 
 
         else :
@@ -430,9 +431,7 @@ if (!function_exists('invierte_date_time')) {
                 get_frm(
                     $data,
                     $id_servicio,
-                    $es_servicio,
-                    $existencia,
-                    $q2,
+                    $es_servicio,                    
                     $tiempo_entrega
                 ) : $response;
         } else {
@@ -485,7 +484,7 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function get_frm($data, $id_servicio, $es_servicio, $existencia, $q2, $tiempo_entrega)
+    function get_frm($data, $id_servicio, $es_servicio, $tiempo_entrega)
     {
         
         $response = [];
