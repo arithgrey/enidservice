@@ -66,8 +66,8 @@ if (!function_exists('invierte_date_time')) {
     {
 
         
-        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase');
-        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer');
+        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase f12');
+        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
 
         
         $contenido[] = d(d(
@@ -76,7 +76,7 @@ if (!function_exists('invierte_date_time')) {
                 span("12 Meses de garantía", " ml-2")
             ),
             [
-                "class" => "black text-uppercase"
+                "class" => "black text-uppercase f12"
             ]
         ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
         /*
@@ -193,7 +193,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo, 1, ["class" => "strong f12"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f2 precio_b"]));
             $x[] = venta_producto(
                 $s,
                 $data,
@@ -493,13 +493,13 @@ if (!function_exists('invierte_date_time')) {
         $tipo = (is_mobile()) ? 2 : 4;
 
         $r[] = ganancia_comisionista($data);
-        $r[] = flex(
+        $r[] = d(flex(
             _titulo("Cantidad", $tipo),
             select_cantidad_compra($es_servicio, 4),
             _text_(_between, 'mb-3'),
             'col-xs-4 p-0',
             'col-xs-8 p-0'
-        );
+        ),'d-none');
 
         $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
         $r[] = $tiempo_entrega;
@@ -868,6 +868,7 @@ if (!function_exists('invierte_date_time')) {
 
     function recompensa($data)
     {
+        
         $recompensa = $data["recompensa"];
         $response[] = "";
         $id_servicio_recompesa = 0;
@@ -945,7 +946,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $ofertas = count($recompensa);
-            if ($ofertas > 1) {
+            if ($ofertas > 1 && $data["in_session"] ) {
 
                 $path = path_enid("recompensas", $id_servicio_recompesa);
                 $link = a_enid(
@@ -1115,20 +1116,20 @@ if (!function_exists('invierte_date_time')) {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "mt-3 f23 black");
+            $texto = d($texto_precio_base, "mt-3 f23 precio_b");
 
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text("Precio regular $", span($precio_alto,'underline')), "black f11 ");
+                $texto_precio_alto = d(_text(span("Precio regular $"), span($precio_alto,'underline')), "black f11 ");
                 $tiempo_restante = span("",
                 [
                     "id"=>"contador_oferta",
-                    "class" => "red_enid "
+                    "class" => "precio_b "
                 ]);
                                 
                 $tiempo_restante_oferta = _text_($tiempo_restante,span('termina la oferta, quedan 3 disponibles','strong'));                
-                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','',' p-1 border_black mt-3');
+                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','',' p-1  mt-4');
             }
 
 
@@ -1302,8 +1303,8 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span("Solicita tu entrega "),
-                        icon('pull-right mr-4 fa fa fa-truck white ml-auto')
+                        span("Solicita tu entrega ",'f14'),
+                        icon('pull-right mr-4 fa fa fa-truck  fa-2x white ml-auto')
                     ),
                     'pt-3 pb-3'
                 ),
