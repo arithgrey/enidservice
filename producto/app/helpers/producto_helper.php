@@ -407,7 +407,7 @@ if (!function_exists('invierte_date_time')) {
 
         $r[] = $tallas;
 
-        $extra = is_mobile() ? '' : 'position-fixed zindex-2 p-2 bg-white row';
+        $extra = is_mobile() ? '' : 'position-fixed zindex-2 bg-white row';
         return d($r, $extra);
     }
 
