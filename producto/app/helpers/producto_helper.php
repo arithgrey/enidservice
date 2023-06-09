@@ -1124,10 +1124,10 @@ if (!function_exists('invierte_date_time')) {
                 $tiempo_restante = span("",
                 [
                     "id"=>"contador_oferta",
-                    "class" => "precio_b "
+                    "class" => "precio_b f12 "
                 ]);
                                 
-                $tiempo_restante_oferta = _text_($tiempo_restante,span('termina la oferta, quedan 3 disponibles','strong'));                
+                $tiempo_restante_oferta = _text_($tiempo_restante,span('termina la oferta, quedan 3 disponibles','strong f12'));                
                 $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','',' p-1  mt-4');
             }
 
