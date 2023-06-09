@@ -738,7 +738,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = $evaluacion;
-        $z[] = $text;
+        $z[] = span($text,'black border_black f12 strong mb-5 d-block');
         $z[] = _titulo('domicilio de entrega', 3, 'underline');
         $z[] = d(text_domicilio($data));
         $id_servicio = pr($productos_orden_compra, "id_servicio");
@@ -761,9 +761,9 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $texto = texto_orden_administrador($data, $es_orden_entregada, $texto);
-        $a[] = d($texto, 'texto_pedido bg_white p-3');
+        $a[] = d($texto, 'texto_pedido p-3 big_compra_seccion');
 
-        return d($a, 'col-sm-4 borde_black mb-5');
+        return d($a, 'col-sm-4 borde_black mb-5 big_compra_seccion');
     }
 
     function nota_compra($saldo_cubierto, $id_recibo)
@@ -3397,7 +3397,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $path_ticket = path_enid('area_cliente_compras', $id_orden_compra);
-        $pago_realizado = text_icon("fa fa-check black", "COMPRASTÉ!");
+        $pago_realizado = text_icon("fa fa-check black ", span("COMPRASTÉ!",'strong black'));
         $comprar = format_link("COMPRA AHORA!", ["href" => $path_ticket]);
         $text = ($saldo_cubierto > 0) ? $pago_realizado : $comprar;
         $text = (!$in_session) ? 'PREPARANDO TU PEDIDO' : $text;
@@ -3420,7 +3420,7 @@ if (!function_exists('invierte_date_time')) {
             span(
                 'ENTREGADO',
 
-                "timeline__item__content__description borde_black p-2 black"
+                "timeline__item__content__description borde_black p-2 black strong"
 
             ),
             "timeline__item__content"
@@ -3432,9 +3432,9 @@ if (!function_exists('invierte_date_time')) {
 
         return d(
             p(
-                'ORDEN REALIZADA    ',
+                'ORDEN REALIZADA',
 
-                "timeline__item__content__description borde_black p-2 black"
+                "timeline__item__content__description borde_black p-2 black strong"
 
             ),
             "timeline__item__content"
