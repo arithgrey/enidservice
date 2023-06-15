@@ -26,6 +26,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:title" content="<?= $desc_web; ?>" />
 <meta property="og:url" content="<?= $enlace; ?>" />
 <meta property="og:site_name" content="Enid Service" />
+<meta name="p:domain_verify" content="287921956bb357b93dabea5956368127"/>
 
 <?php if (isset($url_img_post) && !is_null($url_img_post)) : ?>
 
