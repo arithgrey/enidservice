@@ -287,6 +287,8 @@ class app extends CI_Controller
         $data["mas_vendidos"] = $this->api->api("mas_vendido/publicos",["id_nicho" => $id_nicho]);
         $data["clasificaciones_departamentos"] =  [];
         $data["footer_visible"] = true;
+        $data["id_nicho"] = $id_nicho;
+        
         if ($this->is_logged_in() > 0) {
 
             $session = $this->get_session();
@@ -312,6 +314,7 @@ class app extends CI_Controller
             $data["HTTP_REFERER"] =  prm_def($_SERVER, "HTTP_REFERER", "");
             $data["pixel_facebook"] = 0;
             $data["navegacion_principal"] = 1;
+
         } else {
 
             $data["in_session"] = 0;
