@@ -46,6 +46,10 @@ class Home extends CI_Controller
                 header("location:../search/?q=nails-and-nails&order=2");
                 break;
 
+            case 7:
+
+                header("location:../search/?q=piñatas&order=2");
+                break;
 
             default:
                 break;
