@@ -34,10 +34,10 @@ class Imagen_cliente_empresa extends REST_Controller
 
         $param = $this->get();
         $response = false;
-        if (fx($param, "id_empresa")) {
+        if (fx($param, "id_nicho")) {
 
-            $id_empresa = $param["id_empresa"];
-            $response = $this->imagen_cliente_empresa_model->clientes($id_empresa);
+            $id_nicho = $param["id_nicho"];
+            $response = $this->imagen_cliente_empresa_model->clientes($id_nicho);
         }
         $this->response($response);
     }
@@ -55,7 +55,6 @@ class Imagen_cliente_empresa extends REST_Controller
             $imagenes_clientes = $this->imagen_cliente_empresa_model->clientes_servicio(1, $id_servicio);
 
             $response = formato_referencias($ids_clientes_actuales,  $imagenes_clientes, $id_servicio);
-
         }
         $this->response($response);
     }
@@ -66,21 +65,15 @@ class Imagen_cliente_empresa extends REST_Controller
         $response = false;
         if (fx($param, "id_servicio")) {
 
-            $id_servicio = $param["id_servicio"];            
+            $id_servicio = $param["id_servicio"];
             $response = $this->imagen_cliente_empresa_model->clientes_servicio(1, $id_servicio);
-        
         }
         $this->response($response);
     }
-
-
     private function referencias($param)
     {
 
         $id_servicio = $param["id_servicio"];
         return $this->app->api("referencia/servicio", ["id_servicio" => $id_servicio]);
-
     }
-
-
 }
