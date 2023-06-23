@@ -40,14 +40,14 @@ class Imagen_cliente_empresa_model extends CI_Model
         return $this->db->delete($this->tabla, $params_where);
     }
 
-    function clientes($id_empresa)
+    function clientes($id_nicho)
     {
         $query_get =  "SELECT i.nombre_imagen , ice.* FROM  
 							imagen_cliente_empresa  ice 
 							INNER JOIN imagen i 
 							ON  
 							ice.id_imagen =  i.idimagen
-							WHERE ice.id_empresa =  $id_empresa 
+							WHERE ice.id_nicho =  $id_nicho 
 							ORDER BY ice.fecha_registro DESC";
 
         return  $this->db->query($query_get)->result_array();
