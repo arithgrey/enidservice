@@ -58,9 +58,9 @@ class Intento_conversion extends REST_Controller
 
                 $this->intento_conversion_model->q_up("intentos", $nuevo_intento, $id);
                 
-                $movimientos = [15,90,150];
+                $movimientos = [45,110,200];
                 
-                $intentos_movimientos = (in_array($intentos, $movimientos) && $se_muestra_cupon < 4);
+                $intentos_movimientos = (in_array($intentos, $movimientos) && $se_muestra_cupon < 3);
                 $intentos_movimientos_sin_cupon = ($intentos > 1 && $se_muestra_cupon < 1);
                 if($intentos_movimientos || $intentos_movimientos_sin_cupon){
 
