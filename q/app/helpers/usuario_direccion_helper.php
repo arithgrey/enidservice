@@ -77,7 +77,8 @@ if (!function_exists('invierte_date_time')) {
     {
         
         $id_orden_compra = $param['id_orden_compra'];
-        $form[] = d( flex(icon(_text_('fa-2x',_delivery_icon)),_titulo('Tienes una de dos')) , 'selector_ubicaciones_domicilio  text-center text-md-left');
+        $form[] = d( flex(icon(_text_('fa-2x',_delivery_icon)),_titulo('Información de envío')) , 'selector_ubicaciones_domicilio  text-center text-md-left');
+        $form[] = d( flex(d(_text_('Tienes una de dos',icon(_mas_opciones_bajo_icon)),'f14 strong')) , 'selector_ubicaciones_domicilio  text-center text-md-left mt-3');
         $ubicacion = format_link(flex(icon("fa fa-map-marker white mr-2"),'Ingresar ubicación') , ['class' => 'ingreso_ubicacion']);
         $domicilio = format_link(flex(icon('fa fa-home'),'Registrar domicilio') , ['class' => 'ingreso_texto_completo'], 0);
 

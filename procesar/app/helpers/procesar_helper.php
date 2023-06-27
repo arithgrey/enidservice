@@ -88,7 +88,7 @@ if (!function_exists('invierte_date_time')) {
 
             $producto_carro_compra = $param["producto_carro_compra"];
             $recompensas = $param["recompensas"];
-            $titulo = ($es_cliente) ? "INFORMACIÓN DE ENTREGA" : 'Datos del cliente';
+            $titulo = "INFORMACIÓN DE CONTACTO";
             $r[] = d(flex(_titulo($titulo)), 'mb-5');
 
             if (!$in_session) {
