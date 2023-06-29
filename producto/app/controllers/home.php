@@ -64,6 +64,7 @@ class Home extends CI_Controller
     private function vista($param, $data)
     {
     
+        
         $data["q2"] = prm_def($param, "q2");
         $servicio = $this->app->servicio($this->id_servicio);
 
@@ -85,8 +86,10 @@ class Home extends CI_Controller
             $data["ciclos"] = "";            
             if (pr($servicio, "flag_servicio") == 0) {
     
+                $nicho = $this->app->api("nicho/id",["id" => $data["id_nicho"]]);
+                
                 $data["costo_envio"] = 0;                
-                $data["tiempo_entrega"] = valida_tiempo_entrega($servicio);
+                $data["tiempo_entrega"] = valida_tiempo_entrega($servicio, $nicho);
             }
     
             

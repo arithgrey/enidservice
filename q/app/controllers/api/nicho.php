@@ -12,11 +12,17 @@ class nicho extends REST_Controller
 
     function index_GET()
     {
-        $param = $this->get();
-        $response = false;
 
         $response = $this->nicho_model->get([], [], 100);
+        $this->response($response);
+    }
+    function id_GET()
+    {
+        $param = $this->get();
+        
+        $response = $this->nicho_model->q_get($param["id"]);
 
         $this->response($response);
     }
+
 }

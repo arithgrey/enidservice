@@ -62,15 +62,17 @@ if (!function_exists('invierte_date_time')) {
         return gb_modal($response, 'modal_accion_tiempo_alcaldia_pago');
     }
 
-    function valida_tiempo_entrega($servicio)
+    function valida_tiempo_entrega($servicio, $nicho)
     {
 
-        
+
         $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase f12');
         $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
 
-        
-        if(intval(pr($servicio,"garantizado"))){
+
+        $nicho_garantizado = intval(pr($nicho, "garantizado"));
+        $servicio_garantizado = intval(pr($servicio, "garantizado"));
+        if ($nicho_garantizado && $servicio_garantizado) {
             $contenido[] = d(d(
                 _text_(
                     icon('fa black fa fa-shield'),
@@ -80,10 +82,9 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "black text-uppercase f12"
                 ]
             ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
-           
         }
-        
-        return d($contenido,'bg_gray p-3 mt-3');
+
+        return d($contenido, 'bg_gray p-3 mt-3');
     }
 
 
@@ -203,7 +204,7 @@ if (!function_exists('invierte_date_time')) {
                 $id_publicador,
                 $is_mobile,
                 $tiempo_entrega
-            ),$extra);
+            ), $extra);
 
 
         else :
@@ -240,9 +241,9 @@ if (!function_exists('invierte_date_time')) {
         );
         $recompensa = recompensa($data);
 
-        
-        
-        
+
+
+
         if (is_mobile()) {
             $nombre = pr($s, "nombre_servicio");
             $nombre = substr($nombre, 0, 300);
@@ -253,10 +254,9 @@ if (!function_exists('invierte_date_time')) {
         $numero_compras = pr($s, "deseado");
         if ($numero_compras > 1) {
 
-            $extra = is_mobile() ? "col-sm-12 mt-5" :"col-sm-12";
+            $extra = is_mobile() ? "col-sm-12 mt-5" : "col-sm-12";
             $texto = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)));
-            $data_response[] = d(flex($texto, "Calificaciones",'flex-column mb-1 black','','strong'),$extra); 
-
+            $data_response[] = d(flex($texto, "Calificaciones", 'flex-column mb-1 black', '', 'strong'), $extra);
         }
 
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
@@ -424,7 +424,7 @@ if (!function_exists('invierte_date_time')) {
                 get_frm(
                     $data,
                     $id_servicio,
-                    $es_servicio,                    
+                    $es_servicio,
                     $tiempo_entrega
                 ) : $response;
         } else {
@@ -479,7 +479,7 @@ if (!function_exists('invierte_date_time')) {
 
     function get_frm($data, $id_servicio, $es_servicio, $tiempo_entrega)
     {
-        
+
         $response = [];
         $en_session = $data["in_session"];
         $tipo = (is_mobile()) ? 2 : 4;
@@ -491,7 +491,7 @@ if (!function_exists('invierte_date_time')) {
             _text_(_between, 'mb-3'),
             'col-xs-4 p-0',
             'col-xs-8 p-0'
-        ),'d-none');
+        ), 'd-none');
 
         $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
         $r[] = $tiempo_entrega;
@@ -832,7 +832,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 );
             }
-            $response[] = d(_d($enlace_promocional,$enlace_ultima_oportunidad,$respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
+            $response[] = d(_d($enlace_promocional, $enlace_ultima_oportunidad, $respuestas, $metricas, $simulador, $promesa_ventas, $seccion_sorteo), $flex);
         }
         return append($response);
     }
@@ -860,7 +860,7 @@ if (!function_exists('invierte_date_time')) {
 
     function recompensa($data)
     {
-        
+
         $recompensa = $data["recompensa"];
         $response[] = "";
         $id_servicio_recompesa = 0;
@@ -938,7 +938,7 @@ if (!function_exists('invierte_date_time')) {
             }
 
             $ofertas = count($recompensa);
-            if ($ofertas > 1 && $data["in_session"] ) {
+            if ($ofertas > 1 && $data["in_session"]) {
 
                 $path = path_enid("recompensas", $id_servicio_recompesa);
                 $link = a_enid(
@@ -1090,8 +1090,8 @@ if (!function_exists('invierte_date_time')) {
 
         $servicio = $data["info_servicio"]["servicio"];
         $descuento_especial = pr($servicio, "descuento_especial");
-        $precio_alto = pr($servicio, "precio_alto");    
-        $precio_alto = ($precio_alto > $precio_unidad ) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad,16));
+        $precio_alto = pr($servicio, "precio_alto");
+        $precio_alto = ($precio_alto > $precio_unidad) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad, 16));
 
         $usuario = $data["usuario"];
         $es_premium = es_premium($data, $usuario);
@@ -1113,15 +1113,17 @@ if (!function_exists('invierte_date_time')) {
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text(span("Precio regular $"), span($precio_alto,'underline')), "black f11 ");
-                $tiempo_restante = span("",
-                [
-                    "id"=>"contador_oferta",
-                    "class" => "precio_b f12 "
-                ]);
-                                
-                $tiempo_restante_oferta = _text_($tiempo_restante,span('termina la oferta, quedan 3 disponibles','strong f12'));                
-                $texto_precio_alto = flex($texto_precio_alto,$tiempo_restante_oferta,'flex-column mb-5','',' p-1  mt-4');
+                $texto_precio_alto = d(_text(span("Precio regular $"), span($precio_alto, 'underline')), "black f11 ");
+                $tiempo_restante = span(
+                    "",
+                    [
+                        "id" => "contador_oferta",
+                        "class" => "precio_b f12 "
+                    ]
+                );
+
+                $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta, quedan 3 disponibles', 'strong f12'));
+                $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 'flex-column mb-5', '', ' p-1  mt-4');
             }
 
 
@@ -1295,7 +1297,7 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span("Solicita tu entrega ",'f14'),
+                        span("Solicita tu entrega ", 'f14'),
                         icon('pull-right mr-4 fa fa fa-truck  fa-2x white ml-auto')
                     ),
                     'pt-3 pb-3'
@@ -1317,7 +1319,7 @@ if (!function_exists('invierte_date_time')) {
         );
 
         $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'mt-3'), 'p-0 col-xs-10', 'p-0 col-xs-2');
-        $seccion[] = d(cargando(),'col-xs-12');
+        $seccion[] = d(cargando(), 'col-xs-12');
         return append($seccion);
     }
     function confianza($id_servicio, $data)
