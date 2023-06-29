@@ -2048,6 +2048,9 @@ function navegacion(
                 "class" => "black"
             ],0
         );
+        
+        $str = span('12 meses de garantía', 'strong');
+
         $response[] = d(d(
             _text_(
                 $categorias,
@@ -2055,7 +2058,7 @@ function navegacion(
                 icon('fa fa-gift fa-2x', 'strong'),
                 span('Pide y recibe hoy', 'strong'),
                 icon('fa fa-clock-o fa-2x', 'strong'),
-                span('12 meses de garantía', 'strong'),
+                $str,
                 icon('fa fa-shield fa-2x', 'strong'),
                 span($link, 'strong')
 

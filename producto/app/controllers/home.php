@@ -86,7 +86,7 @@ class Home extends CI_Controller
             if (pr($servicio, "flag_servicio") == 0) {
     
                 $data["costo_envio"] = 0;                
-                $data["tiempo_entrega"] = valida_tiempo_entrega();
+                $data["tiempo_entrega"] = valida_tiempo_entrega($servicio);
             }
     
             

@@ -62,7 +62,7 @@ if (!function_exists('invierte_date_time')) {
         return gb_modal($response, 'modal_accion_tiempo_alcaldia_pago');
     }
 
-    function valida_tiempo_entrega()
+    function valida_tiempo_entrega($servicio)
     {
 
         
@@ -70,26 +70,19 @@ if (!function_exists('invierte_date_time')) {
         $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
 
         
-        $contenido[] = d(d(
-            _text_(
-                icon('fa black fa fa-shield'),
-                span("12 Meses de garantía", " ml-2")
-            ),
-            [
-                "class" => "black text-uppercase f12"
-            ]
-        ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
-        /*
-        $contenido[] = d(d(
-            _text_(icon("fa fa-check"), span("Formas de pago", ' ml-2')),
-            [
-                "class" => " black text-uppercase",
-            ]
-        ), 'mt-3 black accion_forma_pago cursor_pointer');
-        */
-
-
-
+        if(intval(pr($servicio,"garantizado"))){
+            $contenido[] = d(d(
+                _text_(
+                    icon('fa black fa fa-shield'),
+                    span("12 Meses de garantía", " ml-2")
+                ),
+                [
+                    "class" => "black text-uppercase f12"
+                ]
+            ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
+           
+        }
+        
         return d($contenido,'bg_gray p-3 mt-3');
     }
 
