@@ -2049,18 +2049,20 @@ function navegacion(
             ],0
         );
         
-        $str = span('12 meses de garantía', 'black f13');
+        $extra = is_mobile() ? "f11":"f13";
+        $str = span('12 meses de garantía', _text_('black',$extra));
 
+        
         $response[] = d(d(
             _text_(
                 $categorias,
-                span('Envíos, cambios y devoluciones gratis', 'black f13'),
-                icon('fa fa-gift fa-2x', 'black f13'),
-                span('Pide y recibe hoy', 'black f13'),
-                icon('fa fa-clock-o fa-2x', 'black f13'),
+                span('Envíos, cambios y devoluciones gratis', _text_('black',$extra)),
+                icon('fa fa-gift fa-2x', _text_('black',$extra)),
+                span('Pide y recibe hoy', _text_('black',$extra)),
+                icon('fa fa-clock-o fa-2x', _text_('black',$extra)),
                 $str,
-                icon('fa fa-shield fa-2x', 'black f13'),
-                span($link, 'black f13')
+                icon('fa fa-shield fa-2x', _text_('black',$extra)),
+                span($link, _text_('black',$extra))
 
             ),
             [
