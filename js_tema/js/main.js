@@ -419,7 +419,7 @@ let response_deseo_compra = function (data) {
     if (parseInt(data) > 0) {
 
         render_enid('.place_resumen_deseo_compra', _text_(data, "Productos"));
-        $('.icono_compras_pendientes').addClass('borde_amarillo');
+        $('.icono_compras_pendientes').addClass('borde_amarillo_b');
         $('.icono_compras_pendientes').attr('href', '../lista_deseos');
 
         $('.place_resumen_deseo_compra').addClass('mr-2 ');

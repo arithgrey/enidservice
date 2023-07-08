@@ -1017,7 +1017,7 @@ if (!function_exists('invierte_date_time')) {
         $agregar_a_carrito =  d(
             "Agregar al carrito",
             [
-                "class" => "borde_green cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase font-weight-bold white text-center",
+                "class" => "borde_green cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase  white text-center",
                 "id" => $id_recompensa,
                 "antecedente_compra" => $antecedentes,
                 "onclick" => "log_operaciones_externas(26, $id_servicio)"
