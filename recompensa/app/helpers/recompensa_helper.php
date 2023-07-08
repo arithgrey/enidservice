@@ -114,7 +114,7 @@ if (!function_exists('invierte_date_time')) {
 
                 "class" => "borde_green cursor_pointer p-1 
                 bottom_carro_compra_recompensa borde_accion text-uppercase 
-                font-weight-bold white text-center",
+                 white text-center",
                 "id" => $id_recompensa, 
                 "antecedente_compra" => $antecedentes
             ]

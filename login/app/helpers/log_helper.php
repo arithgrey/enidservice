@@ -40,7 +40,7 @@ if (!function_exists('invierte_date_time')) {
             $r[] = d("Te registrasté, ingresa ahora!", $clases);
         }
         $r[] = place("place_acceso_sistema mt-5 mb-5");
-        $x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'black registrar_cuenta strong mt-1']);
+        //$x[] = a_enid("¿ERES NUEVO?   REGISTRATE!", ["class" => 'black registrar_cuenta strong mt-1']);
         $x[] = a_enid(
             "¿Olvidasté tu contraseña?",
             [

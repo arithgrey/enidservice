@@ -1874,7 +1874,7 @@ function opciones_populares()
     $response[] = a_enid(
         _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
         [
-            "class" => "white strong ml-sm-5 borde_amarillo p-1",
+            "class" => "white strong ml-sm-5 borde_amarillo_b p-1",
             "href" => path_enid("forma_pago")
         ]
     );
@@ -1882,7 +1882,7 @@ function opciones_populares()
     $response[] = a_enid(
         _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
         [
-            "class" => "white ml-sm-5 strong mt-2",
+            "class" => "white ml-sm-5 strong mt-2 f11",
             "href" => path_enid("rastrea-paquete")
         ]
     );
@@ -1892,7 +1892,7 @@ function opciones_populares()
     $response[] = a_enid(
         _text("Referencias"),
         [
-            "class" => "white mt-2  ml-sm-5 strong d-none d-lg-block",
+            "class" => "f11 white mt-2  ml-sm-5 strong d-none d-lg-block",
             "href" => path_enid("clientes")
         ],
         0
@@ -1902,7 +1902,7 @@ function opciones_populares()
     $response[] = a_enid(
         "Cambios y Devoluciones",
         [
-            "class" => "white mt-2 ml-sm-5 strong d-none d-lg-block",
+            "class" => "f11 white mt-2 ml-sm-5 strong d-none d-lg-block",
             "href" => path_enid("cambios-y-devoluciones")
         ],
         0
@@ -2049,22 +2049,23 @@ function navegacion(
             ],0
         );
         
-        $str = span('12 meses de garantía', 'strong');
+        $str = span('12 meses de garantía', 'black f13');
 
         $response[] = d(d(
             _text_(
                 $categorias,
-                span('Envíos, cambios y devoluciones gratis', 'strong'),
-                icon('fa fa-gift fa-2x', 'strong'),
-                span('Pide y recibe hoy', 'strong'),
-                icon('fa fa-clock-o fa-2x', 'strong'),
+                span('Envíos, cambios y devoluciones gratis', 'black f13'),
+                icon('fa fa-gift fa-2x', 'black f13'),
+                span('Pide y recibe hoy', 'black f13'),
+                icon('fa fa-clock-o fa-2x', 'black f13'),
                 $str,
-                icon('fa fa-shield fa-2x', 'strong'),
-                span($link, 'strong')
+                icon('fa fa-shield fa-2x', 'black f13'),
+                span($link, 'black f13')
 
             ),
             [
-                "class" => 'black bg_yellow borde_white pr-4 pl-4'
+                "class" => 'black bg_yellow_s
+                  pr-4 pl-4'
             ]
         ), 'text-md-right col-sx-12 col-sx-12 ');
         $response[] = d([get_logo(), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
@@ -2123,7 +2124,7 @@ function navegacion(
             $response[] = d(d(
                 _text_(
                     $categorias,
-                    span('Pago contra entrega', 'strong text-uppercase accion_forma_pago cursor_pointer'),
+                    span('Pago contra entrega', 'f11 strong text-uppercase accion_forma_pago cursor_pointer'),
                     icon('fa fa-handshake-o fa-2x', 'strong')
                 ),
                 [

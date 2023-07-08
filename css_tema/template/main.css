@@ -46,26 +46,26 @@
 }
 
 .border_black {
-    border-bottom: solid 3px !important;
+    border-bottom: solid 1px !important;
     border-bottom-color: black !important;
 
 }
 
 .border_red_b {
-    border-bottom: solid 3px !important;
+    border-bottom: solid 1px !important;
     border-bottom-color: #F00 !important;
 
 
 }
 
 .border_blue {
-    border-bottom: solid 3px !important;
+    border-bottom: solid 1px !important;
     border-bottom-color: #0c3789 !important;
 
 }
 
 .bottom_carro_compra_recompensa {
-    background: #031120 !important;
+    background: #000f36 !important;
 }
 
 .filtro_orden_categorias {
@@ -658,7 +658,7 @@ li {
 
 .input_enid_format input {
     border: none !important;
-    border-bottom: solid 3px black !important;
+    border-bottom: solid 1px black !important;
     height: 40px !important;
 }
 
@@ -795,7 +795,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background: #000000 !important;
+    background: #000f36 !important;
     /*min-height: 90px;*/
 }
 
@@ -1469,7 +1469,7 @@ select {
 }
 
 .bg_black {
-    background: #000 !important;
+    background:  #000f36!important;
 }
 
 .bg_gray {
@@ -1762,11 +1762,11 @@ h5 {
 }
 
 .solid_bottom_2 {
-    border-bottom: solid 2px black !important;
+    border-bottom: solid 1px black !important;
 }
 
 .solid_bottom_hover_3:hover {
-    border-bottom: solid 3px black !important;
+    border-bottom: solid 1px black !important;
 }
 
 .text_agilizar:hover {
@@ -1805,11 +1805,11 @@ a {
 }
 
 .solid_bottom_3 {
-    border-bottom: solid 3px #000 !important;
+    border-bottom: solid 1px #000 !important;
 }
 
 .solid_bottom_error_3 {
-    border-bottom: solid 3px red !important;
+    border-bottom: solid 1px red !important;
 }
 
 .w_15 {
@@ -1946,7 +1946,7 @@ input:focus:invalid {
 }
 
 .border_bottom_big {
-    border-bottom: solid 2px !important;
+    border-bottom: solid 1px !important;
 }
 
 .sombra_boton {
@@ -2032,58 +2032,66 @@ ul li a {
 }
 
 .borde_end_b {
-    border-bottom: solid 2px #0836a4;
+    border-bottom: solid 1px #0836a4;
     cursor: pointer;
 }
 
 .borde_end {
-    border: solid 3px #0836a4 !important;
+    border: solid 1px #0836a4 !important;
     padding: 1px 10px 0px 10px !important;
     cursor: pointer !important;
 }
 
 .borde_black {
-    border: solid 3px black !important;
+    border: solid 1px black !important;
 }
 
 .borde_white {
-    border: solid 2px white !important;
+    border: solid 1px white !important;
 }
 
 .borde_red {
-    border: solid 2px red !important;
+    border: solid 1px red !important;
 }
 
 .borde_green {
 
-    border: solid 3px #69ffc0 !important;
+    border: solid 1px #69ffc0 !important;
 }
 
 .borde_grey {
 
-    border: solid 3px #ebecec !important;
+    border: solid 1px #ebecec !important;
 
 }
 
 .border_b_green {
 
-    border-bottom: solid 2px #46e1b6 !important;
+    border-bottom: solid 1px #46e1b6 !important;
 }
+.bg_yellow_s{
+    background: #44c2ff!important;
+}
+.borde_amarillo_b {
 
+    border-bottom: solid 1px #deff05 !important;
+    padding: 1px 10px 0px 10px;
+    cursor: pointer;
+}
 .borde_amarillo {
-    border: solid 2px #deff05;
+    border: solid 1px #deff05;
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
 
 .borde_rojo {
-    border: solid 2px #f5089a;
+    border: solid 1px #f5089a;
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
 
 .borde_rojo_b {
-    border: solid 2px #f5089a;
+    border: solid 1px #f5089a;
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
@@ -2102,7 +2110,7 @@ ul li a {
 }
 
 .solid_3 {
-    border: solid 3px black !important;
+    border: solid 1px black !important;
 }
 
 .format_invitacion {
@@ -2115,13 +2123,13 @@ ul li a {
 .format_google {
     background: #030a57;
     color: white;
-    border: solid 3px #ff0075 !important;
+    border: solid 1px #ff0075 !important;
 }
 
 .format_google:hover {
     background: #030a57;
     color: white;
-    border: solid 3px #ff0075 !important;
+    border: solid 1px #ff0075 !important;
 }
 
 .border-left-ct {
