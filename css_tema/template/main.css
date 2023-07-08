@@ -1,3 +1,8 @@
+.texto_accion{
+    font-size: 3em;
+    font-weight: bold;
+    color: #0869d2;
+}
 .big_compra_seccion{
     background: #ffffff;
 }

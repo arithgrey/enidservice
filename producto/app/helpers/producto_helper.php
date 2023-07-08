@@ -265,10 +265,17 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
         $data_response[] = d($recompensa, 12);
         $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
+        
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-        //$data_response[] = d(botones_ver_mas($id_servicio), 'col-sm-12 mt-5');
-        $data_response[] = d(hr(), 'col-sm-12 mt-5');
+        
+        $data_response[] = d(p("RECIBES EL MISMO DÍA","texto_accion"),'');
+        $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
+
+        $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ",'texto_accion'),'text-right mt-3');
+        
+        $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"),'text-right');
+        
 
         $pagina_producto[] =  d($data_response, 8);
 
