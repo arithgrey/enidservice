@@ -17,6 +17,7 @@ if (!function_exists('invierte_date_time')) {
         $lista_productos[] = d($data["lista_productos"], 13);
         $lista_productos[] = d($paginacion, 13);
         $response[] = d(d($lista_productos, 10, 1), 13);
+        
 
         if (prm_def($data, "es_sorteo") > 1) {
 
@@ -41,11 +42,13 @@ if (!function_exists('invierte_date_time')) {
         $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
 
+        
+        
+        $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0");
+
         $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);
         $adicionales[] = $seccion_compras_conjunto;
-
-
 
         $response[] = d(d(d($adicionales, 13), 10, 1), "row mt-5 ssss");
         $response[] = d(d(d("", "place_recien_agregados"), " col-sm-10 col-sm-offset-1 p-0"), 13);
