@@ -381,9 +381,9 @@ if (!function_exists('invierte_date_time')) {
         
         if (es_data($recompensa)) {
         
-            $str = ($popular) ? "Lo que más compran nuestros clientes": "Compra en conjunto y logra descuentos";
+            $str = ($popular) ? "KITS DEPORTIVOS A DOMICILIO, PAGAS A TU ENTREGA": "Compra en conjunto y logra descuentos";
             $extra = ($popular) ? "":"text-right";
-            $response[] = d($str, _text_("col-xs-12 strong mb-5 p-0", $extra));
+            $response[] = d($str, _text_("col-xs-12 strong mb-5 p-0 f3 text-uppercase", $extra));
 
             foreach ($recompensa as $row) {
 
