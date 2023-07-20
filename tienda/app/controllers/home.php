@@ -51,6 +51,11 @@ class Home extends CI_Controller
                 header("location:../search/?q=piñatas&order=2");
                 break;
 
+            case 8:
+
+                header("location:../search/?q=decoraciones-tematicas-globolandia&order=2");
+                break;
+
             default:
                 break;
         }
