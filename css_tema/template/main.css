@@ -803,6 +803,9 @@ div.pagination li.active span:hover {
     background: #000f36 !important;
     /*min-height: 90px;*/
 }
+#flipkart-navbar-decoracion, .bg_decoraciones{
+    background: #d500a1 !important;
+}
 
 .row1 {
     padding-top: 10px;
@@ -2152,4 +2155,7 @@ ul li a {
 .red_lista_negra {
     background: #ff2121;
 
+}
+.background_decoraciones_tematicas{
+    background: #0e1e3f;
 }

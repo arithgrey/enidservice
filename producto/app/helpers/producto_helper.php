@@ -65,26 +65,41 @@ if (!function_exists('invierte_date_time')) {
     function valida_tiempo_entrega($servicio, $nicho)
     {
 
+        
+        if(intval(pr($nicho,"id")) !== 8){
+            
+            $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase f12');
+            $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
+    
+    
+            $nicho_garantizado = intval(pr($nicho, "garantizado"));
+            $servicio_garantizado = intval(pr($servicio, "garantizado"));
+            if ($nicho_garantizado && $servicio_garantizado) {
+                $contenido[] = d(d(
+                    _text_(
+                        icon('fa black fa fa-shield'),
+                        span("12 Meses de garantía", " ml-2")
+                    ),
+                    [
+                        "class" => "black text-uppercase f12"
+                    ]
+                ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
+            }
+    
+            return d($contenido, 'bg_gray p-3 mt-3');
+        }else{
 
-        $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase f12');
-        $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
+            
+            $contenido[] = d(_text_(icon("fa fa-check"), 
+            span("Ten en cuenta que la disponibilidad de nuestros servicios estará sujeta a la demanda. 
+            Al anticipar con un depósito, tendrás la certeza de que llegaremos a la locación en tiempo y forma para asegurar que todo esté listo!", 
+            'ml-2 accion_forma_pago')), 'black mt-4 cursor_pointer f13');
+    
 
+            return d($contenido, 'p-3 mt-3');
 
-        $nicho_garantizado = intval(pr($nicho, "garantizado"));
-        $servicio_garantizado = intval(pr($servicio, "garantizado"));
-        if ($nicho_garantizado && $servicio_garantizado) {
-            $contenido[] = d(d(
-                _text_(
-                    icon('fa black fa fa-shield'),
-                    span("12 Meses de garantía", " ml-2")
-                ),
-                [
-                    "class" => "black text-uppercase f12"
-                ]
-            ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
         }
-
-        return d($contenido, 'bg_gray p-3 mt-3');
+        
     }
 
 
@@ -269,12 +284,15 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
         
-        $data_response[] = d(p("RECIBES EL MISMO DÍA","texto_accion"),'');
-        $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
-
-        $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ",'texto_accion'),'text-right mt-3');
-        
-        $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"),'text-right');
+        if(!es_decoracion_tematica($data)){
+            $data_response[] = d(p("RECIBES EL MISMO DÍA","texto_accion"),'');
+            $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
+    
+            $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ",'texto_accion'),'text-right mt-3');
+            
+            $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"),'text-right');
+            
+        }
         
 
         $pagina_producto[] =  d($data_response, 8);
@@ -1284,10 +1302,12 @@ if (!function_exists('invierte_date_time')) {
     {
 
 
+        $id_nicho = $data["id_nicho"];
+        $call_to_action = ($id_nicho != 8) ? "Solicita tu entrega" : "Anticipa tu fecha aquí";
         if ($in_session > 0) {
 
             $response[] = d(format_link(
-                d("Solicita tu entrega", 'pt-3 pb-3'),
+                d($call_to_action, 'pt-3 pb-3'),
                 [
                     "id" => 'agregar_a_lista_deseos_add',
                     "class" => "agregar_a_lista_deseos l_deseos white text-center",
@@ -1304,7 +1324,7 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span("Solicita tu entrega ", 'f14'),
+                        span($call_to_action, 'f14'),
                         icon('pull-right mr-4 fa fa fa-truck  fa-2x white ml-auto')
                     ),
                     'pt-3 pb-3'

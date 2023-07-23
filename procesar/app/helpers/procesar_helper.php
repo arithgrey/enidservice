@@ -408,7 +408,7 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion_compra[] = d(avance_compra(), "mb-5 mt-lg-5 col-xs-12");
         $seccion_compra[] = d($response, 8);
-        $seccion_compra[] = d(llegada(), 4);
+        $seccion_compra[] = d(llegada($data), 4);
         return d($seccion_compra, 13);
     }
     function avance_compra()
@@ -454,14 +454,18 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("", "border-bottom border-secondary mb-5 row ");
         return d($response, 12);
     }
-    function llegada()
+    function llegada($data)
     {
 
-        $response[] = _titulo(_text_("LLEGADA?", span("?", 'border p-2 bg-light')), 2);
-        $contenidos[] = d("Tardaremos 1 hora con 30 si agendas tu pedido ya!", "black");
-        $contenidos[] = d("Envío gratis", "strong mt-2");
-        $response[] = d($contenidos, "borde_black p-3 mt-5");
+        if(!es_decoracion_tematica($data)){
 
+            $response[] = _titulo(_text_("LLEGADA?", span("?", 'border p-2 bg-light')), 2);
+            $contenidos[] = d("Tardaremos 2 hora con 30 si agendas tu pedido ya!", "black");
+            $contenidos[] = d("Envío gratis", "strong mt-2");
+            $response[] = d($contenidos, "borde_black p-3 mt-5");
+            
+        }
+        
         $response[] = d(_titulo(_text_("OPCIONES DE PAGO", span("?", 'border p-2 bg-light')), 2), "mt-5");
 
         $formas_pago[] = d("Al recibir tu pedido podrás pagar con:", 'strong black');
