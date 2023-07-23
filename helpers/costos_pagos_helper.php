@@ -61,7 +61,8 @@
 
         $path_servicio =  ($es_sorteo < 1 ) ? get_url_servicio($id_servicio): path_enid("sorteo",$id_servicio) ;
 
-        $texto_precio_real = format_link(money($precio), ["href" => $path_servicio]);
+        $formato_nicho = (es_decoracion_tematica($servicio)) ? 6: 1;
+        $texto_precio_real = format_link(money($precio), ["href" => $path_servicio],$formato_nicho);
 
         $texto_descuento = "";
         if($precio_alto > $precio){

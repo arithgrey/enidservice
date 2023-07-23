@@ -1314,7 +1314,7 @@ if (!function_exists('invierte_date_time')) {
                     "class" => "agregar_a_lista_deseos l_deseos white text-center",
                     "onclick" => "log_operaciones_externas(27, $id_servicio)"
                 ],
-                2
+                $format
             ), 'se_agregara');
 
 
