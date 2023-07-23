@@ -16,9 +16,9 @@ class Format
     function url_imagen_servicios(array $servicios, $key = "id_servicio", $index = 'url_img_servicio')
     {
 
-        
-        $imagenes = $this->imagenes_por_servicios($servicios, $key );
-        
+
+        $imagenes = $this->imagenes_por_servicios($servicios, $key);
+
         $lista_servicios = [];
 
         foreach ($servicios as $servicio) {
@@ -26,14 +26,13 @@ class Format
             $id_servicio = $servicio[$key];
 
             $path = search_bi_array($imagenes, "id_servicio", $id_servicio, "nombre_imagen");
-            $servicio[$index] = get_url_servicio($path, 1); 
-            $lista_servicios[] = $servicio;           
-
+            $servicio[$index] = get_url_servicio($path, 1);
+            $lista_servicios[] = $servicio;
         }
         return $lista_servicios;
-    }    
+    }
 
-    function formato_servicio(array $servicios, $id_nicho = 0 , $id_servicio_actual = 0 )
+    function formato_servicio(array $servicios, $id_nicho = 0, $id_servicio_actual = 0)
     {
 
         $imagenes = $this->imagenes_por_servicios($servicios);
@@ -42,20 +41,21 @@ class Format
 
         foreach ($servicios as $servicio) {
             $id_servicio = $servicio["id_servicio"];
-            if($id_nicho === $servicio["id_nicho"] && $id_servicio_actual != $id_servicio ){
-                
+            if (
+                $id_nicho === $servicio["id_nicho"]
+                && $id_servicio_actual != $id_servicio
+                || $id_nicho == 0
+            ) {
+
                 $path = search_bi_array($imagenes, "id_servicio", $id_servicio, "nombre_imagen");
                 $servicio["url_img_servicio"] = get_url_servicio($path, 1);
                 $servicio["in_session"] = 0;
                 $servicio["id_usuario_actual"] = 0;
                 $lista_servicios[] = create_vista($servicio);
-
-    
             }
-
         }
         return $lista_servicios;
-    }    
+    }
 
     function imagenes_por_servicios($servicios, $key = 'id_servicio')
     {
