@@ -2447,7 +2447,13 @@ function get_logo($id_nicho, $session = 0)
 
 
     $path = path_enid("search_q3");
-    $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
+    
+    if(es_decoracion_tematica($id_nicho)){
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
+    }else{
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
+    }
+    
 
 
     $icono_busqueda = icon(_text_(_busqueda_icon, "white fa-2x mr-2"), ["onclick" => "openNav()"]);
