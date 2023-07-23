@@ -54,6 +54,7 @@ function accesos_enid()
         "fotos_clientes_instagram" => "https://www.instagram.com/enid_service/",
         "whatsapp" => "https://wa.me/c/5215552967027",
         "whatsapp_ayuda" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20Me%20puedes%20ayudar,%20vi%20esto%20desde%20su%20p%C3%A1gina%20web",
+        "whatsapp_ayuda_decoraciones" =>"https://api.whatsapp.com/send?phone=+5215576127281&text=Hola!%20Me%20puedes%20ayudar,%20vi%20esta%20decoración",
         "whatsapp_descuento" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20mi%20código%20de%20descuento%20es%20el%20XD341!6swA%20envío%20whatsApp%20para%20quedar%20en%20la%20lista!",
         "whatsapp_catalogo" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20el%20catálogo%20quiero%20ser%20afiliado",
         "whatsapp_catalogo_pagina_web" =>"https://api.whatsapp.com/send?phone=+5215552967027&text=Hola!%20envío%20whatsApp%20para%20solicitar%20información%20sobre%20las%20páginas%20web!",        

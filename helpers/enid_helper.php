@@ -1820,3 +1820,17 @@ function _current_url()
     $currentURL .= '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     return $currentURL;
 }
+
+function es_decoracion_tematica($data)
+{
+
+    if(is_array($data)){
+        
+        $id_nicho = prm_def($data,"id_nicho");   
+        return (intval($id_nicho) === 8 );
+
+    }else{
+        return (intval($data) === 8 );
+    }
+    
+}

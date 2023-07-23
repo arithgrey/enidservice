@@ -43,8 +43,16 @@ if (!function_exists('invierte_date_time')) {
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
 
         
+        if(es_decoracion_tematica($data)){
+
+            $adicionales[] = d(img("https://enidservices.com/imgs/decoraciones_globos_globolandia.png"), "col-md-12 text-center col-xs-12 p-0");
+
+        }else{
+
+            $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0");
+        }
         
-        $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0");
+        
 
         $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);
@@ -163,8 +171,7 @@ if (!function_exists('invierte_date_time')) {
 
         );
 
-        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
-        //$response[] = d(botones_ver_mas(), 'mt-5 col-sm-12 d-none otros');
+        $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');        
         $response[] = d(hr(), 'mt-5 col-sm-12 d-none otros');
 
         return d(d($response, 13), 10, 1);

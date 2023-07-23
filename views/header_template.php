@@ -31,14 +31,15 @@
       $clasificaciones_departamentos,
       $proceso_compra,
       $menu,
-      $mas_vendidos
+      $mas_vendidos,
+      $id_nicho
     ) ?>
   <?php endif; ?>
 
 
   <div class="container-fluid" id="page-content">
     <?= menu_session_mobil($mas_vendidos) ?>
-    <?= opciones_acceso($in_session) ?>
+    <?= opciones_acceso($id_nicho) ?>
     <?= modal_intento_conversion() ?>
     <?= modal_desglose_carro_compra() ?>
     <?= modal_prueba_en_casa() ?>

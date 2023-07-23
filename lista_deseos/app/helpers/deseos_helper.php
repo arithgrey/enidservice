@@ -451,7 +451,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($boton_agendar_pedido, _text_('seccion_enviar_orden bg-white', $extra_envio));
         $response[] = d(cargando(),12);
 
-        if (!is_mobile()) {
+        if (!is_mobile() && !es_decoracion_tematica($data)) {
 
             $contenido[] = d(_text_(icon('fa fa-truck'), "Envío gratis"), 'mt-5 display-7 black strong text-uppercase');
             $contenido[] = d(_text_(icon(_delivery_icon), "Recibe hoy!"), 'black  display-7 mt-2 black');

@@ -3,7 +3,7 @@
 
 use BaconQrCode\Renderer\Path\Path;
 
- if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
+if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
     <?php foreach ($css as $c) : $link = "../css_tema/template/" . $c; ?>
         <?php if (file_exists($link)) : ?>
             <link rel="stylesheet" type="text/css" href="<?= $link; ?>?<?= version_enid ?>">
@@ -88,25 +88,27 @@ use BaconQrCode\Renderer\Path\Path;
 <?= hiddens(['class' => 'en_lista_deseos_producto', 'value' => 0]) ?>
 <?php if ($footer_visible) : ?>
     <?php if (!$in_session) : ?>
-        
-        <div class="bg_black row p-4 anuncio_registro_descuento">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="d-flex <?= _between ?>">
-                    <div class="white f12 strong">
-                        Consigue un 10% de descuento y entrega gratis
-                    </div>
-                    <div>
-                        <?= format_link("Registrate ya!", ["href" => path_enid("login_registro")]) ?>
+        <?php if (!es_decoracion_tematica($id_nicho)) : ?>
+            <div class="bg_black row p-4 anuncio_registro_descuento">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="d-flex <?= _between ?>">
+                        <div class="white f12 strong">
+                            Consigue un 10% de descuento y entrega gratis
+                        </div>
+                        <div>
+                            <?= format_link("Registrate ya!", ["href" => path_enid("login_registro")]) ?>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <?php endif; ?>
     <?php endif; ?>
-    <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>
-        <?= d(footer_opciones(), 13) ?>
-
-        <?= d(d("© 2023 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'), 13); ?>
-    </footer>
+    <?php if (!es_decoracion_tematica($id_nicho)) : ?>
+        <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>
+            <?= d(footer_opciones(), 13) ?>
+            <?= d(d("© 2023 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'), 13); ?>
+        </footer>
+    <?php endif; ?>
 <?php endif; ?>
 </body>
 

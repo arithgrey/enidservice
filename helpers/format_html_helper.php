@@ -804,6 +804,8 @@ function append($array, $col = 0, $num_col = 0)
 function get_menu_session($in_session, $proceso_compra = 1)
 {
 
+    return  "";
+    /*
     $response = "";
     if ($in_session < 1) {
 
@@ -831,6 +833,7 @@ function get_menu_session($in_session, $proceso_compra = 1)
     }
 
     return $response;
+    */
 }
 
 function btw($a, $b, $class = '', $row = 0, $frow = 0)
@@ -1388,10 +1391,8 @@ function form_busqueda_productos($mas_vendidos)
     return d($form, 'my-auto col-sm-12 mr-3');
 }
 
-function opciones_acceso($in_session)
+function opciones_acceso($id_nicho)
 {
-
-
 
     $response = [];
 
@@ -1404,12 +1405,12 @@ function opciones_acceso($in_session)
     );
 
 
-
+    $extra = (es_decoracion_tematica($id_nicho)) ? '':'borde_green';
     $link_lista_compras  = format_link(
         _text_(icon("fa black fa-shopping-bag white"), "Ver carrito"),
         [
             "href" => path_enid("lista_deseos"),
-            "class" => "text-center mb-2"
+            "class" => _text_("text-center mb-2", $extra)
 
         ],
         1
@@ -1441,10 +1442,12 @@ function opciones_acceso($in_session)
         'd-flex flex-column'
     );
 
+    $class = (es_decoracion_tematica($id_nicho)) ? 'bg_decoraciones' : 'bg_black';
+
     $response[] = d(
 
         $compras,
-        _text_(_between, 'fixed-bottom mt-1 p-2 bg_black d-none d-md-none productos_en_carro_compra')
+        _text_(_between, 'fixed-bottom mt-1 p-2 d-none d-md-none productos_en_carro_compra', $class)
 
     );
 
@@ -1793,8 +1796,7 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
             text-uppercase registro_google format_action format_google shadow d-block";
             break;
         case 1:
-            $clase = "p-2 pb-3 pt-3 bg_black white 
-            borde_green text-uppercase col shadow";
+            $clase = "p-2 pb-3 pt-3 bg_black white text-uppercase col shadow";
             break;
         case 0:
             $clase = "bg-white format_action pb-3 pt-3 p-2
@@ -1863,54 +1865,66 @@ function _d()
     return $response;
 }
 
-function opciones_populares()
-{
-    $path = path_enid("search_q3");
-    $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
-    $response[] = $texto;
+function opciones_populares($id_nicho)
+{   
+    if(es_decoracion_tematica($id_nicho)){
+        
+        $path = path_enid("search_q3");
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $response[] = $texto;
+        return flex($response);
 
+    }else{
 
+        $path = path_enid("search_q3");
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $response[] = $texto;
+    
+    
+    
+        $response[] = a_enid(
+            _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
+            [
+                "class" => "white strong ml-sm-5 borde_amarillo_b p-1",
+                "href" => path_enid("forma_pago")
+            ]
+        );
+    
+        $response[] = a_enid(
+            _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
+            [
+                "class" => "white ml-sm-5 strong mt-2 f11",
+                "href" => path_enid("rastrea-paquete")
+            ]
+        );
+    
+    
+    
+        $response[] = a_enid(
+            _text("Referencias"),
+            [
+                "class" => "f11 white mt-2  ml-sm-5 strong d-none d-lg-block",
+                "href" => path_enid("clientes")
+            ],
+            0
+        );
+    
+    
+        $response[] = a_enid(
+            "Cambios y Devoluciones",
+            [
+                "class" => "f11 white mt-2 ml-sm-5 strong d-none d-lg-block",
+                "href" => path_enid("cambios-y-devoluciones")
+            ],
+            0
+        );
+    
+    
+    
+        return flex($response);
 
-    $response[] = a_enid(
-        _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
-        [
-            "class" => "white strong ml-sm-5 borde_amarillo_b p-1",
-            "href" => path_enid("forma_pago")
-        ]
-    );
-
-    $response[] = a_enid(
-        _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
-        [
-            "class" => "white ml-sm-5 strong mt-2 f11",
-            "href" => path_enid("rastrea-paquete")
-        ]
-    );
-
-
-
-    $response[] = a_enid(
-        _text("Referencias"),
-        [
-            "class" => "f11 white mt-2  ml-sm-5 strong d-none d-lg-block",
-            "href" => path_enid("clientes")
-        ],
-        0
-    );
-
-
-    $response[] = a_enid(
-        "Cambios y Devoluciones",
-        [
-            "class" => "f11 white mt-2 ml-sm-5 strong d-none d-lg-block",
-            "href" => path_enid("cambios-y-devoluciones")
-        ],
-        0
-    );
-
-
-
-    return flex($response);
+    }
+    
 }
 
 function opciones_adicionales_navegacion()
@@ -2012,12 +2026,13 @@ function navegacion(
     $clasificaciones_departamentos,
     $proceso_compra,
     $menu,
-    $mas_vendidos
+    $mas_vendidos, 
+    $id_nicho
 ) {
     $is_mobile = is_mobile();
-    $frecuentes = opciones_populares();
+    $frecuentes = opciones_populares($id_nicho);
     $response = [];
-
+    
     if (!$in_session) {
 
         $busqueda = frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session);
@@ -2041,36 +2056,78 @@ function navegacion(
         ], "dropdown pull-left d-none d-md-block ");
 
 
-        $link = a_enid(
-            "(55) 5296 - 7027",
-            [
-                "href" => _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url()),
-                "class" => "black"
-            ],0
-        );
+        $es_decoracion = es_decoracion_tematica($id_nicho);
         
         $extra = is_mobile() ? "f11":"f13";
         $str = span('12 meses de garantía', _text_('black',$extra));
 
-        
-        $response[] = d(d(
-            _text_(
-                $categorias,
-                span('Envíos, cambios y devoluciones gratis', _text_('black',$extra)),
-                icon('fa fa-gift fa-2x', _text_('black',$extra)),
-                span('Pide y recibe hoy', _text_('black',$extra)),
-                icon('fa fa-clock-o fa-2x', _text_('black',$extra)),
-                $str,
-                icon('fa fa-shield fa-2x', _text_('black',$extra)),
-                span($link, _text_('black',$extra))
+        if(!$es_decoracion){
 
-            ),
-            [
-                "class" => 'black bg_yellow_s
-                  pr-4 pl-4'
-            ]
-        ), 'text-md-right col-sx-12 col-sx-12 ');
-        $response[] = d([get_logo(), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
+            $tel = ($es_decoracion) ? "(55) 7612 - 7281":"(55) 5296 - 7027";
+            $link = a_enid(
+                $tel,
+                [
+                    "href" => _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url()),
+                    "class" => "black"
+                ],0
+            );
+            
+            $response[] = d(d(
+                _text_(
+                    $categorias,
+                    span('Envíos, cambios y devoluciones gratis', _text_('black',$extra)),
+                    icon('fa fa-gift fa-2x', _text_('black',$extra)),
+                    span('Pide y recibe hoy', _text_('black',$extra)),
+                    icon('fa fa-clock-o fa-2x', _text_('black',$extra)),
+                    $str,
+                    icon('fa fa-shield fa-2x', _text_('black',$extra)),
+                    span($link, _text_('black',$extra))
+    
+                ),
+                [
+                    "class" => 'black bg_yellow_s
+                      pr-4 pl-4'
+                ]
+            ), 'text-md-right col-sx-12 col-sx-12 ');
+
+        }else{
+
+            
+            $link = a_enid(
+                "(55) 7612 - 7281",
+                [
+                    "href" => _text_(path_enid('whatsapp_ayuda_decoraciones', 0, 1), _current_url()),
+                    "class" => "white font-weight-bold ml-3"
+                ],0
+            );
+            
+
+            
+            $str = span("Pagas al termino de tu decoración!", _text_('white font-weight-bold ml-4',$extra));
+            $response[] = d(d(
+                _text_(
+                    $categorias,                                
+                    span('Asegura tu fecha con el 10%', _text_('white font-weight-bold ',$extra)),
+                    
+                    $str,
+                    
+                    span($link, _text_('white font-weight-bold ml-3',$extra))
+    
+                ),
+                [
+                    "class" => 'white font-weight-bold background_decoraciones_tematicas
+                      pr-4 pl-4'
+                ]
+            ), 'text-md-right col-sx-12 col-sx-12 ');
+    
+    
+
+            
+        }
+        
+        
+
+        $response[] = d([get_logo($id_nicho), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
 
 
         $opciones[] = d(a_enid(
@@ -2100,9 +2157,11 @@ function navegacion(
             "col-xs-4 "
         );
 
+        if(!es_decoracion_tematica($id_nicho)){
+            $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
+        }
+        
 
-
-        $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none bg-light border-bottom seccion_menu_comunes');
     } else {
 
         if (!$is_mobile) {
@@ -2135,7 +2194,7 @@ function navegacion(
             ), 'text-md-right col-sx-12 col-sx-12');
 
             $response[] = flex(
-                ajustar(get_logo(), $frecuentes, 2),
+                ajustar(get_logo($id_nicho), $frecuentes, 2),
                 frm_search($proceso_compra, $path_img_usuario, $clasificaciones_departamentos, $in_session, $menu),
                 "p-3",
                 "col-md-7 align-self-center pupulares d-none d-md-block",
@@ -2145,7 +2204,7 @@ function navegacion(
         } else {
 
             $response[] = ajustar(
-                get_logo($in_session),
+                get_logo($id_nicho,$in_session),
                 tmp_menu($path_img_usuario, $menu)
             );
             $response[] = opciones_adicionales_navegacion();
@@ -2153,10 +2212,12 @@ function navegacion(
     }
 
 
+    $es_decoracion = es_decoracion_tematica($id_nicho);
+    $id = ($es_decoracion) ? "flipkart-navbar-decoracion":"flipkart-navbar";
     $navegacion[] = d(
         $response,
         [
-            'id' => "flipkart-navbar",
+            'id' => $id,
             'class' => "col-md-12"
         ]
     );
@@ -2375,7 +2436,7 @@ function get_url_facebook($url, $icon = 0)
 
     return $url_facebook;
 }
-function get_logo($session = 0)
+function get_logo($id_nicho, $session = 0)
 {
 
 
@@ -2394,6 +2455,7 @@ function get_logo($session = 0)
         ]
     ), $carro, _between);
 
+    /*
     $acceder = a_enid(
         icon('fa black fa fa-user fa-2x white p-2'),
         [
@@ -2403,6 +2465,9 @@ function get_logo($session = 0)
     );
 
     $acceder  = ($session < 1) ? $acceder : "";
+    */
+    $acceder = "";
+
     $icono_busqueda_carro_session = flex($icono_busqueda_carro, $acceder, _between, 'mr-3');
 
 
