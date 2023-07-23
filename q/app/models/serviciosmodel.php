@@ -644,7 +644,8 @@ class serviciosmodel extends CI_Model
                         es_publico,
                         es_sorteo,
                         precio_alto,
-                        link_afiliado_amazon
+                        link_afiliado_amazon,
+                        id_nicho
                         FROM 
                         servicio
                         WHERE 
@@ -678,6 +679,7 @@ class serviciosmodel extends CI_Model
     {
 
         $params = [
+            "id_nicho",
             "id_servicio",
             "primer_nivel",
             "segundo_nivel",
@@ -762,7 +764,7 @@ class serviciosmodel extends CI_Model
                 marca, dimension,metakeyword_usuario,
                 metakeyword, primer_nivel , segundo_nivel , 
                 tercer_nivel , cuarto_nivel , quinto_nivel, es_publico, 
-                precio,precio_alto, es_sorteo, link_afiliado_amazon FROM servicio ", $where);
+                precio,precio_alto, es_sorteo, link_afiliado_amazon, id_nicho FROM servicio ", $where);
         return $this->db->query($query_create)->result_array();
     }
 

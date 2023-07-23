@@ -1480,7 +1480,7 @@ class Servicio extends REST_Controller
         $param = $this->get();
         $response = false;
         $campos =
-            "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel,link_afiliado_amazon";
+            "id_servicio,primer_nivel,segundo_nivel,tercer_nivel,cuarto_nivel,quinto_nivel,link_afiliado_amazon,id_nicho";
         if (fx($param, $campos)) {
 
             $response = $this->serviciosmodel->get_producto_por_clasificacion($param, $this->id_nicho);
@@ -1905,11 +1905,13 @@ class Servicio extends REST_Controller
             $response = (es_data($clasificaciones)) ? $this->get_servicios_por_clasificaciones($clasificaciones[0]) : [];
             $servicios = $this->completa_servicios_sugeridos($response, $param);
             $servicios = $this->extra_sugerencias($servicios);
+            
 
-
+            
             if (es_data($servicios)) {
 
-                $response = $this->servicio_imagen_formato->formato_servicio($servicios);
+                $response = $this->servicio_imagen_formato->formato_servicio($servicios, $this->id_nicho, $id_servicio);
+
             } else {
 
                 $data_response["sugerencias"] = 0;
