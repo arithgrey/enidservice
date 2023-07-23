@@ -1304,6 +1304,7 @@ if (!function_exists('invierte_date_time')) {
 
         $id_nicho = $data["id_nicho"];
         $call_to_action = ($id_nicho != 8) ? "Solicita tu entrega" : "Anticipa tu fecha aquí";
+        $format = (es_decoracion_tematica($id_nicho)) ? 6: 1;
         if ($in_session > 0) {
 
             $response[] = d(format_link(
@@ -1332,7 +1333,7 @@ if (!function_exists('invierte_date_time')) {
                 [
                     'class' => 'en_lista_deseos white',
                     "onclick" => "agregar_deseos_sin_antecedente_gbl_btn($id_servicio)"
-                ]
+                ],$format
             );
         }
 
