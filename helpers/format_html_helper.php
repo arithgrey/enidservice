@@ -1773,6 +1773,12 @@ function format_link($str, $attributes, $primario = 1, $texto_strong = 1)
     $clase = "";
     switch ($primario) {
 
+        case 6:
+            /*Format red black list*/
+            $clase = "pb-3 pt-3 p-2 strong col 
+            text-uppercase  borde_red shadow d-block format_decoraciones";
+            break;
+
         case 5:
             /*Format red black list*/
             $clase = "pb-3 pt-3 p-2 strong col 
@@ -2441,12 +2447,7 @@ function get_logo($id_nicho, $session = 0)
 
 
     $path = path_enid("search_q3");
-    if(es_decoracion_tematica($id_nicho)){
-        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Decoraciones</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
-    }else{
-        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
-    }
-    
+    $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
 
 
     $icono_busqueda = icon(_text_(_busqueda_icon, "white fa-2x mr-2"), ["onclick" => "openNav()"]);
