@@ -1,15 +1,18 @@
-.texto_accion{
+.texto_accion {
     font-size: 3em;
     font-weight: bold;
     color: #0869d2;
 }
-.big_compra_seccion{
+
+.big_compra_seccion {
     background: #ffffff;
 }
-.precio_b{
+
+.precio_b {
     color: #0869d2;
     font-weight: bold;
 }
+
 .img-zoom:hover {
 
     cursor: pointer;
@@ -803,7 +806,9 @@ div.pagination li.active span:hover {
     background: #000f36 !important;
     /*min-height: 90px;*/
 }
-#flipkart-navbar-decoracion, .bg_decoraciones{
+
+#flipkart-navbar-decoracion,
+.bg_decoraciones {
     background: #d500a1 !important;
 }
 
@@ -1482,13 +1487,13 @@ select {
 }
 
 .bg_black {
-    background:  #000f36!important;
+    background: #000f36 !important;
 }
 
 .bg_gray {
 
 
-    background:rgb(249 250 250) !important;
+    background: rgb(249 250 250) !important;
 }
 
 .bg_custom_black {
@@ -2082,15 +2087,18 @@ ul li a {
 
     border-bottom: solid 1px #46e1b6 !important;
 }
-.bg_yellow_s{
-    background: #44c2ff!important;
+
+.bg_yellow_s {
+    background: #44c2ff !important;
 }
+
 .borde_amarillo_b {
 
     border-bottom: solid 1px #deff05 !important;
     padding: 1px 10px 0px 10px;
     cursor: pointer;
 }
+
 .borde_amarillo {
     border: solid 1px #deff05;
     padding: 1px 10px 0px 10px;
@@ -2133,6 +2141,12 @@ ul li a {
 
 }
 
+.format_decoraciones {
+    background: #d500a1;
+    color: white;
+    border: solid 1px #ff0075 !important;
+}
+
 .format_google {
     background: #030a57;
     color: white;
@@ -2156,6 +2170,7 @@ ul li a {
     background: #ff2121;
 
 }
-.background_decoraciones_tematicas{
+
+.background_decoraciones_tematicas {
     background: #0e1e3f;
 }
