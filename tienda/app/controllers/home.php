@@ -13,6 +13,8 @@ class Home extends CI_Controller
 
         $param = $this->input->get();
         $id = intval(prm_def($param, "xn", 1));
+        $id_producto = intval(prm_def($param, "id"));
+
         setcookie('xn', prm_def($param, "xn", 1), strtotime('2038-01-01'), "/");
 
         switch ($id) {
@@ -40,7 +42,7 @@ class Home extends CI_Controller
 
                 header("location:../search/?q=pasteles-dulceros&order=2");
                 break;
-            
+
             case 6:
 
                 header("location:../search/?q=nails-and-nails&order=2");
@@ -53,7 +55,15 @@ class Home extends CI_Controller
 
             case 8:
 
-                header("location:../search/?q=decoraciones-tematicas-globolandia&order=2");
+                if ($id_producto > 0) {
+
+                    header(_text("location:../producto/?producto=", $id_producto));
+                    
+                } else {
+
+                    header("location:../search/?q=decoraciones-tematicas-globolandia&order=2");
+                }
+
                 break;
 
             default:
