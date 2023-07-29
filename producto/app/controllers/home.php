@@ -66,9 +66,7 @@ class Home extends CI_Controller
     
         
         $data["q2"] = prm_def($param, "q2");
-        $servicio = $this->app->servicio($this->id_servicio);
-
-        
+        $servicio = $this->app->servicio($this->id_servicio);                
         if(pr($servicio, "status") > 0){
 
             $data["tallas"] = $this->get_tallas($this->id_servicio);
@@ -115,7 +113,8 @@ class Home extends CI_Controller
             $data["alcaldias"] = $this->app->api("delegacion/cobertura");
             
     
-            $data = $this->app->cssJs($data, "producto");        
+            $data = $this->app->cssJs($data, "producto");    
+              
             $this->app->log_acceso($data, 3, $this->id_servicio  );
             $this->app->pagina($data, render_producto($data), 1);
             
