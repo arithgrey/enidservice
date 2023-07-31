@@ -961,7 +961,7 @@ function text_icon($class_icono, $text, $att = [], $left = 1)
     return ($left > 0 && !$es_derecho) ? $izquierdo : $derecho;
 }
 
-function _titulo($text, $tipo = 0, $extra = '')
+function _titulo($text, $tipo = 2, $extra = '')
 {
 
     $response = [];
