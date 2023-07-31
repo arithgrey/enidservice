@@ -1876,7 +1876,7 @@ function opciones_populares($id_nicho)
     if(es_decoracion_tematica($id_nicho)){
         
         $path = path_enid("search_q3");
-        $texto = d("<a href='https://globos-globolandia.com/' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
         $response[] = $texto;
         return flex($response);
 
@@ -2449,7 +2449,7 @@ function get_logo($id_nicho, $session = 0)
     $path = path_enid("search_q3");
     
     if(es_decoracion_tematica($id_nicho)){
-        $texto = d("<a href='https://globos-globolandia.com/' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
+        $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
     }else{
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
     }
