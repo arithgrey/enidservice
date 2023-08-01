@@ -23,10 +23,8 @@ if (!function_exists('invierte_date_time')) {
             
             $valores = [4,6,8];
             $indice_aleatorio = mt_rand(0, count($valores) - 1);
-
             $valor_aleatorio = $valores[$indice_aleatorio];
-
-
+            
             $response[] = d(img(["class" =>"img-zoom","src" => $link]),  $valor_aleatorio);
         }
 
