@@ -3,14 +3,14 @@ header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 ?>
-<title><?= $titulo ?></title>
+<title>Pago contra entrega CDMX <?= $titulo ?></title>
 
 <meta name="google-site-verification" content="CRCERpjQ1KolmfT9LEgiEC1GbnkyxdZvdd8MVqs1lY4" />
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <?= meta('keywords', $meta_keywords . " "); ?>
 <?= meta('author', 'Enid Service'); ?>
-<meta name="description" content="<?= $desc_web; ?>" />
+<meta name="description" content="Pago contra entrega CDMX - <?= $desc_web; ?>" />
 <meta name="robots" content="all">
 <link rel="canonical" href="http://enidservices.com/" />
 <link rel="canonical" href="http://www.enidservices.com/" />
@@ -35,7 +35,7 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     <meta property="og:image" content="https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/img_tema/portafolio/pesas.jpg" />
 <?php endif; ?>
 
-<meta property="og:description" content="<?= $desc_web; ?>" />
+<meta property="og:description" content="Pago contra entrega CDMX <?= $desc_web; ?>" />
 <meta property="fb:app_id" content="708127766008103" />
 <meta property="business:contact_data:email" content="ventas@enidservices.com" />
 <meta property="business:contact_data:phone_number" content="5552967027" />
@@ -49,12 +49,12 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@enidservice">
 <meta name="twitter:title" content="<?= $titulo ?>">
-<meta name="twitter:description" content="<?= $desc_web; ?>">
+<meta name="twitter:description" content="Pago contra entrega CDMX <?= $desc_web; ?>">
 <meta name="twitter:creator" content="@enidservice">
 <meta name="twitter:image" content="<?= create_url_preview($url_img_post) ?>">
 <meta name="twitter:image:src" content="<?= create_url_preview($url_img_post) ?>">
 <meta itemprop="name" content="Enid Service">
-<meta itemprop="description" content="<?= $desc_web; ?>">
+<meta itemprop="description" content="Pago contra entrega CDMX <?= $desc_web; ?>">
 <meta itemprop="image logo" content="<?= create_url_preview($url_img_post) ?>">
 <meta itemprop="email" content="ventas@enidservices.com">
 <meta itemprop="telephone" content="5552967027">
