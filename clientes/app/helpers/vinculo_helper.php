@@ -7,9 +7,9 @@ if (!function_exists('invierte_date_time')) {
     function render($data)
     {
                 
-        $response[] = d(foto_link($data), 10, 1);
-        $response[] = d(add_imgs_cliente_empresa($data), 10, 1);
-        return d($response, " bg_black shadow  text-center");
+        $response[] = d(foto_link($data),12);
+        $response[] = d(add_imgs_cliente_empresa($data),12);
+        return d($response, "text-center");
     }
 
     function add_imgs_cliente_empresa($data)
@@ -20,7 +20,14 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);
-            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  'col-sm-3 col-xs-6');
+            
+            $valores = [2, 3, 4,5, 6,8];
+            $indice_aleatorio = mt_rand(0, count($valores) - 1);
+
+            $valor_aleatorio = $valores[$indice_aleatorio];
+
+
+            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  $valor_aleatorio);
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');
