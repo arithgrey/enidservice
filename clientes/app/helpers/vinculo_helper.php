@@ -21,7 +21,7 @@ if (!function_exists('invierte_date_time')) {
 
             $link = get_path($row["nombre_imagen"]);
             
-            $valores = [2, 3, 4,5, 6,8];
+            $valores = [4,6,8];
             $indice_aleatorio = mt_rand(0, count($valores) - 1);
 
             $valor_aleatorio = $valores[$indice_aleatorio];
