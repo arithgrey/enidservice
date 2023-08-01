@@ -19,13 +19,8 @@ if (!function_exists('invierte_date_time')) {
         $response = [];
         foreach ($imagenes_clientes as $row) {
 
-            $link = get_path($row["nombre_imagen"]);
-            
-            $valores = [4,6,8];
-            $indice_aleatorio = mt_rand(0, count($valores) - 1);
-            $valor_aleatorio = $valores[$indice_aleatorio];
-            
-            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  $valor_aleatorio);
+            $link = get_path($row["nombre_imagen"]);            
+            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  4);
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');
