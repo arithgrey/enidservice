@@ -803,7 +803,7 @@ div.pagination li.active span:hover {
 
 #flipkart-navbar {
 
-    background: #000f36 !important;
+    background: #000000 !important;
     /*min-height: 90px;*/
 }
 
@@ -1487,7 +1487,7 @@ select {
 }
 
 .bg_black {
-    background: #000f36 !important;
+    background: black !important;
 }
 
 .bg_gray {
@@ -2089,7 +2089,7 @@ ul li a {
 }
 
 .bg_yellow_s {
-    background: #44c2ff !important;
+    background: white !important;
 }
 
 .borde_amarillo_b {
@@ -2173,4 +2173,7 @@ ul li a {
 
 .background_decoraciones_tematicas {
     background: #fd789b;
+}
+.ab_bg{
+    background: #007bc6;
 }
