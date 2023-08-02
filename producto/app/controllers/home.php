@@ -1,14 +1,18 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+use Enid\ServicioImagen\Format as FormatImgServicio;
 class Home extends CI_Controller
 {    
     private $id_servicio;     
+    private $servicio_imagen;
+
     function __construct()
     {
         parent::__construct();
         $this->load->helper("producto");
         $this->load->library(lib_def());
         $this->id_servicio = $this->input->get("producto");        
+        $this->servicio_imagen = new FormatImgServicio();
     }
 
     function index()
@@ -111,8 +115,9 @@ class Home extends CI_Controller
             $data["servicio_materiales"] = $this->servicio_materiales($this->id_servicio);
             $data["recompensa"] = $this->recompensa($this->id_servicio);
             $data["alcaldias"] = $this->app->api("delegacion/cobertura");
+            $is_mobile = $data["is_mobile"];
             
-    
+            $data["imagenes"] = $this->servicio_imagen->formatG($data["imgs"], pr($servicio, "nombre_servicio"), $is_mobile);
             $data = $this->app->cssJs($data, "producto");    
               
             $this->app->log_acceso($data, 3, $this->id_servicio  );

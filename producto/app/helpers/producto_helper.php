@@ -181,23 +181,11 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio,
             $data["id_perfil"]
         );
-
-        $imagenes = img_lateral($imgs, $nombre, $is_mobile);
-
-        $clases = " align-self-center mx-auto col-md-2 d-none d-lg-block d-xl-block 
-            d-md-block d-xl-none aviso_comision pt-3 pb-3";
-        $clases_imagenes =
-            " tab-content col-sm-12 col-sm-offset-0 col-xs-12 col-xs-offset-0 
-            col-md-6 col-md-offset-3 align-self-center image-container";
-
-        $r[] = btw(
-            d($imagenes["preview"], $clases),
-            d($imagenes["imagenes_contenido"], ["class" => $clases_imagenes, "id" => "container"]),
-            'row'
-
-        );
-
-        $r[] = d($imagenes["preview_mb"], "d-none d-sm-block d-md-none d-flex mt-5 row azul_deporte");
+        
+        $imagenes =  $data["imagenes"];        
+        $r[] = $imagenes["galeria"];    
+        
+        
         $titulo = substr(strtoupper($nombre), 0, 270);
 
         if ($es_servicio < 1) :
@@ -1184,85 +1172,6 @@ if (!function_exists('invierte_date_time')) {
             $response = texto_tipo_comision($data, $precio_unidad);
         }
 
-        return $response;
-    }
-
-    function img_lateral($param, $nombre_servicio, $is_mobile)
-    {
-
-        $preview = [];
-        $imgs_grandes = [];
-        $preview_mb = [];
-        $z = 0;
-
-        foreach ($param as $row) {
-
-            $url = get_url_servicio($row["nombre_imagen"], 1);
-            $extra_class = "";
-            $extra_class_contenido = '';
-
-            if ($z < 1) {
-                $extra_class = ' active ';
-                $extra_class_contenido = ' in active ';
-            }
-
-
-            $preview[] =
-                img(
-                    [
-                        'src' => $url,
-                        'alt' => $nombre_servicio,
-                        'class' => 'col-lg-8 mt-2 border cursor_pointer col-lg-offset-2 bg_white ' . $extra_class,
-                        'id' => $z,
-                        'data-toggle' => 'tab',
-                        'href' => "#imagen_tab_" . $z
-                    ]
-                );
-
-            $preview_mb[] = img(
-                [
-                    'src' => $url,
-                    'alt' => $nombre_servicio,
-                    'class' => 'col-xs-3 col-sm-3 mt-2 border mh_50 mah_50 mr-1 mb-1' . $extra_class,
-                    'id' => $z,
-                    'data-toggle' => 'tab',
-                    'href' => _text("#imagen_tab_", $z)
-                ]
-
-            );
-
-
-            $ext = ($is_mobile < 1) ? " mh_450 " : "";
-
-            $imgs_grandes[] =
-                img(
-                    [
-                        'src' => $url,
-                        "class" => " w-100 tab-pane fade zoom img-zoom mh_sm_460" . $ext . " " . $extra_class_contenido,
-                        "id" => "imagen_tab_" . $z,
-
-                    ]
-                );
-
-            $z++;
-        }
-
-
-        $principal = "";
-
-        if (es_data($param)) {
-
-            $principal = (count($param) > 1) ? $param[1]["nombre_imagen"] : $param[0]["nombre_imagen"];
-        }
-
-
-        $response = [
-            "preview" => append($preview),
-            "preview_mb" => append($preview_mb),
-            "num_imagenes" => count($param),
-            "imagenes_contenido" => append($imgs_grandes),
-            "principal" => get_url_servicio($principal, 1)
-        ];
         return $response;
     }
 
