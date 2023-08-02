@@ -1,6 +1,6 @@
 .texto_accion {
     
-    font-size: 2.5em;
+    font-size: 2.2em;
     font-weight: bold;
     color: #b3d7ff;
     background: #000;
@@ -2178,4 +2178,9 @@ ul li a {
 }
 .ab_bg{
     background: #007bc6;
+}
+.mh_450 {
+
+    min-height: 520px!important;
+    
 }
