@@ -1891,7 +1891,7 @@ function opciones_populares($id_nicho)
         $response[] = a_enid(
             _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
             [
-                "class" => "white strong ml-sm-5 borde_amarillo_b p-1 text-uppercase",
+                "class" => "white strong ml-sm-5 mt-2 text-uppercase",
                 "href" => path_enid("forma_pago")
             ]
         );

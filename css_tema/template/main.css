@@ -1,7 +1,9 @@
 .texto_accion {
-    font-size: 3em;
+    
+    font-size: 2.5em;
     font-weight: bold;
-    color: #0869d2;
+    color: #b3d7ff;
+    background: #000;
 }
 
 .big_compra_seccion {
@@ -100,7 +102,7 @@
 }
 
 .azul_deporte {
-    background: #15abc4 !important;
+    background: black !important;
 }
 
 .display-5 {
