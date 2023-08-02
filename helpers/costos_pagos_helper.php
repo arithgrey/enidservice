@@ -44,7 +44,7 @@
          );
      } else {
 
-         $class = "col-md-3 col-lg-2 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-primary";
+         $class = "col-md-3 col-lg-2 col-xs-6 hps h_345 p-1 mh-auto top_50 bottom_50 border border-secondary";
          $response = d($img,  $class);
      }
 

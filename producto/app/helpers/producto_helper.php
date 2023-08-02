@@ -68,8 +68,8 @@ if (!function_exists('invierte_date_time')) {
         
         if(intval(pr($nicho,"id")) !== 8){
             
-            $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black text-uppercase f12');
-            $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black text-uppercase mt-4 cursor_pointer f12');
+            $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black  ');
+            $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black  mt-4 cursor_pointer ');
     
     
             $nicho_garantizado = intval(pr($nicho, "garantizado"));
@@ -81,7 +81,7 @@ if (!function_exists('invierte_date_time')) {
                         span("12 Meses de garantía", " ml-2")
                     ),
                     [
-                        "class" => "black text-uppercase f12"
+                        "class" => "black  "
                     ]
                 ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
             }
@@ -1028,9 +1028,9 @@ if (!function_exists('invierte_date_time')) {
         $texto_editar_ganancias = es_administrador_o_vendedor($data) ? $texto_editar_ganancias : '';
 
         $agregar_a_carrito =  d(
-            "Agregar al carrito",
+            icon("fa fa-heart-o fa-2x"),
             [
-                "class" => "borde_green cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase  white text-center",
+                "class" => "cursor_pointer p-1 bottom_carro_compra_recompensa borde_accion text-uppercase  white text-center",
                 "id" => $id_recompensa,
                 "antecedente_compra" => $antecedentes,
                 "onclick" => "log_operaciones_externas(26, $id_servicio)"
