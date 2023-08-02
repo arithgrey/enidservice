@@ -421,7 +421,7 @@ if (!function_exists('invierte_date_time')) {
                 
         }
         
-        return d($response);
+        return d($response, "mt-5");
 
 
     }
@@ -429,10 +429,10 @@ if (!function_exists('invierte_date_time')) {
     {
 
         
-        $agregar_a_carrito =  d("Agregar al carrito",
+        $agregar_a_carrito =  d(icon("fa fa-heart-o fa-2x"),
             [
 
-                "class" => "borde_green cursor_pointer p-1 
+                "class" => "cursor_pointer p-1 
                 bottom_carro_compra_recompensa borde_accion text-uppercase 
                  white text-center",
                 "id" => $id_recompensa, 

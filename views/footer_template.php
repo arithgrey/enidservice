@@ -96,7 +96,7 @@ if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
                             Consigue un 10% de descuento y entrega gratis
                         </div>
                         <div>
-                            <?= format_link("Registrate ya!", ["href" => path_enid("login_registro")]) ?>
+                            <?= format_link("Registrate ya!", ["href" => path_enid("login_registro"), "class"=>"border_b_green"]) ?>
                         </div>
                     </div>
                 </div>

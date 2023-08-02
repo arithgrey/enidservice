@@ -49,7 +49,7 @@ if (!function_exists('invierte_date_time')) {
 
         }else{
 
-            $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0");
+            $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0 bg_enid_depo");
         }
         
         

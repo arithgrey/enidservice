@@ -1097,7 +1097,7 @@ function get_orden()
 function footer_opciones()
 {
 
-    $productos_footer[] = _titulo('Productos', 2, 'border_b_green');
+    $productos_footer[] = _titulo('Productos', 2, '');
 
     $productos_footer[] = a_enid(
         'Novedades',
@@ -1126,7 +1126,7 @@ function footer_opciones()
 
 
     /*Asistencia*/
-    $asistencia[] =  _titulo('Asistencia', 2, 'border_b_green');
+    $asistencia[] =  _titulo('Asistencia', 2, '');
 
     $asistencia[] =  a_enid(
         flex('¿Necesitas ayuda?', '(55) 5296 - 7027', 'flex-column mb-3 borde_black p-2', 'strong', 'strong'),
@@ -1186,7 +1186,7 @@ function footer_opciones()
     /**Oportunidades*/
 
 
-    $oportunidades[] = _titulo('Oportunidades', 2, 'border_b_green');
+    $oportunidades[] = _titulo('Oportunidades', 2, '');
 
     /*
     $anuncio_mayorista[] = d('Mayoristas', "black strong");
@@ -1218,7 +1218,7 @@ function footer_opciones()
         ]
     );
     */
-    $sociales[] = _titulo('SÍGUENOS', 2, 'border_b_green');
+    $sociales[] = _titulo('SÍGUENOS', 2, '');
     $sociales[] = a_enid(
         icon(_text_(_facebook_icon, 'fa-2x')),
         [
