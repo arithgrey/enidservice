@@ -17,11 +17,12 @@ class Imagen_cliente_empresa extends REST_Controller
 
         $param = $this->post();
         $response = false;
-        if (fx($param, "id_imagen,id_empresa")) {
+        if (fx($param, "id_imagen,id_empresa,id_nicho")) {
 
             $params = [
                 "id_imagen" => $param["id_imagen"],
-                "id_empresa" => $param["id_empresa"]
+                "id_empresa" => $param["id_empresa"],
+                "id_nicho" => $param["id_nicho"]
             ];
 
             $response = $this->imagen_cliente_empresa_model->insert($params);
