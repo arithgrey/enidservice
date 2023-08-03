@@ -4,7 +4,7 @@ require APPPATH . '../../librerias/REST_Controller.php';
 class Archivo extends REST_Controller
 {
     private $id_usuario;
-
+    private $id_nicho;
     function __construct()
     {
         parent::__construct();
@@ -13,6 +13,7 @@ class Archivo extends REST_Controller
         $this->load->library('image_lib');
         $this->load->library(lib_def());
         $this->id_usuario = $this->app->get_session("id_usuario");
+        $this->id_nicho = $this->app->get_nicho();
     }
 
     function extension($str)
@@ -202,6 +203,8 @@ class Archivo extends REST_Controller
                     $prm = [
                         "id_imagen" => $id_imagen,
                         "id_empresa" => $param["id_empresa"],
+                        "id_nicho" => $this->id_nicho
+                        
                     ];
 
                     $response["status_imagen_servicio"] = $this->insert_imagen_cliente_empresa($prm);
