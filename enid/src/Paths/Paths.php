@@ -824,6 +824,9 @@ class Paths
                     "producto/cuenta_regresiva.js",
                     "alerts/jquery-confirm.js"
                 ],
+                "js_extra_web" => [
+                    "https://js.stripe.com/v3/buy-button.js"
+                ],
             ],
             "producto_codigo" =>
             [

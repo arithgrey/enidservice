@@ -65,13 +65,13 @@ if (!function_exists('invierte_date_time')) {
     function valida_tiempo_entrega($servicio, $nicho)
     {
 
-        
-        if(intval(pr($nicho,"id")) !== 8){
-            
+
+        if (intval(pr($nicho, "id")) !== 8) {
+
             $contenido[] = d(_text_(icon('fa fa-truck'), span(_text_(span("Entrega gratis, pide y recibe hoy", 'strong')), ' ml-2')), 'mt-4  black  ');
             $contenido[] = d(_text_(icon("fa fa-lock"), span("Pagas al recibir tu pedido!", ' ml-2 accion_forma_pago')), 'black  mt-4 cursor_pointer ');
-    
-    
+
+
             $nicho_garantizado = intval(pr($nicho, "garantizado"));
             $servicio_garantizado = intval(pr($servicio, "garantizado"));
             if ($nicho_garantizado && $servicio_garantizado) {
@@ -85,21 +85,23 @@ if (!function_exists('invierte_date_time')) {
                     ]
                 ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
             }
-    
-            return d($contenido, 'bg_gray p-3 mt-3');
-        }else{
 
-            
-            $contenido[] = d(_text_(icon("fa fa-check"), 
-            span("Ten en cuenta que la disponibilidad de nuestros servicios estará sujeta a la demanda. 
-            Al anticipar con un depósito, tendrás la certeza de que llegaremos a la locación en tiempo y forma para asegurar que todo esté listo!", 
-            'ml-2 accion_forma_pago')), 'black mt-4 cursor_pointer f13');
-    
+            return d($contenido, 'bg_gray p-3 mt-3');
+        } else {
+
+
+            $contenido[] = d(_text_(
+                icon("fa fa-check"),
+                span(
+                    "Ten en cuenta que la disponibilidad de nuestros servicios estará sujeta a la demanda. 
+            Al anticipar con un depósito, tendrás la certeza de que llegaremos a la locación en tiempo y forma para asegurar que todo esté listo!",
+                    'ml-2 accion_forma_pago'
+                )
+            ), 'black mt-4 cursor_pointer f13');
+
 
             return d($contenido, 'p-3 mt-3');
-
         }
-        
     }
 
 
@@ -181,11 +183,11 @@ if (!function_exists('invierte_date_time')) {
             $id_servicio,
             $data["id_perfil"]
         );
-        
-        $imagenes =  $data["imagenes"];        
-        $r[] = $imagenes["galeria"];    
-        
-        
+
+        $imagenes =  $data["imagenes"];
+        $r[] = $imagenes["galeria"];
+
+
         $titulo = substr(strtoupper($nombre), 0, 270);
 
         if ($es_servicio < 1) :
@@ -268,20 +270,19 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
         $data_response[] = d($recompensa, 12);
         $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
-        
+
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
-        
-        if(!es_decoracion_tematica($data)){
-            $data_response[] = d(p("RECIBES EL MISMO DÍA","texto_accion"),"col-xs-12 texto_accion mt-4 mb-4");
+
+        if (!es_decoracion_tematica($data)) {
+            $data_response[] = d(p("RECIBES EL MISMO DÍA", "texto_accion"), "col-xs-12 texto_accion mt-4 mb-4");
             $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
-    
-            $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ",'texto_accion'),'text-right mt-3 col-xs-12 texto_accion mt-4 mb-4');
-            
-            $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"),'text-right');
-            
+
+            $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ", 'texto_accion'), 'text-right mt-3 col-xs-12 texto_accion mt-4 mb-4');
+
+            $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"), 'text-right');
         }
-        
+
 
         $pagina_producto[] =  d($data_response, 8);
 
@@ -507,7 +508,7 @@ if (!function_exists('invierte_date_time')) {
         ), 'd-none');
 
         $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
-        $r[] = $tiempo_entrega;
+        //$r[] = $tiempo_entrega;
         $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
     }
@@ -1210,10 +1211,10 @@ if (!function_exists('invierte_date_time')) {
     function agregar_lista_deseos($data, $in_session, $id_servicio)
     {
 
-
+        
         $id_nicho = $data["id_nicho"];
-        $call_to_action = ($id_nicho != 8) ? "Solicita tu entrega" : "Anticipa tu fecha aquí";
-        $format = (es_decoracion_tematica($id_nicho)) ? 6: 1;
+        $call_to_action = ($id_nicho != 8) ? "Solicita tu entrega aquí" : "Anticipa tu fecha aquí";
+        $format = (es_decoracion_tematica($id_nicho)) ? 6 : 1;
         if ($in_session > 0) {
 
             $response[] = d(format_link(
@@ -1234,31 +1235,75 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span($call_to_action, 'f14'),
+                        span($call_to_action),
                         icon('pull-right mr-4 fa fa fa-truck  fa-2x white ml-auto')
                     ),
                     'pt-3 pb-3'
                 ),
                 [
-                    'class' => 'en_lista_deseos white',
+                    'class' => 'en_lista_deseos white text-center',
                     "onclick" => "agregar_deseos_sin_antecedente_gbl_btn($id_servicio)"
-                ],$format
+                ],
+                $format
             );
         }
 
         $agregar_lista_deseos = append($response);
+        
+
+        $seccion = get_compra_agenda($data, $agregar_lista_deseos);
+        $seccion[] = d(cargando(), 'col-xs-12');
+        return append($seccion);
+    }
+    function get_compra_agenda($data, $agregar_lista_deseos){
+        
+    
+        $servicio = $data["info_servicio"]["servicio"];
+        $buy_button_id = pr($servicio,"buy_button_id");
+        $publishable_key = pr($servicio,"publishable_key");
+        
+        if(!str_len($buy_button_id,3) || !str_len($$publishable_key,3) ){
+            return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
+        }
+        $seccion[] = d("Tienes una de dos!",'f2 col-lg-12 text-center strong mb-3');
+        $seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'f13 precio_b')),' col-lg-12 text-center strong mt-3 mb-3');
+        
+        $seccion[] = d($agregar_lista_deseos,8,1);
+        
+        $seccion[] = d("Ó",' col-lg-12 f2 text-center strong mt-3');
+        $seccion[] = d("Te lo envíamos a cualquier parte de la república!",' col-lg-12 text-center strong mt-3 mb-3');
+        
+
+        $seccion[] = d(d(stripe_buy_button(
+            $buy_button_id,
+            $publishable_key,
+            "mx-auto"
+        )),6,1);
+        
+        $seccion[] = d("Te llega de 1 a 2 días hábilies",' col-lg-12 text-center strong mt-1 mb-3');
+        return $seccion;
+
+    }
+    function agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $tiempo_entrega){
+
+        $id_servicio = pr($servicio,"id_servicio");
+        
         $lista_deseos = icon(
-            'fa black agregar_deseos_sin_antecedente 
-        fa fa-heart-o fa-2x p-4 borde_black ',
+            'fa black agregar_deseos_sin_antecedente fa fa-heart-o fa-2x p-4 borde_black ',
             [
                 "id" => $id_servicio
             ]
         );
 
-        $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'mt-3'), 'p-0 col-xs-10', 'p-0 col-xs-2');
-        $seccion[] = d(cargando(), 'col-xs-12');
-        return append($seccion);
+        $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'mt-1'), 'p-0 col-xs-10', 'p-0 col-xs-2');
+        $seccion[] = $tiempo_entrega;
+        
+
+        
+        return  $seccion;
+        
     }
+
     function confianza($id_servicio, $data)
     {
         $textos = _text_(icon('fa fa-lock'), "Compra seguro, paga hasta tu entrega!");
