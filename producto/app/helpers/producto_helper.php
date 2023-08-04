@@ -1262,7 +1262,7 @@ if (!function_exists('invierte_date_time')) {
         $buy_button_id = pr($servicio,"buy_button_id");
         $publishable_key = pr($servicio,"publishable_key");
         
-        if(!str_len($buy_button_id,3) || !str_len($$publishable_key,3) ){
+        if(!str_len($buy_button_id,3) || !str_len($publishable_key,3) ){
             return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
         }
         $seccion[] = d("Tienes una de dos!",'f2 col-lg-12 text-center strong mb-3');
