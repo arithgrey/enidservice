@@ -416,6 +416,7 @@ if (!function_exists('invierte_date_time')) {
         $r[] = $tallas;
 
         $extra = is_mobile() ? '' : 'position-fixed zindex-2 bg-white row';
+        
         return d($r, $extra);
     }
 
@@ -1137,7 +1138,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta'));
                 $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 
-                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 f12 ', '', 'bg_yellow strong p-1  mt-3 ');
+                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 f11 ', '', 'bg_yellow strong p-1  mt-3 ');
             }
 
 
@@ -1266,21 +1267,20 @@ if (!function_exists('invierte_date_time')) {
             return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
         }
         $seccion[] = d("Tienes una de dos!",'f2 col-lg-12 text-center strong mb-3');
-        $seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'f13 precio_b')),' col-lg-12 text-center strong mt-3 mb-3');
+        $seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'precio_b')),' col-lg-12 text-center strong mt-3 mb-3 f12');
         
         $seccion[] = d($agregar_lista_deseos,8,1);
         
-        $seccion[] = d("Ó",' col-lg-12 f2 text-center strong mt-3');
+        $seccion[] = d("Ó",'col-lg-12 f2 text-center strong mt-3');
         $seccion[] = d("Te lo envíamos a cualquier parte de la república!",' col-lg-12 text-center strong mt-3 mb-3');
         
-
-        $seccion[] = d(d(stripe_buy_button(
+        $compra = stripe_buy_button(
             $buy_button_id,
-            $publishable_key,
-            "mx-auto"
-        )),6,1);
+            $publishable_key
+        );
+        $seccion[] = d($compra,"col-lg-12 text-center");
         
-        $seccion[] = d("Te llega de 1 a 2 días hábilies",' col-lg-12 text-center strong mt-1 mb-3');
+        $seccion[] = d("Te llega de 1 a 2 días hábilies",' col-lg-12 text-center black f12 mt-1 mb-3');
         return $seccion;
 
     }
