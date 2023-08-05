@@ -253,7 +253,10 @@ if (!function_exists('invierte_date_time')) {
             $nombre = pr($s, "nombre_servicio");
             $nombre = substr($nombre, 0, 300);
             $nombre_producto = _titulo($nombre, 2);
-            $data_response[] = d($nombre_producto, 'col-sm-12 mt-5 mb-5');
+            
+            $data_response[] = d($nombre_producto, 'col-sm-12 mt-5');
+            $data_response[] = d(texto_precio($data), 'col-sm-12');
+            
         }
 
         $numero_compras = pr($s, "deseado");
@@ -262,6 +265,10 @@ if (!function_exists('invierte_date_time')) {
             $extra = is_mobile() ? "col-sm-12 mt-5" : "col-sm-12";
             $texto = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)));
             $data_response[] = d(flex($texto, "Calificaciones", 'flex-column mb-1 black', '', 'strong'), $extra);
+
+            
+
+
         }
 
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
@@ -293,6 +300,35 @@ if (!function_exists('invierte_date_time')) {
         $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
 
         return d(d($pagina_producto, 13), 'col-sm-12 mt-md-5 ');
+    }
+    function texto_precio($data){
+
+            $servicio = $data["info_servicio"]["servicio"];
+            $precio_unidad = pr($servicio, "precio");
+
+            $descuento_especial = pr($servicio, "descuento_especial");
+            $precio_alto = pr($servicio, "precio_alto");
+            $precio_alto = ($precio_alto > $precio_unidad) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad, 16));
+    
+            $usuario = $data["usuario"];
+            $es_premium = es_premium($data, $usuario);
+            $texto_precio_base = ($precio_unidad > 0) ? _text("$", $precio_unidad) : "A CONVENIR";
+    
+    
+            $texto_premium = "";
+            if ($es_premium) {
+    
+                $texto = d(del($texto_precio_base), "f11 text-secondary");
+    
+                $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
+            } else {
+    
+    
+                $in_session = $data["in_session"];
+                $texto = d($texto_precio_base, "mt-3 f16 precio_b mt-md-1");
+            }
+
+            return  $texto;
     }
     function botones_ver_mas($id_servicio)
     {
@@ -1122,7 +1158,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "mt-3 f14 precio_b mt-md-1");
+            $texto = d($texto_precio_base, "mt-3 f16 precio_b mt-md-1");
 
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
