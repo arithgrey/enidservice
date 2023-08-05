@@ -1276,9 +1276,9 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion[] = d(d(stripe_buy_button(
             $buy_button_id,
-            $publishable_key,
-            "mx-auto"
-        )),6,1);
+            $publishable_key
+            
+        )),"col-lg-12 text-center");
         
         $seccion[] = d("Te llega de 1 a 2 días hábilies",' col-lg-12 text-center strong mt-1 mb-3');
         return $seccion;
