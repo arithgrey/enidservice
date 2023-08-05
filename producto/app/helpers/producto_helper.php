@@ -192,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo, 1, ["class" => "strong f14 precio_b"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f18 "]));
             $extra = is_mobile() ? 'row' : '';
             $x[] = d(venta_producto(
                 $s,
@@ -287,7 +287,7 @@ if (!function_exists('invierte_date_time')) {
         $pagina_producto[] =  d($data_response, 8);
 
         if (!is_mobile()) {
-            $pagina_producto[] =  d($x, 'col-sm-4 border-left-ct mt-md-5 mt-lg-1');
+            $pagina_producto[] =  d($x, 'col-sm-4 border-left-ct mt-lg-1');
         }
 
         $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
@@ -1122,7 +1122,7 @@ if (!function_exists('invierte_date_time')) {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "mt-3 f23 precio_b mt-md-1");
+            $texto = d($texto_precio_base, "mt-3 f14 precio_b mt-md-1");
 
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
@@ -1137,7 +1137,7 @@ if (!function_exists('invierte_date_time')) {
 
                 $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta'));
                 $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 
-                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 f12 ', '', 'bg_yellow strong p-1  mt-3 ');
+                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 ', '', 'bg_yellow strong p-1  mt-3 ');
             }
 
 
@@ -1155,7 +1155,7 @@ if (!function_exists('invierte_date_time')) {
                 $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
             } else {
 
-                $response = d($texto, "flex-column mb-3 mt-3");
+                $response = d($texto, "flex-column  mt-3");
             }
         }
         return d($response, 12);
@@ -1265,12 +1265,12 @@ if (!function_exists('invierte_date_time')) {
         if(!str_len($buy_button_id,3) || !str_len($publishable_key,3) ){
             return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
         }
-        $seccion[] = d("Tienes una de dos!",'f2 col-lg-12 text-center strong mb-3');
-        $seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'f13 precio_b')),' col-lg-12 text-center strong mt-3 mb-3');
+        $seccion[] = d("Tienes una de dos!",'f18 col-lg-12 text-center strong mb-3 mt-lg-5');
+        $seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'precio_b')),' col-lg-12 text-center strong mb-3');
         
         $seccion[] = d($agregar_lista_deseos,12);
         
-        $seccion[] = d("Ó",' col-lg-12 f2 text-center strong mt-3');
+        $seccion[] = d("Ó",' col-lg-12 f16 text-center strong mt-3');
         $seccion[] = d("Te lo envíamos a cualquier parte de la república!",' col-lg-12 text-center strong mt-3 mb-3');
         
 
