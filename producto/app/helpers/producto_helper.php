@@ -86,7 +86,7 @@ if (!function_exists('invierte_date_time')) {
                 ), 'mt-4 black cursor_pointer accion_modal_politica_devoluciones');
             }
 
-            return d($contenido, 'bg_gray p-3 mt-3');
+            return d($contenido, 'bg_gray p-3 mt-3 mt-md-4 f12');
         } else {
 
 
@@ -438,8 +438,8 @@ if (!function_exists('invierte_date_time')) {
                 get_frm(
                     $data,
                     $id_servicio,
-                    $es_servicio,
-                    $tiempo_entrega
+                    $es_servicio
+                    
                 ) : $response;
         } else {
             $response = frm_servicio($id_servicio);
@@ -491,7 +491,7 @@ if (!function_exists('invierte_date_time')) {
         return append($response);
     }
 
-    function get_frm($data, $id_servicio, $es_servicio, $tiempo_entrega)
+    function get_frm($data, $id_servicio, $es_servicio)
     {
 
         $response = [];
@@ -508,7 +508,7 @@ if (!function_exists('invierte_date_time')) {
         ), 'd-none');
 
         $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
-        //$r[] = $tiempo_entrega;
+        
         $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
     }
@@ -1122,22 +1122,22 @@ if (!function_exists('invierte_date_time')) {
 
 
             $in_session = $data["in_session"];
-            $texto = d($texto_precio_base, "mt-3 f23 precio_b");
+            $texto = d($texto_precio_base, "mt-3 f23 precio_b mt-md-1");
 
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text(span("Precio regular $"), span($precio_alto, 'underline')), "black f11 ");
+                $texto_precio_alto = d(_text(span("Precio regular $",'black'), span($precio_alto, 'underline black')));
                 $tiempo_restante = span(
                     "",
                     [
-                        "id" => "contador_oferta",
-                        "class" => "precio_b f12 "
+                        "id" => "contador_oferta",                        
                     ]
                 );
 
-                $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta, quedan 3 disponibles', 'strong f12'));
-                $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 'flex-column mb-5', '', ' p-1  mt-4');
+                $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta'));
+                $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 
+                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 f12 ', '', 'bg_yellow strong p-1  mt-3 ');
             }
 
 
