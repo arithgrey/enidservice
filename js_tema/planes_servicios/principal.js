@@ -209,7 +209,12 @@ let respuesta_informacion_servicio = (data) => {
     $(".form_servicio_desc").submit(actualiza_dato_servicio_desc);
     $(".form_servicio_youtube").submit(actualiza_dato_servicio_youtube);
     $(".form_link_maps").submit(actualiza_link_maps);
+    
     $(".form_link_afiliado_amazon").submit(actualiza_link_afiliado_amazon);
+    $(".form_buy_button_id").submit(actualiza_button_id);
+    
+    $(".form_publishable_key").submit(actualiza_publishable_key);
+    
 
     $(".form_servicio_facebook").submit(actualiza_dato_servicio_facebook);
     $(".foto_producto").click(elimina_foto_producto);
@@ -777,6 +782,32 @@ let actualiza_link_afiliado_amazon = e => {
     /* Validamos que la url realmente sea de youtube */
     let url = "../q/index.php/api/servicio/q/format/json/";
     let data_send = $(".form_link_afiliado_amazon").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(1);
+    });
+
+    e.preventDefault();
+};
+let actualiza_button_id = e => {
+
+    /* Validamos que la url realmente sea de youtube */
+    let url = "../q/index.php/api/servicio/q/format/json/";
+    let data_send = $(".form_buy_button_id").serialize() + "&" + $.param({
+        "id_servicio": get_option("servicio")
+    });
+    request_enid("PUT", data_send, url, function (data) {
+        carga_informacion_servicio(1);
+    });
+
+    e.preventDefault();
+};
+let actualiza_publishable_key = e => {
+
+    /* Validamos que la url realmente sea de youtube */
+    let url = "../q/index.php/api/servicio/q/format/json/";
+    let data_send = $(".form_publishable_key").serialize() + "&" + $.param({
         "id_servicio": get_option("servicio")
     });
     request_enid("PUT", data_send, url, function (data) {
