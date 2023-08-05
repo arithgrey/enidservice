@@ -173,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
         $existencia = pr($s, "existencia");
         $precio = pr($s, "precio");
         $id_ciclo_facturacion = pr($s, "id_ciclo_facturacion");
-        $nombre = substr(strtoupper($nombre), 0, 70);
+        
         $id_usuario = pr($s, "id_usuario");
         $respuestas = respuestas_sugeridas($data, $id_servicio);
         $boton_editar = editar(
@@ -192,7 +192,7 @@ if (!function_exists('invierte_date_time')) {
 
         if ($es_servicio < 1) :
 
-            $nombre_producto = d(h($titulo, 1, ["class" => "strong f2 precio_b"]));
+            $nombre_producto = d(h($titulo, 1, ["class" => "strong f14 precio_b"]));
             $extra = is_mobile() ? 'row' : '';
             $x[] = d(venta_producto(
                 $s,
