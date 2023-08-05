@@ -202,6 +202,8 @@ if (!function_exists('invierte_date_time')) {
         $servicio,
         $nnservicio
     ) {
+        $buy_button_id = pr($servicio, "buy_button_id");
+        $publishable_key = pr($servicio, "publishable_key");
 
         $link_afiliado_amazon = pr($servicio, "link_afiliado_amazon");
         $link_maps = pr($servicio, "link_maps");
@@ -218,6 +220,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
+            $buy_button_id,
+            $publishable_key,            
             $link_afiliado_amazon,
             $link_maps,
             valida_text_imagenes($tipo_promocion, $num_imagenes),
@@ -629,6 +633,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_entrada(
+        $buy_button_id,
+        $publishable_key,
         $link_afiliado_amazon,
         $link_maps,
         $notificacion_imagenes,
@@ -706,6 +712,8 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $z[] = form_afiliado_amazon($link_afiliado_amazon);
+        $z[] = form_buy_button_id($buy_button_id);
+        $z[] = form_publishable_key($publishable_key);
 
 
         return tab_seccion($z, "tab_imagenes", $ext_1);
@@ -1880,6 +1888,83 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r);
     }
+    function form_buy_button_id($buy_button_id)
+    {
+
+
+        $r[] = form_open("", ["class" => "form_buy_button_id"]);
+        $r[] = input(
+            [
+                "type" => "hidden",
+                "name" => "q",
+                "value" => "buy_button_id"
+            ]
+        );
+
+        $input = input_frm(
+            "",
+            "buy_button",
+            [
+                "type" => "text",
+                "name" => "q2",
+                "class" => 'buy_button_id',
+                "id" => 'buy_button_id',
+                "value" => $buy_button_id,
+                "required" => true
+            ]
+        );
+
+        $button = btn("GUARDAR", ["class" => "buy_button_id_"]);
+        $r[] = flex(
+            $input,
+            $button,
+            'mt-5 align-items-end',
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
+        $r[] = form_close();
+
+        return d($r);
+    }
+    function form_publishable_key($publishable_key)
+    {
+
+
+        $r[] = form_open("", ["class" => "form_publishable_key"]);
+        $r[] = input(
+            [
+                "type" => "hidden",
+                "name" => "q",
+                "value" => "publishable_key"
+            ]
+        );
+
+        $input = input_frm(
+            "",
+            "publishable_key",
+            [
+                "type" => "text",
+                "name" => "q2",
+                "class" => 'publishable_key',
+                "id" => 'publishable_key',
+                "value" => $publishable_key,
+                "required" => true
+            ]
+        );
+
+        $button = btn("GUARDAR", ["class" => "publishable_key_"]);
+        $r[] = flex(
+            $input,
+            $button,
+            'mt-5 align-items-end',
+            'col-sm-8 p-0',
+            'col-sm-4 p-0'
+        );
+        $r[] = form_close();
+
+        return d($r);
+    }
+    
     function form_afiliado_amazon($link_afiliado_amazon)
     {
 
