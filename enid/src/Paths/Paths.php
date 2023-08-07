@@ -38,6 +38,22 @@ class Paths
         $formato[] = d($response, 'mb-5');
         return d($formato);
     }
+    function get_path_bg($id_nicho){
+    
+        $response = "";
+        $paths = [
+            1 => "https://enidservices.com/imgs/04.jpg",            
+            8 => "https://enidservices.com/imgs/decoraciones_globos_globolandia.png",
+            9 => "https://enidservices.com/imgs/background-carpas.jpg"
+        ];
+
+        if(array_key_exists($id_nicho,$paths)){
+
+            $response= $paths[$id_nicho];
+        }
+        return $response;
+        
+    }   
     public static function getcSSJs()
     {
         /*Debe extraerse desde base de datos en el futuro */
