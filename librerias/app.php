@@ -280,7 +280,6 @@ class app extends CI_Controller
     {
 
         
-        
         $id_nicho = $this->get_nicho();
         $data["is_mobile"] = (dispositivo() === 1) ? 1 : 0;
         $data["proceso_compra"] = 0;
@@ -288,6 +287,7 @@ class app extends CI_Controller
         $data["clasificaciones_departamentos"] =  [];
         $data["footer_visible"] = true;
         $data["id_nicho"] = $id_nicho;
+        $data["url_path_bg"] = $this->paths->get_path_bg($id_nicho);
         
         if ($this->is_logged_in() > 0) {
 
@@ -342,7 +342,7 @@ class app extends CI_Controller
 
         return (is_string($key)) ? $this->session->userdata($key) : $this->session->all_userdata();
     }
-
+    
     function cSSJs($data, $key = '', $valida_session = 0)
     {
         $response = $this->paths->getcSSJs();
@@ -365,7 +365,7 @@ class app extends CI_Controller
             $data["desc_web"] = $this->remplazo("desc_web", $data);
             $data["titulo"] = $this->remplazo("titulo", $data);
             $data["url_img_post"] = $this->remplazo("url_img_post", $data);
-
+            
             $this->log_acceso($data, $pagina);
         } else {
 

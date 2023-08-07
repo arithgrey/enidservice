@@ -10,7 +10,7 @@ if (!function_exists('invierte_date_time')) {
 
     function render_search($data)
     {
-
+        
         $paginacion = $data["paginacion"];
         $response[] = $data["busqueda_paginas"];
         $response[] = baner_compra_tipo_producto($data);
@@ -41,18 +41,9 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion_compras_conjunto = d("", "promociones_sugeridas col-md-5 col-xs-12 p-0");
         $seccion_compras_conjunto_top = d("", "promociones_sugeridas_top col-md-5 col-xs-12 p-0");
-
-        
-        if(es_decoracion_tematica($data)){
-
-            $adicionales[] = d(img("https://enidservices.com/imgs/decoraciones_globos_globolandia.png"), "col-md-12 text-center col-xs-12 p-0");
-
-        }else{
-
-            $adicionales[] = d(img("https://enidservices.com/imgs/04.jpg"), "col-md-12 text-center col-xs-12 p-0 bg_enid_depo");
-        }
         
         
+        $adicionales[] = d(img($data["url_path_bg"]), "col-md-12 text-center col-xs-12 p-0");
 
         $adicionales[] = $seccion_compras_conjunto_top;
         $adicionales[] = d("", 2);
