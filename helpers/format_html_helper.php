@@ -1678,7 +1678,7 @@ function crea_estrellas($calificacion, $sm = 0)
 
         for ($a; $a <= $calificacion; $a++) {
 
-            $valoraciones .= label("★", ["class" => 'estrella black ', "id" => $a]);
+            $valoraciones .= label("★", ["class" => 'estrella white ', "id" => $a]);
         }
     }
 
