@@ -51,16 +51,16 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta name="twitter:title" content="<?= $titulo ?>">
 <meta name="twitter:description" content="Pago contra entrega CDMX <?= $desc_web; ?>">
 <meta name="twitter:creator" content="@enidservice">
-<meta name="twitter:image" content="<?= create_url_preview($url_img_post) ?>">
-<meta name="twitter:image:src" content="<?= create_url_preview($url_img_post) ?>">
+<meta name="twitter:image" content="<?= $url_img_post ?>">
+<meta name="twitter:image:src" content="<?= $url_img_post ?>">
 <meta itemprop="name" content="Enid Service">
 <meta itemprop="description" content="Pago contra entrega CDMX <?= $desc_web; ?>">
-<meta itemprop="image logo" content="<?= create_url_preview($url_img_post) ?>">
+<meta itemprop="image logo" content="<?= $url_img_post ?>">
 <meta itemprop="email" content="ventas@enidservices.com">
 <meta itemprop="telephone" content="5552967027">
 <meta itemprop="address" content="">
 <meta itemprop="url" content="<?= base_url() ?>">
-<meta itemprop="photo" content="<?= create_url_preview($url_img_post) ?>">
+<meta itemprop="photo" content="<?= $url_img_post ?>">
 <meta name="p:domain_verify" content="db70882d0b8730259e2a264f997224b3" />
 <meta name="facebook-domain-verification" content="wsvdn89zybnrs300qx1bnnt8gn8lcj" />
 <link rel="shortcut icon" href="../img_tema/enid_service_logo.jpg">
