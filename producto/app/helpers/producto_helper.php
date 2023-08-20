@@ -1272,10 +1272,10 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span($call_to_action),
-                        icon('pull-right mr-4 fa fa fa-truck  fa-2x white ml-auto')
+                        span($call_to_action,'f11'),
+                        icon('pull-right mr-4 fa fa fa-truck fa-2x white ml-auto')
                     ),
-                    'pt-3 pb-3'
+                    'pt-2 pb-2'
                 ),
                 [
                     'class' => 'en_lista_deseos white text-center',
@@ -1303,7 +1303,7 @@ if (!function_exists('invierte_date_time')) {
             return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
         }
         
-        $seccion[] = d("Tienes una de dos!",'f13 col-lg-12 text-center strong mb-3 ');        
+        $seccion[] = d("-- Tienes una de dos -- ",'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');        
         $seccion[] = d($agregar_lista_deseos,12);
     
         $seccion[] = d(d(stripe_buy_button(
