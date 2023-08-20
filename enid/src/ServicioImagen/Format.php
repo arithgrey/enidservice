@@ -107,7 +107,7 @@ class Format
         
         $galeria = append([$galeri, $galeria_preview]);
         
-        if($is_mobile){
+        if(!$is_mobile){
             $galeria = append($imagenes_format);
         }
         return [

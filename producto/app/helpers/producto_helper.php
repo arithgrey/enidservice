@@ -1302,15 +1302,10 @@ if (!function_exists('invierte_date_time')) {
         if(!str_len($buy_button_id,3) || !str_len($publishable_key,3) ){
             return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
         }
-        $seccion[] = d("Tienes una de dos!",'f13 col-lg-12 text-center strong mb-3 ');
-        //$seccion[] = d(_text_("Si vives en CDMX paga al recibir tu pedido",span("te llaga hoy!",'precio_b')),' col-lg-12 text-center strong mb-3');
         
+        $seccion[] = d("Tienes una de dos!",'f13 col-lg-12 text-center strong mb-3 ');        
         $seccion[] = d($agregar_lista_deseos,12);
-        
-        //$seccion[] = d("Ó",' col-lg-12 f16 text-center strong mt-3');
-        //$seccion[] = d("Te lo envíamos ENVÍO GRATIS!",' col-lg-12 text-center strong mt-3 mb-3');
-        
-
+    
         $seccion[] = d(d(stripe_buy_button(
             $buy_button_id,
             $publishable_key
@@ -1318,7 +1313,7 @@ if (!function_exists('invierte_date_time')) {
         )),"col-lg-12 text-center mt-3");
         
         $seccion[] = d("Te llegan HOY en CDMX y Área Metropolitana",' col-lg-12 text-center strong mt-3 mb-3');
-        $seccion[] = d("y de un a dos en los estados",' col-lg-12 text-center strong ');
+        $seccion[] = d("y de un a dos días en los estados",' col-lg-12 text-center strong ');
         return $seccion;
 
     }
