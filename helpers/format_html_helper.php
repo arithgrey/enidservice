@@ -389,7 +389,7 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
 function stripe_buy_button($buy_button_id = "", $key = "", $class = "")
 {
 
-    $att = ["buy-button-id" => $buy_button_id, "publishable-key" => $key, "class" => $class];
+    $att = ["buy-button-id" => $buy_button_id, "publishable-key" => $key, "class" => _text_($class)];
 
     return get_base_html("stripe-buy-button", "", $att);
 }
