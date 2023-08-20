@@ -386,11 +386,11 @@ function a_enid($title = '', $attributes = [], $format_block = 1)
 
     return get_base_html("a", $title, $att);
 }
-function stripe_buy_button($buy_button_id="",$key="", $class="")
+function stripe_buy_button($buy_button_id = "", $key = "", $class = "")
 {
 
-    $att = ["buy-button-id" => $buy_button_id, "publishable-key" => $key, "class"=>$class] ;
-    
+    $att = ["buy-button-id" => $buy_button_id, "publishable-key" => $key, "class" => $class];
+
     return get_base_html("stripe-buy-button", "", $att);
 }
 
@@ -2124,24 +2124,28 @@ function navegacion(
                 0
             );
 
+            $textos = _text_(
+                span('Pide y recibe hoy', _text_('black', $extra)),
+                icon('fa fa-clock-o fa-2x', _text_('black', $extra)),
+                $str,
+                icon('fa fa-shield fa-2x', _text_('black', $extra)),
+                span($link, _text_('black', $extra))
+            );
+            $textos = is_mobile() ? "" :  $textos;
+            $class_mb = is_mobile() ? "text-uppercase black strong f11" :  "";
+            $class_mb_ = is_mobile() ? "text-center" :  "";
             $response[] = d(d(
                 _text_(
                     $categorias,
-                    span('Envíos, cambios y devoluciones gratis', _text_('black', $extra)),
-                    icon('fa fa-gift fa-2x', _text_('black', $extra)),
-                    span('Pide y recibe hoy', _text_('black', $extra)),
-                    icon('fa fa-clock-o fa-2x', _text_('black', $extra)),
-                    $str,
-                    icon('fa fa-shield fa-2x', _text_('black', $extra)),
-                    span($link, _text_('black', $extra))
-
+                    span('Envíos, cambios y devoluciones gratis', _text_('black', $extra, $class_mb)),
+                    icon('fa fa-gift fa-2x', _text_('black', $extra, $class_mb)),
+                    
+                    $textos
                 ),
                 [
-                    "class" => 'black bg_yellow_s
-                      pr-4 pl-4'
+                    "class" => _text_($class_mb_, 'black bg_yellow_s pr-4 pl-4')
                 ]
             ), 'text-md-right col-sx-12 col-sx-12 ');
-
         } else {
 
 
@@ -2181,10 +2185,9 @@ function navegacion(
         );
 
         if (!es_decoracion_tematica($id_nicho)) {
-            
-            $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none ab_bg border-bottom seccion_menu_comunes');
 
-        }else{
+            $response[] = d(d($opciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none ab_bg border-bottom seccion_menu_comunes');
+        } else {
 
             $opciones_decoraciones[] = d(
                 a_enid(flex(icon('white fa fa fa-star'), "Referencias", "", "", "ml-2"), [
@@ -2195,9 +2198,7 @@ function navegacion(
             );
 
             $response[] = d(d($opciones_decoraciones, _text_("row d-flex  p-1", _between)), 'col-xs-12 d-md-none');
-        } 
-
-
+        }
     } else {
 
         if (!$is_mobile) {
@@ -2486,7 +2487,7 @@ function get_logo($id_nicho, $session = 0)
 
 
 
-    $icono_busqueda = icon(_text_(_busqueda_icon, "white fa-2x mr-2"), ["onclick" => "openNav()"]);
+    $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
     $carro = "";
 
     $icono_busqueda_carro = flex(d(

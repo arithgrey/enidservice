@@ -262,12 +262,13 @@ if (!function_exists('invierte_date_time')) {
         $numero_compras = pr($s, "deseado");
         if ($numero_compras > 1) {
 
-            $extra = is_mobile() ? "col-sm-12 mt-5" : "col-sm-12";
+            $extra = is_mobile() ? "col-sm-12" : "col-sm-12";
             $texto = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)));
-            $data_response[] = d(flex($texto, "Calificaciones", 'flex-column mb-1 black', '', 'strong'), $extra);
-
             
-
+            if(!is_mobile()){
+                $data_response[] = d(flex($texto, "Calificaciones", 'flex-column mb-1 black', '', 'strong'), $extra);
+            }
+            
 
         }
 
