@@ -435,7 +435,8 @@ if (!function_exists('invierte_date_time')) {
     ) {
 
 
-        $r[] = ($es_mobile > 0) ? "" : d($nombre_producto, 12);
+        $extra = is_mobile() ? "mt-5": "";
+        $r[] = d($nombre_producto, _text_("col-sm-12",$extra));
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
 

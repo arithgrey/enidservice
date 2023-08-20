@@ -2137,7 +2137,7 @@ function navegacion(
             $response[] = d(d(
                 _text_(
                     $categorias,
-                    span('Envíos, cambios y devoluciones gratis', _text_('black', $extra, $class_mb)),
+                    span('Envíos, cambios y devoluciones gratis y hasta 12 Meses sin intereses', _text_('black', $extra, $class_mb)),
                     icon('fa fa-gift fa-2x', _text_('black', $extra, $class_mb)),
                     
                     $textos
