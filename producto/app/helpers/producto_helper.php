@@ -173,7 +173,7 @@ if (!function_exists('invierte_date_time')) {
         $existencia = pr($s, "existencia");
         $precio = pr($s, "precio");
         $id_ciclo_facturacion = pr($s, "id_ciclo_facturacion");
-        
+
         $id_usuario = pr($s, "id_usuario");
         $respuestas = respuestas_sugeridas($data, $id_servicio);
         $boton_editar = editar(
@@ -253,10 +253,9 @@ if (!function_exists('invierte_date_time')) {
             $nombre = pr($s, "nombre_servicio");
             $nombre = substr($nombre, 0, 300);
             $nombre_producto = _titulo($nombre, 2);
-            
+
             $data_response[] = d($nombre_producto, 'col-sm-12 mt-5');
             $data_response[] = d(texto_precio($data), 'col-sm-12');
-            
         }
 
         $numero_compras = pr($s, "deseado");
@@ -264,12 +263,10 @@ if (!function_exists('invierte_date_time')) {
 
             $extra = is_mobile() ? "col-sm-12" : "col-sm-12";
             $texto = d(_text_(span($numero_compras, 'underline'), crea_estrellas(5)));
-            
-            if(!is_mobile()){
+
+            if (!is_mobile()) {
                 $data_response[] = d(flex($texto, "Calificaciones", 'flex-column mb-1 black', '', 'strong'), $extra);
             }
-            
-
         }
 
         $data_response[] = d($r, 'col-sm-12 mt-5 mb-5');
@@ -302,34 +299,35 @@ if (!function_exists('invierte_date_time')) {
 
         return d(d($pagina_producto, 13), 'col-sm-12 mt-md-5 ');
     }
-    function texto_precio($data){
+    function texto_precio($data)
+    {
 
-            $servicio = $data["info_servicio"]["servicio"];
-            $precio_unidad = pr($servicio, "precio");
+        $servicio = $data["info_servicio"]["servicio"];
+        $precio_unidad = pr($servicio, "precio");
 
-            $descuento_especial = pr($servicio, "descuento_especial");
-            $precio_alto = pr($servicio, "precio_alto");
-            $precio_alto = ($precio_alto > $precio_unidad) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad, 16));
-    
-            $usuario = $data["usuario"];
-            $es_premium = es_premium($data, $usuario);
-            $texto_precio_base = ($precio_unidad > 0) ? _text("$", $precio_unidad) : "A CONVENIR";
-    
-    
-            $texto_premium = "";
-            if ($es_premium) {
-    
-                $texto = d(del($texto_precio_base), "f11 text-secondary");
-    
-                $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
-            } else {
-    
-    
-                $in_session = $data["in_session"];
-                $texto = d($texto_precio_base, "mt-3 f16 precio_b mt-md-1");
-            }
+        $descuento_especial = pr($servicio, "descuento_especial");
+        $precio_alto = pr($servicio, "precio_alto");
+        $precio_alto = ($precio_alto > $precio_unidad) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad, 16));
 
-            return  $texto;
+        $usuario = $data["usuario"];
+        $es_premium = es_premium($data, $usuario);
+        $texto_precio_base = ($precio_unidad > 0) ? _text("$", $precio_unidad) : "A CONVENIR";
+
+
+        $texto_premium = "";
+        if ($es_premium) {
+
+            $texto = d(del($texto_precio_base), "f11 text-secondary");
+
+            $response = flex($texto, $texto_premium, "flex-column mb-3 mt-3");
+        } else {
+
+
+            $in_session = $data["in_session"];
+            $texto = d($texto_precio_base, "mt-3 f16 precio_b mt-md-1");
+        }
+
+        return  $texto;
     }
     function botones_ver_mas($id_servicio)
     {
@@ -435,7 +433,7 @@ if (!function_exists('invierte_date_time')) {
     ) {
 
 
-        $extra = is_mobile() ? "col-sm-12 mt-3":"col-sm-12"; 
+        $extra = is_mobile() ? "col-sm-12 mt-3" : "col-sm-12";
         $r[] = d($nombre_producto, $extra);
         $r[] = text_servicio($es_servicio, $precio, $id_ciclo_facturacion, $data);
 
@@ -477,7 +475,7 @@ if (!function_exists('invierte_date_time')) {
                     $data,
                     $id_servicio,
                     $es_servicio
-                    
+
                 ) : $response;
         } else {
             $response = frm_servicio($id_servicio);
@@ -546,7 +544,7 @@ if (!function_exists('invierte_date_time')) {
         ), 'd-none');
 
         $r[] = agregar_lista_deseos($data, $en_session, $id_servicio);
-        
+
         $response[] = d($r, "contenedor_form col-sm-12");
         return append($response);
     }
@@ -1165,17 +1163,22 @@ if (!function_exists('invierte_date_time')) {
             $texto_precio_alto = '';
             if ($precio_alto > $precio_unidad) {
 
-                $texto_precio_alto = d(_text(span("Precio regular $",'black'), span($precio_alto, 'underline black')));
+                $texto_precio_alto = d(_text(span("Precio regular $", 'black'), span($precio_alto, 'underline black')));
                 $tiempo_restante = span(
                     "",
                     [
-                        "id" => "contador_oferta",                        
+                        "id" => "contador_oferta",
                     ]
                 );
 
                 $tiempo_restante_oferta = _text_($tiempo_restante, span('termina la oferta'));
-                $texto_precio_alto = flex($texto_precio_alto, $tiempo_restante_oferta, 
-                'flex-column mb-5 mt-3 border-bottom border-secondary p-2 ', '', 'bg_g strong p-1  mt-3 ');
+                $texto_precio_alto = flex(
+                    $texto_precio_alto,
+                    $tiempo_restante_oferta,
+                    'flex-column mb-5 mt-3 border-bottom border-secondary p-2 ',
+                    '',
+                    'bg_g strong p-1  mt-3 '
+                );
             }
 
 
@@ -1249,7 +1252,7 @@ if (!function_exists('invierte_date_time')) {
     function agregar_lista_deseos($data, $in_session, $id_servicio)
     {
 
-        
+
         $id_nicho = $data["id_nicho"];
         $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (en cdmx)" : "Anticipa tu fecha aquí";
         $format = (es_decoracion_tematica($id_nicho)) ? 6 : 1;
@@ -1273,7 +1276,7 @@ if (!function_exists('invierte_date_time')) {
 
                 d(
                     _text_(
-                        span($call_to_action,'f11'),
+                        span($call_to_action, 'f11'),
                         icon('pull-right mr-4 fa fa fa-truck fa-2x white ml-auto')
                     ),
                     'pt-2 pb-2'
@@ -1287,41 +1290,72 @@ if (!function_exists('invierte_date_time')) {
         }
 
         $agregar_lista_deseos = append($response);
-        
+
 
         $seccion = get_compra_agenda($data, $agregar_lista_deseos);
         $seccion[] = d(cargando(), 'col-xs-12');
         return append($seccion);
     }
-    function get_compra_agenda($data, $agregar_lista_deseos){
-        
-    
+    function get_compra_agenda($data, $agregar_lista_deseos)
+    {
+
+
         $servicio = $data["info_servicio"]["servicio"];
-        $buy_button_id = pr($servicio,"buy_button_id");
-        $publishable_key = pr($servicio,"publishable_key");
-        
-        if(!str_len($buy_button_id,3) || !str_len($publishable_key,3) ){
-            return agenda_pago_contra_entrega($agregar_lista_deseos,$servicio,$data["tiempo_entrega"]);
+        $buy_button_id = pr($servicio, "buy_button_id");
+        $publishable_key = pr($servicio, "publishable_key");
+
+        if (!str_len($buy_button_id, 3) || !str_len($publishable_key, 3)) {
+            return agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $data["tiempo_entrega"]);
         }
-        
-        $seccion[] = d("-- Tienes una de dos -- ",'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');        
-        $seccion[] = d($agregar_lista_deseos,12);
-    
+
+        $seccion[] = d("-- Tienes una de dos -- ", 'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');
+        $seccion[] = d($agregar_lista_deseos, 12);
+
         $seccion[] = d(d(stripe_buy_button(
             $buy_button_id,
             $publishable_key
-            
-        )),"col-lg-12 text-center mt-3");
-        
-        $seccion[] = d("Te llegan HOY en CDMX y Área Metropolitana",' col-lg-12 text-center strong mt-3 mb-3');
-        $seccion[] = d("y de un a dos días en los estados",' col-lg-12 text-center strong ');
+
+        )), "col-lg-12 text-center mt-3");
+
+        $seccion[] = d("Te llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center strong mt-3 mb-3');
+        $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center strong ');
+
+
+        $id_servicio = pr($servicio, "id_servicio");
+        $path = a_enid(
+            "Checa referencias aquí!",
+            [
+                "href" =>
+                path_enid("clientes"),
+                "class" => "black"
+            ]
+        );
+
+        if (is_mobile()) {
+
+            $ids = [1110, 1606, 1113, 1518, 1032, 1127];
+            if (in_array($id_servicio, $ids)) {
+
+                $path = a_enid(
+                    "Checa referencias aquí!",
+                    [
+                        "href" =>
+                        "https://m.facebook.com/story.php?story_fbid=pfbid024TEAKwr1KF4X3pVANnaDgKsh2LcoVjcVADcDi7sp9jjBvycR5fqTi6zoFk1zZL8wl&id=100063746634538&mibextid=qC1gEa",
+                        "class" => "black"
+                    ]
+                );
+            }
+        }
+
+        $seccion[] = d($path, ' col-lg-12 underline text-center mt-2');
+
         return $seccion;
-
     }
-    function agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $tiempo_entrega){
+    function agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $tiempo_entrega)
+    {
 
-        $id_servicio = pr($servicio,"id_servicio");
-        
+        $id_servicio = pr($servicio, "id_servicio");
+
         $lista_deseos = icon(
             'fa black agregar_deseos_sin_antecedente fa fa-heart-o fa-2x p-4 borde_black ',
             [
@@ -1331,11 +1365,10 @@ if (!function_exists('invierte_date_time')) {
 
         $seccion[] = flex($agregar_lista_deseos, $lista_deseos, _text_(_between, 'mt-1'), 'p-0 col-xs-10', 'p-0 col-xs-2');
         $seccion[] = $tiempo_entrega;
-        
 
-        
+
+
         return  $seccion;
-        
     }
 
     function confianza($id_servicio, $data)
