@@ -1340,7 +1340,7 @@ if (!function_exists('invierte_date_time')) {
                     "Checa referencias aquí!",
                     [
                         "href" =>
-                        "https://www.facebook.com/media/set/?set=a.4158793034166256&type=3&mibextid=ncKXMA",
+                        "https://www.facebook.com/100063746634538/posts/pfbid018XMMgQ2vM35s7GK5YM3P2HctCmjZcyHRKRnPccV1MbPEjhkcnczft1W4qEMTGwnl/?mibextid=cr9u03",
                         "class" => "black"
                     ]
                 );
