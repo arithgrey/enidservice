@@ -52,9 +52,6 @@ if (!function_exists('invierte_date_time')) {
 
     $response[] = d($paso_3, 'col-xs-3 text-center mt-5');
 
-
-
-
     /**/
 
     $paso_4[]  = d('<svg xmlns="http://www.w3.org/2000/svg" fill="none" 
@@ -69,13 +66,36 @@ if (!function_exists('invierte_date_time')) {
 
     $contenido[] =  d($response, 13);
 
+    $referencias =  format_link(
+        _text_(icon('fa fa-star white'),"Mira nuestras referencias"),
+        [
+            "href" => path_enid("clientes")
+            
+        ],2
+    );
+
+    $referencias_ =  format_link(
+        _text_(icon('fa fa-star white'),"Mira nuestras referencias"),
+        [
+            "href" => path_enid("clientes")
+            
+        ],2
+    );
+    $referencias_en_facebook =  format_link(
+        _text_(icon('fa fa-star white'),"Checa referencias en Facebook"),
+        [
+            "href" => "https://www.facebook.com/100063746634538/posts/pfbid018XMMgQ2vM35s7GK5YM3P2HctCmjZcyHRKRnPccV1MbPEjhkcnczft1W4qEMTGwnl/?mibextid=cr9u03"
+            
+        ],2
+    );
+
+    $referencias = flex_md($referencias, $referencias_en_facebook, _between_md,'','mt-4');
+
     $str = _d(
             d(_titulo(
                 _text_(
-                    "Paga al recibir tus artículos y recíbelos el mismo día!",
-                    icon('fa fa-handshake-o'),
-                    "si vives en CDMX",
-                    icon('fa-gift')
+                    span("Paga al recibir tus artículos y recíbelos el mismo día! en CDMX","f2"),                                        
+                    icon('fa fa-check fa-2x')                    
                 )
             ), 'mb-2 mt-4'),
             
@@ -83,73 +103,53 @@ if (!function_exists('invierte_date_time')) {
             d(append($contenido))
             
             ,
-            hr('borde_end_b'),
+            
             _text(
-                d("Ofrecemos estas formas de pago al recibir tu pedido", 'text-uppercase black mt-5 f12 black strong')
+                d("Formas de pago ", 'text-uppercase black mt-5 f2 black strong')
             ),            
             _text(
                 d(
-                    _text("1.-", strong("Efectivo ")),
+                    _text("1.-", span("Efectivo","black f12")),
                     'mt-4'
                 )
             ),
             _text(
-                d(_text("2.-", strong("Transferencia electrónica")), 'mt-5'),
-                d('Validamos el pago a través de nuestra banca electrónica 
-                al momento de la transferencia','black')
+                d(_text("2.-", span("Transferencia electrónica","black f12")), 'mt-2')                
             ),
             _text(
-                d(_text("3.-", strong("tarjeta de crédito o débito")), 'mt-5'),
-                d("Podrás comprar con tu tarjeta bancaria con una comisión adicional del 8.5% del monto de tu pedido")
-            ),
-            
+                d(_text("3.-", span("Tarjeta de crédito o débito","black f12")), 'mt-2')
+            ),            
             d(
-                format_link(
-                    _text_(icon('fa fa-star white'),"Mira algunos de nuestros clientes"),
-                    [
-                        "href" => path_enid("clientes")
-                        
-                    ],2
-                ),'top_100'
-            ),
-            hr("top_100 borde_black"),
-                d(_titulo(
-                    _text_(
-                        "Pago contra entrega en el estado de México",
-                        icon('fa fa-check')                    
-                    )
-                    ),'mt-5'
-                )
+                $referencias ,'mt-5 '
+            )            
+
             ,
-            _text(                
-                d(
-                    _text_("La mecánica de pago contra entrega al 100% la tenemos disponible solo en CDMX, (no te desmotives) 
-                si vives en el estado de México, puedes acceder a este beneficio, el costo de envió es de 100 pesos los cuales deben ser liquidados para 
-                que podamos llevarte tus artículos el mismo día o el día siguiente según sea la distancia y hora en que agendes tu pedido, 
-                puedes seguir la entrega de tu pedido en nuestro localizador con tu número de guia signado",
-                format_link( _text_(icon('fa fa-fighter-jet fa-2x white'), "Localiza tu pedido"),
-                
-                [
-                    "href" => path_enid("rastrea-paquete"),
-                    "class" => "top_100 white"
-                ],2)),'mt-3')
-            ),
-            
+            d("Esta modalidad es EXCLUSIVA para entregas en CDMX y SOLO estas zonas adicionales:", "f2 black strong top_100 text-uppercase"),
+            d("- Nezahualcóyotl", "f12 black mt-5"),
+            d("- Chimalhuacán", "f12 black mt-2"),
+            d("- Ecatepec solo del metro Villa de Aragón a Ciudad Azteca ", "f12 black mt-2")
+            ,
             hr("top_100 borde_black"),
+            
             d(_titulo(
                 _text_(                    
-                    'También contamos con envíos express',
-                    icon('fa black fa fa-truck '),
-                    'a todo México'
+                    span("No hacemos pago contra entrega en los estados pero ...","f2"),                                                            
                 )
             ), 'mb-2 mt-5')
             ,_text(
-                d("Solo agenda tu pedido en nuestra página y muy seguramente el costo de entrega vá de nuestra parte! y lo mejor de todo con la confianza de que miles de clientes nos respaldan.", 'black mt-3')
+                d("Pierde  el miedo!! Te las podemos enviar","f18 text-center font-weight-bold text-uppercase mt-5 red_enid"),                                        
+                d("Si estamos aquí es para ayudarte a pasar al siguiente nivel.", 'black mt-3 text-center f12 black'),
+                d(
+                    $referencias_ ,'mt-5 text-center'
+                )            ,
+                d(
+                    $referencias_en_facebook ,"mt-3 text-center"
+                )            
             )
         );
 
         $r[] = d($str, " d-flex flex-column justify-content-between mh_300");
-        $r[] = img_pago();
+        
 
 
         return d($r,"col-md-6 col-md-offset-3 col-xs-12 mt-5");
