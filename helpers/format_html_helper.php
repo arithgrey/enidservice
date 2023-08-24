@@ -1401,6 +1401,7 @@ function form_busqueda_productos($mas_vendidos)
 function opciones_acceso($id_nicho)
 {
 
+    return "";
     $response = [];
 
     $flex_compras = d(
