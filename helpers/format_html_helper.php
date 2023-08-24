@@ -2168,7 +2168,7 @@ function navegacion(
                 "href" => path_enid("clientes"),
                 "class" => "strong white"
             ]),
-            "col-xs-4 "
+            "col-xs-6 "
         );
 
         $opciones[] = d(
@@ -2176,10 +2176,10 @@ function navegacion(
                 "href" => path_enid("rastrea-paquete"),
                 "class" => "strong white"
             ]),
-            "col-xs-4 "
+            "col-xs-6 "
         );
 
-
+        /*
         $opciones[] = d(a_enid(
             flex(icon('fa fa-check-circle-o white'), "Paga al recibir en CDMX", _between, 'mr-2'),
             [
@@ -2187,6 +2187,7 @@ function navegacion(
                 "class" => "strong white"
             ]
         ), " col-xs-4");
+        */
 
 
         if (!es_decoracion_tematica($id_nicho)) {
