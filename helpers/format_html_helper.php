@@ -2157,16 +2157,18 @@ function navegacion(
         $response[] = d([get_logo($id_nicho), $frecuentes_busqueda], 'd-md-flex mb-3 p-md-4');
 
 
-        $opciones[] = d(a_enid(
-            flex(icon('fa fa-check-circle-o white'), "Paga al recibir", _between, 'mr-2'),
-            [
-                "href" => path_enid("forma_pago"),
+       
+
+
+
+        
+        $opciones[] = d(
+            a_enid(flex(icon('white fa fa fa-star'), "Referencias", "", "", "ml-2"), [
+                "href" => path_enid("clientes"),
                 "class" => "strong white"
-            ]
-        ), " col-xs-4");
-
-
-
+            ]),
+            "col-xs-4 "
+        );
 
         $opciones[] = d(
             a_enid(flex(icon('white fa white fa fa-truck'), "Rastrea tu equipo", _between, 'mr-2'), [
@@ -2176,13 +2178,15 @@ function navegacion(
             "col-xs-4 "
         );
 
-        $opciones[] = d(
-            a_enid(flex(icon('white fa fa fa-star'), "Referencias", "", "", "ml-2"), [
-                "href" => path_enid("clientes"),
+
+        $opciones[] = d(a_enid(
+            flex(icon('fa fa-check-circle-o white'), "Paga al recibir", _between, 'mr-2'),
+            [
+                "href" => path_enid("forma_pago"),
                 "class" => "strong white"
-            ]),
-            "col-xs-4 "
-        );
+            ]
+        ), " col-xs-4");
+
 
         if (!es_decoracion_tematica($id_nicho)) {
 
