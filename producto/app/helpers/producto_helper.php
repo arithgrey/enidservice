@@ -255,7 +255,7 @@ if (!function_exists('invierte_date_time')) {
             $nombre_producto = _titulo($nombre, 2);
 
             $data_response[] = d($nombre_producto, 'col-sm-12 mt-5');
-            $data_response[] = d(texto_precio($data), 'col-sm-12');
+            
         }
 
         $numero_compras = pr($s, "deseado");
@@ -328,6 +328,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
         return  $texto;
+        
     }
     function botones_ver_mas($id_servicio)
     {

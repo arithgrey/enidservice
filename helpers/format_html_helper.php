@@ -2181,7 +2181,7 @@ function navegacion(
 
 
         $opciones[] = d(a_enid(
-            flex(icon('fa fa-check-circle-o white'), "Paga al recibir", _between, 'mr-2'),
+            flex(icon('fa fa-check-circle-o white'), "Paga al recibir en CDMX", _between, 'mr-2'),
             [
                 "href" => path_enid("forma_pago"),
                 "class" => "strong white"
