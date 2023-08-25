@@ -104,7 +104,7 @@ if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
         <?php endif; ?>
     <?php endif; ?>
     <?php if (!es_decoracion_tematica($id_nicho)) : ?>
-        <footer class='p-4 mt-5 borde_black top_200' id='sticky-footer'>
+        <footer class='p-4 mt-5 top_200' id='sticky-footer'>
             <?= d(footer_opciones(), 13) ?>
             <?= d(d("© 2023 ENID SERVICE.", 'col-lg-12 mt-5 strong fp9'), 13); ?>
         </footer>
