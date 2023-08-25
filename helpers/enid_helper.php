@@ -1100,7 +1100,8 @@ function footer_opciones()
     $productos_footer[] = _titulo('Productos', 2, '');
 
     $productos_footer[] = a_enid(
-        'Novedades',
+        
+        h('Novedades',2,"fp8 ayuda "),
         [
             "href" => path_enid("search", "/?q2=0&q=&order=1"),
             'class' => 'black fp9'
@@ -1108,14 +1109,16 @@ function footer_opciones()
     );
 
     $productos_footer[] = a_enid(
-        'Populares',
+        
+        h('Lo más pedido',2,"fp8 ayuda "),
         [
             "href" => path_enid("search", "/?q2=0&q=&order=2&order=4"),
             'class' => 'black fp9'
         ]
     );
     $productos_footer[] = a_enid(
-        'Blog',
+        
+        h('Blog',2,"fp8 ayuda "),
         [
             "href" => "../../sports",
             'class' => 'black fp9'
@@ -1126,66 +1129,52 @@ function footer_opciones()
 
 
     /*Asistencia*/
-    $asistencia[] =  _titulo('Asistencia', 2, '');
+    $asistencia[] =  _titulo('¿Necesitas ayuda?', 2, '');
 
     $asistencia[] =  a_enid(
-        flex('¿Necesitas ayuda?', '(55) 5296 - 7027', 'flex-column mb-3 borde_black p-2', 'strong', 'strong'),
+        
+        h('(55) 5296 - 7027',2,"f15 black underline"),
         [
             'href' => path_enid('whatsapp_ayuda', 0, 1),
-            'class' => 'black fp9',
+            'class' => 'black ',
             'target' => '_black'
         ]
     );
 
-
     $asistencia[] =  a_enid(
-        'Pago',
+        h('Rastrea tu pedido',2,"fp8 "),
         [
-            'href' => path_enid('forma_pago'),
-            'class' => 'black fp9',
+            'href' => path_enid('rastrea-paquete'),            
+            'target' => '_black'
+        ]
+    );
+
+    $asistencia[] =  a_enid(
+        h('Formas de pago',2,"fp8 ayuda "),
+        [
+            'href' => path_enid('forma_pago'),            
             'target' => '_black'
         ]
     );
     $asistencia[] =  a_enid(
-        'Envío',
+        
+        h('Envío y pago contra entrega',2,"fp8 ayuda "),
         [
             'href' => path_enid('envio'),
-            'class' => 'black fp9',
             'target' => '_black'
         ]
     );
 
 
     $asistencia[] =  a_enid(
-        'Clientes',
+        h('Nuestras referencias',2,"fp8 ayuda "),
         [
-            'href' => path_enid('clientes'),
-            'class' => 'black fp9',
+            'href' => path_enid('clientes'),            
             'target' => '_black'
         ]
     );
-    $asistencia[] =  a_enid(
-        'Acceder',
-        [
-            'href' => path_enid('login'),
-            'class' => 'black fp9',
-            'target' => '_black'
-        ]
-    );
-
-    /*
-    $asistencia[] =  a_enid(
-        '¿Costo de entrega?',
-        [
-            'href' => path_enid('costo_entrega'),
-            'class' => 'black fp9',
-            'target' => '_black'
-        ]
-    );
-    */
-    /**Oportunidades*/
-
-
+    
+    
     $oportunidades[] = _titulo('Oportunidades', 2, '');
 
     /*
@@ -1199,10 +1188,11 @@ function footer_opciones()
     );
     */
     $oportunidades[] = a_enid(
-        'Programa de afiliados',
+        
+        h('Programa de afiliados',2,"fp8 "),
         [
             'href' => path_enid('sobre_vender'),
-            'class' => 'black fp9 mt-3 borde_black p-2 strong'
+            'class' => 'black  '
         ]
     );
 
@@ -1218,7 +1208,7 @@ function footer_opciones()
         ]
     );
     */
-    $sociales[] = _titulo('SÍGUENOS', 2, '');
+    $sociales[] = _titulo('Redes sociales', 2, '');
     $sociales[] = a_enid(
         icon(_text_(_facebook_icon, 'fa-2x')),
         [
