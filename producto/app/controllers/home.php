@@ -72,6 +72,7 @@ class Home extends CI_Controller
         $data["q2"] = prm_def($param, "q2");
         $servicio = $this->app->servicio($this->id_servicio);                
         if(pr($servicio, "status") > 0){
+            $id_nicho = pr($servicio, "id_nicho");
 
             $data["tallas"] = $this->get_tallas($this->id_servicio);
             $path = path_enid("go_home");
@@ -120,8 +121,12 @@ class Home extends CI_Controller
             $data["imagenes"] = $this->servicio_imagen->formatG($data["imgs"], pr($servicio, "nombre_servicio"), $is_mobile);
             $data = $this->app->cssJs($data, "producto");    
               
+            
             $this->app->log_acceso($data, 3, $this->id_servicio  );
+            setcookie('xn', $id_nicho, strtotime('2038-01-01'), "/");
             $this->app->pagina($data, render_producto($data), 1);
+
+
             
             
         }else{
