@@ -9,11 +9,12 @@ if (!function_exists('invierte_date_time')) {
         $comentarios = $data["comentarios"];
         $promedio_valoraciones = valorados($num);
 
+        $z[] = referencias_fotograficas($data);
         $z[] = place("table_orden_1");
         $z[] = criterios($comentarios);
 
         $z[] = comentarios($comentarios, $data);
-        $z[] = referencias_fotograficas($data);
+        
         $z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
 
         
@@ -194,7 +195,7 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $response[] = d(d("Comentarios con imágenes", '  h3 text-uppercase black font-weight-bold col-sm-12'), 13);
+        $response[] = d(d("Aquí algunas referencias", '  h3 text-uppercase black font-weight-bold col-sm-12'), 13);
         $response[] = d(a_enid("Ve fotos recientes",
             [
                 "href" => path_enid("clientes"),
