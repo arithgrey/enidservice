@@ -122,7 +122,7 @@ class Home extends CI_Controller
             $data = $this->app->cssJs($data, "producto");    
               
             
-            //$this->app->log_acceso($data, 3, $this->id_servicio);
+            $this->app->log_acceso($data, 3, $this->id_servicio);
             setcookie('xn', $id_nicho, strtotime('2038-01-01'), "/");
             $this->app->pagina($data, render_producto($data), 1);
             
