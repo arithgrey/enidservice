@@ -388,6 +388,7 @@ if (!function_exists('invierte_date_time')) {
 
     function interes_re_venta($s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio)
     {
+
         $descripcion = flex(
             "DESCRIPCIÓN",
             "DETALLES",
@@ -396,9 +397,10 @@ if (!function_exists('invierte_date_time')) {
             "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"
         );
 
+        $response[] = d("", "place_valoraciones mt-5 row");
         $response[] = d($descripcion);
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
-        $response[] = d("", "place_valoraciones mt-5 row");
+        
         $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, " h3 text-uppercase black font-weight-bold");
         $response[] = d($interes, "mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100 row"));
