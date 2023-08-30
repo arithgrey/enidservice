@@ -2,36 +2,31 @@
     <div class="col-md-8 col-md-offset-2">
         <div class="d-md-block d-none">
             <h1 class="strong text-uppercase ">
-                Pago contra entrega en CDMX y envíos a todo México
+                Pago contra entrega <br> en CDMX y envíos a todo México
             </h1>
-            <h2 class="f14 strong">
-                 <span class="borde_end_b ">
-                    Categorías
-                </span>                
-            </h2>
         </div>
         <div class="d-md-none">
             <h1 class="strong text-uppercase f12">
                 Pago contra entrega en CDMX y envíos a todo México
             </h1>
-            <h2 class="f11 borde_end_b">            
-                Categorías                
-            </h2>
+
         </div>
     </div>
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
             <?php foreach ($nichos as $nicho) : ?>
-                <?php if ( intval($nicho["publico"]) > 0) : ?>
+                <?php if (intval($nicho["publico"]) > 0) : ?>
                     <div class="col-md-4 col-xs-6">
-                        <a href="../../<?= $nicho["path"] ?>">
-                            <div class="mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                                <img src="<?= $nicho["url_img"] ?>">
-                                <h2 class="fp9">
-                                    <span class="borde_end_b"> 
-                                    <?= $nicho["nombre"] ?>
+                        <a href="../../<?= $nicho["path"] ?>" class="hps h_345 p-1 mh-auto top_50 bottom_50 border border-secondary">
+                            <div class="flex-column mx-auto my-auto d-block p-1 mh-auto mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
+                                <div>
+                                    <img src="<?= $nicho["url_img"] ?>" class="flex-column mx-auto my-auto d-block p-1 mh-auto mt-5">
+                                </div>
+                                <div class="fp9 black">
+                                    <span class="borde_end_b">
+                                        <?= $nicho["nombre"] ?>
                                     </span>
-                                </h2>
+                                </div>
                             </div>
                         </a>
                     </div>
