@@ -19,10 +19,10 @@
                     <div class="col-md-4 col-xs-6">
                         <a href="../../<?= $nicho["path"] ?>" class="hps h_345 p-1 mh-auto top_50 bottom_50 border border-secondary">
                             <div class="flex-column mx-auto my-auto d-block p-1 mh-auto mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                                <div>
-                                    <img src="<?= $nicho["url_img"] ?>" class="flex-column mx-auto my-auto d-block p-1 mh-auto mt-5">
+                                <div class="mt-5">
+                                    <img src="<?= $nicho["url_img"] ?>" class="d-block mh_250 mh_sm_310 mx-auto mt-3 servicio">
                                 </div>
-                                <div class="fp9 black">
+                                <div class="fp9 black text-center">
                                     <span class="borde_end_b">
                                         <?= $nicho["nombre"] ?>
                                     </span>
