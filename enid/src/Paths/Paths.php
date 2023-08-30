@@ -242,7 +242,7 @@ class Paths
 
                 ],
                 "js_extra_web" => [
-                    "https://js.stripe.com/v3/"
+                    //"https://js.stripe.com/v3/"
                 ],
                 "css" =>
                 [
