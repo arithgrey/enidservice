@@ -23,7 +23,7 @@
         <div class="row">
             <?php foreach ($nichos as $nicho) : ?>
                 <div class="col-md-4 col-xs-6">
-                    <a href="<?= path_enid('pesas') ?>">
+                    <a href="../../<?= $nicho["path"] ?>">
                         <div class="mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
                             <img src="<?= $nicho["url_img"] ?>">
                             <h2 class="fp9">
@@ -40,8 +40,6 @@
         </div>
     </div>
 </div>
-
-
 <style>
     .card:hover {
         background-color: #f2f2f2;
