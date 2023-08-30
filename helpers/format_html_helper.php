@@ -2485,7 +2485,7 @@ function get_logo($id_nicho, $session = 0)
 {
 
 
-    $path = path_enid("search_q3");
+    $path = path_enid("tiendas");
 
     if (es_decoracion_tematica($id_nicho)) {
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
