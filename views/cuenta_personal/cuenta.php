@@ -22,10 +22,10 @@
                                 <div class="mt-5">
                                     <img src="<?= $nicho["url_img"] ?>" class="d-block mh_250 mh_sm_310 mx-auto mt-3 servicio">
                                 </div>
-                                <div class=" black text-center">
-                                    <h2 class="borde_end_b f12">
+                                <div class="black text-center">
+                                    <span class="borde_end_b f12">
                                         <?= $nicho["nombre"] ?>
-                                    </h2>
+                                    </span>
                                 </div>
                             </div>
                         </a>
