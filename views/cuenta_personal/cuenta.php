@@ -1,76 +1,46 @@
 <div class="row top_150 base_enid_web">
     <div class="col-md-8 col-md-offset-2">
+        <div class="d-md-block d-none">
+            <h1 class="strong text-uppercase ">
+                Pago contra entrega en CDMX y envíos a todo México
+            </h1>
+            <h2 class="f14 strong">
+                 <span class="borde_end_b ">
+                    Categorías
+                </span>                
+            </h2>
+        </div>
+        <div class="d-md-none">
+            <h1 class="strong text-uppercase f12">
+                Pago contra entrega en CDMX y envíos a todo México
+            </h1>
+            <h2 class="f11 borde_end_b">            
+                Categorías                
+            </h2>
+        </div>
+    </div>
+    <div class="col-md-8 col-md-offset-2">
         <div class="row">
-            <div class="col-md-4">
-                <a href="<?= path_enid('pedidos') ?>">
-                    <div class="card mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold mb-0 d-flex align-items-center"><i class="fa fa-truck mr-2" aria-hidden="true"></i>Mis pedidos</h5>
-                            <p class="card-text black ml-2 mt-2">Aquí podrás ver tus pedidos recientes</p>
+            <?php foreach ($nichos as $nicho) : ?>
+                <div class="col-md-4 col-xs-6">
+                    <a href="<?= path_enid('pesas') ?>">
+                        <div class="mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
+                            <img src="<?= $nicho["url_img"] ?>">
+                            <h2 class="fp9">
+                                <span class="borde_end_b"> 
+                                <?= $nicho["nombre"] ?>
+                                </span>
+                            </h2>
                         </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="<?= path_enid('administracion_cuenta') ?>">
-                    <div class="card mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold mb-0 d-flex align-items-center"><i class="fa fa-unlock-alt mr-2" aria-hidden="true"></i>Inicio de sesión y seguridad</h5>
-                            <p class="card-text black ml-2 mt-2">Protege tu cuenta con una contraseña segura</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="<?= path_enid('rastrea-paquete') ?>">
-                    <div class="card mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold mb-0 d-flex align-items-center"><i class="fa fa-info-circle mr-2" aria-hidden="true"></i>Servicio al cliente</h5>
-                            <p class="card-text black ml-2 mt-2">Contáctanos si necesitas ayuda</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="<?= path_enid('lista_deseos') ?>">
-                    <div class="card mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold mb-0 d-flex align-items-center"><i class="fa fa-gift mr-2" aria-hidden="true"></i>Lista de deseos</h5>
-                            <p class="card-text black ml-2 mt-2">Aquí podrás ver tus artículos deseados</p>
-                        </div>
-                    </div>
+                    </a>
+                </div>
 
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="<?= path_enid('lista_deseos') ?>">
-                    <div class="card mt-5" onmouseover="this.style.backgroundColor='#f2f2f2'" onmouseout="this.style.backgroundColor='white'">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold mb-0 d-flex align-items-center"><i class="fa fa-arrow-left mr-2" aria-hidden="true"></i>
-                                Cambios y devoluciones
-                            </h5>
-                            <p class="card-text black ml-2 mt-2">
-                                Realiza cambios y devoluciones de tus pedidos
-                            </p>
-                        </div>
-                    </div>
-
-                </a>
-            </div>
+            <?php endforeach; ?>
 
         </div>
     </div>
 </div>
 
-<div class="row top_150">
-    <div class="col-xs-12 mt-5 border_black"></div>
-    <div class="col-xs-12">
-        <span class='strong f12'>Los clientes también vieron</span>
-    </div>
-    <div class="col-xs-12 mt-5">
-        <div class="place_tambien_podria_interezar"></div>
-    </div>
-</div>
 
 <style>
     .card:hover {

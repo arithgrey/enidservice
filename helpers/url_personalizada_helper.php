@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "pesas" => "../pesas",
         "kits" => "kits",
         "editar_respuestas_rapidas" => "respuestas_rapidas",
         "leads" => "leads",
