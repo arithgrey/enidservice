@@ -69,7 +69,11 @@ class Home extends CI_Controller
 
                     header("location:../search/?q=carpas-reforzadas&order=2");
                     break;
-    
+
+            case 10:
+
+                    header("location:../search/?q=hogar-y-negocio&order=2");
+                    break;
 
             default:
                 break;
