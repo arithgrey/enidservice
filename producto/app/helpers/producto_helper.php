@@ -1320,8 +1320,10 @@ if (!function_exists('invierte_date_time')) {
 
         )), "col-lg-12 text-center mt-3");
 
-        $seccion[] = d("Te llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center strong mt-3 mb-3');
-        $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center strong ');
+        $seccion[] = d("Compra en linea para adquirir el descuento", ' col-lg-12 text-center strong mt-3 mb-3 f12');
+
+        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center  mb-3');
+        $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  ');
 
 
         $id_servicio = pr($servicio, "id_servicio");
@@ -1350,7 +1352,10 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $seccion[] = d($path, ' col-lg-12 underline text-center mt-2');
+        
+
+
+        $seccion[] = d($path, ' col-lg-12 underline text-center mt-4 f11 ');
 
         return $seccion;
     }
