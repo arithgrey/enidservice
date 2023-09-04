@@ -94,7 +94,7 @@ if (!function_exists('invierte_date_time')) {
     $str = _d(
             d(_titulo(
                 _text_(
-                    span("Paga al recibir tus artículos y recíbelos el mismo día! en CDMX","f2"),                                        
+                    span("Paga al recibir tus artículos y recíbelos el mismo día! en CDMX y algunas partes del estado de México","f2"),                                        
                     icon('fa fa-check fa-2x')                    
                 )
             ), 'mb-2 mt-4'),
@@ -125,10 +125,13 @@ if (!function_exists('invierte_date_time')) {
 
             ,
             d("Esta modalidad es EXCLUSIVA para entregas en CDMX y SOLO estas zonas adicionales:", "f2 black strong top_100 text-uppercase"),
-            d("- Nezahualcóyotl", "f12 black mt-5"),
-            d("- Chimalhuacán", "f12 black mt-2"),
-            d("- Ecatepec solo del metro Villa de Aragón a Ciudad Azteca ", "f12 black mt-2")
-            ,
+            d(h("- Nezahualcóyotl",2, "f12 black mt-5")),
+            d(h("- Chimalhuacán",2, "f12 black mt-2")),
+            d(h("- Ecatepec solo del metro Villa de Aragón a Ciudad Azteca ",2, "f12 black mt-2")),
+            d(h("- Tultitlán de Mariano Escobedo ",2, "f12 black mt-2")),
+            d(h("- Cuautitlán de Romero Rubio ",2, "f12 black mt-2")),
+            d(h("- Cuautitlán ",2, "f12 black mt-2")),
+            d(h("- Tultepec ",2, "f12 black mt-2")),            
             hr("top_100 borde_black"),
             
             d(_titulo(
