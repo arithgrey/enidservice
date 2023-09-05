@@ -1302,7 +1302,6 @@ if (!function_exists('invierte_date_time')) {
     function get_compra_agenda($data, $agregar_lista_deseos)
     {
 
-
         $servicio = $data["info_servicio"]["servicio"];
         $buy_button_id = pr($servicio, "buy_button_id");
         $publishable_key = pr($servicio, "publishable_key");
@@ -1339,9 +1338,8 @@ if (!function_exists('invierte_date_time')) {
         
                 )), "col-lg-12 text-center mt-3");
                 
-                $seccion[] = d(span("Compra en linéa ya! y gana
-                $150 más de descuento, es tu
-                única oportunidad",'border_black'),'f12 text-center black mb-5');
+                $seccion[] = d(span("Ahorra $300 al comprar en línea",'border_black'),'f12 text-center black ');
+                $seccion[] = d(span("La promoción terminará en una hora"),'f12 text-center black mb-5');
 
             }
             
