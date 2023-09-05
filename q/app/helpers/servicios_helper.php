@@ -202,8 +202,13 @@ if (!function_exists('invierte_date_time')) {
         $servicio,
         $nnservicio
     ) {
+
         $buy_button_id = pr($servicio, "buy_button_id");
         $publishable_key = pr($servicio, "publishable_key");
+
+        $buy_button_id_bajo = pr($servicio, "buy_button_id_bajo");
+        $publishable_key_bajo = pr($servicio, "publishable_key_bajo");
+
 
         $link_afiliado_amazon = pr($servicio, "link_afiliado_amazon");
         $link_maps = pr($servicio, "link_maps");
@@ -220,6 +225,8 @@ if (!function_exists('invierte_date_time')) {
 
 
         $r[] = conf_entrada(
+            $buy_button_id_bajo,
+            $publishable_key_bajo,
             $buy_button_id,
             $publishable_key,            
             $link_afiliado_amazon,
@@ -633,6 +640,8 @@ if (!function_exists('invierte_date_time')) {
     }
 
     function conf_entrada(
+        $buy_button_id_bajo,
+            $publishable_key_bajo,
         $buy_button_id,
         $publishable_key,
         $link_afiliado_amazon,
@@ -714,6 +723,10 @@ if (!function_exists('invierte_date_time')) {
         $z[] = form_afiliado_amazon($link_afiliado_amazon);
         $z[] = form_buy_button_id($buy_button_id);
         $z[] = form_publishable_key($publishable_key);
+        
+        
+        $z[] = form_buy_button_id($buy_button_id_bajo, "form_buy_button_id_bajo", "buy_button_id_bajo");
+        $z[] = form_publishable_key($publishable_key_bajo, "form_publishable_key_bajo", "publishable_key_bajo");
 
 
         return tab_seccion($z, "tab_imagenes", $ext_1);
@@ -1888,16 +1901,15 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r);
     }
-    function form_buy_button_id($buy_button_id)
+    function form_buy_button_id($buy_button_id, $form_class = "form_buy_button_id", $name="buy_button_id")
     {
 
-
-        $r[] = form_open("", ["class" => "form_buy_button_id"]);
+        $r[] = form_open("", ["class" => $form_class]);
         $r[] = input(
             [
                 "type" => "hidden",
                 "name" => "q",
-                "value" => "buy_button_id"
+                "value" => $name
             ]
         );
 
@@ -1926,16 +1938,16 @@ if (!function_exists('invierte_date_time')) {
 
         return d($r);
     }
-    function form_publishable_key($publishable_key)
+    function form_publishable_key($publishable_key, $form='form_publishable_key', $name="publishable_key")
     {
 
 
-        $r[] = form_open("", ["class" => "form_publishable_key"]);
+        $r[] = form_open("", ["class" => $form]);
         $r[] = input(
             [
                 "type" => "hidden",
                 "name" => "q",
-                "value" => "publishable_key"
+                "value" => $name
             ]
         );
 

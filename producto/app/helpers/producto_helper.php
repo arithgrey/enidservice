@@ -1307,6 +1307,9 @@ if (!function_exists('invierte_date_time')) {
         $buy_button_id = pr($servicio, "buy_button_id");
         $publishable_key = pr($servicio, "publishable_key");
 
+        $buy_button_id_bajo = pr($servicio, "buy_button_id_bajo");
+        $publishable_key_bajo = pr($servicio, "publishable_key_bajo");
+
         if (!str_len($buy_button_id, 3) || !str_len($publishable_key, 3)) {
             return agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $data["tiempo_entrega"]);
         }
@@ -1314,15 +1317,49 @@ if (!function_exists('invierte_date_time')) {
         $seccion[] = d("-- Tienes una de dos -- ", 'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');
         $seccion[] = d($agregar_lista_deseos, 12);
 
-        $seccion[] = d(d(stripe_buy_button(
-            $buy_button_id,
-            $publishable_key
+        date_default_timezone_set('America/Mexico_City');
+        // Obtiene la hora actual
+        $hora_actual = date('H');
 
-        )), "col-lg-12 text-center mt-3");
+        if ($hora_actual >= 1 && $hora_actual <= 6) {
 
-        $seccion[] = d("Compra en linea para adquirir el descuento", ' col-lg-12 text-center strong mt-3 mb-3 f12');
+            if (!str_len($buy_button_id_bajo, 3) || !str_len($publishable_key_bajo, 3)) {
 
-        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center  mb-3');
+                $seccion[] = d(d(stripe_buy_button(
+                    $buy_button_id,
+                    $publishable_key
+        
+                )), "col-lg-12 text-center mt-3");
+
+            }else{
+                
+                $seccion[] = d(d(stripe_buy_button(
+                    $buy_button_id_bajo,
+                    $publishable_key_bajo
+        
+                )), "col-lg-12 text-center mt-3");
+                
+                $seccion[] = d(span("Compra en linéa ya! y gana
+                $150 más de descuento, es tu
+                única oportunidad",'border_black'),'f12 text-center black mb-5');
+
+            }
+            
+            
+        }else{
+
+            $seccion[] = d(d(stripe_buy_button(
+                $buy_button_id,
+                $publishable_key
+    
+            )), "col-lg-12 text-center mt-3");
+        }
+
+        
+
+        //$seccion[] = d("Compra en linea para adquirir el descuento", ' col-lg-12 text-center strong mt-3 mb-3 f12');
+
+        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center strong mt-3 mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  ');
 
 
