@@ -1330,6 +1330,9 @@ if (!function_exists('invierte_date_time')) {
         
                 )), "col-lg-12 text-center mt-3");
 
+                $seccion[] = d(span("Ahorra $312 al comprar en línea",'border_black'),'f12 text-center black ');
+                $seccion[] = d(span("La promoción termina pronto"),'f12 text-center black mb-5');
+
             }else{
                 
                 $seccion[] = d(d(stripe_buy_button(
@@ -1351,6 +1354,10 @@ if (!function_exists('invierte_date_time')) {
                 $publishable_key
     
             )), "col-lg-12 text-center mt-3");
+
+            $seccion[] = d(span("Ahorra $312 al comprar en línea",'border_black'),'f12 text-center black ');
+            $seccion[] = d(span("La promoción termina pronto"),'f12 text-center black mb-5');
+
         }
 
         
