@@ -1320,6 +1320,12 @@ if (!function_exists('invierte_date_time')) {
         // Obtiene la hora actual
         $hora_actual = date('H');
 
+        $precio_unidad = pr($servicio, "precio");
+        $precio_alto = pr($servicio, "precio_alto");
+        $precio_alto = ($precio_alto > $precio_unidad) ?  $precio_alto : ($precio_unidad + porcentaje($precio_unidad, 16));
+
+
+        $diferencia = $precio_alto - $precio_unidad;
         if ($hora_actual >= 1 && $hora_actual <= 9) {
 
             if (!str_len($buy_button_id_bajo, 3) || !str_len($publishable_key_bajo, 3)) {
@@ -1330,9 +1336,7 @@ if (!function_exists('invierte_date_time')) {
         
                 )), "col-lg-12 text-center mt-3");
 
-                $seccion[] = d(span("Ahorra $312 al comprar en línea",'border_black'),'f12 text-center black ');
-                $seccion[] = d(span("La promoción termina pronto"),'f12 text-center black mb-5');
-
+                
             }else{
                 
                 $seccion[] = d(d(stripe_buy_button(
@@ -1341,9 +1345,7 @@ if (!function_exists('invierte_date_time')) {
         
                 )), "col-lg-12 text-center mt-3");
                 
-                $seccion[] = d(span("Ahorra $300 al comprar en línea",'border_black'),'f12 text-center black ');
-                $seccion[] = d(span("La promoción terminará en una hora"),'f12 text-center black mb-5');
-
+                
             }
             
             
@@ -1355,16 +1357,12 @@ if (!function_exists('invierte_date_time')) {
     
             )), "col-lg-12 text-center mt-3");
 
-            $seccion[] = d(span("Ahorra $312 al comprar en línea",'border_black'),'f12 text-center black ');
-            $seccion[] = d(span("La promoción termina pronto"),'f12 text-center black mb-5');
-
+            
         }
 
+        $seccion[] = d(span(_text("Ahorra $",$diferencia," y envío gratis al comprar en línea"),''),'f12 text-center black strong mb-2');
         
-
-        //$seccion[] = d("Compra en linea para adquirir el descuento", ' col-lg-12 text-center strong mt-3 mb-3 f12');
-
-        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center strong mt-3 mb-3');
+        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center  mt-3 mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  ');
 
 
