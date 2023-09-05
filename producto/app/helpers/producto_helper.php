@@ -1320,7 +1320,7 @@ if (!function_exists('invierte_date_time')) {
         // Obtiene la hora actual
         $hora_actual = date('H');
 
-        if ($hora_actual >= 1 && $hora_actual <= 6) {
+        if ($hora_actual >= 1 && $hora_actual <= 9) {
 
             if (!str_len($buy_button_id_bajo, 3) || !str_len($publishable_key_bajo, 3)) {
 
