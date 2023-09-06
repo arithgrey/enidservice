@@ -1257,7 +1257,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $id_nicho = $data["id_nicho"];
-        $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (en cdmx)" : "Anticipa tu fecha aquí";
+        $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (en cdmx y Edomex)" : "Anticipa tu fecha aquí";
         $format = (es_decoracion_tematica($id_nicho)) ? 6 : 1;
         if ($in_session > 0) {
 
