@@ -93,10 +93,10 @@ if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
                 <div class="col-md-6 col-md-offset-3">
                     <div class="d-flex <?= _between ?>">
                         <div class="white f12 strong">
-                            Consigue un 10% de descuento y entrega gratis
+                            Consigue un 10% de descuento y entrega gratis al hacer tu pedido en línea
                         </div>
                         <div>
-                            <?= format_link("Registrate ya!", ["href" => path_enid("login_registro"), "class"=>"border_b_green"]) ?>
+                            <?= format_link("Pago contra entrega", ["href" => path_enid("forma_pago"), "class"=>"border_b_green"]) ?>
                         </div>
                     </div>
                 </div>
