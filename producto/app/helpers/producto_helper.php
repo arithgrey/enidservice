@@ -1252,12 +1252,56 @@ if (!function_exists('invierte_date_time')) {
     }
 
 
+    function anticipo_decoraciones($data){
+        
+
+        $servicio = $data["info_servicio"]["servicio"];
+        $buy_button_id = pr($servicio, "buy_button_id");
+        $publishable_key = pr($servicio, "publishable_key");
+
+        if (str_len($buy_button_id, 3) || str_len($publishable_key, 3)) {
+
+            $contenido[] = d(d(stripe_buy_button(
+                $buy_button_id,
+                $publishable_key
+    
+            )), "col-lg-12 text-center mt-3");
+        }
+    
+        $contenido[] = d(_text_(
+            
+            span(
+                "Al anticipar con un 10%, tendrás la certeza de que llegaremos a la locación en 
+                tiempo y forma para asegurar que todo esté listo! y lo mejor pagas el 90% restante el día de tu evento!",
+                'ml-2 black '
+            )
+        ), 'black mt-4 cursor_pointer ');
+
+        $path = a_enid(
+            "Checa referencias aquí!",
+            [
+                "href" =>
+                path_enid("clientes"),
+                "class" => "black"
+            ]
+        );
+
+        $contenido[] = d($path, ' col-lg-12 underline text-center mt-4 f11 ');
+
+        return append($contenido);
+
+    }
     function agregar_lista_deseos($data, $in_session, $id_servicio)
     {
 
 
         $id_nicho = $data["id_nicho"];
         $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (en cdmx y Edomex)" : "Anticipa tu fecha aquí";
+        
+        if($id_nicho == 8){
+            return anticipo_decoraciones($data);
+        }
+
         $format = (es_decoracion_tematica($id_nicho)) ? 6 : 1;
         if ($in_session > 0) {
 
