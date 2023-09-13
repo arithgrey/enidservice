@@ -68,7 +68,7 @@ if (!function_exists('invierte_date_time')) {
 
             }
             $response[] =  d($html_paginador,  'mt-5');
-            $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, "  h3 text-uppercase black font-weight-bold");
+            $interes = h("QUIZÁ TAMBIÉN TE GUSTE...", 2, "  h3 text-uppercase black font-weight-bold");
             $response[] = d($interes, "mt-5 text_sugerencias d-none ");
             $response[] = d("", "place_tambien_podria_interezar");
 

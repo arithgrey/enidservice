@@ -401,7 +401,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d($descripcion);
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
         
-        $interes = h("TAMBIÉN PODRÍA INTERESARTE", 2, " h3 text-uppercase black font-weight-bold");
+        $interes = h("QUIZÁ TAMBIÉN TE GUSTE ...", 2, " h3 text-uppercase black font-weight-bold");
         $response[] = d($interes, "mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100 row"));
         $response[] = hiddens(["class" => "qservicio", "value" => $nombre]);

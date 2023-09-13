@@ -13,7 +13,7 @@ if (!function_exists('invierte_date_time')) {
 
         $z[] = comentarios($comentarios, $data);
         
-        $z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
+        //$z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
         $response[] = d($z,12);
         $response[] = modal_referencia($data);
 
@@ -185,15 +185,8 @@ if (!function_exists('invierte_date_time')) {
             }
         }
 
-        $response[] = d(d("Aquí algunas referencias", '  h3 text-uppercase black font-weight-bold col-sm-12'), 13);
-        $response[] = d(a_enid("Ve fotos recientes",
-            [
-                "href" => path_enid("clientes"),
-                "class" => 'col-sm-12 text-secondary',
-                "target" => "_black",                
-            ]
-        ), 13);
-
+        $response[] = d(d("Algunas referencias ...", '  h3 text-uppercase black font-weight-bold col-sm-12'), 13);
+       
         $referencias_boton = format_link("agregar foto",
             [
                 "class" => "col-sm-3 pull-right agregar_foto agregar_referencia_fotografica",
