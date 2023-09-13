@@ -34,6 +34,8 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "decoraciones" => "../decoraciones-tematicas-globolandia",
+        "pesas_enid" => "../pesas",
         "tiendas" => "tiendas",
         "kits" => "kits",
         "editar_respuestas_rapidas" => "respuestas_rapidas",
