@@ -280,12 +280,10 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         if (!es_decoracion_tematica($data)) {
-            $data_response[] = d(p("RECIBES EL MISMO DÍA", "texto_accion"), "col-xs-12 texto_accion mt-4 mb-4");
+            $data_response[] = d(p("Las pides hoy -> Las recibes hoy!", "texto_accion"), "col-xs-12 texto_accion mt-4 mb-4");
             $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
 
-            $data_response[] = d(p("MÁS DE 1000 CLIENTES YA INICIARON ", 'texto_accion'), 'text-right mt-3 col-xs-12 texto_accion mt-4 mb-4');
-
-            $data_response[] = d(img("https://enidservices.com/imgs/06.jpg"), 'text-right');
+            
         }
 
 
