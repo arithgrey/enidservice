@@ -13,8 +13,11 @@ class Home extends CI_Controller
     function index()
     {   
         $param = $this->input->get();
+        
         $data = $this->app->session();
-        $data = $this->app->cssJs($data, "rastrea_paquete");            
+        $data = $this->app->cssJs($data, "rastrea_paquete");  
+        setcookie('xn', 1, strtotime('2038-01-01'));     
+             
         $this->app->pagina($data, busqueda_pedido($param), 1);
 
     }

@@ -17,6 +17,7 @@ class Home extends CI_Controller
 
         $param = $this->input->get();
         $i = prm_def($param, "info");
+        setcookie('xn', 1, strtotime('2038-01-01'));     
 
         switch ($i) {
 

@@ -15,6 +15,7 @@ class Home extends CI_Controller
     function index()
     {
         $data = $this->app->cssJs($this->data, "cambios_devoluciones");
+        setcookie('xn', 1, strtotime('2038-01-01'));     
         $this->app->pagina($data , get_format_pago(), 1);
     }
 
