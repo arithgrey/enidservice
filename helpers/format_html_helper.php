@@ -1884,9 +1884,9 @@ function opciones_populares($id_nicho)
     $tiendas = path_enid("tiendas");
     if (es_decoracion_tematica($id_nicho)) {
 
-        $path = path_enid("search_q3");
+        $path = path_enid("decoraciones");
         
-        $texto = d("<a href='http://enidservices.com/decoraciones-tematicas-globolandia/' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $texto = d("<a href='".$path."' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
         $response[] = $texto;
 
         $response[] = a_enid(
@@ -1901,8 +1901,8 @@ function opciones_populares($id_nicho)
         return flex($response);
     } else {
 
-        $path = path_enid("search_q3");
-        $texto = d("<a href='http://enidservices.com/pesas' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $path = path_enid("pesas_enid");
+        $texto = d("<a href='".$path."' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
         $response[] = $texto;
 
 
@@ -2484,16 +2484,13 @@ function get_url_facebook($url, $icon = 0)
 function get_logo($id_nicho, $session = 0)
 {
 
-
-    $path = path_enid("tiendas");
-
     if (es_decoracion_tematica($id_nicho)) {
+        $path = path_enid("decoraciones");
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
     } else {
+        $path = path_enid("tiendas");
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
     }
-
-
 
     $icono_busqueda = icon(_text_(_busqueda_icon, "white mr-2"), ["onclick" => "openNav()"]);
     $carro = "";
