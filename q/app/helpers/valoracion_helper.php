@@ -7,7 +7,7 @@ if (!function_exists('invierte_date_time')) {
 
         $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
-        $promedio_valoraciones = valorados($num);
+        //$promedio_valoraciones = valorados($num);
 
         $z[] = referencias_fotograficas($data);
         $z[] = place("table_orden_1");
@@ -23,7 +23,7 @@ if (!function_exists('invierte_date_time')) {
         }
 
 
-        $response[] = d($promedio_valoraciones,12);
+        //$response[] = d($promedio_valoraciones,12);
         $response[] = d($z,12);
         $response[] = modal_referencia($data);
 

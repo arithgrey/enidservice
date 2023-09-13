@@ -39,8 +39,7 @@
 
   <div class="container-fluid" id="page-content">
     <?= menu_session_mobil($mas_vendidos) ?>
-    <?= opciones_acceso($id_nicho) ?>
-    <?= modal_intento_conversion() ?>
+    <?= opciones_acceso($id_nicho) ?>    
     <?= modal_desglose_carro_compra() ?>
     <?= modal_prueba_en_casa() ?>
     <?= modal_format_pago() ?>
