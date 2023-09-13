@@ -1886,7 +1886,7 @@ function opciones_populares($id_nicho)
 
         $path = path_enid("search_q3");
         
-        $texto = d("<a href='" . $tiendas . "' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $texto = d("<a href='http://enidservices.com/decoraciones-tematicas-globolandia/' class='white'><strong class='white'>Decoraciones</strong>  Globolandia</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
         $response[] = $texto;
 
         $response[] = a_enid(
@@ -1902,7 +1902,7 @@ function opciones_populares($id_nicho)
     } else {
 
         $path = path_enid("search_q3");
-        $texto = d("<a href='" . $tiendas . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
+        $texto = d("<a href='http://enidservices.com/pesas' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service d-none d-md-block"]);
         $response[] = $texto;
 
 

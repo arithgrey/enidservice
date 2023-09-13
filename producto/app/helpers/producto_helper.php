@@ -290,21 +290,6 @@ if (!function_exists('invierte_date_time')) {
             $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
             
             
-
-            /*
-              <div class="bg_black row p-4 anuncio_registro_descuento">
-                <div class="col-md-6 col-md-offset-3">
-                    <div class="d-flex <?= _between ?>">
-                        <div class="white f12 strong">
-                            ¿Las pedirás después?
-                        </div>
-                        <div>
-                            <?= format_link("Sigamos en contacto!", ["href" => "https://www.facebook.com/enidservicemx", "class"=>"border_b_green"]) ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            */
         }
 
 
