@@ -170,6 +170,7 @@ let trigger_cupon = function (data) {
 }
 let trigger_promocion = function (data) {
 
+    /*
     if (data.promocion_10_porciento) {
 
         $("#modal_intento_conversion").modal("show");
@@ -177,6 +178,7 @@ let trigger_promocion = function (data) {
         $(".cerrar_modal").removeClass("black").addClass("white borde_amarillo");
 
     }
+    */
 }
 
 let log_operaciones_externas = function (pagina_id, id_servicio = 0) {
@@ -1492,12 +1494,13 @@ let adicionales_gbl = function () {
 }
 
 function evalua_promocion_modal() {
-
+    /*
     let $ip = $(".ip_referer_enid").val();
     let url = "../q/index.php/api/intento_conversion/id_cupon/format/json/";
     let data_send = { "ip": $ip };
 
     request_enid("GET", data_send, url, trigger_promocion);
+    */
 }
 let busqueda_carro_agregado_s = function () {
 

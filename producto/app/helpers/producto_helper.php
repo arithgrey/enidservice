@@ -390,11 +390,11 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $descripcion = flex(
-            "DESCRIPCIÓN",
-            "DETALLES",
+            "+ INFO",
+            "",
             "flex-row mt-5 mb-5 cursor_pointer",
             "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer",
-            "border text-center p-3 w-100 strong black descripcion_detallada cursor_pointer"
+            ""
         );
 
         $response[] = d("", "place_valoraciones mt-5 row");
