@@ -5,9 +5,7 @@ if (!function_exists('invierte_date_time')) {
     function render_articulo($data)
     {
 
-        $num = $data["numero_valoraciones"];
         $comentarios = $data["comentarios"];
-        //$promedio_valoraciones = valorados($num);
 
         $z[] = referencias_fotograficas($data);
         $z[] = place("table_orden_1");
@@ -16,14 +14,6 @@ if (!function_exists('invierte_date_time')) {
         $z[] = comentarios($comentarios, $data);
         
         $z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
-
-        
-        if (es_data($comentarios)) {
-            $response[] = d(d("VALORACIONES Y RESEÑAS", "h3 text-uppercase black font-weight-bold"),12);
-        }
-
-
-        //$response[] = d($promedio_valoraciones,12);
         $response[] = d($z,12);
         $response[] = modal_referencia($data);
 
