@@ -280,10 +280,31 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         if (!es_decoracion_tematica($data)) {
-            $data_response[] = d(p("Las pides hoy -> Las recibes hoy!", "texto_accion"), "col-xs-12 texto_accion mt-4 mb-4");
+            $data_response[] = d(p("Las pides hoy -> Las recibes hoy!", "texto_accion"), "col-xs-12 texto_accion mt-4 border-bottom");
+            $data_response[] = flex(
+                "¿Las pedirás después?",
+                format_link("Sigamos en contacto!", ["href" => "https://www.facebook.com/enidservicemx", "class"=>"border_b_green f2"]),
+                    _text_(_between,"bg_black  p-5 anuncio_registro_descuento"),
+                    "white f2"
+                );
             $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
-
             
+            
+
+            /*
+              <div class="bg_black row p-4 anuncio_registro_descuento">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="d-flex <?= _between ?>">
+                        <div class="white f12 strong">
+                            ¿Las pedirás después?
+                        </div>
+                        <div>
+                            <?= format_link("Sigamos en contacto!", ["href" => "https://www.facebook.com/enidservicemx", "class"=>"border_b_green"]) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            */
         }
 
 
