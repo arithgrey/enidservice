@@ -289,6 +289,14 @@ if (!function_exists('invierte_date_time')) {
                 );
             $data_response[] = d(img("https://enidservices.com/imgs/05.jpg"));
             
+        }else{
+
+            $data_response[] = flex(
+                "¿Aún falta para tu evento?",
+                format_link("Sigamos en contacto!", ["href" => "https://www.facebook.com/profile.php?id=100093599380757"],3),
+                    _text_(_between,"bg_black  p-5 anuncio_registro_descuento"),
+                    "white f2"
+                );
             
         }
 

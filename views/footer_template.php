@@ -101,7 +101,22 @@ if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
                     </div>
                 </div>
             </div>
+        <?php else : ?>
+            <div class="format_decoraciones row p-4 ">
+                <div class="col-md-6 col-md-offset-3">
+                    <div class="d-flex <?= _between ?>">
+                        <div class="white f12 strong">
+                            ¿Tu evento será después?
+                        </div>
+                        <div>
+                            <?= format_link("Sigamos en contacto!", 
+                            ["href" => "https://www.facebook.com/profile.php?id=100093599380757"],3) ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php endif; ?>
+        
     <?php endif; ?>
     <?php if (!es_decoracion_tematica($id_nicho)) : ?>
         <footer class='p-4 mt-5 top_200' id='sticky-footer'>
