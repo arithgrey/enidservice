@@ -136,12 +136,11 @@ if (!function_exists('invierte_date_time')) {
             
             d(_titulo(
                 _text_(                    
-                    span("No hacemos pago contra entrega en los estados pero ... al anticipar un 10% desdes nuestra página web te las 
-                    podemos enviar, el 90% restante lo liquidas al recibir tus artículos","f2"),                                                            
+                    span("También llegamos a los estados! al anticipar con el 10% podemos enviarte tu equipo el 90% restante lo liquidas al recibirlo.","f2"),                                                            
                 )
             ), 'mb-2 mt-5')
             ,_text(
-                d("Pierde  el miedo!!","f18 text-center font-weight-bold text-uppercase mt-5 red_enid"),                                        
+                
                 d("Si estamos aquí es para ayudarte a pasar al siguiente nivel.", 'black mt-3 text-center f12 black'),
                 d(
                     $referencias_ ,'mt-5 text-center'
