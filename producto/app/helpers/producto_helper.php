@@ -1314,7 +1314,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         $id_nicho = $data["id_nicho"];
-        $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (en cdmx y Edomex)" : "Anticipa tu fecha aquí";
+        $call_to_action = ($id_nicho != 8) ? "Pagar al recibir (EXCLUSIVO en cdmx)" : "Anticipa tu fecha aquí";
         
         if($id_nicho == 8){
             return anticipo_decoraciones($data);
@@ -1422,10 +1422,9 @@ if (!function_exists('invierte_date_time')) {
             
         }
 
-        $seccion[] = d(span(_text("Ahorra $",$diferencia," y envío gratis al comprar en línea"),''),'f12 text-center black strong mb-2');
-        
-        $seccion[] = d("Llegan HOY en CDMX y Área Metropolitana", ' col-lg-12 text-center  mt-3 mb-3');
-        $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  ');
+        $seccion[] = d("Al anticipar con el 10% podemos enviarte tu equipo si vives fuera de CDMX el 90% restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
+        $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
+        $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  black');
 
 
         $id_servicio = pr($servicio, "id_servicio");
@@ -1434,7 +1433,7 @@ if (!function_exists('invierte_date_time')) {
             [
                 "href" =>
                 path_enid("clientes"),
-                "class" => "black"
+                "class" => "black strong"
             ]
         );
 
