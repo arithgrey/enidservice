@@ -1388,6 +1388,13 @@ if (!function_exists('invierte_date_time')) {
 
 
         $diferencia = $precio_alto - $precio_unidad;
+        $seccion[] = d(d(stripe_buy_button(
+            $buy_button_id,
+            $publishable_key
+
+        )), "col-lg-12 text-center mt-3");
+
+        /*
         if ($hora_actual >= 1 && $hora_actual <= 9) {
 
             if (!str_len($buy_button_id_bajo, 3) || !str_len($publishable_key_bajo, 3)) {
@@ -1421,6 +1428,7 @@ if (!function_exists('invierte_date_time')) {
 
             
         }
+        */
 
         $seccion[] = d("Al anticipar con el 10% podemos enviarte tu equipo si vives fuera de CDMX el 90% restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
         $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
