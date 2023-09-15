@@ -291,13 +291,7 @@ if (!function_exists('invierte_date_time')) {
             
         }else{
 
-            $data_response[] = flex(
-                "¿Aún falta para tu evento?",
-                format_link("Sigamos en contacto!", ["href" => "https://www.facebook.com/profile.php?id=100093599380757"],3),
-                    _text_(_between,"bg_black  p-5 anuncio_registro_descuento"),
-                    "white f2"
-                );
-            
+           
         }
 
 
@@ -1284,10 +1278,10 @@ if (!function_exists('invierte_date_time')) {
             
             span(
                 "Al anticipar con un 10%, tendrás la certeza de que llegaremos a la locación en 
-                tiempo y forma para asegurar que todo esté listo! y lo mejor pagas el 90% restante el día de tu evento!",
+                tiempo y forma para asegurar que todo esté listo! el 90% restante lo liquidas en tu evento!",
                 'ml-2 black '
             )
-        ), 'black mt-4 cursor_pointer ');
+        ), 'black mt-5 cursor_pointer ');
 
         $path = a_enid(
             "Checa referencias aquí!",
@@ -1298,7 +1292,19 @@ if (!function_exists('invierte_date_time')) {
             ]
         );
 
-        $contenido[] = d($path, ' col-lg-12 underline text-center mt-4 f11 ');
+        
+        $contenido[] = d($path, ' col-lg-12 underline text-center mt-4 f12 ');
+        $contenido[] = d("¿Necesitas un diseño personalizado?",' col-lg-12 text-center mt-5  black ');
+        $link = a_enid(
+            "(55) 7612 - 7281",
+            [
+                "href" => _text_(path_enid('whatsapp_ayuda_decoraciones', 0, 1), _current_url()),
+                "class" => "black font-weight-bold ml-3"
+            ],
+            0
+        );
+
+        $contenido[] = d($link,' col-lg-12 text-center mt-1 fp9 black ');
 
         return append($contenido);
 

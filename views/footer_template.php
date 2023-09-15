@@ -106,13 +106,20 @@ if (isset($css) && !is_null($css) && is_array($css) && count($css) > 0) : ?>
                 <div class="col-md-6 col-md-offset-3">
                     <div class="d-flex <?= _between ?>">
                         <div class="white f12 strong">
-                            ¿Tu evento será después?
+                            ¿Aún falta para tu evento?
                         </div>
                         <div>
                             <?= format_link("Sigamos en contacto!", 
                             ["href" => "https://www.facebook.com/profile.php?id=100093599380757"],3) ?>
                         </div>
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <a class="black fp9" href="https://enidservice.com/">
+                        © Enid Service - <span class="underline">¿Necesitas una página web?</span>
+                    </a>
                 </div>
             </div>
         <?php endif; ?>
