@@ -1375,8 +1375,8 @@ if (!function_exists('invierte_date_time')) {
             return agenda_pago_contra_entrega($agregar_lista_deseos, $servicio, $data["tiempo_entrega"]);
         }
 
-        $seccion[] = d("-- Tienes una de dos -- ", 'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');
-        $seccion[] = d($agregar_lista_deseos, 12);
+        //$seccion[] = d("-- Tienes una de dos -- ", 'f17 col-lg-12 text-center strong mb-3 text-uppercase una_de_dos');
+        //$seccion[] = d($agregar_lista_deseos, 12);
 
         date_default_timezone_set('America/Mexico_City');
         // Obtiene la hora actual
@@ -1430,7 +1430,7 @@ if (!function_exists('invierte_date_time')) {
         }
         */
 
-        $seccion[] = d("Al anticipar con el 10% podemos enviarte tu equipo si vives fuera de CDMX el 90% restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
+        $seccion[] = d("Agenda tu entrega con el 10% el 90% restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
         $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  black');
 
