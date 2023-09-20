@@ -231,7 +231,7 @@ if (!function_exists('invierte_date_time')) {
             }
             
             $r[] = flex(
-                crea_estrellas($row["valoracion"], 1),
+                crea_estrellas($row["valoracion"], 5),
                 format_fecha($fecha_registro),
                 'justify-content-between'
             );

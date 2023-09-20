@@ -85,13 +85,15 @@ if (!function_exists('invierte_date_time')) {
 
         $form[] = form_close();
 
+        $response[] = d(_titulo("Venta de equipo deportivo - Mayoreo",0),12);
         $response[] = d(_titulo("Simula las ganancias que tendrás de acuerdo a las ventas de tus artículos",3),12);
         $response[] = d(d("¿Estás iniciando tu negocio quieres saber cuanto debes vender para lograr tus objetivos? checa esta herramienta"),12);
         $response[] = d(hr());
         $response[] = append($form);
         $response[] = d(place("simulacion_gastos_utilidad col-xs-12"), "mt-5 row");
+        $response[] = d("Se parte, además de darte precios especiales podemos enviar pedidos de clientes que estén en tu zona!",'black f18 text-center bg_yellow');
+        $response[] = d("Iniciémos conversación (55) 5296 - 7027",'black f18 text-center bg_yellow');
         
-
         return d($response, 8,1);
 
     }

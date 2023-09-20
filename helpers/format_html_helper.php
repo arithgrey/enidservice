@@ -2348,7 +2348,7 @@ function list_orden($list_orden, $default)
 
     return append($r);
 }
-function gb_modal_costos($precio, $costo, $id_servicio)
+function gb_modal_costos($precio, $costo, $id_servicio, $precio_mayoreo)
 {
 
     $form[] = d(_titulo('¿Precios y costos?'), 'mb-5');
@@ -2396,6 +2396,36 @@ function gb_modal_costos($precio, $costo, $id_servicio)
             'required' => true
         ]
     );
+
+
+
+    
+    $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
+    $form[] = form_close();
+
+
+
+
+    $form[] = form_open(
+        "",
+        [
+            "class" => "form_precio_mayoreo mt-5",
+            "method" => "post"
+        ]
+    );
+
+    $form[] = input_frm(
+        '',
+        '¿Precio venta de mayoreo?',
+        [
+            'class' => 'precio_mayoreo',
+            'id' => 'precio_mayoreo',
+            'name' => 'precio_mayoreo',
+            'value' => $precio_mayoreo,
+            'required' => true
+        ]
+    );
+
     $form[] = hiddens(['name' => 'id_servicio', 'class' => 'id_servicio', 'value' => $id_servicio]);
     $form[] = form_close();
     return gb_modal(append($form), 'gb_costos_precios');
