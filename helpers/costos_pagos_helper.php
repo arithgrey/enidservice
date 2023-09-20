@@ -504,6 +504,7 @@ function utilidad_en_servicio($data, $servicio, $boton = 0, $extra = '')
         
 
         $precio = pr($servicio , "precio");
+        $precio_mayoreo = pr($servicio , "precio_mayoreo");
         $id_servicio = pr($servicio , "id_servicio");
         $costo_servicio = pr($servicio , "costo");
         
@@ -529,7 +530,7 @@ function utilidad_en_servicio($data, $servicio, $boton = 0, $extra = '')
             
             $seccion_costo = d($icono_editar, $class);
             $response[] = flex($seccion, $seccion_costo, 'flex-column');
-            $response[] = gb_modal_costos($precio, $costo_servicio , $id_servicio);
+            $response[] = gb_modal_costos($precio, $costo_servicio , $id_servicio, $precio_mayoreo);
 
         }
 

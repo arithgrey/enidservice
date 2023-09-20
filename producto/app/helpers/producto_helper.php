@@ -279,6 +279,8 @@ if (!function_exists('invierte_date_time')) {
         
         $data_response[] = d($interes_re_venta, 12);
         $data_response[] = d($recompensa, 12);
+        
+
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         if (!es_decoracion_tematica($data)) {
@@ -296,6 +298,7 @@ if (!function_exists('invierte_date_time')) {
            
         }
 
+        $data_response[] = ventas_mayoristas($s);
         
         $pagina_producto[] =  d($data_response, 8);
 
@@ -306,6 +309,64 @@ if (!function_exists('invierte_date_time')) {
         $pagina_producto[] = modal_accion_tiempo_alcaldia_pago($data["alcaldias"]);
 
         return d(d($pagina_producto, 13), 'col-sm-12 mt-md-5 ');
+    }
+    function ventas_mayoristas($servicio){
+
+        $precio_mayoreo = pr($servicio, "precio_mayoreo");
+        $precio = pr($servicio, "precio");
+        $costo = pr($servicio, "costo");
+        $id_servicio = pr($servicio, "id_servicio");
+        $venta = porcentaje($precio, pr($servicio, "comision")) + 100;
+        $entrega = 0;
+        $otro_gas = 0;
+        $promedio_venta = 6;
+
+        
+
+        $response = [];
+        if($precio_mayoreo > 0){
+
+            $response[] = d(h("¿Quieres iniciar tu negocio de venta de equipo deportivo?",2),'f2 text-uppercase black');
+            $response[] = d(h("Precios de mayoristas",2,"f15"),'text-uppercase black');
+            
+            $inversion = $precio_mayoreo * 10;
+
+            $response[] = d(_text_(
+                "Inicia con 10 piezas a precio de ", 
+                money($precio_mayoreo),
+                "Inversión para iniciar",
+                money($inversion)
+
+            ),
+            "black f12"
+            );
+
+
+            $path = "venta=$venta&precio=$precio&costo=$precio_mayoreo&entrega=$entrega&otro=$otro_gas&promedio_venta=$promedio_venta";
+                
+
+            $simulador = format_link(
+                    "Simula tus ganancias",
+                    [
+                        "href" => _text(path_enid("simulador"), "/?", $path),
+                    ]
+            );
+
+            $response[] = d($simulador,"mt-5");
+            
+            
+            $pedidos = format_link(
+                    "Haz tu pedido",
+                    [
+                        "href" => _text(path_enid("simulador"), "/?", _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url())),
+                    ],0
+            );
+            $response[] = d($pedidos,"mt-2");
+            
+
+
+        }
+        return d($response,'bg_yellow p-5');
     }
     function texto_precio($data)
     {

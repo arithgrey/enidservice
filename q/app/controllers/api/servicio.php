@@ -1289,6 +1289,13 @@ class Servicio extends REST_Controller
         $response = $this->serviciosmodel->q_up("precio_alto", $param["precio_alto"], $param["id_servicio"]);
         $this->response($response);
     }
+    function precio_mayoreo_PUT()
+    {
+        $param = $this->put();
+        $response = $this->serviciosmodel->q_up("precio_mayoreo", $param["precio_mayoreo"], $param["id_servicio"]);
+        $this->response($response);
+    }
+    
     function costo_compra_PUT()
     {
         $param = $this->put();
