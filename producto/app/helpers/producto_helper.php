@@ -273,10 +273,12 @@ if (!function_exists('invierte_date_time')) {
         $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
 
         $data_response[] = d(flex($boton_editar, $respuestas, _between), 'col-sm-12 mt-5 mb-5');
-        $data_response[] = d($recompensa, 12);
-        $data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
+        
+        //$data_response[] = d(d(""), 'col-sm-12 mt-5 border_black');
 
+        
         $data_response[] = d($interes_re_venta, 12);
+        $data_response[] = d($recompensa, 12);
         $data_response[] = d(hr(), 'col-sm-12 mt-5');
 
         if (!es_decoracion_tematica($data)) {
@@ -294,7 +296,7 @@ if (!function_exists('invierte_date_time')) {
            
         }
 
-
+        
         $pagina_producto[] =  d($data_response, 8);
 
         if (!is_mobile()) {
@@ -395,16 +397,8 @@ if (!function_exists('invierte_date_time')) {
     function interes_re_venta($s, $proceso_compra, $data, $imagenes, $in_session, $nombre, $id_servicio)
     {
 
-        $descripcion = flex(
-            "+ INFO",
-            "",
-            "flex-row mt-5 mb-5 cursor_pointer",
-            "border_enid text-center p-3 w-100 strong black descripcion_producto cursor_pointer",
-            ""
-        );
-
         $response[] = d("", "place_valoraciones mt-5 row");
-        $response[] = d($descripcion);
+        
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
         
         $interes = h("QUIZÁ TAMBIÉN TE GUSTE ...", 2, " h3 text-uppercase black font-weight-bold");
@@ -674,7 +668,7 @@ if (!function_exists('invierte_date_time')) {
         $capacidad = pr($servicio, "capacidad");
         $servicio_materiales = $data["servicio_materiales"];
 
-        $z[] = d(_titulo($nombre, 0, "borde_end p-2"), "mb-4");
+        $z[] = d(_titulo($nombre, 0), "mb-4");
 
         if (str_len($descripcion, 5)) {
 
@@ -1430,7 +1424,7 @@ if (!function_exists('invierte_date_time')) {
         }
         */
 
-        $seccion[] = d("Agenda tu entrega con el 10% el 90% restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
+        $seccion[] = d("Agenda tu entrega con el 10% el restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
         $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  black');
 
