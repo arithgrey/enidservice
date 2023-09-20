@@ -91,7 +91,7 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(hr());
         $response[] = append($form);
         $response[] = d(place("simulacion_gastos_utilidad col-xs-12"), "mt-5 row");
-        $response[] = d("Se parte, además de darte precios especiales podemos enviar pedidos de clientes que estén en tu zona!",'black f18 text-center bg_yellow');
+        $response[] = d("Se parte, además de darte precios especiales podemos enviar pedidos de clientes que estén en tu zona!",'black f18 text-center bg_yellow mt-5');
         $response[] = d("Iniciémos conversación (55) 5296 - 7027",'black f18 text-center bg_yellow');
         
         return d($response, 8,1);
