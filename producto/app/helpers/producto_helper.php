@@ -348,17 +348,16 @@ if (!function_exists('invierte_date_time')) {
             $simulador = format_link(
                     "Simula tus ganancias",
                     [
-                        "href" => _text(path_enid("simulador"), "/?", $path),
+                        "href" => _text(path_enid("simulador"), "/?", $path)
                     ]
             );
 
             $response[] = d($simulador,"mt-5");
-            
-            
+                        
             $pedidos = format_link(
                     "Haz tu pedido",
                     [
-                        "href" => _text(path_enid("simulador"), "/?", _text_(path_enid('whatsapp_ayuda', 0, 1), _current_url())),
+                        "href" => _text(_text_(path_enid('whatsapp_ayuda', 0, 1), _current_url())),
                     ],0
             );
             $response[] = d($pedidos,"mt-2");
