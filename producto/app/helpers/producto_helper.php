@@ -313,10 +313,10 @@ if (!function_exists('invierte_date_time')) {
     function ventas_mayoristas($servicio){
 
         $precio_mayoreo = pr($servicio, "precio_mayoreo");
-        $precio = pr($servicio, "precio");
+        $precio = pr($servicio, "precio") + 100;
         $costo = pr($servicio, "costo");
         $id_servicio = pr($servicio, "id_servicio");
-        $venta = porcentaje($precio, pr($servicio, "comision")) + 100;
+        $venta = 0;
         $entrega = 0;
         $otro_gas = 0;
         $promedio_venta = 6;

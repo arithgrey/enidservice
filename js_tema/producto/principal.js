@@ -431,7 +431,6 @@ let precio_mayoreo = function (e) {
 
     
     let $precio = $(".precio_mayoreo").val();
-    alert($precio);
     
     if (es_float($precio) && $precio > 0) {
 
