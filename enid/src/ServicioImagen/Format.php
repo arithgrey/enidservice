@@ -74,7 +74,7 @@ class Format
             $imagenes_format[] = img(
                 [
                     'src' => $url,
-                    "class" => "mt-3 zoom img-zoom col-xs-12 col-md-6 mh_sm_310 p-0 mh_450 ",                    
+                    "class" => "mt-3 zoom img-zoom col-xs-12 col-md-6 mh_sm_310 p-1 mh_450 ",                    
                 ]
                 );
 
