@@ -1485,8 +1485,8 @@ if (!function_exists('invierte_date_time')) {
         }
         */
 
-        $seccion[] = d("Agenda tu entrega con el 10% el restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
-        $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
+        
+        $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center strong f12 mt-3 black mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  black');
 
 
