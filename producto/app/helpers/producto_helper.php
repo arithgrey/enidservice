@@ -365,7 +365,7 @@ if (!function_exists('invierte_date_time')) {
 
 
         }
-        return d($response,'bg_yellow p-5');
+        return d($response,["class"=>'bg_yellow p-5',"id"=>"mayoristas"]);
     }
     function texto_precio($data)
     {
@@ -1419,7 +1419,7 @@ if (!function_exists('invierte_date_time')) {
     {
 
         $servicio = $data["info_servicio"]["servicio"];
-        $opcion_pago_contra_entrega   =  pr($servicio, "opcion_pago_contra_entrega");
+        
         $buy_button_id = pr($servicio, "buy_button_id");
         $publishable_key = pr($servicio, "publishable_key");
 
@@ -1484,18 +1484,15 @@ if (!function_exists('invierte_date_time')) {
             
         }
         */
-        if($opcion_pago_contra_entrega){
-            $seccion[] = d("Agenda tu entrega con el 10% el restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3'); 
-        }
 
-               
+        $seccion[] = d("Agenda tu entrega con el 10% el restante lo liquidas al recibirlo.",' col-lg-12 text-center strong f12 mt-3 black mb-3');        
         $seccion[] = d("Llegan HOY en CDMX y área metropolitana", ' col-lg-12 text-center black  mt-5 mb-3');
         $seccion[] = d("y de uno a dos días en los estados", ' col-lg-12 text-center  black');
 
 
         $id_servicio = pr($servicio, "id_servicio");
         $path = a_enid(
-            "Checa referencias aquí!",
+            "Checa referencias!",
             [
                 "href" =>
                 path_enid("clientes"),
@@ -1522,7 +1519,21 @@ if (!function_exists('invierte_date_time')) {
         
 
 
-        $seccion[] = d($path, ' col-lg-12 underline text-center mt-4 f11 ');
+        $seccion[] = d($path, ' col-lg-12 underline text-center mt-4 f11');
+
+        
+        if(intval(pr($servicio,"precio_mayoreo")>12)){
+            $path = a_enid(
+                "Ver precio de mayoreo",
+                [
+                    "href" =>
+                    "#mayoristas",
+                    "class" => "black"
+                ]
+            );
+            $seccion[] = d($path, ' col-lg-12 underline text-center mt-5 f11');
+        }
+
 
         return $seccion;
     }

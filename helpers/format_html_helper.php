@@ -2518,7 +2518,7 @@ function get_logo($id_nicho, $session = 0)
         $path = path_enid("decoraciones");
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Globos</strong> Globolandia</a>", ["class" => "titulo_enid_service"]);
     } else {
-        $path = path_enid("tiendas");
+        $path = path_enid("pesas_enid");
         $texto = d("<a href='" . $path . "' class='white'><strong class='white'>Enid</strong> Service</a>", ["class" => "titulo_enid_service"]);
     }
 
