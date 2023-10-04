@@ -48,7 +48,7 @@ if (!function_exists('invierte_date_time')) {
    
    ');
     $paso_3[]  = d('3', 'strong f2');
-    $paso_3[]  = d('Te marcamos ya que estemos de camino', 'f11 black');
+    $paso_3[]  = d('Te indicamos quien entregará tu equipo', 'f11 black');
 
     $response[] = d($paso_3, 'col-xs-3 text-center mt-5');
 
@@ -74,6 +74,7 @@ if (!function_exists('invierte_date_time')) {
         ],2
     );
 
+
     $referencias_ =  format_link(
         _text_(icon('fa fa-star white'),"Mira nuestras referencias"),
         [
@@ -94,16 +95,21 @@ if (!function_exists('invierte_date_time')) {
     $str = _d(
             d(_titulo(
                 _text_(
-                    span("Paga al recibir tus artículos y recíbelos el mismo día! en CDMX y algunas partes del estado de México","f2"),                                        
+                    span("Paga al recibir tus artículos y recíbelos el mismo día! en CDMX 
+                    y algunas partes del estado de México","f2"),                                        
                     icon('fa fa-check fa-2x')                    
                 )
             ), 'mb-2 mt-4'),
             
             d('Así funciona:', 'mt-2 f12 black borde_end_b'),
             d(append($contenido))
+            ,            
+            _text(
+                d(
+                    _text_("Lee estas medidas de seguridad para saber que somos nosotros y no algún estafador ",format_link("Medidas de seguridad",["class"=>"mt-5 ","href"=>path_enid("distribuidores_autorizados")])), 'text-uppercase p-5 bg_yellow mt-5 f2 red_enid')
+            )
             
-            ,
-            
+            ,            
             _text(
                 d("Formas de pago ", 'text-uppercase black mt-5 f2 black strong')
             ),            
@@ -136,7 +142,7 @@ if (!function_exists('invierte_date_time')) {
             
             d(_titulo(
                 _text_(                    
-                    span("También llegamos a los estados! al anticipar con el 10% podemos enviarte tu equipo el 90% restante lo liquidas al recibirlo.","f2"),                                                            
+                    span("Pero no te limites... Hacemos envíos a todo México, la forma más rápida y segura!","f2"),                                                            
                 )
             ), 'mb-2 mt-5')
             ,_text(
