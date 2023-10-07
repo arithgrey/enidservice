@@ -188,8 +188,6 @@ if (!function_exists('invierte_date_time')) {
     {
         $r[] = h("UPS! AÚN NO HAZ AGREGADO PRODUCTOS A TU LISTA", 4);
 
-
-
         $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
         fill="none" 
         viewBox="0 0 24 24" 
