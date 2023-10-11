@@ -24,14 +24,15 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <meta property="og:locale" content="es_ES" />
 <meta property="og:type" content="article" />
 <meta property="og:title" content="<?= $desc_web; ?>" />
-<meta property="og:url" content="<?= $enlace; ?>" />
+
 <meta property="og:site_name" content="Enid Service" />
 <meta name="p:domain_verify" content="287921956bb357b93dabea5956368127"/>
 
 <?php if (isset($url_img_post) && !is_null($url_img_post)) : ?>
-
-    <meta property="og:image" content="<?= create_url_preview($url_img_post) ?>" />
+    <meta property="og:url" content="<?= create_url_preview($url_img_post,1) ?>" />
+    <meta property="og:image" content="<?= create_url_preview($url_img_post,1) ?>" />
 <?php else : ?>
+    <meta property="og:url" content="https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/img_tema/portafolio/pesas.jpg" />
     <meta property="og:image" content="https://enidservices.com/kits-pesas-barras-discos-mancuernas-fit/img_tema/portafolio/pesas.jpg" />
 <?php endif; ?>
 

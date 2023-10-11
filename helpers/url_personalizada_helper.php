@@ -237,9 +237,16 @@ function get_url_usuario($nombre_imagen, $n = 0)
 }
 
 
-function create_url_preview($img)
+function create_url_preview($img,$img_directa =0)
 {
-    return base_url() . "../img_tema/portafolio/" . $img;
+    if($img_directa >  0){
+
+        return $img;
+        
+    }else{
+        return base_url() . "../img_tema/portafolio/" . $img;
+    }
+    
 }
 
 function lib_def()
