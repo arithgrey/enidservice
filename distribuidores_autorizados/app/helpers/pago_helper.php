@@ -81,8 +81,7 @@ if (!function_exists('invierte_date_time')) {
     $contenido[]  = d("PERFILES FALSOS","text-uppercase p-5 red_lista_negra mt-5 f3 white");
 
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-daniela-gonzales-estafadora-infonavit.jpeg"),"text-center red_lista_negra mt-5 f2 white");
-    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-3.jpeg"),"text-center red_lista_negra mt-5 f2 white");
-    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-3.jpeg"),"text-center red_lista_negra mt-5 f2 white");    
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-1.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-2.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     $contenido[] =  d($response, 13);
