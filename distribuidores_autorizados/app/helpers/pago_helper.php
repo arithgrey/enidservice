@@ -71,6 +71,23 @@ if (!function_exists('invierte_date_time')) {
             _text_('Recibe solo el pedido del número que te daremos al confirmar tu envío'), 'f16 black');
 
        
+            $paso[]  = d('<svg xmlns="http://www.w3.org/2000/svg" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke-width="1.5" 
+        stroke="currentColor" 
+        class="w-6 h-6 black">
+        <path stroke-linecap="round" 
+        stroke-linejoin="round" 
+        d="M11.48 3.499a.562.562 0 011.04 0l2.125 5.111a.563.563 0 00.475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 00-.182.557l1.285 5.385a.562.562 0 01-.84.61l-4.725-2.885a.563.563 0 00-.586 0L6.982 20.54a.562.562 0 01-.84-.61l1.285-5.386a.562.562 0 00-.182-.557l-4.204-3.602a.563.563 0 01.321-.988l5.518-.442a.563.563 0 00.475-.345L11.48 3.5z" />
+      </svg>
+      ');
+        $paso[]  = d('5', 'strong f2');
+        
+        $paso[]  = d(
+            _text_(a_enid('Lee más sobre nuestras medidas de seguridad aquí',["href"=> "https://www.facebook.com/enidservicemx/posts/pfbid02KaV9Riq74BKwBGXiQq8MECBEwrH66AXS4bkzUmSv3PXK3AggrLFBCftju54CSNLsl"])), 'f16 black');
+
+       
         
             
             
@@ -78,12 +95,26 @@ if (!function_exists('invierte_date_time')) {
 
     $contenido[]  = d("LEE ESTAS MEDIDAS DE SEGURIDAD PARA SABER QUE SOMOS NOSOTROS Y NO ALGÚN ESTAFADOR","text-uppercase p-5 bg_yellow mt-5 f2 red_enid");
     
-    $contenido[]  = d("PERFILES FALSOS","text-uppercase p-5 red_lista_negra mt-5 f3 white");
+    $contenido[]  = d("PERFILES FALSOS, CUIDADO!","text-uppercase p-5 red_lista_negra mt-5 f3 white");
 
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/daniela-gonzales-estafadora-1.jpeg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-daniela-gonzales-estafadora-infonavit.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-3.jpeg"),"text-center red_lista_negra mt-5 f2 white");    
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-1.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-2.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratero.jpg"),"text-center red_lista_negra mt-5 f2 white");
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratera-daniela.jpg"),"text-center red_lista_negra mt-5 f2 white");
+
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratera-daniela-1.jpg"),"text-center red_lista_negra mt-5 f2 white");
+ 
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratera-luis-galindo-1.jpg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratero-daniel-galindo-medrano-1.jpg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/daniela-gonzales-estafadora.jpeg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+    
+    
+
+    
     $contenido[] =  d($response, 13);
 
     
@@ -95,7 +126,9 @@ if (!function_exists('invierte_date_time')) {
                 )
             ), 'mb-2 mt-4'),
             
-            d('Toma si o si estas medidas de seguridad si compras con nosotros bajo el concepto de pago contra entrega:',
+            d('Toma si o si estas medidas de seguridad si compras con nosotros bajo el concepto de pago contra entrega, 
+            estos perfiles de ninguna manera tienen algo que ver con Enid Service NO TE EXPONGAS, son estafadores y ya son 7 personas que nos reportan 
+            ser victimas de estos delincuentes:',
              'mt-2 f15 black borde_end_b'),
             d(append($contenido))            
                        
