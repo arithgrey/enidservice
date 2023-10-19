@@ -30,16 +30,8 @@ if (!function_exists('invierte_date_time')) {
                         "class" => 'mt-5 black strong underline hover_bg_black'
                     ]
                 )
-                    ),
-                    _text(
-                        a_enid(
-                            "¿QUÉ PASA SI MI PRODUCTO TIENE UN DEFECTO O NO CUMPLE CON LOS ESTÁNDARES DE CALIDAD?",
-                            [
-                                "href" => path_enid("que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad"),
-                                "class" => 'mt-5 black strong underline hover_bg_black'
-                            ]
-                        )
                     )
+                    
 
                     ,
                     _text(

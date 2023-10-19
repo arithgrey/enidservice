@@ -1144,8 +1144,7 @@ function footer_opciones()
     $asistencia[] =  a_enid(
         h('Rastrea tu pedido',2,"fp8 "),
         [
-            'href' => path_enid('rastrea-paquete'),            
-            'target' => '_black'
+            'href' => path_enid('rastrea-paquete'),                        
         ]
     );
 
@@ -1153,7 +1152,7 @@ function footer_opciones()
         h('Formas de pago',2,"fp8 ayuda "),
         [
             'href' => path_enid('forma_pago'),            
-            'target' => '_black'
+            
         ]
     );
     $asistencia[] =  a_enid(
@@ -1161,7 +1160,7 @@ function footer_opciones()
         h('Envío y pago contra entrega',2,"fp8 ayuda "),
         [
             'href' => path_enid('envio'),
-            'target' => '_black'
+            
         ]
     );
 
@@ -1170,9 +1169,18 @@ function footer_opciones()
         h('Nuestras referencias',2,"fp8 ayuda "),
         [
             'href' => path_enid('clientes'),            
-            'target' => '_black'
+            
         ]
     );
+    
+    $asistencia[] =  a_enid(
+        h('Medidas de seguridad para pedidos pago contra entrega',2,"fp8 ayuda "),
+        [
+            'href' => path_enid("distribuidores_autorizados"),            
+            
+        ]
+    );
+
     
     
     $oportunidades[] = _titulo('Oportunidades', 2, '');
@@ -1275,15 +1283,7 @@ function modal_politica_devoluciones()
                 ]
             )
         ),
-        _text(
-            a_enid(
-                "¿QUÉ PASA SI MI PRODUCTO TIENE UN DEFECTO O NO CUMPLE CON LOS ESTÁNDARES DE CALIDAD?",
-                [
-                    "href" => path_enid("que-pasa-si-mi-producto-tiene-un-defecto-o-no-cumple-con-los-estandares-de-calidad"),
-                    "class" => 'mt-5 black strong underline hover_bg_black'
-                ]
-            )
-        ),
+        
         _text(
             a_enid(
                 "¿CÓMO ES EL PROCESO DE DEVOLUCIÓN DE UN PEDIDO?",
