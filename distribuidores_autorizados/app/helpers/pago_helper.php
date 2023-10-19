@@ -93,7 +93,7 @@ if (!function_exists('invierte_date_time')) {
             
     $response[] = d($paso, 'col-xs-12 text-center mt-5');
 
-    $contenido[]  = d("LEE ESTAS MEDIDAS DE SEGURIDAD PARA SABER QUE SOMOS NOSOTROS Y NO ALGÚN ESTAFADOR","text-uppercase p-5 bg_yellow mt-5 f2 red_enid");
+    $contenido[]  = d("LEE ESTAS MEDIDAS DE SEGURIDAD PARA SABER QUE SOMOS NOSOTROS Y NO ALGÚN ESTAFADOR","text-uppercase p-3 bg_yellow mt-3 f2 red_enid strong");
     
     $contenido[]  = d("PERFILES FALSOS, CUIDADO!","text-uppercase p-5 red_lista_negra mt-5 f3 white");
 
