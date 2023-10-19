@@ -48,19 +48,7 @@ if (!function_exists('invierte_date_time')) {
                         
                     ]
                 )
-            ),
-
-            d(
-                format_link(
-                    "Costos de entrega",
-                    [
-                        "href" => path_enid("clientes"),                        
-                        "class" =>  "mt-3"
-                    ]
-                )
             )
-
-
 
         );
 
