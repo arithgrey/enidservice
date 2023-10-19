@@ -10,6 +10,7 @@ if (!function_exists('invierte_date_time')) {
         $response[]  = d(
             _text_("Si alguien te envió este enlace y vas hacer tu pedido en la modalidad pago contra entrega, lee estas medidas de seguridad para saber que somos nosotros y no algún estafador ",
             format_link("Medidas de seguridad",["class"=>"mt-5 ","href"=>path_enid("distribuidores_autorizados")])), 'text-uppercase p-2 bg_yellow mt-5 f2 red_enid strong');
+
             
         $response[] = d(foto_link($data),12);
         $response[] = d(add_imgs_cliente_empresa($data),12);
@@ -24,7 +25,7 @@ if (!function_exists('invierte_date_time')) {
         foreach ($imagenes_clientes as $row) {
 
             $link = get_path($row["nombre_imagen"]);            
-            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  4);
+            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  "col-md-3 col-xs-6");
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');
