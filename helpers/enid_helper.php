@@ -1129,11 +1129,11 @@ function footer_opciones()
 
 
     /*Asistencia*/
-    $asistencia[] =  _titulo('¿Necesitas ayuda?', 2, '');
+    $asistencia[] =  _titulo('¿Necesitas ayuda?', 2);
 
     $asistencia[] =  a_enid(
         
-        h('(55) 5296 - 7027',2,"f15 black underline"),
+        h('(55) 5296 - 7027',2,"f15 black underline bg_yellow"),
         [
             'href' => path_enid('whatsapp_ayuda', 0, 1),
             'class' => 'black ',
@@ -1219,7 +1219,7 @@ function footer_opciones()
     */
     $sociales[] = _titulo('SÍGUENOS EN:', 2, '');
     $sociales[] = a_enid(
-        text_icon(_text_(_facebook_icon, 'fa-2x'),"Facebook",'black') ,
+        text_icon(_text_(_facebook_icon, 'fa-2x'),"Facebook") ,
         [
             'href' => path_enid('facebook', 0, 1),
             'target' => 'black',
@@ -1228,7 +1228,7 @@ function footer_opciones()
     );
     $sociales[] = a_enid(
         
-        text_icon(_text_(_instagram_icon, 'fa-2x'),"Instagram",'black') ,
+        text_icon(_text_(_instagram_icon, 'fa-2x'),"Instagram") ,
         [
             'href' => path_enid('instagram', 0, 1),
             'target' => 'black',
@@ -1238,7 +1238,7 @@ function footer_opciones()
 
     $sociales[] = a_enid(
         
-        text_icon(_text_(_pinterest_icon, 'fa-2x'),"Pinterest",'black') ,
+        text_icon(_text_(_pinterest_icon, 'fa-2x'),"Pinterest") ,
         [
             'href' => path_enid('pinterest', 0, 1),
             'target' => 'black',
