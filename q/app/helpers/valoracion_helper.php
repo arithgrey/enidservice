@@ -2,16 +2,20 @@
 if (!function_exists('invierte_date_time')) {
 
 
-    function render_articulo($data)
-    {
+
+    function render_comentarios($data){
 
         $comentarios = $data["comentarios"];
+        $z[] = criterios($comentarios);
+        $z[] = comentarios($comentarios, $data);
+        return d($z,12);        
 
+    }
+    function render_articulo($data)
+    {
+        
         $z[] = referencias_fotograficas($data);
         $z[] = place("table_orden_1");
-        $z[] = criterios($comentarios);
-
-        $z[] = comentarios($comentarios, $data);
         
         //$z[] = d(redactar($data), "mt-1 d-flex justify-content-between");
         $response[] = d($z,12);
