@@ -60,8 +60,8 @@ if (!function_exists('invierte_date_time')) {
                 )
 
             ),
-            _text_("mt-1 mb-5 f12", $extra)
-        ),"col-xs-12 mt-5 text-right text-secondary");
+            _text_("mt-1 mb-5 f13", $extra)
+        ),"col-xs-12 mt-5 text-right black bg_yellow");
 
 
         return d(d($response, 13), 6, 1);

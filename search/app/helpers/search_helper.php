@@ -74,7 +74,7 @@ if (!function_exists('invierte_date_time')) {
                 if (str_len($titulo, 3)) {
                     $response_[] = d(
                         $titulo,
-                        'display-5 strong text-uppercase black mt-5 col-sm-12 p-0'
+                        'display-5 strong text-uppercase black mt-5 col-sm-12 p-2 bg_yellow'
                     );
                 }
 
