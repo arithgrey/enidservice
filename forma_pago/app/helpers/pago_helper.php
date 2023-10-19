@@ -106,7 +106,7 @@ if (!function_exists('invierte_date_time')) {
             ,            
             _text(
                 d(
-                    _text_("Lee estas medidas de seguridad para saber que somos nosotros y no algún estafador ",format_link("Medidas de seguridad",["class"=>"mt-5 ","href"=>path_enid("distribuidores_autorizados")])), 'text-uppercase p-5 bg_yellow mt-5 f2 red_enid')
+                    _text_("Lee estas medidas de seguridad para saber que somos nosotros y no algún estafador ",format_link("Medidas de seguridad",["class"=>"mt-5 ","href"=>path_enid("distribuidores_autorizados")])), 'text-uppercase p-3 bg_yellow mt-5 f2 red_enid strong')
             )
             
             ,            
