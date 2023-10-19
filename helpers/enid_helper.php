@@ -1223,7 +1223,7 @@ function footer_opciones()
         [
             'href' => path_enid('facebook', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 click_facebook_clientes black'
+            'class' => 'click_facebook_clientes black'
         ]
     );
     $sociales[] = a_enid(
@@ -1232,7 +1232,7 @@ function footer_opciones()
         [
             'href' => path_enid('instagram', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3 click_instagram_clientes black'
+            'class' => 'mt-3 click_instagram_clientes black'
         ]
     );
 
@@ -1242,7 +1242,7 @@ function footer_opciones()
         [
             'href' => path_enid('pinterest', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3 click_pinterest_clientes black'
+            'class' => 'mt-3 click_pinterest_clientes black'
         ]
     );
 
