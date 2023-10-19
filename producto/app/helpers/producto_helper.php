@@ -460,7 +460,8 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d("", "place_valoraciones mt-5 row");
         
         $response[] = d(desc_servicio($s, $proceso_compra, $data, $imagenes, $in_session));
-        
+
+        $response[] = d("", "place_valoraciones_comentarios mt-5 row");
         $interes = h("QUIZÁ TAMBIÉN TE GUSTE ...", 2, " h3 text-uppercase black font-weight-bold");
         $response[] = d($interes, "mt-5 text_sugerencias d-none ");
         $response[] = d(d("", "place_tambien_podria_interezar bottom_100 row"));

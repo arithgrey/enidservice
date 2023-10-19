@@ -175,7 +175,9 @@ class Valoracion extends REST_Controller
             "es_administrador" => $es_administrador,
         ];
 
-        $this->response(render_articulo($data));
+        $data["valoraciones_fotograficas"]  =  render_articulo($data);
+        $data["valoraciones_comentarios"] =  render_comentarios($data);
+        $this->response($data);
     }
 
     function index_POST()

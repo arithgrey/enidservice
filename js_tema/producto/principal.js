@@ -165,7 +165,9 @@ let carga_valoraciones = () => {
 
 let response_carga_valoraciones = data => {
 
-    render_enid(".place_valoraciones", data);
+    
+    render_enid(".place_valoraciones", data.valoraciones_fotograficas);
+    render_enid(".place_valoraciones_comentarios", data.valoraciones_comentarios);
     $('.agregar_referencia_fotografica').click(agregar_referencia_fotografica);
     $(".eliminar_foto_referencia").click(elimina_imagen_referencia);
 

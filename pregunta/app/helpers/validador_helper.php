@@ -88,7 +88,6 @@ if (!function_exists('invierte_date_time')) {
     function get_format_pregunta($formulario_valoracion, $id_servicio)
     {
 
-
         $r[] = addNRow(d($formulario_valoracion, 8, 1));
         $r[] = hiddens(["class" => "servicio", "value" => $id_servicio]);
         $r[] = addNRow(d(d("ENVIAMOS TU PREGUNTA AL VENDEDOR!", "registro_pregunta display_none padding_10 top_30"), 8, 1));
