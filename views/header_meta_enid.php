@@ -78,6 +78,8 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
 
+
+
 <input type="hidden" class="http_referer_enid" value="<?= $enlace; ?>" />
 <input type="hidden" class="ip_referer_enid" value="<?= getRealIPAddress(); ?>" />
 

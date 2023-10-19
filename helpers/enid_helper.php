@@ -1155,14 +1155,7 @@ function footer_opciones()
             
         ]
     );
-    $asistencia[] =  a_enid(
-        
-        h('Envío y pago contra entrega',2,"fp8 ayuda "),
-        [
-            'href' => path_enid('envio'),
-            
-        ]
-    );
+    
 
 
     $asistencia[] =  a_enid(
@@ -1197,13 +1190,21 @@ function footer_opciones()
     */
     $oportunidades[] = a_enid(
         
-        h('Programa de afiliados',2,"fp8 "),
+        h('Simulador de ganancias',2,"fp8 "),
         [
             'href' => path_enid('sobre_vender'),
             'class' => 'black  '
         ]
     );
 
+    $oportunidades[] = a_enid(
+        
+        h('Programa de afiliados',2,"fp8 "),
+        [
+            'href' => path_enid('sobre_vender'),
+            'class' => 'black  '
+        ]
+    );
     /*
     $anuncio[] = d('¿Vendes artículos?', "black strong");
     $anuncio[] = d('Anúnciate aquí!');
@@ -1216,33 +1217,37 @@ function footer_opciones()
         ]
     );
     */
-    $sociales[] = _titulo('Redes sociales', 2, '');
+    $sociales[] = _titulo('SÍGUENOS EN:', 2, '');
     $sociales[] = a_enid(
-        icon(_text_(_facebook_icon, 'fa-2x')),
+        text_icon(_text_(_facebook_icon, 'fa-2x'),"Facebook",'black') ,
         [
             'href' => path_enid('facebook', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 click_facebook_clientes'
+            'class' => 'ml-5 click_facebook_clientes black'
         ]
     );
     $sociales[] = a_enid(
-        icon(_text_(_instagram_icon, 'fa-2x')),
+        
+        text_icon(_text_(_instagram_icon, 'fa-2x'),"Instagram",'black') ,
         [
             'href' => path_enid('instagram', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3 click_instagram_clientes'
+            'class' => 'ml-5 mt-3 click_instagram_clientes black'
         ]
     );
 
     $sociales[] = a_enid(
-        icon(_text_(_pinterest_icon, 'fa-2x')),
+        
+        text_icon(_text_(_pinterest_icon, 'fa-2x'),"Pinterest",'black') ,
         [
             'href' => path_enid('pinterest', 0, 1),
             'target' => 'black',
-            'class' => 'ml-5 mt-3 click_pinterest_clientes'
+            'class' => 'ml-5 mt-3 click_pinterest_clientes black'
         ]
     );
 
+
+    
 
     $seccion_productos =  d($productos_footer, 3);
     $asistencia_seccion = d($asistencia, 3);

@@ -29,7 +29,7 @@ if (!function_exists('invierte_date_time')) {
             )
         );
 
-
+        
 
 
 
@@ -55,14 +55,20 @@ if (!function_exists('invierte_date_time')) {
         $response[] = d(d(
             d(
                 _text_(
-                    "Tiempo de entrega en CDMX de 1 hora a",
-                    "máximo 4 horas a partir de que nos envías tu pedido"
+                    "El tiempo de entrega en CDMX de 1 hora a",
+                    "máximo 4 horas a partir de que nos envías tu pedido, 
+                    envíos a otros estados de 1 a 2 días "
                 )
 
             ),
-            _text_("mt-1 mb-5 f12", $extra)
-        ),"col-xs-12 mt-5 text-right text-secondary");
+            _text_("mt-1 mb-5 f13", $extra)
+        ),"col-xs-12 mt-5 f1 bg_yellow black");
 
+        $response[] = d(a_enid("Medidas de seguridad para pedidos contra entrega",
+        [
+            "class"=>'text-right black underline',
+            "href"=> path_enid("distribuidores_autorizados")
+        ]),"col-lg-12");
 
         return d(d($response, 13), 6, 1);
     }
