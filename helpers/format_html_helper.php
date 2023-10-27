@@ -1943,6 +1943,15 @@ function opciones_populares($id_nicho)
             ],
             0
         );
+        $response[] = a_enid(
+            "Faq 🫡 que nadie te dió",
+            [
+                "class" => "text-uppercase white mt-2 ml-sm-5 strong d-none d-lg-block",
+                "href" => path_enid("faq-que-nadie-te-dio")
+            ],
+            0
+        );
+
 
 
 
@@ -2166,20 +2175,29 @@ function navegacion(
 
         
         $opciones[] = d(
-            a_enid(flex(icon('white fa fa fa-star'), "Referencias", "", "", "ml-2"), [
+            a_enid(flex(icon('white fa fa fa-star'), "Referencias", _between, "", "ml-2"), [
                 "href" => path_enid("clientes"),
                 "class" => "strong white"
             ]),
-            "col-xs-6 "
+            "col-xs-3 "
         );
 
         $opciones[] = d(
-            a_enid(flex(icon('white fa white fa fa-truck'), "Rastrea tu equipo", _between, 'mr-2'), [
+            a_enid(flex("", "🚚 Rastrea tu equipo", _between, 'mr-2'), [
                 "href" => path_enid("rastrea-paquete"),
                 "class" => "strong white"
             ]),
             "col-xs-6 "
         );
+        
+        $opciones[] = d(
+            a_enid(flex("", "FAQ 🫡 ", "", 'mr-2'), [
+                "href" => path_enid("rastrea-paquete"),
+                "class" => "strong white"
+            ]),
+            "col-xs-3 "
+        );
+
 
         /*
         $opciones[] = d(a_enid(
