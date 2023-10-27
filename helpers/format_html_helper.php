@@ -2192,7 +2192,7 @@ function navegacion(
         
         $opciones[] = d(
             a_enid(flex("", "FAQ 🫡 ", "", 'mr-2'), [
-                "href" => path_enid("rastrea-paquete"),
+                "href" => path_enid("faq-que-nadie-te-dio"),
                 "class" => "strong white"
             ]),
             "col-xs-3 "
