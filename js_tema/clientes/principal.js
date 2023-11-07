@@ -1,17 +1,35 @@
 "use strict";
 let $anexar_foto_link = $(".anexar_foto_link");
+let $quitar_imagen = $(".quitar_imagen");
 $(document).ready(() => {
+    
     $("footer").ready(evalua_promocion_modal);
     $("footer").removeClass("blue_enid3");
+    $quitar_imagen.click(baja_imagen);
     $anexar_foto_link.click(expon_formulario_fotos);  
+
 });
 
+let baja_imagen = function (e) {
+
+    let $id = e.target.id;
+    let data_send = {"id":$id};
+    let url = "../q/index.php/api/imagen_cliente_empresa/index/format/json/";
+    request_enid("DELETE", data_send, url, response_baja);
+    
+}
 let expon_formulario_fotos = function () {
 
     let data_send = {};
     let url = "../q/index.php/api/img/formulario_imagen_cliente/format/json/";
     request_enid("GET", data_send, url, response_formulario_fotos, ".place_form_img");
 
+}
+
+let response_baja = function (data)
+{
+
+    redirect("");
 }
 let response_formulario_fotos = function (data){
 

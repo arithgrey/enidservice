@@ -20,12 +20,20 @@ if (!function_exists('invierte_date_time')) {
     function add_imgs_cliente_empresa($data)
     {
 
+        $es_administrador = es_administrador($data);
         $imagenes_clientes = $data["imagenes_clientes"];
         $response = [];
         foreach ($imagenes_clientes as $row) {
 
+            
             $link = get_path($row["nombre_imagen"]);            
-            $response[] = d(img(["class" =>"img-zoom","src" => $link]),  "col-md-3 col-xs-6");
+            $img = img(["class" =>"img-zoom","src" => $link]);
+            $id = $row["id"];
+            $icono = icon(_text_(_eliminar_icon,'quitar_imagen'),["id" =>$id ]);
+            $flex = flex($img, $icono);
+            $flex = ($es_administrador) ? $flex : "";
+            $response[] = d($flex,  "col-md-3 col-xs-6");
+
         }
 
         $texto_imagenes  = d(_text("#",count($imagenes_clientes)),'white');
