@@ -30,7 +30,8 @@ if (!function_exists('invierte_date_time')) {
             $img = img(["class" =>"img-zoom","src" => $link]);
             $id = $row["id"];
             $icono = icon(_text_(_eliminar_icon,'quitar_imagen'),["id" =>$id ]);
-            $flex = ($es_administrador) ? $icono : "";
+
+            $icono = ($data["in_session"] > 0 && $es_administrador)  ? $icono : "";
             $flex = flex($img, $icono);
            
             $response[] = d($flex,  "col-md-3 col-xs-6");
