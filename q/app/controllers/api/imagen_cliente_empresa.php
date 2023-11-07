@@ -29,6 +29,21 @@ class Imagen_cliente_empresa extends REST_Controller
         }
         $this->response($response);
     }
+    function index_DELETE()
+    {
+
+        $param = $this->delete();
+        $response = false;
+        if (fx($param, "id")) {
+
+            $params = [
+                "id" => $param["id"]                
+            ];
+
+            $response = $this->imagen_cliente_empresa_model->delete($params);
+        }
+        $this->response($response);
+    }
 
     function clientes_GET()
     {
