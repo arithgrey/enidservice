@@ -31,6 +31,7 @@ if (!function_exists('invierte_date_time')) {
                     ]
                     ),
                     d("Na! más bien tienes mente pobre, más caras tus 🍻 chelas que te metes cada semana 😜",'f12 mt-2 black'),
+                    d(img("https://media.giphy.com/media/XozypzpGakVuX2ciZJ/giphy.gif")),
                     d(hr()),
                     
                 ),
@@ -52,6 +53,7 @@ if (!function_exists('invierte_date_time')) {
                 d("Haz tu pedido en línea. Ya es 2023 y sigues con tus pensamientos vieja escuela 👴🏽. En la Ciudad de México no hay bronca, 
                 es nuestra propuesta de valor que te las entreguemos en tus manitas 👐🏻 y pagues al recibirlas. Pero en otro estado te las enviamos 🚚. Ni modo que fueras tan especial para visitarte 🪿.",'f12 mt-2 black')
                 ,
+                d(img("https://media.giphy.com/media/y9Tia8PxQMlhK/giphy.gif")),
                 d(hr()),
                 
         ),  
@@ -63,6 +65,7 @@ if (!function_exists('invierte_date_time')) {
             ]
             ),
             d("Bueno pero... ¿no las vas a besar verdad? o ¿si? 😱 ",'f12 mt-2 black'),
+            d(img("https://media.giphy.com/media/71taCLE2Q5lq8/giphy.gif")),
             d(hr()),
             
         ),
@@ -74,6 +77,7 @@ if (!function_exists('invierte_date_time')) {
             ]
             ),
             d("Obvio 😎 ¿y tu? 😱😢 ",'f12 mt-2 black'),
+            d(img("https://media.giphy.com/media/iDDBOw59fLjT2o4HBn/giphy.gif")),
             d(hr()),
             
         ),
@@ -85,6 +89,7 @@ if (!function_exists('invierte_date_time')) {
             ]
             ),
             d("De oro 💰 para el cliente lo que pida 🫡 estamos a tus órdenes",'f12 mt-2 black'),
+            d(img("https://media.giphy.com/media/WsQzhuGMxAuXGqSAcS/giphy-downsized-large.gif")),
             d(hr()),
             
         ),
@@ -97,10 +102,11 @@ if (!function_exists('invierte_date_time')) {
             ),
             d(
                 _text_(
-                    "Seee ... hay mucho falto de creatividad robando 🐁🐀 las imágenes, mejor pídelas",
+                    "Seee ... pero hay mucho estafata robando nuestras fotos para delinquir 🐁🐀, mejor pídelas",
             a_enid("aquí",["href"=>"http://m.me/enidservicemx","class"=>"black strong"],0),'ó' , 
             a_enid("aquí",["href"=>"https://instagram.com/enid_service?igshid=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr","class"=>"strong black"],0)
         ),'f12 mt-2 black'),
+        d(img("https://media.giphy.com/media/3oEdv9pgtUVVYdpaY8/giphy.gif")),
             d(hr()),
             
         ),
@@ -115,11 +121,15 @@ if (!function_exists('invierte_date_time')) {
                 _text_(
                     "Disculpe por no usar la hipocresía que se emplea cada que le venden funkibasuras 😎, puede retirarse👋",
             
-        ),'f12 mt-2 black'),
+        )
+        ,'f12 mt-2 black'),
+
+        d(img("https://media.giphy.com/media/26ufcVAp3AiJJsrIs/giphy.gif")),
             d(hr()),
             
         ),
-
+        d(_titulo("¿Incluimos tu faq?  ", 0), 'mb-2 mt-5 text-center'),
+        d(_titulo("#fffenids"), 'mb-2 mt-5 text-center')
            
 
         );

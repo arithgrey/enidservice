@@ -8,9 +8,16 @@ if (!function_exists('invierte_date_time')) {
     {
                 
         $response[]  = d(
-            _text_("Si alguien te envió este enlace y vas hacer tu pedido en la modalidad pago contra entrega, lee estas medidas de seguridad para saber que somos nosotros y no algún estafador ",
+            _text_("¿vas hacer tu pedido pago contra entrega?  lee estas medidas de 
+            seguridad para saber que somos nosotros y no algún ESTAFARATA ",
             format_link("Medidas de seguridad",["class"=>"mt-5 ","href"=>path_enid("distribuidores_autorizados")])), 'text-uppercase p-2 bg_yellow mt-5 f2 red_enid strong');
 
+        $response[]  = d(
+            _titulo(
+                "Después del aviso, ahora 
+                si, aquí puedes ver que de veritas de veritas chambeamos..."), 'p-2  mt-5 ');
+
+                
             
         $response[] = d(foto_link($data),12);
         $response[] = d(add_imgs_cliente_empresa($data),12);

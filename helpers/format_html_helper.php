@@ -1908,7 +1908,15 @@ function opciones_populares($id_nicho)
 
 
         $response[] = a_enid(
-            _text_(icon('white fa fa-check-circle-o'), "Pago contra entrega"),
+            _text_("💪Experiencia"),
+            [
+                "class" => "white strong ml-sm-5 mt-2 text-uppercase",
+                "href" => _text(path_enid("experiencia"))
+            ]
+        );
+
+        $response[] = a_enid(
+            _text_(icon('white fa fa-check-circle-o'), "P-Contra entrega"),
             [
                 "class" => "white strong ml-sm-5 mt-2 text-uppercase",
                 "href" => path_enid("forma_pago")
@@ -1916,7 +1924,7 @@ function opciones_populares($id_nicho)
         );
 
         $response[] = a_enid(
-            _text_(icon('white fa black fa fa-truck'), "Rastrea tu paquete"),
+            _text_(icon('white fa black fa fa-truck'), "Rastreo "),
             [
                 "class" => "white ml-sm-5 strong mt-2 text-uppercase text-uppercase",
                 "href" => path_enid("rastrea-paquete")
@@ -1936,7 +1944,7 @@ function opciones_populares($id_nicho)
 
 
         $response[] = a_enid(
-            "Cambios y Devoluciones",
+            "Cambios",
             [
                 "class" => "text-uppercase white mt-2 ml-sm-5 strong d-none d-lg-block",
                 "href" => path_enid("cambios-y-devoluciones")
@@ -1951,6 +1959,7 @@ function opciones_populares($id_nicho)
             ],
             0
         );
+       
 
 
 
@@ -2175,6 +2184,13 @@ function navegacion(
 
         
         $opciones[] = d(
+            a_enid("Experiencia", [
+                "href" => path_enid("experiencia"),
+                "class" => "strong white"
+            ]),
+            "col-xs-3 "
+        ); 
+        $opciones[] = d(
             a_enid(flex(icon('white fa fa fa-star'), "Referencias", _between, "", "ml-2"), [
                 "href" => path_enid("clientes"),
                 "class" => "strong white"
@@ -2182,21 +2198,22 @@ function navegacion(
             "col-xs-3 "
         );
 
-        $opciones[] = d(
-            a_enid(flex("", "🚚 Rastrea tu equipo", _between, 'mr-2'), [
-                "href" => path_enid("rastrea-paquete"),
-                "class" => "strong white"
-            ]),
-            "col-xs-6 "
-        );
         
         $opciones[] = d(
-            a_enid(flex("", "FAQ 🫡 ", "", 'mr-2'), [
+            a_enid("🫡 FAQ", [
                 "href" => path_enid("faq-que-nadie-te-dio"),
-                "class" => "strong white"
+                "class" => "strong white ml-4"
             ]),
             "col-xs-3 "
         );
+        $opciones[] = d(
+            a_enid("Rastreo", [
+                "href" => path_enid("rastrea-paquete"),
+                "class" => "strong white"
+            ]),
+            "col-xs-3"
+        );
+        
 
 
         /*

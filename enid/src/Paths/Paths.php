@@ -1010,6 +1010,17 @@ class Paths
                     'tiempo_entrega/principal.js',
                 ],
             ],
+            "experiencia" => [
+                "js" =>
+                [
+
+                  
+                ],
+                "css" => [
+
+                  
+                ],
+            ],
             "clientes" =>
             [
                 "js" =>

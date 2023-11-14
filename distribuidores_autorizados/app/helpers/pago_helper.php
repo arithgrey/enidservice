@@ -93,7 +93,6 @@ if (!function_exists('invierte_date_time')) {
             
     $response[] = d($paso, 'col-xs-12 text-center mt-5');
 
-    $contenido[]  = d("LEE ESTAS MEDIDAS DE SEGURIDAD PARA SABER QUE SOMOS NOSOTROS Y NO ALGÚN ESTAFADOR","text-uppercase p-3 bg_yellow mt-3 f2 red_enid strong");
     
     $contenido[]  = d("PERFILES FALSOS, CUIDADO!","text-uppercase p-5 red_lista_negra mt-5 f3 white");
 
@@ -107,9 +106,7 @@ if (!function_exists('invierte_date_time')) {
 
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratera-daniela-1.jpg"),"text-center red_lista_negra mt-5 f2 white");
  
-    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratera-luis-galindo-1.jpg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
-
-    $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/ratero-daniel-galindo-medrano-1.jpg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
+    
     $contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/daniela-gonzales-estafadora.jpeg"),"text-center red_lista_negra mt-5 f2 white");   //$contenido[]  = d(img("https://enidservices.com/medidas-de-seguridad/perfil-falso-5.jpeg"),"text-center red_lista_negra mt-5 f2 white");
     
     
@@ -126,9 +123,10 @@ if (!function_exists('invierte_date_time')) {
                 )
             ), 'mb-2 mt-4'),
             
-            d('Toma si o si estas medidas de seguridad si compras con nosotros bajo el concepto de pago contra entrega, 
-            estos perfiles de ninguna manera tienen algo que ver con Enid Service NO TE EXPONGAS, son estafadores y ya son 7 personas que nos reportan 
-            ser victimas de estos delincuentes:',
+            d('Toma si o si estas medidas de seguridad si haces pedidos en modo pago contra entrega, 
+            estos perfiles de ninguna manera tienen algo que ver con Enid Service,
+             NO TE EXPONGAS, son estafadores(RATAS) que usan nuestras imagenes para robar 
+            :',
              'mt-2 f15 black borde_end_b'),
             d(append($contenido))            
                        
