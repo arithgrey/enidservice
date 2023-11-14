@@ -64,7 +64,7 @@ if (!function_exists('invierte_date_time')) {
             _text_("mt-1 mb-5 f13", $extra)
         ),"col-xs-12 mt-5 f1 bg_yellow black");
 
-        $response[] = d(a_enid("Medidas de seguridad para pedidos contra entrega",
+        $response[] = d(a_enid("Medidas de seguridad para pedidos contra entrega 🐀",
         [
             "class"=>'text-right black underline',
             "href"=> path_enid("distribuidores_autorizados")

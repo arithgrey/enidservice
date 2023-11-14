@@ -34,6 +34,7 @@ function accesos_test()
 function accesos_enid()
 {
      $base_url = [
+        "experiencia"=> "experiencia",
         "faq-que-nadie-te-dio"=> "faq-que-nadie-te-dio",
         "distribuidores_autorizados" =>"distribuidores_autorizados",
         "decoraciones" => "../decoraciones-tematicas-globolandia",

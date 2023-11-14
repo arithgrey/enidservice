@@ -77,7 +77,8 @@ $enlace = 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 <link href="../css_tema/template/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <link rel="stylesheet" href="../css_tema/font-asome2/css/font-awesome.min.css">
 <link rel="stylesheet" href="../js_tema/js/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css">
-
+<link href="https://fonts.googleapis.com/css?family=Red+Hat+Text:400,400i,500,500i,700,700i" rel="stylesheet">
+<link rel="stylesheet" href="../css_tema/experiencia/experiencia.css">
 
 
 <input type="hidden" class="http_referer_enid" value="<?= $enlace; ?>" />
