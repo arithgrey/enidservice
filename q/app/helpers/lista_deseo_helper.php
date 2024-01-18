@@ -73,7 +73,7 @@ if (!function_exists('invierte_date_time')) {
 
                 )), "col-lg-12 text-center mt-5");
             }
-            //$response[] = d(format_link("Ver carrito",["href" => path_enid("lista_deseos")]),"col-xs-12 mt-5");
+            $response[] = d(format_link("Ver carrito",["href" => path_enid("lista_deseos")]),"col-xs-12 mt-5");
             $response[] = d(format_link("Sigue comprando", ["class" => "sigue_comprando_trigger"], 0), "col-xs-12 mt-2 mb-5");
         }
 
